@@ -1,5 +1,5 @@
 <?php
-define('HOST', 'localhost/micamellov1');
+define('HOST', 'localhost/repos_micamello');
 define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/micamellov1/');
 define('DBSERVIDOR', 'localhost');

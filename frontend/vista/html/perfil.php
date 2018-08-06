@@ -105,7 +105,8 @@ body {
 
                     <?php //endif ?>
                     <div align="right">
-                        <button onclick="window.location.href='edito-perfil.php'"
+
+                        <button href="<?php echo PUERTO."://".HOST."/editarperfil/";?>"
                      class="btn btn-success" type="" name="">SIGUIENTE <i class="fa fa-angle-double-right"></i></button>
                     </div>
                 </footer>
