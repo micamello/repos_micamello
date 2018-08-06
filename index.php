@@ -1,0 +1,45 @@
+<?php
+require_once 'constantes.php';
+require_once 'init.php';
+
+/*if( (!isset($_GET['mostrar']) || $_GET['mostrar'] != 'logout') && !Model_Usuario::isLoggedIn() && 
+    (!isset($_GET['mostrar']))){
+  $_GET['mostrar'] = 'inicio';
+  $_SUBMIT['mostrar'] = 'inicio'; 
+}*/
+dispatch();
+$GLOBALS['db']->close();
+
+
+function dispatch() {
+    global $_SUBMIT;
+    $pagina = Utils::getParam('mostrar', 'inicio');
+    $controlador_nombre = obtieneControlador($pagina);
+    $clase = 'Controlador_' . $controlador_nombre;
+    Utils::log(__METHOD__ . " nombre del controlador: ". $clase." - ".$pagina);
+    if(class_exists($clase)){
+      $controlador = new $clase();
+    }else{
+      Utils::log(__METHOD__ . " no existe: ". $clase);
+    }
+    return $controlador->construirPagina();
+  }
+  
+function obtieneControlador($nombre){
+  switch($nombre){
+    case 'login':
+      return 'Login';
+    break;
+    case 'logout':
+      return 'Logout';
+    break;
+    case 'perfil':
+      return 'Perfil';
+    break;
+    default:
+      return 'Inicio'; 
+    break;
+  }
+  return ucfirst($nombre);
+}
+?>

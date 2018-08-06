@@ -1,0 +1,172 @@
+
+.profilebox {
+    position: relative;
+    /* background: #22242a; */
+    background-color: #CEECFD;
+    min-height: 230px;
+    width: 100%;
+    border-radius: 8px;
+    padding: 50px 20px 20px 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+}
+.profpic {
+    display: block;
+    margin: -34px 0px 5px 0px;
+    margin-left: auto;
+    margin-right: auto; 
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border: 5px solid white;
+    background: #22242a;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+
+}
+.prof-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    height: 30px;
+    line-height: 30px;
+    width: 30px;
+    background: transparent;
+    outline: 0 none;
+    border: none;
+    border-radius: 50%;
+    font-size: 18pt;
+    color: rgba(255, 255, 255, 0.87);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease-in-out;
+}
+.prof-close:active {
+    background: rgba(255,255,255,.02);
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+}
+.info {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    height: 30px;
+    line-height: 30px;
+    width: auto;
+    background: transparent;
+    outline: 0 none;
+    border: none;
+    border-radius: 50%;
+    font-size: 12pt;
+    color: rgba(255, 255, 255, 0.90);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease-in-out;
+}
+.info:active {
+    background: rgba(255,255,255,.0);
+}
+.prof-sm {
+    position: absolute;
+    list-style: none;
+    padding: 0;
+    margin: 0px 70px;
+    top: 152px;
+    left: -20px;
+    width: 40px;
+}
+.prof-sm .sm {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 4px;
+    border-radius: 50%;
+    background: #EE2E05;
+    transition: all 0.15s ease-in-out;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+}
+.prof-sm .sm:hover {
+    background: #9d0000;
+}
+.prof-sm .sm:active {
+    background: #fdd706;
+}
+.prof-sm a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+}
+.prof-sm svg {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    border-radius: 50%;
+}
+.prof-sm path {
+    fill: rgb(248, 248, 248);
+}
+.prof-name {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    color: black;
+    font-weight: normal;
+    font-size: 20pt;
+    text-align: center;
+}
+.prof-user {
+    display: block;
+    margin: -25px 0px 4px 0px;
+    text-align: center;
+    color: black;
+    font-weight: normal;
+    font-size: 11pt;
+}
+.user-tags {
+    margin: 20px 0 0 0;
+    padding: 0;
+    list-style: none;
+    cursor: default;
+}
+.user-tags .tag {
+    display: inline-block;
+    font-size: 8pt;
+    text-transform: lowercase;
+    color: rgba(255, 255, 255, 0.72);
+    background: rgba(255, 219, 69, 0.58);
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    border-radius: 10px;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+}
+.user-desc {
+    color: white;
+    font-size: 11pt;
+    line-height: 12pt;
+    flex: 1 0 auto;
+    text-align: justify;
+    margin-left: 0px;
+}
+p1{
+    cursor: pointer;
+    text-align: center;
+    color: white;
+}
+.divide_desc{
+    
+}
+
+.background_img{
+    background-color: none;
+    border-radius: 8px 8px 8px 8px;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+}
+
+/*profile*/
+
+.title_input{
+    font-size: 18px ;
+    color: black;
+}
+

@@ -1,0 +1,137 @@
+.center-text-line {
+  overflow: hidden;
+  text-align: center;
+}
+
+.center-text-line:before,
+.center-text-line:after {
+  background-color: #e0e0eb;
+  content: "";
+  display: inline-block;
+  height: 2px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.center-text-line:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.center-text-line:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+
+
+
+.social-container {
+  width: 400px;
+  text-align: center;
+}
+
+.social-icons {
+  padding: 0;
+  list-style: none;
+  margin: 1em;
+}
+.social-icons li {
+  display: inline-block;
+  margin: 0.15em;
+  position: relative;
+  font-size: 1.2em;
+}
+.social-icons i {
+  color: #fff;
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  transition: all 265ms ease-out;
+}
+.social-icons a {
+  display: inline-block;
+}
+
+
+.social-icons a:hover:before {
+  transform: scale(0);
+  transition: all 265ms ease-in;
+}
+
+
+/*social*/
+ /*.eder{
+                 background: blue; border-radius: 50%;
+            }*/
+            .instagram a:before{
+                transform: scale(1);
+              -ms-transform: scale(1);
+              -webkit-transform: scale(1);
+              content: " ";
+              width: 60px;
+              height: 60px;
+              border-radius: 100%;
+              display: block;
+              background: linear-gradient(45deg, #ff003c, #c648c8);
+              transition: all 265ms ease-out;
+            }
+
+            .instagram a:hover i {
+              transform: scale(2.2);
+              -ms-transform: scale(2.2);
+              -webkit-transform: scale(2.2);
+              color: #ff003c;
+              background: -webkit-linear-gradient(45deg, #ff003c, #c648c8);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              transition: all 265ms ease-in;
+            }
+
+            .facebook a:before{
+                transform: scale(1);
+              -ms-transform: scale(1);
+              -webkit-transform: scale(1);
+              content: " ";
+              width: 60px;
+              height: 60px;
+              border-radius: 100%;
+              display: block;
+              background: #4267b2;
+              transition: all 265ms ease-out;
+            }
+
+            .facebook a:hover i {
+              transform: scale(2.2);
+              -ms-transform: scale(2.2);
+              -webkit-transform: scale(2.2);
+              color: #ff003c;
+              background: #4267b2;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              transition: all 265ms ease-in;
+            }
+
+            .google a:before{
+                transform: scale(1);
+              -ms-transform: scale(1);
+              -webkit-transform: scale(1);
+              content: " ";
+              width: 60px;
+              height: 60px;
+              border-radius: 100%;
+              display: block;
+              background: #ea4335;
+              transition: all 265ms ease-out;
+            }
+
+            .google a:hover i {
+              transform: scale(2.2);
+              -ms-transform: scale(2.2);
+              -webkit-transform: scale(2.2);
+              color: #ff003c;
+              background: #ea4335;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              transition: all 265ms ease-in;
+            }
