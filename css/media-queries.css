@@ -1,0 +1,229 @@
+/*Media queries configurations*/
+
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+
+@media (min-width: 1281px) {
+  
+  .info_text_jobs
+    {
+      font-size: 20px;
+    }
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 105px;
+    }
+  
+}
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  .info_text_jobs
+    {
+      font-size: 20px;
+    }
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 105px;
+    }
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  .info_text_jobs
+    {
+      font-size: 20px;
+    }
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 105px;
+    }
+
+    .content_email
+    {
+      text-align: center;
+    }
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  .info_text_jobs
+    {
+      font-size: 15px;
+    }
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 105px;
+    }
+
+    .giga
+    {
+      font-size: 40px;
+    }
+
+    .item_img i
+    {
+      width: 30px;
+      height: 30px;
+      line-height: 32px;
+      left: 80%;
+    }
+
+    .title_section
+    {
+      font-size: 25px;
+      font-weight: 700;
+    }
+}
+
+/* 
+  ##Device = Low Resolution Tablets, Mobiles (Landscape)
+  ##Screen = B/w 481px to 767px
+*/
+
+@media (min-width: 481px) and (max-width: 767px) {
+  
+  .info_text_jobs
+    {
+      font-size: 15px;
+    }
+
+  .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 105px;
+    }
+
+    .giga
+    {
+      font-size: 40px;
+    }
+
+    .item_img i
+    {
+      width: 30px;
+      height: 30px;
+      line-height: 32px;
+      left: 80%;
+    }
+
+    .title_section
+    {
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    .tti_st
+    {
+      font-size: 30px;
+    }
+
+    .content_email
+    {
+      text-align: center;
+    }
+
+    .country_mic, .social_mic
+    {
+      width: 5%;
+    }
+}
+
+/* 
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = B/w 320px to 479px
+*/
+
+@media (min-width: 320px) and (max-width: 480px) {
+  
+  .info_text_jobs
+    {
+      font-size: 15px;
+    }
+
+    .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 10px;
+    }
+
+    .giga
+    {
+      font-size: 40px;
+    }
+
+    .item_img i
+    {
+      width: 30px;
+      height: 30px;
+      line-height: 32px;
+      left: 80%;
+    }
+
+    .title_section
+    {
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .tti_st
+    {
+      font-size: 30px;
+    }
+
+    .content_email
+    {
+      text-align: center;
+    }
+
+    /*.separate_social_country
+    {
+      display: none;
+    }*/
+     .country_mic, .social_mic
+    {
+      width: 5%;
+    }
+}
+
+/*Others moviles < 320px*/
+
+@media (max-width: 320px) 
+{
+  .tti_st
+    {
+      font-size: 30px;
+    }
+
+  .giga
+    {
+      font-size: 30px;
+    }
+
+    .content_email
+  {
+    text-align: center;
+  }
+
+  .separate_social_country
+  {
+    display: none;
+  }
+   .country_mic, .social_mic
+    {
+      width: 5%;
+    }
+}
+
+/*Media queries configurations*/

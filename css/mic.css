@@ -1,0 +1,411 @@
+/*Media queries configurations*/
+/*@media screen and (max-width: 650px) {
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+      margin-left: 0px;*/
+      /*etiquetas css clases y id*/
+    /*}*/
+/*}*/
+
+/*Media queries configurations*/
+
+
+/*Estilos micamello*/
+body
+{
+    padding-top: 72px;
+}
+
+.navbar {
+    min-height: 60px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 0px;
+}
+
+.navbar-default
+{
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #0267cf;
+	/*color: white;*/
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover
+{
+	background-color: #3385ff;
+	color: white;
+	border-radius: 10px;
+}
+/*Estilos Default opciones del navbar*/
+.navbar-default .navbar-nav>li>a {
+    color: #cccccc;
+}
+/*Estilos de opciones del navbar en hover*/
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    /*font-size: 15px;*/
+    /*background-color: #1a75ff;*/
+}
+
+.navbar-brand {
+    /* float: left; */
+    height: 50px;
+    /* padding: 15px 15px; */
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
+    color: white;
+    background-color: #1a75ff;
+}
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: #1a75ff;
+}
+
+.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    background-color: transparent;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: white;
+}
+
+/*@media (max-width: 767px)*/
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a{
+    color: white;
+    /*background-color: #1a75ff;*/
+}
+
+.navbar-default .navbar-nav .open .dropdown-menu>li>a:hover{
+    color: black;
+    /*background-color: #1a75ff;*/
+}
+
+/*Dropdown menu*/
+.dropdown-menu
+{
+	background-color: #0267cf;
+}
+/*Estilos dropdown navbar*/
+.dropdown-menu>li>a{
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    line-height: 1.42857143;
+    color: white;
+    white-space: nowrap;
+    border-radius: 3px;
+}
+
+.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover {
+    /*color: black;*/
+    text-decoration: none;
+    background-color: #f5f5f5;
+}
+
+/*Navbar brand imagen logo*/
+/*@media screen and (max-width: 992px) and (min-width: 649px) {
+.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
+    margin-left: 105px;
+}
+}*/
+
+.dropdown-menu>li>a:focus{
+    color: #262626;
+    text-decoration: none;
+    background-color: #1a75ff;
+}
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 160%;
+  padding: 0px;
+  margin-top: -15px;
+  width: auto;
+}
+
+/*Línea separadora entre texto*/
+.center-text-line {
+  overflow: hidden;
+  text-align: center;
+}
+
+.center-text-line:before,
+.center-text-line:after {
+  background-color: #e0e0eb;
+  content: "";
+  display: inline-block;
+  height: 2px;
+  position: relative;
+  vertical-align: middle;
+  width: 50%;
+}
+
+.center-text-line:before {
+  right: 0.5em;
+  margin-left: -50%;
+}
+
+.center-text-line:after {
+  left: 0.5em;
+  margin-right: -50%;
+}
+/*Línea separadora entre texto*/
+
+
+
+.social-container {
+  width: 400px;
+  text-align: center;
+}
+
+.social-icons {
+  padding: 0;
+  list-style: none;
+  margin: 1em;
+}
+.social-icons li {
+  display: inline-block;
+  margin: 0.15em;
+  position: relative;
+  font-size: 1.2em;
+}
+.social-icons i {
+  color: #fff;
+  position: absolute;
+  top: 21px;
+  left: 21px;
+  transition: all 265ms ease-out;
+}
+.social-icons a {
+  display: inline-block;
+}
+
+
+.social-icons a:hover:before {
+  transform: scale(0);
+  transition: all 265ms ease-in;
+}
+
+
+/*social*/
+ /*.eder{
+                 background: blue; border-radius: 50%;
+            }*/
+            .instagram a:before{
+                transform: scale(1);
+              -ms-transform: scale(1);
+              -webkit-transform: scale(1);
+              content: " ";
+              width: 60px;
+              height: 60px;
+              border-radius: 100%;
+              display: block;
+              background: linear-gradient(45deg, #ff003c, #c648c8);
+              transition: all 265ms ease-out;
+            }
+
+            .instagram a:hover i {
+              transform: scale(2.2);
+              -ms-transform: scale(2.2);
+              -webkit-transform: scale(2.2);
+              color: #ff003c;
+              background: -webkit-linear-gradient(45deg, #ff003c, #c648c8);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              transition: all 265ms ease-in;
+            }
+
+            .facebook a:before{
+                transform: scale(1);
+              -ms-transform: scale(1);
+              -webkit-transform: scale(1);
+              content: " ";
+              width: 60px;
+              height: 60px;
+              border-radius: 100%;
+              display: block;
+              background: #4267b2;
+              transition: all 265ms ease-out;
+            }
+
+            .facebook a:hover i {
+              transform: scale(2.2);
+              -ms-transform: scale(2.2);
+              -webkit-transform: scale(2.2);
+              color: #ff003c;
+              background: #4267b2;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              transition: all 265ms ease-in;
+            }
+
+            .google a:before{
+                transform: scale(1);
+              -ms-transform: scale(1);
+              -webkit-transform: scale(1);
+              content: " ";
+              width: 60px;
+              height: 60px;
+              border-radius: 100%;
+              display: block;
+              background: #ea4335;
+              transition: all 265ms ease-out;
+            }
+
+            .google a:hover i {
+              transform: scale(2.2);
+              -ms-transform: scale(2.2);
+              -webkit-transform: scale(2.2);
+              color: #ff003c;
+              background: #ea4335;
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              transition: all 265ms ease-in;
+            }
+
+/*Estilos TTI*/
+
+.tti_section
+{
+  background-color: #4B92A7;
+  padding: 50px 0 50px 0;
+}
+
+.item_tti, .tti_st, .tti_concept
+{
+    color: white;
+    padding: 10px 0 10px 0;
+}
+
+.tti_st
+  {
+    font-size: 60px;
+    /*display: block;*/
+  }
+
+.tti_st span
+{
+  display: block;
+}
+
+.text_definition_tti span
+{
+  color: white;
+} 
+
+  .tti_concept
+  {
+    padding: 25px 0px 55px 0px;
+    font-size: 16px;
+  }
+/*Estilos TTI*/
+
+
+/*Estilos banner de info@micamello.com.ec*/
+
+  .content_email
+  {
+    text-align: right;
+    color: white;
+  }
+
+  .content_email div:first-child
+  {
+    padding-top: 15px;
+  }
+
+  .info_email_mic, .pre_text_email
+  {
+    color: white; 
+    text-decoration: none;
+  }
+
+  .banner_info_email
+  {
+    background-color: #03a9f4;
+  }
+
+  .pre_text_email
+  {
+    margin-right: 10px;
+  }
+
+/*Estilos banner de info@micamello.com.ec*/
+/*Estilos sección legal de la empresa*/
+  .legal_info_content
+  {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+/*Estilos sección legal de la empresa*/
+
+/*Estilos del contador de empresas, empleos y candidatos*/
+  .job_count
+  {
+    padding: 30px 0px 30px 0px;
+  }
+/*Estilos del contador de empresas, empleos y candidatos*/
+
+/*Footer de mi camello estilos*/
+
+  .foot_mic
+  {
+    padding: 0 0 65px 0;
+  }
+
+  .country_mic
+  {
+    width: 5%;
+  }
+
+  .social_mic
+  {
+    width: 5%;
+  }
+
+  .separate_social_country
+  {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .text_icons_footer
+  {
+    font-size: 16px;
+    color: black;
+  }
+
+  .foot_div_section
+  {
+    padding: 10px 0 10px 0;
+  }
+
+/*Footer de mi camello estilos*/
+
+/*Listado de auspiciantes*/
+
+  .auspiciantes_list
+  {
+    padding: 20px 20px 20px 20px;
+  }
+
+/*Listado de auspiciantes*/
+
+/*Casos de éxito micamello*/
+  .casos_exito_mic
+  {
+    padding: 40px 40px 40px 40px;
+  }
+/*Casos de éxito micamello*/

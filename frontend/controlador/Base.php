@@ -36,8 +36,8 @@ abstract class Controlador_Base{
     $menu = array();
     if( !Modelo_Usuario::estaLogueado() ){
       $menu[] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
-      $menu[] = array("href"=>"#", "nombre"=>"Candidato", "modal"=>"myModal");
-      $menu[] = array("href"=>"#", "nombre"=>"Empresa", "modal"=>"myModal2");
+      $menu[] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Candidato", "modal"=>"myModal");
+      $menu[] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Empresa", "modal"=>"myModal2");
     }
     else{
       $menu[] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 

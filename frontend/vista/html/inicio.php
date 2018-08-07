@@ -1,13 +1,16 @@
-<!--Home Sections-->
+<body>
+    <!--Home Sections-->
 
-<div class=""><br>
+
+<div class="">
+    <div class="row">
     <?php 
     if (!empty($banners)){
         foreach($banners as $banner){ ?>
             <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['imagen'];?>">
         <?php }
     } ?>
-</div>
+    </div>
             <?php 
                 //if ($rol==2) {
                     ?>
@@ -37,23 +40,25 @@
              ?>
     
             <!--Featured Section-->
-            <section id="features" class="features">
-                <div class="container"><br>
+            <section>
+                <div class="container">
                     <div class="row">
-                            <div  align="center" class="col-md-4 bordi" >
-								<h3>Empleos Agregados</h3>                                
-								<h2 align="" class="count"><?php echo $nro_oferta; ?></h2>                                   
+                        <div class="job_count">
+                            <div  align="center" class="col-md-4 col-sm-4 col-xs-12" >
+                                <h3 class="info_text_jobs">Empleos Agregados</h3>                                
+                                <h2 align="" class="count"><?php echo $nro_oferta; ?></h2>                                   
                             </div>
-                            <div align="center" class="col-md-4 bordi">
-								<h3>Candidatos Activos</h3>  
-								<h2 class="count"><?php echo $nro_candidato; ?></h2>                                   
+                            <div align="center" class="col-md-4 col-sm-4 col-xs-12">
+                                <h3 class="info_text_jobs">Candidatos Activos</h3>  
+                                <h2 class="count"><?php echo $nro_candidato; ?></h2>                                   
                             </div>
-                           <div align="center" class="col-md-4">
-								<h3>Empresas Disponibles</h3>
-								<h2 class="count"><?php echo $nro_empresa; ?></h2>
+                           <div align="center" class="col-md-4 col-sm-4 col-xs-12">
+                                <h3 class="info_text_jobs">Empresas Disponibles</h3>
+                                <h2 class="count"><?php echo $nro_empresa; ?></h2>
                             </div>
+                        </div>
                     </div><!-- End off row -->
-                </div><!-- End off container --><br>
+                </div><!-- End off container -->
             </section><!-- End off Featured Section-->
 
 
@@ -63,16 +68,17 @@
                     <div class="row">
                         <div class="main_business">
                             <div class="col-md-12">
-                                <div class="business_item sm-m-top-50" align="center">
-                                    <h2 class="text-uppercase">Categorías de Empleos</h2>
-										Una mejor carrera está por ahí. Te ayudaremos a encontrarlo Somos 
-										su primer paso para convertirnos en todo lo que queremos ser.
+                                <div class="" align="center">
+                                    <h2 class="title_section">Categorías de Empleos</h2>
+                                        Una mejor carrera está por ahí. Te ayudaremos a encontrarlo Somos 
+                                        su primer paso para convertirnos en todo lo que queremos ser.
                                 </div><br><br>
                                 <?php 
                                     foreach($intereses as $interes){
                                       $nro_interes = Modelo_Oferta::obtieneNroInteres($interes["id_intereses"]);  
                                 ?>
-                                    <div class="col-md-3" align="center">
+
+                                    <div class="col-md-3 col-sm-6 col-xs-12" align="center">
                                         <i class="<?php echo $interes['ico']; ?>" aria-hidden="true"></i>
                                         <h5><a href="javascript:void(0);"><?php echo $interes['nombre']; ?></a></h5>
                                         <div class="nvac">(<?php echo $nro_interes; ?> vacantes)</div><br><br>
@@ -84,15 +90,14 @@
                 </div>
             </section><!-- End off Business section -->
 
-            <!--product section--><br>
-            <section id="product" class="product">
+            <!--product section-->
+            <section class="casos_exito_mic">
                 <div class="container">
                     <div class="row">                        
                         <div class="main_test fix">
-
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="head_title text-center fix">
-                                    <h2 class="text-uppercase">Casos de Éxito</h2>
+                                <div class="text-center fix">
+                                    <h2 class="title_section">Casos de Éxito</h2>
                                     <h5>Una mejor carrera está por ahí. Te ayudaremos a encontrarlo</h5>
                                 </div>
                             </div>
@@ -121,63 +126,78 @@
 
 <!-- PUBLICIDAD -->
 
-            <section id="product" class="product" style="background-color: #4B92A7">
+            <section class="tti_section">
                 <div class="container">
                     <div class="row"> 
-                        <div class="col-md-12"><br><br>
+                        <div class="col-md-12">
                             <img src="<?php echo PUERTO.'://'.HOST;?>/imagenes/logo_tti_blanco.png">
                         </div>
-                        <div class="col-md-12" style="color: #fff; font-size: 16px"><br>
-                            Somos consultores asociados de TTI SUCCESS INSIGHTS™ , líder mundial en medición de habilidades blandas para la gestión de talento y alto desempeño, con el nivel de confiabilidad más alto a nivel mundial.
-                        </div>
-                        <div class="col-md-3"><br><br><br>
-                            <span style="border-collapse: separate;">
+                        <div class="col-md-12">
+                            <div class="tti_concept">
                                 <span>
-                                    <p>
-                                        <i class="far fa-flag" style="color: #fff; font-size: 60px"></i>
-                                    </p>
-                                </span><br>
-                                <span class="count" style="color: #000">92</span>
-                            </span> 
-                            <span style="color: #fff">PAÍSES</span>
+                                    Somos consultores asociados de TTI SUCCESS INSIGHTS™ , líder mundial en medición de habilidades blandas para la gestión de talento y alto desempeño, con el nivel de confiabilidad más alto a nivel mundial.
+                                </span>
+                            </div>
                         </div>
-                        <div class="col-md-3"><br><br><br>
-                            <span style="border-collapse: separate;">
-                                <span>
-                                    <p>
-                                        <i class="fas fa-user-check" style="color: #fff; font-size: 60px"></i>
-                                    </p>
-                                </span><br>
-                                <span class="count" style="color: #000">10</span>
-                            </span>
-                            <span style="color: #fff">MILLONES</span><br>
-                            <span style="color: #fff; font-size: 20px">DE EVALUADOS</span>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="item_tti">
+                                <p>
+                                    <span class="tti_st">
+                                        <i class="far fa-flag"></i>
+                                    </span>
+                                </p>
+                                
+                                <span class="count">92</span>
+                                <span>PAÍSES</span>
+                            </div>
                         </div>
-                        <div class="col-md-3"><br><br><br>
-                            <span style="border-collapse: separate;">
-                                <span>
-                                    <p>
-                                        <i class="fa fa-clock" style="color: #fff; font-size: 60px"></i>
-                                    </p>
-                                </span><br>
-                                <span class="count" style="color: #000">8</span>
-                            </span>
-                            <span style="color: #fff">SEGUNDOS</span><br>
-                            <span style="color: #fff; font-size: 20px">EN ALGÚN LUGAR DEL MUNDO SE HACE UN TTI</span>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="item_tti">
+                                <p>
+                                    <span class="tti_st">
+                                        <i class="fas fa-user-check"></i>
+                                    </span>
+                                </p>
+                                
+                                <p class="text_definition_tti">
+                                    <span class="count">10</span><span> MILLONES</span>
+                                </p>
+                                DE EVALUADOS
+                            </div>
                         </div>
-                        <div class="col-md-3"><br><br><br>
-                            <span style="border-collapse: separate;">
-                                <span>
-                                    <p>
-                                        <i class="fa fa-search" style="color: #fff; font-size: 60px"></i>
-                                    </p>
-                                </span><br>
-                                <span class="count" style="color: #000">30</span>
-                            </span>
-                            <span style="color: #fff">AÑOS</span><br>
-                            <span style="color: #fff; font-size: 20px">DE INVESTIGACIÓN</span>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="item_tti">
+                                <p>
+                                    <span class="tti_st">
+                                        <i class="fa fa-clock"></i>
+                                    </span>
+                                </p>
+                                
+                                <p>
+                                    <span class="count">8</span><span> SEGUNDOS</span>
+                                </p>
+                                EN ALGÚN LUGAR DEL MUNDO SE HACE UN TTI
+                            </div>
                         </div>
-                    </div><br><br>
+
+                        <div class="col-md-3 col-sm-6 col-xs-12">
+                            <div class="item_tti">
+                                <p>
+                                    <span class="tti_st">
+                                        <i class="fa fa-search"></i>
+                                    </span>
+                                </p>
+                                
+                                <p>
+                                    <span class="count">30</span><span> AÑOS</span>
+                                </p>
+                                DE INVESTIGACIÓN
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
@@ -195,14 +215,15 @@
 
 <!-- FIN PUBLICIDAD -->
 
-            <section id="brand" class="brand fix roomy-80">
+<!-- Listado de auspiciantes -->
+            <section id="brand" class="brand fix roomy-70">
                 <div class="container">
                     <div class="row">
                     <?php foreach($arrauspiciante as $auspiciante) {  ?>
 
                         <div class="main_brand text-center">
-                            <div class="col-md-2 col-sm-4 col-xs-6">
-                                <div class="brand_item sm-m-top-20">
+                            <div class="col-md-2 col-sm-4 col-xs-12">
+                                <div class="brand_item auspiciantes_list">
                                     <img src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['imagen'] ?>" />
                                 </div>
                             </div>
@@ -214,7 +235,10 @@
                 </div>
             </section><!-- End off Brand section -->
 
+<!-- Listado de auspiciantes -->
+
         </div>
 
 
         <!-- JS includes -->   
+</body>
