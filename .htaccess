@@ -24,8 +24,12 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 #login
 RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
 
+#contrasena
+RewriteRule ^contrasena/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena [L]
+
 #perfil
 RewriteRule ^perfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil [L]
+RewriteRule ^editarperfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil&opcion=paso1 [L]
 
 #logout
 RewriteRule ^logout/$ %{ENV:REWRITEBASE}index.php?mostrar=logout [L]

@@ -9,7 +9,7 @@
 body {
     background-color: #eceff1;
 }
-    </style>
+</style>
 <section id="home" class="home bg-black fix">
     <div class="overlay"></div>
     <div class="container">
@@ -105,9 +105,7 @@ body {
 
                     <?php //endif ?>
                     <div align="right">
-
-                        <button href="<?php echo PUERTO."://".HOST."/editarperfil/";?>"
-                     class="btn btn-success" type="" name="">SIGUIENTE <i class="fa fa-angle-double-right"></i></button>
+                        <a class="btn btn-success" href="<?php echo PUERTO."://".HOST."/editarperfil/";?>">SIGUIENTE <i class="fa fa-angle-double-right"></i></a>
                     </div>
                 </footer>
             </div>

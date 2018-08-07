@@ -44,9 +44,19 @@ class Utils{
     exit;
   }
   
-  static public function is_email_valid($email){
+  static public function es_correo_valido($email){
     $result = preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email);
     return $result;
+  }
+
+  public static function envioCorreo($to, $subject, $body){
+    $headers  = 'MIME-Version: 1.0' . "\r\n";    
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    $headers .= 'From: '.MAIL_NOMBRE.' <'.MAIL_CORREO.'>' . "\r\n";
+    $headers .= 'X-Mailer: PHP/' . phpversion();    
+    // Mail it
+    $resp = mail($to, $subject, $body, $headers);
+    return $resp;
   }
 }
 ?>

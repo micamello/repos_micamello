@@ -11,10 +11,28 @@ class Controlador_Perfil extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
     
+    $opcion = Utils::getParam('opcion','',$this->data);  
+    switch($opcion){      
+      case 'paso1':
+        $this->mostrarPaso1();
+      break;
+      default:
+        $this->mostrarDefault();
+      break;
+    }     
+    
+  }
+
+  public function mostrarDefault(){
     $menu = $this->obtenerMenu();
     $tags = array('menu'=>$menu);
-    Vista::render('perfil', $tags);  
-    
+    Vista::render('perfil', $tags);
+  }
+
+  public function mostrarPaso1(){
+    $menu = $this->obtenerMenu();
+    $tags = array('menu'=>$menu);
+    Vista::render('perfil_paso1', $tags);
   }
 }  
 ?>

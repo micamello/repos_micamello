@@ -29,6 +29,13 @@ class Modelo_Usuario{
     //$password = md5($password);             
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE username = ? AND password = ? AND estado = 1",array($username,$password)); 
   }
+
+  public static function busquedaPorCorreo($correo){
+    if (empty($correo)){ return false; }
+    $sql = "select * from mfo_usuario where correo = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($correo));
+    return (!empty($rs['id_usuario'])) ? $rs : false;
+  }
   
 }  
 ?>
