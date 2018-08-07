@@ -30,6 +30,9 @@ function obtieneControlador($nombre){
     case 'login':
       return 'Login';
     break;
+    case 'contrasena':
+      return 'Contrasena';
+    break;
     case 'logout':
       return 'Logout';
     break;
