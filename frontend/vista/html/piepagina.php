@@ -45,17 +45,12 @@
                                     <div class="widget_item widget_latest sm-m-top-50" align="center">
                                         <div class="row">
                                         <div class="form-inline">
-                                        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/paises/ecu.png" class="country_mic"> 
-                                        <span class="text_icons_footer">Ecuador</span>
-                                        
-                                        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/paises/col.png" class="country_mic"> 
-                                        <span class="text_icons_footer">Colombia</span>
-                                        &nbsp;&nbsp;
-                                        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/paises/peru.png" class="country_mic"> 
-                                        <span class="text_icons_footer">Perú</span>
+                                        <?php foreach($arrpais as $pais){ ?>    
+                                          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/paises/<?php echo $pais["icono"];?>" class="country_mic"> 
+                                          <span class="text_icons_footer"><?php echo $pais["nombre"];?></span>
+                                        <?php }?>                                                                                
                                         <span class="separate_social_country">|</span>
-                                        <!-- </div>
-                                        
+                                        <!-- </div>                                        
                                         
                                         <div class=""> -->
                                             <span class="text_icons_footer">Siguenos en:</span>

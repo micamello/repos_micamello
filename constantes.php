@@ -13,4 +13,8 @@ define('SECRET_TOKEN_PASSWORD', 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJK
 define('DIAS_TOKEN_PASSWORD', '3');
 define('MAIL_CORREO','support@micamello.com.ec');
 define('MAIL_NOMBRE','Mi Camello');
+define('MAIL_USERNAME','micamelloecuador@gmail.com');
+define('MAIL_PASSWORD','ecuador2018');
+define('MAIL_PORT','587');
+define('MAIL_HOST','smtp.gmail.com');
 ?>

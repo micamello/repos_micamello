@@ -169,8 +169,12 @@ class Database
     if ($this->result === FALSE){
       $msg = "SQL ERROR: ". $this->error();
       Utils::log($msg);
-      $this->_trans_status = false;
+
       }
+
+      $this->_trans_status = false;      
+    }
+
     $this->lastQuery = $query;
     $this->_trans_status = true;
     return $this->result;

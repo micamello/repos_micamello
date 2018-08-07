@@ -5,14 +5,14 @@ class Modelo_Usuario{
   const EMPRESA = 2;
 
   public static function obtieneNroCandidato(){
-    $sql = "SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where rol=1 and estado=1";
-    $rs = $GLOBALS['db']->auto_array($sql,array());
+    $sql = "SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario=? and estado=1";
+    $rs = $GLOBALS['db']->auto_array($sql,array(self::CANDIDATO));
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 
   public static function obtieneNroEmpresa(){
-    $sql = "SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where rol=2 and estado=1";
-    $rs = $GLOBALS['db']->auto_array($sql,array());
+    $sql = "SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario=? and estado=1";
+    $rs = $GLOBALS['db']->auto_array($sql,array(self::EMPRESA));
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 

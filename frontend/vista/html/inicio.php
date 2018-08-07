@@ -7,7 +7,7 @@
     <?php 
     if (!empty($banners)){
         foreach($banners as $banner){ ?>
-            <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['imagen'];?>">
+            <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['id_banner'];?>.<?php echo $banner['formato'];?>">
         <?php }
     } ?>
     </div>
@@ -74,14 +74,14 @@
                                         su primer paso para convertirnos en todo lo que queremos ser.
                                 </div><br><br>
                                 <?php 
-                                    foreach($intereses as $interes){
-                                      $nro_interes = Modelo_Oferta::obtieneNroInteres($interes["id_intereses"]);  
+                                    foreach($arrarea as $area){
+                                      $nro_areas = Modelo_Oferta::obtieneNroArea($area["id_area"]);  
                                 ?>
 
                                     <div class="col-md-3 col-sm-6 col-xs-12" align="center">
-                                        <i class="<?php echo $interes['ico']; ?>" aria-hidden="true"></i>
-                                        <h5><a href="javascript:void(0);"><?php echo $interes['nombre']; ?></a></h5>
-                                        <div class="nvac">(<?php echo $nro_interes; ?> vacantes)</div><br><br>
+                                        <i class="<?php echo $area['ico']; ?>" aria-hidden="true"></i>
+                                        <h5><a href="javascript:void(0);"><?php echo $area['nombre']; ?></a></h5>
+                                        <div class="nvac">(<?php echo $nro_areas; ?> vacantes)</div><br><br>
                                     </div>
                                 <?php } ?>
                             </div>

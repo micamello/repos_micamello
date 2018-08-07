@@ -31,7 +31,8 @@ class Controlador_Contrasena extends Controlador_Base {
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente denuevo");
         }
-        if ($this->envioCorreo($datousuario['correo'])){
+
+        if ($this->envioCorreo($datousuario['correo'],$datousuario['nombres'].' '.$datousuario['apellidos'],$token)){
           throw new Exception("Error en el envio de correo, por favor intente denuevo");
         }
         $_SESSION['mostrar_exito'] = "Se envio a su direccion de correo ingresada el enlace para el cambio de correo ".$token;
@@ -53,8 +54,19 @@ class Controlador_Contrasena extends Controlador_Base {
     return $generator->makeToken($idusuario,$fechalogin);
   }
 
-  public function envioCorreo($correo){
-    Utils::envioCorreo($correo,"Recuperacion de Contraseña","Se ha enviado un correo con el siguiente token");
+  public function envioCorreo($correo,$nombres,$token){
+    $asunto = "Recuperacion de Contraseña";
+    $body = "Estimado, ".$nombres."<br>";
+    $body .= "Por favor de click en este enlace para cambiar su contraseña";
+    $body .= "<a href='".$token."'>".$token."</a><br>";
+    $body .= "O puede copiar y pegar el enlace en su navegador<br>";
+    $body .= "Si usted no selecciono la opcion para recuperar la contraseña, por favor ignore este correo<br>";
+    //if (Utils::envioCorreo($correo,$asunto,$body)){
+
+    //}
+    //else{
+
+    //}
   }
 
 }  

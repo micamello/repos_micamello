@@ -50,13 +50,20 @@ class Utils{
   }
 
   public static function envioCorreo($to, $subject, $body){
-    $headers  = 'MIME-Version: 1.0' . "\r\n";    
-    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-    $headers .= 'From: '.MAIL_NOMBRE.' <'.MAIL_CORREO.'>' . "\r\n";
-    $headers .= 'X-Mailer: PHP/' . phpversion();    
-    // Mail it
-    $resp = mail($to, $subject, $body, $headers);
-    return $resp;
+    $mail = new PHPMailer();
+    $mail->IsSMTP();
+    $mail->SMTPAuth = true;
+    $mail->Port = MAIL_PORT; 
+    $mail->Host = MAIL_HOST; 
+    $mail->Username = MAIL_USERNAME; 
+    $mail->Password = MAIL_PASSWORD;     
+    $mail->From = MAIL_CORREO; 
+    $mail->FromName = MAIL_NOMBRE; 
+    $mail->AddAddress($to); 
+    $mail->IsHTML(true); 
+    $mail->Subject = $subject; 
+    $mail->Body = $body; 
+    return $mail->Send(); 
   }
 }
 ?>
