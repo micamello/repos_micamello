@@ -35,19 +35,19 @@ abstract class Controlador_Base{
   public function obtenerMenu(){
     $menu = array();
     if( !Modelo_Usuario::estaLogueado() ){
-      $menu[] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
-      $menu[] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Candidato", "modal"=>"myModal");
-      $menu[] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Empresa", "modal"=>"myModal2");
+      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
+      $menu["menu"][] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Candidato", "modal"=>"myModal");
+      $menu["menu"][] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Empresa", "modal"=>"myModal2");
     }
     else{
-      $menu[] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
+      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
       if ($_SESSION['mfo_datos']['usuario']['rol'] == Modelo_Usuario::CANDIDATO){        
-        $menu[] = array("href"=>PUERTO."://".HOST."/empleos/", "nombre"=>"Empleos");
-        $menu[] = array("href"=>PUERTO."://".HOST."/postulaciones/", "nombre"=>"Mis Postulaciones");
+        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/empleos/", "nombre"=>"Empleos");
+        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/postulaciones/", "nombre"=>"Mis Postulaciones");
       }
       else{
-        $menu[] = array("href"=>PUERTO."://".HOST."/publicar/", "nombre"=>"Publicar Vacantes");
-        $menu[] = array("href"=>PUERTO."://".HOST."/vacantes/", "nombre"=>"Mis Vacantes");
+        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/publicar/", "nombre"=>"Publicar Vacantes");
+        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/vacantes/", "nombre"=>"Mis Vacantes");
       }
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/facturas/", "nombre"=>"Mis Facturas");
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/perfil/", "nombre"=>"Mi Perfil"); 

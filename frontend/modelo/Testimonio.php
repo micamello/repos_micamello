@@ -2,7 +2,7 @@
 class Modelo_Testimonio{
   
   public static function obtieneListado(){
-    $sql = "SELECT nombre, profesion, imagen, descripcion FROM mfo_exitos where estado = 1";
+    $sql = "SELECT * FROM mfo_testimonio where estado = 1 ORDER BY orden";
     return $GLOBALS['db']->auto_array($sql,array(),MYSQL_ASSOC,true);
   }
   

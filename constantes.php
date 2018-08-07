@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'mica18');
+define('DBNOMBRE', 'micamello_base');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -13,4 +13,8 @@ define('SECRET_TOKEN_PASSWORD', 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJK
 define('DIAS_TOKEN_PASSWORD', '3');
 define('MAIL_CORREO','support@micamello.com.ec');
 define('MAIL_NOMBRE','Mi Camello');
+define('MAIL_USERNAME','micamelloecuador@gmail.com');
+define('MAIL_PASSWORD','ecuador2018');
+define('MAIL_PORT','587');
+define('MAIL_HOST','smtp.gmail.com');
 ?>

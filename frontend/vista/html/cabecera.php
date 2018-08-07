@@ -565,12 +565,12 @@ if( $_POST["btnemp"] ) {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav"> 
                         </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                          <?php foreach($menu as $optmnu){ ?>
+                    <ul class="nav navbar-nav navbar-right">                          
+                          <?php foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                             <li>
-                              <a onclick="<?php echo $optmnu["onclick"]; ?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? 'data-toggle="modal" data-target="#'.$optmnu["modal"].'"' : '';?>><?php echo $optmnu["nombre"];?></a>
-                            </li>                                                
-                          <?php }?>
+                              <a onclick="<?php echo $optmnu["onclick"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? 'data-toggle="modal" data-target="#'.$optmnu["modal"].'"' : '';?>><?php echo $optmnu["nombre"];?></a>
+                            </li>                            
+                          <?php } ?>
                           <?php if (isset($menu["submenu"])){ ?>                            
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?> 
