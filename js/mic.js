@@ -5,7 +5,19 @@ function hidden_menuuser_small()
 	var_menu.classList.remove('in');
 }
 
+// Validación de formulario
+
 $("#form_candidato").validator();
+
+// Validación de formulario
+
+// Validación de cédula campo DNI formulario
+
+$("#dni").validarCedulaEC();
+
+// Validación de cédula campo DNI formulario
+
+
 
 //---------------------- Validación de nputs solo texto-------------------------//
 // $(document).ready(function(){
@@ -16,20 +28,31 @@ $("#form_candidato").validator();
 	// }
 // });
 
-$(document).on('keypress', '#username', function (event) {
-    var regex = new RegExp("^[a-zA-Z ]+$");
-    var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-    if (!regex.test(key)) {
-        event.preventDefault();
-        return false;
-    }
-});
+// $(document).on('keypress', '#id', function (event) {
+//     var regex = new RegExp("^[a-zA-Z ]+$");
+//     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+//     if (!regex.test(key)) {
+//         event.preventDefault();
+//         return false;
+//     }
+// });
 
+// document.getElementById('inputid').onkeypress=function(e){
+//     if(("abcdefghijklmnopqrstuvwxyz ").indexOf(String.fromCharCode(e.keyCode))===-1){
+//         e.preventDefault();
+//         return false;
+//     }
+// }
+
+
+
+// name_user
+// apell_user
 
 //---------------------- Validación de nputs solo texto-------------------------//
 
 
-//---------------------- Validación de nputs solo números-------------------------//
+//---------------------- Validación de inputs solo números-------------------------//
 
 var x = document.getElementById('telefono_cand');
 
@@ -48,4 +71,13 @@ x.addEventListener('keydown',function(e) {
 
 });
 
-//---------------------- Validación de nputs solo números-------------------------//
+//---------------------- Validación de inputs solo números-------------------------//
+
+// Validación de nombres de usuarios
+
+  // function valitidy_username(val)
+  // {
+    
+  // }
+
+// Validación de nombres de usuarios

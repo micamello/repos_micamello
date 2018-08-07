@@ -170,9 +170,6 @@ class Database
       $msg = "SQL ERROR: ". $this->error();
       Utils::log($msg);
       $this->_trans_status = false;
-      if (Utils::isLocal()){
-        throw new Exception($msg);
-        }
       }
     $this->lastQuery = $query;
     $this->_trans_status = true;

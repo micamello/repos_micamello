@@ -83,10 +83,9 @@
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/validator.min.js"></script>
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/validator.js"></script>
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/ruc_jquery_validator.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/mic.js"></script>
-
-
 
 
     </body>

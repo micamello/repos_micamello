@@ -80,7 +80,7 @@
 
     
     </head>
-	<!-- Modal -->
+  <!-- Modal -->
     <?php //include('assets/init.modal.php'); ?>
 
     <!--inicio de los modals-->
@@ -160,27 +160,27 @@
             <div class="form-group">
               <label class="text-center">Usuario:</label><div class="help-block with-errors"></div>
               <!-- <small id="usernameHelp" class="form-text text-muted" style="color: red;"></small> -->
-              <input id="username" type="text" name="username" placeholder="Carlos" class="form-control" aria-describedby="usernameHelp" required>
+              <input id="username" type="text" name="username" placeholder="Ejemplo: camello205487" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" class="form-control" aria-describedby="usernameHelp" required>
             </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label class="text-center">Correo:</label><div class="help-block with-errors"></div>
             <small id="correoHelp" class="form-text text-muted" style="color: red;"></small>
-            <input id="correo" type="email" name="correo" placeholder="carlos@gmail.com" class="form-control" aria-describedby="correoHelp" required>
+            <input id="correo" type="email" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
           </div>
         </div>   
 
         <div class="col-md-6">
             <div class="form-group">
               <label class="text-center">Nombres:</label><div class="help-block with-errors"></div>
-              <input type="text" name="nombres" placeholder="Carlos Pedro" class="form-control" required>
+              <input type="text" name="nombres" id="name_user" pattern="[a-z A-Z]+" placeholder="Ejemplo: Carlos Pedro" class="form-control" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
               <label class="text-center">Apellidos:</label><div class="help-block with-errors"></div>
-              <input type="text" name="apellidos" placeholder="Ortiz Z" class="form-control" required>
+              <input type="text" name="apellidos" id="apell_user" pattern='[a-z A-Z]+' placeholder="Ejemplo: Ortiz Zambrano" class="form-control" required>
             </div>
         </div> 
 
@@ -212,13 +212,13 @@
         <div class="col-md-6">
             <div class="form-group">
               <label class="text-center">Contraseña:</label><div class="help-block with-errors"></div>
-              <input id="password" name="password" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Debe tener al menos 6 caracteres' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Contraseña" class="form-control" required data-toggle="password">
+              <input id="password" name="password" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Debe contener letra, una mayúscula mínimo y numeros' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Formato: me198454EjgE" class="form-control" required data-toggle="password">
             </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
             <label class="text-center">Confirmar Contraseña:</label><div class="help-block with-errors"></div>
-            <input id="password_two" name="password_two" type="password" pattern="^\S{6,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Por favor, ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" required data-toggle="password">
+            <input id="password_two" name="password_two" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Por favor, ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" required data-toggle="password">
           </div>
         </div>   
 
@@ -227,7 +227,7 @@
               <div class="form-group">
                 <label class="text-center">Cédula / Pasaporte:</label><div class="help-block with-errors"></div>
                 <small id="dniHelp" class="form-text text-muted" style="color: red;"></small>
-                <input id="dni" type="text" name="cedula" minlength="10" maxlength="15" class="form-control" aria-describedby="dniHelp" required>
+                <input id="dni" type="text" name="cedula" minlength="10" maxlength="15" onkeypress="" class="form-control" aria-describedby="dniHelp" required>
               </div>
             </div>
         </div>
@@ -300,6 +300,10 @@
 <div class="" align="left">
   <label><input type="checkbox" name="term_cond" id="terminos" value="1"><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos y condiciones </a><i id="verify_check" style="display: none;"><img src="http://bestanimations.com/Signs&Shapes/Arrows/Left/left-arrow-16.gif" width="40px"></i></label>
 </div>
+<div class="" align="left">
+  <label><input type="checkbox" name="term_cond" id="terminos" value="1"><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos de confidencialidad de datos </a><i id="verify_check" style="display: none;"><img src="http://bestanimations.com/Signs&Shapes/Arrows/Left/left-arrow-16.gif" width="40px"></i></label>
+</div>
+
 <div class="row">
   <div class="text-center">
     <input id="button-save" type="submit" name="btnusu" class="btn btn-primary" value="Crear Cuenta">  
@@ -565,15 +569,15 @@ if( $_POST["btnemp"] ) {
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav"> 
                         </ul>
-                    <ul class="nav navbar-nav navbar-right">
-                          <?php foreach($menu as $optmnu){ ?>
+                    <ul class="nav navbar-nav navbar-right">                          
+                          <?php foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                             <li>
-                              <a onclick="<?php echo $optmnu["onclick"]; ?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? 'data-toggle="modal" data-target="#'.$optmnu["modal"].'"' : '';?>><?php echo $optmnu["nombre"];?></a>
-                            </li>                                                
-                          <?php }?>
+                              <a onclick="<?php echo $optmnu["onclick"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? 'data-toggle="modal" data-target="#'.$optmnu["modal"].'"' : '';?>><?php echo $optmnu["nombre"];?></a>
+                            </li>                            
+                          <?php } ?>
                           <?php if (isset($menu["submenu"])){ ?>                            
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?> 
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="http://micamello.ec/assets/images/blanco.png" class="user_icon">
                                 <ul class="dropdown-menu">
                                   <?php foreach($menu["submenu"] as $submenu){ ?>  
                                      <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>

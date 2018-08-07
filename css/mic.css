@@ -15,6 +15,47 @@ body
     padding-top: 72px;
 }
 
+/*Formulario checkbox css*/
+
+
+
+/*Formulario checkbox css*/
+
+/*Corección del desplazamiento hacia la derecha del navbar*/
+
+.modal-open .navbar-fixed-top,
+.modal-open .navbar-fixed-bottom {
+  padding-right: 17px;
+  }
+
+/*Corección del desplazamiento hacia la derecha del navbar*/
+
+
+.user_icon
+{
+  width: 35px;
+  height: 35px;
+  position: relative;
+  top: -7px;
+  float: right;
+  left: 10px;
+  border-radius: 100%;
+  background-color: #e6f7ff;
+  /*-webkit-border-radius: 60px;*/
+    /*-webkit-background-clip: padding-box;*/
+    /*-moz-border-radius: 60px;*/
+    /*-moz-background-clip: padding;*/
+  /*width: 60px;*/
+    /*height: 60px;*/
+    /*-webkit-border-radius: 60px;*/
+    /*-webkit-background-clip: padding-box;*/
+    /*-moz-border-radius: 60px;*/
+    /*-moz-background-clip: padding;*/
+    /*border-radius: 60px;*/
+    /*background-clip: padding-box;*/
+    /*margin: 7px 0 0 5px;*/
+}
+
 .navbar {
     min-height: 60px;
     margin-bottom: 20px;

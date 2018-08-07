@@ -7,9 +7,9 @@ class Controlador_Inicio extends Controlador_Base {
   }
   
   public function construirPagina(){
-    if( Modelo_Usuario::estaLogueado() ){
-      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-    }
+    // if( Modelo_Usuario::estaLogueado() ){
+    //   Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+    // }
     $arrbanner = Modelo_Banner::obtieneListado();
     $nro_oferta = Modelo_Oferta::obtieneNumero();
     $nro_candidato = Modelo_Usuario::obtieneNroCandidato();
