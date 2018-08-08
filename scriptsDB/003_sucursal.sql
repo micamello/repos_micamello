@@ -4,11 +4,11 @@ ALTER TABLE mfo_testimonio
 ALTER TABLE mfo_provincia
   DROP FOREIGN KEY fk_mfo_provincias_mfo_pais1;
 
-ALTER TABLE mfo_usuario
-  DROP FOREIGN KEY fk_convenio_univ;
-
 ALTER TABLE mfo_convenio_univ
   DROP FOREIGN KEY fk_mfo_convenio_univ_mfo_pais1;
+  
+ALTER TABLE mfo_sucursal
+  DROP FOREIGN KEY fk_mfo_sucursal_mfo_pais1;
   
 
 DROP TABLE `micamello_base`.`mfo_pais`;
@@ -177,6 +177,7 @@ INSERT INTO `mfo_convenio_univ` (`Nombre`,`iso`,`id_pais`,`convenio`) VALUES
  ('Universidad Técnica del Norte','UTN',14,0),
  ('Universidad de Otavalo','Otavalo',14,0);
 
+DROP TABLE IF EXISTS `mfo_sucursal`;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `micamello_base`.`mfo_sucursal` (
   `id_sucursal` INT(11) NOT NULL AUTO_INCREMENT COMMENT 'Identificador del país registrado',
@@ -202,7 +203,6 @@ AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8;
 
 INSERT INTO `mfo_sucursal` (`dominio`,`icono`,`logo`,`iso`,`id_pais`,`id_moneda`) VALUES 
- ('Ecuador','micamello_base.com.ec','ecu.png','logo.png','EC',14,1),
- ('Colombia','micamello_base.com.ec','col.png','logo.png','CO',10,2),
- ('Perú','micamello_base.com.ec','peru.png','logo.png','PE',27,3);
-
+ ('micamello_base.com.ec','ecu.png','logo.png','EC',14,1),
+ ('micamello_base.com.ec','col.png','logo.png','CO',10,2),
+ ('micamello_base.com.ec','peru.png','logo.png','PE',27,3);
