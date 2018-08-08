@@ -25,10 +25,10 @@ class PasswordResetTokenGenerator{
      * @param  sfGuardUser $user
      * @param  string $token
      * @return boolean*/
-    public function checkToken($user, $token){
+    public function checkToken($idusu, $fechausu, $token){
       list($ts_b36, $hash) = explode("-", $token);
       $ts = base_convert($ts_b36, 36, 10);
-      if (!$this->tokensAreEqual($token,$this->makeTokenWithTimestamp($user, $ts))){
+      if (!$this->tokensAreEqual($token,$this->makeTokenWithTimestamp($idusu, $fechausu, $ts))){
         return false;
       }
       if ( $this->timeout < $this->days($this->today()) - $ts ){

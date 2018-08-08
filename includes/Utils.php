@@ -53,6 +53,7 @@ class Utils{
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
+    $mail->CharSet = 'UTF-8';
     $mail->Port = MAIL_PORT; 
     $mail->Host = MAIL_HOST; 
     $mail->Username = MAIL_USERNAME; 
@@ -61,9 +62,21 @@ class Utils{
     $mail->FromName = MAIL_NOMBRE; 
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
-    $mail->Subject = $subject; 
+    $mail->Subject = utf8_encode($subject); 
     $mail->Body = $body; 
     return $mail->Send(); 
+  }
+
+  public static function encriptar($texto){    
+    $objaes = new Aes(KEY_ENCRIPTAR);
+    $encriptado = $objaes->encrypt($texto);
+    return bin2hex($encriptado);
+  }
+
+  public static function desencriptar($texto){    
+    $objaes = new Aes(KEY_ENCRIPTAR);
+    $desencriptado = hex2bin($texto);
+    return $objaes->decrypt($desencriptado);
   }
 }
 ?>

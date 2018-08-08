@@ -2,6 +2,7 @@
 require_once RUTA_INCLUDES.'Database.php';
 require_once RUTA_INCLUDES.'Utils.php';
 require_once RUTA_INCLUDES.'/phpMailer/PHPMailerAutoload.php';
+require_once RUTA_INCLUDES.'Aes.php';
 
 function cargarClases($nombreClase) {
   $nombre_archivo = RUTA_FRONTEND . '/'. str_replace('_', '/', $nombreClase) . '.php';

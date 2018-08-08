@@ -26,6 +26,7 @@ RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
 
 #contrasena
 RewriteRule ^contrasena/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena [L]
+RewriteRule ^contrasena/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena&opcion=recuperacion&token=$1 [L]
 
 #perfil
 RewriteRule ^perfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil [L]

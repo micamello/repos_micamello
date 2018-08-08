@@ -41,7 +41,7 @@ abstract class Controlador_Base{
     }
     else{
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
-      if ($_SESSION['mfo_datos']['usuario']['rol'] == Modelo_Usuario::CANDIDATO){        
+      if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){        
         $menu["menu"][] = array("href"=>PUERTO."://".HOST."/empleos/", "nombre"=>"Empleos");
         $menu["menu"][] = array("href"=>PUERTO."://".HOST."/postulaciones/", "nombre"=>"Mis Postulaciones");
       }
@@ -51,13 +51,12 @@ abstract class Controlador_Base{
       }
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/facturas/", "nombre"=>"Mis Facturas");
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/perfil/", "nombre"=>"Mi Perfil"); 
-      if ($_SESSION['mfo_datos']['usuario']['rol'] == Modelo_Usuario::EMPRESA){        
+      if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){        
         $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/planes/", "nombre"=>"Mis Planes");
       }
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/configuracion/", "nombre"=>"Configuración");
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/logout/", "nombre"=>"Cerrar Sesión");
     }
-    Utils::log("menu ".print_r($menu,true));
     return $menu;
   }
 
