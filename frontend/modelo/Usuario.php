@@ -36,6 +36,14 @@ class Modelo_Usuario{
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
+
+  // Búsqueda del username en la BD
+  // public static function existeUsuario($username){
+  //   if(empty($username)){ return false; }
+  //   $sql = "select * from mfo_usuario where username = ?";
+  //   $rs = $GLOBALS['db']->auto_array($sql,array($username));
+  //   return (!empty($rs['id_usuario'])) ? $rs : false;
+  // }
   
 }  
 ?>
