@@ -39246,3 +39246,115 @@
 (
 )
 
+[2018/08/09 09:02:02] Utils::createSession empezo una nueva sesion
+[2018/08/09 09:02:02] dispatch nombre del controlador: Controlador_Registro - registro
+[2018/08/09 09:02:02] Modelo_Usuario::estaLogueado sesion Array
+(
+)
+
+[2018/08/09 09:02:02] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+)
+
+[2018/08/09 09:02:02] Modelo_Usuario::estaLogueado sesion Array
+(
+)
+
+[2018/08/09 09:02:02] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+)
+
+[2018/08/09 09:02:02] menu Array
+(
+    [menu] => Array
+        (
+            [0] => Array
+                (
+                    [href] => http://localhost/repos_micamello/
+                    [nombre] => Inicio
+                )
+
+            [1] => Array
+                (
+                    [href] => #
+                    [onclick] => hidden_menuuser_small();
+                    [nombre] => Candidato
+                    [modal] => myModal
+                )
+
+            [2] => Array
+                (
+                    [href] => #
+                    [onclick] => hidden_menuuser_small();
+                    [nombre] => Empresa
+                    [modal] => myModal2
+                )
+
+        )
+
+)
+
+[2018/08/09 09:02:02] Modelo_Usuario::estaLogueado sesion Array
+(
+)
+
+[2018/08/09 09:02:02] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+)
+
+[2018/08/09 09:03:30] Utils::createSession empezo una nueva sesion
+[2018/08/09 09:03:30] dispatch nombre del controlador: Controlador_Registro - registro
+[2018/08/09 09:03:30] Modelo_Usuario::estaLogueado sesion Array
+(
+)
+
+[2018/08/09 09:03:30] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+)
+
+[2018/08/09 09:03:30] Modelo_Usuario::estaLogueado sesion Array
+(
+)
+
+[2018/08/09 09:03:30] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+)
+
+[2018/08/09 09:03:30] menu Array
+(
+    [menu] => Array
+        (
+            [0] => Array
+                (
+                    [href] => http://localhost/repos_micamello/
+                    [nombre] => Inicio
+                )
+
+            [1] => Array
+                (
+                    [href] => #
+                    [onclick] => hidden_menuuser_small();
+                    [nombre] => Candidato
+                    [modal] => myModal
+                )
+
+            [2] => Array
+                (
+                    [href] => #
+                    [onclick] => hidden_menuuser_small();
+                    [nombre] => Empresa
+                    [modal] => myModal2
+                )
+
+        )
+
+)
+
+[2018/08/09 09:03:30] Modelo_Usuario::estaLogueado sesion Array
+(
+)
+
+[2018/08/09 09:03:30] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+)
+
