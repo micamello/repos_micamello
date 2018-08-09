@@ -1,3 +1,16 @@
+<!--mensajes de error y exito-->
+<?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
+  <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
+    <?php echo $sess_err_msg;?>
+  </div>  
+<?php }?>
+
+<?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
+  <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
+    <?php echo $sess_suc_msg;?>
+  </div>  
+<?php }?>
+
 <section id="action" class="banner_info_email">
                 <div class="container">
                     <div class="row">
@@ -83,18 +96,5 @@
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/ruc_jquery_validator.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/multiple-select.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/mic.js"></script>
-
-    <!--mensajes de error y exito-->
-    <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
-      <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
-        <?php echo $sess_err_msg;?>
-      </div>  
-    <?php }?>
-
-    <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
-      <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
-        <?php echo $sess_suc_msg;?>
-      </div>  
-    <?php }?>
-    </body>
+</body>
 </html>

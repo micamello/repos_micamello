@@ -1,10 +1,9 @@
 <?php
-class Database
-{
+class Database{
   //abstract out mysql constants
-  const ASSOC = MYSQL_ASSOC;
-  const NUM = MYSQL_NUM;
-  const BOTH = MYSQL_BOTH;
+  const ASSOC = MYSQLI_ASSOC;
+  const NUM = MYSQLI_NUM;
+  const BOTH = MYSQLI_BOTH;
 	
   var $server;
   var $username;
@@ -25,7 +24,7 @@ class Database
   private $total_queries; 
   private $_trans_status; 
 
-  function Database( $server, $user, $pass, $dbname = false ){
+  function __construct( $server, $user, $pass, $dbname = false ){
   	$this->server 	= $server;
   	$this->username = $user;
   	$this->password = $pass;
@@ -34,12 +33,12 @@ class Database
 
   function connect(){
   	$this->connection = mysqli_connect($this->server, $this->username, $this->password) or die("No se pudo conectar a la base de datos");
-	if ( $this->connection ){	  
-	  return $this->selectDB();	  
-	}
-	else{
-	  return false;
-	}
+  	if ( $this->connection ){	  
+  	  return $this->selectDB();	  
+  	}
+  	else{
+  	  return false;
+  	}
   }
 
   function selectDB(){	
@@ -52,7 +51,7 @@ class Database
   }
 
   function disconnect(){
-	mysqli_close($this->connection);
+	  mysqli_close($this->connection);
   }
 
   function execute( $query ){
@@ -169,17 +168,14 @@ class Database
     if ($this->result === FALSE){
       $msg = "SQL ERROR: ". $this->error();
       Utils::log($msg);
-
-      }
-
-      $this->_trans_status = false;
-
+    }
+    $this->_trans_status = false;      
     $this->lastQuery = $query;
     $this->_trans_status = true;
     return $this->result;
   }
   
-  function auto_array($query, $params = array(), $result_type=self::ASSOC, $dorowset=false) {
+  function auto_array($query, $params = array(), $dorowset=false, $result_type=self::ASSOC) {
     $this->result = $this->Query($query, $params);
     if($this->result === false){
       return null;

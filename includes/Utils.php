@@ -53,6 +53,7 @@ class Utils{
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
+    $mail->CharSet = 'UTF-8';
     $mail->Port = MAIL_PORT; 
     $mail->Host = MAIL_HOST; 
     $mail->Username = MAIL_USERNAME; 
@@ -61,9 +62,35 @@ class Utils{
     $mail->FromName = MAIL_NOMBRE; 
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
-    $mail->Subject = $subject; 
+    $mail->Subject = utf8_encode($subject); 
     $mail->Body = $body; 
     return $mail->Send(); 
+  }
+
+  public static function encriptar($texto){    
+    $objaes = new Aes(KEY_ENCRIPTAR);
+    $encriptado = $objaes->encrypt($texto);
+    return bin2hex($encriptado);
+  }
+
+  public static function desencriptar($texto){    
+    $objaes = new Aes(KEY_ENCRIPTAR);
+    $desencriptado = hex2bin($texto);
+    return $objaes->decrypt($desencriptado);
+  }
+
+  public static function long_minima($str, $val){
+    if (preg_match("/[^0-9]/", $val)){
+      return false;
+    }
+    if (function_exists('mb_strlen')){
+      return (mb_strlen($str) < $val) ? false : true;    
+    }
+    return (strlen($str) < $val) ? false : true;
+  }
+
+  public static function valida_password( $pass ){
+    return (preg_match('/[A-Z]/',$pass) && preg_match('/[a-z]/',$pass) && preg_match('/\d/',$pass) && self::long_minima($pass,8) )?true:false;
   }
 }
 ?>

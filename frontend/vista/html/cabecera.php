@@ -7,7 +7,10 @@
         <meta charset="utf-8">
         <meta name="google-site-verification" content="Hy5ewWRp0yOqH1Z_3Q59zSVffxTZDLa_T50VEoGBIBw" />
         <title>MiCamello - Portal de Empleos en Ecuador</title>
-        <meta name="description" content="">
+        <meta name="keywords" content="ofertas de trabajo, trabajos, empleos, bolsa de empleos, buscar trabajo, busco empleo, portal de empleo, ofertas de empleo, bolsa de empleo, trabajos en ecuador, paginas de empleo, empleos ecuador, camello">
+        <title>MiCamello - Portal de Empleos en Ecuador</title>
+        <meta name="description" content="Cientos de empresas publican las mejores ofertas en la bolsa de trabajo Mi Camello Ecuador. Busca empleo y apúntate y sé el primero en postular">
+        <link rel="alternate" hreflang="ec-EC" href="https://www.micamello.com.ec/" />
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta property="og:image" content="https://www.micamello.com.ec/" />
         <link rel="icon" type="image/x-icon" href="<?php echo PUERTO."://".HOST;?>/imagenes/favicon.ico">
@@ -34,7 +37,50 @@
         <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/multiple-select.css">
         <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/profile-style.css"> -->
 
+        <!--Theme Responsive css-->
+        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/responsive.css" /> -->
+        
+        <!-- <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
+        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.23.0/sweetalert2.all.js"></script> -->
+        <!-- <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-1.11.2.min.js"></script> -->
+        <!-- <script type="text/javascript">
+            function success_register()
+            {
+                swal(
+                  'Registro exitoso!',
+                  'POR FAVOR, REVISE SU CORREO Y ACTIVE SU CUENTA PARA COMPLETAR SU PERFIL!',
+                  'success'
+                )
+            }
 
+            function error_register()
+            {
+                swal({
+                  type: 'error',
+                  title: 'Error al registrar',
+                  text: 'REGISTRO DUPLICADO, POR FAVOR, REVISE Y VUELVA A INTENTARLO!'
+                })
+                $('#myModal').modal('show');
+            }
+
+            function error_register_emp()
+            {
+                swal({
+                  type: 'error',
+                  title: 'Error al registrar',
+                  text: 'REGISTRO DUPLICADO, POR FAVOR, REVISE Y VUELVA A INTENTARLO!'
+                })
+                $('#myModal2').modal('show');
+            }
+        </script> -->
+    
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-123345917-1');
+        </script>
     
     </head>
 

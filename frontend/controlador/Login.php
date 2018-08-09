@@ -17,7 +17,10 @@ class Controlador_Login extends Controlador_Base {
         $data = $this->camposRequeridos($campos);                        
         $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password"]);
         if (!empty($usuario)){
-           self::registroSesion($usuario);
+           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){
+             throw new Exception("Error en el sistema, por favor intente nuevamente");
+           }
+           self::registroSesion($usuario);           
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");

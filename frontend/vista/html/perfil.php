@@ -1,6 +1,6 @@
 <style type="text/css">
   .home {
-    background: linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),url(<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/cabecera-empresa-3.jpg) no-repeat scroll center center;    background-size: cover;
+    background: linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),url(<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/cabecera-candidato.jpg) no-repeat scroll center center;    background-size: cover;
     position: relative;
     padding-top: 185px;
     padding-bottom: 79px;
