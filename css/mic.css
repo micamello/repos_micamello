@@ -1,4 +1,4 @@
-/*Media queries configurations*/
+Media queries configurations*/
 /*@media screen and (max-width: 650px) {
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
       margin-left: 0px;*/
@@ -450,3 +450,64 @@ body
     padding: 40px 40px 40px 40px;
   }
 /*Casos de éxito micamello*/
+
+
+/*Testing multiselect*/
+
+.multiselect {
+  width: 100%;
+}
+
+.selectBox {
+  position: relative;
+  /*background-color: red;*/
+}
+
+.selectBox select {
+  width: 100%;
+  font-weight: bold;
+}
+
+.overSelect {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.checkboxes {
+  display: none;
+  border: 1px #dadada solid;
+  /*position: sticky;*/
+}
+
+.checkboxes label {
+  display: block;
+}
+
+.checkboxes label:hover {
+  background-color: #1e90ff;
+}
+
+/*-------------------------------------------------------------*/
+
+
+/*Testing multiselect*/
+
+.list-unstyled.msg_error
+{
+  position: absolute;
+  left: 164px;
+  text-align: middle;
+  top: 12px;
+  border: 0px solid #ff4d4d;
+  border-radius: 6px;
+  padding: 0px 3px 0px 3px;
+  background-color: #ff4d4d;
+  color: white;
+  font-size: 12px;
+  right: 15px
+  /*text-shadow: 2px 2px 2px 2px;*/
+  /*text-shadow: 1px 1px 2px black;*/
+}

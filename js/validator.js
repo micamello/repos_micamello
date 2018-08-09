@@ -237,7 +237,7 @@
     if (!errors.length) return
 
     errors = $('<p/>')
-      .addClass('list-unstyled')
+      .addClass('list-unstyled msg_error')
       .append($.map(errors, function (error) { return $('<p/>')[method](error) }))
 
     $block.data('bs.validator.originalContent') === undefined && $block.data('bs.validator.originalContent', $block.html())

@@ -37,6 +37,7 @@ class Modelo_Usuario{
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
 
+
   public static function modificarPassword($pass,$id){
     if (empty($pass) || empty($id)){ return false; }
     $password = md5($pass);
@@ -47,6 +48,14 @@ class Modelo_Usuario{
     if (empty($id)){ return false; }
     return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
   }
+
+  // Búsqueda del username en la BD
+  // public static function existeUsuario($username){
+  //   if(empty($username)){ return false; }
+  //   $sql = "select * from mfo_usuario where username = ?";
+  //   $rs = $GLOBALS['db']->auto_array($sql,array($username));
+  //   return (!empty($rs['id_usuario'])) ? $rs : false;
+  // }
   
 }  
 ?>

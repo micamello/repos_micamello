@@ -22,15 +22,7 @@
         <!-- <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/style.css" /> -->
         <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
-
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/slick/slick.css">  -->
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/slick/slick-theme.css"> -->
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/animate.css"> -->
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/iconfont.css"> -->
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css"> -->
         <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/magnific-popup.css"> -->
-
         <!-- Archivo css micamello mic.css -->
         <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
         <!-- Archivo css micamello mic.css -->
@@ -41,7 +33,9 @@
         <!--Theme custom css -->
         <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css">
         <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
-        <!--<link rel="stylesheet" href="assets/css/colors/maron.css">-->
+        <!-- Estilos del multiselect -->
+        <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/multiple-select.css">
+        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/profile-style.css"> -->
 
         <!--Theme Responsive css-->
         <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/responsive.css" /> -->
@@ -89,42 +83,8 @@
         </script>
     
     </head>
-  <!-- Modal -->
-    <?php //include('assets/init.modal.php'); ?>
 
-    <!--inicio de los modals-->
-    <?php
-//function generarCodigo($longitud) {
-// $key = '';
-// $pattern = '1234567890abcdefghijklmnopqrstuvwxyz';
-// $max = strlen($pattern)-1;
-// for($i=0;$i < $longitud;$i++) $key .= $pattern{mt_rand(0,$max)};
-// return $key;
-//}
- 
-//Ejemplo de uso
- 
-//$token=generarCodigo(50); // genera un código de 6 caracteres de longitud.
-
-?>
-
-<?php 
-//    require 'app/fb_init.php';
-//    $helper = $fb->getRedirectLoginHelper();
-//    $permissions = ['email']; // Optional permissions
-//    $loginUrl = $helper->getLoginUrl('http://localhost/micamello/fb-callback.php', $permissions);
- ?>
-
- <?php
-//    require_once "app/g_init.php";
-//    $gloginURL = $gClient->createAuthUrl();
-  ?>
-
-  <!--Login instagram-->
-  <?php
-//    require "src/instagram/InstagramAPI.php";
-    ?>
-
+<body>
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="z-index:9999">
   <div class="modal-dialog" role="document">
@@ -134,9 +94,10 @@
         <h4 class="modal-title" id="myModalLabel">REGISTRE SU CUENTA 
         <i class="fa fa-user" style="color: #00a885;padding: 8px;font-size: 25px;"></i></h4>
       </div>-->
-      <form role="form" name="formulario" id="form_candidato" method="post">
+      
       <div class="modal-body">
-        
+
+        <!--Formulario de registro usuario - candidato-->
         <div class="col-md-12" align="center">
           <span class="text-center">Accede con: </span>
           <br><br>
@@ -153,183 +114,131 @@
             <i class="fab fa-instagram" style="font-size: 40px; color:#31708f"></i>
           </a>-->
         </div>
-        <div class="col-md-12" id="alert_term">
-          
-        </div>
 
         <hr>
-      <div class="row">
         
         <div class="col-md-12" align="center">
           <p class="center-text-line" style="font-size: 17px;">ó</p>
           <span class="text-center" style="color: grey; font-size: 15px;">o registrate con tus datos: </span><br><br>
         </div>
+
+
         <br><br>
-        <div class="col-md-6">
+        <form action = "<?php echo PUERTO."://".HOST;?>/registro/" method = "post" id="form_candidato">
+
+         <div class="row">
+          <div class="col-md-6">
             <div class="form-group">
               <label class="text-center">Usuario:</label><div class="help-block with-errors"></div>
-              <!-- <small id="usernameHelp" class="form-text text-muted" style="color: red;"></small> -->
               <input id="username" type="text" name="username" placeholder="Ejemplo: camello205487" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" class="form-control" aria-describedby="usernameHelp" required>
             </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-center">Correo:</label><div class="help-block with-errors"></div>
-            <small id="correoHelp" class="form-text text-muted" style="color: red;"></small>
-            <input id="correo" type="email" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
           </div>
-        </div>   
 
-        <div class="col-md-6">
+          <div class="col-md-6">
             <div class="form-group">
-              <label class="text-center">Nombres:</label><div class="help-block with-errors"></div>
-              <input type="text" name="nombres" id="name_user" pattern="[a-z A-Z]+" placeholder="Ejemplo: Carlos Pedro" class="form-control" required>
+              <label class="text-center">Correo:</label><div class="help-block with-errors"></div>
+              <input id="correo" type="email" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
             </div>
-        </div>
-        <div class="col-md-6">
-            <div class="form-group">
-              <label class="text-center">Apellidos:</label><div class="help-block with-errors"></div>
-              <input type="text" name="apellidos" id="apell_user" pattern='[a-z A-Z]+' placeholder="Ejemplo: Ortiz Zambrano" class="form-control" required>
-            </div>
-        </div> 
-
-      <div class="col-md-6">
-        <div class="form-group">
-            <label class="text-center">seleccione provincia:</label><div class="help-block with-errors"></div>
-            <select id="provincia" class="form-control" name="provincia" required>
-              <option value="" selected disabled>Seleccione provincia</option>
-        <!--SQL EXTRACT ALL PROVINCES-->
-        <?php  foreach($arrprovincia as $provincia){ ?>
-            <option value="<?php echo $provincia['nombre'] ?>" id="<?php echo $provincia['id_pro'] ?>"><?php echo $provincia['nombre']; ?></option>
-        <?php } ?>
-        <!--SQL EXTRACT ALL PROVINCES-->
-          </select>
-         </div>
-         </div>    
-
-         <div class="col-md-6">
-          <div class="form-group">
-              <label class="text-center">seleccione ciudad:</label><div class="help-block with-errors"></div>
-              <select id="ciudad" class="form-control" name="ciudad" required>
-                <option value="1">Selecciona ciudad primero</option>
-          <!--SQL EXTRACT ALL PROVINCES-->
-          <!--SQL EXTRACT ALL PROVINCES-->
-            </select>
-           </div>
-         </div>      
-
-        <div class="col-md-6">
-            <div class="form-group">
-              <label class="text-center">Contraseña:</label><div class="help-block with-errors"></div>
-              <input id="password" name="password" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Debe contener letra, una mayúscula mínimo y numeros' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Formato: me198454EjgE" class="form-control" required data-toggle="password">
-            </div>
-        </div>
-        <div class="col-md-6">
-          <div class="form-group">
-            <label class="text-center">Confirmar Contraseña:</label><div class="help-block with-errors"></div>
-            <input id="password_two" name="password_two" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Por favor, ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" required data-toggle="password">
-          </div>
-        </div>   
-
-     <div class="col-md-6">
-            <div class="group">
+          </div>   
+          <input type="hidden" name="register_form" id="register_form" value="1">
+          <div class="col-md-6">
               <div class="form-group">
-                <label class="text-center">Cédula / Pasaporte:</label><div class="help-block with-errors"></div>
-                <small id="dniHelp" class="form-text text-muted" style="color: red;"></small>
-                <input id="dni" type="text" name="cedula" minlength="10" maxlength="15" onkeypress="" class="form-control" aria-describedby="dniHelp" required>
+                <label class="text-center">Nombres:</label><div class="help-block with-errors"></div>
+                <input type="text" name="nombres" id="name_user" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" placeholder="Ejemplo: Carlos Pedro" class="form-control" required>
+              </div>
+          </div>
+          <div class="col-md-6">
+              <div class="form-group">
+                <label class="text-center">Apellidos:</label><div class="help-block with-errors"></div>
+                <input type="text" name="apellidos" id="apell_user" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortiz Zambrano" class="form-control" required>
+              </div>
+          </div>       
+
+          <div class="col-md-6">
+              <div class="form-group">
+                <label class="text-center">Contraseña:</label><div class="help-block with-errors"></div>
+                <input id="password" name="password" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Debe contener letra, una mayúscula mínimo y numeros' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Ejemplo: me198454EjgE" class="form-control" required data-toggle="password">
+              </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="text-center">Confirmar Contraseña:</label><div class="help-block with-errors"></div>
+              <input id="password_two" name="password_two" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Por favor, ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" required data-toggle="password">
+            </div>
+          </div>    
+
+           <div class="col-md-6">
+             <div class="form-group">
+               <label for="numero_cand">Celular: </label><div class="help-block with-errors"></div>
+               <input type="text" class="form-control" name="numero_cand" id="numero_cand" onclick="numero_validate(this);" required>
+             </div>
+           </div> 
+
+           <div class="col-md-6">
+                  <div class="group">
+                    <div class="form-group">
+                      <label class="text-center">Cédula / Pasaporte:</label><div class="help-block with-errors"></div>
+                      <input id="dni" type="text" name="cedula" minlength="10" maxlength="15" onkeypress="" class="form-control" aria-describedby="dniHelp" required>
+                    </div>
+                  </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Seleccione área: </label><div class="help-block with-errors"></div>
+                  <select class="form-control" name="area_select" id="area_select" multiple required>
+                    <option value="" selected disabled>Seleccione un área</option>
+                    <?php 
+                      if (!empty($arrarea)){
+                          foreach($arrarea as $area){ ?>
+                              <option value="<?php echo $area['id_area'] ?>"><?php echo $area['nombre'] ?></option>
+                          <?php }
+                      } ?>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Seleccione nivel de interés: </label><div class="help-block with-errors"></div>
+                  <select class="form-control" name="nivel_interes" id="nivel_interes" multiple required>
+                    <option value="" selected disabled>Seleccione un área</option>
+                    <?php 
+                      if (!empty($intereses)){
+                          foreach($intereses as $interes){ ?>
+                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo $interes['descripcion'] ?></option>
+                          <?php }
+                      } ?>
+                  </select>
+                </div>
+              </div>  
+
+
+              <div class="" align="left">
+                <label><input type="checkbox" name="term_cond" id="term_cond" value="1" required><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos y condiciones </a></label>
+              </div>
+              <div class="" align="left">
+                <label><input type="checkbox" name="term_data" id="term_data" value="1" required><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos de confidencialidad de datos </a></label>
+              </div>
+
+              <div class="row">
+                <div class="text-center">
+                  <input id="button-save" type="submit" name="btnusu" class="btn btn-primary" value="Crear Cuenta">  
+                </div> 
               </div>
             </div>
-        </div>
 
-       <div class="col-md-6">
-            <div class="form-group">
-              <label class="text-center">Teléfono:</label><div class="help-block with-errors"></div>
-              <input type="text" id="telefono_cand" name="telefono" minlength="10" maxlength="10" class="form-control" required>
-            </div>
-        </div>
-         <div class="col-md-6">
-            <div class="form-group">
-              <label class="text-center">Áreas de Interes:</label><div class="help-block with-errors"></div>
-              <select id="intereses" name="intereses[]" multiple class="form-control" required>
-                  <?php
-                  foreach($intereses as $interes){
-                      $id_ma=$interes['id_intereses'];
-                      echo "<label><option type='checkbox' id='option$id_ma' value='$id_ma' class='single-checkbox1'>".$interes['nombre']."</option></label>";
-                  }
-                 ?>
-              </select> 
-            </div> 
-          
-        </div>
-       <div class="col-md-6">
-            <div class="form-group">
-              <label class="text-center">Nivel de Interés: <span style="color: gray; font-size: 10px;">(Escoga dos opciones)</span></label><br>
+        </form>
+        <!--Formulario de registro usuario - candidato-->
 
-              <div class="form-group">
-                  <select class="form-control" id="nivel" multiple name="niveles[]" required>
-                    <label><option type="checkbox" name="" id="option1" class="single-checkbox" value='1'>Cargos gerenciales</option></label><br>
-                    <label><option type="checkbox" name="" id="option2" class="single-checkbox" value='2'>Cargos medios</option></label><br>
-                    <label><option type="checkbox" name="" id="option3" class="single-checkbox" value='3'>Cargos básicos</option></label>
-                  </select>
-              
-            </div> 
-             
-            </div>
-        </div>
-        
-        
-        <!--<div id="form_student" class="animate_panel" style="display: none;">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Seleccione Universidad</label>
-              <select class="form-control" name="university_user" id="university_user">
-                <option value="" selected disabled>Seleccione Universidad</option>
-                <?php 
-                  //$select_university = mysqli_query($db, "SELECT * FROM mfo_universidades");
-                  //while ($row = mysqli_fetch_assoc($select_university)) {
-                    ?>
-                      <option value="<?php //echo $row['id_universidad'] ?>"><?php //echo $row['nombre']; ?></option>
-                    <?php
-                  //}
-                 ?>
-              </select>
-            </div>
+
+        <div class="row">
+          <div class="col-md-12"><br>
+            <p class="text-center"><strong>¿Ya tienes cuenta? </strong><a href="<?php echo PUERTO."://".HOST;?>/login/">Iniciar sesión</a></p> 
           </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label>Ingrese código</label>
-              <input type="text" name="code_asign" id="code_asign" class="form-control" placeholder="ejemplo: 0000-000">
-            </div>
-          </div> 
-        </div>-->       
-           
-      </div>
-
-
-<div class="" align="left">
-  <label><input type="checkbox" name="term_cond" id="terminos" value="1"><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos y condiciones </a><i id="verify_check" style="display: none;"><img src="http://bestanimations.com/Signs&Shapes/Arrows/Left/left-arrow-16.gif" width="40px"></i></label>
-</div>
-<div class="" align="left">
-  <label><input type="checkbox" name="term_cond" id="terminos" value="1"><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos de confidencialidad de datos </a><i id="verify_check" style="display: none;"><img src="http://bestanimations.com/Signs&Shapes/Arrows/Left/left-arrow-16.gif" width="40px"></i></label>
-</div>
-
-<div class="row">
-  <div class="text-center">
-    <input id="button-save" type="submit" name="btnusu" class="btn btn-primary" value="Crear Cuenta">  
-  </div> 
-  
-</div>
-<div class="row">
-  <div class="col-md-12"><br>
-    <p class="text-center"><strong>¿Ya tienes cuenta? </strong><a href="<?php echo PUERTO."://".HOST;?>/login/">Iniciar sesión</a></p> 
-  </div>
-</div>
+        </div>
 
       </div>
-    </form>
-     
-
-
     </div>
   </div>
 </div>
@@ -349,14 +258,12 @@
         <div class="col-md-6">
             <div class="form-group">
               <label>Usuario:</label><div class="help-block with-errors"></div>
-              <small id="username_empHelp" class="form-text text-muted" style="color: red;"></small>
-              <input type="text" id="emp_username" name="emp_username" placeholder="carlosp" class="form-control" required>
+              <input type="text" id="emp_username" name="emp_username" placeholder="Ejemplo: camello205487" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" class="form-control" required>
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
               <label>Correo:</label><div class="help-block with-errors"></div>
-              <small id="correo_empHelp" class="form-text text-muted" style="color: red;"></small>
               <input type="email" id="emp_correo" name="emp_correo" placeholder="carlosp@gmail.com" class="form-control" required>
             </div>
         </div>
@@ -390,26 +297,24 @@
         <div class="col-md-6">
             <div class="form-group">
               <label>Contraseña:</label><div class="help-block with-errors"></div>
-              <input type="password" name="emp_password" id="password"  class="form-control" required data-toggle="password">
+              <input id="password" name="emp_password" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Debe contener letra, una mayúscula mínimo y numeros' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Formato: me198454EjgE" class="form-control" required data-toggle="password">
             </div>
         </div>
         <div class="col-md-6">
             <div class="form-group">
               <label>Confirmar Contraseña:</label><div class="help-block with-errors"></div>
-              <input type="password" name="emp_password2" id="confirm_password" class="form-control" required data-toggle="password">
+              <input id="password_two" name="password_two" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Por favor, ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" required data-toggle="password">
             </div>
         </div>   
        <div class="col-md-6">
             <div class="form-group">
               <label>RUC:</label><div class="help-block with-errors"></div>
-              <small id="ruc_empHelp" class="form-text text-muted" style="color: red;"></small>
-              <input type="number" id="emp_cedula" name="emp_cedula"  class="form-control" required>
+              <input id="dni" type="text" name="emp_cedula" minlength="10" maxlength="15" onkeypress="" class="form-control" aria-describedby="dniHelp" required>
             </div>
         </div>
        <div class="col-md-6">
             <div class="form-group">
               <label>Nombre de Empresa:</label><div class="help-block with-errors"></div>
-              <small id="name_empHelp" class="form-text text-muted" style="color: red;"></small>
               <input type="text" id="emp_nempresa" name="emp_nempresa"  class="form-control" required>
             </div>
         </div>        
@@ -417,7 +322,7 @@
        <div class="col-md-6">
             <div class="form-group">
               <label>Teléfono:</label><div class="help-block with-errors"></div>
-              <input type="text" name="emp_telefono"  class="form-control" required>
+              <input type="text" name="emp_telefono" id="emp_telefono" minlength="10" maxlength="15" onclick="numero_validate(this);"  class="form-control" required>
             </div>
         </div>        
         
@@ -571,7 +476,7 @@ if( $_POST["btnemp"] ) {
                         <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand">
-                        <img src="http://micamello.ec/assets/images/blanco.png" alt="micamellologo">
+                        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/blanco.png" alt="micamellologo">
                       </a>
                     </div>
                     <!-- End Header Navigation -->
@@ -586,7 +491,7 @@ if( $_POST["btnemp"] ) {
                           <?php } ?>
                           <?php if (isset($menu["submenu"])){ ?>                            
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="http://micamello.ec/assets/images/blanco.png" class="user_icon">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo PUERTO."://".HOST;?>/imagenes/blanco.png" class="user_icon">
                                 <ul class="dropdown-menu">
                                   <?php foreach($menu["submenu"] as $submenu){ ?>  
                                      <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
