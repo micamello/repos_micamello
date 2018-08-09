@@ -78,5 +78,19 @@ class Utils{
     $desencriptado = hex2bin($texto);
     return $objaes->decrypt($desencriptado);
   }
+
+  public static function long_minima($str, $val){
+    if (preg_match("/[^0-9]/", $val)){
+      return false;
+    }
+    if (function_exists('mb_strlen')){
+      return (mb_strlen($str) < $val) ? false : true;    
+    }
+    return (strlen($str) < $val) ? false : true;
+  }
+
+  public static function valida_password( $pass ){
+    return (preg_match('/[A-Z]/',$pass) && preg_match('/[a-z]/',$pass) && preg_match('/\d/',$pass) && self::long_minima($pass,8) )?true:false;
+  }
 }
 ?>

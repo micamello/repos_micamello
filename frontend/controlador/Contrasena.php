@@ -1,6 +1,4 @@
 <?php
-require_once RUTA_INCLUDES.'PasswordResetTokenGenerator.php';
-
 class Controlador_Contrasena extends Controlador_Base {
 
   function __construct(){
@@ -17,7 +15,7 @@ class Controlador_Contrasena extends Controlador_Base {
     switch($opcion){      
       case 'recuperacion':
         $this->validarToken();
-      break;
+      break;      
       default:
         $this->mostrarDefault();
       break;
@@ -25,11 +23,13 @@ class Controlador_Contrasena extends Controlador_Base {
   }
 
   public function validarToken(){
-    try{
+    $tags = array();
+    try{            
       $respuesta = Utils::getParam('token', '', false);
       if (empty($respuesta)){
         throw new Exception("La recuperacion del password es fallida, por favor intente denuevo");
-      }            
+      }  
+      $tags["token"] = $respuesta;              
       $respuesta = Utils::desencriptar($respuesta);      
       $valores = explode("||",$respuesta);      
       $token = $valores[0];
@@ -39,13 +39,27 @@ class Controlador_Contrasena extends Controlador_Base {
       $esvalido = $generator->checkToken($idusuario,$ultima_sesion,$token);
       if (!$esvalido){
         throw new Exception("El enlace para recuperacion de contraseña ya no es valida, por favor ingrese denuevo su correo para el envio");
+      }
+      if ( Utils::getParam('confirm_form') == 1 ){
+        $campos = array('password'=>1,'password2'=>1);
+        $data = $this->camposRequeridos($campos);
+        if ($data["password"] != $data["password2"]){
+          throw new Exception("Contraseña y confirmación de contraseña no coinciden");
+        }
+        if (!Utils::valida_password($data["password"])){
+          throw new Exception("Contraseña no válida, debe contener mínimo 8 caracteres, una letra mayúscula y un número");
+        }
+        if (!Modelo_Usuario::modificarPassword($data["password"],$idusuario)){
+          throw new Exception("Error al modificar la contraseña, por favor intente denuevo"); 
+        }
+        $_SESSION['mostrar_exito'] = "Contraseña modificada exitosamente"; 
       }      
     }
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
     } 
     $menu = $this->obtenerMenu();
-    $tags = array('menu'=>$menu);
+    $tags['menu'] = $menu;
     Vista::render('confirmar_password', $tags);     
   }
 

@@ -3,11 +3,12 @@
       <div class="row">
           <div class="main_business"><br><br>
               <div class="col-md-6">
-                  <form action = "<?php echo PUERTO."://".HOST;?>/contrasena/" method = "post">
+                  <form action = "<?php echo PUERTO."://".HOST;?>/contrasena/<?php echo $token;?>/" method = "post">
                     <h3 align="center"> INGRESE SU NUEVA CONTRASE&Ntilde;A</h3>
                     <div class="form-group has-feedback">
                       <input type="password" name="password" id="password" class="form-control" placeholder="Nueva Contrase&ntilde;a" required>
                       <input type="hidden" name="confirm_form" id="confirm_form" value="1">
+                      <input type="hidden" name="token" id="token" value="<?php echo $token;?>">
                     </div>
                     <div class="form-group has-feedback">
                       <input type="password" name="password2" id="password2" class="form-control" placeholder="Confirme Contrase&ntilde;a" required> 

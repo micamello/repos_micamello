@@ -25,9 +25,9 @@ class PasswordResetTokenGenerator{
      * @param  sfGuardUser $user
      * @param  string $token
      * @return boolean*/
-    public function checkToken($idusu, $fechausu, $token){
+    public function checkToken($idusu, $fechausu, $token){      
       list($ts_b36, $hash) = explode("-", $token);
-      $ts = base_convert($ts_b36, 36, 10);
+      $ts = base_convert($ts_b36, 36, 10);      
       if (!$this->tokensAreEqual($token,$this->makeTokenWithTimestamp($idusu, $fechausu, $ts))){
         return false;
       }
@@ -53,9 +53,9 @@ class PasswordResetTokenGenerator{
       // last_login will also change), we produce a hash that will be
       // invalid as soon as it is used.
       // We limit the hash to 20 chars to keep URL short
-      $key_salt = "project.website.lib.PasswordResetTokenGenerator";
-      $value = sprintf("%d%s%s", $idusu, $fechausu, $ts);
-      return sprintf("%s-%s", $ts_b36,$this->getHash($key_salt, $value));
+      $key_salt = "contrasena";
+      $value = sprintf("%d%s%s", $idusu, $fechausu, $ts);      
+      return sprintf("%s-%s", $ts_b36, $this->getHash($key_salt, $value));
     }
 
     /*** Generates a "short" hash for a value.
@@ -91,7 +91,7 @@ class PasswordResetTokenGenerator{
     /*** Returns the current date as an integer value
      * @return integer */
     protected function today(){
-      $today = new DateTime("now", new DateTimeZone("UTC"));
+      $today = new DateTime("now", new DateTimeZone("America/Guayaquil"));      
       return $today->getTimestamp();
     }
 
@@ -100,7 +100,7 @@ class PasswordResetTokenGenerator{
      * @param  integer $dt A timestamp
      * @return integer*/
     protected function days($dt){
-      $baseDate = new DateTime("2001-01-01T00:00:00",new DateTimeZone("UTC"));
+      $baseDate = new DateTime("2001-01-01T00:00:00",new DateTimeZone("America/Guayaquil"));
       $dateDiff = $dt - $baseDate->getTimestamp();
       return floor($dateDiff / (60 * 60 * 24));
     }
