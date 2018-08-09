@@ -27,6 +27,9 @@ RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
 #contrasena
 RewriteRule ^contrasena/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena [L]
 
+#registro
+RewriteRule ^registro/$ %{ENV:REWRITEBASE}index.php?mostrar=registro [L]
+
 #perfil
 RewriteRule ^perfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil [L]
 RewriteRule ^editarperfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil&opcion=paso1 [L]

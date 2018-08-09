@@ -33,7 +33,7 @@ class Controlador_Contrasena extends Controlador_Base {
         }
 
         if ($this->envioCorreo($datousuario['correo'],$datousuario['nombres'].' '.$datousuario['apellidos'],$token)){
-          throw new Exception("Error en el envio de correo, por favor intente denuevo");
+          throw new Exception("Error en el envio de correo, por favor intente de nuevo");
         }
         $_SESSION['mostrar_exito'] = "Se envio a su direccion de correo ingresada el enlace para el cambio de correo ".$token;
          

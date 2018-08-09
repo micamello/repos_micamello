@@ -39,6 +39,9 @@ function obtieneControlador($nombre){
     case 'perfil':
       return 'Perfil';
     break;
+    case 'registro':
+      return 'Registro';
+    break;
     default:
       return 'Inicio'; 
     break;

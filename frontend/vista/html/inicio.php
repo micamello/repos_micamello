@@ -7,7 +7,7 @@
     <?php 
     if (!empty($banners)){
         foreach($banners as $banner){ ?>
-            <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['id_banner'];?>.<?php echo $banner['formato'];?>">
+            <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['id_banner'];?>.<?php echo $banner['extension'];?>">
         <?php }
     } ?>
     </div>

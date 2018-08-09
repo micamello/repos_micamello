@@ -34,7 +34,8 @@
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blanked">Términos y Condiciones</a>| 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/politicas_de_privacidad.pdf" target="blanked">Políticas de Privacidad</a>|
                                     <a class="legal_info_content" href="https://www.blog.micamello.com.ec" target="blanked">Blog</a>|
-                                    <a class="legal_info_content" href="form-sug.php">Recomendaciones</a>
+                                    <a class="legal_info_content" href="form-
+                                    g.php">Recomendaciones</a>
                                     
                                    
                                 </div><!-- End off widget item -->
@@ -80,8 +81,20 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/validator.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/ruc_jquery_validator.js"></script>
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/multiple-select.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/mic.js"></script>
 
+    <!--mensajes de error y exito-->
+    <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
+      <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
+        <?php echo $sess_err_msg;?>
+      </div>  
+    <?php }?>
 
+    <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
+      <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
+        <?php echo $sess_suc_msg;?>
+      </div>  
+    <?php }?>
     </body>
 </html>

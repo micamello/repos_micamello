@@ -172,8 +172,7 @@ class Database
 
       }
 
-      $this->_trans_status = false;      
-    }
+      $this->_trans_status = false;
 
     $this->lastQuery = $query;
     $this->_trans_status = true;
@@ -214,5 +213,6 @@ class Database
   }
   
 }
+
 
 ?>
