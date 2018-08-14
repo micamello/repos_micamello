@@ -3,7 +3,7 @@ class Modelo_UsuarioxNivel{
   
   public static function obtieneListado($id_usuario){
     $sql = "SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = ".$id_usuario;
-    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),MYSQL_ASSOC,true);
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
     $datos = array();
     if (!empty($arrdatos) && is_array($arrdatos)){
 
