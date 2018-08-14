@@ -36,6 +36,16 @@ class Modelo_Usuario{
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
+
+  public static function obtieneFoto(){
+
+    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
+    }else{
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$_SESSION['mfo_datos']['usuario']['id_usuario'].'jpg';
+    }
+    return $rutaImagen;
+  }
   
 }  
 ?>

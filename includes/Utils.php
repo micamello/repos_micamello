@@ -26,7 +26,7 @@ class Utils{
       Utils::log(__METHOD__ . " empezo una nueva sesion");
       session_name('mfo_datos');
       session_start();      
-    
+      $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();
   } 
  
   static public function getArrayParam($paramName,$array, $default=false){
@@ -78,5 +78,11 @@ class Utils{
     $desencriptado = hex2bin($texto);
     return $objaes->decrypt($desencriptado);
   }
+
+  public static function obtieneDominio(){
+
+    return Modelo_Sucursal::obtieneSucursalActual($_SERVER["HTTP_HOST"]);
+  }
+
 }
 ?>

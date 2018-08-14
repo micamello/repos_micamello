@@ -7,13 +7,13 @@ function hidden_menuuser_small()
 
 // Validación de formulario
 
-$("#form_candidato").validator();
+//$("#form_candidato").validator();
 
 // Validación de formulario
 
 // Validación de cédula campo DNI formulario
 
-$("#dni").validarCedulaEC();
+//$("#dni").validarCedulaEC();
 
 // Validación de cédula campo DNI formulario
 
@@ -53,8 +53,16 @@ $("#dni").validarCedulaEC();
 
 
 //---------------------- Validación de inputs solo números-------------------------//
+$('#select_area').selectr({
+  placeholder:'Buscar'
+});
 
-var x = document.getElementById('telefono_cand');
+
+$('#select_nivel').selectr({
+  placeholder:'Buscar'
+});
+
+/*var x = document.getElementById('telefono_cand');
 
 x.addEventListener('keydown',function(e) {
 
@@ -69,7 +77,7 @@ x.addEventListener('keydown',function(e) {
     e.preventDefault();
   }
 
-});
+});*/
 
 //---------------------- Validación de inputs solo números-------------------------//
 
@@ -81,3 +89,5 @@ x.addEventListener('keydown',function(e) {
   // }
 
 // Validación de nombres de usuarios
+
+

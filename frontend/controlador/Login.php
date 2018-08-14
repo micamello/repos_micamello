@@ -29,9 +29,7 @@ class Controlador_Login extends Controlador_Base {
       }
     } 
 
-    $menu = $this->obtenerMenu();
-    $tags = array('menu'=>$menu);
-    Vista::render('login', $tags);  
+    Vista::render('login');  
   }
 
   public static function registroSesion($usuario){
