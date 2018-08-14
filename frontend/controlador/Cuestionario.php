@@ -18,7 +18,6 @@ class Controlador_Cuestionario extends Controlador_Base {
     $test = Modelo_Cuestionario::testActualxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']); 
     $nropreguntas = Modelo_Pregunta::obtieneNroPreguntasxTest($test);
     $preguntaact = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test);
-    
     $opciones = Modelo_Opcion::listadoxPregunta($preguntaact);
     $nro_opc = count($opciones);
 

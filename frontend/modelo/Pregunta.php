@@ -30,5 +30,11 @@ class Modelo_Pregunta{
     $rs = $GLOBALS['db']->auto_array($sql,array($test,$rasgo));
     return (empty($rs['preguntas'])) ? 0 : $rs['preguntas'];
   }
+
+  public static function primeraPreguntaxTest($test){
+    if (empty($test)){ return false; }
+    $sql = "select * from mfo_pregunta where id_cuestionario = ? order by id_pre asc limit 1";
+    return $GLOBALS['db']->auto_array($sql,array($test));
+  }
 }  
 ?>
