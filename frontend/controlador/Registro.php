@@ -25,9 +25,10 @@ class Controlador_Registro extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();      
       }
     } 
+    
+    $tags["template_js"][] = "validator";
+    $tags["template_js"][] = "ruc_jquery_validator";
 
-    $menu = $this->obtenerMenu();
-    $tags = array('menu'=>$menu);
     Vista::render('inicio', $tags);
   }
 }

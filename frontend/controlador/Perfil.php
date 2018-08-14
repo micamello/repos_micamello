@@ -23,15 +23,13 @@ class Controlador_Perfil extends Controlador_Base {
     
   }
 
-  public function mostrarDefault(){
-    $menu = $this->obtenerMenu();
-    $tags = array('menu'=>$menu);
+  public function mostrarDefault(){   
+    $tags["template_js"][] = "validator"; 
     Vista::render('perfil', $tags);
   }
 
-  public function mostrarPaso1(){
-    $menu = $this->obtenerMenu();
-    $tags = array('menu'=>$menu);
+  public function mostrarPaso1(){  
+    $tags["template_js"][] = "validator";   
     Vista::render('perfil_paso1', $tags);
   }
 }  

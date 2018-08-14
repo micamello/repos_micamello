@@ -34,12 +34,17 @@ class Controlador_Contrasena extends Controlador_Base {
       $valores = explode("||",$respuesta);      
       $token = $valores[0];
       $idusuario = $valores[1];
-      $ultima_sesion = $valores[2];
-      $generator = new PasswordResetTokenGenerator(SECRET_TOKEN_PASSWORD, DIAS_TOKEN_PASSWORD);
-      $esvalido = $generator->checkToken($idusuario,$ultima_sesion,$token);
-      if (!$esvalido){
-        throw new Exception("El enlace para recuperacion de contraseña ya no es valida, por favor ingrese denuevo su correo para el envio");
+      $fecha = $valores[2];
+      $token_valido = Utils::generarToken($idusuario,"CONTRASENA");
+      
+      if($token_valido != $token){
+        throw new Exception("El enlace para recuperacion es incorrecto, por favor ingrese denuevo su correo para el envio");      
       }
+
+      if( strtotime($fecha." +".HORAS_VALIDO_PASSWORD." hours") < time() ){
+        throw new Exception("El enlace para recuperacion de contraseña ya no es valida, por favor ingrese denuevo su correo para el envio");        
+      }  
+
       if ( Utils::getParam('confirm_form') == 1 ){
         $campos = array('password'=>1,'password2'=>1);
         $data = $this->camposRequeridos($campos);
@@ -58,8 +63,7 @@ class Controlador_Contrasena extends Controlador_Base {
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
     } 
-    $menu = $this->obtenerMenu();
-    $tags['menu'] = $menu;
+    
     Vista::render('confirmar_password', $tags);     
   }
 
@@ -77,33 +81,26 @@ class Controlador_Contrasena extends Controlador_Base {
         if (empty($datousuario)){
           throw new Exception("Dirección de correo electrónico no existe");
         }   
-                
-        $token = $this->generarToken($datousuario["id_usuario"],$datousuario["ultima_sesion"]);
+                        
+        $token = Utils::generarToken($datousuario["id_usuario"],"CONTRASENA");
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente denuevo");
         }
 
-        $token .= "||".$datousuario["id_usuario"]."||".$datousuario["ultima_sesion"];
+        $token .= "||".$datousuario["id_usuario"]."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         if (!$this->envioCorreo($datousuario['correo'],$datousuario['nombres'].' '.$datousuario['apellidos'],$token)){
           throw new Exception("Error en el envio de correo, por favor intente denuevo");
         }
-        $_SESSION['mostrar_exito'] = "Se envio a su direccion de correo ingresada el enlace para el cambio de correo ";         
+        $_SESSION['mostrar_exito'] = "Se envio a su direccion de correo ingresada el enlace para el cambio de correo, recuerde que tiene un máximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contraseña";         
       }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     } 
 
-    $menu = $this->obtenerMenu();
-    $tags = array('menu'=>$menu);
     Vista::render('recuperar_password', $tags);  
   } 
-
-  public function generarToken($idusuario,$fechalogin){
-    $generator = new PasswordResetTokenGenerator(SECRET_TOKEN_PASSWORD, DIAS_TOKEN_PASSWORD);
-    return $generator->makeToken($idusuario,$fechalogin);
-  }
 
   public function envioCorreo($correo,$nombres,$token){
     $asunto = "Recuperacion de Contraseña";

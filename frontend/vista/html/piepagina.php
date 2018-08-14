@@ -87,14 +87,19 @@
                
             </footer> 
 
-<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-1.11.2.min.js"></script>
-  
-
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
+<!--<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-1.11.2.min.js"></script>-->
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/validator.js"></script>
+<!--<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/validator.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/ruc_jquery_validator.js"></script>
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/multiple-select.js"></script>
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/mic.js"></script>
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/mic.js"></script>-->
+<?php
+if (isset($template_js) && is_array($template_js)){
+  foreach($template_js as $file_js){
+    echo '<script type="text/javascript" src="'.PUERTO.'://'.HOST.'/js/'.$file_js.'.js"></script>';
+  }  
+}
+?>
 </body>
 </html>

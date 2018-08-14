@@ -7,5 +7,10 @@ class Modelo_Cuestionario{
 		$rs = $GLOBALS['db']->auto_array($sql,array());
 		return ((empty($rs["id_cuestionario"])) ? 1 : $rs["id_cuestionario"] + 1); 
 	}
+
+	public static function guardarPorTest($valor,$usuario,$test){
+		if (empty($valor) || empty($usuario) || empty($test)){ return false; }		
+		return $GLOBALS['db']->insert('mfo_porcentajextest',array('valor'=>$valor,'id_usuario'=>$usuario,'id_cuestionario'=>$test));
+	}
 }  
 ?>

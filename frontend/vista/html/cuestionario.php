@@ -33,29 +33,34 @@ body {
   <div class="container"><br><br>
 
     <div class="breadcrumb" style="background-color: #0267cf;">
-      <p class="text-center" style="color: white; font-size: 17px;">Primer formulario</p>
+      <p class="text-center" style="color: white; font-size: 17px;"><?php echo $destest;?> formulario</p>
     </div>
  
     <div class="container">
-      <ul class="nav nav-tabs">               
-        <li class="active"><a href="#<?php echo $total; ?>" data-toggle="tab">No.<?php echo $total; ?></a></li>
-        <!--<li><a href="#<?php echo $i; ?>" data-toggle="">No.<?php echo $i; ?></a></li>-->             
+      <ul class="nav nav-tabs">         
+        <?php for($key=0;$key<$nropreguntas;$key++){ ?>      
+          <li <?php echo ($preguntaact == ($key+1)) ? 'class="active"' : '';?>><a href="javascript:void(0);" data-toggle="tab">No.<?php echo ($key+1);?></a></li>
+        <?php } ?>
       </ul>
     </div>
 
     <div class="" style="background-color: white;">
       <div class="tab-content ">
-        <form role="form" name="form1" id="form1" method="post">
-          <textarea name="tiempo" id="count-up" style="display: none">0:00</textarea>        
+        <form role="form" name="form1" id="form1" method="post" action="<?php echo PUERTO."://".HOST."/cuestionario/";?>">
+          <!--<textarea name="tiempo" id="count-up" style="display:none">0:00</textarea>-->
           <br>
           <div class='tab-pane active' id='1' align='center'>
-            <h4><?php echo $row['pregunta']; ?></h4>
-            <div align="left" style="margin-left: 400px">
-              <label><input type="radio" name="n1" value="1" checked> Completamente falso</label><br>
-              <label><input type="radio" name="n1" value="2"> Bastante falso</label><br>
-              <label><input type="radio" name="n1" value="3"> Ni verdadero ni falso</label><br>
-              <label><input type="radio" name="n1" value="4"> Bastante verdadero</label><br>
-              <label><input type="radio" name="n1" value="5"> Completamente verdadero</label>
+            <h4><?php echo utf8_encode($pregunta["pregunta"]);?>
+              <input type='hidden' id='id_test' name='id_test' value='<?php echo $nrotest;?>'>
+              <input type='hidden' id='id_pregunta' name='id_pregunta' value='<?php echo $pregunta["id_pre"];?>'>
+              <input type='hidden' id='form_pregunta' name='form_pregunta' value='1'>
+              <input type='hidden' id='tiempo' name='tiempo' value='<?php echo $tiempo;?>'>
+              <input type='hidden' id='modo_pregunta' name='modo_pregunta' value='<?php echo $pregunta["modo"];?>'>
+            </h4>
+            <div class="form-group">
+              <?php foreach($opciones as $opcion){ ?>
+                <label><input type="radio" name="id_opcion" value="<?php echo $opcion["orden"];?>" <?php echo ($opcion["orden"] == 1) ? "checked" : "";?>>&nbsp;<?php echo $opcion["descripcion"];?></label><br>
+              <?php } ?>
             </div>
           </div>
           <br>
@@ -80,14 +85,11 @@ body {
         <div class="row">
           <div class="col-md-12" style="font-size: 16px; color: #333">
             Para una mayor efectividad en tu búsqueda, a continuación, te presentamos tres <b>Formularios de Personalidad</b> avalados por profesionales, sigue las siguientes instrucciones:<br><br>
-
             - Debes responder en el menor tiempo posible<br>
             - Apagar celulares o aparatos que pudieran ser distractores<br>
             - Contesta en forma honesta y precisa. <b>Solo accederás una vez</b><br>
             - Al enviar no podrás realizar ningún tipo de corrección <br><br>
-
             ¿Estás listo? Coloca tu mente en blanco y haz clic <br><br>
-
             <center>
               <button type="button" class="btn btn-success" data-dismiss="modal">Formularios </button>
             </center> 
@@ -97,9 +99,3 @@ body {
     </div>
   </div>
 </div>
-
-<!--<script type='text/javascript'>
-  $(window).on('load',function(){
-        $('#myModal').modal('show');
-  });
-</script>-->

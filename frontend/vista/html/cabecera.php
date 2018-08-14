@@ -442,9 +442,9 @@ if( $_POST["btnemp"] ) {
 
     <body data-spy="scroll" data-target=".navbar-collapse">
 
-        <input type="hidden" name="" id="sessionvar" value="<?php //echo $login_session ?>">
+        <!--<input type="hidden" name="" id="sessionvar" value="<?php //echo $login_session ?>">-->
         <!-- Preloader -->
-        <div id="loading">
+        <!--<div id="loading">
             <div id="loading-center">
                 <div id="loading-center-absolute">
                     <div class="object" id="object_one"></div>
@@ -453,7 +453,7 @@ if( $_POST["btnemp"] ) {
                     <div class="object" id="object_four"></div>
                 </div>
             </div>
-        </div><!--End off Preloader -->
+        </div>--><!--End off Preloader -->
 
 
         <div class="culmn">

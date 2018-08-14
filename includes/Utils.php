@@ -92,5 +92,10 @@ class Utils{
   public static function valida_password( $pass ){
     return (preg_match('/[A-Z]/',$pass) && preg_match('/[a-z]/',$pass) && preg_match('/\d/',$pass) && self::long_minima($pass,8) )?true:false;
   }
+
+  public static function generarToken($id,$accion) {
+    $token = md5(TOKEN.$id.$accion);
+    return $token;
+  }
 }
 ?>
