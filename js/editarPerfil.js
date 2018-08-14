@@ -1,3 +1,5 @@
+
+/* Carga select dependiente (ciudad) */
 $('#provincia').change(function()
 {
     var id_provincia = $('select[id=provincia]').val();
@@ -16,4 +18,33 @@ $('#provincia').change(function()
             alert(request.responseText);
         }                  
     })
-})
+});
+
+/* Carga select dependiente (ciudad) */
+
+/* Carga de imagen dinamico */
+
+$('#file-input').change(function(e) {
+    addImage(e); 
+});
+
+function addImage(e){
+    var file = e.target.files[0],
+    imageType = /image.*/;
+
+if (!file.type.match(imageType))
+    return;
+
+    var reader = new FileReader();
+    reader.onload = fileOnload;
+    reader.readAsDataURL(file);
+}
+
+function fileOnload(e) {
+    var result=e.target.result;
+    $('#imagen_perfil').attr("src",result);
+}
+
+/* Carga de imagen dinamico */
+
+

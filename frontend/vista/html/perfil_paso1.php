@@ -1,4 +1,4 @@
-<section id="home" class="home bg-black fix">
+	<section id="home" class="home bg-black fix">
 	<div class="overlay"></div>
 	<div class="container">
 	    <div class="row">
@@ -39,8 +39,8 @@
                 <div class="col-md-4">
                     <div class="panel panel-default shadow" style="border-radius: 20px;">
                     	<img id="imagen_perfil" width="100%" alt="fotoPerfil" src="<?php echo Modelo_Usuario::obtieneFoto(); ?>" style="border-radius: 20px 20px 0px 0px;">
-                        <label for="input_img" class="custom_file"><img class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/upload-icon.png";?>" width="50px"></label>
-						<input id="input_img" type="file" name="imagen" class="upload-photo">
+                        <label for="file-input" class="custom_file"><img class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/upload-icon.png";?>" width="50px"></label>
+						<input id="file-input" type="file" name="file-input" class="upload-photo">
                         <div align="center">
                             <p class="text-center">Actualizar foto de perfil</p>
                             <br>
@@ -55,6 +55,24 @@
 	                                <!-- candidato -->
 	                                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
 	                                <div class="col-md-12">
+	                                	<div class="col-md-12">
+		                                    <div class="form-group">
+		                                        <label for="username">Usuario:<h4 class="usuario"><u><?php echo $_SESSION['mfo_datos']['usuario']['username']; ?></u></h4></label>
+		                                        
+		                                    </div>
+	                                    </div>
+	                                    <div class="col-md-6">
+		                                    <div class="form-group">
+		                                        <label for="dni">C&eacute;dula </label>
+		                                        <input class="form-control" id="dni" readonly value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
+		                                    </div>
+	                                    </div>
+	                                    <div class="col-md-6">
+		                                    <div class="form-group">
+		                                        <label for="correo">Correo </label>
+		                                        <input class="form-control" id="correo" readonly value="<?php echo $_SESSION['mfo_datos']['usuario']['correo']; ?>" required/>
+		                                    </div>
+	                                    </div>
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
 	                                            <label for="nombres">Nombres</label>
@@ -67,21 +85,11 @@
 	                                			<input class="form-control" id="apellidos" value="<?php echo $_SESSION['mfo_datos']['usuario']['apellidos']; ?>" />
 	                                        </div>
 	                                    </div>
-	                                    <div class="col-md-6">
-		                                    <div class="form-group">
-		                                        <label for="correo">Correo: </label>
-		                                        <input class="form-control" id="correo" readonly value="<?php echo $_SESSION['mfo_datos']['usuario']['correo']; ?>" required/>
-		                                    </div>
-	                                    </div>
-	                                    <div class="col-md-6">
-		                                    <div class="form-group">
-		                                        <label for="dni">C&eacute;dula: </label>
-		                                        <input class="form-control" id="dni" readonly value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
-		                                    </div>
-	                                    </div>		
+	                                    
+	                                    		
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
-	                                            <label for="provincia">Provincia:</label>
+	                                            <label for="provincia">Provincia</label>
 	                                            <select class="form-control" name="provincia" id="provincia">
 	                                            	<option value="">Seleccione una provincia</option>
 													<?php 
@@ -99,7 +107,7 @@
 
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
-	                                            <label for="ciudad">Ciudad:</label>
+	                                            <label for="ciudad">Ciudad</label>
 	                                            <select id="ciudad" class="form-control">
 	                                            <?php if(!empty($arrciudad)){
 			                                    	foreach($arrciudad as $key => $ciudad){ 
@@ -113,76 +121,71 @@
 	                                    </div>					
 	                                    <div class="col-md-6">
 		                                    <div class="form-group">
-		                                        <label for="mayor_edad">Fecha Nacimiento: </label>
+		                                        <label for="mayor_edad">Fecha Nacimiento </label>
 		                                        <input class="form-control" type="date" name="fecha" id="mayor_edad" value="<?php echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); ?>" />
 		                                    </div>
 	                                    </div>
 	                                    <div class="col-md-6">
 	                                    	<div class="form-group">
-		                                    	<label for="discapacidad">Discapacidad:</label>
+		                                    	<label for="discapacidad">Discapacidad</label>
 			                                    <select class="form-control">
 			                                    	<option value="">Tiene alguna discapacidad&#63;</option>
 			                                    	<?php 
-			                                    	/*foreach(DISCAPACIDAD as $key => $dis){ 
+			                                    	foreach(DISCAPACIDAD as $key => $dis){ 
 														echo "<option value='$key'";
 														if ($_SESSION['mfo_datos']['usuario']['discapacidad'] == $key)
 														{ 
 															echo " selected='selected'";
 														}
 														echo ">$dis</option>";
-													}*/ ?>
+													} ?>
 												</select>
 											</div>
 										</div>
 										<div class="col-md-6">
 	                                        <div class="form-group">
-	                                            <label for="experiencia">A&ntilde;os de Experiencia:</label>
+	                                            <label for="experiencia">A&ntilde;os de Experiencia</label>
 	                                            <select class="form-control">
 	                                            	<option value="">Seleccione una opci&oacute;n</option>
 	                                            <?php 
-			                                    	/*foreach(ANOSEXP as $key => $exp){ 
+			                                    	foreach(ANOSEXP as $key => $exp){ 
 														echo "<option value='$key'";
 														if ($_SESSION['mfo_datos']['usuario']['anosexp'] == $key)
 														{ 
 															echo " selected='selected'";
 														}
 														echo ">$exp</option>";
-													}*/ ?>
+													} ?>
 	                                            </select>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-md-6">
 		                                    <div class="form-group">
-		                                        <label for="telefono">Tel&eacute;fono: </label>
+		                                        <label for="telefono">Tel&eacute;fono </label>
 		                                        <input class="form-control" id="telefono" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono']; ?>" />
 		                                    </div>
 	                                    </div>
-	                                    <div class="col-md-6">
-		                                    <div class="form-group">
-		                                        <label for="username">Usuario: </label>
-		                                        <input class="form-control" id="username" readonly value="<?php echo $_SESSION['mfo_datos']['usuario']['username']; ?>" />
-		                                    </div>
-	                                    </div>
+	                                    
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
-	                                            <label for="genero">G&eacute;nero:</label>
+	                                            <label for="genero">G&eacute;nero</label>
 	                                            <select class="form-control">
 													<option value="">Seleccione un genero</option>
 			                                    	<?php 
-			                                    	/*foreach(GENERO as $key => $ge){ 
+			                                    	foreach(GENERO as $key => $ge){ 
 														echo "<option value='$key'";
 														if ($_SESSION['mfo_datos']['usuario']['genero'] == $key)
 														{ 
 															echo " selected='selected'";
 														}
 														echo ">$ge</option>";
-													} */?>
+													} ?>
 	                                            </select>
 	                                        </div>
 	                                    </div>
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
-	                                            <label for="escolaridad">Escolaridad:</label>
+	                                            <label for="escolaridad">Escolaridad</label>
 	                                            <select class="form-control">
 	                                            	<option value="">Seleccione una opci&oacute;n</option>
 													<?php 
@@ -199,8 +202,8 @@
 	                                    </div>
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
-	                                            <label for="area">&Aacute;reas de inter&eacute;s:</label>
-	                                            <select class="form-control" multiple id="select_area" name="areas">
+	                                            <label for="area">&Aacute;reas de inter&eacute;s</label>
+	                                            <select class="form-control" multiple id="select_area" data-selectr-opts='{"maxSelection": 3 }' name="areas">
 													<?php 
 			                                    	foreach($arrarea as $key => $ae){ 
 														echo "<option value='".$ae['id_area']."'";
@@ -211,12 +214,13 @@
 														echo ">".utf8_encode($ae['nombre'])."</option>";
 													} ?>
 												</select>
+
 	                                        </div>
 	                                    </div>
-	                                    <div class="col-md-6 col-md-offset-3">
+	                                    <div class="col-md-6">
 	                                        <div class="form-group">
-	                                            <label for="nivel">Niveles de inter&eacute;s:</label>
-	                                            <select class="form-control" multiple id="select_nivel" name="niveles">
+	                                            <label for="nivel">Niveles de inter&eacute;s</label>
+	                                            <select class="form-control" multiple id="select_nivel" data-selectr-opts='{"maxSelection": 2 }' name="niveles">
 													<?php 
 			                                    	foreach($arrinteres as $key => $int){ 
 														echo "<option value='".$int['id_nivelInteres']."'";
@@ -233,11 +237,10 @@
 	                                <?php } ?>    
 	                            </div>
 	                            <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
-		                        <div align="center" style="margin-top: 10px">
-					                <div class="form-group">
-					                    <input id="keep_button" class="btn btn-success" type="submit" name="btnusu" value="GUARDAR Y CONTINUAR">
-					                </div>
-				                </div>
+					            <div class="col-sm-8 col-sm-offset-2 col-lg-8 col-lg-offset-2">
+							      <button type="submit" class="btn btn-success btn-block">GUARDAR</button>
+							    </div>
+				                
 				            </div>  
 			            </div>   
 			        </div>
