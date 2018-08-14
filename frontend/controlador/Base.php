@@ -59,7 +59,6 @@ abstract class Controlador_Base{
     }
     return $menu;
   }
-
   public abstract function construirPagina();
   
 }

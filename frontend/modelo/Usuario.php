@@ -49,13 +49,36 @@ class Modelo_Usuario{
     return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
   }
 
+
+
   // Búsqueda del username en la BD
-  // public static function existeUsuario($username){
-  //   if(empty($username)){ return false; }
-  //   $sql = "select * from mfo_usuario where username = ?";
-  //   $rs = $GLOBALS['db']->auto_array($sql,array($username));
-  //   return (!empty($rs['id_usuario'])) ? $rs : false;
-  // }
-  
+  public static function existeUsuario($username){
+    if(empty($username)){ return false; }
+    $sql = "select * from mfo_usuario where username = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($username));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function existeCorreo($correo){
+    if(empty($correo)){ return false; }
+    $sql = "select * from mfo_usuario where correo = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($correo));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function existeDni($dni){
+    if(empty($dni)){ return false; }
+    $sql = "select * from mfo_usuario where dni = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($dni));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function crearUsuario($data){
+    Utils::log("Eder ".print_r($data, true));
+    if(empty($data)){return false;}
+    
+    return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
+    
+  }
 }  
 ?>

@@ -1,4 +1,4 @@
-Media queries configurations*/
+/*Media queries configurations*/*/
 /*@media screen and (max-width: 650px) {
 .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
       margin-left: 0px;*/
@@ -510,4 +510,29 @@ body
   right: 15px
   /*text-shadow: 2px 2px 2px 2px;*/
   /*text-shadow: 1px 1px 2px black;*/
+}
+
+.conditions_components
+{
+  padding: 0 0 0 20px;
+}
+
+.search_select_multi
+{
+  display: block;
+  width: 100%;
+  height: 23px;
+  padding: 6px 12px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.select_body
+{
+  padding: 3px;
 }

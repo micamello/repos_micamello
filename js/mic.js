@@ -154,17 +154,24 @@ $('.modal').on('hidden.bs.modal', function(){
 
 
 
-$('#area_select').change(function() {
-            console.log($(this).val());
-        }).multipleSelect({
-            width: '100%'
-        });
+// $('#area_select').change(function() {
+//             console.log($(this).val());
+//         }).multipleSelect({
+//             width: '100%'
+//         });
 
-$('#nivel_interes').change(function() {
-            console.log($(this).val());
-        }).multipleSelect({
-            width: '100%'
-        });
+// $('#nivel_interes').change(function() {
+//             console.log($(this).val());
+//         }).multipleSelect({
+//             width: '100%'
+//         });
     
+
+    $("#area_select").selectr({
+                    placeholder: 'Buscar...'
+                });
+    $("#nivel_interes").selectr({
+                    placeholder: 'Buscar...'
+                });
 // Testing multiselect
 
