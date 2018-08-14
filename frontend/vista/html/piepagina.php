@@ -48,7 +48,8 @@
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blanked">Términos y Condiciones</a>| 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/politicas_de_privacidad.pdf" target="blanked">Políticas de Privacidad</a>|
                                     <a class="legal_info_content" href="https://www.blog.micamello.com.ec" target="blanked">Blog</a>|
-                                    <a class="legal_info_content" href="form-sug.php">Recomendaciones</a>
+                                    <a class="legal_info_content" href="form-
+                                    g.php">Recomendaciones</a>
                                     
                                    
                                 </div><!-- End off widget item -->
@@ -87,22 +88,15 @@
                
             </footer> 
 
-<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.min.js"></script>
-  
-
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<!--<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/validator.js"></script>
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/ruc_jquery_validator.js"></script>-->
-
 <?php
 if (isset($template_js) && is_array($template_js)){
   foreach($template_js as $file_js){
     echo '<script type="text/javascript" src="'.PUERTO.'://'.HOST.'/js/'.$file_js.'.js"></script>';
   }  
 }
-
-
 ?>
-    </body>
+</body>
 </html>

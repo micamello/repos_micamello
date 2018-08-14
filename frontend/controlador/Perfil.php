@@ -49,7 +49,7 @@ class Controlador_Perfil extends Controlador_Base {
       default:
         Vista::render('perfil');
       break;
-    }      
+    }     
   }
 
   public function buscaCiudad($id_provincia){

@@ -61,7 +61,7 @@
   ##Screen = B/w 768px to 1024px
 */
 
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 1024px) {
   
   .info_text_jobs
     {
@@ -89,7 +89,25 @@
       font-size: 25px;
       font-weight: 700;
     }
+
+    .list-unstyled.msg_error
+    {
+      position: relative;
+      left: 0px;
+      text-align: center;
+      /*text-align: middle;*/
+      top: 0px;
+      border: none;
+      border-radius: 0px;
+      padding: 0 0 0 0;
+      background-color: transparent;
+      color: red;
+      font-size: 15px;
+      right: 0px
+    }    
 }
+
+
 
 /* 
   ##Device = Low Resolution Tablets, Mobiles (Landscape)
@@ -140,6 +158,27 @@
     {
       width: 5%;
     }
+
+    .list-unstyled.msg_error
+    {
+      position: relative;
+      left: 0px;
+      text-align: center;
+      /*text-align: middle;*/
+      top: 0px;
+      border: none;
+      border-radius: 0px;
+      padding: 0 0 0 0;
+      background-color: transparent;
+      color: red;
+      font-size: 15px;
+      right: 0px
+    }  
+
+    .user_icon
+    {
+      display: none;
+    } 
 }
 
 /* 
@@ -195,6 +234,29 @@
     {
       width: 5%;
     }
+
+    .list-unstyled.msg_error
+    {
+      position: relative;
+      left: 0px;
+      text-align: center;
+      /*text-align: middle;*/
+      top: 0px;
+      border: none;
+      border-radius: 0px;
+      padding: 0 0 0 0;
+      background-color: transparent;
+      color: red;
+      font-size: 15px;
+      right: 0px
+    }  
+
+    .user_icon
+    {
+      display: none;
+    }
+
+    
 }
 
 /*Others moviles < 320px*/
@@ -224,6 +286,29 @@
     {
       width: 5%;
     }
+
+    .list-unstyled.msg_error
+    {
+      position: relative;
+      left: 0px;
+      text-align: center;
+      /*text-align: middle;*/
+      top: 0px;
+      border: none;
+      border-radius: 0px;
+      padding: 0 0 0 0;
+      background-color: transparent;
+      color: red;
+      font-size: 15px;
+      right: 0px
+    }
+
+    .user_icon
+    {
+      display: none;
+    }
+
+    
 }
 
 /*Media queries configurations*/

@@ -89,5 +89,6 @@ class Vista {
     });
     echo json_encode($template_vars);
   }
+
 }
 ?>

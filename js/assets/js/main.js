@@ -3,9 +3,9 @@ jQuery(document).ready(function ($) {
 
 //for Preloader
 
-    $(window).load(function () {
-        $("#loading").fadeOut(500);
-    });
+    //$(window).load(function () {
+    //    $("#loading").fadeOut(500);
+    //});
 
 
     /*---------------------------------------------*
@@ -27,61 +27,54 @@ jQuery(document).ready(function ($) {
         }
     });
 
-
-
     /*---------------------------------------------*
      * WOW
      ---------------------------------------------*/
 
-    var wow = new WOW({
-        mobile: false // trigger animations on mobile devices (default is true)
-    });
-    wow.init();
+    //var wow = new WOW({
+    //    mobile: false // trigger animations on mobile devices (default is true)
+    //});
+    //wow.init();
 
 // magnificPopup
 
-    $('.popup-img').magnificPopup({
-        type: 'image',
-        gallery: {
-            enabled: true
-        }
-    });
+    //$('.popup-img').magnificPopup({
+    //    type: 'image',
+    //    gallery: {
+    //        enabled: true
+    //    }
+    //});
 
-    $('.video-link').magnificPopup({
-        type: 'iframe'
-    });
-
-
+    //$('.video-link').magnificPopup({
+    //    type: 'iframe'
+    //});
 
 // slick slider active Home Page Tow
-    $(".hello_slid").slick({
-        dots: true,
-        infinite: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        prevArrow: "<i class='icon icon-chevron-left nextprevleft'></i>",
-        nextArrow: "<i class='icon icon-chevron-right nextprevright'></i>",
-        autoplay: true,
-        autoplaySpeed: 2000
-    });
+    // $(".hello_slid").slick({
+    //     dots: true,
+    //     infinite: false,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     arrows: true,
+    //     prevArrow: "<i class='icon icon-chevron-left nextprevleft'></i>",
+    //     nextArrow: "<i class='icon icon-chevron-right nextprevright'></i>",
+    //     autoplay: true,
+    //     autoplaySpeed: 2000
+    // });
     
     
     
-    $(".business_items").slick({
-        dots: true,
-        infinite: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: true,
-        prevArrow: "<i class='icon icon-chevron-left nextprevleft'></i>",
-        nextArrow: "<i class='icon icon-chevron-right nextprevright'></i>",
-        autoplay: true,
-        autoplaySpeed: 2000
-    });
-
-
-
+    // $(".business_items").slick({
+    //     dots: true,
+    //     infinite: false,
+    //     slidesToShow: 1,
+    //     slidesToScroll: 1,
+    //     arrows: true,
+    //     prevArrow: "<i class='icon icon-chevron-left nextprevleft'></i>",
+    //     nextArrow: "<i class='icon icon-chevron-right nextprevright'></i>",
+    //     autoplay: true,
+    //     autoplaySpeed: 2000
+    // });
 
 //---------------------------------------------
 // Scroll Up 
@@ -92,19 +85,6 @@ jQuery(document).ready(function ($) {
         return false;
     });
 
-
-
-
-
-
-
-
-
-
-
     //End
 
 });
-
-
-

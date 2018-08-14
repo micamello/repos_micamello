@@ -26,7 +26,7 @@ class Modelo_Usuario{
   }
 
   public static function autenticacion($username, $password){
-    //$password = md5($password);             
+    $password = md5($password);             
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE username = ? AND password = ? AND estado = 1",array($username,$password)); 
   }
 
@@ -35,6 +35,17 @@ class Modelo_Usuario{
     $sql = "select * from mfo_usuario where correo = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     return (!empty($rs['id_usuario'])) ? $rs : false;
+  }
+
+  public static function modificarPassword($pass,$id){
+    if (empty($pass) || empty($id)){ return false; }
+    $password = md5($pass);
+    return $GLOBALS['db']->update("mfo_usuario",array("password"=>$password),"id_usuario=".$id);
+  }
+
+  public static function modificarFechaLogin($id){
+    if (empty($id)){ return false; }
+    return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
   }
 
   public static function obtieneFoto(){
