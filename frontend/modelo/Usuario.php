@@ -37,7 +37,6 @@ class Modelo_Usuario{
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
 
-
   public static function modificarPassword($pass,$id){
     if (empty($pass) || empty($id)){ return false; }
     $password = md5($pass);
@@ -48,8 +47,6 @@ class Modelo_Usuario{
     if (empty($id)){ return false; }
     return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
   }
-
-
 
   // Búsqueda del username en la BD
   public static function existeUsuario($username){
@@ -80,5 +77,16 @@ class Modelo_Usuario{
     return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
     
   }
+
+  public static function obtieneFoto(){
+
+    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
+    }else{
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$_SESSION['mfo_datos']['usuario']['id_usuario'].'jpg';
+    }
+    return $rutaImagen;
+  }
+
 }  
 ?>

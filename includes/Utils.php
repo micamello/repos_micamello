@@ -26,7 +26,7 @@ class Utils{
       Utils::log(__METHOD__ . " empezo una nueva sesion");
       session_name('mfo_datos');
       session_start();      
-    
+      $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();
   } 
  
   static public function getArrayParam($paramName,$array, $default=false){
@@ -76,6 +76,7 @@ class Utils{
     return $objaes->decrypt($desencriptado);
   }
 
+
   public static function long_minima($str, $val){
     if (preg_match("/[^0-9]/", $val)){
       return false;
@@ -89,5 +90,16 @@ class Utils{
   public static function valida_password( $pass ){
     return (preg_match('/[A-Z]/',$pass) && preg_match('/[a-z]/',$pass) && preg_match('/\d/',$pass) && self::long_minima($pass,8) )?true:false;
   }
+
+  public static function generarToken($id,$accion) {
+    $token = md5(TOKEN.$id.$accion);
+    return $token;
+  }
+
+  public static function obtieneDominio(){
+
+    return Modelo_Sucursal::obtieneSucursalActual($_SERVER["HTTP_HOST"]);
+  }
+
 }
 ?>

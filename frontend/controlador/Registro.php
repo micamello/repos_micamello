@@ -69,8 +69,11 @@ class Controlador_Registro extends Controlador_Base {
         Utils::doRedirect(PUERTO.'://'.HOST.'/');    
       }
     } 
-    $menu = $this->obtenerMenu();
-    $tags = array('menu'=>$menu);
+
+    
+    $tags["template_js"][] = "validator";
+    $tags["template_js"][] = "ruc_jquery_validator";
+
     Vista::render('inicio', $tags);
   }
 

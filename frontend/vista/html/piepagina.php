@@ -1,4 +1,5 @@
 <!--mensajes de error y exito-->
+
 <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
   <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
     <?php echo $sess_err_msg;?>
@@ -9,7 +10,7 @@
   <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
     <?php echo $sess_suc_msg;?>
   </div>  
-<?php }?>
+<?php } ?>
 
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
@@ -323,9 +324,9 @@
                                     <div class="widget_item widget_latest sm-m-top-50" align="center">
                                         <div class="row">
                                         <div class="form-inline">
-                                        <?php foreach($arrpais as $pais){ ?>    
-                                          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/paises/<?php echo $pais["icono"];?>" class="country_mic"> 
-                                          <span class="text_icons_footer"><?php echo $pais["nombre"];?></span>
+                                        <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
+                                          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/paises/<?php echo $sucursal["icono"];?>" class="country_mic"> 
+                                          <span class="text_icons_footer"><?php echo $sucursal["nombre_abr"];?></span>
                                         <?php }?>                                                                                
                                         <span class="separate_social_country">|</span>
                                         <!-- </div>                                        
@@ -353,12 +354,25 @@
                
             </footer> 
 
-<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-1.11.2.min.js"></script>
+
+<!-- <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-1.11.2.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/validator.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/ruc_jquery_validator.js"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/selectr.js"></script>
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/mic.js"></script>
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/mic.js"></script> -->
+
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
+<?php
+if (isset($template_js) && is_array($template_js)){
+  foreach($template_js as $file_js){
+    echo '<script type="text/javascript" src="'.PUERTO.'://'.HOST.'/js/'.$file_js.'.js"></script>';
+  }  
+}
+?>
+
 </body>
 </html>

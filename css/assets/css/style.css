@@ -26,7 +26,8 @@ Author URI: http://xpeedstudio.com
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-html{
+html,
+body {
     font-size: 14px;
     color: #797979;
     width: 100%;
@@ -531,7 +532,7 @@ a {
 .btn:focus,
 .btn:active {
     outline: inherit;
-    background-color: transparent;
+    background-color: #398439;
 }
 *,
 *:before,
@@ -619,7 +620,8 @@ h1 span,
 h2 span,
 h3 span,
 h4 span,
-h5 span{
+h5 span,
+p span{
     color:#03A9F4;
 }
 
@@ -1197,9 +1199,8 @@ textarea::-ms-input-placeholder{
 /*
 Nav Menu style
 ==================*/
-
-
-/*.navbar-brand {
+/*
+.navbar-brand {
     padding: 25px 15px;
 }
 .navbar-brand > img {
@@ -1227,10 +1228,8 @@ Nav Menu style
 .navbar-socail li a:hover{
     background-color: #3765a3;
     color:#fff;
-
-}*/
-
-
+}
+*/
 
 /*
 Home Section style
@@ -2230,3 +2229,35 @@ work Section style
   padding: 45px 20px 20px 20px;
   margin: 0px 0px 0px 0px;
 }
+
+/* boton de cargar foto en el perfil */
+#custom_file {
+   cursor: pointer;
+   /* Style as you please, it will become the visible UI component. */
+}
+
+.upload-photo {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+.custom_file:hover img 
+{
+    transform: scale(1.2);
+}
+
+.shadow
+{
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+}
+
+.button-center
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: -25px;
+}
+
+/* boton de cargar foto en el perfil */

@@ -4,70 +4,13 @@ function hidden_menuuser_small()
 	var var_menu = document.getElementById('bs-example-navbar-collapse-1');
 	var_menu.classList.remove('in');
 }
-// Ocultar menú si aparecen los modales
 
 
-
-
-
-// Validación de formulario - Inicialización
-
-// -------------CANDIDATO--------------
 $("#form_candidato").validator();
-// ------------EMPRESA-------------------
 $("#form_empresa").validator();
 
-// Validación de formulario
-
-
-
-
-
-
-
-
-// Validación de cédula campo DNI formulario
 
 $("#dni").validarCedulaEC();
-
-// Validación de cédula campo DNI formulario
-
-
-
-//---------------------- Validación de nputs solo texto-------------------------//
-// $(document).ready(function(){
- //    function isNumberKey(){
-	//     var textInput = document.getElementById("telefono_cand").value;
-	//     textInput = textInput.replace(/[^0-9]/g, "");
-	//     document.getElementById("telefono_cand").value = textInput;
-	// }
-// });
-
-// $(document).on('keypress', '#id', function (event) {
-//     var regex = new RegExp("^[a-zA-Z ]+$");
-//     var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-//     if (!regex.test(key)) {
-//         event.preventDefault();
-//         return false;
-//     }
-// });
-
-// document.getElementById('inputid').onkeypress=function(e){
-//     if(("abcdefghijklmnopqrstuvwxyz ").indexOf(String.fromCharCode(e.keyCode))===-1){
-//         e.preventDefault();
-//         return false;
-//     }
-// }
-
-
-
-// name_user
-// apell_user
-
-//---------------------- Validación de nputs solo texto-------------------------//
-
-
-//---------------------- Validación de inputs solo números-------------------------//
 
 function numero_validate(id)
 {
@@ -109,23 +52,6 @@ function numero_validate(id)
   })
 }
 
-//---------------------- Validación de inputs solo números-------------------------//
-
-
-// ---------------------------------Validación de contraseña-------------------------------//
-
-// ---------------------------------Validación de contraseña-------------------------------//
-
-// Validación de nombres de usuarios
-
-  // function valitidy_username(val)
-  // {
-    
-  // }
-
-// Validación de nombres de usuarios
-
-// Reset de estilos erroneos del modal cuando se ocultan
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
     // $form.find('.with-errors').css('border-color', 'blue').removeClass('error');
@@ -133,45 +59,20 @@ $('.modal').on('hidden.bs.modal', function(){
     // $('.with-errors').removeClass('help-block');
     $(this).find('form')[0].reset();
 });
-// Reset de estilos erroneos del modal cuando se oculta
 
+$("#area_select").selectr({
+                placeholder: 'Buscar...'
+            });
+$("#nivel_interes").selectr({
+                placeholder: 'Buscar...'
+            });
 
-// Testing multiselect
+$('#select_area').selectr({
+  placeholder:'Buscar'
+});
 
-// var expanded = false;
+$('#select_nivel').selectr({
+  placeholder:'Buscar'
+});
 
-// function showCheckboxes(id) {
-//   var checkboxes = document.getElementById("checkboxes"+id);
-//   // alert("checkboxes"+id);
-//   if (!expanded) {
-//     checkboxes.style.display = "block";
-//     expanded = true;
-//   } else {
-//     checkboxes.style.display = "none";
-//     expanded = false;
-//   }
-// }
-
-
-
-// $('#area_select').change(function() {
-//             console.log($(this).val());
-//         }).multipleSelect({
-//             width: '100%'
-//         });
-
-// $('#nivel_interes').change(function() {
-//             console.log($(this).val());
-//         }).multipleSelect({
-//             width: '100%'
-//         });
-    
-
-    $("#area_select").selectr({
-                    placeholder: 'Buscar...'
-                });
-    $("#nivel_interes").selectr({
-                    placeholder: 'Buscar...'
-                });
-// Testing multiselect
 
