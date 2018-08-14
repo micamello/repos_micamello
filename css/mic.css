@@ -12,6 +12,8 @@ Media queries configurations*/
 /*Estilos micamello*/
 body
 {
+    /*Para vista perfil*/
+    background-color: #eceff1;
     padding-top: 72px;
 }
 
@@ -40,7 +42,7 @@ body
   float: right;
   left: 10px;
   border-radius: 100%;
-  background-color: #e6f7ff;
+  background-color: #b8c5cc;
   /*-webkit-border-radius: 60px;*/
     /*-webkit-background-clip: padding-box;*/
     /*-moz-border-radius: 60px;*/
@@ -452,62 +454,69 @@ body
 /*Casos de éxito micamello*/
 
 
-/*Testing multiselect*/
-
-.multiselect {
-  width: 100%;
+/* Para vista perfil */
+.inputPerfl{
+  text-align: center; 
+  color: black; 
+  font-size: 17px;
 }
 
-.selectBox {
-  position: relative;
-  /*background-color: red;*/
+.profpic {
+    display: block;
+    margin: -34px 0px 5px 0px;
+    margin-left: auto;
+    margin-right: auto; 
+    height: 170px;
+    width: 170px;
+    border-radius: 50%;
+    border: 5px solid white;
+    background: #22242a;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+
 }
 
-.selectBox select {
-  width: 100%;
-  font-weight: bold;
+.profilebox {
+    position: relative;
+    /* background: #22242a; */
+    background-color: #CEECFD;
+    min-height: 230px;
+    width: 100%;
+    border-radius: 8px;
+    padding: 50px 20px 20px 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
 }
 
-.overSelect {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+.prof-user {
+    display: block;
+    margin: -25px 0px 4px 0px;
+    text-align: center;
+    color: black;
+    font-weight: normal;
+    font-size: 11pt;
 }
 
-.checkboxes {
-  display: none;
-  border: 1px #dadada solid;
-  /*position: sticky;*/
-}
+/*Para vista perfil*/
 
-.checkboxes label {
-  display: block;
-}
-
-.checkboxes label:hover {
-  background-color: #1e90ff;
-}
-
-/*-------------------------------------------------------------*/
-
-
-/*Testing multiselect*/
-
-.list-unstyled.msg_error
+.search_select_multi
 {
-  position: absolute;
-  left: 164px;
-  text-align: middle;
-  top: 12px;
-  border: 0px solid #ff4d4d;
-  border-radius: 6px;
-  padding: 0px 3px 0px 3px;
-  background-color: #ff4d4d;
-  color: white;
+  display: block;
+  width: 100%;
+  height: 23px;
+  padding: 6px 12px;
   font-size: 12px;
-  right: 15px
-  /*text-shadow: 2px 2px 2px 2px;*/
-  /*text-shadow: 1px 1px 2px black;*/
+  line-height: 1.42857143;
+  color: #555;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
+
+.select_body
+{
+  padding: 3px;
+}
+

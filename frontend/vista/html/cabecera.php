@@ -73,15 +73,28 @@
                 $('#myModal2').modal('show');
             }
         </script> -->
-    
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'UA-123345917-1');
-        </script>
-    
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-123345917-1');
+    </script>
+
+    <?php if(isset($_SESSION['mostrar_banner'])){ ?>
+      <style>
+        /* Para vista perfil */
+        .home {
+            background: linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),url(<?php echo $_SESSION['mostrar_banner']; ?>) no-repeat scroll center center;    background-size: cover;
+            position: relative;
+            padding-top: 185px;
+            padding-bottom: 79px;
+            width: 100%;
+        }
+      </style>
+    <?php } ?>
+
     </head>
 
 <body>
@@ -476,7 +489,7 @@ if( $_POST["btnemp"] ) {
                         <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand">
-                        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/blanco.png" alt="micamellologo">
+                        <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/'.$_SESSION['mfo_datos']['sucursal']['logo']; ?>" alt="micamellologo">
                       </a>
                     </div>
                     <!-- End Header Navigation -->
@@ -484,14 +497,16 @@ if( $_POST["btnemp"] ) {
                         <ul class="nav navbar-nav"> 
                         </ul>
                     <ul class="nav navbar-nav navbar-right">                          
-                          <?php foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
+                          <?php 
+                          
+                          foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                             <li>
                               <a onclick="<?php echo $optmnu["onclick"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? 'data-toggle="modal" data-target="#'.$optmnu["modal"].'"' : '';?>><?php echo $optmnu["nombre"];?></a>
                             </li>                            
                           <?php } ?>
                           <?php if (isset($menu["submenu"])){ ?>                            
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo PUERTO."://".HOST;?>/imagenes/blanco.png" class="user_icon">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto(); ?>" class="user_icon">
                                 <ul class="dropdown-menu">
                                   <?php foreach($menu["submenu"] as $submenu){ ?>  
                                      <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
