@@ -1,0 +1,6 @@
+.chart-gauge{ width:400px;height: 210px; } 
+.chart-first{ fill:#8C9091; }
+.chart-second{ fill:#CE9F59; }
+.chart-third { fill:#485A8C; }
+.needle, .needle-center{ fill:#000000; }
+.progress-bar-danger { background-color:#8c9091; }

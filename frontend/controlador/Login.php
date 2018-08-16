@@ -16,7 +16,7 @@ class Controlador_Login extends Controlador_Base {
         $campos = array('username'=>1, 'password'=>1);
         $data = $this->camposRequeridos($campos);                        
         $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password"]);
-        if (!empty($usuario)){
+        if (!empty($usuario)){            
            if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){
              throw new Exception("Error en el sistema, por favor intente nuevamente");
            }
@@ -38,6 +38,11 @@ class Controlador_Login extends Controlador_Base {
   public static function registroSesion($usuario){
     unset($_SESSION['mfo_datos']['usuario']); 
     $_SESSION['mfo_datos']['usuario'] = $usuario;
+    //busqueda de planes activos
+    $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"]);
+    if (!empty($planesactivos) && is_array($planesactivos)){
+      $_SESSION['mfo_datos']['planes'] = $planesactivos; 
+    }
     ini_set("session.gc_maxlifetime", 14400000000000);        
     session_write_close();  
   }

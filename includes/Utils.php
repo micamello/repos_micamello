@@ -100,17 +100,19 @@ class Utils{
   }
 
   public static function obtieneDominio(){
-
     return Modelo_Sucursal::obtieneSucursalActual($_SERVER["HTTP_HOST"]);
   }
 
-  static public function valida_telefono($numerotelefono){ 
+
+  public static function valida_telefono($numerotelefono){ 
+
     if (preg_match("/^[ ]*[(]{0,1}[ ]*[0-9]{3,3}[ ]*[)]{0,1}[-]{0,1}[ ]*[0-9]{3,3}[ ]*[-]{0,1}[ ]*[0-9]{4,4}[ ]*$/",$numerotelefono)) return true; 
     else return false; 
   }
 
   //en formato de YYYY-MM-DD o YYYY-MM-DD HH:MM:SS
-  static public function valida_fecha($strdate){
+  public static function valida_fecha($strdate){
+
     $long_date = "/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/";
     $short_date = "/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$/";
     
@@ -152,6 +154,7 @@ class Utils{
       return true;
     }
   }
+
 
   static public function valida_imagen_upload($file){ 
 

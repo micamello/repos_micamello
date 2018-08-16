@@ -1,15 +1,3 @@
-<style type="text/css">
-  .home {
-    background: linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),url(<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/cabecera-candidato.jpg) no-repeat scroll center center;    background-size: cover;
-    position: relative;
-    padding-top: 185px;
-    padding-bottom: 79px;
-    width: 100%;
-}
-body {
-    background-color: #eceff1;
-}
-</style>
 <section id="home" class="home bg-black fix">
   <div class="overlay"></div>
     <div class="container">
@@ -39,7 +27,7 @@ body {
     <div class="container">
       <ul class="nav nav-tabs">         
         <?php for($key=0;$key<$nropreguntas;$key++){ ?>      
-          <li <?php echo ($preguntaact == ($key+1)) ? 'class="active"' : '';?>><a href="javascript:void(0);" data-toggle="tab">No.<?php echo ($key+1);?></a></li>
+          <li <?php echo ($pregunta["orden"] == ($key+1)) ? 'class="active"' : '';?>><a href="javascript:void(0);" data-toggle="tab">No.<?php echo ($key+1);?></a></li>
         <?php } ?>
       </ul>
     </div>
