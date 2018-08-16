@@ -5,7 +5,7 @@ RewriteEngine on
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^http://(www\.)?micamello.ec/.*$ [NC]
 RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
-RewriteRule \.(gif|jpg|js|css)$ - [F]
+#RewriteRule \.(gif|jpg|js|css)$ - [F]
 
 RewriteEngine On
 RewriteCond %{HTTP_HOST} !^localhost
@@ -20,6 +20,10 @@ RewriteRule . - [E=REWRITEBASE:/]
 # RewriteBase - Development
 RewriteCond %{HTTP_HOST} ^localhost$
 RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
+
+#imagenes del profile
+RewriteCond %{REQUEST_URI} \.(jpg|jpeg|gif|png)$ [NC]
+RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&archivo=$2 [L]
 
 #login
 RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
