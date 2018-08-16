@@ -19,21 +19,33 @@ abstract class Controlador_Base{
     $data = array(); 
     if (count($campos) > 0){ 
       foreach($campos as $campo=>$requerido){
-        $valor = trim(Utils::getParam($campo,'',$this->datos));           
-        if (empty($valor) && $requerido == 1){                    
-          throw new Exception(" El campo ".$campo." debe ser obligatorio");
+        $valor = Utils::getParam($campo,'',$this->datos);
+        if (is_array($valor)){
+          if (count($valor)<=0 && $requerido == 1){
+            throw new Exception(" El campo ".$campo." debe ser obligatorio");
+          }         
+          foreach($valor as $key=>$val){
+            $val = strip_tags($val);
+            $val = str_replace("\r\n","<br>",$val);
+            $val = htmlentities($val,ENT_QUOTES,'UTF-8');
+            $data[$campo][$key] = $val;
+          }          
         }
-        $valor = strip_tags($valor);
-        $valor = str_replace("\r\n","<br>",$valor);
-        $valor = htmlentities($valor,ENT_QUOTES,'UTF-8');
-        $data[$campo] = $valor;
+        else{
+          $valor = trim($valor);
+          if (empty($valor) && $requerido == 1){                    
+            throw new Exception(" El campo ".$campo." debe ser obligatorio");
+          }
+          $valor = strip_tags($valor);
+          $valor = str_replace("\r\n","<br>",$valor);
+          $valor = htmlentities($valor,ENT_QUOTES,'UTF-8');
+          $data[$campo] = $valor;
+        }        
       } 
     }
     return $data;
   }
   
-  
-
   public abstract function construirPagina();
   
 }
