@@ -13,7 +13,7 @@ class Controlador_Login extends Controlador_Base {
     
     if ( Utils::getParam('login_form') == 1 ){
       try{
-        $campos = array('username'=>1, 'password'=>1);
+        $campos = array('username'=>1, 'password'=>1);        
         $data = $this->camposRequeridos($campos);                        
         $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password"]);
         if (!empty($usuario)){            

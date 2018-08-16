@@ -14,9 +14,9 @@ class Utils{
     if(!$data){
       $data = $_SUBMIT;
     }
-    if (is_array($data)){
-      if(isset($data[$paramName]) ){ 
-        return $data[$paramName];
+    if (is_array($data)){      
+      if(isset($data[$paramName]) ){         
+        return $data[$paramName];                       
       }
     }
     return $default;
