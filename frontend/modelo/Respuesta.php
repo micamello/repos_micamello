@@ -15,6 +15,6 @@ class Modelo_Respuesta{
     $rs = $GLOBALS['db']->auto_array($sql,array($test));
     return (empty($rs['total'])) ? 0 : $rs['total'];
   }
-  
+
 }  
 ?>

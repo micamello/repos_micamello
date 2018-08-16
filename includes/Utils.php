@@ -100,8 +100,75 @@ class Utils{
   }
 
   public static function obtieneDominio(){
-
     return Modelo_Sucursal::obtieneSucursalActual($_SERVER["HTTP_HOST"]);
+  }
+
+  public static function valida_telefono($numerotelefono){ 
+    if (preg_match("/^[ ]*[(]{0,1}[ ]*[0-9]{3,3}[ ]*[)]{0,1}[-]{0,1}[ ]*[0-9]{3,3}[ ]*[-]{0,1}[ ]*[0-9]{4,4}[ ]*$/",$numerotelefono)) return true; 
+    else return false; 
+  }
+
+  //en formato de YYYY-MM-DD o YYYY-MM-DD HH:MM:SS
+  public static function valida_fecha($strdate){
+    $long_date = "/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/";
+    $short_date = "/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$/";
+    
+    if (!preg_match($long_date, $strdate) && !preg_match($short_date, $strdate))
+      return false;
+    else{    
+      if(strlen($strdate) == 19){
+        $date_time = explode(" ", $strdate);
+        $date = $date_time[0];
+        $time = $date_time[1];
+        
+        $date_array = explode("-", $date);
+        $time_array = explode(":", $time);
+        
+        $year = $date_array[0];
+        $month = $date_array[1];
+        $day = $date_array[2];
+        
+        $hours = $time_array[0];
+        $minutes = $time_array[1];
+        $seconds = $time_array[2];  
+        
+        if((($year<1900)OR($year>2200))OR(($month<=0)OR($month>12))OR(($day<=0)OR($day>31))OR(($hours<0)OR($hours>23))OR(($minutes<0)OR($minutes>60))OR(($seconds<0)OR($seconds>60))){
+          return false;
+        }
+      }elseif(strlen($strdate) == 10){
+        $date_time = explode(" ", $strdate);
+        $date_array = explode("-", $date_time[0]);
+        $year = $date_array[0];
+        $month = $date_array[1];
+        $day = $date_array[2];
+        
+        if((($year<1900)OR($year>2200))OR(($month<=0)OR($month>12))OR(($day<=0)OR($day>31)))
+          return false;
+      }else
+        return false;
+      
+        
+      return true;
+    }
+  }
+
+  static public function valida_imagen_upload($file_temp, $file_name, $file_type){       
+    if ((($file_type == "image/jpg") ||($file_type == "image/jpeg") || ($file_type == "image/pjpeg")) && (!empty($file_temp)))
+      return true;
+    else
+      return false;
+  }
+
+  static public function imagen_upload($file_temp, $file_name, $file_type,$path){ 
+    if ( self::valida_imagen_upload($file_temp, $file_name, $file_type)){
+      $file_name .= ".jpg";
+      if (is_uploaded_file($file_temp)){
+        if(file_exists($path . $file_name )){
+          @unlink($path . $file_name );
+        }
+        move_uploaded_file($file_temp, $path . $file_name);
+      }
+    }
   }
 
 }

@@ -57,9 +57,9 @@ class Database{
   function execute( $query ){
     $this->query = $query;    
     Utils::log("SQL execute: $query");
-	$resultSet = mysqli_query( $this->connection,$query )or die(mysql_error()." making a query "." ".$this->query);
-	$this->resultSet = $resultSet;
-	return $resultSet;
+	  $resultSet = mysqli_query( $this->connection,$query );
+	  $this->resultSet = $resultSet;
+	  return $resultSet;
   }
 	
   function insert( $table, $data ){		
@@ -83,7 +83,14 @@ class Database{
   	$query .= ') VALUES (';
   	$query .= $val_list;
   	$query .= ')';
-  	return $this->execute( $query );
+  	$resultado = $this->execute( $query );
+    if (!$resultado){
+      return false;
+    }
+    if ($this->rows_affected() <= 0){
+      return false;
+    }
+    return true;
   }
 
   function update( $table, $data, $where ){        
@@ -101,7 +108,18 @@ class Database{
   	$query .= " WHERE ";
   	$where = $where;
   	$query .= $where;
-  	return $this->execute( $query );
+  	$resultado = $this->execute( $query );
+    if (!$resultado){
+      return false;
+    }
+    if ($this->rows_affected() <= 0){
+      return false;
+    }
+    return true;
+  }
+
+  function rows_affected(){
+    return mysqli_affected_rows($this->connection);
   }
 
   function delete( $table, $where ){
@@ -110,7 +128,14 @@ class Database{
   	$query .= ' WHERE ';
   	$where = $where;
   	$query .= $where;
-  	return $this->execute( $query );
+  	$resultado = $this->execute( $query );
+    if (!$resultado){
+      return false;
+    }
+    if ($this->rows_affected() <= 0){
+      return false;
+    }
+    return true;
   }
 
   function getLastError(){    
