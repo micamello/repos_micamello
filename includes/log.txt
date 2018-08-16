@@ -1,0 +1,1108 @@
+[2018/08/16 02:32:55] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:32:55] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:32:55] dispatch nombre del controlador: Controlador_Login - login
+[2018/08/16 02:32:55] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:32:55] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:32:55] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:32:55] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:32:55] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:32:55] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:32:55] SQL Query: SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/08/16 02:32:59] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:32:59] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:33:00] dispatch nombre del controlador: Controlador_Login - login
+[2018/08/16 02:33:00] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:33:00] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:33:00] SQL Query: SELECT * FROM mfo_usuario WHERE username = 'fernanda' AND password = '0374864d10059501c9bffa2abbe7edf8' AND estado = 1
+[2018/08/16 02:33:00] SQL execute: UPDATE mfo_usuario SET ultima_sesion="2018-08-16 14:33:00" WHERE id_usuario=1
+[2018/08/16 02:33:00] SQL Query: select * from mfo_usuario_plan where id_usuario = ? and estado = 1 and fecha_caducidad <= NOW()
+[2018/08/16 02:33:00] SQL ERROR: 0: 
+[2018/08/16 02:33:00] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:33:00] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:33:00] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/08/16 02:33:00] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+)
+
+[2018/08/16 02:33:00] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 3 order by orden ASC
+[2018/08/16 02:33:00] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:33:00] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:33:00] SQL Query: SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/08/16 02:33:01] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:33:01] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:33:01] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/08/16 02:33:01] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:33:01] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 3 order by orden ASC
+[2018/08/16 02:33:01] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/08/16 02:33:02] SQL Query: SELECT * FROM mfo_area
+[2018/08/16 02:33:02] SQL Query: SELECT * from mfo_nivelinteres
+[2018/08/16 02:33:02] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
+[2018/08/16 02:33:02] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
+[2018/08/16 02:33:02] SQL Query: SELECT * FROM mfo_provincia
+[2018/08/16 02:33:02] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:33:02] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:33:02] SQL Query: SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/08/16 02:48:27] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:48:27] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:48:27] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/08/16 02:48:27] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:27] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 3 order by orden ASC
+[2018/08/16 02:48:27] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/08/16 02:48:27] SQL Query: SELECT * FROM mfo_area
+[2018/08/16 02:48:27] SQL Query: SELECT * from mfo_nivelinteres
+[2018/08/16 02:48:28] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
+[2018/08/16 02:48:28] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
+[2018/08/16 02:48:28] SQL Query: SELECT * FROM mfo_provincia
+[2018/08/16 02:48:28] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:28] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:28] SQL Query: SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/08/16 02:48:29] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:48:29] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:48:29] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/08/16 02:48:29] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:29] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 3 order by orden ASC
+[2018/08/16 02:48:29] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/08/16 02:48:29] SQL Query: SELECT * FROM mfo_area
+[2018/08/16 02:48:29] SQL Query: SELECT * from mfo_nivelinteres
+[2018/08/16 02:48:29] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
+[2018/08/16 02:48:29] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
+[2018/08/16 02:48:29] SQL Query: SELECT * FROM mfo_provincia
+[2018/08/16 02:48:29] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:29] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:29] SQL Query: SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/08/16 02:48:33] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:48:33] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:48:33] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/08/16 02:48:33] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:33] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 3 order by orden ASC
+[2018/08/16 02:48:33] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/08/16 02:48:33] SQL Query: SELECT * FROM mfo_area
+[2018/08/16 02:48:33] SQL Query: SELECT * from mfo_nivelinteres
+[2018/08/16 02:48:33] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
+[2018/08/16 02:48:33] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
+[2018/08/16 02:48:34] SQL Query: SELECT * FROM mfo_provincia
+[2018/08/16 02:48:34] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:34] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:34] SQL Query: SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/08/16 02:48:40] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:48:40] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:48:40] dispatch nombre del controlador: Controlador_Logout - logout
+[2018/08/16 02:48:40] Controlador_Logout::construirPagina Login out
+[2018/08/16 02:48:40] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+            [usuario] => Array
+                (
+                    [id_usuario] => 1
+                    [username] => fernanda
+                    [password] => 0374864d10059501c9bffa2abbe7edf8
+                    [correo] => desarrollo@micamello.com.ec
+                    [telefono] => 0997969113
+                    [dni] => 0919580985
+                    [nombres] => Fernanda
+                    [apellidos] => Fueltala
+                    [fecha_nacimiento] => 2018-06-28 00:00:00
+                    [genero] => F
+                    [discapacidad] => 0
+                    [anosexp] => 10
+                    [fecha_creacion] => 2018-06-28 12:32:00
+                    [foto] => 0
+                    [token] => 0
+                    [estado] => 1
+                    [term_cond] => 1
+                    [conf_datos] => 1
+                    [status_carrera] => 0
+                    [tipo_usuario] => 1
+                    [id_escolaridad] => 1
+                    [id_ciudad] => 1
+                    [id_convenio_univ] => 1
+                    [ultima_sesion] => 2018-08-16 14:30:22
+                )
+
+        )
+
+    [mostrar_banner] => http://localhost/repos_micamello/imagenes/banner/2.jpg
+)
+
+[2018/08/16 02:48:40] Utils::createSession empezo una nueva sesion
+[2018/08/16 02:48:40] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 02:48:40] dispatch nombre del controlador: Controlador_Inicio - inicio
+[2018/08/16 02:48:40] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2018/08/16 02:48:40] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta
+[2018/08/16 02:48:40] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='1' and estado=1
+[2018/08/16 02:48:40] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='2' and estado=1
+[2018/08/16 02:48:40] SQL Query: SELECT * FROM mfo_area
+[2018/08/16 02:48:40] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 ORDER BY orden
+[2018/08/16 02:48:40] SQL Query: SELECT imagen FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2018/08/16 02:48:40] SQL ERROR: 0: 
+[2018/08/16 02:48:40] SQL Query: SELECT * FROM mfo_provincia
+[2018/08/16 02:48:40] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:48:40] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:48:40] Modelo_Usuario::estaLogueado sesion Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:48:40] Modelo_Usuario::estaLogueado sesion no econtrada: Array
+(
+    [mfo_datos] => Array
+        (
+            [sucursal] => Array
+                (
+                    [id_sucursal] => 1
+                    [dominio] => micamello.com.ec
+                    [icono] => ecu.png
+                    [logo] => logoEC.png
+                    [iso] => EC
+                    [estado] => 1
+                    [id_pais] => 14
+                    [id_moneda] => 1
+                )
+
+        )
+
+)
+
+[2018/08/16 02:48:40] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '1'
+[2018/08/16 02:48:40] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '2'
+[2018/08/16 02:48:40] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '3'
+[2018/08/16 02:48:40] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '4'
+[2018/08/16 02:48:40] SQL Query: SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/08/16 03:31:25] Utils::createSession empezo una nueva sesion
+[2018/08/16 03:31:25] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
+[2018/08/16 03:31:26] Utils::createSession empezo una nueva sesion
+[2018/08/16 03:31:26] SQL Query: SELECT * FROM mfo_sucursal s WHERE s.dominio = 'micamello.com.ec';
