@@ -53,10 +53,36 @@ class Modelo_Usuario{
     if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
       $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
     }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$_SESSION['mfo_datos']['usuario']['id_usuario'].'jpg';
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$_SESSION['mfo_datos']['usuario']['id_usuario'].'.jpg';
     }
     return $rutaImagen;
   }
   
+  public static function actualizarSession($idUsuario){
+    return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
+  }
+
+  public static function updateUsuario($data,$idUsuario,$file=false){
+
+    $foto = 0;
+    if($file['error'] != 4 )
+    { 
+      $foto = 1;
+
+    }else if($file['error'] == 4 && $_SESSION['mfo_datos']['usuario']['foto'] == 1){
+      $foto = 1;
+    }
+
+    Utils::imagen_upload($file,$idUsuario,PATH_PROFILE);
+    if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1){
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"apellidos"=>$data['apellidos'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['status_carrera'],"id_escolaridad"=>$data['escolaridad']);
+    }else{
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']);
+    }
+
+    $result = $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
+
+    return $result;
+  }
 }  
 ?>

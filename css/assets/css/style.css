@@ -1,4 +1,4 @@
-
+﻿
 
 /*
 Author: Xpeedstudio
@@ -186,19 +186,20 @@ ul.checkout-bar li:before {
 ul.checkout-bar li.active {
   color: #8bc53f;
   font-weight: bold;
+  z-index:0;
 }
 ul.checkout-bar li.active:before {
   background: #8bc53f;
-  z-index: 99999;
+  z-index: 0;
 }
 ul.checkout-bar li.visited {
   background: #ECECEC;
   color: #57aed1;
-  z-index: 99999;
+  z-index: 0;
 }
 ul.checkout-bar li.visited:before {
   background: #57aed1;
-  z-index: 99999;
+  z-index: 0;
 }
 ul.checkout-bar li:nth-child(1):before {
   content: "1";

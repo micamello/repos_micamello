@@ -34,6 +34,7 @@ RewriteRule ^registro/$ %{ENV:REWRITEBASE}index.php?mostrar=registro [L]
 #perfil
 RewriteRule ^perfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil [L]
 RewriteRule ^editarperfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil&opcion=paso1 [L]
+RewriteRule ^actualizar/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil&opcion=paso1 [L]
 
 #logout
 RewriteRule ^logout/$ %{ENV:REWRITEBASE}index.php?mostrar=logout [L]

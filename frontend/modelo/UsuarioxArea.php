@@ -13,6 +13,15 @@ class Modelo_UsuarioxArea{
     }
     return $datos;
   }
+
+  public static function updateAreas($data,$idUsuario){
+
+    $inserto = false;
+    foreach ($data as $key => $area) {
+        $inserto = $GLOBALS['db']->insert("mfo_usuarioxarea",array("id_usuario"=>$idUsuario,"id_area"=>$area));
+    }
+    return $inserto;
+  }
   
 }  
 ?>

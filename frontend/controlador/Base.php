@@ -17,8 +17,10 @@ abstract class Controlador_Base{
   
   public function camposRequeridos($campos = array()){
     $data = array(); 
+    print_r($this->datos);
     if (count($campos) > 0){ 
       foreach($campos as $campo=>$requerido){
+        
         $valor = trim(Utils::getParam($campo,'',$this->datos));           
         if (empty($valor) && $requerido == 1){                    
           throw new Exception(" El campo ".$campo." debe ser obligatorio");

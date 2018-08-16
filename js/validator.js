@@ -228,6 +228,7 @@
   }
 
   Validator.prototype.showErrors = function ($el) {
+
     var method = this.options.html ? 'html' : 'text'
     var errors = $el.data('bs.validator.errors')
     var $group = $el.closest('.form-group')
@@ -243,6 +244,18 @@
     $block.data('bs.validator.originalContent') === undefined && $block.data('bs.validator.originalContent', $block.html())
     $block.empty().append(errors)
     $group.addClass('has-error has-danger')
+
+    if(errors[0].textContent.indexOf("una de estas opciones")!=-1){
+      errors[0].innerHTML = '<p>Marque una opción</p>';
+    }
+
+    if(errors[0].textContent.indexOf("actualmente, el texto tiene")!=-1){
+      errors[0].innerHTML = '<p>La longitud mínima es de 10 caracteres</p>';
+    }
+
+    if(errors[0].textContent.indexOf("coincida con el solicitado")!=-1){
+      errors[0].innerHTML = '<p>El formato es incorrecto</p>';
+    }
 
     $group.hasClass('has-feedback')
       && $feedback.removeClass(this.options.feedback.success)
@@ -318,9 +331,7 @@
         var $this = $(this)
         var originalContent = $this.data('bs.validator.originalContent')
 
-        $this
-          .removeData('bs.validator.originalContent')
-          .html(originalContent)
+        $this.removeData('bs.validator.originalContent').html(originalContent)
       })
 
     this.$btn.removeClass('disabled')

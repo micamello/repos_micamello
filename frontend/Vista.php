@@ -85,7 +85,7 @@ class Vista {
 
   public static function renderJSON($template_vars=array()){
     array_walk_recursive($template_vars, function(&$item){
-          $item = utf8_encode( $item ); 
+          $item = utf8_encode($item); 
     });
     echo json_encode($template_vars);
   }

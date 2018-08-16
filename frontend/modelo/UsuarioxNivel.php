@@ -14,5 +14,13 @@ class Modelo_UsuarioxNivel{
     return $datos;
   }
   
+  public static function updateNiveles($data,$idUsuario){
+
+    $inserto = false;
+    foreach ($data as $key => $nivel) {
+        $inserto = $GLOBALS['db']->insert("mfo_usuarioxnivel",array("id_usuario"=>$idUsuario,"id_nivelInteres"=>$nivel));
+    }
+    return $inserto;
+  }
 }  
 ?>
