@@ -17,7 +17,7 @@ class Controlador_Perfil extends Controlador_Base {
 
     //obtiene el orden del baner de forma aleatoria segun la cantidad de banner de tipo perfil
     $orden = rand(1,count($arrbanner))-1;
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];    
 
     $opcion = Utils::getParam('opcion','',$this->data);  
     switch($opcion){      
@@ -99,7 +99,8 @@ class Controlador_Perfil extends Controlador_Base {
         Vista::renderJSON($arrciudad);
       break;
       default:
-        Vista::render('perfil');
+        $tags["show_banner"] = 1;
+        Vista::render('perfil',$tags);
       break;
     }     
   }

@@ -49,7 +49,6 @@ class Modelo_Usuario{
   }
 
   public static function obtieneFoto(){
-
     if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
       $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
     }else{

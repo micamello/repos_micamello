@@ -12,7 +12,7 @@ class Controlador_Plan extends Controlador_Base {
     }
     
     $planes = Modelo_Plan::listadoxTipo(Modelo_Plan::CANDIDATO);
-
+    Utils::log("PLANES ".print_r($planes,true));
     $tags['planes'] = $planes;
 
     Vista::render('planes', $tags);    

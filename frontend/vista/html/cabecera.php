@@ -452,7 +452,7 @@ if( $_POST["btnemp"] ) {
                         <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand">
-                        <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/'.$_SESSION['mfo_datos']['sucursal']['logo']; ?>" alt="micamellologo">
+                        <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.$_SESSION['mfo_datos']['sucursal']['id_sucursal'].'.'.$_SESSION['mfo_datos']['sucursal']['extensionlogo'];?>" alt="micamellologo">
                       </a>
                     </div>
                     <!-- End Header Navigation -->
@@ -489,33 +489,34 @@ if(isset($show_banner)){ ?>
 <section id="home" class="home bg-black fix">
   <div class="overlay"></div>
   <div class="container">
-      <div class="row">
-          <div class="main_home text-center">
-              <div class="col-md-12">
-                  <div class="hello_slid">
-                      <div class="slid_item">
-                          <div class="home_text ">
-                              <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></strong></h2>
-                          </div>
-                      </div>
-                  </div>
+    <div class="row">
+      <div class="main_home text-center">
+        <div class="col-md-12">
+          <div class="hello_slid">
+            <div class="slid_item">
+              <div class="home_text ">
+                <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></strong></h2>
               </div>
+            </div>
           </div>
-      </div><!--End off row-->
+        </div>
+      </div>
+    </div><!--End off row-->
   </div><!--End off container -->
 </section> <!--End off Home Sections-->
-<br>
 <?php } ?>
 
-<!--mensajes de error y exito-->
-<?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
-  <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
-    <?php echo $sess_err_msg;?>
-  </div>  
-<?php }?>
+<section id="product" class="product">
+  <br><br><br><br>
+    <!--mensajes de error y exito-->
+    <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
+      <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
+        <?php echo $sess_err_msg;?>
+      </div>  
+    <?php }?>
 
-<?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
-  <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
-    <?php echo $sess_suc_msg;?>
-  </div>  
-<?php } ?>
+    <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
+      <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
+        <?php echo $sess_suc_msg;?>
+      </div>  
+    <?php } ?>

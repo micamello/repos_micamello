@@ -14,9 +14,16 @@ class Controlador_Cuestionario extends Controlador_Base {
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
-    
+
     $nrotest = Modelo_Cuestionario::totalTest();
     $test = Modelo_Cuestionario::testSiguientexUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']); 
+
+    if ((!isset($_SESSION['mfo_datos']['planes']) || 
+        !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
+        $test["orden"] == 3){
+      $this->redirectToController('planes');
+    }
+        
     if ($test > $nrotest){
       $this->redirectToController('velocimetro');
     }
@@ -59,6 +66,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
     $orden = rand(1,count($arrbanner))-1;
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $tags["show_banner"] = 1;
 
     Vista::render('cuestionario', $tags);    
   }

@@ -1,16 +1,19 @@
-ErrorDocument 404 /error/page_not_found.html
-ErrorDocument 401 /error/login_required.html
+ErrorDocument 404 /error/pagina_no_encontrada.html
+ErrorDocument 401 /error/login_requerido.html
 
 RewriteEngine on
 RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^http://(www\.)?micamello.ec/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?micamello.com.ec/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^https://(www\.)?micamello.com.ec/.*$ [NC]
 RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
-#RewriteRule \.(gif|jpg|js|css)$ - [F]
+RewriteRule \.(gif|jpg|jpeg|png|js|css)$ - [NC]
 
 RewriteEngine On
 RewriteCond %{HTTP_HOST} !^localhost
 RewriteCond %{REQUEST_URI} !^/repos_micamello$
 RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+Options -Indexes
 
 ####################################################################
 
@@ -22,7 +25,7 @@ RewriteCond %{HTTP_HOST} ^localhost$
 RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 
 #imagenes del profile
-RewriteCond %{REQUEST_URI} \.(jpg|jpeg|gif|png)$ [NC]
+RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
 RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&archivo=$2 [L]
 
 #login
@@ -30,7 +33,7 @@ RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
 
 #contrasena
 RewriteRule ^contrasena/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena [L]
-RewriteRule ^contrasena/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena&opcion=recuperacion [L]
+RewriteRule ^contrasena/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena&opcion=recuperacion&token=$1 [L]
 
 #registro
 RewriteRule ^registro/$ %{ENV:REWRITEBASE}index.php?mostrar=registro [L]

@@ -1,6 +1,6 @@
 
 <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
-<br>
+
 <div class="checkout-wrap">
   <ul class="checkout-bar">
     <li class="visited"><a href="#">Registro</a></li>    
@@ -14,7 +14,7 @@
 <?php } ?>
 
 
-<section id="product" class="product">
+<!--<section id="product" class="product">-->
     <div class="container"><br><br>
         <form role="form" name="form1" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/cuestionario/" enctype="multipart/form-data">
             <div class="col-md-12">
@@ -263,4 +263,4 @@
 		    </div> 
         </form>
     </div>
-</section>
+<!--</section>-->

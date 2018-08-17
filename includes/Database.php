@@ -83,14 +83,7 @@ class Database{
   	$query .= ') VALUES (';
   	$query .= $val_list;
   	$query .= ')';
-  	$resultado = $this->execute( $query );
-    if (!$resultado){
-      return false;
-    }
-    if ($this->rows_affected() <= 0){
-      return false;
-    }
-    return true;
+  	return $this->execute( $query );
   }
 
   function update( $table, $data, $where ){        
@@ -108,14 +101,7 @@ class Database{
   	$query .= " WHERE ";
   	$where = $where;
   	$query .= $where;
-  	$resultado = $this->execute( $query );
-    if (!$resultado){
-      return false;
-    }
-    if ($this->rows_affected() <= 0){
-      return false;
-    }
-    return true;
+  	return $this->execute( $query );    
   }
 
   function rows_affected(){
@@ -128,14 +114,7 @@ class Database{
   	$query .= ' WHERE ';
   	$where = $where;
   	$query .= $where;
-  	$resultado = $this->execute( $query );
-    if (!$resultado){
-      return false;
-    }
-    if ($this->rows_affected() <= 0){
-      return false;
-    }
-    return true;
+  	return $this->execute( $query );
   }
 
   function getLastError(){    
@@ -218,15 +197,18 @@ class Database{
   }
   
   function beginTrans() {
-    return $this->execute("START TRANSACTION"); 
+    Utils::log("SQL Trans: START TRANSACTION");
+    return mysqli_begin_transaction($this->connection);
   }
   
-  function commit(){
-    return $this->execute("COMMIT");   
+  function commit(){    
+    Utils::log("SQL Trans: COMMIT");   
+    return mysqli_commit($this->connection);   
   }
   
   function rollback(){
-    return $this->execute("ROLLBACK");     
+    Utils::log("SQL Trans: ROLLBACK");     
+    return mysqli_rollback($this->connection);;     
   }
   
   function insert_id(){

@@ -99,7 +99,7 @@ class Controlador_Contrasena extends Controlador_Base {
       }
     } 
 
-    Vista::render('recuperar_password', $tags);  
+    Vista::render('recuperar_password', array());  
   } 
 
   public function envioCorreo($correo,$nombres,$token){

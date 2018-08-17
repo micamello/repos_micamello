@@ -64,7 +64,7 @@ class Utils{
     $mail->IsHTML(true); 
     $mail->Subject = utf8_encode($subject); 
     $mail->Body = $body; 
-    return $mail->Send(); 
+    return $mail->send(); 
   }
 
   public static function encriptar($texto){    
