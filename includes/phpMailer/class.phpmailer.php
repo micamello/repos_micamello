@@ -1173,7 +1173,7 @@ class PHPMailer
      */
     public function send()
     {
-        try {
+        try {            
             if (!$this->preSend()) {
                 return false;
             }

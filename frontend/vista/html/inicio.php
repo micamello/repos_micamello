@@ -76,7 +76,9 @@
 
                                     <div class="col-md-3 col-sm-6 col-xs-12" align="center">
                                         <i class="<?php echo $area['ico']; ?>" aria-hidden="true"></i>
+
                                         <h5><a href="javascript:void(0);"><?php echo utf8_encode($area['nombre']);?></a></h5>
+
                                         <div class="nvac">(<?php echo $nro_areas; ?> vacantes)</div><br><br>
                                     </div>
                                 <?php } ?>

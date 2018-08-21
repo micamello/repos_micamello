@@ -1,8 +1,7 @@
-// Ocultar menú si aparecen los modales
-function hidden_menuuser_small()
-{
-	var var_menu = document.getElementById('bs-example-navbar-collapse-1');
-	var_menu.classList.remove('in');
+// $("#form_empresa").validator();
+
+if(document.getElementById('form_register')){
+  $("#form_register").validator();
 }
 
 function numero_validate(id)
@@ -10,9 +9,6 @@ function numero_validate(id)
   var input_number = id;
   var nodo_padre = document.getElementById(input_number.id).parentNode;
   var nodo_div = nodo_padre.querySelectorAll('div');
-  // alert(input_number.id);
-  
-  // alert(text_show.id);
   
   input_number.addEventListener('keydown',function(e) {
     
@@ -36,22 +32,41 @@ function numero_validate(id)
       nodo_div[0].innerHTML = "";
       input_number.style.borderColor = "";
     }
-    // Hidden modal
       $('.modal').on('hidden.bs.modal', function(){
           nodo_div[0].innerHTML = "";
           input_number.style.borderColor = "";
 
       });
-    // Hidden modal
 
   })
 }
 
-$("#form_editarPerfil").validator();
-$('#area_select').selectr({
-  placeholder:'Buscar'
-});
-$('#nivel_interes').selectr({
-  placeholder:'Buscar'
+if(document.getElementById('form_editarPerfil')){
+  $("#form_editarPerfil").validator();
+}
+
+
+
+$('.modal').on('hidden.bs.modal', function(){
+    var $form = $(this);
+    var dni_error = document.getElementById("error_custom_dni");
+        while (dni_error.hasChildNodes()) {
+          dni_error.removeChild(dni_error.firstChild);
+        }
+
+    $(this).find('form')[0].reset();
 });
 
+if (document.getElementById("area_select"))
+{
+  $("#area_select").selectr({
+                placeholder: 'Buscar...'
+            });
+}
+
+if (document.getElementById("nivel_interes"))
+{
+  $("#nivel_interes").selectr({
+                placeholder: 'Buscar...'
+            });
+}

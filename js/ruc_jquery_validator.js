@@ -1,171 +1,183 @@
-(function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+function show_alert(){
+  var dni_error = document.getElementById("error_custom_dni");
+  var p1 = document.createElement("P");
+  p1.setAttribute("class", "list-unstyled msg_error");
+  p1.setAttribute("id", "p_text");
+  var text_node = document.createTextNode("DNI o RUC no válido");
+  p1.appendChild(text_node);
+  dni_error.appendChild(p1);
+}
 
-  (function($) {
-    var RucValidatorEc, jQueryRucValidatorEc;
-    RucValidatorEc = (function() {
-      function RucValidatorEc(numero) {
-        this.numero = numero;
-        this.numero = this.numero.toString();
-        this.valid = false;
-        this.codigo_provincia = null;
-        this.tipo_de_cedula = null;
-        this.already_validated = false;
+function hide_alert(){
+    var dni_error = document.getElementById("error_custom_dni");
+        while (dni_error.hasChildNodes()) {
+          dni_error.removeChild(dni_error.firstChild);
+        }
+}
+
+   validarDocumento  = function() {          
+   
+      numero = document.getElementById('dni').value;
+    /* alert(numero); */
+      var suma = 0;      
+      var residuo = 0;      
+      var pri = false;      
+      var pub = false;            
+      var nat = false;      
+      var numeroProvincias = 22;                  
+      var modulo = 11;
+                  
+      /* Verifico que el campo no contenga letras */                  
+      var ok=1;
+      for (i=0; i<numero.length && ok==1 ; i++){
+         var n = parseInt(numero.charAt(i));
+         if (isNaN(n)) ok=0;
       }
-
-      RucValidatorEc.prototype.validate = function() {
-        var digito_verificador, i, modulo, multiplicadores, p, producto, productos, provincias, residuo, suma, tercer_digito, verificador, _i, _j, _k, _l, _len, _len1, _ref, _ref1;
-        if ((_ref = this.numero.length) !== 10 && _ref !== 13) {
-          this.valid = false;
-          // throw new Error("Longitud incorrecta.");
-        }
-        provincias = 22;
-        this.codigo_provincia = parseInt(this.numero.substr(0, 2), 10);
-        if (this.codigo_provincia < 1 || this.codigo_provincia > provincias) {
-          this.valid = false;
-          // throw new Error("Código de provincia incorrecto.");
-        }
-        tercer_digito = parseInt(this.numero[2], 10);
-        if (tercer_digito === 7 || tercer_digito === 8) {
-          // throw new Error("Tercer dígito es inválido.");
-        }
-        if (tercer_digito === 9) {
-          this.tipo_de_cedula = "Sociedad privada o extranjera";
-        } else if (tercer_digito === 6) {
-          this.tipo_de_cedula = "Sociedad pública";
-        } else if (tercer_digito < 6) {
-          this.tipo_de_cedula = "Persona natural";
-        }
-        productos = [];
-        if (tercer_digito < 6) {
-          modulo = 10;
-          verificador = parseInt(this.numero.substr(9, 1), 10);
-          p = 2;
-          _ref1 = this.numero.substr(0, 9);
-          for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-            i = _ref1[_i];
-            producto = parseInt(i, 10) * p;
-            if (producto >= 10) {
-              producto -= 9;
-            }
-            productos.push(producto);
-            if (p === 2) {
-              p = 1;
-            } else {
-              p = 2;
-            }
-          }
-        }
-        if (tercer_digito === 6) {
-          verificador = parseInt(this.numero.substr(8, 1), 10);
-          modulo = 11;
-          multiplicadores = [3, 2, 7, 6, 5, 4, 3, 2];
-          for (i = _j = 0; _j <= 7; i = ++_j) {
-            productos[i] = parseInt(this.numero[i], 10) * multiplicadores[i];
-          }
-          productos[8] = 0;
-        }
-        if (tercer_digito === 9) {
-          verificador = parseInt(this.numero.substr(9, 1), 10);
-          modulo = 11;
-          multiplicadores = [4, 3, 2, 7, 6, 5, 4, 3, 2];
-          for (i = _k = 0; _k <= 8; i = ++_k) {
-            productos[i] = parseInt(this.numero[i], 10) * multiplicadores[i];
-          }
-        }
-        suma = 0;
-        for (_l = 0, _len1 = productos.length; _l < _len1; _l++) {
-          i = productos[_l];
-          suma += i;
-        }
-        residuo = suma % modulo;
-        digito_verificador = residuo === 0 ? 0 : modulo - residuo;
-        if (tercer_digito === 6) {
-          if (this.numero.substr(9, 4) !== "0001") {
-            throw new Error("RUC de empresa del sector público debe terminar en 0001");
-          }
-          this.valid = digito_verificador === verificador;
-        }
-        if (tercer_digito === 9) {
-          if (this.numero.substr(10, 3) !== "001") {
-            throw new Error("RUC de entidad privada debe terminar en 001");
-          }
-          this.valid = digito_verificador === verificador;
-        }
-        if (tercer_digito < 6) {
-          if (this.numero.length > 10 && this.numero.substr(10, 3) !== "001") {
-            throw new Error("RUC de persona natural debe terminar en 001");
-          }
-          this.valid = digito_verificador === verificador;
-        }
-        return this;
-      };
-
-      RucValidatorEc.prototype.isValid = function() {
-        if (!this.already_validated) {
-          this.validate();
-        }
-        return this.valid;
-      };
-
-      return RucValidatorEc;
-
-    })();
-    jQueryRucValidatorEc = (function() {
-      function jQueryRucValidatorEc($node, options) {
-        this.$node = $node;
-        this.options = options;
-        this.validateContent = __bind(this.validateContent, this);
-        this.options = $.extend({}, $.fn.validarCedulaEC.defaults, this.options);
-        this.$node.on(this.options.events, this.validateContent);
+      if (ok==0){
+         show_alert();
+         // alert("No puede ingresar caracteres en el número");         
+         return false;
       }
-
-      jQueryRucValidatorEc.prototype.validateContent = function() {
-        var check, error, numero_de_cedula, _ref;
-        numero_de_cedula = this.$node.val().toString();
-        check = this.options.strict;
-        if (!check && ((_ref = numero_de_cedula.length) === 10 || _ref === 13)) {
-          check = true;
-        }
-        if (check) {
-          try {
-            if (new RucValidatorEc(numero_de_cedula).isValid()) {
-              this.$node.removeClass(this.options.the_classes);
-              this.options.onValid.call(this.$node);
-            } else {
-              this.$node.addClass(this.options.the_classes);
-              this.options.onInvalid.call(this.$node);
-            }
-          } catch (_error) {
-            error = _error;
-            this.$node.addClass(this.options.the_classes);
-            this.options.onInvalid.call(this.$node);
-          }
-        }
-        return null;
-      };
-
-      return jQueryRucValidatorEc;
-
-    })();
-    $.fn.validarCedulaEC = function(options) {
-      this.each(function() {
-        return new jQueryRucValidatorEc($(this), options);
-      });
-      return this;
-    };
-    $.fn.validarCedulaEC.RucValidatorEc = RucValidatorEc;
-    return $.fn.validarCedulaEC.defaults = {
-      strict: true,
-      events: "change",
-      the_classes: "invalid",
-      onValid: function() {
-        return null;
-      },
-      onInvalid: function() {
-        return null;
+      else
+      {
+         hide_alert();
       }
-    };
-  })(jQuery);
-
-}).call(this);
+                  
+      if (numero.length < 10 ){ 
+      show_alert();             
+         // alert('El número ingresado no es válido');                  
+         return false;
+      }
+      else
+      {
+         hide_alert();
+      }
+     
+      /* Los primeros dos digitos corresponden al codigo de la provincia */
+      provincia = numero.substr(0,2);      
+      if (provincia < 1 || provincia > numeroProvincias){     
+      show_alert()      
+         // alert('El código de la provincia (dos primeros dígitos) es inválido');
+     return false;       
+      }
+      else
+      {
+         hide_alert();
+      }
+      /* Aqui almacenamos los digitos de la cedula en variables. */
+      d1  = numero.substr(0,1);         
+      d2  = numero.substr(1,1);         
+      d3  = numero.substr(2,1);         
+      d4  = numero.substr(3,1);         
+      d5  = numero.substr(4,1);         
+      d6  = numero.substr(5,1);         
+      d7  = numero.substr(6,1);         
+      d8  = numero.substr(7,1);         
+      d9  = numero.substr(8,1);         
+      d10 = numero.substr(9,1);                
+         
+      /* El tercer digito es: */                           
+      /* 9 para sociedades privadas y extranjeros   */         
+      /* 6 para sociedades publicas */         
+      /* menor que 6 (0,1,2,3,4,5) para personas naturales */ 
+      if (d3==7 || d3==8){    
+      show_alert()       
+         // alert('El tercer dígito ingresado es inválido');                     
+         return false;
+      }
+      else
+      {
+         hide_alert();
+      }         
+         
+      /* Solo para personas naturales (modulo 10) */         
+      if (d3 < 6){           
+         nat = true;            
+         p1 = d1 * 2;  if (p1 >= 10) p1 -= 9;
+         p2 = d2 * 1;  if (p2 >= 10) p2 -= 9;
+         p3 = d3 * 2;  if (p3 >= 10) p3 -= 9;
+         p4 = d4 * 1;  if (p4 >= 10) p4 -= 9;
+         p5 = d5 * 2;  if (p5 >= 10) p5 -= 9;
+         p6 = d6 * 1;  if (p6 >= 10) p6 -= 9; 
+         p7 = d7 * 2;  if (p7 >= 10) p7 -= 9;
+         p8 = d8 * 1;  if (p8 >= 10) p8 -= 9;
+         p9 = d9 * 2;  if (p9 >= 10) p9 -= 9;             
+         modulo = 10;
+      }         
+      /* Solo para sociedades publicas (modulo 11) */                  
+      /* Aqui el digito verficador esta en la posicion 9, en las otras 2 en la pos. 10 */
+      else if(d3 == 6){           
+         pub = true;             
+         p1 = d1 * 3;
+         p2 = d2 * 2;
+         p3 = d3 * 7;
+         p4 = d4 * 6;
+         p5 = d5 * 5;
+         p6 = d6 * 4;
+         p7 = d7 * 3;
+         p8 = d8 * 2;            
+         p9 = 0;            
+      }         
+         
+      /* Solo para entidades privadas (modulo 11) */         
+      else if(d3 == 9) {           
+         pri = true;                                   
+         p1 = d1 * 4;
+         p2 = d2 * 3;
+         p3 = d3 * 2;
+         p4 = d4 * 7;
+         p5 = d5 * 6;
+         p6 = d6 * 5;
+         p7 = d7 * 4;
+         p8 = d8 * 3;
+         p9 = d9 * 2;            
+      }
+                
+      suma = p1 + p2 + p3 + p4 + p5 + p6 + p7 + p8 + p9;                
+      residuo = suma % modulo;                                         
+      /* Si residuo=0, dig.ver.=0, caso contrario 10 - residuo*/
+      digitoVerificador = residuo==0 ? 0: modulo - residuo;                
+      /* ahora comparamos el elemento de la posicion 10 con el dig. ver.*/                         
+      if (pub==true){           
+         if (digitoVerificador != d9){
+         show_alert();                          
+            // alert('El ruc de la empresa del sector público es incorrecto.');            
+            return false;
+         }                  
+         /* El ruc de las empresas del sector publico terminan con 0001*/         
+         if ( numero.substr(9,4) != '0001' ){
+         show_alert();                    
+            // alert('El ruc de la empresa del sector público debe terminar con 0001');
+            return false;
+         }
+      }        
+      else if(pri == true){         
+         if (digitoVerificador != d10){ 
+         show_alert();                         
+            // alert('El ruc de la empresa del sector privado es incorrecto.');
+            return false;
+         }         
+         if ( numero.substr(10,3) != '001' ){ 
+         show_alert();                   
+            // alert('El ruc de la empresa del sector privado debe terminar con 001');
+            return false;
+         }
+      }      
+      else if(nat == true){         
+         if (digitoVerificador != d10){ 
+         show_alert();                         
+            // alert('El número de cédula de la persona natural es incorrecto.');
+            return false;
+         }         
+         if (numero.length >10 && numero.substr(10,3) != '001' ){
+         show_alert();                    
+            // alert('El ruc de la persona natural debe terminar con 001');
+            return false;
+         }
+      }
+      else
+      {
+         hide_alert();
+      }      
+      return true;   
+   }  
