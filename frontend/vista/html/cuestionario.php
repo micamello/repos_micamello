@@ -13,8 +13,7 @@
 
   <div class="" style="background-color: white;">
     <div class="tab-content ">
-      <form role="form" name="form1" id="form1" method="post" action="<?php echo PUERTO."://".HOST."/cuestionario/";?>">
-        <!--<textarea name="tiempo" id="count-up" style="display:none">0:00</textarea>-->
+      <form role="form" name="form1" id="form1" method="post" action="<?php echo PUERTO."://".HOST."/cuestionario/";?>">        
         <br>
         <div class='tab-pane active' id='1' align='center'>
           <h4><?php echo utf8_encode($pregunta["pregunta"]);?>
@@ -25,20 +24,25 @@
             <input type='hidden' id='modo_pregunta' name='modo_pregunta' value='<?php echo $pregunta["modo"];?>'>
           </h4>
           <div class="form-group">
-            <?php foreach($opciones as $opcion){ ?>
-              <label><input type="radio" name="id_opcion" value="<?php echo $opcion["orden"];?>" <?php echo ($opcion["orden"] == 1) ? "checked" : "";?>>&nbsp;<?php echo $opcion["descripcion"];?></label><br>
-            <?php } ?>
+            <div class="row">
+              <div class="col-xs-3 col-md-5"></div>
+              <div class="col-xs-9 col-md-7">
+              <?php foreach($opciones as $opcion){ ?>
+                <p align="justify"><input type="radio" name="id_opcion" value="<?php echo $opcion["orden"];?>" <?php echo ($opcion["orden"] == 1) ? "checked" : "";?>>&nbsp;<?php echo $opcion["descripcion"];?></p>
+              <?php } ?>
+              </div>         
+            </div>               
           </div>
         </div>
-        <br>
-        <div align="center">
-          <input class="btn btn-success" type="submit" name="" value="CONTINUAR">
+        <div class="row">        
+          <div class="col-md-12" align="center">
+            <input class="btn btn-success" type="submit" name="" value="CONTINUAR">
+          </div>
         </div>
         <br>        
       </form>
     </div>
 </div>
-<br><br><br>
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style="margin-top: 100px">
@@ -66,3 +70,5 @@
     </div>
   </div>
 </div>
+
+

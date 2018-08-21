@@ -43,16 +43,15 @@
           </div>
         </div>
         <div class="col-md-12" align="right" style="margin-top: -44px;">
-          <br>
+          <br><br>
           <h2>
             <div class="row">
-              <div class="col-md-10" style="margin-left: 69px;">Posibilidades: 
+              <div class="col-md-12">Posibilidades: 
                 <span style="color:#8C9091;"><?php echo $descrporc;?> </span>
               </div>
-              <div class="col-md-1" align="right" style="padding-left:0px;">
-                <?php echo "<span class='count'>".$valorporc."</span>"; ?>
-              </div>
-              <div class="col-md-1" align="right" style="margin-left: -70px;color: #8c9091;">%</div>
+              <div class="col-md-12" align="right">
+                <?php echo "<span class='count'>".$valorporc."</span>"; ?>%
+              </div>              
             </div>
           </h2>
         </div>    

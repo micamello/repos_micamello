@@ -17,7 +17,7 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
   el = d3.select('.chart-gauge');
   margin = {
     top: 20,
-    right: 20,
+    right: 20,    
     bottom: 30,
     left: 20
   };
