@@ -117,15 +117,15 @@ class Controlador_Perfil extends Controlador_Base
 
             $data = $this->camposRequeridos($campos);
 
-            if ($_FILES['file-input']['error'] != 4) {
-                $validaImg = Utils::valida_upload($_FILES['file-input'], 1);
+            if ($imagen['error'] != 4) {
+                $validaImg = Utils::valida_upload($imagen, 1);
                 if (empty($validaImg)) {
                     throw new Exception("La imagen debe ser en formato .jpg .jpeg .pjpeg y con un peso máx de 1MB");
                 }
             }
 
-            if ($_FILES['subirCV']['error'] != 4) {
-                $validaFile = Utils::valida_upload($_FILES['subirCV'], 2);
+            if ($archivo['error'] != 4) {
+                $validaFile = Utils::valida_upload($archivo, 2);
                 if (empty($validaFile)) {
                     throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
                 }
