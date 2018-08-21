@@ -48,7 +48,6 @@ class Utils{
     $result = preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email);
     return $result;
   }
-
   public static function envioCorreo($to, $subject, $body){
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -66,13 +65,11 @@ class Utils{
     $mail->Body = $body; 
     return $mail->send(); 
   }
-
   public static function encriptar($texto){    
     $objaes = new Aes(KEY_ENCRIPTAR);
     $encriptado = $objaes->encrypt($texto);
     return bin2hex($encriptado);
   }
-
   public static function desencriptar($texto){    
     $objaes = new Aes(KEY_ENCRIPTAR);
     $desencriptado = hex2bin($texto);

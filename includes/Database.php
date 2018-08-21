@@ -4,7 +4,7 @@ class Database{
   const ASSOC = MYSQLI_ASSOC;
   const NUM = MYSQLI_NUM;
   const BOTH = MYSQLI_BOTH;
-	
+  
   var $server;
   var $username;
   var $password;
@@ -25,38 +25,39 @@ class Database{
   private $_trans_status; 
 
   function __construct( $server, $user, $pass, $dbname = false ){
-  	$this->server 	= $server;
-  	$this->username = $user;
-  	$this->password = $pass;
-  	$this->dbname = $dbname;
+    $this->server   = $server;
+    $this->username = $user;
+    $this->password = $pass;
+    $this->dbname = $dbname;
   }
 
   function connect(){
-  	$this->connection = mysqli_connect($this->server, $this->username, $this->password) or die("No se pudo conectar a la base de datos");
-  	if ( $this->connection ){	  
-  	  return $this->selectDB();	  
-  	}
-  	else{
-  	  return false;
-  	}
+    $this->connection = mysqli_connect($this->server, $this->username, $this->password) or die("No se pudo conectar a la base de datos");
+    if ( $this->connection ){   
+      return $this->selectDB();   
+    }
+    else{
+      return false;
+    }
   }
 
-  function selectDB(){	
-	if ( $this->dbname ){
-	  return mysqli_select_db($this->connection,$this->dbname)or die("No se pudo conectar a la Base de Datos");
-	}
-	else{
-	  return false;
-	}	
+  function selectDB(){  
+  if ( $this->dbname ){
+    return mysqli_select_db($this->connection,$this->dbname)or die("No se pudo conectar a la Base de Datos");
+  }
+  else{
+    return false;
+  } 
   }
 
   function disconnect(){
-	  mysqli_close($this->connection);
+    mysqli_close($this->connection);
   }
 
   function execute( $query ){
     $this->query = $query;    
     Utils::log("SQL execute: $query");
+
 	  $resultSet = mysqli_query( $this->connection,$query );
 	  $this->resultSet = $resultSet;
 	  return $resultSet;
@@ -102,6 +103,7 @@ class Database{
   	$where = $where;
   	$query .= $where;
   	return $this->execute( $query );    
+
   }
 
   function rows_affected(){
@@ -109,16 +111,16 @@ class Database{
   }
 
   function delete( $table, $where ){
-  	$query  = 'DELETE FROM ';
-  	$query .= $table;
-  	$query .= ' WHERE ';
-  	$where = $where;
-  	$query .= $where;
-  	return $this->execute( $query );
+    $query  = 'DELETE FROM ';
+    $query .= $table;
+    $query .= ' WHERE ';
+    $where = $where;
+    $query .= $where;
+    return $this->execute( $query );
   }
 
   function getLastError(){    
-	 return mysqli_error($this->connection);
+   return mysqli_error($this->connection);
   }
   
   function fetch_row($result_set, $dorowset=false, $result_type=self::ASSOC ) {

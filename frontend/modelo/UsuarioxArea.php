@@ -14,14 +14,25 @@ class Modelo_UsuarioxArea{
     return $datos;
   }
 
-  public static function updateAreas($data,$idUsuario){
 
+    public static function updateAreas($data,$idUsuario){
+    if (empty($data)|| empty($idUsuario)) {return false;}
     $inserto = false;
     foreach ($data as $key => $area) {
         $inserto = $GLOBALS['db']->insert("mfo_usuarioxarea",array("id_usuario"=>$idUsuario,"id_area"=>$area));
     }
-    return $inserto;
+    return $inserto;  
+    }  
+
+    public static function crearUsuarioArea($area_select, $user_id){
+    if (empty($area_select)|| empty($user_id)) {return false;}
+
+    $insert = false;
+    foreach ($area_select as $key => $area) {
+        $insert = $GLOBALS['db']->insert("mfo_usuarioxarea", array("id_usuario"=>$user_id, "id_area"=>$area));
+    }
+    return $insert;
+
   }
-  
-}  
+}
 ?>

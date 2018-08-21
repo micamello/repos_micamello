@@ -37,6 +37,7 @@ RewriteRule ^contrasena/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena
 
 #registro
 RewriteRule ^registro/$ %{ENV:REWRITEBASE}index.php?mostrar=registro [L]
+RewriteRule ^registro/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=registro&opcion=activacion&token=$1 [L]
 
 #perfil
 RewriteRule ^perfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil [L]

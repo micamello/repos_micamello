@@ -87,7 +87,9 @@ class Controlador_Perfil extends Controlador_Base {
                     );
         
         $tags["template_js"][] = "selectr";
+
 		    $tags["template_js"][] = "validator";
+
         $tags["template_js"][] = "mic";
         $tags["template_js"][] = "editarPerfil";
         $tags["show_banner"] = 1;
