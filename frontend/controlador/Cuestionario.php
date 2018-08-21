@@ -7,6 +7,10 @@ class Controlador_Cuestionario extends Controlador_Base {
   }
 
   public function construirPagina(){
+    
+    $_SESSION['mostrar_exito'] = '';
+    $_SESSION['mostrar_error'] = '';    
+
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }

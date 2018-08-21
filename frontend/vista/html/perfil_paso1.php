@@ -46,18 +46,19 @@
 			                    </div>
 			                    <br>
 							<?php } ?>
-							<?php if($btnSubir == 1 && $btnSig == 0){ ?>
+							<?php if($btnSubir == 1){ ?>
 								<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
 			                        <label for="subirCV" class="custom_file">
 			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
 			                        </label>
-			                   		<input id="subirCV" type="file" name="subirCV"  class="upload-photo">
+			                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo">
 			                   		<div align="center">
 		                            	<p class="text-center arch_cargado" id="texto_status"><?php echo $msj2; ?></p>
 		                        	</div>
 								</div>
 								<br>
-	                        <?php } 
+	                        <?php }
+
 	                        if($btnDescarga == 1 && $btnSubir == 1 && $btnSig == 0){ echo '<br><br><br>'; } ?>
 	                    </div>
                 	<?php } ?>

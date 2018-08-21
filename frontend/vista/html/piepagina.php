@@ -1,10 +1,4 @@
   </section>
-<?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
-  <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
-    <?php echo $sess_suc_msg;?>
-  </div>  
-<?php } ?>
-
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="z-index:9999">
@@ -162,7 +156,7 @@
 </div>
 
 <?php } ?>
-
+<input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
 <section id="action" class="banner_info_email">
                 <div class="container">
                     <div class="row">

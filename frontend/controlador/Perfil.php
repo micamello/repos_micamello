@@ -35,8 +35,34 @@ class Controlador_Perfil extends Controlador_Base
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
 
+                $imgArch2  = 'upload-icon.png';
+                $msj2      = 'Subir CV';
+                $ruta_arch = '#';
+                $btnSubir  = 1;
+
+                if (isset($_SESSION['mfo_datos']['infohv'])) {
+
+                    if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
+                        $imgArch1 = 'actualizar.png';
+                    }else{
+                        $imgArch1    = $_SESSION['mfo_datos']['infohv']['formato'] . '.png';
+                    }
+                    $msj1        = 'Hoja de vida Cargada';
+                    $nombre_arch = $_SESSION['mfo_datos']['usuario']['id_usuario'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
+                    $ruta_arch   = PUERTO . "://" . HOST . '/imagenes/usuarios/hv/' . $nombre_arch;
+                    $btnDescarga = 1;
+                    
+                    $msj2        = 'Actualizar CV';
+                }
+
                 if (Utils::getParam('actualizar') == 1) {
                     $btnSig = 1;
+
+                    if(!isset($_FILES['subirCV'])){
+                        $_FILES['subirCV'] = '';
+                    }
+                    $btnSubir  = 0;
+
                     self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
@@ -47,21 +73,6 @@ class Controlador_Perfil extends Controlador_Base
                     $cargarHv = 1;
                 } else {
                     $cargarHv = 0;
-                }
-
-                $imgArch2  = 'upload-icon.png';
-                $msj2      = 'Subir CV';
-                $ruta_arch = '#';
-                $btnSubir  = 1;
-
-                if (isset($_SESSION['mfo_datos']['infohv'])) {
-
-                    $imgArch1    = $_SESSION['mfo_datos']['infohv']['formato'] . '.png';
-                    $msj1        = 'Hoja de vida Cargada';
-                    $nombre_arch = $_SESSION['mfo_datos']['usuario']['id_usuario'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
-                    $ruta_arch   = PUERTO . "://" . HOST . '/imagenes/usuarios/hv/' . $nombre_arch;
-                    $btnDescarga = 1;
-                    $msj2        = 'Actualizar CV';
                 }
 
                 $tags = array('escolaridad' => $escolaridad,
@@ -89,6 +100,7 @@ class Controlador_Perfil extends Controlador_Base
                 $tags["template_js"][] = "editarPerfil";
                 $tags["show_banner"]   = 1;
                 Vista::render('perfil_paso1', $tags);
+
                 break;
             case 'buscaCiudad':
                 $id_provincia = Utils::getParam('id_provincia', '', $this->data);
@@ -124,7 +136,7 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }
 
-            if ($archivo['error'] != 4) {
+            if (!empty($archivo) && $archivo['error'] != 4) {
                 $validaFile = Utils::valida_upload($archivo, 2);
                 if (empty($validaFile)) {
                     throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
@@ -146,8 +158,8 @@ class Controlador_Perfil extends Controlador_Base
                 throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
             }
             
-            if ($_FILES['subirCV']['error'] != 4) {
-                $arch = Utils::validaExt($_FILES['subirCV'], 2);
+            if (!empty($archivo) && $archivo['error'] != 4) {
+                $arch = Utils::validaExt($archivo, 2);
                 if (isset($_SESSION['mfo_datos']['infohv'])) {
 
                     if ($arch[1] != $_SESSION['mfo_datos']['infohv']['formato']) {

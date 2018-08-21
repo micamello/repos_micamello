@@ -83,7 +83,7 @@ class Controlador_Registro extends Controlador_Base {
         if (empty($datocorreo)){
           throw new Exception("El correo ".$data["correo"]." ya existe");
         }
-        $datodni = Modelo_Usuario::existeDni($data["numero_cand"]);
+        $datodni = Modelo_Usuario::existeDni($data["cedula"]);
         if (empty($datodni)){
           throw new Exception("El dni ".$data["cedula"]." ya existe");
         }
