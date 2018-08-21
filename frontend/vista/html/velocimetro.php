@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="container">
   <div class="row">
     <div class="main_business">                                                    
@@ -31,14 +32,15 @@
             </div>              
             <div class="col-md-3" align="center">
               <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/<?php echo $imagengif;?>">
-              <input type="hidden" id="valorporc" name="valorporc" value="<?php echo $valorporc;?>">                                
+              <input type="hidden" id="valorporc" name="valorporc" value="<?php echo $valorporc;?>">              
             </div>
             <div class="col-md-5" align="center">    
-              <div class="chart-gauge"></div>
-              <div class="progress ">
-                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $valorporc;?>%"><?php echo $descrporc;?>
+                <div class="chart-gauge"></div>
+                <div class="progress ">
+                  <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $valorporc;?>%"><?php echo $descrporc;?>
+                  </div>
                 </div>
-              </div>
+              </div>          
             </div>          
           </div>
         </div>

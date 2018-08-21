@@ -88,31 +88,30 @@ class Modelo_Usuario{
       return $GLOBALS['db']->update("mfo_usuario",array("estado"=>1),"id_usuario=".$id_usuario);
   }
 
-  public static function obtieneFoto(){
+  public static function obtieneFoto($idUsuario){
     if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
       $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
     }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$_SESSION['mfo_datos']['usuario']['id_usuario'].'.jpg';
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
     }
-    return $rutaImagen;
+    return $rutaImagen;   
   }
   
   public static function actualizarSession($idUsuario){
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
   }
 
-  public static function updateUsuario($data,$idUsuario,$file=false){
+  public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto){
 
     $foto = 0;
-    if($file['error'] != 4 )
+    if($imagen['error'] != 4)
     { 
       $foto = 1;
 
-    }else if($file['error'] == 4 && $_SESSION['mfo_datos']['usuario']['foto'] == 1){
+    }else if($imagen['error'] == 4 && $session_foto == 1){
       $foto = 1;
     }
 
-    Utils::imagen_upload($file,$idUsuario,PATH_PROFILE);
     if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1){
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"apellidos"=>$data['apellidos'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['status_carrera'],"id_escolaridad"=>$data['escolaridad']);
     }else{
@@ -120,7 +119,9 @@ class Modelo_Usuario{
     }
 
     $result = $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
-
+    if($result){
+       Utils::upload($imagen,$idUsuario,PATH_PROFILE,1);
+    }
     return $result;
   }
 

@@ -11,7 +11,7 @@
                 <div class="col-md-4">
                     <div class="background_img">
                       <aside>                    
-                        <img class="profpic" src="<?php echo Modelo_Usuario::obtieneFoto(); ?>" style="border-radius: 50%;">
+                        <img class="profpic" src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" style="border-radius: 50%;">
                                     
                         <ul class="prof-sm"></ul>
                       </aside>

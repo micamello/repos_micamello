@@ -57,53 +57,69 @@ class Database{
   function execute( $query ){
     $this->query = $query;    
     Utils::log("SQL execute: $query");
-
 	  $resultSet = mysqli_query( $this->connection,$query );
 	  $this->resultSet = $resultSet;
 	  return $resultSet;
   }
-	
-  function insert( $table, $data ){		
-  	$i = 1;
-  	$col_list = '';
-  	$val_list = '';
-  	foreach ( $data as $col => $value ){
-  		if ( $i != 1 ){
-  			$col_list .= ',';
-  			$val_list .= ',';
-  		}
-  		//$value = mysql_real_escape_string($value);
-  		$col_list .= $col;            
-  		$val_list .= "'".$value."'";
-  		$i++;
-  	}
-  	$query  = 'INSERT INTO ';
-  	$query .= $table;
-  	$query .= ' (';
-  	$query .= $col_list;
-  	$query .= ') VALUES (';
-  	$query .= $val_list;
-  	$query .= ')';
-  	return $this->execute( $query );
+  
+  function insert( $table, $data ){   
+    $i = 1;
+    $col_list = '';
+    $val_list = '';
+    foreach ( $data as $col => $value ){
+      if ( $i != 1 ){
+        $col_list .= ',';
+        $val_list .= ',';
+      }
+      //$value = mysql_real_escape_string($value);
+      $col_list .= $col;            
+      $val_list .= "'".$value."'";
+      $i++;
+    }
+    $query  = 'INSERT INTO ';
+    $query .= $table;
+    $query .= ' (';
+    $query .= $col_list;
+    $query .= ') VALUES (';
+    $query .= $val_list;
+    $query .= ')';
+    return $this->execute( $query );
+  }
+
+  function insert_multiple($table,$campos,$data){   
+
+    $valores = '';
+    foreach ($data as $key => $datos) {
+      $valores = '('.implode(',', $datos).'),';
+    }
+    $valores = substr($valores, 0,strlen($valores)-1);
+
+    $query  = 'INSERT INTO ';
+    $query .= $table;
+    $query .= ' (';
+    $query .= $campos;
+    $query .= ') VALUES';
+    $query .= $valores;
+    $query .= ';';
+    return $this->execute( $query );
   }
 
   function update( $table, $data, $where ){        
-  	$query  = "UPDATE ";
-  	$query .= $table;
-  	$query .= " SET ";
-  	$i = 1;
-  	foreach ( $data as $col => $value ){
-  		if ( $i != 1 ) {
-  			$query .= ",";
-  		}
-  		$query .= $col . '="' . $value . '"';
-  		$i++;
-  	}
-  	$query .= " WHERE ";
-  	$where = $where;
-  	$query .= $where;
-  	return $this->execute( $query );    
-
+    $query  = "UPDATE ";
+    $query .= $table;
+    $query .= " SET ";
+    $i = 1;
+    foreach ( $data as $col => $value ){
+      if ( $i != 1 ) {
+        $query .= ",";
+      }
+      $query .= $col . '="' . $value . '"';
+      $i++;
+    }
+    $query .= " WHERE ";
+    $where = $where;
+    $query .= $where;
+    return $this->execute( $query );    
   }
 
   function rows_affected(){
