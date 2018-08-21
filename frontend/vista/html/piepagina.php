@@ -255,5 +255,5 @@ if (isset($template_js) && is_array($template_js)){
 ?>
 
 </body>
->>>>>>> VP
+
 </html>

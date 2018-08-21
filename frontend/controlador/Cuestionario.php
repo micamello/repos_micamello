@@ -16,9 +16,9 @@ class Controlador_Cuestionario extends Controlador_Base {
     }else if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
 
       if (isset($_SESSION['mfo_datos']['planes'])){
-        Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
+        $this->redirectToController('publicar');
       }else{
-        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+        $this->redirectToController('planes');
       }
     }
 
