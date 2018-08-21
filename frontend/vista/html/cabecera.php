@@ -239,7 +239,10 @@ if(isset($show_banner)){ ?>
 <?php } ?>
 
 <section id="product" class="product">
-  <br><br><br><br>
+  <br>
+  <?php if(!isset($show_banner)){ ?>
+    <br><br><br>
+  <?php } ?>
     <!--mensajes de error y exito-->
     <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
       <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
