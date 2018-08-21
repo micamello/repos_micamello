@@ -162,7 +162,7 @@
 </div>
 
 <?php } ?>
-
+<input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
 <section id="action" class="banner_info_email">
                 <div class="container">
                     <div class="row">
