@@ -28,6 +28,12 @@ class Modelo_Sucursal{
     return $GLOBALS['db']->auto_array($sql,array());
 
   }
+
+  public static function obtieneCiudadDefault(){
+    $id_pais = $_SESSION['mfo_datos']['sucursal']['id_pais'];
+    $sql = "select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = ".$id_pais." limit 1;";
+    return $GLOBALS['db']->auto_array($sql,array());
+  }
   
 }  
 ?>

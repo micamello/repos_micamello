@@ -13,6 +13,16 @@ class Modelo_UsuarioxArea{
     }
     return $datos;
   }
+
+  public static function crearUsuarioArea($area_select, $user_id){
+    if (empty($area_select)|| empty($user_id)) {return false;}
+
+    $insert = false;
+    foreach ($area_select as $key => $area) {
+        $insert = $GLOBALS['db']->insert("mfo_usuarioxarea", array("id_usuario"=>$user_id, "id_area"=>$area));
+    }
+    return $insert;
+  }
   
 }  
 ?>

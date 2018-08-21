@@ -151,6 +151,7 @@
 
   Validator.prototype.runValidators = function ($el) {
     var errors   = []
+
     var deferred = $.Deferred()
 
     $el.data('bs.validator.deferred') && $el.data('bs.validator.deferred').reject()
@@ -228,12 +229,13 @@
   }
 
   Validator.prototype.showErrors = function ($el) {
+
     var method = this.options.html ? 'html' : 'text'
     var errors = $el.data('bs.validator.errors')
     var $group = $el.closest('.form-group')
     var $block = $group.find('.help-block.with-errors')
     var $feedback = $group.find('.form-control-feedback')
-
+    // console.log(errors);
     if (!errors.length) return
 
     errors = $('<p/>')
@@ -244,6 +246,12 @@
     $block.empty().append(errors)
     $group.addClass('has-error has-danger')
 
+    // console.log(errors);
+    if(errors[0].textContent == 'Seleccione una de estas opciones.'){
+      
+      errors[0].innerHTML = '<p>Marque una opción</p>';
+     // errors[0].outerHTML = '<p class="list-unstyled msg_error" style="font-size:11px; padding-right: 0px;padding-left: 0px;"><p>Marque una opción</p></p>';
+    }
     $group.hasClass('has-feedback')
       && $feedback.removeClass(this.options.feedback.success)
       && $feedback.addClass(this.options.feedback.error)
@@ -318,9 +326,7 @@
         var $this = $(this)
         var originalContent = $this.data('bs.validator.originalContent')
 
-        $this
-          .removeData('bs.validator.originalContent')
-          .html(originalContent)
+        $this.removeData('bs.validator.originalContent').html(originalContent)
       })
 
     this.$btn.removeClass('disabled')

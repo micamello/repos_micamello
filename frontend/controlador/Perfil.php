@@ -37,6 +37,7 @@ class Controlador_Perfil extends Controlador_Base {
                       'nivelxusuario'=>$nivelxusuario
                     );
         $tags["template_js"][] = "selectr";
+        $tags["template_js"][] = "validator";
         $tags["template_js"][] = "mic";
         $tags["template_js"][] = "editarPerfil";
         Vista::render('perfil_paso1',$tags);
