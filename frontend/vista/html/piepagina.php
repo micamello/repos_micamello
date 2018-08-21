@@ -1,10 +1,4 @@
   </section>
-<?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
-  <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
-    <?php echo $sess_suc_msg;?>
-  </div>  
-<?php } ?>
-
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="z-index:9999">

@@ -14,6 +14,7 @@ if(!Modelo_Usuario::estaLogueado()){
 }
 
 $idusuario = strstr($archivo, '.', true);
+$ext = strstr($archivo, '.');
 if (empty($idusuario)){
 	exit;
 }
@@ -30,6 +31,15 @@ switch ($carpeta){
 	  $extension = 'image/jpeg';
 	  $ruta = PATH_PROFILE.$archivo;
 	  $mostrar = true;
+	break;
+	case 'hv':
+		if($ext == '.pdf'){
+		  $extension = 'application/pdf';
+		}else{
+			$extension = 'application/msword';
+		}
+		$ruta = PATH_ARCHIVO.$archivo;
+		$mostrar = true;
 	break;
 }
 
