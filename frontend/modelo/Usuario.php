@@ -48,31 +48,70 @@ class Modelo_Usuario{
     return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
   }
 
-  public static function obtieneFoto(){
+  // Búsqueda del username en la BD
+  public static function existeUsuario($username){
+    if(empty($username)){ return false; }
+    $sql = "select * from mfo_usuario where username = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($username));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function existeCorreo($correo){
+    if(empty($correo)){ return false; }
+    $sql = "select * from mfo_usuario where correo = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($correo));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function existeDni($dni){
+    if(empty($dni)){ return false; }
+    $sql = "select * from mfo_usuario where dni = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($dni));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function crearUsuario($data, $defaultDataUser){
+    if(empty($data)||empty($defaultDataUser)){return false;}
+
+    $password = md5($data['password']);
+
+      if ($data['tipo_usuario'] == 2) {
+        $data["apell_user"] = $data['name_user'];
+      }
+
+    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>$data['username'],"password"=>$password,"correo"=>$data['correo'],"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"apellidos"=>$data['apell_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"status_carrera"=>$defaultDataUser['status_carrera'],"tipo_usuario"=>$data['tipo_usuario'],"id_escolaridad"=>$defaultDataUser['id_escolaridad'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
+    return $result;
+  }
+
+  public static function activarCuenta($id_usuario){
+    if(empty($id_usuario)){return false;}
+      return $GLOBALS['db']->update("mfo_usuario",array("estado"=>1),"id_usuario=".$id_usuario);
+  }
+
+  public static function obtieneFoto($idUsuario){
     if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
       $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
     }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$_SESSION['mfo_datos']['usuario']['id_usuario'].'.jpg';
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
     }
-    return $rutaImagen;
+    return $rutaImagen;   
   }
   
   public static function actualizarSession($idUsuario){
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
   }
 
-  public static function updateUsuario($data,$idUsuario,$file=false){
+  public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto){
 
     $foto = 0;
-    if($file['error'] != 4 )
+    if($imagen['error'] != 4)
     { 
       $foto = 1;
 
-    }else if($file['error'] == 4 && $_SESSION['mfo_datos']['usuario']['foto'] == 1){
+    }else if($imagen['error'] == 4 && $session_foto == 1){
       $foto = 1;
     }
 
-    Utils::imagen_upload($file,$idUsuario,PATH_PROFILE);
     if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1){
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"apellidos"=>$data['apellidos'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['status_carrera'],"id_escolaridad"=>$data['escolaridad']);
     }else{
@@ -80,8 +119,11 @@ class Modelo_Usuario{
     }
 
     $result = $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
-
+    if($result){
+       Utils::upload($imagen,$idUsuario,PATH_PROFILE,1);
+    }
     return $result;
   }
+
 }  
 ?>

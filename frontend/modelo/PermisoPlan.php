@@ -12,13 +12,12 @@ class Modelo_PermisoPlan{
     return false;
   }
   
-
   public static function busquedaPermisoxPlan($idplan, $permiso){
     if (empty($idplan)){ return false; }
-    $sql = "select mfo_accionsist.id_accionSist from mfo_accionsist 
-						inner join mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-						where mfo_accionsist.accion = ? and mfo_accionsist.estado = 1 and mfo_permisoplan.id_plan = ?";
-		return $GLOBALS['db']->auto_array($sql,array($permiso,$idplan));						
+    $sql = "SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = ? AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = ?";
+    return $rs = $GLOBALS['db']->auto_array($sql,array($permiso,$idplan));  						
   }
 
   public static function listaPermisoxPlan($idplan){

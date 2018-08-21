@@ -50,6 +50,9 @@ function obtieneControlador($nombre){
     case 'plan':
       return 'Plan';
     break;
+    case 'oferta':
+      return 'Oferta';
+    break;
     default:
       return 'Inicio'; 
     break;

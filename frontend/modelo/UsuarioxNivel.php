@@ -13,14 +13,34 @@ class Modelo_UsuarioxNivel{
     }
     return $datos;
   }
-  
-  public static function updateNiveles($data,$idUsuario){
 
-    $inserto = false;
-    foreach ($data as $key => $nivel) {
-        $inserto = $GLOBALS['db']->insert("mfo_usuarioxnivel",array("id_usuario"=>$idUsuario,"id_nivelInteres"=>$nivel));
+  public static function crearUsuarioNivel($nivel_interes, $user_id){
+    if (empty($nivel_interes)|| empty($user_id)) {return false;}
+
+    $insert = false;
+    foreach ($nivel_interes as $key => $nivel) {
+        $insert = $GLOBALS['db']->insert("mfo_usuarioxnivel", array("id_usuario"=>$user_id, "id_nivelInteres"=>$nivel));
     }
-    return $inserto;
+    return $insert;
+  }
+  
+  public static function updateNiveles($data_session,$data_form,$idUsuario){
+
+    $result = true;
+    $array_session = array();
+    $r = array_diff($data_session, $data_form);
+    if(!empty($r)){
+      $result = $GLOBALS['db']->delete("mfo_usuarioxnivel", 'id_nivelInteres IN('.implode(',', $r).') AND id_usuario = '.$idUsuario.';');
+    }
+    $diff_insert = array_diff($data_form, $data_session);
+
+    if(!empty($diff_insert)){
+      foreach ($diff_insert as $key => $id) {
+        array_push($array_session,array($idUsuario,$id));
+      }
+      $result = $GLOBALS['db']->insert_multiple("mfo_usuarioxnivel","id_usuario,id_nivelInteres",$array_session); 
+    }
+    return $result;
   }
 }  
 ?>

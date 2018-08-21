@@ -50,4 +50,15 @@ function fileOnload(e) {
 
 /* Carga de imagen dinamico */
 
+/* Carga dehoja de vida */
+
+$('#subirCV').change(function(e) {
+    $('#imagenBtn').attr("src",'http://localhost/repos_micamello/imagenes/cargado.png');
+    $('#texto_status').html('Hoja de vida Cargada');
+    $('#texto_status').addClass('arch_cargado')
+     
+});
+
+/* Carga dehoja de vida */
+
 
