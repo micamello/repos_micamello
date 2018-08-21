@@ -1,22 +1,3 @@
-<section id="home" class="home bg-black fix">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-          <div class="main_home text-center">
-            <div class="col-md-12">
-                <div class="hello_slid">
-                    <div class="slid_item">
-                        <div class="home_text ">
-                            <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></strong></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div><!--End off row-->
-    </div><!--End off container -->
-</section> <!--End off Home Sections-->
-
 <section id="product" class="product">
     <div class="container"><br><br>
         <div class="row">
@@ -41,7 +22,7 @@
                 <div class="col-md-4">
                     <div class="background_img">
                       <aside>                    
-                        <img class="profpic" src="<?php echo Modelo_Usuario::obtieneFoto(); ?>" style="border-radius: 50%;">
+                        <img class="profpic" src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" style="border-radius: 50%;">
                                     
                         <ul class="prof-sm"></ul>
                       </aside>

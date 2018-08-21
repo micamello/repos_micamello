@@ -155,36 +155,64 @@ class Utils{
     }
   }
 
-
-  static public function valida_imagen_upload($file){ 
+  static public function valida_upload($file,$tipo){ 
 
     $file_type = $file['type']; 
     $file_size = $file['size'];
     $file_temp = $file['tmp_name'];
     
-    $valido = false;
-    if ((($file_type == "image/jpg") ||($file_type == "image/jpeg") || ($file_type == "image/pjpeg")) && (!empty($file_temp)) && ($file_size <= PESO_IMAGEN))
+    $valida_arch = self::validaExt($file,$tipo);
+    if($tipo == 1){
+      $peso_valido = PESO_IMAGEN;
+    }else{
+      $peso_valido = PESO_ARCHIVO;
+    }
+
+    if (($valida_arch[0] == true) && (!empty($file_temp)) && ($file_size <= $peso_valido))
       return true;
     else
       return false;
   }
 
-  static public function imagen_upload($file,$nombre,$path){ 
+  static public function upload($file,$nombre,$path,$tipo){ 
 
     $file_type = $file['type']; 
     $file_temp = $file['tmp_name'];
-    //$file_name = $file['name'];
 
-    if ( self::valida_imagen_upload($file)){
-      $nombre .= ".jpg";
+    $valida_arch = self::validaExt($file,$tipo);
+    if ($valida_arch[0]){
+
       if (is_uploaded_file($file_temp)){
-        if(file_exists($path . $nombre )){
-          @unlink($path . $nombre );
+        if(isset($_SESSION['mfo_datos']['infohv']) && file_exists($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato'])){
+          @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato']);
         }
-        move_uploaded_file($file_temp, $path . $nombre);
+        $nombre .= ".".$valida_arch[1];
+        move_uploaded_file($file_temp, ''.$path . $nombre);
       }
     }
   } 
 
+  static public function validaExt($file,$tipo){
+
+    $ext = '';
+    $status = false;
+    if($tipo == 1){
+      if($file['type'] == 'image/jpg' || $file['type'] == 'image/jpeg' || $file['type'] == 'image/pjpeg'){
+        $ext = 'jpg';
+        $status = true;
+      }
+    }else{
+      if($file['type'] == 'application/pdf'){
+        $ext = 'pdf';
+        $status = true;
+      }
+      $encontro = strpos($file['type'], 'word');
+      if($encontro != false){
+        $ext = 'docx';
+        $status = true;
+      }
+    }
+    return array($status,$ext);
+  }
 }
 ?>

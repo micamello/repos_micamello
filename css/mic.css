@@ -549,3 +549,53 @@ body
   color: #737373;
   font-size: 11px;
 }
+/* vista de editar perfil */
+.arch_cargado{
+  color: #DF0101;
+  font-weight: bold;
+}
+/* vista de editar perfil */
+
+/* vista de ofertas */
+.shadow-panel
+{
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.shadow-panel:hover
+{
+  background-color: #cce6ff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+}
+
+.postulacion{
+  color:#FA5858;
+  font-weight: bold;
+}
+
+.empresa{
+  color:#0B0B61;
+  font-weight: bold;
+}
+
+.etiquetaOferta{
+  color: #66b3ff;
+}
+
+.lista{
+  list-style: none;
+  text-align:justify;
+}
+
+.filtros{
+  font-size:12px; 
+  border-radius: 5px; 
+  padding: 5px 10px 5px 10px; 
+  background-color: #0099cc; 
+  color: white; 
+  z-index:-1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+}
+/* vista de ofertas */

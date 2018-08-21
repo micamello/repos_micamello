@@ -14,13 +14,23 @@ class Modelo_UsuarioxNivel{
     return $datos;
   }
   
-  public static function updateNiveles($data,$idUsuario){
+  public static function updateNiveles($data_session,$data_form,$idUsuario){
 
-    $inserto = false;
-    foreach ($data as $key => $nivel) {
-        $inserto = $GLOBALS['db']->insert("mfo_usuarioxnivel",array("id_usuario"=>$idUsuario,"id_nivelInteres"=>$nivel));
+    $result = true;
+    $array_session = array();
+    $r = array_diff($data_session, $data_form);
+    if(!empty($r)){
+      $result = $GLOBALS['db']->delete("mfo_usuarioxnivel", 'id_nivelInteres IN('.implode(',', $r).') AND id_usuario = '.$idUsuario.';');
     }
-    return $inserto;
+    $diff_insert = array_diff($data_form, $data_session);
+
+    if(!empty($diff_insert)){
+      foreach ($diff_insert as $key => $id) {
+        array_push($array_session,array($idUsuario,$id));
+      }
+      $result = $GLOBALS['db']->insert_multiple("mfo_usuarioxnivel","id_usuario,id_nivelInteres",$array_session); 
+    }
+    return $result;
   }
 }  
 ?>
