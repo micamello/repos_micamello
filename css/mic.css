@@ -490,10 +490,10 @@ body
 }
 
 
-/*-------------------------------------------------------------*/
+.usuario{
+  color: #DF0101;
+}
 
-
-/*Testing multiselect*/
 
 .msg_error
 {
@@ -502,17 +502,18 @@ body
   height: 20px;
   text-align: middle;
   top: 7px;
-  padding: 11px 21px 6px 8px;
-  /*background-color: #ff4d4d;*/
+  padding: 11px 0px 6px 0px;
   color: red;
-  font-size: 10px;
+  font-size: 11px;
   right: 15px
+
 }
 
 .conditions_components
 {
   padding: 0 0 0 20px;
 }
+
 
 .breadmic_title{
   margin: 10px 0 0 0;
@@ -523,3 +524,62 @@ body
   border-radius: 8px;
   color: white;
 }
+
+.help-text{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: #737373;
+  font-size: 11px;
+}
+
+/* vista de editar perfil */
+.arch_cargado{
+  color: #DF0101;
+  font-weight: bold;
+}
+/* vista de editar perfil */
+
+/* vista de ofertas */
+.shadow-panel
+{
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.shadow-panel:hover
+{
+  background-color: #cce6ff;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+}
+
+.postulacion{
+  color:#FA5858;
+  font-weight: bold;
+}
+
+.empresa{
+  color:#0B0B61;
+  font-weight: bold;
+}
+
+.etiquetaOferta{
+  color: #66b3ff;
+}
+
+.lista{
+  list-style: none;
+  text-align:justify;
+}
+
+.filtros{
+  font-size:12px; 
+  border-radius: 5px; 
+  padding: 5px 10px 5px 10px; 
+  background-color: #0099cc; 
+  color: white; 
+  z-index:-1;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+}
+/* vista de ofertas */
+

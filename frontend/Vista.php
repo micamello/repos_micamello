@@ -32,6 +32,24 @@ class Vista {
     }    
     ob_end_flush();
   }
+
+  public static function display($pagina, $template_vars = array()){    
+    if (!empty($template_vars))
+        extract($template_vars);
+    
+    ob_start();
+
+    $ruta = RUTA_VISTA . "html/". $pagina . '.php';
+    if( file_exists($ruta) ){
+        require $ruta;       
+    }    
+    else{
+        echo 'Esta pagina no existe : '. $pagina;  
+    }
+        
+    $to_return = ob_get_clean();
+    return $to_return;
+  }
   
   private static function obtieneMsgError(){
     $msg = "";
@@ -85,7 +103,7 @@ class Vista {
 
   public static function renderJSON($template_vars=array()){
     array_walk_recursive($template_vars, function(&$item){
-          $item = utf8_encode( $item ); 
+          $item = utf8_encode($item); 
     });
     echo json_encode($template_vars);
   }

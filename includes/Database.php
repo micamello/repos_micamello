@@ -57,9 +57,9 @@ class Database{
   function execute( $query ){
     $this->query = $query;    
     Utils::log("SQL execute: $query");
-    $resultSet = mysqli_query( $this->connection,$query );
-    $this->resultSet = $resultSet;
-    return $resultSet;
+	  $resultSet = mysqli_query( $this->connection,$query );
+	  $this->resultSet = $resultSet;
+	  return $resultSet;
   }
   
   function insert( $table, $data ){   
@@ -83,6 +83,24 @@ class Database{
     $query .= ') VALUES (';
     $query .= $val_list;
     $query .= ')';
+    return $this->execute( $query );
+  }
+
+  function insert_multiple($table,$campos,$data){   
+
+    $valores = '';
+    foreach ($data as $key => $datos) {
+      $valores = '('.implode(',', $datos).'),';
+    }
+    $valores = substr($valores, 0,strlen($valores)-1);
+
+    $query  = 'INSERT INTO ';
+    $query .= $table;
+    $query .= ' (';
+    $query .= $campos;
+    $query .= ') VALUES';
+    $query .= $valores;
+    $query .= ';';
     return $this->execute( $query );
   }
 

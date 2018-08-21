@@ -246,12 +246,20 @@
     $block.empty().append(errors)
     $group.addClass('has-error has-danger')
 
-    // console.log(errors);
-    if(errors[0].textContent == 'Seleccione una de estas opciones.'){
-      
+
+    if(errors[0].textContent.indexOf("una de estas opciones")!=-1){
       errors[0].innerHTML = '<p>Marque una opción</p>';
-     // errors[0].outerHTML = '<p class="list-unstyled msg_error" style="font-size:11px; padding-right: 0px;padding-left: 0px;"><p>Marque una opción</p></p>';
     }
+
+    if(errors[0].textContent.indexOf("actualmente, el texto tiene")!=-1){
+      errors[0].innerHTML = '<p>La longitud mínima es de 10 caracteres</p>';
+    }
+
+    if(errors[0].textContent.indexOf("coincida con el solicitado")!=-1){
+      errors[0].innerHTML = '<p>El formato es incorrecto</p>';
+    }
+
+
     $group.hasClass('has-feedback')
       && $feedback.removeClass(this.options.feedback.success)
       && $feedback.addClass(this.options.feedback.error)

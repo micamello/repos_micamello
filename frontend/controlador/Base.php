@@ -8,7 +8,8 @@ abstract class Controlador_Base{
   function __construct($device='web'){
     global $_SUBMIT;
     $this->device = $device;
-    $this->datos = $_SUBMIT;    
+    $this->datos = $_SUBMIT;
+    
   }
   
   public function redirectToController($controladorNombre, $params = array()){  

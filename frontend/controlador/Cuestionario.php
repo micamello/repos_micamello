@@ -7,28 +7,49 @@ class Controlador_Cuestionario extends Controlador_Base {
   }
 
   public function construirPagina(){
+    
+    $_SESSION['mostrar_exito'] = '';
+    $_SESSION['mostrar_error'] = '';    
+
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
     //solo candidatos pueden ingresar a los test
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+    }else if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
+
+      if (isset($_SESSION['mfo_datos']['planes'])){
+        $this->redirectToController('publicar');
+      }else{
+        $this->redirectToController('planes');
+      }
     }
 
-    $test = Modelo_Cuestionario::testActualxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']); 
-    $nropreguntas = Modelo_Pregunta::obtieneNroPreguntasxTest($test);
-    $preguntaact = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test);
-    
-    $opciones = Modelo_Opcion::listadoxPregunta($preguntaact);
+    $nrotest = Modelo_Cuestionario::totalTest();
+    $test = Modelo_Cuestionario::testSiguientexUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']); 
+  
+    if ((!isset($_SESSION['mfo_datos']['planes']) || 
+        !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
+        $test["orden"] == 3){
+      $this->redirectToController('planes');
+    }
+        
+    if ($test["orden"] > $nrotest){
+      $this->redirectToController('velocimetro');
+    }
+
+    $nropreguntas = Modelo_Pregunta::obtieneNroPreguntasxTest($test["id_cuestionario"]);
+    $pregunta = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test["id_cuestionario"]);  
+    $this->data["pregunta"] = $pregunta;
+    $opciones = Modelo_Opcion::listadoxPregunta($pregunta["id_pre"]);
     $nro_opc = count($opciones);
 
     if (Utils::getParam('form_pregunta') == 1){
-      $this->guardarRespuestas($nro_opc,$test,$nropreguntas);
+      $this->guardarRespuestas($nro_opc,$test["id_cuestionario"],$nropreguntas);
     }
         
-    $pregunta = Modelo_Pregunta::obtienePreguntaxTest($preguntaact,$test);
-    
-    switch($test){
+    switch($test["orden"]){
       case 1:
         $destest = "Primer";
       break;
@@ -40,22 +61,24 @@ class Controlador_Cuestionario extends Controlador_Base {
       break;
     }
 
-    $menu = $this->obtenerMenu();
     $hoy = date("Y-m-d H:i:s");
-    $tags = array('menu'=>$menu,
-                  'nrotest'=>$test,
+    $tags = array('nrotest'=>$test["orden"],
                   'destest'=>$destest,
                   'nropreguntas'=>$nropreguntas,
-                  'preguntaact'=>$preguntaact,
-                  'pregunta'=>$pregunta,
+                  //'preguntaact'=>$preguntaact,
+                  'pregunta'=>$this->data["pregunta"],
                   'opciones'=>$opciones,
-                  'tiempo'=>$hoy,
-                  'menu'=>$menu);   
+                  'tiempo'=>$hoy);   
 
-    if ($preguntaact == 1){
+    if ($this->data["pregunta"]["orden"] == 1){
       $tags["template_js"][] = "cuestionario";
     }
     
+    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
+    $orden = rand(1,count($arrbanner))-1;
+    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $tags["show_banner"] = 1;
+
     Vista::render('cuestionario', $tags);    
   }
 
@@ -80,12 +103,16 @@ class Controlador_Cuestionario extends Controlador_Base {
           throw new Exception("Error al registrar la respuesta, por favor intente denuevo");
       }
 
-      $preguntaact = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test);      
-      if ($preguntaact == ($nropreguntas+1)){
+      //si ya completo todas las preguntas del test envia al velocimetro
+      if ($this->data["pregunta"]["orden"] == $nropreguntas){
         $this->guardarCuestionario($test); 
         $_SESSION['mostrar_exito'] = "Formulario completado exitosamente"; 
         $this->redirectToController('velocimetro');
       }
+      else{
+        $pregunta = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test);  
+        $this->data["pregunta"] = $pregunta;    
+      }       
 
     }
     catch( Exception $e ){

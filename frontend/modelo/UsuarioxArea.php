@@ -12,7 +12,7 @@ class Modelo_UsuarioxArea{
     	}
     }
     return $datos;
-  }
+  } 
 
   public static function crearUsuarioArea($area_select, $user_id){
     if (empty($area_select)|| empty($user_id)) {return false;}
@@ -23,6 +23,24 @@ class Modelo_UsuarioxArea{
     }
     return $insert;
   }
-  
-}  
+
+  public static function updateAreas($data_session,$data_form,$idUsuario){
+
+    $result = true;
+    $array_session = array();
+    $r = array_diff($data_session, $data_form);
+    if(!empty($r)){
+      $result = $GLOBALS['db']->delete("mfo_usuarioxarea", 'id_area IN('.implode(',', $r).') AND id_usuario = '.$idUsuario.';');
+    }
+    $diff_insert = array_diff($data_form, $data_session);
+
+    if(!empty($diff_insert)){
+      foreach ($diff_insert as $key => $id) {
+        array_push($array_session,array($idUsuario,$id));
+      }
+      $result = $GLOBALS['db']->insert_multiple("mfo_usuarioxarea","id_usuario,id_area",$array_session); 
+    }
+    return $result;
+  }
+}
 ?>

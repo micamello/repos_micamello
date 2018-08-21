@@ -1,33 +1,3 @@
-<section id="home" class="home bg-black fix">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-          <div class="main_home text-center">
-            <div class="col-md-12">
-                <div class="hello_slid">
-                    <div class="slid_item">
-                        <div class="home_text ">
-                            <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></strong></h2>
-                        </div>
-                    </div>
-                </div>
-            </div>
-          </div>
-        </div><!--End off row-->
-    </div><!--End off container -->
-</section> <!--End off Home Sections-->
-
-<section id="product" class="product">
-    <div class="container"><br><br>
-        <div class="row">
-            <div class="main_business">                  
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <div class="container">
     <div class="breadcrumb">
       <p class="text-center" style="font-size: 20px;">Datos del perfil</p>
@@ -41,7 +11,7 @@
                 <div class="col-md-4">
                     <div class="background_img">
                       <aside>                    
-                        <img class="profpic" src="<?php echo Modelo_Usuario::obtieneFoto(); ?>" style="border-radius: 50%;">
+                        <img class="profpic" src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" style="border-radius: 50%;">
                                     
                         <ul class="prof-sm"></ul>
                       </aside>
@@ -57,35 +27,51 @@
                         <main class="user-desc">
                                  
                             <div class="form-group col-md-6">
-                                <label for="nombres">Nombres</label>
+                                <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+                                    <label for="nombres">Nombres</label>
+                                <?php }else{ ?>
+                                    <label for="nombres">Nombre de la empresa</label>
+                                <?php } ?>
                                 <input class="form-control text-center" readonly id="nombres" value="<?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?>" />
                             </div>
 
+                            <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+                                <div class="form-group col-md-6">
+                                    <label for="apellidos">Apellidos</label>
+                                    <input class="form-control text-center" readonly id="apellidos" value="<?php echo $_SESSION['mfo_datos']['usuario']['apellidos']; ?>" />
+                                </div>
+                            <?php } ?>
+
                             <div class="form-group col-md-6">
-                                <label for="apellidos">Apellidos</label>
-                                <input class="form-control text-center" readonly id="apellidos" value="<?php echo $_SESSION['mfo_datos']['usuario']['apellidos']; ?>" />
+                                <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+                                    <label for="nombres">C&eacute;dula</label>
+                                <?php }else{ ?>
+                                    <label for="nombres">Ruc</label>
+                                <?php } ?>
+                                <input class="form-control text-center" readonly id="dni" value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
                             </div>
-                            
-                            <div class="form-group col-md-6">
-                                <label for="correo">Correo</label>
-                                <input class="form-control text-center" readonly id="correo" value="<?php echo $_SESSION['mfo_datos']['usuario']['correo']; ?>" />
-                            </div>
-                                                
+
                             <div class="form-group col-md-6">
                                 <label for="telefono">Tel&eacute;fono</label>
                                 <input class="form-control text-center" readonly id="telefono" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono']; ?>" />
                             </div>
-                            
-                            <div class="form-group col-md-6">
-                                <label for="dni">C&eacute;dula</label>
-                                <input class="form-control text-center" readonly id="dni" value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
-                            </div>
-                                                
-                            <div class="form-group col-md-6">
-                                <label for="username">Usuario</label>
-                                <input class="form-control text-center" readonly id="username" value="<?php echo $_SESSION['mfo_datos']['usuario']['username']; ?>" />
-                            </div>
-                            
+
+                            <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+                                <div class="form-group col-md-6">
+                                    <label for="correo">Correo</label>
+                                    <input class="form-control text-center" readonly id="correo" value="<?php echo $_SESSION['mfo_datos']['usuario']['correo']; ?>" />
+                                </div>
+                                                                              
+                                <div class="form-group col-md-6">
+                                    <label for="username">Usuario</label>
+                                    <input class="form-control text-center" readonly id="username" value="<?php echo $_SESSION['mfo_datos']['usuario']['username']; ?>" />
+                                </div>
+                            <?php }else{ ?>
+                                <div class="form-group col-md-6">
+                                    <label for="mayor_edad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?> Fecha de Nacimiento <?php }else{ ?> Fecha de Apertura <?php } ?></label>
+                                    <input class="form-control text-center" type="text" name="fecha" id="mayor_edad" value="<?php echo date('d-m-Y',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); ?>" readonly/>
+                                </div>
+                            <?php } ?>
                         </main>
                     </div>
                     <footer>
@@ -97,3 +83,4 @@
         </section>
     </div>
 </div>
+<br><br><br><br><br> 

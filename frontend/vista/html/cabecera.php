@@ -3,76 +3,40 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <meta name="google-site-verification" content="Hy5ewWRp0yOqH1Z_3Q59zSVffxTZDLa_T50VEoGBIBw" />
-        <title>MiCamello - Portal de Empleos en Ecuador</title>
-        <meta name="keywords" content="ofertas de trabajo, trabajos, empleos, bolsa de empleos, buscar trabajo, busco empleo, portal de empleo, ofertas de empleo, bolsa de empleo, trabajos en ecuador, paginas de empleo, empleos ecuador, camello">
-        <title>MiCamello - Portal de Empleos en Ecuador</title>
-        <meta name="description" content="Cientos de empresas publican las mejores ofertas en la bolsa de trabajo Mi Camello Ecuador. Busca empleo y apúntate y sé el primero en postular">
-        <link rel="alternate" hreflang="ec-EC" href="https://www.micamello.com.ec/" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta property="og:image" content="https://www.micamello.com.ec/" />
-        <link rel="icon" type="image/x-icon" href="<?php echo PUERTO."://".HOST;?>/imagenes/favicon.ico">
+  <head>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="Hy5ewWRp0yOqH1Z_3Q59zSVffxTZDLa_T50VEoGBIBw" />
+    <title>MiCamello - Portal de Empleos en Ecuador</title>
+    <meta name="keywords" content="ofertas de trabajo, trabajos, empleos, bolsa de empleos, buscar trabajo, busco empleo, portal de empleo, ofertas de empleo, bolsa de empleo, trabajos en ecuador, paginas de empleo, empleos ecuador, camello">
+    <title>MiCamello - Portal de Empleos en Ecuador</title>
+    <meta name="description" content="Cientos de empresas publican las mejores ofertas en la bolsa de trabajo Mi Camello Ecuador. Busca empleo y apúntate y sé el primero en postular">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:image" content="https://www.micamello.com.ec/" />
+    <link rel="icon" type="image/x-icon" href="<?php echo PUERTO."://".HOST;?>/imagenes/favicon.ico">
 
-        <!--Google Font link-->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/demo.css" />
+    <!--Google Font link-->
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/demo.css" />
 
-        <!-- <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/style.css" /> -->
-        <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css'>
-        <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
-        <!-- Archivo css micamello mic.css -->
-        <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
-        <!-- Archivo css micamello mic.css -->
+    <!-- <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/style.css" /> -->
+    <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
+    <!-- Archivo css micamello mic.css -->
+    <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
+    <!--Theme custom css -->
+    <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
+    <!-- Estilos del multiselect -->
+    <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/multiple-select.css">
 
-        <!-- <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/add-style.css"> -->
-
-
-        <!--Theme custom css -->
-        <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css">
-        <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
-        <!-- Estilos del multiselect -->
-        <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/multiple-select.css">
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/profile-style.css"> -->
-
-        <!--Theme Responsive css-->
-        <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/responsive.css" /> -->
-        
-        <!-- <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script> -->
-        <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.23.0/sweetalert2.all.js"></script> -->
-        <!-- <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-1.11.2.min.js"></script> -->
-        <!-- <script type="text/javascript">
-            function success_register()
-            {
-                swal(
-                  'Registro exitoso!',
-                  'POR FAVOR, REVISE SU CORREO Y ACTIVE SU CUENTA PARA COMPLETAR SU PERFIL!',
-                  'success'
-                )
-            }
-
-            function error_register()
-            {
-                swal({
-                  type: 'error',
-                  title: 'Error al registrar',
-                  text: 'REGISTRO DUPLICADO, POR FAVOR, REVISE Y VUELVA A INTENTARLO!'
-                })
-                $('#myModal').modal('show');
-            }
-
-            function error_register_emp()
-            {
-                swal({
-                  type: 'error',
-                  title: 'Error al registrar',
-                  text: 'REGISTRO DUPLICADO, POR FAVOR, REVISE Y VUELVA A INTENTARLO!'
-                })
-                $('#myModal2').modal('show');
-            }
-        </script> -->
+    <?php
+    if (isset($template_css) && is_array($template_css)){
+      foreach($template_css as $file_css){
+        echo '<link rel="stylesheet" href="'.PUERTO.'://'.HOST.'/css/'.$file_css.'.css">';
+      }  
+    }
+    ?>
 
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
     <script>
@@ -83,22 +47,21 @@
     </script>
 
     <?php if(isset($_SESSION['mostrar_banner'])){ ?>
-      <style>
-        /* Para vista perfil */
-        .home {
-            background: linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),url(<?php echo $_SESSION['mostrar_banner']; ?>) no-repeat scroll center center;    background-size: cover;
-            position: relative;
-            padding-top: 185px;
-            padding-bottom: 79px;
-            width: 100%;
-        }
-      </style>
+    <style>
+      /* Para vista perfil */
+      .home {
+          background: linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),url(<?php echo $_SESSION['mostrar_banner']; ?>) no-repeat scroll center center;    background-size: cover;
+          position: relative;
+          padding-top: 185px;
+          padding-bottom: 79px;
+          width: 100%;
+      }
+    </style>
     <?php } ?>
 
     </head>
 
 <body>
-
 
 
 
@@ -221,7 +184,7 @@ if( $_POST["btnemp"] ) {
                         <span class="icon-bar"></span>
                       </button>
                       <a class="navbar-brand">
-                        <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/'.$_SESSION['mfo_datos']['sucursal']['logo']; ?>" alt="micamellologo">
+                        <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.$_SESSION['mfo_datos']['sucursal']['id_sucursal'].'.'.$_SESSION['mfo_datos']['sucursal']['extensionlogo'];?>" alt="micamellologo">
                       </a>
                     </div>
                     <!-- End Header Navigation -->
@@ -238,7 +201,7 @@ if( $_POST["btnemp"] ) {
                           <?php } ?>
                           <?php if (isset($menu["submenu"])){ ?>                            
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto(); ?>" class="user_icon">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" class="user_icon">
                                 <ul class="dropdown-menu">
                                   <?php foreach($menu["submenu"] as $submenu){ ?>  
                                      <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
@@ -252,3 +215,43 @@ if( $_POST["btnemp"] ) {
                 </div> 
 
             </nav>
+
+<?php
+if(isset($show_banner)){ ?>
+<section id="home" class="home bg-black fix">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="main_home text-center">
+        <div class="col-md-12">
+          <div class="hello_slid">
+            <div class="slid_item">
+              <div class="home_text ">
+                <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></strong></h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div><!--End off row-->
+  </div><!--End off container -->
+</section> <!--End off Home Sections-->
+<?php } ?>
+
+<section id="product" class="product">
+  <br>
+  <?php if(!isset($show_banner)){ ?>
+    <br><br><br>
+  <?php } ?>
+    <!--mensajes de error y exito-->
+    <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
+      <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
+        <?php echo $sess_err_msg;?>
+      </div>  
+    <?php }?>
+
+    <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
+      <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
+        <?php echo $sess_suc_msg;?>
+      </div>  
+    <?php } ?>

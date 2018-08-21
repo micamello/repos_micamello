@@ -1,12 +1,4 @@
-<!--mensajes de error y exito-->
-
-<?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
-  <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
-    <?php echo $sess_err_msg;?>
-  </div>  
-<?php }?>
-
-
+  </section>
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="z-index:9999">
@@ -164,7 +156,7 @@
 </div>
 
 <?php } ?>
-
+<input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
 <section id="action" class="banner_info_email">
                 <div class="container">
                     <div class="row">
@@ -257,4 +249,5 @@ if (isset($template_js) && is_array($template_js)){
 ?>
 
 </body>
+
 </html>

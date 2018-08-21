@@ -15,7 +15,7 @@
 class Modelo_Sucursal{
   
   public static function obtieneListado(){
-    $sql = "SELECT s.icono, p.nombre_abr FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;";
+    $sql = "SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;";
     return $GLOBALS['db']->auto_array($sql,array(),MYSQL_ASSOC,true);
   }
 

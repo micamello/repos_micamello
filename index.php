@@ -47,8 +47,16 @@ function obtieneControlador($nombre){
     case 'velocimetro':
       return 'Velocimetro';
     break;
+<<<<<<< HEAD
     case 'publicar':
       return 'Publicar';
+=======
+    case 'plan':
+      return 'Plan';
+    break;
+    case 'oferta':
+      return 'Oferta';
+>>>>>>> desarrollo
     break;
     default:
       return 'Inicio'; 

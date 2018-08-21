@@ -1,16 +1,28 @@
-ErrorDocument 404 /error/page_not_found.html
-ErrorDocument 401 /error/login_required.html
+ErrorDocument 404 /error/pagina_no_encontrada.html
+ErrorDocument 401 /error/login_requerido.html
+
+<IfModule mod_headers.c> 
+  <FilesMatch "\\.(ico|css|png|gif|swf)$"> 
+    Header set Cache-Control "max-age=2628000, public" 
+  </FilesMatch> 
+  <FilesMatch "\\.(x?html?|php)$"> 
+    Header set Cache-Control "max-age=172800, public" 
+  </FilesMatch> 
+</IfModule>
 
 RewriteEngine on
 RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^http://(www\.)?micamello.ec/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^http://(www\.)?micamello.com.ec/.*$ [NC]
+RewriteCond %{HTTP_REFERER} !^https://(www\.)?micamello.com.ec/.*$ [NC]
 RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
-RewriteRule \.(gif|jpg|js|css)$ - [F]
+RewriteRule \.(gif|jpg|jpeg|png|js|css)$ - [F]
 
 RewriteEngine On
 RewriteCond %{HTTP_HOST} !^localhost
 RewriteCond %{REQUEST_URI} !^/repos_micamello$
 RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
+
+Options -Indexes
 
 ####################################################################
 
@@ -20,6 +32,10 @@ RewriteRule . - [E=REWRITEBASE:/]
 # RewriteBase - Development
 RewriteCond %{HTTP_HOST} ^localhost$
 RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
+
+#imagenes del profile
+RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
+RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&archivo=$2 [L]
 
 #login
 RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
@@ -35,6 +51,7 @@ RewriteRule ^registro/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=registro&opc
 #perfil
 RewriteRule ^perfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil [L]
 RewriteRule ^editarperfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil&opcion=paso1 [L]
+RewriteRule ^actualizar/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil&opcion=paso1 [L]
 
 #logout
 RewriteRule ^logout/$ %{ENV:REWRITEBASE}index.php?mostrar=logout [L]
@@ -45,5 +62,11 @@ RewriteRule ^cuestionario/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario [L]
 #velocimetro
 RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 
-#publicar
 RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
+
+#planes
+RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
+
+#ofertas
+RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta [L]
+>>>>>>> desarrollo

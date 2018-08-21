@@ -17,7 +17,6 @@ class Controlador_Inicio extends Controlador_Base {
     $arrtestimonio = Modelo_Testimonio::obtieneListado();
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
     $arrprovincia = Modelo_Provincia::obtieneListado();
-
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
                   'nro_candidato'=>$nro_candidato,

@@ -1,5 +1,4 @@
-
-
+﻿
 /*
 Author: Xpeedstudio
 Author URI: http://xpeedstudio.com
@@ -151,7 +150,7 @@ label.multi-select-menuitem {
 .checkout-wrap {
   color: #444;
   font-family: 'PT Sans Caption', sans-serif;
-  margin: 40px auto;
+  margin: 0px 0px 40px auto;
   max-width: 1200px;
   position: relative;
 }
@@ -163,6 +162,7 @@ ul.checkout-bar li {
   font-weight: 600;
   padding: 14px 20px 14px 80px;
   position: relative;
+  z-index: 999;
 }
 ul.checkout-bar li:before {
   -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
@@ -186,19 +186,20 @@ ul.checkout-bar li:before {
 ul.checkout-bar li.active {
   color: #8bc53f;
   font-weight: bold;
+  z-index: 999;
 }
 ul.checkout-bar li.active:before {
   background: #8bc53f;
-  z-index: 99999;
+  z-index: 999;
 }
 ul.checkout-bar li.visited {
   background: #ECECEC;
   color: #57aed1;
-  z-index: 99999;
+  z-index: 999;
 }
 ul.checkout-bar li.visited:before {
   background: #57aed1;
-  z-index: 99999;
+  z-index: 999;
 }
 ul.checkout-bar li:nth-child(1):before {
   content: "1";
@@ -1205,7 +1206,6 @@ Nav Menu style
     display: block;
     width: 80%;
 }
-
 .navbar-callus li a{
     font-size:14px;
     padding: 10px;
@@ -1236,14 +1236,14 @@ Home Section style
     z-index: 99999;
 }
 .nvac{
-	font-size:14px; margin-top:-10px
+  font-size:14px; margin-top:-10px
 }
 .giga {
     color: #369fe4;
     font-size: 60px;
 }
 .col-md-4.bordi{
-	border-right: 1px solid #ebebeb
+  border-right: 1px solid #ebebeb
 }
 .home{
     background: url(../images/cabecera-definitivo.gif) no-repeat scroll  center center;
@@ -2259,3 +2259,19 @@ work Section style
 }
 
 /* boton de cargar foto en el perfil */
+
+    © 2018 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+Press h to open a hovercard with more details.
