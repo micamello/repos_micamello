@@ -6,11 +6,6 @@
   </div>  
 <?php }?>
 
-<?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
-  <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
-    <?php echo $sess_suc_msg;?>
-  </div>  
-<?php } ?>
 
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
@@ -87,7 +82,7 @@
            <div class="col-md-6">
              <div class="form-group">
                <label for="numero_cand">Celular: </label><div class="help-block with-errors" id="error_custom_cel"></div>
-               <input type="text" class="form-control" name="numero_cand" id="numero_cand" onkeypress="return isNumber(event)" required>
+               <input type="text" class="form-control" name="numero_cand" id="numero_cand" onclick="numero_validate(this);" required>
              </div>
            </div> 
 
@@ -212,6 +207,33 @@
                                    
                                 </div><!-- End off widget item -->
                             </div><!-- End off col-md-3 -->
+                            <div class="col-md-6">
+                            <div class="foot_div_section">
+                              <div class="widget_item widget_latest sm-m-top-50" align="center">
+                                <div class="row">
+                                  <div class="form-inline">
+                                    <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
+                                      <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic"> 
+                                      <span class="text_icons_footer"><?php echo $sucursal["nombre_abr"];?></span>
+                                    <?php }?>                                                                                
+                                    <span class="separate_social_country">|</span>
+                                    <!-- </div>                                        
+                                    
+                                    <div class=""> -->
+                                        <span class="text_icons_footer">Siguenos en:</span>
+                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
+                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
+                                    
+                                    <a href="https://twitter.com/MiCamelloec" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">
+                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
+                                    
+                                    <a href="https://www.instagram.com/micamelloec/" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">
+                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
+                                  </div>
+                                </div>
+                              </div><!-- End off widget item -->
+                            </div>
+                          </div>
 
                             
                         </div>

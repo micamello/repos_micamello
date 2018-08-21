@@ -514,3 +514,12 @@ body
   padding: 0 0 0 20px;
 }
 
+.breadmic_title{
+  margin: 10px 0 0 0;
+  padding: 8px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #03a9f4;
+  border-radius: 8px;
+  color: white;
+}
