@@ -2,12 +2,15 @@
   <div class="row">
     <div class="main_business"><br><br>
       <div class="col-md-6">
-        <form action = "<?php echo PUERTO."://".HOST;?>/contrasena/" method = "post">
-          <h3 align="center"> INGRESE SU DIRECCI&Oacute;N DE CORREO ELECTR&Oacute;NICO</h3>
-          <div class="form-group has-feedback">
-            <input type="text" name="correo" id="correo" class="form-control" placeholder="Correo Electr&oacute;nico" required>
-            <input type="hidden" name="forgot_form" id="forgot_form" value="1">
-          </div>                              
+        <h3 align="center"> RECUPERACI&Oacute;N DE CONTRASE&Ntilde;A</h3>
+        <form action = "<?php echo PUERTO."://".HOST;?>/contrasena/" method = "post" id="form_contrasena">          
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>Correo Electr&oacute;nico:</label><div class="help-block with-errors"></div>
+              <input type="email" name="correo" id="correo" class="form-control" placeholder="Ej: camello@gmail.com" aria-describedby="correoHelp" required>
+              <input type="hidden" name="forgot_form" id="forgot_form" value="1">
+            </div>  
+          </div>                            
           <div class="row">          
             <div class="col-xs-12">
               <button type="submit" class="btn btn-success btn-block btn-flat">Enviar</button>

@@ -221,7 +221,7 @@
         <div class="main_brand text-center">
           <div class="col-md-2 col-sm-4 col-xs-12">
             <div class="brand_item auspiciantes_list">
-              <img src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'];?>.<?php echo $auspiciante['extensionicono'];?>" />
+              <img src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'];?>.<?php echo $auspiciante['extension'];?>" />
             </div>
           </div>
         </div>

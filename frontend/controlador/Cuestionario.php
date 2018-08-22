@@ -14,11 +14,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
-    //solo candidatos pueden ingresar a los test
-    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
-      Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
-    }else if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
-
+    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
       if (isset($_SESSION['mfo_datos']['planes'])){
         $this->redirectToController('publicar');
       }else{

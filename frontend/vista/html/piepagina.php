@@ -154,7 +154,6 @@
     </div>
   </div>
 </div>
-
 <?php } ?>
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
 <section id="action" class="banner_info_email">
@@ -193,8 +192,7 @@
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blanked">Términos y Condiciones</a>| 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/politicas_de_privacidad.pdf" target="blanked">Políticas de Privacidad</a>|
                                     <a class="legal_info_content" href="https://www.blog.micamello.com.ec" target="blanked">Blog</a>|
-                                    <a class="legal_info_content" href="form-
-                                    g.php">Recomendaciones</a>
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/">Recomendaciones</a>
                                     
                                    
                                 </div><!-- End off widget item -->

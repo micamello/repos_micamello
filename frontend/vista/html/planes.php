@@ -25,3 +25,19 @@
   </div>
 </div>
 <br><br>
+
+<!-- Modal -->
+<div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
+  <div class="modal-dialog " role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Mensaje de Confirmación</h5>        
+      </div>
+      <div class="modal-body"><p>Por favor confirme que desea comprar el plan seleccionado</p></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Comprar</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,5 @@
 <?php foreach($arreglo as $plan){ ?>
-  <a onclick="javascript:void(0);">
+  <a onclick="msg_compra(<?php echo $plan["id_plan"];?>);">
     <div class="col-xs-12 col-md-4">
       <div class="panel panel-primary <?php echo ($plan["promocional"]) ? "panelrojo" : "panelazul";?>">
         <?php if ($plan["promocional"]){ ?>
