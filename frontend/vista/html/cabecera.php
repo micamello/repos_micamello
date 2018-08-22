@@ -10,7 +10,6 @@
     <meta name="keywords" content="ofertas de trabajo, trabajos, empleos, bolsa de empleos, buscar trabajo, busco empleo, portal de empleo, ofertas de empleo, bolsa de empleo, trabajos en ecuador, paginas de empleo, empleos ecuador, camello">
     <title>MiCamello - Portal de Empleos en Ecuador</title>
     <meta name="description" content="Cientos de empresas publican las mejores ofertas en la bolsa de trabajo Mi Camello Ecuador. Busca empleo y apúntate y sé el primero en postular">
-    <link rel="alternate" hreflang="ec-EC" href="https://www.micamello.com.ec/" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta property="og:image" content="https://www.micamello.com.ec/" />
     <link rel="icon" type="image/x-icon" href="<?php echo PUERTO."://".HOST;?>/imagenes/favicon.ico">
@@ -240,7 +239,10 @@ if(isset($show_banner)){ ?>
 <?php } ?>
 
 <section id="product" class="product">
-  <br><br><br><br>
+  <br>
+  <?php if(!isset($show_banner)){ ?>
+    <br><br><br>
+  <?php } ?>
     <!--mensajes de error y exito-->
     <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
       <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
