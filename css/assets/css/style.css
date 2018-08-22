@@ -2256,6 +2256,7 @@ work Section style
     margin-left: auto;
     margin-right: auto;
     margin-top: -25px;
+    cursor: pointer;
 }
 
 /* boton de cargar foto en el perfil */

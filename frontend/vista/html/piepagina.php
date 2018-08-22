@@ -240,6 +240,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
+
 <?php
 if (isset($template_js) && is_array($template_js)){
   foreach($template_js as $file_js){
@@ -247,7 +248,7 @@ if (isset($template_js) && is_array($template_js)){
   }  
 }
 ?>
-
+ 
 </body>
 
 </html>
