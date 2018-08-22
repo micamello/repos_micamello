@@ -26,7 +26,7 @@ class Controlador_Contrasena extends Controlador_Base {
       $respuesta = Utils::getParam('token', '', false);
 
       if (empty($respuesta)){
-        throw new Exception("La recuperacion del password es fallida, por favor intente denuevo");
+        throw new Exception("La recuperación del password es fallida, por favor intente denuevo");
       }  
       $tags["token"] = $respuesta;              
       $respuesta = Utils::desencriptar($respuesta);      
@@ -37,10 +37,10 @@ class Controlador_Contrasena extends Controlador_Base {
       $token_valido = Utils::generarToken($idusuario,"CONTRASENA");
       
       if($token_valido != $token){
-        throw new Exception("El enlace para recuperacion es incorrecto, por favor ingrese denuevo su correo para el envio");      
+        throw new Exception("El enlace para recuperación es incorrecto, por favor ingrese denuevo su correo para el envio");      
       }
       if( strtotime($fecha." +".HORAS_VALIDO_PASSWORD." hours") < time() ){
-        throw new Exception("El enlace para recuperacion de contraseña ya no es valida, por favor ingrese denuevo su correo para el envio");        
+        throw new Exception("El enlace para recuperación de contraseña ya no es válida, por favor ingrese denuevo su correo para el envío");        
       }  
       if ( Utils::getParam('confirm_form') == 1 ){
         $campos = array('password'=>1,'password2'=>1);
@@ -60,7 +60,11 @@ class Controlador_Contrasena extends Controlador_Base {
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
     } 
-    
+    $tags["template_js"][] = "validator";    
+    $tags["template_js"][] = "ruc_jquery_validator";
+    $tags["template_js"][] = "selectr";
+    $tags["template_js"][] = "mic";
+    $tags["template_js"][] = "modal-register";
     Vista::render('confirmar_password', $tags);     
   }
   public function mostrarDefault(){
@@ -92,7 +96,12 @@ class Controlador_Contrasena extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     } 
-    Vista::render('recuperar_password', array());  
+    $tags["template_js"][] = "validator";    
+    $tags["template_js"][] = "ruc_jquery_validator";
+    $tags["template_js"][] = "selectr";
+    $tags["template_js"][] = "mic";
+    $tags["template_js"][] = "modal-register";
+    Vista::render('recuperar_password', $tags);  
   } 
   public function envioCorreo($correo,$nombres,$token){
     $asunto = "Recuperacion de Contraseña";

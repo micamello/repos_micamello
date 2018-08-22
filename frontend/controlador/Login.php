@@ -4,13 +4,13 @@ class Controlador_Login extends Controlador_Base {
   function __construct(){
     global $_SUBMIT;
     $this->data = $_SUBMIT;
-  }
-  
+  } 
+
   public function construirPagina(){
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
     }
-    
+
     if ( Utils::getParam('login_form') == 1 ){
       try{
         $campos = array('username'=>1, 'password'=>1);        
@@ -31,8 +31,12 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     } 
-    //Utils::log("MENSAJE ".$_SESSION['mostrar_error']);
-    Vista::render('login');  
+    $tags["template_js"][] = "validator";    
+    $tags["template_js"][] = "ruc_jquery_validator";
+    $tags["template_js"][] = "selectr";
+    $tags["template_js"][] = "mic";
+    $tags["template_js"][] = "modal-register";
+    Vista::render('login',$tags);  
   }
 
   public static function registroSesion($usuario){

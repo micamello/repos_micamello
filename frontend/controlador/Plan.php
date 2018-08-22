@@ -25,6 +25,7 @@ class Controlador_Plan extends Controlador_Base {
     $tags["show_banner"] = 1;
     
     $tags["template_css"][] = "planes";
+    $tags["template_js"][] = "planes";
 
     Vista::render('planes', $tags);    
   }

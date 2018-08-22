@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <div class="container">
   <div class="row">
     <div class="main_business">                                                    
@@ -27,7 +26,7 @@
         <div class="row">
           <div class="main_business">
             <div class="col-md-4" align="center">                                
-              <img src="<?php echo Modelo_Usuario::obtieneFoto(); ?>" style="border-radius: 5%;">                                
+              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" style="border-radius: 5%;">
               <br><h3><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></h3>
             </div>              
             <div class="col-md-3" align="center">
@@ -35,10 +34,9 @@
               <input type="hidden" id="valorporc" name="valorporc" value="<?php echo $valorporc;?>">              
             </div>
             <div class="col-md-5" align="center">    
-                <div class="chart-gauge"></div>
-                <div class="progress ">
-                  <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $valorporc;?>%"><?php echo $descrporc;?>
-                  </div>
+              <div class="chart-gauge"></div>
+              <div class="progress ">
+                <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $valorporc;?>%"><?php echo $descrporc;?>
                 </div>
               </div>          
             </div>          
@@ -57,13 +55,13 @@
             </div>
           </h2>
         </div>    
-        <div class="col-md-12" align="center">
-          <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/cuestionarios/<?php echo $testactual["imagen"];?>" style="width: 100%">
-        </div>            
-        <div class="row"> 
+        <div class="row">          
+          <div class="col-md-12" align="center">
+            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/cuestionarios/<?php echo $testactual["imagen"];?>" style="width: 100%">
+          </div> 
           <div class="col-md-4 col-xs-12 pull-right">
             <a href="<?php echo PUERTO;?>://<?php echo HOST;?>/<?php echo $enlaceboton;?>/" class="btn btn-success btn-block">SIGUIENTE CUESTIONARIO<br>SUBIR CV</a>
-          </div>
+          </div>        
         </div>
       </div>                      
     </div>

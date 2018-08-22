@@ -70,3 +70,11 @@ if (document.getElementById("nivel_interes"))
                 placeholder: 'Buscar...'
             });
 }
+
+if(document.getElementById('form_login')){
+  $("#form_login").validator();
+}
+
+if(document.getElementById('form_contrasena')){
+  $("#form_contrasena").validator();
+}

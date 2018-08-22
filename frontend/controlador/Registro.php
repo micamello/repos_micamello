@@ -18,8 +18,7 @@ class Controlador_Registro extends Controlador_Base {
       break;      
       default:
         $this->validateCampos();
-        Utils::doRedirect(PUERTO.'://'.HOST.'/');
-        Vista::render('inicio');
+        //Utils::doRedirect(PUERTO.'://'.HOST.'/');
       break;
     } 
   }
@@ -59,7 +58,7 @@ class Controlador_Registro extends Controlador_Base {
   public function validateCampos(){
     if ( Utils::getParam('register_form') == 1 ){
 
-      Utils::log("correo post: ".$_POST["correo"]);
+      //Utils::log("correo post: ".$_POST["correo"]);
       try{
         if ($_POST['tipo_usuario'] == 1) {
           $campos = array('username'=>1,'correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area_select'=>1,'nivel_interes'=>1);          
@@ -73,7 +72,7 @@ class Controlador_Registro extends Controlador_Base {
 
         $data = $this->camposRequeridos($campos);
 
-        Utils::log("correo data post: ".$data["correo"]);
+        //Utils::log("correo data post: ".$data["correo"]);
 
         $datousername = Modelo_Usuario::existeUsuario($data["username"]);
         if (empty($datousername)){
@@ -102,14 +101,19 @@ class Controlador_Registro extends Controlador_Base {
           throw new Exception("Ingrese un correo válido");
         }
 
+        $GLOBALS['db']->beginTrans();
+
         self::guardarUsuario($data);
-        Utils::doRedirect(PUERTO.'://'.HOST.'/');
+        
+        //Utils::doRedirect(PUERTO.'://'.HOST.'/');
           
       }
       catch( Exception $e ){
+        $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();  
-        Utils::doRedirect(PUERTO.'://'.HOST.'/');  
+        //Utils::doRedirect(PUERTO.'://'.HOST.'/');  
       }
+      Utils::doRedirect(PUERTO.'://'.HOST.'/');
     }    
   }
 
@@ -123,8 +127,8 @@ class Controlador_Registro extends Controlador_Base {
       $nivel_interes = $data['nivel_interes'];
     }
     
-              try {
-                $GLOBALS['db']->beginTrans();
+              //try {
+                //$GLOBALS['db']->beginTrans();
 
                 if(!Modelo_Usuario::crearUsuario($data, $defaultDataUser)){
                     throw new Exception("Ha ocurrido un error, intente nuevamente");
@@ -158,12 +162,12 @@ class Controlador_Registro extends Controlador_Base {
 
 
                 
-                } catch (Exception $e) {
-                        $_SESSION['mostrar_error'] = $e->getMessage();
-                        $GLOBALS['db']->rollback();
+                //} catch (Exception $e) {
+                //        $_SESSION['mostrar_error'] = $e->getMessage();
+                //        $GLOBALS['db']->rollback();
                         // Utils::log("Si dentra aqui es rollback eder");
-                        $this->redirectToController('inicio');
-                }
+                        //$this->redirectToController('inicio');
+                //}
   }
 
   public function correoActivacionCuenta($correo,$nombres,$token){
