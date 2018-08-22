@@ -6,8 +6,7 @@ class Modelo_Cuestionario{
 	public static function testSiguientexUsuario($usuario){
 		if (empty($usuario)){ return false; }
 		$sql = "select id_cuestionario, orden from mfo_cuestionario where orden = (select count(1) as nro from mfo_porcentajextest where id_usuario = ?) + 1";
-		$rs = $GLOBALS['db']->auto_array($sql,array($usuario));
-    return $rs["id_cuestionario"];		
+		return $GLOBALS['db']->auto_array($sql,array($usuario));
 	}
 
 	public static function guardarPorTest($valor,$usuario,$test){

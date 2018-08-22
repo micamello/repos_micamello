@@ -10,7 +10,6 @@ class Controlador_Perfil extends Controlador_Base
 
     public function construirPagina()
     {
-
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
@@ -23,7 +22,7 @@ class Controlador_Perfil extends Controlador_Base
         $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
 
         $msj1 = $imgArch1 = $btnDescarga = '';
-        //$msj2 = $imgArch2 = $btnSubir = '';
+
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
             case 'paso1':
@@ -36,20 +35,6 @@ class Controlador_Perfil extends Controlador_Base
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
 
-                if (Utils::getParam('actualizar') == 1) {
-                    $btnSig = 1;
-                    self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
-                }
-
-                $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                $nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
-
-                if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'cargarHv')) {
-                    $cargarHv = 1;
-                } else {
-                    $cargarHv = 0;
-                }
-
                 $imgArch2  = 'upload-icon.png';
                 $msj2      = 'Subir CV';
                 $ruta_arch = '#';
@@ -57,13 +42,42 @@ class Controlador_Perfil extends Controlador_Base
 
                 if (isset($_SESSION['mfo_datos']['infohv'])) {
 
-                    $imgArch1    = $_SESSION['mfo_datos']['infohv']['formato'] . '.png';
+                    if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
+                        $imgArch1 = 'actualizar.png';
+                    }else{
+                        $imgArch1    = $_SESSION['mfo_datos']['infohv']['formato'] . '.png';
+                    }
                     $msj1        = 'Hoja de vida Cargada';
                     $nombre_arch = $_SESSION['mfo_datos']['usuario']['id_usuario'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
                     $ruta_arch   = PUERTO . "://" . HOST . '/imagenes/usuarios/hv/' . $nombre_arch;
                     $btnDescarga = 1;
+                    
                     $msj2        = 'Actualizar CV';
                 }
+
+                if (Utils::getParam('actualizar') == 1) {
+                    $btnSig = 1;
+
+                    if(!isset($_FILES['subirCV'])){
+                        $_FILES['subirCV'] = '';
+                    }
+                    $btnSubir  = 0;
+
+                    self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
+                }
+
+                $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                $nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
+
+                if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'cargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
+                    $cargarHv = 1;
+                } else {
+                    $cargarHv = 0;
+                }
+
+                $cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+                $nrototaltest = Modelo_Cuestionario::totalTest();
+                $nrotestusuario = count($cuestionario);
 
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
@@ -82,14 +96,19 @@ class Controlador_Perfil extends Controlador_Base
                     'btnSubir'                  => $btnSubir,
                     'btnDescarga'               => $btnDescarga,
                     'ruta_arch'                 => $ruta_arch,
+                    'nrototaltest'              =>$nrototaltest,
+                    'nrotestusuario'            =>$nrotestusuario
                 );
 
                 $tags["template_js"][] = "selectr";
                 $tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
+                $tags["template_js"][] = "bootstrap-datepicker";
+                $tags["template_css"][] = "bootstrap-datepicker.min";
                 $tags["show_banner"]   = 1;
                 Vista::render('perfil_paso1', $tags);
+
                 break;
             case 'buscaCiudad':
                 $id_provincia = Utils::getParam('id_provincia', '', $this->data);
@@ -108,7 +127,7 @@ class Controlador_Perfil extends Controlador_Base
 
         try {
 
-            if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) {
+            if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
 
                 $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'status_carrera' => 1, 'area_select' => 1, 'nivel_interes' => 1);
             } else {
@@ -125,7 +144,8 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }
 
-            if ($archivo['error'] != 4) {
+            if (!empty($archivo) && $archivo['error'] != 4) {
+
                 $validaFile = Utils::valida_upload($archivo, 2);
                 if (empty($validaFile)) {
                     throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
@@ -142,12 +162,21 @@ class Controlador_Perfil extends Controlador_Base
                 throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es válida");
             }
 
+            if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
+
+                $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
+                if (empty($validaFechaNac)) {
+                    throw new Exception("Debe ser Mayor de edad");
+                }
+            }
+
             $GLOBALS['db']->beginTrans();
             if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'])) {
                 throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
             }
+            
+            if (!empty($archivo) && $archivo['error'] != 4) {
 
-            if ($archivo['error'] != 4) {
                 $arch = Utils::validaExt($archivo, 2);
                 if (isset($_SESSION['mfo_datos']['infohv'])) {
 
@@ -168,12 +197,15 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }
 
-            if (!Modelo_UsuarioxArea::updateAreas($_SESSION['mfo_datos']['usuarioxarea'], $data['area_select'], $idUsuario)) {
-                throw new Exception("Ha ocurrido un error al guardar las areas de interes, intente nuevamente");
-            }
+            if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
 
-            if (!Modelo_UsuarioxNivel::updateNiveles($_SESSION['mfo_datos']['usuarioxnivel'], $data['nivel_interes'], $idUsuario)) {
-                throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
+                if (!Modelo_UsuarioxArea::updateAreas($_SESSION['mfo_datos']['usuarioxarea'], $data['area_select'], $idUsuario)) {
+                    throw new Exception("Ha ocurrido un error al guardar las areas de interes, intente nuevamente");
+                }
+
+                if (!Modelo_UsuarioxNivel::updateNiveles($_SESSION['mfo_datos']['usuarioxnivel'], $data['nivel_interes'], $idUsuario)) {
+                    throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
+                }
             }
 
             $GLOBALS['db']->commit();

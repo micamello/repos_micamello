@@ -13,13 +13,13 @@ class Controlador_Login extends Controlador_Base {
     
     if ( Utils::getParam('login_form') == 1 ){
       try{
-        $campos = array('username'=>1, 'password'=>1);
+        $campos = array('username'=>1, 'password'=>1);        
         $data = $this->camposRequeridos($campos);                        
         $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password"]);
-        if (!empty($usuario)){            
-           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){
+        if (!empty($usuario)){   
+           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){            
              throw new Exception("Error en el sistema, por favor intente nuevamente");
-           }
+           }                                 
            self::registroSesion($usuario);           
         }
         else{
@@ -31,7 +31,7 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     } 
-
+    //Utils::log("MENSAJE ".$_SESSION['mostrar_error']);
     Vista::render('login');  
   }
 

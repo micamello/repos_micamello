@@ -48,8 +48,47 @@ class Modelo_Usuario{
     return $GLOBALS['db']->update("mfo_usuario",array("ultima_sesion"=>date("Y-m-d H:i:s")),"id_usuario=".$id);
   }
 
-  public static function obtieneFoto($idUsuario){
+  // Búsqueda del username en la BD
+  public static function existeUsuario($username){
+    if(empty($username)){ return false; }
+    $sql = "select * from mfo_usuario where username = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($username));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
 
+  public static function existeCorreo($correo){
+    if(empty($correo)){ return false; }
+    $sql = "select * from mfo_usuario where correo = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($correo));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function existeDni($dni){
+    if(empty($dni)){ return false; }
+    $sql = "select * from mfo_usuario where dni = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($dni));
+    return (!empty($rs['id_usuario'])) ? false : true;
+  }
+
+  public static function crearUsuario($data, $defaultDataUser){
+    if(empty($data)||empty($defaultDataUser)){return false;}
+
+    $password = md5($data['password']);
+
+      if ($data['tipo_usuario'] == 2) {
+        $data["apell_user"] = $data['name_user'];
+      }
+
+    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>$data['username'],"password"=>$password,"correo"=>$data['correo'],"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"apellidos"=>$data['apell_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"status_carrera"=>$defaultDataUser['status_carrera'],"tipo_usuario"=>$data['tipo_usuario'],"id_escolaridad"=>$defaultDataUser['id_escolaridad'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
+    return $result;
+  }
+
+  public static function activarCuenta($id_usuario){
+    if(empty($id_usuario)){return false;}
+      return $GLOBALS['db']->update("mfo_usuario",array("estado"=>1),"id_usuario=".$id_usuario);
+  }
+
+  public static function obtieneFoto($idUsuario){
     if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
       $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
     }else{
@@ -85,5 +124,27 @@ class Modelo_Usuario{
     }
     return $result;
   }
+
+  public static function validarFechaNac($fecha){
+
+    //Creamos objeto fecha desde los valores recibidos
+    $nacio = DateTime::createFromFormat('Y-m-d', $fecha);
+
+    //Calculamos usando diff y la fecha actual
+    $calculo = $nacio->diff(new DateTime());
+
+    //Obtenemos la edad
+    $edad =  $calculo->y;    
+
+    if ($edad < 18) 
+    {
+        //echo "Usted es menor de edad. Su edad es: $edad\n";
+        return false;  
+     }else{
+        //echo "Usted es mayor de edad. Su edad es: $edad\n";
+        return true;  
+    }
+  }
+
 }  
 ?>

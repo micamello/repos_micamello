@@ -1,14 +1,3 @@
-Media queries configurations*/
-/*@media screen and (max-width: 650px) {
-.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-      margin-left: 0px;*/
-      /*etiquetas css clases y id*/
-    /*}*/
-/*}*/
-
-/*Media queries configurations*/
-
-
 /*Estilos micamello*/
 body
 {
@@ -43,19 +32,6 @@ body
   left: 10px;
   border-radius: 100%;
   background-color: #b8c5cc;
-  /*-webkit-border-radius: 60px;*/
-    /*-webkit-background-clip: padding-box;*/
-    /*-moz-border-radius: 60px;*/
-    /*-moz-background-clip: padding;*/
-  /*width: 60px;*/
-    /*height: 60px;*/
-    /*-webkit-border-radius: 60px;*/
-    /*-webkit-background-clip: padding-box;*/
-    /*-moz-border-radius: 60px;*/
-    /*-moz-background-clip: padding;*/
-    /*border-radius: 60px;*/
-    /*background-clip: padding-box;*/
-    /*margin: 7px 0 0 5px;*/
 }
 
 .navbar {
@@ -154,13 +130,6 @@ body
     text-decoration: none;
     background-color: #f5f5f5;
 }
-
-/*Navbar brand imagen logo*/
-/*@media screen and (max-width: 992px) and (min-width: 649px) {
-.navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-    margin-left: 105px;
-}
-}*/
 
 .dropdown-menu>li>a:focus{
     color: #262626;
@@ -520,9 +489,11 @@ body
   padding: 3px;
 }
 
+
 .usuario{
   color: #DF0101;
 }
+
 
 .msg_error
 {
@@ -537,11 +508,11 @@ body
   right: 15px
 
 }
+
 .conditions_components
 {
   padding: 0 0 0 20px;
 }
-
 
 .help-text{
   margin-top: 5px;
@@ -549,11 +520,13 @@ body
   color: #737373;
   font-size: 11px;
 }
+
 /* vista de editar perfil */
 .arch_cargado{
   color: #DF0101;
   font-weight: bold;
 }
+
 /* vista de editar perfil */
 
 /* vista de ofertas */
@@ -599,3 +572,4 @@ body
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
 }
 /* vista de ofertas */
+

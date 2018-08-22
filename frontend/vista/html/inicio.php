@@ -1,7 +1,3 @@
-<body>
-    <!--Home Sections-->
-
-
 <div class="">
     <div class="row">
     <?php 
@@ -80,7 +76,9 @@
 
                                     <div class="col-md-3 col-sm-6 col-xs-12" align="center">
                                         <i class="<?php echo $area['ico']; ?>" aria-hidden="true"></i>
-                                        <h5><a href="javascript:void(0);"><?php echo $area['nombre']; ?></a></h5>
+
+                                        <h5><a href="javascript:void(0);"><?php echo utf8_encode($area['nombre']);?></a></h5>
+
                                         <div class="nvac">(<?php echo $nro_areas; ?> vacantes)</div><br><br>
                                     </div>
                                 <?php } ?>
@@ -107,14 +105,14 @@
                             <div class="col-md-6">
                                 <div class="test_item fix">
                                     <div class="item_img">
-                                        <img class="img-circle" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/testimonios/<?php echo $testimonio['imagen'] ?>"  />
+                                        <img class="img-circle" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/testimonios/<?php echo $testimonio['id_testimonio'];?>.<?php echo $testimonio['extension'];?>"  />
                                         <i class="fa fa-quote-left"></i>
                                     </div>
 
                                     <div class="item_text">
-                                        <h5><?php echo $testimonio['nombre'] ?></h5>
-                                        <h6><?php echo $testimonio['profesion'] ?></h6>
-                                        <p><?php echo $testimonio['descripcion'] ?></p>
+                                        <h5><?php echo utf8_encode($testimonio['nombre']);?></h5>
+                                        <h6><?php echo utf8_encode($testimonio['profesion']);?></h6>
+                                        <p><?php echo utf8_encode($testimonio['descripcion']);?></p>
                                     </div>
                                 </div>
                             </div>
@@ -216,29 +214,18 @@
 <!-- FIN PUBLICIDAD -->
 
 <!-- Listado de auspiciantes -->
-            <section id="brand" class="brand fix roomy-70">
-                <div class="container">
-                    <div class="row">
-                    <?php foreach($arrauspiciante as $auspiciante) {  ?>
-
-                        <div class="main_brand text-center">
-                            <div class="col-md-2 col-sm-4 col-xs-12">
-                                <div class="brand_item auspiciantes_list">
-                                    <img src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['imagen'] ?>" />
-                                </div>
-                            </div>
-                        </div>
-
-                    <?php } ?>
-
-                    </div>
-                </div>
-            </section><!-- End off Brand section -->
-
-<!-- Listado de auspiciantes -->
-
+<section id="brand" class="brand fix roomy-70">
+  <div class="container">
+    <div class="row">
+      <?php foreach($arrauspiciante as $auspiciante) { ?>
+        <div class="main_brand text-center">
+          <div class="col-md-2 col-sm-4 col-xs-12">
+            <div class="brand_item auspiciantes_list">
+              <img src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'];?>.<?php echo $auspiciante['extensionicono'];?>" />
+            </div>
+          </div>
         </div>
-
-
-        <!-- JS includes -->   
-</body>
+      <?php } ?>
+    </div>
+  </div>
+</section><!-- End off Brand section -->

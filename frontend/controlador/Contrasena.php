@@ -1,6 +1,5 @@
 <?php
 class Controlador_Contrasena extends Controlador_Base {
-
   function __construct(){
     global $_SUBMIT;
     $this->data = $_SUBMIT;
@@ -21,11 +20,11 @@ class Controlador_Contrasena extends Controlador_Base {
       break;
     }        
   }
-
   public function validarToken(){
     $tags = array();
     try{            
       $respuesta = Utils::getParam('token', '', false);
+
       if (empty($respuesta)){
         throw new Exception("La recuperacion del password es fallida, por favor intente denuevo");
       }  
@@ -40,11 +39,9 @@ class Controlador_Contrasena extends Controlador_Base {
       if($token_valido != $token){
         throw new Exception("El enlace para recuperacion es incorrecto, por favor ingrese denuevo su correo para el envio");      
       }
-
       if( strtotime($fecha." +".HORAS_VALIDO_PASSWORD." hours") < time() ){
         throw new Exception("El enlace para recuperacion de contraseña ya no es valida, por favor ingrese denuevo su correo para el envio");        
       }  
-
       if ( Utils::getParam('confirm_form') == 1 ){
         $campos = array('password'=>1,'password2'=>1);
         $data = $this->camposRequeridos($campos);
@@ -66,7 +63,6 @@ class Controlador_Contrasena extends Controlador_Base {
     
     Vista::render('confirmar_password', $tags);     
   }
-
   public function mostrarDefault(){
     if ( Utils::getParam('forgot_form') == 1 ){
       try{
@@ -76,7 +72,6 @@ class Controlador_Contrasena extends Controlador_Base {
         if (!Utils::es_correo_valido($data["correo"])){
           throw new Exception("Dirección de correo electrónico no valido");
         }
-
         $datousuario = Modelo_Usuario::busquedaPorCorreo($data["correo"]);
         if (empty($datousuario)){
           throw new Exception("Dirección de correo electrónico no existe");
@@ -86,7 +81,6 @@ class Controlador_Contrasena extends Controlador_Base {
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente denuevo");
         }
-
         $token .= "||".$datousuario["id_usuario"]."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         if (!$this->envioCorreo($datousuario['correo'],$datousuario['nombres'].' '.$datousuario['apellidos'],$token)){
@@ -98,10 +92,8 @@ class Controlador_Contrasena extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     } 
-
-    Vista::render('recuperar_password', $tags);  
+    Vista::render('recuperar_password', array());  
   } 
-
   public function envioCorreo($correo,$nombres,$token){
     $asunto = "Recuperacion de Contraseña";
     $body = "Estimado, ".$nombres."<br>";
@@ -114,6 +106,5 @@ class Controlador_Contrasena extends Controlador_Base {
       return false;
     }
   }
-
 }  
 ?>

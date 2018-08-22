@@ -1,0 +1,8 @@
+.headingazul { background-color:#262D5D!important;border-color:#262D5D!important; }
+.headingrojo { background-color:#a21414!important;border-color:#a21414!important; }
+.bodyrojo { border:2px solid #a21414; }
+.bodyazul { border:2px solid #262D5D; }
+.panelrojo { border-color:#a21414; }
+.panelazul { border-color:#262D5D; }
+.titulo { color:red;font-size:30px; }
+.aut{ text-align:justify; }

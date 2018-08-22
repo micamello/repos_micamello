@@ -13,6 +13,16 @@ class Modelo_UsuarioxNivel{
     }
     return $datos;
   }
+
+  public static function crearUsuarioNivel($nivel_interes, $user_id){
+    if (empty($nivel_interes)|| empty($user_id)) {return false;}
+
+    $insert = false;
+    foreach ($nivel_interes as $key => $nivel) {
+        $insert = $GLOBALS['db']->insert("mfo_usuarioxnivel", array("id_usuario"=>$user_id, "id_nivelInteres"=>$nivel));
+    }
+    return $insert;
+  }
   
   public static function updateNiveles($data_session,$data_form,$idUsuario){
 

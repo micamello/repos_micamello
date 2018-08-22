@@ -1,14 +1,3 @@
-<section id="product" class="product">
-    <div class="container"><br><br>
-        <div class="row">
-            <div class="main_business">                  
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
 <div class="container">
     <div class="breadcrumb">
       <p class="text-center" style="font-size: 20px;">Datos del perfil</p>
@@ -94,3 +83,4 @@
         </section>
     </div>
 </div>
+<br><br><br><br><br> 

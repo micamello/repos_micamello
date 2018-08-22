@@ -32,6 +32,24 @@ class Vista {
     }    
     ob_end_flush();
   }
+
+  public static function display($pagina, $template_vars = array()){    
+    if (!empty($template_vars))
+        extract($template_vars);
+    
+    ob_start();
+
+    $ruta = RUTA_VISTA . "html/". $pagina . '.php';
+    if( file_exists($ruta) ){
+        require $ruta;       
+    }    
+    else{
+        echo 'Esta pagina no existe : '. $pagina;  
+    }
+        
+    $to_return = ob_get_clean();
+    return $to_return;
+  }
   
   private static function obtieneMsgError(){
     $msg = "";
@@ -59,8 +77,8 @@ class Vista {
     $menu = array();
     if( !Modelo_Usuario::estaLogueado() ){
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
-      $menu["menu"][] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Candidato", "modal"=>"myModal");
-      $menu["menu"][] = array("href"=>"#", "onclick"=>"hidden_menuuser_small();", "nombre"=>"Empresa", "modal"=>"myModal2");
+      $menu["menu"][] = array("href"=>"#", "onclick"=>"modal_set(1);", "nombre"=>"Candidato");
+      $menu["menu"][] = array("href"=>"#", "onclick"=>"modal_set(2);", "nombre"=>"Empresa");
     }
     else{
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 

@@ -7,6 +7,10 @@ class Controlador_Cuestionario extends Controlador_Base {
   }
 
   public function construirPagina(){
+    
+    $_SESSION['mostrar_exito'] = '';
+    $_SESSION['mostrar_error'] = '';    
+
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
@@ -16,29 +20,36 @@ class Controlador_Cuestionario extends Controlador_Base {
     }else if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
 
       if (isset($_SESSION['mfo_datos']['planes'])){
-        Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
+        $this->redirectToController('publicar');
       }else{
-        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+        $this->redirectToController('planes');
       }
     }
-    
+
     $nrotest = Modelo_Cuestionario::totalTest();
     $test = Modelo_Cuestionario::testSiguientexUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']); 
-    if ($test > $nrotest){
+  
+    if ((!isset($_SESSION['mfo_datos']['planes']) || 
+        !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
+        $test["orden"] == 3){
+      $this->redirectToController('planes');
+    }
+        
+    if ($test["orden"] > $nrotest){
       $this->redirectToController('velocimetro');
     }
 
-    $nropreguntas = Modelo_Pregunta::obtieneNroPreguntasxTest($test);
-    $pregunta = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test);  
+    $nropreguntas = Modelo_Pregunta::obtieneNroPreguntasxTest($test["id_cuestionario"]);
+    $pregunta = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test["id_cuestionario"]);  
     $this->data["pregunta"] = $pregunta;
     $opciones = Modelo_Opcion::listadoxPregunta($pregunta["id_pre"]);
     $nro_opc = count($opciones);
 
     if (Utils::getParam('form_pregunta') == 1){
-      $this->guardarRespuestas($nro_opc,$test,$nropreguntas);
+      $this->guardarRespuestas($nro_opc,$test["id_cuestionario"],$nropreguntas);
     }
         
-    switch($test){
+    switch($test["orden"]){
       case 1:
         $destest = "Primer";
       break;
@@ -51,7 +62,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     }
 
     $hoy = date("Y-m-d H:i:s");
-    $tags = array('nrotest'=>$test,
+    $tags = array('nrotest'=>$test["orden"],
                   'destest'=>$destest,
                   'nropreguntas'=>$nropreguntas,
                   //'preguntaact'=>$preguntaact,
@@ -66,6 +77,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
     $orden = rand(1,count($arrbanner))-1;
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $tags["show_banner"] = 1;
 
     Vista::render('cuestionario', $tags);    
   }

@@ -151,6 +151,7 @@
 
   Validator.prototype.runValidators = function ($el) {
     var errors   = []
+
     var deferred = $.Deferred()
 
     $el.data('bs.validator.deferred') && $el.data('bs.validator.deferred').reject()
@@ -234,7 +235,7 @@
     var $group = $el.closest('.form-group')
     var $block = $group.find('.help-block.with-errors')
     var $feedback = $group.find('.form-control-feedback')
-
+    // console.log(errors);
     if (!errors.length) return
 
     errors = $('<p/>')
@@ -244,6 +245,7 @@
     $block.data('bs.validator.originalContent') === undefined && $block.data('bs.validator.originalContent', $block.html())
     $block.empty().append(errors)
     $group.addClass('has-error has-danger')
+
 
     if(errors[0].textContent.indexOf("una de estas opciones")!=-1){
       errors[0].innerHTML = '<p>Marque una opción</p>';
@@ -255,6 +257,10 @@
 
     if(errors[0].textContent.indexOf("coincida con el solicitado")!=-1){
       errors[0].innerHTML = '<p>El formato es incorrecto</p>';
+    }
+
+    if(errors[0].textContent.indexOf("El campo está incompleto o incluye una fecha no válida")!=-1){
+      errors[0].innerHTML = '<p>El formato fecha es incorrecto</p>';
     }
 
     $group.hasClass('has-feedback')
