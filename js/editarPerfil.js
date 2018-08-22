@@ -1,4 +1,3 @@
-
 /* Carga select dependiente (ciudad) */
 $('#provincia').change(function()
 {
@@ -50,7 +49,7 @@ function fileOnload(e) {
 
 /* Carga de imagen dinamico */
 
-/* Carga dehoja de vida */
+/* Carga de hoja de vida */
 
 $('#subirCV').change(function(e) {
     $('#imagenBtn').attr("src",'http://localhost/repos_micamello/imagenes/actualizar.png');
@@ -59,6 +58,74 @@ $('#subirCV').change(function(e) {
      
 });
 
-/* Carga dehoja de vida */
+/* Carga de hoja de vida */
 
 
+/* valida si el candidato es mayor de edad */
+
+function calcularEdad()
+{
+    var fecha=document.getElementById("fecha_nacimiento").value;
+
+    // Si la fecha es correcta, calculamos la edad
+    var values=fecha.split("-");
+    var dia = values[2];
+    var mes = values[1];
+    var ano = values[0];
+
+    // cogemos los valores actuales
+    var fecha_hoy = new Date();
+    var ahora_ano = fecha_hoy.getYear();
+    var ahora_mes = fecha_hoy.getMonth()+1;
+    var ahora_dia = fecha_hoy.getDate();
+
+    // realizamos el calculo
+    var edad = (ahora_ano + 1900) - ano;
+    if ( ahora_mes < mes )
+    {
+        edad--;
+    }
+    if ((mes == ahora_mes) && (ahora_dia < dia))
+    {
+        edad--;
+    }
+    if (edad > 1900)
+    {
+        edad -= 1900;
+    }
+
+    if(edad >= 18){
+        
+        $("#mayoria").attr({
+            class: 'form-group',
+        });
+        nodo = document.getElementById("error");
+        nodo.innerHTML = '';
+        $("#boton").removeAttr('disabled');
+
+    }else{
+
+        nodo = document.getElementById("error");
+        nodo.innerHTML = '';
+        var elem1 = document.createElement('P');
+        var t = document.createTextNode("Debe ser mayor de edad"); 
+        elem1.appendChild(t);
+
+        var elem2 = document.createElement("P");             
+        elem2.classList.add('list-unstyled');
+        elem2.classList.add('msg_error');
+        elem2.appendChild(elem1); 
+
+        elem2.appendChild(elem1); 
+        nodo.appendChild(elem2); 
+
+        $("#mayoria").attr({
+            class: 'has-error',
+        });
+
+        $("#boton").attr({
+            disabled: 'disabled',
+        });
+    }
+}
+/* valida si el candidato es mayor de edad */

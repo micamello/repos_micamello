@@ -259,6 +259,9 @@
       errors[0].innerHTML = '<p>El formato es incorrecto</p>';
     }
 
+    if(errors[0].textContent.indexOf("El campo está incompleto o incluye una fecha no válida")!=-1){
+      errors[0].innerHTML = '<p>El formato fecha es incorrecto</p>';
+    }
 
     $group.hasClass('has-feedback')
       && $feedback.removeClass(this.options.feedback.success)

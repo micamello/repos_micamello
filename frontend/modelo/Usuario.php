@@ -125,5 +125,26 @@ class Modelo_Usuario{
     return $result;
   }
 
+  public static function validarFechaNac($fecha){
+
+    //Creamos objeto fecha desde los valores recibidos
+    $nacio = DateTime::createFromFormat('Y-m-d', $fecha);
+
+    //Calculamos usando diff y la fecha actual
+    $calculo = $nacio->diff(new DateTime());
+
+    //Obtenemos la edad
+    $edad =  $calculo->y;    
+
+    if ($edad < 18) 
+    {
+        //echo "Usted es menor de edad. Su edad es: $edad\n";
+        return false;  
+     }else{
+        //echo "Usted es mayor de edad. Su edad es: $edad\n";
+        return true;  
+    }
+  }
+
 }  
 ?>

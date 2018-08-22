@@ -1,13 +1,14 @@
-<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
-
-<div class="checkout-wrap">
-  <ul class="checkout-bar">
-    <li class="visited"><a href="#">Registro</a></li>    
-    <li class="active">Completar Perfil</li>
-    <li class="">Formulario 1</li>
-    <li class="">Formulario 2</li>
-    <li class="">Formulario 3</li>
-  </ul>
+<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
+<div class="container">
+	<div class="checkout-wrap">
+	  <ul class="checkout-bar">
+	    <li class="visited">Registro</li>    
+	    <li class="active">Completar Perfil</li>
+	    <?php for($i=1;$i<=$nrototaltest;$i++){ ?>
+	      <li class="">Formulario <?php echo $i;?></li>                
+	    <?php } ?>
+	  </ul>
+	</div>
 </div>
 <br>
 <?php } ?>
@@ -35,7 +36,7 @@
 	                       <?php if($btnDescarga == 1){ ?>
 		                       	<div <?php if($btnSig == 0){ echo 'class="pull-left" style="position: relative; margin-left: 15px;"'; } ?>>
 			                        <label for="descargarCV" class="custom_file">
-			                        	<a class="" href="<?php echo $ruta_arch; ?>" target="_blank">
+			                        	<a href="<?php echo $ruta_arch; ?>" target="_blank">
 			                        		<img id="imagenBtn1" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch1";?>" width="50px">
 			                        	</a>
 			                        </label>
@@ -74,18 +75,18 @@
 		                                        <label for="username">Usuario:
 		                                        	<h4 class="usuario">
 		                                        	   <u><?php echo $_SESSION['mfo_datos']['usuario']['username']; ?></u>
-		                                        	</h4><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != 1) { ?>
+		                                        	</h4><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO) { ?>
 		                                        	<h6>RUC: <?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?></h6><?php } ?>
 		                                        </label>		                                        
 		                                    </div>
 	                                    </div>
-	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 	                                    <div class="col-md-6">
 		                                    <div class="form-group">
 
 		                                        <label for="dni">C&eacute;dula</label><div class="help-block with-errors"></div>
 
-		                                        <input class="form-control" id="dni" readonly value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
+		                                        <input class="form-control" type="text" id="dni" readonly value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
 		                                    </div>
 	                                    </div>
 	                                	<?php } ?>
@@ -100,15 +101,15 @@
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
 
-	                                            <label for="nombres"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?> Nombres <?php }else{ ?> Nombre de la empresa<?php } ?></label><div class="help-block with-errors"></div>
-	                                			<input class="form-control" id="nombres" name="nombres" value="<?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" <?php if($btnSig == 1){ echo 'readonly'; } ?> required/>
+	                                            <label for="nombres"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nombres <?php }else{ ?> Nombre de la empresa<?php } ?></label><div class="help-block with-errors"></div>
+	                                			<input class="form-control" type="text" id="nombres" name="nombres" value="<?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" <?php if($btnSig == 1){ echo 'readonly'; } ?> required/>
 	                                        </div>
 	                                    </div>
-	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
 	                                            <label for="apellidos">Apellidos</label><div class="help-block with-errors"></div>
-	                                			<input class="form-control" id="apellidos" name="apellidos" value="<?php echo $_SESSION['mfo_datos']['usuario']['apellidos']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' <?php if($btnSig == 1){ echo 'readonly'; } ?> required/>
+	                                			<input class="form-control" type="text" id="apellidos" name="apellidos" value="<?php echo $_SESSION['mfo_datos']['usuario']['apellidos']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' <?php if($btnSig == 1){ echo 'readonly'; } ?> required/>
 	                                        </div>
 	                                    </div>
 	                                    <?php } ?>
@@ -142,7 +143,6 @@
 	                                            <select id="ciudad" name="ciudad" class="form-control" <?php if($btnSig == 1){ echo 'readonly'; } ?> required>
 	                                            <?php 
 	                                            if(!empty($arrciudad)){
-
 			                                    	foreach($arrciudad as $key => $ciudad){ 
 														echo "<option value='".$ciudad['id_ciudad'];
 														if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $key)
@@ -158,13 +158,13 @@
 	                                        </div>
 	                                    </div>					
 	                                    <div class="col-md-6">
-		                                    <div class="form-group">
-
-		                                        <label for="mayor_edad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?> Fecha de Nacimiento <?php }else{ ?> Fecha de Apertura <?php } ?></label><div class="help-block with-errors"></div>
-		                                        <input class="form-control" type="date" name="fecha_nacimiento" id="mayor_edad" value="<?php echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); ?>" <?php if($btnSig == 1){ echo 'readonly'; } ?> required/>
+		                                    <div id="mayoria"  class="form-group">
+		                                        <label for="mayor_edad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Fecha de Nacimiento <?php }else{ ?> Fecha de Apertura <?php } ?></label><div id="error" class="help-block with-errors"></div>
+		                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="<?php echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); ?>" <?php if($btnSig == 1){ echo 'readonly'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> onchange="calcularEdad()" <?php } ?> placeholder="dd/mm/aaaa" required/>
 		                                    </div>
 	                                    </div>
-	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+
+	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 	                                    <div class="col-md-6">
 	                                    	<div class="form-group">
 		                                    	<label for="discapacidad">Discapacidad</label><div class="help-block with-errors"></div>
@@ -182,6 +182,7 @@
 												</select>
 											</div>
 										</div>
+										<div class="clearfix"></div>
 										<div class="col-md-6">
 	                                        <div class="form-group">
 	                                            <label for="experiencia">A&ntilde;os de Experiencia</label><div class="help-block with-errors"></div>
@@ -206,7 +207,7 @@
 		                                        <input class="form-control" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onclick="numero_validate(this);" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono']; ?>" <?php if($btnSig == 1){ echo 'readonly'; } ?> required/>
 		                                    </div>
 	                                    </div>
-	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1) { ?>
+	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
 	                                            <label for="genero">G&eacute;nero</label><div class="help-block with-errors"></div>
@@ -228,7 +229,6 @@
 	                                        <div class="form-group">
 	                                            <label for="escolaridad">Escolaridad</label><div class="help-block with-errors"></div>
 	                                            <select id="escolaridad" name="escolaridad" class="form-control" style="padding-left: 0px;" <?php if($btnSig == 1){ echo 'readonly'; } ?> required>
-	                                            	<option value="">Seleccione una opci&oacute;n</option>
 													<?php 
 													if (!empty($escolaridad)){
 				                                    	foreach($escolaridad as $key => $es){ 
