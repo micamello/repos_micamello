@@ -33,7 +33,8 @@ class Vista {
     ob_end_flush();
   }
 
-  public static function display($pagina, $template_vars = array()){    
+  public static function display($pagina, $template_vars = array()){  
+  Utils::log('template: '.print_r($template_vars,true));  
     if (!empty($template_vars))
         extract($template_vars);
     
@@ -79,6 +80,7 @@ class Vista {
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
       $menu["menu"][] = array("href"=>"#", "onclick"=>"modal_set(1);", "nombre"=>"Candidato");
       $menu["menu"][] = array("href"=>"#", "onclick"=>"modal_set(2);", "nombre"=>"Empresa");
+      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/login/", "nombre"=>"Iniciar sesi&oacute;n");
     }
     else{
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 

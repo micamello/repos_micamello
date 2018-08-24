@@ -40,6 +40,17 @@ class Controlador_Perfil extends Controlador_Base
                 $ruta_arch = '#';
                 $btnSubir  = 1;
 
+                if (Utils::getParam('actualizar') == 1) {
+                    $btnSig = 1;
+
+                    if(!isset($_FILES['subirCV'])){
+                        $_FILES['subirCV'] = '';
+                    }
+                    $btnSubir  = 0;
+
+                    self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
+                }
+
                 if (isset($_SESSION['mfo_datos']['infohv'])) {
 
                     if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
@@ -55,19 +66,13 @@ class Controlador_Perfil extends Controlador_Base
                     $msj2        = 'Actualizar CV';
                 }
 
-                if (Utils::getParam('actualizar') == 1) {
-                    $btnSig = 1;
-
-                    if(!isset($_FILES['subirCV'])){
-                        $_FILES['subirCV'] = '';
-                    }
-                    $btnSubir  = 0;
-
-                    self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
+                if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
+                    $areaxusuario  = $_SESSION['mfo_datos']['usuario']['usuarioxarea'];#
+                    $nivelxusuario = $_SESSION['mfo_datos']['usuario']['usuarioxnivel'];#
+                }else{
+                    $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    $nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
-
-                $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                $nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'cargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
                     $cargarHv = 1;
@@ -104,8 +109,6 @@ class Controlador_Perfil extends Controlador_Base
                 $tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
-                $tags["template_js"][] = "bootstrap-datepicker";
-                $tags["template_css"][] = "bootstrap-datepicker.min";
                 $tags["show_banner"]   = 1;
                 Vista::render('perfil_paso1', $tags);
 
@@ -171,7 +174,7 @@ class Controlador_Perfil extends Controlador_Base
             }
 
             $GLOBALS['db']->beginTrans();
-            if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'])) {
+            if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$_SESSION['mfo_datos']['usuario']['tipo_usuario'])) {
                 throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
             }
             

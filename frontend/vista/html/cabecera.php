@@ -197,7 +197,7 @@ if( $_POST["btnemp"] ) {
                           
                           foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                             <li>
-                              <a onclick="<?php echo $optmnu["onclick"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php echo $optmnu["nombre"];?></a>
+                              <a onclick="<?php echo $optmnu["onclick"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '<i style="font-size: 1em;" class="fa fa-home" aria-hidden="true"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
                             </li>                            
                           <?php } ?>
                           <?php if (isset($menu["submenu"])){ ?>                            

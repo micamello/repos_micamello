@@ -25,7 +25,9 @@ define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
 
 define('DISCAPACIDAD', array('0'=>'No', '1'=>'S&iacute;'));
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Empresa'));
-define('POSTULACIONES', array('1'=>'Manual', '2'=>'Autom&aacute;tico'));
+define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
 define('GENERO', array('M'=>'Masculino', 'F'=>'Femenino', 'P'=>'Prefiero no decirlo'));
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
+define('REGISTRO_PAGINA',10);
+
 ?>

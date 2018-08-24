@@ -15,5 +15,19 @@ class Modelo_Provincia{
     return $GLOBALS['db']->auto_array($sql,array());
   }
   
+    public static function obtieneListadoAsociativo(){
+
+		$sql = "SELECT * FROM mfo_provincia";
+    	$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+
+		$datos = array();
+		if (!empty($arrdatos) && is_array($arrdatos)){
+
+			foreach ($arrdatos as $key => $value) {
+				$datos[$value['id_provincia']] = $value['nombre'];
+			}
+		}
+		return $datos;
+	}
 }  
 ?>

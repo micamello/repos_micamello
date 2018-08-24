@@ -57,4 +57,15 @@ RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
 
 #ofertas
+RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&param2=$3&param3=$4&param4=$5&page=$6 [L]
+
+RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&param2=$3&param3=$4&page=$5 [L]
+
+RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&param2=$3&page=$4 [L]
+
+RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&page=$3 [L]
+
 RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta [L]
+
+RewriteRule ^detalleOferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&id=$1 [L]
+RewriteRule ^detalleOferta/([0-9]+)$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&id=$1 [L]

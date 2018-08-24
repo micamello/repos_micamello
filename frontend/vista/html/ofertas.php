@@ -13,9 +13,19 @@
 				</div>
 				<div class="panel-body">
 				<?php
-				if (!empty($arrarea)) {
+				if (!empty($arrarea)) { 
 				    foreach ($arrarea as $key => $ae) {
-				        echo '<li class="lista"><a onclick="result_filter(this,1);" class="interes" id="' . $ae["id_area"] . '">' . utf8_encode(ucfirst(strtolower($ae["nombre"]))). '</a></li>';
+				        echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/A'.$key.'/';
+				        if($_SESSION['mfo_datos']['Filtrar_ofertas']['P'] != 0){
+				        	echo 'P'.$_SESSION['mfo_datos']['Filtrar_ofertas']['P'].'/';
+				    	}
+				    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['J'] != 0){
+				        	echo 'J'.$_SESSION['mfo_datos']['Filtrar_ofertas']['J'].'/';
+				    	}
+				    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['C'] != 0){
+				        	echo 'C'.$_SESSION['mfo_datos']['Filtrar_ofertas']['C'].'/';
+				    	}
+				    	echo $page.'/" class="interes" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($ae))). '</a></li>';
 				    }
 				}
 				?>
@@ -29,7 +39,17 @@
 				<?php
 					if (!empty($arrprovincia)) {
 						foreach ($arrprovincia as $key => $pr) {
-						    echo '<li class="lista"><a onclick="result_filter(this,1);" class="provincia" id="'.$pr["id_provincia"].'">'.utf8_encode(ucfirst(strtolower($pr["nombre"]))).'</a></li>';
+						    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/P'.$key.'/';
+					        if($_SESSION['mfo_datos']['Filtrar_ofertas']['A'] != 0){
+					        	echo 'A'.$_SESSION['mfo_datos']['Filtrar_ofertas']['A'].'/';
+					    	}
+					    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['J'] != 0){
+					        	echo 'J'.$_SESSION['mfo_datos']['Filtrar_ofertas']['J'].'/';
+					    	}
+					    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['C'] != 0){
+					        	echo 'C'.$_SESSION['mfo_datos']['Filtrar_ofertas']['C'].'/';
+					    	}
+					    	echo $page.'/" class="provincia" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($pr))). '</a></li>';
 						}
 					}
 				?>
@@ -43,7 +63,17 @@
 					<?php
 						if (!empty($jornadas)) {
 							foreach ($jornadas as $key => $jornada) {
-							    echo '<li class="lista"><a onclick="result_filter(this,1);" class="jornada" id="'.$jornada["id_jornada"].'" data-value="'.utf8_encode(ucfirst(strtolower($jornada["nombre"]))).'">'.utf8_encode(ucfirst(strtolower($jornada["nombre"]))).'</a></li>';
+							    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/J'.$key.'/';
+						        if($_SESSION['mfo_datos']['Filtrar_ofertas']['A'] != 0){
+						        	echo 'A'.$_SESSION['mfo_datos']['Filtrar_ofertas']['A'].'/';
+						    	}
+						    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['P'] != 0){
+						        	echo 'P'.$_SESSION['mfo_datos']['Filtrar_ofertas']['P'].'/';
+						    	}
+						    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['C'] != 0){
+						        	echo 'C'.$_SESSION['mfo_datos']['Filtrar_ofertas']['C'].'/';
+						    	}
+						    	echo $page.'/" class="jornada" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($jornada))). '</a></li>';
 							}
 						}
 					?>
@@ -57,7 +87,17 @@
 				<?php
 					if (!empty($tiposContrato)) {
 						foreach ($tiposContrato as $key => $contrato) {
-						    echo '<li class="lista"><a onclick="result_filter(this,1);" class="contrato" id="'.$contrato["id_tipocontrato"].'">'.utf8_encode(ucfirst(strtolower($contrato["descripcion"]))).'</a></li>';
+						    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/C'.$key.'/';
+					        if($_SESSION['mfo_datos']['Filtrar_ofertas']['A'] != 0){
+					        	echo 'A'.$_SESSION['mfo_datos']['Filtrar_ofertas']['A'].'/';
+					    	}
+					    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['P'] != 0){
+					        	echo 'P'.$_SESSION['mfo_datos']['Filtrar_ofertas']['P'].'/';
+					    	}
+					    	if($_SESSION['mfo_datos']['Filtrar_ofertas']['J'] != 0){
+					        	echo 'J'.$_SESSION['mfo_datos']['Filtrar_ofertas']['J'].'/';
+					    	}
+					    	echo $page.'/" class="contrato" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($contrato))). '</a></li>';
 						}
 					}
 				?>
@@ -65,18 +105,15 @@
 		    </div>
 		</div>
 		<div class="col-md-8">
-			
+	
 			<div id="busquedas" class='container-fluid'>
-				<span id="interes_class" class="interes_class"></span>
-				<span id="provincia_class" class="provincia_class"></span>
-				<span id="jornada_class" class="jornada_class"></span>
-				<span id="contrato_class" class="contrato_class"></span>
+				<?php echo $link; ?>
 			</div>
 			
 	        <div id="result">
 	        	<?php if(!empty($ofertas)){
 		            foreach($ofertas as $key => $o){  ?>
-						<a href='<?php echo PUERTO."://".HOST.'/verOferta/'.$o["id_ofertas"]; ?>'>
+						<a href='<?php echo PUERTO."://".HOST.'/detalleOferta/'.$o["id_ofertas"]; ?>/'>
 							<div class='panel panel-default shadow-panel'>
 							   <div class='panel-body'>
 								   <div class='col-md-2' align='center'>
@@ -96,7 +133,7 @@
 										    foreach($postulacionesUserLogueado as $key => $p){ 
 												
 												if($p['id_ofertas'] == $o["id_ofertas"]){
-													if($p['tipo'] == 1){
+													if($p['tipo'] == 2){
 											    		echo ' | <span class="postulacion">Aplic&oacute; de forma '.POSTULACIONES[$p['tipo']].'</span>';
 												    }else{
 												    	echo ' | <span class="postulacion">Autopostulado '.POSTULACIONES[$p['tipo']].'</span>';
@@ -125,7 +162,7 @@
 						</a>
 					<?php }
 				}else{ ?>
-					<br><br>
+					
 					<div class='panel panel-default'>
 			    		<div class='panel-body' align='center'>
 			      			<span>No se encontraron ofertas</span>
@@ -134,6 +171,9 @@
 				<?php } ?>
 	        </div>
 		</div>
+	</div>
+	<div class="col-md-12">
+		<?php echo $paginas; ?>
 	</div>
 </div>
 

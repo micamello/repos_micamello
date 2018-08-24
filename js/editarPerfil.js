@@ -120,11 +120,11 @@ function calcularEdad()
         nodo.appendChild(elem2); 
 
         $("#mayoria").attr({
-            class: 'has-error',
+            'class': 'has-error',
         });
 
         $("#boton").attr({
-            disabled: 'disabled',
+            'disabled': 'disabled',
         });
     }
 }
