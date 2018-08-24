@@ -107,7 +107,9 @@
 		<div class="col-md-8">
 	
 			<div id="busquedas" class='container-fluid'>
-				<?php echo $link; ?>
+				<?php if (isset($link)) { 
+				 echo $link; 
+				} ?>
 			</div>
 			
 	        <div id="result">

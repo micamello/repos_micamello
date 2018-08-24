@@ -82,21 +82,22 @@
             </ul>
         <ul class="nav navbar-nav navbar-right">                          
               <?php 
-              
-              foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
-                <li>
-                  <a onclick="<?php echo $optmnu["onclick"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '<i style="font-size: 1em;" class="fa fa-home" aria-hidden="true"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
-                </li>                            
-              <?php } ?>
-              <?php if (isset($menu["submenu"])){ ?>                            
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" class="user_icon">
-                    <ul class="dropdown-menu">
-                      <?php foreach($menu["submenu"] as $submenu){ ?>  
-                         <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
-                      <?php } ?>
-                    </ul>
-                  </li>                              
+              if (isset($menu["menu"])){   
+                foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
+                  <li>
+                    <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '<i style="font-size: 1em;" class="fa fa-home" aria-hidden="true"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
+                  </li>                            
+                <?php } ?>
+                <?php if (isset($menu["submenu"])){ ?>                            
+                  <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" class="user_icon">
+                      <ul class="dropdown-menu">
+                        <?php foreach($menu["submenu"] as $submenu){ ?>  
+                           <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
+                        <?php } ?>
+                      </ul>
+                    </li>                              
+                <?php } ?>
               <?php } ?>
             </ul>
         </div> 
