@@ -11,11 +11,11 @@
                 <div class="panel-body">
                   <div style="margin: 0;">
                     <?php if ($o['confidencial'] == 0) {?>
-                      <div style="margin-bottom: 10px; color: #1e82c4; font-size: 20px;font-weight: bold; border-bottom: solid #ccc thin">
+                      <div class="confidencial">
                         <?php echo $o['empresa']; ?>
                       </div>
                       <?php } else {?>
-                      <div style="margin-bottom: 10px; color: #1e82c4; font-size: 20px;font-weight: bold; border-bottom: solid #ccc thin">
+                      <div class="confidencial">
                           Nombre - confidencial
                       </div>
                     <?php }?>
@@ -29,33 +29,33 @@
                     <br><br><h5><b>Requerimientos</b></h5>
                     <div>
                         <h5>
-                            <span style="color: #0267cf;">Fecha de Contrato</span><br>
+                            <span class="titulos">Fecha de Contrato</span><br>
                              <?php echo substr($o['fecha_contratacion'], 0, 10); ?>
                         </h5>
                     </div>
 
                     <div>
                         <h5>
-                            <span style="color: #0267cf;">Años de Experiencia</span><br>
+                            <span class="titulos">Años de Experiencia</span><br>
                              <?php echo ANOSEXP[$o['anosexp']]; ?>
                         </h5>
                     </div>
 
                     <div>
                         <h5>
-                            <span style="color: #0267cf;">Nivel de Estudios</span><br>
+                            <span class="titulos">Nivel de Estudios</span><br>
                              <?php echo $o['escolaridad']; ?>
                         </h5>
                     </div>
                     <div>
                         <h5>
-                            <span style="color: #0267cf;">Disponibilidad de Viajar</span><br>
+                            <span class="titulos">Disponibilidad de Viajar</span><br>
                             <?php if ($o['viajar'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
                         </h5>
                     </div>
                     <div>
                         <h5>
-                            <span style="color: #0267cf;">Disponibilidad de Cambio de Residencia</span>
+                            <span class="titulos">Disponibilidad de Cambio de Residencia</span>
                             <br>
                             <?php if ($o['residencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
                         </h5>
@@ -75,31 +75,31 @@
                 <hr>
                 <div>
                   <h5>
-                      <span style="color: #0267cf;">Localización</span><br>
+                      <span class="titulos">Localización</span><br>
                       - <?php echo $o['provincia']; ?>
                   </h5>
                 </div>
                 <div>
                   <h5>
-                      <span style="color: #0267cf;">Jornada</span><br>
+                      <span class="titulos">Jornada</span><br>
                       - <?php echo $o['jornada']; ?>
                   </h5>
                 </div>
                 <div>
                     <h5>
-                        <span style="color: #0267cf;">Tipo de Contrato</span><br>
-                        - <?php echo $o['tipo_contrato']; ?>
+                        <span class="titulos">Tipo de Contrato</span><br>
+                        - <?php echo $o['contrato']; ?>
                     </h5>
                 </div>
                 <div>
                     <h5>
-                        <span style="color: #0267cf;">Salario</span><br>
+                        <span class="titulos">Salario</span><br>
                         - <?php echo $o['salario']; ?>
                     </h5>
                 </div>
                 <div>
                     <h5>
-                        <span style="color: #0267cf;">Discapacidad</span><br>
+                        <span class="titulos">Discapacidad</span><br>
                         - <?php echo DISCAPACIDAD[$o['discapacidad']]; ?>
                     </h5>
                 </div>

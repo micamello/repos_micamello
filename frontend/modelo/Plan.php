@@ -13,6 +13,32 @@ class Modelo_Plan{
             ORDER BY duracion ASC";
     return $GLOBALS['db']->auto_array($sql,array($tipo,$sucursal,$tipoplan),true);
   }
+
+  public static function listadoPlanAccion($tipo,$sucursal,$tipoplan){
+
+    $sql = "SELECT t.id_plan,t.nombre,t.promocional,t.duracion,t.extension,t.porc_descarga,t.num_post,t.costo, 
+        GROUP_CONCAT(a.accion ORDER BY p.id_permisoPlan) as acciones, GROUP_CONCAT(a.descripcion ORDER BY p.id_permisoPlan) as descripciones
+        FROM mfo_permisoplan p
+        INNER JOIN mfo_accionsist a ON a.id_accionSist = p.id_accionSist 
+        INNER JOIN mfo_plan t ON t.id_plan = p.id_plan 
+        WHERE a.estado = 1
+        AND t.tipo_plan = $tipoplan
+        AND t.tipo_usuario = $tipo
+        AND t.id_sucursal = $sucursal
+        GROUP BY t.id_plan
+        ORDER BY p.id_permisoPlan;";
+    return $GLOBALS['db']->auto_array($sql,array(),true);
+  }
+
+ /* public static function numPermisosMax(){
+
+    $sql = 'SELECT MAX(t1.permisos) AS max_permisos FROM (SELECT count(a.descripcion) as permisos
+    FROM mfo_permisoplan p
+    INNER JOIN mfo_accionsist a ON a.id_accionSist = p.id_accionSist 
+    WHERE a.estado = 1
+    GROUP BY p.id_plan) AS t1;';
+    return $GLOBALS['db']->auto_array($sql,array(),true);
+  }*/
   
 }  
 ?>

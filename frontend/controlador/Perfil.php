@@ -22,6 +22,7 @@ class Controlador_Perfil extends Controlador_Base
         $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
 
         $msj1 = $imgArch1 = $btnDescarga = '';
+        $tags["show_banner"] = 1;
 
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
@@ -109,7 +110,7 @@ class Controlador_Perfil extends Controlador_Base
                 $tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
-                $tags["show_banner"]   = 1;
+
                 Vista::render('perfil_paso1', $tags);
 
                 break;
@@ -119,7 +120,6 @@ class Controlador_Perfil extends Controlador_Base
                 Vista::renderJSON($arrciudad);
                 break;
             default:
-                $tags["show_banner"] = 1;
                 Vista::render('perfil', $tags);
                 break;
         }

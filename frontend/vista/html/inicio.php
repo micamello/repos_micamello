@@ -39,6 +39,7 @@
             <section>
                 <div class="container">
                     <div class="row">
+                        
                         <div class="job_count">
                             <div  align="center" class="col-md-4 col-sm-4 col-xs-12" >
                                 <h3 class="info_text_jobs">Empleos Agregados</h3>                                

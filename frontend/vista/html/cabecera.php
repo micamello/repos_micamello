@@ -51,7 +51,9 @@
   <style>
     /* Para vista perfil */
     .home {
-        background-image: /*linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),*/url(<?php echo $_SESSION['mostrar_banner']; ?>) ;    /*background-size: cover;*/
+        background-image: /*linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),*/url(<?php echo $_SESSION['mostrar_banner']; ?>);   /*background-size: cover;*/
+        background-size: cover;
+        
         position: relative;
         padding-top: 185px;
         padding-bottom: 79px;
@@ -85,7 +87,7 @@
               if (isset($menu["menu"])){   
                 foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                   <li>
-                    <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '<i style="font-size: 1em;" class="fa fa-home" aria-hidden="true"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
+                    <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '<img src="'.PUERTO.'://'.HOST.'/imagenes/icon-home.png" alt="Inicio" width="20">';  }else{ echo $optmnu["nombre"]; } ?></a>
                   </li>                            
                 <?php } ?>
                 <?php if (isset($menu["submenu"])){ ?>                            

@@ -131,9 +131,9 @@ class Controlador_Oferta extends Controlador_Base
                     'page' =>$page
                 );
 
-                $tags["template_js"][] = "oferta";
                 $tags["show_banner"] = 1;
-                
+                $tags["template_js"][] = "oferta";
+  
                 $url = PUERTO.'://'.HOST.'/oferta/'.$type.$cadena;
                 
                 $pagination = new Pagination(count($postulacionesFiltradas),REGISTRO_PAGINA,$url);
@@ -161,7 +161,6 @@ class Controlador_Oferta extends Controlador_Base
                 );
 
                 $tags["show_banner"] = 1;
-
                 Vista::render('detalle_oferta', $tags);
             break;
 
@@ -186,6 +185,8 @@ class Controlador_Oferta extends Controlador_Base
                 );
 
                 $tags["template_js"][] = "oferta";
+                $tags["show_banner"] = 1;
+                
                 $url = 'http://localhost/repos_micamello/oferta';
                 $pagination = new Pagination(count($ofertas),REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);

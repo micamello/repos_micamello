@@ -14,8 +14,9 @@ class Controlador_Plan extends Controlador_Base {
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
     $sucursal = $_SESSION["mfo_datos"]["sucursal"]["id_sucursal"]; 
     
-    $planes = Modelo_Plan::listadoxTipo($tipousu,$sucursal,Modelo_Plan::PAQUETE);    
-    $avisos = Modelo_Plan::listadoxTipo($tipousu,$sucursal,Modelo_Plan::AVISO);    
+    $planes = Modelo_Plan::listadoPlanAccion($tipousu,$sucursal,Modelo_Plan::PAQUETE);
+    $avisos = Modelo_Plan::listadoPlanAccion($tipousu,$sucursal,Modelo_Plan::AVISO); 
+
     $tags['planes'] = trim(Vista::display('detalle_plan',array('arreglo'=>$planes)));    
     $tags['avisos'] = trim(Vista::display('detalle_plan',array('arreglo'=>$avisos)));
 

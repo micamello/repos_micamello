@@ -5,8 +5,10 @@
         <div class="col-md-12">        
           <div class="container"><h3 align="left">Seleccione un plan:</h3></div>
           <div class="container">            
-            <div class="row">    
-              <?php echo $planes;?>                                  
+            <div class="row"> 
+              <div class="pricingdiv">   
+                <?php echo $planes;?>  
+              </div>                                
             </div>
           </div>
         </div>  
@@ -15,8 +17,10 @@
         <div class="col-md-12">        
           <div class="container"><h3 align="left">Seleccione un aviso:</h3></div>
           <div class="container">            
-            <div class="row">    
-              <?php echo $avisos;?>                                  
+            <div class="row"> 
+              <div class="pricingdiv">
+                <?php echo $avisos;?>  
+              </div>                                 
             </div>
           </div>
         </div>
@@ -25,6 +29,7 @@
   </div>
 </div>
 <br><br>
+
 
 <!-- Modal -->
 <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
