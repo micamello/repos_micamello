@@ -101,7 +101,7 @@ class Modelo_Usuario{
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
   }
 
-  public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto){
+  public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto,$tipo_usuario){
 
     $foto = 0;
     if($imagen['error'] != 4)
@@ -112,7 +112,7 @@ class Modelo_Usuario{
       $foto = 1;
     }
 
-    if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == 1){
+    if($tipo_usuario == 1){
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"apellidos"=>$data['apellidos'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['status_carrera'],"id_escolaridad"=>$data['escolaridad']);
     }else{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']);

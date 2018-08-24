@@ -13,7 +13,7 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
   
-  public static function obtieneOfertas(){
+  public static function obtieneOfertas($id=false,$page=false){
     $sql = "SELECT 
         o.id_ofertas, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
     a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, t.descripcion AS contrato, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
@@ -31,6 +31,12 @@ class Modelo_Oferta{
     AND j.id_jornada = o.id_jornada
     AND t.id_tipocontrato = o.id_tipocontrato";
 
+    if($id!=false){
+       $sql .= " AND o.id_ofertas = ".$id;
+    }
+    $page = ($page - 1) * REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
@@ -40,7 +46,7 @@ class Modelo_Oferta{
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
-  public static function filtrarOfertas($id_provincia,$id_jornada,$id_contrato,$id_area){
+  public static function filtrarOfertas($id_area,$id_provincia,$id_jornada,$id_contrato,$page){
 
     $sql = "SELECT 
         o.id_ofertas, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
@@ -73,6 +79,8 @@ class Modelo_Oferta{
       $sql .= " AND t.id_tipocontrato = ".$id_contrato;
     }
 
+    $page = ($page - 1) * REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
 }  

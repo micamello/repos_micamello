@@ -62,57 +62,47 @@
 </head>
 
 <body>
-    <!--fin de los modals-->
-    <!--<body data-spy="scroll" data-target=".navbar-collapse">
-        <div class="culmn">
-   <style type="text/css">
-    section#action {
-      height: 64px;
-      padding-top: 8px;
-    }
-   </style>-->
-  
+
   <nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand">
-          <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.$_SESSION['mfo_datos']['sucursal']['id_sucursal'].'.'.$_SESSION['mfo_datos']['sucursal']['extensionlogo'];?>" alt="micamellologo">
-        </a>
-      </div>
-      <!-- End Header Navigation -->
-      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <ul class="nav navbar-nav"></ul>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand">
+            <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.$_SESSION['mfo_datos']['sucursal']['id_sucursal'].'.'.$_SESSION['mfo_datos']['sucursal']['extensionlogo'];?>" alt="micamellologo">
+          </a>
+        </div>
+        <!-- End Header Navigation -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav"> 
+            </ul>
         <ul class="nav navbar-nav navbar-right">                          
-          <?php   
-          if (isset($menu["menu"])){            
-            foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
-              <li>
-                <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php echo $optmnu["nombre"];?></a>
-              </li>                            
-          <?php } 
-          }
-          ?>
-          <?php if (isset($menu["submenu"])){ ?>                            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres'];?>
-              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" class="user_icon">
-              <ul class="dropdown-menu">
-                <?php foreach($menu["submenu"] as $submenu){ ?>  
-                   <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
-                <?php } ?>
-              </ul>
-            </li>                              
-          <?php } ?>
-        </ul>
-      </div>                    
+              <?php 
+              
+              foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
+                <li>
+                  <a onclick="<?php echo $optmnu["onclick"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '<i style="font-size: 1em;" class="fa fa-home" aria-hidden="true"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
+                </li>                            
+              <?php } ?>
+              <?php if (isset($menu["submenu"])){ ?>                            
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" class="user_icon">
+                    <ul class="dropdown-menu">
+                      <?php foreach($menu["submenu"] as $submenu){ ?>  
+                         <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
+                      <?php } ?>
+                    </ul>
+                  </li>                              
+              <?php } ?>
+            </ul>
+        </div> 
     </div> 
-  </nav>
+</nav>
+
 
 <?php
 if(isset($show_banner)){ ?>

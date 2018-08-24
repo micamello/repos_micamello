@@ -562,14 +562,65 @@ body
   text-align:justify;
 }
 
-.filtros{
-  font-size:12px; 
+.btn-filtro {
   border-radius: 5px; 
-  padding: 5px 10px 5px 10px; 
-  background-color: #0099cc; 
-  color: white; 
-  z-index:-1;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  color: #fff;
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.btn-filtro:focus,
+.btn-filtro.focus {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #1b6d85;
+}
+.btn-filtro:hover {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+.btn-filtro:active,
+.btn-filtro.active,
+.open > .dropdown-toggle.btn-filtro {
+  color: #fff;
+  background-color: #31b0d5;
+  border-color: #269abc;
+}
+.btn-filtro:active:hover,
+.btn-filtro.active:hover,
+.open > .dropdown-toggle.btn-filtro:hover,
+.btn-filtro:active:focus,
+.btn-filtro.active:focus,
+.open > .dropdown-toggle.btn-filtro:focus,
+.btn-filtro:active.focus,
+.btn-filtro.active.focus,
+.open > .dropdown-toggle.btn-filtro.focus {
+  color: #fff;
+  background-color: #269abc;
+  border-color: #1b6d85;
+}
+.btn-filtro:active,
+.btn-filtro.active,
+.open > .dropdown-toggle.btn-filtro {
+  background-image: none;
+}
+.btn-filtro.disabled:hover,
+.btn-filtro[disabled]:hover,
+fieldset[disabled] .btn-filtro:hover,
+.btn-filtro.disabled:focus,
+.btn-filtro[disabled]:focus,
+fieldset[disabled] .btn-filtro:focus,
+.btn-filtro.disabled.focus,
+.btn-filtro[disabled].focus,
+fieldset[disabled] .btn-filtro.focus {
+  background-color: #5bc0de;
+  border-color: #46b8da;
+}
+.btn-filtro .badge {
+  color: #5bc0de;
+  background-color: #fff;
 }
 /* vista de ofertas */
 

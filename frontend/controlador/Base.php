@@ -18,7 +18,7 @@ abstract class Controlador_Base{
   
   public function camposRequeridos($campos = array()){
     $data = array(); 
-    print_r($this->datos);
+    //print_r($this->datos);
     if (count($campos) > 0){ 
       foreach($campos as $campo=>$requerido){        
         $valor = Utils::getParam($campo,'',$this->datos);

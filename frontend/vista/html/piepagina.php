@@ -142,14 +142,6 @@
 
         </form>
         <!--Formulario de registro usuario - candidato-->
-
-
-        <div class="row">
-          <div class="col-md-12"><br>
-            <p class="text-center"><strong>¿Ya tienes cuenta? </strong><a href="<?php echo PUERTO."://".HOST;?>/login/">Iniciar sesión</a></p> 
-          </div>
-        </div>
-
       </div>
     </div>
   </div>

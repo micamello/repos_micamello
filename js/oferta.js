@@ -23,29 +23,39 @@ $('#provincia').change(function()
     }
 });
 
+
+/* filtrado por categorias */
 var interes = "";
 var provincia = "";
 var jornada = "";
 var contrato = "";
+var filtros_total = 0;
+var filtros_add = new Array(0,0,0,0);
+var filtros_delete = 0;
 
 function result_filter(element,tipo)
 { 
     var busquedas = nodo = '';
     busquedas = document.getElementById("busquedas");
-
+console.log(element.className+' - '+tipo);
     if (element.className == 'interes' || element.className == 'interes_class filtros')
     {
         if(tipo == 1){
             interes = element.id;
-            nodo = document.getElementById("interes_class");
-            nodo.setAttribute('onclick','result_filter(this,2);');
-            nodo.setAttribute('id',interes);
-            $("#interes_class").html('sfvgfdsgv');
-            //nodo.append(element.innerHTML+"<i class='fa fa-times click'></i>")
+            //filtros_add[0] = 1;
             //select = "<span id='interes_class' onclick='result_filter(this,2);' class='interes_class filtros' id='"+interes+"'>"+element.innerHTML+"<i class='fa fa-times click'></i></span>";
             //$('.interes_class').html(select);
+            $('.interes_class').attr({
+                'onclick': 'alert(this,2);',
+                //'class':'filtros',
+                'id':interes
+            });
+
+            $('.interes_class').html(element.innerHTML+" <i class='fa fa-times click'></i>");
+            $('.interes_class').addClass('filtros');
         }else{
             interes = '';
+            //filtros_delete++;
             nodo = document.getElementById("interes_class");
             busquedas.removeChild(nodo);
             var elem = document.createElement('span');
@@ -57,27 +67,55 @@ function result_filter(element,tipo)
 
     if (element.className == 'provincia' || element.className == 'provincia_class filtros')
     {
-      if(tipo == 1){
-        provincia = element.id;
-        select = "<span id='provincia_class' onclick='result_filter(this,2);' class='provincia_class filtros' id='"+provincia+"'>"+element.innerHTML+"<i class='fa fa-times click'></i></span>";
-        $('.provincia_class').html(select);
-      }else{
-        provincia = '';
-        nodo = document.getElementById("provincia_class");
-        resultado = busquedas.removeChild(nodo);
-      }
+        if(tipo == 1){
+            provincia = element.id;
+            //filtros_add[1] = 1;
+            //select = "<span id='provincia_class' onclick='result_filter(this,2);' class='provincia_class filtros' id='"+provincia+"'>"+element.innerHTML+"<i class='fa fa-times click'></i></span>";
+            //$('.provincia_class').html(select);
+            $('.provincia_class').attr({
+                'onclick': 'result_filter(this,2);',
+                //'class':'filtros',
+                'id':provincia
+            });
+
+            $('.provincia_class').html(element.innerHTML+" <i class='fa fa-times click'></i>");
+            $('.provincia_class').addClass('filtros');
+        }else{
+            provincia = '';
+            //filtros_delete++;
+            nodo = document.getElementById("provincia_class");
+            busquedas.removeChild(nodo);
+            var elem = document.createElement('span');
+            elem.id = "provincia_class";
+            elem.classList.add('provincia_class');
+            busquedas.appendChild(elem);
+        }
     }
 
     if (element.className == 'jornada' || element.className == 'jornada_class filtros')
     {
         if(tipo == 1){
             jornada = element.id;
-            select = "<span id='jornada_class' onclick='result_filter(this,2);' class='jornada_class filtros' id='"+jornada+"'>"+element.innerHTML+"<i class='fa fa-times click'></i></span>";
-            $('.jornada_class').html(select);
+            //filtros_add[2] = 1;
+            //select = "<span id='jornada_class' onclick='result_filter(this,2);' class='jornada_class filtros' id='"+jornada+"'>"+element.innerHTML+"<i class='fa fa-times click'></i></span>";
+            //$('.jornada_class').html(select);
+            $('.jornada_class').attr({
+                'onclick': 'result_filter(this,2);',
+                //'class':'filtros',
+                'id':jornada
+            });
+
+            $('.jornada_class').html(element.innerHTML+" <i class='fa fa-times click'></i>");
+            $('.jornada_class').addClass('filtros');
         }else{
             jornada = '';
+            //filtros_delete++;
             nodo = document.getElementById("jornada_class");
-            resultado = busquedas.removeChild(nodo);
+            busquedas.removeChild(nodo);
+            var elem = document.createElement('span');
+            elem.id = "jornada_class";
+            elem.classList.add('jornada_class');
+            busquedas.appendChild(elem);
         }
     }
     
@@ -85,16 +123,36 @@ function result_filter(element,tipo)
     {
         if(tipo == 1){
             contrato = element.id;
-            select = "<span id='contrato_class' onclick='result_filter(this,2);' class='contrato_class filtros' id='"+contrato+"'>"+element.innerHTML+"<i class='fa fa-times click'></i></span>";
-            $('.contrato_class').html(select);
+            //filtros_add[3] = 1;
+            //select = "<span id='contrato_class' onclick='result_filter(this,2);' class='contrato_class filtros' id='"+contrato+"'>"+element.innerHTML+"<i class='fa fa-times click'></i></span>";
+            //$('.contrato_class').html(select);
+            $('.contrato_class').attr({
+                'onclick': 'result_filter(this,2);',
+                //'class':'filtros',
+                'id':contrato
+            });
+
+            $('.contrato_class').html(element.innerHTML+"<i class='fa fa-times click'></i>");
+            $('.contrato_class').addClass('filtros');
         }else{
             contrato = '';
+           // filtros_delete++;
             nodo = document.getElementById("contrato_class");
-            resultado = busquedas.removeChild(nodo);
+            busquedas.removeChild(nodo);
+            var elem = document.createElement('span');
+            elem.id = "contrato_class";
+            elem.classList.add('contrato_class');
+            busquedas.appendChild(elem);
         }
     }
 
-    var html = "";
+    /*filtros_total = filtros_add[0]+filtros_add[1]+filtros_add[2]+filtros_add[3];
+    if(tipo == 1){
+        $("#busquedas").css('margin-bottom', '25px');
+    }else if(filtros_total == filtros_delete){
+        $("#busquedas").css('margin-bottom', '0px');
+    }*/
+    /*var html = "";
     var puerto_host = $('#puerto_host').val();
     $.ajax({
         type: "GET",
@@ -112,6 +170,6 @@ function result_filter(element,tipo)
         error: function (request, status, error) {
           alert(request.responseText);
         }                  
-    })
+    })*/
 }
 
