@@ -8,7 +8,7 @@ define('DBNOMBRE', 'micamello_base');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
-define('RUTA_VISTA', FRONTEND_RUTA.'frontend/vista/');
+define('RUTA_VISTA', FRONTEND_RUTA.'frontend/Vista/');
 define('TOKEN', 'token.micamello.ecuador');
 define('HORAS_VALIDO_PASSWORD', '24');
 define('MAIL_CORREO','support@micamello.com.ec');

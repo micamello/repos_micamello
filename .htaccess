@@ -1,3 +1,9 @@
+#AuthName "Restricted Area"
+#AuthType Basic
+#AuthUserFile /home/micamellocom/public_html/desarrollo/.htpasswd
+#AuthGroupFile /dev/null
+#require valid-user
+
 ErrorDocument 404 /error/pagina_no_encontrada.html
 ErrorDocument 401 /error/login_requerido.html
 
@@ -30,7 +36,7 @@ Options -Indexes
 RewriteCond %{HTTP_HOST} !^localhost$
 RewriteRule . - [E=REWRITEBASE:/]
 # RewriteBase - Development
-RewriteCond %{HTTP_HOST} ^localhost$
+RewriteCond %{HTTP_HOST} !^localhost$
 RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 
 #imagenes del profile
