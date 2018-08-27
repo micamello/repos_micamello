@@ -29,15 +29,18 @@
 <!-- Modal -->
 <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
   <div class="modal-dialog " role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Mensaje de Confirmación</h5>        
+    <form method="post" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/" id="form_plan" name="form_plan">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Sucripci&oacute;n de plan</h5>        
+          <input type="hidden" name="idplan" id="idplan" value="">
+        </div>
+        <div class="modal-body"><p>Procederas a suscribirte en el Plan, ¿Continuar?</p></div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn btn-primary">Comprar</button>
+        </div>
       </div>
-      <div class="modal-body"><p>Por favor confirme que desea comprar el plan seleccionado</p></div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary">Comprar</button>
-      </div>
-    </div>
+    </form>
   </div>
 </div>

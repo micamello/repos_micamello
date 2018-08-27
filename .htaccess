@@ -39,6 +39,7 @@ RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carp
 
 #login
 RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
+RewriteRule ^login/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=login&page=$1 [L]
 
 #contrasena
 RewriteRule ^contrasena/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena [L]
@@ -63,6 +64,8 @@ RewriteRule ^cuestionario/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario [L]
 RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 
 #planes
+RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
+RewriteRule ^compraplan/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
 
 #ofertas

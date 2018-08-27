@@ -7,14 +7,14 @@
           <div class="col-md-12">
             <div class="form-group ">
               <label>Usuario:</label><div class="help-block with-errors"></div>
-              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: micamello" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" required>
+              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: micamello" required>
               <input type="hidden" name="login_form" id="login_form" value="1">            
             </div>
           </div>
           <div class="col-md-12">
             <div class="form-group">
               <label>Contrase&ntilde;a:</label><div class="help-block with-errors"></div>
-              <input type="password" name="password" id="password" class="form-control" placeholder="Ej: Micamello1" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Al menos 1 may&uacute;scula y 1 nro' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" required>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Ej: Micamello1" required>
             </div>
           </div>
           <p class="text-center"><strong>Olvidaste tu contrase&ntilde;a</strong> <a href="<?php echo PUERTO."://".HOST;?>/contrasena/">Haz click aqu&iacute;</a></p><br>
@@ -32,4 +32,4 @@
     </div>
   </div>
 </div>
-<br><br><br><br><br>        
+<br><br><br><br><br> 

@@ -1,5 +1,4 @@
-<?php foreach($arreglo as $plan){ ?>
-  <a onclick="msg_compra(<?php echo $plan["id_plan"];?>);">
+<?php foreach($arreglo as $plan){ ?>  
     <div class="col-xs-12 col-md-4">
       <div class="panel panel-primary <?php echo ($plan["promocional"]) ? "panelrojo" : "panelazul";?>">
         <?php if ($plan["promocional"]){ ?>
@@ -41,13 +40,12 @@
             <?php } ?>
             <tr align="center">
               <td><br><br>
-                <h1>$<?php echo number_format($plan["costo"],2);?><span class="subscript"></span></h1>
-                <a class="btn btn-success">Suscribirse</a>
+                <h1><?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($plan["costo"],2);?><span class="subscript"></span></h1>
+                <a class="btn btn-success" onclick="msg_compra(<?php echo $plan["id_plan"];?>);">Suscribirse</a>
               </td>
             </tr>
           </table>
         </div>               
       </div>
     </div>
-  </a>        
 <?php } ?>    

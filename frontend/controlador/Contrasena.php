@@ -104,7 +104,7 @@ class Controlador_Contrasena extends Controlador_Base {
     Vista::render('recuperar_password', $tags);  
   } 
   public function envioCorreo($correo,$nombres,$token){
-    $asunto = "Recuperacion de Contraseña";
+    $asunto = "Recuperación de Contraseña";
     $body = "Estimado, ".$nombres."<br>";
     $body .= "Por favor de click en este enlace para cambiar su contrase&ntilde;a ";
     $body .= "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a> <br>";

@@ -40,6 +40,18 @@ class Controlador_Perfil extends Controlador_Base
                 $ruta_arch = '#';
                 $btnSubir  = 1;
 
+                
+                if (Utils::getParam('actualizar') == 1) {
+                    $btnSig = 1;
+
+                    if(!isset($_FILES['subirCV'])){
+                        $_FILES['subirCV'] = '';
+                    }
+                    $btnSubir  = 0;
+
+                    self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
+                }
+                
                 if (isset($_SESSION['mfo_datos']['infohv'])) {
 
                     if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
@@ -53,17 +65,6 @@ class Controlador_Perfil extends Controlador_Base
                     $btnDescarga = 1;
                     
                     $msj2        = 'Actualizar CV';
-                }
-
-                if (Utils::getParam('actualizar') == 1) {
-                    $btnSig = 1;
-
-                    if(!isset($_FILES['subirCV'])){
-                        $_FILES['subirCV'] = '';
-                    }
-                    $btnSubir  = 0;
-
-                    self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
                 $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);

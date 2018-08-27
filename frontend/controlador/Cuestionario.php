@@ -28,7 +28,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     if ((!isset($_SESSION['mfo_datos']['planes']) || 
         !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
         $test["orden"] == 3){
-      $this->redirectToController('planes');
+      $this->redirectToController('velocimetro');
     }
         
     if ($test["orden"] > $nrotest){
