@@ -85,7 +85,7 @@ class Vista {
     else{
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){        
-        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/empleos/", "nombre"=>"Empleos");
+        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/oferta/", "nombre"=>"Empleos");
         $menu["menu"][] = array("href"=>PUERTO."://".HOST."/postulaciones/", "nombre"=>"Mis Postulaciones");
       }
       else{

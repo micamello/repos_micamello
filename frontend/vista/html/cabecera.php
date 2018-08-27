@@ -51,7 +51,7 @@
   <style>
     /* Para vista perfil */
     .home {
-        background-image: /*linear-gradient( rgba(35, 30, 30, 0.35), rgba(0, 0, 0, 0.35) ),*/url(<?php echo $_SESSION['mostrar_banner']; ?>);   /*background-size: cover;*/
+        background-image: url(<?php echo $_SESSION['mostrar_banner']; ?>);   
         background-size: cover;
         
         position: relative;

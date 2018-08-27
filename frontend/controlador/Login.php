@@ -36,6 +36,7 @@ class Controlador_Login extends Controlador_Base {
     $tags["template_js"][] = "selectr";
     $tags["template_js"][] = "mic";
     $tags["template_js"][] = "modal-register";
+    
     Vista::render('login',$tags);  
   }
 

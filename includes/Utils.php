@@ -61,7 +61,7 @@ class Utils{
     $mail->FromName = MAIL_NOMBRE; 
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
-    $mail->Subject = utf8_encode($subject); 
+    $mail->Subject = $subject; 
     $mail->Body = $body; 
     return $mail->send(); 
   }

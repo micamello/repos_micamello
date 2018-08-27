@@ -78,3 +78,7 @@ if(document.getElementById('form_login')){
 if(document.getElementById('form_contrasena')){
   $("#form_contrasena").validator();
 }
+
+if(document.getElementById('form_deposito')){
+  $("#form_deposito").validator();
+}

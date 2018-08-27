@@ -40,5 +40,10 @@ class Modelo_Plan{
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }*/
   
+  public static function busquedaActivoxTipo($plan,$tipo,$sucursal){
+    if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }
+    $sql = "SELECT * FROM mfo_plan WHERE estado = 1 AND id_plan = ? AND tipo_usuario = ? AND id_sucursal = ?";
+    return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    
+  }
 }  
 ?>

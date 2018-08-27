@@ -1,3 +1,4 @@
+
 <?php 
   foreach($arreglo as $plan){ ?>
         <ul style="<?php echo ($plan["promocional"]) ? "border: 2px solid #a21414;" : "border: 1px solid #262D5D";?>" class="theplan col-xs-12 col-md-4">
@@ -20,6 +21,7 @@
               if ($listadoAcciones[$key] == "publicarOferta" || $listadoAcciones[$key] == "autopostulacion"){
                 $permiso = str_replace('NRO',$plan["num_post"],$permiso);
               }              
+
           ?>
             <li>• <?php echo utf8_encode(trim($permiso));?></li>
           <?php                           

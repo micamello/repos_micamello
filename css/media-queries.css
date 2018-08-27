@@ -313,7 +313,6 @@
 
 /*Media queries configurations*/
 
-
 @media screen and (min-width: 600px) {
   .pagineo > li > a,
   .pagineo > li > span {padding:10px 16px;font-size:18px;line-height:1.3333333;}
@@ -322,6 +321,7 @@
   .pagineo > li:last-child > a,
   .pagineo > li:last-child > span {border-top-right-radius:6px;border-bottom-right-radius:6px;}
   .pagineo {display:flex;justify-content:center;}
+}
 @media screen and (max-width: 600px) {
   .pagineo > li > a,
   .pagineo > li > span {padding:5px 10px;font-size:12px;line-height:1.5;}
