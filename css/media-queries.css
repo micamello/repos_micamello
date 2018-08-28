@@ -65,7 +65,7 @@
   
   .info_text_jobs
     {
-      font-size: 15px;
+      font-size: 11px;
     }
     .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
       margin-left: 105px;
@@ -92,8 +92,10 @@
 
     .list-unstyled.msg_error
     {
-      position: relative;
+      position: absolute;
       left: 0px;
+      /*padding-top: 20px;*/
+      margin-top: 14px;
       text-align: center;
       /*text-align: middle;*/
       top: 0px;
@@ -102,7 +104,7 @@
       padding: 0 0 0 0;
       background-color: transparent;
       color: red;
-      font-size: 15px;
+      font-size: 11px;
       right: 0px
     }    
 }

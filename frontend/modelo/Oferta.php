@@ -83,5 +83,7 @@ class Modelo_Oferta{
     $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
+
+  
 }  
 ?>

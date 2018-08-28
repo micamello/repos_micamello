@@ -211,5 +211,20 @@ class Utils{
     }
     return array($status,$ext);
   }
+
+  public static function validarNumeros($campo){
+    if(preg_match ("/^[0-9]+$/", $campo)) return true;
+    else return false;
+  }
+
+  public static function validarLongitudMultiselect($array, $long){
+    if(count($array)>$long){ return false;}
+    else return true;
+  }
+  // funcion para validar la cedula de Ecuador//
+//Autor: Oliver Veliz
+//año:2009
+
+
 }
 ?>

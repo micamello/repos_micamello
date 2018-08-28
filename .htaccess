@@ -69,6 +69,9 @@ RewriteRule ^cuestionario/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario [L]
 #velocimetro
 RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 
+#publicar
+RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
+
 #planes
 RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
 RewriteRule ^compraplan/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra [L]

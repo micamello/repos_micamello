@@ -74,7 +74,7 @@
            <div class="col-md-6">
              <div class="form-group">
                <label for="numero_cand">Celular: </label><div class="help-block with-errors" id="error_custom_cel"></div>
-               <input type="text" class="form-control" name="numero_cand" id="numero_cand" onkeypress="return isNumber(event)" required>
+               <input type="text" class="form-control" name="numero_cand" id="numero_cand" required onkeypress="numero_validate(this.id);">
              </div>
            </div> 
 

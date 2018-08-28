@@ -14,6 +14,12 @@ class Modelo_Provincia{
 			AND c.id_ciudad = $idCiudad;";
     return $GLOBALS['db']->auto_array($sql,array());
   }
+
+  public static function obtieneProvinciasSucursal($id_pais)
+  {
+  	$sql = "SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '$id_pais'";
+  	return $GLOBALS['db']->auto_array($sql,array(), true);
+  }
   
     public static function obtieneListadoAsociativo(){
 
