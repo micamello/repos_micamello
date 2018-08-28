@@ -2,14 +2,20 @@
   <div class="row">
     <div class="main_business"><br><br>
       <div class="col-md-6">
-        <form action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post">
+        <form id="form_login" action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post">
           <h3 align="center"> INICIAR SESIÓN</h3>
-          <div class="form-group has-feedback">
+          <div class="col-md-12">
+            <div class="form-group">
+            <label>eder: </label><div class="help-block with-errors"></div>
             <input type="text" name="username" id="username" class="form-control" placeholder="Usuario" required>
             <input type="hidden" name="login_form" id="login_form" value="1">
           </div>
-          <div class="form-group has-feedback">
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+            <label>eder: </label><div class="help-block with-errors"></div>
             <input type="password" name="password" id="password" class="form-control" placeholder="Contraseña" required>
+          </div>
           </div>
           <p class="text-center"><strong>Olvidaste tu contraseña</strong> <a href="<?php echo PUERTO."://".HOST;?>/contrasena/">Haz click aquí</a></p><br>
           <div class="row">          

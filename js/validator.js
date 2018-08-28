@@ -258,6 +258,9 @@
     if(errors[0].textContent.indexOf("coincida con el solicitado")!=-1){
       errors[0].innerHTML = '<p>El formato es incorrecto</p>';
     }
+    // if(errors[0].textContent.indexOf("Rellene este campo")!=-1){
+    //   errors[0].innerHTML = '<i class="fa fa-home"></i>';
+    // }
 
 
     $group.hasClass('has-feedback')

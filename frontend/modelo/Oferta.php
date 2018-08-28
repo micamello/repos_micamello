@@ -75,5 +75,7 @@ class Modelo_Oferta{
 
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
+
+  
 }  
 ?>

@@ -4,6 +4,14 @@ if(document.getElementById('form_register')){
   $("#form_register").validator();
 }
 
+if(document.getElementById('form_login')){
+  $("#form_login").validator();
+}
+
+if(document.getElementById('form_publicar')){
+  $("#form_publicar").validator();
+}
+
 function numero_validate(id)
 {
   var input_number = id;

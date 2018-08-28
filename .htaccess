@@ -62,6 +62,7 @@ RewriteRule ^cuestionario/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario [L]
 #velocimetro
 RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 
+#publicar
 RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
 
 #planes
@@ -69,4 +70,3 @@ RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
 
 #ofertas
 RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta [L]
->>>>>>> desarrollo

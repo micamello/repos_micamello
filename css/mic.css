@@ -583,3 +583,24 @@ body
 }
 /* vista de ofertas */
 
+.button_transfer_list{
+  margin: 26px 0 10px 0;
+  padding: 10px 20px 10px 20px;
+}
+
+.badge_item{
+  padding: 5px 20px 5px 20px;
+  margin: 5px 18px 5px 18px;
+  background-color: #03a9f4;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.error_text{
+  padding: 2px 10px 2px 10px;
+  margin: 2px 10px 2px 10px;
+  background-color: #EB3D3D;
+  color: #FFFFFF;
+  border-radius: 5px;
+}
