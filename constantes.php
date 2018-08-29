@@ -24,6 +24,7 @@ define('PATH_PROFILE',FRONTEND_RUTA.'imagenes/usuarios/profile/');
 define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
 define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'alert-warning'));
 define('ESTADOS',array('1'=>'Activo','0'=>'Inactivo'));
+define('MAIL_SUGERENCIAS','micamelloecuador@gmail.com');
 
 define('DISCAPACIDAD', array('0'=>'No', '1'=>'S&iacute;'));
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));

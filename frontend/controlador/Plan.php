@@ -10,7 +10,7 @@ class Controlador_Plan extends Controlador_Base {
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
-    
+    $breadcrumbs = array();
     $opcion = Utils::getParam('opcion','',$this->data);  
     switch($opcion){      
       case 'compra':
@@ -31,6 +31,7 @@ class Controlador_Plan extends Controlador_Base {
 
   public function planesUsuario(){
 
+    $breadcrumbs['planesUsuario'] = 'Mis planes';
     $desactivarPlan = Utils::getParam('desactivarPlan', '', $this->data);
     if(!empty($desactivarPlan)){
         $r = Modelo_UsuarioxPlan::desactivarPlan($desactivarPlan);
@@ -54,6 +55,7 @@ class Controlador_Plan extends Controlador_Base {
     $tags = self::mostrarDefault(2);
     $tags["show_banner"] = 1;
     $tags["planUsuario"] = $planUsuario;
+    $tags['breadcrumbs'] = $breadcrumbs;
 
     Vista::render('planes_usuario',$tags); 
   }
