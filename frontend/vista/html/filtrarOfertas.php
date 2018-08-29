@@ -2,7 +2,7 @@
 
 foreach ($data as $letra => $value) { 
  
-    echo '<a href="'.PUERTO.'://'.HOST.'/oferta/2';
+    echo '<a href="'.PUERTO.'://'.HOST.'/'.$mostrar.'/'.$vista.'/2';
     if($letra == 'A'){
         echo '/A'.$value['id'];
     }

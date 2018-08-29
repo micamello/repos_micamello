@@ -97,6 +97,15 @@ class Modelo_Usuario{
     return $rutaImagen;   
   }
   
+  public static function obtieneFotoEmpresa($idUsuario){
+    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
+    }else{
+      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
+    }
+    return $rutaImagen;   
+  }
+
   public static function actualizarSession($idUsuario){
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
   }

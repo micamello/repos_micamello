@@ -42,6 +42,7 @@ class Controlador_Perfil extends Controlador_Base
                 $btnSubir  = 1;
 
                 if (Utils::getParam('actualizar') == 1) {
+
                     $btnSig = 1;
 
                     if(!isset($_FILES['subirCV'])){
@@ -110,6 +111,7 @@ class Controlador_Perfil extends Controlador_Base
                 $tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
+                $tags["show_banner"] = 1;
 
                 Vista::render('perfil_paso1', $tags);
 
@@ -120,6 +122,7 @@ class Controlador_Perfil extends Controlador_Base
                 Vista::renderJSON($arrciudad);
                 break;
             default:
+                $tags["show_banner"] = 1;
                 Vista::render('perfil', $tags);
                 break;
         }
@@ -152,6 +155,18 @@ class Controlador_Perfil extends Controlador_Base
                 $validaFile = Utils::valida_upload($archivo, 2);
                 if (empty($validaFile)) {
                     throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
+                }
+            }
+
+            if($_POST["password"] != "" || $_POST["password_two"] != ""){
+
+                if ($_POST["password"] != $_POST["password_two"]){
+                  throw new Exception("Contraseña y confirmación de contraseña no coinciden");
+                }
+
+                $passwordValido = Utils::valida_password($_POST["password"]);
+                if ($passwordValido == false){
+                  throw new Exception("Ingrese una contraseña con el formato especificado");
                 }
             }
 
@@ -208,6 +223,12 @@ class Controlador_Perfil extends Controlador_Base
 
                 if (!Modelo_UsuarioxNivel::updateNiveles($_SESSION['mfo_datos']['usuarioxnivel'], $data['nivel_interes'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
+                }
+
+                if($_POST["password"] != "" && $_POST["password_two"] != ""){
+                    if (!Modelo_Usuario::modificarPassword($_POST["password"],$idUsuario)) {
+                        throw new Exception("Ha ocurrido un error al guardar las contraseñas, intente nuevamente");
+                    }
                 }
             }
 

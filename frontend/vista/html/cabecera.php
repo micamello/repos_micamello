@@ -32,11 +32,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
   <?php
-  if (isset($template_css) && is_array($template_css)){
-    foreach($template_css as $file_css){
-      echo '<link rel="stylesheet" href="'.PUERTO.'://'.HOST.'/css/'.$file_css.'.css">';
-    }  
-  }
+    if (isset($template_css) && is_array($template_css)){
+      foreach($template_css as $file_css){
+        echo '<link rel="stylesheet" href="'.PUERTO.'://'.HOST.'/css/'.$file_css.'.css">';
+      }  
+    }
   ?>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
@@ -128,6 +128,31 @@ if(isset($show_banner)){ ?>
   </div><!--End off container -->
 </section> <!--End off Home Sections-->
 <?php } ?>
+
+<?php
+
+  if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
+    <br>
+    <div class="container">
+      <ol class="breadcrumb" align="left">
+        <?php 
+        $cont = 1;
+        echo '<li><a href="'.PUERTO."://".HOST.'/">Inicio</a></li>';
+        foreach($breadcrumbs as $key => $accion){ 
+          if((count($breadcrumbs)-1) >= $cont){
+              $enlace = '<a href="'.PUERTO."://".HOST.'/'.$key.'/">'.$accion.'</a>';
+          }else{
+            $enlace = $accion;
+          }
+          echo '<li>'.$enlace.'</li>';
+          $cont++;
+        } ?>
+      </ol> 
+    </div>
+  <?php }
+  ?>
+
+
 
 <section id="product" class="product">
   <br>
