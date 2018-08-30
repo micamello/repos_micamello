@@ -30,15 +30,15 @@ class Modelo_Plan{
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
- /* public static function numPermisosMax(){
+  public static function listadoPlanesUsuario($idUsuario){
 
-    $sql = 'SELECT MAX(t1.permisos) AS max_permisos FROM (SELECT count(a.descripcion) as permisos
-    FROM mfo_permisoplan p
-    INNER JOIN mfo_accionsist a ON a.id_accionSist = p.id_accionSist 
-    WHERE a.estado = 1
-    GROUP BY p.id_plan) AS t1;';
+    $sql = "SELECT p.id_plan, p.nombre, p.costo, up.id_comprobante, up.fecha_compra, if(up.num_post_rest <> '',num_post_rest,'-') as num_post_rest, if(up.fecha_caducidad <> '',fecha_caducidad,'Infinito') as fecha_caducidad, up.id_usuario_plan, up.estado
+        FROM mfo_usuario_plan up, mfo_plan p
+        WHERE p.id_plan = up.id_plan 
+        AND ((up.estado = 1)||(up.estado = 0 AND up.id_comprobante <> ''))
+        AND up.id_usuario = ".$idUsuario." ORDER BY fecha_compra ASC";
     return $GLOBALS['db']->auto_array($sql,array(),true);
-  }*/
+  }
   
   public static function busquedaActivoxTipo($plan,$tipo,$sucursal){
     if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }

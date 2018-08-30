@@ -55,6 +55,11 @@ function obtieneControlador($nombre){
     case 'oferta':
       return 'Oferta';
     break;
+    case 'postulacion':
+      return 'Postulacion';
+    break;
+    case 'recomendacion':
+      return 'Recomendacion';
     default:
       return 'Inicio'; 
     break;

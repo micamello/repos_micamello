@@ -14,7 +14,7 @@
 				<?php
 				if (!empty($arrarea)) { 
 				    foreach ($arrarea as $key => $ae) {
-				        echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/'.$mostrar.'/'.$vista.'/1/A'.$key.'/';
+				        echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/A'.$key.'/';
 				        if($_SESSION['mfo_datos']['Filtrar_ofertas']['P'] != 0){
 				        	echo 'P'.$_SESSION['mfo_datos']['Filtrar_ofertas']['P'].'/';
 				    	}
@@ -38,7 +38,7 @@
 				<?php
 					if (!empty($arrprovincia)) {
 						foreach ($arrprovincia as $key => $pr) {
-						    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/'.$mostrar.'/'.$vista.'/1/P'.$key.'/';
+						    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/P'.$key.'/';
 					        if($_SESSION['mfo_datos']['Filtrar_ofertas']['A'] != 0){
 					        	echo 'A'.$_SESSION['mfo_datos']['Filtrar_ofertas']['A'].'/';
 					    	}
@@ -62,7 +62,7 @@
 					<?php
 						if (!empty($jornadas)) {
 							foreach ($jornadas as $key => $jornada) {
-							    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/'.$mostrar.'/'.$vista.'/1/J'.$key.'/';
+							    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/J'.$key.'/';
 						        if($_SESSION['mfo_datos']['Filtrar_ofertas']['A'] != 0){
 						        	echo 'A'.$_SESSION['mfo_datos']['Filtrar_ofertas']['A'].'/';
 						    	}
@@ -86,7 +86,7 @@
 				<?php
 					if (!empty($tiposContrato)) {
 						foreach ($tiposContrato as $key => $contrato) {
-						    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/'.$mostrar.'/'.$vista.'/1/C'.$key.'/';
+						    echo '<li class="lista"><a href="'.PUERTO.'://'.HOST.'/oferta/1/C'.$key.'/';
 					        if($_SESSION['mfo_datos']['Filtrar_ofertas']['A'] != 0){
 					        	echo 'A'.$_SESSION['mfo_datos']['Filtrar_ofertas']['A'].'/';
 					    	}
@@ -105,11 +105,7 @@
 		</div>
 		<div class="col-md-8">
 			<b>
-				<?php if($vista != 'postulacion'){ ?>
-					<span style="font-size: 17px;">Ofertas de empleo</span>
-				<?php }else{ ?>
-					<span style="font-size: 17px;">Mis Postulaciones</span>
-				<?php } ?>
+				<span style="font-size: 17px;">Ofertas de empleo</span>
 			</b>
 			<br/><br/>
 			<div id="busquedas" class='container-fluid'>
@@ -121,13 +117,13 @@
 	        <div id="result">
 	        	<?php if(!empty($ofertas)){
 		            foreach($ofertas as $key => $o){  ?>
-						<a href='<?php echo PUERTO."://".HOST.'/detalleOferta/'.$vista.'/'.$o["id_ofertas"]; ?>/'>
+						<a href='<?php echo PUERTO."://".HOST.'/detalleOferta/'.$o["id_ofertas"]; ?>/'>
 							<div class='panel panel-default shadow-panel'>
 							   <div class='panel-body'>
-									<div class='col-md-2' align='center'>
-										<img class="img-circle img-responsive <?php if($vista != 'postulacion'){ echo ' oferta'; }else{ echo ' postulacion'; } ?>" src="<?php if($vista != 'postulacion'){ echo PUERTO.'://'.HOST.'/imagenes/iconOferta.png'; }else{ echo Modelo_Usuario::obtieneFotoEmpresa($o['id_usuario']); } ?>" alt="icono oferta">
-									</div>
-								    <div class='col-md-<?php if($vista == 'postulacion'){ echo '9'; }else{ echo '10'; }?>'>
+								   <div class='col-md-2' align='center'>
+								   		<img class="img-circle img-responsive" style='border: 3px solid #ccf2ff; margin: 0 auto;padding: 19px 0px 19px 0px;' src="<?php echo PUERTO.'://'.HOST.'/imagenes/iconOferta.png'; ?>" alt="icono oferta">
+								   </div>
+								   <div class='col-md-10'>
 								   		<span>
 											<?php if ($o['confidencial'] == 0) {
 												echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
@@ -138,54 +134,33 @@
 											} ?>
 											<b style='color: black;'><?php echo $o['titulo']; ?></b>  
 										    <?php 
-
-										    	if(isset($o['tipo']) && $o['tipo'] == 2){ 						
-										    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
-										    	}else{
-													if(isset($postulacionesUserLogueado[$o["id_ofertas"]])){
-														$tipo = $postulacionesUserLogueado[$o["id_ofertas"]];
-														if($tipo == 2){
-												    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$tipo].'</span>';
-													    }else{
-													    	echo ' | <span class="etiquetaPostulado parpadea">Autopostulado '.POSTULACIONES[$tipo].'</span>';
-													    }
-													}
+										    foreach($postulacionesUserLogueado as $key => $p){ 
+												
+												if($p['id_ofertas'] == $o["id_ofertas"]){
+													if($p['tipo'] == 2){
+											    		echo ' | <span class="postulacion">Aplic&oacute; de forma '.POSTULACIONES[$p['tipo']].'</span>';
+												    }else{
+												    	echo ' | <span class="postulacion">Autopostulado '.POSTULACIONES[$p['tipo']].'</span>';
+												    }
 												}
-											?>
+											} ?>
 									    </span>
-									    
-										<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
-									    	<br>
-									    	<span class="<?php echo CLASES_ESTATUS[$o['resultado']]; ?>"><b><?php echo Modelo_Oferta::ESTATUS_OFERTA[$o['resultado']]; ?></b></span>
-										<?php } ?>
-
-										<br>
-									    <span style="color:#333;"><?php echo 'Fecha de creaci&oacute;n: '.date("d-m-Y", strtotime($o['fecha_creado'])); ?></span>
-										<br><br>
-									  	<div class="row">
-									  		<div class='col-sm-3 col-md-2' align='center'>
-							                    <span class="etiquetaOferta">Salario: </span><br><?php echo $o['salario']; ?>
-							                </div>
-							                <div class='col-sm-3 col-md-3' align='center'>
-							                    <span class="etiquetaOferta">Provincia: </span><br><?php echo $o['provincia']; ?>
-							                </div>
-							                <div class='col-sm-3 col-md-3' align='center'>
-							                    <span class="etiquetaOferta">Jornada: </span><br><?php echo $o['jornada']; ?>
-							                </div>
-							                <div class='col-sm-3 col-md-4' align='center'>
-							                    <span class="etiquetaOferta">Tipo contrato: </span><br><?php echo $o['contrato']; ?>
-							                </div>
-									  	</div>
 									</div>
-									<?php if($vista == 'postulacion'){ 
-										if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
-											<div class="col-md-1" align='center'>
-												<a href="<?php echo PUERTO."://".HOST."/postulacion/".$o['id_postulacion']."/"; ?>"><br><br>
-													<img width="25" src="<?php echo PUERTO.'://'.HOST.'/imagenes/delete.png'; ?>" alt="Eliminar">
-												</a>
-											</div>
-										<?php } ?>
-									<?php } ?>
+									<br><br><br>
+								  	<div class="row">
+								  		<div class='col-sm-3 col-md-2' align='center'>
+						                    <span class="etiquetaOferta">Salario: </span><br><?php echo $o['salario']; ?>
+						                </div>
+						                <div class='col-sm-3 col-md-2' align='center'>
+						                    <span class="etiquetaOferta">Provincia: </span><br><?php echo $o['provincia']; ?>
+						                </div>
+						                <div class='col-sm-3 col-md-2' align='center'>
+						                    <span class="etiquetaOferta">Jornada: </span><br><?php echo $o['jornada']; ?>
+						                </div>
+						                <div class='col-sm-3 col-md-3' align='center'>
+						                    <span class="etiquetaOferta">Tipo contrato: </span><br><?php echo $o['contrato']; ?>
+						                </div>
+								  	</div>
 							   </div>
 							</div>
 						</a>

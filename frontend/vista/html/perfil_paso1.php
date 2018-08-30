@@ -201,6 +201,7 @@
 	                                        </div>
 	                                    </div>
 	                                <?php } ?>
+	                                	
 	                                    <div class="col-md-6">
 		                                    <div class="form-group">
 		                                        <label for="telefono">Tel&eacute;fono </label><div class="help-block with-errors"></div>
@@ -303,6 +304,18 @@
 	                                        </div>
 	                                    </div>
 	                                <?php } ?>
+									<div class="col-md-6">
+									  <div class="form-group">
+									    <label class="text-center">Contrase&ntilde;a:</label><div class="help-block with-errors"></div>
+									    <input id="password" name="password" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Al menos 1 may&uacute;scula y 1 nro' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Ejemplo: me198454EjgE" class="form-control" data-toggle="password" <?php if($btnSig == 1){ echo 'disabled'; } ?>>
+									  </div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+										  <label class="text-center">Confirmar Contrase&ntilde;a:</label><div class="help-block with-errors"></div>
+										  <input id="password_two" name="password_two" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Por favor, ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" data-toggle="password" <?php if($btnSig == 1){ echo 'disabled'; } ?>>
+										</div>
+									</div>  
 	                                </div>  
 	                                  
 	                            </div>

@@ -34,8 +34,7 @@ class Controlador_Inicio extends Controlador_Base {
     $tags["template_js"][] = "mic";
     $tags["template_js"][] = "modal-register";
 
-    Vista::render('inicio', $tags);  
-    
+    Vista::render('inicio', $tags);
   }
 }  
 ?>

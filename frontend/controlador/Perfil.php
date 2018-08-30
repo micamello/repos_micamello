@@ -42,6 +42,7 @@ class Controlador_Perfil extends Controlador_Base
                 $btnSubir  = 1;
 
                 if (Utils::getParam('actualizar') == 1) {
+
                     $btnSig = 1;
 
                     if(!isset($_FILES['subirCV'])){
@@ -156,6 +157,18 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }
 
+            if($_POST["password"] != "" || $_POST["password_two"] != ""){
+
+                if ($_POST["password"] != $_POST["password_two"]){
+                  throw new Exception("Contraseña y confirmación de contraseña no coinciden");
+                }
+
+                $passwordValido = Utils::valida_password($_POST["password"]);
+                if ($passwordValido == false){
+                  throw new Exception("Ingrese una contraseña con el formato especificado");
+                }
+            }
+
             $validaTlf = Utils::valida_telefono($data['telefono']);
             if (empty($validaTlf)) {
                 throw new Exception("El telefono " . $data['telefono'] . " no es válido");
@@ -209,6 +222,12 @@ class Controlador_Perfil extends Controlador_Base
 
                 if (!Modelo_UsuarioxNivel::updateNiveles($_SESSION['mfo_datos']['usuarioxnivel'], $data['nivel_interes'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
+                }
+
+                if($_POST["password"] != "" && $_POST["password_two"] != ""){
+                    if (!Modelo_Usuario::modificarPassword($_POST["password"],$idUsuario)) {
+                        throw new Exception("Ha ocurrido un error al guardar las contraseñas, intente nuevamente");
+                    }
                 }
             }
 

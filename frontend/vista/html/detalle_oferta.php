@@ -103,20 +103,43 @@
                         - <?php echo DISCAPACIDAD[$o['discapacidad']]; ?>
                     </h5>
                 </div>
-                <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $o['id_ofertas']; ?>/" enctype="multipart/form-data">
+                <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
                   <input type="hidden" name="postulado" id="postulado" value="1">
-                  <?php if(!empty($postulado)){ ?>
-                    <div align="center">
-                      <h5>
-                       <span class="btn btn-danger">Ya aplico para la oferta</span>
-                      </h5>
-                    </div>
+                  <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
+                    <?php if(!empty($postulado)){ ?>
+                      <div align="center">
+                        <h5>
+                         <span class="btn btn-danger">Ya aplico para la oferta</span>
+                        </h5>
+                      </div>
+                    <?php }else{ ?>
+                      <div align="center">
+                        <h5>
+                          <button type="submit" class="btn btn-success">POSTULARSE</button>
+                        </h5>
+                      </div>
+                    <?php } ?>
                   <?php }else{ ?>
-                    <div align="center">
-                      <h5>
-                        <button type="submit" class="btn btn-success">POSTULARSE</button>
-                      </h5>
-                    </div>
+                      <div align="center">
+                        <label for="status">Estatus del candidato en la oferta</label>
+                        <select class="form-control" name="status" id="status">
+                          <option value="">Seleccione un estatus</option>
+                          <?php 
+                            foreach(ESTATUS_OFERTA as $key => $v){ 
+
+                                echo "<option value='".$key."'";
+                                if($key == strtoupper($postulado['0']['resultado'])){
+                                  echo " selected='selected'";
+                                }
+                                echo ">".utf8_encode($v)."</option>";
+                            } 
+                          ?>
+                        </select>
+                        <br>
+                        <h5>
+                          <button type="submit" class="btn btn-success">GUARDAR</button>
+                        </h5>
+                      </div>
                   <?php } ?>
                 </form>
               </div>

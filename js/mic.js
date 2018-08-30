@@ -90,3 +90,7 @@ if(document.getElementById('form_contrasena')){
 if(document.getElementById('form_deposito')){
   $("#form_deposito").validator();
 }
+
+if(document.getElementById('form_recomendaciones')){
+  $("#form_recomendaciones").validator();
+}
