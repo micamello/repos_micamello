@@ -22,10 +22,14 @@ define('PESO_IMAGEN','1000000');
 define('PESO_ARCHIVO','2000000');
 define('PATH_PROFILE',FRONTEND_RUTA.'imagenes/usuarios/profile/');
 define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
+<<<<<<< HEAD
 define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'alert-warning'));
 define('ESTADOS',array('1'=>'Activo','0'=>'Inactivo'));
 define('MAIL_SUGERENCIAS','micamelloecuador@gmail.com');
 
+=======
+define('PATH_COMPROBANTE',FRONTEND_RUTA.'imagenes/usuarios/comprobante/');
+>>>>>>> FF
 define('DISCAPACIDAD', array('0'=>'No', '1'=>'S&iacute;'));
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));

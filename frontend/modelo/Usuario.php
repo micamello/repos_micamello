@@ -17,9 +17,9 @@ class Modelo_Usuario{
   }
 
   public static function estaLogueado(){
-    Utils::log(__METHOD__. " sesion ". print_r($_SESSION, true) );
+    //Utils::log(__METHOD__. " sesion ". print_r($_SESSION, true) );
     if ( !Utils::getArrayParam('mfo_datos', $_SESSION) || !Utils::getArrayParam('usuario', $_SESSION['mfo_datos'] )){      
-      Utils::log(__METHOD__. " sesion no econtrada: ". print_r($_SESSION, true) );
+      //Utils::log(__METHOD__. " sesion no econtrada: ". print_r($_SESSION, true) );
       return false;
     }
     return true;
@@ -127,11 +127,7 @@ class Modelo_Usuario{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']);
     }
 
-    $result = $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
-    if($result){
-       Utils::upload($imagen,$idUsuario,PATH_PROFILE,1);
-    }
-    return $result;
+    return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
   }
 
   public static function validarFechaNac($fecha){

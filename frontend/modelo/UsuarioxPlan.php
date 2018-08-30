@@ -43,5 +43,27 @@ class Modelo_UsuarioxPlan{
     return $result;
   }
 
+  public static function existePlan($usuario,$plan){
+    if (empty($usuario) || empty($plan)){ return false; }
+    $sql = "SELECT id_usuario_plan FROM mfo_usuario_plan WHERE id_usuario = ? AND id_plan = ?";
+    $result = $GLOBALS['db']->auto_array($sql,array($usuario,$plan));
+    return (isset($result['id_usuario_plan']) && !empty($result['id_usuario_plan'])) ? true : false;
+  }
+
+  public static function modificarPlan($usuario,$plan,$numpost,$duracion){
+    if (empty($usuario) || empty($plan)){ return false; }
+    $values_update = array();
+    $fechacreacion = date('Y-m-d H:i:s');    
+    $values_update["fecha_compra"] = $fechacreacion;
+    $values_update["estado"] = 1;
+    if (!empty($numpost)){
+      $values_update["num_post_rest"] = $numpost;
+    }    
+    if (!empty($duracion)){
+      $fechacaducidad = strtotime ( '+'.$duracion.' day',strtotime($fechacreacion));
+      $values_update["fecha_caducidad"] = date('Y-m-d H:i:s',$fechacaducidad);
+    }
+    return $GLOBALS['db']->update('mfo_usuario_plan',$values_update,'id_usuario='.$usuario.' AND id_plan='.$plan);
+  }
 }  
 ?>
