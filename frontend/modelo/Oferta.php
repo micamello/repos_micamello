@@ -18,10 +18,10 @@ class Modelo_Oferta{
         o.id_ofertas, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
     a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, t.descripcion AS contrato, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
     r.edad_minima, r.licencia, r.viajar, u.nombres AS empresa
-    FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelInteres n, mfo_jornada j, mfo_ciudad c, 
+    FROM mfo_oferta o, mfo_usuario u, mfo_requisitoofreta r, mfo_escolaridad e, mfo_area a, mfo_nivelInteres n, mfo_jornada j, mfo_ciudad c, 
     mfo_tipocontrato t, mfo_provincia p
     WHERE o.estado = 1 
-    AND r.id_requisitoOferta = o.id_requisitoOferta
+    AND r.id_requisitoOfreta = o.id_requisitoOfreta
     AND e.id_escolaridad = o.id_escolaridad
     AND c.id_ciudad = o.id_ciudad
     AND p.id_provincia = c.id_provincia
@@ -52,10 +52,10 @@ class Modelo_Oferta{
         o.id_ofertas, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
     a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, t.descripcion AS contrato, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
     r.edad_minima, r.licencia, r.viajar, u.nombres AS empresa
-    FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelInteres n, mfo_jornada j, mfo_ciudad c, 
+    FROM mfo_oferta o, mfo_usuario u, mfo_requisitoofreta r, mfo_escolaridad e, mfo_area a, mfo_nivelInteres n, mfo_jornada j, mfo_ciudad c, 
     mfo_tipocontrato t, mfo_provincia p
     WHERE o.estado = 1 
-    AND r.id_requisitoOferta = o.id_requisitoOferta
+    AND r.id_requisitoOfreta = o.id_requisitoOfreta
     AND e.id_escolaridad = o.id_escolaridad
     AND c.id_ciudad = o.id_ciudad
     AND o.id_usuario=u.id_usuario
@@ -84,6 +84,16 @@ class Modelo_Oferta{
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
-  
+  public static function guardarRequisitosOferta($data){
+    if (empty($data)) {return false;}
+    $result = $GLOBALS['db']->insert('mfo_requisitoofreta', array("licencia"=>$data['licencia'], "viajar"=>$data['viaje'], "residencia"=>$data['cambio_residencia'], "discapacidad"=>$data['discapacidad'], "confidencial"=>$data['confidencial'], "edad_minima"=>$data['edad_min'], "edad_maxima"=>$data['edad_max']));
+    return $result;
+  }
+
+  public static function guardarOferta($data, $id_reqOf, $idusu, $id_plan){
+    if (empty($data)) {return false;}
+    $result = $GLOBALS['db']->insert('mfo_oferta', array("titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>1, "fecha_creado"=>date("Y-m-d H:i:s"), "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_tipocontrato"=>$data['tipo_cont_of'], "id_requisitoOfreta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_usuario"=>$idusu, "id_plan"=>$id_plan));
+    return $result;
+  }  
 }  
 ?>

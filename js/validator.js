@@ -224,7 +224,7 @@
     var $input = this.$element.find(".has-error :input:first")
     if ($input.length === 0) return
 
-    $('html, body').animate({scrollTop: $input.offset().top - Validator.FOCUS_OFFSET}, 250)
+    // $('html, body').animate({scrollTop: $input.offset().top - Validator.FOCUS_OFFSET}, 250)
     $input.focus()
   }
 

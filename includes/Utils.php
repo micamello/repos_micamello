@@ -152,6 +152,17 @@ class Utils{
     }
   }
 
+  public static function valida_fecha_mayor($fecha){
+    $result = false;
+    if (empty($fecha)) {return $result;}
+      $fecha_actual = date("Y-m-d");
+      if ($fecha < $fecha_actual) {
+        return $result;
+      }
+        $result = true;
+        return $result;
+  }
+
   static public function valida_upload($file,$tipo){ 
 
     $file_type = $file['type']; 

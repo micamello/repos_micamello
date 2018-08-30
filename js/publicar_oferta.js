@@ -1,3 +1,46 @@
+if (document.getElementById("fecha_contratacion")) {    
+    $fecha_actual = fechaActual();
+    $("#fecha_contratacion").on("change", function(){
+        var valor = document.getElementById("fecha_contratacion");
+        if ((!!this.value)) {
+            if ($fecha_actual>this.value) {
+                if (document.getElementById("p_node_error")) {
+                    document.getElementById("p_node_error").outerHTML = "";
+                }
+                    var p_node = document.createElement("P");
+                    var p_text = document.createTextNode("La fecha debe ser igual o mayor a la actual");
+                    p_node.appendChild(p_text);
+                    p_node.setAttribute("class", "list-unstyled msg_error");
+                    p_node.setAttribute("id", "p_node_error");
+                    var fecha_error = document.getElementById("fecha_error");
+                    fecha_error.appendChild(p_node);
+            }
+            else{
+                if (document.getElementById("p_node_error")) {
+                    document.getElementById("p_node_error").outerHTML = "";
+                }
+            }
+        }
+        else{
+            if (document.getElementById("p_node_error")) {
+                document.getElementById("p_node_error").outerHTML = "";
+            }
+        }
+    })
+}
+
+function fechaActual() {
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
+
 $('#provincia_of').change(function()
 {
     var id_provincia = $('select[id=provincia_of]').val();
@@ -22,6 +65,20 @@ $('#provincia_of').change(function()
     }
 });
 
+// if(document.getElementById('des_of')){
+//   tinymce.init({ 
+//     selector:'textarea#des_of',
+//     removed_menuitems: 'undo, redo',
+//     height : "128",
+//     resize: false,
+//     branding: false,
+//     elementpath: false,
+//     menubar:false,
+//     statusbar: false,
+//     language: 'es',
+//   })
+// }
+
 $('#btn_transfer').on('click', function()
 {
     var select_array_idioma = document.getElementById('select_array_idioma');
@@ -32,7 +89,7 @@ $('#btn_transfer').on('click', function()
     var idiomanivel_selected_select = tag_nivel_idioma.options[tag_nivel_idioma.selectedIndex];
 
     var selected_items = document.getElementsByClassName('listado');
-    console.log(selected_items);
+    // console.log(selected_items);
 
     var all_selected = $('#idioma_of option:disabled');
     var error_show = document.getElementById('id_span_error');
@@ -144,17 +201,3 @@ function valida_numeros(evt){
 //         return false;
 //       }
 // }
-
-if(document.getElementById('des_of')){
-  tinymce.init({ 
-    selector:'textarea#des_of',
-    removed_menuitems: 'undo, redo',
-    height : "128",
-    resize: false,
-    branding: false,
-    elementpath: false,
-    menubar:false,
-    statusbar: false,
-    language: 'es',
-  })
-}

@@ -1,16 +1,29 @@
 <div class="container">
 	<div class="">
-		<div class="breadmic_title">
-			Publicar Vacante
+		<div class="breadcrumb">
+			<b>Publicar Vacante</b>
+			 <div align="right">Publicaciones restantes: 
+			 	<?php 
+				if (!empty($publicaciones_restantes)) {
+					?><b>
+					<span><?php echo $publicaciones_restantes['p_restantes']; ?></span></b>
+					<?php
+					}
+				 ?>	
+				  <!-- / Plan(es) activo(s):
+				  <select>
+				  	<option></option>
+				  </select> -->
+			 </div>
 		</div>
-		<div class="panel">
+		<div class="panel panel-default shadow">
 			<div class="panel-body">
 				<form id="form_publicar" role="form" method="post" action="<?php echo PUERTO."://".HOST;?>/publicar/">
 					<input type="hidden" name="form_publicar" value="1">
 					<div class="row">
-						<div class="col-md-6">
+						<div class="col-md-12">
 							<div class="form-group">
-								<label class="">Título: </label><div class="help-block with-errors"></div>
+								<label class="">Título oferta: </label><div class="help-block with-errors"></div>
 								<input type="text" name="titu_of" class="form-control" placeholder="Título de la oferta" required value="<?php
 								    if(isset($_REQUEST['titu_of'])){
 								                $name = $_REQUEST['titu_of'];
@@ -20,14 +33,21 @@
 							</div>
 						</div>
 
-						<div class="col-md-3 col-sm-12">
+						<div class="col-md-12">
 							<div class="form-group">
-								<label class="">Salario: </label><div class="help-block with-errors"></div>
-								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return valida_letras(event);" required>
+								<label class="">Descripción oferta: </label><div class="help-block with-errors"></div>
+								<textarea id="des_of" rows="7" name="des_of" class="form-control" style="resize: none;" required></textarea>
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="">Salario: </label><div class="help-block with-errors"></div>
+								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return valida_numeros(event);" required>
+							</div>
+						</div>
+
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cantidad de vacantes: </label><div class="help-block with-errors"></div>
 								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return valida_numeros(event);">
@@ -35,42 +55,6 @@
 						</div>
 
 						<div class="col-md-6">
-							<div class="form-group">
-								<label class="">Descripción: </label><div class="help-block with-errors"></div>
-								<textarea id="des_of" name="des_of" class="form-control" style="resize: none;" required></textarea>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="form-group">
-								<label class="">Categorías: (Máx: 1)</label><div class="help-block with-errors"></div>
-								<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple required>
-			                    <?php 
-			                      if (!empty($arrarea)){
-			                          foreach($arrarea as $area){ ?>
-			                              <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
-			                          <?php }
-			                      } ?>
-			                  </select>
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Nivel: (Máx: 1)</label><div class="help-block with-errors"></div>
-								<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple required>
-			                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
-			                    <?php 
-			                      if (!empty($intereses)){
-			                          foreach($intereses as $interes){ ?>
-			                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
-			                          <?php }
-			                      } ?>
-			                  </select>
-							</div>
-						</div>
-
-						<div class="col-md-3">
 							<div class="form-group">
 								<label>Seleccione provincia:</label><div class="help-block with-errors"></div>
 								<select name="provincia_of" class="form-control" id="provincia_of" required>
@@ -87,7 +71,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione ciudad:</label><div class="help-block with-errors"></div>
 								<select name="ciudad_of" class="form-control" id="ciudad_of" required>
@@ -104,7 +88,39 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label class="">Categorías: (Máx: 1)</label><div class="help-block with-errors"></div>
+								<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+			                    <?php 
+			                      if (!empty($arrarea)){
+			                          foreach($arrarea as $area){ ?>
+			                              <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
+			                          <?php }
+			                      } ?>
+			                  </select>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-group">
+								<label>Nivel: (Máx: 1)</label><div class="help-block with-errors"></div>
+								<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+			                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
+			                    <?php 
+			                      if (!empty($intereses)){
+			                          foreach($intereses as $interes){ ?>
+			                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
+			                          <?php }
+			                      } ?>
+			                  </select>
+							</div>
+						</div>
+
+
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Jornada: </label><div class="help-block with-errors"></div>
 								<select name="jornada_of" class="form-control" required>
@@ -119,7 +135,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Tipo contrato: </label><div class="help-block with-errors"></div>
 								<select name="tipo_cont_of" class="form-control" required>
@@ -134,10 +150,10 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Escolaridad: </label><div class="help-block with-errors"></div>
-								<select name="nivel_idi_of" class="form-control" required>
+								<select name="escolaridad" class="form-control" required>
 									<?php if (!empty($arrescolaridad)){
 										foreach ($arrescolaridad as $escolaridad) {?>
 											<option value="<?php echo $escolaridad['id_escolaridad'] ?>"><?php echo utf8_encode($escolaridad['descripcion']) ?></option>
@@ -149,7 +165,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Años de experiencia: </label><div class="help-block with-errors"></div>
 								<select name="experiencia" class="form-control" required>
@@ -161,10 +177,10 @@
 
 						
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
-								<label>Fecha contratación: </label><div class="help-block with-errors"></div>
-								<input type="date" name="fecha_contratacion" class="form-control" required>
+								<label>Fecha contratación: </label><div id="fecha_error" class="help-block with-errors1"></div>
+								<input type="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" required>
 							</div>
 						</div>
 
@@ -234,7 +250,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Disponibilidad para viajar: </label><div class="help-block with-errors"></div>
 								<select name="viaje" class="form-control" required>
@@ -244,7 +260,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Licencia: </label><div class="help-block with-errors"></div>
 								<select name="licencia" class="form-control" required>
@@ -254,7 +270,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cambio de residencia: </label><div class="help-block with-errors"></div>
 								<select name="cambio_residencia" class="form-control" required>
@@ -264,7 +280,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Discapacidad: </label><div class="help-block with-errors"></div>
 								<select name="discapacidad" class="form-control" required>
@@ -274,7 +290,7 @@
 							</div>
 						</div>
 
-						<div class="col-md-3 col-sm-12">
+						<div class="col-md-6">
 							<div class="form-group">
 								<label>Confidencial: </label><div class="help-block with-errors"></div>
 								<select name="confidencial" class="form-control" required>
@@ -301,7 +317,7 @@
 					</div>
 					<div class="row">
 						<!-- <a type="submit" class="btn btn-success">Publicar</a> -->
-						<input type="submit" name="" class="btn btn-success" value="Publicar">
+						<input type="submit" name="" class="btn btn-success" value="Publicar oferta">
 					</div>
 				</form>
 			</div>
