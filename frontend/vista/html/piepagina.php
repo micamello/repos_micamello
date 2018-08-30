@@ -41,7 +41,7 @@
           <div class="col-md-6">
             <div class="form-group">
               <label class="text-center">Correo:</label><div class="help-block with-errors"></div>
-              <input id="correo" type="email" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
+              <input id="correo" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese un correo electrónico válido' : '')" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
             </div>
           </div>   
           <input type="hidden" name="register_form" id="register_form" value="1">
@@ -74,7 +74,7 @@
            <div class="col-md-6">
              <div class="form-group">
                <label for="numero_cand">Celular: </label><div class="help-block with-errors" id="error_custom_cel"></div>
-               <input type="text" class="form-control" name="numero_cand" id="numero_cand" required onkeypress="numero_validate(this.id);">
+               <input type="text" class="form-control" name="numero_cand" id="numero_cand" required onkeydown="return valida_numeros(event);">
              </div>
            </div> 
 

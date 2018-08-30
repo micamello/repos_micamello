@@ -7,7 +7,6 @@ class Controlador_Inicio extends Controlador_Base {
   }
   
   public function construirPagina(){
-    
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero();

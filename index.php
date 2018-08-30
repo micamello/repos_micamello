@@ -49,6 +49,7 @@ function obtieneControlador($nombre){
     break;
     case 'publicar':
       return 'Publicar';
+    break;
     case 'plan':
       return 'Plan';
     break;

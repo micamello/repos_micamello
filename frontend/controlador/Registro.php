@@ -157,7 +157,7 @@ class Controlador_Registro extends Controlador_Base {
 
                 $token = Utils::generarToken($user_id,"ACTIVACION");
                   if (empty($token)){
-                    throw new Exception("Error en el sistema, por favor intente denuevo");
+                    throw new Exception("Error en el sistema, por favor intente de nuevo");
                   }
 
                 $token .= "||".$user_id."||".date("Y-m-d H:i:s");
