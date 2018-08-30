@@ -33,8 +33,7 @@ class Vista {
     ob_end_flush();
   }
 
-  public static function display($pagina, $template_vars = array()){  
-  Utils::log('template: '.print_r($template_vars,true));  
+  public static function display($pagina, $template_vars = array()){    
     if (!empty($template_vars))
         extract($template_vars);
     

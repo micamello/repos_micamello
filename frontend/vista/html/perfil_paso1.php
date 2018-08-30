@@ -52,7 +52,7 @@
 			                        <label for="subirCV" class="custom_file">
 			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
 			                        </label>
-			                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo">
+			                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
 			                   		<div align="center">
 		                            	<p class="text-center arch_cargado" id="texto_status"><?php echo $msj2; ?></p>
 		                        	</div>

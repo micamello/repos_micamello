@@ -9,7 +9,8 @@ class Controlador_Cuestionario extends Controlador_Base {
   public function construirPagina(){
     
     $_SESSION['mostrar_exito'] = '';
-    $_SESSION['mostrar_error'] = '';    
+    $_SESSION['mostrar_error'] = '';   
+    $mostrar_dialog = false; 
 
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
@@ -24,6 +25,7 @@ class Controlador_Cuestionario extends Controlador_Base {
 
     $nrotest = Modelo_Cuestionario::totalTest();
     $test = Modelo_Cuestionario::testSiguientexUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']); 
+    $ultimo_test = Modelo_Cuestionario::ultimoTestRealizado($_SESSION['mfo_datos']['usuario']['id_usuario']);     
   
     if ((!isset($_SESSION['mfo_datos']['planes']) || 
         !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
@@ -40,7 +42,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     $this->data["pregunta"] = $pregunta;
     $opciones = Modelo_Opcion::listadoxPregunta($pregunta["id_pre"]);
     $nro_opc = count($opciones);
-
+    
     if (Utils::getParam('form_pregunta') == 1){
       $this->guardarRespuestas($nro_opc,$test["id_cuestionario"],$nropreguntas);
     }
@@ -61,12 +63,23 @@ class Controlador_Cuestionario extends Controlador_Base {
     $tags = array('nrotest'=>$test["orden"],
                   'destest'=>$destest,
                   'nropreguntas'=>$nropreguntas,
-                  //'preguntaact'=>$preguntaact,
                   'pregunta'=>$this->data["pregunta"],
                   'opciones'=>$opciones,
                   'tiempo'=>$hoy);   
 
     if ($this->data["pregunta"]["orden"] == 1){
+      $fecha2 = new DateTime($ultimo_test["fecha_culminacion"]);
+      $fecha1 = new DateTime();
+      $resultado = $fecha1->diff($fecha2);
+      if (empty($ultimo_test)){
+        $mostrar_dialog = true;
+      }
+      else if($resultado->format('%d') >= 1){
+        $mostrar_dialog = true;
+      }
+    }
+    
+    if ($mostrar_dialog){  
       $tags["template_js"][] = "cuestionario";
     }
     
@@ -124,7 +137,11 @@ class Controlador_Cuestionario extends Controlador_Base {
     $total_rasgo = 0; $promedio = 0;
     foreach($rasgos as $rasgo){
       $preguntas_rasgo = Modelo_Pregunta::obtienePreguntaxRasgo($test, $rasgo["id_rasgo"]);
-      $total_rasgo = $total_rasgo + Modelo_Respuesta::totalxRasgo($test,$preguntas_rasgo);      
+      $valor_rasgo = Modelo_Respuesta::totalxRasgo($test,$preguntas_rasgo);      
+      if (!Modelo_ResultxRasgo::guardar($valor_rasgo,$_SESSION['mfo_datos']['usuario']['id_usuario'],$rasgo["id_rasgo"])){
+        throw new Exception("Error en el registro del total, por favor comuniquese con el administrador");
+      }
+      $total_rasgo = $total_rasgo + $valor_rasgo; 
     }
     $promedio = round($total_rasgo / count($rasgos));
     if (!Modelo_Cuestionario::guardarPorTest($promedio,$_SESSION['mfo_datos']['usuario']['id_usuario'],$test)){

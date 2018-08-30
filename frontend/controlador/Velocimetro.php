@@ -15,6 +15,44 @@ class Controlador_Velocimetro extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
+    $opcion = Utils::getParam('opcion','',$this->data);  
+    switch($opcion){      
+      case 'cargarcv':
+        $this->cargarCV();
+      break;      
+    } 
+    $this->mostrarDefault();     
+  }
+
+  public function cargarCV(){
+    try {          
+      if(!isset($_FILES['subirCV'])){
+        throw new Exception("Debe subir un archivo con formato pdf o word");         
+      }            
+      $validaFile = Utils::valida_upload($_FILES['subirCV'], 2);
+      if (empty($validaFile)) {
+          throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
+      }
+      $arch = Utils::validaExt($_FILES['subirCV'], 2);
+      
+      $infohv = Modelo_InfoHv::obtieneHv($_SESSION['mfo_datos']['usuario']['id_usuario']);
+      if (empty($infohv)){
+        if (!Modelo_InfoHv::cargarHv($_SESSION['mfo_datos']['usuario']['id_usuario'], $arch[1])) {
+          throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
+        } 
+        else {
+          Utils::upload($_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'], PATH_ARCHIVO, 2);
+        }
+        $_SESSION['mfo_datos']['infohv'] = Modelo_InfoHv::obtieneHv($_SESSION['mfo_datos']['usuario']['id_usuario']);
+      }       
+      $_SESSION['mostrar_exito'] = 'Hoja de vida actualizada exitosamente';          
+    } 
+    catch (Exception $e) {
+      $_SESSION['mostrar_error'] = $e->getMessage();      
+    }
+  } 
+
+  public function mostrarDefault(){
     $cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
     if (empty($cuestionario)){
       $this->redirectToController('cuestionario');
@@ -31,20 +69,20 @@ class Controlador_Velocimetro extends Controlador_Base {
     $descrporc = ($valorporc > 25) ? "Medianas" : "Bajas";    
     $testactual = array_pop($cuestionario);
     $imagengif = ($nrotestusuario < $nrototaltest) ? "gif-lo-quiero.gif" : "gif_felicidades.gif";
+    
     if ($testactual["orden"] < 2){
       $enlaceboton = "cuestionario";
     }
-    elseif($testactual["orden"] == 2){
-      $enlaceboton = "planes";
-    }
     else{
-      //si el usuario tiene un plan y si el plan tiene permiso para el tercer formulario
-      //if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'cargarHv')){
-        //permite subir el curriculum  
-      //} 
-      //else{
+      if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')){
+        $enlaceboton = "cuestionario";
+      } 
+      elseif(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'cargarHv') && !isset($_SESSION['mfo_datos']['infohv'])){        
+        $enlaceboton = "cargarHv";
+      }
+      else{
         $enlaceboton = "planes";
-      //}
+      }
     }
 
     $tags["testactual"] = $testactual;

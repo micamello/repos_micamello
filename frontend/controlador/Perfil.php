@@ -12,7 +12,7 @@ class Controlador_Perfil extends Controlador_Base
     {
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
-        }
+        }    
 
         //Obtiene todos los banner activos segun el tipo
         $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_PERFIL);
@@ -120,6 +120,8 @@ class Controlador_Perfil extends Controlador_Base
                 Vista::renderJSON($arrciudad);
                 break;
             default:
+                $_SESSION['mostrar_exito'] = '';
+                $_SESSION['mostrar_error'] = ''; 
                 $tags["show_banner"] = 1;
                 Vista::render('perfil', $tags);
                 break;
@@ -178,9 +180,15 @@ class Controlador_Perfil extends Controlador_Base
             if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$_SESSION['mfo_datos']['usuario']['tipo_usuario'])) {
                 throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
             }
-            
-            if (!empty($archivo) && $archivo['error'] != 4) {
 
+            if (!empty($imagen) && $imagen['error'] != 4) {
+              if (!Utils::upload($imagen,$idUsuario,PATH_PROFILE,1)){
+                throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
+              }  
+            } 
+                        
+            if (!empty($archivo) && $archivo['error'] != 4) {
+            //if (!empty($archivo)) {
                 $arch = Utils::validaExt($archivo, 2);
                 if (isset($_SESSION['mfo_datos']['infohv'])) {
 
@@ -189,14 +197,18 @@ class Controlador_Perfil extends Controlador_Base
                         if (!Modelo_InfoHv::actualizarHv($_SESSION['mfo_datos']['infohv']['id_infohv'], $arch[1])) {
                             throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                         } else {
-                            Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2);
+                            if (!Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2)){
+                              throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
+                            }
                         }
                     }
                 } else {
                     if (!Modelo_InfoHv::cargarHv($_SESSION['mfo_datos']['usuario']['id_usuario'], $arch[1])) {
                         throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                     } else {
-                        Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2);
+                        if (!Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2)){
+                          throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");  
+                        }
                     }
                 }
             }
