@@ -8,6 +8,13 @@ class Controlador_Inicio extends Controlador_Base {
   
   public function construirPagina(){
 
+    $a1=array("red","green");
+    $a2=array("red","yellow descripción");
+    // print_r()
+    $eder_array = array_merge($a1,$a2);
+    $resultado = array_unique($eder_array);
+      Utils::log(print_r($eder_array, true));
+
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero();
     $nro_candidato = Modelo_Usuario::obtieneNroCandidato();

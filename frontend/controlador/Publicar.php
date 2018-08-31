@@ -15,7 +15,10 @@ class Controlador_Publicar extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
-    
+    if (empty(Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']))){
+      $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
+      Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+    }
 
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
@@ -102,7 +105,35 @@ class Controlador_Publicar extends Controlador_Base {
   }
 
   public function validarCampos($data){
-    // Utils::log("eder pozo datos: ".print_r($data, true));
+
+    // $palabrasTitulo = array();
+    // $palabrasDescripcion = array();
+    // array_push($palabrasTitulo, preg_split("/[\s,]+/u", html_entity_decode($data['titu_of'])));
+    // array_push($palabrasDescripcion, preg_split("/[\s,]+/u", html_entity_decode($data['des_of'])));
+    // // print_r($palabrasTitulo);
+    // // print_r($palabrasDescripcion);
+    // $merge_palabras = array_merge($palabrasTitulo[0], $palabrasDescripcion[0]);
+    // // print_r($merge_palabras);
+    // $arrayPalabras = array_unique($merge_palabras);
+    // print_r($arrayPalabras);
+    // $ordenar_array = array_values($arrayPalabras);
+    // // print_r($ordenar_array);
+    // Utils::log("palabras del descripción y título: ".print_r($ordenar_array, true));
+
+    // // if (Modelo_Oferta::palabrasObscenasFiltro($_SESSION['sucursal']['id_pais'])) {
+      
+    // // }
+
+    // // if (Utils::validarPalabras($data['titu_of'], $data['des_of']) == false) {
+    // //   throw new Exception("Se han encontrado palabras no permitidas en la publicación de su oferta. Por favor revise su contenido e intente nuevamente");
+    // // }
+
+    if (Utils::validarPalabras(array($data['titu_of'], $data['des_of'])) == false) {
+      throw new Exception("Se han encontrado palabras no permitidas en la publicación de su oferta. Por favor revise su contenido e intente nuevamente");
+    }
+
+    // Utils::validarPalabras(array($data['titu_of'], $data['des_of']));
+
 
     if (Utils::validarNumeros($data['salario']) == false) {
       throw new Exception("El campo salario solo permite números");
