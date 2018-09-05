@@ -224,7 +224,7 @@
     var $input = this.$element.find(".has-error :input:first")
     if ($input.length === 0) return
 
-    $('html, body').animate({scrollTop: $input.offset().top - Validator.FOCUS_OFFSET}, 250)
+    // $('html, body').animate({scrollTop: $input.offset().top - Validator.FOCUS_OFFSET}, 250)
     $input.focus()
   }
 
@@ -258,6 +258,9 @@
     if(errors[0].textContent.indexOf("coincida con el solicitado")!=-1){
       errors[0].innerHTML = '<p>El formato es incorrecto</p>';
     }
+    // if(errors[0].textContent.indexOf("Rellene este campo")!=-1){
+    //   errors[0].innerHTML = '<i class="fa fa-home"></i>';
+    // }
 
     if(errors[0].textContent.indexOf("El campo está incompleto o incluye una fecha no válida")!=-1){
       errors[0].innerHTML = '<p>El formato fecha es incorrecto</p>';

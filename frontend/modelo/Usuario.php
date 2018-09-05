@@ -17,9 +17,9 @@ class Modelo_Usuario{
   }
 
   public static function estaLogueado(){
-    Utils::log(__METHOD__. " sesion ". print_r($_SESSION, true) );
+    //Utils::log(__METHOD__. " sesion ". print_r($_SESSION, true) );
     if ( !Utils::getArrayParam('mfo_datos', $_SESSION) || !Utils::getArrayParam('usuario', $_SESSION['mfo_datos'] )){      
-      Utils::log(__METHOD__. " sesion no econtrada: ". print_r($_SESSION, true) );
+      //Utils::log(__METHOD__. " sesion no econtrada: ". print_r($_SESSION, true) );
       return false;
     }
     return true;
@@ -89,14 +89,9 @@ class Modelo_Usuario{
   }
 
   public static function obtieneFoto($idUsuario){
-    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
-    }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
-    }
+    $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
     return $rutaImagen;   
   }
-
 
   public static function actualizarSession($idUsuario){
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
@@ -119,11 +114,7 @@ class Modelo_Usuario{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']);
     }
 
-    $result = $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
-    if($result){
-       Utils::upload($imagen,$idUsuario,PATH_PROFILE,1);
-    }
-    return $result;
+    return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
   }
 
   public static function validarFechaNac($fecha){
@@ -146,6 +137,7 @@ class Modelo_Usuario{
         return true;  
     }
   }
+
 
   public static function obtenerAspirantes($idOferta,$page){
 
@@ -203,6 +195,12 @@ class Modelo_Usuario{
     $page = ($page - 1) * REGISTRO_PAGINA;
     $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+  }
+
+  public static function busquedaPorId($id){
+    if (empty($id)){ return false; }
+    $sql = "SELECT * FROM mfo_usuario WHERE id_usuario = ?";
+    return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
 }  

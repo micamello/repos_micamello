@@ -47,6 +47,10 @@ switch ($carpeta){
 	case 'profile':
 	  $extension = 'image/jpeg';
 	  $ruta = PATH_PROFILE.$archivo;
+	  $resultado = file_get_contents(PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$archivo);	  
+	  if (!$resultado){
+	  	$ruta = PUERTO.'://'.HOST.'/imagenes/user.png';
+	  }	  
 	  $mostrar = true;
 	break;
 	case 'hv':
@@ -56,7 +60,8 @@ switch ($carpeta){
 			$extension = 'application/msword';
 		}
 		$ruta = PATH_ARCHIVO.$archivo;
-		$mostrar = true;
+		$resultado = file_get_contents(PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$archivo);	  
+		$mostrar = (!$resultado) ? false : true;		
 	break;
 }
 

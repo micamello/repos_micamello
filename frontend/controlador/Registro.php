@@ -5,7 +5,6 @@ class Controlador_Registro extends Controlador_Base {
     $this->data = $_SUBMIT;
   }
 
-
   public function construirPagina(){
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -18,7 +17,6 @@ class Controlador_Registro extends Controlador_Base {
       break;      
       default:
         $this->validateCampos();
-        //Utils::doRedirect(PUERTO.'://'.HOST.'/');
       break;
     } 
   }
@@ -56,9 +54,11 @@ class Controlador_Registro extends Controlador_Base {
 
 
   public function validateCampos(){
+    $datadominio = Utils::obtieneDominio();
+    $iso = $datadominio['iso'];
+
     if ( Utils::getParam('register_form') == 1 ){
 
-      //Utils::log("correo post: ".$_POST["correo"]);
       try{
         if ($_POST['tipo_usuario'] == 1) {
           $campos = array('username'=>1,'correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area_select'=>1,'nivel_interes'=>1);          
@@ -68,11 +68,7 @@ class Controlador_Registro extends Controlador_Base {
           $campos = array('username'=>1,'correo'=>1, 'name_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1);          
         }
 
-        
-
         $data = $this->camposRequeridos($campos);
-
-        //Utils::log("correo data post: ".$data["correo"]);
 
         $datousername = Modelo_Usuario::existeUsuario($data["username"]);
         if (empty($datousername)){
@@ -94,28 +90,42 @@ class Controlador_Registro extends Controlador_Base {
         $passwordValido = Utils::valida_password($data["password"]);
         if ($passwordValido == false){
           throw new Exception("Ingrese una contraseña con el formato especificado");
-        }
+        }              
+
+        if (method_exists(new Modelo_Sucursal, 'validar_'.$iso)) {
+            $function = 'validar_'.$iso;
+            $validaCedula = Modelo_Sucursal::$function($data['cedula']);
+              if ($validaCedula == false){
+                throw new Exception("El DNI ingresado no es válido ruc");
+              }
+          }
+          else
+          {
+            $validaCedula = Utils::valida_telefono($data['cedula']);
+            if ($validaCedula == false){
+                throw new Exception("El DNI ingresado no es válido"); 
+                }   
+          }
 
         $correoValido = Utils::es_correo_valido($data["correo"]);
         if ($correoValido == false){
           throw new Exception("Ingrese un correo válido");
         }
-
         $GLOBALS['db']->beginTrans();
 
         self::guardarUsuario($data);
         
-        //Utils::doRedirect(PUERTO.'://'.HOST.'/');
-          
+        //Utils::doRedirect(PUERTO.'://'.HOST.'/');  
       }
       catch( Exception $e ){
         $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();  
-        //Utils::doRedirect(PUERTO.'://'.HOST.'/');  
       }
       Utils::doRedirect(PUERTO.'://'.HOST.'/');
     }    
+
   }
+}
 
   public function guardarUsuario($data){
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
@@ -126,9 +136,6 @@ class Controlador_Registro extends Controlador_Base {
       $area_select = $data['area_select'];
       $nivel_interes = $data['nivel_interes'];
     }
-    
-              //try {
-                //$GLOBALS['db']->beginTrans();
 
                 if(!Modelo_Usuario::crearUsuario($data, $defaultDataUser)){
                     throw new Exception("Ha ocurrido un error, intente nuevamente");
@@ -150,7 +157,7 @@ class Controlador_Registro extends Controlador_Base {
 
                 $token = Utils::generarToken($user_id,"ACTIVACION");
                   if (empty($token)){
-                    throw new Exception("Error en el sistema, por favor intente denuevo");
+                    throw new Exception("Error en el sistema, por favor intente de nuevo");
                   }
 
                 $token .= "||".$user_id."||".date("Y-m-d H:i:s");
@@ -159,15 +166,6 @@ class Controlador_Registro extends Controlador_Base {
                     throw new Exception("Error en el envio de correo, por favor intente denuevo");
                   }
                 $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo y haz clic en el enlace para activar tu cuenta";
-
-
-                
-                //} catch (Exception $e) {
-                //        $_SESSION['mostrar_error'] = $e->getMessage();
-                //        $GLOBALS['db']->rollback();
-                        // Utils::log("Si dentra aqui es rollback eder");
-                        //$this->redirectToController('inicio');
-                //}
   }
 
   public function correoActivacionCuenta($correo,$nombres,$token){

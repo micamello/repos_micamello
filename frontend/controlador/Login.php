@@ -31,13 +31,14 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     } 
+
     $tags["template_js"][] = "validator";    
     $tags["template_js"][] = "ruc_jquery_validator";
     $tags["template_js"][] = "selectr";
     $tags["template_js"][] = "mic";
-    $tags["template_js"][] = "modal-register";
-    
+    $tags["template_js"][] = "modal-register"; 
     Vista::render('login',$tags);  
+
   }
 
   public static function registroSesion($usuario){
