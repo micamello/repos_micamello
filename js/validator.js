@@ -263,6 +263,11 @@
       errors[0].innerHTML = '<p>El formato fecha es incorrecto</p>';
     }
 
+    if(errors[0].textContent.indexOf('Incluye un signo "@" en la dirección de correo electrónico')!=-1){
+      errors[0].innerHTML = '<p>El formato de correo es incorrecto</p>';
+    }
+    
+
     $group.hasClass('has-feedback')
       && $feedback.removeClass(this.options.feedback.success)
       && $feedback.addClass(this.options.feedback.error)

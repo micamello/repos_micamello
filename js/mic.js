@@ -1,4 +1,4 @@
-// $("#form_empresa").validator();
+
 
 if(document.getElementById('form_register')){
   $("#form_register").validator();
@@ -47,6 +47,7 @@ if(document.getElementById('form_editarPerfil')){
 
 
 
+
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
     var dni_error = document.getElementById("error_custom_dni");
@@ -78,3 +79,32 @@ if(document.getElementById('form_login')){
 if(document.getElementById('form_contrasena')){
   $("#form_contrasena").validator();
 }
+
+if(document.getElementById('form_deposito')){
+  $("#form_deposito").validator();
+}
+
+if(document.getElementById('form_recomendaciones')){
+  $("#form_recomendaciones").validator();
+}
+
+
+$('.carousel[data-type="multi"] .item').each(function(){
+
+  var next = $(this).next();
+  if (!next.length) {
+    next = $(this).siblings(':first');
+  }
+  next.children(':first-child').clone().appendTo($(this));
+  
+  for (var i=0;i<4;i++) {
+
+    next=next.next();
+    if (!next.length) {
+        next = $(this).siblings(':first');
+    }
+    
+    next.children(':first-child').clone().appendTo($(this));
+  }
+});
+

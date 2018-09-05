@@ -734,13 +734,22 @@ Separator
 /*
 Button
 */
+.btn-sm{
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+  font-size:9px;
+  font-weight: 600;
+  border:1px solid;
+  padding: 2px 5px 0px 5px;
+}
+
 .btn{
-    -webkit-transition: all 0.6s;
-    transition: all 0.6s;
-    font-size:14px;
-    font-weight: 600;
-    border:1px solid;
-    padding: 1rem 4rem;
+  -webkit-transition: all 0.6s;
+  transition: all 0.6s;
+  font-size:14px;
+  font-weight: 600;
+  border:1px solid;
+  padding: 1rem 4rem;
 }
 .btn-primary {
     color: #fff;
@@ -749,9 +758,9 @@ Button
     border-color: #03A9F4;
 }
 .btn-primary:hover{
-    background-color: #eee;
-    border-color: #eee;
-    color:#03A9F4;
+    background-color: #03A9F4;
+    border-color: #03A9F4;
+    color:#fff;
 }
 
 .btn-default{
@@ -1525,7 +1534,8 @@ work Section style
     display: block;
 }
 .test_item{
-    padding: 40px;
+    padding-top: 25px;
+    padding-bottom: 25px;
     transition: all 0.6s;
     border:1px solid transparent;
 }
@@ -1533,7 +1543,7 @@ work Section style
     border:1px solid #ddd;
     background-color: #fff;
 }
-.test_item:hover .item_img i{
+.test_item:hover #icono{
     color:#fff;
     background-color: #03A9F4;
 }
@@ -1541,24 +1551,30 @@ work Section style
 .main_test .item_img{
     float: left;
     display: inline-block;
-    width:20%;
-    margin-right: 10%;
+    width:30%;
+    /*margin-right: 5%;*/
 }
+
+
 .main_test .item_text{
     display: inline-block;
     width:70%;
 }
+#testimonio{
+  padding-left: 0px;
+  position: relative;
+}
+
 .item_img{
     position: relative;
 }
-.item_img i{
+#icono{
     background-color: #fff;
     position: absolute;
-    right: -25%;
     top: 50%;
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
     text-align: center;
     color: #ddd;
     border-radius: 50%;
@@ -1571,7 +1587,7 @@ work Section style
     -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
     filter: grayscale(100%);
     transition: all 0.6s;
-    height: 30px;
+  
 }
 .brand_item img:hover{
     -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
@@ -2259,4 +2275,39 @@ work Section style
     cursor: pointer;
 }
 
-/* boton de cargar foto en el perfil */
+
+.carousel-control          { width:  4%; }
+.carousel-control.left,.carousel-control.right {
+
+  margin-left:15px;
+}
+
+@media (max-width: 767px) {
+  .carousel-inner .active.left { left: -100%; }
+  .carousel-inner .next        { left:  100%; }
+  .carousel-inner .prev    { left: -100%; }
+  .active > div { display:none; }
+  .active > div:first-child { display:block; }
+
+}
+@media (min-width: 767px) and (max-width: 992px ) {
+  .carousel-inner .active.left { left: -50%; }
+  .carousel-inner .next        { left:  50%; }
+  .carousel-inner .prev    { left: -50%; }
+  .active > div { display:none; }
+  .active > div:first-child { display:block; }
+  .active > div:first-child + div { display:block; }
+}
+@media (min-width: 992px ) {
+  .carousel-inner .active.left { left: -16.7%; }
+  .carousel-inner .next        { left:  16.7%; }
+  .carousel-inner .prev    { left: -16.7%; }  
+}
+
+
+.carousel-xs{
+  width: 25%;
+  margin: 0 auto;
+}
+
+

@@ -22,7 +22,7 @@ class Controlador_Perfil extends Controlador_Base
         $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
 
         $msj1 = $imgArch1 = $btnDescarga = '';
-        $tags["show_banner"] = 1;
+        
 
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
@@ -61,8 +61,8 @@ class Controlador_Perfil extends Controlador_Base
                         $imgArch1    = $_SESSION['mfo_datos']['infohv']['formato'] . '.png';
                     }
                     $msj1        = 'Hoja de vida Cargada';
-                    $nombre_arch = $_SESSION['mfo_datos']['usuario']['id_usuario'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
-                    $ruta_arch   = PUERTO . "://" . HOST . '/imagenes/usuarios/hv/' . $nombre_arch;
+                   $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
+                    $ruta_arch   = PUERTO . "://" . HOST . '/hojasDeVida/' . $nombre_arch;
                     $btnDescarga = 1;
                     
                     $msj2        = 'Actualizar CV';
@@ -112,7 +112,6 @@ class Controlador_Perfil extends Controlador_Base
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
                 $tags["show_banner"] = 1;
-
                 Vista::render('perfil_paso1', $tags);
 
                 break;

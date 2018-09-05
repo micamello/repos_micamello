@@ -1,11 +1,11 @@
-<div class="container"><br><br>
+<div class="container"><br>
     <div class="row">
         <div class="main_business">
             <section>
                 <div class="container">
                     <div class="col-md-12">
-                        <div class="breadcrumb">
-                            <p class="text-center" style="font-size: 20px;">Planes Contratados</p>
+                        <div>
+                            <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Planes Contratados</p>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -30,7 +30,7 @@
 
                                                 ?>
                                                 <?php foreach ($planUsuario as $key => $value) { ?>
-                                                <tr>
+                                                <tr align="center">
                                                     <td><?php echo utf8_encode($value['nombre']); ?></td>
                                                     <td><?php echo date("d-m-Y", strtotime($value['fecha_compra'])); ?></td>
                                                     <td><?php if($value['fecha_caducidad'] != 'Infinito'){

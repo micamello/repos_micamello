@@ -7,33 +7,30 @@
         <?php }
     } ?>
     </div>
-            <?php 
-                //if ($rol==2) {
-                    ?>
-                    <!--<section style="background-color: #369fe4; padding: 10px 0px 10px 0px;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="container">
-                                    <span style="font-size: 40px; color: white; font-weight: 500;">Llámanos a nuestras líneas Call Center:</span>
-                                </div>
-                            </div>
+    <?php 
+        if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+            ?>
+            <section style="background-color: #369fe4; padding: 10px 0px 10px 0px;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="container">
+                            <span style="font-size: 40px; color: white; font-weight: 500;">Llámanos a nuestras líneas Call Center:</span>
                         </div>
-                        <br>
-                        <div class="row">
-                            <div class="container">
-                                <div class="col-md-6">
-                                    <span style="font-size: 30px; color: white; text-align: center;"><b>Quito: </b>026055990 <i class="fa fa-phone"></i></span>
-                                </div>
-                                <div class="col-md-6">
-                                    <span style="font-size: 30px; color: white; text-align: center;"><b>Guayaquil: </b>04 6060111 <i class="fa fa-phone"></i></span>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="container">
+                        <div class="col-md-6">
+                            <span style="font-size: 30px; color: white; text-align: center;"><b>Quito: </b>026055990 <i class="fa fa-phone"></i></span>
                         </div>
-                    </section>-->
-                    <?php
-                    # code...
-                //}
-             ?>
+                        <div class="col-md-6">
+                            <span style="font-size: 30px; color: white; text-align: center;"><b>Guayaquil: </b>04 6060111 <i class="fa fa-phone"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <?php } ?>
     
             <!--Featured Section-->
             <section>
@@ -102,21 +99,18 @@
                             </div>
 
                 <?php foreach($arrtestimonio as $testimonio) { ?>
-
-                            <div class="col-md-6">
-                                <div class="test_item fix">
-                                    <div class="item_img">
-                                        <img class="img-circle" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/testimonios/<?php echo $testimonio['id_testimonio'];?>.<?php echo $testimonio['extension'];?>"  />
-                                        <i class="fa fa-quote-left"></i>
-                                    </div>
-
-                                    <div class="item_text">
-                                        <h5><?php echo utf8_encode($testimonio['nombre']);?></h5>
-                                        <h6><?php echo utf8_encode($testimonio['profesion']);?></h6>
-                                        <p><?php echo utf8_encode($testimonio['descripcion']);?></p>
-                                    </div>
+                        <div class="col-md-4">
+                            <div class="test_item fix">
+                                <div class="col-sm-2 col-md-4" id="testimonio">
+                                    <img class="img-circle" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/testimonios/<?php echo $testimonio['id_testimonio'];?>.<?php echo $testimonio['extension'];?>"><i id="icono" class="fa fa-quote-left"></i></img>
+                                </div>
+                                <div style="" class="col-sm-10 col-md-8">
+                                    <h5><?php echo utf8_encode($testimonio['nombre']);?></h5>
+                                    <h6><?php echo utf8_encode($testimonio['profesion']);?></h6>
+                                    <p><?php echo utf8_encode($testimonio['descripcion']);?></p>
                                 </div>
                             </div>
+                        </div>
                     <?php } ?>
                         </div>
                     </div>
@@ -215,18 +209,23 @@
 <!-- FIN PUBLICIDAD -->
 
 <!-- Listado de auspiciantes -->
-<section id="brand" class="brand fix roomy-70">
-  <div class="container">
-    <div class="row">
-      <?php foreach($arrauspiciante as $auspiciante) { ?>
-        <div class="main_brand text-center">
-          <div class="col-md-2 col-sm-4 col-xs-12">
-            <div class="brand_item auspiciantes_list">
-              <img src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'];?>.<?php echo $auspiciante['extension'];?>" />
+<section id="brand" class="brand fix">
+  <div class="container-fluid">
+    <div class="carousel slide col-md-12" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+      <div class="carousel-inner">
+        <?php 
+            $cont = 1;
+            foreach($arrauspiciante as $auspiciante) { 
+        ?>
+            <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
+              <div class="brand_item col-md-2 col-sm-6 "><a href="<?php echo $auspiciante['url']; ?>"><img style="width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a></div>
             </div>
-          </div>
-        </div>
-      <?php } ?>
-    </div>
+        <?php $cont++; } ?>
+      </div>
+    </div>                
   </div>
 </section><!-- End off Brand section -->
+
+
+
+

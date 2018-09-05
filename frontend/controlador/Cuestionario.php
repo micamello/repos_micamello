@@ -28,7 +28,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     if ((!isset($_SESSION['mfo_datos']['planes']) || 
         !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
         $test["orden"] == 3){
-      $this->redirectToController('planes');
+      $this->redirectToController('velocimetro');
     }
         
     if ($test["orden"] > $nrotest){
@@ -38,6 +38,7 @@ class Controlador_Cuestionario extends Controlador_Base {
     $nropreguntas = Modelo_Pregunta::obtieneNroPreguntasxTest($test["id_cuestionario"]);
     $pregunta = Modelo_Pregunta::obtienePreguntaActual($_SESSION['mfo_datos']['usuario']['id_usuario'],$test["id_cuestionario"]);  
     $this->data["pregunta"] = $pregunta;
+    Utils::log('pregunta: '.$pregunta["id_pre"]);
     $opciones = Modelo_Opcion::listadoxPregunta($pregunta["id_pre"]);
     $nro_opc = count($opciones);
 

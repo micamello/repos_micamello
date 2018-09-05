@@ -39,12 +39,12 @@ class Controlador_Velocimetro extends Controlador_Base {
     }
     else{
       //si el usuario tiene un plan y si el plan tiene permiso para el tercer formulario
-      if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')){
+      //if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'cargarHv')){
         //permite subir el curriculum  
-      } 
-      else{
+      //} 
+      //else{
         $enlaceboton = "planes";
-      }
+      //}
     }
 
     $tags["testactual"] = $testactual;

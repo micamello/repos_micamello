@@ -2,14 +2,14 @@
 require_once RUTA_INCLUDES.'/phpMailer/PHPMailerAutoload.php';
 
 function cargarClases($nombreClase) {
-  $nombre_archivo = RUTA_FRONTEND . '/'. str_replace('_', '/', $nombreClase) . '.php';
+  $nombre_archivo = RUTA_FRONTEND . str_replace('_', '/', $nombreClase) . '.php';
   if (file_exists($nombre_archivo)) {
     include_once( $nombre_archivo );
   }
 }
 
 function cargarClasesLib($nombreClase) {
-  $nombre_archivo = RUTA_INCLUDES . '/'. str_replace('_', '/', $nombreClase) . '.php';
+  $nombre_archivo = RUTA_INCLUDES . str_replace('_', '/', $nombreClase) . '.php';
   if (file_exists($nombre_archivo)) {
     include_once( $nombre_archivo );
   }
@@ -28,6 +28,6 @@ if(count($_COOKIE) != 0){ filter_input_array(INPUT_COOKIE, FILTER_SANITIZE_STRIN
 if(count($_SERVER) != 0){ filter_input_array(INPUT_SERVER, FILTER_SANITIZE_STRING); }
 
 $_SUBMIT = array_merge($_POST, $_GET);
-
+  
 Utils::createSession(); 
 ?>
