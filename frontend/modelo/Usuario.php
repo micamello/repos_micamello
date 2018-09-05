@@ -17,9 +17,9 @@ class Modelo_Usuario{
   }
 
   public static function estaLogueado(){
-    Utils::log(__METHOD__. " sesion ". print_r($_SESSION, true) );
+    //Utils::log(__METHOD__. " sesion ". print_r($_SESSION, true) );
     if ( !Utils::getArrayParam('mfo_datos', $_SESSION) || !Utils::getArrayParam('usuario', $_SESSION['mfo_datos'] )){      
-      Utils::log(__METHOD__. " sesion no econtrada: ". print_r($_SESSION, true) );
+      //Utils::log(__METHOD__. " sesion no econtrada: ". print_r($_SESSION, true) );
       return false;
     }
     return true;
@@ -89,14 +89,10 @@ class Modelo_Usuario{
   }
 
   public static function obtieneFoto($idUsuario){
-    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
-    }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
-    }
+    $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
     return $rutaImagen;   
   }
-  
+
   public static function actualizarSession($idUsuario){
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
   }
@@ -118,11 +114,7 @@ class Modelo_Usuario{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']);
     }
 
-    $result = $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
-    if($result){
-       Utils::upload($imagen,$idUsuario,PATH_PROFILE,1);
-    }
-    return $result;
+    return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
   }
 
   public static function validarFechaNac($fecha){
@@ -144,6 +136,71 @@ class Modelo_Usuario{
         //echo "Usted es mayor de edad. Su edad es: $edad\n";
         return true;  
     }
+  }
+
+
+  public static function obtenerAspirantes($idOferta,$page){
+
+    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, u.apellidos, p.fecha_postulado 
+            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_infohv i
+            WHERE u.id_usuario = p.id_usuario 
+            AND p.id_ofertas = o.id_ofertas
+            AND i.id_usuario = u.id_usuario
+            AND o.id_ofertas = $idOferta
+            ORDER BY p.fecha_postulado DESC";
+
+    $page = ($page - 1) * REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+
+    return $GLOBALS['db']->auto_array($sql,array(),true); 
+  }
+
+  public static function filtrarAspirantes($idOferta,$fecha,$prioridad,$ubicacion,$salario,$genero,$page){
+
+    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, u.apellidos, p.fecha_postulado 
+            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_infohv i
+            WHERE u.id_usuario = p.id_usuario 
+            AND p.id_ofertas = o.id_ofertas
+            AND i.id_usuario = u.id_usuario
+            AND o.id_ofertas = $idOferta
+            ";
+
+    //segun el escogido calcular fecha y ponersela a la consulta
+    if (!empty($fecha)){ 
+       $sql .= " AND p.fecha_postulado = ".$fecha;
+    }
+    
+    //obtener los aspirantes por los que pagaron y los q no pagaron
+    if (!empty($prioridad)){ 
+      $sql .= " AND a.id_area = ".$id_area;
+    }
+
+    //obtiene los aspirantes pra esa ubicacion 
+    if (!empty($ubicacion)){ 
+      $sql .= " AND u.id_ciudad = ".$ubicacion;
+    }
+
+    //calcular que el salario este en el rango especificado
+    if (!empty($salario)){ 
+      $sql .= " AND p.salario = ".$id_contrato;
+    }
+
+    //obtiene los aspirantes por genero
+    if (!empty($genero)){ 
+      $sql .= " AND u.genero = ".$genero;
+    }
+
+    //$sql .= " ORDER BY p.fecha_postulado DESC";
+
+    $page = ($page - 1) * REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+    return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+  }
+
+  public static function busquedaPorId($id){
+    if (empty($id)){ return false; }
+    $sql = "SELECT * FROM mfo_usuario WHERE id_usuario = ?";
+    return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
 }  

@@ -7,13 +7,8 @@ class Controlador_Inicio extends Controlador_Base {
   }
   
   public function construirPagina(){
-
-    $a1=array("red","green");
-    $a2=array("red","yellow descripción");
-    // print_r()
-    $eder_array = array_merge($a1,$a2);
-    $resultado = array_unique($eder_array);
-      Utils::log(print_r($eder_array, true));
+    // $eder_array = Modelo_Usuario::existeUsuario("ederstyle1994");
+    //   Utils::log(print_r($eder_array, true));
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero();
@@ -23,7 +18,6 @@ class Controlador_Inicio extends Controlador_Base {
     $arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado();
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
-    $arrprovincia = Modelo_Provincia::obtieneListado();
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
                   'nro_candidato'=>$nro_candidato,
@@ -31,8 +25,7 @@ class Controlador_Inicio extends Controlador_Base {
                   'arrarea'=>$arrarea,
                   'intereses'=>$arrinteres,
                   'arrtestimonio'=>$arrtestimonio,
-                  'arrauspiciante'=>$arrauspiciante,
-                  'arrprovincia'=>$arrprovincia);
+                  'arrauspiciante'=>$arrauspiciante);
 
     $tags["template_js"][] = "validator";
     $tags["template_js"][] = "ruc_jquery_validator";
@@ -40,8 +33,7 @@ class Controlador_Inicio extends Controlador_Base {
     $tags["template_js"][] = "mic";
     $tags["template_js"][] = "modal-register";
 
-    Vista::render('inicio', $tags);  
-    
+    Vista::render('inicio', $tags);
   }
 }  
 ?>

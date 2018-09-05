@@ -29,15 +29,19 @@
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
   <!-- Estilos del multiselect -->
   <!--<link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/multiple-select.css">-->
+
+  <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
+
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
 
+
   <?php
-  if (isset($template_css) && is_array($template_css)){
-    foreach($template_css as $file_css){
-      echo '<link rel="stylesheet" href="'.PUERTO.'://'.HOST.'/css/'.$file_css.'.css">';
-    }  
-  }
+    if (isset($template_css) && is_array($template_css)){
+      foreach($template_css as $file_css){
+        echo '<link rel="stylesheet" href="'.PUERTO.'://'.HOST.'/css/'.$file_css.'.css">';
+      }  
+    }
   ?>
 
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
@@ -66,7 +70,33 @@
 
 <body>
 
+  <!--                       LEY DE COOKIES                     -->
+  <div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel" align="center">Uso de Cookies</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12" style="font-size: 16px; color: #333">
+            <b class="text_large">Este sitio web utiliza cookies para que usted tenga la mejor experiencia de usuario. Si contin&uacute;a navegando est&aacute; dando su consentimiento para la aceptaci&oacute;n de las mencionadas cookies y la aceptaci&oacute;n de nuestra pol&iacute;tica de cookies.</b>
+            <b class="text_small">Este sitio web utiliza cookies desea activarlas para mayor experiencia.</b>
+            <br>
+            <center>
+              <a href="#" class="ok" onclick="CrearCookie();"><b>OK</b></a> | 
+              <a href="<?php echo PUERTO."://".HOST;?>/docs/politicas_de_cookies.pdf" target="_blank" class="info">M&aacute;s informaci&oacute;n</a>
+            </center> 
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
+</div>
+
   <nav class="navbar navbar-default navbar-fixed-top">
+ <!--   <button id="buttonP">Dar Permisos</button>  
+<button id="buttonN">Lanzar notificación</button>-->
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -131,9 +161,36 @@ if(isset($show_banner)){ ?>
 </section> <!--End off Home Sections-->
 <?php } ?>
 
+<?php
+
+  if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
+    <br>
+    <?php if(!isset($show_banner)){ ?> 
+      <br><br><br><br>
+    <?php } ?>
+    <div class="container">
+      <ol class="breadcrumb" align="left">
+        <?php 
+        $cont = 1;
+        echo '<li><a href="'.PUERTO."://".HOST.'/">Inicio</a></li>';
+        foreach($breadcrumbs as $key => $accion){ 
+          if((count($breadcrumbs)-1) >= $cont){
+              $enlace = '<a href="'.PUERTO."://".HOST.'/'.$key.'/">'.$accion.'</a>';
+          }else{
+            $enlace = $accion;
+          }
+          echo '<li>'.$enlace.'</li>';
+          $cont++;
+        } ?>
+      </ol> 
+    </div>
+  <?php } ?>
+
+
+
 <section id="product" class="product">
   <br>
-  <?php if(!isset($show_banner)){ ?>
+  <?php if(!isset($show_banner) && !isset($breadcrumbs)){ ?>
     <br><br><br>
   <?php } ?>
     <!--mensajes de error y exito-->

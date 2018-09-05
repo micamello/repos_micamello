@@ -33,8 +33,7 @@ class Vista {
     ob_end_flush();
   }
 
-  public static function display($pagina, $template_vars = array()){  
-  Utils::log('template: '.print_r($template_vars,true));  
+  public static function display($pagina, $template_vars = array()){    
     if (!empty($template_vars))
         extract($template_vars);
     
@@ -86,18 +85,17 @@ class Vista {
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){        
         $menu["menu"][] = array("href"=>PUERTO."://".HOST."/oferta/", "nombre"=>"Empleos");
-        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/postulaciones/", "nombre"=>"Mis Postulaciones");
+        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/postulacion/", "nombre"=>"Mis Postulaciones");
       }
       else{
         $menu["menu"][] = array("href"=>PUERTO."://".HOST."/publicar/", "nombre"=>"Publicar Vacantes");
         $menu["menu"][] = array("href"=>PUERTO."://".HOST."/vacantes/", "nombre"=>"Mis Vacantes");
       }
-      $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/facturas/", "nombre"=>"Mis Facturas");
+      $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/planesUsuario/", "nombre"=>"Mis Planes");
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/perfil/", "nombre"=>"Mi Perfil"); 
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){        
         $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/planes/", "nombre"=>"Mis Planes");
       }
-      $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/configuracion/", "nombre"=>"Configuración");
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/logout/", "nombre"=>"Cerrar Sesión");
     }
     return $menu;

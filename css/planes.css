@@ -47,7 +47,7 @@
 .pricingdiv ul.theplan li{
   padding: 10px 10px;
   position: relative;
-  border-bottom: 1px solid #eee;
+  /*border-bottom: 1px solid #eee;*/
 }
 
 .pricingdiv ul.theplan li.title{

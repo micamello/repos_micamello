@@ -52,7 +52,7 @@ function fileOnload(e) {
 /* Carga de hoja de vida */
 
 $('#subirCV').change(function(e) {
-    $('#imagenBtn').attr("src",'http://localhost/repos_micamello/imagenes/actualizar.png');
+    $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
     $('#texto_status').html('Hoja de vida Cargada');
     $('#texto_status').addClass('arch_cargado')
      

@@ -42,6 +42,7 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 #imagenes del profile
 RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
 RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&archivo=$2 [L]
+RewriteRule ^hojasDeVida/([a-z]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
 
 #login
 RewriteRule ^login/$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
@@ -68,28 +69,62 @@ RewriteRule ^cuestionario/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario [L]
 
 #velocimetro
 RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
+RewriteRule ^cargarcv/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro&opcion=cargarcv [L]
 
 #publicar
 RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
 
 #planes
+RewriteRule ^compraplan/paypal/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=paypal [L]
 RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
 RewriteRule ^compraplan/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
+RewriteRule ^planesUsuario/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario [L]
+RewriteRule ^planesUsuario/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario&desactivarPlan=$1 [L]
 
 #ofertas
-RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&param2=$3&param3=$4&param4=$5&page=$6 [L]
+RewriteRule ^oferta/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&page=$7 [L]
 
-RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&param2=$3&param3=$4&page=$5 [L]
+RewriteRule ^oferta/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&page=$6 [L]
 
-RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&param2=$3&page=$4 [L]
+RewriteRule ^oferta/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&page=$5 [L]
 
-RewriteRule ^oferta/([0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&type=$1&param1=$2&page=$3 [L]
+RewriteRule ^oferta/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&page=$4 [L]
 
-RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta [L]
+RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=publicacion [L]
+RewriteRule ^detalleOferta/([a-z]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
 
-RewriteRule ^detalleOferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&id=$1 [L]
-RewriteRule ^detalleOferta/([0-9]+)$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&id=$1 [L]
+#postulaciones
+RewriteRule ^postulacion/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion [L]
+RewriteRule ^postulacion/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&eliminarPostulacion=$1 [L]
+RewriteRule ^postulacion/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&page=$7 [L]
+
+RewriteRule ^postulacion/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&page=$6 [L]
+
+RewriteRule ^postulacion/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&page=$5 [L]
+
+RewriteRule ^postulacion/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&page=$4 [L]
+
+#Inicio
+RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [L]
+
+#Vacantes
+RewriteRule ^vacantes/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes [L]
+
+#Aspirantes
+RewriteRule ^verAspirantes/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante [L]
+
+RewriteRule ^verAspirantes/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&id_oferta=$1 [L]
+
+RewriteRule ^verAspirantes/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&id_oferta=$1&type=$2&param2=$3&param3=$4&param4=$5&param5=$6&param6=$7&page=$8 [L]
+
+RewriteRule ^verAspirantes/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&id_oferta=$1&type=$2&param2=$3&param3=$4&param4=$5&param5=$6&page=$7 [L]
+
+RewriteRule ^verAspirantes/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&id_oferta=$1&type=$2&param2=$3&param3=$4&param4=$5&page=$6 [L]
+
+RewriteRule ^verAspirantes/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&id_oferta=$1&type=$2&param2=$3&param3=$4&page=$5 [L]
+
+RewriteRule ^verAspirantes/([0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&id_oferta=$1&type=$2&param2=$3&page=$4 [L]
 
 #informePDF
 RewriteRule ^informePDF/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF [L]

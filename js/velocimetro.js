@@ -181,3 +181,14 @@ displayValue = function() {
   needle.moveTo(percent);
   setTimeout(displayValue, 3900);
 })();
+
+/**/
+$('#btn_subirhv').click(function(){
+  $('#msg_subirhv').modal();
+});
+
+$('#subirCV').change(function(e) {
+  $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
+  $('#texto_status').html('CV Cargado');
+  $('#texto_status').addClass('arch_cargado')     
+});

@@ -22,11 +22,11 @@ class Utils{
     return $default;
   }
   
-  static public function createSession(){   
-      Utils::log(__METHOD__ . " empezo una nueva sesion");
-      session_name('mfo_datos');
-      session_start();      
-      $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();
+  static public function createSession(){           
+    Utils::log(__METHOD__ . " empezo una nueva sesion");
+    session_name('mfo_datos');
+    session_start();      
+    $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();      
   } 
  
   static public function getArrayParam($paramName,$array, $default=false){
@@ -100,19 +100,15 @@ class Utils{
     return Modelo_Sucursal::obtieneSucursalActual($_SERVER["HTTP_HOST"]);
   }
 
-
   public static function valida_telefono($numerotelefono){ 
-
     if (preg_match("/^[ ]*[(]{0,1}[ ]*[0-9]{3,3}[ ]*[)]{0,1}[-]{0,1}[ ]*[0-9]{3,3}[ ]*[-]{0,1}[ ]*[0-9]{4,4}[ ]*$/",$numerotelefono)) return true; 
     else return false; 
   }
 
   //en formato de YYYY-MM-DD o YYYY-MM-DD HH:MM:SS
   public static function valida_fecha($strdate){
-
     $long_date = "/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/";
     $short_date = "/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$/";
-    
     if (!preg_match($long_date, $strdate) && !preg_match($short_date, $strdate))
       return false;
     else{    
@@ -164,18 +160,19 @@ class Utils{
   }
 
   static public function valida_upload($file,$tipo){ 
-
     $file_type = $file['type']; 
     $file_size = $file['size'];
     $file_temp = $file['tmp_name'];
-    
     $valida_arch = self::validaExt($file,$tipo);
     if($tipo == 1){
       $peso_valido = PESO_IMAGEN;
-    }else{
+    }
+    elseif($tipo == 2){
       $peso_valido = PESO_ARCHIVO;
     }
-
+    elseif($tipo == 3){
+      $peso_valido = PESO_IMAGEN;
+    }    
     if (($valida_arch[0] == true) && (!empty($file_temp)) && ($file_size <= $peso_valido))
       return true;
     else
@@ -183,25 +180,23 @@ class Utils{
   }
 
   static public function upload($file,$nombre,$path,$tipo){ 
-
     $file_type = $file['type']; 
     $file_temp = $file['tmp_name'];
-
     $valida_arch = self::validaExt($file,$tipo);
-    if ($valida_arch[0]){
 
+    if ($valida_arch[0]){
       if (is_uploaded_file($file_temp)){
         if(isset($_SESSION['mfo_datos']['infohv']) && file_exists($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato'])){
           @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato']);
         }
         $nombre .= ".".$valida_arch[1];
-        move_uploaded_file($file_temp, ''.$path . $nombre);
+        return move_uploaded_file($file_temp, ''.$path . $nombre);        
       }
     }
+    return false;
   } 
 
   static public function validaExt($file,$tipo){
-
     $ext = '';
     $status = false;
     if($tipo == 1){
@@ -209,7 +204,8 @@ class Utils{
         $ext = 'jpg';
         $status = true;
       }
-    }else{
+    }
+    elseif($tipo == 2){
       if($file['type'] == 'application/pdf'){
         $ext = 'pdf';
         $status = true;
@@ -220,8 +216,15 @@ class Utils{
         $status = true;
       }
     }
+    elseif($tipo == 3){
+      if($file['type'] == 'image/jpg' || $file['type'] == 'image/jpeg' || $file['type'] == 'image/pjpeg' || $file['type'] == 'image/png'){
+        $ext = (!strpos($file['type'],'png')) ? 'jpg' : 'png';
+        $status = true;
+      }
+    }
     return array($status,$ext);
   }
+
 
   public static function validarNumeros($campo){
     if(preg_match ("/^[0-9]+$/", $campo)) return true;
@@ -232,9 +235,23 @@ class Utils{
     if(count($array)>$long){ return false;}
     else return true;
   }
-  // funcion para validar la cedula de Ecuador//
-//Autor: Oliver Veliz
-//año:2009
+
+
+  //static public function numerico($str){
+  //  return (bool)preg_match( '/^[\-+]?[0-9]*\.?[0-9]+$/', $str);
+  //}
+
+  static public function alfabetico($str){
+    return ( ! preg_match("/^([a-z ])*$/i", $str)) ? false : true;
+  }
+
+  static public function alfanumerico($str){
+    return ( ! preg_match("/^([-a-z0-9 -])+$/i", $str)) ? false : true;
+  }
+
+  static public function formatoDinero($str){
+    return ( ! preg_match("/^[0-9]+(?:\.[0-9]{0,2})?$/", $str)) ? false : true;
+  }
 
   public static function validarPalabras($data){
     $merge_palabras;
@@ -257,6 +274,7 @@ class Utils{
         }
       }
     return true; 
+
   }
 }
 ?>
