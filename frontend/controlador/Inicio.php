@@ -7,6 +7,8 @@ class Controlador_Inicio extends Controlador_Base {
   }
   
   public function construirPagina(){
+    // $eder_array = Modelo_Usuario::existeUsuario("ederstyle1994");
+    //   Utils::log(print_r($eder_array, true));
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero();

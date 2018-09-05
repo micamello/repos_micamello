@@ -31,7 +31,7 @@ if(!empty($param1) && !empty($param2)){
 
 	if($archivo != false){
 
-		$idusuario = $archivo;
+		$idusuario = $archivo[];
 		$ext = '.'.$param2;
 	}
 }

@@ -125,7 +125,6 @@ class Controlador_Registro extends Controlador_Base {
     }    
 
   }
-}
 
   public function guardarUsuario($data){
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();

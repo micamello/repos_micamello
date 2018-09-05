@@ -1,0 +1,122 @@
+[2018/09/05 11:58:13] Utils::createSession empezo una nueva sesion
+[2018/09/05 11:58:13] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 11:58:13] dispatch nombre del controlador: Controlador_Inicio - inicio
+[2018/09/05 11:58:13] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2018/09/05 11:58:13] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta
+[2018/09/05 11:58:13] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='1' and estado=1
+[2018/09/05 11:58:13] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='2' and estado=1
+[2018/09/05 11:58:13] SQL Query: SELECT * FROM mfo_area
+[2018/09/05 11:58:13] SQL Query: SELECT * from mfo_nivelinteres
+[2018/09/05 11:58:13] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 ORDER BY orden LIMIT 3
+[2018/09/05 11:58:13] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2018/09/05 11:58:13] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '1'
+[2018/09/05 11:58:13] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '2'
+[2018/09/05 11:58:13] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '3'
+[2018/09/05 11:58:13] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '4'
+[2018/09/05 11:58:14] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/05 11:58:44] Utils::createSession empezo una nueva sesion
+[2018/09/05 11:58:44] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 11:58:44] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/09/05 11:58:44] SQL Query: SELECT * FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2018/09/05 11:58:44] SQL Query: SELECT * FROM mfo_area
+[2018/09/05 11:58:44] SQL Query: SELECT * from mfo_nivelinteres
+[2018/09/05 11:58:44] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14'
+[2018/09/05 11:58:44] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1;
+[2018/09/05 11:58:44] SQL Query: SELECT * FROM mfo_jornada
+[2018/09/05 11:58:44] SQL Query: SELECT * FROM mfo_tipocontrato
+[2018/09/05 11:58:44] SQL Query: SELECT * from mfo_idioma
+[2018/09/05 11:58:44] SQL Query: SELECT * from mfo_nivelidioma
+[2018/09/05 11:58:44] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/09/05 11:58:44] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);
+[2018/09/05 11:58:44] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/05 11:59:19] Utils::createSession empezo una nueva sesion
+[2018/09/05 11:59:19] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 11:59:19] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/09/05 11:59:19] SQL Query: SELECT * FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2018/09/05 11:59:19] SQL Query: SELECT * FROM mfo_area
+[2018/09/05 11:59:19] SQL Query: SELECT * from mfo_nivelinteres
+[2018/09/05 11:59:19] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14'
+[2018/09/05 11:59:19] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1;
+[2018/09/05 11:59:19] SQL Query: SELECT * FROM mfo_jornada
+[2018/09/05 11:59:19] SQL Query: SELECT * FROM mfo_tipocontrato
+[2018/09/05 11:59:19] SQL Query: SELECT * from mfo_idioma
+[2018/09/05 11:59:19] SQL Query: SELECT * from mfo_nivelidioma
+[2018/09/05 11:59:19] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/09/05 11:59:19] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);
+[2018/09/05 11:59:19] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/05 11:59:21] Utils::createSession empezo una nueva sesion
+[2018/09/05 11:59:21] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 11:59:21] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/09/05 11:59:22] SQL Query: SELECT * FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2018/09/05 11:59:22] SQL Query: SELECT * FROM mfo_area
+[2018/09/05 11:59:22] SQL Query: SELECT * from mfo_nivelinteres
+[2018/09/05 11:59:22] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14'
+[2018/09/05 11:59:22] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1;
+[2018/09/05 11:59:22] SQL Query: SELECT * FROM mfo_jornada
+[2018/09/05 11:59:22] SQL Query: SELECT * FROM mfo_tipocontrato
+[2018/09/05 11:59:22] SQL Query: SELECT * from mfo_idioma
+[2018/09/05 11:59:22] SQL Query: SELECT * from mfo_nivelidioma
+[2018/09/05 11:59:22] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/09/05 11:59:22] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);
+[2018/09/05 11:59:22] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/05 12:05:12] Utils::createSession empezo una nueva sesion
+[2018/09/05 12:05:12] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 12:05:12] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/09/05 12:05:12] SQL Query: SELECT * FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2018/09/05 12:05:12] SQL Query: SELECT * FROM mfo_area
+[2018/09/05 12:05:12] SQL Query: SELECT * from mfo_nivelinteres
+[2018/09/05 12:05:12] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14'
+[2018/09/05 12:05:12] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1;
+[2018/09/05 12:05:12] SQL Query: SELECT * FROM mfo_jornada
+[2018/09/05 12:05:12] SQL Query: SELECT * FROM mfo_tipocontrato
+[2018/09/05 12:05:13] SQL Query: SELECT * from mfo_idioma
+[2018/09/05 12:05:13] SQL Query: SELECT * from mfo_nivelidioma
+[2018/09/05 12:05:13] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/09/05 12:05:13] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);
+[2018/09/05 12:05:13] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/05 12:05:18] Utils::createSession empezo una nueva sesion
+[2018/09/05 12:05:18] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 12:05:18] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/09/05 12:05:18] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 3 order by orden ASC
+[2018/09/05 12:05:18] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/05 12:05:22] Utils::createSession empezo una nueva sesion
+[2018/09/05 12:05:22] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 12:05:22] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/09/05 12:05:22] SQL Query: SELECT * FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2018/09/05 12:05:22] SQL Query: SELECT * FROM mfo_area
+[2018/09/05 12:05:22] SQL Query: SELECT * from mfo_nivelinteres
+[2018/09/05 12:05:22] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14'
+[2018/09/05 12:05:22] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1;
+[2018/09/05 12:05:22] SQL Query: SELECT * FROM mfo_jornada
+[2018/09/05 12:05:22] SQL Query: SELECT * FROM mfo_tipocontrato
+[2018/09/05 12:05:22] SQL Query: SELECT * from mfo_idioma
+[2018/09/05 12:05:22] SQL Query: SELECT * from mfo_nivelidioma
+[2018/09/05 12:05:22] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/09/05 12:05:22] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '43' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);
+[2018/09/05 12:05:22] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/05 12:05:24] Utils::createSession empezo una nueva sesion
+[2018/09/05 12:05:24] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/05 12:05:24] dispatch nombre del controlador: Controlador_Inicio - inicio
+[2018/09/05 12:05:24] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2018/09/05 12:05:24] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta
+[2018/09/05 12:05:24] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='1' and estado=1
+[2018/09/05 12:05:24] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='2' and estado=1
+[2018/09/05 12:05:24] SQL Query: SELECT * FROM mfo_area
+[2018/09/05 12:05:24] SQL Query: SELECT * from mfo_nivelinteres
+[2018/09/05 12:05:24] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 ORDER BY orden LIMIT 3
+[2018/09/05 12:05:24] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2018/09/05 12:05:24] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '1'
+[2018/09/05 12:05:24] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '2'
+[2018/09/05 12:05:24] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '3'
+[2018/09/05 12:05:24] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '4'
+[2018/09/05 12:05:25] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

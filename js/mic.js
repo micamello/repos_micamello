@@ -121,8 +121,6 @@ if(document.getElementById('form_recomendaciones')){
   $("#form_recomendaciones").validator();
 }
 
-<<<<<<< HEAD
-
 $('.carousel[data-type="multi"] .item').each(function(){
 
   var next = $(this).next();

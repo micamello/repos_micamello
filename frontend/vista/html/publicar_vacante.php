@@ -2,11 +2,13 @@
 	<div class="">
 		<div class="breadcrumb">
 			<b>Publicar Vacante</b>
-			 <div align="right">Publicaciones restantes: 
-			 	<?php 
+			<?php 
 				if (!empty($publicaciones_restantes)) {
-					?><b>
+					?>
+			 <div align="right">Publicaciones restantes: 
+			 	<b>
 					<span><?php echo $publicaciones_restantes['p_restantes']; ?></span></b>
+			</div>
 					<?php
 					}
 				 ?>	
@@ -14,9 +16,9 @@
 				  <select>
 				  	<option></option>
 				  </select> -->
-			 </div>
+			 
 		</div>
-		<div class="panel panel-default shadow">
+		<div class="panel panel-default shadow col-md-10 col-md-offset-1">
 			<div class="panel-body">
 				<form id="form_publicar" role="form" method="post" action="<?php echo PUERTO."://".HOST;?>/publicar/">
 					<input type="hidden" name="form_publicar" value="1">
@@ -33,24 +35,39 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+						<div class="col-md-10 col-md-offset-1">
 							<div class="form-group">
-								<label class="">Descripción oferta: </label><div class="help-block with-errors"></div>
-								<textarea id="des_of" rows="7" name="des_of" class="form-control" style="resize: none;" required></textarea>
+								<label class="">Descripción oferta: </label><div id="descripcion_error" class="help-block with-errors"></div>
+								<textarea id="des_of" rows="7" name="des_of" class="form-control" style="resize: none;"><?php
+								    if(isset($_REQUEST['des_of'])){
+								                $name = $_REQUEST['des_of'];
+								                echo $name;
+								    }
+								?></textarea>
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="">Salario: </label><div class="help-block with-errors"></div>
-								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return valida_numeros(event);" required>
+								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return valida_numeros(event);" required value="<?php
+								    if(isset($_REQUEST['salario'])){
+								                $name = $_REQUEST['salario'];
+								                echo $name;
+								    }
+								?>">
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cantidad de vacantes: </label><div class="help-block with-errors"></div>
-								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return valida_numeros(event);">
+								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
+								    if(isset($_REQUEST['vacantes'])){
+								                $name = $_REQUEST['vacantes'];
+								                echo $name;
+								    }
+								?>">
 							</div>
 						</div>
 
@@ -169,8 +186,13 @@
 							<div class="form-group">
 								<label>Años de experiencia: </label><div class="help-block with-errors"></div>
 								<select name="experiencia" class="form-control" required>
-									<option value="2">1</option>
-									<option value="1">1</option>
+									<?php 
+
+										foreach(ANOSEXP as $key => $exp){ 
+											echo "<option value='$key'>$exp</option>";
+										}
+
+									 ?>
 								</select>
 							</div>
 						</div>
@@ -180,7 +202,12 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Fecha contratación: </label><div id="fecha_error" class="help-block with-errors1"></div>
-								<input type="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" required>
+								<input type="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" required value="<?php
+								    if(isset($_REQUEST['fecha_contratacion'])){
+								                $name = $_REQUEST['fecha_contratacion'];
+								                echo $name;
+								    }
+								?>">
 							</div>
 						</div>
 
@@ -217,34 +244,31 @@
 						<div class="">
 							<div class="col-md-2">
 								<div class="form-group">
-									<a id="btn_transfer" class="btn btn-info button_transfer_list"><i class="fas fa-plus"></i></a>
+									<a id="btn_transfer" class="button_transfer_list"><i class="fa fa-plus"></i></a>
 								</div>
 							</div>
 						</div>
 
 
 
-						<div class="col-md-6  col-md-offset-3">
+						<div class="col-md-8 col-md-offset-2">
 							<div class="form-group">
 								<label>Idiomas seleccionados: </label><div class="help-block with-errors"></div>
 								<!-- <div class="col-md-12"> -->
 									<div id="error_msg">
 									</div>
-									<br>
+									<div class="list_content">
+										<div class="form-group" id="list_idioma">
+											<p id="text_nothing">Ningun idioma seleccionado.....</p>
+										</div>
+									</div>
 								<!-- </div> -->
-								<select style="visibility: hidden;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
+								<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
 								</select>
 							</div>
 						</div>
 
-						<div class="col-md-12">
-							<div class="" style="padding: 10px 0 0 0; margin: -100px 0 0 0;">
-								<div class="form-group" id="list_idioma">
-								</div>
-							</div>
-						</div>
-
-						<div class="form-inline">
+						<div class="">
 							<div class="col-md-12">
 								<hr>
 							</div>
@@ -284,8 +308,13 @@
 							<div class="form-group">
 								<label>Discapacidad: </label><div class="help-block with-errors"></div>
 								<select name="discapacidad" class="form-control" required>
-									<option value="1">Sí</option>
-									<option value="2">No</option>
+									<?php 
+
+										foreach(DISCAPACIDAD as $key => $disc){ 
+											echo "<option value='$key'>$disc</option>";
+										}
+
+									 ?>
 								</select>
 							</div>
 						</div>
@@ -304,14 +333,24 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Edad mínima: </label><div class="help-block with-errors"></div>
-								<input type="number" name="edad_min" min="1" class="form-control" required onkeydown=" return valida_numeros(event);">
+								<input type="number" name="edad_min" min="1" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
+								    if(isset($_REQUEST['edad_min'])){
+								                $name = $_REQUEST['edad_min'];
+								                echo $name;
+								    }
+								?>">
 							</div>
 						</div>
 
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Edad máxima: </label><div class="help-block with-errors"></div>
-								<input type="number" name="edad_max" min="1" max="100" class="form-control" required onkeydown=" return valida_numeros(event);">
+								<input type="number" name="edad_max" min="1" max="100" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
+								    if(isset($_REQUEST['edad_max'])){
+								                $name = $_REQUEST['edad_max'];
+								                echo $name;
+								    }
+								?>">
 							</div>
 						</div>	
 					</div>

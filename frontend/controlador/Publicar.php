@@ -15,7 +15,10 @@ class Controlador_Publicar extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
-    
+    if (empty(Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']))){
+      $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
+      Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+    }
 
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
@@ -59,14 +62,16 @@ class Controlador_Publicar extends Controlador_Base {
       if ( Utils::getParam('form_publicar') == 1 ){
         try{
           // print_r($_POST['confidencial']);
-          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>1, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'tipo_cont_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>1, 'cambio_residencia'=>1, 'discapacidad'=>1, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>1, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
+          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>1, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'tipo_cont_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>1, 'cambio_residencia'=>1, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>1, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
 
-          $data = $this->camposRequeridos($campos);
-
-          $data_idiomas = self::validarCampos($data);
 
           if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
               if (($publicaciones_restantes['p_restantes'] > 0)) {
+                
+
+                $data = $this->camposRequeridos($campos);
+                $data_idiomas = self::validarCampos($data);
+
                 $GLOBALS['db']->beginTrans();
                 self::guardarPublicacion($data, $data_idiomas, $idusu);
                 $GLOBALS['db']->commit();
@@ -102,7 +107,10 @@ class Controlador_Publicar extends Controlador_Base {
   }
 
   public function validarCampos($data){
-    // Utils::log("eder pozo datos: ".print_r($data, true));
+
+    if (Utils::validarPalabras(array($data['titu_of'], $data['des_of'])) == false) {
+      throw new Exception("Se han encontrado palabras no permitidas en la publicación de su oferta. Por favor revise su contenido e intente nuevamente");
+    }
 
     if (Utils::validarNumeros($data['salario']) == false) {
       throw new Exception("El campo salario solo permite números");
@@ -150,8 +158,6 @@ class Controlador_Publicar extends Controlador_Base {
       }
     }
 
-    // Utils::log(print_r($data_idioma_nivel, true));
-
     if (count($data_idioma_nivel) != count($array_nivel_idioma)) {
           throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
         }
@@ -181,7 +187,6 @@ class Controlador_Publicar extends Controlador_Base {
     $fecha = date("Y-m-d H:i:s");
     $id_plan_usuario;
     $num_post;
-    Utils::log("aqui se esta quedando: ".print_r($planes, true));
     foreach ($planes as $plan_usuario) {
       if (($plan_usuario['fecha_compra']< $fecha) && $plan_usuario['num_post_rest'] != 0) {
         $fecha = $plan_usuario['fecha_compra'];

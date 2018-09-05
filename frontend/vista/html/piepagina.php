@@ -161,7 +161,7 @@
                                <div class="content_email">
                                    <div>
                                         <span class="pre_text_email">NECESITA AYUDA? ESCRÍBANOS:</span>
-                                        <i class="far fa-envelope"></i>
+                                        <i class="fa fa-envelope"></i>
                                         <a class="info_email_mic">info@micamello.com.ec</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <!--<a href="form-sug.php" style="color: white; text-decoration: underline;"><b>Recomendaciones o sugerencias <i class="fa fa-focus"></i></b></a>-->
                                     </div>
