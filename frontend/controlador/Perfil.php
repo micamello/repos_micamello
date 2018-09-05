@@ -61,8 +61,8 @@ class Controlador_Perfil extends Controlador_Base
                         $imgArch1    = $_SESSION['mfo_datos']['infohv']['formato'] . '.png';
                     }
                     $msj1        = 'Hoja de vida Cargada';
-                    $nombre_arch = $_SESSION['mfo_datos']['usuario']['id_usuario'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
-                    $ruta_arch   = PUERTO . "://" . HOST . '/imagenes/usuarios/hv/' . $nombre_arch;
+                   $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
+                    $ruta_arch   = PUERTO . "://" . HOST . '/hojasDeVida/' . $nombre_arch;
                     $btnDescarga = 1;
                     
                     $msj2        = 'Actualizar CV';

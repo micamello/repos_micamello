@@ -1,0 +1,42 @@
+#cookies {
+	display:none;
+	position:fixed;
+	left:0px;
+	right:0px;
+	top:0px;
+	width:100%;
+	text-align:center;
+	min-height:75px;
+	background-color: rgb(54, 159, 228);
+	color:#fff;
+	z-index:99999;
+	
+}
+/*
+.inner {
+	width:100%;
+	position:absolute;
+	padding-left:5px;
+	font-family:verdana;
+	font-size:12px;
+	top:30%;
+}*/
+
+.text_large{
+	display:block;
+}
+.text_small{
+	display:none;
+}
+
+@media (max-width: 767px) {
+  .text_large{
+		display:none;
+	}
+	.text_small{
+		display:block;
+	}
+}
+
+.row a.ok {padding:4px;color:#00ff2e;text-decoration:none; font-weight: bold;font-size: 13px;}
+.row a.info {padding-left:5px;text-decoration:none;color:#ffbc00; font-weight: bold;font-size: 13px;}

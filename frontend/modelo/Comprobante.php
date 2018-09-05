@@ -17,7 +17,7 @@ class Modelo_Comprobante{
   public static function guardarComprobante($numero, $nombre, $correo, $telefono, $dni, $ciudad, 
   																					$tipopago, $imagen, $valor, $usuario, $plan){
     if (empty($numero) || empty($nombre) || empty($correo) || empty($telefono) ||
-    	  empty($dni) || empty($ciudad) || empty($tipopago) || empty($imagen) || empty($valor) || 
+    	  empty($dni) || empty($ciudad) || empty($tipopago) || empty($valor) || 
     	  empty($usuario) || empty($plan)){ 
     	return false; 
     }
