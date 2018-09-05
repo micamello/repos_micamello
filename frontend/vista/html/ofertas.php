@@ -106,9 +106,9 @@
 		<div class="col-md-8">
 			<b>
 				<?php if($vista != 'postulacion'){ ?>
-					<span style="font-size: 17px;">Ofertas de empleo</span>
+					<span style="font-size: 17px;"><?php echo $breadcrumbs['oferta']; ?></span>
 				<?php }else{ ?>
-					<span style="font-size: 17px;">Mis Postulaciones</span>
+					<span style="font-size: 17px;"><?php echo $breadcrumbs['postulacion']; ?></span>
 				<?php } ?>
 			</b>
 			<br/><br/>
@@ -121,38 +121,51 @@
 	        <div id="result">
 	        	<?php if(!empty($ofertas)){
 		            foreach($ofertas as $key => $o){  ?>
-						<a href='<?php echo PUERTO."://".HOST.'/detalleOferta/'.$vista.'/'.$o["id_ofertas"]; ?>/'>
-							<div class='panel panel-default shadow-panel'>
+		            		<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) { ?>
+								<a href='<?php echo PUERTO."://".HOST.'/detalleOferta/'.$vista.'/'.$o["id_ofertas"]; ?>/'>
+							<?php } ?>
+							<div class='panel panel-default shadow'>
 							   <div class='panel-body'>
 									<div class='col-md-2' align='center'>
-										<img class="img-circle img-responsive <?php if($vista != 'postulacion'){ echo ' oferta'; }else{ echo ' postulacion'; } ?>" src="<?php if($vista != 'postulacion'){ echo PUERTO.'://'.HOST.'/imagenes/iconOferta.png'; }else{ echo Modelo_Usuario::obtieneFotoEmpresa($o['id_usuario']); } ?>" alt="icono oferta">
+										<img style="vertical-align: middle; margin-bottom: 10px;" class="img-circle img-responsive <?php if($vista != 'postulacion'){ echo ' oferta'; }else{ echo ' postulacion'; } ?>" src="<?php if($vista != 'postulacion' && $vista != 'vacantes'){ echo PUERTO.'://'.HOST.'/imagenes/logo.png'; }else{ echo Modelo_Usuario::obtieneFoto($o['id_usuario']); } ?>" alt="icono">
 									</div>
 								    <div class='col-md-<?php if($vista == 'postulacion'){ echo '9'; }else{ echo '10'; }?>'>
-								   		<span>
-											<?php if ($o['confidencial'] == 0) {
-												echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
-											}
-											else
-											{
-												echo '<h5 class="empresa"><i>Nombre - confidencial</i></h5>';
-											} ?>
-											<b style='color: black;'><?php echo $o['titulo']; ?></b>  
-										    <?php 
-
-										    	if(isset($o['tipo']) && $o['tipo'] == 2){ 						
-										    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
-										    	}else{
-													if(isset($postulacionesUserLogueado[$o["id_ofertas"]])){
-														$tipo = $postulacionesUserLogueado[$o["id_ofertas"]];
-														if($tipo == 2){
-												    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$tipo].'</span>';
-													    }else{
-													    	echo ' | <span class="etiquetaPostulado parpadea">Autopostulado '.POSTULACIONES[$tipo].'</span>';
-													    }
-													}
+										<span>
+								    	<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) { ?>
+									   		
+												<?php if ($o['confidencial'] == 0) {
+													echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
 												}
-											?>
-									    </span>
+												else
+												{
+													echo '<h5 class="empresa"><i>Nombre - confidencial</i></h5>';
+												} 
+										} ?>
+
+										<b style='color: black;'><?php echo $o['titulo']; ?></b>  
+										<?php 
+										if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) {
+
+									    	if(isset($o['tipo']) && $o['tipo'] == 2){ 						
+									    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
+									    	}else{
+												if(isset($postulacionesUserLogueado[$o["id_ofertas"]])){
+													$tipo = $postulacionesUserLogueado[$o["id_ofertas"]];
+													if($tipo == 2){
+											    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$tipo].'</span>';
+												    }else{
+												    	echo ' | <span class="etiquetaPostulado parpadea">Autopostulado '.POSTULACIONES[$tipo].'</span>';
+												    }
+												}
+											}
+										}else{
+											if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { 
+												echo ' | <a class="btn-sm btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/'.$o['id_ofertas'].'/">Ver Aspirantes</a>';
+											}
+										}
+										?>
+										</span>
+										
 									    
 										<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
 									    	<br>
@@ -162,6 +175,12 @@
 										<br>
 									    <span style="color:#333;"><?php echo 'Fecha de creaci&oacute;n: '.date("d-m-Y", strtotime($o['fecha_creado'])); ?></span>
 										<br><br>
+										<div class="row">
+											<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
+												<p style="color:#C3BABA" class="text" align="justify"><?php echo $o['descripcion']; ?></p>
+											<?php } ?>
+										</div>
+										<br>
 									  	<div class="row">
 									  		<div class='col-sm-3 col-md-2' align='center'>
 							                    <span class="etiquetaOferta">Salario: </span><br><?php echo $o['salario']; ?>
@@ -197,7 +216,8 @@
 			      			<span>No se encontraron ofertas</span>
 			    		</div>
 			  		</div>
-				<?php } ?>
+			  	<?php 
+			  		} ?>
 	        </div>
 		</div>
 	</div>

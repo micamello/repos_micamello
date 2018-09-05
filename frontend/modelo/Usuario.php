@@ -53,7 +53,7 @@ class Modelo_Usuario{
     if(empty($username)){ return false; }
     $sql = "select * from mfo_usuario where username = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username));
-    return (!empty($rs['id_usuario'])) ? false : true;
+    return (!empty($rs['id_usuario'])) ? $rs['id_usuario']: false;
   }
 
   public static function existeCorreo($correo){
@@ -96,15 +96,7 @@ class Modelo_Usuario{
     }
     return $rutaImagen;   
   }
-  
-  public static function obtieneFotoEmpresa($idUsuario){
-    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
-    }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
-    }
-    return $rutaImagen;   
-  }
+
 
   public static function actualizarSession($idUsuario){
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
@@ -153,6 +145,64 @@ class Modelo_Usuario{
         //echo "Usted es mayor de edad. Su edad es: $edad\n";
         return true;  
     }
+  }
+
+  public static function obtenerAspirantes($idOferta,$page){
+
+    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, u.apellidos, p.fecha_postulado 
+            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_infohv i
+            WHERE u.id_usuario = p.id_usuario 
+            AND p.id_ofertas = o.id_ofertas
+            AND i.id_usuario = u.id_usuario
+            AND o.id_ofertas = $idOferta
+            ORDER BY p.fecha_postulado DESC";
+
+    $page = ($page - 1) * REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+
+    return $GLOBALS['db']->auto_array($sql,array(),true); 
+  }
+
+  public static function filtrarAspirantes($idOferta,$fecha,$prioridad,$ubicacion,$salario,$genero,$page){
+
+    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, u.apellidos, p.fecha_postulado 
+            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_infohv i
+            WHERE u.id_usuario = p.id_usuario 
+            AND p.id_ofertas = o.id_ofertas
+            AND i.id_usuario = u.id_usuario
+            AND o.id_ofertas = $idOferta
+            ";
+
+    //segun el escogido calcular fecha y ponersela a la consulta
+    if (!empty($fecha)){ 
+       $sql .= " AND p.fecha_postulado = ".$fecha;
+    }
+    
+    //obtener los aspirantes por los que pagaron y los q no pagaron
+    if (!empty($prioridad)){ 
+      $sql .= " AND a.id_area = ".$id_area;
+    }
+
+    //obtiene los aspirantes pra esa ubicacion 
+    if (!empty($ubicacion)){ 
+      $sql .= " AND u.id_ciudad = ".$ubicacion;
+    }
+
+    //calcular que el salario este en el rango especificado
+    if (!empty($salario)){ 
+      $sql .= " AND p.salario = ".$id_contrato;
+    }
+
+    //obtiene los aspirantes por genero
+    if (!empty($genero)){ 
+      $sql .= " AND u.genero = ".$genero;
+    }
+
+    //$sql .= " ORDER BY p.fecha_postulado DESC";
+
+    $page = ($page - 1) * REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+    return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
 }  
