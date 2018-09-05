@@ -90,3 +90,6 @@ RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta [L]
 
 RewriteRule ^detalleOferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&id=$1 [L]
 RewriteRule ^detalleOferta/([0-9]+)$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&id=$1 [L]
+
+#informePDF
+RewriteRule ^informePDF/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF [L]

@@ -29,7 +29,8 @@
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
   <!-- Estilos del multiselect -->
   <!--<link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/multiple-select.css">-->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
+  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
 
   <?php
   if (isset($template_css) && is_array($template_css)){
@@ -87,7 +88,8 @@
               if (isset($menu["menu"])){   
                 foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                   <li>
-                    <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '<img src="'.PUERTO.'://'.HOST.'/imagenes/icon-home.png" alt="Inicio" width="20">';  }else{ echo $optmnu["nombre"]; } ?></a>
+                    <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
+                    <i class="fa fa-home fa-2x"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
                   </li>                            
                 <?php } ?>
                 <?php if (isset($menu["submenu"])){ ?>                            

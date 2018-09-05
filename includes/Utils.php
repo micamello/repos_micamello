@@ -237,37 +237,26 @@ class Utils{
 //año:2009
 
   public static function validarPalabras($data){
-    Utils::log("Eder descripción:".print_r((($data[0])), true)) ;
     $merge_palabras;
-    for ($i=0; $i < count($data); $i++) { 
+    for ($i=0; $i < count($data); $i++) {
       ${"array_".$i} = array();
-      array_push(${"array_".$i}, preg_split("/[\s,]+/u", (html_entity_decode($data[$i]))));
-      if ($i>0) {
-        ${"merge_palabras_".$i} = array_merge(${"array_0"}[0], ${"array_".($i)}[0]);
-        $merge_palabras = ${"merge_palabras_".$i};
-      }
-    }
-    $arrayPalabras = array_unique($merge_palabras);
-    $palabras_ordenadas = array_values($arrayPalabras);
-    $palabras_bd = (Modelo_PalabrasObscenas::obtienePalabras());
-    
-    // Utils::log(print_r($palabras_ordenadas, true));
-    // Utils::log(print_r($palabras_bd, true));
-    // pokpoñklmñl
-    for ($i=0; $i < count($palabras_ordenadas); $i++) { 
-      for ($j=0; $j < count($palabras_bd); $j++) { 
-        if ($palabras_bd[$j]['descripcion'] == $palabras_ordenadas[$i]) {
-          return false;
+      array_push(${"array_".$i}, preg_split("/[\s,]+/u", ($data[$i])));
+        if ($i>0) {
+          ${"merge_palabras_".$i} = array_merge(${"array_0"}[0], ${"array_".($i)}[0]);
+          $merge_palabras = ${"merge_palabras_".$i};
         }
       }
-    }
-    // $result1=array_intersect($arrayPalabras,utf8_encode($palabras_bd['descripcion'][0]));
-    // Utils::log("palabras obtenidas: ".print_r($result1, true));
-    // Utils::log("palabras obtenidas1: ".print_r($palabras_bd[1]['descripcion'], true));
-    return true;
-    
+      $arrayPalabras = array_unique($merge_palabras);
+      $palabras_ordenadas = array_values($arrayPalabras);
+      $palabras_bd = (Modelo_PalabrasObscenas::obtienePalabras());
+      for ($i=0; $i < count($palabras_ordenadas); $i++) { 
+        for ($j=0; $j < count($palabras_bd); $j++) { 
+          if ($palabras_bd[$j]['descripcion'] == $palabras_ordenadas[$i]) {
+            return false;
+          }
+        }
+      }
+    return true; 
   }
-
-
 }
 ?>

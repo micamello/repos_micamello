@@ -53,7 +53,7 @@ class Modelo_Usuario{
     if(empty($username)){ return false; }
     $sql = "select * from mfo_usuario where username = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username));
-    return (!empty($rs['id_usuario'])) ? false : true;
+    return (!empty($rs['id_usuario'])) ? false : $rs;
   }
 
   public static function existeCorreo($correo){
