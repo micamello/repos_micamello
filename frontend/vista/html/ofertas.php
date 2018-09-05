@@ -125,7 +125,7 @@
 							<div class='panel panel-default shadow-panel'>
 							   <div class='panel-body'>
 									<div class='col-md-2' align='center'>
-										<img class="img-circle img-responsive <?php if($vista != 'postulacion'){ echo ' oferta'; }else{ echo ' postulacion'; } ?>" src="<?php if($vista != 'postulacion'){ echo PUERTO.'://'.HOST.'/imagenes/iconOferta.png'; }else{ echo Modelo_Usuario::obtieneFotoEmpresa($o['id_usuario']); } ?>" alt="icono oferta">
+										<img class="img-circle img-responsive <?php if($vista != 'postulacion'){ echo ' oferta'; }else{ echo ' postulacion'; } ?>" src="<?php if($vista != 'postulacion'){ echo PUERTO.'://'.HOST.'/imagenes/iconOferta.png'; }else{ echo Modelo_Usuario::obtieneFoto($o['id_usuario']); } ?>" alt="icono oferta">
 									</div>
 								    <div class='col-md-<?php if($vista == 'postulacion'){ echo '9'; }else{ echo '10'; }?>'>
 								   		<span>

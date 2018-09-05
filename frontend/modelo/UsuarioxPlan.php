@@ -29,6 +29,11 @@ class Modelo_UsuarioxPlan{
 		$result = $GLOBALS['db']->update('mfo_usuario_plan',array('estado'=>0), ' id_usuario_plan = '.$id_usuario_plan);
 		return $result;
 	}
+
+  public static function cancelarPlan($usuario,$plan,$observacion=''){
+    if (empty($usuario) || empty($plan)){ return false; }
+    return $GLOBALS['db']->update('mfo_usuario_plan',array('estado'=>0,'observacion'=>$observacion), 'id_usuario = '.$usuario.' AND id_plan = '.$plan);
+  }
 	
   public static function publicacionesRestantes($usuario){
     if (empty($usuario)){ return false; }

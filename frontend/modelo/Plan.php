@@ -15,7 +15,6 @@ class Modelo_Plan{
   }
 
   public static function listadoPlanAccion($tipo,$sucursal,$tipoplan){
-
     $sql = "SELECT t.id_plan,t.nombre,t.promocional,t.duracion,t.extension,t.porc_descarga,t.num_post,t.costo, 
         GROUP_CONCAT(a.accion ORDER BY p.id_permisoPlan) as acciones, GROUP_CONCAT(a.descripcion ORDER BY p.id_permisoPlan) as descripciones
         FROM mfo_permisoplan p
@@ -31,7 +30,6 @@ class Modelo_Plan{
   }
 
   public static function listadoPlanesUsuario($idUsuario){
-
     $sql = "SELECT p.id_plan, p.nombre, p.costo, up.id_comprobante, up.fecha_compra, if(up.num_post_rest <> '',num_post_rest,'-') as num_post_rest, if(up.fecha_caducidad <> '',fecha_caducidad,'Infinito') as fecha_caducidad, up.id_usuario_plan, up.estado
         FROM mfo_usuario_plan up, mfo_plan p
         WHERE p.id_plan = up.id_plan 
@@ -44,6 +42,12 @@ class Modelo_Plan{
     if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }
     $sql = "SELECT * FROM mfo_plan WHERE estado = 1 AND id_plan = ? AND tipo_usuario = ? AND id_sucursal = ?";
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    
+  }
+
+  public static function busquedaXId($id){
+    if (empty($id)){ return false; }
+    $sql = "SELECT * FROM mfo_plan WHERE id_plan = ?";
+    return $GLOBALS['db']->auto_array($sql,array($id));
   }
 }  
 ?>

@@ -32,5 +32,5 @@ define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
 define('GENERO', array('M'=>'Masculino', 'F'=>'Femenino', 'P'=>'Prefiero no decirlo'));
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
 define('REGISTRO_PAGINA',10);
-
+define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr')
 ?>

@@ -117,3 +117,7 @@ if(document.getElementById('form_deposito')){
 if(document.getElementById('form_recomendaciones')){
   $("#form_recomendaciones").validator();
 }
+
+if(document.getElementById('form_paypal')){
+  $("#form_paypal").validator();
+}

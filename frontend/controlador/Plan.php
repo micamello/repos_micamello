@@ -19,6 +19,9 @@ class Controlador_Plan extends Controlador_Base {
       case 'deposito':
         $this->deposito();
       break; 
+      case 'paypal':
+        $this->paypal();
+      break;
       case 'planes_usuario':
         $this->planesUsuario();
       break;
@@ -26,11 +29,9 @@ class Controlador_Plan extends Controlador_Base {
         $this->mostrarDefault(1);
       break;
     }   
-    
   }
 
   public function planesUsuario(){
-
     $breadcrumbs['planesUsuario'] = 'Mis planes';
     $desactivarPlan = Utils::getParam('desactivarPlan', '', $this->data);
     if(!empty($desactivarPlan)){
@@ -45,7 +46,6 @@ class Controlador_Plan extends Controlador_Base {
 
     //Obtiene todos los banner activos segun el tipo
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_PERFIL);
-
     $orden                      = rand(1, count($arrbanner)) - 1;
     $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
 
@@ -61,7 +61,6 @@ class Controlador_Plan extends Controlador_Base {
   }
 
   public function mostrarDefault($tipo){
-
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
     $sucursal = $_SESSION["mfo_datos"]["sucursal"]["id_sucursal"]; 
     
@@ -116,8 +115,15 @@ class Controlador_Plan extends Controlador_Base {
         }   
         
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);
-        $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede cargar su hoja de vida"; 
-        $this->redirectToController('editarperfil');
+
+        if ($tipousu == Modelo_Usuario::CANDIDATO){
+          $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede cargar su hoja de vida"; 
+          $this->redirectToController('editarperfil');
+        }
+        else{
+          $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede publicar una oferta"; 
+          $this->redirectToController('publicar');
+        }
       }
       else{
         //presenta metodos de pago
@@ -135,7 +141,7 @@ class Controlador_Plan extends Controlador_Base {
         $tags["template_js"][] = "validator";
         $tags["template_js"][] = "mic";
         $tags["template_js"][] = "metodospago";
-        $tags["template_js"][] = "editarPerfil";
+        //$tags["template_js"][] = "editarPerfil";
 
         Vista::render('metodos_pago', $tags);      
       }
@@ -146,6 +152,7 @@ class Controlador_Plan extends Controlador_Base {
       $this->redirectToController('planes');
     } 
   }
+
   public function existePlan($idplan){
     if (isset($_SESSION['mfo_datos']['planes'])){
       foreach($_SESSION['mfo_datos']['planes'] as $planactivo){
@@ -156,6 +163,7 @@ class Controlador_Plan extends Controlador_Base {
     }
     return false;
   }
+
   public function deposito(){
     try{
       $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'provincia'=>1,'ciudad'=>1,'telefono'=>1,'dni'=>1);
@@ -201,6 +209,10 @@ class Controlador_Plan extends Controlador_Base {
       
     }
     $this->redirectToController('planes');
+  }
+
+  public function paypal(){
+    $_SESSION['mostrar_exito'] = "Compra exitosa, el administrador verificará sus datos para aprobar el plan";      
   }
 }  
 ?>

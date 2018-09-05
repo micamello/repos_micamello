@@ -89,23 +89,10 @@ class Modelo_Usuario{
   }
 
   public static function obtieneFoto($idUsuario){
-    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
-    }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
-    }
+    $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
     return $rutaImagen;   
   }
   
-  public static function obtieneFotoEmpresa($idUsuario){
-    if($_SESSION['mfo_datos']['usuario']['foto'] == 0){
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/user.png';
-    }else{
-      $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
-    }
-    return $rutaImagen;   
-  }
-
   public static function actualizarSession($idUsuario){
     return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
   }
@@ -149,6 +136,12 @@ class Modelo_Usuario{
         //echo "Usted es mayor de edad. Su edad es: $edad\n";
         return true;  
     }
+  }
+
+  public static function busquedaPorId($id){
+    if (empty($id)){ return false; }
+    $sql = "SELECT * FROM mfo_usuario WHERE id_usuario = ?";
+    return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
 }  

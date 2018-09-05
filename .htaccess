@@ -74,6 +74,7 @@ RewriteRule ^cargarcv/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro&opcion=c
 RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
 
 #planes
+RewriteRule ^compraplan/paypal/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=paypal [L]
 RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
 RewriteRule ^compraplan/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
@@ -90,17 +91,11 @@ RewriteRule ^oferta/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:R
 RewriteRule ^oferta/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&page=$4 [L]
 
 RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=publicacion [L]
-
-
 RewriteRule ^detalleOferta/([a-z]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
 
-
 #postulaciones
-
 RewriteRule ^postulacion/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion [L]
-
 RewriteRule ^postulacion/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&eliminarPostulacion=$1 [L]
-
 RewriteRule ^postulacion/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&page=$7 [L]
 
 RewriteRule ^postulacion/([a-z]+)/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&page=$6 [L]

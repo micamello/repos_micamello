@@ -22,11 +22,11 @@ class Utils{
     return $default;
   }
   
-  static public function createSession(){   
-      Utils::log(__METHOD__ . " empezo una nueva sesion");
-      session_name('mfo_datos');
-      session_start();      
-      $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();
+  static public function createSession(){           
+    Utils::log(__METHOD__ . " empezo una nueva sesion");
+    session_name('mfo_datos');
+    session_start();      
+    $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();      
   } 
  
   static public function getArrayParam($paramName,$array, $default=false){
