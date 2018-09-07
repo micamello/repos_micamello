@@ -278,8 +278,11 @@
 							<div class="form-group">
 								<label>Disponibilidad para viajar: </label><div class="help-block with-errors"></div>
 								<select name="viaje" class="form-control" required>
-									<option value="1">Sí</option>
-									<option value="2">No</option>
+									<?php 
+									foreach(VIAJAR as $key => $viajar){ 
+									echo "<option value='$key'>$viajar</option>";
+									}
+									?>
 								</select>
 							</div>
 						</div>
@@ -288,8 +291,11 @@
 							<div class="form-group">
 								<label>Licencia: </label><div class="help-block with-errors"></div>
 								<select name="licencia" class="form-control" required>
-									<option value="1">Sí</option>
-									<option value="2">No</option>
+									<?php
+									foreach(LICENCIA as $key => $licencia){ 
+									echo "<option value='$key'>$licencia</option>";
+									}
+									?>
 								</select>
 							</div>
 						</div>
@@ -298,8 +304,11 @@
 							<div class="form-group">
 								<label>Cambio de residencia: </label><div class="help-block with-errors"></div>
 								<select name="cambio_residencia" class="form-control" required>
-									<option value="1">Sí</option>
-									<option value="2">No</option>
+									<?php
+									foreach(RESIDENCIA as $key => $residencia){ 
+									echo "<option value='$key'>$residencia</option>";
+									}
+									?>
 								</select>
 							</div>
 						</div>
@@ -309,11 +318,9 @@
 								<label>Discapacidad: </label><div class="help-block with-errors"></div>
 								<select name="discapacidad" class="form-control" required>
 									<?php 
-
 										foreach(DISCAPACIDAD as $key => $disc){ 
 											echo "<option value='$key'>$disc</option>";
 										}
-
 									 ?>
 								</select>
 							</div>
@@ -322,10 +329,12 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Confidencial: </label><div class="help-block with-errors"></div>
-								<select name="confidencial" class="form-control" required>
-									<option value="" selected disabled>Elija una opción</option>
-									<option value="1">Sí</option>
-									<option value="2">No</option>
+								<select name="confidencial" class="form-control" required>									
+									<?php
+									foreach(CONFIDENCIAL as $key => $confidencial){ 
+									  echo "<option value='$key'>$confidencial</option>";
+									}
+									?>
 								</select>
 							</div>
 						</div>
@@ -333,7 +342,7 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Edad mínima: </label><div class="help-block with-errors"></div>
-								<input type="number" name="edad_min" min="1" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
+								<input type="number" name="edad_min" min="18" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
 								    if(isset($_REQUEST['edad_min'])){
 								                $name = $_REQUEST['edad_min'];
 								                echo $name;
@@ -345,7 +354,7 @@
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Edad máxima: </label><div class="help-block with-errors"></div>
-								<input type="number" name="edad_max" min="1" max="100" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
+								<input type="number" name="edad_max" min="18" max="90" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
 								    if(isset($_REQUEST['edad_max'])){
 								                $name = $_REQUEST['edad_max'];
 								                echo $name;

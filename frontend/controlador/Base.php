@@ -13,7 +13,7 @@ abstract class Controlador_Base{
   }
   
   public function redirectToController($controladorNombre, $params = array()){  
-    Utils::doRedirect('http://'.HOST.'/'.$controladorNombre.'/');
+    Utils::doRedirect(PUERTO.'://'.HOST.'/'.$controladorNombre.'/');
   }
   
   public function camposRequeridos($campos = array()){

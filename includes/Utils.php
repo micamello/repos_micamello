@@ -276,5 +276,15 @@ class Utils{
     return true; 
 
   }
+
+  public static function validarEminEmax($campo1, $campo2){
+    if($campo1 >= 18 || $campo2 >= 18){
+      if($campo1 <= $campo2){
+        return true;
+      }
+      else return false;
+    }
+    else return false;
+  }
 }
 ?>

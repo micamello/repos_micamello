@@ -148,7 +148,8 @@ class Controlador_Aspirante extends Controlador_Base
                 }
 
                 $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0);
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo();
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $aspirantesConHv = Modelo_InfoHv::obtieneHvAspirantes($id_oferta);
                 $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page);
                 $breadcrumbs['vacantes'] = 'Ver vacantes';
                 $breadcrumbs['aspirante'] = 'Aspirantes de la oferta';
@@ -160,11 +161,9 @@ class Controlador_Aspirante extends Controlador_Base
                     'page' => $page,
                     'mostrar'=>$mostrar,
                     'vista'=>$vista,
-                    'id_oferta'=>$id_oferta
+                    'id_oferta'=>$id_oferta,
+                    'aspirantesConHv'=>$aspirantesConHv
                 );
-
-                //$tags["template_js"][] = "oferta";
-                //$tags["show_banner"] = 1;
                 
                 $url = PUERTO.'://'.HOST.'/'.$vista;
                 $pagination = new Pagination(count($aspirantes),REGISTRO_PAGINA,$url);

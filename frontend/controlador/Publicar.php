@@ -34,7 +34,14 @@ class Controlador_Publicar extends Controlador_Base {
   }
 
   public function mostrarDefault(){
+
     $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
+    $publicaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idusu);
+    if ($publicaciones_restantes['p_restantes'] == 0) {
+      $array = array('publicaciones_restantes'=>$publicaciones_restantes);
+      Vista::render('sin_publicacion', $array);
+      exit();
+    }
 
       $arrarea = Modelo_Area::obtieneListado();
       $arrinteres = Modelo_Interes::obtieneListado();
@@ -45,7 +52,7 @@ class Controlador_Publicar extends Controlador_Base {
       $arridioma = Modelo_Idioma::obtieneListado();
       $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
       $arrescolaridad = Modelo_Escolaridad::obtieneListado();
-      $publicaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idusu);
+      
 
       $tags = array('arrarea'=>$arrarea,
                     'intereses'=>$arrinteres,
@@ -62,7 +69,7 @@ class Controlador_Publicar extends Controlador_Base {
       if ( Utils::getParam('form_publicar') == 1 ){
         try{
           // print_r($_POST['confidencial']);
-          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>1, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'tipo_cont_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>1, 'cambio_residencia'=>1, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>1, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
+          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'tipo_cont_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
 
 
           if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
@@ -132,6 +139,10 @@ class Controlador_Publicar extends Controlador_Base {
 
     if (Utils::validarNumeros($data['edad_max']) == false) {
       throw new Exception("El campo edad máxima solo permite números");
+    }
+
+    if(Utils::validarEminEmax($data['edad_min'], $data['edad_max']) == false){
+       throw new Exception("Verifique los valores de los campos edad mínima y máxima");
     }
 
     if (Utils::validarLongitudMultiselect($data['area_select'], 1) == false) {

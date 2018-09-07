@@ -751,3 +751,17 @@ fieldset[disabled] .btn-filtro.focus {
 .font_awesome{
   color: #337ab7;
 }
+
+.big_number{
+  font-size: 100px;
+  font-weight: 550;
+}
+
+.bg_red{
+  color: red;
+}
+
+.text_in_alert_danger{
+  padding: 20px 0 20px 0;
+  font-size: 15px;
+}

@@ -16,5 +16,19 @@ class Modelo_InfoHv{
   	$sql = "SELECT * FROM mfo_infohv WHERE id_usuario = ".$idUsuario;
     return $GLOBALS['db']->auto_array($sql,array(),false);
   }
+
+  public static function obtieneHvAspirantes($idOferta){
+
+    $sql = "SELECT i.id_usuario FROM mfo_infohv i, mfo_oferta o WHERE o.id_ofertas = $idOferta AND o.id_usuario = i.id_usuario";
+    $arraydatos = $GLOBALS['db']->auto_array($sql,array(),false);
+    $datos = array();
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+        $datos[$value['id_usuario']] = 1;
+      }
+    }
+    return $datos;
+}
 }  
 ?>

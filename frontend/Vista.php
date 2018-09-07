@@ -93,9 +93,6 @@ class Vista {
       }
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/planesUsuario/", "nombre"=>"Mis Planes");
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/perfil/", "nombre"=>"Mi Perfil"); 
-      if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){        
-        $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/planes/", "nombre"=>"Mis Planes");
-      }
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/logout/", "nombre"=>"Cerrar Sesión");
     }
     return $menu;
