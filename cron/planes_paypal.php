@@ -43,10 +43,14 @@ foreach($registros as $registro){
         if (!Modelo_Comprobante::guardarComprobante($registro["txn_id"],$cliente["nombres"],$cliente["correo"],
         	                                          $cliente["telefono"],$cliente["dni"],$cliente["ciudad"],
         	                                          Modelo_Comprobante::METODO_PAYPAL,'',$registro["payment_gross"],
-        	                                          $infousuario['id_usuario'],$infoplan["id_plan"])){
+        	                                          $infousuario['id_usuario'],$infoplan["id_plan"],
+                                                    Modelo_Comprobante::PAGO_VERIFICADO)){
           throw new Exception("Error al ingresar el comprobante ".print_r($registro,true));
         }  
-        if (!Modelo_UsuarioxPlan::modificarPlan($cliente["usuario"],$cliente["plan"],$infoplan["num_post"],$infoplan["duracion"])){
+
+        $id_comprobante = $GLOBALS['db']->insert_id();
+
+        if (!Modelo_UsuarioxPlan::modificarPlan($cliente["usuario"],$cliente["plan"],$infoplan["num_post"],$infoplan["duracion"],$id_comprobante)){
           throw new Exception("Error en actualizar el plan ".print_r($registro,true));	
         }
         $email_subject = "Activación de Subscripción";
@@ -58,10 +62,15 @@ foreach($registros as $registro){
       if (!Modelo_Comprobante::guardarComprobante($registro["txn_id"],$cliente["nombres"],$cliente["correo"],
         	                                        $cliente["telefono"],$cliente["dni"],$cliente["ciudad"],
         	                                        Modelo_Comprobante::METODO_PAYPAL,'',$registro["payment_gross"],
-        	                                        $infousuario['id_usuario'],$infoplan["id_plan"])){
+        	                                        $infousuario['id_usuario'],$infoplan["id_plan"],
+                                                  Modelo_Comprobante::PAGO_VERIFICADO)){
         throw new Exception("Error al ingresar el comprobante ".print_r($registro,true));
       }  
-      if (!Modelo_UsuarioxPlan::guardarPlan($cliente["usuario"],$cliente["plan"],$infoplan["num_post"],$infoplan["duracion"])){
+      
+      $id_comprobante = $GLOBALS['db']->insert_id();
+      Utils::log("ID COMPROBANTE".$id_comprobante);
+
+      if (!Modelo_UsuarioxPlan::guardarPlan($cliente["usuario"],$cliente["plan"],$infoplan["num_post"],$infoplan["duracion"],$id_comprobante)){
         throw new Exception("Error en crear el plan ".print_r($registro,true));	
       }
       $email_subject = "Activación de Subscripción";

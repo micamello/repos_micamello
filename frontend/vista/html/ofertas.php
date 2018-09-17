@@ -64,11 +64,11 @@
 		    </div>
             
 		    <div class="panel panel-default shadow-panel1">
-		          <div class="panel-heading">
-		              <span><i class="fa fa-user-clock"></i> Jornada</span>
-		            </div>
-		          <div class="panel-body">
-		          		<div class="filtros">
+	            <div class="panel-heading">
+	              <span><i class="fa fa-user-clock"></i> Jornada</span>
+	            </div>
+	            <div class="panel-body">
+	          		<div class="filtros">
 					<?php
 						if (!empty($jornadas)) {
 						    foreach ($jornadas as $key => $v) {
@@ -77,8 +77,9 @@
 								echo '<li class="lista"><a href="'.$ruta.$page.'/" class="jornada" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 							}
 						}
-					?> </div>
-		          </div>
+					?>
+	         		</div>
+	    		</div>
 		    </div>
 		</div>
 		

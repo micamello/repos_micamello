@@ -15,8 +15,7 @@ class Controlador_Oferta extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
-        //Valida los permisos 
-        //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);
+        
 
         //Obtiene todos los banner activos segun el tipo
         $arrbanner     = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
@@ -31,7 +30,6 @@ class Controlador_Oferta extends Controlador_Base
         $orden = rand(1, count($arrbanner)) - 1;
         $_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
 
-        //$mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
         $page = Utils::getParam('page', '1', $this->data);
         $type = Utils::getParam('type', '', $this->data); 
@@ -39,12 +37,17 @@ class Controlador_Oferta extends Controlador_Base
         $postulacionesUserLogueado = array();
         $breadcrumbs = array();
 
+        if($opcion != 'vacantes'){
+            
+            //Valida los permisos 
+            Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);
+        }
+
+
         if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == ''){
             echo 'entro';
             $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'O'=>1,'Q'=>0);
         }
-
-        print_r($_SESSION['mfo_datos']['Filtrar_ofertas']); 
 
         switch ($opcion) {
             case 'filtrar':
@@ -146,12 +149,12 @@ class Controlador_Oferta extends Controlador_Base
                         }
                     }
                 }
-print_r($array_datos);
-                $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-                $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas']/*['A'],$_SESSION['mfo_datos']['Filtrar_ofertas']['P'],$_SESSION['mfo_datos']['Filtrar_ofertas']['J'],$_SESSION['mfo_datos']['Filtrar_ofertas']['Q']*/,$page,$vista,$idUsuario);
 
-                $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page/*,'mostrar'=>$mostrar*/,'vista'=>$vista)); 
-                 print_r($_SESSION['mfo_datos']['Filtrar_ofertas']); 
+                $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+                $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario);
+
+                $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'vista'=>$vista));  
+
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,
                     'arrarea'       => $arrarea,
@@ -161,7 +164,6 @@ print_r($array_datos);
                     'postulacionesUserLogueado' => $postulacionesUserLogueado,
                     'link'=>$link,
                     'page' =>$page,
-                    //'mostrar'=>$mostrar,
                     'vista'=>$vista
                 );
 
@@ -190,6 +192,7 @@ print_r($array_datos);
 
                 $idOferta = Utils::getParam('id', '', $this->data);
                 $status = Utils::getParam('status', '', $this->data);
+
                 $aspiracion = Utils::getParam('aspiracion', '', $this->data);
                 $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
                 $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$idUsuario);
@@ -246,7 +249,6 @@ print_r($array_datos);
                     'jornadas'      => $jornadas,
                     'ofertas'       => $ofertas,
                     'page' => $page,
-                    //'mostrar'=>$mostrar,
                     'vista'=>$vista
                 );
 
@@ -300,7 +302,6 @@ print_r($array_datos);
                     'ofertas'       => $ofertas,
                     'postulacionesUserLogueado' => $postulacionesUserLogueado,
                     'page' => $page,
-                    //'mostrar'=>$mostrar,
                     'vista'=>$vista
                 );
 

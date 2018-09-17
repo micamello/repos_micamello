@@ -236,6 +236,7 @@ class Utils{
     else return true;
   }
 
+
   //static public function numerico($str){
   //  return (bool)preg_match( '/^[\-+]?[0-9]*\.?[0-9]+$/', $str);
   //}
@@ -252,14 +253,40 @@ class Utils{
     return ( ! preg_match("/^[0-9]+(?:\.[0-9]{0,2})?$/", $str)) ? false : true;
   }
 
- /* public static function calcularEdad($fecha_nacimiento) { 
 
-    $tiempo = strtotime($fecha_nacimiento); 
-    $ahora = time(); 
-    $edad = ($ahora-$tiempo)/(60*60*24*365.25); 
-    $edad = floor($edad); 
-    return $edad; 
-  }*/
+  public static function validarPalabras($data){
+    $merge_palabras;
+    for ($i=0; $i < count($data); $i++) {
+      ${"array_".$i} = array();
+      array_push(${"array_".$i}, preg_split("/[\s,]+/u", ($data[$i])));
+        if ($i>0) {
+          ${"merge_palabras_".$i} = array_merge(${"array_0"}[0], ${"array_".($i)}[0]);
+          $merge_palabras = ${"merge_palabras_".$i};
+        }
+      }
+      $arrayPalabras = array_unique($merge_palabras);
+      $palabras_ordenadas = array_values($arrayPalabras);
+      $palabras_bd = (Modelo_PalabrasObscenas::obtienePalabras());
+      for ($i=0; $i < count($palabras_ordenadas); $i++) { 
+        for ($j=0; $j < count($palabras_bd); $j++) { 
+          if ($palabras_bd[$j]['descripcion'] == $palabras_ordenadas[$i]) {
+            return false;
+          }
+        }
+      }
+    return true; 
+
+  }
+
+  public static function validarEminEmax($campo1, $campo2){
+    if($campo1 >= 18 || $campo2 >= 18){
+      if($campo1 <= $campo2){
+        return true;
+      }
+      else return false;
+    }
+    else return false;
+  }
 
 }
 ?>

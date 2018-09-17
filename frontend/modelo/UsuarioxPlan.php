@@ -7,7 +7,7 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array($usuario),true);
   }
 
-    public static function guardarPlan($usuario,$plan,$numpost,$duracion){
+  public static function guardarPlan($usuario,$plan,$numpost,$duracion,$idcomprobante=''){
 	    if (empty($usuario) || empty($plan)){ return false; }
 	    $values_insert = array();
 	    $fechacreacion = date('Y-m-d H:i:s');    
@@ -22,6 +22,9 @@ class Modelo_UsuarioxPlan{
 	    	$fechacaducidad = strtotime ( '+'.$duracion.' day',strtotime($fechacreacion));
 	      $values_insert["fecha_caducidad"] = date('Y-m-d H:i:s',$fechacaducidad);
 	    }
+      if (!empty($idcomprobante)){
+        $values_insert["id_comprobante"] = $idcomprobante;
+      }
 	    return $GLOBALS['db']->insert('mfo_usuario_plan',$values_insert);
 	}
 
@@ -55,7 +58,7 @@ class Modelo_UsuarioxPlan{
     return (isset($result['id_usuario_plan']) && !empty($result['id_usuario_plan'])) ? true : false;
   }
 
-  public static function modificarPlan($usuario,$plan,$numpost,$duracion){
+  public static function modificarPlan($usuario,$plan,$numpost,$duracion,$idcomprobante=''){
     if (empty($usuario) || empty($plan)){ return false; }
     $values_update = array();
     $fechacreacion = date('Y-m-d H:i:s');    
@@ -67,6 +70,9 @@ class Modelo_UsuarioxPlan{
     if (!empty($duracion)){
       $fechacaducidad = strtotime ( '+'.$duracion.' day',strtotime($fechacreacion));
       $values_update["fecha_caducidad"] = date('Y-m-d H:i:s',$fechacaducidad);
+    }
+    if (!empty($idcomprobante)){
+      $values_update["id_comprobante"] = $idcomprobante;
     }
     return $GLOBALS['db']->update('mfo_usuario_plan',$values_update,'id_usuario='.$usuario.' AND id_plan='.$plan);
   }

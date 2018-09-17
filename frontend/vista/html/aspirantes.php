@@ -238,61 +238,59 @@
 							      </tr>
 							    </thead>
 				        		<tbody>
-					        	<?php if(!empty($aspirantes)){
+						        	<?php if(!empty($aspirantes)){
+							            foreach($aspirantes as $key => $a){  ?>
+							            	<tr>
+							            		<td><img class="img-circle" width="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
 
-						            foreach($aspirantes as $key => $a){  ?>
-										
-						            	<tr>
-						            		<td><img class="img-circle" width="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
+							            		<td style="vertical-align: middle; text-align: justify;"><?php echo $a['nombres'].' '.$a['apellidos']; ?></td>
 
-						            		<td style="vertical-align: middle; text-align: justify;"><?php echo $a['nombres'].' '.$a['apellidos']; ?></td>
+							            		<td style="vertical-align: middle;" class="text-center"><?php echo $a['edad']; ?></td>
 
-						            		<td style="vertical-align: middle;" class="text-center"><?php echo $a['edad']; ?></td>
+							            		<td style="vertical-align: middle;" class="text-center"><?php echo date("d", strtotime($a['fecha_postulado'])).' de '.MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado'])); ?></td>
+												
+												<td style="vertical-align: middle;">
+								            		<?php 
+									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
 
-						            		<td style="vertical-align: middle;" class="text-center"><?php echo date("d", strtotime($a['fecha_postulado'])).' de '.MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado'])); ?></td>
-											
-											<td style="vertical-align: middle;">
-							            		<?php 
-								            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-
-								            			$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-								            			$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-								            			
-								            			if(in_array('-1',$posibilidades) ){
-															echo '<a href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
-														}else{
-															$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
-
-															if($cantidadRestante > 0){
+									            			$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
+									            			$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
+									            			
+									            			if(in_array('-1',$posibilidades) ){
 																echo '<a href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
 															}else{
-																echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar hojas de vida'".')"><i class="fa fa-file-text fa-1x"></i></a>';
+																$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
+
+																if($cantidadRestante > 0){
+																	echo '<a href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
+																}else{
+																	echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar hojas de vida'".')"><i class="fa fa-file-text fa-1x"></i></a>';
+																}
 															}
+
+														}else{
+															echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar hojas de vida'".')"><i class="fa fa-file-text fa-1x"></i></a>';
 														}
+													?>
+												</td>
 
-													}else{
-														echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar hojas de vida'".')"><i class="fa fa-file-text fa-1x"></i></a>';
-													}
-												?>
-											</td>
-
-											<td style="vertical-align: middle;">
-							            		<?php 
-								            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-														echo '<a href="'.PUERTO."://".HOST."/verResultados/".$a['id_usuario'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
-													}else{
-														echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar Informes de personalidad'".')"><i class="fa fa-clipboard fa-1x"></i></a>';
-													}
-												?>
-											</td>
-						            	</tr>
-									<?php }
-								}else{ ?>
-								    <tr>
-								      <td colspan="5" class="text-center">No hay resultados</td>
-								    </tr>
-							  	<?php 
-							    } ?>
+												<td style="vertical-align: middle;">
+								            		<?php 
+									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+															echo '<a href="'.PUERTO."://".HOST."/verResultados/".$a['id_usuario'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
+														}else{
+															echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar Informes de personalidad'".')"><i class="fa fa-clipboard fa-1x"></i></a>';
+														}
+													?>
+												</td>
+							            	</tr>
+										<?php }
+									}else{ ?>
+									    <tr>
+									      <td colspan="5" class="text-center">No hay resultados</td>
+									    </tr>
+								  	<?php 
+								    } ?>
 								</tbody>
 							</table>
 						</div>

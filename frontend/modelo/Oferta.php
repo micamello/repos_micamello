@@ -17,7 +17,6 @@ class Modelo_Oferta{
   }
   
   public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false){
-
     $sql = "SELECT 
         o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
     a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
@@ -71,7 +70,6 @@ class Modelo_Oferta{
 
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
-
 
   public static function filtrarOfertas(&$filtros,$page,$vista=false,$idusuario=false){
 
@@ -190,6 +188,8 @@ class Modelo_Oferta{
     if (empty($data)) {return false;}
     $result = $GLOBALS['db']->insert('mfo_oferta', array("titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>1, "fecha_creado"=>date("Y-m-d H:i:s"), "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_tipocontrato"=>$data['tipo_cont_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_usuario"=>$idusu, "id_plan"=>$id_plan));
     return $result;
-  }  
+  }
+
+  
 }  
 ?>

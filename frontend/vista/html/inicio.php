@@ -93,7 +93,7 @@
                                 ?>
 
                                     <div class="col-md-3 col-sm-6 col-xs-12" align="center">
-                                        <i class="<?php echo $area['ico']; ?>" aria-hidden="true"></i>
+                                        <i class="<?php echo $area['ico']; ?> font_awesome" aria-hidden="true"></i>
 
                                         <h5><a href="javascript:void(0);"><?php echo utf8_encode($area['nombre']);?></a></h5>
 
@@ -157,7 +157,7 @@
                             <div class="item_tti">
                                 <p>
                                     <span class="tti_st">
-                                        <i class="far fa-flag"></i>
+                                        <i class="fa fa-flag"></i>
                                     </span>
                                 </p>
                                 
@@ -170,7 +170,7 @@
                             <div class="item_tti">
                                 <p>
                                     <span class="tti_st">
-                                        <i class="fas fa-user-check"></i>
+                                        <i class="fa fa-check-circle"></i>
                                     </span>
                                 </p>
                                 
@@ -185,7 +185,7 @@
                             <div class="item_tti">
                                 <p>
                                     <span class="tti_st">
-                                        <i class="fa fa-clock"></i>
+                                        <i class="fa fa-clock-o"></i>
                                     </span>
                                 </p>
                                 
@@ -227,6 +227,7 @@
 <!-- Modal registro exitoso -->
 
 <!-- FIN PUBLICIDAD -->
+<!-- <a href="<?php echo PUERTO."://".HOST;?>/informePDF/" class="btn btn-success">Eder</a> -->
 
 <!-- Listado de auspiciantes -->
 <section id="brand" class="brand fix">

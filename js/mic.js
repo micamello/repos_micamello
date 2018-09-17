@@ -1,5 +1,3 @@
-
-
 if(document.getElementById('form_register')){
   $("#form_register").validator();
 }
@@ -11,43 +9,6 @@ if(document.getElementById('form_login')){
 if(document.getElementById('form_publicar')){
   $("#form_publicar").validator();
 }
-
-// function numero_validate(id)
-// {
-//   var input_number = id;
-//   var nodo_padre = document.getElementById(input_number.id).parentNode;
-//   var nodo_div = nodo_padre.querySelectorAll('div');
-  
-//   input_number.addEventListener('keydown',function(e) {
-    
-//     var code = e.which || e.keyCode,
-//     allowedKeys = [8, 9, 13, 27, 35,36,37,38,39,46,110, 190];
-    
-//     if(allowedKeys.indexOf(code) > -1) {
-//       return;
-//     }
-    
-//     if((e.shiftKey || (code < 48 || code > 57)) && (code < 96 || code > 105)) {
-//       e.preventDefault();
-//       nodo_div[0].innerHTML = "El campo solo acepta números";
-//       nodo_div[0].style.color = "red";
-//       nodo_div[0].style.position = "absolute";
-//       input_number.style.borderColor = "red";
-//       input_number.style.borderColor = ""
-//     }
-//     else
-//     {
-//       nodo_div[0].innerHTML = "";
-//       input_number.style.borderColor = "";
-//     }
-//       $('.modal').on('hidden.bs.modal', function(){
-//           nodo_div[0].innerHTML = "";
-//           input_number.style.borderColor = "";
-
-//       });
-
-//   })
-// }
 
 function valida_numeros(evt){
     if(window.event){
@@ -66,8 +27,6 @@ function valida_numeros(evt){
       return false;
      }
 }
-
-
 
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
@@ -108,7 +67,6 @@ if(document.getElementById('form_deposito')){
 if(document.getElementById('form_recomendaciones')){
   $("#form_recomendaciones").validator();
 }
-
 
 $('.carousel[data-type="multi"] .item').each(function(){
 
