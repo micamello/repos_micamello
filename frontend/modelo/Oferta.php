@@ -16,7 +16,7 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
   
-  public static function obtieneOfertas($id=false,$page=false,$vista=false){
+  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false){
     $sql = "SELECT 
         o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
     a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, t.descripcion AS contrato, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
@@ -27,7 +27,7 @@ class Modelo_Oferta{
        $sql .= ",pos.tipo, pos.id_auto as id_postulacion, pos.resultado";
     }
 
-    $sql .= " FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelInteres n, mfo_jornada j, mfo_ciudad c, 
+    $sql .= " FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, 
     mfo_tipocontrato t, mfo_provincia p";
 
     if(!empty($vista) && $vista == 'postulacion'){
@@ -51,7 +51,7 @@ class Modelo_Oferta{
     }
 
     if(!empty($vista) && $vista == 'postulacion'){
-      $sql .= " AND o.id_usuario = pos.id_usuario";
+      $sql .= " AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
 
     $sql .= " ORDER BY o.fecha_creado DESC";
@@ -63,7 +63,7 @@ class Modelo_Oferta{
   }
 
 
-  public static function filtrarOfertas($id_area,$id_provincia,$id_jornada,$id_contrato,$page,$vista=false){
+  public static function filtrarOfertas($id_area,$id_provincia,$id_jornada,$id_contrato,$page,$vista=false,$idusuario=false){
 
     $sql = "SELECT 
         o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
@@ -75,7 +75,7 @@ class Modelo_Oferta{
        $sql .= ",pos.tipo,pos.id_auto as id_postulacion, pos.resultado";
     }
 
-    $sql .= " FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelInteres n, mfo_jornada j, mfo_ciudad c, 
+    $sql .= " FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, 
     mfo_tipocontrato t, mfo_provincia p";
 
     if(!empty($vista) && $vista == 'postulacion'){
@@ -109,7 +109,7 @@ class Modelo_Oferta{
     }
 
     if(!empty($vista) && $vista == 'postulacion'){
-      $sql .= " AND o.id_usuario = pos.id_usuario";
+      $sql .= " AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
 
     $sql .= " ORDER BY o.fecha_creado DESC";
@@ -130,6 +130,8 @@ class Modelo_Oferta{
     if (empty($data)) {return false;}
     $result = $GLOBALS['db']->insert('mfo_oferta', array("titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>1, "fecha_creado"=>date("Y-m-d H:i:s"), "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_tipocontrato"=>$data['tipo_cont_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_usuario"=>$idusu, "id_plan"=>$id_plan));
     return $result;
-  }  
+  }
+
+  
 }  
 ?>

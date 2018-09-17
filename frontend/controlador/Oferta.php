@@ -46,7 +46,7 @@ class Controlador_Oferta extends Controlador_Base
 
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['vista']);
                 
-                if($vista == 'oferta'){
+                if($vista == 'publicacion'){
                     $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     $breadcrumbs['oferta'] = 'Ofertas de empleo';
                 }else if($vista == 'vacantes'){
@@ -121,7 +121,7 @@ class Controlador_Oferta extends Controlador_Base
                     }
                 }
 
-                $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas']['A'],$_SESSION['mfo_datos']['Filtrar_ofertas']['P'],$_SESSION['mfo_datos']['Filtrar_ofertas']['J'],$_SESSION['mfo_datos']['Filtrar_ofertas']['C'],$page,$vista);
+                $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas']['A'],$_SESSION['mfo_datos']['Filtrar_ofertas']['P'],$_SESSION['mfo_datos']['Filtrar_ofertas']['J'],$_SESSION['mfo_datos']['Filtrar_ofertas']['C'],$page,$vista,$_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'mostrar'=>$mostrar,'vista'=>$vista)); 
                  
@@ -163,8 +163,8 @@ class Controlador_Oferta extends Controlador_Base
 
                 $idOferta = Utils::getParam('id', '', $this->data);
                 $status = Utils::getParam('status', '', $this->data);
-                $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page);
-                $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+                $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];                
+                $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$idUsuario);                
 
                 if (Utils::getParam('postulado') == 1) {
 
@@ -255,7 +255,7 @@ class Controlador_Oferta extends Controlador_Base
                 $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo();
                 $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
                 $tiposContrato = Modelo_TipoContrato::obtieneListadoAsociativo();
-                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista);
+                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 if($vista != 'postulacion'){
                     $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($_SESSION['mfo_datos']['usuario']['id_usuario'],$page);

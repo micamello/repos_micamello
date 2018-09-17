@@ -695,17 +695,41 @@ fieldset[disabled] .btn-filtro.focus {
 /* vista de ofertas */
 
 .button_transfer_list{
-  margin: 26px 0 10px 0;
-  padding: 10px 20px 10px 20px;
+  margin: 32px 0 10px 0;
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background-color: #56B78A;
+  color: white;
 }
 
 .badge_item{
   padding: 5px 20px 5px 20px;
-  margin: 5px 18px 5px 18px;
-  background-color: #03a9f4;
+  margin: 5px 8px 5px 18px;
+  background-color: #56b78a;
   color: white;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.badge_item:hover{
+  background-color: #D56464;
 }
 
 .error_text{
@@ -714,4 +738,30 @@ fieldset[disabled] .btn-filtro.focus {
   background-color: #EB3D3D;
   color: #FFFFFF;
   border-radius: 5px;
+}
+
+.list_content{
+  border: 2px solid #C1C1C1; 
+  border-radius: 5px; 
+  padding: 0px 20px 100px 20px;
+  overflow-y: auto;
+  height: 70px;
+}
+
+.font_awesome{
+  color: #337ab7;
+}
+
+.big_number{
+  font-size: 100px;
+  font-weight: 550;
+}
+
+.bg_red{
+  color: red;
+}
+
+.text_in_alert_danger{
+  padding: 20px 0 20px 0;
+  font-size: 15px;
 }

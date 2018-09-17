@@ -5,6 +5,7 @@ class Modelo_Comprobante{
   const METODOS_PAGOS = array('1'=>'Deposito','2'=>'Paypal','3'=>'Paymentez');
 
   const PAGO_PROCESO = 3;
+  const PAGO_VERIFICADO = 1;
   const METODO_DEPOSITO = 1;
   const METODO_PAYPAL = 2;
   const METODO_PAYMENTEZ = 3;
@@ -15,7 +16,7 @@ class Modelo_Comprobante{
   }
 
   public static function guardarComprobante($numero, $nombre, $correo, $telefono, $dni, $ciudad, 
-  																					$tipopago, $imagen, $valor, $usuario, $plan){
+  																					$tipopago, $imagen, $valor, $usuario, $plan, $estado = self::PAGO_PROCESO){
     if (empty($numero) || empty($nombre) || empty($correo) || empty($telefono) ||
     	  empty($dni) || empty($ciudad) || empty($tipopago) || empty($valor) || 
     	  empty($usuario) || empty($plan)){ 
@@ -23,7 +24,7 @@ class Modelo_Comprobante{
     }
     $data_insert = array('num_comprobante'=>$numero,'nombre'=>$nombre,'correo'=>$correo,'telefono'=>$telefono,
                          'fecha_creacion'=>date('Y-m-d H:i:s'),'id_ciudad'=>$ciudad,'tipo_pago'=>$tipopago,
-                         'ext_imagen'=>$imagen,'valor'=>$valor,'estado'=>self::PAGO_PROCESO,'id_plan'=>$plan,
+                         'ext_imagen'=>$imagen,'valor'=>$valor,'estado'=>$estado,'id_plan'=>$plan,
                          'id_usuario'=>$usuario,'dni'=>$dni);
     return $GLOBALS['db']->insert('mfo_rcomprobantescam',$data_insert);                      
   }

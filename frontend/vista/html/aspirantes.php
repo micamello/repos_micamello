@@ -8,7 +8,7 @@
 			<br/><br/>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fas fa-list-ul"></i> Fecha de postulaci&oacute;n</span>
+					<span><i class="fa fa-list-ul"></i> Fecha de postulaci&oacute;n</span>
 				</div>
 				<div class="panel-body">
 				<?php
@@ -33,7 +33,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fas fa-map"></i> Ubicaci&oacute;n</span>
+					<span><i class="fa fa-map"></i> Ubicaci&oacute;n</span>
 				</div>
 				<div class="panel-body">
 				<?php
@@ -60,7 +60,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 		          <div class="panel-heading">
-		              <span><i class="fas fa-user-clock"></i> Prioridad por plan</span>
+		              <span><i class="fa fa-user-clock"></i> Prioridad por plan</span>
 		            </div>
 		          <div class="panel-body">
 					<?php
@@ -85,7 +85,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
-		            <span><i class="fas fa-file"></i> Salario</span>
+		            <span><i class="fa fa-file"></i> Salario</span>
 		          </div>
 		      <div class="panel-body">
 				<?php
@@ -110,7 +110,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
-		            <span><i class="fas fa-file"></i> Genero</span>
+		            <span><i class="fa fa-file"></i> Genero</span>
 		          </div>
 		      <div class="panel-body">
 				<?php
@@ -163,7 +163,7 @@
 									            <ul style="list-style-type: none;">
 									        <?php 
 
-									            if (1) {
+									            if (isset($aspirantesConHv[$a['id_usuario']])) {
 									                ?>
 									                <li><i class="far fa-file"></i> <a class="unstyled" href="<?php echo PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf';?>">Ver Hoja de Vida</a></li>
 									                <?php
@@ -174,7 +174,7 @@
 									                <li><i class="far fa-file"></i> <span style="color: black;">No ha cargado HV</span></li>
 									                <?php
 									            }?>
-									                <li><i class="fas fa-chart-bar"></i> <a href="<?php echo PUERTO."://".HOST."/verResultados/".$a['id_usuario'].'/';?>">Resultados evaluaci&oacute;n</a></li>
+									                <li><i class="fa fa-chart-bar"></i> <a href="<?php echo PUERTO."://".HOST."/verResultados/".$a['id_usuario'].'/';?>">Resultados evaluaci&oacute;n</a></li>
 									            </ul>
 									            
 									      </p>

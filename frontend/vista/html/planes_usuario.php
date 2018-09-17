@@ -40,14 +40,14 @@
                                                     <?php if($value['costo'] == 0){ ?>
                                                         <td colspan="3">Plan Gratuito</td>
                                                     <?php }else{ 
-                                                        if($value['id_comprobante'] != ""){
-                                                        $datos = Modelo_Comprobante::obtieneComprobante($value['id_comprobante']);
+                                                        if($value['id_comprobante'] != ""){                                                            
+                                                        $datos = Modelo_Comprobante::obtieneComprobante($value['id_comprobante']);                                                        
                                                     ?>
                                                         <td><?php echo date("d-m-Y", strtotime($datos[0]['fecha_creacion'])); ?></td>
                                                         <td><?php echo Modelo_Comprobante::METODOS_PAGOS[$datos[0]['tipo_pago']]; ?></td>
                                                         <td><?php echo  Modelo_Comprobante::TIPO_PAGOS[$datos[0]['estado']]; ?></td>
                                                     <?php }else{ ?>
-                                                        <td colspan="3"><?php echo Modelo_Comprobante::METODOS_PAGOS['3']; ?></td>
+                                                        <td colspan="3">Plan Gratuito</td>
                                                     <?php }
                                                     } ?>
                                                     <td><?php echo ESTADOS[$value['estado']]; ?></td>

@@ -71,7 +71,7 @@ class Controlador_Registro extends Controlador_Base {
         $data = $this->camposRequeridos($campos);
 
         $datousername = Modelo_Usuario::existeUsuario($data["username"]);
-        if (empty($datousername)){
+        if (!empty($datousername)){
           throw new Exception("El usuario ".$data["username"]." ya existe");
         }
         $datocorreo = Modelo_Usuario::existeCorreo($data["correo"]);
@@ -125,7 +125,6 @@ class Controlador_Registro extends Controlador_Base {
     }    
 
   }
-}
 
   public function guardarUsuario($data){
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();

@@ -8,7 +8,7 @@
 			<br/><br/>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fas fa-list-ul"></i> Categor&iacute;as</span>
+					<span><i class="fa fa-list-ul"></i> Categor&iacute;as</span>
 				</div>
 				<div class="panel-body">
 				<?php
@@ -32,7 +32,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fas fa-map"></i> Provincias</span>
+					<span><i class="fa fa-map"></i> Provincias</span>
 				</div>
 				<div class="panel-body">
 				<?php
@@ -56,7 +56,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 		          <div class="panel-heading">
-		              <span><i class="fas fa-user-clock"></i> Jornada</span>
+		              <span><i class="fa fa-user-clock"></i> Jornada</span>
 		            </div>
 		          <div class="panel-body">
 					<?php
@@ -80,7 +80,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
-		            <span><i class="fas fa-file"></i> Contrato</span>
+		            <span><i class="fa fa-file"></i> Contrato</span>
 		          </div>
 		      <div class="panel-body">
 				<?php

@@ -161,7 +161,7 @@
                                <div class="content_email">
                                    <div>
                                         <span class="pre_text_email">NECESITA AYUDA? ESCRÍBANOS:</span>
-                                        <i class="far fa-envelope"></i>
+                                        <i class="fa fa-envelope"></i>
                                         <a class="info_email_mic">info@micamello.com.ec</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                         <!--<a href="form-sug.php" style="color: white; text-decoration: underline;"><b>Recomendaciones o sugerencias <i class="fa fa-focus"></i></b></a>-->
                                     </div>
@@ -231,7 +231,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<!--<script src="<?php #echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>-->
+<!--<script src="<?php //echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>-->
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
 
 <?php

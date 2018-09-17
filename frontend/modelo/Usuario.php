@@ -53,7 +53,7 @@ class Modelo_Usuario{
     if(empty($username)){ return false; }
     $sql = "select * from mfo_usuario where username = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username));
-    return (!empty($rs['id_usuario'])) ? $rs['id_usuario']: false;
+    return (!empty($rs['id_usuario'])) ? $rs : false;
   }
 
   public static function existeCorreo($correo){
@@ -142,10 +142,9 @@ class Modelo_Usuario{
   public static function obtenerAspirantes($idOferta,$page){
 
     $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, u.apellidos, p.fecha_postulado 
-            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_infohv i
+            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o
             WHERE u.id_usuario = p.id_usuario 
             AND p.id_ofertas = o.id_ofertas
-            AND i.id_usuario = u.id_usuario
             AND o.id_ofertas = $idOferta
             ORDER BY p.fecha_postulado DESC";
 

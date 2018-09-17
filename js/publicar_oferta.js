@@ -65,19 +65,47 @@ $('#provincia_of').change(function()
     }
 });
 
-// if(document.getElementById('des_of')){
-//   tinymce.init({ 
-//     selector:'textarea#des_of',
-//     removed_menuitems: 'undo, redo',
-//     height : "128",
-//     resize: false,
-//     branding: false,
-//     elementpath: false,
-//     menubar:false,
-//     statusbar: false,
-//     language: 'es',
-//   })
-// }
+if(document.getElementById('des_of')){
+  tinymce.init({ 
+    selector:'textarea#des_of',
+    removed_menuitems: 'undo, redo',
+    height : "128",
+    resize: false,
+    branding: false,
+    elementpath: false,
+    menubar:false,
+    statusbar: false,
+    language: 'es',
+    setup: function(editor) {
+    editor.on('blur', function(e) {
+      if (tinyMCE.get('des_of').getContent() == "") {
+        crearMensajeError("descripcion_error", "Rellene este campo");
+      }
+      else
+      {
+        eliminarMensajeError("descripcion_error");
+      }
+    });
+  }
+})
+}
+
+function crearMensajeError($id_div_error, $mensaje_error){
+    var nodo_div = document.getElementById($id_div_error);
+    var p_node = document.createElement("P");
+    p_node.setAttribute("class", "list-unstyled msg_error");
+     p_node.setAttribute("id", "p_node_error");
+    var p_text = document.createTextNode($mensaje_error);
+    p_node.appendChild(p_text);
+    nodo_div.appendChild(p_node);
+}
+
+function eliminarMensajeError($id_div_error){
+    var nodo_div = document.getElementById($id_div_error);
+    nodo_div.innerHTML = "";
+}
+
+
 
 $('#btn_transfer').on('click', function()
 {
@@ -104,13 +132,17 @@ $('#btn_transfer').on('click', function()
             var error_span = document.createElement('SPAN');
             error_span.setAttribute("id", "id_span_error");
             error_span.setAttribute("class", "error_text");
-            var error_msg_text = document.createTextNode('Todas seleccionadas');
+            var error_msg_text = document.createTextNode('Ha seleccionado todas las opciones disponibles');
             error_span.appendChild(error_msg_text);
             error_all_selected.appendChild(error_span);
     }
     
     if (idioma_selected_select.disabled == false)
     {
+        if (document.getElementById("text_nothing")) {
+            document.getElementById("text_nothing").innerHTML = "";
+            document.getElementById("text_nothing").style.display = "none";
+        }
         var id_idioma = tag_idioma.value;
         var id_nivel_idioma = tag_nivel_idioma.value;
         var div_idioma = document.getElementById('list_idioma');
@@ -121,7 +153,7 @@ $('#btn_transfer').on('click', function()
         p_node.setAttribute("id", "idioma"+id_idioma);
         p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close' id='"+id_idioma+"' onclick='delete_item_selected(this);'></i>";
         p_node.setAttribute("disabled", "disabled");
-        p_node.setAttribute("class", "col-md-2 badge_item listado");
+        p_node.setAttribute("class", "col-md-5 badge_item listado");
         idioma_selected_select.setAttribute("disabled", "disabled");
         var nodo_option = document.createElement('option');
         nodo_option.setAttribute("value", id_idioma+"_"+id_nivel_idioma);
@@ -162,6 +194,8 @@ function delete_item_selected(selected_item){
     {
         tag_idioma.setAttribute("required", true);
         tag_nivel_idioma.setAttribute("required", true);
+        document.getElementById("text_nothing").innerHTML = "Ningun idioma seleccionado.....";
+        document.getElementById("text_nothing").style.display = "";
     }
 }
 
