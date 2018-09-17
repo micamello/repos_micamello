@@ -87,7 +87,7 @@ class Modelo_Usuario{
         $data["apell_user"] = $data['name_user'];
       }
 
-    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>$data['username'],"password"=>$password,"correo"=>$data['correo'],"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"apellidos"=>$data['apell_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"status_carrera"=>$defaultDataUser['status_carrera'],"tipo_usuario"=>$data['tipo_usuario'],"id_escolaridad"=>$defaultDataUser['id_escolaridad'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
+    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>strtolower($data['username']),"password"=>$password,"correo"=>strtolower($data['correo']),"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"tipo_usuario"=>$data['tipo_usuario'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
     return $result;
   }
 
@@ -158,8 +158,10 @@ class Modelo_Usuario{
 
   public static function obtenerAspirantes($idOferta,$page){
 
+
     $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, r.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) as edad 
             FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_requisitosusuario r
+
             WHERE u.id_usuario = p.id_usuario 
             AND p.id_ofertas = o.id_ofertas
             AND r.id_usuario = u.id_usuario

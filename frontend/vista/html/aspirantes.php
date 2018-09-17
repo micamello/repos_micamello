@@ -277,7 +277,7 @@
 												<td style="vertical-align: middle;">
 								            		<?php 
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-															echo '<a href="'.PUERTO."://".HOST."/verResultados/".$a['id_usuario'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
+															echo '<a href="'.PUERTO."://".HOST."/informePDF/".$a['username'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
 														}else{
 															echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar Informes de personalidad'".')"><i class="fa fa-clipboard fa-1x"></i></a>';
 														}

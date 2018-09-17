@@ -90,23 +90,6 @@ if(document.getElementById('des_of')){
 })
 }
 
-function crearMensajeError($id_div_error, $mensaje_error){
-    var nodo_div = document.getElementById($id_div_error);
-    var p_node = document.createElement("P");
-    p_node.setAttribute("class", "list-unstyled msg_error");
-     p_node.setAttribute("id", "p_node_error");
-    var p_text = document.createTextNode($mensaje_error);
-    p_node.appendChild(p_text);
-    nodo_div.appendChild(p_node);
-}
-
-function eliminarMensajeError($id_div_error){
-    var nodo_div = document.getElementById($id_div_error);
-    nodo_div.innerHTML = "";
-}
-
-
-
 $('#btn_transfer').on('click', function()
 {
     var select_array_idioma = document.getElementById('select_array_idioma');
@@ -151,7 +134,7 @@ $('#btn_transfer').on('click', function()
         var p_node = document.createElement('P');
         div_idioma.appendChild(p_node);
         p_node.setAttribute("id", "idioma"+id_idioma);
-        p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close' id='"+id_idioma+"' onclick='delete_item_selected(this);'></i>";
+        p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close fa-2x icon' id='"+id_idioma+"' onclick='delete_item_selected(this);'></i>";
         p_node.setAttribute("disabled", "disabled");
         p_node.setAttribute("class", "col-md-5 badge_item listado");
         idioma_selected_select.setAttribute("disabled", "disabled");

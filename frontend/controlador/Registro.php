@@ -129,12 +129,7 @@ class Controlador_Registro extends Controlador_Base {
   public function guardarUsuario($data){
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $campo_fecha = date("Y-m-d H:i:s");
-    $defaultDataUser = array('fecha_nacimiento'=>$campo_fecha, 'fecha_creacion'=>$campo_fecha, 'token'=>0, 'estado'=>0, 'status_carrera'=>0, 'id_escolaridad'=>1, 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>$campo_fecha);
-
-    if ($data['tipo_usuario'] == 1) {
-      $area_select = $data['area_select'];
-      $nivel_interes = $data['nivel_interes'];
-    }
+    $defaultDataUser = array('fecha_nacimiento'=>$campo_fecha, 'fecha_creacion'=>$campo_fecha, 'token'=>0, 'estado'=>0, 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>$campo_fecha);
 
                 if(!Modelo_Usuario::crearUsuario($data, $defaultDataUser)){
                     throw new Exception("Ha ocurrido un error, intente nuevamente");
@@ -143,6 +138,22 @@ class Controlador_Registro extends Controlador_Base {
                 $user_id = $GLOBALS['db']->insert_id();
 
                 if ($data['tipo_usuario'] == 1) {
+                  
+                  $escolaridad = Modelo_Escolaridad::obtieneListado();
+                  $universidad = Modelo_Universidad::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                  $apellidos = $data['apell_user'];
+
+                  $area_select = $data['area_select'];
+                  $nivel_interes = $data['nivel_interes'];
+
+                  $requisitos = array('id_usuario'=>$user_id, 'estado_civil'=>1, 'anosexp'=>1, 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 'apellidos'=>$apellidos, 'id_univ'=>$universidad[0]['id_univ']);
+
+                  Utils::log("datos de requisitos: ".print_r($requisitos, true));
+
+                  if(!Modelo_RequisitoxUsuario::crearRequisitoUsuario($requisitos)){
+                    throw new Exception("Ha ocurrido un error el registrar los requisitos, intente nuevamente");
+                  }
+
                   if(!Modelo_UsuarioxArea::crearUsuarioArea($area_select, $user_id)){
                       throw new Exception("Ha ocurrido un error, intente nuevamente");
                   }
