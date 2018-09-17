@@ -15,75 +15,99 @@ class Controlador_Aspirante extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
+        //Valida los permisos 
+        if (!isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
+             $this->redirectToController('vacantes');
+        }
+
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
         $page = Utils::getParam('page', '1', $this->data);
         $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
         $type = Utils::getParam('type', '', $this->data); 
         $vista = Utils::getParam('vista', '', $this->data);
-        //$postulacionesUserLogueado = array();
         $breadcrumbs = array();
 
         switch ($opcion) {
             case 'filtrar':
                 
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo();
-               /* $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                
-                $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
-                $tiposContrato = Modelo_TipoContrato::obtieneListadoAsociativo();*/
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
+                $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
 
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta']);
-                
-               /* if($vista == 'oferta'){
-                    $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                    $breadcrumbs['oferta'] = 'Ofertas de empleo';
-                }else if($vista == 'vacantes'){
-                    $breadcrumbs['oferta'] = 'Mis Vacantes';
-                }else{
-                    $breadcrumbs['postulacion'] = 'Mis postulaciones';
-                }*/
 
-                /*$id_area = '';
-                $id_provincia = '';
-                $id_jornada = '';
-                $id_contrato = '';*/
                 $cadena = '';
                 $array_datos = $aspirantesFiltrados = array();
+                
                 foreach ($this->data as $param => $value) {
                     
                     $letra = substr($value,0,1);
-                    $id = substr($value,1,2);
+                    $id = substr($value,1);
                     $cadena .= '/'.$value;
-                    //array_push($result, strval($value));
 
                     if($letra == 'F' && $type == 1){
                         
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['F'] = $id;
-                        $array_datos['F'] = array('id'=>$id,'nombre'=>FECHA_POSTULADO[$id]);
-
+                        if(isset(FECHA_POSTULADO[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['F'] = $id;
+                            $array_datos['F'] = array('id'=>$id,'nombre'=>FECHA_POSTULADO[$id]);
+                        }
                     }
                     else if($letra == 'P' && $type == 1){
                         
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] = $id;
-                        $array_datos['P'] = array('id'=>$id,'nombre'=>PRIORIDAD[$id]);
-
+                        if(isset(PRIORIDAD[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] = $id;
+                            $array_datos['P'] = array('id'=>$id,'nombre'=>PRIORIDAD[$id]);
+                        }
                     }
                     else if($letra == 'G' && $type == 1){
                         
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['G'] = $id;
-                        $array_datos['G'] = array('id'=>$id,'nombre'=>GENERO[$id]);
+                        $g = array_search($id,VALOR_GENERO); 
+                        if($g != false){
 
+                            if(isset(GENERO[$g])){
+                                $_SESSION['mfo_datos']['Filtrar_aspirantes']['G'] = $id;
+                                $array_datos['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
+                            }
+                        }
                     }
                     else if($letra == 'U' && $type == 1){
                         
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['U'] = $id;
-                        $array_datos['U'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                        if(isset($arrprovincia[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['U'] = $id;
+                            $array_datos['U'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                        }
 
                     }else if($letra == 'S' && $type == 1){
                         
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['S'] = $id;
-                        $array_datos['S'] = array('id'=>$id,'nombre'=>SALARIO[$id]);
+                        if(isset(SALARIO[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['S'] = $id;
+                            $array_datos['S'] = array('id'=>$id,'nombre'=>SALARIO[$id]);
+                        }
+
+                    }else if($letra == 'N' && $type == 1){
+                        
+                        if(isset($nacionalidades[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['N'] = $id;
+                        $array_datos['N'] = array('id'=>$id,'nombre'=>$nacionalidades[$id]);
+                        }
+
+                    }
+                    else if($letra == 'E' && $type == 1){
+                        
+                        if(isset($escolaridad[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['E'] = $id;
+                            $array_datos['E'] = array('id'=>$id,'nombre'=>$escolaridad[$id]);
+                        }
+
+                    }else if($letra == 'Q' && $type == 1){
+                        
+                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['Q'] = $id;
+                        $array_datos['Q'] = array('id'=>$id,'nombre'=>$id);
+                    }
+                    else if($letra == 'O' && $type == 1){
+                        
+                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['O'] = $id; 
 
                     }else if($type == 2){
 
@@ -93,35 +117,69 @@ class Controlador_Aspirante extends Controlador_Base
 
                 foreach ($_SESSION['mfo_datos']['Filtrar_aspirantes'] as $letra => $value) {
 
-                    if($value!=0){
+                    if($value!=0 || $value != ''){
 
                         if($letra == 'F'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>FECHA_POSTULADO[$value]);
+                            if(isset(FECHA_POSTULADO[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>FECHA_POSTULADO[$value]);
+                            }
                         }
 
                         if($letra == 'P'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>PRIORIDAD[$value]);
+                            if(isset(PRIORIDAD[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>PRIORIDAD[$value]);
+                            }
                         }
                         if($letra == 'G'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>GENERO[$value]);
+
+                            $g = array_search($id,VALOR_GENERO); 
+                            if($g != false){
+                                $array_datos['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
+                            }
+
                         }
                         if($letra == 'U'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
+                            if(isset($arrprovincia[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
+                            }
                         }
                         if($letra == 'S'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>SALARIO[$value]);
+                            if(isset(SALARIO[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>SALARIO[$value]);
+                            }
+                        }
+                        if($letra == 'N'){
+                            if(isset($nacionalidades[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$nacionalidades[$value]);
+                            }
+                        }
+                        if($letra == 'E'){
+                            if(isset($escolaridad[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$escolaridad[$value]);
+                            }
+                        }
+                        if($letra == 'O'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                        }
+                        if($letra == 'Q'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                         }
                     }
                 }
 
-                $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes']['F'],$_SESSION['mfo_datos']['Filtrar_aspirantes']['P'],$_SESSION['mfo_datos']['Filtrar_aspirantes']['U'],$_SESSION['mfo_datos']['Filtrar_aspirantes']['S'],$_SESSION['mfo_datos']['Filtrar_aspirantes']['G'],$page);
+                $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page);
 
                 $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'page'=>$page,'mostrar'=>$mostrar,'vista'=>$vista,'id_oferta'=>$id_oferta)); 
                  
+                $breadcrumbs['vacantes'] = 'Ver vacantes';
+                $breadcrumbs['aspirante'] = 'Ver Aspirantes';
+
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,
                     'aspirantes'       => $aspirantesFiltrados,
                     'arrprovincia'=>$arrprovincia,
+                    'nacionalidades'=>$nacionalidades,
+                    'escolaridad'=>$escolaridad,
                     'link'=>$link,
                     'page' =>$page,
                     'mostrar'=>$mostrar,
@@ -134,6 +192,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $pagination = new Pagination(count($aspirantesFiltrados),REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
+                $tags["template_js"][] = "aspirantes";
 
                 Vista::render('aspirantes', $tags);
             break;
@@ -147,24 +206,28 @@ class Controlador_Aspirante extends Controlador_Base
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
 
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0);
+                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'O'=>1,'Q'=>0);
                 $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
-                $aspirantesConHv = Modelo_InfoHv::obtieneHvAspirantes($id_oferta);
+                $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
+                $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page);
                 $breadcrumbs['vacantes'] = 'Ver vacantes';
-                $breadcrumbs['aspirante'] = 'Aspirantes de la oferta';
+                $breadcrumbs['aspirante'] = 'Ver aspirantes';
 
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,
                     'arrprovincia'  => $arrprovincia,
+                    'nacionalidades'=>$nacionalidades,
+                    'escolaridad'=>$escolaridad,
                     'aspirantes'       => $aspirantes,
                     'page' => $page,
                     'mostrar'=>$mostrar,
                     'vista'=>$vista,
                     'id_oferta'=>$id_oferta,
-                    'aspirantesConHv'=>$aspirantesConHv
                 );
-                
+
+                $tags["template_js"][] = "aspirantes";
+
                 $url = PUERTO.'://'.HOST.'/'.$vista;
                 $pagination = new Pagination(count($aspirantes),REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);
@@ -173,6 +236,41 @@ class Controlador_Aspirante extends Controlador_Base
                 Vista::render('aspirantes', $tags);
             break;
         }
+    }
+
+    public static function calcularRuta($ruta,$letraDescartar){
+
+        foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $key => $v) {
+
+            if($letraDescartar != $key){
+
+                if($key == 'F' && $v != 0){
+                    $ruta .= 'F'.$v.'/';
+                }
+                if($key == 'P' && $v != 0){
+                    $ruta .= 'P'.$v.'/';
+                }
+                if($key == 'N' && $v != 0){
+                    $ruta .= 'N'.$v.'/';
+                }
+                if($key == 'U' && $v != 0){
+                    $ruta .= 'U'.$v.'/';
+                }
+                if($key == 'S' && $v != 0){
+                    $ruta .= 'S'.$v.'/';
+                }   
+                if($key == 'E' && $v != 0){
+                    $ruta .= 'E'.$v.'/';
+                }   
+                if($key == 'G' && $v != 0){
+                    $ruta .= 'G'.$v.'/';
+                }
+                if($key == 'Q' && $v != 0){
+                    $ruta .= 'Q'.$v.'/';
+                }
+            }
+        }
+        return $ruta;
     }
 
 }

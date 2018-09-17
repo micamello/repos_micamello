@@ -21,6 +21,7 @@
                                                 <th class="text-center">M&eacute;todo de Pago</th>
                                                 <th class="text-center">Estado de Pago</th>
                                                 <th class="text-center">Estado del Plan</th>
+                                                <th class="text-center">Factura</th>
                                                 <th class="text-center">Eliminar</th>
                                             </tr>
                                         </thead>
@@ -54,14 +55,21 @@
                                                     <td>
                                                         <?php if($value['estado'] != 0){ ?>
                                                             <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
-                                                                <img width="15" src="<?php echo PUERTO.'://'.HOST.'/imagenes/delete.png'; ?>" alt="Eliminar">
+                                                                <i class="fa fa-money"></i></i>
+                                                            </a>
+                                                        <?php }else{ echo '-'; } ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php if($value['estado'] != 0){ ?>
+                                                            <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
+                                                                <i class="fa fa-trash"></i>
                                                             </a>
                                                         <?php }else{ echo '-'; } ?>
                                                     </td>
                                                 </tr>
                                                 <?php } ?>
                                             <?php }else{ ?>
-                                                <tr><td colspan="7">No tiene ning&uacute;n plan comprado</td></tr>
+                                                <tr><td colspan="10">No tiene ning&uacute;n plan comprado</td></tr>
                                             <?php } ?>
                                         </tbody>
                                     </table>
@@ -69,7 +77,7 @@
                             </div>
                             <div class="astrodivider">
                                 <div class="astrodividermask"></div>
-                                <span><i><img src="<?php echo PUERTO."://".HOST."/imagenes/logo.png"; ?>"></i></span>
+                                <span><i><img width="100%" src="<?php echo PUERTO."://".HOST."/imagenes/logo.png"; ?>"></i></span>
                             </div>
                            <div class="row">    
                               <?php if (!empty($planes)){ ?>                

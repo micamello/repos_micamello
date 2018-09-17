@@ -1,3 +1,8 @@
+if(document.getElementById('form_editarPerfil')){
+  $("#form_editarPerfil").validator();
+}
+
+
 /* Carga select dependiente (ciudad) */
 $('#provincia').change(function()
 {

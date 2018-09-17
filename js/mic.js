@@ -28,10 +28,6 @@ function valida_numeros(evt){
      }
 }
 
-if(document.getElementById('form_editarPerfil')){
-  $("#form_editarPerfil").validator();
-}
-
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
     var dni_error = document.getElementById("error_custom_dni");

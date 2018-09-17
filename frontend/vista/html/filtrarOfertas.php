@@ -1,20 +1,34 @@
 <?php 
 
 foreach ($data as $letra => $value) { 
- 
-    echo '<a href="'.PUERTO.'://'.HOST.'/'.$mostrar.'/'.$vista.'/2';
-    if($letra == 'A'){
-        echo '/A'.$value['id'];
-    }
-    if($letra == 'P'){
-        echo '/P'.$value['id'];
-    }
-    if($letra == 'J'){
-        echo '/J'.$value['id'];
-    }
-    if($letra == 'C'){
-        echo '/C'.$value['id'];
-    }
-    echo '/'.$page.'/" class="col-xs-12 col-md-3 btn-filtro">'.utf8_encode(ucfirst(strtolower($value['nombre']))).'<i class="fa fa-times click"></i></a>';
 
+    if($letra != 'O'){
+        
+        $ruta = PUERTO.'://'.HOST.'/'.$vista.'/2'; 
+        if($letra == 'A'){
+            $ruta .= '/A'.$value['id'];
+        }
+        if($letra == 'P'){
+            $ruta .= '/P'.$value['id'];
+        }
+        if($letra == 'J'){
+            $ruta .= '/J'.$value['id'];
+        }
+        if($letra == 'Q'){
+            $ruta .= '/Q'.$value['id'];
+        }
+
+        $valores = "'".$ruta."/',".$page;
+        echo '<div class="col-xs-12 col-md-3 btn-filtro">
+            <div class="input-group">
+                <span>'.utf8_encode(ucfirst(strtolower($value['nombre']))).'</span>
+                <span class="input-group-addon btn-filtro" style="padding:0px; cursor:pointer;">
+                    <p onclick="enviarPclave('.$valores.')"><i style="font-size:20px;" class="fa fa-window-close"></i>
+                    </p>
+                </span>
+            </div>
+        </div>';
+    }
 } ?>
+
+                       

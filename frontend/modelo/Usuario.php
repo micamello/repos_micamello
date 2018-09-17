@@ -26,8 +26,16 @@ class Modelo_Usuario{
   }
 
   public static function autenticacion($username, $password){
-    $password = md5($password);             
-    return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE username = ? AND password = ? AND estado = 1",array($username,$password)); 
+    $password = md5($password);     
+    $sql = "SELECT u.id_usuario, u.username, u.correo, u.telefono, 
+                   u.dni, u.nombres, u.fecha_nacimiento, u.foto,
+                   u.tipo_usuario, u.id_ciudad, r.estado_civil,
+                   r.tiene_trabajo, r.viajar, r.licencia,
+                   r.discapacidad,r.anosexp, r.status_carrera, 
+                   r.id_escolaridad, r.genero, r.apellidos, r.id_univ, u.id_nacionalidad
+            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+            WHERE u.username = ? AND u.password = ? AND u.estado = 1";        
+    return $GLOBALS['db']->auto_array($sql,array($username,$password)); 
   }
 
   public static function busquedaPorCorreo($correo){
@@ -94,7 +102,16 @@ class Modelo_Usuario{
   }
 
   public static function actualizarSession($idUsuario){
-    return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE id_usuario = ".$idUsuario); 
+
+    $sql = "SELECT u.id_usuario, u.username, u.correo, u.telefono, 
+                   u.dni, u.nombres, u.fecha_nacimiento, u.foto,
+                   u.tipo_usuario, u.id_ciudad, r.estado_civil,
+                   r.tiene_trabajo, r.viajar, r.licencia,
+                   r.discapacidad,r.anosexp, r.status_carrera, 
+                   r.id_escolaridad, r.genero, r.apellidos, r.id_univ, r.status_carrera, u.id_nacionalidad
+            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+            WHERE u.id_usuario = ? AND u.estado = 1";        
+    return $GLOBALS['db']->auto_array($sql,array($idUsuario)); 
   }
 
   public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto,$tipo_usuario){
@@ -109,7 +126,7 @@ class Modelo_Usuario{
     }
 
     if($tipo_usuario == 1){
-      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"apellidos"=>$data['apellidos'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['status_carrera'],"id_escolaridad"=>$data['escolaridad']);
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],/*,"apellidos"=>$data['apellidos'],*/"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']/*,"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['status_carrera'],"id_escolaridad"=>$data['escolaridad'],"id_univ"=>$data['universidad']*/,"id_nacionalidad"=>$data['id_pais']);
     }else{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']);
     }
@@ -141,58 +158,159 @@ class Modelo_Usuario{
 
   public static function obtenerAspirantes($idOferta,$page){
 
-    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, u.apellidos, p.fecha_postulado 
-            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o
+    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, r.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) as edad 
+            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_requisitosusuario r
             WHERE u.id_usuario = p.id_usuario 
             AND p.id_ofertas = o.id_ofertas
+            AND r.id_usuario = u.id_usuario
             AND o.id_ofertas = $idOferta
             ORDER BY p.fecha_postulado DESC";
 
     $page = ($page - 1) * REGISTRO_PAGINA;
-    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
 
     return $GLOBALS['db']->auto_array($sql,array(),true); 
   }
 
-  public static function filtrarAspirantes($idOferta,$fecha,$prioridad,$ubicacion,$salario,$genero,$page){
+  public static function filtrarAspirantes($idOferta,/*,$fecha,$prioridad,$ubicacion,$salario,$genero,$nacionalidad,$escolaridad,$pclave,*/&$filtros,$page){
 
-    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, u.apellidos, p.fecha_postulado 
-            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_infohv i
-            WHERE u.id_usuario = p.id_usuario 
-            AND p.id_ofertas = o.id_ofertas
-            AND i.id_usuario = u.id_usuario
-            AND o.id_ofertas = $idOferta
+    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, r.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) as edad 
+            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_requisitosusuario r";
+
+    if(!empty($filtros['P']) && $filtros['P'] != 0){
+      $sql .= ", mfo_usuario_plan up, mfo_plan pl ";
+    }
+
+    if(!empty($filtros['U']) && $filtros['U'] != 0){
+      $sql .= ", mfo_provincia pro, mfo_ciudad c ";
+    }
+
+    $sql .= " WHERE u.id_usuario = p.id_usuario 
+              AND p.id_ofertas = o.id_ofertas
+              AND o.id_ofertas = $idOferta
+              AND r.id_usuario = u.id_usuario
             ";
 
     //segun el escogido calcular fecha y ponersela a la consulta
-    if (!empty($fecha)){ 
-       $sql .= " AND p.fecha_postulado = ".$fecha;
+    if(!empty($filtros['F']) && $filtros['F'] != 0){
+
+       if($filtros['F'] == 1){
+        $sql .= " AND p.fecha_postulado BETWEEN DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00') AND NOW()";
+       }
+       
+       if($filtros['F'] == 2){
+        $sql .= " AND p.fecha_postulado BETWEEN DATE_SUB(NOW(), INTERVAL 3 DAY) AND NOW()";
+       }
+       
+       if($filtros['F'] == 3){
+        $sql .= " AND p.fecha_postulado BETWEEN DATE_SUB(NOW(), INTERVAL 1 WEEK) AND NOW()";
+       }
+
+       if($filtros['F'] == 4){
+        $sql .= " AND p.fecha_postulado BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+       }
     }
     
     //obtener los aspirantes por los que pagaron y los q no pagaron
-    if (!empty($prioridad)){ 
-      $sql .= " AND a.id_area = ".$id_area;
+    if(!empty($filtros['P']) && $filtros['P'] != 0){
+
+      $sql .= " AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan";
+      if(PRIORIDAD[$filtros['P']] == 'Pagado'){
+        $sql .=  " AND pl.costo > 0" ;
+      }else{
+        $sql .=  " AND pl.costo = 0 AND up.estado = 1" ;
+      }
     }
 
-    //obtiene los aspirantes pra esa ubicacion 
-    if (!empty($ubicacion)){ 
-      $sql .= " AND u.id_ciudad = ".$ubicacion;
+    //obtiene los aspirantes para esa ubicacion 
+    if(!empty($filtros['U']) && $filtros['U'] != 0){ 
+
+      $sql .= " AND pro.id_provincia = c.id_provincia and u.id_ciudad = c.id_ciudad AND pro.id_provincia = ".$filtros['U'];
     }
 
     //calcular que el salario este en el rango especificado
-    if (!empty($salario)){ 
-      $sql .= " AND p.salario = ".$id_contrato;
+    if(!empty($filtros['S']) && $filtros['S'] != 0){
+
+      if($filtros['S'] == 1){
+        $sql .= " AND p.asp_salarial < 341";
+      }
+
+      if($filtros['S'] == 2){
+        $sql .= " AND p.asp_salarial between '341' and '700'";
+      }
+
+      if($filtros['S'] == 3){
+        $sql .= " AND p.asp_salarial >= 700";
+      }
     }
 
     //obtiene los aspirantes por genero
-    if (!empty($genero)){ 
-      $sql .= " AND u.genero = ".$genero;
+    if(!empty($filtros['G']) && $filtros['G'] != 0){
+      $g = array_search($filtros['G'],VALOR_GENERO);
+      if($g != false){
+        $sql .= " AND r.genero = '".$g."'";
+      }
     }
 
-    //$sql .= " ORDER BY p.fecha_postulado DESC";
+    //obtiene los aspirantes por nacionalidad
+    if(!empty($filtros['N']) && $filtros['N'] != 0){
+      $sql .= " AND u.id_nacionalidad = ".$filtros['N'];
+    }
+
+    //obtiene los aspirantes por escolaridad
+    if(!empty($filtros['E']) && $filtros['E'] != 0){ 
+      $sql .= " AND r.id_escolaridad = ".$filtros['E'];
+    }
+
+    //Hace la busqueda por palabra clave
+    if(!empty($filtros['Q']) && $filtros['Q'] != 0 || $filtros['Q'] != ''){
+
+      $pos = strpos($filtros['Q'], "-");
+      if ($pos != false) {
+
+        $datos_fecha = explode("-",$filtros['Q']);
+        if(count($datos_fecha) == 3 && checkdate($datos_fecha[1], $datos_fecha[2], $datos_fecha[0])){
+            $pclave = $datos_fecha[0].'-'.$datos_fecha[1].'-'.$datos_fecha[2];
+        }else if(count($datos_fecha) == 3 && checkdate($datos_fecha[1], $datos_fecha[0], $datos_fecha[2])){
+            $pclave = $datos_fecha[2].'-'.$datos_fecha[1].'-'.$datos_fecha[0];
+        }
+      }else{
+        $pclave = $filtros['Q'];
+      }
+
+      $sql .= " AND (u.nombres LIKE '%".$pclave."%' OR r.apellidos LIKE '%".$pclave."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR p.fecha_postulado LIKE '%".$pclave."%')";
+    }
+
+    if(!empty($filtros['O']) && $filtros['O'] != 0){
+
+      $tipo = substr($filtros['O'],0,1);
+      $t = substr($filtros['O'],1,2);
+      if($tipo == 1){
+        if($t == 1){
+          $filtros['O'] = 2;
+          $sql .= " ORDER BY edad ASC";
+        }
+        if($t == 2){
+          $filtros['O'] = 1;
+          $sql .= " ORDER BY edad DESC";
+        }
+        
+      }else{
+        if($t == 1){
+          $filtros['O'] = 2;
+          $sql .= " ORDER BY p.fecha_postulado ASC";
+        }
+        if($t == 2){
+          $filtros['O'] = 1;
+          $sql .= " ORDER BY p.fecha_postulado DESC";
+        }
+      }
+    }else{
+      $sql .= " ORDER BY u.nombres";
+    }
 
     $page = ($page - 1) * REGISTRO_PAGINA;
-    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
@@ -200,6 +318,43 @@ class Modelo_Usuario{
     if (empty($id)){ return false; }
     $sql = "SELECT * FROM mfo_usuario WHERE id_usuario = ?";
     return $GLOBALS['db']->auto_array($sql,array($id)); 
+  }
+
+  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes){
+
+    if ($tipousuario == Modelo_Usuario::CANDIDATO){   
+      //si no tiene hoja de vida cargada       
+      if (empty($infohv)){
+        $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
+        Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+      }   
+      $nrotest = Modelo_Cuestionario::totalTest();             
+      $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
+      
+      //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
+      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-1)){
+        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }
+      //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
+      elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
+        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }  
+      else{                    
+        Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
+      }                
+    }
+    //si es empresa
+    else{  
+      if (isset($planes)){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
+      }
+      else{
+        $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
+        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+      }          
+    }
   }
 
 }  

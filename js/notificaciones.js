@@ -1,3 +1,9 @@
+if($("#msg_notificacion").length > 0){
+    if(document.getElementById('msg_notificacion').value == 1){
+        $('#notificaciones').modal('show');
+    }
+}
+
 
 function crea_notificacion(titulo,opciones,url) {
 
@@ -27,7 +33,7 @@ function permiso(titulo,opciones,url) {
         }
 
         else if(Notification.permission == "default") {
-            alert("Primero da los permisos de notificación");
+            alert("Primero tiene que dar los permisos de notificación");
             Notification.requestPermission();
         }
         else {
@@ -48,7 +54,7 @@ var opciones = {
 };
 var url = 'http://www.google.com';
 
-permiso(titulo,opciones,url);
+/*permiso(titulo,opciones,url);*/
 
 function navegador(){
     var agente = window.navigator.userAgent;
@@ -58,4 +64,21 @@ function navegador(){
             return navegadores[i];
         }
     }
+}
+
+function desactivarNotificacion(id,url){
+
+    var enlace = $('#puerto_host').val()+"?mostrar=notificacion&id_notificacion="+id;
+
+    $.ajax({
+        type: "GET",
+        url: enlace,
+        dataType:'json',
+        success:function(data){
+            window.location=$('#puerto_host').val()+'/'+url+'/';
+        },
+        error: function (request, status, error) {
+            alert('Error intente de nuevo');
+        }                  
+    });
 }

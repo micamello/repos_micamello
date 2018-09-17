@@ -4,5 +4,6 @@ class Modelo_NivelIdioma{
 		$sql = "SELECT * from mfo_nivelidioma";
     	return $GLOBALS['db']->auto_array($sql,array(),true);
 	}
+
 }
  ?>

@@ -71,6 +71,9 @@ function obtieneControlador($nombre){
     case 'informePDF':
       return 'InformePDF';
     break;
+    case 'notificacion':
+      return 'Notificacion';
+    break;
     default:
       return 'Inicio'; 
     break;

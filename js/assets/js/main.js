@@ -88,3 +88,9 @@ jQuery(document).ready(function ($) {
     //End
 
 });
+
+
+function abrirModal(mensaje){
+    $('#mensaje').html(mensaje);
+    $('#alert_descarga').modal();
+}

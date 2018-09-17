@@ -2,7 +2,7 @@
 class Modelo_Sucursal{
   
   public static function obtieneListado(){
-    $sql = "SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;";
+    $sql = "SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;";
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
@@ -10,7 +10,7 @@ class Modelo_Sucursal{
   	if($dominio == 'localhost'){
   		$dominio = 'micamello.com.ec';
   	}
-  	$sql = "SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = ?";
+  	$sql = "SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = ?;";
     return $GLOBALS['db']->auto_array($sql,array($dominio));
   }
 

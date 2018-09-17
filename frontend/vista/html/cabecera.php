@@ -27,9 +27,8 @@
   <!--Theme custom css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
-  <!-- Estilos del multiselect -->
-  <!--<link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/multiple-select.css">-->
-
+  
+  <link href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
 
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
@@ -58,7 +57,6 @@
     .home {
         background-image: url(<?php echo $_SESSION['mostrar_banner']; ?>);   
         background-size: cover;
-        
         position: relative;
         padding-top: 185px;
         padding-bottom: 79px;
@@ -70,8 +68,8 @@
 
 <body>
 
-  <!--                       LEY DE COOKIES                     -->
-  <div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<!--                       LEY DE COOKIES                     -->
+<div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -94,6 +92,45 @@
   </div>
 </div>
 
+<!--                       NOTIFICACIONES                     -->
+<?php
+
+if(isset($_SESSION['mfo_datos']['usuario'])){
+
+ $notificaciones = Modelo_Notificacion::notificacionxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],Modelo_Notificacion::WEB);
+
+ if(!empty($notificaciones)){  ?>
+
+  <input type="hidden" name="msg_notificacion" id="msg_notificacion" value="1">
+
+  <div class="modal fade" id="notificaciones" tabindex="-1" role="dialog" aria-labelledby="notificaciones" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel" align="center">Notificaci&oacute;n</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-12" style="font-size: 16px; color: #333">
+
+              <b class="text_large">
+                <?php echo $notificaciones['descripcion']; ?>
+              </b>
+              <b class="text_small"><?php echo $notificaciones['descripcion']; ?></b>
+              <br>
+              <center>
+                <a href="#" onclick="desactivarNotificacion(<?php echo $notificaciones['id_notificacion']; ?>,'<?php echo $notificaciones['url']; ?>')" class="ok"><b>Aceptar</b></a>
+              </center> 
+            </div>
+          </div>
+        </div>      
+      </div>
+    </div>
+  </div>
+<?php } 
+} ?>
+
+
   <nav class="navbar navbar-default navbar-fixed-top">
  <!--   <button id="buttonP">Dar Permisos</button>  
 <button id="buttonN">Lanzar notificación</button>-->
@@ -105,7 +142,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand">
+          <a class="navbar-brand" href="<?php echo PUERTO."://".HOST;?>">
             <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.$_SESSION['mfo_datos']['sucursal']['id_sucursal'].'.'.$_SESSION['mfo_datos']['sucursal']['extensionlogo'];?>" alt="micamellologo">
           </a>
         </div>
@@ -142,7 +179,7 @@
 <?php
 if(isset($show_banner)){ ?>
 <section id="home" class="home bg-black fix">
-  <div class="overlay"></div>
+  <div class="overlay" ></div>
   <div class="container">
     <div class="row">
       <div class="main_home text-center">
@@ -150,7 +187,7 @@ if(isset($show_banner)){ ?>
           <div class="hello_slid">
             <div class="slid_item">
               <div class="home_text ">
-                <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></strong></h2>
+                <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '; if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])) { echo $_SESSION['mfo_datos']['usuario']['apellidos']; } ?></strong></h2>
               </div>
             </div>
           </div>

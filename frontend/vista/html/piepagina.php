@@ -1,5 +1,21 @@
   </section>
 
+<div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
+  <div class="modal-dialog" role="document">    
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><b>Notificaci&oacute;n</b></h5>                
+      </div>
+      <div class="modal-body">
+        <h5 id="mensaje"></h5>
+      </div>
+      <div class="modal-footer" style="margin-top: 0px;">
+        <button type="button" class="btn btn-md btn-primary" data-dismiss="modal">OK</button>
+      </div>
+    </div>    
+  </div>
+</div>
+
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="z-index:9999">
   <div class="modal-dialog" role="document">
@@ -123,11 +139,11 @@
               <div class="conditions_components">
                 <div class="" align="left">
                   <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="term_cond" id="term_cond" value="1" required><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos y condiciones </a></label>
+                    <input type="checkbox" name="term_cond" id="term_cond" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="blank">Aceptar términos y condiciones </a></label>
                 </div>
                 <div class="" align="left">
                   <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="conf_datos" id="conf_datos" value="1" required><a href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blank">Aceptar términos de confidencialidad de datos </a></label>
+                    <input type="checkbox" name="conf_datos" id="conf_datos" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="blank">Políticas de Privacidad </a></label>
                 </div>
               </div>
 
@@ -181,8 +197,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="foot_div_section">
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/terminos_y_condiciones.pdf" target="blanked">Términos y Condiciones</a>| 
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/docs/politicas_de_privacidad.pdf" target="blanked">Políticas de Privacidad</a>|
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Términos y Condiciones</a>| 
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Políticas de Privacidad</a>|
                                     <a class="legal_info_content" href="http://www.blog.micamello.com.ec" target="blanked">Blog</a>|
 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a>
@@ -196,8 +212,8 @@
                                 <div class="row">
                                   <div class="form-inline">
                                     <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
-                                      <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic"> 
-                                      <span class="text_icons_footer"><?php echo $sucursal["nombre_abr"];?></span>
+                                      <a href="<?php echo PUERTO."://".$sucursal["dominio"];?>/"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic"> 
+                                      <span class="text_icons_footer"><?php echo utf8_encode($sucursal["nombre_abr"]);?></span></a>
                                     <?php }?>                                                                                
                                     <span class="separate_social_country">|</span>
                                     <!-- </div>                                        
@@ -243,3 +259,4 @@ if (isset($template_js) && is_array($template_js)){
 ?>
 </body>
 </html>
+

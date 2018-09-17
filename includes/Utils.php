@@ -253,6 +253,7 @@ class Utils{
     return ( ! preg_match("/^[0-9]+(?:\.[0-9]{0,2})?$/", $str)) ? false : true;
   }
 
+
   public static function validarPalabras($data){
     $merge_palabras;
     for ($i=0; $i < count($data); $i++) {
@@ -286,5 +287,6 @@ class Utils{
     }
     else return false;
   }
+
 }
 ?>

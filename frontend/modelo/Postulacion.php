@@ -6,8 +6,8 @@ class Modelo_Postulacion{
 		return $GLOBALS['db']->auto_array($sql,array(),true);
 	}
 
-	public static function postularse($id_usuario,$id_oferta){
-		$result = $GLOBALS['db']->insert('mfo_postulacion',array("tipo"=>2,"fecha_postulado"=>date("Y-m-d H:i:s"),"resultado"=>3,"id_usuario"=>$id_usuario,"id_ofertas"=>$id_oferta));
+	public static function postularse($id_usuario,$id_oferta,$asp_salarial){
+		$result = $GLOBALS['db']->insert('mfo_postulacion',array("tipo"=>2,"fecha_postulado"=>date("Y-m-d H:i:s"),"resultado"=>3,"id_usuario"=>$id_usuario,"id_ofertas"=>$id_oferta,"asp_salarial"=>$asp_salarial));
 		return $result;
 	}
 

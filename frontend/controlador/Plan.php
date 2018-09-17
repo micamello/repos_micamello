@@ -34,6 +34,7 @@ class Controlador_Plan extends Controlador_Base {
   public function planesUsuario(){
     $breadcrumbs['planesUsuario'] = 'Mis planes';
     $desactivarPlan = Utils::getParam('desactivarPlan', '', $this->data);
+
     if(!empty($desactivarPlan)){
         $r = Modelo_UsuarioxPlan::desactivarPlan($desactivarPlan);
         if(!$r){
@@ -135,7 +136,7 @@ class Controlador_Plan extends Controlador_Base {
 
         $provincia = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
         $tags["provincia"] = $provincia["id_provincia"];
-        $tags["arrprovincia"] = Modelo_Provincia::obtieneListado();
+        $tags["arrprovincia"] = Modelo_Provincia::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
         $tags["arrciudad"] = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);                
 
         $tags["template_js"][] = "validator";

@@ -1143,6 +1143,7 @@ img {
 }
 .img-circle {
   border-radius: 50%;
+  max-width: 100%;
 }
 hr {
   margin-top: 20px;
@@ -2445,6 +2446,9 @@ table th[class*="col-"] {
   overflow-x: auto;
 }
 @media screen and (max-width: 767px) {
+  panel-body{
+    font-size: 50%;
+  }
   .table-responsive {
     width: 100%;
     margin-bottom: 15px;

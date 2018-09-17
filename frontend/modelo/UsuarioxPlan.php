@@ -76,5 +76,21 @@ class Modelo_UsuarioxPlan{
     }
     return $GLOBALS['db']->update('mfo_usuario_plan',$values_update,'id_usuario='.$usuario.' AND id_plan='.$plan);
   }
+
+  public static function disponibilidadDescarga($id_empresa){
+
+    $sql = "SELECT porc_descarga FROM mfo_usuario_plan p, mfo_plan pl WHERE p.id_plan = pl.id_plan AND (pl.porc_descarga > 0 or pl.porc_descarga = -1)
+            AND pl.tipo_usuario = 2 AND p.id_usuario = ?";
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array($id_empresa),true);
+
+    $datos = array();
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+        array_push($datos,$value['porc_descarga']);
+      }
+    }
+    return $datos;
+  }
 }  
 ?>

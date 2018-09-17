@@ -37,9 +37,16 @@ class Modelo_Cuestionario{
 	}
 
 	public static function ultimoTestRealizado($usuario){
-    if (empty($usuario)){ return false; }
-    $sql = "SELECT * FROM mfo_porcentajextest WHERE id_usuario = ? ORDER BY id_cuestionario DESC LIMIT 1";
-    return $GLOBALS['db']->auto_array($sql,array($usuario));
+	    if (empty($usuario)){ return false; }
+	    $sql = "SELECT * FROM mfo_porcentajextest WHERE id_usuario = ? ORDER BY id_cuestionario DESC LIMIT 1";
+	    return $GLOBALS['db']->auto_array($sql,array($usuario));
+	}
+
+	public static function totalTestxUsuario($usuario){
+		if (empty($usuario)){ return false; }
+	  $sql = "SELECT COUNT(1) AS nro FROM mfo_porcentajextest WHERE id_usuario = ?";
+		$rs = $GLOBALS['db']->auto_array($sql,array($usuario));
+		return $rs["nro"];	
 	}
 }  
 ?>

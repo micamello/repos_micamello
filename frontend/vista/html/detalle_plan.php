@@ -23,7 +23,7 @@
               }              
 
           ?>
-            <li>• <?php echo utf8_encode(trim($permiso));?></li>
+            <li style="font-size: 14px;">• <?php echo utf8_encode(trim($permiso));?></li>
           <?php                           
             } 
           ?>

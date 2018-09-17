@@ -579,59 +579,7 @@ body
   margin-bottom: 5px;
   color: #fff;
   background-color: #5bc0de;
-  border-color: #46b8da;
-}
-.btn-filtro:focus,
-.btn-filtro.focus {
-  color: #fff;
-  background-color: #31b0d5;
-  border-color: #1b6d85;
-}
-.btn-filtro:hover {
-  color: #fff;
-  background-color: #31b0d5;
-  border-color: #269abc;
-}
-.btn-filtro:active,
-.btn-filtro.active,
-.open > .dropdown-toggle.btn-filtro {
-  color: #fff;
-  background-color: #31b0d5;
-  border-color: #269abc;
-}
-.btn-filtro:active:hover,
-.btn-filtro.active:hover,
-.open > .dropdown-toggle.btn-filtro:hover,
-.btn-filtro:active:focus,
-.btn-filtro.active:focus,
-.open > .dropdown-toggle.btn-filtro:focus,
-.btn-filtro:active.focus,
-.btn-filtro.active.focus,
-.open > .dropdown-toggle.btn-filtro.focus {
-  color: #fff;
-  background-color: #269abc;
-  border-color: #1b6d85;
-}
-.btn-filtro:active,
-.btn-filtro.active,
-.open > .dropdown-toggle.btn-filtro {
-  background-image: none;
-}
-.btn-filtro.disabled:hover,
-.btn-filtro[disabled]:hover,
-fieldset[disabled] .btn-filtro:hover,
-.btn-filtro.disabled:focus,
-.btn-filtro[disabled]:focus,
-fieldset[disabled] .btn-filtro:focus,
-.btn-filtro.disabled.focus,
-.btn-filtro[disabled].focus,
-fieldset[disabled] .btn-filtro.focus {
-  background-color: #5bc0de;
-  border-color: #46b8da;
-}
-.btn-filtro .badge {
-  color: #5bc0de;
-  background-color: #fff;
+  border-color: #5bc0de;
 }
 
 .confidencial{
@@ -646,19 +594,26 @@ fieldset[disabled] .btn-filtro.focus {
   color:#0267cf;
 }
 
-.oferta{
+/*.oferta{
   border-radius: 70px; 
   border: 3px solid #ccf2ff; 
   display: block; 
   margin: 0 auto;     
   padding: 19px 0px 19px 0px;
-}
+}*/
 
 .postulacion{
   border-radius: 70px; 
   border: 3px solid #ccf2ff; 
   display: block; 
   margin: 0 auto; 
+}
+
+#imgPerfil{
+  vertical-align: middle; 
+  margin-bottom: 10px; 
+  border-radius: 50%; 
+  border: 2px solid #5d9fe2; 
 }
 
 .parpadea {
@@ -740,6 +695,7 @@ fieldset[disabled] .btn-filtro.focus {
   border-radius: 5px;
 }
 
+
 .list_content{
   border: 2px solid #C1C1C1; 
   border-radius: 5px; 
@@ -764,4 +720,33 @@ fieldset[disabled] .btn-filtro.focus {
 .text_in_alert_danger{
   padding: 20px 0 20px 0;
   font-size: 15px;
+
+.cortar{
+  width:100%;
+  height:20px;
+  padding:20px;
+  text-overflow:ellipsis;
+  white-space:nowrap; 
+  overflow:hidden; 
 }
+
+.badge_item2{
+  padding: 5px 10px 5px 10px;
+  margin: 5px 8px 5px 18px;
+  background-color: #5bc0de;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.badge_item:hover{
+  background-color: #D56464;
+}
+
+.icon{
+  position: absolute;
+  right: 3px;
+  top: 2px;
+  font-size: 25px;
+}
+
