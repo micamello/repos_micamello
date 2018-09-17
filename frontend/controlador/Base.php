@@ -35,7 +35,7 @@ abstract class Controlador_Base{
         }
         else{
           $valor = trim($valor);
-          if (empty($valor) && $requerido == 1){                    
+          if ($valor == "" && $requerido == 1){                    
             throw new Exception(" El campo ".$campo." debe ser obligatorio");
           }
           $valor = strip_tags($valor);

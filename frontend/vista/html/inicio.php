@@ -1,11 +1,31 @@
 <div class="">
     <div class="row">
-    <?php 
-    if (!empty($banners)){
-        foreach($banners as $banner){ ?>
-            <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['id_banner'];?>.<?php echo $banner['extension'];?>">
-        <?php }
-    } ?>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <?php 
+            if (!empty($banners)){ ?>
+                <ol class="carousel-indicators">
+                <?php 
+                    $cont = 0;
+                    foreach($banners as $banner){  ?>
+                        <li data-target="#myCarousel" data-slide-to="<?php echo $cont; ?>" <?php if($cont == 0){ echo 'class="active"'; } ?>></li>
+              <?php     $cont++; 
+                    } ?>
+                </ol>
+            <?php } ?>
+
+            <div class="carousel-inner">
+              <?php 
+            if (!empty($banners)){
+                $cont = 0;
+                foreach($banners as $banner){ ?>
+                    <div class="item <?php if($cont == 0){ echo 'active'; } ?>">
+                        <a href="<?php echo $banner['url']; ?>" target="_blan"><img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['id_banner'];?>.<?php echo $banner['extension'];?>"></a>
+                    </div>
+                <?php $cont++; }
+            } ?>
+            </div>
+        </div>
+    
     </div>
     <?php 
         if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
@@ -218,7 +238,7 @@
             foreach($arrauspiciante as $auspiciante) { 
         ?>
             <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
-              <div class="brand_item col-md-2 col-sm-6 "><a href="<?php echo $auspiciante['url']; ?>"><img style="width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a></div>
+              <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php echo $auspiciante['url']; ?>"><img style="width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a></div>
             </div>
         <?php $cont++; } ?>
       </div>

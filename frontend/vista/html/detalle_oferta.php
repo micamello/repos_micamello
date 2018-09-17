@@ -47,6 +47,19 @@
                              <?php echo $o['escolaridad']; ?>
                         </h5>
                     </div>
+
+                    <div>
+                        <h5>
+                            <span class="titulos">Nivel de Idiomas</span><br>
+                             <?php $idiomas = Modelo_NivelxIdioma::relacionIdiomaNivel($o['idiomas']); 
+                             foreach ($idiomas as $key => $value) {
+                                echo utf8_encode($value['descripcion'].' - '.$value['nombre']).'<br>';
+                             }
+
+                             ?>
+                        </h5>
+                    </div>
+
                     <div>
                         <h5>
                             <span class="titulos">Disponibilidad de Viajar</span><br>
@@ -87,25 +100,21 @@
                 </div>
                 <div>
                     <h5>
-                        <span class="titulos">Tipo de Contrato</span><br>
-                        - <?php echo $o['contrato']; ?>
-                    </h5>
-                </div>
-                <div>
-                    <h5>
                         <span class="titulos">Salario</span><br>
-                        - <?php echo $o['salario']; ?>
+                        - <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($o['salario'],2);?>
                     </h5>
                 </div>
                 <div>
                     <h5>
                         <span class="titulos">Discapacidad</span><br>
-                        - <?php echo DISCAPACIDAD[$o['discapacidad']]; ?>
+                        - <?php echo REQUISITO[$o['discapacidad']]; ?>
                     </h5>
                 </div>
                 <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
                   <input type="hidden" name="postulado" id="postulado" value="1">
-                  <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
+                  <?php if(!empty($vista) && $vista != 'postulacion'){ 
+
+                     ?>
                     <?php if(!empty($postulado)){ ?>
                       <div align="center">
                         <h5>
@@ -114,6 +123,12 @@
                       </div>
                     <?php }else{ ?>
                       <div align="center">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
+                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
+                          </div>
+                        </div>
                         <h5>
                           <button type="submit" class="btn btn-success">POSTULARSE</button>
                         </h5>

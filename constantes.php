@@ -26,16 +26,24 @@ define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'ale
 define('ESTADOS',array('1'=>'Activo','0'=>'Inactivo'));
 define('MAIL_SUGERENCIAS','micamelloecuador@gmail.com');
 define('PATH_COMPROBANTE',FRONTEND_RUTA.'imagenes/usuarios/comprobante/');
-define('DISCAPACIDAD', array('0'=>'No', '1'=>'S&iacute;'));
+//define('DISCAPACIDAD', array('0'=>'No', '1'=>'S&iacute;'));
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
 define('GENERO', array('M'=>'Masculino', 'F'=>'Femenino', 'P'=>'Prefiero no decirlo'));
+define('VALOR_GENERO', array('M'=>'1', 'F'=>'2', 'P'=>'3'));
 define('PRIORIDAD', array('1'=>'Gratuito', '2'=>'Pagado'));
+define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
 define('SALARIO', array('1'=>'Menos de 341', '2'=>'M&aacute;s de 341', '3'=>'M&aacute;s de 700'));
 define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as', '3'=>'&Uacute;ltima semana', '4'=>'&Uacute;ltimo mes'));
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
 define('REGISTRO_PAGINA',10);
-define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr')
+define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
+/*define('CONFIDENCIAL', array('1'=>'Sí', '0'=>'No'));
+define('LICENCIA', array('1'=>'Sí', '0'=>'No'));
+define('RESIDENCIA', array('1'=>'Sí', '0'=>'No'));*/
+define('REQUISITO', array('1'=>'S&iacute;', '0'=>'No'));
+define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Casado(a)', '3'=>'En union', '4'=>'Divorciado(a)','5'=>'Viudo(a)'));
+
 ?>

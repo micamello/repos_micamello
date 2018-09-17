@@ -1,11 +1,4 @@
 
-// $("#form_empresa").validator();
-if (document.getElementById("alerta")) {
-  setTimeout(function() {
-    $('#alerta').fadeOut();
-  }, 5000);
-}
-
 
 if(document.getElementById('form_register')){
   $("#form_register").validator();
@@ -74,11 +67,6 @@ function valida_numeros(evt){
      }
 }
 
-if(document.getElementById('form_editarPerfil')){
-  $("#form_editarPerfil").validator();
-}
-
-
 
 
 $('.modal').on('hidden.bs.modal', function(){
@@ -121,7 +109,6 @@ if(document.getElementById('form_recomendaciones')){
   $("#form_recomendaciones").validator();
 }
 
-<<<<<<< HEAD
 
 $('.carousel[data-type="multi"] .item').each(function(){
 
@@ -146,4 +133,3 @@ $('.carousel[data-type="multi"] .item').each(function(){
 if(document.getElementById('form_paypal')){
   $("#form_paypal").validator();
 }
-

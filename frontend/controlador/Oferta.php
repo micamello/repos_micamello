@@ -15,6 +15,9 @@ class Controlador_Oferta extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
+        //Valida los permisos 
+        //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);
+
         //Obtiene todos los banner activos segun el tipo
         $arrbanner     = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
 
@@ -28,7 +31,7 @@ class Controlador_Oferta extends Controlador_Base
         $orden = rand(1, count($arrbanner)) - 1;
         $_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
 
-        $mostrar = Utils::getParam('mostrar', '', $this->data);
+        //$mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
         $page = Utils::getParam('page', '1', $this->data);
         $type = Utils::getParam('type', '', $this->data); 
@@ -36,17 +39,23 @@ class Controlador_Oferta extends Controlador_Base
         $postulacionesUserLogueado = array();
         $breadcrumbs = array();
 
+        if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == ''){
+            echo 'entro';
+            $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'O'=>1,'Q'=>0);
+        }
+
+        print_r($_SESSION['mfo_datos']['Filtrar_ofertas']); 
+
         switch ($opcion) {
             case 'filtrar':
 
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo();
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
                 $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
-                $tiposContrato = Modelo_TipoContrato::obtieneListadoAsociativo();
 
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['vista']);
                 
-                if($vista == 'oferta'){
+                if($vista == 'publicacion'){
                     $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     $breadcrumbs['oferta'] = 'Ofertas de empleo';
                 }else if($vista == 'vacantes'){
@@ -58,46 +67,54 @@ class Controlador_Oferta extends Controlador_Base
                 $id_area = '';
                 $id_provincia = '';
                 $id_jornada = '';
-                $id_contrato = '';
                 $cadena = '';
                 $array_datos = $result = array();
+
                 foreach ($this->data as $param => $value) {
                     
                     $letra = substr($value,0,1);
-                    $id = substr($value,1,2);
+                    $id = substr($value,1);
                     $cadena .= '/'.$value;
                     array_push($result, strval($value));
 
-                    if($letra == 'A' && $type == 1){
+                    if(isset($_SESSION['mfo_datos']['Filtrar_ofertas'][$letra])){
+
+                        if($letra == 'A' && $type == 1){
+                            
+                            if(isset($arrarea[$id])){
+                                $_SESSION['mfo_datos']['Filtrar_ofertas']['A'] = $id;
+                                $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id]);
+                            }
+                        }
+                        else if($letra == 'P' && $type == 1){
+                            
+                            if(isset($arrprovincia[$id])){
+                                $_SESSION['mfo_datos']['Filtrar_ofertas']['P'] = $id;
+                                $array_datos['P'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                            }
+
+                        }
+                        else if($letra == 'J' && $type == 1){
+                            
+                            if(isset($arrjornadas[$id])){
+                                $_SESSION['mfo_datos']['Filtrar_ofertas']['J'] = $id;
+                                $array_datos['J'] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
+                            }
+
+                        }else if($letra == 'O' && $type == 1){
                         
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['A'] = $id;
-                        $id_area = $id;
-                        $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id_area]);
+                            $_SESSION['mfo_datos']['Filtrar_ofertas']['O'] = $id; 
 
-                    }
-                    else if($letra == 'P' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['P'] = $id;
-                        $id_provincia = $id;
-                        $array_datos['P'] = array('id'=>$id,'nombre'=>$arrprovincia[$id_provincia]);
+                        }
+                        else if($letra == 'Q' && $type == 1){
 
-                    }
-                    else if($letra == 'J' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['J'] = $id;
-                        $id_jornada = $id;
-                        $array_datos['J'] = array('id'=>$id,'nombre'=>$arrjornadas[$id_jornada]);
+                            $_SESSION['mfo_datos']['Filtrar_ofertas']['Q'] = $id;
+                            $array_datos['Q'] = array('id'=>$id,'nombre'=>$id);
 
-                    }
-                    else if($letra == 'C' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['C'] = $id;
-                        $id_contrato = $id;
-                        $array_datos['C'] = array('id'=>$id,'nombre'=>$tiposContrato[$id_contrato]);
+                        }else if($type == 2){
 
-                    }else if($type == 2){
-
-                        $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
+                            $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
+                        }
                     }
                 }
 
@@ -106,36 +123,45 @@ class Controlador_Oferta extends Controlador_Base
                     if($value!=0){
 
                         if($letra == 'A'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
+                            if(isset($arrarea[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
+                            }
                         }
 
                         if($letra == 'P'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
+                            if(isset($arrprovincia[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
+                            }
                         }
                         if($letra == 'J'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrjornadas[$value]);
+                            if(isset($arrjornadas[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrjornadas[$value]);
+                            }
                         }
-                        if($letra == 'C'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$tiposContrato[$value]);
+                        if($letra == 'O'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                        }
+                        if($letra == 'Q'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                         }
                     }
                 }
+print_r($array_datos);
+                $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+                $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas']/*['A'],$_SESSION['mfo_datos']['Filtrar_ofertas']['P'],$_SESSION['mfo_datos']['Filtrar_ofertas']['J'],$_SESSION['mfo_datos']['Filtrar_ofertas']['Q']*/,$page,$vista,$idUsuario);
 
-                $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas']['A'],$_SESSION['mfo_datos']['Filtrar_ofertas']['P'],$_SESSION['mfo_datos']['Filtrar_ofertas']['J'],$_SESSION['mfo_datos']['Filtrar_ofertas']['C'],$page,$vista);
-
-                $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'mostrar'=>$mostrar,'vista'=>$vista)); 
-                 
+                $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page/*,'mostrar'=>$mostrar*/,'vista'=>$vista)); 
+                 print_r($_SESSION['mfo_datos']['Filtrar_ofertas']); 
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,
                     'arrarea'       => $arrarea,
-                    'tiposContrato' => $tiposContrato,
                     'arrprovincia'  => $arrprovincia,
                     'jornadas'      => $arrjornadas,
                     'ofertas'       => $postulacionesFiltradas,
                     'postulacionesUserLogueado' => $postulacionesUserLogueado,
                     'link'=>$link,
                     'page' =>$page,
-                    'mostrar'=>$mostrar,
+                    //'mostrar'=>$mostrar,
                     'vista'=>$vista
                 );
 
@@ -143,8 +169,9 @@ class Controlador_Oferta extends Controlador_Base
                     $tags["show_banner"] = 1;
                 }
                 
+                $tags["template_js"][] = "validator";
                 $tags["template_js"][] = "oferta";
-  
+
                 $url = PUERTO.'://'.HOST.'/'.$vista.'/'.$type.$cadena;
                 
                 $pagination = new Pagination(count($postulacionesFiltradas),REGISTRO_PAGINA,$url);
@@ -163,15 +190,16 @@ class Controlador_Oferta extends Controlador_Base
 
                 $idOferta = Utils::getParam('id', '', $this->data);
                 $status = Utils::getParam('status', '', $this->data);
-                $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page);
+                $aspiracion = Utils::getParam('aspiracion', '', $this->data);
                 $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+                $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$idUsuario);
 
                 if (Utils::getParam('postulado') == 1) {
 
                     if(!empty($status)){
                         self::guardarEstatus($idUsuario,$idOferta,$status);
                     }else{
-                        self::guardarPostulacion($idUsuario,$idOferta,$vista);
+                        self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
                     }
                 }
 
@@ -188,6 +216,9 @@ class Controlador_Oferta extends Controlador_Base
                 );
 
                 $tags["show_banner"] = 1;
+                $tags["template_js"][] = "validator";
+                $tags["template_js"][] = "oferta";
+
                 Vista::render('detalle_oferta', $tags);
             break;
 
@@ -200,24 +231,22 @@ class Controlador_Oferta extends Controlador_Base
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
 
-                $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'C'=>0);
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo();
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
                 $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
-                $tiposContrato = Modelo_TipoContrato::obtieneListadoAsociativo();
-                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista);
+                $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario);
 
                 $breadcrumbs['oferta'] = 'Mis vacantes';
 
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,
                     'arrarea'       => $arrarea,
-                    'tiposContrato' => $tiposContrato,
                     'arrprovincia'  => $arrprovincia,
                     'jornadas'      => $jornadas,
                     'ofertas'       => $ofertas,
                     'page' => $page,
-                    'mostrar'=>$mostrar,
+                    //'mostrar'=>$mostrar,
                     'vista'=>$vista
                 );
 
@@ -250,12 +279,11 @@ class Controlador_Oferta extends Controlador_Base
                     }
                 }
 
-                $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'C'=>0);
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo();
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
                 $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
-                $tiposContrato = Modelo_TipoContrato::obtieneListadoAsociativo();
-                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista);
+
+                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 if($vista != 'postulacion'){
                     $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($_SESSION['mfo_datos']['usuario']['id_usuario'],$page);
@@ -267,16 +295,16 @@ class Controlador_Oferta extends Controlador_Base
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,
                     'arrarea'       => $arrarea,
-                    'tiposContrato' => $tiposContrato,
                     'arrprovincia'  => $arrprovincia,
                     'jornadas'      => $jornadas,
                     'ofertas'       => $ofertas,
                     'postulacionesUserLogueado' => $postulacionesUserLogueado,
                     'page' => $page,
-                    'mostrar'=>$mostrar,
+                    //'mostrar'=>$mostrar,
                     'vista'=>$vista
                 );
 
+                $tags["template_js"][] = "validator";
                 $tags["template_js"][] = "oferta";
                 $tags["show_banner"] = 1;
                 
@@ -290,13 +318,13 @@ class Controlador_Oferta extends Controlador_Base
         }
     }
 
-    public function guardarPostulacion($id_usuario,$id_oferta,$vista){
+    public function guardarPostulacion($id_usuario,$id_oferta,$aspiracion,$vista){
 
         try{
 
             if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'postulacion') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
 
-                if (!Modelo_Postulacion::postularse($id_usuario,$id_oferta)) {
+                if (!Modelo_Postulacion::postularse($id_usuario,$id_oferta,$aspiracion)) {
                     throw new Exception("Ha ocurrido un error la postulación, intente nuevamente");
                 }
                 $GLOBALS['db']->commit();
@@ -304,7 +332,7 @@ class Controlador_Oferta extends Controlador_Base
 
             }else{
 
-                $_SESSION['mostrar_error'] = "No tiene permiso para postularse";
+                $_SESSION['mostrar_error'] = "No tiene permiso para postularse, contrate un plan";
                 $this->redirectToController('detalleOferta/'.$vista.'/'.$id_oferta);
             }
 
@@ -330,5 +358,28 @@ class Controlador_Oferta extends Controlador_Base
             $GLOBALS['db']->rollback();
             $this->redirectToController('detalle_oferta');
         }
+    }
+
+    public static function calcularRuta($ruta,$letraDescartar){
+
+        foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $key => $v) {
+
+            if($letraDescartar != $key){
+
+                if($key == 'A' && $v != 0){
+                    $ruta .= 'A'.$v.'/';
+                }
+                if($key == 'P' && $v != 0){
+                    $ruta .= 'P'.$v.'/';
+                }
+                if($key == 'J' && $v != 0){
+                    $ruta .= 'J'.$v.'/';
+                }
+                if($key == 'Q' && $v != 0){
+                    $ruta .= 'Q'.$v.'/';
+                }
+            }
+        }
+        return $ruta;
     }
 }

@@ -251,5 +251,15 @@ class Utils{
   static public function formatoDinero($str){
     return ( ! preg_match("/^[0-9]+(?:\.[0-9]{0,2})?$/", $str)) ? false : true;
   }
+
+ /* public static function calcularEdad($fecha_nacimiento) { 
+
+    $tiempo = strtotime($fecha_nacimiento); 
+    $ahora = time(); 
+    $edad = ($ahora-$tiempo)/(60*60*24*365.25); 
+    $edad = floor($edad); 
+    return $edad; 
+  }*/
+
 }
 ?>
