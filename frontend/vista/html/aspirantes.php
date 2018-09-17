@@ -156,8 +156,8 @@
 									<div class="wrapper" width="100%" style="background-image: url('<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>');">
 									  <div class="data">
 									    <div class="content">
-									      <p class="text-center" style="font-size: 17px; color: black;"><?php echo $a['nombres'].' '.$a['apellidos']; ?><br>
-									      <span style="color:#03A9F4;"><?php echo MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado'])); ?></span> </p><br><br>
+									      <a a href="<?php echo PUERTO."://".HOST."/aspirante/detallePerfil/".$a['username'].'/';?>"><p class="text-center" style="font-size: 17px; color: black;"><?php echo $a['nombres'].' '.$a['apellidos']; ?><br>
+									      <span style="color:#03A9F4;"><?php echo MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado'])); ?></span> </p></a><br><br>
 									      <p class="text">
 									        <hr>
 									            <ul style="list-style-type: none;">
@@ -174,7 +174,7 @@
 									                <li><i class="far fa-file"></i> <span style="color: black;">No ha cargado HV</span></li>
 									                <?php
 									            }?>
-									                <li><i class="fas fa-chart-bar"></i> <a href="<?php echo PUERTO."://".HOST."/verResultados/".$a['id_usuario'].'/';?>">Resultados evaluaci&oacute;n</a></li>
+									                <li><i class="fas fa-chart-bar"></i> <a href="<?php echo PUERTO."://".HOST."/informePDF/".$a['username'].'/';?>">Resultados evaluaci&oacute;n</a></li>
 									            </ul>
 									            
 									      </p>

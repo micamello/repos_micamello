@@ -12,7 +12,7 @@ class Modelo_Cuestionario{
 	public static function guardarPorTest($valor,$usuario,$test){
 		if (empty($valor) || empty($usuario) || empty($test)){ return false; }		
 		return $GLOBALS['db']->insert('mfo_porcentajextest',array('valor'=>$valor,'id_usuario'=>$usuario,
-																															'id_cuestionario'=>$test,'fecha_culminacion'=>date('Y-m-d H:i:s')));
+			'id_cuestionario'=>$test,'fecha_culminacion'=>date('Y-m-d H:i:s')));
 	}
 
 	public static function existeTest($id){
@@ -40,6 +40,11 @@ class Modelo_Cuestionario{
     if (empty($usuario)){ return false; }
     $sql = "SELECT * FROM mfo_porcentajextest WHERE id_usuario = ? ORDER BY id_cuestionario DESC LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($usuario));
+	}
+
+	public static function listadoCuestionariosxUsuario($id_usuario){
+		$sql = "SELECT distinct mr.id_cuestionario, mc.nombre FROM mfo_respuesta mr, mfo_cuestionario mc WHERE mc.id_cuestionario = mr.id_cuestionario and mr.id_usuario = '$id_usuario';";
+		return $GLOBALS['db']->auto_array($sql,array(), true);
 	}
 }  
 ?>

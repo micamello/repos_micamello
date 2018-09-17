@@ -37,5 +37,10 @@ define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
 define('REGISTRO_PAGINA',10);
-define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr')
+define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
+define('CONFIDENCIAL', array('1'=>'Sí', '0'=>'No'));
+define('LICENCIA', array('1'=>'Sí', '0'=>'No'));
+define('RESIDENCIA', array('1'=>'Sí', '0'=>'No'));
+define('VIAJAR', array('1'=>'Sí', '0'=>'No'));
+define('ESTATUS_OFERTA', array('1'=>'No contratado', '2'=>'Contratado', '3'=>'En proceso'));
 ?>

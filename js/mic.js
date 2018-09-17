@@ -1,10 +1,10 @@
 
 // $("#form_empresa").validator();
-if (document.getElementById("alerta")) {
-  setTimeout(function() {
-    $('#alerta').fadeOut();
-  }, 5000);
-}
+// if (document.getElementById("alerta")) {
+//   setTimeout(function() {
+//     $('#alerta').fadeOut();
+//   }, 5000);
+// }
 
 
 if(document.getElementById('form_register')){
@@ -18,43 +18,6 @@ if(document.getElementById('form_login')){
 if(document.getElementById('form_publicar')){
   $("#form_publicar").validator();
 }
-
-// function numero_validate(id)
-// {
-//   var input_number = id;
-//   var nodo_padre = document.getElementById(input_number.id).parentNode;
-//   var nodo_div = nodo_padre.querySelectorAll('div');
-  
-//   input_number.addEventListener('keydown',function(e) {
-    
-//     var code = e.which || e.keyCode,
-//     allowedKeys = [8, 9, 13, 27, 35,36,37,38,39,46,110, 190];
-    
-//     if(allowedKeys.indexOf(code) > -1) {
-//       return;
-//     }
-    
-//     if((e.shiftKey || (code < 48 || code > 57)) && (code < 96 || code > 105)) {
-//       e.preventDefault();
-//       nodo_div[0].innerHTML = "El campo solo acepta números";
-//       nodo_div[0].style.color = "red";
-//       nodo_div[0].style.position = "absolute";
-//       input_number.style.borderColor = "red";
-//       input_number.style.borderColor = ""
-//     }
-//     else
-//     {
-//       nodo_div[0].innerHTML = "";
-//       input_number.style.borderColor = "";
-//     }
-//       $('.modal').on('hidden.bs.modal', function(){
-//           nodo_div[0].innerHTML = "";
-//           input_number.style.borderColor = "";
-
-//       });
-
-//   })
-// }
 
 function valida_numeros(evt){
     if(window.event){
@@ -143,5 +106,66 @@ $('.carousel[data-type="multi"] .item').each(function(){
 
 if(document.getElementById('form_paypal')){
   $("#form_paypal").validator();
+}
+
+function pass_reveal(obj){
+  var input_reveal = obj.nextElementSibling;
+  input_reveal.setAttribute("type", "text");
+  obj.firstChild.setAttribute("class", "fa fa-eye-slash");
+  obj.setAttribute("onclick", "pass_hidden(this)");
+}
+
+function pass_hidden(obj){
+  var input_reveal = obj.nextElementSibling;
+  input_reveal.setAttribute("type", "password");
+  obj.firstChild.setAttribute("class", "fa fa-eye");
+  obj.setAttribute("onclick", "pass_reveal(this)");
+}
+
+
+if(document.getElementById("term_cond")){
+  $("#term_cond").on("change", function(){
+    if (document.getElementById("term_cond").checked) {
+      document.getElementById("conf_datos").checked = true;
+    }
+    else{
+      document.getElementById("conf_datos").checked = false;
+    }
+  })
+}
+
+if(document.getElementById("conf_datos")){
+  $("#conf_datos").on("change", function(){
+    if (document.getElementById("conf_datos").checked) {
+      document.getElementById("term_cond").checked = true;
+    }
+    else{
+      document.getElementById("term_cond").checked = false;
+    }
+  })
+}
+
+function crearMensajeError($id_div_error, $mensaje_error){
+    var nodo_div = document.getElementById($id_div_error);
+    var p_node = document.createElement("P");
+    p_node.setAttribute("class", "list-unstyled msg_error");
+     p_node.setAttribute("id", "p_node_error");
+    var p_text = document.createTextNode($mensaje_error);
+    p_node.appendChild(p_text);
+    nodo_div.appendChild(p_node);
+}
+
+function eliminarMensajeError($id_div_error){
+    var nodo_div = document.getElementById($id_div_error);
+    nodo_div.innerHTML = "";
+}
+
+if (document.getElementById("dni")) {
+  var host = window.location.hostname;
+  $("#dni").on("blur", function(){
+    if (host == 'localhost') {
+      validarDocumento(this);
+    }
+  })
 }
 

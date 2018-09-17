@@ -55,36 +55,31 @@
                 </div><!-- End off container -->
             </section><!-- End off Featured Section-->
 
-
-            <!--Business Section-->
-            <section id="business" class="business bg-grey roomy-70">
-                <div class="container">
-                    <div class="row">
-                        <div class="main_business">
-                            <div class="col-md-12">
-                                <div class="" align="center">
+            <section id="brand" class="business bg-grey roomy-70">
+              <div class="container-fluid">
+                <div class="" align="center">
                                     <h2 class="title_section">Categorías de Empleos</h2>
                                         Una mejor carrera está por ahí. Te ayudaremos a encontrarlo Somos 
                                         su primer paso para convertirnos en todo lo que queremos ser.
                                 </div><br><br>
-                                <?php 
-                                    foreach($arrarea as $area){
-                                      $nro_areas = Modelo_Oferta::obtieneNroArea($area["id_area"]);  
-                                ?>
-
-                                    <div class="col-md-3 col-sm-6 col-xs-12" align="center">
-                                        <i class="<?php echo $area['ico']; ?> font_awesome" aria-hidden="true"></i>
-
-                                        <h5><a href="javascript:void(0);"><?php echo utf8_encode($area['nombre']);?></a></h5>
-
-                                        <div class="nvac">(<?php echo $nro_areas; ?> vacantes)</div><br><br>
-                                    </div>
-                                <?php } ?>
-                            </div>
+                <div class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+                  <div class="carousel-inner">
+                    <?php 
+                        $cont = 1;
+                        foreach($arrarea as $area) {
+                        $nro_areas = Modelo_Oferta::obtieneNroArea($area["id_area"]);  
+                    ?>
+                        <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
+                          <div class="brand_item col-md-2 col-sm-6" align="center"><i class="<?php echo $area['ico'] ?> font_awesome"></i><br><br>
+                            <h5><?php echo utf8_encode($area['nombre']) ?></h5>
+                            <div class="nvac">(<?php echo $nro_areas; ?> vacantes)</div><br><br>
+                          </div>
                         </div>
-                    </div>
-                </div>
-            </section><!-- End off Business section -->
+                    <?php $cont++; } ?>
+                  </div>
+                </div>                
+              </div>
+            </section>
 
             <!--product section-->
             <section class="casos_exito_mic">

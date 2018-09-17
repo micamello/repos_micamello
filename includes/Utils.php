@@ -88,7 +88,7 @@ class Utils{
   }
 
   public static function valida_password( $pass ){
-    return (preg_match('/[A-Z]/',$pass) && preg_match('/[a-z]/',$pass) && preg_match('/\d/',$pass) && self::long_minima($pass,8) )?true:false;
+    return (preg_match('/[a-zA-Z]/',$pass) && preg_match('/\d/',$pass) && self::long_minima($pass,8) )?true:false;
   }
 
   public static function generarToken($id,$accion) {
@@ -228,6 +228,16 @@ class Utils{
 
   public static function validarNumeros($campo){
     if(preg_match ("/^[0-9]+$/", $campo)) return true;
+    else return false;
+  }
+
+  public static function validarEminEmax($campo1, $campo2){
+    if($campo1 >= 18 || $campo2 >= 18){
+      if($campo1 <= $campo2){
+        return true;
+      }
+      else return false;
+    }
     else return false;
   }
 

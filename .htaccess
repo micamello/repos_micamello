@@ -127,4 +127,7 @@ RewriteRule ^verAspirantes/([0-9]+)/([A-Z0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REW
 RewriteRule ^verAspirantes/([0-9]+)/([A-Z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&id_oferta=$1&type=$2&param2=$3&page=$4 [L]
 
 #informePDF
-RewriteRule ^informePDF/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF [L]
+RewriteRule ^informePDF/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF&username=$1 [L]
+
+#Aspirantes
+RewriteRule ^aspirante/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$2 [L]

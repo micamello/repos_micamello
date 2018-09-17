@@ -1,0 +1,930 @@
+[2018/09/17 01:41:26] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:41:26] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:41:26] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:41:26] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:41:26] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:41:26] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:41:41] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:41:41] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:41:41] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:41:41] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:41:41] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:41:41] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:41:57] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:41:57] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:41:57] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:41:57] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:41:57] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:41:57] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:44:57] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:44:57] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:44:57] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:44:57] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:44:57] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:44:57] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:45:02] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:45:02] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:45:02] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:45:02] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:45:02] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:45:02] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:48:51] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:48:51] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:48:51] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:48:51] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:48:51] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:48:51] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:49:30] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:49:30] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:49:30] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:49:30] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:49:30] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:49:30] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:49:41] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:49:41] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:49:41] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:49:41] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:49:41] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:49:41] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:49:57] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:49:57] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:49:57] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:49:57] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:49:57] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:49:57] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:50:02] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:50:02] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:50:02] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:50:02] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:50:02] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:50:02] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:50:06] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:50:06] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:50:06] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:50:06] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:50:06] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:50:06] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:50:12] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:50:12] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:50:12] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:50:12] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:50:12] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:50:12] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:50:44] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:50:44] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:50:44] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:50:44] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:50:44] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:50:44] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:51:44] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:51:44] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:51:44] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:51:44] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:51:44] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:51:44] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:51:54] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:51:54] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:51:54] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:51:54] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:51:54] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:51:55] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:51:57] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:51:57] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:51:57] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:51:57] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:51:57] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:51:57] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:52:35] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:52:35] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:52:35] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:52:35] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:52:35] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:52:35] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:52:47] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:52:47] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:52:47] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:52:47] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:52:47] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:52:47] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:52:58] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:52:58] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:52:58] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:52:58] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:52:58] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:52:58] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:53:01] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:53:01] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:53:01] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:53:01] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:53:01] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:53:01] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:53:05] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:53:05] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:53:05] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:53:05] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:53:05] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:53:05] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:53:15] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:53:15] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:53:15] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:53:15] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:53:15] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:53:15] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 01:53:40] Utils::createSession empezo una nueva sesion
+[2018/09/17 01:53:40] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 01:53:40] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 01:53:40] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 01:53:40] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 01:53:40] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:06:25] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:06:25] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:06:25] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:06:25] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:06:25] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:06:25] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:06:37] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:06:37] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:06:37] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:06:37] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:06:37] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:06:37] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:06:42] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:06:42] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:06:42] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:06:42] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:06:42] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:06:42] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:06:53] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:06:53] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:06:53] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:06:53] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:06:53] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:06:53] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:06:59] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:06:59] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:06:59] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:06:59] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:06:59] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:06:59] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:08:03] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:08:03] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:08:03] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:08:03] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:08:03] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:08:03] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:08:09] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:08:09] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:08:10] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:08:10] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:08:10] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:08:10] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/09/17 02:08:18] Utils::createSession empezo una nueva sesion
+[2018/09/17 02:08:18] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.dominio = 'micamello.com.ec'
+[2018/09/17 02:08:18] dispatch nombre del controlador: Controlador_Aspirante - aspirante
+[2018/09/17 02:08:18] SQL Query: select * from mfo_usuario where username = 'Ederstyle1994'
+[2018/09/17 02:08:18] Array
+(
+    [datos_Usuario] => Array
+        (
+            [id_usuario] => 8
+            [username] => Ederstyle1994
+            [password] => 3f7824cb4a39da4d9806860e10f14df5
+            [correo] => evpozo@gmail.com.ec
+            [telefono] => 0968597677
+            [dni] => 0706715667
+            [nombres] => Virgilio Eder
+            [fecha_nacimiento] => 1994-09-07 00:00:00
+            [fecha_creacion] => 2018-09-07 14:15:25
+            [foto] => 0
+            [token] => 0
+            [estado] => 1
+            [term_cond] => 1
+            [conf_datos] => 1
+            [tipo_usuario] => 1
+            [id_ciudad] => 1
+            [ultima_sesion] => 2018-09-10 17:17:49
+        )
+
+)
+
+[2018/09/17 02:08:18] SQL Query: SELECT * FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

@@ -22,6 +22,7 @@ class Controlador_Aspirante extends Controlador_Base
         $type = Utils::getParam('type', '', $this->data); 
         $vista = Utils::getParam('vista', '', $this->data);
         //$postulacionesUserLogueado = array();
+        $username = Utils::getParam('username', '', $this->data);
         $breadcrumbs = array();
 
         switch ($opcion) {
@@ -138,6 +139,10 @@ class Controlador_Aspirante extends Controlador_Base
                 Vista::render('aspirantes', $tags);
             break;
 
+            case 'detallePerfil':
+                $this->perfilAspirante($username);
+            break;
+
             default:
                 
                 $id_oferta = Utils::getParam('id_oferta', '', $this->data);
@@ -174,6 +179,13 @@ class Controlador_Aspirante extends Controlador_Base
                 Vista::render('aspirantes', $tags);
             break;
         }
+    }
+
+    public function perfilAspirante($username){
+        $datos_usuario = ["datos_Usuario"=>Modelo_Usuario::existeUsuario($username)];
+
+        Utils::log(print_r($datos_usuario, true));
+        Vista::render('perfilAspirante', $datos_usuario);
     }
 
 }
