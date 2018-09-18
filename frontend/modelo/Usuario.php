@@ -367,6 +367,8 @@ class Modelo_Usuario{
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }elseif (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'busquedaOferta')) {
+          Utils::doRedirect(PUERTO.'://'.HOST.'/');  
       }  
       else{                    
         Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  

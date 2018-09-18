@@ -32,43 +32,41 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
                             <br>
                         </div>
                     </div>
-                    <?php if($cargarHv){ ?>
-	                    <div class="panel panel-default shadow" style="border-radius: 20px;">
-	                    	
-	                    	<img id="archivo" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/Hv.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
-	                       
-	                       <?php if($btnDescarga == 1){ ?>
-		                       	<div <?php if($btnSig == 0){ echo 'class="pull-left" style="position: relative; margin-left: 15px;"'; } ?>>
-			                        <label for="descargarCV" class="custom_file">
-			                        	<a href="<?php echo $ruta_arch; ?>" target="_blank">
-			                        		<img id="imagenBtn1" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch1";?>" width="50px">
-			                        	</a>
-			                        </label>
-									<input id="descargarCV" type="file" name="descargarCV" <?php if($btnSig == 1){ echo 'disabled'; } ?> class="upload-photo">
-									<div align="center">
-			                            <p class="text-center arch_cargado" id="texto_status1"><?php echo $msj1; ?></p>
-			                        </div>
-			                    </div>
-			                    <br>
-							<?php } ?>
-							<?php 
+                    <div class="panel panel-default shadow" style="border-radius: 20px;">
+                    	
+                    	<img id="archivo" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/Hv.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
+                       
+                       <?php if($btnDescarga == 1){ ?>
+	                       	<div <?php if($btnSig == 0){ echo 'class="pull-left" style="position: relative; margin-left: 15px;"'; } ?>>
+		                        <label for="descargarCV" class="custom_file">
+		                        	<a href="<?php echo $ruta_arch; ?>" target="_blank">
+		                        		<img id="imagenBtn1" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch1";?>" width="50px">
+		                        	</a>
+		                        </label>
+								<input id="descargarCV" type="file" name="descargarCV" <?php if($btnSig == 1){ echo 'disabled'; } ?> class="upload-photo">
+								<div align="center">
+		                            <p class="text-center arch_cargado" id="texto_status1"><?php echo $msj1; ?></p>
+		                        </div>
+		                    </div>
+		                    <br>
+						<?php } ?>
+						<?php 
 
-							if($btnSubir == 1){ ?>
-								<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
-			                        <label for="subirCV" class="custom_file">
-			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
-			                        </label>
-			                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
-			                   		<div align="center">
-		                            	<p class="text-center arch_cargado" id="texto_status"><?php echo $msj2; ?></p>
-		                        	</div>
-								</div>
-								<br>
-	                        <?php }
+						if($btnSubir == 1){ ?>
+							<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
+		                        <label for="subirCV" class="custom_file">
+		                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
+		                        </label>
+		                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
+		                   		<div align="center">
+	                            	<p class="text-center arch_cargado" id="texto_status"><?php echo $msj2; ?></p>
+	                        	</div>
+							</div>
+							<br>
+                        <?php }
 
-	                        if($btnDescarga == 1 && $btnSubir == 1 && $btnSig == 0){ echo '<br><br><br>'; } ?>
-	                    </div>
-                	<?php } ?>
+                        if($btnDescarga == 1 && $btnSubir == 1 && $btnSig == 0){ echo '<br><br><br>'; } ?>
+                    </div>
                 </div>
 	            <div class="col-md-8">
 	                <div class="panel panel-default shadow" style="border-radius: 20px;">
