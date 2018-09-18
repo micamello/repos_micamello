@@ -91,3 +91,65 @@ $('.carousel[data-type="multi"] .item').each(function(){
 if(document.getElementById('form_paypal')){
   $("#form_paypal").validator();
 }
+
+function pass_reveal(obj){
+  var input_reveal = obj.nextElementSibling;
+  input_reveal.setAttribute("type", "text");
+  obj.firstChild.setAttribute("class", "fa fa-eye-slash");
+  obj.setAttribute("onclick", "pass_hidden(this)");
+}
+
+function pass_hidden(obj){
+  var input_reveal = obj.nextElementSibling;
+  input_reveal.setAttribute("type", "password");
+  obj.firstChild.setAttribute("class", "fa fa-eye");
+  obj.setAttribute("onclick", "pass_reveal(this)");
+}
+
+
+if(document.getElementById("term_cond")){
+  $("#term_cond").on("change", function(){
+    if (document.getElementById("term_cond").checked) {
+      document.getElementById("conf_datos").checked = true;
+    }
+    else{
+      document.getElementById("conf_datos").checked = false;
+    }
+  })
+}
+
+if(document.getElementById("conf_datos")){
+  $("#conf_datos").on("change", function(){
+    if (document.getElementById("conf_datos").checked) {
+      document.getElementById("term_cond").checked = true;
+    }
+    else{
+      document.getElementById("term_cond").checked = false;
+    }
+  })
+}
+
+function crearMensajeError($id_div_error, $mensaje_error){
+    var nodo_div = document.getElementById($id_div_error);
+    var p_node = document.createElement("P");
+    p_node.setAttribute("class", "list-unstyled msg_error");
+     p_node.setAttribute("id", "p_node_error");
+    var p_text = document.createTextNode($mensaje_error);
+    p_node.appendChild(p_text);
+    nodo_div.appendChild(p_node);
+}
+
+function eliminarMensajeError($id_div_error){
+    var nodo_div = document.getElementById($id_div_error);
+    nodo_div.innerHTML = "";
+}
+
+if (document.getElementById("dni")) {
+  var host = window.location.hostname;
+  $("#dni").on("blur", function(){
+    if (host == 'localhost') {
+      validarDocumento(this);
+    }
+  })
+}
+

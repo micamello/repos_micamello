@@ -61,7 +61,7 @@ class Controlador_Oferta extends Controlador_Base
                     $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario);
                     $breadcrumbs['oferta'] = 'Ofertas de empleo';
                 }else if($vista == 'vacantes'){
-                    $breadcrumbs['oferta'] = 'Mis Vacantes';
+                    $breadcrumbs['vacantes'] = 'Mis Vacantes';
                     $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
                 }else{
                     $breadcrumbs['postulacion'] = 'Mis postulaciones';
@@ -237,7 +237,7 @@ class Controlador_Oferta extends Controlador_Base
                 $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
                 $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
 
-                $breadcrumbs['oferta'] = 'Mis vacantes';
+                $breadcrumbs['vacantes'] = 'Mis vacantes';
 
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,

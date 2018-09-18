@@ -87,7 +87,7 @@ class Modelo_Usuario{
         $data["apell_user"] = $data['name_user'];
       }
 
-    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>$data['username'],"password"=>$password,"correo"=>$data['correo'],"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"apellidos"=>$data['apell_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"status_carrera"=>$defaultDataUser['status_carrera'],"tipo_usuario"=>$data['tipo_usuario'],"id_escolaridad"=>$defaultDataUser['id_escolaridad'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
+    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>strtolower($data['username']),"password"=>$password,"correo"=>strtolower($data['correo']),"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"tipo_usuario"=>$data['tipo_usuario'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
     return $result;
   }
 
@@ -175,7 +175,7 @@ class Modelo_Usuario{
     if($obtCantdRegistros == false){
       $sql .= " ORDER BY p.fecha_postulado DESC";
       $page = ($page - 1) * REGISTRO_PAGINA;
-      echo $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
       $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     }else{
       $rs = $GLOBALS['db']->auto_array($sql,array()); 

@@ -25,7 +25,11 @@ class Controlador_Aspirante extends Controlador_Base
         $page = Utils::getParam('page', '1', $this->data);
         $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
         $type = Utils::getParam('type', '', $this->data); 
-       // $vista = Utils::getParam('vista', '', $this->data);
+
+        $vista = Utils::getParam('vista', '', $this->data);
+
+        $username = Utils::getParam('username', '', $this->data);
+
         $breadcrumbs = array();
 
         switch ($opcion) {
@@ -196,6 +200,10 @@ class Controlador_Aspirante extends Controlador_Base
                 Vista::render('aspirantes', $tags);
             break;
 
+            case 'detallePerfil':
+                $this->perfilAspirante($username);
+            break;
+
             default:
                 
                 $id_oferta = Utils::getParam('id_oferta', '', $this->data);
@@ -237,6 +245,7 @@ class Controlador_Aspirante extends Controlador_Base
         }
     }
 
+
     public static function calcularRuta($ruta,$letraDescartar){
 
         foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $key => $v) {
@@ -270,6 +279,13 @@ class Controlador_Aspirante extends Controlador_Base
             }
         }
         return $ruta;
+    }
+
+    public function perfilAspirante($username, $requisito = 1){
+        $datos_usuario = ["datos_Usuario"=>Modelo_Usuario::existeUsuario($username, $requisito)];
+
+        Utils::log(print_r($datos_usuario, true));
+        Vista::render('perfilAspirante', $datos_usuario);
     }
 
 }

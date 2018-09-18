@@ -72,20 +72,7 @@
                 <label class="text-center">Apellidos:</label><div class="help-block with-errors"></div>
                 <input type="text" name="apell_user" id="apell_user" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortiz Zambrano" class="form-control">
               </div>
-          </div>       
-
-          <div class="col-md-6">
-              <div class="form-group">
-                <label class="text-center">Contraseña:</label><div class="help-block with-errors"></div>
-                <input id="password" name="password" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Debe contener minúsculas, mayúsculas y numeros' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" placeholder="Ejemplo: me198454EjgE" class="form-control" required data-toggle="password">
-              </div>
-          </div>
-          <div class="col-md-6">
-            <div class="form-group">
-              <label class="text-center">Confirmar Contraseña:</label><div class="help-block with-errors"></div>
-              <input id="password_two" name="password_two" type="password" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Por favor, ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" required data-toggle="password">
-            </div>
-          </div>    
+          </div>        
 
            <div class="col-md-6">
              <div class="form-group">
@@ -98,7 +85,7 @@
                   <div class="group">
                     <div class="form-group">
                       <label class="text-center" id="dni_text"></label><div class="help-block with-errors" id="error_custom_dni"></div>
-                      <input id="dni" type="text" onblur="validarDocumento()" name="cedula" minlength="10" maxlength="15" onkeypress="" class="form-control" aria-describedby="dniHelp" required>
+                      <input id="dni" type="text" name="cedula" class="form-control" required>
                     </div>
                   </div>
               </div>
@@ -131,7 +118,26 @@
                       } ?>
                   </select>
                 </div>
-              </div>  
+              </div> 
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label class="text-center">Contraseña:</label><div class="help-block with-errors"></div>
+                  <div class="input-group">
+                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
+                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control">
+                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                  <label class="text-center">Confirmar Contraseña:</label><div class="help-block with-errors"></div>
+                  <div class="input-group">
+                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
+                    <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control">
+                </div>
+              </div>
+            </div>  
 
               <div class="row">
                 

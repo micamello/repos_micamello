@@ -444,6 +444,20 @@ body
 
 }
 
+.perfil_photo_user {
+    display: block;
+    margin: -105px 0px 5px 0px;
+    margin-left: auto;
+    margin-right: auto; 
+    height: 250px;
+    width: 250px;
+    border-radius: 50%;
+    border: 5px solid white;
+    background: #22242a;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+
+}
+
 .profilebox {
     position: relative;
     /* background: #22242a; */
@@ -742,6 +756,15 @@ body
 
 .badge_item:hover{
   background-color: #D56464;
+
+}
+
+.show_hidden{
+  cursor: pointer;
+}
+
+.show_hidden:hover{
+  color: #7E7D84;
 }
 
 .icon{

@@ -7,8 +7,6 @@ class Controlador_Inicio extends Controlador_Base {
   }
   
   public function construirPagina(){
-    // $eder_array = Modelo_Usuario::existeUsuario("ederstyle1994");
-    //   Utils::log(print_r($eder_array, true));
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero();
@@ -28,8 +26,8 @@ class Controlador_Inicio extends Controlador_Base {
                   'arrauspiciante'=>$arrauspiciante);
 
     $tags["template_js"][] = "validator";
-    $tags["template_js"][] = "ruc_jquery_validator";
     $tags["template_js"][] = "selectr";
+    $tags["template_js"][] = "ruc_jquery_validator";
     $tags["template_js"][] = "mic";
     $tags["template_js"][] = "modal-register";
 

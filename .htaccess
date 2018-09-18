@@ -45,7 +45,7 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 #imagenes del profile
 RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
 RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&archivo=$2 [L]
-RewriteRule ^hojasDeVida/([a-z]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
 
 ###########################################################################################################################################################
 
@@ -188,7 +188,8 @@ RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([0-9]+)/$ %{EN
 ###########################################################################################################################################################
 
 #informePDF
-RewriteRule ^informePDF/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF [L]
 
-###########################################################################################################################################################
+RewriteRule ^informePDF/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF&username=$1 [L]
 
+#Aspirantes
+RewriteRule ^aspirante/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$2 [L]

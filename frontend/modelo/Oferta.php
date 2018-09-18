@@ -15,6 +15,7 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
   
+
   public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false){
     
     $sql = "SELECT ";
@@ -36,9 +37,11 @@ class Modelo_Oferta{
       $sql .= "count(1) as cantd_ofertas";
     }
 
+
     $sql .= " FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p";
 
     if(!empty($vista) && ($vista == 'postulacion')){
+
       $sql .= ", mfo_postulacion pos";
     }
 
@@ -54,7 +57,9 @@ class Modelo_Oferta{
     AND o.id_usuario=u.id_usuario
     AND a.id_area = o.id_area
     AND n.id_nivelInteres = o.id_nivelInteres
-    AND j.id_jornada = o.id_jornada";
+    AND j.id_jornada = o.id_jornada
+    AND o.id_usuario = ".$idusuario;
+
 
     if(!empty($id)){
        $sql .= " AND ni.id_nivelIdioma_idioma = un.id_nivelIdioma_idioma
@@ -187,13 +192,14 @@ class Modelo_Oferta{
 
   public static function guardarRequisitosOferta($data){
     if (empty($data)) {return false;}
+    Utils::log("datos de requisitos: ".print_r($data, true));
     $result = $GLOBALS['db']->insert('mfo_requisitooferta', array("licencia"=>$data['licencia'], "viajar"=>$data['viaje'], "residencia"=>$data['cambio_residencia'], "discapacidad"=>$data['discapacidad'], "confidencial"=>$data['confidencial'], "edad_minima"=>$data['edad_min'], "edad_maxima"=>$data['edad_max']));
     return $result;
   }
 
   public static function guardarOferta($data, $id_reqOf, $idusu, $id_plan){
     if (empty($data)) {return false;}
-    $result = $GLOBALS['db']->insert('mfo_oferta', array("titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>1, "fecha_creado"=>date("Y-m-d H:i:s"), "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_tipocontrato"=>$data['tipo_cont_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_usuario"=>$idusu, "id_plan"=>$id_plan));
+    $result = $GLOBALS['db']->insert('mfo_oferta', array("titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>1, "fecha_creado"=>date("Y-m-d H:i:s"), "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_usuario"=>$idusu, "id_plan"=>$id_plan));
     return $result;
   }
 
