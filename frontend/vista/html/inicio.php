@@ -1,13 +1,13 @@
 <div class="">
     <div class="row">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+        <div id="myCarousel1" class="carousel slide" data-ride="carousel">
             <?php 
             if (!empty($banners)){ ?>
                 <ol class="carousel-indicators">
                 <?php 
                     $cont = 0;
                     foreach($banners as $banner){  ?>
-                        <li data-target="#myCarousel" data-slide-to="<?php echo $cont; ?>" <?php if($cont == 0){ echo 'class="active"'; } ?>></li>
+                        <li data-target="#myCarousel1" data-slide-to="<?php echo $cont; ?>" <?php if($cont == 0){ echo 'class="active"'; } ?>></li>
               <?php     $cont++; 
                     } ?>
                 </ol>
@@ -82,7 +82,7 @@
                                         Una mejor carrera está por ahí. Te ayudaremos a encontrarlo Somos 
                                         su primer paso para convertirnos en todo lo que queremos ser.
                                 </div><br><br>
-                <div class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+                <div class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel2">
                   <div class="carousel-inner">
                     <?php 
                         $cont = 1;
@@ -227,14 +227,14 @@
 <!-- Listado de auspiciantes -->
 <section id="brand" class="brand fix">
   <div class="container-fluid">
-    <div class="carousel slide col-md-12" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel">
+    <div class="carousel slide col-md-12" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel3">
       <div class="carousel-inner">
         <?php 
             $cont = 1;
             foreach($arrauspiciante as $auspiciante) { 
         ?>
             <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
-              <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php echo $auspiciante['url']; ?>"><img style="width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a></div>
+              <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php echo $auspiciante['url']; ?>"><img style="max-width:100%; width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a></div>
             </div>
         <?php $cont++; } ?>
       </div>
