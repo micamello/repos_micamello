@@ -14,6 +14,8 @@ class Controlador_Perfil extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
 
+        Utils::log("SESSION ".print_r($_SESSION,true));
+
         //Obtiene todos los banner activos segun el tipo
         $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_PERFIL);
 

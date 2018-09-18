@@ -54,11 +54,5 @@ class Modelo_Cuestionario{
 		return $GLOBALS['db']->auto_array($sql,array(), true);
 	}
 
-	public static function totalTestxUsuario($usuario){
-		if (empty($usuario)){ return false; }
-	  $sql = "SELECT COUNT(1) AS nro FROM mfo_porcentajextest WHERE id_usuario = ?";
-		$rs = $GLOBALS['db']->auto_array($sql,array($usuario));
-		return $rs["nro"];	
-	}
 }  
 ?>

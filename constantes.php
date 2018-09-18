@@ -41,6 +41,5 @@ define('REGISTRO_PAGINA',10);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('1'=>'S&iacute;', '0'=>'No'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Casado(a)', '3'=>'En union', '4'=>'Divorciado(a)','5'=>'Viudo(a)'));
-define('ESTATUS_OFERTA', array('1'=>'No contratado', '2'=>'Contratado', '3'=>'En proceso'));
 define('CRON_RUTA',FRONTEND_RUTA.'cron/');
 ?>
