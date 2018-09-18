@@ -222,21 +222,14 @@
                                       <span class="text_icons_footer"><?php echo utf8_encode($sucursal["nombre_abr"]);?></span></a>
                                     <?php }?>                                                                                
                                     <span class="separate_social_country">|</span>
-                                    <!-- </div>                                        
                                     
-                                    <div class=""> -->
-                                        <span class="text_icons_footer">Siguenos en:</span>
-                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
-                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
-                                    
-                                    <a href="https://twitter.com/MiCamelloec" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">
-                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
-                                    
-                                    <a href="https://www.instagram.com/micamelloec/" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">
-                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
+                                    <span class="text_icons_footer">Siguenos en:</span>
+                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">                                                                        
+                                    <a href="https://twitter.com/MiCamelloec" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">                                                                        
+                                    <a href="https://www.instagram.com/micamelloec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">                                    
                                   </div>
                                 </div>
-                              </div><!-- End off widget item -->
+                              </div>
                             </div>
                           </div>
 

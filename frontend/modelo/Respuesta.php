@@ -9,10 +9,10 @@ class Modelo_Respuesta{
   	
   }
 
-  public static function totalxRasgo($test,$preguntas){
-  	if (empty($test) || empty($preguntas)){ return false; }
-    $sql = "select sum(valor) as total from mfo_respuesta where id_cuestionario = ? and estado = 1 and id_pre in(".$preguntas.");";
-    $rs = $GLOBALS['db']->auto_array($sql,array($test));
+  public static function totalxRasgo($test,$preguntas,$usuario){
+  	if (empty($test) || empty($preguntas) || empty($usuario)){ return false; }
+    $sql = "SELECT SUM(valor) AS total FROM mfo_respuesta WHERE id_cuestionario = ? AND id_usuario = ? AND estado = 1 AND id_pre IN(".$preguntas.")";
+    $rs = $GLOBALS['db']->auto_array($sql,array($test,$usuario));
     return (empty($rs['total'])) ? 0 : $rs['total'];
   }
 

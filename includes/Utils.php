@@ -288,6 +288,12 @@ class Utils{
 
   }
 
+  static public function crearArchivo($ruta,$nombre,$contenido){  
+    $fd = fopen($ruta.$nombre, "a");
+    $str = $contenido;  
+    fwrite($fd, $str . "\n");
+    fclose($fd);
+  }
 
 }
 ?>

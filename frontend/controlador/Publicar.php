@@ -46,9 +46,13 @@ class Controlador_Publicar extends Controlador_Base {
     } 
   }
 
+<<<<<<< HEAD
 
   public function mostrarDefault($idusu,$publicaciones_restantes){
 
+=======
+  public function mostrarDefault($idusu,$publicaciones_restantes){
+>>>>>>> FF
 
       $arrarea = Modelo_Area::obtieneListado();
       $arrinteres = Modelo_Interes::obtieneListado();
@@ -76,8 +80,12 @@ class Controlador_Publicar extends Controlador_Base {
       if ( Utils::getParam('form_publicar') == 1 ){
         try{
           // print_r($_POST['confidencial']);
+<<<<<<< HEAD
 
           $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
+=======
+          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'tipo_cont_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
+>>>>>>> FF
               
           $data = $this->camposRequeridos($campos);
           $data_idiomas = self::validarCampos($data);
@@ -87,8 +95,13 @@ class Controlador_Publicar extends Controlador_Base {
           $GLOBALS['db']->commit();
 
           $_SESSION['mostrar_exito'] = "La oferta se ha publicado correctamente";
+<<<<<<< HEAD
           $this->redirectToController('publicar');        
 
+=======
+          $this->redirectToController('publicar');
+                  
+>>>>>>> FF
         }
         catch( Exception $e ){
           $GLOBALS['db']->rollback();

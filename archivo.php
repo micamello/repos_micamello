@@ -51,7 +51,7 @@ switch ($carpeta){
 		}else{
 			$extension = 'application/msword';
 		}
-		$ruta = PATH_ARCHIVO.$archivo;
+		$ruta = PATH_ARCHIVO.$archivo;		
 		$resultado = file_exists($ruta);	  
 		$mostrar = (!$resultado) ? false : true;		
 	break;
@@ -83,7 +83,13 @@ if ($mostrar){
   readfile($ruta); 	
 }   
 else{
+<<<<<<< HEAD
 	echo 'Archivo no encontrado';
 }
+=======
+	Utils::doRedirect(PUERTO.'://'.HOST.'/error/paginanoencontrada.php');
+}
+
+>>>>>>> FF
 exit;
 ?>

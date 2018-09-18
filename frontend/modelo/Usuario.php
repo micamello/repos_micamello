@@ -27,6 +27,7 @@ class Modelo_Usuario{
 
   public static function autenticacion($username, $password){
     $password = md5($password);     
+<<<<<<< HEAD
     $sql = "SELECT u.id_usuario, u.username, u.correo, u.telefono, 
                    u.dni, u.nombres, u.fecha_nacimiento, u.foto,
                    u.tipo_usuario, u.id_ciudad, r.estado_civil,
@@ -36,6 +37,16 @@ class Modelo_Usuario{
             FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
             WHERE u.username = ? AND u.password = ? AND u.estado = 1";        
     return $GLOBALS['db']->auto_array($sql,array($username,$password)); 
+=======
+    $sql = "SELECT u.id_usuario, u.username, u.correo, u.telefono, u.dni, u.nombres,
+                   u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
+                   r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
+                   r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
+                   r.genero, r.apellidos
+            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+            WHERE (u.username = ? OR u.correo = ?) AND u.password = ? AND u.estado = 1";        
+    return $GLOBALS['db']->auto_array($sql,array($username,$username,$password)); 
+>>>>>>> FF
   }
 
   public static function busquedaPorCorreo($correo){
@@ -348,11 +359,17 @@ class Modelo_Usuario{
   }
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes){
+<<<<<<< HEAD
 
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada       
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
+=======
+    if ($tipousuario == Modelo_Usuario::CANDIDATO){   
+      //si no tiene hoja de vida cargada       
+      if (empty($infohv)){
+>>>>>>> FF
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }   
       $nrotest = Modelo_Cuestionario::totalTest();             
@@ -360,12 +377,18 @@ class Modelo_Usuario{
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
       if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-1)){
+<<<<<<< HEAD
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
+=======
+>>>>>>> FF
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
+<<<<<<< HEAD
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
+=======
+>>>>>>> FF
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }  
       else{                    
@@ -378,7 +401,10 @@ class Modelo_Usuario{
         Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
       }
       else{
+<<<<<<< HEAD
         $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
+=======
+>>>>>>> FF
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }          
     }

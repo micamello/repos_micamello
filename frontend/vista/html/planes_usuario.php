@@ -79,23 +79,24 @@
                                 <div class="astrodividermask"></div>
                                 <span><i><img width="100%" src="<?php echo PUERTO."://".HOST."/imagenes/logo.png"; ?>"></i></span>
                             </div>
-                           <div class="row">    
-                              <?php if (!empty($planes)){ ?>                
+                           <div class="row">   
+                              <?php echo $html;?> 
+                              <!--<?php //if (!empty($planes)){ ?>                
                                 <div class="col-md-12">        
                                   <h3 align="left">&nbsp;Seleccione un plan:</h3>
                                   <div class="pricingdiv">   
-                                    <?php echo $planes;?>  
+                                    <?php //echo $planes;?>  
                                   </div>                                
                                 </div>  
-                              <?php } ?> 
-                              <?php if (!empty($avisos)){ ?>     
+                              <?php //} ?> 
+                              <?php //if (!empty($avisos)){ ?>     
                                 <div class="col-md-12">        
                                   <h3 align="left">&nbsp;Seleccione un aviso:</h3>
                                   <div class="pricingdiv">
-                                    <?php echo $avisos;?>  
+                                    <?php //echo $avisos;?>  
                                   </div>                                 
                                 </div>
-                              <?php } ?> 
+                              <?php //} ?>-->
                            </div>
                             <br><br>
 
