@@ -15,8 +15,13 @@ class Controlador_Publicar extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
-    if (empty(Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']))){
+    if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
       $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
+      Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+    }
+
+    if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta')){
+      $_SESSION['mostrar_error'] = "No tiene permisos para publicar oferta";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
 
@@ -28,20 +33,20 @@ class Controlador_Publicar extends Controlador_Base {
         Vista::renderJSON($arrciudad);
       break;
       default:
-        $this->mostrarDefault();
+        $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
+        $publicaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idusu);
+        if ($publicaciones_restantes['p_restantes'] <= 0) {
+          $array = array('publicaciones_restantes'=>$publicaciones_restantes);
+          Vista::render('sin_publicacion', $array);          
+        }
+        else{
+          $this->mostrarDefault($idusu,$publicaciones_restantes);
+        }
       break;
     } 
   }
 
-  public function mostrarDefault(){
-
-    $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
-    $publicaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idusu);
-    if ($publicaciones_restantes['p_restantes'] == 0) {
-      $array = array('publicaciones_restantes'=>$publicaciones_restantes);
-      Vista::render('sin_publicacion', $array);
-      exit();
-    }
+  public function mostrarDefault($idusu,$publicaciones_restantes){
 
       $arrarea = Modelo_Area::obtieneListado();
       $arrinteres = Modelo_Interes::obtieneListado();
@@ -70,32 +75,17 @@ class Controlador_Publicar extends Controlador_Base {
         try{
           // print_r($_POST['confidencial']);
           $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'tipo_cont_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
+              
+          $data = $this->camposRequeridos($campos);
+          $data_idiomas = self::validarCampos($data);
 
+          $GLOBALS['db']->beginTrans();
+          self::guardarPublicacion($data, $data_idiomas, $idusu);
+          $GLOBALS['db']->commit();
 
-          if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-              if (($publicaciones_restantes['p_restantes'] > 0)) {
-                
-
-                $data = $this->camposRequeridos($campos);
-                $data_idiomas = self::validarCampos($data);
-
-                $GLOBALS['db']->beginTrans();
-                self::guardarPublicacion($data, $data_idiomas, $idusu);
-                $GLOBALS['db']->commit();
-
-                $_SESSION['mostrar_exito'] = "La oferta se ha publicado correctamente";
-                $this->redirectToController('publicar');
-              }
-              else
-              {
-                $_SESSION['mostrar_error'] = "Ya no dispone de publicaciones";
-              }
-          }
-          else
-          {
-            $_SESSION['mostrar_error'] = "No tiene permisos para publicar oferta";
-            $this->redirectToController('publicar');
-          }
+          $_SESSION['mostrar_exito'] = "La oferta se ha publicado correctamente";
+          $this->redirectToController('publicar');
+                  
         }
         catch( Exception $e ){
           $GLOBALS['db']->rollback();

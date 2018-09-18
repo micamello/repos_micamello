@@ -26,8 +26,15 @@ class Modelo_Usuario{
   }
 
   public static function autenticacion($username, $password){
-    $password = md5($password);             
-    return $GLOBALS['db']->auto_array("SELECT * FROM mfo_usuario WHERE username = ? AND password = ? AND estado = 1",array($username,$password)); 
+    $password = md5($password);     
+    $sql = "SELECT u.id_usuario, u.username, u.correo, u.telefono, u.dni, u.nombres,
+                   u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
+                   r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
+                   r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
+                   r.genero, r.apellidos
+            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+            WHERE (u.username = ? OR u.correo = ?) AND u.password = ? AND u.estado = 1";        
+    return $GLOBALS['db']->auto_array($sql,array($username,$username,$password)); 
   }
 
   public static function busquedaPorCorreo($correo){
@@ -200,6 +207,38 @@ class Modelo_Usuario{
     if (empty($id)){ return false; }
     $sql = "SELECT * FROM mfo_usuario WHERE id_usuario = ?";
     return $GLOBALS['db']->auto_array($sql,array($id)); 
+  }
+
+  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes){
+    if ($tipousuario == Modelo_Usuario::CANDIDATO){   
+      //si no tiene hoja de vida cargada       
+      if (empty($infohv)){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+      }   
+      $nrotest = Modelo_Cuestionario::totalTest();             
+      $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
+      
+      //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
+      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-1)){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }
+      //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
+      elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }  
+      else{                    
+        Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
+      }                
+    }
+    //si es empresa
+    else{  
+      if (isset($planes)){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
+      }
+      else{
+        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+      }          
+    }
   }
 
 }  

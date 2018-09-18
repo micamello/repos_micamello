@@ -76,28 +76,29 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
          .attr('transform', "translate(" + ((width + margin.left) / 6) + ", " + ((height + margin.top) / 1.5) + ")")
          .attr("font-size",25)
          .style("display", "none");      
-var trX = 180 - 230 * Math.cos(percToRad(percent / 2)); 
+
+var trX = 180 - 230 * Math.cos(percToRad(percent / 2));
 var trY = 195 - 210 * Math.sin(percToRad(percent / 2));
-// (180, 195) are the coordinates of the center of the gauge.
+
 displayValue = function() {
                 texts.append("text")
                     .text(function(){
-                        return dataset[0].value;
+                        return dataset[0].value+'%';
                     })
                     .attr('id', "Value")
                     .attr('transform', "translate(" + trX + ", " + trY+ ")")
-                    .attr("font-size",18)
+                    .attr("font-size",15)                                      
                     .style("fill", '#000000');
             }      
     texts.append("text")
         .text(function(){
-            return 0;
+            return 0+' ';
         })
         .attr('id', 'scale0')
         .attr('transform', "translate(" + ((width + margin.left) / 100 ) + ", " + ((height + margin.top) / 2) + ")")
         .attr("font-size", 15)
         .style("fill", "#000000");
-    texts.append("text")
+    /*texts.append("text")
         .text(function(){
             return 25;
         })
@@ -120,7 +121,7 @@ displayValue = function() {
         .attr('id', 'scale0')
         .attr('transform', "translate(" + ((width + margin.left) / 1.2 ) + ", " + ((height + margin.top) / 5) + ")")
         .attr("font-size", 15)
-        .style("fill", "#000000");                                        
+        .style("fill", "#000000");*/                                       
     texts.append("text")
         .text(function(){
             return gaugeMaxValue;
@@ -181,14 +182,3 @@ displayValue = function() {
   needle.moveTo(percent);
   setTimeout(displayValue, 3900);
 })();
-
-/**/
-$('#btn_subirhv').click(function(){
-  $('#msg_subirhv').modal();
-});
-
-$('#subirCV').change(function(e) {
-  $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
-  $('#texto_status').html('CV Cargado');
-  $('#texto_status').addClass('arch_cargado')     
-});

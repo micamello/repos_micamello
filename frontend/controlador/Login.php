@@ -20,12 +20,14 @@ class Controlador_Login extends Controlador_Base {
            if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){            
              throw new Exception("Error en el sistema, por favor intente nuevamente");
            }                                 
-           self::registroSesion($usuario);           
+           self::registroSesion($usuario);                   
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
-        }
-        Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+        }        
+        Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
+                                       $_SESSION['mfo_datos']['usuario']['id_usuario'],
+                                       $_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);   
       }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();

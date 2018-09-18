@@ -52,7 +52,7 @@ class Controlador_Plan extends Controlador_Base {
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario);
 
-    $tags = self::mostrarDefault(2);
+    $tags = self::mostrarDefault(2);    
     $tags["show_banner"] = 1;
     $tags["planUsuario"] = $planUsuario;
     $tags['breadcrumbs'] = $breadcrumbs;
@@ -64,10 +64,15 @@ class Controlador_Plan extends Controlador_Base {
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
     $sucursal = $_SESSION["mfo_datos"]["sucursal"]["id_sucursal"]; 
     
-    $planes = Modelo_Plan::listadoPlanAccion($tipousu,$sucursal,Modelo_Plan::PAQUETE);
-    $avisos = Modelo_Plan::listadoPlanAccion($tipousu,$sucursal,Modelo_Plan::AVISO); 
-    $tags['planes'] = trim(Vista::display('detalle_plan',array('arreglo'=>$planes)));    
-    $tags['avisos'] = trim(Vista::display('detalle_plan',array('arreglo'=>$avisos)));
+    if ($tipousu == Modelo_Usuario::CANDIDATO){
+      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,$sucursal);       
+    }
+    else{
+      $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1);
+      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE);
+      $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO);
+    }    
+
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
     $orden = rand(1,count($arrbanner))-1;
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
@@ -76,14 +81,17 @@ class Controlador_Plan extends Controlador_Base {
     $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
 
-    if($tipo == 1){
-      Vista::render('planes', $tags); 
-    }else{
-      return $tags;   
+    $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";          
+
+    if($tipo == 1){    
+      Vista::render($render, $tags); 
+    }else{            
+      $tags['html'] = Vista::display($render, $tags);    
+      return $tags;
     }
   }
 
-  public function compra(){
+  public function compra(){    
     $idplan = Utils::getParam('idplan','',$this->data);
     try{ 
       if (empty($idplan)){
@@ -117,8 +125,8 @@ class Controlador_Plan extends Controlador_Base {
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);
 
         if ($tipousu == Modelo_Usuario::CANDIDATO){
-          $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede cargar su hoja de vida"; 
-          $this->redirectToController('editarperfil');
+          $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede postular a una oferta"; 
+          $this->redirectToController('oferta');
         }
         else{
           $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede publicar una oferta"; 
@@ -136,12 +144,12 @@ class Controlador_Plan extends Controlador_Base {
         $provincia = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
         $tags["provincia"] = $provincia["id_provincia"];
         $tags["arrprovincia"] = Modelo_Provincia::obtieneListado();
-        $tags["arrciudad"] = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);                
+        $tags["arrciudad"] = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);      
+        $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
 
         $tags["template_js"][] = "validator";
         $tags["template_js"][] = "mic";
-        $tags["template_js"][] = "metodospago";
-        //$tags["template_js"][] = "editarPerfil";
+        $tags["template_js"][] = "metodospago";        
 
         Vista::render('metodos_pago', $tags);      
       }
@@ -191,10 +199,7 @@ class Controlador_Plan extends Controlador_Base {
       if (!Utils::valida_upload($_FILES['imagen'], 3)) {
         throw new Exception("La imagen debe ser en formato .jpg .jpeg .png y con un peso máximo de 1MB");
       }
-      if (!Utils::upload($_FILES['imagen'],$_SESSION['mfo_datos']['usuario']['id_usuario'],PATH_COMPROBANTE,3)){
-        throw new Exception("Error al cargar la imagen, por favor intente denuevo");
-      }
-
+      
       $archivo = Utils::validaExt($_FILES['imagen'],3);
       if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],$data["telefono"],
                                                   $data["dni"],$data["ciudad"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
@@ -202,17 +207,28 @@ class Controlador_Plan extends Controlador_Base {
         throw new Exception("Error al ingresar el deposito, por favor intente denuevo");
       }
 
-      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, el administrador verificará sus datos para aprobar el plan";      
+      $id_comprobante = $GLOBALS['db']->insert_id();
+
+      if (!Utils::upload($_FILES['imagen'],$id_comprobante,PATH_COMPROBANTE,3)){
+        throw new Exception("Error al cargar la imagen, por favor intente denuevo");
+      }
+
+      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, el administrador verificará sus datos para aprobar el plan";  
+      Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
     }
     catch(Exception $e){
-      $_SESSION['mostrar_error'] = $e->getMessage();  
-      
-    }
-    $this->redirectToController('planes');
+      $_SESSION['mostrar_error'] = $e->getMessage();            
+      Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.$data["idplan"].'/');             
+    }     
   }
 
   public function paypal(){
-    $_SESSION['mostrar_exito'] = "Compra exitosa, el administrador verificará sus datos para aprobar el plan";      
+    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
+    $orden = rand(1,count($arrbanner))-1;
+    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $tags["show_banner"] = 1;
+    
+    Vista::render('mensaje_paypal', $tags);       
   }
 }  
 ?>

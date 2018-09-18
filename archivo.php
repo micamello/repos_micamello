@@ -16,10 +16,8 @@ if(!Modelo_Usuario::estaLogueado()){
 }
 
 if(!empty($archivo)){
-
 	$idusuario = strstr($archivo, '.', true);
 	$ext = strstr($archivo, '.');
-
 	if (empty($idusuario)){
 		exit;
 	}
@@ -30,6 +28,7 @@ if(!empty($param1) && !empty($param2)){
 	if(!empty($archivo)){
 		$idusuario = $archivo["id_usuario"];
 		$ext = '.'.$param2;
+		$archivo = $idusuario.$ext;
 	}
 }
 
@@ -59,7 +58,7 @@ switch ($carpeta){
 		}else{
 			$extension = 'application/msword';
 		}
-		$ruta = PATH_ARCHIVO.$archivo;
+		$ruta = PATH_ARCHIVO.$archivo;		
 		$resultado = file_exists($ruta);	  
 		$mostrar = (!$resultado) ? false : true;		
 	break;
@@ -78,6 +77,9 @@ if ($mostrar){
 	header("Content-Disposition: inline; filename=".$archivo); 
 	readfile($ruta); 	
 }   
+else{
+	Utils::doRedirect(PUERTO.'://'.HOST.'/error/paginanoencontrada.php');
+}
 
 exit;
 ?>

@@ -1,13 +1,13 @@
 <?php
 class Vista {
   
-  public static function render($pagina, $template_vars = array(),$cabecera='cabecera', $piepagina='piepagina'){
+  public static function render($pagina, $template_vars = array(),$cabecera='cabecera', $piepagina='piepagina',$deshabilitarmenu=''){
     if (!empty($template_vars))
         extract($template_vars);
       
     $sess_err_msg = self::obtieneMsgError();
     $sess_suc_msg = self::obtieneMsgExito();
-    $menu = self::obtieneMenu();
+    $menu = self::obtieneMenu($deshabilitarmenu);
     if( !$sess_err_msg ){
       $sess_err_msg = '';
     }
@@ -73,7 +73,7 @@ class Vista {
     return $msg;
   }  
 
-  private static function obtieneMenu(){
+  private static function obtieneMenu($deshabilitarmenu){
     $menu = array();
     if( !Modelo_Usuario::estaLogueado() ){
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
@@ -81,18 +81,18 @@ class Vista {
       $menu["menu"][] = array("href"=>"#", "onclick"=>"modal_set(2);", "nombre"=>"Empresa");
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/login/", "nombre"=>"Iniciar sesi&oacute;n");
     }
-    else{
-      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
-      if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){        
-        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/oferta/", "nombre"=>"Empleos");
-        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/postulacion/", "nombre"=>"Mis Postulaciones");
+    else{      
+      $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
+      if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){                
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/oferta/", "nombre"=>"Empleos");
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/postulacion/", "nombre"=>"Mis Postulaciones");
       }
       else{
-        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/publicar/", "nombre"=>"Publicar Vacantes");
-        $menu["menu"][] = array("href"=>PUERTO."://".HOST."/vacantes/", "nombre"=>"Mis Vacantes");
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/publicar/", "nombre"=>"Publicar Vacantes");
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/vacantes/", "nombre"=>"Mis Vacantes");
       }
-      $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/planesUsuario/", "nombre"=>"Mis Planes");
-      $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/perfil/", "nombre"=>"Mi Perfil"); 
+      $menu["submenu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/planesUsuario/", "nombre"=>"Mis Planes");
+      $menu["submenu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/perfil/", "nombre"=>"Mi Perfil"); 
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/logout/", "nombre"=>"Cerrar Sesión");
     }
     return $menu;

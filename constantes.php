@@ -42,4 +42,6 @@ define('CONFIDENCIAL', array('1'=>'Sí', '0'=>'No'));
 define('LICENCIA', array('1'=>'Sí', '0'=>'No'));
 define('RESIDENCIA', array('1'=>'Sí', '0'=>'No'));
 define('VIAJAR', array('1'=>'Sí', '0'=>'No'));
+define('ESTATUS_OFERTA', array('1'=>'No contratado', '2'=>'Contratado', '3'=>'En proceso'));
+define('CRON_RUTA',FRONTEND_RUTA.'cron/');
 ?>

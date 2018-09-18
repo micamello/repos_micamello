@@ -6,8 +6,8 @@
         <form action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login">
           <div class="col-md-12">
             <div class="form-group ">
-              <label>Usuario:</label><div class="help-block with-errors"></div>
-              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: micamello" required>
+              <label>Usuario/Correo:</label><div class="help-block with-errors"></div>
+              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: palvarez/pedroalvarez@gmail.com" required>
               <input type="hidden" name="login_form" id="login_form" value="1">            
             </div>
           </div>
