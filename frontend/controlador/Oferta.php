@@ -36,12 +36,9 @@ class Controlador_Oferta extends Controlador_Base
         $breadcrumbs = array();
         $aspirantesXoferta = '';
 
-        if($opcion != 'vacantes'){
-            
-            //Valida los permisos 
+        if($vista == 'oferta'){
             //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);
         }
-
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == ''){
             $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'O'=>1,'Q'=>0);
@@ -184,7 +181,7 @@ class Controlador_Oferta extends Controlador_Base
             case 'detalleOferta':
 
                 //solo candidatos 
-                if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
+                if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO) || (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
 
@@ -201,6 +198,7 @@ class Controlador_Oferta extends Controlador_Base
                     }else{
                         self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
                     }
+                    Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
                 }
 
                 $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($idUsuario,$idOferta);

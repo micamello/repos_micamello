@@ -198,18 +198,20 @@
 
 													<b style='color: black;'><?php echo $o['titulo']; ?></b>  
 													<?php 
-													if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) {
+													if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
 
-												    	if(isset($o['tipo']) && $o['tipo'] == 2){ 						
-												    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
-												    	}else{
-															if(isset($postulacionesUserLogueado[$o["id_ofertas"]])){
-																$tipo = $postulacionesUserLogueado[$o["id_ofertas"]];
-																if($tipo == 2){
-														    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$tipo].'</span>';
-															    }else{
-															    	echo ' | <span class="etiquetaPostulado parpadea">Autopostulado '.POSTULACIONES[$tipo].'</span>';
-															    }
+														if($vista == 'postulacion'){
+													    	if(isset($o['tipo']) && $o['tipo'] == 2){ 						
+													    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
+													    	}else{
+																if(isset($postulacionesUserLogueado[$o["id_ofertas"]])){
+																	$tipo = $postulacionesUserLogueado[$o["id_ofertas"]];
+																	if($tipo == 2){
+															    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$tipo].'</span>';
+																    }else{
+																    	echo ' | <span class="etiquetaPostulado parpadea">Autopostulado '.POSTULACIONES[$tipo].'</span>';
+																    }
+																}
 															}
 														}
 													}else{
@@ -278,7 +280,7 @@
 					
 					<div class='panel panel-default'>
 			    		<div class='panel-body' align='center'>
-			      			<span>No se encontraron ofertas</span>
+			      			<span>No se encontraron resultados</span>
 			    		</div>
 			  		</div>
 			  	<?php 

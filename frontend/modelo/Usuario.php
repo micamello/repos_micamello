@@ -390,6 +390,8 @@ class Modelo_Usuario{
 =======
 >>>>>>> FF
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }elseif (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'busquedaOferta')) {
+          Utils::doRedirect(PUERTO.'://'.HOST.'/');  
       }  
       else{                    
         Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
