@@ -57,9 +57,7 @@ class Modelo_Oferta{
     AND o.id_usuario=u.id_usuario
     AND a.id_area = o.id_area
     AND n.id_nivelInteres = o.id_nivelInteres
-    AND j.id_jornada = o.id_jornada
-    AND o.id_usuario = ".$idusuario;
-
+    AND j.id_jornada = o.id_jornada";
 
     if(!empty($id)){
        $sql .= " AND ni.id_nivelIdioma_idioma = un.id_nivelIdioma_idioma
