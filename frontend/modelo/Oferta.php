@@ -1,7 +1,6 @@
 <?php
 class Modelo_Oferta{
-  
-  const NOMBRE_OFERTA = array('publicacion'=>'oferta','postulacion'=>'postulacion');
+
   const ESTATUS_OFERTA = array('1'=>'CONTRATADO','2'=>'NO CONTRATADO','3'=>'EN PROCESO');
 
   public static function obtieneNumero(){
@@ -16,30 +15,37 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
   
-  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false){
-    $sql = "SELECT 
-        o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
-    a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
 
-    r.edad_minima, r.licencia, r.viajar, u.nombres AS empresa, u.id_usuario";
+  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false){
+    
+    $sql = "SELECT ";
 
-    if (!empty($vista) && ($vista == 'postulacion' || $vista == 'vacantes')){ 
-       $sql .= ", pos.tipo, pos.id_auto as id_postulacion, pos.resultado, if(COUNT(pos.id_auto)=0,null,COUNT(pos.id_auto)) as aspirantes";
-    }
+    if($obtCantdRegistros == false){
+        $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
+      a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
+      r.edad_minima, r.licencia, r.viajar, u.nombres AS empresa, u.id_usuario";
 
-    if (!empty($vista) && $vista != 'vacantes'){ 
-       $sql .= ", GROUP_CONCAT(ni.id_nivelIdioma_idioma) as idiomas";
+      if (!empty($vista) && ($vista == 'postulacion')){ 
+         $sql .= ", pos.tipo, pos.id_auto as id_postulacion, pos.resultado";
+      }
+
+      if(!empty($id)){
+         $sql .= ", GROUP_CONCAT(ni.id_nivelIdioma_idioma) as idiomas";
+      }
+
+    }else{
+      $sql .= "count(1) as cantd_ofertas";
     }
 
 
     $sql .= " FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p";
 
+    if(!empty($vista) && ($vista == 'postulacion')){
 
-    if(!empty($vista) && ($vista == 'postulacion' || $vista == 'vacantes')){
       $sql .= ", mfo_postulacion pos";
     }
 
-    if(!empty($vista) && $vista != 'vacantes'){
+    if(!empty($id)){
       $sql .= ", mfo_usuario_nivelidioma un, mfo_nivelidioma_idioma ni";
     }
 
@@ -55,49 +61,49 @@ class Modelo_Oferta{
     AND o.id_usuario = ".$idusuario;
 
 
-    if(!empty($vista) && $vista != 'vacantes'){
-      $sql .= " AND ni.id_nivelIdioma_idioma = un.id_nivelIdioma_idioma
-      AND un.id_usuario = o.id_usuario";
-    }
-
     if(!empty($id)){
-       $sql .= " AND o.id_ofertas = ".$id;
+       $sql .= " AND ni.id_nivelIdioma_idioma = un.id_nivelIdioma_idioma
+      AND un.id_usuario = o.id_usuario AND o.id_ofertas = ".$id;
     }
 
-    if(!empty($vista) && ($vista == 'postulacion' || $vista == 'vacantes')){
-      $sql .= " AND pos.id_ofertas = o.id_ofertas";
+    if(!empty($vista) && ($vista == 'postulacion')){
+      $sql .= " AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
 
-    $sql .= " ORDER BY o.fecha_creado DESC";
+    if($obtCantdRegistros == false){
+      $sql .= " ORDER BY o.fecha_creado DESC";
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
 
-    $page = ($page - 1) * REGISTRO_PAGINA;
-    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    }else{
+      $rs = $GLOBALS['db']->auto_array($sql,array());
+      $rs = $rs['cantd_ofertas'];
+    }
 
-    return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    return $rs;
   }
 
-  public static function filtrarOfertas(&$filtros,$page,$vista=false,$idusuario=false){
+  public static function filtrarOfertas(&$filtros,$page,$vista=false,$idusuario=false,$obtCantdRegistros=false){
 
-    $sql = "SELECT 
-        o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
-    a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,r.edad_minima, r.licencia, r.viajar, u.nombres AS empresa, u.id_usuario";
+    $sql = "SELECT ";
 
-    if (!empty($vista) && ($vista == 'postulacion' || $vista == 'vacantes')){ 
-       $sql .= ", pos.tipo, pos.id_auto as id_postulacion, pos.resultado, if(COUNT(pos.id_auto)=0,null,COUNT(pos.id_auto)) as aspirantes";
-    }
+    if($obtCantdRegistros == false){
+      $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
+      a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,r.edad_minima, r.licencia, r.viajar, u.nombres AS empresa, u.id_usuario";
 
-    if (!empty($vista) && $vista != 'vacantes'){ 
-       $sql .= ", GROUP_CONCAT(ni.id_nivelIdioma_idioma) as idiomas";
+      if (!empty($vista) && ($vista == 'postulacion')){ 
+         $sql .= ", pos.tipo, pos.id_auto as id_postulacion, pos.resultado";
+      }
+
+    }else{
+      $sql .= "count(1) as cantd_ofertas";
     }
 
     $sql .= " FROM mfo_oferta o, mfo_usuario u, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelInteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p";
 
-    if(!empty($vista) && ($vista == 'postulacion' || $vista == 'vacantes')){
+    if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= ", mfo_postulacion pos";
-    }
-
-    if(!empty($vista) && $vista != 'vacantes'){
-      $sql .= ", mfo_usuario_nivelidioma un, mfo_nivelidioma_idioma ni";
     }
 
     $sql .= " WHERE o.estado = 1 
@@ -108,8 +114,7 @@ class Modelo_Oferta{
     AND n.id_nivelInteres = o.id_nivelInteres
     AND p.id_provincia = c.id_provincia
     AND a.id_area = o.id_area
-    AND j.id_jornada = o.id_jornada
-     AND pos.id_usuario = ".$idusuario;
+    AND j.id_jornada = o.id_jornada";
 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
        $sql .= " AND p.id_provincia = ".$filtros['P'];
@@ -141,13 +146,8 @@ class Modelo_Oferta{
       $sql .= " AND (u.nombres LIKE '%".$pclave."%' OR o.titulo LIKE '%".$pclave."%' OR o.descripcion LIKE '%".$pclave."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
     }
 
-    if(!empty($vista) && $vista != 'vacantes'){
-      $sql .= " AND ni.id_nivelIdioma_idioma = un.id_nivelIdioma_idioma
-      AND un.id_usuario = o.id_usuario";
-    }
-
-    if(!empty($vista) && ($vista == 'postulacion' || $vista == 'vacantes')){
-      $sql .= " AND pos.id_ofertas = o.id_ofertas";
+    if(!empty($vista) && ($vista == 'postulacion')){
+      $sql .= " AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
 
     if(!empty($filtros['O']) && $filtros['O'] != 0){
@@ -178,10 +178,16 @@ class Modelo_Oferta{
       $sql .= " ORDER BY empresa DESC";
     }
 
-    $page = ($page - 1) * REGISTRO_PAGINA;
-    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+    if($obtCantdRegistros == false){
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    }else{
+      $rs = $GLOBALS['db']->auto_array($sql,array());
+      $rs = $rs['cantd_ofertas'];
+    }
 
-    return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    return $rs;
   }
 
   public static function guardarRequisitosOferta($data){
@@ -197,6 +203,23 @@ class Modelo_Oferta{
     return $result;
   }
 
+  public static function aspirantesXofertas(){
+
+    $sql = "SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes FROM mfo_oferta o
+    LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
+    WHERE o.estado = 1
+    GROUP BY o.id_ofertas;";
+
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+    $datos = array();
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+        $datos[$value['id_ofertas']] = $value['cantd_aspirantes'];
+      }
+    }
+    return $datos;
+  }
   
 }  
 ?>
