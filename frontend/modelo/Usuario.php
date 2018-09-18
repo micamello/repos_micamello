@@ -156,26 +156,46 @@ class Modelo_Usuario{
   }
 
 
-  public static function obtenerAspirantes($idOferta,$page){
+  public static function obtenerAspirantes($idOferta,$page,$obtCantdRegistros=false){
 
-    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, r.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) as edad 
-            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_requisitosusuario r
+    $sql = "SELECT ";
+
+    if($obtCantdRegistros == false){
+      $sql .= "o.id_ofertas, u.id_usuario, u.username, u.nombres, r.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) as edad"; 
+    }else{
+      $sql .= "count(1) AS cantd_aspirantes";
+    }
+    
+    $sql .= " FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_requisitosusuario r
             WHERE u.id_usuario = p.id_usuario 
             AND p.id_ofertas = o.id_ofertas
             AND r.id_usuario = u.id_usuario
-            AND o.id_ofertas = $idOferta
-            ORDER BY p.fecha_postulado DESC";
+            AND o.id_ofertas = $idOferta";
 
-    $page = ($page - 1) * REGISTRO_PAGINA;
-    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+    if($obtCantdRegistros == false){
+      $sql .= " ORDER BY p.fecha_postulado DESC";
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      echo $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    }else{
+      $rs = $GLOBALS['db']->auto_array($sql,array()); 
+      $rs = $rs['cantd_aspirantes'];
+    }
+    return $rs; 
 
-    return $GLOBALS['db']->auto_array($sql,array(),true); 
   }
 
-  public static function filtrarAspirantes($idOferta,/*,$fecha,$prioridad,$ubicacion,$salario,$genero,$nacionalidad,$escolaridad,$pclave,*/&$filtros,$page){
+  public static function filtrarAspirantes($idOferta,&$filtros,$page,$obtCantdRegistros=false){
 
-    $sql = "SELECT o.id_ofertas, u.id_usuario, u.username, u.nombres, r.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) as edad 
-            FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_requisitosusuario r";
+    $sql = "SELECT ";
+
+    if($obtCantdRegistros == false){
+      $sql .= "o.id_ofertas, u.id_usuario, u.username, u.nombres, r.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) as edad"; 
+    }else{
+      $sql .= "count(1) AS cantd_aspirantes";
+    }
+
+    $sql .= " FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_requisitosusuario r";
 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
       $sql .= ", mfo_usuario_plan up, mfo_plan pl ";
@@ -309,9 +329,16 @@ class Modelo_Usuario{
       $sql .= " ORDER BY u.nombres";
     }
 
-    $page = ($page - 1) * REGISTRO_PAGINA;
-    $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-    return $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    if($obtCantdRegistros == false){
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    }else{
+      $rs = $GLOBALS['db']->auto_array($sql,array());
+      $rs = $rs['cantd_aspirantes'];
+    }
+
+    return $rs;
   }
 
   public static function busquedaPorId($id){

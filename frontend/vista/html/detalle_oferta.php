@@ -81,7 +81,7 @@
           <div class="col-md-4">
             <div class="panel panel-default shadow-panel1">
               <div class="panel-body">
-                <img style="margin-top: 0px; padding-bottom: 10px;" src="<?php echo $_SESSION['publicidad']; ?>">
+                <img class="publicidad" src="<?php echo $_SESSION['publicidad']; ?>">
                 <div>
                   <h5><b>Resumen de Empleo</b></h5>
                 </div>

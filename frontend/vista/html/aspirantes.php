@@ -160,7 +160,7 @@
 					</div>
                 	<div class="form-group">
                 		<?php 
-                			$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/'; 
+                			$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$id_oferta.'/1/'; 
                 			$ruta = Controlador_Aspirante::calcularRuta($ruta,'');
                 		?>
 			            <select id="escolaridad" class="form-control">
@@ -243,7 +243,7 @@
 							            	<tr>
 							            		<td><img class="img-circle" width="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
 
-							            		<td style="vertical-align: middle; text-align: justify;"><?php echo $a['nombres'].' '.$a['apellidos']; ?></td>
+							            		<td style="vertical-align: middle; text-align: justify;"><a href="<?php echo PUERTO.'://'.HOST.'/verDetalle/'.$a['id_usuario'].'/'; ?>"><?php echo $a['nombres'].' '.$a['apellidos']; ?></a></td>
 
 							            		<td style="vertical-align: middle;" class="text-center"><?php echo $a['edad']; ?></td>
 

@@ -25,7 +25,7 @@ class Controlador_Aspirante extends Controlador_Base
         $page = Utils::getParam('page', '1', $this->data);
         $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
         $type = Utils::getParam('type', '', $this->data); 
-        $vista = Utils::getParam('vista', '', $this->data);
+       // $vista = Utils::getParam('vista', '', $this->data);
         $breadcrumbs = array();
 
         switch ($opcion) {
@@ -167,9 +167,9 @@ class Controlador_Aspirante extends Controlador_Base
                     }
                 }
 
-                $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page);
+                $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
 
-                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'page'=>$page,'mostrar'=>$mostrar,'vista'=>$vista,'id_oferta'=>$id_oferta)); 
+                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'page'=>$page,'mostrar'=>$mostrar,'id_oferta'=>$id_oferta)); 
                  
                 $breadcrumbs['vacantes'] = 'Ver vacantes';
                 $breadcrumbs['aspirante'] = 'Ver Aspirantes';
@@ -183,13 +183,12 @@ class Controlador_Aspirante extends Controlador_Base
                     'link'=>$link,
                     'page' =>$page,
                     'mostrar'=>$mostrar,
-                    'vista'=>$vista,
                     'id_oferta'=>$id_oferta
                 );
                
                 $url = PUERTO.'://'.HOST.'/verAspirantes/'.$cadena;
                 
-                $pagination = new Pagination(count($aspirantesFiltrados),REGISTRO_PAGINA,$url);
+                $pagination = new Pagination(Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
                 $tags["template_js"][] = "aspirantes";
@@ -210,7 +209,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
-                $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page);
+                $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,false);
                 $breadcrumbs['vacantes'] = 'Ver vacantes';
                 $breadcrumbs['aspirante'] = 'Ver aspirantes';
 
@@ -222,16 +221,16 @@ class Controlador_Aspirante extends Controlador_Base
                     'aspirantes'       => $aspirantes,
                     'page' => $page,
                     'mostrar'=>$mostrar,
-                    'vista'=>$vista,
                     'id_oferta'=>$id_oferta,
                 );
 
                 $tags["template_js"][] = "aspirantes";
 
-                $url = PUERTO.'://'.HOST.'/'.$vista;
-                $pagination = new Pagination(count($aspirantes),REGISTRO_PAGINA,$url);
+                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$id_oferta;
+                $pagination = new Pagination(Modelo_Usuario::obtenerAspirantes($id_oferta,$page,true),REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
+
 
                 Vista::render('aspirantes', $tags);
             break;

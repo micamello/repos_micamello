@@ -19,7 +19,7 @@
 								    $ruta = Controlador_Oferta::calcularRuta($ruta,''); 
 								?>
 							    <span class="input-group-addon">
-							    	<a href="#" onclick="enviarPclave('<?php echo $ruta; ?>','<?php echo $page; ?>')"><i class="fa fa-search"></i>
+							    	<a href="#" onclick="enviarPclave('<?php echo $ruta; ?>','1')"><i class="fa fa-search"></i>
 							    	</a>
 							    </span>
 						    </div>
@@ -38,7 +38,7 @@
 				    foreach ($arrarea as $key => $v) {
 				    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/A'.$key.'/';
 						$ruta = Controlador_Oferta::calcularRuta($ruta,'A');
-						echo '<li class="lista"><a href="'.$ruta.$page.'/" class="area" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="area" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 					}
 				}
 				?></div>
@@ -55,7 +55,7 @@
 					    foreach ($arrprovincia as $key => $v) {
 					    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/P'.$key.'/';
 							$ruta = Controlador_Oferta::calcularRuta($ruta,'P');
-							echo '<li class="lista"><a href="'.$ruta.$page.'/" class="provincia" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+							echo '<li class="lista"><a href="'.$ruta.'1/" class="provincia" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 						}
 					}
 				?>
@@ -74,7 +74,7 @@
 						    foreach ($jornadas as $key => $v) {
 						    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/J'.$key.'/';
 								$ruta = Controlador_Oferta::calcularRuta($ruta,'J');
-								echo '<li class="lista"><a href="'.$ruta.$page.'/" class="jornada" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+								echo '<li class="lista"><a href="'.$ruta.'1/" class="jornada" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 							}
 						}
 					?>
@@ -126,7 +126,7 @@
 				            </select>
 				        </div>
 				        <div class="form-group">
-							<a class="btn btn-md btn-info" onclick="obtenerFiltro('<?php echo $ruta; ?>','<?php echo $page; ?>')">
+							<a class="btn btn-md btn-info" onclick="obtenerFiltro('<?php echo $ruta; ?>','1')">
 								Buscar
 						    </a>
 	                	</div>	
@@ -137,11 +137,7 @@
 
 		<div class="col-md-8">
 			<b>
-				<?php if($vista != 'postulacion'){ ?>
-					<span style="font-size: 17px;"><?php echo $breadcrumbs['oferta']; ?></span>
-				<?php }else{ ?>
-					<span style="font-size: 17px;"><?php echo $breadcrumbs['postulacion']; ?></span>
-				<?php } ?>
+				<span style="font-size: 17px;"><?php echo $breadcrumbs[$vista]; ?></span>
 			</b>
 			<br/><br/>
 			<div id="busquedas" class='container-fluid'>
@@ -159,14 +155,14 @@
 								$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/O1'.$_SESSION['mfo_datos']['Filtrar_ofertas']['O'].'/';
 								$ruta = Controlador_Oferta::calcularRuta($ruta,'O');
 							?>
-				           <a href="<?php echo $ruta.$page.'/'; ?>">Salario <i class="fa fa-sort"></i></a>
+				           <a href="<?php echo $ruta.'1/'; ?>">Salario <i class="fa fa-sort"></i></a>
 				        </th>
 				        <th class="text-center">
 							<?php 
 								$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/O2'.$_SESSION['mfo_datos']['Filtrar_ofertas']['O'].'/';
 								$ruta = Controlador_Oferta::calcularRuta($ruta,'O');
 							?>
-				           <a href="<?php echo $ruta.$page.'/'; ?>">Fecha <i class="fa fa-sort"></i></a>
+				           <a href="<?php echo $ruta.'1/'; ?>">Fecha <i class="fa fa-sort"></i></a>
 				        </th>
 				        <th colspan="2" class="text-center"></th>
 				      </tr>
@@ -218,9 +214,9 @@
 														}
 													}else{
 														if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { 
-															echo ' | <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/'.$o['id_ofertas'].'/">Ver Aspirantes ( '.$o['aspirantes'].' )</a>';
+															echo ' | <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/'.$o['id_ofertas'].'/">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</a>';
 														}else{
-															echo ' | <span style="cursor:pointer" onclick="abrirModal('."'Debe contratar un plan que permita ver Aspirantes'".')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$o['aspirantes'].' )</span>';
+															echo ' | <span style="cursor:pointer" onclick="abrirModal('."'Debe contratar un plan que permita ver Aspirantes'".')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</span>';
 														}
 													}
 													?>
@@ -243,7 +239,7 @@
 								  	
 								  				<div class="col-sm-1 col-md-2 col-lg-1" align="center" style="vertical-align: middle; padding-top: 5%;">
 													<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
-														<a href="<?php echo PUERTO."://".HOST."/postulacion/".$o['id_postulacion']."/"; ?>">
+														<a href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".$o['id_postulacion']."/"; ?>">
 															<i class="fa fa-trash fa-2x"></i>
 														</a>
 													<?php } ?>
