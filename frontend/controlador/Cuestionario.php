@@ -7,11 +7,6 @@ class Controlador_Cuestionario extends Controlador_Base {
   }
 
   public function construirPagina(){
-<<<<<<< HEAD
-  
-=======
-    
->>>>>>> FF
     $mostrar_dialog = false; 
 
     if( !Modelo_Usuario::estaLogueado() ){
@@ -57,10 +52,6 @@ class Controlador_Cuestionario extends Controlador_Base {
     $pregunta = self::obtienePreguntaActual();    
 
     $this->data["pregunta"] = $pregunta;
-<<<<<<< HEAD
-=======
-    
->>>>>>> FF
     $opciones = Modelo_Opcion::listadoxPregunta($pregunta["id_pre"]);
     $nro_opc = count($opciones);
     

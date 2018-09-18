@@ -24,15 +24,10 @@ class Controlador_Login extends Controlador_Base {
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
-<<<<<<< HEAD
-        }
-        //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);
-=======
         }        
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                        $_SESSION['mfo_datos']['usuario']['id_usuario'],
                                        $_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);   
->>>>>>> FF
       }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();

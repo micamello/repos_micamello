@@ -83,13 +83,8 @@ if ($mostrar){
   readfile($ruta); 	
 }   
 else{
-<<<<<<< HEAD
-	echo 'Archivo no encontrado';
-}
-=======
 	Utils::doRedirect(PUERTO.'://'.HOST.'/error/paginanoencontrada.php');
 }
 
->>>>>>> FF
 exit;
 ?>

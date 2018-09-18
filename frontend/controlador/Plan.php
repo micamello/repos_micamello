@@ -144,14 +144,9 @@ class Controlador_Plan extends Controlador_Base {
 
         $provincia = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
         $tags["provincia"] = $provincia["id_provincia"];
-<<<<<<< HEAD
         $tags["arrprovincia"] = Modelo_Provincia::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
         $tags["arrciudad"] = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);                
-=======
-        $tags["arrprovincia"] = Modelo_Provincia::obtieneListado();
-        $tags["arrciudad"] = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);      
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
->>>>>>> FF
 
         $tags["template_js"][] = "validator";
         $tags["template_js"][] = "mic";

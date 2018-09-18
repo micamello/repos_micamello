@@ -7,7 +7,6 @@ class Modelo_Notificacion{
 
   public static function notificacionxUsuario($usuario,$tipo){
   	if (empty($usuario) || empty($tipo)){ return false; }
-<<<<<<< HEAD
     $sql = "SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = ? AND tipo = ? LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($usuario,$tipo));
   }
@@ -32,16 +31,9 @@ class Modelo_Notificacion{
         WHERE
             tipo = 1 AND estado = 0
         GROUP BY id_usuario;";
-
-=======
     $sql = "SELECT url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = ? AND tipo = ? LIMIT 1";
->>>>>>> FF
     return $GLOBALS['db']->auto_array($sql,array($usuario,$tipo));
   }
   
 }  
 ?>
-<<<<<<< HEAD
-
-=======
->>>>>>> FF
