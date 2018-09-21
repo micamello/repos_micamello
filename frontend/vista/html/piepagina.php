@@ -1,4 +1,4 @@
-  </section>
+﻿  </section>
 
 <div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
   <div class="modal-dialog" role="document">    
@@ -203,9 +203,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="foot_div_section">
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Términos y Condiciones</a>| 
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Políticas de Privacidad</a>|
-                                    <a class="legal_info_content" href="http://www.blog.micamello.com.ec" target="blanked">Blog</a>|
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">T&eacute;rminos y Condiciones</a>| 
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Pol&iacute;ticas de Privacidad</a>|
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Pol&iacute;ticas de Cookies</a>|
+				    <a class="legal_info_content" href="http://blog.micamello.com.ec" target="blanked">Blog</a>|
 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a>
                                     
@@ -222,21 +223,14 @@
                                       <span class="text_icons_footer"><?php echo utf8_encode($sucursal["nombre_abr"]);?></span></a>
                                     <?php }?>                                                                                
                                     <span class="separate_social_country">|</span>
-                                    <!-- </div>                                        
                                     
-                                    <div class=""> -->
-                                        <span class="text_icons_footer">Siguenos en:</span>
-                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
-                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
-                                    
-                                    <a href="https://twitter.com/MiCamelloec" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">
-                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
-                                    
-                                    <a href="https://www.instagram.com/micamelloec/" target="blacked"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">
-                                    <!-- <span style="color: #000;font-size: 16px;" class="text_icons_footer"></span></a> -->
+                                    <span class="text_icons_footer">Siguenos en:</span>
+                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">                                                                        
+                                    <a href="https://twitter.com/MiCamelloec" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">                                                                        
+                                    <a href="https://www.instagram.com/micamelloec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">                                    
                                   </div>
                                 </div>
-                              </div><!-- End off widget item -->
+                              </div>
                             </div>
                           </div>
 
@@ -253,7 +247,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<!--<script src="<?php //echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>-->
+<script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
 
 <?php
@@ -265,4 +259,3 @@ if (isset($template_js) && is_array($template_js)){
 ?>
 </body>
 </html>
-

@@ -15,9 +15,13 @@ class Controlador_Aspirante extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
+        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes']){
+          Utils::doRedirect(PUERTO . '://' . HOST . '/');  
+        }
+
         //Valida los permisos 
-        if (!isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
-             $this->redirectToController('vacantes');
+        if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos')){
+           $this->redirectToController('vacantes');
         }
 
         $mostrar = Utils::getParam('mostrar', '', $this->data);
@@ -289,3 +293,4 @@ class Controlador_Aspirante extends Controlador_Base
     }
 
 }
+?>

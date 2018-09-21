@@ -8,7 +8,7 @@
 .pricingdiv{
   display: flex;
   flex-wrap: wrap;
-  font-size: 12px;
+  font-size: 14px;
   justify-content: center;
   font-family: 'Source Sans Pro', Arial, sans-serif;
 }
@@ -74,7 +74,7 @@
 
 /*very last LI within each pricing UL */
 .pricingdiv ul.theplan li:last-of-type{
-  text-align: center;
+  /*text-align: center;*/
   margin-top: auto; /*align last LI (price botton li) to the very bottom of UL */
 }  
 
@@ -126,4 +126,12 @@ a.pricebutton.active,
     display: block;
     
   }
+}
+
+.modal-dialog{
+  width: 400px;
+}
+
+.modal-footer{
+  margin-top:0px!important;
 }

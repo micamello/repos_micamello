@@ -1,10 +1,18 @@
 <?php
 set_time_limit(0);
-
 /*Script que permite la generacion de planes de los usuarios que cancelaron por medio de paypal*/
 
 require_once '../constantes.php';
 require_once '../init.php';
+
+//pregunta si ya se esta ejecutando el cron sino crea el archivo
+$resultado = file_exists(CRON_RUTA.'procesando_paypal.txt');
+if ($resultado){
+  exit;
+}
+else{
+  Utils::crearArchivo(CRON_RUTA,'procesando_paypal.txt','');
+}
 
 $registros = Modelo_Paypal::obtieneNoProcesados();
 if (empty($registros) || !is_array($registros)){
@@ -37,8 +45,10 @@ foreach($registros as $registro){
       	}
       	$email_subject = "Cancelación de Subscripción";
       	$email_body = "Estimado, ".$infousuario["nombres"]." ".$infousuario["apellidos"]."<br>";
-        $email_body .= "Su plan ".$infoplan["nombre"]." ha sido cancelado desde Paypal";
+        $email_body .= "Su plan ".$infoplan["nombre"]." ha sido cancelado desde Paypal<br>";
+        $email_body .= "El plan ser&aacute; desactivado hasta que Paypal apruebe la transacci&oacute;n";
     	}
+      //si ya tenia un plan anterior inactivo
     	else{
         if (!Modelo_Comprobante::guardarComprobante($registro["txn_id"],$cliente["nombres"],$cliente["correo"],
         	                                          $cliente["telefono"],$cliente["dni"],$cliente["ciudad"],
@@ -55,9 +65,17 @@ foreach($registros as $registro){
         }
         $email_subject = "Activación de Subscripción";
       	$email_body = "Estimado, ".$infousuario["nombres"]." ".$infousuario["apellidos"]."<br>";
-        $email_body .= "Su plan (".$infoplan["nombre"].") ha sido activado exitosamente";
+        $email_body .= "Su plan (".$infoplan["nombre"].") ha sido activado exitosamente <br>";
+        if ($infousuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
+          $email_body .= "Por favor de click en este enlace para realizar el tercer formulario "; 
+          $email_body .= "<a href='".PUERTO."://".HOST."/cuestionario/'>click aqu&iacute;</a> <br>";
+        }else{
+          $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
+          $email_body .= "<a href='".PUERTO."://".HOST."/publicar/'>click aqu&iacute;</a> <br>";
+        }        
     	}
     }
+    //si no tiene ese plan ingresado anteriormente
     else{
       if (!Modelo_Comprobante::guardarComprobante($registro["txn_id"],$cliente["nombres"],$cliente["correo"],
         	                                        $cliente["telefono"],$cliente["dni"],$cliente["ciudad"],
@@ -67,15 +85,21 @@ foreach($registros as $registro){
         throw new Exception("Error al ingresar el comprobante ".print_r($registro,true));
       }  
       
-      $id_comprobante = $GLOBALS['db']->insert_id();
-      Utils::log("ID COMPROBANTE".$id_comprobante);
+      $id_comprobante = $GLOBALS['db']->insert_id();      
 
       if (!Modelo_UsuarioxPlan::guardarPlan($cliente["usuario"],$cliente["plan"],$infoplan["num_post"],$infoplan["duracion"],$id_comprobante)){
         throw new Exception("Error en crear el plan ".print_r($registro,true));	
       }
       $email_subject = "Activación de Subscripción";
       $email_body = "Estimado, ".$infousuario["nombres"]." ".$infousuario["apellidos"]."<br>";
-      $email_body .= "Su plan (".$infoplan["nombre"].") ha sido activado exitosamente";
+      $email_body .= "Su plan (".$infoplan["nombre"].") ha sido activado exitosamente <br>";
+      if ($infousuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
+        $email_body .= "Por favor de click en este enlace para realizar el tercer formulario "; 
+        $email_body .= "<a href='".PUERTO."://".HOST."/cuestionario/'>click aqu&iacute;</a> <br>";
+      }else{
+        $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
+        $email_body .= "<a href='".PUERTO."://".HOST."/publicar/'>click aqu&iacute;</a> <br>";
+      }
     }
     
     if (!Modelo_Paypal::modificarEstado($registro["id_paypal"])){
@@ -98,6 +122,8 @@ foreach($registros as $registro){
   }
 }
 
+//elimina archivo de procesamiento
+unlink(CRON_RUTA.'procesando_paypal.txt');
 
 function obtenerDatosCliente($custom){
   if (empty($custom)){ return false; }

@@ -147,9 +147,9 @@ function eliminarMensajeError($id_div_error){
 if (document.getElementById("dni")) {
   var host = window.location.hostname;
   $("#dni").on("blur", function(){
-    if (host == 'localhost') {
+    //if (host == 'localhost') {
       validarDocumento(this);
-    }
+    //}
   })
 }
 

@@ -276,7 +276,7 @@ class Utils{
       }
       $arrayPalabras = array_unique($merge_palabras);
       $palabras_ordenadas = array_values($arrayPalabras);
-      $palabras_bd = (Modelo_PalabrasObscenas::obtienePalabras());
+      $palabras_bd = (Modelo_PalabrasObscenas::obtienePalabras());      
       for ($i=0; $i < count($palabras_ordenadas); $i++) { 
         for ($j=0; $j < count($palabras_bd); $j++) { 
           if ($palabras_bd[$j]['descripcion'] == $palabras_ordenadas[$i]) {
@@ -288,6 +288,12 @@ class Utils{
 
   }
 
+  static public function crearArchivo($ruta,$nombre,$contenido){  
+    $fd = fopen($ruta.$nombre, "a");
+    $str = $contenido;  
+    fwrite($fd, $str . "\n");
+    fclose($fd);
+  }
 
 }
 ?>

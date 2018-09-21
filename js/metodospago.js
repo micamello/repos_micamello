@@ -1,16 +1,24 @@
-$(window).on('load',function(){
-  $("#panel_P *").attr("disabled",true);
-  $("#panel_D *").attr("disabled",false);
+$(window).on('load',function(){  
+  $("#panel_1").show();
+  $("#panel_2").hide();
+  $("#panel_3").hide();
 });
 
 $("input[name=select_form]").click( function() {
-	if ($("input:checked").val() == 'P'){
-		$("#panel_P *").attr("disabled",false);
-		$("#panel_D *").attr("disabled",true);
+	if ($("input:checked").val() == '2'){
+		$("#panel_2").show();
+		$("#panel_1").hide();
+    $("#panel_3").hide();
 	}
+  else if($("input:checked").val() == '3'){
+    $("#panel_2").hide();
+    $("#panel_1").hide();
+    $("#panel_3").show();
+  }
 	else{
-    $("#panel_D *").attr("disabled",false);
-		$("#panel_P *").attr("disabled",true);
+    $("#panel_1").show();
+		$("#panel_2").hide();
+    $("#panel_3").hide();
 	}
 });
 

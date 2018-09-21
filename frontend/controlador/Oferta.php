@@ -1,13 +1,19 @@
 <?php
-class Controlador_Oferta extends Controlador_Base
-{
+class Controlador_Oferta extends Controlador_Base{
+    
+  function __construct(){
+    global $_SUBMIT;
+    $this->data = $_SUBMIT;
+  }
 
-    public function __construct()
-    {
-        global $_SUBMIT;
-        $this->data = $_SUBMIT;
+  public function construirPagina(){
+    if(!Modelo_Usuario::estaLogueado()) {
+      Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
+    //Obtiene todos los banner activos segun el tipo
+    $arrbanner     = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
 
+<<<<<<< HEAD
     public function construirPagina()
     {
 
@@ -148,36 +154,35 @@ class Controlador_Oferta extends Controlador_Base
                 }
 
                 $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,false);
+=======
+    //Muestra solo un banner de tipo candidato para no dar impresion que cambia de pagina
+    $orden = 0;
+    $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
+>>>>>>> 5efd6d6a17fec5f48166415883b8941978b02318
 
-                $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'vista'=>$vista));  
+    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PUBLICIDAD);
 
-                $tags = array(
-                    'breadcrumbs'=>$breadcrumbs,
-                    'arrarea'       => $arrarea,
-                    'arrprovincia'  => $arrprovincia,
-                    'jornadas'      => $arrjornadas,
-                    'ofertas'       => $postulacionesFiltradas,
-                    'postulacionesUserLogueado' => $postulacionesUserLogueado,
-                    'link'=>$link,
-                    'vista'=>$vista,
-                    'aspirantesXoferta'=>$aspirantesXoferta
-                );
+    //obtiene el orden del banner de forma aleatoria segun la cantidad de banner
+    $orden = rand(1, count($arrbanner)) - 1;
+    $_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
 
-                if($vista != 'vacantes'){
-                    $tags["show_banner"] = 1;
-                }
-                
-                $tags["template_js"][] = "validator";
-                $tags["template_js"][] = "oferta";
+    $opcion = Utils::getParam('opcion', '', $this->data);
+    $page = Utils::getParam('page', '1', $this->data);
+    $type = Utils::getParam('type', '', $this->data); 
+    $vista = Utils::getParam('vista', '', $this->data);
+    $postulacionesUserLogueado = array();
+    $breadcrumbs = array();
+    $aspirantesXoferta = '';
 
-                $url = PUERTO.'://'.HOST.'/'.$vista.'/'.$type.$cadena;
-                $pagination = new Pagination(Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,true),REGISTRO_PAGINA,$url);
-                $pagination->setPage($page);
-                $tags['paginas'] = $pagination->showPage();
+    if($vista == 'oferta'){
+        Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes'],$vista);
+    }
 
-                Vista::render('ofertas', $tags);
-            break;
+    if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == ''){
+        $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'O'=>1,'Q'=>0);
+    }
     
+<<<<<<< HEAD
             case 'detalleOferta':
 
                 //solo candidatos 
@@ -257,106 +262,313 @@ class Controlador_Oferta extends Controlador_Base
 
                 Vista::render('ofertas', $tags);
             break;
+=======
+    $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
 
-            default:
+    switch ($opcion) {
+    	case 'filtrar':
 
-                //solo candidatos 
-                if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
-                  Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
-                }
+          $arrarea       = Modelo_Area::obtieneListadoAsociativo();
+          $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+          $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
-                $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
+          unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['vista']);
+          
+          if($vista == 'oferta'){
+              $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario);
+              $breadcrumbs['oferta'] = 'Ofertas de empleo';
+          }else if($vista == 'vacantes'){
+              $breadcrumbs['vacantes'] = 'Mis Vacantes';
+              $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
+          }else{
+              $breadcrumbs['postulacion'] = 'Mis postulaciones';
+          }
 
-                if(!empty($eliminarPostulacion)){
-                    $r = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion);
-                    if(!$r){
-                        $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulación, intente de nuevo';
-                    }else{
-                        $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulacion exitosamente';
-                    }
-                }
+          $id_area = '';
+          $id_provincia = '';
+          $id_jornada = '';
+          $cadena = '';
+          $array_datos = $result = array();
 
-                $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
-                $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
+          foreach ($this->data as $param => $value) {
+              
+              $letra = substr($value,0,1);
+              $id = substr($value,1);
+              $cadena .= '/'.$value;
+              array_push($result, strval($value));
 
-                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
+              if(isset($_SESSION['mfo_datos']['Filtrar_ofertas'][$letra])){
 
-                if($vista != 'postulacion'){
-                    $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario,$page);
-                    $breadcrumbs['oferta'] = 'Ofertas de empleo';
-                }else{
-                    $breadcrumbs['postulacion'] = 'Mis postulaciones';
-                }
+                  if($letra == 'A' && $type == 1){
+                      
+                      if(isset($arrarea[$id])){
+                          $_SESSION['mfo_datos']['Filtrar_ofertas']['A'] = $id;
+                          $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id]);
+                      }
+                  }
+                  else if($letra == 'P' && $type == 1){
+                      
+                      if(isset($arrprovincia[$id])){
+                          $_SESSION['mfo_datos']['Filtrar_ofertas']['P'] = $id;
+                          $array_datos['P'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                      }
 
-                $tags = array(
-                    'breadcrumbs'=>$breadcrumbs,
-                    'arrarea'       => $arrarea,
-                    'arrprovincia'  => $arrprovincia,
-                    'jornadas'      => $jornadas,
-                    'ofertas'       => $ofertas,
-                    'postulacionesUserLogueado' => $postulacionesUserLogueado,
-                    'page' => $page,
-                    'vista'=>$vista
-                );
+                  }
+                  else if($letra == 'J' && $type == 1){
+                      
+                      if(isset($arrjornadas[$id])){
+                          $_SESSION['mfo_datos']['Filtrar_ofertas']['J'] = $id;
+                          $array_datos['J'] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
+                      }
 
-                $tags["template_js"][] = "validator";
-                $tags["template_js"][] = "oferta";
-                $tags["show_banner"] = 1;
-                
-                $url = PUERTO.'://'.HOST.'/'.$vista; 
-                $pagination = new Pagination(Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true),REGISTRO_PAGINA,$url);
-                $pagination->setPage($page);
-                $tags['paginas'] = $pagination->showPage();
+                  }else if($letra == 'O' && $type == 1){
+                  
+                      $_SESSION['mfo_datos']['Filtrar_ofertas']['O'] = $id; 
 
-                Vista::render('ofertas', $tags);
-                break;
+                  }
+                  else if($letra == 'Q' && $type == 1){
+
+                      $_SESSION['mfo_datos']['Filtrar_ofertas']['Q'] = $id;
+                      $array_datos['Q'] = array('id'=>$id,'nombre'=>$id);
+
+                  }else if($type == 2){
+
+                      $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
+                  }
+              }
+          }
+
+          foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $letra => $value) {
+
+              if($value!=0){
+
+                  if($letra == 'A'){
+                      if(isset($arrarea[$value])){
+                          $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
+                      }
+                  }
+
+                  if($letra == 'P'){
+                      if(isset($arrprovincia[$value])){
+                          $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
+                      }
+                  }
+                  if($letra == 'J'){
+                      if(isset($arrjornadas[$value])){
+                          $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrjornadas[$value]);
+                      }
+                  }
+                  if($letra == 'O'){
+                      $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                  }
+                  if($letra == 'Q'){
+                      $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                  }
+              }
+          }
+
+          $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,false);
+
+          $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'vista'=>$vista));  
+
+          $tags = array(
+              'breadcrumbs'=>$breadcrumbs,
+              'arrarea'       => $arrarea,
+              'arrprovincia'  => $arrprovincia,
+              'jornadas'      => $arrjornadas,
+              'ofertas'       => $postulacionesFiltradas,
+              'postulacionesUserLogueado' => $postulacionesUserLogueado,
+              'link'=>$link,
+              'vista'=>$vista,
+              'aspirantesXoferta'=>$aspirantesXoferta
+          );
+
+          if($vista != 'vacantes'){
+              $tags["show_banner"] = 1;
+          }
+          
+          $tags["template_js"][] = "validator";
+          $tags["template_js"][] = "oferta";
+
+          $url = PUERTO.'://'.HOST.'/'.$vista.'/'.$type.$cadena;
+          $pagination = new Pagination(Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,true),REGISTRO_PAGINA,$url);
+          $pagination->setPage($page);
+          $tags['paginas'] = $pagination->showPage();
+
+          Vista::render('ofertas', $tags);
+      break;
+      case 'detalleOferta':
+
+        //solo candidatos 
+        if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
+          Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
         }
+
+        $idOferta = Utils::getParam('id', '', $this->data);
+        $status = Utils::getParam('status', '', $this->data);
+
+        $aspiracion = Utils::getParam('aspiracion', '', $this->data);
+        $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$idUsuario,false);
+>>>>>>> 5efd6d6a17fec5f48166415883b8941978b02318
+
+        if (Utils::getParam('postulado') == 1) {
+            if(!empty($status)){
+                self::guardarEstatus($idUsuario,$idOferta,$status);
+            }else{
+                self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
+            } 
+        }
+
+        $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($idUsuario,$idOferta);
+
+        $breadcrumbs[$vista] = ucfirst($vista);
+        $breadcrumbs['detalleOferta'] = 'Ver detalle';
+
+        $tags = array(
+            'breadcrumbs'=>$breadcrumbs,
+            'oferta'=> $oferta,
+            'postulado'=>$postulado,
+            'vista'=>$vista
+        );
+
+        $tags["show_banner"] = 1;
+        $tags["template_js"][] = "validator";
+        $tags["template_js"][] = "oferta";
+
+        Vista::render('detalle_oferta', $tags);
+      break;
+      case 'vacantes':
+
+        $vista = $opcion;
+
+        //solo empresas
+        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA ){
+          Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+        }
+
+        $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
+        $arrarea       = Modelo_Area::obtieneListadoAsociativo();
+        $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+        $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
+        $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
+
+        $breadcrumbs['vacantes'] = 'Mis vacantes';
+
+        $tags = array(
+            'breadcrumbs'=>$breadcrumbs,
+            'arrarea'       => $arrarea,
+            'arrprovincia'  => $arrprovincia,
+            'jornadas'      => $jornadas,
+            'ofertas'       => $ofertas,
+            'page' => $page,
+            'vista'=>$vista,
+            'aspirantesXoferta'=>$aspirantesXoferta
+        );
+
+        $tags["template_js"][] = "oferta";
+
+        $url = PUERTO.'://'.HOST.'/'.$vista;
+        $pagination = new Pagination(Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true),REGISTRO_PAGINA,$url);
+        $pagination->setPage($page);
+        $tags['paginas'] = $pagination->showPage();
+
+        Vista::render('ofertas', $tags);
+
+      break;
+    	default:	      
+	      //solo candidatos 
+	      if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
+	        Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+	      }
+
+	      $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
+
+	      if(!empty($eliminarPostulacion)){
+	          $r = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion);
+	          if(!$r){
+	              $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulación, intente de nuevo';
+	          }else{
+	              $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulacion exitosamente';
+	          }
+	      }
+
+	      $arrarea       = Modelo_Area::obtieneListadoAsociativo();
+	      $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+	      $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
+
+	      $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
+
+	      if($vista != 'postulacion'){
+	          $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario,$page);
+	          $breadcrumbs['oferta'] = 'Ofertas de empleo';
+	      }else{
+	          $breadcrumbs['postulacion'] = 'Mis postulaciones';
+	      }
+
+	      $tags = array(
+	          'breadcrumbs'=>$breadcrumbs,
+	          'arrarea'       => $arrarea,
+	          'arrprovincia'  => $arrprovincia,
+	          'jornadas'      => $jornadas,
+	          'ofertas'       => $ofertas,
+	          'postulacionesUserLogueado' => $postulacionesUserLogueado,
+	          'page' => $page,
+	          'vista'=>$vista
+	      );
+
+	      $tags["template_js"][] = "validator";
+	      $tags["template_js"][] = "oferta";
+	      $tags["show_banner"] = 1;
+	      
+	      $url = PUERTO.'://'.HOST.'/'.$vista; 
+	      $pagination = new Pagination(Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true),REGISTRO_PAGINA,$url);
+	      $pagination->setPage($page);
+	      $tags['paginas'] = $pagination->showPage();
+
+	      Vista::render('ofertas', $tags);
+	      break;
     }
+  }
 
-    public function guardarPostulacion($id_usuario,$id_oferta,$aspiracion,$vista){
-
+  public function guardarPostulacion($id_usuario,$id_oferta,$aspiracion,$vista){
         try{
-
             if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'postulacion') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
-
                 if (!Modelo_Postulacion::postularse($id_usuario,$id_oferta,$aspiracion)) {
                     throw new Exception("Ha ocurrido un error la postulación, intente nuevamente");
                 }
                 $GLOBALS['db']->commit();
                 $_SESSION['mostrar_exito'] = 'Se ha postulado a esta oferta exitosamente';
-
+		        		$this->redirectToController('postulacion');
             }else{
-
-                $_SESSION['mostrar_error'] = "No tiene permiso para postularse, contrate un plan";
+                $_SESSION['mostrar_error'] = "No tiene permiso para postularse, contrate un plan"; 
                 $this->redirectToController('detalleOferta/'.$vista.'/'.$id_oferta);
             }
-
         }catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $GLOBALS['db']->rollback();
-            $this->redirectToController('detalle_oferta');
+            $this->redirectToController('detalleOferta/'.$vista.'/'.$id_oferta); 
         }
-    }
+  }
 
-    public function guardarEstatus($id_usuario,$id_oferta,$resultado){
+  public function guardarEstatus($id_usuario,$id_oferta,$resultado){
 
-        try{
+      try{
 
-            if (!Modelo_Postulacion::cambiarEstatus($id_usuario,$id_oferta,$resultado)) {
-                throw new Exception("Ha ocurrido un error en el cambio de estatus, intente nuevamente");
-            }
-            $GLOBALS['db']->commit();
-            $_SESSION['mostrar_exito'] = 'El estatus de la oferta fue editado exitosamente';
+          if (!Modelo_Postulacion::cambiarEstatus($id_usuario,$id_oferta,$resultado)) {
+              throw new Exception("Ha ocurrido un error en el cambio de estatus, intente nuevamente");
+          }
+          $GLOBALS['db']->commit();
+          $_SESSION['mostrar_exito'] = 'El estatus de la oferta fue editado exitosamente';
+    			$this->redirectToController('postulacion');
 
-        }catch (Exception $e) {
-            $_SESSION['mostrar_error'] = $e->getMessage();
-            $GLOBALS['db']->rollback();
-            $this->redirectToController('detalle_oferta');
-        }
-    }
+      }catch (Exception $e) {
+          $_SESSION['mostrar_error'] = $e->getMessage();
+          $GLOBALS['db']->rollback();
+          $this->redirectToController('detalle_oferta');
+      }
+  }
 
-    public static function calcularRuta($ruta,$letraDescartar){
+  public static function calcularRuta($ruta,$letraDescartar){
 
         foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $key => $v) {
 
@@ -379,3 +591,4 @@ class Controlador_Oferta extends Controlador_Base
         return $ruta;
     }
 }
+?>

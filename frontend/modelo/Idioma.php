@@ -5,8 +5,6 @@ class Modelo_Idioma{
     $sql = "SELECT * from mfo_idioma";
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
-
-  
   
 } 
 ?>
