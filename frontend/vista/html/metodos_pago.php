@@ -5,28 +5,36 @@
         <div class="breadcrumb">
           <h3>M&eacute;todos de pago</h3>
         </div>
-        <div align="center">
-          <label><input type="radio" name="select_form" id="db" checked="checked" value="D">&nbsp;Dep&oacute;sito Bancario</label>
-          <?php if (!empty($plan["codigo_paypal"])){ ?>
-            <label><input type="radio" name="select_form" id="pp" value="P">&nbsp;Paypal</label>
-          <?php } ?>
+        <div align="center">     
+          <?php foreach(Modelo_Comprobante::METODOS_PAGOS as $key=>$metodo){ ?>               
+            <label>
+              <input type="radio" id="db" name="select_form" <?php echo ($key == 1) ? 'checked="checked"' : '';?> value="<?php echo $key;?>">&nbsp;<?php echo $metodo;?>
+            </label>&nbsp;&nbsp;&nbsp;&nbsp;  
+          <?php } ?>            
         </div>
         <br>
-      </div>          
-      <div class="col-md-6">        
-        <div class="panel panel-default" id="panel_D">
+      </div>           
+      <div class="col-md-2"></div>
+      <div class="col-md-8">        
+        <div class="panel panel-default" id="panel_1">
           <div class="panel-body">
             <form role="form" name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">  
               <h4 class="text-center">Dep&oacute;sito bancario</h4>
               <input type="hidden" id="idplan" name="idplan" value="<?php echo $plan["id_plan"];?>">
               <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/circulo-morado.png"><br>
               <p class="text-justify">En caso de haber realizado el dep&oacute;sito, proceda a ingresar el número, subir imagen(fotograf&iacute;a) del comprobante y llenar datos que se solicitan en la parte inferior.</p>
-              <div align="center" class="breadcrumb">
-                <h6><strong>Banco: </strong>Banco xxxxxxxx</h6>
-                <h6><strong>N° de cuenta: </strong>00000000000000</h6>
-                <h6><strong>Nombre: </strong>Windman Hidrovo</h6>
-                <h6><strong>C&eacute;dula: </strong>000000000-0</h6>
-              </div><hr>
+              <?php if (isset($ctabancaria) && !empty($ctabancaria)){ ?>
+                <?php foreach($ctabancaria as $banco){?>
+                  <div align="center" class="breadcrumb">
+                    <h6><strong>Banco: </strong><?php echo $banco["nombre_banco"];?></h6>
+                    <h6><strong>N° de cuenta: </strong><?php echo $banco["numero_cta"];?></h6>
+                    <h6><strong>Nombre: </strong><?php echo $banco["nombres"]."&nbsp;".$banco["apellidos"];?></h6>
+                    <h6><strong>C&eacute;dula: </strong><?php echo $banco["dni"];?></h6>
+                    <h6><strong>Tipo de Cuenta: </strong><?php echo ($banco["tipocta"] == Modelo_Ctabancaria::AHORROS) ? "Ahorros" : "Cr&eacute;dito";?></h6>
+                  </div>
+                <?php }?>
+              <?php } ?>
+              <hr>
               <div>                                                
                 <h6 class="text-center">Datos del dep&oacute;sito</h6>
                 <div class="row">
@@ -103,10 +111,12 @@
             </form>
           </div>
         </div>        
-      </div>
+      </div>      
+      <div class="col-md-2"></div>
       <?php if (!empty($plan["codigo_paypal"])){ ?>
-      <div class="col-md-6">
-        <div class="panel panel-default" id="panel_P">
+      <div class="col-md-2"></div>  
+      <div class="col-md-8">
+        <div class="panel panel-default" id="panel_2">
           <div class="panel-body">
             <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/PayPal.jpg"><br><br>            
             <form action="<?php echo RUTA_PAYPAL;?>" method="post" name="form_paypal" id="form_paypal" role="form">
@@ -178,7 +188,78 @@
           </div>
         </div>    
       </div>  
-      <?php } ?>   
+      <div class="col-md-2"></div>
+      <?php } ?>
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+        <div class="panel panel-default" id="panel_3">
+          <div class="panel-body">
+            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo-paymentez.jpg"><br><br>            
+            <form action="<?php echo RUTA_PAYPAL;?>" method="post" name="form_paypal" id="form_paypal" role="form">
+              <div class="col-xs-12 col-md-12">                
+                <div class="form-group col-md-12">
+                  <label>Nombre y apellidos:</label><div class="help-block with-errors"></div>
+                  <input type="text" name="nombreP" id="nombreP" class="form-control" required>
+                </div>
+                <div class="form-group col-md-12">    
+                  <label>Correo:</label><div class="help-block with-errors"></div>
+                  <input type="email" name="correoP" id="correoP" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">    
+                  <label>Provincia:</label><div class="help-block with-errors"></div>
+                  <select class="form-control" name="provinciaP" id="provinciaP">
+                    <option value="">Seleccione una provincia</option>
+                    <?php if (!empty($arrprovincia)){
+                            foreach($arrprovincia as $key => $pr){ 
+                              echo "<option value='".$pr['id_provincia']."'";
+                              if ($provincia == $pr['id_provincia']){ 
+                                echo " selected='selected'";
+                              }
+                              echo ">".utf8_encode($pr['nombre'])."</option>";
+                            }
+                          } 
+                    ?>
+                  </select>                
+                </div>
+                <div class="form-group col-md-6">    
+                  <label>Ciudad:</label><div class="help-block with-errors"></div>
+                  <select id="ciudadP" name="ciudadP" class="form-control">
+                  <?php if(!empty($arrciudad)){
+                          foreach($arrciudad as $key => $ciudad){ 
+                            echo "<option value='".$ciudad['id_ciudad'];
+                            if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $key){  
+                                echo " selected='selected'";
+                            }
+                            echo "'>".utf8_encode($ciudad['ciudad'])."</option>";
+                          } 
+                        }else{ ?>
+                          <option value="">Seleccione una ciudad</option>
+                  <?php } ?>
+                  </select>
+                </div>                
+                <div class="form-group col-md-6">    
+                  <label>Tel&eacute;fono:</label><div class="help-block with-errors"></div>
+                  <input type="text" name="telefonoP" id="telefonoP" class="form-control" required>
+                </div>
+                <div class="form-group col-md-6">    
+                  <label>C&eacute;dula / RUC:</label><div class="help-block with-errors"></div>
+                  <input type="text" name="dniP" id="dniP" class="form-control" required>
+                </div>                 
+              </div>
+              <div class="col-xs-12 col-md-12">
+                <div class="breadcrumb" align="center">                  
+                  <label>Plan Seleccionado:</label><br><?php echo $plan["nombre"];?>
+                  <input type="hidden" id="idplanP" name="idplanP" value="<?php echo $plan["id_plan"];?>">
+                  <input type="hidden" id="usuarioP" name="usuarioP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>">
+                  <hr>
+                  <label>Valor:</label><?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($plan["costo"],2);?><br><br>                         
+                </div>                   
+              </div>                        
+            </form>
+          </div>
+        </div>    
+      </div>     
+      <div class="col-md-2"></div>
     </div>
   </div>
 </div>

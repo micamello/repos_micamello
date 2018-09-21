@@ -1,4 +1,4 @@
-<div class="row">
+﻿<div class="row">
   <div class="main_business">
     <div class="container">
       <div class="row" align="justify">
@@ -16,7 +16,7 @@
                       </div>
                       <?php } else {?>
                       <div class="confidencial">
-                          Nombre - confidencial
+                          Nombre de empresa - confidencial
                       </div>
                     <?php }?>
                     <div>
@@ -24,7 +24,7 @@
                     </div>
 
                     <div style="color: #333; font-size: 16px;">
-                        <?php echo $o['descripcion']; ?>
+                        <?php echo html_entity_decode($o['descripcion']); ?>
                     </div>
                     <br><br><h5><b>Requerimientos</b></h5>
                     <div>
@@ -55,7 +55,6 @@
                              foreach ($idiomas as $key => $value) {
                                 echo utf8_encode($value['descripcion'].' - '.$value['nombre']).'<br>';
                              }
-
                              ?>
                         </h5>
                     </div>
@@ -73,6 +72,13 @@
                             <?php if ($o['residencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
                         </h5>
                     </div>
+		   <div>
+                        <h5>
+                            <span class="titulos">Tiene licencia para conducir</span>
+                            <br>
+                            <?php if ($o['licencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
+                        </h5>
+                    </div>
                   </div>
                 </div>
                 <br><br>
@@ -81,7 +87,7 @@
           <div class="col-md-4">
             <div class="panel panel-default shadow-panel1">
               <div class="panel-body">
-                <img style="margin-top: 0px; padding-bottom: 10px;" src="<?php echo $_SESSION['publicidad']; ?>">
+                <img class="publicidad" src="<?php echo $_SESSION['publicidad']; ?>">
                 <div>
                   <h5><b>Resumen de Empleo</b></h5>
                 </div>
@@ -89,7 +95,7 @@
                 <div>
                   <h5>
                       <span class="titulos">Localización</span><br>
-                      - <?php echo $o['provincia']; ?>
+                      - <?php echo $o['provincia'].'/'.$o['ciudad']; ?>
                   </h5>
                 </div>
                 <div>
@@ -110,6 +116,19 @@
                         - <?php echo REQUISITO[$o['discapacidad']]; ?>
                     </h5>
                 </div>
+                <div>
+                    <h5>
+                        <span class="titulos">Cantidad de vacantes</span><br>
+                        - <?php echo $o['vacantes']; ?>
+                    </h5>
+                </div>
+                <div>
+                    <h5>
+                        <span class="titulos">Rango de edad</span><br>
+                        - <?php echo $o['edad_minima'].' a '.$o['edad_maxima']; ?> a&ntilde;os
+                    </h5>
+                </div>
+		<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
                 <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
                   <input type="hidden" name="postulado" id="postulado" value="1">
                   <?php if(!empty($vista) && $vista != 'postulacion'){ 
@@ -126,7 +145,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                               <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
-                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
+                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
                           </div>
                         </div>
                         <h5>
@@ -136,6 +155,7 @@
                     <?php } ?>
                   <?php }else{ ?>
                       <div align="center">
+			<br>
                         <label for="status">Estatus del candidato en la oferta</label>
                         <select class="form-control" name="status" id="status">
                           <option value="">Seleccione un estatus</option>
@@ -157,6 +177,7 @@
                       </div>
                   <?php } ?>
                 </form>
+		<?php } ?>
               </div>
             </div>
           </div>

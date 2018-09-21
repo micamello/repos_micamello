@@ -16,7 +16,11 @@
                                                 <th class="text-center">Nombre plan</th> 
                                                 <th class="text-center">Fecha inscripci&oacute;n</th>
                                                 <th class="text-center">Fecha Vencimiento</th>
+                                                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
                                                 <th class="text-center">Autopostulaciones Restantes</th>
+                                                <?php }else{ ?>
+                                                <th class="text-center">Publicaciones Restantes</th>
+                                                <?php } ?>	
                                                 <th class="text-center">Fecha Pago</th>
                                                 <th class="text-center">M&eacute;todo de Pago</th>
                                                 <th class="text-center">Estado de Pago</th>
@@ -54,7 +58,7 @@
                                                     <td><?php echo ESTADOS[$value['estado']]; ?></td>
                                                     <td>
                                                         <?php if($value['estado'] != 0){ ?>
-                                                            <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
+                                                            <a href="#<?php //echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
                                                                 <i class="fa fa-money"></i></i>
                                                             </a>
                                                         <?php }else{ echo '-'; } ?>
@@ -79,23 +83,24 @@
                                 <div class="astrodividermask"></div>
                                 <span><i><img width="100%" src="<?php echo PUERTO."://".HOST."/imagenes/logo.png"; ?>"></i></span>
                             </div>
-                           <div class="row">    
-                              <?php if (!empty($planes)){ ?>                
+                           <div class="row">   
+                              <?php echo $html;?> 
+                              <!--<?php //if (!empty($planes)){ ?>                
                                 <div class="col-md-12">        
                                   <h3 align="left">&nbsp;Seleccione un plan:</h3>
                                   <div class="pricingdiv">   
-                                    <?php echo $planes;?>  
+                                    <?php //echo $planes;?>  
                                   </div>                                
                                 </div>  
-                              <?php } ?> 
-                              <?php if (!empty($avisos)){ ?>     
+                              <?php //} ?> 
+                              <?php //if (!empty($avisos)){ ?>     
                                 <div class="col-md-12">        
                                   <h3 align="left">&nbsp;Seleccione un aviso:</h3>
                                   <div class="pricingdiv">
-                                    <?php echo $avisos;?>  
+                                    <?php //echo $avisos;?>  
                                   </div>                                 
                                 </div>
-                              <?php } ?> 
+                              <?php //} ?>-->
                            </div>
                             <br><br>
 

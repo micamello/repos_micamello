@@ -48,14 +48,11 @@ class Controlador_Publicar extends Controlador_Base {
 
 
   public function mostrarDefault($idusu,$publicaciones_restantes){
-
-
       $arrarea = Modelo_Area::obtieneListado();
       $arrinteres = Modelo_Interes::obtieneListado();
       $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal($_SESSION['mfo_datos']['sucursal']['id_pais']);
       $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
       $arrjornada = Modelo_Jornada::obtieneListado();
-      // $arrtipo = Modelo_TipoContrato::obtieneListado();
       $arridioma = Modelo_Idioma::obtieneListado();
       $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
       $arrescolaridad = Modelo_Escolaridad::obtieneListado();
@@ -66,7 +63,6 @@ class Controlador_Publicar extends Controlador_Base {
                     'arrprovinciasucursal'=>$arrprovinciasucursal,
                     'arrciudad'=>$arrciudad,
                     'arrjornada'=>$arrjornada,
-                    // 'arrtipo'=>$arrtipo,
                     'arridioma'=>$arridioma,
                     'arrnivelidioma'=>$arrnivelidioma,
                     'arrescolaridad'=>$arrescolaridad,
@@ -75,10 +71,7 @@ class Controlador_Publicar extends Controlador_Base {
       
       if ( Utils::getParam('form_publicar') == 1 ){
         try{
-          // print_r($_POST['confidencial']);
-
-          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);
-              
+          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);              
           $data = $this->camposRequeridos($campos);
           $data_idiomas = self::validarCampos($data);
 
@@ -87,8 +80,8 @@ class Controlador_Publicar extends Controlador_Base {
           $GLOBALS['db']->commit();
 
           $_SESSION['mostrar_exito'] = "La oferta se ha publicado correctamente";
-          $this->redirectToController('publicar');        
 
+          $this->redirectToController('publicar');
         }
         catch( Exception $e ){
           $GLOBALS['db']->rollback();
@@ -204,4 +197,4 @@ class Controlador_Publicar extends Controlador_Base {
     }
   }
 }
- ?>
+?>

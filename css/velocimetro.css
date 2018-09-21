@@ -6,6 +6,6 @@
 @media screen and (max-width: 600px) {
   .chart-gauge{ width:270px;height:210px; } 
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 600px) {	
   .chart-gauge{ width:400px;height:210px; } 
 }

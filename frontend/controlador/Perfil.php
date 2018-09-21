@@ -83,12 +83,6 @@ class Controlador_Perfil extends Controlador_Base
                     $nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
-                if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'cargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
-                    $cargarHv = 1;
-                } else {
-                    $cargarHv = 0;
-                }
-
                 $nrototaltest = Modelo_Cuestionario::totalTest();
 
                 $tags = array('escolaridad' => $escolaridad,
@@ -100,7 +94,6 @@ class Controlador_Perfil extends Controlador_Base
                     'provincia'                 => $provincia['id_provincia'],
                     'arrciudad'                 => $arrciudad,
                     'btnSig'                    => $btnSig,
-                    'cargarHv'                  => $cargarHv,
                     'imgArch1'                  => $imgArch1,
                     'imgArch2'                  => $imgArch2,
                     'msj1'                      => $msj1,
@@ -109,7 +102,6 @@ class Controlador_Perfil extends Controlador_Base
                     'btnDescarga'               => $btnDescarga,
                     'ruta_arch'                 => $ruta_arch,
                     'nrototaltest'              =>$nrototaltest,
-                    //'nrotestusuario'            =>$nrotestusuario,
                     'nacionalidades'            =>$nacionalidades,
                     'universidades'             =>$universidades
                 );
@@ -260,3 +252,4 @@ class Controlador_Perfil extends Controlador_Base
         }
     }
 }
+?>

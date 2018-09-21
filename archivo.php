@@ -26,6 +26,7 @@ if(!empty($param1) && !empty($param2)){
 		$archivo = $idusuario.$ext;
 	}
 }
+
 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO && 
 	  Utils::getArrayParam('id_usuario',$_SESSION['mfo_datos']['usuario']) != $idusuario){
 	$infoUsuario = Modelo_Usuario::busquedaPorId($idusuario);  
@@ -50,7 +51,7 @@ switch ($carpeta){
 		}else{
 			$extension = 'application/msword';
 		}
-		$ruta = PATH_ARCHIVO.$archivo; 
+		$ruta = PATH_ARCHIVO.$archivo;		
 		$resultado = file_exists($ruta);	  
 		$mostrar = (!$resultado) ? false : true;		
 	break;
@@ -60,7 +61,7 @@ if(!empty($param1) && !empty($param2) && $mostrar && $_SESSION['mfo_datos']['usu
 	$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idusuario);
 	$descargas = Modelo_Descarga::cantidadDescarga($idusuario);
 
-	$infoHv = Modelo_InfoHv::obtieneHv($idusuario);
+	$infoHv = Modelo_InfoHv::obtieneHv($idusuario);	
 	if(in_array('-1',$posibilidades) ){
 		Modelo_Descarga::registrarDescarga($infoHv[0]['id_infohv'],$idusuario);
 	}else{
@@ -68,19 +69,22 @@ if(!empty($param1) && !empty($param2) && $mostrar && $_SESSION['mfo_datos']['usu
 		if($cantidadRestante > 0){
 			Modelo_Descarga::registrarDescarga($infoHv[0]['id_infohv'],$idusuario);
 		}else{
-			exit;
+			$mostrar = false;
 		}
 	}
-	
 }
 
 if ($mostrar){	
   header("Pragma: no-cache"); 
-	header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); 
-	header("Expires: 0"); 
-	header("Content-type: ".$extension); 
-	header("Content-Disposition: inline; filename=".$archivo); 
-	readfile($ruta); 	
+  header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); 
+  header("Expires: 0"); 
+  header("Content-type: ".$extension); 
+  header("Content-Disposition: inline; filename=".$archivo); 
+  readfile($ruta); 	
 }   
+else{
+	Utils::doRedirect(PUERTO.'://'.HOST.'/error/paginanoencontrada.php');
+}
+
 exit;
 ?>

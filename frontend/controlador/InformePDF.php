@@ -8,8 +8,12 @@ class Controlador_InformePDF extends Controlador_Base
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
 
-    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
+    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+    }
+
+    if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
+      Utils::doRedirect(PUERTO.'://'.HOST.'/vacantes/');  
     }
 
     $username = Utils::getParam('username','',$this->data);
@@ -228,5 +232,4 @@ class Controlador_InformePDF extends Controlador_Base
 	    exit;
 	}
 }
-
- ?>
+?>

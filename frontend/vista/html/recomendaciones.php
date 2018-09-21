@@ -43,7 +43,7 @@
     </div>
     <div class="col-md-6">
         <div class="" align="center" style="margin: auto 0; margin-top: 80px;">
-            <img src="<?php echo PUERTO."://".HOST."/imagenes/logo.png";?>" class="img-responsive">
+            <img src="<?php echo PUERTO."://".HOST."/imagenes/logo.png";?>" class="img-responsive" style="max-width:100%;">
         </div>
     </div>
 </div>

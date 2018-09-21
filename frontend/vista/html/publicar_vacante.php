@@ -1,5 +1,6 @@
-<div class="container">
+﻿<div class="container">
 	<div class="">
+		<br>
 		<div class="breadcrumb">
 			<b>Publicar Vacante</b>
 			<?php 

@@ -7,7 +7,6 @@ class Controlador_Recomendacion extends Controlador_Base {
   }
   
   public function construirPagina(){
-
     try {
 
       if (Utils::getParam('enviarRecomendacion') == 1) {
