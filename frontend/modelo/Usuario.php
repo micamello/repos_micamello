@@ -126,7 +126,7 @@ class Modelo_Usuario{
     }
 
     if($tipo_usuario == 1){
-      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],/*,"apellidos"=>$data['apellidos'],*/"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']/*,"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['status_carrera'],"id_escolaridad"=>$data['escolaridad'],"id_univ"=>$data['universidad']*/,"id_nacionalidad"=>$data['id_pais']);
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_pais']);
     }else{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento']);
     }
@@ -331,7 +331,7 @@ class Modelo_Usuario{
 
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
-      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      echo $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
       $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     }else{
       $rs = $GLOBALS['db']->auto_array($sql,array());

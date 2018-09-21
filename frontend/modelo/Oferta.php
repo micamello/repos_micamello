@@ -22,7 +22,7 @@ class Modelo_Oferta{
 
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp,
-      a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
+      a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
       r.edad_minima, r.licencia, r.viajar, u.nombres AS empresa, u.id_usuario";
 
       if (!empty($vista) && ($vista == 'postulacion')){ 
@@ -46,7 +46,7 @@ class Modelo_Oferta{
     }
 
     if(!empty($id)){
-      $sql .= ", mfo_usuario_nivelidioma un, mfo_nivelidioma_idioma ni";
+      $sql .= ", mfo_oferta_nivelidioma ofn, mfo_nivelidioma_idioma ni";
     }
 
     $sql .= " WHERE o.estado = 1 
@@ -60,8 +60,8 @@ class Modelo_Oferta{
     AND j.id_jornada = o.id_jornada";
 
     if(!empty($id)){
-       $sql .= " AND ni.id_nivelIdioma_idioma = un.id_nivelIdioma_idioma
-      AND un.id_usuario = o.id_usuario AND o.id_ofertas = ".$id;
+       $sql .= " AND ni.id_nivelIdioma_idioma = ofn.id_nivelIdioma_idioma
+      AND ofn.id_ofertas = o.id_ofertas AND o.id_ofertas = ".$id;
     }
 
     if(!empty($vista) && ($vista == 'postulacion')){

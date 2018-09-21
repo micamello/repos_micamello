@@ -10,21 +10,24 @@
                 </div>
                 <div class="panel-body">
                   <div style="margin: 0;">
-                    <?php if ($o['confidencial'] == 0) {?>
-                      <div class="confidencial">
-                        <?php echo $o['empresa']; ?>
-                      </div>
-                      <?php } else {?>
-                      <div class="confidencial">
-                          Nombre - confidencial
-                      </div>
-                    <?php }?>
+                    <?php 
+                    if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
+                      if ($o['confidencial'] == 0) {?>
+                        <div class="confidencial">
+                          <?php echo $o['empresa']; ?>
+                        </div>
+                        <?php } else {?>
+                        <div class="confidencial">
+                            Nombre - confidencial
+                        </div>
+                      <?php }
+                    } ?>
                     <div>
                         <h5><b>Descripción</b></h5>
                     </div>
 
                     <div style="color: #333; font-size: 16px;">
-                        <?php echo $o['descripcion']; ?>
+                        <?php echo html_entity_decode($o['descripcion']); ?>
                     </div>
                     <br><br><h5><b>Requerimientos</b></h5>
                     <div>
@@ -44,7 +47,7 @@
                     <div>
                         <h5>
                             <span class="titulos">Nivel de Estudios</span><br>
-                             <?php echo $o['escolaridad']; ?>
+                             <?php echo utf8_encode($o['escolaridad']); ?>
                         </h5>
                     </div>
 
@@ -89,13 +92,13 @@
                 <div>
                   <h5>
                       <span class="titulos">Localización</span><br>
-                      - <?php echo $o['provincia']; ?>
+                      - <?php echo utf8_encode($o['provincia'].'/'.$o['ciudad']); ?>
                   </h5>
                 </div>
                 <div>
                   <h5>
                       <span class="titulos">Jornada</span><br>
-                      - <?php echo $o['jornada']; ?>
+                      - <?php echo utf8_encode($o['jornada']); ?>
                   </h5>
                 </div>
                 <div>
@@ -110,53 +113,67 @@
                         - <?php echo REQUISITO[$o['discapacidad']]; ?>
                     </h5>
                 </div>
-                <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
-                  <input type="hidden" name="postulado" id="postulado" value="1">
-                  <?php if(!empty($vista) && $vista != 'postulacion'){ 
+                <div>
+                    <h5>
+                        <span class="titulos">Cantidad de vacantes</span><br>
+                        - <?php echo $o['vacantes']; ?>
+                    </h5>
+                </div>
+                <div>
+                    <h5>
+                        <span class="titulos">Rango de edad</span><br>
+                        - <?php echo $o['edad_minima'].' - '.$o['edad_maxima']; ?>
+                    </h5>
+                </div>
+                <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+                  <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST.'/detalleOferta/'.$vista.'/'.$o['id_ofertas'].'/'; ?>">
+                    <input type="hidden" name="postulado" id="postulado" value="1">
+                    <?php if(!empty($vista) && $vista != 'postulacion'){ 
 
-                     ?>
-                    <?php if(!empty($postulado)){ ?>
-                      <div align="center">
-                        <h5>
-                         <span class="btn btn-danger">Ya aplico para la oferta</span>
-                        </h5>
-                      </div>
-                    <?php }else{ ?>
-                      <div align="center">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                              <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
-                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
-                          </div>
+                       ?>
+                      <?php if(!empty($postulado)){ ?>
+                        <div align="center">
+                          <h5>
+                           <span class="btn btn-danger">Ya aplico para la oferta</span>
+                          </h5>
                         </div>
-                        <h5>
-                          <button type="submit" class="btn btn-success">POSTULARSE</button>
-                        </h5>
-                      </div>
-                    <?php } ?>
-                  <?php }else{ ?>
-                      <div align="center">
-                        <label for="status">Estatus del candidato en la oferta</label>
-                        <select class="form-control" name="status" id="status">
-                          <option value="">Seleccione un estatus</option>
-                          <?php 
-                            foreach(ESTATUS_OFERTA as $key => $v){ 
+                      <?php }else{ ?>
+                        <div align="center">
+                          <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
+                                <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
+                            </div>
+                          </div>
+                          <h5>
+                            <button type="submit" class="btn btn-success">POSTULARSE</button>
+                          </h5>
+                        </div>
+                      <?php } ?>
+                    <?php }else{ ?>
+                        <div align="center">
+                          <label for="status">Estatus del candidato en la oferta</label>
+                          <select class="form-control" name="status" id="status">
+                            <option value="">Seleccione un estatus</option>
+                            <?php 
+                              foreach(ESTATUS_OFERTA as $key => $v){ 
 
-                                echo "<option value='".$key."'";
-                                if($key == strtoupper($postulado['0']['resultado'])){
-                                  echo " selected='selected'";
-                                }
-                                echo ">".utf8_encode($v)."</option>";
-                            } 
-                          ?>
-                        </select>
-                        <br>
-                        <h5>
-                          <button type="submit" class="btn btn-success">GUARDAR</button>
-                        </h5>
-                      </div>
-                  <?php } ?>
-                </form>
+                                  echo "<option value='".$key."'";
+                                  if($key == strtoupper($postulado['0']['resultado'])){
+                                    echo " selected='selected'";
+                                  }
+                                  echo ">".utf8_encode($v)."</option>";
+                              } 
+                            ?>
+                          </select>
+                          <br>
+                          <h5>
+                            <button type="submit" class="btn btn-success">GUARDAR</button>
+                          </h5>
+                        </div>
+                    <?php } ?>
+                  </form>
+                <?php } ?>
               </div>
             </div>
           </div>

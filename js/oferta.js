@@ -37,3 +37,10 @@ function obtenerFiltro(ruta,page){
 if(document.getElementById('form_postulacion')){
 	$("#form_postulacion").validator();
 }
+
+function verAspirantes($idOfertas){
+
+	var nueva_ruta = $('#puerto_host').val()+'/verAspirantes/'+$idOfertas;
+	alert(nueva_ruta);
+	//window.location = nueva_ruta;
+}

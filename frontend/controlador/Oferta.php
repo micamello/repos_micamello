@@ -37,7 +37,7 @@ class Controlador_Oferta extends Controlador_Base
         $aspirantesXoferta = '';
 
         if($vista == 'oferta'){
-            //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);
+            Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes']);
         }
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == ''){
@@ -181,7 +181,7 @@ class Controlador_Oferta extends Controlador_Base
             case 'detalleOferta':
 
                 //solo candidatos 
-                if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO) || (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
+                if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
 
@@ -256,7 +256,6 @@ class Controlador_Oferta extends Controlador_Base
                 $tags['paginas'] = $pagination->showPage();
 
                 Vista::render('ofertas', $tags);
-
             break;
 
             default:

@@ -26,3 +26,4 @@ class Modelo_Jornada
 	}
 
 }
+?>

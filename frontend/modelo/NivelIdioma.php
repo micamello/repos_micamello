@@ -6,4 +6,4 @@ class Modelo_NivelIdioma{
 	}
 
 }
- ?>
+?>
