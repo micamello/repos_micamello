@@ -1,4 +1,4 @@
-<div class="row">
+﻿<div class="row">
   <div class="main_business">
     <div class="container">
       <div class="row" align="justify">
@@ -12,15 +12,15 @@
                   <div style="margin: 0;">
                     <?php 
                     if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
-                      if ($o['confidencial'] == 0) {?>
+                      if ($o['confidencial'] == 0) { ?>
                         <div class="confidencial">
                           <?php echo $o['empresa']; ?>
                         </div>
-                        <?php } else {?>
+                      <?php } else {?>
                         <div class="confidencial">
-                            Nombre - confidencial
+                            Nombre de empresa - confidencial
                         </div>
-                      <?php }
+                    <?php }
                     } ?>
                     <div>
                         <h5><b>Descripción</b></h5>
@@ -58,7 +58,6 @@
                              foreach ($idiomas as $key => $value) {
                                 echo utf8_encode($value['descripcion'].' - '.$value['nombre']).'<br>';
                              }
-
                              ?>
                         </h5>
                     </div>
@@ -74,6 +73,13 @@
                             <span class="titulos">Disponibilidad de Cambio de Residencia</span>
                             <br>
                             <?php if ($o['residencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
+                        </h5>
+                    </div>
+		                <div>
+                        <h5>
+                            <span class="titulos">Tiene licencia para conducir</span>
+                            <br>
+                            <?php if ($o['licencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
                         </h5>
                     </div>
                   </div>
@@ -122,58 +128,57 @@
                 <div>
                     <h5>
                         <span class="titulos">Rango de edad</span><br>
-                        - <?php echo $o['edad_minima'].' - '.$o['edad_maxima']; ?>
+                        - <?php echo $o['edad_minima'].' a '.$o['edad_maxima']; ?> a&ntilde;os
                     </h5>
                 </div>
-                <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-                  <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST.'/detalleOferta/'.$vista.'/'.$o['id_ofertas'].'/'; ?>">
-                    <input type="hidden" name="postulado" id="postulado" value="1">
-                    <?php if(!empty($vista) && $vista != 'postulacion'){ 
-
-                       ?>
-                      <?php if(!empty($postulado)){ ?>
-                        <div align="center">
-                          <h5>
-                           <span class="btn btn-danger">Ya aplico para la oferta</span>
-                          </h5>
-                        </div>
-                      <?php }else{ ?>
-                        <div align="center">
-                          <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
-                                <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
-                            </div>
+		          <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+                <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
+                  <input type="hidden" name="postulado" id="postulado" value="1">
+                  <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
+                    <?php if(!empty($postulado)){ ?>
+                      <div align="center">
+                        <h5>
+                         <span class="btn btn-danger">Ya aplico para la oferta</span>
+                        </h5>
+                      </div>
+                    <?php }else{ ?>
+                      <div align="center">
+                        <div class="col-md-12">
+                          <div class="form-group">
+                              <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
+                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
                           </div>
                           <h5>
                             <button type="submit" class="btn btn-success">POSTULARSE</button>
                           </h5>
                         </div>
-                      <?php } ?>
-                    <?php }else{ ?>
-                        <div align="center">
-                          <label for="status">Estatus del candidato en la oferta</label>
-                          <select class="form-control" name="status" id="status">
-                            <option value="">Seleccione un estatus</option>
-                            <?php 
-                              foreach(ESTATUS_OFERTA as $key => $v){ 
-
-                                  echo "<option value='".$key."'";
-                                  if($key == strtoupper($postulado['0']['resultado'])){
-                                    echo " selected='selected'";
-                                  }
-                                  echo ">".utf8_encode($v)."</option>";
-                              } 
-                            ?>
-                          </select>
-                          <br>
-                          <h5>
-                            <button type="submit" class="btn btn-success">GUARDAR</button>
-                          </h5>
-                        </div>
+                      </div>
                     <?php } ?>
-                  </form>
-                <?php } ?>
+                  <?php }else{ ?>
+                      <div align="center">
+			                 <br>
+                        <label for="status">Estatus del candidato en la oferta</label>
+                        <select class="form-control" name="status" id="status">
+                          <option value="">Seleccione un estatus</option>
+                          <?php 
+                            foreach(ESTATUS_OFERTA as $key => $v){ 
+
+                                echo "<option value='".$key."'";
+                                if($key == strtoupper($postulado['0']['resultado'])){
+                                  echo " selected='selected'";
+                                }
+                                echo ">".utf8_encode($v)."</option>";
+                            } 
+                          ?>
+                        </select>
+                        <br>
+                        <h5>
+                          <button type="submit" class="btn btn-success">GUARDAR</button>
+                        </h5>
+                      </div>
+                  <?php } ?>
+                </form>
+		          <?php } ?>
               </div>
             </div>
           </div>

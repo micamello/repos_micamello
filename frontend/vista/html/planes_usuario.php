@@ -16,7 +16,11 @@
                                                 <th class="text-center">Nombre del Plan</th> 
                                                 <th class="text-center">Fecha de Inscripci&oacute;n</th>
                                                 <th class="text-center">Fecha de Vencimiento</th>
-                                                <th class="text-center">Autopostulaciones restantes</th>
+                                                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+                                                <th class="text-center">Autopostulaciones Restantes</th>
+                                                <?php }else{ ?>
+                                                <th class="text-center">Publicaciones Restantes</th>
+                                                <?php } ?>  
                                                 <th class="text-center">Fecha Pago</th>
                                                 <th class="text-center">M&eacute;todo de Pago</th>
                                                 <th class="text-center">Estado de Pago</th>
@@ -34,40 +38,40 @@
                                                     }
                                                 </style>
                                                 <tr align="center">
-                                                        <td style="text-align: center;" data-title="Nombre:"><?php echo utf8_encode($value['nombre']); ?></td>
-                                                        <td style="text-align: center; " data-title="Inscripci&oacute;n:"><?php echo date("d-m-Y", strtotime($value['fecha_compra'])); ?></td>
-                                                        <td style="text-align: center;" data-title="Vencimiento:"><?php if($value['fecha_caducidad'] != 'Infinito'){
-                                                            echo date("d-m-Y", strtotime($value['fecha_caducidad'])); 
-                                                            }else{ echo $value['fecha_caducidad']; } ?></td>
-                                                        <td style="text-align: center;" data-title="Autopostulaciones:"><?php echo $value['num_post_rest']; ?></td>
-                                                        <?php if($value['costo'] == 0){ ?>
-                                                            <td style="text-align: center;" data-title="M&eacute;todo" colspan="3">Plan Gratuito</td>
-                                                        <?php }else{ 
-                                                            if($value['id_comprobante'] != ""){                                                            
-                                                            $datos = Modelo_Comprobante::obtieneComprobante($value['id_comprobante']);                                                        
-                                                        ?>
-                                                            <td style="text-align: center;" data-title="Fecha Pago: "><?php echo date("d-m-Y", strtotime($datos[0]['fecha_creacion'])); ?></td>
-                                                            <td style="text-align: center;" data-title="M&eacute;todo"><?php echo Modelo_Comprobante::METODOS_PAGOS[$datos[0]['tipo_pago']]; ?></td>
-                                                            <td style="text-align: center;" data-title="Estado de Pago: "><?php echo  Modelo_Comprobante::TIPO_PAGOS[$datos[0]['estado']]; ?></td>
-                                                        <?php }else{ ?>
-                                                            <td style="text-align: center;" data-title="M&eacute;todo: " colspan="3">Plan Gratuito</td>
-                                                        <?php }
-                                                        } ?>
-                                                        <td style="text-align: center;" data-title="Estado del Plan: "><?php echo ESTADOS[$value['estado']]; ?></td>
-                                                        <td style="text-align: center;" data-title="Factura: ">
-                                                            <?php if($value['estado'] != 0){ ?>
-                                                                <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
-                                                                    <i class="fa fa-money"></i></i>
-                                                                </a>
-                                                            <?php }else{ echo '-'; } ?>
-                                                        </td>
-                                                        <td style="text-align: center;" data-title="Eliminar: ">
-                                                            <?php if($value['estado'] != 0){ ?>
-                                                                <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
-                                                            <?php }else{ echo '-'; } ?>
-                                                        </td>
+                                                    <td style="text-align: center;" data-title="Nombre:"><?php echo utf8_encode($value['nombre']); ?></td>
+                                                    <td style="text-align: center; " data-title="Inscripci&oacute;n:"><?php echo date("d-m-Y", strtotime($value['fecha_compra'])); ?></td>
+                                                    <td style="text-align: center;" data-title="Vencimiento:"><?php if($value['fecha_caducidad'] != 'Infinito'){
+                                                        echo date("d-m-Y", strtotime($value['fecha_caducidad'])); 
+                                                        }else{ echo $value['fecha_caducidad']; } ?></td>
+                                                    <td style="text-align: center;" data-title="Autopostulaciones:"><?php echo $value['num_post_rest']; ?></td>
+                                                    <?php if($value['costo'] == 0){ ?>
+                                                        <td style="text-align: center;" data-title="M&eacute;todo" colspan="3">Plan Gratuito</td>
+                                                    <?php }else{ 
+                                                        if($value['id_comprobante'] != ""){                                                            
+                                                        $datos = Modelo_Comprobante::obtieneComprobante($value['id_comprobante']);                                                        
+                                                    ?>
+                                                        <td style="text-align: center;" data-title="Fecha Pago: "><?php echo date("d-m-Y", strtotime($datos[0]['fecha_creacion'])); ?></td>
+                                                        <td style="text-align: center;" data-title="M&eacute;todo"><?php echo Modelo_Comprobante::METODOS_PAGOS[$datos[0]['tipo_pago']]; ?></td>
+                                                        <td style="text-align: center;" data-title="Estado de Pago: "><?php echo  Modelo_Comprobante::TIPO_PAGOS[$datos[0]['estado']]; ?></td>
+                                                    <?php }else{ ?>
+                                                        <td style="text-align: center;" data-title="M&eacute;todo: " colspan="3">Plan Gratuito</td>
+                                                    <?php }
+                                                    } ?>
+                                                    <td style="text-align: center;" data-title="Estado del Plan: "><?php echo ESTADOS[$value['estado']]; ?></td>
+                                                    <td style="text-align: center;" data-title="Factura: ">
+                                                        <?php if($value['estado'] != 0){ ?>
+                                                            <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
+                                                                <i class="fa fa-money"></i></i>
+                                                            </a>
+                                                        <?php }else{ echo '-'; } ?>
+                                                    </td>
+                                                    <td style="text-align: center;" data-title="Eliminar: ">
+                                                        <?php if($value['estado'] != 0){ ?>
+                                                            <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+                                                        <?php }else{ echo '-'; } ?>
+                                                    </td>
                                                 </tr>
                                             <?php } ?>
                                         <?php }else{ ?>
@@ -81,23 +85,24 @@
                                 <div class="astrodividermask"></div>
                                 <span><i><img width="100%" src="<?php echo PUERTO."://".HOST."/imagenes/logo.png"; ?>"></i></span>
                             </div>
-                           <div class="row">    
-                              <?php if (!empty($planes)){ ?>                
+                           <div class="row">   
+                              <?php echo $html;?> 
+                              <!--<?php //if (!empty($planes)){ ?>                
                                 <div class="col-md-12">        
                                   <h3 align="left">&nbsp;Seleccione un plan:</h3>
                                   <div class="pricingdiv">   
-                                    <?php echo $planes;?>  
+                                    <?php //echo $planes;?>  
                                   </div>                                
                                 </div>  
-                              <?php } ?> 
-                              <?php if (!empty($avisos)){ ?>     
+                              <?php //} ?> 
+                              <?php //if (!empty($avisos)){ ?>     
                                 <div class="col-md-12">        
                                   <h3 align="left">&nbsp;Seleccione un aviso:</h3>
                                   <div class="pricingdiv">
-                                    <?php echo $avisos;?>  
+                                    <?php //echo $avisos;?>  
                                   </div>                                 
                                 </div>
-                              <?php } ?> 
+                              <?php //} ?>-->
                            </div>
                             <br><br>
 

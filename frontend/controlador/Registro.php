@@ -114,13 +114,13 @@ class Controlador_Registro extends Controlador_Base {
         $GLOBALS['db']->beginTrans();
 
         self::guardarUsuario($data);
-        
-        //Utils::doRedirect(PUERTO.'://'.HOST.'/');  
+                
       }
       catch( Exception $e ){
         $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();  
       }
+      
       Utils::doRedirect(PUERTO.'://'.HOST.'/');
     }    
 
@@ -148,7 +148,7 @@ class Controlador_Registro extends Controlador_Base {
 
                   $requisitos = array('id_usuario'=>$user_id, 'estado_civil'=>1, 'anosexp'=>1, 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 'apellidos'=>$apellidos, 'id_univ'=>$universidad[0]['id_univ']);
 
-                  Utils::log("datos de requisitos: ".print_r($requisitos, true));
+                  //Utils::log("datos de requisitos: ".print_r($requisitos, true));
 
                   if(!Modelo_RequisitoxUsuario::crearRequisitoUsuario($requisitos)){
                     throw new Exception("Ha ocurrido un error el registrar los requisitos, intente nuevamente");
@@ -181,7 +181,7 @@ class Controlador_Registro extends Controlador_Base {
   public function correoActivacionCuenta($correo,$nombres,$token){
     $asunto = "Activación de cuenta";
     $body = "Estimado, ".$nombres."<br>";
-    $body .= "Por favor de click en este enlace para activar su contrase&ntilde;a ";
+    $body .= "Por favor de click en este enlace para activar su cuenta de usuario ";
     $body .= "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a> <br>";
     if (Utils::envioCorreo($correo,$asunto,$body)){
       return true;

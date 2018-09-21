@@ -257,7 +257,7 @@
 									            			$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
 									            			
 									            			if(in_array('-1',$posibilidades) ){
-																echo '<a title="Descargar Hoja de vida" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
+																echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
 															}else{
 																$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
 
@@ -277,7 +277,7 @@
 												<td title="Descargar Informe de personalidad" data-title="Informe" style="vertical-align: middle; text-align: center;">
 								            		<?php 
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-															echo '<a href="'.PUERTO."://".HOST."/informePDF/".$a['username'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
+															echo '<a target="_blank" href="'.PUERTO."://".HOST."/informePDF/".$a['username'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
 														}else{
 															echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar Informes de personalidad'".')"><i class="fa fa-clipboard fa-1x"></i></a>';
 														}

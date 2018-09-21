@@ -188,8 +188,8 @@ class Database{
     $this->result = mysqli_query($this->connection, $query);
     $this->total_queries++;
     if ($this->result === FALSE){
-      $msg = "SQL ERROR: ". $this->error();
-      Utils::log($msg);
+      //$msg = "SQL ERROR: ". $this->error();
+      //Utils::log($msg);
     }
     $this->_trans_status = false;      
     $this->lastQuery = $query;

@@ -32,6 +32,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
                             <br>
                         </div>
                     </div>
+                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
                     <div class="panel panel-default shadow" style="border-radius: 20px;">
                     	
                     	<img id="archivo" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/Hv.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
@@ -67,6 +68,8 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
                         if($btnDescarga == 1 && $btnSubir == 1 && $btnSig == 0){ echo '<br><br><br>'; } ?>
                     </div>
+
+                  <?php } ?>
                 </div>
 	            <div class="col-md-8">
 	                <div class="panel panel-default shadow" style="border-radius: 20px;">

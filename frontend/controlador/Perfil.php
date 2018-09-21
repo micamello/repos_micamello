@@ -252,3 +252,4 @@ class Controlador_Perfil extends Controlador_Base
         }
     }
 }
+?>

@@ -1,14 +1,12 @@
 <?php
 class Modelo_Provincia{
   
-  /*public static function obtieneListado($idSucursal,$id_pais){
+  public static function obtieneListado(){
 
-
-    $sql = "SELECT id_provincia, nombre FROM mfo_provincia p 
-            WHERE id_pais = '$id_pais' ORDER BY nombre ASC";
+    $sql = "SELECT * FROM mfo_provincia";
     return $GLOBALS['db']->auto_array($sql,array(),true);
 
-  }*/
+  }
 
   public static function obtieneProvincia($idCiudad){
 

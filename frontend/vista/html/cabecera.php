@@ -15,12 +15,12 @@
   <link rel="icon" type="image/x-icon" href="<?php echo PUERTO."://".HOST;?>/imagenes/favicon.ico">
 
   <!--Google Font link-->
-  <link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+  <!--<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">-->
   <!-- <link rel="stylesheet" type="text/css" href="<?php #echo PUERTO."://".HOST;?>/css/demo.css" /> -->
 
   <!-- <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/style.css" /> -->
-  <link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>
+  <!--<link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css'>-->
+  <!--<link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>-->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
   <!-- Archivo css micamello mic.css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">

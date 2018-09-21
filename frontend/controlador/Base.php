@@ -51,3 +51,4 @@ abstract class Controlador_Base{
   public abstract function construirPagina();
   
 }
+?>
