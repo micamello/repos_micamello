@@ -11,7 +11,7 @@ class Controlador_Plan extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
     $breadcrumbs = array();
-    $opcion = Utils::getParam('opcion','',$this->data);  
+    $opcion = Utils::getParam('opcion','',$this->data);      
     switch($opcion){      
       case 'compra':
         $this->compra();
@@ -25,7 +25,7 @@ class Controlador_Plan extends Controlador_Base {
       case 'planes_usuario':
         $this->planesUsuario();
       break;
-      default:
+      default:        
         $this->mostrarDefault(1);
       break;
     }   
@@ -144,7 +144,7 @@ class Controlador_Plan extends Controlador_Base {
 
         $provincia = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
         $tags["provincia"] = $provincia["id_provincia"];
-        $tags["arrprovincia"] = Modelo_Provincia::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
+        $tags["arrprovincia"] = Modelo_Provincia::obtieneListado();
         $tags["arrciudad"] = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);                
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
 

@@ -31,7 +31,7 @@ class Modelo_Usuario{
                    u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
                    r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
                    r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
-                   r.genero, r.apellidos
+                   r.genero, r.apellidos, u.id_nacionalidad
             FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
             WHERE (u.username = ? OR u.correo = ?) AND u.password = ? AND u.estado = 1";        
     return $GLOBALS['db']->auto_array($sql,array($username,$username,$password)); 
@@ -212,21 +212,20 @@ class Modelo_Usuario{
 
     //segun el escogido calcular fecha y ponersela a la consulta
     if(!empty($filtros['F']) && $filtros['F'] != 0){
-
        if($filtros['F'] == 1){
-        $sql .= " AND p.fecha_postulado BETWEEN DATE_FORMAT(NOW(), '%Y-%m-%d 00:00:00') AND NOW()";
+        $sql .= " AND DATE_FORMAT(p.fecha_postulado, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
        
        if($filtros['F'] == 2){
-        $sql .= " AND p.fecha_postulado BETWEEN DATE_SUB(NOW(), INTERVAL 3 DAY) AND NOW()";
+        $sql .= " AND DATE_FORMAT(p.fecha_postulado, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 DAY), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
        
        if($filtros['F'] == 3){
-        $sql .= " AND p.fecha_postulado BETWEEN DATE_SUB(NOW(), INTERVAL 1 WEEK) AND NOW()";
+         $sql .= " AND DATE_FORMAT(p.fecha_postulado, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 WEEK), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
 
        if($filtros['F'] == 4){
-        $sql .= " AND p.fecha_postulado BETWEEN DATE_SUB(NOW(), INTERVAL 1 MONTH) AND NOW()";
+        $sql .= " AND DATE_FORMAT(p.fecha_postulado, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
     }
     
@@ -346,7 +345,7 @@ class Modelo_Usuario{
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
-  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes){
+  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){
 
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada       
@@ -366,11 +365,14 @@ class Modelo_Usuario{
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
-      }elseif (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'busquedaOferta')) {
-          Utils::doRedirect(PUERTO.'://'.HOST.'/');  
+      }
+      elseif (isset($planes) && !Modelo_PermisoPlan::tienePermiso($planes, 'busquedaOferta')) {
+        Utils::doRedirect(PUERTO.'://'.HOST.'/');  
       }  
-      else{                    
-        Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
+      else{           
+        if ($controlador == 'login'){
+          Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
+        }                         
       }                
     }
     //si es empresa

@@ -1,4 +1,4 @@
-  </section>
+﻿  </section>
 
 <div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
   <div class="modal-dialog" role="document">    
@@ -203,9 +203,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="foot_div_section">
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Términos y Condiciones</a>| 
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Políticas de Privacidad</a>|
-                                    <a class="legal_info_content" href="http://www.blog.micamello.com.ec" target="blanked">Blog</a>|
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">T&eacute;rminos y Condiciones</a>| 
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Pol&iacute;ticas de Privacidad</a>|
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Pol&iacute;ticas de Cookies</a>|
+				    <a class="legal_info_content" href="http://blog.micamello.com.ec" target="blanked">Blog</a>|
 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a>
                                     
@@ -246,7 +247,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<!--<script src="<?php //echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>-->
+<script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
 
 <?php
@@ -258,4 +259,3 @@ if (isset($template_js) && is_array($template_js)){
 ?>
 </body>
 </html>
-

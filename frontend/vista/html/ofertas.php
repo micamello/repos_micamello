@@ -183,7 +183,7 @@
 											<div class="col-sm-2 col-md-3 col-lg-2" style="padding-left: 0px;" align='center'>
 												<img id="imgPerfil" class="img-responsive postulacion'" src="<?php if($vista != 'postulacion' && $vista != 'vacantes'){ echo PUERTO.'://'.HOST.'/imagenes/logo.png'; }else{ echo Modelo_Usuario::obtieneFoto($o['id_usuario']); } ?>" alt="icono">
 								  			</div>
-								  			<div class='col-sm-9 col-md-7 col-lg-<?php if($vista == 'postulacion'){ echo '9'; }else{ echo '10'; }?>'>
+								  			<div class='col-sm-9 col-md-7 col-lg-<?php if($vista == 'oferta'){ echo '10'; }else{ echo '9'; }?>'>
 												<span>
 											    	<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) { ?>
 												   		
@@ -192,7 +192,7 @@
 															}
 															else
 															{
-																echo '<h5 class="empresa"><i>Nombre - confidencial</i></h5>';
+																echo '<h5 class="empresa"><i>Nombre de la empresa - confidencial</i></h5>';
 															} 
 													} ?>
 
@@ -215,8 +215,10 @@
 															}
 														}
 													}else{
-														if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { 
+														if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $aspirantesXoferta[$o['id_ofertas']] != 0) { 
 															echo ' | <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/'.$o['id_ofertas'].'/">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</a>';
+														}elseif($aspirantesXoferta[$o['id_ofertas']] == 0){
+															echo ' | <span class="btn-xs btn-danger parpadea">No tiene Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</span>';
 														}else{
 															echo ' | <span style="cursor:pointer" onclick="abrirModal('."'Debe contratar un plan que permita ver Aspirantes'".')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</span>';
 														}
@@ -233,7 +235,7 @@
 												<br>
 												<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 													<div class="row">
-														<p style="color:#C3BABA" class="cortar" align="justify"><?php echo $o['descripcion']; ?></p>
+														<p style="color:#C3BABA" class="cortar" align="justify"><?php echo html_entity_decode($o['descripcion']); ?></p>
 													</div>
 												<?php } ?>
 								  			</div>
@@ -245,6 +247,13 @@
 															<i class="fa fa-trash fa-2x"></i>
 														</a>
 													<?php } ?>
+												</div>
+											<?php } ?>
+											<?php if($vista == 'vacantes'){ ?>
+							  					<div class="col-sm-1 col-md-2 col-lg-1" align="center" style="vertical-align: middle; padding-top: 5%;">
+													<a href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".$o["id_ofertas"]."/"; ?>">
+														<i class="fa fa-eye fa-1x" title="Ver detalle de la oferta"></i>
+													</a>
 												</div>
 											<?php } ?>
 								  		</div>

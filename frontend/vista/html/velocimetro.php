@@ -26,7 +26,7 @@
         <div class="row">
           <!--<div class="main_business">-->
             <div class="col-md-4" align="center">                                
-              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" style="border-radius: 5%;">
+              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" style="border-radius: 5%;max-width:100%;">
               <br><h3><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '.$_SESSION['mfo_datos']['usuario']['apellidos']; ?></h3>
             </div>              
             <div class="col-md-3" align="center">

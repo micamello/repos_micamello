@@ -8,8 +8,12 @@ class Controlador_InformePDF extends Controlador_Base
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
 
-    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
+    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+    }
+
+    if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
+      Utils::doRedirect(PUERTO.'://'.HOST.'/vacantes/');  
     }
 
     $username = Utils::getParam('username','',$this->data);
@@ -81,7 +85,7 @@ class Controlador_InformePDF extends Controlador_Base
       $arrayformej += [$test=>$array_mej_for];
       $array_defxtest += [$test=>$array_definiciones_cxr];
       $array_caracteristicasxrasgo +=[$test=>$rasgoxcaracte];
-      $array_promedioxtest += [$test=>($suma/count($rasgoxtest))];
+      $array_promedioxtest += [$test=>(round($suma/count($rasgoxtest)))];
       $rasgo_general = Modelo_RasgoGeneral::obtieneRasgosGeneral($cuestionarios['id_cuestionario'], $array_promedioxtest['Test'.$cuestionarios['id_cuestionario']]);
       $ragen_conceptos +=[$test=>str_replace(array("_nombreAspirante_", "_saltoLinea_"), array(ucfirst($datos_usuario['nombres']), "<br><br>"), $rasgo_general['descripcion'])];
 
@@ -118,7 +122,7 @@ class Controlador_InformePDF extends Controlador_Base
                 table{ width: 100%; border-collapse: collapse;}
                 .ant_name{font-size: 25px; font-family: font-family: 'Archivo', sans-serif;}
                 .name_caratula{font-size: 80px; font-family: font-family: 'Archivo', sans-serif; color: #118BD8;}
-                .content_caratula{padding-top: 500px; text-align: right; line-height: 10px;}
+                .content_caratula{padding-top: 500px; text-align: right; }
                 </style>
                 <body>
                 <main>";
@@ -228,5 +232,4 @@ class Controlador_InformePDF extends Controlador_Base
 	    exit;
 	}
 }
-
- ?>
+?>

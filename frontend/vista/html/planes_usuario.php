@@ -16,7 +16,11 @@
                                                 <th class="text-center">Nombre plan</th> 
                                                 <th class="text-center">Fecha inscripci&oacute;n</th>
                                                 <th class="text-center">Fecha Vencimiento</th>
+                                                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
                                                 <th class="text-center">Autopostulaciones Restantes</th>
+                                                <?php }else{ ?>
+                                                <th class="text-center">Publicaciones Restantes</th>
+                                                <?php } ?>	
                                                 <th class="text-center">Fecha Pago</th>
                                                 <th class="text-center">M&eacute;todo de Pago</th>
                                                 <th class="text-center">Estado de Pago</th>
@@ -54,7 +58,7 @@
                                                     <td><?php echo ESTADOS[$value['estado']]; ?></td>
                                                     <td>
                                                         <?php if($value['estado'] != 0){ ?>
-                                                            <a href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
+                                                            <a href="#<?php //echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
                                                                 <i class="fa fa-money"></i></i>
                                                             </a>
                                                         <?php }else{ echo '-'; } ?>
