@@ -775,3 +775,17 @@ body
   font-size: 25px;
 }
 
+/*Profile*/
+
+.box_text{
+  background-color: #F4F4F4;
+  border-radius: 30px;
+  margin: 5px 1px 5px 1px;
+  /*margin: auto;*/
+  /*padding: 5px;*/
+  overflow: hidden; 
+}
+
+.box_text:hover{
+  background-color: #B2E6FE;
+}

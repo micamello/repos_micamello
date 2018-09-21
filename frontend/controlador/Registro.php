@@ -140,13 +140,13 @@ class Controlador_Registro extends Controlador_Base {
                 if ($data['tipo_usuario'] == 1) {
                   
                   $escolaridad = Modelo_Escolaridad::obtieneListado();
-                  $universidad = Modelo_Universidad::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                  // $universidad = Modelo_Universidad::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
                   $apellidos = $data['apell_user'];
 
                   $area_select = $data['area_select'];
                   $nivel_interes = $data['nivel_interes'];
 
-                  $requisitos = array('id_usuario'=>$user_id, 'estado_civil'=>1, 'anosexp'=>1, 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 'apellidos'=>$apellidos, 'id_univ'=>$universidad[0]['id_univ']);
+                  $requisitos = array('id_usuario'=>$user_id, 'estado_civil'=>1, 'anosexp'=>1, 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 'apellidos'=>$apellidos);
 
                   Utils::log("datos de requisitos: ".print_r($requisitos, true));
 

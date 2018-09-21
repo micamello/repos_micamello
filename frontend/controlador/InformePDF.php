@@ -81,7 +81,7 @@ class Controlador_InformePDF extends Controlador_Base
       $arrayformej += [$test=>$array_mej_for];
       $array_defxtest += [$test=>$array_definiciones_cxr];
       $array_caracteristicasxrasgo +=[$test=>$rasgoxcaracte];
-      $array_promedioxtest += [$test=>($suma/count($rasgoxtest))];
+      $array_promedioxtest += [$test=>(round($suma/count($rasgoxtest)))];
       $rasgo_general = Modelo_RasgoGeneral::obtieneRasgosGeneral($cuestionarios['id_cuestionario'], $array_promedioxtest['Test'.$cuestionarios['id_cuestionario']]);
       $ragen_conceptos +=[$test=>str_replace(array("_nombreAspirante_", "_saltoLinea_"), array(ucfirst($datos_usuario['nombres']), "<br><br>"), $rasgo_general['descripcion'])];
 
@@ -118,11 +118,11 @@ class Controlador_InformePDF extends Controlador_Base
                 table{ width: 100%; border-collapse: collapse;}
                 .ant_name{font-size: 25px; font-family: font-family: 'Archivo', sans-serif;}
                 .name_caratula{font-size: 80px; font-family: font-family: 'Archivo', sans-serif; color: #118BD8;}
-                .content_caratula{padding-top: 500px; text-align: right; line-height: 10px;}
+                .content_caratula{padding-top: 500px; text-align: right;}
                 </style>
                 <body>
                 <main>";
-      $caratula = "<div class='content_caratula'><span class='ant_name'>Resultados del informe de</span><h3 class='name_caratula'>".ucfirst($datos_usuario['nombres'])."</h3></div>";
+      $caratula = "<div class='content_caratula'><span class='ant_name'>Resultados del informe de</span><h3 class='name_caratula'>".ucfirst($datos_usuario['nombres'])." ".ucfirst($datos_usuario['apellidos'])."</h3></div>";
       $caracteristicas_esp = str_replace("_nombreAspirante_", ucfirst($datos_usuario['nombres']), $parametro2['descripcion']);
       $introduccion = "<h3 class='titulo_1'>Introducción</h3><br><p class='text_justify'>".utf8_encode(str_replace("_saltoLinea_", "<br><br>", $parametro1['descripcion']))."</p>";
       $salto = "<div style='page-break-after:always;'></div>";

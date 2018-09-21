@@ -366,4 +366,9 @@
   .img-responsive{
     max-width: 50%;
   }
+
+  .perfil_photo_user{
+    height: 150px;
+    width: 150px;
+  }
 }

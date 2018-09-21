@@ -59,7 +59,42 @@ class Modelo_Usuario{
   // Búsqueda del username en la BD
   public static function existeUsuario($username){
     if(empty($username)){ return false; }
-    $sql = "select * from mfo_usuario where username = ?";
+    $sql = "SELECT 
+    u.id_usuario,
+    u.username,
+    u.correo,
+    u.telefono,
+    u.dni,
+    nombres,
+    ru.*,
+    DATE_FORMAT(u.fecha_nacimiento, '%Y-%m-%d') as fecha,
+    YEAR(now()) - YEAR(u.fecha_nacimiento) as edad,
+    p.nombre_abr as pais,
+    c.nombre as ciudad,
+    e.descripcion as escolaridad,
+    uni.nombre as universidad,
+    GROUP_CONCAT(nii.id_nivelIdioma_idioma) as idiomas
+FROM
+    mfo_usuario u,
+    mfo_ciudad c,
+    mfo_provincia pr,
+    mfo_pais p,
+    mfo_requisitosusuario ru,
+    mfo_escolaridad e,
+    mfo_universidades uni,
+    mfo_usuario_nivelidioma niu,
+    mfo_nivelidioma_idioma nii
+WHERE
+    p.id_pais = pr.id_pais
+  and pr.id_provincia = c.id_provincia
+    and c.id_ciudad = u.id_ciudad
+    and ru.id_usuario = u.id_usuario
+    AND niu.id_usuario = u.id_usuario
+    AND niu.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+    AND e.id_escolaridad = ru.id_escolaridad
+    AND ru.id_univ = uni.id_univ
+    and u.tipo_usuario = 1
+    and u.username = ?;";
     $rs = $GLOBALS['db']->auto_array($sql,array($username));
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
@@ -99,6 +134,10 @@ class Modelo_Usuario{
   public static function obtieneFoto($idUsuario){
     $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$idUsuario.'.jpg';
     return $rutaImagen;   
+  }
+
+  public static function obtieneRequisitosUsuario($id_usuario){
+    $sql = "";
   }
 
   public static function actualizarSession($idUsuario){
@@ -357,6 +396,12 @@ class Modelo_Usuario{
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }          
     }
+  }
+
+  public static function aspSalarial($id_usuario, $id_oferta){
+    if(empty($id_usuario) || empty($id_oferta)){return false;}
+    $sql = "SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = ? AND id_ofertas = ? LIMIT 1;";
+    return $GLOBALS['db']->auto_array($sql,array($id_usuario,$id_oferta));
   }
 
 }  

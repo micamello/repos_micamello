@@ -243,7 +243,8 @@
 							            	<tr>
 							            		<td><img class="img-circle" width="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
 
-							            		<td style="vertical-align: middle; text-align: justify;"><?php echo $a['nombres'].' '.$a['apellidos']; ?></td>
+							            		<td style="vertical-align: middle; text-align: justify;">
+							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/detallePerfil/".$a['username'].'/'.$id_oferta.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
 
 							            		<td style="vertical-align: middle;" class="text-center"><?php echo $a['edad']; ?></td>
 

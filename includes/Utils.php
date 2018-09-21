@@ -288,6 +288,17 @@ class Utils{
 
   }
 
+  public static function ocultarCaracteres($str, $start, $end){
+      $len = strlen($str);
+      return substr($str, 0, $start) . str_repeat('*', $len - ($start + $end)) . substr($str, $len - $end, $end);
+  }
 
+  public static function ocultarEmail($email){
+      $em   = explode("@",$email);
+      $name = implode(array_slice($em, 0, count($em)-1), '@');
+      $len  = floor(strlen($name));
+
+      return substr($name,0, 0) . str_repeat('*', $len) . "@" . end($em); 
+  }
 }
 ?>

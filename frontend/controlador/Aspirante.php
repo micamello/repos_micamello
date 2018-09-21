@@ -202,7 +202,7 @@ class Controlador_Aspirante extends Controlador_Base
             break;
 
             case 'detallePerfil':
-                $this->perfilAspirante($username);
+                $this->perfilAspirante($username, $id_oferta);
             break;
 
             default:
@@ -282,11 +282,47 @@ class Controlador_Aspirante extends Controlador_Base
         return $ruta;
     }
 
-    public function perfilAspirante($username, $requisito = 1){
-        $datos_usuario = ["datos_Usuario"=>Modelo_Usuario::existeUsuario($username, $requisito)];
+    public function perfilAspirante($username, $id_oferta){
+        $datos = Modelo_Usuario::existeUsuario($username);
+        $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
+        Utils::log($datos['id_usuario']);
+        array_push($datos, $asp_salarial);
+        $contacto = array();
+        $array_rasgosxusuario = array();
 
-        Utils::log(print_r($datos_usuario, true));
-        Vista::render('perfilAspirante', $datos_usuario);
+        if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
+                $contacto = ["correo"=>Utils::ocultarEmail($datos['correo']), "telefono"=>Utils::ocultarCaracteres($datos['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($datos['dni'], 0, 0)];
+            }
+            else{
+                $contacto = ["correo"=>$datos['correo'], "telefono"=>$datos['telefono'], "dni"=>$datos['dni']];
+            }
+
+        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
+                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($datos['id_usuario']);
+                $resultados = array();
+                $rasgoxtest = array();
+                foreach ($cuestionariosUsuario as $cuestionarios) {
+                  $test = "Test".$cuestionarios['id_cuestionario'];
+                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($datos['id_usuario'], $cuestionarios['id_cuestionario']);
+                  foreach ($rasgoxtest as $res) {
+                      // Utils::log(print_r($res, true));
+                    array_push($array_rasgosxusuario, array("nombre"=>$res['nombre'], "valor"=>$res['valor']));
+                  }
+                }
+                // Utils::log("eder: ".print_r($array_rasgosxusuario, true));
+            }    
+            Utils::log(print_r($datos, true));
+
+        $tags = array("NoConf"=>$datos,
+                        "Conf"=>$contacto,
+                        "Resultados"=>$array_rasgosxusuario
+                  );
+
+        $tags["template_js"][] = "mic";
+        $tags["template_js"][] = "Chart.min";
+        Vista::render('perfilAspirante', $tags);
     }
+
+    // informePersonalidad
 
 }
