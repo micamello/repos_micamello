@@ -15,7 +15,7 @@ class Controlador_Aspirante extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
-        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes']){
+        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
         }
 
