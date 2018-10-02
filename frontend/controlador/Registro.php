@@ -53,9 +53,8 @@ class Controlador_Registro extends Controlador_Base {
     }
 
 
-  public function validateCampos(){
-    $datadominio = Utils::obtieneDominio();
-    $iso = $datadominio['iso'];
+  public function validateCampos(){    
+    $iso = SUCURSAL_ISO;
 
     if ( Utils::getParam('register_form') == 1 ){
 
@@ -140,7 +139,9 @@ class Controlador_Registro extends Controlador_Base {
                 if ($data['tipo_usuario'] == 1) {
                   
                   $escolaridad = Modelo_Escolaridad::obtieneListado();
-                  // $universidad = Modelo_Universidad::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
+
+                  $universidad = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
+
                   $apellidos = $data['apell_user'];
 
                   $area_select = $data['area_select'];

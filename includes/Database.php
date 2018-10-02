@@ -113,7 +113,12 @@ class Database{
       if ( $i != 1 ) {
         $query .= ",";
       }
-      $query .= $col . '="' . $value . '"';
+
+      if($value == null || $value == 'null'){
+        $query .= $col . '=' . $value;
+      }else{
+        $query .= $col . '="' . $value . '"';
+      }
       $i++;
     }
     $query .= " WHERE ";

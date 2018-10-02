@@ -8,10 +8,9 @@ body
 
 /*Formulario checkbox css*/
 
-.container{
+.container-fluid{
   text-align: center;
 }
-
 
 /*Formulario checkbox css*/
 
@@ -717,7 +716,6 @@ body
   border: 2px solid #C1C1C1; 
   border-radius: 5px; 
   padding: 0px 20px 100px 20px;
-  overflow-y: auto;
   height: 70px;
 }
 
@@ -747,6 +745,17 @@ body
   white-space:nowrap; 
   overflow:hidden; 
 }
+
+.badge_item3{
+  padding: 5px 10px 5px 10px;
+  margin: 5px 2px 5px 2px;
+  background-color: #B9B7B7;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  font-size: 11px;
+}
+
 
 .badge_item2{
   padding: 5px 10px 5px 10px;
@@ -790,4 +799,16 @@ body
 
 .box_text:hover{
   background-color: #B2E6FE;
+}
+
+.opcionesSeleccionados{
+  border: 1px solid #C1C1C1; 
+  border-radius: 5px; 
+  padding: 0px 20px 0px 20px;
+  height: 100%;
+}
+
+.requerido{
+  color: red;
+
 }

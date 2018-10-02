@@ -15,7 +15,7 @@ class Modelo_Sucursal{
   }
 
   public static function obtieneCiudadDefault(){
-    $id_pais = $_SESSION['mfo_datos']['sucursal']['id_pais'];
+    $id_pais = SUCURSAL_PAISID;
     $sql = "select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = ".$id_pais." limit 1;";
     return $GLOBALS['db']->auto_array($sql,array());
   }
@@ -86,6 +86,25 @@ class Modelo_Sucursal{
     return false;
     }
     }
+  }
+
+  public static function consultaDominio($id){
+    if (empty($id)){ return false; }
+    $sql = "SELECT dominio,id_pais FROM mfo_sucursal WHERE id_sucursal = ? AND estado = 1";
+    if( strstr(dirname(__FILE__), 'C:') ){  
+      $rs["dominio"] = 'localhost/repos_micamello';
+      $rs["id_pais"] = '14'; 
     }
+    else{
+      $rs = $GLOBALS['db']->auto_array($sql,array($id)); 
+    }
+    return $rs;
+  } 
+
+  public static function consultaxPais($pais){
+    if (empty($pais)){ return false; }
+    $sql = "SELECT dominio FROM mfo_sucursal where id_pais = ?";
+    return $GLOBALS['db']->auto_array($sql,array($pais));   
+  } 
 }  
 ?>

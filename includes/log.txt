@@ -1,144 +1,19 @@
-[2018/09/21 08:54:33] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:54:33] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
-[2018/09/21 08:54:33] dispatch nombre del controlador: Controlador_Inicio - inicio
-[2018/09/21 08:54:33] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='1' and estado=1
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='2' and estado=1
-[2018/09/21 08:54:33] SQL Query: SELECT * FROM mfo_area
-[2018/09/21 08:54:33] SQL Query: SELECT * from mfo_nivelinteres
-[2018/09/21 08:54:33] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 ORDER BY orden LIMIT 3
-[2018/09/21 08:54:33] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '1'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '2'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '3'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '4'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '5'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '6'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '7'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '8'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '9'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '10'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '11'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '12'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '13'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '14'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '15'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '16'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '17'
-[2018/09/21 08:54:33] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '18'
-[2018/09/21 08:54:34] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '19'
-[2018/09/21 08:54:34] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '20'
-[2018/09/21 08:54:34] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '21'
-[2018/09/21 08:54:34] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2018/09/21 08:54:35] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:54:35] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
-[2018/09/21 08:54:35] dispatch nombre del controlador: Controlador_Inicio - inicio
-[2018/09/21 08:54:35] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='1' and estado=1
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario='2' and estado=1
-[2018/09/21 08:54:35] SQL Query: SELECT * FROM mfo_area
-[2018/09/21 08:54:35] SQL Query: SELECT * from mfo_nivelinteres
-[2018/09/21 08:54:35] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 ORDER BY orden LIMIT 3
-[2018/09/21 08:54:35] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '1'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '2'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '3'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '4'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '5'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '6'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '7'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '8'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '9'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '10'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '11'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '12'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '13'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '14'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '15'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '16'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '17'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '18'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '19'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '20'
-[2018/09/21 08:54:35] SQL Query: SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = '21'
-[2018/09/21 08:54:35] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2018/09/21 08:57:15] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:57:15] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
-[2018/09/21 08:57:15] dispatch nombre del controlador: Controlador_Login - login
-[2018/09/21 08:57:15] SQL Query: SELECT * FROM mfo_area
-[2018/09/21 08:57:15] SQL Query: SELECT * from mfo_nivelinteres
-[2018/09/21 08:57:15] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2018/09/21 08:57:25] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:57:25] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
-[2018/09/21 08:57:25] dispatch nombre del controlador: Controlador_Login - login
-[2018/09/21 08:57:25] SQL Query: SELECT u.id_usuario, u.username, u.correo, u.telefono, u.dni, u.nombres,
-                   u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
-                   r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
-                   r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
-                   r.genero, r.apellidos, u.id_nacionalidad
-            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
-            WHERE (u.username = 'empresa2' OR u.correo = 'empresa2') AND u.password = '25d55ad283aa400af464c76d713c07ad' AND u.estado = 1
-[2018/09/21 08:57:25] SQL execute: UPDATE mfo_usuario SET ultima_sesion="2018-09-21 08:57:25" WHERE id_usuario=7
-[2018/09/21 08:57:25] SQL Query: SELECT * FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
-[2018/09/21 08:57:25] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 7
-[2018/09/21 08:57:25] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 7
-[2018/09/21 08:57:25] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 7
-[2018/09/21 08:57:26] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:57:26] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
-[2018/09/21 08:57:26] dispatch nombre del controlador: Controlador_Publicar - publicar
-[2018/09/21 08:57:26] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+[2018/10/02 02:25:48] Utils::createSession empezo una nueva sesion
+[2018/10/02 02:25:48] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 02:25:48] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
             INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
             WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2018/09/21 08:57:26] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);
-[2018/09/21 08:57:26] SQL Query: SELECT * FROM mfo_area
-[2018/09/21 08:57:26] SQL Query: SELECT * from mfo_nivelinteres
-[2018/09/21 08:57:26] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2018/09/21 08:57:26] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+[2018/10/02 02:25:48] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 02:25:48] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 02:25:48] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 02:25:49] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 02:25:49] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
             FROM mfo_ciudad c, mfo_provincia p
             WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
-[2018/09/21 08:57:26] SQL Query: SELECT * FROM mfo_jornada
-[2018/09/21 08:57:26] SQL Query: SELECT * from mfo_idioma
-[2018/09/21 08:57:26] SQL Query: SELECT * from mfo_nivelidioma
-[2018/09/21 08:57:26] SQL Query: SELECT * FROM mfo_escolaridad
-[2018/09/21 08:57:26] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
-[2018/09/21 08:57:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2018/09/21 08:57:26] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:57:26] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
-[2018/09/21 08:57:28] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:57:28] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
-[2018/09/21 08:57:28] dispatch nombre del controlador: Controlador_Plan - plan
-[2018/09/21 08:57:28] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 3 order by orden ASC
-[2018/09/21 08:57:28] SQL Query: SELECT p.id_plan, p.nombre, p.costo, up.id_comprobante, up.fecha_compra, if(up.num_post_rest <> '',num_post_rest,'-') as num_post_rest, if(up.fecha_caducidad <> '',fecha_caducidad,'ilimitado') as fecha_caducidad, up.id_usuario_plan, up.estado
-        FROM mfo_usuario_plan up, mfo_plan p
-        WHERE p.id_plan = up.id_plan 
-        AND ((up.estado = 1)||(up.estado = 0 AND up.id_comprobante <> ''))
-        AND up.id_usuario = 7 ORDER BY fecha_compra ASC
-[2018/09/21 08:57:28] SQL Query: SELECT p.id_plan, p.nombre, p.num_post, p.promocional, p.costo, p.duracion, 
-                   p.porc_descarga, p.extension, p.codigo_paypal, GROUP_CONCAT(a.descripcion) AS permisos,
-                   GROUP_CONCAT(a.accion) AS acciones
-            FROM mfo_plan p
-            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
-            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist
-            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND a.estado = 1  AND p.costo = 0 GROUP BY p.id_plan ORDER BY p.costo, a.id_accionSist
-[2018/09/21 08:57:28] SQL Query: SELECT p.id_plan, p.nombre, p.num_post, p.promocional, p.costo, p.duracion, 
-                   p.porc_descarga, p.extension, p.codigo_paypal, GROUP_CONCAT(a.descripcion) AS permisos,
-                   GROUP_CONCAT(a.accion) AS acciones
-            FROM mfo_plan p
-            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
-            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist
-            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND a.estado = 1  AND p.costo <> 0  AND p.tipo_plan = 2 GROUP BY p.id_plan ORDER BY p.costo, a.id_accionSist
-[2018/09/21 08:57:28] SQL Query: SELECT p.id_plan, p.nombre, p.num_post, p.promocional, p.costo, p.duracion, 
-                   p.porc_descarga, p.extension, p.codigo_paypal, GROUP_CONCAT(a.descripcion) AS permisos,
-                   GROUP_CONCAT(a.accion) AS acciones
-            FROM mfo_plan p
-            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
-            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist
-            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND a.estado = 1  AND p.costo <> 0  AND p.tipo_plan = 1 GROUP BY p.id_plan ORDER BY p.costo, a.id_accionSist
-[2018/09/21 08:57:28] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 4 order by orden ASC
-[2018/09/21 08:57:28] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
-[2018/09/21 08:57:28] SQL Query: SELECT * FROM mfo_rcomprobantescam WHERE id_comprobante = 10
-[2018/09/21 08:57:28] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2018/09/21 08:57:28] Utils::createSession empezo una nueva sesion
-[2018/09/21 08:57:28] SQL Query: SELECT s.*, m.simbolo FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda  AND s.estado = 1 AND s.dominio = 'micamello.com.ec';
+[2018/10/02 02:25:49] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 02:25:49] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 02:25:49] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 02:25:49] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 02:25:49] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 02:25:49] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 02:25:49] Utils::createSession empezo una nueva sesion

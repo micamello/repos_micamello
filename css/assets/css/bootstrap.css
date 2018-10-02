@@ -11,7 +11,9 @@ html {
 }
 body {
   margin: 0;
+  text-align: center;
 }
+
 article,
 aside,
 details,
@@ -2448,6 +2450,7 @@ table th[class*="col-"] {
 @media screen and (max-width: 767px) {
   panel-body{
     font-size: 50%;
+    font-size: 12px;
   }
   .table-responsive {
     width: 100%;
@@ -6764,3 +6767,4 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
+

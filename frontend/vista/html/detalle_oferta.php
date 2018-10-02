@@ -6,19 +6,22 @@
           <div class="col-md-8">
               <div class="panel panel-primary shadow-panel1">
                 <div class="panel-heading">
-                    <?php echo $o['titulo']; ?>
+                    <?php echo utf8_encode($o['titulo']); ?>
                 </div>
                 <div class="panel-body">
                   <div style="margin: 0;">
-                    <?php if ($o['confidencial'] == 0) {?>
-                      <div class="confidencial">
-                        <?php echo $o['empresa']; ?>
-                      </div>
+                    <?php 
+                    if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
+                      if ($o['confidencial'] == 0) { ?>
+                        <div class="confidencial">
+                          <?php echo utf8_encode($o['empresa']); ?>
+                        </div>
                       <?php } else {?>
-                      <div class="confidencial">
-                          Nombre de empresa - confidencial
-                      </div>
-                    <?php }?>
+                        <div class="confidencial">
+                            Nombre de empresa - confidencial
+                        </div>
+                    <?php }
+                    } ?>
                     <div>
                         <h5><b>Descripción</b></h5>
                     </div>
@@ -44,7 +47,7 @@
                     <div>
                         <h5>
                             <span class="titulos">Nivel de Estudios</span><br>
-                             <?php echo $o['escolaridad']; ?>
+                             <?php echo utf8_encode($o['escolaridad']); ?>
                         </h5>
                     </div>
 
@@ -72,7 +75,7 @@
                             <?php if ($o['residencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
                         </h5>
                     </div>
-		   <div>
+		                <div>
                         <h5>
                             <span class="titulos">Tiene licencia para conducir</span>
                             <br>
@@ -95,19 +98,19 @@
                 <div>
                   <h5>
                       <span class="titulos">Localización</span><br>
-                      - <?php echo $o['provincia'].'/'.$o['ciudad']; ?>
+                      - <?php echo utf8_encode($o['provincia'].'/'.$o['ciudad']); ?>
                   </h5>
                 </div>
                 <div>
                   <h5>
                       <span class="titulos">Jornada</span><br>
-                      - <?php echo $o['jornada']; ?>
+                      - <?php echo utf8_encode($o['jornada']); ?>
                   </h5>
                 </div>
                 <div>
                     <h5>
                         <span class="titulos">Salario</span><br>
-                        - <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($o['salario'],2);?>
+                        - <?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
                     </h5>
                 </div>
                 <div>
@@ -128,12 +131,10 @@
                         - <?php echo $o['edad_minima'].' a '.$o['edad_maxima']; ?> a&ntilde;os
                     </h5>
                 </div>
-		<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+		          <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
                 <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
                   <input type="hidden" name="postulado" id="postulado" value="1">
-                  <?php if(!empty($vista) && $vista != 'postulacion'){ 
-
-                     ?>
+                  <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
                     <?php if(!empty($postulado)){ ?>
                       <div align="center">
                         <h5>
@@ -145,17 +146,17 @@
                         <div class="col-md-12">
                           <div class="form-group">
                               <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
-                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
+                              <input class="form-control" type="text" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,2); ?>" required/>
                           </div>
+                          <h5>
+                            <button type="submit" class="btn btn-success">POSTULARSE</button>
+                          </h5>
                         </div>
-                        <h5>
-                          <button type="submit" class="btn btn-success">POSTULARSE</button>
-                        </h5>
                       </div>
                     <?php } ?>
                   <?php }else{ ?>
                       <div align="center">
-			<br>
+			                 <br>
                         <label for="status">Estatus del candidato en la oferta</label>
                         <select class="form-control" name="status" id="status">
                           <option value="">Seleccione un estatus</option>
@@ -177,7 +178,7 @@
                       </div>
                   <?php } ?>
                 </form>
-		<?php } ?>
+		          <?php } ?>
               </div>
             </div>
           </div>

@@ -133,7 +133,7 @@
 												echo '<h5 class="empresa"><i>Nombre - confidencial</i></h5>';
 											} ?>
 											<b style='color: black;'><?php echo $o['titulo']; ?></b>  
-										    <?php 
+										    <?php 										    
 										    foreach($postulacionesUserLogueado as $key => $p){ 
 												
 												if($p['id_ofertas'] == $o["id_ofertas"]){

@@ -10,35 +10,41 @@ class Controlador_Perfil extends Controlador_Base
 
     public function construirPagina()
     {
+
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
 
         //Obtiene todos los banner activos segun el tipo
-        $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_PERFIL);
-
-        //obtiene el orden del banner de forma aleatoria segun la cantidad de banner de tipo perfil
-        $orden                      = rand(1, count($arrbanner)) - 1;
-        $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
+        $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
+        $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
         $msj1 = $imgArch1 = $btnDescarga = '';
         
 
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
+            case 'buscaDependencia':
+                $id_escolaridad = Utils::getParam('id_escolaridad', '', $this->data); 
+                $dependencia    = Modelo_Escolaridad::obtieneDependencia($id_escolaridad);
+                Vista::renderJSON($dependencia);
+            break;
             case 'buscaCiudad':
                 $id_provincia = Utils::getParam('id_provincia', '', $this->data);
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($id_provincia);
                 Vista::renderJSON($arrciudad);
                 break;
             default:
+
+                $arridioma = Modelo_Idioma::obtieneListado();
+                $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
                 $escolaridad  = Modelo_Escolaridad::obtieneListado();
                 $arrarea      = Modelo_Area::obtieneListado();
                 $arrinteres   = Modelo_Interes::obtieneListado();
-                $universidades   = Modelo_Universidad::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
                 $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
-                $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
@@ -58,7 +64,15 @@ class Controlador_Perfil extends Controlador_Base
                     $btnSubir  = 0;
 
                     self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
                 }
+
+                if (Utils::getParam('cambiarClave') == 1) {
+                    self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    $_SESSION['mostrar_exito'] = 'La contraseña fue modificada exitosamente.';
+                }
+
+                $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 if (isset($_SESSION['mfo_datos']['infohv'])) {
 
@@ -103,19 +117,23 @@ class Controlador_Perfil extends Controlador_Base
                     'ruta_arch'                 => $ruta_arch,
                     'nrototaltest'              =>$nrototaltest,
                     'nacionalidades'            =>$nacionalidades,
-                    'universidades'             =>$universidades
+                    'universidades'             =>$universidades,
+                    'arridioma'                 =>$arridioma,
+                    'arrnivelidioma'            =>$arrnivelidioma,
+                    'nivelIdiomas'              => $nivelIdiomas
+
                 );
 
                 $tags["template_js"][] = "selectr";
                 $tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
+                $tags["template_js"][] = "publicar_oferta";
                 $tags["show_banner"] = 1;
 
 
-                Vista::render('perfil', $tags);
-                
-                break;
+                Vista::render('perfil', $tags);                
+            break;
         }
     }
 
@@ -126,10 +144,10 @@ class Controlador_Perfil extends Controlador_Base
 
             if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
 
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_pais' => 1, 'universidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'id_nacionalidad' => 1, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad2'=>0);
             } else {
 
-                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1);
+                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1);
             }
 
             $data = $this->camposRequeridos($campos);
@@ -146,18 +164,6 @@ class Controlador_Perfil extends Controlador_Base
                 $validaFile = Utils::valida_upload($archivo, 2);
                 if (empty($validaFile)) {
                     throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
-                }
-            }
-
-            if($_POST["password"] != "" || $_POST["password_two"] != ""){
-
-                if ($_POST["password"] != $_POST["password_two"]){
-                  throw new Exception("Contraseña y confirmación de contraseña no coinciden");
-                }
-
-                $passwordValido = Utils::valida_password($_POST["password"]);
-                if ($passwordValido == false){
-                  throw new Exception("Ingrese una contraseña con el formato especificado");
                 }
             }
 
@@ -186,8 +192,13 @@ class Controlador_Perfil extends Controlador_Base
 
             if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 
-                if (!Modelo_RequisitosUsuario::updateRequisitosUsuario($data, $idUsuario)) {
-                    throw new Exception("Ha ocurrido un error al guardar los datos del usuario, intente nuevamente");
+                if($_POST['lugar_estudio'] != 0 && ($_POST['universidad'] != 0 || $_POST['universidad2'] != 0)){
+                    
+                    if (!Modelo_RequisitosUsuario::updateRequisitosUsuario($data, $idUsuario)) {
+                        throw new Exception("Ha ocurrido un error al guardar los datos del usuario, intente nuevamente");
+                    }
+                }else{
+                    throw new Exception("Debe ingresar una universidad");
                 }
 
                 if (!empty($archivo) && $archivo['error'] != 4) {
@@ -217,6 +228,39 @@ class Controlador_Perfil extends Controlador_Base
                 }else if (!isset($_SESSION['mfo_datos']['infohv'])) {
                     throw new Exception("Cargar la hoja de vida es obligatorio");
                 }
+
+                if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
+
+                    $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
+                    if (empty($validaFechaNac)) {
+                        throw new Exception("Debe ser Mayor de edad");
+                    }
+
+                    $listado_idiomas_niveles_db = Modelo_NivelxIdioma::obtieneListado();
+                    $array_nivel_idioma = array();
+                    for ($i=0; $i < count($data['nivel_idioma']); $i++) {
+                      $explode = explode("_", $data['nivel_idioma'][$i]);
+                      array_push($array_nivel_idioma, $explode);
+                    }
+                    $data_idioma_nivel = array();
+
+                    for ($i=0; $i < count($listado_idiomas_niveles_db); $i++) { 
+                      for ($j=0; $j < count($array_nivel_idioma); $j++) { 
+                        if (($listado_idiomas_niveles_db[$i]['id_idioma'] == $array_nivel_idioma[$j][0]) && ($listado_idiomas_niveles_db[$i]['id_nivelIdioma']) == $array_nivel_idioma[$j][1]) {
+                          array_push($data_idioma_nivel, $listado_idiomas_niveles_db[$i]['id_nivelIdioma_idioma']);
+                        }
+                      }
+                    }
+
+                    if (count($data_idioma_nivel) != count($array_nivel_idioma)) {
+                      throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
+                    }else{
+                        
+                        if (!Modelo_UsuarioxNivelIdioma::guardarUsuarioNivelIdioma($idUsuario,$data_idioma_nivel)) {
+                            throw new Exception("Ha ocurrido un error al guardar los idiomas del usuario, intente nuevamente");
+                        }
+                    }
+                }
             }
 
             if (!empty($imagen) && $imagen['error'] != 4) {
@@ -235,16 +279,37 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
                 }
 
-                if($_POST["password"] != "" && $_POST["password_two"] != ""){
-                    if (!Modelo_Usuario::modificarPassword($_POST["password"],$idUsuario)) {
-                        throw new Exception("Ha ocurrido un error al guardar las contraseñas, intente nuevamente");
-                    }
+            }
+            $GLOBALS['db']->commit();
+            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+            Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario));
+        } catch (Exception $e) {
+            $_SESSION['mostrar_error'] = $e->getMessage();
+            $GLOBALS['db']->rollback();
+            $this->redirectToController('perfil');
+        }
+    }
+
+    public function guardarClave($idUsuario){
+
+        try {
+            if($_POST["password"] != "" || $_POST["password_two"] != ""){
+
+                if ($_POST["password"] != $_POST["password_two"]){
+                  throw new Exception("Contraseña y confirmación de contraseña no coinciden");
+                }
+
+                $passwordValido = Utils::valida_password($_POST["password"]);
+                if ($passwordValido == false){
+                  throw new Exception("Ingrese una contraseña con el formato especificado");
                 }
             }
 
-            $GLOBALS['db']->commit();
-            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
-            Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario));
+            if($_POST["password"] != "" && $_POST["password_two"] != ""){
+                if (!Modelo_Usuario::modificarPassword($_POST["password"],$idUsuario)) {
+                    throw new Exception("Ha ocurrido un error al guardar las contraseñas, intente nuevamente");
+                }
+            }
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $GLOBALS['db']->rollback();

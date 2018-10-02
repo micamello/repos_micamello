@@ -15,7 +15,7 @@ class Controlador_Aspirante extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
-        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes']){
+        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
         }
 
@@ -30,24 +30,22 @@ class Controlador_Aspirante extends Controlador_Base
         $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
         $type = Utils::getParam('type', '', $this->data); 
 
-        $vista = Utils::getParam('vista', '', $this->data);
-
+        $vista = Utils::getParam('vista', '1', $this->data);
         $username = Utils::getParam('username', '', $this->data);
-
         $breadcrumbs = array();
 
         switch ($opcion) {
-            case 'filtrar':
-                
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+            case 'filtrar':                
+                $arrarea       = Modelo_Area::obtieneListadoAsociativo();
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
 
-                unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta']);
+                unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista']);
 
                 $cadena = '';
                 $array_datos = $aspirantesFiltrados = array();
-                
+               
                 foreach ($this->data as $param => $value) {
                     
                     $letra = substr($value,0,1);
@@ -59,6 +57,13 @@ class Controlador_Aspirante extends Controlador_Base
                         if(isset(FECHA_POSTULADO[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes']['F'] = $id;
                             $array_datos['F'] = array('id'=>$id,'nombre'=>FECHA_POSTULADO[$id]);
+                        }
+                    }
+                    else if($letra == 'A' && $type == 1){
+                          
+                        if(isset($arrarea[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['A'] = $id;
+                            $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id]);
                         }
                     }
                     else if($letra == 'P' && $type == 1){
@@ -108,6 +113,26 @@ class Controlador_Aspirante extends Controlador_Base
                             $array_datos['E'] = array('id'=>$id,'nombre'=>$escolaridad[$id]);
                         }
 
+                    }else if($letra == 'D' && $type == 1){
+                        
+                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['D'] = $id;
+                        $array_datos['D'] = array('id'=>$id,'nombre'=>$id);
+
+                    }else if($letra == 'L' && $type == 1){
+                        
+                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['L'] = $id;
+                        $array_datos['L'] = array('id'=>$id,'nombre'=>$id);
+
+                    }else if($letra == 'T' && $type == 1){
+                        
+                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['T'] = $id;
+                        $array_datos['T'] = array('id'=>$id,'nombre'=>$id);
+
+                    }else if($letra == 'V' && $type == 1){
+                        
+                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['V'] = $id;
+                        $array_datos['V'] = array('id'=>$id,'nombre'=>$id);
+
                     }else if($letra == 'Q' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes']['Q'] = $id;
@@ -125,11 +150,17 @@ class Controlador_Aspirante extends Controlador_Base
 
                 foreach ($_SESSION['mfo_datos']['Filtrar_aspirantes'] as $letra => $value) {
 
-                    if($value!=0 || $value != ''){
+                    if($value !=0 || $value != ''){
 
                         if($letra == 'F'){
                             if(isset(FECHA_POSTULADO[$value])){
                                 $array_datos[$letra] = array('id'=>$value,'nombre'=>FECHA_POSTULADO[$value]);
+                            }
+                        }
+
+                        if($letra == 'A'){
+                            if(isset($arrarea[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
                             }
                         }
 
@@ -139,10 +170,9 @@ class Controlador_Aspirante extends Controlador_Base
                             }
                         }
                         if($letra == 'G'){
-
-                            $g = array_search($id,VALOR_GENERO); 
+                            $g = array_search($value,VALOR_GENERO); 
                             if($g != false){
-                                $array_datos['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
+                                $array_datos['G'] = array('id'=>$value,'nombre'=>GENERO[$g]);
                             }
 
                         }
@@ -155,6 +185,18 @@ class Controlador_Aspirante extends Controlador_Base
                             if(isset(SALARIO[$value])){
                                 $array_datos[$letra] = array('id'=>$value,'nombre'=>SALARIO[$value]);
                             }
+                        }
+                        if($letra == 'D'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                        }
+                        if($letra == 'L'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                        }
+                        if($letra == 'T'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                        }
+                        if($letra == 'V'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                         }
                         if($letra == 'N'){
                             if(isset($nacionalidades[$value])){
@@ -175,14 +217,22 @@ class Controlador_Aspirante extends Controlador_Base
                     }
                 }
 
-                $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
+                if($vista == 1){
+                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
+                }else{
+                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(14,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
+                }
 
-                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'page'=>$page,'mostrar'=>$mostrar,'id_oferta'=>$id_oferta)); 
-                 
-                $breadcrumbs['vacantes'] = 'Ver vacantes';
+                $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];
+                $arrprovincia = $_SESSION['mfo_datos']['arrprovincia'];
+
+                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'mostrar'=>$mostrar,'id_oferta'=>$id_oferta,'vista'=>$vista)); 
+
+                $breadcrumbs['vacantes'] = 'Ver Ofertas';
                 $breadcrumbs['aspirante'] = 'Ver Aspirantes';
 
                 $tags = array(
+                    'arrarea'       => $arrarea,
                     'breadcrumbs'=>$breadcrumbs,
                     'aspirantes'       => $aspirantesFiltrados,
                     'arrprovincia'=>$arrprovincia,
@@ -191,17 +241,24 @@ class Controlador_Aspirante extends Controlador_Base
                     'link'=>$link,
                     'page' =>$page,
                     'mostrar'=>$mostrar,
+                    'vista'=>$vista,
                     'id_oferta'=>$id_oferta
                 );
                
-                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$cadena;
-                
-                $pagination = new Pagination(Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
+         
+                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/'.$type.$cadena;
+
+                if($vista == 1){
+                    $pagination = new Pagination(Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
+                }else{
+                    $pagination = new Pagination(Modelo_Usuario::filtrarAspirantesGlobal(/*$_SESSION['mfo_datos']['usuario']['id_pais']*/14,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
+                }
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
                 $tags["template_js"][] = "aspirantes";
-
+                
                 Vista::render('aspirantes', $tags);
+               
             break;
 
             case 'detallePerfil':
@@ -210,22 +267,41 @@ class Controlador_Aspirante extends Controlador_Base
 
             default:
                 
+                $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $id_oferta = Utils::getParam('id_oferta', '', $this->data);
 
                 //solo empresa 
                 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
-
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'O'=>1,'Q'=>0);
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
-                $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
+                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0);
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
-                $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,false);
-                $breadcrumbs['vacantes'] = 'Ver vacantes';
-                $breadcrumbs['aspirante'] = 'Ver aspirantes';
+
+                if($vista == 1){
+
+                    $breadcrumbs['vacantes'] = 'Ver Oferta';
+                    $breadcrumbs['aspirante'] = 'Ver aspirantes';
+                    $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,false);
+                }else{
+                    $id_oferta = 0;
+                    $breadcrumbs['aspirante'] = 'Buscar Aspirantes';
+                    $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(/*$_SESSION['mfo_datos']['usuario']['id_pais']*/14,$page,false);
+                }
+
+                $arranacionalidades = Modelo_pais::obtieneListadoAsociativo();
+
+                $arrprovincia = $nacionalidades = array();
+                foreach ($aspirantes as $key => $value) {
+                   $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
+                   $arrprovincia[$value['id_provincia']] = $value['ubicacion'];
+                }
+                
+                $_SESSION['mfo_datos']['nacionalidades'] = $nacionalidades;
+                $_SESSION['mfo_datos']['arrprovincia'] = $arrprovincia;
+
 
                 $tags = array(
+                    'arrarea'       => $arrarea,
                     'breadcrumbs'=>$breadcrumbs,
                     'arrprovincia'  => $arrprovincia,
                     'nacionalidades'=>$nacionalidades,
@@ -233,13 +309,20 @@ class Controlador_Aspirante extends Controlador_Base
                     'aspirantes'       => $aspirantes,
                     'page' => $page,
                     'mostrar'=>$mostrar,
+                    'vista'=>$vista,
                     'id_oferta'=>$id_oferta,
                 );
 
                 $tags["template_js"][] = "aspirantes";
 
-                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$id_oferta;
-                $pagination = new Pagination(Modelo_Usuario::obtenerAspirantes($id_oferta,$page,true),REGISTRO_PAGINA,$url);
+                if($vista == 1){
+
+                    $url = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta;
+                    $pagination = new Pagination(Modelo_Usuario::obtenerAspirantes($id_oferta,$page,true),REGISTRO_PAGINA,$url);
+                }else{
+                    $url = PUERTO.'://'.HOST.'/verAspirantes/2/0';
+                    $pagination = new Pagination(Modelo_Usuario::busquedaGlobalAspirantes(14,$page,true),REGISTRO_PAGINA,$url);
+                }
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
 
@@ -252,12 +335,15 @@ class Controlador_Aspirante extends Controlador_Base
 
     public static function calcularRuta($ruta,$letraDescartar){
 
-        foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $key => $v) {
+        foreach ($_SESSION['mfo_datos']['Filtrar_aspirantes'] as $key => $v) {
 
             if($letraDescartar != $key){
 
                 if($key == 'F' && $v != 0){
                     $ruta .= 'F'.$v.'/';
+                }
+                if($key == 'A' && $v != 0){
+                    $ruta .= 'A'.$v.'/';
                 }
                 if($key == 'P' && $v != 0){
                     $ruta .= 'P'.$v.'/';
@@ -273,11 +359,23 @@ class Controlador_Aspirante extends Controlador_Base
                 }   
                 if($key == 'E' && $v != 0){
                     $ruta .= 'E'.$v.'/';
+                } 
+                if($key == 'D' && $v != 0){
+                    $ruta .= 'D'.$v.'/';
+                }  
+                if($key == 'T' && $v != 0){
+                    $ruta .= 'T'.$v.'/';
+                }  
+                if($key == 'L' && $v != 0){
+                    $ruta .= 'L'.$v.'/';
+                }  
+                if($key == 'V' && $v != 0){
+                    $ruta .= 'V'.$v.'/';
                 }   
                 if($key == 'G' && $v != 0){
                     $ruta .= 'G'.$v.'/';
                 }
-                if($key == 'Q' && $v != 0){
+                if($key == 'Q' && ($v != 0 || $v != '')){
                     $ruta .= 'Q'.$v.'/';
                 }
             }
@@ -287,38 +385,36 @@ class Controlador_Aspirante extends Controlador_Base
 
     public function perfilAspirante($username, $id_oferta){
         $datos = Modelo_Usuario::existeUsuario($username);
+        $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
+
         $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
-        Utils::log($datos['id_usuario']);
-        array_push($datos, $asp_salarial);
         $contacto = array();
         $array_rasgosxusuario = array();
 
         if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-                $contacto = ["correo"=>Utils::ocultarEmail($datos['correo']), "telefono"=>Utils::ocultarCaracteres($datos['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($datos['dni'], 0, 0)];
+                $contacto = ["correo"=>Utils::ocultarEmail($info_usuario['correo']), "telefono"=>Utils::ocultarCaracteres($info_usuario['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($info_usuario['dni'], 0, 0)];
             }
             else{
-                $contacto = ["correo"=>$datos['correo'], "telefono"=>$datos['telefono'], "dni"=>$datos['dni']];
+                $contacto = ["correo"=>$info_usuario['correo'], "telefono"=>$info_usuario['telefono'], "dni"=>$info_usuario['dni']];
             }
 
-        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($datos['id_usuario']);
+        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
+                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($info_usuario['id_usuario']);
                 $resultados = array();
                 $rasgoxtest = array();
                 foreach ($cuestionariosUsuario as $cuestionarios) {
                   $test = "Test".$cuestionarios['id_cuestionario'];
-                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($datos['id_usuario'], $cuestionarios['id_cuestionario']);
+                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($info_usuario['id_usuario'], $cuestionarios['id_cuestionario']);
                   foreach ($rasgoxtest as $res) {
-                      // Utils::log(print_r($res, true));
                     array_push($array_rasgosxusuario, array("nombre"=>$res['nombre'], "valor"=>$res['valor']));
                   }
                 }
-                // Utils::log("eder: ".print_r($array_rasgosxusuario, true));
-            }    
-            Utils::log(print_r($datos, true));
+            }
 
-        $tags = array("NoConf"=>$datos,
+        $tags = array("infoUsuario"=>$info_usuario,
                         "Conf"=>$contacto,
-                        "Resultados"=>$array_rasgosxusuario
+                        "Resultados"=>$array_rasgosxusuario,
+                        "asp_sararial"=>$asp_salarial
                   );
 
         $tags["template_js"][] = "mic";

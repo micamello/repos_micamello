@@ -29,7 +29,7 @@ class Modelo_Pregunta{
 
   public static function preguntasxTest($test){
     if (empty($test)){ return false; }
-    $sql = "SELECT id_pre,pregunta,modo FROM mfo_pregunta WHERE id_cuestionario = ? order BY RAND()";
+    $sql = "SELECT id_pre,pregunta,modo FROM mfo_pregunta WHERE id_cuestionario = ? ORDER BY RAND()";
     $result = $GLOBALS['db']->auto_array($sql,array($test),true);
     $preguntas = array();
     if (!empty($result)){
