@@ -1,4 +1,12 @@
 <div class="container">
+
+	<?php if ($vista == 'ofertas' && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
+		<div class="col-md-12" align="right" >
+			<b>Autopostulaciones restantes: <span class="parpadea" style="color:red"><?php echo $autopostulaciones_restantes['p_restantes']; ?></span></b>
+		</div>
+		<br><br>
+	<?php } ?>
+	
 	<div class="col-md-12">
 	  	<div class="col-md-4 visible-md-inline visible-lg-inline">
 	  		<b>
@@ -65,7 +73,7 @@
             
 		    <div class="panel panel-default shadow-panel1">
 	            <div class="panel-heading">
-	              <span><i class="fa fa-user-clock"></i> Jornada</span>
+	              <span><i class="fa fa-clock-o"></i> Jornada</span>
 	            </div>
 	            <div class="panel-body">
 	          		<div class="filtros">
@@ -217,11 +225,12 @@
 												}else{
 													
 													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $aspirantesXoferta[$o['id_ofertas']] != 0) { 
-														echo ' | <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/'.$o['id_ofertas'].'/">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</a>';
+														echo ' | <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.$o['id_ofertas'].'/1/">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</a>';
+
 													}elseif($aspirantesXoferta[$o['id_ofertas']] == 0){
 														echo ' | <span class="btn-xs btn-danger parpadea">No tiene Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</span>';
 													}else{
-														echo ' | <span style="cursor:pointer" onclick="abrirModal('."'Debe contratar un plan que permita ver Aspirantes'".')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</span>';
+														echo ' | <span style="cursor:pointer" onclick="abrirModal('."'Debe contratar un plan que permita ver Aspirantes'".',"alert_descarga")" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$aspirantesXoferta[$o['id_ofertas']].' )</span>';
 													}
 												}
 												?>
@@ -232,11 +241,12 @@
 												<?php } ?>
 
 												<br>
-											    <span style="color:#333;"><?php echo 'Fecha de creaci&oacute;n: '.date("d-m-Y", strtotime($o['fecha_creado'])); ?></span>
+
+											    <span style="color:#333;"><?php echo 'Fecha de creaci&oacute;n de la oferta: '.date("d-m-Y", strtotime($o['fecha_creado'])); ?></span>
 												<br>
 												<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 													<div class="row">
-														<p style="color:#C3BABA" class="cortar" align="justify"><?php echo html_entity_decode($o['descripcion']); ?></p>
+														<p style="color:#C3BABA" class="cortar" align="center"><?php echo html_entity_decode($o['descripcion']); ?></p>
 													</div>
 												<?php } ?>
 								  			</div>
@@ -244,7 +254,8 @@
 								  	
 								  				<div class="col-sm-1 col-md-2 col-lg-1" align="center" style="vertical-align: middle; padding-top: 5%;">
 													<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
-														<a href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".$o['id_postulacion']."/"; ?>">
+
+														<a title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".$o['id_postulacion']."/"; ?>">
 															<i class="fa fa-trash fa-2x"></i>
 														</a>
 													<?php } ?>

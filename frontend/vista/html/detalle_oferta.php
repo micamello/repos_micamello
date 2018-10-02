@@ -6,7 +6,7 @@
           <div class="col-md-8">
               <div class="panel panel-primary shadow-panel1">
                 <div class="panel-heading">
-                    <?php echo $o['titulo']; ?>
+                    <?php echo utf8_encode($o['titulo']); ?>
                 </div>
                 <div class="panel-body">
                   <div style="margin: 0;">
@@ -14,7 +14,7 @@
                     if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
                       if ($o['confidencial'] == 0) { ?>
                         <div class="confidencial">
-                          <?php echo $o['empresa']; ?>
+                          <?php echo utf8_encode($o['empresa']); ?>
                         </div>
                       <?php } else {?>
                         <div class="confidencial">
@@ -146,7 +146,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                               <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
-                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
+                              <input class="form-control" type="text" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
                           </div>
                           <h5>
                             <button type="submit" class="btn btn-success">POSTULARSE</button>

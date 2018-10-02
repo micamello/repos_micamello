@@ -90,7 +90,20 @@ jQuery(document).ready(function ($) {
 });
 
 
-function abrirModal(mensaje){
+function abrirModal(mensaje,id){
     $('#mensaje').html(mensaje);
-    $('#alert_descarga').modal();
+    $('#'+id).modal();
+}
+
+function validaNumeros(evt){
+     var keynum = window.Event ? evt.which : evt.keyCode;    
+     if((keynum > 47 && keynum < 58) || keynum == 8 
+    || keynum == 9 || keynum == 13 || keynum == 116 
+    || (keynum > 36 && keynum < 41) 
+    || (keynum > 95 && keynum < 106)){
+      return true;
+     }
+     else{
+      return false;
+     }
 }

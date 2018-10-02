@@ -89,7 +89,8 @@ displayValue = function() {
                     .attr('transform', "translate(" + trX + ", " + trY+ ")")
                     .attr("font-size",15)                                      
                     .style("fill", '#000000');
-            }      
+            } 
+    
     texts.append("text")
         .text(function(){
             return 0+' ';

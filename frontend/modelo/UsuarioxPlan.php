@@ -40,7 +40,7 @@ class Modelo_UsuarioxPlan{
 	
   public static function publicacionesRestantes($usuario){
     if (empty($usuario)){ return false; }
-    $sql = "SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);";
+      $sql = "SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;"; 
     return $GLOBALS['db']->auto_array($sql,array($usuario));
   }
 
@@ -91,6 +91,16 @@ class Modelo_UsuarioxPlan{
       }
     }
     return $datos;
+  }
+
+  public static function obtenerAspiranteSegunPlanContratado($id_usuario,$id_usuario_plan){
+    $sql = "SELECT count(1) AS aspirantes
+    FROM mfo_postulacion p, mfo_usuario_plan up, mfo_oferta o
+    WHERE up.id_plan = o.id_plan
+    AND o.id_ofertas = p.id_ofertas
+    AND up.id_usuario_plan = $id_usuario_plan
+    AND o.id_usuario = $id_usuario";
+    return $GLOBALS['db']->auto_array($sql,'',false);
   }
 }  
 ?>

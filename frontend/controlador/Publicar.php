@@ -156,8 +156,8 @@ class Controlador_Publicar extends Controlador_Base {
     }
 
     if (count($data_idioma_nivel) != count($array_nivel_idioma)) {
-          throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
-        }
+      throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
+    }
     return $data_idioma_nivel;
   }
 

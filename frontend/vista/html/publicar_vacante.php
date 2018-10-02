@@ -239,7 +239,7 @@
 
 						<div class="col-md-8 col-md-offset-2">
 							<div class="form-group">
-								<label>Idiomas seleccionados: </label><div class="help-block with-errors"></div>
+								<label>Idiomas seleccionados: </label><div id="listado_idiomas" class="help-block with-errors"></div>
 								<!-- <div class="col-md-12"> -->
 									<div id="error_msg">
 									</div>
