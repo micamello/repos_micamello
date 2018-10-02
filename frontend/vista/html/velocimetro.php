@@ -6,7 +6,9 @@
           <ul class="checkout-bar">
             <li class="visited">Registro</li>
             <li class="visited">Completar Perfil</li>
-            <?php for($i=1;$i<=$nrototaltest;$i++){ ?>
+            <?php 
+
+            for($i=1;$i<=$nrototaltest;$i++){ ?>
               <?php 
                if ($i < $nrotestusuario){
                  $clase = "visited";

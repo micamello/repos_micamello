@@ -56,12 +56,14 @@ switch ($carpeta){
 		$mostrar = (!$resultado) ? false : true;		
 	break;
 }
+
 if(!empty($param1) && !empty($param2) && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::EMPRESA){
 
-	$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idusuario);
-	$descargas = Modelo_Descarga::cantidadDescarga($idusuario);
+	$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
+	$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
 	$infoHv = Modelo_InfoHv::obtieneHv($idusuario);	
+
 	if(in_array('-1',$posibilidades) ){
 		Modelo_Descarga::registrarDescarga($infoHv[0]['id_infohv'],$idusuario);
 	}else{
@@ -83,7 +85,14 @@ if ($mostrar){
   readfile($ruta); 	
 }   
 else{
-	echo 'Archivo no encontrado';
+
+	if(isset($cantidadRestante) && $cantidadRestante == 0){
+		$_SESSION['mostrar_error'] = 'Ya agoto su cupón de descargas';
+	}else{
+		$_SESSION['mostrar_error'] = 'Archivo no encontrado';
+	}
+	$enlace = PUERTO.'://'.HOST.'/verAspirantes/2/0/1/';
+	header('Location: '.$enlace);
 }
 exit;
 ?>

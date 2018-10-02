@@ -30,7 +30,7 @@ define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
 define('GENERO', array('M'=>'Masculino', 'F'=>'Femenino', 'P'=>'Prefiero no decirlo'));
 define('VALOR_GENERO', array('M'=>'1', 'F'=>'2', 'P'=>'3'));
-define('PRIORIDAD', array('1'=>'Gratuito', '2'=>'Pagado'));
+define('PRIORIDAD', array('1'=>'Plan Gratuito', '2'=>'Plan Pagado'));
 define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
 define('SALARIO', array('1'=>'Menos de 341', '2'=>'M&aacute;s de 341', '3'=>'M&aacute;s de 700'));
 define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as', '3'=>'&Uacute;ltima semana', '4'=>'&Uacute;ltimo mes'));

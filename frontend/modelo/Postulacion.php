@@ -33,5 +33,6 @@ class Modelo_Postulacion{
 		$result = $GLOBALS['db']->delete('mfo_postulacion','id_auto = '.$id_postulacion);
 		return $result;
 	}
+
 }  
 ?>

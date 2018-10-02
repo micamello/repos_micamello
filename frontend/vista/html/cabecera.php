@@ -205,7 +205,7 @@ if(isset($show_banner)){ ?>
     <?php if(!isset($show_banner)){ ?> 
       <br><br><br><br>
     <?php } ?>
-    <div class="container">
+    <div class="container-fluid">
       <ol class="breadcrumb" align="left">
         <?php 
         $cont = 1;

@@ -42,6 +42,7 @@ class Controlador_Oferta extends Controlador_Base{
         }
         
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+        $autopostulaciones_restantes['p_restantes'] = 0;
         switch ($opcion) {
         	case 'filtrar':
 
@@ -55,7 +56,7 @@ class Controlador_Oferta extends Controlador_Base{
                   $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario);
                   $breadcrumbs['oferta'] = 'Ofertas de empleo';
               }else if($vista == 'vacantes'){
-                  $breadcrumbs['vacantes'] = 'Mis Vacantes';
+                  $breadcrumbs['vacantes'] = 'Mis Ofertas';
                   $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
               }else{
                   $breadcrumbs['postulacion'] = 'Mis postulaciones';
@@ -144,7 +145,8 @@ class Controlador_Oferta extends Controlador_Base{
                   }
               }
 
-              $postulacionesFiltradas    = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,false);
+              $ofertas = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,false);
+              $ofertas = self::ordenarOfertasXareasUsuario($idUsuario,$ofertas);
 
               $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'vista'=>$vista));  
 
@@ -153,7 +155,7 @@ class Controlador_Oferta extends Controlador_Base{
                   'arrarea'       => $arrarea,
                   'arrprovincia'  => $arrprovincia,
                   'jornadas'      => $arrjornadas,
-                  'ofertas'       => $postulacionesFiltradas,
+                  'ofertas'       => $ofertas,
                   'postulacionesUserLogueado' => $postulacionesUserLogueado,
                   'link'=>$link,
                   'vista'=>$vista,
@@ -230,7 +232,8 @@ class Controlador_Oferta extends Controlador_Base{
                 $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
                 $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
                 
-                $breadcrumbs['vacantes'] = 'Mis vacantes';
+
+                $breadcrumbs['vacantes'] = 'Mis Ofertas';
                 
                 $tags = array(
                     'breadcrumbs'=>$breadcrumbs,
@@ -273,14 +276,15 @@ class Controlador_Oferta extends Controlador_Base{
     	      $arrarea       = Modelo_Area::obtieneListadoAsociativo();
     	      $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
     	      $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
-
     	      $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
+            $ofertas = self::ordenarOfertasXareasUsuario($idUsuario,$ofertas);
 
     	      if($vista != 'postulacion'){
     	          $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario,$page);
     	          $breadcrumbs['oferta'] = 'Ofertas de empleo';
     	      }else{
     	          $breadcrumbs['postulacion'] = 'Mis postulaciones';
+                $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
     	      }
 
     	      $tags = array(
@@ -289,6 +293,7 @@ class Controlador_Oferta extends Controlador_Base{
     	          'arrprovincia'  => $arrprovincia,
     	          'jornadas'      => $jornadas,
     	          'ofertas'       => $ofertas,
+                'autopostulaciones_restantes'=>$autopostulaciones_restantes,
     	          'postulacionesUserLogueado' => $postulacionesUserLogueado,
     	          'page' => $page,
     	          'vista'=>$vista
@@ -308,6 +313,20 @@ class Controlador_Oferta extends Controlador_Base{
         }
     }
 
+    public function ordenarOfertasXareasUsuario($idUsuario,$ofertas){
+
+      $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($idUsuario);
+      $array_ofertasXarea = $array_ofertaxRestantes = array(); 
+      foreach ($ofertas as $key => $value) {
+        if(in_array($value['id_area'], $usuarioxarea)){
+          $array_ofertasXarea[] = $value;
+        }else{
+          $array_ofertaxRestantes[] = $value;
+        } 
+      }
+      return $ofertas = array_merge($array_ofertasXarea,$array_ofertaxRestantes);
+    }
+
     public function guardarPostulacion($id_usuario,$id_oferta,$aspiracion,$vista){
         try{
             if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'postulacion') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
@@ -316,7 +335,7 @@ class Controlador_Oferta extends Controlador_Base{
                 }
                 $GLOBALS['db']->commit();
                 $_SESSION['mostrar_exito'] = 'Se ha postulado a esta oferta exitosamente';
-    	        		$this->redirectToController('postulacion');
+    	        	$this->redirectToController('oferta');
             }else{
                 $_SESSION['mostrar_error'] = "No tiene permiso para postularse, contrate un plan"; 
                 $this->redirectToController('detalleOferta/'.$vista.'/'.$id_oferta);

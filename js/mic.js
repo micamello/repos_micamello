@@ -41,15 +41,15 @@ $('.modal').on('hidden.bs.modal', function(){
 if (document.getElementById("area_select"))
 {
   $("#area_select").selectr({
-                placeholder: 'Buscar...'
-            });
+      placeholder: 'Buscar...'
+  });
 }
 
 if (document.getElementById("nivel_interes"))
 {
   $("#nivel_interes").selectr({
-                placeholder: 'Buscar...'
-            });
+      placeholder: 'Buscar...'
+  });
 }
 
 if(document.getElementById('form_login')){

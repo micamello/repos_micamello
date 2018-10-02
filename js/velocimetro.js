@@ -77,9 +77,21 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
          .attr("font-size",25)
          .style("display", "none");      
 
-var trX = 180 - 230 * Math.cos(percToRad(percent / 2));
-var trY = 195 - 210 * Math.sin(percToRad(percent / 2));
+var trX = Math.abs(140 * Math.cos(percToRad(percent / 2)));
+var trY = Math.abs(155 * Math.sin(percToRad(percent / 2)));
 
+if(value<50){
+displayValue = function() {
+                texts.append("text")
+                    .text(function(){
+                        return dataset[0].value+'%';
+                    })
+                    .attr('id', "Value")
+                    .attr('transform', "translate(" + trY + ", " + trX+ ")")
+                    .attr("font-size",15)                                      
+                    .style("fill", '#000000');
+            } 
+            }else{
 displayValue = function() {
                 texts.append("text")
                     .text(function(){
@@ -89,7 +101,8 @@ displayValue = function() {
                     .attr('transform', "translate(" + trX + ", " + trY+ ")")
                     .attr("font-size",15)                                      
                     .style("fill", '#000000');
-            }      
+            } 
+            }     
     texts.append("text")
         .text(function(){
             return 0+' ';

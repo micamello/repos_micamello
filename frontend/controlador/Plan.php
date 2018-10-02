@@ -36,11 +36,19 @@ class Controlador_Plan extends Controlador_Base {
     $desactivarPlan = Utils::getParam('desactivarPlan', '', $this->data);
 
     if(!empty($desactivarPlan)){
-        $r = Modelo_UsuarioxPlan::desactivarPlan($desactivarPlan);
-        if(!$r){
-            $_SESSION['mostrar_error'] = 'No se pudo eliminar la suscripción, intentelo de nuevo';
+
+        $id_usuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
+        $aspirantes = Modelo_UsuarioxPlan::obtenerAspiranteSegunPlanContratado($id_usuario,$desactivarPlan);
+
+        if($aspirantes['aspirantes'] == 0){
+          $r = Modelo_UsuarioxPlan::desactivarPlan($desactivarPlan);
+          if(!$r){
+              $_SESSION['mostrar_error'] = 'No se pudo eliminar la suscripción, intentelo de nuevo';
+          }else{
+              $_SESSION['mostrar_exito'] = 'Se ha eliminado la afiliación del plan exitosamente';
+          }
         }else{
-            $_SESSION['mostrar_exito'] = 'Se ha eliminado la afiliación del plan exitosamente';
+          $_SESSION['mostrar_error'] = 'No se puede eliminar la suscripción, ya existen postulados';
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
     }
