@@ -15,7 +15,7 @@ class Controlador_Aspirante extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
-        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes']){
+        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
         }
 
@@ -38,8 +38,8 @@ class Controlador_Aspirante extends Controlador_Base
 
         switch ($opcion) {
             case 'filtrar':
-                
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                                
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
 
@@ -218,7 +218,7 @@ class Controlador_Aspirante extends Controlador_Base
                 }
 
                 $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'O'=>1,'Q'=>0);
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,false);

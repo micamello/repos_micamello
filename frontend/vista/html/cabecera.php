@@ -143,7 +143,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="<?php echo PUERTO."://".HOST;?>">
-            <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.$_SESSION['mfo_datos']['sucursal']['id_sucursal'].'.'.$_SESSION['mfo_datos']['sucursal']['extensionlogo'];?>" alt="micamellologo">
+            <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
           </a>
         </div>
         <!-- End Header Navigation -->

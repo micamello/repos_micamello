@@ -1,5 +1,5 @@
 <?php
-define('HOST', 'localhost/repos_micamello');
+//define('HOST', 'localhost/repos_micamello');
 define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
@@ -11,12 +11,12 @@ define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/');
 define('RUTA_VISTA', FRONTEND_RUTA.'frontend/Vista/');
 define('TOKEN', 'token.micamello.ecuador');
 define('HORAS_VALIDO_PASSWORD', '24');
-define('MAIL_CORREO','support@micamello.com.ec');
+define('MAIL_CORREO','info@micamello.com.ec');
 define('MAIL_NOMBRE','Mi Camello');
-define('MAIL_USERNAME','micamelloecuador@gmail.com');
-define('MAIL_PASSWORD','ecuador2018');
+define('MAIL_USERNAME','info@micamello.com.ec');
+define('MAIL_PASSWORD','bXKX695=ukC@');
 define('MAIL_PORT','587');
-define('MAIL_HOST','smtp.gmail.com');
+define('MAIL_HOST','mail.micamello.com.ec');
 define('KEY_ENCRIPTAR','micamelloecuador');
 define('PESO_IMAGEN','1000000');
 define('PESO_ARCHIVO','2000000');
@@ -24,7 +24,7 @@ define('PATH_PROFILE',FRONTEND_RUTA.'imagenes/usuarios/profile/');
 define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
 define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'alert-warning'));
 define('ESTADOS',array('1'=>'Activo','0'=>'Inactivo'));
-define('MAIL_SUGERENCIAS','micamelloecuador@gmail.com');
+define('MAIL_SUGERENCIAS','info@micamello.com.ec');
 define('PATH_COMPROBANTE',FRONTEND_RUTA.'imagenes/usuarios/comprobante/');
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
@@ -42,4 +42,5 @@ define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('1'=>'S&iacute;', '0'=>'No'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Casado(a)', '3'=>'En union', '4'=>'Divorciado(a)','5'=>'Viudo(a)'));
 define('CRON_RUTA',FRONTEND_RUTA.'cron/');
+define('DIAS_AUTOPOSTULACION','3');
 ?>

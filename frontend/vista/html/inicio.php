@@ -86,13 +86,12 @@
                   <div class="carousel-inner">
                     <?php 
                         $cont = 1;
-                        foreach($arrarea as $area) {
-                        $nro_areas = Modelo_Oferta::obtieneNroArea($area["id_area"]);  
+                        foreach($arrarea as $area) {                        
                     ?>
                         <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
                           <div class="brand_item col-md-2 col-sm-6" align="center"><i class="<?php echo $area['ico'] ?> font_awesome"></i><br><br>
                             <h5><?php echo utf8_encode($area['nombre']) ?></h5>
-                            <div class="nvac">(<?php echo $nro_areas; ?> vacantes)</div><br><br>
+                            <div class="nvac">(<?php echo $area['ofertas']; ?> vacantes)</div><br><br>
                           </div>
                         </div>
                     <?php $cont++; } ?>

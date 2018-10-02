@@ -107,7 +107,7 @@
                 <div>
                     <h5>
                         <span class="titulos">Salario</span><br>
-                        - <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($o['salario'],2);?>
+                        - <?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
                     </h5>
                 </div>
                 <div>
@@ -145,7 +145,7 @@
                         <div class="col-md-12">
                           <div class="form-group">
                               <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
-                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format(450,2); ?>" required/>
+                              <input class="form-control" type="text" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,2); ?>" required/>
                           </div>
                         </div>
                         <h5>

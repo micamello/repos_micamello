@@ -11,17 +11,11 @@ class Controlador_Oferta extends Controlador_Base{
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
     //Obtiene todos los banner activos segun el tipo
-    $arrbanner     = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
+    $arrbanner     = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);
+    $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
-    //Muestra solo un banner de tipo candidato para no dar impresion que cambia de pagina
-    $orden = 0;
-    $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
-
-    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PUBLICIDAD);
-
-    //obtiene el orden del banner de forma aleatoria segun la cantidad de banner
-    $orden = rand(1, count($arrbanner)) - 1;
-    $_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
+    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::PUBLICIDAD);
+    $_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
     $opcion = Utils::getParam('opcion', '', $this->data);
     $page = Utils::getParam('page', '1', $this->data);
@@ -45,13 +39,13 @@ class Controlador_Oferta extends Controlador_Base{
     	case 'filtrar':
 
           $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-          $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+          $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
           $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
           unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['vista']);
           
           if($vista == 'oferta'){
-              $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario);
+              //$postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario);
               $breadcrumbs['oferta'] = 'Ofertas de empleo';
           }else if($vista == 'vacantes'){
               $breadcrumbs['vacantes'] = 'Mis Vacantes';
@@ -153,7 +147,7 @@ class Controlador_Oferta extends Controlador_Base{
               'arrprovincia'  => $arrprovincia,
               'jornadas'      => $arrjornadas,
               'ofertas'       => $postulacionesFiltradas,
-              'postulacionesUserLogueado' => $postulacionesUserLogueado,
+              //'postulacionesUserLogueado' => $postulacionesUserLogueado,
               'link'=>$link,
               'vista'=>$vista,
               'aspirantesXoferta'=>$aspirantesXoferta
@@ -223,7 +217,7 @@ class Controlador_Oferta extends Controlador_Base{
 
         $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
         $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-        $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+        $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
         $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
         $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
 
@@ -268,15 +262,15 @@ class Controlador_Oferta extends Controlador_Base{
 	      }
 
 	      $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-	      $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+	      $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
 	      $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
 	      $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false);
-
-	      if($vista != 'postulacion'){
-	          $postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario,$page);
+        //$postulacionesUserLogueado = array();
+	      if($vista != 'postulacion'){	        
 	          $breadcrumbs['oferta'] = 'Ofertas de empleo';
 	      }else{
+            //$postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario,$page);          
 	          $breadcrumbs['postulacion'] = 'Mis postulaciones';
 	      }
 
@@ -286,7 +280,7 @@ class Controlador_Oferta extends Controlador_Base{
 	          'arrprovincia'  => $arrprovincia,
 	          'jornadas'      => $jornadas,
 	          'ofertas'       => $ofertas,
-	          'postulacionesUserLogueado' => $postulacionesUserLogueado,
+	         // 'postulacionesUserLogueado' => $postulacionesUserLogueado,
 	          'page' => $page,
 	          'vista'=>$vista
 	      );

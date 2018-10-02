@@ -10,24 +10,6 @@ if(document.getElementById('form_publicar')){
   $("#form_publicar").validator();
 }
 
-function valida_numeros(evt){
-    if(window.event){
-      keynum = evt.keyCode; 
-     }
-     else{
-      keynum = evt.which; 
-     } 
-     if((keynum > 47 && keynum < 58) || keynum == 8 
-    || keynum == 9 || keynum == 13 || keynum == 116 
-    || (keynum > 36 && keynum < 41) 
-    || (keynum > 95 && keynum < 106)){
-      return true;
-     }
-     else{
-      return false;
-     }
-}
-
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
     var dni_error = document.getElementById("error_custom_dni");
@@ -152,4 +134,3 @@ if (document.getElementById("dni")) {
     //}
   })
 }
-

@@ -183,7 +183,7 @@ function delete_item_selected(selected_item){
 }
 
 
-function valida_numeros(evt){
+/*function valida_numeros(evt){
     if(window.event){
       keynum = evt.keyCode; 
      }
@@ -199,7 +199,7 @@ function valida_numeros(evt){
      else{
       return false;
      }
-}
+}*/
 
 // function valida_letras(e) {
 //     key = e.keyCode || e.which;

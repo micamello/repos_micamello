@@ -4,15 +4,14 @@ class Modelo_Usuario{
   const CANDIDATO = 1;
   const EMPRESA = 2;
 
-  public static function obtieneNroCandidato(){
-    $sql = "SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario=? and estado=1";
-    $rs = $GLOBALS['db']->auto_array($sql,array(self::CANDIDATO));
-    return (!empty($rs['cont'])) ? $rs['cont'] : 0;
-  }
-
-  public static function obtieneNroEmpresa(){
-    $sql = "SELECT COUNT(id_usuario) AS cont FROM mfo_usuario where tipo_usuario=? and estado=1";
-    $rs = $GLOBALS['db']->auto_array($sql,array(self::EMPRESA));
+  public static function obtieneNroUsuarios($pais,$tipo=self::CANDIDATO){
+    if (empty($pais)){ return false; }
+    $sql = "SELECT COUNT(1) AS cont 
+            FROM mfo_usuario u 
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE u.tipo_usuario=? AND u.estado=1 AND p.id_pais = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($tipo,$pais));
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 
@@ -31,15 +30,20 @@ class Modelo_Usuario{
                    u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
                    r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
                    r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
-                   r.genero, r.apellidos, u.id_nacionalidad
-            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+                   r.genero, r.apellidos, u.id_nacionalidad, p.id_pais
+            FROM mfo_usuario u
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia   
+            LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
             WHERE (u.username = ? OR u.correo = ?) AND u.password = ? AND u.estado = 1";        
     return $GLOBALS['db']->auto_array($sql,array($username,$username,$password)); 
   }
 
   public static function busquedaPorCorreo($correo){
     if (empty($correo)){ return false; }
-    $sql = "select * from mfo_usuario where correo = ?";
+    $sql = "SELECT u.id_usuario,u.correo,u.nombres,r.apellidos 
+            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON u.id_usuario = r.id_usuario 
+            WHERE u.correo = ? LIMIT 1";
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
@@ -339,9 +343,19 @@ class Modelo_Usuario{
     return $rs;
   }
 
-  public static function busquedaPorId($id){
+  public static function busquedaPorId($id,$todos=false){
     if (empty($id)){ return false; }
-    $sql = "SELECT * FROM mfo_usuario WHERE id_usuario = ?";
+    if (!$todos){
+      $sql = "SELECT id_usuario, tipo_usuario, nombres FROM mfo_usuario WHERE id_usuario = ?";
+    }
+    else{
+      $sql = "SELECT u.id_usuario, u.nombres, u.correo, u.tipo_usuario, p.id_pais, r.apellidos 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario 
+              WHERE u.id_usuario = ?";
+    }
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
@@ -385,6 +399,18 @@ class Modelo_Usuario{
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }          
     }
+  }
+
+  public static function obtieneTodosCandidatos(){
+    $sql = "SELECT u.id_usuario, u.nombres, u.correo, r.apellidos, r.viajar, 
+                   p.id_provincia, p.id_pais 
+            FROM mfo_usuario u 
+            INNER JOIN mfo_requisitosusuario r ON u.id_usuario = r.id_usuario 
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia 
+            WHERE u.estado = 1 AND u.tipo_usuario = ?
+            ORDER BY u.id_usuario";
+    return $GLOBALS['db']->Query($sql,array(Modelo_Usuario::CANDIDATO));                 
   }
 
 }  

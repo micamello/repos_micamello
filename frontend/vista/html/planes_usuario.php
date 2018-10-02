@@ -38,7 +38,7 @@
                                                 <tr align="center">
                                                     <td><?php echo utf8_encode($value['nombre']); ?></td>
                                                     <td><?php echo date("d-m-Y", strtotime($value['fecha_compra'])); ?></td>
-                                                    <td><?php if($value['fecha_caducidad'] != 'Infinito'){
+                                                    <td><?php if($value['fecha_caducidad'] != 'ilimitado'){
                                                         echo date("d-m-Y", strtotime($value['fecha_caducidad'])); 
                                                         }else{ echo $value['fecha_caducidad']; } ?></td>
                                                     <td><?php echo $value['num_post_rest']; ?></td>

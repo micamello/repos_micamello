@@ -1,7 +1,6 @@
 <?php  
 $_SESSION['mostrar_exito'] = "";
 $_SESSION['mostrar_error'] = "";
-
 if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <div class="container">
 	<div class="checkout-wrap">
@@ -52,7 +51,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                    <br>
 						<?php } ?>
 						<?php 
-
 						if($btnSubir == 1){ ?>
 							<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
 		                        <label for="subirCV" class="custom_file">
@@ -65,7 +63,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 							</div>
 							<br>
                         <?php }
-
                         if($btnDescarga == 1 && $btnSubir == 1 && $btnSig == 0){ echo '<br><br><br>'; } ?>
                     </div>
 
@@ -181,14 +178,14 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            <label for="ciudad">Ciudad</label><div class="help-block with-errors"></div>
 		                                            <select id="ciudad" name="ciudad" class="form-control" <?php if($btnSig == 1){ echo 'readonly'; } ?> required>
 		                                            <?php 
-		                                            if(!empty($arrciudad)){
+		                                            if(!empty($arrciudad)){		                                          
 				                                    	foreach($arrciudad as $key => $ciudad){ 
-															echo "<option value='".$ciudad['id_ciudad'];
-															if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $key)
+															echo "<option value='".$ciudad['id_ciudad']."'";;
+															if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad'])
 															{  
 																echo " selected='selected'";
 															}
-															echo "'>".utf8_encode($ciudad['ciudad'])."</option>";
+															echo ">".utf8_encode($ciudad['ciudad'])."</option>";
 														} 
 		                                            }else{ ?>
 														<option value="">Selecciona una ciudad</option>
@@ -409,9 +406,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 															echo "<option value='".$ae['id_area']."'";
 															if (in_array($ae['id_area'], $areaxusuario))
 															{ 
-
 																echo " selected='selected'";
-
 															}
 															echo ">".utf8_encode($ae['nombre'])."</option>";
 														} 
@@ -429,9 +424,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 															echo "<option value='".$int['id_nivelInteres']."'";
 															if (in_array($int['id_nivelInteres'], $nivelxusuario))
 															{ 
-
 																echo " selected='selected'";
-
 															}
 															echo ">".utf8_encode($int['descripcion'])."</option>";
 														} 

@@ -28,19 +28,14 @@ class Modelo_UsuarioxPlan{
 	    return $GLOBALS['db']->insert('mfo_usuario_plan',$values_insert);
 	}
 
-	public static function desactivarPlan($id_usuario_plan){
-		$result = $GLOBALS['db']->update('mfo_usuario_plan',array('estado'=>0), ' id_usuario_plan = '.$id_usuario_plan);
+	public static function desactivarPlan($id_usuario_plan,$observacion=''){
+		$result = $GLOBALS['db']->update('mfo_usuario_plan',array('estado'=>0,'observacion'=>$observacion), 'id_usuario_plan = '.$id_usuario_plan);
 		return $result;
 	}
-
-  public static function cancelarPlan($usuario,$plan,$observacion=''){
-    if (empty($usuario) || empty($plan)){ return false; }
-    return $GLOBALS['db']->update('mfo_usuario_plan',array('estado'=>0,'observacion'=>$observacion), 'id_usuario = '.$usuario.' AND id_plan = '.$plan);
-  }
 	
   public static function publicacionesRestantes($usuario){
     if (empty($usuario)){ return false; }
-    $sql = "SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL);";
+    $sql = "SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL)";
     return $GLOBALS['db']->auto_array($sql,array($usuario));
   }
 
@@ -92,5 +87,34 @@ class Modelo_UsuarioxPlan{
     }
     return $datos;
   }
+
+  public static function planesConAutopostulaciones($idusuario){
+    if (empty($idusuario)){ return false; }
+    $sql = "SELECT id_usuario_plan, fecha_compra, num_post_rest 
+            FROM mfo_usuario_plan 
+            WHERE id_usuario = ? AND estado = 1 AND 
+                  fecha_caducidad > NOW() AND num_post_rest > 0 
+            ORDER BY fecha_compra";
+    return $GLOBALS['db']->auto_array($sql,array($idusuario),true);   
+  }
+
+  public static function consultaNroPostulaciones($idusuarioplan){
+    if (empty($idusuarioplan)){ return false; }
+    $sql = "SELECT num_post_rest FROM mfo_usuario_plan WHERE id_usuario_plan = ? LIMIT 1";
+    $rs = $GLOBALS['db']->auto_array($sql,array($idusuarioplan));    
+    return $rs["num_post_rest"];
+  }
+
+  public static function ultimoPlanActivo($usuario,$plan){
+    if (empty($usuario) || empty($plan)){ return false; }
+    $sql = "SELECT id_usuario_plan FROM mfo_usuario_plan WHERE id_usuario = ? AND id_plan = ? AND estado = 1 ORDER BY fecha_compra DESC LIMIT 1";
+    return $GLOBALS['db']->auto_array($sql,array($usuario,$plan));   
+  }
+
+  public static function sumarPublicaciones($id_plan_usuario){
+    if (empty($id_plan_usuario)) { return false; }    
+    return $GLOBALS['db']->execute("UPDATE mfo_usuario_plan SET num_post_rest = num_post_rest + 1 WHERE id_usuario_plan = ".$id_plan_usuario);
+  }
+
 }  
 ?>

@@ -77,7 +77,7 @@
            <div class="col-md-6">
              <div class="form-group">
                <label for="numero_cand">Celular: </label><div class="help-block with-errors" id="error_custom_cel"></div>
-               <input type="text" class="form-control" name="numero_cand" id="numero_cand" required onkeydown="return valida_numeros(event);">
+               <input type="text" class="form-control" name="numero_cand" id="numero_cand" required onkeydown="return validaNumeros(event);">
              </div>
            </div> 
 
@@ -145,11 +145,11 @@
               <div class="conditions_components">
                 <div class="" align="left">
                   <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="term_cond" id="term_cond" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="blank">Aceptar términos y condiciones </a></label>
+                    <input type="checkbox" name="term_cond" id="term_cond" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank">Aceptar términos y condiciones </a></label>
                 </div>
                 <div class="" align="left">
                   <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="conf_datos" id="conf_datos" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="blank">Políticas de Privacidad </a></label>
+                    <input type="checkbox" name="conf_datos" id="conf_datos" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Políticas de Privacidad </a></label>
                 </div>
               </div>
 
@@ -203,8 +203,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="foot_div_section">
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">T&eacute;rminos y Condiciones</a>| 
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".$_SESSION['mfo_datos']['sucursal']['id_sucursal'].".pdf";?>" target="_blank">Pol&iacute;ticas de Privacidad</a>|
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">T&eacute;rminos y Condiciones</a>| 
+                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Pol&iacute;ticas de Privacidad</a>|
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Pol&iacute;ticas de Cookies</a>|
 				    <a class="legal_info_content" href="http://blog.micamello.com.ec" target="blanked">Blog</a>|
 
