@@ -15,7 +15,7 @@ class Controlador_Aspirante extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
-        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes']){
+        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
         }
 
@@ -205,7 +205,9 @@ class Controlador_Aspirante extends Controlador_Base
             break;
 
             case 'detallePerfil':
+            if (Modelo_Usuario::EMPRESA) {
                 $this->perfilAspirante($username, $id_oferta);
+            }
             break;
 
             default:
@@ -287,38 +289,36 @@ class Controlador_Aspirante extends Controlador_Base
 
     public function perfilAspirante($username, $id_oferta){
         $datos = Modelo_Usuario::existeUsuario($username);
+        $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
+
         $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
-        Utils::log($datos['id_usuario']);
-        array_push($datos, $asp_salarial);
         $contacto = array();
         $array_rasgosxusuario = array();
 
         if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-                $contacto = ["correo"=>Utils::ocultarEmail($datos['correo']), "telefono"=>Utils::ocultarCaracteres($datos['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($datos['dni'], 0, 0)];
+                $contacto = ["correo"=>Utils::ocultarEmail($info_usuario['correo']), "telefono"=>Utils::ocultarCaracteres($info_usuario['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($info_usuario['dni'], 0, 0)];
             }
             else{
-                $contacto = ["correo"=>$datos['correo'], "telefono"=>$datos['telefono'], "dni"=>$datos['dni']];
+                $contacto = ["correo"=>$info_usuario['correo'], "telefono"=>$info_usuario['telefono'], "dni"=>$info_usuario['dni']];
             }
 
-        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($datos['id_usuario']);
+        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
+                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($info_usuario['id_usuario']);
                 $resultados = array();
                 $rasgoxtest = array();
                 foreach ($cuestionariosUsuario as $cuestionarios) {
                   $test = "Test".$cuestionarios['id_cuestionario'];
-                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($datos['id_usuario'], $cuestionarios['id_cuestionario']);
+                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($info_usuario['id_usuario'], $cuestionarios['id_cuestionario']);
                   foreach ($rasgoxtest as $res) {
-                      // Utils::log(print_r($res, true));
                     array_push($array_rasgosxusuario, array("nombre"=>$res['nombre'], "valor"=>$res['valor']));
                   }
                 }
-                // Utils::log("eder: ".print_r($array_rasgosxusuario, true));
-            }    
-            Utils::log(print_r($datos, true));
+            }
 
-        $tags = array("NoConf"=>$datos,
+        $tags = array("infoUsuario"=>$info_usuario,
                         "Conf"=>$contacto,
-                        "Resultados"=>$array_rasgosxusuario
+                        "Resultados"=>$array_rasgosxusuario,
+                        "asp_sararial"=>$asp_salarial
                   );
 
         $tags["template_js"][] = "mic";

@@ -57,6 +57,7 @@
   Validator.FOCUS_OFFSET = 20
 
   Validator.DEFAULTS = {
+    // ignore: '',
     delay: 500,
     html: false,
     disable: true,

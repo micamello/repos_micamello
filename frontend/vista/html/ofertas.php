@@ -235,7 +235,7 @@
 												<br>
 												<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 													<div class="row">
-														<p style="color:#C3BABA" class="cortar" align="justify"><?php echo html_entity_decode($o['descripcion']); ?></p>
+														<p style="color:#C3BABA" class="cortar" align="justify"><?php echo strip_tags(html_entity_decode($o['descripcion'])); ?></p>
 													</div>
 												<?php } ?>
 								  			</div>
