@@ -366,7 +366,7 @@
 												<td style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>
 
 												<?php if($vista == 1){ ?>
-													<td style="vertical-align: middle; text-align: center;"><?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($a['asp_salarial'],2); ?></td>
+													<td style="vertical-align: middle; text-align: center;"><?php echo SUCURSAL_MONEDA.number_format($a['asp_salarial'],2); ?></td>
 												<?php } ?>
 												<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 								            		<?php 

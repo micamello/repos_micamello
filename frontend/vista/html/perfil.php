@@ -1,7 +1,6 @@
 <?php  
 $_SESSION['mostrar_exito'] = "";
 $_SESSION['mostrar_error'] = "";
-
 if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <div class="container">
 	<div class="checkout-wrap">
@@ -72,7 +71,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 					<div class="panel panel-default shadow" style="border-radius: 20px;">
 				    	
 				    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/cambiar_clave.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
-
 			           	<div>
 			                <label for="cambiar" class="custom_file">
 			                	<a onclick="abrirModal('','cambiar_clave');">
@@ -196,7 +194,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            <label for="ciudad">Ciudad <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
 		                                            <select id="ciudad" name="ciudad" class="form-control" <?php if($btnSig == 1){ echo 'readonly'; } ?> required>
 		                                            <?php 
-		                                            if(!empty($arrciudad)){
+		                                            if(!empty($arrciudad)){		                                          
 				                                    	foreach($arrciudad as $key => $ciudad){ 
 															echo "<option value='".$ciudad['id_ciudad']."'";
 															if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad'])

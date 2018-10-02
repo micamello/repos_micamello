@@ -51,7 +51,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label class="">Salario: </label><div class="help-block with-errors"></div>
-								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return valida_numeros(event);" required value="<?php
+								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return validaNumeros(event);" required value="<?php
 								    if(isset($_REQUEST['salario'])){
 								                $name = $_REQUEST['salario'];
 								                echo $name;
@@ -63,7 +63,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cantidad de vacantes: </label><div class="help-block with-errors"></div>
-								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return valida_numeros(event);" value="<?php
+								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);" value="<?php
 								    if(isset($_REQUEST['vacantes'])){
 								                $name = $_REQUEST['vacantes'];
 								                echo $name;
@@ -348,7 +348,7 @@
 							<div class="form-group">
 								<label>Edad mínima: </label><div class="help-block with-errors"></div>
 
-								<input type="number" name="edad_min" min="18" class="form-control" onkeydown=" return valida_numeros(event);" value="<?php
+								<input type="number" name="edad_min" min="18" class="form-control" onkeydown=" return validaNumeros(event);" value="<?php
 
 								    if(isset($_REQUEST['edad_min'])){
 								                $name = $_REQUEST['edad_min'];
@@ -362,7 +362,7 @@
 							<div class="form-group">
 								<label>Edad máxima: </label><div class="help-block with-errors"></div>
 
-								<input type="number" name="edad_max" min="18" max="100" class="form-control" onkeydown=" return valida_numeros(event);" value="<?php
+								<input type="number" name="edad_max" min="18" max="100" class="form-control" onkeydown=" return validaNumeros(event);" value="<?php
 
 								    if(isset($_REQUEST['edad_max'])){
 								                $name = $_REQUEST['edad_max'];

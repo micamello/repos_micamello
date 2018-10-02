@@ -26,7 +26,6 @@ class Utils{
     Utils::log(__METHOD__ . " empezo una nueva sesion");
     session_name('mfo_datos');
     session_start();      
-    $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();      
   } 
  
   static public function getArrayParam($paramName,$array, $default=false){
@@ -58,7 +57,8 @@ class Utils{
     $mail->Username = MAIL_USERNAME; 
     $mail->Password = MAIL_PASSWORD;     
     $mail->From = MAIL_CORREO; 
-    $mail->FromName = MAIL_NOMBRE; 
+    $mail->FromName = MAIL_NOMBRE;         
+    $mail->SMTPAutoTLS = false;    
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 
@@ -293,6 +293,19 @@ class Utils{
     $str = $contenido;  
     fwrite($fd, $str . "\n");
     fclose($fd);
+  }
+
+  static public function restarDiasLaborables($fecha,$dias){
+    $nrodias = 1; $cont_dias = 1;
+    while($nrodias <= $dias){
+      $dias_antes = strtotime($fecha." -".$cont_dias." days");
+      $dia_semana = date("w",$dias_antes);
+      if ($dia_semana != 0 && $dia_semana != 6){
+        $nrodias++;
+      }      
+      $cont_dias++;            
+    }
+    return date('Y-m-d H:i:s',$dias_antes);
   }
 
 }

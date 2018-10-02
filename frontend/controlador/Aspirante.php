@@ -35,10 +35,9 @@ class Controlador_Aspirante extends Controlador_Base
         $breadcrumbs = array();
 
         switch ($opcion) {
-            case 'filtrar':
-                
+            case 'filtrar':                
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
 
@@ -275,9 +274,7 @@ class Controlador_Aspirante extends Controlador_Base
                 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
-
                 $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0);
-
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
 
                 if($vista == 1){

@@ -40,7 +40,7 @@
                                                 <tr align="center">
                                                     <td style="text-align: center;" data-title="Nombre:"><?php echo utf8_encode($value['nombre']); ?></td>
                                                     <td style="text-align: center; " data-title="Inscripci&oacute;n:"><?php echo date("d-m-Y", strtotime($value['fecha_compra'])); ?></td>
-                                                    <td style="text-align: center;" data-title="Vencimiento:"><?php if($value['fecha_caducidad'] != 'Infinito'){
+                                                    <td style="text-align: center;" data-title="Vencimiento:"><?php if($value['fecha_caducidad'] != 'ilimitado'){
                                                         echo date("d-m-Y", strtotime($value['fecha_caducidad'])); 
                                                         }else{ echo $value['fecha_caducidad']; } ?></td>
                                                     <td style="text-align: center;" data-title="Autopostulaciones:"><?php echo $value['num_post_rest']; ?></td>

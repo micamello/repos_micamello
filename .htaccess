@@ -4,9 +4,9 @@
 #AuthGroupFile /dev/null
 #require valid-user
 
-ErrorDocument 404 /repos_micamello/multisitios.php
-ErrorDocument 401 /repos_micamello/error/loginrequerido.php
-ErrorDocument 403 /repos_micamello/error/accesodenegado.php
+#ErrorDocument 404 /repos_micamello/error/paginanoencontrada.php
+#ErrorDocument 401 /repos_micamello/error/loginrequerido.php
+#ErrorDocument 403 /repos_micamello/error/accesodenegado.php
 
 <IfModule mod_headers.c> 
   <FilesMatch "\\.(ico|css|png|gif|swf)$"> 

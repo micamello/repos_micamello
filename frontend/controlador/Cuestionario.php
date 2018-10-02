@@ -82,9 +82,8 @@ class Controlador_Cuestionario extends Controlador_Base {
       $tags["template_js"][] = "cuestionario";
     }
     
-    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
-    $orden = rand(1,count($arrbanner))-1;
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);   
+    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
 
     Vista::render('cuestionario', $tags, 'cabecera','',true);    

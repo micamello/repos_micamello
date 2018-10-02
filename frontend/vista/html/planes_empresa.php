@@ -4,7 +4,7 @@
       <?php if (!empty($planes)){ ?>                
         <div class="col-md-12">        
           <h3>Seleccione un plan:</h3>
-          <input type="hidden" id="simbolo" value="<?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"];?>">          
+          <input type="hidden" id="simbolo" value="<?php echo SUCURSAL_MONEDA;?>">          
             <div class="pricingdiv">   
               <?php 
               if (!empty($gratuitos) && is_array($gratuitos)){ 
@@ -22,15 +22,16 @@
                   $permisos_grat = '';
                   foreach($listadoPermisos as $key => $permiso){
                     if ($listadoAcciones[$key] == "descargarHv"){                      
-                      $porc_descarga = ($gratuito["porc_descarga"] == 0) ? "total" : $gratuito["porc_descarga"];
+                      $porc_descarga = ($gratuito["porc_descarga"] == -1) ? "total" : $gratuito["porc_descarga"];
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
                     if ($listadoAcciones[$key] == "publicarOferta"){
                       $permiso = str_replace('NRO',$gratuito["num_post"],$permiso);
                     }  
                     $permisos_grat .= utf8_encode(trim($permiso)).'||';
-                  }                    
-                  $opc_select .= '<option value="'.$gratuito["id_plan"].'">'.$gratuito["nombre"].'</option>';
+                  }
+                  $text_publicacion = ($gratuito["num_post"] > 1) ? "publicaciones" : "publicaci&oacute;n";                      
+                  $opc_select .= '<option value="'.$gratuito["id_plan"].'">'.$gratuito["nombre"].'&nbsp;-&nbsp;'.$gratuito["num_post"].'&nbsp;'.$text_publicacion.'</option>';
                   ?>
                   <input type="hidden" id="gratpermiso_<?php echo $gratuito["id_plan"];?>" value="<?php echo $permisos_grat;?>">  
                 <?php } ?>
@@ -38,20 +39,20 @@
                   <li class="" id="grattitulo"></li>
                   <li><img id="gratimg" src=""></li>
                   <li class="titulo" id="gratdura"></li>
-                  <?php if (count($gratuitos) > 1){ ?>
-                    <li>
+                  <?php if (count($gratuitos) > 1){ ?>                    
                      <select class="form-control" id="gratcmb">
                        <?php echo $opc_select; ?>
-                     </select>
-                    </li>                    
+                     </select>                    
                   <?php } else{  ?>
-                    <input type="hidden" id="gratcmb" value="<?php echo $gratuito["id_plan"];?>">
-                    <input type="hidden" id="gratnombre" value="<?php echo utf8_encode($gratuito["nombre"]);?>">
+                    <li>
+                      <input type="hidden" id="gratcmb" value="<?php echo $gratuito["id_plan"];?>">
+                      <input type="hidden" id="gratnombre" value="<?php echo utf8_encode($gratuito["nombre"]);?>">
+                    </li>
                   <?php }?>
                   <div id="gratpermisos"></div>  
                   <li>
                     <h1 id="gratcosto"><span class="subscript"></span></h1>
-                    <a class="pricebutton" onclick="buttongrat();"><span class="icon-tag"></span> Suscribirse</a>
+                    <a class="pricebutton" onclick="buttongrat();"><span class="icon-tag"></span> Publicar Oferta</a>
                   </li>
                 </ul>
               <?php } ?> 
@@ -72,15 +73,16 @@
                   $permisos_plan = '';
                   foreach($listadoPermisos as $key => $permiso){
                     if ($listadoAcciones[$key] == "descargarHv"){
-                      $porc_descarga = ($plan["porc_descarga"] == 0) ? "total" : $plan["porc_descarga"];
+                      $porc_descarga = ($plan["porc_descarga"] == -1) ? "total" : $plan["porc_descarga"];
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
                     if ($listadoAcciones[$key] == "publicarOferta"){
                       $permiso = str_replace('NRO',$plan["num_post"],$permiso);
                     }  
                     $permisos_plan .= utf8_encode(trim($permiso)).'||';
-                  }                    
-                  $opc_select .= '<option value="'.$plan["id_plan"].'">'.$plan["nombre"].'</option>';
+                  }     
+                  $text_publicacion = ($plan["num_post"] > 1) ? "publicaciones" : "publicaci&oacute;n";               
+                  $opc_select .= '<option value="'.$plan["id_plan"].'">'.$plan["nombre"].'&nbsp;-&nbsp;'.$plan["num_post"].'&nbsp;'.$text_publicacion.'</option>';
                   ?>
                   <input type="hidden" id="planpermiso_<?php echo $plan["id_plan"];?>" value="<?php echo $permisos_plan;?>">
                 <?php } ?>
@@ -122,15 +124,16 @@
                   $permisos_aviso = '';
                   foreach($listadoPermisos as $key => $permiso){
                     if ($listadoAcciones[$key] == "descargarHv"){
-                      $porc_descarga = ($aviso["porc_descarga"] == 0) ? "total" : $aviso["porc_descarga"];
+                      $porc_descarga = ($aviso["porc_descarga"] == -1) ? "total" : $aviso["porc_descarga"];
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
                     if ($listadoAcciones[$key] == "publicarOferta"){
                       $permiso = str_replace('NRO',$aviso["num_post"],$permiso);
                     }  
                     $permisos_aviso .= utf8_encode(trim($permiso)).'||';
-                  }                    
-                  $opc_select .= '<option value="'.$aviso["id_plan"].'">'.$aviso["nombre"].'</option>';
+                  }       
+                  $text_publicacion = ($aviso["num_post"] > 1) ? "publicaciones" : "publicaci&oacute;n";               
+                  $opc_select .= '<option value="'.$aviso["id_plan"].'">'.$aviso["nombre"].'&nbsp;-&nbsp;'.$aviso["num_post"].'&nbsp;'.$text_publicacion.'</option>';
                   ?>
                   <input type="hidden" id="avisopermiso_<?php echo $aviso["id_plan"];?>" value="<?php echo $permisos_aviso;?>">  
                 <?php } ?>

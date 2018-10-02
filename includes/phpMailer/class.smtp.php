@@ -340,7 +340,8 @@ class SMTP
     {
         if (!$this->sendCommand('STARTTLS', 'STARTTLS', 220)) {
             return false;
-        }
+        }      
+
         // Begin encrypted connection
         if (!stream_socket_enable_crypto(
             $this->smtp_conn,

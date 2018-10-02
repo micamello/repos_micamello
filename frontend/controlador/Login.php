@@ -16,11 +16,21 @@ class Controlador_Login extends Controlador_Base {
         $campos = array('username'=>1, 'password'=>1);        
         $data = $this->camposRequeridos($campos);                        
         $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password"]);
-        if (!empty($usuario)){   
-           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){            
-             throw new Exception("Error en el sistema, por favor intente nuevamente");
-           }                                 
-           self::registroSesion($usuario);                   
+        if (!empty($usuario)){  
+          if ($usuario["id_pais"] != SUCURSAL_PAISID){
+            $sucursal = Modelo_Sucursal::consultaxPais($usuario["id_pais"]);
+            if (empty($sucursal)){
+              $_SESSION['mostrar_error'] = "Registro realizado en una sucursal no activa";  
+              Utils::doRedirect(PUERTO.'://'.HOST.'/');
+            }
+            else{              
+              Utils::doRedirect(PUERTO.'://'.$sucursal['dominio'].'/');
+            }            
+          } 
+          if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){            
+            throw new Exception("Error en el sistema, por favor intente nuevamente");
+          }                                 
+          self::registroSesion($usuario);                   
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");

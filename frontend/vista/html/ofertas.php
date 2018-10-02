@@ -207,21 +207,11 @@
 												<b style='color: black;'><?php echo $o['titulo']; ?></b>  
 												<?php 
 												if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
-
-													if($vista == 'postulacion'){
-												    	if(isset($o['tipo']) && $o['tipo'] == 2){ 						
-												    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
-												    	}else{
-															if(isset($postulacionesUserLogueado[$o["id_ofertas"]])){
-																$tipo = $postulacionesUserLogueado[$o["id_ofertas"]];
-																if($tipo == 2){
-														    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$tipo].'</span>';
-															    }else{
-															    	echo ' | <span class="etiquetaPostulado parpadea">Autopostulado '.POSTULACIONES[$tipo].'</span>';
-															    }
-															}
-														}
-													}
+														if($vista == 'postulacion'){
+													    	if(isset($o['tipo'])){ 						
+													    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
+													    	}													    	
+														}													
 												}else{
 													
 													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $aspirantesXoferta[$o['id_ofertas']] != 0) { 
@@ -235,7 +225,7 @@
 												}
 												?>
 												</span>
-												<?php if(isset($o['tipo']) && $o['tipo'] == 2 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+												<?php if(isset($o['tipo']) /*&& $o['tipo'] == 2*/ && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 											    	<br>
 											    	<span class="<?php echo CLASES_ESTATUS[$o['resultado']]; ?>"><b><?php echo Modelo_Oferta::ESTATUS_OFERTA[$o['resultado']]; ?></b></span>
 												<?php } ?>
@@ -246,7 +236,7 @@
 												<br>
 												<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 													<div class="row">
-														<p style="color:#C3BABA" class="cortar" align="center"><?php echo html_entity_decode($o['descripcion']); ?></p>
+														<p style="color:#C3BABA" class="cortar" align="justify"><?php echo strip_tags(html_entity_decode($o['descripcion'])); ?></p>
 													</div>
 												<?php } ?>
 								  			</div>
@@ -278,7 +268,7 @@
 								  	<div class="row">
 							   			<div class="col-md-12">
 											<div class='col-xs-6 col-md-3' align='center'>
-							                    <span class="etiquetaOferta">Salario: </span><br><?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($o['salario'],2);?>
+							                    <span class="etiquetaOferta">Salario: </span><br><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
 							                </div>
 							                <div class='col-xs-6 col-md-3' align='center'>
 							                    <span class="etiquetaOferta">Provincia: </span><br><?php echo $o['provincia']; ?>

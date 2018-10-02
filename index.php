@@ -1,6 +1,7 @@
 <?php
 require_once 'constantes.php';
 require_once 'init.php';
+include 'multisitios.php';
 
 /*if( (!isset($_GET['mostrar']) || $_GET['mostrar'] != 'logout') && !Model_Usuario::isLoggedIn() && 
     (!isset($_GET['mostrar']))){
