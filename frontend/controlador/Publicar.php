@@ -183,6 +183,7 @@ class Controlador_Publicar extends Controlador_Base {
 
     //VERIFICAR TIENE PARA PUBLICAR OFERTA 
     if (!Modelo_Oferta::guardarOferta($data, $id_reqOf, $idusu, $id_plan_usuario)) {
+
       throw new Exception("Ha ocurrido un error, intente nuevamente"); 
     }
 

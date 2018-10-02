@@ -308,6 +308,7 @@ class Utils{
       return substr($name,0, 0) . str_repeat('*', $len) . "@" . end($em); 
   }
 
+
   static public function restarDiasLaborables($fecha,$dias){
     $nrodias = 1; $cont_dias = 1;
     while($nrodias <= $dias){
@@ -320,5 +321,33 @@ class Utils{
     }
     return date('Y-m-d H:i:s',$dias_antes);
   }
+
+  public static function generarUsername($email){
+    $generado = self::generateRandomString();
+    $emailextract = substr($email, 0, strpos($email, '@'));
+    $username = $emailextract.$generado;
+    return strtolower($username);
+  }
+
+  public static function generateRandomString() {
+      $length = rand(6, 10);
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $charactersLength = strlen($characters);
+      $randomString = '';
+      for ($i = 0; $i < $length; $i++) {
+          $randomString .= $characters[rand(0, $charactersLength - 1)];
+      }
+      return $randomString;
+  }
+
+  public static function validar_EC($dni){
+    if (empty($dni)) {return false;}
+    $val = false;
+    if(ValidadorEc::validarCedula($dni) == true || ValidadorEc::validarRucPersonaNatural($dni) == true || ValidadorEc::validarRucSociedadPrivada($dni) == true || ValidadorEc::validarRucSociedadPublica($dni) == true) {
+      $val = true;
+      }
+      return $val;
+    }
+
 }
 ?>

@@ -60,19 +60,19 @@ class Controlador_Registro extends Controlador_Base {
 
       try{
         if ($_POST['tipo_usuario'] == 1) {
-          $campos = array('username'=>1,'correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area_select'=>1,'nivel_interes'=>1);          
+          $campos = array('correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area_select'=>1,'nivel_interes'=>1);          
         }
 
         if ($_POST['tipo_usuario'] == 2) {
-          $campos = array('username'=>1,'correo'=>1, 'name_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1);          
+          $campos = array('correo'=>1, 'name_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, "nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0);          
         }
 
         $data = $this->camposRequeridos($campos);
 
-        $datousername = Modelo_Usuario::existeUsuario($data["username"]);
-        if (!empty($datousername)){
-          throw new Exception("El usuario ".$data["username"]." ya existe");
-        }
+        // $datousername = Modelo_Usuario::existeUsuario($data["username"]);
+        // if (!empty($datousername)){
+        //   throw new Exception("El usuario ".$data["username"]." ya existe");
+        // }
         $datocorreo = Modelo_Usuario::existeCorreo($data["correo"]);
         if (empty($datocorreo)){
           throw new Exception("El correo ".$data["correo"]." ya existe");
@@ -91,9 +91,11 @@ class Controlador_Registro extends Controlador_Base {
           throw new Exception("Ingrese una contraseña con el formato especificado");
         }              
 
-        if (method_exists(new Modelo_Sucursal, 'validar_'.$iso)) {
+        if (method_exists(new Utils, 'validar_'.$iso)) {
             $function = 'validar_'.$iso;
-            $validaCedula = Modelo_Sucursal::$function($data['cedula']);
+            // Utils::log("eder: ".$data['cedula']);
+            $validaCedula = Utils::$function($data['cedula']);
+            // Utils::log("eder: ".$validaCedula); exit;
               if ($validaCedula == false){
                 throw new Exception("El DNI ingresado no es válido ruc");
               }
@@ -110,9 +112,16 @@ class Controlador_Registro extends Controlador_Base {
         if ($correoValido == false){
           throw new Exception("Ingrese un correo válido");
         }
+
+        do{
+          $username = Utils::generarUsername($data['correo']);
+          $datousername = Modelo_Usuario::existeUsuario($username);
+        }
+        while (!empty($datousername));
+
         $GLOBALS['db']->beginTrans();
 
-        self::guardarUsuario($data);
+        self::guardarUsuario($data, $username);
                 
       }
       catch( Exception $e ){
@@ -125,12 +134,12 @@ class Controlador_Registro extends Controlador_Base {
 
   }
 
-  public function guardarUsuario($data){
+  public function guardarUsuario($data, $username){
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $campo_fecha = date("Y-m-d H:i:s");
     $defaultDataUser = array('fecha_nacimiento'=>$campo_fecha, 'fecha_creacion'=>$campo_fecha, 'token'=>0, 'estado'=>0, 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>$campo_fecha);
 
-                if(!Modelo_Usuario::crearUsuario($data, $defaultDataUser)){
+                if(!Modelo_Usuario::crearUsuario($data, $defaultDataUser, $username)){
                     throw new Exception("Ha ocurrido un error, intente nuevamente");
                 }
 
@@ -163,6 +172,11 @@ class Controlador_Registro extends Controlador_Base {
                       throw new Exception("Ha ocurrido un error, intente nuevamente");
                   }
                 }
+                else{
+                  if(!Modelo_ContactoEmpresa::crearContactoEmpresa($data, $user_id)){
+                    throw new Exception("Ha ocurrido un error el registrar los requisitos, intente nuevamente");
+                  }
+                }
 
                 $GLOBALS['db']->commit();
 
@@ -173,16 +187,17 @@ class Controlador_Registro extends Controlador_Base {
 
                 $token .= "||".$user_id."||".date("Y-m-d H:i:s");
                 $token = Utils::encriptar($token);
-                if (!$this->correoActivacionCuenta($data['correo'],$data['name_user'].' '.$data['apell_user'],$token)){
+                if (!$this->correoActivacionCuenta($data['correo'],$data['name_user'].' '.$data['apell_user'],$token, $username)){
                     throw new Exception("Error en el envio de correo, por favor intente denuevo");
                   }
-                $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo y haz clic en el enlace para activar tu cuenta";
+                $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
   }
 
-  public function correoActivacionCuenta($correo,$nombres,$token){
+  public function correoActivacionCuenta($correo,$nombres,$token, $username){
     $asunto = "Activación de cuenta";
     $body = "Estimado, ".$nombres."<br>";
-    $body .= "Por favor de click en este enlace para activar su cuenta de usuario ";
+    $body .= "<br>Una vez activada su cuenta puede ingresar mediante su correo electrónico o el siguiente username: <br><b>".$username."</b><br><br>";
+    $body .= "Click en este enlace para activar su cuenta de usuario";
     $body .= "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a> <br>";
     if (Utils::envioCorreo($correo,$asunto,$body)){
       return true;

@@ -118,7 +118,7 @@ function crearMensajeError($id_div_error, $mensaje_error){
      p_node.setAttribute("id", "p_node_error");
     var p_text = document.createTextNode($mensaje_error);
     p_node.appendChild(p_text);
-    nodo_div.appendChild(p_node);
+    nodo_div.appendChild(p_node); 
 }
 
 function eliminarMensajeError($id_div_error){
@@ -157,8 +157,8 @@ function mostrarGrafico(label, valor){
     valores[i] = valor[i].value;
     // 
   }
-  console.log(labels);
-  console.log(valores);
+  // console.log(labels);
+  // console.log(valores);
     let myChart = document.getElementById('myChart').getContext('2d');
 
       // Global Options
@@ -178,12 +178,14 @@ function mostrarGrafico(label, valor){
               'rgba(75, 192, 192, 0.6)',
               'rgba(255, 99, 132, 0.6)',
               'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
+              'rgba(51, 136, 45, 0.3)',
               'rgba(153, 102, 255, 0.6)',
+              'rgba(246, 136, 196, 0.3)',
               'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(75, 192, 192, 0.6)'
+              'rgba(246, 61, 196, 0.3)',
+              'rgba(246, 136, 45, 0.3)',
+              'rgba(164, 142, 99, 0.3)',
+              'rgba(33, 91, 138, 0.3)'
             ],
             borderWidth:1,
             borderColor:'#777',

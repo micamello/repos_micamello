@@ -262,7 +262,9 @@ class Controlador_Aspirante extends Controlador_Base
             break;
 
             case 'detallePerfil':
+            if (Modelo_Usuario::EMPRESA) {
                 $this->perfilAspirante($username, $id_oferta);
+            }
             break;
 
             default:

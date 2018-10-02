@@ -251,6 +251,15 @@
     {
       display: none;
     } 
+
+    .caja{
+      background-color: transparent;
+      color: black;
+      margin: 0px;
+      padding: 0px;
+      font-size: 12px;
+      text-align: center; 
+    }
 }
 
 /* 
@@ -336,6 +345,15 @@
       display: none;
     }
 
+    .caja{
+      background-color: transparent;
+      color: black;
+      margin: 0px;
+      padding: 0px;
+      font-size: 12px;
+      text-align: center; 
+    }
+
     
 }
 
@@ -386,6 +404,15 @@
     .user_icon
     {
       display: none;
+    }
+
+    .caja{
+      background-color: transparent;
+      color: black;
+      margin: 0px;
+      padding: 0px;
+      font-size: 12px;
+      text-align: center; 
     }
 
     

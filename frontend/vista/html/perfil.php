@@ -516,7 +516,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 										<div class="form-group">
 											<label>Idioma: </label><div class="help-block with-errors"></div>
 											<select id="idioma_of" name="idioma_of" class="form-control" required <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
-												<option value="0">Seleccione una opci&oacute;n</option>
+												<option disabled selected value="0">Seleccione una opci&oacute;n</option>
 												<?php if (!empty($arridioma)){
 													
 													foreach ($arridioma as $idioma) { ?>
@@ -538,7 +538,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 										<div class="form-group">
 											<label>Nivel idioma: </label><div class="help-block with-errors"></div>
 											<select id="nivel_idi_of" name="nivel_idi_of" class="form-control" required <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
-												<option value="0">Seleccione una opci&oacute;n</option>
+												<option disabled selected value="0">Seleccione una opci&oacute;n</option>
 												<?php if (!empty($arrnivelidioma)){
 													foreach ($arrnivelidioma as $nivelidioma) {?>
 														<option value="<?php echo $nivelidioma['id_nivelIdioma'] ?>"><?php echo utf8_encode($nivelidioma['nombre']) ?></option>
