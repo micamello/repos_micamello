@@ -47,12 +47,6 @@
         <form action = "<?php echo PUERTO."://".HOST;?>/registro/" method = "post" id="form_register">
 
          <div class="row">
-          <!-- <div class="col-md-6">
-            <div class="form-group">
-              <label class="text-center">Usuario:</label><div class="help-block with-errors"></div>
-              <input id="username" type="text" name="username" placeholder="Ejemplo: camello205487" pattern="^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$" class="form-control" aria-describedby="usernameHelp" required>
-            </div>
-          </div> -->
 
           <div class="col-md-6" id="correo_group">
             <div class="form-group">

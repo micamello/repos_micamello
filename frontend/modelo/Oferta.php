@@ -195,7 +195,6 @@ class Modelo_Oferta{
 
   public static function guardarRequisitosOferta($data){
     if (empty($data)) {return false;}
-    Utils::log("datos de requisitos: ".print_r($data, true));
     $result = $GLOBALS['db']->insert('mfo_requisitooferta', array("licencia"=>$data['licencia'], "viajar"=>$data['viaje'], "residencia"=>$data['cambio_residencia'], "discapacidad"=>$data['discapacidad'], "confidencial"=>$data['confidencial'], "edad_minima"=>$data['edad_min'], "edad_maxima"=>$data['edad_max']));
     return $result;
   }

@@ -93,9 +93,7 @@ class Controlador_Registro extends Controlador_Base {
 
         if (method_exists(new Utils, 'validar_'.$iso)) {
             $function = 'validar_'.$iso;
-            // Utils::log("eder: ".$data['cedula']);
             $validaCedula = Utils::$function($data['cedula']);
-            // Utils::log("eder: ".$validaCedula); exit;
               if ($validaCedula == false){
                 throw new Exception("El DNI ingresado no es válido ruc");
               }
@@ -157,8 +155,6 @@ class Controlador_Registro extends Controlador_Base {
                   $nivel_interes = $data['nivel_interes'];
 
                   $requisitos = array('id_usuario'=>$user_id, 'estado_civil'=>1, 'anosexp'=>1, 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 'apellidos'=>$apellidos);
-
-                  //Utils::log("datos de requisitos: ".print_r($requisitos, true));
 
                   if(!Modelo_RequisitoxUsuario::crearRequisitoUsuario($requisitos)){
                     throw new Exception("Ha ocurrido un error el registrar los requisitos, intente nuevamente");

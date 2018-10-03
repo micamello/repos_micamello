@@ -58,7 +58,6 @@ class Controlador_InformePDF extends Controlador_Base
       $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($datos_usuario['id_usuario'], $cuestionarios['id_cuestionario']);
       $array_rasgosxusuario +=[$test=>$rasgoxtest];
       $resultados += ["CuestionariosUsuario"=>$cuestionariosUsuario];
-      // Utils::log(count($cuestionariosUsuario)."-----".$total_cuestionarios); exit;
       if (count($cuestionariosUsuario) == $total_cuestionarios) {
         $firma = "<img class='img_inf_mic' src='imagenes/informe/firma.png' alt='firma Psic.Luis Mata'/>";
       }
@@ -99,12 +98,11 @@ class Controlador_InformePDF extends Controlador_Base
       $resultados +=["CaracteristicasxRasgo"=>$array_caracteristicasxrasgo];
       $resultados +=["DefinicionesCaracteristicas"=>$array_defxtest];
       $resultados +=["FortalezasMejoras"=>$arrayformej];
-      Utils::log("eder: ".print_r($resultados, true));
       // $resultados = "";
 
     $parametro1 = Modelo_InformePDF::obtieneParametro(1);
     $parametro2 = Modelo_InformePDF::obtieneParametro(2);
-    Utils::log(count($resultados)."-----".count($datos_usuario)."-----".count($info_usuario));
+
     if (empty($resultados) || empty($datos_usuario) || empty($info_usuario)) {
       throw new Exception("Ha ocurrido un error al generar el informe");
     }
@@ -201,6 +199,7 @@ class Controlador_InformePDF extends Controlador_Base
               }
             }
           }
+
       }
       if ($firma != "") {
         $mpdf->WriteHTML("<div class='div_img_mic_inf'>".$firma."</div>");

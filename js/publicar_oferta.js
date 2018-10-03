@@ -111,18 +111,17 @@ if(document.getElementById('des_of')){
     statusbar: false,
     language: 'es',
     setup: function (editor) {
-        var publicar_btn = document.getElementById("publicar_btn");
+        var publicar_btn = document.getElementById("boton");
         var errors = document.getElementsByClassName("form-group has-error has-danger");
         editor.on('keyup', function () {
             tinymce.triggerSave();
             if (tinyMCE.get('des_of').getContent() != "") {
                 eliminarMensajeError("descripcion_error");
                 document.getElementById("des_of_error").setAttribute("class", "form-group");
-                if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "") && ($('select').filter('[required]:visible').val() != "")) {
-                  publicar_btn.setAttribute("class", "btn btn-success");
+                if (errors.length <= 0 && ($(':input').filter('[required]:visible').val() != "")) {                    
+                    publicar_btn.setAttribute("class", "btn btn-success");
                 }
                 else{
-                    console.log("Deshabilita el boton");
                     publicar_btn.setAttribute("class", "btn btn-success disabled");
                 }
             }
@@ -233,7 +232,7 @@ function delete_item_selected(selected_item){
             tag_nivel_idioma.removeAttribute("disabled");
             tag_idioma.removeAttribute("disabled");
     }
-    var publicar_btn = document.getElementById("publicar_btn");
+    var publicar_btn = document.getElementById("boton");
         var errors = document.getElementsByClassName("form-group has-error has-danger");
     if (document.getElementById('select_array_idioma').length <= 0)
     {
@@ -256,22 +255,4 @@ function delete_item_selected(selected_item){
           document.getElementById("id_idi_error").setAttribute("class", "form-group");
         }
     }	
-}
-
-function valida_numeros(evt){
-    if(window.event){
-      keynum = evt.keyCode; 
-     }
-     else{
-      keynum = evt.which; 
-     } 
-     if((keynum > 47 && keynum < 58) || keynum == 8 
-    || keynum == 9 || keynum == 13 || keynum == 116 
-    || (keynum > 36 && keynum < 41) 
-    || (keynum > 95 && keynum < 106)){
-      return true;
-     }
-     else{
-      return false;
-     }
 }

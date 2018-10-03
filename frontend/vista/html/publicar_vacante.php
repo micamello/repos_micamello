@@ -129,48 +129,53 @@
 
 						
 
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="opcionesSeleccionados">
-									<div class="row" id="seleccionados">
-										<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-										<!-- <?php echo $optiones; ?> -->
-									</div>
-									<div class="help-block with-errors"></div>
-									<label class="">Categorías: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-									<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple required>
-				                    <?php 
-				                      if (!empty($arrarea)){
-				                          foreach($arrarea as $area){ ?>
-				                              <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
-				                          <?php }
-				                      } ?>
-				                  	</select>
-				                </div>
+					<div class="row">
+						<div class="">
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="opcionesSeleccionados">
+										<div class="row" id="seleccionados">
+											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+											<!-- <?php echo $optiones; ?> -->
+										</div>
+										<div class="help-block with-errors"></div>
+										<label class="">Categorías: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
+										<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+					                    <?php 
+					                      if (!empty($arrarea)){
+					                          foreach($arrarea as $area){ ?>
+					                              <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
+					                          <?php }
+					                      } ?>
+					                  	</select>
+					                </div>
+								</div>
 							</div>
-						</div>
 
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="opcionesSeleccionados">
-									<div class="row" id="seleccionados1">
-										<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-										<!-- <?php echo $optiones; ?> -->
-									</div>
-									<div class="help-block with-errors"></div>
-									<label>Nivel: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-									<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple required>
-				                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
-				                    <?php 
-				                      if (!empty($intereses)){
-				                          foreach($intereses as $interes){ ?>
-				                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
-				                          <?php }
-				                      } ?>
-				                  	</select>
-				                </div>
+
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="opcionesSeleccionados">
+										<div class="row" id="seleccionados1">
+											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+											<!-- <?php echo $optiones; ?> -->
+										</div>
+										<div class="help-block with-errors"></div>
+										<label>Nivel: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
+										<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+					                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
+					                    <?php 
+					                      if (!empty($intereses)){
+					                          foreach($intereses as $interes){ ?>
+					                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
+					                          <?php }
+					                      } ?>
+					                  	</select>
+					                </div>
+								</div>
 							</div>
 						</div>
+					</div>
 
 
 						<div class="col-md-6">

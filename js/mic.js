@@ -135,7 +135,6 @@ if (document.getElementById("dni")) {
     //}
   })
 }
-// Canvas gráfico
 
 $(document).ready(function(){
   if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){
@@ -198,7 +197,7 @@ function mostrarGrafico(label, valor){
           responsive: true,
           title:{
             display:false,
-            text:'Resultados evaluación',
+            text:'Resultados evaluaci�n',
             fontSize:25
           },
           legend:{

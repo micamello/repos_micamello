@@ -163,7 +163,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											<div class="col-md-6">
 											    <div class="form-group">
 											        <label for="telefono">Tel&eacute;fono<span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeypress="return validaNumeros(event)" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono']; ?>" <?php if($btnSig == 1){ echo 'disableddisabled'; } ?> required/>
+											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeypress="return validaNumeros(event)" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono']; ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> required/>
 											    </div>
 											</div>
 
@@ -174,7 +174,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    <div class="col-md-6">
 		                                        <div class="form-group">
 		                                            <label for="provincia">Provincia <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-		                                            <select class="form-control" name="provincia" id="provincia" <?php if($btnSig == 1){ echo 'disableddisabled'; } ?> required>
+		                                            <select class="form-control" name="provincia" id="provincia" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
 		                                            	<option value="">Seleccione una provincia</option>
 														<?php 
 														if (!empty($arrprovincia)){
@@ -194,7 +194,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    <div class="col-md-6">
 		                                        <div class="form-group">
 		                                            <label for="ciudad">Ciudad <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-		                                            <select id="ciudad" name="ciudad" class="form-control" <?php if($btnSig == 1){ echo 'disableddisabled'; } ?> required>
+		                                            <select id="ciudad" name="ciudad" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
 		                                            <?php 
 		                                            if(!empty($arrciudad)){
 				                                    	foreach($arrciudad as $key => $ciudad){ 
@@ -249,11 +249,11 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            </select>
 		                                        </div>
 		                                    </div>
-		                                <?php } ?>
+		                                
 	                                	
 
 	                                    
-	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
+	                                    
 
 										<div class="col-md-6">
 										    <div class="form-group">
@@ -510,29 +510,29 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                    </div>
 
 	                                    <div class="clearfix"></div>
-	                                <?php } ?>
 
-                                    <div class="col-md-4 col-md-offset-1">
-										<div class="form-group">
-											<label>Idioma: </label><div class="help-block with-errors"></div>
-											<select id="idioma_of" name="idioma_of" class="form-control" required <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
-												<option disabled selected value="0">Seleccione una opci&oacute;n</option>
-												<?php if (!empty($arridioma)){
-													
-													foreach ($arridioma as $idioma) { ?>
-														<option value="<?php echo $idioma['id_idioma'] ?>"
-														<?php 
-															$descripcion = utf8_encode($idioma['descripcion']);
-															if(isset($nivelIdiomas[$descripcion])){
-																echo 'disabled=disabled';
-															}
-														?>
-														><?php echo utf8_encode($idioma['descripcion']) ?></option>
-												<?php }
-												} ?>
-											</select>
+	                                
+	                                    <div class="col-md-4 col-md-offset-1">
+											<div class="form-group">
+												<label>Idioma: </label><div class="help-block with-errors"></div>
+												<select id="idioma_of" name="idioma_of" class="form-control" required <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
+													<option value="0">Seleccione una opci&oacute;n</option>
+													<?php if (!empty($arridioma)){
+														
+														foreach ($arridioma as $idioma) { ?>
+															<option value="<?php echo $idioma['id_idioma'] ?>"
+															<?php 
+																$descripcion = utf8_encode($idioma['descripcion']);
+																if(isset($nivelIdiomas[$descripcion])){
+																	echo 'disabled=disabled';
+																}
+															?>
+															><?php echo utf8_encode($idioma['descripcion']) ?></option>
+													<?php }
+													} ?>
+												</select>
+											</div>
 										</div>
-									</div>
 
 									<div class="col-md-4">
 										<div class="form-group">
@@ -588,6 +588,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											</select>
 										</div>
 									</div>
+									<?php } ?>
 
 	                            </div>
 	                            
