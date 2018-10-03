@@ -21,7 +21,8 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
     bottom: 30,
     left: 20
   };
-  width = el[0][0].offsetWidth - margin.left - margin.right;
+  
+  width = el[0][0].offsetWidth - margin.left - margin.right - 100;
   height = width;
   radius = Math.min(width, height) / 2;
   barWidth = 40 * width / 300;
@@ -36,7 +37,9 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
     return deg * Math.PI / 180;
   };
   // Create SVG element
-  svg = el.append('svg').attr('width', width + margin.left + margin.right).attr('height', height + margin.top + margin.bottom);
+  svg = el.append('svg').attr('width', el[0][0].offsetWidth).attr('height', height + margin.top + margin.bottom).attr({
+    style: 'padding-top: 25px;padding-left: 50px;padding-right: 50px;'
+  });;
   // Add layer for the panel
   chart = svg.append('g').attr('transform', "translate(" + ((width + margin.left) / 2) + ", " + ((height + margin.top) / 2) + ")");
   chart.append('path').attr('class', "arc chart-first");
@@ -75,7 +78,7 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
          .attr('id', "Name")
          .attr('transform', "translate(" + ((width + margin.left) / 6) + ", " + ((height + margin.top) / 1.5) + ")")
          .attr("font-size",25)
-         .style("display", "none");      
+         .style("display", "none"); 
 
 var trX = 180 - 230 * Math.cos(percToRad(percent / 2));
 var trY = 195 - 210 * Math.sin(percToRad(percent / 2));
@@ -87,8 +90,9 @@ displayValue = function() {
                     })
                     .attr('id', "Value")
                     .attr('transform', "translate(" + trX + ", " + trY+ ")")
-                    .attr("font-size",15)                                      
-                    .style("fill", '#000000');
+                    .attr("font-size",12)  
+                    .attr("class","parpadea")                                     
+                    .style("fill", '#DB2929');
             } 
     
     texts.append("text")

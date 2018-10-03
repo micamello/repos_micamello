@@ -197,7 +197,7 @@
 
             <footer id="contact" class="footer p-top-30">
                 <!--<div class="action-lage"></div>-->
-                <div class="fluid-container" align="center">
+                <div class="container-fluid" align="center">
 
                     <div class="foot_mic">
                         <div class="row">
@@ -225,9 +225,9 @@
                                     <span class="separate_social_country">|</span>
                                     
                                     <span class="text_icons_footer">Siguenos en:</span>
-                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">                                                                        
-                                    <a href="https://twitter.com/MiCamelloec" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">                                                                        
-                                    <a href="https://www.instagram.com/micamelloec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">                                    
+                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic"></a>                                                                        
+                                    <a href="https://twitter.com/MiCamelloec" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic"></a>                                                                        
+                                    <a href="https://www.instagram.com/micamelloec/" target="_blank"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic"></a>                                    
                                   </div>
                                 </div>
                               </div>

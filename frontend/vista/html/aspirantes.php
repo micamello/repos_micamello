@@ -141,21 +141,23 @@
 					 </div>
 		          </div>
 		    </div>
-		    <div class="panel panel-default shadow-panel1">
-		      <div class="panel-heading">
-		            <span><i class="fa fa-money"></i> Salario</span>
-		          </div>
-		      <div class="panel-body">
-		      	<div class="filtros">
-				<?php
-					foreach (SALARIO as $key => $v) {
-				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/S'.$key.'/';
-						$ruta = Controlador_Aspirante::calcularRuta($ruta,'S');
-						echo '<li class="lista"><a href="'.$ruta.'1/" class="salario" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-					}
-				?></div>
-		      </div>
-		    </div>
+		    <?php if($vista == 1) { ?>
+			    <div class="panel panel-default shadow-panel1">
+			      <div class="panel-heading">
+			            <span><i class="fa fa-money"></i> Salario</span>
+			          </div>
+			      <div class="panel-body">
+			      	<div class="filtros">
+					<?php
+						foreach (SALARIO as $key => $v) {
+					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/S'.$key.'/';
+							$ruta = Controlador_Aspirante::calcularRuta($ruta,'S');
+							echo '<li class="lista"><a href="'.$ruta.'1/" class="salario" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+						}
+					?></div>
+			      </div>
+			    </div>
+		     <?php } ?>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
 		            <span><i class="fa fa-venus-mars"></i> Genero</span>

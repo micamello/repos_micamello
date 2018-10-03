@@ -196,7 +196,9 @@ class Controlador_Perfil extends Controlador_Base
 
             if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 
-                if($_POST['lugar_estudio'] != 0 && ($_POST['universidad'] != 0 || $_POST['universidad2'] != 0)){
+                $dependencia    = Modelo_Escolaridad::obtieneDependencia($data['escolaridad']);
+
+                if($dependencia['dependencia'] == 0 || ($_POST['universidad'] != '' || $_POST['universidad2'] != '')){
                     
                     if (!Modelo_RequisitosUsuario::updateRequisitosUsuario($data, $idUsuario)) {
                         throw new Exception("Ha ocurrido un error al guardar los datos del usuario, intente nuevamente");

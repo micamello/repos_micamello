@@ -111,7 +111,8 @@
                         }
                     }, t.prototype.deselectOption = function(t) {
 
-                        var nombre = e("option[value=" + e(t).data("val") + "]", this.source)[0].outerText;
+                        var nombre = e("option[value=" + e(t).data("val") + "]", this.source)[0].text;
+                        console.log(e("option[value=" + e(t).data("val") + "]", this.source));
                         elemento = document.getElementById(nombre);
                         elemento.parentNode.removeChild(elemento);
                         return this.selectrContainer.removeClass("max-selection-reached"), e(t).removeClass("selected"), e("option[value=" + e(t).data("val") + "]", this.source).prop("selected", !1), this.updateFooter(), this.triggerChange()

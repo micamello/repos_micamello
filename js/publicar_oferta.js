@@ -157,7 +157,8 @@ $('#btn_transfer').on('click', function()
             listado.innerHTML = "";
             var publicar_btn = document.getElementById("boton");
             var errors = document.getElementsByClassName("form-group has-error has-danger");
-            if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "")) {
+
+            if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "") && ($('select').filter('[required]:visible').val() != "")) {
                 publicar_btn.setAttribute("class", "btn btn-success");
             }  
         }

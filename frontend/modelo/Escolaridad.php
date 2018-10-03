@@ -24,7 +24,7 @@ class Modelo_Escolaridad{
 	public static function obtieneDependencia($id_escolaridad){
 
 		$sql = "SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = ".$id_escolaridad;
-    	return $GLOBALS['db']->auto_array($sql,array(),true);
+    	return $GLOBALS['db']->auto_array($sql,array(),false);
 	}
 }  
 ?>
