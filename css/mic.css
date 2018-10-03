@@ -786,6 +786,46 @@ body
   font-size: 25px;
 }
 
+/*Profile*/
+
+.box_text{
+  background-color: #F4F4F4;
+  border-radius: 30px;
+  margin: 5px 1px 5px 1px;
+  /*margin: auto;*/
+  /*padding: 5px;*/
+  overflow: hidden; 
+}
+
+.box_text:hover{
+  background-color: #B2E6FE;
+}
+
+.requerido{
+  color: red;
+}
+
+.publicar_text{
+  text-align: center;
+  font-size: 20px;
+}
+
+.caja{
+  background-color: #47A0FB;
+  color: white;
+  border-radius: 10px;
+  margin: 3px;
+  padding: 5px;
+}
+
+.text_progress_bar{
+  font-size: 12px;
+  background-color: #DEDEDE;
+  border-radius: 5px 5px 0px 0px;
+  color: #6A6D6D; font-weight: 550;
+  margin-bottom: 0px;
+}
+
 .opcionesSeleccionados{
   border: 1px solid #C1C1C1; 
   border-radius: 5px; 

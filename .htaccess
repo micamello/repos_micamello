@@ -167,4 +167,5 @@ RewriteRule ^aspirante/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.p
 
 RewriteRule ^informePDF/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF&username=$1 [L]
 
-
+#Aspirantes
+RewriteRule ^aspirante/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$2&id_oferta=$3 [L]

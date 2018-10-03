@@ -692,6 +692,58 @@ class Modelo_Usuario{
     }
   }
 
+
+  public static function aspSalarial($id_usuario, $id_oferta){
+    if(empty($id_usuario) || empty($id_oferta)){return false;}
+    $sql = "SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = ? AND id_ofertas = ? LIMIT 1;";
+    return $GLOBALS['db']->auto_array($sql,array($id_usuario,$id_oferta));
+  }
+
+  public static function infoUsuario($id_usuario){
+    if(empty($id_usuario)){return false;}
+    $sql = "SELECT 
+    u.id_usuario,
+    u.nombres,
+    u.username,
+    u.correo,
+    u.telefono,
+    u.dni,
+    DATE_FORMAT(u.fecha_nacimiento, '%Y-%m-%d') AS fecha,
+    YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,
+    ru.*,
+    p.nombre_abr AS pais,
+    pais.nombre_abr AS nacionalidad,
+    pr.nombre AS provincia,
+    e.descripcion AS escolaridad,
+    ciu.nombre as ciudad,
+    muni.nombre AS nombre_uni,
+    e.descripcion AS escolaridad,
+    GROUP_CONCAT(nii.id_nivelIdioma_idioma) AS idiomas
+FROM
+    mfo_usuario u
+        LEFT JOIN
+    mfo_requisitosusuario ru ON u.id_usuario = ru.id_usuario
+        LEFT JOIN
+    mfo_escolaridad e ON e.id_escolaridad = ru.id_escolaridad
+        LEFT JOIN
+    mfo_ciudad ciu ON ciu.id_ciudad = u.id_ciudad
+        LEFT JOIN
+    mfo_usuario_nivelidioma niu ON niu.id_usuario = u.id_usuario
+        LEFT JOIN
+    mfo_nivelidioma_idioma nii ON nii.id_nivelIdioma_idioma = niu.id_nivelIdioma_idioma
+        LEFT JOIN
+    mfo_provincia pr ON pr.id_provincia = ciu.id_provincia
+        LEFT JOIN
+    mfo_pais p ON p.id_pais = pr.id_pais
+    LEFT JOIN
+  mfo_pais pais ON pais.id_pais = u.id_nacionalidad
+        LEFT JOIN
+    mfo_universidades muni ON ru.id_univ = muni.id_univ
+WHERE
+    u.id_usuario = ?;";
+    return $GLOBALS['db']->auto_array($sql,array($id_usuario));
+  }
+
   public static function obtieneTodosCandidatos(){
     $sql = "SELECT u.id_usuario, u.nombres, u.correo, r.apellidos, r.viajar, 
                    p.id_provincia, p.id_pais 
