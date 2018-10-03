@@ -90,8 +90,8 @@ WHERE u.username = ?;";
     return (!empty($rs['id_usuario'])) ? false : true;
   }
 
-  public static function crearUsuario($data, $defaultDataUser, $username){
-    if(empty($data)||empty($defaultDataUser)){return false;}
+  public static function crearUsuario($data, $defaultDataUser,$username){
+    if(empty($data)||empty($defaultDataUser) || empty($username)){return false;}
 
     $password = md5($data['password']);
 

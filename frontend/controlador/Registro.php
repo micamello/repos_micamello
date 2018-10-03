@@ -155,8 +155,8 @@ class Controlador_Registro extends Controlador_Base {
                   $nivel_interes = $data['nivel_interes'];
 
                   $requisitos = array('id_usuario'=>$user_id, 'estado_civil'=>1, 'anosexp'=>1, 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 'apellidos'=>$apellidos);
-
-                  if(!Modelo_RequisitoxUsuario::crearRequisitoUsuario($requisitos)){
+                  
+                  if(!Modelo_RequisitosUsuario::crearRequisitoUsuario($requisitos)){
                     throw new Exception("Ha ocurrido un error el registrar los requisitos, intente nuevamente");
                   }
 
@@ -193,7 +193,7 @@ class Controlador_Registro extends Controlador_Base {
     $asunto = "Activación de cuenta";
     $body = "Estimado, ".$nombres."<br>";
     $body .= "<br>Una vez activada su cuenta puede ingresar mediante su correo electrónico o el siguiente username: <br><b>".$username."</b><br><br>";
-    $body .= "Click en este enlace para activar su cuenta de usuario";
+    $body .= "Click en este enlace para activar su cuenta de usuario&nbsp;";
     $body .= "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a> <br>";
     if (Utils::envioCorreo($correo,$asunto,$body)){
       return true;

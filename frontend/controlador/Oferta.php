@@ -174,7 +174,7 @@ class Controlador_Oferta extends Controlador_Base{
                 
                 $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($idUsuario,$idOferta);
                 
-                $breadcrumbs[$vista] = ucfirst($vista);
+                $breadcrumbs[$vista] = 'Ofertas';
                 $breadcrumbs['detalleOferta'] = 'Ver detalle';
                 
                 $tags = array(

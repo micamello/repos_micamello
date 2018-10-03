@@ -356,8 +356,8 @@
 							            	<tr>
 							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
 
-							            		<td style="vertical-align: middle; text-align: justify;">
-							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/detallePerfil/".$a['username'].'/'.$id_oferta.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
+							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
+							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
 
 							            		<td data-title="Edad: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $a['edad']; ?></td>
 												<?php if($vista == 1){ ?>
