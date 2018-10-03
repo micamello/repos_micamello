@@ -1,6 +1,6 @@
 $(window).on('load',function(){  
-  $("#panel_1").show();
-  $("#panel_2").hide();
+  $("#panel_1").hide();
+  $("#panel_2").show();
   $("#panel_3").hide();
 });
 
@@ -67,6 +67,27 @@ $('#provinciaP').change(function(){
 });
 
 $('#btn_submitpaypal').click(function(){	
-	var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#ciudadP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val();
+	var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#ciudadP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
 	$('#custom').attr('value',valor);
 });
+
+$('#imagen').change(function(e) {
+    addImage(e); 
+});
+
+function addImage(e){
+    var file = e.target.files[0],
+    imageType = /image.*/;
+
+if (!file.type.match(imageType))
+    return;
+
+    var reader = new FileReader();
+    reader.onload = fileOnload;
+    reader.readAsDataURL(file);
+}
+
+function fileOnload(e) {
+    var result=e.target.result;
+    $('#divimagen').html('<img width="130" height="130" src="'+result+'">');
+}

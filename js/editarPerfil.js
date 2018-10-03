@@ -144,45 +144,59 @@ function calcularEdad()
 function mostrarUni(){
 
     var lugar_estudio = document.getElementById("lugar_estudio");
-    var r = lugar_estudio.options[lugar_estudio.selectedIndex].value;
 
-    if(r == 0){
-        document.getElementById("universidad2").style.display = "none";
-        document.getElementById("universidad").style.display = "block";
-        document.getElementById("universidad").setAttribute("required", "true");
-    }else{
-        document.getElementById("universidad").style.display = "none";
-        document.getElementById("universidad2").style.display = "block";
-        document.getElementById("universidad2").setAttribute("required", "true");
+    if(lugar_estudio){
+
+        var r = lugar_estudio.options[lugar_estudio.selectedIndex].value;
+        
+        if(lugar_estudio.selectedIndex != ''){
+            if(r == 0){
+                document.getElementById("universidad2").style.display = "none";
+                document.getElementById("universidad").style.display = "block";
+                document.getElementById("universidad").setAttribute("required",true);
+                $("#universidad2").removeAttr("required");;
+            }else{
+                document.getElementById("universidad").style.display = "none";
+                document.getElementById("universidad2").style.display = "block";
+                document.getElementById("universidad2").setAttribute("required",true);
+                $("#universidad").removeAttr("required");
+            }
+        } 
     }
 }
 
 function ocultarCampos(){
 
     var ultimoTitulo = document.getElementById("escolaridad");
-    var id_escolaridad = ultimoTitulo.options[ultimoTitulo.selectedIndex].value;
-    var puerto_host = $('#puerto_host').val();
 
-    if(id_escolaridad != 0){
-        $.ajax({
-            type: "GET",
-            url: puerto_host+"?mostrar=perfil&opcion=buscaDependencia&id_escolaridad="+id_escolaridad,
-            dataType:'json',
-            success:function(data){
+    if(ultimoTitulo){
 
-                var elements = document.getElementsByClassName("depende");
-                
-                for(var i = 0, length = elements.length; i < length; i++) {
-                    if(data[0].dependencia == 1){
-                        elements[i].style.display = 'block';
-                    }else{
-                        elements[i].style.display = 'none';
+        var id_escolaridad = ultimoTitulo.options[ultimoTitulo.selectedIndex].value;
+        var puerto_host = $('#puerto_host').val();
+
+        if(id_escolaridad != 0){
+            $.ajax({
+                type: "GET",
+                url: puerto_host+"?mostrar=perfil&opcion=buscaDependencia&id_escolaridad="+id_escolaridad,
+                dataType:'json',
+                success:function(data){
+
+                    var elements = document.getElementsByClassName("depende");
+                    for(var i = 0, length = elements.length; i < length; i++) {
+                        if(data.dependencia == 1){
+                            document.getElementById("lugar_estudio").setAttribute("required",true);
+                            elements[i].style.display = 'block';
+                            
+                        }else{
+                            $("#lugar_estudio").removeAttr("required");
+                            elements[i].style.display = 'none';
+                        }
                     }
-                }
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
-            }                  
-        });
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }                  
+            });
+        }
     }
 }

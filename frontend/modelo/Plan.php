@@ -42,9 +42,17 @@ class Modelo_Plan{
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    
   }
 
-  public static function busquedaXId($id){
+  public static function busquedaXId($id,$todos=false){
     if (empty($id)){ return false; }
-    $sql = "SELECT * FROM mfo_plan WHERE id_plan = ?";
+    if (!$todos){
+      $sql = "SELECT * FROM mfo_plan WHERE id_plan = ?";
+    }
+    else{
+      $sql = "SELECT p.tipo_plan, p.id_sucursal, p.num_post, p.duracion, p.codigo_paypal, p.nombre, s.id_pais, p.tipo_usuario 
+              FROM mfo_plan p
+              INNER JOIN mfo_sucursal s ON s.id_sucursal = p.id_sucursal 
+              WHERE p.id_plan = ? AND p.estado = 1";
+    }
     return $GLOBALS['db']->auto_array($sql,array($id));
   }
 }  

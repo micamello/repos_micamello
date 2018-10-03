@@ -251,6 +251,15 @@
     {
       display: none;
     } 
+
+    .caja{
+      background-color: transparent;
+      color: black;
+      margin: 0px;
+      padding: 0px;
+      font-size: 12px;
+      text-align: center; 
+    }
 }
 
 /* 
@@ -336,6 +345,15 @@
       display: none;
     }
 
+    .caja{
+      background-color: transparent;
+      color: black;
+      margin: 0px;
+      padding: 0px;
+      font-size: 12px;
+      text-align: center; 
+    }
+
     
 }
 
@@ -388,6 +406,15 @@
       display: none;
     }
 
+    .caja{
+      background-color: transparent;
+      color: black;
+      margin: 0px;
+      padding: 0px;
+      font-size: 12px;
+      text-align: center; 
+    }
+
     
 }
 
@@ -415,5 +442,10 @@
 @media screen and (max-width: 436px) {
   .img-responsive{
     max-width: 50%;
+  }
+
+  .perfil_photo_user{
+    height: 150px;
+    width: 150px;
   }
 }

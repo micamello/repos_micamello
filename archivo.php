@@ -1,6 +1,8 @@
 <?php
 require_once 'constantes.php';
 require_once 'init.php';
+include 'multisitios.php';
+
 $carpeta = Utils::getParam('carpeta','',$_GET);
 $archivo = Utils::getParam('archivo','',$_GET);
 $param1 = Utils::getParam('param1','',$_GET);

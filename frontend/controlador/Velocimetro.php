@@ -48,6 +48,7 @@ class Controlador_Velocimetro extends Controlador_Base {
       break;
     }
 
+    //si no tengo planes o no tengo permiso para el tercer cuestionario 
     if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
         $nrotestusuario < ($nrototaltest-1)){
       $enlaceboton = "cuestionario";

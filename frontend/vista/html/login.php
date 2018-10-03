@@ -14,7 +14,10 @@
           <div class="col-md-12">
             <div class="form-group">
               <label>Contrase&ntilde;a:</label><div class="help-block with-errors"></div>
-              <input type="password" name="password" id="password" class="form-control" placeholder="Ej: Micamello1" required>
+              <div class="input-group">
+                <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
+                <input title="Letras y números, mínimo 8 caracteres" type="password" name="password" id="password" class="form-control" required>
+              </div>
             </div>
           </div>
           <p class="text-center"><strong>Olvidaste tu contrase&ntilde;a</strong> <a href="<?php echo PUERTO."://".HOST;?>/contrasena/">Haz click aqu&iacute;</a></p><br>

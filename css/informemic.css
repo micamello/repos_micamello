@@ -1,0 +1,72 @@
+header{
+        padding: -34px 0px 0px -57px;
+}
+
+main{
+        margin: 0px 155px 55px 155px; 
+        font-size: 30px;
+}
+
+footer{
+        padding-bottom: -34px;
+        padding-right: -57px;
+        text-align: right;
+}
+
+.titulo_1{
+        text-align: center; 
+        font-family: 
+        font-family: 'Archivo', sans-serif;
+}
+
+.text_justify{
+        text-align: justify; 
+        font-family: font-family: 'Archivo', sans-serif;
+}
+
+.text_separate{
+        padding-top: 350px; 
+        font-size: 80px; 
+        font-weigth: 550; 
+        text-align: center; 
+        font-family: font-family: 'Archivo', sans-serif; 
+        color: #118BD8;
+}
+
+.ant_name{
+        font-size: 25px; 
+        font-family: font-family: 'Archivo', sans-serif;
+}
+
+.name_caratula{
+        font-size: 80px; 
+        font-family: font-family: 'Archivo', sans-serif; 
+        color: #118BD8;
+}
+
+.content_caratula{
+        padding-top: 500px; 
+        text-align: right;
+}
+
+.items_inf{
+        background-color: #7BB6FE;
+        padding: 5px;
+        border-radius: 10px;
+        margin: 0px 175px 10px 175px;
+        /*display: block;*/
+        text-align: center;
+        color: white;
+}
+
+.img_inf_mic{
+        width: 75%;
+        position: absolute;
+}
+
+.div_img_mic_inf{
+        /*text-align: center;*/
+        padding-left: 210px;
+        position: fixed;
+        bottom: 0;
+}

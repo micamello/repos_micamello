@@ -40,7 +40,7 @@
                                                 <tr align="center">
                                                     <td style="text-align: center;" data-title="Nombre:"><?php echo utf8_encode($value['nombre']); ?></td>
                                                     <td style="text-align: center; " data-title="Inscripci&oacute;n:"><?php echo date("d-m-Y", strtotime($value['fecha_compra'])); ?></td>
-                                                    <td style="text-align: center;" data-title="Vencimiento:"><?php if($value['fecha_caducidad'] != 'Infinito'){
+                                                    <td style="text-align: center;" data-title="Vencimiento:"><?php if($value['fecha_caducidad'] != 'ilimitado'){
                                                         echo date("d-m-Y", strtotime($value['fecha_caducidad'])); 
                                                         }else{ echo $value['fecha_caducidad']; } ?></td>
                                                     <td style="text-align: center;" data-title="Autopostulaciones:"><?php echo $value['num_post_rest']; ?></td>
@@ -60,15 +60,13 @@
                                                     <td style="text-align: center;" data-title="Estado del Plan: "><?php echo ESTADOS[$value['estado']]; ?></td>
                                                     <td style="text-align: center;" data-title="Factura: ">
                                                         <?php if($value['estado'] != 0){ ?>
-
-                                                            <a title="Descargar factura" href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
+                                                            <a title="Descargar factura" href="#">
                                                                 <i class="fa fa-money"></i></i>
                                                             </a>
                                                         <?php }else{ echo '-'; } ?>
                                                     </td>
                                                     <td style="text-align: center;" data-title="Eliminar: ">
                                                         <?php if($value['estado'] != 0){ ?>
-
                                                             <a title="Eliminar suscripci&oacute;n al plan" href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>

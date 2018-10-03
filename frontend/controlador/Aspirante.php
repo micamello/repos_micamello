@@ -35,10 +35,9 @@ class Controlador_Aspirante extends Controlador_Base
         $breadcrumbs = array();
 
         switch ($opcion) {
-            case 'filtrar':
-                
+            case 'filtrar':                
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
 
@@ -263,7 +262,9 @@ class Controlador_Aspirante extends Controlador_Base
             break;
 
             case 'detallePerfil':
-                $this->perfilAspirante($username);
+            if (Modelo_Usuario::EMPRESA) {
+                $this->perfilAspirante($username, $id_oferta);
+            }
             break;
 
             default:
@@ -275,9 +276,7 @@ class Controlador_Aspirante extends Controlador_Base
                 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
-
                 $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0);
-
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
 
                 if($vista == 1){
@@ -295,7 +294,9 @@ class Controlador_Aspirante extends Controlador_Base
 
                 $arrprovincia = $nacionalidades = array();
                 foreach ($aspirantes as $key => $value) {
-                   $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
+                   if (!empty($arranacionalidades[$value['id_pais']])){
+                     $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
+                   }
                    $arrprovincia[$value['id_provincia']] = $value['ubicacion'];
                 }
                 
@@ -386,13 +387,46 @@ class Controlador_Aspirante extends Controlador_Base
         return $ruta;
     }
 
-    public function perfilAspirante($username, $requisito = 1){
+    public function perfilAspirante($username, $id_oferta){
+        $datos = Modelo_Usuario::existeUsuario($username);
+        $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
 
-        $datos_usuario = ["datos_Usuario"=>Modelo_Usuario::existeUsuario($username, $requisito)];
+        $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
+        $contacto = array();
+        $array_rasgosxusuario = array();
 
-        Utils::log(print_r($datos_usuario, true));
-        Vista::render('perfilAspirante', $datos_usuario);
+        if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
+                $contacto = ["correo"=>Utils::ocultarEmail($info_usuario['correo']), "telefono"=>Utils::ocultarCaracteres($info_usuario['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($info_usuario['dni'], 0, 0)];
+            }
+            else{
+                $contacto = ["correo"=>$info_usuario['correo'], "telefono"=>$info_usuario['telefono'], "dni"=>$info_usuario['dni']];
+            }
+
+        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
+                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($info_usuario['id_usuario']);
+                $resultados = array();
+                $rasgoxtest = array();
+                foreach ($cuestionariosUsuario as $cuestionarios) {
+                  $test = "Test".$cuestionarios['id_cuestionario'];
+                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($info_usuario['id_usuario'], $cuestionarios['id_cuestionario']);
+                  foreach ($rasgoxtest as $res) {
+                    array_push($array_rasgosxusuario, array("nombre"=>$res['nombre'], "valor"=>$res['valor']));
+                  }
+                }
+            }
+
+        $tags = array("infoUsuario"=>$info_usuario,
+                        "Conf"=>$contacto,
+                        "Resultados"=>$array_rasgosxusuario,
+                        "asp_sararial"=>$asp_salarial
+                  );
+
+        $tags["template_js"][] = "mic";
+        $tags["template_js"][] = "Chart.min";
+        Vista::render('perfilAspirante', $tags);
     }
+
+    // informePersonalidad
 
 }
 ?>

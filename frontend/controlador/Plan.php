@@ -54,9 +54,8 @@ class Controlador_Plan extends Controlador_Base {
     }
 
     //Obtiene todos los banner activos segun el tipo
-    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_PERFIL);
-    $orden                      = rand(1, count($arrbanner)) - 1;
-    $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
+    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);    
+    $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario);
@@ -71,7 +70,7 @@ class Controlador_Plan extends Controlador_Base {
 
   public function mostrarDefault($tipo){
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
-    $sucursal = $_SESSION["mfo_datos"]["sucursal"]["id_sucursal"]; 
+    $sucursal = SUCURSAL_ID; 
     
     if ($tipousu == Modelo_Usuario::CANDIDATO){
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,$sucursal);       
@@ -82,9 +81,8 @@ class Controlador_Plan extends Controlador_Base {
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO);
     }    
 
-    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
-    $orden = rand(1,count($arrbanner))-1;
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
+    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
     
     $tags["template_css"][] = "planes";
@@ -109,7 +107,7 @@ class Controlador_Plan extends Controlador_Base {
       
       $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
       $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
-      $sucursal = $_SESSION["mfo_datos"]["sucursal"]["id_sucursal"]; 
+      $sucursal = SUCURSAL_ID; 
       $tipoplan = ($tipousu == Modelo_Usuario::CANDIDATO) ? Modelo_Plan::CANDIDATO : Modelo_Plan::EMPRESA;
       $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);
       if (!isset($infoplan["id_plan"]) || empty($infoplan["id_plan"])){
@@ -144,9 +142,8 @@ class Controlador_Plan extends Controlador_Base {
       }
       else{
         //presenta metodos de pago
-        $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
-        $orden = rand(1,count($arrbanner))-1;
-        $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+        $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);        
+        $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
         $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
 
@@ -183,7 +180,7 @@ class Controlador_Plan extends Controlador_Base {
 
   public function deposito(){
     try{
-      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'provincia'=>1,'ciudad'=>1,'telefono'=>1,'dni'=>1);
+      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'direccion'=>1,'provincia'=>1,'ciudad'=>1,'telefono'=>1,'dni'=>1);
       $data = $this->camposRequeridos($campos);   
       
       if (!Utils::alfanumerico($data["num_comprobante"])){
@@ -212,7 +209,8 @@ class Controlador_Plan extends Controlador_Base {
       $archivo = Utils::validaExt($_FILES['imagen'],3);
       if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],$data["telefono"],
                                                   $data["dni"],$data["ciudad"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
-                                                  $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],$data["idplan"])){
+                                                  $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],$data["idplan"],
+                                                  $data['direccion'])){
         throw new Exception("Error al ingresar el deposito, por favor intente denuevo");
       }
 
@@ -232,9 +230,8 @@ class Controlador_Plan extends Controlador_Base {
   }
 
   public function paypal(){
-    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_CANDIDATO);
-    $orden = rand(1,count($arrbanner))-1;
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner[$orden]['id_banner'].'.'.$arrbanner[$orden]['extension'];
+    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
+    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
     
     Vista::render('mensaje_paypal', $tags);       
