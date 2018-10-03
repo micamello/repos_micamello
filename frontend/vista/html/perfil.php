@@ -544,46 +544,44 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														} ?>
 													</select>
 												</div>
-
-												<div class="">
-													<div class="col-md-2">
-														<div class="form-group">
-															<a id="btn_transfer" class="button_transfer_list"><i class="fa fa-plus"></i></a>
-														</div>
-													</div>
+											</div>
+											
+											<div class="col-md-2">
+												<div class="form-group">
+													<a id="btn_transfer" class="button_transfer_list"><i class="fa fa-plus"></i></a>
 												</div>
+											</div>
 
-												<div class="col-md-12">
-													<div class="form-group">
-														<label>Idiomas seleccionados: </label><div id="listado_idiomas" class="help-block with-errors"></div>
-															<div id="error_msg">
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Idiomas seleccionados: </label><div id="listado_idiomas" class="help-block with-errors"></div>
+														<div id="error_msg">
+														</div>
+														<div class="list_content">
+															<div class="form-group" id="list_idioma">
+																<?php if(empty($nivelIdiomas)){ ?>
+																	<p id="text_nothing">Ningun idioma seleccionado.....</p>
+																<?php }else{ ?>
+																	<p style="display:none;" id="text_nothing">Ningun idioma seleccionado.....</p>
+																<?php 
+																	$i = 1;
+																	foreach ($nivelIdiomas as $key => $value) {
+																		echo '<p id="idioma'.$i.'" disabled="disabled" class="col-md-5 badge_item listado">'.$key.' ('.$value[2].') <i class="fa fa-window-close fa-2x icon" id="'.$i.'" ';
+																			if($btnSig != 1){
+																				echo 'onclick="delete_item_selected(this);"';
+																			}
+																			echo '></i></p>';
+																			
+																		$i++;
+																	}
+																 }?>
 															</div>
-															<div class="list_content">
-																<div class="form-group" id="list_idioma">
-																	<?php if(empty($nivelIdiomas)){ ?>
-																		<p id="text_nothing">Ningun idioma seleccionado.....</p>
-																	<?php }else{ ?>
-																		<p style="display:none;" id="text_nothing">Ningun idioma seleccionado.....</p>
-																	<?php 
-																		$i = 1;
-																		foreach ($nivelIdiomas as $key => $value) {
-																			echo '<p id="idioma'.$i.'" disabled="disabled" class="col-md-5 badge_item listado">'.$key.' ('.$value[2].') <i class="fa fa-window-close fa-2x icon" id="'.$i.'" ';
-																				if($btnSig != 1){
-																					echo 'onclick="delete_item_selected(this);"';
-																				}
-																				echo '></i></p>';
-																				
-																			$i++;
-																		}
-																	 }?>
-																</div>
-															</div>
-														<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
-															<?php foreach ($nivelIdiomas as $key => $value) { ?>
-																<option value="<?php echo $value[0].'_'.$value[1]; ?>" id="array_idioma<?php echo $value[0]; ?>" selected='selected'></option>
-														    <?php } ?>
-														</select>
-													</div>
+														</div>
+													<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
+														<?php foreach ($nivelIdiomas as $key => $value) { ?>
+															<option value="<?php echo $value[0].'_'.$value[1]; ?>" id="array_idioma<?php echo $value[0]; ?>" selected='selected'></option>
+													    <?php } ?>
+													</select>
 												</div>
 											</div>
 										<?php } ?>

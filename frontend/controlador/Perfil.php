@@ -43,10 +43,10 @@ class Controlador_Perfil extends Controlador_Base
                 $escolaridad  = Modelo_Escolaridad::obtieneListado();
                 $arrarea      = Modelo_Area::obtieneListado();
                 $arrinteres   = Modelo_Interes::obtieneListado();
-                $universidades   = Modelo_Universidad::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
                 $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
-                $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
