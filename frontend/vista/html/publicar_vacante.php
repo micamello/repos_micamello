@@ -12,15 +12,15 @@
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
 			 			<?php 
-			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {
+			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {			 					
 			 					?>
 						 			<p>Fecha caducidad plan: </p>
 						 			<b><span><?php
 						 			$fecha = date_create($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad']);
-						 			 echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b>
-			 				<?php
-			 				}
-			 			 ?>
+						 			echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b>
+			 			<?php }else{ ?>
+			 				<p>Fecha caducidad plan: ilimitado</p>
+			 			<?php } ?>
 			 			</div>
 			 		</div>	
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
@@ -89,7 +89,7 @@
 							<div class="form-group">
 
 								<label>Cantidad de vacantes: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);">
+								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);" value="1">
 							</div>
 						</div>
 
@@ -387,7 +387,7 @@
 							<div class="form-group">
 
 								<label>Edad mínima: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" onkeydown=" return validaNumeros(event);" required>
+								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" onkeydown=" return validaNumeros(event);" value="18" required>
 							</div>
 						</div>
 

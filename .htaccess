@@ -70,17 +70,17 @@ RewriteRule ^logout/$ %{ENV:REWRITEBASE}index.php?mostrar=logout [L]
 #cuestionarios
 RewriteRule ^cuestionario/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario [L]
 
-###########################################################################################################################################################
+#####################################################################################
 
 #velocimetro
 RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 
-###########################################################################################################################################################
+######################################################################################
 
 #publicar
 RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
 
-###########################################################################################################################################################
+######################################################################################
 
 #planes
 RewriteRule ^compraplan/paypal/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=paypal [L]
@@ -97,15 +97,14 @@ RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta [L
 RewriteRule ^oferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta&page=$1 [L]
 RewriteRule ^detalleOferta/([a-z]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
 
-###########################################################################################################################################################
+######################################################################################
 
 #postulaciones
 RewriteRule ^postulacion/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion [L]
-
 RewriteRule ^postulacion/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&page=$1 [L]
 RewriteRule ^postulacion/([a-z])+/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&param=$1&eliminarPostulacion=$2 [L]
 
-###########################################################################################################################################################
+######################################################################################
 
 #filtros
 RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&page=$7 [L]
@@ -122,18 +121,18 @@ RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([0-9]+)/
 
 RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&page=$4 [L]
 
-###########################################################################################################################################################
+#######################################################################################
 
 #Inicio
 RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [L]
 
-###########################################################################################################################################################
+#########################################################################################
 
 #Vacantes
 RewriteRule ^vacantes/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes [L]
 RewriteRule ^vacantes/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&page=$1 [L]
 
-###########################################################################################################################################################
+########################################################################################
 
 #Aspirantes
 RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&vista=$1&id_oferta=$2&page=$3 [L]
@@ -159,13 +158,10 @@ RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]
 RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&page=$6 [L]
 
 RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&page=$5 [L]
-
-RewriteRule ^aspirante/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$2 [L]
-###########################################################################################################################################################
+###########################################################################################################################################
 
 #informePDF
-
 RewriteRule ^informePDF/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF&username=$1 [L]
 
 #Aspirantes
-RewriteRule ^aspirante/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$2&id_oferta=$3 [L]
+RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2 [L]

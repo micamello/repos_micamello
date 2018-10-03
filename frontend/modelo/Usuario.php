@@ -81,8 +81,8 @@ class Modelo_Usuario{
     return (!empty($rs['id_usuario'])) ? false : true;
   }
 
-  public static function crearUsuario($data, $defaultDataUser){
-    if(empty($data)||empty($defaultDataUser)){return false;}
+  public static function crearUsuario($data, $defaultDataUser,$username){
+    if(empty($data)||empty($defaultDataUser) || empty($username)){return false;}
 
     $password = md5($data['password']);
 
@@ -90,7 +90,7 @@ class Modelo_Usuario{
         $data["apell_user"] = $data['name_user'];
       }
 
-    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>strtolower($data['username']),"password"=>$password,"correo"=>strtolower($data['correo']),"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"tipo_usuario"=>$data['tipo_usuario'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
+    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>strtolower($username),"password"=>$password,"correo"=>strtolower($data['correo']),"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"tipo_usuario"=>$data['tipo_usuario'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion']));
     return $result;
   }
 

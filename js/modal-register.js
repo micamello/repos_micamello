@@ -123,7 +123,7 @@ function modal_set(id)
 
 		correo_group.className ="col-md-6";
 
-		name_user.setAttribute("pattern", "^[a-zA-Z][a-zA-Z0-9-_\.]{1,20}$");
+		name_user.setAttribute("pattern", "[A-Za-z 0-9]+");
 
 		tipo_usuario.value = id;
 		$("#myModal").modal("show");
