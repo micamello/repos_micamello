@@ -60,15 +60,13 @@
                                                     <td style="text-align: center;" data-title="Estado del Plan: "><?php echo ESTADOS[$value['estado']]; ?></td>
                                                     <td style="text-align: center;" data-title="Factura: ">
                                                         <?php if($value['estado'] != 0){ ?>
-
-                                                            <a title="Descargar factura" href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
+                                                            <a title="Descargar factura" href="#">
                                                                 <i class="fa fa-money"></i></i>
                                                             </a>
                                                         <?php }else{ echo '-'; } ?>
                                                     </td>
                                                     <td style="text-align: center;" data-title="Eliminar: ">
                                                         <?php if($value['estado'] != 0){ ?>
-
                                                             <a title="Eliminar suscripci&oacute;n al plan" href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
                                                                 <i class="fa fa-trash"></i>
                                                             </a>

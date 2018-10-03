@@ -292,7 +292,9 @@ class Controlador_Aspirante extends Controlador_Base
 
                 $arrprovincia = $nacionalidades = array();
                 foreach ($aspirantes as $key => $value) {
-                   $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
+                   if (!empty($arranacionalidades[$value['id_pais']])){
+                     $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
+                   }
                    $arrprovincia[$value['id_provincia']] = $value['ubicacion'];
                 }
                 

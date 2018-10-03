@@ -197,7 +197,7 @@
 
             <footer id="contact" class="footer p-top-30">
                 <!--<div class="action-lage"></div>-->
-                <div class="container" align="center">
+                <div class="container-fluid" align="center">
 
                     <div class="foot_mic">
                         <div class="row">

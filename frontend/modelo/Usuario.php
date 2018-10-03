@@ -447,7 +447,11 @@ class Modelo_Usuario{
       $sql .= "count(1) AS cantd_aspirantes";
     }
 
-    $sql .= " FROM mfo_usuario u, mfo_requisitosusuario r, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_area a, mfo_usuarioxarea ua";
+    $sql .= " FROM mfo_usuario u, mfo_requisitosusuario r, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c";
+
+    if(!empty($filtros['A']) && $filtros['A'] != 0){
+      $sql .= ",  mfo_usuarioxarea ua ";
+    }
 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
       $sql .= ", mfo_usuario_plan up, mfo_plan pl ";
@@ -457,8 +461,6 @@ class Modelo_Usuario{
             AND c.id_provincia = pr.id_provincia
             AND u.id_ciudad = c.id_ciudad
             AND e.id_escolaridad = r.id_escolaridad
-            AND a.id_area = ua.id_area
-            AND ua.id_usuario = u.id_usuario
             AND u.tipo_usuario = 1
             AND pr.id_pais = ".$id_pais_empresa;
    
@@ -482,7 +484,7 @@ class Modelo_Usuario{
     }
 
     if(!empty($filtros['A']) && $filtros['A'] != 0){
-      $sql .= " AND a.id_area = ".$filtros['A'];
+      $sql .= " AND ua.id_usuario = u.id_usuario AND ua.id_area = ".$filtros['A'];
     }
 
     //obtener los aspirantes por los que pagaron y los q no pagaron

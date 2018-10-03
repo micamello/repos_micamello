@@ -41,7 +41,7 @@ class Controlador_Oferta extends Controlador_Base{
         switch ($opcion) {
           case 'filtrar':
               $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-              $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo($_SESSION['mfo_datos']['sucursal']['id_pais']);
+              $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
               $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
               unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['vista']);
               

@@ -101,7 +101,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fa fa-calendar"></i> Fecha de postulaci&oacute;n</span>
+					<span><i class="fa fa-calendar"></i><?php if ($vista == 1){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
 				</div>
 				<div class="panel-body">
 					<div class="filtros">
@@ -141,6 +141,7 @@
 					 </div>
 		          </div>
 		    </div>
+		    <?php if ($vista == 1){ ?>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
 		            <span><i class="fa fa-money"></i> Salario</span>
@@ -156,6 +157,7 @@
 				?></div>
 		      </div>
 		    </div>
+		    <?php } ?>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
 		            <span><i class="fa fa-venus-mars"></i> Genero</span>
@@ -360,7 +362,7 @@
 												<?php if($vista == 1){ ?>
 							            			<td data-title="Postulado el: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo date("d", strtotime($a['fecha_postulado'])).' de '.MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado'])); ?></td>
 												<?php }else{ ?>
-													<td data-title="Postulado el: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo date("d", strtotime($a['fecha_creacion'])).' de '.MESES[date("m", strtotime($a['fecha_creacion']))].', '.date("Y", strtotime($a['fecha_creacion'])); ?></td>
+													<td data-title="Registrado el: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo date("d", strtotime($a['fecha_creacion'])).' de '.MESES[date("m", strtotime($a['fecha_creacion']))].', '.date("Y", strtotime($a['fecha_creacion'])); ?></td>
 												<?php } ?>
 
 												<td style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>

@@ -12,11 +12,12 @@ if(document.getElementById('form_publicar')){
 
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
-    var dni_error = document.getElementById("error_custom_dni");
-        while (dni_error.hasChildNodes()) {
-          dni_error.removeChild(dni_error.firstChild);
-        }
-
+    if (document.getElementById("error_custom_dni")){
+      var dni_error = document.getElementById("error_custom_dni");
+      while (dni_error.hasChildNodes()) {
+        dni_error.removeChild(dni_error.firstChild);
+      }
+    }
     $(this).find('form')[0].reset();
 });
 

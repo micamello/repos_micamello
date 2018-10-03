@@ -89,7 +89,7 @@
                         foreach($arrarea as $area) {                        
                     ?>
                         <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
-                            <?php if(Modelo_Usuario::estalogueado()){ 
+                            <?php if(Modelo_Usuario::estalogueado() && $area['ofertas'] > 0){ 
                                 echo '<a href="'.PUERTO.'://'.HOST.'/oferta/1/A'.$area['id_area'].'/1/">';
                             } ?>
                               <div class="brand_item col-md-2 col-sm-6" align="center"><i class="<?php echo $area['ico'] ?> font_awesome"></i><br><br>
@@ -214,21 +214,6 @@
                 </div>
             </section>
 
-<!-- Modal registro exitoso -->
-<!-- <div class="modal" tabindex="-1" role="dialog" id="modal_registro">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-    </div>
-  </div>
-</div> -->
-<!-- Modal registro exitoso -->
-
-<!-- FIN PUBLICIDAD -->
-<!-- <a href="<?php echo PUERTO."://".HOST;?>/informePDF/" class="btn btn-success">Eder</a> -->
-
 <!-- Listado de auspiciantes -->
 <section id="brand" class="brand fix">
   <div class="container-fluid">
@@ -246,7 +231,3 @@
     </div>                
   </div>
 </section><!-- End off Brand section -->
-
-
-
-

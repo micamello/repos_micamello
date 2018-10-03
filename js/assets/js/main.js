@@ -92,8 +92,8 @@ jQuery(document).ready(function ($) {
 
 function abrirModal(mensaje,id){
     $('#mensaje').html(mensaje);
+    //$('#alert_descarga').modal();
     $('#'+id).modal();
-    $('#alert_descarga').modal();
 }
 
 function validaDecimales(evt,input){
