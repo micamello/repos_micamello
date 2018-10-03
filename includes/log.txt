@@ -1,9 +1,0 @@
-[2018/10/03 04:53:16] Utils::createSession empezo una nueva sesion
-[2018/10/03 04:53:16] dispatch nombre del controlador: Controlador_Velocimetro - velocimetro
-[2018/10/03 04:53:16] SQL Query: SELECT p.valor, c.imagen, c.orden 
-						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
-						WHERE p.id_usuario = '4' ORDER BY p.id_cuestionario ASC
-[2018/10/03 04:53:16] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
-[2018/10/03 04:53:16] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '4' AND tipo = '1' LIMIT 1
-[2018/10/03 04:53:17] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2018/10/03 04:53:17] Utils::createSession empezo una nueva sesion
