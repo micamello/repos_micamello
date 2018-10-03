@@ -1072,3 +1072,206 @@ WHERE
 [2018/10/02 04:19:16] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
 [2018/10/02 04:19:16] Utils::createSession empezo una nueva sesion
 [2018/10/02 04:19:16] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:43:52] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:43:52] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 04:43:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/02 04:43:52] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 04:43:52] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 04:43:52] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 04:43:52] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 04:43:52] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/02 04:43:52] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 04:43:52] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 04:43:52] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 04:43:52] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 04:43:52] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 04:43:52] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 04:43:53] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:46:40] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:46:40] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 04:46:40] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/02 04:46:40] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 04:46:40] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 04:46:40] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 04:46:40] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 04:46:40] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/02 04:46:40] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 04:46:40] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 04:46:40] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 04:46:40] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 04:46:40] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 04:46:41] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 04:46:41] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:51:07] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:51:07] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 04:51:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/02 04:51:07] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 04:51:07] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 04:51:07] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 04:51:07] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 04:51:07] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/02 04:51:07] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 04:51:07] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 04:51:07] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 04:51:07] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 04:51:07] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 04:51:08] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 04:51:08] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:53:24] Utils::createSession empezo una nueva sesion
+[2018/10/02 04:53:24] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 04:53:24] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/02 04:53:24] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 04:53:24] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 04:53:24] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 04:53:24] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 04:53:24] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/02 04:53:24] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 04:53:24] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 04:53:24] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 04:53:24] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 04:53:24] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 04:53:24] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 04:53:25] Utils::createSession empezo una nueva sesion
+[2018/10/02 05:02:39] Utils::createSession empezo una nueva sesion
+[2018/10/02 05:02:39] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 05:02:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/02 05:02:39] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 05:02:39] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 05:02:39] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 05:02:39] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 05:02:39] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/02 05:02:39] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 05:02:39] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 05:02:39] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 05:02:39] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 05:02:39] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 05:02:39] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 05:02:40] Utils::createSession empezo una nueva sesion
+[2018/10/02 05:03:42] Utils::createSession empezo una nueva sesion
+[2018/10/02 05:03:42] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 05:03:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/02 05:03:42] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 05:03:42] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 05:03:42] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 05:03:42] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 05:03:42] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/02 05:03:42] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 05:03:42] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 05:03:42] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 05:03:42] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 05:03:42] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 05:03:42] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 05:03:42] Utils::createSession empezo una nueva sesion
+[2018/10/02 05:05:07] Utils::createSession empezo una nueva sesion
+[2018/10/02 05:05:07] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/02 05:05:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/02 05:05:07] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/02 05:05:07] SQL Query: SELECT * FROM mfo_area
+[2018/10/02 05:05:07] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/02 05:05:07] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/02 05:05:07] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/02 05:05:07] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/02 05:05:07] SQL Query: SELECT * from mfo_idioma
+[2018/10/02 05:05:07] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/02 05:05:07] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/02 05:05:08] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/02 05:05:08] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/02 05:05:08] Utils::createSession empezo una nueva sesion
+[2018/10/03 08:25:54] Utils::createSession empezo una nueva sesion
+[2018/10/03 08:25:55] dispatch nombre del controlador: Controlador_Inicio - inicio
+[2018/10/03 08:25:55] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2018/10/03 08:25:55] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2018/10/03 08:25:55] SQL Query: SELECT COUNT(1) AS cont 
+            FROM mfo_usuario u 
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE u.tipo_usuario='1' AND u.estado=1 AND p.id_pais = '14'
+[2018/10/03 08:25:55] SQL Query: SELECT COUNT(1) AS cont 
+            FROM mfo_usuario u 
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE u.tipo_usuario='2' AND u.estado=1 AND p.id_pais = '14'
+[2018/10/03 08:25:55] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2018/10/03 08:25:55] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/03 08:25:55] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2018/10/03 08:25:56] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2018/10/03 08:25:58] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/03 08:30:55] Utils::createSession empezo una nueva sesion
+[2018/10/03 08:30:55] dispatch nombre del controlador: Controlador_Login - login
+[2018/10/03 08:30:55] SQL Query: SELECT * FROM mfo_area
+[2018/10/03 08:30:55] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/03 08:30:56] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/03 08:31:14] Utils::createSession empezo una nueva sesion
+[2018/10/03 08:31:14] dispatch nombre del controlador: Controlador_Login - login
+[2018/10/03 08:31:14] SQL Query: SELECT u.id_usuario, u.username, u.correo, u.telefono, u.dni, u.nombres,
+                   u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
+                   r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
+                   r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
+                   r.genero, r.apellidos, u.id_nacionalidad, r.id_univ, r.nombre_univ, p.id_pais
+            FROM mfo_usuario u 
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia   
+            LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+            WHERE (u.username = 'empresa2' OR u.correo = 'empresa2') AND u.password = '25d55ad283aa400af464c76d713c07ad' AND u.estado = 1
+[2018/10/03 08:31:14] SQL execute: UPDATE mfo_usuario SET ultima_sesion="2018-10-03 08:31:14" WHERE id_usuario=7
+[2018/10/03 08:31:15] SQL Query: SELECT * FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2018/10/03 08:31:15] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 7
+[2018/10/03 08:31:15] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 7
+[2018/10/03 08:31:15] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 7
+[2018/10/03 08:31:15] Utils::createSession empezo una nueva sesion
+[2018/10/03 08:31:15] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/10/03 08:31:15] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2018/10/03 08:31:15] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '7' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/10/03 08:31:15] SQL Query: SELECT * FROM mfo_area
+[2018/10/03 08:31:15] SQL Query: SELECT * from mfo_nivelinteres
+[2018/10/03 08:31:15] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/10/03 08:31:15] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/10/03 08:31:15] SQL Query: SELECT * FROM mfo_jornada
+[2018/10/03 08:31:15] SQL Query: SELECT * from mfo_idioma
+[2018/10/03 08:31:15] SQL Query: SELECT * from mfo_nivelidioma
+[2018/10/03 08:31:15] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/10/03 08:31:15] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '7' AND tipo = '1' LIMIT 1
+[2018/10/03 08:31:16] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/10/03 08:31:16] Utils::createSession empezo una nueva sesion

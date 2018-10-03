@@ -81,7 +81,7 @@
 							<div class="form-group">
 
 								<label class="">Salario: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return valida_numeros(event);" required>
+								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return validaNumeros(event);" required>
 							</div>
 						</div>
 
@@ -89,7 +89,7 @@
 							<div class="form-group">
 
 								<label>Cantidad de vacantes: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return valida_numeros(event);">
+								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);">
 							</div>
 						</div>
 
@@ -384,21 +384,21 @@
 							<div class="form-group">
 
 								<label>Edad mínima: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" onkeydown=" return valida_numeros(event);" required>
+								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" onkeydown=" return validaNumeros(event);" required>
 							</div>
 						</div>
 
 						<div class="col-md-3">
 							<div class="form-group">
 								<label>Edad máxima: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" id="edad_max" name="edad_max" min="18" max="100" class="form-control" onkeydown=" return valida_numeros(event);" required>
+								<input type="number" id="edad_max" name="edad_max" min="18" max="100" class="form-control" onkeydown=" return validaNumeros(event);" required>
 							</div>
 						</div>	
 					</div>
 					<br>
 					<div class="row">
 						<!-- <a type="submit" class="btn btn-success">Publicar</a> -->
-						<input type="submit" id="publicar_btn" name="" class="btn btn-success" value="Publicar oferta">
+						<input type="submit" id="boton" name="" class="btn btn-success" value="Publicar oferta">
 					</div>
 				</form>
 			</div>
