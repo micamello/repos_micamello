@@ -290,7 +290,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(/*$_SESSION['mfo_datos']['usuario']['id_pais']*/14,$page,false);
                 }
 
-                $arranacionalidades = Modelo_pais::obtieneListadoAsociativo();
+                $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();
 
                 $arrprovincia = $nacionalidades = array();
                 foreach ($aspirantes as $key => $value) {

@@ -4,8 +4,8 @@
 .needle, .needle-center{ fill:#000000; }
 .progress-bar-danger { background-color:#8c9091; }
 @media screen and (max-width: 600px) {
-  .chart-gauge{ width:270px;height:210px; } 
+  .chart-gauge{ width:270px;height:120px; } 
 }
 @media screen and (min-width: 600px) {	
-  .chart-gauge{ width:400px;height:210px; } 
+  .chart-gauge{ width:500px;height:210px; } 
 }

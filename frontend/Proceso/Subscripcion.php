@@ -55,7 +55,7 @@ class Proceso_Subscripcion{
   	  $GLOBALS['db']->rollback();
 	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
       $msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    Utils::envioCorreo('micamelloecuador@gmail.com','Error Cron planes_paypal',$msgerror);	    
+	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_paypal',$msgerror);	    
   	}
 
   }
@@ -80,7 +80,7 @@ class Proceso_Subscripcion{
       $email_body .= "<a href='".PUERTO."://".$dominio."/cuestionario/'>click aqu&iacute;</a> <br>";
     }else{
       $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
-      $email_body .= "<a href='".PUERTO."://".$dominio."/publicar/'>click aqu&iacute;</a> <br>";
+      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollo/publicar/'>click aqu&iacute;</a> <br>";
     }  
     Utils::envioCorreo($correo,$email_subject,$email_body);
   }

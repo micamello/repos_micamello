@@ -235,4 +235,4 @@ function mostrarGrafico(label, valor){
           }
         }
       });
-  }
+  }  

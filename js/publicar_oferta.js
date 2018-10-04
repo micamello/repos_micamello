@@ -254,5 +254,5 @@ function delete_item_selected(selected_item){
         // document.getElementById("listado_idiomas").innerHTML = "";
           document.getElementById("id_idi_error").setAttribute("class", "form-group");
         }
-    }	
+    }   
 }

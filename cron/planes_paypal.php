@@ -19,44 +19,42 @@ else{
 }
 
 $registros = Modelo_Paypal::obtieneNoProcesados();
-if (empty($registros) || !is_array($registros)){
-	exit;
-}
 
-foreach($registros as $registro){  
-  if (empty($registro)){
-    Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Registro no tiene valores '.print_r($registro,true));
-    continue;
-  }
+if (!empty($registros) && is_array($registros)){
+  foreach($registros as $registro){  
+    if (empty($registro)){
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Registro no tiene valores '.print_r($registro,true));
+      continue;
+    }
 
-  $cliente = obtenerDatosCliente($registro["custom"]); 
-  if (empty($cliente)){ 
-  	Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Campo custom no tiene valores '.print_r($registro,true));
-    continue;
-  }    
-  if (empty($registro["txn_id"]) || empty($registro["payment_gross"]) || empty($registro["id_paypal"])){
-    Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Valores nulos '.print_r($registro,true));
-    continue;
-  }
-   
-  $procesador = (object) array('id'=>$registro["id_paypal"],
-                               'tipo'=>'paypal',
-                               'trans'=>$registro["txn_id"],
-                               'monto'=>$registro["payment_gross"]);
+    $cliente = obtenerDatosCliente($registro["custom"]); 
+    if (empty($cliente)){ 
+    	Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Campo custom no tiene valores '.print_r($registro,true));
+      continue;
+    }    
+    if (empty($registro["txn_id"]) || empty($registro["payment_gross"]) || empty($registro["id_paypal"])){
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Valores nulos '.print_r($registro,true));
+      continue;
+    }
+     
+    $procesador = (object) array('id'=>$registro["id_paypal"],
+                                 'tipo'=>'paypal',
+                                 'trans'=>$registro["txn_id"],
+                                 'monto'=>$registro["payment_gross"]);
 
-  switch($registro["payment_status"]){
-    //si realizo el pago
-    case "Completed":
-       $objSubscripcion = new Proceso_Subscripcion($cliente,$cliente->plan,$procesador);
-       $objSubscripcion->procesar();        
-    break;
-    //si cancelo el pago
-    case "Reversed":
-       $objCancelacion = new Proceso_Cancelacion($cliente,$cliente->plan,$procesador);
-       $objCancelacion->procesar();
-    break;
+    switch($registro["payment_status"]){
+      //si realizo el pago
+      case "Completed":
+         $objSubscripcion = new Proceso_Subscripcion($cliente,$cliente->plan,$procesador);
+         $objSubscripcion->procesar();        
+      break;
+      //si cancelo el pago
+      case "Reversed":
+         $objCancelacion = new Proceso_Cancelacion($cliente,$cliente->plan,$procesador);
+         $objCancelacion->procesar();
+      break;
+    }    
   }
-  
 }
 
 //elimina archivo de procesamiento
