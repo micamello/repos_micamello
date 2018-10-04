@@ -30,11 +30,13 @@ class Modelo_Usuario{
                    u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
                    r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
                    r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
-                   r.genero, r.apellidos, u.id_nacionalidad, r.id_univ, r.nombre_univ, p.id_pais
+                   r.genero, r.apellidos, u.id_nacionalidad, r.id_univ, r.nombre_univ, p.id_pais, ce.nombres AS nombres_contacto, 
+                   ce.apellidos AS apellidos_contacto, ce.telefono1, ce.telefono2
             FROM mfo_usuario u 
             INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia   
             LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+            LEFT JOIN mfo_contactoempresa ce ON ce.id_empresa = u.id_usuario
             WHERE (u.username = ? OR u.correo = ?) AND u.password = ? AND u.estado = 1";        
     return $GLOBALS['db']->auto_array($sql,array($username,$username,$password)); 
   }
@@ -106,13 +108,17 @@ class Modelo_Usuario{
 
   public static function actualizarSession($idUsuario){
 
-    $sql = "SELECT u.id_usuario, u.username, u.correo, u.telefono, 
-                   u.dni, u.nombres, u.fecha_nacimiento, u.foto,
-                   u.tipo_usuario, u.id_ciudad, r.estado_civil,
-                   r.tiene_trabajo, r.viajar, r.licencia,
-                   r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, r.genero, r.apellidos, 
-                   r.id_univ, r.status_carrera, u.id_nacionalidad, r.nombre_univ
-            FROM mfo_usuario u LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+    $sql = "SELECT u.id_usuario, u.username, u.correo, u.telefono, u.dni, u.nombres,
+                   u.fecha_nacimiento, u.foto, u.tipo_usuario, u.id_ciudad,
+                   r.estado_civil, r.tiene_trabajo, r.viajar, r.licencia,
+                   r.discapacidad,r.anosexp, r.status_carrera, r.id_escolaridad, 
+                   r.genero, r.apellidos, u.id_nacionalidad, r.id_univ, r.nombre_univ, p.id_pais, ce.nombres AS nombres_contacto, 
+                   ce.apellidos AS apellidos_contacto, ce.telefono1, ce.telefono2
+            FROM mfo_usuario u 
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia   
+            LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario
+            LEFT JOIN mfo_contactoempresa ce ON ce.id_empresa = u.id_usuario
             WHERE u.id_usuario = ? AND u.estado = 1";        
     return $GLOBALS['db']->auto_array($sql,array($idUsuario)); 
   }
@@ -423,6 +429,7 @@ class Modelo_Usuario{
             AND u.id_ciudad = c.id_ciudad
             AND e.id_escolaridad = r.id_escolaridad
             AND u.tipo_usuario = 1
+            AND u.id_usuario = (SELECT p.id_usuario FROM mfo_porcentajextest p WHERE p.id_usuario = u.id_usuario LIMIT 1)
             AND pr.id_pais = '.$id_pais_empresa;
 
     if($obtCantdRegistros == false){
@@ -462,6 +469,7 @@ class Modelo_Usuario{
             AND u.id_ciudad = c.id_ciudad
             AND e.id_escolaridad = r.id_escolaridad
             AND u.tipo_usuario = 1
+            AND u.id_usuario = (SELECT p.id_usuario FROM mfo_porcentajextest p WHERE p.id_usuario = u.id_usuario LIMIT 1)
             AND pr.id_pais = ".$id_pais_empresa;
    
     //segun el escogido calcular fecha y ponersela a la consulta
