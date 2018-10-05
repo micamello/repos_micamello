@@ -14,10 +14,10 @@
 			 			<?php 
 			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {
 			 					?>
-						 			<p>Fecha caducidad plan: </p>
+						 			<p>Fecha caducidad plan: 
 						 			<b><span><?php
 						 			$fecha = date_create($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad']);
-						 			 echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b>
+						 			 echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>
 			 				<?php
 			 				}
 			 			 ?>
@@ -25,14 +25,14 @@
 			 		</div>	
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
-			 				<p>Publicaciones restantes: </p>
-			 				<b><span><?php echo $publicaciones_restantes['p_restantes']; ?></span></b>
+			 				<p>Publicaciones restantes: 
+			 				<b><span><?php echo $publicaciones_restantes['p_restantes']; ?></span></b></p>
 			 			</div>
 			 		</div>
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
-			 				<p>N° Planes activos: </p>
-			 				<b><span><?php echo count($_SESSION['mfo_datos']['planes']); ?></span></b>
+			 				<p>N° Planes activos: 
+			 				<b><span><?php echo count($_SESSION['mfo_datos']['planes']); ?></span></b></p>
 			 			</div>
 			 		</div>
 			 	</div>
@@ -89,14 +89,14 @@
 							<div class="form-group">
 
 								<label>Cantidad de vacantes: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);">
+								<input type="number" id="vacantes" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);">
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione provincia:</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="provincia_of" class="form-control" id="provincia_of" required>
+								<select name="provincia_of" id="provincia_of" class="form-control" id="provincia_of" required>
 									<?php 
 			                      if (!empty($arrprovinciasucursal)){
 			                          foreach($arrprovinciasucursal as $provincia){ ?>
@@ -128,49 +128,52 @@
 						</div>
 
 						
+					<div class="row">
+						<div class="">
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="opcionesSeleccionados">
+										<div class="row" id="seleccionados">
+											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+											<!-- <?php echo $optiones; ?> -->
+										</div>
+										<div class="help-block with-errors"></div>
+										<label class="">Categorías: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
+										<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+					                    <?php 
+					                      if (!empty($arrarea)){
+					                          foreach($arrarea as $area){ ?>
+					                              <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
+					                          <?php }
+					                      } ?>
+					                  	</select>
+					                </div>
+								</div>
+							</div>
 
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="opcionesSeleccionados">
-									<div class="row" id="seleccionados">
-										<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-										<!-- <?php echo $optiones; ?> -->
-									</div>
-									<div class="help-block with-errors"></div>
-									<label class="">Categorías: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-									<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple required>
-				                    <?php 
-				                      if (!empty($arrarea)){
-				                          foreach($arrarea as $area){ ?>
-				                              <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
-				                          <?php }
-				                      } ?>
-				                  	</select>
-				                </div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<div class="opcionesSeleccionados">
+										<div class="row" id="seleccionados1">
+											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+											<!-- <?php echo $optiones; ?> -->
+										</div>
+										<div class="help-block with-errors"></div>
+										<label>Nivel: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
+										<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+					                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
+					                    <?php 
+					                      if (!empty($intereses)){
+					                          foreach($intereses as $interes){ ?>
+					                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
+					                          <?php }
+					                      } ?>
+					                  	</select>
+					                </div>
+								</div>
 							</div>
 						</div>
-
-						<div class="col-md-6">
-							<div class="form-group">
-								<div class="opcionesSeleccionados">
-									<div class="row" id="seleccionados1">
-										<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-										<!-- <?php echo $optiones; ?> -->
-									</div>
-									<div class="help-block with-errors"></div>
-									<label>Nivel: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-									<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple required>
-				                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
-				                    <?php 
-				                      if (!empty($intereses)){
-				                          foreach($intereses as $interes){ ?>
-				                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
-				                          <?php }
-				                      } ?>
-				                  	</select>
-				                </div>
-							</div>
-						</div>
+					</div>
 
 
 						<div class="col-md-6">

@@ -56,20 +56,20 @@
 
           <div class="col-md-6" id="correo_group">
             <div class="form-group">
-              <label class="text-center">Correo</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+              <p class="text-center text_form">Correo&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
               <input id="correo" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese un correo electrónico válido' : '')" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
             </div>
           </div>   
           <input type="hidden" name="register_form" id="register_form" value="1">
           <div class="col-md-6">
               <div class="form-group">
-                <label class="text-center">Nombres</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+                <p class="text-center text_form">Nombres&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                 <input type="text" name="name_user" id="name_user" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" placeholder="Ejemplo: Carlos Pedro" class="form-control" required>
               </div>
           </div>
           <div class="col-md-6" id="apellido_group">
               <div class="form-group">
-                <label class="text-center">Apellidos</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+                <p class="text-center text_form">Apellidos&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                 <input type="text" name="apell_user" id="apell_user" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortiz Zambrano" class="form-control">
               </div>
           </div>        
@@ -77,7 +77,7 @@
            <div class="col-md-6">
              <div class="form-group">
 
-               <label for="numero_cand">Celular:</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors" id="error_custom_cel"></div>
+               <p for="numero_cand" class="text-center text_form">Celular&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors" id="error_custom_cel"></div>
                <input type="text" class="form-control" name="numero_cand" id="numero_cand" required onkeydown="return validaNumeros(event);">
              </div>
            </div> 
@@ -85,13 +85,14 @@
            <div class="col-md-6">
                   <div class="group">
                     <div class="form-group">
-                      <label class="text-center" id="dni_text"></label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors" id="error_custom_dni"></div>
+                      <p class="text-center text_form" id="dni_text"></p><div class="help-block with-errors" id="error_custom_dni"></div>
                       <input id="dni" type="text" name="cedula" class="form-control" required>
                     </div>
                   </div>
               </div>
 
               <div class="col-md-12" id="area_group">
+                <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione área:<span class="text-help">(max. 3)</span>&nbsp;<i class="requerido">*</i></p>
                 <div class="form-group">
                   <div class="opcionesSeleccionados">
                     <div class="row" id="seleccionados">
@@ -99,7 +100,6 @@
                       <!-- <?php echo $optiones; ?> -->
                     </div>
                       <div class="help-block with-errors"></div>
-                      <label class="form-text">Seleccione área:</label><span class="text-help">(max. 3)&nbsp;<i class="requerido">*</i></span>
                       <select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 3 }' multiple>
                         <!-- <option value="" selected disabled>Seleccione un área</option> -->
                         <?php 
@@ -114,6 +114,7 @@
               </div>
 
               <div class="col-md-12" id="nivel_group">
+                <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione nivel de interés:<span>(max. 2)&nbsp;<i class="requerido">*</i></span></p>
                 <div class="form-group">
                   <div class="opcionesSeleccionados">
                     <div class="row" id="seleccionados1">
@@ -121,7 +122,6 @@
                       <!-- <?php echo $optiones; ?> -->
                     </div>
                       <div class="help-block with-errors"></div>
-                      <label class="form-text">Seleccione nivel de interés:</label><span>(max. 2)&nbsp;<i class="requerido">*</i></span>
                       <select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 2 }' multiple>
                         <!-- <option value="" selected disabled>Seleccione un área</option> -->
                         <?php 
@@ -137,7 +137,7 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label class="text-center">Contraseña</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+                  <p class="text-center text_form">Contraseña&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
                     <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control" required>
@@ -146,7 +146,7 @@
             </div>
             <div class="col-md-6">
               <div class="form-group">
-                  <label class="text-center">Confirmar Contraseña</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+                  <p class="text-center text_form">Confirmar Contraseña&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
                     <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" required>
@@ -162,28 +162,28 @@
             <!-- Empresas contacto -->
             <div class="col-md-6" id="group_nombre_contact">
               <div class="form-group">
-                <label class="text-center">Nombres</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+                <p class="text-center text_form">Nombres&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                 <input type="text" name="nombre_contact" id="nombre_contact" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control">
               </div>
             </div>  
 
             <div class="col-md-6" id="group_apell_contact">
               <div class="form-group">
-                <label class="text-center">Apellidos</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+                <p class="text-center text_form">Apellidos&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                 <input type="text" name="apellido_contact" id="apellido_contact" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control">
               </div>
             </div> 
 
             <div class="col-md-6" id="group_num1_contact">
               <div class="form-group">
-                <label class="text-center">Teléfono 1</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+                <p class="text-center text_form">Teléfono 1&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                 <input type="text" name="tel_one_contact" id="tel_one_contact" class="form-control" onkeydown="return validaNumeros(event);">
               </div>
             </div> 
 
             <div class="col-md-6" id="group_num2_contact">
               <div class="form-group">
-                <label class="text-center">Teléfono 2 (opcional):</label><div class="help-block with-errors"></div>
+                <p class="text-center text_form">Teléfono 2 (opcional):</p><div class="help-block with-errors"></div>
                 <input type="text" name="tel_two_contact" id="tel_two_contact" class="form-control" onkeydown="return validaNumeros(event);">
               </div>
             </div> 
@@ -196,12 +196,11 @@
               <div class="conditions_components">
                 <div class="" align="left">
                   <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="term_cond" id="term_cond" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank">Aceptar términos y condiciones </a></label>
+                    <input id="box-1" type="checkbox" name="term_cond" id="term_cond" value="1" required><label for="box-1">He leido y acepto los <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank"> términos y condiciones </a> y la <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Política de Privacidad</a></label></label>
                 </div>
-                <div class="" align="left">
-                  <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="conf_datos" id="conf_datos" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Políticas de Privacidad </a></label>
-                </div>
+                
+                    <input type="hidden" name="conf_datos" id="conf_datos" value="1">
+                
               </div>
 
               <input type="hidden" id="tipo_usuario" name="tipo_usuario" value="">
@@ -302,7 +301,7 @@
 
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
-<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>

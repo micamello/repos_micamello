@@ -89,27 +89,27 @@ function pass_hidden(obj){
 }
 
 
-if(document.getElementById("term_cond")){
-  $("#term_cond").on("change", function(){
-    if (document.getElementById("term_cond").checked) {
-      document.getElementById("conf_datos").checked = true;
-    }
-    else{
-      document.getElementById("conf_datos").checked = false;
-    }
-  })
-}
+// if(document.getElementById("term_cond")){
+//   $("#term_cond").on("change", function(){
+//     if (document.getElementById("term_cond").checked) {
+//       document.getElementById("conf_datos").checked = true;
+//     }
+//     else{
+//       document.getElementById("conf_datos").checked = false;
+//     }
+//   })
+// }
 
-if(document.getElementById("conf_datos")){
-  $("#conf_datos").on("change", function(){
-    if (document.getElementById("conf_datos").checked) {
-      document.getElementById("term_cond").checked = true;
-    }
-    else{
-      document.getElementById("term_cond").checked = false;
-    }
-  })
-}
+// if(document.getElementById("conf_datos")){
+//   $("#conf_datos").on("change", function(){
+//     if (document.getElementById("conf_datos").checked) {
+//       document.getElementById("term_cond").checked = true;
+//     }
+//     else{
+//       document.getElementById("term_cond").checked = false;
+//     }
+//   })
+// }
 
 function crearMensajeError($id_div_error, $mensaje_error){
     var nodo_div = document.getElementById($id_div_error);
