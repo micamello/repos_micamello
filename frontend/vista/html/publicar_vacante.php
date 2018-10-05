@@ -91,13 +91,14 @@
 
 								<label>Cantidad de vacantes: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);" value="1">
+
 							</div>
 						</div>
 
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione provincia:</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="provincia_of" class="form-control" id="provincia_of" required>
+								<select name="provincia_of" id="provincia_of" class="form-control" id="provincia_of" required>
 									<?php 
 			                      if (!empty($arrprovinciasucursal)){
 			                          foreach($arrprovinciasucursal as $provincia){ ?>
@@ -128,8 +129,6 @@
 							</div>
 						</div>
 
-						
-
 					<div class="row">
 						<div class="">
 							<div class="col-md-6">
@@ -152,7 +151,6 @@
 					                </div>
 								</div>
 							</div>
-
 
 							<div class="col-md-6">
 								<div class="form-group">

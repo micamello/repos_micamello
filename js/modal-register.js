@@ -71,7 +71,7 @@ function modal_set(id)
 	if (id == 1){
 		apellido_group.style.display = "";
 		apell_user.required = true;
-		dni_text.innerHTML = "Cédula / Pasaporte:";
+		dni_text.innerHTML = "Cédula / Pasaporte&nbsp;<i class='requerido'>*</i>";
 		area_group.style.display = "";
 		area_select.required = true;
 		nivel_group.style.display = "";
@@ -102,7 +102,7 @@ function modal_set(id)
 	if(id == 2){
 		apellido_group.style.display = "none";
 		apell_user.required = false;
-		dni_text.innerHTML = "RUC";
+		dni_text.innerHTML = "RUC&nbsp;<i class='requerido'>*</i>";
 		area_group.style.display = "none";
 		area_select.required = false;
 		nivel_group.style.display = "none";
