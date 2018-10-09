@@ -1,6 +1,5 @@
 <div class="container">
-
-	<?php if ($vista == 'ofertas' && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
+	<?php if (trim($vista) == 'oferta' && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
 		<div class="col-md-12" align="right" >
 			<b>Autopostulaciones restantes: <span class="parpadea" style="color:red"><?php echo $autopostulaciones_restantes['p_restantes']; ?></span></b>
 		</div>
@@ -189,7 +188,10 @@
 						   		<div class="row">
 						   			<div class="col-md-12">
 										<div class="col-sm-2 col-md-3 col-lg-2" style="padding-left: 0px;" align='center'>
-											<img id="imgPerfil" class="img-responsive postulacion'" src="<?php if($vista != 'postulacion' && $vista != 'vacantes'){ echo PUERTO.'://'.HOST.'/imagenes/logo.png'; }else{ echo Modelo_Usuario::obtieneFoto($o['id_usuario']); } ?>" alt="icono">
+											<?php											
+											$src_imagen = ($o['confidencial'] && $vista!='vacantes') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : Modelo_Usuario::obtieneFoto($o['id_usuario']);
+											?>
+											<img id="imgPerfil" class="img-responsive postulacion'" src="<?php echo $src_imagen; ?>" alt="icono">
 							  			</div>
 							  			<div class='col-sm-9 col-md-7 col-lg-<?php if($vista == 'oferta'){ echo '10'; }else{ echo '9'; }?>'>
 											<span>

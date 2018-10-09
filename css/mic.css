@@ -45,17 +45,17 @@ body
 
 .navbar-default
 {
-	padding-top: 10px;
-	padding-bottom: 10px;
-	background-color: #0267cf;
-	/*color: white;*/
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #0267cf;
+  /*color: white;*/
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover
 {
-	background-color: #3385ff;
-	color: white;
-	border-radius: 10px;
+  background-color: #3385ff;
+  color: white;
+  border-radius: 10px;
 }
 /*Estilos Default opciones del navbar*/
 .navbar-default .navbar-nav>li>a {
@@ -113,7 +113,7 @@ body
 /*Dropdown menu*/
 .dropdown-menu
 {
-	background-color: #0267cf;
+  background-color: #0267cf;
 }
 /*Estilos dropdown navbar*/
 .dropdown-menu>li>a{

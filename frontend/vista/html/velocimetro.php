@@ -7,7 +7,7 @@
             <li class="visited">Registro</li>
             <li class="visited">Completar Perfil</li>
             <?php 
-$valorporc = 5;
+
             for($i=1;$i<=$nrototaltest;$i++){ ?>
               <?php 
                if ($i < $nrotestusuario){
@@ -35,8 +35,9 @@ $valorporc = 5;
               <input type="hidden" id="valorporc" name="valorporc" value="<?php echo $valorporc;?>">              
             </div>            
             <div class="col-md-6" align="center">    
-              <div class="chart-gauge"></div>
-              <br><br>
+
+              <div class="chart-gauge"></div><br><br>
+
               <div class="progress ">
                 <div class="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width:<?php echo $valorporc;?>%"><?php echo $descrporc;?>
                 </div>

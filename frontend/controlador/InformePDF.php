@@ -119,9 +119,11 @@ class Controlador_InformePDF extends Controlador_Base
 
 
     $inidoc = "<link href='https://fonts.googleapis.com/css?family=Archivo' rel='stylesheet'>
-                <link rel='stylesheet' href='css/informemic.css'>
-                <body>
-                <main>";
+               <link rel='stylesheet' href='css/informemic.css'>
+               <link rel='icon' type='image/x-icon' href='imagenes/favicon.ico'>
+               <body>
+               <main>";
+
 
       $caratula = "<div class='content_caratula'><span class='ant_name'>Resultados del informe de</span><h3 class='name_caratula'>".ucfirst($datos_usuario['nombres'])." ".ucfirst($info_usuario['apellidos'])."</h3></div>";
       $caracteristicas_esp = str_replace("_nombreAspirante_", ucfirst($datos_usuario['nombres']), $parametro2['descripcion']);

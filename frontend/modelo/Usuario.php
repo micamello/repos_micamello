@@ -442,6 +442,7 @@ WHERE u.username = ?;";
             AND u.id_ciudad = c.id_ciudad
             AND e.id_escolaridad = r.id_escolaridad
             AND u.tipo_usuario = 1
+            AND u.id_usuario = (SELECT p.id_usuario FROM mfo_porcentajextest p WHERE p.id_usuario = u.id_usuario LIMIT 1)
             AND pr.id_pais = '.$id_pais_empresa;
 
     if($obtCantdRegistros == false){
@@ -481,6 +482,7 @@ WHERE u.username = ?;";
             AND u.id_ciudad = c.id_ciudad
             AND e.id_escolaridad = r.id_escolaridad
             AND u.tipo_usuario = 1
+            AND u.id_usuario = (SELECT p.id_usuario FROM mfo_porcentajextest p WHERE p.id_usuario = u.id_usuario LIMIT 1)
             AND pr.id_pais = ".$id_pais_empresa;
    
     //segun el escogido calcular fecha y ponersela a la consulta

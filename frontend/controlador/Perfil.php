@@ -10,16 +10,14 @@ class Controlador_Perfil extends Controlador_Base
 
     public function construirPagina()
     {
+
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
 
         //Obtiene todos los banner activos segun el tipo
-        $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_PERFIL);
-
-        //obtiene el orden del banner de forma aleatoria segun la cantidad de banner de tipo perfil
-        $orden                      = rand(1, count($arrbanner)) - 1;
-        $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
+        $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
+        $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
         $msj1 = $imgArch1 = $btnDescarga = '';
         
@@ -70,11 +68,9 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
                 if (Utils::getParam('cambiarClave') == 1) {
-
                     self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     $_SESSION['mostrar_exito'] = 'La contraseña fue modificada exitosamente.';
                 }
-
 
                 $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
@@ -285,13 +281,14 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
                 }
 
-            }else if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
+            }
+            else if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
                 if (!Modelo_ContactoEmpresa::editarContactoEmpresa($data, $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
                 }
             }
-
             $GLOBALS['db']->commit();
+            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
             Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario));
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();

@@ -190,12 +190,10 @@
               <div class="conditions_components">
                 <div class="" align="left">
                   <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="term_cond" id="term_cond" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank">Aceptar términos y condiciones </a></label>
+                  <input id="box-1" type="checkbox" name="term_cond" id="term_cond" value="1" required><label for="box-1">He leido y acepto los <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank"> términos y condiciones </a> y la <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Política de Privacidad</a></label></label>
+
                 </div>
-                <div class="" align="left">
-                  <label class="form-text"><div class="help-block with-errors"></div>
-                    <input type="checkbox" name="conf_datos" id="conf_datos" value="1" required><a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Políticas de Privacidad </a></label>
-                </div>
+                <input type="hidden" name="conf_datos" id="conf_datos" value="1">
               </div>
 
               <input type="hidden" id="tipo_usuario" name="tipo_usuario" value="">
@@ -251,7 +249,7 @@
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">T&eacute;rminos y Condiciones</a>| 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Pol&iacute;ticas de Privacidad</a>|
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Pol&iacute;ticas de Cookies</a>|
-				    <a class="legal_info_content" href="http://blog.micamello.com.ec" target="blanked">Blog</a>|
+            <a class="legal_info_content" href="http://blog.micamello.com.ec" target="blanked">Blog</a>|
 
                                     <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a>
                                     
@@ -292,13 +290,13 @@
 
 
                
-            </footer> 
+</footer> 
 
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
+<!--<script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>-->
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
 
 <?php
