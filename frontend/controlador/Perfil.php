@@ -10,16 +10,14 @@ class Controlador_Perfil extends Controlador_Base
 
     public function construirPagina()
     {
+
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
 
         //Obtiene todos los banner activos segun el tipo
-        $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::BANNER_PERFIL);
-
-        //obtiene el orden del banner de forma aleatoria segun la cantidad de banner de tipo perfil
-        $orden                      = rand(1, count($arrbanner)) - 1;
-        $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner[$orden]['id_banner'] . '.' . $arrbanner[$orden]['extension'];
+        $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
+        $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
         $msj1 = $imgArch1 = $btnDescarga = '';
         
@@ -43,10 +41,10 @@ class Controlador_Perfil extends Controlador_Base
                 $escolaridad  = Modelo_Escolaridad::obtieneListado();
                 $arrarea      = Modelo_Area::obtieneListado();
                 $arrinteres   = Modelo_Interes::obtieneListado();
-                $universidades   = Modelo_Universidad::obtieneListado($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
                 $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
-                $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal($_SESSION['mfo_datos']['sucursal']['id_pais']);
+                $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
@@ -70,11 +68,9 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
                 if (Utils::getParam('cambiarClave') == 1) {
-
                     self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     $_SESSION['mostrar_exito'] = 'La contraseña fue modificada exitosamente.';
                 }
-
 
                 $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
@@ -151,7 +147,7 @@ class Controlador_Perfil extends Controlador_Base
                 $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'id_nacionalidad' => 1, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad2'=>0);
             } else {
 
-                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1);
+                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
             }
 
             $data = $this->camposRequeridos($campos);
@@ -286,8 +282,13 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
             }
-
+            else if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
+                if (!Modelo_ContactoEmpresa::editarContactoEmpresa($data, $idUsuario)) {
+                    throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
+                }
+            }
             $GLOBALS['db']->commit();
+            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
             Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario));
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();

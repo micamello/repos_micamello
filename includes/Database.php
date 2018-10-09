@@ -113,9 +113,9 @@ class Database{
       if ( $i != 1 ) {
         $query .= ",";
       }
-
-      if($value == null || $value == 'null'){
-        $query .= $col . '=' . $value;
+      if($value === 'null'){
+        //$query .= $col . '=' . $value;
+        $query .= $col . '= NULL';
       }else{
         $query .= $col . '="' . $value . '"';
       }

@@ -20,7 +20,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 <!--<section id="product" class="product">-->
     <div class="container"><br><br>
-        <form role="form" name="form1" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/<?php if($btnSig == 0){ echo 'perfil'; }else{ echo 'cuestionario'; } ?>/" enctype="multipart/form-data">
+        <form role="form" name="form1" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/perfil/" enctype="multipart/form-data">
             <div class="col-md-12">
                 <div class="col-md-4">
                     <div class="panel panel-default shadow" style="border-radius: 20px;">
@@ -103,32 +103,35 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    </div>
 	                                    </div>
 	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-	                                    <div class="col-md-6">
-		                                    <div class="form-group">
-		                                        <label for="dni">C&eacute;dula</label><div class="help-block with-errors"></div>
-		                                        <input class="form-control" type="text" id="dni" disabled value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
+		                                    <div class="col-md-6">
+			                                    <div class="form-group">
+			                                        <label for="dni">C&eacute;dula</label><div class="help-block with-errors"></div>
+			                                        <input class="form-control" type="text" id="dni" disabled value="<?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?>" />
+			                                    </div>
 		                                    </div>
-	                                    </div>
 	                                	<?php } ?>
+
 	                                    <div class="col-md-6">
 		                                    <div class="form-group">
 		                                        <label for="correo">Correo </label><div class="help-block with-errors"></div>
 		                                        <input class="form-control" id="correo" type="email" disabled value="<?php echo $_SESSION['mfo_datos']['usuario']['correo']; ?>"/>
 		                                    </div>
 	                                    </div>
+
 	                                    <div class="col-md-6">
 	                                        <div class="form-group">
 	                                            <label for="nombres"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nombres <span class="requerido" title="Este campo es obligatorio">*</span><?php }else{ ?> Nombre de la empresa<?php } ?></label><div class="help-block with-errors"></div>
 	                                			<input class="form-control" type="text" id="nombres" name="nombres" value="<?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" <?php if($btnSig == 1){ echo 'disabled'; } ?> required/>
 	                                        </div>
 	                                    </div>
+
 	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-	                                    <div class="col-md-6">
-	                                        <div class="form-group">
-	                                            <label for="apellidos">Apellidos<span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-	                                			<input class="form-control" type="text" id="apellidos" name="apellidos" value="<?php if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])){ echo $_SESSION['mfo_datos']['usuario']['apellidos']; } ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' <?php if($btnSig == 1){ echo 'disabled'; } ?> required/>
-	                                        </div>
-	                                    </div>
+		                                    <div class="col-md-6">
+		                                        <div class="form-group">
+		                                            <label for="apellidos">Apellidos<span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+		                                			<input class="form-control" type="text" id="apellidos" name="apellidos" value="<?php if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])){ echo $_SESSION['mfo_datos']['usuario']['apellidos']; } ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' <?php if($btnSig == 1){ echo 'disabled'; } ?> required/>
+		                                        </div>
+		                                    </div>
 	                                    <?php } ?>
 
 	                                    <div class="col-md-<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { echo '6'; }else{ echo '12';} ?>">
@@ -249,355 +252,388 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            </select>
 		                                        </div>
 		                                    </div>
-		                                <?php #} ?>
 
-	                                    <?php #if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-
-										<div class="col-md-6">
-										    <div class="form-group">
-										        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-										        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono']; ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> required/>
-										    </div>
-										</div>
-
-	                                    <div class="col-md-6">
-	                                    	<div class="form-group">
-		                                    	<label for="estado_civil">Estado civil <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-			                                    <select id="estado_civil" name="estado_civil" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-			                                    	<option value="">Seleccione una opci&oacute;n</option>
-			                                    	<?php 
-			                                    	foreach(ESTADO_CIVIL as $key => $e){ 
-														echo "<option value='$key'";
-														if ($_SESSION['mfo_datos']['usuario']['estado_civil'] == $key)
-														{ 
-															echo " selected='selected'";
-														}
-														echo ">$e</option>";
-													} ?>
-												</select>
+											<div class="col-md-6">
+											    <div class="form-group">
+											        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono']; ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> required/>
+											    </div>
 											</div>
-										</div>
 
-	                                    <div class="col-md-6">
-	                                        <div class="form-group">
-	                                            <label for="genero">G&eacute;nero <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-	                                            <select id="genero" name="genero" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-													<option value="">Seleccione un genero</option>
-			                                    	<?php 
-			                                    	foreach(GENERO as $key => $ge){ 
-														echo "<option value='$key'";
-														if ($_SESSION['mfo_datos']['usuario']['genero'] == $key)
-														{ 
-															echo " selected='selected'";
-														}
-														echo ">$ge</option>";
-													} ?>
-	                                            </select>
-	                                        </div>
-	                                    </div>
-
-										<div class="col-md-6">
-	                                    	<div class="form-group">
-		                                    	<label for="tiene_trabajo">&#191;Tiene trabajo&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-			                                    <select id="tiene_trabajo" name="tiene_trabajo" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-			                                    	<option value="">Seleccione una opci&oacute;n</option>
-			                                    	<?php 
-			                                    	foreach(REQUISITO as $key => $r){ 
-														echo "<option value='$key'";
-														if ($_SESSION['mfo_datos']['usuario']['tiene_trabajo'] == $key)
-														{ 
-															echo " selected='selected'";
-														}
-														echo ">$r</option>";
-													} ?>
-												</select>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-	                                    	<div class="form-group">
-		                                    	<label for="viajar">&#191;Puede viajar&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-			                                    <select id="viajar" name="viajar" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-			                                    	<option value="">Seleccione una opci&oacute;n</option>
-			                                    	<?php 
-			                                    	foreach(REQUISITO as $key => $r){ 
-														echo "<option value='$key'";
-														if ($_SESSION['mfo_datos']['usuario']['viajar'] == $key)
-														{ 
-															echo " selected='selected'";
-														}
-														echo ">$r</option>";
-													} ?>
-												</select>
-											</div>
-										</div>
-
-										<div class="col-md-6">
-	                                    	<div class="form-group">
-		                                    	<label for="licencia">&#191;Tiene licencia para conducir&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-			                                    <select id="licencia" name="licencia" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-			                                    	<option value="">Seleccione una opci&oacute;n</option>
-			                                    	<?php 
-			                                    	
-			                                    	foreach(REQUISITO as $key => $r){ 
-														echo "<option value='$key'";
-														if ($_SESSION['mfo_datos']['usuario']['licencia'] == $key)
-														{ 
-															echo " selected='selected'";
-														}
-														echo ">$r</option>";
-													} ?>
-												</select>
-											</div>
-										</div>
- 
-	                                    <div class="col-md-6" >
-	                                        <div class="form-group">
-	                                            <label for="escolaridad">&Uacute;ltimo estudio realizado <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-	                                            <select id="escolaridad" name="escolaridad" class="form-control" onchange="ocultarCampos()"style="padding-left: 0px;" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-	                                            	<option value="">Seleccione una opci&oacute;n</option>
-													<?php 
-													if (!empty($escolaridad)){
-				                                    	foreach($escolaridad as $key => $es){ 
-															echo "<option value='".$es['id_escolaridad']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_escolaridad'] == $es['id_escolaridad'])
+		                                    <div class="col-md-6">
+		                                    	<div class="form-group">
+			                                    	<label for="estado_civil">Estado civil <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+				                                    <select id="estado_civil" name="estado_civil" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+				                                    	<option value="">Seleccione una opci&oacute;n</option>
+				                                    	<?php 
+				                                    	foreach(ESTADO_CIVIL as $key => $e){ 
+															echo "<option value='$key'";
+															if ($_SESSION['mfo_datos']['usuario']['estado_civil'] == $key)
 															{ 
 																echo " selected='selected'";
 															}
-															echo ">".utf8_encode($es['descripcion'])."</option>";
-														}
-													} ?>
-												</select>
-	                                        </div>
-	                                    </div>
-
-	                                    <div class="col-md-6">
-	                                    	<div class="form-group">
-	                                    		<label for="estatus">Nivel <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-												 <select id="estatus" name="estatus" class="form-control" style="padding-left: 0px;" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-												 	<option value="">Seleccione su opci&oacute;n</option>
-													<?php 
-			                                    	foreach(STATUS_CARRERA as $key => $status){ 
-														echo "<option value='".$key."'";
-														if ($_SESSION['mfo_datos']['usuario']['status_carrera'] == $key)
-														{ 
-															echo " selected='selected'";
-														}
-														echo ">".utf8_encode($status)."</option>";
-													}
-													 ?>
-												</select>
+															echo ">$e</option>";
+														} ?>
+													</select>
+												</div>
 											</div>
-	                                    </div>
-										
-										<div class="col-md-6 depende">
-	                                        <div class="form-group">
-	                                            <label for="lugar_estudio">&#191;Estudi&oacute; en el extranjero&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-	                                            <select class="form-control" id="lugar_estudio" name="lugar_estudio" onchange='mostrarUni()' <?php if($btnSig == 1){ echo 'disabled'; } ?> >
-	                                            	<option value="">Seleccione su opci&oacute;n</option>
-													<?php 
-			                                    	foreach(REQUISITO as $key => $u){ 
-														echo "<option value='".$key."'";
-														if ($_SESSION['mfo_datos']['usuario']['id_univ'] != null && $key == 0 && $_SESSION['mfo_datos']['usuario']['nombre_univ'] == '')
-														{
-															echo " selected='selected'";
-														}else if ($_SESSION['mfo_datos']['usuario']['id_univ'] == null && $key == 1 && $_SESSION['mfo_datos']['usuario']['nombre_univ'] != '')
-														{
-															echo " selected='selected'";
-														}
-														
-														echo ">".utf8_encode($u)."</option>";
-													} 
-													?>
-												</select>
-	                                        </div>
-	                                    </div>
-
-	                                    <div class="col-md-6 depende">
-	                                        <div class="form-group">
-	                                            <label for="universidad">Universidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
-	                                            <select class="form-control" id="universidad" name="universidad" <?php if($btnSig == 1){ echo 'disabled'; } ?> >
-	                                            	<option value="">Seleccione su opci&oacute;n</option>
-													<?php 
-													if (!empty($universidades)){
-				                                    	foreach($universidades as $key => $u){ 
-															echo "<option value='".$u['id_univ']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_univ'] == $u['id_univ'])
+											<div class="clearfix"></div>
+		                                    <div class="col-md-6">
+		                                        <div class="form-group">
+		                                            <label for="genero">G&eacute;nero <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+		                                            <select id="genero" name="genero" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+														<option value="">Seleccione un genero</option>
+				                                    	<?php 
+				                                    	foreach(GENERO as $key => $ge){ 
+															echo "<option value='$key'";
+															if ($_SESSION['mfo_datos']['usuario']['genero'] == $key)
 															{ 
 																echo " selected='selected'";
 															}
-															echo ">".utf8_encode($u['nombre'])."</option>";
-														} 
-													}?>
-												</select>
-												<input type="text" name="universidad2" id="universidad2" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?>  pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ.]+" style="display:none" value="<?php echo $_SESSION['mfo_datos']['usuario']['nombre_univ']; ?>">
-	                                        </div>
-	                                    </div>
+															echo ">$ge</option>";
+														} ?>
+		                                            </select>
+		                                        </div>
+		                                    </div>
 
-	                                    <div class="col-md-6">
-	                                        <div class="form-group">
-	                                            <label for="area_select">&Aacute;reas de inter&eacute;s <span class="requerido" title="Este campo es obligatorio">*</span></label><span class="help-text"> (m&aacute;x 3)</span><div class="help-block with-errors"></div>
-	                                            <?php if (!empty($arrarea)){
-	                                            	    $optiones = '';
-				                                    	foreach($arrarea as $key => $ae){ 
-															if (in_array($ae['id_area'], $areaxusuario))
+											<div class="col-md-6">
+		                                    	<div class="form-group">
+			                                    	<label for="tiene_trabajo">&#191;Tiene trabajo&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+				                                    <select id="tiene_trabajo" name="tiene_trabajo" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+				                                    	<option value="">Seleccione una opci&oacute;n</option>
+				                                    	<?php 
+				                                    	foreach(REQUISITO as $key => $r){ 
+															echo "<option value='$key'";
+															if ($_SESSION['mfo_datos']['usuario']['tiene_trabajo'] == $key)
 															{ 
-																$optiones .= '<div class="col-sm-3 col-md-5 badge_item3" id="'.utf8_encode($ae['nombre']).'">'.utf8_encode($ae['nombre']).'</div>';
+																echo " selected='selected'";
 															}
-														} 
-													} ?>
-												<div class="opcionesSeleccionados">
-													<div class="row" id="seleccionados">
-														<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-														<?php echo $optiones; ?>
-													</div>
-													<div class="row">
-			                                            <select class="form-control" multiple id="area_select" data-selectr-opts='{"maxSelection": 3 }' name="area_select[]" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-															<?php 
-															if (!empty($arrarea)){
-						                                    	foreach($arrarea as $key => $ae){ 
-																	echo "<option value='".$ae['id_area']."'";
-																	if (in_array($ae['id_area'], $areaxusuario))
-																	{ 
-																		echo " selected='selected'";
-																	}
-																	echo ">".utf8_encode($ae['nombre'])."</option>";
-																} 
-															}?>
-														</select>
-													</div>
+															echo ">$r</option>";
+														} ?>
+													</select>
 												</div>
-	                                        </div>
-	                                    </div>
+											</div>
 
-	                                    <div class="col-md-6">
-	                                        <div class="form-group">
-	                                            <label for="nivel_interes">Niveles de inter&eacute;s  </label><span class="help-text"> (m&aacute;x 2)</span><div class="help-block with-errors"></div>
-	                                            <?php if (!empty($arrinteres)){
-	                                            	    $optiones = '';
-				                                    	foreach($arrinteres as $key => $ae){ 
-															if (in_array($ae['id_nivelInteres'], $nivelxusuario))
+											<div class="col-md-6">
+		                                    	<div class="form-group">
+			                                    	<label for="viajar">&#191;Puede viajar&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+				                                    <select id="viajar" name="viajar" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+				                                    	<option value="">Seleccione una opci&oacute;n</option>
+				                                    	<?php 
+				                                    	foreach(REQUISITO as $key => $r){ 
+															echo "<option value='$key'";
+															if ($_SESSION['mfo_datos']['usuario']['viajar'] == $key)
 															{ 
-																$optiones .= '<div class="col-sm-4 col-md-5 badge_item3" id="'.utf8_encode($ae['descripcion']).'">'.utf8_encode($ae['descripcion']).'</div>';
+																echo " selected='selected'";
 															}
-														} 
-													} ?>
-												<div class="opcionesSeleccionados">
-													<div class="row" id="seleccionados1">
-														<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-														<?php echo $optiones; ?>
-													</div>
-													
-													<div class="row">
-			                                            <select class="form-control" multiple id="nivel_interes" data-selectr-opts='{"maxSelection": 2 }' name="nivel_interes[]" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
-															<?php 
-															if (!empty($arrinteres)){
-						                                    	foreach($arrinteres as $key => $ae){ 
-																	echo "<option value='".$ae['id_nivelInteres']."'";
-																	if (in_array($ae['id_nivelInteres'], $nivelxusuario))
-																	{ 
-																		echo " selected='selected'";
-																	}
-																	echo ">".utf8_encode($ae['descripcion'])."</option>";
-																} 
-															}?>
-														</select>
-													</div>
+															echo ">$r</option>";
+														} ?>
+													</select>
 												</div>
-	                                        </div>
-	                                    </div>
+											</div>
 
-	                                    <div class="clearfix"></div>
-	                                
-	                                    <div class="col-md-4 col-md-offset-1">
-											<div class="form-group">
-												<label>Idioma: </label><div class="help-block with-errors"></div>
-												<select id="idioma_of" name="idioma_of" class="form-control" required <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
-													<option value="0">Seleccione una opci&oacute;n</option>
-													<?php if (!empty($arridioma)){
-														
-														foreach ($arridioma as $idioma) { ?>
-															<option value="<?php echo $idioma['id_idioma'] ?>"
-															<?php 
-																$descripcion = utf8_encode($idioma['descripcion']);
-																if(isset($nivelIdiomas[$descripcion])){
-																	echo 'disabled=disabled';
+											<div class="col-md-6">
+		                                    	<div class="form-group">
+			                                    	<label for="licencia">&#191;Tiene licencia para conducir&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+				                                    <select id="licencia" name="licencia" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+				                                    	<option value="">Seleccione una opci&oacute;n</option>
+				                                    	<?php 
+				                                    	
+				                                    	foreach(REQUISITO as $key => $r){ 
+															echo "<option value='$key'";
+															if ($_SESSION['mfo_datos']['usuario']['licencia'] == $key)
+															{ 
+																echo " selected='selected'";
+															}
+															echo ">$r</option>";
+														} ?>
+													</select>
+												</div>
+											</div>
+	 
+		                                    <div class="col-md-6" >
+		                                        <div class="form-group">
+		                                            <label for="escolaridad">&Uacute;ltimo estudio realizado <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+		                                            <select id="escolaridad" name="escolaridad" class="form-control" onchange="ocultarCampos()"style="padding-left: 0px;" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+		                                            	<option value="">Seleccione una opci&oacute;n</option>
+														<?php 
+														if (!empty($escolaridad)){
+					                                    	foreach($escolaridad as $key => $es){ 
+																echo "<option value='".$es['id_escolaridad']."'";
+																if ($_SESSION['mfo_datos']['usuario']['id_escolaridad'] == $es['id_escolaridad'])
+																{ 
+																	echo " selected='selected'";
 																}
-															?>
-															><?php echo utf8_encode($idioma['descripcion']) ?></option>
-													<?php }
-													} ?>
-												</select>
-											</div>
-										</div>
+																echo ">".utf8_encode($es['descripcion'])."</option>";
+															}
+														} ?>
+													</select>
+		                                        </div>
+		                                    </div>
 
-										<div class="col-md-4">
-											<div class="form-group">
-												<label>Nivel idioma: </label><div class="help-block with-errors"></div>
-												<select id="nivel_idi_of" name="nivel_idi_of" class="form-control" required <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
-													<option value="0">Seleccione una opci&oacute;n</option>
-													<?php if (!empty($arrnivelidioma)){
-														foreach ($arrnivelidioma as $nivelidioma) {?>
-															<option value="<?php echo $nivelidioma['id_nivelIdioma'] ?>"><?php echo utf8_encode($nivelidioma['nombre']) ?></option>
-													<?php }
-													} ?>
-												</select>
-											</div>
-										</div>
+		                                    <div class="col-md-6">
+		                                    	<div class="form-group">
+		                                    		<label for="estatus">Nivel <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+													 <select id="estatus" name="estatus" class="form-control" style="padding-left: 0px;" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+													 	<option value="">Seleccione su opci&oacute;n</option>
+														<?php 
+				                                    	foreach(STATUS_CARRERA as $key => $status){ 
+															echo "<option value='".$key."'";
+															if ($_SESSION['mfo_datos']['usuario']['status_carrera'] == $key)
+															{ 
+																echo " selected='selected'";
+															}
+															echo ">".utf8_encode($status)."</option>";
+														}
+														 ?>
+													</select>
+												</div>
+		                                    </div>
+											
+											<div class="col-md-6 depende">
+		                                        <div class="form-group">
+		                                            <label for="lugar_estudio">&#191;Estudi&oacute; en el extranjero&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+		                                            <select class="form-control" id="lugar_estudio" name="lugar_estudio" onchange='mostrarUni()' <?php if($btnSig == 1){ echo 'disabled'; } ?> >
+		                                            	<option value="-1">Seleccione su opci&oacute;n</option>
+														<?php #echo strlen($_SESSION['mfo_datos']['usuario']['id_univ']);
+														#var_dump($_SESSION['mfo_datos']['usuario']['id_univ']);
+				                                    	foreach(REQUISITO as $key => $u){ 
 
-										<div class="">
+															echo "<option value='".$key."'";
+															if ($_SESSION['mfo_datos']['usuario']['id_univ'] != 0 && $key == 0 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) <= 1)
+															{
+																echo " selected='selected'";
+															}else if (strlen($_SESSION['mfo_datos']['usuario']['id_univ']) <= 1 && $key == 1 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) > 1)
+															{
+																echo " selected='selected'";
+															}
+															
+															echo ">".utf8_encode($u)."</option>";
+														} 
+														?>
+													</select>
+		                                        </div>
+		                                    </div>
+
+		                                    <div class="col-md-6 depende">
+		                                        <div class="form-group">
+		                                            <label for="universidad">Universidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div class="help-block with-errors"></div>
+		                                            <select class="form-control" id="universidad" name="universidad" <?php if($btnSig == 1){ echo 'disabled'; } ?> >
+		                                            	<option value="">Seleccione su opci&oacute;n</option>
+														<?php 
+														if (!empty($universidades)){
+					                                    	foreach($universidades as $key => $u){ 
+																echo "<option value='".$u['id_univ']."'";
+																if ($_SESSION['mfo_datos']['usuario']['id_univ'] == $u['id_univ'])
+																{ 
+																	echo " selected='selected'";
+																}
+																echo ">".utf8_encode($u['nombre'])."</option>";
+															} 
+														}?>
+													</select>
+													<input type="text" name="universidad2" id="universidad2" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?>  pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ.]+" style="display:none" value="<?php if($_SESSION['mfo_datos']['usuario']['nombre_univ'] != ' '){ echo $_SESSION['mfo_datos']['usuario']['nombre_univ']; } ?>">
+		                                        </div>
+		                                    </div>
+
+		                                    <div class="col-md-6">
+		                                        <div class="form-group">
+		                                            <label for="area_select">&Aacute;reas de inter&eacute;s <span class="requerido" title="Este campo es obligatorio">*</span></label><span class="help-text"> (m&aacute;x 3)</span><div class="help-block with-errors"></div>
+		                                            <?php if (!empty($arrarea)){
+		                                            	    $optiones = '';
+					                                    	foreach($arrarea as $key => $ae){ 
+																if (in_array($ae['id_area'], $areaxusuario))
+																{ 
+																	$optiones .= '<div class="col-sm-3 col-md-5 badge_item3" id="'.utf8_encode($ae['nombre']).'">'.utf8_encode($ae['nombre']).'</div>';
+																}
+															} 
+														} ?>
+													<div class="opcionesSeleccionados">
+														<div class="row" id="seleccionados">
+															<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+															<?php echo $optiones; ?>
+														</div>
+														<div class="row">
+				                                            <select class="form-control" multiple id="area_select" data-selectr-opts='{"maxSelection": 3 }' name="area_select[]" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+																<?php 
+																if (!empty($arrarea)){
+							                                    	foreach($arrarea as $key => $ae){ 
+																		echo "<option value='".$ae['id_area']."'";
+																		if (in_array($ae['id_area'], $areaxusuario))
+																		{ 
+																			echo " selected='selected'";
+																		}
+																		echo ">".utf8_encode($ae['nombre'])."</option>";
+																	} 
+																}?>
+															</select>
+														</div>
+													</div>
+		                                        </div>
+		                                    </div>
+
+		                                    <div class="col-md-6">
+		                                        <div class="form-group">
+		                                            <label for="nivel_interes">Niveles de inter&eacute;s  </label><span class="help-text"> (m&aacute;x 2)</span><div class="help-block with-errors"></div>
+		                                            <?php if (!empty($arrinteres)){
+		                                            	    $optiones = '';
+					                                    	foreach($arrinteres as $key => $ae){ 
+																if (in_array($ae['id_nivelInteres'], $nivelxusuario))
+																{ 
+																	$optiones .= '<div class="col-sm-4 col-md-5 badge_item3" id="'.utf8_encode($ae['descripcion']).'">'.utf8_encode($ae['descripcion']).'</div>';
+																}
+															} 
+														} ?>
+													<div class="opcionesSeleccionados">
+														<div class="row" id="seleccionados1">
+															<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+															<?php echo $optiones; ?>
+														</div>
+														
+														<div class="row">
+				                                            <select class="form-control" multiple id="nivel_interes" data-selectr-opts='{"maxSelection": 2 }' name="nivel_interes[]" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+																<?php 
+																if (!empty($arrinteres)){
+							                                    	foreach($arrinteres as $key => $ae){ 
+																		echo "<option value='".$ae['id_nivelInteres']."'";
+																		if (in_array($ae['id_nivelInteres'], $nivelxusuario))
+																		{ 
+																			echo " selected='selected'";
+																		}
+																		echo ">".utf8_encode($ae['descripcion'])."</option>";
+																	} 
+																}?>
+															</select>
+														</div>
+													</div>
+		                                        </div>
+		                                    </div>
+
+		                                    <div class="clearfix"></div>
+		                                
+		                                    <div class="col-md-4 col-md-offset-1">
+												<div class="form-group">
+													<label>Idioma: </label><div class="help-block with-errors"></div>
+													<select id="idioma_of" name="idioma_of" class="form-control" <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
+														<option value="0">Seleccione una opci&oacute;n</option>
+														<?php if (!empty($arridioma)){
+															
+															foreach ($arridioma as $idioma) { ?>
+																<option value="<?php echo $idioma['id_idioma'] ?>"
+																<?php 
+																	$descripcion = utf8_encode($idioma['descripcion']);
+																	if(isset($nivelIdiomas[$descripcion])){
+																		echo 'disabled=disabled';
+																	}
+																?>
+																><?php echo utf8_encode($idioma['descripcion']) ?></option>
+														<?php }
+														} ?>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-4">
+												<div class="form-group">
+													<label>Nivel idioma: </label><div class="help-block with-errors"></div>
+													<select id="nivel_idi_of" name="nivel_idi_of" class="form-control" <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
+														<option disabled selected value="0">Seleccione una opci&oacute;n</option>
+														<?php if (!empty($arrnivelidioma)){
+															foreach ($arrnivelidioma as $nivelidioma) {?>
+																<option value="<?php echo $nivelidioma['id_nivelIdioma'] ?>"><?php echo utf8_encode($nivelidioma['nombre']) ?></option>
+														<?php }
+														} ?>
+													</select>
+												</div>
+											</div>
+
 											<div class="col-md-2">
 												<div class="form-group">
 													<a id="btn_transfer" class="button_transfer_list"><i class="fa fa-plus"></i></a>
 												</div>
 											</div>
-										</div>
 
-										<div class="col-md-12">
-											<div class="form-group">
-												<label>Idiomas seleccionados: </label><div id="listado_idiomas" class="help-block with-errors"></div>
-													<div id="error_msg">
-													</div>
-													<div class="list_content">
-														<div class="form-group" id="list_idioma">
-															<?php if(empty($nivelIdiomas)){ ?>
-																<p id="text_nothing">Ningun idioma seleccionado.....</p>
-															<?php }else{ ?>
-																<p style="display:none;" id="text_nothing">Ningun idioma seleccionado.....</p>
-															<?php 
-																$i = 1;
-																foreach ($nivelIdiomas as $key => $value) {
-																	echo '<p id="idioma'.$i.'" disabled="disabled" class="col-md-5 badge_item listado">'.$key.' ('.$value[2].') <i class="fa fa-window-close fa-2x icon" id="'.$i.'" ';
-																		if($btnSig != 1){
-																			echo 'onclick="delete_item_selected(this);"';
-																		}
-																		echo '></i></p>';
-																		
-																	$i++;
-																}
-															 }?>
+											<div class="col-md-12">
+												<div class="form-group">
+													<label>Idiomas seleccionados: </label><div id="listado_idiomas" class="help-block with-errors"></div>
+														<div id="error_msg">
 														</div>
-													</div>
-												<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
-													<?php foreach ($nivelIdiomas as $key => $value) { ?>
-														<option value="<?php echo $value[0].'_'.$value[1]; ?>" id="array_idioma<?php echo $value[0]; ?>" selected='selected'></option>
-												    <?php } ?>
-												</select>
+														<div class="list_content">
+															<div class="form-group" id="list_idioma">
+																<?php if(empty($nivelIdiomas)){ ?>
+																	<p id="text_nothing">Ningun idioma seleccionado.....</p>
+																<?php }else{ ?>
+																	<p style="display:none;" id="text_nothing">Ningun idioma seleccionado.....</p>
+																<?php 
+																	$i = 1;
+																	foreach ($nivelIdiomas as $key => $value) {
+																		echo '<p id="idioma'.$i.'" disabled="disabled" class="col-md-5 badge_item listado">'.$key.' ('.$value[2].') <i class="fa fa-window-close fa-2x icon" id="'.$i.'" ';
+																			if($btnSig != 1){
+																				echo 'onclick="delete_item_selected(this);"';
+																			}
+																			echo '></i></p>';
+																			
+																		$i++;
+																	}
+																 }?>
+															</div>
+														</div>
+													<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
+														<?php foreach ($nivelIdiomas as $key => $value) { ?>
+															<option value="<?php echo $value[0].'_'.$value[1]; ?>" id="array_idioma<?php echo $value[0]; ?>" selected='selected'></option>
+													    <?php } ?>
+													</select>
+												</div>
 											</div>
-										</div>
-										<?php } ?>
+										<?php }else{ ?>
+					                    	<fieldset  style="padding: 15px 0px 0px 0px;" class="form-group col-md-12">
+    											<legend style="color: #8c8b8b; margin-bottom: 5px;"><h5><b>Datos de contacto</b></h5></legend>
 
-	                            </div>
-	                            
-	                            <input type="hidden" name="actualizar" id="actualizar" value="1">
-				                <div class="row">
-									<input type="submit" id="boton" name="" class="btn btn-success" value="<?php if($btnSig == 0){ echo 'GUARDAR'; }else{ echo 'SIGUIENTE>>'; } ?>">
-								</div>
-				            </div>  
-			            </div>   
-			        </div>
-			    </div>
-		    </div> 
+								           	 	<!-- Empresas contacto -->
+									            <div class="col-md-6" id="group_nombre_contact">
+									              <div class="form-group">
+									                <label class="text-center">Nombres</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+									                <input type="text" name="nombre_contact" id="nombre_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['nombres_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?>>
+									              </div>
+									            </div>  
+
+									            <div class="col-md-6" id="group_apell_contact">
+									              <div class="form-group">
+									                <label class="text-center">Apellidos</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+									                <input type="text" name="apellido_contact" id="apellido_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['apellidos_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?>>
+									              </div>
+									            </div> 
+
+									            <div class="col-md-6" id="group_num1_contact">
+									              <div class="form-group">
+									                <label class="text-center">Teléfono 1</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
+									                <input type="text" name="tel_one_contact" id="tel_one_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono1']; ?>" class="form-control" onkeydown="return validaNumeros(event);" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?>>
+									              </div>
+									            </div> 
+
+									            <div class="col-md-6" id="group_num2_contact">
+									              <div class="form-group">
+									                <label class="text-center">Teléfono 2 (opcional):</label><div class="help-block with-errors"></div>
+									                <input type="text" name="tel_two_contact" id="tel_two_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono2']; ?>" class="form-control" onkeydown="return validaNumeros(event);" <?php if($btnSig == 1){ echo 'disabled'; } ?>>
+									              </div>
+									            </div> 
+									        </fieldset>
+								        <?php } ?>
+	                            	</div>
+		                            <input type="hidden" name="actualizar" id="actualizar" value="1">
+					                <div class="row">
+					                	<?php if($btnSig == 0){ ?>
+											<input type="submit" id="boton" name="" class="btn btn-success" value="GUARDAR">
+										<?php }else{ ?>
+											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn btn-success">SIGUIENTE</a>
+										<?php }?>
+									</div>
+				            	</div>  
+			            	</div>   
+			        	</div>
+			    	</div>
+		    	</div> 
+		    </div>
         </form>
     </div>
 <!--</section>-->

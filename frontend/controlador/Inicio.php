@@ -9,12 +9,12 @@ class Controlador_Inicio extends Controlador_Base {
   public function construirPagina(){
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
-    $nro_oferta = Modelo_Oferta::obtieneNumero();
-    $nro_candidato = Modelo_Usuario::obtieneNroCandidato();
-    $nro_empresa = Modelo_Usuario::obtieneNroEmpresa();
-    $arrarea = Modelo_Area::obtieneListado();
+    $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
+    $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID);
+    $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
+    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     $arrinteres = Modelo_Interes::obtieneListado();
-    $arrtestimonio = Modelo_Testimonio::obtieneListado();
+    $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,

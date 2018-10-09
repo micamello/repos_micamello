@@ -1,3 +1,9 @@
+if(document.getElementById("fecha_contratacion")){
+    var date = new Date();
+    console.log(date.setDate(date.getDate()+30));
+    document.getElementById("fecha_contratacion").valueAsDate = date;
+}
+
 if (document.getElementById("fecha_contratacion")) {    
     $fecha_actual = fechaActual();
     $("#fecha_contratacion").on("change", function(){
@@ -68,6 +74,34 @@ $('#provincia_of').change(function()
 if(document.getElementById('des_of')){
   tinymce.init({ 
     selector:'textarea#des_of',
+    style_formats: [
+        {title: 'Headers', items: [
+            {title: 'Header 1', format: 'h1'},
+            {title: 'Header 2', format: 'h2'},
+            {title: 'Header 3', format: 'h3'},
+            {title: 'Header 4', format: 'h4'},
+            {title: 'Header 5', format: 'h5'},
+            {title: 'Header 6', format: 'h6'}
+        ]},
+        {title: 'Inline', items: [
+            {title: 'Bold', icon: 'bold', format: 'bold'},
+            {title: 'Italic', icon: 'italic', format: 'italic'},
+            {title: 'Underline', icon: 'underline', format: 'underline'},
+            {title: 'Strikethrough', icon: 'strikethrough', format: 'strikethrough'},
+            {title: 'Superscript', icon: 'superscript', format: 'superscript'},
+            {title: 'Subscript', icon: 'subscript', format: 'subscript'}
+        ]},
+        {title: 'Blocks', items: [
+            {title: 'Paragraph', format: 'p'},
+            {title: 'Blockquote', format: 'blockquote'}
+        ]},
+        {title: 'Alignment', items: [
+            {title: 'Left', icon: 'alignleft', format: 'alignleft'},
+            {title: 'Center', icon: 'aligncenter', format: 'aligncenter'},
+            {title: 'Right', icon: 'alignright', format: 'alignright'},
+            {title: 'Justify', icon: 'alignjustify', format: 'alignjustify'}
+        ]}
+    ],
     removed_menuitems: 'undo, redo',
     height : "128",
     resize: false,
@@ -76,17 +110,26 @@ if(document.getElementById('des_of')){
     menubar:false,
     statusbar: false,
     language: 'es',
-    setup: function(editor) {
-    editor.on('blur', function(e) {
-      if (tinyMCE.get('des_of').getContent() == "") {
-        crearMensajeError("descripcion_error", "Rellene este campo");
-      }
-      else
-      {
-        eliminarMensajeError("descripcion_error");
-      }
-    });
-  }
+    setup: function (editor) {
+        var publicar_btn = document.getElementById("boton");
+        var errors = document.getElementsByClassName("form-group has-error has-danger");
+        editor.on('keyup', function () {
+            tinymce.triggerSave();
+            if (tinyMCE.get('des_of').getContent() != "") {
+                eliminarMensajeError("descripcion_error");
+                document.getElementById("des_of_error").setAttribute("class", "form-group");
+                if (errors.length <= 0 && ($(':input').filter('[required]:visible').val() != "")) {                    
+                    publicar_btn.setAttribute("class", "btn btn-success");
+                }
+                else{
+                    publicar_btn.setAttribute("class", "btn btn-success disabled");
+                }
+            }
+            else{
+                publicar_btn.setAttribute("class", "btn btn-success disabled");
+            }
+        });
+    }
 })
 }
 
@@ -189,50 +232,29 @@ function delete_item_selected(selected_item){
             tag_nivel_idioma.removeAttribute("disabled");
             tag_idioma.removeAttribute("disabled");
     }
+    var publicar_btn = document.getElementById("boton");
+        var errors = document.getElementsByClassName("form-group has-error has-danger");
     if (document.getElementById('select_array_idioma').length <= 0)
     {
         tag_idioma.setAttribute("required", true);
         tag_nivel_idioma.setAttribute("required", true);
         document.getElementById("text_nothing").innerHTML = "Ningun idioma seleccionado.....";
         document.getElementById("text_nothing").style.display = "";
-        var publicar_btn = document.getElementById("boton");
-        publicar_btn.setAttribute("class", "btn btn-success disabled");
+        // document.getElementById("listado_idiomas").innerHTML = "<p id='error_tag' class='list-unstyled msg_error'></p>";
+        // document.getElementById("error_tag").innerHTML = "<p>Seleccione un elemento de la lista.</p>";
+
+        if (document.getElementById("id_idi_error")){
+          document.getElementById("id_idi_error").setAttribute("class", "form-group has-error has-danger");
+        }
+        if (document.getElementById("publicar_btn")){
+          publicar_btn.setAttribute("class", "btn btn-success disabled");
+        }
     }
+    else{
+        if (document.getElementById("id_idi_error")){
+        // document.getElementById("listado_idiomas").innerHTML = "";
+          document.getElementById("id_idi_error").setAttribute("class", "form-group");
+        }
+    }   
 }
 
-
-// function valida_numeros(evt){
-//     if(window.event){
-//       keynum = evt.keyCode; 
-//      }
-//      else{
-//       keynum = evt.which; 
-//      } 
-//      if((keynum > 47 && keynum < 58) || keynum == 8 
-//     || keynum == 9 || keynum == 13 || keynum == 116 
-//     || (keynum > 36 && keynum < 41) 
-//     || (keynum > 95 && keynum < 106)){
-//       return true;
-//      }
-//      else{
-//       return false;
-//      }
-// }
-
-// function valida_letras(e) {
-//     key = e.keyCode || e.which;
-//     tecla = String.fromCharCode(key).toString();
-//     letras = " áéíóúabcdefghijklmnñopqrstuvwxyzÁÉÍÓÚABCDEFGHIJKLMNÑOPQRSTUVWXYZ";
-//     especiales = [8, 37, 39, 46, 6]; 
-
-//     tecla_especial = false
-//     for(var i in especiales) {
-//         if(key == especiales[i]) {
-//             tecla_especial = true;
-//             break;
-//         }
-//     }
-//     if(letras.indexOf(tecla) == -1 && !tecla_especial){
-//         return false;
-//       }
-// }

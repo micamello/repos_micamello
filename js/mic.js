@@ -10,31 +10,14 @@ if(document.getElementById('form_publicar')){
   $("#form_publicar").validator();
 }
 
-function valida_numeros(evt){
-    if(window.event){
-      keynum = evt.keyCode; 
-     }
-     else{
-      keynum = evt.which; 
-     } 
-     if((keynum > 47 && keynum < 58) || keynum == 8 
-    || keynum == 9 || keynum == 13 || keynum == 116 
-    || (keynum > 36 && keynum < 41) 
-    || (keynum > 95 && keynum < 106)){
-      return true;
-     }
-     else{
-      return false;
-     }
-}
-
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
-    var dni_error = document.getElementById("error_custom_dni");
-        while (dni_error.hasChildNodes()) {
-          dni_error.removeChild(dni_error.firstChild);
-        }
-
+    if (document.getElementById("error_custom_dni")){
+      var dni_error = document.getElementById("error_custom_dni");
+      while (dni_error.hasChildNodes()) {
+        dni_error.removeChild(dni_error.firstChild);
+      }
+    }
     $(this).find('form')[0].reset();
 });
 
@@ -136,7 +119,7 @@ function crearMensajeError($id_div_error, $mensaje_error){
      p_node.setAttribute("id", "p_node_error");
     var p_text = document.createTextNode($mensaje_error);
     p_node.appendChild(p_text);
-    nodo_div.appendChild(p_node);
+    nodo_div.appendChild(p_node); 
 }
 
 function eliminarMensajeError($id_div_error){
@@ -152,4 +135,107 @@ if (document.getElementById("dni")) {
     //}
   })
 }
+
+$(document).ready(function(){
+  if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){
+    var nombres_res = document.getElementsByName("nombres_res");
+    var valor_res = document.getElementsByName("valor_res");
+      mostrarGrafico(nombres_res, valor_res);
+  }
+});
+
+function mostrarGrafico(label, valor){
+  var labels = [];
+  var valores = [];
+  for (var i = label.length - 1; i >= 0; i--) {
+    // console.log(label[i].value+" - "+valor[i].value);
+    labels[i] = label[i].value;
+    // 
+  }
+  for (var i = valor.length - 1; i >= 0; i--) {
+    // console.log(label[i].value+" - "+valor[i].value);
+    valores[i] = valor[i].value;
+    // 
+  }
+  // console.log(labels);
+  // console.log(valores);
+
+    let myChart = document.getElementById('myChart').getContext('2d');
+
+
+      // Global Options
+      Chart.defaults.global.defaultFontFamily = 'Lato';
+      Chart.defaults.global.defaultFontSize = 15;
+      Chart.defaults.global.defaultFontColor = '#777';
+
+      let massPopChart = new Chart(myChart, {
+        type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data:{
+          labels:labels,
+          datasets:[{
+            label:'Population',
+            data:valores,
+            //backgroundColor:'green',
+            backgroundColor:[
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(51, 136, 45, 0.3)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(246, 136, 196, 0.3)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(246, 61, 196, 0.3)',
+              'rgba(246, 136, 45, 0.3)',
+              'rgba(164, 142, 99, 0.3)',
+              'rgba(33, 91, 138, 0.3)'
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+          }]
+        },
+        options:{
+          responsive: true,
+          title:{
+            display:false,
+            text:'Resultados evaluación',
+            fontSize:25
+          },
+          legend:{
+            display:false,
+            position:'top',
+            labels:{
+              fontColor:'#000'
+            }
+          },
+          layout:{
+            padding:{
+              left:50,
+              right:0,
+              bottom:0,
+              top:0
+            }
+          },
+          tooltips:{
+            enabled:true
+          },
+          scales: {
+            yAxes: [{
+                ticks: {
+                  min: 5
+                }
+            }],
+            xAxes: [{
+                barPercentage: 0.4,
+                 ticks: {
+                    autoSkip: false,
+                    maxRotation: 50,
+                    minRotation: 50
+                  }
+            }]
+          }
+        }
+      });
+  }  
 

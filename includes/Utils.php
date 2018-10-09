@@ -26,7 +26,6 @@ class Utils{
     Utils::log(__METHOD__ . " empezo una nueva sesion");
     session_name('mfo_datos');
     session_start();      
-    $_SESSION['mfo_datos']['sucursal'] = self::obtieneDominio();      
   } 
  
   static public function getArrayParam($paramName,$array, $default=false){
@@ -58,7 +57,8 @@ class Utils{
     $mail->Username = MAIL_USERNAME; 
     $mail->Password = MAIL_PASSWORD;     
     $mail->From = MAIL_CORREO; 
-    $mail->FromName = MAIL_NOMBRE; 
+    $mail->FromName = MAIL_NOMBRE;         
+    $mail->SMTPAutoTLS = false;    
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 
@@ -294,6 +294,60 @@ class Utils{
     fwrite($fd, $str . "\n");
     fclose($fd);
   }
+
+
+  public static function ocultarCaracteres($str, $start, $end){
+      $len = strlen($str);
+      return substr($str, 0, $start) . str_repeat('*', $len - ($start + $end)) . substr($str, $len - $end, $end);
+  }
+
+  public static function ocultarEmail($email){
+      $em   = explode("@",$email);
+      $name = implode(array_slice($em, 0, count($em)-1), '@');
+      $len  = floor(strlen($name));
+      return substr($name,0, 0) . str_repeat('*', $len) . "@" . end($em); 
+  }
+
+
+  static public function restarDiasLaborables($fecha,$dias){
+    $nrodias = 1; $cont_dias = 1;
+    while($nrodias <= $dias){
+      $dias_antes = strtotime($fecha." -".$cont_dias." days");
+      $dia_semana = date("w",$dias_antes);
+      if ($dia_semana != 0 && $dia_semana != 6){
+        $nrodias++;
+      }      
+      $cont_dias++;            
+    }
+    return date('Y-m-d H:i:s',$dias_antes);
+  }
+
+  public static function generarUsername($email){
+    $generado = self::generateRandomString();
+    $emailextract = substr($email, 0, strpos($email, '@'));
+    $username = $emailextract.$generado;
+    return strtolower($username);
+  }
+
+  public static function generateRandomString() {
+      $length = rand(6, 10);
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $charactersLength = strlen($characters);
+      $randomString = '';
+      for ($i = 0; $i < $length; $i++) {
+          $randomString .= $characters[rand(0, $charactersLength - 1)];
+      }
+      return $randomString;
+  }
+
+  public static function validar_EC($dni){
+    if (empty($dni)) {return false;}
+    $val = false;
+    if(ValidadorEc::validarCedula($dni) == true || ValidadorEc::validarRucPersonaNatural($dni) == true || ValidadorEc::validarRucSociedadPrivada($dni) == true || ValidadorEc::validarRucSociedadPublica($dni) == true) {
+      $val = true;
+      }
+      return $val;
+    }
 
 }
 ?>

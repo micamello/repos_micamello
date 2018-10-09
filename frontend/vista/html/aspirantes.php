@@ -101,7 +101,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fa fa-calendar"></i> Fecha de postulaci&oacute;n</span>
+					<span><i class="fa fa-calendar"></i><?php if ($vista == 1){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
 				</div>
 				<div class="panel-body">
 					<div class="filtros">
@@ -141,23 +141,25 @@
 					 </div>
 		          </div>
 		    </div>
-		    <?php if($vista == 1) { ?>
-			    <div class="panel panel-default shadow-panel1">
-			      <div class="panel-heading">
-			            <span><i class="fa fa-money"></i> Salario</span>
-			          </div>
-			      <div class="panel-body">
-			      	<div class="filtros">
-					<?php
-						foreach (SALARIO as $key => $v) {
-					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/S'.$key.'/';
-							$ruta = Controlador_Aspirante::calcularRuta($ruta,'S');
-							echo '<li class="lista"><a href="'.$ruta.'1/" class="salario" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-						}
-					?></div>
-			      </div>
-			    </div>
-		     <?php } ?>
+
+		    <?php if ($vista == 1){ ?>
+		    <div class="panel panel-default shadow-panel1">
+		      <div class="panel-heading">
+		            <span><i class="fa fa-money"></i> Salario</span>
+		          </div>
+		      <div class="panel-body">
+		      	<div class="filtros">
+				<?php
+					foreach (SALARIO as $key => $v) {
+				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/S'.$key.'/';
+						$ruta = Controlador_Aspirante::calcularRuta($ruta,'S');
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="salario" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+					}
+				?></div>
+		      </div>
+		    </div>
+		    <?php } ?>
+
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
 		            <span><i class="fa fa-venus-mars"></i> Genero</span>
@@ -356,19 +358,20 @@
 							            	<tr>
 							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
 
-							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/verDetalle/'.$a['id_usuario'].'/'; ?>"><?php echo $a['nombres'].' '.$a['apellidos']; ?></a></td>
+							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
+							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
 
 							            		<td data-title="Edad: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $a['edad']; ?></td>
 												<?php if($vista == 1){ ?>
 							            			<td data-title="Postulado el: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo date("d", strtotime($a['fecha_postulado'])).' de '.MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado'])); ?></td>
 												<?php }else{ ?>
-													<td data-title="Postulado el: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo date("d", strtotime($a['fecha_creacion'])).' de '.MESES[date("m", strtotime($a['fecha_creacion']))].', '.date("Y", strtotime($a['fecha_creacion'])); ?></td>
+													<td data-title="Registrado el: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo date("d", strtotime($a['fecha_creacion'])).' de '.MESES[date("m", strtotime($a['fecha_creacion']))].', '.date("Y", strtotime($a['fecha_creacion'])); ?></td>
 												<?php } ?>
 
 												<td style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>
 
 												<?php if($vista == 1){ ?>
-													<td style="vertical-align: middle; text-align: center;"><?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($a['asp_salarial'],2); ?></td>
+													<td style="vertical-align: middle; text-align: center;"><?php echo SUCURSAL_MONEDA.number_format($a['asp_salarial'],2); ?></td>
 												<?php } ?>
 												<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 								            		<?php 

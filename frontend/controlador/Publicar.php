@@ -15,6 +15,9 @@ class Controlador_Publicar extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
+    unset($_SESSION['mfo_datos']['planes']);
+    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']);
+
     if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
       $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
@@ -50,13 +53,12 @@ class Controlador_Publicar extends Controlador_Base {
   public function mostrarDefault($idusu,$publicaciones_restantes){
       $arrarea = Modelo_Area::obtieneListado();
       $arrinteres = Modelo_Interes::obtieneListado();
-      $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal($_SESSION['mfo_datos']['sucursal']['id_pais']);
+      $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
       $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
       $arrjornada = Modelo_Jornada::obtieneListado();
       $arridioma = Modelo_Idioma::obtieneListado();
       $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
-      $arrescolaridad = Modelo_Escolaridad::obtieneListado();
-      
+      $arrescolaridad = Modelo_Escolaridad::obtieneListado();            
 
       $tags = array('arrarea'=>$arrarea,
                     'intereses'=>$arrinteres,
@@ -70,14 +72,20 @@ class Controlador_Publicar extends Controlador_Base {
                   );
       
       if ( Utils::getParam('form_publicar') == 1 ){
-        try{
+        try{          
           $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1);              
           $data = $this->camposRequeridos($campos);
+          $data["des_of"] = str_replace("\r\n","<br>",$_POST["des_of"]);
+          $data["des_of"] = htmlentities($data["des_of"],ENT_QUOTES,'UTF-8'); 
+          
           $data_idiomas = self::validarCampos($data);
 
           $GLOBALS['db']->beginTrans();
           self::guardarPublicacion($data, $data_idiomas, $idusu);
           $GLOBALS['db']->commit();
+
+          /*unset($_SESSION['mfo_datos']['planes']);
+          $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);*/
 
           $_SESSION['mostrar_exito'] = "La oferta se ha publicado correctamente";
 
@@ -167,10 +175,19 @@ class Controlador_Publicar extends Controlador_Base {
       throw new Exception("Ha ocurrido un error, intente nuevamente");
     }
 
-    $id_plan = $_SESSION['mfo_datos']['planes'][0]['id_plan'];
     $id_reqOf = $GLOBALS['db']->insert_id();
 
-    if (!Modelo_Oferta::guardarOferta($data, $id_reqOf, $idusu, $id_plan)) {
+    foreach($_SESSION['mfo_datos']['planes'] as $key=>$plan){
+      if ($plan["num_post_rest"] > 0){
+        $id_plan_usuario = $plan["id_usuario_plan"];
+        $num_post = $plan["num_post_rest"];
+        break;
+      }
+    }    
+
+    //VERIFICAR TIENE PARA PUBLICAR OFERTA 
+    if (!Modelo_Oferta::guardarOferta($data, $id_reqOf, $idusu, $id_plan_usuario)) {
+
       throw new Exception("Ha ocurrido un error, intente nuevamente"); 
     }
 
@@ -180,21 +197,10 @@ class Controlador_Publicar extends Controlador_Base {
       throw new Exception("Ha ocurrido un error, intente nuevamente");
     }
 
-    $planes = Modelo_UsuarioxPlan::planesActivos($idusu);
-    $fecha = date("Y-m-d H:i:s");
-    $id_plan_usuario;
-    $num_post;
-    foreach ($planes as $plan_usuario) {
-      if (($plan_usuario['fecha_compra']< $fecha) && $plan_usuario['num_post_rest'] != 0) {
-        $fecha = $plan_usuario['fecha_compra'];
-        $id_plan_usuario = $plan_usuario['id_usuario_plan'];
-        $num_post = $plan_usuario['num_post_rest'];
-      }
-    }
-
     if(!Modelo_UsuarioxPlan::restarPublicaciones($id_plan_usuario, $num_post)){
       throw new Exception("Ha ocurrido un error, intente nuevamente");
     }
+
   }
 }
 ?>

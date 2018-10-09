@@ -11,9 +11,9 @@
                 <li><img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/planes/<?php echo $plan["id_plan"];?>.<?php echo $plan["extension"];?>" ></li>
                 <li class="titulo">
                   <?php 
-                  echo (($plan["promocional"]) ? "Promoci&oacute;n " : "&nbsp;");
+                  echo (($plan["promocional"]) ? "Promoci&oacute;n<br>" : "");                 
                   if (!empty($plan["duracion"])){ 
-                    echo $plan["duracion"]." días"; 
+                    echo "Duraci&oacute;n del plan<br>".$plan["duracion"]." días"; 
                   } 
                   else{
                     echo "ilimitado"; 
@@ -32,12 +32,18 @@
                   } 
                 ?>
                 <li>
-                  <h1><?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($plan["costo"],2);?>
+                  <h1><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?>
                     <span class="subscript"></span>
                   </h1>
-                  <a class="pricebutton" onclick="msg_compra(<?php echo $plan["id_plan"];?>,'<?php echo utf8_encode($plan["nombre"]);?>');">
-                    <span class="icon-tag"></span> Suscribirse
-                  </a>
+                  <?php if (empty($plan["costo"])) { ?>
+                    <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"
+                      <span class="icon-tag"></span>POSTULARSE
+                    </a>
+                  <?php } else { ?>
+                    <a class="pricebutton" onclick="msg_compra(<?php echo $plan["id_plan"];?>,'<?php echo utf8_encode($plan["nombre"]);?>');">
+                      <span class="icon-tag"></span>SUBSCRIBIRSE
+                    </a>
+                  <?php } ?>                    
                 </li>
               </ul>
             <?php } ?> 

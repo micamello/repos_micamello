@@ -1,6 +1,5 @@
 <div class="container">
-
-	<?php if ($vista == 'ofertas' && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
+	<?php if (trim($vista) == 'oferta' && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
 		<div class="col-md-12" align="right" >
 			<b>Autopostulaciones restantes: <span class="parpadea" style="color:red"><?php echo $autopostulaciones_restantes['p_restantes']; ?></span></b>
 		</div>
@@ -184,12 +183,15 @@
 			            <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 							echo "<a href='".PUERTO."://".HOST."/detalleOferta/".$vista."/".$o["id_ofertas"]."/'>";
 						} ?>
-						<div class='panel panel-default shadow'>
+						<div class='panel panel-default shadow-panel'>
 						    <div class='panel-body' id='caracteristica_oferta'>
 						   		<div class="row">
 						   			<div class="col-md-12">
 										<div class="col-sm-2 col-md-3 col-lg-2" style="padding-left: 0px;" align='center'>
-											<img id="imgPerfil" class="img-responsive postulacion'" src="<?php if($vista != 'postulacion' && $vista != 'vacantes'){ echo PUERTO.'://'.HOST.'/imagenes/logo.png'; }else{ echo Modelo_Usuario::obtieneFoto($o['id_usuario']); } ?>" alt="icono">
+											<?php											
+											$src_imagen = ($o['confidencial'] && $vista!='vacantes') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : Modelo_Usuario::obtieneFoto($o['id_usuario']);
+											?>
+											<img id="imgPerfil" class="img-responsive postulacion'" src="<?php echo $src_imagen; ?>" alt="icono">
 							  			</div>
 							  			<div class='col-sm-9 col-md-7 col-lg-<?php if($vista == 'oferta'){ echo '10'; }else{ echo '9'; }?>'>
 											<span>
@@ -207,21 +209,11 @@
 												<b style='color: black;'><?php echo $o['titulo']; ?></b>  
 												<?php 
 												if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
-
-													if($vista == 'postulacion'){
-												    	if(isset($o['tipo']) && $o['tipo'] == 2){ 						
-												    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
-												    	}else{
-															if(isset($postulacionesUserLogueado[$o["id_ofertas"]])){
-																$tipo = $postulacionesUserLogueado[$o["id_ofertas"]];
-																if($tipo == 2){
-														    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$tipo].'</span>';
-															    }else{
-															    	echo ' | <span class="etiquetaPostulado parpadea">Autopostulado '.POSTULACIONES[$tipo].'</span>';
-															    }
-															}
-														}
-													}
+														if($vista == 'postulacion'){
+													    	if(isset($o['tipo'])){ 						
+													    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
+													    	}													    	
+														}													
 												}else{
 													
 													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $aspirantesXoferta[$o['id_ofertas']] != 0) { 
@@ -235,7 +227,7 @@
 												}
 												?>
 												</span>
-												<?php if(isset($o['tipo']) && $o['tipo'] == 2 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+												<?php if(isset($o['tipo']) /*&& $o['tipo'] == 2*/ && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 											    	<br>
 											    	<span class="<?php echo CLASES_ESTATUS[$o['resultado']]; ?>"><b><?php echo Modelo_Oferta::ESTATUS_OFERTA[$o['resultado']]; ?></b></span>
 												<?php } ?>
@@ -246,7 +238,7 @@
 												<br>
 												<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 													<div class="row">
-														<p style="color:#C3BABA" class="cortar" align="center"><?php echo html_entity_decode($o['descripcion']); ?></p>
+														<p style="color:#C3BABA" class="cortar" align="justify"><?php echo strip_tags(html_entity_decode($o['descripcion'])); ?></p>
 													</div>
 												<?php } ?>
 								  			</div>
@@ -278,7 +270,7 @@
 								  	<div class="row">
 							   			<div class="col-md-12">
 											<div class='col-xs-6 col-md-3' align='center'>
-							                    <span class="etiquetaOferta">Salario: </span><br><?php echo $_SESSION["mfo_datos"]["sucursal"]["simbolo"].number_format($o['salario'],2);?>
+							                    <span class="etiquetaOferta">Salario: </span><br><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
 							                </div>
 							                <div class='col-xs-6 col-md-3' align='center'>
 							                    <span class="etiquetaOferta">Provincia: </span><br><?php echo $o['provincia']; ?>
