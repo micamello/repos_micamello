@@ -184,7 +184,7 @@
 			            <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 							echo "<a href='".PUERTO."://".HOST."/detalleOferta/".$vista."/".$o["id_ofertas"]."/'>";
 						} ?>
-						<div class='panel panel-default shadow'>
+						<div class='panel panel-default shadow-panel'>
 						    <div class='panel-body' id='caracteristica_oferta'>
 						   		<div class="row">
 						   			<div class="col-md-12">

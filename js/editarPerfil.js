@@ -1,6 +1,7 @@
 if(document.getElementById('form_editarPerfil')){
-    mostrarUni();
+    
     ocultarCampos();
+    mostrarUni();
     $("#form_editarPerfil").validator();
 }
 
@@ -147,20 +148,24 @@ function mostrarUni(){
 
     if(lugar_estudio){
 
-        var r = lugar_estudio.options[lugar_estudio.selectedIndex].value;
+        if(lugar_estudio.selectedIndex != -1){
+
+            var r = lugar_estudio.options[lugar_estudio.selectedIndex].value;
         
-        if(lugar_estudio.selectedIndex != ''){
             if(r == 0){
                 document.getElementById("universidad2").style.display = "none";
                 document.getElementById("universidad").style.display = "block";
                 document.getElementById("universidad").setAttribute("required",true);
-                $("#universidad2").removeAttr("required");;
+                $("#universidad2").removeAttr("required");
             }else{
                 document.getElementById("universidad").style.display = "none";
                 document.getElementById("universidad2").style.display = "block";
                 document.getElementById("universidad2").setAttribute("required",true);
                 $("#universidad").removeAttr("required");
             }
+        }else{
+            $("#universidad").removeAttr("required");
+            $("#universidad2").removeAttr("required");
         } 
     }
 }
@@ -190,11 +195,16 @@ function ocultarCampos(){
                         }else{
                             $("#lugar_estudio").removeAttr("required");
                             elements[i].style.display = 'none';
+                            var lugar_estudio = document.getElementById("lugar_estudio");
+                            lugar_estudio.selectedIndex = -1;
+                            mostrarUni();
                         }
                     }
+
+                    mostrarUni();
                 },
                 error: function (request, status, error) {
-                    alert(request.responseText);
+                    //alert(request.responseText);
                 }                  
             });
         }

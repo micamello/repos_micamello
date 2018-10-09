@@ -80,8 +80,8 @@ var barWidth, chart, chartInset, degToRad, repaintGauge,
          .attr("font-size",25)
          .style("display", "none"); 
 
-var trX = 180 - 230 * Math.cos(percToRad(percent / 2));
-var trY = 195 - 210 * Math.sin(percToRad(percent / 2));
+/*var trX = Math.abs(180 - 230 * Math.cos(percToRad(percent / 2)));
+var trY = Math.abs(195 - 210 * Math.sin(percToRad(percent / 2)));
 
 displayValue = function() {
                 texts.append("text")
@@ -93,8 +93,23 @@ displayValue = function() {
                     .attr("font-size",12)  
                     .attr("class","parpadea")                                     
                     .style("fill", '#DB2929');
-            } 
+            } */
     
+ var trX = Math.abs(180 - 210 * Math.cos(percToRad(percent / 2))); 
+ var trY = Math.abs(195 - 210 * Math.sin(percToRad(percent / 2))); 
+ // (180, 195) are the coordinates of the center of the gauge.
+  displayValue = function() { 
+    texts.append("text") 
+      .text(function(){ 
+          return dataset[0].value+'%'; 
+      }) 
+      .attr('id', "Value") 
+      .attr('transform', "translate(" + trX + ", " + trY+ ")") 
+      .attr("font-size",12) 
+      .attr("class","parpadea") 
+      .style("fill", '#FB0006'); 
+  } 
+
     texts.append("text")
         .text(function(){
             return 0+' ';

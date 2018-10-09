@@ -201,7 +201,7 @@ $('#btn_transfer').on('click', function()
             var publicar_btn = document.getElementById("boton");
             var errors = document.getElementsByClassName("form-group has-error has-danger");
 
-            if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "") && ($('select').filter('[required]:visible').val() != "")) {
+            if (errors.length <= 1 || (($(':input').filter('[required]:visible').val() != "") && ($(':select').filter('[required]:visible').val() != ""))) {
                 publicar_btn.setAttribute("class", "btn btn-success");
             }  
         }
@@ -242,17 +242,12 @@ function delete_item_selected(selected_item){
         document.getElementById("text_nothing").style.display = "";
         // document.getElementById("listado_idiomas").innerHTML = "<p id='error_tag' class='list-unstyled msg_error'></p>";
         // document.getElementById("error_tag").innerHTML = "<p>Seleccione un elemento de la lista.</p>";
-        if (document.getElementById("id_idi_error")){
-          document.getElementById("id_idi_error").setAttribute("class", "form-group has-error has-danger");
-        }
-        if (document.getElementById("publicar_btn")){
-          publicar_btn.setAttribute("class", "btn btn-success disabled");
-        }
+        document.getElementById("id_idi_error").setAttribute("class", "form-group has-error has-danger");
+        publicar_btn.setAttribute("class", "btn btn-success disabled");
     }
     else{
-        if (document.getElementById("id_idi_error")){
         // document.getElementById("listado_idiomas").innerHTML = "";
-          document.getElementById("id_idi_error").setAttribute("class", "form-group");
-        }
-    }	
+        document.getElementById("id_idi_error").setAttribute("class", "form-group");
+    }
 }
+

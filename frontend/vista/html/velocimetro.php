@@ -7,7 +7,7 @@
             <li class="visited">Registro</li>
             <li class="visited">Completar Perfil</li>
             <?php 
-$valorporc = 98;
+$valorporc = 5;
             for($i=1;$i<=$nrototaltest;$i++){ ?>
               <?php 
                if ($i < $nrotestusuario){

@@ -151,7 +151,7 @@ class Controlador_Perfil extends Controlador_Base
                 $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'id_nacionalidad' => 1, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad2'=>0);
             } else {
 
-                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1);
+                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
             }
 
             $data = $this->camposRequeridos($campos);
@@ -285,6 +285,10 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
                 }
 
+            }else if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
+                if (!Modelo_ContactoEmpresa::editarContactoEmpresa($data, $idUsuario)) {
+                    throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
+                }
             }
 
             $GLOBALS['db']->commit();

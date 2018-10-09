@@ -159,7 +159,7 @@ function mostrarGrafico(label, valor){
   }
   // console.log(labels);
   // console.log(valores);
-    let myChart = document.getElementById('myChart').getContext('2d');
+    /*let myChart = document.getElementById('myChart').getContext('2d');
 
       // Global Options
       Chart.defaults.global.defaultFontFamily = 'Lato';
@@ -234,5 +234,5 @@ function mostrarGrafico(label, valor){
             }]
           }
         }
-      });
+      });*/
   }
