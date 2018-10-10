@@ -16,6 +16,7 @@ class Controlador_Inicio extends Controlador_Base {
     $arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
+
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
                   'nro_candidato'=>$nro_candidato,

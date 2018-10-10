@@ -6,12 +6,22 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 <div class="container">
 	<div class="checkout-wrap">
 	  <ul class="checkout-bar">
-	    <li class="visited">Registro</li>    
-	    <li class="active">Completar Perfil</li>
-	    <?php for($i=1;$i<=$nrototaltest;$i++){ ?>
-	      <li class="">Formulario <?php echo $i;?></li>                
-	    <?php } ?>
-	  </ul>
+        <li class="visited">Registro</li>
+        <li class="active">Completar Perfil</li>
+        <?php 
+
+        for($i=1;$i<=$nrototaltest;$i++){ ?>
+          <?php 
+           if ($i <= $nrotestusuario){
+             $clase = "visited";
+           }
+           else{
+             $clase = "";
+           }
+          ?>
+          <li class="<?php echo $clase;?>">Formulario <?php echo $i;?></li>                
+        <?php } ?>
+      </ul>
 	</div>
 </div>
 <br>
