@@ -9,70 +9,70 @@ $('#form_register').on("submit", function(e){
 	}
 })
 
-$("#correo").on("blur", function(){
-	if ($('#correo_error')) {
-		var correo = document.getElementById("correo_error");
-	}
-	var puerto_host = $('#puerto_host').val();
-	var correo_form = this.value;
-	if (correo_form != "") {
-		$.ajax({
-            type: "GET",
-            url: puerto_host+"?opcion=buscaCorreo&correo="+correo_form,
-    		dataType: 'json',
-            success:function(data){
-            	// console.log("valor ajax 1:"+data.respcorreo);
-				if(data.respcorreo != 1){
-					// console.log("valor ajax 2:"+data.respcorreo);
-						crearMensajeError("correo_div_error", "El correo ingresado ya existe");
-						correo.setAttribute("class", "form-group has-error has-danger");
-				}
-				else{
-					console.log(document.getElementById("correo_div_error").firstChild.innerHTML);
-					// if(document.getElementById("correo_div_error").firstChild.innerHTML == "El correo ingresado ya existe"){
-						eliminarMensajeError("correo_div_error");
-						correo.setAttribute("class", "form-group");
-					// }
-				}
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
-            }                  
-        })
-	}
-})
+// $("#correo").on("blur", function(){
+// 	if ($('#correo_error')) {
+// 		var correo = document.getElementById("correo_error");
+// 	}
+// 	var puerto_host = $('#puerto_host').val();
+// 	var correo_form = this.value;
+// 	if (correo_form != "") {
+// 		$.ajax({
+//             type: "GET",
+//             url: puerto_host+"?opcion=buscaCorreo&correo="+correo_form,
+//     		dataType: 'json',
+//             success:function(data){
+//             	console.log("valor ajax 1:"+data.respcorreo);
+// 				if(data.respcorreo != 1){
+// 					console.log("valor ajax 2:"+data.respcorreo);
+// 						crearMensajeError("correo_div_error", "El correo ingresado ya existe");
+// 						correo.setAttribute("class", "form-group has-error has-danger");
+// 				}
+// 				else{
+// 					// console.log(document.getElementById("correo_div_error").firstChild.innerHTML);
+// 					// if(document.getElementById("correo_div_error").firstChild.innerHTML == "El correo ingresado ya existe"){
+// 						eliminarMensajeError("correo_div_error");
+// 						correo.setAttribute("class", "form-group");
+// 					// }
+// 				}
+//             },
+//             error: function (request, status, error) {
+//                 alert(request.responseText);
+//             }                  
+//         })
+// 	}
+// })
 
-$("#dni").on("blur", function(){
-	if ($('#dni_error')) {
-		var dni = document.getElementById("dni_error");
-	}
-	var puerto_host = $('#puerto_host').val();
-	var dni_form = this.value;
-	if (dni_form != "") {
-		$.ajax({
-            type: "GET",
-            url: puerto_host+"?opcion=buscaDni&dni="+dni_form,
-    		dataType: 'json',
-            success:function(data){
-				if(data.respdni != 1){
-					if(document.getElementById("error_custom_dni").innerHTML == ""){
-						crearMensajeError("error_custom_dni", "El dni ingresado ya existe");
-						dni.setAttribute("class", "form-group has-error has-danger");
-					}
-				}
-				else{
-					if(document.getElementById("error_custom_dni").firstChild.innerHTML == "El dni ingresado ya existe"){
-						eliminarMensajeError("error_custom_dni");
-						dni.setAttribute("class", "form-group");
-					}
-				}
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
-            }                  
-        })
-	}
-})
+// $("#dni").on("blur", function(){
+// 	if ($('#dni_error')) {
+// 		var dni = document.getElementById("dni_error");
+// 	}
+// 	var puerto_host = $('#puerto_host').val();
+// 	var dni_form = this.value;
+// 	if (dni_form != "") {
+// 		$.ajax({
+//             type: "GET",
+//             url: puerto_host+"?opcion=buscaDni&dni="+dni_form,
+//     		dataType: 'json',
+//             success:function(data){
+// 				if(data.respdni != 1){
+// 					if(document.getElementById("error_custom_dni").innerHTML == ""){
+// 						crearMensajeError("error_custom_dni", "El dni ingresado ya existe");
+// 						dni.setAttribute("class", "form-group has-error has-danger");
+// 					}
+// 				}
+// 				else{
+// 					if(document.getElementById("error_custom_dni").firstChild.innerHTML == "El dni ingresado ya existe"){
+// 						eliminarMensajeError("error_custom_dni");
+// 						dni.setAttribute("class", "form-group");
+// 					}
+// 				}
+//             },
+//             error: function (request, status, error) {
+//                 alert(request.responseText);
+//             }                  
+//         })
+// 	}
+// })
 
 
 
