@@ -5,7 +5,6 @@ if( strstr(dirname(__FILE__), 'C:') ){
   $_SERVER['HTTP_HOST'] = 'micamello.com.ec'; 
 }
 //buscar en el archivo de relaciones
-
 if (isset($_SERVER['HTTP_HOST']) /*&& (strpos($_SERVER['HTTP_HOST'], 'www.') !== false)*/){
   if (file_exists(FRONTEND_RUTA.'sucursales/'.$_SERVER['HTTP_HOST'].'.txt')) {
     $fp = fopen(FRONTEND_RUTA.'sucursales/'.$_SERVER['HTTP_HOST'].'.txt', 'r');

@@ -110,6 +110,7 @@
                         
                         }
                     }, t.prototype.deselectOption = function(t) {
+                        
                         var nombre = e("option[value=" + e(t).data("val") + "]", this.source)[0].text;
                         elemento = document.getElementById(nombre);
                         elemento.parentNode.removeChild(elemento);

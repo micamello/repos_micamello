@@ -53,8 +53,7 @@ if (!empty($registros) && is_array($registros)){
          $objCancelacion = new Proceso_Cancelacion($cliente,$cliente->plan,$procesador);
          $objCancelacion->procesar();
       break;
-    }    
-  }
+    }     
 }
 
 //elimina archivo de procesamiento

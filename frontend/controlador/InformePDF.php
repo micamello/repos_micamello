@@ -124,6 +124,7 @@ class Controlador_InformePDF extends Controlador_Base
                <body>
                <main>";
 
+
       $caratula = "<div class='content_caratula'><span class='ant_name'>Resultados del informe de</span><h3 class='name_caratula'>".ucfirst($datos_usuario['nombres'])." ".ucfirst($info_usuario['apellidos'])."</h3></div>";
       $caracteristicas_esp = str_replace("_nombreAspirante_", ucfirst($datos_usuario['nombres']), $parametro2['descripcion']);
       $introduccion = "<h3 class='titulo_1'>Introducción</h3><br><p class='text_justify'>".utf8_encode(str_replace("_saltoLinea_", "<br><br>", $parametro1['descripcion']))."</p>";

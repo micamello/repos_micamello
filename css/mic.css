@@ -833,6 +833,7 @@ body
   height: 100%;
 }
 
+
 .text_form{
   font-size: 12px;
   background-color: white;
@@ -887,4 +888,9 @@ input[type="checkbox"]:checked + label:before {
   border-left-color: transparent;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.text-white{
+  text-shadow: 1px 2px #000;
+  color: ##f3efef;
 }

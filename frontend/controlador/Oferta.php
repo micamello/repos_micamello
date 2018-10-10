@@ -46,7 +46,8 @@ class Controlador_Oferta extends Controlador_Base{
               unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['vista']);
               
               if($vista == 'oferta'){
-                  //$postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario);
+
+                  $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
                   $breadcrumbs['oferta'] = 'Ofertas de empleo';
               }else if($vista == 'vacantes'){
                   $breadcrumbs['vacantes'] = 'Mis Ofertas';
@@ -132,7 +133,6 @@ class Controlador_Oferta extends Controlador_Base{
                   'arrprovincia'  => $arrprovincia,
                   'jornadas'      => $arrjornadas,
                   'ofertas'       => $ofertas,
-                  //'postulacionesUserLogueado' => $postulacionesUserLogueado,
                   'autopostulaciones_restantes'=>$autopostulaciones_restantes,
                   'link'=>$link,
                   'vista'=>$vista,
@@ -246,12 +246,10 @@ class Controlador_Oferta extends Controlador_Base{
             $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
             $ofertas = self::ordenarOfertasXareasUsuario($idUsuario,$ofertas);
             if($vista != 'postulacion'){
-                //$postulacionesUserLogueado = Modelo_Postulacion::obtienePostulaciones($idUsuario,$page);
                 $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
                 $breadcrumbs['oferta'] = 'Ofertas de empleo';
             }else{
                 $breadcrumbs['postulacion'] = 'Mis postulaciones';
-                
             }
             $tags = array(
                 'breadcrumbs'=>$breadcrumbs,
@@ -260,7 +258,6 @@ class Controlador_Oferta extends Controlador_Base{
                 'jornadas'      => $jornadas,
                 'ofertas'       => $ofertas,
                 'autopostulaciones_restantes'=>$autopostulaciones_restantes,
-                //'postulacionesUserLogueado' => $postulacionesUserLogueado,
                 'page' => $page,
                 'vista'=>$vista
             );

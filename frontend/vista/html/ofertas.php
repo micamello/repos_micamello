@@ -1,5 +1,6 @@
 <div class="container">
-	<?php if (trim($vista) == 'oferta' && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
+	<?php if (trim($vista) == 'oferta' && isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
+
 		<div class="col-md-12" align="right" >
 			<b>Autopostulaciones restantes: <span class="parpadea" style="color:red"><?php echo $autopostulaciones_restantes['p_restantes']; ?></span></b>
 		</div>
@@ -183,7 +184,7 @@
 			            <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 							echo "<a href='".PUERTO."://".HOST."/detalleOferta/".$vista."/".$o["id_ofertas"]."/'>";
 						} ?>
-						<div class='panel panel-default shadow'>
+						<div class='panel panel-default shadow-panel'>
 						    <div class='panel-body' id='caracteristica_oferta'>
 						   		<div class="row">
 						   			<div class="col-md-12">

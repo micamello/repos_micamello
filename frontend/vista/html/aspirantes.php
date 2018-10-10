@@ -141,6 +141,7 @@
 					 </div>
 		          </div>
 		    </div>
+
 		    <?php if ($vista == 1){ ?>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
@@ -158,6 +159,7 @@
 		      </div>
 		    </div>
 		    <?php } ?>
+
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
 		            <span><i class="fa fa-venus-mars"></i> Genero</span>

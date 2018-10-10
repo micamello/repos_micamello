@@ -181,7 +181,7 @@ if(isset($show_banner)){ ?>
 <section id="home" class="home bg-black fix">
   <div class="overlay" ></div>
   <div class="container">
-    <div class="row">
+    <!--<div class="row">-->
       <div class="main_home text-center">
         <div class="col-md-12">
           <div class="hello_slid">
@@ -193,7 +193,7 @@ if(isset($show_banner)){ ?>
           </div>
         </div>
       </div>
-    </div><!--End off row-->
+    <!--</div>End off row-->
   </div><!--End off container -->
 </section> <!--End off Home Sections-->
 <?php } ?>

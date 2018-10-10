@@ -12,27 +12,33 @@
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
 			 			<?php 
-			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {
+
+			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {			 					
 			 					?>
-						 			<p>Fecha caducidad plan: 
+						 			<p>Fecha caducidad plan: </p>
 						 			<b><span><?php
 						 			$fecha = date_create($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad']);
-						 			 echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>
-			 				<?php
-			 				}
-			 			 ?>
+						 			echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b>
+			 			<?php }else{ ?>
+			 				<p>Fecha caducidad plan: ilimitado</p>
+			 			<?php } ?>
+
 			 			</div>
 			 		</div>	
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
+
 			 				<p>Publicaciones restantes: 
 			 				<b><span><?php echo $publicaciones_restantes['p_restantes']; ?></span></b></p>
+
 			 			</div>
 			 		</div>
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
+
 			 				<p>N° Planes activos: 
 			 				<b><span><?php echo count($_SESSION['mfo_datos']['planes']); ?></span></b></p>
+
 			 			</div>
 			 		</div>
 			 	</div>
@@ -47,7 +53,7 @@
 			 
 		</div>
 	</div>
-	</div>
+
 	<div class="container">
 		<div class="panel panel-default shadow col-md-10 col-md-offset-1">
 			<div class="panel-body">

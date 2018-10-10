@@ -190,11 +190,10 @@
               <div class="conditions_components">
                 <div class="" align="left">
                   <label class="form-text"><div class="help-block with-errors"></div>
-                    <input id="box-1" type="checkbox" name="term_cond" id="term_cond" value="1" required><label for="box-1">He leido y acepto los <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank"> términos y condiciones </a> y la <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Política de Privacidad</a></label></label>
+                  <input id="box-1" type="checkbox" name="term_cond" id="term_cond" value="1" required><label for="box-1">He leido y acepto los <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank"> términos y condiciones </a> y la <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Política de Privacidad</a></label></label>
+
                 </div>
-                
-                    <input type="hidden" name="conf_datos" id="conf_datos" value="1">
-                
+                <input type="hidden" name="conf_datos" id="conf_datos" value="1">
               </div>
 
               <input type="hidden" id="tipo_usuario" name="tipo_usuario" value="">

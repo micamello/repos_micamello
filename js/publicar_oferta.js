@@ -246,6 +246,7 @@ function delete_item_selected(selected_item){
         document.getElementById("text_nothing").style.display = "";
         // document.getElementById("listado_idiomas").innerHTML = "<p id='error_tag' class='list-unstyled msg_error'></p>";
         // document.getElementById("error_tag").innerHTML = "<p>Seleccione un elemento de la lista.</p>";
+
         if (document.getElementById("id_idi_error")){
           document.getElementById("id_idi_error").setAttribute("class", "form-group has-error has-danger");
         }
@@ -260,3 +261,4 @@ function delete_item_selected(selected_item){
         }
     }   
 }
+

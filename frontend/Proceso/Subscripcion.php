@@ -77,10 +77,9 @@ class Proceso_Subscripcion{
     $email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $email_body .= "Por favor de click en este enlace para realizar el tercer formulario "; 
-      $email_body .= "<a href='".PUERTO."://".$dominio."/cuestionario/'>click aqu&iacute;</a> <br>";
+      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollo/cuestionario/'>click aqu&iacute;</a> <br>";
     }else{
       $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
-      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollo/publicar/'>click aqu&iacute;</a> <br>";
     }  
     Utils::envioCorreo($correo,$email_subject,$email_body);
   }
