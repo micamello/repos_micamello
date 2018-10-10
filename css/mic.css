@@ -832,3 +832,8 @@ body
   padding: 0px 20px 0px 20px;
   height: 100%;
 }
+
+.text-white{
+  text-shadow: 1px 2px #000;
+  color: ##f3efef;
+}

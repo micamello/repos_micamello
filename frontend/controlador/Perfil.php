@@ -98,6 +98,8 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
                 $nrototaltest = Modelo_Cuestionario::totalTest();
+                $cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+                $nrotestusuario = count($cuestionario);
 
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
@@ -116,6 +118,7 @@ class Controlador_Perfil extends Controlador_Base
                     'btnDescarga'               => $btnDescarga,
                     'ruta_arch'                 => $ruta_arch,
                     'nrototaltest'              =>$nrototaltest,
+                    'nrotestusuario'            =>$nrotestusuario,
                     'nacionalidades'            =>$nacionalidades,
                     'universidades'             =>$universidades,
                     'arridioma'                 =>$arridioma,
