@@ -43,4 +43,5 @@ define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Casado(a)', '3'=>'En union', '4'=>'Divorciado(a)','5'=>'Viudo(a)'));
 define('CRON_RUTA',FRONTEND_RUTA.'cron/');
 define('DIAS_AUTOPOSTULACION','3');
+define('DOCUMENTACION', array('2'=>'CÉDULA', '3'=>'PASAPORTE'));
 ?>
