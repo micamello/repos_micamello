@@ -19,7 +19,16 @@ else{
   Utils::crearArchivo(CRON_RUTA,'procesando_cancelar_planes.txt','');
 }
 
-
+$arrplanes = Modelo_UsuarioxPlan::planesActivosPagados();
+if (!empty($arrplanes)){
+	$fechaactual = date("Y-m-d H:i:s");
+  echo "Fecha Actual: ".$fechaactual."<br>";
+	foreach($arrplanes as $usuarioplan){
+		if ($usuarioplan["fecha_caducidad"] > $fechaactual){
+			echo "Fecha de Caducidad:".$usuarioplan["fecha_caducidad"]."<br>";
+		}    
+	}
+} 
 
 //elimina archivo de procesamiento
 unlink(CRON_RUTA.'procesando_cancelar_planes.txt');

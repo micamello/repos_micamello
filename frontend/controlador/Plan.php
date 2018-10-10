@@ -220,7 +220,7 @@ class Controlador_Plan extends Controlador_Base {
         throw new Exception("Error al cargar la imagen, por favor intente denuevo");
       }
 
-      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, el administrador verificará sus datos para aprobar el plan";  
+      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan será aprobado en un máximo de 48 horas";  
       Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
     }
     catch(Exception $e){
@@ -233,7 +233,8 @@ class Controlador_Plan extends Controlador_Base {
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
-    
+    unset($_SESSION['mfo_datos']['planes']);
+    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']);
     Vista::render('mensaje_paypal', $tags);       
   }
 }  

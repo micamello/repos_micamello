@@ -13,10 +13,7 @@ class Controlador_Publicar extends Controlador_Base {
 
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
-    }
-
-    unset($_SESSION['mfo_datos']['planes']);
-    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']);
+    }    
 
     if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
       $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
@@ -83,9 +80,8 @@ class Controlador_Publicar extends Controlador_Base {
           $GLOBALS['db']->beginTrans();
           self::guardarPublicacion($data, $data_idiomas, $idusu);
           $GLOBALS['db']->commit();
-
-          /*unset($_SESSION['mfo_datos']['planes']);
-          $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);*/
+          unset($_SESSION['mfo_datos']['planes']);
+          $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);
 
           $_SESSION['mostrar_exito'] = "La oferta se ha publicado correctamente";
 
