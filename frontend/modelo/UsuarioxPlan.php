@@ -126,5 +126,12 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->execute("UPDATE mfo_usuario_plan SET num_post_rest = num_post_rest + 1 WHERE id_usuario_plan = ".$id_plan_usuario);
   }
 
+  public static function planesActivosPagados(){
+    $sql = "SELECT id_usuario_plan, id_usuario, fecha_caducidad 
+            FROM mfo_usuario_plan WHERE estado = 1 AND fecha_caducidad IS NOT NULL
+            ORDER BY id_usuario";
+    return $GLOBALS['db']->auto_array($sql,array(),true);        
+  }
+
 }  
 ?>
