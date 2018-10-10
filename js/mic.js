@@ -127,14 +127,14 @@ function eliminarMensajeError($id_div_error){
     nodo_div.innerHTML = "";
 }
 
-if (document.getElementById("dni")) {
-  var host = window.location.hostname;
-  $("#dni").on("blur", function(){
-    //if (host == 'localhost') {
-      validarDocumento(this);
-    //}
-  })
-}
+// if (document.getElementById("dni")) {
+//   var host = window.location.hostname;
+//   $("#dni").on("blur", function(){
+//     //if (host == 'localhost') {
+//       validarDocumento(this);
+//     //}
+//   })
+// }
 
 $(document).ready(function(){
   if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){

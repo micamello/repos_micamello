@@ -50,13 +50,14 @@ footer{
 }
 
 .items_inf{
-        background-color: #7BB6FE;
+        background-color: #0096FF;
         padding: 5px;
         border-radius: 10px;
         margin: 0px 175px 10px 175px;
         /*display: block;*/
         text-align: center;
-        color: white;
+        font-size: 14px;
+        color: #FFFFFF;
 }
 
 .img_inf_mic{

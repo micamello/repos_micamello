@@ -164,4 +164,4 @@ RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-9]+)/$
 RewriteRule ^informePDF/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF&username=$1 [L]
 
 #Aspirantes
-RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2 [L]
+RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2&vista=$3 [L]

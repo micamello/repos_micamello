@@ -46,14 +46,7 @@
         <!-- <br><br> -->
         <form action = "<?php echo PUERTO."://".HOST;?>/registro/" method = "post" id="form_register">
 
-         <div class="row">
-
-          <div class="col-md-6" id="correo_group">
-            <div class="form-group">
-              <p class="text-center text_form">Correo&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
-              <input id="correo" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese un correo electrónico válido' : '')" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
-            </div>
-          </div>   
+         <div class="row">  
           <input type="hidden" name="register_form" id="register_form" value="1">
           <div class="col-md-6">
               <div class="form-group">
@@ -66,24 +59,45 @@
                 <p class="text-center text_form">Apellidos&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors"></div>
                 <input type="text" name="apell_user" id="apell_user" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortiz Zambrano" class="form-control">
               </div>
-          </div>        
+          </div>
+
+          <div class="col-md-6" id="correo_group">
+            <div class="form-group" id="correo_error">
+              <p class="text-center text_form">Correo&nbsp;<i class="requerido">*</i></p><div id="correo_div_error" class="help-block with-errors"></div>
+              <input id="correo" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese un correo electrónico válido' : '')" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp" required>
+            </div>
+          </div>      
 
            <div class="col-md-6">
              <div class="form-group">
-
                <p for="numero_cand" class="text-center text_form">Celular&nbsp;<i class="requerido">*</i></p><div class="help-block with-errors" id="error_custom_cel"></div>
                <input type="text" class="form-control" name="numero_cand" id="numero_cand" required onkeydown="return validaNumeros(event);">
              </div>
-           </div> 
+           </div>
+
+          <div class="col-md-6" id="group_select_tipo_doc">
+            <div class="form-group">
+              <p class="text-center text_form">Seleccione tipo documentación</p><div class="help-block with-errors"></div>
+              <select class="form-control" id="documentacion" name="tipo_doc">
+                <option selected="" value="" disabled>Seleccione tipo identificación</option>
+                <?php 
+                  foreach(DOCUMENTACION as $key => $doc)
+                    echo "<option value='".$key."'>$doc</option>";
+                 ?>
+              </select>
+            </div>
+          </div> 
 
            <div class="col-md-6">
                   <div class="group">
-                    <div class="form-group">
+                    <div class="form-group" id="dni_error">
                       <p class="text-center text_form" id="dni_text"></p><div class="help-block with-errors" id="error_custom_dni"></div>
-                      <input id="dni" type="text" name="cedula" class="form-control" required>
+                      <input id="dni" type="text" name="cedula" onblur="validarDocumento(this);" class="form-control" required>
                     </div>
                   </div>
               </div>
+
+              <input type="hidden" name="ruc" value="1">
 
               <div class="col-md-12" id="area_group">
                 <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione área:<span class="text-help">(max. 3)</span>&nbsp;<i class="requerido">*</i></p>

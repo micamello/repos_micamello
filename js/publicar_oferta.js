@@ -59,6 +59,7 @@ $('#provincia_of').change(function()
             dataType:'json',
             success:function(data){
                 $('#ciudad_of').html('<option value="">Selecciona una ciudad</option>');
+                console.log(data);
                 $.each(data, function(index, value) {
                     $('#ciudad_of').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
 

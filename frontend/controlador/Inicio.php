@@ -31,7 +31,26 @@ class Controlador_Inicio extends Controlador_Base {
     $tags["template_js"][] = "mic";
     $tags["template_js"][] = "modal-register";
 
-    Vista::render('inicio', $tags);
+
+    $opcion = Utils::getParam('opcion','',$this->data);
+    switch($opcion){
+      case 'buscaCorreo':
+        // Utils::log("eder:".$opcion);
+        $correo = Utils::getParam('correo', '', $this->data);
+        $datocorreo = Modelo_Usuario::existeCorreo($correo);
+        Vista::renderJSON(array("respcorreo"=>$datocorreo));
+      break;
+      case 'buscaDni':
+        $dni = Utils::getParam('dni', '', $this->data);
+        $datodni = Modelo_Usuario::existeDni($dni);
+        Vista::renderJSON(array("respdni"=>$datodni));
+      break;
+      default:
+        Vista::render('inicio', $tags);
+      break;
+    }
+
+    
   }
 }  
 ?>
