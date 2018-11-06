@@ -44,7 +44,13 @@
                         return e(document.createElement("div")).addClass("selectr panel panel-" + this.args.panelStyle + " " + (this.multi ? "multi" : void 0)).css("width", this.args.width).html("<div class='panel-body select_body'> <input class='search_select_multi' placeholder='" + this.args.placeholder + "'> <span class='clear-search hidden'>&times;</span> </div> <ul class='list-group' style='max-height: " + this.args.maxListHeight + "'> </ul> <div class='no-matching-options hidden'> <strong>" + this.args.noMatchingOptionsText + "</strong> </div>")
                     }, t.prototype.createOpts = function() {
                         var t, r, o, i, n;
-                        for (i = e("option", this.source), n = [], t = 0, r = i.length; t < r; t++) o = i[t], n.push(e(document.createElement("li")).addClass("list-group-item " + (e(o).is(":selected") ? "selected" : void 0)).data("val", e(o).val()).append(e(document.createElement("div")).addClass("color-code " + (e(o).data("selectr-color") ? void 0 : "no-color")).css("background-color", e(o).data("selectr-color"))).append(e(document.createElement("div")).text(e(o).text()).addClass("option-name").attr({
+                        var select = '';
+                        if(this.source[0].id == 'area_select'){
+                            select = 'area';
+                        }else{
+                            select = 'nivel';
+                        }
+                        for (i = e("option", this.source), n = [], t = 0, r = i.length; t < r; t++) o = i[t], n.push(e(document.createElement("li")).attr('id', 'li'+select+e(o).val()).addClass("list-group-item " + (e(o).is(":selected") ? "selected" : void 0)).data("val", e(o).val()).append(e(document.createElement("div")).addClass("color-code " + (e(o).data("selectr-color") ? void 0 : "no-color")).css("background-color", e(o).data("selectr-color"))).append(e(document.createElement("div")).text(e(o).text()).addClass("option-name").attr({
                             title: e(o).text().length > this.args.tooltipBreakpoint ? e(o).text() : ""
                         })).append(e(document.createElement("div")).html("&times").addClass("add-remove " + (this.multi ? void 0 : "hidden"))));
                         return n
@@ -91,31 +97,51 @@
                                 
                             }else{
 
+                                var select = '';
                                 if(this.source[0].id == 'area_select'){
                                     var seleccionados = $("#seleccionados");
+                                    select = 'area';
                                 }else{
                                     var seleccionados = $("#seleccionados1");
+                                    select = 'nivel';
                                 }
 
                                 var nombre = e("option[value='" + e(r).data("val") + "']", this.source)[0].text;
-                                var newDiv = document.createElement("div"); 
-                                newDiv.id = nombre;
-                                newDiv.className = 'col-sm-4 col-md-5 badge_item3';
-                                
+                                var newDiv = document.createElement("p"); 
+                                newDiv.id = select+e(r).data("val");
+                                newDiv.className = 'col-md-12 badge_item3';
+
+                                var newI = document.createElement("i"); 
+                                newI.className = 'fa fa-window-close fa-2x icon';
+                                newI.setAttribute('onclick', 'eliminar_item_selected(\''+select+e(r).data("val")+'\',\''+this.source[0].id+'\',\''+e(r).data("val")+'\'); validarFormulario(); ');
+
                                 var newContent = document.createTextNode(nombre); 
                                 newDiv.appendChild(newContent);
+                                newDiv.appendChild(newI);
                                 seleccionados.append(newDiv);
                             }
+                            //return this.selectrContainer.removeClass("max-selection-reached"), e(t).removeClass("selected"), e("option[value=" + e(t).data("val") + "]", this.source).prop("selected", !1), this.updateFooter(), this.triggerChange()
                             return e(r).addClass("selected"), e("option[value='" + e(r).data("val") + "']", this.source).prop("selected", !0), this.updateFooter(), this.triggerChange()
                         
                         }
                     }, t.prototype.deselectOption = function(t) {
                         
-                        var nombre = e("option[value=" + e(t).data("val") + "]", this.source)[0].text;
+                        var select = '';
+                        if(this.source[0].id == 'area_select'){
+                            select = 'area';
+                        }else{
+                            select = 'nivel';
+                        }
+
+                        var nombre = select+e(t).data("val");
                         elemento = document.getElementById(nombre);
                         elemento.parentNode.removeChild(elemento);
+                        //this.args.maxSelection;
+
+                                console.log(this.args.maxSelection);
+                                console.log(e(r).siblings(".selected").length);
                         return this.selectrContainer.removeClass("max-selection-reached"), e(t).removeClass("selected"), e("option[value=" + e(t).data("val") + "]", this.source).prop("selected", !1), this.updateFooter(), this.triggerChange()
-                        
+                    
                     }, t.prototype.updateFooter = function() {
                         var t, r;
                         if (this.multi && (r = e("option:selected", this.source).length, e(".current-selection", this.selectrContainer).text(r > 0 ? r : ""), r === this.args.maxSelection ? this.selectrContainer.addClass("max-selection-reached") : this.selectrContainer.removeClass("max-selection-reached"), !this.args.alwaysShowFooter)) return t = e(".panel-footer", this.selectrContainer), 0 === r ? t.addClass("hidden") : t.removeClass("hidden")

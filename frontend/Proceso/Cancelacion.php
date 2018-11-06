@@ -109,20 +109,20 @@ class Proceso_Cancelacion{
 	    $GLOBALS['db']->commit();
     	echo "PROCESADO REGISTRO ".$this->procesador->id."<br>";	
       $nombres = $infousuario["nombres"]." ".$infousuario["apellidos"];    
-	    $this->buildCorreo($infousuario["correo"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"]);
+	    $this->buildNotificacion(/*$infousuario["correo"]*/$infousuario["id_usuario"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"],2);
 
     }
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
 	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
 	  	$msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    Utils::envioCorreo('micamelloecuador@gmail.com','Error Cron planes_paypal',$msgerror);	    
+	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_paypal',$msgerror);	    
   	}
   }
 
-  public function buildCorreo($correo,$nombres,$plan,$tipousuario){  	
-  	$email_subject = "Cancelación de Subscripción";
-  	$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
+  public function buildNotificacion($id_usuario,$nombres,$plan,$tipousuario,$tipo){  	
+  	//$email_subject = "Cancelación de Subscripción";
+  	$email_body = "Cancelación de Subscripción<br>Estimado, ".utf8_encode($nombres)."<br>";
     $email_body .= "Su plan (".utf8_encode($plan).") ha sido cancelado desde Paypal<br>";
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $email_body .= "En el caso de tener autopostulaciones estas ser&aacute;n eliminadas"; 
@@ -130,7 +130,8 @@ class Proceso_Cancelacion{
     }else{
       $email_body .= "En el caso de tener ofertas publicadas estas ser&aacute;n eliminadas";
     }  
-    Utils::envioCorreo($correo,$email_subject,$email_body);
+    //Utils::envioCorreo($correo,$email_subject,$email_body);
+    Modelo_Notificacion::insertarNotificacion($id_usuario,$email_body,$tipo);
   }
   
 }

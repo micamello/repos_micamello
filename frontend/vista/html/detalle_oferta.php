@@ -54,10 +54,14 @@
                     <div>
                         <h5>
                             <span class="titulos">Nivel de Idiomas</span><br>
-                             <?php $idiomas = Modelo_NivelxIdioma::relacionIdiomaNivel($o['idiomas']); 
-                             foreach ($idiomas as $key => $value) {
-                                echo utf8_encode($value['descripcion'].' - '.$value['nombre']).'<br>';
-                             }
+                             <?php $idiomas = Modelo_NivelxIdioma::relacionIdiomaNivel($o['idiomas']);
+                              if(!empty($idiomas)){ 
+                               foreach ($idiomas as $key => $value) {
+                                  echo utf8_encode($value['descripcion'].' - '.$value['nombre']).'<br>';
+                               }
+                              }else{
+                                echo 'No exige idiomas en especifico';
+                              }
                              ?>
                         </h5>
                     </div>

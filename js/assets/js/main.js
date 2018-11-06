@@ -92,9 +92,45 @@ jQuery(document).ready(function ($) {
 
 function abrirModal(mensaje,id){
     $('#mensaje').html(mensaje);
-    //$('#alert_descarga').modal();
     $('#'+id).modal();
 }
+
+function colocaError(campo, id, mensaje,btn){
+
+    nodo = document.getElementById(campo);
+    nodo.innerHTML = '';
+    var elem1 = document.createElement('P');
+    var t = document.createTextNode(mensaje); 
+    elem1.appendChild(t);
+
+    var elem2 = document.createElement("P");             
+    elem2.classList.add('list-unstyled');
+    elem2.classList.add('msg_error');
+    elem2.appendChild(elem1); 
+
+    elem2.appendChild(elem1); 
+    nodo.appendChild(elem2); 
+
+    $("#"+id).addClass('has-error');
+
+    $("#"+btn).attr({
+        'disabled': 'disabled',
+    });
+ 
+    $("#"+btn).addClass('disabled');
+    $("#"+btn).attr('disabled', 'disabled');
+
+    if(document.getElementById('form_paypal')){
+      document.getElementById('form_paypal').action = '#';
+    }
+}
+
+function quitarError(campo,id){
+
+    document.getElementById(campo).innerHTML = '';
+    $("#"+id).removeClass('has-error');
+}
+
 
 function validaDecimales(evt,input){
     // Backspace = 8, Enter = 13, ‘0′ = 48, ‘9′ = 57, ‘.’ = 46, ‘-’ = 43

@@ -4,45 +4,40 @@ require_once 'init.php';
 include 'multisitios.php';
 
 $carpeta = Utils::getParam('carpeta','',$_GET);
-$archivo = Utils::getParam('archivo','',$_GET);
-$param1 = Utils::getParam('param1','',$_GET);
-$param2 = Utils::getParam('param2','',$_GET);
-if (empty($carpeta) && (empty($archivo) || empty($param2) || empty($param1))){
+$param1 = Utils::getParam('param1','',$_GET); //username
+$param2 = Utils::getParam('param2','',$_GET); //extension del archivo
+
+if (empty($carpeta) || empty($param2) || empty($param1)){
    exit; 
 }
+
 if(!Modelo_Usuario::estaLogueado()){
   exit;
 }
-if(!empty($archivo)){
-	$idusuario = strstr($archivo, '.', true);
-	$ext = strstr($archivo, '.');
-	if (empty($idusuario)){
+
+if(!empty($param1) && !empty($param2)){
+	$usuario = Modelo_Usuario::existeUsuario($param1);
+	if (empty($usuario)){
 		exit;
 	}
-}
-if(!empty($param1) && !empty($param2)){
-	$archivo = Modelo_Usuario::existeUsuario($param1);
-	if(!empty($archivo)){
-		$idusuario = $archivo["id_usuario"]; 
-		$ext = '.'.$param2;
-		$archivo = $idusuario.$ext;
+	else{
+		$archivo = $usuario["username"].'.'.$param2;
 	}
 }
 
+//si es candidato no puede ver imagenes/hojas de vida de otros candidatos
 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO && 
-	  Utils::getArrayParam('id_usuario',$_SESSION['mfo_datos']['usuario']) != $idusuario){
-	$infoUsuario = Modelo_Usuario::busquedaPorId($idusuario);  
-  if (empty($infoUsuario) || !isset($infoUsuario["id_usuario"]) || $infoUsuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
-  	exit;
-  }
+	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){	
+  exit;
 }
+
 $mostrar = false;
 switch ($carpeta){
 	case 'profile':
 	  $extension = 'image/jpeg';
 	  $ruta = PATH_PROFILE.$archivo;
 	  $resultado = file_exists($ruta);	  
-	  if (!$resultado){
+	  if (!$resultado || empty($_SESSION['mfo_datos']['usuario']['foto'])){
 	  	$ruta = FRONTEND_RUTA.'/imagenes/user.png';
 	  }	  
 	  $mostrar = true;
@@ -59,19 +54,16 @@ switch ($carpeta){
 	break;
 }
 
-if(!empty($param1) && !empty($param2) && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::EMPRESA){
-
+if($carpeta=='hv' && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::EMPRESA){
 	$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
 	$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-
-	$infoHv = Modelo_InfoHv::obtieneHv($idusuario);	
-
+	$infoHv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);	
 	if(in_array('-1',$posibilidades) ){
-		Modelo_Descarga::registrarDescarga($infoHv[0]['id_infohv'],$idusuario);
+		Modelo_Descarga::registrarDescarga($infoHv['id_infohv'],$usuario["id_usuario"]);
 	}else{
 		$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
 		if($cantidadRestante > 0){
-			Modelo_Descarga::registrarDescarga($infoHv[0]['id_infohv'],$idusuario);
+			Modelo_Descarga::registrarDescarga($infoHv['id_infohv'],$usuario["id_usuario"]);
 		}else{
 			$mostrar = false;
 		}
@@ -87,7 +79,6 @@ if ($mostrar){
   readfile($ruta); 	
 }   
 else{
-
 	if(isset($cantidadRestante) && $cantidadRestante == 0){
 		$_SESSION['mostrar_error'] = 'Ya agoto su cupón de descargas';
 	}else{
@@ -95,7 +86,6 @@ else{
 	}
 	$enlace = PUERTO.'://'.HOST.'/verAspirantes/2/0/1/';
 	header('Location: '.$enlace);
-
 }
 
 exit;

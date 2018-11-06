@@ -21,7 +21,7 @@ class Controlador_Perfil extends Controlador_Base
 
         $msj1 = $imgArch1 = $btnDescarga = '';
         
-
+ //print_r($_POST);
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
             case 'buscaDependencia':
@@ -53,7 +53,7 @@ class Controlador_Perfil extends Controlador_Base
                 $msj2      = 'Subir CV';
                 $ruta_arch = '#';
                 $btnSubir  = 1;
-
+                $data = array();
                 if (Utils::getParam('actualizar') == 1) {
 
                     $btnSig = 1;
@@ -63,18 +63,18 @@ class Controlador_Perfil extends Controlador_Base
                     }
                     $btnSubir  = 0;
 
-                    self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario']);
-                    $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+                    $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
+                    //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
                 }
 
                 if (Utils::getParam('cambiarClave') == 1) {
-                    self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login']);
                     $_SESSION['mostrar_exito'] = 'La contraseña fue modificada exitosamente.';
                 }
 
                 $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
-                if (isset($_SESSION['mfo_datos']['infohv'])) {
+                if (isset($_SESSION['mfo_datos']['infohv']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
 
                     if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
                         $imgArch1 = 'actualizar.png';
@@ -127,27 +127,33 @@ class Controlador_Perfil extends Controlador_Base
 
                 );
 
+
+
                 $tags["template_js"][] = "selectr";
-                $tags["template_js"][] = "validator";
+                //$tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
                 $tags["template_js"][] = "publicar_oferta";
                 $tags["show_banner"] = 1;
 
+                if(!empty($_SESSION['mostrar_error'])){
+                    $tags['data'] = $data;
+                    $tags['btnSig'] = 0;
+                }
 
                 Vista::render('perfil', $tags);                
             break;
         }
     }
 
-    public function guardarPerfil($imagen, $archivo, $idUsuario)
+    public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario)
     {
 
         try {
 
-            if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
+            if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
 
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'id_nacionalidad' => 1, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad2'=>0);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'id_nacionalidad' => 1, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0);
             } else {
 
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
@@ -162,11 +168,14 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }
 
-            if (!empty($archivo) && $archivo['error'] != 4) {
+            if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
 
-                $validaFile = Utils::valida_upload($archivo, 2);
-                if (empty($validaFile)) {
-                    throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
+                if (!empty($archivo) && $archivo['error'] != 4) {
+
+                    $validaFile = Utils::valida_upload($archivo, 2);
+                    if (empty($validaFile)) {
+                        throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
+                    }
                 }
             }
 
@@ -180,7 +189,7 @@ class Controlador_Perfil extends Controlador_Base
                 throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es válida");
             }
 
-            if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
+            if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
 
                 $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
                 if (empty($validaFechaNac)) {
@@ -189,22 +198,36 @@ class Controlador_Perfil extends Controlador_Base
             }
 
             $GLOBALS['db']->beginTrans();
-            if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$_SESSION['mfo_datos']['usuario']['tipo_usuario'])) {
-                throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
-            }
 
-            if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
-
+            if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 $dependencia    = Modelo_Escolaridad::obtieneDependencia($data['escolaridad']);
 
                 if($dependencia['dependencia'] == 0 || ($_POST['universidad'] != '' || $_POST['universidad2'] != '')){
                     
-                    if (!Modelo_RequisitosUsuario::updateRequisitosUsuario($data, $idUsuario)) {
-                        throw new Exception("Ha ocurrido un error al guardar los datos del usuario, intente nuevamente");
+                    if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
+                        throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
                     }
                 }else{
                     throw new Exception("Debe ingresar una universidad");
                 }
+            }else{
+
+                if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
+                    throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
+                }
+
+                if (!Modelo_ContactoEmpresa::editarContactoEmpresa($data, $idUsuario)) {
+                    throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
+                }
+            }
+
+            if (!empty($imagen) && $imagen['error'] != 4) {
+              if (!Utils::upload($imagen,$idUsuario,PATH_PROFILE,1)){
+                throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
+              }  
+            } 
+
+            if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
 
                 if (!empty($archivo) && $archivo['error'] != 4) {
 
@@ -222,7 +245,7 @@ class Controlador_Perfil extends Controlador_Base
                             }
                         }
                     } else {
-                        if (!Modelo_InfoHv::cargarHv($_SESSION['mfo_datos']['usuario']['id_usuario'], $arch[1])) {
+                        if (!Modelo_InfoHv::cargarHv($idUsuario, $arch[1])) {
                             throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                         } else {
                             if (!Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2)){
@@ -234,73 +257,67 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("Cargar la hoja de vida es obligatorio");
                 }
 
-                if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
-
-                    $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
-                    if (empty($validaFechaNac)) {
-                        throw new Exception("Debe ser Mayor de edad");
-                    }
-
-                    $listado_idiomas_niveles_db = Modelo_NivelxIdioma::obtieneListado();
-                    $array_nivel_idioma = array();
-                    for ($i=0; $i < count($data['nivel_idioma']); $i++) {
-                      $explode = explode("_", $data['nivel_idioma'][$i]);
-                      array_push($array_nivel_idioma, $explode);
-                    }
-                    $data_idioma_nivel = array();
-
-                    for ($i=0; $i < count($listado_idiomas_niveles_db); $i++) { 
-                      for ($j=0; $j < count($array_nivel_idioma); $j++) { 
-                        if (($listado_idiomas_niveles_db[$i]['id_idioma'] == $array_nivel_idioma[$j][0]) && ($listado_idiomas_niveles_db[$i]['id_nivelIdioma']) == $array_nivel_idioma[$j][1]) {
-                          array_push($data_idioma_nivel, $listado_idiomas_niveles_db[$i]['id_nivelIdioma_idioma']);
-                        }
-                      }
-                    }
-
-                    if (count($data_idioma_nivel) != count($array_nivel_idioma)) {
-                      throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
-                    }else{
-                        
-                        if (!Modelo_UsuarioxNivelIdioma::guardarUsuarioNivelIdioma($idUsuario,$data_idioma_nivel)) {
-                            throw new Exception("Ha ocurrido un error al guardar los idiomas del usuario, intente nuevamente");
-                        }
-                    }
+                $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
+                if (empty($validaFechaNac)) {
+                    throw new Exception("Debe ser Mayor de edad");
                 }
-            }
 
-            if (!empty($imagen) && $imagen['error'] != 4) {
-              if (!Utils::upload($imagen,$idUsuario,PATH_PROFILE,1)){
-                throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
-              }  
-            } 
+                $listado_idiomas_niveles_db = Modelo_NivelxIdioma::obtieneListado();
+                $array_nivel_idioma = array();
+                for ($i=0; $i < count($data['nivel_idioma']); $i++) {
+                  $explode = explode("_", $data['nivel_idioma'][$i]);
+                  array_push($array_nivel_idioma, $explode);
+                }
+                $data_idioma_nivel = array();
 
-            if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+                for ($i=0; $i < count($listado_idiomas_niveles_db); $i++) { 
+                  for ($j=0; $j < count($array_nivel_idioma); $j++) { 
+                    if (($listado_idiomas_niveles_db[$i]['id_idioma'] == $array_nivel_idioma[$j][0]) && ($listado_idiomas_niveles_db[$i]['id_nivelIdioma']) == $array_nivel_idioma[$j][1]) {
+                      array_push($data_idioma_nivel, $listado_idiomas_niveles_db[$i]['id_nivelIdioma_idioma']);
+                    }
+                  }
+                }
 
-                if (!Modelo_UsuarioxArea::updateAreas($_SESSION['mfo_datos']['usuarioxarea'], $data['area_select'], $idUsuario)) {
+                if (count($data_idioma_nivel) != count($array_nivel_idioma)) {
+                  throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
+                }else{
+                    
+                    if (!Modelo_UsuarioxNivelIdioma::guardarUsuarioNivelIdioma($idUsuario,$data_idioma_nivel)) {
+                        throw new Exception("Ha ocurrido un error al guardar los idiomas del usuario, intente nuevamente");
+                    }
+                }   
+
+                $array_data_area = $array_data_nivel =array();
+                if(isset($_SESSION['mfo_datos']['usuarioxarea'])){
+                    $array_data_area = $_SESSION['mfo_datos']['usuarioxarea'];
+                }
+
+                if(isset($_SESSION['mfo_datos']['usuarioxnivel'])){
+                    $array_data_nivel = $_SESSION['mfo_datos']['usuarioxnivel'];
+                }
+
+                if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $data['area_select'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar las areas de interes, intente nuevamente");
                 }
 
-                if (!Modelo_UsuarioxNivel::updateNiveles($_SESSION['mfo_datos']['usuarioxnivel'], $data['nivel_interes'], $idUsuario)) {
+                if (!Modelo_UsuarioxNivel::updateNiveles($array_data_nivel, $data['nivel_interes'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
                 }
 
             }
-            else if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
-                if (!Modelo_ContactoEmpresa::editarContactoEmpresa($data, $idUsuario)) {
-                    throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
-                }
-            }
+            
+
             $GLOBALS['db']->commit();
-            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
-            Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario));
+            Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario));
+            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
-            $GLOBALS['db']->rollback();
-            $this->redirectToController('perfil');
         }
+        return $data;
     }
 
-    public function guardarClave($idUsuario){
+    public function guardarClave($id_login){
 
         try {
             if($_POST["password"] != "" || $_POST["password_two"] != ""){
@@ -316,7 +333,7 @@ class Controlador_Perfil extends Controlador_Base
             }
 
             if($_POST["password"] != "" && $_POST["password_two"] != ""){
-                if (!Modelo_Usuario::modificarPassword($_POST["password"],$idUsuario)) {
+                if (!Modelo_Usuario::modificarPassword($_POST["password"],$id_login)) {
                     throw new Exception("Ha ocurrido un error al guardar las contraseñas, intente nuevamente");
                 }
             }

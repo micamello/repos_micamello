@@ -25,8 +25,7 @@
                                                 <th class="text-center">M&eacute;todo de Pago</th>
                                                 <th class="text-center">Estado de Pago</th>
                                                 <th class="text-center">Estado del Plan</th>
-                                                <th class="text-center">Factura</th>
-                                                <th class="text-center">Eliminar</th>
+                                                <th class="text-center">Factura</th>                                                
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -59,19 +58,12 @@
                                                     } ?>
                                                     <td style="text-align: center;" data-title="Estado del Plan: "><?php echo ESTADOS[$value['estado']]; ?></td>
                                                     <td style="text-align: center;" data-title="Factura: ">
-                                                        <?php if($value['estado'] != 0){ ?>
+                                                        <?php if(!empty($value['id_factura'])){ ?>
                                                             <a title="Descargar factura" href="#">
                                                                 <i class="fa fa-money"></i></i>
                                                             </a>
                                                         <?php }else{ echo '-'; } ?>
-                                                    </td>
-                                                    <td style="text-align: center;" data-title="Eliminar: ">
-                                                        <?php if($value['estado'] != 0){ ?>
-                                                            <a title="Eliminar suscripci&oacute;n al plan" href="<?php echo PUERTO."://".HOST.'/planesUsuario/'.$value['id_usuario_plan']."/"; ?>">
-                                                                <i class="fa fa-trash"></i>
-                                                            </a>
-                                                        <?php }else{ echo '-'; } ?>
-                                                    </td>
+                                                    </td>                                                    
                                                 </tr>
                                             <?php } ?>
                                         <?php }else{ ?>
@@ -86,26 +78,10 @@
                                 <span><i><img width="100%" src="<?php echo PUERTO."://".HOST."/imagenes/logo.png"; ?>"></i></span>
                             </div>
                            <div class="row">   
-                              <?php echo $html;?> 
-                              <!--<?php //if (!empty($planes)){ ?>                
-                                <div class="col-md-12">        
-                                  <h3 align="left">&nbsp;Seleccione un plan:</h3>
-                                  <div class="pricingdiv">   
-                                    <?php //echo $planes;?>  
-                                  </div>                                
-                                </div>  
-                              <?php //} ?> 
-                              <?php //if (!empty($avisos)){ ?>     
-                                <div class="col-md-12">        
-                                  <h3 align="left">&nbsp;Seleccione un aviso:</h3>
-                                  <div class="pricingdiv">
-                                    <?php //echo $avisos;?>  
-                                  </div>                                 
-                                </div>
-                              <?php //} ?>-->
+                              <?php echo $html;?>                               
                            </div>
                             <br><br>
-
+ 
                             <!-- Modal -->
                             <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
                               <div class="modal-dialog " role="document">
@@ -131,5 +107,3 @@
         </div>
     </div>
 </div>
-
-        

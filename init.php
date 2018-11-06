@@ -22,7 +22,7 @@ spl_autoload_register('cargarClasesLib', false);
 $GLOBALS['db'] = new Database( DBSERVIDOR, DBUSUARIO, DBCLAVE, DBNOMBRE);
 $GLOBALS['db']->connect();
 
-if(count($_POST) != 0 && $_GET["mostrar"] != "publicar"){ $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); }
+if(count($_POST) != 0 && $_GET["mostrar"] != "publicar" && $_GET["mostrar"] != "oferta"){ $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); }
 if(count($_GET) != 0){ $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING); }
 if(count($_COOKIE) != 0){ $_COOKIE = filter_input_array(INPUT_COOKIE, FILTER_SANITIZE_STRING); }
 

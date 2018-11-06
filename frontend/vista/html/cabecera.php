@@ -159,15 +159,27 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                     <i class="fa fa-home fa-2x"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
                   </li>                            
                 <?php } ?>
-                <?php if (isset($menu["submenu"])){ ?>                            
+                <?php if (isset($menu["submenu_cuentas"])){ ?>                            
                   <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" class="user_icon">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuentas
                       <ul class="dropdown-menu">
-                        <?php foreach($menu["submenu"] as $submenu){ ?>  
-                           <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
+                        <?php foreach($menu["submenu_cuentas"] as $submenu_cuentas){ ?>  
+                           <li><a href="<?php echo $submenu_cuentas['href'];?>"><?php echo $submenu_cuentas['nombre'];?></a></li>
                         <?php } ?>
                       </ul>
-                    </li>                              
+                    </a>
+                  </li>                              
+                <?php } ?>
+                <?php if (isset($menu["submenu"])){ ?>                            
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" class="user_icon">
+                      <ul class="dropdown-menu">
+                        <?php foreach($menu["submenu"] as $submenu){ ?>  
+                            <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
+                        <?php } ?>
+                      </ul>
+                    </a>
+                  </li>                              
                 <?php } ?>
               <?php } ?>
             </ul>

@@ -183,7 +183,7 @@ $('#btn_transfer').on('click', function()
             var p_node = document.createElement('P');
             div_idioma.appendChild(p_node);
             p_node.setAttribute("id", "idioma"+id_idioma);
-            p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close fa-2x icon' id='"+id_idioma+"' onclick='delete_item_selected(this);'></i>";
+            p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close fa-2x icon' id='"+id_idioma+"' onclick='delete_item_selected(this); validarFormulario();'></i>";
             p_node.setAttribute("disabled", "disabled");
             p_node.setAttribute("class", "col-md-5 badge_item listado");
             idioma_selected_select.setAttribute("disabled", "disabled");

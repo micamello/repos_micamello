@@ -48,7 +48,7 @@ class Proceso_Subscripcion{
 	    $GLOBALS['db']->commit();
     	echo "PROCESADO REGISTRO ".$this->procesador->id."<br>";	
       $nombres = $infousuario["nombres"]." ".$infousuario["apellidos"];    
-	    $this->buildCorreo($infousuario["correo"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"]);
+	    $this->buildNotificacion($infousuario["id_usuario"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],2);
 
   	}
   	catch(Exception $e){
@@ -71,9 +71,9 @@ class Proceso_Subscripcion{
 	  return $GLOBALS['db']->insert_id();	  
   }
 
-  public function buildCorreo($correo,$nombres,$plan,$tipousuario,$dominio){  	
-  	$email_subject = "Activación de Subscripción";
-  	$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
+  public function buildNotificacion($id_usuario,$nombres,$plan,$tipousuario,$dominio,$tipo){  	
+  	//$email_subject = "Activación de Subscripción";
+  	$email_body = "Activación de Subscripción<br>Estimado, ".utf8_encode($nombres)."<br>";
     $email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $email_body .= "Por favor de click en este enlace para realizar el tercer formulario "; 
@@ -81,7 +81,8 @@ class Proceso_Subscripcion{
     }else{
       $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
     }  
-    Utils::envioCorreo($correo,$email_subject,$email_body);
+    //Utils::envioCorreo($correo,$email_subject,$email_body);
+    Modelo_Notificacion::insertarNotificacion($id_usuario,$email_body,$tipo);
   }
 
 }

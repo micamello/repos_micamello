@@ -312,44 +312,43 @@
 						
 					</div>
 				</div>
-			<h5 class="text-center">Resultados evaluación</h5>
-			<br><br><br>
-			<?php if(empty($Resultados) && is_array($Resultados)){ ?>
-				<div class="alert alert-info">Estimado usuario. <br>El plan que posee actualmente no permite visualizar datos de la evaluación los postulantes</div>
-			<?php } 
-			else{
-				foreach ($Resultados as $res) {
+
+				<h5 class="text-center">Resultados evaluación</h5>
+				<br><br><br>
+				<?php if(empty($Resultados) && is_array($Resultados)){ ?>
+					<div class="alert alert-info">Estimado usuario. <br>El plan que posee actualmente no permite visualizar datos de la evaluación los postulantes</div>
+				<?php } 
+				else{
+					foreach ($Resultados as $res) {
+						?>
+							<input type="hidden" name="nombres_res" value="<?php echo utf8_encode($res['nombre']) ?>">
+							<input type="hidden" name="valor_res" value="<?php echo $res['valor'] ?>">
+						<?php
+						}
 					?>
-						<input type="hidden" name="nombres_res" value="<?php echo utf8_encode($res['nombre']) ?>">
-						<input type="hidden" name="valor_res" value="<?php echo $res['valor'] ?>">
-					<?php
-					}
-				?>
-			
-				<div class="hidden-xs hidden-sm">
-					<div class="col-md-10 col-md-offset-1">
-					 	<canvas id="myChart"></canvas>
-					</div>
-				</div>
-				<div class="hidden-lg hidden-md">
-				<?php $i = 0; foreach ($Resultados as $res) {
-					$color = ["#1278A2", "#7D4AF2", "#187D22", "#9A3030", "#637103", "#665706", "#716E69", "#256AF6", "#555555", "#075F5A", "#50AF0B"];
-					?>
-						<div class="col-md-6 col-sm-6">
-						<p class="text-center text_progress_bar"><?php echo utf8_encode($res['nombre']) ?></p>
-							<div class="progress">
-							  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo ($res['valor']*100)/25 ?>%; background-color: <?php echo $color[$i]; $i++; ?>;">
-							    <?php echo $res['valor'] ?>
-							  </div>
-							</div>
+				
+					<div class="hidden-xs hidden-sm">
+						<div class="col-md-10 col-md-offset-1">
+						 	<canvas id="myChart"></canvas>
 						</div>
-				<?php
-					}
-				?>
-				</div>
-
-
-			<?php } ?>
+					</div>
+					<div class="hidden-lg hidden-md">
+					<?php $i = 0; foreach ($Resultados as $res) {
+						$color = ["#1278A2", "#7D4AF2", "#187D22", "#9A3030", "#637103", "#665706", "#716E69", "#256AF6", "#555555", "#075F5A", "#50AF0B"];
+						?>
+							<div class="col-md-6 col-sm-6">
+							<p class="text-center text_progress_bar"><?php echo utf8_encode($res['nombre']) ?></p>
+								<div class="progress">
+								  <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: <?php echo ($res['valor']*100)/25 ?>%; background-color: <?php echo $color[$i]; $i++; ?>;">
+								    <?php echo $res['valor'] ?>
+								  </div>
+								</div>
+							</div>
+					<?php
+						}
+					?>
+					</div>
+				<?php } ?>
 			</div>
 		</div>
 

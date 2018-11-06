@@ -128,10 +128,16 @@ RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [
 
 #########################################################################################
 
+#Cuentas
+RewriteRule ^cuentas/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas [L]
+RewriteRule ^cuentas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas&page=$1 [L]
+
+#########################################################################################
+
 #Vacantes
 RewriteRule ^vacantes/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes [L]
 RewriteRule ^vacantes/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&page=$1 [L]
-
+RewriteRule ^vacantes/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&idOferta=$1&page=$2 [L]
 ########################################################################################
 
 #Aspirantes

@@ -28,11 +28,19 @@ class Modelo_UsuarioxNivel{
 
     $result = true;
     $array_session = array();
-    $r = array_diff($data_session, $data_form);
-    if(!empty($r)){
-      $result = $GLOBALS['db']->delete("mfo_usuarioxnivel", 'id_nivelInteres IN('.implode(',', $r).') AND id_usuario = '.$idUsuario.';');
+
+    if(!empty($data_session)){
+
+      $r = array_diff($data_session, $data_form);
+      if(!empty($r)){
+        $result = $GLOBALS['db']->delete("mfo_usuarioxnivel", 'id_nivelInteres IN('.implode(',', $r).') AND id_usuario = '.$idUsuario.';');
+      }
+      $diff_insert = array_diff($data_form, $data_session);
+
+    }else{
+
+      $diff_insert = $data_form;
     }
-    $diff_insert = array_diff($data_form, $data_session);
 
     if(!empty($diff_insert)){
       foreach ($diff_insert as $key => $id) {
