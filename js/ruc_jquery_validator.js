@@ -33,7 +33,7 @@
          if (isNaN(n)) ok=0;
       }
       if (ok==0){
-         crearMensajeError("error_custom_dni", "CI o DNI inválido");
+         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");
          // alert("No puede ingresar caracteres en el número");         
          return false;
       }
@@ -43,7 +43,7 @@
       }
                   
       if (numero.length < 10 ){ 
-      crearMensajeError("error_custom_dni", "Mínimo 10 caracteres");             
+      crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");             
          // alert('El número ingresado no es válido');                  
          return false;
       }
@@ -55,7 +55,7 @@
       /* Los primeros dos digitos corresponden al codigo de la provincia */
       provincia = numero.substr(0,2);      
       if (provincia < 1 || provincia > numeroProvincias){     
-      crearMensajeError("error_custom_dni", "CI o DNI inválido");    
+      crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");    
          // alert('El código de la provincia (dos primeros dígitos) es inválido');
      return false;       
       }
@@ -80,7 +80,7 @@
       /* 6 para sociedades publicas */         
       /* menor que 6 (0,1,2,3,4,5) para personas naturales */ 
       if (d3==7 || d3==8){    
-      crearMensajeError("error_custom_dni", "CI o DNI inválido");       
+      crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");       
          // alert('El tercer dígito ingresado es inválido');                     
          return false;
       }
@@ -139,37 +139,37 @@
       /* ahora comparamos el elemento de la posicion 10 con el dig. ver.*/                         
       if (pub==true){           
          if (digitoVerificador != d9){
-         crearMensajeError("error_custom_dni", "CI o DNI inválido");                          
+         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                          
             // alert('El ruc de la empresa del sector público es incorrecto.');            
             return false;
          }                  
          /* El ruc de las empresas del sector publico terminan con 0001*/         
          if ( numero.substr(9,4) != '0001' ){
-         crearMensajeError("error_custom_dni", "CI o DNI inválido");                    
+         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                    
             // alert('El ruc de la empresa del sector público debe terminar con 0001');
             return false;
          }
       }        
       else if(pri == true){         
          if (digitoVerificador != d10){ 
-         crearMensajeError("error_custom_dni", "CI o DNI inválido");                         
+         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                         
             // alert('El ruc de la empresa del sector privado es incorrecto.');
             return false;
          }         
          if ( numero.substr(10,3) != '001' ){ 
-         crearMensajeError("error_custom_dni", "CI o DNI inválido");                   
+         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                   
             // alert('El ruc de la empresa del sector privado debe terminar con 001');
             return false;
          }
       }      
       else if(nat == true){         
          if (digitoVerificador != d10){ 
-         crearMensajeError("error_custom_dni", "CI o DNI inválido");                         
+         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                         
             // alert('El número de cédula de la persona natural es incorrecto.');
             return false;
          }         
          if (numero.length >10 && numero.substr(10,3) != '001' ){
-         crearMensajeError("error_custom_dni", "CI o DNI inválido");                    
+         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                    
             // alert('El ruc de la persona natural debe terminar con 001');
             return false;
          }

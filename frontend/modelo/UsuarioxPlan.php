@@ -152,6 +152,7 @@ class Modelo_UsuarioxPlan{
     if (empty($id_plan_usuario)) { return false; }    
     return $GLOBALS['db']->execute("UPDATE mfo_usuario_plan SET num_post_rest = num_post_rest + 1 WHERE id_usuario_plan = ".$id_plan_usuario);
   }
+
  
   public static function planesActivosPagados($tipo){
     if (empty($tipo)){ return false; }

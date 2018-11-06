@@ -218,7 +218,7 @@ class Controlador_Plan extends Controlador_Base {
       if (!Utils::upload($_FILES['imagen'],$id_comprobante,PATH_COMPROBANTE,3)){
         throw new Exception("Error al cargar la imagen, por favor intente denuevo");
       }
- 
+
       $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan será aprobado en un máximo de 48 horas";  
       Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
     }

@@ -31,6 +31,7 @@ class Controlador_Aspirante extends Controlador_Base
         $type = Utils::getParam('type', '', $this->data); 
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $vista = Utils::getParam('vista', '1', $this->data);
+        Utils::log("EDER:".$vista);
         $username = Utils::getParam('username', '', $this->data);
         $breadcrumbs = array();
 
@@ -280,7 +281,7 @@ class Controlador_Aspirante extends Controlador_Base
 
             case 'detallePerfil':
             if (Modelo_Usuario::EMPRESA) {
-                $this->perfilAspirante($username, $id_oferta);
+                $this->perfilAspirante($username, $id_oferta, $vista);
             }
             break;
 
@@ -416,7 +417,8 @@ class Controlador_Aspirante extends Controlador_Base
         return $ruta;
     }
 
-    public function perfilAspirante($username, $id_oferta){
+    public function perfilAspirante($username, $id_oferta, $vista){
+        Utils::log($vista);
         $datos = Modelo_Usuario::existeUsuario($username);
         $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
 
@@ -448,6 +450,7 @@ class Controlador_Aspirante extends Controlador_Base
                         "Conf"=>$contacto,
                         "Resultados"=>$array_rasgosxusuario,
                         "asp_sararial"=>$asp_salarial,
+                        "vista"=>$vista
                   );
 
         $tags["template_js"][] = "mic";

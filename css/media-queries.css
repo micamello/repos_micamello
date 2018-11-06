@@ -172,7 +172,7 @@
       color: red;
       font-size: 11px;
       right: 0px
-    }    
+    }   
 }
 
 
@@ -260,6 +260,20 @@
       font-size: 12px;
       text-align: center; 
     }
+
+    .text_form{
+      font-size: 12px;
+      background-color: #FFFFFF;
+      border-radius: 0px;
+      color: #000000;
+      font-weight: 550;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      margin-bottom: 0px;
+    } 
+
+  }
 }
 
 /* 
@@ -354,7 +368,17 @@
       text-align: center; 
     }
 
-    
+    .text_form{
+      font-size: 12px;
+      background-color: #FFFFFF;
+      border-radius: 0px;
+      color: #000000;
+      font-weight: 550;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      margin-bottom: 0px;
+    }
 }
 
 /*Others moviles < 320px*/
@@ -415,7 +439,17 @@
       text-align: center; 
     }
 
-    
+    .text_form{
+      font-size: 12px;
+      background-color: #FFFFFF;
+      border-radius: 0px;
+      color: #000000;
+      font-weight: 550;
+      margin-bottom: 0px;
+      padding-bottom: 0px;
+      padding-top: 0px;
+      margin-bottom: 0px;
+    }  
 }
 
 /*Media queries configurations*/

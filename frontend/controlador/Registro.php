@@ -57,17 +57,22 @@ class Controlador_Registro extends Controlador_Base {
     $iso = SUCURSAL_ISO;
 
     if ( Utils::getParam('register_form') == 1 ){
-
+      Utils::log("tipo_doc:".$_POST['tipo_doc']);
+      Utils::log("dni:".$_POST['cedula']);
+      // exit;
       try{
         if ($_POST['tipo_usuario'] == 1) {
-          $campos = array('correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area_select'=>1,'nivel_interes'=>1);          
+          $campos = array('correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1, 'tipo_doc'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area_select'=>1,'nivel_interes'=>1);          
         }
 
         if ($_POST['tipo_usuario'] == 2) {
-          $campos = array('correo'=>1, 'name_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, "nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0);          
+          $campos = array('correo'=>1, 'name_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1,'ruc'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, "nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0);          
         }
 
+        // Utils::log("eder datops send:".print_r($campos, true));
+        // exit;
         $data = $this->camposRequeridos($campos);
+
 
         // $datousername = Modelo_Usuario::existeUsuario($data["username"]);
         // if (!empty($datousername)){
@@ -89,22 +94,28 @@ class Controlador_Registro extends Controlador_Base {
         $passwordValido = Utils::valida_password($data["password"]);
         if ($passwordValido == false){
           throw new Exception("Ingrese una contraseña con el formato especificado");
-        }              
+        }
 
-        if (method_exists(new Utils, 'validar_'.$iso)) {
-            $function = 'validar_'.$iso;
-            $validaCedula = Utils::$function($data['cedula']);
-              if ($validaCedula == false){
-                throw new Exception("El DNI ingresado no es válido ruc");
+        if ($_POST['tipo_usuario'] == 1) {
+          if($_POST['tipo_doc'] == 2){ 
+          // Utils::log("valida la cédula");    
+            if (method_exists(new Utils, 'validar_'.$iso)) {
+                $function = 'validar_'.$iso;
+                $validaCedula = Utils::$function($data['cedula']);
+                  if ($validaCedula == false){
+                    throw new Exception("El DNI ingresado no es válido ruc");
+                  }
               }
+            else
+            {
+              $validaCedula = Utils::valida_telefono($data['cedula']);
+              if ($validaCedula == false){
+                  throw new Exception("El DNI ingresado no es válido"); 
+                  }   
+            }
           }
-          else
-          {
-            $validaCedula = Utils::valida_telefono($data['cedula']);
-            if ($validaCedula == false){
-                throw new Exception("El DNI ingresado no es válido"); 
-                }   
-          }
+        }
+        // exit;
 
         $correoValido = Utils::es_correo_valido($data["correo"]);
         if ($correoValido == false){

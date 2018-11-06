@@ -12,10 +12,33 @@
 								<img class="perfil_photo_user" src="<?php echo Modelo_Usuario::obtieneFoto($infoUsuario['id_usuario']) ?>">
 							</div>
 						</div>
+
 						<h3 class="text-center">
-							<?php echo ucfirst(utf8_encode($infoUsuario['nombres']." ".$infoUsuario['apellidos'])) ?>
-							<h5><b>Aspiración salarial:</b> <?php echo SUCURSAL_MONEDA." ".number_format($asp_sararial['asp_salarial'], 2) ?></h5>
-							<h5><b>Nacionalidad:</b> <?php echo utf8_encode($infoUsuario['nacionalidad']);?></h5>
+							<?php echo ucfirst(utf8_encode($infoUsuario['nombres']." ".$infoUsuario['apellidos']));
+								if($vista != 2){
+							?>
+								<h5><b>Aspiración salarial:</b> 
+							<?php 
+								if ((!(empty($asp_sararial['asp_salarial'])))) {
+									echo SUCURSAL_MONEDA." ".number_format($asp_sararial['asp_salarial'], 2);
+								}
+								else{
+									echo "-------";
+								}
+							 }
+							 ?>
+							</h5>
+							<h5><b>Nacionalidad:</b>
+								<?php 
+									if (!empty($infoUsuario['nacionalidad'])) {
+										echo utf8_encode($infoUsuario['nacionalidad']);
+									}
+									else{
+
+										echo "-------";
+									}
+								?>
+							</h5>
 							<br>
 						</h3>
 						<div class="">

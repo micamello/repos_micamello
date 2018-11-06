@@ -300,7 +300,7 @@
 					<span style="font-size: 17px;">Aspirantes Postulados</span>
 				<?php }else{ ?>
 					<span style="font-size: 17px;">Candidatos Registrados en la plataforma</span>
-				<?php } ?>
+				<?php echo "Eder: ". $vista; } ?>
 			</b>
 			<br/><br/>
 			<div id="busquedas" class='container-fluid'>
@@ -361,7 +361,7 @@
 							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
 
 							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
-							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
+							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
 
 							            		<td data-title="Edad: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $a['edad']; ?></td>
 												<?php if($vista == 1){ ?>

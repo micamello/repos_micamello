@@ -83,9 +83,8 @@ class Controlador_Publicar extends Controlador_Base {
           $GLOBALS['db']->beginTrans();
           self::guardarPublicacion($data, $data_idiomas, $idusu);
           $GLOBALS['db']->commit();
-
-          /*unset($_SESSION['mfo_datos']['planes']);
-          $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);*/
+          unset($_SESSION['mfo_datos']['planes']);
+          $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);
 
           $_SESSION['mostrar_exito'] = "La oferta se ha publicado correctamente";
 

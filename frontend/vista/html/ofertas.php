@@ -206,7 +206,13 @@
 														{
 															echo '<h5 class="empresa"><i>Nombre de la empresa - confidencial</i></h5>';
 														} 
-												} ?>
+												}
+
+												if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $vista == 'cuentas'){
+
+													echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
+												}
+												?>
 
 												<b style='color: black;'><?php echo $o['titulo']; ?></b>  
 												<?php 

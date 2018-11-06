@@ -59,6 +59,7 @@ $('#provincia_of').change(function()
             dataType:'json',
             success:function(data){
                 $('#ciudad_of').html('<option value="">Selecciona una ciudad</option>');
+                console.log(data);
                 $.each(data, function(index, value) {
                     $('#ciudad_of').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
 
@@ -200,9 +201,13 @@ $('#btn_transfer').on('click', function()
             listado.innerHTML = "";
             var publicar_btn = document.getElementById("boton");
             var errors = document.getElementsByClassName("form-group has-error has-danger");
-
+            // $("#boton").on("click", function(e){
+            //     e.preventDefault();
+            // });
+            // publicar_btn.setAttribute("class", "btn btn-success eder");
             if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "") && ($('select').filter('[required]:visible').val() != "")) {
                 publicar_btn.setAttribute("class", "btn btn-success");
+                console.log("Habilitando el boton");
             }  
         }
 
