@@ -222,7 +222,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                 if($vista == 1){
 
-                    $subempresas = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario); 
+                    $subempresas = $_SESSION['mfo_datos']['subempresas'];
                     $array_empresas = explode(",",$subempresas);
 
                     if(isset($datosOfertas[0]['id_empresa']) && in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
@@ -300,7 +300,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
 
-                $subempresas = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario);  
+                $subempresas = $_SESSION['mfo_datos']['subempresas'];  
                 $array_empresas = explode(",",$subempresas);
                 if($vista == 1){
 

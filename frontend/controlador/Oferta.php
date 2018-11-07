@@ -97,10 +97,7 @@ class Controlador_Oferta extends Controlador_Base{
                     
                         $_SESSION['mfo_datos']['Filtrar_ofertas']['O'] = $id; 
                     }
-                    /*else if($letra == 'F' && $type == 1){
-                    
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['F'] = $id; 
-                    }*/
+
                     else if($letra == 'Q' && $type == 1){
                         $_SESSION['mfo_datos']['Filtrar_ofertas']['Q'] = $id;
                         $array_datos['Q'] = array('id'=>$id,'nombre'=>$id);
@@ -130,9 +127,7 @@ class Controlador_Oferta extends Controlador_Base{
                     if($letra == 'O'){
                         $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                     }
-                    /*if($letra == 'F'){
-                        $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                    }*/
+
                     if($letra == 'Q'){
                         $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                     }
@@ -140,8 +135,7 @@ class Controlador_Oferta extends Controlador_Base{
             }
 
             if($vista == 'cuentas'){
-              $idUsuario = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario); 
-              //$ofertas = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$subempresas,false,SUCURSAL_PAISID);
+              $idUsuario = $_SESSION['mfo_datos']['subempresas'];
             }
 
             $ofertas = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
@@ -163,7 +157,6 @@ class Controlador_Oferta extends Controlador_Base{
                 'autopostulaciones_restantes'=>$autopostulaciones_restantes,
                 'link'=>$link,
                 'vista'=>$vista,
-                //'ofertasSubempresas' => $ofertasSubempresas,
                 'aspirantesXoferta'=>$aspirantesXoferta
             );
 
@@ -194,7 +187,7 @@ class Controlador_Oferta extends Controlador_Base{
 
               if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
 
-                $subempresas = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario); 
+                $subempresas = $_SESSION['mfo_datos']['subempresas']; 
 
                 if($subempresas != ''){
                   $idUsuario = $idUsuario.",".$subempresas;
@@ -243,10 +236,7 @@ class Controlador_Oferta extends Controlador_Base{
               //solo empresas
               if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA ){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
-              }/*else{
-                $subempresas = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario); 
-                $ofertasSubempresas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$subempresas,false,SUCURSAL_PAISID);
-              }*/
+              }
 
               if (Utils::getParam('guardarEdicion') == 1) {
 
@@ -270,7 +260,6 @@ class Controlador_Oferta extends Controlador_Base{
                   'ofertas'       => $ofertas,
                   'page' => $page,
                   'vista'=>$vista,
-                  //'subempresas' => $subempresas,
                   'ofertasSubempresas' => $ofertasSubempresas,
                   'aspirantesXoferta'=>$aspirantesXoferta
               );

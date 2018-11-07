@@ -96,7 +96,7 @@ class Vista {
       }
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
 
-        $subempresas = Modelo_Usuario::obtieneHerenciaEmpresa($_SESSION['mfo_datos']['usuario']['id_usuario']); 
+        $subempresas = $_SESSION['mfo_datos']['subempresas'];
 
         if($subempresas != ''){
           $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/adminCuentas/", "nombre"=>"Administración");
