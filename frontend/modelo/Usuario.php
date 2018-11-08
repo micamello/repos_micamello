@@ -892,5 +892,33 @@ WHERE
     while(!empty($padre["padre"]));    
     return $empHijas;
   }
+
+  #OBTIENE LAS EMPRESAS HIJAS Y SUS PLANES
+  public static function obtieneSubempresasYplanes($padre){
+
+    if (empty($padre)) { return false; }
+
+      $sql = "SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = ? AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;";
+    return $GLOBALS['db']->auto_array($sql,array($padre),true);
+  }
+
+  #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
+  public static function obtieneInfoPlan($idplan){
+
+    if (empty($idplan)) { return false; }
+
+    $sql = "SELECT num_publicaciones_rest AS numero_postulaciones, porc_descarga AS numero_descarga
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = ? AND ep.estado = 1 AND p.num_cuenta > 0;";
+    return $info = $GLOBALS['db']->auto_array($sql,array($idplan));
+
+  }
+
 }  
 ?>

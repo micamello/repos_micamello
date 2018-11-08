@@ -90,9 +90,9 @@ RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
 RewriteRule ^planesUsuario/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario [L]
 RewriteRule ^planesUsuario/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario&desactivarPlan=$1 [L]
 
+######################################################################################
 
 #ofertas
-
 RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta [L]
 RewriteRule ^oferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta&page=$1 [L]
 RewriteRule ^detalleOferta/([a-z]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
@@ -129,6 +129,7 @@ RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [
 #########################################################################################
 
 #Cuentas
+RewriteRule ^adminEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresas [L]
 RewriteRule ^cuentas/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas [L]
 RewriteRule ^cuentas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas&page=$1 [L]
 

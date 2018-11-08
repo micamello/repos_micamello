@@ -154,7 +154,7 @@ class Modelo_UsuarioxPlan{
   }
 
  
-  public static function planesActivosPagados($tipo){
+  public static function planesActivosPagados($tipo,$idEmpresa=false){
     if (empty($tipo)){ return false; }
     if ($tipo == Modelo_Usuario::CANDIDATO){        
       $sql = "SELECT up.id_usuario_plan, up.id_usuario, up.fecha_caducidad, p.nombre, up.fecha_compra
@@ -168,8 +168,11 @@ class Modelo_UsuarioxPlan{
                      p.nombre, em.fecha_compra
               FROM mfo_empresa_plan em
               INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
-              WHERE em.estado = 1 AND em.fecha_caducidad IS NOT NULL
-              ORDER BY em.id_empresa";
+              WHERE em.estado = 1 AND em.fecha_caducidad IS NOT NULL";
+      if (!empty($idEmpresa)){ 
+        $sql .= " AND p.num_cuenta > 0 AND em.id_empresa = ".$idEmpresa;
+      }
+      $sql .= " ORDER BY em.id_empresa";
     }
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }

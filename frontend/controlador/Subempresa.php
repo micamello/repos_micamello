@@ -1,6 +1,5 @@
 <?php
-<?php
-class Controlador_Aspirante extends Controlador_Base
+class Controlador_Subempresa extends Controlador_Base
 {
 
     public function __construct()
@@ -16,9 +15,9 @@ class Controlador_Aspirante extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
-        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
+        /*if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
-        }
+        }*/
 
         //Valida los permisos 
         /*if(isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos')){
@@ -27,7 +26,9 @@ class Controlador_Aspirante extends Controlador_Base
 
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
-        $page = Utils::getParam('page', '1', $this->data);
+        $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+        $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario);
+        /*$page = Utils::getParam('page', '1', $this->data);
         $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
         $type = Utils::getParam('type', '', $this->data); 
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
@@ -364,102 +365,13 @@ class Controlador_Aspirante extends Controlador_Base
 
                 Vista::render('aspirantes', $tags);
             break;
-        }
+        }*/
+
+        $tags = array(
+            //'breadcrumbs'=>$breadcrumbs,
+            'subempresas' => $subempresas,
+        );
+        Vista::render('subempresas', $tags);
     }
-
-
-    public static function calcularRuta($ruta,$letraDescartar){
-
-        foreach ($_SESSION['mfo_datos']['Filtrar_aspirantes'] as $key => $v) {
-
-            if($letraDescartar != $key){
-
-                if($key == 'F' && $v != 0){
-                    $ruta .= 'F'.$v.'/';
-                }
-                if($key == 'A' && $v != 0){
-                    $ruta .= 'A'.$v.'/';
-                }
-                if($key == 'P' && $v != 0){
-                    $ruta .= 'P'.$v.'/';
-                }
-                if($key == 'N' && $v != 0){
-                    $ruta .= 'N'.$v.'/';
-                }
-                if($key == 'U' && $v != 0){
-                    $ruta .= 'U'.$v.'/';
-                }
-                if($key == 'S' && $v != 0){
-                    $ruta .= 'S'.$v.'/';
-                }   
-                if($key == 'E' && $v != 0){
-                    $ruta .= 'E'.$v.'/';
-                } 
-                if($key == 'D' && $v != 0){
-                    $ruta .= 'D'.$v.'/';
-                }  
-                if($key == 'T' && $v != 0){
-                    $ruta .= 'T'.$v.'/';
-                }  
-                if($key == 'L' && $v != 0){
-                    $ruta .= 'L'.$v.'/';
-                }  
-                if($key == 'V' && $v != 0){
-                    $ruta .= 'V'.$v.'/';
-                }   
-                if($key == 'G' && $v != 0){
-                    $ruta .= 'G'.$v.'/';
-                }
-                if($key == 'Q' && ($v != 0 || $v != '')){
-                    $ruta .= 'Q'.$v.'/';
-                }
-            }
-        }
-        return $ruta;
-    }
-
-    public function perfilAspirante($username, $id_oferta, $vista){
-        Utils::log($vista);
-        $datos = Modelo_Usuario::existeUsuario($username);
-        $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
-
-        $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
-        $contacto = array();
-        $array_rasgosxusuario = array();
-
-        if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-                $contacto = ["correo"=>Utils::ocultarEmail($info_usuario['correo']), "telefono"=>Utils::ocultarCaracteres($info_usuario['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($info_usuario['dni'], 0, 0)];
-            }
-            else{
-                $contacto = ["correo"=>$info_usuario['correo'], "telefono"=>$info_usuario['telefono'], "dni"=>$info_usuario['dni']];
-            }
-
-        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
-                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($info_usuario['id_usuario']);
-                $resultados = array();
-                $rasgoxtest = array();
-                foreach ($cuestionariosUsuario as $cuestionarios) {
-                  $test = "Test".$cuestionarios['id_cuestionario'];
-                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($info_usuario['id_usuario'], $cuestionarios['id_cuestionario']);
-                  foreach ($rasgoxtest as $res) {
-                    array_push($array_rasgosxusuario, array("nombre"=>$res['nombre'], "valor"=>$res['valor']));
-                  }
-                }
-            }
-
-        $tags = array("infoUsuario"=>$info_usuario,
-                        "Conf"=>$contacto,
-                        "Resultados"=>$array_rasgosxusuario,
-                        "asp_sararial"=>$asp_salarial,
-                        "vista"=>$vista
-                  );
-
-        $tags["template_js"][] = "mic";
-        $tags["template_js"][] = "Chart.min";
-        Vista::render('perfilAspirante', $tags);
-    }
-
-    // informePersonalidad
-
 }
 ?>
