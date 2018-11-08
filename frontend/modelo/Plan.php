@@ -5,13 +5,12 @@ class Modelo_Plan{
   const EMPRESA = 2;
   const PAQUETE = 2;
   const AVISO = 1;
-   
   /*costo=false => todos sin validar el costo
     costo=1 => los que tengan precio 0
     costo=2 => los que no tenga precio 0*/
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
-    if (empty($tipousuario)||empty($sucursal)){ return false; }
-    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.extension, 
+  	if (empty($tipousuario)||empty($sucursal)){ return false; }
+    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.extension, p.num_cuenta, 
                    IF(p.promocional,p.prom_codigo_paypal,p.codigo_paypal) AS codigo_paypal,
                    IF(p.promocional,p.prom_num_post,p.num_post) AS num_post, 
                    IF(p.promocional,p.prom_costo,p.costo) AS costo, 
@@ -36,7 +35,6 @@ class Modelo_Plan{
     $sql .= "GROUP BY p.id_plan ORDER BY p.costo";
     return $GLOBALS['db']->auto_array($sql,array($tipousuario,$sucursal),true);
   }
- 
   public static function listadoPlanesUsuario($idUsuario,$tipo){
     if (empty($idUsuario) || empty($tipo)){ return false; }
     if ($tipo == Modelo_Usuario::CANDIDATO){
@@ -102,12 +100,10 @@ class Modelo_Plan{
     }
     return $GLOBALS['db']->auto_array($sql,array($id));
   }
- 
   public static function obtienePromocionales(){
     $sql = "SELECT * FROM mfo_plan WHERE estado = 1 AND promocional = 1";
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
- 
   public static function modificarPromocion($idplan){
     if (empty($idplan)){ return false; }
     $data_update = array("fecha_inicio"=>"null",

@@ -44,7 +44,7 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 
 #imagenes del profile
 RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
-RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&archivo=$2 [L]
+RewriteRule ^imagenes/usuarios/([a-z]+)/([a-z0-9]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&param1=$2&param2=$3 [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
 #login
 RewriteRule ^login/?$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
@@ -83,7 +83,8 @@ RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
 ######################################################################################
 
 #planes
-RewriteRule ^compraplan/paypal/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=paypal [L]
+RewriteRule ^compraplan/exito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=exito [L]
+RewriteRule ^compraplan/error/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=error [L]
 RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
 RewriteRule ^compraplan/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra&idplan=$1 [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]

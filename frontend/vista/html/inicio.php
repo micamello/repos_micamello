@@ -42,10 +42,10 @@
                 <div class="row">
                     <div class="container">
                         <div class="col-md-6">
-                            <span style="font-size: 30px; color: white; text-align: center;"><b>Quito: </b>026055990 <i class="fa fa-phone"></i></span>
+                            <span style="font-size: 30px; color: white; text-align: center;"><b>Quito: </b>02&nbsp;6055990 <i class="fa fa-phone"></i></span>
                         </div>
                         <div class="col-md-6">
-                            <span style="font-size: 30px; color: white; text-align: center;"><b>Guayaquil: </b>04 6060111 <i class="fa fa-phone"></i></span>
+                            <span style="font-size: 30px; color: white; text-align: center;"><b>Guayaquil: </b>04&nbsp;6060111 <i class="fa fa-phone"></i></span>
                         </div>
                     </div>
                 </div>
@@ -220,13 +220,18 @@
     <div class="carousel slide col-md-12" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel3">
       <div class="carousel-inner">
         <?php 
-            $cont = 1;
-            foreach($arrauspiciante as $auspiciante) { 
+        $cont = 1;
+        if (count($arrauspiciante) > 1){
+          foreach($arrauspiciante as $auspiciante) {         
         ?>
             <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
               <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php echo $auspiciante['url']; ?>"><img style="max-width:100%; width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a></div>
             </div>
-        <?php $cont++; } ?>
+        <?php 
+          $cont++; 
+          }
+        } 
+        ?>
       </div>
     </div>                
   </div>

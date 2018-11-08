@@ -15,7 +15,7 @@ class Proceso_Subscripcion{
     try{	
       $GLOBALS['db']->beginTrans();
 
-	    $infousuario = Modelo_Usuario::busquedaPorId($this->objUsuario->id,true);
+	    $infousuario = Modelo_Usuario::busquedaPorId($this->objUsuario->id,$this->objUsuario->tipo);
 	    $infoplan = Modelo_Plan::busquedaXId($this->idplan,true);
       $infosucursal = Modelo_Sucursal::consultaDominio($infoplan["id_sucursal"]); 
 
@@ -35,7 +35,8 @@ class Proceso_Subscripcion{
       }
 	  	
       $id_comprobante = $this->guardarComprobante();      
-      if (!Modelo_UsuarioxPlan::guardarPlan($this->objUsuario->id,$this->idplan,$infoplan["num_post"],$infoplan["duracion"],$id_comprobante)){
+      if (!Modelo_UsuarioxPlan::guardarPlan($this->objUsuario->id,$this->objUsuario->tipo,$this->idplan,$infoplan["num_post"],
+                                            $infoplan["duracion"],$infoplan["porc_descarga"],$id_comprobante)){
         throw new Exception("Error en crear el plan");	
       }	      
 	    
@@ -47,9 +48,8 @@ class Proceso_Subscripcion{
 	    
 	    $GLOBALS['db']->commit();
     	echo "PROCESADO REGISTRO ".$this->procesador->id."<br>";	
-      $nombres = $infousuario["nombres"]." ".$infousuario["apellidos"];    
-	    $this->buildNotificacion($infousuario["id_usuario"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],2);
-
+      $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
+	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"]);
   	}
   	catch(Exception $e){
   	  $GLOBALS['db']->rollback();
@@ -62,27 +62,31 @@ class Proceso_Subscripcion{
 
   public function guardarComprobante(){
     if (!Modelo_Comprobante::guardarComprobante($this->procesador->trans,$this->objUsuario->nombres,$this->objUsuario->correo,
-        	                                      $this->objUsuario->telefono,$this->objUsuario->dni,$this->objUsuario->ciudad,
+        	                                      $this->objUsuario->telefono,$this->objUsuario->dni,$this->objUsuario->tipodoc,
         	                                      Modelo_Comprobante::METODO_PAYPAL,'',$this->procesador->monto,
-        	                                      $this->objUsuario->id,$this->idplan,$this->objUsuario->direccion,
+        	                                      $this->objUsuario->id,$this->idplan,$this->objUsuario->direccion,$this->objUsuario->tipo,
                                                 Modelo_Comprobante::PAGO_VERIFICADO)){
       throw new Exception("Error al ingresar el comprobante transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan);
     }  
 	  return $GLOBALS['db']->insert_id();	  
   }
 
-  public function buildNotificacion($id_usuario,$nombres,$plan,$tipousuario,$dominio,$tipo){  	
-  	//$email_subject = "Activación de Subscripción";
-  	$email_body = "Activación de Subscripción<br>Estimado, ".utf8_encode($nombres)."<br>";
+  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio){  	
+  	$email_subject = "Activación de Subscripción";    
+  	$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
     $email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
+    $notif_body = $email_body;
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $email_body .= "Por favor de click en este enlace para realizar el tercer formulario "; 
       $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollo/cuestionario/'>click aqu&iacute;</a> <br>";
+      $notif_url = "cuestionario";
     }else{
       $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
+      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollo/publicar/'>click aqu&iacute;</a> <br>";
+      $notif_url = "publicar";
     }  
-    //Utils::envioCorreo($correo,$email_subject,$email_body);
-    Modelo_Notificacion::insertarNotificacion($id_usuario,$email_body,$tipo);
+    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,$notif_url);
+    Utils::envioCorreo($correo,$email_subject,$email_body);
   }
 
 }

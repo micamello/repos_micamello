@@ -62,7 +62,6 @@ class Controlador_Plan extends Controlador_Base {
  
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
- 
     $tags = self::mostrarDefault(2);    
     $tags["show_banner"] = 1;
     $tags["planUsuario"] = $planUsuario;
@@ -74,7 +73,6 @@ class Controlador_Plan extends Controlador_Base {
   public function mostrarDefault($tipo){
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
     $sucursal = SUCURSAL_ID;           
- 
     if ($tipousu == Modelo_Usuario::CANDIDATO){
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,$sucursal);       
     }
@@ -125,9 +123,9 @@ class Controlador_Plan extends Controlador_Base {
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"])){
           throw new Exception("Error al registrar la subscripción, por favor intente denuevo");   
         }  
-         
+        
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
- 
+
         if ($tipousu == Modelo_Usuario::CANDIDATO){
           $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede postular a una oferta"; 
           $this->redirectToController('oferta');
@@ -148,7 +146,6 @@ class Controlador_Plan extends Controlador_Base {
         $tags["template_js"][] = "validator";
         $tags["template_js"][] = "mic";
         $tags["template_js"][] = "metodospago";              
- 
         Vista::render('metodos_pago', $tags);      
       }
        
@@ -187,7 +184,6 @@ class Controlador_Plan extends Controlador_Base {
       if (!Utils::valida_telefono($data["telefono"])){
         throw new Exception("Número de teléfono no es válido");
       }
-                         
       if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
         if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)) {
           $function = 'validar_'.SUCURSAL_ISO;
@@ -197,7 +193,6 @@ class Controlador_Plan extends Controlador_Base {
           }
         }
       }
-             
       if(!isset($_FILES['imagen'])){
         throw new Exception("Debe subir una imagen con formato jpg o png y menor a 1 MB");         
       } 
@@ -227,7 +222,6 @@ class Controlador_Plan extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.$data["idplan"].'/');             
     }     
   }
- 
   public function resultado(){
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];

@@ -32,7 +32,8 @@ class Controlador_Login extends Controlador_Base {
           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
             throw new Exception("Error en el sistema, por favor intente nuevamente");
           }                                 
-          self::registroSesion($usuario);                   
+          self::registroSesion($usuario);     
+          Utils::log("SESSION ".print_r($_SESSION,true));              
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
@@ -68,25 +69,30 @@ class Controlador_Login extends Controlador_Base {
     if (!empty($planesactivos) && is_array($planesactivos)){
       $_SESSION['mfo_datos']['planes'] = $planesactivos; 
     }
- 
     if ($usuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
       $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
       $usuarioxnivel = Modelo_UsuarioxNivel::obtieneListado($usuario["id_usuario"]);
       $infohv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);
-       
+      
       if (!empty($usuarioxarea) && is_array($usuarioxarea)){
         $_SESSION['mfo_datos']['usuarioxarea'] = $usuarioxarea; 
       }
- 
+
       if (!empty($usuarioxnivel) && is_array($usuarioxnivel)){
         $_SESSION['mfo_datos']['usuarioxnivel'] = $usuarioxnivel; 
       }
- 
+
       if (!empty($infohv) && is_array($infohv)){
         $_SESSION['mfo_datos']['infohv'] = $infohv; 
       }
-    }    
-     
+    }  
+    else{      
+      $hijos = Modelo_Usuario::obtieneHerenciaEmpresa($usuario["id_usuario"]);
+      if (!empty($hijos)){
+        $_SESSION['mfo_datos']['subempresas'] = $hijos;
+      }      
+    }  
+    
     ini_set("session.gc_maxlifetime", 14400000000000);        
     session_write_close();  
   }

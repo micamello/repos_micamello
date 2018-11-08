@@ -97,7 +97,7 @@
 
 if(isset($_SESSION['mfo_datos']['usuario'])){
 
- $notificaciones = Modelo_Notificacion::notificacionxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],Modelo_Notificacion::WEB);
+ $notificaciones = Modelo_Notificacion::notificacionxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
 
  if(!empty($notificaciones)){  ?>
 
