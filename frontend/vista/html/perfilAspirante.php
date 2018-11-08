@@ -338,7 +338,7 @@
 			<h5 class="text-center">Resultados evaluación</h5>
 			<br><br><br>
 			<?php if(empty($Resultados) && is_array($Resultados)){ ?>
-				<div class="alert alert-info">Estimado usuario. <br>El plan que posee actualmente no permite visualizar datos de la evaluación los postulantes</div>
+				<div class="alert alert-info">Estimado usuario. <br>El plan que posee actualmente no permite visualizar datos de la evaluación a los postulantes</div>
 			<?php } 
 			else{
 				foreach ($Resultados as $res) {

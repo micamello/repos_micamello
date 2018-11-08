@@ -7,7 +7,6 @@ class Controlador_Inicio extends Controlador_Base {
   }
   
   public function construirPagina(){
-
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID);
@@ -35,8 +34,7 @@ class Controlador_Inicio extends Controlador_Base {
 
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
-      case 'buscaCorreo':
-        // Utils::log("eder:".$opcion);
+      case 'buscaCorreo':        
         $correo = Utils::getParam('correo', '', $this->data);
         $datocorreo = Modelo_Usuario::existeCorreo($correo);
         Vista::renderJSON(array("respcorreo"=>$datocorreo));
@@ -46,7 +44,7 @@ class Controlador_Inicio extends Controlador_Base {
         $datodni = Modelo_Usuario::existeDni($dni);
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
-      default:
+      default:        
         Vista::render('inicio', $tags);
       break;
     }

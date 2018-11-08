@@ -112,29 +112,41 @@ function pass_hidden(obj){
 //   })
 // }
 
-function crearMensajeError($id_div_error, $mensaje_error){
-    var nodo_div = document.getElementById($id_div_error);
-    var p_node = document.createElement("P");
-    p_node.setAttribute("class", "list-unstyled msg_error");
-     p_node.setAttribute("id", "p_node_error");
-    var p_text = document.createTextNode($mensaje_error);
-    p_node.appendChild(p_text);
-    nodo_div.appendChild(p_node); 
+function colocaError(campo, id, mensaje,btn){
+
+    nodo = document.getElementById(campo);
+    nodo.innerHTML = '';
+    var elem1 = document.createElement('P');
+    var t = document.createTextNode(mensaje); 
+    elem1.appendChild(t);
+
+    var elem2 = document.createElement("P");             
+    elem2.classList.add('list-unstyled');
+    elem2.classList.add('msg_error');
+    elem2.appendChild(elem1); 
+
+    elem2.appendChild(elem1); 
+    nodo.appendChild(elem2); 
+
+    $("#"+id).addClass('has-error');
+
+    $("#"+btn).attr({
+        'disabled': 'disabled',
+    });
+ 
+    $("#"+btn).addClass('disabled');
+    $("#"+btn).attr('disabled', 'disabled');
+
+    if(document.getElementById('form_paypal')){
+      document.getElementById('form_paypal').action = '#';
+    }
 }
 
-function eliminarMensajeError($id_div_error){
-    var nodo_div = document.getElementById($id_div_error);
-    nodo_div.innerHTML = "";
-}
+function quitarError(campo,id){
 
-// if (document.getElementById("dni")) {
-//   var host = window.location.hostname;
-//   $("#dni").on("blur", function(){
-//     //if (host == 'localhost') {
-//       validarDocumento(this);
-//     //}
-//   })
-// }
+    document.getElementById(campo).innerHTML = '';
+    $("#"+id).removeClass('has-error');
+}
 
 $(document).ready(function(){
   if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){

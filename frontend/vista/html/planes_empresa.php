@@ -26,11 +26,25 @@
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
                     if ($listadoAcciones[$key] == "publicarOferta"){
-                      $permiso = str_replace('NRO',$gratuito["num_post"],$permiso);
+                      if ($gratuito["num_post"] == -1){
+                        $permiso = "Publicaciones ilimitadas";
+                      }
+                      else{
+                        $permiso = str_replace('NRO',$gratuito["num_post"],$permiso);
+                        $permiso .= ($gratuito["num_post"] > 1) ? "ones" : "&oacute;n";
+                      }                      
+                    }
+                    if ($listadoAcciones[$key] == "adminEmpresas"){
+                      $permiso = str_replace('NRO',$gratuito["num_cuenta"],$permiso);
                     }  
                     $permisos_grat .= utf8_encode(trim($permiso)).'||';
                   }
-                  $text_publicacion = ($gratuito["num_post"] > 1) ? "publicaciones" : "publicaci&oacute;n";                      
+                  if ($gratuito["num_post"] == -1){
+                    $text_publicacion = "publicaciones ilimitadas";
+                  }
+                  else{
+                    $text_publicacion = ($gratuito["num_post"] > 1) ? $gratuito["num_post"]."&nbsp;publicaciones" : $gratuito["num_post"]."&nbsp;publicaci&oacute;n";                      
+                  }                  
                   $opc_select .= '<option value="'.$gratuito["id_plan"].'">'.$gratuito["nombre"].'&nbsp;-&nbsp;'.$gratuito["num_post"].'&nbsp;'.$text_publicacion.'</option>';
                   ?>
                   <input type="hidden" id="gratpermiso_<?php echo $gratuito["id_plan"];?>" value="<?php echo $permisos_grat;?>">  
@@ -77,12 +91,26 @@
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
                     if ($listadoAcciones[$key] == "publicarOferta"){
-                      $permiso = str_replace('NRO',$plan["num_post"],$permiso);
+                      if ($plan["num_post"] == -1){
+                        $permiso = "Publicaciones ilimitadas";
+                      } 
+                      else{
+                        $permiso = str_replace('NRO',$plan["num_post"],$permiso);
+                        $permiso .= ($plan["num_post"] > 1) ? "ones" : "&oacute;n";
+                      }
+                    }
+                    if ($listadoAcciones[$key] == "adminEmpresas"){
+                      $permiso = str_replace('NRO',$plan["num_cuenta"],$permiso);
                     }  
                     $permisos_plan .= utf8_encode(trim($permiso)).'||';
                   }     
-                  $text_publicacion = ($plan["num_post"] > 1) ? "publicaciones" : "publicaci&oacute;n";               
-                  $opc_select .= '<option value="'.$plan["id_plan"].'">'.$plan["nombre"].'&nbsp;-&nbsp;'.$plan["num_post"].'&nbsp;'.$text_publicacion.'</option>';
+                  if ($plan["num_post"] == -1){
+                    $text_publicacion = "publicaciones ilimitadas";
+                  } 
+                  else{               
+                    $text_publicacion = ($plan["num_post"] > 1) ? $plan["num_post"]."&nbsp;publicaciones" : $plan["num_post"]."publicaci&oacute;n";
+                  }
+                  $opc_select .= '<option value="'.$plan["id_plan"].'">'.$plan["nombre"].'&nbsp;-&nbsp;'.$text_publicacion.'</option>';
                   ?>
                   <input type="hidden" id="planpermiso_<?php echo $plan["id_plan"];?>" value="<?php echo $permisos_plan;?>">
                 <?php } ?>
@@ -102,7 +130,8 @@
                   <?php } ?>  
                   <div id="planpermisos"></div>                    
                   <li>
-                    <h1 id="plancosto"><span class="subscript"></span></h1>
+                    <h1 id="plancosto"></h1>
+                    <h6><small>(El precio incluye IVA)</small></h6>
                     <a class="pricebutton" onclick="buttonplan();"><span class="icon-tag"></span> Suscribirse</a>
                   </li>
                 </ul>                                    
@@ -128,12 +157,26 @@
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
                     if ($listadoAcciones[$key] == "publicarOferta"){
-                      $permiso = str_replace('NRO',$aviso["num_post"],$permiso);
+                      if ($aviso["num_post"] == -1){
+                        $permiso = "Publicaciones ilimitadas";
+                      }
+                      else{
+                        $permiso = str_replace('NRO',$aviso["num_post"],$permiso);
+                        $permiso .= ($aviso["num_post"] > 1) ? "ones" : "&oacute;n";
+                      }                      
                     }  
+                    if ($listadoAcciones[$key] == "adminEmpresas"){
+                      $permiso = str_replace('NRO',$aviso["num_cuenta"],$permiso);
+                    }
                     $permisos_aviso .= utf8_encode(trim($permiso)).'||';
                   }       
-                  $text_publicacion = ($aviso["num_post"] > 1) ? "publicaciones" : "publicaci&oacute;n";               
-                  $opc_select .= '<option value="'.$aviso["id_plan"].'">'.$aviso["nombre"].'&nbsp;-&nbsp;'.$aviso["num_post"].'&nbsp;'.$text_publicacion.'</option>';
+                  if ($aviso["num_post"] == -1){
+                    $text_publicacion = "publicaciones ilimitadas"; 
+                  }
+                  else{
+                    $text_publicacion = ($aviso["num_post"] > 1) ? $aviso["num_post"]."&nbsp;publicaciones" : $aviso["num_post"]."&nbsp;publicaci&oacute;n";
+                  }                  
+                  $opc_select .= '<option value="'.$aviso["id_plan"].'">'.$aviso["nombre"].'&nbsp;-&nbsp;'.$text_publicacion.'</option>';
                   ?>
                   <input type="hidden" id="avisopermiso_<?php echo $aviso["id_plan"];?>" value="<?php echo $permisos_aviso;?>">  
                 <?php } ?>
@@ -153,7 +196,8 @@
                   <?php } ?>  
                   <div id="avisopermisos"></div>
                   <li>
-                    <h1 id="avisocosto"><span class="subscript"></span></h1>
+                    <h1 id="avisocosto"></h1>
+                    <h6><small>(El precio incluye IVA)</small></h6>
                     <a class="pricebutton" onclick="buttonaviso();"><span class="icon-tag"></span> Suscribirse</a>
                   </li>
                 </ul>
@@ -164,7 +208,7 @@
     </div>
   </div>
 </div>
-<br><br>
+<br>
 
 <!-- Modal -->
 <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">

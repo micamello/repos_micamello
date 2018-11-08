@@ -13,10 +13,10 @@
                   <?php 
                   echo (($plan["promocional"]) ? "Promoci&oacute;n<br>" : "");                 
                   if (!empty($plan["duracion"])){ 
-                    echo "Duraci&oacute;n del plan<br>".$plan["duracion"]." días"; 
+                    echo "Plan&nbsp;".$plan["duracion"]." días"; 
                   } 
                   else{
-                    echo "ilimitado"; 
+                    echo "Plan&nbsp;Gratuito"; 
                   }
                 ?></li>
                 <?php 
@@ -33,7 +33,9 @@
                 ?>
                 <li>
                   <h1><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?>
-                    <span class="subscript"></span>
+                    <?php if (!empty($plan["costo"])){ ?>  
+                      <h6><small>(El precio incluye IVA)</small></h6>
+                    <?php } ?>
                   </h1>
                   <?php if (empty($plan["costo"])) { ?>
                     <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"

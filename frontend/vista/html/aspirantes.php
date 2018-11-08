@@ -299,8 +299,8 @@
 				<?php if($vista == 1){ ?>
 					<span style="font-size: 17px;">Aspirantes Postulados</span>
 				<?php }else{ ?>
-					<span style="font-size: 17px;">Candidatos Registrados en la plataforma</span>
-				<?php echo "Eder: ". $vista; } ?>
+					<span style="font-size: 17px;">Candidatos Registrados</span>
+					<?php }?>				
 			</b>
 			<br/><br/>
 			<div id="busquedas" class='container-fluid'>

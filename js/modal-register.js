@@ -1,5 +1,5 @@
 $('#form_register').on("submit", function(e){
-	console.log(document.getElementsByClassName("list-unstyled msg_error").length);
+	//console.log(document.getElementsByClassName("list-unstyled msg_error").length);
 	if(document.getElementsByClassName("list-unstyled msg_error").length > 0){
 		document.getElementById("button_register").setAttribute("class","btn btn-info disabled");
 		e.preventDefault();

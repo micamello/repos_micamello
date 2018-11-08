@@ -225,11 +225,13 @@ class Modelo_Oferta{
 
   public static function obtieneAutopostulaciones($pais,$fecha,$areas,$intereses,$usuario,$provincia=0){
     if (empty($pais) || empty($fecha) || empty($areas) || empty($intereses) || empty($usuario)){ return false; }
-    $sql = "SELECT o.id_ofertas, o.salario, o.titulo, o.id_usuario, p.nombre AS provincia, c.nombre AS ciudad
+    $sql = "SELECT o.id_ofertas, o.salario, o.titulo, o.id_empresa AS id_usuario, p.nombre AS provincia, c.nombre AS ciudad
             FROM mfo_oferta o
             INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-            WHERE o.estado = 1 AND p.id_pais = ? AND o.fecha_contratacion >= ? AND 
+            INNER JOIN mfo_empresa_plan e ON e.id_empresa_plan = o.id_empresa_plan
+            INNER JOIN mfo_plan a ON a.id_plan = e.id_plan 
+            WHERE o.estado = 1 AND p.id_pais = ? AND o.fecha_contratacion >= ? AND a.costo <> 0 AND
                   o.id_area IN(".$areas.") AND o.id_nivelInteres IN(".$intereses.") AND 
                   o.id_ofertas NOT IN (SELECT id_ofertas FROM mfo_postulacion WHERE id_usuario = ?)";
     if (!empty($provincia)){
@@ -241,13 +243,28 @@ class Modelo_Oferta{
   
   public static function ofertasxUsuarioPlan($usuarioplan){
     if (empty($usuarioplan)){ return false; }
-    $sql = "SELECT id_ofertas FROM mfo_oferta where estado = 1 AND id_usuarioplan = ?";
+    $sql = "SELECT id_ofertas FROM mfo_oferta where estado = 1 AND id_empresa_plan = ?";
     return $GLOBALS['db']->auto_array($sql,array($usuarioplan),true);
   }
 
   public static function desactivarOferta($idoferta){
     if (empty($idoferta)){ return false; }
     return $GLOBALS['db']->update('mfo_oferta',array('estado'=>0),'id_ofertas='.$idoferta);
+  }
+
+  public static function ofertasDiarias($pais,$areas,$intereses){
+    if (empty($pais) || empty($areas) || empty($intereses)){ return false; }    
+    $fechaayer = date("Y-m-d",strtotime(date("Y-m-d")."- 1 day"));
+    $fechadesde = $fechaayer." 00:00:00";
+    $fechahasta = $fechaayer." 23:59:59";
+    $sql = "SELECT o.id_ofertas, o.titulo, e.nombres AS empresa, c.nombre AS ciudad, p.nombre AS provincia
+            FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            INNER JOIN mfo_empresa e ON e.id_empresa = o.id_empresa
+            WHERE o.estado = 1 AND p.id_pais = ? AND o.id_area IN(".$areas.") AND o.id_nivelInteres IN(".$intereses.") AND o.fecha_creado BETWEEN ? AND ? 
+            ORDER BY o.id_ofertas";    
+    return $GLOBALS['db']->auto_array($sql,array($pais,$fechadesde,$fechahasta),true);        
   }
 }  
 ?>

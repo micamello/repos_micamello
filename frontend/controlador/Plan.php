@@ -19,8 +19,11 @@ class Controlador_Plan extends Controlador_Base {
       case 'deposito':
         $this->deposito();
       break; 
-      case 'paypal':
-        $this->paypal();
+      case 'resultado':
+        $this->resultado();
+      break;
+      case 'error':
+        $this->error();
       break;
       case 'planes_usuario':
         $this->planesUsuario();
@@ -58,7 +61,7 @@ class Controlador_Plan extends Controlador_Base {
     $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
-    $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario);
+    $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
 
     $tags = self::mostrarDefault(2);    
     $tags["show_banner"] = 1;
@@ -70,15 +73,16 @@ class Controlador_Plan extends Controlador_Base {
 
   public function mostrarDefault($tipo){
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
-    $sucursal = SUCURSAL_ID; 
-    
+    $sucursal = SUCURSAL_ID;           
+
     if ($tipousu == Modelo_Usuario::CANDIDATO){
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,$sucursal);       
     }
     else{
-      $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1);
-      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE);
-      $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO);
+      $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);      
+      $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
+      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
+      $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
     }    
 
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
@@ -118,18 +122,11 @@ class Controlador_Plan extends Controlador_Base {
           throw new Exception("Ya esta subscrito al plan seleccionado");   
         }
 
-        if (Modelo_UsuarioxPlan::existePlan($idusu,$infoplan["id_plan"])){
-          if (!Modelo_UsuarioxPlan::modificarPlan($idusu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"])){
-            throw new Exception("Error al registrar la subscripción, por favor intente denuevo");   
-          }
-        }
-        else{
-          if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"])){
-            throw new Exception("Error al registrar la subscripción, por favor intente denuevo");   
-          }  
-        }   
+        if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"])){
+          throw new Exception("Error al registrar la subscripción, por favor intente denuevo");   
+        }  
         
-        $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu);
+        $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
 
         if ($tipousu == Modelo_Usuario::CANDIDATO){
           $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede postular a una oferta"; 
@@ -146,16 +143,11 @@ class Controlador_Plan extends Controlador_Base {
         $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
         $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
-
-        $provincia = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
-        $tags["provincia"] = $provincia["id_provincia"];
-        $tags["arrprovincia"] = Modelo_Provincia::obtieneListado();
-        $tags["arrciudad"] = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);                
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
 
         $tags["template_js"][] = "validator";
         $tags["template_js"][] = "mic";
-        $tags["template_js"][] = "metodospago";        
+        $tags["template_js"][] = "metodospago";              
 
         Vista::render('metodos_pago', $tags);      
       }
@@ -180,7 +172,7 @@ class Controlador_Plan extends Controlador_Base {
 
   public function deposito(){
     try{
-      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'direccion'=>1,'provincia'=>1,'ciudad'=>1,'telefono'=>1,'dni'=>1);
+      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'direccion'=>1,'tipo_doc'=>1,'telefono'=>1,'dni'=>1);
       $data = $this->camposRequeridos($campos);   
       
       if (!Utils::alfanumerico($data["num_comprobante"])){
@@ -195,10 +187,17 @@ class Controlador_Plan extends Controlador_Base {
       if (!Utils::valida_telefono($data["telefono"])){
         throw new Exception("Número de teléfono no es válido");
       }
-      //agregar validacion para dni
-      if (!Utils::long_minima($data["dni"],10)){
-        throw new Exception("Cédula/Ruc no es válido");
+                        
+      if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
+        if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)) {
+          $function = 'validar_'.SUCURSAL_ISO;
+          $validaCedula = Utils::$function($data['dni']);
+          if ($validaCedula == false){
+            throw new Exception("El DNI ingresado no es válido");
+          }
+        }
       }
+            
       if(!isset($_FILES['imagen'])){
         throw new Exception("Debe subir una imagen con formato jpg o png y menor a 1 MB");         
       } 
@@ -208,9 +207,9 @@ class Controlador_Plan extends Controlador_Base {
       
       $archivo = Utils::validaExt($_FILES['imagen'],3);
       if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],$data["telefono"],
-                                                  $data["dni"],$data["ciudad"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
+                                                  $data["dni"],$data["tipo_doc"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
                                                   $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],$data["idplan"],
-                                                  $data['direccion'])){
+                                                  $data['direccion'],$_SESSION['mfo_datos']['usuario']['tipo_usuario'])){
         throw new Exception("Error al ingresar el deposito, por favor intente denuevo");
       }
 
@@ -229,13 +228,16 @@ class Controlador_Plan extends Controlador_Base {
     }     
   }
 
-  public function paypal(){
+  public function resultado(){
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
-    unset($_SESSION['mfo_datos']['planes']);
-    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']);
-    Vista::render('mensaje_paypal', $tags);       
+    $mensaje = Utils::getParam('mensaje','',$this->data);     
+    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
+    if ($mensaje == "exito"){
+      $_SESSION['mfo_datos']['actualizar_planes'] = 1;
+    }
+    Vista::render($template, $tags);       
   }
 }  
 ?>

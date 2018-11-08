@@ -62,6 +62,21 @@
               </div>
               <hr>
               <h4 class="text-center">Detalles de Facturaci&oacute;n</h4>
+              <div class="form-group col-md-6">    
+                <label>Tipo de Documento:</label><div class="help-block with-errors"></div>
+                <select id="tipo_doc" name="tipo_doc" class="form-control">                
+                <?php
+                foreach(TIPO_DOCUMENTO as $key=>$tipo){
+                  echo "<option value='".$key."'>".$tipo."</option>";
+                }
+                ?>  
+                </select>
+              </div>
+              <div class="form-group col-md-6">    
+                <label>Identificaci&oacute;n:</label>
+                <div class="help-block with-errors" id="error_custom_dni"></div>
+                <input type="text" name="dni" id="dni" class="form-control" minlength="10" maxlength="15" onblur="validarDocumento(this);" required>
+              </div>
               <div class="form-group col-md-6">
                 <label>Nombre y apellidos:</label><div class="help-block with-errors"></div>
                 <input type="text" name="nombre" id="nombre" class="form-control" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" placeholder="Ejemplo: Carlos Crespo" required>
@@ -69,40 +84,8 @@
               <div class="form-group col-md-6">    
                 <label>Correo:</label><div class="help-block with-errors"></div>
                 <input type="email" name="correo" id="correo" class="form-control" placeholder="Ejemplo: carloscrespo@gmail.com" required>
-              </div>              
+              </div>                                    
               <div class="form-group col-md-6">    
-                <label>Provincia:</label><div class="help-block with-errors"></div>
-                <select class="form-control" name="provincia" id="provincia">
-                  <option value="">Seleccione una provincia</option>
-                  <?php if (!empty($arrprovincia)){
-                          foreach($arrprovincia as $key => $pr){ 
-                            echo "<option value='".$pr['id_provincia']."'";
-                            if ($provincia == $pr['id_provincia']){ 
-                              echo " selected='selected'";
-                            }
-                            echo ">".utf8_encode($pr['nombre'])."</option>";
-                          }
-                        } 
-                  ?>
-                </select>                
-              </div>
-              <div class="form-group col-md-6">    
-                <label>Ciudad:</label><div class="help-block with-errors"></div>
-                <select id="ciudad" name="ciudad" class="form-control">
-                <?php if(!empty($arrciudad)){
-                        foreach($arrciudad as $key => $ciudad){ 
-                          echo "<option value='".$ciudad['id_ciudad'];
-                          if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $key){  
-                              echo " selected='selected'";
-                          }
-                          echo "'>".utf8_encode($ciudad['ciudad'])."</option>";
-                        } 
-                      }else{ ?>
-                        <option value="">Seleccione una ciudad</option>
-                <?php } ?>
-                </select>
-              </div>
-              <div class="form-group col-md-12">    
                 <label>Direcci&oacute;n:</label><div class="help-block with-errors"></div>
                 <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ejemplo: Samanes V" required>
               </div>
@@ -110,10 +93,7 @@
                 <label>Tel&eacute;fono:</label><div class="help-block with-errors"></div>
                 <input type="text" name="telefono" id="telefono" class="form-control" minlength="10" maxlength="15" onkeydown="return validaNumeros(event);" required>
               </div>
-              <div class="form-group col-md-6">    
-                <label>C&eacute;dula / RUC:</label><div class="help-block with-errors"></div>                
-                <input type="text" name="dni" id="dni" class="form-control" minlength="10" maxlength="15" onkeydown="return validaNumeros(event);" required>
-              </div>
+              
               <div align="center">
                 <input type="submit" name="btndeposito" value="Aceptar" class="btn btn-success btn-sm">
               </div>
@@ -129,7 +109,23 @@
           <div class="panel-body">
             <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/PayPal.jpg"><br><br>            
             <form action="<?php echo RUTA_PAYPAL;?>" method="post" name="form_paypal" id="form_paypal" role="form">
-              <div class="col-xs-12 col-md-12">                
+              <div class="col-xs-12 col-md-12"> 
+                <div class="form-group col-md-6">    
+                  <label>Tipo de Documento:</label><div class="help-block with-errors"></div>
+                  <select id="tipo_docP" name="tipo_docP" class="form-control">                    
+                    <?php
+                    foreach(TIPO_DOCUMENTO as $key=>$tipo){
+                      echo "<option value='".$key."'>".$tipo."</option>";
+                    }
+                    ?>  
+                  </select>
+                </div> 
+                <div class="form-group col-md-6">    
+                  <label>Identificaci&oacute;n:</label>
+                  <div class="help-block with-errors" id="error_custom_dniP"></div>
+                  <input type="text" name="dniP" id="dniP" class="form-control" minlength="13" maxlength="13" 
+                  onblur="validarDocumento($(this).val(),$('#tipo_docP').val(),'error_custom_dniP');" required>
+                </div>               
                 <div class="form-group col-md-6">
                   <label>Nombre y apellidos:</label><div class="help-block with-errors"></div>
                   <input type="text" name="nombreP" id="nombreP" class="form-control" required>
@@ -137,62 +133,26 @@
                 <div class="form-group col-md-6">    
                   <label>Correo:</label><div class="help-block with-errors"></div>
                   <input type="email" name="correoP" id="correoP" class="form-control" required>
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>Provincia:</label><div class="help-block with-errors"></div>
-                  <select class="form-control" name="provinciaP" id="provinciaP">
-                    <option value="">Seleccione una provincia</option>
-                    <?php if (!empty($arrprovincia)){
-                            foreach($arrprovincia as $key => $pr){ 
-                              echo "<option value='".$pr['id_provincia']."'";
-                              if ($provincia == $pr['id_provincia']){ 
-                                echo " selected='selected'";
-                              }
-                              echo ">".utf8_encode($pr['nombre'])."</option>";
-                            }
-                          } 
-                    ?>
-                  </select>                
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>Ciudad:</label><div class="help-block with-errors"></div>
-                  <select id="ciudadP" name="ciudadP" class="form-control">
-                  <?php if(!empty($arrciudad)){
-                          foreach($arrciudad as $key => $ciudad){ 
-                            echo "<option value='".$ciudad['id_ciudad'];
-                            if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $key){  
-                                echo " selected='selected'";
-                            }
-                            echo "'>".utf8_encode($ciudad['ciudad'])."</option>";
-                          } 
-                        }else{ ?>
-                          <option value="">Seleccione una ciudad</option>
-                  <?php } ?>
-                  </select>
-                </div> 
-                <div class="form-group col-md-12">
+                </div>                
+                <div class="form-group col-md-6">
                   <label>Direcci&oacute;n:</label><div class="help-block with-errors"></div> 
                   <input type="text" name="direccionP" id="direccionP" class="form-control" required>  
                 </div>
                 <div class="form-group col-md-6">    
                   <label>Tel&eacute;fono:</label><div class="help-block with-errors"></div>
                   <input type="text" name="telefonoP" id="telefonoP" class="form-control" onkeydown="return validaNumeros(event);" required>
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>C&eacute;dula / RUC:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="dniP" id="dniP" class="form-control" onkeydown="return validaNumeros(event);" required>
-                </div>                 
+                </div>                                
               </div>
               <div class="col-xs-12 col-md-12">
                 <div class="breadcrumb" align="center">                  
                   <label>Plan Seleccionado:</label>&nbsp;<?php echo $plan["nombre"];?>
                   <input type="hidden" name="cmd" value="_s-xclick">
                   <input type="hidden" name="custom" id="custom" value="">
-                  <input type="hidden" name="rm" value="2">
-                  <input type="hidden" name="return" id="return" value="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/paypal/">  
+                  <input type="hidden" name="rm" value="2">                  
                   <input type="hidden" name="hosted_button_id" value="<?php echo $plan["codigo_paypal"];?>">
                   <input type="hidden" id="idplanP" name="idplanP" value="<?php echo $plan["id_plan"];?>">
-                  <input type="hidden" id="usuarioP" name="usuarioP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>">                  
+                  <input type="hidden" id="usuarioP" name="usuarioP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>">
+                  <input type="hidden" id="tipousuP" name="tipousuP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>">
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
                   <input type="image" src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/btn_buynowCC_LG.gif" border="0" name="button" alt="PayPal - The safer, easier way to pay online!" id="btn_submitpaypal">
@@ -203,77 +163,7 @@
         </div>    
       </div>  
       <div class="col-md-2"></div>
-      <?php } ?>
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-        <div class="panel panel-default" id="panel_3" style="display:none;">
-          <div class="panel-body">
-            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo-paymentez.jpg"><br><br>            
-            <form action="<?php echo RUTA_PAYPAL;?>" method="post" name="form_paypal" id="form_paypal" role="form">
-              <div class="col-xs-12 col-md-12">                
-                <div class="form-group col-md-12">
-                  <label>Nombre y apellidos:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="nombreZ" id="nombreZ" class="form-control" required>
-                </div>
-                <div class="form-group col-md-12">    
-                  <label>Correo:</label><div class="help-block with-errors"></div>
-                  <input type="email" name="correoZ" id="correoZ" class="form-control" required>
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>Provincia:</label><div class="help-block with-errors"></div>
-                  <select class="form-control" name="provinciaZ" id="provinciaZ">
-                    <option value="">Seleccione una provincia</option>
-                    <?php if (!empty($arrprovincia)){
-                            foreach($arrprovincia as $key => $pr){ 
-                              echo "<option value='".$pr['id_provincia']."'";
-                              if ($provincia == $pr['id_provincia']){ 
-                                echo " selected='selected'";
-                              }
-                              echo ">".utf8_encode($pr['nombre'])."</option>";
-                            }
-                          } 
-                    ?>
-                  </select>                
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>Ciudad:</label><div class="help-block with-errors"></div>
-                  <select id="ciudadP" name="ciudadZ" class="form-control">
-                  <?php if(!empty($arrciudad)){
-                          foreach($arrciudad as $key => $ciudad){ 
-                            echo "<option value='".$ciudad['id_ciudad'];
-                            if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $key){  
-                                echo " selected='selected'";
-                            }
-                            echo "'>".utf8_encode($ciudad['ciudad'])."</option>";
-                          } 
-                        }else{ ?>
-                          <option value="">Seleccione una ciudad</option>
-                  <?php } ?>
-                  </select>
-                </div>                
-                <div class="form-group col-md-6">    
-                  <label>Tel&eacute;fono:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="telefonoZ" id="telefonoZ" class="form-control" onkeydown="return validaNumeros(event);" required>
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>C&eacute;dula / RUC:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="dniZ" id="dniZ" class="form-control" onkeydown="return validaNumeros(event);" required>
-                </div>                 
-              </div>
-              <div class="col-xs-12 col-md-12">
-                <div class="breadcrumb" align="center">                  
-                  <label>Plan Seleccionado:</label><br><?php echo $plan["nombre"];?>
-                  <input type="hidden" id="idplanZ" name="idplanZ" value="<?php echo $plan["id_plan"];?>">
-                  <input type="hidden" id="usuarioZ" name="usuarioZ" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>">
-                  <hr>
-                  <label>Valor:</label><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>                         
-                </div>                   
-              </div>                        
-            </form>
-          </div>
-        </div>    
-      </div>     
-      <div class="col-md-2"></div>
+      <?php } ?>      
     </div>
   </div>
 </div>
