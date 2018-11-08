@@ -32,8 +32,7 @@ class Controlador_Login extends Controlador_Base {
           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
             throw new Exception("Error en el sistema, por favor intente nuevamente");
           }                                 
-          self::registroSesion($usuario);     
-          Utils::log("SESSION ".print_r($_SESSION,true));              
+          self::registroSesion($usuario);               
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
@@ -60,8 +59,7 @@ class Controlador_Login extends Controlador_Base {
  
   }
  
-  public static function registroSesion($usuario){
-    unset($_SESSION['mfo_datos']['usuario']); 
+  public static function registroSesion($usuario){        
     $_SESSION['mfo_datos']['usuario'] = $usuario;
     //busqueda de planes activos
     $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"],$usuario["tipo_usuario"]);

@@ -15,15 +15,12 @@ class Controlador_Publicar extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
-    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario']);
-
     if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
       $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
 
     if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta')){
-
       $_SESSION['mostrar_error'] = "No tiene permisos para publicar oferta";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }

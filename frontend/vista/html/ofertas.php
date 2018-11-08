@@ -191,7 +191,7 @@
 						   			<div class="col-md-12">
 										<div class="col-sm-2 col-md-3 col-lg-2" style="padding-left: 0px;" align='center'>
 											<?php											
-											$src_imagen = ($o['confidencial'] && $vista!='vacantes') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : Modelo_Usuario::obtieneFoto($o['id_usuario']);
+											$src_imagen = ($o['confidencial'] && $vista!='vacantes' && $vista!='cuentas') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : Modelo_Usuario::obtieneFoto($o['username']);
 											?>
 											<img id="imgPerfil" class="img-responsive postulacion'" src="<?php echo $src_imagen; ?>" alt="icono">
 							  			</div>

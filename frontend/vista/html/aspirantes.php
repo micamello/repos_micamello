@@ -358,7 +358,7 @@
 						        	<?php if(!empty($aspirantes)){
 							            foreach($aspirantes as $key => $a){  ?>
 							            	<tr>
-							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
+							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>
 
 							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
 							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
