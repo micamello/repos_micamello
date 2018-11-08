@@ -21,7 +21,7 @@ class Controlador_Perfil extends Controlador_Base
 
         $msj1 = $imgArch1 = $btnDescarga = '';
         
- //print_r($_POST);
+
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
             case 'buscaDependencia':
@@ -58,13 +58,11 @@ class Controlador_Perfil extends Controlador_Base
 
                     $btnSig = 1;
                     if(!isset($_FILES['subirCV'])){
-                        $_FILES['subirCV'] = '';
-                        
+                        $_FILES['subirCV'] = ''; 
                     }
                     $btnSubir  = 0;
 
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
-                    //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
                 }
 
                 if (Utils::getParam('cambiarClave') == 1) {
@@ -127,10 +125,7 @@ class Controlador_Perfil extends Controlador_Base
 
                 );
 
-
-
                 $tags["template_js"][] = "selectr";
-                //$tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
                 $tags["template_js"][] = "publicar_oferta";
@@ -222,7 +217,7 @@ class Controlador_Perfil extends Controlador_Base
             }
 
             if (!empty($imagen) && $imagen['error'] != 4) {
-              if (!Utils::upload($imagen,$idUsuario,PATH_PROFILE,1)){
+              if (!Utils::upload($imagen,$_SESSION['mfo_datos']['usuario']['username'],PATH_PROFILE,1)){
                 throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
               }  
             } 
@@ -239,7 +234,7 @@ class Controlador_Perfil extends Controlador_Base
                             if (!Modelo_InfoHv::actualizarHv($_SESSION['mfo_datos']['infohv']['id_infohv'], $arch[1])) {
                                 throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                             } else {
-                                if (!Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2)){
+                                if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
                                   throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                                 }
                             }
@@ -248,7 +243,7 @@ class Controlador_Perfil extends Controlador_Base
                         if (!Modelo_InfoHv::cargarHv($idUsuario, $arch[1])) {
                             throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                         } else {
-                            if (!Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2)){
+                            if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
                               throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");  
                             }
                         }

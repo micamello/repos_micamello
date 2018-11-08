@@ -15,10 +15,10 @@
 
 			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {			 					
 			 					?>
-						 			<p>Fecha caducidad plan: </p>
+						 			<p>Fecha caducidad plan: 
 						 			<b><span><?php
 						 			$fecha = date_create($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad']);
-						 			echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b>
+						 			echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>
 			 			<?php }else{ ?>
 			 				<p>Fecha caducidad plan: ilimitado</p>
 			 			<?php } ?>

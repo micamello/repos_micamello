@@ -47,6 +47,7 @@ try{
     $vl_insert["transaction_subject"] = $_POST["transaction_subject"];
     $vl_insert["payment_gross"] = $_POST["payment_gross"];
     $vl_insert["ipn_track_id"] = $_POST["ipn_track_id"];
+    $vl_insert["parent_txn_id"] = $_POST["parent_txn_id"];
     Utils::envioCorreo("desarrollo@micamello.com.ec","CRON PAYPAL",print_r($_POST,true));
     if (!Modelo_Paypal::guardar($vl_insert)){
       throw new Exception("Error Insert IPN Paypal");

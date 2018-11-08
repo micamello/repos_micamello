@@ -1,4 +1,5 @@
 <?php
+/*Modelo que servira para la tabla de candidatos(usuario) y para la tabla de empresas*/
 class Modelo_Usuario{
 
   const CANDIDATO = 1;
@@ -23,7 +24,6 @@ class Modelo_Usuario{
     $rs = $GLOBALS['db']->auto_array($sql,array($tipo,$pais));
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
- 
   public static function estaLogueado(){    
     if ( !Utils::getArrayParam('mfo_datos', $_SESSION) || !Utils::getArrayParam('usuario', $_SESSION['mfo_datos'] )){            
       return false;
@@ -50,7 +50,7 @@ class Modelo_Usuario{
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE u.id_usuario_login = ? AND u.estado = 1";
+              WHERE u.id_usuario_login = ?";
     }
     else{
       $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
@@ -60,7 +60,7 @@ class Modelo_Usuario{
               INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
               INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
-              WHERE e.id_usuario_login = ? AND e.estado = 1";
+              WHERE e.id_usuario_login = ?";
     }
     $rs2 = $GLOBALS['db']->auto_array($sql,array($rs["id_usuario_login"])); 
     if (empty($rs2)){ return false; }
@@ -88,7 +88,6 @@ class Modelo_Usuario{
     $password = md5($pass);
     return $GLOBALS['db']->update("mfo_usuario_login",array("password"=>$password),"id_usuario_login=".$id);
   }
- 
   public static function modificarFechaLogin($id,$tipo=self::CANDIDATO){
     if (empty($id) || empty($tipo)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -114,32 +113,25 @@ class Modelo_Usuario{
 
   public static function existeCorreo($correo){
     if(empty($correo)){ return false; }
-    $sql = "select * from mfo_usuario where correo = ?";
+    $sql = "select * from mfo_usuario_login where correo = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
-    return (!empty($rs['id_usuario'])) ? false : true;
+    return (!empty($rs['correo'])) ? false : true;
   }
 
   public static function existeDni($dni){
     if(empty($dni)){ return false; }
-    $sql = "select * from mfo_usuario where dni = ?";
+    $sql = "select * from mfo_usuario_login where dni = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($dni));
-    return (!empty($rs['id_usuario'])) ? false : true;
+    return (!empty($rs['dni'])) ? false : true;
   }
-
-  public static function crearUsuario($data, $defaultDataUser,$username){
-    if(empty($data)||empty($defaultDataUser) || empty($username)){return false;}
- 
-    $password = md5($data['password']);
- 
-      if ($data['tipo_usuario'] == 2) {
-        // $data["apell_user"] = $data['name_user'];
-        $tipo_doc = $data['ruc'];
-      }
-      else{
-        $tipo_doc = $data['tipo_doc'];
-      }
-
-    $result = $GLOBALS['db']->insert('mfo_usuario',array("username"=>strtolower($username),"password"=>$password,"correo"=>strtolower($data['correo']),"telefono"=>$data['numero_cand'],"dni"=>$data['cedula'],"nombres"=>$data['name_user'],"fecha_nacimiento"=>$defaultDataUser['fecha_nacimiento'],"fecha_creacion"=>$defaultDataUser['fecha_creacion'],"token"=>$defaultDataUser['token'],"estado"=>$defaultDataUser['estado'],"term_cond"=>$data['term_cond'],"conf_datos"=>$data['conf_datos'],"tipo_usuario"=>$data['tipo_usuario'],"id_ciudad"=>$defaultDataUser['id_ciudad'],"ultima_sesion"=>$defaultDataUser['ultima_sesion'], 'tipo_doc'=>$tipo_doc));
+  public static function crearUsuario($dato_registro){
+    if(empty($dato_registro)){return false;}    
+    if ($dato_registro['tipo_usuario'] == 1) {
+      $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], "token"=>$dato_registro['token'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'conf_datos'=>$dato_registro['conf_datos'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'status_carrera'=>$dato_registro['status_carrera'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
+    }
+    else{
+      $result = $GLOBALS['db']->insert('mfo_empresa',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'conf_datos'=>$dato_registro['conf_datos'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']));
+    }      
     return $result;
   }
 
@@ -147,15 +139,20 @@ class Modelo_Usuario{
     if(empty($id_usuario)){return false;}
       return $GLOBALS['db']->update("mfo_usuario",array("estado"=>1),"id_usuario=".$id_usuario);
   }
+  public static function desactivarCuenta($id_usuario,$tipo=self::CANDIDATO){
+    if(empty($id_usuario)){ return false; }
+    if ($tipo == self::CANDIDATO){
+      return $GLOBALS['db']->update("mfo_usuario",array("estado"=>0),"id_usuario=".$id_usuario);
+    }
+    else{
+      return $GLOBALS['db']->update("mfo_empresa",array("estado"=>0),"id_empresa=".$id_usuario); 
+    }
+  }
 
   public static function obtieneFoto($username){
     $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$username.'.jpg';
     return $rutaImagen;   
   }
-
-  // public static function obtieneRequisitosUsuario($id_usuario){
-  //   $sql = "";
-  // }
 
   public static function actualizarSession($idUsuario,$tipo_usuario){
 
@@ -726,7 +723,6 @@ class Modelo_Usuario{
 
     return $rs;
   }
- 
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
     if (empty($id)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -734,11 +730,11 @@ class Modelo_Usuario{
               FROM mfo_usuario u 
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              LEFT JOIN mfo_requisitosusuario r ON r.id_usuario = u.id_usuario 
+              INNER JOIN mfo_usuario_login l ON l.id_usuario_login = u.id_usuario_login
               WHERE u.id_usuario = ?";
     }
     else{
-      $sql = "SELECT e.id_empresa AS id_usuario, e.nombres, l.correo, l.tipo_usuario, p.id_pais
+      $sql = "SELECT e.id_empresa AS id_usuario, e.nombres, l.correo, l.tipo_usuario, p.id_pais, e.padre
               FROM mfo_empresa e 
               INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -749,8 +745,6 @@ class Modelo_Usuario{
   }
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){
-
-
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada       
       if (empty($infohv)){
@@ -770,8 +764,8 @@ class Modelo_Usuario{
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
-      elseif (isset($planes) && !Modelo_PermisoPlan::tienePermiso($planes, 'busquedaOferta')) {
-        Utils::doRedirect(PUERTO.'://'.HOST.'/');  
+      elseif (isset($planes) && !Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion')) {
+        Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
       }  
       else{           
         if ($controlador == 'login'){
@@ -792,7 +786,6 @@ class Modelo_Usuario{
       }          
     }
   }
-
 
   public static function aspSalarial($id_usuario, $id_oferta){
     if(empty($id_usuario) || empty($id_oferta)){return false;}
@@ -855,12 +848,12 @@ WHERE
             ORDER BY u.id_usuario";
     return $GLOBALS['db']->Query($sql,array());
   }
- 
+
   public static function obtieneNivel($idpadre){
     if (empty($idpadre)) { return false; }
     $nivel = 0;
     do{
-      $sql = "SELECT padre FROM mfo_empresa where id_empresa = ?";
+      $sql = "SELECT id_empresa,padre FROM mfo_empresa where id_empresa = ?";
       $padre = $GLOBALS['db']->auto_array($sql,array($idpadre));
       $nivel++;
       $idpadre = $padre["padre"];
@@ -868,19 +861,24 @@ WHERE
     while(!empty($padre["padre"]));    
     return $nivel;
   }
-
   public static function obtieneHerenciaEmpresa($idpadre){
     if (empty($idpadre)) { return false; }
     $primera = 0;
     $empHijas = '';
     do{
-      $sql = "SELECT GROUP_CONCAT(id_empresa) AS emp_hijas, padre FROM mfo_empresa where padre IN(".$idpadre.")";
-      $padre = $GLOBALS['db']->auto_array($sql,array());
-
-      $idpadre = $padre["emp_hijas"];
-
+      $strpadre = '';
+      $sql = "SELECT e.id_empresa, e.padre FROM mfo_empresa e
+              WHERE e.padre IN(?) AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)";
+      $padre = $GLOBALS['db']->auto_array($sql,array($idpadre),true);
+      if (!empty($padre) && is_array($padre)){
+        $numreg = count($padre);
+        foreach($padre as $key=>$registro){
+          $strpadre .= $registro["id_empresa"].(($key+1 < $numreg) ? ',' : '');
+        }
+      }      
+      //$idpadre = $padre["emp_hijas"];
+      $idpadre = $strpadre;
       if($idpadre != ''){
-
         if($empHijas==''){
           $empHijas .= $idpadre;
           $primera++;
@@ -889,7 +887,7 @@ WHERE
         }
       }
     }
-    while(!empty($padre["padre"]));    
+    while(!empty($strpadre));    
     return $empHijas;
   }
 

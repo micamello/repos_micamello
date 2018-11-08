@@ -23,8 +23,7 @@
             function(e, t) {
                 var r;
                 return r = function() {
-                    function t(t, r) {
-
+                    function t(t, r) {                        
                         this.source = t, this.args = r, this.updateFooter = i(this.updateFooter, this), this.deselectOption = i(this.deselectOption, this), this.selectOption = i(this.selectOption, this), this.triggerChange = i(this.triggerChange, this), this.args = e.extend({}, this.defaults, this.args, this.source.data("selectr-opts")), this.multi = this.source.prop("multiple"), this.createSelectr(), this.monitorSource(), this.selectrContainer.insertAfter(this.source), this.selectrContainer = e(this.source.next()), this.bindEventListeners(), this.source.hide()
                      }
                     return t.prototype.defaults = {
@@ -105,15 +104,16 @@
                                     var seleccionados = $("#seleccionados1");
                                     select = 'nivel';
                                 }
+                                var nombre = e("option[value='" + e(r).data("val") + "']", this.source)[0].text;                                
 
-                                var nombre = e("option[value='" + e(r).data("val") + "']", this.source)[0].text;
                                 var newDiv = document.createElement("p"); 
                                 newDiv.id = select+e(r).data("val");
                                 newDiv.className = 'col-md-12 badge_item3';
 
                                 var newI = document.createElement("i"); 
                                 newI.className = 'fa fa-window-close fa-2x icon';
-                                newI.setAttribute('onclick', 'eliminar_item_selected(\''+select+e(r).data("val")+'\',\''+this.source[0].id+'\',\''+e(r).data("val")+'\'); validarFormulario(); ');
+                                newI.setAttribute('onclick', 'eliminar_item_selected(\''+select+e(r).data("val")+'\',\''+this.source[0].id+'\',\''+e(r).data("val")+'\'); validarFormulario(); '); 
+                                newI.setAttribute('style', 'cursor:pointer;'); 
 
                                 var newContent = document.createTextNode(nombre); 
                                 newDiv.appendChild(newContent);
@@ -132,14 +132,11 @@
                         }else{
                             select = 'nivel';
                         }
-
-                        var nombre = select+e(t).data("val");
+                        
+                        var nombre = select+e(t).data("val");                        
                         elemento = document.getElementById(nombre);
-                        elemento.parentNode.removeChild(elemento);
-                        //this.args.maxSelection;
-
-                                console.log(this.args.maxSelection);
-                                console.log(e(r).siblings(".selected").length);
+                        elemento.parentNode.removeChild(elemento);                        
+                                                                                                
                         return this.selectrContainer.removeClass("max-selection-reached"), e(t).removeClass("selected"), e("option[value=" + e(t).data("val") + "]", this.source).prop("selected", !1), this.updateFooter(), this.triggerChange()
                     
                     }, t.prototype.updateFooter = function() {

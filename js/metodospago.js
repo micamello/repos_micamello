@@ -25,21 +25,21 @@ function cambia(radioSeleccionado){
 }
 
 $("input[name=select_form]").click( function() {
-	if ($('input[name=select_form]:checked').val() == '2'){
-		$("#panel_2").show();
-		$("#panel_1").hide();
+  if ($('input[name=select_form]:checked').val() == '2'){
+    $("#panel_2").show();
+    $("#panel_1").hide();
     $("#panel_3").hide();
-	}
+  }
   else if($('input[name=select_form]:checked').val() == '3'){
     $("#panel_2").hide();
     $("#panel_1").hide();
     $("#panel_3").show();
   }
-	else{
+  else{
     $("#panel_1").show();
-		$("#panel_2").hide();
+    $("#panel_2").hide();
     $("#panel_3").hide();
-	}
+  }
 });
 
 
@@ -88,9 +88,9 @@ $('#provinciaP').change(function(){
 });
 
 
-$('#btn_submitpaypal').click(function(){	
-	var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#ciudadP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
-	$('#custom').attr('value',valor);
+$('#btn_submitpaypal').click(function(){  
+  var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#ciudadP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
+  $('#custom').attr('value',valor);
 
 });
 

@@ -34,7 +34,6 @@
 										echo utf8_encode($infoUsuario['nacionalidad']);
 									}
 									else{
-
 										echo "-------";
 									}
 								?>

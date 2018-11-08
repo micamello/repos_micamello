@@ -13,79 +13,105 @@ require_once '../init.php';
 //pregunta si ya se esta ejecutando el cron sino crea el archivo
 $resultado = file_exists(CRON_RUTA.'procesando_cancelar_planes.txt');
 if ($resultado){
- // exit;
+  exit;
 }
 else{
   Utils::crearArchivo(CRON_RUTA,'procesando_cancelar_planes.txt','');
 }
 
-$arrplanes = Modelo_UsuarioxPlan::planesActivosPagados();
-if (!empty($arrplanes)){
-
+$arrcandidato = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::CANDIDATO);
+if (!empty($arrcandidato)){
 	$fechaactual = date("Y-m-d H:i:s");
-  	echo "Fecha Actual: ".$fechaactual."<br>";
-
-	foreach($arrplanes as $usuarioplan){
-
-		if ($usuarioplan["fecha_caducidad"] <= $fechaactual){
-
-			echo "<br>Fecha de Caducidad: ".$usuarioplan["fecha_caducidad"]."<br>";
-			echo "Usuario de tipo: ";
-			if($usuarioplan["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
-				echo "Candidato<br>";
-			}else{
-				echo "Empresa<br>";
-			}
-
-			//Desactivar el plan caducado del usuario 
-			if (!Modelo_UsuarioxPlan::desactivarUsuarioxPlan($usuarioplan["id_usuario_plan"])){
-				throw new Exception("Error al desactivar el plan caducado"); 
-			}else{
-
-				$tipo = 2; // Tipo de alerta (1.- web, 2.- correo y 3.- sms)
-				if(!Modelo_Notificacion::existeNotificacion($usuarioplan["id_usuario"],$tipo,$usuarioplan["fecha_compra"])){
-
-					echo '<br>Notificación vía correo empresa<br>';
-					echo "El plan: ".utf8_encode($usuarioplan["nombre"])." del usuario ".$usuarioplan["nombres"]." fue desactivado<br>";
-					echo $mensaje = "Estimado, ".utf8_encode($usuarioplan["nombres"])."<br> Su plan (".utf8_encode($usuarioplan["nombre"]).") contratado el ".$usuarioplan["fecha_compra"]." ha caducado.<br> De querer seguir haciendo uso de nuestro servicio debe activar un nuevo plan.<br>";
-					Modelo_Notificacion::insertarNotificacion($usuarioplan["id_usuario"],$mensaje,$tipo);
+	foreach($arrcandidato as $usuarioplan){
+		try{
+			$infousuario = Modelo_Usuario::busquedaPorId($usuarioplan["id_usuario"],Modelo_Usuario::CANDIDATO);
+		  if ($usuarioplan["fecha_caducidad"] <= $fechaactual){			
+				$GLOBALS['db']->beginTrans();      
+				//Desactivar el plan caducado del usuario 
+				if (!Modelo_UsuarioxPlan::desactivarPlan($usuarioplan["id_usuario_plan"],Modelo_Usuario::CANDIDATO)){
+					throw new Exception("Error al desactivar el plan caducado"); 
 				}
-			}
-
-			if($usuarioplan["tipo_usuario"] == Modelo_Usuario::EMPRESA){
-
-				//Obtener las ofertas creadas o asignadas al plan si es empresa
-				if (!Modelo_Oferta::desactivarOferta($usuarioplan["id_usuario_plan"])){
-                	throw new Exception("Error al desactivar la oferta"); 
-                }else{
-                	echo "Fueron desactivadas todas las ofertas registradas con el plan: ".utf8_encode($usuarioplan["nombre"])." contratado el ".$usuarioplan["fecha_compra"]."<br>";
-                }  
-			}
-
-		}else if($usuarioplan["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
-
-			$resultado = Modelo_UsuarioxPlan::publicacionesRestantes($usuarioplan["id_usuario"]);
-
-			$tipo = 2; // Tipo de alerta (1.- web, 2.- correo y 3.- sms) 
-			if($resultado['p_restantes'] == 0){
-
-				if(!Modelo_Notificacion::existeNotificacion($usuarioplan["id_usuario"],$tipo,$usuarioplan["fecha_compra"],$resultado['p_restantes'])){
-					echo '<br>Notificación vía correo candidato<br>';
-					echo $mensaje = "Estimado ".utf8_encode($usuarioplan["nombres"])." sus autopostulaciones se han agotado, debe activar un nuevo plan.<br>";
-					Modelo_Notificacion::insertarNotificacion($usuarioplan["id_usuario"],$mensaje,$tipo);
-				}
-
-			}else if($resultado['p_restantes'] <= AUTOPOSTULACION_MIN){
+										
+				$mensaje = "Estimado, ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>Su plan (".utf8_encode($usuarioplan["nombre"]).") contratado el ".$usuarioplan["fecha_compra"]." ha caducado.<br> De querer seguir haciendo uso de nuestro servicio debe activar un nuevo plan.";
 				
-				if(!Modelo_Notificacion::existeNotificacion($usuarioplan["id_usuario"],$tipo,$usuarioplan["fecha_compra"],$resultado['p_restantes'])){
-					echo '<br>Notificación vía correo candidato<br>';
-					echo $mensaje = "Estimado ".utf8_encode($usuarioplan["nombres"])." le restan: ".$resultado['p_restantes']." autopostulaciones, pronto deberá activar un nuevo plan.<br>";
-					Modelo_Notificacion::insertarNotificacion($usuarioplan["id_usuario"],$mensaje,$tipo);
-				}
+        $GLOBALS['db']->commit();
+        echo "Plan de Candidato Desactivado ".$usuarioplan["id_usuario_plan"]."<br>";				
+				Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);												
 			}
-		}    
+			else{				
+			  $resultado = Modelo_UsuarioxPlan::publicacionesRestantes($usuarioplan["id_usuario"]);
+				if($resultado['p_restantes'] == 0){
+	        $mensaje = "Estimado ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>De su plan contratado el ".$usuarioplan["fecha_compra"]." se han agotado las autopostulaciones.<br>De querer seguir haciendo uso de este servicio debe activar un nuevo plan.";	        
+	        $result = enviarNotificaciones($usuarioplan["id_usuario"],$usuarioplan["fecha_compra"],$mensaje);					
+	        if (!$result){
+	        	throw new Exception("Error al enviar la notificacion"); 
+	        }
+	        echo "Notificacion de que acabo autopostulaciones a Candidato Enviado ".$usuarioplan["id_usuario"]."<br>";
+				}
+				else if($resultado['p_restantes'] <= AUTOPOSTULACION_MIN){				
+          $mensaje = "Estimado ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>De su plan contratado el ".$usuarioplan["fecha_compra"]." le restan: ".$resultado['p_restantes']." autopostulaciones, pronto deber&aacute; activar un nuevo plan.";
+				  $result = enviarNotificaciones($usuarioplan["id_usuario"],$usuarioplan["fecha_compra"],$mensaje);					
+				  if (!$result){
+	        	throw new Exception("Error al enviar la notificacion"); 
+	        }
+	        echo "Notificacion de que 5 o menos autopostulaciones a Candidato Enviado ".$usuarioplan["id_usuario"]."<br>";
+				}
+		  }
+		}
+    catch(Exception $e){
+  	  $GLOBALS['db']->rollback();
+  	  echo "Error en registro ".$usuarioplan['id_usuario_plan']."<br>";
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());      
+    }    
 	}
 } 
+
+$arrempresa = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::EMPRESA);
+if (!empty($arrempresa)){
+	$fechaactual = date("Y-m-d H:i:s");
+	foreach($arrempresa as $usuarioplan){
+		try{
+			$infousuario = Modelo_Usuario::busquedaPorId($usuarioplan["id_usuario"],Modelo_Usuario::EMPRESA);
+		  if ($usuarioplan["fecha_caducidad"] <= $fechaactual){			
+				$GLOBALS['db']->beginTrans();      
+				//Desactivar el plan caducado del usuario 
+				if (!Modelo_UsuarioxPlan::desactivarPlan($usuarioplan["id_usuario_plan"],Modelo_Usuario::EMPRESA)){
+					throw new Exception("Error al desactivar el plan caducado"); 
+				}
+								
+				$mensaje = "Estimado, ".utf8_encode($infousuario["nombres"]).",<br>Su plan (".utf8_encode($usuarioplan["nombre"]).") contratado el ".$usuarioplan["fecha_compra"]." ha caducado.<br>De querer seguir haciendo uso de nuestro servicio debe activar un nuevo plan.";
+				        								
+				//desactivar todas las ofertas del plan
+				$ofertas = Modelo_Oferta::ofertasxUsuarioPlan($usuarioplan["id_usuario_plan"]);
+				if (!empty($ofertas) && is_array($ofertas)){
+					foreach($ofertas as $oferta){
+						if (!Modelo_Oferta::desactivarOferta($oferta["id_ofertas"])){
+		          throw new Exception("Error al desactivar la oferta"); 
+		        }         
+	        }
+        }
+				
+				$GLOBALS['db']->commit();
+				Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);				
+				echo "Plan de Empresa Desactivado ".$usuarioplan["id_usuario"]."<br>";
+			}			
+		}
+    catch(Exception $e){
+  	  $GLOBALS['db']->rollback();
+  	  echo "Error en registro ".$usuarioplan["id_usuario_plan"]."<br>";
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());      
+    }    
+	}
+} 
+
+function enviarNotificaciones($idusu,$fchcompra,$mensaje){
+	if(!Modelo_Notificacion::existeNotificacion($idusu,Modelo_Notificacion::WEB,$fchcompra)){		
+		if (!Modelo_Notificacion::insertarNotificacion($idusu,$mensaje,Modelo_Notificacion::WEB,"planes")){
+			return false;
+		}
+	}  
+	return true;
+}
 
 //elimina archivo de procesamiento
 unlink(CRON_RUTA.'procesando_cancelar_planes.txt');

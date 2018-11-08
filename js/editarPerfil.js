@@ -80,7 +80,16 @@ $('#subirCV').change(function(e) {
     $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
     $('#texto_status').html('Hoja de vida Cargada');
     $('#texto_status').addClass('arch_cargado');
-    document.getElementById("mensaje_error_hv").style.display = "none";
+    if(document.getElementById("mensaje_error_hv")){
+        document.getElementById("mensaje_error_hv").style.display = "none";
+    }
+
+    var estado = validarFormulario();
+    if(estado == 1){
+        $('#boton').removeAttr('disabled');
+    }else{
+        $('#boton').attr('disabled');
+    }
 });
 
 /* Carga de hoja de vida */
@@ -137,30 +146,23 @@ function calcularEdad()
 
 
 /*function colocaError(campo, id, mensaje){
-
     nodo = document.getElementById(campo);
     nodo.innerHTML = '';
     var elem1 = document.createElement('P');
     var t = document.createTextNode(mensaje); 
     elem1.appendChild(t);
-
     var elem2 = document.createElement("P");             
     elem2.classList.add('list-unstyled');
     elem2.classList.add('msg_error');
     elem2.appendChild(elem1); 
-
     elem2.appendChild(elem1); 
     nodo.appendChild(elem2); 
-
     $("#"+id).addClass('has-error');
-
     $("#boton").attr({
         'disabled': 'disabled',
     });
 }
-
 function quitarError(campo,id){
-
     document.getElementById(campo).innerHTML = '';
     $("#"+id).removeClass('has-error');
 }*/

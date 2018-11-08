@@ -16,18 +16,18 @@ class Modelo_Comprobante{
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
-  public static function guardarComprobante($numero, $nombre, $correo, $telefono, $dni, $ciudad, 
+  public static function guardarComprobante($numero, $nombre, $correo, $telefono, $dni, $tipodoc, 
   																					$tipopago, $imagen, $valor, $usuario, $plan, $direccion, 
-                                            $estado = self::PAGO_PROCESO){
+                                            $tipousu, $estado = self::PAGO_PROCESO){
     if (empty($numero) || empty($nombre) || empty($correo) || empty($telefono) ||
-    	  empty($dni) || empty($ciudad) || empty($tipopago) || empty($valor) || 
-    	  empty($usuario) || empty($plan) || empty($direccion)){ 
+    	  empty($dni) || empty($tipodoc) || empty($tipopago) || empty($valor) || 
+    	  empty($usuario) || empty($plan) || empty($direccion) || empty($tipousu)){ 
     	return false; 
     }
     $data_insert = array('num_comprobante'=>$numero,'nombre'=>$nombre,'correo'=>$correo,'telefono'=>$telefono,
-                         'fecha_creacion'=>date('Y-m-d H:i:s'),'id_ciudad'=>$ciudad,'tipo_pago'=>$tipopago,
+                         'fecha_creacion'=>date('Y-m-d H:i:s'),'tipo_doc'=>$tipodoc,'tipo_pago'=>$tipopago,
                          'ext_imagen'=>$imagen,'valor'=>$valor,'estado'=>$estado,'id_plan'=>$plan,
-                         'id_usuario'=>$usuario,'dni'=>$dni,'direccion'=>$direccion);
+                         'id_user_emp'=>$usuario,'dni'=>$dni,'direccion'=>$direccion,'tipo_usuario'=>$tipousu);
     return $GLOBALS['db']->insert('mfo_rcomprobantescam',$data_insert);                      
   }
 

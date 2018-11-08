@@ -1,7 +1,6 @@
 <?php  
 $_SESSION['mostrar_exito'] = "";
 $_SESSION['mostrar_error'] = "";
-
 if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <div class="container">
 	<div class="checkout-wrap">
@@ -9,7 +8,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
         <li class="visited">Registro</li>
         <li class="active">Completar Perfil</li>
         <?php 
-
         for($i=1;$i<=$nrototaltest;$i++){ ?>
           <?php 
            if ($i <= $nrotestusuario){
@@ -26,7 +24,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 </div>
 <br>
 <?php } 
-
 ?>
 
 
@@ -65,7 +62,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			                    <br>
 							<?php } ?>
 							<?php 
-
 							if($btnSubir == 1 || isset($data)){ ?>
 								<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
 			                        <label for="subirCV" class="custom_file">
@@ -79,7 +75,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 								</div>
 								<br>
 	                        <?php }
-
 	                        if($btnDescarga == 1 && $btnSubir == 1 && $btnSig == 0){ echo '<br><br><br>'; } ?>
 	                    </div>
                     <?php } ?>
@@ -413,12 +408,10 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            	<option value="0" selected>Seleccione su opci&oacute;n</option>
 														<?php 
 				                                    	foreach(REQUISITO as $key => $u){ 
-
 															echo "<option value='".$key."'";
 															if (($_SESSION['mfo_datos']['usuario']['id_univ'] != 0 && $key == 0 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) <= 1) || (isset($data) && $data['lugar_estudio'] == 0 && $key == $data['lugar_estudio']))
 															{
 																echo " selected='selected'";
-
 															}else if ((strlen($_SESSION['mfo_datos']['usuario']['id_univ']) <= 1 && $key == 1 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) > 1) || (isset($data) && $data['lugar_estudio'] == 1 && $key == $data['lugar_estudio']))
 															{
 																echo " selected='selected'";
@@ -594,18 +587,12 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																	<p style="display:none;" id="text_nothing">Ningun idioma seleccionado.....</p>
 																<?php 
 																	$i = 1;
-
 																if(isset($data['nivel_idioma']) && !empty($data['nivel_idioma'])){
-
 																	foreach ($data['nivel_idioma'] as $clave => $comb_idioma) {
-
 																		$sel = explode('_',$comb_idioma);
 																		foreach ($arridioma as $key => $value) {
-
 																			if($value['id_idioma'] == $sel[0]){
-
 																				foreach ($arrnivelidioma as $pos => $valor) {
-
 																					if($valor['id_nivelIdioma'] == $sel[1]){
 																						echo '<p id="idioma'.$i.'" disabled="disabled" class="col-md-5 badge_item listado">'.utf8_encode($value['descripcion']).' ('.$valor['nombre'].') <i class="fa fa-window-close fa-2x icon" id="'.$i.'" ';
 																						if($btnSig != 1){
@@ -636,9 +623,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 													<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
 														<?php 
 												        if(isset($data['nivel_idioma']) && !empty($data['nivel_idioma'])){
-
 															foreach ($data['nivel_idioma'] as $clave => $comb_idioma) {
-
 																$sel = explode('_',$comb_idioma);
 																echo '<option value="'.$sel[0].'_'.$sel[1].'" id="array_idioma'.$sel[0].'" selected></option>';
 															}

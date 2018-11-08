@@ -37,23 +37,27 @@ if (!empty($registros) && is_array($registros)){
       continue;
     }
      
-    $procesador = (object) array('id'=>$registro["id_paypal"],
-                                 'tipo'=>'paypal',
-                                 'trans'=>$registro["txn_id"],
-                                 'monto'=>$registro["payment_gross"]);
-
     switch($registro["payment_status"]){
       //si realizo el pago
       case "Completed":
+         $procesador = (object) array('id'=>$registro["id_paypal"],
+                                      'tipo'=>'paypal',
+                                      'trans'=>$registro["txn_id"],
+                                      'monto'=>$registro["payment_gross"]);
          $objSubscripcion = new Proceso_Subscripcion($cliente,$cliente->plan,$procesador);
          $objSubscripcion->procesar();        
       break;
       //si cancelo el pago
       case "Reversed":
+         $procesador = (object) array('id'=>$registro["id_paypal"],
+                                      'tipo'=>'paypal',
+                                      'trans'=>$registro["parent_txn_id"],
+                                      'monto'=>$registro["payment_gross"]);
          $objCancelacion = new Proceso_Cancelacion($cliente,$cliente->plan,$procesador);
          $objCancelacion->procesar();
       break;
     }     
+  }
 }
 
 //elimina archivo de procesamiento
@@ -66,12 +70,13 @@ function obtenerDatosCliente($custom){
   if (count($datos)<6){ return false; }
   $usuario = array('plan'=>$datos[0],
                    'id'=>$datos[1], 
-                   'nombres'=>$datos[2],  
-                   'correo'=>$datos[3], 
-                   'ciudad'=>$datos[4], 
-                   'telefono'=>$datos[5], 
-                   'dni'=>$datos[6], 
-                   'direccion'=>$datos[7]);
+                   'tipo'=>$datos[2],
+                   'nombres'=>$datos[3],  
+                   'correo'=>$datos[4], 
+                   'tipodoc'=>$datos[5], 
+                   'telefono'=>$datos[6], 
+                   'dni'=>$datos[7], 
+                   'direccion'=>$datos[8]);
   $obj = (object) $usuario;  
   return $obj;
 }
