@@ -46,6 +46,4 @@ define('DIAS_AUTOPOSTULACION','3');
 define('AUTOPOSTULACION_MIN','5');
 define('TIPO_DOCUMENTO', array('1'=>'RUC','2'=>'CÉDULA','3'=>'PASAPORTE'));
 define('DOCUMENTACION', array('2'=>'CÉDULA', '3'=>'PASAPORTE'));
-define('TIPO_DOCUMENTO', array('1'=>'RUC','2'=>'CÉDULA','3'=>'PASAPORTE'));
-define('AUTOPOSTULACION_MIN','5');
 ?>
