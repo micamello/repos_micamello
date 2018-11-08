@@ -14,14 +14,14 @@ class Controlador_Perfil extends Controlador_Base
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
-Utils::log(print_r($_SESSION,true));
+
         //Obtiene todos los banner activos segun el tipo
         $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
         $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
 
         $msj1 = $imgArch1 = $btnDescarga = '';
         
- //print_r($_POST);
+
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
             case 'buscaDependencia':
@@ -58,13 +58,11 @@ Utils::log(print_r($_SESSION,true));
 
                     $btnSig = 1;
                     if(!isset($_FILES['subirCV'])){
-                        $_FILES['subirCV'] = '';
-                        
+                        $_FILES['subirCV'] = ''; 
                     }
                     $btnSubir  = 0;
 
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
-                    //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
                 }
 
                 if (Utils::getParam('cambiarClave') == 1) {
@@ -127,10 +125,7 @@ Utils::log(print_r($_SESSION,true));
 
                 );
 
-
-
                 $tags["template_js"][] = "selectr";
-                //$tags["template_js"][] = "validator";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "editarPerfil";
                 $tags["template_js"][] = "publicar_oferta";
@@ -222,7 +217,7 @@ Utils::log(print_r($_SESSION,true));
             }
 
             if (!empty($imagen) && $imagen['error'] != 4) {
-              if (!Utils::upload($imagen,$idUsuario,PATH_PROFILE,1)){
+              if (!Utils::upload($imagen,$_SESSION['mfo_datos']['usuario']['username'],PATH_PROFILE,1)){
                 throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
               }  
             } 
@@ -239,7 +234,7 @@ Utils::log(print_r($_SESSION,true));
                             if (!Modelo_InfoHv::actualizarHv($_SESSION['mfo_datos']['infohv']['id_infohv'], $arch[1])) {
                                 throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                             } else {
-                                if (!Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2)){
+                                if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
                                   throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                                 }
                             }
@@ -248,7 +243,7 @@ Utils::log(print_r($_SESSION,true));
                         if (!Modelo_InfoHv::cargarHv($idUsuario, $arch[1])) {
                             throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                         } else {
-                            if (!Utils::upload($archivo, $idUsuario, PATH_ARCHIVO, 2)){
+                            if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
                               throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");  
                             }
                         }

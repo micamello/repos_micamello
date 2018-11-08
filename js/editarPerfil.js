@@ -80,7 +80,16 @@ $('#subirCV').change(function(e) {
     $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
     $('#texto_status').html('Hoja de vida Cargada');
     $('#texto_status').addClass('arch_cargado');
-    document.getElementById("mensaje_error_hv").style.display = "none";
+    if(document.getElementById("mensaje_error_hv")){
+        document.getElementById("mensaje_error_hv").style.display = "none";
+    }
+
+    var estado = validarFormulario();
+    if(estado == 1){
+        $('#boton').removeAttr('disabled');
+    }else{
+        $('#boton').attr('disabled');
+    }
 });
 
 /* Carga de hoja de vida */
