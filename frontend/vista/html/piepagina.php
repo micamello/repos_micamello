@@ -17,14 +17,12 @@
 </div>
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" style="z-index:9999">
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" style="z-index:9999">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <!--<div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">REGISTRE SU CUENTA 
-        <i class="fa fa-user" style="color: #00a885;padding: 8px;font-size: 25px;"></i></h4>
-      </div>-->
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
       
       <div class="modal-body">
 

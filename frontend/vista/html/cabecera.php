@@ -244,13 +244,13 @@ if(isset($show_banner)){ ?>
   <?php } ?>
     <!--mensajes de error y exito-->
     <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
-      <div align="center" id="alerta" style="display:" class="alert alert-danger alert-dismissible">
-        <?php echo $sess_err_msg;?>
+      <div align="center" id="alerta" style="display:" class="alert alert-danger" role="alert">
+        <strong><?php echo $sess_err_msg;?></strong>
       </div>  
     <?php }?>
 
     <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
-      <div align="center" id="alerta" style="display:" class="alert alert-success alert-dismissible">
-        <?php echo $sess_suc_msg;?>
+      <div align="center" id="alerta" style="display:" class="alert alert-success" role="alert">
+        <strong><?php echo $sess_suc_msg;?></strong>
       </div>  
     <?php } ?>
