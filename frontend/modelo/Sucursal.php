@@ -37,14 +37,6 @@ class Modelo_Sucursal{
     if (empty($pais)){ return false; }
     $sql = "SELECT dominio FROM mfo_sucursal where id_pais = ?";
     return $GLOBALS['db']->auto_array($sql,array($pais));   
-
-  // public static function validar_EC($dni){
-  //   $val = true;
-  //   if(ValidadorEc::validarCedula($dni) == false || ValidadorEc::validarRucPersonaNatural($dni) == false || ValidadorEc::validarRucSociedadPrivada($dni) == false || ValidadorEc::validarRucSociedadPublica($dni) == false){
-  //     $val = false;
-  //     }
-  //     return $val;
-  //   }
   }
 }  
 ?>

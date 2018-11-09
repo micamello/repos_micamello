@@ -36,10 +36,20 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   if (empty($ofertas)){
   	continue;
   }
-  foreach($ofertas as $oferta){
-    echo "oferta: ".$oferta["titulo"]."<br>";
+
+  $sucursal = Modelo_Sucursal::consultaxPais($rows["id_pais"]);
+
+  foreach($ofertas as $oferta){    
     $mail_ofertas .= utf8_encode($oferta["titulo"])."<br>";
-    $mail_ofertas .= utf8_encode($empresa["nombres"])." - ".utf8_encode($oferta["provincia"])."/".utf8_encode($oferta["ciudad"])."<br><br>";
+    $mail_ofertas .= utf8_encode($oferta["empresa"])." - ".utf8_encode($oferta["provincia"])." / ".utf8_encode($oferta["ciudad"])."<br>";
+    $mail_ofertas .= "<a href='".PUERTO."://".$sucursal["dominio"]."/detalleOferta/oferta/".$oferta["id_ofertas"]."/'>Ver Oferta</a><br><br>";
+    echo $mail_ofertas."<br>";
+  }
+  //envio de correo al candidato
+  if (!empty($mail_ofertas)){
+    $email_body = "Estimado ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le informamos las siguientes ofertas que se ajustan a su perfil:<br><br>";    
+    $email_body .= $mail_ofertas;
+    Utils::envioCorreo($rows["correo"],"Ofertas Laborales",$email_body);    
   }
 }
 
