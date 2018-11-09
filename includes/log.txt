@@ -1,0 +1,1842 @@
+[2018/11/08 08:47:23] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:47:23] dispatch nombre del controlador: Controlador_Logout - logout
+[2018/11/08 08:47:23] Controlador_Logout::construirPagina Login out
+[2018/11/08 08:47:23] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:47:23] dispatch nombre del controlador: Controlador_Inicio - inicio
+[2018/11/08 08:47:23] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2018/11/08 08:47:23] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2018/11/08 08:47:23] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '1'
+[2018/11/08 08:47:23] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '2'
+[2018/11/08 08:47:23] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2018/11/08 08:47:23] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:47:23] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2018/11/08 08:47:23] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2018/11/08 08:47:23] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:47:24] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:47:24] dispatch nombre del controlador: Controlador_Login - login
+[2018/11/08 08:47:24] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:47:24] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:47:24] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:47:29] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:47:29] dispatch nombre del controlador: Controlador_Login - login
+[2018/11/08 08:47:29] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '25d55ad283aa400af464c76d713c07ad'
+[2018/11/08 08:47:29] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '2'
+[2018/11/08 08:47:29] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2018-11-08 20:47:29" WHERE id_empresa=1
+[2018/11/08 08:47:29] SQL Query: SELECT * FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2018/11/08 08:47:29] SQL Query: SELECT e.id_empresa, e.padre FROM mfo_empresa e
+              WHERE e.padre IN('1') AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)
+[2018/11/08 08:47:29] SQL Query: SELECT e.id_empresa, e.padre FROM mfo_empresa e
+              WHERE e.padre IN('3,4') AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)
+[2018/11/08 08:47:29] SQL Query: SELECT e.id_empresa, e.padre FROM mfo_empresa e
+              WHERE e.padre IN('5') AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)
+[2018/11/08 08:47:29] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:47:29] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 08:47:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:47:29] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 08:47:29] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:47:29] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:47:29] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 08:47:29] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 08:47:29] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 08:47:29] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 08:47:29] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 08:47:29] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 08:47:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:47:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:47:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:47:29] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:47:29] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:47:29] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:47:29] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 08:47:33] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:47:33] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 08:47:33] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:47:33] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 08:47:33] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:47:33] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:47:33] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 08:47:33] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 08:47:33] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 08:47:33] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 08:47:33] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 08:47:33] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 08:47:33] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:47:33] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:47:34] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:47:34] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:47:34] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:48:50] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:48:50] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 08:48:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:50] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 08:48:50] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:48:50] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:48:50] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 08:48:50] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 08:48:50] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 08:48:50] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 08:48:50] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 08:48:50] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 08:48:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:48:50] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:48:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:48:50] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:48:50] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 08:48:54] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:48:54] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 08:48:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:54] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 08:48:54] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:48:54] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:48:54] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 08:48:54] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 08:48:54] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 08:48:54] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 08:48:54] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 08:48:54] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 08:48:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:48:54] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:48:55] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:48:56] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:48:56] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 08:48:56] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:56] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 08:48:56] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:48:56] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:48:56] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 08:48:56] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 08:48:56] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 08:48:56] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 08:48:56] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 08:48:56] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 08:48:56] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:56] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:48:56] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:48:56] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:48:56] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:48:56] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:48:56] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 08:49:02] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:49:02] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 08:49:02] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:02] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 08:49:02] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:49:02] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:49:02] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 08:49:02] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 08:49:02] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 08:49:02] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 08:49:02] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 08:49:02] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 08:49:02] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:02] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:02] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:49:02] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:49:02] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:49:23] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:49:23] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 08:49:23] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:23] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 08:49:23] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 08:49:23] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 08:49:23] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 08:49:23] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 08:49:23] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 08:49:23] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 08:49:23] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 08:49:23] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 08:49:23] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:23] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:23] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:49:23] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:49:23] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:49:23] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:49:23] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 08:49:29] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:49:29] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 08:49:29] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;
+[2018/11/08 08:49:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 08:49:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 08:49:29] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 08:49:29] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 08:49:29] Utils::createSession empezo una nueva sesion
+[2018/11/08 08:49:29] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:10:31] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:10:31] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:10:31] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;
+[2018/11/08 09:10:31] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:10:31] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:10:31] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:10:31] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:10:31] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:10:31] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:10:31] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:12:00] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:00] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:12:00] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;
+[2018/11/08 09:12:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:12:00] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:12:00] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:12:00] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:00] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:12:15] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:15] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:12:15] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;
+[2018/11/08 09:12:15] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:15] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:15] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:12:15] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:12:15] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:12:15] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:15] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:12:17] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:17] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:12:17] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;
+[2018/11/08 09:12:17] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:17] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:17] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:12:17] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:12:17] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:12:17] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:17] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:12:27] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:27] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:12:27] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;
+[2018/11/08 09:12:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:12:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:12:27] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:12:27] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:12:27] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:12:27] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:13:53] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:13:53] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:13:53] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
+        FROM micamello_produccion.mfo_empresa e
+        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+        WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+        GROUP BY e.id_empresa;
+[2018/11/08 09:13:53] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:13:53] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:13:53] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:13:53] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:13:53] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:13:53] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:13:53] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:23:55] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:23:55] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:23:55] SQL Query:  FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa;
+[2018/11/08 09:23:55] SQL Query: SELECT u.id_usuario, ul.username, u.nombres, u.apellidos, u.fecha_nacimiento,u.fecha_creacion, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, e.descripcion AS estudios, u.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia FROM mfo_usuario u, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_usuario_login ul
+            WHERE 
+            ul.id_usuario_login = u.id_usuario_login
+            AND c.id_provincia = pr.id_provincia
+            AND u.id_ciudad = c.id_ciudad
+            AND e.id_escolaridad = u.id_escolaridad
+            AND ul.tipo_usuario = 1
+            AND u.id_usuario = (SELECT p.id_usuario FROM mfo_porcentajextest p WHERE p.id_usuario = u.id_usuario LIMIT 1)
+            AND pr.id_pais =  ORDER BY u.nombres ASC LIMIT 0,2
+[2018/11/08 09:23:55] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:23:55] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:23:55] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:23:55] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:23:55] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:23:55] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:23:55] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:24:12] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:24:12] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:24:12] SQL Query:  FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa;
+[2018/11/08 09:24:12] SQL Query: SELECT u.id_usuario, ul.username, u.nombres, u.apellidos, u.fecha_nacimiento,u.fecha_creacion, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, e.descripcion AS estudios, u.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia FROM mfo_usuario u, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_usuario_login ul
+            WHERE 
+            ul.id_usuario_login = u.id_usuario_login
+            AND c.id_provincia = pr.id_provincia
+            AND u.id_ciudad = c.id_ciudad
+            AND e.id_escolaridad = u.id_escolaridad
+            AND ul.tipo_usuario = 1
+            AND u.id_usuario = (SELECT p.id_usuario FROM mfo_porcentajextest p WHERE p.id_usuario = u.id_usuario LIMIT 1)
+            AND pr.id_pais = 1 ORDER BY u.nombres ASC LIMIT 0,2
+[2018/11/08 09:26:22] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:26:22] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:26:22] SQL Query:  FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa; LIMIT -2,2
+[2018/11/08 09:26:22] SQL Query:  FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa;
+[2018/11/08 09:26:22] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:26:22] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:26:22] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:26:22] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:26:22] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:26:22] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:26:22] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:26:48] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:26:48] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:26:48] SQL Query:  FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa; LIMIT 0,2
+[2018/11/08 09:26:48] SQL Query:  FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa;
+[2018/11/08 09:26:48] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:26:48] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:26:48] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:26:48] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:26:48] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:26:48] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:26:48] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:27:08] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:27:08] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:27:08] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa; LIMIT 0,2
+[2018/11/08 09:27:08] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa;
+[2018/11/08 09:27:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:27:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:27:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:27:08] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:27:08] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:27:08] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:27:08] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:27:15] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:27:15] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:27:15] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa; LIMIT 0,2
+[2018/11/08 09:27:15] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa;
+[2018/11/08 09:27:15] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:27:15] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:27:15] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:27:15] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:27:15] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:27:15] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:27:15] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:27:38] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:27:38] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:27:38] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 0,2
+[2018/11/08 09:27:38] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:27:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:27:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:27:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:27:38] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:27:38] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:27:38] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:27:38] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:28:26] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:28:26] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:28:26] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 0,2
+[2018/11/08 09:28:26] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:28:26] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:28:26] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:28:26] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:28:26] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:28:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:28:26] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:28:26] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:28:51] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:28:51] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:28:51] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 0,2
+[2018/11/08 09:28:51] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:28:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:28:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:28:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:28:51] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:28:51] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:28:51] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:28:51] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:28:54] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:28:54] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:28:54] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 2,2
+[2018/11/08 09:28:54] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:28:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:28:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:28:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:28:54] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:28:54] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:28:54] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:28:54] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:29:24] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:24] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:29:24] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 2,2
+[2018/11/08 09:29:24] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:29:24] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:24] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:24] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:29:24] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:29:24] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:29:24] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:24] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:29:29] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:29] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:29:29] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 0,2
+[2018/11/08 09:29:29] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:29:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:29:29] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:29:29] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:29:29] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:29] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:29:30] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:30] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:29:30] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 2,2
+[2018/11/08 09:29:30] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:29:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:29:30] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:29:30] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:29:31] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:31] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:29:33] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:33] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:29:33] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 0,2
+[2018/11/08 09:29:33] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:29:33] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:33] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:33] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:29:33] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:29:33] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:29:33] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:33] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:29:46] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:46] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:29:46] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 0,2
+[2018/11/08 09:29:46] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:29:46] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:29:46] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:46] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:29:46] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:29:46] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:29:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:29:46] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:29:46] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:30:12] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:30:12] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:30:12] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa  LIMIT 0,2
+[2018/11/08 09:30:12] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:30:12] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      GROUP BY e.id_empresa 
+[2018/11/08 09:30:12] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:30:12] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:30:12] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:30:12] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:30:12] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:30:12] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:30:12] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:33:37] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:33:37] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:33:37] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 LIMIT 0,2
+[2018/11/08 09:33:37] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa
+[2018/11/08 09:33:37] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa
+[2018/11/08 09:33:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:33:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:33:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:33:37] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:33:37] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:33:37] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:33:37] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:34:11] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:34:11] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:34:11] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 LIMIT 0,2
+[2018/11/08 09:34:11] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa
+[2018/11/08 09:34:11] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa
+[2018/11/08 09:34:11] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:34:11] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:34:11] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:34:11] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:34:11] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:34:11] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:34:11] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:34:30] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:34:30] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:34:30] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 LIMIT 0,2
+[2018/11/08 09:34:30] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa
+[2018/11/08 09:34:30] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa
+[2018/11/08 09:34:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:34:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:34:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:34:30] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:34:30] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:34:30] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:34:30] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:36:14] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:36:14] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:36:14] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:36:14] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:36:14] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:36:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:36:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:36:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:36:14] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:36:14] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:36:14] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:36:14] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:36:34] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:36:34] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:36:34] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:36:34] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:36:34] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:36:34] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:36:34] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:36:34] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:36:34] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:36:34] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:36:34] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:37:18] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:37:18] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:37:19] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:37:19] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:37:19] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:37:19] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:37:19] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:37:19] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:37:19] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:37:19] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:37:19] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:37:46] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:37:46] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/11/08 09:37:46] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2018/11/08 09:37:46] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 09:37:46] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 09:37:46] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 09:37:46] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 09:37:46] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 09:37:46] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 14 ORDER BY nombre;
+[2018/11/08 09:37:46] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+			AND c.id_ciudad = 16;
+[2018/11/08 09:37:46] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2018/11/08 09:37:46] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 09:37:46] SQL Query: SELECT * FROM mfo_pais
+[2018/11/08 09:37:46] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
+[2018/11/08 09:37:46] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
+[2018/11/08 09:37:46] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
+[2018/11/08 09:37:46] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
+[2018/11/08 09:37:46] SQL Query: SELECT p.valor, c.imagen, c.orden 
+						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
+						WHERE p.id_usuario = '1' ORDER BY p.id_cuestionario ASC
+[2018/11/08 09:37:46] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:37:46] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:37:46] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:37:46] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:37:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:37:46] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:37:46] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:38:37] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:38:37] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:38:37] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:38:37] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:38:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:38:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:38:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:38:37] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:38:37] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:38:37] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:38:37] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:39:39] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:39:39] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:39:39] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:39:39] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:39:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:39:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:39:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:39:39] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:39:39] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:39:39] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:39:39] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:40:03] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:03] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:40:03] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:40:03] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:40:03] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:03] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:03] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:40:03] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:40:03] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:40:03] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:03] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:40:07] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:07] dispatch nombre del controlador: Controlador_Publicar - publicar
+[2018/11/08 09:40:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:07] SQL Query: SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;
+[2018/11/08 09:40:07] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 09:40:07] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 09:40:07] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 09:40:07] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2018/11/08 09:40:07] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 09:40:07] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 09:40:07] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 09:40:07] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 09:40:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:40:07] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:40:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:40:07] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:07] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:40:09] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:09] dispatch nombre del controlador: Controlador_Oferta - oferta
+[2018/11/08 09:40:09] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '4' ORDER BY RAND() LIMIT 1
+[2018/11/08 09:40:09] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '2' ORDER BY RAND() LIMIT 1
+[2018/11/08 09:40:09] SQL Query: SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
+            FROM mfo_oferta o
+            LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
+            WHERE o.estado = 1
+            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajextest pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
+            GROUP BY o.id_ofertas;
+[2018/11/08 09:40:09] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 09:40:09] SQL Query: SELECT * FROM mfo_provincia WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 09:40:09] SQL Query: SELECT * FROM mfo_jornada
+[2018/11/08 09:40:09] SQL Query: SELECT o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo,
+      a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
+      r.edad_minima, r.licencia, r.viajar, a.id_area, ul.username, emp.nombres AS empresa, emp.id_empresa AS id_usuario FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp WHERE o.estado = 1 
+    AND r.id_requisitoOferta = o.id_requisitoOferta
+    AND e.id_escolaridad = o.id_escolaridad
+    AND c.id_ciudad = o.id_ciudad
+    AND p.id_provincia = c.id_provincia
+    AND a.id_area = o.id_area
+    AND n.id_nivelInteres = o.id_nivelInteres
+    AND j.id_jornada = o.id_jornada
+
+    AND p.id_pais = 14 AND o.id_empresa = emp.id_empresa AND o.id_empresa IN(1) AND ul.id_usuario_login = emp.id_usuario_login ORDER BY o.fecha_creado DESC LIMIT 0,2
+[2018/11/08 09:40:09] SQL Query: SELECT count(1) AS cantd_ofertas FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp WHERE o.estado = 1 
+    AND r.id_requisitoOferta = o.id_requisitoOferta
+    AND e.id_escolaridad = o.id_escolaridad
+    AND c.id_ciudad = o.id_ciudad
+    AND p.id_provincia = c.id_provincia
+    AND a.id_area = o.id_area
+    AND n.id_nivelInteres = o.id_nivelInteres
+    AND j.id_jornada = o.id_jornada
+
+    AND p.id_pais = 14 AND o.id_empresa = emp.id_empresa AND o.id_empresa IN(1) AND ul.id_usuario_login = emp.id_usuario_login
+[2018/11/08 09:40:09] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:09] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:09] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:40:09] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:40:09] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:09] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:09] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:40:09] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:09] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:40:13] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:13] dispatch nombre del controlador: Controlador_Perfil - perfil
+[2018/11/08 09:40:13] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2018/11/08 09:40:13] SQL Query: SELECT * from mfo_idioma
+[2018/11/08 09:40:13] SQL Query: SELECT * from mfo_nivelidioma
+[2018/11/08 09:40:13] SQL Query: SELECT * FROM mfo_escolaridad
+[2018/11/08 09:40:13] SQL Query: SELECT * FROM mfo_area
+[2018/11/08 09:40:13] SQL Query: SELECT * from mfo_nivelinteres
+[2018/11/08 09:40:13] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 14 ORDER BY nombre;
+[2018/11/08 09:40:13] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+			AND c.id_ciudad = 16;
+[2018/11/08 09:40:13] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2018/11/08 09:40:13] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
+[2018/11/08 09:40:13] SQL Query: SELECT * FROM mfo_pais
+[2018/11/08 09:40:13] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
+[2018/11/08 09:40:13] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
+[2018/11/08 09:40:13] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
+[2018/11/08 09:40:13] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
+[2018/11/08 09:40:13] SQL Query: SELECT p.valor, c.imagen, c.orden 
+						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
+						WHERE p.id_usuario = '1' ORDER BY p.id_cuestionario ASC
+[2018/11/08 09:40:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:40:13] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:40:13] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:40:13] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:13] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:40:28] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:28] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:40:28] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:40:28] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:40:28] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:28] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:28] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:40:28] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:40:28] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:40:28] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:28] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:40:44] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:44] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:40:44] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:40:44] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:40:44] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:44] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:40:44] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:40:44] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:40:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:40:44] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:40:44] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:41:10] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:41:10] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:41:10] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:41:10] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:41:10] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:41:10] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:41:10] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:41:10] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:41:10] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:41:10] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:41:10] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:41:17] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:41:17] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:41:17] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:41:17] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:41:17] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:41:17] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:41:17] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:41:17] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:41:17] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:41:17] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:41:17] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:41:52] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:41:52] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:41:52] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:41:52] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:41:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:41:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:41:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:41:52] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:41:52] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:41:52] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:41:52] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:42:27] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:42:27] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:42:27] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:42:27] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:42:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:42:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:42:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:42:27] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:42:27] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:42:27] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:42:27] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:42:51] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:42:51] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:42:51] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:42:51] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:42:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:42:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:42:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:42:51] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:42:51] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:42:51] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:42:51] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:45:43] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:45:43] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:45:43] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:45:43] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:45:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:45:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:45:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:45:43] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:45:43] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:45:43] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:45:43] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:45:50] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:45:50] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:45:50] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:45:50] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:45:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:45:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:45:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:45:50] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:45:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:45:50] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:45:50] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:46:18] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:46:18] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:46:18] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:46:18] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:46:18] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:46:18] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:46:18] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:46:18] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:46:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:46:18] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:46:18] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:46:26] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:46:26] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:46:26] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:46:26] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:46:26] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:46:26] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:46:26] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:46:26] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:46:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:46:26] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:46:26] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:47:52] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:47:52] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:47:52] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:47:52] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:47:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:47:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:47:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:47:52] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:47:52] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:47:52] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:47:52] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:48:13] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:48:13] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:48:13] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:48:13] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:48:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:48:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:48:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:48:13] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:48:13] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:48:13] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:48:13] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:48:41] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:48:41] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:48:41] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:48:41] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:48:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:48:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:48:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:48:41] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:48:41] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:48:41] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:48:41] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:48:54] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:48:54] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:48:54] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:48:54] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:48:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:48:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:48:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:48:54] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:48:54] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:48:54] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:48:54] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:49:06] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:49:06] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:49:06] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:49:06] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:49:06] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:49:06] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:49:06] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:49:06] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:49:06] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:49:06] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:49:06] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:49:56] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:49:57] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:49:57] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:49:57] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:49:57] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:49:57] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:49:57] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:49:57] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:49:57] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:49:57] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:49:57] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:50:42] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:50:42] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:50:42] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:50:42] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:50:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:50:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:50:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:50:42] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:50:42] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:50:42] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:50:42] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:51:48] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:51:48] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:51:48] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:51:48] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1 GROUP BY e.id_empresa
+[2018/11/08 09:51:48] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:51:48] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:51:48] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:51:48] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:51:48] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:51:48] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:51:48] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:52:05] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:52:05] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:52:05] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:52:05] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1
+[2018/11/08 09:52:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:52:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:52:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:52:05] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:52:05] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:52:05] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:52:05] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/11/08 09:52:18] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:52:18] dispatch nombre del controlador: Controlador_Subempresa - subempresas
+[2018/11/08 09:52:18] SQL Query: SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest FROM micamello_produccion.mfo_empresa e INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa LIMIT 0,2
+[2018/11/08 09:52:18] SQL Query: SELECT count(1) AS cantd_empresas FROM micamello_produccion.mfo_empresa e WHERE e.padre = '1' AND e.estado = 1
+[2018/11/08 09:52:18] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:52:18] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/11/08 09:52:18] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2018/11/08 09:52:18] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/11/08 09:52:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/11/08 09:52:18] Utils::createSession empezo una nueva sesion
+[2018/11/08 09:52:18] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'

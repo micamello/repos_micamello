@@ -96,7 +96,7 @@ class Vista {
       }
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
         if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'adminEmpresas')){
-          $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/adminCuentas/", "nombre"=>"Administración");
+          $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/adminEmpresas/", "nombre"=>"Administración");
         }
         if(isset($_SESSION['mfo_datos']['subempresas'])){
           $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/cuentas/", "nombre"=>"Ofertas");

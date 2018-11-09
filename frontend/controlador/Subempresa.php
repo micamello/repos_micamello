@@ -26,10 +26,11 @@ class Controlador_Subempresa extends Controlador_Base
 
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
+        $page = Utils::getParam('page', '1', $this->data);
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-        $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario);
-        /*$page = Utils::getParam('page', '1', $this->data);
-        $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
+        $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false);
+        
+        /*$id_oferta = Utils::getParam('id_oferta', '', $this->data); 
         $type = Utils::getParam('type', '', $this->data); 
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $vista = Utils::getParam('vista', '1', $this->data);
@@ -366,11 +367,19 @@ class Controlador_Subempresa extends Controlador_Base
                 Vista::render('aspirantes', $tags);
             break;
         }*/
+        $breadcrumbs['adminEmpresas'] = 'Listado de sub empresas';
+        $cantd_empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,true);
+        $url = PUERTO.'://'.HOST.'/adminEmpresas';
+        $pagination = new Pagination($cantd_empresas,REGISTRO_PAGINA,$url);
+        $pagination->setPage($page);
 
         $tags = array(
-            //'breadcrumbs'=>$breadcrumbs,
+            'breadcrumbs'=>$breadcrumbs,
             'subempresas' => $subempresas,
-        );
+            'cantd_empresas'=>$cantd_empresas,
+            'paginas'=>$pagination->showPage()
+        );      
+        
         Vista::render('subempresas', $tags);
     }
 }

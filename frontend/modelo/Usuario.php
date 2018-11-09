@@ -892,17 +892,38 @@ WHERE
   }
 
   #OBTIENE LAS EMPRESAS HIJAS Y SUS PLANES
-  public static function obtieneSubempresasYplanes($padre){
+  public static function obtieneSubempresasYplanes($padre,$page,$obtCantdRegistros=false){
 
     if (empty($padre)) { return false; }
 
-      $sql = "SELECT e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest
-        FROM micamello_produccion.mfo_empresa e
-        INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
-        INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
-        WHERE e.padre = ? AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW()
-        GROUP BY e.id_empresa;";
-    return $GLOBALS['db']->auto_array($sql,array($padre),true);
+    $sql = "SELECT ";
+    if(!$obtCantdRegistros){
+      $sql .= "e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest";
+    }else{
+      $sql .= "count(1) AS cantd_empresas";
+    }
+
+    $sql .= " FROM micamello_produccion.mfo_empresa e";
+
+    if(!$obtCantdRegistros){
+
+      $sql .= " INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = ? AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa";
+
+    }else{
+
+      $sql .= " WHERE e.padre = ? AND e.estado = 1";
+    }
+
+    if(!$obtCantdRegistros){
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+      return $GLOBALS['db']->auto_array($sql,array($padre),true);
+    }else{
+      $rs = $GLOBALS['db']->auto_array($sql,array($padre));
+      return $rs['cantd_empresas'];
+    }
   }
 
   #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
