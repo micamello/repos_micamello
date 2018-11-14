@@ -63,8 +63,8 @@ if(document.getElementById('des_of')){
 
 function abrirModalEditar(id,contenido,idOferta){
     
-    document.getElementById('idOferta').value = idOferta;
-    tinymce.get('des_of').setContent(contenido);
+    document.getElementById('idOferta').value = idOferta;    
+    tinymce.get('des_of').setContent(decodeURIComponent((contenido+'').replace(/\+/g, '%20')));
     $('#'+id).modal();
 }
 

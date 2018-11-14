@@ -25,12 +25,12 @@ class Controlador_Oferta extends Controlador_Base{
         $postulacionesUserLogueado = array();
         $breadcrumbs = array();
         $aspirantesXoferta = '';
-        if($vista == 'oferta'){
+        if($vista == 'oferta'){          
           if(isset($_SESSION['mfo_datos']['planes'])){            
             $planes = $_SESSION['mfo_datos']['planes'];
           }else{
             $planes = null;
-          }
+          }          
           Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
         }
 
@@ -177,7 +177,8 @@ class Controlador_Oferta extends Controlador_Base{
           case 'detalleOferta':
               //solo candidatos 
               if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
-                  Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+                 $_SESSION['mostrar_error'] = 'Deberá contratar un plan para poder aplicar a una oferta'; 
+                 Utils::doRedirect(PUERTO.'://'.HOST.'/planes/'); 
               }
               
               $idOferta = Utils::getParam('id', '', $this->data);
@@ -187,7 +188,7 @@ class Controlador_Oferta extends Controlador_Base{
 
               if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
 
-                $subempresas = $_SESSION['mfo_datos']['subempresas']; 
+                $subempresas = (isset($_SESSION['mfo_datos']['subempresas'])) ? $_SESSION['mfo_datos']['subempresas'] : ''; 
 
                 if($subempresas != ''){
                   $idUsuario = $idUsuario.",".$subempresas;
@@ -325,7 +326,7 @@ class Controlador_Oferta extends Controlador_Base{
                 if(!$r){
                     $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci&oacute;n, intente de nuevo';
                 }else{
-                    $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci&oacute;n exitosamente';
+                    $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulación exitosamente';
                 }
             }
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();

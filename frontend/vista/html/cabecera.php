@@ -172,7 +172,9 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                 <?php } ?>
                 <?php if (isset($menu["submenu"])){ ?>                            
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION['mfo_datos']['usuario']['nombres']; ?><img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                      <?php echo $_SESSION['mfo_datos']['usuario']['nombres'].(isset($_SESSION['mfo_datos']['usuario']['apellidos']) ? ' '.$_SESSION['mfo_datos']['usuario']['apellidos'] : ''); ?>
+                      <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon">
                       <ul class="dropdown-menu">
                         <?php foreach($menu["submenu"] as $submenu){ ?>  
                             <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>

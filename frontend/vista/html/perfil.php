@@ -42,7 +42,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
                         </div>
                     </div>
                     <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-	                    <div class="panel panel-default shadow" style="border-radius: 20px;">
+	                    <div id="carga" class="panel panel-default shadow" style="border-radius: 20px;">
 	                    	
 	                    	<img id="archivo" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/Hv.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
 	                       
@@ -130,7 +130,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                    <div class="col-md-6">
 	                                        <div id="seccion_nombre" class="form-group">
 	                                            <label for="nombres"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nombres <span class="requerido" title="Este campo es obligatorio">*</span><?php }else{ ?> Nombre de la empresa<?php } ?></label><div id="err_nom" class="help-block with-errors"></div>
-	                                			<input class="form-control" type="text" id="nombres" name="nombres" value="<?php if(isset($data)){ echo $data['nombres']; } else{ echo $_SESSION['mfo_datos']['usuario']['nombres']; } ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
+	                                			<input class="form-control" type="text" id="nombres" name="nombres" value="<?php if(isset($data['nombres'])){ echo $data['nombres']; } else{ echo $_SESSION['mfo_datos']['usuario']['nombres']; } ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
 	                                        </div>
 	                                    </div>
 
@@ -138,7 +138,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    <div class="col-md-6">
 		                                        <div id="seccion_apellido" class="form-group">
 		                                            <label for="apellidos">Apellidos<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_ape" class="help-block with-errors"></div>
-		                                			<input class="form-control" type="text" id="apellidos" name="apellidos" value="<?php if(isset($data)){ echo $data['apellidos']; } else{ echo $_SESSION['mfo_datos']['usuario']['apellidos']; } ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
+		                                			<input class="form-control" type="text" id="apellidos" name="apellidos" value="<?php if(isset($data['apellidos'])){ echo $data['apellidos']; } else{ echo $_SESSION['mfo_datos']['usuario']['apellidos']; } ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
 		                                        </div>
 		                                    </div>
 	                                    <?php } ?>
@@ -150,9 +150,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                            	<option value="0">Seleccione su opci&oacute;n</option>
 													<?php 
 													if (!empty($nacionalidades)){
-				                                    	foreach($nacionalidades as $key => $n){ 
+				                    foreach($nacionalidades as $key => $n){ 
 															echo "<option value='".$n['id_pais']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_nacionalidad'] == $n['id_pais'] || (isset($data) && $data['id_nacionalidad'] == $n['id_pais']))
+															if ($_SESSION['mfo_datos']['usuario']['id_nacionalidad'] == $n['id_pais'] || (isset($data['id_nacionalidad']) && $data['id_nacionalidad'] == $n['id_pais']))
 															{ 
 																echo " selected='selected'";
 															}
@@ -166,7 +166,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                    <div class="col-md-6">
 		                                    <div id="mayoria"  class="form-group">
 		                                        <label for="mayor_edad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Fecha de Nacimiento <?php }else{ ?> Fecha de Apertura <?php } ?><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="error" class="help-block with-errors"></div>
-		                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" value="<?php if(isset($data)){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> onchange="calcularEdad()" <?php } ?> placeholder="dd/mm/aaaa" onkeyup="validarFormulario()" required/>
+		                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>"  value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> onchange="calcularEdad()" <?php } ?> placeholder="dd/mm/aaaa" onkeyup="validarFormulario()" required/>
 		                                    </div>
 	                                    </div>
 
@@ -175,7 +175,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											<div class="col-md-6">
 											    <div id="seccion_tlf" class="form-group">
 											        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
-											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data)){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
+											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="9" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
 											    </div>
 											</div>
 
@@ -189,11 +189,10 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            <select class="form-control" name="provincia" id="provincia" <?php if($btnSig == 1){ echo 'disabled'; } ?> onchange="validarFormulario()" required>
 		                                            	<option value="0">Seleccione una provincia</option>
 														<?php 
-														if (!empty($arrprovincia)){
-															
-					                                    	foreach($arrprovincia as $key => $pr){ 
+														if (!empty($arrprovincia)){															  												
+					                    foreach($arrprovincia as $key => $pr){ 
 																echo "<option value='".$pr['id_provincia']."'";
-																if ($provincia == $pr['id_provincia'] || (isset($data) && $data['provincia'] == $pr['id_provincia']))
+																if ($provincia == $pr['id_provincia'] || (isset($data['provincia']) && $data['provincia'] == $pr['id_provincia']))
 																{ 
 																	echo " selected='selected'";
 																}
@@ -212,7 +211,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            if(!empty($arrciudad)){
 				                                    	foreach($arrciudad as $key => $ciudad){ 
 															echo "<option value='".$ciudad['id_ciudad']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad'] || (isset($data) && $data['ciudad'] == $ciudad['id_ciudad']))
+															if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad'] || (isset($data['ciudad']) && $data['ciudad'] == $ciudad['id_ciudad']))
 															{  
 																echo " selected='selected'";
 															}
@@ -236,7 +235,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	<?php 
 				                                    	foreach(REQUISITO as $key => $dis){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['discapacidad'] == $key || (isset($data) && $data['discapacidad'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['discapacidad'] == $key || (isset($data['discapacidad']) && $data['discapacidad'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -254,7 +253,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            <?php 
 				                                    	foreach(ANOSEXP as $key => $exp){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['anosexp'] == $key || (isset($data) && $data['experiencia'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['anosexp'] == $key || (isset($data['experiencia']) && $data['experiencia'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -267,7 +266,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											<div class="col-md-6">
 											    <div id="seccion_tlf" class="form-group">
 											        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
-											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data)){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
+											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> onkeyup="validarFormulario()" required/>
 											    </div>
 											</div>
 
@@ -279,7 +278,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	<?php 
 				                                    	foreach(ESTADO_CIVIL as $key => $e){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['estado_civil'] == $key || (isset($data) && $data['estado_civil'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['estado_civil'] == $key || (isset($data['estado_civil']) && $data['estado_civil'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -297,7 +296,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	<?php 
 				                                    	foreach(GENERO as $key => $ge){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['genero'] == $key || (isset($data) && $data['genero'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['genero'] == $key || (isset($data['genero']) && $data['genero'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -315,7 +314,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	<?php 
 				                                    	foreach(REQUISITO as $key => $r){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['tiene_trabajo'] == $key || (isset($data) && $data['tiene_trabajo'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['tiene_trabajo'] == $key || (isset($data['tiene_trabajo']) && $data['tiene_trabajo'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -333,7 +332,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	<?php 
 				                                    	foreach(REQUISITO as $key => $r){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['viajar'] == $key || (isset($data) && $data['viajar'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['viajar'] == $key || (isset($data['viajar']) && $data['viajar'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -352,7 +351,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	
 				                                    	foreach(REQUISITO as $key => $r){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['licencia'] == $key || (isset($data) && $data['licencia'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['licencia'] == $key || (isset($data['licencia']) && $data['licencia'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -365,13 +364,13 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    <div class="col-md-6" >
 		                                        <div id="seccion_esc" class="form-group">
 		                                            <label for="escolaridad">&Uacute;ltimo estudio realizado <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_esc" class="help-block with-errors"></div>
-		                                            <select id="escolaridad" name="escolaridad" class="form-control" onchange="ocultarCampos()"style="padding-left: 0px;" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
+		                                            <select id="escolaridad" name="escolaridad" class="form-control" onchange="ocultarCampos(); validarFormulario();"style="padding-left: 0px;" <?php if($btnSig == 1){ echo 'disabled'; } ?> required>
 		                                            	<option value="0">Seleccione una opci&oacute;n</option>
 														<?php 
 														if (!empty($escolaridad)){
 					                                    	foreach($escolaridad as $key => $es){ 
 																echo "<option value='".$es['id_escolaridad']."'";
-																if ($_SESSION['mfo_datos']['usuario']['id_escolaridad'] == $es['id_escolaridad'] || (isset($data) && $data['escolaridad'] == $es['id_escolaridad']))
+																if ($_SESSION['mfo_datos']['usuario']['id_escolaridad'] == $es['id_escolaridad'] || (isset($data['escolaridad']) && $data['escolaridad'] == $es['id_escolaridad']))
 																{ 
 																	echo " selected='selected'";
 																}
@@ -390,7 +389,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														<?php 
 				                                    	foreach(STATUS_CARRERA as $key => $status){ 
 															echo "<option value='".$key."'";
-															if ($_SESSION['mfo_datos']['usuario']['status_carrera'] == $key || (isset($data) && $data['estatus'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['status_carrera'] == $key || (isset($data['estatus']) && $data['estatus'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -401,18 +400,18 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 												</div>
 		                                    </div>
 											
-											<div class="col-md-6 depende">
+											<div class="col-md-6 depende" hidden>
 		                                        <div id="seccion_estudio" class="form-group">
 		                                            <label for="lugar_estudio">&#191;Estudi&oacute; en el extranjero&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_estudio" class="help-block with-errors"></div>
 		                                            <select class="form-control" id="lugar_estudio" name="lugar_estudio" onchange='mostrarUni(); validarFormulario();' <?php if($btnSig == 1){ echo 'disabled'; } ?> >
-		                                            	<option value="0" selected>Seleccione su opci&oacute;n</option>
+		                                            	<option value="-1" selected="selected">Seleccione su opci&oacute;n</option>
 														<?php 
 				                                    	foreach(REQUISITO as $key => $u){ 
 															echo "<option value='".$key."'";
-															if (($_SESSION['mfo_datos']['usuario']['id_univ'] != 0 && $key == 0 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) <= 1) || (isset($data) && $data['lugar_estudio'] == 0 && $key == $data['lugar_estudio']))
+															if (($_SESSION['mfo_datos']['usuario']['id_univ'] != 0 && $key == 0 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) <= 1) || (isset($data['lugar_estudio']) && $data['lugar_estudio'] == 0 && $key == $data['lugar_estudio']))
 															{
 																echo " selected='selected'";
-															}else if ((strlen($_SESSION['mfo_datos']['usuario']['id_univ']) <= 1 && $key == 1 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) > 1) || (isset($data) && $data['lugar_estudio'] == 1 && $key == $data['lugar_estudio']))
+															}else if ((strlen($_SESSION['mfo_datos']['usuario']['id_univ']) <= 1 && $key == 1 && strlen($_SESSION['mfo_datos']['usuario']['nombre_univ']) > 1) || (isset($data['lugar_estudio']) && $data['lugar_estudio'] == 1 && $key == $data['lugar_estudio']))
 															{
 																echo " selected='selected'";
 															}
@@ -424,7 +423,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                        </div>
 		                                    </div>
 
-		                                    <div class="col-md-6 depende">
+		                                    <div hidden class="col-md-6 depende">
 		                                        <div id="seccion_univ" class="form-group">
 		                                            <label for="universidad">Universidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_univ" class="help-block with-errors"></div>
 		                                            <select class="form-control" id="universidad" name="universidad" <?php if($btnSig == 1){ echo 'disabled'; } ?> onchange="validarFormulario()" >
@@ -433,7 +432,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														if (!empty($universidades)){
 					                                    	foreach($universidades as $key => $u){ 
 																echo "<option value='".$u['id_univ']."'";
-																if ($_SESSION['mfo_datos']['usuario']['id_univ'] == $u['id_univ'] || (isset($data) && $data['universidad'] == $u['id_univ']))
+																if ($_SESSION['mfo_datos']['usuario']['id_univ'] == $u['id_univ'] || (isset($data['universidad']) && $data['universidad'] == $u['id_univ']))
 																{ 
 																	echo " selected='selected'";
 																}
@@ -456,7 +455,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																{ 
 																	$optiones .= '<p class="col-md-12 badge_item3" id="area'.$ae['id_area'].'">'.utf8_encode($ae['nombre']).'<i class="fa fa-window-close fa-2x icon" ';
 																	if($btnSig != 1){
-																		$optiones .= 'onclick="eliminar_item_selected(\'area'.$ae['id_area'].'\',\'area_select\',\''.$ae['id_area'].'\'); validarFormulario();"';
+																		$optiones .= 'onclick="eliminar_item_selected(\'area'.$ae['id_area'].'\',\'area_select\',\''.$ae['id_area'].'\'); validarFormulario();" style="cursor:pointer;"';
 																	}
 																	$optiones .= '></i></p>';
 																}
@@ -498,7 +497,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																{ 
 																	$optiones .= '<p class="col-md-12 badge_item3" id="nivel'.utf8_encode($ae['id_nivelInteres']).'">'.utf8_encode($ae['descripcion']).'<i class="fa fa-window-close fa-2x icon" ';
 																	if($btnSig != 1){
-																		$optiones .= 'onclick="eliminar_item_selected(\'nivel'.$ae['id_nivelInteres'].'\',\'nivel_interes\',\''.$ae['id_nivelInteres'].'\'); validarFormulario();"';
+																		$optiones .= 'onclick="eliminar_item_selected(\'nivel'.$ae['id_nivelInteres'].'\',\'nivel_interes\',\''.$ae['id_nivelInteres'].'\'); validarFormulario();" style="cursor:pointer;"' ;
 																	}
 																	$optiones .= '></i></p>';
 																}
@@ -570,7 +569,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 											<div class="col-md-2">
 												<div class="form-group">
-													<a id="btn_transfer" class="button_transfer_list"><i class="fa fa-plus"></i></a>
+													<a id="btn_transfer" class="button_transfer_list" ><i class="fa fa-plus"></i></a>
 												</div>
 											</div>
 
@@ -581,7 +580,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														</div>
 														<div class="list_content">
 															<div class="form-group" id="list_idioma">
-																<?php if(empty($nivelIdiomas) && (isset($data) && empty($data['nivel_idioma'])) ){ ?>
+																<?php if(empty($nivelIdiomas) && (isset($data['nivel_idioma']) && empty($data['nivel_idioma'])) ){ ?>
 																	<p id="text_nothing">Ningun idioma seleccionado.....</p>
 																<?php }else{ ?>
 																	<p style="display:none;" id="text_nothing">Ningun idioma seleccionado.....</p>
@@ -644,34 +643,35 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 									            <div class="col-md-6" id="group_nombre_contact">
 									              <div id="seccion_nomCon" class="form-group">
 									                <label class="text-center">Nombres</label>&nbsp;<i class="requerido">*</i><div id="err_nomCon" class="help-block with-errors"></div>
-									                <input type="text" name="nombre_contact" id="nombre_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['nombres_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control" onkeyup="validarFormulario()" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?> >
+									                <input type="text" name="nombre_contact" id="nombre_contact" value="<?php echo (isset($data['nombre_contact'])) ? $data['nombre_contact'] : $_SESSION['mfo_datos']['usuario']['nombres_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control" onkeyup="validarFormulario()" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?> >
 									              </div>
 									            </div>  
 
 									            <div class="col-md-6" id="group_apell_contact">
 									              <div id="seccion_apeCon" class="form-group">
 									                <label class="text-center">Apellidos</label>&nbsp;<i class="requerido">*</i><div id="err_apeCon" class="help-block with-errors"></div>
-									                <input type="text" name="apellido_contact" id="apellido_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['apellidos_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control" onkeyup="validarFormulario()" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?>>
+									                <input type="text" name="apellido_contact" id="apellido_contact" value="<?php echo (isset($data['apellido_contact'])) ? $data['apellido_contact'] : $_SESSION['mfo_datos']['usuario']['apellidos_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control" onkeyup="validarFormulario()" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?>>
 									              </div>
 									            </div> 
 
 									            <div class="col-md-6" id="group_num1_contact">
 									              <div id="seccion_tlfCon" class="form-group">
 									                <label class="text-center">Teléfono 1</label>&nbsp;<i class="requerido">*</i><div id="err_tlfCon" class="help-block with-errors"></div>
-									                <input type="text" name="tel_one_contact" id="tel_one_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono1']; ?>" class="form-control" pattern='[0-9]+' onkeyup="validarFormulario()" onkeydown="return validaNumeros(event)" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?>>
+									                <input type="text" name="tel_one_contact" id="tel_one_contact" value="<?php echo (isset($data['tel_one_contact'])) ? $data['tel_one_contact'] : $_SESSION['mfo_datos']['usuario']['telefono1']; ?>" class="form-control" pattern='[0-9]+' onkeyup="validarFormulario()" onkeydown="return validaNumeros(event)" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo 'required'; } ?>>
 									              </div>
 									            </div> 
 
 									            <div class="col-md-6" id="group_num2_contact">
 									              <div class="form-group">
 									                <label class="text-center">Teléfono 2 (opcional):</label><div class="help-block with-errors"></div>
-									                <input type="text" name="tel_two_contact" id="tel_two_contact" value="<?php echo $_SESSION['mfo_datos']['usuario']['telefono2']; ?>" class="form-control" pattern='[0-9]+' onkeydown="return validaNumeros(event)" <?php if($btnSig == 1){ echo 'disabled'; } ?>>
+									                <input type="text" name="tel_two_contact" id="tel_two_contact" value="<?php echo (isset($data['tel_two_contact'])) ? $data['tel_two_contact'] : $_SESSION['mfo_datos']['usuario']['telefono2']; ?>" class="form-control" pattern='[0-9]+' onkeydown="return validaNumeros(event)" <?php if($btnSig == 1){ echo 'disabled'; } ?>>
 									              </div>
 									            </div> 
 									        </div>
 								        <?php } ?>
 	                            	</div>
 		                            <input type="hidden" name="actualizar" id="actualizar" value="1">
+		                            <input type="hidden" name="btnDescarga" id="btnDescarga" value="<?php echo $btnDescarga; ?>">
 		                            <input type="hidden" name="tipo_usuario" id="tipo_usuario" value="<?php echo $_SESSION['mfo_datos']['usuario']['tipo_usuario']; ?>">
 					                <div class="row">
 					                	<?php if($btnSig == 0){ ?>

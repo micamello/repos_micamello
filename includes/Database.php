@@ -90,7 +90,7 @@ class Database{
 
     $valores = '';
     foreach ($data as $key => $datos) {
-      $valores = '('.implode(',', $datos).'),';
+      $valores .= '('.implode(',', $datos).'),';
     }
     $valores = substr($valores, 0,strlen($valores)-1);
 

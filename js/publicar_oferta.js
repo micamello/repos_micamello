@@ -207,7 +207,12 @@ $('#btn_transfer').on('click', function()
             // publicar_btn.setAttribute("class", "btn btn-success eder");
             if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "") && ($('select').filter('[required]:visible').val() != "")) {
                 publicar_btn.setAttribute("class", "btn btn-success");
+              if (validarFormulario()){
+                if(document.getElementById('btnDescarga').value != 0){
+                  publicar_btn.removeAttribute("disabled");
+                }
                 console.log("Habilitando el boton");
+              }
             }  
         }
 

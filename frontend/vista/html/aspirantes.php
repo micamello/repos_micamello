@@ -99,23 +99,25 @@
 				?></div>
 				</div>
 		    </div>
-		    <div class="panel panel-default shadow-panel1">
-				<div class="panel-heading">
-					<span><i class="fa fa-calendar"></i><?php if ($vista == 1){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
-				</div>
-				<div class="panel-body">
-					<div class="filtros">
-				<?php
-					
-				    foreach (FECHA_POSTULADO as $key => $v) {
+		    <?php if ($vista == 1){ ?>
+			    <div class="panel panel-default shadow-panel1">
+						<div class="panel-heading">
+							<span><i class="fa fa-calendar"></i><?php if ($vista == 1){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
+						</div>
+						<div class="panel-body">
+							<div class="filtros">
+						<?php
+							
+						    foreach (FECHA_POSTULADO as $key => $v) {
 
-				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/F'.$key.'/';
-						$ruta = Controlador_Aspirante::calcularRuta($ruta,'F');
-				    	echo '<li class="lista"><a href="'.$ruta.'1/" class="fecha" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-				    }
-				?></div>
-				</div>
-		    </div>
+						    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/F'.$key.'/';
+								$ruta = Controlador_Aspirante::calcularRuta($ruta,'F');
+						    	echo '<li class="lista"><a href="'.$ruta.'1/" class="fecha" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+						    }
+						?></div>
+						</div>
+			    </div>
+		  	<?php } ?>
 		    <div class="panel panel-default shadow-panel1">
 		          <div class="panel-heading">
 		              <span><i class="fa fa-money"></i> Plan Contratado (prioridad)</span>
@@ -378,29 +380,27 @@
 
 												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))){ ?>
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
-									            		<?php 
-										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-
-										            			$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-										            			$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-										            			
-										            			if(in_array('-1',$posibilidades) ){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
-																}else{
-																	$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
-
-																	if($cantidadRestante > 0){
-																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
-																	}else{
-
-																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';
-																	}
-																}
-
-															}else{
+									        <?php 									            		  
+										      if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+						            		$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
+						            		$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);										            			
+									          if(in_array('-1',$posibilidades) ){
+									          	$url = ($vista == 1) ? $a['username'].'/'.$a['id_ofertas'] : $a['username'];
+															echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$url.'/"><i class="fa fa-file-text fa-1x"></i></a>';
+														}else{
+															$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
+															if($cantidadRestante > 0){
+																$url = ($vista == 1) ? $a['username'].'/'.$a['id_ofertas'] : $a['username'];
+																echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$url.'/"><i class="fa fa-file-text fa-1x"></i></a>';
+															}
+															else{
 																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';
 															}
-														?>
+														}
+													}else{
+														echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';
+													}
+													?>
 													</td>
 
 													<td title="Descargar Informe de personalidad" data-title="Informe" style="vertical-align: middle; text-align: center;">

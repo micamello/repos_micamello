@@ -10,6 +10,14 @@ class Controlador_Plan extends Controlador_Base {
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
+
+    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+      Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
+                                     $_SESSION['mfo_datos']['usuario']['id_usuario'],
+                                     (isset($_SESSION['mfo_datos']['infohv']) ? $_SESSION['mfo_datos']['infohv'] : null),
+                                     (isset($_SESSION['mfo_datos']['planes']) ? $_SESSION['mfo_datos']['planes'] : null)); 
+    }
+
     $breadcrumbs = array();
     $opcion = Utils::getParam('opcion','',$this->data);      
     switch($opcion){      
@@ -119,13 +127,13 @@ class Controlador_Plan extends Controlador_Base {
         if ($this->existePlan($infoplan["id_plan"])){
           throw new Exception("Ya esta subscrito al plan seleccionado");   
         }
- 
+                 
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"])){
           throw new Exception("Error al registrar la subscripción, por favor intente denuevo");   
         }  
         
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
-
+        //Utils::log("paso por aqui".print_r($_SESSION,true));
         if ($tipousu == Modelo_Usuario::CANDIDATO){
           $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede postular a una oferta"; 
           $this->redirectToController('oferta');

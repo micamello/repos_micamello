@@ -11,7 +11,7 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array($usuario),true);
   }
 
-  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion=30,$porcdesc=0,$idcomprobante='',$fechacreacion=false,$fechacaducidad=false){
+  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion,$porcdesc=0,$idcomprobante='',$fechacreacion=false,$fechacaducidad=false){
 	    if (empty($usuario) || empty($plan)){ return false; }
 	    $values_insert = array();
 	    $fechacreacion = (empty($fechacreacion)) ? date('Y-m-d H:i:s') : $fechacreacion;    
@@ -27,9 +27,11 @@ class Modelo_UsuarioxPlan{
       if (!empty($fechacaducidad)){
         $values_insert["fecha_caducidad"] = $fechacaducidad;
       }
-      else{  	    
-  	    $fechacaducidad = strtotime ( '+'.$duracion.' day',strtotime($fechacreacion));
-  	    $values_insert["fecha_caducidad"] = date('Y-m-d H:i:s',$fechacaducidad);  	    
+      else{  
+        if (!empty($duracion)){ 	    
+  	      $fechacaducidad = strtotime ( '+'.$duracion.' day',strtotime($fechacreacion));
+  	      $values_insert["fecha_caducidad"] = date('Y-m-d H:i:s',$fechacaducidad);  	    
+        }
       }
       if (!empty($idcomprobante)){
         $values_insert["id_comprobante"] = $idcomprobante;
@@ -92,15 +94,15 @@ class Modelo_UsuarioxPlan{
   }
  
   public static function disponibilidadDescarga($id_empresa){
-    $sql = "SELECT num_publicaciones_rest 
+    $sql = "SELECT num_descarga_rest 
             FROM mfo_empresa_plan  
             WHERE (num_descarga_rest > 0 or num_descarga_rest = -1) AND 
-                  id_empresa = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL)";
+                  id_empresa = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array($id_empresa),true);
     $datos = array();
     if (!empty($arrdatos) && is_array($arrdatos)){
       foreach ($arrdatos as $key => $value) {
-        array_push($datos,$value['num_publicaciones_rest']);
+        array_push($datos,$value['num_descarga_rest']);
       }
     }
     return $datos;

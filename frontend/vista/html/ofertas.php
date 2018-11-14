@@ -179,18 +179,17 @@
 			</div>
 	        <div id="result">
 	        	<?php if(!empty($ofertas) && $ofertas[0]['id_ofertas'] != ''){
-		            foreach($ofertas as $key => $o){  ?>
-
+		            foreach($ofertas as $key => $o){ ?>
 			            <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 							echo "<a href='".PUERTO."://".HOST."/detalleOferta/".$vista."/".$o["id_ofertas"]."/'>";
 						} ?>
 						<div class='panel panel-default shadow-panel'>
-							<?php if($o['tipo'] == 1){ echo '<div class="panel-head">Aviso Urgente </div>'; } ?>
-						    <div class='panel-body <?php if($o['tipo'] == 1){ echo 'ofertaUrgente';} ?>' id='caracteristica_oferta'>
+							<?php if($o['tipo_oferta'] == 1){ echo '<div class="panel-head">Aviso Urgente </div>'; } ?>
+						    <div class='panel-body <?php if($o['tipo_oferta'] == 1){ echo 'ofertaUrgente';} ?>' id='caracteristica_oferta'>
 						   		<div class="row">
 						   			<div class="col-md-12">
 										<div class="col-sm-2 col-md-3 col-lg-2" style="padding-left: 0px;" align='center'>
-											<?php											
+											<?php													
 											$src_imagen = ($o['confidencial'] && $vista!='vacantes' && $vista!='cuentas') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : Modelo_Usuario::obtieneFoto($o['username']);
 											?>
 											<img id="imgPerfil" class="img-responsive postulacion'" src="<?php echo $src_imagen; ?>" alt="icono">
@@ -271,7 +270,7 @@
 											<?php } ?>
 											<?php if($vista == 'vacantes'){ ?>
 												<div class="col-sm-1 col-md-1 col-lg-1" align="center" style="vertical-align: middle; padding-top: 5%; cursor:pointer;">
-													<?php $des = str_replace("'", "\'",$o["descripcion"]); ?>
+													<?php $des = urlencode(str_replace("'", "\'",$o["descripcion"])); ?>
 													<a onclick="abrirModalEditar('editar_Of','<?php echo $des; ?>','<?php echo $o["id_ofertas"]; ?>');">
 														<i class="fa fa-edit fa-1x" title="Editar la oferta"></i>
 													</a>
@@ -287,16 +286,16 @@
 								  	<div class="row">
 							   			<div class="col-md-12">
 											<div class='col-xs-6 col-md-3' align='center'>
-							                    <span class="<?php if($o['tipo'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Salario: </span><br><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
+							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Salario: </span><br><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
 							                </div>
 							                <div class='col-xs-6 col-md-3' align='center'>
-							                    <span class="<?php if($o['tipo'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Provincia: </span><br><?php echo $o['provincia']; ?>
+							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Provincia: </span><br><?php echo utf8_encode($o['provincia']);?>
 							                </div>
 							                <div class='col-xs-6 col-md-3' align='center'>
-							                    <span class="<?php if($o['tipo'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Jornada: </span><br><?php echo $o['jornada']; ?>
+							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Jornada: </span><br><?php echo $o['jornada']; ?>
 							                </div>
 							                <div class='col-xs-6 col-md-3' align='center'>
-							                    <span class="<?php if($o['tipo'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Vacantes: </span><br><?php echo $o['vacantes']; ?>
+							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Vacantes: </span><br><?php echo $o['vacantes']; ?>
 							                </div>
 								  		</div>
 								  	</div>
@@ -309,26 +308,26 @@
 								  	<div class="row">
 								  		<div class="estados_postulados col-md-12">
 							                <?php $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$o['id_ofertas']);
-							                	$cv_descargado = Modelo_descarga::obtieneDescargaCV($_SESSION['mfo_datos']['infohv']['id_infohv'],$o['id_usuario']); 
+							                	$cv_descargado = Modelo_descarga::obtieneDescargaCV($_SESSION['mfo_datos']['infohv']['id_infohv'],$o['id_empresa'],$o['id_ofertas']);
 							                 ?>
-							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d", strtotime($o['fecha_contratacion'])) >= date('Y-m-d')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
+							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
 							                    <div class="wizard-icon"><i class="fa fa-file-text-o"></i></div>
 							                    <p>Postulado:
 							                    	<?php if(isset($postulado)){ ?>
 											    	<b><?php echo date("d-m-Y", strtotime($postulado[0]['fecha_postulado'])); ?></b>
 												<?php } ?></p>
 							                </div>
-							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d", strtotime($o['fecha_contratacion'])) >= date('Y-m-d')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
+							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
 							                    <div class="wizard-icon"><i class="fa fa-user"></i></div>
 							                    <p>Estatus: <?php if(isset($o['tipo']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 											    	<b><?php echo ucfirst(strtolower(Modelo_Oferta::ESTATUS_OFERTA[$o['resultado']])); ?></b>
 												<?php } ?></p>
 							                </div>
-							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d", strtotime($o['fecha_contratacion'])) >= date('Y-m-d')){ echo 'cancelada'; }else if(isset($cv_descargado) && $cv_descargado['cantd_descarga'] >= 1){ echo 'activated'; } ?>">
+							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else if(isset($cv_descargado) && $cv_descargado['cantd_descarga'] >= 1){ echo 'activated'; } ?>">
 							                    <div class="wizard-icon"><i class="fa fa-key"></i></div>
 							                    <p><b>CV visto</b></p>
 							                </div>
-							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d", strtotime($o['fecha_contratacion'])) >= date('Y-m-d')){ echo 'cancelada'; } ?>">
+							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; } ?>">
 							                    <div class="wizard-icon"><i class="fa fa-check-circle"></i></div>
 							                    <p>Finalizado</p>
 							                </div>

@@ -42,8 +42,8 @@ class Controlador_Perfil extends Controlador_Base
                 $arrarea      = Modelo_Area::obtieneListado();
                 $arrinteres   = Modelo_Interes::obtieneListado();
                 $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
-                $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
-                $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
+                //$provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
+                
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
                 $area_select  = $nivel_interes  = false;
@@ -70,6 +70,9 @@ class Controlador_Perfil extends Controlador_Base
                     $_SESSION['mostrar_exito'] = 'La contraseña fue modificada exitosamente.';
                 }
 
+
+                 $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
+                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
                 $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 if (isset($_SESSION['mfo_datos']['infohv']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
@@ -81,7 +84,7 @@ class Controlador_Perfil extends Controlador_Base
                     }
                     $msj1        = 'Cv Cargado';
                     $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
-                    $ruta_arch   = PUERTO . "://" . HOST . '/hojasDeVida/' . $nombre_arch;
+                    $ruta_arch   = PUERTO."://".HOST.'/hojasDeVida/'.$_SESSION['mfo_datos']['usuario']['username'].'/';
                     $btnDescarga = 1;
                     
                     $msj2        = 'Actualizar CV';
@@ -170,6 +173,21 @@ class Controlador_Perfil extends Controlador_Base
                     $validaFile = Utils::valida_upload($archivo, 2);
                     if (empty($validaFile)) {
                         throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
+                    }
+                }
+            }
+            else{
+
+                $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
+                if (empty($validaTlf2)) {
+                    throw new Exception("El telefono " . $data['tel_one_contact'] . " no es válido");
+                }
+
+                if(isset($_POST['tel_two_contact'])){
+
+                    $validaTlf3 = Utils::valida_telefono($data['tel_two_contact']);
+                    if (empty($validaTlf3)) {
+                        throw new Exception("El telefono " . $data['tel_two_contact'] . " no es válido");
                     }
                 }
             }

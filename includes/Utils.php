@@ -101,7 +101,7 @@ class Utils{
   }
 
   public static function valida_telefono($numerotelefono){ 
-    if (preg_match("/^[ ]*[(]{0,1}[ ]*[0-9]{3,3}[ ]*[)]{0,1}[-]{0,1}[ ]*[0-9]{3,3}[ ]*[-]{0,1}[ ]*[0-9]{4,4}[ ]*$/",$numerotelefono)) return true; 
+    if (preg_match("/^[ ]*[(]{0,1}[ ]*[0-9]{2,3}[ ]*[)]{0,1}[-]{0,1}[ ]*[0-9]{3,3}[ ]*[-]{0,1}[ ]*[0-9]{4,4}[ ]*$/",$numerotelefono)) return true; 
     else return false; 
   }
 
@@ -190,6 +190,8 @@ class Utils{
           @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato']);
         }
         $nombre .= ".".$valida_arch[1];
+        Utils::log($file_temp);
+        Utils::log(''.$path . $nombre);        
         return move_uploaded_file($file_temp, ''.$path . $nombre);        
       }
     }

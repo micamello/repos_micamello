@@ -1,5 +1,4 @@
 <?php
-<?php
 class Controlador_Aspirante extends Controlador_Base
 {
 
@@ -301,8 +300,13 @@ class Controlador_Aspirante extends Controlador_Base
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
 
-                $subempresas = $_SESSION['mfo_datos']['subempresas'];  
-                $array_empresas = explode(",",$subempresas);
+                $subempresas = (isset($_SESSION['mfo_datos']['subempresas'])) ? $_SESSION['mfo_datos']['subempresas'] : '';  
+                if (!empty($subempresas)){
+                  $array_empresas = explode(",",$subempresas);
+                }
+                else{
+                  $array_empresas = array();  
+                }
                 if($vista == 1){
 
                     if(isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)){

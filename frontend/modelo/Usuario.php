@@ -150,7 +150,7 @@ class Modelo_Usuario{
   }
 
   public static function obtieneFoto($username){
-    $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$username.'.jpg';
+    $rutaImagen = PUERTO.'://'.HOST.'/imagenes/usuarios/'.$username.'/';
     return $rutaImagen;   
   }
 
@@ -197,7 +197,7 @@ class Modelo_Usuario{
 
         $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil']); 
 
-        if(isset($_POST['lugar_estudio'])){
+        if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
           if($_POST['lugar_estudio'] == 1){
             $datos['nombre_univ'] = $_POST['universidad2'];
             $datos['id_univ'] = 'null';
@@ -665,7 +665,7 @@ class Modelo_Usuario{
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (u.nombres LIKE '%".$pclave."%' OR r.apellidos LIKE '%".$pclave."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR u.fecha_creacion LIKE '%".$pclave."%')";
+      $sql .= " AND (u.nombres LIKE '%".$pclave."%' OR u.apellidos LIKE '%".$pclave."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR u.fecha_creacion LIKE '%".$pclave."%')";
     }
 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
@@ -744,7 +744,7 @@ class Modelo_Usuario{
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
-  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){
+  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada       
       if (empty($infohv)){
@@ -764,7 +764,7 @@ class Modelo_Usuario{
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
-      elseif (isset($planes) && !Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion')) {
+      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion')) {                
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
       }  
       else{           
@@ -775,12 +775,10 @@ class Modelo_Usuario{
     }
     //si es empresa
     else{  
-
       if (isset($planes)){
         Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
       }
       else{
-
         $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }          
@@ -862,33 +860,19 @@ WHERE
     return $nivel;
   }
   public static function obtieneHerenciaEmpresa($idpadre){
-    if (empty($idpadre)) { return false; }
-    $primera = 0;
-    $empHijas = '';
-    do{
-      $strpadre = '';
-      $sql = "SELECT e.id_empresa, e.padre FROM mfo_empresa e
-              WHERE e.padre IN(?) AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)";
-      $padre = $GLOBALS['db']->auto_array($sql,array($idpadre),true);
-      if (!empty($padre) && is_array($padre)){
-        $numreg = count($padre);
-        foreach($padre as $key=>$registro){
-          $strpadre .= $registro["id_empresa"].(($key+1 < $numreg) ? ',' : '');
-        }
-      }      
-      //$idpadre = $padre["emp_hijas"];
-      $idpadre = $strpadre;
-      if($idpadre != ''){
-        if($empHijas==''){
-          $empHijas .= $idpadre;
-          $primera++;
-        }else{
-          $empHijas .= ','.$idpadre;
-        }
+    if (empty($idpadre)) { return false; }    
+    $strpadre = '';
+    $sql = "SELECT e.id_empresa, e.padre FROM mfo_empresa e
+            WHERE e.padre IN(?) AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)";
+    $padre = $GLOBALS['db']->auto_array($sql,array($idpadre),true);
+    if (!empty($padre) && is_array($padre)){
+      $numreg = count($padre);
+      foreach($padre as $key=>$registro){
+        $strpadre .= $registro["id_empresa"].(($key+1 < $numreg) ? ',' : '');
       }
-    }
-    while(!empty($strpadre));    
-    return $empHijas;
+    }            
+    $idpadre = $strpadre;      
+    return $idpadre;
   }
 
   #OBTIENE LAS EMPRESAS HIJAS Y SUS PLANES
@@ -903,7 +887,7 @@ WHERE
       $sql .= "count(1) AS cantd_empresas";
     }
 
-    $sql .= " FROM micamello_produccion.mfo_empresa e";
+    $sql .= " FROM mfo_empresa e";
 
     if(!$obtCantdRegistros){
 
