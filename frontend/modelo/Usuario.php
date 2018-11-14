@@ -784,7 +784,7 @@ public static function existeUsername($username){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
-      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion')) {                
+      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {                
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
       }  
       else{           

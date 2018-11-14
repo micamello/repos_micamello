@@ -55,7 +55,7 @@ class Database{
   }
 
   function execute( $query ){
-    $this->query = $query;    
+    $this->query = $query;        
     Utils::log("SQL execute: $query");
 	  $resultSet = mysqli_query( $this->connection,$query );
 	  $this->resultSet = $resultSet;

@@ -125,8 +125,6 @@ class Controlador_Registro extends Controlador_Base {
 
         $username_generated = self::generarUsername($username);
 
-        Utils::log("eend: ".$username_generated);
-
         $GLOBALS['db']->beginTrans();
 
         self::guardarUsuario($data, $username_generated);
@@ -147,10 +145,6 @@ class Controlador_Registro extends Controlador_Base {
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $campo_fecha = date("Y-m-d H:i:s");
     $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
-    // Utils::log(SUCURSAL_PAISID."----".print_r($data, true));
-
-    // exit();
-
     $usuario_login = array('tipo_usuario'=>$data['tipo_usuario'], 'username'=>$username_generated, 'password'=>$data['password'], 'correo'=>$data['correo'], 'dni'=>$data['cedula']);
 
     if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
@@ -158,8 +152,6 @@ class Controlador_Registro extends Controlador_Base {
     }
 
     $id_usuario_login = $GLOBALS['db']->insert_id();
-    // Utils::log("datos del array data: ".print_r($data, true));
-    // exit();
 
     if($data['tipo_usuario'] == 1){
       $escolaridad = Modelo_Escolaridad::obtieneListado();
@@ -421,9 +413,6 @@ class Controlador_Registro extends Controlador_Base {
       $username = $nombre_user[0].$apell_user[0];
 
       $username = self::generarUsername(strtolower($username));
-      // Utils::log("username: ".$username);
-      // print_r("username: ".$username);
-      // exit();
       $GLOBALS['db']->beginTrans();
 
       $password = Utils::generarPassword();
@@ -481,8 +470,6 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username){
-    // Utils::log($correo."-----".$nombres."-----".$token."-----".$username);
-    // exit();
     $asunto = "Activación de cuenta";
     $body = "Estimado, ".$nombres."<br>";
     $body .= "<br>Una vez activada su cuenta puede ingresar mediante su correo electrónico o el siguiente username: <br><b>".$username."</b><br><br>";

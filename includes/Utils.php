@@ -191,8 +191,6 @@ class Utils{
           @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato']);
         }
         $nombre .= ".".$valida_arch[1];
-        Utils::log($file_temp);
-        Utils::log(''.$path . $nombre);        
         return move_uploaded_file($file_temp, ''.$path . $nombre);        
       }
     }

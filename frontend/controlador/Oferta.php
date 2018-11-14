@@ -30,7 +30,8 @@ class Controlador_Oferta extends Controlador_Base{
             $planes = $_SESSION['mfo_datos']['planes'];
           }else{
             $planes = null;
-          }          
+          }
+
           Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
         }
 
