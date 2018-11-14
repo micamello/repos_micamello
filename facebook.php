@@ -1,4 +1,5 @@
 <?php
+
 	require_once 'constantes.php';
 	require_once 'init.php';
 	// include 'multisitios.php';
@@ -36,4 +37,5 @@
 	$_SESSION['access_token'] = (string) $accessToken;
 	$obj_registro = new Controlador_Registro();
 	$obj_registro->facebook($userData, $tipo_usuario);
+
 ?>

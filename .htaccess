@@ -43,12 +43,13 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 ########################################
 
 #imagenes del profile
-RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
-RewriteRule ^imagenes/usuarios/([a-z]+)/(.*)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&archivo=$2 [L]
-RewriteRule ^hojasDeVida/([a-z0-9]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
+#RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
+RewriteRule ^imagenes/usuarios/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=profile&param1=$1 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
+
 #login
 RewriteRule ^login/?$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
-
 
 #contrasena
 RewriteRule ^contrasena/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena [L]
@@ -83,16 +84,17 @@ RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
 ######################################################################################
 
 #planes
-RewriteRule ^compraplan/paypal/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=paypal [L]
+RewriteRule ^compraplan/exito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=exito [L]
+RewriteRule ^compraplan/error/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=error [L]
 RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
 RewriteRule ^compraplan/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra&idplan=$1 [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
 RewriteRule ^planesUsuario/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario [L]
 RewriteRule ^planesUsuario/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario&desactivarPlan=$1 [L]
 
+######################################################################################
 
 #ofertas
-
 RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta [L]
 RewriteRule ^oferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta&page=$1 [L]
 RewriteRule ^detalleOferta/([a-z]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
@@ -128,10 +130,18 @@ RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [
 
 #########################################################################################
 
+#Cuentas
+RewriteRule ^adminEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresas [L]
+RewriteRule ^adminEmpresas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresas&page=$1 [L]
+RewriteRule ^cuentas/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas [L]
+RewriteRule ^cuentas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas&page=$1 [L]
+
+#########################################################################################
+
 #Vacantes
 RewriteRule ^vacantes/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes [L]
 RewriteRule ^vacantes/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&page=$1 [L]
-
+RewriteRule ^vacantes/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&idOferta=$1&page=$2 [L]
 ########################################################################################
 
 #Aspirantes

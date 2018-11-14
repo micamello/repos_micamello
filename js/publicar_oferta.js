@@ -170,6 +170,7 @@ $('#provincia_of').change(function()
 //                 error_all_selected.appendChild(error_span);
 //         }
         
+// <<<<<<< HEAD
 //         if (idioma_selected_select.disabled == false)
 //         {
 //             if (document.getElementById("text_nothing")) {
@@ -193,10 +194,36 @@ $('#provincia_of').change(function()
 //             nodo_option.setAttribute("id", "array_idioma"+id_idioma);
 //             nodo_option.selected = "selected";
 //             select_array_idioma.appendChild(nodo_option);
+// =======
+//         if (idioma_selected_select.disabled == false)
+//         {
+//             if (document.getElementById("text_nothing")) {
+//                 document.getElementById("text_nothing").innerHTML = "";
+//                 document.getElementById("text_nothing").style.display = "none";
+//             }
+//             var id_idioma = tag_idioma.value;
+//             var id_nivel_idioma = tag_nivel_idioma.value;
+//             var div_idioma = document.getElementById('list_idioma');
+//             var text_idioma = idioma_selected_select.text;
+//             var text_idioma_nivel = idiomanivel_selected_select.text;
+//             var p_node = document.createElement('P');
+//             div_idioma.appendChild(p_node);
+//             p_node.setAttribute("id", "idioma"+id_idioma);
+//             p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close fa-2x icon' id='"+id_idioma+"' onclick='delete_item_selected(this); validarFormulario();'></i>";
+//             p_node.setAttribute("disabled", "disabled");
+//             p_node.setAttribute("class", "col-md-5 badge_item listado");
+//             idioma_selected_select.setAttribute("disabled", "disabled");
+//             var nodo_option = document.createElement('option');
+//             nodo_option.setAttribute("value", id_idioma+"_"+id_nivel_idioma);
+//             nodo_option.setAttribute("id", "array_idioma"+id_idioma);
+//             nodo_option.selected = "selected";
+//             select_array_idioma.appendChild(nodo_option);
+// >>>>>>> 49beacccce491f3e72e210540f9d4830960059b3
 
 //             tag_idioma.removeAttribute("required");
 //             tag_nivel_idioma.removeAttribute("required"); 
 
+// <<<<<<< HEAD
 //             var listado = document.getElementById("listado_idiomas");
 //             listado.innerHTML = "";
 //             var publicar_btn = document.getElementById("boton");
@@ -210,6 +237,26 @@ $('#provincia_of').change(function()
 //                 console.log("Habilitando el boton");
 //             }  
 //         }
+// =======
+//             var listado = document.getElementById("listado_idiomas");
+//             listado.innerHTML = "";
+//             var publicar_btn = document.getElementById("boton");
+//             var errors = document.getElementsByClassName("form-group has-error has-danger");
+//             // $("#boton").on("click", function(e){
+//             //     e.preventDefault();
+//             // });
+//             // publicar_btn.setAttribute("class", "btn btn-success eder");
+//             if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "") && ($('select').filter('[required]:visible').val() != "")) {
+//                 publicar_btn.setAttribute("class", "btn btn-success");
+//               if (validarFormulario()){
+//                 if(document.getElementById('btnDescarga').value != 0){
+//                   publicar_btn.removeAttribute("disabled");
+//                 }
+//                 console.log("Habilitando el boton");
+//               }
+//             }  
+//         }
+// >>>>>>> 49beacccce491f3e72e210540f9d4830960059b3
 
 //         var all_selected = $('#idioma_of option:disabled');
 //         if (all_selected.length == op) {

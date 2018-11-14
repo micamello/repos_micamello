@@ -19,7 +19,7 @@ class Controlador_Publicar extends Controlador_Base {
 
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
-    }    
+    }
 
     if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
       $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";

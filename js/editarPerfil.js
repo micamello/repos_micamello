@@ -1,12 +1,15 @@
 if(document.getElementById('form_editarPerfil')){
-    
+
+    validarFormulario();
+    //validarClave();
+
     ocultarCampos();
     mostrarUni();
-    $("#form_editarPerfil").validator();
+    //$("#form_editarPerfil").validator();
 }
 
 if(document.getElementById('form_cambiar')){
-  $("#form_cambiar").validator();
+  //$("#form_cambiar").validator();
 }
 
 
@@ -22,7 +25,7 @@ $('#provincia').change(function()
             url: puerto_host+"?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
             dataType:'json',
             success:function(data){
-                $('#ciudad').html('<option value="">Selecciona una ciudad</option>');
+                $('#ciudad').html('<option value="0">Selecciona una ciudad</option>');
                 $.each(data, function(index, value) {
                     $('#ciudad').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
                 });
@@ -33,6 +36,14 @@ $('#provincia').change(function()
         })
     }
 });
+
+function eliminar_item_selected(selected_item,tipo,op){
+  var seleccionado = document.getElementById(selected_item);
+  seleccionado.parentNode.removeChild(seleccionado);    
+  $('#li'+selected_item).parent().parent().removeClass("max-selection-reached");    
+  $('#li'+selected_item).removeClass('selected');        
+  $('#'+tipo+' option[value='+op+']').removeAttr('selected');           
+}
 
 /* Carga select dependiente (ciudad) */
 
@@ -66,8 +77,17 @@ function fileOnload(e) {
 $('#subirCV').change(function(e) {
     $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
     $('#texto_status').html('Hoja de vida Cargada');
-    $('#texto_status').addClass('arch_cargado')
-     
+    $('#texto_status').addClass('arch_cargado');
+    if(document.getElementById("mensaje_error_hv")){
+        document.getElementById("mensaje_error_hv").style.display = "none";
+    }
+
+    var estado = validarFormulario();
+    if(estado == 1){
+        $('#boton').removeAttr('disabled');
+    }else{
+        $('#boton').attr('disabled');
+    }
 });
 
 /* Carga de hoja de vida */
@@ -105,41 +125,45 @@ function calcularEdad()
     {
         edad -= 1900;
     }
-
+     
     if(edad >= 18){
         
-        $("#mayoria").attr({
+        /*$("#mayoria").attr({
             class: 'form-group',
         });
         nodo = document.getElementById("error");
         nodo.innerHTML = '';
-        $("#boton").removeAttr('disabled');
+        $("#boton").removeAttr('disabled');*/
+        return 1;
 
     }else{
-
-        nodo = document.getElementById("error");
-        nodo.innerHTML = '';
-        var elem1 = document.createElement('P');
-        var t = document.createTextNode("Debe ser mayor de edad"); 
-        elem1.appendChild(t);
-
-        var elem2 = document.createElement("P");             
-        elem2.classList.add('list-unstyled');
-        elem2.classList.add('msg_error');
-        elem2.appendChild(elem1); 
-
-        elem2.appendChild(elem1); 
-        nodo.appendChild(elem2); 
-
-        $("#mayoria").attr({
-            'class': 'has-error',
-        });
-
-        $("#boton").attr({
-            'disabled': 'disabled',
-        });
+        return 0;
+        //colocaError("error", "mayoria","Debe ser mayor de edad");
     }
 }
+
+
+/*function colocaError(campo, id, mensaje){
+    nodo = document.getElementById(campo);
+    nodo.innerHTML = '';
+    var elem1 = document.createElement('P');
+    var t = document.createTextNode(mensaje); 
+    elem1.appendChild(t);
+    var elem2 = document.createElement("P");             
+    elem2.classList.add('list-unstyled');
+    elem2.classList.add('msg_error');
+    elem2.appendChild(elem1); 
+    elem2.appendChild(elem1); 
+    nodo.appendChild(elem2); 
+    $("#"+id).addClass('has-error');
+    $("#boton").attr({
+        'disabled': 'disabled',
+    });
+}
+function quitarError(campo,id){
+    document.getElementById(campo).innerHTML = '';
+    $("#"+id).removeClass('has-error');
+}*/
 /* valida si el candidato es mayor de edad */
 
 function mostrarUni(){
@@ -148,11 +172,11 @@ function mostrarUni(){
 
     if(lugar_estudio){
 
-        if(lugar_estudio.selectedIndex != -1){
+        if(lugar_estudio.value != -1){
 
-            var r = lugar_estudio.options[lugar_estudio.selectedIndex].value;
-        
-            if(r == 0){
+            
+       
+            if(lugar_estudio.value == 0){
                 document.getElementById("universidad2").style.display = "none";
                 document.getElementById("universidad").style.display = "block";
                 document.getElementById("universidad").setAttribute("required",true);
@@ -191,12 +215,13 @@ function ocultarCampos(){
                         if(data.dependencia == 1){
                             document.getElementById("lugar_estudio").setAttribute("required",true);
                             elements[i].style.display = 'block';
+                            validarFormulario();
                             
                         }else{
                             $("#lugar_estudio").removeAttr("required");
                             elements[i].style.display = 'none';
                             var lugar_estudio = document.getElementById("lugar_estudio");
-                            lugar_estudio.selectedIndex = -1;
+                            lugar_estudio.selectedIndex = 0;
                             mostrarUni();
                         }
                     }
@@ -208,5 +233,413 @@ function ocultarCampos(){
                 }                  
             });
         }
+    }
+}
+
+function enviarFormulario(){  
+    var estado = validarFormulario();    
+    if(estado == 1){
+        document.form_editarPerfil.submit();
+    }
+}
+
+function validarFormulario(){
+
+    var tipo_usuario = document.getElementById('tipo_usuario').value;
+    var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
+    var expreg_telf = /^[0-9]+$/i;
+    var error = 0;
+
+    var nombres = document.getElementById('nombres').value;
+    if(document.getElementById('apellidos')){
+        var apellidos = document.getElementById('apellidos').value;
+    }
+    var nacionalidad = document.getElementById('id_nacionalidad').value;
+    var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
+    var telefono = document.getElementById('telefono').value;
+    var provincia = document.getElementById('provincia').selectedIndex;
+    var ciudad = document.getElementById('ciudad').selectedIndex;
+
+    if(tipo_usuario == 1){
+
+        var discapacidad = document.getElementById('discapacidad').selectedIndex;
+        var experiencia = document.getElementById('experiencia').selectedIndex;
+        var estado_civil = document.getElementById('estado_civil').selectedIndex;
+        var genero = document.getElementById('genero').selectedIndex;
+        var tiene_trabajo = document.getElementById('tiene_trabajo').selectedIndex;
+        var viajar = document.getElementById('viajar').selectedIndex;
+        var licencia = document.getElementById('licencia').selectedIndex;
+        var escolaridad = document.getElementById('escolaridad').selectedIndex;
+        var estatus = document.getElementById('estatus').selectedIndex;
+        var area_select = document.getElementById('area_select');
+        var nivel_interes = document.getElementById('nivel_interes');
+        var select_array_idioma = document.getElementById('select_array_idioma');
+        var lugar_estudio = document.getElementById('lugar_estudio');
+        var universidad = document.getElementById('universidad').selectedIndex;
+        var universidad2 = document.getElementById('universidad2').value;
+ 
+        if(document.getElementById('subirCV') && document.getElementById('subirCV').value != ''){
+
+            $("#mensaje_error_hv").remove();
+
+        }else if(document.getElementById('btnDescarga').value == 0 && document.getElementById('subirCV').value == ''){
+            console.log("error 1");
+            error = 1;
+        }
+
+        if(discapacidad == null || discapacidad == 0){
+            colocaError("err_dis", "seccion_dis","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 2");
+            error = 1;
+
+        }else{
+            quitarError("err_exp", "seccion_exp");
+        }
+
+        if(experiencia == null || experiencia == 0){
+            colocaError("err_exp", "seccion_exp","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 3");
+            error = 1;
+
+        }else{
+            quitarError("err_exp", "seccion_exp");
+        }
+
+        if(estado_civil == null || estado_civil == 0){
+            colocaError("err_civil", "seccion_civil","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 4");
+            error = 1;
+
+        }else{
+            quitarError("err_civil", "seccion_civil");
+        }
+
+        if(genero == null || genero == 0){
+            colocaError("err_gen", "seccion_gen","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 5");
+            error = 1;
+
+        }else{
+            quitarError("err_gen", "seccion_gen");
+        }
+
+        if(tiene_trabajo == null || tiene_trabajo == 0){
+            colocaError("err_trab", "seccion_trab","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 6");
+            error = 1;
+
+        }else{
+            quitarError("err_trab", "seccion_trab");
+        }
+
+        if(viajar == null || viajar == 0){
+            colocaError("err_via", "seccion_via","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 7");
+            error = 1;
+
+        }else{
+            quitarError("err_via", "seccion_via");
+        }
+
+        if(licencia == null || licencia == 0){
+            colocaError("err_lic", "seccion_lic","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 8");
+            error = 1;
+
+        }else{
+            quitarError("err_lic", "seccion_lic");
+        }
+
+        if(escolaridad == null || escolaridad == 0){
+            colocaError("err_esc", "seccion_esc","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 9");
+            error = 1;
+
+        }else{
+            quitarError("err_esc", "seccion_esc");
+        }
+
+        if(estatus == null || estatus == 0){
+            colocaError("err_est", "seccion_est","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 10");
+            error = 1;
+
+        }else{
+            quitarError("err_est", "seccion_est");
+        }
+
+        if($(".depende").is(":visible")){                
+            if(lugar_estudio.selectedIndex == null || lugar_estudio.selectedIndex == 0){
+                colocaError("err_estudio", "seccion_estudio","Debe seleccionar una opcion de la lista","boton");
+                if($(".depende").is(":visible") && lugar_estudio.value == -1){
+
+                    if(universidad2 == null || universidad2 == ''){
+
+                        colocaError("err_univ", "seccion_univ","Debe introducir una universidad","boton");
+                        console.log("error 55");
+                        error = 1;
+                    }else{
+                        quitarError("err_univ", "seccion_univ");
+                    }
+                }
+                console.log("error 89"); 
+                error = 1;
+
+            }else{
+                quitarError("err_estudio", "seccion_estudio");
+            }
+        }
+
+        if($(".depende").is(":visible") && lugar_estudio.value == 0){
+            if(universidad == null || universidad == 0){
+                colocaError("err_univ", "seccion_univ","Debe seleccionar una opcion de la lista","boton");
+                console.log("error 12");
+                error = 1;
+
+            }else{
+                quitarError("err_univ", "seccion_univ");
+            }
+
+        }else if($(".depende").is(":visible") && lugar_estudio.value == 1){
+            if(universidad2 == null || universidad2 == ''){
+                colocaError("err_univ", "seccion_univ","Debe introducir una universidad","boton");
+                console.log("error 13");
+                error = 1;
+
+            }else{
+                quitarError("err_univ", "seccion_univ");
+            }
+        } 
+
+        if(area_select.selectedIndex == null || area_select.selectedIndex == -1){
+            colocaError("err_area", "seccion_area","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 14");
+            error = 1;
+
+        }else{            
+            var cantd_selec = $('#seleccionados').find('p').length-1;
+            if(cantd_selec == 0){
+                colocaError("err_area", "seccion_area","Debe seleccionar una opcion de la lista","boton");
+                console.log("error 15");
+                error = 1;
+            }else{
+                quitarError("err_area", "seccion_area");
+            }
+        }
+
+        if(nivel_interes.selectedIndex == null || nivel_interes.selectedIndex == -1){
+            colocaError("err_int", "seccion_int","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 16");
+            error = 1;
+
+        }else{
+            quitarError("err_int", "seccion_int");
+        }
+
+        if(select_array_idioma.length == 0 || select_array_idioma.length == -1){
+            colocaError("listado_idiomas", "seccion_listado","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 17");
+            error = 1;
+
+        }else{
+            quitarError("listado_idiomas", "seccion_listado");
+        }
+
+
+    }else if(tipo_usuario == 2){
+        var nombre_contact = document.getElementById('nombre_contact').value;
+        var apellido_contact = document.getElementById('apellido_contact').value;
+        var tel_one_contact = document.getElementById('tel_one_contact').value;
+
+        if(nombre_contact == null || nombre_contact.length == 0 || /^\s+$/.test(nombre_contact)){
+            colocaError("err_nomCon", "seccion_nombreContacto","El campo no puede ser vacío","boton");
+            console.log("error 18");
+            error = 1; 
+
+        }else if(!expreg.test(nombre_contact)){
+            colocaError("err_nomCon", "seccion_nombreContacto","Formato incorrecto, solo letras","boton"); 
+            console.log("error 19");
+            error = 1;  
+        }else{
+            quitarError("err_nomCon","seccion_nombreContacto");
+        }
+
+        if(apellido_contact == null || apellido_contact.length == 0 || /^\s+$/.test(apellido_contact)){
+            colocaError("err_apeCon", "seccion_apellidoContacto","El campo no puede ser vacío","boton");
+            console.log("error 20");
+            error = 1; 
+
+        }else if(!expreg.test(apellido_contact)){
+            colocaError("err_apeCon", "seccion_apellidoContacto","Formato incorrecto, solo letras","boton");
+            console.log("error 21");
+            error = 1;  
+
+        }else{
+            quitarError("err_apeCon","seccion_apellidoContacto");
+        }
+
+        if(tel_one_contact == null || tel_one_contact.length == 0 || /^\s+$/.test(tel_one_contact)){
+            colocaError("err_tlfCon", "seccion_tlfCon","El campo no puede ser vacío","boton");
+            console.log("error 22");
+            error = 1;
+
+        }else if(!expreg_telf.test(tel_one_contact)){
+            colocaError("err_tlfCon", "seccion_tlfCon","Formato incorrecto, solo numeros","boton");
+            console.log("error 23");
+            error = 1; 
+
+        }else{
+            quitarError("err_tlfCon","seccion_tlfCon");
+        }
+    }
+
+    if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
+        colocaError("err_nom", "seccion_nombre","El campo no puede ser vacío","boton");
+        console.log("error 24");
+        error = 1; 
+
+    }else if(!expreg.test(nombres)){
+        colocaError("err_nom", "seccion_nombre","Formato incorrecto, solo letras","boton");
+        console.log("error 25");
+        error = 1;
+
+    }else{
+        quitarError("err_nom","seccion_nombre");
+    }
+
+    if(document.getElementById('apellidos')){
+        if(apellidos == null || apellidos.length == 0 || /^\s+$/.test(apellidos)){
+            colocaError("err_ape", "seccion_apellido","El campo no puede ser vacío","boton");
+            console.log("error 26");
+            error = 1; 
+
+        }else if(!expreg.test(apellidos)){
+            colocaError("err_ape", "seccion_apellido","Formato incorrecto, solo letras","boton");
+            console.log("error 27");
+            error = 1;
+
+        }else{
+            quitarError("err_ape","seccion_apellido");
+        }
+    }
+
+    if(telefono == null || telefono.length == 0 || /^\s+$/.test(telefono)){
+        colocaError("err_tlf", "seccion_tlf","El campo no puede ser vacío","boton");
+        console.log("error 28");
+        error = 1;
+
+    }else if(!expreg_telf.test(telefono)){
+        colocaError("err_tlf", "seccion_tlf","Formato incorrecto, solo numeros","boton");
+        console.log("error 29");
+        error = 1; 
+
+    }else{
+        quitarError("err_tlf","seccion_tlf");
+    }
+
+    if(!isNaN(fecha_nacimiento)){
+        colocaError("error", "mayoria","Debe elegir una fecha válida","boton");
+        console.log("error 30");
+        error = 1;
+    }else if(calcularEdad() == 0 && tipo_usuario == 1){
+        colocaError("error", "mayoria","Debe ser mayor de edad");
+        console.log("error 31");
+        error = 1;
+
+    }else{
+        quitarError("error","mayoria");
+    }
+
+    if(provincia == null || provincia == 0){
+        colocaError("err_prov", "seccion_provincia","Debe seleccionar una opcion de la lista","boton");
+        colocaError("err_ciu", "seccion_ciudad","Debe seleccionar una opcion de la lista","boton");
+        console.log("error 32");
+        error = 1;
+    }else{
+        if(ciudad == null || ciudad == 0){
+            colocaError("err_ciu", "seccion_ciudad","Debe seleccionar una opcion de la lista","boton");
+            console.log("error 33");
+            error = 1;
+
+        }else{
+            quitarError("err_ciu","seccion_ciudad");
+        }
+
+        quitarError("err_prov","seccion_provincia");
+    }
+
+    if(nacionalidad == null || nacionalidad == 0){
+        colocaError("err_nac", "seccion_nac","Debe seleccionar una opcion de la lista","boton");
+        console.log("error 34");
+        error = 1;
+
+    }else{
+        quitarError("err_nac", "seccion_nac");
+    }
+    console.log(error);
+    
+    if(error == 1){
+        return 0;
+    }else{
+        $("#boton").removeAttr('disabled');
+        $("#boton").removeClass('disabled');
+        return 1;
+    }
+}
+ 
+function enviarCambioClave(){
+
+    var estado = validarClave();
+    if(estado == 1){
+        document.form_cambiar.submit();
+    }
+}
+
+function validarClave(){
+
+    var expreg = /^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$/i;
+    var error = 0;
+
+    var password = document.getElementById('password').value;
+    var password_two = document.getElementById('password_two').value;
+
+    if(password == null || password.length == 0 || /^\s+$/.test(password)){
+
+        colocaError("err_clave", "seccion_clave","El campo no puede ser vacío","button_cambiar");
+        error = 1; 
+
+    }else if(!expreg.test(password)){
+
+        colocaError("err_clave", "seccion_clave","Formato incorrecto, Letras y números, mínimo 8 caracteres","button_cambiar"); 
+        error = 1;  
+    }else{
+        quitarError("err_clave", "seccion_clave");
+        //error = 0;
+    }
+
+    if(password_two == null || password_two.length == 0 || /^\s+$/.test(password_two)){
+
+        colocaError("err_clave1", "seccion_clave1","El campo no puede ser vacío","button_cambiar");
+        error = 1; 
+
+    }else if(!expreg.test(password_two)){
+
+        colocaError("err_clave1", "seccion_clave1","Formato incorrecto, Letras y números, mínimo 8 caracteres","button_cambiar"); 
+        error = 1;  
+    }else{
+         if(password != password_two){
+            colocaError("err_clave1", "seccion_clave1","Ingrese la misma contraseña","button_cambiar"); 
+            error = 1; 
+        }else{
+            quitarError("err_clave1", "seccion_clave1");
+            //error = 0;
+        }
+    }    
+    if(error == 1){
+        return 0;
+    }else{
+        $("#button_cambiar").removeAttr('disabled');
+        $("#button_cambiar").removeClass('disabled');
+        return 1;
     }
 }

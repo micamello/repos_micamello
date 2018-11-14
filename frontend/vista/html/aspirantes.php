@@ -13,7 +13,7 @@
 					<div class="filtros">
 						<div class="form-group">
 						    <div class="input-group">
-							    <input type="text" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx"> 
+							    <input type="text" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 							    <?php 
 								    $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
 								    $ruta = Controlador_Aspirante::calcularRuta($ruta,'Q');
@@ -99,23 +99,25 @@
 				?></div>
 				</div>
 		    </div>
-		    <div class="panel panel-default shadow-panel1">
-				<div class="panel-heading">
-					<span><i class="fa fa-calendar"></i><?php if ($vista == 1){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
-				</div>
-				<div class="panel-body">
-					<div class="filtros">
-				<?php
-					
-				    foreach (FECHA_POSTULADO as $key => $v) {
+		    <?php if ($vista == 1){ ?>
+			    <div class="panel panel-default shadow-panel1">
+						<div class="panel-heading">
+							<span><i class="fa fa-calendar"></i><?php if ($vista == 1){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
+						</div>
+						<div class="panel-body">
+							<div class="filtros">
+						<?php
+							
+						    foreach (FECHA_POSTULADO as $key => $v) {
 
-				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/F'.$key.'/';
-						$ruta = Controlador_Aspirante::calcularRuta($ruta,'F');
-				    	echo '<li class="lista"><a href="'.$ruta.'1/" class="fecha" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-				    }
-				?></div>
-				</div>
-		    </div>
+						    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/F'.$key.'/';
+								$ruta = Controlador_Aspirante::calcularRuta($ruta,'F');
+						    	echo '<li class="lista"><a href="'.$ruta.'1/" class="fecha" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+						    }
+						?></div>
+						</div>
+			    </div>
+		  	<?php } ?>
 		    <div class="panel panel-default shadow-panel1">
 		          <div class="panel-heading">
 		              <span><i class="fa fa-money"></i> Plan Contratado (prioridad)</span>
@@ -133,7 +135,7 @@
 						    	$ruta = Controlador_Aspirante::calcularRuta($ruta,'P');
 						    	$ruta .= '1/'; ?>
 						    	<label onclick="window.location='<?php echo $ruta; ?>'" class="btn btn-default btn-on-3 btn-md <?php if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == $key || ($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0 && $cont == 1)){ echo 'active'; $cont = count(PRIORIDAD); } ?>">
-									<input type="radio" value="<?php echo $key; ?>" name="multifeatured_module[module_id][status]" checked="checked" ><?php echo $v; ?>
+									<input type="radio" value="<?php echo $key; ?>" name="multifeatured_module[module_id][status]" checked="checked" /><?php echo $v; ?>
 								</label>
 							<?php 
 							} ?>
@@ -249,7 +251,7 @@
 				<div class="panel-heading" style="cursor:pointer" data-toggle="collapse" data-target="#contenedor"><i class="fa fa-angle-down"></i>Filtros</div>
                 <div class="panel-body collapse" id="contenedor">
                 	<div class="form-group">
-						<input type="text" maxlength="30" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx"> 
+						<input type="text" maxlength="30" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 					</div>
                 	<div class="form-group">
                 		<?php 
@@ -276,7 +278,7 @@
 			            </select>
 			        </div>
 			        <div class="form-group">
-			            <select id="jornada" class="form-control">
+			            <select id="salario" class="form-control">
 			                <option value="0">Seleccione un salario</option>
 			                <?php
 								foreach (SALARIO as $key => $v) {
@@ -299,8 +301,10 @@
 				<?php if($vista == 1){ ?>
 					<span style="font-size: 17px;">Aspirantes Postulados</span>
 				<?php }else{ ?>
+
 					<span style="font-size: 17px;">Candidatos Registrados en la plataforma</span>
 				<?php } ?>
+
 			</b>
 			<br/><br/>
 			<div id="busquedas" class='container-fluid'>
@@ -349,14 +353,16 @@
 								           <a href="<?php echo $ruta.'1/'; ?>">Salario<i class="fa fa-sort"></i></a>
 								       </th>
 								   <?php } ?>
-							        <th colspan="2" class="text-center">Acci&oacute;n</th>
+								   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))){ ?>
+							        	<th colspan="2" class="text-center">Acci&oacute;n</th>
+							    	<?php } ?>
 							      </tr>
 							    </thead>
 				        		<tbody>
 						        	<?php if(!empty($aspirantes)){
 							            foreach($aspirantes as $key => $a){  ?>
 							            	<tr>
-							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['id_usuario']); ?>" alt="perfil"></td>
+							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>
 
 							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
 							            			<?php echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; ?></td>
@@ -373,40 +379,42 @@
 												<?php if($vista == 1){ ?>
 													<td style="vertical-align: middle; text-align: center;"><?php echo SUCURSAL_MONEDA.number_format($a['asp_salarial'],2); ?></td>
 												<?php } ?>
-												<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
-								            		<?php 
-									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
 
-									            			$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-									            			$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-									            			
-									            			if(in_array('-1',$posibilidades) ){
-																echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
-															}else{
-																$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
-
-																if($cantidadRestante > 0){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'.pdf"><i class="fa fa-file-text fa-1x"></i></a>';
-																}else{
-																	echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar hojas de vida'".',"alert_descarga")"><i class="fa fa-file-text fa-1x"></i></a>';
-																}
+												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))){ ?>
+													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
+									        <?php 									            		  
+										      if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+						            		$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
+						            		$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);										            			
+									          if(in_array('-1',$posibilidades) ){
+									          	$url = ($vista == 1) ? $a['username'].'/'.$a['id_ofertas'] : $a['username'];
+															echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$url.'/"><i class="fa fa-file-text fa-1x"></i></a>';
+														}else{
+															$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
+															if($cantidadRestante > 0){
+																$url = ($vista == 1) ? $a['username'].'/'.$a['id_ofertas'] : $a['username'];
+																echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$url.'/"><i class="fa fa-file-text fa-1x"></i></a>';
 															}
-
-														}else{
-															echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar hojas de vida'".',"alert_descarga")"><i class="fa fa-file-text fa-1x"></i></a>';
+															else{
+																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';
+															}
 														}
+													}else{
+														echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';
+													}
 													?>
-												</td>
+													</td>
 
-												<td title="Descargar Informe de personalidad" data-title="Informe" style="vertical-align: middle; text-align: center;">
-								            		<?php 
-									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-															echo '<a target="_blank" href="'.PUERTO."://".HOST."/informePDF/".$a['username'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
-														}else{
-															echo '<a href="#" onclick="abrirModal('."'Debe contratar un plan que permita descargar Informes de personalidad'".',"alert_descarga")"><i class="fa fa-clipboard fa-1x"></i></a>';
-														}
-													?>
-												</td>
+													<td title="Descargar Informe de personalidad" data-title="Informe" style="vertical-align: middle; text-align: center;">
+									            		<?php 
+										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+																echo '<a target="_blank" href="'.PUERTO."://".HOST."/informePDF/".$a['username'].'/"><i class="fa fa-clipboard fa-1x" aria-hidden="true"></i></a>';
+															}else{
+																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\')"><i class="fa fa-clipboard fa-1x"></i></a>';
+															}
+														?>
+													</td>
+												<?php } ?>
 							            	</tr>
 										<?php }
 									}else{ ?>

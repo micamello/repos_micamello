@@ -10,6 +10,7 @@ class Controlador_Inicio extends Controlador_Base {
   }
   
   public function construirPagina(){
+
     // FACEBOOK
     require_once "includes/fb_api/config.php";
     $permissions = ['email'];
@@ -54,8 +55,7 @@ class Controlador_Inicio extends Controlador_Base {
 
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
-      case 'buscaCorreo':
-        // Utils::log("eder:".$opcion);
+      case 'buscaCorreo':        
         $correo = Utils::getParam('correo', '', $this->data);
         $datocorreo = Modelo_Usuario::existeCorreo($correo);
         Utils::log($datocorreo);
@@ -67,7 +67,7 @@ class Controlador_Inicio extends Controlador_Base {
         Utils::log($datodni);
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
-      default:
+      default:        
         Vista::render('inicio', $tags);
       break;
     }

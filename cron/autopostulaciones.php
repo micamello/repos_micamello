@@ -37,6 +37,10 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   $arr_niveles = Modelo_UsuarioxNivel::obtieneListado($rows["id_usuario"]);
   $str_niveles = implode($arr_niveles,',');
 
+  if (empty($arr_areas) || empty($arr_niveles)){
+    continue;
+  }
+  
   echo "<br>usuario: ".$rows["id_usuario"]." / ".$rows["nombres"]." / ".$rows["viajar"]." / ".$rows["id_provincia"]."<br>";
   echo "areas: ".$str_areas."<br>";
   echo "interes: ".$str_niveles."<br>";
@@ -61,7 +65,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
 	    try{	
 	  	  $GLOBALS['db']->beginTrans();
 
-        if (!Modelo_Postulacion::postularse($rows["id_usuario"],$oferta["id_ofertas"],$oferta["salario"],Modelo_Postulacion::AUTOMATICO)){        	
+        if (!Modelo_Postulacion::postularse($rows["id_usuario"],$oferta["id_ofertas"],$oferta["salario"],Modelo_Postulacion::AUTOMATICO)){  
           throw new Exception("Error al grabar la postulacion ".print_r($oferta,true));
         } 
         $idpostulacion = $GLOBALS['db']->insert_id();      
@@ -75,7 +79,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
          
         $cont_publicacion = $cont_publicacion - 1; 
 
-        $empresa = Modelo_Usuario::busquedaPorId($oferta["id_usuario"]);    
+        $empresa = Modelo_Usuario::busquedaPorId($oferta["id_usuario"],Modelo_Usuario::EMPRESA);    
         $mail_ofertas .= utf8_encode($oferta["titulo"])."<br>";
         $mail_ofertas .= utf8_encode($empresa["nombres"])." - ".utf8_encode($oferta["provincia"])."/".utf8_encode($oferta["ciudad"])."<br><br>";
 
@@ -84,16 +88,15 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
         if (empty($numpostact)){
         	break;
         }
-        
-        echo "PROCESADO REGISTRO ".$oferta['id_ofertas']."<br>";
+              
+        echo "PROCESADA OFERTA ".$oferta['id_ofertas']." / ".$oferta['titulo']."<br>";
 	  	}
 	    catch(Exception $e){
 	  	  $GLOBALS['db']->rollback();
 	  	  echo "NO PROCESADO REGISTRO ".$oferta['id_ofertas']."<br>";
-	      Utils::envioCorreo('micamelloecuador@gmail.com','Error Cron autopostulaciones',$e->getMessage());      
+	      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron autopostulaciones',$e->getMessage());      
 	    }
-    }
-        
+    }        
   }  
   
   //5.-envio de correo al candidato
@@ -101,6 +104,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   	$email_body = "Estimado, ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le confirmamos su autopostulaci&oacute;n a las siguientes ofertas:<br><br>";
     $email_body .= $mail_ofertas;
   	Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);
+    Modelo_Notificacion::insertarNotificacion($rows["id_usuario"],$email_body,2);
   }
 
 }

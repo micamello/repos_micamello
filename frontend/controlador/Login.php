@@ -1,16 +1,16 @@
 <?php
 class Controlador_Login extends Controlador_Base {
-
+ 
   function __construct(){
     global $_SUBMIT;
     $this->data = $_SUBMIT;
   } 
-
+ 
   public function construirPagina(){
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
     }
-
+ 
     if ( Utils::getParam('login_form') == 1 ){
       try{
         $campos = array('username'=>1, 'password'=>1);        
@@ -19,18 +19,20 @@ class Controlador_Login extends Controlador_Base {
         if (!empty($usuario)){  
           if ($usuario["id_pais"] != SUCURSAL_PAISID){
             $sucursal = Modelo_Sucursal::consultaxPais($usuario["id_pais"]);
-            if (empty($sucursal)){
-              $_SESSION['mostrar_error'] = "Registro realizado en una sucursal no activa";  
-              Utils::doRedirect(PUERTO.'://'.HOST.'/');
+            if (empty($sucursal)){              
+              throw new Exception("Registro realizado en una sucursal no activa");
             }
             else{              
               Utils::doRedirect(PUERTO.'://'.$sucursal['dominio'].'/');
             }            
           } 
+          if ($usuario["estado"] != 1){
+            throw new Exception("El Usuario no esta activo, por favor comuniquese con el administrador para su activación");            
+          }
           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
             throw new Exception("Error en el sistema, por favor intente nuevamente");
           }                                 
-          self::registroSesion($usuario);                   
+          self::registroSesion($usuario);               
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
@@ -44,21 +46,20 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     } 
-
+ 
     $tags["arrarea"] = Modelo_Area::obtieneListado();
     $tags["intereses"] = Modelo_Interes::obtieneListado();
-
+ 
     $tags["template_js"][] = "validator";    
     $tags["template_js"][] = "ruc_jquery_validator";
     $tags["template_js"][] = "selectr";
     $tags["template_js"][] = "mic";
     $tags["template_js"][] = "modal-register"; 
     Vista::render('login',$tags);  
-
+ 
   }
-
-  public static function registroSesion($usuario){
-    unset($_SESSION['mfo_datos']['usuario']); 
+ 
+  public static function registroSesion($usuario){        
     $_SESSION['mfo_datos']['usuario'] = $usuario;
     //busqueda de planes activos
     $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"],$usuario["tipo_usuario"]);
@@ -66,7 +67,6 @@ class Controlador_Login extends Controlador_Base {
     if (!empty($planesactivos) && is_array($planesactivos)){
       $_SESSION['mfo_datos']['planes'] = $planesactivos; 
     }
-
     if ($usuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
       $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
       $usuarioxnivel = Modelo_UsuarioxNivel::obtieneListado($usuario["id_usuario"]);
@@ -75,7 +75,6 @@ class Controlador_Login extends Controlador_Base {
       if (!empty($usuarioxarea) && is_array($usuarioxarea)){
         $_SESSION['mfo_datos']['usuarioxarea'] = $usuarioxarea; 
       }
-
       if (!empty($usuarioxnivel) && is_array($usuarioxnivel)){
         $_SESSION['mfo_datos']['usuarioxnivel'] = $usuarioxnivel; 
       }
@@ -83,11 +82,17 @@ class Controlador_Login extends Controlador_Base {
       if (!empty($infohv) && is_array($infohv)){
         $_SESSION['mfo_datos']['infohv'] = $infohv; 
       }
-    }    
-    
+
+    }  
+    else{      
+      $hijos = Modelo_Usuario::obtieneHerenciaEmpresa($usuario["id_usuario"]);
+      if (!empty($hijos)){
+        $_SESSION['mfo_datos']['subempresas'] = $hijos;
+      }      
+    }  
     ini_set("session.gc_maxlifetime", 14400000000000);        
     session_write_close();  
   }
-
+ 
 }  
 ?>

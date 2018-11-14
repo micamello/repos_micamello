@@ -76,6 +76,9 @@ function obtieneControlador($nombre){
     case 'notificacion':
       return 'Notificacion';
     break;
+    case 'subempresas':
+      return 'Subempresa';
+    break;
     default:
       return 'Inicio'; 
     break;

@@ -12,9 +12,8 @@ class Modelo_InfoHv{
   }
   
   public static function obtieneHv($idUsuario){
-
   	$sql = "SELECT * FROM mfo_infohv WHERE id_usuario = ".$idUsuario;
-    return $GLOBALS['db']->auto_array($sql,array(),false);
+    return $GLOBALS['db']->auto_array($sql,array());
   }
 
   public static function obtieneHvAspirantes($idOferta){

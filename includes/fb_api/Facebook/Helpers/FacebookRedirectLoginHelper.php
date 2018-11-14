@@ -220,13 +220,12 @@ class FacebookRedirectLoginHelper
 
         $this->validateCsrf();
         $this->resetCsrf();
-
+        
         $redirectUrl = $redirectUrl ?: $this->urlDetectionHandler->getCurrentUrl();
         // At minimum we need to remove the state param
         // $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl($redirectUrl, ['state']);-->SE COMENTO ORIGINAL
         $redirectUrl = FacebookUrlManipulator::removeParamsFromUrl ($redirectUrl, ['state', 'code', 'enforce_https']);
         // Lo que se reemplazo arriba
-
         return $this->oAuth2Client->getAccessTokenFromCode($code, $redirectUrl);
     }
 

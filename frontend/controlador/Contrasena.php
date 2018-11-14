@@ -32,9 +32,9 @@ class Controlador_Contrasena extends Controlador_Base {
       $respuesta = Utils::desencriptar($respuesta);      
       $valores = explode("||",$respuesta);      
       $token = $valores[0];
-      $idusuario = $valores[1];
+      $id_usuario_login = $valores[1];
       $fecha = $valores[2];
-      $token_valido = Utils::generarToken($idusuario,"CONTRASENA");
+      $token_valido = Utils::generarToken($id_usuario_login,"CONTRASENA");
       
       if($token_valido != $token){
         throw new Exception("El enlace para recuperación es incorrecto, por favor ingrese denuevo su correo para el envio");      
@@ -51,7 +51,7 @@ class Controlador_Contrasena extends Controlador_Base {
         if (!Utils::valida_password($data["password"])){
           throw new Exception("Contraseña no válida, debe contener mínimo 8 caracteres, una letra mayúscula y un número");
         }
-        if (!Modelo_Usuario::modificarPassword($data["password"],$idusuario)){
+        if (!Modelo_Usuario::modificarPassword($data["password"],$id_usuario_login)){
           throw new Exception("Error al modificar la contraseña, por favor intente denuevo"); 
         }
         $_SESSION['mostrar_exito'] = "Contraseña modificada exitosamente"; 
@@ -80,13 +80,12 @@ class Controlador_Contrasena extends Controlador_Base {
         $datousuario = Modelo_Usuario::busquedaPorCorreo($data["correo"]);
         if (empty($datousuario)){
           throw new Exception("Dirección de correo electrónico no existe");
-        }   
-                        
-        $token = Utils::generarToken($datousuario["id_usuario"],"CONTRASENA");
+        }                           
+        $token = Utils::generarToken($datousuario["id_usuario_login"],"CONTRASENA");
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente denuevo");
         }
-        $token .= "||".$datousuario["id_usuario"]."||".date("Y-m-d H:i:s");
+        $token .= "||".$datousuario["id_usuario_login"]."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         $nombres = $datousuario['nombres'] . ((isset($datousuario['apellidos'])) ? "&nbsp;".$datousuario['apellidos'] : '');
         if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
@@ -109,7 +108,7 @@ class Controlador_Contrasena extends Controlador_Base {
     $asunto = "Recuperación de Contraseña";
     $body = "Estimado, ".utf8_encode($nombres)."<br>";
     $body .= "Por favor de click en este enlace para cambiar su contrase&ntilde;a ";
-    $body .= "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a> <br>";
+    $body .= "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a> <br>";    
     if (Utils::envioCorreo($correo,$asunto,$body)){
       return true;
     }

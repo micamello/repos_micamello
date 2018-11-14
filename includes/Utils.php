@@ -102,7 +102,7 @@ class Utils{
   }
 
   public static function valida_telefono($numerotelefono){ 
-    if (preg_match("/^[ ]*[(]{0,1}[ ]*[0-9]{3,3}[ ]*[)]{0,1}[-]{0,1}[ ]*[0-9]{3,3}[ ]*[-]{0,1}[ ]*[0-9]{4,4}[ ]*$/",$numerotelefono)) return true; 
+    if (preg_match("/^[ ]*[(]{0,1}[ ]*[0-9]{2,3}[ ]*[)]{0,1}[-]{0,1}[ ]*[0-9]{3,3}[ ]*[-]{0,1}[ ]*[0-9]{4,4}[ ]*$/",$numerotelefono)) return true; 
     else return false; 
   }
 
@@ -191,6 +191,8 @@ class Utils{
           @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato']);
         }
         $nombre .= ".".$valida_arch[1];
+        Utils::log($file_temp);
+        Utils::log(''.$path . $nombre);        
         return move_uploaded_file($file_temp, ''.$path . $nombre);        
       }
     }
@@ -353,33 +355,33 @@ class Utils{
   public static function no_carac($cadena)
   {
     $cadena = str_replace(
-        array('Ã¡', 'Ã ', 'Ã¤', 'Ã¢', 'Âª', 'Ã', 'Ã€', 'Ã‚', 'Ã„'),
+        array('á', 'à', 'ä', 'â', 'ª', 'Á', 'À', 'Â', 'Ä'),
         array('a', 'a', 'a', 'a', 'a', 'A', 'A', 'A', 'A'),
         $cadena
     );
  
     $cadena = str_replace(
-        array('Ã©', 'Ã¨', 'Ã«', 'Ãª', 'Ã‰', 'Ãˆ', 'ÃŠ', 'Ã‹'),
+        array('é', 'è', 'ë', 'ê', 'É', 'È', 'Ê', 'Ë'),
         array('e', 'e', 'e', 'e', 'E', 'E', 'E', 'E'),
         $cadena );
  
     $cadena = str_replace(
-        array('Ã­', 'Ã¬', 'Ã¯', 'Ã®', 'Ã', 'ÃŒ', 'Ã', 'Ã'),
+        array('í', 'ì', 'ï', 'î', 'Í', 'Ì', 'Ï', 'Î'),
         array('i', 'i', 'i', 'i', 'I', 'I', 'I', 'I'),
         $cadena );
  
     $cadena = str_replace(
-        array('Ã³', 'Ã²', 'Ã¶', 'Ã´', 'Ã“', 'Ã’', 'Ã–', 'Ã”'),
+        array('ó', 'ò', 'ö', 'ô', 'Ó', 'Ò', 'Ö', 'Ô'),
         array('o', 'o', 'o', 'o', 'O', 'O', 'O', 'O'),
         $cadena );
  
     $cadena = str_replace(
-        array('Ãº', 'Ã¹', 'Ã¼', 'Ã»', 'Ãš', 'Ã™', 'Ã›', 'Ãœ'),
+        array('ú', 'ù', 'ü', 'û', 'Ú', 'Ù', 'Û', 'Ü'),
         array('u', 'u', 'u', 'u', 'U', 'U', 'U', 'U'),
         $cadena );
  
     $cadena = str_replace(
-        array('Ã±', 'Ã‘', 'Ã§', 'Ã‡'),
+        array('ñ', 'Ñ', 'ç', 'Ç'),
         array('n', 'N', 'c', 'C'),
         $cadena
     );

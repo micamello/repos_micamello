@@ -28,7 +28,7 @@
         <div class="row">
           <!--<div class="main_business">-->
             <div class="col-md-3" align="center">                                
-              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['id_usuario']); ?>" style="border-radius: 5%;max-width:100%;">
+              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" style="border-radius: 5%;max-width:100%;">
             </div>              
             <div class="col-md-3" align="center">
               <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/<?php echo $imagengif;?>">
@@ -61,7 +61,11 @@
         </div>    
         <div class="row">                    
           <div class="col-md-4 col-xs-12 pull-right">
-            <?php if ($nrotestusuario < $nrototaltest){?>              
+            <?php if ($nrotestusuario < $nrototaltest){?>  
+              <?php if ($enlaceboton == "planes"){ 
+                $_SESSION['mostrar_error'] = "Si desea continuar con el siguiente formulario es necesario contratar un plan";
+              }
+              ?>            
               <a href="<?php echo PUERTO;?>://<?php echo HOST;?>/<?php echo $enlaceboton;?>/" class="btn btn-success btn-block">SIGUIENTE CUESTIONARIO</a>
             <?php } else{ ?>
               <a href="<?php echo PUERTO;?>://<?php echo HOST;?>/postulacion/" class="btn btn-success btn-block">POSTULATE</a>

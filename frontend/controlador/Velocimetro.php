@@ -58,7 +58,7 @@ class Controlador_Velocimetro extends Controlador_Base {
            $nrotestusuario < $nrototaltest){
       $enlaceboton = "cuestionario";
     }  
-    else{                    
+    else{          
       $enlaceboton = "planes"; 
     }
 
