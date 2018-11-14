@@ -133,7 +133,6 @@ class Controlador_Plan extends Controlador_Base {
         }  
         
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
-        //Utils::log("paso por aqui".print_r($_SESSION,true));
         if ($tipousu == Modelo_Usuario::CANDIDATO){
           $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede postular a una oferta"; 
           $this->redirectToController('oferta');

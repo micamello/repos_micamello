@@ -96,6 +96,7 @@ $('#btn_submitpaypal').click(function(){
 
 $('#imagen').change(function(e) {
     addImage(e); 
+    validarFormulario();
 });
 
 function addImage(e){
@@ -129,7 +130,7 @@ function validarFormulario(){
   var expreg1 = /^[a-z A-Z 0-9]+$/i;
   var expreg_telf = /^[0-9]+$/i;
   var expreg_correo = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/i;
-  var expreg_float = /^[0-9]{2,}\.?[0-9]{2}$/i;
+  //var expreg_float = /^[0-9]{2,}\.?[0-9]{2}$/i;
   var error = 0;
 
   var form = document.getElementById("tipoSeleccionado").value;
@@ -173,9 +174,9 @@ function validarFormulario(){
         colocaError("err_val", "seccion_val","El campo no puede ser vacío",btn);
         error = 1;
 
-    }else if(!expreg_float.test(valor)){
+    }else if(!expreg_telf.test(valor)){
 
-        colocaError("err_val", "seccion_val","Formato incorrecto, xx.xx",btn);
+        colocaError("err_val", "seccion_val","Formato incorrecto",btn);
         error = 1; 
 
     }else{
@@ -319,7 +320,7 @@ function validarDocumento(numero,tipo,campoErr,campoSeccion,btn){
     return error = 1;
   }
   else if (numero.length < 10 && tipo == 2){ 
-    colocaError(campoErr, campoSeccion,"DNI inválida",btn);                 
+    colocaError(campoErr, campoSeccion,"Cédula inválida",btn);                 
     return error = 1;
 
   }else if (numero.length < 13 && tipo == 1){ 
@@ -447,6 +448,7 @@ function fileValidation(fileInput){
 
   var filePath = fileInput.value;
   var allowedExtensions = /[.jpg |.jpeg |.png]$/i;
+  console.log(filePath);
   if(!allowedExtensions.exec(filePath)){
     colocaError("err_img", "seccion_img","El formato permitido es .jpeg/.jpg/.png","btndeposito");
     fileInput.value = '';

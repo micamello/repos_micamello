@@ -31,7 +31,6 @@ class Controlador_Aspirante extends Controlador_Base
         $type = Utils::getParam('type', '', $this->data); 
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $vista = Utils::getParam('vista', '1', $this->data);
-        Utils::log("EDER:".$vista);
         $username = Utils::getParam('username', '', $this->data);
         $breadcrumbs = array();
 
@@ -423,7 +422,6 @@ class Controlador_Aspirante extends Controlador_Base
     }
 
     public function perfilAspirante($username, $id_oferta, $vista){
-        Utils::log($vista);
         $datos = Modelo_Usuario::existeUsuario($username);
         $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
 

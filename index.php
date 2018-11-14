@@ -17,11 +17,10 @@ function dispatch() {
     $pagina = Utils::getParam('mostrar', 'inicio');
     $controlador_nombre = obtieneControlador($pagina);
     $clase = 'Controlador_' . $controlador_nombre;
-    Utils::log(__METHOD__ . " nombre del controlador: ". $clase." - ".$pagina);
     if(class_exists($clase)){
       $controlador = new $clase();
     }else{
-      Utils::log(__METHOD__ . " no existe: ". $clase);
+      //no existe controlador
     }
     return $controlador->construirPagina();
   }

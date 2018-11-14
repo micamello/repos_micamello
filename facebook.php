@@ -6,7 +6,6 @@ include 'multisitios.php';
 require_once "includes/fb_api/config.php";
 
 $tipo_usuario = $_GET['tipo_user'];
-// Utils::log("tipo de usuario : ".$tipo_usuario);
 
 $_SESSION['FBRLH_state']=$_GET['state'];
 try {
