@@ -1,100 +1,24 @@
 $('#form_register').on("submit", function(e){
-	console.log(document.getElementsByClassName("list-unstyled msg_error").length);
-	if(document.getElementsByClassName("list-unstyled msg_error").length > 0){
+	// console.log(document.getElementsByClassName("list-unstyled msg_error").length);
+	var correo_e = document.getElementById("correo_e");
+	var dni_e = document.getElementById("dni_e");
+	if(document.getElementsByClassName("list-unstyled msg_error").length > 0 || (correo_e.innerHTML != "" && dni_e.innerHTML != "")){
 		document.getElementById("button_register").setAttribute("class","btn btn-info disabled");
 		e.preventDefault();
 	}
-	else{
-		document.getElementById("button_register").setAttribute("class", "btn btn-info");
-	}
-})
-
-// $("#correo").on("blur", function(){
-// 	if ($('#correo_error')) {
-// 		var correo = document.getElementById("correo_error");
-// 	}
-// 	var puerto_host = $('#puerto_host').val();
-// 	var correo_form = this.value;
-// 	if (correo_form != "") {
-// 		$.ajax({
-//             type: "GET",
-//             url: puerto_host+"?opcion=buscaCorreo&correo="+correo_form,
-//     		dataType: 'json',
-//             success:function(data){
-//             	console.log("valor ajax 1:"+data.respcorreo);
-// 				if(data.respcorreo != 1){
-// 					console.log("valor ajax 2:"+data.respcorreo);
-// 						crearMensajeError("correo_div_error", "El correo ingresado ya existe");
-// 						correo.setAttribute("class", "form-group has-error has-danger");
-// 				}
-// 				else{
-// 					// console.log(document.getElementById("correo_div_error").firstChild.innerHTML);
-// 					// if(document.getElementById("correo_div_error").firstChild.innerHTML == "El correo ingresado ya existe"){
-// 						eliminarMensajeError("correo_div_error");
-// 						correo.setAttribute("class", "form-group");
-// 					// }
-// 				}
-//             },
-//             error: function (request, status, error) {
-//                 alert(request.responseText);
-//             }                  
-//         })
-// 	}
-// })
-
-// $("#dni").on("blur", function(){
-// 	if ($('#dni_error')) {
-// 		var dni = document.getElementById("dni_error");
-// 	}
-// 	var puerto_host = $('#puerto_host').val();
-// 	var dni_form = this.value;
-// 	if (dni_form != "") {
-// 		$.ajax({
-//             type: "GET",
-//             url: puerto_host+"?opcion=buscaDni&dni="+dni_form,
-//     		dataType: 'json',
-//             success:function(data){
-// 				if(data.respdni != 1){
-// 					if(document.getElementById("error_custom_dni").innerHTML == ""){
-// 						crearMensajeError("error_custom_dni", "El dni ingresado ya existe");
-// 						dni.setAttribute("class", "form-group has-error has-danger");
-// 					}
-// 				}
-// 				else{
-// 					if(document.getElementById("error_custom_dni").firstChild.innerHTML == "El dni ingresado ya existe"){
-// 						eliminarMensajeError("error_custom_dni");
-// 						dni.setAttribute("class", "form-group");
-// 					}
-// 				}
-//             },
-//             error: function (request, status, error) {
-//                 alert(request.responseText);
-//             }                  
-//         })
-// 	}
-// })
-
-
-
-
-$("#documentacion").on("change", function(){
-	var dni = document.getElementById("dni");
-	var dni_text = document.getElementById("error_custom_dni");
-	dni_text.innerHTML = "";
-	dni.value = "";
-	if(this.value != null || this.value != ""){
-		dni.removeAttribute("disabled");
-		if (this.value == 3) {
-			dni.removeAttribute("onblur");
-		}
-		else{
-			dni.setAttribute("onblur", "validarDocumento(this);");
-		}
-	}
-})
+});
 
 function modal_set(id)
 {
+
+	if($('#social_reg')){
+		var social_reg = document.getElementById("social_reg");
+	}
+
+	if($('#modal.size')){
+		var modal_size = document.getElementById("modal-size");
+	}
+
 	if($('#documentacion')){
 		var select_tipo_doc = document.getElementById("documentacion");
 	}
@@ -177,22 +101,26 @@ function modal_set(id)
 	}
 
 	if (id == 1){
+		modal_size.setAttribute("class", "modal-dialog modal-lg");
+
+		social_reg.style.display = "";
+
 		apellido_group.style.display = "";
-		apell_user.required = true;
+		// apell_user.required = true;
 		dni_text.innerHTML = "Cédula / Pasaporte&nbsp;<i class='requerido'>*</i>";
 		area_group.style.display = "";
-		area_select.required = true;
+		// area_select.required = true;
 		nivel_group.style.display = "";
-		nivel_interes.required = true;
+		// nivel_interes.required = true;
 
 		group_nombre_contact.style.display = "none";
-		nombre_contact.required = false;
+		// nombre_contact.required = false;
 
 		group_apell_contact.style.display = "none";
-		apellido_contact.required = false;
+		// apellido_contact.required = false;
 
 		group_num1_contact.style.display = "none";
-		tel_one_contact.required = false;
+		// tel_one_contact.required = false;
 
 		group_num2_contact.style.display = "none";
 
@@ -202,7 +130,7 @@ function modal_set(id)
 
 		tipo_doc.style.display = "";
 
-		select_tipo_doc.setAttribute("required", "true");
+		// select_tipo_doc.setAttribute("required", "true");
 
 
 
@@ -219,22 +147,27 @@ function modal_set(id)
 	}
 
 	if(id == 2){
+
+		modal_size.setAttribute("class", "modal-dialog");
+
+		social_reg.style.display = "none";
+
 		apellido_group.style.display = "none";
-		apell_user.required = false;
+		// apell_user.required = false;
 		dni_text.innerHTML = "RUC&nbsp;<i class='requerido'>*</i>";
 		area_group.style.display = "none";
-		area_select.required = false;
+		// area_select.required = false;
 		nivel_group.style.display = "none";
-		nivel_interes.required = false;
+		// nivel_interes.required = false;
 
 		group_nombre_contact.style.display = "";
-		nombre_contact.required = true;
+		// nombre_contact.required = true;
 
 		group_apell_contact.style.display = "";
-		apellido_contact.required = true;
+		// apellido_contact.required = true;
 
 		group_num1_contact.style.display = "";
-		tel_one_contact.required = true;
+		// tel_one_contact.required = true;
 
 		group_num2_contact.style.display = "";
 
@@ -246,14 +179,15 @@ function modal_set(id)
 
 		dni.setAttribute("minlength", "13");
 		dni.setAttribute("maxlength", "13");
+		dni.setAttribute("pattern", "[0-9]{13,13}");
 
 		dni.removeAttribute("disabled");
 
-		dni.setAttribute("onblur", "validarDocumento(this);");
+		// dni.setAttribute("onblur", "validarDocumento(this);");
 
 		tipo_doc.style.display = "none";
 
-		select_tipo_doc.removeAttribute("required");
+		// select_tipo_doc.removeAttribute("required");
 
 		tipo_usuario.value = id;
 		$("#myModal").modal("show");

@@ -27,7 +27,7 @@ class Controlador_Login extends Controlador_Base {
               Utils::doRedirect(PUERTO.'://'.$sucursal['dominio'].'/');
             }            
           } 
-          if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"])){            
+          if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
             throw new Exception("Error en el sistema, por favor intente nuevamente");
           }                                 
           self::registroSesion($usuario);                   
@@ -37,7 +37,8 @@ class Controlador_Login extends Controlador_Base {
         }        
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                        $_SESSION['mfo_datos']['usuario']['id_usuario'],
-                                       $_SESSION['mfo_datos']['infohv'],$_SESSION['mfo_datos']['planes'],'login');   
+                                       (isset($_SESSION['mfo_datos']['infohv'])) ? $_SESSION['mfo_datos']['infohv'] : array(),
+                                       $_SESSION['mfo_datos']['planes'],'login');   
       }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();
@@ -60,26 +61,30 @@ class Controlador_Login extends Controlador_Base {
     unset($_SESSION['mfo_datos']['usuario']); 
     $_SESSION['mfo_datos']['usuario'] = $usuario;
     //busqueda de planes activos
-    $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"]);
-    $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
-    $usuarioxnivel = Modelo_UsuarioxNivel::obtieneListado($usuario["id_usuario"]);
-    $infohv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);
+    $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"],$usuario["tipo_usuario"]);
+
     if (!empty($planesactivos) && is_array($planesactivos)){
       $_SESSION['mfo_datos']['planes'] = $planesactivos; 
     }
 
-    if (!empty($usuarioxarea) && is_array($usuarioxarea)){
-      $_SESSION['mfo_datos']['usuarioxarea'] = $usuarioxarea; 
-    }
+    if ($usuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
+      $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
+      $usuarioxnivel = Modelo_UsuarioxNivel::obtieneListado($usuario["id_usuario"]);
+      $infohv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);
+      
+      if (!empty($usuarioxarea) && is_array($usuarioxarea)){
+        $_SESSION['mfo_datos']['usuarioxarea'] = $usuarioxarea; 
+      }
 
-    if (!empty($usuarioxnivel) && is_array($usuarioxnivel)){
-      $_SESSION['mfo_datos']['usuarioxnivel'] = $usuarioxnivel; 
-    }
+      if (!empty($usuarioxnivel) && is_array($usuarioxnivel)){
+        $_SESSION['mfo_datos']['usuarioxnivel'] = $usuarioxnivel; 
+      }
 
-    if (!empty($infohv) && is_array($infohv)){
-      $_SESSION['mfo_datos']['infohv'] = $infohv; 
-    }
-
+      if (!empty($infohv) && is_array($infohv)){
+        $_SESSION['mfo_datos']['infohv'] = $infohv; 
+      }
+    }    
+    
     ini_set("session.gc_maxlifetime", 14400000000000);        
     session_write_close();  
   }

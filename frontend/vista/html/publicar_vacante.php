@@ -7,7 +7,7 @@
 			<?php 
 				if (!empty($publicaciones_restantes)) {
 					?>
-			 <div align="right">
+			 <div align="center">
 			 	<div class="col-md-12">
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
@@ -15,10 +15,10 @@
 
 			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {			 					
 			 					?>
-						 			<p>Fecha caducidad plan: </p>
+						 			<p>Fecha caducidad plan: 
 						 			<b><span><?php
 						 			$fecha = date_create($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad']);
-						 			echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b>
+						 			echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>
 			 			<?php }else{ ?>
 			 				<p>Fecha caducidad plan: ilimitado</p>
 			 			<?php } ?>
@@ -29,7 +29,7 @@
 			 			<div class="caja">
 
 			 				<p>Publicaciones restantes: 
-			 				<b><span><?php echo $publicaciones_restantes['p_restantes']; ?></span></b></p>
+			 				<b><span> <?php echo $publicaciones_restantes; ?></span></b></p>
 
 			 			</div>
 			 		</div>
@@ -61,9 +61,9 @@
 					<input type="hidden" name="form_publicar" value="1">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="form-group">
-								<label class="">Título oferta: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="text" name="titu_of" class="form-control" placeholder="Título de la oferta" required value="<?php
+							<div class="form-group" id="titu_of_group">
+								<label class="">Título oferta: </label>&nbsp;<i class="requerido">*</i><div id="titu_of_error" class="help-block with-errors"></div>
+								<input type="text" name="titu_of" id="titu_of" class="form-control" placeholder="Título de la oferta" value="<?php
 								    if(isset($_REQUEST['titu_of'])){
 								                $name = $_REQUEST['titu_of'];
 								                echo $name;
@@ -73,9 +73,9 @@
 						</div>
 
 						<div class="col-md-10 col-md-offset-1">
-							<div id="des_of_error" class="form-group">
+							<div id="descripcion_group" class="form-group">
 								<label class="">Descripción oferta: </label>&nbsp;<i class="requerido">*</i><div id="descripcion_error" class="help-block with-errors"></div>
-								<textarea id="des_of" rows="7" required name="des_of" class="form-control" style="resize: none;"><?php
+								<textarea id="des_of" rows="7" name="des_of" class="form-control" style="resize: none;"><?php
 								    if(isset($_REQUEST['des_of'])){
 								                $name = $_REQUEST['des_of'];
 								                echo $name;
@@ -85,18 +85,18 @@
 						</div>
 
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group" id="salario_group">
 
-								<label class="">Salario: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00" onkeydown=" return validaNumeros(event);" required>
+								<label class="">Salario: </label>&nbsp;<i class="requerido">*</i><div id="salario_error" class="help-block with-errors"></div>
+								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00">
 							</div>
 						</div>
 
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group" id="vacante_group">
 
-								<label>Cantidad de vacantes: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" name="vacantes" min="1" class="form-control" required onkeydown=" return validaNumeros(event);" value="1">
+								<label>Cantidad de vacantes: </label>&nbsp;<i class="requerido">*</i><div id="vacante_error" class="help-block with-errors"></div>
+								<input type="number" id="vacante" name="vacantes" min="1" class="form-control" value="1">
 
 							</div>
 						</div>
@@ -104,7 +104,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione provincia:</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="provincia_of" id="provincia_of" class="form-control" id="provincia_of" required>
+								<select name="provincia_of" id="provincia_of" class="form-control" id="provincia_of">
 									<?php 
 			                      if (!empty($arrprovinciasucursal)){
 			                          foreach($arrprovinciasucursal as $provincia){ ?>
@@ -121,7 +121,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione ciudad:</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="ciudad_of" class="form-control" id="ciudad_of" required>
+								<select name="ciudad_of" class="form-control" id="ciudad_of">
 									<?php 
 	                                	if(!empty($arrciudad)){
 
@@ -138,15 +138,15 @@
 					<div class="row">
 						<div class="">
 							<div class="col-md-6">
-								<div class="form-group">
+								<div class="form-group" id="area_group">
 									<div class="opcionesSeleccionados">
 										<div class="row" id="seleccionados">
 											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
 											<!-- <?php echo $optiones; ?> -->
 										</div>
-										<div class="help-block with-errors"></div>
+										<div id="area_error" class="help-block with-errors"></div>
 										<label class="">Categorías: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-										<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+										<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple>
 					                    <?php 
 					                      if (!empty($arrarea)){
 					                          foreach($arrarea as $area){ ?>
@@ -159,15 +159,15 @@
 							</div>
 
 							<div class="col-md-6">
-								<div class="form-group">
+								<div class="form-group" id="nivel_group">
 									<div class="opcionesSeleccionados">
 										<div class="row" id="seleccionados1">
 											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
 											<!-- <?php echo $optiones; ?> -->
 										</div>
-										<div class="help-block with-errors"></div>
+										<div id="nivel_error" class="help-block with-errors"></div>
 										<label>Nivel: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-										<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple required>
+										<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple>
 					                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
 					                    <?php 
 					                      if (!empty($intereses)){
@@ -186,7 +186,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Jornada: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="jornada_of" class="form-control" required>
+								<select name="jornada_of" class="form-control">
 									<?php if (!empty($arrjornada)){
 										foreach ($arrjornada as $jornada) {?>
 											<option value="<?php echo $jornada['id_jornada'] ?>"><?php echo utf8_encode($jornada['nombre']) ?></option>
@@ -201,7 +201,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Escolaridad: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="escolaridad" class="form-control" required>
+								<select name="escolaridad" class="form-control">
 									<?php if (!empty($arrescolaridad)){
 										foreach ($arrescolaridad as $escolaridad) {?>
 											<option value="<?php echo $escolaridad['id_escolaridad'] ?>"><?php echo utf8_encode($escolaridad['descripcion']) ?></option>
@@ -216,7 +216,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Años de experiencia: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="experiencia" class="form-control" required>
+								<select name="experiencia" class="form-control">
 									<?php 
 
 										foreach(ANOSEXP as $key => $exp){ 
@@ -231,9 +231,9 @@
 						
 
 						<div class="col-md-6">
-							<div class="form-group">
+							<div class="form-group" id="fecha_group">
 								<label>Fecha contratación: </label>&nbsp;<i class="requerido">*</i><div id="fecha_error" class="help-block with-errors"></div>
-								<input type="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" required value="<?php
+								<input type="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" value="<?php
 								    if(isset($_REQUEST['fecha_contratacion'])){
 								                $name = $_REQUEST['fecha_contratacion'];
 								                echo $name;
@@ -284,18 +284,18 @@
 
 						<div class="col-md-8 col-md-offset-2">
 
-							<div id="id_idi_error" class="form-group">
-								<label>Idiomas seleccionados: </label>&nbsp;<i class="requerido">*</i><div id="listado_idiomas" class="help-block with-errors"></div>
+							<div id="listado_group" class="form-group">
+								<label>Idiomas seleccionados: </label>&nbsp;<i class="requerido">*</i><div id="listado_error" class="help-block with-errors"></div>
 								<!-- <div class="col-md-12"> -->
 									<div id="error_msg">
 									</div>
-									<div class="list_content">
+									<div class="list_content" style="overflow-y: scroll;">
 										<div class="form-group" id="list_idioma">
 											<p id="text_nothing">Ningun idioma seleccionado.....</p>
 										</div>
 									</div>
 								<!-- </div> -->
-								<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple required>
+								<select style="visibility: hidden; height: 1px;" id="select_array_idioma" name="nivel_idioma[]" multiple>
 								</select>
 							</div>
 						</div>
@@ -309,7 +309,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Disponibilidad para viajar: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="viaje" class="form-control" required>
+								<select name="viaje" class="form-control">
 
 									<?php
 										foreach(REQUISITO as $key => $viajar){ 
@@ -325,7 +325,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Licencia: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="licencia" class="form-control" required>
+								<select name="licencia" class="form-control">
 
 									<?php 
 
@@ -342,7 +342,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cambio de residencia: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="cambio_residencia" class="form-control" required>
+								<select name="cambio_residencia" class="form-control">
 
 									<?php 
 
@@ -359,7 +359,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Discapacidad: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<select name="discapacidad" class="form-control" required>
+								<select name="discapacidad" class="form-control">
 									<?php 
 
 
@@ -376,7 +376,7 @@
 							<div class="form-group">
 								<label>Confidencial: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 
-								<select name="confidencial" class="form-control" required>
+								<select name="confidencial" class="form-control">
 									<?php 
 
 										foreach(REQUISITO as $key => $confidencial){ 
@@ -391,24 +391,30 @@
 						</div>
 
 						<div class="col-md-3">
-							<div class="form-group">
+							<div class="form-group" id="edad_min_group">
 
-								<label>Edad mínima: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" onkeydown=" return validaNumeros(event);" value="18" required>
+								<label>Edad mínima: </label>&nbsp;<i class="requerido">*</i><div id="edad_min_error" class="help-block with-errors"></div>
+								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" value="18">
 							</div>
 						</div>
 
 						<div class="col-md-3">
+							<div class="form-group" id="edad_max_group">
+								<label>Edad máxima: </label>&nbsp;<i class="requerido">*</i><div id="edad_max_error" class="help-block with-errors"></div>
+								<input type="number" id="edad_max" name="edad_max" min="18" max="100" class="form-control">
+							</div>
+						</div>
+
+						<div class="col-md-6">
 							<div class="form-group">
-								<label>Edad máxima: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-								<input type="number" id="edad_max" name="edad_max" min="18" max="100" class="form-control" onkeydown=" return validaNumeros(event);" required>
+								<input type="checkbox" name="urgente" id="urgente" value="0"><label for="urgente" style="text-align: left;"><p>Urgente (<small id="text_urg" style="color: #A7A7A7;">No</small>)</p></label>
 							</div>
 						</div>	
 					</div>
 					<br>
 					<div class="row">
 						<!-- <a type="submit" class="btn btn-success">Publicar</a> -->
-						<input type="submit" id="boton" name="" class="btn btn-success" value="Publicar oferta">
+						<input type="submit" id="boton" name="boton" class="btn btn-success" value="Publicar oferta">
 					</div>
 				</form>
 			</div>

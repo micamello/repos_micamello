@@ -892,5 +892,107 @@ input[type="checkbox"]:checked + label:before {
 
 .text-white{
   text-shadow: 1px 2px #000;
-  color: ##f3efef;
+  color: #f3efef;
+}
+
+.twin_reg{
+  color: red;
+  position: absolute;
+  font-size: 10px;
+  margin-top: 66px;
+}
+
+
+
+.social_content{
+  margin: 10px 0 10px 0;
+}
+/*----------------------------*/
+.socialbutton{
+  /*padding: 2px 20px 2px 20px;*/
+  margin: 5px 0 5px 0;
+  display: inline-block;
+  width: 100%;
+  border-radius: 25px;
+  font-size: 35px;
+  text-align: center;
+  display: table;
+  transition: transform .5s;
+  }
+
+.socialbutton:hover{
+  /*padding: 20px;*/
+  border-radius: 10px 10px 10px 10px;
+  transform: scale(1.35);
+  /*position: absolute;*/
+}
+
+.social_text{
+  display: none;
+}
+
+.fb{
+  background-color: white;
+  color: #3d5b99;
+}
+
+.tw{
+  background-color: white;
+  color: #1da1f2;
+}
+
+.google{
+  background-color: white;
+  color: #ea4335;
+}
+
+.lkin{
+  background-color: white;
+  color: #0077b5;
+}
+
+.fb:hover{
+  border-radius: 25px 25px 25px 25px;
+  background-color: white;
+  color: #3d5b99;
+  /*padding: 0px 10px 0px 10px;*/
+}
+
+.tw:hover{
+  border-radius: 25px 25px 25px 25px;
+  background-color: white;
+  color: #1da1f2;
+  /*padding: 0px 10px 0px 10px;*/
+}
+
+.google:hover{
+  border-radius: 25px 25px 25px 25px;
+  background-color: white;
+  color: #ea4335;
+  /*padding: 0px 10px 0px 10px;*/
+}
+
+.lkin:hover{
+  border-radius: 25px 25px 25px 25px;
+  background-color: white;
+  color: #0077b5;
+  /*padding: 0px 10px 0px 10px;*/
+}
+
+
+/*.facebook_reg1{
+  color: #FFFFFF;
+  padding: 10px 60px 10px 60px;
+  background-color: #3d5b99;
+  font-size: 20px;
+  border-radius: 3px;
+}
+
+.facebook_reg1:hover{
+  color: #3d5b99;
+  background-color: #FFFFFF;
+}
+
+.text_social{
+  display: ;
 }

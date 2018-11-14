@@ -204,8 +204,8 @@
 								<div class="box_text">
 									<label>Universidad <i class="fa fa-university icon fa-2x"></i></label>
 										<?php 
-											if ($infoUsuario['nombre_uni'] != NULL || $infoUsuario['nombre_uni'] = "") {
-												echo "<h6>".utf8_encode($infoUsuario['nombre_uni'])."</h6>";
+											if ($infoUsuario['universidad'] != NULL || $infoUsuario['universidad'] = "") {
+												echo "<h6>".utf8_encode($infoUsuario['universidad'])."</h6>";
 											}
 											else{
 												echo "<h6>----------</h6>";
@@ -236,8 +236,8 @@
 								<div class="box_text">
 									<label>Fecha Nac. / Edad <i class="fa fa-calendar icon fa-2x"></i></label>
 										<?php 
-											if (($infoUsuario['fecha'] != NULL || $infoUsuario['fecha'] = "") || ($infoUsuario['edad'] != NULL || $infoUsuario['edad'] = "")) {
-												echo "<h6>".utf8_encode($infoUsuario['fecha'])." (".$infoUsuario['edad']." años)"."</h6>";
+											if (($infoUsuario['fecha_nacimiento'] != NULL || $infoUsuario['fecha_nacimiento'] = "") || ($infoUsuario['edad'] != NULL || $infoUsuario['edad'] = "")) {
+												echo "<h6>".utf8_encode($infoUsuario['fecha_nacimiento'])." (".$infoUsuario['edad']." años)"."</h6>";
 											}
 											else{
 												echo "<h6>----------</h6>";

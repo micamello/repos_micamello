@@ -1,24 +1,32 @@
-if(document.getElementById('form_register')){
-  $("#form_register").validator();
-}
+// if(document.getElementById('form_register')){
+//   $("#form_register").validator();
+// }
 
 if(document.getElementById('form_login')){
   $("#form_login").validator();
 }
 
-if(document.getElementById('form_publicar')){
-  $("#form_publicar").validator();
-}
+// if(document.getElementById('form_publicar')){
+//   $("#form_publicar").validator();
+// }
 
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
-    if (document.getElementById("error_custom_dni")){
-      var dni_error = document.getElementById("error_custom_dni");
-      while (dni_error.hasChildNodes()) {
-        dni_error.removeChild(dni_error.firstChild);
-      }
-    }
+
     $(this).find('form')[0].reset();
+    var error_msg = document.getElementsByClassName('with-errors');
+    var error_input = document.getElementsByClassName('has-error');
+
+    // console.log(error_msg.length);
+    // console.log(error_input.length);
+
+    for (var i = error_msg.length - 1; i >= 0; i--) {
+      error_msg[i].innerHTML = '';
+    }
+
+    for (var i = error_input.length - 1; i >= 0; i--) {
+      error_input[i].classList.remove("has-error")
+    }
 });
 
 if (document.getElementById("area_select"))
@@ -90,51 +98,20 @@ function pass_hidden(obj){
 }
 
 
-// if(document.getElementById("term_cond")){
-//   $("#term_cond").on("change", function(){
-//     if (document.getElementById("term_cond").checked) {
-//       document.getElementById("conf_datos").checked = true;
-//     }
-//     else{
-//       document.getElementById("conf_datos").checked = false;
-//     }
-//   })
-// }
-
-// if(document.getElementById("conf_datos")){
-//   $("#conf_datos").on("change", function(){
-//     if (document.getElementById("conf_datos").checked) {
-//       document.getElementById("term_cond").checked = true;
-//     }
-//     else{
-//       document.getElementById("term_cond").checked = false;
-//     }
-//   })
-// }
-
-function crearMensajeError($id_div_error, $mensaje_error){
-    var nodo_div = document.getElementById($id_div_error);
+function crearMensajeError(id_div_error, mensaje_error){
+    var nodo_div = document.getElementById(id_div_error);
     var p_node = document.createElement("P");
     p_node.setAttribute("class", "list-unstyled msg_error");
      p_node.setAttribute("id", "p_node_error");
-    var p_text = document.createTextNode($mensaje_error);
+    var p_text = document.createTextNode(mensaje_error);
     p_node.appendChild(p_text);
     nodo_div.appendChild(p_node); 
 }
 
-function eliminarMensajeError($id_div_error){
-    var nodo_div = document.getElementById($id_div_error);
+function eliminarMensajeError(id_div_error){
+    var nodo_div = document.getElementById(id_div_error);
     nodo_div.innerHTML = "";
 }
-
-// if (document.getElementById("dni")) {
-//   var host = window.location.hostname;
-//   $("#dni").on("blur", function(){
-//     //if (host == 'localhost') {
-//       validarDocumento(this);
-//     //}
-//   })
-// }
 
 $(document).ready(function(){
   if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){
@@ -148,25 +125,19 @@ function mostrarGrafico(label, valor){
   var labels = [];
   var valores = [];
   for (var i = label.length - 1; i >= 0; i--) {
-    // console.log(label[i].value+" - "+valor[i].value);
     labels[i] = label[i].value;
     // 
   }
   for (var i = valor.length - 1; i >= 0; i--) {
-    // console.log(label[i].value+" - "+valor[i].value);
     valores[i] = valor[i].value;
     // 
   }
-  // console.log(labels);
-  // console.log(valores);
-
     let myChart = document.getElementById('myChart').getContext('2d');
-
-
       // Global Options
       Chart.defaults.global.defaultFontFamily = 'Lato';
       Chart.defaults.global.defaultFontSize = 15;
-      Chart.defaults.global.defaultFontColor = '#777';
+      Chart.defaults.global.defaultFontColor = 'black';
+      // Chart.defaults.scale.gridLines.display = false;
 
       let massPopChart = new Chart(myChart, {
         type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
@@ -177,17 +148,17 @@ function mostrarGrafico(label, valor){
             data:valores,
             //backgroundColor:'green',
             backgroundColor:[
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(51, 136, 45, 0.3)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(246, 136, 196, 0.3)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(246, 61, 196, 0.3)',
-              'rgba(246, 136, 45, 0.3)',
-              'rgba(164, 142, 99, 0.3)',
-              'rgba(33, 91, 138, 0.3)'
+              '#001f3f',
+              '#0074D9',
+              '#7FDBFF',
+              '#39CCCC',
+              '#3D9970',
+              '#FFDC00',
+              '#FF851B ',
+              '#FF4136',
+              '#85144b',
+              '#AAAAAA',
+              '#B10DC9'
             ],
             borderWidth:1,
             borderColor:'#777',
@@ -224,6 +195,9 @@ function mostrarGrafico(label, valor){
             yAxes: [{
                 ticks: {
                   min: 5
+                },
+                gridLines: {
+                    display:false
                 }
             }],
             xAxes: [{
@@ -232,7 +206,10 @@ function mostrarGrafico(label, valor){
                     autoSkip: false,
                     maxRotation: 50,
                     minRotation: 50
-                  }
+                  },
+                gridLines: {
+                    display:false
+                }
             }]
           }
         }

@@ -5,6 +5,10 @@
   ##Screen = 1281px to higher resolution desktops
 */
 
+@media (min-width: 1080px) and (max-width: 1600px) {
+
+}
+
 @media only screen and (max-width: 1080px) {
     
     /* Force table to not be like tables anymore */
@@ -77,6 +81,10 @@
 */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
+
+  .text_social{
+      display: none;
+    }
   
   .img-responsive{
     max-width: 50%;
@@ -98,6 +106,10 @@
 */
 
 @media (min-width: 768px) and (max-width: 1024px) {
+
+  .text_social{
+      display: none;
+    }
   
   .img-responsive{
     max-width: 50%;
@@ -115,7 +127,6 @@
     {
       text-align: center;
     }
-  
 }
 
 /* 
@@ -172,7 +183,7 @@
       color: red;
       font-size: 11px;
       right: 0px
-    }   
+    }  
 }
 
 
@@ -183,7 +194,7 @@
 */
 
 @media (min-width: 481px) and (max-width: 767px) {
-  
+
   .img-responsive{
     max-width: 25%;
   }
@@ -271,10 +282,48 @@
       padding-bottom: 0px;
       padding-top: 0px;
       margin-bottom: 0px;
-    } 
+    }
+
+    .socialbutton{
+        padding: 2px 20px 2px 20px;
+        margin: 5px 0 5px 0;
+        display: inline-block;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 25px;
+        text-align: center;
+        display: table;
+      }
+
+    .social_text{
+      font-size: 15px;
+      padding-bottom: 4px;
+      vertical-align: middle;
+      display: inline-block;
+      padding-left: 10px;
+    }
+
+    .fb{
+      background-color: #3d5b99;
+      color: white;
+    }
+
+    .tw{
+      background-color: #1da1f2;
+      color: white;
+    }
+
+    .google{
+      background-color: #ea4335;
+      color: white;
+    }
+
+    .lkin{
+      background-color: #0077b5;
+      color: white;
+    }
 
   }
-}
 
 /* 
   ##Device = Most of the Smartphones Mobiles (Portrait)
@@ -379,6 +428,46 @@
       padding-top: 0px;
       margin-bottom: 0px;
     }
+
+    .socialbutton{
+        padding: 2px 20px 2px 20px;
+        margin: 5px 0 5px 0;
+        display: inline-block;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 25px;
+        text-align: center;
+        display: table;
+      }
+
+    .social_text{
+      font-size: 15px;
+      padding-bottom: 4px;
+      vertical-align: middle;
+      display: inline-block;
+      padding-left: 10px;
+    }
+
+    .fb{
+      background-color: #3d5b99;
+      color: white;
+    }
+
+    .tw{
+      background-color: #1da1f2;
+      color: white;
+    }
+
+    .google{
+      background-color: #ea4335;
+      color: white;
+    }
+
+    .lkin{
+      background-color: #0077b5;
+      color: white;
+    }
+    
 }
 
 /*Others moviles < 320px*/
@@ -449,7 +538,46 @@
       padding-bottom: 0px;
       padding-top: 0px;
       margin-bottom: 0px;
-    }  
+    }
+
+    .socialbutton{
+        padding: 2px 20px 2px 20px;
+        margin: 5px 0 5px 0;
+        display: inline-block;
+        width: 100%;
+        border-radius: 5px;
+        font-size: 25px;
+        text-align: center;
+        display: table;
+      }
+
+    .social_text{
+      font-size: 15px;
+      padding-bottom: 4px;
+      vertical-align: middle;
+      display: inline-block;
+      padding-left: 10px;
+    }
+
+    .fb{
+      background-color: #3d5b99;
+      color: white;
+    }
+
+    .tw{
+      background-color: #1da1f2;
+      color: white;
+    }
+
+    .google{
+      background-color: #ea4335;
+      color: white;
+    }
+
+    .lkin{
+      background-color: #0077b5;
+      color: white;
+    }
 }
 
 /*Media queries configurations*/

@@ -8,6 +8,7 @@ include 'multisitios.php';
   $_GET['mostrar'] = 'inicio';
   $_SUBMIT['mostrar'] = 'inicio'; 
 }*/
+
 dispatch();
 $GLOBALS['db']->close();
 

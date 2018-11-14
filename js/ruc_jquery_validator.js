@@ -1,21 +1,5 @@
-// function show_alert(){
-//   var dni_error = document.getElementById("error_custom_dni");
-//   var p1 = document.createElement("P");
-//   p1.setAttribute("class", "list-unstyled msg_error");
-//   p1.setAttribute("id", "p_text");
-//   var text_node = document.createTextNode("DNI o RUC no válido");
-//   p1.appendChild(text_node);
-//   dni_error.appendChild(p1);
-// }
-
-// function hide_alert(){
-//     var dni_error = document.getElementById("error_custom_dni");
-//         while (dni_error.hasChildNodes()) {
-//           dni_error.removeChild(dni_error.firstChild);
-//         }
-// }
-
    function validarDocumento(obj){
+      var mensaje = "DNI no válido";
       numero = obj.value;
     /* alert(numero); */
       var suma = 0;      
@@ -33,35 +17,35 @@
          if (isNaN(n)) ok=0;
       }
       if (ok==0){
-         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");
+         colocaError(dni_error, dni_group, mensaje, button_register);
          // alert("No puede ingresar caracteres en el número");         
          return false;
       }
       else
       {
-         eliminarMensajeError("error_custom_dni");
+         quitarError(dni_error, dni_group);
       }
                   
       if (numero.length < 10 ){ 
-      crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");             
+      colocaError(dni_error, dni_group, mensaje, button_register);             
          // alert('El número ingresado no es válido');                  
          return false;
       }
       else
       {
-         eliminarMensajeError("error_custom_dni");
+         quitarError(dni_error, dni_group);
       }
      
       /* Los primeros dos digitos corresponden al codigo de la provincia */
       provincia = numero.substr(0,2);      
       if (provincia < 1 || provincia > numeroProvincias){     
-      crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");    
+      colocaError(dni_error, dni_group, mensaje, button_register);    
          // alert('El código de la provincia (dos primeros dígitos) es inválido');
      return false;       
       }
       else
       {
-         eliminarMensajeError("error_custom_dni");
+         quitarError(dni_error, dni_group);
       }
       /* Aqui almacenamos los digitos de la cedula en variables. */
       d1  = numero.substr(0,1);         
@@ -80,13 +64,13 @@
       /* 6 para sociedades publicas */         
       /* menor que 6 (0,1,2,3,4,5) para personas naturales */ 
       if (d3==7 || d3==8){    
-      crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");       
+      colocaError(dni_error, dni_group, mensaje, button_register);       
          // alert('El tercer dígito ingresado es inválido');                     
          return false;
       }
       else
       {
-         eliminarMensajeError("error_custom_dni");
+         quitarError(dni_error, dni_group);
       }         
          
       /* Solo para personas naturales (modulo 10) */         
@@ -139,44 +123,44 @@
       /* ahora comparamos el elemento de la posicion 10 con el dig. ver.*/                         
       if (pub==true){           
          if (digitoVerificador != d9){
-         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                          
+         colocaError(dni_error, dni_group, mensaje, button_register);                          
             // alert('El ruc de la empresa del sector público es incorrecto.');            
             return false;
          }                  
          /* El ruc de las empresas del sector publico terminan con 0001*/         
          if ( numero.substr(9,4) != '0001' ){
-         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                    
+         colocaError(dni_error, dni_group, mensaje, button_register);                    
             // alert('El ruc de la empresa del sector público debe terminar con 0001');
             return false;
          }
       }        
       else if(pri == true){         
          if (digitoVerificador != d10){ 
-         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                         
+         colocaError(dni_error, dni_group, mensaje, button_register);                         
             // alert('El ruc de la empresa del sector privado es incorrecto.');
             return false;
          }         
          if ( numero.substr(10,3) != '001' ){ 
-         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                   
+         colocaError(dni_error, dni_group, mensaje, button_register);                   
             // alert('El ruc de la empresa del sector privado debe terminar con 001');
             return false;
          }
       }      
       else if(nat == true){         
          if (digitoVerificador != d10){ 
-         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                         
+         colocaError(dni_error, dni_group, mensaje, button_register);                         
             // alert('El número de cédula de la persona natural es incorrecto.');
             return false;
          }         
          if (numero.length >10 && numero.substr(10,3) != '001' ){
-         crearMensajeError("error_custom_dni", "RUC, CI o DNI inválido");                    
+         colocaError(dni_error, dni_group, mensaje, button_register);                    
             // alert('El ruc de la persona natural debe terminar con 001');
             return false;
          }
       }
       else
       {
-         eliminarMensajeError("error_custom_dni");
+         quitarError(dni_error, dni_group);
       }      
       return true;   
    }  

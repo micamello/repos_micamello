@@ -1,3 +1,37 @@
+function colocaError(campo, id, mensaje,btn){
+    nodo = document.getElementById(campo);
+    nodo.innerHTML = '';
+    var elem1 = document.createElement('P');
+    var t = document.createTextNode(mensaje); 
+    elem1.appendChild(t);
+
+    var elem2 = document.createElement("P");             
+    elem2.classList.add('list-unstyled');
+    elem2.classList.add('msg_error');
+    elem2.appendChild(elem1); 
+
+    elem2.appendChild(elem1); 
+    nodo.appendChild(elem2); 
+
+    $("#"+id).addClass('has-error');
+
+    // $("#"+btn).attr({
+    //     'disabled': 'disabled',
+    // });
+ 
+    $("#"+btn).addClass('disabled');
+    // $("#"+btn).attr('disabled', 'disabled');
+
+    if(document.getElementById('form_paypal')){
+      document.getElementById('form_paypal').action = '#';
+    }
+}
+
+function quitarError(campo,id){
+    document.getElementById(campo).innerHTML = '';
+    $("#"+id).removeClass('has-error');
+}
+
 "use strict";
 jQuery(document).ready(function ($) {
     
@@ -27,58 +61,6 @@ jQuery(document).ready(function ($) {
         }
     });
 
-    /*---------------------------------------------*
-     * WOW
-     ---------------------------------------------*/
-
-    //var wow = new WOW({
-    //    mobile: false // trigger animations on mobile devices (default is true)
-    //});
-    //wow.init();
-
-// magnificPopup
-
-    //$('.popup-img').magnificPopup({
-    //    type: 'image',
-    //    gallery: {
-    //        enabled: true
-    //    }
-    //});
-
-    //$('.video-link').magnificPopup({
-    //    type: 'iframe'
-    //});
-
-// slick slider active Home Page Tow
-    // $(".hello_slid").slick({
-    //     dots: true,
-    //     infinite: false,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     arrows: true,
-    //     prevArrow: "<i class='icon icon-chevron-left nextprevleft'></i>",
-    //     nextArrow: "<i class='icon icon-chevron-right nextprevright'></i>",
-    //     autoplay: true,
-    //     autoplaySpeed: 2000
-    // });
-    
-    
-    
-    // $(".business_items").slick({
-    //     dots: true,
-    //     infinite: false,
-    //     slidesToShow: 1,
-    //     slidesToScroll: 1,
-    //     arrows: true,
-    //     prevArrow: "<i class='icon icon-chevron-left nextprevleft'></i>",
-    //     nextArrow: "<i class='icon icon-chevron-right nextprevright'></i>",
-    //     autoplay: true,
-    //     autoplaySpeed: 2000
-    // });
-
-//---------------------------------------------
-// Scroll Up 
-//---------------------------------------------
 
     $('.scrollup').click(function () {
         $("html, body").animate({scrollTop: 0}, 1000);
@@ -143,4 +125,63 @@ function validaNumeros(evt){
      else{
       return false;
      }
+}
+
+
+function validar_keycode(obj, tipo_keydown, error_mensaje, error_group, event){
+        var mensaje = "";
+        var permitidas = [8, 9, 18, 27, 37, 38, 39, 40];
+        for (var i = 112; i < 124; i++) {
+            permitidas.push(i);
+        }
+
+        var numeros = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105,];
+        if(tipo_keydown == "telefono"){
+            var keycode = numeros;
+            mensaje = "El campo solo acepta números";
+        }
+
+        if(tipo_keydown == "nombre_apellido"){
+            var keycode = [32];
+            for (var i = 65; i < 91; i++) {
+                keycode.push(i);
+            }
+            mensaje = "El campo solo acepta letras";
+        }
+
+        if(tipo_keydown == "nombre_empresa_pasaporte"){
+            var keycode = numeros;
+            for (var i = 65; i < 91; i++) {
+                keycode.push(i);
+            }
+            mensaje = "El campo solo acepta valores alfanuméricos";
+        }
+
+        if(tipo_keydown == "float"){
+            keycode = numeros;
+            keycode.push(190, 110);
+            mensaje = "Ajustese al formato indicado";
+        }
+
+        if($.inArray(event.keyCode, keycode) !== -1 || $.inArray(event.keyCode, permitidas) !== -1){
+            // console.log(keycode);
+            quitarError(error_mensaje, error_group)
+        }
+        else{
+            event.preventDefault();
+            colocaError(error_mensaje, error_group, mensaje, button_register);
+        }
+
+    }
+
+function fechaActual() {
+    var d = new Date(),
+        month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
 }

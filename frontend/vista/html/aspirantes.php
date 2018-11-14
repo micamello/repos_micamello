@@ -300,7 +300,7 @@
 					<span style="font-size: 17px;">Aspirantes Postulados</span>
 				<?php }else{ ?>
 					<span style="font-size: 17px;">Candidatos Registrados en la plataforma</span>
-				<?php echo "Eder: ". $vista; } ?>
+				<?php } ?>
 			</b>
 			<br/><br/>
 			<div id="busquedas" class='container-fluid'>

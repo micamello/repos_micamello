@@ -392,6 +392,8 @@ class Controlador_Aspirante extends Controlador_Base
         Utils::log($vista);
         $datos = Modelo_Usuario::existeUsuario($username);
         $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
+        // print_r($info_usuario);
+        // exit();
 
         $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
         $contacto = array();
@@ -406,6 +408,8 @@ class Controlador_Aspirante extends Controlador_Base
 
         if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
                 $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($info_usuario['id_usuario']);
+                // print_r($cuestionariosUsuario);
+                // exit();
                 $resultados = array();
                 $rasgoxtest = array();
                 foreach ($cuestionariosUsuario as $cuestionarios) {
@@ -416,6 +420,8 @@ class Controlador_Aspirante extends Controlador_Base
                   }
                 }
             }
+
+            // print_r($resultados);
 
         $tags = array("infoUsuario"=>$info_usuario,
                         "Conf"=>$contacto,

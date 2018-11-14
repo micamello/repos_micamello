@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'micamell_desarrollo');
+define('DBNOMBRE', 'micamello_desarrollo2');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -44,4 +44,6 @@ define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Casado(a)', '3'=>'En union'
 define('CRON_RUTA',FRONTEND_RUTA.'cron/');
 define('DIAS_AUTOPOSTULACION','3');
 define('DOCUMENTACION', array('2'=>'CÉDULA', '3'=>'PASAPORTE'));
+define('APP_ID', '706585049706744');
+define('APP_SECRET', '247391a884159a515d149502b0f56aba');
 ?>
