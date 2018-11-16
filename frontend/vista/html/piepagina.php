@@ -44,14 +44,14 @@
           <input type="hidden" name="register_form" id="register_form" value="1">
           <div class="col-md-6">
               <div class="form-group" id="group_nombre">
-                <p class="text-center text_form">Nombres&nbsp;<i class="requerido">*</i></p><div id="nombre_error" class="help-block with-errors"></div>
-                <input type="text" name="name_user" id="name_user" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+" placeholder="Ejemplo: Carlos Pedro" class="form-control">
+                <p class="text-center text_form" id="label_nombres">Nombres&nbsp;<i class="requerido">*</i></p><div id="nombre_error" class="help-block with-errors"></div>
+                <input type="text" name="name_user" id="name_user" placeholder="Ejemplo: Carlos Pedro" class="form-control">
               </div>
           </div>
           <div class="col-md-6" id="apellido_group">
               <div class="form-group" id="apellido_group">
                 <p class="text-center text_form">Apellidos&nbsp;<i class="requerido">*</i></p><div id="apell_error" class="help-block with-errors"></div>
-                <input type="text" name="apell_user" id="apell_user" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortiz Zambrano" class="form-control">
+                <input type="text" name="apell_user" id="apell_user" placeholder="Ejemplo: Ortiz Zambrano" class="form-control">
               </div>
           </div>
 
@@ -59,7 +59,7 @@
             <p id="correo_e" class="twin_reg"></p>
             <div class="form-group" id="correo_group">
               <p class="text-center text_form">Correo&nbsp;<i class="requerido">*</i></p><div id="correo_error" class="help-block with-errors"></div>
-              <input id="correo" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese un correo electrónico válido' : '')" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp">
+              <input id="correo" type="email" name="correo" placeholder="Ejemplo: camello@gmail.com" class="form-control" aria-describedby="correoHelp">
             </div>
           </div>    
 
@@ -95,56 +95,60 @@
 
               <input type="hidden" name="ruc" value="1">
 
-              <div class="col-md-6" id="area_group">
-                <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione área:<span class="text-help">(max. 3)</span>&nbsp;<i class="requerido">*</i></p>
-                <div class="form-group">
-                  <div class="opcionesSeleccionados">
-                    <div class="row" id="seleccionados">
-                      <p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-                      <!-- <?php echo $optiones; ?> -->
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-6" id="area_group">
+                    <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione área:<span class="text-help">(max. 3)</span>&nbsp;<i class="requerido">*</i></p>
+                    <div class="form-group">
+                      <div class="opcionesSeleccionados">
+                        <div class="row" id="seleccionados">
+                          <p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+                          <!-- <?php echo $optiones; ?> -->
+                        </div>
+                          <div id="area_error" class="help-block with-errors"></div>
+                          <select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 3 }' multiple>
+                            <!-- <option value="" selected disabled>Seleccione un área</option> -->
+                            <?php 
+                              if (!empty($arrarea)){
+                                  foreach($arrarea as $area){ ?>
+                                      <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
+                                  <?php }
+                              } ?>
+                          </select>
+                        </div>
                     </div>
-                      <div id="area_error" class="help-block with-errors"></div>
-                      <select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 3 }' multiple>
-                        <!-- <option value="" selected disabled>Seleccione un área</option> -->
-                        <?php 
-                          if (!empty($arrarea)){
-                              foreach($arrarea as $area){ ?>
-                                  <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
-                              <?php }
-                          } ?>
-                      </select>
+                  </div>
+
+                  <div class="col-md-6" id="nivel_group">
+                    <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione nivel de interés:<span>(max. 2)&nbsp;<i class="requerido">*</i></span></p>
+                    <div class="form-group">
+                      <div class="opcionesSeleccionados">
+                        <div class="row" id="seleccionados1">
+                          <p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
+                          <!-- <?php echo $optiones; ?> -->
+                        </div>
+                          <div id="nivel_error" class="help-block with-errors"></div>
+                          <select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 2 }' multiple>
+                            <!-- <option value="" selected disabled>Seleccione un área</option> -->
+                            <?php 
+                              if (!empty($intereses)){
+                                  foreach($intereses as $interes){ ?>
+                                      <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
+                                  <?php }
+                              } ?>
+                          </select>
+                        </div>
                     </div>
+                  </div>
                 </div>
               </div>
-
-              <div class="col-md-6" id="nivel_group">
-                <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione nivel de interés:<span>(max. 2)&nbsp;<i class="requerido">*</i></span></p>
-                <div class="form-group">
-                  <div class="opcionesSeleccionados">
-                    <div class="row" id="seleccionados1">
-                      <p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-                      <!-- <?php echo $optiones; ?> -->
-                    </div>
-                      <div id="nivel_error" class="help-block with-errors"></div>
-                      <select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 2 }' multiple>
-                        <!-- <option value="" selected disabled>Seleccione un área</option> -->
-                        <?php 
-                          if (!empty($intereses)){
-                              foreach($intereses as $interes){ ?>
-                                  <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
-                              <?php }
-                          } ?>
-                      </select>
-                    </div>
-                </div>
-              </div> 
 
               <div class="col-md-6">
                 <div class="form-group" id="password_group">
                   <p class="text-center text_form">Contraseña&nbsp;<i class="requerido">*</i></p><div id="password_error" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control">
+                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" class="form-control">
                   </div>
                 </div>
             </div>
@@ -153,7 +157,7 @@
                   <p class="text-center text_form">Confirmar Contraseña&nbsp;<i class="requerido">*</i></p><div id="password_error_two" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control">
+                    <input id="password_two" name="password_two" type="password" placeholder="Verificar contraseña" class="form-control">
                 </div>
               </div>
             </div>
@@ -167,28 +171,28 @@
             <div class="col-md-6" id="group_nombre_contact">
               <div class="form-group" id="nombre_contact_group">
                 <p class="text-center text_form">Nombres&nbsp;<i class="requerido">*</i></p><div id="nombre_contact_error" class="help-block with-errors"></div>
-                <input type="text" name="nombre_contact" id="nombre_contact" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control">
+                <input type="text" name="nombre_contact" id="nombre_contact" placeholder="Ejemplo: Juan David" class="form-control">
               </div>
             </div>  
 
             <div class="col-md-6" id="group_apell_contact">
               <div class="form-group" id="apellido_contact_group">
                 <p class="text-center text_form">Apellidos&nbsp;<i class="requerido">*</i></p><div id="apellido_contact_error" class="help-block with-errors"></div>
-                <input type="text" name="apellido_contact" id="apellido_contact" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control">
+                <input type="text" name="apellido_contact" id="apellido_contact" placeholder="Ejemplo: Ortíz Zambrano" class="form-control">
               </div>
             </div> 
 
             <div class="col-md-6" id="group_num1_contact">
               <div class="form-group" id="tel_one_contact_group">
                 <p class="text-center text_form">Teléfono 1&nbsp;<i class="requerido">*</i></p><div id="tel_one_contact_error" class="help-block with-errors"></div>
-                <input type="text" name="tel_one_contact" id="tel_one_contact" class="form-control" onkeydown="return validaNumeros(event);">
+                <input type="text" name="tel_one_contact" id="tel_one_contact" class="form-control">
               </div>
             </div> 
 
             <div class="col-md-6" id="group_num2_contact">
               <div class="form-group" id="tel_two_contact_group">
                 <p class="text-center text_form">Teléfono 2 (opcional):</p><div id="tel_two_contact_error" class="help-block with-errors"></div>
-                <input type="text" name="tel_two_contact" id="tel_two_contact" class="form-control" onkeydown="return validaNumeros(event);">
+                <input type="text" name="tel_two_contact" id="tel_two_contact" class="form-control">
               </div>
             </div> 
 

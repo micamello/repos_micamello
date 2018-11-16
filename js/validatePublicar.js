@@ -242,21 +242,30 @@ if(document.getElementById('edad_min')){
 		var edad1 =  document.getElementById('edad_min');
 		var edad2 =  document.getElementById('edad_max');
 		if(emptyContent(this) != false){
-			// if(edad1.value >= 18)
-			// {
-			// 	if(edad1.value < edad2.value && edad2.value != "")
-			// 	{
-					quitarError(edad_min_error, edad_min_group);
-			// 	}
-			// 	else{
-			// 		mensaje = "Edad no válida";
-			// 		colocaError(edad_min_error, edad_min_group, mensaje, button_register);	
-			// 	}
-			// }
-			// else{
-			// 	mensaje = "Edad no válida";
-			// 	colocaError(edad_min_error, edad_min_group, mensaje, button_register);
-			// }
+			if(this.value >= 18){
+				console.log("eder");
+				if(edad2.value == ""){
+					console.log("eder dentro eder");
+						console.log("eder dentro");
+						quitarError(edad_min_error, edad_min_group);				}
+				else{
+					if(this.value >= edad2.value){
+						console.log("--------------------- 1");
+						mensaje = "Edad no válida 1";
+						colocaError(edad_min_error, edad_min_group, mensaje, button_register);
+					// }
+					// else{
+						// quitarError(edad_min_error, edad_min_group);
+					}
+					else{
+						mensaje = "Edad no válida 3";
+						colocaError(edad_max_error, edad_max_group, mensaje, button_register);
+					}
+				}
+			}else{
+				mensaje = "Edad no válida 2";
+				colocaError(edad_min_error, edad_min_group, mensaje, button_register);
+			}
 		}
 		else{
 			mensaje = "Rellene este campo";
@@ -275,21 +284,32 @@ if(document.getElementById('edad_max')){
 		var edad1 =  document.getElementById('edad_min');
 		var edad2 =  document.getElementById('edad_max');
 		if(emptyContent(this) != false){
-			// if(edad2.value >= 18)
-			// {
-			// 	if(edad2.value < edad1.value && edad1.value != "")
-			// 	{
-					quitarError(edad_max_error, edad_max_group);
-			// 	}
-			// 	else{
-			// 		mensaje = "Edad no válida";
-			// 		colocaError(edad_max_error, edad_max_group, mensaje, button_register);	
-			// 	}
-			// }
-			// else{
-			// 	mensaje = "Edad no válida";
-			// 	colocaError(edad_min_error, edad_min_group, mensaje, button_register);
-			// }
+			if(this.value >= 18){
+				console.log("eder");
+				if(edad1.value == ""){
+					console.log("eder dentro eder");
+						console.log("eder dentro");
+						quitarError(edad_max_error, edad_max_group);
+				}
+				else{
+					if(this.value >= edad1.value){
+						console.log("---------------------");
+						// mensaje = "Edad no válida 1";
+						// colocaError(edad_max_error, edad_max_group, mensaje, button_register);
+					// }
+					// else{
+						// console.log("ederederedereder");
+						quitarError(edad_max_error, edad_max_group);
+					}
+					else{
+						mensaje = "Edad no válida 3";
+						colocaError(edad_max_error, edad_max_group, mensaje, button_register);
+					}
+				}
+			}else{
+				mensaje = "Edad no válida 2";
+				colocaError(edad_max_error, edad_max_group, mensaje, button_register);
+			}
 		}
 		else{
 			mensaje = "Rellene este campo";
@@ -479,7 +499,7 @@ function campos(){
 		errors++;
 	}
 
-	console.log("edereder: " + document.getElementById('select_array_idioma').value);
+	// console.log("edereder: " + document.getElementById('select_array_idioma').value);
 
 	if(document.getElementById('nivel_interes').value == ""){
 		colocaError(nivel_error, nivel_group, mensaje, button_register);
@@ -554,8 +574,9 @@ $('#btn_transfer').on('click', function()
         }else{
        		// console.log(tag_idioma.options[0].value);
             op = tag_idioma.length;
+            enableBTN();
             quitarError(listado_error, listado_group);
-           	enableBTN();
+           	
         }
 
         if (all_selected.length == op) {
@@ -563,8 +584,9 @@ $('#btn_transfer').on('click', function()
 	        colocaError(listado_error, listado_group, mensaje, button_register);
         }
         else{
-        	quitarError(listado_error, listado_group);
         	enableBTN();
+        	quitarError(listado_error, listado_group);
+        	
         	
         	document.getElementById('text_nothing').style.display = "none";
         }
