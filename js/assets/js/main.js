@@ -77,41 +77,41 @@ function abrirModal(mensaje,id){
     $('#'+id).modal();
 }
 
-function colocaError(campo, id, mensaje,btn){
+// function colocaError(campo, id, mensaje,btn){
 
-    nodo = document.getElementById(campo);
-    nodo.innerHTML = '';
-    var elem1 = document.createElement('P');
-    var t = document.createTextNode(mensaje); 
-    elem1.appendChild(t);
+//     nodo = document.getElementById(campo);
+//     nodo.innerHTML = '';
+//     var elem1 = document.createElement('P');
+//     var t = document.createTextNode(mensaje); 
+//     elem1.appendChild(t);
 
-    var elem2 = document.createElement("P");             
-    elem2.classList.add('list-unstyled');
-    elem2.classList.add('msg_error');
-    elem2.appendChild(elem1); 
+//     var elem2 = document.createElement("P");             
+//     elem2.classList.add('list-unstyled');
+//     elem2.classList.add('msg_error');
+//     elem2.appendChild(elem1); 
 
-    elem2.appendChild(elem1); 
-    nodo.appendChild(elem2); 
+//     elem2.appendChild(elem1); 
+//     nodo.appendChild(elem2); 
 
-    $("#"+id).addClass('has-error');
+//     $("#"+id).addClass('has-error');
 
-    $("#"+btn).attr({
-        'disabled': 'disabled',
-    });
+//     $("#"+btn).attr({
+//         'disabled': 'disabled',
+//     });
  
-    $("#"+btn).addClass('disabled');
-    $("#"+btn).attr('disabled', 'disabled');
+//     $("#"+btn).addClass('disabled');
+//     $("#"+btn).attr('disabled', 'disabled');
 
-    if(document.getElementById('form_paypal')){
-      document.getElementById('form_paypal').action = '#';
-    }
-}
+//     if(document.getElementById('form_paypal')){
+//       document.getElementById('form_paypal').action = '#';
+//     }
+// }
 
-function quitarError(campo,id){
+// function quitarError(campo,id){
 
-    document.getElementById(campo).innerHTML = '';
-    $("#"+id).removeClass('has-error');
-}
+//     document.getElementById(campo).innerHTML = '';
+//     $("#"+id).removeClass('has-error');
+// }
 
 
 function validaDecimales(evt,input){
@@ -151,7 +151,7 @@ function filter(__val__){
 }
 
 function validaNumeros(evt){
-     var keynum = window.Event ? evt.which : evt.keyCode;    
+     var keynum = window.Event ? evt.which : evt.keycode;    
      if((keynum > 47 && keynum < 58) || keynum == 8 
     || keynum == 9 || keynum == 13 || keynum == 116 
     || (keynum > 36 && keynum < 41) 
@@ -166,7 +166,7 @@ function validaNumeros(evt){
 
 function validar_keycode(obj, tipo_keydown, error_mensaje, error_group, event){
         var mensaje = "";
-        var permitidas = [8, 9, 18, 27, 37, 38, 39, 40];
+        var permitidas = [8, 9, 18, 20, 27, 37, 38, 39, 40];
         for (var i = 112; i < 124; i++) {
             permitidas.push(i);
         }
@@ -178,19 +178,31 @@ function validar_keycode(obj, tipo_keydown, error_mensaje, error_group, event){
         }
 
         if(tipo_keydown == "nombre_apellido"){
-            var keycode = [32];
+            var keycode = [32, 192];
             for (var i = 65; i < 91; i++) {
                 keycode.push(i);
             }
             mensaje = "El campo solo acepta letras";
         }
 
-        if(tipo_keydown == "nombre_empresa_pasaporte"){
+        if(tipo_keydown == "pasaporte"){
             var keycode = numeros;
             for (var i = 65; i < 91; i++) {
                 keycode.push(i);
             }
             mensaje = "El campo solo acepta valores alfanuméricos";
+        }
+
+        if(tipo_keydown == "nombre_empresa"){
+            var keycode = numeros;
+            for (var i = 65; i < 91; i++) {
+                keycode.push(i);
+            }
+            keycode.push(32);
+            keycode.push(192);
+            keycode.push(110);
+            keycode.push(190);
+            mensaje = "Solo acepta valores alfanuméricos y espacios";
         }
 
         if(tipo_keydown == "float"){

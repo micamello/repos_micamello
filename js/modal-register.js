@@ -1,12 +1,12 @@
-$('#form_register').on("submit", function(e){
-	// console.log(document.getElementsByClassName("list-unstyled msg_error").length);
-	var correo_e = document.getElementById("correo_e");
-	var dni_e = document.getElementById("dni_e");
-	if(document.getElementsByClassName("list-unstyled msg_error").length > 0 || (correo_e.innerHTML != "" && dni_e.innerHTML != "")){
-		document.getElementById("button_register").setAttribute("class","btn btn-info disabled");
-		e.preventDefault();
-	}
-});
+// $('#form_register').on("submit", function(e){
+// 	// console.log(document.getElementsByClassName("list-unstyled msg_error").length);
+// 	var correo_e = document.getElementById("correo_e");
+// 	var dni_e = document.getElementById("dni_e");
+// 	if(document.getElementsByClassName("list-unstyled msg_error").length > 0 || (correo_e.innerHTML != "" && dni_e.innerHTML != "")){
+// 		document.getElementById("button_register").setAttribute("class","btn btn-info disabled");
+// 		e.preventDefault();
+// 	}
+// });
 
 function modal_set(id)
 {
@@ -87,6 +87,10 @@ function modal_set(id)
 		var contact_company_section = document.getElementById("contact_company_section");
 	}
 
+	if(document.getElementById('label_nombres')){
+		var label_nombres = document.getElementById('label_nombres');
+	}
+
 	// if (('#correo_group')) {
 	// 	var correo_group = document.getElementById("correo_group");
 	// }
@@ -132,7 +136,7 @@ function modal_set(id)
 
 		// select_tipo_doc.setAttribute("required", "true");
 
-
+		label_nombres.innerHTML = "Nombres&nbsp;<i class='requerido'>*</i>";
 
 		// correo_group.className ="col-md-12";
 
@@ -184,6 +188,8 @@ function modal_set(id)
 		dni.removeAttribute("disabled");
 
 		// dni.setAttribute("onblur", "validarDocumento(this);");
+
+		label_nombres.innerHTML = "Nombre Empresa&nbsp;<i class='requerido'>*</i>";
 
 		tipo_doc.style.display = "none";
 

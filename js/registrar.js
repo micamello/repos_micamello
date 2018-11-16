@@ -1,11 +1,23 @@
+// MENSAJES DE ERROR
+var campo_vacio = "Rellene este campo";
+var lista_vacia = "Seleccione un elemento de la lista";
+var invalido_dni = "Cédula no válida";
+var term_cond_mensaje = "Debe aceptar términos y condiciones";
+
+if(document.getElementById('button_register')){
+	var button_register = document.getElementById('button_register').id;
+}
+
+$(document).ready(function(){
+	$("#button_register").addClass('disabled');
+})
+
 document.querySelector( "form" )
 .addEventListener( "invalid", function( event ) {
     event.preventDefault();
 }, true );
 
-if(document.getElementById('button_register')){
-	var button_register = document.getElementById('button_register').id;
-}
+
 
 if(document.getElementById('name_user')){
 	var reg = "";
@@ -23,22 +35,37 @@ if(document.getElementById('name_user')){
 		var nombres = document.getElementById('name_user');
 		var tipo_usuario = document.getElementById("tipo_usuario").value;
 		if(tipo_usuario == 1){
-			reg = /^[a-z ÁÉÍÓÚáéíóú]+$/i;
+			reg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
 		}else{
-			reg = /^[a-zÁÉÍÓÚáéíóú 0-9]+$/i;
+			reg = /^[a-zÁÉÍÓÚáéíóúñÑ. 0-9]+$/i;
 		}
 
 		var contenido = nombres.value;
 		if(contenido != ""){
-				if(reg.test(contenido) == false && contenido != ""){
-					// alert("eder");
-					mensaje = "Ajustese al formato solicitado";
-					colocaError(nombre_error, group_nombre, mensaje, button_register);
-				}
-				else{
+			if(reg.test(contenido) != false){
+				if(contenido.length <= 60){
 					quitarError(nombre_error, group_nombre);
 					enableBTN();
-				}	
+				}
+				else{
+					mensaje = "Longitud máxima del campo 60 caracteres";
+					// colocaError(nombre_error, group_nombre, mensaje, button_register);
+				}
+			}
+			else{
+				mensaje = "Ajustese al formato solicitado";
+				colocaError(nombre_error, group_nombre, mensaje, button_register);
+			}
+
+
+				// if(reg.test(contenido) == false && contenido != ""){
+				// 	// alert("eder");
+				// 	mensaje = "Ajustese al formato solicitado";
+				// 	colocaError(nombre_error, group_nombre, mensaje, button_register);
+				// }
+				// else{
+					
+				// }	
 		}
 		else{
 			mensaje = "Rellene este campo";
@@ -52,13 +79,12 @@ if(document.getElementById('name_user')){
 			validar_keycode(this, "nombre_apellido", nombre_error, group_nombre, event);
 		}
 		else{
-			validar_keycode(this, "nombre_empresa_pasaporte", nombre_error, group_nombre, event);
+			validar_keycode(this, "nombre_empresa", nombre_error, group_nombre, event);
 		}
 	});
 }
 
 if(document.getElementById('apell_user')){
-	reg = /^[a-z ÁÉÍÓÚáéíóú]+$/i;
 	var mensaje = "";
 	
 	if(document.getElementById('apell_error')){
@@ -70,16 +96,23 @@ if(document.getElementById('apell_user')){
 	}
 
 	$('#apell_user').on('blur', function(){
+		reg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
 		var apellidos = document.getElementById('apell_user');
 		var contenido = apellidos.value;
 		if(contenido != ""){
-				if(reg.test(contenido) == false && contenido != ""){
-					mensaje = "Ajustese al formato solicitado";
-					colocaError(apell_error, apellido_group, mensaje, button_register);
+				if(reg.test(contenido) != false){
+					if(contenido.length <= 60){
+						quitarError(apell_error, apellido_group);
+						enableBTN();
+					}
+					else{
+						mensaje = "Longitud máxima del campo 60 caracteres";
+						// colocaError(apell_error, apellido_group, mensaje, button_register);
+					}
 				}
 				else{
-					quitarError(apell_error, apellido_group);
-					enableBTN();
+					mensaje = "Ajustese al formato solicitado";
+					colocaError(apell_error, apellido_group, mensaje, button_register);
 				}	
 		}
 		else{
@@ -186,23 +219,39 @@ if(document.getElementById('dni')){
 		if(tipo_usuario == 1){
 			if(documentacion == 2){
 				if (typeof window['validar_'+host] === 'function') {
-				    window['validar_'+host](this);
-				    if(host == "EC"){
-				    	if(((this.value.length))>10){
-				    		mensaje = "DNI máximo 10 números";
-							colocaError(dni_error, dni_group, mensaje, button_register);
-				    	}
-				    	else{
-				    		if(existeDni(this.value) != 1){
-								mensaje = "La cédula ingresada ya existe";
+				    if(window['validar_'+host](this) != false){
+					    if(host == "EC"){
+					    	if(((this.value.length))>10){
+					    		mensaje = "DNI máximo 10 números";
 								colocaError(dni_error, dni_group, mensaje, button_register);
-							}
-							else{
-									quitarError(dni_error, dni_group);
-									enableBTN();
+					    	}
+					    	else{
+					    		if(existeDni(this.value) != 1){
+									mensaje = "El numero de cédula o pasaporte o ruc ya existe";
+									colocaError(dni_error, dni_group, mensaje, button_register);
 								}
-				    	}
-				    }
+								else{
+										quitarError(dni_error, dni_group);
+										enableBTN();
+									}
+					    	}
+					    }
+					}
+					// else{
+					// 	quitarError(dni_error, dni_group);
+					// 	enableBTN();
+					// }
+				}
+			}
+			else{
+				if(existeDni(this.value) != 1){
+					mensaje = "El numero de cédula o pasaporte o ruc ya existe";
+					colocaError(dni_error, dni_group, mensaje, button_register);
+				}
+				else
+				{
+					quitarError(dni_error, dni_group);
+					enableBTN();
 				}
 			}
 		}
@@ -211,8 +260,7 @@ if(document.getElementById('dni')){
 			    window['validar_'+host](this);
 			    if(host == "EC"){
 			    	if(((this.value.length)) < 13){
-			    		mensaje = "DNI máximo 13 números";
-			    		// console.log(this.value.length + mensaje);
+			    		mensaje = "Para ingresar el RUC son 13 números";
 						colocaError(dni_error, dni_group, mensaje, button_register);
 			    	}
 			    	else{
@@ -234,7 +282,6 @@ if(document.getElementById('dni')){
 		var host = document.getElementById('iso').value;
 		if(tipo_usuario == 1){
 			if(documentacion == 2){
-				// console.log((this.value.length));
 				if(host == "EC"){
 					if(((this.value.length)+1)<=10){
 						validar_keycode(this, "telefono", dni_error, dni_group, event);
@@ -253,7 +300,7 @@ if(document.getElementById('dni')){
 				}
 			}
 			else{
-				validar_keycode(this, "nombre_empresa_pasaporte", dni_error, dni_group, event);
+				validar_keycode(this, "pasaporte", dni_error, dni_group, event);
 			}
 		}
 		else{
@@ -297,7 +344,6 @@ if(document.getElementById('password')){
 			}
 			else
 			if(contenido_pass != "" && (passCoincide(contenido_pass, contenido)) == false){
-				// console.log("eder: "+passCoincide(contenido_pass, contenido));
 				mensaje = "La contraseñas no coinciden";
 				colocaError(password_error, password_group, mensaje, button_register);
 				colocaError(password_error_two, password_group_two, mensaje, button_register);
@@ -330,7 +376,6 @@ if(document.getElementById('password_two')){
 			}
 			else
 			if(contenido_pass != "" && (passCoincide(contenido_pass, contenido)) == false){
-				// console.log("eder: "+passCoincide(contenido_pass, contenido));
 				mensaje = "La contraseñas no coinciden";
 				colocaError(password_error_two, password_group_two, mensaje, button_register);
 				colocaError(password_error, password_group, mensaje, button_register);
@@ -443,87 +488,10 @@ if(document.getElementById('tel_one_contact_error')){
 }
 
 
-$('#button_register').on('click', function(){
-	// console.log("eder");
-
-	var tipo_usuario = document.getElementById('tipo_usuario').value;
-
-	var mensaje = "Rellene este campo";
-	if(document.getElementById('name_user').value == ""){
-		colocaError(nombre_error, group_nombre, mensaje, button_register);
+$('#form_register').on('submit', function(event){
+	if(enableBTN() === false){
+		event.preventDefault();
 	}
-
-	// Grupo de tipo usuario 1
-	if(tipo_usuario == 1){
-		if(document.getElementById('apell_user').value == ""){
-			colocaError(apell_error, apellido_group, mensaje, button_register);
-		}
-	}
-
-	if(document.getElementById('correo').value == ""){
-		colocaError(correo_error, correo_group, mensaje, button_register);
-	}
-
-	if(document.getElementById('numero_cand').value == ""){
-		colocaError(numero_error, numero_group, mensaje, button_register);
-	}
-
-	if(tipo_usuario == 1){
-		mensaje = "Seleccione un elemento de la lista";
-		if(document.getElementById('documentacion').value == ""){
-			colocaError(seleccione_error, seleccione_group, mensaje, button_register);
-		}
-
-		if(document.getElementById('area_select').value == ""){
-			// alert("eder");
-			colocaError(area_error, area_group, mensaje, button_register);
-		}
-
-		if(document.getElementById('nivel_interes').value == ""){
-			// alert("eder 2");
-			colocaError(nivel_error, nivel_group, mensaje, button_register);
-		}
-	}
-
-	mensaje = "Rellene este campo";
-
-	if(document.getElementById('password').value == ""){
-		colocaError(password_error, password_group, mensaje, button_register);
-	}
-
-	if(document.getElementById('password_two').value == ""){
-
-		colocaError(password_error_two, password_group_two, mensaje, button_register);
-	}
-
-	if(document.getElementById('dni').value == ""){
-		colocaError(dni_error, dni_group, mensaje, button_register);
-	}
-
-	if(document.getElementById('term_cond').checked){
-		//
-	}
-	else{
-		var mensaje = "Debe aceptar términos y condiciones";
-		colocaError(term_cond_error, term_cond_group, mensaje, button_register);
-	}
-
-	if(tipo_usuario == 2){
-		mensaje = "Rellene este campo";
-		if(document.getElementById('nombre_contact').value == ""){
-			colocaError(nombre_contact_error, nombre_contact_group, mensaje, button_register);
-		}
-
-		if(document.getElementById('apellido_contact').value == ""){
-			colocaError(apellido_contact_error, apellido_contact_group, mensaje, button_register);
-		}
-
-		if(document.getElementById('tel_one_contact').value == ""){
-			colocaError(tel_one_contact_error, tel_one_contact_group, mensaje, button_register);
-		}
-	}
-
-
 });
 
 // Validación campo contacto empresa
@@ -654,20 +622,18 @@ function validar_numero(obj, requerido, error_mensaje, error_group){
 }
 
 function enableBTN(){
-	var errors = document.getElementsByClassName("has-error");
-	console.log(errors.length);
-	if(errors.length == 0){
+	if(validateForm() == 0 && verifyErrors() == 0){
 		var btn = document.getElementById('button_register');
 		btn.classList.remove("disabled");
-		btn.removeAttribute("disabled");
-		console.log("eder");
+		return true;
 	}
+	return false;
 }
 
 
 function validateEmail(correo) {
   // var pattern = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-  var pattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/;
+  var pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
   return pattern.test(correo);
 }
 
@@ -680,8 +646,93 @@ function passCoincide(pass_one, pass_two){
 	}
 }
 
+function validateForm(){
+	var tipo_usuario = document.getElementById('tipo_usuario').value;
+	var errors = 0;
+	if(document.getElementById('name_user').value == ""){
+		colocaError(nombre_error, group_nombre, campo_vacio, button_register);
+		errors++;
+	}
+
+	if(document.getElementById('correo').value == ""){
+		colocaError(correo_error, correo_group, campo_vacio, button_register);
+		errors++;
+	}
+
+	if(document.getElementById('numero_cand').value == ""){
+		colocaError(numero_error, numero_group, campo_vacio, button_register);
+		errors++;
+	}
+
+	if(document.getElementById('password').value == ""){
+		colocaError(password_error, password_group, campo_vacio, button_register);
+		errors++;
+	}
+
+	if(document.getElementById('password_two').value == ""){
+		colocaError(password_error_two, password_group_two, campo_vacio, button_register);
+		errors++;
+	}
+
+	if(document.getElementById('dni').value == ""){
+		colocaError(dni_error, dni_group, campo_vacio, button_register);
+		errors++;
+	}
+
+	if(document.getElementById('term_cond').checked){
+	}
+	else{
+		colocaError(term_cond_error, term_cond_group, term_cond_mensaje, button_register);
+		errors++;
+	}
+// ----------------------------------------------Tipo de usuario 1 (candidato) exclusivo--------------------------------------
+	if(tipo_usuario == 1){
+		if(document.getElementById('apell_user').value == ""){
+			colocaError(apell_error, apellido_group, campo_vacio, button_register);
+			errors++;
+		}
+
+		if(document.getElementById('documentacion').value == ""){
+			colocaError(seleccione_error, seleccione_group, lista_vacia, button_register);
+			errors++;
+		}
+		if(document.getElementById('area_select').value == ""){
+			colocaError(area_error, area_group, lista_vacia, button_register);
+			errors++;
+		}
+
+		if(document.getElementById('nivel_interes').value == ""){
+			colocaError(nivel_error, nivel_group, lista_vacia, button_register);
+			errors++;
+		}
+	}
+// ----------------------------------------------Tipo de usuario 1 (candidato) exclusivo--------------------------------------
+
+// ----------------------------------------------Tipo de usuario 2 (candidato) exclusivo--------------------------------------
+	if(tipo_usuario == 2){
+		mensaje = "Rellene este campo";
+		if(document.getElementById('nombre_contact').value == ""){
+			colocaError(nombre_contact_error, nombre_contact_group, mensaje, button_register);
+			errors++;
+		}
+
+		if(document.getElementById('apellido_contact').value == ""){
+			colocaError(apellido_contact_error, apellido_contact_group, mensaje, button_register);
+			errors++;
+		}
+
+		if(document.getElementById('tel_one_contact').value == ""){
+			colocaError(tel_one_contact_error, tel_one_contact_group, mensaje, button_register);
+			errors++;
+		}
+	}
+// ----------------------------------------------Tipo de usuario 2 (candidato) exclusivo--------------------------------------
+	return errors;
+}
+
 function validar_EC(dni_obj){
-	validarDocumento(dni_obj);
+	var validacion = validarDocumento(dni_obj);
+	return validacion;
 }
 
 function existeCorreo(correo){
@@ -722,4 +773,9 @@ function existeDni(dni){
         })
 	}
 	return value;
+}
+
+function verifyErrors(){
+	var listerrors = document.getElementsByClassName('msg_error');
+	return listerrors.length;
 }
