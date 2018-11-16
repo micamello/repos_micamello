@@ -77,7 +77,7 @@
                 <option selected="" value="" disabled>Seleccione tipo identificación</option>
                 <?php 
                   foreach(DOCUMENTACION as $key => $doc)
-                    echo "<option value='".$key."'>$doc</option>";
+                    echo "<option value='".$key."'>".utf8_encode($doc)."</option>";
                  ?>
               </select>
             </div>
@@ -144,7 +144,7 @@
                   <p class="text-center text_form">Contraseña&nbsp;<i class="requerido">*</i></p><div id="password_error" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control">
+                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" class="form-control">
                   </div>
                 </div>
             </div>
@@ -153,7 +153,7 @@
                   <p class="text-center text_form">Confirmar Contraseña&nbsp;<i class="requerido">*</i></p><div id="password_error_two" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control">
+                    <input id="password_two" name="password_two" type="password" placeholder="Verificar contraseña" class="form-control">
                 </div>
               </div>
             </div>
@@ -226,21 +226,21 @@
           <div class="col-md-12" align="center">
             <p class="center-text-line" style="font-size: 17px;">ó registrate con: </p>
             <!-- <div align="center" class="col-md-12"> -->
-              <div class="col-xs-8 col-xs-offset-2 col-md-1 col-md-offset-4 col-sm-1 col-sm-offset-4" align="">
+              <div class="col-xs-8 col-xs-offset-2 col-md-1 col-md-offset-5 col-sm-1 col-sm-offset-4" align="">
               <a class="socialbutton fb" onclick="window.location = '<?php echo $social['fb']; ?>'"><i class="fa fa-facebook-square"></i><span class="social_text"> Facebook</span></a>
               </div>
 
-              <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
+              <!-- <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
                 <a class="socialbutton tw" onclick="window.location = '<?php echo $social['gg'] ?>'"><i class="fa fa-twitter-square"></i><span class="social_text"> Twitter</span></a>
-              </div>
+              </div> -->
 
               <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
-                <a class="socialbutton google"><i class="fa fa-google-plus-square"></i><span class="social_text"> Google</span></a>
+                <a class="socialbutton google" onclick="window.location = '<?php echo $social['gg'] ?>'"><i class="fa fa-google-plus-square"></i><span class="social_text"> Google</span></a>
               </div>
 
-              <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
+              <!-- <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
                 <a class="socialbutton lkin"><i class="fa fa-linkedin-square"></i><span class="social_text"> LinkeIn</span></a>
-              </div>
+              </div> -->
             <!-- </div> -->
           </div>
         </div>
@@ -300,8 +300,8 @@
                                 <div class="row">
                                   <div class="form-inline">
                                     <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
-                                      <a href="<?php echo PUERTO."://".$sucursal["dominio"];?>/"><img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic"> 
-                                      <span class="text_icons_footer"><?php echo utf8_encode($sucursal["nombre_abr"]);?></span></a>
+                                      <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic"> 
+                                      <span class="text_icons_footer"><?php echo utf8_encode($sucursal["nombre_abr"]);?></span>
                                     <?php }?>                                                                                
                                     <span class="separate_social_country">|</span>
                                     

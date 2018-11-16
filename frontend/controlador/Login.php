@@ -7,6 +7,19 @@ class Controlador_Login extends Controlador_Base {
   } 
  
   public function construirPagina(){
+
+    // FACEBOOK
+    require_once "includes/fb_api/config.php";
+    $permissions = ['email'];
+    $urlLogin = PUERTO."://".HOST."/facebook.php?tipo_user=1";
+    $fb_URL = $helper->getLoginUrl(PUERTO."://".HOST."/facebook.php?tipo_user=1", $permissions);
+    // $fb_URL = $helper->getLoginUrl(PUERTO."://".HOST."/index.php?mostrar=registro&opcion=facebook", ['email']);
+
+    // GOOGLE
+    require_once "includes/gg_api/config.php";
+    $gg_URL = $gClient->createAuthUrl();
+
+
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
     }
@@ -27,7 +40,7 @@ class Controlador_Login extends Controlador_Base {
             }            
           } 
           if ($usuario["estado"] != 1){
-            throw new Exception("El Usuario no esta activo, por favor comuniquese con el administrador para su activación");            
+            throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electrónico para activarlo o comuniquese con el administrador para su activación");            
           }
           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
             throw new Exception("Error en el sistema, por favor intente nuevamente");
@@ -46,15 +59,21 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     } 
+
+    $social_reg = array('fb'=>$fb_URL, 'gg'=>$gg_URL);
+
+    $tags = array('social'=>$social_reg);
  
     $tags["arrarea"] = Modelo_Area::obtieneListado();
     $tags["intereses"] = Modelo_Interes::obtieneListado();
  
-    $tags["template_js"][] = "validator";    
+    $tags["template_js"][] = "modal-register";
+    $tags["template_js"][] = "validator";
+    $tags["template_js"][] = "assets/js/main"; 
     $tags["template_js"][] = "ruc_jquery_validator";
+    $tags["template_js"][] = "registrar";
     $tags["template_js"][] = "selectr";
     $tags["template_js"][] = "mic";
-    $tags["template_js"][] = "modal-register"; 
     Vista::render('login',$tags);  
  
   }

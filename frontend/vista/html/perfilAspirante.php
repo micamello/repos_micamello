@@ -9,7 +9,7 @@
 						
 						<div class="text-center">
 							<div class="col-md-12">
-								<img class="perfil_photo_user" src="<?php echo Modelo_Usuario::obtieneFoto($infoUsuario['id_usuario']) ?>">
+								<img class="perfil_photo_user" src="<?php echo Modelo_Usuario::obtieneFoto($infoUsuario['username']) ?>">
 							</div>
 						</div>
 

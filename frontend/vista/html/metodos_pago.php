@@ -194,6 +194,7 @@
                   <input type="hidden" name="hosted_button_id" value="<?php echo $plan["codigo_paypal"];?>">
                   <input type="hidden" id="idplanP" name="idplanP" value="<?php echo $plan["id_plan"];?>">
                   <input type="hidden" id="usuarioP" name="usuarioP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>">
+                  <input type="hidden" id="tipousuP" name="tipousuP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>">
                   <input type="hidden" name="rutaPAYPAL" id="rutaPAYPAL" value="<?php echo RUTA_PAYPAL;?>">                  
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       

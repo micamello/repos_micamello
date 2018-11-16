@@ -72,7 +72,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
         if (!Modelo_Postulacion::guardarPostAuto($idpostulacion,$plan["id_usuario_plan"])){
         	throw new Exception("Error al grabar la postulacion automatica ".print_r($oferta,true));
         }        
-        if (!Modelo_UsuarioxPlan::restarPublicaciones($plan["id_usuario_plan"],$cont_publicacion)){
+        if (!Modelo_UsuarioxPlan::restarPublicaciones($plan["id_usuario_plan"],$cont_publicacion,Modelo_Usuario::CANDIDATO)){
           throw new Exception("Error al restar las autopostulaciones ".print_r($oferta,true)); 
         }
 	  	  $GLOBALS['db']->commit();

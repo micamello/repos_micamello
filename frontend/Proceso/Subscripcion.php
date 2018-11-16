@@ -78,14 +78,12 @@ class Proceso_Subscripcion{
     $notif_body = $email_body;
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $email_body .= "Por favor de click en este enlace para realizar el tercer formulario "; 
-      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollo/cuestionario/'>click aqu&iacute;</a> <br>";
-      $notif_url = "cuestionario";
+      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollov2/cuestionario/'>click aqu&iacute;</a> <br>";      
     }else{
       $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
-      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollo/publicar/'>click aqu&iacute;</a> <br>";
-      $notif_url = "publicar";
+      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollov2/publicar/'>click aqu&iacute;</a> <br>";      
     }  
-    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,$notif_url);
+    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
     Utils::envioCorreo($correo,$email_subject,$email_body);
   }
 

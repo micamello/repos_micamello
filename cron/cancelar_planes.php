@@ -106,7 +106,7 @@ if (!empty($arrempresa)){
 
 function enviarNotificaciones($idusu,$fchcompra,$mensaje){
 	if(!Modelo_Notificacion::existeNotificacion($idusu,Modelo_Notificacion::WEB,$fchcompra)){		
-		if (!Modelo_Notificacion::insertarNotificacion($idusu,$mensaje,Modelo_Notificacion::WEB,"planes")){
+		if (!Modelo_Notificacion::insertarNotificacion($idusu,$mensaje,Modelo_Notificacion::WEB)){
 			return false;
 		}
 	}  

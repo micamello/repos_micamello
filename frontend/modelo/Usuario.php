@@ -21,7 +21,7 @@ class Modelo_Usuario{
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
               WHERE e.estado=1 AND p.id_pais = ?";
     }
-    $rs = $GLOBALS['db']->auto_array($sql,array($tipo,$pais));
+    $rs = $GLOBALS['db']->auto_array($sql,array($pais));
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 

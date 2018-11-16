@@ -1,7 +1,4 @@
 <?php
-
-
-
 class Controlador_Inicio extends Controlador_Base {
   
   function __construct(){
@@ -24,7 +21,7 @@ class Controlador_Inicio extends Controlador_Base {
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
-    $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID);
+    $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
     $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     $arrinteres = Modelo_Interes::obtieneListado();

@@ -1,5 +1,6 @@
 if(document.getElementById('form_editarPerfil')){
 
+
     validarFormulario();
     //validarClave();
 
@@ -576,7 +577,7 @@ function validarFormulario(){
     }else{
         quitarError("err_nac", "seccion_nac");
     }
-    console.log(error);
+    
     
     if(error == 1){
         return 0;
@@ -595,9 +596,8 @@ function enviarCambioClave(){
     }
 }
 
-function validarClave(){
-
-    var expreg = /^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$/i;
+function validarClave(){                 
+    var expreg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     var error = 0;
 
     var password = document.getElementById('password').value;
@@ -607,37 +607,44 @@ function validarClave(){
 
         colocaError("err_clave", "seccion_clave","El campo no puede ser vacío","button_cambiar");
         error = 1; 
+        console.log("error1");
 
     }else if(!expreg.test(password)){
 
         colocaError("err_clave", "seccion_clave","Formato incorrecto, Letras y números, mínimo 8 caracteres","button_cambiar"); 
         error = 1;  
+        console.log("error2");
     }else{
         quitarError("err_clave", "seccion_clave");
-        //error = 0;
     }
 
     if(password_two == null || password_two.length == 0 || /^\s+$/.test(password_two)){
 
         colocaError("err_clave1", "seccion_clave1","El campo no puede ser vacío","button_cambiar");
         error = 1; 
+        console.log("error3");
 
     }else if(!expreg.test(password_two)){
 
         colocaError("err_clave1", "seccion_clave1","Formato incorrecto, Letras y números, mínimo 8 caracteres","button_cambiar"); 
         error = 1;  
+        console.log("error3");
+
     }else{
+
          if(password != password_two){
             colocaError("err_clave1", "seccion_clave1","Ingrese la misma contraseña","button_cambiar"); 
             error = 1; 
+            console.log("error4");
         }else{
             quitarError("err_clave1", "seccion_clave1");
-            //error = 0;
         }
-    }    
+    }
+//alert(error);
     if(error == 1){
         return 0;
     }else{
+
         $("#button_cambiar").removeAttr('disabled');
         $("#button_cambiar").removeClass('disabled');
         return 1;

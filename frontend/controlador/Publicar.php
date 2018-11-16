@@ -11,8 +11,7 @@ class Controlador_Publicar extends Controlador_Base {
     $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     unset($_SESSION['mfo_datos']['planes']);
     $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu, $_SESSION['mfo_datos']['usuario']['tipo_usuario']);
-
-    Utils::log(print_r($_SESSION,true));
+    
     if(!Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
@@ -215,7 +214,7 @@ class Controlador_Publicar extends Controlador_Base {
       }
     }    
 
-    print_r("empresa plan: ". $id_empresa_plan);
+    // print_r("empresa plan: ". $id_empresa_plan);
     // exit();
 
     //VERIFICAR TIENE PARA PUBLICAR OFERTA 
@@ -231,7 +230,7 @@ class Controlador_Publicar extends Controlador_Base {
     }
 
     if($num_post > 0){
-      if(!Modelo_UsuarioxPlan::restarPublicaciones($id_empresa_plan, $num_post)){
+      if(!Modelo_UsuarioxPlan::restarPublicaciones($id_empresa_plan, $num_post, Modelo_Usuario::EMPRESA)){
         throw new Exception("Ha ocurrido un error, intente nuevamente4");
       }
     }

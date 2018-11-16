@@ -133,7 +133,7 @@ if (!empty($usuarios) && is_array($usuarios)){
 	    $email_body .= "Correo Electr&oacute;nico: ".$usuario["correo"]."<br>";
 	    $email_body .= "Contrase&ntilde;a: ".$password."<br>";
 	    $email_body .= "Por favor de click en este enlace para ingresar "; 
-	    $email_body .= "<a href='".PUERTO."://".DOMINIO."/desarrollo/login/'>click aqu&iacute;</a> <br>";	     	
+	    $email_body .= "<a href='".PUERTO."://".DOMINIO."/desarrollov2/login/'>click aqu&iacute;</a> <br>";	     	
 	   
 	    Utils::envioCorreo($usuario["correo"],$email_subject,$email_body);
 

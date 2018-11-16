@@ -28,7 +28,7 @@
         <div class="row">
           <!--<div class="main_business">-->
             <div class="col-md-3" align="center">                                
-              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" style="border-radius: 5%;max-width:100%;">
+              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" style="border-radius: 5%;max-width:100%;max-height: 300px;margin-top: 40px;">
             </div>              
             <div class="col-md-3" align="center">
               <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/<?php echo $imagengif;?>">

@@ -554,8 +554,9 @@ $('#btn_transfer').on('click', function()
         }else{
        		// console.log(tag_idioma.options[0].value);
             op = tag_idioma.length;
+            enableBTN();
             quitarError(listado_error, listado_group);
-           	enableBTN();
+           	
         }
 
         if (all_selected.length == op) {
@@ -563,8 +564,9 @@ $('#btn_transfer').on('click', function()
 	        colocaError(listado_error, listado_group, mensaje, button_register);
         }
         else{
-        	quitarError(listado_error, listado_group);
         	enableBTN();
+        	quitarError(listado_error, listado_group);
+        	
         	
         	document.getElementById('text_nothing').style.display = "none";
         }

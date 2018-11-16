@@ -59,17 +59,21 @@ class Modelo_UsuarioxPlan{
     return $result;
   }
 	
-
   public static function publicacionesRestantes($usuario){
     if (empty($usuario)){ return false; }
-      $sql = "SELECT * FROM mfo_empresa_plan WHERE id_empresa = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;"; 
-    return $GLOBALS['db']->auto_array($sql,array($usuario), true);
+      $sql = "SELECT sum(num_post_rest) as p_restantes FROM mfo_usuario_plan WHERE id_usuario = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) AND estado = 1;"; 
+    return $GLOBALS['db']->auto_array($sql,array($usuario));
   }
-
-  public static function restarPublicaciones($id_empresa_plan, $num_post){
-    if (empty($id_empresa_plan) || empty($num_post)) {return false;}
+ 
+  public static function restarPublicaciones($id_plan_usuario, $num_post, $tipousu){
+    if (empty($id_plan_usuario) || empty($num_post) || empty($tipousu)) {return false;}
     $num_post = $num_post-1;
-    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post), "id_empresa_plan = ".$id_empresa_plan);
+    if ($tipousu == Modelo_Usuario::CANDIDATO){
+      $result = $GLOBALS['db']->update('mfo_usuario_plan', array("num_post_rest"=>$num_post), "id_usuario_plan = ".$id_plan_usuario);
+    }
+    else{
+      $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post), "id_empresa_plan = ".$id_plan_usuario);
+    }    
     return $result;
   }
  

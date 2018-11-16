@@ -42,7 +42,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   foreach($ofertas as $oferta){    
     $mail_ofertas .= utf8_encode($oferta["titulo"])."<br>";
     $mail_ofertas .= utf8_encode($oferta["empresa"])." - ".utf8_encode($oferta["provincia"])." / ".utf8_encode($oferta["ciudad"])."<br>";
-    $mail_ofertas .= "<a href='".PUERTO."://".$sucursal["dominio"]."/detalleOferta/oferta/".$oferta["id_ofertas"]."/'>Ver Oferta</a><br><br>";
+    $mail_ofertas .= "<a href='".PUERTO."://".$sucursal["dominio"]."/desarrollov2/detalleOferta/oferta/".$oferta["id_ofertas"]."/'>Ver Oferta</a><br><br>";
     echo $mail_ofertas."<br>";
   }
   //envio de correo al candidato
