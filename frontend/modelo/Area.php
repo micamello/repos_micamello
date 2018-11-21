@@ -33,5 +33,11 @@ class Modelo_Area{
 						ORDER BY a.nombre";
 		return $GLOBALS['db']->auto_array($sql,array($pais),true);				
 	}
+
+	public static function obtieneAreas($areas){
+		$sql = "SELECT * FROM mfo_area WHERE id_area IN($areas)";
+		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+		return $arrdatos;
+	}
 }  
 ?>

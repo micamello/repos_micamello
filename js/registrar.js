@@ -49,7 +49,7 @@ if(document.getElementById('name_user')){
 				}
 				else{
 					mensaje = "Longitud máxima del campo 60 caracteres";
-					// colocaError(nombre_error, group_nombre, mensaje, button_register);
+					colocaError(nombre_error, group_nombre, mensaje, button_register);
 				}
 			}
 			else{
@@ -107,7 +107,7 @@ if(document.getElementById('apell_user')){
 					}
 					else{
 						mensaje = "Longitud máxima del campo 60 caracteres";
-						// colocaError(apell_error, apellido_group, mensaje, button_register);
+						colocaError(apell_error, apellido_group, mensaje, button_register);
 					}
 				}
 				else{

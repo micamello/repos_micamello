@@ -15,7 +15,6 @@ $('#provincia_of').change(function()
             dataType:'json',
             success:function(data){
                 $('#ciudad_of').html('<option value="">Selecciona una ciudad</option>');
-                console.log(data);
                 $.each(data, function(index, value) {
                     $('#ciudad_of').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
 
@@ -27,14 +26,6 @@ $('#provincia_of').change(function()
         })
     }
 });
-
-
-
-// var editor = tinyMCE.get('des_of');
-// console.log(editor.getContent());
-// tinymce.get('des_of').setContent('...content here...');
-// alert(tinyMCE.get('#des_of').getContent());
-// tinymce.activeEditor.setContent('custom');
 
 var mensaje = "";
 if(document.getElementById('boton')){
@@ -137,9 +128,15 @@ if(document.getElementById('titu_of')){
 if(document.getElementById('salario')){
 	$('#salario').on('blur', function(){
 		if(emptyContent(this) != false){
-			if(validarFloat(this) != false && this.value > -1){
-				quitarError(salario_error, salario_group);
-				enableBTN();
+			if(validarFloat(this) != false){
+				if(this.value > 0){
+					quitarError(salario_error, salario_group);
+					enableBTN();
+				}
+				else{
+					mensaje = "Solo valores mayores a 1";
+					colocaError(salario_error, salario_group, mensaje, button_register);
+				}
 			}
 			else{
 				mensaje = "Ajustese al formato solicitado";
@@ -184,10 +181,6 @@ if(document.getElementById('vacante')){
 		}
 	});
 
-	// $('#vacante').on('blur', function(){
-
-	// })
-
 	$('#vacante').on('keydown', function(event){
 		lockLength(vacante_error, vacante_group, this, 3, event, button_register);
 	});
@@ -195,7 +188,6 @@ if(document.getElementById('vacante')){
 
 if(document.getElementById('fecha_contratacion')){
 	var date = new Date();
-    console.log(date.setDate(date.getDate()+30));
     document.getElementById("fecha_contratacion").valueAsDate = date;
     var fecha_actual = fechaActual();
 
@@ -239,31 +231,14 @@ if(document.getElementById('area_select')){
 
 if(document.getElementById('edad_min')){
 	$('#edad_min').on('blur', function(){
-		var edad1 =  document.getElementById('edad_min');
 		var edad2 =  document.getElementById('edad_max');
 		if(emptyContent(this) != false){
 			if(this.value >= 18){
-				console.log("eder");
-				if(edad2.value == ""){
-					console.log("eder dentro eder");
-						console.log("eder dentro");
-						quitarError(edad_min_error, edad_min_group);				}
-				else{
-					if(this.value >= edad2.value){
-						console.log("--------------------- 1");
-						mensaje = "Edad no válida 1";
-						colocaError(edad_min_error, edad_min_group, mensaje, button_register);
-					// }
-					// else{
-						// quitarError(edad_min_error, edad_min_group);
-					}
-					else{
-						mensaje = "Edad no válida 3";
-						colocaError(edad_max_error, edad_max_group, mensaje, button_register);
-					}
+				if(this.value <= edad2.value && edad2.value != ""){
+					quitarError(edad_min_error, edad_min_group);
 				}
 			}else{
-				mensaje = "Edad no válida 2";
+				mensaje = "Debe ser mayor o igual a 18";
 				colocaError(edad_min_error, edad_min_group, mensaje, button_register);
 			}
 		}
@@ -282,32 +257,17 @@ if(document.getElementById('edad_min')){
 if(document.getElementById('edad_max')){
 	$('#edad_max').on('blur', function(){
 		var edad1 =  document.getElementById('edad_min');
-		var edad2 =  document.getElementById('edad_max');
 		if(emptyContent(this) != false){
 			if(this.value >= 18){
-				console.log("eder");
-				if(edad1.value == ""){
-					console.log("eder dentro eder");
-						console.log("eder dentro");
-						quitarError(edad_max_error, edad_max_group);
+				if(this.value >= edad1.value && edad1.value != ""){
+					quitarError(edad_min_error, edad_min_group);
 				}
 				else{
-					if(this.value >= edad1.value){
-						console.log("---------------------");
-						// mensaje = "Edad no válida 1";
-						// colocaError(edad_max_error, edad_max_group, mensaje, button_register);
-					// }
-					// else{
-						// console.log("ederederedereder");
-						quitarError(edad_max_error, edad_max_group);
-					}
-					else{
-						mensaje = "Edad no válida 3";
-						colocaError(edad_max_error, edad_max_group, mensaje, button_register);
-					}
+					mensaje = "Debe ser mayor a edad mínima";
+					colocaError(edad_max_error, edad_max_group, mensaje, button_register);
 				}
 			}else{
-				mensaje = "Edad no válida 2";
+				mensaje = "Debe ser mayor o igual a 18";
 				colocaError(edad_max_error, edad_max_group, mensaje, button_register);
 			}
 		}
@@ -377,11 +337,27 @@ if(document.getElementById('des_of')){
 })
 }
 
+var select_one = 0;
+var select_two = 0;
+$('#idioma_of').on('change', function(){
+	select_one = 1;
+	if(select_one == 1 && select_two == 1){
+		document.getElementById('effect_bounce').classList.add('bounce');
+		document.getElementById('btn_transfer').classList.add('active_button');
+	}
+});
+
+$('#nivel_idi_of').on('change', function(){
+	select_two = 1;
+	if(select_one == 1 && select_two == 1){
+		document.getElementById('effect_bounce').classList.add('bounce');
+		document.getElementById('btn_transfer').classList.add('active_button');
+	}
+});
+
 function validarRangoEdad(obj1, obj2){
-	console.log("eder-.-.,-.,-.,-.,-.,-.-.-.-.-..");
 	if(obj1.value != "" && obj2.value != ""){
 		if(obj1.value >=18 && obj2.value >= 18){
-			console.log("eder-.-.,-.,-.,-.,-.,-.-.-.-.-..eder");
 			if(obj1.value >= obj2.value){
 				return true;
 			}
@@ -494,17 +470,16 @@ function campos(){
 		errors++;
 	}
 
-	if(document.getElementById('select_array_idioma').value == ""){
+	if(document.getElementsByClassName('badge_item').length == 0){
 		colocaError(listado_error, listado_group, mensaje, button_register);
 		errors++;
 	}
-
-	// console.log("edereder: " + document.getElementById('select_array_idioma').value);
 
 	if(document.getElementById('nivel_interes').value == ""){
 		colocaError(nivel_error, nivel_group, mensaje, button_register);
 		errors++;
 	}
+
 	mensaje = "Rellene este  campo";
 	if(document.getElementById('fecha_contratacion').value == ""){
 		colocaError(fecha_error, fecha_group, mensaje, button_register);
@@ -520,13 +495,11 @@ function campos(){
 		colocaError(edad_max_error, edad_max_group, mensaje, button_register);
 		errors++;
 	}
-
 	return errors; 
 }
 
 function enableBTN(event){
 	var flag = false;
-	// console.log("edereder: " + campos() + "------- eder" + errorsVerify());
 	if(campos() == 0 && errorsVerify() != false){
 
 		var btn = document.getElementById('boton');
@@ -540,7 +513,6 @@ function enableBTN(event){
 function errorsVerify(){
 	var flag = false;
 	var errors = document.getElementsByClassName("has-error");
-	console.log(errors.length);
 	if(errors.length == 0){
 		flag = true;
 	}
@@ -572,11 +544,7 @@ $('#btn_transfer').on('click', function()
         if(tag_idioma.options[0].value == 0){
             op = tag_idioma.length-1;
         }else{
-       		// console.log(tag_idioma.options[0].value);
-            op = tag_idioma.length;
-            enableBTN();
-            quitarError(listado_error, listado_group);
-           	
+            op = tag_idioma.length;           	
         }
 
         if (all_selected.length == op) {
@@ -610,6 +578,10 @@ $('#btn_transfer').on('click', function()
             nodo_option.setAttribute("id", "array_idioma"+id_idioma);
             nodo_option.selected = "selected";
             select_array_idioma.appendChild(nodo_option);
+            document.getElementById('effect_bounce').classList.remove('bounce');
+            document.getElementById('btn_transfer').classList.remove('active_button');
+            select_one = 0;
+            select_two = 1;
         }
 
         var all_selected = $('#idioma_of option:disabled');
@@ -617,6 +589,12 @@ $('#btn_transfer').on('click', function()
             tag_nivel_idioma.setAttribute("disabled", true);
             tag_idioma.setAttribute("disabled", true);
         }
+        quitarError(listado_error, listado_group);
+    	enableBTN();
+    }
+    else{
+    	mensaje = "Seleccione una opción";
+	   	colocaError(listado_error, listado_group, mensaje, button_register);
     }
 })
 
@@ -632,6 +610,11 @@ function delete_item_selected(selected_item){
             $("#select_array_idioma option[id='array_idioma"+selected_item.id+"']").remove();
             tag_nivel_idioma.removeAttribute("disabled");
             tag_idioma.removeAttribute("disabled");
+            if(selected_item.id == tag_idioma.options[tag_idioma.selectedIndex].value){
+            	document.getElementById('effect_bounce').classList.add('bounce');
+           		document.getElementById('btn_transfer').classList.add('active_button');
+            	select_one = 0;
+            }
     }
 	if (document.getElementById('select_array_idioma').length <= 0)
 	{

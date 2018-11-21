@@ -38,16 +38,10 @@ class Controlador_Publicar extends Controlador_Base {
         Vista::renderJSON($arrciudad);
       break;
       default:
-      // print_r("eder");
-        
-        // print_r($_SESSION['mfo_datos']['planes']);
-        // exit();
         $publicaciones_restantes = $_SESSION['mfo_datos']['planes'];
-        // print_r($publicaciones_restantes);
         $rest = 0;
         foreach ($publicaciones_restantes as $value) {
           if($value['num_publicaciones_rest'] < 0){
-            // $rest = "&infin;";
             $rest = "&infin;";
             break;
           }
@@ -55,10 +49,7 @@ class Controlador_Publicar extends Controlador_Base {
             $rest += $value['num_publicaciones_rest'];
           }
         }
-
-        // print_r("rest: ".$rest);
-        // exit();
-        if ($rest <= 0 && $rest != "&infin;") {
+        if ($rest <= 0 && is_numeric($rest)) {
           $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
           Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');       
         }
@@ -103,13 +94,17 @@ class Controlador_Publicar extends Controlador_Base {
           
           $data_idiomas = self::validarCampos($data);
 
-          $GLOBALS['db']->beginTrans();
-          self::guardarPublicacion($data, $data_idiomas, $idusu);
-          $GLOBALS['db']->commit();
-          
-          $_SESSION['mostrar_exito'] = "La oferta se ha registrado correctamente. Pronto un administrador habilitará la oferta";
-
-          $this->redirectToController('vacantes');
+          if($publicaciones_restantes > 0){
+            $GLOBALS['db']->beginTrans();
+            self::guardarPublicacion($data, $data_idiomas, $idusu);
+            $GLOBALS['db']->commit();
+            $_SESSION['mostrar_exito'] = "La oferta se ha registrado correctamente. Pronto un administrador habilitará la oferta";
+            $this->redirectToController('vacantes');
+          }
+          else{
+            $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
+            $this->redirectToController('planes');
+          }
         }
         catch( Exception $e ){
           $GLOBALS['db']->rollback();
@@ -135,6 +130,10 @@ class Controlador_Publicar extends Controlador_Base {
 
     if (Utils::formatoDinero($data['salario']) == false) {
       throw new Exception("El campo salario solo permite números");
+    }
+
+    if (($data['salario']) < 1) {
+      throw new Exception("Salario no debe ser menor a 1");
     }
 
     if (Utils::validarNumeros($data['vacantes']) == false) {
@@ -209,13 +208,10 @@ class Controlador_Publicar extends Controlador_Base {
       }
       else{
         $id_empresa = $plan['id_empresa']; 
-       $id_empresa_plan = $plan["id_empresa_plan"];
+        $id_empresa_plan = $plan["id_empresa_plan"];
         $num_post = -1;
       }
     }    
-
-    // print_r("empresa plan: ". $id_empresa_plan);
-    // exit();
 
     //VERIFICAR TIENE PARA PUBLICAR OFERTA 
     if (!Modelo_Oferta::guardarOferta($data, $id_reqOf, $id_empresa_plan, $id_empresa)) {

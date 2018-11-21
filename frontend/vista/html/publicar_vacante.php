@@ -12,16 +12,31 @@
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
 			 			<?php 
-
-			 				if (!empty($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad'])) {			 					
-			 					?>
+			 				$fecha_final = "2015-10-17 11:24:00";
+			 				foreach ($_SESSION['mfo_datos']['planes'] as $key => $value) {
+			 					if($value['fecha_caducidad'] != NULL || $value['fecha_caducidad'] != ""){
+			 						if($fecha_final< $value['fecha_caducidad']){
+				 						$fecha_final = $value['fecha_caducidad'];
+				 					}
+			 					}
+			 					else{
+			 						if(count($_SESSION['mfo_datos']['planes']) == 1){
+			 							$fecha_final = "Ilimitado";
+			 						}
+			 					}
+			 				}		 					
+			 			?>
 						 			<p>Fecha caducidad plan: 
 						 			<b><span><?php
-						 			$fecha = date_create($_SESSION['mfo_datos']['planes'][0]['fecha_caducidad']);
-						 			echo date_format($fecha, "Y-m-d")?> <i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>
-			 			<?php }else{ ?>
-			 				<p>Fecha caducidad plan: ilimitado</p>
-			 			<?php } ?>
+						 						if($fecha_final != "Ilimitado"){
+						 							echo date_format(date_create($fecha_final), "Y-m-d");
+						 						}
+						 						else{
+						 							echo $fecha_final;
+						 						}
+						 					?>
+						 			<i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>
+			 			
 
 			 			</div>
 			 		</div>	
@@ -46,10 +61,6 @@
 					<?php
 					}
 				 ?>	
-				  <!-- / Plan(es) activo(s):
-				  <select>
-				  	<option></option>
-				  </select> -->
 			 
 		</div>
 	</div>
@@ -242,10 +253,11 @@
 							</div>
 						</div>
 
-						<div class="col-md-3 col-md-offset-3">
+						<div class="col-md-3 col-md-offset-2">
 							<div class="form-group">
 								<label>Idioma: </label>
 								<select id="idioma_of" name="idioma_of" class="form-control">
+									<option value="" selected="" disabled="">Seleccione una opción</option>
 									<?php if (!empty($arridioma)){
 										foreach ($arridioma as $idioma) {?>
 											<option value="<?php echo $idioma['id_idioma'] ?>"><?php echo utf8_encode($idioma['descripcion']) ?></option>
@@ -261,6 +273,7 @@
 							<div class="form-group">
 								<label>Nivel idioma: </label>
 								<select id="nivel_idi_of" name="nivel_idi_of" class="form-control">
+									<option value="" selected="" disabled="">Seleccione una opción</option>
 									<?php if (!empty($arrnivelidioma)){
 										foreach ($arrnivelidioma as $nivelidioma) {?>
 											<option value="<?php echo $nivelidioma['id_nivelIdioma'] ?>"><?php echo utf8_encode($nivelidioma['nombre']) ?></option>
@@ -273,9 +286,9 @@
 						</div>
 
 						<div class="">
-							<div class="col-md-2">
-								<div class="form-group">
-									<a id="btn_transfer" class="button_transfer_list"><i class="fa fa-plus"></i></a>
+							<div class="col-md-1">
+								<div class="form-group" id="effect_bounce">
+									<a id="btn_transfer" class="button_transfer_list">+ Añadir idioma</a>
 								</div>
 							</div>
 						</div>
@@ -401,7 +414,7 @@
 						<div class="col-md-3">
 							<div class="form-group" id="edad_max_group">
 								<label>Edad máxima: </label>&nbsp;<i class="requerido">*</i><div id="edad_max_error" class="help-block with-errors"></div>
-								<input type="number" id="edad_max" name="edad_max" min="18" max="100" class="form-control">
+								<input type="number" id="edad_max" name="edad_max" min="18" max="100" class="form-control" value="18">
 							</div>
 						</div>
 

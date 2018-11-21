@@ -826,8 +826,10 @@ public static function existeUsername($username){
     DATE_FORMAT(mu.fecha_nacimiento, '%Y-%m-%d') AS fecha_nacimiento,
     YEAR(NOW()) - YEAR(mu.fecha_nacimiento) AS edad,
     pais.nombre_abr as nacionalidad,
-    muni.nombre as universidad,
-    GROUP_CONCAT(nii.id_nivelIdioma_idioma) AS idiomas
+    IFNULL(muni.nombre, mu.nombre_univ) as universidad,
+    GROUP_CONCAT(DISTINCT nii.id_nivelIdioma_idioma) AS idiomas,
+    GROUP_CONCAT(DISTINCT ai.id_area) AS areas,
+    GROUP_CONCAT(DISTINCT nin.id_nivelInteres) AS nivel
 FROM
     mfo_usuario_login mul,
     mfo_ciudad mc,
@@ -839,6 +841,8 @@ FROM
     LEFT JOIN mfo_universidades muni ON mu.id_univ = muni.id_univ
     LEFT JOIN mfo_usuario_nivelidioma niu ON mu.id_usuario = niu.id_usuario
     LEFT JOIN mfo_nivelidioma_idioma nii ON nii.id_nivelIdioma_idioma = niu.id_nivelIdioma_idioma
+  LEFT JOIN mfo_usuarioxarea ai ON mu.id_usuario = ai.id_usuario
+    LEFT JOIN mfo_usuarioxnivel nin ON ai.id_usuario = nin.id_usuario
 WHERE
     mpais.id_pais = mpro.id_pais
     AND me.id_escolaridad = mu.id_escolaridad

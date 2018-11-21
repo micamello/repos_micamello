@@ -111,7 +111,7 @@ function modal_set(id)
 
 		apellido_group.style.display = "";
 		// apell_user.required = true;
-		dni_text.innerHTML = "Cédula / Pasaporte&nbsp;<i class='requerido'>*</i>";
+		dni_text.innerHTML = "C&eacute;dula / Pasaporte&nbsp;<i class='requerido'>*</i>";
 		area_group.style.display = "";
 		// area_select.required = true;
 		nivel_group.style.display = "";

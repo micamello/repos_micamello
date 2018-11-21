@@ -462,6 +462,9 @@ class Controlador_Aspirante extends Controlador_Base
                         "vista"=>$vista
                   );
 
+        // print_r($info_usuario);
+        // exit();
+
         $tags["template_js"][] = "mic";
         $tags["template_js"][] = "Chart.min";
         Vista::render('perfilAspirante', $tags);
