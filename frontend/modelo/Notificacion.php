@@ -37,7 +37,7 @@ class Modelo_Notificacion{
   }
 
   public static function insertarNotificacion($id_usuario,$mensaje,$tipousu,$url='',$tipo=self::WEB){
-    if (empty($mensaje) || empty($id_usuario) || empty($tipousu) || empty($url)){ return false; }    
+    if (empty($mensaje) || empty($id_usuario) || empty($tipousu)){ return false; }    
     $datos = array("id_usuario"=>$id_usuario,"estado"=>self::NOLEIDA,"descripcion"=>$mensaje,"tipo"=>$tipo,
                    "fecha_creacion"=>date('Y-m-d H:i:s'),"tipo_usuario"=>$tipousu,"url"=>$url);
     return $GLOBALS['db']->insert('mfo_notificacion',$datos);    
@@ -51,10 +51,10 @@ class Modelo_Notificacion{
       }else{
         $mensaje = "le restan: ".$autopostulaciones." autopostulaciones";
       }
-      $sql = "SELECT id_notificacion FROM mfo_notificacion n WHERE n.id_usuario = ? AND tipo = ? AND n.descripcion LIKE '%".$mensaje."%';";
+      $sql = "SELECT id_notificacion FROM mfo_notificacion WHERE id_usuario = ? AND tipo = ? AND descripcion LIKE '%".$mensaje."%';";
       $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario,$tipo));
     }else{
-      $sql = "SELECT id_notificacion FROM mfo_notificacion n WHERE n.id_usuario = ? AND tipo = ? AND n.descripcion LIKE '%".$fecha_compra."%';";
+      $sql = "SELECT id_notificacion FROM mfo_notificacion WHERE id_usuario = ? AND tipo = ? AND descripcion LIKE '%".$fecha_compra."%';";
       $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario,$tipo));
     }
     return (!empty($rs['id_notificacion'])) ? true : false;

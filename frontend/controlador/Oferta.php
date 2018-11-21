@@ -32,7 +32,7 @@ class Controlador_Oferta extends Controlador_Base{
             $planes = null;
           }
 
-          Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
+          Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);          
         }
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == '' || $opcion == 'vacantes' || $opcion == 'cuentas'){

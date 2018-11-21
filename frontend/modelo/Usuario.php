@@ -788,7 +788,7 @@ public static function existeUsername($username){
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
       }  
       else{           
-        if ($controlador == 'login'){
+        if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
         }                         
       }                

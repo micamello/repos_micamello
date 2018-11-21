@@ -229,6 +229,7 @@ class Controlador_Plan extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.$data["idplan"].'/');             
     }     
   }
+  
   public function resultado(){
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];

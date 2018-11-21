@@ -37,17 +37,11 @@ class Controlador_Publicar extends Controlador_Base {
         $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($id_provincia);
         Vista::renderJSON($arrciudad);
       break;
-      default:
-      // print_r("eder");
-        
-        // print_r($_SESSION['mfo_datos']['planes']);
-        // exit();
-        $publicaciones_restantes = $_SESSION['mfo_datos']['planes'];
-        // print_r($publicaciones_restantes);
+      default:      
+        $publicaciones_restantes = $_SESSION['mfo_datos']['planes'];        
         $rest = 0;
         foreach ($publicaciones_restantes as $value) {
-          if($value['num_publicaciones_rest'] < 0){
-            // $rest = "&infin;";
+          if($value['num_publicaciones_rest'] < 0){            
             $rest = "&infin;";
             break;
           }
@@ -55,10 +49,8 @@ class Controlador_Publicar extends Controlador_Base {
             $rest += $value['num_publicaciones_rest'];
           }
         }
-
-        // print_r("rest: ".$rest);
-        // exit();
-        if ($rest <= 0 && $rest != "&infin;") {
+                
+        if ($rest <= 0 && $rest != "&infin;") {          
           $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
           Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');       
         }
