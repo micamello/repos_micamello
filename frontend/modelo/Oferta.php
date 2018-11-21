@@ -170,7 +170,7 @@ class Modelo_Oferta{
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (nombres LIKE '%".$pclave."%' OR o.titulo LIKE '%".$pclave."%' OR o.descripcion LIKE '%".$pclave."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
+      $sql .= " AND (emp.nombres LIKE '%".$pclave."%' OR o.titulo LIKE '%".$pclave."%' OR o.descripcion LIKE '%".$pclave."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
     }
 
     if(!empty($vista) && ($vista == 'postulacion')){
@@ -393,9 +393,9 @@ class Modelo_Oferta{
     return $GLOBALS['db']->auto_array($sql,array($usuarioplan),true);
   }
 
-  public static function desactivarOferta($id_usuarioplan){
-    if (empty($id_usuarioplan)){ return false; }
-    return $GLOBALS['db']->update('mfo_oferta',array('estado'=>0),'id_usuarioplan='.$id_usuarioplan);
+  public static function desactivarOferta($id_ofertas){
+    if (empty($id_ofertas)){ return false; }
+    return $GLOBALS['db']->update('mfo_oferta',array('estado'=>0),'id_ofertas='.$id_ofertas);
   }
 
   public static function guardarDescripcion($idOferta,$descripcion){

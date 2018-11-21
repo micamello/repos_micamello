@@ -42,7 +42,6 @@ class Controlador_Aspirante extends Controlador_Base
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta);
                 $array_empresas = array();
-
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista']);
 
                 $cadena = '';
@@ -240,12 +239,10 @@ class Controlador_Aspirante extends Controlador_Base
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
                 }
 
-                $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];
+                $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];                
                 $arrprovincia = $_SESSION['mfo_datos']['arrprovincia'];
 
-                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'mostrar'=>$mostrar,'id_oferta'=>$id_oferta,'vista'=>$vista)); 
-
-                
+                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'mostrar'=>$mostrar,'id_oferta'=>$id_oferta,'vista'=>$vista));         
 
                 $tags = array(
                     'arrarea'       => $arrarea,
@@ -322,7 +319,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,false);
                 }
 
-                $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();
+                $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();                
 
                 $arrprovincia = $nacionalidades = array();
                 foreach ($aspirantes as $key => $value) {
@@ -330,11 +327,10 @@ class Controlador_Aspirante extends Controlador_Base
                      $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
                    }
                    $arrprovincia[$value['id_provincia']] = $value['ubicacion'];
-                }
-                
-                $_SESSION['mfo_datos']['nacionalidades'] = $nacionalidades;
-                $_SESSION['mfo_datos']['arrprovincia'] = $arrprovincia;
+                }                            
 
+                $_SESSION['mfo_datos']['nacionalidades'] = $nacionalidades;
+                $_SESSION['mfo_datos']['arrprovincia'] = $arrprovincia;                
 
                 $tags = array(
                     'arrarea'       => $arrarea,
