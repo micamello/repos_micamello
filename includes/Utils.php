@@ -47,8 +47,7 @@ class Utils{
     $result = preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email);
     return $result;
   }
-  public static function envioCorreo($to, $subject, $body){
-    self::log($to.$subject.$body);
+  public static function envioCorreo($to, $subject, $body){    
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
