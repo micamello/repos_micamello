@@ -359,7 +359,20 @@ if (typeof jQuery === 'undefined') {
   }
 
   Carousel.prototype.getItemForDirection = function (direction, active) {
-    var delta = direction == 'prev' ? -1 : 6
+    var resolution = 6;
+    if(getBrowserSize().width > 993){
+      resolution = 6;
+    }
+    if(getBrowserSize().width < 993 && getBrowserSize().width>776){
+      resolution = 2;
+    }
+    if(getBrowserSize().width < 777){
+      resolution = 1;
+    }
+    // 993
+    // 766
+
+    var delta = direction == 'prev' ? -1 : resolution
     var activeIndex = this.getItemIndex(active)
     var itemIndex = (activeIndex + delta) % this.$items.length
     return this.$items.eq(itemIndex)

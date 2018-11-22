@@ -62,7 +62,7 @@
 @media (min-width: 1281px) {
   
   .img-responsive{
-    max-width: 100px;
+    /*max-width: 100px;*/
   }
 
   .info_text_jobs
@@ -87,7 +87,7 @@
     }
   
   .img-responsive{
-    max-width: 50%;
+    /*max-width: 50%;*/
   }
 
   .info_text_jobs
@@ -112,7 +112,7 @@
     }
   
   .img-responsive{
-    max-width: 50%;
+    /*max-width: 50%;*/
   }
 
   .info_text_jobs
@@ -120,7 +120,7 @@
       font-size: 20px;
     }
     .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-      margin-left: 105px;
+      margin-left: 20px;
     }
 
     .content_email
@@ -137,7 +137,7 @@
 @media (min-width: 768px) and (max-width: 1024px) {
   
   .img-responsive{
-    max-width: 80%;
+    /*max-width: 80%;*/
   }
 
   .info_text_jobs
@@ -145,7 +145,7 @@
       font-size: 11px;
     }
     .navbar>.container .navbar-brand, .navbar>.container-fluid .navbar-brand {
-      margin-left: 105px;
+      margin-left: 20px;
     }
 
     .giga
@@ -196,7 +196,7 @@
 @media (min-width: 481px) and (max-width: 767px) {
 
   .img-responsive{
-    max-width: 25%;
+    /*max-width: 25%;*/
   }
 
   .info_text_jobs
@@ -337,7 +337,7 @@
   }
 
   .img-responsive{
-    max-width: 25%;
+    /*max-width: 25%;*/
   }
 
   .info_text_jobs
@@ -603,7 +603,7 @@
 
 @media screen and (max-width: 436px) {
   .img-responsive{
-    max-width: 50%;
+    /*max-width: 50%;*/
   }
 
   .perfil_photo_user{

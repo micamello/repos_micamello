@@ -12,12 +12,12 @@ $(document).ready(function(){
 	$("#button_register").addClass('disabled');
 })
 
-document.querySelector( "form" )
-.addEventListener( "invalid", function( event ) {
-    event.preventDefault();
-}, true );
-
-
+if(document.getElementById("#form_register")){
+	document.querySelector("#form_register")
+	.addEventListener( "invalid", function( event ) {
+	    event.preventDefault();
+	}, true );
+}
 
 if(document.getElementById('name_user')){
 	var reg = "";
@@ -259,12 +259,20 @@ if(document.getElementById('dni')){
 			if (typeof window['validar_'+host] === 'function') {
 			    window['validar_'+host](this);
 			    if(host == "EC"){
-			    	if(((this.value.length)) < 13){
-			    		mensaje = "Para ingresar el RUC son 13 números";
-						colocaError(dni_error, dni_group, mensaje, button_register);
+			    	if(((this.value.length)) == 13){
+			    		if(existeDni(this.value) == 1){
+							quitarError(dni_error, dni_group);
+							enableBTN();
+						}
+						else
+						{
+							mensaje = "El numero de cédula o pasaporte o ruc ya existe";
+							colocaError(dni_error, dni_group, mensaje, button_register);
+						}
 			    	}
 			    	else{
-			    		enableBTN();
+			    		mensaje = "Para ingresar el RUC son 13 números";
+						colocaError(dni_error, dni_group, mensaje, button_register);
 			    	}
 			    }
 			}

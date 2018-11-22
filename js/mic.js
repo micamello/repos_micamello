@@ -13,7 +13,7 @@ if(document.getElementById('form_login')){
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
 
-    $(this).find('form')[0].reset();
+    $(this).find('#form_register')[0].reset();
     var error_msg = document.getElementsByClassName('with-errors');
     var error_input = document.getElementsByClassName('has-error');
 

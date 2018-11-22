@@ -143,7 +143,7 @@
                 <div class="container">
                     <div class="row"> 
                         <div class="col-md-12">
-                            <img src="<?php echo PUERTO.'://'.HOST;?>/imagenes/logo_tti_blanco.png">
+                            <img class="img-responsive" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/logo_tti_blanco.png">
                         </div>
                         <div class="col-md-12">
                             <div class="tti_concept">
