@@ -61,9 +61,9 @@
         </div>    
         <div class="row">                    
           <div class="col-md-4 col-xs-12 pull-right">
-            <?php if ($nrotestusuario < $nrototaltest){?>  
+            <?php if ($nrotestusuario < $nrototaltest){ ?>  
               <?php if ($enlaceboton == "planes"){ 
-                $_SESSION['mostrar_error'] = "Si desea continuar con el siguiente formulario es necesario contratar un plan";
+                $_SESSION['mostrar_error'] = "Para realizar el siguiente formulario es necesario contratar un plan";
               }
               ?>            
               <a href="<?php echo PUERTO;?>://<?php echo HOST;?>/<?php echo $enlaceboton;?>/" class="btn btn-success btn-block">SIGUIENTE CUESTIONARIO</a>

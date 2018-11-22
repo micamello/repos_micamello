@@ -42,7 +42,7 @@ if (!empty($arrcandidato)){
 			  $resultado = Modelo_UsuarioxPlan::publicacionesRestantes($usuarioplan["id_usuario"]);
 				if($resultado['p_restantes'] == 0){
 	        $mensaje = "Estimado ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>De su plan contratado el ".$usuarioplan["fecha_compra"]." se han agotado las autopostulaciones.<br>De querer seguir haciendo uso de este servicio debe activar un nuevo plan.";	        
-	        $result = enviarNotificaciones($usuarioplan["id_usuario"],$usuarioplan["fecha_compra"],$mensaje);					
+	        $result = enviarNotificaciones($usuarioplan["id_usuario"],$usuarioplan["fecha_compra"],$mensaje,Modelo_Usuario::CANDIDATO);					
 	        if (!$result){
 	        	throw new Exception("Error al enviar la notificacion"); 
 	        }
@@ -50,7 +50,7 @@ if (!empty($arrcandidato)){
 				}
 				else if($resultado['p_restantes'] <= AUTOPOSTULACION_MIN){				
           $mensaje = "Estimado ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>De su plan contratado el ".$usuarioplan["fecha_compra"]." le restan: ".$resultado['p_restantes']." autopostulaciones, pronto deber&aacute; activar un nuevo plan.";
-				  $result = enviarNotificaciones($usuarioplan["id_usuario"],$usuarioplan["fecha_compra"],$mensaje);					
+				  $result = enviarNotificaciones($usuarioplan["id_usuario"],$usuarioplan["fecha_compra"],$mensaje,Modelo_Usuario::CANDIDATO);					
 				  if (!$result){
 	        	throw new Exception("Error al enviar la notificacion"); 
 	        }
@@ -60,7 +60,7 @@ if (!empty($arrcandidato)){
 		}
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
-  	  echo "Error en registro ".$usuarioplan['id_usuario_plan']."<br>";
+  	  echo "Error en registro candidato ".$usuarioplan['id_usuario_plan']."<br>";
       Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());      
     }    
 	}
@@ -98,15 +98,15 @@ if (!empty($arrempresa)){
 		}
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
-  	  echo "Error en registro ".$usuarioplan["id_usuario_plan"]."<br>";
+  	  echo "Error en registro empresa ".$usuarioplan["id_usuario_plan"]."<br>";
       Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());      
     }    
 	}
 } 
 
-function enviarNotificaciones($idusu,$fchcompra,$mensaje){
-	if(!Modelo_Notificacion::existeNotificacion($idusu,Modelo_Notificacion::WEB,$fchcompra)){		
-		if (!Modelo_Notificacion::insertarNotificacion($idusu,$mensaje,Modelo_Notificacion::WEB)){
+function enviarNotificaciones($idusu,$fchcompra,$mensaje,$tipousu){
+	if(!Modelo_Notificacion::existeNotificacion($idusu,Modelo_Notificacion::WEB,$fchcompra)){				
+		if (!Modelo_Notificacion::insertarNotificacion($idusu,$mensaje,$tipousu,'',Modelo_Notificacion::WEB)){
 			return false;
 		}
 	}  

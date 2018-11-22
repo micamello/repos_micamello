@@ -43,7 +43,7 @@
                                                         <?php if($value['fecha_caducidad'] != '-'){
                                                         echo date("d-m-Y", strtotime($value['fecha_caducidad'])); 
                                                         }else{ echo $value['fecha_caducidad']; } ?></td>
-                                                    <td style="text-align: center;" data-title="Autopostulaciones:"><?php echo $value['num_post_rest']; ?></td>
+                                                    <td style="text-align: center;" data-title="<?php echo ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) ? "Autopostulaciones:" : "Publicaciones:"; ?>"><?php echo $value['num_post_rest']; ?></td>
                                                     <?php if($value['costo'] == 0){ ?>
                                                         <td style="text-align: center;" data-title="M&eacute;todo" colspan="3">Plan Gratuito</td>
                                                     <?php }else{ 

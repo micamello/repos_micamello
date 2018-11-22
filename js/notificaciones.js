@@ -75,7 +75,8 @@ function desactivarNotificacion(id,url){
         url: enlace,
         dataType:'json',
         success:function(data){
-            window.location=$('#puerto_host').val()+'/'+url+'/';
+            //window.location=$('#puerto_host').val()+'/'+url+'/';
+            $("#notificaciones").modal('hide');        
         },
         error: function (request, status, error) {
             alert('Error intente de nuevo');
