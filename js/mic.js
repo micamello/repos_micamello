@@ -21,19 +21,6 @@ $('.modal').on('hidden.bs.modal', function(){
     $(this).find('form')[0].reset();
 });
 
-if (document.getElementById("area_select"))
-{
-  $("#area_select").selectr({
-      placeholder: 'Buscar...'
-  });
-}
-
-if (document.getElementById("nivel_interes"))
-{
-  $("#nivel_interes").selectr({
-      placeholder: 'Buscar...'
-  });
-}
 
 if(document.getElementById('form_login')){
   $("#form_login").validator();
@@ -122,13 +109,7 @@ function colocaError(campo, id, mensaje,btn){
     nodo.appendChild(elem2); 
 
     $("#"+id).addClass('has-error');
-
-    $("#"+btn).attr({
-        'disabled': 'disabled',
-    });
- 
     $("#"+btn).addClass('disabled');
-    $("#"+btn).attr('disabled', 'disabled');
 
     if(document.getElementById('form_paypal')){
       document.getElementById('form_paypal').action = '#';
@@ -137,8 +118,8 @@ function colocaError(campo, id, mensaje,btn){
 
 function quitarError(campo,id){
 
-    document.getElementById(campo).innerHTML = '';
-    $("#"+id).removeClass('has-error');
+  document.getElementById(campo).innerHTML = '';
+  $("#"+id).removeClass('has-error');
 }
 
 $(document).ready(function(){

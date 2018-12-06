@@ -45,7 +45,8 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 #imagenes del profile
 RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
 RewriteRule ^imagenes/usuarios/([a-z]+)/([a-z0-9]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=$1&param1=$2&param2=$3 [L]
-RewriteRule ^hojasDeVida/([a-z0-9]+).([a-z]+)$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
 #login
 RewriteRule ^login/?$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
 
@@ -130,8 +131,16 @@ RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [
 #########################################################################################
 
 #Cuentas
-RewriteRule ^adminEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresas [L]
-RewriteRule ^adminEmpresas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresas&page=$1 [L]
+RewriteRule ^adminEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa [L]
+RewriteRule ^adminEmpresas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&page=$1 [L]
+
+RewriteRule ^eliminarPlanEmpresa/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=eliminar&idPlanEmpresa=$1 [L]
+
+RewriteRule ^asignarPlanEmpresa/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearPlan&idSubEmpresa=$1 [L]
+
+RewriteRule ^editarPlanEmpresa/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=editarPlan&idPlanEmpresa=$1 [L]
+
+RewriteRule ^crearEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearEmpresas [L]
 RewriteRule ^cuentas/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas [L]
 RewriteRule ^cuentas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas&page=$1 [L]
 

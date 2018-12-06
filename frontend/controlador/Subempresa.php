@@ -17,358 +17,123 @@ class Controlador_Subempresa extends Controlador_Base
 
         /*if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
-        }*/
+        }
 
         //Valida los permisos 
-        /*if(isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos')){
+        if(isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'adminEmpresas')){
            $this->redirectToController('vacantes');
         }*/
 
-        $mostrar = Utils::getParam('mostrar', '', $this->data);
+        $mostrar = Utils::getParam('mostrar', '', $this->data); 
         $opcion = Utils::getParam('opcion', '', $this->data);
         $page = Utils::getParam('page', '1', $this->data);
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-        $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false);
-        
-        /*$id_oferta = Utils::getParam('id_oferta', '', $this->data); 
-        $type = Utils::getParam('type', '', $this->data); 
-        $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-        $vista = Utils::getParam('vista', '1', $this->data);
-        Utils::log("EDER:".$vista);
-        $username = Utils::getParam('username', '', $this->data);
+        $idPlanEmpresa = Utils::getParam('idPlanEmpresa', '', $this->data);
         $breadcrumbs = array();
 
         switch ($opcion) {
-            case 'filtrar':                
-                $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
-                $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
-                $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
-                $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta);
-                $array_empresas = array();
-
-                unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista']);
-
-                $cadena = '';
-                $array_datos = $aspirantesFiltrados = array();
-               
-                foreach ($this->data as $param => $value) {
-                    
-                    $letra = substr($value,0,1);
-                    $id = substr($value,1);
-                    $cadena .= '/'.$value;
-
-                    if($letra == 'F' && $type == 1){
-                        
-                        if(isset(FECHA_POSTULADO[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['F'] = $id;
-                            $array_datos['F'] = array('id'=>$id,'nombre'=>FECHA_POSTULADO[$id]);
-                        }
-                    }
-                    else if($letra == 'A' && $type == 1){
-                          
-                        if(isset($arrarea[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['A'] = $id;
-                            $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id]);
-                        }
-                    }
-                    else if($letra == 'P' && $type == 1){
-                        
-                        if(isset(PRIORIDAD[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] = $id;
-                            $array_datos['P'] = array('id'=>$id,'nombre'=>PRIORIDAD[$id]);
-                        }
-                    }
-                    else if($letra == 'G' && $type == 1){
-                        
-                        $g = array_search($id,VALOR_GENERO); 
-                        if($g != false){
-
-                            if(isset(GENERO[$g])){
-                                $_SESSION['mfo_datos']['Filtrar_aspirantes']['G'] = $id;
-                                $array_datos['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
-                            }
-                        }
-                    }
-                    else if($letra == 'U' && $type == 1){
-                        
-                        if(isset($arrprovincia[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['U'] = $id;
-                            $array_datos['U'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
-                        }
-
-                    }else if($letra == 'S' && $type == 1){
-                        
-                        if(isset(SALARIO[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['S'] = $id;
-                            $array_datos['S'] = array('id'=>$id,'nombre'=>SALARIO[$id]);
-                        }
-
-                    }else if($letra == 'N' && $type == 1){
-                        
-                        if(isset($nacionalidades[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['N'] = $id;
-                        $array_datos['N'] = array('id'=>$id,'nombre'=>$nacionalidades[$id]);
-                        }
-
-                    }
-                    else if($letra == 'E' && $type == 1){
-                        
-                        if(isset($escolaridad[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes']['E'] = $id;
-                            $array_datos['E'] = array('id'=>$id,'nombre'=>$escolaridad[$id]);
-                        }
-
-                    }else if($letra == 'D' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['D'] = $id;
-                        $array_datos['D'] = array('id'=>$id,'nombre'=>$id);
-
-                    }else if($letra == 'L' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['L'] = $id;
-                        $array_datos['L'] = array('id'=>$id,'nombre'=>$id);
-
-                    }else if($letra == 'T' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['T'] = $id;
-                        $array_datos['T'] = array('id'=>$id,'nombre'=>$id);
-
-                    }else if($letra == 'V' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['V'] = $id;
-                        $array_datos['V'] = array('id'=>$id,'nombre'=>$id);
-
-                    }else if($letra == 'Q' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['Q'] = $id;
-                        $array_datos['Q'] = array('id'=>$id,'nombre'=>$id);
-                    }
-                    else if($letra == 'O' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes']['O'] = $id; 
-
-                    }else if($type == 2){
-
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = 0;
-                    }
-                }
-
-                foreach ($_SESSION['mfo_datos']['Filtrar_aspirantes'] as $letra => $value) {
-
-                    if($value !=0 || $value != ''){
-
-                        if($letra == 'F'){
-                            if(isset(FECHA_POSTULADO[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>FECHA_POSTULADO[$value]);
-                            }
-                        }
-
-                        if($letra == 'A'){
-                            if(isset($arrarea[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
-                            }
-                        }
-
-                        if($letra == 'P'){
-                            if(isset(PRIORIDAD[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>PRIORIDAD[$value]);
-                            }
-                        }
-                        if($letra == 'G'){
-                            $g = array_search($value,VALOR_GENERO); 
-                            if($g != false){
-                                $array_datos['G'] = array('id'=>$value,'nombre'=>GENERO[$g]);
-                            }
-
-                        }
-                        if($letra == 'U'){
-                            if(isset($arrprovincia[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
-                            }
-                        }
-                        if($letra == 'S'){
-                            if(isset(SALARIO[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>SALARIO[$value]);
-                            }
-                        }
-                        if($letra == 'D'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                        }
-                        if($letra == 'L'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                        }
-                        if($letra == 'T'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                        }
-                        if($letra == 'V'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                        }
-                        if($letra == 'N'){
-                            if(isset($nacionalidades[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$nacionalidades[$value]);
-                            }
-                        }
-                        if($letra == 'E'){
-                            if(isset($escolaridad[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$escolaridad[$value]);
-                            }
-                        }
-                        if($letra == 'O'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                        }
-                        if($letra == 'Q'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                        }
-                    }
-                }
-
-                if($vista == 1){
-
-                    $subempresas = $_SESSION['mfo_datos']['subempresas'];
-                    $array_empresas = explode(",",$subempresas);
-
-                    if(isset($datosOfertas[0]['id_empresa']) && in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
-                        $breadcrumbs['cuentas'] = 'Ver Ofertas';
-                    }else{
-                        $breadcrumbs['vacantes'] = 'Ver Ofertas';
-                    }
-                    $breadcrumbs['aspirante'] = 'Ver Aspirantes';
-
-                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
-                }else{
-
-                    $breadcrumbs['vacantes'] = 'Ver Ofertas';
-                    $breadcrumbs['aspirante'] = 'Ver Aspirantes';
-
-                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
-                }
-
-                $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];
-                $arrprovincia = $_SESSION['mfo_datos']['arrprovincia'];
-
-                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'mostrar'=>$mostrar,'id_oferta'=>$id_oferta,'vista'=>$vista)); 
-
+            case 'buscaRecursos':
+                $resultado = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
+                Vista::renderJSON($resultado);
+            break;
+            case 'eliminar': 
+                self::eliminarPlan($idPlanEmpresa);
+                self::vistaPrincipal($idUsuario,$page);
+            break;
+            case 'crearPlan': 
                 
+                //Permite crear un nuevo plan a la empresa seleccionada 
+                $idSubEmpresa = Utils::getParam('idSubEmpresa', '', $this->data);
+                $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,$idSubEmpresa);
+                $planesActivos = Modelo_UsuarioxPlan::planesConCuentas($idUsuario,$subempresas[0]['ids_Planes']);
+
+                $breadcrumbs['adminEmpresas'] = "Administrar Cuentas";
+                $breadcrumbs['asinarRecursos'] = "Asignar Recursos";  
+
+                if (Utils::getParam('asignarRecursos') == 1) {
+
+                    self::asignarRecursos($idSubEmpresa,'asignar');
+                    Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/');
+                }              
 
                 $tags = array(
-                    'arrarea'       => $arrarea,
-                    'breadcrumbs'=>$breadcrumbs,
-                    'aspirantes'       => $aspirantesFiltrados,
-                    'arrprovincia'=>$arrprovincia,
-                    'nacionalidades'=>$nacionalidades,
-                    'escolaridad'=>$escolaridad,
-                    'link'=>$link,
-                    'page' =>$page,
-                    'mostrar'=>$mostrar,
-                    'vista'=>$vista,
-                    'array_empresas'=>$array_empresas,
-                    'datosOfertas'=>$datosOfertas,
-                    'id_oferta'=>$id_oferta
+                    'nombreEmp'=>$subempresas[0]['nombres'],
+                    'planesActivos'=>$planesActivos,
+                    'idSubEmpresa'=>$idSubEmpresa,
+                    'breadcrumbs'=>$breadcrumbs
                 );
-         
-                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/'.$type.$cadena;
-
-                if($vista == 1){
-                    $pagination = new Pagination(Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
-                }else{
-                    $pagination = new Pagination(Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
-                }
-                $pagination->setPage($page);
-                $tags['paginas'] = $pagination->showPage();
-                $tags["template_js"][] = "aspirantes";
+                $tags["template_js"][] = "subempresas";
+                Vista::render('asignarRecursos', $tags);
                 
-                Vista::render('aspirantes', $tags);
-               
             break;
+            case 'editarPlan': 
+                
+                //Permite editar un plan a la empresa seleccionada 
+                $breadcrumbs['adminEmpresas'] = "Administrar Cuentas";
+                $breadcrumbs['asinarRecursos'] = "Editar Plan";       
 
-            case 'detallePerfil':
-            if (Modelo_Usuario::EMPRESA) {
-                $this->perfilAspirante($username, $id_oferta, $vista);
-            }
+                $idSubEmpresa = Utils::getParam('idSubEmpresa', '', $this->data);
+                if (Utils::getParam('editarPlan') == 1) {
+                    self::asignarRecursos($idPlanEmpresa,'editar');
+                    Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/');
+                }
+
+                $planHijo = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
+                $planPadre = array();
+                if(!empty($planHijo)){
+                    $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($planHijo['id_empresa_plan_parent']);
+                }         
+
+                $tags = array(
+                    'breadcrumbs'=>$breadcrumbs,
+                    'planHijo'=>$planHijo,
+                    'planPadre'=>$planPadre,
+                    'idPlanEmpresa'=>$idPlanEmpresa
+                );
+
+                $tags["template_js"][] = "subempresas";
+                Vista::render('editarPlan', $tags);
+                
             break;
+            case 'crearEmpresas': 
+                
+                //Permite crear una nueva cuenta hija 
+                //buscar los planes activos y con recursos para asignar
+                $breadcrumbs['adminEmpresas'] = "Administrar Cuentas";
+                $breadcrumbs['crearEmpresas'] = "Crear Cuenta";
 
+                if (Utils::getParam('form_crear_input') == 1) {
+                    self::crearEmpresa($idUsuario);
+                    Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/');
+                }
+
+                $planesActivos = Modelo_UsuarioxPlan::planesConCuentas($idUsuario,false);
+ 
+                $tags = array(
+                    'planesActivos'=>$planesActivos,
+                    'breadcrumbs'=>$breadcrumbs
+                );
+
+                $tags["template_js"][] = "subempresas";
+                Vista::render('crearEmpresas', $tags);
+                
+            break;
             default:
-                
-                $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-                $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
-                $array_empresas = array();
-
-                //solo empresa 
-                if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
-                  Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
-                }
-                
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0);
-                $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
-                $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-
-                $subempresas = $_SESSION['mfo_datos']['subempresas'];  
-                $array_empresas = explode(",",$subempresas);
-                if($vista == 1){
-
-                    if(isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
-                        $breadcrumbs['vacantes'] = 'Ver Ofertas';
-                    }else{
-                        $breadcrumbs['cuentas'] = 'Ver Ofertas subempresas';
-                    }
-                    $breadcrumbs['aspirante'] = 'Ver Aspirantes';
-
-                    $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,false);
-                }else{
-                    $id_oferta = 0;
-                    $breadcrumbs['aspirante'] = 'Buscar Aspirantes';
-                    $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,false);
-                }
-
-                $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();
-
-                $arrprovincia = $nacionalidades = array();
-                foreach ($aspirantes as $key => $value) {
-                   if (!empty($arranacionalidades[$value['id_pais']])){
-                     $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
-                   }
-                   $arrprovincia[$value['id_provincia']] = $value['ubicacion'];
-                }
-                
-                $_SESSION['mfo_datos']['nacionalidades'] = $nacionalidades;
-                $_SESSION['mfo_datos']['arrprovincia'] = $arrprovincia;
-
-
-                $tags = array(
-                    'arrarea'       => $arrarea,
-                    'breadcrumbs'=>$breadcrumbs,
-                    'arrprovincia'  => $arrprovincia,
-                    'nacionalidades'=>$nacionalidades,
-                    'escolaridad'=>$escolaridad,
-                    'aspirantes'       => $aspirantes,
-                    'page' => $page,
-                    'mostrar'=>$mostrar,
-                    'vista'=>$vista,
-                    'id_oferta'=>$id_oferta,
-                    'datosOfertas'=>$datosOfertas,
-                    'array_empresas'=>$array_empresas
-                );
-
-                $tags["template_js"][] = "aspirantes";
-
-                if($vista == 1){
-
-                    $url = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta;
-                    $pagination = new Pagination(Modelo_Usuario::obtenerAspirantes($id_oferta,$page,true),REGISTRO_PAGINA,$url);
-                }else{
-                    $url = PUERTO.'://'.HOST.'/verAspirantes/2/0';
-                    $pagination = new Pagination(Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,true),REGISTRO_PAGINA,$url);
-                }
-                $pagination->setPage($page);
-                $tags['paginas'] = $pagination->showPage();
-
-
-                Vista::render('aspirantes', $tags);
+                self::vistaPrincipal($idUsuario,$page);
             break;
-        }*/
-        $breadcrumbs['adminEmpresas'] = 'Listado de sub empresas';
-        $cantd_empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,true);
+        } 
+    }
+
+    public function vistaPrincipal($idUsuario,$page){
+
+        $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,false);
+        $cantd_empresas = count(Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,true));
+        $puedeCrearCuenta = Modelo_UsuarioxPlan::puedeCrearCuentas($idUsuario,$cantd_empresas);
+        $planesActivos = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::EMPRESA,$idUsuario);
+        $recursos = Modelo_UsuarioxPlan::tieneRecursos(false,$idUsuario);
+        $tieneRecursos = self::obtieneRecursos($recursos);
+ 
+        $breadcrumbs['adminEmpresas'] = 'Administrar Cuentas';
         $url = PUERTO.'://'.HOST.'/adminEmpresas';
         $pagination = new Pagination($cantd_empresas,REGISTRO_PAGINA,$url);
         $pagination->setPage($page);
@@ -377,10 +142,249 @@ class Controlador_Subempresa extends Controlador_Base
             'breadcrumbs'=>$breadcrumbs,
             'subempresas' => $subempresas,
             'cantd_empresas'=>$cantd_empresas,
+            'puedeCrearCuenta'=>$puedeCrearCuenta,
+            'planesActivos'=>$planesActivos,
+            'tieneRecursos'=>$tieneRecursos,
             'paginas'=>$pagination->showPage()
         );      
         
         Vista::render('subempresas', $tags);
+    }
+
+    public function obtieneRecursos($tieneRecursos){
+
+        $num_post = $num_desc = array();
+        $valor_post = $valor_desc = 0;
+        $hay_neg_post = $hay_neg_desc = 0;
+        $valor_cuenta = 0;
+
+        foreach ($tieneRecursos as $key => $value) {
+
+            if($value['numero_postulaciones'] > 0){
+                $valor_post += $value['numero_postulaciones'];
+            }else if($value['numero_postulaciones'] == -1){
+                $hay_neg_post++;  
+            }
+
+            if($value['numero_descarga'] > 0){
+                $valor_desc += $value['numero_descarga'];
+            }else if($value['numero_descarga'] == -1){
+                $hay_neg_desc++; 
+            }
+
+            if($value['num_cuenta'] > 0){
+                $valor_cuenta += $value['num_cuenta'];
+            }
+        }
+
+        if($valor_post > 0){
+            array_push($num_post, $valor_post);
+        }
+
+        if($hay_neg_post > 0){
+            array_push($num_post, 'Ilimitado');
+        }
+
+        if($valor_desc > 0){
+            array_push($num_desc, $valor_desc);
+        }
+
+        if($hay_neg_desc > 0){
+            array_push($num_desc, 'Ilimitado');
+        }
+
+        $recursos['publicaciones'] = implode("/",$num_post);
+        $recursos['descargas'] = implode("/",$num_desc);
+        $recursos['cuentas'] = $valor_cuenta;
+
+        return $recursos;
+    }
+
+    public function eliminarPlan($idPlanEmpresa){
+
+        try{
+
+            $GLOBALS['db']->beginTrans();
+
+            $cancelacion = new Proceso_Cancelacion(null,null,'paypal');
+            
+            //si la empresa tiene asociadas cuentas hijas
+            $planes_hijos = Modelo_UsuarioxPlan::obtienePlanesHijos($idPlanEmpresa);
+
+            if (!empty($planes_hijos) && count($planes_hijos) > 0){
+              foreach($planes_hijos as $planhijo){
+
+                //reverso de ofertas y postulaciones de candidatos
+                $cancelacion->reversoOfertas(false,$planhijo["id_empresa_plan"]);
+                //consulta si el usuario tiene mas planes activos y pagados
+                $planpago = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::EMPRESA,$planes_hijos['id_empresa']);
+                //inactivar el usuario
+                if (empty($planpago)){
+
+                    $datosHijos = explode(",",$planpago['id_empresa_plan']);
+                    foreach ($datosHijos as $key => $value) {
+
+                        if (!Modelo_UsuarioxPlan::desactivarPlan($value,Modelo_Usuario::EMPRESA)){
+                          throw new Exception("Error al eliminar el plan");
+                        }
+
+                        $recursosHijo = Modelo_UsuarioxPlan::consultarRecursosAretornar($value);
+                        if (!Modelo_UsuarioxPlan::devolverRecursos($recursosHijo)){
+                          throw new Exception("Error al devolver datos a la empresa hija");
+                        } 
+                    }   
+                }
+              }          
+            }
+
+            $cancelacion->reversoOfertas(false,$idPlanEmpresa);
+
+            if (!Modelo_UsuarioxPlan::desactivarPlan($idPlanEmpresa,Modelo_Usuario::EMPRESA)){
+              throw new Exception("Error al desactivar el plan");
+            }
+
+            $recursos = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
+            if (!Modelo_UsuarioxPlan::devolverRecursos($recursos)){
+              throw new Exception("Error al devolver datos a la empresa padre");
+            }   
+
+            $GLOBALS['db']->commit();
+            $_SESSION['mostrar_exito'] = 'Se ha eliminado el plan de la empresa satisfactoriamente';
+        }
+        catch(Exception $e){
+          $GLOBALS['db']->rollback();
+          $_SESSION['mostrar_error'] = 'No se pudo eliminar el plan de la empresa intente de nuevo';  
+        }
+    }
+
+    public function crearEmpresa($idUsuario){
+
+        try{
+
+            $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'ruc'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0,"postNum"=>1,"num_post"=>1,"descNum"=>1, "num_desc"=>1, "plan"=>1);  
+
+            $data = $this->camposRequeridos($campos);
+
+            $campo_fecha = date("Y-m-d H:i:s");  
+            $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year")); 
+            $default_city = 1;     
+
+            $username = str_replace(" ", "",strtolower($data['name_user']));
+            $username = Utils::generarUsername(strtolower($username));
+            $password = Utils::generarPassword();
+
+            $usuario_login = array("tipo_usuario"=>Modelo_Usuario::EMPRESA, "username"=>$username, "password"=>$password, "correo"=>$data['correo'], "dni"=>$data['dni']);
+
+            $GLOBALS['db']->beginTrans();
+
+            if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
+                throw new Exception("Ha ocurrido un error no se pudo crear el usuario, intente nuevamente");
+            }
+
+            $id_usuario_login = $GLOBALS['db']->insert_id();
+
+            $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, 'term_cond'=>1, 'conf_datos'=>1, 'id_ciudad'=>$default_city, 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>Modelo_Usuario::EMPRESA, 'estado'=>1, 'padre'=>$idUsuario);
+
+            if(!Modelo_Usuario::crearUsuario($dato_registro)){
+                throw new Exception("Ha ocurrido un error al crear la empresa, intente nuevamente");
+            }
+
+            $id_empresa = $GLOBALS['db']->insert_id();
+
+            $dato_contacto = array('nombre_contact'=>$data['nombre_contact'], 'apellido_contact'=>$data['apellido_contact'], 'tel_one_contact'=>$data['tel_one_contact'], 'tel_two_contact'=>$data['tel_two_contact']);
+
+            if(!Modelo_ContactoEmpresa::crearContactoEmpresa($dato_contacto, $id_empresa)){
+                throw new Exception("Ha ocurrido un error al crear empresa, intente nuevamente");
+            }
+
+            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($data['plan']);
+
+            if(isset($data["postNum"]) && $data["postNum"] == -1){
+                $var1 = -1;
+            }else{
+                $var1 = $data["num_post"];
+                $numPublicaciones = $planPadre['num_publicaciones_rest']-$var1;
+            }
+
+            if(isset($data["descNum"]) && $data["descNum"] == -1){
+                $var2 = -1;
+            }else{
+                $var2 = $data["num_desc"];
+                $numDescargas = $planPadre['num_descarga_rest']-$var2;
+            }
+
+            if($var1 != -1 && $var2 != -1){
+
+                if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($data['plan'],$numPublicaciones,$numDescargas)){
+                    throw new Exception("Error al actualizar los recursos de la empresa."); 
+                }
+            }
+
+            if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$data['plan'])){
+              throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
+            }
+
+            if (!Modelo_UsuarioxPlan::devolverRecursos($planPadre)){
+              throw new Exception("Error al devolver datos a la empresa hija");
+            }
+
+            $GLOBALS['db']->commit();
+            $_SESSION['mostrar_exito'] = "La cuenta fue creada exitosamente.";
+
+        }catch( Exception $e ){
+            $GLOBALS['db']->rollback();
+            $_SESSION['mostrar_error'] = $e->getMessage();  
+        }
+    }
+
+    public function asignarRecursos($id_empresa,$tipoVista){
+
+        try{
+
+            $campos = array("num_post"=>1,"num_desc"=>1, "plan"=>1); 
+
+            $data = $this->camposRequeridos($campos);
+
+            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($data['plan']);
+            if($data["num_post"] == -1){
+                $var1 = -1;
+            }else{
+                $var1 = $data["num_post"];
+                $numPublicaciones = $planPadre['num_publicaciones_rest'] - $var1;
+            }
+
+            if($data["num_desc"] == -1){
+                $var2 = -1;
+            }else{
+                $var2 = $data["num_desc"];
+                $numDescargas = $planPadre['num_descarga_rest'] - $var2;
+            }
+
+            if($var1 != -1 && $var2 != -1){
+
+                if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($data['plan'],$numPublicaciones,$numDescargas)){
+                    throw new Exception("Error al actualizar los recursos de la empresa."); 
+                }
+            }
+
+            if($tipoVista == 'asignar'){
+                if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$data['plan'])){
+                  throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
+                }
+            }else{
+                if (!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($id_empresa,$var1,$var2))
+                {
+                  throw new Exception("Error al actualizar los recursos de la empresa hija.");   
+                }
+            }
+
+            $GLOBALS['db']->commit();
+            $_SESSION['mostrar_exito'] = "Los cambios se procesaron exitosamente.";
+
+        }catch( Exception $e ){
+            $GLOBALS['db']->rollback();
+            $_SESSION['mostrar_error'] = $e->getMessage();  
+        }
     }
 }
 ?>

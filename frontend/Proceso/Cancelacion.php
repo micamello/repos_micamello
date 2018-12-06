@@ -100,7 +100,7 @@ class Proceso_Cancelacion{
     $this->reversoComprobantePlan($id_comprobante,$id_usuario_plan);
   }
   
-  public function reversoOfertas($id_comprobante,$id_usuario_plan){
+  public function reversoOfertas($id_comprobante=false,$id_usuario_plan){
     $ofertas = Modelo_Oferta::ofertasxUsuarioPlan($id_usuario_plan);
     if (!empty($ofertas)){
       foreach($ofertas as $oferta){
@@ -135,7 +135,9 @@ class Proceso_Cancelacion{
         }     
       }   
     }
-    $this->reversoComprobantePlan($id_comprobante,$id_usuario_plan);    
+    if (!empty($id_comprobante)){
+      $this->reversoComprobantePlan($id_comprobante,$id_usuario_plan);    
+    }
   }
 
   public function reversoComprobantePlan($id_comprobante,$id_usuario_plan){

@@ -322,11 +322,19 @@ class Utils{
     return date('Y-m-d H:i:s',$dias_antes);
   }
 
-  public static function generarUsername($email){
-    $generado = self::generateRandomString();
-    $emailextract = substr($email, 0, strpos($email, '@'));
-    $username = $emailextract.$generado;
-    return strtolower($username);
+  public static function generarUsername($name){
+    $count = 0;
+    $username = ($name);
+    $username_generated = $username;
+      do{
+        if($count != 0){
+          $username_generated = $username.$count;
+        }
+        $count++;
+        Utils::log("-----".$username_generated);
+      }
+    while(!empty(Modelo_Usuario::existeUsuario($username_generated)));
+    return $username_generated;
   }
 
   public static function generateRandomString() {

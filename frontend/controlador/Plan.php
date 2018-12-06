@@ -143,7 +143,7 @@ class Controlador_Plan extends Controlador_Base {
         $tags["plan"] = $infoplan;
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
  
-        $tags["template_js"][] = "validator";
+        $tags["template_js"][] = "ruc_jquery_validator";
         $tags["template_js"][] = "mic";
         $tags["template_js"][] = "metodospago";              
         Vista::render('metodos_pago', $tags);      

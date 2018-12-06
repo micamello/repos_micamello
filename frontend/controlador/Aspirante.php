@@ -1,5 +1,4 @@
 <?php
-<?php
 class Controlador_Aspirante extends Controlador_Base
 {
 
@@ -32,9 +31,11 @@ class Controlador_Aspirante extends Controlador_Base
         $type = Utils::getParam('type', '', $this->data); 
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $vista = Utils::getParam('vista', '1', $this->data);
-        Utils::log("EDER:".$vista);
+
+        //Utils::log("EDER:".$vista);
         $username = Utils::getParam('username', '', $this->data);
         $breadcrumbs = array();
+        $array_empresas = array();
 
         switch ($opcion) {
             case 'filtrar':                
@@ -43,7 +44,6 @@ class Controlador_Aspirante extends Controlador_Base
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta);
-                $array_empresas = array();
 
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista']);
 
@@ -140,7 +140,7 @@ class Controlador_Aspirante extends Controlador_Base
                     }else if($letra == 'Q' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes']['Q'] = $id;
-                        $array_datos['Q'] = array('id'=>$id,'nombre'=>$id);
+                        $array_datos['Q'] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
                     }
                     else if($letra == 'O' && $type == 1){
                         
@@ -216,15 +216,17 @@ class Controlador_Aspirante extends Controlador_Base
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                         }
                         if($letra == 'Q'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>htmlentities($value,ENT_QUOTES,'UTF-8'));
                         }
                     }
                 }
 
                 if($vista == 1){
 
-                    $subempresas = $_SESSION['mfo_datos']['subempresas'];
-                    $array_empresas = explode(",",$subempresas);
+                    if(isset($_SESSION['mfo_datos']['subempresas'])){
+                        $subempresas = $_SESSION['mfo_datos']['subempresas'];  
+                        $array_empresas = explode(",",$subempresas);
+                    }
 
                     if(isset($datosOfertas[0]['id_empresa']) && in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
                         $breadcrumbs['cuentas'] = 'Ver Ofertas';
@@ -234,20 +236,25 @@ class Controlador_Aspirante extends Controlador_Base
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
+
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true);
+
                 }else{
 
                     $breadcrumbs['vacantes'] = 'Ver Ofertas';
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,false);
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true);
                 }
+
+                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario);
+                $descargas = Modelo_Descarga::cantidadDescarga($idUsuario);
 
                 $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];
                 $arrprovincia = $_SESSION['mfo_datos']['arrprovincia'];
 
                 $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'mostrar'=>$mostrar,'id_oferta'=>$id_oferta,'vista'=>$vista)); 
-
-                
 
                 $tags = array(
                     'arrarea'       => $arrarea,
@@ -262,16 +269,14 @@ class Controlador_Aspirante extends Controlador_Base
                     'vista'=>$vista,
                     'array_empresas'=>$array_empresas,
                     'datosOfertas'=>$datosOfertas,
-                    'id_oferta'=>$id_oferta
+                    'id_oferta'=>$id_oferta,
+                    'posibilidades'=>$posibilidades,
+                    'descargas'=>$descargas
                 );
          
                 $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/'.$type.$cadena;
 
-                if($vista == 1){
-                    $pagination = new Pagination(Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
-                }else{
-                    $pagination = new Pagination(Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,true),REGISTRO_PAGINA,$url);
-                }
+                $pagination = new Pagination(count($cantd_aspirantes),REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
                 $tags["template_js"][] = "aspirantes";
@@ -290,7 +295,6 @@ class Controlador_Aspirante extends Controlador_Base
                 
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
-                $array_empresas = array();
 
                 //solo empresa 
                 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
@@ -301,8 +305,11 @@ class Controlador_Aspirante extends Controlador_Base
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
 
-                $subempresas = $_SESSION['mfo_datos']['subempresas'];  
-                $array_empresas = explode(",",$subempresas);
+                if(isset($_SESSION['mfo_datos']['subempresas'])){
+                    $subempresas = $_SESSION['mfo_datos']['subempresas'];  
+                    $array_empresas = explode(",",$subempresas);
+                }
+
                 if($vista == 1){
 
                     if(isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
@@ -313,16 +320,22 @@ class Controlador_Aspirante extends Controlador_Base
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
 
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,false);
+                    $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,true);
+                    $url = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta;
                 }else{
                     $id_oferta = 0;
                     $breadcrumbs['aspirante'] = 'Buscar Aspirantes';
                     $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,false);
+                    $paises = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,true);
+                    $url = PUERTO.'://'.HOST.'/verAspirantes/2/0';
                 }
-
+                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario);
+                $descargas = Modelo_Descarga::cantidadDescarga($idUsuario);
+                
                 $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();
 
                 $arrprovincia = $nacionalidades = array();
-                foreach ($aspirantes as $key => $value) {
+                foreach ($paises as $key => $value) {
                    if (!empty($arranacionalidades[$value['id_pais']])){
                      $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];
                    }
@@ -331,7 +344,6 @@ class Controlador_Aspirante extends Controlador_Base
                 
                 $_SESSION['mfo_datos']['nacionalidades'] = $nacionalidades;
                 $_SESSION['mfo_datos']['arrprovincia'] = $arrprovincia;
-
 
                 $tags = array(
                     'arrarea'       => $arrarea,
@@ -345,22 +357,15 @@ class Controlador_Aspirante extends Controlador_Base
                     'vista'=>$vista,
                     'id_oferta'=>$id_oferta,
                     'datosOfertas'=>$datosOfertas,
-                    'array_empresas'=>$array_empresas
+                    'array_empresas'=>$array_empresas,
+                    'posibilidades'=>$posibilidades,
+                    'descargas'=>$descargas
                 );
 
                 $tags["template_js"][] = "aspirantes";
-
-                if($vista == 1){
-
-                    $url = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta;
-                    $pagination = new Pagination(Modelo_Usuario::obtenerAspirantes($id_oferta,$page,true),REGISTRO_PAGINA,$url);
-                }else{
-                    $url = PUERTO.'://'.HOST.'/verAspirantes/2/0';
-                    $pagination = new Pagination(Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,true),REGISTRO_PAGINA,$url);
-                }
+                $pagination = new Pagination(count($paises),REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
-
 
                 Vista::render('aspirantes', $tags);
             break;

@@ -1,0 +1,307 @@
+span.multiselect-native-select{
+    position:relative
+}
+span.multiselect-native-select select{
+    border:0!important;
+    clip:rect(0 0 0 0)!important;
+    height:1px!important;
+    margin:-1px -1px -1px -3px!important;
+    overflow:hidden!important;
+    padding:0!important;
+    position:absolute!important;
+    width:1px!important;
+    left:50%;
+    top:30px
+}
+.multiselect-container{
+    /*position:absolute;*/
+    list-style-type:none;
+    margin:0;
+    padding:0;    width: 200%;
+}
+.multiselect-container .input-group{
+    margin:5px
+}
+.multiselect-container .multiselect-reset .input-group{
+    width:93%
+}
+.multiselect-container>li{
+    padding:0
+}
+.multiselect-container>li>a.multiselect-all label{
+    font-weight:700
+}
+.multiselect-container>li.multiselect-group label{
+    margin:0;
+    padding:3px 20px;
+    height:100%;
+    font-weight:700
+}
+.multiselect-container>li.multiselect-group-clickable label{
+    cursor:pointer
+}
+.multiselect-container>li>a{
+    padding:0
+}
+.multiselect-container>li>a>label{
+    margin:0;
+    /*height:100%;*/
+    cursor:pointer;
+    font-weight:400;
+    padding:3px 20px 3px 40px
+}
+.multiselect-container>li>a>label.checkbox,.multiselect-container>li>a>label.radio{
+    margin:0
+}
+.multiselect-container>li>a>label>input[type=checkbox]{
+    margin-bottom:5px
+}
+.btn-group>.btn-group:nth-child(2)>.multiselect.btn{
+    border-top-left-radius:4px;
+    border-bottom-left-radius:4px
+}
+.form-inline .multiselect-container label.checkbox,.form-inline .multiselect-container label.radio{
+    padding:3px 20px 3px 40px
+}
+.form-inline .multiselect-container li a label.checkbox input[type=checkbox],.form-inline .multiselect-container li a label.radio input[type=radio]{
+    margin-left:-20px;
+    margin-right:0
+}
+
+.scroll{  
+  overflow-y: scroll;
+}
+
+/*.scroll li:nth-child(2){
+  padding-top: 50px;
+}*/
+
+
+/*.fixedHeader-ul
+{
+overflow-x: scroll;
+}
+.fixedHeader-ul li
+{
+}
+.fixedHeader-ul li:first-child
+{
+position: fixed;
+background-color: white;
+z-index: 10;
+
+}
+*/
+
+.selectedItems{
+  background-color: #5CCB90;
+  border-radius: 15px;
+  margin: -1px 15px 3px 15px;
+  padding: 1px 5px 2px 5px;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.selectedItems:hover{
+  background-color: #FC7171;
+  color: white;
+}
+
+.selectedItems>a{
+    float: right;
+    /*padding-top: 0px;*/
+    color: white;
+    margin-top: -2px;
+    margin-right: -3px;
+}
+
+.selectedItems > a:first-child{
+  /*color: red;*/
+  font-size: 13px;
+  /*padding-top: -1px;*/
+}
+
+.no_display{
+  display: none;
+}
+
+/*.show_list:hover + div#seleccionados{
+  display: block;
+}*/
+
+.display_el{
+  display: block;
+}
+
+.numeros_opciones{
+  text-align: right;
+    clear: both;
+    float:right;
+    background-color: #6FA9FF;
+    border-radius: 50%;
+    padding: 1px 7px 1px 7px;
+}
+
+.show_list{
+  background-color: #AFDDE7;
+  display: block;
+  border-radius: 5px;
+    padding: 5px 10px 5px 10px;
+    /*text-overflow: ellipsis;*/
+  /*text-align: right;*/
+    /*clear: both;*/
+    /*float:left;*/
+    /*margin-right:15px;*/
+    padding-bottom: 12px;
+}
+
+/*#mostrar_listado2{
+    float: right;
+}*/
+
+.seleccionados{
+    background-color: #AFDDE7;
+    margin-top: -8px;
+    padding: 1px 10px 1px 10px;
+    /*position: absolute;*/
+    z-index: 3;
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+}
+
+.show_list>p{
+    color: white;
+    float: right;
+    margin-top: -2px;
+}
+
+.contenedor_sel{
+    position: relative;
+}
+
+.multiselect-filter{
+    list-style: none;
+}
+
+/*.active{
+    color: red;
+}*/
+
+.list-group-item.active, .list-group-item.active:focus, .list-group-item.active:hover {
+    text-shadow: 0 -1px 0 #C5ECD7;
+    background-image: -webkit-linear-gradient(top,#C5ECD7 0,#C5ECD7 100%);
+    background-image: -o-linear-gradient(top,#C5ECD7 0,#C5ECD7 100%);
+    background-image: -webkit-gradient(linear,left top,left bottom,from(#C5ECD7),to(#C5ECD7));
+    background-image: linear-gradient(to bottom,#C5ECD7 0,#C5ECD7 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#C5ECD7', endColorstr='#C5ECD7', GradientType=0);
+    background-repeat: repeat-x;
+    border-color: white;
+    border-radius: 3px;
+    color: white;
+}
+
+.flipswitch_select {
+  position: relative;
+  background: white;
+  width: 18px;
+  height: 15px;
+  -webkit-appearance: initial;
+  border-radius: 3px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
+  font-size: 14px;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  margin-left: -35px;
+}
+
+.flipswitch_select:after {
+  position: absolute;
+  top: 5%;
+  display: block;
+  line-height: 32px;
+  width: 45%;
+  height: 90%;
+  background: #fff;
+  box-sizing: border-box;
+  text-align: center;
+  transition: all 0.3s ease-in 0s;
+  color: black;
+  border: #888 1px solid;
+  border-radius: 3px;
+}
+
+.flipswitch_select:after {
+  left: 2%;
+  content: "";
+}
+
+.flipswitch_select:checked:after {
+  left: 53%;
+  content: "";
+  background-color: #AFDDE7;;
+}
+
+.flipswitch_check {
+  position: relative;
+  background: white;
+  width: 45px;
+  height: 23px;
+  -webkit-appearance: initial;
+  border-radius: 3px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  outline: none;
+  font-size: 14px;
+  font-family: Trebuchet, Arial, sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  margin-left: -35px;
+}
+
+.flipswitch_check:after {
+  position: absolute;
+  top: 5%;
+  display: block;
+  line-height: 32px;
+  width: 45%;
+  height: 90%;
+  background: #fff;
+  box-sizing: border-box;
+  text-align: center;
+  transition: all 0.3s ease-in 0s;
+  color: black;
+  border: #888 1px solid;
+  border-radius: 3px;
+}
+
+.flipswitch_check:after {
+  left: 2%;
+  content: "";
+}
+
+.flipswitch_check:checked:after {
+  left: 53%;
+  content: "";
+  background-color: #AFDDE7;;
+}
+
+label[class="checkbox"] {
+    padding-right: 20px;    
+    color: black;
+    font-weight: 501;
+    display: block;
+    /*text-align: right;*/
+}
+
+.list-group-item>a>label{
+  text-align: left;
+}
+
+.label_term_cond{
+  position: absolute;
+  padding: 7px 0px 0px 10px;
+}

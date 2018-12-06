@@ -125,10 +125,11 @@ class Controlador_Perfil extends Controlador_Base
 
                 );
 
-                $tags["template_js"][] = "selectr";
+                $tags["template_css"][] = "bootstrap-multiselect";
+                $tags["template_js"][] = "bootstrap-multiselect";
                 $tags["template_js"][] = "mic";
+                //$tags["template_js"][] = "publicar_oferta";
                 $tags["template_js"][] = "editarPerfil";
-                $tags["template_js"][] = "publicar_oferta";
                 $tags["show_banner"] = 1;
 
                 if(!empty($_SESSION['mostrar_error'])){
@@ -148,7 +149,7 @@ class Controlador_Perfil extends Controlador_Base
 
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
 
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'id_nacionalidad' => 1, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0);
             } else {
 
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
@@ -172,11 +173,38 @@ class Controlador_Perfil extends Controlador_Base
                         throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
                     }
                 }
+            }else{
+
+                $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
+                if (empty($validaTlf2)){
+                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " no es válido");
+                }
+
+                if (strlen($data['tel_one_contact']) > 25) {
+                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " supera el límite permitido");
+                }
+
+                if(isset($_POST['tel_two_contact']) && !empty($_POST['tel_two_contact'])){
+
+                    $validaTlf3 = Utils::valida_telefono($data['tel_two_contact']);
+                    if (empty($validaTlf3)) {
+                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " no es válido");
+                    }
+
+                    if (strlen($data['tel_two_contact']) > 25) {
+                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " supera el límite permitido");
+                    }
+                }
             }
 
             $validaTlf = Utils::valida_telefono($data['telefono']);
+
             if (empty($validaTlf)) {
                 throw new Exception("El telefono " . $data['telefono'] . " no es válido");
+            }
+
+            if (strlen($data['telefono']) > 25) {
+                throw new Exception("El telefono " . $data['telefono'] . " supera el límite permitido");
             }
 
             $validaFecha = Utils::valida_fecha($data['fecha_nacimiento']);
@@ -190,6 +218,14 @@ class Controlador_Perfil extends Controlador_Base
                 if (empty($validaFechaNac)) {
                     throw new Exception("Debe ser Mayor de edad");
                 }
+
+                if(strlen($data['apellidos']) > 100){
+                    throw new Exception("Apellidos: " . $data['apellidos'] . " supera el límite permitido");
+                }
+            }
+
+            if(strlen($data['nombres']) > 100){
+                throw new Exception("Nombres: " . $data['nombres'] . " supera el límite permitido");
             }
 
             $GLOBALS['db']->beginTrans();
@@ -198,6 +234,12 @@ class Controlador_Perfil extends Controlador_Base
                 $dependencia    = Modelo_Escolaridad::obtieneDependencia($data['escolaridad']);
 
                 if($dependencia['dependencia'] == 0 || ($_POST['universidad'] != '' || $_POST['universidad2'] != '')){
+                    
+                    if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
+                      if($_POST['lugar_estudio'] == 1 && strlen($data['universidad2']) > 100){
+                        throw new Exception("El nombre de la universidad: " . $data['universidad2'] . " supera el límite permitido");
+                      }
+                    }
                     
                     if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
                         throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");

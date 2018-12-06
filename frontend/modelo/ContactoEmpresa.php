@@ -12,7 +12,10 @@ class Modelo_ContactoEmpresa{
   	$datos = array('nombres'=>$data['nombre_contact'],'apellidos'=>$data['apellido_contact'],'telefono1'=>$data['tel_one_contact']);
   	if($telf2 != ''){
   		$datos['telefono2'] = $telf2;
-  	}
+  	}else{
+      $datos['telefono2'] = NULL;
+    }
+
   	$result = $GLOBALS['db']->update('mfo_contactoempresa',$datos, 'id_empresa = '.$user_id);
 	return $result;
   }

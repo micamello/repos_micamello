@@ -7,7 +7,7 @@
 
 @media only screen and (max-width: 1080px) {
     
-    /* Force table to not be like tables anymore */
+  /* Force table to not be like tables anymore */
   #no-more-tables table, 
   #no-more-tables thead, 
   #no-more-tables tbody, 
@@ -56,7 +56,7 @@
 }
 
 @media (min-width: 1281px) {
-  
+
   .img-responsive{
     max-width: 100px;
   }
@@ -77,7 +77,7 @@
 */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-  
+
   .img-responsive{
     max-width: 50%;
   }
@@ -98,7 +98,7 @@
 */
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  
+
   .img-responsive{
     max-width: 50%;
   }
@@ -124,7 +124,7 @@
 */
 
 @media (min-width: 768px) and (max-width: 1024px) {
-  
+
   .img-responsive{
     max-width: 80%;
   }
@@ -183,7 +183,7 @@
 */
 
 @media (min-width: 481px) and (max-width: 767px) {
-  
+
   .img-responsive{
     max-width: 25%;
   }
@@ -455,6 +455,11 @@
 /*Media queries configurations*/
 
 @media screen and (min-width: 600px) {
+
+  .icon_oferta{
+    font-size: 1.3em;
+  }
+
   .pagineo > li > a,
   .pagineo > li > span {padding:10px 16px;font-size:18px;line-height:1.3333333;}
   .pagineo > li:first-child > a,
@@ -463,7 +468,13 @@
   .pagineo > li:last-child > span {border-top-right-radius:6px;border-bottom-right-radius:6px;}
   .pagineo {display:flex;justify-content:center;}
 }
+
 @media screen and (max-width: 600px) {
+
+  .icon_oferta{
+    font-size: 1.5em;
+  }
+
   .pagineo > li > a,
   .pagineo > li > span {padding:5px 10px;font-size:12px;line-height:1.5;}
   .pagineo > li:first-child > a,
@@ -474,6 +485,11 @@
 }
 
 @media screen and (max-width: 436px) {
+
+  .icon_oferta{
+    font-size: 1.6em;
+  }
+
   .img-responsive{
     max-width: 50%;
   }

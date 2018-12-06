@@ -61,9 +61,10 @@ if(document.getElementById('des_of')){
     })
 }
 
-function abrirModalEditar(id,contenido,idOferta){
+function abrirModalEditar(id,idOferta){
     
     document.getElementById('idOferta').value = idOferta;
+    var contenido = document.getElementById('descripcion').value;
     tinymce.get('des_of').setContent(contenido);
     $('#'+id).modal();
 }
