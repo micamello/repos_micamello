@@ -291,7 +291,7 @@
 													<?php $des = str_replace("'", "\'",$o["descripcion"]); ?>
 
 													<input type="hidden" id="descripcion" name="descripcion" value="<?php echo $des; ?>">
-													<?php $puedeEditar = 1;//Modelo_Oferta::puedeEditar($o["id_ofertas"]);
+													<?php $puedeEditar = Modelo_Oferta::puedeEditar($o["id_ofertas"]);
 														if($puedeEditar == 1){
 													?>
 													<a onclick="abrirModalEditar('editar_Of','<?php echo $o["id_ofertas"]; ?>');">

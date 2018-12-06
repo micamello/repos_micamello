@@ -894,18 +894,15 @@ WHERE
 
     if (empty($padre)) { return false; }
 
-    $sql = "SELECT ";
+     $sql = "SELECT ";
     if($obtCantdRegistros == false){
       $sql .= "e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado";
     }else{
       $sql .= "*";
     }
 
-    $sql .= " FROM mfo_empresa e";
-
-    if(!$obtCantdRegistros){
-
-      $sql .= " INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+    $sql .= " FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
       INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
       WHERE e.padre = ? AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0";
 
@@ -920,6 +917,7 @@ WHERE
     else{
       $sql .= " GROUP BY e.id_empresa";
     }
+
     return $GLOBALS['db']->auto_array($sql,array($padre),true);
   }
 }  

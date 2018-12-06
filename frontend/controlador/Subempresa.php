@@ -15,7 +15,8 @@ class Controlador_Subempresa extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
 
-        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
+
+        if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
         }
 
@@ -341,19 +342,19 @@ class Controlador_Subempresa extends Controlador_Base
 
         try{
 
-            $campos = array("num_post"=>1,"num_desc"=>1, "plan"=>1); 
+            $campos = array("num_post"=>1,"num_desc"=>1,"plan"=>1); 
 
             $data = $this->camposRequeridos($campos);
 
             $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($data['plan']);
-            if($data["num_post"] == -1){
+            if($_POST["num_post"] == -1){
                 $var1 = -1;
             }else{
                 $var1 = $data["num_post"];
                 $numPublicaciones = $planPadre['num_publicaciones_rest'] - $var1;
             }
 
-            if($data["num_desc"] == -1){
+            if($_POST["num_desc"] == -1){
                 $var2 = -1;
             }else{
                 $var2 = $data["num_desc"];

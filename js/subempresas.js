@@ -82,6 +82,7 @@ function calcularRecursos(){
               }
               document.getElementById('post_asignar').innerHTML = nuevo_valor;
               quitarError("rec1","recursos1");
+              document.getElementById('num').value = '-1';
             }else{
               colocaError("rec1","recursos1","La cantidad no es válida","button_crear");
               document.getElementById('post_asignar').innerHTML = post_asignar+post;
@@ -140,10 +141,10 @@ function calcularRecursos(){
             }
             document.getElementById('pI').innerHTML = '';
           }else{
-            if(post_asignar == -1){
+            if(post_asignar == -1){ 
               $('#seccion_recursos').show();
               document.getElementById('pI').innerHTML = '<label style="color:red" class="parpadea">Número de Publicaciones Ilimitadas</label>';
-              document.getElementById('postNum').value = '-1';
+              document.getElementById('num_post').value = '-1';
               $('#seccion_postulacion').hide();
             }else{
               document.getElementById('pI').innerHTML = '';
@@ -180,7 +181,7 @@ function calcularRecursos(){
             if(desc_asignar == -1){
               $('#seccion_recursos').show();
               document.getElementById('dI').innerHTML = '<label style="color:red" class="parpadea">Número de Descargas Ilimitadas</label>';
-              document.getElementById('descNum').value = '-1';
+              document.getElementById('num_desc').value = '-1';
               $('#seccion_descarga').hide();
             }else{
               document.getElementById('dI').innerHTML = '';
@@ -642,11 +643,11 @@ function validaRecursos(){
     errors = 1;
   }
 
-  if(num_post == ''){
+  if(num_post == '' || num_post == 0){
     errors = 1;
   }
 
-  if(num_desc == ''){
+  if(num_desc == '' || num_desc == 0){
     errors = 1;
   }
 
