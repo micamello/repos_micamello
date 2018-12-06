@@ -2,7 +2,7 @@
 
 foreach ($data as $letra => $value) { 
 
-    if($letra != 'O' && $letra != 'F'){
+    if($letra != 'O' /*&& $letra != 'F'*/){
         
         $ruta = PUERTO.'://'.HOST.'/'.$vista.'/2'; 
         if($letra == 'A'){
@@ -13,6 +13,9 @@ foreach ($data as $letra => $value) {
         }
         if($letra == 'J'){
             $ruta .= '/J'.$value['id'];
+        }
+        if($letra == 'S'){
+            $ruta .= '/S'.$value['id'];
         }
         if($letra == 'Q'){
             $ruta .= '/Q'.$value['id'];

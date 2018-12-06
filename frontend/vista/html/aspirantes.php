@@ -353,7 +353,7 @@
 								           <a href="<?php echo $ruta.'1/'; ?>">Salario<i class="fa fa-sort"></i></a>
 								       </th>
 								   <?php } ?>
-								   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))){ ?>
+								   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) || in_array('-1',$posibilidades)){ ?>
 							        	<th colspan="2" class="text-center">Acci&oacute;n</th>
 							    	<?php } ?>
 							      </tr>
@@ -380,22 +380,27 @@
 													<td style="vertical-align: middle; text-align: center;"><?php echo SUCURSAL_MONEDA.number_format($a['asp_salarial'],2); ?></td>
 												<?php } ?>
 
-												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))){ ?>
+												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) ||in_array('-1',$posibilidades)){ ?>
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
-									        <?php 									            		  
-										      if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-						            		$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-						            		$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);										            			
-									          if(in_array('-1',$posibilidades) ){
-									          	$url = ($vista == 1) ? $a['username'].'/'.$a['id_ofertas'] : $a['username'];
-															echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$url.'/"><i class="fa fa-file-text fa-1x"></i></a>';
-														}else{
-															$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
-															if($cantidadRestante > 0){
-																$url = ($vista == 1) ? $a['username'].'/'.$a['id_ofertas'] : $a['username'];
-																echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$url.'/"><i class="fa fa-file-text fa-1x"></i></a>';
-															}
-															else{
+
+									            		<?php 
+										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+
+										            			if(in_array('-1',$posibilidades)){
+																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/"><i class="fa fa-file-text fa-1x"></i></a>';
+																}else{
+																	$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
+
+																	if($cantidadRestante > 0){
+																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/"><i class="fa fa-file-text fa-1x"></i></a>';
+																	}else{
+
+																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';
+																	}
+																}
+
+															}else{
+
 																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';
 															}
 														}

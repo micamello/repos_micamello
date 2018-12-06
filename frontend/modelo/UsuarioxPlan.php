@@ -13,8 +13,8 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array($usuario),true);
   }
 
+  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion,$porcdesc=0,$idcomprobante='',$fechacreacion=false,$fechacaducidad=false,$idEmpresaPlanParent=false){
 
-  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion,$porcdesc=0,$idcomprobante='',$fechacreacion=false,$fechacaducidad=false){
 	    if (empty($usuario) || empty($plan)){ return false; }
 	    $values_insert = array();
 	    $fechacreacion = (empty($fechacreacion)) ? date('Y-m-d H:i:s') : $fechacreacion;    
@@ -40,13 +40,16 @@ class Modelo_UsuarioxPlan{
       if (!empty($idcomprobante)){
         $values_insert["id_comprobante"] = $idcomprobante;
       }
-      if ($tipousuario == Modelo_Usuario::EMPRESA){
-        $values_insert["num_descarga_rest"] = $porcdesc;
+    if ($tipousuario == Modelo_Usuario::EMPRESA){
+      $values_insert["num_descarga_rest"] = $porcdesc;
+      if ($idEmpresaPlanParent != false){
+        $values_insert["id_empresa_plan_parent"] = $idEmpresaPlanParent;
       }
-      $tabla = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "mfo_usuario_plan" : "mfo_empresa_plan";
-
-        return $GLOBALS['db']->insert($tabla,$values_insert);
     }
+    $tabla = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "mfo_usuario_plan" : "mfo_empresa_plan";
+
+    return $GLOBALS['db']->insert($tabla,$values_insert);
+  }
  
   public static function desactivarPlan($id_usuario_plan,$tipousu){
     if (empty($id_usuario_plan) || empty($tipousu)){ return false; }
@@ -113,7 +116,6 @@ class Modelo_UsuarioxPlan{
     $datos = array();
     if (!empty($arrdatos) && is_array($arrdatos)){
       foreach ($arrdatos as $key => $value) {
-
         array_push($datos,$value['num_descarga_rest']);
       }
     }
@@ -178,21 +180,32 @@ class Modelo_UsuarioxPlan{
               FROM mfo_usuario_plan up
               INNER JOIN mfo_plan p ON p.id_plan = up.id_plan
               WHERE up.estado = 1 AND up.fecha_caducidad IS NOT NULL
-              ORDER BY up.id_usuario";    
+              ORDER BY up.id_usuario";  
+      return $GLOBALS['db']->auto_array($sql,array(),true);  
     }        
     else{
-      $sql = "SELECT em.id_empresa_plan AS id_usuario_plan, em.id_empresa AS id_usuario, em.fecha_caducidad,
-                     p.nombre, em.fecha_compra
-              FROM mfo_empresa_plan em
-              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
-              WHERE em.estado = 1 AND em.fecha_caducidad IS NOT NULL";
+      $sql = "SELECT ";
+
       if (!empty($idEmpresa)){ 
-        $sql .= " AND p.num_cuenta > 0 AND em.id_empresa = ".$idEmpresa;
+        $sql .= "GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan";
+      }else{ 
+        $sql .= "em.id_empresa_plan AS id_usuario_plan, em.id_empresa AS id_usuario, em.fecha_caducidad, p.nombre, em.fecha_compra";
+      }          
+      
+      $sql .= " FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW()";
+
+      if (!empty($idEmpresa)){ 
+         $sql .= " AND p.num_cuenta > 0 AND em.id_empresa = ".$idEmpresa." GROUP BY em.id_empresa LIMIT 1";
+        return $GLOBALS['db']->auto_array($sql,array(),false);
+      }else{
+        $sql .= " AND em.fecha_caducidad IS NOT NULL ORDER BY em.id_empresa";
+        return $GLOBALS['db']->auto_array($sql,array(),true);
       }
-      $sql .= " ORDER BY em.id_empresa";
-    }
-    return $GLOBALS['db']->auto_array($sql,array(),true);        
+    }     
   }
+
   public static function obtienePlanesHijos($idplanpadre){
     if (empty($idplanpadre)){ return false; }
     $sql = "SELECT id_empresa_plan, id_empresa 
@@ -200,21 +213,95 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array($idplanpadre),true);
   }
 
-  public static function existePlanPagado($usuario,$idusuplan,$tipo){
-    if (empty($usuario) || empty($idusuplan) || empty($tipo)){ return false; }
-    if ($tipo == Modelo_Usuario::CANDIDATO){
-      $sql = "SELECT u.id_usuario_plan FROM mfo_usuario_plan u 
-              INNER JOIN mfo_plan p ON p.id_plan = u.id_plan
-              WHERE u.id_usuario = ? AND u.estado = 1 AND u.fecha_caducidad > NOW() AND
-                    u.id_usuario_plan <> ? AND p.estado = 1 AND p.costo <> 0 LIMIT 1";
+  public static function puedeCrearCuentas($padre,$cantd_empresas){
+
+    if (empty($padre) && empty($cantd_empresas)){ return false; }
+
+      $sql = "SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = ?
+          AND p.num_cuenta >= ?
+          GROUP BY ep.id_empresa;";
+    return $GLOBALS['db']->auto_array($sql,array($padre,$cantd_empresas));
+  }
+
+  #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
+  public static function tieneRecursos($idEmpresaPlan=false,$idEmpresa=false){
+
+    $sql = "SELECT ";
+
+    $sql .= "ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta";
+    
+    $sql .= " FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW()";
+
+    if($idEmpresaPlan!=false){
+      $sql.= " AND ep.id_empresa_plan = ".$idEmpresaPlan;
+    }else{
+      $sql .= " AND ep.id_empresa = ".$idEmpresa;
     }
-    else{
-      $sql = "SELECT e.id_empresa_plan AS id_usuario_plan FROM mfo_empresa_plan e 
-              INNER JOIN mfo_plan p ON p.id_plan = e.id_plan         
-              WHERE e.id_empresa = ? AND e.estado = 1 AND e.fecha_caducidad > NOW() AND 
-                    e.id_empresa_plan <> ? AND p.estado = 1 AND p.costo <> 0 LIMIT 1"; 
+
+    return $GLOBALS['db']->auto_array($sql,array(),true);
+  }
+
+  public static function consultarRecursosAretornar($idPlanEmpresa){
+  
+    $sql = "SELECT id_empresa_plan, id_empresa_plan_parent, num_publicaciones_rest,num_descarga_rest, fecha_compra, fecha_caducidad, id_plan, id_empresa FROM mfo_empresa_plan 
+      WHERE id_empresa_plan = $idPlanEmpresa";
+    return $GLOBALS['db']->auto_array($sql,array());
+  }
+
+  public static function devolverRecursos($recursos){
+
+    if($recursos['id_empresa_plan_parent'] == ''){
+      $recursos['id_empresa_plan_parent'] = $recursos['id_empresa_plan'];
     }
-    return $GLOBALS['db']->auto_array($sql,array($usuario,$idusuplan));
+
+    $sql = "SELECT num_publicaciones_rest,num_descarga_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1";
+    $result = $GLOBALS['db']->auto_array($sql,array(),false);
+
+    if($result['num_publicaciones_rest'] != -1 && $recursos['num_publicaciones_rest'] != -1){
+      $cantd_post = $result['num_publicaciones_rest']+$recursos['num_publicaciones_rest'];
+    }else{
+      $cantd_post = -1;
+    }
+
+    if($result['num_descarga_rest'] != -1 && $recursos['num_descarga_rest'] != -1){
+      $cantd_desc = $result['num_descarga_rest']+$recursos['num_descarga_rest'];
+    }else{
+      $cantd_desc = -1;
+    }
+
+    $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => 0, 'num_descarga_rest' => 0),'id_empresa_plan='.$recursos['id_empresa_plan']);
+
+    return $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => $cantd_post, 'num_descarga_rest' => $cantd_desc),'id_empresa_plan='.$recursos['id_empresa_plan_parent']);
+  }
+
+  public static function planesConCuentas($idEmpresa,$planes=false){
+
+    $sql = "SELECT ep.id_empresa_plan, p.nombre, ep.id_plan
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW()
+      AND p.num_cuenta > 0 AND ep.id_empresa = $idEmpresa 
+      AND ((ep.num_descarga_rest > 0 or ep.num_descarga_rest = -1)
+      OR (ep.num_publicaciones_rest > 0 or ep.num_publicaciones_rest = -1))";
+
+    if(!empty($planes)){
+      $sql .= " AND ep.id_plan NOT IN(".$planes.")";
+    }
+
+    return $GLOBALS['db']->auto_array($sql,array(),true);   
+  }
+
+  public static function actualizarPublicacionesEmpresa($id_empresa_plan, $num_post,$num_desc){
+    if (empty($id_empresa_plan) || empty($num_post) || empty($num_desc)) {return false;}
+    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post,"num_descarga_rest"=>$num_desc), "id_empresa_plan = ".$id_empresa_plan);
+    return $result;
   }
 }  
+
 ?>

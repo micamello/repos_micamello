@@ -42,7 +42,6 @@ class Modelo_UsuarioxArea{
 
       $diff_insert = $data_form;
     }
-    
 
     if(!empty($diff_insert)){
       foreach ($diff_insert as $key => $id) {

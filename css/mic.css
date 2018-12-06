@@ -549,10 +549,10 @@ body
 }
 
 /* vista de editar perfil */
-.arch_cargado{
+/*.arch_cargado{
   color: #DF0101;
   font-weight: bold;
-}
+}*/
 
 /* vista de editar perfil */
 
@@ -755,8 +755,8 @@ body
 .list_content{
   border: 2px solid #C1C1C1; 
   border-radius: 5px; 
-  padding: 0px 20px 100px 20px;
-  height: 70px;
+  padding: 0px 20px 20px 20px;
+  overflow-y: scroll;
 }
 
 .font_awesome{
@@ -1093,3 +1093,51 @@ fieldset {
 .etiquetaOfertaUrgente{
   color:black;
 }
+
+.icon_deshabilitados{
+  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(0%);
+}
+
+#section_recursos{
+  padding: 0px 15px 0px 15px;
+}
+
+.bounce {
+    -webkit-border-radius:50%;
+    -moz-border-radius:50%;
+    -ms-border-radius:50%;
+    border-radius:50%;
+    animation: bounce 1s infinite;
+    -webkit-animation: bounce 1s infinite;
+    -moz-animation: bounce 1s infinite;
+    -o-animation: bounce 1s infinite;
+}
+
+.active_button{
+  background-color: #FF3E55;
+}
+ 
+@-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 
+    40% {-webkit-transform: translateY(-10px);}
+    60% {-webkit-transform: translateY(-10px);}
+}
+ 
+@-moz-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {-moz-transform: translateY(0);}
+    40% {-moz-transform: translateY(-10px);}
+    60% {-moz-transform: translateY(-10px);}
+}
+ 
+@-o-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {-o-transform: translateY(0);}
+    40% {-o-transform: translateY(-10px);}
+    60% {-o-transform: translateY(-10px);}
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+    40% {transform: translateY(-10px);}
+    60% {transform: translateY(-10px);}
+}
+

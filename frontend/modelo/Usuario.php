@@ -137,16 +137,23 @@ public static function existeUsername($username){
   }
 
   public static function crearUsuario($dato_registro){
-    if(empty($dato_registro)){return false;}
-    // Utils::log("empresa datos en el modelo: ".print_r($dato_registro, true));
-    // exit();
 
-      if ($dato_registro['tipo_usuario'] == 1) {
-        $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], "token"=>$dato_registro['token'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'conf_datos'=>$dato_registro['conf_datos'], 'id_ciudad'=>$dato_registro['id_ciudad']['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'status_carrera'=>$dato_registro['status_carrera'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
+    if(empty($dato_registro)){return false;}
+ 
+    if ($dato_registro['tipo_usuario'] == 1) {
+      $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], "token"=>$dato_registro['token'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'conf_datos'=>$dato_registro['conf_datos'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'status_carrera'=>$dato_registro['status_carrera'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
+    }
+    else{
+
+      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'conf_datos'=>$dato_registro['conf_datos'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
+
+      if(isset($dato_registro['padre'])){
+        $arreglo_datos['padre'] = $dato_registro['padre'];
       }
-      else{
-        $result = $GLOBALS['db']->insert('mfo_empresa',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'conf_datos'=>$dato_registro['conf_datos'], 'id_ciudad'=>$dato_registro['id_ciudad']['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
-      }
+
+      $result = $GLOBALS['db']->insert('mfo_empresa',$arreglo_datos);
+    }      
+
     return $result;
   }
 
@@ -266,7 +273,7 @@ public static function existeUsername($username){
     if($obtCantdRegistros == false){
       $sql .= "o.id_ofertas, u.id_usuario, ul.username, u.nombres, u.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial, e.descripcion AS estudios, n.nombre_abr AS nacionalidad, n.id_pais, pr.id_provincia, pr.nombre AS ubicacion"; 
     }else{
-      $sql .= "count(1) AS cantd_aspirantes";
+      $sql .= "n.id_pais, pr.id_provincia, pr.nombre AS ubicacion";
     }
     
     $sql .= " FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_pais n, mfo_usuario_login ul
@@ -284,11 +291,8 @@ public static function existeUsername($username){
       $sql .= " ORDER BY u.nombres ASC";
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
-    }else{
-      $rs = $GLOBALS['db']->auto_array($sql,array()); 
-      $rs = $rs['cantd_aspirantes'];
     }
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs; 
   }
 
@@ -299,7 +303,7 @@ public static function existeUsername($username){
     if($obtCantdRegistros == false){
       $sql .= "o.id_ofertas, u.id_usuario, ul.username, u.nombres, u.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial, e.descripcion AS estudios, u.discapacidad, n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion"; 
     }else{
-      $sql .= "count(1) AS cantd_aspirantes";
+      $sql .= "n.id_pais, pr.id_provincia, pro.nombre AS ubicacion";
     }
 
     $sql .= " FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_usuario_login ul, mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c";
@@ -316,8 +320,7 @@ public static function existeUsername($username){
               AND c.id_provincia = pro.id_provincia
               AND u.id_ciudad = c.id_ciudad
               AND u.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajextest pt WHERE pt.id_usuario = u.id_usuario LIMIT 1)
-              AND o.id_ofertas = $idOferta
-            ";
+              AND o.id_ofertas = $idOferta";
 
     if(!empty($filtros['F']) && $filtros['F'] != 0){
        if($filtros['F'] == 1){
@@ -445,7 +448,7 @@ public static function existeUsername($username){
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (u.nombres LIKE '%".$pclave."%' OR u.apellidos LIKE '%".$pclave."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR p.asp_salarial LIKE '%".$pclave."%' OR p.fecha_postulado LIKE '%".$pclave."%')";
+      $sql .= " AND (u.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR u.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR p.asp_salarial LIKE '%".$pclave."%' OR p.fecha_postulado LIKE '%".$pclave."%')";
     }
 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
@@ -504,12 +507,8 @@ public static function existeUsername($username){
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
-    }else{
-      $rs = $GLOBALS['db']->auto_array($sql,array());
-      $rs = $rs['cantd_aspirantes'];
     }
-
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
 
@@ -520,7 +519,7 @@ public static function existeUsername($username){
 
       $sql .= 'u.id_usuario, ul.username, u.nombres, u.apellidos, u.fecha_nacimiento,u.fecha_creacion, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, e.descripcion AS estudios, u.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia';
     }else{
-      $sql .= "count(1) AS cantd_aspirantes";
+      $sql .= "u.id_nacionalidad AS id_pais, pr.id_provincia, pr.nombre AS ubicacion";
     }
 
     $sql .= ' FROM mfo_usuario u, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_usuario_login ul
@@ -537,11 +536,8 @@ public static function existeUsername($username){
       $sql .= " ORDER BY u.nombres ASC";
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
-    }else{
-      $rs = $GLOBALS['db']->auto_array($sql,array()); 
-      $rs = $rs['cantd_aspirantes'];
     }
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs; 
   }
 
@@ -552,7 +548,7 @@ public static function existeUsername($username){
     if($obtCantdRegistros == false){
       $sql .= "u.id_usuario, ul.username, u.nombres, u.apellidos, u.fecha_nacimiento,u.fecha_creacion, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, e.descripcion AS estudios, u.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia"; 
     }else{
-      $sql .= "count(1) AS cantd_aspirantes";
+      $sql .= "u.id_nacionalidad AS id_pais, pr.id_provincia, pr.nombre AS ubicacion";
     }
 
     $sql .= " FROM mfo_usuario u, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_usuario_login ul";
@@ -684,7 +680,7 @@ public static function existeUsername($username){
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (u.nombres LIKE '%".$pclave."%' OR u.apellidos LIKE '%".$pclave."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR u.fecha_creacion LIKE '%".$pclave."%')";
+      $sql .= " AND (u.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR r.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR u.fecha_creacion LIKE '%".$pclave."%')";
     }
 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
@@ -696,50 +692,48 @@ public static function existeUsername($username){
 
     if(!empty($filtros['O']) && $filtros['O'] != 0){
 
-      $tipo = substr($filtros['O'],0,1);
-      $t = substr($filtros['O'],1,2);
-      if($tipo == 1){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY edad ASC";
+      $long_filtro = $filtros['O'];
+      if(strlen($long_filtro) == 3){
+        $tipo = substr($filtros['O'],0,1);
+        $t = substr($filtros['O'],1,2);
+        if($tipo == 1){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY edad ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY edad DESC";
+          }        
+        }else if($tipo == 2){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY u.fecha_creacion ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY u.fecha_creacion DESC";
+          }
+        }else if($tipo == 3){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY e.descripcion ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY e.descripcion DESC";
+          }
         }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY edad DESC";
-        }        
-      }else if($tipo == 2){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY u.fecha_creacion ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY u.fecha_creacion DESC";
-        }
-      }else if($tipo == 3){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY e.descripcion ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY e.descripcion DESC";
-        }
+      }else{
+        $sql .= " ORDER BY u.nombres ASC";
       }
-
-    }else{
-      $sql .= " ORDER BY u.nombres ASC";
     }
 
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
-    }else{
-      $rs = $GLOBALS['db']->auto_array($sql,array());
-      $rs = $rs['cantd_aspirantes'];
     }
-
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
@@ -879,7 +873,9 @@ WHERE
     return $nivel;
   }
   public static function obtieneHerenciaEmpresa($idpadre){
-    if (empty($idpadre)) { return false; }    
+
+    if (empty($idpadre)) { return false; }
+
     $strpadre = '';
     $sql = "SELECT e.id_empresa, e.padre FROM mfo_empresa e
             WHERE e.padre IN(?) AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)";
@@ -889,21 +885,20 @@ WHERE
       foreach($padre as $key=>$registro){
         $strpadre .= $registro["id_empresa"].(($key+1 < $numreg) ? ',' : '');
       }
-    }            
-    $idpadre = $strpadre;      
-    return $idpadre;
+    }      
+    return $idpadre = $strpadre;    
   }
 
   #OBTIENE LAS EMPRESAS HIJAS Y SUS PLANES
-  public static function obtieneSubempresasYplanes($padre,$page,$obtCantdRegistros=false){
+  public static function obtieneSubempresasYplanes($padre,$page,$subempresa=false,$obtCantdRegistros=false){
 
     if (empty($padre)) { return false; }
 
     $sql = "SELECT ";
-    if(!$obtCantdRegistros){
-      $sql .= "e.nombres, GROUP_CONCAT(DISTINCT(pl.nombre)) AS planes, IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest) AS num_publicaciones_rest, IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest) AS num_descarga_rest";
+    if($obtCantdRegistros == false){
+      $sql .= "e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado";
     }else{
-      $sql .= "count(1) AS cantd_empresas";
+      $sql .= "*";
     }
 
     $sql .= " FROM mfo_empresa e";
@@ -912,35 +907,20 @@ WHERE
 
       $sql .= " INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
       INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
-      WHERE e.padre = ? AND e.estado = 1 AND ep.estado = 1 AND ep.fecha_caducidad > NOW() GROUP BY e.id_empresa";
+      WHERE e.padre = ? AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0";
 
-    }else{
-
-      $sql .= " WHERE e.padre = ? AND e.estado = 1";
+    $page = ($page - 1) * REGISTRO_PAGINA;
+    if($subempresa != false){
+      $sql .= " AND e.id_empresa = $subempresa";
     }
 
-    if(!$obtCantdRegistros){
-      $page = ($page - 1) * REGISTRO_PAGINA;
-      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
-      return $GLOBALS['db']->auto_array($sql,array($padre),true);
-    }else{
-      $rs = $GLOBALS['db']->auto_array($sql,array($padre));
-      return $rs['cantd_empresas'];
+    if($obtCantdRegistros == false){
+      $sql .= " GROUP BY e.id_empresa LIMIT ".$page.",".REGISTRO_PAGINA;
+    } 
+    else{
+      $sql .= " GROUP BY e.id_empresa";
     }
+    return $GLOBALS['db']->auto_array($sql,array($padre),true);
   }
-
-  #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
-  public static function obtieneInfoPlan($idplan){
-
-    if (empty($idplan)) { return false; }
-
-    $sql = "SELECT num_publicaciones_rest AS numero_postulaciones, porc_descarga AS numero_descarga
-      FROM mfo_empresa_plan ep
-      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
-      WHERE ep.id_empresa_plan = ? AND ep.estado = 1 AND p.num_cuenta > 0;";
-    return $info = $GLOBALS['db']->auto_array($sql,array($idplan));
-
-  }
-
 }  
 ?>

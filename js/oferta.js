@@ -61,9 +61,10 @@ if(document.getElementById('des_of')){
     })
 }
 
-function abrirModalEditar(id,contenido,idOferta){
+function abrirModalEditar(id,idOferta){
     
-    document.getElementById('idOferta').value = idOferta;    
+    document.getElementById('idOferta').value = idOferta;
+    var contenido = document.getElementById('descripcion').value;
     tinymce.get('des_of').setContent(decodeURIComponent((contenido+'').replace(/\+/g, '%20')));
     $('#'+id).modal();
 }
@@ -114,9 +115,6 @@ function colocaError(campo, id, mensaje,btn){
 function validarDescripcion(){
 
     var error = 0;
-
-    /*var des_of = document.getElementById('des_of').value;
-    console.log(des_of);*/
 
     if(tinyMCE.get('des_of').getContent() == ""){
 
@@ -179,5 +177,4 @@ function verAspirantes($idOfertas){
 
 	var nueva_ruta = $('#puerto_host').val()+'/verAspirantes/'+$idOfertas;
 	alert(nueva_ruta);
-	//window.location = nueva_ruta;
 }

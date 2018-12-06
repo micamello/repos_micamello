@@ -39,7 +39,7 @@ class Modelo_Oferta{
       }
 
     }else{
-      $sql .= "count(1) AS cantd_ofertas";
+      $sql .= "emp.id_empresa AS id_usuario, emp.nombres";
     }
 
 
@@ -48,36 +48,28 @@ class Modelo_Oferta{
     if(!empty($vista) && ($vista == 'postulacion')){
 
       $sql .= ", mfo_postulacion pos, mfo_usuario u";
-
-    }/*else{
-
-      $sql .= ", mfo_empresa emp";
-    }*/
+    }
 
     if(!empty($id)){
       $sql .= ", mfo_oferta_nivelidioma ofn, mfo_nivelidioma_idioma ni";
     }
 
-    $sql .= " WHERE o.estado = 1 
-    AND r.id_requisitoOferta = o.id_requisitoOferta
+    $sql .= " WHERE r.id_requisitoOferta = o.id_requisitoOferta
     AND e.id_escolaridad = o.id_escolaridad
     AND c.id_ciudad = o.id_ciudad
     AND p.id_provincia = c.id_provincia
     AND a.id_area = o.id_area
     AND n.id_nivelInteres = o.id_nivelInteres
     AND j.id_jornada = o.id_jornada
-
     AND p.id_pais = ".$pais_empresa;
 
     if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
-      $sql .= " AND o.id_empresa = emp.id_empresa AND o.id_empresa IN(".$idusuario.")";
+      $sql .= " AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
+    }else{
+      $sql .= " AND o.estado = 1 ";
     }
     
     $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
-
-    /*if(!empty($vista) && ($vista == 'oferta')){
-      $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
-    }*/
 
     if(!empty($id)){
        $sql .= " AND ni.id_nivelIdioma_idioma = ofn.id_nivelIdioma_idioma
@@ -87,23 +79,19 @@ class Modelo_Oferta{
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= " AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
-
     
     if($obtCantdRegistros == false){
       $sql .= " ORDER BY o.fecha_creado DESC";
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     }else{
 
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $sql .= " ORDER BY pos.tipo DESC";
       }
-      
-      $rs = $GLOBALS['db']->auto_array($sql,array());
-      $rs = $rs['cantd_ofertas'];
     }
 
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
 
@@ -122,19 +110,16 @@ class Modelo_Oferta{
       }
 
     }else{
-      $sql .= "count(1) AS cantd_ofertas";
+      $sql .= "emp.id_empresa AS id_usuario, emp.nombres";
     }
 
     $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp";
 
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= ", mfo_postulacion pos, mfo_usuario u";
-    }/*else{
-      $sql .= ", mfo_empresa emp";
-    }*/
+    }
 
-    $sql .= " WHERE o.estado = 1 
-    AND r.id_requisitoOferta = o.id_requisitoOferta
+    $sql .= " WHERE r.id_requisitoOferta = o.id_requisitoOferta
     AND e.id_escolaridad = o.id_escolaridad
     AND c.id_ciudad = o.id_ciudad
     AND n.id_nivelInteres = o.id_nivelInteres
@@ -155,117 +140,8 @@ class Modelo_Oferta{
       $sql .= " AND j.id_jornada = ".$filtros['J'];
     }
 
-    if(!empty($filtros['Q']) && $filtros['Q'] != 0 || $filtros['Q'] != ''){
-
-      $pos = strpos($filtros['Q'], "-");
-      if ($pos != false) {
-
-        $datos_fecha = explode("-",$filtros['Q']);
-        if(count($datos_fecha) == 3 && checkdate($datos_fecha[1], $datos_fecha[2], $datos_fecha[0])){
-            $pclave = $datos_fecha[0].'-'.$datos_fecha[1].'-'.$datos_fecha[2];
-        }else if(count($datos_fecha) == 3 && checkdate($datos_fecha[1], $datos_fecha[0], $datos_fecha[2])){
-            $pclave = $datos_fecha[2].'-'.$datos_fecha[1].'-'.$datos_fecha[0];
-        }
-      }else{
-        $pclave = $filtros['Q'];
-      }
-
-      $sql .= " AND (emp.nombres LIKE '%".$pclave."%' OR o.titulo LIKE '%".$pclave."%' OR o.descripcion LIKE '%".$pclave."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
-    }
-
-    if(!empty($vista) && ($vista == 'postulacion')){
-      $sql .= " AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
-    }else if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
-      $sql .= " AND o.id_empresa IN(".$idusuario.")";
-    }/*else{*/
-      $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
-   /* }*/
-
-    if(!empty($filtros['O']) && $filtros['O'] != 0){
-
-      $tipo = substr($filtros['O'],0,1);
-      $t = substr($filtros['O'],1,2);
-      if($tipo == 1){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY o.salario ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY o.salario DESC";
-        }
-        
-      }else if($tipo == 2){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY o.fecha_creado ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY o.fecha_creado DESC";
-        }
-      }
-    }
-
-
-    if($obtCantdRegistros == false){
-      $page = ($page - 1) * REGISTRO_PAGINA;
-      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
-    }else{
-      $rs = $GLOBALS['db']->auto_array($sql,array());
-      $rs = $rs['cantd_ofertas'];
-    }
-
-    return $rs;
-  }
-
- /* public static function filtrarOfertas(&$filtros,$page,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa){
-
-    $sql = "SELECT ";
-
-    if($obtCantdRegistros == false){
-      $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta,
-      a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,r.edad_minima, r.licencia, r.viajar, a.id_area, ul.username";
-
-      if (!empty($vista) && ($vista == 'postulacion')){ 
-         $sql .= ", pos.tipo, pos.id_auto AS id_postulacion, pos.resultado, u.id_usuario, o.id_empresa";
-      }else{
-        $sql .= ", emp.nombres AS empresa, emp.id_empresa AS id_usuario";
-      }
-
-    }else{
-      $sql .= "count(1) AS cantd_ofertas";
-    }
-
-    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul";
-
-    if(!empty($vista) && ($vista == 'postulacion')){
-      $sql .= ", mfo_postulacion pos, mfo_usuario u";
-    }else{
-      $sql .= ", mfo_empresa emp";
-    }
-
-    $sql .= " WHERE o.estado = 1 
-    AND r.id_requisitoOferta = o.id_requisitoOferta
-    AND e.id_escolaridad = o.id_escolaridad
-    AND c.id_ciudad = o.id_ciudad
-    AND n.id_nivelInteres = o.id_nivelInteres
-    AND p.id_provincia = c.id_provincia
-    AND a.id_area = o.id_area
-    AND j.id_jornada = o.id_jornada
-    AND p.id_pais = ".$pais_empresa;
-
-    if(!empty($filtros['P']) && $filtros['P'] != 0){
-       $sql .= " AND p.id_provincia = ".$filtros['P'];
-    }
-    
-    if(!empty($filtros['A']) && $filtros['A'] != 0){
-      $sql .= " AND a.id_area = ".$filtros['A'];
-    }
-
-    if(!empty($filtros['J']) && $filtros['J'] != 0){
-      $sql .= " AND j.id_jornada = ".$filtros['J'];
+    if(!empty($filtros['S']) && $filtros['S'] != 0){
+      $sql .= " AND emp.id_empresa = ".$filtros['S'];
     }
 
     if(!empty($filtros['Q']) && $filtros['Q'] != 0 || $filtros['Q'] != ''){
@@ -287,12 +163,14 @@ class Modelo_Oferta{
     }
 
     if(!empty($vista) && ($vista == 'postulacion')){
-      $sql .= " AND pos.id_ofertas = o.id_ofertas AND ul.id_usuario_login = u.id_usuario_login AND pos.id_usuario = ".$idusuario;
+      $sql .= " AND o.estado = 1 AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }else if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
-      $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login AND o.id_empresa IN(".$idusuario.")";
+      $sql .= " AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
     }else{
-      $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login ";
+      $sql .= " AND o.estado = 1";
     }
+
+    $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
 
     if(!empty($filtros['O']) && $filtros['O'] != 0){
 
@@ -324,14 +202,10 @@ class Modelo_Oferta{
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-      $rs = $GLOBALS['db']->auto_array($sql,array(),true);
-    }else{
-      $rs = $GLOBALS['db']->auto_array($sql,array());
-      $rs = $rs['cantd_ofertas'];
     }
-
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
-  }*/
+  }
 
   public static function guardarRequisitosOferta($data){
     if (empty($data)) {return false;}
@@ -354,7 +228,7 @@ class Modelo_Oferta{
     $sql = "SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
             FROM mfo_oferta o
             LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
-            WHERE o.estado = 1
+            WHERE (o.estado = 1 OR o.estado = 3)
             AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajextest pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
             GROUP BY o.id_ofertas;";
 
@@ -400,7 +274,13 @@ class Modelo_Oferta{
 
   public static function guardarDescripcion($idOferta,$descripcion){
     if (empty($idOferta)){ return false; }
-    return $GLOBALS['db']->update('mfo_oferta',array('descripcion'=>$descripcion),'id_ofertas='.$idOferta);
+    return $GLOBALS['db']->update('mfo_oferta',array('descripcion'=>$descripcion,'estado'=>2),'id_ofertas='.$idOferta);
+  }
+
+  public static function puedeEditar($idOferta){
+    if (empty($idOferta)){ return false; }
+    $sql = "SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = ? LIMIT 1";
+    return $GLOBALS['db']->auto_array($sql,array($idOferta),false);
   }
 
   public static function ofertaPostuladoPor($idOferta){

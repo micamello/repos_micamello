@@ -1,14 +1,6 @@
-// if(document.getElementById('form_register')){
-//   $("#form_register").validator();
-// }
-
 if(document.getElementById('form_login')){
   $("#form_login").validator();
 }
-
-// if(document.getElementById('form_publicar')){
-//   $("#form_publicar").validator();
-// }
 
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
@@ -16,9 +8,6 @@ $('.modal').on('hidden.bs.modal', function(){
     $(this).find('#form_register')[0].reset();
     var error_msg = document.getElementsByClassName('with-errors');
     var error_input = document.getElementsByClassName('has-error');
-
-    // console.log(error_msg.length);
-    // console.log(error_input.length);
 
     for (var i = error_msg.length - 1; i >= 0; i--) {
       error_msg[i].innerHTML = '';
@@ -29,19 +18,6 @@ $('.modal').on('hidden.bs.modal', function(){
     }
 });
 
-if (document.getElementById("area_select"))
-{
-  $("#area_select").selectr({
-      placeholder: 'Buscar...'
-  });
-}
-
-if (document.getElementById("nivel_interes"))
-{
-  $("#nivel_interes").selectr({
-      placeholder: 'Buscar...'
-  });
-}
 
 if(document.getElementById('form_login')){
   $("#form_login").validator();
@@ -89,6 +65,37 @@ function pass_hidden(obj){
   obj.firstChild.setAttribute("class", "fa fa-eye");
   obj.setAttribute("onclick", "pass_reveal(this)");
 }
+
+function colocaError(campo, id, mensaje,btn){
+
+    nodo = document.getElementById(campo);
+    nodo.innerHTML = '';
+    var elem1 = document.createElement('P');
+    var t = document.createTextNode(mensaje); 
+    elem1.appendChild(t);
+
+    var elem2 = document.createElement("P");             
+    elem2.classList.add('list-unstyled');
+    elem2.classList.add('msg_error');
+    elem2.appendChild(elem1); 
+
+    elem2.appendChild(elem1); 
+    nodo.appendChild(elem2); 
+
+    $("#"+id).addClass('has-error');
+    $("#"+btn).addClass('disabled');
+
+    if(document.getElementById('form_paypal')){
+      document.getElementById('form_paypal').action = '#';
+    }
+}
+
+function quitarError(campo,id){
+
+  document.getElementById(campo).innerHTML = '';
+  $("#"+id).removeClass('has-error');
+}
+
 
 $(document).ready(function(){
   if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){

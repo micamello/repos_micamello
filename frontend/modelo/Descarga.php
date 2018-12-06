@@ -19,7 +19,9 @@ class Modelo_Descarga{
   }
 
   public static function obtieneDescargaCV($infoHv, $id_empresa,$id_oferta){
-    if (empty($infoHv) || empty($id_empresa)){ return false; }
+
+  	if (empty($infoHv) || empty($id_empresa)){ return false; }
+
     $sql = "SELECT COUNT(1) as cantd_descarga FROM mfo_descarga WHERE id_infohv = ? AND id_empresa = ? AND id_ofertas = ?";
     return $rs = $GLOBALS['db']->auto_array($sql,array($infoHv,$id_empresa,$id_oferta));
   }

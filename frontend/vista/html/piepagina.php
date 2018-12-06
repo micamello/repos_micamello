@@ -98,45 +98,61 @@
               <div class="col-md-12">
                 <div class="row">
                   <div class="col-md-6" id="area_group">
-                    <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione área:<span class="text-help">(max. 3)</span>&nbsp;<i class="requerido">*</i></p>
                     <div class="form-group">
-                      <div class="opcionesSeleccionados">
-                        <div class="row" id="seleccionados">
-                          <p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-                          <!-- <?php echo $optiones; ?> -->
-                        </div>
-                          <div id="area_error" class="help-block with-errors"></div>
-                          <select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 3 }' multiple>
-                            <!-- <option value="" selected disabled>Seleccione un área</option> -->
-                            <?php 
-                              if (!empty($arrarea)){
-                                  foreach($arrarea as $area){ ?>
-                                      <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
-                                  <?php }
-                              } ?>
-                          </select>
+                      <div class="">
+                        
+                          <div class="panel panel-default">
+                            <div class="panel-heading">Seleccione áreas (Máx: 3)
+                                  <label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+                                      <label id="numero1">0</label> de 3
+                                  </label>
+                              </div>
+                              <div class="panel-body">
+                                <div class="row" id="seleccionados1">
+                                </div>
+                              </div>
+                              <div id="area_error" class="help-block with-errors"></div>
+                              <select class="form-control" name="area_select[]" id="area_select" multiple>
+                                <!-- <option value="" selected disabled>Seleccione un área</option> -->
+                                <?php 
+                                  if (!empty($arrarea)){
+                                      foreach($arrarea as $area){ ?>
+                                          <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
+                                      <?php }
+                                  } ?>
+                              </select>
+                            </div>
                         </div>
                     </div>
                   </div>
 
+
                   <div class="col-md-6" id="nivel_group">
-                    <p class="form-text text_form" style="margin-bottom: 0px;">Seleccione nivel de interés:<span>(max. 2)&nbsp;<i class="requerido">*</i></span></p>
+                    
                     <div class="form-group">
-                      <div class="opcionesSeleccionados">
-                        <div class="row" id="seleccionados1">
-                          <p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-                          <!-- <?php echo $optiones; ?> -->
-                        </div>
-                          <div id="nivel_error" class="help-block with-errors"></div>
-                          <select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 2 }' multiple>
-                            <!-- <option value="" selected disabled>Seleccione un área</option> -->
-                            <?php 
-                              if (!empty($intereses)){
-                                  foreach($intereses as $interes){ ?>
-                                      <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
-                                  <?php }
-                              } ?>
-                          </select>
+                      <div class="">
+                          
+                          <div class="panel panel-default">
+                            <div class="panel-heading">Seleccione nivel de interés (Máx: 2)
+                                  <label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+                                      <label id="numero2">0</label> de 2
+                                  </label>
+                              </div>
+                              <div class="panel-body">
+                                <div class="row" id="seleccionados2">
+                                </div>
+                              </div>
+                            <div id="nivel_error" class="help-block with-errors"></div>
+                            <select class="form-control" name="nivel_interes[]" id="nivel_interes" multiple>
+                              <!-- <option value="" selected disabled>Seleccione un área</option> -->
+                              <?php 
+                                if (!empty($intereses)){
+                                    foreach($intereses as $interes){ ?>
+                                        <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
+                                    <?php }
+                                } ?>
+                            </select>
+                          </div>
                         </div>
                     </div>
                   </div>
@@ -205,7 +221,7 @@
                 <div class="col-md-12" align="left">
                   <div class="form-group" id="term_cond_group"> 
                     <label class="form-text">
-                    <input type="checkbox" name="term_cond" id="term_cond" value="1"><label for="term_cond">He leido y acepto los <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank"> términos y condiciones </a> y la <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Política de Privacidad</a></label><div id="term_cond_error" class="help-block with-errors"></div></label>
+                    <input type="checkbox" class="flipswitch_check" name="term_cond" id="term_cond" value="1"><label for="term_cond" class="label_term_cond">He leido y acepto los <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="blank"> términos y condiciones </a> y la <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="blank">Política de Privacidad</a></label><div id="term_cond_error" class="help-block with-errors"></div></label>
                   </div>
                 </div>
                 <input type="hidden" name="conf_datos" id="conf_datos" value="1">
@@ -242,9 +258,9 @@
                 <a class="socialbutton google" onclick="window.location = '<?php echo $social['gg'] ?>'"><i class="fa fa-google-plus-square"></i><span class="social_text"> Google</span></a>
               </div>
 
-              <!-- <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
-                <a class="socialbutton lkin"><i class="fa fa-linkedin-square"></i><span class="social_text"> LinkeIn</span></a>
-              </div> -->
+              <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
+                <a class="socialbutton lkin" onclick="window.location = '<?php echo $social['lk'] ?>'"><i class="fa fa-linkedin-square"></i><span class="social_text"> LinkeIn</span></a>
+              </div>
             <!-- </div> -->
           </div>
         </div>

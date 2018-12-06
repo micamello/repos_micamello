@@ -134,6 +134,26 @@ if(document.getElementById('des_of')){
     })
 }
 
+function enableBTN(event){
+    var flag = false;
+    if(campos() == 0 && errorsVerify() != false){
+
+        var btn = document.getElementById('boton');
+        btn.classList.remove("disabled");
+        btn.removeAttribute("disabled");
+        flag = true;
+    }
+    return flag;
+}
+
+function limpiarSelect(idSelect) {
+  
+    var elements = document.getElementById(idSelect).options;
+    for(var i = 0; i < elements.length; i++){
+      elements[i].selected = false;
+    }
+}
+
 $('#btn_transfer').on('click', function()
 {
     var select_array_idioma = document.getElementById('select_array_idioma');
@@ -154,10 +174,11 @@ $('#btn_transfer').on('click', function()
         if(tag_idioma.options[0].value == 0){
             op = tag_idioma.length-1;
         }else{
-            op = tag_idioma.length;
+            op = tag_idioma.length;             
         }
 
         if (all_selected.length == op) {
+
             if (error_show) {
                 error_show.outerHTML = "";
             }
@@ -168,14 +189,18 @@ $('#btn_transfer').on('click', function()
             var error_msg_text = document.createTextNode('Ha seleccionado todas las opciones disponibles');
             error_span.appendChild(error_msg_text);
             error_all_selected.appendChild(error_span);
+
+            mensaje = "Ha seleccionado todas las opciones disponibles";
+            colocaError(listado_error, listado_group, mensaje, button_register);
+        }
+        else{
+
+            quitarError(listado_error, listado_group);
+            document.getElementById('text_nothing').style.display = "none";
         }
 
         if (idioma_selected_select.disabled == false)
         {
-            if (document.getElementById("text_nothing")) {
-                document.getElementById("text_nothing").innerHTML = "";
-                document.getElementById("text_nothing").style.display = "none";
-            }
             var id_idioma = tag_idioma.value;
             var id_nivel_idioma = tag_nivel_idioma.value;
             var div_idioma = document.getElementById('list_idioma');
@@ -184,7 +209,7 @@ $('#btn_transfer').on('click', function()
             var p_node = document.createElement('P');
             div_idioma.appendChild(p_node);
             p_node.setAttribute("id", "idioma"+id_idioma);
-            p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close fa-2x icon' id='"+id_idioma+"' onclick='delete_item_selected(this); validarFormulario();'></i>";
+            p_node.innerHTML = text_idioma+" ("+text_idioma_nivel+") <i class='fa fa-window-close fa-2x icon' id='"+id_idioma+"' onclick='delete_item_selected(this);'></i>";
             p_node.setAttribute("disabled", "disabled");
             p_node.setAttribute("class", "col-md-5 badge_item listado");
             idioma_selected_select.setAttribute("disabled", "disabled");
@@ -201,10 +226,7 @@ $('#btn_transfer').on('click', function()
             listado.innerHTML = "";
             var publicar_btn = document.getElementById("boton");
             var errors = document.getElementsByClassName("form-group has-error has-danger");
-            // $("#boton").on("click", function(e){
-            //     e.preventDefault();
-            // });
-            // publicar_btn.setAttribute("class", "btn btn-success eder");
+
             if (errors.length <= 1 && ($(':input').filter('[required]:visible').val() != "") && ($('select').filter('[required]:visible').val() != "")) {
                 publicar_btn.setAttribute("class", "btn btn-success");
                 if (validarFormulario()){
@@ -214,6 +236,11 @@ $('#btn_transfer').on('click', function()
                     console.log("Habilitando el boton");
                 }
             }
+            document.getElementById('effect_bounce').classList.remove('bounce');
+            document.getElementById('btn_transfer').classList.remove('active_button');
+            
+            limpiarSelect("idioma_of");
+            limpiarSelect("nivel_idi_of");
         }
 
         var all_selected = $('#idioma_of option:disabled');
@@ -221,10 +248,16 @@ $('#btn_transfer').on('click', function()
             tag_nivel_idioma.setAttribute("disabled", true);
             tag_idioma.setAttribute("disabled", true);
         }
+        quitarError(listado_error, listado_group);
+    }
+    else{
+        mensaje = "Seleccione una opción";
+        colocaError(listado_error, listado_group, mensaje, button_register);
     }
 })
 
 function delete_item_selected(selected_item){
+
     var error_show = document.getElementById('id_span_error');
     if (error_show) {
         error_show.outerHTML = "";
@@ -237,10 +270,17 @@ function delete_item_selected(selected_item){
     $("#idioma_of option[value="+selected_item.id+"]").attr("disabled",false);
     var idioma_selected_select = document.getElementById('idioma_of');
     var array_idioma_select = document.getElementById('select_array_idioma').length;
+    
     if (array_idioma_select >= 1) {
+
         $("#select_array_idioma option[id='array_idioma"+selected_item.id+"']").remove();
         tag_nivel_idioma.removeAttribute("disabled");
         tag_idioma.removeAttribute("disabled");
+
+        if(selected_item.id == tag_idioma.options[tag_idioma.selectedIndex].value){
+            document.getElementById('effect_bounce').classList.add('bounce');
+            document.getElementById('btn_transfer').classList.add('active_button');
+        }
     }
     var publicar_btn = document.getElementById("boton");
     var errors = document.getElementsByClassName("form-group has-error has-danger");
@@ -266,5 +306,19 @@ function delete_item_selected(selected_item){
             document.getElementById("id_idi_error").setAttribute("class", "form-group");
         }
     }
+
+
+    if (document.getElementById('select_array_idioma').length <= 0)
+    {
+        mensaje = "Seleccione una opcion";
+        colocaError(listado_error, listado_group, mensaje, button_register);
+        document.getElementById('text_nothing').style.display = "";
+    }
+    else{
+        quitarError(listado_error, listado_group);
+        document.getElementById('text_nothing').style.display = "block";
+        //enableBTN();
+    } 
+
 }
 

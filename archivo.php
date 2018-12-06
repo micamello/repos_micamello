@@ -12,10 +12,11 @@ if (empty($carpeta) || empty($param1)){
 }
 
 if(!Modelo_Usuario::estaLogueado()){
-  exit;
+	exit;
 }
 
 if(!empty($param1) && !empty($carpeta)){
+
 	$usuario = Modelo_Usuario::existeUsuario($param1);
 	if (empty($usuario)){
 		exit;
@@ -26,13 +27,14 @@ if(!empty($param1) && !empty($carpeta)){
 }
 
 //si es candidato no puede ver imagenes/hojas de vida de otros candidatos
-if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO && 
-	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){	
-  exit;
+if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO &&
+$_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){
+	exit;
 }
 
 $mostrar = false;
 switch ($carpeta){
+
 	case 'profile':
 	  $extension = 'image/jpeg';
 	  $disposition = 'inline';
@@ -77,12 +79,12 @@ if($carpeta=='hv' && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario
 }
 
 if ($mostrar){
-  header("Pragma: no-cache"); 
-  header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); 
-  header("Expires: 0"); 
-  header("Content-type: ".$extension); 
-  header("Content-Disposition: ".$disposition."; filename=".$archivo); 
-  readfile($ruta); 	
+	header("Pragma: no-cache"); 
+	header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); 
+	header("Expires: 0"); 
+	header("Content-type: ".$extension); 
+	header("Content-Disposition: ".$disposition."; filename=".$archivo); 
+	readfile($ruta); 	
 }   
 else{
 	if(isset($cantidadRestante) && $cantidadRestante == 0){
@@ -90,7 +92,8 @@ else{
 	}else{
 		$_SESSION['mostrar_error'] = 'Archivo no encontrado';
 	}
-	$enlace = PUERTO.'://'.HOST.'/verAspirantes/2/0/1/';
+
+	$enlace = $_SERVER['HTTP_REFERER'];
 	header('Location: '.$enlace);
 }
 

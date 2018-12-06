@@ -322,12 +322,31 @@ class Utils{
     return date('Y-m-d H:i:s',$dias_antes);
   }
 
-  // public static function generarUsername($email){
-  //   $generado = self::generateRandomString();
-  //   $emailextract = substr($email, 0, strpos($email, '@'));
-  //   $username = $emailextract.$generado;
-  //   return strtolower($username);
-  // }
+  public static function generarUsername($name){
+    $count = 0;
+    $username = ($name);
+    $username_generated = $username;
+      do{
+        if($count != 0){
+          $username_generated = $username.$count;
+        }
+        $count++;
+        Utils::log("-----".$username_generated);
+      }
+    while(!empty(Modelo_Usuario::existeUsuario($username_generated)));
+    return $username_generated;
+  }
+
+  public static function generateRandomString() {
+      $length = rand(6, 10);
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $charactersLength = strlen($characters);
+      $randomString = '';
+      for ($i = 0; $i < $length; $i++) {
+          $randomString .= $characters[rand(0, $charactersLength - 1)];
+      }
+      return $randomString;
+  }
 
   public static function generarPassword() {
       $length = rand(8, 10);
