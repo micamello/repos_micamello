@@ -4955,3 +4955,1295 @@
             LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
             LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
             WHERE l.username = 'empresa1'
+[2018/12/07 09:34:00] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:00] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:34:00] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:34:00] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:34:00] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:34:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:00] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:00] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:34:00] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:34:00] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:34:00] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:00] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:34:01] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:01] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:34:01] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:34:01] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:34:01] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:01] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:34:01] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:34:01] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:01] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:34:01] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:01] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:34:01] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:34:01] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:34:01] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:01] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:01] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:34:01] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:34:01] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:34:01] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:01] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:34:38] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:38] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:34:38] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:34:38] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:34:38] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:34:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:34:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:34:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:34:38] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:34:38] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:34:38] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:34:38] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:34:38] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:35:27] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:35:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:35:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:35:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:35:27] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:35:27] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:35:27] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:35:27] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:35:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:35:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:35:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:35:27] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:35:27] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:35:27] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:35:27] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:35:27] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:35:27] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:35:39] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:35:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:35:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:35:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:35:39] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:35:39] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:35:39] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:35:39] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:35:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:35:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:35:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:35:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:35:39] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:35:39] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:35:39] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:35:39] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:35:39] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:36:42] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:36:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:36:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:36:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:36:43] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:36:43] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:36:43] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:36:43] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:36:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:36:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:36:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:36:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:36:43] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:36:43] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:36:43] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:36:43] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:36:43] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:36:54] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:36:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:36:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:36:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:36:54] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:36:54] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:36:54] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:36:54] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:36:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:36:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:36:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:36:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:36:54] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:36:54] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:36:54] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:36:54] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:36:54] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:37:30] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:37:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:37:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:37:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:37:30] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:37:30] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:37:30] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:37:30] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:37:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:37:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:37:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:37:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:37:30] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:37:30] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:37:30] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:37:30] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:37:30] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:37:45] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:37:45] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:37:45] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:37:45] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:37:45] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:37:45] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:37:45] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:37:45] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:37:45] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:37:45] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:37:45] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:37:45] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:37:45] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:37:45] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:37:45] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:37:45] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:37:45] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:38:29] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:38:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:38:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:38:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:38:29] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:38:29] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:38:29] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:38:29] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:38:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:38:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:38:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:38:29] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:38:29] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:38:29] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:38:29] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:38:30] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:38:30] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:38:41] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:38:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:38:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:38:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:38:41] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:38:41] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:38:41] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:38:41] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:38:41] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:38:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:38:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:38:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:38:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:38:41] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:38:41] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:38:41] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:38:42] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:38:42] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:38:42] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:38:42] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:38:42] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:38:42] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:38:42] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:38:42] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:38:42] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:39:08] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:39:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:39:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:39:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:39:08] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:39:08] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:39:08] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:39:08] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:39:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:39:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:39:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:39:08] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:39:08] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:39:08] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:39:08] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:39:08] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:39:08] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:39:30] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:39:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:39:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:39:30] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:39:30] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:39:30] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:39:30] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:39:30] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:39:31] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:39:31] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:39:31] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:39:31] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:39:31] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:39:31] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:39:31] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:39:31] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:39:31] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:40:51] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:40:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:40:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:40:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:40:51] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:40:51] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:40:51] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:40:51] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:40:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:40:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:40:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:40:51] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:40:51] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:40:51] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:40:51] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:40:51] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:40:51] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:41:20] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:41:20] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:41:20] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:41:20] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:41:20] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:41:20] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:41:20] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:41:20] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:41:20] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:41:20] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:41:20] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:41:20] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:41:20] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:41:20] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:41:20] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:41:20] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:41:20] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2018/12/07 09:50:21] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:50:21] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:50:21] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:50:21] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:50:21] SQL Query: SELECT e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa LIMIT 0,10
+[2018/12/07 09:50:21] SQL Query: SELECT * FROM mfo_empresa e 
+      INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa
+      INNER JOIN mfo_plan pl ON pl.id_plan = ep.id_plan
+      WHERE e.padre = '1' AND ep.id_empresa_plan_parent IS NOT NULL AND pl.num_cuenta > 0 GROUP BY e.id_empresa
+[2018/12/07 09:50:21] SQL Query: SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+          INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+          WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
+          AND e.padre = '1'
+          AND p.num_cuenta >= '4'
+          GROUP BY ep.id_empresa;
+[2018/12/07 09:50:21] SQL Query: SELECT GROUP_CONCAT(DISTINCT(p.id_plan)) AS planes_activos, GROUP_CONCAT(DISTINCT(em.id_empresa_plan)) AS id_empresa_plan FROM mfo_empresa_plan em
+              INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+              WHERE em.estado = 1 AND em.fecha_caducidad > NOW() AND p.num_cuenta > 0 AND em.id_empresa = 1 GROUP BY em.id_empresa LIMIT 1
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa = 1
+[2018/12/07 09:50:21] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:50:21] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2018/12/07 09:50:21] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '5'
+[2018/12/07 09:50:21] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '10'
+[2018/12/07 09:50:21] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 4
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 7
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 18
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 5
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 12
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 19
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 23
+[2018/12/07 09:50:21] SQL Query: SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta FROM mfo_empresa_plan ep
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW() AND ep.id_empresa_plan = 25
+[2018/12/07 09:50:21] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2018/12/07 09:50:21] Utils::createSession empezo una nueva sesion
+[2018/12/07 09:50:21] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'

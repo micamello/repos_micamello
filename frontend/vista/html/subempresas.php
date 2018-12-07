@@ -36,13 +36,13 @@
                                         <?php } ?>
                                     </div>
                                    <?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ ?>
-                                        <div class="col-md-2" align="right">
+                                        <div class="col-md-2 icon_oferta" align="right">
                                             <a href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/"><span id="boton" name="" class="btn btn-md btn-success">
-                                            <i class="fa fa-industry fa-1x" title="Crear nueva empresa"></i> CREAR EMPRESA</span></a>
+                                            <i class="fa fa-industry " title="Crear nueva empresa"></i> CREAR EMPRESA</span></a>
                                         </div>
                                     <?php } ?>
                                 </div>
-                                <div style="overflow-x:auto;">
+                                <div style="overflow-x:auto; width: 100%">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr class="breadcrumb">
@@ -121,32 +121,32 @@
                                                                 }
 
                                                                 if($fechas_caducidades[$key] >= date('Y-m-d H:i:s') || $estados[$key] != 'Inactivo'/*&& $numero_postulaciones != -1*/){ ?>
-                                                                    <td style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/editarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>">
-                                                                        <i class="fa fa-edit fa-1x" title="Editar plan de la empresa"></i>
+                                                                    <td class="icon_oferta" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/editarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>">
+                                                                        <i class="fa fa-edit" title="Editar plan de la empresa"></i>
                                                                     </a></td>
                                                                 <?php }else{ ?>
-                                                                        <td style="text-align: center;">
-                                                                            <i class="fa fa-edit fa-1x icon_deshabilitados" title="Editar plan de la empresa"></i>
+                                                                        <td class="icon_oferta" style="text-align: center;">
+                                                                            <i class="fa fa-edit icon_deshabilitados" title="Editar plan de la empresa"></i>
                                                                         </td>
                                                                 <?php } 
 
                                                                 if($estados[$key] != 'Inactivo'){ ?>
-                                                                    <td style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>" onclick="if(!confirm('Está seguro que desea eliminar el plan?')) return false;">
-                                                                        <i class="fa fa-trash fa-1x" title="Eliminar plan de la empresa"></i>
+                                                                    <td class="icon_oferta" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>" onclick="if(!confirm('Está seguro que desea eliminar el plan?')) return false;">
+                                                                        <i class="fa fa-trash " title="Eliminar plan de la empresa"></i>
                                                                     </a></td>
                                                             <?php }else{ ?>
-                                                                    <td style="text-align: center;">
-                                                                        <i class="fa fa-trash fa-1x icon_deshabilitados" title="Eliminar plan de la empresa"></i></td>
+                                                                    <td class="icon_oferta" style="text-align: center;">
+                                                                        <i class="fa fa-trash  icon_deshabilitados" title="Eliminar plan de la empresa"></i></td>
                                                             <?php }
 
                                                                  if($mostrar == 0){
                             
                                                                     if(!empty($tieneRecursos['publicaciones']) && !empty($puedeCrearPlan)){ ?>
-                                                                        <td style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/asignarPlanEmpresa/'.$value['id_empresa'].'/'; ?>">
-                                                                            <i class="fa fa-plus fa-1x" title="Asignar recursos"></i>
+                                                                        <td class="icon_oferta" style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/asignarPlanEmpresa/'.$value['id_empresa'].'/'; ?>">
+                                                                            <i class="fa fa-plus " title="Asignar recursos"></i>
                                                                         </a></td>
                                                                 <?php } else{ ?>
-                                                                            <td style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><i class="fa fa-plus fa-1x icon_deshabilitados" title="Asignar recursos"></i></td>
+                                                                            <td class="icon_oferta" style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><i class="fa fa-plus  icon_deshabilitados" title="Asignar recursos"></i></td>
                                                                     <?php }
                                                                 }
                                                         }
