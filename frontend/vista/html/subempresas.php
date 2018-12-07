@@ -9,41 +9,40 @@
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-body">
-                                <div id="no-more-tables">
-                                    
-                                    <div class="form-group col-md-12" align="right">
-                                        <div class="col-md-<?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ echo '10'; }else{ echo '12'; } ?>" align="right">
+
+                                <div class="form-group col-md-12" align="right">
+                                    <div class="col-md-<?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ echo '10'; }else{ echo '12'; } ?>" align="right">
+                                        <span>
+                                            <strong>N° de Cuentas creadas: </strong>
+                                            <span style="color:red" class="parpadea"><?php echo $cantd_empresas; ?></span>
+                                        </span>
+                                        <br>
+
+                                        <?php if(!empty($tieneRecursos['publicaciones'])){ ?>
                                             <span>
-                                                <strong>N° de Cuentas creadas: </strong>
-                                                <span style="color:red" class="parpadea"><?php echo $cantd_empresas; ?></span>
+                                                <strong>N° de Publicaciones Restantes: </strong>
+                                                <span style="color:red" class="parpadea"><?php if($tieneRecursos['publicaciones'] == ''){ echo 'No tiene publicaciones'; }else{ echo $tieneRecursos['publicaciones']; } ?></span>
                                             </span>
                                             <br>
-
-                                            <?php if(!empty($tieneRecursos['publicaciones'])){ ?>
-                                                <span>
-                                                    <strong>N° de Publicaciones Restantes: </strong>
-                                                    <span style="color:red" class="parpadea"><?php if($tieneRecursos['publicaciones'] == ''){ echo 'No tiene publicaciones'; }else{ echo $tieneRecursos['publicaciones']; } ?></span>
-                                                </span>
-                                                <br>
-                                                <span>
-                                                    <strong>N° de Descargas Restantes: </strong>
-                                                    <span style="color:red" class="parpadea"><?php if($tieneRecursos['descargas'] == ''){ echo 'No tiene descargas'; }else{ echo $tieneRecursos['descargas']; } ?></span>
-                                                </span>
-                                            <?php }else{ ?>
-                                                <span>
-                                                    <strong>N° de Publicaciones Restantes: </strong>
-                                                    <span style="color:red" class="parpadea">0</span>
-                                                </span>
-                                            <?php } ?>
-                                        </div>
-                                       <?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ ?>
-                                            <div class="col-md-2" align="right">
-                                                <a href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/"><span id="boton" name="" class="btn btn-md btn-success">
-                                                <i class="fa fa-industry fa-1x" title="Crear nueva empresa"></i> CREAR EMPRESA</span></a>
-                                            </div>
+                                            <span>
+                                                <strong>N° de Descargas Restantes: </strong>
+                                                <span style="color:red" class="parpadea"><?php if($tieneRecursos['descargas'] == ''){ echo 'No tiene descargas'; }else{ echo $tieneRecursos['descargas']; } ?></span>
+                                            </span>
+                                        <?php }else{ ?>
+                                            <span>
+                                                <strong>N° de Publicaciones Restantes: </strong>
+                                                <span style="color:red" class="parpadea">0</span>
+                                            </span>
                                         <?php } ?>
                                     </div>
-
+                                   <?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ ?>
+                                        <div class="col-md-2" align="right">
+                                            <a href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/"><span id="boton" name="" class="btn btn-md btn-success">
+                                            <i class="fa fa-industry fa-1x" title="Crear nueva empresa"></i> CREAR EMPRESA</span></a>
+                                        </div>
+                                    <?php } ?>
+                                </div>
+                                <div style="overflow-x:auto;">
                                     <table class="table table-bordered table-hover">
                                         <thead>
                                             <tr class="breadcrumb">
@@ -53,7 +52,7 @@
                                                 <th class="text-center">N° de descargas restantes</th>
                                                 <th class="text-center">Estado</th>
                                                 <?php
-                                                #print_r($tieneRecursos);
+                                                
                                                  if(!empty($puedeCrearCuenta) && !empty($tieneRecursos['publicaciones'])){ ?>
                                                     <th colspan="3" class="text-center">Acciones</th>
                                                 <?php } ?>
@@ -97,10 +96,10 @@
                                                             $mostrar = 0;
                                                             foreach ($planes as $key => $dato) { ?>
 
-                                                            <td style="text-align: center;" data-title="Planes activos:"><?php echo $dato; ?></td>
-                                                            <td style="text-align: center;" data-title="Publicaciones restantes: "><?php echo $num_post[$key]; ?></td>
-                                                            <td style="text-align: center;" data-title="Descargas restantes"><?php echo $num_desc[$key]; ?></td>
-                                                            <td style="text-align: center;" data-title="Estado"><?php echo $estados[$key]; ?></td>
+                                                            <td style="text-align: center;"><?php echo $dato; ?></td>
+                                                            <td style="text-align: center;"><?php echo $num_post[$key]; ?></td>
+                                                            <td style="text-align: center;"><?php echo $num_desc[$key]; ?></td>
+                                                            <td style="text-align: center;"><?php echo $estados[$key]; ?></td>
 
                                                             <?php 
 
@@ -121,33 +120,33 @@
                                                                    $numero_descargas = '0'; 
                                                                 }
 
-                                                                if($fechas_caducidades[$key] >= date('Y-m-d H:i:s') && $estados[$key] != 'Inactivo' && $numero_postulaciones != -1){ ?>
-                                                                    <td style="text-align: center;" data-title="Editar"><a href="<?php echo PUERTO.'://'.HOST.'/editarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>">
+                                                                if($fechas_caducidades[$key] >= date('Y-m-d H:i:s') || $estados[$key] != 'Inactivo'/*&& $numero_postulaciones != -1*/){ ?>
+                                                                    <td style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/editarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>">
                                                                         <i class="fa fa-edit fa-1x" title="Editar plan de la empresa"></i>
                                                                     </a></td>
                                                                 <?php }else{ ?>
-                                                                        <td style="text-align: center;" data-title="Editar">
+                                                                        <td style="text-align: center;">
                                                                             <i class="fa fa-edit fa-1x icon_deshabilitados" title="Editar plan de la empresa"></i>
                                                                         </td>
                                                                 <?php } 
 
                                                                 if($estados[$key] != 'Inactivo'){ ?>
-                                                                    <td style="text-align: center;" data-title="Eliminar"><a href="<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>" onclick="if(!confirm('Está seguro que desea eliminar el plan?')) return false;">
+                                                                    <td style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>" onclick="if(!confirm('Está seguro que desea eliminar el plan?')) return false;">
                                                                         <i class="fa fa-trash fa-1x" title="Eliminar plan de la empresa"></i>
                                                                     </a></td>
                                                             <?php }else{ ?>
-                                                                    <td style="text-align: center;" data-title="Eliminar">
+                                                                    <td style="text-align: center;">
                                                                         <i class="fa fa-trash fa-1x icon_deshabilitados" title="Eliminar plan de la empresa"></i></td>
                                                             <?php }
 
                                                                  if($mostrar == 0){
                             
                                                                     if(!empty($tieneRecursos['publicaciones']) && !empty($puedeCrearPlan)){ ?>
-                                                                        <td style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;" data-title="Asignar Recursos"><a href="<?php echo PUERTO.'://'.HOST.'/asignarPlanEmpresa/'.$value['id_empresa'].'/'; ?>">
+                                                                        <td style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/asignarPlanEmpresa/'.$value['id_empresa'].'/'; ?>">
                                                                             <i class="fa fa-plus fa-1x" title="Asignar recursos"></i>
                                                                         </a></td>
                                                                 <?php } else{ ?>
-                                                                            <td style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;" data-title="Asignar Recursos"><i class="fa fa-plus fa-1x icon_deshabilitados" title="Asignar recursos"></i></td>
+                                                                            <td style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><i class="fa fa-plus fa-1x icon_deshabilitados" title="Asignar recursos"></i></td>
                                                                     <?php }
                                                                 }
                                                         }
@@ -156,10 +155,10 @@
                                                 <?php  } ?>
                                                         
                                                 <?php }else{  ?>
-                                                    <td style="text-align: center;" data-title="Planes activos:"><?php echo $value['planes']; ?></td>
-                                                    <td style="text-align: center;" data-title="Publicaciones restantes: "><?php echo $value['num_publicaciones_rest']; ?></td>
-                                                    <td style="text-align: center;" data-title="Descargas restantes"><?php echo $value['num_descarga_rest']; ?></td>
-                                                    <td style="text-align: center;" data-title="Estado"><?php echo $value['estado']; ?></td></tr>
+                                                    <td style="text-align: center;"><?php echo $value['planes']; ?></td>
+                                                    <td style="text-align: center;"><?php echo $value['num_publicaciones_rest']; ?></td>
+                                                    <td style="text-align: center;" ><?php echo $value['num_descarga_rest']; ?></td>
+                                                    <td style="text-align: center;"><?php echo $value['estado']; ?></td></tr>
                                                 <?php } ?>
                                                 
                                             <?php } ?>
@@ -168,17 +167,13 @@
                                         <?php } ?>
                                         </tbody>
                                     </table>
-                                    <div class="col-md-12">
-                                        <?php echo $paginas; ?>
-                                    </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <?php echo $paginas; ?>
+                                </div>
+                                
                             </div>
-                            <!--<div class="astrodivider">
-                                <div class="astrodividermask"></div>
-                                <span><i><img width="100%" src="<?php #echo PUERTO."://".HOST."/imagenes/logo.png"; ?>"></i></span>
-                            </div>
-                            <br><br>
-                            -->
+
                             <!-- Modal -->
                             <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
                               <div class="modal-dialog " role="document">

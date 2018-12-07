@@ -1,3 +1,23 @@
+if(document.getElementById('form_editarCuenta')){
+  //cambiarEstados();
+}
+
+function cambiarEstados(){
+
+  if(document.getElementById('estado')){
+
+    var estado = document.getElementById('estado').value;
+    console.log(estado);
+    if(estado == 0){
+      document.getElementById('nom_estado').innerHTML = '<h6><b>Activo</b></h6>';
+      document.getElementById('estado').value = 1;
+    }else{
+      document.getElementById('nom_estado').innerHTML = '<h6><b>Inactivo</b></h6>';
+      document.getElementById('estado').value = 0;
+    }
+  }
+}
+
 function colocaError(campo, id, mensaje, btn){
 
   nodo = document.getElementById(campo);
@@ -82,7 +102,7 @@ function calcularRecursos(){
               }
               document.getElementById('post_asignar').innerHTML = nuevo_valor;
               quitarError("rec1","recursos1");
-              document.getElementById('num').value = '-1';
+              //document.getElementById('post').value = '-1';
             }else{
               colocaError("rec1","recursos1","La cantidad no es válida","button_crear");
               document.getElementById('post_asignar').innerHTML = post_asignar+post;
@@ -634,8 +654,18 @@ function enviarRecursos(){
 
 function validaRecursos(){
 
-  var num_post = document.getElementById('num_post').value;
-  var num_desc = document.getElementById('num_desc').value;
+  if(document.getElementById('num_desc')){
+    var num_post = document.getElementById('num_post').value;
+  }else{
+    var num_post = -1;
+  }
+
+  if(document.getElementById('num_desc')){
+    var num_desc = document.getElementById('num_desc').value;
+  }else{
+    var num_desc = -1;
+  }
+
   var errors = 0; 
 
   if(document.getElementById('plan') && document.getElementById('plan').value == 0){
@@ -648,9 +678,9 @@ function validaRecursos(){
   }
 
   if(num_desc == '' || num_desc == 0){
-    errors = 1;
+    errors = 2;
   }
-
+console.log(errors);
   if(errors > 0){
     $("#button_editar").addClass('disabled');
   }else{

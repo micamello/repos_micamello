@@ -7,6 +7,7 @@
                         <div>
                             <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Editar Plan</p>
                         </div>
+
                         <div class="panel panel-default">
                             <div class="panel-body">
                                 <div id="no-more-tables">
@@ -24,7 +25,20 @@
                                               <input type="hidden" name="desc" id="desc" value="<?php if(isset($planHijo['num_descarga_rest'])) { echo $planHijo['num_descarga_rest']; } ?>">
 
                                               <div class="col-md-12" id="seccion_recursos">
-                                                  <br>                                                
+                                                  <br>     
+                                                  <?php if(isset($planHijo['num_publicaciones_rest']) && $planHijo['num_publicaciones_rest'] == -1 && $planHijo['num_descarga_rest'] == -1) { ?>
+                                                  <div id="nom_estado">
+                                                    <?php if($planHijo['estado'] == 1){ ?>
+                                                      <h6><b>Activo</b></h6>
+                                                    <?php }else{ ?>
+                                                      <h6><b>Inactivo</b></h6>
+                                                    <?php } ?>
+                                                  </div>
+                                                  <div>
+                                                    <input name="estado" id="estado" type="checkbox" value="<?php echo $planHijo['estado']; ?>" class="flipswitch_check" onclick="cambiarEstados();" <?php if($planHijo['estado'] == 1){ echo 'checked'; } ?> />
+                                                  </div>
+                                                  <br> 
+                                                <?php } ?>
                                                   <?php if(isset($planHijo['num_publicaciones_rest']) && $planHijo['num_publicaciones_rest'] != -1) { ?>
                                                     <div id="seccion_postulacion">
                                                       <div class="col-md-offset-3 col-md-4">

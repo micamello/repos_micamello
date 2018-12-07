@@ -249,7 +249,7 @@ class Modelo_UsuarioxPlan{
 
   public static function consultarRecursosAretornar($idPlanEmpresa){
   
-    $sql = "SELECT id_empresa_plan, id_empresa_plan_parent, num_publicaciones_rest,num_descarga_rest, fecha_compra, fecha_caducidad, id_plan, id_empresa FROM mfo_empresa_plan 
+    $sql = "SELECT id_empresa_plan, id_empresa_plan_parent, num_publicaciones_rest,num_descarga_rest, fecha_compra, fecha_caducidad, id_plan, id_empresa, estado FROM mfo_empresa_plan 
       WHERE id_empresa_plan = $idPlanEmpresa";
     return $GLOBALS['db']->auto_array($sql,array());
   }
@@ -275,8 +275,6 @@ class Modelo_UsuarioxPlan{
       $cantd_desc = -1;
     }
 
-    $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => 0, 'num_descarga_rest' => 0),'id_empresa_plan='.$recursos['id_empresa_plan']);
-
     return $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => $cantd_post, 'num_descarga_rest' => $cantd_desc),'id_empresa_plan='.$recursos['id_empresa_plan_parent']);
   }
 
@@ -299,7 +297,19 @@ class Modelo_UsuarioxPlan{
 
   public static function actualizarPublicacionesEmpresa($id_empresa_plan, $num_post,$num_desc){
     if (empty($id_empresa_plan) || empty($num_post) || empty($num_desc)) {return false;}
-    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post,"num_descarga_rest"=>$num_desc), "id_empresa_plan = ".$id_empresa_plan);
+    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post,"num_descarga_rest"=>$num_desc, "estado"=>1), "id_empresa_plan = ".$id_empresa_plan);
+    return $result;
+  }
+
+  public static function actualizaEstadoPlan($id_empresa_plan, $estado){
+    
+    if (empty($id_empresa_plan)) {return false;}
+
+    if($estado == ''){
+      $estado = 0;
+    }
+    
+    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("estado"=>$estado), "id_empresa_plan = ".$id_empresa_plan);
     return $result;
   }
 }  

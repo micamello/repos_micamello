@@ -39,7 +39,7 @@ class Controlador_Subempresa extends Controlador_Base
             break;
             case 'eliminar': 
                 self::eliminarPlan($idPlanEmpresa);
-                self::vistaPrincipal($idUsuario,$page);
+                Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/'); 
             break;
             case 'crearPlan': 
                 
@@ -73,13 +73,13 @@ class Controlador_Subempresa extends Controlador_Base
                 $breadcrumbs['adminEmpresas'] = "Administrar Cuentas";
                 $breadcrumbs['asinarRecursos'] = "Editar Plan";       
 
-                $idSubEmpresa = Utils::getParam('idSubEmpresa', '', $this->data);
                 if (Utils::getParam('editarPlan') == 1) {
                     self::asignarRecursos($idPlanEmpresa,'editar');
                     Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/');
                 }
 
                 $planHijo = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
+
                 $planPadre = array();
                 if(!empty($planHijo)){
                     $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($planHijo['id_empresa_plan_parent']);
@@ -91,7 +91,6 @@ class Controlador_Subempresa extends Controlador_Base
                     'planPadre'=>$planPadre,
                     'idPlanEmpresa'=>$idPlanEmpresa
                 );
-
                 $tags["template_js"][] = "subempresas";
                 Vista::render('editarPlan', $tags);
                 
@@ -148,7 +147,6 @@ class Controlador_Subempresa extends Controlador_Base
             'tieneRecursos'=>$tieneRecursos,
             'paginas'=>$pagination->showPage()
         );      
-        
         Vista::render('subempresas', $tags);
     }
 
@@ -338,44 +336,69 @@ class Controlador_Subempresa extends Controlador_Base
         }
     }
 
-    public function asignarRecursos($id_empresa,$tipoVista){
+    public function asignarRecursos($id,$tipoVista){
 
         try{
 
-            $campos = array("num_post"=>1,"num_desc"=>1,"plan"=>1); 
+            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($_POST['plan']);
 
-            $data = $this->camposRequeridos($campos);
-
-            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($data['plan']);
-            if($_POST["num_post"] == -1){
+            if(!isset($_POST["num_post"]) || $_POST["num_post"] == -1){
                 $var1 = -1;
+                $numPublicaciones = -1;
             }else{
-                $var1 = $data["num_post"];
-                $numPublicaciones = $planPadre['num_publicaciones_rest'] - $var1;
-            }
+                $var1 = $_POST["num_post"];
 
-            if($_POST["num_desc"] == -1){
+                if(isset($_POST["post"])){
+                    $post = $_POST["post"];
+                }else{
+                    $post = 0;
+                }
+                $numPublicaciones = ($planPadre['num_publicaciones_rest']+$post) - $var1;
+            }
+            
+            if(!isset($_POST["num_desc"]) || $_POST["num_desc"] == -1){
                 $var2 = -1;
+                $numDescargas = -1;
             }else{
-                $var2 = $data["num_desc"];
-                $numDescargas = $planPadre['num_descarga_rest'] - $var2;
+                $var2 = $_POST["num_desc"];
+
+                if(isset($_POST["desc"])){
+                    $desc = $_POST["desc"];
+                }else{
+                    $desc = 0;
+                }
+
+                $numDescargas = ($planPadre['num_descarga_rest']+$desc) - $var2;
             }
 
-            if($var1 != -1 && $var2 != -1){
+            if($var1 == -1 || $var2 == -1){
 
-                if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($data['plan'],$numPublicaciones,$numDescargas)){
-                    throw new Exception("Error al actualizar los recursos de la empresa."); 
+                if(isset($_POST['estado'])){
+                    $est = $_POST['estado'];
+                }else{
+                    $est = 0;
                 }
-            }
 
-            if($tipoVista == 'asignar'){
-                if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$data['plan'])){
-                  throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
+                if (!Modelo_UsuarioxPlan::actualizaEstadoPlan($id,$est)){
+                    throw new Exception("Error al cambiar el estado del plan, por favor intente de nuevo.");   
                 }
             }else{
-                if (!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($id_empresa,$var1,$var2))
-                {
-                  throw new Exception("Error al actualizar los recursos de la empresa hija.");   
+
+                if($var1 != -1 || $var2 != -1){
+
+                    if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($_POST['plan'],$numPublicaciones,$numDescargas)){
+                        throw new Exception("Error al actualizar los recursos de la empresa."); 
+                    }
+                }
+
+                if($tipoVista == 'asignar'){
+                    if (!Modelo_UsuarioxPlan::guardarPlan($id,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$_POST['plan'])){
+                      throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
+                    }
+                }else{
+                    if (!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($id,$var1,$var2)){
+                      throw new Exception("Error al actualizar los recursos de la empresa hija.");   
+                    }
                 }
             }
 
