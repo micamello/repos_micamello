@@ -9,7 +9,7 @@
               <label>Nueva contrase&ntilde;a:</label><div class="help-block with-errors"></div>
               <div class="input-group">
                 <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                <input type="password" name="password" id="password" class="form-control" title="Letras y números, mínimo 8 caracteres" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" required>
+                <input type="password" name="password" id="password" class="form-control" title="Letras y números, mínimo 8 caracteres" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" required maxlength="8" minlength="8">
               </div>
               <input type="hidden" name="confirm_form" id="confirm_form" value="1">
               <input type="hidden" name="token" id="token" value="<?php echo $token;?>">
@@ -20,7 +20,7 @@
               <label>Confirme contrase&ntilde;a:</label><div class="help-block with-errors"></div>
               <div class="input-group">
                 <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                <input type="password" name="password2" id="password2" class="form-control" title="Letras y números, mínimo 8 caracteres" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" required> 
+                <input type="password" name="password2" id="password2" class="form-control" title="Letras y números, mínimo 8 caracteres" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" required maxlength="8" minlength="8"> 
               </div>
             </div>                 
           </div>   

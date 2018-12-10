@@ -78,14 +78,14 @@ if (!empty($usuarios) && is_array($usuarios)){
 	      throw new Exception("CORREO YA EXISTE ".$usuario["correo"]);
 	    }
     
-	    $obj_registro = new Controlador_Registro();
+	    //$obj_registro = new Controlador_Registro();
 	    $nombre = Utils::no_carac(explode(" ", strtolower(trim(utf8_decode($usuario['nombres']))))); 
 	    if ($usuario['tipo_usuario'] == 1){   
 	      $apellido = Utils::no_carac(explode(" ", strtolower(trim(utf8_decode($usuario['apellidos'])))));    
-	      $username = $obj_registro->generarUsername($nombre[0].$apellido[0]);
+	      $username = Utils::generarUsername($nombre[0].$apellido[0]);
 	    }
 	    else{
-	      $username = $obj_registro->generarUsername($nombre[0]);
+	      $username = Utils::generarUsername($nombre[0]);
 	    }
       
  			$password = Utils::generarPassword();

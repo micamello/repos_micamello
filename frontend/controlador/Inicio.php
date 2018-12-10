@@ -28,7 +28,6 @@ class Controlador_Inicio extends Controlador_Base {
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
 
-
     $social_reg = array('fb'=>$fb_URL, 'gg'=>$gg_URL);
 
     $tags = array('banners'=>$arrbanner, 
