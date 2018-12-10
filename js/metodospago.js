@@ -20,7 +20,7 @@ $(window).on('load',function(){
 
 });
 
-function cambia(radioSeleccionado){
+function cambia(radioSeleccionado){  
   document.getElementById('tipoSeleccionado').value = radioSeleccionado;
 }
 
@@ -126,8 +126,8 @@ function enviarFormulario(form){
 
 function validarFormulario(){
 
-  var expreg = /^[a-z A-Z]+$/i;
-  var expreg1 = /^[a-z A-Z 0-9]+$/i;
+  var expreg = /^[a-z A-Z ÁÉÍÓÚáéíóúñÑ]+$/i;
+  var expreg1 = /^[a-z A-Z 0-9 ÁÉÍÓÚáéíóúñÑ]+$/i;
   var expreg_telf = /^[0-9]+$/i;
   var expreg_correo = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/i;
   //var expreg_float = /^[0-9]{2,}\.?[0-9]{2}$/i;

@@ -179,16 +179,16 @@ class Controlador_Plan extends Controlador_Base {
       $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'direccion'=>1,'tipo_doc'=>1,'telefono'=>1,'dni'=>1);
       $data = $this->camposRequeridos($campos);   
        
-      if (!Utils::alfanumerico($data["num_comprobante"])){
+      if (!Utils::alfanumerico($data["num_comprobante"]) || strlen($data["num_comprobante"]) > 50){
         throw new Exception("Número de comprobante no es válido");
       }
-      if (!Utils::formatoDinero($data["valor"])){
+      if (!Utils::formatoDinero($data["valor"]) || strlen($data["valor"]) > 10){
         throw new Exception("Valor del comprobante no es válido");
       }
-      if (!Utils::es_correo_valido($data["correo"])){
+      if (!Utils::es_correo_valido($data["correo"]) || strlen($data["correo"]) > 100){
         throw new Exception("Dirección de correo electrónico no es válido");
       }
-      if (!Utils::valida_telefono($data["telefono"])){
+      if (!Utils::valida_telefono($data["telefono"]) || strlen($data["telefono"]) > 25){
         throw new Exception("Número de teléfono no es válido");
       }
       if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
@@ -208,6 +208,7 @@ class Controlador_Plan extends Controlador_Base {
       }
        
       $archivo = Utils::validaExt($_FILES['imagen'],3);
+
       if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],$data["telefono"],
                                                   $data["dni"],$data["tipo_doc"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
                                                   $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],$data["idplan"],

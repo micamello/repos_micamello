@@ -4,6 +4,7 @@
       <div class="container">
         <div class="breadcrumb">
           <h3>M&eacute;todos de pago</h3>
+          <input type="hidden" name="tipoSeleccionado" id="tipoSeleccionado" value="">
         </div>
         <div align="center">     
           <?php foreach(Modelo_Comprobante::METODOS_PAGOS as $key=>$metodo){ ?>               
@@ -40,13 +41,13 @@
                   <div class="col-md-6">
                     <div id="seccion_comp" class="form-group">
                       <label>N&uacute;mero de comprobante:</label><div id="err_comp" class="help-block with-errors"></div>
-                      <input type="text" name="num_comprobante" id="num_comprobante" class="form-control" onkeydown="return validaNumeros(event);" onkeyup="validarFormulario();" required>
+                      <input type="text" name="num_comprobante" id="num_comprobante" class="form-control" onkeydown="return validaNumeros(event);" onkeyup="validarFormulario();" required maxlength="50" minlength="5">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div id="seccion_val" class="form-group">
                       <label>Valor del d&eacute;posito:</label><div id="err_val" class="help-block with-errors"></div>
-                      <input type="text" name="valor" id="valor" class="form-control" onkeyup="validarFormulario();" onkeypress="return validaDecimales(event,this);" required>
+                      <input type="text" name="valor" id="valor" class="form-control" onkeyup="validarFormulario();" onkeypress="return validaDecimales(event,this);" required maxlength="10" minlength="2">
                     </div>
                   </div>
                   <div id="seccion_img" class="col-md-6">
@@ -92,25 +93,25 @@
               <div class="col-md-6">
                 <div id="seccion_nombre" class="form-group">
                   <label>Nombre y apellidos:</label><div id="err_nom" class="help-block with-errors"></div>
-                  <input type="text" name="nombre" id="nombre" class="form-control" onkeyup="validarFormulario();" placeholder="Ejemplo: Carlos Crespo" required>
+                  <input type="text" name="nombre" id="nombre" class="form-control" onkeyup="validarFormulario();" placeholder="Ejemplo: Carlos Crespo" required minlength="10" maxlength="100">
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="seccion_correo" class="form-group">    
                   <label>Correo:</label><div id="err_correo" class="help-block with-errors"></div>
-                  <input type="email" name="correo" id="correo" class="form-control" placeholder="Ejemplo: carloscrespo@gmail.com" onkeyup="validarFormulario();" required>
+                  <input type="email" name="correo" id="correo" class="form-control" placeholder="Ejemplo: carloscrespo@gmail.com" onkeyup="validarFormulario();" required minlength="10" maxlength="100">
                 </div>  
               </div> 
               <div class="col-md-6">           
                 <div id="seccion_dir" class="form-group">    
                   <label>Direcci&oacute;n:</label><div id="err_dir" class="help-block with-errors"></div>
-                  <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ejemplo: Samanes V" onkeyup="validarFormulario();" required>
+                  <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ejemplo: Samanes V" onkeyup="validarFormulario();" required minlength="10" maxlength="100">
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="seccion_tlf" class="form-group">    
                   <label>Tel&eacute;fono:</label><div id="err_tlf" class="help-block with-errors"></div>
-                  <input type="text" name="telefono" id="telefono" class="form-control" minlength="10" maxlength="15" onkeyup="validarFormulario();" onkeydown="return validaNumeros(event);" required>
+                  <input type="text" name="telefono" id="telefono" class="form-control" minlength="6" maxlength="15" onkeyup="validarFormulario();" onkeydown="return validaNumeros(event);" required>
                 </div>
               </div>
               <div align="center">
@@ -154,28 +155,28 @@
                 <div class="col-md-6"> 
                   <div id="seccion_nombreP" class="form-group">
                     <label>Nombre y apellidos:</label><div id="err_nomP" class="help-block with-errors"></div>
-                    <input type="text" name="nombreP" id="nombreP" class="form-control" onkeyup="validarFormulario();">
+                    <input type="text" name="nombreP" id="nombreP" class="form-control" onkeyup="validarFormulario();" minlength="10" maxlength="100">
                   </div>
                 </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_correoP" class="form-group">   
                     <label>Correo:</label><div id="err_correoP" class="help-block with-errors"></div>
-                    <input type="email" name="correoP" id="correoP" class="form-control" onkeyup="validarFormulario();">
+                    <input type="email" name="correoP" id="correoP" class="form-control" onkeyup="validarFormulario();" minlength="10" maxlength="100">
                   </div>
                 </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_dirP" class="form-group"> 
                     <label>Direcci&oacute;n:</label><div id="err_dirP" class="help-block with-errors"></div> 
-                    <input type="text" name="direccionP" id="direccionP" class="form-control" onkeyup="validarFormulario();">  
+                    <input type="text" name="direccionP" id="direccionP" class="form-control" onkeyup="validarFormulario();" minlength="10" maxlength="100">  
                   </div>
                 </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_tlfP" class="form-group">    
                     <label>Tel&eacute;fono:</label><div id="err_tlfP" class="help-block with-errors"></div>
-                    <input type="text" name="telefonoP" id="telefonoP" class="form-control" onkeyup="validarFormulario();" onkeydown="return validaNumeros(event);">
+                    <input type="text" name="telefonoP" id="telefonoP" class="form-control" onkeyup="validarFormulario();" onkeydown="return validaNumeros(event);" minlength="6" maxlength="25">
                   </div>
                 </div>
 
@@ -206,78 +207,7 @@
         </div>    
       </div>  
       <div class="col-md-2"></div>
-      <?php } ?>
-      <div class="col-md-2"></div>
-      <div class="col-md-8">
-        <div class="panel panel-default" id="panel_3" style="display:none;">
-          <div class="panel-body">
-            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo-paymentez.jpg"><br><br>            
-            <form action="<?php echo RUTA_PAYPAL;?>" method="post" name="form_paypal" id="form_paypal" role="form">
-              <div class="col-xs-12 col-md-12">                
-                <div class="form-group col-md-12">
-                  <label>Nombre y apellidos:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="nombreZ" id="nombreZ" class="form-control" required>
-                </div>
-                <div class="form-group col-md-12">    
-                  <label>Correo:</label><div class="help-block with-errors"></div>
-                  <input type="email" name="correoZ" id="correoZ" class="form-control" required>
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>Provincia:</label><div class="help-block with-errors"></div>
-                  <select class="form-control" name="provinciaZ" id="provinciaZ">
-                    <option value="">Seleccione una provincia</option>
-                    <?php if (!empty($arrprovincia)){
-                            foreach($arrprovincia as $key => $pr){ 
-                              echo "<option value='".$pr['id_provincia']."'";
-                              if ($provincia == $pr['id_provincia']){ 
-                                echo " selected='selected'";
-                              }
-                              echo ">".utf8_encode($pr['nombre'])."</option>";
-                            }
-                          } 
-                    ?>
-                  </select>                
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>Ciudad:</label><div class="help-block with-errors"></div>
-                  <select id="ciudadP" name="ciudadZ" class="form-control">
-                  <?php if(!empty($arrciudad)){
-                          foreach($arrciudad as $key => $ciudad){ 
-                            echo "<option value='".$ciudad['id_ciudad'];
-                            if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $key){  
-                                echo " selected='selected'";
-                            }
-                            echo "'>".utf8_encode($ciudad['ciudad'])."</option>";
-                          } 
-                        }else{ ?>
-                          <option value="">Seleccione una ciudad</option>
-                  <?php } ?>
-                  </select>
-                </div>                
-                <div class="form-group col-md-6">    
-                  <label>Tel&eacute;fono:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="telefonoZ" id="telefonoZ" class="form-control" onkeydown="return validaNumeros(event);" required>
-                </div>
-                <div class="form-group col-md-6">    
-                  <label>C&eacute;dula / RUC:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="dniZ" id="dniZ" class="form-control" onkeydown="return validaNumeros(event);" required>
-                </div>                 
-              </div>
-              <div class="col-xs-12 col-md-12">
-                <div class="breadcrumb" align="center">                  
-                  <label>Plan Seleccionado:</label><br><?php echo $plan["nombre"];?>
-                  <input type="hidden" id="idplanZ" name="idplanZ" value="<?php echo $plan["id_plan"];?>">
-                  <input type="hidden" id="usuarioZ" name="usuarioZ" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>">
-                  <input type="hidden" id="tipoSeleccionado" value="<?php echo Modelo_Comprobante::METODO_PAYPAL;?>">
-                  <hr>
-                  <label>Valor:</label><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>                         
-                </div>                   
-              </div>                        
-            </form>
-          </div>
-        </div>    
-      </div>     
-      <div class="col-md-2"></div>
+      <?php } ?>      
     </div>
   </div>
 </div>

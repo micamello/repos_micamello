@@ -115,7 +115,7 @@ class Controlador_Registro extends Controlador_Base {
         }
         $username = Utils::no_carac(html_entity_decode($username));
         
-        $username_generated = self::generarUsername($username);
+        $username_generated = Utils::generarUsername($username);
         // Utils::log("eend: ".$username_generated);
         $GLOBALS['db']->beginTrans();
         self::guardarUsuario($data, $username_generated);
@@ -193,7 +193,7 @@ class Controlador_Registro extends Controlador_Base {
     $apell_user = Utils::no_carac(explode(" ", strtolower($userdata['last_name'])));
     $nombre_user = Utils::no_carac(explode(" ", strtolower($userdata['first_name'])));
     $username = $nombre_user[0].$apell_user[0];
-      $username = self::generarUsername(strtolower($username));
+      $username = Utils::generarUsername(strtolower($username));
       $GLOBALS['db']->beginTrans();
       $password = Utils::generarPassword();
       $usuario_login = array("tipo_usuario"=>$tipo_usuario, "username"=>$username, "password"=>$password, "correo"=>$userdata['email'], "dni"=>0);
@@ -240,7 +240,7 @@ class Controlador_Registro extends Controlador_Base {
       $apell_user = Utils::no_carac(explode(" ", strtolower($userdata['family_name'])));
       $nombre_user = Utils::no_carac(explode(" ", strtolower($userdata['given_name'])));
       $username = $nombre_user[0].$apell_user[0];
-      $username = self::generarUsername(strtolower($username));
+      $username = Utils::generarUsername(strtolower($username));
       $GLOBALS['db']->beginTrans();
       $password = Utils::generarPassword();
       $usuario_login = array("tipo_usuario"=>$tipo_usuario, "username"=>$username, "password"=>$password, "correo"=>$userdata['email'], "dni"=>0);
@@ -274,22 +274,7 @@ class Controlador_Registro extends Controlador_Base {
     }
     Utils::doRedirect(PUERTO.'://'.HOST.'/');
   }
-  public function generarUsername($name){
-    $count = 0;
-    if(strlen($name) > 50){
-      $name = substr($name, 1, 49);
-    }
-    $username = ($name);
-    $username_generated = $username;
-      do{
-        if($count != 0){
-          $username_generated = $username.$count;
-        }
-        $count++;
-      }
-    while(!empty(Modelo_Usuario::existeUsuario($username_generated)));
-    return $username_generated;
-  }
+  
   public function correoActivacionCuenta($correo,$nombres,$token, $username){
     // Utils::log($correo."-----".$nombres."-----".$token."-----".$username);
     // exit();

@@ -20,6 +20,7 @@ class Controlador_Contrasena extends Controlador_Base {
       break;
     }        
   }
+
   public function validarToken(){
     $tags = array();
     try{            
@@ -68,6 +69,7 @@ class Controlador_Contrasena extends Controlador_Base {
     $tags["template_js"][] = "modal-register";
     Vista::render('confirmar_password', $tags);     
   }
+  
   public function mostrarDefault(){
     if ( Utils::getParam('forgot_form') == 1 ){
       try{
@@ -96,14 +98,34 @@ class Controlador_Contrasena extends Controlador_Base {
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
-    } 
-    $tags["template_js"][] = "validator";    
+    }
+
+    require_once "includes/fb_api/config.php";
+    $permissions = ['email'];
+    $urlLogin = PUERTO."://".HOST."/facebook.php?tipo_user=1";
+    $fb_URL = $helper->getLoginUrl(PUERTO."://".HOST."/facebook.php?tipo_user=1", $permissions);    
+
+    // GOOGLE
+    require_once "includes/gg_api/config.php";
+    $gg_URL = $gClient->createAuthUrl();
+
+    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
+    $arrinteres = Modelo_Interes::obtieneListado();
+    $social_reg = array('fb'=>$fb_URL, 'gg'=>$gg_URL);
+
+    $tags["arrarea"] = $arrarea;
+    $tags["intereses"] = $arrinteres;
+    $tags["social"] = $social_reg;
+    $tags["template_js"][] = "modal-register";
+    $tags["template_js"][] = "validator";
+    $tags["template_js"][] = "assets/js/main";
     $tags["template_js"][] = "ruc_jquery_validator";
+    $tags["template_js"][] = "registrar";
     $tags["template_js"][] = "selectr";
     $tags["template_js"][] = "mic";
-    $tags["template_js"][] = "modal-register";
     Vista::render('recuperar_password', $tags);  
   } 
+
   public function envioCorreo($correo,$nombres,$token){
     $asunto = "Recuperación de Contraseña";
     $body = "Estimado, ".utf8_encode($nombres)."<br>";

@@ -1,13 +1,12 @@
 <div class="container">
   <div class="row">
     <div class="main_business">                                                    
-      <div class="container"><br><br>
+      <div class="container"><br>
         <div class="checkout-wrap">
           <ul class="checkout-bar">
             <li class="visited">Registro</li>
             <li class="visited">Completar Perfil</li>
             <?php 
-
             for($i=1;$i<=$nrototaltest;$i++){ ?>
               <?php 
                if ($i < $nrotestusuario){
@@ -20,11 +19,11 @@
                  $clase = "";
                }
               ?>
-              <li class="<?php echo $clase;?>">Formulario <?php echo $i;?></li>                
+              <li class="<?php echo $clase;?>">Formulario <?php echo $i;?></li>              
             <?php } ?>
           </ul>
         </div>
-        <br><br>
+        <br>
         <div class="row">
           <!--<div class="main_business">-->
             <div class="col-md-3" align="center">                                
