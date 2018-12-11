@@ -19,7 +19,7 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 
-  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa){    
+  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false){    
 
     $sql = "SELECT ";
 
@@ -81,7 +81,11 @@ class Modelo_Oferta{
     }
     
     if($obtCantdRegistros == false){
-      $sql .= " ORDER BY o.fecha_creado DESC";
+      $sql .= " ORDER BY ";
+      if($areasInteres != false){
+        $sql .= "FIELD(a.id_area, ".$areasInteres.") DESC, ";
+      }
+      $sql .= "o.fecha_creado DESC";
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }else{
@@ -197,7 +201,6 @@ class Modelo_Oferta{
         }
       }
     }
-
 
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
