@@ -29,19 +29,7 @@ $('.modal').on('hidden.bs.modal', function(){
     }
 });
 
-if (document.getElementById("area_select"))
-{
-  $("#area_select").selectr({
-      placeholder: 'Buscar...'
-  });
-}
 
-if (document.getElementById("nivel_interes"))
-{
-  $("#nivel_interes").selectr({
-      placeholder: 'Buscar...'
-  });
-}
 
 if(document.getElementById('form_login')){
   $("#form_login").validator();

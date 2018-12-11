@@ -33,6 +33,7 @@
 
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap-multiselect.css">
 
 
   <?php
@@ -156,12 +157,12 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                 foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                   <li>
                     <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
-                    <i class="fa fa-home fa-2x"></i>';  }else{ echo $optmnu["nombre"]; } ?></a>
+                    <p class="hidden_small"><i class="fa fa-home fa-2x"></i></p>';  }else{ echo $optmnu["nombre"]; } ?></a>
                   </li>                            
                 <?php } ?>
                 <?php if (isset($menu["submenu_cuentas"])){ ?>                            
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuentas
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuentas&nbsp;<i class="fa fa-caret-down"></i>
                       <ul class="dropdown-menu">
                         <?php foreach($menu["submenu_cuentas"] as $submenu_cuentas){ ?>  
                            <li><a href="<?php echo $submenu_cuentas['href'];?>"><?php echo $submenu_cuentas['nombre'];?></a></li>

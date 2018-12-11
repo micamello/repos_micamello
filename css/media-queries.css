@@ -106,7 +106,16 @@
 */
 
 @media (min-width: 768px) and (max-width: 1024px) {
+  .hidden_small{
+    display: none;
+  }
 
+  .navbar-brand>img {
+    height: 88%;
+    padding: 0px;
+    margin-top: -1px;
+    width: auto;
+  }
   .text_social{
       display: none;
     }
@@ -194,6 +203,17 @@
 */
 
 @media (min-width: 481px) and (max-width: 767px) {
+
+  .hidden_small{
+    display: none;
+  }
+
+  .navbar-brand>img {
+    height: 88%;
+    padding: 0px;
+    margin-top: -1px;
+    width: auto;
+  }
 
   .img-responsive{
     /*max-width: 25%;*/
@@ -332,6 +352,17 @@
 
 @media (min-width: 320px) and (max-width: 480px) {
   
+  .hidden_small{
+    display: none;
+  }
+
+  .navbar-brand>img {
+    height: 88%;
+    padding: 0px;
+    margin-top: -1px;
+    width: auto;
+  }
+
   #caracteristica_oferta{
     font-size: 60%;
   }
@@ -474,6 +505,18 @@
 
 @media (max-width: 320px) 
 {
+
+  .hidden_small{
+    display: none;
+  }
+
+  .navbar-brand>img {
+    height: 88%;
+    padding: 0px;
+    margin-top: -1px;
+    width: auto;
+  }
+
   .tti_st
     {
       font-size: 30px;

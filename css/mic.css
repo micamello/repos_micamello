@@ -755,8 +755,9 @@ body
 .list_content{
   border: 2px solid #C1C1C1; 
   border-radius: 5px; 
-  padding: 0px 20px 100px 20px;
-  height: 70px;
+  padding: 0px 20px 20px 20px;
+  /*height: 70px;*/
+  overflow-y: scroll;
 }
 
 .font_awesome{
@@ -887,7 +888,7 @@ body
 }
 
 /*Checkboxes styles*/
-input[type="checkbox"] { display: none; }
+/*input[type="checkbox"] { display: none; }
 
 input[type="checkbox"] + label {
   display: block;
@@ -928,7 +929,7 @@ input[type="checkbox"]:checked + label:before {
   border-left-color: transparent;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
-}
+}*/
 
 .text-white{
   text-shadow: 1px 2px #000;
