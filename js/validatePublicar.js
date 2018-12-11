@@ -3,6 +3,148 @@ document.querySelector( "form" )
     event.preventDefault();
 }, true );
 
+$(document).ready(function() {
+          $('#area_select').multiselect({
+            buttonContainer: '<div id="example-checkbox-list-container"></div>',
+            buttonClass: '',
+            templates: {
+                button: '',
+                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
+            },
+            maxHeight: 84,
+            	enableFiltering: true,
+            	enableCaseInsensitiveFiltering: true,
+            	buttonWidth: '50%',
+            	buttonText: function(options, select) {
+                if (options.length === 0) { 
+                	//$('#seleccionados').html('Seleccione una area ...');
+                	$('#seleccionados1').html('');
+                  return 'Seleccione una area ...';
+                }
+                else if (options.length > 1) {                	
+                    return 'Solo se permiten 3 areas';
+                }
+                else {
+                  var labels = [];  
+                  $('#seleccionados1').html('');                
+                  options.each(function() {
+                    if ($(this).attr('label') !== undefined) {
+                      labels.push($(this).attr('label'));                             
+                      $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
+                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                      // console.log(this);
+                    }
+                    else {
+                      labels.push($(this).html());                             
+                      $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
+                        // $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                    }
+                  });                          
+                  return labels.join(', ') + '';
+                }
+              },
+              onChange: function(option, checked) {
+                var selectedOptions = $('#area_select option:selected');
+ 
+                if (selectedOptions.length >= 1) {
+                    var nonSelectedOptions = $('#area_select option').filter(function() {
+                        return !$(this).is(':selected');
+                    }); 
+                    nonSelectedOptions.each(function() {
+                        var input = $('input[id="area_select-' + $(this).val() + '"]');
+                        // console.log(input[0].nextSibling.data);
+                        // console.log($('input[id="area_select-' + $(this).val() + '"]')[0]);
+                        input.prop('disabled', true);
+                        input.parent('li').addClass('disabled');
+                    });
+                }
+                else {
+                    $('#area_select option').each(function() {
+                        // console.log(this);
+                        var input = $('input[id="area_select-' + $(this).val() + '"]');
+                        input.prop('disabled', false);
+                        input.parent('li').addClass('disabled');
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                    });
+                }
+              }        
+            });
+            $('#seleccionados1').parent().append(filtro[0]);
+
+            
+        $('#nivel_interes').multiselect({
+            buttonContainer: '<div id="example-checkbox-list-container"></div>',
+            buttonClass: '',
+            templates: {
+                button: '',
+                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
+            },
+            maxHeight: 84,
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                buttonWidth: '50%',
+                buttonText: function(options, select) {
+                if (options.length === 0) { 
+                    //$('#seleccionados').html('Seleccione una area ...');
+                    $('#seleccionados2').html('');
+                  return 'Seleccione una area ...';
+                }
+                else if (options.length > 1) {                  
+                    return 'Solo se permiten 1 area';
+                }
+                else {
+                  var labels = [];  
+                  $('#seleccionados2').html('');                
+                  options.each(function() {
+                    if ($(this).attr('label') !== undefined) {
+                      labels.push($(this).attr('label'));                             
+                      $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a>');
+                      $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                    }
+                    else {
+                      labels.push($(this).html());                             
+                      $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a></p>');
+                    // console.log(this.parentNode.id);
+                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children());
+                    }
+                  });                                    
+                  return labels.join(', ') + '';
+                }
+              },
+              onChange: function(option, checked) {
+                var selectedOptions = $('#nivel_interes option:selected');
+ 
+                if (selectedOptions.length >= 1) {
+                    var nonSelectedOptions = $('#nivel_interes option').filter(function() {
+                        return !$(this).is(':selected');
+                    }); 
+                    nonSelectedOptions.each(function() {
+                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+                        // console.log(input[0].nextSibling.data);
+                        // console.log($('input[id="nivel_interes-' + $(this).val() + '"]')[0]);
+                        input.prop('disabled', true);
+                        input.parent('li').addClass('disabled');
+                    });
+                }
+                else {
+                    $('#nivel_interes option').each(function() {
+                        // console.log(this);
+                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+                        input.prop('disabled', false);
+                        input.parent('li').addClass('disabled');
+                        // console.log("eder:  "+selectedOptions.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                    });
+                }
+              }        
+            });
+            $('#seleccionados2').parent().append(filtro[1]);
+        });
+
 $('#provincia_of').change(function()
 {
     var id_provincia = $('select[id=provincia_of]').val();
@@ -113,15 +255,26 @@ if(document.getElementById('edad_max_error')){
 	var edad_max_error = document.getElementById('edad_max_error').id;
 }
 // ----------------------------------------------------
-mensaje = "Rellene este campo";
+
 if(document.getElementById('titu_of')){
 	$('#titu_of').on('blur', function(){
 		if(emptyContent(this) != false){
-			quitarError(titu_of_error, titu_of_group);
+			if(this.value.length <= 100){
+				quitarError(titu_of_error, titu_of_group);
+			}
+			else{
+				mensaje = "Longitud máxima del campo 100 caracteres";
+				colocaError(titu_of_error, titu_of_group, mensaje, button_register);
+			}
 		}
 		else{
+			mensaje = "Rellene este campo";
 			colocaError(titu_of_error, titu_of_group, mensaje, button_register);
 		}
+	});
+
+	$('#titu_of').on('keydown', function(event){
+		validar_keycode(this, "nombre_empresa", titu_of_error, titu_of_group, event, button_register, 100);
 	})
 }
 
@@ -131,7 +284,7 @@ if(document.getElementById('salario')){
 			if(validarFloat(this) != false){
 				if(this.value > 0){
 					quitarError(salario_error, salario_group);
-					enableBTN();
+					enableBTN(1);
 				}
 				else{
 					mensaje = "Solo valores mayores a 1";
@@ -150,7 +303,7 @@ if(document.getElementById('salario')){
 	});
 
 	$('#salario').on('keydown', function(event){
-		validar_keycode(this, "float", salario_error, salario_group, event);
+		validar_keycode(this, "float", salario_error, salario_group, event, button_register, 10);
 	})
 }
 
@@ -162,7 +315,7 @@ if(document.getElementById('vacante')){
 				if(this.value > 0){
 					if(this.value.length > 0 && this.value.length < 4){
 						quitarError(vacante_error, vacante_group);
-						enableBTN();
+						enableBTN(1);
 					}
 					else{
 						mensaje = "Máximo 3 dígitos";
@@ -182,7 +335,8 @@ if(document.getElementById('vacante')){
 	});
 
 	$('#vacante').on('keydown', function(event){
-		lockLength(vacante_error, vacante_group, this, 3, event, button_register);
+		// lockLength(vacante_error, vacante_group, this, 3, event, button_register);
+		validar_keycode(this, "float", vacante_error, vacante_group, event, button_register, 3);
 	});
 }
 
@@ -198,7 +352,7 @@ if(document.getElementById('fecha_contratacion')){
     	}
     	else{
     		quitarError(fecha_error, fecha_group);
-    		enableBTN();
+    		enableBTN(1);
     	}
     })
 }
@@ -211,7 +365,7 @@ if(document.getElementById('nivel_interes')){
 		}
 		else{
 			quitarError(nivel_error, nivel_group);
-    		enableBTN();
+    		enableBTN(1);
 		}
 	})
 }
@@ -224,7 +378,7 @@ if(document.getElementById('area_select')){
 		}
 		else{
 			quitarError(area_error, area_group);
-    		enableBTN();
+    		enableBTN(1);
 		}
 	})
 }
@@ -233,12 +387,12 @@ if(document.getElementById('edad_min')){
 	$('#edad_min').on('blur', function(){
 		var edad2 =  document.getElementById('edad_max');
 		if(emptyContent(this) != false){
-			if(this.value >= 18){
-				if(this.value <= edad2.value && edad2.value != ""){
-					quitarError(edad_min_error, edad_min_group);
-				}
+			if(this.value >= 18 && this.value <=100){
+					if(this.value <= edad2.value && edad2.value != ""){
+						quitarError(edad_min_error, edad_min_group);
+					}
 			}else{
-				mensaje = "Debe ser mayor o igual a 18";
+				mensaje = "Mayor a 17 y menor 101";
 				colocaError(edad_min_error, edad_min_group, mensaje, button_register);
 			}
 		}
@@ -249,7 +403,8 @@ if(document.getElementById('edad_min')){
 	});
 
 	$('#edad_min').on('keydown', function(event){
-		lockLength(edad_min_error, edad_min_group, this, 3, event, button_register);
+		// lockLength(edad_min_error, edad_min_group, this, 3, event, button_register);
+		validar_keycode(this, "telefono", edad_min_error, edad_min_group, event, button_register, 3);
 		
 	})
 }
@@ -258,7 +413,7 @@ if(document.getElementById('edad_max')){
 	$('#edad_max').on('blur', function(){
 		var edad1 =  document.getElementById('edad_min');
 		if(emptyContent(this) != false){
-			if(this.value >= 18){
+			if(this.value >= 18 && this.value <=100){
 				if(this.value >= edad1.value && edad1.value != ""){
 					quitarError(edad_min_error, edad_min_group);
 				}
@@ -267,7 +422,7 @@ if(document.getElementById('edad_max')){
 					colocaError(edad_max_error, edad_max_group, mensaje, button_register);
 				}
 			}else{
-				mensaje = "Debe ser mayor o igual a 18";
+				mensaje = mensaje = "Mayor a 17 y menor 101";
 				colocaError(edad_max_error, edad_max_group, mensaje, button_register);
 			}
 		}
@@ -278,8 +433,8 @@ if(document.getElementById('edad_max')){
 	});
 
 	$('#edad_max').on('keydown', function(event){
-		lockLength(edad_max_error, edad_max_group, this, 3, event, button_register);
-		
+		// lockLength(edad_max_error, edad_max_group, this, 3, event, button_register);
+		validar_keycode(this, "telefono", edad_max_error, edad_max_group, event, button_register, 3);
 	})
 }
 
@@ -330,7 +485,7 @@ if(document.getElementById('des_of')){
         	}
         	else{
         		quitarError(descripcion_error, descripcion_group);
-        		enableBTN();
+        		enableBTN(1);
         	}
         });
     },
@@ -401,106 +556,107 @@ function emptyContent(obj){
 	}
 }
 // 112 - 123
-function lockLength(error_mensaje, error_group, obj, longitud, event, button_register){
-	var permitidas = [8, 9, 18, 27, 37, 38, 39, 40];
-	var numeros = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
-	for (var i = 112; i < 124; i++) {
-	    permitidas.push(i);
-	}
+// function lockLength(error_mensaje, error_group, obj, longitud, event, button_register){
+// 	var permitidas = [8, 9, 18, 27, 37, 38, 39, 40];
+// 	var numeros = [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105];
+// 	for (var i = 112; i < 124; i++) {
+// 	    permitidas.push(i);
+// 	}
 	
-	if($.inArray(event.keyCode, numeros) !== -1 || $.inArray(event.keyCode, permitidas) !== -1){
-		// event.preventDefault();
-		if(obj.value.length < longitud){
-			quitarError(error_mensaje, error_group);
-			enableBTN();
-		}
-		else{
-			if($.inArray(event.keyCode, permitidas) == -1){
-				event.preventDefault();
-				mensaje = longitud + " dígitos max.";
-				colocaError(error_mensaje, error_group, mensaje, button_register);
-			}
-			else{
-				quitarError(error_mensaje, error_group);
-				enableBTN();
-			}
-		}
-	}
-	else{
-		event.preventDefault();
-		mensaje = "Solo dígitos";
-		colocaError(error_mensaje, error_group, mensaje, button_register);
-	}
-}
+// 	if($.inArray(event.keyCode, numeros) !== -1 || $.inArray(event.keyCode, permitidas) !== -1){
+// 		// event.preventDefault();
+// 		if(obj.value.length < longitud){
+// 			quitarError(error_mensaje, error_group);
+// 			enableBTN();
+// 		}
+// 		else{
+// 			if($.inArray(event.keyCode, permitidas) == -1){
+// 				event.preventDefault();
+// 				mensaje = longitud + " dígitos max.";
+// 				colocaError(error_mensaje, error_group, mensaje, button_register);
+// 			}
+// 			else{
+// 				quitarError(error_mensaje, error_group);
+// 				enableBTN();
+// 			}
+// 		}
+// 	}
+// 	else{
+// 		event.preventDefault();
+// 		mensaje = "Solo dígitos";
+// 		colocaError(error_mensaje, error_group, mensaje, button_register);
+// 	}
+// }
 
 	$('#form_publicar').on('submit', function(event){
-		if(enableBTN() == false){
+		if(enableBTN(2) == false){
 			cancelSubmit(event);
 		}
 	})
 
-function campos(){
+function campos(tipo){
 	var errors = 0
 	mensaje = "Rellene este  campo";
 	if(document.getElementById('titu_of').value === ""){
-		colocaError(titu_of_error, titu_of_group, mensaje, button_register);
+		if(tipo ==2){colocaError(titu_of_error, titu_of_group, mensaje, button_register);}
 		errors++;
 	}
 
 	var editorContent = tinyMCE.get('des_of').getContent();
 	if (editorContent == '')
 	{
-	    colocaError(descripcion_error, descripcion_group, mensaje, button_register);
+	    if(tipo ==2){colocaError(descripcion_error, descripcion_group, mensaje, button_register);}
 	 	errors++;
 	}
 
 	if(document.getElementById('salario').value == ""){
-		colocaError(salario_error, salario_group, mensaje, button_register);
+		if(tipo ==2){colocaError(salario_error, salario_group, mensaje, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('vacante').value == ""){
-		colocaError(vacante_error, vacante_group, mensaje, button_register);
+		if(tipo ==2){colocaError(vacante_error, vacante_group, mensaje, button_register);}
 		errors++;
 	}
 
 	mensaje = "Seleccione una opción";
 	if(document.getElementById('area_select').value == ""){
-		colocaError(area_error, area_group, mensaje, button_register);
+		if(tipo ==2){colocaError(area_error, area_group, mensaje, button_register);}
 		errors++;
 	}
 
 	if(document.getElementsByClassName('badge_item').length == 0){
-		colocaError(listado_error, listado_group, mensaje, button_register);
+		if(tipo ==2){colocaError(listado_error, listado_group, mensaje, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('nivel_interes').value == ""){
-		colocaError(nivel_error, nivel_group, mensaje, button_register);
+		if(tipo ==2){colocaError(nivel_error, nivel_group, mensaje, button_register);}
 		errors++;
 	}
 
 	mensaje = "Rellene este  campo";
 	if(document.getElementById('fecha_contratacion').value == ""){
-		colocaError(fecha_error, fecha_group, mensaje, button_register);
+		if(tipo ==2){colocaError(fecha_error, fecha_group, mensaje, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('edad_min').value == ""){
-		colocaError(edad_min_error, edad_min_group, mensaje, button_register);
+		if(tipo ==2){colocaError(edad_min_error, edad_min_group, mensaje, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('edad_max').value == ""){
-		colocaError(edad_max_error, edad_max_group, mensaje, button_register);
+		if(tipo ==2){colocaError(edad_max_error, edad_max_group, mensaje, button_register);}
 		errors++;
 	}
 	return errors; 
 }
 
-function enableBTN(event){
+function enableBTN(tipo){
+    console.log(tipo);
 	var flag = false;
-	if(campos() == 0 && errorsVerify() != false){
+	if(campos(tipo) == 0 && errorsVerify() != false){
 
 		var btn = document.getElementById('boton');
 		btn.classList.remove("disabled");

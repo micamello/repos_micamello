@@ -45,7 +45,7 @@ if(document.getElementById('name_user')){
 			if(reg.test(contenido) != false){
 				if(contenido.length <= 60){
 					quitarError(nombre_error, group_nombre);
-					enableBTN();
+					enableBTN(1);
 				}
 				else{
 					mensaje = "Longitud máxima del campo 60 caracteres";
@@ -76,10 +76,10 @@ if(document.getElementById('name_user')){
 	$('#name_user').on('keydown', function(event){
 		tipo_usuario = document.getElementById("tipo_usuario").value;
 		if(tipo_usuario == 1){
-			validar_keycode(this, "nombre_apellido", nombre_error, group_nombre, event);
+			validar_keycode(this, "nombre_apellido", nombre_error, group_nombre, event, button_register, 60);
 		}
 		else{
-			validar_keycode(this, "nombre_empresa", nombre_error, group_nombre, event);
+			validar_keycode(this, "nombre_empresa", nombre_error, group_nombre, event, button_register, 60);
 		}
 	});
 }
@@ -103,7 +103,7 @@ if(document.getElementById('apell_user')){
 				if(reg.test(contenido) != false){
 					if(contenido.length <= 60){
 						quitarError(apell_error, apellido_group);
-						enableBTN();
+						enableBTN(1);
 					}
 					else{
 						mensaje = "Longitud máxima del campo 60 caracteres";
@@ -124,7 +124,7 @@ if(document.getElementById('apell_user')){
 	$('#apell_user').on('keydown', function(event){
 		tipo_usuario = document.getElementById("tipo_usuario").value;
 		if(tipo_usuario == 1){
-			validar_keycode(this, "nombre_apellido", apell_error, apellido_group, event);
+			validar_keycode(this, "nombre_apellido", apell_error, apellido_group, event, button_register, 60);
 		}
 	});
 }
@@ -154,7 +154,7 @@ if(document.getElementById('correo')){
 				}
 				else{
 					quitarError(correo_error, correo_group);
-					enableBTN();
+					enableBTN(1);
 				}
 			}
 		}
@@ -179,7 +179,7 @@ if(document.getElementById('numero_cand')){
 	});
 
 	$('#numero_cand').on('keydown', function(event){
-		validar_keycode(this, "telefono", numero_error, numero_group, event);
+		validar_keycode(this, "telefono", numero_error, numero_group, event, button_register, 15);
 	})
 }
 
@@ -202,7 +202,7 @@ if(document.getElementById('documentacion')){
 	$("#documentacion").on("change", function(){
 		quitarError(seleccione_error, seleccione_group);
 		quitarError(dni_error, dni_group);
-		enableBTN();
+		enableBTN(1);
 		var dni = document.getElementById('dni');
 		dni.removeAttribute('disabled');
 		dni.value = "";
@@ -232,14 +232,14 @@ if(document.getElementById('dni')){
 								}
 								else{
 										quitarError(dni_error, dni_group);
-										enableBTN();
+										enableBTN(1);
 									}
 					    	}
 					    }
 					}
 					// else{
 					// 	quitarError(dni_error, dni_group);
-					// 	enableBTN();
+					// 	enableBTN(1);
 					// }
 				}
 			}
@@ -251,7 +251,7 @@ if(document.getElementById('dni')){
 				else
 				{
 					quitarError(dni_error, dni_group);
-					enableBTN();
+					enableBTN(1);
 				}
 			}
 		}
@@ -262,7 +262,7 @@ if(document.getElementById('dni')){
 			    	if(((this.value.length)) == 13){
 			    		if(existeDni(this.value) == 1){
 							quitarError(dni_error, dni_group);
-							enableBTN();
+							enableBTN(1);
 						}
 						else
 						{
@@ -292,7 +292,7 @@ if(document.getElementById('dni')){
 			if(documentacion == 2){
 				if(host == "EC"){
 					if(((this.value.length)+1)<=10){
-						validar_keycode(this, "telefono", dni_error, dni_group, event);
+						validar_keycode(this, "telefono", dni_error, dni_group, event, button_register, 10);
 					}
 					else{
 						if (event.keyCode >= 65 && event.keyCode <= 90) {
@@ -308,11 +308,11 @@ if(document.getElementById('dni')){
 				}
 			}
 			else{
-				validar_keycode(this, "pasaporte", dni_error, dni_group, event);
+				validar_keycode(this, "pasaporte", dni_error, dni_group, event, button_register, 15);
 			}
 		}
 		else{
-			validar_keycode(this, "telefono", dni_error, dni_group, event);
+			validar_keycode(this, "telefono", dni_error, dni_group, event, button_register, 15);
 		}
 	})
 }
@@ -359,7 +359,7 @@ if(document.getElementById('password')){
 			else{
 				quitarError(password_error, password_group);
 				quitarError(password_error_two, password_group_two);
-				enableBTN();
+				enableBTN(1);
 			}
 		}
 		else{
@@ -391,7 +391,7 @@ if(document.getElementById('password_two')){
 			else{
 				quitarError(password_error_two, password_group_two);
 				quitarError(password_error, password_group);
-				enableBTN();
+				enableBTN(1);
 			}
 		}
 		else{
@@ -419,7 +419,7 @@ if(document.getElementById('term_cond')){
 		}
 		else{
 			quitarError(term_cond_error, term_cond_group);
-			enableBTN();
+			enableBTN(1);
 		}
 	})
 }
@@ -450,7 +450,7 @@ if(document.getElementById('area_select')){
 		}
 		else{
 			quitarError(area_error, area_group);
-			enableBTN();
+			enableBTN(1);
 		}
 	})
 }
@@ -463,7 +463,7 @@ if(document.getElementById('nivel_interes')){
 		}
 		else{
 			quitarError(nivel_error, nivel_group);
-			enableBTN();
+			enableBTN(1);
 		}
 	})
 }
@@ -497,7 +497,7 @@ if(document.getElementById('tel_one_contact_error')){
 
 
 $('#form_register').on('submit', function(event){
-	if(enableBTN() === false){
+	if(enableBTN(2) === false){
 		event.preventDefault();
 	}
 });
@@ -521,7 +521,7 @@ if(document.getElementById('nombre_contact')){
 				}
 				else{
 					quitarError(nombre_contact_error, nombre_contact_group);
-					enableBTN();
+					enableBTN(1);
 				}	
 		}
 		else{
@@ -531,7 +531,7 @@ if(document.getElementById('nombre_contact')){
 	});
 
 	$('#nombre_contact').on('keydown', function(event){	
-		validar_keycode(this, "nombre_apellido", nombre_contact_error, nombre_contact_group, event);
+		validar_keycode(this, "nombre_apellido", nombre_contact_error, nombre_contact_group, event, button_register, 60);
 	});
 }
 
@@ -553,7 +553,7 @@ if(document.getElementById('apellido_contact')){
 				}
 				else{
 					quitarError(apellido_contact_error, apellido_contact_group);
-					enableBTN();
+					enableBTN(1);
 				}	
 		}
 		else{
@@ -563,7 +563,7 @@ if(document.getElementById('apellido_contact')){
 	});
 
 	$('#apellido_contact').on('keydown', function(event){	
-	  	validar_keycode(this, "nombre_apellido", apellido_contact_error, apellido_contact_group, event);
+	  	validar_keycode(this, "nombre_apellido", apellido_contact_error, apellido_contact_group, event, button_register, 60);
 	});
 }
 
@@ -579,7 +579,7 @@ if(document.getElementById('tel_one_contact')){
 		var error_mensaje = document.getElementById('tel_one_contact_error').id;
 		var error_group = document.getElementById('tel_one_contact_group').id;
 
-		validar_keycode(this, "telefono", error_mensaje, error_group, event);
+		validar_keycode(this, "telefono", error_mensaje, error_group, event, button_register, 15);
 	});
 }
 
@@ -598,9 +598,172 @@ if(document.getElementById('tel_two_contact')){
 		// *telefono
 		// *nombre_apellido
 		// *nombre_empresa_pasaporte
-		validar_keycode(this, "telefono", error_mensaje, error_group, event);
+		validar_keycode(this, "telefono", error_mensaje, error_group, event, button_register, 15);
 	});
 }
+
+// --------------------------------------------------------------------------------------------------------------------
+
+// if (document.getElementById("area_select"))
+// {
+//   $("#area_select").selectr({
+//       placeholder: 'Buscar...'
+//   });
+// }
+
+// if (document.getElementById("nivel_interes"))
+// {
+//   $("#nivel_interes").selectr({
+//       placeholder: 'Buscar...'
+//   });
+// }
+
+        $(document).ready(function() {
+          $('#area_select').multiselect({
+            buttonContainer: '<div id="example-checkbox-list-container"></div>',
+            buttonClass: '',
+            templates: {
+                button: '',
+                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
+            },
+            maxHeight: 84,
+            	enableFiltering: true,
+            	enableCaseInsensitiveFiltering: true,
+            	buttonWidth: '50%',
+            	buttonText: function(options, select) {
+                if (options.length === 0) { 
+                	//$('#seleccionados').html('Seleccione una area ...');
+                	$('#seleccionados1').html('');
+                  return 'Seleccione una area ...';
+                }
+                else if (options.length > 3) {                	
+                    return 'Solo se permiten 3 areas';
+                }
+                else {
+                  var labels = [];  
+                  $('#seleccionados1').html('');                
+                  options.each(function() {
+                    if ($(this).attr('label') !== undefined) {
+                      labels.push($(this).attr('label'));                             
+                      $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
+                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                      // console.log(this);
+                    }
+                    else {
+                      labels.push($(this).html());                             
+                      $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
+                        // $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                    }
+                  });                          
+                  return labels.join(', ') + '';
+                }
+              },
+              onChange: function(option, checked) {
+                var selectedOptions = $('#area_select option:selected');
+ 
+                if (selectedOptions.length >= 3) {
+                    var nonSelectedOptions = $('#area_select option').filter(function() {
+                        return !$(this).is(':selected');
+                    }); 
+                    nonSelectedOptions.each(function() {
+                        var input = $('input[id="area_select-' + $(this).val() + '"]');
+                        // console.log(input[0].nextSibling.data);
+                        // console.log($('input[id="area_select-' + $(this).val() + '"]')[0]);
+                        input.prop('disabled', true);
+                        input.parent('li').addClass('disabled');
+                    });
+                }
+                else {
+                    $('#area_select option').each(function() {
+                        // console.log(this);
+                        var input = $('input[id="area_select-' + $(this).val() + '"]');
+                        input.prop('disabled', false);
+                        input.parent('li').addClass('disabled');
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                    });
+                }
+              }        
+            });
+            $('#seleccionados1').parent().append(filtro[0]);
+
+            
+        $('#nivel_interes').multiselect({
+            buttonContainer: '<div id="example-checkbox-list-container"></div>',
+            buttonClass: '',
+            templates: {
+                button: '',
+                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
+            },
+            maxHeight: 84,
+                enableFiltering: true,
+                enableCaseInsensitiveFiltering: true,
+                buttonWidth: '50%',
+                buttonText: function(options, select) {
+                if (options.length === 0) { 
+                    //$('#seleccionados').html('Seleccione una area ...');
+                    $('#seleccionados2').html('');
+                  return 'Seleccione una area ...';
+                }
+                else if (options.length > 2) {                  
+                    return 'Solo se permiten 1 areas';
+                }
+                else {
+                  var labels = [];  
+                  $('#seleccionados2').html('');                
+                  options.each(function() {
+                    if ($(this).attr('label') !== undefined) {
+                      labels.push($(this).attr('label'));                             
+                      $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a>');
+                      $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                    }
+                    else {
+                      labels.push($(this).html());                             
+                      $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a></p>');
+                    // console.log(this.parentNode.id);
+                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children());
+                    }
+                  });                                    
+                  return labels.join(', ') + '';
+                }
+              },
+              onChange: function(option, checked) {
+                var selectedOptions = $('#nivel_interes option:selected');
+ 
+                if (selectedOptions.length >= 2) {
+                    var nonSelectedOptions = $('#nivel_interes option').filter(function() {
+                        return !$(this).is(':selected');
+                    }); 
+                    nonSelectedOptions.each(function() {
+                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+                        // console.log(input[0].nextSibling.data);
+                        // console.log($('input[id="nivel_interes-' + $(this).val() + '"]')[0]);
+                        input.prop('disabled', true);
+                        input.parent('li').addClass('disabled');
+                        // console.log(input.parent('li'));
+                    });
+                }
+                else {
+                    $('#nivel_interes option').each(function() {
+                        // console.log(this);
+                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+                        input.prop('disabled', false);
+                        input.parent('li').addClass('disabled');
+                        // console.log(input.parent('li'));
+                        // console.log("eder:  "+selectedOptions.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                    });
+                }
+              }        
+            });
+            $('#seleccionados2').parent().append(filtro[1]);
+        });
+
+
+// ----------------------------------------------------------------------------------------------------------------------------------------
 
 function validar_numero(obj, requerido, error_mensaje, error_group){
 	// Pattern de validación
@@ -614,7 +777,7 @@ function validar_numero(obj, requerido, error_mensaje, error_group){
 		}
 		else{
 			quitarError(error_mensaje, error_group);
-			enableBTN();
+			enableBTN(1);
 		}
 	}
 	else{
@@ -624,13 +787,13 @@ function validar_numero(obj, requerido, error_mensaje, error_group){
 		}
 		else{
 			quitarError(error_mensaje, error_group);
-			enableBTN();
+			enableBTN(1);
 		}
 	}
 }
 
-function enableBTN(){
-	if(validateForm() == 0 && verifyErrors() == 0){
+function enableBTN(tipo){
+	if(validateForm(tipo) == 0 && verifyErrors() == 0){
 		var btn = document.getElementById('button_register');
 		btn.classList.remove("disabled");
 		return true;
@@ -654,63 +817,64 @@ function passCoincide(pass_one, pass_two){
 	}
 }
 
-function validateForm(){
+function validateForm(tipo){
+	console.log(tipo);
 	var tipo_usuario = document.getElementById('tipo_usuario').value;
 	var errors = 0;
 	if(document.getElementById('name_user').value == ""){
-		colocaError(nombre_error, group_nombre, campo_vacio, button_register);
+		if(tipo==2){colocaError(nombre_error, group_nombre, campo_vacio, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('correo').value == ""){
-		colocaError(correo_error, correo_group, campo_vacio, button_register);
+		if(tipo==2){colocaError(correo_error, correo_group, campo_vacio, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('numero_cand').value == ""){
-		colocaError(numero_error, numero_group, campo_vacio, button_register);
+		if(tipo==2){colocaError(numero_error, numero_group, campo_vacio, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('password').value == ""){
-		colocaError(password_error, password_group, campo_vacio, button_register);
+		if(tipo==2){colocaError(password_error, password_group, campo_vacio, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('password_two').value == ""){
-		colocaError(password_error_two, password_group_two, campo_vacio, button_register);
+		if(tipo==2){colocaError(password_error_two, password_group_two, campo_vacio, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('dni').value == ""){
-		colocaError(dni_error, dni_group, campo_vacio, button_register);
+		if(tipo==2){colocaError(dni_error, dni_group, campo_vacio, button_register);}
 		errors++;
 	}
 
 	if(document.getElementById('term_cond').checked){
 	}
 	else{
-		colocaError(term_cond_error, term_cond_group, term_cond_mensaje, button_register);
+		if(tipo==2){colocaError(term_cond_error, term_cond_group, term_cond_mensaje, button_register);}
 		errors++;
 	}
 // ----------------------------------------------Tipo de usuario 1 (candidato) exclusivo--------------------------------------
 	if(tipo_usuario == 1){
 		if(document.getElementById('apell_user').value == ""){
-			colocaError(apell_error, apellido_group, campo_vacio, button_register);
+			if(tipo==2){colocaError(apell_error, apellido_group, campo_vacio, button_register);}
 			errors++;
 		}
 
 		if(document.getElementById('documentacion').value == ""){
-			colocaError(seleccione_error, seleccione_group, lista_vacia, button_register);
+			if(tipo==2){colocaError(seleccione_error, seleccione_group, lista_vacia, button_register);}
 			errors++;
 		}
 		if(document.getElementById('area_select').value == ""){
-			colocaError(area_error, area_group, lista_vacia, button_register);
+			if(tipo==2){colocaError(area_error, area_group, lista_vacia, button_register);}
 			errors++;
 		}
 
 		if(document.getElementById('nivel_interes').value == ""){
-			colocaError(nivel_error, nivel_group, lista_vacia, button_register);
+			if(tipo==2){colocaError(nivel_error, nivel_group, lista_vacia, button_register);}
 			errors++;
 		}
 	}
@@ -720,17 +884,17 @@ function validateForm(){
 	if(tipo_usuario == 2){
 		mensaje = "Rellene este campo";
 		if(document.getElementById('nombre_contact').value == ""){
-			colocaError(nombre_contact_error, nombre_contact_group, mensaje, button_register);
+			if(tipo==2){colocaError(nombre_contact_error, nombre_contact_group, mensaje, button_register);}
 			errors++;
 		}
 
 		if(document.getElementById('apellido_contact').value == ""){
-			colocaError(apellido_contact_error, apellido_contact_group, mensaje, button_register);
+			if(tipo==2){colocaError(apellido_contact_error, apellido_contact_group, mensaje, button_register);}
 			errors++;
 		}
 
 		if(document.getElementById('tel_one_contact').value == ""){
-			colocaError(tel_one_contact_error, tel_one_contact_group, mensaje, button_register);
+			if(tipo==2){colocaError(tel_one_contact_error, tel_one_contact_group, mensaje, button_register);}
 			errors++;
 		}
 	}

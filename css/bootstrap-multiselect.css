@@ -286,7 +286,7 @@ z-index: 10;
 .flipswitch_check:checked:after {
   left: 53%;
   content: "";
-  background-color: #AFDDE7;;
+  background-color: #AFDDE7;
 }
 
 label[class="checkbox"] {

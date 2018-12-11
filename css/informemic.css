@@ -71,3 +71,7 @@ footer{
         position: fixed;
         bottom: 0;
 }
+
+.selectedItems{
+        background-color: cyan;
+}

@@ -164,7 +164,7 @@ function validaNumeros(evt){
 }
 
 
-function validar_keycode(obj, tipo_keydown, error_mensaje, error_group, event){
+function validar_keycode(obj, tipo_keydown, error_mensaje, error_group, event, button_register, longitud){
         var mensaje = "";
         var permitidas = [8, 9, 18, 20, 27, 37, 38, 39, 40];
         for (var i = 112; i < 124; i++) {
@@ -213,7 +213,23 @@ function validar_keycode(obj, tipo_keydown, error_mensaje, error_group, event){
 
         if($.inArray(event.keyCode, keycode) !== -1 || $.inArray(event.keyCode, permitidas) !== -1){
             // console.log(keycode);
-            quitarError(error_mensaje, error_group)
+          if(longitud != -1){
+            if(obj.value.length < longitud){
+              quitarError(error_mensaje, error_group);
+              enableBTN(1);
+            }
+            else{
+              if($.inArray(event.keyCode, permitidas) == -1){
+                event.preventDefault();
+                mensaje = longitud + " caracteres max.";
+                colocaError(error_mensaje, error_group, mensaje, button_register);
+              }
+              else{
+                quitarError(error_mensaje, error_group);
+                enableBTN(1);
+              }
+            }
+          }
         }
         else{
             event.preventDefault();

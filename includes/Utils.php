@@ -377,5 +377,15 @@ class Utils{
     return str_replace($a, $b, $cadena);
   }
 
+  public static function validarLongitudCampos($campo, $longitud){
+    $contenido = html_entity_decode($campo);
+    if(strlen($contenido)<=$longitud){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
 }
 ?>
