@@ -110,6 +110,8 @@ RewriteRule ^postulacion/([a-z])+/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar
 ######################################################################################
 
 #filtros
+RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&param5=$7&page=$8 [L]
+
 RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&page=$7 [L]
 
 RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}([^.]+))/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&page=$6 [L]

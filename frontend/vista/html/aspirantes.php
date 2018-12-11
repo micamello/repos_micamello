@@ -101,7 +101,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fa fa-calendar"></i><?php if ($vista == 1){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
+					<span><i class="fa fa-calendar"></i><?php if ($vista == 2){ echo "Fecha de Registro"; }else{ echo "Fecha de postulaci&oacute;n"; } ?></span>
 				</div>
 				<div class="panel-body">
 					<div class="filtros">

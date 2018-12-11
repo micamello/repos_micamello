@@ -308,6 +308,10 @@ public static function existeUsername($username){
 
     $sql .= " FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_usuario_login ul, mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c";
 
+    if(!empty($filtros['A']) && $filtros['A'] != 0){
+      $sql .= ",  mfo_usuarioxarea ua ";
+    }
+
     if(!empty($filtros['P']) && $filtros['P'] != 0){
       $sql .= ", mfo_usuario_plan up, mfo_plan pl ";
     }
@@ -321,6 +325,10 @@ public static function existeUsername($username){
               AND u.id_ciudad = c.id_ciudad
               AND u.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajextest pt WHERE pt.id_usuario = u.id_usuario LIMIT 1)
               AND o.id_ofertas = $idOferta";
+
+    if(!empty($filtros['A']) && $filtros['A'] != 0){
+      $sql .= " AND ua.id_usuario = u.id_usuario AND ua.id_area = ".$filtros['A'];
+    }
 
     if(!empty($filtros['F']) && $filtros['F'] != 0){
        if($filtros['F'] == 1){
@@ -508,6 +516,7 @@ public static function existeUsername($username){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
+
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -680,7 +689,7 @@ public static function existeUsername($username){
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (u.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR r.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR u.fecha_creacion LIKE '%".$pclave."%')";
+      $sql .= " AND (u.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR u.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR u.fecha_creacion LIKE '%".$pclave."%')";
     }
 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
@@ -692,42 +701,40 @@ public static function existeUsername($username){
 
     if(!empty($filtros['O']) && $filtros['O'] != 0){
 
-      $long_filtro = $filtros['O'];
-      if(strlen($long_filtro) == 3){
-        $tipo = substr($filtros['O'],0,1);
-        $t = substr($filtros['O'],1,2);
-        if($tipo == 1){
-          if($t == 1){
-            $filtros['O'] = 2;
-            $sql .= " ORDER BY edad ASC";
-          }
-          if($t == 2){
-            $filtros['O'] = 1;
-            $sql .= " ORDER BY edad DESC";
-          }        
-        }else if($tipo == 2){
-          if($t == 1){
-            $filtros['O'] = 2;
-            $sql .= " ORDER BY u.fecha_creacion ASC";
-          }
-          if($t == 2){
-            $filtros['O'] = 1;
-            $sql .= " ORDER BY u.fecha_creacion DESC";
-          }
-        }else if($tipo == 3){
-          if($t == 1){
-            $filtros['O'] = 2;
-            $sql .= " ORDER BY e.descripcion ASC";
-          }
-          if($t == 2){
-            $filtros['O'] = 1;
-            $sql .= " ORDER BY e.descripcion DESC";
-          }
+      $tipo = substr($filtros['O'],0,1);
+      $t = substr($filtros['O'],1,2);
+      if($tipo == 1){
+        if($t == 1){
+          $filtros['O'] = 2;
+          $sql .= " ORDER BY edad ASC";
         }
-      }else{
-        $sql .= " ORDER BY u.nombres ASC";
+        if($t == 2){
+          $filtros['O'] = 1;
+          $sql .= " ORDER BY edad DESC";
+        }        
+      }else if($tipo == 2){
+        if($t == 1){
+          $filtros['O'] = 2;
+          $sql .= " ORDER BY u.fecha_creacion ASC";
+        }
+        if($t == 2){
+          $filtros['O'] = 1;
+          $sql .= " ORDER BY u.fecha_creacion DESC";
+        }
+      }else if($tipo == 3){
+        if($t == 1){
+          $filtros['O'] = 2;
+          $sql .= " ORDER BY e.descripcion ASC";
+        }
+        if($t == 2){
+          $filtros['O'] = 1;
+          $sql .= " ORDER BY e.descripcion DESC";
+        }
       }
+    }else{
+      $sql .= " ORDER BY u.nombres ASC";
     }
+
 
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;

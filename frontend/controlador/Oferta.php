@@ -80,14 +80,14 @@ class Controlador_Oferta extends Controlador_Base{
             $id_provincia = '';
             $id_jornada = '';
             $cadena = '';
-            $array_datos = $result = array();
+            $array_datos = array();
             foreach ($this->data as $param => $value) {
                 
                 $letra = substr($value,0,1);
                 $id = substr($value,1);
 
                 $cadena .= '/'.$value;
-                array_push($result, strval($value));
+                //array_push($result, strval($value));
                 if(isset($_SESSION['mfo_datos']['Filtrar_ofertas'][$letra])){
                     if($letra == 'A' && $type == 1){
                         
