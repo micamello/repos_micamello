@@ -169,8 +169,19 @@ function obtenerFiltro(ruta,page){
 	window.location = nueva_ruta;
 }
 
-if(document.getElementById('form_postulacion')){
-	$("#form_postulacion").validator();
+
+function validarAspiracion(){
+
+    var aspiracion = $('#aspiracion').val();
+
+    if(aspiracion == 0 || aspiracion == ''){
+        colocaError("err_asp", "seccion_asp","La aspiración salarial debe ser mayor a 0.","boton");
+        error = 1; 
+    }else{
+        quitarError("err_asp", "seccion_asp");
+        document.form_postulacion.submit();
+    }
+
 }
 
 function verAspirantes($idOfertas){

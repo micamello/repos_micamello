@@ -199,21 +199,6 @@ class Controlador_Perfil extends Controlador_Base
                     }
                 }
             }
-            else{
-
-                $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
-                if (empty($validaTlf2)) {
-                    throw new Exception("El telefono " . $data['tel_one_contact'] . " no es válido");
-                }
-
-                if(isset($_POST['tel_two_contact'])){
-
-                    $validaTlf3 = Utils::valida_telefono($data['tel_two_contact']);
-                    if (empty($validaTlf3)) {
-                        throw new Exception("El telefono " . $data['tel_two_contact'] . " no es válido");
-                    }
-                }
-            }
 
             $validaTlf = Utils::valida_telefono($data['telefono']);
 

@@ -228,9 +228,14 @@ class Controlador_Oferta extends Controlador_Base{
                   if(!empty($status)){
                       self::guardarEstatus($idUsuario,$idOferta,$status);
                   }else{
+
+                    if($aspiracion > 0){
                       self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
+                      Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
+                    }else{
+                      $_SESSION['mostrar_error'] = "La aspiración salarial debe ser mayor a 0";
+                    }
                   }
-                  Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
               }
               
               if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
@@ -249,7 +254,7 @@ class Controlador_Oferta extends Controlador_Base{
               );
               
               $tags["show_banner"] = 1;
-              $tags["template_js"][] = "validator";
+              //$tags["template_js"][] = "validator";
               $tags["template_js"][] = "oferta";
               
               Vista::render('detalle_oferta', $tags);
@@ -430,7 +435,7 @@ class Controlador_Oferta extends Controlador_Base{
           $array_ofertaxRestantes[] = $value;
         } 
       }
-      return $ofertas = array_merge($array_ofertasXarea,$array_ofertaxRestantes);
+      return array_merge($array_ofertasXarea,$array_ofertaxRestantes);
     }
 
     public function guardarPostulacion($id_usuario,$id_oferta,$aspiracion,$vista){

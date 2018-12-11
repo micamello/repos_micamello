@@ -668,9 +668,9 @@ body
 /* vista de ofertas */
 
 .button_transfer_list{
-  margin: 24px 0 10px 0;
+  margin: 32px 0 10px 0;
   display: inline-block;
-  padding: 6px 32px;
+  padding: 6px 12px;
   margin-bottom: 0;
   font-size: 14px;
   font-weight: normal;

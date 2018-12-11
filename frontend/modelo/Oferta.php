@@ -159,11 +159,11 @@ class Modelo_Oferta{
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (nombres LIKE '%".$pclave."%' OR o.titulo LIKE '%".$pclave."%' OR o.descripcion LIKE '%".$pclave."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
+      $sql .= " AND (nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.titulo LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.descripcion LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
     }
 
     if(!empty($vista) && ($vista == 'postulacion')){
-      $sql .= " AND o.estado = 1 AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
+      $sql .= " AND o.estado = 1 AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }else if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
       $sql .= " AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
     }else{
