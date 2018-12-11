@@ -19,10 +19,6 @@ $('.modal').on('hidden.bs.modal', function(){
 });
 
 
-if(document.getElementById('form_login')){
-  $("#form_login").validator();
-}
-
 if(document.getElementById('form_contrasena')){
   $("#form_contrasena").validator();
 }

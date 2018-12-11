@@ -908,6 +908,7 @@ var filtro = [];
 
             $label.prepend($checkbox);
 
+
             if ($element.is(':selected')) {
                 $label.prepend('<i class="fa fa-check" style="float: right; padding-top: 2px; color: green;"></i>');
             }

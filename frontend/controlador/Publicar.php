@@ -32,27 +32,37 @@ class Controlador_Publicar extends Controlador_Base {
       break;
       default:
         $publicaciones_restantes = $_SESSION['mfo_datos']['planes'];
+        Utils::log(print_r($_SESSION['mfo_datos']['planes'], true));
         $rest = 0;
         foreach ($publicaciones_restantes as $value) {
           if($value['num_publicaciones_rest'] < 0){
-            $rest = "&infin;";
+            $rest = "Ilimitado";
             break;
           }
           else{
             $rest += $value['num_publicaciones_rest'];
           }
         }
+
+        $plan_con_pub = 0;
+        foreach ($publicaciones_restantes as $value) {
+          if($value['num_publicaciones_rest'] >= 0){
+            $plan_con_pub += $value['num_publicaciones_rest'];
+          }
+        }
+        // print_r("<br>".$plan_con_pub."<br>");
+        // exit();
         if ($rest <= 0 && is_numeric($rest)) {
-          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
+          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan eder.";
           Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');       
         }
         else{
-          $this->mostrarDefault($idusu,$rest);
+          $this->mostrarDefault($idusu,$rest, $plan_con_pub);
         }
       break;
     } 
   }
-  public function mostrarDefault($idusu,$publicaciones_restantes){
+  public function mostrarDefault($idusu,$publicaciones_restantes, $plan_con_pub){
       $arrarea = Modelo_Area::obtieneListado();
       $arrinteres = Modelo_Interes::obtieneListado();
       $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
@@ -69,7 +79,8 @@ class Controlador_Publicar extends Controlador_Base {
                     'arridioma'=>$arridioma,
                     'arrnivelidioma'=>$arrnivelidioma,
                     'arrescolaridad'=>$arrescolaridad,
-                    'publicaciones_restantes'=>$publicaciones_restantes
+                    'publicaciones_restantes'=>$publicaciones_restantes,
+                    'plan_con_pub'=>$plan_con_pub
                   );
       
       if ( Utils::getParam('form_publicar') == 1 ){
@@ -82,7 +93,7 @@ class Controlador_Publicar extends Controlador_Base {
           // exit();
           
           $data_idiomas = self::validarCampos($data);
-          if($publicaciones_restantes > 0){
+          if($publicaciones_restantes > 0 || $publicaciones_restantes == "Ilimitado"){
             $GLOBALS['db']->beginTrans();
             self::guardarPublicacion($data, $data_idiomas, $idusu);
             $GLOBALS['db']->commit();
@@ -102,7 +113,7 @@ class Controlador_Publicar extends Controlador_Base {
       }
       $tags["template_js"][] = "assets/js/main";
       $tags["template_js"][] = "tinymce/tinymce.min";
-      $tags["template_js"][] = "selectr";
+      $tags["template_js"][] = "bootstrap-multiselect";
       $tags["template_js"][] = "mic";
       $tags["template_js"][] = "validatePublicar";
       Vista::render('publicar_vacante', $tags);
@@ -111,6 +122,12 @@ class Controlador_Publicar extends Controlador_Base {
     // if (Utils::validarPalabras(array($data['titu_of'], $data['des_of'])) == false) {
     //   throw new Exception("Se han encontrado palabras no permitidas en la publicación de su oferta. Por favor revise su contenido e intente nuevamente");
     // }
+
+    // Validar longitud de campos
+    if(Utils::validarLongitudCampos($data['titu_of'], 100) == false){
+      throw new Exception("Longitud máxima del campo 100 caracteres");
+    }
+
     if (Utils::formatoDinero($data['salario']) == false) {
       throw new Exception("El campo salario solo permite números");
     }
@@ -189,6 +206,7 @@ class Controlador_Publicar extends Controlador_Base {
       throw new Exception("Ha ocurrido un error, intente nuevamente3");
     }
     if($num_post > 0){
+      // exit();
       if(!Modelo_UsuarioxPlan::restarPublicaciones($id_empresa_plan, $num_post, Modelo_Usuario::EMPRESA)){
         throw new Exception("Ha ocurrido un error, intente nuevamente4");
       }

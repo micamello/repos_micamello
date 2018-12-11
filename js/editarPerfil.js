@@ -33,18 +33,18 @@ if (document.getElementById("area_select"))
 
           if ($(this).attr('label') !== undefined) {
             labels.push($(this).attr('label'));                             
-            $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
+            $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');          
             $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
           }
           else {
             labels.push($(this).html());
-
             $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
               $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
           }
         });                        
         return labels.join(', ') + '';
       }
+
     },
     onChange: function(option, checked) {
       var selectedOptions = $('#area_select option:selected');
@@ -60,9 +60,9 @@ if (document.getElementById("area_select"))
           });
       }
       else {
-          $('#area_select option').each(function() {
-              // console.log(this);
+          $('#area_select option').each(function() {               
               var input = $('input[id="area_select-' + $(this).val() + '"]');
+              //console.log(input);
               input.prop('disabled', false);
               input.parent('li').addClass('disabled');
               $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
@@ -70,6 +70,27 @@ if (document.getElementById("area_select"))
       }
     }        
   });
+
+  var selectedOptions = $('#area_select option:selected');
+  if (selectedOptions.length >= 3) {
+          var nonSelectedOptions = $('#area_select option').filter(function() {
+              return !$(this).is(':selected');
+          }); 
+          nonSelectedOptions.each(function() {
+              var input = $('input[id="area_select-' + $(this).val() + '"]');
+              input.prop('disabled', true);
+              input.parent('li').addClass('disabled');
+          });
+      }
+      else {
+          $('#area_select option').each(function() {               
+              var input = $('input[id="area_select-' + $(this).val() + '"]');
+              //console.log(input);
+              input.prop('disabled', false);
+              input.parent('li').addClass('disabled');
+              $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
+          });
+      }
 
   $('#seleccionados1').parent().append(filtro[0]);
 

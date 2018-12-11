@@ -44,7 +44,8 @@
 			 			<div class="caja">
 
 			 				<p>Publicaciones restantes: 
-			 				<b><span> <?php echo $publicaciones_restantes; ?></span></b></p>
+			 				<b><span> <?php echo $publicaciones_restantes;
+			 							if($plan_con_pub >0 && is_numeric($plan_con_pub)){echo " + ".$plan_con_pub;} ?></span></b></p>
 
 			 			</div>
 			 		</div>
@@ -150,14 +151,19 @@
 						<div class="">
 							<div class="col-md-6">
 								<div class="form-group" id="area_group">
-									<div class="opcionesSeleccionados">
-										<div class="row" id="seleccionados">
-											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-											<!-- <?php echo $optiones; ?> -->
-										</div>
+									<div class="">
 										<div id="area_error" class="help-block with-errors"></div>
-										<label class="">Categorías: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-										<select class="form-control" name="area_select[]" id="area_select" data-selectr-opts='{"maxSelection": 1 }' multiple>
+										<div class="panel panel-default">
+											<div class="panel-heading">Áreas (Máx: 1)
+									        	<label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+									          		<label id="numero1">0</label> de 1
+									        	</label>
+									      </div>
+									      <div class="panel-body">
+									        <div class="row" id="seleccionados1">
+									        </div>
+									      </div>
+										<select class="form-control" name="area_select[]" id="area_select" multiple>
 					                    <?php 
 					                      if (!empty($arrarea)){
 					                          foreach($arrarea as $area){ ?>
@@ -165,28 +171,35 @@
 					                          <?php }
 					                      } ?>
 					                  	</select>
+					                  	</div>
 					                </div>
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="form-group" id="nivel_group">
-									<div class="opcionesSeleccionados">
-										<div class="row" id="seleccionados1">
-											<p style="font-size: 11px; margin-bottom: 0px;">Opciones seleccionadas</p>
-											<!-- <?php echo $optiones; ?> -->
-										</div>
+									<div class="">
 										<div id="nivel_error" class="help-block with-errors"></div>
-										<label>Nivel: (Máx: 1)</label>&nbsp;<i class="requerido">*</i>
-										<select class="form-control" name="nivel_interes[]" id="nivel_interes" data-selectr-opts='{"maxSelection": 1 }' multiple>
-					                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
-					                    <?php 
-					                      if (!empty($intereses)){
-					                          foreach($intereses as $interes){ ?>
-					                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
-					                          <?php }
-					                      } ?>
-					                  	</select>
+											<div class="panel panel-default">
+												<div class="panel-heading">Niveles (Máx: 1)
+											        <label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+											          <label id="numero2">0</label> de 1
+											        </label>
+											      </div>
+											      <div class="panel-body">
+											        <div class="row" id="seleccionados2">
+											        </div>
+											      </div>
+												<select class="form-control" name="nivel_interes[]" id="nivel_interes" multiple>
+							                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
+							                    <?php 
+							                      if (!empty($intereses)){
+							                          foreach($intereses as $interes){ ?>
+							                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
+							                          <?php }
+							                      } ?>
+							                  	</select>
+							                </div>
 					                </div>
 								</div>
 							</div>
@@ -302,7 +315,7 @@
 								<!-- <div class="col-md-12"> -->
 									<div id="error_msg">
 									</div>
-									<div class="list_content" style="overflow-y: scroll;">
+									<div class="list_content">
 										<div class="form-group" id="list_idioma">
 											<p id="text_nothing">Ningun idioma seleccionado.....</p>
 										</div>
@@ -414,7 +427,7 @@
 						<div class="col-md-3">
 							<div class="form-group" id="edad_max_group">
 								<label>Edad máxima: </label>&nbsp;<i class="requerido">*</i><div id="edad_max_error" class="help-block with-errors"></div>
-								<input type="number" id="edad_max" name="edad_max" min="18" max="100" class="form-control" value="18">
+								<input type="number" id="edad_max" name="edad_max" min="18" class="form-control" value="18">
 							</div>
 						</div>
 

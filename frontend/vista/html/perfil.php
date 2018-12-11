@@ -661,6 +661,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                            <input type="hidden" name="actualizar" id="actualizar" value="1">
 		                            <input type="hidden" name="tipo_usuario" id="tipo_usuario" value="<?php echo $_SESSION['mfo_datos']['usuario']['tipo_usuario']; ?>">
 		                            <input type="hidden" name="btnDescarga" id="btnDescarga" value="<?php echo $btnDescarga; ?>">
+
 					                <div class="row">
 					                	<?php if($btnSig == 0){ ?>
 											<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR" disabled onclick="enviarFormulario()">

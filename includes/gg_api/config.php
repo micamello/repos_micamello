@@ -9,7 +9,7 @@
 	$gClient->setClientId("87037959378-d851bc5825slmmu4qq2dr9ajspd0nhqo.apps.googleusercontent.com");
 	$gClient->setClientSecret("U0XSH6-3nHpMZLNp6Cszy7Br");
 	$gClient->setApplicationName("MiCamello");
-	$gClient->setRedirectUri("http://localhost/repos_micamello/google.php?tipo_user=1");
+	$gClient->setRedirectUri("https://www.micamello.com.ec/desarrollov2/google.php?tipo_user=1");
 	// $gClient->setRedirectUri("http://localhost/repos_micamello/includes/gg_api/google.php?tipo_user=1");
 	
 	$gClient->addScope("https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email");

@@ -7,8 +7,8 @@
 	require_once "Facebook/autoload.php";
 
 	$FB = new \Facebook\Facebook([
-		'app_id' => '182819669263964',
-		'app_secret' => 'f5ce73ed2f5bd3dff264b2589cdb43ca',
+		'app_id' => '388679925219540',
+		'app_secret' => '59bc4e9abca15fa0ef6583a735c688fc',
 		'default_graph_version' => 'v2.10'
 	]);
 
