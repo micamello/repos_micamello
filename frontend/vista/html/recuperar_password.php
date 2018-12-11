@@ -7,7 +7,7 @@
           <div class="col-md-12">
             <div class="form-group">
               <label>Correo Electr&oacute;nico:</label><div class="help-block with-errors"></div>
-              <input type="email" name="correo" id="correo" class="form-control" placeholder="Ej: camello@gmail.com" aria-describedby="correoHelp" required>
+              <input type="email" name="correo" id="correo" class="form-control" placeholder="Ej: camello@gmail.com" aria-describedby="correoHelp" required maxlength="100" minlength="10">
               <input type="hidden" name="forgot_form" id="forgot_form" value="1">
             </div>  
           </div>                            

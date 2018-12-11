@@ -7,7 +7,7 @@
           <div class="col-md-12">
             <div class="form-group ">
               <label>Usuario/Correo:</label><div class="help-block with-errors"></div>
-              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: palvarez/pedroalvarez@gmail.com" required>
+              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: palvarez/pedroalvarez@gmail.com" required maxlength="50" minlength="5">
               <input type="hidden" name="login_form" id="login_form" value="1">            
             </div>
           </div>
@@ -16,7 +16,7 @@
               <label>Contrase&ntilde;a:</label><div class="help-block with-errors"></div>
               <div class="input-group">
                 <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                <input title="Letras y números, mínimo 8 caracteres" type="password" name="password" id="password" class="form-control" required>
+                <input title="Letras y números, mínimo 8 caracteres" type="password" name="password" id="password" class="form-control" required maxlength="15" minlength="8">
               </div>
             </div>
           </div>

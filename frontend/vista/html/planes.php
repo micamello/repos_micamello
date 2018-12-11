@@ -32,10 +32,11 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
-  <div class="modal-dialog " role="document">
-    <form method="post" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/" id="form_plan" name="form_plan">
-      <div class="modal-content">
+<div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true"> 
+  <div class="modal-dialog" role="document">
+    
+    <div class="modal-content">
+      <form method="post" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/" id="form_plan" name="form_plan">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLongTitle">Sucripci&oacute;n de plan</h5>        
           <input type="hidden" name="idplan" id="idplan" value="">
@@ -45,7 +46,8 @@
           <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
           <button type="submit" class="btn btn-primary">Comprar</button>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
+    
   </div>
 </div>

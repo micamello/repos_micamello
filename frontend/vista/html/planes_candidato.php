@@ -49,25 +49,24 @@
                 </li>
               </ul>
             <?php } ?> 
-          </div>                                
+          </div>  
         </div>  
       <?php } ?>       
     </div>
   </div>
 </div>
-<br><br>
 
 <!-- Modal -->
 <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Confirmaci&oacute;n de Sucripci&oacute;n de plan</h5>                
+        <h5 class="modal-title" id="exampleModalLongTitle">Confirmaci&oacute;n de Sucripci&oacute;n de Plan</h5>                        
       </div>
-      <div class="modal-body">
+      <div class="modal-body">                           
         <h5>Usted procedera a suscribirse en el Plan <b><span id="desplan"></span></b>&nbsp;¿Desea continuar?</h5>
         <p class="text-center"><i class="fa fa-shopping-cart fa-5x" aria-hidden="true"></i></p>
-      </div>
+      </div>    
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
         <a class="btn btn-primary" href="" id="btncomprar">Comprar</a>
