@@ -361,9 +361,9 @@ class Controlador_Oferta extends Controlador_Base{
             if(!empty($eliminarPostulacion)){
                 $r = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion);
                 if(!$r){
-                    $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci&oacute;n, intente de nuevo';
+                    $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulación, intente de nuevo';
                 }else{
-                    $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci&oacute;n exitosamente';
+                    $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulación exitosamente';
                 }
             }
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();
