@@ -45,6 +45,11 @@ class Controlador_Oferta extends Controlador_Base{
         $postulado = array();
         $subempresas = '';
         $ofertasSubempresas = array();
+
+        if(isset($_SESSION['mfo_datos']['usuarioxarea'])){
+          $areasInteres = implode(",",$_SESSION['mfo_datos']['usuarioxarea']); 
+        }
+
         switch ($opcion) {
           case 'filtrar':
 
@@ -75,14 +80,14 @@ class Controlador_Oferta extends Controlador_Base{
             $id_provincia = '';
             $id_jornada = '';
             $cadena = '';
-            $array_datos = $result = array();
+            $array_datos = array();
             foreach ($this->data as $param => $value) {
                 
                 $letra = substr($value,0,1);
                 $id = substr($value,1);
 
                 $cadena .= '/'.$value;
-                array_push($result, strval($value));
+                //array_push($result, strval($value));
                 if(isset($_SESSION['mfo_datos']['Filtrar_ofertas'][$letra])){
                     if($letra == 'A' && $type == 1){
                         
@@ -161,11 +166,12 @@ class Controlador_Oferta extends Controlador_Base{
 
             $ofertas = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
 
+            //Para obtener la cantidad de registros totales de la consulta
             $registros = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
 
-            if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-              $ofertas = self::ordenarOfertasXareasUsuario($idUsuario,$ofertas);
-            }else{
+            if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
+              /*$ofertas = self::ordenarOfertasXareasUsuario($idUsuario,$ofertas);
+            }else{*/
               $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
             }
 
@@ -217,20 +223,24 @@ class Controlador_Oferta extends Controlador_Base{
                   $idUsuario = $idUsuario.",".$subempresas;
                 }
 
-                $array_subempresas = explode(",",$subempresas);
-                $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);                  
-              }else{
-                $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
+                $array_subempresas = explode(",",$subempresas);               
               }
+              
+              $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
 
               if (Utils::getParam('postulado') == 1) {
               
                   if(!empty($status)){
                       self::guardarEstatus($idUsuario,$idOferta,$status);
                   }else{
+
+                    if($aspiracion > 0){
                       self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
+                      Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
+                    }else{
+                      $_SESSION['mostrar_error'] = "La aspiración salarial debe ser mayor a 0";
+                    }
                   }
-                  Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
               }
               
               if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
@@ -249,7 +259,6 @@ class Controlador_Oferta extends Controlador_Base{
               );
               
               $tags["show_banner"] = 1;
-              $tags["template_js"][] = "validator";
               $tags["template_js"][] = "oferta";
               
               Vista::render('detalle_oferta', $tags);
@@ -271,7 +280,10 @@ class Controlador_Oferta extends Controlador_Base{
               $arrarea       = Modelo_Area::obtieneListadoAsociativo();
               $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
               $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
+
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
+
+              //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
               
               $breadcrumbs['vacantes'] = 'Mis Ofertas';
@@ -303,8 +315,6 @@ class Controlador_Oferta extends Controlador_Base{
 
               //solo empresas
               $subempresas = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario); 
-              //$subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,false);
-
               
               if ($subempresas == '') {
                   Utils::doRedirect(PUERTO . '://' . HOST . '/vacantes/');
@@ -312,6 +322,7 @@ class Controlador_Oferta extends Controlador_Base{
 
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$subempresas,false,SUCURSAL_PAISID);
 
+              //Para obtener la cantidad de registros totales de la consulta
               $cantidad_ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$subempresas,true,SUCURSAL_PAISID);
 
               $array_empresas_hijas = array();
@@ -369,14 +380,14 @@ class Controlador_Oferta extends Controlador_Base{
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();
             $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
             $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
-            $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);          
+
+            $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres);       
 
             if($vista != 'postulacion'){
                 $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
-                $ofertas = self::ordenarOfertasXareasUsuario($idUsuario,$ofertas);
                 $breadcrumbs['oferta'] = 'Ofertas de empleo';
             }else{
-                $breadcrumbs['postulacion'] = 'Mis postulaciones';
+              $breadcrumbs['postulacion'] = 'Mis postulaciones';
             }
 
             $tags = array(
@@ -394,9 +405,10 @@ class Controlador_Oferta extends Controlador_Base{
             $tags["show_banner"] = 1;
             
             $url = PUERTO.'://'.HOST.'/'.$vista; 
-            //echo 'cantd_ofertas: '.count($ofertas);
-            /*echo 'cantd: '.*/$cantd = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); //exit;
-            $pagination = new Pagination(count($cantd),REGISTRO_PAGINA,$url);
+
+            //Para obtener la cantidad de registros totales de la consulta
+            $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
+            $pagination = new Pagination(count($registros),REGISTRO_PAGINA,$url);
             $pagination->setPage($page);
             $tags['paginas'] = $pagination->showPage();
             Vista::render('ofertas', $tags);
@@ -419,7 +431,7 @@ class Controlador_Oferta extends Controlador_Base{
       }
     }
 
-    public function ordenarOfertasXareasUsuario($idUsuario,$ofertas){
+    /*public function ordenarOfertasXareasUsuario($idUsuario,$ofertas){
 
       $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($idUsuario);
       $array_ofertasXarea = $array_ofertaxRestantes = array(); 
@@ -430,8 +442,8 @@ class Controlador_Oferta extends Controlador_Base{
           $array_ofertaxRestantes[] = $value;
         } 
       }
-      return $ofertas = array_merge($array_ofertasXarea,$array_ofertaxRestantes);
-    }
+      return array_merge($array_ofertasXarea,$array_ofertaxRestantes);
+    }*/
 
     public function guardarPostulacion($id_usuario,$id_oferta,$aspiracion,$vista){
       try{

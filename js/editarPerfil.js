@@ -23,13 +23,9 @@ if (document.getElementById("area_select"))
     buttonWidth: '50%',
     buttonText: function(options, select) {
       if (options.length === 0) { 
-        //$('#seleccionados').html('Seleccione una area ...');
         $('#seleccionados1').html('');
         return 'Seleccione una area ...';
       }
-      /*else if (options.length > 3) {                  
-          return 'Solo se permiten 3 areas';
-      }*/
       else {
         var labels = [];  
         $('#seleccionados1').html('');                
@@ -48,7 +44,6 @@ if (document.getElementById("area_select"))
         });                        
         return labels.join(', ') + '';
       }
-      
 
     },
     onChange: function(option, checked) {
@@ -76,8 +71,6 @@ if (document.getElementById("area_select"))
     }        
   });
 
-  //$('#area_select').multiselect('select', ['1', '3', '5']);
-
   var selectedOptions = $('#area_select option:selected');
   if (selectedOptions.length >= 3) {
           var nonSelectedOptions = $('#area_select option').filter(function() {
@@ -100,6 +93,26 @@ if (document.getElementById("area_select"))
       }
 
   $('#seleccionados1').parent().append(filtro[0]);
+
+  var selectedOptions = $('#area_select option:selected');
+  if (selectedOptions.length >= 3) {
+      var nonSelectedOptions = $('#area_select option').filter(function() {
+          return !$(this).is(':selected');
+      }); 
+      nonSelectedOptions.each(function() {
+          var input = $('input[id="area_select-' + $(this).val() + '"]');
+          input.prop('disabled', true);
+          input.parent('li').addClass('disabled');
+      });
+  }
+  else {
+      $('#area_select option').each(function() {
+          var input = $('input[id="area_select-' + $(this).val() + '"]');
+          input.prop('disabled', false);
+          input.parent('li').addClass('disabled');
+          $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
+      });
+  }
 }
 
 if (document.getElementById("nivel_interes"))
@@ -116,13 +129,10 @@ if (document.getElementById("nivel_interes"))
     enableCaseInsensitiveFiltering: true,
     buttonWidth: '50%',
     buttonText: function(options, select) {
-        //console.log(options.length);
+
       if (options.length === 0) { 
         $('#seleccionados2').html('');
         return 'Seleccione un nivel ...';
-      }
-      else if (options.length > 2) {                  
-          return 'Solo se permiten 2 niveles';
       }
       else {
         var labels = [];  
@@ -169,11 +179,28 @@ if (document.getElementById("nivel_interes"))
     }        
   });
 
-  $('#seleccionados2').parent().append(filtro[0]);
-}
+  $('#seleccionados2').parent().append(filtro[1]);
 
-if(document.getElementById('form_cambiar')){
-  //$("#form_cambiar").validator();
+  var selectedOptions = $('#nivel_interes option:selected');
+
+  if (selectedOptions.length >= 2) {
+    var nonSelectedOptions = $('#nivel_interes option').filter(function() {
+        return !$(this).is(':selected');
+    }); 
+    nonSelectedOptions.each(function() {
+        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+        input.prop('disabled', true);
+        input.parent('li').addClass('disabled');
+    });
+  }
+  else {
+    $('#nivel_interes option').each(function() {
+        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+        input.prop('disabled', false);
+        input.parent('li').addClass('disabled');
+        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
+    });
+  }
 }
 
 if(document.getElementById('seccion_listado')){
@@ -798,14 +825,14 @@ function validarFormulario(){
         } 
 
 
-        if(area_select.selectedIndex == null || area_select.selectedIndex == -1){
+        if(area_select.value == null || area_select.value == 0){
 
             colocaError("err_area", "seccion_area",err_list,"boton");
             error = 1;
         }else{
-            
-            var cantd_selec = $('#seleccionados1').find('p').length-1;
-            if(cantd_selec == 0)
+
+            var cantd_selec = $('#seleccionados1').find('help-block').length;
+            if(cantd_selec != 0)
             {
                 colocaError("err_area", "seccion_area",err_list,"boton");
                 error = 1;
@@ -814,14 +841,14 @@ function validarFormulario(){
             }
         }
 
-        if(nivel_interes.selectedIndex == null || nivel_interes.selectedIndex == -1){
+        if(nivel_interes.value == null || nivel_interes.value == 0){
 
             colocaError("err_int", "seccion_int",err_list,"boton");
             error = 1;
         }else{
             
-            var cantd_selec = $('#seleccionados2').find('p').length-1;
-            if(cantd_selec == 0)
+            var cantd_selec = $('#seleccionados2').find('help-block').length;
+            if(cantd_selec != 0)
             {
                 colocaError("err_int", "seccion_int",err_list,"boton");
                 error = 1;
@@ -1050,7 +1077,7 @@ function validarClave(){
     if(password_two == null || password_two.length == 0 || /^\s+$/.test(password_two)){
 
         colocaError("err_clave1", "seccion_clave1",err_campo,"button_cambiar");
-        error = 1; console.log(password_two);
+        error = 1; 
 
     }else if(!expreg.test(password_two)){
 

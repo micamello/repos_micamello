@@ -36,6 +36,10 @@ class Controlador_Aspirante extends Controlador_Base
         $breadcrumbs = array();
         $array_empresas = array();
 
+        if(!isset($_SESSION['mfo_datos']['Filtrar_aspirantes']) || $opcion == '' || $vista == 2 || $vista == 1){
+            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0);
+        }
+
         switch ($opcion) {
             case 'filtrar':                
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
@@ -54,7 +58,6 @@ class Controlador_Aspirante extends Controlador_Base
                     $letra = substr($value,0,1);
                     $id = substr($value,1);
                     $cadena .= '/'.$value;
-
                     if($letra == 'F' && $type == 1){
                         
                         if(isset(FECHA_POSTULADO[$id])){
@@ -299,8 +302,7 @@ class Controlador_Aspirante extends Controlador_Base
                 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
                 }
-                
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0);
+
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
 

@@ -199,7 +199,6 @@ class Controlador_Perfil extends Controlador_Base
                     }
                 }
             }
-            
 
             $validaTlf = Utils::valida_telefono($data['telefono']);
 

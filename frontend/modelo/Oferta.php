@@ -15,7 +15,9 @@ class Modelo_Oferta{
     $rs = $GLOBALS['db']->auto_array($sql,array($area));
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
-  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa){    
+
+  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false){    
+
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta,
@@ -63,7 +65,11 @@ class Modelo_Oferta{
     }
     
     if($obtCantdRegistros == false){
-      $sql .= " ORDER BY o.fecha_creado DESC";
+      $sql .= " ORDER BY ";
+      if($areasInteres != false){
+        $sql .= "FIELD(a.id_area, ".$areasInteres.") DESC, ";
+      }
+      $sql .= "o.fecha_creado DESC";
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }else{
@@ -124,16 +130,18 @@ class Modelo_Oferta{
       }else{
         $pclave = $filtros['Q'];
       }
-      $sql .= " AND (nombres LIKE '%".$pclave."%' OR o.titulo LIKE '%".$pclave."%' OR o.descripcion LIKE '%".$pclave."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
+
+      $sql .= " AND (nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.titulo LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.descripcion LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.salario LIKE '%".$pclave."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
     }
     if(!empty($vista) && ($vista == 'postulacion')){
-      $sql .= " AND o.estado = 1 AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
+      $sql .= " AND o.estado = 1 AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }else if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
       $sql .= " AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
     }else{
       $sql .= " AND o.estado = 1";
     }
     $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
+    
     if(!empty($filtros['O']) && $filtros['O'] != 0){
       $tipo = substr($filtros['O'],0,1);
       $t = substr($filtros['O'],1,2);
@@ -158,6 +166,7 @@ class Modelo_Oferta{
         }
       }
     }
+
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 

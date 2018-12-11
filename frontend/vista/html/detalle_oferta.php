@@ -136,7 +136,7 @@
                     </h5>
                 </div>
 		          <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-                <form role="form" name="form1" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
+                <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.$o['id_ofertas']; ?>/">
                   <input type="hidden" name="postulado" id="postulado" value="1">
                   <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
                     <?php if(!empty($postulado)){ ?>
@@ -148,12 +148,12 @@
                     <?php }else{ ?>
                       <div align="center">
                         <div class="col-md-12">
-                          <div class="form-group">
-                              <label for="aspiracion">Aspiraci&oacute;n salarial</label><div class="help-block with-errors"></div>
-                              <input class="form-control" type="text" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,2); ?>" required/>
+                          <div id="seccion_asp" class="form-group">
+                              <label for="aspiracion">Aspiraci&oacute;n salarial</label><div id="err_asp" class="help-block with-errors"></div>
+                              <input class="form-control" type="text" min="1" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,2); ?>" required/>
                           </div>
                           <h5>
-                            <button type="submit" class="btn btn-success">POSTULARSE</button>
+                            <button type="button" class="btn btn-success" onclick="validarAspiracion();">POSTULARSE</button>
                           </h5>
                         </div>
                       </div>
