@@ -26,14 +26,14 @@ class Controlador_Oferta extends Controlador_Base{
         $breadcrumbs = array();
         $aspirantesXoferta = '';
 
-        /*if($vista == 'oferta'){
+        if($vista == 'oferta'){
           if(isset($_SESSION['mfo_datos']['planes'])){            
             $planes = $_SESSION['mfo_datos']['planes'];
           }else{
             $planes = null;
           }
           Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
-        }*/
+        }
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == '' || $opcion == 'vacantes' || $opcion == 'cuentas'){
 
@@ -207,7 +207,9 @@ class Controlador_Oferta extends Controlador_Base{
           case 'detalleOferta':
               //solo candidatos 
               if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
-                  Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+
+                  $_SESSION['mostrar_error'] = "Debe contratar al menos un plan para poder acceder a las ofertas.";
+                  Utils::doRedirect(PUERTO.'://'.HOST.'/planes/'); 
               }
               
               $idOferta = Utils::getParam('id', '', $this->data);

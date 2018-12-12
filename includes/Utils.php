@@ -323,6 +323,8 @@ class Utils{
   }
 
   public static function generarUsername($name){
+
+    $count = 0;
     if(strlen($name) > 50){
       $name = substr($name, 1, 49);
     }

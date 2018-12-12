@@ -480,7 +480,7 @@ function chequeaRUC(dni){
   if(dni != ""){
       
       if (typeof window['validar_'+host] === 'function') {
-          window['validar_'+host](dnid,1,"dni_error", "dni_group", btn);
+          window['validar_'+host](dni,1,"dni_error", "dni_group", btn);
           if(host == "EC"){
 
               if(((dni.length)) < 13){
