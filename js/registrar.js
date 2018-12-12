@@ -903,7 +903,7 @@ function validateForm(tipo){
 }
 
 function validar_EC(dni_obj){
-	var validacion = validarDocumento(dni_obj);
+	var validacion = validarDocumento(dni_obj.value);
 	return validacion;
 }
 
