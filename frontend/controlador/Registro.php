@@ -202,7 +202,7 @@ class Controlador_Registro extends Controlador_Base {
                     throw new Exception("Error en el envio de correo, por favor intente denuevo");
                   }
                 $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
-                Utils::doRedirect(PUERTO."/".HOST."/");
+                Utils::doRedirect(PUERTO."://".HOST."/");
   }
 
   public function facebook($userdata, $tipo_usuario){
