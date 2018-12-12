@@ -148,6 +148,9 @@ function validaCampos(tipo){
     $("#"+btn).addClass('disabled');
   }else{
     $("#"+btn).removeClass('disabled');
+    if(tipo == 1){
+      document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
+    }
   }
 }
 
@@ -445,12 +448,17 @@ $('#dniP').on('blur', function(){
 function enviarFormulario(form){
 
   var estado = validarFormulario();
+  
   if(estado == 1 && form == 'form_deposito'){
     document.form_deposito.submit();
-  }else if(estado != 1 && form == 'form_paypal'){
-    $("#btn_submitpaypal").on('click', function(evt){
-      evt.preventDefault();  
-    });
+  }else if(form == 'form_paypal'){
+    if(estado != 1){
+      $("#btn_submitpaypal").on('click', function(evt){
+        evt.preventDefault();  
+      });
+    }else{
+      document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
+    }
   }
 }
 
@@ -582,9 +590,7 @@ function validarFormulario(){
 
   if(error == 0){
     $("#"+btn).removeClass('disabled');
-    if(form == 2){
-      document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
-    }
+    document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
     return 1;
   }
 }

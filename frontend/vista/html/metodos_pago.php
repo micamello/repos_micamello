@@ -93,7 +93,7 @@
               <div class="col-md-6">
                 <div id="seccion_nombre" class="form-group">
                   <label>Nombre y apellidos:</label><div id="err_nom" class="help-block with-errors"></div>
-                  <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ejemplo: Carlos Crespo" minlength="10" maxlength="100">
+                  <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ejemplo: Carlos Crespo" maxlength="100">
                 </div>
               </div>
               <div class="col-md-6">

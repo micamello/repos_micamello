@@ -1,7 +1,6 @@
 if(document.getElementById('form_editarPerfil')){
-
+calcularEdad();
     validarFormulario();
-    //validarClave();
 
     ocultarCampos();
     mostrarUni();
@@ -320,7 +319,7 @@ function fileValidation(fileInput){
   }
 }
 
-function validaCampos(tipo){
+/*function validaCampos(tipo){
 
   var elem = $('#form_editarPerfil').find('input[type!="hidden"]');
   var btn = 'btn_submitpaypal'; 
@@ -345,7 +344,7 @@ function validaCampos(tipo){
   }else{
     $("#"+btn).removeClass('disabled');
   }
-}
+}*/
 
 
 /* Carga de imagen dinamico */
@@ -536,8 +535,24 @@ function delete_item_selected(selected_item){
 }
 
 /* valida si el candidato es mayor de edad */
+function validarFormatoFecha(campo) {
+  var RegExPattern = /^\d{1,2}-\d{1,2}-\d{4}$/;
+  var values = campo.split("-");
+  var dia = parseInt(values[2]);
+  var mes = parseInt(values[1]);
+  var ano = parseInt(values[0]);
+
+  if((dia <= 0 || dia > 31) || (mes <= 0 || mes > 12) || (ano <= 1500 || ano > 2099)){
+    return true;
+  }else if ((campo.match(RegExPattern)) && (campo!='')) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
 function calcularEdad(){
+
     var fecha=document.getElementById("fecha_nacimiento").value;
 
     // Si la fecha es correcta, calculamos la edad
@@ -569,17 +584,10 @@ function calcularEdad(){
 
     if(edad >= 18){
         
-        /*$("#mayoria").attr({
-            class: 'form-group',
-        });
-        nodo = document.getElementById("error");
-        nodo.innerHTML = '';
-        $("#boton").removeAttr('disabled');*/
         return 1;
 
     }else{
         return 0;
-        //colocaError("error", "mayoria","Debe ser mayor de edad");
     }
 }
 
@@ -1000,9 +1008,14 @@ function validarFormulario(){
 
         colocaError("error", "mayoria","Debe elegir una fecha válida","boton");
         error = 1;
-    }else if(calcularEdad() == 0 && tipo_usuario == 1){
+    }/*else if(validarFormatoFecha(fecha_nacimiento)){
 
-        colocaError("error", "mayoria","Debe ser mayor de edad");
+      colocaError("error", "mayoria","El formato de fecha es incorrecto","boton");
+      error = 1;
+
+    }*/else if(calcularEdad() == 0 && tipo_usuario == 1){
+
+        colocaError("error", "mayoria","Debe ser mayor de edad","boton");
         error = 1;
 
     }else{

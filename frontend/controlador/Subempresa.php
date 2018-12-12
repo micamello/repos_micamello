@@ -291,6 +291,10 @@ class Controlador_Subempresa extends Controlador_Base
 
             $id_empresa = $GLOBALS['db']->insert_id();
 
+            if(!self::correoAvisoCreacion($data['correo'],$data['name_user'],$username,$password)){
+                throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta, intente nuevamente");
+            }
+
             if(!Modelo_ContactoEmpresa::crearContactoEmpresa($data, $id_empresa)){
                 throw new Exception("Ha ocurrido un error al crear empresa, intente nuevamente");
             }
@@ -320,10 +324,6 @@ class Controlador_Subempresa extends Controlador_Base
             if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$data['plan'])){
               throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
             }
-
-            /*if (!Modelo_UsuarioxPlan::devolverRecursos($planPadre)){
-              throw new Exception("Error al devolver datos a la empresa hija");
-            }*/
 
             $GLOBALS['db']->commit();
             $_SESSION['mostrar_exito'] = "La cuenta fue creada exitosamente.";
@@ -403,6 +403,19 @@ class Controlador_Subempresa extends Controlador_Base
         }catch( Exception $e ){
             $GLOBALS['db']->rollback();
             $_SESSION['mostrar_error'] = $e->getMessage();  
+        }
+    }
+
+    public function correoAvisoCreacion($correo,$nombres,$username,$password){
+
+        $asunto = "Creación de cuenta";
+        $body = "Estimado, ".$nombres."<br>";
+        $body .= "<br>Su cuenta puede fue creada exitosamente y puede ingresar mediante su correo electrónico o el siguiente username: <br><b>".$username."</b> y password: <br><b>".$password."</b><br><br>";
+        if (Utils::envioCorreo($correo,$asunto,$body)){
+          return true;
+        }
+        else{
+          return false;
         }
     }
 }
