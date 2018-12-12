@@ -13,8 +13,8 @@
                                 <div class="form-group col-md-12" align="right">
                                     <div class="col-md-<?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ echo '10'; }else{ echo '12'; } ?>" align="right">
                                         <span>
-                                            <strong>N° de Cuentas creadas: </strong>
-                                            <span style="color:red" class="parpadea"><?php echo $cantd_empresas; ?></span>
+                                            <strong>N° de Cuentas restantes: </strong>
+                                            <span style="color:red" class="parpadea"><?php echo $tieneRecursos['cuentas']-$cantd_empresas; ?></span>
                                         </span>
                                         <br>
 

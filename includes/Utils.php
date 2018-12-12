@@ -323,10 +323,15 @@ class Utils{
   }
 
   public static function generarUsername($name){
-
+    
     $count = 0;
     if(strlen($name) > 50){
       $name = substr($name, 1, 49);
+    }
+
+    if(strlen($name) < 8){
+      $addTousername = self::generateRandomString(8-(strlen($name)));
+      $name = $name.$addTousername;
     }
     $username = ($name);
     $username_generated = $username;
@@ -335,15 +340,17 @@ class Utils{
           $username_generated = $username.$count;
         }
         $count++;
-        Utils::log("-----".$username_generated);
+        
       }
     while(!empty(Modelo_Usuario::existeUsuario($username_generated)));
+
     return $username_generated;
   }
 
-  public static function generateRandomString() {
-      $length = rand(6, 10);
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  public static function generateRandomString($minimo) {
+
+      $length = rand($minimo, $minimo+4);
+      $characters = '0123456789';
       $charactersLength = strlen($characters);
       $randomString = '';
       for ($i = 0; $i < $length; $i++) {

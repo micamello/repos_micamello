@@ -927,5 +927,6 @@ WHERE
 
     return $GLOBALS['db']->auto_array($sql,array($padre),true);
   }
+
 }  
 ?>

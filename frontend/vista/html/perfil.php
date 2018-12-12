@@ -73,9 +73,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                            	<p class="text-center" id="texto_status"><?php echo $msj2; ?></p>
 		                        	</div>
 								</div>
-								<br>
+								<br><br>
 	                        <?php } ?>
-	                        <br><br><br>
+	                        <br><br>
 	                    </div>
                     <?php } ?>
 
@@ -170,7 +170,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    <div id="mayoria"  class="form-group">
 		                                        <label for="mayor_edad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Fecha de Nacimiento <?php }else{ ?> Fecha de Apertura <?php } ?><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="error" class="help-block with-errors"></div>
 
-		                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>"  value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> onchange="calcularEdad()" <?php } ?> placeholder="dd/mm/aaaa" onkeyup="validarFormulario()" required/>
+		                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>"  value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>" <?php if($btnSig == 1){ echo 'disabled'; } ?> <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> onchange="calcularEdad(); validarFormulario();" <?php } ?> placeholder="dd/mm/aaaa" onkeyup="calcularEdad(); validarFormulario();" required/>
 		                                    </div>
 	                                    </div>
 
@@ -196,8 +196,11 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														if (!empty($arrprovincia)){									
 					                    					foreach($arrprovincia as $key => $pr){ 
 																echo "<option value='".$pr['id_provincia']."'";
-																if ($provincia == $pr['id_provincia'] || (isset($data['provincia']) && $data['provincia'] == $pr['id_provincia']))
-																{ 
+
+																if(isset($data['provincia']) && (int)$data['provincia'] == (int)$pr['id_provincia']){
+													
+																	echo " selected='selected'";
+																}else if ((int)$provincia == (int)$pr['id_provincia']){ 
 																	echo " selected='selected'";
 																}
 																echo ">".utf8_encode($pr['nombre'])."</option>";
@@ -215,8 +218,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                            if(!empty($arrciudad)){
 				                                    	foreach($arrciudad as $key => $ciudad){ 
 															echo "<option value='".$ciudad['id_ciudad']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad'] || (isset($data['ciudad']) && $data['ciudad'] == $ciudad['id_ciudad']))
-															{  
+															if(isset($data['ciudad']) && $data['ciudad'] == $ciudad['id_ciudad']){
+																echo " selected='selected'";
+															}else if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad']){  
 																echo " selected='selected'";
 															}
 															echo ">".utf8_encode($ciudad['ciudad'])."</option>";
@@ -464,13 +468,21 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 															</div>
 														</div>
 													  	<select class="form-control" multiple id="area_select" name="area_select[]" <?php if($btnSig == 1){ echo 'disabled'; } ?> onchange="validarFormulario()" required>
-															<?php 
+															<?php print_r($data); 
 															if (!empty($arrarea)){
 											                	foreach($arrarea as $key => $ae){ 
 																	echo "<option value='".$ae['id_area']."'";
-																	if (in_array($ae['id_area'], $areaxusuario) || (isset($data['area_select']) && in_array($ae['id_area'], $data['area_select'])))
-																	{ 
-																		echo " selected='selected'";
+
+																	if(isset($data['area_select'])){
+																		if (in_array($ae['id_area'], $data['area_select']))
+																		{ 
+																			echo " selected='selected'";
+																		}
+																	}else{
+																		if (in_array($ae['id_area'], $areaxusuario))
+																		{ 
+																			echo " selected='selected'";
+																		}
 																	}
 																	echo ">".utf8_encode($ae['nombre'])."</option>";
 																} 
@@ -499,10 +511,19 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 															if (!empty($arrinteres)){
 											                	foreach($arrinteres as $key => $ae){ 
 																	echo "<option value='".$ae['id_nivelInteres']."'";
-																	if (in_array($ae['id_nivelInteres'], $nivelxusuario) || (isset($data['nivel_interes']) && in_array($ae['id_nivelInteres'], $data['nivel_interes'])))
-																	{ 
-																		echo " selected='selected'";
+				
+																	if(isset($data['nivel_interes'])){
+																		if (in_array($ae['id_nivelInteres'], $data['nivel_interes']))
+																		{ 
+																			echo " selected='selected'";
+																		}
+																	}else{
+																		if (in_array($ae['id_nivelInteres'], $nivelxusuario))
+																		{ 
+																			echo " selected='selected'";
+																		}
 																	}
+
 																	echo ">".utf8_encode($ae['descripcion']);
 																	echo "</option>";
 																} 

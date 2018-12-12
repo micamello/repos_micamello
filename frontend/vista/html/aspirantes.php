@@ -372,25 +372,25 @@
 
 												<td style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>
 
-												<?php if($vista == 1){ ?>
+												<?php if($vista == 1){ 
+													$compl_url = $id_oferta."/"; ?>
 													<td style="vertical-align: middle; text-align: center;"><?php echo SUCURSAL_MONEDA.number_format($a['asp_salarial'],2); ?></td>
-												<?php } ?>
+												<?php }else{
+													$compl_url = '';
+												} ?>
 
 												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) ||in_array('-1',$posibilidades)){ ?>
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 									            		<?php 
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
 
-										            			/*$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);
-										            			$descargas = Modelo_Descarga::cantidadDescarga($_SESSION['mfo_datos']['usuario']['id_usuario']);*/
-										            			 //print_r($posibilidades);
 										            			if(in_array('-1',$posibilidades)){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/"><i class="fa fa-file-text fa-1x"></i></a>';
+																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
 																}else{
 																	$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
 
 																	if($cantidadRestante > 0){
-																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/"><i class="fa fa-file-text fa-1x"></i></a>';
+																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
 																	}else{
 
 																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\')"><i class="fa fa-file-text fa-1x"></i></a>';

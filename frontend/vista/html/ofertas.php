@@ -292,7 +292,7 @@
 
 													<input type="hidden" id="descripcion" name="descripcion" value="<?php echo $des; ?>">
 													<?php $puedeEditar = Modelo_Oferta::puedeEditar($o["id_ofertas"]);
-														if($puedeEditar == 1){
+														if($puedeEditar["editar"] == 1){
 													?>
 													<a onclick="abrirModalEditar('editar_Of','<?php echo $o["id_ofertas"]; ?>');">
 														<i class="fa fa-edit" title="Editar la oferta"></i>
@@ -332,7 +332,7 @@
 								  	<div class="row">
 								  		<div class="estados_postulados col-md-12">
 							                <?php $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$o['id_ofertas']);
-							                	$cv_descargado = Modelo_descarga::obtieneDescargaCV($_SESSION['mfo_datos']['infohv']['id_infohv'],$o['id_empresa'],$o['id_ofertas']);
+							                	$cv_descargado = Modelo_Descarga::obtieneDescargaCV($_SESSION['mfo_datos']['infohv']['id_infohv'],$o['id_empresa'],$o['id_ofertas']);
 							                 ?>
 							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
 							                    <div class="wizard-icon"><i class="fa fa-file-text-o"></i></div>
