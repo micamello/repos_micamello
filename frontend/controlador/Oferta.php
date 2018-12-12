@@ -384,7 +384,6 @@ class Controlador_Oferta extends Controlador_Base{
             $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
             $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres);       
-
             if($vista != 'postulacion'){
                 $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
                 $breadcrumbs['oferta'] = 'Ofertas de empleo';
