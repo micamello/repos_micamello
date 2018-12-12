@@ -259,8 +259,8 @@ class Modelo_UsuarioxPlan{
     if($recursos['id_empresa_plan_parent'] == ''){
       $recursos['id_empresa_plan_parent'] = $recursos['id_empresa_plan'];
     }
-
-    $sql = "SELECT num_publicaciones_rest,num_descarga_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1";
+print_r($recursos);
+    echo $sql = "SELECT num_publicaciones_rest,num_descarga_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1";
     $result = $GLOBALS['db']->auto_array($sql,array(),false);
 
     if($result['num_publicaciones_rest'] != -1 && $recursos['num_publicaciones_rest'] != -1){
@@ -274,7 +274,8 @@ class Modelo_UsuarioxPlan{
     }else{
       $cantd_desc = -1;
     }
-
+echo $cantd_post; 
+echo $cantd_desc; exit;
     return $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => $cantd_post, 'num_descarga_rest' => $cantd_desc),'id_empresa_plan='.$recursos['id_empresa_plan_parent']);
   }
 
@@ -297,6 +298,7 @@ class Modelo_UsuarioxPlan{
 
   public static function actualizarPublicacionesEmpresa($id_empresa_plan, $num_post,$num_desc){
     if (empty($id_empresa_plan) || empty($num_post) || empty($num_desc)) {return false;}
+
     $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post,"num_descarga_rest"=>$num_desc, "estado"=>1), "id_empresa_plan = ".$id_empresa_plan);
     return $result;
   }

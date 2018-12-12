@@ -114,6 +114,7 @@ class Controlador_Subempresa extends Controlador_Base
                     'breadcrumbs'=>$breadcrumbs
                 );
 
+                $tags["template_js"][] = "ruc_jquery_validator";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('crearEmpresas', $tags);
                 
@@ -260,7 +261,7 @@ class Controlador_Subempresa extends Controlador_Base
 
         try{
 
-            $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'ruc'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0,"postNum"=>1,"num_post"=>1,"descNum"=>1, "num_desc"=>1, "plan"=>1);  
+            $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'dni'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0/*,"postNum"=>1*/,"num_post"=>1,/*"descNum"=>1,*/ "num_desc"=>1, "plan"=>1);  
 
             $data = $this->camposRequeridos($campos);
 
@@ -290,42 +291,39 @@ class Controlador_Subempresa extends Controlador_Base
 
             $id_empresa = $GLOBALS['db']->insert_id();
 
-            $dato_contacto = array('nombre_contact'=>$data['nombre_contact'], 'apellido_contact'=>$data['apellido_contact'], 'tel_one_contact'=>$data['tel_one_contact'], 'tel_two_contact'=>$data['tel_two_contact']);
-
-            if(!Modelo_ContactoEmpresa::crearContactoEmpresa($dato_contacto, $id_empresa)){
+            if(!Modelo_ContactoEmpresa::crearContactoEmpresa($data, $id_empresa)){
                 throw new Exception("Ha ocurrido un error al crear empresa, intente nuevamente");
             }
 
             $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($data['plan']);
 
-            if(isset($data["postNum"]) && $data["postNum"] == -1){
+            if(isset($data["num_post"]) && $data["num_post"] == -1){
                 $var1 = -1;
+                $numPublicaciones = $var1;
             }else{
                 $var1 = $data["num_post"];
                 $numPublicaciones = $planPadre['num_publicaciones_rest']-$var1;
             }
 
-            if(isset($data["descNum"]) && $data["descNum"] == -1){
+            if(isset($data["num_desc"]) && $data["num_desc"] == -1){
                 $var2 = -1;
+                $numDescargas = $var2;
             }else{
                 $var2 = $data["num_desc"];
                 $numDescargas = $planPadre['num_descarga_rest']-$var2;
             }
 
-            if($var1 != -1 && $var2 != -1){
-
-                if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($data['plan'],$numPublicaciones,$numDescargas)){
-                    throw new Exception("Error al actualizar los recursos de la empresa."); 
-                }
+            if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($data['plan'],$numPublicaciones,$numDescargas)){
+                throw new Exception("Error al actualizar los recursos de la empresa."); 
             }
 
             if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$data['plan'])){
               throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
             }
 
-            if (!Modelo_UsuarioxPlan::devolverRecursos($planPadre)){
+            /*if (!Modelo_UsuarioxPlan::devolverRecursos($planPadre)){
               throw new Exception("Error al devolver datos a la empresa hija");
-            }
+            }*/
 
             $GLOBALS['db']->commit();
             $_SESSION['mostrar_exito'] = "La cuenta fue creada exitosamente.";
@@ -371,7 +369,7 @@ class Controlador_Subempresa extends Controlador_Base
                 $numDescargas = ($planPadre['num_descarga_rest']+$desc) - $var2;
             }
 
-            if($var1 == -1 || $var2 == -1){
+            if($var1 == -1 && $var2 == -1){
 
                 if(isset($_POST['estado'])){
                     $est = $_POST['estado'];
@@ -384,11 +382,8 @@ class Controlador_Subempresa extends Controlador_Base
                 }
             }else{
 
-                if($var1 != -1 || $var2 != -1){
-
-                    if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($_POST['plan'],$numPublicaciones,$numDescargas)){
-                        throw new Exception("Error al actualizar los recursos de la empresa."); 
-                    }
+                if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($_POST['plan'],$numPublicaciones,$numDescargas)){
+                    throw new Exception("Error al actualizar los recursos de la empresa."); 
                 }
 
                 if($tipoVista == 'asignar'){
