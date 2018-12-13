@@ -8,7 +8,7 @@ if (! session_id()) {
 }
 $tipo_usuario = $_GET['tipo_usuario'];
 if (empty($_GET["action"])) {
-    require_once 'includes/lk_api/config.php';
+    // require_once 'includes/lk_api/config.php';
     require ('includes/lk_api/oauth/http.php');
     require ('includes/lk_api/oauth/oauth_client.php');
     
@@ -20,11 +20,11 @@ if (empty($_GET["action"])) {
     
     $client->debug = false;
     $client->debug_http = true;
-    $client->redirect_uri = REDIRECT_URI;
+    $client->redirect_uri = LK_REDIRECT_URI;
     $client->server = "LinkedIn";
-    $client->client_id = CLIENT_ID;
-    $client->client_secret = CLIENT_SECRET;
-    $client->scope = SCOPE;
+    $client->client_id = LK_ID_CLIENTE;
+    $client->client_secret = LK_SECRET;
+    $client->scope = LK_SCOPE;
     // print_r("eder");exit();
     
     if (($success = $client->Initialize())) {

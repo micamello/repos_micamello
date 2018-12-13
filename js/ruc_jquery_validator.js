@@ -1,5 +1,5 @@
 function validarDocumento(numero,tipo,campoErr,campoSeccion,btn){  
-  
+  // alert(numero);
   var suma = 0;      
   var residuo = 0;      
   var pri = false;      
