@@ -34,6 +34,14 @@ body
   left: 10px;
   border-radius: 100%;
   background-color: #b8c5cc;
+  /*margin: 200px 20px 20px 20px;*/
+  /*margin-top: -20px;*/
+  display: block;
+  display: inline-block;
+}
+
+.usericon_safari{
+  margin-top: -20px;
 }
 
 .navbar {
@@ -963,6 +971,7 @@ input[type="checkbox"]:checked + label:before {
   text-align: center;
   display: table;
   transition: transform .5s;
+  cursor: pointer;
   }
 
 .socialbutton:hover{

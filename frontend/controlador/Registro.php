@@ -158,11 +158,11 @@ class Controlador_Registro extends Controlador_Base {
     if($data['tipo_usuario'] == 1){
       $escolaridad = Modelo_Escolaridad::obtieneListado();
       $nombres_correo = $data['name_user']." ".$data['apell_user'];
-      $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'apellidos'=>$data['apell_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, "token"=>NULL, 'estado'=>0, 'term_cond'=>$data['term_cond'], 'conf_datos'=>$data['conf_datos'], 'id_ciudad'=>$default_city, 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'tipo_doc'=>$data['tipo_doc'], 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'] , 'genero'=>'M', 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$data['tipo_usuario']);
+      $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'apellidos'=>$data['apell_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, "token"=>NULL, 'estado'=>0, 'term_cond'=>$data['term_cond'], 'conf_datos'=>$data['conf_datos'], 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'tipo_doc'=>$data['tipo_doc'], 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'] , 'genero'=>'M', 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$data['tipo_usuario'], "estado"=>0);
     }
     else{
       $nombres_correo = $data['name_user'];
-      $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'fecha_nacimiento'=>$campo_fecha, 'fecha_creacion'=>$mayor_edad, 'term_cond'=>$data['term_cond'], 'conf_datos'=>$data['conf_datos'], 'id_ciudad'=>$default_city, 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$data['tipo_usuario']);
+      $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'fecha_nacimiento'=>$campo_fecha, 'fecha_creacion'=>$mayor_edad, 'term_cond'=>$data['term_cond'], 'conf_datos'=>$data['conf_datos'], 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$data['tipo_usuario'],"estado"=>0);
     }
         if(!Modelo_Usuario::crearUsuario($dato_registro)){
             throw new Exception("Ha ocurrido un error, intente nuevamente");
@@ -202,7 +202,7 @@ class Controlador_Registro extends Controlador_Base {
                     throw new Exception("Error en el envio de correo, por favor intente denuevo");
                   }
                 $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
-                Utils::doRedirect(PUERTO."/".HOST."/");
+                Utils::doRedirect(PUERTO."://".HOST."/");
   }
 
   public function facebook($userdata, $tipo_usuario){
@@ -234,7 +234,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['first_name']." ".$userdata['last_name'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['first_name'], "apellidos"=>$userdata['last_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city, "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['first_name'], "apellidos"=>$userdata['last_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
 
 
@@ -296,7 +296,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['given_name']." ".$userdata['family_name'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['given_name'], "apellidos"=>$userdata['family_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city, "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['given_name'], "apellidos"=>$userdata['family_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
 
         if(!Modelo_Usuario::crearUsuario($dato_registro)){
@@ -351,7 +351,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['firstName']." ".$userdata['lastName'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['firstName'], "apellidos"=>$userdata['lastName'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city, "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['firstName'], "apellidos"=>$userdata['lastName'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
         if(!Modelo_Usuario::crearUsuario($dato_registro)){
             throw new Exception("Ha ocurrido un error, intente nuevamente 2");
@@ -403,7 +403,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['screen_name']." ".$userdata['screen_name'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['screen_name'], "apellidos"=>$userdata['screen_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city, "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['screen_name'], "apellidos"=>$userdata['screen_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
         if(!Modelo_Usuario::crearUsuario($dato_registro)){
             throw new Exception("Ha ocurrido un error, intente nuevamente  ");

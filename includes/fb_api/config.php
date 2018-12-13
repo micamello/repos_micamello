@@ -3,12 +3,12 @@
     { 
         session_start(); 
     } 
-
+    require_once "constantes.php";
 	require_once "Facebook/autoload.php";
 
 	$FB = new \Facebook\Facebook([
-		'app_id' => '388679925219540',
-		'app_secret' => '59bc4e9abca15fa0ef6583a735c688fc',
+		'app_id' => FB_ID_CLIENTE,
+		'app_secret' => FB_CLIENTE_SECRET,
 		'default_graph_version' => 'v2.10'
 	]);
 
