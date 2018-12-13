@@ -11,7 +11,7 @@
                             <div class="panel-body">
 
                                 <div class="form-group col-md-12" align="right">
-                                    <div class="col-md-<?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ echo '10'; }else{ echo '12'; } ?>" align="right">
+                                    <div class="col-md-<?php if($cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ echo '10'; }else{ echo '12'; } ?>" align="right">
                                         <span>
                                             <strong>N° de Cuentas restantes: </strong>
                                             <span style="color:red" class="parpadea"><?php echo $tieneRecursos['cuentas']-$cantd_empresas; ?></span>
@@ -35,7 +35,9 @@
                                             </span>
                                         <?php } ?>
                                     </div>
-                                   <?php if(!empty($puedeCrearCuenta) && $cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ ?>
+                                   <?php 
+
+                                   if($cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ ?>
                                         <div class="col-md-2 icon_oferta" align="right">
                                             <a href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/"><span id="boton" name="" class="btn btn-md btn-success">
                                             <i class="fa fa-industry " title="Crear nueva empresa"></i> CREAR EMPRESA</span></a>

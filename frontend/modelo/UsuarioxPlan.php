@@ -230,9 +230,7 @@ class Modelo_UsuarioxPlan{
   #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
   public static function tieneRecursos($idEmpresaPlan=false,$idEmpresa=false){
 
-    $sql = "SELECT ";
-
-    $sql .= "ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta";
+    $sql = "SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta";
     
     $sql .= " FROM mfo_empresa_plan ep
       INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
@@ -313,6 +311,24 @@ echo $cantd_desc; exit;
     
     $result = $GLOBALS['db']->update('mfo_empresa_plan', array("estado"=>$estado), "id_empresa_plan = ".$id_empresa_plan);
     return $result;
+  }
+
+  public static function planCuentaPropio($idEmpresa){
+
+    $estatus = false;
+    $sql = "SELECT id_empresa_plan 
+    FROM mfo_empresa_plan ep 
+    INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+    WHERE ep.id_empresa = $idEmpresa AND ep.id_empresa_plan_parent IS NULL
+    AND p.costo > 0 AND p.num_cuenta > 0 LIMIT 1;";
+
+    $result = $GLOBALS['db']->auto_array($sql,array(),true);
+
+    if(count($result)>0){
+      $estatus = true;
+    }
+
+    return $estatus;
   }
 }  
 

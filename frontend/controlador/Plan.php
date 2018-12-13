@@ -70,6 +70,7 @@ class Controlador_Plan extends Controlador_Base {
  
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
+
     $tags = self::mostrarDefault(2);    
     $tags["show_banner"] = 1;
     $tags["planUsuario"] = $planUsuario;
