@@ -51,7 +51,7 @@ class Modelo_Plan{
               ORDER BY u.fecha_compra ASC";
     }
     else{
-      $sql = "SELECT p.id_plan, p.nombre, p.costo, e.id_comprobante, e.fecha_compra,        
+      $sql = "SELECT p.id_plan, p.nombre, p.costo, e.id_comprobante,e.id_empresa_plan_parent, e.fecha_compra,        
                      IFNULL(e.fecha_caducidad,'-') AS fecha_caducidad, 
                      CASE WHEN num_publicaciones_rest = -1 THEN 'ilimitado'
                           WHEN num_publicaciones_rest = 0 THEN '-'

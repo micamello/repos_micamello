@@ -201,7 +201,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-5 form-group">
+							<!-- <div class="col-md-5 form-group">
 								<div class="box_text">
 									<label>Cambio de residencia <i class="fa fa-home icon fa-2x"></i></label>
 										<?php 
@@ -217,9 +217,9 @@
 											}
 										 ?>
 								</div>
-							</div>
+							</div> -->
 
-							<div class="col-md-6 col-md-offset-3 form-group">
+							<div class="col-md-5 form-group">
 								<div class="box_text">
 									<label>Fecha Nac. / Edad <i class="fa fa-calendar icon fa-2x"></i></label>
 										<?php 
@@ -257,6 +257,43 @@
 										 ?>
 								</div>
 							</div>
+
+							<div class="col-md-5 col-md-offset-1 form-group">
+								<div class="box_text">
+									<label>Escolaridad <i class="fa fa-university icon fa-2x"></i></label>
+										<?php 
+											if ($infoUsuario['id_escolaridad'] != NULL || $infoUsuario['id_escolaridad'] != "") {
+												foreach ($escolaridad as $key => $value) {
+													if($key == $infoUsuario['id_escolaridad']){
+														echo "<h6>".utf8_encode($value)."</h6>";
+													}
+												}
+											}
+											else{
+												echo "<h6>----------</h6>";
+											}
+										 ?>
+								</div>
+							</div>
+
+							<div class="col-md-5 form-group">
+								<div class="box_text">
+									<label>Estado carrera <i class="fa fa-university icon fa-2x"></i></label>
+										<?php 
+											if ($infoUsuario['status_carrera'] != NULL || $infoUsuario['status_carrera'] != "") {
+												foreach (STATUS_CARRERA as $key => $value) {
+													if($key == $infoUsuario['status_carrera']){
+														echo "<h6>".utf8_encode($value)."</h6>";
+													}
+												}
+											}
+											else{
+												echo "<h6>----------</h6>";
+											}
+										 ?>
+								</div>
+							</div>
+
 							<div class="col-md-12">
 								<hr>
 								<h4>Datos domiciliarios</h4>

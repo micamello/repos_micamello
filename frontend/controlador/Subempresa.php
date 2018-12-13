@@ -21,8 +21,8 @@ class Controlador_Subempresa extends Controlador_Base
         }
 
         //Valida los permisos 
-        if(isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'adminEmpresas')){
-           $this->redirectToController('vacantes');
+        if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'adminEmpresas') && !Modelo_UsuarioxPlan::planCuentaPropio($_SESSION['mfo_datos']['usuario']['id_usuario'])){
+            $this->redirectToController('vacantes');
         }
 
         $mostrar = Utils::getParam('mostrar', '', $this->data); 
@@ -410,7 +410,7 @@ class Controlador_Subempresa extends Controlador_Base
 
         $asunto = "Creación de cuenta";
         $body = "Estimado, ".$nombres."<br>";
-        $body .= "<br>Su cuenta puede fue creada exitosamente y puede ingresar mediante su correo electrónico o el siguiente username: <br><b>".$username."</b> y password: <br><b>".$password."</b><br><br>";
+        $body .= "<br>Su cuenta puede fue creada exitosamente y puede ingresar mediante su correo electrónico o el siguiente. <br>usuario: <b>".$username."</b><br> clave: <b>".$password."</b><br><br>";
         if (Utils::envioCorreo($correo,$asunto,$body)){
           return true;
         }

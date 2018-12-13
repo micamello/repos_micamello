@@ -37,7 +37,7 @@ if(document.getElementById('name_user')){
 		if(tipo_usuario == 1){
 			reg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
 		}else{
-			reg = /^[a-zÁÉÍÓÚáéíóúñÑ. 0-9]+$/i;
+			reg = /^[a-z ÁÉÍÓÚáéíóúñÑ. 0-9 &]+$/i;
 		}
 
 		var contenido = nombres.value;
@@ -898,6 +898,7 @@ function validateForm(tipo){
 			errors++;
 		}
 	}
+	console.log(errors);
 // ----------------------------------------------Tipo de usuario 2 (candidato) exclusivo--------------------------------------
 	return errors;
 }
