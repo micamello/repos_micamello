@@ -36,7 +36,6 @@
                                         <?php } ?>
                                     </div>
                                    <?php 
-
                                    if($cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ ?>
                                         <div class="col-md-2 icon_oferta" align="right">
                                             <a href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/"><span id="boton" name="" class="btn btn-md btn-success">
