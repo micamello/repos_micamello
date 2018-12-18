@@ -1,9 +1,6 @@
 <?php 
 class Controlador_Publicar extends Controlador_Base {
-  function __construct(){
-    global $_SUBMIT;
-    $this->data = $_SUBMIT;
-  }
+  
   public function construirPagina(){
     $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     unset($_SESSION['mfo_datos']['planes']);
@@ -32,7 +29,7 @@ class Controlador_Publicar extends Controlador_Base {
       break;
       default:
         $publicaciones_restantes = $_SESSION['mfo_datos']['planes'];
-        Utils::log(print_r($_SESSION['mfo_datos']['planes'], true));
+        //Utils::log(print_r($_SESSION['mfo_datos']['planes'], true));
         $rest = 0;
         foreach ($publicaciones_restantes as $value) {
           if($value['num_publicaciones_rest'] < 0){
@@ -86,11 +83,8 @@ class Controlador_Publicar extends Controlador_Base {
       if ( Utils::getParam('form_publicar') == 1 ){
         try{          
           $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1, 'urgente'=>0);             
-          $data = $this->camposRequeridos($campos);
+          $data = $this->camposRequeridos($campos);          
           $data["des_of"] = str_replace("\r\n","<br>",$_POST["des_of"]);
-          $data["des_of"] = htmlentities($data["des_of"],ENT_QUOTES,'UTF-8'); 
-          // Utils::log("eder: ----------------------------".print_r($data));
-          // exit();
           
           $data_idiomas = self::validarCampos($data);
           if($publicaciones_restantes > 0 || $publicaciones_restantes == "Ilimitado"){

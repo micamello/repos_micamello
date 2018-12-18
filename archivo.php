@@ -16,7 +16,6 @@ if(!Modelo_Usuario::estaLogueado()){
 }
 
 if(!empty($param1) && !empty($carpeta)){
-
 	$usuario = Modelo_Usuario::existeUsuario($param1);
 	if (empty($usuario)){
 		exit;

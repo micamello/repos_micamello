@@ -11,7 +11,7 @@
 				<p class="text_in_alert_danger">
 					Dentro de un momento su plan ser&aacute; activado<br>
 					Por favor revise su correo para verificar su subscripci&oacute;n<br><br>
-				<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
+				<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO && isset($msg_cuestionario) && $msg_cuestionario == 1) { ?>
 					Cuando su plan este activo, podr&aacute; realizar el tercer <a href="<?php echo PUERTO."://".HOST."/cuestionario/";?>">formulario</a>
 				<?php } ?>	
 				</p>        

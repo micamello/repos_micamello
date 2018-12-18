@@ -1,6 +1,12 @@
 <?php 
 class Modelo_Oferta{
+
   const ESTATUS_OFERTA = array('1'=>'CONTRATADO','2'=>'NO CONTRATADO','3'=>'EN PROCESO');
+  const ACTIVA = 1;
+  const INACTIVA = 0;
+  const PORAPROBAR = 2;
+  const PORELIMINAR = 3;
+  
   public static function obtieneNumero($pais){
     if (empty($pais)){ return false; }
     $sql = "SELECT COUNT(1) AS cont FROM mfo_oferta o
@@ -10,6 +16,7 @@ class Modelo_Oferta{
     $rs = $GLOBALS['db']->auto_array($sql,array($pais));
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
+  
   public static function obtieneNroArea($area){
     $sql = "SELECT COUNT(id_ofertas) AS cont FROM mfo_oferta where id_area = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($area));
@@ -17,7 +24,6 @@ class Modelo_Oferta{
   }
 
   public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false){    
-
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta,
@@ -80,6 +86,7 @@ class Modelo_Oferta{
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
+
   public static function filtrarOfertas(&$filtros,$page,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa){
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
@@ -175,11 +182,13 @@ class Modelo_Oferta{
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
+
   public static function guardarRequisitosOferta($data){
     if (empty($data)) {return false;}
     $result = $GLOBALS['db']->insert('mfo_requisitooferta', array("licencia"=>$data['licencia'], "viajar"=>$data['viaje'], "residencia"=>$data['cambio_residencia'], "discapacidad"=>$data['discapacidad'], "confidencial"=>$data['confidencial'], "edad_minima"=>$data['edad_min'], "edad_maxima"=>$data['edad_max']));
     return $result;
   }
+
   public static function guardarOferta($data, $id_reqOf, $id_plan, $id_empresa){
     if (empty($data)) {return false;}
     $urgente = 0;
@@ -189,6 +198,7 @@ class Modelo_Oferta{
     $result = $GLOBALS['db']->insert('mfo_oferta', array("id_empresa"=>$id_empresa, "titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>2, "fecha_creado"=>date("Y-m-d H:i:s"), "tipo"=>$urgente, "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_empresa_plan"=>$id_plan));
     return $result;
   }
+
   public static function aspirantesXofertas(){
     $sql = "SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
             FROM mfo_oferta o
@@ -205,6 +215,7 @@ class Modelo_Oferta{
     }
     return $datos;
   }
+
   public static function obtieneAutopostulaciones($pais,$fecha,$areas,$intereses,$usuario,$provincia=0){
     if (empty($pais) || empty($fecha) || empty($areas) || empty($intereses) || empty($usuario)){ return false; }
     $sql = "SELECT o.id_ofertas, o.salario, o.titulo, o.id_empresa AS id_usuario, p.nombre AS provincia, c.nombre AS ciudad
@@ -228,24 +239,29 @@ class Modelo_Oferta{
     $sql = "SELECT id_ofertas FROM mfo_oferta where estado = 1 AND id_empresa_plan = ?";
     return $GLOBALS['db']->auto_array($sql,array($usuarioplan),true);
   }
-  public static function desactivarOferta($id_ofertas){
+
+  public static function desactivarOferta($id_ofertas,$estado=self::INACTIVA){
     if (empty($id_ofertas)){ return false; }
-    return $GLOBALS['db']->update('mfo_oferta',array('estado'=>0),'id_ofertas='.$id_ofertas);
+    return $GLOBALS['db']->update('mfo_oferta',array('estado'=>$estado),'id_ofertas='.$id_ofertas);
   }
+
   public static function guardarDescripcion($idOferta,$descripcion){
     if (empty($idOferta)){ return false; }
     return $GLOBALS['db']->update('mfo_oferta',array('descripcion'=>$descripcion,'estado'=>2),'id_ofertas='.$idOferta);
   }
+
   public static function puedeEditar($idOferta){
     if (empty($idOferta)){ return false; }
     $sql = "SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = ? LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($idOferta),false);
   }
+
   public static function ofertaPostuladoPor($idOferta){
     if (empty($idOferta)){ return false; }
     $sql = "SELECT id_empresa FROM mfo_oferta where id_ofertas = ?";
     return $GLOBALS['db']->auto_array($sql,array($idOferta),true);
   }
+
   public static function ofertasDiarias($pais,$areas,$intereses){
     if (empty($pais) || empty($areas) || empty($intereses)){ return false; }    
     $fechaayer = date("Y-m-d",strtotime(date("Y-m-d")."- 1 day"));
@@ -259,6 +275,14 @@ class Modelo_Oferta{
             WHERE o.estado = 1 AND p.id_pais = ? AND o.id_area IN(".$areas.") AND o.id_nivelInteres IN(".$intereses.") AND o.fecha_creado BETWEEN ? AND ? 
             ORDER BY o.id_ofertas";    
     return $GLOBALS['db']->auto_array($sql,array($pais,$fechadesde,$fechahasta),true);        
+  }
+
+  public static function ofertasxEliminar(){
+    $sql = "SELECT o.id_ofertas, NOW() AS fecha_actual, DATE_ADD(e.fecha_caducidad, INTERVAL 1 MONTH) AS fecha_tope
+            FROM mfo_oferta o 
+            INNER JOIN mfo_empresa_plan e ON e.id_empresa_plan = o.id_empresa_plan 
+            WHERE o.estado = ?";  
+    return $GLOBALS['db']->auto_array($sql,array(self::PORELIMINAR),true);          
   }
 }  
 ?>

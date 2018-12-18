@@ -1,11 +1,6 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  function __construct(){
-    global $_SUBMIT;
-    $this->data = $_SUBMIT;
-  }
-  
   public function construirPagina(){
     // $navegador = Utils::detectarNavegador();
     // FACEBOOK

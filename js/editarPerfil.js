@@ -1008,12 +1008,12 @@ function validarFormulario(){
 
         colocaError("error", "mayoria","Debe elegir una fecha válida","boton");
         error = 1;
-    }/*else if(validarFormatoFecha(fecha_nacimiento)){
+    }else if(validarFormatoFecha(fecha_nacimiento)){
 
       colocaError("error", "mayoria","El formato de fecha es incorrecto","boton");
       error = 1;
 
-    }*/else if(calcularEdad() == 0 && tipo_usuario == 1){
+    }else if(calcularEdad() == 0 && tipo_usuario == 1){
 
         colocaError("error", "mayoria","Debe ser mayor de edad","boton");
         error = 1;

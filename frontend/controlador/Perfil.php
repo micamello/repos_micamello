@@ -2,12 +2,6 @@
 class Controlador_Perfil extends Controlador_Base
 {
 
-    public function __construct()
-    {
-        global $_SUBMIT;
-        $this->data = $_SUBMIT;
-    }
-
     public function construirPagina()
     {
 

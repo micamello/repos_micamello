@@ -104,7 +104,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   	$email_body = "Estimado, ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le confirmamos su autopostulaci&oacute;n a las siguientes ofertas:<br><br>";
     $email_body .= $mail_ofertas;
   	Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);
-    Modelo_Notificacion::insertarNotificacion($rows["id_usuario"],$email_body,2);
+    Modelo_Notificacion::insertarNotificacion($rows["id_usuario"],$email_body,Modelo_Usuario::CANDIDATO);
   }
 
 }

@@ -85,7 +85,7 @@ if (!empty($arrempresa)){
 				$ofertas = Modelo_Oferta::ofertasxUsuarioPlan($usuarioplan["id_usuario_plan"]);
 				if (!empty($ofertas) && is_array($ofertas)){
 					foreach($ofertas as $oferta){
-						if (!Modelo_Oferta::desactivarOferta($oferta["id_ofertas"],Modelo_oferta::PORELIMINAR)){
+						if (!Modelo_Oferta::desactivarOferta($oferta["id_ofertas"],Modelo_Oferta::PORELIMINAR)){
 		          throw new Exception("Error al desactivar la oferta"); 
 		        }         
 	        }

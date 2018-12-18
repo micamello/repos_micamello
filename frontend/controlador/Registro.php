@@ -1,9 +1,5 @@
 <?php 
 class Controlador_Registro extends Controlador_Base {
-  function __construct(){
-    global $_SUBMIT;
-    $this->data = $_SUBMIT;
-  }
 
   public function construirPagina(){
     if( Modelo_Usuario::estaLogueado() ){
@@ -181,13 +177,14 @@ class Controlador_Registro extends Controlador_Base {
                   if(!Modelo_UsuarioxNivel::crearUsuarioNivel($nivel_interes, $user_id)){
                       throw new Exception("Ha ocurrido un error, intente nuevamente");
                   }
-                }
-                else{
-                  $dato_contacto = array('nombres'=>$data['nombre_contact'], 'apellidos'=>$data['apellido_contact'], 'telefono1'=>$data['tel_one_contact'], 'telefono2'=>$data['tel_two_contact']);
-                  if(!Modelo_ContactoEmpresa::crearContactoEmpresa($dato_contacto, $user_id)){
-                    throw new Exception("Ha ocurrido un error el registrar, intente nuevamente");
-                  }
-                }
+          }
+          else{
+            $dato_contacto = array('nombre_contact'=>$data['nombre_contact'], 'apellido_contact'=>$data['apellido_contact'], 'tel_one_contact'=>$data['tel_one_contact'], 'tel_two_contact'=>$data['tel_two_contact']);
+            
+            if(!Modelo_ContactoEmpresa::crearContactoEmpresa($dato_contacto, $user_id)){
+              throw new Exception("Ha ocurrido un error el registrar, intente nuevamente");
+            }
+          }
 
                 $GLOBALS['db']->commit();
 

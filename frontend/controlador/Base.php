@@ -4,12 +4,14 @@ abstract class Controlador_Base{
   protected $ajax_enabled;
   protected $device;
   protected $datos;
+  protected $data;
   
   function __construct($device='web'){
     global $_SUBMIT;
     $this->device = $device;
-    $this->datos = $_SUBMIT;
-    
+    $this->datos = $_SUBMIT;    
+    $this->data = $_SUBMIT;    
+    self::verificaCompra();
   }
   
   public function redirectToController($controladorNombre, $params = array()){  
@@ -48,6 +50,17 @@ abstract class Controlador_Base{
     return $data;
   }
   
+  public function verificaCompra(){    
+    if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){      
+      $arrplanes = Modelo_UsuarioxPlan::planesActivos($_SESSION["mfo_datos"]["usuario"]["id_usuario"],
+                                                      $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
+      if (count($_SESSION['mfo_datos']['planes']) <> count($arrplanes)){
+        $_SESSION['mfo_datos']['planes'] = $arrplanes;
+        unset($_SESSION['mfo_datos']['actualizar_planes']);       
+      }      
+    }
+  }
+
   public abstract function construirPagina();
   
 }

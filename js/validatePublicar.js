@@ -588,7 +588,7 @@ function emptyContent(obj){
 // 	}
 // }
 
-	$('#form_publicar').on('submit', function(event){
+	$('#form_publicar').on('submit', function(event){        
 		if(enableBTN(2) == false){
 			cancelSubmit(event);
 		}

@@ -91,7 +91,6 @@ $('#provinciaP').change(function(){
 $('#btn_submitpaypal').click(function(){  
   var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
   $('#custom').attr('value',valor);
-
 });
 
 $('#imagen').change(function(e) {
@@ -144,12 +143,14 @@ function validaCampos(tipo){
     errors++;
   }
 
-  if(errors > 0 || verifyErrors() > 0){
+  if(errors > 0 || verifyErrors() > 0){    
     $("#"+btn).addClass('disabled');
-  }else{
-    $("#"+btn).removeClass('disabled');
-    if(tipo == 1){
-      document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
+  }else{    
+    $("#"+btn).removeClass('disabled');     
+    if(tipo == 1){    
+      var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
+      $('#custom').attr('value',valor);
+      document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
     }
   }
 }
@@ -451,13 +452,16 @@ function enviarFormulario(form){
   
   if(estado == 1 && form == 'form_deposito'){
     document.form_deposito.submit();
-  }else if(form == 'form_paypal'){
+  }else if(form == 'form_paypal'){    
     if(estado != 1){
       $("#btn_submitpaypal").on('click', function(evt){
         evt.preventDefault();  
       });
-    }else{
-      document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
+    }else{      
+      var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
+      $('#custom').attr('value',valor);
+      document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
+      $('#form_paypal').submit();
     }
   }
 }
@@ -541,7 +545,7 @@ function validarFormulario(){
     }
   }else{
     colocaError(err_nom,seccion_nombre,"El nombre no debe exceder de 100 caracteres",btn);
-    error = 1;
+    error = 1;    
   }
 
   if(validarCorreo(correo,err_correo,seccion_correo,btn)){
@@ -569,7 +573,7 @@ function validarFormulario(){
     }
   }else if(telefono.length <= '10'){
     colocaError(err_tlf,seccion_tlf,"El número minimo de caracteres es de 10",btn);
-    error = 1;
+    error = 1;    
   }else{
     colocaError(err_tlf,seccion_tlf,"El teléfono no debe exceder de 25 caracteres",btn);
     error = 1;
