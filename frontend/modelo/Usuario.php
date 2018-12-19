@@ -853,7 +853,8 @@ WHERE
   }
 
   public static function obtieneTodosCandidatos(){
-    $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.viajar, p.id_pais, l.correo, p.id_provincia
+    $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.viajar, p.id_pais, l.correo, 
+                   p.id_provincia, u.id_ciudad, u.residencia
             FROM mfo_usuario u
             INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia

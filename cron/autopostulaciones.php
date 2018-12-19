@@ -41,7 +41,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
     continue;
   }
   
-  echo "<br>usuario: ".$rows["id_usuario"]." / ".$rows["nombres"]." / ".$rows["viajar"]." / ".$rows["id_provincia"]."<br>";
+  echo "<br>usuario: ".$rows["id_usuario"]." / ".$rows["nombres"]." / ".$rows["viajar"]." / ".$rows["id_provincia"]." / ".$rows["id_ciudad"]."<br>";
   echo "areas: ".$str_areas."<br>";
   echo "interes: ".$str_niveles."<br>";
 
@@ -50,8 +50,23 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
     //restar 3 dias laborables a la fecha de contratacion del plan
     $fechacalculada = Utils::restarDiasLaborables($plan["fecha_compra"],DIAS_AUTOPOSTULACION);           
     echo "3 dias antes ".$fechacalculada."<br>";
-    //3.- obtiene todas las ofertas del pais del candidato, con los niveles y areas, si tiene disponibilidad para viajar o no y que no se haya postulado antes
-    $arr_ofertas = Modelo_Oferta::obtieneAutopostulaciones($rows["id_pais"],$fechacalculada,$str_areas,$str_niveles,$rows["id_usuario"],(($rows["viajar"]) ? 0 :$rows["id_provincia"]));
+    //3.- obtiene todas las ofertas del pais del candidato, con los niveles y areas, si tiene disponibilidad para viajar o no y que no se haya postulado antes    
+    $flag_provincia = 0;
+    $flag_ciudad = 0;
+    //4.si puede viajar busca dentro de la provincia y si puede cambiar de residencia dentro del pais    
+    if (empty($rows["residencia"])){
+      if (empty($rows["viajar"])){
+        $flag_provincia = $rows["id_provincia"];
+        $flag_ciudad = $rows["id_ciudad"];
+      }
+      else{
+        $flag_provincia = $rows["id_provincia"];
+        $flag_ciudad = 0; 
+      }
+    }    
+
+    $arr_ofertas = Modelo_Oferta::obtieneAutopostulaciones($rows["id_pais"],$fechacalculada,$str_areas,$str_niveles,
+                                                           $rows["id_usuario"],$flag_provincia,$flag_ciudad);
     
     if (empty($arr_ofertas)){
     	echo "No hay ofertas para este plan<br>";
@@ -71,10 +86,11 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
         $idpostulacion = $GLOBALS['db']->insert_id();      
         if (!Modelo_Postulacion::guardarPostAuto($idpostulacion,$plan["id_usuario_plan"])){
         	throw new Exception("Error al grabar la postulacion automatica ".print_r($oferta,true));
-        }        
+        }       
         if (!Modelo_UsuarioxPlan::restarPublicaciones($plan["id_usuario_plan"],$cont_publicacion,Modelo_Usuario::CANDIDATO)){
           throw new Exception("Error al restar las autopostulaciones ".print_r($oferta,true)); 
         }
+
 	  	  $GLOBALS['db']->commit();
          
         $cont_publicacion = $cont_publicacion - 1; 
