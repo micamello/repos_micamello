@@ -31,15 +31,15 @@ $(document).ready(function() {
                     if ($(this).attr('label') !== undefined) {
                       labels.push($(this).attr('label'));                             
                       $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
-                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
                       // console.log(this);
                     }
                     else {
                       labels.push($(this).html());                             
                       $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
-                        // $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                        // $(this).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
                     }
                   });                          
                   return labels.join(', ') + '';
@@ -66,7 +66,7 @@ $(document).ready(function() {
                         var input = $('input[id="area_select-' + $(this).val() + '"]');
                         input.prop('disabled', false);
                         input.parent('li').addClass('disabled');
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
                     });
                 }
               }        
@@ -101,14 +101,14 @@ $(document).ready(function() {
                     if ($(this).attr('label') !== undefined) {
                       labels.push($(this).attr('label'));                             
                       $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a>');
-                      $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                      $(this).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
                     }
                     else {
                       labels.push($(this).html());                             
                       $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a></p>');
                     // console.log(this.parentNode.id);
-                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
-                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children());
+                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children());
                     }
                   });                                    
                   return labels.join(', ') + '';
@@ -136,8 +136,8 @@ $(document).ready(function() {
                         input.prop('disabled', false);
                         input.parent('li').addClass('disabled');
                         // console.log("eder:  "+selectedOptions.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
                     });
                 }
               }        
@@ -258,7 +258,7 @@ if(document.getElementById('edad_max_error')){
 
 if(document.getElementById('titu_of')){
 	$('#titu_of').on('blur', function(){
-		if(emptyContent(this) != false){
+		if(emptyContent(this) != false && this.value.match(/\w/)){
 			if(this.value.length <= 100){
 				quitarError(titu_of_error, titu_of_group);
 			}
@@ -271,6 +271,7 @@ if(document.getElementById('titu_of')){
 			mensaje = "Rellene este campo";
 			colocaError(titu_of_error, titu_of_group, mensaje, button_register);
 		}
+        console.log(this.value);
 	});
 
 	$('#titu_of').on('keydown', function(event){
@@ -480,7 +481,10 @@ if(document.getElementById('des_of')){
     language: 'es',
     setup: function (editor) {
         editor.on('blur', function () {
-        	if(editor.getContent() == ""){
+            // console.log(editor.getContent().replace(/<p>/g, "").replace(/<\/p>/g, "").replace(/&nbsp;/g, ""));
+            contenido = editor.getContent().replace(/<p>/g, "").replace(/<\/p>/g, "").replace(/&nbsp;/g, "");
+        	if(editor.getContent() == "" || !contenido.match(/\w/)){
+
         		colocaError(descripcion_error, descripcion_group, mensaje, button_register);
         	}
         	else{

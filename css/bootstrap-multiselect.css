@@ -305,3 +305,12 @@ label[class="checkbox"] {
   position: absolute;
   padding: 7px 0px 0px 10px;
 }
+
+/*input[type="checkbox"]:hover{
+  outline: thin;
+}*/
+input[type="file"]:focus, input[type="radio"]:focus, input[type="checkbox"]:focus {
+    outline: thin;
+    outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
