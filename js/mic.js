@@ -1,6 +1,6 @@
-if(document.getElementById('form_login')){
+//if(document.getElementById('form_login')){
   //$("#form_login").validator();
-}
+//}
 
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
