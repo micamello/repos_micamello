@@ -359,16 +359,16 @@ if (typeof jQuery === 'undefined') {
   }
 
   Carousel.prototype.getItemForDirection = function (direction, active) {
-    var resolution = 6;
-    if(getBrowserSize().width > 993){
-      resolution = 6;
-    }
-    if(getBrowserSize().width < 993 && getBrowserSize().width>776){
-      resolution = 2;
-    }
-    if(getBrowserSize().width < 777){
-      resolution = 1;
-    }
+    var resolution = 1;
+    // if(getBrowserSize().width > 993){
+    //   resolution = 6;
+    // }
+    // if(getBrowserSize().width < 993 && getBrowserSize().width>776){
+    //   resolution = 2;
+    // }
+    // if(getBrowserSize().width < 777){
+    //   resolution = 1;
+    // }
     // 993
     // 766
 

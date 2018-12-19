@@ -37,7 +37,7 @@ if(document.getElementById('name_user')){
 		if(tipo_usuario == 1){
 			reg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
 		}else{
-			reg = /^[a-zÁÉÍÓÚáéíóúñÑ. 0-9]+$/i;
+			reg = /^[a-z ÁÉÍÓÚáéíóúñÑ. 0-9 &]+$/i;
 		}
 
 		var contenido = nombres.value;
@@ -219,7 +219,7 @@ if(document.getElementById('dni')){
 		if(tipo_usuario == 1){
 			if(documentacion == 2){
 				if (typeof window['validar_'+host] === 'function') {
-				    if(window['validar_'+host](this) != false){
+				    if(window['validar_'+host](this, 2, dni_error, dni_group, button_register) != 1){
 					    if(host == "EC"){
 					    	if(((this.value.length))>10){
 					    		mensaje = "DNI máximo 10 números";
@@ -257,7 +257,7 @@ if(document.getElementById('dni')){
 		}
 		else{
 			if (typeof window['validar_'+host] === 'function') {
-			    window['validar_'+host](this);
+			    window['validar_'+host](this, 1, dni_error, dni_group, button_register);
 			    if(host == "EC"){
 			    	if(((this.value.length)) == 13){
 			    		if(existeDni(this.value) == 1){
@@ -300,10 +300,10 @@ if(document.getElementById('dni')){
 							mensaje = "DNI no debe contener letras";
 							colocaError(dni_error, dni_group, mensaje, button_register);
 						}
-						else{
-							mensaje = "DNI máximo 10 números";
-							colocaError(dni_error, dni_group, mensaje, button_register);
-						}
+						// else{
+						// 	mensaje = "DNI máximo 10 números";
+						// 	colocaError(dni_error, dni_group, mensaje, button_register);
+						// }
 					}
 				}
 			}
@@ -898,14 +898,12 @@ function validateForm(tipo){
 			errors++;
 		}
 	}
+	console.log(errors);
 // ----------------------------------------------Tipo de usuario 2 (candidato) exclusivo--------------------------------------
 	return errors;
 }
 
-function validar_EC(dni_obj){
-	var validacion = validarDocumento(dni_obj);
-	return validacion;
-}
+function validar_EC(dni_obj,tipo,campoErr,campoSeccion,btn){ var validacion = validarDocumento(dni_obj.value, tipo,campoErr,campoSeccion,btn); return validacion; }
 
 function existeCorreo(correo){
 	var value = "";

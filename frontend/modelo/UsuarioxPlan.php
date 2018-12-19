@@ -259,12 +259,10 @@ class Modelo_UsuarioxPlan{
     
     if($recursos['id_empresa_plan_parent'] == ''){
       $recursos['id_empresa_plan_parent'] = $recursos['id_empresa_plan'];
-    }/*else{
-      $cantd_desc = 0;
-      $cantd_post = 0;
-    }*/
+    }
 
-    $sql = "SELECT num_publicaciones_rest,num_descarga_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1"; 
+    $sql = "SELECT num_publicaciones_rest,num_descarga_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1";
+
     $result = $GLOBALS['db']->auto_array($sql,array(),false);
 
     if($result['num_publicaciones_rest'] != -1 && $recursos['num_publicaciones_rest'] != -1){

@@ -44,8 +44,8 @@
 			 			<div class="caja">
 
 			 				<p>Ofertas restantes: 
-			 				<b><span> <?php echo $publicaciones_restantes;
-			 							if($plan_con_pub >0 && is_numeric($plan_con_pub)){echo " + ".$plan_con_pub;} ?></span></b></p>
+			 				<b><span> <?php if(!is_numeric($publicaciones_restantes)){echo $publicaciones_restantes." + ";}
+			 							if($plan_con_pub >0 && is_numeric($plan_con_pub)){echo $plan_con_pub;} ?></span></b></p>
 
 			 			</div>
 			 		</div>

@@ -7,7 +7,7 @@
           <div class="col-md-12">
             <div class="form-group ">
               <label>Usuario/Correo:</label><div class="help-block with-errors"></div>
-              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: palvarez/pedroalvarez@gmail.com" required maxlength="50" minlength="5">
+              <input type="text" name="username" id="username" class="form-control" placeholder="Ej: palvarez/pedroalvarez@gmail.com" required maxlength="50" minlength="4">
               <input type="hidden" name="login_form" id="login_form" value="1">            
             </div>
           </div>

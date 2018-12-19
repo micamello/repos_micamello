@@ -142,7 +142,7 @@ function modal_set(id)
 
 		tipo_usuario.value = id;
 
-		name_user.setAttribute("pattern", "[a-z A-ZñÑáéíóúÁÉÍÓÚ]+");
+		// name_user.setAttribute("pattern", "[a-z A-ZñÑáéíóúÁÉÍÓÚ]+");
 
 		dni.setAttribute("minlength", "");
 		dni.setAttribute("maxlength", "");
@@ -179,11 +179,11 @@ function modal_set(id)
 
 		correo_group.className ="col-md-6";
 
-		name_user.setAttribute("pattern", "[A-Za-z 0-9]+");
+		// name_user.setAttribute("pattern", "[A-Za-z 0-9]+");
 
 		dni.setAttribute("minlength", "13");
 		dni.setAttribute("maxlength", "13");
-		dni.setAttribute("pattern", "[0-9]{13,13}");
+		// dni.setAttribute("pattern", "[0-9]{13,13}");
 
 		dni.removeAttribute("disabled");
 

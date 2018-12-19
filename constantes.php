@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'micamello_desarrollo2');
+define('DBNOMBRE', 'micamello_desarrollo3');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -46,6 +46,25 @@ define('DIAS_AUTOPOSTULACION','3');
 define('AUTOPOSTULACION_MIN','5');
 define('TIPO_DOCUMENTO', array('1'=>'RUC','2'=>'CÉDULA','3'=>'PASAPORTE'));
 define('DOCUMENTACION', array('2'=>'CÉDULA', '3'=>'PASAPORTE'));
-define('APP_ID', '706585049706744');
-define('APP_SECRET', '247391a884159a515d149502b0f56aba');
+
+// facebook
+define('FB_ID_CLIENTE', '2148107835439054');
+define('FB_CLIENTE_SECRET', 'cac4885b9285bde2975216f6a26f69a9');
+
+// twitter
+define('CONSUMER_KEY', 's7ac5g54J6UDY5CLw3GAmIUbq');
+define('CONSUMER_SECRET', '0tBkfO1NhUSq2CrefAKkI1wZqmUFJbdM7ugBCX48NOY4UwFOwU');
+define('ACCESS_TOKEN', '1055523335109533696-nCq3bDsm4J4EJzo6PMnbRknuDGqKha');
+define('ACCESS_TOKEN_SECRET', 'u37zWlOowuE3bo6GxKORUaQpWy5b39H6cNTalRxuydsTO');
+define('OAUTH_CALLBACK', 'https://www.micamello.com.ec/desarrollov2/twitter.php?tipo_usuario=1');
+
+// google
+define('G_ID_CLIENTE', '286913321702-08b89odiboi5us5kvuj2tckskmhk7bg4.apps.googleusercontent.com');
+define('G_SECRET', 'dkpJFubkmGyTHXx3gjptqcCf');
+
+// linkedin
+define('LK_ID_CLIENTE', '78mhxodb8c3yih');
+define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
+define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
+define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 ?>

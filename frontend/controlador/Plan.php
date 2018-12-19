@@ -1,11 +1,6 @@
 <?php
 class Controlador_Plan extends Controlador_Base {
    
-  function __construct(){
-    global $_SUBMIT;
-    $this->data = $_SUBMIT;
-  }
-   
   public function construirPagina(){
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
@@ -239,8 +234,12 @@ class Controlador_Plan extends Controlador_Base {
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){
-      $_SESSION['mfo_datos']['actualizar_planes'] = 1;
-    }
+      $nrotest = Modelo_Cuestionario::totalTest();             
+      $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+      $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
+      $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
+    }  
+    Utils::log("FERNANDA FUELTALA");  
     Vista::render($template, $tags);       
   }
 }  

@@ -19,7 +19,22 @@ else{
 }
 
 $ofertas = Modelo_Oferta::ofertasxEliminar();
-print_r($ofertas);
+if (count($ofertas) > 0){
+	$fechaactual = date("Y-m-d H:i:s");
+	foreach($ofertas as $oferta){
+		if ($oferta["fecha_actual"] > $oferta["fecha_tope"]){
+			try{
+				if (!Modelo_Oferta::desactivarOferta($oferta["id_ofertas"],Modelo_Oferta::INACTIVA)){
+		      throw new Exception("Error al desactivar la oferta"); 
+		    } 			  
+			}
+      catch(Exception $e){  	    
+  	    echo "Error al inactivar oferta ".$oferta["id_ofertas"]."<br>";
+        Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Eliminar Ofertas',$e->getMessage());      
+      } 
+		}    
+	}
+}
 
 //elimina archivo de procesamiento
 unlink(CRON_RUTA.'procesando_eliminar_ofertas.txt');

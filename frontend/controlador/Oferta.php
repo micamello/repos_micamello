@@ -1,10 +1,6 @@
 <?php
 class Controlador_Oferta extends Controlador_Base{
-    
-      function __construct(){
-        global $_SUBMIT;
-        $this->data = $_SUBMIT;
-      }
+          
     public function construirPagina()
     {
         if (!Modelo_Usuario::estaLogueado()) {
@@ -396,7 +392,6 @@ class Controlador_Oferta extends Controlador_Base{
             $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
 
             $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres);       
-
             if($vista != 'postulacion'){
                 $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
                 $breadcrumbs['oferta'] = 'Ofertas de empleo';

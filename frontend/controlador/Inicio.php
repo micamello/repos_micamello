@@ -1,13 +1,8 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  function __construct(){
-    global $_SUBMIT;
-    $this->data = $_SUBMIT;
-  }
-  
   public function construirPagina(){
-
+    // $navegador = Utils::detectarNavegador();
     // FACEBOOK
     // require_once "includes/fb_api/config.php";
     // $permissions = ['email'];
@@ -36,7 +31,7 @@ class Controlador_Inicio extends Controlador_Base {
 
 
 
-    // $social_reg = array('fb'=>$fb_URL, 'gg'=>$gg_URL, 'lk'=>$lk);
+    // $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
     $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
 
 

@@ -2,12 +2,6 @@
 class Controlador_Aspirante extends Controlador_Base
 {
 
-    public function __construct()
-    {
-        global $_SUBMIT;
-        $this->data = $_SUBMIT;
-    }
-
     public function construirPagina()
     {
 
@@ -429,10 +423,14 @@ class Controlador_Aspirante extends Controlador_Base
     public function perfilAspirante($username, $id_oferta, $vista){
         $datos = Modelo_Usuario::existeUsuario($username);
         $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
-
+        $escolaridad = Modelo_Escolaridad::obtieneListadoAsociativo();
         $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
         $contacto = array();
+        $breadcrumbs = array();
         $array_rasgosxusuario = array();
+
+        $breadcrumbs['verAspirantes/'.$vista.'/'.$id_oferta."/1"] = "Ver aspirantes";
+        $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
 
         if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
                 $contacto = ["correo"=>Utils::ocultarEmail($info_usuario['correo']), "telefono"=>Utils::ocultarCaracteres($info_usuario['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($info_usuario['dni'], 0, 0)];
@@ -464,7 +462,9 @@ class Controlador_Aspirante extends Controlador_Base
 
             $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
 
-            $tags = array("infoUsuario"=>$info_usuario,
+            $tags = array("breadcrumbs"=>$breadcrumbs,
+                    "infoUsuario"=>$info_usuario,
+                    "escolaridad"=>$escolaridad,
                     "Conf"=>$contacto,
                     "Resultados"=>$array_rasgosxusuario,
                     "asp_sararial"=>$asp_salarial,

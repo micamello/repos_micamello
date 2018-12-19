@@ -1,5 +1,5 @@
 if(document.getElementById('form_login')){
-  $("#form_login").validator();
+  //$("#form_login").validator();
 }
 
 $('.modal').on('hidden.bs.modal', function(){

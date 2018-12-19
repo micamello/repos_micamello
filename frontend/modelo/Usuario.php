@@ -28,11 +28,7 @@ class Modelo_Usuario{
   public static function estaLogueado(){    
     if ( !Utils::getArrayParam('mfo_datos', $_SESSION) || !Utils::getArrayParam('usuario', $_SESSION['mfo_datos'] )){            
       return false;
-    }
-    if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
-      $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION["mfo_datos"]["usuario"]["id_usuario"],$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
-      unset($_SESSION['mfo_datos']['actualizar_planes']); 
-    }
+    }    
     return true;
   }
 
