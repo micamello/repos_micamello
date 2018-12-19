@@ -49,11 +49,22 @@ function calcularRecursos(){
   var error = 0;
   var nuevo_valor = 0;
   var puerto_host = $('#puerto_host').val();
-  var idEmpresaPlan = $('#plan').val();
+  var idplan = $('#plan').val();
+
+  if(document.getElementById('name_user')){
+    
+    if(document.getElementById('num_post')){
+      document.getElementById('num_post').value = 1;
+    }
+
+    if(document.getElementById('num_desc')){
+      document.getElementById('num_desc').value = 1;
+    }
+  }
 
   $.ajax({
       type: "GET",
-      url: puerto_host+"?mostrar=subempresa&opcion=buscaRecursos&idPlanEmpresa="+idEmpresaPlan,
+      url: puerto_host+"?mostrar=subempresa&opcion=buscaRecursos&idPlanEmpresa="+idplan,
       dataType:'json',
       async: false,
       success:function(data){
@@ -139,6 +150,7 @@ function calcularRecursos(){
           if(post_asignar >= 1){
 
             var cantd_1 = num_post;
+
             if(cantd_1 != -1){
 
               if(cantd_1 <= post_asignar && cantd_1 != 0){
@@ -220,6 +232,10 @@ function calcularRecursos(){
   return error;
 }
 
+
+
+
+
 $('#correo').on('blur', function(){
 
   validarCorreo();
@@ -228,7 +244,7 @@ $('#correo').on('blur', function(){
 
 $('#plan').on('change', function(){
 
-    var plan = document.getElementById('plan').selectedIndex;
+    var plan = document.getElementById('plan').value;
 
     if(calcularRecursos() == 1 || plan != 0){
       quitarError("err_plan","seccion_plan");

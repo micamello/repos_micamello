@@ -68,6 +68,20 @@
 
                     <div>
                         <h5>
+                            <span class="titulos">&Aacute;rea</span><br>
+                             <?php echo utf8_encode($o['area']); ?>
+                        </h5>
+                    </div>
+
+                    <div>
+                        <h5>
+                            <span class="titulos">Nivel</span><br>
+                             <?php echo utf8_encode($o['nivel']); ?>
+                        </h5>
+                    </div>
+
+                    <div>
+                        <h5>
                             <span class="titulos">Disponibilidad de Viajar</span><br>
                             <?php if ($o['viajar'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
                         </h5>

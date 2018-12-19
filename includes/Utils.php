@@ -396,5 +396,16 @@ class Utils{
     }
   }
 
+  /*public static function mostrarCompraPlan($id,$tipo_usuario){
+
+    if($tipo_usuario == Modelo_Usuario::CANDIDATO){
+      $result = Modelo_UsuarioxPlan::consultarConsumoPlan($id, Modelo_Usuario::CANDIDATO);
+    }else{
+      $result = Modelo_UsuarioxPlan::consultarConsumoPlan($id, Modelo_Usuario::EMPRESA);
+    }
+
+    return $result;
+  }*/
+
 }
 ?>

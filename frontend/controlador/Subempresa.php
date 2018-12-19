@@ -37,6 +37,11 @@ class Controlador_Subempresa extends Controlador_Base
                 $resultado = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
                 Vista::renderJSON($resultado);
             break;
+            case 'buscaDescripcion':
+                $idOferta = Utils::getParam('idOferta', '', $this->data);
+                $resultado = Modelo_Oferta::consultarDescripcionOferta($idOferta);
+                Vista::renderJSON($resultado);
+            break;
             case 'eliminar': 
                 self::eliminarPlan($idPlanEmpresa);
                 Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/'); 
@@ -44,7 +49,7 @@ class Controlador_Subempresa extends Controlador_Base
             case 'crearPlan': 
                 
                 //Permite crear un nuevo plan a la empresa seleccionada 
-                $idSubEmpresa = Utils::getParam('idSubEmpresa', '', $this->data);
+                echo 'idSubEmpresa: '.$idSubEmpresa = Utils::getParam('idSubEmpresa', '', $this->data);
                 $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,$idSubEmpresa);
                 $planesActivos = Modelo_UsuarioxPlan::planesConCuentas($idUsuario,$subempresas[0]['ids_Planes']);
 
@@ -133,7 +138,7 @@ class Controlador_Subempresa extends Controlador_Base
         $planesActivos = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::EMPRESA,$idUsuario);
         $recursos = Modelo_UsuarioxPlan::tieneRecursos(false,$idUsuario);
         $tieneRecursos = self::obtieneRecursos($recursos);
- 
+
         $breadcrumbs['adminEmpresas'] = 'Administrar Cuentas';
         $url = PUERTO.'://'.HOST.'/adminEmpresas';
         $pagination = new Pagination($cantd_empresas,REGISTRO_PAGINA,$url);
@@ -222,6 +227,7 @@ class Controlador_Subempresa extends Controlador_Base
                 if (empty($planpago)){
 
                     $datosHijos = explode(",",$planpago['id_empresa_plan']);
+
                     foreach ($datosHijos as $key => $value) {
 
                         if (!Modelo_UsuarioxPlan::desactivarPlan($value,Modelo_Usuario::EMPRESA)){
@@ -239,14 +245,15 @@ class Controlador_Subempresa extends Controlador_Base
 
             $cancelacion->reversoOfertas(false,$idPlanEmpresa);
 
+            $recursos1 = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
+
+            if (!Modelo_UsuarioxPlan::devolverRecursos($recursos1)){
+              throw new Exception("Error al devolver datos a la empresa padre");
+            }
+
             if (!Modelo_UsuarioxPlan::desactivarPlan($idPlanEmpresa,Modelo_Usuario::EMPRESA)){
               throw new Exception("Error al desactivar el plan");
             }
-
-            $recursos = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
-            if (!Modelo_UsuarioxPlan::devolverRecursos($recursos)){
-              throw new Exception("Error al devolver datos a la empresa padre");
-            }   
 
             $GLOBALS['db']->commit();
             $_SESSION['mostrar_exito'] = 'Se ha eliminado el plan de la empresa satisfactoriamente';
@@ -369,7 +376,7 @@ class Controlador_Subempresa extends Controlador_Base
                 $numDescargas = ($planPadre['num_descarga_rest']+$desc) - $var2;
             }
 
-            if($var1 == -1 && $var2 == -1){
+            if($var1 == -1 && $var2 == -1 && $tipoVista != 'asignar'){
 
                 if(isset($_POST['estado'])){
                     $est = $_POST['estado'];
@@ -381,9 +388,8 @@ class Controlador_Subempresa extends Controlador_Base
                     throw new Exception("Error al cambiar el estado del plan, por favor intente de nuevo.");   
                 }
             }else{
-
                 if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($_POST['plan'],$numPublicaciones,$numDescargas)){
-                    throw new Exception("Error al actualizar los recursos de la empresa."); 
+                    throw new Exception("Error al actualizar los recursos de la empresa1."); 
                 }
 
                 if($tipoVista == 'asignar'){

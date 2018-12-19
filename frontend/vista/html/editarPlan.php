@@ -5,7 +5,9 @@
                 <div class="container">
                     <div class="col-md-12">
                         <div>
-                            <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Editar Plan</p>
+                            <h1 class="text-center" style="font-size: 20px;margin-bottom: 20px;">Editar Plan</h1>
+                            <h5 style="color:#989494;"><strong><?php echo $planHijo['nombre']; ?></strong> - 
+                            <strong><?php echo $planHijo['nombres']; ?></strong></h5>
                         </div>
 
                         <div class="panel panel-default">
@@ -26,7 +28,7 @@
 
                                               <div class="col-md-12" id="seccion_recursos">
                                                   <br>     
-                                                  <?php if(isset($planHijo['num_publicaciones_rest']) && $planHijo['num_publicaciones_rest'] == -1 && $planHijo['num_descarga_rest'] == -1) { ?>
+                                                  <?php if(isset($planPadre['num_publicaciones_rest']) && $planPadre['num_publicaciones_rest'] == -1 && $planPadre['num_descarga_rest'] == -1) { ?>
                                                   <div id="nom_estado">
                                                     <?php if($planHijo['estado'] == 1){ ?>
                                                       <h6><b>Activo</b></h6>
@@ -39,33 +41,33 @@
                                                   </div>
                                                   <br> 
                                                 <?php } ?>
-                                                  <?php if(isset($planHijo['num_publicaciones_rest']) && $planHijo['num_publicaciones_rest'] != -1) { ?>
+                                                  <?php if(isset($planPadre['num_publicaciones_rest']) && $planPadre['num_publicaciones_rest'] != -1) { ?>
                                                     <div id="seccion_postulacion">
                                                       <div class="col-md-offset-3 col-md-4">
                                                         <div id="recursos1" class="form-group">
-                                                          <label for="numPost">N&uacute;mero de Publicaciones</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
+                                                          <label for="numPost">N&uacute;mero de Ofertas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
                                                           <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeydown="return validaNumeros(event);" onkeyup="calcularRecursos(); validaRecursos();" onclick="calcularRecursos(); validaRecursos();" class="form-control" value="<?php if(isset($planHijo['num_publicaciones_rest'])){ echo $planHijo['num_publicaciones_rest']; }else{ echo '1'; } ?>">
                                                         </div>
                                                       </div> 
 
                                                       <div class="col-md-2">
                                                         <div class="form-group">
-                                                          <label style="font-size: 12px;">Publicaci&oacute;n por asignar: </label>
+                                                          <label style="font-size: 12px;">Ofertas por asignar: </label>
                                                           <div style="padding-top: 15px;" id="post_asignar"><?php if(isset($planPadre['num_publicaciones_rest'])){ echo $planPadre['num_publicaciones_rest']; } ?></div>
                                                         </div>
                                                       </div>
                                                       <div id="pI" style="display:none">
-                                                      <label style="color:red" class="parpadea">Número de Publicaciones Ilimitadas</label>
+                                                      <label style="color:red" class="parpadea">Número de Ofertas Ilimitadas</label>
                                                     </div>
                                                       <div class="clearfix"></div>
                                                     </div>
                                                   <?php }else{ ?>
                                                     <div id="pI">
-                                                      <label style="color:red" class="parpadea">Número de Publicaciones Ilimitadas</label>
+                                                      <label style="color:red" class="parpadea">Número de Ofertas Ilimitadas</label>
                                                     </div>
                                                   <?php } ?>
 
-                                                  <?php if(isset($planHijo['num_descarga_rest']) && $planHijo['num_descarga_rest'] != -1) { ?>
+                                                  <?php if(isset($planPadre['num_descarga_rest']) && $planPadre['num_descarga_rest'] != -1) { ?>
                                                     <div id="seccion_descarga">
                                                       <div class="col-md-offset-3 col-md-4">
                                                         <div class="form-group" id="recursos2">

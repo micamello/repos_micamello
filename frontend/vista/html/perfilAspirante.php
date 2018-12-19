@@ -409,7 +409,8 @@
 					<h4 class="text-center">Resultados evaluación</h4>
 				<?php if(empty($Resultados) && is_array($Resultados)){ ?>
 					<div class="alert alert-info">Estimado usuario. <br>El plan que posee actualmente no permite visualizar datos de la evaluación de los postulantes</div>
-				<?php } 
+				<?php echo $enlaceCompraPlan;
+					} 
 				else{
 					foreach ($Resultados as $res) {
 						?>

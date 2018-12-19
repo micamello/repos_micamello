@@ -43,7 +43,7 @@
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
 
-			 				<p>Publicaciones restantes: 
+			 				<p>Ofertas restantes: 
 			 				<b><span> <?php echo $publicaciones_restantes;
 			 							if($plan_con_pub >0 && is_numeric($plan_con_pub)){echo " + ".$plan_con_pub;} ?></span></b></p>
 

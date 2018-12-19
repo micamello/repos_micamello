@@ -5,7 +5,7 @@
                 <div class="container">
                     <div class="col-md-12">
                         <div>
-                            <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Asignar Recursos a - <?php echo $nombreEmp; ?></p>
+                            <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Asignar Recursos - <?php echo $nombreEmp; ?></p>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -38,7 +38,7 @@
                                                   <div id="seccion_postulacion" style="display: none;" >
                                                     <div class="col-md-offset-3 col-md-4">
                                                       <div id="recursos1" class="form-group">
-                                                        <label for="numPost">N&uacute;mero de Publicaciones</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
+                                                        <label for="numPost">N&uacute;mero de Ofertas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
                                                         <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calcularRecursos(); validaRecursos();" onclick="calcularRecursos(); validaRecursos();" onkeydown="return validaNumeros(event);" class="form-control" value="1">
                                                       </div>
                                                     </div> 

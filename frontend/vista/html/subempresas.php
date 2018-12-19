@@ -20,7 +20,7 @@
 
                                         <?php if(!empty($tieneRecursos['publicaciones'])){ ?>
                                             <span>
-                                                <strong>N° de Publicaciones Restantes: </strong>
+                                                <strong>N° de Ofertas Restantes: </strong>
                                                 <span style="color:red" class="parpadea"><?php if($tieneRecursos['publicaciones'] == ''){ echo 'No tiene publicaciones'; }else{ echo $tieneRecursos['publicaciones']; } ?></span>
                                             </span>
                                             <br>
@@ -30,7 +30,7 @@
                                             </span>
                                         <?php }else{ ?>
                                             <span>
-                                                <strong>N° de Publicaciones Restantes: </strong>
+                                                <strong>N° de Ofertas Restantes: </strong>
                                                 <span style="color:red" class="parpadea">0</span>
                                             </span>
                                         <?php } ?>
@@ -50,12 +50,12 @@
                                             <tr class="breadcrumb">
                                                 <th class="text-center">Nombre empresa</th> 
                                                 <th class="text-center">Plan(es) asociado(s)</th>
-                                                <th class="text-center">N° de publicaciones restantes</th>
+                                                <th class="text-center">N° de ofertas restantes</th>
                                                 <th class="text-center">N° de descargas restantes</th>
                                                 <th class="text-center">Estado</th>
                                                 <?php
                                                 
-                                                 if(!empty($puedeCrearCuenta) && !empty($tieneRecursos['publicaciones'])){ ?>
+                                                 if(!empty($puedeCrearCuenta) && ($tieneRecursos['publicaciones'] == 'Ilimitado' || $tieneRecursos['publicaciones'] > 0)){ ?>
                                                     <th colspan="3" class="text-center">Acciones</th>
                                                 <?php } ?>
                                             </tr>
@@ -83,6 +83,8 @@
                    
                                                         if(!empty($interseccion_planes)){
                                                             $puedeCrearPlan = '1';
+                                                        }else{
+                                                            $puedeCrearPlan = '';
                                                         }
                                                     }else{
                                                         $puedeCrearPlan = '';
@@ -105,7 +107,7 @@
 
                                                             <?php 
 
-                                                            if(!empty($puedeCrearCuenta) && !empty($tieneRecursos['publicaciones'])){ 
+                                                            if(!empty($puedeCrearCuenta) && ($tieneRecursos['publicaciones'] == 'Ilimitado' || $tieneRecursos['publicaciones'] > 0)){ 
 
                                                                 //verificar al editar que mi plan padre tiene recursos para asignarme (solo puedo editar si mi padre tiene recursos del mismo plan que lo creo) y esta activo
                                                                 $puedeEditarCuenta = Modelo_UsuarioxPlan::tieneRecursos($ids_empresasPlans[$key],false);
@@ -133,12 +135,12 @@
                                                                 <?php } 
 
                                                                 if($estados[$key] != 'Inactivo'){ ?>
-                                                                    <td class="icon_oferta" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>" onclick="if(!confirm('Está seguro que desea eliminar el plan?')) return false;">
-                                                                        <i class="fa fa-trash " title="Eliminar plan de la empresa"></i>
+                                                                    <td class="icon_oferta" style="text-align: center;"><a onclick="abrirModal('Está seguro que desea eliminar las ofertas?','alert_descarga','<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>','btn_modal');">
+                                                                        <i class="fa fa-trash " title="Eliminar ofertas de la empresa"></i>
                                                                     </a></td>
                                                             <?php }else{ ?>
                                                                     <td class="icon_oferta" style="text-align: center;">
-                                                                        <i class="fa fa-trash  icon_deshabilitados" title="Eliminar plan de la empresa"></i></td>
+                                                                        <i class="fa fa-trash  icon_deshabilitados" title="Eliminar ofertas de la empresa"></i></td>
                                                             <?php }
 
                                                                  if($mostrar == 0){

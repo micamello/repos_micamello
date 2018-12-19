@@ -5,6 +5,8 @@
 			<b>Autopostulaciones restantes: <span class="parpadea" style="color:red"><?php echo $autopostulaciones_restantes['p_restantes']; ?></span></b>
 		</div>
 		<br><br>
+	<?php }else{  
+		echo $enlaceCompraPlan; ?>
 	<?php } ?>
 	
 	<div class="col-md-12">
@@ -254,7 +256,7 @@
 														echo ' | <span class="btn-xs btn-danger parpadea">No tiene Aspirantes ( '.$cantd.' )</span>';
 													}else{
 
-														echo ' | <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver Aspirantes\',\'alert_descarga\')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$cantd.' )</span>';
+														echo ' | <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver Aspirantes\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$cantd.' )</span>';
 													}
 												}
 												?>
@@ -287,10 +289,7 @@
 												</div>
 											<?php } ?>
 											<?php if($vista == 'vacantes'){ ?>
-												<div class="col-sm-1 col-md-1 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%; cursor:pointer;">
-													<?php $des = str_replace("'", "\'",$o["descripcion"]); ?>
-
-													<input type="hidden" id="descripcion" name="descripcion" value="<?php echo $des; ?>">
+												<div id="editar" class="col-sm-1 col-md-1 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%; cursor:pointer;">
 													<?php $puedeEditar = Modelo_Oferta::puedeEditar($o["id_ofertas"]);
 														if($puedeEditar["editar"] == 1){
 													?>

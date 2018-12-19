@@ -289,6 +289,7 @@ class Controlador_Aspirante extends Controlador_Base
 
             case 'detallePerfil':
             if (Modelo_Usuario::EMPRESA) {
+
                 $this->perfilAspirante($username, $id_oferta, $vista);
             }
             break;
@@ -454,11 +455,20 @@ class Controlador_Aspirante extends Controlador_Base
                 }
             }
 
+            $planes = array();
+            if(isset($_SESSION['mfo_datos']['planes'])){
+                $planes = $_SESSION['mfo_datos']['planes'];
+            }else{
+                array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
+            }
+
+            $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
 
             $tags = array("infoUsuario"=>$info_usuario,
                     "Conf"=>$contacto,
                     "Resultados"=>$array_rasgosxusuario,
                     "asp_sararial"=>$asp_salarial,
+                    "enlaceCompraPlan"=>$enlaceCompraPlan,
                     "vista"=>$vista
               );
 

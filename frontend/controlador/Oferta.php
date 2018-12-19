@@ -82,79 +82,73 @@ class Controlador_Oferta extends Controlador_Base{
             $cadena = '';
             $array_datos = array();
             foreach ($this->data as $param => $value) {
-                
-                $letra = substr($value,0,1);
-                $id = substr($value,1);
+              $letra = substr($value,0,1);
+              $id = substr($value,1);
 
-                $cadena .= '/'.$value;
-                //array_push($result, strval($value));
-                if(isset($_SESSION['mfo_datos']['Filtrar_ofertas'][$letra])){
-                    if($letra == 'A' && $type == 1){
-                        
-                        if(isset($arrarea[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_ofertas']['A'] = $id;
-                            $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id]);
-                        }
-                    }
-                    else if($letra == 'P' && $type == 1){
-                        
-                        if(isset($arrprovincia[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_ofertas']['P'] = $id;
-                            $array_datos['P'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
-                        }
-                    }
-                    else if($letra == 'J' && $type == 1){
-                        
-                        if(isset($arrjornadas[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_ofertas']['J'] = $id;
-                            $array_datos['J'] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
-                        }
-                    }else if($letra == 'O' && $type == 1){
-                    
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['O'] = $id; 
-                    }
-                    else if($letra == 'S' && $type == 1){
-                    
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['S'] = $id; 
-                    }
-                    else if($letra == 'Q' && $type == 1){
-                        $_SESSION['mfo_datos']['Filtrar_ofertas']['Q'] = $id;
-                        $array_datos['Q'] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
-                    }else if($type == 2){
-                        $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
-                    }
+              $cadena .= '/'.$value;
+              
+              if(isset($_SESSION['mfo_datos']['Filtrar_ofertas'][$letra])){
+                if($letra == 'A' && $type == 1){
+                  if(isset($arrarea[$id])){
+                    $_SESSION['mfo_datos']['Filtrar_ofertas']['A'] = $id;
+                    $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id]);
+                  }
                 }
+                else if($letra == 'P' && $type == 1){
+                  if(isset($arrprovincia[$id])){
+                      $_SESSION['mfo_datos']['Filtrar_ofertas']['P'] = $id;
+                      $array_datos['P'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                  }
+                }
+                else if($letra == 'J' && $type == 1){
+                  if(isset($arrjornadas[$id])){
+                      $_SESSION['mfo_datos']['Filtrar_ofertas']['J'] = $id;
+                      $array_datos['J'] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
+                  }
+                }else if($letra == 'O' && $type == 1){
+                  $_SESSION['mfo_datos']['Filtrar_ofertas']['O'] = $id; 
+                }
+                else if($letra == 'S' && $type == 1){
+                  $_SESSION['mfo_datos']['Filtrar_ofertas']['S'] = $id; 
+                }
+                else if($letra == 'Q' && $type == 1){
+                  $_SESSION['mfo_datos']['Filtrar_ofertas']['Q'] = $id;
+                  $array_datos['Q'] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
+                }else if($type == 2){
+                  $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
+                }
+              }
             }
 
             foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $letra => $value) {
-                if($value!=0){
-                    if($letra == 'A'){
-                        if(isset($arrarea[$value])){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
-                        }
-                    }
-                    if($letra == 'P'){
-                        if(isset($arrprovincia[$value])){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
-                        }
-                    }
-                    if($letra == 'J'){
-                        if(isset($arrjornadas[$value])){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrjornadas[$value]);
-                        }
-                    }
-                    if($letra == 'S'){
-                        if(isset($empresas[$value])){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$empresas[$value]);
-                        }
-                    }
-                    if($letra == 'O'){
-                        $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
-                    }
-                    if($letra == 'Q'){ 
-                      $array_datos[$letra] = array('id'=>$value,'nombre'=>htmlentities($value,ENT_QUOTES,'UTF-8'));
+              if($value!=0){
+                if($letra == 'A'){
+                    if(isset($arrarea[$value])){
+                        $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
                     }
                 }
+                if($letra == 'P'){
+                    if(isset($arrprovincia[$value])){
+                        $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
+                    }
+                }
+                if($letra == 'J'){
+                    if(isset($arrjornadas[$value])){
+                        $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrjornadas[$value]);
+                    }
+                }
+                if($letra == 'S'){
+                    if(isset($empresas[$value])){
+                        $array_datos[$letra] = array('id'=>$value,'nombre'=>$empresas[$value]);
+                    }
+                }
+                if($letra == 'O'){
+                    $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                }
+                if($letra == 'Q'){ 
+                  $array_datos[$letra] = array('id'=>$value,'nombre'=>htmlentities($value,ENT_QUOTES,'UTF-8'));
+                }
+              }
             }
 
             if($vista == 'cuentas'){
@@ -170,8 +164,6 @@ class Controlador_Oferta extends Controlador_Base{
             $registros = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
 
             if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
-              /*$ofertas = self::ordenarOfertasXareasUsuario($idUsuario,$ofertas);
-            }else{*/
               $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
             }
 
@@ -287,7 +279,17 @@ class Controlador_Oferta extends Controlador_Base{
 
               //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
-              
+
+              $planes = array();
+              if(isset($_SESSION['mfo_datos']['planes'])){
+                $planes = $_SESSION['mfo_datos']['planes'];
+              }else{
+               array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
+              }
+
+              $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
+
+
               $breadcrumbs['vacantes'] = 'Mis Ofertas';
  
               $tags = array(
@@ -299,7 +301,8 @@ class Controlador_Oferta extends Controlador_Base{
                   'page' => $page,
                   'vista'=>$vista,
                   'ofertasSubempresas' => $ofertasSubempresas,
-                  'aspirantesXoferta'=>$aspirantesXoferta
+                  'aspirantesXoferta'=>$aspirantesXoferta,
+                  'enlaceCompraPlan'=>$enlaceCompraPlan
               );
               
               $tags["template_js"][] = "tinymce/tinymce.min";
@@ -383,6 +386,15 @@ class Controlador_Oferta extends Controlador_Base{
             $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
             $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
+            $planes = array();
+            if(isset($_SESSION['mfo_datos']['planes'])){
+              $planes = $_SESSION['mfo_datos']['planes'];
+            }else{
+             array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
+            }
+
+            $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
+
             $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres);       
 
             if($vista != 'postulacion'){
@@ -398,6 +410,7 @@ class Controlador_Oferta extends Controlador_Base{
                 'arrprovincia'  => $arrprovincia,
                 'jornadas'      => $jornadas,
                 'ofertas'       => $ofertas,
+                'enlaceCompraPlan'=>$enlaceCompraPlan,
                 'autopostulaciones_restantes'=>$autopostulaciones_restantes,
                 'page' => $page,
                 'vista'=>$vista
@@ -426,26 +439,12 @@ class Controlador_Oferta extends Controlador_Base{
               throw new Exception("Ha ocurrido un error al guardar la descripcion, intente nuevamente");
           }
           $GLOBALS['db']->commit();
-          $_SESSION['mostrar_exito'] = 'La descripción fue editada exitosamente, debe esperar unos minutos que el admin apruebe el nuevo contenido';
+          $_SESSION['mostrar_exito'] = 'La descripción fue editada exitosamente, debe esperar un máximo de 48 horas para que el administrador apruebe el nuevo contenido.';
       }catch (Exception $e) {
           $_SESSION['mostrar_error'] = $e->getMessage();
           $GLOBALS['db']->rollback();
       }
     }
-
-    /*public function ordenarOfertasXareasUsuario($idUsuario,$ofertas){
-
-      $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($idUsuario);
-      $array_ofertasXarea = $array_ofertaxRestantes = array(); 
-      foreach ($ofertas as $key => $value) {
-        if(in_array($value['id_area'], $usuarioxarea)){
-          $array_ofertasXarea[] = $value;
-        }else{
-          $array_ofertaxRestantes[] = $value;
-        } 
-      }
-      return array_merge($array_ofertasXarea,$array_ofertaxRestantes);
-    }*/
 
     public function guardarPostulacion($id_usuario,$id_oferta,$aspiracion,$vista){
       try{

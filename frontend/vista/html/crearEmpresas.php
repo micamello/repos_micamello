@@ -35,8 +35,8 @@
                                               </div>
                                               <div class="col-md-6">
                                                   <div class="form-group" id="seccion_nombre">
-                                                    <p class="text-center text_form">Nombres&nbsp;<i class="requerido">*</i></p><div id="err_nom" class="help-block with-errors"></div>
-                                                    <input type="text" name="name_user" id="name_user" placeholder="Ejemplo: Carlos Pedro" maxlength="100" class="form-control">
+                                                    <p class="text-center text_form">Nombres de la empresa&nbsp;<i class="requerido">*</i></p><div id="err_nom" class="help-block with-errors"></div>
+                                                    <input type="text" name="name_user" id="name_user" placeholder="Ejemplo: micamellosa" maxlength="100" class="form-control">
                                                   </div>
                                               </div>
 
@@ -93,7 +93,7 @@
                                                   <div id="seccion_postulacion" style="display: none;" >
                                                     <div class="col-md-offset-3 col-md-4">
                                                       <div id="recursos1" class="form-group">
-                                                        <label for="numPost">N&uacute;mero de Publicaciones</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
+                                                        <label for="numPost">N&uacute;mero de Ofertas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
                                                         <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calcularRecursos()" onclick="calcularRecursos()" onkeydown="return validaNumeros(event);" class="form-control" value="1">
                                                       </div>
                                                     </div> 

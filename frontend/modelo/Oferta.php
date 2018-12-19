@@ -246,6 +246,13 @@ class Modelo_Oferta{
     $sql = "SELECT id_empresa FROM mfo_oferta where id_ofertas = ?";
     return $GLOBALS['db']->auto_array($sql,array($idOferta),true);
   }
+
+  public static function consultarDescripcionOferta($idOferta){
+    if (empty($idOferta)){ return false; }
+    $sql = "SELECT descripcion FROM mfo_oferta where id_ofertas = ?";
+    return $GLOBALS['db']->auto_array($sql,array($idOferta));
+  }
+
   public static function ofertasDiarias($pais,$areas,$intereses){
     if (empty($pais) || empty($areas) || empty($intereses)){ return false; }    
     $fechaayer = date("Y-m-d",strtotime(date("Y-m-d")."- 1 day"));

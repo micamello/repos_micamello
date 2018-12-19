@@ -14,12 +14,12 @@
 
 							<h5 class="text-center big_number bg_red"><?php echo $publicaciones_restantes['p_restantes'] ?></h5><br>
 
-							Publicaciones restantes
+							Ofertas restantes
 							<?php
 						}
 					 ?>
 					<p class="text_in_alert_danger">
-						Actualmente no dispone de publicaciones.<br>
+						Actualmente no dispone de Ofertas.<br>
 						Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.
 					</p>
 					<br>

@@ -64,9 +64,24 @@ if(document.getElementById('des_of')){
 function abrirModalEditar(id,idOferta){
     
     document.getElementById('idOferta').value = idOferta;
-    var contenido = document.getElementById('descripcion').value;
-    tinymce.get('des_of').setContent(decodeURIComponent((contenido+'').replace(/\+/g, '%20')));
-    $('#'+id).modal();
+    var puerto_host = $('#puerto_host').val();
+
+    $.ajax({
+        type: "GET",
+        url: puerto_host+"?mostrar=subempresa&opcion=buscaDescripcion&idOferta="+idOferta,
+        dataType:'json',
+        async: false,
+
+        success:function(data){
+
+            var contenido = data.descripcion;
+            tinymce.get('des_of').setContent(decodeURIComponent((contenido).replace(/\+/g, '%20')));
+            $('#'+id).modal();
+        },
+        error: function (request, status, error) {
+            error = 1;
+        }                  
+    })
 }
 
 function enviarEdicion(){
