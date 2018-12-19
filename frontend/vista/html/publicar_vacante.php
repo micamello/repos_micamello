@@ -44,7 +44,9 @@
 			 			<div class="caja">
 
 			 				<p>Publicaciones restantes: 
-			 				<b><span> <?php if(!is_numeric($publicaciones_restantes)){echo $publicaciones_restantes." + ";}
+			 				<b><span> <?php if(!is_numeric($publicaciones_restantes)){echo $publicaciones_restantes; if (!empty($plan_con_pub >0)){echo " + ";} {
+			 					# code...
+			 				}}
 			 							if($plan_con_pub >0 && is_numeric($plan_con_pub)){echo $plan_con_pub;} ?></span></b></p>
 
 			 			</div>
@@ -152,10 +154,10 @@
 							<div class="col-md-6">
 								<div class="form-group" id="area_group">
 									<div class="">
-										<div id="area_error" class="help-block with-errors"></div>
+										
 										<div class="panel panel-default">
-											<div class="panel-heading">Áreas (Máx: 1)
-									        	<label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+											<div class="panel-head-select">Áreas (Máx: 1)
+									        	<label class="num_sel" style="float: right; color: black; padding: 0px 5px 0px 5px;">
 									          		<label id="numero1">0</label> de 1
 									        	</label>
 									      </div>
@@ -163,6 +165,7 @@
 									        <div class="row" id="seleccionados1">
 									        </div>
 									      </div>
+										<div id="area_error" class="help-block with-errors"></div>
 										<select class="form-control" name="area_select[]" id="area_select" multiple>
 					                    <?php 
 					                      if (!empty($arrarea)){
@@ -179,10 +182,10 @@
 							<div class="col-md-6">
 								<div class="form-group" id="nivel_group">
 									<div class="">
-										<div id="nivel_error" class="help-block with-errors"></div>
+										
 											<div class="panel panel-default">
-												<div class="panel-heading">Niveles (Máx: 1)
-											        <label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+												<div class="panel-head-select">Niveles (Máx: 1)
+											        <label class="num_sel" style="float: right; color: black; padding: 0px 5px 0px 5px;">
 											          <label id="numero2">0</label> de 1
 											        </label>
 											      </div>
@@ -190,6 +193,7 @@
 											        <div class="row" id="seleccionados2">
 											        </div>
 											      </div>
+												<div id="nivel_error" class="help-block with-errors"></div>
 												<select class="form-control" name="nivel_interes[]" id="nivel_interes" multiple>
 							                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
 							                    <?php 
@@ -412,7 +416,7 @@
 									 ?>
 
 								</select>
-							<span class="label label-default col-md-12">Mostrar datos de la empresa</span>
+							<!-- <span class="label label-default col-md-12">Mostrar datos de la empresa</span> -->
 							</div>
 						</div>
 
@@ -431,11 +435,16 @@
 							</div>
 						</div>
 
+						
 						<div class="col-md-6">
-							<div class="form-group">
-								<input type="checkbox" name="urgente" id="urgente" value="0"><label for="urgente" style="text-align: left;"><p>Urgente (<small id="text_urg" style="color: #A7A7A7;">No</small>)</p></label>
+							<div class="form-group" align="left">
+								<div class="urgente_class_input">
+									<input class="flipswitch_check" type="checkbox" name="urgente" id="urgente" value="0">
+									<label class="label_checkbox">Oferta Urgente (<small id="text_urg" style="color: #A7A7A7;">No</small>)</label>
+								</div>
 							</div>
-						</div>	
+						</div>
+						
 					</div>
 					<br>
 					<div class="row">

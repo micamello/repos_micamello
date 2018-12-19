@@ -183,7 +183,7 @@ class Controlador_Registro extends Controlador_Base {
                   }
                 }
                 else{
-                  $dato_contacto = array('nombres'=>$data['nombre_contact'], 'apellidos'=>$data['apellido_contact'], 'telefono1'=>$data['tel_one_contact'], 'telefono2'=>$data['tel_two_contact']);
+                  $dato_contacto = array('nombre_contact'=>$data['nombre_contact'], 'apellido_contact'=>$data['apellido_contact'], 'tel_one_contact'=>$data['tel_one_contact'], 'tel_two_contact'=>$data['tel_two_contact']);
                   if(!Modelo_ContactoEmpresa::crearContactoEmpresa($dato_contacto, $user_id)){
                     throw new Exception("Ha ocurrido un error el registrar, intente nuevamente");
                   }
@@ -201,7 +201,9 @@ class Controlador_Registro extends Controlador_Base {
                 if (!$this->correoActivacionCuenta($data['correo'], $nombres_correo,$token, $usuario_login['username'])){
                     throw new Exception("Error en el envio de correo, por favor intente denuevo");
                   }
-                $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
+                // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
+                // echo "<script type='text/javascript'>alert('Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam');</script>";
+                $_SESSION['registro'] = 1;
                 Utils::doRedirect(PUERTO."://".HOST."/");
   }
 
@@ -257,7 +259,8 @@ class Controlador_Registro extends Controlador_Base {
           if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
               throw new Exception("Error al enviar credenciales. Intente nuevamente");
             }
-          $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam";
+          // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam";
+            echo "alert('Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam')";
     }
       catch( Exception $e ){
         $GLOBALS['db']->rollback();

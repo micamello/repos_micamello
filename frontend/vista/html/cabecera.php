@@ -34,6 +34,8 @@
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap-multiselect.css">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 
 
   <?php
@@ -43,8 +45,21 @@
       }  
     }
   ?>
-
+<!-- $_SESSION['registro']); -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
+
+  <?php if(isset($_SESSION['registro']) == 1){
+    $mensaje = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam";
+    echo "<script type='text/javascript'>
+            $(document).ready(function(){
+              swal('Registro exitoso!', '".$mensaje."', 'success');
+            });
+          </script>";
+    } 
+  if(isset($_SESSION['registro'])){
+    unset($_SESSION['registro']);
+  } ?>
+  
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -174,10 +189,10 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                 <?php if (isset($menu["submenu"])){ ?>                            
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      <?php echo $_SESSION['mfo_datos']['usuario']['nombres'].(isset($_SESSION['mfo_datos']['usuario']['apellidos']) ? ' '.$_SESSION['mfo_datos']['usuario']['apellidos'] : ''); ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <?php echo $_SESSION['mfo_datos']['usuario']['nombres'].(isset($_SESSION['mfo_datos']['usuario']['apellidos']) ? ' '.$_SESSION['mfo_datos']['usuario']['apellidos'] : ''); ?>&nbsp;&nbsp;&nbsp;<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
                       <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                         echo "usericon_safari";
-                      } ?>">
+                      } ?>"><i class="fa fa-caret-down"></i>
                       <ul class="dropdown-menu">
                         <?php foreach($menu["submenu"] as $submenu){ ?>  
                             <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>

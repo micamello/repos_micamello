@@ -102,8 +102,8 @@
                       <div class="">
                         
                           <div class="panel panel-default">
-                            <div class="panel-heading">Seleccione áreas (Máx: 3)
-                                  <label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+                            <div class="panel-head-select">Seleccione áreas (Máx: 3)
+                                  <label class="num_sel" style="float: right; color: black; padding: 0px 5px 0px 5px;">
                                       <label id="numero1">0</label> de 3
                                   </label>
                               </div>
@@ -133,8 +133,8 @@
                       <div class="">
                           
                           <div class="panel panel-default">
-                            <div class="panel-heading">Seleccione nivel de interés (Máx: 2)
-                                  <label class="num_sel" style="float: right; background-color: white; color: black; border-radius: 5px; padding: 0px 5px 0px 5px;">
+                            <div class="panel-head-select">Seleccione nivel de interés (Máx: 2)
+                                  <label class="num_sel" style="float: right; color: black; padding: 0px 5px 0px 5px;">
                                       <label id="numero2">0</label> de 2
                                   </label>
                               </div>
@@ -353,6 +353,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <?php
 if (isset($template_js) && is_array($template_js)){

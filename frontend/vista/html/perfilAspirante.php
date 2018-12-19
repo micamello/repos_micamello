@@ -1,6 +1,6 @@
 <div class="container">
 		<br><br><br><br><br><br>
-	<div class="col-md-10 col-md-offset-1">
+	<div class="col-md-10 col-md-offset-1" id="contenido_imprimir">
 		<div class="panel panel-default shadow">
 			<div class="panel-body">
 				<div class="" align="center">
@@ -43,6 +43,8 @@
 						<div class="">
 							<hr>
 							<h4>Datos candidato</h4>
+
+							<a onclick="imprimir('contenido_imprimir');" id="boton_imprimir" class="btn btn-warning min_btn btn-xs">Imprimir datos <i class="fa fa-print"></i></a><br>
 							<div class="col-md-5 col-md-offset-1 form-group">
 								<div class="box_text">
 									<label>Estado civil <i class="fa fa-user icon fa-2x"></i></label>
@@ -400,6 +402,7 @@
 					<div class="col-md-12">
 						<hr>
 						<h4>Datos de contacto</h4>
+						
 					</div>
 					<div class="" align="center">
 						

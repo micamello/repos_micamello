@@ -269,3 +269,21 @@ function getBrowserSize(){
          }
        return {'width':w, 'height': h};
 }
+
+function imprimir(nombreDiv) {
+    document.getElementById('boton_imprimir').style.display = 'none';
+    var printContents = document.getElementById(nombreDiv).innerHTML;
+    var document_html = window.open();
+    document_html.document.write( "<html><head><title></title>" );
+    document_html.document.write( "<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css\" type=\"text/css\"/>" );
+    document_html.document.write( "<link rel=\"stylesheet\" href=\"https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css\" type=\"text/css\"/>" );
+    document_html.document.write( "<link rel=\"stylesheet\" href=\"https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css\" type=\"text/css\"/>" );
+    document_html.document.write( "<style>.perfil_photo_user {display: block;margin: -10px 0px 5px 0px;margin-left: auto;margin-right: auto; height: 250px;width: 250px;border-radius: 50%;border: 5px solid white;background: #22242a;box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);}.profilebox {position: relative;background-color: #CEECFD;min-height: 230px;width: 100%;border-radius: 8px;padding: 50px 20px 20px 15px;box-shadow: 0 6px 12px rgba(0, 0, 0, 0.23), 0 10px 40px rgba(0, 0, 0, 0.19);display: flex;flex-direction: column;margin-bottom: 20px;}.box_text{background-color: #F4F4F4;border-radius: 30px;margin: 5px 1px 5px 1px;overflow: hidden; }</style>" );
+    document_html.document.write( "</head><body>" );
+    document_html.document.write( printContents );
+    document_html.document.write( "</body></html>" );
+    setTimeout(function () {
+      document_html.print();
+      document.getElementById('boton_imprimir').style.display = '';
+    }, 500)
+  }
