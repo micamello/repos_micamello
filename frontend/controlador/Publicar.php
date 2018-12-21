@@ -50,7 +50,7 @@ class Controlador_Publicar extends Controlador_Base {
         // print_r("<br>".$plan_con_pub."<br>");
         // exit();
         if ($rest <= 0 && is_numeric($rest)) {
-          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan eder.";
+          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
           Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');       
         }
         else{
@@ -113,9 +113,7 @@ class Controlador_Publicar extends Controlador_Base {
       Vista::render('publicar_vacante', $tags);
   }
   public function validarCampos($data){
-    throw new Exception("Longitud máxima del campo 100 caracteres");$descripcion = str_replace(array("&nbsp;", "<p>", "</p>"), array(" ", " ", " "), html_entity_decode($data['des_of']));
-
-    if(ctype_space($descripcion) || empty($descripcion) || $descripcion == ""){
+    if(ctype_space($descripcion) && (empty($descripcion) || $descripcion == "")){
       throw new Exception("El campo descripción es obligatorio");
     }
 

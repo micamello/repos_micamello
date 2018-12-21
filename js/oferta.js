@@ -162,26 +162,35 @@ function enviarPclave(ruta,page){
 
 function obtenerFiltro(ruta,page){
 
-	var pclave = $('#inputGroup1').val();
-	var categoria = $('#categoria').val();
-	var provincia = $('#provincia').val();
-	var jornada = $('#jornada').val();
+    var pclave = $('#inputGroup1').val();
+    var categoria = $('#categoria').val();
+    var provincia = $('#provincia').val();
+    var jornada = $('#jornada').val();
+    var busco = false;
 
-	if(pclave != ''){
-		ruta += "Q"+pclave.toLowerCase()+"/";
-	}
-	if(categoria != 0){
-		ruta += "A"+categoria+"/";
-	}
-	if(provincia != 0){
-		ruta += "P"+provincia+"/";
-	}
-	if(jornada != 0){
-		ruta += "J"+jornada+"/";
-	}
+    if(pclave != ''){
+        ruta += "Q"+pclave.toLowerCase()+"/";
+        busco = true;
+    }
+    if(categoria != 0){
+        ruta += "A"+categoria+"/";
+        busco = true;
+    }
+    if(provincia != 0){
+        ruta += "P"+provincia+"/";
+        busco = true;
+    }
+    if(jornada != 0){
+        ruta += "J"+jornada+"/";
+        busco = true;
+    }
 
-	var nueva_ruta = ruta+page+"/";
-	window.location = nueva_ruta;
+    if(busco){
+        var nueva_ruta = ruta+page+"/";
+        window.location = nueva_ruta;
+    }else{
+        abrirModal('Debe Seleccionar al menos un filtro','alert_descarga','','Ok');
+    }
 }
 
 

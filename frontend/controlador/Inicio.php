@@ -10,15 +10,15 @@ class Controlador_Inicio extends Controlador_Base {
     // $fb_URL = $helper->getLoginUrl(PUERTO."://".HOST."/facebook.php?tipo_user=1", $permissions);
 
     // GOOGLE
-    // require_once "includes/gg_api/config.php";
-    // $gg_URL = $gClient->createAuthUrl();
+    require_once "includes/gg_api/config.php";
+    $gg_URL = $gClient->createAuthUrl();
 
     // LINKEDIN
-    // $lk = "linkedin.php?tipo_usuario=1";
+    $lk = "linkedin.php?tipo_usuario=1";
 
     // TWITTER
-    // require_once "includes/tw_api/config.php";
-    // $tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
+    require_once "includes/tw_api/config.php";
+    $tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
@@ -32,7 +32,8 @@ class Controlador_Inicio extends Controlador_Base {
 
 
     // $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-    $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
+    // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
+    $social_reg = array('gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
 
 
     $tags = array('banners'=>$arrbanner, 
