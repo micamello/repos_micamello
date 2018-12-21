@@ -11,7 +11,7 @@ class Modelo_UsuarioLogin{
   public static function editarDniLogin($idUsuario,$dni){
 
   	$datos = array("dni"=>$dni);
-  	return $GLOBALS['db']->update("mfo_usuario_login",$datos,"id_usuario=".$idUsuario);
+  	return $GLOBALS['db']->update("mfo_usuario_login",$datos,"id_usuario_login=".$idUsuario);
   }
 }  
 ?>

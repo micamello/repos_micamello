@@ -60,13 +60,11 @@ class Controlador_Inicio extends Controlador_Base {
       case 'buscaCorreo':        
         $correo = Utils::getParam('correo', '', $this->data);
         $datocorreo = Modelo_Usuario::existeCorreo($correo);
-        Utils::log($datocorreo);
         Vista::renderJSON(array("respcorreo"=>$datocorreo));
       break;
       case 'buscaDni':
         $dni = Utils::getParam('dni', '', $this->data);
         $datodni = Modelo_Usuario::existeDni($dni);
-        Utils::log($datodni);
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
       default:        

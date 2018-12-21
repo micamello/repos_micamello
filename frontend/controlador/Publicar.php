@@ -29,7 +29,6 @@ class Controlador_Publicar extends Controlador_Base {
       break;
       default:
         $publicaciones_restantes = $_SESSION['mfo_datos']['planes'];
-        //Utils::log(print_r($_SESSION['mfo_datos']['planes'], true));
         $rest = 0;
         foreach ($publicaciones_restantes as $value) {
           if($value['num_publicaciones_rest'] < 0){
@@ -46,9 +45,7 @@ class Controlador_Publicar extends Controlador_Base {
           if($value['num_publicaciones_rest'] >= 0){
             $plan_con_pub += $value['num_publicaciones_rest'];
           }
-        }
-        // print_r("<br>".$plan_con_pub."<br>");
-        // exit();
+        }        
         if ($rest <= 0 && is_numeric($rest)) {
           $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
           Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');       

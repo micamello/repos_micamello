@@ -237,7 +237,7 @@ class Controlador_Perfil extends Controlador_Base
                       }
                     }
      
-                    if (!Modelo_Usuario::editarDniLogin($idUsuario,$data['dni'])) {
+                    if (!Modelo_UsuarioLogin::editarDniLogin($_SESSION['mfo_datos']['usuario']['id_usuario_login'],$data['dni'])) {
                         throw new Exception("Ha ocurrido un error al guardar la cedula , intente nuevamente");
                     }
 

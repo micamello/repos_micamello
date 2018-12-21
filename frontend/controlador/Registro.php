@@ -120,7 +120,6 @@ class Controlador_Registro extends Controlador_Base {
         $username = Utils::no_carac(html_entity_decode($username));
         
         $username_generated = Utils::generarUsername($username);
-        // Utils::log("eend: ".$username_generated);
 
         $GLOBALS['db']->beginTrans();
 
