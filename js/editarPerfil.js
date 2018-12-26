@@ -665,7 +665,12 @@ function enviarFormulario(){
 function validarFormulario(){
 
     var tipo_usuario = document.getElementById('tipo_usuario').value;
-    var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
+    if(tipo_usuario == 1){
+      expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
+    }else{
+      expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ. 0-9 &]+$/i;
+    }
+    //var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
     var expreg_telf = /^[0-9]+$/i;
     var error = 0;
     var err_list = "Debe seleccionar una opcion de la lista";
