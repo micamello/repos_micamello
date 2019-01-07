@@ -23,7 +23,7 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 
-  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false){    
+  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$nivelInteres=false,$cambioRes=false){    
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta,
@@ -71,11 +71,20 @@ class Modelo_Oferta{
     }
     
     if($obtCantdRegistros == false){
-      $sql .= " ORDER BY ";
+
       if($areasInteres != false){
-        $sql .= "FIELD(a.id_area, ".$areasInteres.") DESC, ";
+        $sql .= " AND a.id_area IN(".$areasInteres.")"; 
       }
-      $sql .= "o.fecha_creado DESC";
+
+      if($nivelInteres != false){
+        $sql .= " AND o.id_nivelInteres IN(".$nivelInteres.")"; 
+      }
+
+      if($cambioRes != false){
+        $sql .= " AND c.id_ciudad = ".$cambioRes; 
+      }
+
+      $sql .= " ORDER BY o.fecha_creado DESC";
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }else{
@@ -83,6 +92,7 @@ class Modelo_Oferta{
         $sql .= " ORDER BY pos.tipo DESC";
       }
     }
+
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

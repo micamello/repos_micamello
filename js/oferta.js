@@ -96,7 +96,7 @@ function enviarEdicion(){
     }
 }
 
-function colocaError(campo, id, mensaje,btn){
+/*function colocaError(campo, id, mensaje,btn){
 
     nodo = document.getElementById(campo);
     nodo.innerHTML = '';
@@ -113,19 +113,12 @@ function colocaError(campo, id, mensaje,btn){
     nodo.appendChild(elem2); 
 
     $("#"+id).addClass('has-error');
-
-    $("#"+btn).attr({
-        'disabled': 'disabled',
-    });
- 
     $("#"+btn).addClass('disabled');
-    $("#"+btn).attr('disabled', 'disabled');
 
     if(document.getElementById('form_paypal')){
       document.getElementById('form_paypal').action = '#';
     }
-
-}
+}*/
 
 function validarDescripcion(){
 
@@ -166,22 +159,31 @@ function obtenerFiltro(ruta,page){
 	var categoria = $('#categoria').val();
 	var provincia = $('#provincia').val();
 	var jornada = $('#jornada').val();
+    var busco = false;
 
 	if(pclave != ''){
 		ruta += "Q"+pclave.toLowerCase()+"/";
+        busco = true;
 	}
 	if(categoria != 0){
 		ruta += "A"+categoria+"/";
+        busco = true;
 	}
 	if(provincia != 0){
 		ruta += "P"+provincia+"/";
+        busco = true;
 	}
 	if(jornada != 0){
 		ruta += "J"+jornada+"/";
+        busco = true;
 	}
 
-	var nueva_ruta = ruta+page+"/";
-	window.location = nueva_ruta;
+	if(busco){
+        var nueva_ruta = ruta+page+"/";
+        window.location = nueva_ruta;
+    }else{
+        abrirModal('Debe Seleccionar al menos un filtro','alert_descarga','','Ok');
+    }
 }
 
 

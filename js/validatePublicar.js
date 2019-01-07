@@ -794,7 +794,7 @@ $('#urgente').on('change', function(){
 	text_urg.innerHTML = text;
 })
 
-function colocaError(campo, id, mensaje,btn){
+/*function colocaError(campo, id, mensaje,btn){
     nodo = document.getElementById(campo);
     nodo.innerHTML = '';
     var elem1 = document.createElement('P');
@@ -810,13 +810,7 @@ function colocaError(campo, id, mensaje,btn){
     nodo.appendChild(elem2); 
 
     $("#"+id).addClass('has-error');
-
-    // $("#"+btn).attr({
-    //     'disabled': 'disabled',
-    // });
- 
     $("#"+btn).addClass('disabled');
-    // $("#"+btn).attr('disabled', 'disabled');
 
     if(document.getElementById('form_paypal')){
       document.getElementById('form_paypal').action = '#';
@@ -826,4 +820,4 @@ function colocaError(campo, id, mensaje,btn){
 function quitarError(campo,id){
     document.getElementById(campo).innerHTML = '';
     $("#"+id).removeClass('has-error');
-}
+}*/

@@ -5,7 +5,7 @@
                 <div class="container">
                     <div class="col-md-12">
                         <div>
-                            <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Asignar Recursos - <?php echo $nombreEmp; ?></p>
+                            <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Asignar Ofertas - <?php echo $nombreEmp; ?></p>
                         </div>
                         <div class="panel panel-default">
                             <div class="panel-body">
@@ -22,7 +22,7 @@
                                                     <?php 
                                                     if (!empty($planesActivos)){
                                                       foreach($planesActivos as $key => $v){ 
-                                                        echo "<option value='".$v['id_empresa_plan']."'>".utf8_encode($v['nombre'])."</option>";
+                                                        echo "<option value='".Utils::encriptar($v['id_empresa_plan'])."'>".utf8_encode($v['nombre']).' - Fecha de compra: '.$v['fecha_compra']."</option>";
                                                       }
                                                     } ?>
                                                   </select>
@@ -33,7 +33,7 @@
 
                                               <div class="col-md-12" id="seccion_recursos" style="display: none;">
                                                   <hr>
-                                                  <h6 class="text-center">Asignar Recursos</h6>
+                                                  <h6 class="text-center">Asignar Ofertas</h6>
                                                 
                                                   <div id="seccion_postulacion" style="display: none;" >
                                                     <div class="col-md-offset-3 col-md-4">
@@ -45,7 +45,7 @@
 
                                                     <div class="col-md-2">
                                                       <div class="form-group">
-                                                        <label style="font-size: 12px;">Publicaci&oacute;n por asignar: </label>
+                                                        <label style="font-size: 12px;">Ofertas por asignar: </label>
                                                         <div style="padding-top: 15px;" id="post_asignar"></div>
                                                       </div>
                                                     </div>
@@ -76,7 +76,7 @@
                                             <br><br>
                                             <div class="row">
                                               <div class="form-group">
-                                                <input id="button_crear" type="button" name="btnusu" class="btn btn-success disabled" value="Crear Plan" onclick="enviarRecursos();">  
+                                                <input id="button_editar" type="button" name="btnusu" class="btn btn-success disabled" value="Crear Plan">  
                                               </div> 
                                             </div>
                                         </form>

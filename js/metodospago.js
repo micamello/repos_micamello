@@ -154,7 +154,7 @@ function validaCampos(tipo){
     }
   }
 }
-
+/*
 function validarCorreo(correo,err_correo,seccion_correo,btn){
 
   var error = 0;
@@ -213,11 +213,7 @@ function validarDir(direccion,err_dir, seccion_dir,btn){
   }
   return error;
 }
-
-function verifyErrors(){
-  var listerrors = document.getElementsByClassName('msg_error');
-  return listerrors.length;
-}
+*/
 
 function validarSelect(id,err_select,err_group_select,btn){
 
@@ -232,7 +228,7 @@ function validarSelect(id,err_select,err_group_select,btn){
   return error;
 }
 
-function validarNumTelf(num,err_telf,seccion_telf,btn){
+/*function validarNumTelf(num,err_telf,seccion_telf,btn){
 
   var expreg_telf = /^[0-9]+$/i;
   var error = 0;
@@ -251,7 +247,7 @@ function validarNumTelf(num,err_telf,seccion_telf,btn){
       quitarError(err_telf,seccion_telf);
   }
   return error;
-}
+}*/
 
 function validarImg(archivo,err_img,seccion_img,btn){
 
