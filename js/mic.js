@@ -1,3 +1,4 @@
+
 function validarUsuario(username){
 
   if(username == null || username.length == 0 || /^\s+$/.test(username)){
@@ -186,6 +187,7 @@ function validaCampos(form,btn){
     $('#'+btn).removeAttr('disabled');   
   }
 }
+
 
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);

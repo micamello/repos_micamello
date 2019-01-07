@@ -200,11 +200,7 @@ class Modelo_Oferta{
   }
 
   public static function guardarOferta($data, $id_reqOf, $id_plan, $id_empresa){
-    if (empty($data)) {return false;}
-    $urgente = 0;
-    if($data['urgente'] != null || $data['urgente'] != ""){
-      $urgente = 1;
-    }
+    $urgente = $data['urgente'];
     $result = $GLOBALS['db']->insert('mfo_oferta', array("id_empresa"=>$id_empresa, "titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>2, "fecha_creado"=>date("Y-m-d H:i:s"), "tipo"=>$urgente, "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_empresa_plan"=>$id_plan));
     return $result;
   }
@@ -226,7 +222,7 @@ class Modelo_Oferta{
     return $datos;
   }
 
-  public static function obtieneAutopostulaciones($pais,$fecha,$areas,$intereses,$usuario,$provincia=0){
+  public static function obtieneAutopostulaciones($pais,$fecha,$areas,$intereses,$usuario,$provincia=0,$ciudad=0){
     if (empty($pais) || empty($fecha) || empty($areas) || empty($intereses) || empty($usuario)){ return false; }
     $sql = "SELECT o.id_ofertas, o.salario, o.titulo, o.id_empresa AS id_usuario, p.nombre AS provincia, c.nombre AS ciudad
             FROM mfo_oferta o
@@ -236,9 +232,12 @@ class Modelo_Oferta{
             INNER JOIN mfo_plan a ON a.id_plan = e.id_plan 
             WHERE o.estado = 1 AND p.id_pais = ? AND o.fecha_contratacion >= ? AND a.costo <> 0 AND
                   o.id_area IN(".$areas.") AND o.id_nivelInteres IN(".$intereses.") AND 
-                  o.id_ofertas NOT IN (SELECT id_ofertas FROM mfo_postulacion WHERE id_usuario = ?)";
+                  o.id_ofertas NOT IN (SELECT id_ofertas FROM mfo_postulacion WHERE id_usuario = ?)";   
     if (!empty($provincia)){
       $sql .= " AND p.id_provincia = ".$provincia;
+    }
+    if (!empty($ciudad)){
+      $sql .= " AND c.id_ciudad = ".$ciudad;
     }
     $sql .= " ORDER BY o.fecha_creado";
     return $GLOBALS['db']->auto_array($sql,array($pais,$fecha,$usuario),true);              

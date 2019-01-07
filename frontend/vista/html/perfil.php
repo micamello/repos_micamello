@@ -138,12 +138,11 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 									                 ?>
 									              </select>
 									            </div>
-									          </div> 
-
+									          </div>                             
 		                                    <div class="col-md-6">
 			                                    <div class="form-group" id="seccion_dni">
 			                                        <label for="dni">C&eacute;dula</label><div id="err_dni" class="help-block with-errors"></div>
-			                                        <input class="form-control" type="text" id="dni" <?php if($_SESSION['mfo_datos']['usuario']['dni'] == 0){ echo ''; }else{ echo 'disabled';} ?> value="<?php if(isset($data['dni'])){ echo $data['dni']; } else{ if($_SESSION['mfo_datos']['usuario']['dni'] == 0){ echo ''; }else{ echo $_SESSION['mfo_datos']['usuario']['dni']; } } ?>" onkeyup="validarFormulario()" />
+			                                        <input class="form-control" type="text" id="dni" name="dni" <?php if(empty($_SESSION['mfo_datos']['usuario']['dni'])){ echo ''; }else{ echo 'disabled';} ?> value="<?php if(isset($data['dni'])){ echo $data['dni']; } else if(empty($_SESSION['mfo_datos']['usuario']['dni'])){ echo ''; }else{ echo $_SESSION['mfo_datos']['usuario']['dni'];  } ?>" onkeyup="validarFormulario()" />
 			                                    </div>
 		                                    </div>
 	                                	<?php } ?>

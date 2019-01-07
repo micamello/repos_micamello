@@ -120,7 +120,6 @@ class Controlador_Registro extends Controlador_Base {
         $username = Utils::no_carac(html_entity_decode($username));
         
         $username_generated = Utils::generarUsername($username);
-        // Utils::log("eend: ".$username_generated);
 
         $GLOBALS['db']->beginTrans();
 
@@ -186,6 +185,7 @@ class Controlador_Registro extends Controlador_Base {
             }
           }
 
+
                 $GLOBALS['db']->commit();
 
                 $token = Utils::generarToken($user_id,"ACTIVACION");
@@ -198,7 +198,9 @@ class Controlador_Registro extends Controlador_Base {
                 if (!$this->correoActivacionCuenta($data['correo'], $nombres_correo,$token, $usuario_login['username'])){
                     throw new Exception("Error en el envio de correo, por favor intente denuevo");
                   }
-                $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
+                // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
+                // echo "<script type='text/javascript'>alert('Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam');</script>";
+                $_SESSION['registro'] = 1;
                 Utils::doRedirect(PUERTO."://".HOST."/");
   }
 
@@ -254,7 +256,8 @@ class Controlador_Registro extends Controlador_Base {
           if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
               throw new Exception("Error al enviar credenciales. Intente nuevamente");
             }
-          $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam";
+          // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam";
+            echo "alert('Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam')";
     }
       catch( Exception $e ){
         $GLOBALS['db']->rollback();

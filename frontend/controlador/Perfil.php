@@ -145,7 +145,13 @@ class Controlador_Perfil extends Controlador_Base
 
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
 
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'tipo_doc'=>1,'dni'=>1,'residencia'=>1);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
+
+                if (empty($_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                  $campos['dni'] = 1;
+                  $campos['documentacion'] = 1;
+                }
+
             } else {
 
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
@@ -235,10 +241,12 @@ class Controlador_Perfil extends Controlador_Base
                       if($_POST['lugar_estudio'] == 1 && strlen($data['universidad2']) > 100){
                         throw new Exception("El nombre de la universidad: " . $data['universidad2'] . " supera el límite permitido");
                       }
-                    }
+                    }            
      
-                    if (!Modelo_Usuario::editarDniLogin($idUsuario,$data['dni'])) {
-                        throw new Exception("Ha ocurrido un error al guardar la cedula , intente nuevamente");
+                    if (empty($_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                        if (!Modelo_UsuarioLogin::editarDniLogin($_SESSION['mfo_datos']['usuario']['id_usuario_login'],$data['dni'])) {
+                            throw new Exception("Ha ocurrido un error al guardar la cedula , intente nuevamente");
+                        }
                     }
 
                     if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
@@ -340,9 +348,7 @@ class Controlador_Perfil extends Controlador_Base
                 if (!Modelo_UsuarioxNivel::updateNiveles($array_data_nivel, $data['nivel_interes'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
                 }
-
-            }
-            
+            }            
 
             $GLOBALS['db']->commit();
             Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario));
@@ -350,6 +356,7 @@ class Controlador_Perfil extends Controlador_Base
 
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
+            $GLOBALS['db']->rollback();
         }
         return $data;
     }

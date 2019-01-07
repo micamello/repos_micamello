@@ -1,16 +1,15 @@
-<div class="container">
-	<div class="col-md-12">
-		<br>
-			<?php if (trim($vista) == 'oferta' && isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?>
-
-			<div class="col-md-12" align="right" >
-				<b>Autopostulaciones restantes: <span class="parpadea" style="color:red"><?php echo $autopostulaciones_restantes['p_restantes']; ?></span></b>
-			</div>
-			<br>
-		<?php }else{  
-			echo $enlaceCompraPlan; ?>
-		<?php } ?>
-	</div>
+<div class="container"> 
+	<div class="col-md-12"> 
+		<?php if (trim($vista) == 'oferta' && isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?> 
+			<div class="col-md-12" align="right" > 
+				<b>Autopostulaciones restantes: 
+				  <span class="parpadea" style="color:red">
+				    <?php echo $autopostulaciones_restantes['p_restantes']; ?>					
+				  </span>
+			  </b> 
+			</div><br>
+		<?php }else{ echo isset($enlaceCompraPlan) ? $enlaceCompraPlan : ''; ?> <?php } ?> 
+	</div> 
 </div>
 
 <div class="container">

@@ -46,7 +46,7 @@ class Controlador_Login extends Controlador_Base {
           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
             throw new Exception("Error en el sistema, por favor intente nuevamente");
           }                                 
-          self::registroSesion($usuario);               
+          self::registroSesion($usuario);              
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");

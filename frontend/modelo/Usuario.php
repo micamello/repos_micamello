@@ -219,6 +219,10 @@ public static function existeUsername($username){
 
         $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil'],"tipo_doc"=>$data['tipo_doc']); 
 
+        if (!empty($data['documentacion'])){          
+          $datos['tipo_doc'] = $data['documentacion'];
+        }
+
         if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
           if($_POST['lugar_estudio'] == 1){
             $datos['nombre_univ'] = $_POST['universidad2'];
@@ -853,7 +857,8 @@ WHERE
   }
 
   public static function obtieneTodosCandidatos(){
-    $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.viajar, p.id_pais, l.correo, p.id_provincia
+    $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.viajar, p.id_pais, l.correo, 
+                   p.id_provincia, u.id_ciudad, u.residencia
             FROM mfo_usuario u
             INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia

@@ -11,6 +11,8 @@ foreach ($presentarBtnCompra as $key => $value) {
 
 if($presentarBtn){ ?>
 	<div class="parpadea pull-right" >
-		<h6 style="color:#6d6d6b"><strong>Desea adquirir un plan con mayores beneficios?</strong><a href="<?php echo PUERTO."://".HOST;?>/planes/" id="btn_compra" class="btn btn-md btn-warning">Adquierelo YA!</a></h6>
+		<h6 style="color:#6d6d6b"><strong>Desea adquirir un plan con mayores beneficios?</strong><a href="<?php echo PUERTO."://".HOST."/planes/";?>" id="btn_compra" class="btn btn-md btn-warning">Adquierelo YA!</a></h6>
+		<br>
+		<br>
 	</div>
 <?php } ?>

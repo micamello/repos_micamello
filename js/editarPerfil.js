@@ -631,7 +631,12 @@ function enviarFormulario(){
 function validarFormulario(){
 
     var tipo_usuario = document.getElementById('tipo_usuario').value;
-    var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
+    if(tipo_usuario == 1){
+      expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
+    }else{
+      expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ. 0-9 &]+$/i;
+    }
+    //var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
     var expreg_telf = /^[0-9]+$/i;
     var error = 0;
     var err_list = "Debe seleccionar una opcion de la lista";
@@ -671,23 +676,24 @@ function validarFormulario(){
         
         var tipo_doc = document.getElementById('documentacion').value;
         var dni = document.getElementById('dni').value;
-        
-        if(tipo_doc != 0){
-          quitarError("seleccione_error","seleccione_group");
-          var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
-          if(validar == 1){
-            error = 1;
+                
+        if ($("#dni").is(":disabled") == false){
+          if(tipo_doc != 0){          
+            quitarError("seleccione_error","seleccione_group");          
+            var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
+            if(validar == 1){            
+              error = 1;
+            }else{
+              quitarError("err_dni","seccion_dni");
+            }
           }else{
-            quitarError("err_dni","seccion_dni");
-          }
-        }else{
-          colocaError("seleccione_error","seleccione_group",err_list,"boton");
-          validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
-          error = 1;
-        }       
+            colocaError("seleccione_error","seleccione_group",err_list,"boton");
+            validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
+            error = 1;
+          }       
+        }
 
         if(document.getElementById('subirCV') && document.getElementById('subirCV').value != ''){
-
             $("#mensaje_error_hv").remove();
 
         }else if(document.getElementById('btnDescarga').value == 0 && document.getElementById('subirCV').value == ''){
@@ -695,7 +701,6 @@ function validarFormulario(){
         }
 
         if(discapacidad == null || discapacidad == 0){
-
             colocaError("err_dis", "seccion_dis",err_list,"boton");
             error = 1;
         }else{

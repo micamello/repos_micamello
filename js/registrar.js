@@ -648,15 +648,15 @@ if(document.getElementById('tel_two_contact')){
                     if ($(this).attr('label') !== undefined) {
                       labels.push($(this).attr('label'));                             
                       $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
-                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                      // $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
                       // console.log(this);
                     }
                     else {
                       labels.push($(this).html());                             
                       $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
-                        // $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                        // $(this).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
                     }
                   });                          
                   return labels.join(', ') + '';
@@ -664,6 +664,7 @@ if(document.getElementById('tel_two_contact')){
               },
               onChange: function(option, checked) {
                 var selectedOptions = $('#area_select option:selected');
+                // console.log(selectedOptions);
  
                 if (selectedOptions.length >= 3) {
                     var nonSelectedOptions = $('#area_select option').filter(function() {
@@ -675,15 +676,17 @@ if(document.getElementById('tel_two_contact')){
                         // console.log($('input[id="area_select-' + $(this).val() + '"]')[0]);
                         input.prop('disabled', true);
                         input.parent('li').addClass('disabled');
+                        // $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
                     });
                 }
                 else {
                     $('#area_select option').each(function() {
                         // console.log(this);
+                        console.log(selectedOptions.length);
                         var input = $('input[id="area_select-' + $(this).val() + '"]');
                         input.prop('disabled', false);
                         input.parent('li').addClass('disabled');
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
                     });
                 }
               }        
@@ -718,14 +721,14 @@ if(document.getElementById('tel_two_contact')){
                     if ($(this).attr('label') !== undefined) {
                       labels.push($(this).attr('label'));                             
                       $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a>');
-                      $(this).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
+                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
                     }
                     else {
                       labels.push($(this).html());                             
                       $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a></p>');
                     // console.log(this.parentNode.id);
-                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(options.length);
-                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children());
+                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children());
                     }
                   });                                    
                   return labels.join(', ') + '';
@@ -755,8 +758,8 @@ if(document.getElementById('tel_two_contact')){
                         input.parent('li').addClass('disabled');
                         // console.log(input.parent('li'));
                         // console.log("eder:  "+selectedOptions.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-heading'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-heading').children().children().html(selectedOptions.length);
+                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
+                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
                     });
                 }
               }        
@@ -820,7 +823,7 @@ function passCoincide(pass_one, pass_two){
 }
 
 function validateForm(tipo){
-	console.log(tipo);
+	// console.log(tipo);
 	var tipo_usuario = document.getElementById('tipo_usuario').value;
 	var errors = 0;
 	if(document.getElementById('name_user').value == ""){
@@ -900,12 +903,16 @@ function validateForm(tipo){
 			errors++;
 		}
 	}
-	console.log(errors);
+	// console.log(errors);
 // ----------------------------------------------Tipo de usuario 2 (candidato) exclusivo--------------------------------------
 	return errors;
 }
 
-function validar_EC(dni_obj,tipo,campoErr,campoSeccion,btn){ var validacion = validarDocumento(dni_obj.value, tipo,campoErr,campoSeccion,btn); return validacion; }
+
+function validar_EC(dni_obj,tipo,campoErr,campoSeccion,btn){
+	var validacion = validarDocumento(dni_obj.value, tipo,campoErr,campoSeccion,btn);
+	return validacion;
+}
 
 function existeCorreo(correo){
 	var value = "";
