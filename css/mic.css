@@ -1143,6 +1143,22 @@ fieldset {
 .active_button{
   background-color: #FF3E55;
 }
+
+.progress_bar {
+  background-color: #EAEAEA;
+  border-radius: 13px;
+  /* (height of inner div) / 2 + padding */
+  padding: 3px;
+  /*text-align: center;*/
+}
+
+.inside_progress {
+  /*background-color: orange;*/
+  /*width: 40%;*/
+  /* Adjust with JavaScript */
+  height: 20px;
+  border-radius: 10px;
+}
  
 @-webkit-keyframes bounce {
     0%, 20%, 50%, 80%, 100% {-webkit-transform: translateY(0);} 

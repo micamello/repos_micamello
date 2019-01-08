@@ -258,5 +258,5 @@ function imprimir(nombreDiv) {
     setTimeout(function () {
       document_html.print();
       document.getElementById('boton_imprimir').style.display = '';
-    }, 500)
+    }, 100)
   }

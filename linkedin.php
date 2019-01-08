@@ -25,7 +25,7 @@ if (empty($_GET["action"])) {
     $client->client_id = LK_ID_CLIENTE;
     $client->client_secret = LK_SECRET;
     $client->scope = LK_SCOPE;
-    // print_r("eder");exit();
+    print_r("eder");exit();
     
     if (($success = $client->Initialize())) {
         if (($success = $client->Process())) {
@@ -48,6 +48,7 @@ if (empty($_GET["action"])) {
         // exit();
         $obj_registro = new Controlador_Registro();
         $obj_registro->linkedin($data_user, $tipo_usuario);
+        // unset($_SESSION['OAUTH_ACCESS_TOKEN']);
     }
     if ($client->exit) {
         exit();

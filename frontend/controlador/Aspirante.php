@@ -421,16 +421,46 @@ class Controlador_Aspirante extends Controlador_Base
     }
 
     public function perfilAspirante($username, $id_oferta, $vista){
+            $data_user = self::datauser($username, $id_oferta, $vista);
+            // var_dump($data_user);exit();
+            $breadcrumbs = array();
+            $breadcrumbs['verAspirantes/'.$vista.'/'.$id_oferta."/1"] = "Ver aspirantes";
+            $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
+            $planes = array();
+            if(isset($_SESSION['mfo_datos']['planes'])){
+                $planes = $_SESSION['mfo_datos']['planes'];
+            }else{
+                array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
+            }
+
+            $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
+
+            $tags = array("breadcrumbs"=>$breadcrumbs,
+                    "infoUsuario"=>$data_user['infoUsuario'],
+                    "escolaridad"=>$data_user['escolaridad'],
+                    "Conf"=>$data_user['Conf'],
+                    "Resultados"=>$data_user['Resultados'],
+                    "asp_sararial"=>$data_user['asp_sararial'],
+                    "enlaceCompraPlan"=>$enlaceCompraPlan,
+                    "id_oferta"=>$id_oferta,
+                    "vista"=>$vista
+              );
+            
+        $tags["template_js"][] = "html2canvas.min";
+        $tags["template_js"][] = "jsPDF-1.4.1/dist/jspdf.debug";
+        $tags["template_js"][] = "mic";
+        $tags["template_js"][] = "Chart.min";
+        Vista::render('perfilAspirante', $tags);
+    }
+
+    public function datauser($username, $id_oferta, $vista){
         $datos = Modelo_Usuario::existeUsuario($username);
         $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
         $escolaridad = Modelo_Escolaridad::obtieneListadoAsociativo();
         $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
         $contacto = array();
-        $breadcrumbs = array();
         $array_rasgosxusuario = array();
 
-        $breadcrumbs['verAspirantes/'.$vista.'/'.$id_oferta."/1"] = "Ver aspirantes";
-        $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
 
         if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
                 $contacto = ["correo"=>Utils::ocultarEmail($info_usuario['correo']), "telefono"=>Utils::ocultarCaracteres($info_usuario['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($info_usuario['dni'], 0, 0)];
@@ -453,28 +483,11 @@ class Controlador_Aspirante extends Controlador_Base
                 }
             }
 
-            $planes = array();
-            if(isset($_SESSION['mfo_datos']['planes'])){
-                $planes = $_SESSION['mfo_datos']['planes'];
-            }else{
-                array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
-            }
-
-            $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
-
-            $tags = array("breadcrumbs"=>$breadcrumbs,
-                    "infoUsuario"=>$info_usuario,
+        return array("infoUsuario"=>$info_usuario,
                     "escolaridad"=>$escolaridad,
                     "Conf"=>$contacto,
                     "Resultados"=>$array_rasgosxusuario,
-                    "asp_sararial"=>$asp_salarial,
-                    "enlaceCompraPlan"=>$enlaceCompraPlan,
-                    "vista"=>$vista
-              );
-
-        $tags["template_js"][] = "mic";
-        $tags["template_js"][] = "Chart.min";
-        Vista::render('perfilAspirante', $tags);
+                    "asp_sararial"=>$asp_salarial);
     }
 
 }

@@ -1,4 +1,5 @@
 <div class="container">
+	<!-- <?php print_r("eder: ".$id_oferta.$vista); ?> -->
 		<br><br><br><br><br><br>
 	<div class="col-md-10 col-md-offset-1" id="contenido_imprimir">
 		<div class="panel panel-default shadow">
@@ -14,7 +15,7 @@
 						</div>
 
 						<h3 class="text-center">
-							<?php echo ucfirst(utf8_encode($infoUsuario['nombres']." ".$infoUsuario['apellidos']));
+							<?php echo ucwords(utf8_encode($infoUsuario['nombres']." ".$infoUsuario['apellidos']));
 								if($vista != 2){
 							?>
 								<h5><b>Aspiración salarial:</b> 
@@ -44,7 +45,11 @@
 							<hr>
 							<h4>Datos candidato</h4>
 
-							<a onclick="imprimir('contenido_imprimir');" id="boton_imprimir" class="btn btn-warning min_btn btn-xs">Imprimir datos <i class="fa fa-print"></i></a><br>
+							<!-- <a onclick="imprimir('contenido_imprimir');" id="boton_imprimir" class="btn btn-warning min_btn btn-xs">Imprimir datos <i class="fa fa-print"></i></a> -->
+							
+							<a href="<?php echo PUERTO."://".HOST."/fileGEN/datousuario/".$infoUsuario['username']."/".$vista."/".$id_oferta."/" ?>" class="btn btn-info btn-xs" target="_blanked">Descargar datos <i class="fa fa-file-pdf-o"></i></a>
+							<!-- <a id="print" target="_blanked">Descargar datos <i class="fa fa-file-pdf-o"></i></a> -->
+							<br><br>
 							<div class="col-md-5 col-md-offset-1 form-group">
 								<div class="box_text">
 									<label>Estado civil <i class="fa fa-user icon fa-2x"></i></label>
@@ -454,17 +459,18 @@
 				else{
 					foreach ($Resultados as $res) {
 						?>
-							<input type="hidden" name="nombres_res" value="<?php echo utf8_encode($res['nombre']) ?>">
+							<input type="hidden" name="nombres_res" value="<?php echo ($res['nombre']) ?>">
 							<input type="hidden" name="valor_res" value="<?php echo $res['valor'] ?>">
 						<?php
 						}
 					?>
 				
-					<div class="hidden-xs hidden-sm">
+					<div class="hidden-xs hidden-sm" id="result_graph">
 						<div class="col-md-10 col-md-offset-1">
 						 	<canvas id="myChart"></canvas>
 						</div>
 					</div>
+
 					<div class="hidden-lg hidden-md">
 					<?php $i = 0; foreach ($Resultados as $res) {
 						$color = ["#1278A2", "#7D4AF2", "#187D22", "#9A3030", "#637103", "#665706", "#716E69", "#256AF6", "#555555", "#075F5A", "#50AF0B"];

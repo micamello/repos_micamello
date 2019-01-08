@@ -438,11 +438,19 @@
 
 						
 						<div class="col-md-6">
-							<div class="form-group" align="left">
-								<div class="urgente_class_input">
+							<div class="form-group">
+								<label>¿Oferta urgente? </label>
+								<!-- <div class="urgente_class_input">
 									<input class="flipswitch_check" type="checkbox" name="urgente" id="urgente" value="0">
 									<label class="label_checkbox">Oferta Urgente (<small id="text_urg" style="color: #A7A7A7;">No</small>)</label>
-								</div>
+								</div> -->
+								<select class="form-control" name="urgente">
+									<?php 
+										foreach (REQUISITO as $key => $value) {
+											echo "<option value='".$key."'>".$value."</option>";
+										}
+									 ?>
+								</select>
 							</div>
 						</div>
 						

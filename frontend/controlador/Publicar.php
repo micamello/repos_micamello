@@ -113,9 +113,8 @@ class Controlador_Publicar extends Controlador_Base {
       Vista::render('publicar_vacante', $tags);
   }
   public function validarCampos($data){
-    throw new Exception("Longitud máxima del campo 100 caracteres");$descripcion = str_replace(array("&nbsp;", "<p>", "</p>"), array(" ", " ", " "), html_entity_decode($data['des_of']));
 
-    if(ctype_space($descripcion) || empty($descripcion) || $descripcion == ""){
+    if(ctype_space($descripcion) && (empty($descripcion) || $descripcion == "")){
       throw new Exception("El campo descripción es obligatorio");
     }
 
