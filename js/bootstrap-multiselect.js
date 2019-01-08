@@ -1809,17 +1809,24 @@ var filtro = [];
 });
 
 function deseleccionar(valor, id_select){
-          var select_id = id_select.id;
-          $('#'+select_id).multiselect('deselect', valor);
-          $('#'+id_select.id+'-'+valor).prev()[0].outerHTML = "";
-          var selectedOptions = $('#'+select_id+' option:selected');
-            $('#'+select_id+' option').each(function() {
-              var input = $('input[id="'+select_id+'-' + $(this).val() + '"]');
-              input.prop('disabled', false);
-              input.parent('li').addClass('disabled');
-            });
-          $('#'+id_select.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-        }
+
+  var select_id = id_select.id;
+  $('#'+select_id).multiselect('deselect', valor);
+  $('#'+id_select.id+'-'+valor).prev()[0].outerHTML = "";
+  var selectedOptions = $('#'+select_id+' option:selected');
+    $('#'+select_id+' option').each(function() {
+      var input = $('input[id="'+select_id+'-' + $(this).val() + '"]');
+      input.prop('disabled', false);
+      input.parent('li').addClass('disabled');
+    });
+  $('#'+id_select.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
+
+  if(id_select.id == 'area_select' && selectedOptions.length == 0){
+    colocaError("err_area","seccion_area","Debe seleccionar una opcion de la lista","boton");
+  }else if(id_select.id == 'nivel_interes' && selectedOptions.length == 0){
+    colocaError("err_int","seccion_int","Debe seleccionar una opcion de la lista","boton");
+  }
+}
 
 function display_selected(obj){
   // console.log(obj.parentNode.nextElementSibling.id);

@@ -9,7 +9,7 @@ if(document.getElementById('button_register')){
 }
 
 $(document).ready(function(){
-	$("#button_register").addClass('disabled');
+	$("#button_register").addClass('disabled');		
 })
 
 if(document.getElementById("#form_register")){
@@ -43,6 +43,7 @@ if(document.getElementById('name_user')){
 		var contenido = nombres.value;
 		if(contenido != ""){
 			if(reg.test(contenido) != false){
+
 				if(contenido.length <= 60){
 					quitarError(nombre_error, group_nombre);
 					enableBTN(1);
@@ -75,6 +76,7 @@ if(document.getElementById('name_user')){
 
 	$('#name_user').on('keydown', function(event){
 		tipo_usuario = document.getElementById("tipo_usuario").value;
+
 		if(tipo_usuario == 1){
 			validar_keycode(this, "nombre_apellido", nombre_error, group_nombre, event, button_register, 60);
 		}
@@ -950,9 +952,4 @@ function existeDni(dni){
         })
 	}
 	return value;
-}
-
-function verifyErrors(){
-	var listerrors = document.getElementsByClassName('msg_error');
-	return listerrors.length;
 }

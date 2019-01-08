@@ -257,7 +257,7 @@
                 			$ruta = Controlador_Aspirante::calcularRuta($ruta,'');
                 		?>
 			            <select id="escolaridad" class="form-control">
-			                <option value="0">Seleccione una nivel</option>
+			                <option value="0">Seleccione un nivel</option>
 			                <?php
 								foreach ($escolaridad as $key => $v) {
 									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';

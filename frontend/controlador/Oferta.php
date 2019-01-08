@@ -22,12 +22,21 @@ class Controlador_Oferta extends Controlador_Base{
         $breadcrumbs = array();
         $aspirantesXoferta = '';
 
+        /*if(isset($_SESSION['mfo_datos']['planes'])){            
+          $planes = $_SESSION['mfo_datos']['planes'];
+        }else{
+          $planes = null;
+        } */
+
+        $planes = array();
+        if(isset($_SESSION['mfo_datos']['planes'])){
+          $planes = $_SESSION['mfo_datos']['planes'];
+        }else{
+         array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
+        }
+
         if($vista == 'oferta'){
-          if(isset($_SESSION['mfo_datos']['planes'])){            
-            $planes = $_SESSION['mfo_datos']['planes'];
-          }else{
-            $planes = null;
-          }
+          
           Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
         }
 
@@ -42,8 +51,17 @@ class Controlador_Oferta extends Controlador_Base{
         $subempresas = '';
         $ofertasSubempresas = array();
 
+        $areasInteres = $nivelInteres = $cambioRes = false;
         if(isset($_SESSION['mfo_datos']['usuarioxarea'])){
           $areasInteres = implode(",",$_SESSION['mfo_datos']['usuarioxarea']); 
+        }
+
+        if(isset($_SESSION['mfo_datos']['usuarioxnivel'])){
+          $nivelInteres = implode(",",$_SESSION['mfo_datos']['usuarioxnivel']); 
+        }
+
+        if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 0){
+          $cambioRes = $_SESSION['mfo_datos']['usuario']['id_ciudad']; 
         }
 
         switch ($opcion) {
@@ -148,20 +166,39 @@ class Controlador_Oferta extends Controlador_Base{
             }
 
             if($vista == 'cuentas'){
-              $idUsuario = $_SESSION['mfo_datos']['subempresas'];
+              $array_subempresas = array();
+              $sub = $_SESSION['mfo_datos']['subempresas'];
+              foreach ($sub as $id) {
+                  array_push($array_subempresas, $id);
+              }
+              $idUsuario = implode(",", $array_subempresas);
+
               $array_empresas_hijas = $_SESSION['mfo_datos']['array_empresas_hijas'];
             }else{
               $array_empresas_hijas = array();
             }
 
-            $ofertas = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
+            $filtros = $_SESSION['mfo_datos']['Filtrar_ofertas'];
+            if($filtros['A'] == 0 && $filtros['P'] == 0 && $filtros['J'] == 0 && $filtros['S'] == 0 && $filtros['Q'] == 0){
+              
+              $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes);     
 
-            //Para obtener la cantidad de registros totales de la consulta
-            $registros = Modelo_Oferta::filtrarOfertas($_SESSION['mfo_datos']['Filtrar_ofertas'],$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
+              //Para obtener la cantidad de registros totales de la consulta
+              $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
+
+            }else{
+
+              $ofertas = Modelo_Oferta::filtrarOfertas($filtros,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
+
+              //Para obtener la cantidad de registros totales de la consulta
+              $registros = Modelo_Oferta::filtrarOfertas($filtros,$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
+            }
 
             if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
               $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
             }
+
+            $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
 
             $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'vista'=>$vista));  
 
@@ -171,6 +208,7 @@ class Controlador_Oferta extends Controlador_Base{
                 'arrprovincia'  => $arrprovincia,
                 'jornadas'      => $arrjornadas,
                 'ofertas'       => $ofertas,
+                'enlaceCompraPlan'=>$enlaceCompraPlan,
                 'autopostulaciones_restantes'=>$autopostulaciones_restantes,
                 'link'=>$link,
                 'vista'=>$vista,
@@ -208,12 +246,12 @@ class Controlador_Oferta extends Controlador_Base{
               if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
 
                 $subempresas = $_SESSION['mfo_datos']['subempresas']; 
-
-                if($subempresas != ''){
-                  $idUsuario = $idUsuario.",".$subempresas;
+                $array_subempresas = array();
+                foreach ($subempresas as $id) {
+                    array_push($array_subempresas, $id);
                 }
+                $idUsuario = $idUsuario.",".implode(",", $array_subempresas);
 
-                $array_subempresas = explode(",",$subempresas);               
               }
               
               $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
@@ -364,11 +402,19 @@ class Controlador_Oferta extends Controlador_Base{
               
               Vista::render('ofertas', $tags);
           break;
-          default:
+          default:            
             //solo candidatos 
             if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
-              Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
+              Utils::doRedirect(PUERTO.'://'.HOST.'/');               
             }
+
+            if(isset($_SESSION['mfo_datos']['planes'])){            
+              $planes = $_SESSION['mfo_datos']['planes'];
+            }else{
+              $planes = null;
+            }
+            Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
+
             $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
             if(!empty($eliminarPostulacion)){
                 $r = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion);
@@ -382,16 +428,13 @@ class Controlador_Oferta extends Controlador_Base{
             $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
             $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
-            $planes = array();
-            if(isset($_SESSION['mfo_datos']['planes'])){
-              $planes = $_SESSION['mfo_datos']['planes'];
-            }else{
-             array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
-            }
-
             $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
 
-            $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres);       
+            $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes);     
+
+            //Para obtener la cantidad de registros totales de la consulta
+            $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
+
             if($vista != 'postulacion'){
                 $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
                 $breadcrumbs['oferta'] = 'Ofertas de empleo';
@@ -416,8 +459,6 @@ class Controlador_Oferta extends Controlador_Base{
             
             $url = PUERTO.'://'.HOST.'/'.$vista; 
 
-            //Para obtener la cantidad de registros totales de la consulta
-            $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
             $pagination = new Pagination(count($registros),REGISTRO_PAGINA,$url);
             $pagination->setPage($page);
             $tags['paginas'] = $pagination->showPage();

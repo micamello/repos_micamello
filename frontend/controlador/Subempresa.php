@@ -24,12 +24,14 @@ class Controlador_Subempresa extends Controlador_Base
         $page = Utils::getParam('page', '1', $this->data);
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $idPlanEmpresa = Utils::getParam('idPlanEmpresa', '', $this->data);
+        $idPlanEmpresa = Utils::desencriptar($idPlanEmpresa);
         $breadcrumbs = array();
 
         switch ($opcion) {
             case 'buscaRecursos':
                 $resultado = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
-                Vista::renderJSON($resultado);
+                $result = array('num_publicaciones_rest'=>$resultado['num_publicaciones_rest'],'num_descarga_rest'=>$resultado['num_descarga_rest']);
+                Vista::renderJSON($result);
             break;
             case 'buscaDescripcion':
                 $idOferta = Utils::getParam('idOferta', '', $this->data);
@@ -43,9 +45,10 @@ class Controlador_Subempresa extends Controlador_Base
             case 'crearPlan': 
                 
                 //Permite crear un nuevo plan a la empresa seleccionada 
-                echo 'idSubEmpresa: '.$idSubEmpresa = Utils::getParam('idSubEmpresa', '', $this->data);
+                $idSubEmpresa = Utils::getParam('idSubEmpresa', '', $this->data);
+                $idSubEmpresa = Utils::desencriptar($idSubEmpresa);
                 $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,$idSubEmpresa);
-                $planesActivos = Modelo_UsuarioxPlan::planesConCuentas($idUsuario,$subempresas[0]['ids_Planes']);
+                $planesActivos = Modelo_UsuarioxPlan::planesConCuentas($idUsuario,$subempresas[0]['ids_parents'],1);
 
                 $breadcrumbs['adminEmpresas'] = "Administrar Cuentas";
                 $breadcrumbs['asinarRecursos'] = "Asignar Recursos";  
@@ -62,6 +65,7 @@ class Controlador_Subempresa extends Controlador_Base
                     'idSubEmpresa'=>$idSubEmpresa,
                     'breadcrumbs'=>$breadcrumbs
                 );
+                $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('asignarRecursos', $tags);
                 
@@ -90,6 +94,8 @@ class Controlador_Subempresa extends Controlador_Base
                     'planPadre'=>$planPadre,
                     'idPlanEmpresa'=>$idPlanEmpresa
                 );
+
+                $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('editarPlan', $tags);
                 
@@ -103,16 +109,35 @@ class Controlador_Subempresa extends Controlador_Base
 
                 if (Utils::getParam('form_crear_input') == 1) {
                     self::crearEmpresa($idUsuario);
+                    $hijos = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario);
+                    if (!empty($hijos)){
+                        $_SESSION['mfo_datos']['subempresas'] = $hijos;
+                    }      
                     Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/');
                 }
 
-                $planesActivos = Modelo_UsuarioxPlan::planesConCuentas($idUsuario,false);
+                /*$empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,false);
+                $empresas = implode(",",array_unique($_SESSION['mfo_datos']['subempresas']));*/
+                $recursos = Modelo_UsuarioxPlan::tieneRecursos(false,$idUsuario);
+                $emp_plan = self::cuentasXplan($_SESSION['mfo_datos']['subempresas']);
+                $tieneRecursos = self::obtieneRecursos($recursos,$emp_plan);
+                
+                $empresa_plan = array();
+                foreach ($tieneRecursos as $id => $value) {
+                    if($value['num_cuentas'] > 0 && ($value['postulaciones'] > 0 || $value['postulaciones'] == 'Ilimitado')){
+                        array_push($empresa_plan, $id);
+                    }
+                }
+                
+                $planesActivos = Modelo_UsuarioxPlan::planesConCuentas($idUsuario,implode(",",$empresa_plan));
  
+
                 $tags = array(
                     'planesActivos'=>$planesActivos,
                     'breadcrumbs'=>$breadcrumbs
                 );
 
+                $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "ruc_jquery_validator";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('crearEmpresas', $tags);
@@ -128,10 +153,11 @@ class Controlador_Subempresa extends Controlador_Base
 
         $subempresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,false);
         $cantd_empresas = count(Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,true));
-        $puedeCrearCuenta = Modelo_UsuarioxPlan::puedeCrearCuentas($idUsuario,$cantd_empresas);
         $planesActivos = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::EMPRESA,$idUsuario);
         $recursos = Modelo_UsuarioxPlan::tieneRecursos(false,$idUsuario);
-        $tieneRecursos = self::obtieneRecursos($recursos);
+        $emp_plan = self::cuentasXplan($_SESSION['mfo_datos']['subempresas']);
+        $tieneRecursos = self::obtieneRecursos($recursos,$emp_plan);
+        $puedeCrearCuenta = self::puedeCrearCuentas($emp_plan,$recursos);
 
         $breadcrumbs['adminEmpresas'] = 'Administrar Cuentas';
         $url = PUERTO.'://'.HOST.'/adminEmpresas';
@@ -150,16 +176,38 @@ class Controlador_Subempresa extends Controlador_Base
         Vista::render('subempresas', $tags);
     }
 
-    public function obtieneRecursos($tieneRecursos){
+    public function obtieneRecursos($tieneRecursos,$emp_plan){
 
-        $num_post = $num_desc = array();
+        //$num_post = $num_desc = array();
         $valor_post = $valor_desc = 0;
-        $hay_neg_post = $hay_neg_desc = 0;
-        $valor_cuenta = 0;
+        //$hay_neg_post = $hay_neg_desc = 0;
+        $recursos = array();
 
         foreach ($tieneRecursos as $key => $value) {
 
+            $valor_post = $valor_desc = 0;
             if($value['numero_postulaciones'] > 0){
+                $valor_post = $value['numero_postulaciones'];
+            }else if($value['numero_postulaciones'] == -1){
+                $valor_post = 'Ilimitado';  
+            }
+
+            $cantd_emp = 0;
+            if(isset($emp_plan[$value['id_empresa_plan']])){
+
+                $cantd_emp = $value['num_cuenta']-$emp_plan[$value['id_empresa_plan']];
+                if($cantd_emp < 0){
+                    $cantd_emp = 0;
+                }
+
+                //if(($valor_post > 0 && $cantd_emp > 0) || ($valor_post > 0 && $cantd_emp == 0)){
+                    $recursos[$value['id_empresa_plan']] = array('nombre'=>$value['nombre'].' (Fecha de compra: '.$value['fecha_compra'].')','postulaciones'=>$valor_post,'num_cuentas'=>$cantd_emp); 
+                //}
+            }else{
+                
+               $recursos[$value['id_empresa_plan']] = array('nombre'=>$value['nombre'].' (Fecha de compra: '.$value['fecha_compra'].')','postulaciones'=>$valor_post,'num_cuentas'=>$value['num_cuenta']); 
+            }
+           /* if($value['numero_postulaciones'] > 0){
                 $valor_post += $value['numero_postulaciones'];
             }else if($value['numero_postulaciones'] == -1){
                 $hay_neg_post++;  
@@ -173,10 +221,10 @@ class Controlador_Subempresa extends Controlador_Base
 
             if($value['num_cuenta'] > 0){
                 $valor_cuenta += $value['num_cuenta'];
-            }
+            }*/
         }
 
-        if($valor_post > 0){
+        /*if($valor_post > 0){
             array_push($num_post, $valor_post);
         }
 
@@ -195,7 +243,7 @@ class Controlador_Subempresa extends Controlador_Base
         $recursos['publicaciones'] = implode("/",$num_post);
         $recursos['descargas'] = implode("/",$num_desc);
         $recursos['cuentas'] = $valor_cuenta;
-
+*/
         return $recursos;
     }
 
@@ -250,11 +298,11 @@ class Controlador_Subempresa extends Controlador_Base
             }
 
             $GLOBALS['db']->commit();
-            $_SESSION['mostrar_exito'] = 'Se ha eliminado el plan de la empresa satisfactoriamente';
+            $_SESSION['mostrar_exito'] = 'Se han eliminado las ofertas satisfactoriamente';
         }
         catch(Exception $e){
           $GLOBALS['db']->rollback();
-          $_SESSION['mostrar_error'] = 'No se pudo eliminar el plan de la empresa intente de nuevo';  
+          $_SESSION['mostrar_error'] = 'No se pudo eliminar las ofertas, intente de nuevo';  
         }
     }
 
@@ -300,7 +348,8 @@ class Controlador_Subempresa extends Controlador_Base
                 throw new Exception("Ha ocurrido un error al crear empresa, intente nuevamente");
             }
 
-            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($data['plan']);
+            $idPlan = Utils::desencriptar($data['plan']);
+            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlan);
 
             if(isset($data["num_post"]) && $data["num_post"] == -1){
                 $var1 = -1;
@@ -318,11 +367,11 @@ class Controlador_Subempresa extends Controlador_Base
                 $numDescargas = $planPadre['num_descarga_rest']-$var2;
             }
 
-            if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($data['plan'],$numPublicaciones,$numDescargas)){
+            if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($idPlan,$numPublicaciones,$numDescargas)){
                 throw new Exception("Error al actualizar los recursos de la empresa."); 
             }
 
-            if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$data['plan'])){
+            if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$idPlan)){
               throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
             }
 
@@ -338,8 +387,8 @@ class Controlador_Subempresa extends Controlador_Base
     public function asignarRecursos($id,$tipoVista){
 
         try{
-
-            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($_POST['plan']);
+            $idPlan = Utils::desencriptar($_POST['plan']);
+            $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlan);
 
             if(!isset($_POST["num_post"]) || $_POST["num_post"] == -1){
                 $var1 = -1;
@@ -382,12 +431,12 @@ class Controlador_Subempresa extends Controlador_Base
                     throw new Exception("Error al cambiar el estado del plan, por favor intente de nuevo.");   
                 }
             }else{
-                if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($_POST['plan'],$numPublicaciones,$numDescargas)){
-                    throw new Exception("Error al actualizar los recursos de la empresa1."); 
+                if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($idPlan,$numPublicaciones,$numDescargas)){
+                    throw new Exception("Error al actualizar los recursos de la empresa."); 
                 }
 
                 if($tipoVista == 'asignar'){
-                    if (!Modelo_UsuarioxPlan::guardarPlan($id,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$_POST['plan'])){
+                    if (!Modelo_UsuarioxPlan::guardarPlan($id,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$idPlan)){
                       throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
                     }
                 }else{
@@ -418,5 +467,39 @@ class Controlador_Subempresa extends Controlador_Base
           return false;
         }
     }
+
+    public function cuentasXplan($subempresas){
+
+        $emp_plan = array();
+        foreach ($subempresas as $key => $value) {
+
+            if(isset($emp_plan[$value])){
+                $emp_plan[$value] += 1;
+            }else{
+                $emp_plan[$value] = 1;
+            }
+        }
+
+        return $emp_plan;
+    }
+
+    public function puedeCrearCuentas($emp_plan,$recursos){
+        
+        $puedeCrear = 0;
+        foreach ($recursos as $key => $value) {
+
+            if(isset($emp_plan[$value['id_empresa_plan']]) && $emp_plan[$value['id_empresa_plan']] <= $value['num_cuenta'] && ($value['numero_postulaciones'] > 0 || $value['numero_postulaciones'] == -1)){
+                $puedeCrear = 1;
+                break;
+            }else if(!isset($emp_plan[$value['id_empresa_plan']]) && ($value['numero_postulaciones'] > 0 || $value['numero_postulaciones'] == -1)){
+                //echo 'entro'.$value['id_empresa_plan'];
+                $puedeCrear = 1;
+                break;
+            }
+        }
+        return $puedeCrear;
+    }
+
+
 }
 ?>

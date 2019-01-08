@@ -1,30 +1,23 @@
 function colocaError(campo, id, mensaje,btn){
-    nodo = document.getElementById(campo);
-    nodo.innerHTML = '';
-    var elem1 = document.createElement('P');
-    var t = document.createTextNode(mensaje); 
-    elem1.appendChild(t);
 
-    var elem2 = document.createElement("P");             
-    elem2.classList.add('list-unstyled');
-    elem2.classList.add('msg_error');
-    elem2.appendChild(elem1); 
+  nodo = document.getElementById(campo);
+  nodo.innerHTML = '';
+  var elem1 = document.createElement('P');
+  var t = document.createTextNode(mensaje); 
+  elem1.appendChild(t);
 
-    elem2.appendChild(elem1); 
-    nodo.appendChild(elem2); 
+  var elem2 = document.createElement("P");             
+  elem2.classList.add('list-unstyled');
+  elem2.classList.add('msg_error');
+  elem2.appendChild(elem1); 
+  nodo.appendChild(elem2); 
 
-    $("#"+id).addClass('has-error');
+  $("#"+id).addClass('has-error');
+  $("#"+btn).addClass('disabled');
 
-    // $("#"+btn).attr({
-    //     'disabled': 'disabled',
-    // });
- 
-    $("#"+btn).addClass('disabled');
-    // $("#"+btn).attr('disabled', 'disabled');
-
-    if(document.getElementById('form_paypal')){
-      document.getElementById('form_paypal').action = '#';
-    }
+  if(document.getElementById('form_paypal')){
+    document.getElementById('form_paypal').action = '#';
+  }
 }
 
 function quitarError(campo,id){

@@ -239,7 +239,6 @@ class Controlador_Plan extends Controlador_Base {
       $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
     }  
-    Utils::log("FERNANDA FUELTALA");  
     Vista::render($template, $tags);       
   }
 }  

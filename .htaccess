@@ -137,11 +137,11 @@ RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [
 RewriteRule ^adminEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa [L]
 RewriteRule ^adminEmpresas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&page=$1 [L]
 
-RewriteRule ^eliminarPlanEmpresa/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=eliminar&idPlanEmpresa=$1 [L]
+RewriteRule ^eliminarPlanEmpresa/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=eliminar&idPlanEmpresa=$1 [L]
 
-RewriteRule ^asignarPlanEmpresa/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearPlan&idSubEmpresa=$1 [L]
+RewriteRule ^asignarPlanEmpresa/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearPlan&idSubEmpresa=$1 [L]
 
-RewriteRule ^editarPlanEmpresa/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=editarPlan&idPlanEmpresa=$1 [L]
+RewriteRule ^editarPlanEmpresa/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=editarPlan&idPlanEmpresa=$1 [L]
 
 RewriteRule ^crearEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearEmpresas [L]
 RewriteRule ^cuentas/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas [L]

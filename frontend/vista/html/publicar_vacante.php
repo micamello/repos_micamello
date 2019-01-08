@@ -435,15 +435,16 @@
 								<input type="number" id="edad_max" name="edad_max" min="18" class="form-control" value="18">
 							</div>
 						</div>
-
 						
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>¿Oferta urgente? </label>
+
 								<!-- <div class="urgente_class_input">
 									<input class="flipswitch_check" type="checkbox" name="urgente" id="urgente" value="0">
 									<label class="label_checkbox">Oferta Urgente (<small id="text_urg" style="color: #A7A7A7;">No</small>)</label>
 								</div> -->
+
 								<select class="form-control" name="urgente">
 									<?php 
 										foreach (REQUISITO as $key => $value) {

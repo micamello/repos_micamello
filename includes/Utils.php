@@ -345,9 +345,8 @@ class Utils{
     return $username_generated;
   }
 
-  public static function generateRandomString($minimo) {
-      $length = rand($minimo, $minimo+4);
-      // $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  public static function generateRandomNumeric($minimo,$maximo) {
+      $length = rand($minimo, $maximo);      
       $characters = '0123456789';
       $charactersLength = strlen($characters);
       $randomString = '';

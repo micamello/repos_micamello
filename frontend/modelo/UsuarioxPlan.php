@@ -198,11 +198,14 @@ class Modelo_UsuarioxPlan{
 
       if (!empty($idEmpresa)){ 
          $sql .= " AND p.num_cuenta > 0 AND em.id_empresa = ".$idEmpresa." GROUP BY em.id_empresa LIMIT 1";
+         //echo $sql;
         return $GLOBALS['db']->auto_array($sql,array(),false);
       }else{
         $sql .= " AND em.fecha_caducidad IS NOT NULL ORDER BY em.id_empresa";
+        //echo $sql;
         return $GLOBALS['db']->auto_array($sql,array(),true);
       }
+
     }     
   }
 
@@ -213,11 +216,11 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array($idplanpadre),true);
   }
 
-  public static function puedeCrearCuentas($padre,$cantd_empresas){
+  /*public static function puedeCrearCuentas($padre,$cantd_empresas){
 
     if (empty($padre) && empty($cantd_empresas)){ return false; }
 
-      $sql = "SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
+      echo $sql = "SELECT ep.id_empresa_plan FROM mfo_empresa_plan ep 
           INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
           INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
           WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW() 
@@ -225,24 +228,28 @@ class Modelo_UsuarioxPlan{
           AND p.num_cuenta >= ?
           GROUP BY ep.id_empresa;";
     return $GLOBALS['db']->auto_array($sql,array($padre,$cantd_empresas));
-  }
+  }*/
 
   #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
   public static function tieneRecursos($idEmpresaPlan=false,$idEmpresa=false){
 
-    $sql = "SELECT ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta";
-    
-    $sql .= " FROM mfo_empresa_plan ep
+    $sql = "SELECT ep.id_plan,ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta, ep.id_empresa_plan,p.nombre, DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d') as fecha_compra
+     FROM mfo_empresa_plan ep
       INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
-      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW()";
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      WHERE ep.estado = 1 AND p.num_cuenta > 0 AND ep.fecha_caducidad > NOW()
+      ";
 
     if($idEmpresaPlan!=false){
-      $sql.= " AND ep.id_empresa_plan = ".$idEmpresaPlan;
+      $sql .= " AND ep.id_empresa_plan = ".$idEmpresaPlan;
     }else{
       $sql .= " AND ep.id_empresa = ".$idEmpresa;
     }
+    //echo $sql;
+    //$sql .= " GROUP BY ep.id_plan";
 
     return $GLOBALS['db']->auto_array($sql,array(),true);
+
   }
 
   public static function consultarRecursosAretornar($idPlanEmpresa){
@@ -260,7 +267,8 @@ class Modelo_UsuarioxPlan{
     if($recursos['id_empresa_plan_parent'] == ''){
       $recursos['id_empresa_plan_parent'] = $recursos['id_empresa_plan'];
     }
-
+    
+    $cantd_post = $cantd_desc = 0;
     $sql = "SELECT num_publicaciones_rest,num_descarga_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1";
 
     $result = $GLOBALS['db']->auto_array($sql,array(),false);
@@ -280,20 +288,24 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => $cantd_post, 'num_descarga_rest' => $cantd_desc),'id_empresa_plan='.$recursos['id_empresa_plan_parent']);
   }
 
-  public static function planesConCuentas($idEmpresa,$planes=false){
+  public static function planesConCuentas($idEmpresa/*,$cantd_empresas*/,$planes=false,$tipo=0){
 
-    $sql = "SELECT ep.id_empresa_plan, p.nombre, ep.id_plan
+    $sql = "SELECT ep.id_empresa_plan, p.nombre,DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d') as fecha_compra, ep.id_plan
       FROM mfo_empresa_plan ep
       INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
       WHERE ep.estado = 1 AND ep.fecha_caducidad > NOW()
       AND p.num_cuenta > 0 AND ep.id_empresa = $idEmpresa 
-      AND ((ep.num_descarga_rest > 0 OR ep.num_descarga_rest = -1)
-      AND (ep.num_publicaciones_rest > 0 OR ep.num_publicaciones_rest = -1))";
-
+      AND (ep.num_publicaciones_rest > 0 OR ep.num_publicaciones_rest = -1)";
+#AND ((ep.num_descarga_rest > 0 OR ep.num_descarga_rest = -1))
     if(!empty($planes)){
-      $sql .= " AND ep.id_plan NOT IN(".$planes.")";
-    }
 
+      if($tipo == 1){
+        $sql .= " AND ep.id_empresa_plan NOT IN(".$planes.")";
+      }else{
+        $sql .= " AND ep.id_empresa_plan IN(".$planes.")";
+      }
+    }
+//echo $sql;
     return $GLOBALS['db']->auto_array($sql,array(),true);   
   }
 
