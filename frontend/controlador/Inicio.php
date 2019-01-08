@@ -29,12 +29,9 @@ class Controlador_Inicio extends Controlador_Base {
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
 
-
-
     // $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
     // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
     $social_reg = array('gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-
 
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
@@ -54,7 +51,6 @@ class Controlador_Inicio extends Controlador_Base {
     $tags["template_js"][] = "registrar";
     $tags["template_js"][] = "mic";
 
-
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCorreo':        
@@ -72,7 +68,6 @@ class Controlador_Inicio extends Controlador_Base {
       break;
     }
 
-    
   }
 }  
 ?>

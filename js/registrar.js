@@ -9,7 +9,7 @@ if(document.getElementById('button_register')){
 }
 
 $(document).ready(function(){
-	$("#button_register").addClass('disabled');
+	$("#button_register").addClass('disabled');		
 })
 
 if(document.getElementById("#form_register")){
