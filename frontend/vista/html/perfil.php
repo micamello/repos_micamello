@@ -128,14 +128,14 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 									                  $option = '';
 									                  foreach(DOCUMENTACION as $key => $doc){
 									                    $option .= "<option value='".$key."'";
-													                	if ($_SESSION['mfo_datos']['usuario']['tipo_doc'] == $key || (isset($data['tipo_doc']) && $data['tipo_doc'] == $key))
-																		{ 
-																			$option .= " selected='selected'";
-																		}
-																		$option .= ">".$doc."</option>";
-																	  }
-																	  echo $option;
-													                 ?>
+									                	if ($_SESSION['mfo_datos']['usuario']['tipo_doc'] == $key || (isset($data['tipo_doc']) && $data['tipo_doc'] == $key))
+														{ 
+															$option .= " selected='selected'";
+														}
+														$option .= ">".$doc."</option>";
+													  }
+													  echo $option;
+									                 ?>
 									              </select>
 									            </div>
 									          </div>                             

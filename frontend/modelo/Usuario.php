@@ -42,7 +42,7 @@ class Modelo_Usuario{
     if ($rs["tipo_usuario"] == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
                      u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.anosexp, u.status_carrera,                       
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,  u.anosexp, u.status_carrera,                       
                      u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado 
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -181,7 +181,7 @@ public static function existeUsername($username){
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
                      u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.anosexp, u.status_carrera,                       
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia, u.anosexp, u.status_carrera,                       
                      u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, ul.correo, ul.dni, ul.username, ul.tipo_usuario
               FROM mfo_usuario u
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
@@ -217,7 +217,7 @@ public static function existeUsername($username){
 
     if($tipo_usuario == self::CANDIDATO){
 
-        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil']); 
+        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil'],"tipo_doc"=>$data['tipo_doc']); 
 
         if (!empty($data['documentacion'])){          
           $datos['tipo_doc'] = $data['documentacion'];
@@ -885,16 +885,23 @@ WHERE
     if (empty($idpadre)) { return false; }
 
     $strpadre = '';
-    $sql = "SELECT e.id_empresa, e.padre FROM mfo_empresa e
-            WHERE e.padre IN(?) AND e.id_empresa IN (SELECT id_empresa FROM mfo_empresa_plan WHERE id_empresa = e.id_empresa AND estado = 1)";
+    $sql = "SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN(?)";
     $padre = $GLOBALS['db']->auto_array($sql,array($idpadre),true);
     if (!empty($padre) && is_array($padre)){
-      $numreg = count($padre);
+      //$numreg = count($padre);
+      $cuentaPlan = array();
       foreach($padre as $key=>$registro){
-        $strpadre .= $registro["id_empresa"].(($key+1 < $numreg) ? ',' : '');
+
+        if(!isset($cuentaPlan[$registro["id_empresa"]])){
+          $cuentaPlan[$registro["id_empresa"]] = $registro["id_empresa_plan_parent"];
+        }
+        //$strpadre .= $registro["id_empresa"].(($key+1 < $numreg) ? ',' : '');
       }
     }      
-    return $idpadre = $strpadre;    
+    return $cuentaPlan;    
   }
 
   #OBTIENE LAS EMPRESAS HIJAS Y SUS PLANES
@@ -904,7 +911,7 @@ WHERE
 
      $sql = "SELECT ";
     if($obtCantdRegistros == false){
-      $sql .= "e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_Planes,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado";
+      $sql .= "e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_planes,GROUP_CONCAT(ep.id_empresa_plan_parent) AS ids_parents,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes,GROUP_CONCAT(DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d')) AS fecha_compra, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado";
     }else{
       $sql .= "*";
     }
@@ -925,7 +932,7 @@ WHERE
     else{
       $sql .= " GROUP BY e.id_empresa";
     }
-
+    //echo $sql;
     return $GLOBALS['db']->auto_array($sql,array($padre),true);
   }
 

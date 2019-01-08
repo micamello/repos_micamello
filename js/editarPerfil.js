@@ -312,34 +312,6 @@ function fileValidation(fileInput){
   }
 }
 
-/*function validaCampos(tipo){
-
-  var elem = $('#form_editarPerfil').find('input[type!="hidden"]');
-  var btn = 'btn_submitpaypal'; 
-
-  var errors = 0; 
-
-  if(select != 0){
-    for(i=0; i < elem.length; i++){
-      if(elem[i].type != 'image'){
-        if(elem[i].value=="" || elem[i].value==" "){
-          errors++;
-          break;
-        }
-      }
-    }
-  }else{
-    errors++;
-  }
-
-  if(errors > 0 || verifyErrors() > 0){
-    $("#"+btn).addClass('disabled');
-  }else{
-    $("#"+btn).removeClass('disabled');
-  }
-}*/
-
-
 /* Carga de imagen dinamico */
 
 /* Carga de hoja de vida */
@@ -425,8 +397,7 @@ $('#btn_transfer').on('click', function()
     var tag_nivel_idioma = document.getElementById('nivel_idi_of');
     var idioma_selected_select = tag_idioma.options[tag_idioma.selectedIndex];
     var idiomanivel_selected_select = tag_nivel_idioma.options[tag_nivel_idioma.selectedIndex];
-//console.log(idioma_selected_select.text);
-//console.log(idiomanivel_selected_select.text);
+
     if(idioma_selected_select.text != 'Seleccione una opción' && idiomanivel_selected_select.text != 'Seleccione una opción'){
         
         var selected_items = document.getElementsByClassName('listado');
@@ -485,12 +456,7 @@ $('#btn_transfer').on('click', function()
         quitarError(listado_error, listado_group);
         enableBTN();
     }
-    /*else{
 
-        console.log($('#idioma_of option:disabled'));
-        mensaje = "Debe seleccionar un idiomas";
-        colocaError(listado_error, listado_group, mensaje, button_register);
-    }*/
 })
 
 function delete_item_selected(selected_item){

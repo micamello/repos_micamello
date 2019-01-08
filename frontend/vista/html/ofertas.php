@@ -14,6 +14,7 @@
 
 <div class="container">
 	<div class="col-md-12">
+
 	  	<div class="col-md-4 visible-md-inline visible-lg-inline">
 	  		<b>
 				<span style="font-size: 18px;"><i class="fa fa-filter"></i>Filtros</span>
@@ -167,6 +168,9 @@
 			</form>
 		</div>
 
+		
+			
+		
 		<div class="col-md-8">
 			<b>
 				<span style="font-size: 18px;"><?php echo $breadcrumbs[$vista]; ?></span>

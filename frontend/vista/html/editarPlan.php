@@ -14,13 +14,13 @@
                             <div class="panel-body">
                                 <div id="no-more-tables">
                                     <div class="form-group col-md-12">
-                                        <form action = "<?php echo PUERTO."://".HOST;?>/editarPlanEmpresa/<?php echo $idPlanEmpresa; ?>/" method = "post" id="form_editarCuenta" name="form_editarCuenta">
+                                        <form action = "<?php echo PUERTO."://".HOST;?>/editarPlanEmpresa/<?php echo Utils::encriptar($idPlanEmpresa); ?>/" method = "post" id="form_editarCuenta" name="form_editarCuenta">
                                             <div class="row">  
                                               <input type="hidden" name="editarPlan" id="editarPlan" value="1">
 
-                                              <input type="hidden" name="idSubEmpresa" id="idSubEmpresa" value="<?php if(isset($planHijo['id_empresa'])) { echo $planHijo['id_empresa']; } ?>">
+                                              <input type="hidden" name="idSubEmpresa" id="idSubEmpresa" value="<?php if(isset($planHijo['id_empresa'])) { echo Utils::encriptar($planHijo['id_empresa']); } ?>">
 
-                                              <input type="hidden" name="plan" id="plan" value="<?php if(isset($planHijo['id_empresa_plan_parent'])) { echo $planHijo['id_empresa_plan_parent']; } ?>">
+                                              <input type="hidden" name="plan" id="plan" value="<?php if(isset($planHijo['id_empresa_plan_parent'])) { echo Utils::encriptar($planHijo['id_empresa_plan_parent']); } ?>">
 
                                               <input type="hidden" name="post" id="post" value="<?php if(isset($planHijo['num_publicaciones_rest'])) { echo $planHijo['num_publicaciones_rest']; } ?>">
 
@@ -100,7 +100,7 @@
                                             <br><br>
                                             <div class="row">
                                               <div class="form-group">
-                                                <input id="button_editar" type="button" name="btnusu" class="btn btn-success" value="Guardar" onclick="enviarRecursos();">  
+                                                <input id="button_editar" type="button" name="btnusu" class="btn btn-success" value="Guardar">  
                                               </div> 
                                             </div>
                                         </form>

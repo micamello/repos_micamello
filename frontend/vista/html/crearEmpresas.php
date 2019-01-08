@@ -17,12 +17,12 @@
                                               <div class="col-md-offset-3 col-md-6">
                                                 <div class="form-group" id="seccion_plan">
                                                   <label for="plan">Seleccione un Plan <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_plan" class="help-block with-errors"></div>
-                                                  <select class="form-control" name="plan" id="plan"   required>
+                                                  <select class="form-control" name="plan" id="plan">
                                                     <option value="0">Seleccione un plan</option>
                                                     <?php 
                                                     if (!empty($planesActivos)){
                                                       foreach($planesActivos as $key => $v){ 
-                                                        echo "<option value='".$v['id_empresa_plan']."'>".utf8_encode($v['nombre'])."</option>";
+                                                        echo "<option value='".Utils::encriptar($v['id_empresa_plan'])."'>".utf8_encode($v['nombre']).' - Fecha de compra: '.$v['fecha_compra']."</option>";
                                                       }
                                                     } ?>
                                                   </select>
@@ -88,7 +88,7 @@
                                               </div>
                                               <div class="col-md-12" id="seccion_recursos" style="display: none;">
                                                   <hr>
-                                                  <h6 class="text-center">Asignar Recursos</h6>
+                                                  <h6 class="text-center">Asignar Ofertas</h6>
                                                 
                                                   <div id="seccion_postulacion" style="display: none;" >
                                                     <div class="col-md-offset-3 col-md-4">
@@ -133,7 +133,7 @@
                                             <input type="hidden" name="descNum" id="descNum" value="">
                                             <div class="row">
                                               <div class="form-group">
-                                                <input id="button_crear" type="button" name="btnusu" class="btn btn-success disabled" value="Crear Cuenta" onclick="enviarFormulario();">  
+                                                <input id="button_crear" type="button" name="btnusu" class="btn btn-success disabled" value="Crear Cuenta">  
                                               </div> 
                                             </div>
                                         </form>

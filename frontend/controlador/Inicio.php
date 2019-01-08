@@ -7,7 +7,7 @@ class Controlador_Inicio extends Controlador_Base {
     // require_once "includes/fb_api/config.php";
     // $permissions = ['email'];
     // $urlLogin = PUERTO."://".HOST."/facebook.php?tipo_user=1";
-    // $fb_URL = $helper->getLoginUrl(PUERTO."://".HOST."/facebook.php?tipo_user=1", $permissions);
+    //$fb_URL = $helper->getLoginUrl(PUERTO."://".HOST."/facebook.php?tipo_user=1", $permissions);
 
     // GOOGLE
     require_once "includes/gg_api/config.php";
@@ -44,7 +44,7 @@ class Controlador_Inicio extends Controlador_Base {
                   'social'=>$social_reg);
 
     $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "validator";
+    //$tags["template_js"][] = "validator";
     $tags["template_js"][] = "assets/js/main";
     $tags["template_js"][] = "ruc_jquery_validator";
     $tags["template_js"][] = "bootstrap-multiselect";

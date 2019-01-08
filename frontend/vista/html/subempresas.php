@@ -4,40 +4,43 @@
             <section>
                 <div class="container">
                     <div class="col-md-12">
-                        <div>
-                            <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Listado de Cuentas</p>
+                      <p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Listado de Cuentas</p>
+                    </div>  
+
+                    <?php 
+                        $cuentas = $ofertas = '';
+                        $cantd_cuentas = 0;
+                        $recursos = 0;
+                        //print_r($tieneRecursos);
+                        foreach ($tieneRecursos as $key => $value) {
+                            
+                            $cantd_cuentas += $value['num_cuentas'];
+                            $cuentas .= $value['nombre'].': '.$value['num_cuentas'].'<br>';
+                            $ofertas .= $value['nombre'].': '.$value['postulaciones'].'<br>';
+                        }
+                    ?>
+                    <div class="col-md-6 col-md-12">
+                        <div class="caja">
+                            <p style="margin-bottom: 0px;"><b>Cuentas restantes</b></p>
+                            <span><?php echo $cuentas; ?></span>
                         </div>
+                    </div>
+                    <br>
+                     <div class="col-md-6 col-md-12">
+                        <div class="caja">
+                            <p style="margin-bottom: 0px;"><b>Ofertas restantes</b></p>
+                            <span><?php echo $ofertas; ?></span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-md-12">
                         <div class="panel panel-default">
                             <div class="panel-body">
-
                                 <div class="form-group col-md-12" align="right">
-                                    <div class="col-md-<?php if($cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ echo '10'; }else{ echo '12'; } ?>" align="right">
-                                        <span>
-                                            <strong>N° de Cuentas restantes: </strong>
-                                            <span style="color:red" class="parpadea"><?php echo $tieneRecursos['cuentas']-$cantd_empresas; ?></span>
-                                        </span>
-                                        <br>
-
-                                        <?php if(!empty($tieneRecursos['publicaciones'])){ ?>
-                                            <span>
-                                                <strong>N° de Ofertas Restantes: </strong>
-                                                <span style="color:red" class="parpadea"><?php if($tieneRecursos['publicaciones'] == ''){ echo 'No tiene publicaciones'; }else{ echo $tieneRecursos['publicaciones']; } ?></span>
-                                            </span>
-                                            <br>
-                                            <span>
-                                                <strong>N° de Descargas Restantes: </strong>
-                                                <span style="color:red" class="parpadea"><?php if($tieneRecursos['descargas'] == ''){ echo 'No tiene descargas'; }else{ echo $tieneRecursos['descargas']; } ?></span>
-                                            </span>
-                                        <?php }else{ ?>
-                                            <span>
-                                                <strong>N° de Ofertas Restantes: </strong>
-                                                <span style="color:red" class="parpadea">0</span>
-                                            </span>
-                                        <?php } ?>
-                                    </div>
+                                    
                                    <?php 
-                                   if($cantd_empresas <= $tieneRecursos['cuentas'] && !empty($tieneRecursos['publicaciones'])){ ?>
-                                        <div class="col-md-2 icon_oferta" align="right">
+                                   if($cantd_cuentas > 0 && $puedeCrearCuenta == 1){ ?>
+                                        <div class="col-md-12 icon_oferta">
                                             <a href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/"><span id="boton" name="" class="btn btn-md btn-success">
                                             <i class="fa fa-industry " title="Crear nueva empresa"></i> CREAR EMPRESA</span></a>
                                         </div>
@@ -50,17 +53,13 @@
                                                 <th class="text-center">Nombre empresa</th> 
                                                 <th class="text-center">Plan(es) asociado(s)</th>
                                                 <th class="text-center">N° de ofertas restantes</th>
-                                                <th class="text-center">N° de descargas restantes</th>
+                                                <!--<th class="text-center">N° de descargas restantes</th>-->
                                                 <th class="text-center">Estado</th>
-                                                <?php
-                                                
-                                                 if(!empty($puedeCrearCuenta) && ($tieneRecursos['publicaciones'] == 'Ilimitado' || $tieneRecursos['publicaciones'] > 0)){ ?>
-                                                    <th colspan="3" class="text-center">Acciones</th>
-                                                <?php } ?>
+                                                <th colspan="3" class="text-center">Acciones</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        <?php if(!empty($subempresas)){ ?>
+                                        <?php  if(!empty($subempresas)){ ?>
                                             <?php foreach ($subempresas as $key => $value) { ?>
                                                 <style>
                                                     #centrar{
@@ -69,16 +68,19 @@
                                                 </style>
                                                 <?php 
                                                     $planes = explode(",",$value['planes']);
+                                                    $fechas_compra = explode(",",$value['fecha_compra']);
                                                     $num_post = explode(",",$value['num_publicaciones_rest']);
-                                                    $num_desc = explode(",",$value['num_descarga_rest']);
+                                                    //$num_desc = explode(",",$value['num_descarga_rest']);
                                                     $estados = explode(",",$value['estado']);
                                                     $ids_empresasPlans = explode(",",$value['ids_empresasPlans']); 
+                                                    $ids_parents = explode(",",$value['ids_parents']); 
                                                     $fechas_caducidades = explode(",",$value['fechas_caducidades']);
                                                    
                                                     if(!empty($planesActivos)){
                                                         
                                                         //solo se puede agregar un nuevo plan siempre y cuando el o los planes disponibles sean distintos de los planes ya creados y tengan recursos
-                                                        $interseccion_planes = array_diff(explode(",",$planesActivos['planes_activos']), explode(",",$value['ids_Planes']));
+                                                        
+                                                        $interseccion_planes = array_diff(explode(",",$planesActivos['id_empresa_plan']), $ids_parents);
                    
                                                         if(!empty($interseccion_planes)){
                                                             $puedeCrearPlan = '1';
@@ -97,19 +99,34 @@
                                                         if(isset($planes) && is_array($planes)){
 
                                                             $mostrar = 0;
-                                                            foreach ($planes as $key => $dato) { ?>
 
-                                                            <td style="text-align: center;"><?php echo $dato; ?></td>
+                                                            foreach ($planes as $key => $dato) {  ?>
+
+                                                            <td style="text-align: center;"><?php echo $dato.'<br><span style="font-size:10px;">Fecha de compra: '.$fechas_compra[$key].'</span>'; ?></td>
                                                             <td style="text-align: center;"><?php echo $num_post[$key]; ?></td>
-                                                            <td style="text-align: center;"><?php echo $num_desc[$key]; ?></td>
+                                                            <!--<td style="text-align: center;"><?php #echo $num_desc[$key]; ?></td>-->
                                                             <td style="text-align: center;"><?php echo $estados[$key]; ?></td>
 
                                                             <?php 
 
-                                                            if(!empty($puedeCrearCuenta) && ($tieneRecursos['publicaciones'] == 'Ilimitado' || $tieneRecursos['publicaciones'] > 0)){ 
+                                                            #if($puedeCrearCuenta == 1){
 
                                                                 //verificar al editar que mi plan padre tiene recursos para asignarme (solo puedo editar si mi padre tiene recursos del mismo plan que lo creo) y esta activo
-                                                                $puedeEditarCuenta = Modelo_UsuarioxPlan::tieneRecursos($ids_empresasPlans[$key],false);
+                                                            //print_r($tieneRecursos[7]['postulaciones']);
+                                                            //echo '<br>'.$ids_parents[$key]; exit;
+                                                            $puedeEditarCuenta = 0;
+                                                            /*print_r('<br>key: '.$key);
+                                                           print_r('<br>num_post: '.$num_post[$key]); 
+                                                            print_r('<br>tieneRecursos: '.$tieneRecursos[$ids_parents[$key]]['postulaciones']); */
+                               
+                                                            if(isset($tieneRecursos[$ids_parents[$key]]) && (    ($num_post[$key] == 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0) || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] == 0) || ($tieneRecursos[$ids_parents[$key]]['postulaciones'] === 'Ilimitado') || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0)
+                                                            )){
+                                                                //echo '<br>entro: '.$tieneRecursos[$ids_parents[$key]]['postulaciones'];
+                                                                $puedeEditarCuenta = 1;
+                                                            }
+
+
+                                                                /*$puedeEditarCuenta = Modelo_UsuarioxPlan::tieneRecursos($ids_parents[$key],false);
 
                                                                 if(!empty($puedeEditarCuenta[0]['numero_postulaciones'])){
                                                                     $numero_postulaciones = $puedeEditarCuenta[0]['numero_postulaciones'];
@@ -121,38 +138,39 @@
                                                                     $numero_descargas = $puedeEditarCuenta[0]['numero_descarga'];
                                                                 }else{
                                                                    $numero_descargas = '0'; 
-                                                                }
-
-                                                                if($fechas_caducidades[$key] >= date('Y-m-d H:i:s') || $estados[$key] != 'Inactivo'/*&& $numero_postulaciones != -1*/){ ?>
-                                                                    <td class="icon_oferta" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/editarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>">
-                                                                        <i class="fa fa-edit" title="Editar plan de la empresa"></i>
+                                                                }encriptar($texto)
+desencriptar($texto)
+ echo '<br>puedeEditar: '.$puedeEditarCuenta.'<br>';*/
+                                                                if(($fechas_caducidades[$key] >= date('Y-m-d H:i:s') || $estados[$key] != 'Inactivo') && $puedeEditarCuenta == 1){ ?>
+                                                                    <td class="icon_oferta" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/editarPlanEmpresa/'.Utils::encriptar($ids_empresasPlans[$key]).'/'; ?>">
+                                                                        <i class="fa fa-edit" title="Editar ofertas"></i>
                                                                     </a></td>
                                                                 <?php }else{ ?>
                                                                         <td class="icon_oferta" style="text-align: center;">
-                                                                            <i class="fa fa-edit icon_deshabilitados" title="Editar plan de la empresa"></i>
+                                                                            <i class="fa fa-edit icon_deshabilitados" title="Editar ofertas"></i>
                                                                         </td>
                                                                 <?php } 
 
                                                                 if($estados[$key] != 'Inactivo'){ ?>
-                                                                    <td class="icon_oferta" style="text-align: center;"><a onclick="abrirModal('Está seguro que desea eliminar las ofertas?','alert_descarga','<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.$ids_empresasPlans[$key].'/'; ?>','btn_modal');">
-                                                                        <i class="fa fa-trash " title="Eliminar ofertas de la empresa"></i>
+                                                                    <td class="icon_oferta" style="text-align: center;"><a onclick="abrirModal('Está seguro que desea eliminar las ofertas?','alert_descarga','<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.Utils::encriptar($ids_empresasPlans[$key]).'/'; ?>','btn_modal');">
+                                                                        <i class="fa fa-trash " title="Liberar ofertas"></i>
                                                                     </a></td>
                                                             <?php }else{ ?>
                                                                     <td class="icon_oferta" style="text-align: center;">
-                                                                        <i class="fa fa-trash  icon_deshabilitados" title="Eliminar ofertas de la empresa"></i></td>
+                                                                        <i class="fa fa-trash  icon_deshabilitados" title="Liberar ofertas"></i></td>
                                                             <?php }
 
                                                                  if($mostrar == 0){
                             
-                                                                    if(!empty($tieneRecursos['publicaciones']) && !empty($puedeCrearPlan)){ ?>
-                                                                        <td class="icon_oferta" style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/asignarPlanEmpresa/'.$value['id_empresa'].'/'; ?>">
-                                                                            <i class="fa fa-plus " title="Asignar recursos"></i>
+                                                                    if(!empty($puedeCrearPlan)){ ?>
+                                                                        <td class="icon_oferta" style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/asignarPlanEmpresa/'.Utils::encriptar($value['id_empresa']).'/'; ?>">
+                                                                            <i class="fa fa-plus " title="Asignar ofertas"></i>
                                                                         </a></td>
                                                                 <?php } else{ ?>
-                                                                            <td class="icon_oferta" style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><i class="fa fa-plus  icon_deshabilitados" title="Asignar recursos"></i></td>
-                                                                    <?php }
+                                                                            <td class="icon_oferta" style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><i class="fa fa-plus  icon_deshabilitados" title="Asignar ofertas"></i></td>
+                                                                 <?php }
                                                                 }
-                                                        }
+                                                       # }
                                                         $mostrar++; ?>
                                                 </tr>
                                                 <?php  } ?>

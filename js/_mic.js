@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 6f2caed42bfbd8daa742584f20dbecf04dcab762
-function validarUsuario(username){
+/*function validarUsuario(username){
 
   if(username == null || username.length == 0 || /^\s+$/.test(username)){
     colocaError("err_username","seccion_username","El campo no puede ser vac\u00EDo","btn_sesion");
@@ -28,9 +24,9 @@ function validarClave(){
   }else{
     quitarError("err_password","seccion_password");
   }
-}
+}*/
 
-function validarClavesRecuperar(){
+/*function validarClavesRecuperar(){
 
     var expreg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     var err_campo = "El campo no puede ser vac\u00EDo";
@@ -68,12 +64,12 @@ function validarCorreo(correo,err_correo,seccion_correo,btn){
   }else{
     quitarError(err_correo,seccion_correo);
   }
-}
+}*/
 
 function validaForm(tipo,btn){
 
-  //tipo de formulario a evaluar 1 es login y 2 recuperar contrase√±a
-  if(tipo == 1){
+  //tipo de formulario a evaluar 1 es login y 2 recuperar contraseÒa
+  /*if(tipo == 1){
     var username = document.getElementById('username').value;
     validarUsuario(username);
     validarClave();
@@ -88,22 +84,22 @@ function validaForm(tipo,btn){
       validarCorreo(correo,"err_correo","seccion_correo",btn);
     }
     validaCampos(2,btn);
-  }
+  }*/
 
   if(tipo == 3){
     var nombres = document.getElementById('nombres').value;
-    var correo = document.getElementById('correo1').value;
-    var descripcion = document.getElementById('descripcion').value;
-    var telefono = document.getElementById('telefono').value;    
+    //var correo = document.getElementById('correo1').value;
+    //var descripcion = document.getElementById('descripcion').value;
+    //var telefono = document.getElementById('telefono').value;    
     validarInput(nombres,"err_nombres","seccion_nombres",btn);
-    validarCorreo(correo,"err_correo","seccion_correo",btn);
-    validarDir(descripcion,"err_descripcion", "seccion_descripcion",btn);
-    validarNumTelf(telefono,"err_telefono","seccion_telefono",btn);
+    //validarCorreo(correo,"err_correo","seccion_correo",btn);
+    //validarDir(descripcion,"err_descripcion", "seccion_descripcion",btn);
+    //validarNumTelf(telefono,"err_telefono","seccion_telefono",btn);
     validaCampos(3,btn);
   }
 }
 
-function validarNumTelf(num,err_telf,seccion_telf,btn){
+/*function validarNumTelf(num,err_telf,seccion_telf,btn){
 
   var expreg_telf = /^[0-9]+$/;
   var error = 0;
@@ -122,12 +118,12 @@ function validarNumTelf(num,err_telf,seccion_telf,btn){
       quitarError(err_telf,seccion_telf);
   }
   return error;
-}
+}*/
 
-function validarDir(direccion,err_dir, seccion_dir,btn){
+/*function validarDir(direccion,err_dir, seccion_dir,btn){
 
   var error = 0;
-  var expreg1 = /^[a-z A-Z0-9√±√ë√Å√â√ç√ì√ö√°√©√≠√≥√∫]+$/;
+  var expreg1 = /^[a-z A-Z0-9Ò—¡…Õ”⁄·ÈÌÛ˙]+$/;
 
   //console.log(expreg1.test(direccion));
   if(direccion == null || direccion.length == 0 || /^\s+$/.test(direccion)){
@@ -144,20 +140,17 @@ function validarDir(direccion,err_dir, seccion_dir,btn){
       quitarError(err_dir,seccion_dir);
   }
   return error;
-}
+}*/
 
 function validarInput(campo,err,err_campo,btn){
 
   var error = 0;
-  var expreg = /^[a-z √Å√â√ç√ì√ö√°√©√≠√≥√∫√±√ë]+$/i;  
+  var expreg = /^[a-z ¡…Õ”⁄·ÈÌÛ˙Ò—]+$/i;  
   if(campo == null || campo.length == 0 || /^\s+$/.test(campo)){
     colocaError(err,err_campo,"El campo no puede ser vac\u00EDo",btn);
     error = 1; 
   }else if(expreg.test(campo) == false){
-<<<<<<< HEAD
     console.log(campo + "/" + expreg);
-=======
->>>>>>> 6f2caed42bfbd8daa742584f20dbecf04dcab762
     colocaError(err,err_campo,"Formato incorrecto, solo letras",btn);
     error = 1;
   }else{
@@ -194,12 +187,8 @@ function validaCampos(form,btn){
     $('#'+btn).removeAttr('disabled');   
   }
 }
-<<<<<<< HEAD
-=======
 
->>>>>>> 6f2caed42bfbd8daa742584f20dbecf04dcab762
-
-$('.modal').on('hidden.bs.modal', function(){
+/*$('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
 
     $(this).find('#form_register')[0].reset();
@@ -251,19 +240,19 @@ function pass_hidden(obj){
   input_reveal.setAttribute("type", "password");
   obj.firstChild.setAttribute("class", "fa fa-eye");
   obj.setAttribute("onclick", "pass_reveal(this)");
-}
+}*/
 
 $(document).ready(function(){
-  if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){
+  /*if (document.getElementsByName("nombres_res") && document.getElementsByName("valor_res")){
     var nombres_res = document.getElementsByName("nombres_res");
     var valor_res = document.getElementsByName("valor_res");
       mostrarGrafico(nombres_res, valor_res);
-  }
-  expreg = /^[a-z √Å√â√ç√ì√ö√°√©√≠√≥√∫√±√ë]+$/i;  
+  }*/
+  expreg = /^[a-z ¡…Õ”⁄·ÈÌÛ˙Ò—]+$/i;  
   console.log(expreg);
 });
 
-function mostrarGrafico(label, valor){
+/*function mostrarGrafico(label, valor){
   var labels = [];
   var valores = [];
   for (var i = label.length - 1; i >= 0; i--) {
@@ -312,7 +301,7 @@ function mostrarGrafico(label, valor){
           responsive: true,
           title:{
             display:false,
-            text:'Resultados evaluaci√≥n',
+            text:'Resultados evaluaciÛn',
             fontSize:25
           },
           legend:{
@@ -356,4 +345,4 @@ function mostrarGrafico(label, valor){
           }
         }
       });
-  } 
+  }  */

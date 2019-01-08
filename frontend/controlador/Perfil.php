@@ -151,6 +151,7 @@ class Controlador_Perfil extends Controlador_Base
                   $campos['dni'] = 1;
                   $campos['documentacion'] = 1;
                 }
+
             } else {
 
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
@@ -347,7 +348,6 @@ class Controlador_Perfil extends Controlador_Base
                 if (!Modelo_UsuarioxNivel::updateNiveles($array_data_nivel, $data['nivel_interes'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
                 }
-
             }            
 
             $GLOBALS['db']->commit();

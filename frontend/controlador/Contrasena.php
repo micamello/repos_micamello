@@ -40,15 +40,15 @@ class Controlador_Contrasena extends Controlador_Base {
         throw new Exception("El enlace para recuperación de contraseña ya no es válida, por favor ingrese denuevo su correo para el envío");        
       }  
       if ( Utils::getParam('confirm_form') == 1 ){
-        $campos = array('password'=>1,'password2'=>1);
+        $campos = array('password1'=>1,'password2'=>1);
         $data = $this->camposRequeridos($campos);
-        if ($data["password"] != $data["password2"]){
+        if ($data["password1"] != $data["password2"]){
           throw new Exception("Contraseña y confirmación de contraseña no coinciden");
         }
-        if (!Utils::valida_password($data["password"])){
+        if (!Utils::valida_password($data["password1"])){
           throw new Exception("Contraseña no válida, debe contener mínimo 8 caracteres, una letra mayúscula y un número");
         }
-        if (!Modelo_Usuario::modificarPassword($data["password"],$id_usuario_login)){
+        if (!Modelo_Usuario::modificarPassword($data["password1"],$id_usuario_login)){
           throw new Exception("Error al modificar la contraseña, por favor intente denuevo"); 
         }
         $_SESSION['mostrar_exito'] = "Contraseña modificada exitosamente"; 
@@ -58,10 +58,10 @@ class Controlador_Contrasena extends Controlador_Base {
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
     } 
-    $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
+    //$social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
     // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
 
-    $tags = array('social'=>$social_reg);
+    //$tags = array('social'=>$social_reg);
     $tags["template_js"][] = "modal-register";
     $tags["template_js"][] = "validator";
     $tags["template_js"][] = "assets/js/main";     
@@ -92,13 +92,13 @@ class Controlador_Contrasena extends Controlador_Base {
 
     if ( Utils::getParam('forgot_form') == 1 ){
       try{
-        $campos = array('correo'=>1);
+        $campos = array('correo1'=>1);
         $data = $this->camposRequeridos($campos);  
         
-        if (!Utils::es_correo_valido($data["correo"])){
+        if (!Utils::es_correo_valido($data["correo1"])){
           throw new Exception("Dirección de correo electrónico no valido");
         }
-        $datousuario = Modelo_Usuario::busquedaPorCorreo($data["correo"]);
+        $datousuario = Modelo_Usuario::busquedaPorCorreo($data["correo1"]);
         if (empty($datousuario)){
           throw new Exception("Dirección de correo electrónico no existe");
         }                           
@@ -123,13 +123,13 @@ class Controlador_Contrasena extends Controlador_Base {
     $arrinteres = Modelo_Interes::obtieneListado();
     
     $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-    // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
+    //$social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
 
     $tags = array('social'=>$social_reg);
 
     $tags["arrarea"] = $arrarea;
     $tags["intereses"] = $arrinteres;
-    $tags["social"] = $social_reg;
+    //$tags["social"] = $social_reg;
     $tags["template_js"][] = "modal-register";
     $tags["template_js"][] = "validator";
     $tags["template_js"][] = "assets/js/main";

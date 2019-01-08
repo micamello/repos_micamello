@@ -27,9 +27,9 @@ class Controlador_Login extends Controlador_Base {
  
     if ( Utils::getParam('login_form') == 1 ){
       try{
-        $campos = array('username'=>1, 'password'=>1);        
+        $campos = array('username'=>1, 'password1'=>1);        
         $data = $this->camposRequeridos($campos);                        
-        $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password"]);
+        $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password1"]);
         if (!empty($usuario)){  
           if ($usuario["id_pais"] != SUCURSAL_PAISID){
             $sucursal = Modelo_Sucursal::consultaxPais($usuario["id_pais"]);
@@ -62,7 +62,7 @@ class Controlador_Login extends Controlador_Base {
     } 
 
     $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-    // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
+    $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
 
     $tags = array('social'=>$social_reg);
  
@@ -70,7 +70,6 @@ class Controlador_Login extends Controlador_Base {
     $tags["intereses"] = Modelo_Interes::obtieneListado();
  
     $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "validator";
     $tags["template_js"][] = "assets/js/main"; 
     $tags["template_js"][] = "ruc_jquery_validator";
     $tags["template_js"][] = "bootstrap-multiselect";

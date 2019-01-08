@@ -105,7 +105,7 @@
               <div class="col-md-6">           
                 <div id="seccion_dir" class="form-group">    
                   <label>Direcci&oacute;n:</label><div id="err_dir" class="help-block with-errors"></div>
-                  <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ejemplo: Samanes V" minlength="10" maxlength="100">
+                  <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ejemplo: Samanes V" maxlength="100">
                 </div>
               </div>
               <div class="col-md-6">
@@ -169,7 +169,7 @@
                 <div class="col-md-6"> 
                   <div id="seccion_dirP" class="form-group"> 
                     <label>Direcci&oacute;n:</label><div id="err_dirP" class="help-block with-errors"></div> 
-                    <input type="text" name="direccionP" id="direccionP" maxlength="100" class="form-control" minlength="10">  
+                    <input type="text" name="direccionP" id="direccionP" maxlength="100" class="form-control">  
                   </div>
                 </div>
 
