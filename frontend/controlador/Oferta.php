@@ -68,6 +68,7 @@ class Controlador_Oferta extends Controlador_Base{
           case 'filtrar':
 
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();
+            $arrnivel      = Modelo_Interes::obtieneListadoAsociativo();
             $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
             $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
             $array_empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,true);
@@ -180,14 +181,33 @@ class Controlador_Oferta extends Controlador_Base{
 
             $filtros = $_SESSION['mfo_datos']['Filtrar_ofertas'];
             if($filtros['A'] == 0 && $filtros['P'] == 0 && $filtros['J'] == 0 && $filtros['S'] == 0 && $filtros['Q'] == 0){
-              
-              $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes);     
 
-              //Para obtener la cantidad de registros totales de la consulta
-              $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
+              if(isset($_POST['filtro'])){
+                $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
+              }
+
+              if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){
+
+                $filtro = 1;
+                $_SESSION['mfo_datos']['filtro'] = 0;
+                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
+
+                //Para obtener la cantidad de registros totales de la consulta
+                $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
+
+              }else{
+
+                $filtro = 0;
+                $_SESSION['mfo_datos']['filtro'] = 1;
+                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes);     
+
+                //Para obtener la cantidad de registros totales de la consulta
+                $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes); 
+              }
 
             }else{
 
+              $filtro = 1;
               $ofertas = Modelo_Oferta::filtrarOfertas($filtros,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
 
               //Para obtener la cantidad de registros totales de la consulta
@@ -205,6 +225,7 @@ class Controlador_Oferta extends Controlador_Base{
             $tags = array(
                 'breadcrumbs'=>$breadcrumbs,
                 'arrarea'       => $arrarea,
+                'arrnivel'       => $arrnivel,
                 'arrprovincia'  => $arrprovincia,
                 'jornadas'      => $arrjornadas,
                 'ofertas'       => $ofertas,
@@ -212,6 +233,7 @@ class Controlador_Oferta extends Controlador_Base{
                 'autopostulaciones_restantes'=>$autopostulaciones_restantes,
                 'link'=>$link,
                 'vista'=>$vista,
+                'filtro'=>$filtro,
                 'aspirantesXoferta'=>$aspirantesXoferta,
                 'array_empresas_hijas'=>$array_empresas_hijas
             );
@@ -425,32 +447,62 @@ class Controlador_Oferta extends Controlador_Base{
                 }
             }
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();
+            $arrnivel      = Modelo_Interes::obtieneListadoAsociativo();
             $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
             $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
             $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
+            if($vista == 'oferta'){
 
-            $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes);     
+              if(isset($_POST['filtro'])){
+                $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
+              }
 
-            //Para obtener la cantidad de registros totales de la consulta
-            $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
+              if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){
 
-            if($vista != 'postulacion'){
+                $filtro = 1;
+                $_SESSION['mfo_datos']['filtro'] = 0;
+                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
+
+                //Para obtener la cantidad de registros totales de la consulta
+                $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
+
+              }else{
+
+                $filtro = 0;
+                $_SESSION['mfo_datos']['filtro'] = 1;
+                $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes);     
+
+                //Para obtener la cantidad de registros totales de la consulta
+                $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes); 
+              }
+            }
+            
+            if($vista != 'postulacion'){             
                 $autopostulaciones_restantes = Modelo_UsuarioxPlan::publicacionesRestantes($idUsuario);
                 $breadcrumbs['oferta'] = 'Ofertas de empleo';
             }else{
+
+              $filtro = 0;
+              $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
+              
+              //Para obtener la cantidad de registros totales de la consulta
+              $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
               $breadcrumbs['postulacion'] = 'Mis postulaciones';
             }
 
             $tags = array(
                 'breadcrumbs'=>$breadcrumbs,
                 'arrarea'       => $arrarea,
+                'arrnivel'      => $arrnivel,
                 'arrprovincia'  => $arrprovincia,
                 'jornadas'      => $jornadas,
                 'ofertas'       => $ofertas,
                 'enlaceCompraPlan'=>$enlaceCompraPlan,
                 'autopostulaciones_restantes'=>$autopostulaciones_restantes,
                 'page' => $page,
+                'filtro'=>$filtro,
+                //'sinFiltro'=>$sinFiltro,
                 'vista'=>$vista
             );
             $tags["template_js"][] = "tinymce/tinymce.min";

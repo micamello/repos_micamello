@@ -1,4 +1,46 @@
 <div class="container"> 
+	<?php if(isset($filtro) && $vista == 'oferta'){ ?>
+		<div class="alert alert-warning col-md-12"> 
+			<form role="form" name="filtro" id="filtro" method="post" action="<?php echo PUERTO.'://'.HOST.'/'.$vista.'/'; ?>">
+			<?php if($filtro == 0){ ?>
+				<h6><b>Las ofertas aqu&iacute; presentadas estan filtradas por las siguientes caracteristicas:</b></h6>
+
+				<?php if(isset($_SESSION['mfo_datos']['usuarioxarea'])){
+					echo '<br><b>&Aacute;reas de inter&eacute;s: </b>';
+					$areas = '';
+					foreach ($_SESSION['mfo_datos']['usuarioxarea'] as $key => $value) {
+						$areas.=utf8_encode($arrarea[$value]).',';
+					}
+					echo $areas = substr($areas,0,strlen($areas)-1);
+				} ?>
+
+				<?php if(isset($_SESSION['mfo_datos']['usuarioxnivel'])){
+					echo '<br><b>Nivel de inter&eacute;s: </b>';
+					$niveles = '';
+					foreach ($_SESSION['mfo_datos']['usuarioxnivel'] as $key => $value) {
+						$niveles.=utf8_encode($arrnivel[$value]).',';
+					}
+					echo $niveles = substr($niveles,0,strlen($niveles)-1);
+				} ?>
+
+				<?php if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 0){
+					echo '<br><b>Cambio de Residencia:</b> SI';
+		         
+		        }else{ 
+		        	echo '<br>Cambio de Residencia: NO';
+		         } ?>
+
+		         
+				<br><br>Si desea ver todas las ofertas sin filtro --> <a style="cursor:pointer" class="Button"  onclick="document.forms['filtro'].submit()"><b>Presione aquí</b></a>
+				
+			<?php }else{ ?>
+				Si desea ver las ofertas con los filtros configurados en su cuenta --> <a style="cursor:pointer" class="Button"  onclick="document.forms['filtro'].submit()"> <b>Presione aquí</b></a>
+				
+			<?php } ?>
+				<input type="hidden" name="filtro" id="filtro" value="<?php echo $filtro; ?>">
+			</form>
+		</div>
+	<?php } ?>
 	<div class="col-md-12"> 
 		<?php if (trim($vista) == 'oferta' && isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { ?> 
 			<div class="col-md-12" align="right" > 

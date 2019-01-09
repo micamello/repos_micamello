@@ -69,24 +69,25 @@ class Modelo_Oferta{
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= " AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
-    
+
+    if($areasInteres != false){
+      $sql .= " AND a.id_area IN(".$areasInteres.")"; 
+    }
+
+    if($nivelInteres != false){
+      $sql .= " AND o.id_nivelInteres IN(".$nivelInteres.")"; 
+    }
+
+    if($cambioRes != false){
+      $sql .= " AND c.id_ciudad = ".$cambioRes; 
+    }
+
     if($obtCantdRegistros == false){
-
-      if($areasInteres != false){
-        $sql .= " AND a.id_area IN(".$areasInteres.")"; 
-      }
-
-      if($nivelInteres != false){
-        $sql .= " AND o.id_nivelInteres IN(".$nivelInteres.")"; 
-      }
-
-      if($cambioRes != false){
-        $sql .= " AND c.id_ciudad = ".$cambioRes; 
-      }
 
       $sql .= " ORDER BY o.fecha_creado DESC";
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      //echo $sql;
     }else{
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $sql .= " ORDER BY pos.tipo DESC";
