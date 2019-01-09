@@ -300,13 +300,13 @@
 													}
 
 													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
-														echo ' | <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.$o['id_ofertas'].'/1/">Ver Aspirantes ( '.$cantd.' )</a>';
+														echo ' <br> <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.$o['id_ofertas'].'/1/">Ver Aspirantes ( '.$cantd.' )</a>';
 
 													}elseif($cantd == 0){
-														echo ' | <span class="btn-xs btn-danger parpadea">No tiene Aspirantes ( '.$cantd.' )</span>';
+														echo ' <br> <span class="btn-xs btn-danger parpadea">No tiene Aspirantes ( '.$cantd.' )</span>';
 													}else{
 
-														echo ' | <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver Aspirantes\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$cantd.' )</span>';
+														echo ' <br> <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver Aspirantes\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$cantd.' )</span>';
 													}
 												}
 												?>

@@ -47,7 +47,7 @@
 
 							<!-- <a onclick="imprimir('contenido_imprimir');" id="boton_imprimir" class="btn btn-warning min_btn btn-xs">Imprimir datos <i class="fa fa-print"></i></a> -->
 							
-							<a href="<?php echo PUERTO."://".HOST."/fileGEN/datousuario/".$infoUsuario['username']."/".$vista."/".$id_oferta."/" ?>" class="btn btn-info btn-xs" target="_blanked">Descargar datos <i class="fa fa-file-pdf-o"></i></a>
+							<a href="<?php echo PUERTO."://".HOST."/fileGEN/datousuario/".$infoUsuario['username']."/".$vista."/".$id_oferta."/" ?>" class="btn btn-info btn-xs" target="_blanked">Imprimir datos <i class="fa fa-file-pdf-o"></i></a>
 							<!-- <a id="print" target="_blanked">Descargar datos <i class="fa fa-file-pdf-o"></i></a> -->
 							<br><br>
 							<div class="col-md-5 col-md-offset-1 form-group">
