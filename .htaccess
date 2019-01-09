@@ -181,8 +181,13 @@ RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]
 RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&page=$5 [L]
 ###########################################################################################################################################
 
-#informePDF
-RewriteRule ^informePDF/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=informePDF&username=$1 [L]
+#generarPDF
+RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&username=$2 [L]
+
+#datosPDF
+RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&username=$2&vista=$3&id_oferta=$4 [L]
 
 #Aspirantes
 RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2&vista=$3 [L]
+
+

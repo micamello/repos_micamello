@@ -1,4 +1,3 @@
-
 function validarUsuario(username){
 
   if(username == null || username.length == 0 || /^\s+$/.test(username)){
@@ -151,6 +150,7 @@ function validarInput(campo,err,err_campo,btn){
     colocaError(err,err_campo,"El campo no puede ser vac\u00EDo",btn);
     error = 1; 
   }else if(expreg.test(campo) == false){
+    console.log(campo + "/" + expreg);
     colocaError(err,err_campo,"Formato incorrecto, solo letras",btn);
     error = 1;
   }else{
@@ -187,7 +187,6 @@ function validaCampos(form,btn){
     $('#'+btn).removeAttr('disabled');   
   }
 }
-
 
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
@@ -249,6 +248,8 @@ $(document).ready(function(){
     var valor_res = document.getElementsByName("valor_res");
       mostrarGrafico(nombres_res, valor_res);
   }
+  expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;  
+  console.log(expreg);
 });
 
 function mostrarGrafico(label, valor){
@@ -324,7 +325,7 @@ function mostrarGrafico(label, valor){
           scales: {
             yAxes: [{
                 ticks: {
-                  min: 5
+                  min: 0
                 },
                 gridLines: {
                     display:false
@@ -344,4 +345,38 @@ function mostrarGrafico(label, valor){
           }
         }
       });
-  } 
+  }  
+
+// $(document).ready(function(){
+//   html2canvas(document.getElementById("myChart"), {
+//     dpi: 300, // Set to 300 DPI
+//     scale: 69, // Adjusts your resolution
+//     onrendered: function(canvas) {
+//       var img = canvas.toDataURL("image/png", 1);
+//       console.log(img);
+//       // document.getElementById('img_2').appendChild(canvas);
+//       $('#img_val').val(canvas.toDataURL("image/png"));
+//       console.log($('#img_val').val());
+//     }
+//   });
+// });
+
+  // this.style.display = "none";
+  // var w = document.getElementById("myChart").offsetWidth;
+  // var h = document.getElementById("myChart").offsetHeight;
+  // html2canvas(document.getElementById("myChart"), {
+  //   dpi: 300, // Set to 300 DPI
+  //   scale: 3, // Adjusts your resolution
+  //   onrendered: function(canvas) {
+  //     var img = canvas.toDataURL("image/png", 1);
+  //     var doc = new jsPDF('L', 'px', [w, h]);
+  //     doc.addImage(img, 'JPEG',   0,  0, w, h);
+  //     doc.save('sample-file.pdf');
+  //   }
+  // });
+  // this.style.display = "";
+
+// html2canvas(document.querySelector("#myChart")).then(canvas => {
+//     document.body.appendChild(canvas)
+// });
+

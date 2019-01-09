@@ -51,7 +51,6 @@ class Controlador_Inicio extends Controlador_Base {
     $tags["template_js"][] = "registrar";
     $tags["template_js"][] = "mic";
 
-
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCorreo':        
@@ -69,7 +68,6 @@ class Controlador_Inicio extends Controlador_Base {
       break;
     }
 
-    
   }
 }  
 ?>

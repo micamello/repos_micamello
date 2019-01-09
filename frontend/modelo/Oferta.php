@@ -201,6 +201,12 @@ class Modelo_Oferta{
   }
 
   public static function guardarOferta($data, $id_reqOf, $id_plan, $id_empresa){
+
+    // if (empty($data)) {return false;}
+    // $urgente = $data['urgente'];
+    // if($data['urgente'] != null || $data['urgente'] != ""){
+    //   $urgente = 1;
+    // }
     $urgente = $data['urgente'];
     $result = $GLOBALS['db']->insert('mfo_oferta', array("id_empresa"=>$id_empresa, "titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>2, "fecha_creado"=>date("Y-m-d H:i:s"), "tipo"=>$urgente, "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_empresa_plan"=>$id_plan));
     return $result;

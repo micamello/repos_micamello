@@ -69,14 +69,17 @@ function obtieneControlador($nombre){
     case 'aspirante':
       return 'Aspirante';
     break;
-    case 'informePDF':
-      return 'InformePDF';
+    case 'fileGEN':
+      return 'GenerarPDF';
     break;
     case 'notificacion':
       return 'Notificacion';
     break;
     case 'subempresa':
       return 'Subempresa';
+    break;
+    case 'datosUsuario':
+      return 'Aspirante';
     break;
     default:
       return 'Inicio'; 

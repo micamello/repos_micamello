@@ -110,6 +110,7 @@ class Controlador_Publicar extends Controlador_Base {
       Vista::render('publicar_vacante', $tags);
   }
   public function validarCampos($data){
+
     if(ctype_space($descripcion) && (empty($descripcion) || $descripcion == "")){
       throw new Exception("El campo descripción es obligatorio");
     }

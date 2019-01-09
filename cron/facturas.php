@@ -15,6 +15,7 @@ $obj_facturacion->descripdetalle = 'Camellito Simple';
 $xml = $obj_facturacion->generarFactura();
 $obj_facturacion->sign(RUTA_INCLUDES."facturae/widman_ivan_hidrovo_benalcazar.p12", null, "Amor2018"); 
 $xml_final = $obj_facturacion->injectSignature($xml);
+
 $xml_prueba = '<?xml version="1.0" encoding="UTF-8"?>
 <factura id="comprobante" version="1.1.0">
     <infoTributaria>
@@ -237,7 +238,6 @@ $options = Array(
 $soap = new SoapClient($wsdl, $options);
 $result = $soap->validarComprobante($params); 
 print_r($result);
-     
 ?>
 
 <html>
@@ -247,6 +247,7 @@ print_r($result);
 <body>
   <?php
    echo "<br><textarea cols=100 rows=30>".$xml_final."</textarea>"; 
+
    echo "<br><textarea cols=100 rows=30>".$xml_prueba."</textarea>"; 
    //echo "<br><textarea cols=100 rows=30>".$byte_array."</textarea>"; 
    //print_r($byte_array);

@@ -8,11 +8,11 @@
 <div class="container" style="text-align: left;">
     <div class="panel panel-default col-md-6">
         <div class="panel-body">
-            <form role="form" name="form_recomendaciones" id="form_recomendaciones" method="post" action="<?php echo PUERTO."://".HOST;?>/recomendacion/">
+            <form role="form" id="form_recomendaciones" method="post" action="<?php echo PUERTO."://".HOST;?>/recomendacion/">
                 <div class="col-md-12">
                     <div class="form-group" id="seccion_nombres">
                         <label for="nombres">Nombres</label><div id="err_nombres" class="help-block with-errors"></div>
-                        <input class="form-control" type="text" id="nombres" name="nombres" onkeyup="validarInput(this.value,'err_nombres','seccion_nombres','recomendaciones')"/>
+                        <input class="form-control" type="text" name="nombres" id="nombres" onkeyup="validaForm(3,'recomendaciones')"/>
                     </div>
                 </div>
                 <div class="col-md-12">
@@ -43,9 +43,7 @@
     </div>
     <div class="col-md-6">
         <div class="" align="center" style="margin: auto 0; margin-top: 80px;">
-            <img src="<?php echo PUERTO."://".HOST."/imagenes/logo.png";?>" class="img-responsive" style="max-width:100%;">
+            <img src="<?php //echo PUERTO."://".HOST."/imagenes/logo.png";?>" class="img-responsive" style="max-width:100%;">
         </div>
     </div>
 </div>
-
-        
