@@ -653,16 +653,18 @@ class Controlador_GenerarPDF extends Controlador_Base
     // $mpdf->WriteHTML($label_asp_salarial);
 
     // // $mpdf->WriteHTML($cajainicio);
-    // if($datos_usuario['asp_sararial']['asp_salarial'] !== null || !empty($datos_usuario['asp_sararial']['asp_salarial'])){
-    //   $mpdf->WriteHTML($cajainicio.$asp_salarial.$cajafin);
-    // }
-    // else{
-    //   $mpdf->WriteHTML($cajainicio.$nodata.$cajafin);
-    // }
+    if($vista == 1){
+      if($datos_usuario['asp_sararial']['asp_salarial'] !== null || !empty($datos_usuario['asp_sararial']['asp_salarial'])){
+        $mpdf->WriteHTML($cajainicio.$asp_salarial.$cajafin.$vista);
+      }
+      else{
+        $mpdf->WriteHTML($cajainicio.$nodata.$cajafin);
+      }
+    }
     // $mpdf->WriteHTML($cajafin);
     $mpdf->WriteHTML($table);
     $mpdf->WriteHTML($enddoc);
-    $mpdf->Output('informe_'.$datos_usuario['infoUsuario']['username'].".pdf", 'D');
+    $mpdf->Output();
   }
 }
 ?>

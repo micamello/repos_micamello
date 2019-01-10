@@ -6,15 +6,18 @@
 if (! session_id()) {
     session_start();
 }
-$tipo_usuario = $_GET['tipo_usuario'];
-if (empty($_GET["action"])) {
-    // require_once 'includes/lk_api/config.php';
+
+
+$tipo_usuario = 1;
     require ('includes/lk_api/oauth/http.php');
     require ('includes/lk_api/oauth/oauth_client.php');
     
     // if ($_GET["oauth_problem"] != "") {
     //     $error1 = $_GET["oauth_problem"];
     // }
+
+    // print_r($_SESSION);
+    // exit();
     
     $client = new oauth_client_class();
     
@@ -25,7 +28,6 @@ if (empty($_GET["action"])) {
     $client->client_id = LK_ID_CLIENTE;
     $client->client_secret = LK_SECRET;
     $client->scope = LK_SCOPE;
-    print_r("eder");exit();
     
     if (($success = $client->Initialize())) {
         if (($success = $client->Process())) {
@@ -38,29 +40,26 @@ if (empty($_GET["action"])) {
                 ), array(
                     'FailOnAccessError' => true
                 ), $user);
+                
             }
         }
-        // print_r($success);
-
-        $success = $client->Finalize($success);
-        $data_user =  (array) $user;
-        // print_r($user->emailAddress);
-        // exit();
-        $obj_registro = new Controlador_Registro();
-        $obj_registro->linkedin($data_user, $tipo_usuario);
-        // unset($_SESSION['OAUTH_ACCESS_TOKEN']);
     }
     if ($client->exit) {
         exit();
     }
     if ($success) {
         // Do your code with the Linkedin Data
+        // $_SESSION['linkedin_data'] = (array) $user;
+        $success = $client->Finalize($success);
+        $data_user =  (array) $user;
+        $obj_registro = new Controlador_Registro();
+        $obj_registro->linkedin($data_user, $tipo_usuario);
     } else {
         $error = $client->error;
     }
-} else {
-    $_SESSION = array();
-    unset($_SESSION);
-    session_destroy();
-}
+// } else {
+//     $_SESSION = array();
+//     unset($_SESSION);
+//     session_destroy();
+// }
 ?>
