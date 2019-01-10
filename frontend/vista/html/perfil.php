@@ -64,7 +64,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 							
 							<?php 
 							
-
 							if($btnSubir == 1 || isset($data)){ ?>
 								<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
 			                        <label for="subirCV" class="custom_file">
@@ -134,7 +133,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														}
 														$option .= ">".$doc."</option>";
 													  }
-													  echo $option;
+													  echo utf8_encode($option);
 									                 ?>
 									              </select>
 									            </div>
@@ -242,7 +241,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														if (!empty($arrprovincia)){									
 					                    					foreach($arrprovincia as $key => $pr){ 
 																echo "<option value='".$pr['id_provincia']."'";
-
 																if(isset($data['provincia']) && (int)$data['provincia'] == (int)$pr['id_provincia']){
 													
 																	echo " selected='selected'";
@@ -519,7 +517,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 															if (!empty($arrarea)){
 											                	foreach($arrarea as $key => $ae){ 
 																	echo "<option value='".$ae['id_area']."'";
-
 																	if(isset($data['area_select'])){
 																		if (in_array($ae['id_area'], $data['area_select']))
 																		{ 
@@ -570,7 +567,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																			echo " selected='selected'";
 																		}
 																	}
-
 																	echo ">".utf8_encode($ae['descripcion']);
 																	echo "</option>";
 																} 
@@ -640,9 +636,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																if(isset($data['nivel_idioma']) && !empty($data['nivel_idioma'])){
 																	foreach ($data['nivel_idioma'] as $clave => $comb_idioma) {
 																		$sel = explode('_',$comb_idioma);
-
 																		foreach ($arridioma as $key => $value) {
-
 																			if($value['id_idioma'] == $sel[0]){
 																				foreach ($arrnivelidioma as $pos => $valor) {
 																					if($valor['id_nivelIdioma'] == $sel[1]){
@@ -658,7 +652,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																		}
 																	}
 																}else{
-
 																	foreach ($nivelIdiomas as $key => $value) {
 																		echo '<p id="idioma'.$value[0].'" disabled="disabled" class="col-md-5 badge_item listado">'.$key.' ('.$value[2].') <i class="fa fa-window-close fa-2x icon" id="'.$value[0].'" ';
 																		if($btnSig != 1){

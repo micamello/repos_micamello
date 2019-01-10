@@ -253,7 +253,7 @@
 
               <!-- <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align=""> -->
               <div class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-3 col-sm-1 col-sm-offset-4" align="">
-                <a class="socialbutton tw" onclick="window.location = '<?php echo $social['tw'] ?>'"><i class="fa fa-twitter-square"></i><span class="social_text"> Twitter</span></a>
+                <a class="socialbutton tw" onclick="window.location = '<?php echo (isset($social['tw'])) ? $social['tw']:''; ?>'"><i class="fa fa-twitter-square"></i><span class="social_text"> Twitter</span></a>
               </div>
 
               <div class="col-md-2 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">

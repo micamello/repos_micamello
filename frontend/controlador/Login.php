@@ -20,7 +20,6 @@ class Controlador_Login extends Controlador_Base {
     require_once "includes/tw_api/config.php";
     $tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
 
-
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
     }

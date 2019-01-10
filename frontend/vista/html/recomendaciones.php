@@ -36,14 +36,14 @@
                 <br>
                 <input type="hidden" name="enviarRecomendacion" id="enviarRecomendacion" value="1">
                 <div class="text-center">
-                    <input type="submit" class="btn btn-success" value="Enviar" id="recomendaciones" onclick="validaForm(3,'recomendaciones')">
+                    <input type="button" class="btn btn-success" value="Enviar" id="recomendaciones" onclick="validaForm(3,'recomendaciones')">
                 </div>
             </form>
         </div>
     </div>
     <div class="col-md-6">
         <div class="" align="center" style="margin: auto 0; margin-top: 80px;">
-            <img src="<?php //echo PUERTO."://".HOST."/imagenes/logo.png";?>" class="img-responsive" style="max-width:100%;">
+            <img src="<?php echo PUERTO."://".HOST."/imagenes/logo.png";?>" class="img-responsive" style="max-width:100%;">
         </div>
     </div>
 </div>
