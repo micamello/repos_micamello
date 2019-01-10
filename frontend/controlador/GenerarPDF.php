@@ -578,6 +578,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $i++;
     }
 
+
     $mpdf->WriteHTML($enddoc);
 
     $mpdf->Output('informe_'.$datos_usuario['infoUsuario']['username'].".pdf", 'I');
