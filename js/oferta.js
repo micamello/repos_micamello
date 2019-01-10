@@ -61,6 +61,7 @@ if(document.getElementById('des_of')){
     })
 }
 
+
 function abrirModalEditar(id,idOferta){
     
     document.getElementById('idOferta').value = idOferta;
