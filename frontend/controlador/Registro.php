@@ -234,7 +234,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['first_name']." ".$userdata['last_name'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['first_name'], "apellidos"=>$userdata['last_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['first_name'], "apellidos"=>$userdata['last_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
 
 
@@ -257,8 +257,7 @@ class Controlador_Registro extends Controlador_Base {
           if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
               throw new Exception("Error al enviar credenciales. Intente nuevamente");
             }
-          // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam";
-            // echo "alert('Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam')";
+          
             $_SESSION['registro'] = 1;
     }
       catch( Exception $e ){
@@ -299,7 +298,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['given_name']." ".$userdata['family_name'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['given_name'], "apellidos"=>$userdata['family_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['given_name'], "apellidos"=>$userdata['family_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
 
         if(!Modelo_Usuario::crearUsuario($dato_registro)){
@@ -319,7 +318,7 @@ class Controlador_Registro extends Controlador_Base {
           if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
               throw new Exception("Error al enviar credenciales. Intente nuevamente");
             }
-          // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
+          
           $_SESSION['registro'] = 1;
     } catch (Exception $e) {
         $GLOBALS['db']->rollback();
@@ -356,7 +355,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['firstName']." ".$userdata['lastName'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['firstName'], "apellidos"=>$userdata['lastName'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['firstName'], "apellidos"=>$userdata['lastName'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
         if(!Modelo_Usuario::crearUsuario($dato_registro)){
             throw new Exception("Ha ocurrido un error, intente nuevamente 2");
@@ -373,7 +372,7 @@ class Controlador_Registro extends Controlador_Base {
           if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
               throw new Exception("Error al enviar credenciales. Intente nuevamente");
             }
-          // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
+          
             $_SESSION['registro'] = 1;
       
     } catch (Exception $e) {
@@ -381,13 +380,12 @@ class Controlador_Registro extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
     }
     // produccion
-    // $_SESSION = array();
+  
     unset($_SESSION['OAUTH_ACCESS_TOKEN']);
-    // session_destroy();
+    
     
     Utils::doRedirect(PUERTO.'://'.HOST.'/');
-    // local
-    // Utils::doRedirect('http://localhost/repos_micamello/');
+    
   }
 
   public function twitter($userdata, $tipo_usuario){
@@ -414,7 +412,7 @@ class Controlador_Registro extends Controlador_Base {
         if ($tipo_usuario == 1) {
           $nombres_correo = $userdata['screen_name']." ".$userdata['screen_name'];
           $escolaridad = Modelo_Escolaridad::obtieneListado();
-          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['screen_name'], "apellidos"=>$userdata['screen_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>2, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
+          $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['screen_name'], "apellidos"=>$userdata['screen_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
         }
         if(!Modelo_Usuario::crearUsuario($dato_registro)){
             throw new Exception("Ha ocurrido un error, intente nuevamente  ");
@@ -430,7 +428,7 @@ class Controlador_Registro extends Controlador_Base {
           if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
               throw new Exception("Error al enviar credenciales. Intente nuevamente");
             }
-          // $_SESSION['mostrar_exito'] = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam y haz clic en el enlace para activar tu cuenta";
+          
           $_SESSION['registro'] = 1;
     } catch (Exception $e) {
         $GLOBALS['db']->rollback();
@@ -469,12 +467,13 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function credencialSocial($correo,$nombres,$username, $password, $token){
-    $asunto = "Credenciales de cuenta mi camello";
-    $body = "Estimado, ".$nombres."<br>";
-    $body .= "Te has registrado correctamente, haz click en el enlace de abajo para activar tu cuenta y luego podrás acc";
-    $body .="acc a tu mediante tu correo electrónico:  <b>".$correo."</b> ó username:  <b>".$username."</b> y tu contraseña: <b>".$password."</b><br><br><br>";
-    $body .= "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a> <br>";
-    $body .= "<br>Recuerda no entregar tus credenciales de acceso.</b><br><br>";
+    $asunto = "Credenciales de cuenta";
+    $body = "Estimado, ".$nombres.",<br><br>";
+    $body .= "Se ha registrado correctamente, de click en este <a href='".PUERTO."://".HOST."/registro/".$token."/'>enlace</a> para activar su cuenta e ingresar al sistema con los siguientes datos.<br><br>";
+    $body .= "Correo electrónico: <b>".$correo."</b><br>";
+    $body .= "Usuario: <b>".$username."</b><br>";
+    $body .= "Contraseña: <b>".$password."</b><br><br>";    
+    $body .= "Recuerde no entregar sus credenciales de acceso.</b>";
     if (Utils::envioCorreo($correo,$asunto,$body)){
       return true;
     }

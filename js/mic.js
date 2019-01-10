@@ -72,9 +72,23 @@ $('#btn_sesion').click(function () {
   }      
 });
 
+$("#password1").keypress(function(e) {
+  if(e.which == 13) {
+    if (!$('#btn_sesion').hasClass("disabled")){
+      document.form_login.submit();
+    }   
+  }
+});
+
 $('#recomendaciones').click(function () {
   if (!$('#recomendaciones').hasClass("disabled")){
     $('#form_recomendaciones').submit();    
+  }      
+});
+
+$('#recuperar').click(function () {
+  if (!$('#recuperar').hasClass("disabled")){
+    $('#form_contrasena').submit();    
   }      
 });
 
@@ -195,7 +209,8 @@ function validaCampos(form,btn){
     $("#"+btn).addClass('disabled');
   }else{    
     $("#"+btn).removeClass('disabled'); 
-    $('#'+btn).removeAttr('disabled');       
+    $('#'+btn).removeAttr('disabled');  
+    //if ()     
   }
 }
 

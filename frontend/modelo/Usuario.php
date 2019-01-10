@@ -38,6 +38,7 @@ class Modelo_Usuario{
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?) AND password = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password)); 
+    Utils::log("rs: ".print_r($rs,true));
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
@@ -217,29 +218,36 @@ public static function existeUsername($username){
 
     if($tipo_usuario == self::CANDIDATO){
 
-        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil'],"tipo_doc"=>$data['tipo_doc']); 
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],
+                     "fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],
+                     "genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],
+                     "status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],
+                     "viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil'],
+                     "tipo_doc"=>isset($data['tipo_doc']) ? $data['tipo_doc'] : ''); 
 
-        if (!empty($data['documentacion'])){          
-          $datos['tipo_doc'] = $data['documentacion'];
-        }
+      if (!empty($data['documentacion'])){          
+        $datos['tipo_doc'] = $data['documentacion'];
+      }
+      else{
+        unset($datos['tipo_doc']);
+      }
 
-        if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
-          if($_POST['lugar_estudio'] == 1){
-            $datos['nombre_univ'] = $_POST['universidad2'];
-            $datos['id_univ'] = 'null';
-          }else{
-            $datos['id_univ'] = $_POST['universidad'];
-            $datos['nombre_univ'] = ' ';
-          }
-        }else{
+      if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
+        if($_POST['lugar_estudio'] == 1){
+          $datos['nombre_univ'] = $_POST['universidad2'];
           $datos['id_univ'] = 'null';
+        }else{
+          $datos['id_univ'] = $_POST['universidad'];
           $datos['nombre_univ'] = ' ';
         }
+      }else{
+        $datos['id_univ'] = 'null';
+        $datos['nombre_univ'] = ' ';
+      }
 
-        return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
-
-    }else{
-
+      return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
+    }
+    else{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad']);
       return $GLOBALS['db']->update("mfo_empresa",$datos,"id_empresa=".$idUsuario);
     }

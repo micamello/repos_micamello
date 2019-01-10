@@ -5,12 +5,17 @@ abstract class Controlador_Base{
   protected $device;
   protected $datos;
   protected $data;
+
+  public $loginURL;
+  public $gg_URL;
+  public $tw;
+  public $lk;
   
   function __construct($device='web'){
     global $_SUBMIT;
     $this->device = $device;
     $this->datos = $_SUBMIT;    
-    $this->data = $_SUBMIT;    
+    $this->data = $_SUBMIT;        
     self::verificaCompra();
   }
   
@@ -19,8 +24,7 @@ abstract class Controlador_Base{
   }
   
   public function camposRequeridos($campos = array()){
-    $data = array(); 
-    //print_r($this->datos);
+    $data = array();     
     if (count($campos) > 0){ 
       foreach($campos as $campo=>$requerido){        
         $valor = Utils::getParam($campo,'',$this->datos);
@@ -59,6 +63,31 @@ abstract class Controlador_Base{
         unset($_SESSION['mfo_datos']['actualizar_planes']);       
       }      
     }
+  }
+
+  public function linkRedesSociales(){
+    if( strstr(dirname(__FILE__), 'C:') ){        
+      $this->loginURL = ''; $this->gg_URL = ''; $this->lk = ''; $this->tw = '';
+    }
+    else{
+      // FACEBOOK
+      require_once "includes/fb_api/config.php";
+      $redirectURL = PUERTO."://".HOST."/desarrollov2/facebook.php?tipo_user=1";
+      //$redirectURL = "https://www.micamello.com.ec/desarrollov2/facebook.php?tipo_user=1";
+      $permissions = ['email'];
+      $this->loginURL = $helper->getLoginUrl($redirectURL, $permissions);
+
+      // GOOGLE
+      require_once "includes/gg_api/config.php";
+      $this->gg_URL = $gClient->createAuthUrl();
+
+      // LINKEDIN
+      $this->lk = "linkedin.php?tipo_usuario=1";
+
+      // TWITTER
+      require_once "includes/tw_api/config.php";
+      $this->tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
+    } 
   }
 
   public abstract function construirPagina();
