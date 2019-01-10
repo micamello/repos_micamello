@@ -238,7 +238,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 
     // exit();
     $datos_usuario = $modelo_aspirante->datauser($username, $id_oferta, $vista);
-    Utils::log(print_r($datos_usuario, true));
+    //Utils::log(print_r($datos_usuario, true));
 
     // print_r($datos_usuario['asp_sararial']['asp_salarial']);
     // exit();
@@ -296,14 +296,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 
     $label_datos_contacto = "<b>DATOS DE CONTACTO</>";
     $label_resultados_evaluacion = "<b>RESULTADOS DE EVALUACIÓN</b>";
-    // var_dump($idiomas);
-    // exit();
 
-    // var_dump($nivel_interes);
-    // exit();
-
-    // Datos
-// Nacionalidad
     $dato_nacionalidad = "";
     if($datos_usuario['infoUsuario']['nacionalidad'] != "" || !empty($datos_usuario['infoUsuario']['nacionalidad'])){
       $dato_nacionalidad = $datos_usuario['infoUsuario']['nacionalidad'];
@@ -311,7 +304,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $dato_nacionalidad = $nodata;
     }
     $nacionalidad = "<label><b>Nacionalidad:</b> ".$dato_nacionalidad."</label>";
-// Estado civil
+
     $dato_estado_civil = "";
     if($datos_usuario['infoUsuario']['estado_civil'] != "" || !empty($datos_usuario['infoUsuario']['estado_civil'])){
       foreach (ESTADO_CIVIL as $key => $value) {
@@ -324,7 +317,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $estado_civil = "<p><b>Estado civil</b></p>".$dato_estado_civil;
 
-// Trabaja
     $dato_tiene_trabajo = "";
     if($datos_usuario['infoUsuario']['tiene_trabajo'] != "" || !empty($datos_usuario['infoUsuario']['tiene_trabajo'])){
       foreach (REQUISITO as $key => $value) {
@@ -337,7 +329,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $tiene_trabajo = "<p><b>Trabaja</b></p>".$dato_tiene_trabajo;
 
-// Disponibilidad de viaje
     $dato_viajar = "";
     if($datos_usuario['infoUsuario']['viajar'] != "" || !empty($datos_usuario['infoUsuario']['viajar'])){
       foreach (REQUISITO as $key => $value) {
@@ -350,7 +341,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $viajar = "<p><b>Disponibilidad de viajar</b></p>".$dato_viajar;
 
-// Licencia
     $dato_licencia = "";
     if($datos_usuario['infoUsuario']['licencia'] != "" || !empty($datos_usuario['infoUsuario']['licencia'])){
       foreach (REQUISITO as $key => $value) {
@@ -363,7 +353,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $licencia = "<p><b>Licencia</b></p>".$dato_licencia;
 
-// Discapacidad
     $dato_discapacidad = "";
     if($datos_usuario['infoUsuario']['discapacidad'] != "" || !empty($datos_usuario['infoUsuario']['discapacidad'])){
       foreach (REQUISITO as $key => $value) {
@@ -376,7 +365,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $discapacidad = "<p><b>Discapacidad</b></p>".$dato_discapacidad;
 
-// Años experiencia
     $dato_anosexp = "";
     if($datos_usuario['infoUsuario']['anosexp'] != "" || !empty($datos_usuario['infoUsuario']['anosexp'])){
       foreach (ANOSEXP as $key => $value) {
@@ -389,7 +377,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $anosexp = "<p><b>Experiencia</b></p>".$dato_anosexp;
 
-// Estado carrera
     $dato_status_carrera = "";
     if($datos_usuario['infoUsuario']['status_carrera'] != "" || !empty($datos_usuario['infoUsuario']['status_carrera'])){
       foreach (STATUS_CARRERA as $key => $value) {
@@ -402,7 +389,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $status_carrera = "<p><b>Estado carrera</b></p>".$dato_status_carrera;
 
-// Escolaridad
     $dato_escolaridad = "";
     if($datos_usuario['infoUsuario']['escolaridad'] != "" || !empty($datos_usuario['infoUsuario']['escolaridad'])){
       $dato_escolaridad = $datos_usuario['infoUsuario']['escolaridad'];
@@ -411,7 +397,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $escolaridad = "<p><b>Escolaridad</b></p>".$dato_escolaridad;
 
-// Género
     $dato_genero = "";
     if($datos_usuario['infoUsuario']['genero'] != "" || !empty($datos_usuario['infoUsuario']['genero'])){
       foreach (GENERO as $key => $value) {
@@ -422,9 +407,8 @@ class Controlador_GenerarPDF extends Controlador_Base
     }else{
       $dato_genero = $nodata;
     }
-    $genero = "<p><b>Género</b></p>".$dato_genero;
+    $genero = "<p><b>G&eacute;nero</b></p>".$dato_genero;
 
-// Fecha nacimiento
     $dato_fecha_nacimiento = "";
     if($datos_usuario['infoUsuario']['fecha_nacimiento'] != "" || !empty($datos_usuario['infoUsuario']['fecha_nacimiento'])){
       $dato_fecha_nacimiento = $datos_usuario['infoUsuario']['fecha_nacimiento'];
@@ -433,7 +417,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $fecha_nacimiento = "<p><b>Fecha nacimiento</b></p>".$dato_fecha_nacimiento;
 
-// Escolaridad
     $dato_universidad = "";
     if($datos_usuario['infoUsuario']['universidad'] != "" || !empty($datos_usuario['infoUsuario']['universidad'])){
       $dato_universidad = $datos_usuario['infoUsuario']['universidad'];
@@ -442,16 +425,14 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $universidad = "<p><b>Universidad</b></p>".$dato_universidad;
 
-// País
     $dato_genero = "";
     if($datos_usuario['infoUsuario']['pais'] != "" || !empty($datos_usuario['infoUsuario']['pais'])){
       $dato_pais = $datos_usuario['infoUsuario']['pais'];
     }else{
       $dato_pais = $nodata;
     }
-    $pais = "<p><b>País</b></p>".$dato_pais;
+    $pais = "<p><b>Pa&iacute;s</b></p>".$dato_pais;
 
-// Provincia
     $dato_provincia = "";
     if($datos_usuario['infoUsuario']['provincia'] != "" || !empty($datos_usuario['infoUsuario']['provincia'])){
       $dato_provincia = $datos_usuario['infoUsuario']['provincia'];
@@ -460,7 +441,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $provincia = "<p><b>Provincia</b></p>".$dato_provincia;
 
-//  Ciudad
     $dato_ciudad = "";
     if($datos_usuario['infoUsuario']['ciudad'] != "" || !empty($datos_usuario['infoUsuario']['ciudad'])){
       $dato_ciudad = $datos_usuario['infoUsuario']['ciudad'];
@@ -469,202 +449,139 @@ class Controlador_GenerarPDF extends Controlador_Base
     }
     $ciudad = "<p><b>Ciudad</b></p>".$dato_ciudad;
 
-
-
-
-
-
     $mpdf->WriteHTML($inidoc);
     $mpdf->WriteHTML($tableinicio);
 
-    // Nombre y apellido
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$nombre_apellido.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$nacionalidad.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($hr);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_datos_candidato.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$estado_civil.$tdfin));
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$tiene_trabajo.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$viajar.$tdfin));
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$licencia.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$discapacidad.$tdfin));
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$anosexp.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$genero.$tdfin));
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$fecha_nacimiento.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_estudios_candidato.$tdfin));
+    $mpdf->WriteHTML($trfin);
+  
+    if(($datos_usuario['infoUsuario']['id_univ'] == NULL || $datos_usuario['infoUsuario']['id_univ'] == "") && ($datos_usuario['infoUsuario']['universidad'] != NULL || $datos_usuario['infoUsuario']['universidad']) != ""){
       $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$nombre_apellido.$tdfin);
+        $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_estudios_extrajero.$tdfin));
       $mpdf->WriteHTML($trfin);
+    }
 
-    // Nacionalidad
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$universidad.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$status_carrera.$tdfin));
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."6".$tdfinst.$escolaridad.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_datos_docimiciliarios_candidato.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."4".$tdfinst.$pais.$tdfin));
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."4".$tdfinst.$provincia.$tdfin));
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."4".$tdfinst.$ciudad.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_datos_nivel_idiomas.$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    foreach ($idiomas as $key => $value) {
       $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$nacionalidad.$tdfin);
-      $mpdf->WriteHTML($trfin);
+        $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.($value['descripcion'].' - '.$value['nombre']).$tdfin));
+      $mpdf->WriteHTML($trinicio); 
+    }
 
-      // Seccion
-      $mpdf->WriteHTML($hr);
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_datos_preferencia_empleo.$tdfin));
+    $mpdf->WriteHTML($trfin);
 
-      // Label datos candidato
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst."<b>&Aacute;reas</b>".$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    foreach ($areas as $key => $value) {
       $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_datos_candidato.$tdfin);
+        $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$value['nombre'].$tdfin));
       $mpdf->WriteHTML($trfin);
+    }
 
-      // $mpdf->WriteHTML($trinicio."<td rowspan='10' colspan='12'></td>".$trfin);
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst."<b>Nivel de inter&eacute;s</b>".$tdfin));
+    $mpdf->WriteHTML($trfin);
+
+    foreach ($nivel_interes as $key => $value) {
+      $mpdf->WriteHTML($trinicio);
+        $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$value['descripcion'].$tdfin));
+      $mpdf->WriteHTML($trfin);
+    }
+
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_datos_contacto.$tdfin));
+    $mpdf->WriteHTML($trfin);
 
       $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$estado_civil.$tdfin);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$tiene_trabajo.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$viajar.$tdfin);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$licencia.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$discapacidad.$tdfin);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$anosexp.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$genero.$tdfin);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$fecha_nacimiento.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      // Seccion}
-
-      // $mpdf->WriteHTML($hr);
-
-      // Label datos candidato
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_estudios_candidato.$tdfin);
-      $mpdf->WriteHTML($trfin);
+        $mpdf->WriteHTML(utf8_encode($tdiniciost."4".$tdfinst."<b>Tel&eacute;fono</b><br>".$datos_usuario['Conf']['telefono'].$tdfin));
       
-      if(($datos_usuario['infoUsuario']['id_univ'] == NULL || $datos_usuario['infoUsuario']['id_univ'] == "") && ($datos_usuario['infoUsuario']['universidad'] != NULL || $datos_usuario['infoUsuario']['universidad']) != ""){
-        $mpdf->WriteHTML($trinicio);
-          $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_estudios_extrajero.$tdfin);
-        $mpdf->WriteHTML($trfin);
-      }
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$universidad.$tdfin);
+        $mpdf->WriteHTML(utf8_encode($tdiniciost."4".$tdfinst."<b>Correo</b><br>".$datos_usuario['Conf']['correo'].$tdfin));
+      
+        $mpdf->WriteHTML(utf8_encode($tdiniciost."4".$tdfinst."<b>DNI</b><br>".$datos_usuario['Conf']['dni'].$tdfin));
       $mpdf->WriteHTML($trfin);
 
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$status_carrera.$tdfin);
-        $mpdf->WriteHTML($tdiniciost."6".$tdfinst.$escolaridad.$tdfin);
-      $mpdf->WriteHTML($trfin);
 
-      // Label DATOS DOMICILIARIOS
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_datos_docimiciliarios_candidato.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      // $mpdf->WriteHTML($trinicio);
-      //   $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$universidad.$tdfin);
-      // $mpdf->WriteHTML($trfin);
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."4".$tdfinst.$pais.$tdfin);
-        $mpdf->WriteHTML($tdiniciost."4".$tdfinst.$provincia.$tdfin);
-        $mpdf->WriteHTML($tdiniciost."4".$tdfinst.$ciudad.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      // Label DOMINIO DE IDIOMAS
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_datos_nivel_idiomas.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      foreach ($idiomas as $key => $value) {
-        $mpdf->WriteHTML($trinicio);
-          $mpdf->WriteHTML($tdiniciost."12".$tdfinst.($value['descripcion'].' - '.$value['nombre']).$tdfin);
-        $mpdf->WriteHTML($trinicio); 
-      }
-
-      // Label PREFERENCIAS DE EMPLEOS
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_datos_preferencia_empleo.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst."<b>Áreas</b>".$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      foreach ($areas as $key => $value) {
-        $mpdf->WriteHTML($trinicio);
-          $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$value['nombre'].$tdfin);
-        $mpdf->WriteHTML($trfin);
-      }
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst."<b>Nivel de interés</b>".$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-      foreach ($nivel_interes as $key => $value) {
-        $mpdf->WriteHTML($trinicio);
-          $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$value['descripcion'].$tdfin);
-        $mpdf->WriteHTML($trfin);
-      }
-
-      // Label DATOS DE CONTACTO
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_datos_contacto.$tdfin);
-      $mpdf->WriteHTML($trfin);
-
-        $mpdf->WriteHTML($trinicio);
-          $mpdf->WriteHTML($tdiniciost."4".$tdfinst."<b>Teléfono</b><br>".$datos_usuario['Conf']['telefono'].$tdfin);
-        
-          $mpdf->WriteHTML($tdiniciost."4".$tdfinst."<b>Correo</b><br>".$datos_usuario['Conf']['correo'].$tdfin);
-        
-          $mpdf->WriteHTML($tdiniciost."4".$tdfinst."<b>DNI</b><br>".$datos_usuario['Conf']['dni'].$tdfin);
-        $mpdf->WriteHTML($trfin);
-
-
-      $mpdf->WriteHTML($trinicio);
-        $mpdf->WriteHTML($tdiniciost."12".$tdfinst.$label_resultados_evaluacion.$tdfin);
-      $mpdf->WriteHTML($trfin);
+    $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$label_resultados_evaluacion.$tdfin));
+    $mpdf->WriteHTML($trfin);
 
     $mpdf->WriteHTML($tablefin);
 
     $array_colors = ['#DFDD4B', '#C29BE6', '#E61616', '#39E75E', '#81B152', '#BEA3A3', '#5BC6FD', '#C1842D', '#9C29EC', '#FFAD85', '#88BE54'];
-    // $ul_start = "<ul class='skill-list'>";
-    // $ul_end = "</ul>";
-    // $li_start = "<li class='skill'>";
-    // $li_end = "<li>";
-    // $text_bar_start = "<h3 class=''>";
-    // $text_bar_end = "</h3>";
-    // $progress_start_class = "<progress class='";
-    // $progress_end_class_start_value = "' style='background-color: red;' max='100' value='";
-    // $progress_end_value = "'>";
-    // $progress_end_tag = "</progress>";
-
-    // $mpdf->WriteHTML("<progress max='100' style='width: 100%; height: 3%; color: red;' value='25'>eder</progress>");
 
     
     $i = 0;
     foreach ($datos_usuario['Resultados'] as $key => $value) {
-      $mpdf->WriteHTML("<p style='text-align: center;'>".$datos_usuario['Resultados'][$i]['nombre']."   (".$datos_usuario['Resultados'][$i]['valor'].")</p>");
-      $mpdf->WriteHTML("<div class='progress_bar'><div class='inside_progress' style='width: ".(($datos_usuario['Resultados'][$i]['valor']*100)/25)."%; background-color: ".$array_colors[$i].";'></div></div>");
+      $mpdf->WriteHTML(utf8_encode("<p style='text-align: center;'>".$datos_usuario['Resultados'][$i]['nombre']."   (".$datos_usuario['Resultados'][$i]['valor'].")</p>"));
+      $mpdf->WriteHTML(utf8_encode("<div class='progress_bar'><div class='inside_progress' style='width: ".(($datos_usuario['Resultados'][$i]['valor']*100)/25)."%; background-color: ".$array_colors[$i].";'></div></div>"));
       $i++;
     }
 
-      // $mpdf->WriteHTML("<progress value='90' max='100' style='background-color: red;'>");
-        // $mpdf->WriteHTML($progress_start_class."red".$progress_end_class_start_value."80".$progress_end_value.$progress_end_tag);
-    // $mpdf->showImageErrors = true;
-    // $mpdf->curlAllowUnsafeSslRequests = true; 
-    // $mpdf->WriteHTML("<img src='".$_POST['img_val']."'>");
-    // $mpdf->WriteHTML("<img src='imagenes/banner/1.gif'>");
-    // $mpdf->Image($_POST['img_val'], 0, 0, 210, 297, '', '', true, true);  
-     // echo "<img src='".$foto."'>";
-    // $mpdf->WriteHTML("<img src='http://localhost/repos_micamello/imagenes/usuarios/candidato1/'>");
-    // $mpdf->showImageErrors(true);
 
-    // $mpdf->WriteHTML($cajainicio."eder".$cajafin);
-    // $mpdf->WriteHTML($foto);
-    // $mpdf->WriteHTML($nombre_nacionalidad);
-
-    // $mpdf->WriteHTML($cajainicio);
-    // $mpdf->WriteHTML($label_asp_salarial);
-
-    // // $mpdf->WriteHTML($cajainicio);
-    if($vista == 1){
-      if($datos_usuario['asp_sararial']['asp_salarial'] !== null || !empty($datos_usuario['asp_sararial']['asp_salarial'])){
-        $mpdf->WriteHTML($cajainicio.$asp_salarial.$cajafin.$vista);
-      }
-      else{
-        $mpdf->WriteHTML($cajainicio.$nodata.$cajafin);
-      }
-    }
-    // $mpdf->WriteHTML($cajafin);
-    $mpdf->WriteHTML($table);
     $mpdf->WriteHTML($enddoc);
-    $mpdf->Output();
+
+    $mpdf->Output('informe_'.$datos_usuario['infoUsuario']['username'].".pdf", 'I');
   }
 }
 ?>

@@ -273,7 +273,7 @@ function mostrarGrafico(label, valor){
       let massPopChart = new Chart(myChart, {
         type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
         data:{
-          labels:labels,
+          labels: labels,
           datasets:[{
             label:'Population',
             data:valores,

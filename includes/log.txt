@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 [2019/01/08 11:53:49] Utils::createSession empezo una nueva sesion
 [2019/01/08 11:53:49] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
             INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
@@ -3379,3 +3380,5 @@ WHERE
             LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
             LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
             WHERE l.username = 'empresa1'
+=======
+>>>>>>> desarrollo
