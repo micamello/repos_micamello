@@ -69,7 +69,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			                        <label for="subirCV" class="custom_file">
 			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
 			                        </label>
-			                        <?php if($btnDescarga != 1){ echo '<p id="mensaje_error_hv" class="parpadea" style="font-size:14px;color:red">Cargar la hoja de vida es obligatorio *</p>'; } ?>
+			                        <?php if($btnDescarga != 1){ echo '<p id="mensaje_error_hv" class="parpadea" style="font-size:16px;color:red;font-weight:bold;">Cargar la hoja de vida es obligatorio *</p>'; } ?>
 			                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" >
 			                   		<div align="center">
 		                            	<p class="text-center" id="texto_status"><?php echo $msj2; ?></p>
@@ -581,7 +581,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    <div class="col-md-4 col-md-offset-1">
 												<div class="form-group">
 													<label>Idioma: </label><div class="help-block with-errors"></div>
-													<select id="idioma_of" name="idioma_of" class="form-control" <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?> >
+													<select id="idioma_of" name="idioma_of" class="form-control" <?php if(count($arridioma) == count($nivelIdiomas)){ echo 'disabled=disabled'; } ?> >
 														<option value="0">Seleccione una opci&oacute;n</option>
 														<?php if (!empty($arridioma)){
 															
@@ -603,7 +603,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											<div class="col-md-4">
 												<div class="form-group">
 													<label>Nivel idioma: </label><div class="help-block with-errors"></div>
-													<select id="nivel_idi_of" name="nivel_idi_of" class="form-control" <?php if((count($arridioma) == count($nivelIdiomas)) || $btnSig == 1){ echo 'disabled=disabled'; } ?>>
+													<select id="nivel_idi_of" name="nivel_idi_of" class="form-control" <?php if(count($arridioma) == count($nivelIdiomas)){ echo 'disabled=disabled'; } ?>>
 														<option value="0">Seleccione una opci&oacute;n</option>
 														<?php if (!empty($arrnivelidioma)){
 															foreach ($arrnivelidioma as $nivelidioma) {?>
@@ -641,9 +641,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																				foreach ($arrnivelidioma as $pos => $valor) {
 																					if($valor['id_nivelIdioma'] == $sel[1]){
 																						echo '<p id="idioma'.$sel[0].'" disabled="disabled" class="col-md-5 badge_item listado">'.utf8_encode($value['descripcion']).' ('.$valor['nombre'].') <i class="fa fa-window-close fa-2x icon" id="'.$sel[0].'" ';
-																						if($btnSig != 1){
+																						//if($btnSig != 1){
 																							echo 'onclick="delete_item_selected(this); validarFormulario();"';
-																						}
+																						//}
 																						echo '></i></p>';
 																						break;
 																					}
@@ -654,9 +654,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 																}else{
 																	foreach ($nivelIdiomas as $key => $value) {
 																		echo '<p id="idioma'.$value[0].'" disabled="disabled" class="col-md-5 badge_item listado">'.$key.' ('.$value[2].') <i class="fa fa-window-close fa-2x icon" id="'.$value[0].'" ';
-																		if($btnSig != 1){
+																		//if($btnSig != 1){
 																			echo 'onclick="delete_item_selected(this); validarFormulario();"';
-																		}
+																		//}
 																		echo '></i></p>';
 																	}
 																}

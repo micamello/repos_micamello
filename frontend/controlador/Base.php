@@ -3,7 +3,6 @@ abstract class Controlador_Base{
   
   protected $ajax_enabled;
   protected $device;
-  protected $datos;
   protected $data;
 
   public $loginURL;
@@ -14,7 +13,6 @@ abstract class Controlador_Base{
   function __construct($device='web'){
     global $_SUBMIT;
     $this->device = $device;
-    $this->datos = $_SUBMIT;    
     $this->data = $_SUBMIT;        
     self::verificaCompra();
   }
@@ -27,7 +25,7 @@ abstract class Controlador_Base{
     $data = array();     
     if (count($campos) > 0){ 
       foreach($campos as $campo=>$requerido){        
-        $valor = Utils::getParam($campo,'',$this->datos);
+        $valor = Utils::getParam($campo,'',$this->data);
         if (is_array($valor)){
           if (count($valor)<=0 && $requerido == 1){
             throw new Exception("Los campos marcado con asterisco son obligatorios");

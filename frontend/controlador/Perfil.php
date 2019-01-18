@@ -121,14 +121,22 @@ class Controlador_Perfil extends Controlador_Base
         try {
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
                 $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
-                if (empty($_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+
+                if (isset($_POST['dni'])){
                   $campos['dni'] = 1;
-                  $campos['documentacion'] = 1;
+                }
+
+                if (empty($_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                    $campos['documentacion'] = 1;
                 }
             } else {
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
             }
             $data = $this->camposRequeridos($campos);
+            if (!isset($data['dni'])){
+                $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
+            }
+
             if ($imagen['error'] != 4) {
                 $validaImg = Utils::valida_upload($imagen, 1);
                 if (empty($validaImg)) {
@@ -194,7 +202,12 @@ class Controlador_Perfil extends Controlador_Base
                       }
                     }            
      
-                    if (empty($_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                    $datodni = Modelo_Usuario::existeDni($data['dni'],$_SESSION['mfo_datos']['usuario']['id_usuario_login']);
+                    if (empty($datodni)){
+                      throw new Exception("La cédula o pasaporte ".$data["dni"]." ya existe");
+                    }
+
+                    if (!empty($data['dni'])){
                         if (!Modelo_UsuarioLogin::editarDniLogin($_SESSION['mfo_datos']['usuario']['id_usuario_login'],$data['dni'])) {
                             throw new Exception("Ha ocurrido un error al guardar la cedula , intente nuevamente");
                         }

@@ -17,7 +17,7 @@
     <div class="tab-content ">
       <form role="form" name="form1" id="form1" method="post" action="<?php echo PUERTO."://".HOST."/cuestionario/";?>">        
         <br>
-        <div class='tab-pane active' id='1' align='center'>
+        <div class='tab-pane ' id='1' align='center'>
           <h4><?php echo utf8_encode($preguntaact["pregunta"]);?>
             <input type='hidden' id='id_test' name='id_test' value='<?php echo $nrotest;?>'>
             <input type='hidden' id='id_pregunta' name='id_pregunta' value='<?php echo $preguntaact["id_pre"];?>'>
@@ -27,8 +27,8 @@
           </h4>
           <div class="form-group">
             <div class="row">
-              <div class="col-xs-3 col-md-5"></div>
-              <div class="col-xs-9 col-md-7">
+              <div class="col-xs-2 col-md-5 col-sm-4"></div>
+              <div class="col-xs-10 col-md-7 col-sm-8">
               <?php foreach($opciones as $opcion){ ?>
                 <p align="justify"><input type="radio" name="id_opcion" value="<?php echo $opcion["id_opcion"];?>" <?php echo ($opcion["orden"] == 1) ? "checked" : "";?>>&nbsp;<?php echo $opcion["descripcion"];?></p>
               <?php } ?>

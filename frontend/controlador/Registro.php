@@ -329,9 +329,6 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function linkedin($userdata, $tipo_usuario){
-    // print_r("");
-    // print_r($userdata);
-    // print_r($tipo_usuario);exit();
     $nombres_correo = "";
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $campo_fecha = date("Y-m-d H:i:s");
@@ -383,9 +380,7 @@ class Controlador_Registro extends Controlador_Base {
   
     unset($_SESSION['OAUTH_ACCESS_TOKEN']);
     
-    
     Utils::doRedirect(PUERTO.'://'.HOST.'/');
-    
   }
 
   public function twitter($userdata, $tipo_usuario){
@@ -455,7 +450,7 @@ class Controlador_Registro extends Controlador_Base {
   public function correoActivacionCuenta($correo,$nombres,$token, $username){
     $asunto = "Activación de cuenta";
     $body = "Estimado, ".$nombres."<br>";
-    $body .= "<br>Una vez activada su cuenta puede ingresar mediante su correo electrónico o el siguiente username: <br><b>".$username."</b><br><br>";
+    $body .= "<br>Una vez activada su cuenta puede ingresar mediante su correo electrónico o el siguiente Usuario: <br><b>".$username."</b><br><br>";
     $body .= "Click en este enlace para activar su cuenta de usuario&nbsp;";
     $body .= "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a> <br>";
     if (Utils::envioCorreo($correo,$asunto,$body)){

@@ -23,7 +23,7 @@
 					echo $niveles = substr($niveles,0,strlen($niveles)-1);
 				} ?>
 
-				<?php if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 0){
+				<?php if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 1){
 					echo '<br><b>Cambio de Residencia:</b> SI';
 		         
 		        }else{ 
@@ -172,7 +172,7 @@
 	                			$ruta = Controlador_Oferta::calcularRuta($ruta,'');
 	                		?>
 				            <select id="categoria" class="form-control">
-				                <option value="0">Seleccione una catego&iacute;a</option>
+				                <option value="0">Seleccione una categor&iacute;a</option>
 				                <?php
 									foreach ($arrarea as $key => $v) {
 										echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';

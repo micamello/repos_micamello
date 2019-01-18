@@ -152,7 +152,7 @@ desencriptar($texto)
                                                                 <?php } 
 
                                                                 if($estados[$key] != 'Inactivo'){ ?>
-                                                                    <td class="icon_oferta" style="text-align: center;"><a onclick="abrirModal('Está seguro que desea eliminar las ofertas?','alert_descarga','<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.Utils::encriptar($ids_empresasPlans[$key]).'/'; ?>','btn_modal');">
+                                                                    <td class="icon_oferta" style="text-align:center;cursor:pointer;"><a onclick="abrirModal('Está seguro que desea eliminar las ofertas?','alert_descarga','<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.Utils::encriptar($ids_empresasPlans[$key]).'/'; ?>','btn_modal');">
                                                                         <i class="fa fa-trash " title="Liberar ofertas"></i>
                                                                     </a></td>
                                                             <?php }else{ ?>

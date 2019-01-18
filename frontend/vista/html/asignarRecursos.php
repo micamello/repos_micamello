@@ -11,7 +11,7 @@
                             <div class="panel-body">
                                 <div id="no-more-tables">
                                     <div class="form-group col-md-12">
-                                        <form action = "<?php echo PUERTO."://".HOST;?>/asignarPlanEmpresa/<?php echo $idSubEmpresa; ?>/" method = "post" id="form_editarCuenta" name="form_editarCuenta">
+                                        <form action = "<?php echo PUERTO."://".HOST;?>/asignarPlanEmpresa/<?php echo Utils::encriptar($idSubEmpresa); ?>/" method = "post" id="form_editarCuenta" name="form_editarCuenta">
                                             <div class="row">  
                                               <input type="hidden" name="asignarRecursos" id="asignarRecursos" value="1">
                                               <div class="col-md-offset-3 col-md-6">

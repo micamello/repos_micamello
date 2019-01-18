@@ -23,7 +23,7 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 
-  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$nivelInteres=false,$cambioRes=false){    
+  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$nivelInteres=false,$cambioRes=false,&$filtros=false){    
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta,
@@ -69,22 +69,51 @@ class Modelo_Oferta{
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= " AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
+    
+    if (!empty($vista) && ($vista != 'postulacion')){ 
+      if($areasInteres != false){
+        $sql .= " AND a.id_area IN(".$areasInteres.")"; 
+      }
 
-    if($areasInteres != false){
-      $sql .= " AND a.id_area IN(".$areasInteres.")"; 
-    }
+      if($nivelInteres != false){
+        $sql .= " AND o.id_nivelInteres IN(".$nivelInteres.")"; 
+      }
 
-    if($nivelInteres != false){
-      $sql .= " AND o.id_nivelInteres IN(".$nivelInteres.")"; 
-    }
-
-    if($cambioRes != false){
-      $sql .= " AND c.id_ciudad = ".$cambioRes; 
+      if($cambioRes != false){
+        $sql .= " AND c.id_ciudad = ".$cambioRes; 
+      }
     }
 
     if($obtCantdRegistros == false){
 
-      $sql .= " ORDER BY o.fecha_creado DESC";
+      if($filtros != false){
+        
+        $tipo = substr($filtros['O'],0,1);
+        $t = substr($filtros['O'],1,2);
+        if($tipo == 1){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY o.salario ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY o.salario DESC";
+          }
+          
+        }else if($tipo == 2){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY o.fecha_creado ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY o.fecha_creado DESC";
+          }
+        }
+      }else{
+        $sql .= " ORDER BY o.fecha_creado DESC";
+      }
+
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
       //echo $sql;
