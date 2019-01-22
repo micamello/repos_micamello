@@ -205,8 +205,6 @@ class Controlador_Oferta extends Controlador_Base{
                 $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,$areasInteres,$nivelInteres,$cambioRes,$filtros); 
               }
 
-              //$_SESSION['mfo_datos']['Filtrar_ofertas'] = $filtros;
-
             }else{
 
               $filtro = 1;
@@ -256,6 +254,11 @@ class Controlador_Oferta extends Controlador_Base{
             $tags['paginas'] = $pagination->showPage();
             Vista::render('ofertas', $tags);
           break;
+          case 'buscaDescripcion':                 
+              $idOferta = Utils::getParam('idOferta', '', $this->data);
+              $resultado = Modelo_Oferta::consultarDescripcionOferta($idOferta);
+              Vista::renderJSON($resultado);
+          break;
           case 'detalleOferta':
               //solo candidatos 
               if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
@@ -273,13 +276,13 @@ class Controlador_Oferta extends Controlador_Base{
 
                 $subempresas = $_SESSION['mfo_datos']['subempresas']; 
                 $array_subempresas = array();
-                foreach ($subempresas as $id) {
-                    array_push($array_subempresas, $id);
+                foreach ($subempresas as $key => $id) {
+                  array_push($array_subempresas, $key);
                 }
+
                 if(!empty($array_subempresas)){
                   $idUsuario = $idUsuario.",".implode(",", $array_subempresas);
                 }
-
               }
               
               $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
@@ -381,7 +384,15 @@ class Controlador_Oferta extends Controlador_Base{
               $vista = $opcion;
 
               //solo empresas
-              $subempresas = Modelo_Usuario::obtieneHerenciaEmpresa($idUsuario); 
+              $subempresas = $_SESSION['mfo_datos']['subempresas']; 
+              $array_subempresas = array();
+              foreach ($subempresas as $key => $id) {
+                  array_push($array_subempresas, $key);
+              }
+
+              if(!empty($array_subempresas)){
+                $subempresas = implode(",", $array_subempresas);
+              } 
               
               if ($subempresas == '') {
                   Utils::doRedirect(PUERTO . '://' . HOST . '/vacantes/');

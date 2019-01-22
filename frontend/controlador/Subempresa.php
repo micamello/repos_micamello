@@ -4,11 +4,10 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function construirPagina()
     {
-
+        
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }
-
 
         if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
           Utils::doRedirect(PUERTO . '://' . HOST . '/');  
@@ -32,11 +31,6 @@ class Controlador_Subempresa extends Controlador_Base
                 $resultado = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlanEmpresa);
                 $result = array('num_publicaciones_rest'=>$resultado['num_publicaciones_rest'],'num_descarga_rest'=>$resultado['num_descarga_rest']);
                 Vista::renderJSON($result);
-            break;
-            case 'buscaDescripcion':
-                $idOferta = Utils::getParam('idOferta', '', $this->data);
-                $resultado = Modelo_Oferta::consultarDescripcionOferta($idOferta);
-                Vista::renderJSON($resultado);
             break;
             case 'eliminar': 
                 self::eliminarPlan($idPlanEmpresa);
