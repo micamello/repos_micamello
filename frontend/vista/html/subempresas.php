@@ -11,12 +11,17 @@
                         $cuentas = $ofertas = '';
                         $cantd_cuentas = 0;
                         $recursos = 0;
-                        //print_r($tieneRecursos);
+                        $planes_con_postulaciones = array();
+
                         foreach ($tieneRecursos as $key => $value) {
                             
                             $cantd_cuentas += $value['num_cuentas'];
                             $cuentas .= $value['nombre'].': '.$value['num_cuentas'].'<br>';
                             $ofertas .= $value['nombre'].': '.$value['postulaciones'].'<br>';
+
+                            if($value['postulaciones'] > 0 || $value['postulaciones'] === 'Ilimitado'){
+                                array_push($planes_con_postulaciones, $key);
+                            }
                         }
                     ?>
                     <div class="col-md-6 col-md-12">
@@ -75,14 +80,15 @@
                                                     $ids_empresasPlans = explode(",",$value['ids_empresasPlans']); 
                                                     $ids_parents = explode(",",$value['ids_parents']); 
                                                     $fechas_caducidades = explode(",",$value['fechas_caducidades']);
-                                                   
+
                                                     if(!empty($planesActivos)){
                                                         
                                                         //solo se puede agregar un nuevo plan siempre y cuando el o los planes disponibles sean distintos de los planes ya creados y tengan recursos
-                                                        
                                                         $interseccion_planes = array_diff(explode(",",$planesActivos['id_empresa_plan']), $ids_parents);
                    
-                                                        if(!empty($interseccion_planes)){
+                                                        $inter_planes = array_intersect($interseccion_planes, $planes_con_postulaciones);
+
+                                                        if(!empty($inter_planes)){
                                                             $puedeCrearPlan = '1';
                                                         }else{
                                                             $puedeCrearPlan = '';

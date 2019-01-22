@@ -65,6 +65,11 @@ class Controlador_Oferta extends Controlador_Base{
         }
 
         switch ($opcion) {
+          case 'buscaDescripcion':
+            $idOferta = Utils::getParam('idOferta', '', $this->data);
+            $resultado = Modelo_Oferta::consultarDescripcionOferta($idOferta);
+            Vista::renderJSON($resultado);
+          break;
           case 'filtrar':
 
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();
@@ -169,8 +174,8 @@ class Controlador_Oferta extends Controlador_Base{
             if($vista == 'cuentas'){
               $array_subempresas = array();
               $sub = $_SESSION['mfo_datos']['subempresas'];
-              foreach ($sub as $id) {
-                  array_push($array_subempresas, $id);
+              foreach ($sub as $key => $id) {
+                  array_push($array_subempresas, $key);
               }
               $idUsuario = implode(",", $array_subempresas);
 
@@ -180,6 +185,8 @@ class Controlador_Oferta extends Controlador_Base{
             }
 
             $filtros = $_SESSION['mfo_datos']['Filtrar_ofertas'];
+
+
             if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['J']) && empty($filtros['S']) && empty($filtros['Q'])){
 
               if(isset($_POST['filtro'])){
@@ -254,11 +261,6 @@ class Controlador_Oferta extends Controlador_Base{
             $tags['paginas'] = $pagination->showPage();
             Vista::render('ofertas', $tags);
           break;
-          case 'buscaDescripcion':                 
-              $idOferta = Utils::getParam('idOferta', '', $this->data);
-              $resultado = Modelo_Oferta::consultarDescripcionOferta($idOferta);
-              Vista::renderJSON($resultado);
-          break;
           case 'detalleOferta':
               //solo candidatos 
               if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
@@ -284,6 +286,7 @@ class Controlador_Oferta extends Controlador_Base{
                   $idUsuario = $idUsuario.",".implode(",", $array_subempresas);
                 }
               }
+
               
               $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
 

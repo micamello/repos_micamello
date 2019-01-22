@@ -16,8 +16,8 @@
                                               <input type="hidden" name="asignarRecursos" id="asignarRecursos" value="1">
                                               <div class="col-md-offset-3 col-md-6">
                                                 <div class="form-group" id="seccion_plan">
-                                                  <label for="plan">Seleccione un Plan <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_plan" class="help-block with-errors"></div>
-                                                  <select class="form-control" name="plan" id="plan"   required>
+                                                  <label for="plan1">Seleccione un Plan <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_plan" class="help-block with-errors"></div>
+                                                  <select class="form-control" name="plan1" id="plan1"   required>
                                                     <option value="0">Seleccione un plan</option>
                                                     <?php 
                                                     if (!empty($planesActivos)){
@@ -39,7 +39,7 @@
                                                     <div class="col-md-offset-3 col-md-4">
                                                       <div id="recursos1" class="form-group">
                                                         <label for="numPost">N&uacute;mero de Ofertas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
-                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calcularRecursos(); validaRecursos();" onclick="calcularRecursos(); validaRecursos();" onkeydown="return validaNumeros(event);" class="form-control" value="1">
+                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calcularRecursos('<?php echo Utils::encriptar($idSubEmpresa); ?>'); validaRecursos();" onclick="calcularRecursos('<?php echo Utils::encriptar($idSubEmpresa); ?>'); validaRecursos();" onkeydown="return validaNumeros(event);" class="form-control" value="1">
                                                       </div>
                                                     </div> 
 
@@ -57,7 +57,7 @@
                                                     <div class="col-md-offset-3 col-md-4">
                                                       <div class="form-group" id="recursos2">
                                                         <label for="numDesc">N&uacute;mero de Descargas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec2" class="help-block with-errors"></div>
-                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_desc" id="num_desc" onkeyup="calcularRecursos(); validaRecursos();" onclick="calcularRecursos(); validaRecursos();" onkeydown="return validaNumeros(event);" class="form-control" value="1">
+                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_desc" id="num_desc" onkeyup="calcularRecursos('<?php echo Utils::encriptar($idSubEmpresa); ?>'); validaRecursos();" onclick="calcularRecursos('<?php echo Utils::encriptar($idSubEmpresa); ?>'); validaRecursos();" onkeydown="return validaNumeros(event);" class="form-control" value="1">
                                                       </div>
                                                     </div> 
 
