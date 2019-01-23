@@ -47,6 +47,42 @@ class Utils{
     $result = preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email);
     return $result;
   }
+
+  static public function enviarEmail($parametros){
+    $url = "";
+    $asunto = "";
+    $body = "";
+    $text_button = "";
+    $tipo = $parametros['tipo'];
+    $template = Modelo_TemplateEmail::obtieneTemplate($tipo);
+      switch ($tipo) {
+        case 1:
+            $asunto = "Activación de cuenta";
+            $text_button = "Activar cuenta";
+            $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
+            $body = str_replace(array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%"), array(ucwords($parametros['nombres_mostrar']), $parametros['usuario_login'], $url), $template['contenido'], $text_button);
+          break;
+        case 2:
+            $asunto = "Credenciales de cuenta mi camello";
+            $text_button = "Activar cuenta";
+            $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
+            $body = str_replace(array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", $text_button, "%CORREO%", "%PASSWORD%"), array(ucwords($parametros['nombres_mostrar']), $parametros['usuario_login'], $url), $template['contenido'], $text_button, $parametros['correo'], $parametros['password']);
+        break;
+        default:
+            
+          break;
+      }
+    $template_data = array('asunto'=>$asunto, 'body'=>$body);
+    $asunto = $template_data['asunto'];
+    $body = $template_data['body'];
+    if (Utils::envioCorreo($parametros['correo'],$asunto,$body)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   public static function envioCorreo($to, $subject, $body){    
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -411,6 +447,29 @@ class Utils{
    else
      return 'Other';
   }
+
+// public static function generarTemplateCorreo($parametros){
+// $url = "";
+// $asunto = "";
+// $body = "";
+// $tipo = $parametros['tipo'];
+// $template = Modelo_TemplateEmail::obtieneTemplate($tipo);
+//   switch ($tipo) {
+//     case 'REGISTRO_MANUAL':
+//         $asunto = "Activación de cuenta";
+//         $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
+//         $body = str_replace(array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%"), array($parametros['nombres_mostrar'], $parametros['usuario_login'], $url), $template['contenido']);
+//       break;
+//     case 'REGISTRO_RED_SOCIAL':
+//         $asunto = "Credenciales de cuenta mi camello";
+//     break;
+//     default:
+        
+//       break;
+//   }
+//   $result = array('asunto'=>$asunto, 'body'=>$body);
+//   return $result;
+// }
 
 }
 ?>
