@@ -1,25 +1,10 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  public function construirPagina(){
-    // $navegador = Utils::detectarNavegador();
-    // FACEBOOK
-    require_once "includes/fb_api/config.php";
-    // $redirectURL = PUERTO."://".HOST."/facebook.php?tipo_user=1";
-    $redirectURL = "https://www.micamello.com.ec/desarrollov2/facebook.php?tipo_user=1";
-    $permissions = ['email'];
-    $loginURL = $helper->getLoginUrl($redirectURL, $permissions);
+  public function construirPagina(){        
 
-    // GOOGLE
-    require_once "includes/gg_api/config.php";
-    $gg_URL = $gClient->createAuthUrl();
-
-    // LINKEDIN
-    $lk = "linkedin.php?tipo_usuario=1";
-
-    // TWITTER
-    require_once "includes/tw_api/config.php";
-    $tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
+    $this->linkRedesSociales();
+    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
 
     $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
@@ -29,13 +14,6 @@ class Controlador_Inicio extends Controlador_Base {
     $arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
-
-
-
-    // $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-    // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
-    $social_reg = array('fb'=>$loginURL, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-
 
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,

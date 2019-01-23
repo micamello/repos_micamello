@@ -78,7 +78,7 @@
                 <option selected="" value="" disabled>Seleccione tipo identificación</option>
                 <?php 
                   foreach(DOCUMENTACION as $key => $doc)
-                    echo "<option value='".$key."'>".($doc)."</option>";
+                    echo "<option value='".$key."'>".utf8_encode($doc)."</option>";
                  ?>
               </select>
             </div>

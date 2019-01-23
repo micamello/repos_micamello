@@ -3,7 +3,7 @@
     <div class="main_business"><br><br>      
       <div class="col-md-6"> 
       <h3 align="center"> INICIAR SESI&Oacute;N</h3>       
-        <form action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login">
+        <form action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login">
           <div class="col-md-12">
             <div class="form-group" id="seccion_username">
               <label>Usuario/Correo:</label><div id="err_username" class="help-block with-errors"></div>
@@ -23,7 +23,7 @@
           <p class="text-center"><strong>Olvidaste tu contrase&ntilde;a</strong> <a href="<?php echo PUERTO."://".HOST;?>/contrasena/">Haz click aqu&iacute;</a></p><br>
           <div class="row">          
             <div class="col-xs-12">
-              <button id="btn_sesion" type="submit" class="btn btn-success btn-block btn-flat" onclick="validaForm(1,'btn_sesion')">Iniciar Sesi&oacute;n</button>
+              <button id="btn_sesion" type="button" class="btn btn-success btn-block btn-flat" onclick="validaForm(1,'btn_sesion')">Iniciar Sesi&oacute;n</button>
             </div>
           </div>
         </form>

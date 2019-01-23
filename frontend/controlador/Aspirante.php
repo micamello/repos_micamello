@@ -222,8 +222,8 @@ class Controlador_Aspirante extends Controlador_Base
                     if(isset($_SESSION['mfo_datos']['subempresas'])){
                         $subempresas = $_SESSION['mfo_datos']['subempresas'];  
                         //$array_empresas = explode(",",$subempresas);
-                        foreach ($subempresas as $id) {
-                            array_push($array_empresas, $id);
+                        foreach ($subempresas as $key => $id) {
+                            array_push($array_empresas, $key);
                         }
                     }
 
@@ -307,8 +307,8 @@ class Controlador_Aspirante extends Controlador_Base
                 if(isset($_SESSION['mfo_datos']['subempresas'])){
                     $subempresas = $_SESSION['mfo_datos']['subempresas'];  
                     //$array_empresas = explode(",",$subempresas);
-                    foreach ($subempresas as $id) {
-                        array_push($array_empresas, $id);
+                    foreach ($subempresas as $key => $id) {
+                        array_push($array_empresas, $key);
                     }
                 }
 

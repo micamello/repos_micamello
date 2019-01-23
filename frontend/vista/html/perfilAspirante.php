@@ -459,7 +459,7 @@
 				else{
 					foreach ($Resultados as $res) {
 						?>
-							<input type="hidden" name="nombres_res" value="<?php echo ($res['nombre']) ?>">
+							<input type="hidden" name="nombres_res" value="<?php echo utf8_encode($res['nombre']) ?>">
 							<input type="hidden" name="valor_res" value="<?php echo $res['valor'] ?>">
 						<?php
 						}

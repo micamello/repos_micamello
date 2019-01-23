@@ -26,7 +26,7 @@
           </div>   
           <div class="row">                            
             <div class="col-xs-12">
-              <button type="submit" class="btn btn-success btn-block btn-flat" onclick="validaForm(2,'recuperar')" id="recuperar">Enviar</button>
+              <button type="button" class="btn btn-success btn-block btn-flat" onclick="validaForm(2,'recuperar')" id="recuperar">Enviar</button>
             </div>
           </div>
         </form>    

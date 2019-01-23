@@ -76,7 +76,7 @@
                   <option value="0">Seleccione una opción</option>             
                   <?php
                     foreach(TIPO_DOCUMENTO as $key=>$tipo){
-                      echo "<option value='".$key."'>".$tipo."</option>";
+                      echo "<option value='".$key."'>".utf8_encode($tipo)."</option>";
                     }
                   ?>  
                   </select>
@@ -137,7 +137,7 @@
                     <option value="0">Seleccione una opción</option>             
                     <?php
                       foreach(TIPO_DOCUMENTO as $key=>$tipo){
-                        echo "<option value='".$key."'>".$tipo."</option>";
+                        echo "<option value='".$key."'>".utf8_encode($tipo)."</option>";
                       }
                     ?>  
                     </select>

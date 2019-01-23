@@ -1,6 +1,0 @@
-[2019/01/23 04:45:17] Utils::createSession empezo una nueva sesion
-[2019/01/23 04:45:17] SQL execute: UPDATE mfo_usuario SET estado="1" WHERE id_usuario=1380
-[2019/01/23 04:45:17] Utils::createSession empezo una nueva sesion
-[2019/01/23 04:45:18] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 04:45:18] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 04:45:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

@@ -33,11 +33,6 @@ class Controlador_Subempresa extends Controlador_Base
                 $result = array('num_publicaciones_rest'=>$resultado['num_publicaciones_rest'],'num_descarga_rest'=>$resultado['num_descarga_rest']);
                 Vista::renderJSON($result);
             break;
-            case 'buscaDescripcion':
-                $idOferta = Utils::getParam('idOferta', '', $this->data);
-                $resultado = Modelo_Oferta::consultarDescripcionOferta($idOferta);
-                Vista::renderJSON($resultado);
-            break;
             case 'eliminar': 
                 self::eliminarPlan($idPlanEmpresa);
                 Utils::doRedirect(PUERTO . '://' . HOST . '/adminEmpresas/'); 
@@ -200,50 +195,12 @@ class Controlador_Subempresa extends Controlador_Base
                     $cantd_emp = 0;
                 }
 
-                //if(($valor_post > 0 && $cantd_emp > 0) || ($valor_post > 0 && $cantd_emp == 0)){
-                    $recursos[$value['id_empresa_plan']] = array('nombre'=>$value['nombre'].' (Fecha de compra: '.$value['fecha_compra'].')','postulaciones'=>$valor_post,'num_cuentas'=>$cantd_emp); 
-                //}
+                $recursos[$value['id_empresa_plan']] = array('nombre'=>$value['nombre'].' (Fecha de compra: '.$value['fecha_compra'].')','postulaciones'=>$valor_post,'num_cuentas'=>$cantd_emp); 
             }else{
                 
                $recursos[$value['id_empresa_plan']] = array('nombre'=>$value['nombre'].' (Fecha de compra: '.$value['fecha_compra'].')','postulaciones'=>$valor_post,'num_cuentas'=>$value['num_cuenta']); 
             }
-           /* if($value['numero_postulaciones'] > 0){
-                $valor_post += $value['numero_postulaciones'];
-            }else if($value['numero_postulaciones'] == -1){
-                $hay_neg_post++;  
-            }
-
-            if($value['numero_descarga'] > 0){
-                $valor_desc += $value['numero_descarga'];
-            }else if($value['numero_descarga'] == -1){
-                $hay_neg_desc++; 
-            }
-
-            if($value['num_cuenta'] > 0){
-                $valor_cuenta += $value['num_cuenta'];
-            }*/
         }
-
-        /*if($valor_post > 0){
-            array_push($num_post, $valor_post);
-        }
-
-        if($hay_neg_post > 0){
-            array_push($num_post, 'Ilimitado');
-        }
-
-        if($valor_desc > 0){
-            array_push($num_desc, $valor_desc);
-        }
-
-        if($hay_neg_desc > 0){
-            array_push($num_desc, 'Ilimitado');
-        }
-
-        $recursos['publicaciones'] = implode("/",$num_post);
-        $recursos['descargas'] = implode("/",$num_desc);
-        $recursos['cuentas'] = $valor_cuenta;
-*/
         return $recursos;
     }
 
@@ -341,7 +298,7 @@ class Controlador_Subempresa extends Controlador_Base
             $id_empresa = $GLOBALS['db']->insert_id();
 
             if(!self::correoAvisoCreacion($data['correo'],$data['name_user'],$username,$password)){
-                throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta, intente nuevamente");
+                throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta o el correo no existe, intente nuevamente");
             }
 
             if(!Modelo_ContactoEmpresa::crearContactoEmpresa($data, $id_empresa)){
@@ -368,7 +325,7 @@ class Controlador_Subempresa extends Controlador_Base
             }
 
             if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($idPlan,$numPublicaciones,$numDescargas)){
-                throw new Exception("Error al actualizar los recursos de la empresa."); 
+                throw new Exception("Error al actualizar las ofertas de la empresa."); 
             }
 
             if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,$var2,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$idPlan)){
@@ -387,7 +344,8 @@ class Controlador_Subempresa extends Controlador_Base
     public function asignarRecursos($id,$tipoVista){
 
         try{
-            $idPlan = Utils::desencriptar($_POST['plan']);
+
+            $idPlan = Utils::desencriptar($_POST['plan1']);
             $planPadre = Modelo_UsuarioxPlan::consultarRecursosAretornar($idPlan);
 
             if(!isset($_POST["num_post"]) || $_POST["num_post"] == -1){
@@ -432,7 +390,7 @@ class Controlador_Subempresa extends Controlador_Base
                 }
             }else{
                 if(!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($idPlan,$numPublicaciones,$numDescargas)){
-                    throw new Exception("Error al actualizar los recursos de la empresa."); 
+                    throw new Exception("Error al actualizar las ofertas de la empresa."); 
                 }
 
                 if($tipoVista == 'asignar'){
@@ -441,7 +399,7 @@ class Controlador_Subempresa extends Controlador_Base
                     }
                 }else{
                     if (!Modelo_UsuarioxPlan::actualizarPublicacionesEmpresa($id,$var1,$var2)){
-                      throw new Exception("Error al actualizar los recursos de la empresa hija.");   
+                      throw new Exception("Error al actualizar las ofertas de la empresa hija.");   
                     }
                 }
             }
@@ -459,7 +417,7 @@ class Controlador_Subempresa extends Controlador_Base
 
         $asunto = "Creación de cuenta";
         $body = "Estimado, ".$nombres."<br>";
-        $body .= "<br>Su cuenta puede fue creada exitosamente y puede ingresar mediante su correo electrónico o el siguiente. <br>usuario: <b>".$username."</b><br> clave: <b>".$password."</b><br><br>";
+        $body .= "<br>Su cuenta fue creada exitosamente, puede ingresar a su cuenta con los siguientes datos: <br><br>Usuario: <b>".$username."</b><br>Correo: <b>".$correo."</b><br> Clave: <b>".$password."</b>";
         if (Utils::envioCorreo($correo,$asunto,$body)){
           return true;
         }
