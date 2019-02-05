@@ -3,23 +3,8 @@ class Controlador_Login extends Controlador_Base {
  
   public function construirPagina(){
 
-    // FACEBOOK
-    // require_once "includes/fb_api/config.php";
-    // $permissions = ['email'];
-    // $urlLogin = PUERTO."://".HOST."/facebook.php?tipo_user=1";
-    // $fb_URL = $helper->getLoginUrl(PUERTO."://".HOST."/facebook.php?tipo_user=1", $permissions);
-
-    // GOOGLE
-    require_once "includes/gg_api/config.php";
-    $gg_URL = $gClient->createAuthUrl();
-
-    // LINKEDIN
-    $lk = "linkedin.php?tipo_usuario=1";
-
-    // TWITTER
-    require_once "includes/tw_api/config.php";
-    $tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
-
+    $this->linkRedesSociales();
+    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
 
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -60,9 +45,6 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     } 
-
-    $social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-    $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
 
     $tags = array('social'=>$social_reg);
  

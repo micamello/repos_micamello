@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fe:Facturae xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:fe="http://www.facturae.es/Facturae/2014/v3.2.1/Facturae"><FileHeader><SchemaVersion>3.2.1</SchemaVersion><Modality>I</Modality><InvoiceIssuerType>EM</InvoiceIssuerType><Batch><BatchIdentifier>A00000000123FAC201804</BatchIdentifier><InvoicesCount>1</InvoicesCount><TotalInvoicesAmount><TotalAmount>60.42</TotalAmount></TotalInvoicesAmount><TotalOutstandingAmount><TotalAmount>60.42</TotalAmount></TotalOutstandingAmount><TotalExecutableAmount><TotalAmount>60.42</TotalAmount></TotalExecutableAmount><InvoiceCurrencyCode>EUR</InvoiceCurrencyCode></Batch></FileHeader><Parties><SellerParty><TaxIdentification><PersonTypeCode>J</PersonTypeCode><ResidenceTypeCode>R</ResidenceTypeCode><TaxIdentificationNumber>A00000000</TaxIdentificationNumber></TaxIdentification><LegalEntity><CorporateName>Perico de los Palotes S.A.</CorporateName><AddressInSpain><Address>C/ Falsa, 123</Address><PostCode>12345</PostCode><Town>Madrid</Town><Province>Madrid</Province><CountryCode>ESP</CountryCode></AddressInSpain></LegalEntity></SellerParty><BuyerParty><TaxIdentification><PersonTypeCode>F</PersonTypeCode><ResidenceTypeCode>R</ResidenceTypeCode><TaxIdentificationNumber>00000000A</TaxIdentificationNumber></TaxIdentification><Individual><Name>Antonio</Name><FirstSurname>García</FirstSurname><SecondSurname>Pérez</SecondSurname><AddressInSpain><Address>Avda. Mayor, 7</Address><PostCode>54321</PostCode><Town>Madrid</Town><Province>Madrid</Province><CountryCode>ESP</CountryCode></AddressInSpain></Individual></BuyerParty></Parties><Invoices><Invoice><InvoiceHeader><InvoiceNumber>123</InvoiceNumber><InvoiceSeriesCode>FAC201804</InvoiceSeriesCode><InvoiceDocumentType>FC</InvoiceDocumentType><InvoiceClass>OO</InvoiceClass></InvoiceHeader><InvoiceIssueData><IssueDate>2018-04-01</IssueDate><InvoiceCurrencyCode>EUR</InvoiceCurrencyCode><TaxCurrencyCode>EUR</TaxCurrencyCode><LanguageName>es</LanguageName></InvoiceIssueData><TaxesOutputs><Tax><TaxTypeCode>01</TaxTypeCode><TaxRate>21.00</TaxRate><TaxableBase><TotalAmount>49.93</TotalAmount></TaxableBase><TaxAmount><TotalAmount>10.49</TotalAmount></TaxAmount></Tax></TaxesOutputs><InvoiceTotals><TotalGrossAmount>49.93</TotalGrossAmount><TotalGeneralDiscounts>0.00</TotalGeneralDiscounts><TotalGeneralSurcharges>0.00</TotalGeneralSurcharges><TotalGrossAmountBeforeTaxes>49.93</TotalGrossAmountBeforeTaxes><TotalTaxOutputs>10.49</TotalTaxOutputs><TotalTaxesWithheld>0.00</TotalTaxesWithheld><InvoiceTotal>60.42</InvoiceTotal><TotalOutstandingAmount>60.42</TotalOutstandingAmount><TotalExecutableAmount>60.42</TotalExecutableAmount></InvoiceTotals><Items><InvoiceLine><ItemDescription>Lámpara de pie</ItemDescription><Quantity>3.00</Quantity><UnitOfMeasure>01</UnitOfMeasure><UnitPriceWithoutTax>16.6446281</UnitPriceWithoutTax><TotalCost>49.93</TotalCost><GrossAmount>49.93</GrossAmount><TaxesOutputs><Tax><TaxTypeCode>01</TaxTypeCode><TaxRate>21.00</TaxRate><TaxableBase><TotalAmount>49.93</TotalAmount></TaxableBase><TaxAmount><TotalAmount>10.49</TotalAmount></TaxAmount></Tax></TaxesOutputs></InvoiceLine></Items></Invoice></Invoices><ds:Signature xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="Signature540903320">
+<ds:SignedInfo Id="Signature-SignedInfo684684376">
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
+<ds:Reference Id="SignedPropertiesID1784787857" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature540903320-SignedProperties856417937">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>HF8/jwXMC1V7uPz1VmIyY6l4DJs=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference URI="#Certificate786445698">
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>R28aeXnGhkiz7PYMDLSZbmEcdrg=</ds:DigestValue>
+</ds:Reference>
+<ds:Reference Id="Reference-ID-1949821497" URI="">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
+<ds:DigestValue>1nCNyjU+Gw47LHxcj4zTCwDBRd8=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue Id="SignatureValue1184550104">
+SF8U6HeKXZZZCFd877+xVVdPdqT7BCNxaZ8YodKLkuOHcqbzCAoHzfa6b6InlHLNSCxQst7nbIqb
+zq35cuUb+snZ9+/wQ31CIo5DI9wB0TwoKEPOs+wooUsv1H6W7fxxpaKwc2Wi1CKOfd1zI8QH87j6
+MaIQq+UjuRRzOOb8pRAaSbS4jc5wKzbKXFV+2uH1Ao6NvVnSW4+T7M62fBdP4TRe5qs70KFs6XAY
+6jxf9tlzD1jgvy6sq6iYEUpvK2Nv7Gcu1JHufdIHFZ/s0Zzo6u2xlo12KeBL9jJ2DUyPIJ/6zalD
+IKEbKZdFQ1lfohkfLrGDb8qw/DoFlXBMWtcozg==
+</ds:SignatureValue>
+<ds:KeyInfo Id="Certificate786445698">
+<ds:X509Data>
+<ds:X509Certificate>
+MIIJWzCCB0OgAwIBAgIEWH+3oTANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
+BAoTGUJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxNzA1BgNVBAsTLkVOVElEQUQgREUgQ0VSVElG
+SUNBQ0lPTiBERSBJTkZPUk1BQ0lPTi1FQ0lCQ0UxDjAMBgNVBAcTBVFVSVRPMSUwIwYDVQQDExxB
+QyBCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMB4XDTE4MDExMDIwNDIzMloXDTIwMDExMDIxMTIz
+MlowgbYxCzAJBgNVBAYTAkVDMSIwIAYDVQQKExlCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMTcw
+NQYDVQQLEy5FTlRJREFEIERFIENFUlRJRklDQUNJT04gREUgSU5GT1JNQUNJT04tRUNJQkNFMQ4w
+DAYDVQQHEwVRVUlUTzE6MBEGA1UEBRMKMDAwMDI1MDY1ODAlBgNVBAMTHldJRE1BTiBJVkFOIEhJ
+RFJPVk8gQkVOQUxDQVpBUjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALDUeJd2geqc
+6OVhERDKzvIJXJWV6b/CvFZbcPvrePu2KEOKMLX/GldtkM5htmG/Yv6+jNWTLW2fNPscUsEOS1BB
+WnOJP2xmbLJTn6cxcqircZyH9oE7W2XFRPN5KBJYvVV+7BFIxUn98pvnTIrBHvGKZclED+7sNuTJ
+/l6COKyXw1FQmeqgugD2TjEjo6KUqPq22nt3gX6tMvZMesXse+ajAAma7q6NwOyjvRNTexXre9CW
+pbKrJsE9g6hpILU4y6xDOoSn4Pvv+hoqhkHcm17r+06r5rruVSMAnhlu7Hhq6tfHYOHzyTcCvVhk
+rOJosNjUM33DdUiQ27UPMGKXNVMCAwEAAaOCBIIwggR+MAsGA1UdDwQEAwIFIDCBkQYIKwYBBQUH
+AQEEgYQwgYEwPgYIKwYBBQUHMAGGMmh0dHA6Ly9vY3NwLmVjaS5iY2UuZWMvZWpiY2EvcHVibGlj
+d2ViL3N0YXR1cy9vY3NwMD8GCCsGAQUFBzABhjNodHRwOi8vb2NzcDEuZWNpLmJjZS5lYy9lamJj
+YS9wdWJsaWN3ZWIvc3RhdHVzL29jc3AwHAYKKwYBBAGCqDsDCgQOEwxNSUNBTUVMTE8gU0EwHQYK
+KwYBBAGCqDsDCwQPEw0wOTkzMDY0NDY3MDAxMBoGCisGAQQBgqg7AwEEDBMKMTcxMjQ2NTczOTAb
+BgorBgEEAYKoOwMCBA0TC1dJRE1BTiBJVkFOMBcGCisGAQQBgqg7AwMECRMHSElEUk9WTzAaBgor
+BgEEAYKoOwMEBAwTCkJFTkFMQ0FaQVIwHwYKKwYBBAGCqDsDBQQREw9HRVJFTlRFIEdFTkVSQUww
+MQYKKwYBBAGCqDsDBwQjEyFWSUxMQSBDTFVCIEVUQVBBIEtSWVBUT04gTVogMTQgVjMwGQYKKwYB
+BAGCqDsDCAQLEwkwNDI3NTMxMDYwGQYKKwYBBAGCqDsDCQQLEwlHdWF5YXF1aWwwFwYKKwYBBAGC
+qDsDDAQJEwdFQ1VBRE9SMCAGCisGAQQBgqg7AzMEEhMQU09GVFdBUkUtQVJDSElWTzAiBgNVHREE
+GzAZgRd3aWRtYW5oaWRyb3ZvQGdtYWlsLmNvbTCCAd8GA1UdHwSCAdYwggHSMIIBzqCCAcqgggHG
+hoHVbGRhcDovL2JjZXFsZGFwc3VicDEuYmNlLmVjL2NuPUNSTDQ5OSxjbj1BQyUyMEJBTkNPJTIw
+Q0VOVFJBTCUyMERFTCUyMEVDVUFET1IsbD1RVUlUTyxvdT1FTlRJREFEJTIwREUlMjBDRVJUSUZJ
+Q0FDSU9OJTIwREUlMjBJTkZPUk1BQ0lPTi1FQ0lCQ0Usbz1CQU5DTyUyMENFTlRSQUwlMjBERUwl
+MjBFQ1VBRE9SLGM9RUM/Y2VydGlmaWNhdGVSZXZvY2F0aW9uTGlzdD9iYXNlhjRodHRwOi8vd3d3
+LmVjaS5iY2UuZWMvQ1JML2VjaV9iY2VfZWNfY3JsZmlsZWNvbWIuY3JspIG1MIGyMQswCQYDVQQG
+EwJFQzEiMCAGA1UEChMZQkFOQ08gQ0VOVFJBTCBERUwgRUNVQURPUjE3MDUGA1UECxMuRU5USURB
+RCBERSBDRVJUSUZJQ0FDSU9OIERFIElORk9STUFDSU9OLUVDSUJDRTEOMAwGA1UEBxMFUVVJVE8x
+JTAjBgNVBAMTHEFDIEJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxDzANBgNVBAMTBkNSTDQ5OTAf
+BgNVHSMEGDAWgBQY+fD75jIcmWY5KsqLsml9SSe/zjAdBgNVHQ4EFgQUVMXqi0ulY/Pjiy75JqvL
+Yc/5kIAwCQYDVR0TBAIwADAZBgkqhkiG9n0HQQAEDDAKGwRWOC4xAwIEsDANBgkqhkiG9w0BAQsF
+AAOCAgEAkl6O+kKvCWyLpxMUcAsMWANYx5QAFevWD4SprUOONHOBnLCLVyZt6vkbo9KmgTO0POcr
+DYxN6geYjPFxvM8RQ/PHvKytFfHxXCTfKmf1JUo8f4Zh2DC5qJWNm6p4OjmQ/1b6vulj0lZeH3sQ
+e6odmGp8zocyBu/2ms+/TYL0Y8uV7j3P5oy4ado8+pTK0awRCbavUsUniDB8o0c5pXNPdGbsPm+O
+iHVdmJLHTTLCIB570i/hTPr+QTFd1CUoJKEoJ+c28UOqCDokd1WVSrR2X9o0NQFLnJfsi033yGRW
+PrXe/XwCPgU7RXuYN+LyFrsa4JPgH78a5qtLIcXsXljeyOUFuywu/L6Xab8QBV+WV8gbk8yaBCqg
+QgvZsNe2w1yEYM2itUJJEjXBr+bWoVGTmE1ZtcIoOGLP7vVvJ/nJGklVIyv5K9+fMr1Jgyz5S+lM
+Nt4R2UMdPCjlvJaoBnzWRJITfSu+d3EULdXwrDozKPdiptA0OdtPWWFz76CvNL1hVtzrOqIVkInR
+5iI/a6FkpAaK2PVItHSDm+KdlMxt8iOIjNs8yy5QrN9MbDaKLGFNN21NhbfMuiz0HKrA1phPraQH
+XigIJj0mPMHABfVj7nzkV9axz/wiIzsm1j1bd4KlXy7kU2sthMhIqN2xTN7vtapp6JW4wXi/4I+n
+caTHusg=
+</ds:X509Certificate>
+</ds:X509Data>
+<ds:KeyValue>
+<ds:RSAKeyValue>
+<ds:Modulus>
+sNR4l3aB6pzo5WEREMrO8glclZXpv8K8Vltw++t4+7YoQ4owtf8aV22QzmG2Yb9i/r6M1ZMtbZ80
++xxSwQ5LUEFac4k/bGZsslOfpzFyqKtxnIf2gTtbZcVE83koEli9VX7sEUjFSf3ym+dMisEe8Ypl
+yUQP7uw25Mn+XoI4rJfDUVCZ6qC6APZOMSOjopSo+rbae3eBfq0y9kx6xex75qMACZruro3A7KO9
+E1N7Fet70JalsqsmwT2DqGkgtTjLrEM6hKfg++/6GiqGQdybXuv7Tqvmuu5VIwCeGW7seGrq18dg
+4fPJNwK9WGSs4miw2NQzfcN1SJDbtQ8wYpc1Uw==
+</ds:Modulus>
+<ds:Exponent>AQAB</ds:Exponent>
+</ds:RSAKeyValue>
+</ds:KeyValue>
+</ds:KeyInfo>
+<ds:Object Id="Signature540903320-Object1274538737"><xades:QualifyingProperties Target="#Signature540903320"><xades:SignedProperties Id="Signature540903320-SignedProperties856417937"><xades:SignedSignatureProperties><xades:SigningTime>2019-01-07T16:32:20+00:00</xades:SigningTime><xades:SigningCertificate><xades:Cert><xades:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>Bbo8m1lK1iJ1W3XKgFOfsCbAD8o=</ds:DigestValue></xades:CertDigest><xades:IssuerSerial><ds:X509IssuerName>C=EC,O=BANCO CENTRAL DEL ECUADOR,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,L=QUITO,CN=AC BANCO CENTRAL DEL ECUADOR</ds:X509IssuerName><ds:X509SerialNumber>1484765089</ds:X509SerialNumber></xades:IssuerSerial></xades:Cert></xades:SigningCertificate><xades:SignaturePolicyIdentifier><xades:SignaturePolicyId><xades:SigPolicyId><xades:Identifier>http://www.facturae.es/politica_de_firma_formato_facturae/politica_de_firma_formato_facturae_v3_1.pdf</xades:Identifier><xades:Description>Política de Firma FacturaE v3.1</xades:Description></xades:SigPolicyId><xades:SigPolicyHash><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>Ohixl6upD6av8N7pEvDABhEL6hM=</ds:DigestValue></xades:SigPolicyHash></xades:SignaturePolicyId></xades:SignaturePolicyIdentifier><xades:SignerRole><xades:ClaimedRoles><xades:ClaimedRole>emisor</xades:ClaimedRole></xades:ClaimedRoles></xades:SignerRole></xades:SignedSignatureProperties><xades:SignedDataObjectProperties><xades:DataObjectFormat ObjectReference="#Reference-ID-1949821497"><xades:Description>Factura electrónica</xades:Description><xades:MimeType>text/xml</xades:MimeType></xades:DataObjectFormat></xades:SignedDataObjectProperties></xades:SignedProperties></xades:QualifyingProperties></ds:Object></ds:Signature></fe:Facturae>

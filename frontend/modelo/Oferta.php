@@ -69,6 +69,11 @@ class Modelo_Oferta{
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= " AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }
+    
+    if (!empty($vista) && ($vista != 'postulacion')){ 
+      if($areasInteres != false){
+        $sql .= " AND a.id_area IN(".$areasInteres.")"; 
+      }
 
     if (!empty($vista) && ($vista != 'postulacion')){ 
 
@@ -116,7 +121,7 @@ class Modelo_Oferta{
       }
 
       $page = ($page - 1) * REGISTRO_PAGINA;
-      echo $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
 
     }else{
       if (!empty($vista) && ($vista == 'postulacion')){ 

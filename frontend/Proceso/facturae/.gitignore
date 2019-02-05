@@ -1,0 +1,7 @@
+/vendor/
+/composer.lock
+tests/salida-*.xsig
+tests/cookies.txt
+Gemfile.lock
+.sass-cache/
+_site/

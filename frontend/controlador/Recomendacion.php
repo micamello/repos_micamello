@@ -2,6 +2,10 @@
 class Controlador_Recomendacion extends Controlador_Base {
   
   public function construirPagina(){
+    $this->linkRedesSociales();
+    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
+    $tags = array('social'=>$social_reg);
+
     try {
       if (Utils::getParam('enviarRecomendacion') == 1) {
         $campos = array('nombres' => 1, 'correo1' => 1, 'telefono' => 1, 'descripcion' => 1);

@@ -37,7 +37,7 @@ class Modelo_Usuario{
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?) AND password = ?";
-    $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password)); 
+    $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
@@ -130,7 +130,7 @@ public static function existeUsername($username){
     $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?";
 
     if($idUsuarioLogin != false){
-      $sql .= " AND id_usuario_login = ".$idUsuarioLogin;
+      $sql .= " AND id_usuario_login <> ".$idUsuarioLogin;
     }
 
     $rs = $GLOBALS['db']->auto_array($sql,array($dni));
@@ -228,18 +228,18 @@ public static function existeUsername($username){
           $datos['tipo_doc'] = $data['documentacion'];
         }
 
-        if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
-          if($_POST['lugar_estudio'] == 1){
-            $datos['nombre_univ'] = $_POST['universidad2'];
-            $datos['id_univ'] = 'null';
-          }else{
-            $datos['id_univ'] = $_POST['universidad'];
-            $datos['nombre_univ'] = ' ';
-          }
-        }else{
+      if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
+        if($_POST['lugar_estudio'] == 1){
+          $datos['nombre_univ'] = $_POST['universidad2'];
           $datos['id_univ'] = 'null';
+        }else{
+          $datos['id_univ'] = $_POST['universidad'];
           $datos['nombre_univ'] = ' ';
         }
+      }else{
+        $datos['id_univ'] = 'null';
+        $datos['nombre_univ'] = ' ';
+      }
 
         return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
 

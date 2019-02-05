@@ -78,7 +78,7 @@
                 <option selected="" value="" disabled>Seleccione tipo identificación</option>
                 <?php 
                   foreach(DOCUMENTACION as $key => $doc)
-                    echo "<option value='".$key."'>".($doc)."</option>";
+                    echo "<option value='".$key."'>".utf8_encode($doc)."</option>";
                  ?>
               </select>
             </div>
@@ -247,20 +247,20 @@
           <div class="col-md-12" align="center">
             <p class="center-text-line" style="font-size: 17px;">ó registrate con: </p>
             <!-- <div align="center" class="col-md-12"> -->
-              <!-- <div class="col-xs-8 col-xs-offset-2 col-md-1 col-md-offset-4 col-sm-1 col-sm-offset-4" align="">
-              <a class="socialbutton fb" onclick="window.location = '<?php //echo $social['fb']; ?>'"><i class="fa fa-facebook-square"></i><span class="social_text"> Facebook</span></a>
-              </div> -->
+              <div class="col-xs-8 col-xs-offset-2 col-md-1 col-md-offset-4 col-sm-1 col-sm-offset-4" align="">
+              <a class="socialbutton fb" onclick="window.location = '<?php echo $social['fb']; ?>'"><i class="fa fa-facebook-square"></i><span class="social_text"> Facebook</span></a>
+              </div>
 
-              <!-- <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align=""> -->
-              <div class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-3 col-sm-1 col-sm-offset-4" align="">
+              <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
+              <!-- <div class="col-xs-8 col-xs-offset-2 col-md-2 col-md-offset-3 col-sm-1 col-sm-offset-4" align=""> -->
                 <a class="socialbutton tw" onclick="window.location = '<?php echo $social['tw'] ?>'"><i class="fa fa-twitter-square"></i><span class="social_text"> Twitter</span></a>
               </div>
 
-              <div class="col-md-2 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
+              <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
                 <a class="socialbutton google" onclick="window.location = '<?php echo $social['gg'] ?>'"><i class="fa fa-google-plus-square"></i><span class="social_text"> Google</span></a>
               </div>
 
-              <div class="col-md-2 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
+              <div class="col-md-1 col-sm-offset-0 col-sm-1 col-xs-8 col-xs-offset-2" align="">
                 <a class="socialbutton lkin" onclick="window.location = '<?php echo $social['lk'] ?>'"><i class="fa fa-linkedin-square"></i><span class="social_text"> LinkeIn</span></a>
               </div>
             <!-- </div> -->

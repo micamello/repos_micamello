@@ -417,7 +417,7 @@ class Controlador_Subempresa extends Controlador_Base
 
         $asunto = "Creación de cuenta";
         $body = "Estimado, ".$nombres."<br>";
-        $body .= "<br>Su cuenta puede fue creada exitosamente y puede ingresar mediante su correo electrónico o el siguiente. <br>usuario: <b>".$username."</b><br> clave: <b>".$password."</b><br><br>";
+        $body .= "<br>Su cuenta fue creada exitosamente, puede ingresar a su cuenta con los siguientes datos: <br><br>Usuario: <b>".$username."</b><br>Correo: <b>".$correo."</b><br> Clave: <b>".$password."</b>";
         if (Utils::envioCorreo($correo,$asunto,$body)){
           return true;
         }

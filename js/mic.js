@@ -66,6 +66,32 @@ function validarCorreo(correo,err_correo,seccion_correo,btn){
   }
 }
 
+$('#btn_sesion').click(function () {
+  if (!$('#btn_sesion').hasClass("disabled")){
+    document.form_login.submit();
+  }      
+});
+
+$("#password1").keypress(function(e) {
+  if(e.which == 13) {
+    if (!$('#btn_sesion').hasClass("disabled")){
+      document.form_login.submit();
+    }   
+  }
+});
+
+$('#recomendaciones').click(function () {
+  if (!$('#recomendaciones').hasClass("disabled")){
+    $('#form_recomendaciones').submit();    
+  }      
+});
+
+$('#recuperar').click(function () {
+  if (!$('#recuperar').hasClass("disabled")){
+    $('#form_contrasena').submit();    
+  }      
+});
+
 function validaForm(tipo,btn){
 
   //tipo de formulario a evaluar 1 es login y 2 recuperar contraseña
@@ -73,7 +99,7 @@ function validaForm(tipo,btn){
     var username = document.getElementById('username').value;
     validarUsuario(username);
     validarClave();
-    validaCampos(1,btn);
+    validaCampos(1,btn);    
   }
 
   if(tipo == 2){
@@ -178,13 +204,13 @@ function validaCampos(form,btn){
       break;
     }
   }
-  //console.log(errors);
+  
   if(errors > 0 || verifyErrors() > 0){    
     $("#"+btn).addClass('disabled');
-    document.getElementById(btn).setAttribute('disabled','disabled');
   }else{    
     $("#"+btn).removeClass('disabled'); 
-    $('#'+btn).removeAttr('disabled');   
+    $('#'+btn).removeAttr('disabled');  
+    //if ()     
   }
 }
 
@@ -346,37 +372,3 @@ function mostrarGrafico(label, valor){
         }
       });
   }  
-
-// $(document).ready(function(){
-//   html2canvas(document.getElementById("myChart"), {
-//     dpi: 300, // Set to 300 DPI
-//     scale: 69, // Adjusts your resolution
-//     onrendered: function(canvas) {
-//       var img = canvas.toDataURL("image/png", 1);
-//       console.log(img);
-//       // document.getElementById('img_2').appendChild(canvas);
-//       $('#img_val').val(canvas.toDataURL("image/png"));
-//       console.log($('#img_val').val());
-//     }
-//   });
-// });
-
-  // this.style.display = "none";
-  // var w = document.getElementById("myChart").offsetWidth;
-  // var h = document.getElementById("myChart").offsetHeight;
-  // html2canvas(document.getElementById("myChart"), {
-  //   dpi: 300, // Set to 300 DPI
-  //   scale: 3, // Adjusts your resolution
-  //   onrendered: function(canvas) {
-  //     var img = canvas.toDataURL("image/png", 1);
-  //     var doc = new jsPDF('L', 'px', [w, h]);
-  //     doc.addImage(img, 'JPEG',   0,  0, w, h);
-  //     doc.save('sample-file.pdf');
-  //   }
-  // });
-  // this.style.display = "";
-
-// html2canvas(document.querySelector("#myChart")).then(canvas => {
-//     document.body.appendChild(canvas)
-// });
-

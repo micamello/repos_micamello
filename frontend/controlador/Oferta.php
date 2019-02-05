@@ -265,7 +265,7 @@ class Controlador_Oferta extends Controlador_Base{
               //solo candidatos 
               if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
 
-                  $_SESSION['mostrar_error'] = "Debe contratar al menos un plan para poder acceder a las ofertas.";
+                  $_SESSION['mostrar_error'] = "Debe subscribirse a un plan para poder postularse a las ofertas.";
                   Utils::doRedirect(PUERTO.'://'.HOST.'/planes/'); 
               }
               

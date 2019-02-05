@@ -251,25 +251,20 @@ class Controlador_GenerarPDF extends Controlador_Base
 
     $inidoc = "<link href='https://fonts.googleapis.com/css?family=Archivo' rel='stylesheet'>
               <link rel='stylesheet' href='css/mic.css'>
-              <link rel='icon' type='image/x-icon' href='imagenes/favicon.ico'>
-               <style>
-                table{
-                  width: 100%;
-                }
-                </style>
+              <link rel='icon' type='image/x-icon' href='imagenes/favicon.ico'>               
                <body>
                <main>";
     $enddoc = "</main></body>";
     $foto = "<img class='perfil_photo_user' src='imagenes/usuarios/profile/".$username.".jpg'>";
     $nombre_apellido = "<h3>".ucwords($datos_usuario['infoUsuario']['nombres'])." ".ucwords($datos_usuario['infoUsuario']['apellidos'])."</h3>";
-    $label_asp_salarial = "<h5>ASPIRACIÓN SALARIAL</h5>";
-    $asp_salarial = "<h5>".$datos_usuario['asp_sararial']['asp_salarial']."</h5>";
+    $label_asp_salarial = "Aspiraci&oacute;n Salarial";
+    $asp_salarial = (!empty($datos_usuario['asp_sararial']['asp_salarial'])) ? "<label><b>".$label_asp_salarial.":</b> ".SUCURSAL_MONEDA.number_format($datos_usuario['asp_sararial']['asp_salarial'],2)."</label>" :"";
     // print_r("imagenes/usuarios/profile/".$username."/.jpg");exit();
     $cajainicio = "<div class='box_text'>";
     $cajafin = "</div>";
 
 
-    $tableinicio = "<table><tbody>";
+    $tableinicio = "<table width='100%'><tbody>";
     $trinicio = "<tr>";
     $trfin = "</tr>";
     $tdiniciost = "<td style='text-align: center;' colspan='";
@@ -295,7 +290,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     $nivel_interes = Modelo_Interes::obtieneIntereses($datos_usuario['infoUsuario']['nivel']);
 
     $label_datos_contacto = "<b>DATOS DE CONTACTO</>";
-    $label_resultados_evaluacion = "<b>RESULTADOS DE EVALUACIÓN</b>";
+    $label_resultados_evaluacion = "<b>RESULTADOS DE EVALUACI&Oacute;N</b>";
 
     $dato_nacionalidad = "";
     if($datos_usuario['infoUsuario']['nacionalidad'] != "" || !empty($datos_usuario['infoUsuario']['nacionalidad'])){
@@ -303,7 +298,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     }else{
       $dato_nacionalidad = $nodata;
     }
-    $nacionalidad = "<label><b>Nacionalidad:</b> ".$dato_nacionalidad."</label>";
+    $nacionalidad = "<label><b>Nacionalidad:</b> ".$dato_nacionalidad."</label>";    
 
     $dato_estado_civil = "";
     if($datos_usuario['infoUsuario']['estado_civil'] != "" || !empty($datos_usuario['infoUsuario']['estado_civil'])){
@@ -460,6 +455,12 @@ class Controlador_GenerarPDF extends Controlador_Base
       $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$nacionalidad.$tdfin));
     $mpdf->WriteHTML($trfin);
 
+    if (!empty($asp_salarial)){
+      $mpdf->WriteHTML($trinicio);
+      $mpdf->WriteHTML(utf8_encode($tdiniciost."12".$tdfinst.$asp_salarial.$tdfin));
+      $mpdf->WriteHTML($trfin);
+    }    
+
     $mpdf->WriteHTML($hr);
 
     $mpdf->WriteHTML($trinicio);
@@ -577,6 +578,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $mpdf->WriteHTML(utf8_encode("<div class='progress_bar'><div class='inside_progress' style='width: ".(($datos_usuario['Resultados'][$i]['valor']*100)/25)."%; background-color: ".$array_colors[$i].";'></div></div>"));
       $i++;
     }
+
 
     $mpdf->WriteHTML($enddoc);
 
