@@ -125,9 +125,14 @@ public static function existeUsername($username){
     return (!empty($rs['correo'])) ? false : true;
   }
 
-  public static function existeDni($dni){
+  public static function existeDni($dni,$idUsuarioLogin=false){
     if(empty($dni)){ return false; }
-    $sql = "select * from mfo_usuario_login where dni = ?";
+    $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?";
+
+    if($idUsuarioLogin != false){
+      $sql .= " AND id_usuario_login = ".$idUsuarioLogin;
+    }
+
     $rs = $GLOBALS['db']->auto_array($sql,array($dni));
     return (!empty($rs['dni'])) ? false : true;
   }
@@ -217,7 +222,7 @@ public static function existeUsername($username){
 
     if($tipo_usuario == self::CANDIDATO){
 
-        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil'],"tipo_doc"=>$data['tipo_doc']); 
+        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil']); 
 
         if (!empty($data['documentacion'])){          
           $datos['tipo_doc'] = $data['documentacion'];
@@ -891,7 +896,7 @@ WHERE
             WHERE e.padre IN(?)";
     $padre = $GLOBALS['db']->auto_array($sql,array($idpadre),true);
     if (!empty($padre) && is_array($padre)){
-      //$numreg = count($padre);
+     
       $cuentaPlan = array();
       foreach($padre as $key=>$registro){
 

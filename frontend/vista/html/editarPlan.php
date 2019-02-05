@@ -20,7 +20,7 @@
 
                                               <input type="hidden" name="idSubEmpresa" id="idSubEmpresa" value="<?php if(isset($planHijo['id_empresa'])) { echo Utils::encriptar($planHijo['id_empresa']); } ?>">
 
-                                              <input type="hidden" name="plan" id="plan" value="<?php if(isset($planHijo['id_empresa_plan_parent'])) { echo Utils::encriptar($planHijo['id_empresa_plan_parent']); } ?>">
+                                              <input type="hidden" name="plan1" id="plan1" value="<?php if(isset($planHijo['id_empresa_plan_parent'])) { echo Utils::encriptar($planHijo['id_empresa_plan_parent']); } ?>">
 
                                               <input type="hidden" name="post" id="post" value="<?php if(isset($planHijo['num_publicaciones_rest'])) { echo $planHijo['num_publicaciones_rest']; } ?>">
 
@@ -46,7 +46,7 @@
                                                       <div class="col-md-offset-3 col-md-4">
                                                         <div id="recursos1" class="form-group">
                                                           <label for="numPost">N&uacute;mero de Ofertas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
-                                                          <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeydown="return validaNumeros(event);" onkeyup="calcularRecursos(); validaRecursos();" onclick="calcularRecursos(); validaRecursos();" class="form-control" value="<?php if(isset($planHijo['num_publicaciones_rest'])){ echo $planHijo['num_publicaciones_rest']; }else{ echo '1'; } ?>">
+                                                          <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeydown="return validaNumeros(event);" onkeyup="calcularRecursos('<?php echo Utils::encriptar($planHijo['id_empresa_plan_parent']) ?>'); validaRecursos();" onclick="calcularRecursos('<?php echo Utils::encriptar($planHijo['id_empresa_plan_parent']) ?>'); validaRecursos();" class="form-control" value="<?php if(isset($planHijo['num_publicaciones_rest'])){ echo $planHijo['num_publicaciones_rest']; }else{ echo '1'; } ?>">
                                                         </div>
                                                       </div> 
 
@@ -72,7 +72,7 @@
                                                       <div class="col-md-offset-3 col-md-4">
                                                         <div class="form-group" id="recursos2">
                                                           <label for="numDesc">N&uacute;mero de Descargas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec2" class="help-block with-errors"></div>
-                                                          <input type="number" min="1" pattern="^[0-9]+" name="num_desc" id="num_desc" onkeydown="return validaNumeros(event);" onkeyup="calcularRecursos(); validaRecursos();" onclick="calcularRecursos(); validaRecursos();" class="form-control" value="<?php if(isset($planHijo['num_descarga_rest'])){ echo $planHijo['num_descarga_rest']; }else{ echo '1'; } ?>">
+                                                          <input type="number" min="1" pattern="^[0-9]+" name="num_desc" id="num_desc" onkeydown="return validaNumeros(event);" onkeyup="calcularRecursos('<?php echo Utils::encriptar($planHijo['id_empresa_plan_parent']) ?>'); validaRecursos();" onclick="calcularRecursos('<?php echo Utils::encriptar($planHijo['id_empresa_plan_parent']) ?>'); validaRecursos();" class="form-control" value="<?php if(isset($planHijo['num_descarga_rest'])){ echo $planHijo['num_descarga_rest']; }else{ echo '1'; } ?>">
                                                         </div>
                                                       </div> 
 

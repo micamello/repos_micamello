@@ -21,7 +21,7 @@ class Proceso_Facturacion{
   protected $signatureObjectID;
   protected $publicKey;
   protected $privateKey;
-  protected $signPolicy;
+  //protected $signPolicy;
   protected $signTime;
 
   public $razonSocialComprador;
@@ -34,7 +34,7 @@ class Proceso_Facturacion{
 
   const RUC = '0993064467001';
   const TIPO_EMISION = 1;
-  const VERSION = '2.1.0';
+  const VERSION = '1.1.0';
   const RAZON_SOCIAL = 'MICAMELLO S.A.';
   const NOMBRE_COMERCIAL = 'MICAMELLO S.A.';
   const DIR_MATRIZ = 'Km 12 Av. Febres Cordero Cdla. Villa Club Etapa Krypton Mz.14 Solar 3';
@@ -51,13 +51,8 @@ class Proceso_Facturacion{
   const CODIGO_IMPUESTO = array("IVA"=>2,"ICE"=>3,"IRBPNR"=>5);  
   const TARIFA_IVA = array("12"=>2,"14"=>3);
   const MONEDA = array(1=>'DOLAR');
-  const FORMA_PAGO = array("SINFINANCIERO"=>"01","TARJETADEBITO"=>"16","TARJETACREDITO"=>"19");   
-
-  const SIGN_POLICY_3_1 = array(
-    "name" => "Política de Firma FacturaE v3.1",
-    "url" => "http://www.facturae.es/politica_de_firma_formato_facturae/politica_de_firma_formato_facturae_v3_1.pdf",
-    "digest" => "Ohixl6upD6av8N7pEvDABhEL6hM="
-  ); 
+  const FORMA_PAGO = array("SINFINANCIERO"=>"01","TARJETADEBITO"=>"16","TARJETACREDITO"=>"19"); 
+  const TIPO_IMPUESTO = array("detalle"=>1,"total"=>2);  
   
   const SCHEMA_3_2 = "3.2";
   const SCHEMA_3_2_1 = "3.2.1";
@@ -79,7 +74,7 @@ class Proceso_Facturacion{
 
   function generarClaveAcceso(){
     $seriefactura = Modelo_Parametro::obtieneValor('seriefactura');
-    $numerofactura = Modelo_Parametro::obtieneValor('numerofactura')+1;
+    $numerofactura = 9;//Modelo_Parametro::obtieneValor('numerofactura')+1;
     $this->secuencial = str_pad($numerofactura,9,"0",STR_PAD_LEFT);        
     $numerico = str_pad($numerofactura,8,"0",STR_PAD_LEFT);   
     $clave = date('dmY').
@@ -89,20 +84,31 @@ class Proceso_Facturacion{
              $seriefactura.
              $this->secuencial.
              $numerico.
-             self::TIPO_EMISION;    
+             self::TIPO_EMISION;   
+
     $arrclave = str_split($clave);
     $j=7; $acum=0;
     for($i=0;$i<48;$i++){
-      $acum = $acum + ($arrclave[$i] * $j);      
+      $acum = $acum + ($arrclave[$i] * $j);   
       $j = $j - 1;
       $j = ($j == 1) ? 7 : $j;
     }     
-    $resultado = $acum / 11;
-    $entero = intval($resultado);        
-    $this->claveAcceso = $clave.(11 - abs((($entero - $resultado) * 11)));
+
+    $resultado = $acum%11;
+    $codVerificador = 11 - $resultado;
+
+    if($codVerificador >= 1 && $codVerificador <= 9){
+      $codVerificador = $codVerificador;
+    }else if($codVerificador == 10){
+      $codVerificador = 1;
+    }else if($codVerificador == 11){
+      $codVerificador = 0;
+    }
+    $this->claveAcceso = $clave.$codVerificador;
   }
 
   function creaXml(){
+
     $xml = new DomDocument('1.0', 'UTF-8'); 
     $xml->formatOutput = true;
     $root = $xml->createElement('factura');
@@ -148,11 +154,12 @@ class Proceso_Facturacion{
       else{        
         $subnodo = $xml->createElement($atributo,$valor);                
         $subnodo = $nodo->appendChild($subnodo);        
-      }
-      $nodo = $root->appendChild($nodo);                   
+      }                  
     }
+    $nodo = $root->appendChild($nodo);
+
     $detalles = $xml->createElement('detalles');
-    $detalles = $nodo->appendChild($detalles);
+    $detalles = $root->appendChild($detalles);
     $detalle = $xml->createElement('detalle');
     $detalle = $detalles->appendChild($detalle);
     $infodetalle = $this->valoresDetalle();
@@ -174,8 +181,6 @@ class Proceso_Facturacion{
         $subnodo = $detalle->appendChild($subnodo);       
       }      
     }
-    
-    $nodo = $root->appendChild($nodo);
     return $xml->saveXML();
   }
 
@@ -205,14 +210,17 @@ class Proceso_Facturacion{
                          "direccionComprador" => $this->direccionComprador,                        
                          "totalSinImpuestos" => $this->totalSinImpuestos,
                          "totalDescuento" => $this->totalDescuento,
-                         "totalImpuesto" => array($this->valoresImpuestos(self::CODIGO_IMPUESTO["IVA"],self::TARIFA_IVA["12"],$this->importeImpuesto)),
+                         "totalImpuesto" => array($this->valoresImpuestos(self::CODIGO_IMPUESTO["IVA"],self::TARIFA_IVA["12"],$this->importeImpuesto,self::TIPO_IMPUESTO['detalle'])),
                          "propina" => self::PROPINA,
                          "importeTotal" => $this->importeTotal,
                          "moneda" => self::MONEDA[1],
                          "pagos" => array("formaPago" => self::FORMA_PAGO["SINFINANCIERO"],
                                           "total" => $this->importeTotal,
                                           "plazo" => self::PLAZO,
-                                          "unidadTiempo" => self::UNIDAD_TIEMPO)
+                                          "unidadTiempo" => self::UNIDAD_TIEMPO
+                                        ),
+                         "valorRetIva" => '0.00',
+                         "valorRetRenta" => '0.00'
                         );    
     return $infoFactura;
   }
@@ -225,39 +233,46 @@ class Proceso_Facturacion{
                          "precioUnitario" => $this->totalSinImpuestos,
                          "descuento" => $this->totalDescuento,
                          "precioTotalSinImpuesto" => $this->totalSinImpuestos,
-                         "impuestos" => array($this->valoresImpuestos(self::CODIGO_IMPUESTO["IVA"],self::TARIFA_IVA["12"],$this->importeImpuesto)));
+                         "impuestos" => array($this->valoresImpuestos(self::CODIGO_IMPUESTO["IVA"],self::TARIFA_IVA["12"],$this->importeImpuesto,self::TIPO_IMPUESTO['total'])));
     return $infoDetalle;
   }
 
-  function valoresImpuestos($codigo,$tarifa,$valor){
+  function valoresImpuestos($codigo,$tarifa,$valor,$tipoImp){
     $totalConImpuestos = array("codigo" => $codigo,
-                               "codigoPorcentaje" => $tarifa,
-                               "baseImponible" => $this->totalSinImpuestos,
-                               "valor" => $valor);
+                               "codigoPorcentaje" => $tarifa);
+    if($tipoImp == 1){
+      $totalConImpuestos["descuentoAdicional"] = '0.00';
+    }else{
+      $totalConImpuestos["tarifa"] = '12.00';
+    }
+
+    $totalConImpuestos["baseImponible"] = $this->totalSinImpuestos;
+    $totalConImpuestos["valor"] = $valor;
     return $totalConImpuestos;
   }
 
-  function sign($publicPath, $privatePath=null, $passphrase="",$policy=self::SIGN_POLICY_3_1) {
+  function sign($publicPath, $privatePath=null, $passphrase=""/*,$policy=self::SIGN_POLICY_3_1*/) {
     // Generate random IDs
     $tools = new XmlTools();
-    $this->signatureID = $tools->randomId();
-    $this->signedInfoID = $tools->randomId();
-    $this->signedPropertiesID = $tools->randomId();
-    $this->signatureValueID = $tools->randomId();
-    $this->certificateID = $tools->randomId();
-    $this->referenceID = $tools->randomId();
-    $this->signatureSignedPropertiesID = $tools->randomId();
-    $this->signatureObjectID = $tools->randomId();
+    $this->signatureID = '470145';//$tools->randomId();
+    $this->signedInfoID = '143579';//$tools->randomId();
+    $this->signedPropertiesID = '574754';//$tools->randomId();
+    $this->signatureValueID = '404944';//$tools->randomId();
+    $this->certificateID = '1451469';//$tools->randomId();
+    $this->referenceID = '552521';//$tools->randomId();
+    $this->signatureSignedPropertiesID = '682704';//$tools->randomId();
+    $this->signatureObjectID = '806398';//$tools->randomId();
 
     // Load public and private keys
     $reader = new KeyPairReader($publicPath, $privatePath, $passphrase);
+
     $this->publicKey = $reader->getPublicKey();
     $this->privateKey = $reader->getPrivateKey();
-    $this->signPolicy = $policy;
+    //$this->signPolicy = $policy;
+
     unset($reader);   
     // Return success
     return (!empty($this->publicKey) && !empty($this->privateKey));
-
   }
 
   function injectTimestamp($signedXml) {
@@ -308,16 +323,16 @@ class Proceso_Facturacion{
     $tools = new XmlTools();
     $timeStamp = substr($tsr, 9);
     $timeStamp = $tools->toBase64($timeStamp, true);
-    $tsXml = '<xades:UnsignedProperties Id="Signature' . $this->signatureID . '-UnsignedProperties' . $tools->randomId() . '">' .
-               '<xades:UnsignedSignatureProperties>' .
-                 '<xades:SignatureTimeStamp Id="Timestamp-' . $tools->randomId() . '">' .
+    $tsXml = '<etsi:UnsignedProperties Id="Signature' . $this->signatureID . '-UnsignedProperties' . $tools->randomId() . '">' .
+               '<etsi:UnsignedSignatureProperties>' .
+                 '<etsi:SignatureTimeStamp Id="Timestamp-' . $tools->randomId() . '">' .
                    '<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">' .
                    '</ds:CanonicalizationMethod>' .
-                   '<xades:EncapsulatedTimeStamp>' . "\n" . $timeStamp . '</xades:EncapsulatedTimeStamp>' .
-                 '</xades:SignatureTimeStamp>' .
-               '</xades:UnsignedSignatureProperties>' .
-             '</xades:UnsignedProperties>';
-    $signedXml = str_replace('</xades:QualifyingProperties>', $tsXml . '</xades:QualifyingProperties>', $signedXml);
+                   '<etsi:EncapsulatedTimeStamp>' . "\n" . $timeStamp . '</etsi:EncapsulatedTimeStamp>' .
+                 '</etsi:SignatureTimeStamp>' .
+               '</etsi:UnsignedSignatureProperties>' .
+             '</etsi:UnsignedProperties>';
+    //$signedXml = str_replace('</etsi:QualifyingProperties>', $tsXml . '</etsi:QualifyingProperties>', $signedXml);
     return $signedXml;
   }
 
@@ -325,7 +340,7 @@ class Proceso_Facturacion{
     // Make sure we have all we need to sign the document
     if (empty($this->publicKey) || empty($this->privateKey)) return $xml;
     $tools = new XmlTools();
-
+ 
     // Normalize document
     $xml = str_replace("\r", "", $xml);
 
@@ -337,64 +352,49 @@ class Proceso_Facturacion{
       $certIssuer[] = $item . '=' . $value;
     }
     $certIssuer = implode(',', $certIssuer);
+    //print_r($tools->getCertDigest($this->publicKey)); 
 
     // Generate signed properties
-    $prop = '<xades:SignedProperties Id="Signature' . $this->signatureID .
+    $prop = '<etsi:SignedProperties Id="Signature' . $this->signatureID .
             '-SignedProperties' . $this->signatureSignedPropertiesID . '">' .
-              '<xades:SignedSignatureProperties>' .
-                '<xades:SigningTime>' . date('c', $signTime) . '</xades:SigningTime>' .
-                '<xades:SigningCertificate>' .
-                  '<xades:Cert>' .
-                    '<xades:CertDigest>' .
+              '<etsi:SignedSignatureProperties>' .
+                '<etsi:SigningTime>' . date('c', $signTime) . '</etsi:SigningTime>' .
+                '<etsi:SigningCertificate>' .
+                  '<etsi:Cert>' .
+                    '<etsi:CertDigest>' .
                       '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>' .
-                      '<ds:DigestValue>' . $tools->getCertDigest($this->publicKey) . '</ds:DigestValue>' .
-                    '</xades:CertDigest>' .
-                    '<xades:IssuerSerial>' .
+                      '<ds:DigestValue>'.$tools->getCertDigest($this->publicKey).'</ds:DigestValue>' .
+                    '</etsi:CertDigest>'.
+                    '<etsi:IssuerSerial>'.
                       '<ds:X509IssuerName>' . $certIssuer . '</ds:X509IssuerName>' .
                       '<ds:X509SerialNumber>' . $certData['serialNumber'] . '</ds:X509SerialNumber>' .
-                    '</xades:IssuerSerial>' .
-                  '</xades:Cert>' .
-                '</xades:SigningCertificate>' .
-                '<xades:SignaturePolicyIdentifier>' .
-                  '<xades:SignaturePolicyId>' .
-                    '<xades:SigPolicyId>' .
-                      '<xades:Identifier>' . $this->signPolicy['url'] . '</xades:Identifier>' .
-                      '<xades:Description>' . $this->signPolicy['name'] . '</xades:Description>' .
-                    '</xades:SigPolicyId>' .
-                    '<xades:SigPolicyHash>' .
-                      '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>' .
-                      '<ds:DigestValue>' . $this->signPolicy['digest'] . '</ds:DigestValue>' .
-                    '</xades:SigPolicyHash>' .
-                  '</xades:SignaturePolicyId>' .
-                '</xades:SignaturePolicyIdentifier>' .
-                '<xades:SignerRole>' .
-                  '<xades:ClaimedRoles>' .
-                    '<xades:ClaimedRole>emisor</xades:ClaimedRole>' .
-                  '</xades:ClaimedRoles>' .
-                '</xades:SignerRole>' .
-              '</xades:SignedSignatureProperties>' .
-              '<xades:SignedDataObjectProperties>' .
-                '<xades:DataObjectFormat ObjectReference="#Reference-ID-' . $this->referenceID . '">' .
-                  '<xades:Description>Factura electrónica</xades:Description>' .
-                  '<xades:MimeType>text/xml</xades:MimeType>' .
-                '</xades:DataObjectFormat>' .
-              '</xades:SignedDataObjectProperties>' .
-            '</xades:SignedProperties>';
+                    '</etsi:IssuerSerial>' .
+                  '</etsi:Cert>' .
+                '</etsi:SigningCertificate>' .
+              '</etsi:SignedSignatureProperties>' .
+              '<etsi:SignedDataObjectProperties>' .
+                '<etsi:DataObjectFormat ObjectReference="#Reference-ID-' . $this->referenceID . '">' .
+                  '<etsi:Description>Factura electrónica</etsi:Description>' .
+                  '<etsi:MimeType>text/xml</etsi:MimeType>' .
+                '</etsi:DataObjectFormat>' .
+              '</etsi:SignedDataObjectProperties>' .
+            '</etsi:SignedProperties>';
 
     // Extract public exponent (e) and modulus (n)
     $privateData = openssl_pkey_get_details($this->privateKey);
+
     $modulus = chunk_split(base64_encode($privateData['rsa']['n']), 76);
     $modulus = str_replace("\r", "", $modulus);
     $exponent = base64_encode($privateData['rsa']['e']);
-
+//print_r(base64_encode($privateData['rsa']['n']));
     // Generate KeyInfo
     $kInfo = '<ds:KeyInfo Id="Certificate' . $this->certificateID . '">' . "\n" .
                '<ds:X509Data>' . "\n" .
-                 '<ds:X509Certificate>' . "\n" . $tools->getCert($this->publicKey) . '</ds:X509Certificate>' . "\n" .
+                 '<ds:X509Certificate>' .$tools->getCert($this->publicKey) . '</ds:X509Certificate>' . "\n" .
                '</ds:X509Data>' . "\n" .
                '<ds:KeyValue>' . "\n" .
                  '<ds:RSAKeyValue>' . "\n" .
-                   '<ds:Modulus>' . "\n" . $modulus . '</ds:Modulus>' . "\n" .
+                   '<ds:Modulus>' .$modulus . '</ds:Modulus>' . "\n" .
                    '<ds:Exponent>' . $exponent . '</ds:Exponent>' . "\n" .
                  '</ds:RSAKeyValue>' . "\n" .
                '</ds:KeyValue>' . "\n" .
@@ -425,7 +425,7 @@ class Proceso_Facturacion{
                  '</ds:DigestMethod>' . "\n" .
                  '<ds:DigestValue>' . $kInfoDigest . '</ds:DigestValue>' . "\n" .
                '</ds:Reference>' . "\n" .
-               '<ds:Reference Id="Reference-ID-' . $this->referenceID . '" URI="">' . "\n" .
+               '<ds:Reference Id="Reference-ID-' . $this->referenceID . '" URI="#comprobante">' . "\n" .
                  '<ds:Transforms>' . "\n" .
                    '<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature">' .
                    '</ds:Transform>' . "\n" .
@@ -441,25 +441,23 @@ class Proceso_Facturacion{
     $signatureResult = $tools->getSignature($signaturePayload, $this->privateKey);
 
     // Make signature
-    $sig = '<ds:Signature xmlns:xades="http://uri.etsi.org/01903/v1.3.2#" Id="Signature' . $this->signatureID . '">' . "\n" .
+    $sig = '<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature' . $this->signatureID . '">' . "\n" .
              $sInfo . "\n" .
              '<ds:SignatureValue Id="SignatureValue' . $this->signatureValueID . '">' . "\n" .
                $signatureResult .
              '</ds:SignatureValue>' . "\n" .
              $kInfo . "\n" .
              '<ds:Object Id="Signature' . $this->signatureID . '-Object' . $this->signatureObjectID . '">' .
-               '<xades:QualifyingProperties Target="#Signature' . $this->signatureID . '">' .
+               '<etsi:QualifyingProperties Target="#Signature' . $this->signatureID . '">' .
                  $prop .
-               '</xades:QualifyingProperties>' .
+               '</etsi:QualifyingProperties>' .
              '</ds:Object>' .
            '</ds:Signature>';
 
-    // Inject signature
-    //$xml = str_replace('</fe:Facturae>', $sig . '</fe:Facturae>', $xml);
     $xml = str_replace('</factura>', $sig . '</factura>', $xml);    
 
     // Inject timestamp
-    if (!empty($this->timestampServer)) $xml = $this->injectTimestamp($xml);
+    //if (!empty($this->timestampServer)) $xml = $this->injectTimestamp($xml);
 
     return $xml;
   }
@@ -467,8 +465,8 @@ class Proceso_Facturacion{
   function getNamespaces() {
     $xmlns = array();
     $xmlns[] = 'xmlns:ds="http://www.w3.org/2000/09/xmldsig#"';
-    $xmlns[] = 'xmlns:fe="' . self::$SCHEMA_NS[self::SCHEMA_3_2_1] . '"';
-    $xmlns[] = 'xmlns:xades="http://uri.etsi.org/01903/v1.3.2#"';
+    //$xmlns[] = 'xmlns:fe="' . self::$SCHEMA_NS[self::SCHEMA_3_2_1] . '"';
+    $xmlns[] = 'xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#"';
     return $xmlns;
   }
   /*public function export($filePath=null) {
