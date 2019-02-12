@@ -81,6 +81,12 @@ function obtieneControlador($nombre){
     case 'datosUsuario':
       return 'Aspirante';
     break;
+    case 'cuestionariom2':
+      return 'Cuestionariom2';
+    break;
+    case 'minisitio':
+      return 'Minisitio';
+    break;
     default:
       return 'Inicio'; 
     break;

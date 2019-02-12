@@ -1,7 +1,6 @@
 <?php
 require_once RUTA_INCLUDES.'facturae/KeyPairReader.php';
 require_once RUTA_INCLUDES.'facturae/XmlTools.php';
-
 class Proceso_Facturacion{
      
   protected $claveAcceso;      
@@ -23,7 +22,6 @@ class Proceso_Facturacion{
   protected $privateKey;
   //protected $signPolicy;
   protected $signTime;
-
   public $razonSocialComprador;
   public $identificacionComprador;
   public $direccionComprador; 
@@ -33,7 +31,6 @@ class Proceso_Facturacion{
   public $importeTotal;
   public $codigoPrincipal;
   public $descripdetalle;
-
   const RUC = '0993064467001';
   const TIPO_EMISION = 1;
   const VERSION = '1.0.0';
@@ -59,13 +56,11 @@ class Proceso_Facturacion{
   const SCHEMA_3_2 = "3.2";
   const SCHEMA_3_2_1 = "3.2.1";
   const SCHEMA_3_2_2 = "3.2.2";
-
   protected static $SCHEMA_NS = array(
     self::SCHEMA_3_2   => "http://www.facturae.es/Facturae/2009/v3.2/Facturae",
     self::SCHEMA_3_2_1 => "http://www.facturae.es/Facturae/2014/v3.2.1/Facturae",
     self::SCHEMA_3_2_2 => "http://www.facturae.gob.es/formato/Versiones/Facturaev3_2_2.xml"
   );
-
   function generarFactura(){    
     $this->totalSinImpuestos = number_format(round($this->importeTotal / ((array_search(2, self::TARIFA_IVA)/100)+1),2),2);
     $this->importeImpuesto = number_format(round($this->totalSinImpuestos * (array_search(2, self::TARIFA_IVA)/100),2),2);
@@ -73,12 +68,11 @@ class Proceso_Facturacion{
     $this->generarClaveAcceso();
     return $this->creaXml();    
   }
-
   function generarClaveAcceso(){
     //$seriefactura = Modelo_Parametro::obtieneValor('seriefactura');
     //$numerofactura = Modelo_Parametro::obtieneValor('numerofactura')+1;
     $seriefactura = '001001';
-    $numerofactura = 35;
+    $numerofactura = 26;
     $this->secuencial = str_pad($numerofactura,9,"0",STR_PAD_LEFT);        
     $numerico = "12345678";   
     $clave = date('dmY').self::TIPO_DOCUMENTO["FACTURA"].
@@ -98,7 +92,6 @@ class Proceso_Facturacion{
     }         
     $resultado = $acum%11;
     $codVerificador = 11 - $resultado;
-
     if($codVerificador >= 1 && $codVerificador <= 9){
       $codVerificador = $codVerificador;
     }else if($codVerificador == 10){
@@ -108,7 +101,6 @@ class Proceso_Facturacion{
     }
     $this->claveAcceso = $clave.$codVerificador;
   }
-
   function creaXml(){
     $xml = new DomDocument('1.0', 'UTF-8'); 
     $xml->preserveWhiteSpace = false;
@@ -159,7 +151,6 @@ class Proceso_Facturacion{
       }                  
     }
     $nodo = $root->appendChild($nodo);
-
     $detalles = $xml->createElement('detalles');
     $detalles = $root->appendChild($detalles);
     $detalle = $xml->createElement('detalle');
@@ -183,7 +174,6 @@ class Proceso_Facturacion{
         $subnodo = $detalle->appendChild($subnodo);       
       }      
     }
-
     $infoadicional = $xml->createElement('infoAdicional'); 
     $infoadicional = $root->appendChild($infoadicional);
     $campoadicional = $xml->createElement('campoAdicional',$this->direccionComprador);
@@ -201,12 +191,8 @@ class Proceso_Facturacion{
     $attribute->value = 'Email';    
     $campoadicional->appendChild($attribute);
     $campoadicional = $infoadicional->appendChild($campoadicional);
-
-    $xmltest = $xml->saveXML();
-    $xml->save($this->claveAcceso.'.xml');
-    return $xmltest;
+    return $xml->saveXML();    
   }
-
   function valoresInfoTributaria(){
     $infoTributaria = array("ambiente" => self::AMBIENTE["PRUEBAS"], 
                             "tipoEmision" => self::TIPO_EMISION,
@@ -221,7 +207,6 @@ class Proceso_Facturacion{
                             "dirMatriz" => self::DIR_MATRIZ);
     return $infoTributaria;
   }
-
   function valoresinfoFactura(){
     $infoFactura = array("fechaEmision" => date("d/m/Y"),
                          "dirEstablecimiento" => self::DIR_MATRIZ,    
@@ -247,7 +232,6 @@ class Proceso_Facturacion{
                         );    
     return $infoFactura;
   }
-
   function valoresDetalle(){
     $infoDetalle = array("codigoPrincipal" => $this->codigoPrincipal,
                          //"codigoAuxiliar" => $this->codigoPrincipal,
@@ -259,7 +243,6 @@ class Proceso_Facturacion{
                          "impuestos" => array($this->valoresImpuestos(self::CODIGO_IMPUESTO["IVA"],self::TARIFA_IVA["12"],$this->importeImpuesto,self::TIPO_IMPUESTO['total'])));
     return $infoDetalle;
   }
-
   function valoresImpuestos($codigo,$tarifa,$valor,$tipoImp){
     $totalConImpuestos = array("codigo" => $codigo,
                                "codigoPorcentaje" => $tarifa);    
@@ -273,7 +256,6 @@ class Proceso_Facturacion{
     $totalConImpuestos["valor"] = $valor;
     return $totalConImpuestos;
   }
-
   function sign($publicPath, $privatePath=null, $passphrase=""/*,$policy=self::SIGN_POLICY_3_1*/) {
     // Generate random IDs
     $tools = new XmlTools();
@@ -285,7 +267,6 @@ class Proceso_Facturacion{
     $this->referenceID = '552521';//$tools->randomId();
     $this->signatureSignedPropertiesID = '682704';//$tools->randomId();
     $this->signatureObjectID = '806398';//$tools->randomId();
-
     // Load public and private keys
     $reader = new KeyPairReader($publicPath, $privatePath, $passphrase);
     $this->publicKey = $reader->getPublicKey();
@@ -295,23 +276,23 @@ class Proceso_Facturacion{
     // Return success
     return (!empty($this->publicKey) && !empty($this->privateKey));
   }
-
   function injectSignature($xml) {
     // Make sure we have all we need to sign the document
-    /*if (empty($this->publicKey) || empty($this->privateKey)) return $xml;
+    if (empty($this->publicKey) || empty($this->privateKey)) return $xml;
     $tools = new XmlTools();
-
     // Normalize document
     $xml = str_replace("\r", "", $xml);
-
     // Prepare signed properties
     $signTime = is_null($this->signTime) ? time() : $this->signTime;
     $certData = openssl_x509_parse($this->publicKey);
+    //print_r($certData);
     $certIssuer = array();
     foreach ($certData['issuer'] as $item=>$value) {
       $certIssuer[] = $item . '=' . $value;
     }
     $certIssuer = implode(',', $certIssuer);
+
+    $digestvalue = 'KiO4lk5C4adHzXVIrQb9W5acGps=';
 
     // Generate signed properties
     $prop = '<etsi:SignedProperties Id="Signature' . $this->signatureID .
@@ -322,127 +303,29 @@ class Proceso_Facturacion{
                   '<etsi:Cert>' .
                     '<etsi:CertDigest>' .
                       '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>' .
-                      '<ds:DigestValue>' . $tools->getCertDigest($this->publicKey) . '</ds:DigestValue>' .
+                      '<ds:DigestValue>' . $digestvalue . '</ds:DigestValue>' .
                     '</etsi:CertDigest>' .
                     '<etsi:IssuerSerial>' .
-                      '<ds:X509IssuerName>' . $certIssuer . '</ds:X509IssuerName>' .
-                      '<ds:X509SerialNumber>' . $certData['serialNumber'] . '</ds:X509SerialNumber>' .
+                      '<ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName>' .
+                      '<ds:X509SerialNumber>1484765090</ds:X509SerialNumber>' .
                     '</etsi:IssuerSerial>' .
                   '</etsi:Cert>' .
                 '</etsi:SigningCertificate>' .
               '</etsi:SignedSignatureProperties>' .
               '<etsi:SignedDataObjectProperties>' .
                 '<etsi:DataObjectFormat ObjectReference="#Reference-ID-' . $this->referenceID . '">' .
-                  '<etsi:Description>Factura electrónica</etsi:Description>' .
+                  '<etsi:Description>contenido comprobante</etsi:Description>' .
                   '<etsi:MimeType>text/xml</etsi:MimeType>' .
                 '</etsi:DataObjectFormat>' .
               '</etsi:SignedDataObjectProperties>' .
             '</etsi:SignedProperties>';
-
     // Extract public exponent (e) and modulus (n)
     $privateData = openssl_pkey_get_details($this->privateKey);
     $modulus = chunk_split(base64_encode($privateData['rsa']['n']), 76);
     $modulus = str_replace("\r", "", $modulus);
     $exponent = base64_encode($privateData['rsa']['e']);
 
-    // Generate KeyInfo
-    $kInfo = '<ds:KeyInfo Id="Certificate' . $this->certificateID . '">' . "\n" .
-               '<ds:X509Data>' . "\n" .
-                 '<ds:X509Certificate>' . "\n" . $tools->getCert($this->publicKey) . '</ds:X509Certificate>' . "\n" .
-               '</ds:X509Data>' . "\n" .
-               '<ds:KeyValue>' . "\n" .
-                 '<ds:RSAKeyValue>' . "\n" .
-                   '<ds:Modulus>' . "\n" . $modulus . '</ds:Modulus>' . "\n" .
-                   '<ds:Exponent>' . $exponent . '</ds:Exponent>' . "\n" .
-                 '</ds:RSAKeyValue>' . "\n" .
-               '</ds:KeyValue>' . "\n" .
-             '</ds:KeyInfo>';
-
-    // Calculate digests
-    $xmlns = $this->getNamespaces();
-    $propDigest = $tools->getDigest($tools->injectNamespaces($prop, $xmlns));
-    $kInfoDigest = $tools->getDigest($tools->injectNamespaces($kInfo, $xmlns));
-    $documentDigest = $tools->getDigest($xml);
-
-    // Generate SignedInfo
-    $sInfo = '<ds:SignedInfo Id="Signature-SignedInfo' . $this->signedInfoID . '">' . "\n" .
-               '<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">' .
-               '</ds:CanonicalizationMethod>' . "\n" .
-               '<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1">' .
-               '</ds:SignatureMethod>' . "\n" .
-               '<ds:Reference Id="SignedPropertiesID' . $this->signedPropertiesID . '" ' .
-               'Type="http://uri.etsi.org/01903#SignedProperties" ' .
-               'URI="#Signature' . $this->signatureID . '-SignedProperties' .
-               $this->signatureSignedPropertiesID . '">' . "\n" .
-                 '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1">' .
-                 '</ds:DigestMethod>' . "\n" .
-                 '<ds:DigestValue>' . $propDigest . '</ds:DigestValue>' . "\n" .
-               '</ds:Reference>' . "\n" .
-               '<ds:Reference URI="#Certificate' . $this->certificateID . '">' . "\n" .
-                 '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1">' .
-                 '</ds:DigestMethod>' . "\n" .
-                 '<ds:DigestValue>' . $kInfoDigest . '</ds:DigestValue>' . "\n" .
-               '</ds:Reference>' . "\n" .
-               '<ds:Reference Id="Reference-ID-' . $this->referenceID . '" URI="#comprobante">' . "\n" .
-                 '<ds:Transforms>' . "\n" .
-                   '<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature">' .
-                   '</ds:Transform>' . "\n" .
-                 '</ds:Transforms>' . "\n" .
-                 '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1">' .
-                 '</ds:DigestMethod>' . "\n" .
-                 '<ds:DigestValue>' . $documentDigest . '</ds:DigestValue>' . "\n" .
-               '</ds:Reference>' . "\n" .
-             '</ds:SignedInfo>';
-
-    // Calculate signature
-    $signaturePayload = $tools->injectNamespaces($sInfo, $xmlns);
-    $signatureResult = $tools->getSignature($signaturePayload, $this->privateKey);
-
-    // Make signature
-    $sig = '<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature' . $this->signatureID . '">' . "\n" .
-             $sInfo . "\n" .
-             '<ds:SignatureValue Id="SignatureValue' . $this->signatureValueID . '">' . "\n" .
-               $signatureResult .
-             '</ds:SignatureValue>' . "\n" .
-             $kInfo . "\n" .
-             '<ds:Object Id="Signature' . $this->signatureID . '-Object' . $this->signatureObjectID . '">' .
-               '<etsi:QualifyingProperties Target="#Signature' . $this->signatureID . '">' .
-                 $prop .
-               '</etsi:QualifyingProperties>' .
-             '</ds:Object>' .
-           '</ds:Signature>';*/
-
-    $sign = '<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature713585">
-<ds:SignedInfo Id="Signature-SignedInfo86168">
-<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"></ds:CanonicalizationMethod>
-<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"></ds:SignatureMethod>
-<ds:Reference Id="SignedPropertiesID861246" Type="http://uri.etsi.org/01903#SignedProperties" URI="#Signature713585-SignedProperties124821">
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>6eO2G2UGDZe/R8dIYJRcSdQEOZU=</ds:DigestValue>
-</ds:Reference>
-<ds:Reference URI="#Certificate1940706">
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>N3p39c7hv/iAtAG17f5Zb3YbCnY=</ds:DigestValue>
-</ds:Reference>
-<ds:Reference Id="Reference-ID-160180" URI="#comprobante">
-<ds:Transforms>
-<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"></ds:Transform>
-</ds:Transforms>
-<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod>
-<ds:DigestValue>9Z99xKugZUOD3SQtuNjIoi5LIKE=</ds:DigestValue>
-</ds:Reference>
-</ds:SignedInfo>
-<ds:SignatureValue Id="SignatureValue976167">
-mQDKE0uZIWpZCyZRmHYh2waf9IbyHUP7110DnfWnVDFbu477uKdWPMFRVnWxJS8dg0SU9PD4mbLt
-kUu9BGD0G2s1TzRBOdWdBdNDsm0OFwNJT+BozDZeVxAEK3auUIbdTpG1rvchxvvZ+o31bLU718zl
-as5n9B4/PYUvV3n9TeK25yyu/Kt+S9JxfJTJlGVTYQueHPEdeOHSOvrNcuBHqCKX8pJQ5TVvW8Gc
-JTnFR732MM74T6ijvp2eCQiNpFPeCc4SciCQtkHh5LyV5OcsMBFyOkSXdiyKvBh9G/EmDQ5p8DQs
-fzXWZgpk0zMefWVif3OIjcPxPILS+WvhTrYkTA==
-</ds:SignatureValue>
-<ds:KeyInfo Id="Certificate1940706">
-<ds:X509Data>
-<ds:X509Certificate>
-MIIJ8TCCB9mgAwIBAgIEWH+3ojANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
+    $x509certificate = 'MIIJ8TCCB9mgAwIBAgIEWH+3ojANBgkqhkiG9w0BAQsFADCBoTELMAkGA1UEBhMCRUMxIjAgBgNV
 BAoTGUJBTkNPIENFTlRSQUwgREVMIEVDVUFET1IxNzA1BgNVBAsTLkVOVElEQUQgREUgQ0VSVElG
 SUNBQ0lPTiBERSBJTkZPUk1BQ0lPTi1FQ0lCQ0UxDjAMBgNVBAcTBVFVSVRPMSUwIwYDVQQDExxB
 QyBCQU5DTyBDRU5UUkFMIERFTCBFQ1VBRE9SMB4XDTE4MDExMDIwNDIzMloXDTIwMDExMDIxMTIz
@@ -487,28 +370,83 @@ pFV2/2sOwHx/rWSPXtuzWHGUcHHmhQBYZFpzxgQtszuDT7lRRu1xU81wsOAxMTbunw+Qy9/1gmQ3
 9Zax84Cba1iqEpy41/yLIfz8tEPIWrsg3MC0kOstTaEY3SqDMRgFONMCDkiGbxmTEOUnRrb3M2Hq
 KMYfdD9ZoeY74n3PkVpuBuysCk112ATgAaaUd2gpyfaM4DKBxi+uwbCDIs7mXqJ9mVgIQ02qc6Cw
 VVEVLVHoGHy5u58iyN8nc+Vl6Js4jSn5cm0sE3AyT1j0bI9zXWkx7pY=
-</ds:X509Certificate>
-</ds:X509Data>
-<ds:KeyValue>
-<ds:RSAKeyValue>
-<ds:Modulus>
-vzxFz0jnvlz5LUP/A5U+vR8Z5p1gn0WzSo7FIkRUWhXUzsQ6dmU6VUoTwlKjfuOk1T2+xmlAE7TI
+'; 
+
+    $modulus = 'vzxFz0jnvlz5LUP/A5U+vR8Z5p1gn0WzSo7FIkRUWhXUzsQ6dmU6VUoTwlKjfuOk1T2+xmlAE7TI
 MUVOEeGkmQd54/2D8eTOYD4llT7NfZVPB9hpC0LtyFlhrNSp6oMA7cU7PSA4P/XgfIllHNHL1mXm
 QAIyGDFAV/hTjmQyMqKAgeHQ4A6NeIF0Qvl9FA5sd2kOAN+qAQee/Swone0uTD49GYvxKZMIK/p5
 3EsfUu+XUn4LkMoquByRMp1IZWaNjKmFhvR14dYoNraNKg73mqJKHKTphNm+cVYdZIEIMWWNmT4f
 ZbIJo6OW4knrleYsHO3fvmg7j8Ty1o8lyo2S6w==
-</ds:Modulus>
-<ds:Exponent>AQAB</ds:Exponent>
-</ds:RSAKeyValue>
-</ds:KeyValue>
-</ds:KeyInfo>
-<ds:Object Id="Signature713585-Object454535"><etsi:QualifyingProperties Target="#Signature713585"><etsi:SignedProperties Id="Signature713585-SignedProperties124821"><etsi:SignedSignatureProperties><etsi:SigningTime>2019-01-16T14:53:46-05:00</etsi:SigningTime><etsi:SigningCertificate><etsi:Cert><etsi:CertDigest><ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"></ds:DigestMethod><ds:DigestValue>KiO4lk5C4adHzXVIrQb9W5acGps=</ds:DigestValue></etsi:CertDigest><etsi:IssuerSerial><ds:X509IssuerName>CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC</ds:X509IssuerName><ds:X509SerialNumber>1484765090</ds:X509SerialNumber></etsi:IssuerSerial></etsi:Cert></etsi:SigningCertificate></etsi:SignedSignatureProperties><etsi:SignedDataObjectProperties><etsi:DataObjectFormat ObjectReference="#Reference-ID-160180"><etsi:Description>contenido comprobante</etsi:Description><etsi:MimeType>text/xml</etsi:MimeType></etsi:DataObjectFormat></etsi:SignedDataObjectProperties></etsi:SignedProperties></etsi:QualifyingProperties></ds:Object></ds:Signature>';
-   
+';
+
+    // Generate KeyInfo
+    $kInfo = '<ds:KeyInfo Id="Certificate' . $this->certificateID . '">' . "\n" .
+               '<ds:X509Data>' . "\n" .
+                 '<ds:X509Certificate>' . "\n" . $x509certificate . '</ds:X509Certificate>' . "\n" .
+               '</ds:X509Data>' . "\n" .
+               '<ds:KeyValue>' . "\n" .
+                 '<ds:RSAKeyValue>' . "\n" .
+                   '<ds:Modulus>' . "\n" . $modulus . '</ds:Modulus>' . "\n" .
+                   '<ds:Exponent>' . $exponent . '</ds:Exponent>' . "\n" .
+                 '</ds:RSAKeyValue>' . "\n" .
+               '</ds:KeyValue>' . "\n" .
+             '</ds:KeyInfo>';
+    // Calculate digests
+    $xmlns = $this->getNamespaces();
+    $propDigest = $tools->getDigest($tools->injectNamespaces($prop, $xmlns));
+    $kInfoDigest = $tools->getDigest($tools->injectNamespaces($kInfo, $xmlns));
+    $documentDigest = $tools->getDigest($xml);
+    // Generate SignedInfo
+    $sInfo = '<ds:SignedInfo Id="Signature-SignedInfo' . $this->signedInfoID . '">' . "\n" .
+               '<ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315">' .
+               '</ds:CanonicalizationMethod>' . "\n" .
+               '<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1">' .
+               '</ds:SignatureMethod>' . "\n" .
+               '<ds:Reference Id="SignedPropertiesID' . $this->signedPropertiesID . '" ' .
+               'Type="http://uri.etsi.org/01903#SignedProperties" ' .
+               'URI="#Signature' . $this->signatureID . '-SignedProperties' .
+               $this->signatureSignedPropertiesID . '">' . "\n" .
+                 '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1">' .
+                 '</ds:DigestMethod>' . "\n" .
+                 '<ds:DigestValue>' . $propDigest . '</ds:DigestValue>' . "\n" .
+               '</ds:Reference>' . "\n" .
+               '<ds:Reference URI="#Certificate' . $this->certificateID . '">' . "\n" .
+                 '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1">' .
+                 '</ds:DigestMethod>' . "\n" .
+                 '<ds:DigestValue>' . $kInfoDigest . '</ds:DigestValue>' . "\n" .
+               '</ds:Reference>' . "\n" .
+               '<ds:Reference Id="Reference-ID-' . $this->referenceID . '" URI="#comprobante">' . "\n" .
+                 '<ds:Transforms>' . "\n" .
+                   '<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature">' .
+                   '</ds:Transform>' . "\n" .
+                 '</ds:Transforms>' . "\n" .
+                 '<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1">' .
+                 '</ds:DigestMethod>' . "\n" .
+                 '<ds:DigestValue>' . $documentDigest . '</ds:DigestValue>' . "\n" .
+               '</ds:Reference>' . "\n" .
+             '</ds:SignedInfo>';
+    // Calculate signature
+    $signaturePayload = $tools->injectNamespaces($sInfo, $xmlns);
+    echo $signaturePayload;
+    $signatureResult = $tools->getSignature($signaturePayload, $this->privateKey);
+    // Make signature
+    $sign = '<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#" xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#" Id="Signature' . $this->signatureID . '">' . "\n" .
+             $sInfo . "\n" .
+             '<ds:SignatureValue Id="SignatureValue' . $this->signatureValueID . '">' . "\n" .
+               $signatureResult .
+             '</ds:SignatureValue>' . "\n" .
+             $kInfo . "\n" .
+             '<ds:Object Id="Signature' . $this->signatureID . '-Object' . $this->signatureObjectID . '">' .
+               '<etsi:QualifyingProperties Target="#Signature' . $this->signatureID . '">' .
+                 $prop .
+               '</etsi:QualifyingProperties>' .
+             '</ds:Object>' .
+           '</ds:Signature>';
+
     $xml = trim(str_replace('</factura>', $sign . '</factura>', $xml));  
       
     return $xml;    
   }
-
   function getNamespaces() {
     $xmlns = array();
     $xmlns[] = 'xmlns:ds="http://www.w3.org/2000/09/xmldsig#"';
@@ -516,19 +454,6 @@ ZbIJo6OW4knrleYsHO3fvmg7j8Ty1o8lyo2S6w==
     $xmlns[] = 'xmlns:etsi="http://uri.etsi.org/01903/v1.3.2#"';
     return $xmlns;
   }
-  /*public function export($filePath=null) {
-
-    // Add signature
-    $xml = $this->injectSignature($xml);
-    foreach ($this->extensions as $ext) $xml = $ext->__onAfterSign($xml);
-
-    // Prepend content type
-    $xml = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . $xml;
-
-    // Save document
-    if (!is_null($filePath)) return file_put_contents($filePath, $xml);
-    return $xml;
-  }*/
-
+  
 }
 ?>

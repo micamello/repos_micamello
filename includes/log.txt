@@ -1,0 +1,736 @@
+[2019/02/08 04:52:00] Utils::createSession empezo una nueva sesion
+[2019/02/08 04:52:00] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT o.id_pregunta, p.id_competencia,       
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, o.valor
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/08 04:52:00] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:00:34] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:00:34] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/02/11 09:00:34] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2019/02/11 09:00:34] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '14'
+[2019/02/11 09:00:34] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '14'
+[2019/02/11 09:00:34] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2019/02/11 09:00:34] SQL Query: SELECT * from mfo_nivelinteres
+[2019/02/11 09:00:34] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2019/02/11 09:00:34] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/02/11 09:00:34] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/02/11 09:00:40] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:00:40] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:00:40] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:21:35] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:21:35] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:21:35] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:22:17] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:22:17] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '2' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '2' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '2' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:22:17] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '2' LIMIT 1
+[2019/02/11 09:22:47] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:22:47] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:22:47] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:23:57] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:23:57] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:23:57] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:24:25] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:24:25] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:25] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:24:32] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:24:32] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '1' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '2' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:32] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:24:59] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:24:59] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '1' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '2' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:24:59] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/11 09:25:21] Utils::createSession empezo una nueva sesion
+[2019/02/11 09:25:21] SQL Query: SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = '1' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuestam2 r 
+            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
+            WHERE r.id_usuario = '1'
+            GROUP BY o.id_pregunta
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '1' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '1' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '2' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '3' AND id_puntaje = '2' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '4' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '3' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion, introduccion
+            FROM mfo_facetam2
+            WHERE id_faceta = '2' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '4' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '3' AND orden3 = '1' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/02/11 09:25:21] SQL Query: SELECT descripcion FROM mfo_descriptorm2 
+            WHERE id_competencia = '8' AND id_puntaje = '3' LIMIT 1
+[2019/02/12 03:25:19] Utils::createSession empezo una nueva sesion
+[2019/02/12 03:25:19] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/02/12 03:25:19] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2019/02/12 03:25:19] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '14'
+[2019/02/12 03:25:19] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '14'
+[2019/02/12 03:25:19] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2019/02/12 03:25:19] SQL Query: SELECT * from mfo_nivelinteres
+[2019/02/12 03:25:19] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2019/02/12 03:25:19] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/02/12 03:25:19] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

@@ -39,5 +39,11 @@ class Modelo_Pregunta{
     }
     return $preguntas;
   }
+
+  /******MINISITIO******/
+  public static function totalPreguntas(){
+    $sql = "SELECT COUNT(1) AS nro FROM mfo_preguntam2";
+    return $GLOBALS['db']->auto_array($sql); 
+  }
 }  
 ?>
