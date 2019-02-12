@@ -44,6 +44,6 @@
 </script>  
  
 <div id="grafico" style="width: 100%; max-width:900px; height: 500px; visibility: hidden;"></div>
-<form target="_blank" method="POST" id="envio_graficos" action="<?php echo PUERTO."://".HOST;?>/generaInforme/1/">
+<form method="POST" id="envio_graficos" action="<?php echo PUERTO."://".HOST;?>/generaInforme/1/">
 <div id="area_inputs"></div>
 </form>

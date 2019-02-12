@@ -959,7 +959,7 @@ WHERE
     $sql = "SELECT gender, count(*) as number FROM tbl_employee GROUP BY gender";
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
-
+  
   public static function guardarUsuario($data){
     if (empty($data)) {return false;}
     $term_cond = 0;
@@ -977,6 +977,5 @@ WHERE
       $result = $GLOBALS['db']->insert('mfo_usuariom2', $data_usuario);
       return $result;
   }
-
 }  
 ?>

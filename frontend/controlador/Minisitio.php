@@ -1,6 +1,5 @@
 <?php
-require_once 'includes/mpdf/mpdf.php';
-
+require_once 'includes/mpdf/mpdf.php';                                
 class Controlador_Minisitio extends Controlador_Base
 {
 
@@ -179,14 +178,14 @@ class Controlador_Minisitio extends Controlador_Base
                     $informe = $this->generaInforme(array('datos'=>$datosusuario,'preguntas'=>$preguntas,'facetas'=>$facetas));
                     $_SESSION['datos_informe'] = array('nombre_archivo'=>"informe_".$datosusuario['nombres'].' '.$datosusuario['apellidos'].".pdf",'informe'=>$informe);
                     $this->generaGrafico();
-                }else{
+                }else{                                      
                     $mpdf=new mPDF('','A4');
                     foreach ($facetas as $key => $value) {
                         $_SESSION['datos_informe']['informe'] = str_replace('_grafico'.($key), $_POST["hidden_html".($key)], $_SESSION['informe']);
                     }
                     $informe = $_SESSION['datos_informe']['informe'];
                     $nombre_archivo = $_SESSION['datos_informe']['nombre_archivo'];
-                    $mpdf->WriteHTML($informe);
+                    $mpdf->WriteHTML($informe);                    
                     $mpdf->Output($nombre_archivo, 'D');
                 }
             break;
@@ -429,7 +428,7 @@ class Controlador_Minisitio extends Controlador_Base
                     }
 
                     if($tipo == 1){
-                        $table .= '<td align="center" style="vertical-align:middle;"><a href="'.PUERTO."://".HOST.'/generaInforme/'.$value['id_usuario'].'/0/" title="Descargar informe de '.$value['nombres'].' '.$value['apellidos'].'"><i class="fa fa-download"></i></a></td>';
+                        $table .= '<td align="center" style="vertical-align:middle;"><a href="'.PUERTO."://".HOST.'/generaInforme/'.$value['id_usuario'].'/0/" title="Descargar informe de '.$value['nombres'].' '.$value['apellidos'].'" target="_blank"><i class="fa fa-download"></i></a></td>';
                     }
                     $table .= '</tr>';
                   $cont_opciones = 0;
@@ -488,8 +487,11 @@ class Controlador_Minisitio extends Controlador_Base
 
     public function generaGrafico(){
 
-        $result = Modelo_Usuario::prueba();
+        //$result = Modelo_Usuario::prueba();
+        $result[] = array('gender'=>'Female','number'=>'100');
+        
         $variable = Vista::display('admin/generarGrafico',array('datos'=>array($result,$result,$result)));
+        //ob_flush();
         echo $variable;
     }
 }

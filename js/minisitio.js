@@ -1,3 +1,19 @@
+if(document.querySelector( "form" )){
+	document.querySelector( "form" )
+	.addEventListener( "invalid", function( event ) {
+	    event.preventDefault();
+	}, true );
+}
+
+$(document).ready(function() {
+    $('#cuestionarios').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        }
+    } );
+
+} );
+
 // DEPENDENCIAS
 var puerto_host = $('#puerto_host').val();
 

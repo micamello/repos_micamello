@@ -1,6 +1,5 @@
 <?php 
 class Modelo_Faceta{
-
   
   public static function obtenerLiterales(){
     $sql = "SELECT id_faceta,SUBSTRING(descripcion, 1, 1) as faceta FROM mfo_facetam2 WHERE estado = 1";  
