@@ -297,7 +297,8 @@ class Controlador_Subempresa extends Controlador_Base
 
             $id_empresa = $GLOBALS['db']->insert_id();
 
-            if(!self::correoAvisoCreacion($data['correo'],$data['name_user'],$username,$password)){
+            $datos_correo = array('tipo'=>3, 'correo'=>$data['correo'], 'nombres_mostrar'=>$data['name_user'], 'usuario_login'=>$username, 'password'=>$password);
+            if (!Utils::enviarEmail($datos_correo)){
                 throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta o el correo no existe, intente nuevamente");
             }
 
@@ -413,18 +414,18 @@ class Controlador_Subempresa extends Controlador_Base
         }
     }
 
-    public function correoAvisoCreacion($correo,$nombres,$username,$password){
+    // public function correoAvisoCreacion($correo,$nombres,$username,$password){
 
-        $asunto = "Creación de cuenta";
-        $body = "Estimado, ".$nombres."<br>";
-        $body .= "<br>Su cuenta fue creada exitosamente, puede ingresar a su cuenta con los siguientes datos: <br><br>Usuario: <b>".$username."</b><br>Correo: <b>".$correo."</b><br> Clave: <b>".$password."</b>";
-        if (Utils::envioCorreo($correo,$asunto,$body)){
-          return true;
-        }
-        else{
-          return false;
-        }
-    }
+    //     $asunto = "Creación de cuenta";
+    //     $body = "Estimado, ".$nombres."<br>";
+    //     $body .= "<br>Su cuenta fue creada exitosamente, puede ingresar a su cuenta con los siguientes datos: <br><br>Usuario: <b>".$username."</b><br>Correo: <b>".$correo."</b><br> Clave: <b>".$password."</b>";
+    //     if (Utils::envioCorreo($correo,$asunto,$body)){
+    //       return true;
+    //     }
+    //     else{
+    //       return false;
+    //     }
+    // }
 
     public function cuentasXplan($subempresas){
 

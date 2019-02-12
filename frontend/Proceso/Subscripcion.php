@@ -54,8 +54,10 @@ class Proceso_Subscripcion{
   	catch(Exception $e){
   	  $GLOBALS['db']->rollback();
 	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
-      $msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_paypal',$msgerror);	    
+      $msgerror = $e->getMessage()." <b>Transaccion:</b>".$this->procesador->trans."<br> <b>Usuario:</b>".$this->objUsuario->id." <br><b>Plan:</b>".$this->idplan;
+      $datos_correo = array('tipo'=>8, 'mensaje'=>$msgerror, 'correo'=>'desarrollo@micamello.com.ec', 'type'=>TIPO['error_cron_paypal'], 'asunto'=>'Error Cron planes_paypal');
+      Utils::enviarEmail($datos_correo);
+	    // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_paypal',$msgerror);
   	}
 
   }
@@ -72,7 +74,7 @@ class Proceso_Subscripcion{
   }
 
   public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio){  	
-  	$email_subject = "Activación de Subscripción";    
+  	// $email_subject = "Activación de Subscripción";    
   	$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
     $email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
     $notif_body = $email_body;
@@ -84,7 +86,9 @@ class Proceso_Subscripcion{
       $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollov2/publicar/'>click aqu&iacute;</a> <br>";      
     }  
     Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
-    Utils::envioCorreo($correo,$email_subject,$email_body);
+    $datos_correo = array('tipo'=>11, 'mensaje'=>$email_body, 'correo'=>$correo, 'type'=>TIPO['notificaciones'], 'asunto'=>'Activación de Subscripción');
+    Utils::enviarEmail($datos_correo);
+    // Utils::envioCorreo($correo,$email_subject,$email_body);
   }
 
 }

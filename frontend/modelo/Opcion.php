@@ -19,6 +19,5 @@ class Modelo_Opcion{
 		        ORDER BY RAND()";
     return $GLOBALS['db']->auto_array($sql,array($pregunta),true);
 	}
-
 }  
 ?>

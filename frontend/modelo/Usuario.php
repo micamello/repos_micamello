@@ -942,8 +942,8 @@ WHERE
   }
 
   /******************MINISITIO*****************/
-  public static function buscaUsuario($idusuario){
-    if (empty($idusuario)){ return false; }
+  public static function buscaUsuario($id_usuario){
+    if (empty($id_usuario)){ return false; }
     $sql = "SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario));
     if (empty($rs['id_usuario'])){ return false; } else{ return true; }
@@ -956,9 +956,26 @@ WHERE
   }
 
   public static function prueba(){
-
     $sql = "SELECT gender, count(*) as number FROM tbl_employee GROUP BY gender";
     return $GLOBALS['db']->auto_array($sql,array(),true);
+  }
+
+  public static function guardarUsuario($data){
+    if (empty($data)) {return false;}
+    $term_cond = 0;
+    if($data['terminos_condiciones'] == 'on'){
+      $term_cond = 1;
+    }
+
+    $data_usuario = array("nombres"=>$data['nombres'], "apellidos"=>$data['apellidos'], "fecha_nacimiento"=>$data['fecha_nacimiento'], "id_nacionalidad"=>$data['pais'], "id_ciudad"=>$data['cantonnac'], "genero"=>$data['genero'], "estado_civil"=>$data['estado_civil'], "id_escolaridad"=>$data['nivel_instruccion'], "fecha_creacion"=>date("Y-m-d H:i:s"), "term_cond"=>$term_cond, "correo"=>$data['correo'], "asp_salarial"=>$data['aspiracion_salarial'], "id_parroquia"=>$data['parroquia_res'], "id_profesion"=>$data['profesion'], "id_ocupacion"=>$data['ocupacion']);
+
+    if($data['cantonnac'] == NULL || $data['cantonnac'] == ""){
+      $data_usuario = array("nombres"=>$data['nombres'], "apellidos"=>$data['apellidos'], "fecha_nacimiento"=>$data['fecha_nacimiento'], "id_nacionalidad"=>$data['pais'], "genero"=>$data['genero'], "estado_civil"=>$data['estado_civil'], "id_escolaridad"=>$data['nivel_instruccion'], "fecha_creacion"=>date("Y-m-d H:i:s"), "term_cond"=>$term_cond, "correo"=>$data['correo'], "asp_salarial"=>$data['aspiracion_salarial'], "id_parroquia"=>$data['parroquia_res'], "id_profesion"=>$data['profesion'], "id_ocupacion"=>$data['ocupacion']);
+    }
+    // print_r($data_usuario);
+    // exit();
+      $result = $GLOBALS['db']->insert('mfo_usuariom2', $data_usuario);
+      return $result;
   }
 
 }  

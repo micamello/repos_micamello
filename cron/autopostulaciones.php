@@ -110,16 +110,22 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
 	    catch(Exception $e){
 	  	  $GLOBALS['db']->rollback();
 	  	  echo "NO PROCESADO REGISTRO ".$oferta['id_ofertas']."<br>";
-	      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron autopostulaciones',$e->getMessage());      
+        $datos_correo_error = array('tipo'=>6, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage());
+        Utils::enviarEmail($datos_correo_error);
+	      // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron autopostulaciones',$e->getMessage());      
 	    }
     }        
   }  
   
   //5.-envio de correo al candidato
   if (!empty($mail_ofertas)){
-  	$email_body = "Estimado, ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le confirmamos su autopostulaci&oacute;n a las siguientes ofertas:<br><br>";
-    $email_body .= $mail_ofertas;
-  	Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);
+    $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);
+  	// $email_body = "Estimado, ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le confirmamos su autopostulaci&oacute;n a las siguientes ofertas:<br><br>";
+   //  $email_body .= $mail_ofertas;
+
+    $datos_correo = array("plantilla"=>9, "correo"=>$rows["correo"], "mensaje"=>$mail_ofertas, "nombre"=>$nombre_mostrar, 'type'=>TIPO['autopostulacion']);
+    Utils::enviarEmail($datos_correo);
+  	// Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);
     Modelo_Notificacion::insertarNotificacion($rows["id_usuario"],$email_body,Modelo_Usuario::CANDIDATO);
   }
 

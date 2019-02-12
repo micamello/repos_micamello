@@ -80,8 +80,17 @@ class Proceso_Cancelacion{
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
 	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
-	  	$msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_paypal',$msgerror);	    
+	  	$msgerror = $e->getMessage()." 
+                          <br><b>Transaccion:</b>".$this->procesador->trans." 
+                          <br><b>Usuario:</b>".$this->objUsuario->id." 
+                          <br><b>Plan:</b>".$this->idplan;
+	    // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_paypal',$msgerror);
+      $datos_correo = array(
+                          'tipo'=>11, 
+                          'mensaje'=>$msgerror, 'correo'=>'desarrollo@micamello.com.ec', 
+                          'asunto'=>'Error Cron planes_paypal', 
+                          'type'=>TIPO['error_cron_paypal']);
+      Utils::enviarEmail($datos_correo);
   	}
   }
 
@@ -161,7 +170,9 @@ class Proceso_Cancelacion{
       $email_body .= "En el caso de tener ofertas publicadas estas ser&aacute;n eliminadas";
     }  
     Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
-    Utils::envioCorreo($correo,$email_subject,$email_body);
+    $datos_correo = array('tipo'=>11, 'mensaje'=>$email_body, 'correo'=>$correo, 'type'=>TIPO['notificaciones'], 'asunto'=>'Cancelación de Subscripción');
+    Utils::enviarEmail($datos_correo);
+    // Utils::envioCorreo($correo,$email_subject,$email_body);
   }
   
 }

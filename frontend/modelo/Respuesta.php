@@ -19,6 +19,7 @@ class Modelo_Respuesta{
   /************MINISITIO****************/
   public static function guardarValores($orden,$tiempo,$idusuario,$idopcion){    
     if (empty($orden) || empty($tiempo) || empty($idusuario) || empty($idopcion)){ return false; }
+
     $datosinsert = array('orden_seleccion' => $orden,
                          'tiempo' => $tiempo,
                          'id_usuario' => $id_usuario,
@@ -26,7 +27,7 @@ class Modelo_Respuesta{
     return $GLOBALS['db']->insert('mfo_respuesta',$datosinsert);
   }
 
-  public static function verResultados($edad='', $nacionalidad='', $ciudadnac='', $genero='', $estadocivil='', $profesion='', 
+   public static function verResultados($edad='', $nacionalidad='', $ciudadnac='', $genero='', $estadocivil='', $profesion='', 
                                        $ocupacion='', $escolaridad='', $aspsalarial='', $parroquia='', $ciudad='', $provincia='',
                                        $competencias=array()){
     $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_ciudad, u.genero,
@@ -92,6 +93,8 @@ class Modelo_Respuesta{
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }
 
+ 
+
   public static function resultadoxUsuario($idusuario){
     if (empty($idusuario)){ return false; }
     $sql = "SELECT o.id_pregunta, p.id_competencia, a.id_faceta,        
@@ -109,6 +112,16 @@ class Modelo_Respuesta{
             GROUP BY o.id_pregunta
             ORDER BY o.id_pregunta, a.id_faceta, o.valor";
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
+
+
+    for ($i=0; $i < count($orden); $i++) { 
+      $datosinsert = array('orden_seleccion' => $orden[$i],
+                         'tiempo' => $tiempo,
+                         'id_usuario' => $idusuario,
+                         'id_opcion' => $idopcion[$i]);
+      $result = $GLOBALS['db']->insert('mfo_respuestam2',$datosinsert);
+    }
+    return $result;
   }
 
 }  

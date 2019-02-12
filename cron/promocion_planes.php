@@ -28,7 +28,10 @@ if (!empty($promocionales) && is_array($promocionales)){
     if ($fechacaducidad < $fechaActual){    	
     	if (!Modelo_Plan::modificarPromocion($promocion["id_plan"])){
     		echo "NO PROCESADO REGISTRO ".$promocion["id_plan"]."<br>";
-	      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Promocion Planes',"NO PROCESADO REGISTRO ".$promocion["id_plan"]);     
+	      // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Promocion Planes',"NO PROCESADO REGISTRO".$promocion["id_plan"]);
+
+        $datos_correo_error = array('tipo'=>8, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>"NO PROCESADO REGISTRO".$promocion["id_plan"], "type"=>TIPO['promocion_planes']);
+        Utils::enviarEmail($datos_correo_error);
     	}
     	echo "Plan procesado ".$promocion["id_plan"]." / ".$promocion["fecha_inicio"]." / ".$fechacaducidad." /".$fechaActual."<br>";
     }    

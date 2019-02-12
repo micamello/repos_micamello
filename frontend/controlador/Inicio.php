@@ -1,8 +1,7 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  public function construirPagina(){        
-
+  public function construirPagina(){    
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
 
