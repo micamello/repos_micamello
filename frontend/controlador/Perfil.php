@@ -39,14 +39,17 @@ class Controlador_Perfil extends Controlador_Base
                 $msj2      = 'Subir CV';
                 $ruta_arch = '#';
                 $btnSubir  = 1;
+
                 $data = array();
                 if (Utils::getParam('actualizar') == 1) {
+
                     $btnSig = 1;
                     if(!isset($_FILES['subirCV'])){
                         $_FILES['subirCV'] = ''; 
                     }
                     $btnSubir  = 0;
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
+                   print_r($data);
                 }
                 if (Utils::getParam('cambiarClave') == 1) {
                     self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login']);

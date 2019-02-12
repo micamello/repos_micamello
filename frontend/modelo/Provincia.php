@@ -43,5 +43,21 @@ class Modelo_Provincia{
             WHERE c.id_provincia = p.id_provincia AND c.id_provincia = $id_provincia ORDER BY c.nombre ASC";
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
+
+  public static function residenciaActual($id_pais){
+
+    $provincias = self::obtieneProvinciasSucursal($id_pais);
+    $datos = array();
+    foreach ($provincias as $key => $value) {
+      $cantones = self::obtieneProvinciaxCiudad($value['id_provincia']);
+      $datos_cantones = array();
+      foreach ($cantones as $k => $val) {
+        $parroquias = Modelo_Parroquia::obtieneParroquiaxCiudad($val['id_ciudad']);
+        $datos_cantones[$val['id_ciudad']] = array('nombre'=>$val['ciudad'],'parroquias'=>$parroquias);
+      }
+      $datos[$value['id_provincia']] = array('nombre'=>$value['nombre'],'cantones'=>$datos_cantones);
+    }
+    return $datos;
+  }
 }  
 ?>

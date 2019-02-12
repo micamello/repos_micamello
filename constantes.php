@@ -9,6 +9,7 @@ define('DBCLAVE', '');
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
 define('RUTA_VISTA', FRONTEND_RUTA.'frontend/Vista/');
+define('RUTA_ADMIN', FRONTEND_RUTA.'admin');
 define('TOKEN', 'token.micamello.ecuador');
 define('HORAS_VALIDO_PASSWORD', '24');
 define('MAIL_CORREO','info@micamello.com.ec');
@@ -37,7 +38,7 @@ define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as',
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
-define('REGISTRO_PAGINA',10);
+define('REGISTRO_PAGINA',9);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Casado(a)', '3'=>'En union', '4'=>'Divorciado(a)','5'=>'Viudo(a)'));
@@ -46,6 +47,8 @@ define('DIAS_AUTOPOSTULACION','3');
 define('AUTOPOSTULACION_MIN','5');
 define('TIPO_DOCUMENTO', array('1'=>'RUC','2'=>'CÉDULA','3'=>'PASAPORTE'));
 define('DOCUMENTACION', array('2'=>'CÉDULA', '3'=>'PASAPORTE'));
+define('EDAD', array('1'=>'Entre 18 y 20 a&ntilde;os', '2'=>'Entre 20 y 30 a&ntilde;os','3'=>'Entre 30 y 40 a&ntilde;os','4'=>'Entre 40 y 50 a&ntilde;os','5'=>'M&aacute;s de 50 a&ntilde;os'));
+define('OPCIONES',array('a','b','c','d','e'));
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');
