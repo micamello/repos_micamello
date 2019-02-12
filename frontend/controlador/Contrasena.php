@@ -95,7 +95,9 @@ class Controlador_Contrasena extends Controlador_Base {
         $token .= "||".$datousuario["id_usuario_login"]."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         $nombres = $datousuario['nombres'] . ((isset($datousuario['apellidos'])) ? "&nbsp;".$datousuario['apellidos'] : '');
-        if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
+
+        $datos_correo = array('tipo'=>4, 'correo'=>$datousuario['correo'], 'nombres_mostrar'=>$nombres, 'token'=>$token);
+        if (!Utils::enviarEmail($datos_correo)){
           throw new Exception("Error en el envio de correo, por favor intente denuevo");
         }
         $_SESSION['mostrar_exito'] = "Se envio a su direccion de correo ingresada el enlace para el cambio de correo, recuerde que tiene un máximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contraseña y en el caso de que no encuentre su correo revisar tambien su carpeta de spam";         
@@ -123,17 +125,17 @@ class Controlador_Contrasena extends Controlador_Base {
     Vista::render('recuperar_password', $tags);  
   } 
 
-  public function envioCorreo($correo,$nombres,$token){
-    $asunto = "Recuperación de Contraseña";
-    $body = "Estimado, ".utf8_encode($nombres)."<br>";
-    $body .= "Por favor de click en este enlace para cambiar su contrase&ntilde;a ";
-    $body .= "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a> <br>";    
-    if (Utils::envioCorreo($correo,$asunto,$body)){
-      return true;
-    }
-    else{
-      return false;
-    }
-  }
+  // public function envioCorreo($correo,$nombres,$token){
+  //   $asunto = "Recuperación de Contraseña";
+  //   $body = "Estimado, ".utf8_encode($nombres)."<br>";
+  //   $body .= "Por favor de click en este enlace para cambiar su contrase&ntilde;a ";
+  //   $body .= "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a> <br>";    
+  //   if (Utils::envioCorreo($correo,$asunto,$body)){
+  //     return true;
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // }
 }  
 ?>

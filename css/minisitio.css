@@ -1,0 +1,118 @@
+.window_class{
+	/*background-color: #9AA39B;*/
+	background: #757F9A;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to left, #D7DDE8, #757F9A);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to left, #D7DDE8, #757F9A); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.asterisk_red{
+	color: red;
+}
+
+.error_field{
+	/*background-color: #D7537A;*/
+  background-color: rgba(215, 44, 44, 0.6);
+	border-radius: 5px;
+	color: white;
+}
+	
+/********************************RESPUESTAS*************************************/
+.draganddrop {
+  width: 150px; 
+  height: 150px; 
+  padding: 0.5em; 
+}
+
+.caja_origen{
+  border-radius: 5px;
+  border-color: #AEAEAE;
+  padding: 0px 0 0px 0;
+  /*max-height: 100px;*/
+  min-height: 100px;
+}
+
+.caja_destino>.list-group1:hover{
+  background-color: transparent;
+  padding: 0px;
+  border-radius: 10px;
+  text-align: center;
+} 
+
+.caja_destino{
+  border-radius: 5px;
+  padding: 0px 0 0px 0;
+  /*max-height: 50px;*/
+  min-height: 100px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.caja_destino:hover{
+  /*background-color: #CFCFCF;*/
+}
+.texto_destino{
+  font-size: 20px;
+  text-align: center;
+  margin: 10px 0 10px 0;
+  color: #AEAEAE;
+}
+.list-group1{
+  list-style: none;
+  text-align: center;
+  font-size: 18px;
+  /*font-style: oblique;*/
+  margin: 10px 0 10px 0;
+}
+
+.list-group1:hover{
+  background-color: #B5CFFF;
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+  animation: bounce 1s;
+}
+
+.order_priority{
+  background-color: #80CAEC;
+  border-radius: 20px;
+  padding: 8px 15px 8px 15px;
+  position: absolute;
+  margin: -16px 0px 0px -11px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  color: #FFFFFF;
+  font-size: 20px;
+}
+.title_side{
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+@keyframes bounce {
+  0%, 20%, 60%, 100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+
+  40% {
+    -webkit-transform: translateY(-20px);
+    transform: translateY(-20px);
+  }
+
+  80% {
+    -webkit-transform: translateY(-10px);
+    transform: translateY(-10px);
+  }
+}
+
+/*.eder{
+  white-space: nowrap;
+  word-wrap: break-word;
+  width: 100%; 
+  overflow: hidden;
+  text-overflow: hidden; 
+  border: 1px solid #000000;
+}*/
+

@@ -16,5 +16,21 @@ class Modelo_Respuesta{
     return (empty($rs['total'])) ? 0 : $rs['total'];
   }
 
+  /************MINISITIO****************/
+  public static function guardarValores($orden,$tiempo,$idusuario,$idopcion){    
+    if (empty($orden) || empty($tiempo) || empty($idusuario) || empty($idopcion)){ return false; }
+
+    for ($i=0; $i < count($orden); $i++) { 
+      $datosinsert = array('orden_seleccion' => $orden[$i],
+                         'tiempo' => $tiempo,
+                         'id_usuario' => $idusuario,
+                         'id_opcion' => $idopcion[$i]);
+      $result = $GLOBALS['db']->insert('mfo_respuestam2',$datosinsert);
+    }
+
+    
+    return $result;
+  }
+
 }  
 ?>

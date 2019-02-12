@@ -126,23 +126,29 @@ if (!empty($usuarios) && is_array($usuarios)){
 
       $GLOBALS['db']->commit();
     
-      $email_subject = "Activación de Usuario";    
-	  	$email_body = "Estimado, ".$usuario["nombres"].(!empty($usuario['apellidos']) ? " ".$usuario['apellidos'] : "")."<br>";
-	    $email_body .= "Su usuario ha sido activado exitosamente, sus credenciales de autenticaci&oacute;n son: <br>";	    	    
-	    $email_body .= "Usuario: ".$username."<br>";
-	    $email_body .= "Correo Electr&oacute;nico: ".$usuario["correo"]."<br>";
-	    $email_body .= "Contrase&ntilde;a: ".$password."<br>";
-	    $email_body .= "Por favor de click en este enlace para ingresar "; 
-	    $email_body .= "<a href='".PUERTO."://".DOMINIO."/desarrollov2/login/'>click aqu&iacute;</a> <br>";	     	
+    //   $email_subject = "Activación de Usuario";    
+	  	// $nombre_mostrar = $usuario["nombres"].(!empty($usuario['apellidos']) ? " ".$usuario['apellidos'] : "");
+	   //  $email_body .= "Su usuario ha sido activado exitosamente, sus credenciales de autenticaci&oacute;n son: <br>";	    	    
+	   //  $email_body .= "Usuario: ".$username."<br>";
+	   //  $email_body .= "Correo Electr&oacute;nico: ".$usuario["correo"]."<br>";
+	   //  $email_body .= "Contrase&ntilde;a: ".$password."<br>";
+	   //  $email_body .= "Por favor de click en este enlace para ingresar "; 
+	   //  $email_body .= "<a href='".PUERTO."://".DOMINIO."/desarrollov2/login/'>click aqu&iacute;</a> <br>";	
+
+
+	    $datos_correo = array('tipo'=>5, 'nombres_mostrar'=>$nombre_mostrar, 'correo'=>$usuario["correo"], 'username'=>$username, 'password'=>$password);
+        Utils::enviarEmail($datos_correo);
 	   
-	    Utils::envioCorreo($usuario["correo"],$email_subject,$email_body);
+	    // Utils::envioCorreo($usuario["correo"],$email_subject,$email_body);
 
       echo $usuario['nombres']." ".$usuario['apellidos']."/".$username."<br>";    
     }
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
   	  echo "Error en usuario ".$usuario['id']." ".$e->getMessage()."<br>";
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
+  	  $datos_correo_error = array('tipo'=>6, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage());
+   		Utils::enviarEmail($datos_correo_error);
+		// Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
     }         
 	}
 	echo "TOTAL REGISTROS INVALIDOS ".$conterror;

@@ -1,620 +1,1859 @@
-[2019/01/23 05:15:26] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:26] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
-[2019/01/23 05:15:26] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
-            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-            WHERE o.estado = 1 AND p.id_pais = '14'
-[2019/01/23 05:15:26] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_usuario u 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE u.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:15:27] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_empresa e 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE e.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:15:27] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
-						FROM mfo_area a 
-						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
-						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-						WHERE p.id_pais = '14' OR p.id_pais IS NULL
-						GROUP BY a.id_area
-						ORDER BY a.nombre
-[2019/01/23 05:15:27] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:15:27] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
-[2019/01/23 05:15:27] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
-[2019/01/23 05:15:28] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:15:31] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:31] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:15:31] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:15:31] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:15:36] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:36] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
-            FROM mfo_usuario_login 
-            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '25d55ad283aa400af464c76d713c07ad'
-[2019/01/23 05:15:36] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
-                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
-                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado
-              FROM mfo_empresa e
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
-              WHERE e.id_usuario_login = '2'
-[2019/01/23 05:15:36] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-01-23 17:15:36" WHERE id_empresa=1
-[2019/01/23 05:15:36] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
-[2019/01/23 05:15:36] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
-            FROM mfo_empresa e
-            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
-            WHERE e.padre IN('1')
-[2019/01/23 05:15:37] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:37] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
-[2019/01/23 05:15:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:37] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:15:37] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:15:37] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:15:37] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+[2019/02/11 10:23:46] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:23:46] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:24:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:24:27] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:24:27] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:24:47] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:24:47] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:24:47] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:24:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:24:55] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '13'
+[2019/02/11 10:24:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:24:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:8','13','1')
+[2019/02/11 10:24:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:8','13','3')
+[2019/02/11 10:24:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:8','13','4')
+[2019/02/11 10:24:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:8','13','5')
+[2019/02/11 10:24:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:8','13','2')
+[2019/02/11 10:24:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:24:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:24:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:25:57] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:26:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:26:02] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:26:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:26:47] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:26:47] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '13'
+[2019/02/11 10:26:47] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:26:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:45','13','4')
+[2019/02/11 10:26:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:45','13','1')
+[2019/02/11 10:26:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:45','13','3')
+[2019/02/11 10:26:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:45','13','5')
+[2019/02/11 10:26:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:45','13','2')
+[2019/02/11 10:26:47] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:26:47] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:26:47] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:27:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:27:10] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:27:10] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:27:30] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:27:53] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:27:53] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:27:53] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:28:26] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:28:27] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:28:27] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:29:59] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:29:59] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:29:59] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:30:16] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:30:17] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:30:17] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:30:41] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:30:41] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:30:41] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:31:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:08] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:31:08] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:31:08] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:31:08] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:31:08] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:31:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:23] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
             FROM mfo_ciudad c, mfo_provincia p
             WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
-[2019/01/23 05:15:37] SQL Query: SELECT * FROM mfo_jornada
-[2019/01/23 05:15:37] SQL Query: SELECT * from mfo_idioma
-[2019/01/23 05:15:37] SQL Query: SELECT * from mfo_nivelidioma
-[2019/01/23 05:15:37] SQL Query: SELECT * FROM mfo_escolaridad
-[2019/01/23 05:15:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:37] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
-[2019/01/23 05:15:37] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
-[2019/01/23 05:15:38] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:15:38] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:38] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'empresa1'
-[2019/01/23 05:15:42] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:43] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '4' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '2' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
-            FROM mfo_oferta o
-            LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
-            WHERE (o.estado = 1 OR o.estado = 3)
-            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajextest pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
-            GROUP BY o.id_ofertas;
-[2019/01/23 05:15:43] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:15:43] SQL Query: SELECT * FROM mfo_provincia WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:15:43] SQL Query: SELECT * FROM mfo_jornada
-[2019/01/23 05:15:43] SQL Query: SELECT o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta,
-      a.nombre AS area, n.descripcion AS nivel, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
-      r.edad_minima, r.licencia, r.viajar, a.id_area, ul.username, emp.nombres AS empresa, emp.id_empresa AS id_usuario FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp WHERE r.id_requisitoOferta = o.id_requisitoOferta
-    AND e.id_escolaridad = o.id_escolaridad
-    AND c.id_ciudad = o.id_ciudad
-    AND p.id_provincia = c.id_provincia
-    AND a.id_area = o.id_area
-    AND n.id_nivelInteres = o.id_nivelInteres
-    AND j.id_jornada = o.id_jornada
-    AND p.id_pais = 14 AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(1) AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login ORDER BY o.fecha_creado DESC LIMIT 0,10
-[2019/01/23 05:15:43] SQL Query: SELECT emp.id_empresa AS id_usuario, emp.nombres FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_area a, mfo_nivelinteres n, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp WHERE r.id_requisitoOferta = o.id_requisitoOferta
-    AND e.id_escolaridad = o.id_escolaridad
-    AND c.id_ciudad = o.id_ciudad
-    AND p.id_provincia = c.id_provincia
-    AND a.id_area = o.id_area
-    AND n.id_nivelInteres = o.id_nivelInteres
-    AND j.id_jornada = o.id_jornada
-    AND p.id_pais = 14 AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(1) AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
-[2019/01/23 05:15:43] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '14' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '13' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '12' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '11' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '10' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '9' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '8' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '7' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '6' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:15:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:15:43] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 48, 1,0) AS editar FROM mfo_oferta where id_ofertas = '5' LIMIT 1
-[2019/01/23 05:15:43] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:15:43] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:43] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'empresa1'
-[2019/01/23 05:15:54] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:54] Controlador_Logout::construirPagina Login out
-[2019/01/23 05:15:54] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:54] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
-[2019/01/23 05:15:54] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
-            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-            WHERE o.estado = 1 AND p.id_pais = '14'
-[2019/01/23 05:15:54] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_usuario u 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE u.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:15:54] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_empresa e 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE e.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:15:54] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
-						FROM mfo_area a 
-						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
-						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-						WHERE p.id_pais = '14' OR p.id_pais IS NULL
-						GROUP BY a.id_area
-						ORDER BY a.nombre
-[2019/01/23 05:15:54] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:15:54] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
-[2019/01/23 05:15:54] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
-[2019/01/23 05:15:54] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:15:55] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:15:55] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:15:55] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:15:55] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:16:26] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:26] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:16:26] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:16:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:16:34] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:34] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
-            FROM mfo_usuario_login 
-            WHERE (username = 'candidato1' OR correo = 'candidato1') AND password = '25d55ad283aa400af464c76d713c07ad'
-[2019/01/23 05:16:34] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                     u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,  u.anosexp, u.status_carrera,                       
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado 
-              FROM mfo_usuario u
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE u.id_usuario_login = '1'
-[2019/01/23 05:16:34] SQL execute: UPDATE mfo_usuario SET ultima_sesion="2019-01-23 17:16:34" WHERE id_usuario=1
-[2019/01/23 05:16:34] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
-[2019/01/23 05:16:34] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
-[2019/01/23 05:16:34] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
-[2019/01/23 05:16:34] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 1
-[2019/01/23 05:16:34] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:34] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:16:34] SQL Query: SELECT * from mfo_idioma
-[2019/01/23 05:16:34] SQL Query: SELECT * from mfo_nivelidioma
-[2019/01/23 05:16:34] SQL Query: SELECT * FROM mfo_escolaridad
-[2019/01/23 05:16:34] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:16:34] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:16:34] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 14 ORDER BY nombre;
-[2019/01/23 05:16:35] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:16:35] SQL Query: SELECT * FROM mfo_pais
-[2019/01/23 05:16:35] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
-			AND c.id_ciudad = 16;
-[2019/01/23 05:16:35] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+[2019/02/11 10:31:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:24] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
             FROM mfo_ciudad c, mfo_provincia p
             WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
-[2019/01/23 05:16:35] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
-		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
-		AND i.id_idioma = nii.id_idioma
-		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
-[2019/01/23 05:16:35] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
-[2019/01/23 05:16:35] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
-[2019/01/23 05:16:35] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
-[2019/01/23 05:16:35] SQL Query: SELECT p.valor, c.imagen, c.orden 
-						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
-						WHERE p.id_usuario = '1' ORDER BY p.id_cuestionario ASC
-[2019/01/23 05:16:35] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
-[2019/01/23 05:16:35] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:16:35] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:35] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'candidato1'
-[2019/01/23 05:16:35] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:35] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:16:35] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 4
-[2019/01/23 05:16:39] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:39] Controlador_Logout::construirPagina Login out
-[2019/01/23 05:16:39] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:39] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
-[2019/01/23 05:16:39] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
-            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-            WHERE o.estado = 1 AND p.id_pais = '14'
-[2019/01/23 05:16:39] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_usuario u 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE u.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:16:39] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_empresa e 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE e.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:16:39] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
-						FROM mfo_area a 
-						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
-						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-						WHERE p.id_pais = '14' OR p.id_pais IS NULL
-						GROUP BY a.id_area
-						ORDER BY a.nombre
-[2019/01/23 05:16:39] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:16:39] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
-[2019/01/23 05:16:39] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
-[2019/01/23 05:16:39] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:16:41] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:41] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:16:41] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:16:41] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:16:48] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:48] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
-            FROM mfo_usuario_login 
-            WHERE (username = 'candidato2' OR correo = 'candidato2') AND password = '25d55ad283aa400af464c76d713c07ad'
-[2019/01/23 05:16:48] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:16:48] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:16:48] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:16:56] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:16:56] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
-            FROM mfo_usuario_login 
-            WHERE (username = 'candidato2' OR correo = 'candidato2') AND password = '25d55ad283aa400af464c76d713c07ad'
-[2019/01/23 05:16:56] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:16:56] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:16:56] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:07] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:07] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
-            FROM mfo_usuario_login 
-            WHERE (username = 'candidato1' OR correo = 'candidato1') AND password = '25d55ad283aa400af464c76d713c07ad'
-[2019/01/23 05:17:07] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                     u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,  u.anosexp, u.status_carrera,                       
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado 
-              FROM mfo_usuario u
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE u.id_usuario_login = '1'
-[2019/01/23 05:17:07] SQL execute: UPDATE mfo_usuario SET ultima_sesion="2019-01-23 17:17:07" WHERE id_usuario=1
-[2019/01/23 05:17:07] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 1
-[2019/01/23 05:17:07] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:07] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:07] SQL Query: SELECT * from mfo_idioma
-[2019/01/23 05:17:07] SQL Query: SELECT * from mfo_nivelidioma
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_escolaridad
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:17:07] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 14 ORDER BY nombre;
-[2019/01/23 05:17:07] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_pais
-[2019/01/23 05:17:07] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
-			AND c.id_ciudad = 16;
-[2019/01/23 05:17:07] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+[2019/02/11 10:31:24] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:24] eder1 17
+[2019/02/11 10:31:24] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 10:31:24] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:24] eder1 18
+[2019/02/11 10:31:24] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 10:31:28] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:28] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','2','M','2','2','2019-02-11 10:31:28','1','eder@hotmail.com','12000.00','488','2','2')
+[2019/02/11 10:31:28] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:28] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:31:28] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:31:38] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:38] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:31:38] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:31:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:51] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '14'
+[2019/02/11 10:31:51] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:31:51] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:13','14','3')
+[2019/02/11 10:31:51] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:13','14','1')
+[2019/02/11 10:31:51] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:13','14','2')
+[2019/02/11 10:31:51] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:13','14','5')
+[2019/02/11 10:31:51] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:13','14','4')
+[2019/02/11 10:31:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:31:51] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:31:51] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:32:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:32:46] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:32:57] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:32:57] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:32:57] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:33:04] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:33:04] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '14'
+[2019/02/11 10:33:04] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:33:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:7','14','3')
+[2019/02/11 10:33:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:7','14','2')
+[2019/02/11 10:33:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:7','14','5')
+[2019/02/11 10:33:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:7','14','1')
+[2019/02/11 10:33:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:7','14','4')
+[2019/02/11 10:33:04] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:33:04] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:33:04] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:36:21] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:36:22] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:36:22] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:38:07] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:38:30] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:38:30] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:38:30] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:38:43] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:38:43] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '14'
+[2019/02/11 10:38:43] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:38:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:13','14','4')
+[2019/02/11 10:38:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:13','14','3')
+[2019/02/11 10:38:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:13','14','2')
+[2019/02/11 10:38:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:13','14','1')
+[2019/02/11 10:38:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:13','14','5')
+[2019/02/11 10:38:44] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:38:44] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:38:44] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:32] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:32] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:32] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:41] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:41] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '14'
+[2019/02/11 10:40:41] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:9','14','1')
+[2019/02/11 10:40:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:9','14','2')
+[2019/02/11 10:40:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:9','14','5')
+[2019/02/11 10:40:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:9','14','3')
+[2019/02/11 10:40:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:9','14','4')
+[2019/02/11 10:40:41] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:41] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:41] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:48] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:48] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '14'
+[2019/02/11 10:40:48] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:7','14','4')
+[2019/02/11 10:40:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:7','14','3')
+[2019/02/11 10:40:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:7','14','2')
+[2019/02/11 10:40:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:7','14','1')
+[2019/02/11 10:40:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:7','14','5')
+[2019/02/11 10:40:48] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:48] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:48] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:49] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:49] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:49] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:51] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:51] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:51] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:51] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:51] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:51] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:40:58] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:40:58] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:40:58] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:41:13] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:41:13] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '14'
+[2019/02/11 10:41:13] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:41:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:15','14','2')
+[2019/02/11 10:41:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:15','14','3')
+[2019/02/11 10:41:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:15','14','4')
+[2019/02/11 10:41:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:15','14','5')
+[2019/02/11 10:41:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:15','14','1')
+[2019/02/11 10:41:13] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:41:13] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:41:13] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:44:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:44:27] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:44:27] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:44:27] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:44:27] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:44:27] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:44:28] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:44:28] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:44:28] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:44:28] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:44:28] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:44:28] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:44:28] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:45:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:10] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:45:10] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:45:10] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:45:10] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:45:10] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:45:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:10] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:45:10] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:45:11] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:11] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:45:11] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:45:16] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:16] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:16] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:45:16] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:45:16] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:45:16] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:45:16] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:45:24] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:24] SQL Query: SELECT * FROM mfo_provincia WHERE id_pais = '14' ORDER BY nombre ASC
+[2019/02/11 10:45:25] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:25] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
             FROM mfo_ciudad c, mfo_provincia p
             WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
-[2019/01/23 05:17:07] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
-		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
-		AND i.id_idioma = nii.id_idioma
-		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
-[2019/01/23 05:17:07] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
-[2019/01/23 05:17:07] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
-[2019/01/23 05:17:07] SQL Query: SELECT p.valor, c.imagen, c.orden 
-						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
-						WHERE p.id_usuario = '1' ORDER BY p.id_cuestionario ASC
-[2019/01/23 05:17:07] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
-[2019/01/23 05:17:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:08] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:08] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'candidato1'
-[2019/01/23 05:17:08] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:08] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:08] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 4
-[2019/01/23 05:17:11] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:11] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '4' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:11] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '2' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:11] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:11] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:11] SQL Query: SELECT * from mfo_idioma
-[2019/01/23 05:17:11] SQL Query: SELECT * from mfo_nivelidioma
-[2019/01/23 05:17:11] SQL Query: SELECT * FROM mfo_escolaridad
-[2019/01/23 05:17:11] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:17:11] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:17:11] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 14 ORDER BY nombre;
-[2019/01/23 05:17:11] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:17:11] SQL Query: SELECT * FROM mfo_pais
-[2019/01/23 05:17:11] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
-			AND c.id_ciudad = 16;
-[2019/01/23 05:17:11] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
-            FROM mfo_ciudad c, mfo_provincia p
-            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
-[2019/01/23 05:17:11] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
-		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
-		AND i.id_idioma = nii.id_idioma
-		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
-[2019/01/23 05:17:11] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
-[2019/01/23 05:17:11] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
-[2019/01/23 05:17:11] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
-[2019/01/23 05:17:11] SQL Query: SELECT p.valor, c.imagen, c.orden 
-						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
-						WHERE p.id_usuario = '1' ORDER BY p.id_cuestionario ASC
-[2019/01/23 05:17:11] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
-[2019/01/23 05:17:11] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:11] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:11] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'candidato1'
-[2019/01/23 05:17:12] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:12] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:12] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 4
-[2019/01/23 05:17:23] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:23] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:23] SQL Query: SELECT * from mfo_idioma
-[2019/01/23 05:17:23] SQL Query: SELECT * from mfo_nivelidioma
-[2019/01/23 05:17:23] SQL Query: SELECT * FROM mfo_escolaridad
-[2019/01/23 05:17:23] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:17:23] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:17:23] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 14 ORDER BY nombre;
-[2019/01/23 05:17:23] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:17:23] SQL Query: SELECT * FROM mfo_pais
-[2019/01/23 05:17:23] SQL Trans: ROLLBACK
-[2019/01/23 05:17:23] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
-			AND c.id_ciudad = 16;
-[2019/01/23 05:17:23] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
-            FROM mfo_ciudad c, mfo_provincia p
-            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
-[2019/01/23 05:17:23] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
-		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
-		AND i.id_idioma = nii.id_idioma
-		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
-[2019/01/23 05:17:23] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
-[2019/01/23 05:17:23] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
-[2019/01/23 05:17:23] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
-[2019/01/23 05:17:23] SQL Query: SELECT p.valor, c.imagen, c.orden 
-						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
-						WHERE p.id_usuario = '1' ORDER BY p.id_cuestionario ASC
-[2019/01/23 05:17:23] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
-[2019/01/23 05:17:23] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:23] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:23] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'candidato1'
-[2019/01/23 05:17:23] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:23] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:23] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 4
-[2019/01/23 05:17:37] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:37] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:37] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:37] SQL Query: SELECT * from mfo_idioma
-[2019/01/23 05:17:37] SQL Query: SELECT * from mfo_nivelidioma
-[2019/01/23 05:17:37] SQL Query: SELECT * FROM mfo_escolaridad
-[2019/01/23 05:17:37] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:17:37] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:17:37] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 14 ORDER BY nombre;
-[2019/01/23 05:17:37] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:17:37] SQL Query: SELECT * FROM mfo_pais
-[2019/01/23 05:17:37] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
-			AND c.id_ciudad = 16;
-[2019/01/23 05:17:37] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
-            FROM mfo_ciudad c, mfo_provincia p
-            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
-[2019/01/23 05:17:37] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
-		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
-		AND i.id_idioma = nii.id_idioma
-		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
-[2019/01/23 05:17:37] SQL Query: SELECT * FROM mfo_usuarioxarea WHERE id_usuario = 1
-[2019/01/23 05:17:37] SQL Query: SELECT * FROM mfo_usuarioxnivel WHERE id_usuario = 1
-[2019/01/23 05:17:37] SQL Query: SELECT COUNT(1) AS nro FROM mfo_cuestionario
-[2019/01/23 05:17:37] SQL Query: SELECT p.valor, c.imagen, c.orden 
-						FROM mfo_porcentajextest p INNER JOIN mfo_cuestionario c ON p.id_cuestionario = c.id_cuestionario 
-						WHERE p.id_usuario = '1' ORDER BY p.id_cuestionario ASC
-[2019/01/23 05:17:37] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
-[2019/01/23 05:17:37] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:37] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:37] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'candidato1'
-[2019/01/23 05:17:38] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:38] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
-[2019/01/23 05:17:38] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 4
-[2019/01/23 05:17:44] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:44] Controlador_Logout::construirPagina Login out
-[2019/01/23 05:17:44] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:44] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
-[2019/01/23 05:17:44] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
-            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-            WHERE o.estado = 1 AND p.id_pais = '14'
-[2019/01/23 05:17:44] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_usuario u 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE u.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:17:44] SQL Query: SELECT COUNT(1) AS cont 
-              FROM mfo_empresa e 
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              WHERE e.estado=1 AND p.id_pais = '14'
-[2019/01/23 05:17:44] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
-						FROM mfo_area a 
-						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
-						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
-						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-						WHERE p.id_pais = '14' OR p.id_pais IS NULL
-						GROUP BY a.id_area
-						ORDER BY a.nombre
-[2019/01/23 05:17:44] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:17:44] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
-[2019/01/23 05:17:44] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
-[2019/01/23 05:17:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:46] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:46] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:17:46] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:17:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:52] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:52] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
-            FROM mfo_usuario_login 
-            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '25d55ad283aa400af464c76d713c07ad'
-[2019/01/23 05:17:52] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
-                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
-                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado
-              FROM mfo_empresa e
-              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
-              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
-              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
-              WHERE e.id_usuario_login = '2'
-[2019/01/23 05:17:52] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-01-23 17:17:52" WHERE id_empresa=1
-[2019/01/23 05:17:52] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
-[2019/01/23 05:17:52] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
-            FROM mfo_empresa e
-            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
-            WHERE e.padre IN('1')
-[2019/01/23 05:17:52] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:52] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
-[2019/01/23 05:17:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:17:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:17:52] SQL Query: SELECT * FROM mfo_area
-[2019/01/23 05:17:52] SQL Query: SELECT * from mfo_nivelinteres
-[2019/01/23 05:17:52] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/01/23 05:17:52] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+[2019/02/11 10:45:34] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:34] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
             FROM mfo_ciudad c, mfo_provincia p
             WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
-[2019/01/23 05:17:52] SQL Query: SELECT * FROM mfo_jornada
-[2019/01/23 05:17:52] SQL Query: SELECT * from mfo_idioma
-[2019/01/23 05:17:52] SQL Query: SELECT * from mfo_nivelidioma
-[2019/01/23 05:17:52] SQL Query: SELECT * FROM mfo_escolaridad
-[2019/01/23 05:17:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:17:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'verCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:17:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
-[2019/01/23 05:17:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
-[2019/01/23 05:17:52] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
-            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
-            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
-[2019/01/23 05:17:52] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '1' AND tipo = '1' AND tipo_usuario = '2' LIMIT 1
-[2019/01/23 05:17:52] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
-[2019/01/23 05:17:53] Utils::createSession empezo una nueva sesion
-[2019/01/23 05:17:53] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
-            FROM mfo_usuario_login l
-            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
-            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
-            WHERE l.username = 'empresa1'
+[2019/02/11 10:45:34] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:34] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 10:45:34] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:34] eder1 17
+[2019/02/11 10:45:34] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 10:45:34] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:34] eder1 18
+[2019/02/11 10:45:34] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 10:45:45] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:45] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,id_ciudad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','14','18','M','1','4','2019-02-11 10:45:45','1','eder@hotmail.com','1200.00','488','1','2')
+[2019/02/11 10:45:45] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:45:45] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:45:45] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:46:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:46:02] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '15'
+[2019/02/11 10:46:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:46:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:17','15','1')
+[2019/02/11 10:46:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:17','15','2')
+[2019/02/11 10:46:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:17','15','4')
+[2019/02/11 10:46:03] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:17','15','5')
+[2019/02/11 10:46:03] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:17','15','3')
+[2019/02/11 10:46:03] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:46:03] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:46:03] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 10:48:59] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:48:59] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:48:59] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 10:49:17] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:17] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:49:17] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 10:49:25] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:25] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '15'
+[2019/02/11 10:49:25] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 10:49:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:8','15','2')
+[2019/02/11 10:49:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:8','15','3')
+[2019/02/11 10:49:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:8','15','4')
+[2019/02/11 10:49:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:8','15','1')
+[2019/02/11 10:49:26] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:8','15','5')
+[2019/02/11 10:49:26] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:26] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:49:26] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 10:49:33] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:33] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '15'
+[2019/02/11 10:49:33] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 10:49:33] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:7','15','4')
+[2019/02/11 10:49:33] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:7','15','1')
+[2019/02/11 10:49:33] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:7','15','5')
+[2019/02/11 10:49:33] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:7','15','3')
+[2019/02/11 10:49:33] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:7','15','2')
+[2019/02/11 10:49:33] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:33] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:49:33] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 10:49:45] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:45] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '15'
+[2019/02/11 10:49:45] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 10:49:45] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:12','15','2')
+[2019/02/11 10:49:45] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:12','15','3')
+[2019/02/11 10:49:45] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:12','15','1')
+[2019/02/11 10:49:45] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:12','15','4')
+[2019/02/11 10:49:45] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:12','15','5')
+[2019/02/11 10:49:45] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:45] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:49:45] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:45] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:49:45] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:49:45] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:49:45] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:49:45] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:49:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:51] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:49:51] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:49:51] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:49:51] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:49:51] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:49:56] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:56] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:49:56] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:49:56] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:49:56] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:49:56] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:49:56] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:53:22] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:22] SQL Query: SELECT * FROM mfo_provincia WHERE id_pais = '14' ORDER BY nombre ASC
+[2019/02/11 10:53:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:23] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 10:53:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:27] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/02/11 10:53:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:27] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 10:53:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:27] eder1 17
+[2019/02/11 10:53:27] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 10:53:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:27] eder1 18
+[2019/02/11 10:53:27] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 10:53:34] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:34] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,id_ciudad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','14','18','M','2','2','2019-02-11 10:53:34','1','eder@hotmail.com','12000.00','488','2','2')
+[2019/02/11 10:53:34] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:34] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:34] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:41] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:41] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '16'
+[2019/02/11 10:53:41] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:7','16','5')
+[2019/02/11 10:53:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:7','16','4')
+[2019/02/11 10:53:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:7','16','3')
+[2019/02/11 10:53:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:7','16','1')
+[2019/02/11 10:53:41] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:7','16','2')
+[2019/02/11 10:53:41] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:41] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:41] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:50] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '16'
+[2019/02/11 10:53:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:9','16','3')
+[2019/02/11 10:53:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:9','16','2')
+[2019/02/11 10:53:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:9','16','4')
+[2019/02/11 10:53:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:9','16','5')
+[2019/02/11 10:53:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:9','16','1')
+[2019/02/11 10:53:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:54] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:54] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:54] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:53:59] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:53:59] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:53:59] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:00] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:00] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:01] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:01] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:01] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:02] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:02] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:03] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:03] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:03] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:04] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:04] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:04] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:05] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:05] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:06] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:06] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:06] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:06] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:06] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:06] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:07] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:07] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:07] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:08] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:08] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:09] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:09] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:09] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:10] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:10] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:17] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:17] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '16'
+[2019/02/11 10:54:17] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:17] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:7','16','4')
+[2019/02/11 10:54:17] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:7','16','3')
+[2019/02/11 10:54:17] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:7','16','5')
+[2019/02/11 10:54:17] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:7','16','2')
+[2019/02/11 10:54:17] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:7','16','1')
+[2019/02/11 10:54:17] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:17] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:17] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:27] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '16'
+[2019/02/11 10:54:27] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:27] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:10','16','2')
+[2019/02/11 10:54:27] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:10','16','5')
+[2019/02/11 10:54:27] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:10','16','3')
+[2019/02/11 10:54:27] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:10','16','1')
+[2019/02/11 10:54:27] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:10','16','4')
+[2019/02/11 10:54:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:27] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:54:27] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:54:31] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:31] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:54:31] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:54:31] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:54:31] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:54:31] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:54:33] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:33] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:33] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:54:33] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:54:33] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:54:33] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:54:33] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:54:38] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:38] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:54:38] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:54:38] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:54:38] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:54:38] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:54:38] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:55:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:55:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:55:51] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:55:51] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:55:51] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:55:51] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:55:51] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:56:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:00] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/02/11 10:56:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:00] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 10:56:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:00] eder1 17
+[2019/02/11 10:56:00] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 10:56:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:00] eder1 18
+[2019/02/11 10:56:00] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 10:56:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:05] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','2','M','2','2','2019-02-11 10:56:05','1','eder@hotmail.com','12000.00','488','2','2')
+[2019/02/11 10:56:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:05] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:56:05] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:14] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:14] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:56:14] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:14] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:9','17','3')
+[2019/02/11 10:56:14] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:9','17','2')
+[2019/02/11 10:56:14] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:9','17','5')
+[2019/02/11 10:56:14] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:9','17','1')
+[2019/02/11 10:56:14] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:9','17','4')
+[2019/02/11 10:56:14] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:14] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:56:14] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:20] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:20] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:56:20] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:6','17','3')
+[2019/02/11 10:56:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:6','17','1')
+[2019/02/11 10:56:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:6','17','5')
+[2019/02/11 10:56:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:6','17','2')
+[2019/02/11 10:56:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:6','17','4')
+[2019/02/11 10:56:20] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:20] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:56:20] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:29] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:29] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:56:29] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:9','17','1')
+[2019/02/11 10:56:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:9','17','4')
+[2019/02/11 10:56:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:9','17','3')
+[2019/02/11 10:56:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:9','17','2')
+[2019/02/11 10:56:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:9','17','5')
+[2019/02/11 10:56:29] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:29] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:56:29] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:39] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:39] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:56:39] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:39] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:10','17','5')
+[2019/02/11 10:56:39] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:10','17','1')
+[2019/02/11 10:56:39] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:10','17','4')
+[2019/02/11 10:56:39] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:10','17','3')
+[2019/02/11 10:56:39] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:10','17','2')
+[2019/02/11 10:56:39] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:39] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:56:39] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:47] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:47] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:56:47] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:8','17','2')
+[2019/02/11 10:56:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:8','17','4')
+[2019/02/11 10:56:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:8','17','5')
+[2019/02/11 10:56:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:8','17','3')
+[2019/02/11 10:56:47] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:8','17','1')
+[2019/02/11 10:56:47] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:47] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:56:47] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:55] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:56:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 10:56:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:8','17','3')
+[2019/02/11 10:56:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:8','17','1')
+[2019/02/11 10:56:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:8','17','4')
+[2019/02/11 10:56:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:8','17','2')
+[2019/02/11 10:56:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:8','17','5')
+[2019/02/11 10:56:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:56:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:56:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 10:58:35] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:35] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:58:35] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 10:58:35] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:1:40','17','5')
+[2019/02/11 10:58:35] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:1:40','17','1')
+[2019/02/11 10:58:35] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:1:40','17','3')
+[2019/02/11 10:58:35] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:1:40','17','4')
+[2019/02/11 10:58:35] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:1:40','17','2')
+[2019/02/11 10:58:35] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:35] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:58:35] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 10:58:40] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:40] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '17'
+[2019/02/11 10:58:40] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 10:58:40] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:5','17','4')
+[2019/02/11 10:58:40] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:5','17','3')
+[2019/02/11 10:58:40] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:5','17','5')
+[2019/02/11 10:58:40] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:5','17','2')
+[2019/02/11 10:58:40] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:5','17','1')
+[2019/02/11 10:58:40] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:40] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:58:40] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:40] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:58:40] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:58:40] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:58:40] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:58:40] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:58:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:50] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:58:50] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:58:50] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:58:50] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:58:50] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:58:51] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:58:51] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 10:58:51] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 10:58:51] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 10:58:51] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 10:58:51] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 10:59:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:00] SQL Query: SELECT * FROM mfo_provincia WHERE id_pais = '14' ORDER BY nombre ASC
+[2019/02/11 10:59:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:02] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 10:59:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:05] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/02/11 10:59:06] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:06] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 10:59:06] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:06] eder1 17
+[2019/02/11 10:59:06] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 10:59:06] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:06] eder1 18
+[2019/02/11 10:59:06] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 10:59:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:10] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,id_ciudad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','14','18','M','2','2','2019-02-11 10:59:10','1','eder@hotmail.com','12000.00','488','2','2')
+[2019/02/11 10:59:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 10:59:10] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 10:59:10] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:01:56] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:01:56] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:01:56] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:01:56] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:2:46','18','3')
+[2019/02/11 11:01:56] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:2:46','18','1')
+[2019/02/11 11:01:56] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:2:46','18','5')
+[2019/02/11 11:01:56] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:2:46','18','2')
+[2019/02/11 11:01:56] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:2:46','18','4')
+[2019/02/11 11:01:56] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:01:56] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:01:56] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:01] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:01] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:02:01] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:5','18','1')
+[2019/02/11 11:02:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:5','18','4')
+[2019/02/11 11:02:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:5','18','2')
+[2019/02/11 11:02:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:5','18','3')
+[2019/02/11 11:02:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:5','18','5')
+[2019/02/11 11:02:01] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:01] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:02:01] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:07] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:07] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:02:07] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:07] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:6','18','1')
+[2019/02/11 11:02:07] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:6','18','4')
+[2019/02/11 11:02:07] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:6','18','5')
+[2019/02/11 11:02:07] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:6','18','3')
+[2019/02/11 11:02:07] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:6','18','2')
+[2019/02/11 11:02:07] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:07] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:02:07] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:13] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:13] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:02:13] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:6','18','1')
+[2019/02/11 11:02:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:6','18','5')
+[2019/02/11 11:02:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:6','18','2')
+[2019/02/11 11:02:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:6','18','3')
+[2019/02/11 11:02:13] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:6','18','4')
+[2019/02/11 11:02:13] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:13] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:02:13] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:22] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:22] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:02:22] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:22] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:9','18','1')
+[2019/02/11 11:02:22] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:9','18','2')
+[2019/02/11 11:02:22] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:9','18','4')
+[2019/02/11 11:02:22] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:9','18','3')
+[2019/02/11 11:02:22] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:9','18','5')
+[2019/02/11 11:02:22] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:22] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:02:22] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:38] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:38] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:02:38] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 11:02:38] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:16','18','3')
+[2019/02/11 11:02:38] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:16','18','2')
+[2019/02/11 11:02:38] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:16','18','5')
+[2019/02/11 11:02:38] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:16','18','1')
+[2019/02/11 11:02:38] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:16','18','4')
+[2019/02/11 11:02:38] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:02:38] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:02:38] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 11:03:37] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:03:37] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:03:37] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 11:03:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:59','18','1')
+[2019/02/11 11:03:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:59','18','4')
+[2019/02/11 11:03:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:59','18','3')
+[2019/02/11 11:03:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:59','18','5')
+[2019/02/11 11:03:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:59','18','2')
+[2019/02/11 11:03:37] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:03:37] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:03:37] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 11:03:43] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:03:43] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '18'
+[2019/02/11 11:03:43] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 11:03:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:6','18','5')
+[2019/02/11 11:03:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:6','18','1')
+[2019/02/11 11:03:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:6','18','4')
+[2019/02/11 11:03:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:6','18','3')
+[2019/02/11 11:03:43] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:6','18','2')
+[2019/02/11 11:03:43] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:03:43] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:03:43] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:03:43] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 11:03:43] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 11:03:43] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 11:03:43] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 11:03:43] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 11:03:46] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:03:46] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:03:46] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 11:03:46] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 11:03:46] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 11:03:46] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 11:03:46] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 11:07:15] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:07:15] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/02/11 11:07:15] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:07:15] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 11:07:15] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:07:15] eder1 17
+[2019/02/11 11:07:15] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 11:07:15] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:07:15] eder1 18
+[2019/02/11 11:07:16] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 11:07:22] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:07:22] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','2','M','2','2','2019-02-11 11:07:22','1','eder@hotmail.com','12000.00','488','2','2')
+[2019/02/11 11:07:22] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:07:22] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:07:22] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:32:07] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:32:07] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:32:07] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:32:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:32:23] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:32:23] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:32:31] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:32:31] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:32:31] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:32:40] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:32:40] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:32:40] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:32:44] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:32:44] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:32:44] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:32:48] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:32:48] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:32:48] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:33:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:33:00] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:33:00] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:39:01] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:39:01] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:39:01] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:39:09] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:39:09] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:39:09] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:39:28] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:39:28] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:39:28] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:39:38] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:39:38] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:39:38] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:40:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:40:08] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:40:08] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:41:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:41:23] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:41:23] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:41:30] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:41:30] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:41:30] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:42:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:42:02] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:42:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:42:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:42:23] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:42:23] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:42:56] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:42:56] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:42:56] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:43:18] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:43:18] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:43:18] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:44:52] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:44:52] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:44:52] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 11:51:36] Utils::createSession empezo una nueva sesion
+[2019/02/11 11:51:36] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 11:51:36] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 12:57:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:57:00] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 12:57:00] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 12:57:00] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','01:5:24','19','2')
+[2019/02/11 12:57:00] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','01:5:24','19','4')
+[2019/02/11 12:57:00] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','01:5:24','19','3')
+[2019/02/11 12:57:00] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','01:5:24','19','5')
+[2019/02/11 12:57:00] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','01:5:24','19','1')
+[2019/02/11 12:57:00] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:57:00] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 12:57:00] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 12:57:12] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:57:12] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 12:57:12] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 12:57:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:12','19','5')
+[2019/02/11 12:57:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:12','19','4')
+[2019/02/11 12:57:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:12','19','3')
+[2019/02/11 12:57:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:12','19','2')
+[2019/02/11 12:57:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:12','19','1')
+[2019/02/11 12:57:12] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:57:12] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 12:57:12] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 12:57:25] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:57:25] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 12:57:25] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 12:57:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:13','19','5')
+[2019/02/11 12:57:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:13','19','1')
+[2019/02/11 12:57:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:13','19','2')
+[2019/02/11 12:57:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:13','19','4')
+[2019/02/11 12:57:25] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:13','19','3')
+[2019/02/11 12:57:25] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:57:25] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 12:57:25] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 12:59:52] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:59:52] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 12:59:52] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 12:59:57] Utils::createSession empezo una nueva sesion
+[2019/02/11 12:59:57] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 12:59:57] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:01:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:01:02] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:01:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:03:09] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:03:09] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:03:09] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:03:27] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:03:27] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:03:27] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:03:39] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:03:39] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:03:39] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:03:57] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:03:57] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:03:57] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:04:11] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:04:11] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:04:11] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:05:18] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:05:18] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:05:18] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:05:28] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:05:28] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:05:28] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:06:56] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:06:56] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:06:56] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:08:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:08:08] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 01:08:08] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:08:08] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:1:12','19','5')
+[2019/02/11 01:08:08] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:1:12','19','4')
+[2019/02/11 01:08:08] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:1:12','19','2')
+[2019/02/11 01:08:08] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:1:12','19','1')
+[2019/02/11 01:08:08] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:1:12','19','3')
+[2019/02/11 01:08:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:08:08] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:08:08] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 01:19:57] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:19:57] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 01:19:57] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 01:19:57] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:11:49','19','3')
+[2019/02/11 01:19:57] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:11:49','19','4')
+[2019/02/11 01:19:57] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:11:49','19','2')
+[2019/02/11 01:19:57] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:11:49','19','1')
+[2019/02/11 01:19:57] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:11:49','19','5')
+[2019/02/11 01:19:57] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:19:57] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:19:57] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 01:20:04] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:20:04] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 01:20:04] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 01:20:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:7','19','4')
+[2019/02/11 01:20:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:7','19','5')
+[2019/02/11 01:20:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:7','19','2')
+[2019/02/11 01:20:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:7','19','1')
+[2019/02/11 01:20:04] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:7','19','3')
+[2019/02/11 01:20:04] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:20:04] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:20:04] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 01:20:15] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:20:15] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 01:20:15] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 01:20:15] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:11','19','1')
+[2019/02/11 01:20:15] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:11','19','5')
+[2019/02/11 01:20:15] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:11','19','4')
+[2019/02/11 01:20:15] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:11','19','3')
+[2019/02/11 01:20:15] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:11','19','2')
+[2019/02/11 01:20:15] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:20:15] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:20:16] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 01:20:45] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:20:45] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:20:45] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 01:21:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:21:02] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '19'
+[2019/02/11 01:21:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 01:21:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:17','19','1')
+[2019/02/11 01:21:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:17','19','4')
+[2019/02/11 01:21:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:17','19','2')
+[2019/02/11 01:21:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:17','19','5')
+[2019/02/11 01:21:02] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:17','19','3')
+[2019/02/11 01:21:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:21:02] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:21:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:21:02] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:21:02] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:21:02] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:21:02] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:21:02] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:24:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:24:05] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:24:05] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:24:05] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:24:05] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:24:05] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:27:11] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:11] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:27:11] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:27:11] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:27:11] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:27:11] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:27:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:23] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/02/11 01:27:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:23] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 01:27:23] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:23] eder1 17
+[2019/02/11 01:27:24] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 01:27:24] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:24] eder1 18
+[2019/02/11 01:27:24] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 01:27:31] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:31] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','1','M','2','2','2019-02-11 13:27:31','1','eder@hotmail.com','12000.00','488','2','2')
+[2019/02/11 01:27:31] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:31] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:27:31] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 01:27:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:50] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:27:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 01:27:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:19','20','1')
+[2019/02/11 01:27:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:19','20','3')
+[2019/02/11 01:27:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:19','20','5')
+[2019/02/11 01:27:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:19','20','4')
+[2019/02/11 01:27:50] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:19','20','2')
+[2019/02/11 01:27:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:27:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:27:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:28:19] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:28:19] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:28:19] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:28:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:29','20','3')
+[2019/02/11 01:28:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:29','20','5')
+[2019/02/11 01:28:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:29','20','1')
+[2019/02/11 01:28:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:29','20','4')
+[2019/02/11 01:28:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:29','20','2')
+[2019/02/11 01:28:19] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:28:19] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:28:19] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 01:28:37] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:28:37] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:28:37] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 01:28:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:18','20','3')
+[2019/02/11 01:28:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:18','20','2')
+[2019/02/11 01:28:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:18','20','4')
+[2019/02/11 01:28:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:18','20','5')
+[2019/02/11 01:28:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:18','20','1')
+[2019/02/11 01:28:37] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:28:37] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:28:37] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:28:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:28:55] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:28:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:28:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:18','20','4')
+[2019/02/11 01:28:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:18','20','5')
+[2019/02/11 01:28:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:18','20','1')
+[2019/02/11 01:28:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:18','20','2')
+[2019/02/11 01:28:55] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:18','20','3')
+[2019/02/11 01:28:55] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:28:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:28:55] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 01:29:09] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:29:09] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:29:09] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 01:29:09] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:14','20','2')
+[2019/02/11 01:29:09] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:14','20','3')
+[2019/02/11 01:29:09] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:14','20','4')
+[2019/02/11 01:29:09] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:14','20','5')
+[2019/02/11 01:29:09] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:14','20','1')
+[2019/02/11 01:29:09] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:29:09] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:29:09] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 01:29:30] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:29:30] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:29:30] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 01:29:30] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:21','20','3')
+[2019/02/11 01:29:30] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:21','20','5')
+[2019/02/11 01:29:30] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:21','20','2')
+[2019/02/11 01:29:30] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:21','20','1')
+[2019/02/11 01:29:30] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:21','20','4')
+[2019/02/11 01:29:30] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:29:30] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:29:30] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 01:29:48] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:29:48] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:29:48] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 01:29:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:18','20','1')
+[2019/02/11 01:29:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:18','20','4')
+[2019/02/11 01:29:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:18','20','3')
+[2019/02/11 01:29:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:18','20','2')
+[2019/02/11 01:29:48] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:18','20','5')
+[2019/02/11 01:29:48] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:29:48] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:29:48] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 01:30:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:30:05] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '20'
+[2019/02/11 01:30:05] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 01:30:05] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:17','20','1')
+[2019/02/11 01:30:05] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:17','20','3')
+[2019/02/11 01:30:05] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:17','20','2')
+[2019/02/11 01:30:05] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:17','20','5')
+[2019/02/11 01:30:05] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:17','20','4')
+[2019/02/11 01:30:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:30:05] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:30:05] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:30:05] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:30:05] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:30:05] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:30:05] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:30:05] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:30:12] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:30:12] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:30:12] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:30:12] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:30:12] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:30:12] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:32:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:32:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:32:08] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:32:08] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:32:08] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:32:08] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:32:08] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:38:19] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:38:19] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:38:19] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:38:19] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:38:19] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:38:19] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:38:35] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:38:35] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:38:35] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:38:35] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:38:35] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:38:35] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:38:54] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:38:54] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:38:54] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:38:54] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:38:54] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:38:54] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:39:22] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:39:22] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:39:22] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:39:22] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:39:22] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:39:22] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:39:28] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:39:28] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:39:28] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:39:28] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:39:28] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:39:28] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:40:32] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:40:32] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 01:40:32] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 01:40:32] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 01:40:32] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 01:40:32] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 01:43:32] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:43:32] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/02/11 01:43:32] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:43:32] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 01:43:32] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:43:32] eder1 17
+[2019/02/11 01:43:32] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 01:43:32] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:43:32] eder1 18
+[2019/02/11 01:43:32] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 01:43:42] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:43:42] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1994-03-13','2','M','1','2','2019-02-11 13:43:42','1','eder@hotmail.com','12000.00','488','1','2')
+[2019/02/11 01:43:42] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:43:42] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:43:42] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 01:46:10] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:46:10] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:46:10] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 01:46:36] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:46:36] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 01:46:36] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 01:46:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:26','21','5')
+[2019/02/11 01:46:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:26','21','4')
+[2019/02/11 01:46:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:26','21','2')
+[2019/02/11 01:46:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:26','21','1')
+[2019/02/11 01:46:37] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:26','21','3')
+[2019/02/11 01:46:37] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:46:37] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:46:37] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:46:39] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:46:39] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:46:39] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:46:39] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:46:39] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:46:39] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:46:39] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:46:39] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:46:39] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:46:40] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:46:40] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:46:40] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:48:20] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:48:20] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 01:48:20] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '2' 
+		        ORDER BY RAND()
+[2019/02/11 01:48:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:1:40','21','1')
+[2019/02/11 01:48:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:1:40','21','5')
+[2019/02/11 01:48:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:1:40','21','4')
+[2019/02/11 01:48:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:1:40','21','3')
+[2019/02/11 01:48:20] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:1:40','21','2')
+[2019/02/11 01:48:20] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:48:20] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:48:20] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 01:48:29] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:48:29] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 01:48:29] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '3' 
+		        ORDER BY RAND()
+[2019/02/11 01:48:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:9','21','1')
+[2019/02/11 01:48:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:9','21','2')
+[2019/02/11 01:48:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:9','21','4')
+[2019/02/11 01:48:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:9','21','5')
+[2019/02/11 01:48:29] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:9','21','3')
+[2019/02/11 01:48:29] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:48:29] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:48:29] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:48:44] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:48:44] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 01:48:44] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '4' 
+		        ORDER BY RAND()
+[2019/02/11 01:48:44] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:15','21','2')
+[2019/02/11 01:48:44] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:15','21','4')
+[2019/02/11 01:48:44] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:15','21','5')
+[2019/02/11 01:48:44] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:15','21','1')
+[2019/02/11 01:48:44] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:15','21','3')
+[2019/02/11 01:48:44] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:48:44] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:48:44] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 01:49:01] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:49:01] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 01:49:01] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '5' 
+		        ORDER BY RAND()
+[2019/02/11 01:49:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:17','21','3')
+[2019/02/11 01:49:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:17','21','1')
+[2019/02/11 01:49:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:17','21','5')
+[2019/02/11 01:49:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:17','21','2')
+[2019/02/11 01:49:01] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:17','21','4')
+[2019/02/11 01:49:01] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:49:01] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:49:01] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 01:49:19] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:49:19] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 01:49:19] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '6' 
+		        ORDER BY RAND()
+[2019/02/11 01:49:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:18','21','5')
+[2019/02/11 01:49:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:18','21','1')
+[2019/02/11 01:49:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:18','21','3')
+[2019/02/11 01:49:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:18','21','2')
+[2019/02/11 01:49:19] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:18','21','4')
+[2019/02/11 01:49:19] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:49:19] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:49:19] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 01:49:50] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:49:50] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:49:50] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 01:50:02] Utils::createSession empezo una nueva sesion
+[2019/02/11 01:50:02] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 01:50:02] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 02:03:03] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:03:03] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 02:03:03] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '7' 
+		        ORDER BY RAND()
+[2019/02/11 02:03:03] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:13:1','21','3')
+[2019/02/11 02:03:03] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:13:1','21','4')
+[2019/02/11 02:03:03] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:13:1','21','2')
+[2019/02/11 02:03:03] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:13:1','21','1')
+[2019/02/11 02:03:03] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:13:1','21','5')
+[2019/02/11 02:03:03] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:03:03] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:03:03] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 02:03:12] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:03:12] SQL Query: SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = '21'
+[2019/02/11 02:03:12] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '8' 
+		        ORDER BY RAND()
+[2019/02/11 02:03:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('1','00:0:9','21','1')
+[2019/02/11 02:03:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('2','00:0:9','21','4')
+[2019/02/11 02:03:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('3','00:0:9','21','3')
+[2019/02/11 02:03:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('4','00:0:9','21','2')
+[2019/02/11 02:03:12] SQL execute: INSERT INTO mfo_respuestam2 (orden_seleccion,tiempo,id_usuario,id_opcion) VALUES ('5','00:0:9','21','5')
+[2019/02/11 02:03:12] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:03:12] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:03:12] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:03:12] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 02:03:12] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 02:03:12] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 02:03:12] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 02:03:12] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 02:04:17] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:04:17] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 02:04:17] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 02:04:17] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 02:04:17] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 02:04:17] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 02:04:36] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:04:36] SQL Query: SELECT * FROM mfo_pais
+[2019/02/11 02:04:36] SQL Query: SELECT * FROM mfo_provincia
+[2019/02/11 02:04:36] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/02/11 02:04:36] SQL Query: SELECT * FROM mfo_profesionm2
+[2019/02/11 02:04:36] SQL Query: SELECT * FROM mfo_ocupacionm2
+[2019/02/11 02:08:42] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:08:42] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/02/11 02:08:42] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:08:42] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/02/11 02:08:42] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:08:42] eder1 17
+[2019/02/11 02:08:42] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '17'
+[2019/02/11 02:08:43] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:08:43] eder1 18
+[2019/02/11 02:08:43] SQL Query: SELECT * FROM mfo_parroquia WHERE id_ciudad = '18'
+[2019/02/11 02:08:48] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:08:48] SQL execute: INSERT INTO mfo_usuariom2 (nombres,apellidos,fecha_nacimiento,id_nacionalidad,genero,estado_civil,id_escolaridad,fecha_creacion,term_cond,correo,asp_salarial,id_parroquia,id_profesion,id_ocupacion) VALUES ('Eder','Pozo','1992-01-13','2','M','2','2','2019-02-11 14:08:48','1','eder@hotmail.com','12000.00','488','2','2')
+[2019/02/11 02:08:48] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:08:48] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:08:48] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:09:47] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:09:47] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:09:47] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:11:22] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:11:22] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:11:22] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:19:16] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:19:16] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:19:16] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:19:33] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:19:33] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:19:33] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:22:44] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:22:44] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:22:44] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:23:13] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:23:13] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:23:13] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:24:40] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:24:40] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:24:40] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:25:24] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:25:24] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:25:24] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:26:08] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:26:08] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:26:08] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:27:45] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:27:45] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:27:45] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:28:11] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:28:11] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:28:11] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/11 02:28:20] Utils::createSession empezo una nueva sesion
+[2019/02/11 02:28:20] SQL Query: SELECT COUNT(1) AS nro FROM mfo_preguntam2
+[2019/02/11 02:28:20] SQL Query: SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = '1' 
+		        ORDER BY RAND()
+[2019/02/12 11:07:13] Utils::createSession empezo una nueva sesion
+[2019/02/12 11:07:13] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/02/12 11:07:13] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2019/02/12 11:07:13] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '14'
+[2019/02/12 11:07:13] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '14'
+[2019/02/12 11:07:13] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2019/02/12 11:07:13] SQL Query: SELECT * from mfo_nivelinteres
+[2019/02/12 11:07:13] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2019/02/12 11:07:13] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/02/12 11:07:14] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/02/12 11:07:18] Utils::createSession empezo una nueva sesion
+[2019/02/12 11:07:18] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/02/12 11:07:19] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2019/02/12 11:07:19] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '14'
+[2019/02/12 11:07:19] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '14'
+[2019/02/12 11:07:19] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2019/02/12 11:07:19] SQL Query: SELECT * from mfo_nivelinteres
+[2019/02/12 11:07:19] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2019/02/12 11:07:19] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/02/12 11:07:19] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/02/12 02:44:08] Utils::createSession empezo una nueva sesion
+[2019/02/12 02:44:08] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/02/12 02:44:08] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2019/02/12 02:44:08] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '14'
+[2019/02/12 02:44:08] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '14'
+[2019/02/12 02:44:08] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2019/02/12 02:44:08] SQL Query: SELECT * from mfo_nivelinteres
+[2019/02/12 02:44:08] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2019/02/12 02:44:08] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/02/12 02:44:08] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/02/12 02:45:37] Utils::createSession empezo una nueva sesion
+[2019/02/12 02:45:37] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/02/12 02:45:37] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '14'
+[2019/02/12 02:45:37] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '14'
+[2019/02/12 02:45:37] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '14'
+[2019/02/12 02:45:37] SQL Query: SELECT a.id_area, a.nombre, a.ico, COUNT(o.id_ofertas) AS ofertas
+						FROM mfo_area a 
+						LEFT JOIN mfo_oferta o ON o.id_area = a.id_area AND o.estado = 1
+						LEFT JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+						LEFT JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+						WHERE p.id_pais = '14' OR p.id_pais IS NULL
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2019/02/12 02:45:37] SQL Query: SELECT * from mfo_nivelinteres
+[2019/02/12 02:45:37] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '14' ORDER BY orden LIMIT 3
+[2019/02/12 02:45:37] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/02/12 02:45:37] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
