@@ -9,6 +9,7 @@ define('DBCLAVE', '');
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
 define('RUTA_VISTA', FRONTEND_RUTA.'frontend/Vista/');
+define('RUTA_ADMIN', FRONTEND_RUTA.'admin');
 define('TOKEN', 'token.micamello.ecuador');
 define('HORAS_VALIDO_PASSWORD', '24');
 define('MAIL_CORREO','info@micamello.com.ec');
@@ -46,6 +47,8 @@ define('DIAS_AUTOPOSTULACION','3');
 define('AUTOPOSTULACION_MIN','5');
 define('TIPO_DOCUMENTO', array('1'=>'RUC','2'=>'CÉDULA','3'=>'PASAPORTE'));
 define('DOCUMENTACION', array('2'=>'CÉDULA', '3'=>'PASAPORTE'));
+define('EDAD', array('1'=>'Entre 18 y 20 a&ntilde;os', '2'=>'Entre 20 y 30 a&ntilde;os','3'=>'Entre 30 y 40 a&ntilde;os','4'=>'Entre 40 y 50 a&ntilde;os','5'=>'M&aacute;s de 50 a&ntilde;os'));
+define('OPCIONES',array('a','b','c','d','e'));
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');

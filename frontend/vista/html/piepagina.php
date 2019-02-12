@@ -354,6 +354,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
+
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 <?php

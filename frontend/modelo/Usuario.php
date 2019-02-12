@@ -896,7 +896,7 @@ WHERE
             WHERE e.padre IN(?)";
     $padre = $GLOBALS['db']->auto_array($sql,array($idpadre),true);
     if (!empty($padre) && is_array($padre)){
-     
+      //$numreg = count($padre);
       $cuentaPlan = array();
       foreach($padre as $key=>$registro){
 
@@ -939,6 +939,26 @@ WHERE
     }
     //echo $sql;
     return $GLOBALS['db']->auto_array($sql,array($padre),true);
+  }
+
+  /******************MINISITIO*****************/
+  public static function buscaUsuario($idusuario){
+    if (empty($idusuario)){ return false; }
+    $sql = "SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario));
+    if (empty($rs['id_usuario'])){ return false; } else{ return true; }
+  }
+
+  public static function obtieneNombres($idusuario){
+    if (empty($idusuario)){ return false; }
+    $sql = "SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = ? LIMIT 1";
+    return $GLOBALS['db']->auto_array($sql,array($idusuario));
+  }
+
+  public static function prueba(){
+
+    $sql = "SELECT gender, count(*) as number FROM tbl_employee GROUP BY gender";
+    return $GLOBALS['db']->auto_array($sql,array(),true);
   }
 
 }  

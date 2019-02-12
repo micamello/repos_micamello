@@ -1,7 +1,19 @@
-document.querySelector( "form" )
-.addEventListener( "invalid", function( event ) {
-    event.preventDefault();
-}, true );
+if(document.querySelector( "form" )){
+	document.querySelector( "form" )
+	.addEventListener( "invalid", function( event ) {
+	    event.preventDefault();
+	}, true );
+}
+
+$(document).ready(function() {
+    $('#cuestionarios').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        }
+    } );
+  
+} );
+
 // DEPENDENCIAS
 var puerto_host = $('#puerto_host').val();
 
@@ -381,4 +393,45 @@ function validarNombreApellido(nombre){
 function validarFecha(fecha){
 	// console.log(fecha);
 	return /^(19[5-9][0-9]|20[0-4][0-9]|2050)[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$/.test(fecha);
+}
+
+
+$("#ocupaciones").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#listaOcupaciones li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#profesiones").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#listaProfesiones li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#nacionalidades").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu1 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#residencia").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu2 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#competencias").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu3 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+function enviarPclave(ruta){
+
+	window.location = ruta;
 }

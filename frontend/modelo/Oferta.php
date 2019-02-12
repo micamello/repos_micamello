@@ -71,11 +71,6 @@ class Modelo_Oferta{
     }
     
     if (!empty($vista) && ($vista != 'postulacion')){ 
-      if($areasInteres != false){
-        $sql .= " AND a.id_area IN(".$areasInteres.")"; 
-      }
-
-    if (!empty($vista) && ($vista != 'postulacion')){ 
 
       if($areasInteres != false){
         $sql .= " AND a.id_area IN(".$areasInteres.")"; 

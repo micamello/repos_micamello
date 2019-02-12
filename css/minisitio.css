@@ -14,3 +14,58 @@
 	border-radius: 5px;
 	color: white;
 }
+
+.filtros{
+  overflow: auto;
+  max-height: 200px;
+  text-decoration:none;
+}
+
+li{ list-style:none; }
+ul{text-align: left; padding-left: 20px;}
+
+#menu1 * { list-style:none;}
+#menu1 li{ line-height:180%;}
+
+
+#menu1 li a{color:#337ab7; text-decoration:none;}
+.etiqueta{ content:"\025b8"; color:#337ab7; margin-right:4px;}
+
+#menu1 input[name="list"] {
+	position: absolute;
+	left: -1000em;
+	}
+#menu1 label:before{ content:"\025b8"; color:#337ab7; margin-right:4px;}
+#menu1 input:checked ~ label:before{ content:"\025be";}
+#menu1 .interior{display: none;}
+#menu1 input:checked ~ ul{display:block;}
+
+/************************ menu 2 *********************/
+#menu2 * { list-style:none;}
+#menu2 li{ line-height:180%;}
+#menu2 li a{color:#337ab7; text-decoration:none;}
+#menu2 input[name="list"] {
+	position: absolute;
+	left: -1000em;
+	}
+#menu2 label:before{ content:"\025b8"; color:#337ab7; margin-right:4px;}
+#menu2 input:checked ~ label:before{ content:"\025be";}
+#menu2 .interior{display: none;}
+#menu2 input:checked ~ ul{display:block;}
+
+/************************ menu 3 *********************/
+#menu3 * { list-style:none;}
+#menu3 li{ line-height:180%;}
+#menu3 li a{color:#337ab7; text-decoration:none;}
+#menu3 input[name="list"] {
+	position: absolute;
+	left: -1000em;
+	}
+#menu3 label:before{ content:"\025b8"; color:#337ab7; margin-right:4px;}
+#menu3 input:checked ~ label:before{ content:"\025be";}
+#menu3 .interior{display: none;}
+#menu3 input:checked ~ ul{display:block;}
+
+.btn-filtro p{
+	margin-bottom: 0px;
+}

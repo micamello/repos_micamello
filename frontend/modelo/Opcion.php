@@ -10,5 +10,15 @@ class Modelo_Opcion{
 						ORDER BY r.orden";
 		return $GLOBALS['db']->auto_array($sql,array($pregunta),true);
 	}
+	
+	/*******MINISITIO******/
+	public static function obtieneOpciones($pregunta){
+		if (empty($pregunta)){ return false; }
+		$sql = "SELECT id_opcion, descripcion, valor 
+		        FROM mfo_opcionm2 WHERE id_pregunta = ? 
+		        ORDER BY RAND()";
+    return $GLOBALS['db']->auto_array($sql,array($pregunta),true);
+	}
+
 }  
 ?>
