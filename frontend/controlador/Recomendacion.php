@@ -10,7 +10,7 @@ class Controlador_Recomendacion extends Controlador_Base {
       if (Utils::getParam('enviarRecomendacion') == 1) {
         $campos = array('nombres' => 1, 'correo1' => 1, 'telefono' => 1, 'descripcion' => 1);
         $data = $this->camposRequeridos($campos);
-
+        
         if(self::envioRecomendaciones(MAIL_SUGERENCIAS,$data)){
           $_SESSION['mostrar_exito'] = 'Sus recomendaciones han sido enviadas exitosamente';
         }else{

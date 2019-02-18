@@ -19,11 +19,14 @@ class Modelo_Respuesta{
   /************MINISITIO****************/
   public static function guardarValores($orden,$tiempo,$idusuario,$idopcion){    
     if (empty($orden) || empty($tiempo) || empty($idusuario) || empty($idopcion)){ return false; }
-    $datosinsert = array('orden_seleccion' => $orden,
+    foreach($orden as $key=>$values){
+      $datosinsert = array('orden_seleccion' => $orden[$key],
                          'tiempo' => $tiempo,
-                         'id_usuario' => $id_usuario,
-                         'id_opcion' => $id_opcion);
-    return $GLOBALS['db']->insert('mfo_respuesta',$datosinsert);
+                         'id_usuario' => $idusuario,
+                         'id_opcion' => $idopcion[$key]);
+      $return = $GLOBALS['db']->insert('mfo_respuestam2',$datosinsert);
+    }    
+    return $return;
   }
 
   public static function verResultados($edad='', $nacionalidad='', $ciudadnac='', $genero='', $estadocivil='', $profesion='', 
@@ -44,8 +47,9 @@ class Modelo_Respuesta{
         $sql .= "(p.id_competencia = ".$competencia." AND b.id_puntaje = ".$puntaje.") OR ";
       }
       $sql = substr($sql,0,-3).", 'valido', 'invalido') as flag,";
-    }else{
-      $sql .= "'valido' AS flag,";
+    }
+    else{
+      $sql .= " 'valido' AS flag,"; 
     }
     $sql = substr($sql,0,-1);
     $sql .= " FROM mfo_usuariom2 u
@@ -117,7 +121,7 @@ class Modelo_Respuesta{
             INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
             WHERE r.id_usuario = ?
             GROUP BY o.id_pregunta
-            ORDER BY o.id_pregunta, a.id_faceta, o.valor";
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor";          
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
   }
 

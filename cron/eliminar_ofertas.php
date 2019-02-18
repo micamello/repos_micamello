@@ -30,7 +30,9 @@ if (count($ofertas) > 0){
 			}
       catch(Exception $e){  	    
   	    echo "Error al inactivar oferta ".$oferta["id_ofertas"]."<br>";
-        Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Eliminar Ofertas',$e->getMessage());      
+        // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Eliminar Ofertas',$e->getMessage());   
+		$datos_correo_error = array('tipo'=>8, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage(), "type"=>TIPO['eliminar_oferta']);
+   		Utils::enviarEmail($datos_correo_error);   
       } 
 		}    
 	}

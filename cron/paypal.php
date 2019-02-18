@@ -48,14 +48,18 @@ try{
     $vl_insert["payment_gross"] = $_POST["payment_gross"];
     $vl_insert["ipn_track_id"] = $_POST["ipn_track_id"];
     $vl_insert["parent_txn_id"] = $_POST["parent_txn_id"];
-    Utils::envioCorreo("desarrollo@micamello.com.ec","CRON PAYPAL",print_r($_POST,true));
+    // Utils::envioCorreo("desarrollo@micamello.com.ec","CRON PAYPAL",print_r($_POST,true));
+    $datos_correo = array('tipo'=>11, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>print_r($_POST,true), 'type'=>TIPO['cron_paypal_data']);
+    Utils::enviarEmail($datos_correo);
     if (!Modelo_Paypal::guardar($vl_insert)){
       throw new Exception("Error Insert IPN Paypal");
     } 
   }
 }
 catch(Exception $e){
-  Utils::envioCorreo('desarrollo@micamello.com.ec',$e->getMessage(),print_r($_POST,true));
+    $datos_correo = array('tipo'=>8, 'asunto'=>$e->getMessage(), 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>print_r($_POST,true), 'type'=>TIPO['error_cron_paypal']);
+    Utils::enviarEmail($datos_correo);
+    // Utils::envioCorreo('desarrollo@micamello.com.ec',$e->getMessage(),print_r($_POST,true));
 }
 header("HTTP/1.1 200 OK");
 ?>

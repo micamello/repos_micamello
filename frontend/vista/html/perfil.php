@@ -69,9 +69,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			                        <label for="subirCV" class="custom_file">
 			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
 			                        </label>
-
 			                        <?php if($btnDescarga != 1){ echo '<p id="mensaje_error_hv" class="parpadea" style="font-size:16px;color:red;font-weight:bold;">Cargar la hoja de vida es obligatorio *</p>'; } ?>
-
 			                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" >
 			                   		<div align="center">
 		                            	<p class="text-center" id="texto_status"><?php echo $msj2; ?></p>

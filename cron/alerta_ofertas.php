@@ -47,9 +47,13 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   }
   //envio de correo al candidato
   if (!empty($mail_ofertas)){
-    $email_body = "Estimado ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le informamos las siguientes ofertas que se ajustan a su perfil:<br><br>";    
-    $email_body .= $mail_ofertas;
-    Utils::envioCorreo($rows["correo"],"Ofertas Laborales",$email_body);    
+    // $email_body = "Estimado ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le informamos las siguientes ofertas que se ajustan a su perfil:<br><br>";    
+    // $email_body .= $mail_ofertas;
+    // Utils::envioCorreo($rows["correo"],"Ofertas Laborales",$email_body); 
+
+    $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);
+    $datos_correo = array("tipo"=>9, "correo"=>$rows["correo"], "mensaje"=>$mail_ofertas, "nombre"=>$nombre_mostrar, "type"=>TIPO['alerta_oferta']);
+    Utils::enviarEmail($datos_correo);   
   }
 }
 

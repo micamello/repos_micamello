@@ -32,11 +32,15 @@ if (!empty($arrcandidato)){
 					throw new Exception("Error al desactivar el plan caducado"); 
 				}
 										
-				$mensaje = "Estimado, ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>Su plan (".utf8_encode($usuarioplan["nombre"]).") contratado el ".$usuarioplan["fecha_compra"]." ha caducado.<br> De querer seguir haciendo uso de nuestro servicio debe activar un nuevo plan.";
+				// $mensaje = "Estimado, ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>Su plan (".utf8_encode($usuarioplan["nombre"]).") contratado el ".$usuarioplan["fecha_compra"]." ha caducado.<br> De querer seguir haciendo uso de nuestro servicio debe activar un nuevo plan.";
 				
         $GLOBALS['db']->commit();
         echo "Plan de Candidato Desactivado ".$usuarioplan["id_usuario_plan"]."<br>";				
-				Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);												
+				// Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);
+
+				$nombre_mostrar = utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]);
+		$datos_correo = array('tipo'=>10, 'nombres_mostrar'=>$nombre_mostrar, 'correo'=>$infousuario["correo"], 'nombre_plan'=>$usuarioplan['nombre'], 'fecha_plan'=>$usuarioplan['fecha_compra'], "type"=>TIPO['cancelacion_plan']);
+        Utils::enviarEmail($datos_correo);										
 			}
 			else{				
 			  $resultado = Modelo_UsuarioxPlan::publicacionesRestantes($usuarioplan["id_usuario"]);
@@ -61,7 +65,10 @@ if (!empty($arrcandidato)){
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
   	  echo "Error en registro candidato ".$usuarioplan['id_usuario_plan']."<br>";
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());      
+      // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());
+
+      $datos_correo_error = array('tipo'=>8, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage(), "type"=>TIPO['registro_error']);
+   		Utils::enviarEmail($datos_correo_error);    
     }    
 	}
 } 
@@ -92,14 +99,19 @@ if (!empty($arrempresa)){
         }
 				
 				$GLOBALS['db']->commit();
-				Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);				
+				// Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);
+				$nombre_mostrar = utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]);
+				$datos_correo = array('tipo'=>10, 'nombres_mostrar'=>$nombre_mostrar, 'correo'=>$infousuario["correo"], 'nombre_plan'=>$usuarioplan['nombre'], 'fecha_plan'=>$usuarioplan['fecha_compra'], "type"=>TIPO['cancelacion_plan']);
+				Utils::enviarEmail($datos_correo);					
 				echo "Plan de Empresa Desactivado ".$usuarioplan["id_usuario"]."<br>";
 			}			
 		}
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
   	  echo "Error en registro empresa ".$usuarioplan["id_usuario_plan"]."<br>";
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());      
+      // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage()); 
+		$datos_correo_error = array('tipo'=>8, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage(), "type"=>TIPO['registro_error']);
+   		Utils::enviarEmail($datos_correo_error);     
     }    
 	}
 } 

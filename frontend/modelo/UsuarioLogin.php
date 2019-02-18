@@ -13,6 +13,5 @@ class Modelo_UsuarioLogin{
   	$datos = array("dni"=>$dni);
   	return $GLOBALS['db']->update("mfo_usuario_login",$datos,"id_usuario_login=".$idUsuario);
   }
-
 }  
 ?>

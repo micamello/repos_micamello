@@ -47,6 +47,202 @@ class Utils{
     $result = preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$email);
     return $result;
   }
+
+  static public function enviarEmail($parametros){
+    $url = "";
+    $asunto = "";
+    $body = "";
+    $text_button = "";
+    $tipo = $parametros['tipo'];
+    $cabecera = "";
+    $logo_tipo_mensaje = "";
+    $template = Modelo_TemplateEmail::obtieneTemplate($tipo);
+      switch ($tipo) {
+        case 1:
+            $asunto = "Activación de cuenta";
+            $text_button = "Activar cuenta";
+            $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
+            $body = str_replace(
+                        TAGS_REPLACE_T1, 
+                        array(
+                              ucwords($parametros['nombres_mostrar']), 
+                              $parametros['usuario_login'], 
+                              $url, 
+                              $text_button
+                            ), 
+                        $template['contenido']);
+        break;
+        case 2:
+            $asunto = "Credenciales de cuenta mi camello";
+            $text_button = "Activar cuenta";
+            $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
+            $body = str_replace(
+                        TAGS_REPLACE_T2, 
+                        array(
+                              ucwords($parametros['nombres_mostrar']), 
+                              $parametros['usuario_login'], 
+                              $url, 
+                              $text_button, 
+                              $parametros['correo'], 
+                              $parametros['password']
+                            ),
+                          $template['contenido']);
+        break;
+        case 3:
+            $asunto = "Creación de cuenta";
+            $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
+            $body = str_replace(
+                        TAGS_REPLACE_T3, 
+                        array(
+                              ucwords($parametros['nombres_mostrar']), 
+                              $parametros['usuario_login'], 
+                              $parametros['correo'], 
+                              $parametros['password']
+                            )
+                      , $template['contenido']);
+        break;
+        case 4:
+            $asunto = "Recuperación de Contraseña";
+            $url = PUERTO."://".HOST."/contrasena/".$parametros['token']."/";
+            $text_button = "Recuperar contraseña";
+            $body = str_replace(
+                        TAGS_REPLACE_T4, 
+                        array(
+                              ucwords($parametros['nombres_mostrar']), 
+                              $url, 
+                              $text_button, 
+                            )
+                      , $template['contenido']);
+        break;
+        case 5:
+            $asunto = "Activación de Usuario";
+            $url = PUERTO."://".HOST."/login/";
+            $text_button = "Iniciar sesión";
+            $body = str_replace(
+                        TAGS_REPLACE_T5, 
+                        array(
+                              ucwords($parametros['nombres_mostrar']), 
+                              $parametros['username'],
+                              $url, 
+                              $text_button,
+                              $parametros['correo'],
+                              $parametros['password']
+                            )
+                      , $template['contenido']);
+        break;
+        case 6:
+            $asunto = "Error Cron PreRegistro";
+            $body = str_replace(
+                        TAGS_REPLACE_T6, 
+                        array(
+                              $parametros['mensaje']
+                            )
+                      , $template['contenido']);
+        break;
+        case 7:
+            $asunto = "Recomendaciones o sugerencias";
+            $body = str_replace(
+                        TAGS_REPLACE_T7, 
+                        array(
+                              $parametros['destinatario'], 
+                              $parametros['nombres'], 
+                              $parametros['descripcion'], 
+                              $parametros['correo1'], 
+                              $parametros['telefono']
+                            )
+                      , $template['contenido']);
+        break;
+        case 8:
+            if($parametros['asunto'] != "" || $parametros['asunto'] != null){
+              $asunto = $parametros['asunto'];
+            }
+            else{
+              $asunto = $parametros['type']['asunto'];
+            }
+            $logo_tipo_mensaje = $parametros['type']['logo'];
+            $cabecera = $parametros['type']['cabecera'];
+            $body = str_replace(
+                        TAGS_REPLACE_T8, 
+                        array(
+                              $parametros['mensaje'],
+                              $cabecera,
+                              $logo_tipo_mensaje
+                            )
+                      , $template['contenido']);
+            print_r($body);
+            exit();
+        break;
+        case 9:
+        // var_dump($parametros);exit();
+            $asunto = $parametros['type']['asunto'];
+            $logo_tipo_mensaje = $parametros['type']['logo'];
+            $cabecera = $parametros['type']['cabecera'];
+            $body = str_replace(
+                        TAGS_REPLACE_T9, 
+                        array(
+                              $parametros['nombre'],
+                              $parametros['mensaje'],
+                              $cabecera,
+                              $logo_tipo_mensaje, 
+                              $parametros['type']['contenido']
+                            )
+                      , $template['contenido']);
+        break;
+        case 10:
+        // var_dump($parametros);exit();
+            $asunto = $parametros['type']['asunto'];
+            $logo_tipo_mensaje = $parametros['type']['logo'];
+            $cabecera = $parametros['type']['cabecera'];
+            $nombre_mostrar = $parametros['nombres_mostrar'];
+            $fecha_plan = $parametros['fecha_plan'];
+            $nombre_plan = $parametros['nombre_plan'];
+            $body = str_replace(
+                        TAGS_REPLACE_T10, 
+                        array(
+                              $cabecera,
+                              $logo_tipo_mensaje,
+                              $nombre_mostrar,
+                              $nombre_plan,
+                              $fecha_plan
+                            )
+                      , $template['contenido']);
+        break;
+        case 11:
+            if($parametros['type']['asunto'] != "" || $parametros['type']['asunto'] != null){
+              $asunto = $parametros['type']['asunto'];
+            }
+            else{
+              $asunto = $parametros['type']['asunto'];
+            }
+            $logo_tipo_mensaje = $parametros['type']['logo'];
+            $cabecera = $parametros['type']['cabecera'];
+            $mensaje = $parametros['mensaje'];
+            $body = str_replace(
+                        TAGS_REPLACE_T11, 
+                        array(
+                              $cabecera,
+                              $logo_tipo_mensaje,
+                              $mensaje
+                            )
+                      , $template['contenido']);
+            print_r($body);
+            exit();
+        break;
+        default:
+            
+        break;
+      }
+    $template_data = array('asunto'=>$asunto, 'body'=>$body);
+    $asunto = $template_data['asunto'];
+    $body = $template_data['body'];
+    if (Utils::envioCorreo($parametros['correo'],$asunto,$body)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
   public static function envioCorreo($to, $subject, $body){    
     $mail = new PHPMailer();
     $mail->IsSMTP();
@@ -411,6 +607,37 @@ class Utils{
    else
      return 'Other';
   }
+
+  public static function validatFormatoFecha($fecha){
+    $valores = explode('-', $fecha);
+    if(count($valores) == 3 && checkdate($valores[1], $valores[2], $valores[0])){
+      return true;
+      }
+    return false;
+  }
+
+// public static function generarTemplateCorreo($parametros){
+// $url = "";
+// $asunto = "";
+// $body = "";
+// $tipo = $parametros['tipo'];
+// $template = Modelo_TemplateEmail::obtieneTemplate($tipo);
+//   switch ($tipo) {
+//     case 'REGISTRO_MANUAL':
+//         $asunto = "Activación de cuenta";
+//         $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
+//         $body = str_replace(array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%"), array($parametros['nombres_mostrar'], $parametros['usuario_login'], $url), $template['contenido']);
+//       break;
+//     case 'REGISTRO_RED_SOCIAL':
+//         $asunto = "Credenciales de cuenta mi camello";
+//     break;
+//     default:
+        
+//       break;
+//   }
+//   $result = array('asunto'=>$asunto, 'body'=>$body);
+//   return $result;
+// }
 
 }
 ?>

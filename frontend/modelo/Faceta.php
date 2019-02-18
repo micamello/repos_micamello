@@ -11,13 +11,6 @@ class Modelo_Faceta{
   	if (!empty($arrdatos) && is_array($arrdatos)){
 
   		foreach ($arrdatos as $key => $value) {
-
-        /*if($value['id_faceta'] == 5){
-          $f = 'A1';
-          $existe = 1;
-        }else{
-          $f = $value['faceta'];
-        }*/
   			$datos[$value['id_faceta']] = $value['faceta'];
   		}
   	}
@@ -25,6 +18,7 @@ class Modelo_Faceta{
   }
 
   public static function obtenerFacetas(){
+    
     $sql = "SELECT id_faceta,descripcion as faceta FROM mfo_facetam2 WHERE estado = 1";  
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
 
@@ -34,12 +28,6 @@ class Modelo_Faceta{
 
       foreach ($arrdatos as $key => $value) {
 
-        /*if($value['id_faceta'] == 5){
-          $f = 'A1';
-          $existe =1;
-        }else{
-          $f = $value['faceta'];
-        }*/
         $datos[$value['id_faceta']] = $value['faceta'];
       }
     }

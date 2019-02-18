@@ -189,7 +189,6 @@ class Controlador_Minisitio extends Controlador_Base
             $idusuario = Utils::getParam('id_usuario', '', $this->data);
             $datosusuario = Modelo_Usuario::obtieneNombres($idusuario);
             $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario);
-
             $result = Modelo_Opcion::datosGraficos($idusuario);
             $colores = Modelo_Faceta::obtenerColoresLiterales();
             $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
@@ -209,9 +208,6 @@ class Controlador_Minisitio extends Controlador_Base
            
             $informe = $this->generaInforme(array('datos'=>$datosusuario,'preguntas'=>$preguntas,'facetas'=>$facetasDescripcion,'datosGraficos'=>$result,'colores'=>$colores));
             //$_SESSION['datos_informe'] = array('nombre_archivo'=>"informe_".$datosusuario['nombres'].' '.$datosusuario['apellidos'].".pdf",'informe'=>$informe);
-
-            
-
 
           break;
           default:
@@ -398,7 +394,7 @@ class Controlador_Minisitio extends Controlador_Base
                 }
 
                 if($id_ant != $value['id_usuario']){
-
+                    //print_r($facetas);
                     foreach ($facetas as $key => $literales) {
 
                         $promedios[$key] = array();
@@ -457,6 +453,7 @@ class Controlador_Minisitio extends Controlador_Base
                   }
 
                   foreach ($facetas as $key => $literales) {
+
                       $promedios[$value['id_faceta']] = round(array_sum($porc_por_preguntas[$key])/$preg_x_faceta,2);
                       $td .= '<td align="center" style="vertical-align:middle;">'.$promedios[$value['id_faceta']].'</td>';
                   }
@@ -471,7 +468,7 @@ class Controlador_Minisitio extends Controlador_Base
                   $array_validos = array();
                   $cont_opciones = 0;
                 }
-            }echo $td; exit;
+
             $table .= '</tbody>
           </table>';
         return $table;
@@ -532,6 +529,7 @@ class Controlador_Minisitio extends Controlador_Base
             $colors .= str_replace("#", "", $datos['colores'][$pregunta['id_faceta']]).'|';
             $descrip_facetas .= $facetas[$pregunta['id_faceta']].'|';
             $descrip_titulo .= substr($facetas[$pregunta['id_faceta']],0,1);
+
 
             $informe .= '<p align="justify">'.substr($parrafo, 0,-2).'</p>';
             $parrafo = '';

@@ -1,7 +1,3 @@
-<?php 
-require_once 'C:/wamp64/www/repos_micamello/constantes.php';
-require_once FRONTEND_RUTA.'init.php';
-?>
 <!DOCTYPE html>
 <html>
 <head>
