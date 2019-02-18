@@ -216,7 +216,7 @@ $('#provincia').change(function()
     if(id_provincia != ""){
         $.ajax({
             type: "GET",
-            url: puerto_host+"?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
+            url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
             dataType:'json',
             success:function(data){
                 $('#ciudad').html('<option value="0">Selecciona una ciudad</option>');
@@ -590,7 +590,7 @@ function ocultarCampos(){
         if(id_escolaridad != 0){
             $.ajax({
                 type: "GET",
-                url: puerto_host+"?mostrar=perfil&opcion=buscaDependencia&id_escolaridad="+id_escolaridad,
+                url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaDependencia&id_escolaridad="+id_escolaridad,
                 dataType:'json',
                 success:function(data){
 

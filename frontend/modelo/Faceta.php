@@ -7,13 +7,44 @@ class Modelo_Faceta{
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
 
     $datos = array();
-	if (!empty($arrdatos) && is_array($arrdatos)){
+     $existe = 0;
+  	if (!empty($arrdatos) && is_array($arrdatos)){
 
-		foreach ($arrdatos as $key => $value) {
-			$datos[$value['id_faceta']] = $value['faceta'];
-		}
-	}
-	return $datos;         
+  		foreach ($arrdatos as $key => $value) {
+
+        /*if($value['id_faceta'] == 5){
+          $f = 'A1';
+          $existe = 1;
+        }else{
+          $f = $value['faceta'];
+        }*/
+  			$datos[$value['id_faceta']] = $value['faceta'];
+  		}
+  	}
+  	return $datos;         
+  }
+
+  public static function obtenerFacetas(){
+    $sql = "SELECT id_faceta,descripcion as faceta FROM mfo_facetam2 WHERE estado = 1";  
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
+
+    $datos = array();
+    $existe = 0;
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+
+        /*if($value['id_faceta'] == 5){
+          $f = 'A1';
+          $existe =1;
+        }else{
+          $f = $value['faceta'];
+        }*/
+        $datos[$value['id_faceta']] = $value['faceta'];
+      }
+    }
+
+    return $datos;         
   }
 
   public static function obtenerColoresLiterales(){
@@ -21,6 +52,7 @@ class Modelo_Faceta{
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
 
     $datos = array();
+
 	if (!empty($arrdatos) && is_array($arrdatos)){
 
 		foreach ($arrdatos as $key => $value) {

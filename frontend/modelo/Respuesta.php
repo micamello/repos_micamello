@@ -37,8 +37,18 @@ class Modelo_Respuesta{
                    SUBSTR(res.puntaje, 3, 1) AS orden2,
                    SUBSTR(res.puntaje, 5, 1) AS orden3,
                    SUBSTR(res.puntaje, 7, 1) AS orden4,
-                   SUBSTR(res.puntaje, 9, 1) AS orden5
-            FROM mfo_usuariom2 u
+                   SUBSTR(res.puntaje, 9, 1) AS orden5,";
+    if (!empty($competencias)){
+      $sql .= "IF(";
+      foreach($competencias as $competencia=>$puntaje){
+        $sql .= "(p.id_competencia = ".$competencia." AND b.id_puntaje = ".$puntaje.") OR ";
+      }
+      $sql = substr($sql,0,-3).", 'valido', 'invalido') as flag,";
+    }else{
+      $sql .= "'valido' AS flag,";
+    }
+    $sql = substr($sql,0,-1);
+    $sql .= " FROM mfo_usuariom2 u
             INNER JOIN (SELECT r.id_usuario, o.id_pregunta, GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) AS puntaje 
                         FROM mfo_respuestam2 r INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion 
                         GROUP BY r.id_usuario, o.id_pregunta) AS res ON res.id_usuario = u.id_usuario
@@ -75,7 +85,7 @@ class Modelo_Respuesta{
                   ('".$parroquia."' = '' OR u.id_parroquia = '".$parroquia."') AND      
                   ('".$ciudad."' = '' OR a.id_ciudad = '".$ciudad."') AND      
                   ('".$provincia."' = '' OR v.id_provincia = '".$provincia."') ";
-    if (!empty($competencias)){
+    /*if (!empty($competencias)){
       $sql .= "AND ";
       foreach($competencias as $competencia=>$puntaje){
         $sql .= "(p.id_competencia = ".$competencia."";
@@ -87,7 +97,7 @@ class Modelo_Respuesta{
         }
       }
       $sql = substr($sql,0,-3);
-    }
+    }*/
     $sql .= "ORDER BY u.id_usuario, s.id_faceta, p.orden";
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }

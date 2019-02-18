@@ -22,200 +22,226 @@ class Controlador_Minisitio extends Controlador_Base
 
         switch ($opcion) {
             
-            case 'filtrar':
-                $letra = substr($param1,0,1);
-                $id = substr($param1,1);
+          case 'filtrar':
+              $letra = substr($param1,0,1);
+              $id = substr($param1,1);
 
-                $array_datos = $_SESSION['array_datos'];
-                if(isset($_SESSION['filtrar_consultados'][$letra])){
-                    if($letra == 'A' && $type == 1){
-                        if(isset(SALARIO[$id])){
-                            $_SESSION['filtrar_consultados']['A'] = $id;
-                            $_SESSION['array_datos']['A'] = array('id'=>$id,'nombre'=>SALARIO[$id]);
+              $array_datos = $_SESSION['array_datos'];
+              if(isset($_SESSION['filtrar_consultados'][$letra])){
+                  if($letra == 'A' && $type == 1){
+                      if(isset(SALARIO[$id])){
+                          $_SESSION['filtrar_consultados']['A'] = $id;
+                          $_SESSION['array_datos']['A'] = array('id'=>$id,'nombre'=>SALARIO[$id]);
+                      }
+                  }
+                  else if($letra == 'P' && $type == 1){
+                      if(isset($profesion[$id])){
+                        $_SESSION['filtrar_consultados']['P'] = $id;
+                        $_SESSION['array_datos']['P'] = array('id'=>$id,'nombre'=>$profesion[$id]);
+                      }
+                  }
+                  else if($letra == 'E' && $type == 1){
+                      if(isset($escolaridad[$id])){
+                        $_SESSION['filtrar_consultados']['E'] = $id;
+                        $_SESSION['array_datos']['E'] = array('id'=>$id,'nombre'=>$escolaridad[$id]);
+                      }
+                  }else if($letra == 'O' && $type == 1){
+                      if(isset($ocupacion[$id])){
+                          $_SESSION['filtrar_consultados']['O'] = $id; 
+                          $_SESSION['array_datos']['O'] = array('id'=>$id,'nombre'=>$ocupacion[$id]);
+                      }
+                  }
+                  else if($letra == 'F' && $type == 1){
+                      if(isset(EDAD[$id])){
+                        $_SESSION['filtrar_consultados']['F'] = $id; 
+                        $_SESSION['array_datos']['F'] = array('id'=>$id,'nombre'=>EDAD[$id]);
+                      }
+                  }
+                  else if($letra == 'G' && $type == 1){
+
+                      $g = array_search($id,VALOR_GENERO); 
+                      if($g != false){
+
+                          if(isset(GENERO[$g])){
+                              $_SESSION['filtrar_consultados']['G'] = $id;
+                              $array_datos['array_datos']['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
+                          }
+                      }
+                  }
+                  else if($letra == 'H' && $type == 1){
+
+                      $existe = -1;
+                      $comp = explode('_',$id);
+
+                      for ($i=0; $i < count($_SESSION['filtrar_consultados']['H']); $i++) { 
+                        if (strpos($_SESSION['filtrar_consultados']['H'][$i], $comp[0].'_') !== false) {
+                          $existe = $i;
+                          break;
                         }
+                      }
+
+                      if(count($comp) == 1){
+                        $nombre = $competencias[$comp[0]]['nombre'];
+                      }else{
+                        $nombre = $competencias[$comp[0]]['nombre'].' - '.$competencias[$comp[0]]['grados'][$comp[1]];
+                      }
+
+                      if($existe === -1){
+                        array_push($_SESSION['filtrar_consultados']['H'],$id);
+                        array_push($_SESSION['array_datos']['H'],array('id'=>$id,'nombre'=>$nombre));
+                      }else{
+                        $_SESSION['filtrar_consultados']['H'][$existe] = $id;
+                        $_SESSION['array_datos']['H'][$existe]['id'] = $id;
+                        $_SESSION['array_datos']['H'][$existe]['nombre'] = $nombre;
+                      }
+                  }
+                  else if($letra == 'R' && $type == 1){
+
+                    $res = explode('_',$id);
+
+                    if(count($res) == 1){
+                      $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'];
+                    }else if(count($res) == 2){
+                      $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]];
+                    }else{
+                      $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]]['parroquias'][$res[2]];
                     }
-                    else if($letra == 'P' && $type == 1){
-                        if(isset($profesion[$id])){
-                          $_SESSION['filtrar_consultados']['P'] = $id;
-                          $_SESSION['array_datos']['P'] = array('id'=>$id,'nombre'=>$profesion[$id]);
-                        }
+                    $_SESSION['filtrar_consultados']['R'] = $id; 
+                    $_SESSION['array_datos']['R'] = array('id'=>$id,'nombre'=>$nombre);
+
+                  }
+                  else if($letra == 'N' && $type == 1){
+
+                    $nac = explode('_',$id);
+
+                    if(count($nac) == 1){
+                      $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]]['nombre'];
+                    }else{
+                      $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]]['nombre'].' - '.$nacionalidad[$nac[0]]['provincias'][$nac[1]];
                     }
-                    else if($letra == 'E' && $type == 1){
-                        if(isset($escolaridad[$id])){
-                          $_SESSION['filtrar_consultados']['E'] = $id;
-                          $_SESSION['array_datos']['E'] = array('id'=>$id,'nombre'=>$escolaridad[$id]);
-                        }
-                    }else if($letra == 'O' && $type == 1){
-                        if(isset($ocupacion[$id])){
-                            $_SESSION['filtrar_consultados']['O'] = $id; 
-                            $_SESSION['array_datos']['O'] = array('id'=>$id,'nombre'=>$ocupacion[$id]);
-                        }
-                    }
-                    else if($letra == 'F' && $type == 1){
-                        if(isset(EDAD[$id])){
-                          $_SESSION['filtrar_consultados']['F'] = $id; 
-                          $_SESSION['array_datos']['F'] = array('id'=>$id,'nombre'=>EDAD[$id]);
-                        }
-                    }
-                    else if($letra == 'G' && $type == 1){
+                    $_SESSION['filtrar_consultados']['N'] = $id; 
+                    $_SESSION['array_datos']['N'] = array('id'=>$id,'nombre'=>$nombre);
+                  }
+                  else if($letra == 'C' && $type == 1){
+                      if(isset(ESTADO_CIVIL[$id])){
+                        $_SESSION['filtrar_consultados']['C'] = $id; 
+                        $_SESSION['array_datos']['C'] = array('id'=>$id,'nombre'=>ESTADO_CIVIL[$id]);
+                      }
+                  }
+                  else if($type == 2){
+                    
 
-                        $g = array_search($id,VALOR_GENERO); 
-                        if($g != false){
+                      if($letra == 'H'){
 
-                            if(isset(GENERO[$g])){
-                                $_SESSION['filtrar_consultados']['G'] = $id;
-                                $array_datos['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
-                            }
-                        }
-                    }
-                    else if($letra == 'H' && $type == 1){
+                          if(in_array($id, $_SESSION['filtrar_consultados']['H'])){
 
-                        if(!in_array($id, $_SESSION['filtrar_consultados']['H'])){
+                              foreach ($_SESSION['filtrar_consultados']['H'] as $key => $value) {
+                                  if($value == $id){
 
-                          $comp = explode('_',$id);
-
-                          if(count($comp) == 1){
-                            $nombre = $competencias[$comp[0]]['nombre'];
-                          }else{
-                            $nombre = $competencias[$comp[0]]['nombre'].' - '.$competencias[$comp[0]]['grados'][$comp[1]];
+                                      unset($_SESSION['filtrar_consultados']['H'][$key]);
+                                      unset($_SESSION['array_datos']['H'][$key]);
+                                      break;
+                                  }
+                              }
                           }
 
-                          array_push($_SESSION['filtrar_consultados']['H'],$id);
-                          array_push($_SESSION['array_datos']['H'],array('id'=>$id,'nombre'=>$nombre));
-                        }
-                    }
-                    else if($letra == 'R' && $type == 1){
-
-                      $res = explode('_',$id);
-
-                      if(count($res) == 1){
-                        $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'];
-                      }else if(count($res) == 2){
-                        $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]];
                       }else{
-                        $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]]['parroquias'][$res[2]];
+                          $_SESSION['filtrar_consultados'][$letra] = 0;
+                          $_SESSION['array_datos'][$letra] = 0;
                       }
-                      $_SESSION['filtrar_consultados']['R'] = $id; 
-                      $_SESSION['array_datos']['R'] = array('id'=>$id,'nombre'=>$nombre);
+                  }
+              }
 
-                    }
-                    else if($letra == 'N' && $type == 1){
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
+              $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
 
-                      $nac = explode('_',$id);
+              $link = Vista::display('filtrarEntrevistados',array('data'=>$_SESSION['array_datos']));
 
-                      if(count($nac) == 1){
-                        $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]]['nombre'];
-                      }else{
-                        $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]]['nombre'].' - '.$nacionalidad[$nac[0]]['provincias'][$nac[1]];
-                      }
-                      $_SESSION['filtrar_consultados']['N'] = $id; 
-                      $_SESSION['array_datos']['N'] = array('id'=>$id,'nombre'=>$nombre);
-                    }
-                    else if($letra == 'C' && $type == 1){
-                        if(isset(ESTADO_CIVIL[$id])){
-                          $_SESSION['filtrar_consultados']['C'] = $id; 
-                          $_SESSION['array_datos']['C'] = array('id'=>$id,'nombre'=>ESTADO_CIVIL[$id]);
-                        }
-                    }
-                    else if($type == 2){
-                      
+              $tags = array(
+                  'nacionalidad'=>$nacionalidad,
+                  'escolaridad'=>$escolaridad,
+                  'profesion'=>$profesion,
+                  'ocupacion'=>$ocupacion,
+                  //'facetas'=>$facetas,
+                  //'colores_facetas'=>$colores_facetas,
+                  'residenciaActual'=>$residenciaActual,
+                  'competencias'=>$competencias,
+                  'link'=>$link,
+                  'table'=>$table
+                  //'registros'=>$registros
+              );
+              $render = Vista::display('admin/index',$tags); 
+              echo $render;
+          break;
+          case 'generarExcel':
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
+              $table = $this->generarTabla($registros,$facetas,$colores_facetas,2);
+              $this->generarExcel($table);
+          break;
+          case 'guardarDataGraficos':
+          
+            $_SESSION['DataGraficos'] = $_POST['graficos'];
 
-                        if($letra == 'H'){
+          break;
+          case 'generaInforme':
+   
+            //$_SESSION['datos_informe'] = '';
+            $idusuario = Utils::getParam('id_usuario', '', $this->data);
+            $datosusuario = Modelo_Usuario::obtieneNombres($idusuario);
+            $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario);
 
-                            if(in_array($id, $_SESSION['filtrar_consultados']['H'])){
+            $result = Modelo_Opcion::datosGraficos($idusuario);
+            $colores = Modelo_Faceta::obtenerColoresLiterales();
+            $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
 
-                                foreach ($_SESSION['filtrar_consultados']['H'] as $key => $value) {
-                                    if($value == $id){
+            $array_datos_graficos = array();
+            /*foreach ($facetasDescripcion as $key => $f) {
+              $array_datos_graficos[$key] = array();
+            }
 
-                                        unset($_SESSION['filtrar_consultados']['H'][$key]);
-                                        unset($_SESSION['array_datos']['H'][$key]);
-                                        break;
-                                    }
-                                }
-                            }
+            foreach ($facetasDescripcion as $key => $f) {
+              foreach ($result[$key] as $k => $value) {
+                $value['color'] = $colores[$key];
+                $value['descripcion'] = $value['descripcion'];
+                array_push($array_datos_graficos[$key],$value);
+              }
+            }*/
+           
+            $informe = $this->generaInforme(array('datos'=>$datosusuario,'preguntas'=>$preguntas,'facetas'=>$facetasDescripcion,'datosGraficos'=>$result,'colores'=>$colores));
+            //$_SESSION['datos_informe'] = array('nombre_archivo'=>"informe_".$datosusuario['nombres'].' '.$datosusuario['apellidos'].".pdf",'informe'=>$informe);
 
-                        }else{
-                            $_SESSION['filtrar_consultados'][$letra] = 0;
-                            $_SESSION['array_datos'][$letra] = 0;
-                        }
-                    }
-                }
+            
 
-                $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
-                $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
 
-                $link = Vista::display('filtrarEntrevistados',array('data'=>$_SESSION['array_datos']));
+          break;
+          default:
 
-                $tags = array(
-                    'nacionalidad'=>$nacionalidad,
-                    'escolaridad'=>$escolaridad,
-                    'profesion'=>$profesion,
-                    'ocupacion'=>$ocupacion,
-                    //'facetas'=>$facetas,
-                    //'colores_facetas'=>$colores_facetas,
-                    'residenciaActual'=>$residenciaActual,
-                    'competencias'=>$competencias,
-                    'link'=>$link,
-                    'table'=>$table
-                    //'registros'=>$registros
-                );
-                $render = Vista::display('admin/index',$tags); 
-                echo $render;
-            break;
-            case 'generarExcel':
-                $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
-                $table = $this->generarTabla($registros,$facetas,$colores_facetas,2);
-                $this->generarExcel($table);
-            break;
-            case 'generaGrafico':
-                $this->generaGrafico();
-            break;
-            case 'generaInforme':
+              $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0);
+              $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0);
 
-                if($type == 0){
-                    $idusuario = Utils::getParam('id_usuario', '', $this->data);
-                    $datosusuario = Modelo_Usuario::obtieneNombres($idusuario);
-                    $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario);
-                    $informe = $this->generaInforme(array('datos'=>$datosusuario,'preguntas'=>$preguntas,'facetas'=>$facetas));
-                    $_SESSION['datos_informe'] = array('nombre_archivo'=>"informe_".$datosusuario['nombres'].' '.$datosusuario['apellidos'].".pdf",'informe'=>$informe);
-                    $this->generaGrafico();
-                }else{
-                    $mpdf=new mPDF('','A4');
-                    foreach ($facetas as $key => $value) {
-                        $_SESSION['datos_informe']['informe'] = str_replace('_grafico'.($key), $_POST["hidden_html".($key)], $_SESSION['informe']);
-                    }
-                    $informe = $_SESSION['datos_informe']['informe'];
-                    $nombre_archivo = $_SESSION['datos_informe']['nombre_archivo'];
-                    $mpdf->WriteHTML($informe);
-                    $mpdf->Output($nombre_archivo, 'D');
-                }
-            break;
-            default:
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
+              $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
 
-                $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0);
-                $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0);
- 
-                $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
-                $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
-
-                $tags = array(
-                    'nacionalidad'=>$nacionalidad,
-                    'escolaridad'=>$escolaridad,
-                    'profesion'=>$profesion,
-                    'ocupacion'=>$ocupacion,
-                    'residenciaActual'=>$residenciaActual,
-                    'competencias'=>$competencias,
-                    'link'=>'',
-                    'facetas'=>$facetas,
-                    'colores_facetas'=>$colores_facetas,
-                    'registros'=>$registros,
-                    'table'=>$table
-                );  
-                $render = Vista::display('admin/index',$tags); 
-                echo $render;
-            break;
+              $tags = array(
+                  'nacionalidad'=>$nacionalidad,
+                  'escolaridad'=>$escolaridad,
+                  'profesion'=>$profesion,
+                  'ocupacion'=>$ocupacion,
+                  'residenciaActual'=>$residenciaActual,
+                  'competencias'=>$competencias,
+                  'link'=>'',
+                  'facetas'=>$facetas,
+                  'colores_facetas'=>$colores_facetas,
+                  'registros'=>$registros,
+                  'table'=>$table
+              );  
+              $render = Vista::display('admin/index',$tags); 
+              echo $render;
+          break;
         }
     }
+
+
 
     public static function preparaConsulta($filtros){
       $edad = (empty($filtros['F']) || $filtros['F'] > 5) ? '' : $filtros['F']; 
@@ -271,8 +297,7 @@ class Controlador_Minisitio extends Controlador_Base
         }
       }            
 
-      return Modelo_Respuesta::verResultados($edad,$nacionalidad,$ciudadnac,$genero,$estadocivil,$profesion,$ocupacion,
-                                             $escolaridad,$aspiracion,$parroquia,$ciudad,$provincia,$competencias);  
+      return Modelo_Respuesta::verResultados($edad,$nacionalidad,$ciudadnac,$genero,$estadocivil,$profesion,$ocupacion,$escolaridad,$aspiracion,$parroquia,$ciudad,$provincia,$competencias);  
     }
 
     public function generarTabla($registros,$facetas,$colores_facetas,$tipo){
@@ -357,31 +382,39 @@ class Controlador_Minisitio extends Controlador_Base
                     $table .= '<td align="center" style="background:'.$colores_facetas[$key].'; vertical-align:middle;"><b>'.$literales.'</b></td>';
                 } 
 
-              $table .= '</tr>
+             $table .= '</tr>
             </thead>
             <tbody>';
 
             $id_ant = 0;
             $cont_opciones = 0;
+            $array_validos = array();
+            $td = '';
+            
             foreach ($registros as $key => $value) {
+
+                if($value['flag'] == 'valido'){
+                  array_push($array_validos,$value['flag']);
+                }
 
                 if($id_ant != $value['id_usuario']){
 
                     foreach ($facetas as $key => $literales) {
 
-                        $promedios[$literales] = array();
-                        $porc_facetas[$literales] = array();
-                        $porc_por_preguntas[$literales] = array();
-                        $grad_por_preguntas[$literales] = array();
+                        $promedios[$key] = array();
+                        $porc_facetas[$key] = array();
+                        $porc_por_preguntas[$key] = array();
+                        $grad_por_preguntas[$key] = array();
                     }
 
                     $id_ant = $value['id_usuario'];
-                    $table .= '<tr>';
-                    $table .= '<td align="center" style="vertical-align:middle;">'.$value['nombres'].' '.$value['apellidos'].'</td>';
+                    $td = '';
+                    
+                    $td .= '<td align="center" style="vertical-align:middle;">'.$value['nombres'].' '.$value['apellidos'].'</td>';
 
                     if($tipo == 2){
 
-                        $table .= '<td align="center" style="vertical-align:middle;">'.$value['correo'].'</td>
+                        $td .= '<td align="center" style="vertical-align:middle;">'.$value['correo'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['id_nacionalidad'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['id_ciudad'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['genero'].'</td>
@@ -397,7 +430,7 @@ class Controlador_Minisitio extends Controlador_Base
                     }
                 }
 
-                $table .= '<td align="center" style="vertical-align:middle;">'.$value['orden1'].'</td>
+                $td .= '<td align="center" style="vertical-align:middle;">'.$value['orden1'].'</td>
                 <td align="center" style="vertical-align:middle;">'.$value['orden2'].'</td>
                 <td align="center" style="vertical-align:middle;">'.$value['orden3'].'</td>
                 <td align="center" style="vertical-align:middle;">'.$value['orden4'].'</td>
@@ -405,37 +438,40 @@ class Controlador_Minisitio extends Controlador_Base
 
                 $cont_opciones += count(OPCIONES);
 
-                array_push($porc_por_preguntas[$facetas[$value['id_faceta']]],$value['porcentaje']); 
-                array_push($grad_por_preguntas[$facetas[$value['id_faceta']]],$value['id_puntaje']);
+                array_push($porc_por_preguntas[$value['id_faceta']],$value['porcentaje']); 
+                array_push($grad_por_preguntas[$value['id_faceta']],$value['id_puntaje']);
 
-                if($cantd_op == $cont_opciones){
+                if($cantd_op === $cont_opciones){
 
-                   foreach ($porc_por_preguntas as $a => $porc) {
-                        
-                        foreach ($porc as $b => $p) {
-                            $table .= '<td align="center" style="vertical-align:middle;">'.$p.'</td>';
-                        } 
-                    }
- 
-                    foreach ($grad_por_preguntas as $a => $grad) {
-                        foreach ($grad as $b => $g) {
-                            $table .= '<td align="center" style="vertical-align:middle;">'.$g.'</td>';
-                        } 
-                    }
+                  foreach ($porc_por_preguntas as $a => $porc) {
+                      
+                      foreach ($porc as $b => $p) {
+                          $td .= '<td align="center" style="vertical-align:middle;">'.$p.'</td>';
+                      } 
+                  }
 
-                    foreach ($facetas as $key => $literales) {
-                        $promedios[$facetas[$value['id_faceta']]] = array_sum($porc_por_preguntas[$literales])/$preg_x_faceta;
-                        $table .= '<td align="center" style="vertical-align:middle;">'.$promedios[$facetas[$value['id_faceta']]].'</td>';
-                    }
+                  foreach ($grad_por_preguntas as $a => $grad) {
+                      foreach ($grad as $b => $g) {
+                          $td .= '<td align="center" style="vertical-align:middle;">'.$g.'</td>';
+                      } 
+                  }
 
-                    if($tipo == 1){
-                        $table .= '<td align="center" style="vertical-align:middle;"><a href="'.PUERTO."://".HOST.'/generaInforme/'.$value['id_usuario'].'/0/" title="Descargar informe de '.$value['nombres'].' '.$value['apellidos'].'"><i class="fa fa-download"></i></a></td>';
-                    }
-                    $table .= '</tr>';
+                  foreach ($facetas as $key => $literales) {
+                      $promedios[$value['id_faceta']] = round(array_sum($porc_por_preguntas[$key])/$preg_x_faceta,2);
+                      $td .= '<td align="center" style="vertical-align:middle;">'.$promedios[$value['id_faceta']].'</td>';
+                  }
+
+                  if($tipo == 1){
+                      $td .= '<td align="center" style="vertical-align:middle; cursor:pointer; color:#337ab7"><a href="'.PUERTO."://".HOST.'/generaInforme/'.$value['id_usuario'].'/" title="Descargar informe de '.$value['nombres'].' '.$value['apellidos'].'"><i class="fa fa-download"></i></a></td>';
+                  }
+
+                  if(count($_SESSION['filtrar_consultados']['H']) <= count($array_validos)){
+                    $table .= '<tr>'.$td.'</tr>'; 
+                  }
+                  $array_validos = array();
                   $cont_opciones = 0;
                 }
-            }
-            
+            }echo $td; exit;
             $table .= '</tbody>
           </table>';
         return $table;
@@ -450,17 +486,29 @@ class Controlador_Minisitio extends Controlador_Base
 
     public function generaInforme($datos){
 
-      //$mpdf=new mPDF('','A4');
       $facetas = $datos['facetas'];
       $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
-      $datosusuario = $datos['datosusuario'];//Modelo_Usuario::obtieneNombres($idusuario);
-      $preguntas = $datos['preguntas'];//Modelo_Respuesta::resultadoxUsuario($idusuario);
-      $informe = '<h3 align="center">Informe CANEA '.$datosusuario['nombres'].' '.$datosusuario['apellidos'].'</h3><br>';
-      $faceta_ant = 1;
+      $competenciasXfacetas = Modelo_Opcion::competenciasXfaceta();
+    
+      $datosusuario = $datos['datos'];
+      $preguntas = $datos['preguntas'];
+      $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper($datosusuario['nombres'].' '.$datosusuario['apellidos']).'</h3>';
+
+      $informe .= '<p align="justify" style="margin-bottom:2px;margin-top:2px;"><hr width=100%><b>FACTORES QUE MIDE CANEA</b> (En este test no existen resultados ni buenos ni malos.)<hr width=100%></p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>C: Conciencia:</b> Es la capacidad para controlar los propios impulsos, la autodisciplina y la organizaci&oacute;n.</p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Afabilidad (Amabilidad):</b> Es el comportamiento emp&aacute;tico, generoso y mediador.</p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>N: Neurotisismo (Ansiedad):</b> Es la reacción a su entorno social o personal, y estabilidad emocional.</p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>E: Extraversi&oacute;n:</b> Es la capacidad de interactuar en sus relaciones sociales, laborales.</p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Apertura a la Experiencia:</b> Es la experiencia, mente abierta, originalidad, imaginaci&oacute;n y creatividad.</p>
+      <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visi&oacute;n general de tu estilo de comportamiento en el &aacute;mbito laboral y personal. basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
+      <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya le6iacute;do el reporte, omita cualquier afirmaci&oacute;n que no parezca aplicar a su comportamiento.</b></p> ';
+
+      $nombre_archivo = $datosusuario['nombres'].' '.$datosusuario['apellidos'].'.pdf';
       $cantd_preg = 0;
+      $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
 
       foreach($preguntas as $key => $pregunta){
-        
+
         $cantd_preg++;
         $resultado = Modelo_Baremo::obtienePuntaje($pregunta['orden1'],$pregunta['orden2'],$pregunta['orden3'],$pregunta['orden4'],$pregunta['orden5']);
         $descriptor = Modelo_Descriptor::obtieneTextos($pregunta['id_competencia'],$resultado['id_puntaje']);        
@@ -468,29 +516,52 @@ class Controlador_Minisitio extends Controlador_Base
 
           $faceta = $pregunta['id_faceta'];
           $datosfaceta = Modelo_Faceta::consultaIndividual($pregunta['id_faceta']);
-          $informe .= '<p align="justify"><i><u><b>'.utf8_encode($datosfaceta['descripcion'])."</b></u></i></p>";
+
           $informe .= '<p align="justify"><b>'.utf8_encode($datosfaceta['introduccion'])."</b></p>";
+
+          $informe .= '<p align="justify"><i><u><b>'.utf8_encode($datosfaceta['descripcion']).'</b></u></i>: '.utf8_encode($competenciasXfacetas[$pregunta['id_faceta']]).'</p>';
+          ;
         }
-        $informe .= '<p align="justify">'.utf8_encode($descriptor['descripcion'])."</p>";
-        
+        $parrafo .= ($datosusuario['nombres'].' '.$datosusuario['apellidos']).' '.utf8_encode($descriptor['descripcion']).'. ';
+       
         if($cantd_preg == $preg_x_faceta){
             
             $cantd_preg = 0;
-            $informe .= '<img id="grafico'.$faceta_ant.'" src="_grafico'.$faceta_ant.'" class="img-responsive">';
-            $faceta_ant++;
+            $calculo_promedio = round($datos['datosGraficos'][$pregunta['id_faceta']][0]/$datos['datosGraficos'][$pregunta['id_faceta']][1],2);
+            $etiquetas_faceta .=  $calculo_promedio.'|';
+            $colors .= str_replace("#", "", $datos['colores'][$pregunta['id_faceta']]).'|';
+            $descrip_facetas .= $facetas[$pregunta['id_faceta']].'|';
+            $descrip_titulo .= substr($facetas[$pregunta['id_faceta']],0,1);
+
+            $informe .= '<p align="justify">'.substr($parrafo, 0,-2).'</p>';
+            $parrafo = '';
         }
       }
 
-      return $informe;
-      //$mpdf->WriteHTML($informe);
-      //$mpdf->Output('informe_'.$datosusuario['nombres'].' '.$datosusuario['apellidos'].".pdf", 'D');
+      $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
+      $colors = substr($colors, 0,-1);
+      $descrip_facetas = substr($descrip_facetas, 0,-1);
+      $porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
+
+      $informe .= '<p align="center"><img align="center" src="https://chart.googleapis.com/chart?chs=500x300&chd=t:'.$porcentajes_faceta.'&cht=p&chl='.$etiquetas_faceta.'&chco='.$colors.'&chtt='.$descrip_titulo.'&chdl='.$descrip_facetas.'" class="img-responsive"></p>';
+      
+      self::informePersonalidad($informe,$nombre_archivo);
     }
 
-    public function generaGrafico(){
+  public function informePersonalidad($html,$nombre_archivo){
 
-        $result = Modelo_Usuario::prueba();
-        $variable = Vista::display('admin/generarGrafico',array('datos'=>array($result,$result,$result)));
-        echo $variable;
-    }
+    $cabecera = "imagenes/pdf/header.png";
+    $piepagina = "imagenes/pdf/footer.png";
+    $mpdf=new mPDF('','A4');
+
+    $inidoc = "<link rel='stylesheet' href='css/informemic.css'>";
+    $salto = "<div style='page-break-after:always;'></div>";
+    $mpdf->WriteHTML($inidoc);
+    $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="17%"></header>');     
+    $mpdf->WriteHTML('<body>'.$html.'</body>');
+    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
+    $mpdf->Output($nombre_archivo, 'D');
+    exit;
+  }
 }
 ?>

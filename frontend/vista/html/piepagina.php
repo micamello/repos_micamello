@@ -272,6 +272,7 @@
 </div>
 <?php } ?>
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
+<div id="grafico" style="width: 100%; max-width:900px; height: 500px; visibility: hidden;"></div>
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 <section id="action" class="banner_info_email">
                 <div class="container">
@@ -354,8 +355,8 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
-
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script> 
+<script src="<?php echo PUERTO."://".HOST;?>/js/sweetalert.min.js"></script>
 
 <?php
 if (isset($template_js) && is_array($template_js)){

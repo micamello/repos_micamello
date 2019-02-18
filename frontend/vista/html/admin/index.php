@@ -13,7 +13,8 @@ require_once FRONTEND_RUTA.'init.php';
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/minisitio.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
 
 </head>
 <body class="window_class">
@@ -107,9 +108,8 @@ require_once FRONTEND_RUTA.'init.php';
                 echo '<input class="form-control" id="competencias" type="text" placeholder="Buscar..">';
                 echo '<ul id="menu3">';
                 foreach ($competencias as $key => $v) {
-                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/H'.$key.'/';
                   echo '<li><input type="checkbox" name="list" id="comp_'.$key.'">
-                      <label style="content:none; cursor:pointer" for="comp_'.$key.'"><a href="'.$ruta.'1/">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</a></label>
+                      <label style="content:none; cursor:pointer; color: #337ab7" for="comp_'.$key.'">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</label>
                       <ul id="menu31" class="interior">';
                   foreach ($v['grados'] as $p => $val) {
 
@@ -220,7 +220,7 @@ require_once FRONTEND_RUTA.'init.php';
           <?php
             echo '<ul style="padding-left: 0px;">';
             foreach (SALARIO as $key => $v) {
-              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/ A'.$key.'/';
+              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/A'.$key.'/';
               echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="aspiracion" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
             }
             echo '</ul>';
@@ -274,7 +274,7 @@ require_once FRONTEND_RUTA.'init.php';
   </div>
   <div class="col-md-9">
     <br>
-    <a href="<?php echo PUERTO."://".HOST;?>/generarExcel/" class="col-md-1 offset-md-11 btn btn-success"><i class="fa fa-download"></i> Excel</a>
+    <a href="<?php echo PUERTO."://".HOST;?>/admin/generarExcel/" class="col-md-1 offset-md-11 btn btn-success"><i class="fa fa-download"></i> Excel</a>
     <br><br>
     <div class="card shadow-lg rounded text-center">
       <div class="card-header bg-info text-white">
@@ -286,10 +286,12 @@ require_once FRONTEND_RUTA.'init.php';
       </div>
     </div>
   </div>
-
-
+  
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script><script src="<?php echo PUERTO."://".HOST;?>/js/minisitio.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script> 
+<script src="<?php echo PUERTO."://".HOST;?>/js/minisitio.js"></script>
+
 
 </body>
 </html>
