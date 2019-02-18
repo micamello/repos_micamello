@@ -34,7 +34,7 @@ class Controlador_RegTest extends Controlador_Base {
       	$provincia = Modelo_Provincia::obtieneListado();
         $escolaridad = Modelo_Escolaridad::obtieneListado();
         $profesion = Modelo_ProfesionTest::obtenerListado();
-        $ocupacion = Modelo_OcupacionTest::obtenerListado();
+        $ocupacion = Modelo_Ocupacion::obtenerListado();
         Vista::render('registrotest',array('pais'=>$pais, 'provincia'=>$provincia, 'escolaridad'=>$escolaridad, 'profesion'=>$profesion, 'ocupacion'=>$ocupacion), '', '');
       break;
     }    
@@ -53,7 +53,7 @@ class Controlador_RegTest extends Controlador_Base {
         $_SESSION['mostrar_exito'] = "Te has registrado correctamente.";
       }
       catch( Exception $e ){
-        $url = "registro_test";
+        $url = "registroM";
         $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
@@ -63,11 +63,11 @@ class Controlador_RegTest extends Controlador_Base {
 
   public function validarTipoDato($data){
     // validar letras y espacios
-    if (!preg_match('/^[\p{L} ]+$/u', $data['nombres'])){
+    if (!preg_match('/^[\p{L} ]+$/u', html_entity_decode($data['nombres']))){
       throw new Exception("El campo solo acepta espacios y números");
       
     }
-    if (!preg_match('/^[\p{L} ]+$/u', $data['apellidos'])){
+    if (!preg_match('/^[\p{L} ]+$/u', html_entity_decode($data['apellidos']))){
       throw new Exception("El campo solo acepta espacios y números");
     }
     // validar fecha

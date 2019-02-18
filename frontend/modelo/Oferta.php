@@ -71,7 +71,6 @@ class Modelo_Oferta{
     }
     
     if (!empty($vista) && ($vista != 'postulacion')){ 
-
       if($areasInteres != false){
         $sql .= " AND a.id_area IN(".$areasInteres.")"; 
       }
@@ -117,7 +116,7 @@ class Modelo_Oferta{
 
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-
+      //echo $sql;
     }else{
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $sql .= " ORDER BY pos.tipo DESC";
@@ -219,7 +218,7 @@ class Modelo_Oferta{
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
- 
+    
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

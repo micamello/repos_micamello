@@ -19,17 +19,18 @@ class Modelo_Respuesta{
   /************MINISITIO****************/
   public static function guardarValores($orden,$tiempo,$idusuario,$idopcion){    
     if (empty($orden) || empty($tiempo) || empty($idusuario) || empty($idopcion)){ return false; }
-    for ($i=0; $i < count($orden); $i++) { 
-      $datosinsert = array('orden_seleccion' => $orden[$i],
+    foreach($orden as $key=>$values){
+      $datosinsert = array('orden_seleccion' => $orden[$key],
                          'tiempo' => $tiempo,
                          'id_usuario' => $idusuario,
-                         'id_opcion' => $idopcion[$i]);
-      $result = $GLOBALS['db']->insert('mfo_respuestam2',$datosinsert);
-    }
-    return $result;
+                         'id_opcion' => $idopcion[$key]);
+      $return = $GLOBALS['db']->insert('mfo_respuestam2',$datosinsert);
+    }    
+    return $return;
   }
 
-   public static function verResultados($edad='', $nacionalidad='', $ciudadnac='', $genero='', $estadocivil='', $profesion='', $ocupacion='', $escolaridad='', $aspsalarial='', $parroquia='', $ciudad='', $provincia='',
+  public static function verResultados($edad='', $nacionalidad='', $ciudadnac='', $genero='', $estadocivil='', $profesion='', 
+                                       $ocupacion='', $escolaridad='', $aspsalarial='', $parroquia='', $ciudad='', $provincia='',
                                        $competencias=array()){
     $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_ciudad, u.genero,
                    TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) AS edad, u.estado_civil, u.id_profesion,
@@ -39,8 +40,19 @@ class Modelo_Respuesta{
                    SUBSTR(res.puntaje, 3, 1) AS orden2,
                    SUBSTR(res.puntaje, 5, 1) AS orden3,
                    SUBSTR(res.puntaje, 7, 1) AS orden4,
-                   SUBSTR(res.puntaje, 9, 1) AS orden5
-            FROM mfo_usuariom2 u
+                   SUBSTR(res.puntaje, 9, 1) AS orden5,";
+    if (!empty($competencias)){
+      $sql .= "IF(";
+      foreach($competencias as $competencia=>$puntaje){
+        $sql .= "(p.id_competencia = ".$competencia." AND b.id_puntaje = ".$puntaje.") OR ";
+      }
+      $sql = substr($sql,0,-3).", 'valido', 'invalido') as flag,";
+    }
+    else{
+      $sql .= " 'valido' AS flag,"; 
+    }
+    $sql = substr($sql,0,-1);
+    $sql .= " FROM mfo_usuariom2 u
             INNER JOIN (SELECT r.id_usuario, o.id_pregunta, GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) AS puntaje 
                         FROM mfo_respuestam2 r INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion 
                         GROUP BY r.id_usuario, o.id_pregunta) AS res ON res.id_usuario = u.id_usuario
@@ -77,7 +89,7 @@ class Modelo_Respuesta{
                   ('".$parroquia."' = '' OR u.id_parroquia = '".$parroquia."') AND      
                   ('".$ciudad."' = '' OR a.id_ciudad = '".$ciudad."') AND      
                   ('".$provincia."' = '' OR v.id_provincia = '".$provincia."') ";
-    if (!empty($competencias)){
+    /*if (!empty($competencias)){
       $sql .= "AND ";
       foreach($competencias as $competencia=>$puntaje){
         $sql .= "(p.id_competencia = ".$competencia."";
@@ -89,7 +101,7 @@ class Modelo_Respuesta{
         }
       }
       $sql = substr($sql,0,-3);
-    }
+    }*/
     $sql .= "ORDER BY u.id_usuario, s.id_faceta, p.orden";
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }
@@ -109,7 +121,7 @@ class Modelo_Respuesta{
             INNER JOIN mfo_rasgom2 a ON a.id_rasgo = c.id_rasgo
             WHERE r.id_usuario = ?
             GROUP BY o.id_pregunta
-            ORDER BY o.id_pregunta, a.id_faceta, o.valor";
+            ORDER BY o.id_pregunta, a.id_faceta, o.valor";          
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
   }
 

@@ -72,6 +72,70 @@
               </div>
             </div>
 
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="estado_civil">Estado civil</label><i class="asterisk_red">*</i>
+                <select class="form-control" name="estado_civil" id="estado_civil"><i class="asterisk_red">*</i>
+                  <option value="" selected="" disabled="">Seleccione una opción</option>
+                  <?php 
+                    foreach (ESTADO_CIVIL as $key => $value) {
+                    echo "<option value='".$key."'>".$value."</option>";
+                    }
+                   ?>
+                </select>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="nivel_instruccion">Nivel de instrucción</label><i class="asterisk_red">*</i>
+                  <select class="form-control" name="nivel_instruccion" id="nivel_instruccion">
+                    <option value="" selected="" disabled="">Seleccione una opción</option>
+                    <?php 
+                      foreach ($escolaridad as $esc) {
+                        echo "<option value='".$esc['id_escolaridad']."'>".utf8_encode($esc['descripcion'])."</option>";
+                      }
+                     ?>
+                  </select>
+                  <div></div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="profesion">Profesión</label><i class="asterisk_red">*</i>
+                  <select class="form-control" name="profesion" id="profesion">
+                    <option value="" selected="" disabled="">Seleccione una opción</option>
+                    <?php 
+                    foreach ($profesion as $pro) {
+                      echo "<option value='".$pro['id_profesion']."'>".utf8_encode($pro['descripcion'])."</option>";
+                    }
+                     ?>
+                  </select>
+                  <div></div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="ocupacion">Ocupación</label><i class="asterisk_red">*</i>
+                <select class="form-control" name="ocupacion" id="ocupacion">
+                  <option value="" selected="" disabled="">Seleccione una opción</option>
+                  <?php 
+                    foreach ($ocupacion as $ocu) {
+                      echo "<option value='".$ocu['id_ocupacion']."'>".utf8_encode($ocu['descripcion'])."</option>";
+                    }
+                   ?>
+                </select>
+                <div></div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <hr>
+              <label class="center">Lugar de nacimiento</label>
+            </div> 
             <div class="col-md-12" id="pais_content">
               <div class="form-group">
                 <label>Nacionalidad</label><i class="asterisk_red">*</i>
@@ -79,7 +143,7 @@
                   <option value="" selected="" disabled="">Seleccione una opción</option>
                     <?php 
                       foreach ($pais as $pais_listado) {
-                        echo "<option value='".$pais_listado['id_pais']."'>".$pais_listado['nombre_abr']."</option>";
+                        echo "<option value='".$pais_listado['id_pais']."'>".utf8_encode($pais_listado['nombre_abr'])."</option>";
                       }
                      ?>
                 </select>
@@ -105,67 +169,7 @@
                 </select>
                 <div></div>
               </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="estado_civil">Estado civil</label><i class="asterisk_red">*</i>
-                <select class="form-control" name="estado_civil" id="estado_civil"><i class="asterisk_red">*</i>
-                  <option value="" selected="" disabled="">Seleccione una opción</option>
-                  <?php 
-                    foreach (ESTADO_CIVIL as $key => $value) {
-                    echo "<option value='".$key."'>".$value."</option>";
-                    }
-                   ?>
-                </select>
-                <div></div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="nivel_instruccion">Nivel de instrucción</label><i class="asterisk_red">*</i>
-                  <select class="form-control" name="nivel_instruccion" id="nivel_instruccion">
-                    <option value="" selected="" disabled="">Seleccione una opción</option>
-                    <?php 
-                      foreach ($escolaridad as $esc) {
-                        echo "<option value='".$esc['id_escolaridad']."'>".$esc['descripcion']."</option>";
-                      }
-                     ?>
-                  </select>
-                  <div></div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="profesion">Profesión</label><i class="asterisk_red">*</i>
-                  <select class="form-control" name="profesion" id="profesion">
-                    <option value="" selected="" disabled="">Seleccione una opción</option>
-                    <?php 
-                    foreach ($profesion as $pro) {
-                      echo "<option value='".$pro['id_profesion']."'>".$pro['descripcion']."</option>";
-                    }
-                     ?>
-                  </select>
-                  <div></div>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="ocupacion">Ocupación</label><i class="asterisk_red">*</i>
-                <select class="form-control" name="ocupacion" id="ocupacion">
-                  <option value="" selected="" disabled="">Seleccione una opción</option>
-                  <?php 
-                    foreach ($ocupacion as $ocu) {
-                      echo "<option value='".$ocu['id_ocupacion']."'>".$ocu['descripcion']."</option>";
-                    }
-                   ?>
-                </select>
-                <div></div>
-              </div>
-            </div>
+            </div>            
 
             <div class="col-md-12">
               <hr>
@@ -179,7 +183,7 @@
                   <option value="" selected="" disabled="">Seleccione una opción</option>
                   <?php 
                     foreach ($provincia as $provincia_listado) {
-                      echo "<option value='".$provincia_listado['id_provincia']."'>".$provincia_listado['nombre']."</option>";
+                      echo "<option value='".$provincia_listado['id_provincia']."'>".utf8_encode($provincia_listado['nombre'])."</option>";
                     }
                    ?>
                 </select>

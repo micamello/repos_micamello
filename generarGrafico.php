@@ -1,23 +1,16 @@
- <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
+ <script src="http://localhost/repos_micamello/js/assets/js/vendor/jquery-3.0.0.js"></script>
  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script> 
-  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
+  <link rel="stylesheet" href="http://localhost/repos_micamello/css/assets/css/bootstrap.css">
  <script type="text/javascript">
 
    google.charts.load('current', {'packages':['corechart']});
    google.charts.setOnLoadCallback(drawChart);
 
-   function drawChart()
-   {
-    <?php foreach($datos as $key => $result){ ?>
-
+   function drawChart(){
+    
       var data = google.visualization.arrayToDataTable([
       ['Gender', 'Number'],
-      <?php
-        foreach($result as $row)
-        {
-          echo "['".$row["gender"]."', ".$row["number"]."],";
-        }
-      ?>
+      
       ]);
 
       var options = {
@@ -30,20 +23,22 @@
       var chart = new google.visualization.PieChart(chart_area);
 
       chart.draw(data, options);
-
-      var input = document.createElement("input");
+      document.write(chart.getImageURI());
+     /* var input = document.createElement("input");
       input.setAttribute("type", "hidden");
-      input.setAttribute("name", "hidden_html<?php echo $key+1; ?>");
-      input.setAttribute("id", "hidden_html<?php echo $key+1; ?>");
+      input.setAttribute("name", "hidden_html");
+      input.setAttribute("id", "hidden_html");
       input.setAttribute("value", chart.getImageURI());
-      document.getElementById("area_inputs").appendChild(input);
-    <?php } ?>
-
+      document.getElementById("area_inputs").appendChild(input);*/
+      //var divnombre = 'grafico1';
+      //$('#'+divnombre).html(chart.getImageURI());
+    
+      
     //$('#envio_graficos').submit();
    }
+
 </script>  
  
 <div id="grafico" style="width: 100%; max-width:900px; height: 500px; visibility: hidden;"></div>
-<!--<form method="POST" id="envio_graficos" action="<?php echo PUERTO."://".HOST;?>/generaInforme/1/">-->
-<div id="area_inputs"></div>
-<!--</form>-->
+
+<div id="area_inputs"><div id='grafico1'><script>drawChart();</script></div></div>

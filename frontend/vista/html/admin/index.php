@@ -1,7 +1,3 @@
-<?php 
-require_once 'C:/wamp64/www/repos_micamello/constantes.php';
-require_once FRONTEND_RUTA.'init.php';
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,7 +216,7 @@ require_once FRONTEND_RUTA.'init.php';
           <?php
             echo '<ul style="padding-left: 0px;">';
             foreach (SALARIO as $key => $v) {
-              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/ A'.$key.'/';
+              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/A'.$key.'/';
               echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="aspiracion" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
             }
             echo '</ul>';

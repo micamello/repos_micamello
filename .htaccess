@@ -200,7 +200,7 @@ RewriteRule ^generaInforme/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostr
 RewriteRule ^generaInforme/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generaInforme&type=$1 [L]
 
 #preguntas
-RewriteRule ^registro_test/?$ %{ENV:REWRITEBASE}index.php?mostrar=regtest [L]
+RewriteRule ^registroM/?$ %{ENV:REWRITEBASE}index.php?mostrar=regtest [L]
 
 #Registrodatostest
 RewriteRule ^registrodatostest/?$ %{ENV:REWRITEBASE}index.php?mostrar=regtest&opcion=guardardatostest [L]

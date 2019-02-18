@@ -7720,6 +7720,7 @@ function Output($name='',$dest='')
 			break;
 		   case 'D':		   
 			//Download file
+      flush();
 
 			header('Content-Description: File Transfer');
 			
@@ -33233,8 +33234,4 @@ function SetJS($script) {
 
 
 }//end of Class
-
-
-
-
 ?>
