@@ -468,7 +468,7 @@ class Controlador_Minisitio extends Controlador_Base
                   $array_validos = array();
                   $cont_opciones = 0;
                 }
-
+            }
             $table .= '</tbody>
           </table>';
         return $table;
@@ -489,18 +489,18 @@ class Controlador_Minisitio extends Controlador_Base
     
       $datosusuario = $datos['datos'];
       $preguntas = $datos['preguntas'];
-      $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper($datosusuario['nombres'].' '.$datosusuario['apellidos']).'</h3>';
+      $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper(utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos'])).'</h3>';
 
       $informe .= '<p align="justify" style="margin-bottom:2px;margin-top:2px;"><hr width=100%><b>FACTORES QUE MIDE CANEA</b> (En este test no existen resultados ni buenos ni malos.)<hr width=100%></p>
-      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>C: Conciencia:</b> Es la capacidad para controlar los propios impulsos, la autodisciplina y la organizaci&oacute;n.</p>
-      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Afabilidad (Amabilidad):</b> Es el comportamiento emp&aacute;tico, generoso y mediador.</p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>C: Conciencia:</b> Es la capacidad para controlar los propios impulsos, la autodisciplina y la organización.</p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Afabilidad (Amabilidad):</b> Es el comportamiento empático, generoso y mediador.</p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>N: Neurotisismo (Ansiedad):</b> Es la reacción a su entorno social o personal, y estabilidad emocional.</p>
-      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>E: Extraversi&oacute;n:</b> Es la capacidad de interactuar en sus relaciones sociales, laborales.</p>
-      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Apertura a la Experiencia:</b> Es la experiencia, mente abierta, originalidad, imaginaci&oacute;n y creatividad.</p>
-      <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visi&oacute;n general de tu estilo de comportamiento en el &aacute;mbito laboral y personal. basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
-      <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya le6iacute;do el reporte, omita cualquier afirmaci&oacute;n que no parezca aplicar a su comportamiento.</b></p> ';
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>E: Extraversión:</b> Es la capacidad de interactuar en sus relaciones sociales, laborales.</p>
+      <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Apertura a la Experiencia:</b> Es la experiencia, mente abierta, originalidad, imaginación y creatividad.</p>
+      <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
+      <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p> ';
 
-      $nombre_archivo = $datosusuario['nombres'].' '.$datosusuario['apellidos'].'.pdf';
+      $nombre_archivo = utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'.pdf';
       $cantd_preg = 0;
       $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
 
@@ -530,7 +530,6 @@ class Controlador_Minisitio extends Controlador_Base
             $descrip_facetas .= $facetas[$pregunta['id_faceta']].'|';
             $descrip_titulo .= substr($facetas[$pregunta['id_faceta']],0,1);
 
-
             $informe .= '<p align="justify">'.substr($parrafo, 0,-2).'</p>';
             $parrafo = '';
         }
@@ -542,7 +541,7 @@ class Controlador_Minisitio extends Controlador_Base
       $porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
 
       $informe .= '<p align="center"><img align="center" src="https://chart.googleapis.com/chart?chs=500x300&chd=t:'.$porcentajes_faceta.'&cht=p&chl='.$etiquetas_faceta.'&chco='.$colors.'&chtt='.$descrip_titulo.'&chdl='.$descrip_facetas.'" class="img-responsive"></p>';
-      
+
       self::informePersonalidad($informe,$nombre_archivo);
     }
 
@@ -553,13 +552,12 @@ class Controlador_Minisitio extends Controlador_Base
     $mpdf=new mPDF('','A4');
 
     $inidoc = "<link rel='stylesheet' href='css/informemic.css'>";
-    $salto = "<div style='page-break-after:always;'></div>";
     $mpdf->WriteHTML($inidoc);
     $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="17%"></header>');     
-    $mpdf->WriteHTML('<body>'.$html.'</body>');
+    $mpdf->WriteHTML('<body>hola</body>');
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
     $mpdf->Output($nombre_archivo, 'D');
-    exit;
+    
   }
 }
 ?>
