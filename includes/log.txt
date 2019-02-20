@@ -799,3 +799,4 @@
 [2019/02/19 10:04:21] SQL Query: SELECT * FROM mfo_area
 [2019/02/19 10:04:21] SQL Query: SELECT * from mfo_nivelinteres
 [2019/02/19 10:04:22] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/02/20 01:59:42] Utils::createSession empezo una nueva sesion

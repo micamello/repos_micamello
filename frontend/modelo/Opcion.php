@@ -23,12 +23,11 @@ class Modelo_Opcion{
 	public static function datosGraficos($id_usuario){
 
 		if (empty($id_usuario)){ return false; }
-		$sql = 'SELECT t.id_faceta,sum(b.porcentaje) as prom, sum(id_competencia) as cantd_competencias FROM (SELECT GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) as puntaje, ras.id_faceta, (1) as id_competencia
+		$sql = 'SELECT t.id_faceta,sum(b.porcentaje) as prom, sum(id_competencia) as cantd_competencias FROM (SELECT GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) as puntaje, c.id_faceta, (1) as id_competencia
 		FROM mfo_opcionm2 o
 		INNER JOIN mfo_respuestam2 r on r.id_opcion = o.id_opcion
 		INNER JOIN mfo_preguntam2 p on p.id_pregunta = o.id_pregunta
 		INNER JOIN mfo_competenciam2 c on c.id_competencia = p.id_competencia
-		INNER JOIN mfo_rasgom2 ras on ras.id_rasgo = c.id_rasgo
 		WHERE r.id_usuario = ?
 		GROUP BY c.id_competencia) t
 		INNER JOIN mfo_baremo b ON b.orden1 = (SUBSTR(t.puntaje, 1, 1)) AND 
@@ -58,8 +57,8 @@ class Modelo_Opcion{
 	public static function competenciasXfaceta(){
 
 		$sql = 'SELECT f.id_faceta, GROUP_CONCAT(m.descripcion SEPARATOR "-") AS competencias FROM mfo_facetam2 f
-				INNER JOIN mfo_rasgom2 s ON s.id_faceta = f.id_faceta
-				INNER JOIN mfo_competenciam2 m ON m.id_rasgo = s.id_rasgo
+				
+				INNER JOIN mfo_competenciam2 m ON m.id_faceta = f.id_faceta
 				GROUP BY f.id_faceta';
 
 		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);

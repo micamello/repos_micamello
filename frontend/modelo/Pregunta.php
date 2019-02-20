@@ -50,9 +50,8 @@ class Modelo_Pregunta{
 
     $sql = "SELECT COUNT(id_pregunta) AS cantd_preguntas
             FROM mfo_preguntam2 p
-            INNER JOIN mfo_competenciam2 c on c.id_competencia = p.id_competencia
-            INNER JOIN mfo_rasgom2 r on r.id_rasgo = c.id_rasgo
-            GROUP BY r.id_faceta LIMIT 1";
+            INNER JOIN mfo_competenciam2 c on c.id_competencia = p.id_competencia            
+            GROUP BY c.id_faceta LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($sql),false);
   }
 }  

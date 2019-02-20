@@ -6,7 +6,7 @@ class Controlador_Minisitio extends Controlador_Base
 
     public function construirPagina()
     {
-        $nacionalidad  = Modelo_Pais::obtieneListadoNacionalidad(SUCURSAL_PAISID);
+        $nacionalidad  = Modelo_Pais::obtieneListadoNacionalidad(SUCURSAL_PAISID);        
         $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
         $profesion   = Modelo_Ocupacion::obtieneListadoProfesion();
         $ocupacion   = Modelo_Ocupacion::obtieneListadoAsociativo();
@@ -29,13 +29,7 @@ class Controlador_Minisitio extends Controlador_Base
 
               $array_datos = $_SESSION['array_datos'];
               if(isset($_SESSION['filtrar_consultados'][$letra])){
-                  if($letra == 'A' && $type == 1){
-                      if(isset(SALARIO[$id])){
-                          $_SESSION['filtrar_consultados']['A'] = $id;
-                          $_SESSION['array_datos']['A'] = array('id'=>$id,'nombre'=>SALARIO[$id]);
-                      }
-                  }
-                  else if($letra == 'P' && $type == 1){
+                  if($letra == 'P' && $type == 1){
                       if(isset($profesion[$id])){
                         $_SESSION['filtrar_consultados']['P'] = $id;
                         $_SESSION['array_datos']['P'] = array('id'=>$id,'nombre'=>$profesion[$id]);
@@ -65,7 +59,7 @@ class Controlador_Minisitio extends Controlador_Base
 
                           if(isset(GENERO[$g])){
                               $_SESSION['filtrar_consultados']['G'] = $id;
-                              $array_datos['array_datos']['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
+                              $_SESSION['array_datos']['G'] = array('id'=>$id,'nombre'=>GENERO[$g]);
                           }
                       }
                   }
@@ -96,27 +90,16 @@ class Controlador_Minisitio extends Controlador_Base
                         $_SESSION['array_datos']['H'][$existe]['nombre'] = $nombre;
                       }
                   }
-                  else if($letra == 'R' && $type == 1){
-
-                    $res = explode('_',$id);
-
-                    if(count($res) == 1){
-                      $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'];
-                    }else if(count($res) == 2){
-                      $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]];
-                    }else{
-                      $nombre = 'Residencia: '.$residenciaActual[$res[0]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]]['nombre'].' - '.$residenciaActual[$res[0]]['cantones'][$res[1]]['parroquias'][$res[2]];
-                    }
+                  else if($letra == 'R' && $type == 1){                                        
                     $_SESSION['filtrar_consultados']['R'] = $id; 
-                    $_SESSION['array_datos']['R'] = array('id'=>$id,'nombre'=>$nombre);
-
+                    $_SESSION['array_datos']['R'] = array('id'=>$id,'nombre'=>$residenciaActual[$id]['nombre']);
                   }
                   else if($letra == 'N' && $type == 1){
 
                     $nac = explode('_',$id);
 
                     if(count($nac) == 1){
-                      $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]]['nombre'];
+                      $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]];
                     }else{
                       $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]]['nombre'].' - '.$nacionalidad[$nac[0]]['provincias'][$nac[1]];
                     }
@@ -151,7 +134,7 @@ class Controlador_Minisitio extends Controlador_Base
                           $_SESSION['array_datos'][$letra] = 0;
                       }
                   }
-              }
+              }              
 
               $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
@@ -215,7 +198,8 @@ class Controlador_Minisitio extends Controlador_Base
               $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>0);
 
               $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
-              $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
+
+              $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);               
 
               $tags = array(
                   'nacionalidad'=>$nacionalidad,
@@ -238,48 +222,22 @@ class Controlador_Minisitio extends Controlador_Base
     }
 
     public static function preparaConsulta($filtros){
+
       $edad = (empty($filtros['F']) || $filtros['F'] > 5) ? '' : $filtros['F']; 
-      $genero = (empty($filtros['G'])) ? '' : $filtros['G'];
-      $aspiracion = (empty($filtros['A']) || $filtros['A'] > 4) ? '' : $filtros['A'];
+      $genero = (empty($filtros['G'])) ? '' : array_search($filtros['G'],VALOR_GENERO);      
       $estadocivil = (empty($filtros['C'])) ? '' : $filtros['C'];
       $profesion = (empty($filtros['P'])) ? '' : $filtros['P'];  
       $ocupacion = (empty($filtros['O'])) ? '' : $filtros['O'];
       $escolaridad = (empty($filtros['E'])) ? '' : $filtros['E'];
+      $provinciares = (empty($filtros['R'])) ? '' : $filtros['R'];
       
       $nacionalidad = '';
-      $ciudadnac = '';
+      $provincia = '';
       if (!empty($filtros['N'])){
         $lugarnac = explode('_',$filtros['N']);
         $nacionalidad = (is_array($lugarnac) && isset($lugarnac[0])) ? $lugarnac[0] : $filtros['N'];
-        $ciudadnac = (is_array($lugarnac) && isset($lugarnac[1])) ? $lugarnac[1] : '';
-      }    
-      
-      $parroquia = '';
-      $ciudad = '';
-      $provincia = '';   
-      if (!empty($filtros['R'])){
-        $patron = '/(\d+)(\d+)(\d+)/i';
-        preg_match($patron,$filtros['R'],$coincidencias);        
-        if (empty($coincidencias)){
-          $patron = '/(\d+)_(\d+)/i';
-          preg_match($patron,$filtros['R'],$coincidencias);  
-          if (empty($coincidencias)){
-            $parroquia = '';
-            $ciudad = '';
-            $provincia = $filtros['R'];       
-          }
-          else{
-            $parroquia = '';
-            $ciudad = $coincidencias[2];
-            $provincia = $coincidencias[1];    
-          }
-        }
-        else{          
-          $parroquia = $coincidencias[3];
-          $ciudad = $coincidencias[2];
-          $provincia = $coincidencias[1];    
-        }        
-      }
+        $provincia = (is_array($lugarnac) && isset($lugarnac[1])) ? $lugarnac[1] : '';
+      }                            
       
       $competencias = array();
       if (!empty($filtros['H'])){
@@ -289,9 +247,9 @@ class Controlador_Minisitio extends Controlador_Base
           $puntaje = (is_array($competenciatemp) && isset($competenciatemp[1])) ? $competenciatemp[1] : 0;
           $competencias[$comp] = $puntaje; 
         }
-      }            
-
-      return Modelo_Respuesta::verResultados($edad,$nacionalidad,$ciudadnac,$genero,$estadocivil,$profesion,$ocupacion,$escolaridad,$aspiracion,$parroquia,$ciudad,$provincia,$competencias);  
+      }                  
+               
+      return Modelo_Respuesta::verResultados($edad,$nacionalidad,$provincia,$genero,$estadocivil,$profesion,$ocupacion,$escolaridad,$provinciares,$competencias);  
     }
 
     public function generarTabla($registros,$facetas,$colores_facetas,$tipo){
@@ -308,19 +266,17 @@ class Controlador_Minisitio extends Controlador_Base
 
                 if($tipo == 2){
                     $table .= '<td rowspan="2" align="center" style="vertical-align:middle;"><b>Correo</b></td>
-                    <td rowspan="1" colspan="2" align="center" style="vertical-align:middle;"><b>Nacionalidad</b></td>
+                    <td rowspan="1" colspan="2" align="center" style="vertical-align:middle;"><b>Lugar de Nacimiento</b></td>
                     <td rowspan="2" align="center" style="vertical-align:middle;"><b>G&eacute;nero</b></td>
                     <td rowspan="2" align="center" style="vertical-align:middle;"><b>Edad</b></td>
                     <td rowspan="2" align="center" style="vertical-align:middle;"><b>Estado civil</b></td>
                     <td rowspan="2" align="center" style="vertical-align:middle;"><b>Profesi&oacute;n</b></td>
                     <td rowspan="2" align="center" style="vertical-align:middle;"><b>Ocupaci&oacute;n</b></td>
-                    <td rowspan="2" align="center" style="vertical-align:middle;"><b>Nivel de Instrucci&oacute;n</b></td>
-                    <td rowspan="2" align="center" style="vertical-align:middle;"><b>Aspiraci&oacute;n Salarial</b></td>
-                    <td rowspan="1" colspan="3" align="center" style="vertical-align:middle;"><b>Residencia Actual</b></td>';
+                    <td rowspan="2" align="center" style="vertical-align:middle;"><b>Nivel de Instrucci&oacute;n</b></td>                    
+                    <td rowspan="2" align="center" style="vertical-align:middle;"><b>Provincia de Residencia</b></td>';
                 }
 
                 foreach ($facetas as $key => $literales) {
-
                     $table .= '<td align="center" style="background:'.$colores_facetas[$key].'; vertical-align:middle;" colspan="'.$col.'"><b>'.$literales.'</b></td>';
                 } 
 
@@ -338,12 +294,10 @@ class Controlador_Minisitio extends Controlador_Base
                 if($tipo == 2){
                     $table .= '<td rowspan="1" align="center" style="vertical-align:middle;"><b>Pa&iacute;s</b></td>
                     <td rowspan="1" align="center" style="vertical-align:middle;"><b>Ciudad</b></td>
-                    <td rowspan="1" align="center" style="vertical-align:middle;"><b>Provincia</b></td>
-                    <td rowspan="1" align="center" style="vertical-align:middle;"><b>Cant&oacute;n</b></td>
-                    <td rowspan="1" align="center" style="vertical-align:middle;"><b>Parroquia</b></td>';
+                    ';
                 }
 
-                $cont = 1;
+                $cont = 1;                
                 foreach ($facetas as $key => $literales) {
                     $i = 1;
                     while($cont <= $col){
@@ -384,8 +338,8 @@ class Controlador_Minisitio extends Controlador_Base
             $cont_opciones = 0;
             $array_validos = array();
             $td = '';
-            
-            foreach ($registros as $key => $value) {
+            if (!empty($registros)){
+              foreach ($registros as $key => $value) {
 
                 if($value['flag'] == 'valido'){
                   array_push($array_validos,$value['flag']);
@@ -410,17 +364,14 @@ class Controlador_Minisitio extends Controlador_Base
 
                         $td .= '<td align="center" style="vertical-align:middle;">'.$value['correo'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['id_nacionalidad'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_ciudad'].'</td>
+                        <td align="center" style="vertical-align:middle;">'.$value['id_provincia'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['genero'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['edad'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['estado_civil'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['id_profesion'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['id_ocupacion'].'</td>
                         <td align="center" style="vertical-align:middle;">'.$value['id_escolaridad'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['asp_salarial'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_provincia'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_ciudadr'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_parroquia'].'</td>';
+                        <td align="center" style="vertical-align:middle;">'.$value['id_provincia_res'].'</td>';
                     }
                 }
 
@@ -466,6 +417,7 @@ class Controlador_Minisitio extends Controlador_Base
                   $array_validos = array();
                   $cont_opciones = 0;
                 }
+              }
             }
             $table .= '</tbody>
           </table>';
@@ -483,7 +435,7 @@ class Controlador_Minisitio extends Controlador_Base
 
       $facetas = $datos['facetas'];
       $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
-      $competenciasXfacetas = Modelo_Opcion::competenciasXfaceta();
+      //$competenciasXfacetas = Modelo_Opcion::competenciasXfaceta();
     
       $datosusuario = $datos['datos'];
       $preguntas = $datos['preguntas'];
@@ -514,7 +466,7 @@ class Controlador_Minisitio extends Controlador_Base
 
           $informe .= '<p align="justify"><b>'.utf8_encode($datosfaceta['introduccion'])."</b></p>";
 
-          $informe .= '<p align="justify"><i><u><b>'.utf8_encode($datosfaceta['descripcion']).'</b></u></i>: '.utf8_encode($competenciasXfacetas[$pregunta['id_faceta']]).'</p>';
+          //$informe .= '<p align="justify"><i><u><b>'.utf8_encode($datosfaceta['descripcion']).'</b></u></i>: '.utf8_encode($competenciasXfacetas[$pregunta['id_faceta']]).'</p>';
           ;
         }
         $parrafo .= ($datosusuario['nombres'].' '.$datosusuario['apellidos']).' '.utf8_encode($descriptor['descripcion']).'. ';
@@ -552,7 +504,7 @@ class Controlador_Minisitio extends Controlador_Base
     $inidoc = "<link rel='stylesheet' href='css/informemic.css'>";
     $mpdf->WriteHTML($inidoc);
     $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="17%"></header>');     
-    $mpdf->WriteHTML('<body>hola</body>');
+    $mpdf->WriteHTML('<body>'.$html.'</body>');
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
     $mpdf->Output($nombre_archivo, 'D');
     
