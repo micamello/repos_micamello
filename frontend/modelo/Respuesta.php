@@ -30,7 +30,7 @@ class Modelo_Respuesta{
   }
 
   public static function verResultados($edad='', $nacionalidad='', $provincia='', $genero='', $estadocivil='', $profesion='', $ocupacion='',
-                                       $escolaridad='', $provinciares='', $competencias=array()){
+                                       $escolaridad='', $empresa='', $provinciares='', $competencias=array()){
     $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_provincia, u.genero,
                    TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) AS edad, u.estado_civil, u.id_profesion,
                    u.id_ocupacion, u.id_escolaridad, res.id_pregunta, p.id_competencia,
@@ -76,7 +76,8 @@ class Modelo_Respuesta{
                   ('".$estadocivil."' = '' OR u.estado_civil = '".$estadocivil."') AND
                   ('".$profesion."' = '' OR u.id_profesion = '".$profesion."') AND
                   ('".$ocupacion."' = '' OR u.id_ocupacion = '".$ocupacion."') AND      
-                  ('".$escolaridad."' = '' OR u.id_escolaridad = '".$escolaridad."') AND                                                      
+                  ('".$escolaridad."' = '' OR u.id_escolaridad = '".$escolaridad."') AND      
+                  ('".$empresa."' = '' OR u.id_empresa = '".$empresa."')AND                                                      
                   ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";    
     $sql .= "ORDER BY u.id_usuario, m.id_faceta, p.orden";
     return $GLOBALS['db']->auto_array($sql,array(),true);        

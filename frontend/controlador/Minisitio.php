@@ -52,6 +52,12 @@ class Controlador_Minisitio extends Controlador_Base
                         $_SESSION['array_datos']['F'] = array('id'=>$id,'nombre'=>EDAD[$id]);
                       }
                   }
+                  else if($letra == 'I' && $type == 1){
+                      if(isset($empresas[$id])){
+                        $_SESSION['filtrar_consultados']['I'] = $id; 
+                        $_SESSION['array_datos']['I'] = array('id'=>$id,'nombre'=>$empresas[$id]);
+                      }
+                  }
                   else if($letra == 'G' && $type == 1){
 
                       $g = array_search($id,VALOR_GENERO); 
@@ -151,8 +157,8 @@ class Controlador_Minisitio extends Controlador_Base
                   'residenciaActual'=>$residenciaActual,
                   'competencias'=>$competencias,
                   'link'=>$link,
-                  'table'=>$table
-                  //'registros'=>$registros
+                  'table'=>$table,
+                  'empresas'=>$empresas
               );
               $render = Vista::display('admin/index',$tags); 
               echo $render;
@@ -198,7 +204,6 @@ class Controlador_Minisitio extends Controlador_Base
               $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>0);
 
               $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
-
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);               
 
               $tags = array(
@@ -230,6 +235,7 @@ class Controlador_Minisitio extends Controlador_Base
       $ocupacion = (empty($filtros['O'])) ? '' : $filtros['O'];
       $escolaridad = (empty($filtros['E'])) ? '' : $filtros['E'];
       $provinciares = (empty($filtros['R'])) ? '' : $filtros['R'];
+      $empresa = (empty($filtros['I'])) ? '' : $filtros['I'];
       
       $nacionalidad = '';
       $provincia = '';
@@ -249,7 +255,7 @@ class Controlador_Minisitio extends Controlador_Base
         }
       }                  
                
-      return Modelo_Respuesta::verResultados($edad,$nacionalidad,$provincia,$genero,$estadocivil,$profesion,$ocupacion,$escolaridad,$provinciares,$competencias);  
+      return Modelo_Respuesta::verResultados($edad,$nacionalidad,$provincia,$genero,$estadocivil,$profesion,$ocupacion,$escolaridad,$provinciares,$empresa,$competencias);  
     }
 
     public function generarTabla($registros,$facetas,$colores_facetas,$tipo){

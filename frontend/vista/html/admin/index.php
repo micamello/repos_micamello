@@ -62,6 +62,25 @@
       </div>
       <div class="panel panel-default shadow-panel1">
         <div class="panel-heading">
+          <span><i class="fa fa-industry"></i> Empresas</span>
+        </div>
+        <div class="panel-body">
+          <div class="filtros">
+            <?php 
+              if (!empty($empresas)) {
+                echo '<ul style="padding-left: 0px;">';
+                foreach ($empresas as $key => $v) {
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/I'.$key.'/';
+                  echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="empresas" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+                }
+                echo '</ul>';
+              }
+            ?>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default shadow-panel1">
+        <div class="panel-heading">
           <span><i class="fa fa-bar-chart"></i> Nivel de estudio</span>
         </div>
         <div class="panel-body">
@@ -160,7 +179,7 @@
       </div>
       <div class="panel panel-default shadow-panel1">
         <div class="panel-heading">
-          <span><i class="fa fa-transgender"></i> Genero</span>
+          <span><i class="fa fa-transgender"></i> G&eacute;nero</span>
         </div>
         <div class="panel-body">
           <div class="filtros">
@@ -218,7 +237,6 @@
         <div class="panel-body">
           <div class="filtros">
             <input class="form-control" id="ocupaciones" type="text" placeholder="Buscar..">
-
             <?php
               if (!empty($ocupacion)) {
                 echo '<ul class="list-group" id="listaOcupaciones">';
