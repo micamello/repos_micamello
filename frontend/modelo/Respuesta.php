@@ -30,7 +30,7 @@ class Modelo_Respuesta{
   }
 
   public static function verResultados($edad='', $nacionalidad='', $provincia='', $genero='', $estadocivil='', $profesion='', $ocupacion='',
-                                       $escolaridad='', $empresa='', $provinciares='', $competencias=array()){
+                                       $escolaridad='', $provinciares='', $empresa='', $competencias=array()){
     $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_provincia, u.genero,
                    TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) AS edad, u.estado_civil, u.id_profesion,
                    u.id_ocupacion, u.id_escolaridad, res.id_pregunta, p.id_competencia,
