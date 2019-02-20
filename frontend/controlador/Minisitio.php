@@ -456,7 +456,7 @@ class Controlador_Minisitio extends Controlador_Base
       <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
       <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p> ';
 
-      $nombre_archivo = utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'.pdf';
+      $nombre_archivo = utf8_encode($datosusuario['nombres'].'_'.$datosusuario['apellidos']).'.pdf';
       $cantd_preg = 0;
       $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
 
@@ -475,7 +475,7 @@ class Controlador_Minisitio extends Controlador_Base
           //$informe .= '<p align="justify"><i><u><b>'.utf8_encode($datosfaceta['descripcion']).'</b></u></i>: '.utf8_encode($competenciasXfacetas[$pregunta['id_faceta']]).'</p>';
           ;
         }
-        $parrafo .= ($datosusuario['nombres'].' '.$datosusuario['apellidos']).' '.utf8_encode($descriptor['descripcion']).'. ';
+        $parrafo .= ($datosusuario['nombres']).' '.utf8_encode($descriptor['descripcion']).'. ';
        
         if($cantd_preg == $preg_x_faceta){
             
@@ -507,12 +507,12 @@ class Controlador_Minisitio extends Controlador_Base
     $piepagina = "imagenes/pdf/footer.png";
     $mpdf=new mPDF('','A4');
 
-    $inidoc = "<link rel='stylesheet' href='css/informemic.css'>";
+    $inidoc = "<!DOCTYPE html><html><link rel='stylesheet' href='css/informemic.css'>";
     $mpdf->WriteHTML($inidoc);
-    $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="17%"></header>');     
-    $mpdf->WriteHTML('<body>'.$html.'</body>');
-    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
-    $mpdf->Output($nombre_archivo, 'D');
+    $mpdf->setHTMLHeader('<body><header><img src="'.$cabecera.'" width="17%"></header>');     
+    $mpdf->WriteHTML($html);
+    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer></body></html>');
+    $mpdf->Output($nombre_archivo, 'I');
     
   }
 }
