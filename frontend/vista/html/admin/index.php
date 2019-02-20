@@ -13,7 +13,7 @@
 
 
 </head>
-<body class="window_class">
+<body class="window_class" style="padding-top:10px;">
   <?php if(!isset($show_banner) && !isset($breadcrumbs)){ ?>
   <?php } ?>
     <!--mensajes de error y exito-->
@@ -28,7 +28,6 @@
         <strong><?php echo $sess_suc_msg;?></strong>
       </div>  
     <?php } ?>
-  <br>
   
   <div class="col-md-3">
     <div class="card shadow-lg rounded text-center">
@@ -50,22 +49,8 @@
                 foreach ($residenciaActual as $key => $v) {
                   $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/R'.$key.'/';
                   echo '<li><input type="checkbox" name="list" id="prov_'.$key.'">
-                        <label style="content:none; cursor:pointer" for="prov_'.$key.'"><a href="'.$ruta.'1/">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</a></label>
-                        <ul id="menu21" class="interior">';
-                  foreach ($v['cantones'] as $c => $val) {
-
-                    $ruta2 = PUERTO.'://'.HOST.'/filtrarEntrevistados/R'.$key.'_'.$c.'/';
-                    echo '<li><input type="checkbox" name="list" id="ciudad_'.$key.'_'.$c.'">
-                        <label style="content:none; cursor:pointer" for="ciudad_'.$key.'_'.$c.'"><a href="'.$ruta2.'1/">'. utf8_encode(ucfirst(strtolower($val['nombre']))).'</a></label>';
-                    echo '<ul id="menu22" class="interior">';
-                    foreach ($val['parroquias'] as $k => $value) {
-                      
-                      $ruta3 = PUERTO.'://'.HOST.'/filtrarEntrevistados/R'.$key.'_'.$c.'_'.$k.'/';
-                      echo '<li><a href="'.$ruta3.'1/">'.utf8_encode(ucfirst(strtolower($value))).'</a></li>';
-                    }
-                    echo '</ul></li>';
-                  }
-                  echo '</ul></li>';  
+                        <a href="'.$ruta.'1/">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</a>';                  
+                  echo '</li>';  
                 }
                 echo '</ul>';
               }else{
@@ -206,24 +191,7 @@
             ?>
           </div>
         </div>
-      </div>
-      <div class="panel panel-default shadow-panel1">
-        <div class="panel-heading">
-          <span><i class="fa fa-usd"></i> Aspiraci&oacute;n Salarial</span>
-        </div>
-        <div class="panel-body">
-          <div class="filtros">
-          <?php
-            echo '<ul style="padding-left: 0px;">';
-            foreach (SALARIO as $key => $v) {
-              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/A'.$key.'/';
-              echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="aspiracion" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-            }
-            echo '</ul>';
-          ?>
-          </div>
-        </div>
-      </div>
+      </div>      
       <div class="panel panel-default shadow-panel1">
         <div class="panel-heading">
           <span><i class="fa fa-briefcase"></i> Profesi&oacute;n</span>
@@ -268,8 +236,7 @@
   <div class="col-md-9">
     <div id="links"><?php echo $link; ?></div>
   </div>
-  <div class="col-md-9">
-    <br>
+  <div class="col-md-9">    
     <a href="<?php echo PUERTO."://".HOST;?>/admin/generarExcel/" class="col-md-1 offset-md-11 btn btn-success"><i class="fa fa-download"></i> Excel</a>
     <br><br>
     <div class="card shadow-lg rounded text-center">
