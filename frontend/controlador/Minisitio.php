@@ -14,6 +14,7 @@ class Controlador_Minisitio extends Controlador_Base
         $colores_facetas = Modelo_Faceta::obtenerColoresLiterales();
         $residenciaActual = Modelo_Provincia::residenciaActual(SUCURSAL_PAISID);
         $competencias = Modelo_Competencia::obtenerCompetenciasGrados();
+        $empresas = Modelo_Usuario::obtieneListadoEmpresas();
 
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
@@ -181,7 +182,6 @@ class Controlador_Minisitio extends Controlador_Base
           case 'guardarDataGraficos':
           
             $_SESSION['DataGraficos'] = $_POST['graficos'];
-
           break;
           case 'generaInforme':
    
@@ -208,12 +208,11 @@ class Controlador_Minisitio extends Controlador_Base
            
             $informe = $this->generaInforme(array('datos'=>$datosusuario,'preguntas'=>$preguntas,'facetas'=>$facetasDescripcion,'datosGraficos'=>$result,'colores'=>$colores));
             //$_SESSION['datos_informe'] = array('nombre_archivo'=>"informe_".$datosusuario['nombres'].' '.$datosusuario['apellidos'].".pdf",'informe'=>$informe);
-
           break;
           default:
 
-              $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0);
-              $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0);
+              $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>0);
+              $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>0);
 
               $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
@@ -229,6 +228,7 @@ class Controlador_Minisitio extends Controlador_Base
                   'facetas'=>$facetas,
                   'colores_facetas'=>$colores_facetas,
                   'registros'=>$registros,
+                  'empresas'=>$empresas,
                   'table'=>$table
               );  
               $render = Vista::display('admin/index',$tags); 
@@ -236,8 +236,6 @@ class Controlador_Minisitio extends Controlador_Base
           break;
         }
     }
-
-
 
     public static function preparaConsulta($filtros){
       $edad = (empty($filtros['F']) || $filtros['F'] > 5) ? '' : $filtros['F']; 

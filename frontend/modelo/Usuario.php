@@ -977,5 +977,10 @@ WHERE
       $result = $GLOBALS['db']->insert('mfo_usuariom2', $data_usuario);
       return $result;
   }
+
+  public static function obtieneListadoEmpresas(){
+    $sql = "SELECT * FROM mfo_empresam2";
+    return $GLOBALS['db']->auto_array($sql,array(),true);
+  }
 }  
 ?>
