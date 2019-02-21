@@ -42,7 +42,7 @@ define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'
 define('REGISTRO_PAGINA',9);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
-define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Casado(a)', '3'=>'En union', '4'=>'Divorciado(a)','5'=>'Viudo(a)'));
+define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Unión libre', '3'=>'Casado(a)', '4'=>'Separado(a)','5'=>'Divorciado(a)','6'=>'Viudo(a)','7'=>'Otro'));
 define('CRON_RUTA',FRONTEND_RUTA.'cron/');
 define('DIAS_AUTOPOSTULACION','3');
 define('AUTOPOSTULACION_MIN','5');
