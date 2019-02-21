@@ -456,7 +456,7 @@ class Controlador_Minisitio extends Controlador_Base
       <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
       <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p> ';
 
-      $nombre_archivo = utf8_encode($datosusuario['nombres'].'_'.$datosusuario['apellidos']).'.pdf';
+      $nombre_archivo = utf8_encode(str_replace(' ', '_', $datosusuario['nombres'].'_'.$datosusuario['apellidos'])).'.pdf';
       $cantd_preg = 0;
       $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
 
@@ -512,7 +512,7 @@ class Controlador_Minisitio extends Controlador_Base
     $mpdf->setHTMLHeader('<body><header><img src="'.$cabecera.'" width="17%"></header>');     
     $mpdf->WriteHTML($html);
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer></body></html>');
-    $mpdf->Output($nombre_archivo, 'I');
+    $mpdf->Output($nombre_archivo, 'D');
     
   }
 }
