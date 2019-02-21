@@ -271,7 +271,7 @@ class Controlador_Minisitio extends Controlador_Base
                 <td rowspan="2" align="center" style="vertical-align:middle;"><b>Nombre y Apellido</b></td>';
 
                 if($tipo == 2){
-                    $table .= '<td rowspan="2" align="center" style="vertical-align:middle;"><b>Correo</b></td>
+                  $table .= '<td rowspan="2" align="center" style="vertical-align:middle;"><b>Correo</b></td>
                     <td rowspan="1" colspan="2" align="center" style="vertical-align:middle;"><b>Lugar de Nacimiento</b></td>
                     <td rowspan="2" align="center" style="vertical-align:middle;"><b>G&eacute;nero</b></td>
                     <td rowspan="2" align="center" style="vertical-align:middle;"><b>Edad</b></td>
@@ -283,7 +283,7 @@ class Controlador_Minisitio extends Controlador_Base
                 }
 
                 foreach ($facetas as $key => $literales) {
-                    $table .= '<td align="center" style="background:'.$colores_facetas[$key].'; vertical-align:middle;" colspan="'.$col.'"><b>'.$literales.'</b></td>';
+                  $table .= '<td align="center" style="background:'.$colores_facetas[$key].'; vertical-align:middle;" colspan="'.$col.'"><b>'.$literales.'</b></td>';
                 } 
 
                 $table .= '<td colspan="'.$cantd.'" align="center" style="vertical-align:middle;"><b>Porcentajes por preguntas</b></td>';
@@ -292,93 +292,88 @@ class Controlador_Minisitio extends Controlador_Base
                 $table .= '<td colspan="'.count($facetas).'" align="center" style=" vertical-align:middle;"><b>Puntajes por faceta</b></td>';
 
                 if($tipo == 1){
-                    $table .= '<td rowspan="2" align="center" style="vertical-align:middle;"><b>Descargar Informe</b></td>';
+                  $table .= '<td rowspan="2" align="center" style="vertical-align:middle;"><b>Descargar Informe</b></td>';
                 }
               $table .= '</tr>
               <tr style="background:#f3e4e4;">';
 
-                if($tipo == 2){
-                    $table .= '<td rowspan="1" align="center" style="vertical-align:middle;"><b>Pa&iacute;s</b></td>
-                    <td rowspan="1" align="center" style="vertical-align:middle;"><b>Ciudad</b></td>
-                    ';
+              if($tipo == 2){
+                $table .= '<td rowspan="1" align="center" style="vertical-align:middle;"><b>Pa&iacute;s</b></td>
+                  <td rowspan="1" align="center" style="vertical-align:middle;"><b>Ciudad</b></td>
+                  ';
+              }
+
+              $cont = 1;                
+              foreach ($facetas as $key => $literales) {
+                $i = 1;
+                while($cont <= $col){
+                  foreach (OPCIONES as $clave => $op) {
+                    $table .= '<td><b>'.$literales.$i.$op.'</b></td>';
+                    $cont++;
+                  }
+                  $i++;
                 }
 
-                $cont = 1;                
-                foreach ($facetas as $key => $literales) {
-                    $i = 1;
-                    while($cont <= $col){
-
-                      foreach (OPCIONES as $clave => $op) {
-                        $table .= '<td><b>'.$literales.$i.$op.'</b></td>';
-                        $cont++;
-                      }
-                      $i++;
-                    }
-
-                    if($cont > $col){
-                      $cont = 1;
-                    }
-                } 
-
-                foreach ($facetas as $key => $literales) {
-                    for ($i=1; $i <= $preg_x_faceta; $i++) { 
-                        $table .= '<td align="center" style=" background:'.$colores_facetas[$key].'; vertical-align:middle;"><b>'.$literales.$i.'</b></td>';
-                    }
+                if($cont > $col){
+                  $cont = 1;
                 }
+              } 
 
-                foreach ($facetas as $key => $literales) {
-                    for ($i=1; $i <= $preg_x_faceta; $i++) { 
-                        $table .= '<td align="center" style=" background:'.$colores_facetas[$key].'; vertical-align:middle;"><b>'.$literales.$i.'</b></td>';
-                    }
+              foreach ($facetas as $key => $literales) {
+                for ($i=1; $i <= $preg_x_faceta; $i++) { 
+                  $table .= '<td align="center" style=" background:'.$colores_facetas[$key].'; vertical-align:middle;"><b>'.$literales.$i.'</b></td>';
                 }
+              }
 
-                foreach ($facetas as $key => $literales) {
-                    $table .= '<td align="center" style="background:'.$colores_facetas[$key].'; vertical-align:middle;"><b>'.$literales.'</b></td>';
-                } 
+              foreach ($facetas as $key => $literales) {
+                for ($i=1; $i <= $preg_x_faceta; $i++) { 
+                  $table .= '<td align="center" style=" background:'.$colores_facetas[$key].'; vertical-align:middle;"><b>'.$literales.$i.'</b></td>';
+                }
+              }
+
+              foreach ($facetas as $key => $literales) {
+                $table .= '<td align="center" style="background:'.$colores_facetas[$key].'; vertical-align:middle;"><b>'.$literales.'</b></td>';
+              } 
 
              $table .= '</tr>
             </thead>
             <tbody>';
 
             $id_ant = 0;
-            $cont_opciones = 0;
             $array_validos = array();
             $td = '';
             if (!empty($registros)){
               foreach ($registros as $key => $value) {
-
                 if($value['flag'] == 'valido'){
                   array_push($array_validos,$value['flag']);
                 }
 
                 if($id_ant != $value['id_usuario']){
-                    //print_r($facetas);
-                    foreach ($facetas as $key => $literales) {
+                  foreach ($facetas as $key => $literales) {
+                    $promedios[$key] = array();
+                    $porc_facetas[$key] = array();
+                    $porc_por_preguntas[$key] = array();
+                    $grad_por_preguntas[$key] = array();
+                  }
 
-                        $promedios[$key] = array();
-                        $porc_facetas[$key] = array();
-                        $porc_por_preguntas[$key] = array();
-                        $grad_por_preguntas[$key] = array();
-                    }
+                  $id_ant = $value['id_usuario'];
+                  $td = '';
+                  
+                  $td .= '<td align="center" style="vertical-align:middle;">'.$value['nombres'].' '.$value['apellidos'].'</td>';
 
-                    $id_ant = $value['id_usuario'];
-                    $td = '';
-                    
-                    $td .= '<td align="center" style="vertical-align:middle;">'.$value['nombres'].' '.$value['apellidos'].'</td>';
+                  if($tipo == 2){
 
-                    if($tipo == 2){
-
-                        $td .= '<td align="center" style="vertical-align:middle;">'.$value['correo'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_nacionalidad'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_provincia'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['genero'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['edad'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['estado_civil'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_profesion'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_ocupacion'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_escolaridad'].'</td>
-                        <td align="center" style="vertical-align:middle;">'.$value['id_provincia_res'].'</td>';
-                    }
+                      $td .= '<td align="center" style="vertical-align:middle;">'.$value['correo'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['id_nacionalidad'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['id_provincia'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['genero'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['edad'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['estado_civil'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['id_profesion'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['id_ocupacion'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['id_escolaridad'].'</td>
+                      <td align="center" style="vertical-align:middle;">'.$value['id_provincia_res'].'</td>';
+                  }
                 }
 
                 $td .= '<td align="center" style="vertical-align:middle;">'.$value['orden1'].'</td>
@@ -387,41 +382,35 @@ class Controlador_Minisitio extends Controlador_Base
                 <td align="center" style="vertical-align:middle;">'.$value['orden4'].'</td>
                 <td align="center" style="vertical-align:middle;">'.$value['orden5'].'</td>';
 
-                $cont_opciones += count(OPCIONES);
-
                 array_push($porc_por_preguntas[$value['id_faceta']],$value['porcentaje']); 
                 array_push($grad_por_preguntas[$value['id_faceta']],$value['id_puntaje']);
 
-                if($cantd_op === $cont_opciones){
-
+                if($cantd_op == $value['tot_opcion']){
                   foreach ($porc_por_preguntas as $a => $porc) {
-                      
-                      foreach ($porc as $b => $p) {
-                          $td .= '<td align="center" style="vertical-align:middle;">'.$p.'</td>';
-                      } 
+                    foreach ($porc as $b => $p) {
+                      $td .= '<td align="center" style="vertical-align:middle;">'.$p.'</td>';
+                    } 
                   }
 
                   foreach ($grad_por_preguntas as $a => $grad) {
-                      foreach ($grad as $b => $g) {
-                          $td .= '<td align="center" style="vertical-align:middle;">'.$g.'</td>';
-                      } 
+                    foreach ($grad as $b => $g) {
+                      $td .= '<td align="center" style="vertical-align:middle;">'.$g.'</td>';
+                    } 
                   }
 
                   foreach ($facetas as $key => $literales) {
-
-                      $promedios[$value['id_faceta']] = round(array_sum($porc_por_preguntas[$key])/$preg_x_faceta,2);
-                      $td .= '<td align="center" style="vertical-align:middle;">'.$promedios[$value['id_faceta']].'</td>';
+                    $promedios[$value['id_faceta']] = round(array_sum($porc_por_preguntas[$key])/$preg_x_faceta,2);
+                     $td .= '<td align="center" style="vertical-align:middle;">'.$promedios[$value['id_faceta']].'</td>';
                   }
 
                   if($tipo == 1){
-                      $td .= '<td align="center" style="vertical-align:middle; cursor:pointer; color:#337ab7"><a href="'.PUERTO."://".HOST.'/generaInforme/'.$value['id_usuario'].'/" title="Descargar informe de '.$value['nombres'].' '.$value['apellidos'].'"><i class="fa fa-download"></i></a></td>';
+                    $td .= '<td align="center" style="vertical-align:middle; cursor:pointer; color:#337ab7"><a href="'.PUERTO."://".HOST.'/generaInforme/'.$value['id_usuario'].'/" title="Descargar informe de '.$value['nombres'].' '.$value['apellidos'].'"><i class="fa fa-download"></i></a></td>';
                   }
 
                   if(count($_SESSION['filtrar_consultados']['H']) <= count($array_validos)){
                     $table .= '<tr>'.$td.'</tr>'; 
                   }
                   $array_validos = array();
-                  $cont_opciones = 0;
                 }
               }
             }
@@ -453,10 +442,10 @@ class Controlador_Minisitio extends Controlador_Base
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>N: Neurotisismo (Ansiedad):</b> Es la reacción a su entorno social o personal, y estabilidad emocional.</p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>E: Extraversión:</b> Es la capacidad de interactuar en sus relaciones sociales, laborales.</p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Apertura a la Experiencia:</b> Es la experiencia, mente abierta, originalidad, imaginación y creatividad.</p>
-      <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
+      <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
       <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p> ';
 
-      $nombre_archivo = utf8_encode($datosusuario['nombres'].'_'.$datosusuario['apellidos']).'.pdf';
+      $nombre_archivo = utf8_encode(str_replace(' ', '_', $datosusuario['nombres'].'_'.$datosusuario['apellidos'])).'.pdf';
       $cantd_preg = 0;
       $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
 
@@ -512,7 +501,7 @@ class Controlador_Minisitio extends Controlador_Base
     $mpdf->setHTMLHeader('<body><header><img src="'.$cabecera.'" width="17%"></header>');     
     $mpdf->WriteHTML($html);
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer></body></html>');
-    $mpdf->Output($nombre_archivo, 'I');
+    $mpdf->Output($nombre_archivo, 'D');
     
   }
 }

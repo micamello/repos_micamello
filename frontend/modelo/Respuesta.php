@@ -30,11 +30,11 @@ class Modelo_Respuesta{
   }
 
   public static function verResultados($edad='', $nacionalidad='', $provincia='', $genero='', $estadocivil='', $profesion='', $ocupacion='',
-                                       $escolaridad='', $empresa='', $provinciares='', $competencias=array()){
+                                       $escolaridad='', $provinciares='', $empresa='', $competencias=array()){    
     $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_provincia, u.genero,
                    TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) AS edad, u.estado_civil, u.id_profesion,
                    u.id_ocupacion, u.id_escolaridad, res.id_pregunta, p.id_competencia,
-                   b.porcentaje, b.id_puntaje, m.id_faceta, u.id_provincia_res,
+                   b.porcentaje, b.id_puntaje, m.id_faceta, u.id_provincia_res, res.tot_opcion,
                    SUBSTR(res.puntaje, 1, 1) AS orden1,
                    SUBSTR(res.puntaje, 3, 1) AS orden2,
                    SUBSTR(res.puntaje, 5, 1) AS orden3,
@@ -52,7 +52,7 @@ class Modelo_Respuesta{
     }
     $sql = substr($sql,0,-1);
     $sql .= " FROM mfo_usuariom2 u
-            INNER JOIN (SELECT r.id_usuario, o.id_pregunta, GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) AS puntaje 
+            INNER JOIN (SELECT r.id_usuario, o.id_pregunta, GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) AS puntaje, SUM(o.id_pregunta) AS tot_opcion 
                         FROM mfo_respuestam2 r INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion 
                         GROUP BY r.id_usuario, o.id_pregunta) AS res ON res.id_usuario = u.id_usuario
             INNER JOIN mfo_baremo b ON b.orden1 = (SUBSTR(res.puntaje, 1, 1)) AND 
