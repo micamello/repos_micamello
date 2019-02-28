@@ -336,6 +336,7 @@ function validarCaracteresPermitidos(tipo, contenido){
 	tipo_validacion.push(["correo", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarCorreo(contenido[0].value)]]);
 	tipo_validacion.push(["fecha", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarFecha(contenido[0].value)]]);
 	tipo_validacion.push(["dinero", ['El formato ingresado no es válido', validarFormatoDinero(contenido[0].value)]]);
+	tipo_validacion.push(["numero", ['Solo numeros entre 1 y 5', validarNumero(contenido[0].value)]]);
 	// console.log(tipo_validacion);
 	if (tipo == tipo_validacion[0][0] && (contenido[0].value != null && contenido[0].value != "")) {
 		if(!(tipo_validacion[0][1][1])){
@@ -369,6 +370,14 @@ function validarCaracteresPermitidos(tipo, contenido){
 			eliminarMensajeError(contenido);
 		}
 	}
+	if (tipo == tipo_validacion[4][0] && (contenido[0].value != null && contenido[0].value != "")) {
+		if(!(tipo_validacion[4][1][1])){
+			crearMensajeError(contenido, tipo_validacion[4][1][0]);
+		}
+		else{
+			eliminarMensajeError(contenido);
+		}
+	}
 };
 
 function permitidos(){
@@ -390,6 +399,50 @@ function validarNombreApellido(nombre){
 function validarFecha(fecha){
 	// console.log(fecha);
 	return /^(19[5-9][0-9]|20[0-4][0-9]|2050)[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$/.test(fecha);
+}
+
+function validarNumero(numero){
+	return /^[1-5]{1,1}$/.test(numero);
+}
+
+$("#ocupaciones").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#listaOcupaciones li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#profesiones").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#listaProfesiones li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#nacionalidades").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu1 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#residencia").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu2 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#competencias").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu3 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+function enviarPclave(ruta){
+
+	window.location = ruta;
 }
 
 function validarFormatoDinero(salario){
@@ -463,7 +516,7 @@ if($('.caja_destino').length){
   );
 }  
   
-
+// DRAG AND DROP
   function crearinputRespuestas(){
     var contenedor_resp = $('#contenedor_resp');
     var opcion_value = 0;
@@ -518,8 +571,8 @@ function validarRespuestas(){
 	return $return;
 };
 
-function mostrarerror(){
-	var mensaje = ('<div class="alert alert-danger text-center" role="alert"><h5><b>Por favor arrastre todas las opciones del lado izquierdo en los cuadros que se muestran en el lado derecho de acuerdo a su prioridad.</b></h5></div>');
+function mostrarerror(mensaje_text = 'Por favor arrastre todas las opciones del lado izquierdo en los cuadros que se muestran en el lado derecho de acuerdo a su prioridad.'){
+	var mensaje = ('<div class="alert alert-danger text-center" role="alert"><h5><b>'+mensaje_text+'</b></h5></div>');
 	$('#error_msg').html(mensaje);
 }
 
@@ -531,3 +584,229 @@ function mostrarerror(){
 //     n++;
 //   },1000);
 // });
+if($('#pre').length){
+	if($('#pre').val() <= 1){
+		$('#texto_modal').html('Por favor ordene  de 1 a 5  las siguientes oraciones en cada pregunta. <br>(uno es la oración con la que mas se identifica  y 5 es con la que menos se identifica)');
+		$('#exampleModal').modal('show');
+	}
+};
+
+// seleccion de método
+// CASILLAS
+	$('input[type=radio][name="seleccion"]').change(function() {
+		var seleccion_value = this.value;
+		var radios = $('input[type=radio][name="seleccion"]');
+		for (var i = radios.length - 1; i >= 0; i--) {
+			$('#gif_'+(i+1)).removeAttr('class');
+		}
+		$('#gif_'+seleccion_value).attr('class', 'bounce');
+	});
+
+	$('#form_seleccion').on('submit', function(event){
+		if(validar_seleccion_form() <= 0){
+			mostrarerror('Por favor, seleccione una de las opciones.');
+			event.preventDefault();
+		}
+		else{
+			$('#error_msg').html('');
+		}
+	});
+
+	function validar_seleccion_form(){
+		var count = $('[name="seleccion"]:checked').length;
+		return count;
+	}
+
+	function crearInputRespuestasSeleccion(){
+		var contenedor_resp = $('#contenedor_resp');
+		contenedor_resp.html("");
+		var opcion;
+		var orden;
+		var respuestas = $('.respuesta');
+		for (var i = 0; i < respuestas.length ; i++) {
+			if($(respuestas[i]).find('input[name="opcion[]"]').length){
+				opcion = $(respuestas[i]).find('input[name="opcion[]"]').val();
+			}
+
+			if($(respuestas[i]).find('input[name="orden[]"]').length){
+				orden = $(respuestas[i]).find('input[name="orden[]"]').val();
+			}
+
+			var input_opcion = $('<input></input>');
+	        var input_orden = $('<input></input>');
+	        input_orden.attr('name', 'respuestas_orden[]');
+	        input_orden.attr('value', orden);
+	        input_orden.css('background-color', 'red');
+	        input_opcion.attr('name', 'respuestas_opcion[]');
+	        input_opcion.attr('value', opcion);
+	        contenedor_resp.append(input_orden);
+	        contenedor_resp.append(input_opcion);
+		}
+	}
+
+	$('input[name="orden[]"]').on('change', function(){
+		// validarUnicoChange(this);
+		emptyField(this);
+		validarCaracteresPermitidos('numero', $(this));
+		crearInputRespuestasSeleccion();
+	});
+
+	function validarUnicoChange(obj){
+		// console.log($(obj).val());
+		var valor_change = $(obj).val();
+		var inputs = $('input[name="orden[]"]');
+		var found = 0;
+		for (var i = inputs.length - 1; i >= 0; i--) {
+			if(inputs[i] != obj){
+				if($(inputs[i]).val() == $(obj).val()){
+					found = inputs[i];
+					crearMensajeError($(obj), "Valor repetido, por favor revise y vuelva a ingresar un número");
+					// console.log($(obj).val());
+					break;
+					// for (var j = inputs.length - 1; j >= 0; j--) {
+					// 	if(inputs[j] != obj){
+					// 		if($(inputs[j]).val() == $(obj).val()){
+					// 			crearMensajeError(obj, "Valor repetido, por favor revise y vuelva a ingresar un número");
+					// 		}
+					// 	}
+					// }
+				}
+				else{
+					console.log("eder"+found);
+					eliminarMensajeError(obj, "");
+					eliminarMensajeError(found, "");
+				}
+			}
+		}
+	}
+
+	function validarUnico(){
+		var inputs = $('input[name="orden[]"]');
+		var count = 0;
+		for (var i = inputs.length - 1; i >= 0; i--) {
+			for (var j = inputs.length - 1; j >= 0; j--) {
+				if(inputs[j] != inputs[i] && inputs[j] != ""){
+					if($(inputs[j]).val() == $(inputs[i]).val()){
+						mostrarerror("Por favor, verifique que no existan valores repetidos.");
+						count++;
+						break;
+					}
+				}
+			}
+		}
+		return count;
+	}
+
+	if($('#forma_2').length){
+		$('#forma_2').on('submit', function(event){
+			var input_opcion = $('input[name="orden[]"]');
+			ValidarCamposVacios(input_opcion);
+			for (var i = input_opcion.length - 1; i >= 0; i--) {
+				validarCaracteresPermitidos('numero', $(input_opcion[i]));
+			}
+			if(errorCountMessage() > 0 || validarUnico() >= 1){
+				event.preventDefault();
+			}
+			// event.preventDefault();
+		});
+	}
+
+	// $('.label_double_opcion').dblclick(function(){
+	// 	alert();
+	// });
+
+	$('.text_origen').on('dblclick', function(){
+		var destino = $('.text_destino');
+		var input = $(this).find('input[name="opcion_double[]"]');
+		for (var i = 0; i < destino.length; i++) {
+			var ubicar = $(destino[i]).find('label[class="label_double_opcion"]');
+				if(ubicar.length <= 0){
+					var div = $('<div></div>');
+					div.attr('class', 'div_destino');	
+					$(destino[i])[0].innerHTML = 
+						"<i class='fa fa-times delete_icon' onclick='eliminar_nodo(this)'></i>"+$(this).html();
+					break;
+				}		
+		}
+		$(this)[0].innerHTML = "";
+		crearInputRespuestasDobleClick();
+	});
+
+
+	function eliminar_nodo(obj){
+		var padre = $(obj).parent();
+		var label_test = padre.find('label').text();
+		var input_value = padre.find('input[name="opcion_double[]"]').val();
+		var origen = $('.text_origen');
+		var destino = $('.text_destino');
+		for (var i = 0; i < origen.length; i++) {
+			var ubicar = $(origen[i]).find('label[class="label_double_opcion"]');
+				if(ubicar.length <= 0){
+					$(origen[i]).html("<label class='label_double_opcion'>"+label_test+"</label><input type='hidden' name='opcion_double[]' value='"+input_value+"'>");
+					break;
+				}
+		}
+		for (var i = 0; i < destino.length; i++) {
+			console.log("eder");
+			console.log($(obj).parent()[0]);
+			// if($(obj).parent()[0].length){
+				$(obj).parent()[0].innerHTML = "";
+			// }
+			crearInputRespuestasDobleClick();
+		}
+	}
+
+
+	function crearInputRespuestasDobleClick(){
+		var contenedor_resp = $('#contenedor_resp');
+		contenedor_resp.html("");
+		var opcion;
+		var orden;
+		var respuestas = $('.respuesta');
+		for (var i = 0; i < respuestas.length ; i++) {
+			opcion = 0;
+			orden = 0;
+			if($(respuestas[i]).find('input[name="opcion_double[]"]').length){
+				opcion = $(respuestas[i]).find('input[name="opcion_double[]"]').val();
+				console.log(opcion);
+			}
+
+			if($(respuestas[i]).find('input[name="orden_double[]"]').length){
+				orden = $(respuestas[i]).find('input[name="orden_double[]"]').val();
+			}
+
+			var input_opcion = $('<input></input>');
+	        var input_orden = $('<input></input>');
+	        input_orden.attr('name', 'respuestas_orden[]');
+	        input_orden.attr('value', orden);
+	        input_orden.css('background-color', 'red');
+	        input_opcion.attr('name', 'respuestas_opcion[]');
+	        input_opcion.attr('value', opcion);
+	        contenedor_resp.append(input_orden);
+	        contenedor_resp.append(input_opcion);
+	        contenedor_resp.append("<br>");
+		}
+	}
+
+	if($('#forma_1').length){
+		$('#forma_1').on('submit', function(event){
+			if(!validarllenado()){
+				event.preventDefault();
+				mostrarerror();
+			}
+		})
+	};
+
+	function validarllenado(){
+		var respuestas = $('.respuesta').find(('input[name="opcion_double[]"]'));
+		if(respuestas.length >= 5){
+			for (var i =  0; i < respuestas.length; i++) {
+				if($(respuestas[i]).val() != 0){
+					return true;
+				}
+			}
+			return false;
+		}
+	}
+
+// CASILLAS

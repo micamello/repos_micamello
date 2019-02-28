@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'micamello_desarrollo2');
+define('DBNOMBRE', 'micamell_desarrollo3');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -69,32 +69,35 @@ define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
 define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
+// método de selección
+define('METODO_SELECCION', array('1'=>'Doble click', '2'=>'Escribir número'));
+
 
 
 
 // CORREOS_TEMPLATES
 // REGISTRO MANUAL
-const TAGS_REPLACE_T1 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%");
+const TAGS_REPLACE_T1 = array("|NOMBRE|", "|NOMBRE_USUARIO|", "|URL_BOTON|", "|TEXTO_BOTON|");
 //REGISTRO RED SOCIAL
-const TAGS_REPLACE_T2 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
+const TAGS_REPLACE_T2 = array("|NOMBRE|", "|NOMBRE_USUARIO|", "|URL_BOTON|", "|TEXTO_BOTON|", "|CORREO|", "|PASSWORD|");
 // AVISO CREACION
-const TAGS_REPLACE_T3 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%CORREO%", "%PASSWORD%");
+const TAGS_REPLACE_T3 = array("|NOMBRE|", "|NOMBRE_USUARIO|", "|CORREO|", "|PASSWORD|");
 // RECUPERAR CONTRASEÑA
-const TAGS_REPLACE_T4 = array("%NOMBRE%", "%URL_BOTON%", "%TEXTO_BOTON%");
+const TAGS_REPLACE_T4 = array("|NOMBRE|", "|URL_BOTON|", "|TEXTO_BOTON|");
 // PRE_REGISTRO ACTIVACION CUENTA USUARIO
-const TAGS_REPLACE_T5 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
+const TAGS_REPLACE_T5 = array("|NOMBRE|", "|NOMBRE_USUARIO|", "|URL_BOTON|", "|TEXTO_BOTON|", "|CORREO|", "|PASSWORD|");
 // ERROR CRON PRE_REGISTRO
-const TAGS_REPLACE_T6 = array("%MENSAJE_ERROR%");
+const TAGS_REPLACE_T6 = array("|MENSAJE_ERROR|");
 // RECOMENDACIONES
-const TAGS_REPLACE_T7 = array("%NOMBRE_DEST%", "%NOMBRE_USUARIO_SUGERENCIA%", "%MENSAJE_SUGERENCIA%", "%CORREO%", "%TELEFONO%");
+const TAGS_REPLACE_T7 = array("|NOMBRE_DEST|", "|NOMBRE_USUARIO_SUGERENCIA|", "|MENSAJE_SUGERENCIA|", "|CORREO|", "|TELEFONO|");
 //ERROR_GENERAL
-const TAGS_REPLACE_T8 = array("%MENSAJE_ERROR%", "%CABECERA%", "%LOGO_TIPO_MENSAJE%");
+const TAGS_REPLACE_T8 = array("|MENSAJE_ERROR|", "|CABECERA|", "|LOGO_TIPO_MENSAJE|");
 // AUTOPOSTULACIONES------------ALERTAS_OFERTAS
-const TAGS_REPLACE_T9 = array("%NOMBRE%", "%MENSAJE%", "%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%CONTENIDO%");
+const TAGS_REPLACE_T9 = array("|NOMBRE|", "|MENSAJE|", "|CABECERA|", "|LOGO_TIPO_MENSAJE|", "|CONTENIDO|");
 // CANCELAR_PLANES
-const TAGS_REPLACE_T10 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%NOMBRE%", "%NOMBRE_PLAN%", "%FECHA_PLAN%");
+const TAGS_REPLACE_T10 = array("|CABECERA|", "|LOGO_TIPO_MENSAJE|", "|NOMBRE|", "|NOMBRE_PLAN|", "|FECHA_PLAN|");
 // MENSAJE_GENERAL
-const TAGS_REPLACE_T11 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%MENSAJE%");
+const TAGS_REPLACE_T11 = array("|CABECERA|", "|LOGO_TIPO_MENSAJE|", "|MENSAJE|");
 // print_r(TAGS_REPLACE_T1);
 // CEBECERAS
 define('TIPO', 	array(

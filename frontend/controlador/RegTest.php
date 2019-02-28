@@ -8,6 +8,13 @@ class Controlador_RegTest extends Controlador_Base {
     if(isset($_SESSION['id_pregunta'])){
       unset($_SESSION['id_pregunta']);
     }
+    if(isset($_SESSION['questions'])){
+      unset($_SESSION['questions']);
+    }
+    if(isset($_SESSION['metodo_seleccionado_vista'])){
+      unset($_SESSION['metodo_seleccionado_vista']);
+    }
+
   	$opcion = Utils::getParam('opcion','',$this->data);
   	switch($opcion){
       case 'buscaProvincia':
@@ -48,7 +55,7 @@ class Controlador_RegTest extends Controlador_Base {
         $data = $this->camposRequeridos($campos);
         self::validarTipoDato($data);
         self::guardarDatosUsuarioTest($data);
-        $url = "test";
+        $url = "metodo_seleccion";
         $_SESSION['id_usuario'] = $GLOBALS['db']->insert_id();
         $_SESSION['mostrar_exito'] = "Te has registrado correctamente.";
       }
@@ -62,13 +69,12 @@ class Controlador_RegTest extends Controlador_Base {
   }
 
   public function validarTipoDato($data){
-    // validar letras y espacios
-    if (!preg_match('/^[\p{L} ]+$/u', $data['nombres'])){
-      throw new Exception("El campo solo acepta espacios y números");
+    if (!preg_match('/^[\p{L} ]+$/u', html_entity_decode($data['nombres']))){
+      throw new Exception("El campo solo acepta letras, tildes y espacios");
       
     }
-    if (!preg_match('/^[\p{L} ]+$/u', $data['apellidos'])){
-      throw new Exception("El campo solo acepta espacios y números");
+    if (!preg_match('/^[\p{L} ]+$/u', html_entity_decode($data['apellidos']))){
+      throw new Exception("El campo solo acepta letras, tildes y espacios");
     }
     // validar fecha
     if(Utils::validatFormatoFecha($data['fecha_nacimiento']) == false){

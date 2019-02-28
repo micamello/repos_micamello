@@ -949,6 +949,17 @@ WHERE
     if (empty($rs['id_usuario'])){ return false; } else{ return true; }
   }
 
+  public static function obtieneNombres($idusuario){
+    if (empty($idusuario)){ return false; }
+    $sql = "SELECT nombres, apellidos FROM mfo_usuariom2 WHERE id_usuario = ? LIMIT 1";
+    return $GLOBALS['db']->auto_array($sql,array($idusuario));
+  }
+
+  public static function prueba(){
+    $sql = "SELECT gender, count(*) as number FROM tbl_employee GROUP BY gender";
+    return $GLOBALS['db']->auto_array($sql,array(),true);
+  }
+
   public static function guardarUsuario($data){
     if (empty($data)) {return false;}
     $term_cond = 0;

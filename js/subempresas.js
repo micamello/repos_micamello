@@ -1,7 +1,3 @@
-/*if(document.getElementById('form_editarCuenta')){
-  cambiarEstados();
-}*/
-
 if(document.getElementById('form_editarCuenta')){
   validaRecursos();
 }
@@ -22,38 +18,21 @@ function cambiarEstados(){
   }
 }
 
-/*function colocaError(campo, id, mensaje, btn){
+function calRec(){
 
-  nodo = document.getElementById(campo);
-  nodo.innerHTML = '';
-  var elem1 = document.createElement('P');
-  var t = document.createTextNode(mensaje); 
-  elem1.appendChild(t);
-
-  var elem2 = document.createElement("P");             
-  elem2.classList.add('list-unstyled');
-  elem2.classList.add('msg_error');
-  elem2.appendChild(elem1); 
-
-  elem2.appendChild(elem1); 
-  nodo.appendChild(elem2); 
-
-  $("#"+id).addClass('has-error');
-  $("#"+btn).addClass('disabled');
+  var idplan = $('#plan').val();
+  return calcularRecursos(idplan);
 }
 
-function quitarError(campo,id){
-
-  document.getElementById(campo).innerHTML = '';
-  $("#"+id).removeClass('has-error');
-}*/
-
-function calcularRecursos(){
+function calcularRecursos(idplan){
 
   var error = 0;
   var nuevo_valor = 0;
   var puerto_host = $('#puerto_host').val();
-  var idplan = $('#plan').val();
+
+  if(idplan == ''){
+    var idplan = $('#plan').val();
+  }
 
   if(document.getElementById('name_user') && document.getElementById('name_user').value == ''){
     
@@ -210,7 +189,6 @@ function calcularRecursos(){
               document.getElementById('dI').innerHTML = '';
           }else{
             if(desc_asignar == -1){
-              //$('#seccion_recursos').show();
               document.getElementById('dI').innerHTML = '<label style="color:red" class="parpadea">Número de Descargas Ilimitadas</label>';
               document.getElementById('num_desc').value = '-1';
               $('#seccion_descarga').hide();
@@ -225,7 +203,11 @@ function calcularRecursos(){
           }
         }
 
-        validaCampos();
+        if(document.getElementById('form_editarCuenta')){
+          validaRecursos();
+        }else{
+          validaCampos();
+        }
       },
       error: function (request, status, error) {
           error = 1;
@@ -245,13 +227,26 @@ $('#plan').on('change', function(){
 
     var plan = document.getElementById('plan').value;
 
-    if(calcularRecursos() == 1 || plan != 0){
+    if(calcularRecursos(plan) == 1 || plan != 0){
       quitarError("err_plan","seccion_plan");
     }else{
       $('#seccion_recursos').hide();
       colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_crear");
     }
     validaCampos();
+});
+
+$('#plan1').on('change', function(){
+
+    var plan = document.getElementById('plan1').value;
+
+    if(calcularRecursos(plan) == 1 || plan != 0){
+      quitarError("err_plan","seccion_plan");
+    }else{
+      $('#seccion_recursos').hide();
+      colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_editar");
+    }
+    validaRecursos();
 });
 
 $('#name_user').on('blur', function(){
@@ -506,7 +501,7 @@ function enviarRecursos(){
 }
 
 function validaRecursos(){
-//alert('entro');
+
   if(document.getElementById('num_post')){
     var num_post = document.getElementById('num_post').value;
   }else{
@@ -521,7 +516,7 @@ function validaRecursos(){
 
   var errors = 0; 
 
-  if(document.getElementById('plan') && document.getElementById('plan').value == 0){
+  if(document.getElementById('plan1') && document.getElementById('plan1').value == 0){
     colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_crear");
     errors = 1;
   }
@@ -619,7 +614,7 @@ function validarSelect(err_select,err_group_select){
   var idEmpresaPlan = $('#plan').val();
 
   if(idEmpresaPlan != 0){
-    if(calcularRecursos() == 1){
+    if(calcularRecursos(idEmpresaPlan) == 1){
       error = 1;
     }else{
       quitarError(err_select,err_group_select);

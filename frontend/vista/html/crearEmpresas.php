@@ -94,7 +94,7 @@
                                                     <div class="col-md-offset-3 col-md-4">
                                                       <div id="recursos1" class="form-group">
                                                         <label for="numPost">N&uacute;mero de Ofertas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec1" class="help-block with-errors"></div>
-                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calcularRecursos()" onclick="calcularRecursos()" onkeydown="return validaNumeros(event);" class="form-control" value="1">
+                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calRec()" onclick="calRec()" onkeydown="return validaNumeros(event);" class="form-control" value="1">
                                                       </div>
                                                     </div> 
 
@@ -112,7 +112,7 @@
                                                     <div class="col-md-offset-3 col-md-4">
                                                       <div class="form-group" id="recursos2">
                                                         <label for="numDesc">N&uacute;mero de Descargas</label><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="rec2" class="help-block with-errors"></div>
-                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_desc" id="num_desc" onkeyup="calcularRecursos()" onclick="calcularRecursos()" onkeydown="return validaNumeros(event);" class="form-control" value="1">
+                                                        <input type="number" min="1" pattern="^[0-9]+" name="num_desc" id="num_desc" onkeyup="calRec()" onclick="calRec()" onkeydown="return validaNumeros(event);" class="form-control" value="1">
                                                       </div>
                                                     </div> 
 

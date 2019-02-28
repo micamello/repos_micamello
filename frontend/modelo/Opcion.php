@@ -10,7 +10,7 @@ class Modelo_Opcion{
 						ORDER BY r.orden";
 		return $GLOBALS['db']->auto_array($sql,array($pregunta),true);
 	}
-
+	
 	/*******MINISITIO******/
 	public static function obtieneOpciones($pregunta){
 		if (empty($pregunta)){ return false; }

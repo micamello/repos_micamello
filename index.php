@@ -81,6 +81,9 @@ function obtieneControlador($nombre){
     case 'datosUsuario':
       return 'Aspirante';
     break;
+    case 'minisitio':
+      return 'Minisitio';
+    break;
     case 'regtest':
       return 'RegTest';
     break;
