@@ -22,8 +22,9 @@ class XmlTools {
    * @return int Random number
    */
   public function randomId() {
-    if (function_exists('random_int')) return random_int(0x10000000, 0x7FFFFFFF);
-    return rand(100000, 999999);
+    //if (function_exists('random_int')) return random_int(0x10000000, 0x7FFFFFFF);
+    //return rand(100000, 999999);
+    return rand(1, 100000);
   }
 
 
@@ -42,6 +43,7 @@ class XmlTools {
     // Combine and sort namespaces
     $xmlns = array();
     $attributes = array();
+    
     foreach (array_merge($oldNs, $newNs) as $name) {
       if (strpos($name, 'xmlns:') === 0) {
         $xmlns[] = $name;

@@ -14,7 +14,10 @@ class Controlador_Minisitio extends Controlador_Base
         $colores_facetas = Modelo_Faceta::obtenerColoresLiterales();
         $residenciaActual = Modelo_Provincia::residenciaActual(SUCURSAL_PAISID);
         $competencias = Modelo_Competencia::obtenerCompetenciasGrados();
-        $empresas = Modelo_Usuario::obtieneListadoEmpresas();
+        $empresas[0] = 'NINGUNA';
+        $empresas_bd = Modelo_Usuario::obtieneListadoEmpresas();
+        $empresas_todas = array_merge($empresas,$empresas_bd);
+        //print_r($empresas_todas);
 
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
@@ -53,9 +56,9 @@ class Controlador_Minisitio extends Controlador_Base
                       }
                   }
                   else if($letra == 'I' && $type == 1){
-                      if(isset($empresas[$id])){
+                      if(isset($empresas_todas[$id])){
                         $_SESSION['filtrar_consultados']['I'] = $id; 
-                        $_SESSION['array_datos']['I'] = array('id'=>$id,'nombre'=>$empresas[$id]);
+                        $_SESSION['array_datos']['I'] = array('id'=>$id,'nombre'=>$empresas_todas[$id]);
                       }
                   }
                   else if($letra == 'G' && $type == 1){
@@ -135,6 +138,9 @@ class Controlador_Minisitio extends Controlador_Base
                               }
                           }
 
+                      }else if($letra == 'I'){
+                        $_SESSION['filtrar_consultados'][$letra] = -1;
+                        $_SESSION['array_datos'][$letra] = -1;
                       }else{
                           $_SESSION['filtrar_consultados'][$letra] = 0;
                           $_SESSION['array_datos'][$letra] = 0;
@@ -158,7 +164,7 @@ class Controlador_Minisitio extends Controlador_Base
                   'competencias'=>$competencias,
                   'link'=>$link,
                   'table'=>$table,
-                  'empresas'=>$empresas
+                  'empresas'=>$empresas_todas
               );
               $render = Vista::display('admin/index',$tags); 
               echo $render;
@@ -200,8 +206,8 @@ class Controlador_Minisitio extends Controlador_Base
           break;
           default:
 
-              $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>0);
-              $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>0);
+              $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>-1);
+              $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>-1);
 
               $registros = $this->preparaConsulta($_SESSION['filtrar_consultados']);
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);               
@@ -217,7 +223,7 @@ class Controlador_Minisitio extends Controlador_Base
                   'facetas'=>$facetas,
                   'colores_facetas'=>$colores_facetas,
                   'registros'=>$registros,
-                  'empresas'=>$empresas,
+                  'empresas'=>$empresas_todas,
                   'table'=>$table
               );  
               $render = Vista::display('admin/index',$tags); 
@@ -434,7 +440,13 @@ class Controlador_Minisitio extends Controlador_Base
     
       $datosusuario = $datos['datos'];
       $preguntas = $datos['preguntas'];
-      $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper(utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos'])).'</h3>';
+      $conacentos = array('Á', 'É','Í','Ó','Ú','Ñ');
+      $sinacentos = array('a', 'e','i','o','u','n');
+      $codigo   = array('&aacute;', '&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;');
+      $nombre = strtolower($datosusuario['nombres'].' '.$datosusuario['apellidos']);
+      $nombre_archivo = utf8_encode(str_replace(' ', '_',str_replace($codigo,$sinacentos,$nombre))).'.pdf';
+      $nombre = str_replace($codigo,$conacentos,$nombre);
+      $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper($nombre).'</h3>';
 
       $informe .= '<p align="justify" style="margin-bottom:2px;margin-top:2px;"><hr width=100%><b>FACTORES QUE MIDE CANEA</b> (En este test no existen resultados ni buenos ni malos.)<hr width=100%></p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>C: Conciencia:</b> Es la capacidad para controlar los propios impulsos, la autodisciplina y la organización.</p>
@@ -442,10 +454,9 @@ class Controlador_Minisitio extends Controlador_Base
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>N: Neurotisismo (Ansiedad):</b> Es la reacción a su entorno social o personal, y estabilidad emocional.</p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>E: Extraversión:</b> Es la capacidad de interactuar en sus relaciones sociales, laborales.</p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Apertura a la Experiencia:</b> Es la experiencia, mente abierta, originalidad, imaginación y creatividad.</p>
-      <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
+      <p align="justify"><b>'.utf8_encode(ucwords($datosusuario['nombres'].' '.$datosusuario['apellidos'])).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
       <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p> ';
 
-      $nombre_archivo = utf8_encode(str_replace(' ', '_', $datosusuario['nombres'].'_'.$datosusuario['apellidos'])).'.pdf';
       $cantd_preg = 0;
       $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
 
@@ -464,7 +475,7 @@ class Controlador_Minisitio extends Controlador_Base
           //$informe .= '<p align="justify"><i><u><b>'.utf8_encode($datosfaceta['descripcion']).'</b></u></i>: '.utf8_encode($competenciasXfacetas[$pregunta['id_faceta']]).'</p>';
           ;
         }
-        $parrafo .= ($datosusuario['nombres']).' '.utf8_encode($descriptor['descripcion']).'. ';
+        $parrafo .= ucwords(strtolower(utf8_encode($datosusuario['nombres']))).' '.utf8_encode($descriptor['descripcion']).' ';
        
         if($cantd_preg == $preg_x_faceta){
             
@@ -472,7 +483,7 @@ class Controlador_Minisitio extends Controlador_Base
             $calculo_promedio = round($datos['datosGraficos'][$pregunta['id_faceta']][0]/$datos['datosGraficos'][$pregunta['id_faceta']][1],2);
             $etiquetas_faceta .=  $calculo_promedio.'|';
             $colors .= str_replace("#", "", $datos['colores'][$pregunta['id_faceta']]).'|';
-            $descrip_facetas .= $facetas[$pregunta['id_faceta']].'|';
+            $descrip_facetas .= $facetas[$pregunta['id_faceta']].': '.$calculo_promedio.'|';
             $descrip_titulo .= substr($facetas[$pregunta['id_faceta']],0,1);
 
             $informe .= '<p align="justify">'.substr($parrafo, 0,-2).'</p>';
@@ -496,13 +507,15 @@ class Controlador_Minisitio extends Controlador_Base
     $piepagina = "imagenes/pdf/footer.png";
     $mpdf=new mPDF('','A4');
 
-    $inidoc = "<!DOCTYPE html><html><link rel='stylesheet' href='css/informemic.css'>";
+    $inidoc = "<!DOCTYPE html><html><link rel='stylesheet' href='css/informemic.css'>
+                <body><main>";
+    $enddoc = "</main></body></body></html>";
+    $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="17%"></header>'); 
     $mpdf->WriteHTML($inidoc);
-    $mpdf->setHTMLHeader('<body><header><img src="'.$cabecera.'" width="17%"></header>');     
+    $mpdf->WriteHTML($enddoc);   
+    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
     $mpdf->WriteHTML($html);
-    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer></body></html>');
     $mpdf->Output($nombre_archivo, 'D');
-    
   }
 }
 ?>
