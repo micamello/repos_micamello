@@ -103,9 +103,11 @@ class Controlador_Perfil extends Controlador_Base
                     'nivelIdiomas'              => $nivelIdiomas
                 );
                 $tags["template_css"][] = "bootstrap-multiselect";
+                $tags["template_css"][] = "DateTimePicker";
                 $tags["template_js"][] = "bootstrap-multiselect";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "ruc_jquery_validator";
+                $tags["template_js"][] = "DateTimePicker";
                 $tags["template_js"][] = "editarPerfil";
                 $tags["show_banner"] = 1;
                 if(!empty($_SESSION['mostrar_error'])){

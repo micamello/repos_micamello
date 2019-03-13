@@ -3,6 +3,20 @@ if(document.getElementById('form_editarPerfil')){
     validarFormulario();
     ocultarCampos();
     mostrarUni();
+
+    if(navegador() != 'MSIE'){
+      $('#fecha').DateTimePicker({
+        dateFormat: "yyyy-MM-dd",
+        shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+        shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+        fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+        titleContentDate: "Configurar fecha",
+        titleContentTime: "Configurar tiempo",
+        titleContentDateTime: "Configurar Fecha & Tiempo",
+        setButtonContent: "Listo",
+        clearButtonContent: "Limpiar"
+      });
+    }
 }
 
 if (document.getElementById("area_select"))
@@ -623,8 +637,10 @@ function ocultarCampos(){
 function enviarFormulario(){
 
     var estado = validarFormulario();
-    if(estado == 1){
+    if(estado == ''){
         document.form_editarPerfil.submit();
+    }else{
+      //mostrarERRORES
     }
 }
 
@@ -658,15 +674,15 @@ function validarFormulario(){
     if(tipo_usuario == 1){
 
         var discapacidad = document.getElementById('discapacidad').selectedIndex;
-        var experiencia = document.getElementById('experiencia').selectedIndex;
-        var estado_civil = document.getElementById('estado_civil').selectedIndex;
+        /*var experiencia = document.getElementById('experiencia').selectedIndex;
+        var estado_civil = document.getElementById('estado_civil').selectedIndex;*/
         var genero = document.getElementById('genero').selectedIndex;
         var tiene_trabajo = document.getElementById('tiene_trabajo').selectedIndex;
         var residencia = document.getElementById('residencia').selectedIndex;
         var viajar = document.getElementById('viajar').selectedIndex;
         var licencia = document.getElementById('licencia').selectedIndex;
         var escolaridad = document.getElementById('escolaridad').selectedIndex;
-        var estatus = document.getElementById('estatus').selectedIndex;
+        //var estatus = document.getElementById('estatus').selectedIndex;
         var area_select = document.getElementById('area_select');
         var nivel_interes = document.getElementById('nivel_interes');
         var select_array_idioma = document.getElementById('select_array_idioma');
@@ -704,10 +720,10 @@ function validarFormulario(){
             colocaError("err_dis", "seccion_dis",err_list,"boton");
             error = 1;
         }else{
-            quitarError("err_exp", "seccion_exp");
+            quitarError("err_dis", "seccion_dis");
         }
 
-        if(experiencia == null || experiencia == 0){
+        /*if(experiencia == null || experiencia == 0){
 
             colocaError("err_exp", "seccion_exp",err_list,"boton");
             error = 1;
@@ -721,7 +737,7 @@ function validarFormulario(){
             error = 1;
         }else{
             quitarError("err_civil", "seccion_civil");
-        }
+        }*/
 
         if(genero == null || genero == 0){
 
@@ -772,13 +788,13 @@ function validarFormulario(){
             quitarError("err_esc", "seccion_esc");
         }
 
-        if(estatus == null || estatus == 0){
+        /*if(estatus == null || estatus == 0){
 
             colocaError("err_est", "seccion_est",err_list,"boton");
             error = 1;
         }else{
             quitarError("err_est", "seccion_est");
-        }
+        }*/
 
         if($(".depende").is(":visible")){
 

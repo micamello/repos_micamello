@@ -1,3 +1,13 @@
+function navegador(){
+  var agente = window.navigator.userAgent;
+  var navegadores = ["Chrome", "Firefox", "Safari", "Opera", "MSIE", "Trident", "Edge"];
+  for(var i in navegadores){
+      if(agente.indexOf( navegadores[i]) != -1 ){
+          return navegadores[i];
+      }
+  }
+}
+
 function colocaError(campo, id, mensaje,btn){
 
   nodo = document.getElementById(campo);

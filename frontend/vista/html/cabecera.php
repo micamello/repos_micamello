@@ -147,6 +147,19 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
 } ?>
 
 
+<?php 
+  $navegador = Utils::detectarNavegador();
+  $_SESSION['mfo_datos']['navegador'] = $navegador;
+  if($navegador == 'MSIE'){ ?>
+  <div align="center" id="mensaje" style="height: 150px;background: #c36262;"><br>
+    <h3>Usted esta usando internet explorer 8 o inferior</h3>
+    <p>Esta es una versi&oacute;n antigua del navegador, y puede afectar negativamente a su seguridad y su experiencia de navegaci&oacute;n.</p>
+    <p>Por favor, actualice a la version actual de IE o cambie de navegador ahora.</p>
+    <p><b><a href="https://www.microsoft.com/es-es/download/internet-explorer.aspx">Actualizar IE</a></b></p>
+  </div>
+<?php } ?>
+
+
   <nav class="navbar navbar-default navbar-fixed-top">
  <!--   <button id="buttonP">Dar Permisos</button>  
 <button id="buttonN">Lanzar notificación</button>-->

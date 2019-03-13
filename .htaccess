@@ -8,21 +8,21 @@
 #ErrorDocument 401 /repos_micamello/error/loginrequerido.php
 #ErrorDocument 403 /repos_micamello/error/accesodenegado.php
 
-<IfModule mod_headers.c> 
-  <FilesMatch "\\.(ico|css|png|gif|swf)$"> 
-    Header set Cache-Control "max-age=2628000, public" 
-  </FilesMatch> 
-  <FilesMatch "\\.(x?html?|php)$"> 
-    Header set Cache-Control "max-age=172800, public" 
-  </FilesMatch> 
-</IfModule>
+#<IfModule mod_headers.c> 
+#  <FilesMatch "\\.(ico|css|png|gif|swf)$"> 
+#    Header set Cache-Control "max-age=2628000, public" 
+#  </FilesMatch> 
+#  <FilesMatch "\\.(x?html?|php)$"> 
+#    Header set Cache-Control "max-age=172800, public" 
+#  </FilesMatch> 
+#</IfModule>
 
-RewriteEngine on
-RewriteCond %{HTTP_REFERER} !^$
-RewriteCond %{HTTP_REFERER} !^http://(www\.)?micamello.com.ec/.*$ [NC]
-RewriteCond %{HTTP_REFERER} !^https://(www\.)?micamello.com.ec/.*$ [NC]
-RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
-RewriteRule \.(gif|jpg|jpeg|png|js|css)$ - [F]
+#RewriteEngine on
+#RewriteCond %{HTTP_REFERER} !^$
+#RewriteCond %{HTTP_REFERER} !^http://(www\.)?micamello.com.ec/.*$ [NC]
+#RewriteCond %{HTTP_REFERER} !^https://(www\.)?micamello.com.ec/.*$ [NC]
+#RewriteCond %{HTTP_REFERER} !^http://localhost/.*$ [NC]
+#RewriteRule \.(gif|jpg|jpeg|png|js|css)$ - [F]
 
 RewriteEngine On
 RewriteCond %{HTTP_HOST} !^localhost
