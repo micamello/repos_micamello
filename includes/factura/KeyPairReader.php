@@ -1,12 +1,16 @@
 <?php
 //namespace josemmo\Facturae\Common;
+
 /**
  * Gets both public and private keys from a PKCS#12 certificate store or a PEM
  * file (X.509 certificate).
  */
 class KeyPairReader {
+
   private $publicKey;
   private $privateKey;
+
+
   /**
    * Get public key
    * @return string Public Key
@@ -14,6 +18,8 @@ class KeyPairReader {
   public function getPublicKey() {
     return $this->publicKey;
   }
+
+
   /**
    * Get private key
    * @return string Private Key
@@ -21,6 +27,8 @@ class KeyPairReader {
   public function getPrivateKey() {
     return $this->privateKey;
   }
+
+
   /**
    * KeyPairReader constructor
    *
@@ -32,6 +40,8 @@ class KeyPairReader {
     if (is_null($privatePath)) $this->readPkcs12($publicPath, $passphrase);
     $this->readX509($publicPath, $privatePath, $passphrase);
   }
+
+
   /**
    * Read a X.509 certificate and PEM encoded private key
    *
@@ -40,13 +50,15 @@ class KeyPairReader {
    * @param string $passphrase  Private key passphrase
    */
   private function readX509($publicPath, $privatePath, $passphrase) {
-    if (!is_file($publicPath) || !is_file($privatePath)) return;    
+    if (!is_file($publicPath) || !is_file($privatePath)) return;
     $this->publicKey = openssl_x509_read(file_get_contents($publicPath));
     $this->privateKey = openssl_pkey_get_private(
       file_get_contents($privatePath),
       $passphrase
-    );    
+    );
   }
+
+
   /**
    * Read a PKCS#12 Certificate Store
    *
@@ -55,13 +67,10 @@ class KeyPairReader {
    */
   private function readPkcs12($certPath, $passphrase) {
     if (!is_file($certPath)) return false;
-    if (openssl_pkcs12_read(file_get_contents($certPath), $certs, $passphrase)) {      
-      //FFN
+    if (openssl_pkcs12_read(file_get_contents($certPath), $certs, $passphrase)) {
       $this->publicKey = openssl_x509_read($certs['cert']);
-      //$this->publicKey = openssl_x509_read($certs["extracerts"][0]);      
       $this->privateKey = openssl_pkey_get_private($certs['pkey']);
-      echo "paso a";
     }
   }
+
 }
-?>

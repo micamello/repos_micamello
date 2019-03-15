@@ -1,6 +1,6 @@
 <?php
 require_once '../constantes.php';
-//require_once '../init.php';
+require_once '../init.php';
 require_once '../frontend/Proceso/Facturacion.php';
 
 $obj_facturacion = new Proceso_Facturacion();
@@ -15,8 +15,6 @@ $obj_facturacion->codigoPrincipal = '2';
 $obj_facturacion->descripdetalle = 'Camellito Efectivo';
 
 $xml = $obj_facturacion->generarFactura();
-//$obj_facturacion->sign(RUTA_INCLUDES."facturae/widman_ivan_hidrovo_benalcazar.p12", null, "Amor2018";
-//$xml_final = $obj_facturacion->injectSignature($xml);
 
 /*$doc = new DOMDocument();
 $doc->formatOutput = true;
@@ -24,18 +22,18 @@ $return = $doc->loadXML($xml_final);
 
 $doc->save('local.xml',LIBXML_NOEMPTYTAG);*/
 
-$fp = fopen("local.xml", "r");
+/*$fp = fopen("local.xml", "r");
 $contenido = '';
 while (!feof($fp)){
     $linea = fgets($fp);
     $contenido .= $linea;
 }
-fclose($fp);
+fclose($fp);*/
 
-//echo "<textarea cols=150 rows=50>".$xml."</textarea>";
+echo "<textarea cols=150 rows=50>".$xml."</textarea>";
 
 /*$wsdl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl'; 
-$params = Array("xml" => $contenido);
+$params = Array("xml" => $xml);
 $options = Array(
     "uri"=> $wsdl,
     "trace" => true,
@@ -53,7 +51,7 @@ $options = Array(
     "encoding" => "UTF-8",
 );
 $soap = new SoapClient($wsdl, $options);
-$params = Array("claveAccesoComprobante" => '2501201901099306446700110010010000000261234567813');
+$params = Array("claveAccesoComprobante" => '1203201901099306446700110010010000000441234567817');
 $result = $soap->autorizacionComprobante($params); 
 echo "<br>";
 print_r($result);*/

@@ -979,7 +979,7 @@ WHERE
   }
 
   public static function obtieneListadoEmpresas(){
-    $sql = "SELECT * FROM mfo_empresam2";
+    $sql = "SELECT * FROM mfo_empresam2 ORDER BY nombre";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
     $datos = array();

@@ -352,11 +352,9 @@ function validarCaracteresPermitidos(tipo, contenido){
 	tipo_validacion.push(["nombre_apellido", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarNombreApellido(contenido[0].value)]]);
 	tipo_validacion.push(["correo", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarCorreo(contenido[0].value)]]);
 	tipo_validacion.push(["fecha", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarFecha(contenido[0].value)]]);
-<<<<<<< HEAD
 	tipo_validacion.push(["dinero", ['El formato ingresado no es válido', validarFormatoDinero(contenido[0].value)]]);
 	tipo_validacion.push(["numero", ['Solo numeros entre 1 y 5', validarNumero(contenido[0].value)]]);
-=======
->>>>>>> desarrollo
+
 	// console.log(tipo_validacion);
 	if (tipo == tipo_validacion[0][0] && (contenido[0].value != null && contenido[0].value != "")) {
 		if(!(tipo_validacion[0][1][1])){
@@ -408,7 +406,6 @@ function validarFecha(fecha){
 	return /^(19[5-9][0-9]|20[0-4][0-9]|2050)[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$/.test(fecha);
 }
 
-<<<<<<< HEAD
 function validarNumero(numero){
 	return /^[1-5]{1,1}$/.test(numero);
 }
@@ -456,8 +453,7 @@ function enviarPclave(ruta){
 function validarFormatoDinero(salario){
 	return /^[0-9]*\.[0-9][0-9]$/.test(salario);
 }
-=======
->>>>>>> desarrollo
+
 
 $("#ocupaciones").on("keyup", function() {
 	var value = $(this).val().toLowerCase();
@@ -473,7 +469,6 @@ $("#profesiones").on("keyup", function() {
 	});
 });
 
-<<<<<<< HEAD
 if($('.caja_destino').length){
 	$('.caja_destino').droppable(
     {
@@ -721,7 +716,6 @@ if($('#pre').length){
 		crearInputRespuestasDobleClick();
 	});
 
-
 	function eliminar_nodo(obj){
 		var padre = $(obj).parent();
 		var label_test = padre.find('label').text();
@@ -797,32 +791,3 @@ if($('#pre').length){
 			return false;
 		}
 	}
-
-// CASILLAS
-=======
-$("#nacionalidades").on("keyup", function() {
-	var value = $(this).val().toLowerCase();
-	$("#menu1 li").filter(function() {
-	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	});
-});
-
-$("#residencia").on("keyup", function() {
-	var value = $(this).val().toLowerCase();
-	$("#menu2 li").filter(function() {
-	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	});
-});
-
-$("#competencias").on("keyup", function() {
-	var value = $(this).val().toLowerCase();
-	$("#menu3 li").filter(function() {
-	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-	});
-});
-
-function enviarPclave(ruta){
-
-	window.location = ruta;
-}
->>>>>>> desarrollo
