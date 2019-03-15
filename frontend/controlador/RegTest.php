@@ -8,15 +8,8 @@ class Controlador_RegTest extends Controlador_Base {
     if(isset($_SESSION['id_pregunta'])){
       unset($_SESSION['id_pregunta']);
     }
-    if(isset($_SESSION['questions'])){
-      unset($_SESSION['questions']);
-    }
-    if(isset($_SESSION['metodo_seleccionado_vista'])){
-      unset($_SESSION['metodo_seleccionado_vista']);
-    }
-
-  	$opcion = Utils::getParam('opcion','',$this->data);
-  	switch($opcion){
+    $opcion = Utils::getParam('opcion','',$this->data);
+    switch($opcion){
       case 'buscaProvincia':
         $id_pais = Utils::getParam('id_pais', '', $this->data);
         $provincias = Modelo_Provincia::obtieneListadoAsociativo($id_pais);
@@ -37,11 +30,11 @@ class Controlador_RegTest extends Controlador_Base {
         $this->guardarDatosTest();
       break;
       default:
-      	$pais = Modelo_Pais::obtieneListado();
-      	$provincia = Modelo_Provincia::obtieneListado();
+        $pais = Modelo_Pais::obtieneListado();
+        $provincia = Modelo_Provincia::obtieneListado();
         $escolaridad = Modelo_Escolaridad::obtieneListado();
         $profesion = Modelo_ProfesionTest::obtenerListado();
-        $ocupacion = Modelo_OcupacionTest::obtenerListado();
+        $ocupacion = Modelo_Ocupacion::obtenerListado();
         Vista::render('registrotest',array('pais'=>$pais, 'provincia'=>$provincia, 'escolaridad'=>$escolaridad, 'profesion'=>$profesion, 'ocupacion'=>$ocupacion), '', '');
       break;
     }    
@@ -55,12 +48,12 @@ class Controlador_RegTest extends Controlador_Base {
         $data = $this->camposRequeridos($campos);
         self::validarTipoDato($data);
         self::guardarDatosUsuarioTest($data);
-        $url = "metodo_seleccion";
+        $url = "test";
         $_SESSION['id_usuario'] = $GLOBALS['db']->insert_id();
         $_SESSION['mostrar_exito'] = "Te has registrado correctamente.";
       }
       catch( Exception $e ){
-        $url = "registro_test";
+        $url = "registroM";
         $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
@@ -69,12 +62,13 @@ class Controlador_RegTest extends Controlador_Base {
   }
 
   public function validarTipoDato($data){
+    // validar letras y espacios
     if (!preg_match('/^[\p{L} ]+$/u', html_entity_decode($data['nombres']))){
-      throw new Exception("El campo solo acepta letras, tildes y espacios");
+      throw new Exception("El campo solo acepta espacios y números");
       
     }
     if (!preg_match('/^[\p{L} ]+$/u', html_entity_decode($data['apellidos']))){
-      throw new Exception("El campo solo acepta letras, tildes y espacios");
+      throw new Exception("El campo solo acepta espacios y números");
     }
     // validar fecha
     if(Utils::validatFormatoFecha($data['fecha_nacimiento']) == false){

@@ -1,7 +1,3 @@
-<?php 
-require_once 'C:/wamp64/www/repos_micamello/constantes.php';
-require_once FRONTEND_RUTA.'init.php';
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +9,11 @@ require_once FRONTEND_RUTA.'init.php';
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/minisitio.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
 
 </head>
-<body class="window_class">
+<body class="window_class" style="padding-top:10px;">
   <?php if(!isset($show_banner) && !isset($breadcrumbs)){ ?>
   <?php } ?>
     <!--mensajes de error y exito-->
@@ -31,7 +28,6 @@ require_once FRONTEND_RUTA.'init.php';
         <strong><?php echo $sess_suc_msg;?></strong>
       </div>  
     <?php } ?>
-  <br>
   
   <div class="col-md-3">
     <div class="card shadow-lg rounded text-center">
@@ -53,26 +49,31 @@ require_once FRONTEND_RUTA.'init.php';
                 foreach ($residenciaActual as $key => $v) {
                   $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/R'.$key.'/';
                   echo '<li><input type="checkbox" name="list" id="prov_'.$key.'">
-                        <label style="content:none; cursor:pointer" for="prov_'.$key.'"><a href="'.$ruta.'1/">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</a></label>
-                        <ul id="menu21" class="interior">';
-                  foreach ($v['cantones'] as $c => $val) {
-
-                    $ruta2 = PUERTO.'://'.HOST.'/filtrarEntrevistados/R'.$key.'_'.$c.'/';
-                    echo '<li><input type="checkbox" name="list" id="ciudad_'.$key.'_'.$c.'">
-                        <label style="content:none; cursor:pointer" for="ciudad_'.$key.'_'.$c.'"><a href="'.$ruta2.'1/">'. utf8_encode(ucfirst(strtolower($val['nombre']))).'</a></label>';
-                    echo '<ul id="menu22" class="interior">';
-                    foreach ($val['parroquias'] as $k => $value) {
-                      
-                      $ruta3 = PUERTO.'://'.HOST.'/filtrarEntrevistados/R'.$key.'_'.$c.'_'.$k.'/';
-                      echo '<li><a href="'.$ruta3.'1/">'.utf8_encode(ucfirst(strtolower($value))).'</a></li>';
-                    }
-                    echo '</ul></li>';
-                  }
-                  echo '</ul></li>';  
+                        <a href="'.$ruta.'1/">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</a>';                  
+                  echo '</li>';  
                 }
                 echo '</ul>';
               }else{
                 echo 'No hay resultados';
+              }
+            ?>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default shadow-panel1">
+        <div class="panel-heading">
+          <span><i class="fa fa-industry"></i> Empresas</span>
+        </div>
+        <div class="panel-body">
+          <div class="filtros">
+            <?php 
+              if (!empty($empresas)) {
+                echo '<ul style="padding-left: 0px;">';
+                foreach ($empresas as $key => $v) {
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/I'.$key.'/';
+                  echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="empresas" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+                }
+                echo '</ul>';
               }
             ?>
           </div>
@@ -107,9 +108,8 @@ require_once FRONTEND_RUTA.'init.php';
                 echo '<input class="form-control" id="competencias" type="text" placeholder="Buscar..">';
                 echo '<ul id="menu3">';
                 foreach ($competencias as $key => $v) {
-                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/H'.$key.'/';
                   echo '<li><input type="checkbox" name="list" id="comp_'.$key.'">
-                      <label style="content:none; cursor:pointer" for="comp_'.$key.'"><a href="'.$ruta.'1/">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</a></label>
+                      <label style="content:none; cursor:pointer; color: #337ab7" for="comp_'.$key.'">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</label>
                       <ul id="menu31" class="interior">';
                   foreach ($v['grados'] as $p => $val) {
 
@@ -179,7 +179,7 @@ require_once FRONTEND_RUTA.'init.php';
       </div>
       <div class="panel panel-default shadow-panel1">
         <div class="panel-heading">
-          <span><i class="fa fa-transgender"></i> Genero</span>
+          <span><i class="fa fa-transgender"></i> G&eacute;nero</span>
         </div>
         <div class="panel-body">
           <div class="filtros">
@@ -210,24 +210,7 @@ require_once FRONTEND_RUTA.'init.php';
             ?>
           </div>
         </div>
-      </div>
-      <div class="panel panel-default shadow-panel1">
-        <div class="panel-heading">
-          <span><i class="fa fa-usd"></i> Aspiraci&oacute;n Salarial</span>
-        </div>
-        <div class="panel-body">
-          <div class="filtros">
-          <?php
-            echo '<ul style="padding-left: 0px;">';
-            foreach (SALARIO as $key => $v) {
-              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/ A'.$key.'/';
-              echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="aspiracion" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-            }
-            echo '</ul>';
-          ?>
-          </div>
-        </div>
-      </div>
+      </div>      
       <div class="panel panel-default shadow-panel1">
         <div class="panel-heading">
           <span><i class="fa fa-briefcase"></i> Profesi&oacute;n</span>
@@ -254,7 +237,6 @@ require_once FRONTEND_RUTA.'init.php';
         <div class="panel-body">
           <div class="filtros">
             <input class="form-control" id="ocupaciones" type="text" placeholder="Buscar..">
-
             <?php
               if (!empty($ocupacion)) {
                 echo '<ul class="list-group" id="listaOcupaciones">';
@@ -272,9 +254,8 @@ require_once FRONTEND_RUTA.'init.php';
   <div class="col-md-9">
     <div id="links"><?php echo $link; ?></div>
   </div>
-  <div class="col-md-9">
-    <br>
-    <a href="<?php echo PUERTO."://".HOST;?>/generarExcel/" class="col-md-1 offset-md-11 btn btn-success"><i class="fa fa-download"></i> Excel</a>
+  <div class="col-md-9">    
+    <a href="<?php echo PUERTO."://".HOST;?>/admin/generarExcel/" class="col-md-1 offset-md-11 btn btn-success"><i class="fa fa-download"></i> Excel</a>
     <br><br>
     <div class="card shadow-lg rounded text-center">
       <div class="card-header bg-info text-white">
@@ -286,10 +267,12 @@ require_once FRONTEND_RUTA.'init.php';
       </div>
     </div>
   </div>
-
-
+  
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
-<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script><script src="<?php echo PUERTO."://".HOST;?>/js/minisitio.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script> 
+<script src="<?php echo PUERTO."://".HOST;?>/js/minisitio.js"></script>
+
 
 </body>
 </html>

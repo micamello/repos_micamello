@@ -51,7 +51,7 @@ class Controlador_Cuestionariom2 extends Controlador_Base{
           self::renderscreen($pregunta, $_SESSION['metodo_seleccionado_vista']);   
         }
         else{
-          Utils::doRedirect(PUERTO.'://'.HOST.'/registro_test');
+          Utils::doRedirect(PUERTO.'://'.HOST.'/registroM');
         }
       break;
     }         
@@ -122,7 +122,7 @@ class Controlador_Cuestionariom2 extends Controlador_Base{
       $_SESSION['mostrar_exito'] = "Gracias por tu colaboración.";
       unset($_SESSION['id_usuario']);
       unset($_SESSION['id_pregunta']);
-      Utils::doRedirect(PUERTO.'://'.HOST.'/registro_test');
+      Utils::doRedirect(PUERTO.'://'.HOST.'/registroM');
     }
     //funcion que obtiene las opciones de una pregunta especifica    
     $opciones = Modelo_Opcion::obtieneOpciones($nropregunta);

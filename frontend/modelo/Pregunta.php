@@ -5,7 +5,7 @@ class Modelo_Pregunta{
   const INVERSA = 2;
   
   public static function obtieneNroPreguntasxTest($test){
-  	if (empty($test)){ return false; }
+    if (empty($test)){ return false; }
     $sql = "SELECT COUNT(1) AS nro FROM mfo_pregunta WHERE id_cuestionario = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($test));
     return ((empty($rs["nro"])) ? 0 : $rs["nro"]);
@@ -50,9 +50,8 @@ class Modelo_Pregunta{
 
     $sql = "SELECT COUNT(id_pregunta) AS cantd_preguntas
             FROM mfo_preguntam2 p
-            INNER JOIN mfo_competenciam2 c on c.id_competencia = p.id_competencia
-            INNER JOIN mfo_rasgom2 r on r.id_rasgo = c.id_rasgo
-            GROUP BY r.id_faceta LIMIT 1";
+            INNER JOIN mfo_competenciam2 c on c.id_competencia = p.id_competencia            
+            GROUP BY c.id_faceta LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($sql),false);
   }
 }  

@@ -1,3 +1,19 @@
+if(document.querySelector( "form" )){
+	document.querySelector( "form" )
+	.addEventListener( "invalid", function( event ) {
+	    event.preventDefault();
+	}, true );
+}
+
+$(document).ready(function() {
+    $('#cuestionarios').DataTable({
+        "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        }
+    } );
+  
+} );
+
 // DEPENDENCIAS
 var puerto_host = $('#puerto_host').val();
 
@@ -10,7 +26,7 @@ $('#pais').on('change', function(){
 	            dataType:'json',
 	            success:function(data){
 	                $('#provincia').html('<option value="">Selecciona una provincia</option>');
-	                // console.log(data);
+	                console.log(data);
 	                $.each(data, function(index, value) {
 	                    $('#provincia').append("<option value='"+index+"'>"+value+"</option>");
 
@@ -43,7 +59,7 @@ $('#provincia').on('change', function(){
 	            dataType:'json',
 	            success:function(data){
 	                $('#cantonnac').html('<option value="">Selecciona un cantón</option>');
-	                // console.log(data);
+	                console.log(data);
 	                $.each(data, function(index, value) {
 	                    $('#cantonnac').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
 	                });
@@ -104,17 +120,17 @@ $('#canton_res').on('change', function(){
 var mensaje_error = "";
 $('#nombres').on('blur', function(){
 	emptyField(this);
-	validarCaracteresPermitidos('nombre_apellido', $(this));
+	// validarCaracteresPermitidos('nombre_apellido', $(this));
 });
 
 $('#apellidos').on('blur', function(){
 	emptyField(this);
-	validarCaracteresPermitidos('nombre_apellido', $(this));
+	// validarCaracteresPermitidos('nombre_apellido', $(this));
 });
 
 $('#fecha_nacimiento').on('blur', function(){
 	emptyField(this);
-	validarCaracteresPermitidos('fecha', $(this));
+	// validarCaracteresPermitidos('fecha', $(this));
 });
 
 $('#genero').on('change', function(){
@@ -174,12 +190,12 @@ $('#parroquia_res').on('change', function(){
 
 $('#correo').on('blur', function(){
 	emptyField(this);
-	validarCaracteresPermitidos('correo', $(this));
+	// validarCaracteresPermitidos('correo', $(this));
 });
 
 $('#aspiracion_salarial').on('blur', function(){
 	emptyField(this);
-	validarCaracteresPermitidos('dinero', $(this));
+	// validarCaracteresPermitidos('nombre_apellido', $(this));
 });
 
 $('#terminos_condiciones').on('change', function(){
@@ -275,7 +291,7 @@ function ValidarCamposVacios(campos){
 
 function errorCountMessage(){
 	var number = $('.error_field').length;
-	// console.log(number);
+	console.log(number);
 	return number;
 }
  // || $(obj)[0].checked != 1
@@ -310,18 +326,18 @@ function emptyField(obj){
 }
 
 function crearMensajeError(obj, mensaje){
-	$(obj).siblings('div').html(mensaje);
+	console.log(mensaje);
+	$(obj).siblings('div').html(mensaje_error);
 	$(obj).siblings('div').addClass('error_field');
 }
 
 function eliminarMensajeError(obj, mensaje){
-	$(obj).siblings('div').html(mensaje);
+	$(obj).siblings('div').html(mensaje_error);
 	$(obj).siblings('div').removeClass('error_field');
 }
 //Validaciones
 $('#form_registrotest').on('submit', function(event){
 	ValidarCamposVacios(camposFormulario());
-	permitidos();
 	if(errorCountMessage() > 0){
 		event.preventDefault();
 	}
@@ -331,43 +347,40 @@ $('#form_registrotest').on('submit', function(event){
 });
 
 function validarCaracteresPermitidos(tipo, contenido){
+	// console.log(contenido);
 	var tipo_validacion = [];
 	tipo_validacion.push(["nombre_apellido", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarNombreApellido(contenido[0].value)]]);
 	tipo_validacion.push(["correo", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarCorreo(contenido[0].value)]]);
 	tipo_validacion.push(["fecha", ['El ' +contenido.siblings('label').text()+ ' ingresado no es válido', validarFecha(contenido[0].value)]]);
+<<<<<<< HEAD
 	tipo_validacion.push(["dinero", ['El formato ingresado no es válido', validarFormatoDinero(contenido[0].value)]]);
 	tipo_validacion.push(["numero", ['Solo numeros entre 1 y 5', validarNumero(contenido[0].value)]]);
+=======
+>>>>>>> desarrollo
 	// console.log(tipo_validacion);
 	if (tipo == tipo_validacion[0][0] && (contenido[0].value != null && contenido[0].value != "")) {
 		if(!(tipo_validacion[0][1][1])){
-			crearMensajeError(contenido, tipo_validacion[0][1][0]);
+			console.log("----------------");
+			crearMensajeError(contenido[0], tipo_validacion[0][1][0]);
 		}
 		else{
-			eliminarMensajeError(contenido);
+			eliminarMensajeError(contenido[0]);
 		}
 	}
 	if (tipo == tipo_validacion[1][0] && (contenido[0].value != null && contenido[0].value != "")) {
 		if(!(tipo_validacion[1][1][1])){
-			crearMensajeError(contenido, tipo_validacion[1][1][0]);
+			crearMensajeError(contenido[0], tipo_validacion[1][1][0]);
 		}
 		else{
-			eliminarMensajeError(contenido);
+			eliminarMensajeError(contenido[0]);
 		}
 	}
 	if (tipo == tipo_validacion[2][0] && (contenido[0].value != null && contenido[0].value != "")) {
 		if(!(tipo_validacion[2][1][1])){
-			crearMensajeError(contenido, tipo_validacion[2][1][0]);
+			crearMensajeError(contenido[0], tipo_validacion[2][1][0]);
 		}
 		else{
-			eliminarMensajeError(contenido);
-		}
-	}
-	if (tipo == tipo_validacion[3][0] && (contenido[0].value != null && contenido[0].value != "")) {
-		if(!(tipo_validacion[3][1][1])){
-			crearMensajeError(contenido, tipo_validacion[3][1][0]);
-		}
-		else{
-			eliminarMensajeError(contenido);
+			eliminarMensajeError(contenido[0]);
 		}
 	}
 	if (tipo == tipo_validacion[4][0] && (contenido[0].value != null && contenido[0].value != "")) {
@@ -380,19 +393,13 @@ function validarCaracteresPermitidos(tipo, contenido){
 	}
 };
 
-function permitidos(){
-	validarCaracteresPermitidos('nombre_apellido', $('#nombres'));
-	validarCaracteresPermitidos('nombre_apellido', $('#apellidos'));
-	validarCaracteresPermitidos('fecha', $('#fecha_nacimiento'));
-	validarCaracteresPermitidos('correo', $('#correo'));
-	validarCaracteresPermitidos('dinero', $('#aspiracion_salarial'));
-}
-
 function validarCorreo(correo) { 
+	// console.log(correo);
   return /^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(correo);
 }
 
 function validarNombreApellido(nombre){
+	// console.log(nombre);
 	return /^[A-Za-zÁÉÍÓÚñáéíóúÑ ]+?$/.test(nombre);
 }
 
@@ -401,6 +408,7 @@ function validarFecha(fecha){
 	return /^(19[5-9][0-9]|20[0-4][0-9]|2050)[-/](0?[1-9]|1[0-2])[-/](0?[1-9]|[12][0-9]|3[01])$/.test(fecha);
 }
 
+<<<<<<< HEAD
 function validarNumero(numero){
 	return /^[1-5]{1,1}$/.test(numero);
 }
@@ -448,43 +456,24 @@ function enviarPclave(ruta){
 function validarFormatoDinero(salario){
 	return /^[0-9]*\.[0-9][0-9]$/.test(salario);
 }
+=======
+>>>>>>> desarrollo
 
-// *******************************RESPUESTAS************************************
-if($('.list-group1').length){
-	$('.list-group1').draggable({
-	    revert: 'invalid',
-	    stop: function(){
-	        $(this).draggable('option','revert','invalid');
-	    }
-	  });
-}
+$("#ocupaciones").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#listaOcupaciones li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
 
-if($('.caja_origen').length){
-	$('.caja_origen').droppable(
-    {
-      drop: function(event, ui){
-        var draggable = ui.draggable;
-        var droppable = $(this);
-          if(droppable.find('ul').length > 0){
-            draggable.css({top: '0px', left: '0px'});
-          }
-          else{
-            droppable.removeAttr('class');
-            droppable.attr('class', 'caja_origen');
-            draggable.appendTo(droppable);
-            draggable.css({top: '0px', left: '0px'});
-          }
-      },
-      out: function(event, ui){
-        var draggable = ui.draggable;
-        var droppable = $(this);
-        droppable.removeAttr('class');
-        droppable.attr('class', 'caja_origen');
-      }
-    }
-  );
-}
+$("#profesiones").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#listaProfesiones li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
 
+<<<<<<< HEAD
 if($('.caja_destino').length){
 	$('.caja_destino').droppable(
     {
@@ -810,3 +799,30 @@ if($('#pre').length){
 	}
 
 // CASILLAS
+=======
+$("#nacionalidades").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu1 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#residencia").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu2 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+$("#competencias").on("keyup", function() {
+	var value = $(this).val().toLowerCase();
+	$("#menu3 li").filter(function() {
+	  $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	});
+});
+
+function enviarPclave(ruta){
+
+	window.location = ruta;
+}
+>>>>>>> desarrollo

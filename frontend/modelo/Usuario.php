@@ -978,5 +978,18 @@ WHERE
       return $result;
   }
 
+  public static function obtieneListadoEmpresas(){
+    $sql = "SELECT * FROM mfo_empresam2";
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+
+    $datos = array();
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+        $datos[$value['id_empresa']] = $value['nombre'];
+      }
+    }
+    return $datos;
+  }
 }  
 ?>

@@ -1510,8 +1510,8 @@ function StartProgressBarOutput($mode=1) {
 		</div>
 	   ';
 	}
-	ob_flush();
-      flush();
+	// ob_flush();
+      // flush();
 }
 
 function UpdateProgressBar($el,$val,$txt='') {
@@ -1535,8 +1535,8 @@ function UpdateProgressBar($el,$val,$txt='') {
 		echo ' document.getElementById(\'box6\').innerHTML=\''.$m2.'MB / \'; ';
 	}
 	echo '</script>'."\n";
-	ob_flush();
-	flush();
+	// ob_flush();
+	// flush();
 }
 /*-- END PROGRESS-BAR --*/
 
@@ -1743,7 +1743,7 @@ function SetVisibility($v) {
 
 function Error($msg) {
 	//Fatal error
-	header('Content-Type: text/html; charset=utf-8');
+	// header('Content-Type: text/html; charset=utf-8');
 	die('<B>mPDF error: </B>'.$msg);
 }
 
@@ -7581,7 +7581,7 @@ function SetXY($x,$y)
 
 
 function Output($name='',$dest='')
-{
+{	
 	//Output PDF to some destination
 	if ($this->showStats) {
 		echo '<div>Generated in '.sprintf('%.2F',(microtime(true) - $this->time0)).' seconds</div>';
@@ -7695,7 +7695,7 @@ function Output($name='',$dest='')
 	}
 	else {
 		if ($this->progressBar) { $this->UpdateProgressBar(3,'','Finished'); }
-/*-- END PROGRESS-BAR --*/
+/*-- END PROGRESS-BAR --*/    
 
 		switch($dest) {
 		   case 'I':
@@ -7718,9 +7718,12 @@ function Output($name='',$dest='')
 			}
 			echo $this->buffer;
 			break;
-		   case 'D':
+		   case 'D':		   
 			//Download file
-			header('Content-Description: File Transfer');
+      // flush();
+
+			// header('Content-Description: File Transfer');
+			
 			if (headers_sent())
 				$this->Error('Some data has already been output to browser, can\'t send PDF file');
 			header('Content-Transfer-Encoding: binary');
@@ -7736,7 +7739,9 @@ function Output($name='',$dest='')
 				// don't use length if server using compression
 				header('Content-Length: '.strlen($this->buffer));
 			}
+			
 			header('Content-disposition: attachment; filename="'.$name.'"');
+
  			echo $this->buffer;
 			break;
 		   case 'F':
@@ -33229,8 +33234,4 @@ function SetJS($script) {
 
 
 }//end of Class
-
-
-
-
 ?>

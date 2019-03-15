@@ -1,5 +1,5 @@
 <?php 
-//print_r($data);
+
 foreach ($data as $letra => $value) { 
 
     $f = '';
@@ -26,6 +26,11 @@ foreach ($data as $letra => $value) {
 
     if($letra == 'R' && $value != 0){
         $ruta .= '/R'.$value['id'];
+        $f = 1;
+    }
+
+    if($letra == 'I' && $value != 0){
+        $ruta .= '/I'.$value['id'];
         $f = 1;
     }
 

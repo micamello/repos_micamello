@@ -32,5 +32,10 @@ class Modelo_Ocupacion{
 		return $datos;
 	}
 
+	public static function obtenerListado(){
+		$sql = "SELECT * FROM mfo_ocupacionm2 ORDER BY descripcion";
+    	return $GLOBALS['db']->auto_array($sql,array(),true);
+	}
+
 }  
 ?>

@@ -434,7 +434,7 @@ class Controlador_Minisitio extends Controlador_Base
     
       $datosusuario = $datos['datos'];
       $preguntas = $datos['preguntas'];
-      $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper($datosusuario['nombres']).' '.strtoupper($datosusuario['apellidos']).'</h3>';
+      $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper(utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos'])).'</h3>';
 
       $informe .= '<p align="justify" style="margin-bottom:2px;margin-top:2px;"><hr width=100%><b>FACTORES QUE MIDE CANEA</b> (En este test no existen resultados ni buenos ni malos.)<hr width=100%></p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>C: Conciencia:</b> Es la capacidad para controlar los propios impulsos, la autodisciplina y la organización.</p>
@@ -442,7 +442,7 @@ class Controlador_Minisitio extends Controlador_Base
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>N: Neurotisismo (Ansiedad):</b> Es la reacción a su entorno social o personal, y estabilidad emocional.</p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>E: Extraversión:</b> Es la capacidad de interactuar en sus relaciones sociales, laborales.</p>
       <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Apertura a la Experiencia:</b> Es la experiencia, mente abierta, originalidad, imaginación y creatividad.</p>
-      <p align="justify"><b>'.utf8_encode(ucwords($datosusuario['nombres'].' '.$datosusuario['apellidos'])).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
+      <p align="justify"><b>'.utf8_encode($datosusuario['nombres'].' '.$datosusuario['apellidos']).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
       <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p> ';
 
       $nombre_archivo = utf8_encode(str_replace(' ', '_', $datosusuario['nombres'].'_'.$datosusuario['apellidos'])).'.pdf';
@@ -464,7 +464,7 @@ class Controlador_Minisitio extends Controlador_Base
           //$informe .= '<p align="justify"><i><u><b>'.utf8_encode($datosfaceta['descripcion']).'</b></u></i>: '.utf8_encode($competenciasXfacetas[$pregunta['id_faceta']]).'</p>';
           ;
         }
-        $parrafo .= ucwords($datosusuario['nombres']).' '.utf8_encode($descriptor['descripcion']).'. ';
+        $parrafo .= ($datosusuario['nombres']).' '.utf8_encode($descriptor['descripcion']).'. ';
        
         if($cantd_preg == $preg_x_faceta){
             
@@ -472,7 +472,7 @@ class Controlador_Minisitio extends Controlador_Base
             $calculo_promedio = round($datos['datosGraficos'][$pregunta['id_faceta']][0]/$datos['datosGraficos'][$pregunta['id_faceta']][1],2);
             $etiquetas_faceta .=  $calculo_promedio.'|';
             $colors .= str_replace("#", "", $datos['colores'][$pregunta['id_faceta']]).'|';
-            $descrip_facetas .= $facetas[$pregunta['id_faceta']].': '.$calculo_promedio.'|';
+            $descrip_facetas .= $facetas[$pregunta['id_faceta']].'|';
             $descrip_titulo .= substr($facetas[$pregunta['id_faceta']],0,1);
 
             $informe .= '<p align="justify">'.substr($parrafo, 0,-2).'</p>';
@@ -491,18 +491,19 @@ class Controlador_Minisitio extends Controlador_Base
     }
 
   public function informePersonalidad($html,$nombre_archivo){
-
     $cabecera = "imagenes/pdf/header.png";
     $piepagina = "imagenes/pdf/footer.png";
     $mpdf=new mPDF('','A4');
 
-    $inidoc = "<!DOCTYPE html><html><link rel='stylesheet' href='css/informemic.css'>";
+    $inidoc = "<!DOCTYPE html><html><link rel='stylesheet' href='css/informemic.css'>
+                <body><main>";
+    $enddoc = "</main></body></body></html>";
+    $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="17%"></header>'); 
     $mpdf->WriteHTML($inidoc);
-    $mpdf->setHTMLHeader('<body><header><img src="'.$cabecera.'" width="17%"></header>');     
+    $mpdf->WriteHTML($enddoc);   
+    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
     $mpdf->WriteHTML($html);
-    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer></body></html>');
-    $mpdf->Output($nombre_archivo, 'D');
-    
+    $mpdf->Output($nombre_archivo, 'I');
   }
 }
 ?>

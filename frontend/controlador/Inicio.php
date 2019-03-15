@@ -1,7 +1,8 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  public function construirPagina(){    
+  public function construirPagina(){        
+
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
 
@@ -13,6 +14,7 @@ class Controlador_Inicio extends Controlador_Base {
     $arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
+    $areas = Modelo_Area::obtieneListado();
 
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
@@ -22,15 +24,18 @@ class Controlador_Inicio extends Controlador_Base {
                   'intereses'=>$arrinteres,
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
-                  'social'=>$social_reg);
+                  'social'=>$social_reg,
+                  'areas'=>$areas);
 
-    $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "validator";
-    $tags["template_js"][] = "assets/js/main";
-    $tags["template_js"][] = "ruc_jquery_validator";
-    $tags["template_js"][] = "bootstrap-multiselect";
-    $tags["template_js"][] = "registrar";
-    $tags["template_js"][] = "mic";
+    // $tags["template_js"][] = "modal-register";
+    // $tags["template_js"][] = "validator";
+    // $tags["template_js"][] = "assets/js/main";
+    $tags["template_js"][] = "micamello_registro";
+    $tags["template_js"][] = "multiple_select";
+    // $tags["template_js"][] = "ruc_jquery_validator";
+    // $tags["template_js"][] = "bootstrap-multiselect";
+    // $tags["template_js"][] = "registrar";
+    // $tags["template_js"][] = "mic";
 
 
     $opcion = Utils::getParam('opcion','',$this->data);

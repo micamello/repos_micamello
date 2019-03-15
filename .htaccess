@@ -193,17 +193,14 @@ RewriteRule ^filtrarEntrevistados/([A-Z]{1}[0-9_]{1,})/([0-9]+)/$ %{ENV:REWRITEB
 
 RewriteRule ^admin/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio [L]
 
-RewriteRule ^generarExcel/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generarExcel [L]
+RewriteRule ^admin/generarExcel/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generarExcel [L]
 
-RewriteRule ^generaInforme/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generaInforme&id_usuario=$1&type=$2 [L]
+RewriteRule ^generaInforme/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generaInforme&id_usuario=$1 [L]
 
-RewriteRule ^generaInforme/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generaInforme&type=$1 [L]
-
-
-
+RewriteRule ^generaGrafico/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generaGrafico [L]
 
 #preguntas
-RewriteRule ^registro_test/?$ %{ENV:REWRITEBASE}index.php?mostrar=regtest [L]
+RewriteRule ^registroM/?$ %{ENV:REWRITEBASE}index.php?mostrar=regtest [L]
 
 #Registrodatostest
 RewriteRule ^registrodatostest/?$ %{ENV:REWRITEBASE}index.php?mostrar=regtest&opcion=guardardatostest [L]
@@ -213,11 +210,3 @@ RewriteRule ^test/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionariom2 [L]
 
 #RegistroRespuestas
 RewriteRule ^registroresp/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionariom2&opcion=guardarresp [L]
-
-
-#################################################
-#Seleccionmetodo
-RewriteRule ^metodo_seleccion/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionariom2&opcion=metodo_resp [L]
-RewriteRule ^cuestionarioM2/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionarioM2 [L]
-RewriteRule ^test_reg_var/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionariom2&opcion=reg_var [L]
-
