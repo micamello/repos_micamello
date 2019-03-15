@@ -46,9 +46,40 @@ class Proceso_Subscripcion{
 	      }	
 	    }
 	    
-	    $GLOBALS['db']->commit();
-    	echo "PROCESADO REGISTRO ".$this->procesador->id."<br>";	
+      //facturacion electronica
+      $obj_facturacion = new Proceso_Facturacion();
+      $obj_facturacion->razonSocialComprador = $this->objUsuario->nombres;
+      $obj_facturacion->identificacionComprador = $this->objUsuario->dni;
+      $obj_facturacion->direccionComprador = $this->objUsuario->direccion;
+      $obj_facturacion->emailComprador = $this->objUsuario->correo;
+      $obj_facturacion->telefComprador = $this->objUsuario->telefono;            
+      $obj_facturacion->tipoIdentifComprador = TIPO_DOCUMENTO[$this->objUsuario->tipodoc];            
+      $obj_facturacion->importeTotal = $this->procesador->monto;
+      $obj_facturacion->codigoPrincipal = $this->idplan;
+      $obj_facturacion->descripdetalle = $infoplan["nombre"];
+      $rsfact = $obj_facturacion->generarFactura(); 
+      if (is_array($rsfact) && isset($rsfact["claveacceso"]) && isset($rsfact["xml"]) && !empty($rsfact["claveacceso"]) && !empty($rsfact["xml"])){
+        if (!Modelo_Factura::guardar($rsfact["claveacceso"],$rsfact["xml"],$this->objUsuario->id,$infousuario["tipo_usuario"],$infoplan["id_sucursal"])){
+          throw new Exception("Error al generar la factura");  
+        }
+        if (!Modelo_Parametro::actualizarNroFactura()){
+          throw new Exception("Error al generar el siguiente numero de factura");  
+        } 
+      }   
+      
+      $GLOBALS['db']->commit();
+
+      //envio a los WS al SRI
+      if ($obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
+        sleep(5);
+        if ($obj_facturacion->sendAutorizacion($rsfact["claveacceso"])){
+          //adjuntar factura
+
+        }
+      }
+
       $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
+
 	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"]);
   	}
   	catch(Exception $e){

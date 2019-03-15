@@ -751,7 +751,7 @@ public static function existeUsername($username){
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
     if (empty($id)){ return false; }
     if ($tipo == self::CANDIDATO){
-      $sql = "SELECT u.id_usuario, u.nombres, l.correo, l.tipo_usuario, p.id_pais, u.apellidos 
+      $sql = "SELECT u.id_usuario, u.nombres, l.correo, l.tipo_usuario, p.id_pais, u.apellidos
               FROM mfo_usuario u 
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
