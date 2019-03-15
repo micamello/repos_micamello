@@ -66,9 +66,10 @@
         </div>
         <div class="panel-body">
           <div class="filtros">
-            <?php 
+            <?php       
+              Utils::log(print_r($empresas,true));        
               if (!empty($empresas)) {
-                echo '<ul style="padding-left: 0px;">';
+                echo '<ul style="padding-left: 0px;">';                
                 foreach ($empresas as $key => $v) {
                   $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/I'.$key.'/';
                   echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="empresas" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
