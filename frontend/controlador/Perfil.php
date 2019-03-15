@@ -30,6 +30,7 @@ class Controlador_Perfil extends Controlador_Base
                 $arrarea      = Modelo_Area::obtieneListado();
                 $arrinteres   = Modelo_Interes::obtieneListado();
                 $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
+                $puedeDescargarInforme = self::obtenerPermiso($idusuario);
                 
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
@@ -39,6 +40,7 @@ class Controlador_Perfil extends Controlador_Base
                 $msj2      = 'Subir CV';
                 $ruta_arch = '#';
                 $btnSubir  = 1;
+                $btnDescarga = 0;
                 $data = array();
                 if (Utils::getParam('actualizar') == 1) {
                     $btnSig = 1;
@@ -47,13 +49,14 @@ class Controlador_Perfil extends Controlador_Base
                     }
                     $btnSubir  = 0;
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
+
                 }
                 if (Utils::getParam('cambiarClave') == 1) {
                     self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login']);
-                    $_SESSION['mostrar_exito'] = 'La contraseña fue modificada exitosamente.';
+                    $_SESSION['mostrar_exito'] = 'La contrase\u00F1a fue modificada exitosamente.';
                 }
-                 $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
-                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
+                $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
+                $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
                 $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 if (isset($_SESSION['mfo_datos']['infohv']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
                     if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
@@ -65,9 +68,17 @@ class Controlador_Perfil extends Controlador_Base
                     $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
                     $ruta_arch   = PUERTO."://".HOST.'/hojasDeVida/'.$_SESSION['mfo_datos']['usuario']['username'].'/';
                     $btnDescarga = 1;
+                    /*if(!isset($data)){
+                        $btnSubir  = 0;
+                        $btnDescarga = 1;
+                    }else{
+                        $btnSubir  = 1;
+                        $btnDescarga = 0;
+                    }*/
                     
                     $msj2        = 'Actualizar CV';
                 }
+
                 if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
                     $areaxusuario  = $_SESSION['mfo_datos']['usuario']['usuarioxarea'];
                     $nivelxusuario = $_SESSION['mfo_datos']['usuario']['usuarioxnivel'];
@@ -100,7 +111,8 @@ class Controlador_Perfil extends Controlador_Base
                     'universidades'             =>$universidades,
                     'arridioma'                 =>$arridioma,
                     'arrnivelidioma'            =>$arrnivelidioma,
-                    'nivelIdiomas'              => $nivelIdiomas
+                    'nivelIdiomas'              => $nivelIdiomas,
+                    'puedeDescargarInforme'     =>$puedeDescargarInforme
                 );
                 $tags["template_css"][] = "bootstrap-multiselect";
                 $tags["template_css"][] = "DateTimePicker";
@@ -122,7 +134,7 @@ class Controlador_Perfil extends Controlador_Base
     {
         try {
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'experiencia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'estatus' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'estado_civil' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
 
                 if (isset($_POST['dni'])){
                   $campos['dni'] = 1;
@@ -134,7 +146,9 @@ class Controlador_Perfil extends Controlador_Base
             } else {
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
             }
+            //print_r('aaaa:'.print_r($this->data,true));
             $data = $this->camposRequeridos($campos);
+            //print_r('bbbb:'.print_r($data,true)); 
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
@@ -142,44 +156,44 @@ class Controlador_Perfil extends Controlador_Base
             if ($imagen['error'] != 4) {
                 $validaImg = Utils::valida_upload($imagen, 1);
                 if (empty($validaImg)) {
-                    throw new Exception("La imagen debe ser en formato .jpg .jpeg .pjpeg y con un peso máx de 1MB");
+                    throw new Exception("La imagen debe ser en formato .jpg .jpeg .pjpeg y con un peso m\u00E1x de 1MB");
                 }
             }
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
                 if (!empty($archivo) && $archivo['error'] != 4) {
                     $validaFile = Utils::valida_upload($archivo, 2);
                     if (empty($validaFile)) {
-                        throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso máx de 2MB");
+                        throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso m\u00E1x de 2MB");
                     }
                 }
             }else{
                 $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
                 if (empty($validaTlf2)){
-                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " no es válido");
+                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " no es v\u00E1lido");
                 }
                 if (strlen($data['tel_one_contact']) > 25) {
-                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " supera el límite permitido");
+                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " supera el l\u00CDmite permitido");
                 }
                 if(isset($_POST['tel_two_contact']) && !empty($_POST['tel_two_contact'])){
                     $validaTlf3 = Utils::valida_telefono($data['tel_two_contact']);
                     if (empty($validaTlf3)) {
-                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " no es válido");
+                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " no es v\u00E1lido");
                     }
                     if (strlen($data['tel_two_contact']) > 25) {
-                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " supera el límite permitido");
+                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
                     }
                 }
             }
             $validaTlf = Utils::valida_telefono($data['telefono']);
             if (empty($validaTlf)) {
-                throw new Exception("El telefono " . $data['telefono'] . " no es válido");
+                throw new Exception("El telefono " . $data['telefono'] . " no es v\u00E1lido");
             }
             if (strlen($data['telefono']) > 25) {
-                throw new Exception("El telefono " . $data['telefono'] . " supera el límite permitido");
+                throw new Exception("El telefono " . $data['telefono'] . " supera el l\u00CDmite permitido");
             }
             $validaFecha = Utils::valida_fecha($data['fecha_nacimiento']);
             if (empty($validaFecha)) {
-                throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es válida");
+                throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es v\u00E1lida");
             }
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
@@ -187,11 +201,11 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("Debe ser Mayor de edad");
                 }
                 if(strlen($data['apellidos']) > 100){
-                    throw new Exception("Apellidos: " . $data['apellidos'] . " supera el límite permitido");
+                    throw new Exception("Apellidos: " . $data['apellidos'] . " supera el l\u00CDmite permitido");
                 }
             }
             if(strlen($data['nombres']) > 100){
-                throw new Exception("Nombres: " . $data['nombres'] . " supera el límite permitido");
+                throw new Exception("Nombres: " . $data['nombres'] . " supera el l\u00CDmite permitido");
             }
             $GLOBALS['db']->beginTrans();
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
@@ -200,18 +214,18 @@ class Controlador_Perfil extends Controlador_Base
                     
                     if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
                       if($_POST['lugar_estudio'] == 1 && strlen($data['universidad2']) > 100){
-                        throw new Exception("El nombre de la universidad: " . $data['universidad2'] . " supera el límite permitido");
+                        throw new Exception("El nombre de la universidad: " . $data['universidad2'] . " supera el l\u00CDmite permitido");
                       }
                     }            
      
                     $datodni = Modelo_Usuario::existeDni($data['dni'],$_SESSION['mfo_datos']['usuario']['id_usuario_login']);
                     if (empty($datodni)){
-                      throw new Exception("La cédula o pasaporte ".$data["dni"]." ya existe");
+                      throw new Exception("La c\u00E9dula o pasaporte ".$data["dni"]." ya existe");
                     }
 
                     if (!empty($data['dni'])){
                         if (!Modelo_UsuarioLogin::editarDniLogin($_SESSION['mfo_datos']['usuario']['id_usuario_login'],$data['dni'])) {
-                            throw new Exception("Ha ocurrido un error al guardar la cedula , intente nuevamente");
+                            throw new Exception("Ha ocurrido un error al guardar la c\u00E9dula , intente nuevamente");
                         }
                     }
                     if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
@@ -277,7 +291,7 @@ class Controlador_Perfil extends Controlador_Base
                   }
                 }
                 if (count($data_idioma_nivel) != count($array_nivel_idioma)) {
-                  throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
+                  throw new Exception("Uno o m\u00E1s de los idiomas seleccionados no esta disponible");
                 }else{
                     
                     if (!Modelo_UsuarioxNivelIdioma::guardarUsuarioNivelIdioma($idUsuario,$data_idioma_nivel)) {
@@ -300,27 +314,28 @@ class Controlador_Perfil extends Controlador_Base
             }            
             $GLOBALS['db']->commit();
             Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario));
-            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+            $_SESSION['mostrar_exito'] = 'El perfil fue completado';
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $GLOBALS['db']->rollback();
         }
         return $data;
     }
+
     public function guardarClave($id_login){
         try {
             if($_POST["password"] != "" || $_POST["password_two"] != ""){
                 if ($_POST["password"] != $_POST["password_two"]){
-                  throw new Exception("Contraseña y confirmación de contraseña no coinciden");
+                  throw new Exception("Contrase\u00F1a y confirmaci\u00F3n de contrase\u00F1a no coinciden");
                 }
                 $passwordValido = Utils::valida_password($_POST["password"]);
                 if ($passwordValido == false){
-                  throw new Exception("Ingrese una contraseña con el formato especificado");
+                  throw new Exception("Ingrese una contrase\u00F1a con el formato especificado");
                 }
             }
             if($_POST["password"] != "" && $_POST["password_two"] != ""){
                 if (!Modelo_Usuario::modificarPassword($_POST["password"],$id_login)) {
-                    throw new Exception("Ha ocurrido un error al guardar las contraseñas, intente nuevamente");
+                    throw new Exception("Ha ocurrido un error al guardar las contrase\u00F1as, intente nuevamente");
                 }
             }
         } catch (Exception $e) {
@@ -328,6 +343,20 @@ class Controlador_Perfil extends Controlador_Base
             $GLOBALS['db']->rollback();
             $this->redirectToController('perfil');
         }
+    }
+
+    public function obtenerPermiso($idusuario){
+
+        $testDados = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
+        $facetas = Modelo_Faceta::obtenerLiterales();
+        $informe = 0;
+
+        if($testDados == count($facetas)){
+            $informe = 1;
+        }else if($testDados > 0 && $testDados < count($facetas)){
+            $informe = 2;
+        }
+        return $informe;
     }
 }
 ?>

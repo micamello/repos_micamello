@@ -29,7 +29,7 @@ foreach ($data as $letra => $value) {
         $f = 1;
     }
 
-    if($letra == 'I' && $value != 0){
+    if($letra == 'I' && $value >= 0){
         $ruta .= '/I'.$value['id'];
         $f = 1;
     }

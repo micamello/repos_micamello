@@ -23,7 +23,7 @@ function colocaError(campo, id, mensaje,btn){
   nodo.appendChild(elem2); 
 
   $("#"+id).addClass('has-error');
-  $("#"+btn).addClass('disabled');
+  //$("#"+btn).addClass('disabled');
 
   if(document.getElementById('form_paypal')){
     document.getElementById('form_paypal').action = '#';

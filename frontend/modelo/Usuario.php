@@ -222,7 +222,7 @@ public static function existeUsername($username){
 
     if($tipo_usuario == self::CANDIDATO){
 
-        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil']); 
+        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo']); 
 
         if (!empty($data['documentacion'])){          
           $datos['tipo_doc'] = $data['documentacion'];
@@ -979,7 +979,7 @@ WHERE
   }
 
   public static function obtieneListadoEmpresas(){
-    $sql = "SELECT * FROM mfo_empresam2";
+    $sql = "SELECT * FROM mfo_empresam2 ORDER BY nombre";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
     $datos = array();

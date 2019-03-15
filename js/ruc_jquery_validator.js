@@ -8,26 +8,31 @@ function validarDocumento(numero,tipo,campoErr,campoSeccion,btn){
   var numeroProvincias = 22;                  
   var modulo = 11;
   var error = 0;
+  var mensaje = '';
  
   if (numero.length == 0){
     colocaError(campoErr, campoSeccion,"El campo no puede ser vacío",btn);
-    return error = 1;
+    mensaje += 'Dni no puede ser vacío\n';
+    //return error = 1;
   } 
   
   var expregLN = /[a-zA-Z0-9]{7,}$/i;
   if ((!expregLN.test(numero) && tipo == 3) ){
 
-    colocaError(campoErr, campoSeccion,"Pasaporte inválido",btn);                 
-    return error = 1;
+    colocaError(campoErr, campoSeccion,"Pasaporte inválido",btn); 
+    mensaje += 'Pasaporte inválido\n';                
+    //return error = 1;
   }
   else if (tipo == 2 && numero.length > 10){ 
 
-    colocaError(campoErr, campoSeccion,"Cédula inválida",btn);                 
-    return error = 1;
+    colocaError(campoErr, campoSeccion,"Cédula inválida",btn); 
+    mensaje += 'Cédula inválida\n';                     
+    //return error = 1;
 
   }else if (numero.length < 13 && tipo == 1){ 
-    colocaError(campoErr, campoSeccion,"RUC inválido",btn);                 
-    return error = 1;
+    colocaError(campoErr, campoSeccion,"RUC inválido",btn); 
+    mensaje += 'RUC inválido\n';                     
+    //return error = 1;
   }
 
   /* Verifico que el campo no contenga letras */                    
@@ -36,7 +41,8 @@ function validarDocumento(numero,tipo,campoErr,campoSeccion,btn){
     provincia = numero.substr(0,2); 
     if(!expreg.test(numero) || (provincia < 1 || provincia > numeroProvincias)){
       colocaError(campoErr, campoSeccion,"Formato inválido",btn);    
-      return error = 1;
+      mensaje += 'Dni formato inválido\n';     
+      //return error = 1;
     }
   }
 
@@ -59,8 +65,9 @@ function validarDocumento(numero,tipo,campoErr,campoSeccion,btn){
     /* 6 para sociedades publicas */         
     /* menor que 6 (0,1,2,3,4,5) para personas naturales */ 
     if (d3==7 || d3==8){    
-      colocaError(campoErr, campoSeccion,"Formato inválido",btn);           
-      return error = 1;
+      colocaError(campoErr, campoSeccion,"Formato inválido",btn);
+      mensaje += 'Dni formato inválido\n';           
+      //return error = 1;
     }       
            
     /* Solo para personas naturales (modulo 10) */         
@@ -113,37 +120,43 @@ function validarDocumento(numero,tipo,campoErr,campoSeccion,btn){
     /* ahora comparamos el elemento de la posicion 10 con el dig. ver.*/                         
     if (pub==true){           
       if (digitoVerificador != d9){
-        colocaError(campoErr, campoSeccion,"Formato inválido",btn);                                
-        return error = 1;
+        colocaError(campoErr, campoSeccion,"Formato inválido",btn);     
+        mensaje += 'Dni formato inválido\n';                           
+        //return error = 1;
       }                  
       /* El ruc de las empresas del sector publico terminan con 0001*/         
       if ( numero.substr(9,4) != '0001' ){
-        colocaError(campoErr, campoSeccion,"Formato inválido",btn);                          
-        return error = 1;
+        colocaError(campoErr, campoSeccion,"Formato inválido",btn);    
+        mensaje += 'Dni formato inválido\n';                      
+        //return error = 1;
       }
     }        
     else if(pri == true){         
       if (digitoVerificador != d10){ 
-        colocaError(campoErr, campoSeccion,"Formato inválido",btn);                                
-        return error = 1;
+        colocaError(campoErr, campoSeccion,"Formato inválido",btn);    
+        mensaje += 'Dni formato inválido\n';                            
+        //return error = 1;
       }         
       if (numero.substr(10,3) != '001' ){ 
-        colocaError(campoErr, campoSeccion,"Formato inválido",btn);                          
-        return error = 1;
+        colocaError(campoErr, campoSeccion,"Formato inválido",btn);  
+        mensaje += 'Dni formato inválido\n';                        
+        //return error = 1;
       }
     }      
     else if(nat == true){         
       if (digitoVerificador != d10){ 
-        colocaError(campoErr, campoSeccion,"Formato inválido",btn);                                 
-        return error = 1;
+        colocaError(campoErr, campoSeccion,"Formato inválido",btn); 
+        mensaje += 'Dni formato inválido\n';                                
+        //return error = 1;
       }         
       if (numero.length >10 && numero.substr(10,3) != '001' ){
-        colocaError(campoErr, campoSeccion,"Formato inválido",btn);                           
-        return error = 1;
+        colocaError(campoErr, campoSeccion,"Formato inválido",btn);   
+        mensaje += 'Dni formato inválido\n';                        
+        //return error = 1;
       }
     }
   }
 
-  return error;
+  return mensaje;
 }  
 

@@ -323,12 +323,12 @@
 								  			<?php if($vista == 'postulacion'){ ?>
 								  	
 								  				<div class="col-sm-1 col-md-2 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%;">
-													<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
+													<?php #if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
 
 														<a title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".$o['id_postulacion']."/"; ?>">
 															<i class="fa fa-trash fa-2x"></i>
 														</a>
-													<?php } ?>
+													<?php #} ?>
 												</div>
 											<?php } ?>
 											<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>

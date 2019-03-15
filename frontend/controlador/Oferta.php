@@ -505,7 +505,7 @@ class Controlador_Oferta extends Controlador_Base{
 
               $filtro = 0;
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
-              
+              print_r($ofertas);
               //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
               $breadcrumbs['postulacion'] = 'Mis postulaciones';

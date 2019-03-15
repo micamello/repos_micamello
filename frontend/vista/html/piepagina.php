@@ -272,7 +272,6 @@
 </div>
 <?php } ?>
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
-<div id="grafico" style="width: 100%; max-width:900px; height: 500px; visibility: hidden;"></div>
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 <section id="action" class="banner_info_email">
                 <div class="container">

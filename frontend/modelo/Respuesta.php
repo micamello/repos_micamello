@@ -51,6 +51,7 @@ class Modelo_Respuesta{
       $sql .= " 'valido' AS flag,"; 
     }
     $sql = substr($sql,0,-1);
+
     $sql .= " FROM mfo_usuariom2 u
             INNER JOIN (SELECT r.id_usuario, o.id_pregunta, GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) AS puntaje, SUM(o.id_pregunta) AS tot_opcion 
                         FROM mfo_respuestam2 r INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion 
@@ -76,9 +77,17 @@ class Modelo_Respuesta{
                   ('".$estadocivil."' = '' OR u.estado_civil = '".$estadocivil."') AND
                   ('".$profesion."' = '' OR u.id_profesion = '".$profesion."') AND
                   ('".$ocupacion."' = '' OR u.id_ocupacion = '".$ocupacion."') AND      
-                  ('".$escolaridad."' = '' OR u.id_escolaridad = '".$escolaridad."') AND      
-                  ('".$empresa."' = '' OR u.id_empresa = '".$empresa."')AND                                                      
-                  ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";    
+                  ('".$escolaridad."' = '' OR u.id_escolaridad = '".$escolaridad."') AND ";
+    if ($empresa == 0){
+      $sql .= "(u.id_empresa IS NULL) AND ";
+    } 
+    else{
+      if ($empresa == -1){
+        $empresa = '';  
+      }        
+      $sql .= "('".$empresa."' = '' OR u.id_empresa = '".$empresa."') AND ";
+    }                                     
+    $sql .= "     ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";    
     $sql .= "ORDER BY u.id_usuario, m.id_faceta, p.orden";
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }

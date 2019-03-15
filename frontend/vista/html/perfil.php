@@ -24,6 +24,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 </div>
 <br>
 <?php } 
+
 ?>
 
 
@@ -45,9 +46,10 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                    <div id="carga" class="panel panel-default shadow" style="border-radius: 20px;">
 	                    	
 	                    	<img id="archivo" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/Hv.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
-	                       
-	                       <?php if($btnDescarga == 1){ ?>
-		                       	<div <?php if($btnSig == 0){ echo 'class="pull-left" style="position: relative; margin-left: 15px;"'; } ?>>
+	                       <?php 
+
+	                       if($btnDescarga == 1){ ?>
+		                       	<div <?php /*if(($btnSubir == 0)){*/ echo 'class="pull-left" style="position: relative; margin-left: 15px;"'; /*}*/ ?>>
 			                        <label for="descargarCV" class="custom_file">
 			                        	<a href="<?php echo $ruta_arch; ?>" target="_blank">
 			                        		<img id="imagenBtn1" style="cursor:pointer;" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch1";?>" width="50px">
@@ -63,8 +65,18 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 							<?php } ?>
 							
 							<?php 
+/*echo 'btnSubir';
+print_r($btnSubir);
+echo 'data';
+print_r($data);
+echo 'btnDescarga';
+print_r($btnDescarga);*/ 
+							#if(/*$btnSubir == 1 || */isset($data)){ 
+
+
+
 							
-							if($btnSubir == 1 || isset($data)){ ?>
+								?>
 								<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
 			                        <label for="subirCV" class="custom_file">
 			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
@@ -77,16 +89,13 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 								</div>
 								<br><br>
 								<?php if($btnDescarga == 1){ echo '<br><br>'; } ?>
-
-	                        <?php } ?>
-
+	                        <?php #} ?>
 	                    </div>
                     <?php } ?>
 
 					<div class="panel panel-default shadow" style="border-radius: 20px;">
 				    	
 				    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/cambiar_clave.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
-
 			           	<div>
 			                <label for="cambiar" class="custom_file">
 			                	<a onclick="abrirModal('','cambiar_clave','','Ok');">
@@ -99,6 +108,23 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			            </div>
 			            <br>
 				    </div>
+
+				    <?php if($puedeDescargarInforme > 0){ ?>
+					    <div class="panel panel-default shadow" style="border-radius: 20px;">
+					    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/descargar_informe.png";?>" style="border-radius: 20px 20px 0px 0px;">
+				           	<div>
+				                <label for="cambiar" class="custom_file">
+				                	<a target="_blank" href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
+				                		<img id="informePdf" alt="Descargar_informe" style="cursor:pointer;" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/pdf.png";?>" width="50px">
+				                	</a>
+				                </label>
+								<div align="center">
+				                    <p class="text-center" id="texto_status1">Descarga aqu&iacute;</p>
+				                </div>
+				            </div>
+				            <br>
+					    </div>
+					<?php } ?>
                 </div>
 	            <div class="col-md-8">
 	                <div class="panel panel-default shadow" style="border-radius: 20px;">
@@ -232,7 +258,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                    
 	                                    <div class="col-md-6">
 	                                        <div id="seccion_provincia" class="form-group">
-	                                            <label for="provincia">Provincia de domicilio<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_prov" class="help-block with-errors"></div>
+	                                            <label for="provincia">Provincia de Residencia<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_prov" class="help-block with-errors"></div>
 	                                            <select class="form-control" name="provincia" id="provincia"  onchange="validarFormulario()" >
 	                                            	<option value="0">Seleccione una provincia</option>
 													<?php 
@@ -254,7 +280,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 	                                    <div class="col-md-6">
 	                                        <div id="seccion_ciudad" class="form-group">
-	                                            <label for="ciudad">Ciudad de domicilio<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_ciu" class="help-block with-errors"></div>
+	                                            <label for="ciudad">Ciudad de Residencia<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_ciu" class="help-block with-errors"></div>
 	                                            <select id="ciudad" name="ciudad" class="form-control"  onchange="validarFormulario()" >
 	                                            <?php 
 	                                            if(!empty($arrciudad)){
@@ -673,12 +699,12 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 					                <div class="row">
 					                	
-										<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR" disabled onclick="enviarFormulario()">
+										<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR" onclick="enviarFormulario()">
 
 										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn btn-info" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
+											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 										<?php }else{ 	?>
-											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn btn-info" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
+											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 									    <?php } ?>
 									</div>
 				            	</div>  
