@@ -86,7 +86,7 @@ class Modelo_Plan{
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    
   }
  
-  public static function busquedaXId($id,$todos=false){
+  public static function busquedaXId($id,$todos=false){   
     if (empty($id)){ return false; }
     if (!$todos){
       $sql = "SELECT * FROM mfo_plan WHERE id_plan = ?";

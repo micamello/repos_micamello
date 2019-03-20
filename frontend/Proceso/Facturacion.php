@@ -9,6 +9,7 @@ class Proceso_Facturacion{
   protected $totalDescuento = '0';       
   protected $cantidad = 1;
   protected $importeImpuesto;
+  protected $numerico = '12345678';
   protected $strxml = '';
 
   public $razonSocialComprador;
@@ -20,9 +21,11 @@ class Proceso_Facturacion{
   public $importeTotal;
   public $codigoPrincipal;
   public $descripdetalle;
+  public $numerofactura;
 
   const KEY_PUBLIC = RUTA_INCLUDES."factura/firmadigital/public.pem";
   const KEY_PRIVATE = RUTA_INCLUDES."factura/firmadigital/private.pem";
+  const RUTA_FACTURA = FRONTEND_RUTA."/imagenes/usuarios/facturas/";
   const KEY_PASSWORD = "Amor2018";
   const RUC = '0993064467001';
   const TIPO_EMISION = 1;
@@ -64,16 +67,18 @@ class Proceso_Facturacion{
 
   function generarClaveAcceso(){
     $seriefactura = Modelo_Parametro::obtieneValor('seriefactura');
-    $numerofactura = Modelo_Parametro::obtieneValor('numerofactura')+1;
-    $this->secuencial = str_pad($numerofactura,9,"0",STR_PAD_LEFT);        
-    $numerico = "12345678";   
+    if (empty($this->numerofactura)){
+      $this->numerofactura = Modelo_Parametro::obtieneValor('numerofactura')+1;
+    }    
+    $this->secuencial = str_pad($this->numerofactura,9,"0",STR_PAD_LEFT);        
+    //$numerico = "12345678";   
     $clave = date('dmY').
              self::TIPO_DOCUMENTO["FACTURA"].
              self::RUC.
              self::AMBIENTE["PRUEBAS"].
              $seriefactura.
              $this->secuencial.
-             $numerico.
+             $this->numerico.
              self::TIPO_EMISION;    
     $arrclave = str_split($clave);
     $j=7; $acum=0;
@@ -236,62 +241,59 @@ class Proceso_Facturacion{
     $this->strxml = $fac->export($this->strxml);    
   }
 
-  function sendRecepcion($xml,$claveAcceso){
-    $wsdl = WS_SRI_RECEPCION; 
-    $params = Array("xml" => $xml);
-    $options = Array("uri"=> WS_SRI_RECEPCION,"trace" => true,"encoding" => "UTF-8");
+  function sendRecepcion($xml,$claveAcceso){    
+    $params = array("xml" => $xml);
+    $options = array("uri"=> WS_SRI_RECEPCION,"trace" => true,"encoding" => "UTF-8");
     $soap = new SoapClient(WS_SRI_RECEPCION, $options);
     $result = $soap->validarComprobante($params);     
     $msgerror = print_r($result,true);    
     $valoresact = array();
+    $valoresact["fecha_estado"] = date('Y-m-d H:i:s');
     if (is_object($result) && $result->RespuestaRecepcionComprobante->estado == "RECIBIDA"){
-      $valoresact["estado"] = Modelo_Factura::RECIBIDO;
-      $valoresact["fecha_estado"] = date('Y-m-d H:i:s');
-      Modelo_Factura::actualizar($claveAcceso,$valoresact);
-      return true;
+      $valoresact["estado"] = Modelo_Factura::RECIBIDO;            
+      $return = true;
     }
     else{
       $valoresact["estado"] = Modelo_Factura::DEVUELTO;
-      $valoresact["msg_error"] = $msgerror;
-      $valoresact["fecha_estado"] = date('Y-m-d H:i:s');
-      Modelo_Factura::actualizar($claveAcceso,$valoresact);
-      return false;
+      $valoresact["msg_error"] = $msgerror;            
+      $return = false;
     }    
+    Modelo_Factura::actualizar($claveAcceso,$valoresact);
+    return $return;
   }
 
   function sendAutorizacion($claveAcceso){    
-    $options = Array("uri"=> WS_SRI_AUTORIZACION,"trace" => true,"encoding" => "UTF-8");
+    $options = array("uri"=> WS_SRI_AUTORIZACION,"trace" => true,"encoding" => "UTF-8");
     $soap = new SoapClient(WS_SRI_AUTORIZACION, $options);
-    $params = Array("claveAccesoComprobante" => $claveAcceso);
+    $params = array("claveAccesoComprobante" => $claveAcceso);
     $result = $soap->autorizacionComprobante($params);     
     $msgerror = print_r($result,true);    
-    $valoresact = array();
+    $valoresact = array();    
     if (is_object($result) && $result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado == "AUTORIZADO"){
       $valoresact["estado"] = Modelo_Factura::AUTORIZADO;
-      $valoresact["fecha_estado"] = str_replace('T', ' ', substr($result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->fechaAutorizacion,0,18));
-      Modelo_Factura::actualizar($claveAcceso,$valoresact);      
-      return true;
+      $fechaautorizacion = str_replace('T', ' ', substr($result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->fechaAutorizacion,0,18));
+      $valoresact["fecha_estado"] = $fechaautorizacion;      
+      $return = $fechaautorizacion;
     }
     else{
-      $valoresact["estado"] = Modelo_Factura::AUTORIZADO;
-      $valoresact["fecha_estado"] = date('Y-m-d H:i:s');
-      Modelo_Factura::actualizar($claveAcceso,$valoresact);
-      return false;
-    }      
+      $valoresact["estado"] = Modelo_Factura::NOAUTORIZADO;
+      $valoresact["fecha_estado"] = date('Y-m-d H:i:s');      
+      $return = false;
+    }   
+    Modelo_Factura::actualizar($claveAcceso,$valoresact);
+    return $return;   
   }
 
-  function generarRIDE($xml){
-    if (empty($xml)){ return false; }    
-    $autorizacion = simplexml_load_string($xml);
-    Utils::log("AUTORIZACION ".print_r($autorizacion,true));
-    $factura = simplexml_load_string($autorizacion->comprobante);
-    Utils::log("FACTURA ".print_r($factura,true));
+  function generarRIDE($xml,$fecha_auto){
+    if (empty($xml)){ return false; }     
+    $tipo_emision = array(1=>"NORMAL");   
+    $factura = simplexml_load_string($xml);    
     $infoTributaria = $factura->infoTributaria;
     $infoFactura = $factura->infoFactura;
     $detalles = $factura->detalles;
     $infoAdicional = $factura->infoAdicional;
 
-    $obj_generar = new GenerarBarcode((string)$autorizacion->numeroAutorizacion,FRONTEND_RUTA.'/imagenes/imagenesCod/');
+    $obj_generar = new GenerarBarcode((string)$infoTributaria->claveAcceso,FRONTEND_RUTA.'/imagenes/imagenesCod/');
     $obj_generar->imprimirbarcode();
     //header('Content-Type: text/html');
     //ob_flush();
@@ -327,17 +329,17 @@ class Proceso_Facturacion{
                       <td colspan="2"><b>NÚMERO DE AUTORIZACIÓN</b></td>
                     </tr>
                     <tr>
-                      <td colspan="2">'.$autorizacion->numeroAutorizacion.'</td>
+                      <td colspan="2">'.$infoTributaria->claveAcceso.'</td>
                     </tr>'
                     .$abrir_interlineado.'30'.$cerrar_interlineado.
                     '<tr>
                       <td width="200"><b>FECHA Y HORA DE AUTORIZACIÓN:</b></td>
-                      <td>'.str_replace("T", " ", $autorizacion->fechaAutorizacion).'</td>
+                      <td>'.$fecha_auto.'</td>
                     </tr>'
                     .$abrir_interlineado.'10'.$cerrar_interlineado.
                     '<tr>
                       <td width="200"><b>AMBIENTE:</b></td>
-                      <td>'.str_replace("?", "Ó", $autorizacion->ambiente).'</td>
+                      <td>'.str_replace("?", "Ó", array_search($infoTributaria->ambiente, self::AMBIENTE)).'</td>
                     </tr>'
                     .$abrir_interlineado.'10'.$cerrar_interlineado.
                     '<tr>
@@ -349,7 +351,7 @@ class Proceso_Facturacion{
                       <td><b>CLAVE DE ACCESO:</b></td>
                     </tr>
                     <tr>
-                     <td colspan="2"><img style="width: 560px; height: 90px;" alt="codigo de barra" src="'.PUERTO.'://'.HOST.'/imagenes/imagenesCod/'.(string)$autorizacion->numeroAutorizacion.'.png'.'" /></td>
+                     <td colspan="2"><img style="width: 560px; height: 90px;" alt="codigo de barra" src="'.FRONTEND_RUTA.'/imagenes/imagenesCod/'.(string)$infoTributaria->claveAcceso.'.png'.'" /></td>
                     </tr>
                     <tr>
                       <td colspan="2" style="text-align:center;">'.(string)$infoTributaria->claveAcceso.'</td>
@@ -500,8 +502,11 @@ class Proceso_Facturacion{
 
     unlink(FRONTEND_RUTA.'/imagenes/imagenesCod/'.$infoTributaria->claveAcceso.'.png');
     //echo $contenido;
-    $mpdf->Output(FRONTEND_RUTA.'/imagenes/usuarios/facturas/'.$infoTributaria->claveAcceso.".pdf", 'F');
+    $mpdf->Output(self::RUTA_FACTURA.$infoTributaria->claveAcceso.".pdf", 'F');
   }
 
+  function generarXML($xml,$claveacceso){
+    Utils::crearArchivo(self::RUTA_FACTURA,$claveacceso.".xml",$xml);
+  }
 }
 ?>

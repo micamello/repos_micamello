@@ -40,9 +40,9 @@ class Modelo_Usuario{
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
-      $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                     u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,  u.anosexp, u.status_carrera,                       
+      $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
+                     u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
                      u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado 
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -781,7 +781,7 @@ public static function existeUsername($username){
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
-      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-1)){
+      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }

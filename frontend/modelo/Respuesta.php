@@ -30,7 +30,7 @@ class Modelo_Respuesta{
   }
 
   public static function verResultados($edad='', $nacionalidad='', $provincia='', $genero='', $estadocivil='', $profesion='', $ocupacion='',
-                                       $escolaridad='', $provinciares='', $empresa='', $competencias=array()){    
+                                       $escolaridad='', $provinciares='', $empresa='', $competencias=array(),$metodo,$visibilidad){    
     $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_provincia, u.genero,
                    TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) AS edad, u.estado_civil, u.id_profesion,
                    u.id_ocupacion, u.id_escolaridad, res.id_pregunta, p.id_competencia,
@@ -78,16 +78,18 @@ class Modelo_Respuesta{
                   ('".$profesion."' = '' OR u.id_profesion = '".$profesion."') AND
                   ('".$ocupacion."' = '' OR u.id_ocupacion = '".$ocupacion."') AND      
                   ('".$escolaridad."' = '' OR u.id_escolaridad = '".$escolaridad."') AND ";
-    if ($empresa == 0){
-      $sql .= "(u.id_empresa IS NULL) AND ";
-    } 
-    else{
-      if ($empresa == -1){
-        $empresa = '';  
-      }        
-      $sql .= "('".$empresa."' = '' OR u.id_empresa = '".$empresa."') AND ";
-    }                                     
-    $sql .= "     ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";    
+                  if ($empresa == 0){
+                    $sql .= "(u.id_empresa IS NULL) AND ";
+                  } 
+                  else{
+                    if ($empresa == -1){
+                      $empresa = '';  
+                    }        
+                    $sql .= "('".$empresa."' = '' OR u.id_empresa = '".$empresa."') AND ";
+                  }                                   
+    $sql .= "     ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";
+    $sql .= " AND visibilidad = $visibilidad"; 
+    $sql .= " AND metodo_ordenamiento = $metodo ";      
     $sql .= "ORDER BY u.id_usuario, m.id_faceta, p.orden";
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }

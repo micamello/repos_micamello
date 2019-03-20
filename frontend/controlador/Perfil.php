@@ -76,8 +76,8 @@ class Controlador_Perfil extends Controlador_Base
                     $nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
                 $nrototaltest = Modelo_Cuestionario::totalTest();
-                $cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
-                $nrotestusuario = count($cuestionario);
+                //$cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+                $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
                     'arrinteres'                => $arrinteres,

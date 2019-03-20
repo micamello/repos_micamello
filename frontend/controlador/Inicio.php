@@ -1,7 +1,7 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  public function construirPagina(){        
+  public function construirPagina(){   
 
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
@@ -10,8 +10,8 @@ class Controlador_Inicio extends Controlador_Base {
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
-    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
-    $arrinteres = Modelo_Interes::obtieneListado();
+    //$arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
+    //$arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
 
@@ -20,7 +20,7 @@ class Controlador_Inicio extends Controlador_Base {
                   'nro_candidato'=>$nro_candidato,
                   'nro_empresa'=>$nro_empresa,
                   'arrarea'=>$arrarea,
-                  'intereses'=>$arrinteres,
+                  //'intereses'=>$arrinteres,
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg);
@@ -48,7 +48,7 @@ class Controlador_Inicio extends Controlador_Base {
         Utils::log($datodni);
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
-      default:        
+      default:         
         Vista::render('inicio', $tags);
       break;
     }

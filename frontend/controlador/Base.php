@@ -9,12 +9,13 @@ abstract class Controlador_Base{
   public $gg_URL;
   public $tw;
   public $lk;
+  public $nrofactura;
   
   function __construct($device='web'){
     global $_SUBMIT;
     $this->device = $device;
     $this->data = $_SUBMIT;        
-    self::verificaCompra();
+    self::verificaCompra();    
   }
   
   public function redirectToController($controladorNombre, $params = array()){  

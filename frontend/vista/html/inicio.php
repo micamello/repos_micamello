@@ -85,10 +85,11 @@
                 <div class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel2">
                   <div class="carousel-inner">
                     <?php 
-                        $cont = 1;
-                        foreach($arrarea as $area) {                        
-                    ?>
-                        <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
+                    $cont = 1;
+                    if (!empty($arrarea)){
+                      foreach($arrarea as $area) {                        
+                        ?>
+                          <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
                             <?php if(Modelo_Usuario::estalogueado() && $area['ofertas'] > 0 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ 
                                 echo '<a href="'.PUERTO.'://'.HOST.'/oferta/1/A'.$area['id_area'].'/1/">';
                             } ?>
@@ -99,8 +100,11 @@
                             <?php if(Modelo_Usuario::estalogueado()){ 
                                 echo '</a>';
                             } ?>
-                        </div>
-                    <?php $cont++; } ?>
+                          </div>
+                        <?php $cont++; 
+                      } 
+                    }
+                    ?>
                   </div>
                 </div>                
               </div>

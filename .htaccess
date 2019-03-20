@@ -191,7 +191,11 @@ RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}inde
 #Minisitio
 RewriteRule ^filtrarEntrevistados/([A-Z]{1}[0-9_]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar&param1=$1&type=$2 [L]
 
+RewriteRule ^filtrarEntrevistados2/([A-Z]{1}[0-9_]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar2&param1=$1&type=$2 [L]
+
 RewriteRule ^admin/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio [L]
+
+RewriteRule ^admin2/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=admin2 [L]
 
 RewriteRule ^admin/generarExcel/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=generarExcel [L]
 
