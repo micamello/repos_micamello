@@ -45,7 +45,7 @@
               if (!empty(METODO_CUESTIONARIO)) {
                 echo '<ul style="padding-left: 0px;">';                
                 foreach (METODO_CUESTIONARIO as $key => $v) {
-                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/M'.$key.'/';
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/M'.$key.'/';
                   echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="metodo" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
                 }
                 echo '</ul>';
@@ -67,7 +67,7 @@
                 echo '<input class="form-control" id="residencia" type="text" placeholder="Buscar..">';
                 echo '<ul id="menu2">';
                 foreach ($residenciaActual as $key => $v) {
-                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/R'.$key.'/';
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/R'.$key.'/';
                   echo '<li><input type="checkbox" name="list" id="prov_'.$key.'">
                         <a href="'.$ruta.'1/">'. utf8_encode(ucfirst(strtolower($v['nombre']))).'</a>';                  
                   echo '</li>';  
@@ -91,7 +91,7 @@
               if (!empty($empresas)) {
                 echo '<ul style="padding-left: 0px;">';                
                 foreach ($empresas as $key => $v) {
-                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/I'.$key.'/';
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/I'.$key.'/';
                   echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="empresas" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
                 }
                 echo '</ul>';
@@ -110,7 +110,7 @@
           if (!empty($escolaridad)) {
             echo '<ul style="padding-left: 0px;">';
             foreach ($escolaridad as $key => $v) {
-              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/E'.$key.'/';
+              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/E'.$key.'/';
               echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="escolaridad" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
             }
             echo '</ul>';
@@ -134,7 +134,7 @@
                       <ul id="menu31" class="interior">';
                   foreach ($v['grados'] as $p => $val) {
 
-                    $ruta2 = PUERTO.'://'.HOST.'/filtrarEntrevistados/H'.$key.'_'.$p.'/';
+                    $ruta2 = PUERTO.'://'.HOST.'/filtrarEntrevistados2/H'.$key.'_'.$p.'/';
                     echo '<li><a href="'.$ruta2.'1/">'.utf8_encode(ucfirst(strtolower($val))).'</a></li>';
                   }
                   echo '</ul></li>';
@@ -156,7 +156,7 @@
             <?php
               echo '<ul style="padding-left: 0px;">';
               foreach (EDAD as $key => $v) {
-                $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/F'.$key.'/';
+                $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/F'.$key.'/';
                 echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="edad" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
               }
               echo '</ul>';
@@ -175,7 +175,7 @@
               echo '<input class="form-control" id="nacionalidades" type="text" placeholder="Buscar..">';
             echo '<ul id="menu1">';
            foreach ($nacionalidad as $key => $v) {
-                $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/N'.$key.'/';
+                $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/N'.$key.'/';
                 if($key == SUCURSAL_PAISID){
 
                   echo '<li><input type="checkbox" name="list" id="pais_'.$key.'">
@@ -183,7 +183,7 @@
                       <ul id="menu11" class="interior">';
                   foreach ($v['provincias'] as $p => $val) {
 
-                    $ruta2 = PUERTO.'://'.HOST.'/filtrarEntrevistados/N'.$key.'_'.$p.'/';
+                    $ruta2 = PUERTO.'://'.HOST.'/filtrarEntrevistados2/N'.$key.'_'.$p.'/';
                     echo '<li><a href="'.$ruta2.'1/">'.utf8_encode(ucfirst(strtolower($val))).'</a></li>';
                   }
                   echo '</ul></li>';
@@ -207,7 +207,7 @@
           <?php
             echo '<ul style="padding-left: 0px;">';
             foreach (GENERO as $key => $v) {
-              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/G'.VALOR_GENERO[$key].'/';
+              $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/G'.VALOR_GENERO[$key].'/';
               echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="genero" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
             }
             echo '</ul>';
@@ -224,7 +224,7 @@
             <?php
               echo '<ul style="padding-left: 0px;">';
               foreach (ESTADO_CIVIL as $key => $v) {
-                $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/C'.$key.'/';
+                $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/C'.$key.'/';
                 echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="estado_civil" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
               }
               echo '</ul>';
@@ -243,7 +243,7 @@
               if (!empty($profesion)) {
                 echo '<ul class="list-group" id="listaProfesiones">';
                 foreach ($profesion as $key => $v) {
-                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/P'.$key.'/';
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/P'.$key.'/';
                   echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="profesion" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
                 }
                 echo '</ul>';
@@ -262,7 +262,7 @@
               if (!empty($ocupacion)) {
                 echo '<ul class="list-group" id="listaOcupaciones">';
                 foreach ($ocupacion as $key => $v) {
-                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/O'.$key.'/';
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2/O'.$key.'/';
                   echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="ocupacion" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
                 }
                 echo '</ul>';
@@ -276,16 +276,13 @@
     <div id="links"><?php echo $link; ?></div>
   </div>
   <div class="col-md-9">    
-
-    <a href="<?php echo PUERTO."://".HOST;?>/admin/generarExcel/" class="col-md-1 offset-md-11 btn btn-success"><i class="fa fa-download"></i> Excel</a>
-
     <br><br>
     <div class="card shadow-lg rounded text-center">
       <div class="card-header bg-info text-white">
         Encuestas realizadas
       </div>
       <div class="card-footer bg-transparent text-muted">
-        <?php echo $table;?>
+        <?php echo $table; ?>
       </div>
     </div>
   </div>
@@ -294,7 +291,15 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script> 
 <script src="<?php echo PUERTO."://".HOST;?>/js/minisitio.js"></script>
-
+<script type="text/javascript">
+ $(document).ready(function() {
+    $('#cuestionarios2').DataTable({
+      "language": {
+            "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
+        }
+    });
+} );
+</script>
 
 </body>
 </html>

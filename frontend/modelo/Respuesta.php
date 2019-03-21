@@ -28,9 +28,8 @@ class Modelo_Respuesta{
     }    
     return $return;
   }
-
   public static function verResultados($edad='', $nacionalidad='', $provincia='', $genero='', $estadocivil='', $profesion='', $ocupacion='',
-                                       $escolaridad='', $provinciares='', $empresa='', $competencias=array()){    
+                                       $escolaridad='', $provinciares='', $empresa='', $competencias=array(),$metodo,$visibilidad){    
     $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_provincia, u.genero,
                    TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) AS edad, u.estado_civil, u.id_profesion,
                    u.id_ocupacion, u.id_escolaridad, res.id_pregunta, p.id_competencia,
@@ -51,7 +50,6 @@ class Modelo_Respuesta{
       $sql .= " 'valido' AS flag,"; 
     }
     $sql = substr($sql,0,-1);
-
     $sql .= " FROM mfo_usuariom2 u
             INNER JOIN (SELECT r.id_usuario, o.id_pregunta, GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) AS puntaje, SUM(o.id_pregunta) AS tot_opcion 
                         FROM mfo_respuestam2 r INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion 
@@ -78,20 +76,21 @@ class Modelo_Respuesta{
                   ('".$profesion."' = '' OR u.id_profesion = '".$profesion."') AND
                   ('".$ocupacion."' = '' OR u.id_ocupacion = '".$ocupacion."') AND      
                   ('".$escolaridad."' = '' OR u.id_escolaridad = '".$escolaridad."') AND ";
-    if ($empresa == 0){
-      $sql .= "(u.id_empresa IS NULL) AND ";
-    } 
-    else{
-      if ($empresa == -1){
-        $empresa = '';  
-      }        
-      $sql .= "('".$empresa."' = '' OR u.id_empresa = '".$empresa."') AND ";
-    }                                     
-    $sql .= "     ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";    
+                  if ($empresa == 0){
+                    $sql .= "(u.id_empresa IS NULL) AND ";
+                  } 
+                  else{
+                    if ($empresa == -1){
+                      $empresa = '';  
+                    }        
+                    $sql .= "('".$empresa."' = '' OR u.id_empresa = '".$empresa."') AND ";
+                  }                                   
+    $sql .= "     ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";
+    $sql .= " AND visibilidad = $visibilidad"; 
+    $sql .= " AND metodo_ordenamiento = $metodo ";      
     $sql .= "ORDER BY u.id_usuario, m.id_faceta, p.orden";
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }
-
   public static function resultadoxUsuario($idusuario){
     if (empty($idusuario)){ return false; }
     $sql = "SELECT o.id_pregunta, p.id_competencia, c.id_faceta,        
@@ -100,15 +99,16 @@ class Modelo_Respuesta{
                    SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
                    SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
                    SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
-            FROM mfo_respuestam2 r 
-            INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion
-            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = o.id_pregunta
-            INNER JOIN mfo_competenciam2 c ON c.id_competencia = p.id_competencia            
+            FROM mfo_respuesta r 
+            INNER JOIN mfo_opcion o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia            
             WHERE r.id_usuario = ?
             GROUP BY o.id_pregunta
             ORDER BY o.id_pregunta, c.id_faceta, o.valor";          
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
   }
+
 
 }  
 ?>

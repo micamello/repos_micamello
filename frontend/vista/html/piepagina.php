@@ -4,13 +4,13 @@
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><b>Notificaci&oacute;n</b></h5>   
+        <h5 class="modal-title" id="titulo_noti"><b>Notificaci&oacute;n</b></h5>   
       </div>
       <div class="modal-body">
         <h5 id="mensaje"></h5>
       </div>
       <div class="modal-footer" style="margin-top: 0px;">
-        <button type="button" id="btn_cancelar" class="btn btn-md btn-default" data-dismiss="modal">Cancelar</button>
+        <button type="button" id="btn_cancelar" class="btn btn-md btn-danger" data-dismiss="modal">Cancelar</button>
         <a href="#" id="btn_modal" class="btn btn-md btn-success">Ok</a>
       </div>
     </div>    

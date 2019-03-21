@@ -3,7 +3,13 @@
 foreach ($data as $letra => $value) { 
 
     $f = '';
-    $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados'; 
+
+    if($tablaNueva == 0){
+        $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados'; 
+    }else{
+       $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados2';  
+    }
+
     if($letra == 'A' && $value != 0){
         $ruta .= '/A'.$value['id'];
         $f = 1;
@@ -31,6 +37,11 @@ foreach ($data as $letra => $value) {
 
     if($letra == 'I' && $value >= 0){
         $ruta .= '/I'.$value['id'];
+        $f = 1;
+    }
+
+    if($letra == 'M' && $value >= 0){
+        $ruta .= '/M'.$value['id'];
         $f = 1;
     }
 
@@ -81,8 +92,11 @@ foreach ($data as $letra => $value) {
             <div class="input-group">
                 <span>'.utf8_encode(ucwords(strtolower($value['nombre']))).'</span>
                 <span class="input-group-addon btn-filtro" style="padding:0px; cursor:pointer;">
-                    <p onclick="enviarPclave('.$valores.')"><i style="font-size:20px;" class="fa fa-window-close"></i>
-                    </p>
+                    <p onclick="enviarPclave('.$valores.')">';
+        if($letra != 'M'){
+            echo '<i style="font-size:20px;" class="fa fa-window-close"></i>';
+        }
+        echo '     </p>
                 </span>
             </div>
         </div>';

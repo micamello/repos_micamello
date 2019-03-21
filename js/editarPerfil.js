@@ -1,16 +1,9 @@
-/*var mensaje = 'Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam';
-$(document).ready(function(){
-  swal('Registro exitoso!', mensaje, 'error');
-});*/
-
 if(document.getElementById('form_editarPerfil')){
 
     validarFormulario();
     ocultarCampos();
     mostrarUni();
-
-    if(navegador() != 'MSIE'){
-      $('#fecha').DateTimePicker({
+ $('#ejemplo').DateTimePicker({
         dateFormat: "yyyy-MM-dd",
         shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
         shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
@@ -21,8 +14,24 @@ if(document.getElementById('form_editarPerfil')){
         setButtonContent: "Listo",
         clearButtonContent: "Limpiar"
       });
+    if(navegador() != 'MSIE'){
+      /*$('#fecha').DateTimePicker({
+        dateFormat: "yyyy-MM-dd",
+        shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+        shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+        fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+        titleContentDate: "Configurar fecha",
+        titleContentTime: "Configurar tiempo",
+        titleContentDateTime: "Configurar Fecha & Tiempo",
+        setButtonContent: "Listo",
+        clearButtonContent: "Limpiar"
+      });*/
     }
 }
+
+$('#boton').on('click', function(){
+  enviarFormulario();
+});
 
 if (document.getElementById("area_select"))
 {
@@ -176,7 +185,7 @@ if (document.getElementById("nivel_interes"))
       }
       else {
           $('#nivel_interes option').each(function() {
-              // console.log(this);
+              
               var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
               input.prop('disabled', false);
               input.parent('li').addClass('disabled');
@@ -266,9 +275,6 @@ function eliminar_item_selected(selected_item,tipo,op){
     
 }
 
-/* Carga select dependiente (ciudad) */
-
-/* Carga de imagen dinamico */
 
 $('#file-input').change(function(e) {
     addImage(e); 
@@ -314,7 +320,6 @@ function fileValidation(fileInput){
    
     var tamano = fileInput.files[0].size/1024/1024;
     if(tamano > 1){
-      //colocaError("err_img", "seccion_img","El peso permitido es de máximo es de 1MB","btndeposito");
       document.getElementById('err_img').innerHTML = '<p class="parpadea" style="font-size:11px;color:red">El peso permitido es de máximo 1MB</p>';
       return 1;
     }else{
@@ -322,7 +327,7 @@ function fileValidation(fileInput){
     }
     
   }else if(!allowedExtensions.test(filePath)){
-    //colocaError("err_img", "seccion_img","El formato permitido es .jpeg/.jpg/.png","btndeposito");
+
     fileInput.value = '';
     document.getElementById('err_img').innerHTML = '<p class="parpadea" style="font-size:11px;color:red">El formato permitido es .jpeg/.jpg/.png</p>';
     return 1;
@@ -343,12 +348,6 @@ $('#subirCV').change(function(e) {
     if(document.getElementById("mensaje_error_hv")){
         document.getElementById("mensaje_error_hv").style.display = "none";
     }
-
-    /*var estado = validarFormulario();
-
-    if(estado != ''){
-      swal('Faltan algunos datos verifica!', estado, 'error');
-    }*/
 });
 
 /* Carga de hoja de vida */
@@ -377,15 +376,9 @@ $('#nivel_idi_of').on('change', function(){
 function enableBTN(event){
     
     var flag = false;
-    //var estado = validarFormulario();
     if(errorsVerify() != false){
-        //var btn = document.getElementById('boton');
-        //btn.classList.remove("disabled");
-        //btn.removeAttribute("disabled");
         flag = true;
-    }/*else{
-      swal('Faltan algunos datos verifica!', estado, 'error');
-    }*/
+    }
 
     return flag;
 }
@@ -644,7 +637,7 @@ function ocultarCampos(){
 function enviarFormulario(){
 
     var estado = validarFormulario();
-    console.log(estado);
+    //console.log(estado);
     if(estado == ''){
         document.form_editarPerfil.submit();
     }else{
@@ -693,8 +686,8 @@ function validarFormulario(){
         var licencia = document.getElementById('licencia').selectedIndex;
         var escolaridad = document.getElementById('escolaridad').selectedIndex;
         //var estatus = document.getElementById('estatus').selectedIndex;
-        var area_select = document.getElementById('area_select');
-        var nivel_interes = document.getElementById('nivel_interes');
+        //var area_select = document.getElementById('area_select');
+        //var nivel_interes = document.getElementById('nivel_interes');
         var select_array_idioma = document.getElementById('select_array_idioma');
         var lugar_estudio = document.getElementById('lugar_estudio');
         var universidad = document.getElementById('universidad').selectedIndex;
@@ -719,13 +712,36 @@ function validarFormulario(){
             error = 1;
           }  
           
-          var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
-          if(validar != ''){ 
-            mensaje += validar+'\n';         
-            error = 1;
+
+          if($('#dni').val() != ""){
+
+            if(document.getElementById('dni').value.length >= 10){
+              if(searchAjax($('#dni'),tipo_doc) == false){
+                if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+                  quitarError("err_dni","seccion_dni");
+                }else{
+                  colocaError("err_dni", "seccion_dni","- Documento ingresado no es válido","boton");
+                  mensaje += "Documento ingresado no es válido"+'\n';
+                  error = 1;      
+                }
+              }else{
+                colocaError("err_dni", "seccion_dni","- Documento ingresado ya existe","boton");
+                mensaje += "- Documento ingresado ya existe"+'\n'; 
+                error = 1; 
+              } 
+            }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
+
+              colocaError("err_dni", "seccion_dni","- El número de cédula debe tener mínimo 10 dígitos","boton");
+
+            }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 13){
+
+              colocaError("err_dni", "seccion_dni","- El RUC debe tener mínimo 13 dígitos","boton");
+            }
           }else{
-            quitarError("err_dni","seccion_dni");
-          }     
+            colocaError("err_dni", "seccion_dni","- Documento no puede ser vacío","boton");
+            mensaje += "- Documento no puede ser vacío"+'\n';
+            error = 1;
+          }
         }
 
         if(document.getElementById('subirCV') && document.getElementById('subirCV').value != ''){
@@ -871,7 +887,7 @@ function validarFormulario(){
         } 
 
 
-        if(area_select.value == null || area_select.value == 0){
+        /*if(area_select.value == null || area_select.value == 0){
 
             colocaError("err_area", "seccion_area",err_list,"boton");
             mensaje += '- Area, '+err_list+'\n';
@@ -905,7 +921,7 @@ function validarFormulario(){
             }else{
                 quitarError("err_int", "seccion_int");
             }
-        }
+        }*/
 
         if((select_array_idioma.length) == 0 || (select_array_idioma.length) == -1){
 
@@ -1122,6 +1138,35 @@ function validarFormulario(){
         return '';
     }
 }
+
+function searchAjax(obj,tipo_dni){
+
+  var val_retorno1 = "";  
+  var puerto_host = $('#puerto_host').val();
+  var contenido = $(obj).val();
+  var url;
+  if(contenido != "" && tipo_dni != ""){
+    $.ajax({
+      type: "GET",
+      url: url = puerto_host+"/index.php?mostrar=perfil&opcion=buscarDni&dni="+contenido,
+      dataType:'json',
+      async: false,
+      success:function(data){
+          if($.trim(data.resultado)){
+            val_retorno1 = false;
+          }
+          else{
+            val_retorno1 = true;
+          }
+      },
+      error: function (request, status, error) {
+          console.log(request.responseText);
+      }
+    });
+  }
+  return val_retorno1;
+}
+
  
 function enviarCambioClave(){
 

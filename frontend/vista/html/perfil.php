@@ -65,16 +65,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 							<?php } ?>
 							
 							<?php 
-/*echo 'btnSubir';
-print_r($btnSubir);
-echo 'data';
-print_r($data);
-echo 'btnDescarga';
-print_r($btnDescarga);*/ 
 							#if(/*$btnSubir == 1 || */isset($data)){ 
-
-
-
 							
 								?>
 								<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
@@ -98,7 +89,7 @@ print_r($btnDescarga);*/
 				    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/cambiar_clave.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
 			           	<div>
 			                <label for="cambiar" class="custom_file">
-			                	<a onclick="abrirModal('','cambiar_clave','','Ok');">
+			                	<a onclick="abrirModal('','cambiar_clave','','');">
 			                		<img id="cambiar" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/btn_cambiar_clave.png";?>" width="50px">
 			                	</a>
 			                </label>
@@ -109,7 +100,7 @@ print_r($btnDescarga);*/
 			            <br>
 				    </div>
 
-				    <?php if($puedeDescargarInforme > 0){ ?>
+				    <?php if($puedeDescargarInforme == 1){ ?>
 					    <div class="panel panel-default shadow" style="border-radius: 20px;">
 					    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/descargar_informe.png";?>" style="border-radius: 20px 20px 0px 0px;">
 				           	<div>
@@ -147,7 +138,7 @@ print_r($btnDescarga);*/
 	                                    	<div class="col-md-6">
 									            <div class="form-group" id="seleccione_group">
 									              <label for="tipo_dni">Tipo de documento</label><div id="seleccione_error" class="help-block with-errors"></div>
-									              <select class="form-control" id="documentacion" name="documentacion" onchange="validarFormulario()" <?php if($_SESSION['mfo_datos']['usuario']['tipo_doc'] == 0){ echo ''; }else{ echo 'disabled';} ?>>
+									              <select class="form-control" id="documentacion" name="documentacion" <?php if($_SESSION['mfo_datos']['usuario']['tipo_doc'] == 0){ echo ''; }else{ echo 'disabled';} ?>>
 									                <option selected="" value="">Seleccione una opcion</option>
 									                <?php 
 									                  $option = '';
@@ -242,6 +233,7 @@ print_r($btnDescarga);*/
 		                                        <label for="mayor_edad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Fecha de Nacimiento <?php }else{ ?> Fecha de Apertura <?php } ?><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="error" class="help-block with-errors"></div>
 		                                         <input type="text" data-field="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>" placeholder="aaaa-mm-dd" value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>">
 		                                         <div id="fecha"></div>
+		                                         <div id="ejemplo"></div>
 		                                    </div>
 	                                    </div>
 
@@ -472,7 +464,7 @@ print_r($btnDescarga);*/
 													<input type="text" name="universidad2" id="universidad2" maxlength="100" class="form-control"   pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ.]+" style="display:none" onkeyup="validarFormulario()" value="<?php if(isset($data['universidad2'])){ echo $data['universidad2']; } else{ if($_SESSION['mfo_datos']['usuario']['nombre_univ'] != ' '){ echo $_SESSION['mfo_datos']['usuario']['nombre_univ']; } } ?>">
 		                                        </div>
 		                                    </div>
-
+<!--
 		                                    <div class="col-md-6">	
 												<div class="form-group" id="seccion_area">
 													<div class="panel panel-default">
@@ -488,7 +480,7 @@ print_r($btnDescarga);*/
 														</div>
 													  	<select class="form-control" multiple id="area_select" name="area_select[]"  onchange="validarFormulario()" >
 															<?php 
-															if (!empty($arrarea)){
+															/*if (!empty($arrarea)){
 											                	foreach($arrarea as $key => $ae){ 
 																	echo "<option value='".$ae['id_area']."'";
 																	if(isset($data['area_select'])){
@@ -504,7 +496,7 @@ print_r($btnDescarga);*/
 																	}
 																	echo ">".utf8_encode($ae['nombre'])."</option>";
 																} 
-															}?>
+															}*/ ?>
 														</select>
 													</div>
 												</div>
@@ -526,7 +518,7 @@ print_r($btnDescarga);*/
 													  	<select class="form-control" multiple id="nivel_interes" name="nivel_interes[]"  onchange="validarFormulario()" >
 
 															<?php 
-															if (!empty($arrinteres)){
+															/*if (!empty($arrinteres)){
 											                	foreach($arrinteres as $key => $ae){ 
 																	echo "<option value='".$ae['id_nivelInteres']."'";
 				
@@ -544,11 +536,11 @@ print_r($btnDescarga);*/
 																	echo ">".utf8_encode($ae['descripcion']);
 																	echo "</option>";
 																} 
-															} ?>
+															} */ ?>
 														</select>
 													</div>
 												</div>
-											</div>
+											</div>-->
 
 		                                    <div class="clearfix"></div>
 		                                
@@ -699,7 +691,7 @@ print_r($btnDescarga);*/
 
 					                <div class="row">
 					                	
-										<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR" onclick="enviarFormulario()">
+										<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR">
 
 										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
@@ -750,7 +742,7 @@ print_r($btnDescarga);*/
 	      </div>
 	      <input type="hidden" name="cambiarClave" id="cambiarClave" value="1">
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 	        <!--<a href="" class="btn btn-success" id="btncambiar">Cambiar</a>-->
 	        <input type="button" id="button_cambiar" name="btnusu" class="btn btn-success" value="Cambiar" onclick="enviarCambioClave()"> 
 	      </div>

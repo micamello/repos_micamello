@@ -32,7 +32,7 @@ class Modelo_Usuario{
     return true;
   }
 
-  public static function autenticacion($username, $password){
+public static function autenticacion($username, $password){
     $password = md5($password);         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni
             FROM mfo_usuario_login 
@@ -40,10 +40,10 @@ class Modelo_Usuario{
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
-      $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                     u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,  u.anosexp, u.status_carrera,                       
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado 
+      $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
+                     u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -109,6 +109,15 @@ public static function existeUsuario($username){
     $rs = $GLOBALS['db']->auto_array($sql,array($username));
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
+
+/*public static function existeUsuario2($username){
+  if(empty($username)){ return false; }
+  $sql = "SELECT *
+          FROM mfo_usuario u
+          WHERE u.username = ?";
+  $rs = $GLOBALS['db']->auto_array($sql,array($username));
+  return (!empty($rs['id_usuario'])) ? $rs : false;
+}*/
 
 public static function existeUsername($username){
   if(empty($username)){return false;}
@@ -185,8 +194,8 @@ public static function existeUsername($username){
 
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                     u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia, u.anosexp, u.status_carrera,                       
+                      u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                      
                      u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, ul.correo, ul.dni, ul.username, ul.tipo_usuario
               FROM mfo_usuario u
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login

@@ -13,6 +13,14 @@ class Controlador_Perfil extends Controlador_Base
         
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
+            case 'buscarDni':
+                $dni = Utils::getParam('dni', '', $this->data); 
+                $datodni = Modelo_Usuario::existeDni($dni,$_SESSION['mfo_datos']['usuario']['id_usuario_login']);
+                /*if (empty($datodni)){
+                  throw new Exception("La c\u00E9dula o pasaporte ".$data["dni"]." ya existe");
+                }*/
+                Vista::renderJSON(array('resultado' => $datodni));
+            break;
             case 'buscaDependencia':
                 $id_escolaridad = Utils::getParam('id_escolaridad', '', $this->data); 
                 $dependencia    = Modelo_Escolaridad::obtieneDependencia($id_escolaridad);
@@ -30,7 +38,7 @@ class Controlador_Perfil extends Controlador_Base
                 $arrarea      = Modelo_Area::obtieneListado();
                 $arrinteres   = Modelo_Interes::obtieneListado();
                 $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
-                $puedeDescargarInforme = self::obtenerPermiso($idusuario);
+                $puedeDescargarInforme = self::obtenerPermiso($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
@@ -118,7 +126,7 @@ class Controlador_Perfil extends Controlador_Base
                 $tags["template_css"][] = "DateTimePicker";
                 $tags["template_js"][] = "bootstrap-multiselect";
                 $tags["template_js"][] = "mic";
-                $tags["template_js"][] = "ruc_jquery_validator";
+                $tags["template_js"][] = "DniRuc_Validador";
                 $tags["template_js"][] = "DateTimePicker";
                 $tags["template_js"][] = "editarPerfil";
                 $tags["show_banner"] = 1;
@@ -134,7 +142,7 @@ class Controlador_Perfil extends Controlador_Base
     {
         try {
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area_select' => 1, 'nivel_interes' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1/*, 'area_select' => 1, 'nivel_interes' => 1*/, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
 
                 if (isset($_POST['dni'])){
                   $campos['dni'] = 1;
@@ -305,12 +313,12 @@ class Controlador_Perfil extends Controlador_Base
                 if(isset($_SESSION['mfo_datos']['usuarioxnivel'])){
                     $array_data_nivel = $_SESSION['mfo_datos']['usuarioxnivel'];
                 }
-                if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $data['area_select'], $idUsuario)) {
+                /*if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $data['area_select'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar las areas de interes, intente nuevamente");
                 }
                 if (!Modelo_UsuarioxNivel::updateNiveles($array_data_nivel, $data['nivel_interes'], $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
-                }
+                }*/
             }            
             $GLOBALS['db']->commit();
             Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario));
@@ -347,14 +355,10 @@ class Controlador_Perfil extends Controlador_Base
 
     public function obtenerPermiso($idusuario){
 
-        $testDados = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
-        $facetas = Modelo_Faceta::obtenerLiterales();
+        $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
         $informe = 0;
-
-        if($testDados == count($facetas)){
+        if($cantd_facetas > 0){
             $informe = 1;
-        }else if($testDados > 0 && $testDados < count($facetas)){
-            $informe = 2;
         }
         return $informe;
     }

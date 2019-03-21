@@ -74,16 +74,25 @@ jQuery(document).ready(function ($) {
 
 });
 
-function abrirModal(mensaje,id,enlace,btn){
+function abrirModal(mensaje,id,enlace,btn,titulo){
 
     $('#mensaje').html(mensaje);
 
-    if(btn != 'Ok'){
+    if(btn != 'Ok' && btn != ''){
+
       $('#'+btn).html('Aceptar');
       document.getElementById('btn_cancelar').style.display = 'inline-block';
       document.getElementById(btn).setAttribute('href', enlace);
-    }else{
-      document.getElementById('btn_cancelar').style.display = 'none';
+    }else{ 
+
+      if(btn == ''){
+        document.getElementById('btn_cancelar').style.display = 'none';
+      }
+      $('#btn_modal').html('Aceptar');
+
+      if($('#titulo_noti')){
+        $('#titulo_noti').html('<b>'+titulo+'</b>');
+      }
       document.getElementById('btn_modal').setAttribute('href', enlace);
     }
 

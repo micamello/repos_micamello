@@ -32,8 +32,13 @@ class Modelo_Postulacion{
 	    return $datos;
 	} 
 
-	public static function eliminarPostulacion($id_postulacion){
-		$result = $GLOBALS['db']->delete('mfo_postulacion','id_auto = '.$id_postulacion);
+	public static function eliminarPostulacion($id_postulacion,$tipo){
+
+		if($tipo == 1){
+			$GLOBALS['db']->delete('mfo_postulacion_automatica','id_postulacion IN('.$id_postulacion.')');
+		}
+		$result = $GLOBALS['db']->delete('mfo_postulacion','id_auto IN('.$id_postulacion.')');
+
 		return $result;
 	}
 
@@ -81,6 +86,17 @@ class Modelo_Postulacion{
 	public static function eliminarPostAutoxId($idpostauto){
 		if (empty($idpostauto)){ return false; }
 		return $GLOBALS['db']->delete('mfo_postulacion_automatica','id_postauto = '.$idpostauto);
+	}
+
+	public static function postAutoxIdPostAeliminar($idusuario,$idempresa,$tiempo){
+		if (empty($idusuario) || empty($idempresa) || empty($tiempo)){ return false; }
+
+		$sql = "SELECT GROUP_CONCAT(p.id_auto) as ids_postulaciones FROM mfo_oferta o 
+			INNER JOIN mfo_postulacion p ON p.id_ofertas = o.id_ofertas
+    		INNER JOIN mfo_postulacion_automatica a ON a.id_postulacion = p.id_auto
+			WHERE o.id_empresa = $idempresa AND p.id_usuario = $idusuario 
+    		AND TIMESTAMPDIFF(MINUTE, p.fecha_postulado,now()) <= ".($tiempo*60);
+    	return $GLOBALS['db']->auto_array($sql,array(),false);
 	}
 }  
 ?>

@@ -2,7 +2,7 @@
 class Modelo_Faceta{
   
   public static function obtenerLiterales(){
-    $sql = "SELECT id_faceta,SUBSTRING(descripcion, 1, 1) as faceta FROM mfo_facetam2 WHERE estado = 1";  
+    $sql = "SELECT id_faceta,SUBSTRING(descripcion, 1, 1) as faceta FROM mfo_faceta WHERE estado = 1";  
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
     $datos = array();
      $existe = 0;
@@ -15,7 +15,7 @@ class Modelo_Faceta{
   }
   public static function obtenerFacetas(){
     
-    $sql = "SELECT id_faceta,descripcion as faceta FROM mfo_facetam2 WHERE estado = 1";  
+    $sql = "SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1";  
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
     $datos = array();
     $existe = 0;
@@ -27,7 +27,7 @@ class Modelo_Faceta{
     return $datos;         
   }
   public static function obtenerColoresLiterales(){
-    $sql = "SELECT id_faceta,color FROM mfo_facetam2 WHERE estado = 1";  
+    $sql = "SELECT id_faceta,color FROM mfo_faceta WHERE estado = 1";  
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
     $datos = array();
   if (!empty($arrdatos) && is_array($arrdatos)){
@@ -40,7 +40,7 @@ class Modelo_Faceta{
   public static function consultaIndividual($idfaceta){
     if (empty($idfaceta)){ return false; }
     $sql = "SELECT descripcion, introduccion
-            FROM mfo_facetam2
+            FROM mfo_faceta
             WHERE id_faceta = ? LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($idfaceta));
   }
