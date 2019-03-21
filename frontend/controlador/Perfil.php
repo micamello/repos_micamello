@@ -34,6 +34,7 @@ class Controlador_Perfil extends Controlador_Base
                 break;
             default:
 
+
                 //Listados de datos para llenar los select de la vista
                 $arridioma = Modelo_Idioma::obtieneListado();
                 $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
@@ -98,11 +99,13 @@ class Controlador_Perfil extends Controlador_Base
                 //Verifica si el usuario tiene datos en la variable de session para las areas y subareas seleccionadas
                 if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
                     $areaxusuario  = $_SESSION['mfo_datos']['usuario']['usuarioxarea'];
-                    $nivelxusuario = $_SESSION['mfo_datos']['usuario']['usuarioxnivel'];
+                    //$nivelxusuario = $_SESSION['mfo_datos']['usuario']['usuarioxnivel'];
                 }else{
                     $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                    $nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    //$nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
+
+                //print_r($areaxusuario);
                 $nrototaltest = Modelo_Cuestionario::totalTest();
                 //$cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
@@ -162,7 +165,7 @@ class Controlador_Perfil extends Controlador_Base
     {
         try {
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1/*, 'area_select' => 1, 'nivel_interes' => 1*/, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area' => 1/*, 'nivel_interes' => 1*/, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1);
 
                 if (isset($_POST['dni'])){
                   $campos['dni'] = 1;
@@ -326,19 +329,25 @@ class Controlador_Perfil extends Controlador_Base
                         throw new Exception("Ha ocurrido un error al guardar los idiomas del usuario, intente nuevamente");
                     }
                 }   
-                $array_data_area = $array_data_nivel =array();
-                if(isset($_SESSION['mfo_datos']['usuarioxarea'])){
-                    $array_data_area = $_SESSION['mfo_datos']['usuarioxarea'];
+                $array_data_area = array();
+                if(isset($_SESSION['mfo_datos']['usuario']['subareas'])){
+                    $array_data_area = explode(",",$_SESSION['mfo_datos']['usuario']['subareas']);
                 }
-                if(isset($_SESSION['mfo_datos']['usuarioxnivel'])){
-                    $array_data_nivel = $_SESSION['mfo_datos']['usuarioxnivel'];
+
+                if(isset($_POST['subareas']) && !empty($_POST['subareas'])){
+                    $array_subareas_seleccionadas = array();
+                    $areas_subareas = array();
+                    foreach ($_POST['subareas'] as $i => $datos_select_area) {
+                        
+                        $valor = explode("_", $datos_select_area);
+                        $areas_subareas[$valor[0]][] = $valor[2];
+                        array_push($array_subareas_seleccionadas, $valor[2]);
+                    }
                 }
-                /*if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $data['area_select'], $idUsuario)) {
+
+                if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar las areas de interes, intente nuevamente");
                 }
-                if (!Modelo_UsuarioxNivel::updateNiveles($array_data_nivel, $data['nivel_interes'], $idUsuario)) {
-                    throw new Exception("Ha ocurrido un error al guardar los niveles de interes, intente nuevamente");
-                }*/
             }            
             $GLOBALS['db']->commit();
             Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario));

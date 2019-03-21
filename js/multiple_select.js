@@ -150,9 +150,9 @@ function inicializarDependencia(obj){
 				opcion_texto = $(opciones[i]).text();
 				opcion_value = $(opciones[i]).val();
 				var area_val = $(opciones[i]).val().split("_")[0];
+				selected_class = "";
+				check_check = "";
 				if($(opciones[i]).attr('selected')){
-					selected_class = "";
-					check_check = "";
 					selected_class = "subarea_selected"; check_check = "checked";
 				}
 				if(e != area_val){

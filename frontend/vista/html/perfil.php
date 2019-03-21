@@ -465,45 +465,57 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    </div>
 
 		                                    <div class="col-md-6">
-												<div class="form-group">
-												<label>Seleccione área</label>
-												<select class="form-control" id="area" name="area" multiple="multiple">
-												  <!-- <option value="">Seleccione una opción</option> -->
-												  <?php 
-												  $i = 0;
-												    if(!empty($areas) && is_array($areas)){
-												      foreach ($areas as $area) {
-												        if($i != $area['id_area']){
-												          echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
-												          $i = $area['id_area'];
-												        }
-												      }
-												    }
-												   ?>
-												</select>
-												</div>
-												</div>
+												<div class="form-group" id="seccion_area">
+													<label>&Aacute;reas de Inter&eacute;s (Máx 3) <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<div id="err_area" class="help-block with-errors"></div>
+													<select class="form-control" id="area" name="area[]" multiple="multiple">
+													  <!-- <option value="">Seleccione una opción</option> -->
+													  <?php 
+													  $i = 0;
+													    if(!empty($areas) && is_array($areas)){
+													      foreach ($areas as $area) {
+ 															$selected = '';
+													        if($i != $area['id_area']){
 
-												<div class="col-md-6">
-												<div class="form-group">
-												<label>Seleccione subareas</label>
-												<select class="form-control" id="subareas" name="subareas" multiple="multiple">
-												  <!-- <option value="">Seleccione una opción</option> -->
-												  <?php 
-												  $j = 0;
-												    if(!empty($areas) && is_array($areas)){
-												      foreach ($areas as $area) {
-												        if($j != $area['id_subareas']){
-												          echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
-												          $j = $area['id_subareas'];
-												        }
-												      }
-												    }
-												   ?>
-												</select>
+													        	if(isset($areaxusuario[$area['id_area']])){
+													        		$selected = "selected='selected'";
+													        	}
+													          	echo "<option ".$selected." value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
+													          	$i = $area['id_area'];
+													        }
+													      }
+													    }
+													   ?>
+													</select>
 												</div>
+											</div>
 
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Subareas <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<div class="help-block with-errors"></div>
+													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple">
+													  <!-- <option value="">Seleccione una opción</option> -->
+													  <?php 
+													  $j = 0;
+													    if(!empty($areas) && is_array($areas)){
+													      foreach ($areas as $area) {
+													      	$selected = '';
+													        if($j != $area['id_subareas']){
+
+													        	if(in_array($area['id_subareas'], $areaxusuario[$area['id_area']])){
+													        		$selected = "selected='selected'";
+													        	}
+													          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
+													          	$j = $area['id_subareas'];
+													        }
+													      }
+													    }
+													   ?>
+													</select>
 												</div>
+											</div>
+
 		                                    <div class="clearfix"></div>
 		                                
 		                                    <div class="col-md-4 col-md-offset-1">

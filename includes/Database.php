@@ -88,8 +88,15 @@ class Database{
 
   function insert_multiple($table,$campos,$data){   
     $valores = '';
+
     foreach ($data as $key => $datos) {
-      $valores .= '('.implode(',', utf8_decode($datos)).'),';
+
+      if(is_string($datos)){
+        $valor = utf8_decode($datos);
+      }else{
+        $valor = $datos;
+      }
+      $valores .= '('.implode(',', $valor).'),';
     }
     $valores = substr($valores, 0,strlen($valores)-1);
 
@@ -100,6 +107,7 @@ class Database{
     $query .= ') VALUES';
     $query .= $valores;
     $query .= ';';
+
     return $this->execute( $query );
   }
 

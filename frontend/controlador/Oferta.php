@@ -479,15 +479,16 @@ class Controlador_Oferta extends Controlador_Base{
               }else{
                 $tipo_post = 2;
               }
-              
+
               $r = Modelo_Postulacion::postAutoxIdPostAeliminar($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa,$tiempo);
 
               if(!empty($r['ids_postulaciones'])){
                 $resultado = Modelo_Postulacion::eliminarPostulacion($r['ids_postulaciones'],$tipo_post);
                 if(empty($resultado)){
-                    $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo2';
+                    $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo1';
                 }else{
                   Modelo_EmpresaBloq::insertEmpresa($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa);
+                  self::devolverPostulaciones(explode(",",$r['ids_usuariosplanes']));
                   $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
                 }
@@ -498,7 +499,7 @@ class Controlador_Oferta extends Controlador_Base{
                 }else{
                   $resultado = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion,$tipo_post);
                   if(empty($resultado)){
-                      $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo1';
+                      $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo2';
                   }else{
                     $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
                     Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
@@ -651,6 +652,14 @@ class Controlador_Oferta extends Controlador_Base{
         }
       }
       return $ruta;
+    }
+
+    public static function devolverPostulaciones($ids_planes){
+
+      foreach ($ids_planes as $key => $id_plan_usuario) {
+        Modelo_UsuarioxPlan::sumarPublicaciones($id_plan_usuario);
+      }
+
     }
 }
 ?>

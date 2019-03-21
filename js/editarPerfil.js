@@ -689,7 +689,7 @@ function validarFormulario(){
         var licencia = document.getElementById('licencia').selectedIndex;
         var escolaridad = document.getElementById('escolaridad').selectedIndex;
         //var estatus = document.getElementById('estatus').selectedIndex;
-        //var area_select = document.getElementById('area_select');
+        var area_select = document.getElementById('area');
         //var nivel_interes = document.getElementById('nivel_interes');
         var select_array_idioma = document.getElementById('select_array_idioma');
         var lugar_estudio = document.getElementById('lugar_estudio');
@@ -736,7 +736,11 @@ function validarFormulario(){
 
               colocaError("err_dni", "seccion_dni","- El número de cédula debe tener mínimo 10 dígitos","boton");
 
-            }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 13){
+            }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+
+              colocaError("err_dni", "seccion_dni","- El pasaporte debe tener mínimo 6 dígitos","boton");
+            }
+            else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
 
               colocaError("err_dni", "seccion_dni","- El RUC debe tener mínimo 13 dígitos","boton");
             }
@@ -889,26 +893,25 @@ function validarFormulario(){
             }
         } 
 
-
-        /*if(area_select.value == null || area_select.value == 0){
+        if(area_select.value == null || area_select.value == 0){
 
             colocaError("err_area", "seccion_area",err_list,"boton");
-            mensaje += '- Area, '+err_list+'\n';
+            mensaje += '- \u00C1reas, '+err_list+'\n';
             error = 1;
         }else{
 
-            var cantd_selec = $('#seleccionados1').find('help-block').length;
+            /*var cantd_selec = $('#seleccionados1').find('help-block').length;
             if(cantd_selec != 0)
             {
                 colocaError("err_area", "seccion_area",err_list,"boton");
                 mensaje += '- Area, '+err_list+'\n';
                 error = 1;
-            }else{
+            }else{*/
                 quitarError("err_area", "seccion_area");
-            }
+            //}
         }
 
-        if(nivel_interes.value == null || nivel_interes.value == 0){
+        /*if(nivel_interes.value == null || nivel_interes.value == 0){
 
             colocaError("err_int", "seccion_int",err_list,"boton");
             mensaje += '- Nivel de Interes, '+err_list+'\n';

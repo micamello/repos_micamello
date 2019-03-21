@@ -91,11 +91,11 @@ class Modelo_Postulacion{
 	public static function postAutoxIdPostAeliminar($idusuario,$idempresa,$tiempo){
 		if (empty($idusuario) || empty($idempresa) || empty($tiempo)){ return false; }
 
-		$sql = "SELECT GROUP_CONCAT(p.id_auto) as ids_postulaciones FROM mfo_oferta o 
+		$sql = "SELECT GROUP_CONCAT(p.id_auto ORDER BY p.id_auto) as ids_postulaciones, GROUP_CONCAT(a.id_usuarioplan ORDER BY p.id_auto) as ids_usuariosplanes FROM mfo_oferta o 
 			INNER JOIN mfo_postulacion p ON p.id_ofertas = o.id_ofertas
     		INNER JOIN mfo_postulacion_automatica a ON a.id_postulacion = p.id_auto
 			WHERE o.id_empresa = $idempresa AND p.id_usuario = $idusuario 
-    		AND TIMESTAMPDIFF(MINUTE, p.fecha_postulado,now()) <= ".($tiempo*60);
+    		AND TIMESTAMPDIFF(MINUTE, p.fecha_postulado,now()) <= ".($tiempo*60).' ORDER BY p.id_auto ASC';
     	return $GLOBALS['db']->auto_array($sql,array(),false);
 	}
 }  
