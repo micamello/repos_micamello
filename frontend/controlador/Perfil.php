@@ -3,6 +3,7 @@ class Controlador_Perfil extends Controlador_Base
 {
     public function construirPagina()
     {
+        //Si el usuario no esta logueado lo retorna a la página de logueo
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
@@ -15,23 +16,25 @@ class Controlador_Perfil extends Controlador_Base
         switch ($opcion) {
             case 'buscarDni':
                 $dni = Utils::getParam('dni', '', $this->data); 
+                //Permite determinar si el documento ingresado ya esta registrado en base de datos
                 $datodni = Modelo_Usuario::existeDni($dni,$_SESSION['mfo_datos']['usuario']['id_usuario_login']);
-                /*if (empty($datodni)){
-                  throw new Exception("La c\u00E9dula o pasaporte ".$data["dni"]." ya existe");
-                }*/
                 Vista::renderJSON(array('resultado' => $datodni));
             break;
             case 'buscaDependencia':
                 $id_escolaridad = Utils::getParam('id_escolaridad', '', $this->data); 
+                //Permite obtener cuales de las ecolaridades es dependiente 
                 $dependencia    = Modelo_Escolaridad::obtieneDependencia($id_escolaridad);
                 Vista::renderJSON($dependencia);
             break;
             case 'buscaCiudad':
                 $id_provincia = Utils::getParam('id_provincia', '', $this->data);
+                //Permite buscar todas las ciudades relacionadas con la provincia pasada por parametro
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($id_provincia);
                 Vista::renderJSON($arrciudad);
                 break;
             default:
+
+                //Listados de datos para llenar los select de la vista
                 $arridioma = Modelo_Idioma::obtieneListado();
                 $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
                 $escolaridad  = Modelo_Escolaridad::obtieneListado();
@@ -39,9 +42,9 @@ class Controlador_Perfil extends Controlador_Base
                 $arrinteres   = Modelo_Interes::obtieneListado();
                 $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
                 $puedeDescargarInforme = self::obtenerPermiso($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
+
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
                 $imgArch2  = 'upload-icon.png';
@@ -50,22 +53,33 @@ class Controlador_Perfil extends Controlador_Base
                 $btnSubir  = 1;
                 $btnDescarga = 0;
                 $data = array();
+
+                //Detecta si el parametro actualizar viene por post para así acceder a la edición
                 if (Utils::getParam('actualizar') == 1) {
                     $btnSig = 1;
                     if(!isset($_FILES['subirCV'])){
                         $_FILES['subirCV'] = ''; 
                     }
                     $btnSubir  = 0;
+
+                    //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
 
                 }
+                //Detecta si el parametro cambiarClave viene por post para así acceder al cambio de clave
                 if (Utils::getParam('cambiarClave') == 1) {
+
+                    //Guarda el cambio de clave
                     self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login']);
                     $_SESSION['mostrar_exito'] = 'La contrase\u00F1a fue modificada exitosamente.';
                 }
+
+                //Obtiene los datos necesarios según los datos del usuario
                 $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
                 $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+
+                //Valida que el único que guarda foto es el candidato y si tiene o no cargado uno previo
                 if (isset($_SESSION['mfo_datos']['infohv']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
                     if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
                         $imgArch1 = 'actualizar.png';
@@ -75,18 +89,11 @@ class Controlador_Perfil extends Controlador_Base
                     $msj1        = 'Cv Cargado';
                     $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
                     $ruta_arch   = PUERTO."://".HOST.'/hojasDeVida/'.$_SESSION['mfo_datos']['usuario']['username'].'/';
-                    $btnDescarga = 1;
-                    /*if(!isset($data)){
-                        $btnSubir  = 0;
-                        $btnDescarga = 1;
-                    }else{
-                        $btnSubir  = 1;
-                        $btnDescarga = 0;
-                    }*/
-                    
+                    $btnDescarga = 1;                   
                     $msj2        = 'Actualizar CV';
                 }
 
+                //Verifica si el usuario tiene datos en la variable de session para las areas y subareas seleccionadas
                 if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
                     $areaxusuario  = $_SESSION['mfo_datos']['usuario']['usuarioxarea'];
                     $nivelxusuario = $_SESSION['mfo_datos']['usuario']['usuarioxnivel'];
@@ -122,14 +129,22 @@ class Controlador_Perfil extends Controlador_Base
                     'nivelIdiomas'              => $nivelIdiomas,
                     'puedeDescargarInforme'     =>$puedeDescargarInforme
                 );
+
+                //Pasar a la vista los js y css que se van a necesitar
                 $tags["template_css"][] = "bootstrap-multiselect";
-                $tags["template_css"][] = "DateTimePicker";
                 $tags["template_js"][] = "bootstrap-multiselect";
+
+                $tags["template_css"][] = "DateTimePicker";
+                $tags["template_css"][] = "multiple_select";
+
+                $tags["template_js"][] = "multiple_select";
                 $tags["template_js"][] = "mic";
                 $tags["template_js"][] = "DniRuc_Validador";
                 $tags["template_js"][] = "DateTimePicker";
                 $tags["template_js"][] = "editarPerfil";
                 $tags["show_banner"] = 1;
+
+                //En caso de lanzar algún error se guarda en la variable data para mostrar en los campos y no tenga que volverlos a escribir el usuario
                 if(!empty($_SESSION['mostrar_error'])){
                     $tags['data'] = $data;
                     $tags['btnSig'] = 0;
@@ -138,6 +153,8 @@ class Controlador_Perfil extends Controlador_Base
             break;
         }
     }
+
+    //Función para hacer el validado de todos los campos del módulo de perfil y si no hay ningun problema proceder al guardado, sino hace un rollback
     public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario)
     {
         try {
@@ -154,9 +171,9 @@ class Controlador_Perfil extends Controlador_Base
             } else {
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
             }
-            //print_r('aaaa:'.print_r($this->data,true));
+
             $data = $this->camposRequeridos($campos);
-            //print_r('bbbb:'.print_r($data,true)); 
+ 
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
@@ -330,6 +347,7 @@ class Controlador_Perfil extends Controlador_Base
         return $data;
     }
 
+    //Función que permite el cambio de clave, verifica que no existe ningún error y procede a registrarlas
     public function guardarClave($id_login){
         try {
             if($_POST["password"] != "" || $_POST["password_two"] != ""){
@@ -353,6 +371,7 @@ class Controlador_Perfil extends Controlador_Base
         }
     }
 
+    //Función que permite saber si el usuario puede o no descargar un informe de personalidad parcial o completo
     public function obtenerPermiso($idusuario){
 
         $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);

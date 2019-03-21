@@ -3,7 +3,9 @@ if(document.getElementById('form_editarPerfil')){
     validarFormulario();
     ocultarCampos();
     mostrarUni();
- $('#ejemplo').DateTimePicker({
+
+    if(navegador() != 'MSIE'){
+      $('#fecha').DateTimePicker({
         dateFormat: "yyyy-MM-dd",
         shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
         shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
@@ -14,18 +16,6 @@ if(document.getElementById('form_editarPerfil')){
         setButtonContent: "Listo",
         clearButtonContent: "Limpiar"
       });
-    if(navegador() != 'MSIE'){
-      /*$('#fecha').DateTimePicker({
-        dateFormat: "yyyy-MM-dd",
-        shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-        shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
-        fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
-        titleContentDate: "Configurar fecha",
-        titleContentTime: "Configurar tiempo",
-        titleContentDateTime: "Configurar Fecha & Tiempo",
-        setButtonContent: "Listo",
-        clearButtonContent: "Limpiar"
-      });*/
     }
 }
 
@@ -35,7 +25,7 @@ $('#boton').on('click', function(){
 
 if (document.getElementById("area_select"))
 {
-  var selectedOptions = $('#area_select option:selected');
+  /*var selectedOptions = $('#area_select option:selected');
 
   $('#area_select').multiselect({
     buttonContainer: '<div id="example-checkbox-list-container"></div>',
@@ -135,11 +125,20 @@ if (document.getElementById("area_select"))
 
   if(selectedOptions.length === 0){
     colocaError("err_area","seccion_area","Debe seleccionar una opcion de la lista","boton");
-  }
+  }*/
+
+  /*$('#area_select').multiple_select({
+    items: 3,
+    dependence: {
+      id_dependencia: "subareas_select",
+      items: 1
+    }
+  });*/
 }
 
-if (document.getElementById("nivel_interes"))
+/*if (document.getElementById("nivel_interes"))
 {
+
   $('#nivel_interes').multiselect({
     buttonContainer: '<div id="example-checkbox-list-container"></div>',
     buttonClass: '',
@@ -221,7 +220,7 @@ if (document.getElementById("nivel_interes"))
   if(selectedOptions.length == 0){
     colocaError("err_int","seccion_int","Debe seleccionar una opcion de la lista","boton");
   }
-}
+}*/
 
 if(document.getElementById('seccion_listado')){
     var listado_group = document.getElementById('seccion_listado').id;
@@ -265,6 +264,7 @@ $('#provincia').change(function()
     }
 });
 
+/*Permite deseleccionar las subareas seleccionadas*/
 function eliminar_item_selected(selected_item,tipo,op){
 
     var seleccionado = document.getElementById(selected_item);
@@ -275,7 +275,7 @@ function eliminar_item_selected(selected_item,tipo,op){
     
 }
 
-
+/*Muestra dinamicamente si la imagen / foto fue cargada*/
 $('#file-input').change(function(e) {
     addImage(e); 
     validarImg(document.getElementById('file-input'),'err_img','seccion_img',"btndeposito");
@@ -299,6 +299,7 @@ function fileOnload(e) {
 }
 
 
+/*Valida si la imagen / foto fue cargada*/
 function validarImg(archivo,err_img,seccion_img,btn){
 
   var file = fileValidation(archivo);
@@ -311,6 +312,7 @@ function validarImg(archivo,err_img,seccion_img,btn){
   return error;
 }
 
+/*Valida el peso del archivo*/
 function fileValidation(fileInput){
 
   var filePath = fileInput.value;
@@ -336,10 +338,7 @@ function fileValidation(fileInput){
   }
 }
 
-/* Carga de imagen dinamico */
-
 /* Carga de hoja de vida */
-
 $('#subirCV').change(function(e) {
 
     $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
@@ -350,7 +349,7 @@ $('#subirCV').change(function(e) {
     }
 });
 
-/* Carga de hoja de vida */
+/*Eventos del campo de idiomas*/
 $('#idioma_of').on('change', function(){
 
     if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
@@ -373,6 +372,7 @@ $('#nivel_idi_of').on('change', function(){
     }
 });
 
+/*Valrifica si no existe algún error en los inputs*/
 function enableBTN(event){
     
     var flag = false;
@@ -382,6 +382,7 @@ function enableBTN(event){
 
     return flag;
 }
+
 
 function errorsVerify(){
 
@@ -403,6 +404,7 @@ function limpiarSelect(idSelect) {
     }
 }
 
+/*Permite transferir los idiomas de la lista de select al div de seleccionados*/
 $('#btn_transfer').on('click', function()
 {
     var select_array_idioma = document.getElementById('select_array_idioma');
@@ -473,6 +475,7 @@ $('#btn_transfer').on('click', function()
 
 })
 
+/*Permite deseleccionar los idiomas seleccionados*/
 function delete_item_selected(selected_item){
 
     var tag_idioma = document.getElementById('idioma_of');
@@ -507,7 +510,7 @@ function delete_item_selected(selected_item){
     } 
 }
 
-/* valida si el candidato es mayor de edad */
+/*Valida el formato de la fecha*/
 function validarFormatoFecha(campo) {
   var RegExPattern = /^\d{1,2}-\d{1,2}-\d{4}$/;
   var values = campo.split("-");
@@ -523,7 +526,7 @@ function validarFormatoFecha(campo) {
     return false;
   }
 }
-
+/* valida si el candidato es mayor de edad */
 function calcularEdad(){
 
     var fecha=document.getElementById("fecha_nacimiento").value;
