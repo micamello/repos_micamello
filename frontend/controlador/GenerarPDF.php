@@ -216,8 +216,8 @@ class Controlador_GenerarPDF extends Controlador_Base
     if(count($datos['datosGraficos']) == count($facetas)){
       $informe .= '<p align="center"><img align="center" src="https://chart.googleapis.com/chart?chs=500x300&chd=t:'.$porcentajes_faceta.'&cht=p&chl='.$etiquetas_faceta.'&chco='.$colors.'&chtt='.$descrip_titulo.'&chdl='.$descrip_facetas.'" class="img-responsive"></p>';
     }
-    echo $informe;
-    //self::informePersonalidad($informe,$nombre_archivo);
+    //echo $informe;
+    self::informePersonalidad($informe,$nombre_archivo);
   }
 
   public function informePersonalidad($html,$nombre_archivo){

@@ -56,7 +56,7 @@ class Database{
 
   function execute( $query ){
     $this->query = $query;        
-    Utils::log("SQL execute: $query");
+    //Utils::log("SQL execute: $query");
 	  $resultSet = mysqli_query( $this->connection,$query );
 	  $this->resultSet = $resultSet;
 	  return $resultSet;
@@ -73,7 +73,7 @@ class Database{
       }
       //$value = mysql_real_escape_string($value);
       $col_list .= $col;            
-      $val_list .= "'".utf8_decode($value)."'";
+      $val_list .= "'".$value."'";
       $i++;
     }
     $query  = 'INSERT INTO ';
@@ -87,9 +87,10 @@ class Database{
   }
 
   function insert_multiple($table,$campos,$data){   
+
     $valores = '';
     foreach ($data as $key => $datos) {
-      $valores .= '('.implode(',', utf8_decode($datos)).'),';
+      $valores .= '('.implode(',', $datos).'),';
     }
     $valores = substr($valores, 0,strlen($valores)-1);
 
@@ -116,7 +117,7 @@ class Database{
         //$query .= $col . '=' . $value;
         $query .= $col . '= NULL';
       }else{
-        $query .= $col . '="' . utf8_decode($value) . '"';
+        $query .= $col . '="' . $value . '"';
       }
       $i++;
     }
@@ -219,17 +220,17 @@ class Database{
   }
   
   function beginTrans() {
-    Utils::log("SQL Trans: START TRANSACTION");
+    //Utils::log("SQL Trans: START TRANSACTION");
     return mysqli_begin_transaction($this->connection);
   }
   
   function commit(){    
-    Utils::log("SQL Trans: COMMIT");   
+    //Utils::log("SQL Trans: COMMIT");   
     return mysqli_commit($this->connection);   
   }
   
   function rollback(){
-    Utils::log("SQL Trans: ROLLBACK");     
+    //Utils::log("SQL Trans: ROLLBACK");     
     return mysqli_rollback($this->connection);;     
   }
   
