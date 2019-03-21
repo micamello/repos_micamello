@@ -8,7 +8,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
         <li class="visited">Registro</li>
         <li class="active">Completar Perfil</li>
         <?php 
-        for($i=1;$i<=$nrototaltest;$i++){ ?>
+        for($i=1;$i<=($nrototaltest-2);$i++){ ?>
           <?php 
            if ($i <= $nrotestusuario){
              $clase = "visited";
@@ -17,7 +17,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
              $clase = "";
            }
           ?>
-          <li class="<?php echo $clase;?>">Formulario <?php echo $i;?></li>                
+          <li class="<?php echo $clase;?>">Cuestionario <?php echo $i;?></li>                
         <?php } ?>
       </ul>
 	</div>

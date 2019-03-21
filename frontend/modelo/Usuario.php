@@ -195,8 +195,9 @@ public static function existeUsername($username){
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
                       u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                      
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, ul.correo, ul.dni, ul.username, ul.tipo_usuario
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
+                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional
               FROM mfo_usuario u
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -760,7 +761,7 @@ public static function existeUsername($username){
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
     if (empty($id)){ return false; }
     if ($tipo == self::CANDIDATO){
-      $sql = "SELECT u.id_usuario, u.nombres, l.correo, l.tipo_usuario, p.id_pais, u.apellidos 
+      $sql = "SELECT u.id_usuario, u.nombres, l.correo, l.tipo_usuario, p.id_pais, u.apellidos
               FROM mfo_usuario u 
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -790,7 +791,7 @@ public static function existeUsername($username){
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
-      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-1)){
+      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }

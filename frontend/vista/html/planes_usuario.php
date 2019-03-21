@@ -50,9 +50,9 @@
                                                         if($value['id_comprobante'] != ""){                                                            
                                                         $datos = Modelo_Comprobante::obtieneComprobante($value['id_comprobante']);                                                        
                                                     ?>
-                                                        <td style="text-align: center;" data-title="Fecha Pago: "><?php echo date("d-m-Y", strtotime($datos[0]['fecha_creacion'])); ?></td>
-                                                        <td style="text-align: center;" data-title="M&eacute;todo"><?php echo Modelo_Comprobante::METODOS_PAGOS[$datos[0]['tipo_pago']]; ?></td>
-                                                        <td style="text-align: center;" data-title="Estado de Pago: "><?php echo  Modelo_Comprobante::TIPO_PAGOS[$datos[0]['estado']]; ?></td>
+                                                        <td style="text-align: center;" data-title="Fecha Pago: "><?php echo date("d-m-Y", strtotime($datos['fecha_creacion'])); ?></td>
+                                                        <td style="text-align: center;" data-title="M&eacute;todo"><?php echo Modelo_Comprobante::METODOS_PAGOS[$datos['tipo_pago']]; ?></td>
+                                                        <td style="text-align: center;" data-title="Estado de Pago: "><?php echo  Modelo_Comprobante::TIPO_PAGOS[$datos['estado']]; ?></td>
                                                     <?php }else{ 
 
                                                         if(isset($value['id_empresa_plan_parent']) && $value['id_empresa_plan_parent'] != ""){

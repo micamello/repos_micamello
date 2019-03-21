@@ -12,10 +12,8 @@ class Controlador_Minisitio extends Controlador_Base
         $colores_facetas = Modelo_Faceta::obtenerColoresLiterales();
         $residenciaActual = Modelo_Provincia::residenciaActual(SUCURSAL_PAISID);
         $competencias = Modelo_Competencia::obtenerCompetenciasGrados();
-        $empresas[0] = 'NINGUNA';
-        $empresas_bd = Modelo_Usuario::obtieneListadoEmpresas();
-        $empresas_todas = array_merge($empresas,$empresas_bd);
-        //print_r($empresas_todas);
+        $empresas_todas = Modelo_Usuario::obtieneListadoEmpresas();
+        
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
         $type = Utils::getParam('type', '', $this->data);
@@ -98,9 +96,10 @@ class Controlador_Minisitio extends Controlador_Base
                     $_SESSION['array_datos']['R'] = array('id'=>$id,'nombre'=>$residenciaActual[$id]['nombre']);
                   }
                   else if($letra == 'N' && $type == 1){
+
                     $nac = explode('_',$id);
                     if(count($nac) == 1){
-                      $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]];
+                      $nombre = 'Nacionalidad: '.((isset($nacionalidad[$nac[0]]['nombre'])) ? $nacionalidad[$nac[0]]['nombre'] : $nacionalidad[$nac[0]]);
                     }else{
                       $nombre = 'Nacionalidad: '.$nacionalidad[$nac[0]]['nombre'].' - '.$nacionalidad[$nac[0]]['provincias'][$nac[1]];
                     }
@@ -299,7 +298,8 @@ class Controlador_Minisitio extends Controlador_Base
               echo $render;
           break;
           case 'generarExcel':
-              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],0);
+
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],1);              
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,2);
               $this->generarExcel($table);
           break;

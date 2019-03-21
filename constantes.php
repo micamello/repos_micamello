@@ -25,8 +25,7 @@ define('PATH_PROFILE',FRONTEND_RUTA.'imagenes/usuarios/profile/');
 define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
 define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'alert-warning'));
 define('ESTADOS',array('1'=>'Activo','0'=>'Inactivo'));
-// define('MAIL_SUGERENCIAS','info@micamello.com.ec');
-define('MAIL_SUGERENCIAS','evpozo@gmail.com');
+define('MAIL_SUGERENCIAS','info@micamello.com.ec');
 define('PATH_COMPROBANTE',FRONTEND_RUTA.'imagenes/usuarios/comprobante/');
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
@@ -52,6 +51,9 @@ define('EDAD', array('1'=>'Entre 18 y 20 a&ntilde;os', '2'=>'Entre 20 y 30 a&nti
 define('OPCIONES',array('a','b','c','d','e'));
 define('METODO_CUESTIONARIO',array('0'=>'Preguntas ordenadas','1'=>'Preguntas aleatorias'));
 
+define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
+define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
+
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');
 define('FB_CLIENTE_SECRET', 'cac4885b9285bde2975216f6a26f69a9');
@@ -72,9 +74,6 @@ define('LK_ID_CLIENTE', '78mhxodb8c3yih');
 define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
 define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
-
-
-
 
 // CORREOS_TEMPLATES
 // REGISTRO MANUAL
@@ -99,7 +98,7 @@ const TAGS_REPLACE_T9 = array("%NOMBRE%", "%MENSAJE%", "%CABECERA%", "%LOGO_TIPO
 const TAGS_REPLACE_T10 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%NOMBRE%", "%NOMBRE_PLAN%", "%FECHA_PLAN%");
 // MENSAJE_GENERAL
 const TAGS_REPLACE_T11 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%MENSAJE%");
-// print_r(TAGS_REPLACE_T1);
+
 // CEBECERAS
 define('TIPO', 	array(
 						'eliminar_oferta'=>array(

@@ -23,7 +23,7 @@ class Modelo_Cuestionario{
 	}
 
 	public static function totalTest(){
-		$sql = "SELECT COUNT(1) AS nro FROM mfo_cuestionario";
+		$sql = "SELECT COUNT(1) AS nro FROM mfo_faceta";
 		$rs = $GLOBALS['db']->auto_array($sql,array());
 		return $rs["nro"];
 	}
@@ -44,7 +44,7 @@ class Modelo_Cuestionario{
 
 	public static function totalTestxUsuario($usuario){
 		if (empty($usuario)){ return false; }
-	  $sql = "SELECT COUNT(1) AS nro FROM mfo_porcentajextest WHERE id_usuario = ?";
+	  $sql = "SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = ?";
 		$rs = $GLOBALS['db']->auto_array($sql,array($usuario));
 		return $rs["nro"];	
 	}

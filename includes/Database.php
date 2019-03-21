@@ -73,7 +73,7 @@ class Database{
       }
       //$value = mysql_real_escape_string($value);
       $col_list .= $col;            
-      $val_list .= "'".$value."'";
+      $val_list .= "'".utf8_decode($value)."'";
       $i++;
     }
     $query  = 'INSERT INTO ';
@@ -87,10 +87,9 @@ class Database{
   }
 
   function insert_multiple($table,$campos,$data){   
-
     $valores = '';
     foreach ($data as $key => $datos) {
-      $valores .= '('.implode(',', $datos).'),';
+      $valores .= '('.implode(',', utf8_decode($datos)).'),';
     }
     $valores = substr($valores, 0,strlen($valores)-1);
 
@@ -117,7 +116,7 @@ class Database{
         //$query .= $col . '=' . $value;
         $query .= $col . '= NULL';
       }else{
-        $query .= $col . '="' . $value . '"';
+        $query .= $col . '="' . utf8_decode($value) . '"';
       }
       $i++;
     }

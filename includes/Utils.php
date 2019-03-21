@@ -243,7 +243,7 @@ class Utils{
     }
   }
 
-  public static function envioCorreo($to, $subject, $body){    
+  public static function envioCorreo($to, $subject, $body, $attachments=array()){    
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
@@ -259,8 +259,16 @@ class Utils{
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 
     $mail->Body = $body; 
+    if (!empty($attachments) && is_array($attachments)){
+      foreach($attachments as $attachment){
+        if (file_exists($attachment["ruta"])){
+          $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
+        }
+      }
+    }    
     return $mail->send(); 
   }
+
   public static function encriptar($texto){    
     $objaes = new Aes(KEY_ENCRIPTAR);
     $encriptado = $objaes->encrypt($texto);

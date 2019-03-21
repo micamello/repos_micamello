@@ -1,58 +1,112 @@
 <?php
+ignore_user_abort( true );
+ini_set("max_execution_time", "0");
+ini_set("max_input_time", "0");
+ini_set('memory_limit', "768M");
+set_time_limit(0);
+
+/*Script para generar nuevas facturas que no fueron recibidas o autorizadas*/
+
 require_once '../constantes.php';
 require_once '../init.php';
-require_once '../frontend/Proceso/Facturacion.php';
 
-$obj_facturacion = new Proceso_Facturacion();
-$obj_facturacion->razonSocialComprador = 'Fernanda Fueltala Narvaez';
-$obj_facturacion->identificacionComprador = '0919580985';
-$obj_facturacion->direccionComprador = 'Duran cdla abel gilbert mz b48 v1';
-$obj_facturacion->emailComprador = 'fermaggy@hotmail.com';
-$obj_facturacion->telefComprador = '0997969113';
-$obj_facturacion->tipoIdentifComprador = TIPO_DOCUMENTO[2];
-$obj_facturacion->importeTotal = 23;
-$obj_facturacion->codigoPrincipal = '2';
-$obj_facturacion->descripdetalle = 'Camellito Efectivo';
-
-$xml = $obj_facturacion->generarFactura();
-
-/*$doc = new DOMDocument();
-$doc->formatOutput = true;
-$return = $doc->loadXML($xml_final);
-
-$doc->save('local.xml',LIBXML_NOEMPTYTAG);*/
-
-/*$fp = fopen("local.xml", "r");
-$contenido = '';
-while (!feof($fp)){
-    $linea = fgets($fp);
-    $contenido .= $linea;
+$resultado = file_exists(CRON_RUTA.'procesando_facturas.txt');
+if ($resultado){
+  exit;
 }
-fclose($fp);*/
+else{
+  Utils::crearArchivo(CRON_RUTA,'procesando_facturas.txt','');
+}
 
-echo "<textarea cols=150 rows=50>".$xml."</textarea>";
+$facturas = Modelo_Factura::factNoRecibidasAutorizadas();
+if (count($facturas) > 0){
+  $obj_facturacion = new Proceso_Facturacion();
+  foreach($facturas as $factura){
+    try{  
+      $GLOBALS['db']->beginTrans();
+      $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
+      if (empty($datos_comprobante)){
+        throw new Exception("Error no se encontro datos en el comprobante");  
+      }      
+      $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);      
+      if (empty($infoplan)){
+        throw new Exception("Error no se encontro datos en el plan");  
+      }
+      $obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
+      $obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
+      $obj_facturacion->direccionComprador = $datos_comprobante["direccion"];
+      $obj_facturacion->emailComprador = $datos_comprobante["correo"];
+      $obj_facturacion->telefComprador = $datos_comprobante["telefono"];            
+      $obj_facturacion->tipoIdentifComprador = TIPO_DOCUMENTO[$datos_comprobante["tipo_doc"]];            
+      $obj_facturacion->importeTotal = $datos_comprobante["valor"];
+      $obj_facturacion->codigoPrincipal = $datos_comprobante["id_plan"];
+      $obj_facturacion->descripdetalle = $infoplan["nombre"];
+      $obj_facturacion->numerofactura = (int)substr($factura["clave_acceso"],30,9);      
+      $rsfact = $obj_facturacion->generarFactura();  
 
-/*$wsdl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl'; 
-$params = Array("xml" => $xml);
-$options = Array(
-    "uri"=> $wsdl,
-    "trace" => true,
-    "encoding" => "UTF-8",
-);
-$soap = new SoapClient($wsdl, $options);
-$result = $soap->validarComprobante($params); 
-echo "<br>";
-print_r($result);*/
+      if (empty($rsfact) || !isset($rsfact["claveacceso"]) || !isset($rsfact["xml"]) || empty($rsfact["claveacceso"]) || empty($rsfact["xml"])){
+        throw new Exception("Error no se pudo generar la factura");   
+      }
+      
+      $datosact = array("clave_acceso" => $rsfact["claveacceso"], "xml" => $rsfact["xml"], "estado" => Modelo_Factura::NOENVIADO, 
+                        "msg_error" => "", "fecha_estado" => "");
+      if (!Modelo_Factura::actualizar($factura["clave_acceso"],$datosact)){
+        throw new Exception("Error al actualizar la factura");  
+      }       
+      
+      $attachments = array();
+      
+      if (!$obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
+        throw new Exception("Error en primer WS del SRI");  
+      }  
+      sleep(5);
+      $fecha_auto = $obj_facturacion->sendAutorizacion($rsfact["claveacceso"]);
+      if (empty($fecha_auto)){
+        throw new Exception("Error en segundo WS del SRI");  
+      }
+      //adjuntar factura
+      $obj_facturacion->generarRIDE($rsfact["xml"],$fecha_auto);
+      $obj_facturacion->generarXML($rsfact["xml"],$rsfact["claveacceso"]);
+        
+      $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf",
+                             "archivo"=>$rsfact["claveacceso"].".pdf");
+      $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml",
+                             "archivo"=>$rsfact["claveacceso"].".xml");          
 
-/*$wsdl = 'https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl'; 
-$options = Array(
-    "uri"=> $wsdl,
-    "trace" => true,
-    "encoding" => "UTF-8",
-);
-$soap = new SoapClient($wsdl, $options);
-$params = Array("claveAccesoComprobante" => '1203201901099306446700110010010000000441234567817');
-$result = $soap->autorizacionComprobante($params); 
-echo "<br>";
-print_r($result);*/
+      $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
+
+      /*$email_subject = "Activación de Subscripción"; 
+    $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_SUBSCRIPCION");
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
+    $email_body = str_replace("%PLAN%", $plan, $email_body);   
+    //$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
+    //$email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
+    $notif_body = $email_body;
+    if ($tipousuario == Modelo_Usuario::CANDIDATO){
+      $mensaje = "Por favor de click en este enlace para realizar el tercer formulario "; 
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/cuestionario/'>click aqu&iacute;</a><br>";      
+    }else{
+      $mensaje = "Por favor de click en este enlace para publicar una oferta "; 
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/publicar/'>click aqu&iacute;</a><br>";  
+    } 
+    $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
+    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
+    Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);*/
+            
+      unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
+      unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
+
+      $GLOBALS['db']->commit();   
+    }
+    catch(Exception $e){
+      $GLOBALS['db']->rollback();
+      echo "NO PROCESADO REGISTRO ".$factura["id_factura"]."<br>";     
+      $msgerror = $e->getMessage()." factura:".$factura["id_factura"];
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron facturas',$msgerror);     
+    }
+  }
+} 
+ 
+//elimina archivo de procesamiento
+unlink(CRON_RUTA.'procesando_facturas.txt');
 ?>
