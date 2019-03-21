@@ -70,16 +70,16 @@ class Controlador_Login extends Controlador_Base {
       $_SESSION['mfo_datos']['planes'] = $planesactivos; 
     }
     if ($usuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
-      //$usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
+      $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
       //$usuarioxnivel = Modelo_UsuarioxNivel::obtieneListado($usuario["id_usuario"]);
       $infohv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);
       
       if (!empty($usuarioxarea) && is_array($usuarioxarea)){
         $_SESSION['mfo_datos']['usuarioxarea'] = $usuarioxarea; 
       }
-      if (!empty($usuarioxnivel) && is_array($usuarioxnivel)){
+      /*if (!empty($usuarioxnivel) && is_array($usuarioxnivel)){
         $_SESSION['mfo_datos']['usuarioxnivel'] = $usuarioxnivel; 
-      }
+      }*/
 
       if (!empty($infohv) && is_array($infohv)){
         $_SESSION['mfo_datos']['infohv'] = $infohv; 
