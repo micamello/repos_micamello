@@ -2,15 +2,22 @@
 class Modelo_UsuarioxArea{
   
   public static function obtieneListado($id_usuario){
-    $sql = "SELECT * FROM mfo_usuarioxarea WHERE id_usuario = ".$id_usuario;
-    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
-    $datos = array();
+    $sql = "SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = ?
+            ORDER BY b.id_area";
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array($id_usuario),true);
+    $datos = array(); $id_area ='';
     if (!empty($arrdatos) && is_array($arrdatos)){
-
     	foreach ($arrdatos as $key => $value) {
-    		array_push($datos,$value['id_area']);
+        if ($id_area != $value["id_area"]){
+          $id_area = $value["id_area"];
+        }
+        $datos[$id_area][] = $value["id_subareas"];
+    		//array_push($datos,$value['id_area']);
     	}
-    }
+    }    
     return $datos;
   } 
 
