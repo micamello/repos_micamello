@@ -463,84 +463,47 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 													<input type="text" name="universidad2" id="universidad2" maxlength="100" class="form-control"   pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ.]+" style="display:none" onkeyup="validarFormulario()" value="<?php if(isset($data['universidad2'])){ echo $data['universidad2']; } else{ if($_SESSION['mfo_datos']['usuario']['nombre_univ'] != ' '){ echo $_SESSION['mfo_datos']['usuario']['nombre_univ']; } } ?>">
 		                                        </div>
 		                                    </div>
-<!--
-		                                    <div class="col-md-6">	
-												<div class="form-group" id="seccion_area">
-													<div class="panel panel-default">
-														<div class="panel-head-select">Áreas (Máx: 3)
-												        	<label class="num_sel" style="float: right; color: black; border-radius: 5px;">
-												          		<label id="numero1">0</label> de 3
-												        	</label>
-												        	<div id="err_area" class="help-block with-errors"></div>
-												      	</div>
-														<div class="panel-body">
-															<div class="row" id="seleccionados1">
-															</div>
-														</div>
-													  	<select class="form-control" multiple id="area_select" name="area_select[]"  onchange="validarFormulario()" >
-															<?php 
-															/*if (!empty($arrarea)){
-											                	foreach($arrarea as $key => $ae){ 
-																	echo "<option value='".$ae['id_area']."'";
-																	if(isset($data['area_select'])){
-																		if (in_array($ae['id_area'], $data['area_select']))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}else{
-																		if (in_array($ae['id_area'], $areaxusuario))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}
-																	echo ">".utf8_encode($ae['nombre'])."</option>";
-																} 
-															}*/ ?>
-														</select>
-													</div>
+
+		                                    <div class="col-md-6">
+												<div class="form-group">
+												<label>Seleccione área</label>
+												<select class="form-control" id="area" name="area" multiple="multiple">
+												  <!-- <option value="">Seleccione una opción</option> -->
+												  <?php 
+												  $i = 0;
+												    if(!empty($areas) && is_array($areas)){
+												      foreach ($areas as $area) {
+												        if($i != $area['id_area']){
+												          echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
+												          $i = $area['id_area'];
+												        }
+												      }
+												    }
+												   ?>
+												</select>
 												</div>
-											</div>
-
-											<div class="col-md-6">	
-												<div class="form-group" id="seccion_int">
-													<div class="panel panel-default">
-														<div class="panel-head-select">Niveles de Interes (Máx: 2)
-												        	<label class="num_sel" style="float: right; color: black; border-radius: 5px;">
-												          		<label id="numero2">0</label> de 2
-												        	</label>
-												        	<div id="err_int" class="help-block with-errors"></div>
-												      	</div>
-														<div class="panel-body">
-															<div class="row" id="seleccionados2">
-															</div>
-														</div>
-													  	<select class="form-control" multiple id="nivel_interes" name="nivel_interes[]"  onchange="validarFormulario()" >
-
-															<?php 
-															/*if (!empty($arrinteres)){
-											                	foreach($arrinteres as $key => $ae){ 
-																	echo "<option value='".$ae['id_nivelInteres']."'";
-				
-																	if(isset($data['nivel_interes'])){
-																		if (in_array($ae['id_nivelInteres'], $data['nivel_interes']))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}else{
-																		if (in_array($ae['id_nivelInteres'], $nivelxusuario))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}
-																	echo ">".utf8_encode($ae['descripcion']);
-																	echo "</option>";
-																} 
-															} */ ?>
-														</select>
-													</div>
 												</div>
-											</div>-->
 
+												<div class="col-md-6">
+												<div class="form-group">
+												<label>Seleccione subareas</label>
+												<select class="form-control" id="subareas" name="subareas" multiple="multiple">
+												  <!-- <option value="">Seleccione una opción</option> -->
+												  <?php 
+												  $j = 0;
+												    if(!empty($areas) && is_array($areas)){
+												      foreach ($areas as $area) {
+												        if($j != $area['id_subareas']){
+												          echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
+												          $j = $area['id_subareas'];
+												        }
+												      }
+												    }
+												   ?>
+												</select>
+												</div>
+
+												</div>
 		                                    <div class="clearfix"></div>
 		                                
 		                                    <div class="col-md-4 col-md-offset-1">

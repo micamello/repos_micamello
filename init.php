@@ -22,7 +22,7 @@ spl_autoload_register('cargarClasesLib', false);
 
 $GLOBALS['db'] = new Database( DBSERVIDOR, DBUSUARIO, DBCLAVE, DBNOMBRE);
 $GLOBALS['db']->connect();
-
+$GLOBALS['areas'] = Modelo_AreaSubarea::obtieneAreas_Subareas();
 
 
 if(count($_POST) != 0 && $_GET["mostrar"] != "publicar" && $_GET["mostrar"] != "oferta"){ $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); }

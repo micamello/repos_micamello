@@ -45,6 +45,8 @@ class Controlador_Perfil extends Controlador_Base
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
 
+                $areas = $GLOBALS['areas'];
+
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
                 $imgArch2  = 'upload-icon.png';
@@ -127,7 +129,8 @@ class Controlador_Perfil extends Controlador_Base
                     'arridioma'                 =>$arridioma,
                     'arrnivelidioma'            =>$arrnivelidioma,
                     'nivelIdiomas'              => $nivelIdiomas,
-                    'puedeDescargarInforme'     =>$puedeDescargarInforme
+                    'puedeDescargarInforme'     =>$puedeDescargarInforme,
+                    'areas'=>$areas
                 );
 
                 //Pasar a la vista los js y css que se van a necesitar

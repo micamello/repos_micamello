@@ -23,7 +23,7 @@ $('#boton').on('click', function(){
   enviarFormulario();
 });
 
-if (document.getElementById("area_select"))
+if (document.getElementById("area"))
 {
   /*var selectedOptions = $('#area_select option:selected');
 
@@ -127,13 +127,13 @@ if (document.getElementById("area_select"))
     colocaError("err_area","seccion_area","Debe seleccionar una opcion de la lista","boton");
   }*/
 
-  /*$('#area_select').multiple_select({
+  $('#area').multiple_select({
     items: 3,
     dependence: {
-      id_dependencia: "subareas_select",
+      id_dependencia: "subareas",
       items: 1
     }
-  });*/
+  });
 }
 
 /*if (document.getElementById("nivel_interes"))
