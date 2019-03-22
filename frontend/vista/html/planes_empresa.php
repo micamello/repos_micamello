@@ -36,6 +36,9 @@
                     }
                     if ($listadoAcciones[$key] == "adminEmpresas"){
                       $permiso = str_replace('NRO',$gratuito["num_cuenta"],$permiso);
+                    }
+                    if ($listadoAcciones[$key] == "accessos"){
+                      $permiso = str_replace('NRO',$gratuito["num_accesos"],$permiso);
                     }  
                     $permisos_grat .= utf8_encode(trim($permiso)).'||';
                   }
@@ -101,6 +104,9 @@
                     }
                     if ($listadoAcciones[$key] == "adminEmpresas"){
                       $permiso = str_replace('NRO',$plan["num_cuenta"],$permiso);
+                    }
+                    if ($listadoAcciones[$key] == "accessos"){
+                      $permiso = str_replace('NRO',$plan["num_accesos"],$permiso);
                     }  
                     $permisos_plan .= utf8_encode(trim($permiso)).'||';
                   }     
@@ -167,6 +173,9 @@
                     }  
                     if ($listadoAcciones[$key] == "adminEmpresas"){
                       $permiso = str_replace('NRO',$aviso["num_cuenta"],$permiso);
+                    }
+                    if ($listadoAcciones[$key] == "accessos"){
+                      $permiso = str_replace('NRO',$aviso["num_accesos"],$permiso);
                     }
                     $permisos_aviso .= utf8_encode(trim($permiso)).'||';
                   }       

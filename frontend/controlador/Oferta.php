@@ -481,7 +481,7 @@ class Controlador_Oferta extends Controlador_Base{
               }
 
               $r = Modelo_Postulacion::postAutoxIdPostAeliminar($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa,$tiempo);
-
+            
               if(!empty($r['ids_postulaciones'])){
                 $resultado = Modelo_Postulacion::eliminarPostulacion($r['ids_postulaciones'],$tipo_post);
                 if(empty($resultado)){
@@ -489,8 +489,9 @@ class Controlador_Oferta extends Controlador_Base{
                 }else{
                   Modelo_EmpresaBloq::insertEmpresa($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa);
                   self::devolverPostulaciones(explode(",",$r['ids_usuariosplanes']));
-                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
-                  Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
+                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';  
+                  Utils::log('FERNANDA1'.PUERTO.'://'.HOST.'/'.$vista.'/');                
+                  //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
                 }
               }else{
 
@@ -499,16 +500,18 @@ class Controlador_Oferta extends Controlador_Base{
                 }else{
                   $resultado = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion,$tipo_post);
                   if(empty($resultado)){
-                      $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo2';
+                      $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo';
                   }else{
+                    Utils::log('FERNANDA2'.PUERTO.'://'.HOST.'/'.$vista.'/');                
                     $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
-                    Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
+                    //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
                   }
                 }
               }
             }
+
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-            $arrnivel      = Modelo_Interes::obtieneListadoAsociativo();
+            //$arrnivel      = Modelo_Interes::obtieneListadoAsociativo();
             $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
             $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 

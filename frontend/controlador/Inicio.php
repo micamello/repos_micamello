@@ -10,7 +10,7 @@ class Controlador_Inicio extends Controlador_Base {
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
-    //$arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
+    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     //$arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
@@ -39,13 +39,13 @@ class Controlador_Inicio extends Controlador_Base {
       case 'buscaCorreo':        
         $correo = Utils::getParam('correo', '', $this->data);
         $datocorreo = Modelo_Usuario::existeCorreo($correo);
-        Utils::log($datocorreo);
+        //Utils::log($datocorreo);
         Vista::renderJSON(array("respcorreo"=>$datocorreo));
       break;
       case 'buscaDni':
         $dni = Utils::getParam('dni', '', $this->data);
         $datodni = Modelo_Usuario::existeDni($dni);
-        Utils::log($datodni);
+        //Utils::log($datodni);
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
       default:         

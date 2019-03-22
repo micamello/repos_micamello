@@ -100,7 +100,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			            <br>
 				    </div>
 
-				    <?php if($puedeDescargarInforme == 1){ ?>
+				    <?php if($puedeDescargarInforme == 1 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 					    <div class="panel panel-default shadow" style="border-radius: 20px;">
 					    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/descargar_informe.png";?>" style="border-radius: 20px 20px 0px 0px;">
 				           	<div>
@@ -139,7 +139,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 									            <div class="form-group" id="seleccione_group">
 									              <label for="tipo_dni">Tipo de documento</label><div id="seleccione_error" class="help-block with-errors"></div>
 									              <select class="form-control" id="documentacion" name="documentacion" <?php if($_SESSION['mfo_datos']['usuario']['tipo_doc'] == 0){ echo ''; }else{ echo 'disabled';} ?>>
-									                <option selected="" value="">Seleccione una opcion</option>
+									                <option selected="" value="">Seleccione una opci&oacute;n</option>
 									                <?php 
 									                  $option = '';
 									                  foreach(DOCUMENTACION as $key => $doc){
@@ -148,7 +148,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														{ 
 															$option .= " selected='selected'";
 														}
-														$option .= ">".$doc."</option>";
+														$option .= ">".utf8_encode($doc)."</option>";
 													  }
 													  echo $option;
 									                 ?>
@@ -299,12 +299,11 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
 											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>"  onkeyup="validarFormulario()" />
 											    </div>
-											</div>
-
+											</div>                                           
 											<div class="col-md-6">
 											    <div id="seccion_tlf" class="form-group">
 											        <label for="convencional">Convencional (Opcional)</label><div id="err_tlf" class="help-block with-errors"></div>
-											        <input class="form-control" type="text" id="convencional" name="convencional" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['convencional']; } ?>"  onkeyup="validarFormulario()" />
+											        <input class="form-control" type="text" id="convencional" name="convencional" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario()" />
 											    </div>
 											</div>
 		                                    
@@ -492,7 +491,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Subareas <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<label>Sub-Áreas <span class="requerido" title="Este campo es obligatorio">*</span></label>
 													<div class="help-block with-errors"></div>
 													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple">
 													  <!-- <option value="">Seleccione una opción</option> -->

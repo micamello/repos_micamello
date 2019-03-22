@@ -82,7 +82,9 @@
                                         Una mejor carrera está por ahí. Te ayudaremos a encontrarlo Somos 
                                         su primer paso para convertirnos en todo lo que queremos ser.
                                 </div><br><br>
+                
                 <div class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel2">
+                
                   <div class="carousel-inner">
                     <?php 
                     $cont = 1;

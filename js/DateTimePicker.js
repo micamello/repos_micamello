@@ -1376,10 +1376,10 @@ $.cf = {
 		{
 			var oDTP = this;
 		
-			$(document).on("click.DateTimePicker", function(e)
-			{
-				oDTP._hidePicker("");
-			});
+			//$(document).on("click.DateTimePicker", function(e)
+			//{
+			//	oDTP._hidePicker("");
+			//});
 		
 			$(document).on("keydown.DateTimePicker", function(e)
 			{
