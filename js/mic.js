@@ -278,97 +278,97 @@ $(document).ready(function(){
   console.log(expreg);
 });
 
-function mostrarGrafico(label, valor){
-  var labels = [];
-  var valores = [];
-  for (var i = label.length - 1; i >= 0; i--) {
-    labels[i] = label[i].value;
-    // 
-  }
-  for (var i = valor.length - 1; i >= 0; i--) {
-    valores[i] = valor[i].value;
-    // 
-  }
-    let myChart = document.getElementById('myChart').getContext('2d');
-      // Global Options
-      Chart.defaults.global.defaultFontFamily = 'Lato';
-      Chart.defaults.global.defaultFontSize = 15;
-      Chart.defaults.global.defaultFontColor = 'black';
-      // Chart.defaults.scale.gridLines.display = false;
+// function mostrarGrafico(label, valor){
+//   var labels = [];
+//   var valores = [];
+//   for (var i = label.length - 1; i >= 0; i--) {
+//     labels[i] = label[i].value;
+//     // 
+//   }
+//   for (var i = valor.length - 1; i >= 0; i--) {
+//     valores[i] = valor[i].value;
+//     // 
+//   }
+//     let myChart = document.getElementById('myChart').getContext('2d');
+//       // Global Options
+//       Chart.defaults.global.defaultFontFamily = 'Lato';
+//       Chart.defaults.global.defaultFontSize = 15;
+//       Chart.defaults.global.defaultFontColor = 'black';
+//       // Chart.defaults.scale.gridLines.display = false;
 
-      let massPopChart = new Chart(myChart, {
-        type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-        data:{
-          labels: labels,
-          datasets:[{
-            label:'Population',
-            data:valores,
-            //backgroundColor:'green',
-            backgroundColor:[
-              '#001f3f',
-              '#0074D9',
-              '#7FDBFF',
-              '#39CCCC',
-              '#3D9970',
-              '#FFDC00',
-              '#FF851B ',
-              '#FF4136',
-              '#85144b',
-              '#AAAAAA',
-              '#B10DC9'
-            ],
-            borderWidth:1,
-            borderColor:'#777',
-            hoverBorderWidth:3,
-            hoverBorderColor:'#000'
-          }]
-        },
-        options:{
-          responsive: true,
-          title:{
-            display:false,
-            text:'Resultados evaluación',
-            fontSize:25
-          },
-          legend:{
-            display:false,
-            position:'top',
-            labels:{
-              fontColor:'#000'
-            }
-          },
-          layout:{
-            padding:{
-              left:50,
-              right:0,
-              bottom:0,
-              top:0
-            }
-          },
-          tooltips:{
-            enabled:true
-          },
-          scales: {
-            yAxes: [{
-                ticks: {
-                  min: 0
-                },
-                gridLines: {
-                    display:false
-                }
-            }],
-            xAxes: [{
-                barPercentage: 0.4,
-                 ticks: {
-                    autoSkip: false,
-                    maxRotation: 50,
-                    minRotation: 50
-                  },
-                gridLines: {
-                    display:false
-                }
-            }]
-          }
-        }
-      });
-  }  
+//       let massPopChart = new Chart(myChart, {
+//         type:'bar', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+//         data:{
+//           labels: labels,
+//           datasets:[{
+//             label:'Population',
+//             data:valores,
+//             //backgroundColor:'green',
+//             backgroundColor:[
+//               '#001f3f',
+//               '#0074D9',
+//               '#7FDBFF',
+//               '#39CCCC',
+//               '#3D9970',
+//               '#FFDC00',
+//               '#FF851B ',
+//               '#FF4136',
+//               '#85144b',
+//               '#AAAAAA',
+//               '#B10DC9'
+//             ],
+//             borderWidth:1,
+//             borderColor:'#777',
+//             hoverBorderWidth:3,
+//             hoverBorderColor:'#000'
+//           }]
+//         },
+//         options:{
+//           responsive: true,
+//           title:{
+//             display:false,
+//             text:'Resultados evaluación',
+//             fontSize:25
+//           },
+//           legend:{
+//             display:false,
+//             position:'top',
+//             labels:{
+//               fontColor:'#000'
+//             }
+//           },
+//           layout:{
+//             padding:{
+//               left:50,
+//               right:0,
+//               bottom:0,
+//               top:0
+//             }
+//           },
+//           tooltips:{
+//             enabled:true
+//           },
+//           scales: {
+//             yAxes: [{
+//                 ticks: {
+//                   min: 0
+//                 },
+//                 gridLines: {
+//                     display:false
+//                 }
+//             }],
+//             xAxes: [{
+//                 barPercentage: 0.4,
+//                  ticks: {
+//                     autoSkip: false,
+//                     maxRotation: 50,
+//                     minRotation: 50
+//                   },
+//                 gridLines: {
+//                     display:false
+//                 }
+//             }]
+//           }
+//         }
+//       });
+//   }  

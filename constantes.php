@@ -73,8 +73,6 @@ define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.ph
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
 
-
-
 // CORREOS_TEMPLATES
 // REGISTRO MANUAL
 const TAGS_REPLACE_T1 = array("°NOMBRE°", "°NOMBRE_USUARIO°", "°URL_BOTON°", "°TEXTO_BOTON°");

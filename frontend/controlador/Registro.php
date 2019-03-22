@@ -56,7 +56,7 @@ class Controlador_Registro extends Controlador_Base {
     if ( Utils::getParam('register_form') == 1 ){
       try{
         if ($_POST['tipo_usuario'] == 1) {
-          $campos = array('correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1, 'tipo_doc'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area_select'=>1,'nivel_interes'=>1);        
+          $campos = array('correo'=>1,'name_user'=>1,'apell_user'=>1,'password'=>1, 'password_two'=>1,'numero_cand'=>1,'cedula'=>1, 'tipo_doc'=>1,'term_cond'=>1,'conf_datos'=>1, 'tipo_usuario'=>1, 'area'=>1, 'subareas'=>1);        
         }
 
         if ($_POST['tipo_usuario'] == 2) {
@@ -119,11 +119,13 @@ class Controlador_Registro extends Controlador_Base {
 
         $username = Utils::no_carac(html_entity_decode($username));
         
-        $username_generated = Utils::generarUsername($username);
+        $username_generated = self::generarUsername($username);
         // Utils::log("eend: ".$username_generated);
 
         $GLOBALS['db']->beginTrans();
-
+        // print_r($username_generated);
+        // print_r($data);
+        // exit();
         self::guardarUsuario($data, $username_generated);
                 
       }
@@ -138,6 +140,9 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function guardarUsuario($data, $username_generated){
+    var_dump($data);
+    var_dump($username_generated);
+    // exit();
     $nombres_correo = "";
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $campo_fecha = date("Y-m-d H:i:s");
@@ -145,16 +150,17 @@ class Controlador_Registro extends Controlador_Base {
 
     $usuario_login = array('tipo_usuario'=>$data['tipo_usuario'], 'username'=>$username_generated, 'password'=>$data['password'], 'correo'=>$data['correo'], 'dni'=>$data['cedula']);
 
+
     if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
       throw new Exception("Ha ocurrido un error, intente nuevamente");
-    }
+    } // yes---
 
     $id_usuario_login = $GLOBALS['db']->insert_id();
 
     if($data['tipo_usuario'] == 1){
       $escolaridad = Modelo_Escolaridad::obtieneListado();
       $nombres_correo = $data['name_user']." ".$data['apell_user'];
-      $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'apellidos'=>$data['apell_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, "token"=>NULL, 'estado'=>0, 'term_cond'=>$data['term_cond'], 'conf_datos'=>$data['conf_datos'], 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'tipo_doc'=>$data['tipo_doc'], 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'] , 'genero'=>'M', 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$data['tipo_usuario'], "estado"=>0);
+      $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'apellidos'=>$data['apell_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, 'estado'=>0, 'term_cond'=>$data['term_cond'], 'conf_datos'=>$data['conf_datos'], 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'tipo_doc'=>$data['tipo_doc'], 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'] , 'genero'=>'M', 'id_usuario_login'=>$id_usuario_login, "estado"=>0, 'tipo_usuario'=>$data['tipo_usuario']);
     }
     else{
       $nombres_correo = $data['name_user'];
@@ -165,26 +171,27 @@ class Controlador_Registro extends Controlador_Base {
         }
                 
         $user_id = $GLOBALS['db']->insert_id();
+        Utils::log($user_id);
 
-          if ($data['tipo_usuario'] == 1) {
-            $area_select = $data['area_select'];
-            $nivel_interes = $data['nivel_interes'];
+          // if ($data['tipo_usuario'] == 1) {
+          //   // $area_select = $data['area_select'];
+          //   // $nivel_interes = $data['nivel_interes'];
 
-                  if(!Modelo_UsuarioxArea::crearUsuarioArea($area_select, $user_id)){
-                      throw new Exception("Ha ocurrido un error, intente nuevamente");
-                  }
+          //         // if(!Modelo_UsuarioxArea::crearUsuarioArea($area_select, $user_id)){
+          //         //     throw new Exception("Ha ocurrido un error, intente nuevamente");
+          //         // }
 
-                  if(!Modelo_UsuarioxNivel::crearUsuarioNivel($nivel_interes, $user_id)){
-                      throw new Exception("Ha ocurrido un error, intente nuevamente");
-                  }
-          }
-          else{
-            $dato_contacto = array('nombre_contact'=>$data['nombre_contact'], 'apellido_contact'=>$data['apellido_contact'], 'tel_one_contact'=>$data['tel_one_contact'], 'tel_two_contact'=>$data['tel_two_contact']);
+          //         // if(!Modelo_UsuarioxNivel::crearUsuarioNivel($nivel_interes, $user_id)){
+          //         //     throw new Exception("Ha ocurrido un error, intente nuevamente");
+          //         // }
+          // }
+          // else{
+          //   $dato_contacto = array('nombre_contact'=>$data['nombre_contact'], 'apellido_contact'=>$data['apellido_contact'], 'tel_one_contact'=>$data['tel_one_contact'], 'tel_two_contact'=>$data['tel_two_contact']);
             
-            if(!Modelo_ContactoEmpresa::crearContactoEmpresa($dato_contacto, $user_id)){
-              throw new Exception("Ha ocurrido un error el registrar, intente nuevamente");
-            }
-          }
+          //   if(!Modelo_ContactoEmpresa::crearContactoEmpresa($dato_contacto, $user_id)){
+          //     throw new Exception("Ha ocurrido un error el registrar, intente nuevamente");
+          //   }
+          // }
 
 
                 $GLOBALS['db']->commit();

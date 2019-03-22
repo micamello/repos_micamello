@@ -14,8 +14,9 @@ class Controlador_Inicio extends Controlador_Base {
     $arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
-    $areas = Modelo_Area::obtieneListado();
-
+    // $areas = Modelo_Area::obtieneListado();
+    // $areas_sub = Modelo_AreaSubarea::obtieneAreas_Subareas();
+    // var_dump($areas_sub);
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
                   'nro_candidato'=>$nro_candidato,
@@ -25,17 +26,17 @@ class Controlador_Inicio extends Controlador_Base {
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg,
-                  'areas'=>$areas);
+                  'areas'=>$GLOBALS['areas']);
 
-    // $tags["template_js"][] = "modal-register";
-    // $tags["template_js"][] = "validator";
-    // $tags["template_js"][] = "assets/js/main";
-    $tags["template_js"][] = "micamello_registro";
+    $tags["template_js"][] = "modal-register";
+    $tags["template_js"][] = "validator";
+    $tags["template_js"][] = "assets/js/main";
+    // $tags["template_js"][] = "micamello_registro";
     $tags["template_js"][] = "multiple_select";
-    // $tags["template_js"][] = "ruc_jquery_validator";
+    $tags["template_js"][] = "ruc_jquery_validator";
     // $tags["template_js"][] = "bootstrap-multiselect";
-    // $tags["template_js"][] = "registrar";
-    // $tags["template_js"][] = "mic";
+    $tags["template_js"][] = "registrar";
+    $tags["template_js"][] = "mic";
 
 
     $opcion = Utils::getParam('opcion','',$this->data);

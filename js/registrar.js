@@ -434,41 +434,31 @@ if(document.getElementById('area_error')){
 	var area_error = document.getElementById('area_error').id;
 }
 
-if(document.getElementById('nivel_group')){
-	var nivel_group = document.getElementById('nivel_group').id;
-}
+// if(document.getElementById('nivel_group')){
+// 	var nivel_group = document.getElementById('nivel_group').id;
+// }
 
-if(document.getElementById('nivel_error')){
-	var nivel_error = document.getElementById('nivel_error').id;
-}
+// if(document.getElementById('nivel_error')){
+// 	var nivel_error = document.getElementById('nivel_error').id;
+// }
 
 
+// console.log($('#area'));
+// console.log($('#panelarea'));
 
-if(document.getElementById('area_select')){
-	$('#area_select').on('change', function(){
-		if(this.value == ""){
-			mensaje = "Seleccione un elemento de la lista";
-			colocaError(area_error, area_group, mensaje, button_register);
-		}
-		else{
-			quitarError(area_error, area_group);
-			enableBTN(1);
-		}
-	})
-}
 
-if(document.getElementById('nivel_interes')){
-	$('#nivel_interes').on('change', function(){
-		if(this.value == ""){
-			mensaje = "Seleccione un elemento de la lista";
-			colocaError(nivel_error, nivel_group, mensaje, button_register);
-		}
-		else{
-			quitarError(nivel_error, nivel_group);
-			enableBTN(1);
-		}
-	})
-}
+// if(document.getElementById('nivel_interes')){
+// 	$('#nivel_interes').on('change', function(){
+// 		if(this.value == ""){
+// 			mensaje = "Seleccione un elemento de la lista";
+// 			colocaError(nivel_error, nivel_group, mensaje, button_register);
+// 		}
+// 		else{
+// 			quitarError(nivel_error, nivel_group);
+// 			enableBTN(1);
+// 		}
+// 	})
+// }
 
 
 // Datos del contacto modal empresa
@@ -620,152 +610,152 @@ if(document.getElementById('tel_two_contact')){
 //   });
 // }
 
-        $(document).ready(function() {
-          $('#area_select').multiselect({
-            buttonContainer: '<div id="example-checkbox-list-container"></div>',
-            buttonClass: '',
-            templates: {
-                button: '',
-                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
-            },
-            maxHeight: 84,
-            	enableFiltering: true,
-            	enableCaseInsensitiveFiltering: true,
-            	buttonWidth: '50%',
-            	buttonText: function(options, select) {
-                if (options.length === 0) { 
-                	//$('#seleccionados').html('Seleccione una area ...');
-                	$('#seleccionados1').html('');
-                  return 'Seleccione una area ...';
-                }
-                else if (options.length > 3) {                	
-                    return 'Solo se permiten 3 areas';
-                }
-                else {
-                  var labels = [];  
-                  $('#seleccionados1').html('');                
-                  options.each(function() {
-                    if ($(this).attr('label') !== undefined) {
-                      labels.push($(this).attr('label'));                             
-                      $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
-                      // $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                      // console.log(this);
-                    }
-                    else {
-                      labels.push($(this).html());                             
-                      $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
-                        // $(this).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                    }
-                  });                          
-                  return labels.join(', ') + '';
-                }
-              },
-              onChange: function(option, checked) {
-                var selectedOptions = $('#area_select option:selected');
-                // console.log(selectedOptions);
+        // $(document).ready(function() {
+        //   $('#area_select').multiselect({
+        //     buttonContainer: '<div id="example-checkbox-list-container"></div>',
+        //     buttonClass: '',
+        //     templates: {
+        //         button: '',
+        //         ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
+        //     },
+        //     maxHeight: 84,
+        //     	enableFiltering: true,
+        //     	enableCaseInsensitiveFiltering: true,
+        //     	buttonWidth: '50%',
+        //     	buttonText: function(options, select) {
+        //         if (options.length === 0) { 
+        //         	//$('#seleccionados').html('Seleccione una area ...');
+        //         	$('#seleccionados1').html('');
+        //           return 'Seleccione una area ...';
+        //         }
+        //         else if (options.length > 3) {                	
+        //             return 'Solo se permiten 3 areas';
+        //         }
+        //         else {
+        //           var labels = [];  
+        //           $('#seleccionados1').html('');                
+        //           options.each(function() {
+        //             if ($(this).attr('label') !== undefined) {
+        //               labels.push($(this).attr('label'));                             
+        //               $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
+        //               // $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+        //               // console.log(this);
+        //             }
+        //             else {
+        //               labels.push($(this).html());                             
+        //               $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
+        //                 // $(this).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+        //                 // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
+        //                 $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+        //             }
+        //           });                          
+        //           return labels.join(', ') + '';
+        //         }
+        //       },
+        //       onChange: function(option, checked) {
+        //         var selectedOptions = $('#area_select option:selected');
+        //         // console.log(selectedOptions);
  
-                if (selectedOptions.length >= 3) {
-                    var nonSelectedOptions = $('#area_select option').filter(function() {
-                        return !$(this).is(':selected');
-                    }); 
-                    nonSelectedOptions.each(function() {
-                        var input = $('input[id="area_select-' + $(this).val() + '"]');
-                        // console.log(input[0].nextSibling.data);
-                        // console.log($('input[id="area_select-' + $(this).val() + '"]')[0]);
-                        input.prop('disabled', true);
-                        input.parent('li').addClass('disabled');
-                        // $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-                    });
-                }
-                else {
-                    $('#area_select option').each(function() {
-                        // console.log(this);
-                        console.log(selectedOptions.length);
-                        var input = $('input[id="area_select-' + $(this).val() + '"]');
-                        input.prop('disabled', false);
-                        input.parent('li').addClass('disabled');
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-                    });
-                }
-              }        
-            });
-            $('#seleccionados1').parent().append(filtro[0]);
+        //         if (selectedOptions.length >= 3) {
+        //             var nonSelectedOptions = $('#area_select option').filter(function() {
+        //                 return !$(this).is(':selected');
+        //             }); 
+        //             nonSelectedOptions.each(function() {
+        //                 var input = $('input[id="area_select-' + $(this).val() + '"]');
+        //                 // console.log(input[0].nextSibling.data);
+        //                 // console.log($('input[id="area_select-' + $(this).val() + '"]')[0]);
+        //                 input.prop('disabled', true);
+        //                 input.parent('li').addClass('disabled');
+        //                 // $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
+        //             });
+        //         }
+        //         else {
+        //             $('#area_select option').each(function() {
+        //                 // console.log(this);
+        //                 console.log(selectedOptions.length);
+        //                 var input = $('input[id="area_select-' + $(this).val() + '"]');
+        //                 input.prop('disabled', false);
+        //                 input.parent('li').addClass('disabled');
+        //                 $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
+        //             });
+        //         }
+        //       }        
+        //     });
+        //     $('#seleccionados1').parent().append(filtro[0]);
 
             
-        $('#nivel_interes').multiselect({
-            buttonContainer: '<div id="example-checkbox-list-container"></div>',
-            buttonClass: '',
-            templates: {
-                button: '',
-                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
-            },
-            maxHeight: 84,
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true,
-                buttonWidth: '50%',
-                buttonText: function(options, select) {
-                if (options.length === 0) { 
-                    //$('#seleccionados').html('Seleccione una area ...');
-                    $('#seleccionados2').html('');
-                  return 'Seleccione una area ...';
-                }
-                else if (options.length > 2) {                  
-                    return 'Solo se permiten 1 areas';
-                }
-                else {
-                  var labels = [];  
-                  $('#seleccionados2').html('');                
-                  options.each(function() {
-                    if ($(this).attr('label') !== undefined) {
-                      labels.push($(this).attr('label'));                             
-                      $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a>');
-                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                    }
-                    else {
-                      labels.push($(this).html());                             
-                      $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a></p>');
-                    // console.log(this.parentNode.id);
-                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children());
-                    }
-                  });                                    
-                  return labels.join(', ') + '';
-                }
-              },
-              onChange: function(option, checked) {
-                var selectedOptions = $('#nivel_interes option:selected');
+        // $('#nivel_interes').multiselect({
+        //     buttonContainer: '<div id="example-checkbox-list-container"></div>',
+        //     buttonClass: '',
+        //     templates: {
+        //         button: '',
+        //         ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
+        //     },
+        //     maxHeight: 84,
+        //         enableFiltering: true,
+        //         enableCaseInsensitiveFiltering: true,
+        //         buttonWidth: '50%',
+        //         buttonText: function(options, select) {
+        //         if (options.length === 0) { 
+        //             //$('#seleccionados').html('Seleccione una area ...');
+        //             $('#seleccionados2').html('');
+        //           return 'Seleccione una area ...';
+        //         }
+        //         else if (options.length > 2) {                  
+        //             return 'Solo se permiten 1 areas';
+        //         }
+        //         else {
+        //           var labels = [];  
+        //           $('#seleccionados2').html('');                
+        //           options.each(function() {
+        //             if ($(this).attr('label') !== undefined) {
+        //               labels.push($(this).attr('label'));                             
+        //               $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a>');
+        //               $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+        //             }
+        //             else {
+        //               labels.push($(this).html());                             
+        //               $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a></p>');
+        //             // console.log(this.parentNode.id);
+        //             $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
+        //             // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children());
+        //             }
+        //           });                                    
+        //           return labels.join(', ') + '';
+        //         }
+        //       },
+        //       onChange: function(option, checked) {
+        //         var selectedOptions = $('#nivel_interes option:selected');
  
-                if (selectedOptions.length >= 2) {
-                    var nonSelectedOptions = $('#nivel_interes option').filter(function() {
-                        return !$(this).is(':selected');
-                    }); 
-                    nonSelectedOptions.each(function() {
-                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-                        // console.log(input[0].nextSibling.data);
-                        // console.log($('input[id="nivel_interes-' + $(this).val() + '"]')[0]);
-                        input.prop('disabled', true);
-                        input.parent('li').addClass('disabled');
-                        // console.log(input.parent('li'));
-                    });
-                }
-                else {
-                    $('#nivel_interes option').each(function() {
-                        // console.log(this);
-                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-                        input.prop('disabled', false);
-                        input.parent('li').addClass('disabled');
-                        // console.log(input.parent('li'));
-                        // console.log("eder:  "+selectedOptions.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-                    });
-                }
-              }        
-            });
-            $('#seleccionados2').parent().append(filtro[1]);
-        });
+        //         if (selectedOptions.length >= 2) {
+        //             var nonSelectedOptions = $('#nivel_interes option').filter(function() {
+        //                 return !$(this).is(':selected');
+        //             }); 
+        //             nonSelectedOptions.each(function() {
+        //                 var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+        //                 // console.log(input[0].nextSibling.data);
+        //                 // console.log($('input[id="nivel_interes-' + $(this).val() + '"]')[0]);
+        //                 input.prop('disabled', true);
+        //                 input.parent('li').addClass('disabled');
+        //                 // console.log(input.parent('li'));
+        //             });
+        //         }
+        //         else {
+        //             $('#nivel_interes option').each(function() {
+        //                 // console.log(this);
+        //                 var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
+        //                 input.prop('disabled', false);
+        //                 input.parent('li').addClass('disabled');
+        //                 // console.log(input.parent('li'));
+        //                 // console.log("eder:  "+selectedOptions.length);
+        //                 // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
+        //                 $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
+        //             });
+        //         }
+        //       }        
+        //     });
+        //     $('#seleccionados2').parent().append(filtro[1]);
+        // });
 
 
 // ----------------------------------------------------------------------------------------------------------------------------------------
@@ -873,15 +863,15 @@ function validateForm(tipo){
 			if(tipo==2){colocaError(seleccione_error, seleccione_group, lista_vacia, button_register);}
 			errors++;
 		}
-		if(document.getElementById('area_select').value == ""){
+		if(document.getElementById('area').value == ""){
 			if(tipo==2){colocaError(area_error, area_group, lista_vacia, button_register);}
 			errors++;
 		}
 
-		if(document.getElementById('nivel_interes').value == ""){
-			if(tipo==2){colocaError(nivel_error, nivel_group, lista_vacia, button_register);}
-			errors++;
-		}
+		// if(document.getElementById('nivel_interes').value == ""){
+		// 	if(tipo==2){colocaError(nivel_error, nivel_group, lista_vacia, button_register);}
+		// 	errors++;
+		// }
 	}
 // ----------------------------------------------Tipo de usuario 1 (candidato) exclusivo--------------------------------------
 
