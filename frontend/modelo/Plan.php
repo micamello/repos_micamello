@@ -10,7 +10,7 @@ class Modelo_Plan{
     costo=2 => los que no tenga precio 0*/
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
   	if (empty($tipousuario)||empty($sucursal)){ return false; }
-    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.extension, p.num_cuenta, 
+    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.extension, p.num_cuenta, p.num_accesos,
                    IF(p.promocional,p.prom_codigo_paypal,p.codigo_paypal) AS codigo_paypal,
                    IF(p.promocional,p.prom_num_post,p.num_post) AS num_post, 
                    IF(p.promocional,p.prom_costo,p.costo) AS costo, 
@@ -61,6 +61,10 @@ class Modelo_Plan{
                           WHEN num_descarga_rest = 0 THEN '-'
                           ELSE num_descarga_rest
                      END AS num_descarga_rest, 
+                     CASE WHEN num_accesos IS NULL THEN '-'
+                          WHEN num_accesos = 0 THEN '-'
+                          ELSE num_accesos
+                     END AS num_accesos,
                      e.id_empresa_plan AS id_usuario_plan, e.estado, f.id_factura
               FROM mfo_empresa_plan e
               INNER JOIN mfo_plan p ON e.id_plan = p.id_plan
@@ -86,7 +90,7 @@ class Modelo_Plan{
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    
   }
  
-  public static function busquedaXId($id,$todos=false){
+  public static function busquedaXId($id,$todos=false){   
     if (empty($id)){ return false; }
     if (!$todos){
       $sql = "SELECT * FROM mfo_plan WHERE id_plan = ?";

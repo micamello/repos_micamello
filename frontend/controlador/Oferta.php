@@ -17,7 +17,7 @@ class Controlador_Oferta extends Controlador_Base{
         $opcion = Utils::getParam('opcion', '', $this->data); 
         $page = Utils::getParam('page', '1', $this->data);
         $type = Utils::getParam('type', '', $this->data); 
-        $vista = Utils::getParam('vista', '', $this->data);
+        $vista = Utils::getParam('vista', '', $this->data); 
         $postulacionesUserLogueado = array();
         $breadcrumbs = array();
         $aspirantesXoferta = '';
@@ -42,7 +42,7 @@ class Controlador_Oferta extends Controlador_Base{
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == '' || $opcion == 'vacantes' || $opcion == 'cuentas'){
 
-            $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'O'=>1,'S'=>0,'Q'=>0);
+            $_SESSION['mfo_datos']['Filtrar_ofertas'] = array('A'=>0,'P'=>0,'J'=>0,'O'=>1,'S'=>0,'Q'=>0,'K'=>0);
         }
         
         $idUsuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
@@ -131,6 +131,9 @@ class Controlador_Oferta extends Controlador_Base{
                 else if($letra == 'S' && $type == 1){
                   $_SESSION['mfo_datos']['Filtrar_ofertas']['S'] = $id; 
                 }
+                else if($letra == 'K' && $type == 1){
+                  $_SESSION['mfo_datos']['Filtrar_ofertas']['K'] = $id; 
+                }
                 else if($letra == 'Q' && $type == 1){
                   $_SESSION['mfo_datos']['Filtrar_ofertas']['Q'] = $id;
                   $array_datos['Q'] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
@@ -147,25 +150,31 @@ class Controlador_Oferta extends Controlador_Base{
                         $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrarea[$value]);
                     }
                 }
-                if($letra == 'P'){
+                else if($letra == 'P'){
                     if(isset($arrprovincia[$value])){
                         $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrprovincia[$value]);
                     }
                 }
-                if($letra == 'J'){
+                else if($letra == 'J'){
                     if(isset($arrjornadas[$value])){
                         $array_datos[$letra] = array('id'=>$value,'nombre'=>$arrjornadas[$value]);
                     }
                 }
-                if($letra == 'S'){
+                else if($letra == 'S'){
                     if(isset($empresas[$value])){
                         $array_datos[$letra] = array('id'=>$value,'nombre'=>$empresas[$value]);
                     }
                 }
-                if($letra == 'O'){
+                else if($letra == 'O'){
                     $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                 }
-                if($letra == 'Q'){ 
+                else if($letra == 'K' && $type == 1){
+                        
+                  if(isset(SALARIO[$id])){
+                      $array_datos['K'] = array('id'=>$id,'nombre'=>SALARIO[$id]);
+                  }
+                }
+                else if($letra == 'Q'){ 
                   $array_datos[$letra] = array('id'=>$value,'nombre'=>htmlentities($value,ENT_QUOTES,'UTF-8'));
                 }
               }
@@ -186,8 +195,7 @@ class Controlador_Oferta extends Controlador_Base{
 
             $filtros = $_SESSION['mfo_datos']['Filtrar_ofertas'];
 
-
-            if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['J']) && empty($filtros['S']) && empty($filtros['Q'])){
+            if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['J']) && empty($filtros['K']) && empty($filtros['S']) && empty($filtros['Q'])){
 
               if(isset($_POST['filtro'])){
                 $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
@@ -262,6 +270,8 @@ class Controlador_Oferta extends Controlador_Base{
             Vista::render('ofertas', $tags);
           break;
           case 'detalleOferta':
+
+
               //solo candidatos 
               if (($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verOfertaTrabajo'))){
 
@@ -272,6 +282,7 @@ class Controlador_Oferta extends Controlador_Base{
               $idOferta = Utils::getParam('id', '', $this->data);
               $status = Utils::getParam('status', '', $this->data);
               
+              $idOferta = Utils::desencriptar($idOferta);
               $aspiracion = Utils::getParam('aspiracion', '', $this->data);
 
               if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
@@ -300,7 +311,7 @@ class Controlador_Oferta extends Controlador_Base{
                       self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
                       Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
                     }else{
-                      $_SESSION['mostrar_error'] = "La aspiración salarial debe ser mayor a 0";
+                      $_SESSION['mostrar_error'] = "La aspiraci\u00f3n salarial debe ser mayor a 0";
                     }
                   }
               }
@@ -455,19 +466,52 @@ class Controlador_Oferta extends Controlador_Base{
             }else{
               $planes = null;
             }
-            Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
+            //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
 
             $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
+            $empresa = Utils::getParam('empresa', '', $this->data);
+
             if(!empty($eliminarPostulacion)){
-                $r = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion);
-                if(!$r){
-                    $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulación, intente de nuevo';
+
+              $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
+              if(!empty($empresa)){
+                $tipo_post = 1; 
+              }else{
+                $tipo_post = 2;
+              }
+
+              $r = Modelo_Postulacion::postAutoxIdPostAeliminar($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa,$tiempo);
+            
+              if(!empty($r['ids_postulaciones'])){
+                $resultado = Modelo_Postulacion::eliminarPostulacion($r['ids_postulaciones'],$tipo_post);
+                if(empty($resultado)){
+                    $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo1';
                 }else{
-                    $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulación exitosamente';
+                  Modelo_EmpresaBloq::insertEmpresa($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa);
+                  self::devolverPostulaciones(explode(",",$r['ids_usuariosplanes']));
+                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';  
+                  Utils::log('FERNANDA1'.PUERTO.'://'.HOST.'/'.$vista.'/');                
+                  //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
                 }
+              }else{
+
+                if($tipo_post == 1){
+                   $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, Ya pasaron las '.$tiempo.' horas de postulado.';
+                }else{
+                  $resultado = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion,$tipo_post);
+                  if(empty($resultado)){
+                      $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo';
+                  }else{
+                    Utils::log('FERNANDA2'.PUERTO.'://'.HOST.'/'.$vista.'/');                
+                    $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
+                    //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
+                  }
+                }
+              }
             }
+
             $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-            $arrnivel      = Modelo_Interes::obtieneListadoAsociativo();
+            //$arrnivel      = Modelo_Interes::obtieneListadoAsociativo();
             $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
             $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
@@ -504,8 +548,9 @@ class Controlador_Oferta extends Controlador_Base{
             }else{
 
               $filtro = 0;
+              //$tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
-              
+              //print_r($ofertas);
               //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
               $breadcrumbs['postulacion'] = 'Mis postulaciones';
@@ -547,7 +592,8 @@ class Controlador_Oferta extends Controlador_Base{
               throw new Exception("Ha ocurrido un error al guardar la descripcion, intente nuevamente");
           }
           $GLOBALS['db']->commit();
-          $_SESSION['mostrar_exito'] = 'La descripción fue editada exitosamente, debe esperar un máximo de 48 horas para que el administrador apruebe el nuevo contenido.';
+          $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
+          $_SESSION['mostrar_exito'] = 'La descripci\u00f3n fue editada exitosamente, debe esperar un máximo de '.$tiempo.' horas para que el administrador apruebe el nuevo contenido.';
       }catch (Exception $e) {
           $_SESSION['mostrar_error'] = $e->getMessage();
           $GLOBALS['db']->rollback();
@@ -558,7 +604,7 @@ class Controlador_Oferta extends Controlador_Base{
       try{
           if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'postulacion') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
               if (!Modelo_Postulacion::postularse($id_usuario,$id_oferta,$aspiracion)) {
-                  throw new Exception("Ha ocurrido un error la postulación, intente nuevamente");
+                  throw new Exception("Ha ocurrido un error la postulaci\u00f3n, intente nuevamente");
               }
               $GLOBALS['db']->commit();
               $_SESSION['mostrar_exito'] = 'Se ha postulado a esta oferta exitosamente';
@@ -609,6 +655,14 @@ class Controlador_Oferta extends Controlador_Base{
         }
       }
       return $ruta;
+    }
+
+    public static function devolverPostulaciones($ids_planes){
+
+      foreach ($ids_planes as $key => $id_plan_usuario) {
+        Modelo_UsuarioxPlan::sumarPublicaciones($id_plan_usuario);
+      }
+
     }
 }
 ?>

@@ -243,7 +243,7 @@ class Utils{
     }
   }
 
-  public static function envioCorreo($to, $subject, $body){    
+  public static function envioCorreo($to, $subject, $body, $attachments=array()){    
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
@@ -259,8 +259,16 @@ class Utils{
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 
     $mail->Body = $body; 
+    if (!empty($attachments) && is_array($attachments)){
+      foreach($attachments as $attachment){
+        if (file_exists($attachment["ruta"])){
+          $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
+        }
+      }
+    }    
     return $mail->send(); 
   }
+
   public static function encriptar($texto){    
     $objaes = new Aes(KEY_ENCRIPTAR);
     $encriptado = $objaes->encrypt($texto);
@@ -590,22 +598,27 @@ class Utils{
   }
 
   public static function detectarNavegador(){
-  if(strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE') !== false)
-     return 'Internet explorer';
-   elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') !== false)
-      return 'Internet explorer';
-   elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Firefox') !== false)
-     return 'Mozilla Firefox';
-   elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false)
-     return 'Google Chrome';
-   elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera Mini') !== false)
-     return "Opera Mini";
-   elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Opera') !== false)
-     return "Opera";
-   elseif(strpos($_SERVER['HTTP_USER_AGENT'], 'Safari') !== false)
-     return "Safari";
-   else
-     return 'Other';
+
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    
+    if(strpos($user_agent, 'MSIE') !== FALSE)
+      return 'MSIE';
+    elseif(strpos($user_agent, 'Edge') !== FALSE) //Microsoft Edge
+      return 'Microsoft Edge';
+    elseif(strpos($user_agent, 'Trident') !== FALSE) //IE 11
+      return 'Internet explorer 11';
+    elseif(strpos($user_agent, 'Opera Mini') !== FALSE)
+      return "Opera Mini";
+    elseif(strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR') !== FALSE)
+      return "Opera";
+    elseif(strpos($user_agent, 'Firefox') !== FALSE)
+      return 'Mozilla Firefox';
+    elseif(strpos($user_agent, 'Chrome') !== FALSE)
+      return 'Google Chrome';
+    elseif(strpos($user_agent, 'Safari') !== FALSE)
+      return "Safari";
+    else
+      return 'Other';
   }
 
   public static function validatFormatoFecha($fecha){

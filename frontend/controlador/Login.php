@@ -48,8 +48,8 @@ class Controlador_Login extends Controlador_Base {
 
     $tags = array('social'=>$social_reg);
  
-    $tags["arrarea"] = Modelo_Area::obtieneListado();
-    $tags["intereses"] = Modelo_Interes::obtieneListado();
+    //$tags["arrarea"] = Modelo_Area::obtieneListado();
+    //$tags["intereses"] = Modelo_Interes::obtieneListado();
  
     $tags["template_js"][] = "modal-register";
     $tags["template_js"][] = "assets/js/main"; 
@@ -71,14 +71,14 @@ class Controlador_Login extends Controlador_Base {
     }
     if ($usuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
       $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
-      $usuarioxnivel = Modelo_UsuarioxNivel::obtieneListado($usuario["id_usuario"]);
+      $subareas = Modelo_UsuarioxArea::consultarSubareas($usuario["id_usuario"]);
       $infohv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);
       
       if (!empty($usuarioxarea) && is_array($usuarioxarea)){
-        $_SESSION['mfo_datos']['usuarioxarea'] = $usuarioxarea; 
+        $_SESSION['mfo_datos']['usuario']['usuarioxarea'] = $usuarioxarea; 
       }
-      if (!empty($usuarioxnivel) && is_array($usuarioxnivel)){
-        $_SESSION['mfo_datos']['usuarioxnivel'] = $usuarioxnivel; 
+      if (!empty($subareas) && is_array($subareas)){
+        $_SESSION['mfo_datos']['usuario']['subareas'] = $subareas['subareas']; 
       }
 
       if (!empty($infohv) && is_array($infohv)){

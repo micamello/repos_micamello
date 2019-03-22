@@ -218,7 +218,8 @@ class Controlador_Plan extends Controlador_Base {
         throw new Exception("Error al cargar la imagen, por favor intente denuevo");
       }
 
-      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan será aprobado en un máximo de 48 horas";  
+      $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
+      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan será aprobado en un máximo de ".$tiempo." horas";  
       Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
     }
     catch(Exception $e){

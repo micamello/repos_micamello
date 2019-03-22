@@ -1,52 +1,24 @@
-[2019/02/28 12:49:51] Utils::createSession empezo una nueva sesion
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_pais ORDER BY nombre_abr ASC
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_provincia ORDER BY nombre ASC
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_escolaridad ORDER BY id_escolaridad ASC
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_profesionm2
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_ocupacionm2
-[2019/02/28 12:49:51] SQL Query: SELECT id_faceta,SUBSTRING(descripcion, 1, 1) as faceta FROM mfo_facetam2 WHERE estado = 1
-[2019/02/28 12:49:51] SQL Query: SELECT id_faceta,color FROM mfo_facetam2 WHERE estado = 1
-[2019/02/28 12:49:51] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '14' ORDER BY nombre ASC
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_competenciam2
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_puntajem2
-[2019/02/28 12:49:51] SQL Query: SELECT * FROM mfo_empresam2
-[2019/02/28 12:49:51] SQL Query: SELECT u.id_usuario, u.nombres, u.apellidos, u.correo, u.id_nacionalidad, u.id_provincia, u.genero,
-                   TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) AS edad, u.estado_civil, u.id_profesion,
-                   u.id_ocupacion, u.id_escolaridad, res.id_pregunta, p.id_competencia,
-                   b.porcentaje, b.id_puntaje, m.id_faceta, u.id_provincia_res, res.tot_opcion,
-                   SUBSTR(res.puntaje, 1, 1) AS orden1,
-                   SUBSTR(res.puntaje, 3, 1) AS orden2,
-                   SUBSTR(res.puntaje, 5, 1) AS orden3,
-                   SUBSTR(res.puntaje, 7, 1) AS orden4,
-                   SUBSTR(res.puntaje, 9, 1) AS orden5, 'valido' AS flag FROM mfo_usuariom2 u
-            INNER JOIN (SELECT r.id_usuario, o.id_pregunta, GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) AS puntaje, SUM(o.id_pregunta) AS tot_opcion 
-                        FROM mfo_respuestam2 r INNER JOIN mfo_opcionm2 o ON o.id_opcion = r.id_opcion 
-                        GROUP BY r.id_usuario, o.id_pregunta) AS res ON res.id_usuario = u.id_usuario
-            INNER JOIN mfo_baremo b ON b.orden1 = (SUBSTR(res.puntaje, 1, 1)) AND 
-                                       b.orden2 = (SUBSTR(res.puntaje, 3, 1)) AND 
-                                       b.orden3 = (SUBSTR(res.puntaje, 5, 1)) AND 
-                                       b.orden4 = (SUBSTR(res.puntaje, 7, 1)) AND 
-                                       b.orden5 = (SUBSTR(res.puntaje, 9, 1))
-            INNER JOIN mfo_preguntam2 p ON p.id_pregunta = res.id_pregunta                                    
-            INNER JOIN mfo_competenciam2 m ON m.id_competencia = p.id_competencia            
-            WHERE ('' = '' OR ('' = '1' AND TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) <= 20) 
-                                    OR ('' = '2' AND TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) > 20 AND 
-                                                              TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) <= 30)
-                                    OR ('' = '3' AND TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) > 30 AND 
-                                                              TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) <= 40)
-                                    OR ('' = '4' AND TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) > 40 AND 
-                                                              TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) <= 50)
-                                    OR ('' = '5' AND TIMESTAMPDIFF(YEAR,u.fecha_nacimiento,CURDATE()) > 50)) AND
-                  ('' = '' OR u.id_nacionalidad = '') AND 
-                  ('' = '' OR u.id_provincia = '') AND                        
-                  ('' = '' OR u.genero = '') AND      
-                  ('' = '' OR u.estado_civil = '') AND
-                  ('' = '' OR u.id_profesion = '') AND
-                  ('' = '' OR u.id_ocupacion = '') AND      
-                  ('' = '' OR u.id_escolaridad = '') AND      
-                  ('' = '' OR u.id_empresa = '')AND                                                      
-                  ('' = '' OR u.id_provincia_res = '') ORDER BY u.id_usuario, m.id_faceta, p.orden
-[2019/02/28 12:49:51] SQL Query: SELECT COUNT(id_pregunta) AS cantd_preguntas
-            FROM mfo_preguntam2 p
-            INNER JOIN mfo_competenciam2 c on c.id_competencia = p.id_competencia            
-            GROUP BY c.id_faceta LIMIT 1
+[2019/03/22 01:10:16] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/22 01:10:16] Utils::createSession empezo una nueva sesion
+[2019/03/22 01:10:16] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/22 01:10:16] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/22 01:10:16] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/22 01:10:16] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/22 01:10:16] SQL Query: SELECT a.id_area, a.nombre, a.ico, 0 AS ofertas
+						FROM mfo_area a 												
+						GROUP BY a.id_area
+						ORDER BY a.nombre
+[2019/03/22 01:10:16] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/22 01:10:16] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/22 01:10:16] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

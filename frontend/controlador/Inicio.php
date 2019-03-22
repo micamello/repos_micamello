@@ -1,7 +1,7 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  public function construirPagina(){        
+  public function construirPagina(){   
 
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
@@ -11,7 +11,7 @@ class Controlador_Inicio extends Controlador_Base {
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
     $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
-    $arrinteres = Modelo_Interes::obtieneListado();
+    //$arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
 
@@ -20,7 +20,7 @@ class Controlador_Inicio extends Controlador_Base {
                   'nro_candidato'=>$nro_candidato,
                   'nro_empresa'=>$nro_empresa,
                   'arrarea'=>$arrarea,
-                  'intereses'=>$arrinteres,
+                  //'intereses'=>$arrinteres,
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg);
@@ -39,16 +39,16 @@ class Controlador_Inicio extends Controlador_Base {
       case 'buscaCorreo':        
         $correo = Utils::getParam('correo', '', $this->data);
         $datocorreo = Modelo_Usuario::existeCorreo($correo);
-        Utils::log($datocorreo);
+        //Utils::log($datocorreo);
         Vista::renderJSON(array("respcorreo"=>$datocorreo));
       break;
       case 'buscaDni':
         $dni = Utils::getParam('dni', '', $this->data);
         $datodni = Modelo_Usuario::existeDni($dni);
-        Utils::log($datodni);
+        //Utils::log($datodni);
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
-      default:        
+      default:         
         Vista::render('inicio', $tags);
       break;
     }

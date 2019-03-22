@@ -37,6 +37,26 @@
       <br/>
       <div class="panel panel-default shadow-panel1">
         <div class="panel-heading">
+          <span><i class="fa fa-industry"></i> M&eacute;todo de preguntas</span>
+        </div>
+        <div class="panel-body">
+          <div class="filtros">
+            <?php              
+              if (!empty(METODO_CUESTIONARIO)) {
+                echo '<ul style="padding-left: 0px;">';                
+                foreach (METODO_CUESTIONARIO as $key => $v) {
+                  $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/M'.$key.'/';
+                  echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="metodo" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+                }
+                echo '</ul>';
+              }
+            ?>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel panel-default shadow-panel1">
+        <div class="panel-heading">
           <span><i class="fa fa-map-marker"></i> Residencia Actual</span>
         </div>
         <div class="panel-body">
@@ -67,9 +87,8 @@
         <div class="panel-body">
           <div class="filtros">
             <?php       
-              Utils::log(print_r($empresas,true));        
               if (!empty($empresas)) {
-                echo '<ul style="padding-left: 0px;">';                
+                echo '<ul style="padding-left: 0px;">';
                 foreach ($empresas as $key => $v) {
                   $ruta = PUERTO.'://'.HOST.'/filtrarEntrevistados/I'.$key.'/';
                   echo '<li class="list-group-item"><a href="'.$ruta.'1/" class="empresas" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
@@ -256,7 +275,9 @@
     <div id="links"><?php echo $link; ?></div>
   </div>
   <div class="col-md-9">    
+
     <a href="<?php echo PUERTO."://".HOST;?>/admin/generarExcel/" class="col-md-1 offset-md-11 btn btn-success"><i class="fa fa-download"></i> Excel</a>
+
     <br><br>
     <div class="card shadow-lg rounded text-center">
       <div class="card-header bg-info text-white">
@@ -264,7 +285,6 @@
       </div>
       <div class="card-footer bg-transparent text-muted">
         <?php echo $table;?>
-        
       </div>
     </div>
   </div>

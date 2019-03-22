@@ -88,7 +88,8 @@ class Controlador_Publicar extends Controlador_Base {
             $GLOBALS['db']->beginTrans();
             self::guardarPublicacion($data, $data_idiomas, $idusu);
             $GLOBALS['db']->commit();
-            $_SESSION['mostrar_exito'] = "La oferta se ha registrado correctamente. En un máximo de 48 horas para que el administrador apruebará la oferta.";
+            $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
+            $_SESSION['mostrar_exito'] = "La oferta se ha registrado correctamente. En un máximo de ".$tiempo." horas el administrador aprobará la oferta.";
             $this->redirectToController('vacantes');
           }
           else{

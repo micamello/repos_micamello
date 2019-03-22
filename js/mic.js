@@ -217,7 +217,9 @@ function validaCampos(form,btn){
 $('.modal').on('hidden.bs.modal', function(){
     var $form = $(this);
 
-    $(this).find('#form_register')[0].reset();
+    if($(this).find('#form_register')[0]){
+      $(this).find('#form_register')[0].reset();
+    }
     var error_msg = document.getElementsByClassName('with-errors');
     var error_input = document.getElementsByClassName('has-error');
 

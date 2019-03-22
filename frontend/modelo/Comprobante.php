@@ -13,7 +13,7 @@ class Modelo_Comprobante{
 
   public static function obtieneComprobante($id_comprobante){
     $sql = "SELECT * FROM mfo_rcomprobantescam WHERE id_comprobante = ".$id_comprobante;
-    return $GLOBALS['db']->auto_array($sql,array(),true);
+    return $GLOBALS['db']->auto_array($sql,array());
   }
 
   public static function guardarComprobante($numero, $nombre, $correo, $telefono, $dni, $tipodoc, 
