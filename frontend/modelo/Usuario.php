@@ -32,7 +32,7 @@ class Modelo_Usuario{
     return true;
   }
 
-  public static function autenticacion($username, $password){
+public static function autenticacion($username, $password){
     $password = md5($password);         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni
             FROM mfo_usuario_login 
@@ -40,10 +40,10 @@ class Modelo_Usuario{
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
-      $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                     u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,  u.anosexp, u.status_carrera,                       
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado 
+      $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
+                     u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -109,6 +109,15 @@ public static function existeUsuario($username){
     $rs = $GLOBALS['db']->auto_array($sql,array($username));
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
+
+/*public static function existeUsuario2($username){
+  if(empty($username)){ return false; }
+  $sql = "SELECT *
+          FROM mfo_usuario u
+          WHERE u.username = ?";
+  $rs = $GLOBALS['db']->auto_array($sql,array($username));
+  return (!empty($rs['id_usuario'])) ? $rs : false;
+}*/
 
 public static function existeUsername($username){
   if(empty($username)){return false;}
@@ -187,9 +196,10 @@ public static function existeUsername($username){
 
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                     u.token, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.estado_civil,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia, u.anosexp, u.status_carrera,                       
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, ul.correo, ul.dni, ul.username, ul.tipo_usuario
+                      u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
+                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional
               FROM mfo_usuario u
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -224,7 +234,7 @@ public static function existeUsername($username){
 
     if($tipo_usuario == self::CANDIDATO){
 
-        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"anosexp"=>$data['experiencia'],"status_carrera"=>$data['estatus'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"estado_civil"=>$data['estado_civil']); 
+        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional']); 
 
         if (!empty($data['documentacion'])){          
           $datos['tipo_doc'] = $data['documentacion'];
@@ -753,7 +763,7 @@ public static function existeUsername($username){
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
     if (empty($id)){ return false; }
     if ($tipo == self::CANDIDATO){
-      $sql = "SELECT u.id_usuario, u.nombres, l.correo, l.tipo_usuario, p.id_pais, u.apellidos 
+      $sql = "SELECT u.id_usuario, u.nombres, l.correo, l.tipo_usuario, p.id_pais, u.apellidos
               FROM mfo_usuario u 
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -783,7 +793,7 @@ public static function existeUsername($username){
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
-      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-1)){
+      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }

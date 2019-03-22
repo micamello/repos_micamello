@@ -35,4 +35,5 @@ if(count($_COOKIE) != 0){ $_COOKIE = filter_input_array(INPUT_COOKIE, FILTER_SAN
 $_SUBMIT = array_merge($_POST, $_GET);
   
 Utils::createSession(); 
+
 ?>

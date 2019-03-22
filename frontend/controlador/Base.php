@@ -9,12 +9,13 @@ abstract class Controlador_Base{
   public $gg_URL;
   public $tw;
   public $lk;
+  public $nrofactura;
   
   function __construct($device='web'){
     global $_SUBMIT;
     $this->device = $device;
     $this->data = $_SUBMIT;        
-    self::verificaCompra();
+    self::verificaCompra();    
   }
   
   public function redirectToController($controladorNombre, $params = array()){  
@@ -64,10 +65,10 @@ abstract class Controlador_Base{
   }
 
   public function linkRedesSociales(){
-    if( strstr(dirname(__FILE__), 'C:') ){        
+    //if( strstr(dirname(__FILE__), 'C:') ){        
       $this->loginURL = ''; $this->gg_URL = ''; $this->lk = ''; $this->tw = '';
-    }
-    else{
+    //}
+    /*else{
       // FACEBOOK
       require_once "includes/fb_api/config.php";
       $redirectURL = PUERTO."://".HOST."/desarrollov2/facebook.php?tipo_user=1";
@@ -85,7 +86,7 @@ abstract class Controlador_Base{
       // TWITTER
       require_once "includes/tw_api/config.php";
       $this->tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
-    } 
+    }*/ 
   }
 
   public abstract function construirPagina();

@@ -142,16 +142,38 @@ function validarDescripcion(){
     }
 }
 
-function enviarPclave(ruta,page){
+function check(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    //Tecla de retroceso para borrar, siempre la permite
+    if (tecla == 8) {
+        return true;
+    }
+
+    // Patron de entrada, en este caso solo acepta numeros y letras
+    patron = /[a-zA-ZÁÉÍÓÚñáéíóúÑ0-9&.,' ]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
+}
+
+function enviarPclave(ruta,tipo,page){
 
 	var pclave = $('#inputGroup').val();
-
-	if(pclave != ''){
-		var nueva_ruta = ruta+"Q"+pclave.toLowerCase()+"/"+page+"/";
+    
+	if(pclave != '' && pclave.length >= 3){
+		var nueva_ruta = ruta+tipo+'/'+"Q"+pclave.toLowerCase()+"/"+page+"/";
+        console.log(nueva_ruta);
+        window.location = nueva_ruta;
 	}else{
-		var nueva_ruta = ruta+page+"/";
+		
+        if(tipo == 1){
+            swal('Notificación!', 'La longitud mínima de la palabra clave es de 3 caracteres', 'error');
+        }else{
+            var nueva_ruta = ruta+tipo+'/'+page+"/";
+            console.log(nueva_ruta);
+            window.location = nueva_ruta;
+        }
 	}
-	window.location = nueva_ruta;
 }
 
 function obtenerFiltro(ruta,page){

@@ -17,11 +17,14 @@ foreach ($data as $letra => $value) {
         if($letra == 'S'){
             $ruta .= '/S'.$value['id'];
         }
+        if($letra == 'K'){
+            $ruta .= '/K'.$value['id'];
+        }
         if($letra == 'Q'){
             $ruta .= '/Q'.$value['id'];
         }
 
-        $valores = "'".$ruta."/',".$page;
+        $valores = "'".$ruta."/',2,".$page;
         echo '<div class="col-xs-12 col-md-3 btn-filtro">
             <div class="input-group">
                 <span>'.utf8_encode(ucfirst(strtolower($value['nombre']))).'</span>

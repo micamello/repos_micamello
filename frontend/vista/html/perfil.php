@@ -8,7 +8,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
         <li class="visited">Registro</li>
         <li class="active">Completar Perfil</li>
         <?php 
-        for($i=1;$i<=$nrototaltest;$i++){ ?>
+        for($i=1;$i<=($nrototaltest-2);$i++){ ?>
           <?php 
            if ($i <= $nrotestusuario){
              $clase = "visited";
@@ -17,13 +17,14 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
              $clase = "";
            }
           ?>
-          <li class="<?php echo $clase;?>">Formulario <?php echo $i;?></li>                
+          <li class="<?php echo $clase;?>">Cuestionario <?php echo $i;?></li>                
         <?php } ?>
       </ul>
 	</div>
 </div>
 <br>
 <?php } 
+
 ?>
 
 
@@ -45,9 +46,10 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                    <div id="carga" class="panel panel-default shadow" style="border-radius: 20px;">
 	                    	
 	                    	<img id="archivo" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/Hv.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
-	                       
-	                       <?php if($btnDescarga == 1){ ?>
-		                       	<div <?php if($btnSig == 0){ echo 'class="pull-left" style="position: relative; margin-left: 15px;"'; } ?>>
+	                       <?php 
+
+	                       if($btnDescarga == 1){ ?>
+		                       	<div <?php /*if(($btnSubir == 0)){*/ echo 'class="pull-left" style="position: relative; margin-left: 15px;"'; /*}*/ ?>>
 			                        <label for="descargarCV" class="custom_file">
 			                        	<a href="<?php echo $ruta_arch; ?>" target="_blank">
 			                        		<img id="imagenBtn1" style="cursor:pointer;" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch1";?>" width="50px">
@@ -63,8 +65,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 							<?php } ?>
 							
 							<?php 
+							#if(/*$btnSubir == 1 || */isset($data)){ 
 							
-							if($btnSubir == 1 || isset($data)){ ?>
+								?>
 								<div <?php if($btnDescarga == 1){ echo 'class="pull-right" style="position: relative; margin-right: 15px;"'; } ?>>
 			                        <label for="subirCV" class="custom_file">
 			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
@@ -79,19 +82,16 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 								</div>
 								<br><br>
 								<?php if($btnDescarga == 1){ echo '<br><br>'; } ?>
-
-	                        <?php } ?>
-
+	                        <?php #} ?>
 	                    </div>
                     <?php } ?>
 
 					<div class="panel panel-default shadow" style="border-radius: 20px;">
 				    	
 				    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/cambiar_clave.jpg";?>" style="border-radius: 20px 20px 0px 0px;">
-
 			           	<div>
 			                <label for="cambiar" class="custom_file">
-			                	<a onclick="abrirModal('','cambiar_clave','','Ok');">
+			                	<a onclick="abrirModal('','cambiar_clave','','');">
 			                		<img id="cambiar" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/btn_cambiar_clave.png";?>" width="50px">
 			                	</a>
 			                </label>
@@ -101,6 +101,23 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			            </div>
 			            <br>
 				    </div>
+
+				    <?php if($puedeDescargarInforme == 1 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+					    <div class="panel panel-default shadow" style="border-radius: 20px;">
+					    	<img id="archivo" width="100%" alt="cambio_clave" src="<?php echo PUERTO."://".HOST."/imagenes/descargar_informe.png";?>" style="border-radius: 20px 20px 0px 0px;">
+				           	<div>
+				                <label for="cambiar" class="custom_file">
+				                	<a target="_blank" href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
+				                		<img id="informePdf" alt="Descargar_informe" style="cursor:pointer;" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/pdf.png";?>" width="50px">
+				                	</a>
+				                </label>
+								<div align="center">
+				                    <p class="text-center" id="texto_status1">Descarga aqu&iacute;</p>
+				                </div>
+				            </div>
+				            <br>
+					    </div>
+					<?php } ?>
                 </div>
 	            <div class="col-md-8">
 	                <div class="panel panel-default shadow" style="border-radius: 20px;">
@@ -123,8 +140,8 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                    	<div class="col-md-6">
 									            <div class="form-group" id="seleccione_group">
 									              <label for="tipo_dni">Tipo de documento</label><div id="seleccione_error" class="help-block with-errors"></div>
-									              <select class="form-control" id="documentacion" name="documentacion" onchange="validarFormulario()" <?php if($_SESSION['mfo_datos']['usuario']['tipo_doc'] == 0){ echo ''; }else{ echo 'disabled';} ?>>
-									                <option selected="" value="">Seleccione una opcion</option>
+									              <select class="form-control" id="documentacion" name="documentacion" <?php if($_SESSION['mfo_datos']['usuario']['tipo_doc'] == 0){ echo ''; }else{ echo 'disabled';} ?>>
+									                <option selected="" value="">Seleccione una opci&oacute;n</option>
 									                <?php 
 									                  $option = '';
 									                  foreach(DOCUMENTACION as $key => $doc){
@@ -133,9 +150,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														{ 
 															$option .= " selected='selected'";
 														}
-														$option .= ">".$doc."</option>";
+														$option .= ">".utf8_encode($doc)."</option>";
 													  }
-													  echo utf8_encode($option);
+													  echo $option;
 									                 ?>
 									              </select>
 									            </div>
@@ -216,8 +233,8 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                    <div class="col-md-6">
 		                                    <div id="mayoria"  class="form-group">
 		                                        <label for="mayor_edad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Fecha de Nacimiento <?php }else{ ?> Fecha de Apertura <?php } ?><span class="requerido" title="Este campo es obligatorio">*</span></label><div id="error" class="help-block with-errors"></div>
-
-		                                        <input class="form-control" type="date" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>"  value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> onchange="calcularEdad(); validarFormulario();" <?php } ?> placeholder="dd/mm/aaaa" onkeyup="calcularEdad(); validarFormulario();" />
+		                                         <input type="text" data-field="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>" placeholder="aaaa-mm-dd" value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>">
+		                                         <div id="fecha"></div>
 		                                    </div>
 	                                    </div>
 
@@ -231,118 +248,66 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											</div>
 
 										<?php }  ?>
-										<hr width="100%" />
-	                                    <div class="form-group col-md-12">
-    										<h6><b>Direcci&oacute;n Domiciliaria</b></h6>
-		                                    <div class="col-md-6">
-		                                        <div id="seccion_provincia" class="form-group">
-		                                            <label for="provincia">Provincia <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_prov" class="help-block with-errors"></div>
-		                                            <select class="form-control" name="provincia" id="provincia"  onchange="validarFormulario()" >
-		                                            	<option value="0">Seleccione una provincia</option>
-														<?php 
-														if (!empty($arrprovincia)){									
-					                    					foreach($arrprovincia as $key => $pr){ 
-																echo "<option value='".$pr['id_provincia']."'";
-																if(isset($data['provincia']) && (int)$data['provincia'] == (int)$pr['id_provincia']){
-													
-																	echo " selected='selected'";
-																}else if ((int)$provincia == (int)$pr['id_provincia']){ 
-																	echo " selected='selected'";
-																}
-																echo ">".utf8_encode($pr['nombre'])."</option>";
+	                                    
+	                                    <div class="col-md-6">
+	                                        <div id="seccion_provincia" class="form-group">
+	                                            <label for="provincia">Provincia de Residencia<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_prov" class="help-block with-errors"></div>
+	                                            <select class="form-control" name="provincia" id="provincia"  onchange="validarFormulario()" >
+	                                            	<option value="0">Seleccione una provincia</option>
+													<?php 
+													if (!empty($arrprovincia)){									
+				                    					foreach($arrprovincia as $key => $pr){ 
+															echo "<option value='".$pr['id_provincia']."'";
+															if(isset($data['provincia']) && (int)$data['provincia'] == (int)$pr['id_provincia']){
+												
+																echo " selected='selected'";
+															}else if ((int)$provincia == (int)$pr['id_provincia']){ 
+																echo " selected='selected'";
 															}
-														} ?>
-													</select>
-		                                        </div>
-		                                    </div>
+															echo ">".utf8_encode($pr['nombre'])."</option>";
+														}
+													} ?>
+												</select>
+	                                        </div>
+	                                    </div>
 
-		                                    <div class="col-md-6">
-		                                        <div id="seccion_ciudad" class="form-group">
-		                                            <label for="ciudad">Ciudad <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_ciu" class="help-block with-errors"></div>
-		                                            <select id="ciudad" name="ciudad" class="form-control"  onchange="validarFormulario()" >
-		                                            <?php 
-		                                            if(!empty($arrciudad)){
-				                                    	foreach($arrciudad as $key => $ciudad){ 
-															echo "<option value='".$ciudad['id_ciudad']."'";
-															if(isset($data['ciudad']) && $data['ciudad'] == $ciudad['id_ciudad']){
-																echo " selected='selected'";
-															}else if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad']){  
-																echo " selected='selected'";
-															}
-															echo ">".utf8_encode($ciudad['ciudad'])."</option>";
-														} 
-		                                            }else{ ?>
-														<option value="0">Selecciona una ciudad</option>
-		                                            <?php } ?>
-		                                            </select>
-		                                        </div>
-		                                    </div>					
-	                    				</div>
+	                                    <div class="col-md-6">
+	                                        <div id="seccion_ciudad" class="form-group">
+	                                            <label for="ciudad">Ciudad de Residencia<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_ciu" class="help-block with-errors"></div>
+	                                            <select id="ciudad" name="ciudad" class="form-control"  onchange="validarFormulario()" >
+	                                            <?php 
+	                                            if(!empty($arrciudad)){
+			                                    	foreach($arrciudad as $key => $ciudad){ 
+														echo "<option value='".$ciudad['id_ciudad']."'";
+														if(isset($data['ciudad']) && $data['ciudad'] == $ciudad['id_ciudad']){
+															echo " selected='selected'";
+														}else if ($_SESSION['mfo_datos']['usuario']['id_ciudad'] == $ciudad['id_ciudad']){  
+															echo " selected='selected'";
+														}
+														echo ">".utf8_encode($ciudad['ciudad'])."</option>";
+													} 
+	                                            }else{ ?>
+													<option value="0">Selecciona una ciudad</option>
+	                                            <?php } ?>
+	                                            </select>
+	                                        </div>
+	                                    </div>					
 
 	                    				
 	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-	                                    	<hr width="100%" />
-		                                    <div class="col-md-6">
-		                                    	<div id="seccion_dis" class="form-group">
-			                                    	<label for="discapacidad">Discapacidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_dis" class="help-block with-errors"></div>
-				                                    <select id="discapacidad" name="discapacidad" class="form-control"  onchange="validarFormulario()" >
-				                                    	<option value="-1">Tiene alguna discapacidad&#63;</option>
-				                                    	<?php 
-				                                    	foreach(REQUISITO as $key => $dis){ 
-															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['discapacidad'] == $key || (isset($data['discapacidad']) && $data['discapacidad'] == $key))
-															{ 
-																echo " selected='selected'";
-															}
-															echo ">$dis</option>";
-														} ?>
-													</select>
-												</div>
-											</div>
 											
-											<div class="col-md-6">
-		                                        <div id="seccion_exp" class="form-group">
-		                                            <label for="experiencia">A&ntilde;os de Experiencia <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_exp" class="help-block with-errors"></div>
-		                                            <select id="experiencia" name="experiencia" class="form-control"  onchange="validarFormulario()" >
-		                                            	<option value="0">Seleccione una opci&oacute;n</option>
-		                                            <?php 
-				                                    	foreach(ANOSEXP as $key => $exp){ 
-															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['anosexp'] == $key || (isset($data['experiencia']) && $data['experiencia'] == $key))
-															{ 
-																echo " selected='selected'";
-															}
-															echo ">$exp</option>";
-														} ?>
-		                                            </select>
-		                                        </div>
-		                                    </div>
-
 											<div class="col-md-6">
 											    <div id="seccion_tlf" class="form-group">
 											        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
 											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>"  onkeyup="validarFormulario()" />
 											    </div>
+											</div>                                           
+											<div class="col-md-6">
+											    <div id="seccion_tlf" class="form-group">
+											        <label for="convencional">Convencional (Opcional)</label><div id="err_tlf" class="help-block with-errors"></div>
+											        <input class="form-control" type="text" id="convencional" name="convencional" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario()" />
+											    </div>
 											</div>
-
-		                                    <div class="col-md-6">
-		                                    	<div id="seccion_civil" class="form-group">
-			                                    	<label for="estado_civil">Estado civil <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_civil" class="help-block with-errors"></div>
-				                                    <select id="estado_civil" name="estado_civil" class="form-control"  onchange="validarFormulario()" >
-				                                    	<option value="0">Seleccione una opci&oacute;n</option>
-				                                    	<?php 
-				                                    	foreach(ESTADO_CIVIL as $key => $e){ 
-															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['estado_civil'] == $key || (isset($data['estado_civil']) && $data['estado_civil'] == $key))
-															{ 
-																echo " selected='selected'";
-															}
-															echo ">$e</option>";
-														} ?>
-													</select>
-												</div>
-											</div>
-											<div class="clearfix"></div>
 		                                    
 		                                    <div class="col-md-6">
 		                                    	<div id="seccion_res" class="form-group">
@@ -416,7 +381,25 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 													</select>
 												</div>
 											</div>
-	 
+	 										
+	 										<div class="col-md-6">
+		                                    	<div id="seccion_dis" class="form-group">
+			                                    	<label for="discapacidad">Discapacidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_dis" class="help-block with-errors"></div>
+				                                    <select id="discapacidad" name="discapacidad" class="form-control"  onchange="validarFormulario()" >
+				                                    	<option value="-1">Tiene alguna discapacidad&#63;</option>
+				                                    	<?php 
+				                                    	foreach(REQUISITO as $key => $dis){ 
+															echo "<option value='$key'";
+															if ($_SESSION['mfo_datos']['usuario']['discapacidad'] == $key || (isset($data['discapacidad']) && $data['discapacidad'] == $key))
+															{ 
+																echo " selected='selected'";
+															}
+															echo ">$dis</option>";
+														} ?>
+													</select>
+												</div>
+											</div>
+
 		                                    <div class="col-md-6" >
 		                                        <div id="seccion_esc" class="form-group">
 		                                            <label for="escolaridad">&Uacute;ltimo estudio realizado <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_esc" class="help-block with-errors"></div>
@@ -435,25 +418,6 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														} ?>
 													</select>
 		                                        </div>
-		                                    </div>
-
-		                                    <div class="col-md-6">
-		                                    	<div id="seccion_est" class="form-group">
-		                                    		<label for="estatus">Nivel <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_est" class="help-block with-errors"></div>
-													 <select id="estatus" name="estatus" class="form-control" style="padding-left: 0px;"  onchange="validarFormulario()" >
-													 	<option value="0">Seleccione su opci&oacute;n</option>
-														<?php 
-				                                    	foreach(STATUS_CARRERA as $key => $status){ 
-															echo "<option value='".$key."'";
-															if ($_SESSION['mfo_datos']['usuario']['status_carrera'] == $key || (isset($data['estatus']) && $data['estatus'] == $key))
-															{ 
-																echo " selected='selected'";
-															}
-															echo ">".utf8_encode($status)."</option>";
-														}
-														 ?>
-													</select>
-												</div>
 		                                    </div>
 
 											<div class="col-md-6 depende" hidden>
@@ -501,80 +465,55 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                        </div>
 		                                    </div>
 
-		                                    <div class="col-md-6">	
+		                                    <div class="col-md-6">
 												<div class="form-group" id="seccion_area">
-													<div class="panel panel-default">
-														<div class="panel-head-select">Áreas (Máx: 3)
-												        	<label class="num_sel" style="float: right; color: black; border-radius: 5px;">
-												          		<label id="numero1">0</label> de 3
-												        	</label>
-												        	<div id="err_area" class="help-block with-errors"></div>
-												      	</div>
-														<div class="panel-body">
-															<div class="row" id="seleccionados1">
-															</div>
-														</div>
-													  	<select class="form-control" multiple id="area_select" name="area_select[]"  onchange="validarFormulario()" >
-															<?php 
-															if (!empty($arrarea)){
-											                	foreach($arrarea as $key => $ae){ 
-																	echo "<option value='".$ae['id_area']."'";
-																	if(isset($data['area_select'])){
-																		if (in_array($ae['id_area'], $data['area_select']))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}else{
-																		if (in_array($ae['id_area'], $areaxusuario))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}
-																	echo ">".utf8_encode($ae['nombre'])."</option>";
-																} 
-															}?>
-														</select>
-													</div>
+													<label>&Aacute;reas de Inter&eacute;s (Máx 3) <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<div id="err_area" class="help-block with-errors"></div>
+													<select class="form-control" id="area" name="area[]" multiple="multiple">
+													  <!-- <option value="">Seleccione una opción</option> -->
+													  <?php 
+													  $i = 0;
+													    if(!empty($areas) && is_array($areas)){
+													      foreach ($areas as $area) {
+ 															$selected = '';
+													        if($i != $area['id_area']){
+
+													        	if(isset($areaxusuario[$area['id_area']])){
+													        		$selected = "selected='selected'";
+													        	}
+													          	echo "<option ".$selected." value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
+													          	$i = $area['id_area'];
+													        }
+													      }
+													    }
+													   ?>
+													</select>
 												</div>
 											</div>
 
-											<div class="col-md-6">	
-												<div class="form-group" id="seccion_int">
-													<div class="panel panel-default">
-														<div class="panel-head-select">Niveles de Interes (Máx: 2)
-												        	<label class="num_sel" style="float: right; color: black; border-radius: 5px;">
-												          		<label id="numero2">0</label> de 2
-												        	</label>
-												        	<div id="err_int" class="help-block with-errors"></div>
-												      	</div>
-														<div class="panel-body">
-															<div class="row" id="seleccionados2">
-															</div>
-														</div>
-													  	<select class="form-control" multiple id="nivel_interes" name="nivel_interes[]"  onchange="validarFormulario()" >
+											<div class="col-md-6">
+												<div class="form-group">
+													<label>Sub-Áreas <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<div class="help-block with-errors"></div>
+													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple">
+													  <!-- <option value="">Seleccione una opción</option> -->
+													  <?php 
+													  $j = 0;
+													    if(!empty($areas) && is_array($areas)){
+													      foreach ($areas as $area) {
+													      	$selected = '';
+													        if($j != $area['id_subareas']){
 
-															<?php 
-															if (!empty($arrinteres)){
-											                	foreach($arrinteres as $key => $ae){ 
-																	echo "<option value='".$ae['id_nivelInteres']."'";
-				
-																	if(isset($data['nivel_interes'])){
-																		if (in_array($ae['id_nivelInteres'], $data['nivel_interes']))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}else{
-																		if (in_array($ae['id_nivelInteres'], $nivelxusuario))
-																		{ 
-																			echo " selected='selected'";
-																		}
-																	}
-																	echo ">".utf8_encode($ae['descripcion']);
-																	echo "</option>";
-																} 
-															} ?>
-														</select>
-													</div>
+													        	if(in_array($area['id_subareas'], $areaxusuario[$area['id_area']])){
+													        		$selected = "selected='selected'";
+													        	}
+													          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
+													          	$j = $area['id_subareas'];
+													        }
+													      }
+													    }
+													   ?>
+													</select>
 												</div>
 											</div>
 
@@ -727,12 +666,12 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 					                <div class="row">
 					                	
-										<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR" disabled onclick="enviarFormulario()">
+										<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR">
 
 										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn btn-info" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
+											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 										<?php }else{ 	?>
-											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn btn-info" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
+											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 									    <?php } ?>
 									</div>
 				            	</div>  
@@ -778,7 +717,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	      </div>
 	      <input type="hidden" name="cambiarClave" id="cambiarClave" value="1">
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+	        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 	        <!--<a href="" class="btn btn-success" id="btncambiar">Cambiar</a>-->
 	        <input type="button" id="button_cambiar" name="btnusu" class="btn btn-success" value="Cambiar" onclick="enviarCambioClave()"> 
 	      </div>

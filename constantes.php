@@ -25,8 +25,7 @@ define('PATH_PROFILE',FRONTEND_RUTA.'imagenes/usuarios/profile/');
 define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
 define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'alert-warning'));
 define('ESTADOS',array('1'=>'Activo','0'=>'Inactivo'));
-// define('MAIL_SUGERENCIAS','info@micamello.com.ec');
-define('MAIL_SUGERENCIAS','evpozo@gmail.com');
+define('MAIL_SUGERENCIAS','info@micamello.com.ec');
 define('PATH_COMPROBANTE',FRONTEND_RUTA.'imagenes/usuarios/comprobante/');
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
@@ -39,17 +38,21 @@ define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as',
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
-define('REGISTRO_PAGINA',9);
+define('REGISTRO_PAGINA',10);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Unión libre', '3'=>'Casado(a)', '4'=>'Separado(a)','5'=>'Divorciado(a)','6'=>'Viudo(a)','7'=>'Otro'));
 define('CRON_RUTA',FRONTEND_RUTA.'cron/');
 define('DIAS_AUTOPOSTULACION','3');
 define('AUTOPOSTULACION_MIN','5');
-define('TIPO_DOCUMENTO', array('1'=>'RUC','2'=>'CÉDULA','3'=>'PASAPORTE'));
-define('DOCUMENTACION', array('2'=>'CÉDULA', '3'=>'PASAPORTE'));
+define('TIPO_DOCUMENTO', array('1'=>'Ruc','2'=>'Cédula','3'=>'Pasaporte'));
+define('DOCUMENTACION', array('2'=>'Cédula', '3'=>'Pasaporte'));
 define('EDAD', array('1'=>'Entre 18 y 20 a&ntilde;os', '2'=>'Entre 20 y 30 a&ntilde;os','3'=>'Entre 30 y 40 a&ntilde;os','4'=>'Entre 40 y 50 a&ntilde;os','5'=>'M&aacute;s de 50 a&ntilde;os'));
 define('OPCIONES',array('a','b','c','d','e'));
+define('METODO_CUESTIONARIO',array('0'=>'Preguntas ordenadas','1'=>'Preguntas aleatorias'));
+
+define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
+define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');
@@ -72,31 +75,30 @@ define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
 define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
-
 // CORREOS_TEMPLATES
 // REGISTRO MANUAL
-const TAGS_REPLACE_T1 = array("°NOMBRE°", "°NOMBRE_USUARIO°", "°URL_BOTON°", "°TEXTO_BOTON°");
+const TAGS_REPLACE_T1 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%");
 //REGISTRO RED SOCIAL
-const TAGS_REPLACE_T2 = array("°NOMBRE°", "°NOMBRE_USUARIO°", "°URL_BOTON°", "°TEXTO_BOTON°", "°CORREO°", "°PASSWORD°");
+const TAGS_REPLACE_T2 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
 // AVISO CREACION
-const TAGS_REPLACE_T3 = array("°NOMBRE°", "°NOMBRE_USUARIO°", "°CORREO°", "°PASSWORD°");
+const TAGS_REPLACE_T3 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%CORREO%", "%PASSWORD%");
 // RECUPERAR CONTRASEÑA
-const TAGS_REPLACE_T4 = array("°NOMBRE°", "°URL_BOTON°", "°TEXTO_BOTON°");
+const TAGS_REPLACE_T4 = array("%NOMBRE%", "%URL_BOTON%", "%TEXTO_BOTON%");
 // PRE_REGISTRO ACTIVACION CUENTA USUARIO
-const TAGS_REPLACE_T5 = array("°NOMBRE°", "°NOMBRE_USUARIO°", "°URL_BOTON°", "°TEXTO_BOTON°", "°CORREO°", "°PASSWORD°");
+const TAGS_REPLACE_T5 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
 // ERROR CRON PRE_REGISTRO
-const TAGS_REPLACE_T6 = array("°MENSAJE_ERROR°");
+const TAGS_REPLACE_T6 = array("%MENSAJE_ERROR%");
 // RECOMENDACIONES
-const TAGS_REPLACE_T7 = array("°NOMBRE_DEST°", "°NOMBRE_USUARIO_SUGERENCIA°", "°MENSAJE_SUGERENCIA°", "°CORREO°", "°TELEFONO°");
+const TAGS_REPLACE_T7 = array("%NOMBRE_DEST%", "%NOMBRE_USUARIO_SUGERENCIA%", "%MENSAJE_SUGERENCIA%", "%CORREO%", "%TELEFONO%");
 //ERROR_GENERAL
-const TAGS_REPLACE_T8 = array("°MENSAJE_ERROR°", "°CABECERA°", "°LOGO_TIPO_MENSAJE°");
+const TAGS_REPLACE_T8 = array("%MENSAJE_ERROR%", "%CABECERA%", "%LOGO_TIPO_MENSAJE%");
 // AUTOPOSTULACIONES------------ALERTAS_OFERTAS
-const TAGS_REPLACE_T9 = array("°NOMBRE°", "°MENSAJE°", "°CABECERA°", "°LOGO_TIPO_MENSAJE°", "°CONTENIDO°");
+const TAGS_REPLACE_T9 = array("%NOMBRE%", "%MENSAJE%", "%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%CONTENIDO%");
 // CANCELAR_PLANES
-const TAGS_REPLACE_T10 = array("°CABECERA°", "°LOGO_TIPO_MENSAJE°", "°NOMBRE°", "°NOMBRE_PLAN°", "°FECHA_PLAN°");
+const TAGS_REPLACE_T10 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%NOMBRE%", "%NOMBRE_PLAN%", "%FECHA_PLAN%");
 // MENSAJE_GENERAL
-const TAGS_REPLACE_T11 = array("°CABECERA°", "°LOGO_TIPO_MENSAJE°", "°MENSAJE°");
-// print_r(TAGS_REPLACE_T1);
+const TAGS_REPLACE_T11 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%MENSAJE%");
+
 // CEBECERAS
 define('TIPO', 	array(
 						'eliminar_oferta'=>array(

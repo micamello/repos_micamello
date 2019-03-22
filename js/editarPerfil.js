@@ -3,11 +3,29 @@ if(document.getElementById('form_editarPerfil')){
     validarFormulario();
     ocultarCampos();
     mostrarUni();
+
+    if(navegador() != 'MSIE'){
+      $('#fecha').DateTimePicker({
+        dateFormat: "yyyy-MM-dd",
+        shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+        shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+        fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+        titleContentDate: "Configurar fecha",
+        titleContentTime: "Configurar tiempo",
+        titleContentDateTime: "Configurar Fecha & Tiempo",
+        setButtonContent: "Listo",
+        clearButtonContent: "Limpiar"
+      });
+    }
 }
 
-if (document.getElementById("area_select"))
+$('#boton').on('click', function(){
+  enviarFormulario();
+});
+
+if (document.getElementById("area"))
 {
-  var selectedOptions = $('#area_select option:selected');
+  /*var selectedOptions = $('#area_select option:selected');
 
   $('#area_select').multiselect({
     buttonContainer: '<div id="example-checkbox-list-container"></div>',
@@ -107,11 +125,20 @@ if (document.getElementById("area_select"))
 
   if(selectedOptions.length === 0){
     colocaError("err_area","seccion_area","Debe seleccionar una opcion de la lista","boton");
-  }
+  }*/
+
+  $('#area').multiple_select({
+    items: 3,
+    dependence: {
+      id_dependencia: "subareas",
+      items: 1
+    }
+  });
 }
 
-if (document.getElementById("nivel_interes"))
+/*if (document.getElementById("nivel_interes"))
 {
+
   $('#nivel_interes').multiselect({
     buttonContainer: '<div id="example-checkbox-list-container"></div>',
     buttonClass: '',
@@ -157,7 +184,7 @@ if (document.getElementById("nivel_interes"))
       }
       else {
           $('#nivel_interes option').each(function() {
-              // console.log(this);
+              
               var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
               input.prop('disabled', false);
               input.parent('li').addClass('disabled');
@@ -193,7 +220,7 @@ if (document.getElementById("nivel_interes"))
   if(selectedOptions.length == 0){
     colocaError("err_int","seccion_int","Debe seleccionar una opcion de la lista","boton");
   }
-}
+}*/
 
 if(document.getElementById('seccion_listado')){
     var listado_group = document.getElementById('seccion_listado').id;
@@ -237,6 +264,7 @@ $('#provincia').change(function()
     }
 });
 
+/*Permite deseleccionar las subareas seleccionadas*/
 function eliminar_item_selected(selected_item,tipo,op){
 
     var seleccionado = document.getElementById(selected_item);
@@ -247,10 +275,7 @@ function eliminar_item_selected(selected_item,tipo,op){
     
 }
 
-/* Carga select dependiente (ciudad) */
-
-/* Carga de imagen dinamico */
-
+/*Muestra dinamicamente si la imagen / foto fue cargada*/
 $('#file-input').change(function(e) {
     addImage(e); 
     validarImg(document.getElementById('file-input'),'err_img','seccion_img',"btndeposito");
@@ -274,6 +299,7 @@ function fileOnload(e) {
 }
 
 
+/*Valida si la imagen / foto fue cargada*/
 function validarImg(archivo,err_img,seccion_img,btn){
 
   var file = fileValidation(archivo);
@@ -286,6 +312,7 @@ function validarImg(archivo,err_img,seccion_img,btn){
   return error;
 }
 
+/*Valida el peso del archivo*/
 function fileValidation(fileInput){
 
   var filePath = fileInput.value;
@@ -295,7 +322,6 @@ function fileValidation(fileInput){
    
     var tamano = fileInput.files[0].size/1024/1024;
     if(tamano > 1){
-      //colocaError("err_img", "seccion_img","El peso permitido es de máximo es de 1MB","btndeposito");
       document.getElementById('err_img').innerHTML = '<p class="parpadea" style="font-size:11px;color:red">El peso permitido es de máximo 1MB</p>';
       return 1;
     }else{
@@ -303,7 +329,7 @@ function fileValidation(fileInput){
     }
     
   }else if(!allowedExtensions.test(filePath)){
-    //colocaError("err_img", "seccion_img","El formato permitido es .jpeg/.jpg/.png","btndeposito");
+
     fileInput.value = '';
     document.getElementById('err_img').innerHTML = '<p class="parpadea" style="font-size:11px;color:red">El formato permitido es .jpeg/.jpg/.png</p>';
     return 1;
@@ -312,10 +338,7 @@ function fileValidation(fileInput){
   }
 }
 
-/* Carga de imagen dinamico */
-
 /* Carga de hoja de vida */
-
 $('#subirCV').change(function(e) {
 
     $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
@@ -324,17 +347,9 @@ $('#subirCV').change(function(e) {
     if(document.getElementById("mensaje_error_hv")){
         document.getElementById("mensaje_error_hv").style.display = "none";
     }
-
-    var estado = validarFormulario();
-
-    if(estado == 1){
-        $('#boton').removeAttr('disabled');
-    }else{
-        $('#boton').attr('disabled');
-    }
 });
 
-/* Carga de hoja de vida */
+/*Eventos del campo de idiomas*/
 $('#idioma_of').on('change', function(){
 
     if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
@@ -357,17 +372,17 @@ $('#nivel_idi_of').on('change', function(){
     }
 });
 
+/*Valrifica si no existe algún error en los inputs*/
 function enableBTN(event){
     
     var flag = false;
-    if(validarFormulario() == 1 && errorsVerify() != false){
-        var btn = document.getElementById('boton');
-        btn.classList.remove("disabled");
-        btn.removeAttribute("disabled");
+    if(errorsVerify() != false){
         flag = true;
     }
+
     return flag;
 }
+
 
 function errorsVerify(){
 
@@ -389,6 +404,7 @@ function limpiarSelect(idSelect) {
     }
 }
 
+/*Permite transferir los idiomas de la lista de select al div de seleccionados*/
 $('#btn_transfer').on('click', function()
 {
     var select_array_idioma = document.getElementById('select_array_idioma');
@@ -459,6 +475,7 @@ $('#btn_transfer').on('click', function()
 
 })
 
+/*Permite deseleccionar los idiomas seleccionados*/
 function delete_item_selected(selected_item){
 
     var tag_idioma = document.getElementById('idioma_of');
@@ -493,7 +510,7 @@ function delete_item_selected(selected_item){
     } 
 }
 
-/* valida si el candidato es mayor de edad */
+/*Valida el formato de la fecha*/
 function validarFormatoFecha(campo) {
   var RegExPattern = /^\d{1,2}-\d{1,2}-\d{4}$/;
   var values = campo.split("-");
@@ -509,7 +526,7 @@ function validarFormatoFecha(campo) {
     return false;
   }
 }
-
+/* valida si el candidato es mayor de edad */
 function calcularEdad(){
 
     var fecha=document.getElementById("fecha_nacimiento").value;
@@ -623,13 +640,18 @@ function ocultarCampos(){
 function enviarFormulario(){
 
     var estado = validarFormulario();
-    if(estado == 1){
+    //console.log(estado);
+    if(estado == ''){
         document.form_editarPerfil.submit();
+    }else{
+      //mostrarERRORES
+      swal('Faltan algunos datos verifica!', estado, 'error');
     }
 }
 
 function validarFormulario(){
 
+    var mensaje = '';
     var tipo_usuario = document.getElementById('tipo_usuario').value;
     if(tipo_usuario == 1){
       expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
@@ -639,10 +661,10 @@ function validarFormulario(){
     //var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
     var expreg_telf = /^[0-9]+$/i;
     var error = 0;
-    var err_list = "Debe seleccionar una opcion de la lista";
+    var err_list = "Debe seleccionar una opción de la lista";
     var err_campo = "El campo no puede ser vacío";
     var err_formato_letra = "Formato incorrecto, solo letras";
-    var err_formato_numeros = "Formato incorrecto, solo numeros";
+    var err_formato_numeros = "Formato incorrecto, solo números";
     var err_univ = "Debe introducir una universidad";
 
     var nombres = document.getElementById('nombres').value;
@@ -658,17 +680,17 @@ function validarFormulario(){
     if(tipo_usuario == 1){
 
         var discapacidad = document.getElementById('discapacidad').selectedIndex;
-        var experiencia = document.getElementById('experiencia').selectedIndex;
-        var estado_civil = document.getElementById('estado_civil').selectedIndex;
+        /*var experiencia = document.getElementById('experiencia').selectedIndex;
+        var estado_civil = document.getElementById('estado_civil').selectedIndex;*/
         var genero = document.getElementById('genero').selectedIndex;
         var tiene_trabajo = document.getElementById('tiene_trabajo').selectedIndex;
         var residencia = document.getElementById('residencia').selectedIndex;
         var viajar = document.getElementById('viajar').selectedIndex;
         var licencia = document.getElementById('licencia').selectedIndex;
         var escolaridad = document.getElementById('escolaridad').selectedIndex;
-        var estatus = document.getElementById('estatus').selectedIndex;
-        var area_select = document.getElementById('area_select');
-        var nivel_interes = document.getElementById('nivel_interes');
+        //var estatus = document.getElementById('estatus').selectedIndex;
+        var area_select = document.getElementById('area');
+        //var nivel_interes = document.getElementById('nivel_interes');
         var select_array_idioma = document.getElementById('select_array_idioma');
         var lugar_estudio = document.getElementById('lugar_estudio');
         var universidad = document.getElementById('universidad').selectedIndex;
@@ -680,17 +702,53 @@ function validarFormulario(){
         if ($("#dni").is(":disabled") == false){
           if(tipo_doc != 0){          
             quitarError("seleccione_error","seleccione_group");          
-            var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
-            if(validar == 1){            
+            /*var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
+            if(validar != ''){ 
+              mensaje += validar+'\n';         
               error = 1;
             }else{
               quitarError("err_dni","seccion_dni");
-            }
+            }*/
           }else{
             colocaError("seleccione_error","seleccione_group",err_list,"boton");
-            validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
+            mensaje += '- Tipo de documento, '+err_list+'\n';
             error = 1;
-          }       
+          }  
+          
+
+          if($('#dni').val() != ""){
+
+            if(document.getElementById('dni').value.length >= 10){
+              if(searchAjax($('#dni'),tipo_doc) == false){
+                if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+                  quitarError("err_dni","seccion_dni");
+                }else{
+                  colocaError("err_dni", "seccion_dni","- Documento ingresado no es válido","boton");
+                  mensaje += "Documento ingresado no es válido"+'\n';
+                  error = 1;      
+                }
+              }else{
+                colocaError("err_dni", "seccion_dni","- Documento ingresado ya existe","boton");
+                mensaje += "- Documento ingresado ya existe"+'\n'; 
+                error = 1; 
+              } 
+            }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
+
+              colocaError("err_dni", "seccion_dni","- El número de cédula debe tener mínimo 10 dígitos","boton");
+
+            }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+
+              colocaError("err_dni", "seccion_dni","- El pasaporte debe tener mínimo 6 dígitos","boton");
+            }
+            else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
+
+              colocaError("err_dni", "seccion_dni","- El RUC debe tener mínimo 13 dígitos","boton");
+            }
+          }else{
+            colocaError("err_dni", "seccion_dni","- Documento no puede ser vacío","boton");
+            mensaje += "- Documento no puede ser vacío"+'\n';
+            error = 1;
+          }
         }
 
         if(document.getElementById('subirCV') && document.getElementById('subirCV').value != ''){
@@ -698,16 +756,19 @@ function validarFormulario(){
 
         }else if(document.getElementById('btnDescarga').value == 0 && document.getElementById('subirCV').value == ''){
             error = 1;
+            //console.log('entro');
+            mensaje += '- Debe cargar la hoja de vida\n';
         }
 
         if(discapacidad == null || discapacidad == 0){
             colocaError("err_dis", "seccion_dis",err_list,"boton");
+            mensaje += '- Discapacidad, '+err_list+'\n';
             error = 1;
         }else{
-            quitarError("err_exp", "seccion_exp");
+            quitarError("err_dis", "seccion_dis");
         }
 
-        if(experiencia == null || experiencia == 0){
+        /*if(experiencia == null || experiencia == 0){
 
             colocaError("err_exp", "seccion_exp",err_list,"boton");
             error = 1;
@@ -721,11 +782,12 @@ function validarFormulario(){
             error = 1;
         }else{
             quitarError("err_civil", "seccion_civil");
-        }
+        }*/
 
         if(genero == null || genero == 0){
 
             colocaError("err_gen", "seccion_gen",err_list,"boton");
+            mensaje += '- Genero, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_gen", "seccion_gen");
@@ -734,6 +796,7 @@ function validarFormulario(){
         if(tiene_trabajo == null || tiene_trabajo == 0){
 
             colocaError("err_trab", "seccion_trab",err_list,"boton");
+            mensaje += '- Tiene trabajo?, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_trab", "seccion_trab");
@@ -742,6 +805,7 @@ function validarFormulario(){
         if(residencia == null || residencia == 0){
 
             colocaError("err_res", "seccion_res",err_list,"boton");
+            mensaje += '- Cambio de residencia?, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_res", "seccion_res");
@@ -751,6 +815,7 @@ function validarFormulario(){
         if(viajar == null || viajar == 0){
 
             colocaError("err_via", "seccion_via",err_list,"boton");
+            mensaje += '- Puede viajar?, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_via", "seccion_via");
@@ -759,6 +824,7 @@ function validarFormulario(){
         if(licencia == null || licencia == 0){
 
             colocaError("err_lic", "seccion_lic",err_list,"boton");
+            mensaje += '- Tiene licencia?, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_lic", "seccion_lic");
@@ -767,18 +833,19 @@ function validarFormulario(){
         if(escolaridad == null || escolaridad == 0){
 
             colocaError("err_esc", "seccion_esc",err_list,"boton");
+            mensaje += '- Escolaridad, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_esc", "seccion_esc");
         }
 
-        if(estatus == null || estatus == 0){
+        /*if(estatus == null || estatus == 0){
 
             colocaError("err_est", "seccion_est",err_list,"boton");
             error = 1;
         }else{
             quitarError("err_est", "seccion_est");
-        }
+        }*/
 
         if($(".depende").is(":visible")){
 
@@ -790,6 +857,7 @@ function validarFormulario(){
                     if(universidad2 == null || universidad2 == ''){
 
                         colocaError("err_univ", "seccion_univ",err_univ,"boton");
+                        mensaje += '- Universidad, '+err_list+'\n';
                         error = 1;
                     }else{
                         quitarError("err_univ", "seccion_univ");
@@ -807,6 +875,7 @@ function validarFormulario(){
             if(universidad == null || universidad == 0){
 
                 colocaError("err_univ", "seccion_univ",err_list,"boton");
+                mensaje += '- Universidad, '+err_list+'\n';
                 error = 1;
             }else{
                 quitarError("err_univ", "seccion_univ");
@@ -817,32 +886,35 @@ function validarFormulario(){
             if(universidad2 == null || universidad2 == ''){
 
                 colocaError("err_univ", "seccion_univ",err_univ,"boton");
+                mensaje += '- Universidad, '+err_list+'\n';
                 error = 1;
             }else{
                 quitarError("err_univ", "seccion_univ");
             }
         } 
 
-
         if(area_select.value == null || area_select.value == 0){
 
             colocaError("err_area", "seccion_area",err_list,"boton");
+            mensaje += '- \u00C1reas, '+err_list+'\n';
             error = 1;
         }else{
 
-            var cantd_selec = $('#seleccionados1').find('help-block').length;
+            /*var cantd_selec = $('#seleccionados1').find('help-block').length;
             if(cantd_selec != 0)
             {
                 colocaError("err_area", "seccion_area",err_list,"boton");
+                mensaje += '- Area, '+err_list+'\n';
                 error = 1;
-            }else{
+            }else{*/
                 quitarError("err_area", "seccion_area");
-            }
+            //}
         }
 
-        if(nivel_interes.value == null || nivel_interes.value == 0){
+        /*if(nivel_interes.value == null || nivel_interes.value == 0){
 
             colocaError("err_int", "seccion_int",err_list,"boton");
+            mensaje += '- Nivel de Interes, '+err_list+'\n';
             error = 1;
         }else{
             
@@ -850,16 +922,17 @@ function validarFormulario(){
             if(cantd_selec != 0)
             {
                 colocaError("err_int", "seccion_int",err_list,"boton");
+                mensaje += '- Nivel de Interes, '+err_list+'\n';
                 error = 1;
             }else{
                 quitarError("err_int", "seccion_int");
             }
-        }
-
+        }*/
 
         if((select_array_idioma.length) == 0 || (select_array_idioma.length) == -1){
 
             colocaError("listado_idiomas", "seccion_listado",err_list,"boton");
+            mensaje += '- Listado de idiomas, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("listado_idiomas", "seccion_listado");
@@ -871,9 +944,11 @@ function validarFormulario(){
 
             if(apellidos == null || apellidos.length == 0 || /^\s+$/.test(apellidos)){
                 colocaError("err_ape", "seccion_apellido",err_campo,"boton");
+                mensaje += '- Apellidos, '+err_campo+'\n';
                 error = 1; 
             }else if(!expreg.test(apellidos)){
                 colocaError("err_ape", "seccion_apellido",err_formato_letra,"boton");
+                mensaje += '- Apellidos, '+err_formato_letra+'\n';
                 error = 1;
             }else{
                 quitarError("err_ape","seccion_apellido");
@@ -881,6 +956,7 @@ function validarFormulario(){
           }
         }else{
           colocaError("err_ape","seccion_apellido","El apellido no debe exceder de 100 caracteres","boton");
+          mensaje += '- Apellidos, El apellido no debe exceder de 100 caracteres\n';
           error = 1; 
         }
 
@@ -894,11 +970,13 @@ function validarFormulario(){
             if(nombre_contact == null || nombre_contact.length == 0 || /^\s+$/.test(nombre_contact)){
 
                 colocaError("err_nomCon", "seccion_nombreContacto",err_campo,"boton");
+                mensaje += '- Nombre de contacto, '+err_campo+'\n';
                 error = 1; 
 
             }else if(!expreg.test(nombre_contact)){
 
-                colocaError("err_nomCon", "seccion_nombreContacto",err_formato_letra,"boton"); 
+                colocaError("err_nomCon", "seccion_nombreContacto",err_formato_letra,"boton");
+                mensaje += '- Nombre de contacto, '+err_formato_letra+'\n'; 
                 error = 1;  
             }else{
                 quitarError("err_nomCon","seccion_nombreContacto");
@@ -906,6 +984,7 @@ function validarFormulario(){
         }else{
 
             colocaError("err_nomCon", "seccion_nombreContacto","El nombre no debe exceder de 100 caracteres","boton");
+            mensaje += '- Nombre de contacto, no debe exceder de 100 caracteres\n'; 
             error = 1; 
         }
 
@@ -914,11 +993,13 @@ function validarFormulario(){
             if(apellido_contact == null || apellido_contact.length == 0 || /^\s+$/.test(apellido_contact)){
 
                 colocaError("err_apeCon", "seccion_apellidoContacto",err_campo,"boton");
+                mensaje += '- Apellido de contacto, '+err_campo+'\n';
                 error = 1; 
 
             }else if(!expreg.test(apellido_contact)){
 
                 colocaError("err_apeCon", "seccion_apellidoContacto",err_formato_letra,"boton");
+                mensaje += '- Apellido de contacto, '+err_formato_letra+'\n';
                 error = 1;  
 
             }else{
@@ -927,6 +1008,7 @@ function validarFormulario(){
         }else{
 
             colocaError("err_apeCon","seccion_apellidoContacto","El apellido no debe exceder de 100 caracteres","boton");
+            mensaje += '- Apellido de contacto, no debe exceder de 100 caracteres\n'; 
             error = 1; 
         }
 
@@ -935,11 +1017,13 @@ function validarFormulario(){
             if(tel_one_contact == null || tel_one_contact.length == 0 || /^\s+$/.test(tel_one_contact)){
 
                 colocaError("err_tlfCon", "seccion_tlfCon",err_campo,"boton");
+                mensaje += '- Teléfono, '+err_campo+'\n';
                 error = 1;
 
             }else if(!expreg_telf.test(tel_one_contact)){
 
                 colocaError("err_tlfCon", "seccion_tlfCon",err_formato_numeros,"boton");
+                mensaje += '- Teléfono de contacto, '+err_formato_numeros+'\n';
                 error = 1; 
 
             }else{
@@ -948,6 +1032,7 @@ function validarFormulario(){
         }else{
 
             colocaError("err_tlfCon","seccion_tlfCon","El telefono no debe exceder de 25 caracteres","boton");
+            mensaje += '- Teléfono de contacto, no debe exceder de 100 caracteres\n'; 
             error = 1; 
         }
     }
@@ -957,11 +1042,13 @@ function validarFormulario(){
         if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
 
             colocaError("err_nom", "seccion_nombre",err_campo,"boton");
+            mensaje += '- Nombres, '+err_campo+'\n';
             error = 1; 
 
         }else if(!expreg.test(nombres)){
      
             colocaError("err_nom", "seccion_nombre",err_formato_letra,"boton");
+            mensaje += '- Nombres, '+err_formato_letra+'\n';
             error = 1;
 
         }else{
@@ -971,6 +1058,7 @@ function validarFormulario(){
     }else{
 
         colocaError("err_nom","seccion_nombre","El nombre no debe exceder de 100 caracteres","boton");
+        mensaje += '- Nombres, no debe exceder de 100 caracteres\n';
         error = 1; 
     }
 
@@ -979,11 +1067,13 @@ function validarFormulario(){
         if(telefono == null || telefono.length == 0 || /^\s+$/.test(telefono)){
 
             colocaError("err_tlf", "seccion_tlf",err_campo,"boton");
+            mensaje += '- Teléfono, '+err_campo+'\n';
             error = 1;
 
         }else if(!expreg_telf.test(telefono)){
 
             colocaError("err_tlf", "seccion_tlf",err_formato_numeros,"boton");
+            mensaje += '- Teléfono, '+err_formato_numeros+'\n';
             error = 1; 
 
         }else{
@@ -992,21 +1082,25 @@ function validarFormulario(){
     }else{
 
         colocaError("err_tlf","seccion_tlf","El telefono no debe exceder de 25 caracteres","boton");
+        mensaje += '- Teléfono, no debe exceder de 25 caracteres\n';
         error = 1; 
     }
 
     if(!isNaN(fecha_nacimiento)){
 
         colocaError("error", "mayoria","Debe elegir una fecha válida","boton");
+        mensaje += '- Fecha de nacimiento, Debe elegir una fecha válida\n';
         error = 1;
     }else if(validarFormatoFecha(fecha_nacimiento)){
 
       colocaError("error", "mayoria","El formato de fecha es incorrecto","boton");
+      mensaje += '- Fecha de nacimiento, El formato de fecha es incorrecto\n';
       error = 1;
 
     }else if(calcularEdad() == 0 && tipo_usuario == 1){
 
         colocaError("error", "mayoria","Debe ser mayor de edad","boton");
+        mensaje += '- Fecha de nacimiento, Debe ser mayor de edad\n';
         error = 1;
 
     }else{
@@ -1016,6 +1110,7 @@ function validarFormulario(){
     if(provincia == null || provincia == 0){
 
         colocaError("err_prov", "seccion_provincia",err_list,"boton");
+        mensaje += '- Provincia, '+err_list+'\n';
         error = 1;
     }else{
         quitarError("err_prov","seccion_provincia");
@@ -1024,6 +1119,7 @@ function validarFormulario(){
     if(ciudad == null || ciudad == 0){
 
         colocaError("err_ciu", "seccion_ciudad",err_list,"boton");
+        mensaje += '- Ciudad, '+err_list+'\n';
         error = 1;
 
     }else{
@@ -1033,19 +1129,50 @@ function validarFormulario(){
     if(nacionalidad == null || nacionalidad == 0){
 
         colocaError("err_nac", "seccion_nac",err_list,"boton");
+        mensaje += '- Nacionalidad, '+err_list+'\n';
         error = 1;
     }else{
         quitarError("err_nac", "seccion_nac");
     }
     
+    //console.log(mensaje);
     if(error == 1){
-        return 0;
+        return mensaje;
     }else{
-        $("#boton").removeAttr('disabled');
-        $("#boton").removeClass('disabled');
-        return 1;
+        //$("#boton").removeAttr('disabled');
+        //$("#boton").removeClass('disabled');
+        return '';
     }
 }
+
+function searchAjax(obj,tipo_dni){
+
+  var val_retorno1 = "";  
+  var puerto_host = $('#puerto_host').val();
+  var contenido = $(obj).val();
+  var url;
+  if(contenido != "" && tipo_dni != ""){
+    $.ajax({
+      type: "GET",
+      url: url = puerto_host+"/index.php?mostrar=perfil&opcion=buscarDni&dni="+contenido,
+      dataType:'json',
+      async: false,
+      success:function(data){
+          if($.trim(data.resultado)){
+            val_retorno1 = false;
+          }
+          else{
+            val_retorno1 = true;
+          }
+      },
+      error: function (request, status, error) {
+          console.log(request.responseText);
+      }
+    });
+  }
+  return val_retorno1;
+}
+
  
 function enviarCambioClave(){
 

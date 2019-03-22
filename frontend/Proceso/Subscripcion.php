@@ -46,10 +46,57 @@ class Proceso_Subscripcion{
 	      }	
 	    }
 	    
-	    $GLOBALS['db']->commit();
-    	echo "PROCESADO REGISTRO ".$this->procesador->id."<br>";	
+      //facturacion electronica
+      $obj_facturacion = new Proceso_Facturacion();
+      $obj_facturacion->razonSocialComprador = $this->objUsuario->nombres;
+      $obj_facturacion->identificacionComprador = $this->objUsuario->dni;
+      $obj_facturacion->direccionComprador = $this->objUsuario->direccion;
+      $obj_facturacion->emailComprador = $this->objUsuario->correo;
+      $obj_facturacion->telefComprador = $this->objUsuario->telefono;            
+      $obj_facturacion->tipoIdentifComprador = TIPO_DOCUMENTO[$this->objUsuario->tipodoc];            
+      $obj_facturacion->importeTotal = $this->procesador->monto;
+      $obj_facturacion->codigoPrincipal = $this->idplan;
+      $obj_facturacion->descripdetalle = $infoplan["nombre"];
+      $rsfact = $obj_facturacion->generarFactura(); 
+      if (is_array($rsfact) && isset($rsfact["claveacceso"]) && isset($rsfact["xml"]) && !empty($rsfact["claveacceso"]) && !empty($rsfact["xml"])){
+        if (!Modelo_Factura::guardar($rsfact["claveacceso"],$rsfact["xml"],$this->objUsuario->id,$infousuario["tipo_usuario"],$infoplan["id_sucursal"],$id_comprobante)){
+          throw new Exception("Error al generar la factura");  
+        }
+        if (!Modelo_Parametro::actualizarNroFactura()){
+          throw new Exception("Error al generar el siguiente numero de factura");  
+        } 
+      }   
+      
+      $GLOBALS['db']->commit();
+
+      $attachments = array();
+      //envio a los WS al SRI
+      if ($obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
+        sleep(5);
+        $fecha_auto = $obj_facturacion->sendAutorizacion($rsfact["claveacceso"]);
+        if (!empty($fecha_auto)){
+          //adjuntar factura
+          $obj_facturacion->generarRIDE($rsfact["xml"],$fecha_auto);
+          $obj_facturacion->generarXML($rsfact["xml"],$rsfact["claveacceso"]);
+            
+          $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf",
+                                 "archivo"=>$rsfact["claveacceso"].".pdf");
+          $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml",
+                                 "archivo"=>$rsfact["claveacceso"].".xml");
+        }
+      }
+
       $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
-	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"]);
+
+	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
+                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments);
+      
+      if (!empty($attachments)){
+        //eliminar archivos temporales
+        unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
+        unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
+      }
+
   	}
   	catch(Exception $e){
   	  $GLOBALS['db']->rollback();
@@ -71,20 +118,24 @@ class Proceso_Subscripcion{
 	  return $GLOBALS['db']->insert_id();	  
   }
 
-  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio){  	
-  	$email_subject = "Activación de Subscripción";    
-  	$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
-    $email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
+  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$attachments){  
+  	$email_subject = "Activación de Subscripción"; 
+    $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_SUBSCRIPCION");
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
+    $email_body = str_replace("%PLAN%", $plan, $email_body);   
+  	//$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
+    //$email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
     $notif_body = $email_body;
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
-      $email_body .= "Por favor de click en este enlace para realizar el tercer formulario "; 
-      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollov2/cuestionario/'>click aqu&iacute;</a> <br>";      
+      $mensaje = "Por favor de click en este enlace para realizar el tercer formulario "; 
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/cuestionario/'>click aqu&iacute;</a><br>";      
     }else{
-      $email_body .= "Por favor de click en este enlace para publicar una oferta "; 
-      $email_body .= "<a href='".PUERTO."://".$dominio."/desarrollov2/publicar/'>click aqu&iacute;</a> <br>";      
-    }  
+      $mensaje = "Por favor de click en este enlace para publicar una oferta "; 
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/publicar/'>click aqu&iacute;</a><br>";  
+    } 
+    $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
     Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
-    Utils::envioCorreo($correo,$email_subject,$email_body);
+    Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
   }
 
 }

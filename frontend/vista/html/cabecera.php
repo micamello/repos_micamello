@@ -146,6 +146,19 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
 } ?>
 
 
+<?php 
+  $navegador = Utils::detectarNavegador();
+  $_SESSION['mfo_datos']['navegador'] = $navegador;
+  if($navegador == 'MSIE'){ ?>
+  <div align="center" id="mensaje" style="height: 150px;background: #c36262; color:black;"><br>
+    <h3>Usted esta usando internet explorer 8 o inferior</h3>
+    <p>Esta es una versi&oacute;n antigua del navegador, y puede afectar negativamente a su seguridad y su experiencia de navegaci&oacute;n.</p>
+    <p>Por favor, actualice a la version actual de IE o cambie de navegador ahora.</p>
+    <p><b><a href="https://www.microsoft.com/es-es/download/internet-explorer.aspx">Actualizar IE</a></b></p>
+  </div>
+<?php } ?>
+
+
   <nav class="navbar navbar-default navbar-fixed-top">
  <!--   <button id="buttonP">Dar Permisos</button>  
 <button id="buttonN">Lanzar notificación</button>-->
@@ -262,14 +275,24 @@ if(isset($show_banner)){ ?>
     <br><br><br>
   <?php } ?>
     <!--mensajes de error y exito-->
-    <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){?>
-      <div align="center" id="alerta" style="display:" class="alert alert-danger" role="alert">
-        <strong><?php echo $sess_err_msg;?></strong>
-      </div>  
-    <?php }?>
+    <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
+      /*<div align="center" id="alerta" style="display:" class="alert alert-danger" role="alert">
+        <strong><?php #echo $sess_err_msg;?></strong>
+      </div>  */
+      echo "<script type='text/javascript'>
+            $(document).ready(function(){
+              swal('Advertencia!', '".$sess_err_msg."', 'error');
+            });
+          </script>";
+    }?>
 
-    <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){?>
-      <div align="center" id="alerta" style="display:" class="alert alert-success" role="alert">
-        <strong><?php echo $sess_suc_msg;?></strong>
-      </div>  
-    <?php } ?>
+    <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
+      /*<div align="center" id="alerta" style="display:" class="alert alert-success" role="alert">
+        <strong><?php #echo $sess_suc_msg;?></strong>
+      </div>  */
+      echo "<script type='text/javascript'>
+            $(document).ready(function(){
+              swal('Exitoso!', '".$sess_suc_msg."', 'success');
+            });
+          </script>";
+    } ?>

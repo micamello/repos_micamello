@@ -109,7 +109,7 @@ abstract class FacturaeSignable extends FacturaeUtils {
                       '<ds:DigestValue>' . $tools->getCertDigest($this->publicKey) . '</ds:DigestValue>' .
                     '</etsi:CertDigest>' .
                     '<etsi:IssuerSerial>' .
-                      '<ds:X509IssuerName>'./*$certIssuer*/'CN=AC BANCO CENTRAL DEL ECUADOR,L=QUITO,OU=ENTIDAD DE CERTIFICACION DE INFORMACION-ECIBCE,O=BANCO CENTRAL DEL ECUADOR,C=EC'.'</ds:X509IssuerName>' .
+                      '<ds:X509IssuerName>'.$certIssuer.'</ds:X509IssuerName>' .
                       '<ds:X509SerialNumber>' . $certData['serialNumber'] . '</ds:X509SerialNumber>' .
                     '</etsi:IssuerSerial>' .
                   '</etsi:Cert>' .

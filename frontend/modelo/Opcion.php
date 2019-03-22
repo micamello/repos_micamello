@@ -54,6 +54,27 @@ class Modelo_Opcion{
 		return $datos;
 	}
 
+	public static function datosGraficos2($id_usuario,$estado){
+
+		if (empty($id_usuario)){ return false; }
+		$sql = 'SELECT id_faceta, valor as prom FROM mfo_porcentajexfaceta p WHERE id_usuario = '.$id_usuario.' AND estado = '.$estado;
+
+		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+
+		$datos = array();
+		if (!empty($arrdatos) && is_array($arrdatos)){
+
+			foreach ($arrdatos as $key => $value) {
+				$datos[$value['id_faceta']] = array();
+			}
+
+			foreach ($arrdatos as $key => $value) {
+				$datos[$value['id_faceta']] = $value['prom'];
+			}
+		}
+		return $datos;
+	}
+
 	public static function competenciasXfaceta(){
 
 		$sql = 'SELECT f.id_faceta, GROUP_CONCAT(m.descripcion SEPARATOR "-") AS competencias FROM mfo_facetam2 f

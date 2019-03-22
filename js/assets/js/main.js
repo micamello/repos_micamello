@@ -1,3 +1,13 @@
+function navegador(){
+  var agente = window.navigator.userAgent;
+  var navegadores = ["Chrome", "Firefox", "Safari", "Opera", "MSIE", "Trident", "Edge"];
+  for(var i in navegadores){
+      if(agente.indexOf( navegadores[i]) != -1 ){
+          return navegadores[i];
+      }
+  }
+}
+
 function colocaError(campo, id, mensaje,btn){
 
   nodo = document.getElementById(campo);
@@ -13,7 +23,7 @@ function colocaError(campo, id, mensaje,btn){
   nodo.appendChild(elem2); 
 
   $("#"+id).addClass('has-error');
-  $("#"+btn).addClass('disabled');
+  //$("#"+btn).addClass('disabled');
 
   if(document.getElementById('form_paypal')){
     document.getElementById('form_paypal').action = '#';
@@ -64,16 +74,25 @@ jQuery(document).ready(function ($) {
 
 });
 
-function abrirModal(mensaje,id,enlace,btn){
+function abrirModal(mensaje,id,enlace,btn,titulo){
 
     $('#mensaje').html(mensaje);
 
-    if(btn != 'Ok'){
+    if(btn != 'Ok' && btn != ''){
+
       $('#'+btn).html('Aceptar');
       document.getElementById('btn_cancelar').style.display = 'inline-block';
       document.getElementById(btn).setAttribute('href', enlace);
-    }else{
-      document.getElementById('btn_cancelar').style.display = 'none';
+    }else{ 
+
+      if(btn == ''){
+        document.getElementById('btn_cancelar').style.display = 'none';
+      }
+      $('#btn_modal').html('Aceptar');
+
+      if($('#titulo_noti')){
+        $('#titulo_noti').html('<b>'+titulo+'</b>');
+      }
       document.getElementById('btn_modal').setAttribute('href', enlace);
     }
 
