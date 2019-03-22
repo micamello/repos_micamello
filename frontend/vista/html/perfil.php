@@ -491,7 +491,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 											<div class="col-md-6">
 												<div class="form-group">
-													<label>Subareas <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<label>Sub-Áreas <span class="requerido" title="Este campo es obligatorio">*</span></label>
 													<div class="help-block with-errors"></div>
 													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple">
 													  <!-- <option value="">Seleccione una opción</option> -->
