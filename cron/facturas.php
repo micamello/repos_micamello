@@ -79,7 +79,7 @@ if (count($facturas) > 0){
       $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml",
                              "archivo"=>$rsfact["claveacceso"].".xml");          
 
-      $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
+      $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
       $email_subject = "Facturación"; 
       $email_body = Modelo_TemplateEmail::obtieneHTML("FACTURACION");
       $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   

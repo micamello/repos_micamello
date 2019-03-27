@@ -23,7 +23,7 @@ class Controlador_Contrasena extends Controlador_Base {
       $respuesta = Utils::getParam('token', '', false);
 
       if (empty($respuesta)){
-        throw new Exception("La recuperación del password es fallida, por favor intente denuevo");
+        throw new Exception("La recuperaci\u00F3n del password es fallida, por favor intente denuevo");
       }  
       $tags["token"] = $respuesta;              
       $respuesta = Utils::desencriptar($respuesta);      
@@ -34,24 +34,24 @@ class Controlador_Contrasena extends Controlador_Base {
       $token_valido = Utils::generarToken($id_usuario_login,"CONTRASENA");
       
       if($token_valido != $token){
-        throw new Exception("El enlace para recuperación es incorrecto, por favor ingrese denuevo su correo para el envio");      
+        throw new Exception("El enlace para recuperaci\u00F3n es incorrecto, por favor ingrese denuevo su correo para el env\u00EDo");      
       }
       if( strtotime($fecha." +".HORAS_VALIDO_PASSWORD." hours") < time() ){
-        throw new Exception("El enlace para recuperación de contraseña ya no es válida, por favor ingrese denuevo su correo para el envío");        
+        throw new Exception("El enlace para recuperaci\u00F3n de contrase\u00F1a ya no es v\u00E1lida, por favor ingrese denuevo su correo para el env\u00EDo");        
       }  
       if ( Utils::getParam('confirm_form') == 1 ){
         $campos = array('password1'=>1,'password2'=>1);
         $data = $this->camposRequeridos($campos);
         if ($data["password1"] != $data["password2"]){
-          throw new Exception("Contraseña y confirmación de contraseña no coinciden");
+          throw new Exception("Contrase\u00F1a y confirmaci\u00F3n de contrase\u00F1a no coinciden");
         }
         if (!Utils::valida_password($data["password1"])){
-          throw new Exception("Contraseña no válida, debe contener mínimo 8 caracteres, una letra mayúscula y un número");
+          throw new Exception("Contrase\u00F1a no v\u00E1lida, debe contener m\u00EDnimo 8 caracteres, una letra may\u00FAscula y un n\u00FAmero");
         }
         if (!Modelo_Usuario::modificarPassword($data["password1"],$id_usuario_login)){
-          throw new Exception("Error al modificar la contraseña, por favor intente denuevo"); 
+          throw new Exception("Error al modificar la contrase\u00F1a, por favor intente denuevo"); 
         }
-        $_SESSION['mostrar_exito'] = "Contraseña modificada exitosamente"; 
+        $_SESSION['mostrar_exito'] = "Contrase\u00F1a modificada exitosamente"; 
         $this->redirectToController('login');
       }      
     }
@@ -82,11 +82,11 @@ class Controlador_Contrasena extends Controlador_Base {
         $data = $this->camposRequeridos($campos);  
         
         if (!Utils::es_correo_valido($data["correo1"])){
-          throw new Exception("Dirección de correo electrónico no valido");
+          throw new Exception("Direcci\u00F3n de correo electr\u00F3nico no v\u00E1lido");
         }
         $datousuario = Modelo_Usuario::busquedaPorCorreo($data["correo1"]);
         if (empty($datousuario)){
-          throw new Exception("Dirección de correo electrónico no existe");
+          throw new Exception("Direcci\u00F3n de correo electr\u00F3nico no existe");
         }                           
         $token = Utils::generarToken($datousuario["id_usuario_login"],"CONTRASENA");
         if (empty($token)){
@@ -96,22 +96,22 @@ class Controlador_Contrasena extends Controlador_Base {
         $token = Utils::encriptar($token);
         $nombres = $datousuario['nombres'] . ((isset($datousuario['apellidos'])) ? "&nbsp;".$datousuario['apellidos'] : '');
         if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
-          throw new Exception("Error en el envio de correo, por favor intente denuevo");
+          throw new Exception("Error en el env\u00CDo de correo, por favor intente denuevo");
         }
-        $_SESSION['mostrar_exito'] = "Se envio a su direccion de correo ingresada el enlace para el cambio de correo, recuerde que tiene un máximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contraseña y en el caso de que no encuentre su correo revisar tambien su carpeta de spam";         
+        $_SESSION['mostrar_exito'] = "Se envi\u00F3 a su direcci\u00F3n de correo ingresada el enlace para el cambio de correo, recuerde que tiene un m\u00E1ximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contrase\u00F1a y en el caso de que no encuentre su correo revisar tambien su carpeta de spam";         
       }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     }
 
-    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
-    $arrinteres = Modelo_Interes::obtieneListado();
+    //$arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
+    //$arrinteres = Modelo_Interes::obtieneListado();
     
     $tags = array('social'=>$social_reg);
 
-    $tags["arrarea"] = $arrarea;
-    $tags["intereses"] = $arrinteres;
+    //$tags["arrarea"] = $arrarea;
+    //$tags["intereses"] = $arrinteres;
     //$tags["social"] = $social_reg;
     $tags["template_js"][] = "modal-register";
     $tags["template_js"][] = "validator";
@@ -124,11 +124,11 @@ class Controlador_Contrasena extends Controlador_Base {
   } 
 
   public function envioCorreo($correo,$nombres,$token){
-    $asunto = "Recuperación de Contraseña";
-    $body = "Estimado, ".utf8_encode($nombres)."<br>";
-    $body .= "Por favor de click en este enlace para cambiar su contrase&ntilde;a ";
-    $body .= "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a> <br>";    
-    if (Utils::envioCorreo($correo,$asunto,$body)){
+    $enlace = "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a>"; 
+    $email_body = Modelo_TemplateEmail::obtieneHTML("RECUPERACION_CONTRASENA");
+    $email_body = str_replace("%NOMBRES%", utf8_encode($nombres), $email_body);   
+    $email_body = str_replace("%ENLACE%", $enlace, $email_body);        
+    if (Utils::envioCorreo($correo,"Recuperación de Contraseña",$email_body)){
       return true;
     }
     else{
