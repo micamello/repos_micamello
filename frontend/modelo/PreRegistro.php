@@ -3,7 +3,7 @@ class Modelo_PreRegistro{
 
   public static function preregistrados(){
     $sql = "SELECT id,nombres,apellidos,correo,tipo_doc,dni,telefono,fecha,tipo_usuario 
-            FROM preregistro ORDER BY fecha";
+            FROM preregistro WHERE id=37 ORDER BY fecha";
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }
 

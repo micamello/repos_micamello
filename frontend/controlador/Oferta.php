@@ -489,8 +489,7 @@ class Controlador_Oferta extends Controlador_Base{
                 }else{
                   Modelo_EmpresaBloq::insertEmpresa($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa);
                   self::devolverPostulaciones(explode(",",$r['ids_usuariosplanes']));
-                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';  
-                  Utils::log('FERNANDA1'.PUERTO.'://'.HOST.'/'.$vista.'/');                
+                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';                    
                   //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
                 }
               }else{
@@ -501,8 +500,7 @@ class Controlador_Oferta extends Controlador_Base{
                   $resultado = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion,$tipo_post);
                   if(empty($resultado)){
                       $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo';
-                  }else{
-                    Utils::log('FERNANDA2'.PUERTO.'://'.HOST.'/'.$vista.'/');                
+                  }else{                    
                     $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
                     //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
                   }

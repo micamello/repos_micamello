@@ -32,18 +32,16 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   }
   
   //consulta las areas niveles del candidato
-  $arr_areas = Modelo_UsuarioxArea::obtieneListado($rows["id_usuario"]);
+  $arr_areas = Modelo_UsuarioxArea::consultarSubareas($rows["id_usuario"]);
   $str_areas = implode($arr_areas,',');
-  $arr_niveles = Modelo_UsuarioxNivel::obtieneListado($rows["id_usuario"]);
-  $str_niveles = implode($arr_niveles,',');
 
-  if (empty($arr_areas) || empty($arr_niveles)){
+  if (empty($arr_areas)){
     continue;
   }
   
   echo "<br>usuario: ".$rows["id_usuario"]." / ".$rows["nombres"]." / ".$rows["viajar"]." / ".$rows["id_provincia"]." / ".$rows["id_ciudad"]."<br>";
-  echo "areas: ".$str_areas."<br>";
-  echo "interes: ".$str_niveles."<br>";
+  echo "subareas: ".$str_areas."<br>";
+  //echo "interes: ".$str_niveles."<br>";
 
   foreach($arr_planes as $plan){
     echo "plan: ".$plan["id_usuario_plan"]." / ".$plan["fecha_compra"]." / ".$plan["num_post_rest"]."<br>";
@@ -65,9 +63,8 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
       }
     }    
 
-    $arr_ofertas = Modelo_Oferta::obtieneAutopostulaciones($rows["id_pais"],$fechacalculada,$str_areas,$str_niveles,
-                                                           $rows["id_usuario"],$flag_provincia,$flag_ciudad);
-    
+    $arr_ofertas = Modelo_Oferta::obtieneAutopostulaciones($rows["id_pais"],$fechacalculada,$str_areas,
+                                                           $rows["id_usuario"],$flag_provincia,$flag_ciudad);    
     if (empty($arr_ofertas)){
     	echo "No hay ofertas para este plan<br>";
     	continue;
@@ -77,6 +74,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
 
     //4.-guardar la postulacion a esa oferta
     foreach($arr_ofertas as $oferta){
+      
 	    try{	
 	  	  $GLOBALS['db']->beginTrans();
 
@@ -109,23 +107,19 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
 	  	}
 	    catch(Exception $e){
 	  	  $GLOBALS['db']->rollback();
-	  	  echo "NO PROCESADO REGISTRO ".$oferta['id_ofertas']."<br>";
-        $datos_correo_error = array('tipo'=>6, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage());
-        Utils::enviarEmail($datos_correo_error);
-	      // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron autopostulaciones',$e->getMessage());      
+	  	  echo "NO PROCESADO REGISTRO ".$oferta['id_ofertas']."<br>";        
+	      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron autopostulaciones',$e->getMessage());      
 	    }
     }        
   }  
   
   //5.-envio de correo al candidato
   if (!empty($mail_ofertas)){
-    $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);
-  	// $email_body = "Estimado, ".utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]).", le confirmamos su autopostulaci&oacute;n a las siguientes ofertas:<br><br>";
-   //  $email_body .= $mail_ofertas;
-
-    $datos_correo = array("plantilla"=>9, "correo"=>$rows["correo"], "mensaje"=>$mail_ofertas, "nombre"=>$nombre_mostrar, 'type'=>TIPO['autopostulacion']);
-    Utils::enviarEmail($datos_correo);
-  	// Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);
+    $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);    
+    $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");
+    $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
+    $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);   
+    Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);    
     Modelo_Notificacion::insertarNotificacion($rows["id_usuario"],$email_body,Modelo_Usuario::CANDIDATO);
   }
 
