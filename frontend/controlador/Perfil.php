@@ -136,8 +136,8 @@ class Controlador_Perfil extends Controlador_Base
                 );
 
                 //Pasar a la vista los js y css que se van a necesitar
-                $tags["template_css"][] = "bootstrap-multiselect";
-                $tags["template_js"][] = "bootstrap-multiselect";
+                //$tags["template_css"][] = "bootstrap-multiselect";
+                //$tags["template_js"][] = "bootstrap-multiselect";
                 $tags["template_css"][] = "DateTimePicker";
                 $tags["template_css"][] = "multiple_select";
                 $tags["template_js"][] = "multiple_select";

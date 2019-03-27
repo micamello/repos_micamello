@@ -148,7 +148,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														{ 
 															$option .= " selected='selected'";
 														}
-														$option .= ">".utf8_encode($doc)."</option>";
+														$option .= ">".$doc."</option>";
 													  }
 													  echo $option;
 									                 ?>

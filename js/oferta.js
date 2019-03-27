@@ -69,7 +69,7 @@ function abrirModalEditar(id,idOferta){
 
     $.ajax({
         type: "GET",
-        url: puerto_host+"?mostrar=subempresa&opcion=buscaDescripcion&idOferta="+idOferta,
+        url: puerto_host+"?mostrar=oferta&opcion=buscaDescripcion&idOferta="+idOferta,
         dataType:'json',
         async: false,
 
@@ -151,7 +151,7 @@ function check(e) {
     }
 
     // Patron de entrada, en este caso solo acepta numeros y letras
-    patron = /[a-zA-ZÁÉÍÓÚñáéíóúÑ0-9&.,' ]/;
+    patron = /[a-zA-ZÁÉÍÓÚñáéíóúÑ0-9]/;
     tecla_final = String.fromCharCode(tecla);
     return patron.test(tecla_final);
 }
@@ -161,16 +161,14 @@ function enviarPclave(ruta,tipo,page){
 	var pclave = $('#inputGroup').val();
     
 	if(pclave != '' && pclave.length >= 3){
-		var nueva_ruta = ruta+tipo+'/'+"Q"+pclave.toLowerCase()+"/"+page+"/";
-        console.log(nueva_ruta);
+		var nueva_ruta = ruta/*+tipo+'/'*/+"Q"+pclave.toLowerCase()+"/"+page+"/";
         window.location = nueva_ruta;
 	}else{
 		
         if(tipo == 1){
             swal('Notificación!', 'La longitud mínima de la palabra clave es de 3 caracteres', 'error');
         }else{
-            var nueva_ruta = ruta+tipo+'/'+page+"/";
-            console.log(nueva_ruta);
+            var nueva_ruta = ruta/*+tipo+'/'*/+page+"/";
             window.location = nueva_ruta;
         }
 	}

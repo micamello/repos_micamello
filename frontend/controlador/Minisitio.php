@@ -18,19 +18,27 @@ class Controlador_Minisitio extends Controlador_Base
         $opcion = Utils::getParam('opcion', '', $this->data);
         $type = Utils::getParam('type', '', $this->data);
         $param1 = Utils::getParam('param1', '', $this->data);
+        $metodo = Utils::getParam('metodo', '', $this->data);
+
         switch ($opcion) {
           case 'filtrar':
               $letra = substr($param1,0,1);
               $id = substr($param1,1);
               $array_datos = $_SESSION['array_datos'];
+
+              if(isset(METODO_CUESTIONARIO[$metodo])){
+                $_SESSION['filtrar_consultados']['M'] = $metodo;
+                $_SESSION['array_datos']['M'] = array('id'=>$metodo,'nombre'=>METODO_CUESTIONARIO[$metodo]);
+              } 
+
               if(isset($_SESSION['filtrar_consultados'][$letra])){
-                  if($letra == 'M' && $type == 1){
+                  /*if($letra == 'M' && $type == 1){
                       if(isset(METODO_CUESTIONARIO[$id])){
                         $_SESSION['filtrar_consultados']['M'] = $id;
                         $_SESSION['array_datos']['M'] = array('id'=>$id,'nombre'=>METODO_CUESTIONARIO[$id]);
                       }
                   }
-                  else if($letra == 'P' && $type == 1){
+                  else */if($letra == 'P' && $type == 1){
                       if(isset($profesion[$id])){
                         $_SESSION['filtrar_consultados']['P'] = $id;
                         $_SESSION['array_datos']['P'] = array('id'=>$id,'nombre'=>$profesion[$id]);
@@ -114,13 +122,13 @@ class Controlador_Minisitio extends Controlador_Base
                   }
                   else if($type == 2){
                     
-                      if($letra == 'M'){
+                      /*if($letra == 'M'){
                         if(isset(METODO_CUESTIONARIO[$id])){
                           $_SESSION['filtrar_consultados']['M'] = $id;
                           $_SESSION['array_datos']['M'] = array('id'=>$id,'nombre'=>METODO_CUESTIONARIO[$id]);
                         }
                       }
-                      else if($letra == 'H'){
+                      else */if($letra == 'H'){
                           if(in_array($id, $_SESSION['filtrar_consultados']['H'])){
                               foreach ($_SESSION['filtrar_consultados']['H'] as $key => $value) {
                                   if($value == $id){
@@ -139,7 +147,7 @@ class Controlador_Minisitio extends Controlador_Base
                       }
                   }
               }              
-              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],1);
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],1,$metodo);
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);
               $link = Vista::display('filtrarEntrevistados',array('data'=>$_SESSION['array_datos'],'tablaNueva'=>0));
               $tags = array(
@@ -278,7 +286,7 @@ class Controlador_Minisitio extends Controlador_Base
                       }
                   }
               }              
-              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],0);
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],0,$metodo);
               $table = $this->generarTabla2($registros,$facetas,$colores_facetas,1,1);
               $link = Vista::display('filtrarEntrevistados',array('data'=>$_SESSION['array_datos'],'tablaNueva'=>1));
               $tags = array(
@@ -299,7 +307,7 @@ class Controlador_Minisitio extends Controlador_Base
           break;
           case 'generarExcel':
 
-              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],1);              
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],1,$metodo);              
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,2);
               $this->generarExcel($table);
           break;
@@ -334,7 +342,7 @@ class Controlador_Minisitio extends Controlador_Base
           case 'admin2':
               $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>-1,'M'=>0);
               $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>-1,'M'=>0);
-              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],0);
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],0,$metodo);
               $table = $this->generarTabla2($registros,$facetas,$colores_facetas,1,1);  
               $id = 0;
               if(isset(METODO_CUESTIONARIO[$id])){
@@ -365,7 +373,7 @@ class Controlador_Minisitio extends Controlador_Base
           default:
               $_SESSION['filtrar_consultados'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>-1,'M'=>0);
               $_SESSION['array_datos'] = array('F'=>0,'E'=>0,'G'=>0,'P'=>0,'H'=>array(),'R'=>0,'O'=>0,'N'=>0,'C'=>0,'A'=>0,'I'=>-1,'M'=>0);
-              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],1);
+              $registros = $this->preparaConsulta($_SESSION['filtrar_consultados'],1,$metodo);
               $table = $this->generarTabla($registros,$facetas,$colores_facetas,1);  
               $id = 0;
               if(isset(METODO_CUESTIONARIO[$id])){
@@ -395,7 +403,7 @@ class Controlador_Minisitio extends Controlador_Base
           break;
         }
     }
-    public static function preparaConsulta($filtros,$visibilidad){
+    public static function preparaConsulta($filtros,$visibilidad,$metodo){
       $edad = (empty($filtros['F']) || $filtros['F'] > 5) ? '' : $filtros['F']; 
       $genero = (empty($filtros['G'])) ? '' : array_search($filtros['G'],VALOR_GENERO);      
       $estadocivil = (empty($filtros['C'])) ? '' : $filtros['C'];
@@ -404,7 +412,7 @@ class Controlador_Minisitio extends Controlador_Base
       $escolaridad = (empty($filtros['E'])) ? '' : $filtros['E'];
       $provinciares = (empty($filtros['R'])) ? '' : $filtros['R'];
       $empresa = (empty($filtros['I'])) ? '' : $filtros['I'];
-      $metodo_preg = $filtros['M'];
+      $metodo_preg = $metodo;
       //$visibilidad = 1;
       
       $nacionalidad = '';

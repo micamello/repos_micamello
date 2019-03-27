@@ -1,33 +1,26 @@
 <div class="container"> 
-	<?php if(isset($filtro) && $vista == 'oferta'){ ?>
+	<?php  
+	if(isset($filtro) && $vista == 'oferta'){ ?>
 		<div class="alert alert-warning col-md-12"> 
 			<form role="form" name="filtro" id="filtro" method="post" action="<?php echo PUERTO.'://'.HOST.'/'.$vista.'/'; ?>">
 			<?php if($filtro == 0){ ?>
 				<h6><b>Las ofertas aqu&iacute; presentadas estan filtradas por las siguientes caracteristicas:</b></h6>
 
-				<?php if(isset($_SESSION['mfo_datos']['usuarioxarea'])){
-					echo '<br><b>&Aacute;reas de inter&eacute;s: </b>';
+				<?php if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
+					echo '<br><b>&Aacute;reas y sub&aacute;reas de inter&eacute;s: </b>';
 					$areas = '';
-					foreach ($_SESSION['mfo_datos']['usuarioxarea'] as $key => $value) {
-						$areas.=utf8_encode($arrarea[$value]).',';
-					}
-					echo $areas = substr($areas,0,strlen($areas)-1);
-				} ?>
+					foreach ($areas_subareas as $key => $value) {
 
-				<?php if(isset($_SESSION['mfo_datos']['usuarioxnivel'])){
-					echo '<br><b>Nivel de inter&eacute;s: </b>';
-					$niveles = '';
-					foreach ($_SESSION['mfo_datos']['usuarioxnivel'] as $key => $value) {
-						$niveles.=utf8_encode($arrnivel[$value]).',';
+						$areas.='<br>- <b>'.utf8_encode($value['area']).'</b> -->'.utf8_encode($value['subareas']);
 					}
-					echo $niveles = substr($niveles,0,strlen($niveles)-1);
+					echo $areas.'<br>';
 				} ?>
 
 				<?php if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 1){
 					echo '<br><b>Cambio de Residencia:</b> SI';
 		         
 		        }else{ 
-		        	echo '<br>Cambio de Residencia: NO';
+		        	echo '<br><b>Cambio de Residencia:</b> NO';
 		         } ?>
 
 		         
@@ -72,8 +65,7 @@
 						    <div class="input-group">
 							    <input type="text" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" onkeypress="return check(event)" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx"> 
 							    <?php 
-								    $ruta = PUERTO.'://'.HOST.'/'.$vista.'/';
-								    $ruta = Controlador_Oferta::calcularRuta($ruta,''); 
+								    $ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/';
 								?>
 							    <span class="input-group-addon">
 							    	<a href="#" onclick="enviarPclave('<?php echo $ruta; ?>','1','1')"><i class="fa fa-search"></i>
@@ -95,7 +87,6 @@
 				if (!empty($array_empresas_hijas)) { 
 				    foreach ($array_empresas_hijas as $key => $v) {
 				    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/S'.$key.'/';
-						$ruta = Controlador_Oferta::calcularRuta($ruta,'S');
 						echo '<li class="lista"><a href="'.$ruta.'1/" class="cuentas" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 					}
 				}
@@ -113,7 +104,6 @@
 				if (!empty($arrarea)) { 
 				    foreach ($arrarea as $key => $v) {
 				    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/A'.$key.'/';
-						$ruta = Controlador_Oferta::calcularRuta($ruta,'A');
 						echo '<li class="lista"><a href="'.$ruta.'1/" class="area" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 					}
 				}
@@ -130,7 +120,6 @@
 					if (!empty($arrprovincia)) {
 					    foreach ($arrprovincia as $key => $v) {
 					    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/P'.$key.'/';
-							$ruta = Controlador_Oferta::calcularRuta($ruta,'P');
 							echo '<li class="lista"><a href="'.$ruta.'1/" class="provincia" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 						}
 					}
@@ -148,7 +137,6 @@
 						if (!empty($jornadas)) {
 						    foreach ($jornadas as $key => $v) {
 						    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/J'.$key.'/';
-								$ruta = Controlador_Oferta::calcularRuta($ruta,'J');
 								echo '<li class="lista"><a href="'.$ruta.'1/" class="jornada" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 							}
 						}
@@ -166,7 +154,6 @@
 						if (!empty(SALARIO)) {
 						    foreach (SALARIO as $key => $v) {
 						    	$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/K'.$key.'/';
-								$ruta = Controlador_Oferta::calcularRuta($ruta,'K');
 								echo '<li class="lista"><a href="'.$ruta.'1/" class="salario" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 							}
 						}
@@ -187,7 +174,6 @@
 	                	<div class="form-group">
 	                		<?php 
 	                			$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/'; 
-	                			$ruta = Controlador_Oferta::calcularRuta($ruta,'');
 	                		?>
 				            <select id="categoria" class="form-control">
 				                <option value="0">Seleccione una categor&iacute;a</option>
@@ -249,14 +235,12 @@
 				        <th class="text-center">
 							<?php 
 								$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/O1'.$_SESSION['mfo_datos']['Filtrar_ofertas']['O'].'/';
-								$ruta = Controlador_Oferta::calcularRuta($ruta,'O');
 							?>
 				           <a href="<?php echo $ruta.'1/'; ?>">Salario <i class="fa fa-sort"></i></a>
 				        </th>
 				        <th class="text-center">
 							<?php 
 								$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/O2'.$_SESSION['mfo_datos']['Filtrar_ofertas']['O'].'/';
-								$ruta = Controlador_Oferta::calcularRuta($ruta,'O');
 							?>
 				           <a href="<?php echo $ruta.'1/'; ?>">Fecha <i class="fa fa-sort"></i></a>
 				        </th>
@@ -266,7 +250,10 @@
 				</table>
 			</div>
 	        <div id="result">
-	        	<?php if(!empty($ofertas) && $ofertas[0]['id_ofertas'] != ''){
+	        	<?php 
+
+
+	        	if(!empty($ofertas) && $ofertas[0]['id_ofertas'] != ''){
 		            foreach($ofertas as $key => $o){ ?>
 			            <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 							echo "<a href='".PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/'>";
@@ -286,13 +273,13 @@
 											<span>
 										    	<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) { ?>
 											   		
-														<?php if (REQUISITO[$o['confidencial']] == 'No') {
-															echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
-														}
-														else
-														{
-															echo '<h5 class="empresa"><i>Nombre de la empresa - confidencial</i></h5>';
-														} 
+													<?php if (REQUISITO[$o['confidencial']] == 'No') {
+														echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
+													}
+													else
+													{
+														echo '<h5 class="empresa"><i>Nombre de la empresa - confidencial</i></h5>';
+													} 
 												}
 
 												if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $vista == 'cuentas'){
@@ -304,11 +291,11 @@
 												<b style='color: black;'><?php echo $o['titulo']; ?></b>  
 												<?php 
 												if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
-														if($vista == 'postulacion'){
-													    	if(isset($o['tipo'])){ 						
-													    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
-													    	}													    	
-														}													
+													if($vista == 'postulacion'){
+												    	if(isset($o['tipo'])){ 						
+												    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
+												    	}													    	
+													}													
 												}else{
 
 													if(isset($aspirantesXoferta[$o['id_ofertas']])){
@@ -317,7 +304,7 @@
 														$cantd = 0;
 													}
 
-													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
+													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
 														echo ' <br> <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.$o['id_ofertas'].'/1/">Ver Aspirantes ( '.$cantd.' )</a>';
 
 													}elseif($cantd == 0){
@@ -354,7 +341,7 @@
 											<?php } ?>
 											<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>
 							  					<div class="col-sm-1 col-md-1 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%;">
-													<a href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".$o["id_ofertas"]."/"; ?>">
+													<a href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/"; ?>">
 														<i class="fa fa-eye" title="Ver detalle de la oferta"></i>
 													</a>
 												</div>
@@ -366,7 +353,7 @@
 														$puedeEditar = Modelo_Oferta::puedeEditar($o["id_ofertas"],$tiempo);
 														if($puedeEditar["editar"] == 1){
 													?>
-													<a onclick="abrirModalEditar('editar_Of','<?php echo $o["id_ofertas"]; ?>');">
+													<a onclick="abrirModalEditar('editar_Of','<?php echo Utils::encriptar($o["id_ofertas"]); ?>');">
 														<i class="fa fa-edit" title="Editar la oferta"></i>
 													</a>
 												<?php } ?>
@@ -434,7 +421,7 @@
 							</div>
 						<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 							echo "</a>";
-					     } 
+					    } 
 					}
 				} ?>
 	        </div>
@@ -444,7 +431,6 @@
 		<?php echo $paginas; ?>
 	</div>
 </div>
-
 
 <div class="modal fade" id="editar_Of" tabindex="-1" role="dialog" aria-labelledby="editar_Of" aria-hidden="true">
   <div class="modal-dialog" role="document">    

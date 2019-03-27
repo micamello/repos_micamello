@@ -5,5 +5,24 @@ class Modelo_AreaSubarea{
 		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 		return $arrdatos;
 	}
+
+	public static function obtieneAreasSubareas($ids_areas_subareas){
+		$sql = "SELECT t_area.nombre as nombre_area, GROUP_CONCAT(t_sub.nombre) as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area AND t_a_sub.id_areas_subareas IN(".$ids_areas_subareas.") GROUP BY t_a_sub.id_area ORDER BY t_a_sub.id_areas_subareas";
+		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+		return $arrdatos;
+	}
+
+	public static function obtieneAreas_subareas_usuario($id_usuario){
+
+		$sql = 'SELECT a.nombre as area,GROUP_CONCAT(s.nombre) as subareas FROM mfo_usuarioxarea ua
+				INNER JOIN mfo_area_subareas aa ON aa.id_areas_subareas = ua.id_areas_subareas
+				INNER JOIN mfo_area a ON a.id_area = aa.id_area 
+				INNER JOIN mfo_subareas s ON s.id_subareas = aa.id_subareas
+				WHERE ua.id_usuario = ?
+				GROUP BY aa.id_area
+				ORDER BY aa.id_area';
+		$arrdatos = $GLOBALS['db']->auto_array($sql,array($id_usuario),true);
+		return $arrdatos;
+	}
 }
 ?>

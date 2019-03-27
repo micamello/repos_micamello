@@ -2,7 +2,9 @@
   <div class="main_business">
     <div class="container">
       <div class="row" align="justify">
-        <?php foreach ($oferta as $key => $o) { ?>
+        <?php 
+#print_r($GLOBALS['areas']); 
+        foreach ($oferta as $key => $o) { ?>
           <div class="col-md-8">
               <div class="panel panel-primary shadow-panel1">
                 <div class="panel-heading">
@@ -67,11 +69,17 @@
                     </div>
                    <div> 
                     <h5> 
-                      <span class="titulos">&Aacute;rea</span><br> <?php echo utf8_encode($o['area']); ?> </h5> 
+                      <span class="titulos">&Aacute;rea (sub&aacute;reas)</span><br> <?php echo utf8_encode($o['area']); ?>  
+                      <?php 
+                        $areas_subareas = Modelo_AreaSubarea::obtieneAreasSubareas($o['subareas']);
+                        $areas = '';
+                        foreach ($areas_subareas as $key => $datos) {
+                          $areas .= utf8_encode($datos['nombre_area'].' ('.$datos['nombre_subarea']).')<br>';
+                        } 
+                        echo $areas;
+                      ?>
+                      </h5>
                    </div> 
-                   <div> 
-                    <h5> <span class="titulos">Nivel</span><br> <?php echo utf8_encode($o['nivel']); ?> </h5> 
-                   </div>
                     
                     <div>
                         <h5>
@@ -149,7 +157,7 @@
                     <?php if(!empty($postulado)){ ?>
                       <div align="center">
                         <h5>
-                         <span class="btn btn-danger">Ya aplico para la oferta</span>
+                         <span class="btn btn-danger">Ya aplic&oacute; para la oferta</span>
                         </h5>
                       </div>
                     <?php }else{ ?>

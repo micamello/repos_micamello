@@ -14,7 +14,7 @@ class Controlador_Aspirante extends Controlador_Base
         }
 
         //Valida los permisos 
-        if(isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'verCandidatos')){
+        if(isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos')){
            $this->redirectToController('vacantes');
         }
 

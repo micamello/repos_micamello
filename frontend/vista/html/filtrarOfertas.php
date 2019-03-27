@@ -1,5 +1,5 @@
 <?php 
-
+//print_r($data);
 foreach ($data as $letra => $value) { 
 
     if($letra != 'O' /*&& $letra != 'F'*/){

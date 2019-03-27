@@ -88,7 +88,7 @@ class Modelo_Respuesta{
     $sql .= "     ('".$provinciares."' = '' OR u.id_provincia_res = '".$provinciares."') ";
     $sql .= " AND visibilidad = $visibilidad"; 
     $sql .= " AND metodo_ordenamiento = $metodo ";      
-    $sql .= "ORDER BY u.id_usuario, m.id_faceta, p.orden";
+    echo $sql .= "ORDER BY u.id_usuario, m.id_faceta, p.orden";
     return $GLOBALS['db']->auto_array($sql,array(),true);        
   }
   public static function resultadoxUsuario($idusuario){
