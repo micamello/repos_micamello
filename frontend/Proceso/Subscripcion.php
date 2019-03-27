@@ -86,7 +86,7 @@ class Proceso_Subscripcion{
         }
       }
 
-      $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
+      $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
 
 	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
                                  $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments);

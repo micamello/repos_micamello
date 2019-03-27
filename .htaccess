@@ -190,7 +190,7 @@ RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ 
 RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2&vista=$3 [L]
 
 #Minisitio
-RewriteRule ^filtrarEntrevistados/([A-Z]{1}[0-9_]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar&param1=$1&type=$2 [L]
+RewriteRule ^filtrarEntrevistados/([A-Z]{1}[0-9_]{1,})/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar&param1=$1&type=$2&metodo=$3 [L]
 
 RewriteRule ^filtrarEntrevistados2/([A-Z]{1}[0-9_]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar2&param1=$1&type=$2 [L]
 

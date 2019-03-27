@@ -274,7 +274,7 @@ class Modelo_Oferta{
             FROM mfo_oferta o
             LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
             WHERE (o.estado = 1 OR o.estado = 3)
-            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajextest pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
+            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajexfaceta pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
             GROUP BY o.id_ofertas;";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
     $datos = array();
