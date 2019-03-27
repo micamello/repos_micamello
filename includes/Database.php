@@ -56,7 +56,7 @@ class Database{
 
   function execute( $query ){
     $this->query = $query;        
-    //Utils::log("SQL execute: $query");
+    Utils::log("SQL execute: $query");
 	  $resultSet = mysqli_query( $this->connection,$query );
 	  $this->resultSet = $resultSet;
 	  return $resultSet;
@@ -228,17 +228,17 @@ class Database{
   }
   
   function beginTrans() {
-    //Utils::log("SQL Trans: START TRANSACTION");
+    Utils::log("SQL Trans: START TRANSACTION");
     return mysqli_begin_transaction($this->connection);
   }
   
   function commit(){    
-    //Utils::log("SQL Trans: COMMIT");   
+    Utils::log("SQL Trans: COMMIT");   
     return mysqli_commit($this->connection);   
   }
   
   function rollback(){
-    //Utils::log("SQL Trans: ROLLBACK");     
+    Utils::log("SQL Trans: ROLLBACK");     
     return mysqli_rollback($this->connection);;     
   }
   

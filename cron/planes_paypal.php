@@ -22,24 +22,18 @@ $registros = Modelo_Paypal::obtieneNoProcesados();
 
 if (!empty($registros) && is_array($registros)){
   foreach($registros as $registro){  
-    if (empty($registro)){
-      $datos_correo = array('tipo'=>11, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>'Registro no tiene valores '.print_r($registro,true), 'type'=>TIPO['cron_paypal_planes']);
-      Utils::enviarEmail($datos_correo);
-      // Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Registro no tiene valores '.print_r($registro,true));
+    if (empty($registro)){      
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Registro no tiene valores '.print_r($registro,true));
       continue;
     }
 
     $cliente = obtenerDatosCliente($registro["custom"]); 
-    if (empty($cliente)){ 
-      $datos_correo = array('tipo'=>11, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>'Campo custom no tiene valores '.print_r($registro,true), 'type'=>TIPO['cron_paypal_planes']);
-      Utils::enviarEmail($datos_correo);
-    	// Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Campo custom no tiene valores '.print_r($registro,true));
+    if (empty($cliente)){       
+    	Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Campo custom no tiene valores '.print_r($registro,true));
       continue;
     }    
-    if (empty($registro["txn_id"]) || empty($registro["payment_gross"]) || empty($registro["id_paypal"])){
-      $datos_correo = array('tipo'=>11, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>'Valores nulos '.print_r($registro,true), 'type'=>TIPO['cron_paypal_planes']);
-      Utils::enviarEmail($datos_correo);
-      // Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Valores nulos '.print_r($registro,true));
+    if (empty($registro["txn_id"]) || empty($registro["payment_gross"]) || empty($registro["id_paypal"])){      
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Valores nulos '.print_r($registro,true));
       continue;
     }
      

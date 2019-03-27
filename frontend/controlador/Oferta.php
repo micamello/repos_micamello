@@ -481,23 +481,22 @@ class Controlador_Oferta extends Controlador_Base{
                 $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo1';
               }else{
                 Modelo_EmpresaBloq::insertEmpresa($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa);
-                self::devolverPostulaciones(explode(",",$r['ids_usuariosplanes']));
-                $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';  
-                //Utils::log('FERNANDA1'.PUERTO.'://'.HOST.'/'.$vista.'/');                
-                //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
-              }
-            }else{
-
-              if($tipo_post == 1){
-                 $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, Ya pasaron las '.$tiempo.' horas de postulado.';
-              }else{
-                $resultado = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion,$tipo_post);
-                if(empty($resultado)){
-                    $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo';
-                }else{
-                  //Utils::log('FERNANDA2'.PUERTO.'://'.HOST.'/'.$vista.'/');                
-                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
+                  self::devolverPostulaciones(explode(",",$r['ids_usuariosplanes']));
+                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';                    
                   //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
+                }
+              }else{
+
+                if($tipo_post == 1){
+                   $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, Ya pasaron las '.$tiempo.' horas de postulado.';
+                }else{
+                  $resultado = Modelo_Postulacion::eliminarPostulacion($eliminarPostulacion,$tipo_post);
+                  if(empty($resultado)){
+                      $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo';
+                  }else{                    
+                    $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
+                    //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
+                  }
                 }
               }
             }

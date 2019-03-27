@@ -27,7 +27,11 @@ if (count($facturas) > 0){
       $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
       if (empty($datos_comprobante)){
         throw new Exception("Error no se encontro datos en el comprobante");  
-      }      
+      }  
+      $infousuario = Modelo_Usuario::busquedaPorId($datos_comprobante["id_user_emp"],$datos_comprobante["tipo_usuario"]);
+      if (empty($infousuario)){
+        throw new Exception("Error no se encontro datos del usuario");  
+      }    
       $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);      
       if (empty($infoplan)){
         throw new Exception("Error no se encontro datos en el plan");  
@@ -50,6 +54,7 @@ if (count($facturas) > 0){
       
       $datosact = array("clave_acceso" => $rsfact["claveacceso"], "xml" => $rsfact["xml"], "estado" => Modelo_Factura::NOENVIADO, 
                         "msg_error" => "", "fecha_estado" => "");
+      
       if (!Modelo_Factura::actualizar($factura["clave_acceso"],$datosact)){
         throw new Exception("Error al actualizar la factura");  
       }       
@@ -64,6 +69,7 @@ if (count($facturas) > 0){
       if (empty($fecha_auto)){
         throw new Exception("Error en segundo WS del SRI");  
       }
+
       //adjuntar factura
       $obj_facturacion->generarRIDE($rsfact["xml"],$fecha_auto);
       $obj_facturacion->generarXML($rsfact["xml"],$rsfact["claveacceso"]);
@@ -74,29 +80,16 @@ if (count($facturas) > 0){
                              "archivo"=>$rsfact["claveacceso"].".xml");          
 
       $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
-
-      /*$email_subject = "Activación de Subscripción"; 
-    $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_SUBSCRIPCION");
-    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
-    $email_body = str_replace("%PLAN%", $plan, $email_body);   
-    //$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
-    //$email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
-    $notif_body = $email_body;
-    if ($tipousuario == Modelo_Usuario::CANDIDATO){
-      $mensaje = "Por favor de click en este enlace para realizar el tercer formulario "; 
-      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/cuestionario/'>click aqu&iacute;</a><br>";      
-    }else{
-      $mensaje = "Por favor de click en este enlace para publicar una oferta "; 
-      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/publicar/'>click aqu&iacute;</a><br>";  
-    } 
-    $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
-    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
-    Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);*/
+      $email_subject = "Facturación"; 
+      $email_body = Modelo_TemplateEmail::obtieneHTML("FACTURACION");
+      $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
+      $email_body = str_replace("%PLAN%", $infoplan["nombre"], $email_body);   
+      Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
             
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
 
-      $GLOBALS['db']->commit();   
+      $GLOBALS['db']->commit();
     }
     catch(Exception $e){
       $GLOBALS['db']->rollback();

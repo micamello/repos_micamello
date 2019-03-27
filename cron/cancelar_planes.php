@@ -30,17 +30,11 @@ if (!empty($arrcandidato)){
 				//Desactivar el plan caducado del usuario 
 				if (!Modelo_UsuarioxPlan::desactivarPlan($usuarioplan["id_usuario_plan"],Modelo_Usuario::CANDIDATO)){
 					throw new Exception("Error al desactivar el plan caducado"); 
-				}
-										
-				// $mensaje = "Estimado, ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>Su plan (".utf8_encode($usuarioplan["nombre"]).") contratado el ".$usuarioplan["fecha_compra"]." ha caducado.<br> De querer seguir haciendo uso de nuestro servicio debe activar un nuevo plan.";
+				}													
 				
-        $GLOBALS['db']->commit();
+        $GLOBALS['db']->commit();       
+        envioCorreo($infousuario["nombres"]." ".$infousuario["apellidos"],$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);				
         echo "Plan de Candidato Desactivado ".$usuarioplan["id_usuario_plan"]."<br>";				
-				// Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);
-
-				$nombre_mostrar = utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]);
-		$datos_correo = array('tipo'=>10, 'nombres_mostrar'=>$nombre_mostrar, 'correo'=>$infousuario["correo"], 'nombre_plan'=>$usuarioplan['nombre'], 'fecha_plan'=>$usuarioplan['fecha_compra'], "type"=>TIPO['cancelacion_plan']);
-        Utils::enviarEmail($datos_correo);										
 			}
 			else{				
 			  $resultado = Modelo_UsuarioxPlan::publicacionesRestantes($usuarioplan["id_usuario"]);
@@ -65,10 +59,7 @@ if (!empty($arrcandidato)){
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
   	  echo "Error en registro candidato ".$usuarioplan['id_usuario_plan']."<br>";
-      // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());
-
-      $datos_correo_error = array('tipo'=>8, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage(), "type"=>TIPO['registro_error']);
-   		Utils::enviarEmail($datos_correo_error);    
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());
     }    
 	}
 } 
@@ -85,9 +76,7 @@ if (!empty($arrempresa)){
 				if (!Modelo_UsuarioxPlan::desactivarPlan($usuarioplan["id_usuario_plan"],Modelo_Usuario::EMPRESA)){
 					throw new Exception("Error al desactivar el plan caducado"); 
 				}
-								
-				$mensaje = "Estimado, ".utf8_encode($infousuario["nombres"]).",<br>Su plan (".utf8_encode($usuarioplan["nombre"]).") contratado el ".$usuarioplan["fecha_compra"]." ha caducado.<br>De querer seguir haciendo uso de nuestro servicio debe activar un nuevo plan.";
-				        								
+												        							
 				//desactivar todas las ofertas del plan
 				$ofertas = Modelo_Oferta::ofertasxUsuarioPlan($usuarioplan["id_usuario_plan"]);
 				if (!empty($ofertas) && is_array($ofertas)){
@@ -99,19 +88,14 @@ if (!empty($arrempresa)){
         }
 				
 				$GLOBALS['db']->commit();
-				// Utils::envioCorreo($infousuario["correo"],"Cancelación de Plan",$mensaje);
-				$nombre_mostrar = utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]);
-				$datos_correo = array('tipo'=>10, 'nombres_mostrar'=>$nombre_mostrar, 'correo'=>$infousuario["correo"], 'nombre_plan'=>$usuarioplan['nombre'], 'fecha_plan'=>$usuarioplan['fecha_compra'], "type"=>TIPO['cancelacion_plan']);
-				Utils::enviarEmail($datos_correo);					
+        envioCorreo($infousuario["nombres"],$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);
 				echo "Plan de Empresa Desactivado ".$usuarioplan["id_usuario"]."<br>";
 			}			
 		}
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
   	  echo "Error en registro empresa ".$usuarioplan["id_usuario_plan"]."<br>";
-      // Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage()); 
-		$datos_correo_error = array('tipo'=>8, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage(), "type"=>TIPO['registro_error']);
-   		Utils::enviarEmail($datos_correo_error);     
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage()); 		
     }    
 	}
 } 
@@ -123,6 +107,14 @@ function enviarNotificaciones($idusu,$fchcompra,$mensaje,$tipousu){
 		}
 	}  
 	return true;
+}
+
+function envioCorreo($nombres,$correo,$plan,$fecha){
+  $email_body = Modelo_TemplateEmail::obtieneHTML("CANCELACION_SUBSCRIPCION");
+  $email_body = str_replace("%NOMBRES%", utf8_encode($nombres), $email_body);   
+  $email_body = str_replace("%PLAN%", utf8_encode($plan), $email_body); 
+  $email_body = str_replace("%FECHA%", $fecha, $email_body);   
+  Utils::envioCorreo($correo,"Cancelación de Subscripción",$email_body);		
 }
 
 //elimina archivo de procesamiento
