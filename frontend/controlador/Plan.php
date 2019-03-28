@@ -1,6 +1,6 @@
 <?php
 require_once 'includes/mpdf/mpdf.php';
-require_once 'includes/generarBarcode.php';
+//require_once 'includes/generarBarcode.php';
 
 class Controlador_Plan extends Controlador_Base {
    
