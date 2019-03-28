@@ -212,6 +212,9 @@ class Controlador_Perfil extends Controlador_Base
                         throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
                     }
                 }
+                if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::EMPRESA)){
+                  throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
+                }
             }
 
             $validaTlf = Utils::valida_telefono($data['telefono']);
@@ -234,9 +237,15 @@ class Controlador_Perfil extends Controlador_Base
                 if(strlen($data['apellidos']) > 100){
                     throw new Exception("Apellidos: " . $data['apellidos'] . " supera el l\u00CDmite permitido");
                 }
+                if (!Utils::alfabetico($data['apellidos'],Modelo_Usuario::CANDIDATO)){
+                  throw new Exception("Apellidos: " . $data['apellidos'] . " formato no permitido");  
+                }
+                if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::CANDIDATO)){
+                  throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
+                }
             }
             if(strlen($data['nombres']) > 100){
-                throw new Exception("Nombres: " . $data['nombres'] . " supera el l\u00CDmite permitido");
+              throw new Exception("Nombres: " . $data['nombres'] . " supera el l\u00CDmite permitido");
             }
 
             $GLOBALS['db']->beginTrans();
