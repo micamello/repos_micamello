@@ -73,7 +73,7 @@ class Database{
       }
       //$value = mysql_real_escape_string($value);
       $col_list .= $col;            
-      $val_list .= "'".$value."'";
+      $val_list .= "'".utf8_decode($value)."'";
       $i++;
     }
     $query  = 'INSERT INTO ';
@@ -108,7 +108,8 @@ class Database{
     $query .= ') VALUES';
     $query .= $valores;
     $query .= ';';
-
+    print_r($query);
+    // exit();
     return $this->execute( $query );
   }
 

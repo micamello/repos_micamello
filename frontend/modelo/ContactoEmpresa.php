@@ -1,15 +1,21 @@
 <?php
 class Modelo_ContactoEmpresa{
   
-  public static function crearContactoEmpresa($dato_contacto, $user_id){  	
+  public static function crearContactoEmpresa($datoContacto, $user_id){
+  	if (empty($datoContacto) || empty($user_id)){ return false; }
 
-  	if (empty($dato_contacto) || empty($user_id)){ return false; }
-
-    if($dato_contacto['tel_two_contact'] == ''){
-      $dato_contacto['tel_two_contact'] = NULL;
+    if($datoContacto['tel2ConEmp'] == ''){
+      $datoContacto['tel2ConEmp'] = NULL;
     }
 
-  	return $GLOBALS['db']->insert('mfo_contactoempresa',array('id_empresa'=>$user_id,'nombres'=>$dato_contacto['nombre_contact'],'apellidos'=>$dato_contacto['apellido_contact'],'telefono1'=>$dato_contacto['tel_one_contact'],'telefono2'=>$dato_contacto['tel_two_contact']));
+    $result = $GLOBALS['db']->insert('mfo_contactoempresa',
+                                    array(
+                                          'id_empresa'=>$user_id,
+                                          'nombres'=>$datoContacto['nombreConEmp'],
+                                          'apellidos'=>$datoContacto['apellidoConEmp'],
+                                          'telefono1'=>$datoContacto['tel1ConEmp'],
+                                          'telefono2'=>$datoContacto['tel2ConEmp']));
+    return $result;
   }
 
   public static function editarContactoEmpresa($data,$user_id){

@@ -21,13 +21,16 @@ class Modelo_UsuarioxArea{
     return $datos;
   } 
 
-  public static function crearUsuarioArea($area_select, $user_id){
-    if (empty($area_select)|| empty($user_id)) {return false;}
-    $insert = false;
-    foreach ($area_select as $key => $area) {
-        $insert = $GLOBALS['db']->insert("mfo_usuarioxarea", array("id_usuario"=>$user_id, "id_area"=>$area));
-    }
-    return $insert;
+  public static function crearUsuarioArea($areasSubarea, $user_id){
+    
+    $array_session = array();
+
+    if (empty($areasSubarea)|| empty($user_id)) {return false;}
+    foreach ($areasSubarea[0] as $key => $value) {   
+      array_push($array_session,array($user_id, $value));
+    } 
+      $result = $GLOBALS['db']->insert_multiple("mfo_usuarioxarea","id_usuario,id_areas_subareas",$array_session);
+      return $result;
   }
 
   public static function consultarSubareas($user_id){
