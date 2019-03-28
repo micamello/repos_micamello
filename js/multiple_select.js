@@ -562,16 +562,17 @@ function delete_list(obj){
     var list_select = $('#panel'+id_dep).find('li[id="'+id_selected+'"]');
     var des_all = $('#panel'+id_dep).find('li#all_select_'+id_dep+"_"+area_item);
     var select_area;
-    
+    $('#'+id_dep).find('option[value="'+id_selected+'"]').removeAttr('selected');
     list_select.removeClass('subarea_selected');
     list_select.find('input[type="checkbox"]').prop('checked', false);
+
     $('#'+id_dep).find('option[value="'+area_item+'"]').removeAttr('selected');
     if(des_all.hasClass('subarea_selected')){
         des_all.removeClass('subarea_selected');
         des_all.find('input[type="checkbox"]').prop('checked', false);
     }
     contador_sel = $('#panel'+id_dep).find('li[id^="'+area_item+'_"].subarea_selected:not(.seleccion_e)');
-
+    // console.log(contador_sel.length);
     if(contador_sel.length == 0){
         select_area = $('#panel'+$(objeto).attr('id')).find('li#area_'+area_item);
         select_area.removeClass('area_with_subarea');
