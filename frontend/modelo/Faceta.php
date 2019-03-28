@@ -2,7 +2,7 @@
 class Modelo_Faceta{
   
   public static function obtenerLiterales(){
-    $sql = "SELECT id_faceta,SUBSTRING(descripcion, 1, 1) as faceta FROM mfo_faceta WHERE estado = 1";  
+    echo $sql = "SELECT id_faceta,SUBSTRING(descripcion, 1, 1) as faceta FROM mfo_faceta WHERE estado = 1";  
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
     $datos = array();
      $existe = 0;

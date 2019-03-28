@@ -534,30 +534,10 @@ class Utils{
     return date('Y-m-d H:i:s',$dias_antes);
   }
 
-  // public static function generarUsername($name){
-  //   $count = 0;
-  //   if(strlen($name) > 50){
-  //     $name = substr($name, 1, 49);
-  //   }
-
-  //   if(strlen($name) < 8){
-  //     $addTousername = self::generateRandomString(8-(strlen($name)));
-  //     $name = $name.$addTousername;
-  //   }
-  //   $username = ($name);
-  //   $username_generated = $username;
-  //     do{
-  //       if($count != 0){
-  //         $username_generated = $username.$count;
-  //       }
-  //       $count++;
-        
-  //     }
-  //   while(!empty(Modelo_Usuario::existeUsuario($username_generated)));
-  //   return $username_generated;
-  // }
-
-  public static function generarUsername($name){
+  public static function generarUsername($name){   
+    if(strlen($name) > 50){
+      $name = substr($name, 1, 49);
+    } 
     $count = 0;
     $username = ($name);
     $username_generated = $username;

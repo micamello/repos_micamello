@@ -110,20 +110,7 @@ RewriteRule ^postulacion/([a-z])+/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.ph
 ######################################################################################
 
 #filtros
-RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&param5=$7&page=$8 [L]
-
-RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&param4=$6&page=$7 [L]
-RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}([^.]+))/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&page=$6 [L]
-
-RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&page=$5 [L]
-
 RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&page=$4 [L]
-
-RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&param3=$5&page=$6 [L]
-
-RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&param2=$4&page=$5 [L]
-
-RewriteRule ^([a-z]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=filtrar&vista=$1&type=$2&param1=$3&page=$4 [L]
 
 #######################################################################################
 
@@ -190,7 +177,7 @@ RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ 
 RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2&vista=$3 [L]
 
 #Minisitio
-RewriteRule ^filtrarEntrevistados/([A-Z]{1}[0-9_]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar&param1=$1&type=$2 [L]
+RewriteRule ^filtrarEntrevistados/([A-Z]{1}[0-9_]{1,})/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar&param1=$1&type=$2&metodo=$3 [L]
 
 RewriteRule ^filtrarEntrevistados2/([A-Z]{1}[0-9_]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar2&param1=$1&type=$2 [L]
 

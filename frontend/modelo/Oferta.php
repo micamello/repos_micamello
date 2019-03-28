@@ -23,12 +23,12 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 
-  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$nivelInteres=false,$cambioRes=false,&$filtros=false){
+  public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$cambioRes=false,&$filtros=false){
     
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
-      r.edad_minima, r.licencia, r.viajar,ul.username";
+      r.edad_minima, r.licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas";
       if (!empty($vista) && ($vista == 'postulacion')){ 
 
         $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
@@ -37,12 +37,12 @@ class Modelo_Oferta{
         $sql .= ", emp.nombres AS empresa, emp.id_empresa AS id_usuario";
       }
       if(!empty($id)){
-         $sql .= ", GROUP_CONCAT(ni.id_nivelIdioma_idioma) AS idiomas";
+         $sql .= ", GROUP_CONCAT(DISTINCT(ni.id_nivelIdioma_idioma)) AS idiomas";
       }
     }else{
       $sql .= "emp.id_empresa AS id_usuario, emp.nombres";
     }
-    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp";
+    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os";
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= ", mfo_postulacion pos, mfo_usuario u";
     }
@@ -53,6 +53,7 @@ class Modelo_Oferta{
     AND e.id_escolaridad = o.id_escolaridad
     AND c.id_ciudad = o.id_ciudad
     AND p.id_provincia = c.id_provincia
+    AND os.id_ofertas = o.id_ofertas
     AND j.id_jornada = o.id_jornada
     AND p.id_pais = ".$pais_empresa;
     if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
@@ -71,11 +72,11 @@ class Modelo_Oferta{
     }
     
     if (!empty($vista) && ($vista != 'postulacion')){ 
-      /*if($areasInteres != false){
-        $sql .= " AND a.id_area IN(".$areasInteres.")"; 
+      if($areasInteres != false){
+        $sql .= " AND os.id_areas_subareas IN(".$areasInteres.")"; 
       }
 
-      if($nivelInteres != false){
+      /*if($nivelInteres != false){
         $sql .= " AND o.id_nivelInteres IN(".$nivelInteres.")"; 
       }*/
 
@@ -84,6 +85,7 @@ class Modelo_Oferta{
       }
     }
 
+    $sql .= ' GROUP BY o.id_ofertas';
     if($obtCantdRegistros == false){
 
       if($filtros != false){
@@ -154,6 +156,7 @@ class Modelo_Oferta{
     AND c.id_ciudad = o.id_ciudad
     AND p.id_provincia = c.id_provincia
     AND j.id_jornada = o.id_jornada
+
     AND p.id_pais = ".$pais_empresa;
     if(!empty($filtros['P']) && $filtros['P'] != 0){
        $sql .= " AND p.id_provincia = ".$filtros['P'];
@@ -161,8 +164,8 @@ class Modelo_Oferta{
     
     if(!empty($filtros['A']) && $filtros['A'] != 0){
 
-      $sql2 = "SELECT GROUP_CONCAT(DISTINCT(o.id_ofertas)) AS ids FROM micamell_desarrollo3.mfo_oferta_subareas o
-          INNER JOIN micamell_desarrollo3.mfo_area_subareas a on o.id_areas_subareas = a.id_areas_subareas
+      $sql2 = "SELECT GROUP_CONCAT(DISTINCT(o.id_ofertas)) AS ids FROM mfo_oferta_subareas o
+          INNER JOIN mfo_area_subareas a on o.id_areas_subareas = a.id_areas_subareas
           WHERE a.id_area = ".$filtros['A'];
       $ofertas = $GLOBALS['db']->auto_array($sql2,array(),false);
 
@@ -274,7 +277,7 @@ class Modelo_Oferta{
             FROM mfo_oferta o
             LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
             WHERE (o.estado = 1 OR o.estado = 3)
-            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajextest pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
+            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajexfaceta pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
             GROUP BY o.id_ofertas;";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
     $datos = array();
@@ -286,17 +289,19 @@ class Modelo_Oferta{
     return $datos;
   }
 
-  public static function obtieneAutopostulaciones($pais,$fecha,$areas,$intereses,$usuario,$provincia=0,$ciudad=0){
-    if (empty($pais) || empty($fecha) || empty($areas) || empty($intereses) || empty($usuario)){ return false; }
+  public static function obtieneAutopostulaciones($pais,$fecha,$areas,$usuario,$provincia=0,$ciudad=0){
+    if (empty($pais) || empty($fecha) || empty($areas) || empty($usuario)){ return false; }
     $sql = "SELECT o.id_ofertas, o.salario, o.titulo, o.id_empresa AS id_usuario, p.nombre AS provincia, c.nombre AS ciudad
-            FROM mfo_oferta o
+            FROM mfo_oferta o            
             INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
             INNER JOIN mfo_empresa_plan e ON e.id_empresa_plan = o.id_empresa_plan
             INNER JOIN mfo_plan a ON a.id_plan = e.id_plan 
-            WHERE o.estado = 1 AND p.id_pais = ? AND o.fecha_contratacion >= ? AND a.costo <> 0 AND
-                  o.id_area IN(".$areas.") AND o.id_nivelInteres IN(".$intereses.") AND 
-                  o.id_ofertas NOT IN (SELECT id_ofertas FROM mfo_postulacion WHERE id_usuario = ?)";   
+            WHERE o.estado = 1 AND p.id_pais = ? AND o.fecha_contratacion >= ? AND a.costo <> 0 AND                   
+                  o.id_ofertas NOT IN (SELECT id_ofertas FROM mfo_postulacion WHERE id_usuario = ?) AND
+                  o.id_ofertas IN (SELECT DISTINCT(id_ofertas) FROM mfo_oferta_subareas 
+                                   WHERE id_areas_subareas IN (".$areas.")) AND
+                  o.id_empresa NOT IN (SELECT id_empresa FROM mfo_empresa_bloq where id_usuario = ?)";   
     if (!empty($provincia)){
       $sql .= " AND p.id_provincia = ".$provincia;
     }
@@ -304,7 +309,7 @@ class Modelo_Oferta{
       $sql .= " AND c.id_ciudad = ".$ciudad;
     }
     $sql .= " ORDER BY o.fecha_creado";
-    return $GLOBALS['db']->auto_array($sql,array($pais,$fecha,$usuario),true);              
+    return $GLOBALS['db']->auto_array($sql,array($pais,$fecha,$usuario,$usuario),true);
   }
   
   public static function ofertasxUsuarioPlan($usuarioplan){
@@ -342,8 +347,8 @@ class Modelo_Oferta{
     return $GLOBALS['db']->auto_array($sql,array($idOferta));
   }
 
-  public static function ofertasDiarias($pais,$areas,$intereses){
-    if (empty($pais) || empty($areas) || empty($intereses)){ return false; }    
+  public static function ofertasDiarias($pais,$areas){
+    if (empty($pais) || empty($areas)){ return false; }    
     $fechaayer = date("Y-m-d",strtotime(date("Y-m-d")."- 1 day"));
     $fechadesde = $fechaayer." 00:00:00";
     $fechahasta = $fechaayer." 23:59:59";
@@ -352,7 +357,10 @@ class Modelo_Oferta{
             INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
             INNER JOIN mfo_empresa e ON e.id_empresa = o.id_empresa
-            WHERE o.estado = 1 AND p.id_pais = ? AND o.id_area IN(".$areas.") AND o.id_nivelInteres IN(".$intereses.") AND o.fecha_creado BETWEEN ? AND ? 
+            WHERE o.estado = 1 AND p.id_pais = ? AND 
+                  o.id_ofertas IN (SELECT DISTINCT(id_ofertas) FROM mfo_oferta_subareas 
+                                   WHERE id_areas_subareas IN (".$areas.")) AND
+                  o.fecha_creado BETWEEN ? AND ? 
             ORDER BY o.id_ofertas";    
     return $GLOBALS['db']->auto_array($sql,array($pais,$fechadesde,$fechahasta),true);        
   }

@@ -42,7 +42,7 @@ class Proceso_Cancelacion{
 	  	
 	  	//si es de tipo candidato
 	  	if ($infousuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
-	  		$this->reversoCandidato($plan["id_comprobante"],$plan["id_usuario_plan"]); 		 			  		
+	  		$this->reversoCandidato($plan["id_comprobante"],$plan["id_usuario_plan"]);	  		
 	  	}	  		 
 	  	//si es de tipo empresa
 	  	else{
@@ -74,7 +74,7 @@ class Proceso_Cancelacion{
 	    $GLOBALS['db']->commit();
     	echo "PROCESADO REGISTRO ".$this->procesador->id."<br>";	
       $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");    
-	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,$infoplan["nombre"],$infousuario["tipo_usuario"]);
+	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,$infoplan["nombre"],$plan["fecha_compra"]);
 
     }
     catch(Exception $e){
@@ -149,19 +149,14 @@ class Proceso_Cancelacion{
     }
   } 
 
-  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario){  	
-  	$email_subject = "Cancelación de Subscripción";
-  	$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
-    $email_body .= "Su plan (".utf8_encode($plan).") ha sido cancelado <br>";
+  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$fecha){ 
+    $email_body = Modelo_TemplateEmail::obtieneHTML("CANCELACION_SUBSCRIPCION");
+    $email_body = str_replace("%NOMBRES%", utf8_encode($nombres), $email_body);   
+    $email_body = str_replace("%PLAN%", utf8_encode($plan), $email_body); 
+    $email_body = str_replace("%FECHA%", $fecha, $email_body);       
     $notif_body = $email_body;
-    if ($tipousuario == Modelo_Usuario::CANDIDATO){
-      $email_body .= "En el caso de tener autopostulaciones estas ser&aacute;n eliminadas"; 
-      
-    }else{
-      $email_body .= "En el caso de tener ofertas publicadas estas ser&aacute;n eliminadas";
-    }  
     Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
-    Utils::envioCorreo($correo,$email_subject,$email_body);
+    Utils::envioCorreo($correo,"Cancelación de Subscripción",$email_body);
   }
   
 }

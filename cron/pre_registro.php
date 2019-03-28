@@ -10,7 +10,7 @@ set_time_limit(0);
 require_once '../constantes.php';
 require_once '../init.php';
 
-define('SUCURSAL_PAISID',14);
+define('SUCURSAL_PAISID',39);
 define('DOMINIO','micamello.com.ec');
 
 //pregunta si ya se esta ejecutando el cron sino crea el archivo
@@ -49,9 +49,9 @@ if (!empty($usuarios) && is_array($usuarios)){
 	    	}
 	    	$tipodoc = 2;
 	    }
-	    elseif ($long_dni < 7){
+	    elseif ($long_dni <= 6){
 	    	$conterror++;
-	    	throw new Exception("DNI INVALIDO ".$usuario["dni"]);
+	    	throw new Exception("PASAPORTE INVALIDO ".$usuario["dni"]);
 	    }
 	    else{
 	    	$tipodoc = 3;
@@ -76,12 +76,13 @@ if (!empty($usuarios) && is_array($usuarios)){
 	    if (!Modelo_Usuario::existeCorreo($usuario["correo"])){
 	    	$conterror++;
 	      throw new Exception("CORREO YA EXISTE ".$usuario["correo"]);
-	    }
-    
-	    //$obj_registro = new Controlador_Registro();
-	    $nombre = Utils::no_carac(explode(" ", strtolower(trim(utf8_decode($usuario['nombres']))))); 
+	    }    	       	
+    	
+	    $nombre = Utils::no_carac(explode(" ", trim($usuario['nombres']))); 
+	    $nombre[0] = strtolower($nombre[0]);	    	    	    	    
 	    if ($usuario['tipo_usuario'] == 1){   
-	      $apellido = Utils::no_carac(explode(" ", strtolower(trim(utf8_decode($usuario['apellidos'])))));    
+	      $apellido = Utils::no_carac(explode(" ", trim($usuario['apellidos'])));
+	      $apellido[0] = strtolower($apellido[0]);
 	      $username = Utils::generarUsername($nombre[0].$apellido[0]);
 	    }
 	    else{
@@ -99,13 +100,13 @@ if (!empty($usuarios) && is_array($usuarios)){
       if ($usuario["tipo_usuario"] == 1) {      	
         $data = array('telefono'=>$usuario['telefono'], 'nombres'=>$usuario['nombres'], 'apellidos'=>$usuario['apellidos'], 
         	            'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>date('Y-m-d H:i:s'), 'estado'=>1, 'term_cond'=>1,
-        	            'conf_datos'=>1, 'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>date('Y-m-d H:i:s'), 'id_nacionalidad'=>SUCURSAL_PAISID, 
-        	            'tipo_doc'=>$tipodoc, 'status_carrera'=>1, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 
-        	            'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$usuario["tipo_usuario"], 'token'=>NULL);       
+        	            'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>date('Y-m-d H:i:s'), 'id_nacionalidad'=>SUCURSAL_PAISID, 
+        	            'tipo_doc'=>$tipodoc, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 
+        	            'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$usuario["tipo_usuario"]);       
       }
       else{
         $data = array('telefono'=>$usuario['telefono'], 'nombres'=>$usuario['nombres'], 'fecha_nacimiento'=>$mayor_edad,
-        	            'fecha_creacion'=>date('Y-m-d H:i:s'), 'estado'=>1, 'term_cond'=>1, 'conf_datos'=>1, 'id_ciudad'=>$default_city['id_ciudad'],
+        	            'fecha_creacion'=>date('Y-m-d H:i:s'), 'estado'=>1, 'term_cond'=>1, 'id_ciudad'=>$default_city['id_ciudad'],
         	            'ultima_sesion'=>date('Y-m-d H:i:s'), 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$usuario['tipo_usuario']); 
       }
       if(!Modelo_Usuario::crearUsuario($data)){
@@ -126,29 +127,23 @@ if (!empty($usuarios) && is_array($usuarios)){
 
       $GLOBALS['db']->commit();
     
-    //   $email_subject = "Activación de Usuario";    
-	  	// $nombre_mostrar = $usuario["nombres"].(!empty($usuario['apellidos']) ? " ".$usuario['apellidos'] : "");
-	   //  $email_body .= "Su usuario ha sido activado exitosamente, sus credenciales de autenticaci&oacute;n son: <br>";	    	    
-	   //  $email_body .= "Usuario: ".$username."<br>";
-	   //  $email_body .= "Correo Electr&oacute;nico: ".$usuario["correo"]."<br>";
-	   //  $email_body .= "Contrase&ntilde;a: ".$password."<br>";
-	   //  $email_body .= "Por favor de click en este enlace para ingresar "; 
-	   //  $email_body .= "<a href='".PUERTO."://".DOMINIO."/desarrollov2/login/'>click aqu&iacute;</a> <br>";	
+	    $nombre_mostrar = utf8_encode($usuario["nombres"]).(!empty($usuario['apellidos']) ? " ".utf8_encode($usuario['apellidos']) : "");
+	    $enlace = "<a href='".PUERTO."://".DOMINIO."/desarrollov3/login/'>click aqu&iacute;</a>";
+	  
+      $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_USUARIO");
+      $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
+      $email_body = str_replace("%USERNAME%", $username, $email_body);   
+      $email_body = str_replace("%CORREO%", $usuario["correo"], $email_body);   
+      $email_body = str_replace("%PASSWORD%", $password, $email_body);   
+      $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
+      Utils::envioCorreo($usuario["correo"],"Activación de Usuario",$email_body);          
 
-
-	    $datos_correo = array('tipo'=>5, 'nombres_mostrar'=>$nombre_mostrar, 'correo'=>$usuario["correo"], 'username'=>$username, 'password'=>$password);
-        Utils::enviarEmail($datos_correo);
-	   
-	    // Utils::envioCorreo($usuario["correo"],$email_subject,$email_body);
-
-      echo $usuario['nombres']." ".$usuario['apellidos']."/".$username."<br>";    
+      echo utf8_encode($usuario['nombres'])." ".utf8_encode($usuario['apellidos'])."/".$username."<br>";    
     }
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
-  	  echo "Error en usuario ".$usuario['id']." ".$e->getMessage()."<br>";
-  	  $datos_correo_error = array('tipo'=>6, 'correo'=>'desarrollo@micamello.com.ec', 'mensaje'=>$e->getMessage());
-   		Utils::enviarEmail($datos_correo_error);
-		// Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
+  	  echo "Error en usuario ".$usuario['id']." ".$e->getMessage()."<br>";  	  
+		  Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
     }         
 	}
 	echo "TOTAL REGISTROS INVALIDOS ".$conterror;

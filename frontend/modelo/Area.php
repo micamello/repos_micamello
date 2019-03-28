@@ -24,10 +24,13 @@ class Modelo_Area{
 
 	public static function obtieneOfertasxArea($pais){
 		if (empty($pais)){ return false; }
-		$sql = "SELECT a.id_area, a.nombre, a.ico, 0 AS ofertas
-						FROM mfo_area a 												
-						GROUP BY a.id_area
-						ORDER BY a.nombre";
+		$sql = "SELECT COUNT(res.id_ofertas) AS ofertas, a.id_area, a.nombre, a.ico 
+						FROM mfo_area a
+						LEFT JOIN (SELECT o.id_ofertas, s.id_area
+											 FROM mfo_oferta_subareas o 
+											 INNER JOIN mfo_area_subareas s ON s.id_areas_subareas = o.id_areas_subareas
+											 GROUP BY o.id_ofertas, s.id_area) AS res ON res.id_area = a.id_area
+						GROUP BY a.id_area";		
 		return $GLOBALS['db']->auto_array($sql,array($pais),true);				
 	}
 
