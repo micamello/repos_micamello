@@ -294,7 +294,7 @@ class Controlador_Oferta extends Controlador_Base{
           }
 
           $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
-
+          Utils::log("PASO POR AQUI ".print_r($oferta,true));
           if (Utils::getParam('postulado') == 1) {
           
             if(!empty($status)){

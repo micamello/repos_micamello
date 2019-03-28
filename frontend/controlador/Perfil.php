@@ -177,7 +177,7 @@ class Controlador_Perfil extends Controlador_Base
             }
 
             $data = $this->camposRequeridos($campos);
- 
+            
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }

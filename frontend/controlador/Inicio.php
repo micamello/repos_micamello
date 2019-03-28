@@ -48,7 +48,7 @@ class Controlador_Inicio extends Controlador_Base {
         //Utils::log($datodni);
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
-      default:         
+      default:    
         Vista::render('inicio', $tags);
       break;
     }
