@@ -54,6 +54,8 @@ define('METODO_CUESTIONARIO',array('0'=>'Preguntas ordenadas','1'=>'Preguntas al
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
+define('AREASPERMITIDAS', '3');
+
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');
 define('FB_CLIENTE_SECRET', 'cac4885b9285bde2975216f6a26f69a9');

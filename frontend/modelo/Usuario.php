@@ -126,46 +126,40 @@ public static function existeUsername($username){
   return $rs;
 } 
 
-
+// se utiliza esta funcion en el registro modal--------------------
   public static function existeCorreo($correo){
     if(empty($correo)){ return false; }
     $sql = "select * from mfo_usuario_login where correo = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
-    return (!empty($rs['correo'])) ? false : true;
+    return (empty($rs['correo'])) ? false : $rs['id_usuario_login'];
   }
+// se utiliza esta funcion en el registro modal--------------------
 
   public static function existeDni($dni,$idUsuarioLogin=false){
     if(empty($dni)){ return false; }
-    $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?";
+    $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?;";
 
     if($idUsuarioLogin != false){
       $sql .= " AND id_usuario_login <> ".$idUsuarioLogin;
     }
 
     $rs = $GLOBALS['db']->auto_array($sql,array($dni));
-    return (!empty($rs['dni'])) ? false : true;
+    return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
 
   public static function crearUsuario($dato_registro){
-    // var_dump($dato_registro);
-    // exit();
-
     if(empty($dato_registro)){return false;}
  
     if ($dato_registro['tipo_usuario'] == 1) {
-      $result = $GLOBALS['db']->insert('mfo_usuario',array('nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'telefono'=>$dato_registro['telefono'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
+      $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
     }
     else{
-
-      $arreglo_datos = array('nombres'=>$dato_registro['nombres'], 'telefono'=>$dato_registro['telefono'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
-
+      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }
-
       $result = $GLOBALS['db']->insert('mfo_empresa',$arreglo_datos);
     }      
-
     return $result;
   }
 
@@ -978,9 +972,7 @@ WHERE
     if($data['terminos_condiciones'] == 'on'){
       $term_cond = 1;
     }
-
     $data_usuario = array("nombres"=>$data['nombres'], "apellidos"=>$data['apellidos'], "fecha_nacimiento"=>$data['fecha_nacimiento'], "id_nacionalidad"=>$data['pais'], "id_ciudad"=>$data['cantonnac'], "genero"=>$data['genero'], "estado_civil"=>$data['estado_civil'], "id_escolaridad"=>$data['nivel_instruccion'], "fecha_creacion"=>date("Y-m-d H:i:s"), "term_cond"=>$term_cond, "correo"=>$data['correo'], "asp_salarial"=>$data['aspiracion_salarial'], "id_parroquia"=>$data['parroquia_res'], "id_profesion"=>$data['profesion'], "id_ocupacion"=>$data['ocupacion']);
-
     if($data['cantonnac'] == NULL || $data['cantonnac'] == ""){
       $data_usuario = array("nombres"=>$data['nombres'], "apellidos"=>$data['apellidos'], "fecha_nacimiento"=>$data['fecha_nacimiento'], "id_nacionalidad"=>$data['pais'], "genero"=>$data['genero'], "estado_civil"=>$data['estado_civil'], "id_escolaridad"=>$data['nivel_instruccion'], "fecha_creacion"=>date("Y-m-d H:i:s"), "term_cond"=>$term_cond, "correo"=>$data['correo'], "asp_salarial"=>$data['aspiracion_salarial'], "id_parroquia"=>$data['parroquia_res'], "id_profesion"=>$data['profesion'], "id_ocupacion"=>$data['ocupacion']);
     }

@@ -22,7 +22,9 @@ spl_autoload_register('cargarClasesLib', false);
 
 $GLOBALS['db'] = new Database( DBSERVIDOR, DBUSUARIO, DBCLAVE, DBNOMBRE);
 $GLOBALS['db']->connect();
-$GLOBALS['areas'] = Modelo_AreaSubarea::obtieneAreas_Subareas();
+$GLOBALS['areasSubareas'] = Modelo_AreaSubarea::obtieneAreas_Subareas();
+$GLOBALS['ListAreas'] = Modelo_Area::obtieneListadoAsociativo();
+$GLOBALS['ListSubareas'] = Modelo_AreaSubarea::obtieneListadoAsociativo();
 
 if(count($_POST) != 0 && $_GET["mostrar"] != "publicar" && $_GET["mostrar"] != "oferta"){ $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); }
 if(count($_GET) != 0){ $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING); }

@@ -183,7 +183,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
               if (isset($menu["menu"])){   
                 foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                   <li>
-                    <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
+                    <a id="<?php echo $optmnu["id"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
                     <p class="hidden_small"><i class="fa fa-home fa-2x"></i></p>';  }else{ echo $optmnu["nombre"]; } ?></a>
                   </li>                            
                 <?php } ?>

@@ -31,13 +31,145 @@
       <div class="modal-body">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
+        <form action="<?php echo PUERTO."://".HOST;?>/registro/" method="post" id="form_register">
+          <input type="hidden" name="tipo_usuario" id="tipo_usuario">
+          <input type="hidden" name="tipo_documentacion" id="tipo_documentacion">
+          <input type="hidden" name="formularioRegistro" id="formularioRegistro" value="1">
+          <!-- <input type="hidden" name="puerto_host" id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>"> -->
+          <div class="">
+            <diw class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Nombre <i class="obligatorio">*</i></label>
+                  <input type="text" name="nombresCandEmp" class="form-control" id="nombresCandEmp">
+                  <div></div>
+                </div>
+              </div>
 
-        <div class="">
-          <diw class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Apellidos <i class="obligatorio">*</i></label>
+                  <input type="text" name="apellidosCand" class="form-control" id="apellidosCand">
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Correo <i class="obligatorio">*</i></label>
+                  <input type="text" name="correoCandEmp" class="form-control" id="correoCandEmp">
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Celular <i class="obligatorio">*</i></label>
+                  <input type="text" name="celularCandEmp" class="form-control" id="celularCandEmp">
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Tipo documentación <i class="obligatorio">*</i></label>
+                  <select class="form-control" id="tipoDoc" name="tipoDoc">
+                    <option value="">Seleccione una opción</option>
+                    <?php 
+                      foreach (TIPO_DOCUMENTO as $key => $value) {
+                        if($key != 1){
+                          echo "<option value='".$key."'>".$value."</option>";
+                        }
+                      }
+                     ?>
+                  </select>
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Documento <i class="obligatorio">*</i></label>
+                  <input type="text" name="documentoCandEmp" class="form-control" id="documentoCandEmp">
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Seleccione área</label>
+                  <select class="form-control" id="areaCand" name="areaCand[]" multiple="multiple">
+                    <!-- <option value="">Seleccione una opción</option> -->
+                    <?php 
+                    $i = 0;
+                      if(!empty($areasSubareas) && is_array($areasSubareas)){
+                        foreach ($areasSubareas as $area) {
+                          if($i != $area['id_area']){
+                            echo "<option value='".$area['id_area']."'>".$area['nombre_area']."</option>";
+                            $i = $area['id_area'];
+                          }
+                        }
+                      }
+                     ?>
+                  </select>
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Seleccione subárea</label>
+                  <select class="form-control" id="subareasCand" name="subareasCand[]" multiple="multiple">
+                    <!-- <option value="">Seleccione una opción</option> -->
+                    <?php 
+                    // $j = 0;
+                      if(!empty($areasSubareas) && is_array($areasSubareas)){
+                        foreach ($areasSubareas as $area) {
+                          if($j != $area['id_subareas']){
+                            echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".$area['nombre_subarea']."</option>";
+                            // $j = $area['id_subareas'];
+                          }
+                        }
+                      }
+                     ?>
+                  </select>
+                  <div></div>
+                </div>
+               
+              </div>
+
+              <!-- contraseña -->
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Contraseña <i class="obligatorio">*</i></label>
+                  <div class="inner-addon right-addon">
+                    <i class="fa fa-eye reveal_content" title="Mostrar contraseña"></i>
+                    <input type="password" class="form-control" name="password_1" id="password_1">
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Repita contraseña <i class="obligatorio">*</i></label>
+                  <div class="inner-addon right-addon">
+                    <i class="fa fa-eye reveal_content"></i>
+                    <input type="password" class="form-control" name="password_2" id="password_2">
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+
+            <div class="col-md-12" id="datosContEmp">
+              <hr>
+              <label>Datos de contacto</label>
+            </div>
+
             <div class="col-md-6">
               <div class="form-group">
-                <label>Nombre <i class="obligatorio">*</i></label>
-                <input type="text" name="nombres_c_e" class="form-control" id="nombres_c_e">
+                <label>Nombres <i class="obligatorio">*</i></label>
+                <input type="text" class="form-control" name="nombreConEmp" id="nombreConEmp">
                 <div></div>
               </div>
             </div>
@@ -45,94 +177,43 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Apellidos <i class="obligatorio">*</i></label>
-                <input type="text" name="apellidos" class="form-control" id="apellidos">
+                <input type="text" class="form-control" name="apellidoConEmp" id="apellidoConEmp">
                 <div></div>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>Correo <i class="obligatorio">*</i></label>
-                <input type="text" name="correo_c_e" class="form-control" id="correo_c_e">
+                <label>Teléfono 1 <i class="obligatorio">*</i></label>
+                <input type="text" class="form-control" name="tel1ConEmp" id="tel1ConEmp">
                 <div></div>
               </div>
             </div>
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>Celular <i class="obligatorio">*</i></label>
-                <input type="text" name="celular_c_e" class="form-control" id="celular_c_e">
+                <label>Teléfono 2 (opcional)</label>
+                <input type="text" class="form-control" name="tel2ConEmp" id="tel2ConEmp">
                 <div></div>
               </div>
             </div>
 
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Tipo documentación <i class="obligatorio">*</i></label>
-                <select class="form-control" id="tipo_doc" name="tipo_doc">
-                  <option value="">Seleccione una opción</option>
-                  <?php 
-                    foreach (TIPO_DOCUMENTO as $key => $value) {
-                      if($value != 'RUC'){
-                        echo "<option value='".$key."'>".$value."</option>";
-                      }
-                    }
-                   ?>
-                </select>
-                <div></div>
+            <div class="form-group check_box">
+                <div class="col-md-12">
+                  <div class="checkbox">
+                    <label><input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He leído y acepto <a href="">término de condiciones</a> y <a href="">Política de privacidad</a></label>
+                    <div></div>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Documento <i class="obligatorio">*</i></label>
-                <input type="text" name="documento_c_e" class="form-control" id="documento_c_e">
-                <div></div>
+              <div class="col-md-12">
+                <input type="submit" name="registro_form_mic" class="btn btn-success" value="Registrarse">
               </div>
-            </div>
 
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Seleccione área</label>
-                <select class="form-control" id="area" name="area" multiple="multiple">
-                  <!-- <option value="">Seleccione una opción</option> -->
-                  <?php 
-                  $i = 0;
-                    if(!empty($areas) && is_array($areas)){
-                      foreach ($areas as $area) {
-                        if($i != $area['id_area']){
-                          echo "<option value='".$area['id_area']."'>".$area['nombre_area']."</option>";
-                          $i = $area['id_area'];
-                        }
-                      }
-                    }
-                   ?>
-                </select>
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <div class="form-group">
-                <label>Seleccione área</label>
-                <select class="form-control" id="subareas" name="subareas" multiple="multiple">
-                  <!-- <option value="">Seleccione una opción</option> -->
-                  <?php 
-                  $j = 0;
-                    if(!empty($areas) && is_array($areas)){
-                      foreach ($areas as $area) {
-                        if($j != $area['id_subareas']){
-                          echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".$area['nombre_subarea']."</option>";
-                          $j = $area['id_subareas'];
-                        }
-                      }
-                    }
-                   ?>
-                </select>
-              </div>
-             
-            </div>
-          </diw>  
-        </div>
+            </diw>  
+          </div>
+        </form>
 
       </div>
       <div class="modal-footer">
@@ -223,10 +304,13 @@
 </footer> 
 <!-- modal_seleccionados -->
 <div class="modal fade" id="modal_select" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <div class="modal-body">
-          
+        <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+        <div class="modal-body" style="overflow: scroll;">
+          <!-- <div class="col-md-12" id="modalmodal"> -->
+            
+          <!-- </div> -->
         </div>
         <!-- <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -255,14 +339,7 @@ if (isset($template_js) && is_array($template_js)){
 }
 ?>
 <script type="text/javascript">
-  $('#area').multiple_select({
-    items: 2,
-    dependence: {
-      id_dependencia: "subareas",
-      items: 1
-    }
-  });
-  // $('#eder').multiple_select();
+  
 </script>
 </body>
 </html>

@@ -34,7 +34,7 @@ abstract class Controlador_Base{
           foreach($valor as $key=>$val){
             $val = strip_tags($val);
             $val = str_replace("\r\n","<br>",$val);
-            $val = htmlentities($val,ENT_QUOTES,'UTF-8');
+            //$val = htmlentities($val,ENT_QUOTES,'UTF-8');
             $data[$campo][$key] = $val;
           }          
         }
@@ -45,7 +45,7 @@ abstract class Controlador_Base{
           }
           $valor = strip_tags($valor);
           $valor = str_replace("\r\n","<br>",$valor);
-          $valor = htmlentities($valor,ENT_QUOTES,'UTF-8');
+          //$valor = htmlentities($valor,ENT_QUOTES,'UTF-8');
           $data[$campo] = $valor;
         }        
       } 

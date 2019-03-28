@@ -10,7 +10,7 @@ class Controlador_Inicio extends Controlador_Base {
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
-    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
+    // $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     //$arrinteres = Modelo_Interes::obtieneListado();
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
@@ -26,13 +26,14 @@ class Controlador_Inicio extends Controlador_Base {
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg,
-                  'areas'=>$GLOBALS['areas']);
+                  'areasSubareas'=>$GLOBALS['areasSubareas']);
 
     // $tags["template_js"][] = "modal-register";
     // $tags["template_js"][] = "validator";
-    // $tags["template_js"][] = "assets/js/main";
-    $tags["template_js"][] = "micamello_registro";
+    $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "micamello_registro";
+    
     // $tags["template_js"][] = "ruc_jquery_validator";
     // $tags["template_js"][] = "bootstrap-multiselect";
     // $tags["template_js"][] = "registrar";
@@ -41,18 +42,6 @@ class Controlador_Inicio extends Controlador_Base {
 
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
-      case 'buscaCorreo':        
-        $correo = Utils::getParam('correo', '', $this->data);
-        $datocorreo = Modelo_Usuario::existeCorreo($correo);
-        //Utils::log($datocorreo);
-        Vista::renderJSON(array("respcorreo"=>$datocorreo));
-      break;
-      case 'buscaDni':
-        $dni = Utils::getParam('dni', '', $this->data);
-        $datodni = Modelo_Usuario::existeDni($dni);
-        //Utils::log($datodni);
-        Vista::renderJSON(array("respdni"=>$datodni));
-      break;
       default:         
         Vista::render('inicio', $tags);
       break;
