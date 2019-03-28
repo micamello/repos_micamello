@@ -125,7 +125,7 @@ class Database{
         //$query .= $col . '=' . $value;
         $query .= $col . '= NULL';
       }else{
-        $query .= $col . '="' . $value . '"';
+        $query .= $col . '="' . utf8_decode($value) . '"';
       }
       $i++;
     }

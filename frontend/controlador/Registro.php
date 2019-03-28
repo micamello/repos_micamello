@@ -105,17 +105,20 @@ class Controlador_Registro extends Controlador_Base {
     if(count($datosReg['areaCand']) < 1 || count($datosReg['areaCand']) > AREASPERMITIDAS){
       throw new Exception("Seleccione el máximo o mínimo permitido de áreas");
     }
-    // Utils::log(print_r($datosReg, true));
-    // print_r(Utils::no_carac(explode(" ", trim($datosReg['nombresCandEmp'])))); 
+
     // generar username
+    var_dump($_POST);
+    Utils::log("FERNANDA".print_r($datosReg, true));
     // username para candidato
-    $nombreCandidato = explode(" ", Utils::no_carac(strtolower($datosReg['nombresCandEmp'])));
-    $apellidoCandidato = explode(" ", Utils::no_carac(strtolower($datosReg['apellidosCand'])));
-    $username = array("username"=>Utils::generarUsername($nombreCandidato[0].$apellidoCandidato[0]));
-    // Utils::log(print_r($datosReg, true));
-    // print_r($username);
-    array_push($datosReg, $username);
-    return $datosReg;
+    $nombreCandidato = explode(" ", Utils::no_carac($_POST['nombresCandEmp']));
+    //$apellidoCandidato = explode(" ", Utils::no_carac($datosReg['apellidosCand']));
+    //$username = array("username"=>Utils::generarUsername($nombreCandidato[0].$apellidoCandidato[0]));
+    // print_r($_POST);
+    //Utils::log(print_r($nombreCandidato,true));
+    
+    //array_push($datosReg, $username);
+    //return $datosReg;
+
   }
 
   public function guardarDatosUsuario($datosValidos){
@@ -154,6 +157,7 @@ class Controlador_Registro extends Controlador_Base {
                       "genero"=>'M',/*--*/
                       "id_usuario_login"=>$id_usuario_login, 
                       "tipo_usuario"=>$datosValidos['tipo_usuario']);/**/
+
     }
     // var_dump($data);
     if(!Modelo_Usuario::crearUsuario($data)){
