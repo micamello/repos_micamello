@@ -137,7 +137,7 @@ public static function existeUsername($username){
 
   public static function existeDni($dni,$idUsuarioLogin=false){
     if(empty($dni)){ return false; }
-    $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?;";
+    $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?";
 
     if($idUsuarioLogin != false){
       $sql .= " AND id_usuario_login <> ".$idUsuarioLogin;
@@ -216,8 +216,7 @@ public static function existeUsername($username){
     return $rs2 = $GLOBALS['db']->auto_array($sql,array($idUsuario)); 
   }
 
-  public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto,$tipo_usuario){
-
+  public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto,$tipo_usuario){    
     $foto = 0;
     if($imagen['error'] != 4)
     { 

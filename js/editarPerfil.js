@@ -1158,11 +1158,12 @@ function searchAjax(obj,tipo_dni){
       dataType:'json',
       async: false,
       success:function(data){
+
           if($.trim(data.resultado)){
-            val_retorno1 = false;
+            val_retorno1 = true;
           }
           else{
-            val_retorno1 = true;
+            val_retorno1 = false;
           }
       },
       error: function (request, status, error) {
@@ -1170,6 +1171,7 @@ function searchAjax(obj,tipo_dni){
       }
     });
   }
+  console.log(val_retorno1);
   return val_retorno1;
 }
 

@@ -302,7 +302,7 @@ function validarOnSubmit(){
 
 // Campo documentoCandEmp-------------------------------------
 	if(camposavalidar[5].val() != ""){
-		if(!DniRuc_Validador(camposavalidar[5])){
+		if(!DniRuc_Validador(camposavalidar[5], $('#tipo_documentacion').val())){
 			if(!verificarExiste(camposavalidar[5])){
 				crearMensajeError(camposavalidar[5], "El documento ingresado ya existe");
 			}
@@ -584,7 +584,7 @@ $('#modal_registro').on('show.bs.modal', function(){
 	if($('#documentoCandEmp').length){
 		$('#documentoCandEmp').on('blur', function(){
 			if($(this).val() != ""){
-				if(!DniRuc_Validador($(this))){
+				if(!DniRuc_Validador($(this), $('#tipo_documentacion').val())){
 					if(!verificarExiste($(this))){
 						crearMensajeError($(this), "El documento ingresado ya existe");
 					}

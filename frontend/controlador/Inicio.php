@@ -10,13 +10,10 @@ class Controlador_Inicio extends Controlador_Base {
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
-    // $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
-    //$arrinteres = Modelo_Interes::obtieneListado();
+    
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
-    // $areas = Modelo_Area::obtieneListado();
-    // $areas_sub = Modelo_AreaSubarea::obtieneAreas_Subareas();
-    // var_dump($areas_sub);
+    
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
                   'nro_candidato'=>$nro_candidato,
@@ -39,14 +36,24 @@ class Controlador_Inicio extends Controlador_Base {
     // $tags["template_js"][] = "registrar";
     // $tags["template_js"][] = "mic";
 
-
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
-      default:         
+      case 'buscaCorreo':        
+        $correo = Utils::getParam('correo', '', $this->data);
+        $datocorreo = Modelo_Usuario::existeCorreo($correo);
+        //Utils::log($datocorreo);
+        Vista::renderJSON(array("respcorreo"=>$datocorreo));
+      break;
+      case 'buscaDni':
+        $dni = Utils::getParam('dni', '', $this->data);
+        $datodni = Modelo_Usuario::existeDni($dni);
+        //Utils::log($datodni);
+        Vista::renderJSON(array("respdni"=>$datodni));
+      break;
+      default:    
         Vista::render('inicio', $tags);
       break;
     }
-
     
   }
 }  

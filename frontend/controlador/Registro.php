@@ -124,7 +124,7 @@ class Controlador_Registro extends Controlador_Base {
       }
 
     }
-    
+
     // generar username
     // username para candidato
     $nombreCorreo = array();
@@ -142,6 +142,7 @@ class Controlador_Registro extends Controlador_Base {
     $datosReg = array_merge($datosReg, $nombreCorreo);
 
     return $datosReg;
+
   }
 
   public function guardarDatosUsuario($datosValidos){
@@ -175,6 +176,7 @@ class Controlador_Registro extends Controlador_Base {
                       "genero"=>'M',/*--*/
                       "id_usuario_login"=>$id_usuario_login, 
                       "tipo_usuario"=>$datosValidos['tipo_usuario']);/**/
+
 
       if(!Modelo_Usuario::crearUsuario($data)){
         throw new Exception("Ha ocurrido un error, intente nuevamente usuario");

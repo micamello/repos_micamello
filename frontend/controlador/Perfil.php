@@ -17,7 +17,7 @@ class Controlador_Perfil extends Controlador_Base
             case 'buscarDni':
                 $dni = Utils::getParam('dni', '', $this->data); 
                 //Permite determinar si el documento ingresado ya esta registrado en base de datos
-                $datodni = Modelo_Usuario::existeDni($dni,$_SESSION['mfo_datos']['usuario']['id_usuario_login']);
+                $datodni = Modelo_Usuario::existeDni($dni);
                 Vista::renderJSON(array('resultado' => $datodni));
             break;
             case 'buscaDependencia':
@@ -45,7 +45,7 @@ class Controlador_Perfil extends Controlador_Base
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
 
-                $areas = $GLOBALS['areas'];
+                $areas = $GLOBALS['areasSubareas'];
 
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
@@ -177,7 +177,7 @@ class Controlador_Perfil extends Controlador_Base
             }
 
             $data = $this->camposRequeridos($campos);
- 
+                        
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
@@ -212,7 +212,11 @@ class Controlador_Perfil extends Controlador_Base
                         throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
                     }
                 }
+                if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::EMPRESA)){
+                  throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
+                }
             }
+
             $validaTlf = Utils::valida_telefono($data['telefono']);
             if (empty($validaTlf)) {
                 throw new Exception("El telefono " . $data['telefono'] . " no es v\u00E1lido");
@@ -224,6 +228,7 @@ class Controlador_Perfil extends Controlador_Base
             if (empty($validaFecha)) {
                 throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es v\u00E1lida");
             }
+            
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
                 if (empty($validaFechaNac)) {
@@ -232,23 +237,29 @@ class Controlador_Perfil extends Controlador_Base
                 if(strlen($data['apellidos']) > 100){
                     throw new Exception("Apellidos: " . $data['apellidos'] . " supera el l\u00CDmite permitido");
                 }
+                if (!Utils::alfabetico($data['apellidos'],Modelo_Usuario::CANDIDATO)){
+                  throw new Exception("Apellidos: " . $data['apellidos'] . " formato no permitido");  
+                }
+                if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::CANDIDATO)){
+                  throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
+                }
             }
             if(strlen($data['nombres']) > 100){
-                throw new Exception("Nombres: " . $data['nombres'] . " supera el l\u00CDmite permitido");
+              throw new Exception("Nombres: " . $data['nombres'] . " supera el l\u00CDmite permitido");
             }
+
             $GLOBALS['db']->beginTrans();
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
-                $dependencia    = Modelo_Escolaridad::obtieneDependencia($data['escolaridad']);
+                $dependencia    = Modelo_Escolaridad::obtieneDependencia($data['escolaridad']);                
                 if($dependencia['dependencia'] == 0 || ($_POST['universidad'] != '' || $_POST['universidad2'] != '')){
-                    
                     if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
                       if($_POST['lugar_estudio'] == 1 && strlen($data['universidad2']) > 100){
                         throw new Exception("El nombre de la universidad: " . $data['universidad2'] . " supera el l\u00CDmite permitido");
                       }
                     }            
-     
+          
                     $datodni = Modelo_Usuario::existeDni($data['dni'],$_SESSION['mfo_datos']['usuario']['id_usuario_login']);
-                    if (empty($datodni)){
+                    if (!empty($datodni)){                        
                       throw new Exception("La c\u00E9dula o pasaporte ".$data["dni"]." ya existe");
                     }
 
@@ -257,13 +268,14 @@ class Controlador_Perfil extends Controlador_Base
                             throw new Exception("Ha ocurrido un error al guardar la c\u00E9dula , intente nuevamente");
                         }
                     }
+
                     if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
                         throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
                     }
                 }else{
                     throw new Exception("Debe ingresar una universidad");
                 }
-            }else{
+            }else{                  
                 if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
                     throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
                 }
@@ -350,6 +362,7 @@ class Controlador_Perfil extends Controlador_Base
             $GLOBALS['db']->commit();
             Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario));
             $_SESSION['mostrar_exito'] = 'El perfil fue completado';
+            
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $GLOBALS['db']->rollback();
