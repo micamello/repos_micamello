@@ -1,4 +1,4 @@
-.obligatorio{
+﻿.obligatorio{
 	color: red;
 }
 
@@ -136,6 +136,12 @@ ul.list_content_mic > li:last-child {
 	cursor: pointer;
 }
 
+.reveal_content:hover{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	cursor: pointer;
+	border-radius: 0 50px 50px 0;
+}
+
 .subarea_disabled{
 	display: none;
 }
@@ -148,6 +154,8 @@ ul.list_content_mic > li:last-child {
 
 .area_with_subarea{
 	background-color: #B2B0B0;
+	color: black;
+	font-weight: bold;
 }
 
 .button_selected{
@@ -166,29 +174,48 @@ ul.list_content_mic > li:last-child {
 }
 
 .modal_selected_list{
-	padding: 5px;
-	background: #FFFFFF;
-	border: outset;
+	/*padding: 1px;*/
+	border: solid #56B78A;;
+	background-color: #56B78A;;
 	border-radius: 20px;
-	/*margin: 20px;*/
-	color: black;
+	color: white;
 	white-space: nowrap;
   	overflow: hidden;
   	text-overflow: ellipsis;
+  	font-weight: bold;
+  	/*margin: 5px 2px 5px 2px;*/
 }
 
 .modal_selected_list > i{
 	/*right: 0;*/
 	float: right;
-	background-color: red;
+	/*position: fixed;*/
+	background-color: #337699;
 	border-radius: 50%;
 	padding: 8px;
-	margin: -4px -4px 0 0;
+	/*margin: -4px -4px 0 0;*/
 	color: white;
+	cursor: pointer;
 }
 
 .subarea_disabled_1{
 	/*//This makes it not clickable*/
 	pointer-events:none; 
     opacity:0.6;  
+}
+
+.seleccion_e{
+	font-weight: bold;
+}
+
+input.form-control{
+	border-radius: 15px;
+}
+
+select.form-control{
+	border-radius: 15px;
+}
+
+.check_box{
+	text-align: justify;
 }

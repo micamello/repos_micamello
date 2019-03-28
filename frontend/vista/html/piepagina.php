@@ -17,6 +17,22 @@
   </div>
 </div>
 
+<div class="modal fade" id="modal_select" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+      <div class="modal-body" style="overflow: scroll">
+        <!-- <div class="col-md-12" id="modalmodal"> -->
+          
+        <!-- </div> -->
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" style="z-index:9999">

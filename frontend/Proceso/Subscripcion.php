@@ -86,7 +86,7 @@ class Proceso_Subscripcion{
         }
       }
 
-      $nombres = $infousuario["nombres"]." ".(isset($infousuario["apellidos"]) ? $infousuario["apellidos"] : "");
+      $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
 
 	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
                                  $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments);
@@ -123,8 +123,6 @@ class Proceso_Subscripcion{
     $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_SUBSCRIPCION");
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
-  	//$email_body = "Estimado, ".utf8_encode($nombres)."<br>";
-    //$email_body .= "Su plan (".utf8_encode($plan).") ha sido activado exitosamente <br>";
     $notif_body = $email_body;
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $mensaje = "Por favor de click en este enlace para realizar el tercer formulario "; 

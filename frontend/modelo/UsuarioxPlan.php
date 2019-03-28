@@ -152,13 +152,15 @@ class Modelo_UsuarioxPlan{
   public static function obtienePlanComprobante($txnid,$usuario,$plan,$tipousu){
     if (empty($txnid) || empty($usuario) || empty($plan) || empty($tipousu)){ return false; }
     if ($tipousu == Modelo_Usuario::CANDIDATO){
-      $sql = "SELECT u.id_usuario_plan, c.id_comprobante FROM mfo_rcomprobantescam c
+      $sql = "SELECT u.id_usuario_plan, c.id_comprobante, u.fecha_compra 
+              FROM mfo_rcomprobantescam c
               INNER JOIN mfo_usuario_plan u ON u.id_comprobante = c.id_comprobante
               WHERE c.num_comprobante = ? AND u.estado = 1 AND u.id_usuario = ? AND 
                     c.id_user_emp = ? AND c.id_plan = ? AND u.id_plan = ? LIMIT 1";
     }
     else{
-      $sql = "SELECT e.id_empresa_plan AS id_usuario_plan, c.id_comprobante FROM mfo_rcomprobantescam c 
+      $sql = "SELECT e.id_empresa_plan AS id_usuario_plan, c.id_comprobante, e.fecha_compra 
+              FROM mfo_rcomprobantescam c 
               INNER JOIN mfo_empresa_plan e ON e.id_comprobante = c.id_comprobante
               WHERE c.num_comprobante = ? AND e.estado = 1 AND e.id_empresa = ? AND 
                     c.id_user_emp = ? AND c.id_plan = ? AND e.id_plan = ? LIMIT 1";
