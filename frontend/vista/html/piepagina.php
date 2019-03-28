@@ -1,4 +1,4 @@
-﻿  </section>
+﻿</section>
 
 <div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
   <div class="modal-dialog" role="document">    
@@ -242,7 +242,7 @@
 
 <?php } ?>
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
-<div id="grafico" style="width: 100%; max-width:900px; height: 500px; visibility: hidden;"></div>
+<!--<div id="grafico" style="width: 100%; max-width:900px; height: 500px; visibility: hidden;"></div>-->
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 <section id="action" class="banner_info_email">
                 <div class="container">
@@ -334,9 +334,6 @@
       </div>
     </div>
   </div>
-<?php 
-              var_dump($areas_sub); ?>
-
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
@@ -354,8 +351,30 @@ if (isset($template_js) && is_array($template_js)){
   }  
 }
 ?>
-<script type="text/javascript">
-  
-</script>
+<!--mensajes de error y exito-->
+<?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
+  /*<div align="center" id="alerta" style="display:" class="alert alert-danger" role="alert">
+    <strong><?php #echo $sess_err_msg;?></strong>
+  </div>  */
+  echo "<script type='text/javascript'>
+        $(document).ready(function(){
+          swal('Advertencia!', '".$sess_err_msg."', 'error');
+        });
+      </script>";
+}?>
+
+<?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
+  /*<div align="center" id="alerta" style="display:" class="alert alert-success" role="alert">
+    <strong><?php #echo $sess_suc_msg;?></strong>
+  </div>  */
+  echo "<script type='text/javascript'>
+        $(document).ready(function(){
+          swal('Exitoso!', '".$sess_suc_msg."', 'success');
+        });
+      </script>";
+} ?>
+    
 </body>
 </html>
+
+   

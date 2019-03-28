@@ -11,34 +11,29 @@
 	var expreg2 = /^[a-zA-Z0-9]+$/i;
 	var decimo_digito = 0;
 
-	function DniRuc_Validador(obj){
-		// console.log(obj);
-		// return false;
-		var val_retorno = false;
-		tipo = 0;
-		// if($('#tipo_doc').length){
-		// 	tipo = $('#tipo_doc').val();
-		// }
-		if($('#tipo_documentacion').length){
-			tipo = $('#tipo_documentacion').val();
-		}
+	function DniRuc_Validador(obj,tipo){
 
-		console.log(tipo);
-			// tipo = $('#tipo_doc').val();
+		var val_retorno = false;
 			valor = $(obj).val();
+
 			// codigo de provincia entre 0 y 24
 			provincia = valor.substr(0,2);
 				if(valor != "" || valor != null){
+
 					if(tipo != 3){
+
 						if(!expreg.test(valor) || (provincia < 1 || provincia > numeroProvincias)){
 							val_retorno =  true;
+							console.log(valor);
 						}
 						else{
 								val_retorno =  false;
+								console.log('entro');
 						}
 					}
 			// ********************** validar tipo 2 == cedula************************
 					if(tipo == 2){
+
 						if(procesoValidacionPersonaNatural(tipo, valor) == 1){
 								val_retorno =  false;
 						}
@@ -115,6 +110,7 @@
 					  	}
 				    // }
 			}
+
 	    return retorno_val;
 	}
 
@@ -190,4 +186,3 @@
 		}
 		return retorno_val;
 	}
-
