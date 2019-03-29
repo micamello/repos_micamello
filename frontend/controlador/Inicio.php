@@ -34,7 +34,7 @@ class Controlador_Inicio extends Controlador_Base {
     // $tags["template_js"][] = "ruc_jquery_validator";
     // $tags["template_js"][] = "bootstrap-multiselect";
     // $tags["template_js"][] = "registrar";
-    // $tags["template_js"][] = "mic";
+    //$tags["template_js"][] = "mic";
 
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){

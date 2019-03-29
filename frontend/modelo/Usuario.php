@@ -783,7 +783,7 @@ public static function existeUsername($username){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }   
-      $nrotest = Modelo_Cuestionario::totalTest();             
+      /*$nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
@@ -803,7 +803,7 @@ public static function existeUsername($username){
         if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
         }                         
-      }                
+      }*/                
     }
     //si es empresa
     else{  
