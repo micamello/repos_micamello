@@ -454,11 +454,11 @@ class Controlador_Oferta extends Controlador_Base{
             Utils::doRedirect(PUERTO.'://'.HOST.'/');               
           }
 
-          if(isset($_SESSION['mfo_datos']['planes'])){            
-            $planes = $_SESSION['mfo_datos']['planes'];
-          }else{
-            $planes = null;
-          }
+          //if(isset($_SESSION['mfo_datos']['planes'])){            
+          //  $planes = $_SESSION['mfo_datos']['planes'];
+          //}else{
+          //  $planes = null;
+          //}
           //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
 
           $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
