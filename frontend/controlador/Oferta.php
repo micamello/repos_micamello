@@ -31,7 +31,7 @@ class Controlador_Oferta extends Controlador_Base{
 
       if($vista == 'oferta'){
         
-        Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
+        //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
       }
 
       if(!isset($_SESSION['mfo_datos']['Filtrar_ofertas']) || $opcion == '' || $opcion == 'vacantes' || $opcion == 'cuentas'){
@@ -293,7 +293,7 @@ class Controlador_Oferta extends Controlador_Base{
           }
 
           $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
-
+          Utils::log("PASO POR AQUI ".print_r($oferta,true));
           if (Utils::getParam('postulado') == 1) {
           
             if(!empty($status)){
@@ -605,29 +605,6 @@ class Controlador_Oferta extends Controlador_Base{
           $this->redirectToController('detalle_oferta');
       }
     }
-
-    /*public static function calcularRuta($ruta,$letraDescartar){
-      foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $key => $v) {
-        if($letraDescartar != $key){
-          if($key == 'A' && $v != 0){
-              $ruta .= 'A'.$v.'/';
-          }
-          if($key == 'P' && $v != 0){
-              $ruta .= 'P'.$v.'/';
-          }
-          if($key == 'J' && $v != 0){
-              $ruta .= 'J'.$v.'/';
-          }
-          if($key == 'S' && $v != 0){
-              $ruta .= 'S'.$v.'/';
-          }
-          if($key == 'Q' && $v != 0){
-              $ruta .= 'Q'.$v.'/';
-          }
-        }
-      }
-      return $ruta;
-    }*/
 
     public static function devolverPostulaciones($ids_planes){
 

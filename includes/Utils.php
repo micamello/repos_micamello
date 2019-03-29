@@ -49,6 +49,8 @@ class Utils{
   }
 
   static public function enviarEmail($parametros){
+    Utils::log(print_r($parametros, true));
+    // exit();
     $url = "";
     $asunto = "";
     $body = "";
@@ -70,7 +72,7 @@ class Utils{
                               $url, 
                               $text_button
                             ), 
-                        $template['contenido']);
+                        utf8_encode($template['contenido']));
         break;
         case 2:
             $asunto = "Credenciales de cuenta mi camello";
@@ -86,7 +88,7 @@ class Utils{
                               $parametros['correo'], 
                               $parametros['password']
                             ),
-                          $template['contenido']);
+                          utf8_encode($template['contenido']));
         break;
         case 3:
             $asunto = "Creación de cuenta";
@@ -99,7 +101,7 @@ class Utils{
                               $parametros['correo'], 
                               $parametros['password']
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
         break;
         case 4:
             $asunto = "Recuperación de Contraseña";
@@ -112,7 +114,7 @@ class Utils{
                               $url, 
                               $text_button, 
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
         break;
         case 5:
             $asunto = "Activación de Usuario";
@@ -128,7 +130,7 @@ class Utils{
                               $parametros['correo'],
                               $parametros['password']
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
         break;
         case 6:
             $asunto = "Error Cron PreRegistro";
@@ -137,7 +139,7 @@ class Utils{
                         array(
                               $parametros['mensaje']
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
         break;
         case 7:
             $asunto = "Recomendaciones o sugerencias";
@@ -150,7 +152,7 @@ class Utils{
                               $parametros['correo1'], 
                               $parametros['telefono']
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
         break;
         case 8:
             if($parametros['asunto'] != "" || $parametros['asunto'] != null){
@@ -168,7 +170,7 @@ class Utils{
                               $cabecera,
                               $logo_tipo_mensaje
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
             print_r($body);
             exit();
         break;
@@ -186,7 +188,7 @@ class Utils{
                               $logo_tipo_mensaje, 
                               $parametros['type']['contenido']
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
         break;
         case 10:
         // var_dump($parametros);exit();
@@ -205,7 +207,7 @@ class Utils{
                               $nombre_plan,
                               $fecha_plan
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
         break;
         case 11:
             if($parametros['type']['asunto'] != "" || $parametros['type']['asunto'] != null){
@@ -224,7 +226,7 @@ class Utils{
                               $logo_tipo_mensaje,
                               $mensaje
                             )
-                      , $template['contenido']);
+                      , utf8_encode($template['contenido']));
             print_r($body);
             exit();
         break;
@@ -232,6 +234,12 @@ class Utils{
             
         break;
       }
+      // Utils::log(utf8_encode($template['contenido']));
+      // Utils::log($body);
+      // Utils::log(print_r(TAGS_REPLACE_T1,true));
+      // print_r($body);
+      // exit();
+
     $template_data = array('asunto'=>$asunto, 'body'=>$body);
     $asunto = $template_data['asunto'];
     $body = $template_data['body'];
@@ -525,7 +533,10 @@ class Utils{
     return date('Y-m-d H:i:s',$dias_antes);
   }
 
-  public static function generarUsername($name){    
+  public static function generarUsername($name){   
+    if(strlen($name) > 50){
+      $name = substr($name, 1, 49);
+    } 
     $count = 0;
     $username = ($name);
     $username_generated = $username;
@@ -857,7 +868,7 @@ class Utils{
 //     case 'REGISTRO_MANUAL':
 //         $asunto = "Activación de cuenta";
 //         $url = PUERTO."://".HOST."/registro/".$parametros['token']."/";
-//         $body = str_replace(array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%"), array($parametros['nombres_mostrar'], $parametros['usuario_login'], $url), $template['contenido']);
+//         $body = str_replace(array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%"), array($parametros['nombres_mostrar'], $parametros['usuario_login'], $url), utf8_encode($template['contenido']));
 //       break;
 //     case 'REGISTRO_RED_SOCIAL':
 //         $asunto = "Credenciales de cuenta mi camello";
@@ -869,6 +880,39 @@ class Utils{
 //   $result = array('asunto'=>$asunto, 'body'=>$body);
 //   return $result;
 // }
+
+
+// Validaciones que se utilizan en el registro
+  public static function validarNombreApellido($dato){
+    return (! preg_match("/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{4,}$/", $dato)) ? false : true;
+  }
+
+  public static function validarNombreEmpresa($dato){
+    // return (! preg_match("/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{4,}$/", $dato)) ? false : true;
+    if(preg_match("/^[a-zA-ZÁÉÍÓÚñáéíóúÑ0-9&.,' ]{4,}$/", $dato) && preg_match("/(.*[a-zA-ZÁÉÍÓÚñáéíóúÑ]){3}/", $dato)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  public static function validarTelefono($dato){
+    return (! preg_match("/^[0-9]{10,15}$/", $dato)) ? false : true;
+  }
+
+  public static function validarPassword($dato){
+    return (! preg_match("/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/", $dato)) ? false : true;
+  }
+
+  public static function passCoinciden($dato1, $dato2){
+    if($dato1 == $dato2){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
 
 }
 ?>

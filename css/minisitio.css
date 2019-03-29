@@ -135,6 +135,10 @@ ul{text-align: left; padding-left: 20px;}
   animation: bounce 1s;
 }
 
+.bounce{
+  animation: bounce 0.7s;
+}
+
 .order_priority{
   background-color: #80CAEC;
   border-radius: 20px;
@@ -158,8 +162,8 @@ ul{text-align: left; padding-left: 20px;}
   }
 
   40% {
-    -webkit-transform: translateY(-20px);
-    transform: translateY(-20px);
+    -webkit-transform: translateY(-50px);
+    transform: translateY(-50px);
   }
 
   80% {
@@ -167,6 +171,53 @@ ul{text-align: left; padding-left: 20px;}
     transform: translateY(-10px);
   }
 }
+
+/*formas respuestas*/
+.label_double_opcion:hover{
+  cursor: pointer;
+}
+
+.text_origen{
+  background-color: #E6E4E4;
+  border: dashed;
+  border-color: #CFC7C7;
+  border-radius: 5px;
+  min-height: 70px;
+  padding: 5px 10px 5px 10px;
+  cursor: pointer;
+}
+
+.div_destino{
+  border: dashed;
+  border-radius: 5px;
+}
+
+.delete_icon{
+  background-color: #FFFFFF;
+  padding: 10px 10px 10px 10px;
+  border-radius: 50px;
+  float: left; 
+
+}
+
+.delete_icon:hover{
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
+.text_destino{
+  background-color: #C8DAE4;
+  border: dashed;
+  border-color: #C8DAE4;
+  border-radius: 5px;
+  min-height: 70px;
+  padding: 15px 20px 15px 20px;
+  text-align: center;
+}
+
+.respuesta{
+  text-align: right;
+}
+
 
 /*.eder{
   white-space: nowrap;

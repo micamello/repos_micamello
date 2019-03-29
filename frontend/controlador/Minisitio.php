@@ -726,7 +726,7 @@ class Controlador_Minisitio extends Controlador_Base
     $mpdf->WriteHTML($enddoc);   
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
     $mpdf->WriteHTML($html);
-    $mpdf->Output($nombre_archivo, 'D');
+    $mpdf->Output($nombre_archivo, 'I');
   }
 }
 ?>

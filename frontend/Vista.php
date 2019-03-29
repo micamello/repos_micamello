@@ -77,8 +77,8 @@ class Vista {
     $menu = array();
     if( !Modelo_Usuario::estaLogueado() ){
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
-      $menu["menu"][] = array("href"=>"#", "onclick"=>"modal_set(1);", "nombre"=>"Registro Candidato");
-      $menu["menu"][] = array("href"=>"#", "onclick"=>"modal_set(2);", "nombre"=>"Registro Empresa");
+      $menu["menu"][] = array("href"=>"#", "id"=>"regCandMic", "nombre"=>"Registro Candidato");
+      $menu["menu"][] = array("href"=>"#", "id"=>"regEmpMic", "nombre"=>"Registro Empresa");
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/login/", "nombre"=>"Iniciar Sesi&oacute;n");
     }
     else{      

@@ -1510,8 +1510,8 @@ function StartProgressBarOutput($mode=1) {
 		</div>
 	   ';
 	}
-	ob_flush();
-      flush();
+	// ob_flush();
+      // flush();
 }
 
 function UpdateProgressBar($el,$val,$txt='') {
@@ -1535,8 +1535,8 @@ function UpdateProgressBar($el,$val,$txt='') {
 		echo ' document.getElementById(\'box6\').innerHTML=\''.$m2.'MB / \'; ';
 	}
 	echo '</script>'."\n";
-	ob_flush();
-	flush();
+	// ob_flush();
+	// flush();
 }
 /*-- END PROGRESS-BAR --*/
 
@@ -1743,7 +1743,7 @@ function SetVisibility($v) {
 
 function Error($msg) {
 	//Fatal error
-	header('Content-Type: text/html; charset=utf-8');
+	// header('Content-Type: text/html; charset=utf-8');
 	die('<B>mPDF error: </B>'.$msg);
 }
 
@@ -7720,9 +7720,9 @@ function Output($name='',$dest='')
 			break;
 		   case 'D':		   
 			//Download file
-      flush();
+      // flush();
 
-			header('Content-Description: File Transfer');
+			// header('Content-Description: File Transfer');
 			
 			if (headers_sent())
 				$this->Error('Some data has already been output to browser, can\'t send PDF file');

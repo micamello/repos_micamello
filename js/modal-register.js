@@ -43,17 +43,22 @@ function modal_set(id)
 
 	if ($('#area_group')) {
 		var area_group = document.getElementById("area_group");
-		var area_select = document.getElementById("area_select");
+		var area_select = document.getElementById("area");
 	}
 
-	if ($('#nivel_group')) {
-		var nivel_group = document.getElementById("nivel_group");
-		var nivel_interes = document.getElementById("nivel_interes");
+	if ($('#subarea_group')) {
+		var subarea_group = document.getElementById("subarea_group");
+		var area_select = document.getElementById("subareas");
 	}
 
-	if ($('#nivel_group')) {
+	// if ($('#nivel_group')) {
+	// 	var nivel_group = document.getElementById("nivel_group");
+	// 	var nivel_interes = document.getElementById("nivel_interes");
+	// }
+
+	// if ($('#nivel_group')) {
 		var tipo_usuario = document.getElementById("tipo_usuario");
-	}
+	// }
 
 	if ($('#group_nombre_contact')) {
 		var group_nombre_contact = document.getElementById("group_nombre_contact");
@@ -113,8 +118,9 @@ function modal_set(id)
 		// apell_user.required = true;
 		dni_text.innerHTML = "C&eacute;dula / Pasaporte&nbsp;<i class='requerido'>*</i>";
 		area_group.style.display = "";
+		subarea_group.style.display = "";
 		// area_select.required = true;
-		nivel_group.style.display = "";
+		// nivel_group.style.display = "";
 		// nivel_interes.required = true;
 
 		group_nombre_contact.style.display = "none";
@@ -160,8 +166,9 @@ function modal_set(id)
 		// apell_user.required = false;
 		dni_text.innerHTML = "RUC&nbsp;<i class='requerido'>*</i>";
 		area_group.style.display = "none";
+		subarea_group.style.display = "none";
 		// area_select.required = false;
-		nivel_group.style.display = "none";
+		// nivel_group.style.display = "none";
 		// nivel_interes.required = false;
 
 		group_nombre_contact.style.display = "";

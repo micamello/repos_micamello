@@ -8,8 +8,8 @@ class Controlador_RegTest extends Controlador_Base {
     if(isset($_SESSION['id_pregunta'])){
       unset($_SESSION['id_pregunta']);
     }
-  	$opcion = Utils::getParam('opcion','',$this->data);
-  	switch($opcion){
+    $opcion = Utils::getParam('opcion','',$this->data);
+    switch($opcion){
       case 'buscaProvincia':
         $id_pais = Utils::getParam('id_pais', '', $this->data);
         $provincias = Modelo_Provincia::obtieneListadoAsociativo($id_pais);
@@ -30,8 +30,8 @@ class Controlador_RegTest extends Controlador_Base {
         $this->guardarDatosTest();
       break;
       default:
-      	$pais = Modelo_Pais::obtieneListado();
-      	$provincia = Modelo_Provincia::obtieneListado();
+        $pais = Modelo_Pais::obtieneListado();
+        $provincia = Modelo_Provincia::obtieneListado();
         $escolaridad = Modelo_Escolaridad::obtieneListado();
         $profesion = Modelo_ProfesionTest::obtenerListado();
         $ocupacion = Modelo_Ocupacion::obtenerListado();

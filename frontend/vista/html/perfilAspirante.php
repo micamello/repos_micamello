@@ -1,5 +1,4 @@
 <div class="container">
-	<!-- <?php print_r("eder: ".$id_oferta.$vista); ?> -->
 		<br><br><br><br><br><br>
 	<div class="col-md-10 col-md-offset-1" id="contenido_imprimir">
 		<div class="panel panel-default shadow">

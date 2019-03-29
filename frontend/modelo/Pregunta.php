@@ -5,7 +5,7 @@ class Modelo_Pregunta{
   const INVERSA = 2;
   
   public static function obtieneNroPreguntasxTest($test){
-  	if (empty($test)){ return false; }
+    if (empty($test)){ return false; }
     $sql = "SELECT COUNT(1) AS nro FROM mfo_pregunta WHERE id_cuestionario = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($test));
     return ((empty($rs["nro"])) ? 0 : $rs["nro"]);

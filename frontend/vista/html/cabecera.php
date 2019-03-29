@@ -31,13 +31,12 @@
   <link href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
 
+
   <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap-multiselect.css">
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
-
-
+  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/micamello.css">
+ 
   <?php
     if (isset($template_css) && is_array($template_css)){
       foreach($template_css as $file_css){
@@ -47,18 +46,6 @@
   ?>
 <!-- $_SESSION['registro']); -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
-
-  <?php if(isset($_SESSION['registro']) == 1){
-    $mensaje = "Te has registrado correctamente. Revisa tu cuenta de correo o bandeja de spam";
-    echo "<script type='text/javascript'>
-            $(document).ready(function(){
-              swal('Registro exitoso!', '".$mensaje."', 'success');
-            });
-          </script>";
-    } 
-  if(isset($_SESSION['registro'])){
-    unset($_SESSION['registro']);
-  } ?>
   
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -184,7 +171,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
               if (isset($menu["menu"])){   
                 foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                   <li>
-                    <a onclick="<?php echo (isset($optmnu["onclick"])) ? $optmnu["onclick"] : "";?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
+                    <a id="<?php echo $optmnu["id"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
                     <p class="hidden_small"><i class="fa fa-home fa-2x"></i></p>';  }else{ echo $optmnu["nombre"]; } ?></a>
                   </li>                            
                 <?php } ?>
@@ -202,7 +189,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                 <?php if (isset($menu["submenu"])){ ?>                            
                   <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                      <?php echo $_SESSION['mfo_datos']['usuario']['nombres'].(isset($_SESSION['mfo_datos']['usuario']['apellidos']) ? ' '.$_SESSION['mfo_datos']['usuario']['apellidos'] : ''); ?>&nbsp;&nbsp;&nbsp;<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+                      <?php echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).(isset($_SESSION['mfo_datos']['usuario']['apellidos']) ? ' '.utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']) : ''); ?>&nbsp;&nbsp;&nbsp;<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
                       <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                         echo "usericon_safari";
                       } ?>"><i class="fa fa-caret-down"></i>
@@ -232,7 +219,7 @@ if(isset($show_banner)){ ?>
           <div class="hello_slid">
             <div class="slid_item">
               <div class="home_text ">
-                <h2 class="text-white">Bienvenid@ <strong><?php echo $_SESSION['mfo_datos']['usuario']['nombres'].' '; if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])) { echo $_SESSION['mfo_datos']['usuario']['apellidos']; } ?></strong></h2>
+                <h2 class="text-white">Bienvenid@ <strong><?php echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '; if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])) { echo utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']); } ?></strong></h2>
               </div>
             </div>
           </div>
@@ -275,25 +262,4 @@ if(isset($show_banner)){ ?>
   <?php if(!isset($show_banner) && !isset($breadcrumbs)){ ?>
     <br><br><br>
   <?php } ?>
-    <!--mensajes de error y exito-->
-    <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
-      /*<div align="center" id="alerta" style="display:" class="alert alert-danger" role="alert">
-        <strong><?php #echo $sess_err_msg;?></strong>
-      </div>  */
-      echo "<script type='text/javascript'>
-            $(document).ready(function(){
-              swal('Advertencia!', '".$sess_err_msg."', 'error');
-            });
-          </script>";
-    }?>
-
-    <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
-      /*<div align="center" id="alerta" style="display:" class="alert alert-success" role="alert">
-        <strong><?php #echo $sess_suc_msg;?></strong>
-      </div>  */
-      echo "<script type='text/javascript'>
-            $(document).ready(function(){
-              swal('Exitoso!', '".$sess_suc_msg."', 'success');
-            });
-          </script>";
-    } ?>
+    

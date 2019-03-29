@@ -72,7 +72,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			                        <label for="subirCV" class="custom_file">
 			                        	<img id="imagenBtn" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/$imgArch2";?>" width="50px">
 			                        </label>
+
 			                        <?php if($btnDescarga != 1){ echo '<p id="mensaje_error_hv" class="parpadea" style="font-size:16px;color:red;font-weight:bold;">Cargar la hoja de vida es obligatorio *</p>'; } ?>
+
 			                   		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" >
 			                   		<div align="center">
 		                            	<p class="text-center" id="texto_status"><?php echo $msj2; ?></p>
@@ -148,7 +150,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														{ 
 															$option .= " selected='selected'";
 														}
-														$option .= ">".$doc."</option>";
+														$option .= ">".utf8_encode($doc)."</option>";
 													  }
 													  echo $option;
 									                 ?>
@@ -167,7 +169,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                        <div id="seccion_nombre" class="form-group">
 	                                            <label for="nombres"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nombres <span class="requerido" title="Este campo es obligatorio">*</span><?php }else{ ?> Nombre de la empresa<?php } ?></label><div id="err_nom" class="help-block with-errors"></div>
 
-	                                			<input class="form-control" type="text" id="nombres" name="nombres" maxlength="100" value="<?php if(isset($data['nombres'])){ echo $data['nombres']; } else{ echo $_SESSION['mfo_datos']['usuario']['nombres']; } ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+"  onkeyup="validarFormulario()" />
+	                                			<input class="form-control" type="text" id="nombres" name="nombres" maxlength="100" value="<?php if(isset($data['nombres'])){ echo utf8_encode($data['nombres']); } else{ echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']); } ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+"  onkeyup="validarFormulario()" />
 	                                        </div>
 	                                    </div>
 
@@ -176,7 +178,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                        <div id="seccion_apellido" class="form-group">
 		                                            <label for="apellidos">Apellidos<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_ape" class="help-block with-errors"></div>
 
-		                                			<input class="form-control" type="text" id="apellidos" name="apellidos" maxlength="100" value="<?php if(isset($data['apellidos'])){ echo $data['apellidos']; } else{ echo $_SESSION['mfo_datos']['usuario']['apellidos']; } ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+'  onkeyup="validarFormulario()" />
+		                                			<input class="form-control" type="text" id="apellidos" name="apellidos" maxlength="100" value="<?php if(isset($data['apellidos'])){ echo utf8_encode($data['apellidos']); } else{ echo utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']); } ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+'  onkeyup="validarFormulario()" />
 		                                        </div>
 		                                    </div>
 	                                    <?php } ?>

@@ -11,10 +11,11 @@ class Controlador_Recomendacion extends Controlador_Base {
         $campos = array('nombres' => 1, 'correo1' => 1, 'telefono' => 1, 'descripcion' => 1);
         $data = $this->camposRequeridos($campos);
         
-        if(self::envioRecomendaciones(MAIL_SUGERENCIAS,$data)){
+        //if(self::envioRecomendaciones(MAIL_SUGERENCIAS,$data)){
+        if(self::envioRecomendaciones("desarrollo@micamello.com.ec",$data)){  
           $_SESSION['mostrar_exito'] = 'Sus recomendaciones han sido enviadas exitosamente';
         }else{
-          $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones falló, intente de nuevo';
+          $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones fall\u00F3, intente de nuevo';
         }
       }
     } catch (Exception $e) {
@@ -24,11 +25,15 @@ class Controlador_Recomendacion extends Controlador_Base {
     //$tags["template_js"][] = "mic";
     Vista::render('recomendaciones', $tags);
   }
+
   public function envioRecomendaciones($correo,$data){
-    $asunto = "Recomendaciones o sugerencias";
-    $body = "Estimado, ".MAIL_NOMBRE."<br>";
-    $body .= "Sugerencia: ".$data['descripcion']."<br>Este correo fue enviado por ".$data['nombres']." y si desea comunicarse con el destinatario comuniquese al ".$data['correo1']." o al tlf. ".$data['telefono'];
-    if (Utils::envioCorreo($correo,$asunto,$body)){
+    $email_body = Modelo_TemplateEmail::obtieneHTML("SUGERENCIAS");
+    $email_body = str_replace("%NOMBRES%", MAIL_NOMBRE, $email_body);   
+    $email_body = str_replace("%SUGERENCIA%", $data['descripcion'], $email_body);
+    $email_body = str_replace("%USUARIO%", $data['nombres'], $email_body);
+    $email_body = str_replace("%CORREO%", $data['correo1'], $email_body);
+    $email_body = str_replace("%TELEFONO%", $data['telefono'], $email_body);    
+    if (Utils::envioCorreo($correo,"Recomendaciones o Sugerencias",$email_body)){
       return true;
     }
     else{
