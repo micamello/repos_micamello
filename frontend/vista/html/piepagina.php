@@ -217,6 +217,13 @@
           </div>
         </form>
 
+
+        <div class="row">
+          <di class="col-md-12">
+            <hr>
+            <span class="textoInHr" style="font-size: 17px;">O accede con: </span>
+          </di>
+        </div>
       </div>
       <!-- <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
