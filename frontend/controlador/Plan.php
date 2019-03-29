@@ -226,7 +226,7 @@ class Controlador_Plan extends Controlador_Base {
     }
     catch(Exception $e){
       $_SESSION['mostrar_error'] = $e->getMessage();            
-      Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.Utils::encriptar($data["idplan"]).'/');             
+      Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.$data["idplan"].'/');             
     }     
   }
   

@@ -96,7 +96,7 @@
                     <?php 
                       foreach (TIPO_DOCUMENTO as $key => $value) {
                         if($key != 1){
-                          echo "<option value='".$key."'>".$value."</option>";
+                          echo "<option value='".$key."'>".utf8_encode($value)."</option>";
                         }
                       }
                      ?>
