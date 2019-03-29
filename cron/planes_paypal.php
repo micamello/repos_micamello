@@ -71,12 +71,12 @@ function obtenerDatosCliente($custom){
   $usuario = array('plan'=>$datos[0],
                    'id'=>$datos[1], 
                    'tipo'=>$datos[2],
-                   'nombres'=>$datos[3],  
+                   'nombres'=>Utils::no_carac($datos[3]),  
                    'correo'=>$datos[4], 
                    'tipodoc'=>$datos[5], 
                    'telefono'=>$datos[6], 
                    'dni'=>$datos[7], 
-                   'direccion'=>$datos[8]);
+                   'direccion'=>Utils::no_carac($datos[8]));
   $obj = (object) $usuario;  
   return $obj;
 }

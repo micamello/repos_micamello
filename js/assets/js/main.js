@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 function navegador(){
   var agente = window.navigator.userAgent;
   var navegadores = ["Chrome", "Firefox", "Safari", "Opera", "MSIE", "Trident", "Edge"];

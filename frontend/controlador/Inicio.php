@@ -10,7 +10,7 @@ class Controlador_Inicio extends Controlador_Base {
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
-    
+    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
     
@@ -28,7 +28,6 @@ class Controlador_Inicio extends Controlador_Base {
     $tags["template_js"][] = "multiple_select";
     $tags["template_js"][] = "micamello_registro";
     
-
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCorreo':        
@@ -39,8 +38,7 @@ class Controlador_Inicio extends Controlador_Base {
       break;
       case 'buscaDni':
         $dni = Utils::getParam('dni', '', $this->data);
-        $datodni = Modelo_Usuario::existeDni($dni);
-        //Utils::log($datodni);
+        $datodni = Modelo_Usuario::existeDni($dni);        
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
       default:    
