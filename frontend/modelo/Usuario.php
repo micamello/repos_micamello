@@ -778,7 +778,7 @@ public static function existeUsername($username){
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
-      //si no tiene hoja de vida cargada       
+      //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -798,13 +798,13 @@ public static function existeUsername($username){
       }
       elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {                
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
-      } */ 
+      }*/ 
       else{           
         if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
         }                         
-      }              
-    }
+      }
+    }  
     //si es empresa
     else{  
       if (isset($planes)){
@@ -813,8 +813,8 @@ public static function existeUsername($username){
       else{
         $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
-      }          
-    }
+      } 
+    }    
   }
 
   public static function aspSalarial($id_usuario, $id_oferta){

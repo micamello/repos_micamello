@@ -57,7 +57,7 @@
                                               <div class="col-md-6">
                                                   <div class="form-group" id="dni_group">
                                                     <p class="text-center text_form">RUC&nbsp;<i class="requerido">*</i></p><div id="dni_error" class="help-block with-errors"></div>
-                                                    <input type="text" name="dni" id="dni" maxlength="25" class="form-control">
+                                                    <input type="text" name="dni" id="dni" onkeydown="return validaNumeros(event)" maxlength="25" class="form-control">
                                                   </div>
                                               </div>
 

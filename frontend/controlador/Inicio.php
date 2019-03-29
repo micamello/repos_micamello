@@ -10,7 +10,7 @@ class Controlador_Inicio extends Controlador_Base {
     $nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     $nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     $nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
-    
+    $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
     
@@ -19,23 +19,15 @@ class Controlador_Inicio extends Controlador_Base {
                   'nro_candidato'=>$nro_candidato,
                   'nro_empresa'=>$nro_empresa,
                   'arrarea'=>$arrarea,
-                  //'intereses'=>$arrinteres,
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg,
                   'areasSubareas'=>$GLOBALS['areasSubareas']);
 
-    // $tags["template_js"][] = "modal-register";
-    // $tags["template_js"][] = "validator";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "multiple_select";
     $tags["template_js"][] = "micamello_registro";
     
-    // $tags["template_js"][] = "ruc_jquery_validator";
-    // $tags["template_js"][] = "bootstrap-multiselect";
-    // $tags["template_js"][] = "registrar";
-    //$tags["template_js"][] = "mic";
-
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCorreo':        
@@ -46,8 +38,7 @@ class Controlador_Inicio extends Controlador_Base {
       break;
       case 'buscaDni':
         $dni = Utils::getParam('dni', '', $this->data);
-        $datodni = Modelo_Usuario::existeDni($dni);
-        //Utils::log($datodni);
+        $datodni = Modelo_Usuario::existeDni($dni);        
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
       default:    

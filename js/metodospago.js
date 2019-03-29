@@ -89,8 +89,9 @@ $('#provinciaP').change(function(){
 
 
 $('#btn_submitpaypal').click(function(){  
-  var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
+  var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
   $('#custom').attr('value',valor);
+  console.log('v2: '+valor);
 });
 
 $('#imagen').change(function(e) {
@@ -148,8 +149,9 @@ function validaCampos(tipo){
   }else{    
     $("#"+btn).removeClass('disabled');     
     if(tipo == 1){    
-      var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+$('#nombreP').val()+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+$('#direccionP').val();
+      var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
       $('#custom').attr('value',valor);
+      console.log('v1: '+valor);
       document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
     }
   }
@@ -270,18 +272,37 @@ $('#correoP').on('blur', function(){
 
 $('#tipo_docP').on('change', function(){
 
-    var tipo_docP = document.getElementById('tipo_docP').value;
-    var dniP = document.getElementById('dniP').value;
-    if(tipo_docP != 0){
-      validarSelect(tipo_docP,'err_tipoP','seccion_tipoP','btndeposito');
-      var validar = validarDocumento(dniP,tipo_docP,"err_dniP","seccion_dniP","btn_submitpaypal");
-      if(validar == 1){
-        error = 1;
+    var tipo_doc = document.getElementById('tipo_docP').value;
+
+    if(tipo_doc != 0){
+      if(document.getElementById('dniP').value != ""){
+        if(document.getElementById('dniP').value.length >= 10){
+
+          if(DniRuc_Validador($('#dniP'),tipo_doc) == false){
+            quitarError("err_dniP","seccion_dniP");
+          }else{
+            colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
+            error = 1;      
+          }
+        }else if(tipo_doc == 2 && document.getElementById('dniP').value.length < 10){
+
+          colocaError("err_dniP", "seccion_dniP","El número de cédula debe tener mínimo 10 dígitos","btn_submitpaypal");
+
+        }else if(tipo_doc == 3 && document.getElementById('dniP').value.length < 6){
+
+          colocaError("err_dniP", "seccion_dniP","El pasaporte debe tener mínimo 6 dígitos","btn_submitpaypal");
+        }
+        else if(tipo_doc == 1 && document.getElementById('dniP').value.length < 13){
+
+          colocaError("err_dniP", "seccion_dniP","El RUC debe tener mínimo 13 dígitos","btn_submitpaypal");
+        }
       }else{
-        quitarError("err_dniP","seccion_dniP");
+        colocaError("err_dniP", "seccion_dniP","Documento no puede ser vacío","btn_submitpaypal");
+        error = 1;
       }
+      quitarError("err_tipoP","seccion_tipoP");
     }else{
-      error = validarSelect(tipo_docP,'err_tipoP','seccion_tipoP','btn_submitpaypal');
+      error = validarSelect(tipo_doc,'err_tipoP','seccion_tipoP','btn_submitpaypal');
     }
     validaCampos(1);
 });
@@ -290,7 +311,7 @@ $('#nombreP').on('blur', function(){
 
   var nombres = document.getElementById('nombreP').value;
   if(nombres.length <= '100'){
-    validarInput(nombres,"err_nomP","seccion_nombreP","btn_submitpaypal");
+    validarInput(nombres,"err_nomP","seccion_nombreP","btn_submitpaypal")
     validaCampos(1);
   }else{
     colocaError("err_nomP","seccion_nombreP","El nombre no debe exceder de 100 caracteres","btn_submitpaypal");
@@ -313,11 +334,12 @@ $('#telefonoP').on('blur', function(){
 $('#direccionP').on('blur', function(){
 
   var dir = document.getElementById('direccionP').value;
-  if(dir.length <= '100'){
+
+  if(dir.length >= '10' && dir.length <= '100'){
     validarDir(dir,"err_dirP","seccion_dirP","btn_submitpaypal");
     validaCampos(1);
   }else{
-    colocaError("err_dirP","seccion_dirP","La dirección no debe exceder de 100 caracteres","btn_submitpaypal");
+    colocaError("err_dirP","seccion_dirP","La dirección debe tener una longitud entre 10 y 100 caracteres","btn_submitpaypal");
   }
 });
 
@@ -331,17 +353,34 @@ $('#correo').on('blur', function(){
 $('#tipo_doc').on('change', function(){
 
     var tipo_doc = document.getElementById('tipo_doc').value;
-    var dni = document.getElementById('dni').value;
-
     if(tipo_doc != 0){
+      
+      if(document.getElementById('dni').value != ""){
+        if(document.getElementById('dni').value.length >= 10){
+          if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+            quitarError("err_dni","seccion_dni");
+          }else{
+            colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","btndeposito");
+            error = 1;      
+          } 
+        }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
 
-      validarSelect(tipo_doc,'err_tipo','seccion_tipo','btndeposito');
-      var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","btndeposito");
-      if(validar == 1){
-        error = 1;
+          colocaError("err_dni", "seccion_dni","El número de cédula debe tener mínimo 10 dígitos","btndeposito");
+
+        }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+
+          colocaError("err_dni", "seccion_dni","El pasaporte debe tener mínimo 6 dígitos","btndeposito");
+        }
+        else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
+
+          colocaError("err_dni", "seccion_dni","El RUC debe tener mínimo 13 dígitos","btndeposito");
+        }
       }else{
-        quitarError("err_dni","seccion_dni");
+        colocaError("err_dni", "seccion_dni","Documento no puede ser vacío","btndeposito");
+        error = 1;
       }
+      quitarError("err_tipo","seccion_tipo");
+      
     }else{
       error = validarSelect(tipo_doc,'err_tipo','seccion_tipo','btndeposito');
     }
@@ -358,6 +397,7 @@ $('#nombre').on('blur', function(){
     colocaError("err_nom","seccion_nombre","El nombre no debe exceder de 100 caracteres","btndeposito");
   }
 });
+
 
 $('#num_comprobante').on('blur', function(){
 
@@ -393,11 +433,11 @@ $('#telefono').on('blur', function(){
 $('#direccion').on('blur', function(){
 
   var dir = document.getElementById('direccion').value;
-  if(dir.length <= '100'){
+  if(dir.length <= '10' && dir.length <= '100'){
     validarDir(dir,"err_dir","seccion_dir","btndeposito");
     validaCampos(2);
   }else{
-    colocaError("err_dir","seccion_dir","La dirección no debe exceder de 100 caracteres","btndeposito");
+    colocaError("err_dir","seccion_dir","La dirección debe tener una longitud entre 10 y 100 caracteres","btndeposito");
   }
 });
 
@@ -410,34 +450,73 @@ $('#imagen').on('click', function(){
 
 $('#dni').on('blur', function(){
 
-  var dni = document.getElementById('dni').value;
-  var tipo = document.getElementById('tipo_doc').value;
-  if(tipo != 0){
-    var validar = validarDocumento(dni,tipo,"err_dni","seccion_dni","btndeposito");
-    if(validar == 1){
-      error = 1;
+  var tipo_doc = document.getElementById('tipo_doc').value;
+  if(tipo_doc != 0){
+    if(document.getElementById('dni').value != ""){
+
+      if(document.getElementById('dni').value.length >= 10){
+        if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+          quitarError("err_dni","seccion_dni");
+        }else{
+          colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","btndeposito");
+          error = 1;      
+        } 
+      }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
+
+        colocaError("err_dni", "seccion_dni","El número de cédula debe tener mínimo 10 dígitos","btndeposito");
+
+      }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+
+        colocaError("err_dni", "seccion_dni","El pasaporte debe tener mínimo 6 dígitos","btndeposito");
+      }
+      else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
+
+        colocaError("err_dni", "seccion_dni","El RUC debe tener mínimo 13 dígitos","btndeposito");
+      }
     }else{
-      quitarError("err_dni","seccion_dni");
+      colocaError("err_dni", "seccion_dni","Documento no puede ser vacío","btndeposito");
+      error = 1;
     }
   }else{
-    error = validarSelect(tipo,'err_tipo','seccion_tipo','btndeposito');
+    colocaError("err_dni", "seccion_dni","Debe ingresar un tipo de documento","btndeposito");
+    error = validarSelect(tipo_doc,'err_tipo','seccion_tipo','btndeposito');
   }
   validaCampos(2);
 });
 
 $('#dniP').on('blur', function(){
 
-  var dni = document.getElementById('dniP').value;
-  var tipo = document.getElementById('tipo_docP').value;
-  if(tipo != 0){
-    var validar = validarDocumento(dni,tipo,"err_dniP","seccion_dniP","btn_submitpaypal");
-    if(validar == 1){
-      error = 1;
+  var tipo_doc = document.getElementById('tipo_docP').value;
+  if(tipo_doc != 0){
+    if(document.getElementById('dniP').value != ""){
+
+      if(document.getElementById('dniP').value.length >= 10){
+
+        if(DniRuc_Validador($('#dniP'),tipo_doc) == false){
+          quitarError("err_dniP","seccion_dniP");
+        }else{
+          colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
+          error = 1;      
+        }
+      }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
+
+        colocaError("err_dniP", "seccion_dniP","El número de cédula debe tener mínimo 10 dígitos","btn_submitpaypal");
+
+      }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+
+        colocaError("err_dniP", "seccion_dniP","El pasaporte debe tener mínimo 6 dígitos","btn_submitpaypal");
+      }
+      else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
+
+        colocaError("err_dniP", "seccion_dniP","El RUC debe tener mínimo 13 dígitos","btn_submitpaypal");
+      }
     }else{
-      quitarError("err_dniP","seccion_dniP");
+      colocaError("err_dniP", "seccion_dniP","Documento no puede ser vacío","btn_submitpaypal");
+      error = 1;
     }
   }else{
-    error = validarSelect(tipo,'err_tipoP','seccion_tipoP','btn_submitpaypal');
+    colocaError("err_dniP", "seccion_dniP","Debe ingresar un tipo de documento","btn_submitpaypal");
+    error = validarSelect(tipo_doc,'err_tipoP','seccion_tipoP','btn_submitpaypal');
   }
   validaCampos(1);
 });
@@ -550,14 +629,14 @@ function validarFormulario(){
     quitarError(err_correo,seccion_correo);
   }
 
-  if(direccion.length <= '100'){
+  if(direccion.length >= '10' && direccion.length <= '100'){
     if(validarDir(direccion,err_dir,seccion_dir,btn)){
       error = 1;
     }else{
       quitarError(err_dir,seccion_dir);
     }
   }else{
-    colocaError(err_dir,seccion_dir,"La dirección no debe exceder de 100 caracteres",btn);
+    colocaError(err_dir,seccion_dir,"La dirección debe tener una longitud entre 10 y 100 caracteres",btn);
     error = 1;
   }
 
@@ -581,11 +660,33 @@ function validarFormulario(){
     quitarError(err_tipo,seccion_tipo);
   }
 
-  var validar = validarDocumento(dni.value,tipo,err_dni,seccion_dni,btn);
-  if(validar == 1){
-    error = 1;
+  if(dni.value != ""){
+
+    if(dni.value.length >= 10){
+      if(DniRuc_Validador(dni,tipo_doc) == false){
+        quitarError(err_dni,seccion_dni);
+      }else{
+        colocaError(err_dni, seccion_dni,"Documento ingresado no es válido",btn);
+        error = 1;      
+      } 
+    }else if(tipo_doc == 2 && dni.value.length < 10){
+
+      colocaError(err_dni, seccion_dni,"El número de cédula debe tener mínimo 10 dígitos",btn);
+      error = 1;
+
+    }else if(tipo_doc == 3 && dni.value.length < 6){
+
+      colocaError(err_dni, seccion_dni,"El pasaporte debe tener mínimo 6 dígitos",btn);
+      error = 1;
+    }
+    else if(tipo_doc == 1 && dni.value.length < 13){
+
+      colocaError(err_dni, seccion_dni,"El RUC debe tener mínimo 13 dígitos",btn);
+      error = 1;
+    }
   }else{
-    quitarError(err_dni,seccion_dni);
+    colocaError(err_dni, seccion_dni,"Documento no puede ser vacío",btn);
+    error = 1;
   }
 
   if(error == 0){

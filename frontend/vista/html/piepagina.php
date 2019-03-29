@@ -18,6 +18,22 @@
 </div>
 
 
+<div class="modal fade" id="modal_select" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+      <div class="modal-body" style="overflow: scroll">
+        <!-- <div class="col-md-12" id="modalmodal"> -->
+          
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div> 
+    </div>
+  </div>
+</div>
+
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 
@@ -80,7 +96,7 @@
                     <?php 
                       foreach (TIPO_DOCUMENTO as $key => $value) {
                         if($key != 1){
-                          echo "<option value='".$key."'>".$value."</option>";
+                          echo "<option value='".$key."'>".utf8_encode($value)."</option>";
                         }
                       }
                      ?>
@@ -107,7 +123,7 @@
                       if(!empty($areasSubareas) && is_array($areasSubareas)){
                         foreach ($areasSubareas as $area) {
                           if($i != $area['id_area']){
-                            echo "<option value='".$area['id_area']."'>".$area['nombre_area']."</option>";
+                            echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
                             $i = $area['id_area'];
                           }
                         }
@@ -128,7 +144,7 @@
                       if(!empty($areasSubareas) && is_array($areasSubareas)){
                         foreach ($areasSubareas as $area) {
                           if($j != $area['id_subareas']){
-                            echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".$area['nombre_subarea']."</option>";
+                            echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
                             // $j = $area['id_subareas'];
                           }
                         }
@@ -366,9 +382,6 @@ if (isset($template_js) && is_array($template_js)){
 ?>
 <!--mensajes de error y exito-->
 <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
-  /*<div align="center" id="alerta" style="display:" class="alert alert-danger" role="alert">
-    <strong><?php #echo $sess_err_msg;?></strong>
-  </div>  */
   echo "<script type='text/javascript'>
         $(document).ready(function(){
           swal('Advertencia!', '".$sess_err_msg."', 'error');
@@ -377,9 +390,6 @@ if (isset($template_js) && is_array($template_js)){
 }?>
 
 <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
-  /*<div align="center" id="alerta" style="display:" class="alert alert-success" role="alert">
-    <strong><?php #echo $sess_suc_msg;?></strong>
-  </div>  */
   echo "<script type='text/javascript'>
         $(document).ready(function(){
           swal('Exitoso!', '".$sess_suc_msg."', 'success');
@@ -389,5 +399,3 @@ if (isset($template_js) && is_array($template_js)){
     
 </body>
 </html>
-
-   

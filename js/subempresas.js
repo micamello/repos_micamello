@@ -306,8 +306,17 @@ $('#numero_cand').on('blur', function(){
 
 function validar_EC(dni_obj,tipo,error,group,btn){
 
-  var validacion = validarDocumento(dni_obj,tipo,error,group,btn);
-  return validacion;
+  if(searchAjax($('#dni'),tipo) == false){
+    if(DniRuc_Validador($('#dni'),tipo) == false){
+      quitarError(error,group);
+    }else{
+      colocaError(error,group,"Documento ingresado no es válido",btn);
+      error = 1;      
+    }
+  }else{
+    colocaError(error,group,"Documento ingresado ya existe",btn);
+    error = 1; 
+  } 
 }
 
 function chequeaRUC(dni){
@@ -322,20 +331,10 @@ function chequeaRUC(dni){
           window['validar_'+host](dni,1,"dni_error", "dni_group", btn);
           if(host == "EC"){
 
-              if(((dni.length)) < 13){
-                  colocaError("dni_error", "dni_group", "Para ingresar el RUC son 13 números",btn);
-                  error = 1;
-              }
-              else{
-                  if(existeDni(dni) != 1){
-                      colocaError("dni_error", "dni_group","El numero de RUC ya existe", btn);
-                      error = 1;
-                  }
-                  else
-                  {
-                      quitarError("dni_error", "dni_group");
-                  }
-              }
+            if(((dni.length)) < 13){
+                colocaError("dni_error", "dni_group", "Para ingresar el RUC son 13 números",btn);
+                error = 1;
+            }
           }
       }
   }       
@@ -382,7 +381,7 @@ function existeCorreo(correo){
   return value;
 }
 
-function existeDni(dni){
+/*function existeDni(dni){
 
   var value = "";
   var puerto_host = $('#puerto_host').val();
@@ -401,7 +400,7 @@ function existeDni(dni){
       })
   }
   return value;
-}
+}*/
 
 function validarNumTelf(num,err_telf,seccion_telf){
 

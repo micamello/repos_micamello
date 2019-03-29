@@ -60,7 +60,7 @@ class Controlador_Subempresa extends Controlador_Base
                     'idSubEmpresa'=>$idSubEmpresa,
                     'breadcrumbs'=>$breadcrumbs
                 );
-                $tags["template_js"][] = "mic";
+                //$tags["template_js"][] = "mic";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('asignarRecursos', $tags);
                 
@@ -90,7 +90,7 @@ class Controlador_Subempresa extends Controlador_Base
                     'idPlanEmpresa'=>$idPlanEmpresa
                 );
 
-                $tags["template_js"][] = "mic";
+                //$tags["template_js"][] = "mic";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('editarPlan', $tags);
                 
@@ -132,8 +132,8 @@ class Controlador_Subempresa extends Controlador_Base
                     'breadcrumbs'=>$breadcrumbs
                 );
 
-                $tags["template_js"][] = "mic";
-                $tags["template_js"][] = "ruc_jquery_validator";
+                //$tags["template_js"][] = "mic";
+                $tags["template_js"][] = "DniRuc_Validador";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('crearEmpresas', $tags);
                 
@@ -289,7 +289,7 @@ class Controlador_Subempresa extends Controlador_Base
 
             $id_usuario_login = $GLOBALS['db']->insert_id();
 
-            $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, 'term_cond'=>1, 'conf_datos'=>1, 'id_ciudad'=>$default_city, 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>Modelo_Usuario::EMPRESA, 'estado'=>1, 'padre'=>$idUsuario);
+            $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, 'term_cond'=>1, 'id_ciudad'=>$default_city, 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>Modelo_Usuario::EMPRESA, 'estado'=>1, 'padre'=>$idUsuario);
 
             if(!Modelo_Usuario::crearUsuario($dato_registro)){
                 throw new Exception("Ha ocurrido un error al crear la empresa, intente nuevamente");
@@ -415,10 +415,16 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function correoAvisoCreacion($correo,$nombres,$username,$password){
 
-        $asunto = "Creación de cuenta";
-        $body = "Estimado, ".$nombres."<br>";
-        $body .= "<br>Su cuenta fue creada exitosamente, puede ingresar a su cuenta con los siguientes datos: <br><br>Usuario: <b>".$username."</b><br>Correo: <b>".$correo."</b><br> Clave: <b>".$password."</b>";
-        if (Utils::envioCorreo($correo,$asunto,$body)){
+        $nombre_mostrar = utf8_encode(strtoupper($nombres));  
+        $enlace = "<a href='".PUERTO."://".DOMINIO."/desarrollov3/login/'>click aqu&iacute;</a>";
+
+        $email_body = Modelo_TemplateEmail::obtieneHTML("CREACION_EMPRESA");
+        $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
+        $email_body = str_replace("%USERNAME%", $username, $email_body);   
+        $email_body = str_replace("%CORREO%", $correo, $email_body);   
+        $email_body = str_replace("%PASSWORD%", $password, $email_body);     
+        $email_body = str_replace("%ENLACE%", $enlace, $email_body);  
+        if (Utils::envioCorreo($correo,$asunto,$email_body)){
           return true;
         }
         else{

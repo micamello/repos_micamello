@@ -42,7 +42,7 @@
                       <span class="icon-tag"></span>POSTULARSE
                     </a>
                   <?php } else { ?>
-                    <a class="pricebutton" onclick="msg_compra(<?php echo $plan["id_plan"];?>,'<?php echo utf8_encode($plan["nombre"]);?>');">
+                    <a class="pricebutton" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');">
                       <span class="icon-tag"></span>SUBSCRIBIRSE
                     </a>
                   <?php } ?>                    

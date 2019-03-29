@@ -39,7 +39,6 @@ class Controlador_Perfil extends Controlador_Base
                 $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
                 $escolaridad  = Modelo_Escolaridad::obtieneListado();
                 $arrarea      = Modelo_Area::obtieneListado();
-                $arrinteres   = Modelo_Interes::obtieneListado();
                 $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
                 $puedeDescargarInforme = self::obtenerPermiso($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
@@ -98,19 +97,15 @@ class Controlador_Perfil extends Controlador_Base
                 //Verifica si el usuario tiene datos en la variable de session para las areas y subareas seleccionadas
                 if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
                     $areaxusuario  = $_SESSION['mfo_datos']['usuario']['usuarioxarea'];
-                    //$nivelxusuario = $_SESSION['mfo_datos']['usuario']['usuarioxnivel'];
                 }else{
                     $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                    //$nivelxusuario = Modelo_UsuarioxNivel::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
-                //print_r($areaxusuario);
                 $nrototaltest = Modelo_Cuestionario::totalTest();
-                //$cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
-                    'arrinteres'                => $arrinteres,
+                    //'arrinteres'                => $arrinteres,
                     'areaxusuario'              => $areaxusuario,
                     'arrprovincia'              => $arrprovincia,
                     'nivelxusuario'             => $nivelxusuario,
@@ -136,12 +131,10 @@ class Controlador_Perfil extends Controlador_Base
                 );
 
                 //Pasar a la vista los js y css que se van a necesitar
-                //$tags["template_css"][] = "bootstrap-multiselect";
-                //$tags["template_js"][] = "bootstrap-multiselect";
                 $tags["template_css"][] = "DateTimePicker";
                 $tags["template_css"][] = "multiple_select";
                 $tags["template_js"][] = "multiple_select";
-                $tags["template_js"][] = "mic";
+                //$tags["template_js"][] = "mic";
                 $tags["template_js"][] = "DniRuc_Validador";
                 $tags["template_js"][] = "DateTimePicker";
                 $tags["template_js"][] = "editarPerfil";
@@ -344,19 +337,28 @@ class Controlador_Perfil extends Controlador_Base
                     $array_data_area = explode(",",$_SESSION['mfo_datos']['usuario']['subareas']);
                 }
 
-                if(isset($_POST['subareas']) && !empty($_POST['subareas'])){
+                if(isset($_POST['subareas']) && !empty($_POST['subareas']) && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
+
                     $array_subareas_seleccionadas = array();
                     $areas_subareas = array();
                     foreach ($_POST['subareas'] as $i => $datos_select_area) {
                         
                         $valor = explode("_", $datos_select_area);
-                        $areas_subareas[$valor[0]][] = $valor[2];
-                        array_push($array_subareas_seleccionadas, $valor[2]);
+
+                        if(isset($GLOBALS['ListAreas'][$valor[0]]) && isset($GLOBALS['ListSubareas'][$valor[1]])){
+                            $areas_subareas[$valor[0]][] = $valor[2];
+                            array_push($array_subareas_seleccionadas, $valor[2]);
+                        }else{
+
+                            throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
+                        }
                     }
                 }
 
-                if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
-                    throw new Exception("Ha ocurrido un error al guardar las areas de interes, intente nuevamente");
+                if(!empty($array_subareas_seleccionadas)){
+                    if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
+                        throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
+                    }
                 }
             }            
             $GLOBALS['db']->commit();

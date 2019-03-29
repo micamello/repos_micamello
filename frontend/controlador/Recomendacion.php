@@ -12,7 +12,7 @@ class Controlador_Recomendacion extends Controlador_Base {
         $data = $this->camposRequeridos($campos);
         
         //if(self::envioRecomendaciones(MAIL_SUGERENCIAS,$data)){
-        if(self::envioRecomendaciones("desarrollo@micamello.com.ec",$data)){  
+        if(self::envioRecomendaciones("ffueltala@gmail.com",$data)){  
           $_SESSION['mostrar_exito'] = 'Sus recomendaciones han sido enviadas exitosamente';
         }else{
           $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones fall\u00F3, intente de nuevo';
@@ -22,7 +22,7 @@ class Controlador_Recomendacion extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
     }
     $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "mic";
+    //$tags["template_js"][] = "mic";
     Vista::render('recomendaciones', $tags);
   }
 

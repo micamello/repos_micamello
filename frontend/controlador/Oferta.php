@@ -48,13 +48,19 @@ class Controlador_Oferta extends Controlador_Base{
       $areasInteres = $cambioRes = false;
       $areas_subareas = array();
       if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
-        $areasInteres = $_SESSION['mfo_datos']['usuario']['subareas'];//implode(",",$_SESSION['mfo_datos']['usuario']['usuarioxarea']); 
+        $areasInteres = $_SESSION['mfo_datos']['usuario']['subareas']; 
         $areas_subareas = Modelo_AreaSubarea::obtieneAreas_subareas_usuario($idUsuario);
       }
 
       if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 0){
         $cambioRes = $_SESSION['mfo_datos']['usuario']['id_ciudad']; 
       }
+
+      $arrarea       = Modelo_Area::obtieneListadoAsociativo();
+      $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
+      $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
+
+      $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
 
       switch ($opcion) {
         case 'buscaDescripcion':
@@ -64,12 +70,7 @@ class Controlador_Oferta extends Controlador_Base{
         break;
         case 'filtrar':
 
-          $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-          $arrnivel      = Modelo_Interes::obtieneListadoAsociativo();
-          $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
-          $arrjornadas      = Modelo_Jornada::obtieneListadoAsociativo();
           $array_empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,true);
-
           $empresas = array();
 
           foreach ($array_empresas as $key => $value) {
@@ -230,14 +231,12 @@ class Controlador_Oferta extends Controlador_Base{
             $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
           }
 
-          $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
-
           $link = Vista::display('filtrarOfertas',array('data'=>$array_datos,'page'=>$page,'vista'=>$vista));  
 
           $tags = array(
             'breadcrumbs'=>$breadcrumbs,
             'arrarea'       => $arrarea,
-            'arrnivel'       => $arrnivel,
+            //'arrnivel'       => $arrnivel,
             'arrprovincia'  => $arrprovincia,
             'jornadas'      => $arrjornadas,
             'ofertas'       => $ofertas,
@@ -344,9 +343,6 @@ class Controlador_Oferta extends Controlador_Base{
           }
 
           $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
-          $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-          $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
-          $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
           $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
 
@@ -360,15 +356,13 @@ class Controlador_Oferta extends Controlador_Base{
             array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
           }
 
-          $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
-
           $breadcrumbs['vacantes'] = 'Mis Ofertas';
 
           $tags = array(
             'breadcrumbs'=>$breadcrumbs,
             'arrarea'       => $arrarea,
             'arrprovincia'  => $arrprovincia,
-            'jornadas'      => $jornadas,
+            'jornadas'      => $arrjornadas,
             'ofertas'       => $ofertas,
             'page' => $page,
             'vista'=>$vista,
@@ -420,9 +414,9 @@ class Controlador_Oferta extends Controlador_Base{
           $_SESSION['mfo_datos']['array_empresas_hijas'] = $array_empresas_hijas;
 
           $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
-          $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-          $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
-          $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
+          //$arrarea       = Modelo_Area::obtieneListadoAsociativo();
+          //$arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
+          //$jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
           $breadcrumbs['cuentas'] = 'Ofertas subempresas';
 
@@ -430,7 +424,7 @@ class Controlador_Oferta extends Controlador_Base{
             'breadcrumbs'=>$breadcrumbs,
             'arrarea'       => $arrarea,
             'arrprovincia'  => $arrprovincia,
-            'jornadas'      => $jornadas,
+            'jornadas'      => $arrjornadas,
             'ofertas'       => $ofertas,
             'page' => $page,
             'vista'=>$vista,
@@ -453,13 +447,6 @@ class Controlador_Oferta extends Controlador_Base{
           if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
             Utils::doRedirect(PUERTO.'://'.HOST.'/');               
           }
-
-          //if(isset($_SESSION['mfo_datos']['planes'])){            
-          //  $planes = $_SESSION['mfo_datos']['planes'];
-          //}else{
-          //  $planes = null;
-          //}
-          //Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['infohv'],$planes,$vista);
 
           $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
           $empresa = Utils::getParam('empresa', '', $this->data);
@@ -501,11 +488,6 @@ class Controlador_Oferta extends Controlador_Base{
             }
           }
 
-          $arrarea       = Modelo_Area::obtieneListadoAsociativo();
-          $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
-          $jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
-
-          $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
           if($vista == 'oferta'){
 
             if(isset($_POST['filtro'])){
@@ -548,9 +530,9 @@ class Controlador_Oferta extends Controlador_Base{
           $tags = array(
             'breadcrumbs'=>$breadcrumbs,
             'arrarea'       => $arrarea,
-            'arrnivel'      => $arrnivel,
+            //'arrnivel'      => $arrnivel,
             'arrprovincia'  => $arrprovincia,
-            'jornadas'      => $jornadas,
+            'jornadas'      => $arrjornadas,
             'ofertas'       => $ofertas,
             'enlaceCompraPlan'=>$enlaceCompraPlan,
             'autopostulaciones_restantes'=>$autopostulaciones_restantes,
@@ -623,29 +605,6 @@ class Controlador_Oferta extends Controlador_Base{
           $this->redirectToController('detalle_oferta');
       }
     }
-
-    /*public static function calcularRuta($ruta,$letraDescartar){
-      foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $key => $v) {
-        if($letraDescartar != $key){
-          if($key == 'A' && $v != 0){
-              $ruta .= 'A'.$v.'/';
-          }
-          if($key == 'P' && $v != 0){
-              $ruta .= 'P'.$v.'/';
-          }
-          if($key == 'J' && $v != 0){
-              $ruta .= 'J'.$v.'/';
-          }
-          if($key == 'S' && $v != 0){
-              $ruta .= 'S'.$v.'/';
-          }
-          if($key == 'Q' && $v != 0){
-              $ruta .= 'Q'.$v.'/';
-          }
-        }
-      }
-      return $ruta;
-    }*/
 
     public static function devolverPostulaciones($ids_planes){
 

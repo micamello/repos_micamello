@@ -57,7 +57,7 @@ class Controlador_Registro extends Controlador_Base {
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente de nuevo");
         }
-        $token .= "||".$id_usuario."||".$data['tipo_usuario']."||".date("Y-m-d H:i:s");
+        $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
             throw new Exception("Error en el envio de correo, por favor intente denuevo");
@@ -225,26 +225,25 @@ class Controlador_Registro extends Controlador_Base {
       if (empty($respuesta)){
         throw new Exception("La activacion de la cuenta es fallida, por favor intente de nuevo");
       }  
-        $tags["token"] = $respuesta;              
-        $respuesta = Utils::desencriptar($respuesta);  
-        Utils::log("RESPUESTA ".print_r($respuesta,true));   
-        $valores = explode("||",$respuesta);      
-        $token = $valores[0];
-        $idusuario = $valores[1];
-        $tipousuario = $valores[2];
-        $fecha = $valores[3];
-        $token_valido = Utils::generarToken($idusuario,"ACTIVACION");
-        
-          if($token_valido != $token){
-            throw new Exception("El enlace para recuperacion es incorrecto, por favor ingrese denuevo su correo para el envio");      
-          }
-
-          if(!Modelo_Usuario::activarCuenta($idusuario, $tipousuario)){
-            throw new Exception("Ha ocurrido un error al activar la cuenta, intente nuevamente");
-          }
-          $_SESSION['mostrar_exito'] = "Su cuenta se ha activado correctamente";
-          $this->redirectToController('login');
+      $tags["token"] = $respuesta;              
+      $respuesta = Utils::desencriptar($respuesta);          
+      $valores = explode("||",$respuesta);      
+      $token = $valores[0];
+      $idusuario = $valores[1];
+      $tipousuario = $valores[2];
+      $fecha = $valores[3];
+      $token_valido = Utils::generarToken($idusuario,"ACTIVACION");
+      
+        if($token_valido != $token){
+          throw new Exception("El enlace para recuperacion es incorrecto, por favor ingrese denuevo su correo para el envio");      
         }
+
+        if(!Modelo_Usuario::activarCuenta($idusuario, $tipousuario)){
+          throw new Exception("Ha ocurrido un error al activar la cuenta, intente nuevamente");
+        }
+        $_SESSION['mostrar_exito'] = "Su cuenta se ha activado correctamente";
+        $this->redirectToController('login');
+      }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage(); 
         Utils::doRedirect(PUERTO.'://'.HOST.'/');
