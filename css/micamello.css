@@ -296,5 +296,46 @@ select.form-control{
 		}
 
 .textoInHr{
-	
+	background-color: white;
+	padding: 10px;
+	position: relative;
+	bottom: 33px;
+	font-size: 17px;
+}
+
+.fbClass{
+	background-color: #3b5998;
+	color: white;
+	padding: 8px;
+	border-radius: 48%;
+	margin-bottom: 3px;
+}
+
+.twClass{
+	background-color: #1da1f2;
+	color: white;
+	padding: 8px;
+	border-radius: 48%;
+	margin-bottom: 3px;
+}
+
+.lkClass{
+	background-color: #0077b5;
+	color: white;
+	padding: 8px;
+	border-radius: 48%;
+	margin-bottom: 3px;
+}
+
+.ggClass{
+	background-color: #ea4335;
+	color: white;
+	padding: 8px;
+	border-radius: 48%;
+	margin-bottom: 3px;
+
+}
+
+.fbClass:hover, .twClass:hover, .lkClass:hover, .ggClass:hover {
+	transform: scale(1.2);
 }
