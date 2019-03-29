@@ -803,7 +803,8 @@ public static function existeUsername($username){
         if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
         }                         
-    }
+      }
+    }  
     //si es empresa
     else{  
       if (isset($planes)){
@@ -812,8 +813,8 @@ public static function existeUsername($username){
       else{
         $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
-      }          
-    }
+      } 
+    }    
   }
 
   public static function aspSalarial($id_usuario, $id_oferta){
