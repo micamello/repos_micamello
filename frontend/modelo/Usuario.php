@@ -778,7 +778,7 @@ public static function existeUsername($username){
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
-      //si no tiene hoja de vida cargada       
+      //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -798,12 +798,12 @@ public static function existeUsername($username){
       }
       elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {                
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
-      }  
+      }*/  
       else{           
         if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
         }                         
-      }*/                
+      }                
     }
     //si es empresa
     else{  
