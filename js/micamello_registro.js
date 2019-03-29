@@ -1,5 +1,5 @@
 $('#areaCand').multiple_select({
-    items: 2,
+    items: 3,
     dependence: {
       id_dependencia: "subareasCand",
       items: 1
@@ -156,7 +156,7 @@ function showTags(tags, tipo){
 			}
 			else{
 				if(tags[i].attr('id') == 'nombresCandEmp'){
-					tags[i].prev().html('Nombre Candidato <i class="obligatorio">*</i>');
+					tags[i].prev().html('Nombres <i class="obligatorio">*</i>');
 				}
 				else{
 					tags[i].parents(':eq(1)').css('display', '');

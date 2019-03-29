@@ -60,10 +60,10 @@ class Controlador_Registro extends Controlador_Base {
         $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
-            throw new Exception("Error en el envio de correo, por favor intente denuevo");
+            throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
         }
 
-        $_SESSION['mostrar_exito'] = 'Te has registrado correctamente, revisa tu bandeja de entreda o spam para activar tu cuenta';
+        $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entreda o spam para activar tu cuenta';
 
       } catch (Exception $e) {
         $GLOBALS['db']->rollback();
@@ -78,7 +78,7 @@ class Controlador_Registro extends Controlador_Base {
     $arraySubareas = array();
 
     if(!Utils::es_correo_valido($datosReg['correoCandEmp'])){
-      throw new Exception("El correo ingresado no es válido");
+      throw new Exception("El correo ingresado no es v\u00E1lido");
     }
 
     if(Modelo_Usuario::existeCorreo($datosReg['correoCandEmp'])){
@@ -89,7 +89,7 @@ class Controlador_Registro extends Controlador_Base {
       if (method_exists(new Utils, 'validar_'.$iso)){
         $function = 'validar_'.$iso;
         if(!Utils::$function($datosReg['documentoCandEmp'])){
-          throw new Exception("El documento ingresado no es válido");
+          throw new Exception("El documento ingresado no es v\u00E1lido");
         }
       }
     }
@@ -103,7 +103,7 @@ class Controlador_Registro extends Controlador_Base {
     }
 
     if(!Utils::passCoinciden($datosReg['password_1'], $datosReg['password_2'])){
-      throw new Exception("Las contraseñas ingresadas no coinciden");
+      throw new Exception("Las contrase\u00F1as ingresadas no coinciden");
     }
 
     if($datosReg['tipo_usuario'] == 1){
@@ -111,7 +111,7 @@ class Controlador_Registro extends Controlador_Base {
       for ($i=0; $i < count($datosReg['subareasCand']); $i++) { 
         $subareas = explode("_", $datosReg['subareasCand'][$i]);
         if(!in_array($subareas[0], array_keys($GLOBALS['ListAreas'])) && !in_array($subareas[1], array_keys($GLOBALS['ListSubareas']))){
-            throw new Exception("Una o más áreas o subáreas seleccionadas no estan disponibles");
+            throw new Exception("Una o m\u00E1s \u00E1reas o sub\u00E1reas seleccionadas no est\u00E1n disponibles");
           }
           else{
             array_push($arraySubareas, $subareas[2]);
@@ -120,11 +120,11 @@ class Controlador_Registro extends Controlador_Base {
       array_push($datosReg, $arraySubareas);
 
       if(empty($arraySubareas)){
-        throw new Exception("Debe seleccionar al menos una subárea por área");
+        throw new Exception("Debe seleccionar al menos una sub\u00E1rea por \u00E1rea");
       }
 
       if(count($datosReg['areaCand']) < 1 || count($datosReg['areaCand']) > AREASPERMITIDAS){
-        throw new Exception("Seleccione el máximo o mínimo permitido de áreas");
+        throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
       }
 
     }
@@ -153,7 +153,7 @@ class Controlador_Registro extends Controlador_Base {
     $data = array(); $id_usuario = "";
     // guardar mfo_usuario_login
     if(!Modelo_UsuarioLogin::crearUsuarioLogin($datosValidos)){      
-      throw new Exception("Ha ocurrido un error, intente nuevamente usuario login");
+      throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
     }
     $id_usuario_login = $GLOBALS['db']->insert_id();
     $fechaDefault = date("Y-m-d H:i:s");
@@ -181,13 +181,13 @@ class Controlador_Registro extends Controlador_Base {
 
 
       if(!Modelo_Usuario::crearUsuario($data)){
-        throw new Exception("Ha ocurrido un error, intente nuevamente usuario");
+        throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
 
       $id_usuario = $GLOBALS['db']->insert_id();
 
       if(!Modelo_UsuarioxArea::crearUsuarioArea($datosValidos, $id_usuario)){
-        throw new Exception("Ha ocurrido un error, intente nuevamente usuario");
+        throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
 
     }
@@ -206,13 +206,13 @@ class Controlador_Registro extends Controlador_Base {
                       "tipo_usuario"=>$datosValidos['tipo_usuario']);
 
       if(!Modelo_Usuario::crearUsuario($data)){
-        throw new Exception("Ha ocurrido un error, intente nuevamente usuario");
+        throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
 
       $id_usuario = $GLOBALS['db']->insert_id();
 
       if(!Modelo_ContactoEmpresa::crearContactoEmpresa($datosValidos, $id_usuario)){
-        throw new Exception("Ha ocurrido un error, intente nuevamente usuario");
+        throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
     }
     return $id_usuario;
@@ -223,7 +223,7 @@ class Controlador_Registro extends Controlador_Base {
     try{            
       $respuesta = Utils::getParam('token', '', false);
       if (empty($respuesta)){
-        throw new Exception("La activacion de la cuenta es fallida, por favor intente de nuevo");
+        throw new Exception("La activaci\u00F3n de la cuenta es fallida, por favor intente de nuevo");
       }  
       $tags["token"] = $respuesta;              
       $respuesta = Utils::desencriptar($respuesta);          
@@ -235,11 +235,11 @@ class Controlador_Registro extends Controlador_Base {
       $token_valido = Utils::generarToken($idusuario,"ACTIVACION");
       
         if($token_valido != $token){
-          throw new Exception("El enlace para recuperacion es incorrecto, por favor ingrese denuevo su correo para el envio");      
+          throw new Exception("El enlace para recuperaci\u00F3n es incorrecto, por favor ingrese denuevo su correo para el env\u00EDo");      
         }
 
         if(!Modelo_Usuario::activarCuenta($idusuario, $tipousuario)){
-          throw new Exception("Ha ocurrido un error al activar la cuenta, intente nuevamente");
+          throw new Exception("Ha ocurrido un error al activar la cuenta, por favor intente nuevamente");
         }
         $_SESSION['mostrar_exito'] = "Su cuenta se ha activado correctamente";
         $this->redirectToController('login');
