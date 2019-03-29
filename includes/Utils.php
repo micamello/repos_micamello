@@ -450,13 +450,12 @@ class Utils{
     else return true;
   }
 
-
-  //static public function numerico($str){
-  //  return (bool)preg_match( '/^[\-+]?[0-9]*\.?[0-9]+$/', $str);
-  //}
-
-  static public function alfabetico($str){
-    return ( ! preg_match("/^([a-z ])*$/i", $str)) ? false : true;
+  public static function alfabetico($str,$tipo_usuario){
+    if($tipo_usuario == Modelo_Usuario::CANDIDATO){
+      return ( ! preg_match("/^([a-z ÁÉÍÓÚáéíóúñÑ])*$/i", $str)) ? false : true;
+    }else{
+      return ( ! preg_match("/^([a-z ÁÉÍÓÚáéíóúñÑ 0-9.', &])*$/i", $str)) ? false : true;
+    }
   }
 
   static public function alfanumerico($str){

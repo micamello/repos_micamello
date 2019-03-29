@@ -656,7 +656,7 @@ function validarFormulario(){
     if(tipo_usuario == 1){
       expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
     }else{
-      expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ. 0-9 &]+$/i;
+      expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ 0-9.', &]+$/i;
     }
     //var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
     var expreg_telf = /^[0-9]+$/i;
@@ -723,29 +723,32 @@ function validarFormulario(){
                 if(DniRuc_Validador($('#dni'),tipo_doc) == false){
                   quitarError("err_dni","seccion_dni");
                 }else{
-                  colocaError("err_dni", "seccion_dni","- Documento ingresado no es válido","boton");
-                  mensaje += "Documento ingresado no es válido"+'\n';
+                  colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","boton");
+                  mensaje += "- Documento ingresado no es válido"+'\n';
                   error = 1;      
                 }
               }else{
-                colocaError("err_dni", "seccion_dni","- Documento ingresado ya existe","boton");
+                colocaError("err_dni", "seccion_dni","Documento ingresado ya existe","boton");
                 mensaje += "- Documento ingresado ya existe"+'\n'; 
                 error = 1; 
               } 
             }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
 
-              colocaError("err_dni", "seccion_dni","- El número de cédula debe tener mínimo 10 dígitos","boton");
+              colocaError("err_dni", "seccion_dni","El número de cédula debe tener mínimo 10 dígitos","boton");
+              mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'\n';
 
             }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
 
-              colocaError("err_dni", "seccion_dni","- El pasaporte debe tener mínimo 6 dígitos","boton");
+              colocaError("err_dni", "seccion_dni","El pasaporte debe tener mínimo 6 dígitos","boton");
+              mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'\n';
             }
             else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
 
-              colocaError("err_dni", "seccion_dni","- El RUC debe tener mínimo 13 dígitos","boton");
+              colocaError("err_dni", "seccion_dni","El RUC debe tener mínimo 13 dígitos","boton");
+              mensaje += "- El RUC debe tener mínimo 13 dígitos"+'\n';
             }
           }else{
-            colocaError("err_dni", "seccion_dni","- Documento no puede ser vacío","boton");
+            colocaError("err_dni", "seccion_dni","Documento no puede ser vacío","boton");
             mensaje += "- Documento no puede ser vacío"+'\n';
             error = 1;
           }
@@ -1143,34 +1146,6 @@ function validarFormulario(){
         //$("#boton").removeClass('disabled');
         return '';
     }
-}
-
-function searchAjax(obj,tipo_dni){
-
-  var val_retorno1 = "";  
-  var puerto_host = $('#puerto_host').val();
-  var contenido = $(obj).val();
-  var url;
-  if(contenido != "" && tipo_dni != ""){
-    $.ajax({
-      type: "GET",
-      url: url = puerto_host+"/index.php?mostrar=perfil&opcion=buscarDni&dni="+contenido,
-      dataType:'json',
-      async: false,
-      success:function(data){
-          if($.trim(data.resultado)){
-            val_retorno1 = false;
-          }
-          else{
-            val_retorno1 = true;
-          }
-      },
-      error: function (request, status, error) {
-          console.log(request.responseText);
-      }
-    });
-  }
-  return val_retorno1;
 }
 
  

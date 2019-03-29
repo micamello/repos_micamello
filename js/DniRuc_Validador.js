@@ -24,11 +24,11 @@
 
 						if(!expreg.test(valor) || (provincia < 1 || provincia > numeroProvincias)){
 							val_retorno =  true;
-							console.log(valor);
+							//console.log(valor);
 						}
 						else{
 								val_retorno =  false;
-								console.log('entro');
+								//console.log('entro');
 						}
 					}
 			// ********************** validar tipo 2 == cedula************************
@@ -185,5 +185,33 @@
 			}
 		}
 		return retorno_val;
+	}
+
+	function searchAjax(obj,tipo_dni){
+
+	  var val_retorno1 = "";  
+	  var puerto_host = $('#puerto_host').val();
+	  var contenido = $(obj).val();
+	  var url;
+	  if(contenido != "" && tipo_dni != ""){
+	    $.ajax({
+	      type: "GET",
+	      url: url = puerto_host+"/index.php?mostrar=perfil&opcion=buscarDni&dni="+contenido,
+	      dataType:'json',
+	      async: false,
+	      success:function(data){
+	          if($.trim(data.resultado)){
+	            val_retorno1 = false;
+	          }
+	          else{
+	            val_retorno1 = true;
+	          }
+	      },
+	      error: function (request, status, error) {
+	          console.log(request.responseText);
+	      }
+	    });
+	  }
+	  return val_retorno1;
 	}
 

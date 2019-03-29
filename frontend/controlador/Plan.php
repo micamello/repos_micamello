@@ -105,7 +105,7 @@ class Controlador_Plan extends Controlador_Base {
   }
  
   public function compra(){    
-    $idplan = Utils::getParam('idplan','',$this->data);
+    $idplan = Utils::desencriptar(Utils::getParam('idplan','',$this->data));
     try{ 
       if (empty($idplan)){
         throw new Exception("Debe seleccionar un plan para la compra");
@@ -146,8 +146,8 @@ class Controlador_Plan extends Controlador_Base {
         $tags["plan"] = $infoplan;
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
  
-        $tags["template_js"][] = "ruc_jquery_validator";
-        $tags["template_js"][] = "mic";
+        $tags["template_js"][] = "dniRuc_Validador";
+        //$tags["template_js"][] = "mic";
         $tags["template_js"][] = "metodospago";              
         Vista::render('metodos_pago', $tags);      
       }
@@ -224,7 +224,7 @@ class Controlador_Plan extends Controlador_Base {
     }
     catch(Exception $e){
       $_SESSION['mostrar_error'] = $e->getMessage();            
-      Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.$data["idplan"].'/');             
+      Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.Utils::encriptar($data["idplan"]).'/');             
     }     
   }
   

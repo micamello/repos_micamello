@@ -38,11 +38,11 @@
                     <?php } ?>
                   </h1>
                   <?php if (empty($plan["costo"])) { ?>
-                    <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"
+                    <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo Utils::encriptar($plan["id_plan"]);?>/"
                       <span class="icon-tag"></span>POSTULARSE
                     </a>
                   <?php } else { ?>
-                    <a class="pricebutton" onclick="msg_compra(<?php echo $plan["id_plan"];?>,'<?php echo utf8_encode($plan["nombre"]);?>');">
+                    <a class="pricebutton" onclick="msg_compra('<?php echo Utils::encriptar($plan["id_plan"]);?>','<?php echo utf8_encode($plan["nombre"]);?>');">
                       <span class="icon-tag"></span>SUBSCRIBIRSE
                     </a>
                   <?php } ?>                    

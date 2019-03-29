@@ -61,6 +61,7 @@ $.fn.multiple_select = function(options){
         desmarcarTodascheckarea();
         startDefaultLoad();
         loadButtonSelected(settings.dependence.id_dependencia);
+        controlCheck(settings.dependence.id_dependencia);
     }
  
     function ifallselectedStart(){
@@ -221,7 +222,6 @@ function inicializarDependencia(obj){
         var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
         padre_objeto.after(panel);
         loadButtonSelected(obj);
- 
     }
 }
  
@@ -282,6 +282,7 @@ function oncheckChange(obj){
     listado_check.unbind('change').change();
     if(listado_check.length){
         listado_check.on('change', function(){
+ 
             if($(this).parent().attr('id').split("_")[0] == "all"){
                 if($(this).is(':checked')){
                      
@@ -381,6 +382,7 @@ function oncheckChange(obj){
                     $('#all_select_'+obj+"_"+area).find('input[type=checkbox]').prop('checked', false);
                 }
             }
+            $('#'+settings.dependence.id_dependencia).trigger('change');
             contadorAreasSubareas(2);
             desmarcarTodascheckarea();
             loadButtonSelected(obj);
@@ -392,6 +394,7 @@ function oncheckChange(obj){
     listado_li.unbind('click').click();
     if(listado_li.length){
         listado_li.on('click', function(){
+            console.log(this);
             var subarea_count = 0;
             if($(this).attr('id').split("_")[0] == "all"){
                 if(!$(this).hasClass('subarea_selected')){
@@ -505,6 +508,7 @@ function oncheckChange(obj){
                     $('#all_select_'+obj+"_"+area).find('input[type=checkbox]').prop('checked', false);
                 }
             }
+            $('#'+settings.dependence.id_dependencia).trigger('change');
             contadorAreasSubareas(2);
             desmarcarTodascheckarea();
             loadButtonSelected(obj);
@@ -558,16 +562,17 @@ function delete_list(obj){
     var list_select = $('#panel'+id_dep).find('li[id="'+id_selected+'"]');
     var des_all = $('#panel'+id_dep).find('li#all_select_'+id_dep+"_"+area_item);
     var select_area;
-     
+    $('#'+id_dep).find('option[value="'+id_selected+'"]').removeAttr('selected');
     list_select.removeClass('subarea_selected');
     list_select.find('input[type="checkbox"]').prop('checked', false);
+ 
     $('#'+id_dep).find('option[value="'+area_item+'"]').removeAttr('selected');
     if(des_all.hasClass('subarea_selected')){
         des_all.removeClass('subarea_selected');
         des_all.find('input[type="checkbox"]').prop('checked', false);
     }
     contador_sel = $('#panel'+id_dep).find('li[id^="'+area_item+'_"].subarea_selected:not(.seleccion_e)');
- 
+    // console.log(contador_sel.length);
     if(contador_sel.length == 0){
         select_area = $('#panel'+$(objeto).attr('id')).find('li#area_'+area_item);
         select_area.removeClass('area_with_subarea');

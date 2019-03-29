@@ -63,12 +63,12 @@ class Controlador_Contrasena extends Controlador_Base {
 
     //$tags = array('social'=>$social_reg);
     $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "validator";
+    //$tags["template_js"][] = "validator";
     $tags["template_js"][] = "assets/js/main";     
-    $tags["template_js"][] = "ruc_jquery_validator";
-    $tags["template_js"][] = "bootstrap-multiselect";
-    $tags["template_js"][] = "registrar";
-    $tags["template_js"][] = "mic";
+    //$tags["template_js"][] = "ruc_jquery_validator";
+    //$tags["template_js"][] = "bootstrap-multiselect";
+    //$tags["template_js"][] = "registrar";
+    //$tags["template_js"][] = "mic";
     Vista::render('confirmar_password', $tags);     
   }
   
@@ -114,12 +114,12 @@ class Controlador_Contrasena extends Controlador_Base {
     $tags["intereses"] = $arrinteres;
     //$tags["social"] = $social_reg;
     $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "validator";
+    //$tags["template_js"][] = "validator";
     $tags["template_js"][] = "assets/js/main";
-    $tags["template_js"][] = "ruc_jquery_validator";
-    $tags["template_js"][] = "bootstrap-multiselect";
-    $tags["template_js"][] = "registrar";
-    $tags["template_js"][] = "mic";
+    //$tags["template_js"][] = "ruc_jquery_validator";
+    //$tags["template_js"][] = "bootstrap-multiselect";
+    //$tags["template_js"][] = "registrar";
+    //$tags["template_js"][] = "mic";
     Vista::render('recuperar_password', $tags);  
   } 
 
