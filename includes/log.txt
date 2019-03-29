@@ -1145,3 +1145,1100 @@
 [2019/03/28 04:56:10] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
 [2019/03/28 04:56:10] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
 [2019/03/28 04:56:10] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:00:50] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:00:50] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:00:50] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:00:51] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:00:51] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:00:58] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:00:58] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:00:58] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:00:58] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:00:58] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
+            FROM mfo_usuario_login 
+            WHERE (username = 'candidato1' OR correo = 'candidato1') AND password = '25d55ad283aa400af464c76d713c07ad'
+[2019/03/28 05:00:58] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:01:51] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:01:51] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:01:51] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
+            FROM mfo_usuario_login 
+            WHERE (username = 'ederpozo4' OR correo = 'ederpozo4') AND password = '525a7953a3ccadd755defc7207fe4bbf'
+[2019/03/28 05:01:51] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
+                     u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional
+              FROM mfo_usuario u
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.id_usuario_login = '1670'
+[2019/03/28 05:01:51] SQL execute: UPDATE mfo_usuario SET ultima_sesion="2019-03-28 17:01:51" WHERE id_usuario=110
+[2019/03/28 05:01:51] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '110' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/03/28 05:01:51] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '110'
+            ORDER BY b.id_area
+[2019/03/28 05:01:51] SQL Query: SELECT GROUP_CONCAT(id_areas_subareas) AS subareas FROM mfo_usuarioxarea WHERE id_usuario =110
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 110
+[2019/03/28 05:01:51] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:01:51] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:01:51] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:01:51] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:01:51] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:01:51] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:01:51] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:01:51] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:01:51] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:01:51] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:01:51] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:01:51] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:01:51] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:01:51] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:01:51] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:01:52] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:01:52] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:01:52] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:01:52] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:01:52] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:01:52] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:01:52] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:01:52] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:01:52] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:01:52] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:01:52] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:01:52] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:02:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:18] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:18] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:02:18] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:18] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:02:18] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:02:18] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:02:18] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:02:18] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:02:18] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:02:18] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:02:18] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:02:18] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:02:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:19] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:19] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:19] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:02:19] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:19] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:02:19] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:19] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:02:19] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:02:19] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:02:19] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:02:19] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:02:19] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:02:19] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:02:19] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:02:19] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:02:19] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:02:19] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:19] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:02:19] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:19] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:02:19] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:02:19] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:02:19] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:02:20] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:02:20] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:02:20] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:02:20] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:02:20] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:02:20] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:02:20] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:02:20] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:02:20] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:20] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:02:20] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:02:20] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:02:20] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:20] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:02:20] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:02:20] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:02:20] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:02:20] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:02:20] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:02:20] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:02:20] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:02:20] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:02:20] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:02:20] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:02:21] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:02:21] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:21] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:02:21] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:02:21] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:02:21] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:21] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:02:21] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:02:21] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:02:21] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:02:21] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:02:21] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:02:21] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:02:21] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:02:21] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:02:21] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:02:21] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:02:21] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:02:21] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:21] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:21] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:21] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:21] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:02:22] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:22] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:22] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:22] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:22] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:22] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:02:45] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:45] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:45] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:45] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:45] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:45] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:02:45] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:02:45] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:02:45] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:45] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:02:45] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:02:45] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:02:45] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:02:45] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:02:45] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:02:45] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:02:45] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:02:45] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:02:45] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:02:45] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:02:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:02:46] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:46] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:46] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:46] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:46] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:02:46] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:02:46] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:02:46] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:02:46] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:02:46] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:02:46] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:03:55] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:03:55] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:03:55] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:03:55] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:03:55] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:03:55] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:03:55] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:03:55] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:03:55] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:03:55] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:03:55] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:03:55] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:03:55] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:03:55] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:03:55] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:03:55] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:03:55] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:03:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:03:55] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:03:55] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:03:55] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:03:56] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:03:56] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:03:56] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:03:56] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:03:56] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:03:56] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:03:56] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:03:56] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:03:56] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:03:56] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:03:56] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:04:16] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:04:16] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:04:16] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:04:16] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:04:16] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:04:16] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:04:16] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:04:16] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:04:16] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:04:16] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:04:16] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:04:16] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:04:16] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:04:16] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:04:16] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:04:16] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:04:16] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:04:16] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:04:16] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:04:16] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:04:17] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:04:17] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:04:17] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:04:17] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:04:17] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:04:17] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:04:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:04:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:04:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:04:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:04:18] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:04:18] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:05:11] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:05:11] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:05:11] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:05:11] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:05:11] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:05:11] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:05:11] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:05:11] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:05:11] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:05:11] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:05:11] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:05:11] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:05:11] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:05:11] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:05:11] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:05:11] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:05:11] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:05:11] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:05:11] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:05:11] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:05:12] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:05:12] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:05:12] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:05:12] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:05:12] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:05:12] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:05:12] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:05:12] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:05:12] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:05:12] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:05:12] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:05:12] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:06:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:06:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:06:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:06:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:06:18] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:06:18] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:06:18] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:06:18] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:06:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:06:18] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:06:18] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:06:18] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:06:18] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:06:18] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:06:18] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:06:18] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:06:18] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:06:18] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:06:18] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:06:18] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:06:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:06:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:06:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:06:19] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:06:19] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:06:19] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:06:19] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:06:19] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:06:19] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:06:19] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:06:19] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:06:19] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:07:57] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:07:57] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:07:57] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:07:57] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:07:57] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:07:57] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:07:57] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:07:57] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:07:57] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:07:57] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:07:57] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:07:57] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:07:57] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:07:57] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:07:57] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:07:57] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:07:57] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:07:57] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:07:57] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:07:57] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:07:58] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:07:58] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:07:58] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:07:58] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:07:58] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:07:58] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:07:58] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:07:58] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:07:58] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:07:58] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:07:58] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:07:58] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:09:06] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:06] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:06] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:06] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:06] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:06] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:09:06] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:09:06] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:09:06] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:06] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:09:06] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:09:06] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:09:06] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:09:06] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:09:06] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:09:06] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:09:06] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:09:06] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:09:06] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:09:06] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:09:06] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:09:07] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:07] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:07] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:07] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:07] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:09:07] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:07] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:07] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:07] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:07] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:07] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:09:17] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:17] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:17] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:17] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:17] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:17] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:09:17] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:09:17] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:09:17] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:17] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:09:17] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:09:17] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:09:17] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:09:17] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:09:17] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:09:17] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:09:17] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:09:17] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:09:17] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:09:17] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:09:17] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:09:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:18] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:09:18] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:18] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:18] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:18] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:18] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:18] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:09:35] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:35] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:35] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:35] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:35] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:35] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:09:35] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:09:35] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:09:35] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:35] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:09:35] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:09:35] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:09:35] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:09:35] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:09:35] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:09:35] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:09:35] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:09:35] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:09:35] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:09:35] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:09:36] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:09:36] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:36] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:37] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:37] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:37] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:09:37] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:37] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:37] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:37] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:37] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:37] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:09:46] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:46] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:46] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:46] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:46] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:46] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:09:46] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:09:46] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:09:46] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:46] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:09:46] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:09:46] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:09:46] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:09:46] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:09:46] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:09:46] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:09:46] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:09:46] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:09:46] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:09:46] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:09:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:09:47] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:47] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:47] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:47] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:47] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:09:47] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:09:47] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:09:47] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:09:47] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:09:47] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:09:47] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:10:49] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:10:49] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:10:49] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:10:49] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:10:49] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:10:49] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:10:49] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:10:49] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:10:49] SQL Trans: START TRANSACTION
+[2019/03/28 05:10:49] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661' AND id_usuario_login <> 1670
+[2019/03/28 05:10:49] SQL execute: UPDATE mfo_usuario_login SET dni="0706715661" WHERE id_usuario_login=1670
+[2019/03/28 05:10:49] SQL execute: UPDATE mfo_usuario SET foto="0",nombres="Eder",telefono="0968597677",id_ciudad="1",fecha_nacimiento="2001-03-28",id_nacionalidad="39",apellidos="pozo ramírez",genero="M",discapacidad="0",id_escolaridad="1",licencia="0",viajar="0",tiene_trabajo="0",tlf_convencional="",id_univ= NULL,nombre_univ=" " WHERE id_usuario=110
+[2019/03/28 05:10:49] SQL execute: INSERT INTO mfo_infohv (id_usuario,formato,fecha_creacion) VALUES ('110','docx','2019-03-28 17:10:49')
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_nivelidioma_idioma
+[2019/03/28 05:10:49] SQL execute: DELETE FROM mfo_usuario_nivelidioma WHERE id_usuario = 110
+[2019/03/28 05:10:49] SQL execute: INSERT INTO mfo_usuario_nivelidioma (id_usuario,id_nivelIdioma_idioma) VALUES ('110','2')
+[2019/03/28 05:10:49] SQL execute: DELETE FROM mfo_usuarioxarea WHERE id_areas_subareas IN(7) AND id_usuario = 110;
+[2019/03/28 05:10:49] SQL Trans: COMMIT
+[2019/03/28 05:10:49] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
+                      u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
+                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional
+              FROM mfo_usuario u
+              INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.id_usuario = '110' AND u.estado = 1
+[2019/03/28 05:10:49] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '110' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/03/28 05:10:49] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '110'
+            ORDER BY b.id_area
+[2019/03/28 05:10:49] SQL Query: SELECT GROUP_CONCAT(id_areas_subareas) AS subareas FROM mfo_usuarioxarea WHERE id_usuario =110
+[2019/03/28 05:10:49] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 110
+[2019/03/28 05:10:49] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:10:49] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:10:49] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:10:49] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:10:49] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:10:49] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:10:49] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:10:49] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:10:50] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:10:50] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:10:50] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:10:50] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:10:50] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:10:50] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:10:50] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:10:50] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:10:50] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:10:50] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:11:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:11:01] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:11:01] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:11:01] SQL Query: SELECT * from mfo_idioma
+[2019/03/28 05:11:01] SQL Query: SELECT * from mfo_nivelidioma
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:11:01] SQL Query: SELECT * from mfo_nivelinteres
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/03/28 05:11:01] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '110' ORDER BY f.orden ASC
+[2019/03/28 05:11:01] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_pais
+[2019/03/28 05:11:01] SQL Trans: START TRANSACTION
+[2019/03/28 05:11:01] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661' AND id_usuario_login <> 1670
+[2019/03/28 05:11:01] SQL execute: UPDATE mfo_usuario_login SET dni="0706715661" WHERE id_usuario_login=1670
+[2019/03/28 05:11:01] SQL execute: UPDATE mfo_usuario SET foto="0",nombres="Eder",telefono="0968597677",id_ciudad="1",fecha_nacimiento="2001-03-28",id_nacionalidad="39",apellidos="pozo ramírez",genero="M",discapacidad="0",id_escolaridad="1",licencia="0",viajar="0",tiene_trabajo="0",tlf_convencional="",id_univ= NULL,nombre_univ=" " WHERE id_usuario=110
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_nivelidioma_idioma
+[2019/03/28 05:11:01] SQL execute: DELETE FROM mfo_usuario_nivelidioma WHERE id_usuario = 110
+[2019/03/28 05:11:01] SQL execute: INSERT INTO mfo_usuario_nivelidioma (id_usuario,id_nivelIdioma_idioma) VALUES ('110','2')
+[2019/03/28 05:11:01] SQL execute: DELETE FROM mfo_usuarioxarea WHERE id_areas_subareas IN(8,9,10) AND id_usuario = 110;
+[2019/03/28 05:11:01] SQL Trans: COMMIT
+[2019/03/28 05:11:01] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
+                      u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
+                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
+                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional
+              FROM mfo_usuario u
+              INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.id_usuario = '110' AND u.estado = 1
+[2019/03/28 05:11:01] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '110' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/03/28 05:11:01] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '110'
+            ORDER BY b.id_area
+[2019/03/28 05:11:01] SQL Query: SELECT GROUP_CONCAT(id_areas_subareas) AS subareas FROM mfo_usuarioxarea WHERE id_usuario =110
+[2019/03/28 05:11:01] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 110
+[2019/03/28 05:11:01] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/03/28 05:11:01] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/03/28 05:11:01] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 110;
+[2019/03/28 05:11:01] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/03/28 05:11:01] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '110'
+[2019/03/28 05:11:01] SQL Query: SELECT id_notificacion,url,descripcion FROM mfo_notificacion WHERE estado = 1 AND id_usuario = '110' AND tipo = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/03/28 05:11:02] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:11:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:11:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:11:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:11:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:11:02] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:11:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:11:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:11:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:11:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:11:02] SQL Query: SELECT id_banner, extension FROM mfo_banner WHERE estado = 1 AND tipo = '3' ORDER BY RAND() LIMIT 1
+[2019/03/28 05:11:02] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/03/28 05:15:48] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:15:48] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:15:48] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:15:48] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:15:48] Controlador_Logout::construirPagina Login out
+[2019/03/28 05:15:49] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:15:49] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:15:49] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:15:49] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:15:49] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/28 05:15:49] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/28 05:15:49] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:15:49] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:15:49] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/28 05:15:49] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/28 05:15:49] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:15:50] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:15:50] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:15:50] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:15:50] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:15:50] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/28 05:15:50] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/28 05:15:50] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:15:50] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:15:50] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/28 05:15:50] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/28 05:15:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:16:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:16:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:16:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:16:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:16:02] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com'
+[2019/03/28 05:16:11] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:16:11] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:16:11] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:16:11] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:16:11] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:16:15] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:16:15] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:16:15] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:16:15] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:16:15] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:16:59] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:16:59] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:16:59] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:16:59] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:16:59] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:16:59] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:16:59] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:16:59] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:16:59] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:16:59] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:16:59] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:17:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:01] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:01] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:17:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:01] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:17:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:01] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:01] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:17:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:01] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:01] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:17:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:02] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:17:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:17:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:02] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:17:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:02] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:17:05] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:05] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:05] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:05] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:05] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:17:05] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:05] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:05] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:05] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:05] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:17:06] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:06] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:06] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:06] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:06] SQL Query: select * from mfo_usuario_login where correo = 'edervpr@hotmail.com.ff'
+[2019/03/28 05:17:06] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/03/28 05:17:06] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo'
+[2019/03/28 05:17:06] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo1'
+[2019/03/28 05:17:06] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo2'
+[2019/03/28 05:17:06] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo3'
+[2019/03/28 05:17:06] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo4'
+[2019/03/28 05:17:06] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo5'
+[2019/03/28 05:17:06] SQL Trans: START TRANSACTION
+[2019/03/28 05:17:06] SQL execute: INSERT INTO mfo_usuario_login (tipo_usuario,username,password,correo,dni) VALUES ('1','ederpozo5','525a7953a3ccadd755defc7207fe4bbf','edervpr@hotmail.com.ff','0706715661')
+[2019/03/28 05:17:06] SQL Query: select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = 39 limit 1;
+[2019/03/28 05:17:06] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/03/28 05:17:06] SQL execute: INSERT INTO mfo_usuario (telefono,nombres,apellidos,fecha_nacimiento,fecha_creacion,estado,term_cond,id_ciudad,ultima_sesion,id_nacionalidad,tipo_doc,id_escolaridad,genero,id_usuario_login) VALUES ('0968597677','éder virgilio','pozo ramírez','2001-03-28 17:17:06','2019-03-28 17:17:06','0','1','1','2019-03-28 17:17:06','39','2','1','M','1671')
+[2019/03/28 05:17:06] SQL execute: INSERT INTO mfo_usuarioxarea (id_usuario,id_areas_subareas) VALUES(111,12),(111,13),(111,14),(111,15),(111,16),(111,17),(111,20);
+[2019/03/28 05:17:06] SQL Trans: COMMIT
+[2019/03/28 05:17:07] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:17:07] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:17:07] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:17:07] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:17:07] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/28 05:17:07] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/28 05:17:07] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:17:07] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:17:07] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/28 05:17:07] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/28 05:17:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:25:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:25:01] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:25:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:25:01] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:25:01] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/28 05:25:01] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/28 05:25:01] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:25:01] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:25:01] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/28 05:25:01] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/28 05:25:01] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/28 05:25:02] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/28 05:25:02] SQL Query: SELECT * FROM mfo_area
+[2019/03/28 05:25:02] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/28 05:25:02] Utils::createSession empezo una nueva sesion
+[2019/03/28 05:25:02] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/28 05:25:02] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/28 05:25:02] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:25:02] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/28 05:25:02] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/28 05:25:02] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/28 05:25:02] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/29 07:54:37] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/29 07:54:37] SQL Query: SELECT * FROM mfo_area
+[2019/03/29 07:54:37] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/29 07:54:37] Utils::createSession empezo una nueva sesion
+[2019/03/29 07:54:37] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/29 07:54:37] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/29 07:54:37] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/29 07:54:37] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/29 07:54:37] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/29 07:54:38] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/29 07:54:38] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/03/29 08:14:12] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/03/29 08:14:12] SQL Query: SELECT * FROM mfo_area
+[2019/03/29 08:14:12] SQL Query: SELECT * FROM mfo_subareas
+[2019/03/29 08:14:12] Utils::createSession empezo una nueva sesion
+[2019/03/29 08:14:12] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/03/29 08:14:12] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/03/29 08:14:12] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/03/29 08:14:12] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/03/29 08:14:12] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/03/29 08:14:12] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/03/29 08:14:12] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
