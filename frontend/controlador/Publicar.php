@@ -105,8 +105,8 @@ class Controlador_Publicar extends Controlador_Base {
       }
       $tags["template_js"][] = "assets/js/main";
       $tags["template_js"][] = "tinymce/tinymce.min";
-      $tags["template_js"][] = "bootstrap-multiselect";
-      $tags["template_js"][] = "mic";
+      //$tags["template_js"][] = "bootstrap-multiselect";
+      //$tags["template_js"][] = "mic";
       $tags["template_js"][] = "validatePublicar";
       Vista::render('publicar_vacante', $tags);
   }

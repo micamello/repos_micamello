@@ -458,11 +458,6 @@ class Utils{
     else return true;
   }
 
-
-  //static public function numerico($str){
-  //  return (bool)preg_match( '/^[\-+]?[0-9]*\.?[0-9]+$/', $str);
-  //}
-
   public static function alfabetico($str,$tipo_usuario){
     if($tipo_usuario == Modelo_Usuario::CANDIDATO){
       return ( ! preg_match("/^([a-z ÁÉÍÓÚáéíóúñÑ])*$/i", $str)) ? false : true;

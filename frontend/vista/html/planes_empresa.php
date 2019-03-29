@@ -131,7 +131,7 @@
                     </select>
                     </li>
                   <?php } else{ ?>
-                    <input type="hidden" id="plancmb" value="<?php echo $plan["id_plan"];?>">                      
+                    <input type="hidden" id="plancmb" value="<?php echo Utils::encriptar($plan["id_plan"]);?>">                      
                     <input type="hidden" id="plannombre" value="<?php echo utf8_encode($plan["nombre"]);?>">
                   <?php } ?>  
                   <div id="planpermisos"></div>                    

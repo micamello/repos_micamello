@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row" align="justify">
         <?php 
-#print_r($GLOBALS['areas']); 
+
         foreach ($oferta as $key => $o) { ?>
           <div class="col-md-8">
               <div class="panel panel-primary shadow-panel1">

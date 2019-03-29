@@ -40,19 +40,19 @@
                 <div class="row">
                   <div class="col-md-6">
                     <div id="seccion_comp" class="form-group">
-                      <label>N&uacute;mero de comprobante:</label><div id="err_comp" class="help-block with-errors"></div>
+                      <label>N&uacute;mero de comprobante</label><div id="err_comp" class="help-block with-errors"></div>
                       <input type="text" name="num_comprobante" id="num_comprobante" maxlength="50" class="form-control" onkeydown="return validaNumeros(event);" minlength="5">
                     </div>
                   </div>
                   <div class="col-md-6">
                     <div id="seccion_val" class="form-group">
-                      <label>Valor del d&eacute;posito:</label><div id="err_val" class="help-block with-errors"></div>
+                      <label>Valor del d&eacute;posito</label><div id="err_val" class="help-block with-errors"></div>
                       <input type="text" name="valor" id="valor" class="form-control" onkeypress="return validaDecimales(event,this);" maxlength="10" minlength="2">
                     </div>
                   </div>
                   <div id="seccion_img" class="col-md-6">
                     <div class="form-group">
-                      <label>Imagen comprobante:</label><div id="err_img" class="help-block with-errors" style="padding-top: 5px;"></div>
+                      <label>Imagen comprobante</label><div id="err_img" class="help-block with-errors" style="padding-top: 5px;"></div>
                       <br>
                       <label for="imagen" class="custom_file">
                         <img id="imgupload" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/upload-icon.png";?>" width="50px">
@@ -71,9 +71,9 @@
               <h4 class="text-center">Detalles de Facturaci&oacute;n</h4>
               <div class="col-md-6">
                 <div id="seccion_tipo" class="form-group">    
-                  <label>Tipo de Documento:</label><div id="err_tipo" class="help-block with-errors"></div>
+                  <label>Tipo de Documento</label><div id="err_tipo" class="help-block with-errors"></div>
                   <select id="tipo_doc" name="tipo_doc" class="form-control"> 
-                  <option value="0">Seleccione una opción</option>             
+                  <option disabled selected value="0">Seleccione una opción</option>             
                   <?php
                     foreach(TIPO_DOCUMENTO as $key=>$tipo){
                       echo "<option value='".$key."'>".utf8_encode($tipo)."</option>";
@@ -85,32 +85,32 @@
 
               <div class="col-md-6"> 
                 <div id="seccion_dni" class="form-group">    
-                  <label>Identificaci&oacute;n:</label>
+                  <label>Identificaci&oacute;n</label>
                   <div class="help-block with-errors" id="err_dni"></div>
                   <input type="text" name="dni" id="dni" class="form-control" minlength="10" maxlength="15" >
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="seccion_nombre" class="form-group">
-                  <label>Nombre y apellidos:</label><div id="err_nom" class="help-block with-errors"></div>
+                  <label>Nombre y apellidos</label><div id="err_nom" class="help-block with-errors"></div>
                   <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ejemplo: Carlos Crespo" maxlength="100">
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="seccion_correo" class="form-group">    
-                  <label>Correo:</label><div id="err_correo" class="help-block with-errors"></div>
+                  <label>Correo</label><div id="err_correo" class="help-block with-errors"></div>
                   <input type="email" name="correo" id="correo" class="form-control" placeholder="Ejemplo: carloscrespo@gmail.com" minlength="10" maxlength="100">
                 </div>  
               </div> 
               <div class="col-md-6">           
                 <div id="seccion_dir" class="form-group">    
-                  <label>Direcci&oacute;n:</label><div id="err_dir" class="help-block with-errors"></div>
+                  <label>Direcci&oacute;n</label><div id="err_dir" class="help-block with-errors"></div>
                   <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ejemplo: Samanes V" maxlength="100">
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="seccion_tlf" class="form-group">    
-                  <label>Tel&eacute;fono:</label><div id="err_tlf" class="help-block with-errors"></div>
+                  <label>Tel&eacute;fono</label><div id="err_tlf" class="help-block with-errors"></div>
                   <input type="text" name="telefono" id="telefono" class="form-control" minlength="10" maxlength="15" onkeyup="return validaNumeros(event);" >
                 </div>
               </div>
@@ -132,9 +132,9 @@
               <div class="col-xs-12 col-md-12"> 
                 <div class="col-md-6">
                   <div id="seccion_tipoP" class="form-group">    
-                    <label>Tipo de Documento:</label><div id="err_tipoP" class="help-block with-errors"></div>
+                    <label>Tipo de Documento</label><div id="err_tipoP" class="help-block with-errors"></div>
                     <select id="tipo_docP" name="tipo_docP" class="form-control"> 
-                    <option value="0">Seleccione una opción</option>             
+                    <option disabled selected value="0">Seleccione una opción</option>             
                     <?php
                       foreach(TIPO_DOCUMENTO as $key=>$tipo){
                         echo "<option value='".$key."'>".utf8_encode($tipo)."</option>";
@@ -146,7 +146,7 @@
 
                 <div class="col-md-6"> 
                   <div id="seccion_dniP" class="form-group">    
-                    <label>Identificaci&oacute;n:</label>
+                    <label>Identificaci&oacute;n</label>
                     <div class="help-block with-errors" id="err_dniP"></div>
                     <input type="text" name="dniP" id="dniP" class="form-control" minlength="10" maxlength="15">
                   </div>
@@ -154,28 +154,28 @@
 
                 <div class="col-md-6"> 
                   <div id="seccion_nombreP" class="form-group">
-                    <label>Nombre y apellidos:</label><div id="err_nomP" class="help-block with-errors"></div>
+                    <label>Nombre y apellidos</label><div id="err_nomP" class="help-block with-errors"></div>
                     <input type="text" name="nombreP" id="nombreP" maxlength="100" class="form-control" minlength="10">
                   </div>
                 </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_correoP" class="form-group">   
-                    <label>Correo:</label><div id="err_correoP" class="help-block with-errors"></div>
-                    <input type="email" name="correoP" id="correoP" maxlength="100" class="form-control" minlength="10">
+                    <label>Correo</label><div id="err_correoP" class="help-block with-errors"></div>
+                    <input type="email" name="correoP" id="correoP" maxlength="100" class="form-control" minlength="10" placeholder="Ejemplo: carloscrespo@gmail.com">
                   </div>
                 </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_dirP" class="form-group"> 
-                    <label>Direcci&oacute;n:</label><div id="err_dirP" class="help-block with-errors"></div> 
+                    <label>Direcci&oacute;n</label><div id="err_dirP" class="help-block with-errors"></div> 
                     <input type="text" name="direccionP" id="direccionP" maxlength="100" class="form-control">  
                   </div>
                 </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_tlfP" class="form-group">    
-                    <label>Tel&eacute;fono:</label><div id="err_tlfP" class="help-block with-errors"></div>
+                    <label>Tel&eacute;fono</label><div id="err_tlfP" class="help-block with-errors"></div>
                     <input type="text" name="telefonoP" id="telefonoP" minlength="10" maxlength="15" class="form-control" onkeydown="return validaNumeros(event);">
                   </div>
                 </div>
@@ -187,7 +187,7 @@
               </div>
               <div class="col-xs-12 col-md-12">
                 <div class="breadcrumb" align="center">                  
-                  <label>Plan Seleccionado:</label>&nbsp;<?php echo $plan["nombre"];?>
+                  <label>Plan Seleccionado</label>&nbsp;<?php echo $plan["nombre"];?>
                   <input type="hidden" name="cmd" value="_s-xclick">
                   <input type="hidden" name="custom" id="custom" value="">
                   <input type="hidden" name="rm" value="2">

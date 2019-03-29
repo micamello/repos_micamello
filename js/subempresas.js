@@ -304,11 +304,11 @@ $('#numero_cand').on('blur', function(){
   }
 });
 
-function validar_EC(dni_obj,tipo,error,group,btn){
+/*function validar_EC(dni_obj,tipo,error,group,btn){
 
   var validacion = validarDocumento(dni_obj,tipo,error,group,btn);
-  return validacion;
-}
+  return validacion;   
+}*/
 
 function chequeaRUC(dni){
 

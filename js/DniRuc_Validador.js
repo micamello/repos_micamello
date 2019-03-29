@@ -24,11 +24,11 @@
 
 						if(!expreg.test(valor) || (provincia < 1 || provincia > numeroProvincias)){
 							val_retorno =  true;
-							console.log(valor);
+							//console.log(valor);
 						}
 						else{
 								val_retorno =  false;
-								console.log('entro');
+								//console.log('entro');
 						}
 					}
 			// ********************** validar tipo 2 == cedula************************
@@ -185,4 +185,5 @@
 			}
 		}
 		return retorno_val;
+
 	}

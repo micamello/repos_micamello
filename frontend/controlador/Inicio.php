@@ -19,22 +19,15 @@ class Controlador_Inicio extends Controlador_Base {
                   'nro_candidato'=>$nro_candidato,
                   'nro_empresa'=>$nro_empresa,
                   'arrarea'=>$arrarea,
-                  //'intereses'=>$arrinteres,
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg,
                   'areasSubareas'=>$GLOBALS['areasSubareas']);
 
-    // $tags["template_js"][] = "modal-register";
-    // $tags["template_js"][] = "validator";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "multiple_select";
     $tags["template_js"][] = "micamello_registro";
     
-    // $tags["template_js"][] = "ruc_jquery_validator";
-    // $tags["template_js"][] = "bootstrap-multiselect";
-    // $tags["template_js"][] = "registrar";
-    //$tags["template_js"][] = "mic";
 
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){

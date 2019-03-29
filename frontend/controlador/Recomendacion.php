@@ -22,7 +22,7 @@ class Controlador_Recomendacion extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
     }
     $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "mic";
+    //$tags["template_js"][] = "mic";
     Vista::render('recomendaciones', $tags);
   }
 

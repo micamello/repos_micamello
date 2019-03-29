@@ -496,20 +496,15 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 													<label>Sub-Áreas <span class="requerido" title="Este campo es obligatorio">*</span></label>
 													<div class="help-block with-errors"></div>
 													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple">
-													  <!-- <option value="">Seleccione una opción</option> -->
 													  <?php 
-													  $j = 0;
+													  
 													    if(!empty($areas) && is_array($areas)){
 													      foreach ($areas as $area) {
 													      	$selected = '';
-													        if($j != $area['id_subareas']){
-
-													        	if(in_array($area['id_subareas'], $areaxusuario[$area['id_area']])){
-													        		$selected = "selected='selected'";
-													        	}
-													          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
-													          	$j = $area['id_subareas'];
-													        }
+												        	if(isset($areaxusuario[$area['id_area']]) &&in_array($area['id_subareas'], $areaxusuario[$area['id_area']])){
+												        		$selected = "selected='selected'";
+												        	}
+												          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
 													      }
 													    }
 													   ?>

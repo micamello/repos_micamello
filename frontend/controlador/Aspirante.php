@@ -454,7 +454,7 @@ class Controlador_Aspirante extends Controlador_Base
             
         $tags["template_js"][] = "html2canvas.min";
         $tags["template_js"][] = "jsPDF-1.4.1/dist/jspdf.debug";
-        $tags["template_js"][] = "mic";
+        //$tags["template_js"][] = "mic";
         $tags["template_js"][] = "Chart.min";
         Vista::render('perfilAspirante', $tags);
     }
