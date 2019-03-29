@@ -45,19 +45,23 @@ class Controlador_Registro extends Controlador_Base {
 
         $datosValidos = self::validarCamposReg($datosReg);
         $GLOBALS['db']->beginTrans();
-          self::guardarDatosUsuario($datosValidos);
+        $id_usuario = self::guardarDatosUsuario($datosValidos);
+        if (empty($id_usuario)){
+          throw new Exception("Error en el sistema, por favor intente de nuevo");
+        }
         $GLOBALS['db']->commit();
 
+        $nombres = $datosReg['nombresCandEmp'].((isset($datosReg['apellidosCand'])) ? " ".$datosReg['apellidosCand'] : '');
         // generar token
-          $token = Utils::generarToken($id_usuario,"ACTIVACION");
-          if (empty($token)){
-            throw new Exception("Error en el sistema, por favor intente de nuevo");
-          }
-          $token .= "||".$user_id."||".$data['tipo_usuario']."||".date("Y-m-d H:i:s");
-          $token = Utils::encriptar($token);
-          if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'], $datosValidos['nombreCorreo'],$token, $datosValidos['username'])){
+        $token = Utils::generarToken($id_usuario,"ACTIVACION");
+        if (empty($token)){
+          throw new Exception("Error en el sistema, por favor intente de nuevo");
+        }
+        $token .= "||".$id_usuario."||".$data['tipo_usuario']."||".date("Y-m-d H:i:s");
+        $token = Utils::encriptar($token);
+        if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
             throw new Exception("Error en el envio de correo, por favor intente denuevo");
-          }
+        }
 
         $_SESSION['mostrar_exito'] = 'Te has registrado correctamente, revisa tu bandeja de entreda o spam para activar tu cuenta';
 
@@ -146,17 +150,15 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function guardarDatosUsuario($datosValidos){
-    $data = array();
+    $data = array(); $id_usuario = "";
     // guardar mfo_usuario_login
-    if(!Modelo_UsuarioLogin::crearUsuarioLogin($datosValidos)){
-      print_r("error usuario login");
+    if(!Modelo_UsuarioLogin::crearUsuarioLogin($datosValidos)){      
       throw new Exception("Ha ocurrido un error, intente nuevamente usuario login");
     }
     $id_usuario_login = $GLOBALS['db']->insert_id();
     $fechaDefault = date("Y-m-d H:i:s");
     $fechaNacimientoDefault = date("Y-m-d H:i:s",strtotime($fechaDefault."- 18 year")); /*Debe ser mayor de edad fecha default*/
-    $ciudadDefault = Modelo_Sucursal::obtieneCiudadDefault();
-    $id_usuario = "";
+    $ciudadDefault = Modelo_Sucursal::obtieneCiudadDefault();    
     // usuario tipo candidato
     if($datosValidos['tipo_usuario'] == 1){
       $escolaridad = Modelo_Escolaridad::obtieneListado();
@@ -213,9 +215,8 @@ class Controlador_Registro extends Controlador_Base {
         throw new Exception("Ha ocurrido un error, intente nuevamente usuario");
       }
     }
+    return $id_usuario;
   }
-
-
 
   public function validarToken(){
     $tags = array();
@@ -225,7 +226,8 @@ class Controlador_Registro extends Controlador_Base {
         throw new Exception("La activacion de la cuenta es fallida, por favor intente de nuevo");
       }  
         $tags["token"] = $respuesta;              
-        $respuesta = Utils::desencriptar($respuesta);     
+        $respuesta = Utils::desencriptar($respuesta);  
+        Utils::log("RESPUESTA ".print_r($respuesta,true));   
         $valores = explode("||",$respuesta);      
         $token = $valores[0];
         $idusuario = $valores[1];
@@ -483,12 +485,13 @@ class Controlador_Registro extends Controlador_Base {
   // }
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username){
-    $asunto = "Activación de cuenta";
-    $body = "Estimado, ".$nombres."<br>";
-    $body .= "<br>Una vez activada su cuenta puede ingresar mediante su correo electrónico o el siguiente Usuario: <br><b>".$username."</b><br><br>";
-    $body .= "Click en este enlace para activar su cuenta de usuario&nbsp;";
-    $body .= "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a> <br>";
-    if (Utils::envioCorreo($correo,$asunto,$body)){
+    $enlace = "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
+    $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUARIO");
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
+    $email_body = str_replace("%USUARIO%", $username, $email_body);
+    $email_body = str_replace("%CORREO%", $correo, $email_body);   
+    $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
+    if (Utils::envioCorreo($correo,"Registro de Usuario",$email_body)){
       return true;
     }
     else{
