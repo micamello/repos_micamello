@@ -798,12 +798,11 @@ public static function existeUsername($username){
       }
       elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {                
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
-      }*/  
+      }*/ 
       else{           
         if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
         }                         
-      }                
     }
     //si es empresa
     else{  
