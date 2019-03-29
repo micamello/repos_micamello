@@ -133,7 +133,7 @@ class Controlador_Subempresa extends Controlador_Base
                 );
 
                 //$tags["template_js"][] = "mic";
-                $tags["template_js"][] = "DniRuc_Validator";
+                $tags["template_js"][] = "DniRuc_Validador";
                 $tags["template_js"][] = "subempresas";
                 Vista::render('crearEmpresas', $tags);
                 

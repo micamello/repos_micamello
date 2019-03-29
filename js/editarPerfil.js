@@ -735,16 +735,19 @@ function validarFormulario(){
             }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
 
               colocaError("err_dni", "seccion_dni","El número de cédula debe tener mínimo 10 dígitos","boton");
+              error = 1;
               mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'\n';
 
             }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
 
               colocaError("err_dni", "seccion_dni","El pasaporte debe tener mínimo 6 dígitos","boton");
+              error = 1;
               mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'\n';
             }
             else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
 
               colocaError("err_dni", "seccion_dni","El RUC debe tener mínimo 13 dígitos","boton");
+              error = 1;
               mensaje += "- El RUC debe tener mínimo 13 dígitos"+'\n';
             }
           }else{
@@ -1148,35 +1151,6 @@ function validarFormulario(){
     }
 }
 
-function searchAjax(obj,tipo_dni){
-
-  var val_retorno1 = "";  
-  var puerto_host = $('#puerto_host').val();
-  var contenido = $(obj).val();
-  var url;
-  if(contenido != "" && tipo_dni != ""){
-    $.ajax({
-      type: "GET",
-      url: url = puerto_host+"/index.php?mostrar=perfil&opcion=buscarDni&dni="+contenido,
-      dataType:'json',
-      async: false,
-      success:function(data){
-
-          if($.trim(data.resultado)){
-            val_retorno1 = true;
-          }
-          else{
-            val_retorno1 = false;
-          }
-      },
-      error: function (request, status, error) {
-          console.log(request.responseText);
-      }
-    });
-  }
-  //console.log(val_retorno1);
-  return val_retorno1;
-}
 
 function enviarCambioClave(){
 

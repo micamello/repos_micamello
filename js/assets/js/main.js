@@ -543,3 +543,33 @@ function reemplazar(texto){
           replace(/Ó/g, 'O').
           replace(/Ú/g, 'U');
 }
+
+function searchAjax(obj,tipo_dni){
+
+  var val_retorno1 = "";  
+  var puerto_host = $('#puerto_host').val();
+  var contenido = $(obj).val();
+  var url;
+  if(contenido != "" && tipo_dni != ""){
+    $.ajax({
+      type: "GET",
+      url: url = puerto_host+"/index.php?mostrar=perfil&opcion=buscarDni&dni="+contenido,
+      dataType:'json',
+      async: false,
+      success:function(data){
+
+          if(data.resultado == ""){
+            val_retorno1 = false;
+          }
+          else{
+            val_retorno1 = true;
+          }
+      },
+      error: function (request, status, error) {
+          console.log(request.responseText);
+      }
+    });
+  }
+  //console.log(val_retorno1);
+  return val_retorno1;
+}
