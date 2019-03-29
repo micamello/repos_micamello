@@ -50,12 +50,12 @@ class Controlador_Plan extends Controlador_Base {
         if($aspirantes['aspirantes'] == 0){
           $r = Modelo_UsuarioxPlan::desactivarPlan($desactivarPlan);
           if(!$r){
-              $_SESSION['mostrar_error'] = 'No se pudo eliminar la suscripción, intentelo de nuevo';
+              $_SESSION['mostrar_error'] = 'No se pudo eliminar la suscripci\u00F3n, intentelo de nuevo';
           }else{
-              $_SESSION['mostrar_exito'] = 'Se ha eliminado la afiliación del plan exitosamente';
+              $_SESSION['mostrar_exito'] = 'Se ha eliminado la afiliaci\u00F3n del plan exitosamente';
           }
         }else{
-          $_SESSION['mostrar_error'] = 'No se puede eliminar la suscripción, ya existen postulados';
+          $_SESSION['mostrar_error'] = 'No se puede eliminar la suscripci\u00F3n, ya existen postulados';
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
     }
@@ -127,16 +127,16 @@ class Controlador_Plan extends Controlador_Base {
         }
                  
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"])){
-          throw new Exception("Error al registrar la subscripción, por favor intente denuevo");   
+          throw new Exception("Error al registrar la subscripci\u00F3n, por favor intente denuevo");   
         }  
         
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
         if ($tipousu == Modelo_Usuario::CANDIDATO){
-          $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede postular a una oferta"; 
+          $_SESSION['mostrar_exito'] = "Subcripci\u00F3n exitosa, ahora puede postular a una oferta"; 
           $this->redirectToController('oferta');
         }
         else{
-          $_SESSION['mostrar_exito'] = "Subcripción exitosa, ahora puede publicar una oferta"; 
+          $_SESSION['mostrar_exito'] = "Subcripci\u00F3n exitosa, ahora puede publicar una oferta"; 
           $this->redirectToController('publicar');
         }
       }
@@ -148,7 +148,7 @@ class Controlador_Plan extends Controlador_Base {
         $tags["plan"] = $infoplan;
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
  
-        $tags["template_js"][] = "dniRuc_Validador";
+        $tags["template_js"][] = "DniRuc_Validador";
         //$tags["template_js"][] = "mic";
         $tags["template_js"][] = "metodospago";              
         Vista::render('metodos_pago', $tags);      
@@ -178,23 +178,23 @@ class Controlador_Plan extends Controlador_Base {
       $data = $this->camposRequeridos($campos);   
        
       if (!Utils::alfanumerico($data["num_comprobante"]) || strlen($data["num_comprobante"]) > 50){
-        throw new Exception("Número de comprobante no es válido");
+        throw new Exception("N\u00FAmero de comprobante no es v\u00E1lido");
       }
       if (!Utils::formatoDinero($data["valor"]) || strlen($data["valor"]) > 10){
-        throw new Exception("Valor del comprobante no es válido");
+        throw new Exception("Valor del comprobante no es v\u00E1lido");
       }
       if (!Utils::es_correo_valido($data["correo"]) || strlen($data["correo"]) > 100){
-        throw new Exception("Dirección de correo electrónico no es válido");
+        throw new Exception("Direcci\u00F3n de correo electr\u00F3nico no es v\u00E1lido");
       }
       if (!Utils::valida_telefono($data["telefono"]) || strlen($data["telefono"]) > 25){
-        throw new Exception("Número de teléfono no es válido");
+        throw new Exception("N\u00FAmero de tel\u00E9fono no es v\u00E1lido");
       }
       if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
         if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)) {
           $function = 'validar_'.SUCURSAL_ISO;
           $validaCedula = Utils::$function($data['dni']);
           if ($validaCedula == false){
-            throw new Exception("El DNI ingresado no es válido");
+            throw new Exception("El DNI ingresado no es v\u00E1lido");
           }
         }
       }
@@ -202,7 +202,7 @@ class Controlador_Plan extends Controlador_Base {
         throw new Exception("Debe subir una imagen con formato jpg o png y menor a 1 MB");         
       } 
       if (!Utils::valida_upload($_FILES['imagen'], 3)) {
-        throw new Exception("La imagen debe ser en formato .jpg .jpeg .png y con un peso máximo de 1MB");
+        throw new Exception("La imagen debe ser en formato .jpg .jpeg .png y con un peso m\u00E1ximo de 1MB");
       }
        
       $archivo = Utils::validaExt($_FILES['imagen'],3);
@@ -211,7 +211,7 @@ class Controlador_Plan extends Controlador_Base {
                                                   $data["dni"],$data["tipo_doc"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
                                                   $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],$data["idplan"],
                                                   $data['direccion'],$_SESSION['mfo_datos']['usuario']['tipo_usuario'])){
-        throw new Exception("Error al ingresar el deposito, por favor intente denuevo");
+        throw new Exception("Error al ingresar el dep\u00F3sito, por favor intente denuevo");
       }
  
       $id_comprobante = $GLOBALS['db']->insert_id();
@@ -221,7 +221,7 @@ class Controlador_Plan extends Controlador_Base {
       }
 
       $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
-      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan será aprobado en un máximo de ".$tiempo." horas";  
+      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan ser\u00E1 aprobado en un m\u00E1ximo de ".$tiempo." horas";  
       Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
     }
     catch(Exception $e){
