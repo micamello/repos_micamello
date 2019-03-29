@@ -218,11 +218,25 @@
         </form>
 
 
-        <div class="row">
-          <di class="col-md-12">
+        <div class="row" id="socialReg">
+          <div class="col-md-12">
             <hr>
-            <span class="textoInHr" style="font-size: 17px;">O accede con: </span>
-          </di>
+            <span class="textoInHr">O accede con: </span>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12 col-sm-offset-4 col-md-offset-4">
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <div class=""><i class="fa fa-facebook-official fa-2x fbClass"></i></div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <div class=""><i class="fa fa-twitter fa-2x twClass"></i></div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <div class=""><i class="fa fa-linkedin fa-2x lkClass"></i></div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+              <div class=""><i class="fa fa-google fa-2x ggClass"></i></div>
+            </div>
+          </div>
         </div>
       </div>
       <!-- <div class="modal-footer">

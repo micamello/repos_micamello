@@ -127,7 +127,6 @@ function camposDelForm(){
 
 $('#regCandMic').on('click', function(){
 	$('#tipo_usuario').val(1);
-	// $('#tipo_documentacion').val();
 	var tags = camposDelForm();
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 1);
@@ -167,6 +166,10 @@ function showTags(tags, tipo){
 			if($('#datosContEmp')){
 				$('#datosContEmp').css('display', 'none');
 			}
+
+			if($('#socialReg').length){
+				$('#socialReg').css('display', '');
+			}
 		}
 		if(tipo == 2){
 			if(tags[i].attr('id') == 'documentoCandEmp'){
@@ -189,8 +192,11 @@ function showTags(tags, tipo){
 			if($('#datosContEmp')){
 				$('#datosContEmp').css('display', '');
 			}
+
+			if($('#socialReg').length){
+				$('#socialReg').css('display', 'none');
+			}
 		}
-		// console.log(tags[i][0]);
 	}
 }
 
