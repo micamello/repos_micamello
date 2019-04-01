@@ -147,6 +147,7 @@ function showTags(tags, tipo){
 		if(tipo == 1){
 			if(tags[i].attr('id') == 'documentoCandEmp'){
 				tags[i].attr('disabled','disabled');
+				tags[i].prev().html('Documento <i class="obligatorio">*</i>');
 			}
 			if(tags[i].attr('id') == 'nombreConEmp' ||
 				tags[i].attr('id') == 'apellidoConEmp' ||
@@ -174,6 +175,7 @@ function showTags(tags, tipo){
 		if(tipo == 2){
 			if(tags[i].attr('id') == 'documentoCandEmp'){
 				tags[i].removeAttr('disabled');
+				tags[i].prev().html('RUC <i class="obligatorio">*</i>');
 			}
 			if(tags[i].attr('id') == 'apellidosCand' ||
 				tags[i].attr('id') == 'tipoDoc' ||
@@ -583,7 +585,21 @@ $('#modal_registro').on('show.bs.modal', function(){
 		$('#tipoDoc').on('change', function(){
 			$('#tipo_documentacion').val($(this).val());
 			$('#documentoCandEmp').removeAttr('disabled');
+			$('#documentoCandEmp').prev().html($(this).find('option:selected').text()+" <i class='obligatorio'>*</i>");
 			eliminarMensajeError($(this), "");
+			if($('#documentoCandEmp').val() != ""){
+				if(!DniRuc_Validador($('#documentoCandEmp'), $(this).val())){
+					if(!verificarExiste($('#documentoCandEmp'))){
+						crearMensajeError($('#documentoCandEmp'), "El documento ingresado ya existe");
+					}
+					else{
+						eliminarMensajeError($('#documentoCandEmp'), "");
+					}
+				}
+				else{
+					crearMensajeError($('#documentoCandEmp'), "El documento ingresado no es válido");
+				}
+			}
 		});
 	}
 
