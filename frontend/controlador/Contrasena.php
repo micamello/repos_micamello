@@ -60,11 +60,14 @@ class Controlador_Contrasena extends Controlador_Base {
     } 
     //$social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
     // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
-
+    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas']);
     //$tags = array('social'=>$social_reg);
-    $tags["template_js"][] = "modal-register";
+    // $tags["template_js"][] = "modal-register";
     //$tags["template_js"][] = "validator";
-    $tags["template_js"][] = "assets/js/main";     
+    // $tags["template_js"][] = "assets/js/main";
+    $tags["template_js"][] = "DniRuc_Validador";
+    $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "micamello_registro";     
     //$tags["template_js"][] = "ruc_jquery_validator";
     //$tags["template_js"][] = "bootstrap-multiselect";
     //$tags["template_js"][] = "registrar";
@@ -74,7 +77,7 @@ class Controlador_Contrasena extends Controlador_Base {
   
   public function mostrarDefault(){
     $this->linkRedesSociales();
-    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
+    // $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
 
     if ( Utils::getParam('forgot_form') == 1 ){
       try{
@@ -96,7 +99,7 @@ class Controlador_Contrasena extends Controlador_Base {
         $token = Utils::encriptar($token);
         $nombres = $datousuario['nombres'] . ((isset($datousuario['apellidos'])) ? "&nbsp;".$datousuario['apellidos'] : '');
         if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
-          throw new Exception("Error en el env\u00CDo de correo, por favor intente denuevo");
+          throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
         }
         $_SESSION['mostrar_exito'] = "Se envi\u00F3 a su direcci\u00F3n de correo ingresada el enlace para el cambio de correo, recuerde que tiene un m\u00E1ximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contrase\u00F1a y en el caso de que no encuentre su correo revisar tambien su carpeta de spam";         
       }
@@ -104,22 +107,12 @@ class Controlador_Contrasena extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     }
-
-    //$arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
-    //$arrinteres = Modelo_Interes::obtieneListado();
     
-    $tags = array('social'=>$social_reg);
-
-    //$tags["arrarea"] = $arrarea;
-    //$tags["intereses"] = $arrinteres;
-    //$tags["social"] = $social_reg;
-    $tags["template_js"][] = "modal-register";
-    //$tags["template_js"][] = "validator";
-    $tags["template_js"][] = "assets/js/main";
-    //$tags["template_js"][] = "ruc_jquery_validator";
-    //$tags["template_js"][] = "bootstrap-multiselect";
-    //$tags["template_js"][] = "registrar";
-    //$tags["template_js"][] = "mic";
+    // $tags = array('social'=>$social_reg);
+    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas']);
+    $tags["template_js"][] = "DniRuc_Validador";
+    $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "micamello_registro";
     Vista::render('recuperar_password', $tags);  
   } 
 
