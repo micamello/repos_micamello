@@ -1,8 +1,9 @@
 <?php 
-//print_r($data);
+$i = 0;
 foreach ($data as $letra => $value) { 
 
-    if($letra != 'O' /*&& $letra != 'F'*/){
+    $i++;
+    if($letra != 'O'){
         
         $ruta = PUERTO.'://'.HOST.'/'.$vista.'/2'; 
         if($letra == 'A'){
@@ -25,7 +26,7 @@ foreach ($data as $letra => $value) {
         }
 
         $valores = "'".$ruta."/',2,".$page;
-        echo '<div class="col-xs-12 col-md-3 btn-filtro">
+        echo '<div class="col-xs-12 col-md-6 btn-filtro">
             <div class="input-group">
                 <span>'.utf8_encode(ucfirst(strtolower($value['nombre']))).'</span>
                 <span class="input-group-addon btn-filtro" style="padding:0px; cursor:pointer;">
@@ -34,6 +35,11 @@ foreach ($data as $letra => $value) {
                 </span>
             </div>
         </div>';
+
+        if($i == 2){
+            echo '<div class="clearfix"></div>';
+            $i = 0;
+        }
     }
 } ?>
 

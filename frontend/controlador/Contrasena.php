@@ -99,7 +99,7 @@ class Controlador_Contrasena extends Controlador_Base {
         $token = Utils::encriptar($token);
         $nombres = $datousuario['nombres'] . ((isset($datousuario['apellidos'])) ? "&nbsp;".$datousuario['apellidos'] : '');
         if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
-          throw new Exception("Error en el env\u00CDo de correo, por favor intente denuevo");
+          throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
         }
         $_SESSION['mostrar_exito'] = "Se envi\u00F3 a su direcci\u00F3n de correo ingresada el enlace para el cambio de correo, recuerde que tiene un m\u00E1ximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contrase\u00F1a y en el caso de que no encuentre su correo revisar tambien su carpeta de spam";         
       }
