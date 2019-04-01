@@ -18,21 +18,6 @@
 </div>
 
 
-<div class="modal fade" id="modal_select" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
-      <div class="modal-body" style="overflow: scroll">
-        <!-- <div class="col-md-12" id="modalmodal"> -->
-          
-        <!-- </div> -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div> 
-    </div>
-  </div>
-</div>
 
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
@@ -219,7 +204,7 @@
             <div class="form-group check_box">
                 <div class="col-md-12">
                   <div class="checkbox">
-                    <label><input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He leído y acepto <a href="">término de condiciones</a> y <a href="">Política de privacidad</a></label>
+                    <label><input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He leído y acepto <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">término de condiciones</a> y <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Política de privacidad</a></label>
                     <div></div>
                   </div>
                 </div>
@@ -268,6 +253,23 @@
 
   </div>
 </div>
+
+<div class="modal fade" id="modal_select" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+      <div class="modal-body" style="overflow: scroll">
+        <!-- <div class="col-md-12" id="modalmodal"> -->
+          
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div> 
+    </div>
+  </div>
+</div>
+
 
 <?php } ?>
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
