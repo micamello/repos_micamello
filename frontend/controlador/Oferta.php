@@ -70,6 +70,7 @@ class Controlador_Oferta extends Controlador_Base{
         break;
         case 'filtrar':
 
+
           $array_empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,true);
           $empresas = array();
 
@@ -103,40 +104,48 @@ class Controlador_Oferta extends Controlador_Base{
             if(isset($_SESSION['mfo_datos']['Filtrar_ofertas'][$letra])){
               if($letra == 'A' && $type == 1){
                 if(isset($arrarea[$id])){
-                  $_SESSION['mfo_datos']['Filtrar_ofertas']['A'] = $id;
-                  $array_datos['A'] = array('id'=>$id,'nombre'=>$arrarea[$id]);
+                  $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
+                  $array_datos[$letra] = array('id'=>$id,'nombre'=>$arrarea[$id]);
                 }
               }
               else if($letra == 'P' && $type == 1){
                 if(isset($arrprovincia[$id])){
-                    $_SESSION['mfo_datos']['Filtrar_ofertas']['P'] = $id;
-                    $array_datos['P'] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                    $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
+                    $array_datos[$letra] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
                 }
               }
               else if($letra == 'J' && $type == 1){
                 if(isset($arrjornadas[$id])){
-                    $_SESSION['mfo_datos']['Filtrar_ofertas']['J'] = $id;
-                    $array_datos['J'] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
+                    $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
+                    $array_datos[$letra] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
                 }
               }else if($letra == 'O' && $type == 1){
-                $_SESSION['mfo_datos']['Filtrar_ofertas']['O'] = $id; 
+                $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id; 
+                $array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
               }
               else if($letra == 'S' && $type == 1){
-                $_SESSION['mfo_datos']['Filtrar_ofertas']['S'] = $id; 
+                if(isset($empresas[$id])){
+                  $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
+                    $array_datos[$letra] = array('id'=>$id,'nombre'=>$empresas[$id]);
+                  } 
               }
               else if($letra == 'K' && $type == 1){
-                $_SESSION['mfo_datos']['Filtrar_ofertas']['K'] = $id; 
+                
+                if(isset(SALARIO[$id])){
+                  $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id; 
+                    $array_datos[$letra] = array('id'=>$id,'nombre'=>SALARIO[$id]);
+                }
               }
               else if($letra == 'Q' && $type == 1){
-                $_SESSION['mfo_datos']['Filtrar_ofertas']['Q'] = $id;
-                $array_datos['Q'] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
+                $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
+                $array_datos[$letra] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
               }else if($type == 2){
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
               }
             }
           }
 
-          foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $letra => $value) {
+          /*foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $letra => $value) {
 
             if($value!=0 || $value != ''){
 
@@ -174,7 +183,7 @@ class Controlador_Oferta extends Controlador_Base{
                 $array_datos[$letra] = array('id'=>$value,'nombre'=>htmlentities($value,ENT_QUOTES,'UTF-8'));
               }
             }
-          }
+          }*/
 
           if($vista == 'cuentas'){
             $array_subempresas = array();
@@ -192,6 +201,7 @@ class Controlador_Oferta extends Controlador_Base{
           $filtros = $_SESSION['mfo_datos']['Filtrar_ofertas'];
 
           if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['J']) && empty($filtros['K']) && empty($filtros['S']) && empty($filtros['Q'])){
+
 
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
@@ -236,7 +246,6 @@ class Controlador_Oferta extends Controlador_Base{
           $tags = array(
             'breadcrumbs'=>$breadcrumbs,
             'arrarea'       => $arrarea,
-            //'arrnivel'       => $arrnivel,
             'arrprovincia'  => $arrprovincia,
             'jornadas'      => $arrjornadas,
             'ofertas'       => $ofertas,
@@ -293,7 +302,7 @@ class Controlador_Oferta extends Controlador_Base{
           }
 
           $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
-          Utils::log("PASO POR AQUI ".print_r($oferta,true));
+         // Utils::log("PASO POR AQUI ".print_r($oferta,true));
           if (Utils::getParam('postulado') == 1) {
           
             if(!empty($status)){
@@ -307,10 +316,11 @@ class Controlador_Oferta extends Controlador_Base{
                 $_SESSION['mostrar_error'] = "La aspiraci\u00f3n salarial debe ser mayor a 0";
               }
             }
-          }
+          }else{
           
-          if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-            $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($idUsuario,$idOferta);
+            if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+               $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($idUsuario,$idOferta);
+            }
           }
           
           $breadcrumbs[$vista] = 'Ofertas';
@@ -414,9 +424,6 @@ class Controlador_Oferta extends Controlador_Base{
           $_SESSION['mfo_datos']['array_empresas_hijas'] = $array_empresas_hijas;
 
           $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
-          //$arrarea       = Modelo_Area::obtieneListadoAsociativo();
-          //$arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
-          //$jornadas      = Modelo_Jornada::obtieneListadoAsociativo();
 
           $breadcrumbs['cuentas'] = 'Ofertas subempresas';
 
@@ -530,7 +537,6 @@ class Controlador_Oferta extends Controlador_Base{
           $tags = array(
             'breadcrumbs'=>$breadcrumbs,
             'arrarea'       => $arrarea,
-            //'arrnivel'      => $arrnivel,
             'arrprovincia'  => $arrprovincia,
             'jornadas'      => $arrjornadas,
             'ofertas'       => $ofertas,
