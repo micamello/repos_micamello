@@ -294,7 +294,7 @@ function validarClave(){
   }else if(password.length > '15'){
     colocaError("err_password","seccion_password","La clave no debe exceder de 15 caracteres","btn_sesion");
   }else if(password.length < '8'){
-    colocaError("err_password","seccion_password","El n\u00FAmero minimo de caracteres es de 8","btn_sesion");
+    colocaError("err_password","seccion_password","El n\u00FAmero m\u00EDnimo de caracteres es de 8","btn_sesion");
   }else{
     quitarError("err_password","seccion_password");
   }
@@ -453,7 +453,7 @@ function validarInput(campo,err,err_campo,btn){
     colocaError(err,err_campo,"El campo no puede ser vac\u00EDo",btn);
     error = 1; 
   }else if(expreg.test(campo) == false){
-    console.log(campo + "/" + expreg);
+    //console.log(campo + "/" + expreg);
     colocaError(err,err_campo,"Formato incorrecto, solo letras",btn);
     error = 1;
   }else{
