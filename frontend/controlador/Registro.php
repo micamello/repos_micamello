@@ -275,7 +275,7 @@ class Controlador_Registro extends Controlador_Base {
       $GLOBALS['db']->beginTrans();
       $datocorreo = Modelo_Usuario::existeCorreo($correo);
       if (!empty($datocorreo)){
-        throw new Exception("El correo asociado a la cuenta de Twitter con la que desea registrarse ya se encuentra en nuestros registros.");
+        throw new Exception("El correo asociado con su red social ya se encuentra ingresada");
       }
       $apell_user = Utils::no_carac(explode(" ", trim($apellido)));
       $nombre_user = Utils::no_carac(explode(" ", trim($nombre)));
@@ -308,7 +308,7 @@ class Controlador_Registro extends Controlador_Base {
       }
       $token .= "||".$user_id."||".Modelo_Usuario::CANDIDATO."||".date("Y-m-d H:i:s");
       $token = Utils::encriptar($token);
-      if (!$this->correoActivacionCuenta($correo,$nombres,$token,$username)){
+      if (!$this->correoActivacionRedSocial($correo,$nombres,$token,$username,$password)){
         throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
       }
       $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entreda o spam para activar tu cuenta';  
@@ -328,6 +328,22 @@ class Controlador_Registro extends Controlador_Base {
     $email_body = str_replace("%CORREO%", $correo, $email_body);   
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
     if (Utils::envioCorreo($correo,"Registro de Usuario",$email_body)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  public function correoActivacionRedSocial($correo,$nombres,$token,$username,$clave){
+    $enlace = "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
+    $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUA_REDSOCIAL");
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
+    $email_body = str_replace("%USUARIO%", $username, $email_body);
+    $email_body = str_replace("%CORREO%", $correo, $email_body);
+    $email_body = str_replace("%CLAVE%", $clave, $email_body);   
+    $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
+    if (Utils::envioCorreo($correo,"Registro de Candidato Con Red Social",$email_body)){
       return true;
     }
     else{
