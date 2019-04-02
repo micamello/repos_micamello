@@ -31,18 +31,14 @@ class Controlador_Registro extends Controlador_Base {
   public function procesoGuardado(){
     $iso = SUCURSAL_ISO;
     if ( Utils::getParam('formularioRegistro') == 1 ){
-      try {
-        // Usuario candidato
+      try {        
         if($_POST['tipo_usuario'] == 1){
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'apellidosCand'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'tipoDoc'=>1, 'documentoCandEmp'=>1, 'areaCand'=>1, 'subareasCand'=>1, 'password_1'=>1, 'password_2'=>1);
         }
         if($_POST['tipo_usuario'] == 2){
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1, 'nombreConEmp'=>1, 'apellidoConEmp'=>1, 'tel1ConEmp'=>1);
-        }
-        
-
+        }        
         $datosReg = $this->camposRequeridos($campos);
-
         $datosValidos = self::validarCamposReg($datosReg);
         $GLOBALS['db']->beginTrans();
         $id_usuario = self::guardarDatosUsuario($datosValidos);
@@ -50,9 +46,7 @@ class Controlador_Registro extends Controlador_Base {
           throw new Exception("Error en el sistema, por favor intente de nuevo");
         }
         $GLOBALS['db']->commit();
-
         $nombres = $datosReg['nombresCandEmp'].((isset($datosReg['apellidosCand'])) ? " ".$datosReg['apellidosCand'] : '');
-        // generar token
         $token = Utils::generarToken($id_usuario,"ACTIVACION");
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente de nuevo");
@@ -62,10 +56,9 @@ class Controlador_Registro extends Controlador_Base {
         if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
             throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
         }
-
         $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entreda o spam para activar tu cuenta';
-
-      } catch (Exception $e) {
+      } 
+      catch (Exception $e) {
         $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
@@ -76,15 +69,12 @@ class Controlador_Registro extends Controlador_Base {
   public function validarCamposReg($datosReg){
     $iso = SUCURSAL_ISO;
     $arraySubareas = array();
-
     if(!Utils::es_correo_valido($datosReg['correoCandEmp'])){
       throw new Exception("El correo ingresado no es v\u00E1lido");
     }
-
     if(Modelo_Usuario::existeCorreo($datosReg['correoCandEmp'])){
       throw new Exception("El correo ingresado ya existe");
     }
-
     if($datosReg['tipo_usuario'] == 1){
       if (method_exists(new Utils, 'validar_'.$iso)){
         $function = 'validar_'.$iso;
@@ -93,19 +83,15 @@ class Controlador_Registro extends Controlador_Base {
         }
       }
     }
-
     if(Modelo_Usuario::existeDni($datosReg['documentoCandEmp'])){
       throw new Exception("El documento ingresado ya existe");
     }
-
     if(!Utils::validarPassword($datosReg['password_1']) || !Utils::validarPassword($datosReg['password_2'])){
       throw new Exception("La contraseña ingresada no cumple el formato");
     }
-
     if(!Utils::passCoinciden($datosReg['password_1'], $datosReg['password_2'])){
       throw new Exception("Las contrase\u00F1as ingresadas no coinciden");
     }
-
     if($datosReg['tipo_usuario'] == 1){
       // validacion de que area y subarea existe
       for ($i=0; $i < count($datosReg['subareasCand']); $i++) { 
@@ -118,15 +104,12 @@ class Controlador_Registro extends Controlador_Base {
           }
       }
       array_push($datosReg, $arraySubareas);
-
       if(empty($arraySubareas)){
         throw new Exception("Debe seleccionar al menos una sub\u00E1rea por \u00E1rea");
       }
-
       if(count($datosReg['areaCand']) < 1 || count($datosReg['areaCand']) > AREASPERMITIDAS){
         throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
       }
-
     }
 
     // generar username
@@ -150,10 +133,8 @@ class Controlador_Registro extends Controlador_Base {
 
   public function guardarDatosUsuario($datosValidos){
     $data = array(); $id_usuario = "";    
-
     $usuario_login = array("tipo_usuario"=>$datosValidos['tipo_usuario'], "username"=>$datosValidos['username'], 
                            "password"=>$datosValidos['password_1'], "correo"=>$datosValidos['correoCandEmp'], "dni"=>$datosValidos['documentoCandEmp']);
-
     if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){      
       throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
     }
@@ -180,39 +161,30 @@ class Controlador_Registro extends Controlador_Base {
                       "genero"=>'M',/*--*/
                       "id_usuario_login"=>$id_usuario_login, 
                       "tipo_usuario"=>$datosValidos['tipo_usuario']);/**/
-
-
       if(!Modelo_Usuario::crearUsuario($data)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
-
       $id_usuario = $GLOBALS['db']->insert_id();
-
       if(!Modelo_UsuarioxArea::crearUsuarioArea($datosValidos, $id_usuario)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
-
     }
     else{
-      $data = array(
-                    "nombres"=>$datosValidos['nombresCandEmp'],
-                      "telefono"=>$datosValidos['celularCandEmp'],
-                      "fecha_nacimiento"=>$fechaNacimientoDefault,
-                      "fecha_creacion"=>$fechaDefault,/* -----*/
-                      "estado"=>0,
-                      "term_cond"=>1,
-                      "id_ciudad"=>$ciudadDefault['id_ciudad'],
-                      "ultima_sesion"=>$fechaDefault,
-                      "id_nacionalidad"=>SUCURSAL_PAISID,
-                      "id_usuario_login"=>$id_usuario_login, 
-                      "tipo_usuario"=>$datosValidos['tipo_usuario']);
-
+      $data = array("nombres"=>$datosValidos['nombresCandEmp'],
+                    "telefono"=>$datosValidos['celularCandEmp'],
+                    "fecha_nacimiento"=>$fechaNacimientoDefault,
+                    "fecha_creacion"=>$fechaDefault,/* -----*/
+                    "estado"=>0,
+                    "term_cond"=>1,
+                    "id_ciudad"=>$ciudadDefault['id_ciudad'],
+                    "ultima_sesion"=>$fechaDefault,
+                    "id_nacionalidad"=>SUCURSAL_PAISID,
+                    "id_usuario_login"=>$id_usuario_login, 
+                    "tipo_usuario"=>$datosValidos['tipo_usuario']);
       if(!Modelo_Usuario::crearUsuario($data)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
-
       $id_usuario = $GLOBALS['db']->insert_id();
-
       if(!Modelo_ContactoEmpresa::crearContactoEmpresa($datosValidos, $id_usuario)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
@@ -299,8 +271,7 @@ class Controlador_Registro extends Controlador_Base {
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
       $user_id = $GLOBALS['db']->insert_id();
-      $GLOBALS['db']->commit();
-        
+      $GLOBALS['db']->commit();        
       $nombres = $nombre." ".$apellido;      
       $token = Utils::generarToken($user_id,"ACTIVACION");
       if (empty($token)){

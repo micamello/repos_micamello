@@ -645,7 +645,7 @@ function enviarFormulario(){
         document.form_editarPerfil.submit();
     }else{
       //mostrarERRORES
-      swal('Faltan algunos datos verifica!', estado, 'error');
+      swal('Faltan algunos datos!', estado, 'error');
     }
 }
 

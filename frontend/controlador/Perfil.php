@@ -33,7 +33,6 @@ class Controlador_Perfil extends Controlador_Base
                 Vista::renderJSON($arrciudad);
                 break;
             default:
-
                 //Listados de datos para llenar los select de la vista
                 $arridioma = Modelo_Idioma::obtieneListado();
                 $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
