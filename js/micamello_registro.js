@@ -2,7 +2,7 @@ $('#areaCand').multiple_select({
     items: 4,
     dependence: {
       id_dependencia: "subareasCand",
-      items: 3
+      items: false
     }
   });
 

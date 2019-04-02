@@ -81,12 +81,15 @@ abstract class Controlador_Base{
       $this->gg_URL = $gClient->createAuthUrl();
   */
       // LINKEDIN
-      $this->lk = "linkedin.php?tipo_usuario=1";
+      // $this->lk = "linkedin.php?tipo_usuario=1";
 /*
       // TWITTER
       require_once "includes/tw_api/config.php";
       $this->tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
     }*/ 
+    // TWITTER
+      // require_once "includes/tw_api/config.php";
+      // $this->tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));
   }
 
   public abstract function construirPagina();

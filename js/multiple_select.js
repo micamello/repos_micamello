@@ -169,6 +169,7 @@ function loadButtonSelected(obj){
             $(panel_dep).prev('.button_selected').remove();
         }
         panel_dep.before(botonSeleccionados);
+        ondeleteCount();
     }
     else{
         if(panel_dep.prev('.button_selected').length){
@@ -779,9 +780,11 @@ function ondeleteCount(){
     // bounceCss
     var objetoBoton = $('#boton_'+settings.dependence.id_dependencia);
     var countListado = $('#panel'+settings.dependence.id_dependencia).find('li.subarea_selected:not(.seleccion_e)');
+    console.log(countListado.length);
+    console.log(objetoBoton[0]);
     objetoBoton.removeClass('bounceCss');
     objetoBoton.addClass('bounceCss');
-    objetoBoton.html("<i class='fa fa-eye'></i><span class='countList'>"+countListado.length+"</span>");
+    objetoBoton.html("<i class='fa fa-plus'></i><span class='countList'>"+countListado.length+"</span>");
 }
 
 $('#modal_select').on('hidden.bs.modal', function(){

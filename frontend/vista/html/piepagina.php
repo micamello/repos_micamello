@@ -230,7 +230,9 @@
             </div>
 
             <div class="col-md-3 col-sm-3 col-xs-3">
-              <div class=""><i class="fa fa-twitter fa-2x twClass"></i></div>
+              <div class="">
+                  <a onclick="window.location = '<?php echo $social['tw'] ?>'"><i class="fa fa-twitter fa-2x twClass"></i></a>
+              </div>
             </div>
             
             <div class="col-md-3 col-sm-3 col-xs-3">
