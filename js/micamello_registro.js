@@ -1,9 +1,10 @@
 $('#areaCand').multiple_select({
+	items: 3,
     dependence: {
       id_dependencia: "subareasCand",
-      items: 3
+      items: false
     }
-  });
+});
 
 var modal;
 var campos = [];

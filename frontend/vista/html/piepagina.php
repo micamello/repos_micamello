@@ -232,13 +232,13 @@
 
             <div class="col-md-3 col-sm-3 col-xs-3">
               <div class="">
-                <a onclick="window.location = '<?php echo $social['tw'] ?>'"><i class="fa fa-twitter fa-2x twClass"></i></a>
+                <a onclick="window.location = '<?php echo $social['tw'] ?>'" style="cursor:pointer;"><i class="fa fa-twitter fa-2x twClass"></i></a>
               </div>
             </div>
             
             <div class="col-md-3 col-sm-3 col-xs-3">
               <div class="">
-                <a onclick="window.location = '<?php echo $social['lk'] ?>'"><i class="fa fa-linkedin fa-2x lkClass"></i></a>
+                <a onclick="window.location = '<?php echo $social['lk'] ?>'" style="cursor:pointer;"><i class="fa fa-linkedin fa-2x lkClass"></i></a>
               </div>
             </div>
 

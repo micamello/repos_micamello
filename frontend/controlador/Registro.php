@@ -146,13 +146,15 @@ class Controlador_Registro extends Controlador_Base {
     $datosReg = array_merge($datosReg, $nombreCorreo);
 
     return $datosReg;
-
   }
 
   public function guardarDatosUsuario($datosValidos){
-    $data = array(); $id_usuario = "";
-    // guardar mfo_usuario_login
-    if(!Modelo_UsuarioLogin::crearUsuarioLogin($datosValidos)){      
+    $data = array(); $id_usuario = "";    
+
+    $usuario_login = array("tipo_usuario"=>$datosValidos['tipo_usuario'], "username"=>$datosValidos['username'], 
+                           "password"=>$datosValidos['password_1'], "correo"=>$datosValidos['correoCandEmp'], "dni"=>$datosValidos['documentoCandEmp']);
+
+    if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){      
       throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
     }
     $id_usuario_login = $GLOBALS['db']->insert_id();
@@ -233,255 +235,90 @@ class Controlador_Registro extends Controlador_Base {
       $tipousuario = $valores[2];
       $fecha = $valores[3];
       $token_valido = Utils::generarToken($idusuario,"ACTIVACION");
-      
-        if($token_valido != $token){
-          throw new Exception("El enlace para recuperaci\u00F3n es incorrecto, por favor ingrese denuevo su correo para el env\u00EDo");      
-        }
-
-        if(!Modelo_Usuario::activarCuenta($idusuario, $tipousuario)){
-          throw new Exception("Ha ocurrido un error al activar la cuenta, por favor intente nuevamente");
-        }
-        $_SESSION['mostrar_exito'] = "Su cuenta se ha activado correctamente";
-        $this->redirectToController('login');
+      if($token_valido != $token){
+        throw new Exception("El enlace para recuperaci\u00F3n es incorrecto, por favor ingrese denuevo su correo para el env\u00EDo");      
       }
-      catch( Exception $e ){
-        $_SESSION['mostrar_error'] = $e->getMessage(); 
-        Utils::doRedirect(PUERTO.'://'.HOST.'/');
-      }        
+      if(!Modelo_Usuario::activarCuenta($idusuario, $tipousuario)){
+        throw new Exception("Ha ocurrido un error al activar la cuenta, por favor intente nuevamente");
+      }
+      $_SESSION['mostrar_exito'] = "Su cuenta se ha activado correctamente";
+      $this->redirectToController('login');
     }
+    catch( Exception $e ){
+      $_SESSION['mostrar_error'] = $e->getMessage(); 
+      Utils::doRedirect(PUERTO.'://'.HOST.'/');
+    }        
+  }
 
-  // public function facebook($userdata, $tipo_usuario){
-  //   $nombres_correo = "";
-  //   $default_city = Modelo_Sucursal::obtieneCiudadDefault();
-  //   $campo_fecha = date("Y-m-d H:i:s");
-  //   $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
-  
-  //   try {
-  //     $datocorreo = Modelo_Usuario::existeCorreo($userdata["email"]);
-  //       if (empty($datocorreo)){
-  //         throw new Exception("La cuenta ya consta en nuestros registros. Revise su cuenta de correo para activarla.");
-  //       }
+  public function google($userdata){
+    $this->registroRedSocial($userdata["email"],$userdata['given_name'],$userdata['family_name']);    
+  } 
 
-  //   $apell_user = Utils::no_carac(explode(" ", strtolower($userdata['last_name'])));
-  //   $nombre_user = Utils::no_carac(explode(" ", strtolower($userdata['first_name'])));
-  //   $username = $nombre_user[0].$apell_user[0];
-  //     $username = Utils::generarUsername(strtolower($username));
+  public function linkedin($userdata){
+    $this->registroRedSocial($userdata["emailAddress"],$userdata['firstName'],$userdata['lastName']);    
+  }
 
-  //     $GLOBALS['db']->beginTrans();
+  public function twitter($userdata){    
+    $this->registroRedSocial($userdata["email"],$userdata['name'],$userdata['screen_name']);    
+  }
 
-  //     $password = Utils::generarPassword();
-  //     $usuario_login = array("tipo_usuario"=>$tipo_usuario, "username"=>$username, "password"=>$password, "correo"=>$userdata['email'], "dni"=>0);
-  //         if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente");
-  //         }
+  public function facebook($userdata){
+    $this->registroRedSocial($userdata["email"],$userdata['first_name'],$userdata['last_name']);    
+  }
 
-  //     $id_usuario_login = $GLOBALS['db']->insert_id();
-  //       if ($tipo_usuario == 1) {
-  //         $nombres_correo = $userdata['first_name']." ".$userdata['last_name'];
-  //         $escolaridad = Modelo_Escolaridad::obtieneListado();
-  //         $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['first_name'], "apellidos"=>$userdata['last_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
-  //       }
-
-
-  //       if(!Modelo_Usuario::crearUsuario($dato_registro)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente");
-  //       }
+  public function registroRedSocial($correo,$nombre,$apellido){
+    $default_city = Modelo_Sucursal::obtieneCiudadDefault();
+    $escolaridad = Modelo_Escolaridad::obtieneListado();
+    $campo_fecha = date("Y-m-d H:i:s");
+    $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
+    try {      
+      $GLOBALS['db']->beginTrans();
+      $datocorreo = Modelo_Usuario::existeCorreo($correo);
+      if (!empty($datocorreo)){
+        throw new Exception("El correo asociado a la cuenta de Twitter con la que desea registrarse ya se encuentra en nuestros registros.");
+      }
+      $apell_user = Utils::no_carac(explode(" ", trim($apellido)));
+      $nombre_user = Utils::no_carac(explode(" ", trim($nombre)));
+      $username = $nombre_user[0].$apell_user[0];
+      $username = Utils::generarUsername(strtolower($username));      
+      $password = Utils::generarPassword();
+      $userdata['email'] = strtolower($correo);
+      $usuario_login = array("tipo_usuario"=>Modelo_Usuario::CANDIDATO, "username"=>$username, 
+                             "password"=>$password, "correo"=>$correo, "dni"=>0);
+      if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
+        throw new Exception("Ha ocurrido un error, por favor intente denuevo");
+      }
+      $id_usuario_login = $GLOBALS['db']->insert_id();                  
+      $dato_registro = array("telefono"=>"-", "nombres"=>$nombre, "apellidos"=>$apellido, "fecha_nacimiento"=>$mayor_edad,
+                             "fecha_creacion"=>$campo_fecha, "estado"=>0, "term_cond"=>1, "id_ciudad"=>$default_city['id_ciudad'],
+                             "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>SUCURSAL_PAISID, "tipo_doc"=>0, 
+                             "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", 
+                             "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>Modelo_Usuario::CANDIDATO);
+         
+      if(!Modelo_Usuario::crearUsuario($dato_registro)){
+        throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
+      }
+      $user_id = $GLOBALS['db']->insert_id();
+      $GLOBALS['db']->commit();
         
-  //       $user_id = $GLOBALS['db']->insert_id();
-
-  //     $GLOBALS['db']->commit();
-      
-  //           $token = Utils::generarToken($user_id,"ACTIVACION");
-  //           if (empty($token)){
-  //             throw new Exception("Error en el sistema, por favor intente de nuevo");
-  //           }
-
-  //         $token .= "||".$user_id."||".$tipo_usuario."||".date("Y-m-d H:i:s");
-  //         $token = Utils::encriptar($token);
-
-  //         // if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
-  //         //     throw new Exception("Error al enviar credenciales. Intente nuevamente");
-  //         //   }
-
-  //         $parametros = array("tipo"=>2, "correo"=>$usuario_login['correo'], "nombres_mostrar"=>$nombres_correo, "usuario_login"=>$usuario_login['correo'], "token"=>$token);
-  //         if(!Utils::enviarEmail($parametros)){
-  //           throw new Exception("Error en el envio de correo, por favor intente denuevo");
-  //         }
-          
-  //           $_SESSION['registro'] = 1;
-  //   }
-  //     catch( Exception $e ){
-  //       $GLOBALS['db']->rollback();
-  //       $_SESSION['mostrar_error'] = $e->getMessage();  
-  //     }
-      
-  //    Utils::doRedirect(PUERTO.'://'.HOST.'/');
-  // }
-
-  // public function google($userdata, $tipo_usuario){
-  //   $nombres_correo = "";
-  //   $default_city = Modelo_Sucursal::obtieneCiudadDefault();
-  //   $campo_fecha = date("Y-m-d H:i:s");
-  //   $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
-
-  //   try {
-  //     $datocorreo = Modelo_Usuario::existeCorreo($userdata["email"]);
-  //       if (empty($datocorreo)){
-  //         throw new Exception("El correo asociado a la cuenta de Google con la que desea registrarse ya se encuentra en nuestros registros.");
-  //       }
-
-  //     $apell_user = Utils::no_carac(explode(" ", strtolower($userdata['family_name'])));
-  //     $nombre_user = Utils::no_carac(explode(" ", strtolower($userdata['given_name'])));
-  //     $username = $nombre_user[0].$apell_user[0];
-
-  //     $username = Utils::generarUsername(strtolower($username));
-
-  //     $GLOBALS['db']->beginTrans();
-
-  //     $password = Utils::generarPassword();
-  //     $usuario_login = array("tipo_usuario"=>$tipo_usuario, "username"=>$username, "password"=>$password, "correo"=>$userdata['email'], "dni"=>0);
-  //         if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente");
-  //         }
-
-  //     $id_usuario_login = $GLOBALS['db']->insert_id();
-  //       if ($tipo_usuario == 1) {
-  //         $nombres_correo = $userdata['given_name']." ".$userdata['family_name'];
-  //         $escolaridad = Modelo_Escolaridad::obtieneListado();
-  //         $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['given_name'], "apellidos"=>$userdata['family_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
-  //       }
-
-  //       if(!Modelo_Usuario::crearUsuario($dato_registro)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente");
-  //       }
-  //       $user_id = $GLOBALS['db']->insert_id();
-
-  //       $GLOBALS['db']->commit();
-
-  //       $token = Utils::generarToken($user_id,"ACTIVACION");
-  //           if (empty($token)){
-  //             throw new Exception("Error en el sistema, por favor intente de nuevo");
-  //           }
-
-  //         $token .= "||".$user_id."||".$tipo_usuario."||".date("Y-m-d H:i:s");
-  //         $token = Utils::encriptar($token);
-  //         if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
-  //             throw new Exception("Error al enviar credenciales. Intente nuevamente");
-  //           }
-          
-  //         $_SESSION['registro'] = 1;
-  //   } catch (Exception $e) {
-  //       $GLOBALS['db']->rollback();
-  //       $_SESSION['mostrar_error'] = $e->getMessage();
-  //   }
-    
-  //   Utils::doRedirect(PUERTO.'://'.HOST.'/');
-  // }
-
-  // public function linkedin($userdata, $tipo_usuario){
-  //   $nombres_correo = "";
-  //   $default_city = Modelo_Sucursal::obtieneCiudadDefault();
-  //   $campo_fecha = date("Y-m-d H:i:s");
-  //   $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
-  //   try {
-  //     $datocorreo = Modelo_Usuario::existeCorreo($userdata['emailAddress']);
-  //       if (empty($datocorreo)){
-  //         throw new Exception("El correo asociado a la cuenta de LinkedIn con la que desea registrarse ya se encuentra en nuestros registros.");
-  //       }
-  //     $apell_user = Utils::no_carac(explode(" ", strtolower($userdata['lastName'])));
-  //     $nombre_user = Utils::no_carac(explode(" ", strtolower($userdata['firstName'])));
-  //     $username = $nombre_user[0].$apell_user[0];
-  //     $username = self::generarUsername(strtolower($username));
-  //     $GLOBALS['db']->beginTrans();
-  //     $password = Utils::generarPassword();
-  //     $usuario_login = array("tipo_usuario"=>$tipo_usuario, "username"=>$username, "password"=>$password, "correo"=>$userdata['emailAddress'], "dni"=>0);
-  //         if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente 1");
-  //         }
-  //     $id_usuario_login = $GLOBALS['db']->insert_id();
-  //       if ($tipo_usuario == 1) {
-  //         $nombres_correo = $userdata['firstName']." ".$userdata['lastName'];
-  //         $escolaridad = Modelo_Escolaridad::obtieneListado();
-  //         $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['firstName'], "apellidos"=>$userdata['lastName'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
-  //       }
-  //       if(!Modelo_Usuario::crearUsuario($dato_registro)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente 2");
-  //           Utils::log("eder");
-  //       }
-  //       $user_id = $GLOBALS['db']->insert_id();
-  //       $GLOBALS['db']->commit();
-  //       $token = Utils::generarToken($user_id,"ACTIVACION");
-  //           if (empty($token)){
-  //             throw new Exception("Error en el sistema, por favor intente de nuevo");
-  //           }
-  //         $token .= "||".$user_id."||".$tipo_usuario."||".date("Y-m-d H:i:s");
-  //         $token = Utils::encriptar($token);
-  //         if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
-  //             throw new Exception("Error al enviar credenciales. Intente nuevamente");
-  //           }
-          
-  //           $_SESSION['registro'] = 1;
-      
-  //   } catch (Exception $e) {
-  //       $GLOBALS['db']->rollback();
-  //       $_SESSION['mostrar_error'] = $e->getMessage();
-  //   }
-  //   // produccion
-  
-  //   unset($_SESSION['OAUTH_ACCESS_TOKEN']);
-    
-  //   Utils::doRedirect(PUERTO.'://'.HOST.'/');
-  // }
-
-  // public function twitter($userdata, $tipo_usuario){
-  //   $nombres_correo = "";
-  //   $default_city = Modelo_Sucursal::obtieneCiudadDefault();
-  //   $campo_fecha = date("Y-m-d H:i:s");
-  //   $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
-  //   try {
-  //     $datocorreo = Modelo_Usuario::existeCorreo($userdata["email"]);
-  //       if (empty($datocorreo)){
-  //         throw new Exception("El correo asociado a la cuenta de Twitter con la que desea registrarse ya se encuentra en nuestros registros.");
-  //       }
-  //     $apell_user = Utils::no_carac(explode(" ", strtolower($userdata['screen_name'])));
-  //     $nombre_user = Utils::no_carac(explode(" ", strtolower($userdata['screen_name'])));
-  //     $username = $nombre_user[0].$apell_user[0];
-  //     $username = self::generarUsername(strtolower($username));
-  //     $GLOBALS['db']->beginTrans();
-  //     $password = Utils::generarPassword();
-  //     $usuario_login = array("tipo_usuario"=>$tipo_usuario, "username"=>$username, "password"=>$password, "correo"=>strtolower($userdata['email']), "dni"=>0);
-  //         if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente");
-  //         }
-  //     $id_usuario_login = $GLOBALS['db']->insert_id();
-  //       if ($tipo_usuario == 1) {
-  //         $nombres_correo = $userdata['screen_name']." ".$userdata['screen_name'];
-  //         $escolaridad = Modelo_Escolaridad::obtieneListado();
-  //         $dato_registro = array("telefono"=>"0000000000", "nombres"=>$userdata['screen_name'], "apellidos"=>$userdata['screen_name'], "fecha_nacimiento"=>$mayor_edad, "fecha_creacion"=>$campo_fecha, "token"=>$userdata['id'], "estado"=>0, "term_cond"=>1, "conf_datos"=>1, "id_ciudad"=>$default_city['id_ciudad'], "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>1, "tipo_doc"=>0, "status_carrera"=>1, "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>$tipo_usuario);
-  //       }
-  //       if(!Modelo_Usuario::crearUsuario($dato_registro)){
-  //           throw new Exception("Ha ocurrido un error, intente nuevamente  ");
-  //       }
-  //       $user_id = $GLOBALS['db']->insert_id();
-  //       $GLOBALS['db']->commit();
-  //       $token = Utils::generarToken($user_id,"ACTIVACION");
-  //           if (empty($token)){
-  //             throw new Exception("Error en el sistema, por favor intente de nuevo");
-  //           }
-  //         $token .= "||".$user_id."||".$tipo_usuario."||".date("Y-m-d H:i:s");
-  //         $token = Utils::encriptar($token);
-  //         if (!$this->credencialSocial($usuario_login['correo'], $nombres_correo, $username, $usuario_login['password'], $token)){
-  //             throw new Exception("Error al enviar credenciales. Intente nuevamente");
-  //           }
-          
-  //         $_SESSION['registro'] = 1;
-  //   } catch (Exception $e) {
-  //       $GLOBALS['db']->rollback();
-  //       $_SESSION['mostrar_error'] = $e->getMessage();
-  //   }
-    
-  //   Utils::doRedirect(PUERTO.'://'.HOST.'/');
-  // }
+      $nombres = $nombre." ".$apellido;      
+      $token = Utils::generarToken($user_id,"ACTIVACION");
+      if (empty($token)){
+        throw new Exception("Error en el sistema, por favor intente de nuevo");
+      }
+      $token .= "||".$user_id."||".Modelo_Usuario::CANDIDATO."||".date("Y-m-d H:i:s");
+      $token = Utils::encriptar($token);
+      if (!$this->correoActivacionCuenta($correo,$nombres,$token,$username)){
+        throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
+      }
+      $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entreda o spam para activar tu cuenta';  
+    } 
+    catch (Exception $e) {
+      $GLOBALS['db']->rollback();
+      $_SESSION['mostrar_error'] = $e->getMessage();
+    }    
+    Utils::doRedirect(PUERTO.'://'.HOST.'/');
+  } 
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username){
     $enlace = "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
@@ -497,21 +334,5 @@ class Controlador_Registro extends Controlador_Base {
       return false;
     }
   }
-
-  // public function credencialSocial($correo,$nombres,$username, $password, $token){
-  //   $asunto = "Credenciales de cuenta";
-  //   $body = "Estimado, ".$nombres.",<br><br>";
-  //   $body .= "Se ha registrado correctamente, de click en este <a href='".PUERTO."://".HOST."/registro/".$token."/'>enlace</a> para activar su cuenta e ingresar al sistema con los siguientes datos.<br><br>";
-  //   $body .= "Correo electrónico: <b>".$correo."</b><br>";
-  //   $body .= "Usuario: <b>".$username."</b><br>";
-  //   $body .= "Contraseña: <b>".$password."</b><br><br>";    
-  //   $body .= "Recuerde no entregar sus credenciales de acceso.</b>";
-  //   if (Utils::envioCorreo($correo,$asunto,$body)){
-  //     return true;
-  //   }
-  //   else{
-  //     return false;
-  //   }
-  // }
 }
 ?>

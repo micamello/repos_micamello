@@ -214,6 +214,7 @@ function inicializarDependencia(obj){
                 if($(opciones[i]).attr('selected')){
                     selected_class = "subarea_selected"; check_check = "checked";
                 }
+                console.log(settings.dependence.items);
                 if(e != area_val){
                     if(settings.dependence.items == false){
                     listado_opciones += "<li class='select_list_subarea subarea_disabled seleccion_e' id='all_select_"+obj+"_"+area_val+"'>Marcar o desmarcar todos<input type='checkbox'></li>";  

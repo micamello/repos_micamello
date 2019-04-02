@@ -131,7 +131,7 @@ if (document.getElementById("area"))
     items: 3,
     dependence: {
       id_dependencia: "subareas",
-      items: 1
+      items: false
     }
   });
 }
