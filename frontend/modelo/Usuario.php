@@ -129,7 +129,7 @@ public static function existeUsername($username){
 // se utiliza esta funcion en el registro modal--------------------
   public static function existeCorreo($correo){
     if(empty($correo)){ return false; }
-    $sql = "select * from mfo_usuario_login where correo = ?";
+    $sql = "SELECT * FROM mfo_usuario_login WHERE correo = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     return (empty($rs['correo'])) ? false : $rs['id_usuario_login'];
   }

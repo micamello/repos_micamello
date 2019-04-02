@@ -108,7 +108,6 @@ class Database{
     $query .= ') VALUES';
     $query .= $valores;
     $query .= ';';
-    print_r($query);
     // exit();
     return $this->execute( $query );
   }

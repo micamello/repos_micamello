@@ -20,6 +20,7 @@
 
 
 
+
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 
 <div id="modal_registro" class="modal fade" role="dialog">
@@ -204,7 +205,7 @@
             <div class="form-group check_box">
                 <div class="col-md-12">
                   <div class="checkbox">
-                    <label><input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He leído y acepto <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">término de condiciones</a> y <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Política de privacidad</a></label>
+                    <label><input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He leído y acepto <a href="">término de condiciones</a> y <a href="">Política de privacidad</a></label>
                     <div></div>
                   </div>
                 </div>
@@ -226,23 +227,32 @@
           </div>
           <div class="col-md-4 col-sm-4 col-xs-12 col-sm-offset-4 col-md-offset-4">
             <div class="col-md-3 col-sm-3 col-xs-3">
-              <div class=""><i class="fa fa-facebook-official fa-2x fbClass"></i></div>
+              <div class="">
+                <a onclick="window.location = '<?php echo $social['fb']; ?>'" style="cursor:pointer;"> 
+                  <i class="fa fa-facebook-official fa-2x fbClass"></i></div>
+                </a>
             </div>
 
             <div class="col-md-3 col-sm-3 col-xs-3">
               <div class="">
-                  <a onclick="window.location = '<?php echo $social['tw'] ?>'"><i class="fa fa-twitter fa-2x twClass"></i></a>
+                <a onclick="window.location = '<?php echo $social['tw']; ?>'" style="cursor:pointer;">
+                  <i class="fa fa-twitter fa-2x twClass"></i></a>
               </div>
             </div>
             
             <div class="col-md-3 col-sm-3 col-xs-3">
               <div class="">
-                <a onclick="window.location = '<?php echo $social['lk'] ?>'"><i class="fa fa-linkedin fa-2x lkClass"></i></a>
+                <a onclick="window.location = '<?php echo $social['lk']; ?>'" style="cursor:pointer;">
+                  <i class="fa fa-linkedin fa-2x lkClass"></i></a>
               </div>
             </div>
 
             <div class="col-md-3 col-sm-3 col-xs-3">
-              <div class=""><i class="fa fa-google fa-2x ggClass"></i></div>
+              <div class="">
+                <a onclick="window.location = '<?php echo $social['gg']; ?>'" style="cursor:pointer;">
+                  <i class="fa fa-google fa-2x ggClass"></i>
+                </a>
+              </div>  
             </div>
 
           </div>
@@ -271,7 +281,6 @@
     </div>
   </div>
 </div>
-
 
 <?php } ?>
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
