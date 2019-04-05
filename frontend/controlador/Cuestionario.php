@@ -44,7 +44,7 @@ class Controlador_Cuestionario extends Controlador_Base {
         }
         $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $faceta = Modelo_Respuesta::facetaSiguiente($id_usuario);
-        if($faceta == 1 || $faceta == 2 || $faceta == 5 || ($faceta-1) == 2){
+        if($faceta == 1 || $faceta == 2 || ($faceta+1) == 6 || ($faceta-1) == 2){
           Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
         }
         else{
