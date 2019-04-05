@@ -47,7 +47,7 @@ class Controlador_Publicar extends Controlador_Base {
           }
         }        
         if ($rest <= 0 && is_numeric($rest)) {
-          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
+          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contrataci\u00F3n o renovaci\u00F3n del plan.";
           Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');       
         }
         else{
@@ -56,100 +56,103 @@ class Controlador_Publicar extends Controlador_Base {
       break;
     } 
   }
+
   public function mostrarDefault($idusu,$publicaciones_restantes, $plan_con_pub){
-      $arrarea = Modelo_Area::obtieneListado();
-      $arrinteres = Modelo_Interes::obtieneListado();
-      $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
-      $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
-      $arrjornada = Modelo_Jornada::obtieneListado();
-      $arridioma = Modelo_Idioma::obtieneListado();
-      $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
-      $arrescolaridad = Modelo_Escolaridad::obtieneListado();            
-      $tags = array('arrarea'=>$arrarea,
-                    'intereses'=>$arrinteres,
-                    'arrprovinciasucursal'=>$arrprovinciasucursal,
-                    'arrciudad'=>$arrciudad,
-                    'arrjornada'=>$arrjornada,
-                    'arridioma'=>$arridioma,
-                    'arrnivelidioma'=>$arrnivelidioma,
-                    'arrescolaridad'=>$arrescolaridad,
-                    'publicaciones_restantes'=>$publicaciones_restantes,
-                    'plan_con_pub'=>$plan_con_pub
-                  );
+    $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
+    $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
+    $arrjornada = Modelo_Jornada::obtieneListado();
+    $arridioma = Modelo_Idioma::obtieneListado();
+    $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
+    $arrescolaridad = Modelo_Escolaridad::obtieneListado();   
+    $fechacontratacion = date('Y-m-d',strtotime('-1 day',strtotime(date('Y-m-d H:i:s'))));    
+    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas'],
+                  'arrprovinciasucursal'=>$arrprovinciasucursal,
+                  'arrciudad'=>$arrciudad,
+                  'arrjornada'=>$arrjornada,
+                  'arridioma'=>$arridioma,
+                  'arrnivelidioma'=>$arrnivelidioma,
+                  'arrescolaridad'=>$arrescolaridad,
+                  'publicaciones_restantes'=>$publicaciones_restantes,
+                  'plan_con_pub'=>$plan_con_pub,
+                  'fecha_contratacion'=>$fechacontratacion
+                );
       
-      if ( Utils::getParam('form_publicar') == 1 ){
-        try{          
-          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1, 'urgente'=>0);             
-          $data = $this->camposRequeridos($campos);          
-          $data["des_of"] = str_replace("\r\n","<br>",$_POST["des_of"]);
-          
-          $data_idiomas = self::validarCampos($data);
-          if($publicaciones_restantes > 0 || $publicaciones_restantes == "Ilimitado"){
-            $GLOBALS['db']->beginTrans();
-            self::guardarPublicacion($data, $data_idiomas, $idusu);
-            $GLOBALS['db']->commit();
-            $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
-            $_SESSION['mostrar_exito'] = "La oferta se ha registrado correctamente. En un máximo de ".$tiempo." horas el administrador aprobará la oferta.";
-            $this->redirectToController('vacantes');
-          }
-          else{
-            $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
-            $this->redirectToController('planes');
-          }
+    if ( Utils::getParam('form_publicar') == 1 ){
+      try{          
+        $campos = array('titu_of'=>1, 'des_of'=>1, 'salario'=>1, 'convenir'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 
+                        'ciudad_of'=>1, 'jornada_of'=>1, 'escolaridad'=>1, 'confidencial'=>0,  'area_select'=>1, 'nivel_interes'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1,  'licencia'=>0,  'nivel_idioma'=>1, 'urgente'=>0);             
+        $data = $this->camposRequeridos($campos);          
+        $data["des_of"] = str_replace("\r\n","<br>",$_POST["des_of"]);
+        
+        $data_idiomas = self::validarCampos($data);
+        if($publicaciones_restantes > 0 || $publicaciones_restantes == "Ilimitado"){
+          $GLOBALS['db']->beginTrans();
+          self::guardarPublicacion($data, $data_idiomas, $idusu);
+          $GLOBALS['db']->commit();
+          $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
+          $_SESSION['mostrar_exito'] = "La oferta se ha registrado correctamente. En un máximo de ".$tiempo." horas el administrador aprobará la oferta.";
+          $this->redirectToController('vacantes');
         }
-        catch( Exception $e ){
-          $GLOBALS['db']->rollback();
-          $_SESSION['mostrar_error'] = $e->getMessage();
-          $this->redirectToController('publicar');
+        else{
+          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
+          $this->redirectToController('planes');
         }
       }
-      $tags["template_js"][] = "assets/js/main";
-      $tags["template_js"][] = "tinymce/tinymce.min";
-      //$tags["template_js"][] = "bootstrap-multiselect";
-      //$tags["template_js"][] = "mic";
-      $tags["template_js"][] = "validatePublicar";
-      Vista::render('publicar_vacante', $tags);
+      catch( Exception $e ){
+        $GLOBALS['db']->rollback();
+        $_SESSION['mostrar_error'] = $e->getMessage();
+        $this->redirectToController('publicar');
+      }
+    }
+    $tags["template_css"][] = "DateTimePicker";
+    $tags["template_js"][] = "assets/js/main";
+    $tags["template_js"][] = "tinymce/tinymce.min";      
+    $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "DateTimePicker";
+    $tags["template_js"][] = "validatePublicar";
+    Vista::render('publicar_vacante', $tags);
   }
+
   public function validarCampos($data){
 
     if(ctype_space($descripcion) && (empty($descripcion) || $descripcion == "")){
-      throw new Exception("El campo descripción es obligatorio");
+      throw new Exception("El campo descripci\u00F3n es obligatorio");
     }
 
     // Validar longitud de campos
     if(Utils::validarLongitudCampos($data['titu_of'], 100) == false){
-      throw new Exception("Longitud máxima del campo 100 caracteres");
+      throw new Exception("Longitud m\u00E1xima del campo 100 caracteres");
     }
 
     if (Utils::formatoDinero($data['salario']) == false) {
-      throw new Exception("El campo salario solo permite números");
+      throw new Exception("El campo salario solo permite n\u00FAmeros");
     }
     if (($data['salario']) < 1) {
       throw new Exception("Salario no debe ser menor a 1");
     }
     if (Utils::validarNumeros($data['vacantes']) == false) {
-      throw new Exception("El campo vacantes solo permite números");
+      throw new Exception("El campo vacantes solo permite n\u00FAmeros");
     }
     $valida_fecha = Utils::valida_fecha($data['fecha_contratacion']);
     $valida_fecha_mayor = Utils::valida_fecha_mayor($data['fecha_contratacion']);
     if(empty($valida_fecha) || ($valida_fecha_mayor)==false){
-      throw new Exception("El formato o la fecha ingresada no es válida");
+      throw new Exception("El formato o la fecha ingresada no es v\u00E1lida");
     }
     if (Utils::validarNumeros($data['edad_min']) == false) {
-      throw new Exception("El campo de edad mínima solo permite números");
+      throw new Exception("El campo de edad m\u00EDnima solo permite n\u00FAmeros");
     }
     if (Utils::validarNumeros($data['edad_max']) == false) {
-      throw new Exception("El campo edad máxima solo permite números");
+      throw new Exception("El campo edad m\u00E1xima solo permite n\u00FAmeros");
     }
     if(Utils::validarEminEmax($data['edad_min'], $data['edad_max']) == false){
-       throw new Exception("Verifique los valores de los campos edad mínima y máxima");
+       throw new Exception("Verifique los valores de los campos edad m\u00EDnima y m\u00E1xima");
     }
     if (Utils::validarLongitudMultiselect($data['area_select'], 1) == false) {
-      throw new Exception("Supero el límite de opciones permitidas en el campo categorías");
+      throw new Exception("Supero el l\u00EDmite de opciones permitidas en el campo categor\u00EDas");
     }
-    if (Utils::validarLongitudMultiselect($data['nivel_interes'], 1) == false) {
-      throw new Exception("Supero el límite de opciones permitidas en el campo nivel");
-    }
+    /*if (Utils::validarLongitudMultiselect($data['nivel_interes'], 1) == false) {
+      throw new Exception("Supero el l\u00EDmite de opciones permitidas en el campo nivel");
+    }*/
     $listado_idiomas_niveles_db = Modelo_NivelxIdioma::obtieneListado();
     $array_nivel_idioma = array();
     for ($i=0; $i < count($data['nivel_idioma']); $i++) {
@@ -169,6 +172,7 @@ class Controlador_Publicar extends Controlador_Base {
     }
     return $data_idioma_nivel;
   }
+  
   public function guardarPublicacion($data, $data_idiomas, $idusu){
     if (!Modelo_Oferta::guardarRequisitosOferta($data, $data_idiomas)) {
       throw new Exception("Ha ocurrido un error, intente nuevamente1");

@@ -1,6 +1,6 @@
 if(document.getElementById('form_editarPerfil')){
 
-    validarFormulario();
+    validarFormulario(false);
     ocultarCampos();
     mostrarUni();
 
@@ -616,7 +616,7 @@ function ocultarCampos(){
                         if(data.dependencia == 1){
                             document.getElementById("lugar_estudio").setAttribute("required",true);
                             elements[i].style.display = 'block';
-                            validarFormulario();
+                            validarFormulario(false);
                             
                         }else{
                             $("#lugar_estudio").removeAttr("required");
@@ -639,7 +639,7 @@ function ocultarCampos(){
 
 function enviarFormulario(){
 
-    var estado = validarFormulario();
+    var estado = validarFormulario(true);
     //console.log(estado);
     if(estado == ''){
         document.form_editarPerfil.submit();
@@ -649,7 +649,11 @@ function enviarFormulario(){
     }
 }
 
-function validarFormulario(){
+function validarDni(){
+
+}
+
+function validarFormulario(tipovalidacion){
 
     var mensaje = '';
     var tipo_usuario = document.getElementById('tipo_usuario').value;
@@ -716,7 +720,7 @@ function validarFormulario(){
           }  
           
 
-          if($('#dni').val() != ""){
+          if($('#dni').val() != "" && tipovalidacion == true){
 
             if(document.getElementById('dni').value.length >= 10){
               if(searchAjax($('#dni'),tipo_doc) == false){

@@ -26,46 +26,38 @@
 			 					}
 			 				}		 					
 			 			?>
-						 			<p>Fecha caducidad plan: 
-						 			<b><span><?php
-						 						if($fecha_final != "Ilimitado"){
-						 							echo date_format(date_create($fecha_final), "Y-m-d");
-						 						}
-						 						else{
-						 							echo $fecha_final;
-						 						}
-						 					?>
-						 			<i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>
-			 			
-
+			 			<p>Fecha caducidad plan: 
+			 			<b><span><?php
+			 						if($fecha_final != "Ilimitado"){
+			 							echo date_format(date_create($fecha_final), "Y-m-d");
+			 						}
+			 						else{
+			 							echo $fecha_final;
+			 						}
+			 					?>
+			 			<i style="color: #49FC49;" class="fa fa-circle"></i></span></b></p>			 			
 			 			</div>
 			 		</div>	
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
-
 			 				<p>Ofertas restantes:
 			 				<b><span> <?php if(!is_numeric($publicaciones_restantes)){echo $publicaciones_restantes; if (!empty($plan_con_pub >0)){echo " + ";} {
 			 					# code...
 			 				}}
-
-			 							if($plan_con_pub >0 && is_numeric($plan_con_pub)){echo $plan_con_pub;} ?></span></b></p>
-
+			 				if($plan_con_pub >0 && is_numeric($plan_con_pub)){echo $plan_con_pub;} ?></span></b></p>
 			 			</div>
 			 		</div>
 			 		<div class="col-md-4 col-sm-4 col-xs-12">
 			 			<div class="caja">
-
 			 				<p>N° Planes activos: 
 			 				<b><span><?php echo count($_SESSION['mfo_datos']['planes']); ?></span></b></p>
-
 			 			</div>
 			 		</div>
 			 	</div>
 			</div>
 					<?php
 					}
-				 ?>	
-			 
+				 ?>				 
 		</div>
 	</div>
 
@@ -77,11 +69,11 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group" id="titu_of_group">
-								<label class="">Título oferta: </label>&nbsp;<i class="requerido">*</i><div id="titu_of_error" class="help-block with-errors"></div>
+								<label class="">T&iacute;tulo de la Oferta: </label>&nbsp;<i class="requerido">*</i><div id="titu_of_error" class="help-block with-errors"></div>
 								<input type="text" name="titu_of" id="titu_of" class="form-control" placeholder="Título de la oferta" value="<?php
 								    if(isset($_REQUEST['titu_of'])){
-								                $name = $_REQUEST['titu_of'];
-								                echo $name;
+			                $name = $_REQUEST['titu_of'];
+			                echo $name;
 								    }
 								?>">
 							</div>
@@ -89,11 +81,11 @@
 
 						<div class="col-md-10 col-md-offset-1">
 							<div id="descripcion_group" class="form-group">
-								<label class="">Descripción oferta: </label>&nbsp;<i class="requerido">*</i><div id="descripcion_error" class="help-block with-errors"></div>
+								<label class="">Descripci&oacute;n de la Oferta: </label>&nbsp;<i class="requerido">*</i><div id="descripcion_error" class="help-block with-errors"></div>
 								<textarea id="des_of" rows="7" name="des_of" class="form-control" style="resize: none;"><?php
 								    if(isset($_REQUEST['des_of'])){
-								                $name = $_REQUEST['des_of'];
-								                echo $name;
+			                $name = $_REQUEST['des_of'];
+			                echo $name;
 								    }
 								?></textarea>
 							</div>
@@ -101,18 +93,36 @@
 
 						<div class="col-md-6">
 							<div class="form-group" id="salario_group">
-
 								<label class="">Salario: </label>&nbsp;<i class="requerido">*</i><div id="salario_error" class="help-block with-errors"></div>
 								<input type="text" name="salario" id="salario" class="form-control" placeholder="$0.00">
 							</div>
 						</div>
 
+            <div class="col-md-6">
+							<div class="form-group">
+								<label>¿Salario a Convenir?</label>&nbsp;<i class="requerido">*</i><div id="convenir_error" class="help-block with-errors"></div>								
+								<select class="form-control" name="convenir" id="convenir">
+									<?php 
+									foreach (REQUISITO as $key => $value) {
+										echo "<option value='".$key."'>".$value."</option>";
+									}
+									?>
+								</select>
+							</div>
+						</div>  
+
+            <div class="col-md-6">
+							<div class="form-group" id="fecha_group">
+								<label>Fecha contratación: </label>&nbsp;<i class="requerido">*</i><div id="fecha_error" class="help-block with-errors"></div>
+								<input type="text" data-field="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" max="<?php echo date('Y-m-d'); ?>" value="<?php	echo $fecha_contratacion;?>">
+								<div id="fecha"></div>
+							</div>
+						</div>                     
+
 						<div class="col-md-6">
 							<div class="form-group" id="vacante_group">
-
 								<label>Cantidad de vacantes: </label>&nbsp;<i class="requerido">*</i><div id="vacante_error" class="help-block with-errors"></div>
 								<input type="number" id="vacante" name="vacantes" min="1" class="form-control" value="1">
-
 							</div>
 						</div>
 
@@ -121,14 +131,13 @@
 								<label>Seleccione provincia:</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<select name="provincia_of" id="provincia_of" class="form-control" id="provincia_of">
 									<?php 
-			                      if (!empty($arrprovinciasucursal)){
-			                          foreach($arrprovinciasucursal as $provincia){ ?>
-			                              <option value="<?php echo $provincia['id_provincia'] ?>"><?php echo utf8_encode($provincia['nombre']); ?></option>
-			                          <?php }
-
-			                      }else{?>
-			                      	<option value="">Seleccione una opción</option>
-			                      	<?php  }?>
+			            if (!empty($arrprovinciasucursal)){
+			              foreach($arrprovinciasucursal as $provincia){ ?>
+			                <option value="<?php echo $provincia['id_provincia'] ?>"><?php echo utf8_encode($provincia['nombre']); ?></option>
+			              <?php }
+			            }else{?>
+			              <option value="">Seleccione una opción</option>
+			            <?php  }?>
 								</select>
 							</div>
 						</div>
@@ -138,14 +147,13 @@
 								<label>Seleccione ciudad:</label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<select name="ciudad_of" class="form-control" id="ciudad_of">
 									<?php 
-	                                	if(!empty($arrciudad)){
-
-	                                		foreach($arrciudad as $ciudad){ 
-												echo "<option value='".$ciudad['id_ciudad']."'>".utf8_encode($ciudad['ciudad'])."</option>";
-											} 
-	                                	}else{ ?>
-											<option value="">Selecciona una ciudad</option>
-	                                	<?php } ?>
+	                if(!empty($arrciudad)){
+	                  foreach($arrciudad as $ciudad){ 
+											echo "<option value='".$ciudad['id_ciudad']."'>".utf8_encode($ciudad['ciudad'])."</option>";
+										} 
+	                }else{ ?>
+										<option value="">Selecciona una ciudad</option>
+	                <?php } ?>
 								</select>
 							</div>
 						</div>
@@ -154,63 +162,49 @@
 						<div class="">
 							<div class="col-md-6">
 								<div class="form-group" id="area_group">
-									<div class="">
-										
+									<div class="">										
 										<div class="panel panel-default">
-											<div class="panel-head-select">Áreas (Máx: 1)
-									        	<label class="num_sel" style="float: right; color: black; padding: 0px 5px 0px 5px;">
-									          		<label id="numero1">0</label> de 1
-									        	</label>
-									      </div>
-									      <div class="panel-body">
-									        <div class="row" id="seleccionados1">
-									        </div>
-									      </div>
-										<div id="area_error" class="help-block with-errors"></div>
-										<select class="form-control" name="area_select[]" id="area_select" multiple>
-					                    <?php 
-					                      if (!empty($arrarea)){
-					                          foreach($arrarea as $area){ ?>
-					                              <option value="<?php echo $area['id_area'] ?>"><?php echo utf8_encode($area['nombre']); ?></option>
-					                          <?php }
-					                      } ?>
-					                  	</select>
-					                  	</div>
-					                </div>
+											<label>Seleccione área</label>											
+											<select class="form-control" name="area_select[]" id="area_select" multiple>
+						          <?php 
+	                    $i = 0;
+	                    if(!empty($areasSubareas) && is_array($areasSubareas)){
+	                      foreach ($areasSubareas as $area) {
+	                        if($i != $area['id_area']){
+	                          echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
+	                            $i = $area['id_area'];
+	                        }
+	                      }
+	                    }
+	                    ?>
+						          </select>
+					          </div>
+					        </div>
 								</div>
 							</div>
 
 							<div class="col-md-6">
 								<div class="form-group" id="nivel_group">
-									<div class="">
-										
-											<div class="panel panel-default">
-												<div class="panel-head-select">Niveles (Máx: 1)
-											        <label class="num_sel" style="float: right; color: black; padding: 0px 5px 0px 5px;">
-											          <label id="numero2">0</label> de 1
-											        </label>
-											      </div>
-											      <div class="panel-body">
-											        <div class="row" id="seleccionados2">
-											        </div>
-											      </div>
-												<div id="nivel_error" class="help-block with-errors"></div>
-												<select class="form-control" name="nivel_interes[]" id="nivel_interes" multiple>
-							                    <!-- <option value="" selected disabled>Seleccione un área</option> -->
-							                    <?php 
-							                      if (!empty($intereses)){
-							                          foreach($intereses as $interes){ ?>
-							                              <option value="<?php echo $interes['id_nivelInteres'] ?>"><?php echo utf8_encode($interes['descripcion']); ?></option>
-							                          <?php }
-							                      } ?>
-							                  	</select>
-							                </div>
-					                </div>
+									<div class="">										
+										<div class="panel panel-default">
+											<label>Seleccione subárea</label>
+											<select class="form-control" name="subareasCand[]" id="subareasCand" multiple>
+							          <?php                     
+                        if(!empty($areasSubareas) && is_array($areasSubareas)){
+                          foreach ($areasSubareas as $area) {
+                            if($j != $area['id_subareas']){
+                              echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
+                            }
+                          }
+                        }
+                        ?>
+							        </select>
+							      </div>
+					        </div>
 								</div>
 							</div>
 						</div>
 					</div>
-
 
 						<div class="col-md-6">
 							<div class="form-group">
@@ -222,7 +216,7 @@
 									<?php }
 									}else{ ?>
 											<option value="">Selecciona una opción</option>
-	                                	<?php } ?>
+	                <?php } ?>
 								</select>
 							</div>
 						</div>
@@ -237,7 +231,7 @@
 									<?php }
 									}else{ ?>
 											<option value="">Selecciona una opción</option>
-	                                	<?php } ?>
+	                <?php } ?>
 								</select>
 							</div>
 						</div>
@@ -247,27 +241,25 @@
 								<label>Años de experiencia: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<select name="experiencia" class="form-control">
 									<?php 
-
 										foreach(ANOSEXP as $key => $exp){ 
 											echo "<option value='$key'>$exp</option>";
 										}
-
 									 ?>
 								</select>
 							</div>
 						</div>
 
-						
+						<div class="col-md-3">
+							<div class="form-group" id="edad_min_group">
+								<label>Edad mínima: </label>&nbsp;<i class="requerido">*</i><div id="edad_min_error" class="help-block with-errors"></div>
+								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" value="18">
+							</div>
+						</div>
 
-						<div class="col-md-6">
-							<div class="form-group" id="fecha_group">
-								<label>Fecha contratación: </label>&nbsp;<i class="requerido">*</i><div id="fecha_error" class="help-block with-errors"></div>
-								<input type="date" id="fecha_contratacion" name="fecha_contratacion" class="form-control" value="<?php
-								    if(isset($_REQUEST['fecha_contratacion'])){
-								                $name = $_REQUEST['fecha_contratacion'];
-								                echo $name;
-								    }
-								?>">
+						<div class="col-md-3">
+							<div class="form-group" id="edad_max_group">
+								<label>Edad máxima: </label>&nbsp;<i class="requerido">*</i><div id="edad_max_error" class="help-block with-errors"></div>
+								<input type="number" id="edad_max" name="edad_max" min="18" class="form-control" value="18">
 							</div>
 						</div>
 
@@ -282,7 +274,7 @@
 									<?php }
 									}else{ ?>
 											<option value="">Selecciona una opción</option>
-	                                	<?php } ?>
+	                <?php } ?>
 								</select>
 							</div>
 						</div>
@@ -298,7 +290,7 @@
 									<?php }
 									}else{ ?>
 											<option value="">Selecciona una opción</option>
-	                                	<?php } ?>
+	                <?php } ?>
 								</select>
 							</div>
 						</div>
@@ -311,10 +303,7 @@
 							</div>
 						</div>
 
-
-
 						<div class="col-md-8 col-md-offset-2">
-
 							<div id="listado_group" class="form-group">
 								<label>Idiomas seleccionados: </label>&nbsp;<i class="requerido">*</i><div id="listado_error" class="help-block with-errors"></div>
 								<!-- <div class="col-md-12"> -->
@@ -341,14 +330,11 @@
 							<div class="form-group">
 								<label>Disponibilidad para viajar: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<select name="viaje" class="form-control">
-
 									<?php
 										foreach(REQUISITO as $key => $viajar){ 
 											echo "<option value='$key'>$viajar</option>";
 										}
-
 									 ?>
-
 								</select>
 							</div>
 						</div>
@@ -357,15 +343,11 @@
 							<div class="form-group">
 								<label>Licencia: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<select name="licencia" class="form-control">
-
 									<?php 
-
 										foreach(REQUISITO as $key => $licencia){ 
 											echo "<option value='$key'>$licencia</option>";
 										}
-
 									 ?>
-
 								</select>
 							</div>
 						</div>
@@ -374,15 +356,11 @@
 							<div class="form-group">
 								<label>Cambio de residencia: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<select name="cambio_residencia" class="form-control">
-
 									<?php 
-
 										foreach(REQUISITO as $key => $residencia){ 
 											echo "<option value='$key'>$residencia</option>";
 										}
-
 									 ?>
-
 								</select>
 							</div>
 						</div>
@@ -392,11 +370,8 @@
 								<label>Discapacidad: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
 								<select name="discapacidad" class="form-control">
 									<?php 
-
-
 										foreach(REQUISITO as $key => $discapacidad){
 											echo "<option value='$key'>$discapacidad</option>";
-
 										}
 									 ?>
 								</select>
@@ -406,45 +381,20 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Confidencial: </label>&nbsp;<i class="requerido">*</i><div class="help-block with-errors"></div>
-
 								<select name="confidencial" class="form-control">
 									<?php 
-
 										foreach(REQUISITO as $key => $confidencial){ 
 											echo "<option value='$key'>$confidencial</option>";
 										}
-
 									 ?>
-
 								</select>
-							<!-- <span class="label label-default col-md-12">Mostrar datos de la empresa</span> -->
+								<div>(No/Si presentar informaci&oacute;n de la empresa)</div>							
 							</div>
 						</div>
-
-						<div class="col-md-3">
-							<div class="form-group" id="edad_min_group">
-
-								<label>Edad mínima: </label>&nbsp;<i class="requerido">*</i><div id="edad_min_error" class="help-block with-errors"></div>
-								<input type="number" id="edad_min" name="edad_min" min="18" class="form-control" value="18">
-							</div>
-						</div>
-
-						<div class="col-md-3">
-							<div class="form-group" id="edad_max_group">
-								<label>Edad máxima: </label>&nbsp;<i class="requerido">*</i><div id="edad_max_error" class="help-block with-errors"></div>
-								<input type="number" id="edad_max" name="edad_max" min="18" class="form-control" value="18">
-							</div>
-						</div>
-						
-						<div class="col-md-6">
+																						
+            <div class="col-md-6">
 							<div class="form-group">
-								<label>¿Oferta urgente? </label>
-
-								<!-- <div class="urgente_class_input">
-									<input class="flipswitch_check" type="checkbox" name="urgente" id="urgente" value="0">
-									<label class="label_checkbox">Oferta Urgente (<small id="text_urg" style="color: #A7A7A7;">No</small>)</label>
-								</div> -->
-
+								<label>¿Oferta urgente?</label><div class="help-block with-errors"></div>		
 								<select class="form-control" name="urgente">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -453,8 +403,8 @@
 									 ?>
 								</select>
 							</div>
-						</div>
-						
+						</div> 
+
 					</div>
 					<br>
 					<div class="row">

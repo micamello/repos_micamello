@@ -102,8 +102,7 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label>Seleccione área</label>
-                  <select class="form-control" id="areaCand" name="areaCand[]" multiple="multiple">
-                    <!-- <option value="">Seleccione una opción</option> -->
+                  <select class="form-control" id="areaCand" name="areaCand[]" multiple="multiple">                    
                     <?php 
                     $i = 0;
                       if(!empty($areasSubareas) && is_array($areasSubareas)){
@@ -124,22 +123,18 @@
                 <div class="form-group">
                   <label>Seleccione subárea</label>
                   <select class="form-control" id="subareasCand" name="subareasCand[]" multiple="multiple">
-                    <!-- <option value="">Seleccione una opción</option> -->
-                    <?php 
-                    // $j = 0;
+                    <?php                     
                       if(!empty($areasSubareas) && is_array($areasSubareas)){
                         foreach ($areasSubareas as $area) {
                           if($j != $area['id_subareas']){
-                            echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
-                            // $j = $area['id_subareas'];
+                            echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";                            
                           }
                         }
                       }
                      ?>
                   </select>
                   <div></div>
-                </div>
-               
+                </div>               
               </div>
 
               <!-- contraseña -->

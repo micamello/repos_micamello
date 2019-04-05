@@ -779,16 +779,18 @@ public static function existeUsername($username){
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
+      
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }   
-      /*$nrotest = Modelo_Cuestionario::totalTest();             
+      
+      $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
       if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
-        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
+        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";        
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
@@ -796,9 +798,9 @@ public static function existeUsername($username){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
-      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {                
+      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {    
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
-      }*/ 
+      } 
       else{           
         if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
