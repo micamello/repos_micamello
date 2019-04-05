@@ -339,7 +339,7 @@ $('#direccionP').on('blur', function(){
     validarDir(dir,"err_dirP","seccion_dirP","btn_submitpaypal");
     validaCampos(1);
   }else{
-    colocaError("err_dirP","seccion_dirP","La dirección debe tener una longitud entre 10 y 100 caracteres","btn_submitpaypal");
+    colocaError("err_dirP","seccion_dirP","Dirección longitud entre 10 y 100 caracteres","btn_submitpaypal");
   }
 });
 

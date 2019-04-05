@@ -48,17 +48,10 @@ class Controlador_Login extends Controlador_Base {
       }
     } 
 
-    $tags = array('social'=>$social_reg);
- 
-    //$tags["arrarea"] = Modelo_Area::obtieneListado();
-    //$tags["intereses"] = Modelo_Interes::obtieneListado();
- 
-    $tags["template_js"][] = "modal-register";
-    $tags["template_js"][] = "assets/js/main"; 
-    //$tags["template_js"][] = "ruc_jquery_validator";
-    //$tags["template_js"][] = "bootstrap-multiselect";
-    //$tags["template_js"][] = "registrar";
-    //$tags["template_js"][] = "mic";
+    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas']);
+    $tags["template_js"][] = "DniRuc_Validador";
+    $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "micamello_registro";
     Vista::render('login',$tags);  
  
   }

@@ -18,21 +18,7 @@
 </div>
 
 
-<div class="modal fade" id="modal_select" role="dialog">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
-      <div class="modal-body" style="overflow: scroll">
-        <!-- <div class="col-md-12" id="modalmodal"> -->
-          
-        <!-- </div> -->
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      </div> 
-    </div>
-  </div>
-</div>
+
 
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
@@ -241,21 +227,32 @@
           </div>
           <div class="col-md-4 col-sm-4 col-xs-12 col-sm-offset-4 col-md-offset-4">
             <div class="col-md-3 col-sm-3 col-xs-3">
-              <div class=""><i class="fa fa-facebook-official fa-2x fbClass"></i></div>
+              <div class="">
+                <a onclick="window.location = '<?php echo $social['fb']; ?>'" style="cursor:pointer;"> 
+                  <i class="fa fa-facebook-official fa-2x fbClass"></i></div>
+                </a>
             </div>
 
             <div class="col-md-3 col-sm-3 col-xs-3">
-              <div class=""><i class="fa fa-twitter fa-2x twClass"></i></div>
+              <div class="">
+                <a onclick="window.location = '<?php echo $social['tw']; ?>'" style="cursor:pointer;">
+                  <i class="fa fa-twitter fa-2x twClass"></i></a>
+              </div>
             </div>
             
             <div class="col-md-3 col-sm-3 col-xs-3">
               <div class="">
-                <a onclick="window.location = '<?php echo $social['lk'] ?>'"><i class="fa fa-linkedin fa-2x lkClass"></i></a>
+                <a onclick="window.location = '<?php echo $social['lk']; ?>'" style="cursor:pointer;">
+                  <i class="fa fa-linkedin fa-2x lkClass"></i></a>
               </div>
             </div>
 
             <div class="col-md-3 col-sm-3 col-xs-3">
-              <div class=""><i class="fa fa-google fa-2x ggClass"></i></div>
+              <div class="">
+                <a onclick="window.location = '<?php echo $social['gg']; ?>'" style="cursor:pointer;">
+                  <i class="fa fa-google fa-2x ggClass"></i>
+                </a>
+              </div>  
             </div>
 
           </div>
@@ -266,6 +263,22 @@
       </div> -->
     </div>
 
+  </div>
+</div>
+
+<div class="modal fade" id="modal_select" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+      <div class="modal-body" style="overflow: scroll">
+        <!-- <div class="col-md-12" id="modalmodal"> -->
+          
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div> 
+    </div>
   </div>
 </div>
 

@@ -1,3 +1,4 @@
+
 .obligatorio{
 	color: red;
 }
@@ -214,7 +215,7 @@ ul.list_content_mic > li:last-child {
 
 select.form-control{
 	border-radius: 15px;
-}*/
+}
 
 .check_box{
 	text-align: justify;
@@ -338,4 +339,30 @@ select.form-control{
 
 .fbClass:hover, .twClass:hover, .lkClass:hover, .ggClass:hover {
 	transform: scale(1.2);
+}
+.bounceCss{
+	-webkit-animation: bounce 1s;
+    -webkit-animation-iteration-count: 1;
+}
+
+@-webkit-keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        -webkit-transform: translateY(0);
+    }
+    40% {
+        -webkit-transform: translateY(-30px);
+    }
+    60% {
+        -webkit-transform: translateY(-15px);
+    }
+}
+
+.countList{
+	position: absolute;
+	bottom: 28px;
+	color: white;
+	background-color: red;
+	padding: 3px 6px 3px 6px;
+	border-radius: 5px;
+	font-size: 10px;
 }

@@ -47,7 +47,7 @@ class Proceso_Subscripcion{
 	    }
 	    
       //facturacion electronica
-      $obj_facturacion = new Proceso_Facturacion();
+      /*$obj_facturacion = new Proceso_Facturacion();
       $obj_facturacion->razonSocialComprador = $this->objUsuario->nombres;
       $obj_facturacion->identificacionComprador = $this->objUsuario->dni;
       $obj_facturacion->direccionComprador = $this->objUsuario->direccion;
@@ -65,13 +65,13 @@ class Proceso_Subscripcion{
         if (!Modelo_Parametro::actualizarNroFactura()){
           throw new Exception("Error al generar el siguiente numero de factura");  
         } 
-      }   
+      }*/   
       
       $GLOBALS['db']->commit();
 
       $attachments = array();
       //envio a los WS al SRI
-      if ($obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
+      /*if ($obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
         sleep(5);
         $fecha_auto = $obj_facturacion->sendAutorizacion($rsfact["claveacceso"]);
         if (!empty($fecha_auto)){
@@ -84,7 +84,7 @@ class Proceso_Subscripcion{
           $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml",
                                  "archivo"=>$rsfact["claveacceso"].".xml");
         }
-      }
+      }*/
 
       $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
 
@@ -123,16 +123,17 @@ class Proceso_Subscripcion{
     $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_SUBSCRIPCION");
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
-    $notif_body = $email_body;
+    //$notif_body = "Estimado ".$nombres;
+    //$notif_body .= "Su plan ".$plan." ha sido activado exitosamente";
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $mensaje = "Por favor de click en este enlace para realizar el tercer formulario "; 
-      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/cuestionario/'>click aqu&iacute;</a><br>";      
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
     }else{
       $mensaje = "Por favor de click en este enlace para publicar una oferta "; 
-      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov2/publicar/'>click aqu&iacute;</a><br>";  
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
     } 
     $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
-    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
+    //Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
     Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
   }
 

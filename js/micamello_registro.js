@@ -1,10 +1,10 @@
 $('#areaCand').multiple_select({
-    items: 2,
+	items: 3,
     dependence: {
       id_dependencia: "subareasCand",
-      items: 1
+      items: false
     }
-  });
+});
 
 var modal;
 var campos = [];
@@ -157,7 +157,7 @@ function showTags(tags, tipo){
 			}
 			else{
 				if(tags[i].attr('id') == 'nombresCandEmp'){
-					tags[i].prev().html('Nombre Candidato <i class="obligatorio">*</i>');
+					tags[i].prev().html('Nombres <i class="obligatorio">*</i>');
 				}
 				else{
 					tags[i].parents(':eq(1)').css('display', '');
@@ -271,7 +271,7 @@ function validarOnSubmit(){
 
 // Campo correoCandEmp-------------------------------------
 	if(camposavalidar[2].val() != ""){
-		if(validarCorreo(camposavalidar[2].val())){
+		if(validarCorreo1(camposavalidar[2].val())){
 			if(!verificarExiste(camposavalidar[2])){
 				crearMensajeError(camposavalidar[2], "El correo ingresado ya existe");
 			}
@@ -547,7 +547,7 @@ $('#modal_registro').on('show.bs.modal', function(){
 	if($('#correoCandEmp').length){
 		$('#correoCandEmp').on('blur', function(){
 			if($(this).val() != ""){
-				if(validarCorreo($(this).val())){
+				if(validarCorreo1($(this).val())){
 					if(!verificarExiste($(this))){
 						crearMensajeError($(this), 'El correo ingresado ya existe');
 					}
@@ -841,7 +841,7 @@ function verificarExiste(obj){
 }
 
 // funciones de Validaciones
-function validarCorreo(correo) { 
+function validarCorreo1(correo) { 
   return /^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(correo);
 }
 

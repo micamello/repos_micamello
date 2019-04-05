@@ -573,3 +573,5 @@ function searchAjax(obj,tipo_dni){
   //console.log(val_retorno1);
   return val_retorno1;
 }
+
+$('.modal').css('overflow-y', 'auto');
