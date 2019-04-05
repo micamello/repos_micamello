@@ -208,13 +208,13 @@ ul.list_content_mic > li:last-child {
 	font-weight: bold;
 }
 
-input.form-control{
+/*input.form-control{
 	border-radius: 15px;
 }
 
 select.form-control{
 	border-radius: 15px;
-}
+}*/
 
 .check_box{
 	text-align: justify;

@@ -699,7 +699,7 @@ function validarFormulario(){
         var tipo_doc = document.getElementById('documentacion').value;
         var dni = document.getElementById('dni').value;
                 
-        if ($("#dni").is(":disabled") == false){
+        if ($("#dni").is(":disabled") == false ){
           if(tipo_doc != 0){          
             quitarError("seleccione_error","seleccione_group");          
             /*var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
@@ -716,7 +716,7 @@ function validarFormulario(){
           }  
           
 
-          if($('#dni').val() != ""){
+          if(document.getElementById('dni').value == ""){
 
             if(document.getElementById('dni').value.length >= 10){
               if(searchAjax($('#dni'),tipo_doc) == false){
