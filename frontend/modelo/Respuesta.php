@@ -1,13 +1,13 @@
 <?php
 class Modelo_Respuesta{
   
-  public static function guardarResp($valor,$selec,$tiempo,$usuario,$test,$pregunta){   
-    if (empty($valor) || empty($selec) || empty($tiempo) || empty($usuario) || empty($test) || empty($pregunta)){ return false; }
-    return $GLOBALS['db']->insert('mfo_respuesta',array('valor'=>$valor,'seleccion'=>$selec,'tiempo'=>$tiempo,
-                                                        'estado'=>1,'id_usuario'=>$usuario,'id_cuestionario'=>$test,
-                                                        'id_pre'=>$pregunta));
+  // public static function guardarResp($valor,$selec,$tiempo,$usuario,$test,$pregunta){   
+  //   if (empty($valor) || empty($selec) || empty($tiempo) || empty($usuario) || empty($test) || empty($pregunta)){ return false; }
+  //   return $GLOBALS['db']->insert('mfo_respuesta',array('valor'=>$valor,'seleccion'=>$selec,'tiempo'=>$tiempo,
+  //                                                       'estado'=>1,'id_usuario'=>$usuario,'id_cuestionario'=>$test,
+  //                                                       'id_pre'=>$pregunta));
     
-  }
+  // }
 
   public static function totalxRasgo($test,$preguntas,$usuario){
     if (empty($test) || empty($preguntas) || empty($usuario)){ return false; }
@@ -109,6 +109,52 @@ class Modelo_Respuesta{
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
   }
 
+
+
+
+  // se estan utilizando 03-04-2019
+  public static function facetaSiguiente($idusuario){
+    if (empty($idusuario)){ return false; }
+    $sql = "SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)";
+    $result = $GLOBALS['db']->auto_array($sql,array($idusuario));          
+    if (empty($result)){
+      return 1;
+    }
+    else{
+      $orden = $result['orden'] + 1;
+      $sql = "SELECT id_faceta FROM mfo_faceta WHERE orden = ?";
+      $result2 = $GLOBALS['db']->auto_array($sql,array($orden));
+      if (empty($result2)){
+        return false;
+      }
+      else{
+        return $result2['id_faceta'];
+      }
+    }
+  }
+
+  public static function obtenerRespuestas($idusuario){
+    if (empty($idusuario)){ return false; }
+    $sql = "SELECT * FROM mfo_respuesta WHERE id_usuario = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($idusuario), true);
+    return $rs;
+  }
+
+  public static function guardarRespuestas($respuestas, $tiempo, $idusuario){
+    if(empty($respuestas) || empty($tiempo) || empty($idusuario)){return false;}
+    $array_session = array();
+    foreach ($respuestas as $key => $value) {
+      array_push($array_session,array($value['orden'], "'".$tiempo."'", $value['opcion'], $idusuario));
+    }
+    if (!empty($array_session)){
+      $result = $GLOBALS['db']->insert_multiple("mfo_respuesta","orden_seleccion,tiempo,id_opcion,id_usuario",$array_session); 
+    }
+    return $result;
+  }
 
 }  
 ?>

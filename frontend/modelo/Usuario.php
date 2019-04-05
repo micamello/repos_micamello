@@ -982,6 +982,17 @@ WHERE
       return $result;
   }
 
+  public static function actualizarMetodoSeleccion($id_usuario, $modo){
+    if(empty($id_usuario) || (empty($modo) && is_numeric($modo))){return false;}
+    return $GLOBALS['db']->update("mfo_usuario",array("metodo_resp"=>$modo),"id_usuario=".$id_usuario);
+  }
+
+  public static function consultarMetodoASeleccion($id_usuario){
+    $sql = "SELECT u.metodo_resp FROM mfo_usuario u WHERE u.id_usuario = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario));
+    if (empty($rs['metodo_resp'])){ return false; } else{ return $rs; }
+  }
+
   public static function obtieneListadoEmpresas(){
     $sql = "SELECT * FROM mfo_empresam2 ORDER BY nombre";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);

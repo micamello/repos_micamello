@@ -70,6 +70,9 @@ RewriteRule ^logout/$ %{ENV:REWRITEBASE}index.php?mostrar=logout [L]
 
 #cuestionarios
 RewriteRule ^cuestionario/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario [L]
+RewriteRule ^modalidad/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario&opcion=modalidad [L]
+RewriteRule ^preguntas/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario&opcion=preguntas [L]
+RewriteRule ^cuestionario/guardarResp/$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionario&opcion=guardarResp [L]
 
 #####################################################################################
 

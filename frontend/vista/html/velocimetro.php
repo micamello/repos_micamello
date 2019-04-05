@@ -6,21 +6,6 @@
           <ul class="checkout-bar">
             <li class="visited">Registro</li>
             <li class="visited">Completar Perfil</li>
-            <?php 
-            for($i=1;$i<=$nrototaltest;$i++){ ?>
-              <?php 
-               if ($i < $nrotestusuario){
-                 $clase = "visited";
-               }
-               elseif($i == $nrotestusuario){
-                 $clase = "active";
-               }
-               else{
-                 $clase = "";
-               }
-              ?>
-              <li class="<?php echo $clase;?>">Formulario <?php echo $i;?></li>              
-            <?php } ?>
           </ul>
         </div>
         <br>
@@ -56,22 +41,22 @@
           </h2>
         </div> 
         <div class="col-md-12" align="center">
-          <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/cuestionarios/<?php echo $testactual["imagen"];?>" style="width: 100%">
+          <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/cuestionarios/<?php echo $imagen;?>" style="width: 100%">
         </div>    
         <div class="row">                    
           <div class="col-md-4 col-xs-12 pull-right">
-            <?php if ($nrotestusuario < $nrototaltest){ ?>  
-              <?php if ($enlaceboton == "planes"){ 
-                $_SESSION['mostrar_error'] = "Para realizar el siguiente formulario es necesario contratar un plan";
-              }
-              ?>            
-              <a href="<?php echo PUERTO;?>://<?php echo HOST;?>/<?php echo $enlaceboton;?>/" class="btn btn-success btn-block">SIGUIENTE CUESTIONARIO</a>
-            <?php } else{ ?>
-              <a href="<?php echo PUERTO;?>://<?php echo HOST;?>/postulacion/" class="btn btn-success btn-block">POSTULATE</a>
-            <?php } ?>  
+            <?php 
+              echo "<a href='".PUERTO.'://'.HOST.'/'.$enlaceboton."/' class='btn btn-success btn-block'>".$textoBoton."</a>";
+             ?>
           </div>        
         </div>
       </div>                      
     </div>
   </div>              
 </div>
+
+<?php 
+  
+  var_dump($_SESSION['mfo_datos']['planes']);
+
+ ?>
