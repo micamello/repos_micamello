@@ -303,7 +303,7 @@ public static function existeUsername($username){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
-    echo $sql;
+    //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs; 
   }
