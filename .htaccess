@@ -147,26 +147,6 @@ RewriteRule ^vacantes/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=of
 #Aspirantes
 RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&vista=$1&id_oferta=$2&page=$3 [L]
 
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&param5=$8&param6=$9&param7=$10&param8=$11&param9=$12&param10=$13&param11=$14&page=$15 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([A-Z]{1}[0-9]{1,})/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&param5=$8&param6=$9&param7=$10&pram8=$11&param9=$12&param10=$13&page=$14 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&param5=$8&param6=$9&param7=$10&param8=$11&param9=$12&page=$13 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&param5=$8&param6=$9&param7=$10&param8=$11&page=$12 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&param5=$8&param6=$9&param7=$10&page=$11 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&param5=$8&param6=$9&page=$10 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&param5=$8&page=$9 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&param4=$7&page=$8 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&param3=$6&page=$7 [L]
-
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[0-9]{1,})/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&param2=$5&page=$6 [L]
-
 RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&page=$5 [L]
 ###########################################################################################################################################
 

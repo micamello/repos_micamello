@@ -105,47 +105,47 @@ class Controlador_Oferta extends Controlador_Base{
               if($letra == 'A' && $type == 1){
                 if(isset($arrarea[$id])){
                   $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                  $array_datos[$letra] = array('id'=>$id,'nombre'=>$arrarea[$id]);
+                  //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrarea[$id]);
                 }
               }
               else if($letra == 'P' && $type == 1){
                 if(isset($arrprovincia[$id])){
                     $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                    $array_datos[$letra] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
                 }
               }
               else if($letra == 'J' && $type == 1){
                 if(isset($arrjornadas[$id])){
                     $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                    $array_datos[$letra] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
+                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
                 }
               }else if($letra == 'O' && $type == 1){
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id; 
-                $array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
+                //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
               }
               else if($letra == 'S' && $type == 1){
                 if(isset($empresas[$id])){
                   $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                    $array_datos[$letra] = array('id'=>$id,'nombre'=>$empresas[$id]);
+                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>$empresas[$id]);
                   } 
               }
               else if($letra == 'K' && $type == 1){
                 
                 if(isset(SALARIO[$id])){
                   $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id; 
-                    $array_datos[$letra] = array('id'=>$id,'nombre'=>SALARIO[$id]);
+                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>SALARIO[$id]);
                 }
               }
               else if($letra == 'Q' && $type == 1){
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                $array_datos[$letra] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
+                //$array_datos[$letra] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
               }else if($type == 2){
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
               }
             }
           }
 
-          /*foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $letra => $value) {
+          foreach ($_SESSION['mfo_datos']['Filtrar_ofertas'] as $letra => $value) {
 
             if($value!=0 || $value != ''){
 
@@ -183,7 +183,7 @@ class Controlador_Oferta extends Controlador_Base{
                 $array_datos[$letra] = array('id'=>$value,'nombre'=>htmlentities($value,ENT_QUOTES,'UTF-8'));
               }
             }
-          }*/
+          }
 
           if($vista == 'cuentas'){
             $array_subempresas = array();

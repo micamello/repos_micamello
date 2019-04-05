@@ -209,12 +209,12 @@ ul.list_content_mic > li:last-child {
 	font-weight: bold;
 }
 
-input.form-control{
-	/*border-radius: 15px;*/
+/*input.form-control{
+	border-radius: 15px;
 }
 
 select.form-control{
-	/*border-radius: 15px;*/
+	border-radius: 15px;
 }
 
 .check_box{

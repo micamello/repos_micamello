@@ -16,7 +16,7 @@
 							    <input type="text" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 							    <?php 
 								    $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
-								    $ruta = Controlador_Aspirante::calcularRuta($ruta,'Q');
+								    //$ruta = Controlador_Aspirante::calcularRuta($ruta,'Q');
 								?>
 							    <span class="input-group-addon">
 							    	<a href="#" onclick="enviarPclave('<?php echo $ruta; ?>','1')"><i class="fa fa-search"></i>
@@ -27,6 +27,48 @@
 					</div>
 				</div>
 		    </div>
+
+		    <div class="panel panel-default shadow-panel1">
+				<div class="panel-heading">
+					<span><i class="fa fa-comments"></i> Facetas</span>
+				</div>
+				<div class="panel-body">
+					<div id="facetas">
+					<?php
+					$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
+					if (!empty($facetas)) {
+						$i = 0;
+						$f = '';
+						$pos = -1;
+						echo '<div class="col-md-12" style="padding-right: 5px;">';
+						foreach ($facetas as $key => $v) {
+
+							$letra = substr($v,0,1);
+							if($letra == 'A' && $i > 1){
+								$letra = 'P';
+							}
+							$f .= $letra.'-';
+							//$j = $letra;
+							
+							$pos += 6;
+							
+							echo '<div id="fac_'.$i.'" style="float:left;width: 261px;"><div class="p-3">
+					                <h6 class="font-16 mb-3 mt-0">'.utf8_encode(ucfirst(strtolower($v))).'</h6>
+					                <input type="text" id="range_0'.$i.'">
+					            </div></div><div id="btn_'.$i.'" style="float:right;padding-top: 40px;cursor:pointer"><a onclick="verFacetas(\''.$letra.'\','.$pos.')"><i class="fa fa-search"></i></a></div>';
+							$i++;
+						}
+						echo '<input type="hidden" name="f" id="f" value="'.$f.'">';
+						echo '<input type="hidden" name="ruta" id="ruta" value="'.$ruta.'">';
+						echo '<input type="hidden" name="page" id="page" value="'.$page.'">';
+						echo "<div class='clearfix'></div><br><a style='display:none' id='btn_consultar' name='btn_consultar' class='btn btn-default' href='#'><i class='fa fa-search'></i></a></div>";
+					}else{
+						echo 'No hay resultados';
+					}
+				?></div>
+				</div>
+		    </div>
+
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
 					<span><i class="fa fa-map-marker"></i> Residencia Actual</span>
@@ -37,7 +79,7 @@
 					if (!empty($arrprovincia)) {
 						foreach ($arrprovincia as $key => $v) {
 					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/U'.$key.'/';
-							$ruta = Controlador_Aspirante::calcularRuta($ruta,'U');
+							//$ruta = Controlador_Aspirante::calcularRuta($ruta,'U');
 							echo '<li class="lista"><a href="'.$ruta.'1/" class="provincia" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 						}
 					}else{
@@ -56,7 +98,7 @@
 					if (!empty($nacionalidades)) {
 						foreach ($nacionalidades as $key => $v) {
 					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/N'.$key.'/';
-							$ruta = Controlador_Aspirante::calcularRuta($ruta,'N');
+							//$ruta = Controlador_Aspirante::calcularRuta($ruta,'N');
 							echo '<li class="lista"><a href="'.$ruta.'1/" class="nacionalidad" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 						}
 					}else{
@@ -75,7 +117,7 @@
 				if (!empty($arrarea)) { 
 				    foreach ($arrarea as $key => $v) {
 				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/A'.$key.'/';
-						$ruta = Controlador_Aspirante::calcularRuta($ruta,'A');
+						//$ruta = Controlador_Aspirante::calcularRuta($ruta,'A');
 						echo '<li class="lista"><a href="'.$ruta.'1/" class="area" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 					}
 				}
@@ -92,7 +134,7 @@
 					if (!empty($escolaridad)) {
 						foreach ($escolaridad as $key => $v) {
 					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/E'.$key.'/';
-							$ruta = Controlador_Aspirante::calcularRuta($ruta,'E');
+							//$ruta = Controlador_Aspirante::calcularRuta($ruta,'E');
 							echo '<li class="lista"><a href="'.$ruta.'1/" class="escolaridad" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 						}
 					}
@@ -110,7 +152,7 @@
 				    foreach (FECHA_POSTULADO as $key => $v) {
 
 				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/F'.$key.'/';
-						$ruta = Controlador_Aspirante::calcularRuta($ruta,'F');
+						//$ruta = Controlador_Aspirante::calcularRuta($ruta,'F');
 				    	echo '<li class="lista"><a href="'.$ruta.'1/" class="fecha" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 				    }
 				?></div>
@@ -118,7 +160,7 @@
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
 		          <div class="panel-heading">
-		              <span><i class="fa fa-money"></i> Plan Contratado (prioridad)</span>
+		              <span><i class="fa fa-money"></i> Informe de personalidad (prioridad)</span>
 		            </div>
 		          <div class="panel-body">
 		          	<div class="filtros">
@@ -130,7 +172,7 @@
 		          			foreach (PRIORIDAD as $key => $v) { ?>
 				              <?php 
 				              	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/P'.$key.'/';
-						    	$ruta = Controlador_Aspirante::calcularRuta($ruta,'P');
+						    	//$ruta = Controlador_Aspirante::calcularRuta($ruta,'P');
 						    	$ruta .= '1/'; ?>
 						    	<label onclick="window.location='<?php echo $ruta; ?>'" class="btn btn-default btn-on-3 btn-md <?php if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == $key || ($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0 && $cont == 1)){ echo 'active'; $cont = count(PRIORIDAD); } ?>">
 									<input type="radio" value="<?php echo $key; ?>" name="multifeatured_module[module_id][status]" checked="checked" /><?php echo $v; ?>
@@ -152,7 +194,7 @@
 				<?php
 					foreach (SALARIO as $key => $v) {
 				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/S'.$key.'/';
-						$ruta = Controlador_Aspirante::calcularRuta($ruta,'S');
+						//$ruta = Controlador_Aspirante::calcularRuta($ruta,'S');
 						echo '<li class="lista"><a href="'.$ruta.'1/" class="salario" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 					}
 				?></div>
@@ -169,7 +211,7 @@
 				<?php
 					foreach (GENERO as $key => $v) {
 				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/G'.VALOR_GENERO[$key].'/';
-						$ruta = Controlador_Aspirante::calcularRuta($ruta,'G');
+						//$ruta = Controlador_Aspirante::calcularRuta($ruta,'G');
 						echo '<li class="lista"><a href="'.$ruta.'1/" class="genero" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
 					}
 				?></div>
@@ -183,11 +225,11 @@
 					<div class="filtros">
 				<?php
 			    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/V1/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'V');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'V');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="viajar" id="1">S&iacute;</a></li>';
 
 					$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/V2/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'V');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'V');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="viajar" id="2">No</a></li>';
 				?></div>
 				</div>
@@ -200,11 +242,11 @@
 		      	<div class="filtros">
 				<?php
 			    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T1/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'T');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'T');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="1">S&iacute;</a></li>';
 
 					$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T2/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'T');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'T');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="2">No</a></li>';
 				?></div>
 		      </div>
@@ -217,11 +259,11 @@
 					<div class="filtros">
 				<?php
 			    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L1/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'L');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'L');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="1">S&iacute;</a></li>';
 
 					$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L2/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'L');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'L');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="2">No</a></li>';
 				?></div>
 				</div>
@@ -234,11 +276,11 @@
 		      	<div class="filtros">
 				<?php
 			    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/D1/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'D');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'D');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="discapacidad" id="1">S&iacute;</a></li>';
 
 					$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/D2/';
-					$ruta = Controlador_Aspirante::calcularRuta($ruta,'D');
+					//$ruta = Controlador_Aspirante::calcularRuta($ruta,'D');
 					echo '<li class="lista"><a href="'.$ruta.'1/" class="discapacidad" id="2">No</a></li>';
 				?></div>
 		      </div>
@@ -254,7 +296,7 @@
                 	<div class="form-group">
                 		<?php 
                 			$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/'; 
-                			$ruta = Controlador_Aspirante::calcularRuta($ruta,'');
+                			//$ruta = Controlador_Aspirante::calcularRuta($ruta,'');
                 		?>
 			            <select id="escolaridad" class="form-control">
 			                <option value="0">Seleccione un nivel</option>
@@ -320,14 +362,14 @@
 							        <th class="text-center" style="width: 100px">
 										<?php 
 											$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O1'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
-											$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
+											//$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
 										?>
 							           <a href="<?php echo $ruta.'1/'; ?>">Edad <i class="fa fa-sort"></i></a>
 							        </th>
 							        <th class="text-center">
 										<?php 
 											$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O2'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
-											$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
+											//$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
 											if($vista == 1) { $mensaje = 'Postulado el'; }else{ $mensaje = 'Registrado el'; }
 										?>
 							           <a href="<?php echo $ruta.'1/'; ?>"><?php echo $mensaje; ?><i class="fa fa-sort"></i></a>
@@ -335,7 +377,7 @@
 							        <th class="text-center" title="Nivel de Estudios">
 							        	<?php 
 											$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O3'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
-											$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
+											//$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
 										?>
 							           <a href="<?php echo $ruta.'1/'; ?>">Estudios<i class="fa fa-sort"></i></a>
 							       </th>
@@ -344,7 +386,7 @@
 								        <th class="text-center" style="width: 100px" title="Aspiraci&oacute;n Salarial">
 								        	<?php 
 												$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O4'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
-												$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
+												//$ruta = Controlador_Aspirante::calcularRuta($ruta,'O');
 											?>
 								           <a href="<?php echo $ruta.'1/'; ?>">Salario<i class="fa fa-sort"></i></a>
 								       </th>
