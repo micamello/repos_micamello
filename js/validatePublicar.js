@@ -4,169 +4,47 @@ document.querySelector( "form" )
 }, true );
 
 $(document).ready(function() {
-          $('#area_select').multiselect({
-            buttonContainer: '<div id="example-checkbox-list-container"></div>',
-            buttonClass: '',
-            templates: {
-                button: '',
-                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
-            },
-            maxHeight: 84,
-            	enableFiltering: true,
-            	enableCaseInsensitiveFiltering: true,
-            	buttonWidth: '50%',
-            	buttonText: function(options, select) {
-                if (options.length === 0) { 
-                	//$('#seleccionados').html('Seleccione una area ...');
-                	$('#seleccionados1').html('');
-                  return 'Seleccione una area ...';
-                }
-                else if (options.length > 1) {                	
-                    return 'Solo se permiten 3 areas';
-                }
-                else {
-                  var labels = [];  
-                  $('#seleccionados1').html('');                
-                  options.each(function() {
-                    if ($(this).attr('label') !== undefined) {
-                      labels.push($(this).attr('label'));                             
-                      $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
-                      $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                      // console.log(this);
-                    }
-                    else {
-                      labels.push($(this).html());                             
-                      $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
-                        // $(this).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                    }
-                  });                          
-                  return labels.join(', ') + '';
-                }
-              },
-              onChange: function(option, checked) {
-                var selectedOptions = $('#area_select option:selected');
- 
-                if (selectedOptions.length >= 1) {
-                    var nonSelectedOptions = $('#area_select option').filter(function() {
-                        return !$(this).is(':selected');
-                    }); 
-                    nonSelectedOptions.each(function() {
-                        var input = $('input[id="area_select-' + $(this).val() + '"]');
-                        // console.log(input[0].nextSibling.data);
-                        // console.log($('input[id="area_select-' + $(this).val() + '"]')[0]);
-                        input.prop('disabled', true);
-                        input.parent('li').addClass('disabled');
-                    });
-                }
-                else {
-                    $('#area_select option').each(function() {
-                        // console.log(this);
-                        var input = $('input[id="area_select-' + $(this).val() + '"]');
-                        input.prop('disabled', false);
-                        input.parent('li').addClass('disabled');
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-                    });
-                }
-              }        
-            });
-            $('#seleccionados1').parent().append(filtro[0]);
-
-            
-        $('#nivel_interes').multiselect({
-            buttonContainer: '<div id="example-checkbox-list-container"></div>',
-            buttonClass: '',
-            templates: {
-                button: '',
-                ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
-            },
-            maxHeight: 84,
-                enableFiltering: true,
-                enableCaseInsensitiveFiltering: true,
-                buttonWidth: '50%',
-                buttonText: function(options, select) {
-                if (options.length === 0) { 
-                    //$('#seleccionados').html('Seleccione una area ...');
-                    $('#seleccionados2').html('');
-                  return 'Seleccione una area ...';
-                }
-                else if (options.length > 1) {                  
-                    return 'Solo se permiten 1 area';
-                }
-                else {
-                  var labels = [];  
-                  $('#seleccionados2').html('');                
-                  options.each(function() {
-                    if ($(this).attr('label') !== undefined) {
-                      labels.push($(this).attr('label'));                             
-                      $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a>');
-                      $(this).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                    }
-                    else {
-                      labels.push($(this).html());                             
-                      $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa-2x"></i></a></p>');
-                    // console.log(this.parentNode.id);
-                    $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-                    // console.log($('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children());
-                    }
-                  });                                    
-                  return labels.join(', ') + '';
-                }
-              },
-              onChange: function(option, checked) {
-                var selectedOptions = $('#nivel_interes option:selected');
- 
-                if (selectedOptions.length >= 1) {
-                    var nonSelectedOptions = $('#nivel_interes option').filter(function() {
-                        return !$(this).is(':selected');
-                    }); 
-                    nonSelectedOptions.each(function() {
-                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-                        // console.log(input[0].nextSibling.data);
-                        // console.log($('input[id="nivel_interes-' + $(this).val() + '"]')[0]);
-                        input.prop('disabled', true);
-                        input.parent('li').addClass('disabled');
-                    });
-                }
-                else {
-                    $('#nivel_interes option').each(function() {
-                        // console.log(this);
-                        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-                        input.prop('disabled', false);
-                        input.parent('li').addClass('disabled');
-                        // console.log("eder:  "+selectedOptions.length);
-                        // console.log($(this).parents(':eq(1)').find('.panel-head-select'));
-                        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-                    });
-                }
-              }        
-            });
-            $('#seleccionados2').parent().append(filtro[1]);
-        });
-
-$('#provincia_of').change(function()
-{
-    var id_provincia = $('select[id=provincia_of]').val();
-    var puerto_host = $('#puerto_host').val();
-
-    if(id_provincia != ""){
-        $.ajax({
-            type: "GET",
-            url: puerto_host+"?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
-            dataType:'json',
-            success:function(data){
-                $('#ciudad_of').html('<option value="">Selecciona una ciudad</option>');
-                $.each(data, function(index, value) {
-                    $('#ciudad_of').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
-
-                });
-            },
-            error: function (request, status, error) {
-                alert(request.responseText);
-            }                  
-        })
+  $('#area_select').multiple_select({
+    items: 1,
+    dependence: {
+      id_dependencia: "subareasCand",
+      items: 2
     }
+  });  
+
+  $('#fecha').DateTimePicker({
+    dateFormat: "yyyy-MM-dd",
+    shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+    shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+    titleContentDate: "Configurar fecha",
+    titleContentTime: "Configurar tiempo",
+    titleContentDateTime: "Configurar Fecha & Tiempo",
+    setButtonContent: "Listo",
+    clearButtonContent: "Limpiar"
+  });
+
+});
+
+$('#provincia_of').change(function(){
+  var id_provincia = $('select[id=provincia_of]').val();
+  var puerto_host = $('#puerto_host').val();
+  if(id_provincia != ""){
+    $.ajax({
+      type: "GET",
+      url: puerto_host+"?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
+      dataType:'json',
+      success:function(data){
+        $('#ciudad_of').html('<option value="">Selecciona una ciudad</option>');
+        $.each(data, function(index, value) {
+          $('#ciudad_of').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
+        });
+      },
+      error: function (request, status, error) {
+        alert(request.responseText);
+      }                  
+    })
+  }
 });
 
 var mensaje = "";
@@ -215,13 +93,13 @@ if(document.getElementById('area_error')){
 	var area_error = document.getElementById('area_error').id;
 }
 // ----------------------------------------------------
-if(document.getElementById('nivel_group')){
-	var nivel_group = document.getElementById('nivel_group').id;
-}
+//if(document.getElementById('nivel_group')){
+//	var nivel_group = document.getElementById('nivel_group').id;
+//}
 
-if(document.getElementById('nivel_error')){
-	var nivel_error = document.getElementById('nivel_error').id;
-}
+//if(document.getElementById('nivel_error')){
+//	var nivel_error = document.getElementById('nivel_error').id;
+//}
 // ----------------------------------------------------
 if(document.getElementById('fecha_group')){
 	var fecha_group = document.getElementById('fecha_group').id;
@@ -341,7 +219,7 @@ if(document.getElementById('vacante')){
 	});
 }
 
-if(document.getElementById('fecha_contratacion')){
+/*if(document.getElementById('fecha_contratacion')){
 	var date = new Date();
     document.getElementById("fecha_contratacion").valueAsDate = date;
     var fecha_actual = fechaActual();
@@ -356,9 +234,9 @@ if(document.getElementById('fecha_contratacion')){
     		enableBTN(1);
     	}
     })
-}
+}*/
 
-if(document.getElementById('nivel_interes')){
+/*if(document.getElementById('nivel_interes')){
 	$('#nivel_interes').on('change', function(){
 		if(this.value == ""){
 			mensaje = "Seleccione un elemento de la lista";
@@ -369,9 +247,9 @@ if(document.getElementById('nivel_interes')){
     		enableBTN(1);
 		}
 	})
-}
+}*/
 
-if(document.getElementById('area_select')){
+/*if(document.getElementById('area_select')){
 	$('#area_select').on('change', function(){
 		if(this.value == ""){
 			mensaje = "Seleccione un elemento de la lista";
@@ -382,7 +260,7 @@ if(document.getElementById('area_select')){
     		enableBTN(1);
 		}
 	})
-}
+}*/
 
 if(document.getElementById('edad_min')){
 	$('#edad_min').on('blur', function(){
@@ -550,7 +428,6 @@ function validarNumero(obj){
 	}
 }
 
-
 function emptyContent(obj){
 	if(obj.value == ""){
 		return false;
@@ -624,20 +501,20 @@ function campos(tipo){
 	}
 
 	mensaje = "Seleccione una opción";
-	if(document.getElementById('area_select').value == ""){
+	/*if(document.getElementById('area_select').value == ""){
 		if(tipo ==2){colocaError(area_error, area_group, mensaje, button_register);}
 		errors++;
-	}
+	}*/
 
 	if(document.getElementsByClassName('badge_item').length == 0){
 		if(tipo ==2){colocaError(listado_error, listado_group, mensaje, button_register);}
 		errors++;
 	}
 
-	if(document.getElementById('nivel_interes').value == ""){
+	/*if(document.getElementById('nivel_interes').value == ""){
 		if(tipo ==2){colocaError(nivel_error, nivel_group, mensaje, button_register);}
 		errors++;
-	}
+	}*/
 
 	mensaje = "Rellene este  campo";
 	if(document.getElementById('fecha_contratacion').value == ""){
