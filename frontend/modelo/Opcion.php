@@ -12,13 +12,13 @@ class Modelo_Opcion{
 	}
 	
 	/*******MINISITIO******/
-	public static function obtieneOpciones($pregunta){
-		if (empty($pregunta)){ return false; }
-		$sql = "SELECT id_opcion, descripcion, valor 
-		        FROM mfo_opcionm2 WHERE id_pregunta = ? 
-		        ORDER BY RAND()";
-    	return $GLOBALS['db']->auto_array($sql,array($pregunta),true);
-	}
+	// public static function obtieneOpciones($pregunta){
+	// 	if (empty($pregunta)){ return false; }
+	// 	$sql = "SELECT id_opcion, descripcion, valor 
+	// 	        FROM mfo_opcionm2 WHERE id_pregunta = ? 
+	// 	        ORDER BY RAND()";
+ //    	return $GLOBALS['db']->auto_array($sql,array($pregunta),true);
+	// }
 
 	public static function datosGraficos($id_usuario){
 
@@ -96,6 +96,17 @@ class Modelo_Opcion{
 			}
 		}
 		return $datos;
+	}
+
+	public static function obtieneOpciones($faceta){
+		if (empty($faceta)){ return false; }
+		$sql = "SELECT o.id_opcion, o.descripcion, o.valor, p.id_pregunta 
+						FROM mfo_opcion o
+						INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+						INNER JOIN mfo_competencia c ON p.id_competencia = c.id_competencia
+						WHERE c.id_faceta = ?
+						ORDER BY p.orden, RAND()";
+		return $GLOBALS['db']->auto_array($sql,array($faceta),true);		
 	}
 }  
 ?>

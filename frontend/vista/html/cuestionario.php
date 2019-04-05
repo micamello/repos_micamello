@@ -1,51 +1,6 @@
 <div class="container">
-  <div class="breadcrumb" style="background-color: #0267cf;">
-    <p class="text-center" style="color: white; font-size: 17px;"><?php echo $destest;?> formulario</p>
-  </div>
 
-  <div class="container">
-    <ul class="nav nav-tabs">
-      <?php $i = 0;?>         
-      <?php foreach($preguntas as $key=>$pregunta){ ?>
-        <?php $i++;?>      
-        <li <?php echo ($pregunta["id_pre"] == $preguntaact["id_pre"]) ? 'class="active"' : '';?>><a href="javascript:void(0);" data-toggle="tab">No.<?php echo $i;?></a></li>
-      <?php } ?>
-    </ul>
-  </div>
 
-  <div class="" style="background-color: white;">
-    <div class="tab-content ">
-      <form role="form" name="form1" id="form1" method="post" action="<?php echo PUERTO."://".HOST."/cuestionario/";?>">        
-        <br>
-        <div class='tab-pane ' id='1' align='center'>
-          <h4><?php echo utf8_encode($preguntaact["pregunta"]);?>
-            <input type='hidden' id='id_test' name='id_test' value='<?php echo $nrotest;?>'>
-            <input type='hidden' id='id_pregunta' name='id_pregunta' value='<?php echo $preguntaact["id_pre"];?>'>
-            <input type='hidden' id='form_pregunta' name='form_pregunta' value='1'>
-            <input type='hidden' id='tiempo' name='tiempo' value='<?php echo $tiempo;?>'>
-            <input type='hidden' id='modo_pregunta' name='modo_pregunta' value='<?php echo $preguntaact["modo"];?>'>
-          </h4>
-          <div class="form-group">
-            <div class="row">
-              <div class="col-xs-2 col-md-5 col-sm-4"></div>
-              <div class="col-xs-10 col-md-7 col-sm-8">
-              <?php foreach($opciones as $opcion){ ?>
-                <p align="justify"><input type="radio" name="id_opcion" value="<?php echo $opcion["id_opcion"];?>" <?php echo ($opcion["orden"] == 1) ? "checked" : "";?>>&nbsp;<?php echo $opcion["descripcion"];?></p>
-              <?php } ?>
-              </div>         
-            </div>               
-          </div>
-        </div>
-        <div class="row">        
-          <div class="col-md-12" align="center">
-            <input class="btn btn-success" type="submit" name="" value="CONTINUAR">
-          </div>
-        </div>
-        <br>        
-      </form>
-    </div>
-</div>
-<br><br>
 
 <!-- Modal -->
 <div class="modal fade" id="msg_inforcuestionario" tabindex="-1" role="dialog" aria-labelledby="msg_inforcuestionario" aria-hidden="true">

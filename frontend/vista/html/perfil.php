@@ -664,7 +664,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 										<input type="button" id="boton" name="" class="btn btn-success" value="GUARDAR">
 
 										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-											<a href="<?php echo PUERTO."://".HOST;?>/oferta/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
+											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 										<?php }else{ 	?>
 											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 									    <?php } ?>
