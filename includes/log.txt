@@ -8679,3 +8679,61 @@ presa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres,
             LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
             LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
             WHERE l.username = 'candidato1'
+[2019/04/05 03:16:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/05 03:16:01] SQL Query: SELECT * FROM mfo_area
+[2019/04/05 03:16:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/05 03:16:01] Utils::createSession empezo una nueva sesion
+[2019/04/05 03:16:01] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/04/05 03:16:01] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/04/05 03:16:01] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/04/05 03:16:01] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/04/05 03:16:01] SQL Query: SELECT COUNT(res.id_ofertas) AS ofertas, a.id_area, a.nombre, a.ico 
+						FROM mfo_area a
+						LEFT JOIN (SELECT o.id_ofertas, s.id_area
+											 FROM mfo_oferta_subareas o 
+											 INNER JOIN mfo_area_subareas s ON s.id_areas_subareas = o.id_areas_subareas
+											 GROUP BY o.id_ofertas, s.id_area) AS res ON res.id_area = a.id_area
+						GROUP BY a.id_area
+[2019/04/05 03:16:01] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/04/05 03:16:01] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/04/05 03:16:01] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/04/05 03:16:44] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/05 03:16:44] SQL Query: SELECT * FROM mfo_area
+[2019/04/05 03:16:44] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/05 03:16:44] Utils::createSession empezo una nueva sesion
+[2019/04/05 03:16:44] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/04/05 03:16:44] SQL Query: SELECT COUNT(1) AS cont FROM mfo_oferta o
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            WHERE o.estado = 1 AND p.id_pais = '39'
+[2019/04/05 03:16:44] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_usuario u 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.estado=1 AND p.id_pais = '39'
+[2019/04/05 03:16:44] SQL Query: SELECT COUNT(1) AS cont 
+              FROM mfo_empresa e 
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad 
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE e.estado=1 AND p.id_pais = '39'
+[2019/04/05 03:16:44] SQL Query: SELECT COUNT(res.id_ofertas) AS ofertas, a.id_area, a.nombre, a.ico 
+						FROM mfo_area a
+						LEFT JOIN (SELECT o.id_ofertas, s.id_area
+											 FROM mfo_oferta_subareas o 
+											 INNER JOIN mfo_area_subareas s ON s.id_areas_subareas = o.id_areas_subareas
+											 GROUP BY o.id_ofertas, s.id_area) AS res ON res.id_area = a.id_area
+						GROUP BY a.id_area
+[2019/04/05 03:16:44] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/04/05 03:16:44] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/04/05 03:16:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
