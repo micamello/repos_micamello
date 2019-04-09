@@ -575,9 +575,9 @@ class Utils{
   public static function validar_EC($dni){
     if (empty($dni)) {return false;}
     $val = false;
-    if(ValidadorEc::validarCedula($dni) == true || ValidadorEc::validarRucPersonaNatural($dni) == true || ValidadorEc::validarRucSociedadPrivada($dni) == true || ValidadorEc::validarRucSociedadPublica($dni) == true) {
+    if(ValidadorEc::DniRuc_Validador($dni)) {
       $val = true;
-      }
+    }
       return $val;
     }
 
