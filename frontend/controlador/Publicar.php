@@ -2,9 +2,9 @@
 class Controlador_Publicar extends Controlador_Base {
   
   public function construirPagina(){
-    $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
+    /*$idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     unset($_SESSION['mfo_datos']['planes']);
-    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu, $_SESSION['mfo_datos']['usuario']['tipo_usuario']);
+    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu, $_SESSION['mfo_datos']['usuario']['tipo_usuario']);*/
     
     if(!Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
@@ -20,6 +20,7 @@ class Controlador_Publicar extends Controlador_Base {
       $_SESSION['mostrar_error'] = "No tiene permisos para publicar oferta";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
+
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCiudad':

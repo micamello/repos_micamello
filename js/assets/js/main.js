@@ -277,9 +277,9 @@ function validarUsuario(username){
   if(username == null || username.length == 0 || /^\s+$/.test(username)){
     colocaError("err_username","seccion_username","El campo no puede ser vac\u00EDo","btn_sesion");
   }else if(username.length > '50'){
-    colocaError("err_username","seccion_username","El usuario no debe exceder de 50 caracteres","btn_sesion");
+    colocaError("err_username","seccion_username","Usuario no debe exceder a 50 caracteres","btn_sesion");
   }else if(username.length < '4'){
-    colocaError("err_username","seccion_username","El n\u00FAmero minimo de caracteres es de 4","btn_sesion");
+    colocaError("err_username","seccion_username","Minimo de caracteres es de 4","btn_sesion");
   }else{
     quitarError("err_username","seccion_username");
   }
@@ -292,9 +292,9 @@ function validarClave(){
   if(password == null || password.length == 0 || /^\s+$/.test(password)){
     colocaError("err_password","seccion_password","El campo no puede ser vac\u00EDo","btn_sesion");
   }else if(password.length > '15'){
-    colocaError("err_password","seccion_password","La clave no debe exceder de 15 caracteres","btn_sesion");
+    colocaError("err_password","seccion_password","Clave no debe exceder a 15 caracteres","btn_sesion");
   }else if(password.length < '8'){
-    colocaError("err_password","seccion_password","El n\u00FAmero m\u00EDnimo de caracteres es de 8","btn_sesion");
+    colocaError("err_password","seccion_password","M\u00EDnimo de caracteres es 8","btn_sesion");
   }else{
     quitarError("err_password","seccion_password");
   }
@@ -304,7 +304,7 @@ function validarClavesRecuperar(){
 
     var expreg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
     var err_campo = "El campo no puede ser vac\u00EDo";
-    var err_formato = "Formato incorrecto, Letras y n\u00FAmeros, m\u00EDnimo 8 caracteres";
+    var err_formato = "Letras y n\u00FAmeros, m\u00EDnimo 8 caracteres";
     var password = document.getElementById('password1').value;
     var password_two = document.getElementById('password2').value;
 

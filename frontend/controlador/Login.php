@@ -15,9 +15,7 @@ class Controlador_Login extends Controlador_Base {
         $campos = array('username'=>1, 'password1'=>1);        
         $data = $this->camposRequeridos($campos);                        
         $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password1"]);
-        if (!empty($usuario)){  
-          // print_r($usuario['id_pais']."  --  ". SUCURSAL_PAISID);
-          // exit();
+        if (!empty($usuario)){                      
           if ($usuario["id_pais"] != SUCURSAL_PAISID){
             $sucursal = Modelo_Sucursal::consultaxPais($usuario["id_pais"]);
             if (empty($sucursal)){              
@@ -40,7 +38,7 @@ class Controlador_Login extends Controlador_Base {
         }        
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                        $_SESSION['mfo_datos']['usuario']['id_usuario'],
-                                       (isset($_SESSION['mfo_datos']['infohv'])) ? $_SESSION['mfo_datos']['infohv'] : array(),
+                                       (isset($_SESSION['mfo_datos']['usuario']['infohv'])) ? $_SESSION['mfo_datos']['usuario']['infohv'] : array(),
                                        $_SESSION['mfo_datos']['planes'],'login');   
       }
       catch( Exception $e ){
@@ -77,7 +75,7 @@ class Controlador_Login extends Controlador_Base {
       }
 
       if (!empty($infohv) && is_array($infohv)){
-        $_SESSION['mfo_datos']['infohv'] = $infohv; 
+        $_SESSION['mfo_datos']['usuario']['infohv'] = $infohv; 
       }
 
     }  

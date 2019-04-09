@@ -398,8 +398,8 @@ class Utils{
 
     if ($valida_arch[0]){
       if (is_uploaded_file($file_temp)){
-        if(isset($_SESSION['mfo_datos']['infohv']) && file_exists($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato'])){
-          @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato']);
+        if(isset($_SESSION['mfo_datos']['usuario']['infohv']) && file_exists($path . $nombre . "." . $_SESSION['mfo_datos']['usuario']['infohv']['formato'])){
+          @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['usuario']['infohv']['formato']);
         }
         $nombre .= ".".$valida_arch[1];
         return move_uploaded_file($file_temp, ''.$path . $nombre);        

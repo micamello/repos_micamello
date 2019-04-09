@@ -1,13 +1,19 @@
 <?php  
 $_SESSION['mostrar_exito'] = "";
 $_SESSION['mostrar_error'] = "";
-if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
+if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
+Utils::log(print_r($_SESSION['mfo_datos'],true));
+?>
 <div class="container">
 	<div class="checkout-wrap">
 	  <ul class="checkout-bar">
         <li class="visited">Registro</li>
-        <li class="active">Completar Perfil</li>
-        <?php 
+        <?php if (isset($_SESSION['mfo_datos']['usuario']['infohv']) && !empty($_SESSION['mfo_datos']['usuario']['infohv'])){ ?>
+          <li class="visited">Completar Perfil</li>
+        <?php }else { ?>
+        	<li class="active">Completar Perfil</li>
+        <?php } ?>
+        <?php         
         for($i=1;$i<=($nrototaltest-2);$i++){ ?>
           <?php 
            if ($i <= $nrotestusuario){
@@ -23,10 +29,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	</div>
 </div>
 <br>
-<?php } 
-
-?>
-
+<?php } ?>
 
 <!--<section id="product" class="product">-->
     <div class="container"><br><br>

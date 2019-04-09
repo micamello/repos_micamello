@@ -11,8 +11,7 @@
 		<div class="">
 			<div class="">
 				<form action="<?php echo PUERTO."://".HOST;?>/cuestionario/guardarResp/" method="post" id="forma_2">
-					<div class="respuestas" id="respuestas" style="display: none;"></div>
-					<!-- <input type="hidden" name="id_usuario" value="<?php echo $_SESSION['mfo_datos']['usuario']['id_usuario']; ?>"> -->
+					<div class="respuestas" id="respuestas" style="display: none;"></div>					
 					<input type="hidden" name="tiempo" id="tiempo" value="<?php echo $tiempo; ?>">
 					 <?php 
 						$array_group = array();
@@ -56,7 +55,7 @@
 									echo "<div class='contenedor_drag'>";
 									echo "<div class='drag_origen' id='nido_".$value['id_opcion']."'>";
 									echo "<input type='hidden' name='opcion[]' value='".$value['id_opcion']."'>";
-									echo "<label>".utf8_encode($value['descripcion'])."</label>";
+									echo "<label style='cursor:pointer;'>".utf8_encode($value['descripcion'])."</label>";
 									echo "</div>";
 									echo "</div><br><br>";
 								}

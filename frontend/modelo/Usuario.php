@@ -350,12 +350,9 @@ public static function existeUsername($username){
         $i = substr($value[0],1);
         $facetas_porcentajes[$literales[$l]] = $i;
       }
-      //print_r($facetas_porcentajes);
-      //echo '<br>';
+            
       arsort($facetas_porcentajes);
-      $peso = count($facetas);
-      //print_r($facetas_porcentajes);
-      //echo '<br>'; 
+      $peso = count($facetas);            
 
       $if = $parentesis = '';
       foreach ($facetas_porcentajes as $key => $value) {
@@ -666,12 +663,9 @@ public static function existeUsername($username){
         $i = substr($value[0],1);
         $facetas_porcentajes[$literales[$l]] = $i;
       }
-      //print_r($facetas_porcentajes);
-      //echo '<br>';
+            
       arsort($facetas_porcentajes);
-      $peso = count($facetas);
-      //print_r($facetas_porcentajes);
-      //echo '<br>'; 
+      $peso = count($facetas);            
 
       $if = $parentesis = '';
       foreach ($facetas_porcentajes as $key => $value) {
@@ -874,7 +868,7 @@ public static function existeUsername($username){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
-    echo $sql;
+    
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -1103,8 +1097,6 @@ WHERE
     if($data['cantonnac'] == NULL || $data['cantonnac'] == ""){
       $data_usuario = array("nombres"=>$data['nombres'], "apellidos"=>$data['apellidos'], "fecha_nacimiento"=>$data['fecha_nacimiento'], "id_nacionalidad"=>$data['pais'], "genero"=>$data['genero'], "estado_civil"=>$data['estado_civil'], "id_escolaridad"=>$data['nivel_instruccion'], "fecha_creacion"=>date("Y-m-d H:i:s"), "term_cond"=>$term_cond, "correo"=>$data['correo'], "asp_salarial"=>$data['aspiracion_salarial'], "id_parroquia"=>$data['parroquia_res'], "id_profesion"=>$data['profesion'], "id_ocupacion"=>$data['ocupacion']);
     }
-    // print_r($data_usuario);
-    // exit();
       $result = $GLOBALS['db']->insert('mfo_usuariom2', $data_usuario);
       return $result;
   }
