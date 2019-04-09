@@ -54,20 +54,15 @@ class Controlador_Cuestionario extends Controlador_Base {
       break;
 
       case 'preguntas':
-
         $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-        $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($id_usuario);
-        
+        $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($id_usuario);        
         $faceta = Modelo_Respuesta::facetaSiguiente($id_usuario);
-        $data = Modelo_Opcion::obtieneOpciones($faceta);
-        Utils::log("faceta-------:".$faceta);
-        Utils::log(print_r($_SESSION['mfo_datos']['planes'], true));
-        Utils::log("permiso: ".Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario'));
+        $data = Modelo_Opcion::obtieneOpciones($faceta);        
 
-        if(!empty($faceta) && $faceta >= 3 && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario'))){
+        if(!empty($faceta) && $faceta >= 3 && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario'))){
           Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
         }
-        elseif(!empty($faceta) && $faceta == 3 &&isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario'))
+        elseif(!empty($faceta) && $faceta == 3 &&isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario'))
         {
           if(!$metodoSeleccion){
             Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 

@@ -7,7 +7,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	  <ul class="checkout-bar">
         <li class="visited">Registro</li>
         <li class="active">Completar Perfil</li>
-        <?php 
+        <?php         
         for($i=1;$i<=($nrototaltest-2);$i++){ ?>
           <?php 
            if ($i <= $nrotestusuario){
