@@ -1,5 +1,5 @@
 $('#areaCand').multiple_select({
-	items: 3,
+	items: 2,
     dependence: {
       id_dependencia: "subareasCand",
       items: false

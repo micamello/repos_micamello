@@ -88,14 +88,31 @@ class Controlador_Cuestionario extends Controlador_Base {
       break;
       
       default:
-      $tags = array();
-      $tags["template_js"][] = "cuestionario";
-      $respUsuario = Modelo_Respuesta::obtenerRespuestas($_SESSION['mfo_datos']['usuario']['id_usuario']);
-      if(empty($respUsuario)){
-        Vista::render('modalidad', $tags);
-        return false;
+      $nrototaltest = Modelo_Cuestionario::totalTest();
+      $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+      if($nrototaltest > $nrotestusuario){
+        $ruta = "";
+        $tags = array();
+        $tags["template_js"][] = "cuestionario";
+        $respUsuario = Modelo_Respuesta::obtenerRespuestas($_SESSION['mfo_datos']['usuario']['id_usuario']);
+        if(empty($respUsuario)){
+          Vista::render('modalidad', $tags);
+          return false;
+        }
+        Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/');
       }
-      Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/');
+      else{
+        $planesPagados = Modelo_UsuarioxPlan(Modelo_Usuario::CANDIDATO);
+        // if($nrototaltest == $nrotestusuario){
+          if(!empty($planesPagados)){
+            $ruta = "postulacion";
+          }else{
+            $ruta = "ofertas";
+          }
+        // }
+        Utils::doRedirect(PUERTO.'://'.HOST.'/'.$ruta.'/');
+      }
+      
       break;
     }
 

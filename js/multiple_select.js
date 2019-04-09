@@ -103,9 +103,9 @@ $('#'+id_panel).find('li').on('click', function(){
     }
     var li = $(this);
     // if(!li.hasClass('active_li')){
-        if(minMaxSelect(li,settings.dependence.id_dependencia) == false){
-            return minMaxSelect(li, settings.dependence.id_dependencia);
-        }
+        // if(minMaxSelect(li,settings.dependence.id_dependencia) == false){
+        //     return minMaxSelect(li, settings.dependence.id_dependencia);
+        // }
         if(selected_item != ""){
             if(selected_item.hasClass('active_li')){
                 selected_item.removeClass('active_li');
@@ -116,8 +116,8 @@ $('#'+id_panel).find('li').on('click', function(){
         mostrarSubareas(selected_item, settings.dependence.id_dependencia);
     // }
     controlCheck(settings.dependence.id_dependencia);
-    console.log($(this).attr('id').split('_')[1]);
     maximoSubareas($(this).attr('id').split('_')[1]);
+    minMaxSelect(li, settings.dependence.id_dependencia);
 });
 
 $('#'+input_id).on('keyup', function(){
@@ -215,7 +215,6 @@ function inicializarDependencia(obj){
                 if($(opciones[i]).attr('selected')){
                     selected_class = "subarea_selected"; check_check = "checked";
                 }
-                console.log(settings.dependence.items);
                 if(e != area_val){
                     if(settings.dependence.items == false){
                     listado_opciones += "<li class='select_list_subarea subarea_disabled seleccion_e' id='all_select_"+obj+"_"+area_val+"'>Marcar o desmarcar todos<input type='checkbox'></li>";  
@@ -226,7 +225,10 @@ function inicializarDependencia(obj){
                 listado_opciones += "<li class='select_list_subarea subarea_disabled "+selected_class+"' id='"+$(opciones[i]).val()+"'>"+opcion_texto+"<input type='checkbox' "+check_check+"></li>";
             }
         }
-        var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
+        if(settings.dependence.items != false){
+            var subpanelNumber = '&nbsp; (máx: '+settings.dependence.items+')';
+        }
+        var panel = subpanelNumber + "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
         padre_objeto.after(panel);
         loadButtonSelected(obj);
         ondeleteCount();
@@ -646,36 +648,30 @@ function habilitandoOnclickModalDelete(obj){
 }
 
 function minMaxSelect(obj, dependencia){
-    var contador = objeto.find('option[selected]').length;
-    var listados_panel;
-    var array_li = [];
-    listados_panel = $('#panel'+settings.dependence.id_dependencia).find('li');
-    var listado_areas_seleccionadas = $('#panel'+objeto.attr('id')).find('li.area_with_subarea');
-    var id_area_seleccionada;
-    var id_subarea_seleccionada;
-    // console.log(contador + "____" + settings.items);
-    if(contador >= settings.items){
-        for (var i = 0; i < listado_areas_seleccionadas.length; i++) {
-            id_area_seleccionada = $(listado_areas_seleccionadas[i]).attr('id').split("_")[1];
-            // console.log(id_area_seleccionada);
-            for (var j = 0; j < listados_panel.length; j++) {
-                $(listados_panel).addClass('subarea_disabled_1');
-                id_subarea_seleccionada =   $(listados_panel[j]).attr('id').split("_")[0];
-                if(id_area_seleccionada == id_subarea_seleccionada || ($(listados_panel[j]).attr('id') == "all_select_"+dependencia+"_"+id_area_seleccionada)){
-                    
-                    array_li.push($(listados_panel[j])[0]); 
+    // if(settings.dependence.items != false){
+        
+            var numberArea = objeto.find('option[selected]').length;
+            var areaSel;
+            var panelDep = $('#panel'+dependencia);
+            var listadoDep;
+            if(!$(obj).hasClass('area_with_subarea')){
+                areaSel = $(obj).attr('id').split('_')[1];
+                listadoDep = panelDep.find('li[id^="'+areaSel+'_"].select_list_subarea:not(.subarea_selected)');
+                if(numberArea >= settings.items){
+                    console.log(obj);
+                    for (var i = 0; i < listadoDep.length; i++) {
+                        $(listadoDep[i]).addClass('subarea_disabled_1');
+                    }
+                    $('#panel'+dependencia).find('li#all_select_'+dependencia+'_'+areaSel).addClass('subarea_disabled_1');
+                }
+                else{
+                    for (var i = 0; i < listadoDep.length; i++) {
+                        $(listadoDep[i]).removeClass('subarea_disabled_1');
+                    }
+                    $('#panel'+dependencia).find('li#all_select_'+dependencia+'_'+areaSel).removeClass('subarea_disabled_1');
                 }
             }
-        }
-    }
-    else{
-        for (var j = 0; j < listados_panel.length; j++) {
-            $(listados_panel).removeClass('subarea_disabled_1');
-        }
-    }
-    for (var i = 0; i < array_li.length; i++) {
-        $(array_li[i]).removeClass('subarea_disabled_1');
-    }
+    // }
 }
 
 function contadorAreasSubareas(tipo){
@@ -721,7 +717,6 @@ function contadorAreasSubareas(tipo){
 }
 
 function maximoSubareas(id){
-    console.log(id);
     if(settings.dependence.items != false){
         var subareasLim = settings.dependence.items;
         var panelSub = $('#panel'+settings.dependence.id_dependencia);
@@ -774,15 +769,18 @@ function desmarcarTodascheckarea(){
         }
         $(this)[0].outerHTML = "";
         loadButtonSelected(settings.dependence.id_dependencia);
+        var listadoDisabled = $('#panel'+settings.dependence.id_dependencia).find('li[id^="'+area+'_"].subarea_disabled_1');
+        for (var i = 0; i < listadoDisabled.length; i++) {
+            $(listadoDisabled[i]).removeClass('subarea_disabled_1');
+        }
     })
+
 }
 
 function ondeleteCount(){
     // bounceCss
     var objetoBoton = $('#boton_'+settings.dependence.id_dependencia);
     var countListado = $('#panel'+settings.dependence.id_dependencia).find('li.subarea_selected:not(.seleccion_e)');
-    console.log(countListado.length);
-    console.log(objetoBoton[0]);
     objetoBoton.removeClass('bounceCss');
     objetoBoton.addClass('bounceCss');
     objetoBoton.html("<i class='fa fa-plus'></i><span class='countList'>"+countListado.length+"</span>");

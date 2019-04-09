@@ -2,13 +2,25 @@
   <div class="row">
     <div class="main_business">                                                    
       <div class="container"><br>
+
         <div class="checkout-wrap">
           <ul class="checkout-bar">
-            <li class="visited">Registro</li>
-            <li class="visited">Completar Perfil</li>
-          </ul>
-        </div>
-        <br>
+              <li class="visited">Registro</li>
+              <li class="active">Completar Perfil</li>
+              <?php 
+              for($i=1;$i<=($nrototaltest-2);$i++){ ?>
+                <?php 
+                 if ($i <= $nrotestusuario){
+                   $clase = "visited";
+                 }
+                 else{
+                   $clase = "";
+                 }
+                ?>
+                <li class="<?php echo $clase;?>">Cuestionario <?php echo $i;?></li>                
+              <?php } ?>
+            </ul>
+        </div><br><br>
         <div class="row">
           <!--<div class="main_business">-->
             <div class="col-md-3" align="center">                                
@@ -54,9 +66,3 @@
     </div>
   </div>              
 </div>
-
-<?php 
-  
-  var_dump($_SESSION['mfo_datos']['planes']);
-
- ?>

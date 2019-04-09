@@ -96,7 +96,7 @@ displayValue = function() {
             } */
     
  var trX = Math.abs(180 - 210 * Math.cos(percToRad(percent / 2))); 
- var trY = Math.abs(195 - 210 * Math.sin(percToRad(percent / 2))); 
+ var trY = Math.abs(180 - 210 * Math.sin(percToRad(percent / 2))); 
  // (180, 195) are the coordinates of the center of the gauge.
   displayValue = function() { 
     texts.append("text") 

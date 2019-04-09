@@ -19,7 +19,6 @@
 						foreach ($data as $key => $value) {
 						 $array_group[$value['id_pregunta']][$key] = $value;
 						}
-						print_r("<br><br><br><br>".$faceta);
 			            switch($faceta){
 			            	case 1:
 			            	  $indice = 1;

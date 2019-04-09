@@ -25,8 +25,11 @@ class Controlador_Velocimetro extends Controlador_Base {
     $enlaceboton;
     $imagen;
     $textoBoton;
+    $nrototaltest = Modelo_Cuestionario::totalTest();
+    $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
     $faceta = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
     $faceta -= 1;
+    Utils::log($faceta);
     if($faceta == 1){
       $imagengif = "gif-lo-quiero.gif";
       $descrporc = "Bajas";
@@ -105,6 +108,9 @@ class Controlador_Velocimetro extends Controlador_Base {
     $tags["enlaceboton"] = $enlaceboton;
     $tags["imagen"] = $imagen;
     $tags["textoBoton"] = $textoBoton;
+    $tags["faceta"] = $faceta;
+    $tags["nrototaltest"] = $nrototaltest;
+    $tags["nrotestusuario"] = $nrotestusuario;
 
     $tags["template_js"][] = "d3.v3.min";
     $tags["template_js"][] = "velocimetro";
