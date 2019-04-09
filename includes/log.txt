@@ -1,0 +1,63 @@
+[2019/04/09 03:58:24] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/09 03:58:24] SQL Query: SELECT * FROM mfo_area
+[2019/04/09 03:58:25] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/09 03:58:25] Utils::createSession empezo una nueva sesion
+[2019/04/09 03:58:25] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/04/09 03:58:33] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/09 03:58:33] SQL Query: SELECT * FROM mfo_area
+[2019/04/09 03:58:33] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/09 03:58:33] Utils::createSession empezo una nueva sesion
+[2019/04/09 03:58:33] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa13' OR correo = 'empresa13') AND password = '525a7953a3ccadd755defc7207fe4bbf'
+[2019/04/09 03:58:33] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/04/09 03:58:44] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/09 03:58:44] SQL Query: SELECT * FROM mfo_area
+[2019/04/09 03:58:44] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/09 03:58:44] Utils::createSession empezo una nueva sesion
+[2019/04/09 03:58:44] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '525a7953a3ccadd755defc7207fe4bbf'
+[2019/04/09 03:58:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/04/09 03:58:51] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/09 03:58:51] SQL Query: SELECT * FROM mfo_area
+[2019/04/09 03:58:51] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/09 03:58:51] Utils::createSession empezo una nueva sesion
+[2019/04/09 03:58:51] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '25d55ad283aa400af464c76d713c07ad'
+[2019/04/09 03:58:51] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '2'
+[2019/04/09 03:58:52] SQL Query: SELECT dominio FROM mfo_sucursal where id_pais = '14'
+[2019/04/09 03:59:01] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/09 03:59:01] SQL Query: SELECT * FROM mfo_area
+[2019/04/09 03:59:01] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/09 03:59:01] Utils::createSession empezo una nueva sesion
+[2019/04/09 03:59:01] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/04/09 03:59:10] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/09 03:59:10] SQL Query: SELECT * FROM mfo_area
+[2019/04/09 03:59:10] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/09 03:59:10] Utils::createSession empezo una nueva sesion
+[2019/04/09 03:59:10] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '25d55ad283aa400af464c76d713c07ad'
+[2019/04/09 03:59:10] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '2'
+[2019/04/09 03:59:10] SQL Query: SELECT dominio FROM mfo_sucursal where id_pais = '14'
+[2019/04/09 03:59:14] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_a_sub.id_areas_subareas
+[2019/04/09 03:59:14] SQL Query: SELECT * FROM mfo_area
+[2019/04/09 03:59:14] SQL Query: SELECT * FROM mfo_subareas
+[2019/04/09 03:59:14] Utils::createSession empezo una nueva sesion
+[2019/04/09 03:59:14] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
