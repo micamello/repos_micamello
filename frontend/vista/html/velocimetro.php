@@ -6,7 +6,7 @@
         <div class="checkout-wrap">
           <ul class="checkout-bar">
               <li class="visited">Registro</li>
-              <li class="active">Completar Perfil</li>
+              <li class="visited">Completar Perfil</li>
               <?php 
               for($i=1;$i<=($nrototaltest-2);$i++){ ?>
                 <?php 
@@ -14,7 +14,7 @@
                    $clase = "visited";
                  }
                  else{
-                   $clase = "";
+                   $clase = "active";
                  }
                 ?>
                 <li class="<?php echo $clase;?>">Cuestionario <?php echo $i;?></li>                

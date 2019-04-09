@@ -80,14 +80,14 @@ class Controlador_Perfil extends Controlador_Base
                 $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 //Valida que el único que guarda foto es el candidato y si tiene o no cargado uno previo
-                if (isset($_SESSION['mfo_datos']['infohv']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
-                    if($_SESSION['mfo_datos']['infohv']['formato'] == ''){
+                if (isset($_SESSION['mfo_datos']['usuario']['infohv']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
+                    if($_SESSION['mfo_datos']['usuario']['infohv']['formato'] == ''){
                         $imgArch1 = 'actualizar.png';
                     }else{
-                        $imgArch1    = $_SESSION['mfo_datos']['infohv']['formato'] . '.png';
+                        $imgArch1    = $_SESSION['mfo_datos']['usuario']['infohv']['formato'] . '.png';
                     }
                     $msj1        = 'Cv Cargado';
-                    $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['infohv']['formato'];
+                    $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['usuario']['infohv']['formato'];
                     $ruta_arch   = PUERTO."://".HOST.'/hojasDeVida/'.$_SESSION['mfo_datos']['usuario']['username'].'/';
                     $btnDescarga = 1;                   
                     $msj2        = 'Actualizar CV';
@@ -283,9 +283,9 @@ class Controlador_Perfil extends Controlador_Base
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 if (!empty($archivo) && $archivo['error'] != 4) {
                     $arch = Utils::validaExt($archivo, 2);
-                    if (isset($_SESSION['mfo_datos']['infohv'])) {
-                        if ($arch[1] != $_SESSION['mfo_datos']['infohv']['formato']) {
-                            if (!Modelo_InfoHv::actualizarHv($_SESSION['mfo_datos']['infohv']['id_infohv'], $arch[1])) {
+                    if (isset($_SESSION['mfo_datos']['usuario']['infohv'])) {
+                        if ($arch[1] != $_SESSION['mfo_datos']['usuario']['infohv']['formato']) {
+                            if (!Modelo_InfoHv::actualizarHv($_SESSION['mfo_datos']['usuario']['infohv']['id_infohv'], $arch[1])) {
                                 throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
                             } else {
                                 if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
@@ -302,7 +302,7 @@ class Controlador_Perfil extends Controlador_Base
                             }
                         }
                     }
-                }else if (!isset($_SESSION['mfo_datos']['infohv'])) {
+                }else if (!isset($_SESSION['mfo_datos']['usuario']['infohv'])) {
                     throw new Exception("Cargar la hoja de vida es obligatorio");
                 }
                 $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);

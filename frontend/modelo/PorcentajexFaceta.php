@@ -8,5 +8,16 @@ class Modelo_PorcentajexFaceta{
 
     if(!empty($r['resultado'])){ return $r['resultado']; }else{ return false; }
   }
+
+  public static function guardarValores($valor,$idusuario,$idfaceta,$estado=1){
+    if (empty($idusuario) || empty($idfaceta)){ return false; }
+    $fecha_culminacion = date("Y-m-d H:i:s");    
+    $vlinsert = array("valor" => $valor,
+                      "id_usuario" => $idusuario,
+                      "id_faceta" => $idfaceta,
+                      "fecha_culminacion" => $fecha_culminacion,
+                      "estado" => $estado);
+    return $GLOBALS['db']->insert("mfo_porcentajexfaceta",$vlinsert);
+  }
 }  
 ?>

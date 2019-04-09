@@ -11,8 +11,7 @@
 		<div class="">
 			<div class="">
 				<form action="<?php echo PUERTO."://".HOST;?>/cuestionario/guardarResp/" method="post" id="forma_1">
-					<div class="respuestas" id="respuestas" style="display: none;"></div>
-					<!-- <input type="hidden" name="id_usuario" value="<?php echo $_SESSION['id_usuario']; ?>"> -->
+					<div class="respuestas" id="respuestas" style="display: none;"></div>				
 					<input type="hidden" name="tiempo" id="tiempo" value="<?php echo $tiempo; ?>">
 					 <?php 
 						$array_group = array();
@@ -51,33 +50,30 @@
 							echo "<div class='panel-heading'><h5>Pregunta ".$indice."</h5></div>";
 							echo "<div class='panel-body'>";
 
-									echo "<div class='contenedor_p'>";
-									echo "<div class='row'>";
-									$columna = "";
-									if($navegador == "Safari"){
-										$columna = "offset-md-3 ";
-									}
-									echo "<div class='".$columna."col-md-6'>";
-									foreach ($actual as $key => $value) {
-										echo "<div class='text_origen' id='nido_".$value['id_opcion']."'>";
-										echo "<input type='hidden' name='opcion[]' value='".$value['id_opcion']."'>";
-										echo "<label>".utf8_encode($value['descripcion'])."</label>";
-										echo "</div><br><br>";
-									}
-									echo "</div>";
-									echo "<div class='".$columna."col-md-6'>";
-									$l = 1;
-									foreach ($actual as $key => $value) {
-										echo "<span class='order_priority'>".($l)."</span>";
-										echo "<div class='text_destino'><input type='hidden' name='orden[]' value='".($l++)."'></div><br><br>";
-									}
+							echo "<div class='contenedor_p'>";
+							echo "<div class='row'>";
+							$columna = "";
+							if($navegador == "Safari"){
+								$columna = "offset-md-3 ";
+							}
+							echo "<div class='".$columna."col-md-6'>";
+							foreach ($actual as $key => $value) {
+								echo "<div class='text_origen' id='nido_".$value['id_opcion']."'>";
+								echo "<input type='hidden' name='opcion[]' value='".$value['id_opcion']."'>";
+								echo "<label style='cursor:pointer;'>".utf8_encode($value['descripcion'])."</label>";
+								echo "</div><br><br>";
+							}
+							echo "</div>";
+							echo "<div class='".$columna."col-md-6'>";
+							$l = 1;
+							foreach ($actual as $key => $value) {
+								echo "<span class='order_priority'>".($l)."</span>";
+								echo "<div class='text_destino'><input type='hidden' name='orden[]' value='".($l++)."'></div><br><br>";
+							}
 
-									echo "</div>";
-									echo "</div>";
-									echo "</div>";
-
-
-
+							echo "</div>";
+							echo "</div>";
+							echo "</div>";
 
 							echo "</div>";
 							echo "</div>";

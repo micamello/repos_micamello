@@ -4,11 +4,11 @@ require_once 'includes/mpdf/mpdf.php';
 class Controlador_GenerarPDF extends Controlador_Base
 {
 	public function construirPagina(){
-   /* if(!Modelo_Usuario::estaLogueado() ){
+    if(!Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
 
-    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
+    /*if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA || !isset($_SESSION['mfo_datos']['planes'])){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
