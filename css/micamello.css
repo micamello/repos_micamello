@@ -608,3 +608,15 @@ select.form-control{
 .panel-heading{
   text-align: justify;
 }
+a.addButton{
+  background-color: #2BC368;
+  color: white;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+}
+
+a.addButton:hover{
+  color: white;
+  box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+}
+

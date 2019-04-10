@@ -101,6 +101,61 @@
         });
     },
 })
+
+
+
+if($('#fechaCont').length){
+    $('#fecha').DateTimePicker({
+    dateFormat: "yyyy-MM-dd",
+    shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+    shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+    titleContentDate: "Configurar fecha",
+    titleContentTime: "Configurar tiempo",
+    titleContentDateTime: "Configurar Fecha & Tiempo",
+    setButtonContent: "Listo",
+    clearButtonContent: "Limpiar"
+  });
+}
+
+if($('#ciudadOf').length){
+    $('#ciudadOf').attr('disabled', true);
+}
+
+if($('#provinciaOf').length){
+    $('#provinciaOf').change(function(){
+      var id_provincia = $('select[id=provinciaOf]').val();
+      var puerto_host = $('#puerto_host').val();
+      if(id_provincia != ""){
+        $.ajax({
+          type: "GET",
+          url: puerto_host+"?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
+          dataType:'json',
+          success:function(data){
+            $('#ciudadOf').html('<option value="">Seleccione una ciudad</option>');
+            $.each(data, function(index, value) {
+              $('#ciudadOf').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
+            });
+            $('#ciudadOf').attr('disabled', false);
+
+          },
+          error: function (request, status, error) {
+            alert(request.responseText);
+          }                  
+        })
+      }
+    });
+}
+
+if($('#area_select').length){
+  $('#area_select').multiple_select({
+    items: 1,
+    dependence: {
+      id_dependencia: "subareasCand",
+      items: 1
+    }
+  });
+}
 // }
 
 // var mensaje = "";
