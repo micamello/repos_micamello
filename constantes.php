@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'micamello_desarrollo6');
+define('DBNOMBRE', 'micamello_desarrollo3');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -86,7 +86,7 @@ define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
 // CORREOS_TEMPLATES
 // REGISTRO MANUAL
-const TAGS_REPLACE_T1 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%");
+/*const TAGS_REPLACE_T1 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%");
 //REGISTRO RED SOCIAL
 const TAGS_REPLACE_T2 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
 // AVISO CREACION
@@ -163,5 +163,5 @@ define('TIPO', 	array(
 												'cabecera'=>'Mensaje Cancelación de Subscripción'
 												)
 					)
-		);
+		);*/
 ?>

@@ -1,12 +1,11 @@
 <?php
 class Controlador_Oferta extends Controlador_Base{
           
-    public function construirPagina()
-    {
+    public function construirPagina(){
       if (!Modelo_Usuario::estaLogueado()) {
           Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
       }
- 
+       
       //Obtiene todos los banner activos segun el tipo
       $arrbanner     = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);
       //Muestra solo un banner de tipo candidato para no dar impresion que cambia de pagina        
