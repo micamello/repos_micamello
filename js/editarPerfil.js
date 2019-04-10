@@ -723,7 +723,7 @@ function validarFormulario(tipovalidacion){
 
             if(document.getElementById('dni').value.length >= 10){
               if(searchAjax($('#dni'),tipo_doc) == false){
-                if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+                if(DniRuc_Validador($('#dni'),tipo_doc) == true){
                   quitarError("err_dni","seccion_dni");
                 }else{
                   colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","boton");

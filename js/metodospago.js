@@ -278,7 +278,7 @@ $('#tipo_docP').on('change', function(){
       if(document.getElementById('dniP').value != ""){
         if(document.getElementById('dniP').value.length >= 10){
 
-          if(DniRuc_Validador($('#dniP'),tipo_doc) == false){
+          if(DniRuc_Validador($('#dniP'),tipo_doc) == true){
             quitarError("err_dniP","seccion_dniP");
           }else{
             colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
@@ -357,7 +357,7 @@ $('#tipo_doc').on('change', function(){
       
       if(document.getElementById('dni').value != ""){
         if(document.getElementById('dni').value.length >= 10){
-          if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+          if(DniRuc_Validador($('#dni'),tipo_doc) == true){
             quitarError("err_dni","seccion_dni");
           }else{
             colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","btndeposito");
@@ -455,7 +455,7 @@ $('#dni').on('blur', function(){
     if(document.getElementById('dni').value != ""){
 
       if(document.getElementById('dni').value.length >= 10){
-        if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+        if(DniRuc_Validador($('#dni'),tipo_doc) == true){
           quitarError("err_dni","seccion_dni");
         }else{
           colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","btndeposito");
@@ -492,7 +492,7 @@ $('#dniP').on('blur', function(){
 
       if(document.getElementById('dniP').value.length >= 10){
 
-        if(DniRuc_Validador($('#dniP'),tipo_doc) == false){
+        if(DniRuc_Validador($('#dniP'),tipo_doc) == true){
           quitarError("err_dniP","seccion_dniP");
         }else{
           colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
@@ -663,7 +663,7 @@ function validarFormulario(){
   if(dni.value != ""){
 
     if(dni.value.length >= 10){
-      if(DniRuc_Validador(dni,tipo_doc) == false){
+      if(DniRuc_Validador(dni,tipo_doc) == true){
         quitarError(err_dni,seccion_dni);
       }else{
         colocaError(err_dni, seccion_dni,"Documento ingresado no es válido",btn);
