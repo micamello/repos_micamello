@@ -153,6 +153,7 @@
 		          <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
                 <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
                   <input type="hidden" name="postulado" id="postulado" value="1">
+                  <input type="hidden" name="opcion" id="opcion" value="">
                   <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
                     <?php if(!empty($postulado)){ ?>
                       <div align="center">
