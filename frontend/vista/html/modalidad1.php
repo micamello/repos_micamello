@@ -13,6 +13,7 @@
 				<form action="<?php echo PUERTO."://".HOST;?>/cuestionario/guardarResp/" method="post" id="forma_1">
 					<div class="respuestas" id="respuestas" style="display: none;"></div>				
 					<input type="hidden" name="tiempo" id="tiempo" value="<?php echo $tiempo; ?>">
+					<input type="hidden" name="acceso" id="acceso" value="<?php echo (isset($acceso) && !empty($acceso)) ? "1" : "0"; ?>">
 					 <?php 
 						$array_group = array();
 

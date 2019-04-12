@@ -13,26 +13,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:image" content="https://www.micamello.com.ec/" />
   <link rel="icon" type="image/x-icon" href="<?php echo PUERTO."://".HOST;?>/imagenes/favicon.ico">
-
-  <!--Google Font link-->
-  <!--<link href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">-->
-  <!-- <link rel="stylesheet" type="text/css" href="<?php #echo PUERTO."://".HOST;?>/css/demo.css" /> -->
-
-  <!-- <link rel="stylesheet" type="text/css" href="<?php echo PUERTO."://".HOST;?>/css/style.css" /> -->
-  <!--<link href='http://fonts.googleapis.com/css?family=Alfa+Slab+One' rel='stylesheet' type='text/css'>-->
-  <!--<link href='http://fonts.googleapis.com/css?family=Boogaloo' rel='stylesheet' type='text/css'>-->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/bootstrap.css">
   <!-- Archivo css micamello mic.css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
   <!--Theme custom css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
-  
   <link href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
-
-
-  <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"> -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap-multiselect.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/micamello.css">
@@ -44,9 +32,7 @@
       }  
     }
   ?>
-<!-- $_SESSION['registro']); -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
-  
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -95,15 +81,12 @@
   </div>
 </div>
 
-<!--                       NOTIFICACIONES                     -->
+<!--NOTIFICACIONES-->
 <?php
-
 if(isset($_SESSION['mfo_datos']['usuario'])){
+  $notificaciones = Modelo_Notificacion::notificacionxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
 
- $notificaciones = Modelo_Notificacion::notificacionxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
-
- if(!empty($notificaciones)){  ?>
-
+ if(!empty($notificaciones)){ ?>
   <input type="hidden" name="msg_notificacion" id="msg_notificacion" value="1">
 
   <div class="modal fade" id="notificaciones" tabindex="-1" role="dialog" aria-labelledby="notificaciones" aria-hidden="true" data-backdrop="static" data-keyboard="false">
@@ -114,15 +97,20 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
         </div>
         <div class="modal-body">
           <div class="row">
-            <div class="col-md-12" style="font-size: 16px; color: #333">
-
+            <div class="col-md-12" style="font-size:16px; color:#333">
               <b class="text_large">
-                <?php echo $notificaciones['descripcion']; ?>
+                <?php echo $notificaciones['descripcion'];?>
               </b>
               <b class="text_small"><?php echo $notificaciones['descripcion']; ?></b>
               <br>
               <center>
-                <a href="#" onclick="desactivarNotificacion(<?php echo $notificaciones['id_notificacion']; ?>,'<?php echo $notificaciones['url']; ?>')" class="ok"><b>Aceptar</b></a>
+                <?php if ($notificaciones["tipo"] == Modelo_Notificacion::DESBLOQUEO_ACCESO && 
+                          $notificaciones["tipo_usuario"] == Modelo_Usuario::CANDIDATO) { ?>
+                  <a href="javascript:void(0);" onclick="cancelarAcceso(<?php echo $notificaciones['id_notificacion'];?>);" class="btn btn-cancel"><b>Cancelar</b></a>
+                  <a href="javascript:void(0);" onclick="aceptarAcceso(<?php echo $notificaciones['id_notificacion'];?>);" class="btn btn-success"><b>Aceptar</b></a>
+                <?php } else { ?>
+                  <a href="javascript:void(0);" onclick="desactivarNotificacion(<?php echo $notificaciones['id_notificacion'];?>);" class="btn btn-success"><b>Aceptar</b></a>
+                <?php } ?>                  
               </center> 
             </div>
           </div>
@@ -132,7 +120,6 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
   </div>
 <?php } 
 } ?>
-
 
 <?php 
   $navegador = Utils::detectarNavegador();
@@ -145,7 +132,6 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
     <p><b><a href="https://www.microsoft.com/es-es/download/internet-explorer.aspx">Actualizar IE</a></b></p>
   </div>
 <?php } ?>
-
 
   <nav class="navbar navbar-default navbar-fixed-top">
  <!--   <button id="buttonP">Dar Permisos</button>  
@@ -231,7 +217,6 @@ if(isset($show_banner)){ ?>
 <?php } ?>
 
 <?php
-
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
     <br>
     <?php if(!isset($show_banner)){ ?> 
@@ -254,8 +239,6 @@ if(isset($show_banner)){ ?>
       </ol> 
     </div>
   <?php } ?>
-
-
 
 <section id="product" class="product">
   <br>

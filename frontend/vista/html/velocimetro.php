@@ -14,7 +14,7 @@
                    $clase = "visited";
                  }
                  else{
-                   $clase = "active";
+                   $clase = "";
                  }
                 ?>
                 <li class="<?php echo $clase;?>">Cuestionario <?php echo $i;?></li>                

@@ -43,7 +43,8 @@ public static function autenticacion($username, $password){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
                      u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
                      u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional,
+                     u.pendiente_test
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -917,6 +918,9 @@ public static function existeUsername($username){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
+      elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/'); 
+      }
       elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {    
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
       } 
@@ -1069,7 +1073,7 @@ WHERE
   }
 
   /******************MINISITIO*****************/
-  public static function buscaUsuario($id_usuario){
+  /*public static function buscaUsuario($id_usuario){
     if (empty($id_usuario)){ return false; }
     $sql = "SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario));
@@ -1099,7 +1103,7 @@ WHERE
     }
       $result = $GLOBALS['db']->insert('mfo_usuariom2', $data_usuario);
       return $result;
-  }
+  }*/
 
   public static function actualizarMetodoSeleccion($id_usuario, $modo){
     if(empty($id_usuario) || (empty($modo) && is_numeric($modo))){return false;}
@@ -1107,12 +1111,17 @@ WHERE
   }
 
   public static function consultarMetodoASeleccion($id_usuario){
-    $sql = "SELECT u.metodo_resp FROM mfo_usuario u WHERE u.id_usuario = ?";
+    $sql = "SELECT metodo_resp FROM mfo_usuario WHERE id_usuario = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario));
     if (empty($rs['metodo_resp'])){ return false; } else{ return $rs; }
   }
 
-  public static function obtieneListadoEmpresas(){
+  public static function actualizarAceptarAcceso($id_usuario,$estado=1){
+    if(empty($id_usuario)){return false;}
+    return $GLOBALS['db']->update("mfo_usuario",array("pendiente_test"=>$estado),"id_usuario=".$id_usuario);
+  }
+
+  /*public static function obtieneListadoEmpresas(){
     $sql = "SELECT * FROM mfo_empresam2 ORDER BY nombre";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
@@ -1124,6 +1133,6 @@ WHERE
       }
     }
     return $datos;
-  }
+  }*/
 }  
 ?>

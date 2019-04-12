@@ -36,7 +36,8 @@ class Proceso_Subscripcion{
 	  	
       $id_comprobante = $this->guardarComprobante();      
       if (!Modelo_UsuarioxPlan::guardarPlan($this->objUsuario->id,$this->objUsuario->tipo,$this->idplan,$infoplan["num_post"],
-                                            $infoplan["duracion"],$infoplan["porc_descarga"],$id_comprobante)){
+                                            $infoplan["duracion"],$infoplan["porc_descarga"],$id_comprobante,false,false,false,
+                                            $infoplan["num_accesos"])){
         throw new Exception("Error en crear el plan");	
       }	      
 	    
@@ -123,17 +124,16 @@ class Proceso_Subscripcion{
     $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_SUBSCRIPCION");
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
-    //$notif_body = "Estimado ".$nombres;
-    //$notif_body .= "Su plan ".$plan." ha sido activado exitosamente";
+    $notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
-      $mensaje = "Por favor de click en este enlace para realizar el tercer formulario "; 
+      $mensaje = "Por favor de click en este enlace para realizar el tercer formulario";       
       $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
     }else{
       $mensaje = "Por favor de click en este enlace para publicar una oferta "; 
       $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
     } 
     $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
-    //Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
+    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,Modelo_Notificacion::ACTIVACION_SUBSCRIPCION);
     Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
   }
 

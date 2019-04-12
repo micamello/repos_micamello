@@ -1,7 +1,6 @@
 <?php
 class Modelo_UsuarioxPlan{
 
-
   public static function planesActivos($usuario,$tipo){
     if (empty($usuario) || empty($tipo)){ return false; }
     if ($tipo == Modelo_Usuario::CANDIDATO){
@@ -13,41 +12,40 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array($usuario),true);
   }
 
-  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion,$porcdesc=0,$idcomprobante='',$fechacreacion=false,$fechacaducidad=false,$idEmpresaPlanParent=false){
-
-	    if (empty($usuario) || empty($plan)){ return false; }
-	    $values_insert = array();
-	    $fechacreacion = (empty($fechacreacion)) ? date('Y-m-d H:i:s') : $fechacreacion;    
-	    $values_insert["fecha_compra"] = $fechacreacion;
-      $campo = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "id_usuario" : "id_empresa";       
-	    $values_insert[$campo] = $usuario;      
-	    $values_insert["id_plan"] = $plan;
-	    $values_insert["estado"] = 1;
-	    if (!empty($numpost)){
-        $campo = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "num_post_rest" : "num_publicaciones_rest";               
-        $values_insert[$campo] = $numpost;         
-	    }    
-      if (!empty($fechacaducidad)){
-        $values_insert["fecha_caducidad"] = $fechacaducidad;
+  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion,$porcdesc=0,$idcomprobante='',
+                                     $fechacreacion=false,$fechacaducidad=false,$idEmpresaPlanParent=false,$numaccesos=0){
+	  if (empty($usuario) || empty($plan)){ return false; }
+	  $values_insert = array();
+	  $fechacreacion = (empty($fechacreacion)) ? date('Y-m-d H:i:s') : $fechacreacion;    
+	  $values_insert["fecha_compra"] = $fechacreacion;
+    $campo = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "id_usuario" : "id_empresa";       
+	  $values_insert[$campo] = $usuario;      
+	  $values_insert["id_plan"] = $plan;
+	  $values_insert["estado"] = 1;
+	  if (!empty($numpost)){
+      $campo = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "num_post_rest" : "num_publicaciones_rest";               
+      $values_insert[$campo] = $numpost;         
+	  }    
+    if (!empty($fechacaducidad)){
+      $values_insert["fecha_caducidad"] = $fechacaducidad;
+    }
+    else{  
+      if (!empty($duracion)){ 	    
+  	    $fechacaducidad = strtotime ( '+'.$duracion.' day',strtotime($fechacreacion));
+  	    $values_insert["fecha_caducidad"] = date('Y-m-d H:i:s',$fechacaducidad);  	    
       }
-      else{  
-        if (!empty($duracion)){ 	    
-  	      $fechacaducidad = strtotime ( '+'.$duracion.' day',strtotime($fechacreacion));
-  	      $values_insert["fecha_caducidad"] = date('Y-m-d H:i:s',$fechacaducidad);  	    
-        }
-
-      }
-      if (!empty($idcomprobante)){
-        $values_insert["id_comprobante"] = $idcomprobante;
-      }
+    }
+    if (!empty($idcomprobante)){
+      $values_insert["id_comprobante"] = $idcomprobante;
+    }
     if ($tipousuario == Modelo_Usuario::EMPRESA){
       $values_insert["num_descarga_rest"] = $porcdesc;
+      $values_insert["num_accesos_rest"] = $numaccesos;
       if ($idEmpresaPlanParent != false){
         $values_insert["id_empresa_plan_parent"] = $idEmpresaPlanParent;
       }
     }
     $tabla = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "mfo_usuario_plan" : "mfo_empresa_plan";
-
     return $GLOBALS['db']->insert($tabla,$values_insert);
   }
  
@@ -107,7 +105,6 @@ class Modelo_UsuarioxPlan{
   }
  
   public static function disponibilidadDescarga($id_empresa){
-
     $sql = "SELECT num_descarga_rest 
             FROM mfo_empresa_plan  
             WHERE (num_descarga_rest > 0 or num_descarga_rest = -1) AND 
@@ -173,9 +170,7 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->execute("UPDATE mfo_usuario_plan SET num_post_rest = num_post_rest + 1 WHERE id_usuario_plan = ".$id_plan_usuario);
   }
 
-
   public static function planesActivosPagados($tipo,$idEmpresa=false){
-
     if (empty($tipo)){ return false; }
     if ($tipo == Modelo_Usuario::CANDIDATO){        
       $sql = "SELECT up.id_usuario_plan, up.id_usuario, up.fecha_caducidad, p.nombre, up.fecha_compra
@@ -234,7 +229,6 @@ class Modelo_UsuarioxPlan{
 
   #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
   public static function tieneRecursos($idEmpresaPlan=false,$idEmpresa=false){
-
     $sql = "SELECT ep.id_plan,ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta, ep.id_empresa_plan,p.nombre, DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d') as fecha_compra
      FROM mfo_empresa_plan ep
       INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
@@ -251,11 +245,9 @@ class Modelo_UsuarioxPlan{
     //$sql .= " GROUP BY ep.id_plan";
 
     return $GLOBALS['db']->auto_array($sql,array(),true);
-
   }
 
   public static function consultarRecursosAretornar($idPlanEmpresa){
-  
     $sql = "SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres
       FROM mfo_empresa_plan ep
       INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
@@ -265,7 +257,6 @@ class Modelo_UsuarioxPlan{
   }
 
   public static function devolverRecursos($recursos){
-    
     if($recursos['id_empresa_plan_parent'] == ''){
       $recursos['id_empresa_plan_parent'] = $recursos['id_empresa_plan'];
     }
@@ -291,7 +282,6 @@ class Modelo_UsuarioxPlan{
   }
 
   public static function planesConCuentas($idEmpresa/*,$cantd_empresas*/,$planes=false,$tipo=0){
-
     $sql = "SELECT ep.id_empresa_plan, p.nombre,DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d') as fecha_compra, ep.id_plan
       FROM mfo_empresa_plan ep
       INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
@@ -347,6 +337,11 @@ class Modelo_UsuarioxPlan{
     }
 
     return $estatus;
+  }
+
+  public static function sumarNumeroAccesos($id_plan_empresa){
+    if (empty($id_plan_empresa)) { return false; }    
+    return $GLOBALS['db']->execute("UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = ".$id_plan_empresa);
   }
 }  
 
