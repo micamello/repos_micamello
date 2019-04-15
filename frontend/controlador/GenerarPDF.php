@@ -31,8 +31,14 @@ class Controlador_GenerarPDF extends Controlador_Base
 
         if($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
 
-          $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario);
-          $result = Modelo_Opcion::datosGraficos2($idusuario,1);
+          $result = Modelo_Opcion::datosGraficos2($idusuario,1); 
+          $idsfacetas = "";
+          foreach($result as $keyvl=>$vlresult){
+            $idsfacetas .= $keyvl.","; 
+          }
+          $idsfacetas = substr($idsfacetas, 0, -1);         
+          $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario,$idsfacetas);          
+
           $colores = Modelo_Faceta::obtenerColoresLiterales();
           $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
           $array_datos_graficos = array();
@@ -131,8 +137,6 @@ class Controlador_GenerarPDF extends Controlador_Base
       throw new Exception("Ha ocurrido un error al generar el informe");
     }
     self::informePersonalidad($parametro1, $parametro2, $resultados, $datos_usuario, $info_usuario, $firma);
-    
-    
 	}
 
   /*public function informePersonalidad($html){
@@ -159,10 +163,8 @@ class Controlador_GenerarPDF extends Controlador_Base
   }
 */
   public function generaInforme($datos){
-
     $facetas = $datos['facetas'];
     $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
-
     $datosusuario = $datos['datos'];
     $preguntas = $datos['preguntas'];
     $conacentos = array('Á', 'É','Í','Ó','Ú','Ñ');
@@ -185,7 +187,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     foreach($preguntas as $key => $pregunta){
       $cantd_preg++;
       $resultado = Modelo_Baremo::obtienePuntaje($pregunta['orden1'],$pregunta['orden2'],$pregunta['orden3'],$pregunta['orden4'],$pregunta['orden5']);
-      $descriptor = Modelo_Descriptor::obtieneTextos($pregunta['id_competencia'],$resultado['id_puntaje']);       //print_r($descriptor); 
+      $descriptor = Modelo_Descriptor::obtieneTextos($pregunta['id_competencia'],$resultado['id_puntaje']);       
       if ($pregunta['id_faceta'] != $faceta){
         $faceta = $pregunta['id_faceta'];
         $datosfaceta = Modelo_Faceta::consultaIndividual($pregunta['id_faceta']);
@@ -213,10 +215,12 @@ class Controlador_GenerarPDF extends Controlador_Base
     $descrip_facetas = substr($descrip_facetas, 0,-1);
     $porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
 
+    
     if(count($datos['datosGraficos']) == count($facetas)){
       $informe .= '<p align="center"><img align="center" src="https://chart.googleapis.com/chart?chs=500x300&chd=t:'.$porcentajes_faceta.'&cht=p&chl='.$etiquetas_faceta.'&chco='.$colors.'&chtt='.$descrip_titulo.'&chdl='.$descrip_facetas.'" class="img-responsive"></p>';
     }
-    //echo $informe;
+   
+    //echo $informe; 
     self::informePersonalidad($informe,$nombre_archivo);
   }
 

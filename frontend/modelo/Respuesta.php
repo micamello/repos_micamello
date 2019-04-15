@@ -14,7 +14,7 @@ class Modelo_Respuesta{
             INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
             INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia            
             WHERE r.id_usuario = ? ";
-    $sql .= (!empty($faceta)) ? " AND c.id_faceta = ".$faceta : "";        
+    $sql .= (!empty($faceta)) ? " AND c.id_faceta IN (".$faceta.")" : "";        
     $sql .= " GROUP BY o.id_pregunta
               ORDER BY o.id_pregunta, c.id_faceta, o.valor";          
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
