@@ -131,7 +131,7 @@ class Proceso_Subscripcion{
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
     $notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
-      $mensaje = "Por favor de click en este enlace para realizar el tercer formulario";       
+      $mensaje = "Por favor de click en este enlace para ver las ofertas ";       
       $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
     }else{
       $mensaje = "Por favor de click en este enlace para publicar una oferta "; 
