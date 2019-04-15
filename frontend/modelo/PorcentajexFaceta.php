@@ -19,5 +19,10 @@ class Modelo_PorcentajexFaceta{
                       "estado" => $estado);
     return $GLOBALS['db']->insert("mfo_porcentajexfaceta",$vlinsert);
   }
+
+  public static function updateEstado($idusuario,$estado=1){
+    if (empty($idusuario)){ return false; }
+    return $GLOBALS['db']->update("mfo_porcentajexfaceta",array("estado"=>$estado),"id_usuario=".$idusuario);
+  }
 }  
 ?>

@@ -39,8 +39,13 @@ class Proceso_Subscripcion{
                                             $infoplan["duracion"],$infoplan["porc_descarga"],$id_comprobante,false,false,false,
                                             $infoplan["num_accesos"])){
         throw new Exception("Error en crear el plan");	
-      }	      
-	    
+      }	
+      //si es candidato y ya tenia los ultimos 3 cuestionarios hechos se los activa      
+	    if ($this->objUsuario->tipo == Modelo_Usuario::CANDIDATO){
+        if (!Modelo_PorcentajexFaceta::updateEstado($this->objUsuario->id)){
+          throw new Exception("Error en crear el plan");  
+        }
+      }
 	    if ($this->procesador->tipo == 'paypal'){
 	      if (!Modelo_Paypal::modificarEstado($this->procesador->id)){
 	        throw new Exception("Error al actualizar el registro en tabla de paypal");	

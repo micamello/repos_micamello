@@ -27,7 +27,7 @@
               <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" style="border-radius: 5%;max-width:100%;max-height: 300px;margin-top: 40px;">
             </div>              
             <div class="col-md-3" align="center">
-              <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/<?php echo $imagengif;?>">
+              <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/cuestionarios/<?php echo $imagengif;?>">
               <input type="hidden" id="valorporc" name="valorporc" value="<?php echo $valorporc;?>">              
             </div>            
             <div class="col-md-6" align="center">    

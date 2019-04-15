@@ -143,7 +143,7 @@ class Controlador_Cuestionario extends Controlador_Base {
           $this->validaTercerFormulario($faceta);
         }
         $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($_SESSION['mfo_datos']['usuario']['id_usuario']);        
-        if (!empty($metodoSeleccion) && isset($metodoSeleccion["metodo_resp"]) && !empty($metodoSeleccion["metodo_resp"])){
+        if ($faceta > 1 && !empty($metodoSeleccion) && isset($metodoSeleccion["metodo_resp"]) && !empty($metodoSeleccion["metodo_resp"])){
           Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/');
         }  
         $tags = array();

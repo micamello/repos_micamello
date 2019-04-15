@@ -4,21 +4,22 @@ var consecutivo = [];
 var resultado = 0;
 var digitoVer = 0;
 var digitoVerComparar = 0;
-var expreg = /^[0-9]+$/i;
-var expreg2 = /^[a-zA-Z0-9]+$/i;
+var expregNumero = /^[0-9]+$/i;
+var expregAlfaNum = /^[a-zA-Z0-9]+$/i;
 
 function DniRuc_Validador(valor, tipo){
 // ************Validar cédula*******************
 	valor = $(valor).val();
+
 	if(valor != "" || valor != null){
 		if(tipo == 2){
-			if(expreg.test(valor)){
+			if(expregNumero.test(valor)){
 				return validarCedulaEcuador(valor, tipo);
 			}
 		}
 
 		if(tipo == 1){
-			if(expreg.test(valor)){
+			if(expregNumero.test(valor)){
 				if(validarRucPersonaNatural(valor, tipo) 
 					|| validarRucPersonaJuridica(valor)
 					|| validarRucInstitucionPublica(valor)){
@@ -31,7 +32,7 @@ function DniRuc_Validador(valor, tipo){
 		}
 
 		if(tipo == 3){
-			if(expreg2.test(valor) && valor.length >= 6){
+			if(expregAlfaNum.test(valor) && valor.length >= 6){
 				return true;
 			}
 			else{
@@ -41,7 +42,7 @@ function DniRuc_Validador(valor, tipo){
 	}
 }
 
-function validarCedulaEcuador(valor, tipo){
+function validarCedulaEcuador(valor, tipo){	
 	provincia = valor.substr(0,2);
 	longitud = 10;
 	if(tipo == 1){

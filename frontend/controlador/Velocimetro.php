@@ -36,14 +36,14 @@ class Controlador_Velocimetro extends Controlador_Base {
       $imagengif = "gif-lo-quiero.gif";
       $descrporc = "Bajas";
       $valorporc = "20";      
-      $imagen = "caracol";
+      $imagen = "caracol.gif";
       $textoBoton = "Siguiente";
     }
     elseif ($faceta == 2) {
       $imagengif = "gif-lo-quiero.gif";
       $descrporc = "Medianas";
       $valorporc = "40";
-      $imagen = "tortuga";
+      $imagen = "tortuga.gif";
       $textoBoton = "Siguiente";
     }
     else{
@@ -51,7 +51,7 @@ class Controlador_Velocimetro extends Controlador_Base {
       $descrporc = "Altas";
       $valorporc = "100";
       $enlaceboton = "postulacion";
-      $imagen = "camello";
+      $imagen = "camello.gif";
       $textoBoton = "Postúlate";
     }
 

@@ -32,7 +32,7 @@ class Modelo_Usuario{
     return true;
   }
 
-public static function autenticacion($username, $password){
+  public static function autenticacion($username, $password){
     $password = md5($password);         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni
             FROM mfo_usuario_login 
@@ -97,9 +97,8 @@ public static function autenticacion($username, $password){
     }
   }
 
-//   Búsqueda del username en la BD
-
-public static function existeUsuario($username){
+  //Búsqueda del username en la BD
+  public static function existeUsuario($username){
     if(empty($username)){ return false; }
     $sql = "SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
                    u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
@@ -111,52 +110,39 @@ public static function existeUsuario($username){
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
 
-/*public static function existeUsuario2($username){
-  if(empty($username)){ return false; }
-  $sql = "SELECT *
-          FROM mfo_usuario u
-          WHERE u.username = ?";
-  $rs = $GLOBALS['db']->auto_array($sql,array($username));
-  return (!empty($rs['id_usuario'])) ? $rs : false;
-}*/
+  public static function existeUsername($username){
+    if(empty($username)){return false;}
+    $sql = "SELECT * FROM mfo_usuario_login WHERE username = ?;";
+    $rs = $GLOBALS['db']->auto_array($sql,array($username), true);
+    return $rs;
+  } 
 
-public static function existeUsername($username){
-  if(empty($username)){return false;}
-  $sql = "SELECT * FROM mfo_usuario_login WHERE username = ?;";
-  $rs = $GLOBALS['db']->auto_array($sql,array($username), true);
-  return $rs;
-} 
-
-// se utiliza esta funcion en el registro modal--------------------
+  // se utiliza esta funcion en el registro modal--------------------
   public static function existeCorreo($correo){
     if(empty($correo)){ return false; }
     $sql = "SELECT * FROM mfo_usuario_login WHERE correo = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     return (empty($rs['correo'])) ? false : $rs['id_usuario_login'];
   }
-// se utiliza esta funcion en el registro modal--------------------
 
+  // se utiliza esta funcion en el registro modal--------------------
   public static function existeDni($dni,$idUsuarioLogin=false){
     if(empty($dni)){ return false; }
     $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?";
-
     if($idUsuarioLogin != false){
       $sql .= " AND id_usuario_login <> ".$idUsuarioLogin;
     }
-
     $rs = $GLOBALS['db']->auto_array($sql,array($dni));
     return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
 
   public static function crearUsuario($dato_registro){
     if(empty($dato_registro)){return false;}
- 
     if ($dato_registro['tipo_usuario'] == 1) {
       $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
     }
     else{
       $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
-
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }
@@ -173,6 +159,7 @@ public static function existeUsername($username){
       return $GLOBALS['db']->update("mfo_empresa",array("estado"=>1),"id_empresa=".$id_usuario);
     }
   }
+
   public static function desactivarCuenta($id_usuario,$tipo=self::CANDIDATO){
     if(empty($id_usuario)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -189,7 +176,6 @@ public static function existeUsername($username){
   }
 
   public static function actualizarSession($idUsuario,$tipo_usuario){
-
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
                       u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
@@ -226,9 +212,7 @@ public static function existeUsername($username){
     }else if($imagen['error'] == 4 && $session_foto == 1){
       $foto = 1;
     }
-
     if($tipo_usuario == self::CANDIDATO){
-
         $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional']); 
 
         if (!empty($data['documentacion'])){          
@@ -247,7 +231,6 @@ public static function existeUsername($username){
         $datos['id_univ'] = 'null';
         $datos['nombre_univ'] = ' ';
       }
-
         return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
 
     }else{
@@ -258,16 +241,12 @@ public static function existeUsername($username){
   }
 
   public static function validarFechaNac($fecha){
-
     //Creamos objeto fecha desde los valores recibidos
     $nacio = DateTime::createFromFormat('Y-m-d', $fecha);
-
     //Calculamos usando diff y la fecha actual
     $calculo = $nacio->diff(new DateTime());
-
     //Obtenemos la edad
     $edad =  $calculo->y;    
-
     if ($edad < 18) 
     {
         //echo "Usted es menor de edad. Su edad es: $edad\n";
@@ -279,7 +258,6 @@ public static function existeUsername($username){
   }
 
   public static function obtenerAspirantes($idOferta,$page,$obtCantdRegistros=false){
-
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
@@ -310,7 +288,6 @@ public static function existeUsername($username){
   }
 
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$obtCantdRegistros=false){
-
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
@@ -894,7 +871,6 @@ public static function existeUsername($username){
     }
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
-
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
