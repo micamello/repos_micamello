@@ -1,5 +1,5 @@
 $('#areaCand').multiple_select({
-	items: 3,
+	items: 2,
     dependence: {
       id_dependencia: "subareasCand",
       items: false
@@ -310,7 +310,7 @@ function validarOnSubmit(){
 
 // Campo documentoCandEmp-------------------------------------
 	if(camposavalidar[5].val() != ""){
-		if(!DniRuc_Validador(camposavalidar[5], $('#tipo_documentacion').val())){
+		if(DniRuc_Validador(camposavalidar[5], $('#tipo_documentacion').val())){
 			if(!verificarExiste(camposavalidar[5])){
 				crearMensajeError(camposavalidar[5], "El documento ingresado ya existe");
 			}
@@ -388,7 +388,6 @@ function validarOnSubmit(){
 	else{
 		eliminarMensajeError(camposavalidar[14], "");
 	}
-	// console.log(camposavalidar[14]);
 
 	
 	if(tipo_usuario == 2){
@@ -448,14 +447,12 @@ function validarOnSubmit(){
 
 $('#form_register').on('submit', function(event){
 	validarOnSubmit();
-	console.log(checkErrors());
 	if(!checkErrors()){
 		event.preventDefault();
 	}
 });
 
 $('#modal_registro').on('show.bs.modal', function(){
-	// console.log("eder");
 	var error_class = $('.error_class');
 	var error_class_1 = $('.error_class_1');
 	var error_class_2 = $('.error_class_2');
@@ -588,7 +585,7 @@ $('#modal_registro').on('show.bs.modal', function(){
 			$('#documentoCandEmp').prev().html($(this).find('option:selected').text()+" <i class='obligatorio'>*</i>");
 			eliminarMensajeError($(this), "");
 			if($('#documentoCandEmp').val() != ""){
-				if(!DniRuc_Validador($('#documentoCandEmp'), $(this).val())){
+				if(DniRuc_Validador($('#documentoCandEmp'), $(this).val())){
 					if(!verificarExiste($('#documentoCandEmp'))){
 						crearMensajeError($('#documentoCandEmp'), "El documento ingresado ya existe");
 					}
@@ -606,7 +603,7 @@ $('#modal_registro').on('show.bs.modal', function(){
 	if($('#documentoCandEmp').length){
 		$('#documentoCandEmp').on('blur', function(){
 			if($(this).val() != ""){
-				if(!DniRuc_Validador($(this), $('#tipo_documentacion').val())){
+				if(DniRuc_Validador($(this), $('#tipo_documentacion').val())){
 					if(!verificarExiste($(this))){
 						crearMensajeError($(this), "El documento ingresado ya existe");
 					}
@@ -626,7 +623,6 @@ $('#modal_registro').on('show.bs.modal', function(){
 
 	if($('#subareasCand').length){
 		$('#subareasCand').on('change', function(){
-			// console.log("eder");
 			if($(this).val() == ""){
 				crearMensajeError($(this), "Seleccione una opción");
 			}
@@ -775,10 +771,7 @@ function crearMensajeError(obj, mensaje){
 		$(obj).parent().next().attr('class', 'error_class_2 ahashakeheartache');
 		$(obj).parent().next().text(mensaje);
 		return false;
-	}
-	// console.log(obj.prop('tagName'));
-	if(obj.attr('multiple')){
-		// console.log("eder");
+	}	if(obj.attr('multiple')){
 		$(obj).next().attr('class', 'error_class_1 ahashakeheartache');
 		$(obj).addClass('error_input');
 		$(obj).next().text(mensaje);
@@ -810,22 +803,18 @@ function verificarExiste(obj){
 	var url = "";
 	var puerto_host = $('#puerto_host').val();
 	var retorno = "";
-	// console.log(puerto_host);
-	// console.log(buscar);
 	if(obj[0].id == 'correoCandEmp'){
 		url = puerto_host+"?mostrar=registro&opcion=buscarCorreo&correo="+buscar;
 	}
 	if(obj[0].id == 'documentoCandEmp'){
 		url = puerto_host+"?mostrar=registro&opcion=buscarDocumento&documento="+buscar;
 	}
-	console.log(url);
 	$.ajax({
 	    type: "GET",
 	    url: url,
 	    dataType:'json',
 	    async: false,
 	    success:function(data){
-	    	console.log(data.dato);
 	        if(data.dato != ""){
 	        	retorno = false;
 	        }

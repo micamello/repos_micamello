@@ -2,24 +2,26 @@
 class Controlador_Publicar extends Controlador_Base {
   
   public function construirPagina(){
-    $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
-    unset($_SESSION['mfo_datos']['planes']);
-    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu, $_SESSION['mfo_datos']['usuario']['tipo_usuario']);
     
-    if(!Modelo_Usuario::estaLogueado() ){
+    if(!Modelo_Usuario::estaLogueado()){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
+    $id_usuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
+    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($id_usuario, $_SESSION['mfo_datos']['usuario']['tipo_usuario']);
+
     if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
       $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
-    if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta')){
+    if (isset($_SESSION['mfo_datos']['planes']) && 
+      (!Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta') || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOfertaConfidencial'))){
       $_SESSION['mostrar_error'] = "No tiene permisos para publicar oferta";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
+
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCiudad':
@@ -27,183 +29,275 @@ class Controlador_Publicar extends Controlador_Base {
         $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($id_provincia);
         Vista::renderJSON($arrciudad);
       break;
-      default:
-        $publicaciones_restantes = $_SESSION['mfo_datos']['planes'];
-        $rest = 0;
-        foreach ($publicaciones_restantes as $value) {
-          if($value['num_publicaciones_rest'] < 0){
-            $rest = "Ilimitado";
-            break;
-          }
-          else{
-            $rest += $value['num_publicaciones_rest'];
-          }
-        }
-
-        $plan_con_pub = 0;
-        foreach ($publicaciones_restantes as $value) {
-          if($value['num_publicaciones_rest'] >= 0){
-            $plan_con_pub += $value['num_publicaciones_rest'];
-          }
-        }        
-        if ($rest <= 0 && is_numeric($rest)) {
-          $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
-          Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');       
+      case 'buscaPlan':
+        $id_plan_empresa = Utils::getParam('id_plan', '', $this->data);
+        $explodePlanEmpresa = explode("_", Utils::desencriptar($id_plan_empresa));
+        $id_plan = $explodePlanEmpresa[0];
+        $id_empresa_plan = $explodePlanEmpresa[1];
+        $plan = Modelo_UsuarioxPlan::consultarRecursosAretornar($id_empresa_plan);
+        Utils::log(print_r($plan, true));
+        $confidencialPlan = array();
+        if(Modelo_PermisoPlan::busquedaPermisoxPlan($id_plan, 'publicarOfertaConfidencial')){
+          $confidencialPlan = array_merge($plan, array('confidencial'=>0));
         }
         else{
-          $this->mostrarDefault($idusu,$rest, $plan_con_pub);
+          $confidencialPlan = array_merge($plan, array('confidencial'=>1));
         }
+        Vista::renderJSON($confidencialPlan);
+      break;
+      case 'registroOferta':
+        $datos = $_POST;
+        $validados = $this->validarCampos($datos);
+        try {
+                $GLOBALS['db']->beginTrans();
+                  $this->guardarDatosOferta($validados);
+                $GLOBALS['db']->commit();
+                $_SESSION['mostrar_exito'] = 'Su oferta se ha publicado correctamente'; 
+                $url = "vacantes/"; 
+         } catch (Exception $e) {
+                $url = "publicar/";
+                $GLOBALS['db']->rollback();
+                $_SESSION['mostrar_error'] = $e->getMessage();
+         }
+         Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
+      break;
+      default:
+        $this->mostrarDefault();
       break;
     } 
   }
-  public function mostrarDefault($idusu,$publicaciones_restantes, $plan_con_pub){
-      $arrarea = Modelo_Area::obtieneListado();
-      $arrinteres = Modelo_Interes::obtieneListado();
-      $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
-      $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
-      $arrjornada = Modelo_Jornada::obtieneListado();
-      $arridioma = Modelo_Idioma::obtieneListado();
-      $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
-      $arrescolaridad = Modelo_Escolaridad::obtieneListado();            
-      $tags = array('arrarea'=>$arrarea,
-                    'intereses'=>$arrinteres,
-                    'arrprovinciasucursal'=>$arrprovinciasucursal,
-                    'arrciudad'=>$arrciudad,
-                    'arrjornada'=>$arrjornada,
-                    'arridioma'=>$arridioma,
-                    'arrnivelidioma'=>$arrnivelidioma,
-                    'arrescolaridad'=>$arrescolaridad,
-                    'publicaciones_restantes'=>$publicaciones_restantes,
-                    'plan_con_pub'=>$plan_con_pub
-                  );
-      
-      if ( Utils::getParam('form_publicar') == 1 ){
-        try{          
-          $campos = array('titu_of'=>1, 'salario'=>1, 'confidencial'=>0, 'des_of'=>1, 'area_select'=>1, 'nivel_interes'=>1, 'ciudad_of'=>1, 'jornada_of'=>1, 'edad_min'=>1, 'edad_max'=>1, 'viaje'=>0, 'cambio_residencia'=>0, 'discapacidad'=>0, 'experiencia'=>1, 'escolaridad'=>1, 'licencia'=>0, 'fecha_contratacion'=>1, 'vacantes'=>1, 'nivel_idioma'=>1, 'urgente'=>0);             
-          $data = $this->camposRequeridos($campos);          
-          $data["des_of"] = str_replace("\r\n","<br>",$_POST["des_of"]);
-          
-          $data_idiomas = self::validarCampos($data);
-          if($publicaciones_restantes > 0 || $publicaciones_restantes == "Ilimitado"){
-            $GLOBALS['db']->beginTrans();
-            self::guardarPublicacion($data, $data_idiomas, $idusu);
-            $GLOBALS['db']->commit();
-            $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
-            $_SESSION['mostrar_exito'] = "La oferta se ha registrado correctamente. En un máximo de ".$tiempo." horas el administrador aprobará la oferta.";
-            $this->redirectToController('vacantes');
+
+  public function mostrarDefault(){
+    $planes = array();
+    $sumPub = 0;
+    foreach ($_SESSION['mfo_datos']['planes'] as $plan) {
+      $planUsuario = Modelo_UsuarioxPlan::consultarRecursosAretornar($plan['id_empresa_plan']);
+        if($plan['num_rest'] > 0){
+          array_push($planes, $planUsuario);
+          $sumPub += $plan['num_rest'];
+        }
+    }
+    if($sumPub == 0){
+      $_SESSION['mostrar_error'] = "Por el momento no dispone de publicaciones restantes. Por favor adquiera un Plan para poder publicar una oferta";
+      Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+    }
+
+    $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
+    $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
+    $arrjornada = Modelo_Jornada::obtieneListado();
+    $arridioma = Modelo_Idioma::obtieneListado();
+    $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
+    $arrescolaridad = Modelo_Escolaridad::obtieneListado();   
+    $fechacontratacion = date('Y-m-d',strtotime('+1 day',strtotime(date('Y-m-d H:i:s'))));    
+    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas'],
+                  'arrprovinciasucursal'=>$arrprovinciasucursal,
+                  'arrciudad'=>$arrciudad,
+                  'arrjornada'=>$arrjornada,
+                  'arridioma'=>$arridioma,
+                  'arrnivelidioma'=>$arrnivelidioma,
+                  'arrescolaridad'=>$arrescolaridad,
+                  'fecha_contratacion'=>$fechacontratacion,
+                  'planes'=>$planes
+                );
+
+    $tags["template_css"][] = "DateTimePicker";
+    $tags["template_js"][] = "assets/js/main";
+    $tags["template_js"][] = "tinymce/tinymce.min";      
+    $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "DateTimePicker";
+    $tags["template_js"][] = "validatePublicar";
+    Vista::render('publicar_vacante', $tags);
+  }
+
+  public function validarCampos($datos){
+    if(Utils::getParam('registroOferta') == 1 ){
+      $campos = array('planUsuario'=>1,
+                      'nombreOferta'=>1,
+
+                      'salarioOf'=>1,
+                      'salarioConv'=>1,
+                      'fechaCont'=>1,
+                      'cantVac'=>1,
+                      'provinciaOf'=>1,
+                      'ciudadOf'=>1,
+                      'area_select'=>1,
+                      'subareasCand'=>1,
+                      'jornadaOf'=>1,
+                      'escolaridadOf'=>1,
+                      'nivel_idioma'=>1,
+                      'primerEmpleoOf'=>1,
+                      'ofertaUrgenteOf'=>1,
+
+                      'anosexp'=>1,
+                      'licenciaOf'=>1, 
+                      'DispOf'=>1, 
+                      'residenciaOf'=>1,
+                      'discapacidadOf'=>1,
+                      'confidencialOf'=>1,
+                      'edadMinOf'=>1,
+                      'edadMaxOf'=>1);
+      $datosReg = $this->camposRequeridos($campos);
+      $planCombo = explode("_", Utils::desencriptar($datosReg['planUsuario']));
+      $confidencial = 1;
+      if(!Modelo_PermisoPlan::busquedaPermisoxPlan($planCombo[0], 'publicarOferta')){
+        $confidencial = $_POST['confidencialOf'];
+      }
+
+      $plan = $_SESSION['mfo_datos']['planes'];
+      $id_empresa = null;
+      $id_empresa_plan = null;
+      foreach ($_SESSION['mfo_datos']['planes'] as $planes) {
+        if($planes['id_empresa_plan'] == $planCombo[1]){
+          $id_empresa = $planes['id_empresa'];
+          $id_empresa_plan = $planes['id_empresa_plan'];
+          $num_publicaciones = $planes['num_publicaciones_rest'];
+        }
+      }
+
+      if($id_empresa == null){
+        throw new Exception("Ha ocurrido un error");
+        
+      }
+      if($id_empresa_plan == null){
+        throw new Exception("Ha ocurrido un error");
+        
+      }
+
+      $arraySubareas = array();
+      for ($i=0; $i < count($datosReg['subareasCand']); $i++) { 
+        $subareas = explode("_", $datosReg['subareasCand'][$i]);
+        if(!in_array($subareas[0], array_keys($GLOBALS['ListAreas'])) && !in_array($subareas[1], array_keys($GLOBALS['ListSubareas']))){
+            throw new Exception("Una o m\u00E1s \u00E1reas o sub\u00E1reas seleccionadas no est\u00E1n disponibles");
           }
           else{
-            $_SESSION['mostrar_error'] = "Actualmente no dispone de publicaciones. Si desea seguir publicando vacantes proceda con la contratación o renovación del Plan.";
-            $this->redirectToController('planes');
+            array_push($arraySubareas, $subareas[2]);
+          }
+      }
+
+      if(empty($arraySubareas)){
+        throw new Exception("Debe seleccionar al menos una sub\u00E1rea por \u00E1rea");
+      }
+
+      if(count($datosReg['area_select']) != 1){
+        throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
+      }
+
+      $listadoIdiomasNivel = $GLOBALS['nivel_idioma_idioma'];
+      $idiomaNivelIdioma = array();
+      $arrayIdiomasSel = array();
+      foreach ($listadoIdiomasNivel as $idiomas_nivel) {
+        foreach ($datosReg['nivel_idioma'] as $listado_POST) {
+          $idiomaList = explode("_", $listado_POST)[0];
+          $idiomaNivelList = explode("_", $listado_POST)[1];
+          if($idiomas_nivel['id_idioma'] == $idiomaList && $idiomas_nivel['id_nivelIdioma'] == $idiomaNivelList){
+            array_push($arrayIdiomasSel, $idiomas_nivel['id_nivelIdioma_idioma']);
           }
         }
-        catch( Exception $e ){
-          $GLOBALS['db']->rollback();
-          $_SESSION['mostrar_error'] = $e->getMessage();
-          $this->redirectToController('publicar');
-        }
       }
-      $tags["template_js"][] = "assets/js/main";
-      $tags["template_js"][] = "tinymce/tinymce.min";
-      //$tags["template_js"][] = "bootstrap-multiselect";
-      //$tags["template_js"][] = "mic";
-      $tags["template_js"][] = "validatePublicar";
-      Vista::render('publicar_vacante', $tags);
-  }
-  public function validarCampos($data){
 
-    if(ctype_space($descripcion) && (empty($descripcion) || $descripcion == "")){
-      throw new Exception("El campo descripción es obligatorio");
-    }
+      if(empty($arrayIdiomasSel)){
+        throw new Exception("Seleccione al menos un idioma");
+        
+      }
 
-    // Validar longitud de campos
-    if(Utils::validarLongitudCampos($data['titu_of'], 100) == false){
-      throw new Exception("Longitud máxima del campo 100 caracteres");
-    }
+      $datosReg = array_merge($datosReg, array("descripcion"=>$_POST['descripcionOferta'], 
+                                                "confidencialOf"=>$_POST['confidencialOf'], 
+                                                "id_empresa"=>$id_empresa,
+                                                'id_empresa_plan'=>$id_empresa_plan,
+                                                'id_areas_subareas'=> $arraySubareas,
+                                                'listadoNivelIdioma'=>$arrayIdiomasSel,
+                                                'numeroPub'=>$num_publicaciones));
 
-    if (Utils::formatoDinero($data['salario']) == false) {
-      throw new Exception("El campo salario solo permite números");
-    }
-    if (($data['salario']) < 1) {
-      throw new Exception("Salario no debe ser menor a 1");
-    }
-    if (Utils::validarNumeros($data['vacantes']) == false) {
-      throw new Exception("El campo vacantes solo permite números");
-    }
-    $valida_fecha = Utils::valida_fecha($data['fecha_contratacion']);
-    $valida_fecha_mayor = Utils::valida_fecha_mayor($data['fecha_contratacion']);
-    if(empty($valida_fecha) || ($valida_fecha_mayor)==false){
-      throw new Exception("El formato o la fecha ingresada no es válida");
-    }
-    if (Utils::validarNumeros($data['edad_min']) == false) {
-      throw new Exception("El campo de edad mínima solo permite números");
-    }
-    if (Utils::validarNumeros($data['edad_max']) == false) {
-      throw new Exception("El campo edad máxima solo permite números");
-    }
-    if(Utils::validarEminEmax($data['edad_min'], $data['edad_max']) == false){
-       throw new Exception("Verifique los valores de los campos edad mínima y máxima");
-    }
-    if (Utils::validarLongitudMultiselect($data['area_select'], 1) == false) {
-      throw new Exception("Supero el límite de opciones permitidas en el campo categorías");
-    }
-    if (Utils::validarLongitudMultiselect($data['nivel_interes'], 1) == false) {
-      throw new Exception("Supero el límite de opciones permitidas en el campo nivel");
-    }
-    $listado_idiomas_niveles_db = Modelo_NivelxIdioma::obtieneListado();
-    $array_nivel_idioma = array();
-    for ($i=0; $i < count($data['nivel_idioma']); $i++) {
-      $explode = explode("_", $data['nivel_idioma'][$i]);
-      array_push($array_nivel_idioma, $explode);
-    }
-    $data_idioma_nivel = array();
-    for ($i=0; $i < count($listado_idiomas_niveles_db); $i++) { 
-      for ($j=0; $j < count($array_nivel_idioma); $j++) { 
-        if (($listado_idiomas_niveles_db[$i]['id_idioma'] == $array_nivel_idioma[$j][0]) && ($listado_idiomas_niveles_db[$i]['id_nivelIdioma']) == $array_nivel_idioma[$j][1]) {
-          array_push($data_idioma_nivel, $listado_idiomas_niveles_db[$i]['id_nivelIdioma_idioma']);
-        }
+      if(ctype_space($datosReg['nombreOferta']) 
+        || Utils::validarTituloOferta($datosReg['nombreOferta'] == false 
+        || Utils::validarLongitudCampos($datosReg['nombreOferta'], 100) == false)){
+        throw new Exception("Ingrese un título válido para la oferta");
+        
       }
-    }
-    if (count($data_idioma_nivel) != count($array_nivel_idioma)) {
-      throw new Exception("Uno o más de los idiomas seleccionados no esta disponible");
-    }
-    return $data_idioma_nivel;
-  }
-  public function guardarPublicacion($data, $data_idiomas, $idusu){
-    if (!Modelo_Oferta::guardarRequisitosOferta($data, $data_idiomas)) {
-      throw new Exception("Ha ocurrido un error, intente nuevamente1");
-    }
-    $id_reqOf = $GLOBALS['db']->insert_id();
-    $num_post = 0;
-    $id_empresa_plan = 0;
-    $id_empresa = 0;
-    foreach($_SESSION['mfo_datos']['planes'] as $key=>$plan){
-      if ($plan["num_publicaciones_rest"] > 0){
-        $id_empresa = $plan['id_empresa'];
-        $id_empresa_plan = $plan["id_empresa_plan"];
-        $num_post = $plan["num_publicaciones_rest"];
-        break;
+
+      if(ctype_space($datosReg['descripcion']) && (empty($$datosReg['descripcion']) || $datosReg['descripcion'] == "")){
+        throw new Exception("El campo descripci\u00F3n es obligatorio");
       }
-      else{
-        $id_empresa = $plan['id_empresa']; 
-        $id_empresa_plan = $plan["id_empresa_plan"];
-        $num_post = -1;
+
+      if(!Utils::formatoDinero($datosReg['salarioOf'])){
+        throw new Exception("El campo salario solo permite n\u00FAmeros");
       }
-    }    
-    //VERIFICAR TIENE PARA PUBLICAR OFERTA 
-    if (!Modelo_Oferta::guardarOferta($data, $id_reqOf, $id_empresa_plan, $id_empresa)) {
-      throw new Exception("Ha ocurrido un error, intente nuevamente2"); 
-    }
-    $id_oferta = $GLOBALS['db']->insert_id();
-    if(!Modelo_OfertaxNivelIdioma::guardarOfertaNivelIdioma($id_oferta, $data_idiomas)){
-      throw new Exception("Ha ocurrido un error, intente nuevamente3");
-    }
-    if($num_post > 0){
-      // exit();
-      if(!Modelo_UsuarioxPlan::restarPublicaciones($id_empresa_plan, $num_post, Modelo_Usuario::EMPRESA)){
-        throw new Exception("Ha ocurrido un error, intente nuevamente4");
+
+      if (Utils::validarNumeros($datosReg['cantVac']) == false) {
+        throw new Exception("El campo vacantes solo permite n\u00FAmeros");
       }
+
+      $valida_fecha = Utils::valida_fecha($datosReg['fechaCont']);
+      $valida_fecha_mayor = Utils::valida_fecha_mayor($datosReg['fechaCont']);
+      if(empty($valida_fecha) || ($valida_fecha_mayor)==false){
+        throw new Exception("El formato o la fecha ingresada no es v\u00E1lida");
+      }
+      if (Utils::validarNumeros($datosReg['edadMinOf']) == false) {
+        throw new Exception("El campo de edad m\u00EDnima solo permite n\u00FAmeros");
+      }
+      if (Utils::validarNumeros($datosReg['edadMaxOf']) == false) {
+        throw new Exception("El campo edad m\u00E1xima solo permite n\u00FAmeros");
+      }
+      if(Utils::validarEminEmax($datosReg['edadMinOf'], $datosReg['edadMaxOf']) == false){
+         throw new Exception("Verifique los valores de los campos edad m\u00EDnima y m\u00E1xima");
+      }
+      return $datosReg;
     }
   }
+
+
+  public function guardarDatosOferta($datos){
+    $datosRequisitoOferta = array('licencia'=>$datos['licenciaOf'],
+                                    'viajar'=>$datos['DispOf'],
+                                    'residencia'=>$datos['residenciaOf'],
+                                    'discapacidad'=>$datos['discapacidadOf'],
+                                    'confidencial'=>$datos['confidencialOf'],
+                                    'edad_minima'=>$datos['edadMinOf'],
+                                    'edad_maxima'=>$datos['edadMaxOf']);
+    if(!Modelo_Oferta::guardarRequisitosOferta($datosRequisitoOferta)){
+      throw new Exception("Ha ocurrido un error al guardar los requisitos de la oferta");
+    }
+
+    $id_requisitoOferta = $GLOBALS['db']->insert_id();
+      
+      $fechaActual = date('Y-m-d H:m:s');
+      $datosOferta = array('id_empresa'=>$datos['id_empresa'],
+                            'titulo'=>$datos['nombreOferta'],
+                            'descripcion'=>$datos['descripcion'],
+                            'salario'=>$datos['salarioOf'],
+                            'a_convenir'=>$datos['salarioConv'],
+                            'fecha_contratacion'=>$datos['fechaCont'],
+                            'vacantes'=>$datos['cantVac'],
+                            'anosexp'=>$datos['anosexp'],
+                            'estado'=>0,
+                            'fecha_creado'=>$fechaActual,
+                            'tipo'=>$datos['ofertaUrgenteOf'],
+                            'id_jornada'=>$datos['jornadaOf'],
+                            'id_ciudad'=>$datos['ciudadOf'],
+                            'id_requisitoOferta'=>$id_requisitoOferta,
+                            'id_escolaridad'=>$datos['escolaridadOf'],
+                            'id_empresa_plan'=>$datos['id_empresa_plan']
+                            );
+
+      if(!Modelo_Oferta::guardarOferta($datosOferta)){
+        throw new Exception("Ha ocurrido un error al guardar los datos de la oferta");
+      }
+
+      $id_Oferta = $GLOBALS['db']->insert_id();
+      if(!Modelo_OfertaxAreaSubarea::guardarOfertaAreasSubareas($id_Oferta, $datos['id_areas_subareas'])){
+        throw new Exception("Ha ocurrido un error al guardar las subareas de la oferta");
+      }
+
+      if(!Modelo_OfertaxNivelIdioma::guardarOfertaNivelIdioma($id_Oferta, $datos['listadoNivelIdioma'])){
+        throw new Exception("Ha ocurrido un error al guardar los idiomas de la oferta");
+      }
+      if(!Modelo_UsuarioxPlan::restarPublicaciones($datos['id_empresa_plan'], $datos['numeroPub'], Modelo_Usuario::EMPRESA)){
+        throw new Exception("Ha ocurrido un error. Intente nuevamente");
+      }      
+  }
+
+
+
+
 }
 ?>

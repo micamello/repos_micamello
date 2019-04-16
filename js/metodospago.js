@@ -278,7 +278,7 @@ $('#tipo_docP').on('change', function(){
       if(document.getElementById('dniP').value != ""){
         if(document.getElementById('dniP').value.length >= 10){
 
-          if(DniRuc_Validador($('#dniP'),tipo_doc) == false){
+          if(DniRuc_Validador($('#dniP'),tipo_doc) == true){
             quitarError("err_dniP","seccion_dniP");
           }else{
             colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
@@ -357,7 +357,7 @@ $('#tipo_doc').on('change', function(){
       
       if(document.getElementById('dni').value != ""){
         if(document.getElementById('dni').value.length >= 10){
-          if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+          if(DniRuc_Validador($('#dni'),tipo_doc) == true){
             quitarError("err_dni","seccion_dni");
           }else{
             colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","btndeposito");
@@ -455,7 +455,7 @@ $('#dni').on('blur', function(){
     if(document.getElementById('dni').value != ""){
 
       if(document.getElementById('dni').value.length >= 10){
-        if(DniRuc_Validador($('#dni'),tipo_doc) == false){
+        if(DniRuc_Validador($('#dni'),tipo_doc) == true){
           quitarError("err_dni","seccion_dni");
         }else{
           colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","btndeposito");
@@ -492,7 +492,7 @@ $('#dniP').on('blur', function(){
 
       if(document.getElementById('dniP').value.length >= 10){
 
-        if(DniRuc_Validador($('#dniP'),tipo_doc) == false){
+        if(DniRuc_Validador($('#dniP'),tipo_doc) == true){
           quitarError("err_dniP","seccion_dniP");
         }else{
           colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
@@ -662,24 +662,24 @@ function validarFormulario(){
 
   if(dni.value != ""){
 
-    if(dni.value.length >= 10){
-      if(DniRuc_Validador(dni,tipo_doc) == false){
+    if(dni.value.length >= 10){      
+      if(DniRuc_Validador(dni,tipo) == true){
         quitarError(err_dni,seccion_dni);
       }else{
         colocaError(err_dni, seccion_dni,"Documento ingresado no es válido",btn);
         error = 1;      
       } 
-    }else if(tipo_doc == 2 && dni.value.length < 10){
+    }else if(tipo == 2 && dni.value.length < 10){
 
       colocaError(err_dni, seccion_dni,"El número de cédula debe tener mínimo 10 dígitos",btn);
       error = 1;
 
-    }else if(tipo_doc == 3 && dni.value.length < 6){
+    }else if(tipo == 3 && dni.value.length < 6){
 
       colocaError(err_dni, seccion_dni,"El pasaporte debe tener mínimo 6 dígitos",btn);
       error = 1;
     }
-    else if(tipo_doc == 1 && dni.value.length < 13){
+    else if(tipo == 1 && dni.value.length < 13){
 
       colocaError(err_dni, seccion_dni,"El RUC debe tener mínimo 13 dígitos",btn);
       error = 1;

@@ -70,21 +70,18 @@ class Controlador_Aspirante extends Controlador_Base
                         
                         if(isset(FECHA_POSTULADO[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                            //$array_datos[$letra] = array('id'=>$id,'nombre'=>FECHA_POSTULADO[$id]);
                         }
                     }
                     else if($letra == 'A' && $type == 1){
                           
                         if(isset($arrarea[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                            //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrarea[$id]);
                         }
                     }
                     else if($letra == 'P' && $type == 1){
                         
                         if(isset(PRIORIDAD[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                            //$array_datos[$letra] = array('id'=>$id,'nombre'=>PRIORIDAD[$id]);
                         }
                     }
                     else if($letra == 'G' && $type == 1){
@@ -94,72 +91,61 @@ class Controlador_Aspirante extends Controlador_Base
 
                             if(isset(GENERO[$g])){
                                 $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                                //$array_datos[$letra] = array('id'=>$id,'nombre'=>GENERO[$g]);
                             }
                         }
                     }
                     else if($letra == 'U' && $type == 1){
                         
                         if(isset($arrprovincia[$id])){
-                            $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                            //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id; 
                         }
 
                     }else if($letra == 'S' && $type == 1){
                         
                         if(isset(SALARIO[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                            //$array_datos[$letra] = array('id'=>$id,'nombre'=>SALARIO[$id]);
                         }
 
                     }else if($letra == 'N' && $type == 1){
                         
                         if(isset($nacionalidades[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                            //$array_datos[$letra] = array('id'=>$id,'nombre'=>$nacionalidades[$id]);
                         }
 
                     }else if($letra == 'E' && $type == 1){
                         
                         if(isset($escolaridad[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                            //$array_datos[$letra] = array('id'=>$id,'nombre'=>$escolaridad[$id]);
+                            
                         }
 
                     }else if($letra == 'D' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                        //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
-
+                        
                     }else if($letra == 'L' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                        //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
-
+                        
                     }else if($letra == 'T' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                        //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
-
+                        
                     }else if($letra == 'V' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                        //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
-
+                        
                     }else if($letra == 'R' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                        //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
 
                     }else if($letra == 'Q' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
-                        //$array_datos[$letra] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
                     }
                     else if($letra == 'O' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id; 
-                        //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
 
                     }else if($type == 2){
 
@@ -228,9 +214,8 @@ class Controlador_Aspirante extends Controlador_Base
                             }
                         }
                         if($letra == 'R'){
-                            //if(isset($escolaridad[$value])){
-                                $array_datos[$letra] = array('id'=>$value,'nombre'=>/*$escolaridad[*/$value/*]*/);
-                            //}
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                           
                         }
                         if($letra == 'O'){
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
@@ -270,7 +255,7 @@ class Controlador_Aspirante extends Controlador_Base
                         $limite_aspirantes = count($paises);
                     } 
 
-                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,$limite_plan,false,true);   
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,$limite_plan,true);   
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,$limite_plan,false);
 
@@ -279,10 +264,10 @@ class Controlador_Aspirante extends Controlador_Base
                     $id_oferta = 0;
                     $breadcrumbs['vacantes'] = 'Ver Ofertas';
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
+                    
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,array(),true);
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,false);
-
-                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,array(),true);
 
                     $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);
 

@@ -2,7 +2,9 @@
 class Modelo_PermisoPlan{
   
   public static function tienePermiso($planes,$permiso,$idplan=false){
+
     if (empty($planes) || !is_array($planes) || empty($permiso)){ return false; }
+
     if (!empty($idplan)){
       $idaccion = self::busquedaPermisoxPlan($idplan,$permiso);
       if (isset($idaccion["id_accionSist"]) && !empty($idaccion["id_accionSist"])){

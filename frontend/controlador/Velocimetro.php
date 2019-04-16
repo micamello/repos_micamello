@@ -10,60 +10,60 @@ class Controlador_Velocimetro extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
-    $this->mostrarDefault();     
+    $faceta = Modelo_Respuesta::facetaActual($_SESSION['mfo_datos']['usuario']['id_usuario']);
+    if (empty($faceta)){
+      Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
+    }
+
+    $this->mostrarDefault($faceta);     
   }
 
-  public function mostrarDefault(){
-    $cuestionario = Modelo_Cuestionario::testxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
-    if (empty($cuestionario)){
-      $this->redirectToController('cuestionario');
-    }
-    
+  public function mostrarDefault($faceta){    
     $nrototaltest = Modelo_Cuestionario::totalTest();
-    $nrotestusuario = count($cuestionario);
-
-    $porcentajextest = round(100 / $nrototaltest);
-    $valorporc = 0;
-    foreach($cuestionario as $test){
-      $valorporc = $valorporc + round(($test["valor"] * $porcentajextest) / Modelo_Cuestionario::PUNTAJEMAX);
-    }    
-
-    $testactual = array_pop($cuestionario);
-    $imagengif = ($nrotestusuario < $nrototaltest) ? "gif-lo-quiero.gif" : "gif_felicidades.gif";
-    
-    switch($test["orden"]){
-      case 1:
-        $descrporc = "Bajas";
-      break;
-      case 2:
-        $descrporc = "Medianas";
-      break;
-      case 3:
-        $descrporc = "Altas";
-      break;
-    }
-
-    //si no tengo planes o no tengo permiso para el tercer cuestionario 
-    if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && 
-        $nrotestusuario < ($nrototaltest-1)){
+    $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);    
+    if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && $nrotestusuario < ($nrototaltest-3)){
       $enlaceboton = "cuestionario";
     }
-    //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
-    elseif(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario') && 
-           $nrotestusuario < $nrototaltest){
+    // //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
+    elseif(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario') && $nrotestusuario < $nrototaltest){
       $enlaceboton = "cuestionario";
     }  
     else{          
       $enlaceboton = "planes"; 
     }
+    
+    if($faceta == 1){
+      $imagengif = "gif-lo-quiero.gif";
+      $descrporc = "Bajas";
+      $valorporc = "20";      
+      $imagen = "caracol.gif";
+      $textoBoton = "Siguiente";
+    }
+    elseif ($faceta == 2) {
+      $imagengif = "gif-lo-quiero.gif";
+      $descrporc = "Medianas";
+      $valorporc = "40";
+      $imagen = "tortuga.gif";
+      $textoBoton = "Siguiente";
+    }
+    else{
+      $imagengif = "gif_felicidades.gif";
+      $descrporc = "Altas";
+      $valorporc = "100";
+      $enlaceboton = "postulacion";
+      $imagen = "camello.gif";
+      $textoBoton = "Postúlate";
+    }
 
-    $tags["testactual"] = $testactual;
-    $tags["nrototaltest"] = $nrototaltest;
-    $tags["nrotestusuario"] = $nrotestusuario;
     $tags["valorporc"] = $valorporc;
     $tags["descrporc"] = $descrporc;
     $tags["imagengif"] = $imagengif;
     $tags["enlaceboton"] = $enlaceboton;
+    $tags["imagen"] = $imagen;
+    $tags["textoBoton"] = $textoBoton;
+    $tags["faceta"] = $faceta;
+    $tags["nrototaltest"] = $nrototaltest;
+    $tags["nrotestusuario"] = $nrotestusuario;
 
     $tags["template_js"][] = "d3.v3.min";
     $tags["template_js"][] = "velocimetro";

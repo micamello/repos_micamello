@@ -60,6 +60,13 @@ define('EDAD', array('1'=>'Entre 18 y 20 a&ntilde;os', '2'=>'Entre 20 y 30 a&nti
 define('OPCIONES',array('a','b','c','d','e'));
 define('METODO_CUESTIONARIO',array('0'=>'Preguntas ordenadas','1'=>'Preguntas aleatorias'));
 
+// método de selección
+define('METODO_SELECCION', array('1'=>array(
+										'Esta opción le permitirá dar doble clip para seleccionar la respuesta, tome en cuenta que el 1  es la opción  con la que más se siente identificado y 5 la opción con la que menos se siente identificado.'
+									), '2'=>array(
+										'Esta opción le permitirá seleccionar y arrastrar la respuesta; tome en cuenta que la opción 1 es la opción con la que más se siente identificado y la opción 5 la opción con la que menos se siente identificado.', ''
+									)));
+
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
@@ -90,7 +97,7 @@ define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
 // CORREOS_TEMPLATES
 // REGISTRO MANUAL
-const TAGS_REPLACE_T1 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%");
+/*const TAGS_REPLACE_T1 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%");
 //REGISTRO RED SOCIAL
 const TAGS_REPLACE_T2 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
 // AVISO CREACION
@@ -167,5 +174,5 @@ define('TIPO', 	array(
 												'cabecera'=>'Mensaje Cancelación de Subscripción'
 												)
 					)
-		);
+		);*/
 ?>

@@ -40,6 +40,7 @@ class Controlador_Contrasena extends Controlador_Base {
         throw new Exception("El enlace para recuperaci\u00F3n de contrase\u00F1a ya no es v\u00E1lida, por favor ingrese denuevo su correo para el env\u00EDo");        
       }  
       if ( Utils::getParam('confirm_form') == 1 ){
+        Utils::log("PASO");
         $campos = array('password1'=>1,'password2'=>1);
         $data = $this->camposRequeridos($campos);
         if ($data["password1"] != $data["password2"]){
@@ -58,26 +59,15 @@ class Controlador_Contrasena extends Controlador_Base {
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
     } 
-    //$social_reg = array('fb'=>0, 'gg'=>$gg_URL, 'lk'=>$lk, 'tw'=>$tw);
-    // $social_reg = array('fb'=>0, 'gg'=>0, 'lk'=>0);
-    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas']);
-    //$tags = array('social'=>$social_reg);
-    // $tags["template_js"][] = "modal-register";
-    //$tags["template_js"][] = "validator";
-    // $tags["template_js"][] = "assets/js/main";
+    $tags["areasSubareas"] = $GLOBALS['areasSubareas'];
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "multiple_select";
     $tags["template_js"][] = "micamello_registro";     
-    //$tags["template_js"][] = "ruc_jquery_validator";
-    //$tags["template_js"][] = "bootstrap-multiselect";
-    //$tags["template_js"][] = "registrar";
-    //$tags["template_js"][] = "mic";
     Vista::render('confirmar_password', $tags);     
   }
   
   public function mostrarDefault(){
-    $this->linkRedesSociales();
-    // $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
+    $this->linkRedesSociales();    
 
     if ( Utils::getParam('forgot_form') == 1 ){
       try{
@@ -95,7 +85,7 @@ class Controlador_Contrasena extends Controlador_Base {
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente denuevo");
         }
-        $token .= "||".$datousuario["id_usuario_login"]."||".date("Y-m-d H:i:s");
+        $token .= "||".$datousuario["id_usuario_login"]."||".date("Y-m-d H:i:s");        
         $token = Utils::encriptar($token);
         $nombres = $datousuario['nombres'] . ((isset($datousuario['apellidos'])) ? "&nbsp;".$datousuario['apellidos'] : '');
         if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){

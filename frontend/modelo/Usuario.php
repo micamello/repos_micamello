@@ -34,7 +34,7 @@ class Modelo_Usuario{
     return true;
   }
 
-public static function autenticacion($username, $password){
+  public static function autenticacion($username, $password){
     $password = md5($password);         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni
             FROM mfo_usuario_login 
@@ -45,7 +45,8 @@ public static function autenticacion($username, $password){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
                      u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
                      u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional
+                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional,
+                     u.pendiente_test
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -98,9 +99,8 @@ public static function autenticacion($username, $password){
     }
   }
 
-//   Búsqueda del username en la BD
-
-public static function existeUsuario($username){
+  //Búsqueda del username en la BD
+  public static function existeUsuario($username){
     if(empty($username)){ return false; }
     $sql = "SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
                    u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
@@ -112,52 +112,39 @@ public static function existeUsuario($username){
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
 
-/*public static function existeUsuario2($username){
-  if(empty($username)){ return false; }
-  $sql = "SELECT *
-          FROM mfo_usuario u
-          WHERE u.username = ?";
-  $rs = $GLOBALS['db']->auto_array($sql,array($username));
-  return (!empty($rs['id_usuario'])) ? $rs : false;
-}*/
+  public static function existeUsername($username){
+    if(empty($username)){return false;}
+    $sql = "SELECT * FROM mfo_usuario_login WHERE username = ?;";
+    $rs = $GLOBALS['db']->auto_array($sql,array($username), true);
+    return $rs;
+  } 
 
-public static function existeUsername($username){
-  if(empty($username)){return false;}
-  $sql = "SELECT * FROM mfo_usuario_login WHERE username = ?;";
-  $rs = $GLOBALS['db']->auto_array($sql,array($username), true);
-  return $rs;
-} 
-
-// se utiliza esta funcion en el registro modal--------------------
+  // se utiliza esta funcion en el registro modal--------------------
   public static function existeCorreo($correo){
     if(empty($correo)){ return false; }
     $sql = "SELECT * FROM mfo_usuario_login WHERE correo = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     return (empty($rs['correo'])) ? false : $rs['id_usuario_login'];
   }
-// se utiliza esta funcion en el registro modal--------------------
 
+  // se utiliza esta funcion en el registro modal--------------------
   public static function existeDni($dni,$idUsuarioLogin=false){
     if(empty($dni)){ return false; }
     $sql = "SELECT * FROM mfo_usuario_login WHERE dni = ?";
-
     if($idUsuarioLogin != false){
       $sql .= " AND id_usuario_login <> ".$idUsuarioLogin;
     }
-
     $rs = $GLOBALS['db']->auto_array($sql,array($dni));
     return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
 
   public static function crearUsuario($dato_registro){
     if(empty($dato_registro)){return false;}
- 
     if ($dato_registro['tipo_usuario'] == 1) {
       $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
     }
     else{
       $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
-
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }
@@ -174,6 +161,7 @@ public static function existeUsername($username){
       return $GLOBALS['db']->update("mfo_empresa",array("estado"=>1),"id_empresa=".$id_usuario);
     }
   }
+
   public static function desactivarCuenta($id_usuario,$tipo=self::CANDIDATO){
     if(empty($id_usuario)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -190,7 +178,6 @@ public static function existeUsername($username){
   }
 
   public static function actualizarSession($idUsuario,$tipo_usuario){
-
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
                       u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
@@ -227,9 +214,7 @@ public static function existeUsername($username){
     }else if($imagen['error'] == 4 && $session_foto == 1){
       $foto = 1;
     }
-
     if($tipo_usuario == self::CANDIDATO){
-
         $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional']); 
 
         if (!empty($data['documentacion'])){          
@@ -248,7 +233,6 @@ public static function existeUsername($username){
         $datos['id_univ'] = 'null';
         $datos['nombre_univ'] = ' ';
       }
-
         return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
 
     }else{
@@ -259,16 +243,12 @@ public static function existeUsername($username){
   }
 
   public static function validarFechaNac($fecha){
-
     //Creamos objeto fecha desde los valores recibidos
     $nacio = DateTime::createFromFormat('Y-m-d', $fecha);
-
     //Calculamos usando diff y la fecha actual
     $calculo = $nacio->diff(new DateTime());
-
     //Obtenemos la edad
     $edad =  $calculo->y;    
-
     if ($edad < 18) 
     {
         //echo "Usted es menor de edad. Su edad es: $edad\n";
@@ -278,6 +258,7 @@ public static function existeUsername($username){
         return true;  
     }
   }
+
 
   public static function obtenerAspirantes($idOferta,$page,$limite,$obtCantdRegistros=false){
     
@@ -290,9 +271,10 @@ public static function existeUsername($username){
     WHERE
       u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
         AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = $idOferta GROUP BY u.id_usuario";
-
-    if($obtCantdRegistros === false && !empty($limite)){
-      $subquery1 .= " ORDER BY pago DESC, p.fecha_postulado ASC";
+    
+    $subquery1 .= " ORDER BY pago DESC, p.fecha_postulado ASC";
+    
+    if($obtCantdRegistros === false && !empty($limite)){  
       $subquery1 .= " LIMIT 0,".$limite; 
     }
 
@@ -326,6 +308,7 @@ public static function existeUsername($username){
     return $rs; 
   }
 
+
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$obtCantdRegistros=false){
 
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,p.fecha_postulado,u.tiene_trabajo,u.licencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
@@ -336,9 +319,10 @@ public static function existeUsername($username){
     WHERE
       u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
         AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = $idOferta GROUP BY u.id_usuario";
+    
+    $subquery1 .= " ORDER BY pago DESC, p.fecha_postulado ASC";
 
     if($obtCantdRegistros === false && !empty($limite)){
-      $subquery1 .= " ORDER BY pago DESC, p.fecha_postulado ASC";
       $subquery1 .= " LIMIT 0,".$limite; 
     }
 
@@ -413,7 +397,7 @@ public static function existeUsername($username){
       foreach ($orden_canea as $pos => $ids_facetas) {
 
         foreach ($ids_facetas as $c => $id) {
-          $if .= 'if(id_faceta = '.$id.', valor*'.$peso.',';
+          $if .= 'IF(id_faceta = '.$id.', valor*'.$peso.',';
           $peso--;
           $parentesis .= ')';
         }
@@ -569,60 +553,61 @@ public static function existeUsername($username){
       $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.edad = '".$pclave."' OR t2.asp_salarial LIKE '%".$pclave."%' OR t2.fecha_postulado LIKE '%".$pclave."%')";
     }
 
-    if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
-
-      $tipo = substr($filtros['O'],0,1);
-      $t = substr($filtros['O'],1,2);
-      if($tipo == 1){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY t2.edad ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY t2.edad DESC";
-        }        
-      }else if($tipo == 2){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY t2.fecha_postulado ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY t2.fecha_postulado DESC";
-        }
-      }else if($tipo == 3){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY e.descripcion ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY e.descripcion DESC";
-        }
-      }else if($tipo == 4){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY t2.asp_salarial ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY t2.asp_salarial DESC";
-        }
-      }
-
-    }else{
-
-      if(!empty($filtros['R']) && $filtros['R'] != ''){
-        $sql .= " ORDER BY ranqueo DESC";
-      }
-    }
-
     if($obtCantdRegistros === false){
+      if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
+
+        $tipo = substr($filtros['O'],0,1);
+        $t = substr($filtros['O'],1,2);
+        if($tipo == 1){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY t2.edad ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY t2.edad DESC";
+          }        
+        }else if($tipo == 2){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY t2.fecha_postulado ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY t2.fecha_postulado DESC";
+          }
+        }else if($tipo == 3){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY e.descripcion ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY e.descripcion DESC";
+          }
+        }else if($tipo == 4){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY t2.asp_salarial ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY t2.asp_salarial DESC";
+          }
+        }
+
+      }else{
+
+        if(!empty($filtros['R']) && $filtros['R'] != ''){
+          $sql .= " ORDER BY ranqueo DESC";
+        }
+      }
+
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-    //echo $sql;
+
+    //echo 'SQL1: '.$sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -640,12 +625,8 @@ public static function existeUsername($username){
     WHERE
       u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
         AND u.id_usuario_login = ul.id_usuario_login AND ul.tipo_usuario = 1 GROUP BY u.id_usuario";
-
-    if($obtCantdRegistros === false){
-      $subquery1 .= " ORDER BY pago DESC, u.fecha_creacion ASC";
-      $page = ($page - 1) * REGISTRO_PAGINA;
-      $subquery1 .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
-    }
+    
+    $subquery1 .= " ORDER BY pago DESC, u.fecha_creacion ASC";
 
     $subquery1 .= ") t2"; 
 
@@ -667,6 +648,10 @@ public static function existeUsername($username){
           AND t1.id_usuario = t2.id_usuario
           AND pro.id_pais = ".$id_pais_empresa;
 
+    if($obtCantdRegistros === false){
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+    }
     //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs; 
@@ -892,51 +877,51 @@ public static function existeUsername($username){
       $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(t2.fecha_nacimiento)) = '".$pclave."' OR t2.fecha_creacion LIKE '%".$pclave."%')";
     }
 
-    if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
+    if($obtCantdRegistros === false){
 
-      $tipo = substr($filtros['O'],0,1);
-      $t = substr($filtros['O'],1,2);
-      if($tipo == 1){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY t2.edad ASC";
+      if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
+
+        $tipo = substr($filtros['O'],0,1);
+        $t = substr($filtros['O'],1,2);
+        if($tipo == 1){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY t2.edad ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY t2.edad DESC";
+          }        
+        }else if($tipo == 2){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY t2.fecha_creacion ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY t2.fecha_creacion DESC";
+          }
+        }else if($tipo == 3){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY e.descripcion ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY e.descripcion DESC";
+          }
         }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY t2.edad DESC";
-        }        
-      }else if($tipo == 2){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY t2.fecha_creacion ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY t2.fecha_creacion DESC";
-        }
-      }else if($tipo == 3){
-        if($t == 1){
-          $filtros['O'] = 2;
-          $sql .= " ORDER BY e.descripcion ASC";
-        }
-        if($t == 2){
-          $filtros['O'] = 1;
-          $sql .= " ORDER BY e.descripcion DESC";
+      }else{
+
+        if(!empty($filtros['R']) && $filtros['R'] != ''){
+          $sql .= " ORDER BY ranqueo DESC";
         }
       }
-    }else{
 
-      if(!empty($filtros['R']) && $filtros['R'] != ''){
-        $sql .= " ORDER BY ranqueo DESC";
-      }/*else{
-        $sql .= " ORDER BY t2.pago ASC";
-      }*/
-    }
-
-    if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
+
     //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
@@ -963,20 +948,21 @@ public static function existeUsername($username){
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
-
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
+      
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }   
-      /*$nrotest = Modelo_Cuestionario::totalTest();             
+      
+      $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
       if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
-        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
+        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";        
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
@@ -984,9 +970,12 @@ public static function existeUsername($username){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
-      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {                
+      elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/'); 
+      }
+      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {    
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
-      }*/ 
+      } 
       else{           
         if ($controlador == 'login'){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
@@ -1136,7 +1125,7 @@ WHERE
   }
 
   /******************MINISITIO*****************/
-  public static function buscaUsuario($id_usuario){
+  /*public static function buscaUsuario($id_usuario){
     if (empty($id_usuario)){ return false; }
     $sql = "SELECT id_usuario FROM mfo_usuariom2 WHERE id_usuario = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario));
@@ -1164,13 +1153,27 @@ WHERE
     if($data['cantonnac'] == NULL || $data['cantonnac'] == ""){
       $data_usuario = array("nombres"=>$data['nombres'], "apellidos"=>$data['apellidos'], "fecha_nacimiento"=>$data['fecha_nacimiento'], "id_nacionalidad"=>$data['pais'], "genero"=>$data['genero'], "estado_civil"=>$data['estado_civil'], "id_escolaridad"=>$data['nivel_instruccion'], "fecha_creacion"=>date("Y-m-d H:i:s"), "term_cond"=>$term_cond, "correo"=>$data['correo'], "asp_salarial"=>$data['aspiracion_salarial'], "id_parroquia"=>$data['parroquia_res'], "id_profesion"=>$data['profesion'], "id_ocupacion"=>$data['ocupacion']);
     }
-    // print_r($data_usuario);
-    // exit();
       $result = $GLOBALS['db']->insert('mfo_usuariom2', $data_usuario);
       return $result;
+  }*/
+
+  public static function actualizarMetodoSeleccion($id_usuario, $modo){
+    if(empty($id_usuario) || (empty($modo) && is_numeric($modo))){return false;}
+    return $GLOBALS['db']->update("mfo_usuario",array("metodo_resp"=>$modo),"id_usuario=".$id_usuario);
   }
 
-  public static function obtieneListadoEmpresas(){
+  public static function consultarMetodoASeleccion($id_usuario){
+    $sql = "SELECT metodo_resp FROM mfo_usuario WHERE id_usuario = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario));
+    if (empty($rs['metodo_resp'])){ return false; } else{ return $rs; }
+  }
+
+  public static function actualizarAceptarAcceso($id_usuario,$estado=1){
+    if(empty($id_usuario)){return false;}
+    return $GLOBALS['db']->update("mfo_usuario",array("pendiente_test"=>$estado),"id_usuario=".$id_usuario);
+  }
+
+  /*public static function obtieneListadoEmpresas(){
     $sql = "SELECT * FROM mfo_empresam2 ORDER BY nombre";
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
@@ -1182,6 +1185,6 @@ WHERE
       }
     }
     return $datos;
-  }
+  }*/
 }  
 ?>

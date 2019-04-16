@@ -6,6 +6,10 @@ class Controlador_Recomendacion extends Controlador_Base {
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
     $tags = array('social'=>$social_reg);
 
+    if( Modelo_Usuario::estaLogueado() ){
+      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+    }
+    
     try {
       if (Utils::getParam('enviarRecomendacion') == 1) {
         $campos = array('nombres' => 1, 'correo1' => 1, 'telefono' => 1, 'descripcion' => 1);

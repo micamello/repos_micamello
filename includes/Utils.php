@@ -48,9 +48,7 @@ class Utils{
     return $result;
   }
 
-  static public function enviarEmail($parametros){
-    Utils::log(print_r($parametros, true));
-    // exit();
+  static public function enviarEmail($parametros){    
     $url = "";
     $asunto = "";
     $body = "";
@@ -398,8 +396,8 @@ class Utils{
 
     if ($valida_arch[0]){
       if (is_uploaded_file($file_temp)){
-        if(isset($_SESSION['mfo_datos']['infohv']) && file_exists($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato'])){
-          @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['infohv']['formato']);
+        if(isset($_SESSION['mfo_datos']['usuario']['infohv']) && file_exists($path . $nombre . "." . $_SESSION['mfo_datos']['usuario']['infohv']['formato'])){
+          @unlink($path . $nombre . "." . $_SESSION['mfo_datos']['usuario']['infohv']['formato']);
         }
         $nombre .= ".".$valida_arch[1];
         return move_uploaded_file($file_temp, ''.$path . $nombre);        
@@ -575,9 +573,9 @@ class Utils{
   public static function validar_EC($dni){
     if (empty($dni)) {return false;}
     $val = false;
-    if(ValidadorEc::validarCedula($dni) == true || ValidadorEc::validarRucPersonaNatural($dni) == true || ValidadorEc::validarRucSociedadPrivada($dni) == true || ValidadorEc::validarRucSociedadPublica($dni) == true) {
+    if(ValidadorEc::DniRuc_Validador($dni)) {
       $val = true;
-      }
+    }
       return $val;
     }
 
@@ -885,6 +883,10 @@ class Utils{
 // Validaciones que se utilizan en el registro
   public static function validarNombreApellido($dato){
     return (! preg_match("/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{4,}$/", $dato)) ? false : true;
+  }
+
+  public static function validarTituloOferta($contenido){
+    return (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\/\"'&(),. ]{3,}$/", $contenido)) ? false : true;
   }
 
   public static function validarNombreEmpresa($dato){

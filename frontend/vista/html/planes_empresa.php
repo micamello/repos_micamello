@@ -25,13 +25,13 @@
                       $porc_descarga = ($gratuito["porc_descarga"] == -1) ? "total" : $gratuito["porc_descarga"];
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
-                    if ($listadoAcciones[$key] == "publicarOferta"){
+                    if ($listadoAcciones[$key] == "publicarOferta" || $listadoAcciones[$key] == "publicarOfertaConfidencial"){
                       if ($gratuito["num_post"] == -1){
                         $permiso = "Publicaciones ilimitadas";
                       }
                       else{
-                        $permiso = str_replace('NRO',$gratuito["num_post"],$permiso);
-                        $permiso .= ($gratuito["num_post"] > 1) ? "ones" : "&oacute;n";
+                        $permiso = str_replace('NRO',$gratuito["num_post"],$permiso);                        
+                        $permiso = ($gratuito["num_post"] > 1) ? str_replace("publicaci","publicaciones",$permiso) : str_replace("publicaci","publicaci&oacute;n",$permiso);
                       }                      
                     }
                     if ($listadoAcciones[$key] == "adminEmpresas"){
@@ -93,13 +93,13 @@
                       $porc_descarga = ($plan["porc_descarga"] == -1) ? "total" : $plan["porc_descarga"];
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
-                    if ($listadoAcciones[$key] == "publicarOferta"){
+                    if ($listadoAcciones[$key] == "publicarOferta" || $listadoAcciones[$key] == "publicarOfertaConfidencial"){
                       if ($plan["num_post"] == -1){
                         $permiso = "Publicaciones ilimitadas";
                       } 
                       else{
                         $permiso = str_replace('NRO',$plan["num_post"],$permiso);
-                        $permiso .= ($plan["num_post"] > 1) ? "ones" : "&oacute;n";
+                        $permiso = ($plan["num_post"] > 1) ? str_replace("publicaci","publicaciones",$permiso) : str_replace("publicaci","publicaci&oacute;n",$permiso);
                       }
                     }
                     if ($listadoAcciones[$key] == "adminEmpresas"){
@@ -162,13 +162,13 @@
                       $porc_descarga = ($aviso["porc_descarga"] == -1) ? "total" : $aviso["porc_descarga"];
                       $permiso = str_replace('NRO',$porc_descarga,$permiso);
                     }
-                    if ($listadoAcciones[$key] == "publicarOferta"){
+                    if ($listadoAcciones[$key] == "publicarOferta" || $listadoAcciones[$key] == "publicarOfertaConfidencial"){
                       if ($aviso["num_post"] == -1){
                         $permiso = "Publicaciones ilimitadas";
                       }
                       else{
                         $permiso = str_replace('NRO',$aviso["num_post"],$permiso);
-                        $permiso .= ($aviso["num_post"] > 1) ? "ones" : "&oacute;n";
+                        $permiso = ($aviso["num_post"] > 1) ? str_replace("publicaci","publicaciones",$permiso) : str_replace("publicaci","publicaci&oacute;n",$permiso);
                       }                      
                     }  
                     if ($listadoAcciones[$key] == "adminEmpresas"){

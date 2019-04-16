@@ -424,7 +424,7 @@
 								  	<div class="row">
 								  		<div class="estados_postulados col-md-12">
 							                <?php $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$o['id_ofertas']);
-							                	$cv_descargado = Modelo_Descarga::obtieneDescargaCV($_SESSION['mfo_datos']['infohv']['id_infohv'],$o['id_empresa'],$o['id_ofertas']);
+							                	$cv_descargado = Modelo_Descarga::obtieneDescargaCV($_SESSION['mfo_datos']['usuario']['infohv']['id_infohv'],$o['id_empresa'],$o['id_ofertas']);
 							                 ?>
 							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
 							                    <div class="wizard-icon"><i class="fa fa-file-text-o"></i></div>
