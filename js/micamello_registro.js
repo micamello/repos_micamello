@@ -756,7 +756,7 @@ $('#modal_registro').on('show.bs.modal', function(){
 	if($('#terminosCond').length){
 		$('#terminosCond').on('change', function(){
 			if(!$(this).is(':checked')){
-				crearMensajeError($(this), "Deebe aceptar términos y condiciones");
+				crearMensajeError($(this), "Debe aceptar términos y condiciones");
 			}
 			else{
 				eliminarMensajeError($(this), "");

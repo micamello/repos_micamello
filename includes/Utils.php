@@ -348,7 +348,7 @@ class Utils{
         $month = $date_array[1];
         $day = $date_array[2];
         
-        if((($year<1900)OR($year>2200))OR(($month<=0)OR($month>12))OR(($day<=0)OR($day>31)))
+        if((($year<1919)OR($year>2200))OR(($month<=0)OR($month>12))OR(($day<=0)OR($day>31)))
           return false;
       }else
         return false;

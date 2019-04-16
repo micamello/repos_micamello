@@ -196,7 +196,7 @@
             <div class="form-group check_box">
                 <div class="col-md-12">
                   <div class="checkbox">
-                    <label><input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He leído y acepto <a href="">término de condiciones</a> y <a href="">Política de privacidad</a></label>
+                    <label><input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He le&iacute;do y acepto las <a href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad1.pdf";?>" target="_blank">pol&iacute;ticas de privacidad</a> y <a href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones1.pdf";?>" target="_blank">t&eacute;rminos y condiciones</a></label>
                     <div></div>
                   </div>
                 </div>
