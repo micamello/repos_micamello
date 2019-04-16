@@ -885,6 +885,10 @@ class Utils{
     return (! preg_match("/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{4,}$/", $dato)) ? false : true;
   }
 
+  public static function validarTituloOferta($contenido){
+    return (!preg_match("/^[a-zA-ZáéíóúÁÉÍÓÚñÑ0-9\/\"'&(),. ]{3,}$/", $contenido)) ? false : true;
+  }
+
   public static function validarNombreEmpresa($dato){
     // return (! preg_match("/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{4,}$/", $dato)) ? false : true;
     if(preg_match("/^[a-zA-ZÁÉÍÓÚñáéíóúÑ0-9&.,' ]{4,}$/", $dato) && preg_match("/(.*[a-zA-ZÁÉÍÓÚñáéíóúÑ]){3}/", $dato)){

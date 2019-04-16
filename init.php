@@ -25,6 +25,7 @@ $GLOBALS['db']->connect();
 $GLOBALS['areasSubareas'] = Modelo_AreaSubarea::obtieneAreas_Subareas();
 $GLOBALS['ListAreas'] = Modelo_Area::obtieneListadoAsociativo();
 $GLOBALS['ListSubareas'] = Modelo_AreaSubarea::obtieneListadoAsociativo();
+$GLOBALS['nivel_idioma_idioma'] = Modelo_NivelxIdioma::obtieneListado();
 
 if(count($_POST) != 0 && $_GET["mostrar"] != "publicar" && $_GET["mostrar"] != "oferta"){ $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING); }
 if(count($_GET) != 0){ $_GET = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING); }
