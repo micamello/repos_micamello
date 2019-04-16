@@ -1,5 +1,8 @@
-// DOBLE CLICK
+$(window).on('load',function(){
+  $('#msg_inforcuestionario').modal('show');
+});
 
+// DOBLE CLICK
 if($('.contenedor_p').length){
 	var isTouched = false;
 	$('.contenedor_p').find('.text_origen').dblclick( function(){
@@ -132,8 +135,6 @@ function crearArrayInputs(){
 					opcion_array.push(value_opcion);
 				}
 			}
-
-			
 		}
 	}
 
@@ -330,8 +331,6 @@ function checkErrors(){
 	}
 }
 
-
-
 function mostrarerror(obj, mensaje_text){
 	if (mensaje_text == ''){
 		mensaje_text = 'Por favor arrastre todas las opciones del lado izquierdo en los cuadros que se muestran en el lado derecho de acuerdo a su prioridad.';
@@ -373,7 +372,6 @@ function eliminarMensajeError(obj, mensaje){
 	  $(obj).siblings('div').removeClass('error_field');
 	}
 }
-
 
 if($('.drag_origen').length){
 	$('.drag_origen').draggable({
@@ -453,11 +451,7 @@ function opinRightSide(){
 	var panel;
 	for (var i = 0; i < card.length; i++) {
 		panel = $(card[i]).parent();
-		console.log(panel);
-		// console.log("eder");
-		// console.log($(card[i]));
 		// panel = $(card[i]).parents().find('.panel');
-		// console.log(panel[0]);
 		// var error = 0;
 		// error = $(card[i]).prev().prev();
 		destino = $(card[i]).find('.drop_destino');

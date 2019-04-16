@@ -25,9 +25,8 @@ class Controlador_Cuestionario extends Controlador_Base {
     switch ($opcion) {
       case 'modalidad':
         $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-        if(!Modelo_Usuario::actualizarMetodoSeleccion($id_usuario, $_POST['seleccion'])){
-          throw new Exception("Ha ocurrido un error, intente nuevamente");
-          $_SESSION['mostrar_error'] = $e->getMessage();
+        if(!Modelo_Usuario::actualizarMetodoSeleccion($id_usuario, $_POST['seleccion'])){          
+          $_SESSION['mostrar_error'] = "Ha ocurrido un error, intente nuevamente";
           Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
         }
         else{
@@ -61,13 +60,43 @@ class Controlador_Cuestionario extends Controlador_Base {
             }              
             $totalfaceta = $totalfaceta + $resbaremo["porcentaje"];
           }          
-          $porcentaje = round($totalfaceta/count($vlbaremo),2);          
-          if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta)){
+          $porcentaje = round($totalfaceta/count($vlbaremo),2); 
+          $acceso = Utils::getParam('acceso', '', $this->data);         
+          $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
+          if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta,$estado)){
             throw new Exception("Ha ocurrido un error, intente nuevamente."); 
+          }
+          if ($faceta == 5 && $estado == 0){
+            if (!Modelo_Usuario::actualizarAceptarAcceso($_SESSION['mfo_datos']['usuario']['id_usuario'],0)){
+              throw new Exception("Ha ocurrido un error, intente nuevamente.");  
+            } 
+            $_SESSION['mfo_datos']['usuario']['pendiente_test'] = 0;
+            $accesos = Modelo_AccesoEmpresa::consultaVariosPorCandidato($_SESSION['mfo_datos']['usuario']['id_usuario']);           
+            if (!Modelo_AccesoEmpresa::actualizarFechaTermino($_SESSION['mfo_datos']['usuario']['id_usuario'])){
+              throw new Exception("Ha ocurrido un error, intente nuevamente.");  
+            }            
           }
           $GLOBALS['db']->commit();
           if($faceta == 1 || $faceta == 2 || $faceta == 5){
-            Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+            if ($faceta == 5 && $estado == 0){              
+              if (!empty($accesos)){
+                foreach($accesos as $acceso){
+                  $infoempresa = Modelo_Usuario::busquedaPorId($acceso["id_empresa"],Modelo_Usuario::EMPRESA);
+                  $email_subject = "Aceptación de Acceso"; 
+                  $candidato = utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '.utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']);
+                  $email_body = Modelo_TemplateEmail::obtieneHTML("ACEPTACION_ACCESO");
+                  $email_body = str_replace("%NOMBRES%", $infoempresa["nombres"], $email_body);   
+                  $email_body = str_replace("%CANDIDATO%", $candidato, $email_body);               
+                  $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);         
+                  Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);
+                }
+              }
+              //envio de correo              
+              Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
+            }
+            else{
+              Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+            }            
           }
         }
         catch( Exception $e ){
@@ -81,21 +110,23 @@ class Controlador_Cuestionario extends Controlador_Base {
         $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($id_usuario);        
         $faceta = Modelo_Respuesta::facetaSiguiente($id_usuario);
-        if (empty($faceta)){
+        $tags = array();
+        if (empty($faceta)){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
-        }
-        $data = Modelo_Opcion::obtieneOpciones($faceta);        
-        if(!empty($faceta) && $faceta >= 3 && (!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario'))){
-          Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
-        }
-        elseif(!empty($faceta) && $faceta == 3 &&isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')){
-          if(!$metodoSeleccion){
-            Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
+        }   
+        if(!$metodoSeleccion){
+          Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
+        }        
+        if ($faceta >= 3){
+          $acceso = $this->validaTercerFormulario($faceta);
+          if (!empty($acceso) && $_SESSION['mfo_datos']['usuario']['pendiente_test']){
+            $tags["acceso"] = "1";
           }
-        }                
-        $tags = array('data'=>$data,
-                      'tiempo'=>date("Y-m-d H:i:s"),
-                      'faceta'=>$faceta);
+        }        
+        $data = Modelo_Opcion::obtieneOpciones($faceta);        
+        $tags["data"] = $data;
+        $tags["tiempo"] = date("Y-m-d H:i:s");
+        $tags["faceta"] = $faceta;        
         $tags["template_css"][] = "toastr.min";
         $tags["template_js"][] = "jquery-ui";
         $tags["template_js"][] = "modos_respuesta";
@@ -103,31 +134,21 @@ class Controlador_Cuestionario extends Controlador_Base {
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);
       break;
       
-      default:
-        $nrototaltest = Modelo_Cuestionario::totalTest();
-        $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
-        if($nrototaltest > $nrotestusuario){
-          $ruta = "";
-          $tags = array();
-          $tags["template_js"][] = "cuestionario";
-          $respUsuario = Modelo_Respuesta::obtenerRespuestas($_SESSION['mfo_datos']['usuario']['id_usuario']);
-          if(empty($respUsuario)){
-            Vista::render('modalidad', $tags);
-            return false;
-          }
+      default:        
+        $faceta = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);        
+        if (empty($faceta)){
+          Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+        }           
+        if ($faceta >= 3){          
+          $this->validaTercerFormulario($faceta);
+        }
+        $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($_SESSION['mfo_datos']['usuario']['id_usuario']);        
+        if ($faceta > 1 && !empty($metodoSeleccion) && isset($metodoSeleccion["metodo_resp"]) && !empty($metodoSeleccion["metodo_resp"])){
           Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/');
-        }
-        else{
-          $planesPagados = Modelo_UsuarioxPlan(Modelo_Usuario::CANDIDATO);
-          // if($nrototaltest == $nrotestusuario){
-            if(!empty($planesPagados)){
-              $ruta = "postulacion";
-            }else{
-              $ruta = "ofertas";
-            }
-          // }
-          Utils::doRedirect(PUERTO.'://'.HOST.'/'.$ruta.'/');
-        }
+        }  
+        $tags = array();
+        $tags["template_js"][] = "cuestionario";
+        Vista::render('modalidad', $tags);        
       break;
     }
   }
@@ -149,6 +170,20 @@ class Controlador_Cuestionario extends Controlador_Base {
       }
     }
     return $arrayData;
+  }
+
+  public function validaTercerFormulario($faceta){
+    //consultar si tiene algun acceso
+    $acceso = Modelo_AccesoEmpresa::consultaPorCandidato($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+    if (!empty($acceso)){
+      return $acceso; 
+    }else{      
+      if(!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')){
+        $_SESSION['mostrar_error'] = "Debe comprar un plan para poder realizar el Tercer Formulario";  
+        $this->redirectToController('planes');
+      }
+      return false;
+    }    
   }
 
 }

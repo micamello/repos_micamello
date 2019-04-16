@@ -97,7 +97,7 @@ class Modelo_Plan{
     }
     else{
       $sql = "SELECT p.tipo_plan, p.id_sucursal, p.num_post, p.duracion, p.codigo_paypal, p.nombre, 
-                     s.id_pais, p.tipo_usuario, p.num_cuenta, p.porc_descarga 
+                     s.id_pais, p.tipo_usuario, p.num_cuenta, p.porc_descarga, p.num_accesos 
               FROM mfo_plan p
               INNER JOIN mfo_sucursal s ON s.id_sucursal = p.id_sucursal 
               WHERE p.id_plan = ? AND p.estado = 1";

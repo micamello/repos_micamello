@@ -17,10 +17,6 @@
   </div>
 </div>
 
-
-
-
-
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 
 <div id="modal_registro" class="modal fade" role="dialog">
@@ -213,7 +209,6 @@
             </diw>  
           </div>
         </form>
-
 
         <div class="row" id="socialReg">
           <div class="col-md-12">

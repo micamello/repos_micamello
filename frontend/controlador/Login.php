@@ -35,7 +35,7 @@ class Controlador_Login extends Controlador_Base {
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
-        }        
+        }         
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                        $_SESSION['mfo_datos']['usuario']['id_usuario'],
                                        (isset($_SESSION['mfo_datos']['usuario']['infohv'])) ? $_SESSION['mfo_datos']['usuario']['infohv'] : array(),

@@ -48,9 +48,7 @@ class Utils{
     return $result;
   }
 
-  static public function enviarEmail($parametros){
-    Utils::log(print_r($parametros, true));
-    // exit();
+  static public function enviarEmail($parametros){    
     $url = "";
     $asunto = "";
     $body = "";

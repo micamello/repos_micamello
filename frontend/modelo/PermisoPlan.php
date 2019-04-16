@@ -1,14 +1,22 @@
 <?php
 class Modelo_PermisoPlan{
   
-  public static function tienePermiso($planes,$permiso){
+  public static function tienePermiso($planes,$permiso,$idplan=false){
   	if (empty($planes) || !is_array($planes) || empty($permiso)){ return false; }
-  	foreach($planes as $plan){
-       $idaccion = self::busquedaPermisoxPlan($plan["id_plan"],$permiso);
-       if (isset($idaccion["id_accionSist"]) && !empty($idaccion["id_accionSist"])){
+    if (!empty($idplan)){
+      $idaccion = self::busquedaPermisoxPlan($idplan,$permiso);
+      if (isset($idaccion["id_accionSist"]) && !empty($idaccion["id_accionSist"])){
+        return true;
+      }      
+    }
+    else{
+  	  foreach($planes as $plan){
+        $idaccion = self::busquedaPermisoxPlan($plan["id_plan"],$permiso);
+        if (isset($idaccion["id_accionSist"]) && !empty($idaccion["id_accionSist"])){
        	  return true;
-       }
-  	}
+        }
+  	  }
+    }
     return false;
   }
   

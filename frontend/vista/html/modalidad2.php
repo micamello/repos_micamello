@@ -13,6 +13,7 @@
 				<form action="<?php echo PUERTO."://".HOST;?>/cuestionario/guardarResp/" method="post" id="forma_2">
 					<div class="respuestas" id="respuestas" style="display: none;"></div>					
 					<input type="hidden" name="tiempo" id="tiempo" value="<?php echo $tiempo; ?>">
+					<input type="hidden" name="acceso" id="acceso" value="<?php echo (isset($acceso) && !empty($acceso)) ? "1" : "0"; ?>">
 					 <?php 
 						$array_group = array();
 						foreach ($data as $key => $value) {
@@ -87,4 +88,31 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="msg_inforcuestionario" tabindex="-1" role="dialog" aria-labelledby="msg_inforcuestionario" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel" align="center">Instrucciones</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <h5 class="text-justify">Para una mayor efectividad en tu búsqueda, a continuación, te presentamos tres <b>Formularios de Personalidad</b>, sigue las siguientes instrucciones:</h5>
+            <h5 class="text-justify">- Debes responder en el menor tiempo posible<br>
+               - Apagar celulares o aparatos que pudieran ser distractores<br>
+               - Contesta en forma honesta y precisa. <b>Solo accederás una vez</b><br>
+               - Al enviar no podrás realizar ningún tipo de corrección</h5>
+            <h5>¿Estás listo? Coloca tu mente en blanco y haz clic</h5>
+            <center>
+              <button type="button" class="btn btn-success" data-dismiss="modal">Formularios </button>
+            </center> 
+          </div>
+        </div>
+      </div>      
+    </div>
+  </div>
 </div>

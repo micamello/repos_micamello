@@ -116,11 +116,10 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   //5.-envio de correo al candidato
   if (!empty($mail_ofertas)){
     $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);    
-    $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");
+    $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");    
     $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
     $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);      
-    Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);    
-    //Modelo_Notificacion::insertarNotificacion($rows["id_usuario"],$email_body,Modelo_Usuario::CANDIDATO);
+    Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);   
   }
 
 }
