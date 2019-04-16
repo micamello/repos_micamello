@@ -83,6 +83,9 @@ RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 
 #publicar
 RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
+RewriteRule ^registroOferta/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar&opcion=registroOferta [L]
+
+
 
 ######################################################################################
 

@@ -613,10 +613,105 @@ a.addButton{
   color: white;
   padding: 10px 15px 10px 15px;
   border-radius: 10px;
+  /*bottom: 50%;*/
 }
 
 a.addButton:hover{
   color: white;
   box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
 }
+.listPanel{
+  overflow-y: scroll;
+  min-height: 200px;
+  max-height: 200px;
+}
 
+.ulCss{
+  padding: 0;
+  
+}
+
+.liCss{
+  list-style-type: none;
+  margin: 1px;
+  border-bottom: white;
+  padding: 6px;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  background-color: #46C04C;
+  color: #FFFFFF;
+  border-radius: 5px;
+}
+.liCss:hover{
+  background-color: #DDDDDD;
+  box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+  color: black;
+}
+
+.liCss>i{
+  float: right;
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.active_button{
+  background-color: #FF0C0C;
+  color: white;
+  padding: 10px 15px 10px 15px;
+  border-radius: 10px;
+}
+
+.errorMensaje{
+  color: red;
+  font-size: 13px;
+  text-align: center;
+  margin: 1px 50px 0 50px;
+  padding: 0 5px 0 5px;
+  background-color: white;
+  border-radius: 5px;
+  /*position: absolute;*/
+  position: absolute; 
+  left: 0px; 
+  right: 0px; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 100%; 
+}
+
+#formPublicar .form-group{
+  /*background-color: red;*/
+  margin-top: 25px;
+}
+
+.cajaDetalle{
+  background-color: #0267cf;
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
+  color: #FFFFFF;
+}
+.detallePlan{
+  background-color: #0267cf;
+  border-radius: 10px;
+  padding: 5px 10px 5px 10px;
+  margin: 10px 0 10px 0;
+  color: #FFFFFF;
+}
+
+.confidencialObligatory{
+  background-color: #E7E7E7;
+  border: dashed;
+  border-radius: 5px;
+  padding: 8px 0 8px 0;
+}
+
+.bubbleData{
+  padding: 5px 50px 5px 50px;
+  background-color: #0267cf;
+  border-radius: 5px;
+  color: white;
+  margin-bottom: 10px;
+}

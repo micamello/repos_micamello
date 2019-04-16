@@ -250,19 +250,42 @@ class Modelo_Oferta{
     return $rs;
   }
 
+// se esta utlizando 15-04-2019
   public static function guardarRequisitosOferta($data){
-    if (empty($data)) {return false;}
-    $result = $GLOBALS['db']->insert('mfo_requisitooferta', array("licencia"=>$data['licencia'], "viajar"=>$data['viaje'], "residencia"=>$data['cambio_residencia'], "discapacidad"=>$data['discapacidad'], "confidencial"=>$data['confidencial'], "edad_minima"=>$data['edad_min'], "edad_maxima"=>$data['edad_max']));
+    if(empty($data)){return false;}
+    $result = $GLOBALS['db']->insert('mfo_requisitooferta', array('licencia'=>$data['licencia'],
+                                                                  'viajar'=>$data['viajar'],
+                                                                  'residencia'=>$data['residencia'],
+                                                                  'discapacidad'=>$data['discapacidad'],
+                                                                  'confidencial'=>$data['confidencial'],
+                                                                  'edad_minima'=>$data['edad_minima'],
+                                                                  'edad_maxima'=>$data['edad_maxima']));
     return $result;
   }
 
-  public static function guardarOferta($data, $id_reqOf, $id_plan, $id_empresa){
 
-    $urgente = $data['urgente'];
-    $result = $GLOBALS['db']->insert('mfo_oferta', array("id_empresa"=>$id_empresa, "titulo"=>$data['titu_of'], "descripcion"=>$data['des_of'], "salario"=>$data['salario'], "fecha_contratacion"=>$data['fecha_contratacion'], "vacantes"=>$data['vacantes'], "anosexp"=>$data['experiencia'], "estado"=>2, "fecha_creado"=>date("Y-m-d H:i:s"), "tipo"=>$urgente, "id_area"=>$data['area_select'][0], "id_nivelInteres"=>$data['nivel_interes'][0], "id_jornada"=>$data['jornada_of'], "id_ciudad"=>$data['ciudad_of'], "id_requisitoOferta"=>$id_reqOf, "id_escolaridad"=>$data['escolaridad'], "id_empresa_plan"=>$id_plan));
+
+  public static function guardarOferta($data){
+    $result = $GLOBALS['db']->insert('mfo_oferta', array('id_empresa'=>$data['id_empresa'], 
+                                                          'titulo'=>$data['titulo'],
+                                                          'descripcion'=>$data['descripcion'],
+                                                          'salario'=>$data['salario'],
+                                                          'a_convenir'=>$data['a_convenir'],
+                                                          'fecha_contratacion'=>$data['fecha_contratacion'],
+                                                          'vacantes'=>$data['vacantes'],
+                                                          'anosexp'=>$data['anosexp'],
+                                                          'estado'=>0,
+                                                          'fecha_creado'=>$data['fecha_creado'],
+                                                          'tipo'=>$data['tipo'],
+                                                          'id_jornada'=>$data['id_jornada'],
+                                                          'id_ciudad'=>$data['id_ciudad'],
+                                                          'id_requisitoOferta'=>$data['id_requisitoOferta'],
+                                                          'id_escolaridad'=>$data['id_escolaridad'],
+                                                          'id_empresa_plan'=>$data['id_empresa_plan'] 
+                                                          ));
     return $result;
   }
-
+// se esta utlizando 15-04-2019
   public static function aspirantesXofertas(){
     $sql = "SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
             FROM mfo_oferta o
