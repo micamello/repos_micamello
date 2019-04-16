@@ -5,7 +5,9 @@ body
     background-color: #fff;
     padding-top: 72px;
 }
-
+a {
+  cursor:pointer;
+}
 /*Formulario checkbox css*/
 
 .container-fluid{
@@ -1118,6 +1120,14 @@ fieldset {
 
 .etiquetaOfertaUrgente{
   color:black;
+}
+
+.inscritos{
+  color:red;
+}
+
+.aspirantes{
+  color:red;
 }
 
 .icon_deshabilitados{

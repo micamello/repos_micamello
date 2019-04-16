@@ -35,7 +35,7 @@ class Modelo_Plan{
     $sql .= "GROUP BY p.id_plan ORDER BY p.costo";
     return $GLOBALS['db']->auto_array($sql,array($tipousuario,$sucursal),true);
   }
-  public static function listadoPlanesUsuario($idUsuario,$tipo){
+  public static function listadoPlanesUsuario($idUsuario,$tipo,$idPlan=false){
     if (empty($idUsuario) || empty($tipo)){ return false; }
     if ($tipo == Modelo_Usuario::CANDIDATO){
       $sql = "SELECT p.id_plan, p.nombre, p.costo, u.id_comprobante, u.fecha_compra, 
@@ -61,18 +61,22 @@ class Modelo_Plan{
                           WHEN num_descarga_rest = 0 THEN '-'
                           ELSE num_descarga_rest
                      END AS num_descarga_rest, 
-                     CASE WHEN num_accesos IS NULL THEN '-'
-                          WHEN num_accesos = 0 THEN '-'
-                          ELSE num_accesos
-                     END AS num_accesos,
+                     CASE WHEN num_accesos_rest IS NULL THEN '-'
+                          WHEN num_accesos_rest = 0 THEN '-'
+                          ELSE num_accesos_rest
+                     END AS num_accesos_rest,
                      e.id_empresa_plan AS id_usuario_plan, e.estado, f.id_factura
               FROM mfo_empresa_plan e
               INNER JOIN mfo_plan p ON e.id_plan = p.id_plan
               LEFT JOIN mfo_factura f ON f.id_user_emp_plan = e.id_empresa_plan AND 
                                          f.tipo_usuario = 2 AND f.estado = 2
               WHERE e.id_empresa = ? AND
-                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))
-              ORDER BY e.fecha_compra ASC";
+                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))";
+
+              if($idPlan != false){
+                $sql .= " AND e.id_plan = ".$idPlan;
+              }
+      $sql .= " ORDER BY e.fecha_compra ASC";
     }    
     return $GLOBALS['db']->auto_array($sql,array($idUsuario),true);
   }

@@ -4,6 +4,8 @@ class Modelo_Usuario{
 
   const CANDIDATO = 1;
   const EMPRESA = 2;
+  const TEST_PARCIAL = 1;
+  const TEST_COMPLETO = 2;
 
   public static function obtieneNroUsuarios($pais,$tipo=self::CANDIDATO){
     if (empty($pais)){ return false; }
@@ -277,48 +279,87 @@ public static function existeUsername($username){
     }
   }
 
-  public static function obtenerAspirantes($idOferta,$page,$obtCantdRegistros=false){
+  public static function obtenerAspirantes($idOferta,$page,$limite,$obtCantdRegistros=false){
+    
+    $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.tiene_trabajo,u.licencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = $idOferta GROUP BY u.id_usuario";
+
+    if($obtCantdRegistros === false && !empty($limite)){
+      $subquery1 .= " ORDER BY pago DESC, p.fecha_postulado ASC";
+      $subquery1 .= " LIMIT 0,".$limite; 
+    }
+
+    $subquery1 .= ") t2"; 
+
+    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
 
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
-      $sql .= "o.id_ofertas, u.id_usuario, ul.username, u.nombres, u.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial, e.descripcion AS estudios, n.nombre_abr AS nacionalidad, n.id_pais, pr.id_provincia, pr.nombre AS ubicacion"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
     }else{
-      $sql .= "n.id_pais, pr.id_provincia, pr.nombre AS ubicacion";
+      $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }
     
-    $sql .= " FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_pais n, mfo_usuario_login ul
-            WHERE u.id_usuario = p.id_usuario 
-            AND p.id_ofertas = o.id_ofertas
-            AND e.id_escolaridad = u.id_escolaridad
-            AND c.id_provincia = pr.id_provincia
-            AND u.id_ciudad = c.id_ciudad
-            AND n.id_pais = u.id_nacionalidad
-            AND u.id_usuario_login = ul.id_usuario_login
-            AND u.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajexfaceta pt WHERE pt.id_usuario = u.id_usuario LIMIT 1)
-            AND o.id_ofertas = $idOferta";
+    $sql .= " FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, ";
+    $sql .= $subquery1.', '.$subquery2;
 
-    if($obtCantdRegistros == false){
-      $sql .= " ORDER BY u.nombres ASC";
+    $sql .= " WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario";   
+
+    if($obtCantdRegistros === false){
       $page = ($page - 1) * REGISTRO_PAGINA;
-      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
     //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs; 
   }
 
-  public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$obtCantdRegistros=false){
+  public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$obtCantdRegistros=false){
+
+    $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,p.fecha_postulado,u.tiene_trabajo,u.licencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = $idOferta GROUP BY u.id_usuario";
+
+    if($obtCantdRegistros === false && !empty($limite)){
+      $subquery1 .= " ORDER BY pago DESC, p.fecha_postulado ASC";
+      $subquery1 .= " LIMIT 0,".$limite; 
+    }
+
+    $subquery1 .= ") t2";
+
+    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
 
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
-      $sql .= "o.id_ofertas, u.id_usuario, ul.username, u.nombres, u.apellidos, p.fecha_postulado, u.fecha_nacimiento, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial, e.descripcion AS estudios, u.discapacidad, n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
     }else{
-      $sql .= "n.id_pais, pr.id_provincia, pro.nombre AS ubicacion";
+      $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }
 
-    $sql .= " FROM mfo_usuario u, mfo_postulacion p, mfo_oferta o, mfo_usuario_login ul, mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c";
+    if(!empty($filtros['R']) && $filtros['R'] != ''){
+      $sql .= ", IF(t1.test_realizados = 2,(".VALORES_ORDENAMIENTO[0]."*t.total)+".VALORES_ORDENAMIENTO[1].",t.total) AS ranqueo"; 
+    }
+    
+    $sql .= " FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, ";
+    $sql .= $subquery1.', '.$subquery2;
 
     if(!empty($filtros['R']) && $filtros['R'] != ''){
 
@@ -344,62 +385,75 @@ public static function existeUsername($username){
 
       preg_match_all($exp,$filtros['R'],$salida, PREG_PATTERN_ORDER);
       unset($salida[0]);
+      $existe_otro = array();
 
       foreach ($salida as $key => $value) {
         $l = substr($value[0],0,1);
         $i = substr($value[0],1);
         $facetas_porcentajes[$literales[$l]] = $i;
       }
-      //print_r($facetas_porcentajes);
-      //echo '<br>';
-      arsort($facetas_porcentajes);
+
+      $valores_unicos = array_unique($facetas_porcentajes);
+
+      arsort($valores_unicos);
       $peso = count($facetas);
-      //print_r($facetas_porcentajes);
-      //echo '<br>'; 
-
-      $if = $parentesis = '';
-      foreach ($facetas_porcentajes as $key => $value) {
-        $facetas_porcentajes[$key] = $peso;
-        $if .= 'if(id_faceta = '.$key.', valor*'.$peso.',';
-        $peso--;
-        $parentesis .= ')';
+      $orden_canea = array();
+      foreach ($valores_unicos as $k => $valor) {
+        $orden_canea[$valor] = array();
       }
-      $if .= 'valor'.$parentesis.' AS f1';
 
-      $sql .= ", (SELECT SUM(ROUND(res.f1)) AS total, res.id_usuario 
-                FROM (SELECT id_usuario, ".$if." FROM mfo_porcentajexfaceta) as res 
-                GROUP BY res.id_usuario) AS t";
+      foreach ($facetas_porcentajes as $key => $value) {
+
+        array_push($orden_canea[$value], $key);
+      }
+      
+      $if = $parentesis = '';
+      $posicionamiento_valores = '';
+
+      foreach ($orden_canea as $pos => $ids_facetas) {
+
+        foreach ($ids_facetas as $c => $id) {
+          $if .= 'if(id_faceta = '.$id.', valor*'.$peso.',';
+          $peso--;
+          $parentesis .= ')';
+        }
+      }
+      
+      $if .= 'valor'.$parentesis.' AS f1'; 
+
+      $subquery3 = ", (SELECT SUM(ROUND(res.f1)) AS total, res.id_usuario 
+                FROM (SELECT id_usuario, ".$if."  FROM mfo_porcentajexfaceta WHERE id_faceta IN(".implode(',',$literales).")) res 
+                GROUP BY res.id_usuario) t";
+      $sql .= $subquery3;
     }
 
     if(!empty($filtros['A']) && $filtros['A'] != 0){
       $sql .= ",  mfo_usuarioxarea ua ";
     }
 
-    /*if(!empty($filtros['P']) && $filtros['P'] != 0){
-      $sql .= ", mfo_usuario_plan up, mfo_plan pl ";
-    }*/
-
-    $sql .= " WHERE u.id_usuario = p.id_usuario 
-              AND u.id_usuario_login = ul.id_usuario_login
-              AND p.id_ofertas = o.id_ofertas
-              AND e.id_escolaridad = u.id_escolaridad
-              AND n.id_pais = u.id_nacionalidad
+    $sql .= " WHERE e.id_escolaridad = t2.id_escolaridad
+              AND n.id_pais = t2.id_nacionalidad
               AND c.id_provincia = pro.id_provincia
-              AND u.id_ciudad = c.id_ciudad
-              AND o.id_ofertas = $idOferta";
+              AND c.id_ciudad = t2.id_ciudad
+              AND t1.id_usuario = t2.id_usuario";
 
     if(!empty($filtros['R']) && $filtros['R'] != ''){
 
-      $sql .= " AND t.id_usuario = u.id_usuario";
+      $sql .= " AND t.id_usuario = t2.id_usuario";
     }
 
+    if(!empty($filtros['P']) && $filtros['P'] != 0){
+
+      $sql .= " AND t1.test_realizados = ".$filtros['P'];
+    } 
+
     if(!empty($filtros['A']) && $filtros['A'] != 0){
-      $sql .= " AND ua.id_usuario = u.id_usuario AND ua.id_areas_subareas IN(SELECT asu.id_areas_subareas FROM mfo_area_subareas asu WHERE asu.id_area = ".$filtros['A'].")";
+      $sql .= " AND ua.id_usuario = t2.id_usuario AND ua.id_areas_subareas IN(SELECT asu.id_areas_subareas FROM mfo_area_subareas asu WHERE asu.id_area = ".$filtros['A'].")";
     }
 
     if(!empty($filtros['F']) && $filtros['F'] != 0){
        if($filtros['F'] == 1){
-        $sql .= " AND DATE_FORMAT(p.fecha_postulado, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')";
+        $sql .= " AND DATE_FORMAT(t2.fecha_postulado, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
        
        if($filtros['F'] == 2){
@@ -407,24 +461,13 @@ public static function existeUsername($username){
        }
        
        if($filtros['F'] == 3){
-         $sql .= " AND DATE_FORMAT(p.fecha_postulado, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 WEEK), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
+         $sql .= " AND DATE_FORMAT(t2.fecha_postulado, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 WEEK), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
 
        if($filtros['F'] == 4){
-        $sql .= " AND DATE_FORMAT(p.fecha_postulado, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
+        $sql .= " AND DATE_FORMAT(t2.fecha_postulado, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
     }
-    
-    //obtener los aspirantes por los que pagaron y los q no pagaron
-    /*if(!empty($filtros['P']) && $filtros['P'] != 0){
-
-      $sql .= " AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan";
-      if($filtros['P'] == 2){
-        $sql .=  " AND pl.costo > 0" ;
-      }else{
-        $sql .=  " AND pl.costo = 0 AND up.estado = 1" ;
-      }
-    }*/
 
     //obtiene los aspirantes para esa ubicacion 
     if(!empty($filtros['U']) && $filtros['U'] != 0){ 
@@ -436,19 +479,19 @@ public static function existeUsername($username){
     if(!empty($filtros['S']) && $filtros['S'] != 0){
 
       if($filtros['S'] == 1){
-        $sql .= " AND p.asp_salarial < 341";
+        $sql .= " AND t2.asp_salarial < 341";
       }
 
       if($filtros['S'] == 2){
-        $sql .= " AND p.asp_salarial BETWEEN '386' and '700'";
+        $sql .= " AND t2.asp_salarial BETWEEN '386' and '700'";
       }
 
       if($filtros['S'] == 3){
-        $sql .= " p.asp_salarial BETWEEN '700' AND '1200'";
+        $sql .= " t2.asp_salarial BETWEEN '700' AND '1200'";
       }
 
       if($filtros['S'] == 4){
-        $sql .= " AND p.asp_salarial >= 1200";
+        $sql .= " AND t2.asp_salarial >= 1200";
       }
     }
 
@@ -456,18 +499,18 @@ public static function existeUsername($username){
     if(!empty($filtros['G']) && $filtros['G'] != 0){
       $g = array_search($filtros['G'],VALOR_GENERO);
       if($g != false){
-        $sql .= " AND u.genero = '".$g."'";
+        $sql .= " AND t2.genero = '".$g."'";
       }
     }
 
     //obtiene los aspirantes por nacionalidad
     if(!empty($filtros['N']) && $filtros['N'] != 0){
-      $sql .= " AND u.id_nacionalidad = ".$filtros['N'];
+      $sql .= " AND t2.id_nacionalidad = ".$filtros['N'];
     }
 
     //obtiene los aspirantes por escolaridad
     if(!empty($filtros['E']) && $filtros['E'] != 0){ 
-      $sql .= " AND u.id_escolaridad = ".$filtros['E'];
+      $sql .= " AND t2.id_escolaridad = ".$filtros['E'];
     }
 
     //filtra los candidatos por ciertos requisitos
@@ -477,7 +520,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.discapacidad = ".$req;
+      $sql .= " AND t2.discapacidad = ".$req;
     }
 
     if(!empty($filtros['T']) && $filtros['T'] != 0){ 
@@ -486,7 +529,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.tiene_trabajo = ".$req;
+      $sql .= " AND t2.tiene_trabajo = ".$req;
     }
 
     if(!empty($filtros['L']) && $filtros['L'] != 0){ 
@@ -495,7 +538,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.licencia = ".$req;
+      $sql .= " AND t2.licencia = ".$req;
     }
 
     if(!empty($filtros['V']) && $filtros['V'] != 0){ 
@@ -504,7 +547,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.viajar = ".$req;
+      $sql .= " AND t2.viajar = ".$req;
     }
 
     //Hace la busqueda por palabra clave
@@ -523,17 +566,9 @@ public static function existeUsername($username){
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (u.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR u.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR p.asp_salarial LIKE '%".$pclave."%' OR p.fecha_postulado LIKE '%".$pclave."%')";
+      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.edad = '".$pclave."' OR t2.asp_salarial LIKE '%".$pclave."%' OR t2.fecha_postulado LIKE '%".$pclave."%')";
     }
 
-    /*if(!empty($filtros['P']) && $filtros['P'] != 0){
-
-      if($filtros['P'] == 2){
-        $sql .= ' GROUP BY up.id_usuario';
-      }
-    }*/
-
-    $sql .= ' GROUP BY u.id_usuario';
     if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
 
       $tipo = substr($filtros['O'],0,1);
@@ -541,20 +576,20 @@ public static function existeUsername($username){
       if($tipo == 1){
         if($t == 1){
           $filtros['O'] = 2;
-          $sql .= " ORDER BY edad ASC";
+          $sql .= " ORDER BY t2.edad ASC";
         }
         if($t == 2){
           $filtros['O'] = 1;
-          $sql .= " ORDER BY edad DESC";
+          $sql .= " ORDER BY t2.edad DESC";
         }        
       }else if($tipo == 2){
         if($t == 1){
           $filtros['O'] = 2;
-          $sql .= " ORDER BY p.fecha_postulado ASC";
+          $sql .= " ORDER BY t2.fecha_postulado ASC";
         }
         if($t == 2){
           $filtros['O'] = 1;
-          $sql .= " ORDER BY p.fecha_postulado DESC";
+          $sql .= " ORDER BY t2.fecha_postulado DESC";
         }
       }else if($tipo == 3){
         if($t == 1){
@@ -568,73 +603,105 @@ public static function existeUsername($username){
       }else if($tipo == 4){
         if($t == 1){
           $filtros['O'] = 2;
-          $sql .= " ORDER BY p.asp_salarial ASC";
+          $sql .= " ORDER BY t2.asp_salarial ASC";
         }
         if($t == 2){
           $filtros['O'] = 1;
-          $sql .= " ORDER BY p.asp_salarial DESC";
+          $sql .= " ORDER BY t2.asp_salarial DESC";
         }
       }
 
     }else{
 
       if(!empty($filtros['R']) && $filtros['R'] != ''){
-        $sql .= " ORDER BY t.total DESC";
-      }else{
-        $sql .= " ORDER BY u.nombres ASC";
+        $sql .= " ORDER BY ranqueo DESC";
       }
     }
 
-    if($obtCantdRegistros == false){
+    if($obtCantdRegistros === false){
       $page = ($page - 1) * REGISTRO_PAGINA;
-      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-
+    //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
 
-  public static function busquedaGlobalAspirantes($id_pais_empresa,$page,$obtCantdRegistros=false){
+  public static function busquedaGlobalAspirantes($id_pais_empresa,$page,$obtCantdRegistros=false){     
 
-    $sql = 'SELECT ';
-    if($obtCantdRegistros == false){
+    $sql = "SELECT ";
 
-      $sql .= 'u.id_usuario, ul.username, u.nombres, u.apellidos, u.fecha_nacimiento,u.fecha_creacion, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, e.descripcion AS estudios, u.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia';
-    }else{
-      $sql .= "u.id_nacionalidad AS id_pais, pr.id_provincia, pr.nombre AS ubicacion";
-    }
+    $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,u.fecha_creacion,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.tiene_trabajo,u.licencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND ul.tipo_usuario = 1 GROUP BY u.id_usuario";
 
-    $sql .= ' FROM mfo_usuario u, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_usuario_login ul
-            WHERE 
-            ul.id_usuario_login = u.id_usuario_login
-            AND c.id_provincia = pr.id_provincia
-            AND u.id_ciudad = c.id_ciudad
-            AND e.id_escolaridad = u.id_escolaridad
-            AND ul.tipo_usuario = 1
-            AND u.id_usuario = (SELECT p.id_usuario FROM mfo_porcentajexfaceta p WHERE p.id_usuario = u.id_usuario LIMIT 1)
-            AND pr.id_pais = '.$id_pais_empresa;
-
-    if($obtCantdRegistros == false){
-      $sql .= " ORDER BY u.nombres ASC";
+    if($obtCantdRegistros === false){
+      $subquery1 .= " ORDER BY pago DESC, u.fecha_creacion ASC";
       $page = ($page - 1) * REGISTRO_PAGINA;
-      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+      $subquery1 .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
+
+    $subquery1 .= ") t2"; 
+
+    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+
+    if($obtCantdRegistros == false){
+      $sql .= "t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_creacion, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, t2.id_nacionalidad AS id_pais,e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+    }else{
+      $sql .= "t2.id_nacionalidad AS id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
+    }
+
+    $sql .= " FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, ";
+    $sql .= $subquery1.', '.$subquery2;
+
+    $sql .= " WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario
+          AND pro.id_pais = ".$id_pais_empresa;
+
+    //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs; 
   }
 
   public static function filtrarAspirantesGlobal($id_pais_empresa,&$filtros,$page,$facetas,$obtCantdRegistros=false){
 
+    $subquery1 = "(SELECT u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,u.fecha_creacion, u.tiene_trabajo,u.licencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND ul.tipo_usuario = 1 GROUP BY u.id_usuario";
+
+    $subquery1 .= " ORDER BY pago DESC, u.fecha_creacion ASC) t2";
+
+    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
 
-      $sql .= "u.id_usuario, ul.username, u.nombres, u.apellidos, u.fecha_nacimiento,u.fecha_creacion, YEAR(now()) - YEAR(u.fecha_nacimiento) AS edad, e.descripcion AS estudios, u.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia"; 
+      $sql .= "t2.id_usuario, t2.username, t2.nombres, t2.apellidos, t2.genero,t2.discapacidad, t2.fecha_nacimiento,t2.fecha_creacion, t2.edad, e.descripcion AS estudios, t2.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia, t2.pago, t1.test_realizados";
     }else{
-      $sql .= "u.id_nacionalidad AS id_pais, pr.id_provincia, pr.nombre AS ubicacion";
+      $sql .= "t2.id_nacionalidad AS id_pais, pr.id_provincia, pr.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }
 
-    $sql .= " FROM mfo_usuario u, mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, mfo_usuario_login ul";
+    if(!empty($filtros['R']) && $filtros['R'] != ''){
+      $sql .= ", IF(t1.test_realizados = 2,(".VALORES_ORDENAMIENTO[0]."*t.total)+".VALORES_ORDENAMIENTO[1].",t.total) AS ranqueo"; 
+    } 
+
+    $sql .= " FROM mfo_escolaridad e, mfo_provincia pr, mfo_ciudad c, ";
+    $sql .= $subquery1.', '.$subquery2;
 
     if(!empty($filtros['R']) && $filtros['R'] != ''){
 
@@ -660,85 +727,90 @@ public static function existeUsername($username){
 
       preg_match_all($exp,$filtros['R'],$salida, PREG_PATTERN_ORDER);
       unset($salida[0]);
+      $existe_otro = array();
 
       foreach ($salida as $key => $value) {
         $l = substr($value[0],0,1);
         $i = substr($value[0],1);
         $facetas_porcentajes[$literales[$l]] = $i;
       }
-      //print_r($facetas_porcentajes);
-      //echo '<br>';
-      arsort($facetas_porcentajes);
+
+      $valores_unicos = array_unique($facetas_porcentajes);
+
+      arsort($valores_unicos);
       $peso = count($facetas);
-      //print_r($facetas_porcentajes);
-      //echo '<br>'; 
-
-      $if = $parentesis = '';
-      foreach ($facetas_porcentajes as $key => $value) {
-        $facetas_porcentajes[$key] = $peso;
-        $if .= 'if(id_faceta = '.$key.', valor*'.$peso.',';
-        $peso--;
-        $parentesis .= ')';
+      $orden_canea = array();
+      foreach ($valores_unicos as $k => $valor) {
+        $orden_canea[$valor] = array();
       }
-      $if .= 'valor'.$parentesis.' AS f1';
 
-      $sql .= ", (SELECT SUM(ROUND(res.f1)) AS total, res.id_usuario 
-                FROM (SELECT id_usuario, ".$if." FROM mfo_porcentajexfaceta) as res 
-                GROUP BY res.id_usuario) AS t";
+      foreach ($facetas_porcentajes as $key => $value) {
+
+        array_push($orden_canea[$value], $key);
+      }
+      
+      $if = $parentesis = '';
+      $posicionamiento_valores = '';
+
+      foreach ($orden_canea as $pos => $ids_facetas) {
+
+        foreach ($ids_facetas as $c => $id) {
+          $if .= 'if(id_faceta = '.$id.', valor*'.$peso.',';
+          $peso--;
+          $parentesis .= ')';
+        }
+      }
+      
+      $if .= 'valor'.$parentesis.' AS f1'; 
+
+      $subquery3 = ", (SELECT SUM(ROUND(res.f1)) AS total, res.id_usuario 
+                FROM (SELECT id_usuario, ".$if."  FROM mfo_porcentajexfaceta WHERE id_faceta IN(".implode(',',$literales).")) res 
+                GROUP BY res.id_usuario) t";
+      $sql .= $subquery3;
     }
 
     if(!empty($filtros['A']) && $filtros['A'] != 0){
       $sql .= ",  mfo_usuarioxarea ua ";
     }
 
+      $sql .= " WHERE c.id_provincia = pr.id_provincia
+            AND c.id_ciudad = t2.id_ciudad
+            AND e.id_escolaridad = t2.id_escolaridad
+            AND t1.id_usuario = t2.id_usuario";
+ 
     if(!empty($filtros['P']) && $filtros['P'] != 0){
-      $sql .= ", mfo_usuario_plan up, mfo_plan pl ";
-    }
 
-    $sql .= " WHERE ul.id_usuario_login = u.id_usuario_login
-            AND c.id_provincia = pr.id_provincia
-            AND u.id_ciudad = c.id_ciudad
-            AND e.id_escolaridad = u.id_escolaridad
-            AND ul.tipo_usuario = 1
-            AND pr.id_pais = ".$id_pais_empresa;
+      $sql .= " AND t1.test_realizados = ".$filtros['P'];
+    }        
+            
+    $sql .= " AND pr.id_pais = ".$id_pais_empresa;
    
     if(!empty($filtros['R']) && $filtros['R'] != ''){
 
-      $sql .= " AND t.id_usuario = u.id_usuario";
+      $sql .= " AND t.id_usuario = t2.id_usuario";
     }
     //segun el escogido calcular fecha y ponersela a la consulta
     if(!empty($filtros['F']) && $filtros['F'] != 0){
        if($filtros['F'] == 1){
-        $sql .= " AND DATE_FORMAT(p.fecha_creacion, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')";
+        $sql .= " AND DATE_FORMAT(t2.fecha_creacion, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
        
        if($filtros['F'] == 2){
-        $sql .= " AND DATE_FORMAT(p.fecha_creacion, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 DAY), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
+        $sql .= " AND DATE_FORMAT(t2.fecha_creacion, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 3 DAY), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
        
        if($filtros['F'] == 3){
-         $sql .= " AND DATE_FORMAT(p.fecha_creacion, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 WEEK), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
+         $sql .= " AND DATE_FORMAT(t2.fecha_creacion, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 WEEK), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
 
        if($filtros['F'] == 4){
-        $sql .= " AND DATE_FORMAT(p.fecha_creacion, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
+        $sql .= " AND DATE_FORMAT(t2.fecha_creacion, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
     }
 
     if(!empty($filtros['A']) && $filtros['A'] != 0){
-      $sql .= " AND ua.id_usuario = u.id_usuario AND ua.id_areas_subareas IN(SELECT asu.id_areas_subareas FROM mfo_area_subareas asu WHERE asu.id_area = ".$filtros['A'].")";
+      $sql .= " AND ua.id_usuario = t2.id_usuario AND ua.id_areas_subareas IN(SELECT asu.id_areas_subareas FROM mfo_area_subareas asu WHERE asu.id_area = ".$filtros['A'].")";
     }
-
-    //obtener los aspirantes por los que pagaron y los q no pagaron
-    /*if(!empty($filtros['P']) && $filtros['P'] != 0){
-
-      $sql .= " AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan";
-      if($filtros['P'] == 2){
-        $sql .=  " AND pl.costo > 0" ;
-      }else{
-        $sql .=  " AND pl.costo = 0 AND up.estado = 1" ;
-      }
-    }*/
 
     //obtiene los aspirantes para esa ubicacion 
     if(!empty($filtros['U']) && $filtros['U'] != 0){ 
@@ -750,18 +822,18 @@ public static function existeUsername($username){
     if(!empty($filtros['G']) && $filtros['G'] != 0){
       $g = array_search($filtros['G'],VALOR_GENERO);
       if($g != false){
-        $sql .= " AND u.genero = '".$g."'";
+        $sql .= " AND t2.genero = '".$g."'";
       }
     }
 
     //obtiene los aspirantes por nacionalidad
     if(!empty($filtros['N']) && $filtros['N'] != 0){
-      $sql .= " AND u.id_nacionalidad = ".$filtros['N'];
+      $sql .= " AND t2.id_nacionalidad = ".$filtros['N'];
     }
 
     //obtiene los aspirantes por escolaridad
     if(!empty($filtros['E']) && $filtros['E'] != 0){ 
-      $sql .= " AND u.id_escolaridad = ".$filtros['E'];
+      $sql .= " AND t2.id_escolaridad = ".$filtros['E'];
     }
 
     //filtra los candidatos por ciertos requisitos
@@ -771,7 +843,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.discapacidad = ".$req;
+      $sql .= " AND t2.discapacidad = ".$req;
     }
 
     if(!empty($filtros['T']) && $filtros['T'] != 0){ 
@@ -780,7 +852,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.tiene_trabajo = ".$req;
+      $sql .= " AND t2.tiene_trabajo = ".$req;
     }
 
     if(!empty($filtros['L']) && $filtros['L'] != 0){ 
@@ -789,7 +861,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.licencia = ".$req;
+      $sql .= " AND t2.licencia = ".$req;
     }
 
     if(!empty($filtros['V']) && $filtros['V'] != 0){ 
@@ -798,7 +870,7 @@ public static function existeUsername($username){
       }else{
         $req = 1;
       }
-      $sql .= " AND u.viajar = ".$req;
+      $sql .= " AND t2.viajar = ".$req;
     }
 
     //Hace la busqueda por palabra clave
@@ -817,17 +889,9 @@ public static function existeUsername($username){
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (u.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR u.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(u.fecha_nacimiento)) = '".$pclave."' OR u.fecha_creacion LIKE '%".$pclave."%')";
+      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(t2.fecha_nacimiento)) = '".$pclave."' OR t2.fecha_creacion LIKE '%".$pclave."%')";
     }
 
-    /*if(!empty($filtros['P']) && $filtros['P'] != 0){
-
-      if($filtros['P'] == 2){
-        $sql .= ' GROUP BY up.id_usuario';
-      }
-    }*/
-
-    $sql .= ' GROUP BY u.id_usuario';
     if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
 
       $tipo = substr($filtros['O'],0,1);
@@ -835,20 +899,20 @@ public static function existeUsername($username){
       if($tipo == 1){
         if($t == 1){
           $filtros['O'] = 2;
-          $sql .= " ORDER BY edad ASC";
+          $sql .= " ORDER BY t2.edad ASC";
         }
         if($t == 2){
           $filtros['O'] = 1;
-          $sql .= " ORDER BY edad DESC";
+          $sql .= " ORDER BY t2.edad DESC";
         }        
       }else if($tipo == 2){
         if($t == 1){
           $filtros['O'] = 2;
-          $sql .= " ORDER BY u.fecha_creacion ASC";
+          $sql .= " ORDER BY t2.fecha_creacion ASC";
         }
         if($t == 2){
           $filtros['O'] = 1;
-          $sql .= " ORDER BY u.fecha_creacion DESC";
+          $sql .= " ORDER BY t2.fecha_creacion DESC";
         }
       }else if($tipo == 3){
         if($t == 1){
@@ -863,18 +927,17 @@ public static function existeUsername($username){
     }else{
 
       if(!empty($filtros['R']) && $filtros['R'] != ''){
-        $sql .= " ORDER BY t.total DESC";
-      }else{
-        $sql .= " ORDER BY u.nombres ASC";
-      }
+        $sql .= " ORDER BY ranqueo DESC";
+      }/*else{
+        $sql .= " ORDER BY t2.pago ASC";
+      }*/
     }
-
 
     if($obtCantdRegistros == false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
-    echo $sql;
+    //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

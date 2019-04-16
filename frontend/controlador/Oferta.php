@@ -70,7 +70,6 @@ class Controlador_Oferta extends Controlador_Base{
         break;
         case 'filtrar':
 
-
           $array_empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,true);
           $empresas = array();
 
@@ -348,7 +347,7 @@ class Controlador_Oferta extends Controlador_Base{
           }
           
           if (Utils::getParam('guardarEdicion') == 1) {
-            $idOferta = Utils::getParam('idOferta');
+            $idOferta = Utils::desencriptar(Utils::getParam('idOferta', '', $this->data));
             self::guardarDescripcion($idOferta);
           }
 
@@ -455,20 +454,21 @@ class Controlador_Oferta extends Controlador_Base{
             Utils::doRedirect(PUERTO.'://'.HOST.'/');               
           }
 
-          $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
-          $empresa = Utils::getParam('empresa', '', $this->data);
-
+          $eliminarPostulacion = Utils::desencriptar(Utils::getParam('eliminarPostulacion', '', $this->data));
+          $empresa = Utils::desencriptar(Utils::getParam('empresa', '', $this->data));
+          //print_r($eliminarPostulacion);
+//exit;
           if(!empty($eliminarPostulacion)){
 
             $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
             if(!empty($empresa)){
-              $tipo_post = 1; 
+              $tipo_post = 1;
+              $r = Modelo_Postulacion::postAutoxIdPostAeliminar($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa,$tiempo);
             }else{
               $tipo_post = 2;
+              $r = array();
             }
 
-            $r = Modelo_Postulacion::postAutoxIdPostAeliminar($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa,$tiempo);
-          
             if(!empty($r['ids_postulaciones'])){
               $resultado = Modelo_Postulacion::eliminarPostulacion($r['ids_postulaciones'],$tipo_post);
               if(empty($resultado)){
@@ -499,6 +499,8 @@ class Controlador_Oferta extends Controlador_Base{
 
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
+            }else{
+              $_SESSION['mfo_datos']['filtro'] = FILTRO_PREFERENCIAS_DEFAULT;
             }
 
             if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){

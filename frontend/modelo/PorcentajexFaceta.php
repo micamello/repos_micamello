@@ -8,5 +8,21 @@ class Modelo_PorcentajexFaceta{
 
     if(!empty($r['resultado'])){ return $r['resultado']; }else{ return false; }
   }
+
+	public static function usuariosxfaceta(){
+
+		$sql = "SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta";
+		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+
+		$datos = array();
+		if (!empty($arrdatos) && is_array($arrdatos)){
+
+			foreach ($arrdatos as $key => $value) {
+
+				$datos[$value['id_usuario']][$value['id_faceta']] = $value['valor'];
+			}
+		}
+		return $datos;
+	}
 }  
 ?>

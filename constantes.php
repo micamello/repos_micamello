@@ -31,14 +31,23 @@ define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
 define('GENERO', array('M'=>'Masculino', 'F'=>'Femenino', 'P'=>'Prefiero no decirlo'));
 define('VALOR_GENERO', array('M'=>'1', 'F'=>'2', 'P'=>'3'));
-define('PRIORIDAD', array('1'=>'Parcial', '2'=>'Completo'));
+define('PRIORIDAD', array('1'=>'Informe Parcial', '2'=>'Informe Completo'));
 define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
 define('SALARIO', array('1'=>'Menos de 386', '2'=>'Entre 386 y 700', '3'=>'Entre 700 y 1200', '4'=>'M&aacute;s de 1200'));
 define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as', '3'=>'&Uacute;ltima semana', '4'=>'&Uacute;ltimo mes'));
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));
+define('PUEDE_VIAJAR',array('1'=>'S&iacute;','2'=>'No'));
+define('TIENE_TRABAJO',array('1'=>'S&iacute;','2'=>'No'));
+define('TIENE_LICENCIA',array('1'=>'S&iacute;','2'=>'No'));
+define('DISCAPACIDAD',array('1'=>'S&iacute;','2'=>'No'));
+
+//este filtro sirve para colocar por defecto el filtro de las areas y subareas del candidato o sin filtro
+//Para el 0 no se aplican los filtros y para 1 si se aplican 
+define('FILTRO_PREFERENCIAS_DEFAULT',0);
+
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
-define('REGISTRO_PAGINA',10);
+define('REGISTRO_PAGINA',5);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Unión libre', '3'=>'Casado(a)', '4'=>'Separado(a)','5'=>'Divorciado(a)','6'=>'Viudo(a)','7'=>'Otro'));
@@ -55,6 +64,8 @@ define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-w
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
 define('AREASPERMITIDAS', '3');
+define('VALORES_ORDENAMIENTO', array('100','1000'));
+
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');

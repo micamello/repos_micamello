@@ -29,7 +29,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $usuario = Modelo_Usuario::existeUsuario($username);
         $idusuario = $usuario['id_usuario'];
 
-        if($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+        if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) || ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA)){
 
           $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario);
           $result = Modelo_Opcion::datosGraficos2($idusuario,1);
