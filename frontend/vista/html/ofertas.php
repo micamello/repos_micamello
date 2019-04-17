@@ -3,7 +3,7 @@
 	if(isset($filtro) && $vista == 'oferta'){ ?>
 		<div class="alert alert-warning col-md-12"> 
 			<form role="form" name="filtro" id="filtro" method="post" action="<?php echo PUERTO.'://'.HOST.'/'.$vista.'/'; ?>">
-			<?php if($filtro == 0){ ?>
+			<?php if($filtro == 1){ ?>
 				<h6><b>Las ofertas aqu&iacute; presentadas estan filtradas por las siguientes caracteristicas:</b></h6>
 
 				<?php if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){

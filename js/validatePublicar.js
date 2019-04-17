@@ -5,13 +5,13 @@ $(document).ready(function(){
     var id_plan = $('#planesSelect').val();
       var puerto_host = $('#puerto_host').val();
       if(id_plan != ""){
+        //console.log(id_plan);
         $.ajax({
           type: "GET",
-          url: puerto_host+"?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
+          url: puerto_host+"/index.php?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
           dataType:'json',
           success:function(data){
             mostrarDatosPlan(data);
-
           },
           error: function (request, status, error) {
             alert(request.responseText);

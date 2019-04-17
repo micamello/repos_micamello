@@ -195,22 +195,20 @@ class Controlador_Oferta extends Controlador_Base{
             }
 
             if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){
-
-              $filtro = 1;
-              $_SESSION['mfo_datos']['filtro'] = 0;
-              $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,false,false,$filtros);
-
-              //Para obtener la cantidad de registros totales de la consulta
-              $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,false,false,$filtros); 
-
-            }else{
-
               $filtro = 0;
               $_SESSION['mfo_datos']['filtro'] = 1;
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$cambioRes,$filtros);     
 
               //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,$areasInteres,$cambioRes,$filtros); 
+
+            }else{
+              $filtro = 1;
+              $_SESSION['mfo_datos']['filtro'] = 0;
+              $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,false,false,$filtros);
+
+              //Para obtener la cantidad de registros totales de la consulta
+              $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,false,false,$filtros);               
             }
 
           }else{
@@ -481,26 +479,24 @@ class Controlador_Oferta extends Controlador_Base{
 
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
-            }else{
+            }/*else{
               $_SESSION['mfo_datos']['filtro'] = FILTRO_PREFERENCIAS_DEFAULT;
-            }
+            } */                       
 
             if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){
-
               $filtro = 1;
               $_SESSION['mfo_datos']['filtro'] = 0;
+              $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$cambioRes);     
+
+              //Para obtener la cantidad de registros totales de la consulta
+              $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,$areasInteres,$cambioRes);                
+            }else{
+              $filtro = 0;
+              $_SESSION['mfo_datos']['filtro'] = 1;
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
 
               //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
-            }else{
-
-              $filtro = 0;
-              $_SESSION['mfo_datos']['filtro'] = 1;
-              $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$cambioRes);     
-
-              //Para obtener la cantidad de registros totales de la consulta
-              $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,$areasInteres,$cambioRes); 
             }
           }
           

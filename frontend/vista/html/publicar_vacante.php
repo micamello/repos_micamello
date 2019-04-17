@@ -10,10 +10,10 @@
 					<select name="planUsuario" id="planesSelect" class="form-control">
 						<!-- <option value="" selected="selected" disabled="disabled">Seleccione un plan</option> -->
 						<?php 
-						$funcionEnc = new Utils();
-							foreach ($planes as $plan) {
-								echo "<option value='".$funcionEnc->encriptar($plan['id_plan']."_".$plan['id_empresa_plan'])."'>Plan ".$plan['nombre']."</option>";
-							}
+						//$funcionEnc = new Utils();
+						foreach ($planes as $plan) {							
+							echo "<option value='".Utils::encriptar($plan['id_plan']."_".$plan['id_empresa_plan'])."'>Plan ".$plan['nombre']."</option>";
+						}
 						?>
 					</select>
 					<br>
