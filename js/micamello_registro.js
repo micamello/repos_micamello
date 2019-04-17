@@ -1,10 +1,16 @@
-$('#areaCand').multiple_select({
-	items: 2,
-    dependence: {
-      id_dependencia: "subareasCand",
-      items: false
-    }
-});
+if($('#fechaNac').length){
+    $('#fecha').DateTimePicker({
+    dateFormat: "yyyy-MM-dd",
+    shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+    shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+    titleContentDate: "Configurar fecha",
+    titleContentTime: "Configurar tiempo",
+    titleContentDateTime: "Configurar Fecha & Tiempo",
+    setButtonContent: "Listo",
+    clearButtonContent: "Limpiar"
+  });
+}
 
 var modal;
 var campos = [];
@@ -16,8 +22,6 @@ var correoCandEmp;
 var celularCandEmp;
 var tipoDoc;
 var documentoCandEmp;
-var areaCand;
-var subareasCand;
 var password_1;
 var password_2;
 var nombreConEmp;
@@ -33,8 +37,6 @@ function camposDelForm(){
 	celularCandEmp = "";
 	tipoDoc = "";
 	documentoCandEmp = "";
-	areaCand = "";
-	subareasCand = "";
 	password_1 = "";
 	password_2 = "";
 	nombreConEmp = "";
@@ -74,15 +76,6 @@ function camposDelForm(){
 		campos.push(documentoCandEmp);
 	}
 	// No empresa----------
-	if($('#areaCand').length){
-		areaCand = $('#areaCand');
-		campos.push(areaCand);
-	}
-
-	if($('#subareasCand').length){
-		subareasCand = $('#subareasCand');
-		campos.push(subareasCand);
-	}
 	// No empresa----------
 	if($('#password_1').length){
 		password_1 = $('#password_1');
@@ -178,9 +171,7 @@ function showTags(tags, tipo){
 				tags[i].prev().html('RUC <i class="obligatorio">*</i>');
 			}
 			if(tags[i].attr('id') == 'apellidosCand' ||
-				tags[i].attr('id') == 'tipoDoc' ||
-				tags[i].attr('id') == 'areaCand' ||
-				tags[i].attr('id') == 'subareasCand'){
+				tags[i].attr('id') == 'tipoDoc'){
 				tags[i].parents(':eq(1)').css('display', 'none');
 			}
 			else{
@@ -325,76 +316,86 @@ function validarOnSubmit(){
 		crearMensajeError(camposavalidar[5], "Rellene este campo");
 	}
 
-	if(tipo_usuario == 1){
-	// Campo areaCand-------------------------------------
-		if(camposavalidar[6].val() != ""){
-			eliminarMensajeError(camposavalidar[6], "");
-		}else{
-			crearMensajeError(camposavalidar[6], "Seleccione una opción");
-		}
-
-	// Campo subareasCand-------------------------------------
-		if(camposavalidar[7].val() != ""){
-			eliminarMensajeError(camposavalidar[7], "");
-		}else{
-			crearMensajeError(camposavalidar[7], "Seleccione una opción");
-		}
-	}
-
 // Campo password_1-------------------------------------
-	if(camposavalidar[8].val() != ""){
-		if(validarPassword(camposavalidar[8].val())){
-			if(!passwordCoinciden(camposavalidar[8], camposavalidar[9]) && camposavalidar[9].val() != ""){
-				crearMensajeError(camposavalidar[8], "Las contraseñas no coinciden");
-				crearMensajeError(camposavalidar[9], "Las contraseñas no coinciden");
+	if(camposavalidar[6].val() != ""){
+		if(validarPassword(camposavalidar[6].val())){
+			if(!passwordCoinciden(camposavalidar[6], camposavalidar[7]) && camposavalidar[7].val() != ""){
+				crearMensajeError(camposavalidar[6], "Las contraseñas no coinciden");
+				crearMensajeError(camposavalidar[7], "Las contraseñas no coinciden");
 			}
 			else{
-				// crearMensajeError(camposavalidar[8], "Ingrese una contraseña válida");
-				eliminarMensajeError(camposavalidar[8], "");
-				eliminarMensajeError(camposavalidar[9], "");
+				// crearMensajeError(camposavalidar[6], "Ingrese una contraseña válida");
+				eliminarMensajeError(camposavalidar[6], "");
+				eliminarMensajeError(camposavalidar[7], "");
 			}
 		}
 		else{
-			crearMensajeError(camposavalidar[8], "Ingrese una contraseña válida");
+			crearMensajeError(camposavalidar[6], "Ingrese una contraseña válida");
 		}
 	}else{
-		crearMensajeError(camposavalidar[8], "Rellene este campo");
+		crearMensajeError(camposavalidar[6], "Rellene este campo");
 	}
 
 // Campo password_2-------------------------------------
-	if(camposavalidar[9].val() != ""){
-		if(validarPassword(camposavalidar[9].val())){
-			if(!passwordCoinciden(camposavalidar[8], camposavalidar[9]) && camposavalidar[8].val() != ""){
-				crearMensajeError(camposavalidar[8], "Las contraseñas no coinciden");
-				crearMensajeError(camposavalidar[9], "Las contraseñas no coinciden");
+	if(camposavalidar[7].val() != ""){
+		if(validarPassword(camposavalidar[7].val())){
+			if(!passwordCoinciden(camposavalidar[6], camposavalidar[7]) && camposavalidar[6].val() != ""){
+				crearMensajeError(camposavalidar[6], "Las contraseñas no coinciden");
+				crearMensajeError(camposavalidar[7], "Las contraseñas no coinciden");
 			}
 			else{
-				// crearMensajeError(camposavalidar[8], "Ingrese una contraseña válida");
-				eliminarMensajeError(camposavalidar[8], "");
-				eliminarMensajeError(camposavalidar[9], "");
+				// crearMensajeError(camposavalidar[6], "Ingrese una contraseña válida");
+				eliminarMensajeError(camposavalidar[6], "");
+				eliminarMensajeError(camposavalidar[7], "");
 			}
 		}
 		else{
 			// eliminarMensajeError(camposavalidar[8], "");
-			crearMensajeError(camposavalidar[9], "Ingrese una contraseña válida");
+			crearMensajeError(camposavalidar[7], "Ingrese una contraseña válida");
 		}
 	}else{
-		crearMensajeError(camposavalidar[9], "Rellene este campo");
+		crearMensajeError(camposavalidar[7], "Rellene este campo");
 	}
 
-	if(!camposavalidar[14].is(':checked')){
-		crearMensajeError(camposavalidar[14], "Debe aceptar términos y condiciones");
+	if(!camposavalidar[12].is(':checked')){
+		crearMensajeError(camposavalidar[12], "Debe aceptar términos y condiciones");
 	}
 	else{
-		eliminarMensajeError(camposavalidar[14], "");
+		eliminarMensajeError(camposavalidar[12], "");
 	}
 
 	
 	if(tipo_usuario == 2){
 //nombreConEmp
+		if(camposavalidar[8].val() != ""){
+			if(!validarNombreApellido(camposavalidar[8].val())){
+				crearMensajeError(camposavalidar[8], "Ingrese un nombre válido");
+			}
+			else{
+				eliminarMensajeError(camposavalidar[8], "");
+			}
+		}
+		else{
+			crearMensajeError(camposavalidar[8], "Rellene este campo");
+		}
+
+//apellidoConEmp
+		if(camposavalidar[9].val() != ""){
+			if(!validarNombreApellido(camposavalidar[9].val())){
+				crearMensajeError(camposavalidar[9], "Ingrese un apellido válido");
+			}
+			else{
+				eliminarMensajeError(camposavalidar[9], "");
+			}
+		}
+		else{
+			crearMensajeError(camposavalidar[9], "Rellene este campo");
+		}
+
+//tel1ConEmp
 		if(camposavalidar[10].val() != ""){
-			if(!validarNombreApellido(camposavalidar[10].val())){
-				crearMensajeError(camposavalidar[10], "Ingrese un nombre válido");
+			if(!validarTelefono(camposavalidar[10].val())){
+				crearMensajeError(camposavalidar[10], "Ingrese un número válido");
 			}
 			else{
 				eliminarMensajeError(camposavalidar[10], "");
@@ -404,43 +405,17 @@ function validarOnSubmit(){
 			crearMensajeError(camposavalidar[10], "Rellene este campo");
 		}
 
-//apellidoConEmp
+//tel2ConEmp
 		if(camposavalidar[11].val() != ""){
-			if(!validarNombreApellido(camposavalidar[11].val())){
-				crearMensajeError(camposavalidar[11], "Ingrese un apellido válido");
+			if(!validarTelefono(camposavalidar[11].val())){
+				crearMensajeError(camposavalidar[11], "Ingrese un número válido");
 			}
 			else{
 				eliminarMensajeError(camposavalidar[11], "");
 			}
 		}
 		else{
-			crearMensajeError(camposavalidar[11], "Rellene este campo");
-		}
-
-//tel1ConEmp
-		if(camposavalidar[12].val() != ""){
-			if(!validarTelefono(camposavalidar[12].val())){
-				crearMensajeError(camposavalidar[12], "Ingrese un número válido");
-			}
-			else{
-				eliminarMensajeError(camposavalidar[12], "");
-			}
-		}
-		else{
-			crearMensajeError(camposavalidar[12], "Rellene este campo");
-		}
-
-//tel2ConEmp
-		if(camposavalidar[13].val() != ""){
-			if(!validarTelefono(camposavalidar[13].val())){
-				crearMensajeError(camposavalidar[13], "Ingrese un número válido");
-			}
-			else{
-				eliminarMensajeError(camposavalidar[13], "");
-			}
-		}
-		else{
-			eliminarMensajeError(camposavalidar[13], "");
+			eliminarMensajeError(camposavalidar[11], "");
 		}
 	}
 }
@@ -619,18 +594,6 @@ $('#modal_registro').on('show.bs.modal', function(){
 				crearMensajeError($(this), 'Rellene este campo');
 			}
 		})
-	}
-
-	if($('#subareasCand').length){
-		$('#subareasCand').on('change', function(){
-			if($(this).val() == ""){
-				crearMensajeError($(this), "Seleccione una opción");
-			}
-			else{
-				eliminarMensajeError($(this), "");
-				eliminarMensajeError($('#areaCand'), "");
-			}
-		});
 	}
 
 	if($('#password_1').length){

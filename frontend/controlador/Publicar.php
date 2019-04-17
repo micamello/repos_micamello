@@ -110,7 +110,7 @@ class Controlador_Publicar extends Controlador_Base {
   }
 
   public function validarCampos($datos){
-    if(Utils::getParam('registroOferta') == 1 ){
+    if(Utils::getParam('registroOferta') == 1){
       $campos = array('planUsuario'=>1,
                       'nombreOferta'=>1,
 
@@ -133,15 +133,15 @@ class Controlador_Publicar extends Controlador_Base {
                       'DispOf'=>1, 
                       'residenciaOf'=>1,
                       'discapacidadOf'=>1,
-                      'confidencialOf'=>1,
                       'edadMinOf'=>1,
                       'edadMaxOf'=>1);
       $datosReg = $this->camposRequeridos($campos);
       $planCombo = explode("_", Utils::desencriptar($datosReg['planUsuario']));
       $confidencial = 1;
-      if(!Modelo_PermisoPlan::busquedaPermisoxPlan($planCombo[0], 'publicarOferta')){
+      if(!Modelo_PermisoPlan::busquedaPermisoxPlan($planCombo[0], 'publicarOfertaConfidencial')){
         $confidencial = $_POST['confidencialOf'];
       }
+      $datosReg = array_merge($datosReg, array('confidencialOf'=>$confidencial));
 
       $plan = $_SESSION['mfo_datos']['planes'];
       $id_empresa = null;

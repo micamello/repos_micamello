@@ -97,40 +97,25 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Seleccione área</label>
-                  <select class="form-control" id="areaCand" name="areaCand[]" multiple="multiple">                    
-                    <?php 
-                    $i = 0;
-                      if(!empty($areasSubareas) && is_array($areasSubareas)){
-                        foreach ($areasSubareas as $area) {
-                          if($i != $area['id_area']){
-                            echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
-                            $i = $area['id_area'];
-                          }
-                        }
-                      }
-                     ?>
-                  </select>
-                  <div></div>
+                  <label>Fecha de nacimiento: </label>
+                  <input type="text" data-field="date" class="form-control" name="fechaNac" id="fechaNac">
+                  <div id="fecha"></div>
                 </div>
               </div>
-
+              
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Seleccione subárea</label>
-                  <select class="form-control" id="subareasCand" name="subareasCand[]" multiple="multiple">
-                    <?php                     
-                      if(!empty($areasSubareas) && is_array($areasSubareas)){
-                        foreach ($areasSubareas as $area) {
-                          if($j != $area['id_subareas']){
-                            echo "<option value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";                            
-                          }
+                  <label>Género: </label>
+                  <select class="form-control" name="generoUsuario" id="generoUsuario">
+                    <?php 
+                      if(!empty($genero)){
+                        foreach ($genero as $gen) {
+                          echo "<option value='".$gen['id_genero']."'>".$gen['descripcion']."</option>";
                         }
                       }
-                     ?>
+                    ?>
                   </select>
-                  <div></div>
-                </div>               
+                </div>
               </div>
 
               <!-- contraseña -->

@@ -13,6 +13,7 @@ class Controlador_Inicio extends Controlador_Base {
     $arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
     
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
@@ -22,10 +23,11 @@ class Controlador_Inicio extends Controlador_Base {
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg,
-                  'areasSubareas'=>$GLOBALS['areasSubareas']);
-
+                  'genero'=>$arrgenero);
+    $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "micamello_registro";
     
     $opcion = Utils::getParam('opcion','',$this->data);
