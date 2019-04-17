@@ -305,8 +305,7 @@ class Controlador_Oferta extends Controlador_Base{
           }
           
           $breadcrumbs[$vista] = 'Ofertas';
-          $breadcrumbs['detalleOferta'] = 'Ver detalle';
-          
+          $breadcrumbs['detalleOferta'] = 'Ver detalle';          
           $tags = array(
             'breadcrumbs'=>$breadcrumbs,
             'oferta'=> $oferta,
