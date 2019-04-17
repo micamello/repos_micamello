@@ -27,7 +27,7 @@ class Controlador_Login extends Controlador_Base {
           } 
           if ($usuario["estado"] != 1){
             throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electr\u00F3nico para activarlo o comuniquese con el administrador para su activaci\u00F3n");            
-          }
+          }          
           if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
             throw new Exception("Error en el sistema, por favor intente denuevo");
           }                                 

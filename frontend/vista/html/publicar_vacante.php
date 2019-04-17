@@ -113,18 +113,18 @@
 							<div class="form-group">
 								<label>Seleccione área</label>
 								<select class="form-control" name="area_select[]" id="area_select" multiple>
-							       	<?php 
-					                    $i = 0;
-					                    if(!empty($areasSubareas) && is_array($areasSubareas)){
-					                      foreach ($areasSubareas as $area) {
-					                        if($i != $area['id_area']){
-					                          echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
-					                            $i = $area['id_area'];
-					                        }
-					                      }
-					                    }
-				                    ?>
-							  	</select>
+				       	<?php 
+                $i = 0;                
+                if(!empty($areasSubareas) && is_array($areasSubareas)){
+                  foreach ($areasSubareas as $area) {
+                    if($i != $area['id_area']){
+                      echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
+                        $i = $area['id_area'];
+                    }
+                  }
+                }
+	              ?>
+							  </select>
 							</div>
 						</div>
 
@@ -282,11 +282,12 @@
 
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Licencia: </label>
+								<label>Tipo de Licencia: </label>
 								<select class="form-control" name="licenciaOf" id="licenciaOf">
+									<option value="0">Sin Licencia</option>
 									<?php 
-										foreach (REQUISITO as $key => $value) {
-											echo "<option value='".$key."'>".$value."</option>";
+										foreach ($tipolicencia as $key => $value) {
+											echo "<option value='".$value["id_tipolicencia"]."'>".$value["descripcion"]."</option>";
 										}
 									?>
 								</select>
