@@ -591,9 +591,7 @@
 							      </tr>
 							    </thead>
 				        		<tbody>
-						        	<?php 
-						        	//print_r($_SESSION['mfo_datos']['planSeleccionado']);
-									//print_r($_SESSION['mfo_datos']['usuarioSeleccionado']); 
+						        	<?php 						        	
 						        	if(!empty($aspirantes)){ 
 				
 						        		for ($i=0; $i < count($aspirantes); $i++) { 

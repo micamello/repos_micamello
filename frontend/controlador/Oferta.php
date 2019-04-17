@@ -540,11 +540,11 @@ class Controlador_Oferta extends Controlador_Base{
     public function guardarDescripcion($idOferta){
       try{
           if (!Modelo_Oferta::guardarDescripcion($idOferta,str_replace('"', "'", $_POST['des_of']))) {
-              throw new Exception("Ha ocurrido un error al guardar la descripcion, intente nuevamente");
+              throw new Exception("Ha ocurrido un error al guardar la descripci\u00F3n, intente nuevamente");
           }
           $GLOBALS['db']->commit();
           $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
-          $_SESSION['mostrar_exito'] = 'La descripci\u00f3n fue editada exitosamente, debe esperar un máximo de '.$tiempo.' horas para que el administrador apruebe el nuevo contenido.';
+          $_SESSION['mostrar_exito'] = 'La descripci\u00f3n fue editada exitosamente, debe esperar un m\u00E1ximo de '.$tiempo.' horas para que el administrador apruebe el nuevo contenido.';
       }catch (Exception $e) {
           $_SESSION['mostrar_error'] = $e->getMessage();
           $GLOBALS['db']->rollback();
@@ -574,10 +574,10 @@ class Controlador_Oferta extends Controlador_Base{
     public function guardarEstatus($id_usuario,$id_oferta,$resultado){
       try{
           if (!Modelo_Postulacion::cambiarEstatus($id_usuario,$id_oferta,$resultado)) {
-              throw new Exception("Ha ocurrido un error en el cambio de estatus, intente nuevamente");
+              throw new Exception("Ha ocurrido un error en el cambio de estado, intente nuevamente");
           }
           $GLOBALS['db']->commit();
-          $_SESSION['mostrar_exito'] = 'El estatus de la oferta fue editado exitosamente';
+          $_SESSION['mostrar_exito'] = 'El estado de la oferta fue editado exitosamente';
       }catch (Exception $e) {
           $_SESSION['mostrar_error'] = $e->getMessage();
           $GLOBALS['db']->rollback();
