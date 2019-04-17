@@ -30,12 +30,11 @@ class Controlador_Publicar extends Controlador_Base {
         Vista::renderJSON($arrciudad);
       break;
       case 'buscaPlan':
-        $id_plan_empresa = Utils::getParam('id_plan', '', $this->data);
-        $explodePlanEmpresa = explode("_", Utils::desencriptar($id_plan_empresa));
+        $id_plan_empresa = Utils::getParam('id_plan', '', $this->data);        
+        $explodePlanEmpresa = explode("_", Utils::desencriptar($id_plan_empresa));                
         $id_plan = $explodePlanEmpresa[0];
-        $id_empresa_plan = $explodePlanEmpresa[1];
-        $plan = Modelo_UsuarioxPlan::consultarRecursosAretornar($id_empresa_plan);
-        Utils::log(print_r($plan, true));
+        $id_empresa_plan = $explodePlanEmpresa[1];                
+        $plan = Modelo_UsuarioxPlan::consultarRecursosAretornar($id_empresa_plan);           
         $confidencialPlan = array();
         if(Modelo_PermisoPlan::busquedaPermisoxPlan($id_plan, 'publicarOfertaConfidencial')){
           $confidencialPlan = array_merge($plan, array('confidencial'=>0));
@@ -142,7 +141,7 @@ class Controlador_Publicar extends Controlador_Base {
         $confidencial = $_POST['confidencialOf'];
       }
       $datosReg = array_merge($datosReg, array('confidencialOf'=>$confidencial));
-
+      
       $plan = $_SESSION['mfo_datos']['planes'];
       $id_empresa = null;
       $id_empresa_plan = null;
@@ -272,6 +271,7 @@ class Controlador_Publicar extends Controlador_Base {
                             'estado'=>0,
                             'fecha_creado'=>$fechaActual,
                             'tipo'=>$datos['ofertaUrgenteOf'],
+                            'primer_empleo'=>$datos['primerEmpleoOf'],
                             'id_jornada'=>$datos['jornadaOf'],
                             'id_ciudad'=>$datos['ciudadOf'],
                             'id_requisitoOferta'=>$id_requisitoOferta,

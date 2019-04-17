@@ -275,7 +275,7 @@ class Utils{
     return $mail->send(); 
   }
 
-  public static function encriptar($texto){    
+  public static function encriptar($texto){      
     $objaes = new Aes(KEY_ENCRIPTAR);
     $encriptado = $objaes->encrypt($texto);
     return bin2hex($encriptado);

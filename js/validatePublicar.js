@@ -2,16 +2,16 @@ $('#confidencialOf').parents(':eq(1)').css('display', 'none');
 $('#confidencialObligatory').css('display', 'none');
 
 $(document).ready(function(){
-    var id_plan = $('#planes').val();
+    var id_plan = $('#planesSelect').val();
       var puerto_host = $('#puerto_host').val();
       if(id_plan != ""){
+        //console.log(id_plan);
         $.ajax({
           type: "GET",
-          url: puerto_host+"?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
+          url: puerto_host+"/index.php?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
           dataType:'json',
           success:function(data){
             mostrarDatosPlan(data);
-
           },
           error: function (request, status, error) {
             alert(request.responseText);
@@ -897,9 +897,9 @@ function validarFormError(){
     return errors;
 }
 
-// eventos planes
+// eventos planesSelect
 
-$('#planes').on('change', function(){
+$('#planesSelect').on('change', function(){
     var id_plan = $(this).val();
       var puerto_host = $('#puerto_host').val();
       if(id_plan != ""){

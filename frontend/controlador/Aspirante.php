@@ -23,7 +23,8 @@ class Controlador_Aspirante extends Controlador_Base
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
         $page = Utils::getParam('page', '1', $this->data);
-        $id_oferta = Utils::desencriptar(Utils::getParam('id_oferta', '', $this->data)); 
+        $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
+        $id_oferta = (!empty($id_oferta)) ? Utils::desencriptar($id_oferta) : $id_oferta;        
         $type = Utils::getParam('type', '', $this->data); 
         $vista = Utils::getParam('vista', '', $this->data);
         $username = Utils::getParam('username', '', $this->data);
@@ -358,15 +359,15 @@ class Controlador_Aspirante extends Controlador_Base
             break;
 
             case 'buscarCantdAccesos':
-                $idPlan = Utils::desencriptar(Utils::getParam('idPlan', '', $this->data));
-                $cantd = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario,$idPlan);
-
-                if(!empty($cantd)){
-                    $cantd_accesos_restantes = array('cantd'=>$cantd[0]['num_accesos_rest']);
-                }else{
-                    $cantd_accesos_restantes = array('cantd'=>0);
-                }
-                Vista::renderJSON($cantd_accesos_restantes);
+              $idPlan = Utils::getParam('idPlan', '', $this->data);
+              $idPlan = (!empty($idPlan)) ? Utils::desencriptar($idPlan) : $idPlan;                 
+              $cantd = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario,$idPlan);
+              if(!empty($cantd)){
+                $cantd_accesos_restantes = array('cantd'=>$cantd[0]['num_accesos_rest']);
+              }else{
+                $cantd_accesos_restantes = array('cantd'=>0);
+              }
+              Vista::renderJSON($cantd_accesos_restantes);
             break;
 
             case 'guardarUsuariosSeleccionados':
@@ -436,8 +437,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                     $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,false);
                     $paises = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,true); 
-                    $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);
-                    
+                    $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);                    
                     $limite_aspirantes = count($paises);
 
                     $nombre_plan = '';
@@ -477,7 +477,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'page' => $page,
                     'mostrar'=>$mostrar,
                     'vista'=>$vista,
-                    'id_oferta'=>Utils::encriptar($id_oferta),
+                    'id_oferta'=> (!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta,
                     'datosOfertas'=>$datosOfertas,
                     'array_empresas'=>$array_empresas,
                     'posibilidades'=>$posibilidades,
@@ -497,10 +497,8 @@ class Controlador_Aspirante extends Controlador_Base
                 
                 $tags["template_css"][] = "ion.rangeSlider";
                 $tags["template_css"][] = "ion.rangeSlider.skinModern";
-
-                //echo '<br>limite_plan: '.$limite_plan; 
-                //echo '<br>limite_aspirantes: '.$limite_aspirantes; 
-                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta);
+                
+                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta);
                 $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
