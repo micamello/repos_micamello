@@ -2,7 +2,7 @@ $('#confidencialOf').parents(':eq(1)').css('display', 'none');
 $('#confidencialObligatory').css('display', 'none');
 
 $(document).ready(function(){
-    var id_plan = $('#planes').val();
+    var id_plan = $('#planesSelect').val();
       var puerto_host = $('#puerto_host').val();
       if(id_plan != ""){
         $.ajax({
@@ -897,9 +897,9 @@ function validarFormError(){
     return errors;
 }
 
-// eventos planes
+// eventos planesSelect
 
-$('#planes').on('change', function(){
+$('#planesSelect').on('change', function(){
     var id_plan = $(this).val();
       var puerto_host = $('#puerto_host').val();
       if(id_plan != ""){

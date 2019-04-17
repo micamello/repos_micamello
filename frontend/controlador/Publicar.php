@@ -142,7 +142,8 @@ class Controlador_Publicar extends Controlador_Base {
         $confidencial = $_POST['confidencialOf'];
       }
       $datosReg = array_merge($datosReg, array('confidencialOf'=>$confidencial));
-
+      print_r($datosReg);
+      exit();
       $plan = $_SESSION['mfo_datos']['planes'];
       $id_empresa = null;
       $id_empresa_plan = null;
