@@ -26,7 +26,7 @@ class Controlador_Inicio extends Controlador_Base {
                   'genero'=>$arrgenero);
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
-    $tags["template_js"][] = "multiple_select";
+    // $tags["template_js"][] = "multiple_select";
     $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "micamello_registro";
     

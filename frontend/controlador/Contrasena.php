@@ -59,9 +59,11 @@ class Controlador_Contrasena extends Controlador_Base {
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
     } 
-    $tags["areasSubareas"] = $GLOBALS['areasSubareas'];
+    // $tags["areasSubareas"] = $GLOBALS['areasSubareas'];
+    $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
-    $tags["template_js"][] = "multiple_select";
+    // $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "micamello_registro";     
     Vista::render('confirmar_password', $tags);     
   }
@@ -98,10 +100,9 @@ class Controlador_Contrasena extends Controlador_Base {
       }
     }
     
-    // $tags = array('social'=>$social_reg);
-    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas']);
+    $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
-    $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "micamello_registro";
     Vista::render('recuperar_password', $tags);  
   } 
