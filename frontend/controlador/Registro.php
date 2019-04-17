@@ -37,6 +37,9 @@ class Controlador_Registro extends Controlador_Base {
         }
         if($_POST['tipo_usuario'] == 2){
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1, 'nombreConEmp'=>1, 'apellidoConEmp'=>1, 'tel1ConEmp'=>1);
+          if(isset($_POST['tel2ConEmp']) && $_POST['tel2ConEmp'] != ""){
+            $campos = array_merge($campos, array('tel2ConEmp'=>1));
+          }
         }        
         $datosReg = $this->camposRequeridos($campos);
         $datosValidos = self::validarCamposReg($datosReg);
@@ -92,6 +95,22 @@ class Controlador_Registro extends Controlador_Base {
       }
     }
 
+    if(!Utils::validarTelefono($datosReg['celularCandEmp'])){
+      throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+    }
+
+    if($datosReg['tipo_usuario'] == 2){
+      if(!Utils::validarTelefono($datosReg['tel1ConEmp'])){
+        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+      }
+
+      if(isset($datosReg['tel2ConEmp'])){
+        if(!Utils::validarTelefonoConvencional($datosReg['tel2ConEmp'])){
+          throw new Exception("Ingrese un número de teléfono convencional válido (entre 6 o 15 dígitos)");
+        }
+      }
+    }
+
     if(Modelo_Usuario::existeDni($datosReg['documentoCandEmp'])){
       throw new Exception("El documento ingresado ya existe");
     }
@@ -122,9 +141,6 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function guardarDatosUsuario($datosValidos){
-    $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
-    $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListado();
-    $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil[0]['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral[0]['id_situacionlaboral']));
     $data = array(); $id_usuario = "";    
     $usuario_login = array("tipo_usuario"=>$datosValidos['tipo_usuario'], "username"=>$datosValidos['username'], 
                            "password"=>$datosValidos['password_1'], "correo"=>$datosValidos['correoCandEmp'], "dni"=>$datosValidos['documentoCandEmp'], "tipo_registro"=>2);
@@ -138,6 +154,9 @@ class Controlador_Registro extends Controlador_Base {
     $ciudadDefault = Modelo_Sucursal::obtieneCiudadDefault();    
     // usuario tipo candidato
     if($datosValidos['tipo_usuario'] == 1){
+      $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
+      $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListado();
+      $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil[0]['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral[0]['id_situacionlaboral']));
       $escolaridad = Modelo_Escolaridad::obtieneListado();
       $data = array(
                     "nombres"=>$datosValidos['nombresCandEmp'], /*data -----*/
