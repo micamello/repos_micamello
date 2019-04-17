@@ -22,6 +22,8 @@ var correoCandEmp;
 var celularCandEmp;
 var tipoDoc;
 var documentoCandEmp;
+var fechaNac;
+var generoUsuario;
 var password_1;
 var password_2;
 var nombreConEmp;
@@ -76,6 +78,15 @@ function camposDelForm(){
 		campos.push(documentoCandEmp);
 	}
 	// No empresa----------
+	if($('#fechaNac').length){
+		fechaNac = $('#fechaNac');
+		campos.push(fechaNac);
+	}
+
+	if($('#generoUsuario').length){
+		generoUsuario = $('#generoUsuario');
+		campos.push(generoUsuario);
+	}
 	// No empresa----------
 	if($('#password_1').length){
 		password_1 = $('#password_1');
@@ -121,15 +132,34 @@ function camposDelForm(){
 $('#regCandMic').on('click', function(){
 	$('#tipo_usuario').val(1);
 	var tags = camposDelForm();
+	if(campos[6].length){
+		inicializarDatePickerFecha('fechaShow');
+	}
+	console.log(campos);
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 1);
 	riseModal();
 });
 
+function inicializarDatePickerFecha(divCampo){
+	$('#'+divCampo).DateTimePicker({
+	    dateFormat: "yyyy-MM-dd",
+	    shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+	    shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+	    fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
+	    titleContentDate: "Configurar fecha",
+	    titleContentTime: "Configurar tiempo",
+	    titleContentDateTime: "Configurar Fecha & Tiempo",
+	    setButtonContent: "Listo",
+	    clearButtonContent: "Limpiar"
+	  });
+}
+
 $('#regEmpMic').on('click', function(){
 	$('#tipo_usuario').val(2);
 	$('#tipo_documentacion').val(1);
 	var tags = camposDelForm();
+	console.log(campos);
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 2);
 	riseModal();
@@ -171,7 +201,9 @@ function showTags(tags, tipo){
 				tags[i].prev().html('RUC <i class="obligatorio">*</i>');
 			}
 			if(tags[i].attr('id') == 'apellidosCand' ||
-				tags[i].attr('id') == 'tipoDoc'){
+				tags[i].attr('id') == 'tipoDoc' ||
+				tags[i].attr('id') == 'fechaNac' ||
+				tags[i].attr('id') == 'generoUsuario'){
 				tags[i].parents(':eq(1)').css('display', 'none');
 			}
 			else{
@@ -316,86 +348,85 @@ function validarOnSubmit(){
 		crearMensajeError(camposavalidar[5], "Rellene este campo");
 	}
 
+	if(tipo_usuario == 1){
+		// Campo fechaNac-------------------------------------
+		if(camposavalidar[6].val() != ""){
+			if(validarFormatoFecha(camposavalidar[6].val())){
+				if(!calcularEdad(camposavalidar[6].val())){
+					crearMensajeError(camposavalidar[6], "Debe ser mayor de edad");
+				}
+				else{
+					eliminarMensajeError(camposavalidar[6], "");
+				}
+			}
+			else{
+				crearMensajeError(camposavalidar[6], "Ingrese una fecha válida");
+			}
+		}else{
+			crearMensajeError(camposavalidar[6], "Rellene este campo");
+		}
+
+	// Campo generoUsuario-------------------------------------
+		if(camposavalidar[7].val() == "" || camposavalidar[7].val() == null){
+			crearMensajeError(camposavalidar[7], "Seleccione una opción");
+		}else{
+			eliminarMensajeError(camposavalidar[7], "");
+		}
+	}
 // Campo password_1-------------------------------------
-	if(camposavalidar[6].val() != ""){
-		if(validarPassword(camposavalidar[6].val())){
-			if(!passwordCoinciden(camposavalidar[6], camposavalidar[7]) && camposavalidar[7].val() != ""){
-				crearMensajeError(camposavalidar[6], "Las contraseñas no coinciden");
-				crearMensajeError(camposavalidar[7], "Las contraseñas no coinciden");
+	if(camposavalidar[8].val() != ""){
+		if(validarPassword(camposavalidar[8].val())){
+			if(!passwordCoinciden(camposavalidar[8], camposavalidar[9]) && camposavalidar[9].val() != ""){
+				crearMensajeError(camposavalidar[8], "Las contraseñas no coinciden");
+				crearMensajeError(camposavalidar[9], "Las contraseñas no coinciden");
 			}
 			else{
 				// crearMensajeError(camposavalidar[6], "Ingrese una contraseña válida");
-				eliminarMensajeError(camposavalidar[6], "");
-				eliminarMensajeError(camposavalidar[7], "");
+				eliminarMensajeError(camposavalidar[8], "");
+				eliminarMensajeError(camposavalidar[9], "");
 			}
 		}
 		else{
-			crearMensajeError(camposavalidar[6], "Ingrese una contraseña válida");
+			crearMensajeError(camposavalidar[8], "Ingrese una contraseña válida");
 		}
 	}else{
-		crearMensajeError(camposavalidar[6], "Rellene este campo");
+		crearMensajeError(camposavalidar[8], "Rellene este campo");
 	}
 
 // Campo password_2-------------------------------------
-	if(camposavalidar[7].val() != ""){
-		if(validarPassword(camposavalidar[7].val())){
-			if(!passwordCoinciden(camposavalidar[6], camposavalidar[7]) && camposavalidar[6].val() != ""){
-				crearMensajeError(camposavalidar[6], "Las contraseñas no coinciden");
-				crearMensajeError(camposavalidar[7], "Las contraseñas no coinciden");
+	if(camposavalidar[9].val() != ""){
+		if(validarPassword(camposavalidar[9].val())){
+			if(!passwordCoinciden(camposavalidar[8], camposavalidar[9]) && camposavalidar[8].val() != ""){
+				crearMensajeError(camposavalidar[8], "Las contraseñas no coinciden");
+				crearMensajeError(camposavalidar[9], "Las contraseñas no coinciden");
 			}
 			else{
-				// crearMensajeError(camposavalidar[6], "Ingrese una contraseña válida");
+				// crearMensajeError(camposavalidar[8], "Ingrese una contraseña válida");
 				eliminarMensajeError(camposavalidar[6], "");
-				eliminarMensajeError(camposavalidar[7], "");
+				eliminarMensajeError(camposavalidar[9], "");
 			}
 		}
 		else{
 			// eliminarMensajeError(camposavalidar[8], "");
-			crearMensajeError(camposavalidar[7], "Ingrese una contraseña válida");
+			crearMensajeError(camposavalidar[9], "Ingrese una contraseña válida");
 		}
 	}else{
-		crearMensajeError(camposavalidar[7], "Rellene este campo");
+		crearMensajeError(camposavalidar[9], "Rellene este campo");
 	}
 
-	if(!camposavalidar[12].is(':checked')){
-		crearMensajeError(camposavalidar[12], "Debe aceptar términos y condiciones");
+	if(!camposavalidar[14].is(':checked')){
+		crearMensajeError(camposavalidar[14], "Debe aceptar términos y condiciones");
 	}
 	else{
-		eliminarMensajeError(camposavalidar[12], "");
+		eliminarMensajeError(camposavalidar[14], "");
 	}
 
 	
 	if(tipo_usuario == 2){
 //nombreConEmp
-		if(camposavalidar[8].val() != ""){
-			if(!validarNombreApellido(camposavalidar[8].val())){
-				crearMensajeError(camposavalidar[8], "Ingrese un nombre válido");
-			}
-			else{
-				eliminarMensajeError(camposavalidar[8], "");
-			}
-		}
-		else{
-			crearMensajeError(camposavalidar[8], "Rellene este campo");
-		}
-
-//apellidoConEmp
-		if(camposavalidar[9].val() != ""){
-			if(!validarNombreApellido(camposavalidar[9].val())){
-				crearMensajeError(camposavalidar[9], "Ingrese un apellido válido");
-			}
-			else{
-				eliminarMensajeError(camposavalidar[9], "");
-			}
-		}
-		else{
-			crearMensajeError(camposavalidar[9], "Rellene este campo");
-		}
-
-//tel1ConEmp
 		if(camposavalidar[10].val() != ""){
-			if(!validarTelefono(camposavalidar[10].val())){
-				crearMensajeError(camposavalidar[10], "Ingrese un número válido");
+			if(!validarNombreApellido(camposavalidar[10].val())){
+				crearMensajeError(camposavalidar[10], "Ingrese un nombre válido");
 			}
 			else{
 				eliminarMensajeError(camposavalidar[10], "");
@@ -405,17 +436,43 @@ function validarOnSubmit(){
 			crearMensajeError(camposavalidar[10], "Rellene este campo");
 		}
 
-//tel2ConEmp
+//apellidoConEmp
 		if(camposavalidar[11].val() != ""){
-			if(!validarTelefono(camposavalidar[11].val())){
-				crearMensajeError(camposavalidar[11], "Ingrese un número válido");
+			if(!validarNombreApellido(camposavalidar[11].val())){
+				crearMensajeError(camposavalidar[11], "Ingrese un apellido válido");
 			}
 			else{
 				eliminarMensajeError(camposavalidar[11], "");
 			}
 		}
 		else{
-			eliminarMensajeError(camposavalidar[11], "");
+			crearMensajeError(camposavalidar[11], "Rellene este campo");
+		}
+
+//tel1ConEmp
+		if(camposavalidar[12].val() != ""){
+			if(!validarTelefono(camposavalidar[12].val())){
+				crearMensajeError(camposavalidar[12], "Ingrese un número válido");
+			}
+			else{
+				eliminarMensajeError(camposavalidar[12], "");
+			}
+		}
+		else{
+			crearMensajeError(camposavalidar[12], "Rellene este campo");
+		}
+
+//tel2ConEmp
+		if(camposavalidar[13].val() != ""){
+			if(!validarTelefono(camposavalidar[13].val())){
+				crearMensajeError(camposavalidar[13], "Ingrese un número válido");
+			}
+			else{
+				eliminarMensajeError(camposavalidar[13], "");
+			}
+		}
+		else{
+			eliminarMensajeError(camposavalidar[13], "");
 		}
 	}
 }
@@ -596,6 +653,38 @@ $('#modal_registro').on('show.bs.modal', function(){
 		})
 	}
 
+	if($('#fechaNac').length){
+		$('#fechaNac').on('blur', function(){
+			if($(this).val() != ""){
+				if(validarFormatoFecha($(this).val())){
+					if(!calcularEdad($(this).val())){
+						crearMensajeError($(this), "Debe ser mayor de edad");
+					}
+					else{
+						eliminarMensajeError($(this), "");
+					}
+				}
+				else{
+					crearMensajeError($(this), "Ingrese una fecha válida");
+				}
+			}
+			else{
+				crearMensajeError($(this), "Rellene este campo");
+			}
+		})
+	}
+
+	if($('#generoUsuario').length){
+		$('#generoUsuario').on('change blur', function(){
+			if($(this).val() == "" || $(this).val() == null){
+				crearMensajeError($(this), "Seleccione una opción");
+			}
+			else{
+				eliminarMensajeError($(this), "");
+			}
+		});
+	}
+
 	if($('#password_1').length){
 		$('#password_1').on('blur', function(){
 			if($(this).val() != ""){
@@ -740,6 +829,12 @@ function crearMensajeError(obj, mensaje){
 		$(obj).next().text(mensaje);
 		return false;
 	}
+	if(obj.attr('id') == "fechaNac"){
+		$(obj).next().next().attr('class', 'error_class ahashakeheartache');
+		$(obj).addClass('error_input');
+		$(obj).next().next().text(mensaje);
+		return false;
+	}
 	if($(obj).length){
 		$(obj).addClass('error_input');
 		$(obj).next().attr('class', 'error_class ahashakeheartache');
@@ -751,6 +846,13 @@ function eliminarMensajeError(obj, mensaje){
 	if(obj.attr('class') == "terminosCond"){
 		$(obj).parent().next().removeAttr('class', 'error_class_2 ahashakeheartache');
 		$(obj).parent().next().text("");
+		return false;
+	}
+
+	if(obj.attr('id') == "fechaNac"){
+		console.log($(obj).next().next().removeAttr('class'));
+		$(obj).removeClass('error_input');
+		$(obj).next().next().text("");
 		return false;
 	}
 
@@ -843,6 +945,7 @@ function checkErrors(){
 	var error_2 = $('.error_class');
 	var error_3 = $('.error_class_1');
 	var error_4 = $('.error_class_2');
+	console.log(error_4.length);
 	// var error_5 = $('.error');
 	if(error_1.length == 0 && error_2.length == 0 && error_3.length == 0 && error_4.length == 0){
 		return true;
@@ -850,4 +953,58 @@ function checkErrors(){
 	else{
 		return false;
 	}
+}
+
+
+function calcularEdad(contenido){
+    // Si la fecha es correcta, calculamos la edad
+    var values=contenido.split("-");
+    var dia = values[2];
+    var mes = values[1];
+    var ano = values[0];
+    // cogemos los valores actuales
+    var fecha_hoy = new Date();
+    var ahora_ano = fecha_hoy.getYear();
+    var ahora_mes = fecha_hoy.getMonth()+1;
+    var ahora_dia = fecha_hoy.getDate();
+    // realizamos el calculo
+    var edad = (ahora_ano + 1900) - ano;
+
+    if ( ahora_mes < mes )
+    {
+        edad--;
+    }
+    if ((mes == ahora_mes) && (ahora_dia < dia))
+    {
+        edad--;
+    }
+    if (edad > 1900)
+    {
+        edad -= 1900;
+    }
+
+    if(edad >= 18){
+        
+        return true;
+
+    }else{
+        return false;
+    }
+}
+
+function validarFormatoFecha(campo) {
+  var RegExPattern = /^\d{1,2}-\d{1,2}-\d{4}$/;
+  var values = campo.split("-");
+  var dia = parseInt(values[2]);
+  var mes = parseInt(values[1]);
+  var ano = parseInt(values[0]);
+  console.log(dia+"-"+mes+"-"+ano);
+
+  if((dia <= 0 || dia > 31) || (mes <= 0 || mes > 12) || (ano <= 1500 || ano > 2099)){
+    return false;
+  }else if ((RegExPattern.test(dia+"-"+mes+"-"+ano)) && (campo!='')) {
+    return true;
+  } else {
+    return false;
+  }
 }

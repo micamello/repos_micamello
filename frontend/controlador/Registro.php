@@ -33,7 +33,7 @@ class Controlador_Registro extends Controlador_Base {
     if ( Utils::getParam('formularioRegistro') == 1 ){
       try {        
         if($_POST['tipo_usuario'] == 1){
-          $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'apellidosCand'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'tipoDoc'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1);
+          $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'apellidosCand'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'tipoDoc'=>1, 'documentoCandEmp'=>1, 'fechaNac'=>1, 'generoUsuario'=>1, 'password_1'=>1, 'password_2'=>1);
         }
         if($_POST['tipo_usuario'] == 2){
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1, 'nombreConEmp'=>1, 'apellidoConEmp'=>1, 'tel1ConEmp'=>1);
@@ -74,14 +74,24 @@ class Controlador_Registro extends Controlador_Base {
     if(Modelo_Usuario::existeCorreo($datosReg['correoCandEmp'])){
       throw new Exception("El correo ingresado ya existe");
     }
-    if($datosReg['tipo_usuario'] == 1){
+
       if (method_exists(new Utils, 'validar_'.$iso)){
         $function = 'validar_'.$iso;
         if(!Utils::$function($datosReg['documentoCandEmp'])){
           throw new Exception("El documento ingresado no es v\u00E1lido");
         }
       }
+
+    if($datosReg['tipo_usuario'] == 1){
+      if(!Utils::valida_fecha($datosReg['fechaNac'])){
+        throw new Exception("Ingrese una fecha válida");
+      }
+
+      if(!Utils::valida_fecha_mayor_edad($datosReg['fechaNac'])){
+        throw new Exception("Debe ser mayor de edad");
+      }
     }
+
     if(Modelo_Usuario::existeDni($datosReg['documentoCandEmp'])){
       throw new Exception("El documento ingresado ya existe");
     }
@@ -112,15 +122,25 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function guardarDatosUsuario($datosValidos){
+    // $datosDefaultNew = array();
+    $id_estadocivil = Modelo_EstadoCivil::obtenerListadoEstadoCivil();
+    $id_situacionlaboral = Modelo_SituacionLaboral::obtenerListadoSituacionLaboral();
+    // $datosDefaultNew = array_merge('id_estadocivil'=>$id_estadocivil, 'id_situacionlaboral'=>$id_situacionlaboral);
+    $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral['id_situacionlaboral']));
+    // var_dump($datosValidos);
+    // exit();
     $data = array(); $id_usuario = "";    
     $usuario_login = array("tipo_usuario"=>$datosValidos['tipo_usuario'], "username"=>$datosValidos['username'], 
-                           "password"=>$datosValidos['password_1'], "correo"=>$datosValidos['correoCandEmp'], "dni"=>$datosValidos['documentoCandEmp']);
+                           "password"=>$datosValidos['password_1'], "correo"=>$datosValidos['correoCandEmp'], "dni"=>$datosValidos['documentoCandEmp'], "tipo_registro"=>2);
     if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){      
       throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
     }
     $id_usuario_login = $GLOBALS['db']->insert_id();
+    // print_r($datosValidos);
+    // exit();
     $fechaDefault = date("Y-m-d H:i:s");
-    $fechaNacimientoDefault = date("Y-m-d H:i:s",strtotime($fechaDefault."- 18 year")); /*Debe ser mayor de edad fecha default*/
+    $fechaNacimientoDefault = date("Y-m-d H:i:s",strtotime($fechaDefault."- 18 year")); 
+    /*Debe ser mayor de edad fecha default*/
     $ciudadDefault = Modelo_Sucursal::obtieneCiudadDefault();    
     // usuario tipo candidato
     if($datosValidos['tipo_usuario'] == 1){
@@ -129,22 +149,25 @@ class Controlador_Registro extends Controlador_Base {
                     "nombres"=>$datosValidos['nombresCandEmp'], /*data -----*/
                       "apellidos"=>$datosValidos['apellidosCand'],/*data -----*/
                       "telefono"=>$datosValidos['celularCandEmp'],/*data -----*/
-                      "fecha_nacimiento"=>$fechaNacimientoDefault, /* -----*/
+                      "fecha_nacimiento"=>$datosValidos['fechaNac'], /* -----*/
                       "fecha_creacion"=>$fechaDefault,/* -----*/
                       "estado"=>0,
                       "term_cond"=>1,/*data*/
                       "id_ciudad"=>$ciudadDefault['id_ciudad'],/**/
-                      "ultima_sesion"=>$fechaDefault,/* -----*/
                       "id_nacionalidad"=>SUCURSAL_PAISID,/*--*/
                       "tipo_doc"=>$datosValidos['tipo_documentacion'],/*data*/
                       "id_escolaridad"=>$escolaridad[0]['id_escolaridad'],/**/
-                      "genero"=>'M',/*--*/
+                      "genero"=>$datosValidos['generoUsuario'],/*--*/
                       "id_usuario_login"=>$id_usuario_login, 
-                      "tipo_usuario"=>$datosValidos['tipo_usuario']);/**/
+                      "tipo_usuario"=>$datosValidos['tipo_usuario'],
+                      "id_estadocivil"=>$datosValidos['id_estadocivil'],
+                      "id_situacionlaboral"=>$datosValidos['id_situacionlaboral']);/**/
       if(!Modelo_Usuario::crearUsuario($data)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
       $id_usuario = $GLOBALS['db']->insert_id();
+      // print_r($id_usuario);
+      // exit();
     }
     else{
       $data = array("nombres"=>$datosValidos['nombresCandEmp'],
@@ -154,7 +177,6 @@ class Controlador_Registro extends Controlador_Base {
                     "estado"=>0,
                     "term_cond"=>1,
                     "id_ciudad"=>$ciudadDefault['id_ciudad'],
-                    "ultima_sesion"=>$fechaDefault,
                     "id_nacionalidad"=>SUCURSAL_PAISID,
                     "id_usuario_login"=>$id_usuario_login, 
                     "tipo_usuario"=>$datosValidos['tipo_usuario']);
@@ -216,6 +238,14 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function registroRedSocial($correo,$nombre,$apellido){
+    $id_estadocivil = Modelo_EstadoCivil::obtenerListadoEstadoCivil();
+    $id_situacionlaboral = Modelo_SituacionLaboral::obtenerListadoSituacionLaboral();
+    $id_genero = Modelo_Genero::obtenerListadoGenero();
+    $id_genero = $id_genero[0]['id_genero'];
+    // $datosDefaultNew = array_merge('id_estadocivil'=>$id_estadocivil, 'id_situacionlaboral'=>$id_situacionlaboral);
+    $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral['id_situacionlaboral']));
+
+
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $escolaridad = Modelo_Escolaridad::obtieneListado();
     $campo_fecha = date("Y-m-d H:i:s");
@@ -233,7 +263,7 @@ class Controlador_Registro extends Controlador_Base {
       $password = Utils::generarPassword();
       $userdata['email'] = strtolower($correo);
       $usuario_login = array("tipo_usuario"=>Modelo_Usuario::CANDIDATO, "username"=>$username, 
-                             "password"=>$password, "correo"=>$correo, "dni"=>0);
+                             "password"=>$password, "correo"=>$correo, "dni"=>0, 'tipo_registro'=>3);
       if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
         throw new Exception("Ha ocurrido un error, por favor intente denuevo");
       }
@@ -241,8 +271,9 @@ class Controlador_Registro extends Controlador_Base {
       $dato_registro = array("telefono"=>"-", "nombres"=>$nombre, "apellidos"=>$apellido, "fecha_nacimiento"=>$mayor_edad,
                              "fecha_creacion"=>$campo_fecha, "estado"=>0, "term_cond"=>1, "id_ciudad"=>$default_city['id_ciudad'],
                              "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>SUCURSAL_PAISID, "tipo_doc"=>0, 
-                             "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>"M", 
-                             "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>Modelo_Usuario::CANDIDATO);
+                             "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>$id_genero, 
+                             "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>Modelo_Usuario::CANDIDATO,
+                              "id_estadocivil"=>$id_estadocivil, "id_situacionlaboral"=>$id_situacionlaboral);
          
       if(!Modelo_Usuario::crearUsuario($dato_registro)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
