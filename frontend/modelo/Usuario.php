@@ -137,13 +137,29 @@ class Modelo_Usuario{
     return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
 
-  public static function crearUsuario($dato_registro){    
+  public static function crearUsuario($dato_registro){
+    // var_dump($dato_registro);
+    // exit();    
     if(empty($dato_registro)){return false;}
     if ($dato_registro['tipo_usuario'] == 1) {
-      $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
+      $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 
+                'nombres'=>$dato_registro['nombres'], 
+                'apellidos'=>$dato_registro['apellidos'], 
+                'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 
+                'fecha_creacion'=>$dato_registro['fecha_creacion'], 
+                'estado'=>$dato_registro['estado'], 
+                'term_cond'=>$dato_registro['term_cond'], 
+                'id_ciudad'=>$dato_registro['id_ciudad'], 
+                'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 
+                'tipo_doc'=>$dato_registro['tipo_doc'], 
+                'id_escolaridad'=>$dato_registro['id_escolaridad'], 
+                'id_genero'=>$dato_registro['genero'],
+                'id_estadocivil'=>$dato_registro['id_estadocivil'],
+                'id_situacionlaboral'=>$dato_registro['id_situacionlaboral'],
+                'id_usuario_login'=>$dato_registro['id_usuario_login']));
     }
     else{
-      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
+      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }

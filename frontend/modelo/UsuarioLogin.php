@@ -9,7 +9,8 @@ class Modelo_UsuarioLogin{
                                           "username"=>$usuario_login['username'],
                                           "password"=>$password,
                                           "correo"=>$usuario_login['correo'],
-                                          "dni"=>$usuario_login['dni']));
+                                          "dni"=>$usuario_login['dni'],
+                                          "tipo_registro"=>$usuario_login['tipo_registro']));
     return $result;
   }
 

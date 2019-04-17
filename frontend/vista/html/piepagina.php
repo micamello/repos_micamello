@@ -100,6 +100,7 @@
                   <label>Fecha de nacimiento: </label>
                   <input type="text" data-field="date" class="form-control" name="fechaNac" id="fechaNac">
                   <div id="fechaShow"></div>
+                  <div id="errorFechaUsuario"></div>
                 </div>
               </div>
               
@@ -107,6 +108,7 @@
                 <div class="form-group">
                   <label>Género: </label>
                   <select class="form-control" name="generoUsuario" id="generoUsuario">
+                    <option value="" selected="selected" disabled="disabled">Seleccione una opción</option>
                     <?php 
                       if(!empty($genero)){
                         foreach ($genero as $gen) {
@@ -115,6 +117,7 @@
                       }
                     ?>
                   </select>
+                  <div></div>
                 </div>
               </div>
 

@@ -369,6 +369,17 @@ class Utils{
         return $result;
   }
 
+  public static function valida_fecha_mayor_edad($fecha){
+    $result = false;
+    if (empty($fecha)) {return $result;}
+      $fecha_actual = date("Y-m-d");
+      if ($fecha < $fecha_actual) {
+        $result = true;
+        return $result;
+      }
+        return $result;
+  }
+
   static public function valida_upload($file,$tipo){ 
     $file_type = $file['type']; 
     $file_size = $file['size'];
