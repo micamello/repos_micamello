@@ -28,7 +28,7 @@ class Modelo_Oferta{
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
-      r.edad_minima, o.id_tipolicencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas";
+      r.edad_minima, IF(o.id_tipolicencia IS NULL,'No poseo',tl.descripcion) AS licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas";
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
          $sql .= ", pos.tipo, pos.id_auto as id_postulacion, pos.resultado, u.id_usuario, emp.nombres AS empresa, emp.id_empresa AS id_empresa, IF(TIMESTAMPDIFF(MINUTE, pos.fecha_postulado,now()) <= ".($tiempo*60).",1,0) as puedeEliminar";
@@ -45,7 +45,7 @@ class Modelo_Oferta{
     $tiempo_ofertaUrgente = Modelo_Parametro::obtieneValor('tiempo_ofertaUrgente');
     $sql .= ", IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= ".($tiempo_ofertaUrgente*60)." && o.tipo = 1,1,0) as orden_urgente";
 
-    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os ";
+    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os, mfo_tipolicencia tl ";
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= ", mfo_postulacion pos, mfo_usuario u";
     }
@@ -131,7 +131,7 @@ class Modelo_Oferta{
         $sql .= " ORDER BY orden_urgente DESC,o.fecha_creado DESC";
       }
     }
-    echo $sql;
+    //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -140,7 +140,7 @@ class Modelo_Oferta{
     
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
-      $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario,o.a_convenir,o.primer_empleo, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,r.edad_minima, o.id_tipolicencia, r.viajar, ul.username";
+      $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario,o.a_convenir,o.primer_empleo, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,r.edad_minima, IF(o.id_tipolicencia IS NULL,'No poseo',tl.descripcion) AS licencia, r.viajar, ul.username";
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
         $sql .= ", pos.tipo, pos.id_auto AS id_postulacion, pos.resultado, u.id_usuario, emp.nombres AS empresa, emp.id_empresa AS id_empresa, IF(TIMESTAMPDIFF(MINUTE, pos.fecha_postulado,now()) <= ".($tiempo*60).",1,0) as puedeEliminar";
@@ -154,7 +154,7 @@ class Modelo_Oferta{
     $tiempo_ofertaUrgente = Modelo_Parametro::obtieneValor('tiempo_ofertaUrgente');
     $sql .= ", IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= ".($tiempo_ofertaUrgente*60)." && o.tipo = 1,1,0) as orden_urgente";
 
-    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp";
+    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_tipolicencia tl ";
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= ", mfo_postulacion pos, mfo_usuario u";
     }
@@ -162,8 +162,7 @@ class Modelo_Oferta{
     AND e.id_escolaridad = o.id_escolaridad
     AND c.id_ciudad = o.id_ciudad
     AND p.id_provincia = c.id_provincia
-    AND j.id_jornada = o.id_jornada
-
+    AND j.id_jornada = o.id_jornada 
     AND p.id_pais = ".$pais_empresa;
     if(!empty($filtros['P']) && $filtros['P'] != 0){
        $sql .= " AND p.id_provincia = ".$filtros['P'];

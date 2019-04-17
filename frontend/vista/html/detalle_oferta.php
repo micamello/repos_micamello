@@ -98,7 +98,7 @@
                         <h5>
                             <span class="titulos">Tipo de licencia para conducir</span>
                             <br>
-                            <?php if ($o['licencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
+                            <?php echo $o['licencia']; ?>
                         </h5>
                     </div>
                   </div>

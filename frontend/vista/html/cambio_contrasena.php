@@ -11,11 +11,10 @@
 			<div class="panel-body">
 				<div class="col-md-12">
 	                <div id="seccion_usuario" class="form-group">
-	                  <label class="text-center">Usuario</label><div id="err_usuario" class="help-block with-errors"></div>
-	                  <div class="input-group">
-	                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
-	                    <input id="username" name="username" type="text" class="form-control" >
-	                  </div>
+	                  <label class="text-center"> <i class="fa fa-user"></i>Usuario</label><div id="err_usuario" class="help-block with-errors"></div>
+	                  <h3 class="usuario">
+                	   <u><?php echo $_SESSION['mfo_datos']['usuario']['username']; ?></u>
+                	  </h3>
 	                </div>
 	            </div>
 	        	<div class="col-md-12">

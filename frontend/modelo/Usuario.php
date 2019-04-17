@@ -36,7 +36,7 @@ class Modelo_Usuario{
 
   public static function autenticacion($username, $password){
     $password = md5($password);         
-    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni
+    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?) AND password = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
@@ -45,7 +45,7 @@ class Modelo_Usuario{
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
                      u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
                      u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,        
-                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil, ul.tipo_registro
+                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -313,7 +313,6 @@ class Modelo_Usuario{
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs; 
   }
-
 
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$obtCantdRegistros=false){
 
@@ -623,13 +622,13 @@ class Modelo_Usuario{
     $sql = "SELECT ";
 
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,u.fecha_creacion,
-    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
     u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
     FROM
-      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_usuario u, mfo_usuario_login ul,  
       mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
     WHERE
-      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+      up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
         AND u.id_usuario_login = ul.id_usuario_login AND ul.tipo_usuario = 1 GROUP BY u.id_usuario";
     
     $subquery1 .= " ORDER BY pago DESC, u.fecha_creacion ASC";
@@ -639,7 +638,7 @@ class Modelo_Usuario{
     $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
 
     if($obtCantdRegistros == false){
-      $sql .= "t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_creacion, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, t2.id_nacionalidad AS id_pais,e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+      $sql .= "t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_creacion, t2.fecha_nacimiento, t2.edad, t2.id_nacionalidad AS id_pais,e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
     }else{
       $sql .= "t2.id_nacionalidad AS id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }
@@ -664,13 +663,13 @@ class Modelo_Usuario{
   }
 
   public static function filtrarAspirantesGlobal($id_pais_empresa,&$filtros,$page,$facetas,$obtCantdRegistros=false){
-    $subquery1 = "(SELECT u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,u.fecha_creacion, u.id_situacionlaboral,u.id_tipolicencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
+    $subquery1 = "(SELECT u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,u.fecha_creacion, u.id_situacionlaboral,u.id_tipolicencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,u.discapacidad,
     u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
     FROM
-      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_usuario u, mfo_usuario_login ul, 
       mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
     WHERE
-      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+      up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
         AND u.id_usuario_login = ul.id_usuario_login AND ul.tipo_usuario = 1 GROUP BY u.id_usuario";
     $subquery1 .= " ORDER BY pago DESC, u.fecha_creacion ASC) t2";
     $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
