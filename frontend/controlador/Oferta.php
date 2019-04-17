@@ -189,7 +189,7 @@ class Controlador_Oferta extends Controlador_Base{
           $filtros = $_SESSION['mfo_datos']['Filtrar_ofertas'];
 
           if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['J']) && empty($filtros['K']) && empty($filtros['S']) && empty($filtros['Q'])){
-echo 'entro';
+
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
             }
