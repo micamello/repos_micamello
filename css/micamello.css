@@ -209,57 +209,37 @@ ul.list_content_mic > li:last-child {
 	font-weight: bold;
 }
 
-/*input.form-control{
-	border-radius: 15px;
-}
-
-select.form-control{
-	border-radius: 15px;
-}
-
 .check_box{
 	text-align: justify;
 }
 
 .error_class{
-	/*background-color: #D7537A;*/
-	/*border-radius: 5px;*/
 	color: red;
 	text-align: center;
 	font-size: 13px;
 	position: absolute;
 	left:0;
-    right:0;
-    display: inline;
-    /*font-weight: bold;*/
+  right:0;
+  display: inline;
 }
 
 .error_class_1{
-	/*background-color: #D7537A;*/
-	/*border-radius: 5px;*/
 	color: red;
 	text-align: center;
 	font-size: 13px;
 	position: absolute;
 	left:0;
-    right:0;
-    bottom: -4px;
-    display: inline;
-    /*font-weight: bold;*/
+  right:0;
+  bottom: -4px;
+  display: inline;
 }
 
 .error_class_2{
-	/*background-color: #D7537A;*/
-	/*border-radius: 5px;*/
 	color: red;
 	text-align: justify;
 	font-size: 13px;
 	position: absolute;
 	left:0;
-    /*right:20px;*/
-    /*bottom: -4px;*/
-    /*display: inline;*/
-    /*font-weight: bold;*/
 }
 
 .error_input{
