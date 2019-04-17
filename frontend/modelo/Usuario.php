@@ -851,6 +851,12 @@ class Modelo_Usuario{
       }
       $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(t2.fecha_nacimiento)) = '".$pclave."' OR t2.fecha_creacion LIKE '%".$pclave."%')";
     }
+
+
+    if(!empty($filtros['A']) && $filtros['A'] != 0){
+      $sql .= " GROUP BY t2.id_usuario";
+    }
+
     if($obtCantdRegistros === false){
       if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
         $tipo = substr($filtros['O'],0,1);
