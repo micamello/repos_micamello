@@ -99,7 +99,7 @@
                 <div class="form-group">
                   <label>Fecha de nacimiento: </label>
                   <input type="text" data-field="date" class="form-control" name="fechaNac" id="fechaNac">
-                  <div id="fecha"></div>
+                  <div id="fechaShow"></div>
                 </div>
               </div>
               

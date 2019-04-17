@@ -295,6 +295,7 @@ class Modelo_Oferta{
                                                           'estado'=>0,
                                                           'fecha_creado'=>$data['fecha_creado'],
                                                           'tipo'=>$data['tipo'],
+                                                          'primer_empleo'=>$data['primer_empleo'],
                                                           'id_jornada'=>$data['id_jornada'],
                                                           'id_ciudad'=>$data['id_ciudad'],
                                                           'id_requisitoOferta'=>$data['id_requisitoOferta'],

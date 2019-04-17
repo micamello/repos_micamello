@@ -142,7 +142,7 @@ class Controlador_Publicar extends Controlador_Base {
         $confidencial = $_POST['confidencialOf'];
       }
       $datosReg = array_merge($datosReg, array('confidencialOf'=>$confidencial));
-
+      
       $plan = $_SESSION['mfo_datos']['planes'];
       $id_empresa = null;
       $id_empresa_plan = null;
@@ -272,6 +272,7 @@ class Controlador_Publicar extends Controlador_Base {
                             'estado'=>0,
                             'fecha_creado'=>$fechaActual,
                             'tipo'=>$datos['ofertaUrgenteOf'],
+                            'primer_empleo'=>$datos['primerEmpleoOf'],
                             'id_jornada'=>$datos['jornadaOf'],
                             'id_ciudad'=>$datos['ciudadOf'],
                             'id_requisitoOferta'=>$id_requisitoOferta,

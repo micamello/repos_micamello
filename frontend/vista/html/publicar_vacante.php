@@ -7,7 +7,7 @@
 			<div class="col-md-12">
 				<div class="col-md-4 col-md-offset-4">
 					<label>Seleccione plan:</label>
-					<select name="planUsuario" id="planes" class="form-control">
+					<select name="planUsuario" id="planesSelect" class="form-control">
 						<!-- <option value="" selected="selected" disabled="disabled">Seleccione un plan</option> -->
 						<?php 
 						$funcionEnc = new Utils();
