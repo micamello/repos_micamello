@@ -36,7 +36,7 @@ class Modelo_Usuario{
 
   public static function autenticacion($username, $password){
     $password = md5($password);         
-    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni
+    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?) AND password = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
