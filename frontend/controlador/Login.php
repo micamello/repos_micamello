@@ -46,9 +46,9 @@ class Controlador_Login extends Controlador_Base {
       }
     } 
 
-    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas']);
+    $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
-    $tags["template_js"][] = "multiple_select";
+    $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "micamello_registro";
     Vista::render('login',$tags);  
  

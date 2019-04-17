@@ -25,8 +25,11 @@ class Controlador_Recomendacion extends Controlador_Base {
     } catch (Exception $e) {
         $_SESSION['mostrar_error'] = $e->getMessage();
     }
-    $tags["template_js"][] = "modal-register";
-    //$tags["template_js"][] = "mic";
+    
+    $tags["template_css"][] = "DateTimePicker";
+    $tags["template_js"][] = "DniRuc_Validador";
+    $tags["template_js"][] = "DateTimePicker";
+    $tags["template_js"][] = "micamello_registro";
     Vista::render('recomendaciones', $tags);
   }
 
