@@ -502,10 +502,10 @@ class Modelo_Usuario{
 
     //obtiene los aspirantes por genero
     if(!empty($filtros['G']) && $filtros['G'] != 0){
-      $g = array_search($filtros['G'],VALOR_GENERO);
-      if($g != false){
-        $sql .= " AND t2.genero = '".$g."'";
-      }
+      /*$g = array_search($filtros['G'],VALOR_GENERO);
+      if($g != false){*/
+        $sql .= " AND t2.id_genero = ".$filtros['G'];
+      //}
     }
 
     //obtiene los aspirantes por nacionalidad
@@ -790,10 +790,10 @@ class Modelo_Usuario{
     }
     //obtiene los aspirantes por genero
     if(!empty($filtros['G']) && $filtros['G'] != 0){
-      $g = array_search($filtros['G'],VALOR_GENERO);
-      if($g != false){
-        $sql .= " AND t2.genero = '".$g."'";
-      }
+      /*$g = array_search($filtros['G'],VALOR_GENERO);
+      if($g != false){*/
+        $sql .= " AND t2.id_genero = ".$filtros['G'];
+      //}
     }
     //obtiene los aspirantes por nacionalidad
     if(!empty($filtros['N']) && $filtros['N'] != 0){
