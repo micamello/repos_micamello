@@ -100,7 +100,7 @@
 				              	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/P'.$key.'/';
 						    	//$ruta = Controlador_Aspirante::calcularRuta($ruta,'P');
 						    	$ruta .= '1/'; ?>
-						    	<label style="padding-left:10px; padding-right: 10px;" onclick="window.location='<?php echo $ruta; ?>'" class="btn btn-default btn-on-3 btn-md <?php if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == $key || ($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0 && $cont == 1)){ echo 'active'; $cont = count(PRIORIDAD); } ?>">
+						    	<label style="padding-left:5px; padding-right: 5px;" onclick="window.location='<?php echo $ruta; ?>'" class="btn btn-default btn-on-3 btn-md <?php if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == $key || ($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0 && $cont == 1)){ echo 'active'; $cont = count(PRIORIDAD); } ?>">
 									<input type="radio" value="<?php echo $key; ?>" name="multifeatured_module[module_id][status]" checked="checked" /><?php echo $v; ?>
 								</label>
 							<?php 
