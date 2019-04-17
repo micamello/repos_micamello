@@ -721,7 +721,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		      	<div class="col-md-12">
 			        <div class="col-md-6">
 		                <div id="seccion_clave" class="form-group">
-		                  <label class="text-center">Contrase&ntilde;a:</label><div id="err_clave" class="help-block with-errors"></div>
+		                  <label class="text-center">Contrase&ntilde;a <i class="requerido">*</i></label><div id="err_clave" class="help-block with-errors"></div>
 		                  <div class="input-group">
 		                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
 		                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control" onkeyup="validarClave()" >
@@ -730,7 +730,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		            </div>
 		            <div class="col-md-6">
 		              <div id="seccion_clave1" class="form-group">
-		                  <label class="text-center">Confirmar Contrase&ntilde;a:</label><div id="err_clave1" class="help-block with-errors"></div>
+		                  <label class="text-center">Confirmar Contrase&ntilde;a <i class="requerido">*</i></label><div id="err_clave1" class="help-block with-errors"></div>
 		                  <div class="input-group">
 		                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
 		                    <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" onkeyup="validarClave()" >

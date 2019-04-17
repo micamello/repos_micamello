@@ -14,6 +14,9 @@ class Controlador_Perfil extends Controlador_Base
         
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
+            case 'cambioContrasena':
+                Vista::render('cambio_contrasena', array());   
+            break;
             case 'buscarDni':
                 $dni = Utils::getParam('dni', '', $this->data); 
                 //Permite determinar si el documento ingresado ya esta registrado en base de datos
