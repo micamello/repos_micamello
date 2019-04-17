@@ -42,8 +42,11 @@ class Controlador_Perfil extends Controlador_Base
                 $puedeDescargarInforme = self::obtenerPermiso($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
-
-                $areas = $GLOBALS['areasSubareas'];
+                $genero = Modelo_Genero::obtenerListadoGenero();
+                $situacionLaboral = Modelo_SituacionLaboral::obtieneListado();
+                $licencia = Modelo_TipoLicencia::obtieneListado();
+                $estado_civil = Modelo_EstadoCivil::obtieneListado();
+                $areas = Modelo_AreaSubarea::obtieneAreas_Subareas();
 
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
@@ -126,6 +129,10 @@ class Controlador_Perfil extends Controlador_Base
                     'arrnivelidioma'            =>$arrnivelidioma,
                     'nivelIdiomas'              => $nivelIdiomas,
                     'puedeDescargarInforme'     =>$puedeDescargarInforme,
+                    'genero'=>$genero,
+                    'situacionLaboral'=>$situacionLaboral,
+                    'licencia'=>$licencia,
+                    'estado_civil'=>$estado_civil,
                     'areas'=>$areas
                 );
 
@@ -153,9 +160,13 @@ class Controlador_Perfil extends Controlador_Base
     public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario)
     {
         try {
+
+            $listAreas = Modelo_Area::obtieneListadoAsociativo();
+            $listSubareas = Modelo_AreaSubarea::obtieneListadoAsociativo();
+
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
 
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area' => 1/*, 'nivel_interes' => 1*/, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1, 'convencional' => 0);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'estado_civil' => 1,'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1, 'convencional' => 0);
 
                 if (isset($_POST['dni'])){
                   $campos['dni'] = 1;
@@ -169,7 +180,7 @@ class Controlador_Perfil extends Controlador_Base
             }
 
             $data = $this->camposRequeridos($campos);
-                        
+      
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
@@ -344,7 +355,7 @@ class Controlador_Perfil extends Controlador_Base
                         
                         $valor = explode("_", $datos_select_area);
 
-                        if(isset($GLOBALS['ListAreas'][$valor[0]]) && isset($GLOBALS['ListSubareas'][$valor[1]])){
+                        if(isset($listAreas[$valor[0]]) && isset($listSubareas[$valor[1]])){
                             $areas_subareas[$valor[0]][] = $valor[2];
                             array_push($array_subareas_seleccionadas, $valor[2]);
                         }else{

@@ -25,108 +25,6 @@ $('#boton').on('click', function(){
 
 if (document.getElementById("area"))
 {
-  /*var selectedOptions = $('#area_select option:selected');
-
-  $('#area_select').multiselect({
-    buttonContainer: '<div id="example-checkbox-list-container"></div>',
-    buttonClass: '',
-    templates: {
-        button: '',
-        ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
-    },
-    maxHeight: 84,
-    enableFiltering: true,
-    enableCaseInsensitiveFiltering: true,
-    buttonWidth: '50%',
-    buttonText: function(options, select) {
-
-      var labels = [];  
-      $('#seleccionados1').html('');                
-      options.each(function() {
-
-        if ($(this).attr('label') !== undefined) {
-          labels.push($(this).attr('label'));                             
-          $('#seleccionados1').html($('#seleccionados1').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a>');          
-          $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-        }
-        else {
-          labels.push($(this).html());
-          $('#seleccionados1').html($('#seleccionados1').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', area_select);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
-            $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-        }
-      });                        
-      return labels.join(', ') + '';
-    },
-    onChange: function(option, checked) {
-      var selectedOptions = $('#area_select option:selected');
-
-      if (selectedOptions.length >= 3) {
-        var nonSelectedOptions = $('#area_select option').filter(function() {
-            return !$(this).is(':selected');
-        }); 
-        nonSelectedOptions.each(function() {
-            var input = $('input[id="area_select-' + $(this).val() + '"]');
-            input.prop('disabled', true);
-            input.parent('li').addClass('disabled');
-        });
-      }
-      else {
-        $('#area_select option').each(function() {               
-            var input = $('input[id="area_select-' + $(this).val() + '"]');
-            //console.log(input);
-            input.prop('disabled', false);
-            input.parent('li').addClass('disabled');
-            $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-        });
-      }
-    }        
-  });
-
-  if (selectedOptions.length >= 3) {
-      var nonSelectedOptions = $('#area_select option').filter(function() {
-          return !$(this).is(':selected');
-      }); 
-      nonSelectedOptions.each(function() {
-          var input = $('input[id="area_select-' + $(this).val() + '"]');
-          input.prop('disabled', true);
-          input.parent('li').addClass('disabled');
-      });
-  }
-  else {
-      $('#area_select option').each(function() {               
-          var input = $('input[id="area_select-' + $(this).val() + '"]');
-          //console.log(input);
-          input.prop('disabled', false);
-          input.parent('li').addClass('disabled');
-          $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-      });
-  }
-
-  $('#seleccionados1').parent().append(filtro[0]);
-
-  if (selectedOptions.length >= 3) {
-    var nonSelectedOptions = $('#area_select option').filter(function() {
-        return !$(this).is(':selected');
-    }); 
-    nonSelectedOptions.each(function() {
-        var input = $('input[id="area_select-' + $(this).val() + '"]');
-        input.prop('disabled', true);
-        input.parent('li').addClass('disabled');
-    });
-  }
-  else {
-    $('#area_select option').each(function() {
-        var input = $('input[id="area_select-' + $(this).val() + '"]');
-        input.prop('disabled', false);
-        input.parent('li').addClass('disabled');
-        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-    });
-  }
-
-  if(selectedOptions.length === 0){
-    colocaError("err_area","seccion_area","Debe seleccionar una opcion de la lista","boton");
-  }*/
-
   $('#area').multiple_select({
     items: 3,
     dependence: {
@@ -135,92 +33,6 @@ if (document.getElementById("area"))
     }
   });
 }
-
-/*if (document.getElementById("nivel_interes"))
-{
-
-  $('#nivel_interes').multiselect({
-    buttonContainer: '<div id="example-checkbox-list-container"></div>',
-    buttonClass: '',
-    templates: {
-        button: '',
-        ul: '<ul class="multiselect-container checkbox-list scroll"></ul>',
-    },
-    maxHeight: 84,
-    enableFiltering: true,
-    enableCaseInsensitiveFiltering: true,
-    buttonWidth: '50%',
-    buttonText: function(options, select) {
-      var labels = [];  
-      $('#seleccionados2').html('');                
-      options.each(function() {
-
-        if ($(this).attr('label') !== undefined) {
-          labels.push($(this).attr('label'));                             
-          $('#seleccionados2').html($('#seleccionados2').html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa fa-2x"></i></a>');
-          $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-        }
-        else {
-          labels.push($(this).html());
-
-          $('#seleccionados2').html($('#seleccionados2').html()+'<p class="selectedItems">'+$(this).html()+' '+'<a href="javascript:void(0);" onclick="deseleccionar('+$(this).val()+', nivel_interes);"><i class="fa fa-times-circle fa fa-2x"></i></a></p>');
-            $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(options.length);
-        }
-      });                        
-      return labels.join(', ') + '';
-    },
-    onChange: function(option, checked) {
-      var selectedOptions = $('#nivel_interes option:selected');
-
-      if (selectedOptions.length >= 2) {
-          var nonSelectedOptions = $('#nivel_interes option').filter(function() {
-              return !$(this).is(':selected');
-          }); 
-          nonSelectedOptions.each(function() {
-              var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-              input.prop('disabled', true);
-              input.parent('li').addClass('disabled');
-          });
-      }
-      else {
-          $('#nivel_interes option').each(function() {
-              
-              var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-              input.prop('disabled', false);
-              input.parent('li').addClass('disabled');
-              $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-          });
-      }
-    }        
-  });
-
-  $('#seleccionados2').parent().append(filtro[1]);
-
-  var selectedOptions = $('#nivel_interes option:selected');
-
-  if (selectedOptions.length >= 2) {
-    var nonSelectedOptions = $('#nivel_interes option').filter(function() {
-        return !$(this).is(':selected');
-    }); 
-    nonSelectedOptions.each(function() {
-        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-        input.prop('disabled', true);
-        input.parent('li').addClass('disabled');
-    });
-  }
-  else {
-    $('#nivel_interes option').each(function() {
-        var input = $('input[id="nivel_interes-' + $(this).val() + '"]');
-        input.prop('disabled', false);
-        input.parent('li').addClass('disabled');
-        $('#'+this.parentNode.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
-    });
-  }
-
-  if(selectedOptions.length == 0){
-    colocaError("err_int","seccion_int","Debe seleccionar una opcion de la lista","boton");
-  }
-}*/
 
 if(document.getElementById('seccion_listado')){
     var listado_group = document.getElementById('seccion_listado').id;
@@ -575,23 +387,23 @@ function mostrarUni(){
 
     if(lugar_estudio){
 
-        if(lugar_estudio.value != -1){
+      if(lugar_estudio.value != -1){
 
-            if(lugar_estudio.value == 0){
-                document.getElementById("universidad2").style.display = "none";
-                document.getElementById("universidad").style.display = "block";
-                document.getElementById("universidad").setAttribute("required",true);
-                $("#universidad2").removeAttr("required");
-            }else{
-                document.getElementById("universidad").style.display = "none";
-                document.getElementById("universidad2").style.display = "block";
-                document.getElementById("universidad2").setAttribute("required",true);
-                $("#universidad").removeAttr("required");
-            }
-        }else{
-            $("#universidad").removeAttr("required");
+        if(lugar_estudio.value == 0){
+            document.getElementById("universidad2").style.display = "none";
+            document.getElementById("universidad").style.display = "block";
+            document.getElementById("universidad").setAttribute("required",true);
             $("#universidad2").removeAttr("required");
-        } 
+        }else{
+            document.getElementById("universidad").style.display = "none";
+            document.getElementById("universidad2").style.display = "block";
+            document.getElementById("universidad2").setAttribute("required",true);
+            $("#universidad").removeAttr("required");
+        }
+      }else{
+        $("#universidad").removeAttr("required");
+        $("#universidad2").removeAttr("required");
+      } 
     }
 }
 
@@ -684,13 +496,13 @@ function validarFormulario(tipovalidacion){
     if(tipo_usuario == 1){
 
         var discapacidad = document.getElementById('discapacidad').selectedIndex;
-        /*var experiencia = document.getElementById('experiencia').selectedIndex;
-        var estado_civil = document.getElementById('estado_civil').selectedIndex;*/
+        /*var experiencia = document.getElementById('experiencia').selectedIndex;*/
+        var estado_civil = document.getElementById('estado_civil').selectedIndex;
         var genero = document.getElementById('genero').selectedIndex;
         var tiene_trabajo = document.getElementById('tiene_trabajo').selectedIndex;
         var residencia = document.getElementById('residencia').selectedIndex;
         var viajar = document.getElementById('viajar').selectedIndex;
-        var licencia = document.getElementById('licencia').selectedIndex;
+        //var licencia = document.getElementById('licencia').selectedIndex;
         var escolaridad = document.getElementById('escolaridad').selectedIndex;
         //var estatus = document.getElementById('estatus').selectedIndex;
         var area_select = document.getElementById('area');
@@ -784,14 +596,14 @@ function validarFormulario(tipovalidacion){
         }else{
             quitarError("err_exp", "seccion_exp");
         }
-
+*/
         if(estado_civil == null || estado_civil == 0){
 
             colocaError("err_civil", "seccion_civil",err_list,"boton");
             error = 1;
         }else{
             quitarError("err_civil", "seccion_civil");
-        }*/
+        }
 
         if(genero == null || genero == 0){
 
@@ -830,14 +642,14 @@ function validarFormulario(tipovalidacion){
             quitarError("err_via", "seccion_via");
         }
 
-        if(licencia == null || licencia == 0){
+        /*if(licencia == null || licencia == 0){
 
             colocaError("err_lic", "seccion_lic",err_list,"boton");
             mensaje += '- Tiene licencia?, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_lic", "seccion_lic");
-        }
+        }*/
 
         if(escolaridad == null || escolaridad == 0){
 

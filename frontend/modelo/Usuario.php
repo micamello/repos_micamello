@@ -44,9 +44,8 @@ class Modelo_Usuario{
     if ($rs["tipo_usuario"] == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
                      u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
-                     u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,                     
-                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional,
-                     u.pendiente_test, u.id_estadocivil
+                     u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,        
+                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -180,10 +179,9 @@ class Modelo_Usuario{
   public static function actualizarSession($idUsuario,$tipo_usuario){
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                      u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
-                     u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
-                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional
+                      u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.viajar, u.discapacidad, u.residencia,                     
+                     u.id_escolaridad, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
+                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral
               FROM mfo_usuario u
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -202,6 +200,8 @@ class Modelo_Usuario{
               INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
               WHERE e.id_empresa = ? AND e.estado = 1";
     }
+
+    echo $sql;
     return $rs2 = $GLOBALS['db']->auto_array($sql,array($idUsuario)); 
   }
 
@@ -215,11 +215,17 @@ class Modelo_Usuario{
       $foto = 1;
     }
     if($tipo_usuario == self::CANDIDATO){
-        $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"licencia"=>$data['licencia'],"viajar"=>$data['viajar'],"tiene_trabajo"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional']); 
 
-        if (!empty($data['documentacion'])){          
-          $datos['tipo_doc'] = $data['documentacion'];
-        }
+      $licencia = $data['licencia'];
+      if($licencia == 0){
+        $licencia = "null";
+      }
+
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"id_genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"id_tipolicencia"=>$licencia,"id_estadocivil"=>$data['estado_civil'],"viajar"=>$data['viajar'],"id_situacionlaboral"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional']); 
+
+      if (!empty($data['documentacion'])){          
+        $datos['tipo_doc'] = $data['documentacion'];
+      }
 
       if(isset($_POST['lugar_estudio']) && $_POST['lugar_estudio'] != -1){
         if($_POST['lugar_estudio'] == 1){
@@ -233,7 +239,7 @@ class Modelo_Usuario{
         $datos['id_univ'] = 'null';
         $datos['nombre_univ'] = ' ';
       }
-        return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
+      return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
 
     }else{
 
