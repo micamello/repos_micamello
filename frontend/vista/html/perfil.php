@@ -2,7 +2,6 @@
 $_SESSION['mostrar_exito'] = "";
 $_SESSION['mostrar_error'] = "";
 if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
-Utils::log(print_r($_SESSION['mfo_datos'],true));
 ?>
 <div class="container">
 	<div class="checkout-wrap">
@@ -121,8 +120,7 @@ Utils::log(print_r($_SESSION['mfo_datos'],true));
 				            <br>
 					    </div>
 					<?php } ?>
-                </div>
-                <?php print_r($data); ?>
+                </div>                
 	            <div class="col-md-8">
 	                <div class="panel panel-default shadow" style="border-radius: 20px;">
 	                    <div class="panel-body">

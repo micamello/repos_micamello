@@ -96,7 +96,7 @@
                     </div>
 		                <div>
                         <h5>
-                            <span class="titulos">Tiene licencia para conducir</span>
+                            <span class="titulos">Tipo de licencia para conducir</span>
                             <br>
                             <?php if ($o['licencia'] == 0) { echo 'NO'; }else{ echo 'SI'; } ?>
                         </h5>

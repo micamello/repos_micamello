@@ -87,8 +87,11 @@ class Controlador_Publicar extends Controlador_Base {
     $arridioma = Modelo_Idioma::obtieneListado();
     $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
     $arrescolaridad = Modelo_Escolaridad::obtieneListado();   
-    $fechacontratacion = date('Y-m-d',strtotime('+1 day',strtotime(date('Y-m-d H:i:s'))));    
-    $tags = array('areasSubareas'=>$GLOBALS['areasSubareas'],
+    $fechacontratacion = date('Y-m-d',strtotime('+1 day',strtotime(date('Y-m-d H:i:s')))); 
+    $listSubareas = Modelo_AreaSubarea::obtieneAreas_Subareas();
+    $tipolicencia = Modelo_TipoLicencia::obtieneListado();
+
+    $tags = array('areasSubareas'=> $listSubareas,
                   'arrprovinciasucursal'=>$arrprovinciasucursal,
                   'arrciudad'=>$arrciudad,
                   'arrjornada'=>$arrjornada,
@@ -96,7 +99,8 @@ class Controlador_Publicar extends Controlador_Base {
                   'arrnivelidioma'=>$arrnivelidioma,
                   'arrescolaridad'=>$arrescolaridad,
                   'fecha_contratacion'=>$fechacontratacion,
-                  'planes'=>$planes
+                  'planes'=>$planes,
+                  'tipolicencia'=>$tipolicencia
                 );
 
     $tags["template_css"][] = "DateTimePicker";
@@ -112,7 +116,6 @@ class Controlador_Publicar extends Controlador_Base {
     if(Utils::getParam('registroOferta') == 1){
       $campos = array('planUsuario'=>1,
                       'nombreOferta'=>1,
-
                       'salarioOf'=>1,
                       'salarioConv'=>1,
                       'fechaCont'=>1,
@@ -126,9 +129,8 @@ class Controlador_Publicar extends Controlador_Base {
                       'nivel_idioma'=>1,
                       'primerEmpleoOf'=>1,
                       'ofertaUrgenteOf'=>1,
-
                       'anosexp'=>1,
-                      'licenciaOf'=>1, 
+                      'licenciaOf'=>0, 
                       'DispOf'=>1, 
                       'residenciaOf'=>1,
                       'discapacidadOf'=>1,
@@ -163,9 +165,12 @@ class Controlador_Publicar extends Controlador_Base {
       }
 
       $arraySubareas = array();
+      $listAreas = Modelo_Area::obtieneListadoAsociativo();
+      $listSubareas = Modelo_AreaSubarea::obtieneListadoAsociativo();
+
       for ($i=0; $i < count($datosReg['subareasCand']); $i++) { 
         $subareas = explode("_", $datosReg['subareasCand'][$i]);
-        if(!in_array($subareas[0], array_keys($GLOBALS['ListAreas'])) && !in_array($subareas[1], array_keys($GLOBALS['ListSubareas']))){
+        if(!in_array($subareas[0], array_keys($listAreas)) && !in_array($subareas[1], array_keys($listSubareas))){
             throw new Exception("Una o m\u00E1s \u00E1reas o sub\u00E1reas seleccionadas no est\u00E1n disponibles");
           }
           else{
@@ -181,7 +186,7 @@ class Controlador_Publicar extends Controlador_Base {
         throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
       }
 
-      $listadoIdiomasNivel = $GLOBALS['nivel_idioma_idioma'];
+      $listadoIdiomasNivel = Modelo_NivelxIdioma::obtieneListado();
       $idiomaNivelIdioma = array();
       $arrayIdiomasSel = array();
       foreach ($listadoIdiomasNivel as $idiomas_nivel) {
@@ -244,40 +249,38 @@ class Controlador_Publicar extends Controlador_Base {
     }
   }
 
-
   public function guardarDatosOferta($datos){
-    $datosRequisitoOferta = array('licencia'=>$datos['licenciaOf'],
-                                    'viajar'=>$datos['DispOf'],
-                                    'residencia'=>$datos['residenciaOf'],
-                                    'discapacidad'=>$datos['discapacidadOf'],
-                                    'confidencial'=>$datos['confidencialOf'],
-                                    'edad_minima'=>$datos['edadMinOf'],
-                                    'edad_maxima'=>$datos['edadMaxOf']);
+    $datosRequisitoOferta = array('viajar'=>$datos['DispOf'],
+                                  'residencia'=>$datos['residenciaOf'],
+                                  'discapacidad'=>$datos['discapacidadOf'],
+                                  'confidencial'=>$datos['confidencialOf'],
+                                  'edad_minima'=>$datos['edadMinOf'],
+                                  'edad_maxima'=>$datos['edadMaxOf']);
     if(!Modelo_Oferta::guardarRequisitosOferta($datosRequisitoOferta)){
       throw new Exception("Ha ocurrido un error al guardar los requisitos de la oferta");
     }
 
-    $id_requisitoOferta = $GLOBALS['db']->insert_id();
-      
-      $fechaActual = date('Y-m-d H:m:s');
-      $datosOferta = array('id_empresa'=>$datos['id_empresa'],
-                            'titulo'=>$datos['nombreOferta'],
-                            'descripcion'=>$datos['descripcion'],
-                            'salario'=>$datos['salarioOf'],
-                            'a_convenir'=>$datos['salarioConv'],
-                            'fecha_contratacion'=>$datos['fechaCont'],
-                            'vacantes'=>$datos['cantVac'],
-                            'anosexp'=>$datos['anosexp'],
-                            'estado'=>0,
-                            'fecha_creado'=>$fechaActual,
-                            'tipo'=>$datos['ofertaUrgenteOf'],
-                            'primer_empleo'=>$datos['primerEmpleoOf'],
-                            'id_jornada'=>$datos['jornadaOf'],
-                            'id_ciudad'=>$datos['ciudadOf'],
-                            'id_requisitoOferta'=>$id_requisitoOferta,
-                            'id_escolaridad'=>$datos['escolaridadOf'],
-                            'id_empresa_plan'=>$datos['id_empresa_plan']
-                            );
+    $id_requisitoOferta = $GLOBALS['db']->insert_id();      
+    $fechaActual = date('Y-m-d H:m:s');
+    $datosOferta = array('id_empresa'=>$datos['id_empresa'],
+                         'titulo'=>$datos['nombreOferta'],
+                         'descripcion'=>$datos['descripcion'],
+                         'salario'=>$datos['salarioOf'],
+                         'a_convenir'=>$datos['salarioConv'],
+                         'fecha_contratacion'=>$datos['fechaCont'],
+                         'vacantes'=>$datos['cantVac'],
+                         'anosexp'=>$datos['anosexp'],
+                         'estado'=>0,
+                         'fecha_creado'=>$fechaActual,
+                         'tipo'=>$datos['ofertaUrgenteOf'],
+                         'primer_empleo'=>$datos['primerEmpleoOf'],
+                         'id_jornada'=>$datos['jornadaOf'],
+                         'id_ciudad'=>$datos['ciudadOf'],
+                         'id_requisitoOferta'=>$id_requisitoOferta,
+                         'id_escolaridad'=>$datos['escolaridadOf'],
+                         'id_empresa_plan'=>$datos['id_empresa_plan'],
+                         'id_tipolicencia'=>$datos['licenciaOf']
+                          );
 
       if(!Modelo_Oferta::guardarOferta($datosOferta)){
         throw new Exception("Ha ocurrido un error al guardar los datos de la oferta");
