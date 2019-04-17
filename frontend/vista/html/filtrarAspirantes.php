@@ -5,7 +5,7 @@ foreach ($data as $letra => $value) {
     if($vista == 1){
         $ruta = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta.'/2';
     }else{
-        $ruta = PUERTO.'://'.HOST.'/verAspirantes/2/'.Utils::encriptar(0).'/2';
+        $ruta = PUERTO.'://'.HOST.'/verAspirantes/2/0/2';
     }
 
     if($letra != 'O'){
