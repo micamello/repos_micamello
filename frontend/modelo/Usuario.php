@@ -180,10 +180,10 @@ class Modelo_Usuario{
   public static function actualizarSession($idUsuario,$tipo_usuario){
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto,                       
-                      u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
-                     u.tiene_trabajo, u.viajar, u.licencia, u.discapacidad, u.residencia,                     
+                     u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc,
+                     u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,                     
                      u.id_escolaridad, u.genero, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
-                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional
+                     ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional, u.id_estadocivil
               FROM mfo_usuario u
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -193,8 +193,8 @@ class Modelo_Usuario{
     else{
       $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
                       e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
-                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, ul.id_usuario_login, ul.correo, ul.dni, ul.username, ul.tipo_usuario,p.id_pais
-
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, ul.id_usuario_login, ul.correo, 
+                     ul.dni, ul.username, ul.tipo_usuario,p.id_pais
               FROM mfo_empresa e
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = e.id_usuario_login
               INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
