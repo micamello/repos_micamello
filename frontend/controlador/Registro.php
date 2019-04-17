@@ -33,7 +33,7 @@ class Controlador_Registro extends Controlador_Base {
     if ( Utils::getParam('formularioRegistro') == 1 ){
       try {        
         if($_POST['tipo_usuario'] == 1){
-          $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'apellidosCand'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'tipoDoc'=>1, 'documentoCandEmp'=>1, 'areaCand'=>1, 'subareasCand'=>1, 'password_1'=>1, 'password_2'=>1);
+          $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'apellidosCand'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'tipoDoc'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1);
         }
         if($_POST['tipo_usuario'] == 2){
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1, 'nombreConEmp'=>1, 'apellidoConEmp'=>1, 'tel1ConEmp'=>1);
@@ -43,13 +43,13 @@ class Controlador_Registro extends Controlador_Base {
         $GLOBALS['db']->beginTrans();
         $id_usuario = self::guardarDatosUsuario($datosValidos);
         if (empty($id_usuario)){
-          throw new Exception("Error en el sistema, por favor intente de nuevo");
+          throw new Exception("Error en el sistema 1, por favor intente de nuevo");
         }
         $GLOBALS['db']->commit();
         $nombres = $datosReg['nombresCandEmp'].((isset($datosReg['apellidosCand'])) ? " ".$datosReg['apellidosCand'] : '');
         $token = Utils::generarToken($id_usuario,"ACTIVACION");
         if (empty($token)){
-          throw new Exception("Error en el sistema, por favor intente de nuevo");
+          throw new Exception("Error en el sistema 2, por favor intente de nuevo");
         }
         $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
@@ -68,7 +68,6 @@ class Controlador_Registro extends Controlador_Base {
 
   public function validarCamposReg($datosReg){
     $iso = SUCURSAL_ISO;
-    $arraySubareas = array();
     if(!Utils::es_correo_valido($datosReg['correoCandEmp'])){
       throw new Exception("El correo ingresado no es v\u00E1lido");
     }
@@ -91,25 +90,6 @@ class Controlador_Registro extends Controlador_Base {
     }
     if(!Utils::passCoinciden($datosReg['password_1'], $datosReg['password_2'])){
       throw new Exception("Las contrase\u00F1as ingresadas no coinciden");
-    }
-    if($datosReg['tipo_usuario'] == 1){
-      // validacion de que area y subarea existe
-      for ($i=0; $i < count($datosReg['subareasCand']); $i++) { 
-        $subareas = explode("_", $datosReg['subareasCand'][$i]);
-        if(!in_array($subareas[0], array_keys($GLOBALS['ListAreas'])) && !in_array($subareas[1], array_keys($GLOBALS['ListSubareas']))){
-            throw new Exception("Una o m\u00E1s \u00E1reas o sub\u00E1reas seleccionadas no est\u00E1n disponibles");
-          }
-          else{
-            array_push($arraySubareas, $subareas[2]);
-          }
-      }
-      array_push($datosReg, $arraySubareas);
-      if(empty($arraySubareas)){
-        throw new Exception("Debe seleccionar al menos una sub\u00E1rea por \u00E1rea");
-      }
-      if(count($datosReg['areaCand']) < 1 || count($datosReg['areaCand']) > AREASPERMITIDAS){
-        throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
-      }
     }
 
     // generar username
@@ -165,9 +145,6 @@ class Controlador_Registro extends Controlador_Base {
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
       $id_usuario = $GLOBALS['db']->insert_id();
-      if(!Modelo_UsuarioxArea::crearUsuarioArea($datosValidos, $id_usuario)){
-        throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
-      }
     }
     else{
       $data = array("nombres"=>$datosValidos['nombresCandEmp'],
@@ -275,7 +252,7 @@ class Controlador_Registro extends Controlador_Base {
       $nombres = $nombre." ".$apellido;      
       $token = Utils::generarToken($user_id,"ACTIVACION");
       if (empty($token)){
-        throw new Exception("Error en el sistema, por favor intente de nuevo");
+        throw new Exception("Error en el sistema 3, por favor intente de nuevo");
       }
       $token .= "||".$user_id."||".Modelo_Usuario::CANDIDATO."||".date("Y-m-d H:i:s");
       $token = Utils::encriptar($token);

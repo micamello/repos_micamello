@@ -136,7 +136,7 @@ class Modelo_Usuario{
     return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
 
-  public static function crearUsuario($dato_registro){
+  public static function crearUsuario($dato_registro){    
     if(empty($dato_registro)){return false;}
     if ($dato_registro['tipo_usuario'] == 1) {
       $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'], 'apellidos'=>$dato_registro['apellidos'], 'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'estado'=>$dato_registro['estado'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'ultima_sesion'=>$dato_registro['ultima_sesion'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'tipo_doc'=>$dato_registro['tipo_doc'], 'id_escolaridad'=>$dato_registro['id_escolaridad'], 'genero'=>$dato_registro['genero'], 'id_usuario_login'=>$dato_registro['id_usuario_login']));
@@ -147,7 +147,7 @@ class Modelo_Usuario{
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }
       $result = $GLOBALS['db']->insert('mfo_empresa',$arreglo_datos);
-    }      
+    }
     return $result;
   }
 
