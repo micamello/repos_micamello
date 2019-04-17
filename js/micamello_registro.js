@@ -1,5 +1,5 @@
 if($('#fechaNac').length){
-    $('#fecha').DateTimePicker({
+    $('#fechaShow').DateTimePicker({
     dateFormat: "yyyy-MM-dd",
     shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
     shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
