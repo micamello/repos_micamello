@@ -8,6 +8,10 @@ function navegador(){
   }
 }
 
+function redireccionar(ruta){
+  abrirModal('Debe contratar un plan que permita buscar candidatos','alert_descarga',ruta,'Ok','');
+}
+
 function colocaError(campo, id, mensaje,btn){
 
   nodo = document.getElementById(campo);

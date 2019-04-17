@@ -96,7 +96,7 @@
 			<?php } ?>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading">
-					<span><i class="fa fa-list-ul"></i> Categor&iacute;as</span>
+					<span><i class="fa fa-list-ul"></i> &Aacute;reas de Inter&eacute;s</span>
 				</div>
 				<div class="panel-body">
 					<div class="filtros">
@@ -175,8 +175,8 @@
 	                		<?php 
 	                			$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/'; 
 	                		?>
-				            <select id="categoria" class="form-control">
-				                <option value="0">Seleccione una categor&iacute;a</option>
+				            <select id="categorias" class="form-control">
+				                <option value="0">Seleccione un &aacute;rea de inter&eacute;s</option>
 				                <?php
 									foreach ($arrarea as $key => $v) {
 										echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
@@ -202,6 +202,16 @@
 										echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
 									}
 								?>                    
+				            </select>
+				        </div>
+				        <div class="form-group">
+				            <select id="salario" class="form-control">
+				                <option value="0">Seleccione un salario</option>
+				                <?php
+									foreach (SALARIO as $key => $v) {
+										echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
+									}
+								?>  
 				            </select>
 				        </div>
 				        <div class="form-group">
@@ -251,10 +261,12 @@
 			</div>
 	        <div id="result">
 	        	<?php 
-
-
 	        	if(!empty($ofertas) && $ofertas[0]['id_ofertas'] != ''){
-		            foreach($ofertas as $key => $o){ ?>
+		            foreach($ofertas as $key => $o){ 
+
+		            	$datos_plan = Modelo_Oferta::obtenerPlanOferta($o['id_ofertas']);
+                   		$id_plan = $datos_plan['id_plan'];
+		            	?>
 			            <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 							echo "<a href='".PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/'>";
 						} ?>
@@ -296,23 +308,6 @@
 												    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
 												    	}													    	
 													}													
-												}else{
-
-													if(isset($aspirantesXoferta[$o['id_ofertas']])){
-														$cantd = $aspirantesXoferta[$o['id_ofertas']];
-													}else{
-														$cantd = 0;
-													}
-
-													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
-														echo ' <br> <a class="btn-xs btn-primary parpadea" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.$o['id_ofertas'].'/1/">Ver Aspirantes ( '.$cantd.' )</a>';
-
-													}elseif($cantd == 0){
-														echo ' <br> <span class="btn-xs btn-danger parpadea">No tiene Aspirantes ( '.$cantd.' )</span>';
-													}else{
-
-														echo ' <br> <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver Aspirantes\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')" class="btn-xs btn-primary parpadea">Ver Aspirantes ( '.$cantd.' )</span>';
-													}
 												}
 												?>
 												</span>
@@ -329,11 +324,11 @@
 								  	
 								  				<div class="col-sm-1 col-md-2 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%;">
 													<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
-														<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".$o['id_postulacion']."/"; ?>">
+														<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/"; ?>">
 															<i class="fa fa-trash fa-2x"></i>
 														</a>
 													<?php }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1){ ?>
-														<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.$o['empresa'].')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".$o['id_postulacion']."/".$o['id_empresa']."/"; ?>','Ok','Confirmación');">
+														<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.$o['empresa'].')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
 															<i class="fa fa-trash fa-2x"></i>
 														</a>
 													<?php } ?>
@@ -347,17 +342,19 @@
 												</div>
 											<?php } ?>
 											<?php if($vista == 'vacantes'){ ?>
-												<div id="editar" class="col-sm-1 col-md-1 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%; cursor:pointer;">
+												
 													<?php 
 														$tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
 														$puedeEditar = Modelo_Oferta::puedeEditar($o["id_ofertas"],$tiempo);
 														if($puedeEditar["editar"] == 1){
 													?>
-													<a onclick="abrirModalEditar('editar_Of','<?php echo Utils::encriptar($o["id_ofertas"]); ?>');">
-														<i class="fa fa-edit" title="Editar la oferta"></i>
-													</a>
+													<div id="editar" class="col-sm-1 col-md-1 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%; cursor:pointer;">
+														<a onclick="abrirModalEditar('editar_Of','<?php echo Utils::encriptar($o["id_ofertas"]); ?>');">
+															<i class="fa fa-edit" title="Editar la oferta"></i>
+														</a>
+													</div>
 												<?php } ?>
-												</div>
+												
 											<?php } ?>
 								  		</div>
 								  	</div>
@@ -368,18 +365,54 @@
 								  	</div>
 								  	<div class="row">
 							   			<div class="col-md-12">
-											<div class='col-xs-6 col-md-3' align='center'>
+
+							   				<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { 
+							   					$c1 = 2;
+							   					$c2 = 3;
+							   					$c3 = 3;
+							   					$c4 = 2;
+							   					$c5 = 2;
+							   				}else{
+							   					$c1 = 3;
+							   					$c2 = 3;
+							   					$c3 = 3;
+							   					$c4 = 3;
+							   					$c5 = 3;
+							   				} ?>
+
+											<div class='col-xs-6 col-md-<?php echo $c1; ?>' align='center'>
 							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Salario: </span><br><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
 							                </div>
-							                <div class='col-xs-6 col-md-3' align='center'>
+							                <div class='col-xs-6 col-md-<?php echo $c2; ?>' align='center'>
 							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Provincia: </span><br><?php echo utf8_encode($o['provincia']);?>
 							                </div>
-							                <div class='col-xs-6 col-md-3' align='center'>
+							                <div class='col-xs-6 col-md-<?php echo $c3; ?>' align='center'>
 							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Jornada: </span><br><?php echo $o['jornada']; ?>
 							                </div>
-							                <div class='col-xs-6 col-md-3' align='center'>
+							                <div class='col-xs-6 col-md-<?php echo $c4; ?>' align='center'>
 							                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Vacantes: </span><br><?php echo $o['vacantes']; ?>
 							                </div>
+							                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
+								                <div class='col-xs-6 col-md-<?php echo $c5; ?>' align='center'>
+								                    <span class="inscritos"><b>Inscritos: </b></span>
+								                <?php 
+								                	if(isset($aspirantesXoferta[$o['id_ofertas']])){
+														$cantd = $aspirantesXoferta[$o['id_ofertas']];
+													}else{
+														$cantd = 0;
+													}
+
+													if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatosPostulados',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
+														echo ' <br> <a class="aspirantes" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($o['id_ofertas']).'/1/">'.$cantd.'</a>';
+
+													}elseif($cantd == 0){
+														echo ' <br> <span class="aspirantes">'.$cantd.'</span>';
+													}else{
+														echo ' <br> <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver inscritos en la oferta\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')" class="aspirantes">'.$cantd.'</span>';
+													}
+												?>
+								                </div>
+								            <?php } ?>
 								  		</div>
 								  	</div>
 								  	<?php if($vista == 'postulacion'){ ?>
@@ -425,11 +458,12 @@
 					}
 				} ?>
 	        </div>
+	        <div class="col-md-12">
+				<?php echo $paginas; ?>
+			</div>
 		</div>
 	</div>
-	<div class="col-md-12">
-		<?php echo $paginas; ?>
-	</div>
+	
 </div>
 
 <div class="modal fade" id="editar_Of" tabindex="-1" role="dialog" aria-labelledby="editar_Of" aria-hidden="true">

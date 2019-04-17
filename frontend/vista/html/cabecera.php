@@ -157,7 +157,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
               if (isset($menu["menu"])){   
                 foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
                   <li>
-                    <a id="<?php echo $optmnu["id"];?>" href="<?php echo $optmnu["href"];?>" <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
+                    <a <?php if(isset($optmnu['id'])){ echo 'id="'.$optmnu["id"].'"';}  if(isset($optmnu['href'])){ echo 'href="'.$optmnu['href'].'"'; }else{ echo 'onclick="'.$optmnu['onclick'].'"'; } ?> <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
                     <p class="hidden_small"><i class="fa fa-home fa-2x"></i></p>';  }else{ echo $optmnu["nombre"]; } ?></a>
                   </li>                            
                 <?php } ?>
@@ -181,7 +181,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                       } ?>"><i class="fa fa-caret-down"></i>
                       <ul class="dropdown-menu">
                         <?php foreach($menu["submenu"] as $submenu){ ?>  
-                            <li><a href="<?php echo $submenu['href'];?>"><?php echo $submenu['nombre'];?></a></li>
+                            <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>
                         <?php } ?>
                       </ul>
                     </a>

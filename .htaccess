@@ -101,15 +101,15 @@ RewriteRule ^planesUsuario/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&o
 #ofertas
 RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta [L]
 RewriteRule ^oferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta&page=$1 [L]
-RewriteRule ^detalleOferta/([a-z]+)/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
+RewriteRule ^detalleOferta/([a-z]+)/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
 
 ######################################################################################
 
 #postulaciones
 RewriteRule ^postulacion/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion [L]
 RewriteRule ^postulacion/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&page=$1 [L]
-RewriteRule ^postulacion/([a-z])+/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&param=$1&eliminarPostulacion=$2 [L]
-RewriteRule ^postulacion/([a-z])+/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&param=$1&eliminarPostulacion=$2&empresa=$3 [L]
+RewriteRule ^postulacion/([a-z])+/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&param=$1&eliminarPostulacion=$2 [L]
+RewriteRule ^postulacion/([a-z])+/([a-zA-Z0-9]+)/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion&param=$1&eliminarPostulacion=$2&empresa=$3 [L]
 
 ######################################################################################
 
@@ -127,11 +127,11 @@ RewriteRule ^recomendacion/$ %{ENV:REWRITEBASE}index.php?mostrar=recomendacion [
 RewriteRule ^adminEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa [L]
 RewriteRule ^adminEmpresas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&page=$1 [L]
 
-RewriteRule ^eliminarPlanEmpresa/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=eliminar&idPlanEmpresa=$1 [L]
+RewriteRule ^eliminarPlanEmpresa/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=eliminar&idPlanEmpresa=$1 [L]
 
-RewriteRule ^asignarPlanEmpresa/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearPlan&idSubEmpresa=$1 [L]
+RewriteRule ^asignarPlanEmpresa/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearPlan&idSubEmpresa=$1 [L]
 
-RewriteRule ^editarPlanEmpresa/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=editarPlan&idPlanEmpresa=$1 [L]
+RewriteRule ^editarPlanEmpresa/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=editarPlan&idPlanEmpresa=$1 [L]
 
 RewriteRule ^crearEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearEmpresas [L]
 RewriteRule ^cuentas/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas [L]
@@ -142,13 +142,13 @@ RewriteRule ^cuentas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcio
 #Vacantes
 RewriteRule ^vacantes/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes [L]
 RewriteRule ^vacantes/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&page=$1 [L]
-RewriteRule ^vacantes/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&idOferta=$1&page=$2 [L]
+RewriteRule ^vacantes/([A-Za-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=vacantes&idOferta=$1&page=$2 [L]
 ########################################################################################
 
 #Aspirantes
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&vista=$1&id_oferta=$2&page=$3 [L]
+RewriteRule ^verAspirantes/([0-9]+)/([A-Za-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&vista=$1&id_oferta=$2&page=$3 [L]
 
-RewriteRule ^verAspirantes/([0-9]+)/([0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&page=$5 [L]
+RewriteRule ^verAspirantes/([0-9]+)/([A-Za-z0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=filtrar&vista=$1&id_oferta=$2&type=$3&param1=$4&page=$5 [L]
 ###########################################################################################################################################
 
 #generarPDF

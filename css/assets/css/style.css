@@ -34,7 +34,6 @@ body {
     margin-left: 0;
     margin-right: 0;
     font-weight: 400;
-    width:100%;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -2353,4 +2352,17 @@ work Section style
 
 .etiquetaBody{
   font-size:12px;
+}
+
+.parcial{
+  color:red;
+}
+
+#planes{
+  display:none;
+}
+
+.centrado{
+  vertical-align: middle; 
+  text-align: center;
 }

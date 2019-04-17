@@ -1,26 +1,11 @@
 <?php 
 
-/*print_r($data);
-print_r($facetas);
-$exp = '/';*/
-
-/*foreach ($facetas as $key => $value) {
-   $letra = substr($value,0,1);
-   if($letra == 'A' && $a > 1){
-    $letra = 'P';
-   }
-   $exp .= '('.$letra.'[0-9]{1,3})';
-   $literales[$letra] = $value;
-   $a++;
-}
-$exp .= '/';*/
-
 foreach ($data as $letra => $value) { 
 
     if($vista == 1){
         $ruta = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta.'/2';
     }else{
-        $ruta = PUERTO.'://'.HOST.'/verAspirantes/2/0/2';
+        $ruta = PUERTO.'://'.HOST.'/verAspirantes/2/'.Utils::encriptar(0).'/2';
     }
 
     if($letra != 'O'){
@@ -68,7 +53,7 @@ foreach ($data as $letra => $value) {
             $ruta .= '/Q'.$value['id'];
         }
 
-        $valores = "'".$ruta."/',1";
+        $valores = "'".$ruta."/',2,1";
 
         if($letra == 'R'){
             

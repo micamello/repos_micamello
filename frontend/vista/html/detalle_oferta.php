@@ -128,7 +128,7 @@
                 </div>
                 <div>
                     <h5>
-                        <span class="titulos">Salario</span><br>
+                        <span class="titulos">Salario <?php if(!empty($o['a_convenir'])){ echo '(a convenir)'; } ?></span><br>
                         - <?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
                     </h5>
                 </div>
@@ -150,6 +150,14 @@
                         - <?php echo $o['edad_minima'].' a '.$o['edad_maxima']; ?> a&ntilde;os
                     </h5>
                 </div>
+
+                <div>
+                    <h5>
+                        <span class="titulos">Primer Empleo</span><br>
+                        - <?php if($o['primer_empleo']){ echo 'S&iacute;'; }else{ echo 'No'; } ?>
+                    </h5>
+                </div>
+
 		          <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
                 <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
                   <input type="hidden" name="postulado" id="postulado" value="1">

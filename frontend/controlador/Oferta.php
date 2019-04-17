@@ -67,6 +67,7 @@ class Controlador_Oferta extends Controlador_Base{
           Vista::renderJSON($resultado);
         break;
         case 'filtrar':
+
           $array_empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,true);
           $empresas = array();
 
@@ -101,40 +102,33 @@ class Controlador_Oferta extends Controlador_Base{
               if($letra == 'A' && $type == 1){
                 if(isset($arrarea[$id])){
                   $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                  //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrarea[$id]);
                 }
               }
               else if($letra == 'P' && $type == 1){
                 if(isset($arrprovincia[$id])){
-                    $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrprovincia[$id]);
+                  $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
                 }
               }
               else if($letra == 'J' && $type == 1){
                 if(isset($arrjornadas[$id])){
-                    $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>$arrjornadas[$id]);
+                  $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
                 }
               }else if($letra == 'O' && $type == 1){
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id; 
-                //$array_datos[$letra] = array('id'=>$id,'nombre'=>$id);
               }
               else if($letra == 'S' && $type == 1){
                 if(isset($empresas[$id])){
                   $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>$empresas[$id]);
-                  } 
+                } 
               }
               else if($letra == 'K' && $type == 1){
                 
                 if(isset(SALARIO[$id])){
                   $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id; 
-                    //$array_datos[$letra] = array('id'=>$id,'nombre'=>SALARIO[$id]);
                 }
               }
               else if($letra == 'Q' && $type == 1){
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
-                //$array_datos[$letra] = array('id'=>$id,'nombre'=>htmlentities($id,ENT_QUOTES,'UTF-8'));
               }else if($type == 2){
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = 0;
               }
@@ -175,7 +169,6 @@ class Controlador_Oferta extends Controlador_Base{
                 }
               }
               else if($letra == 'Q'){ 
-                
                 $array_datos[$letra] = array('id'=>$value,'nombre'=>htmlentities($value,ENT_QUOTES,'UTF-8'));
               }
             }
@@ -188,7 +181,6 @@ class Controlador_Oferta extends Controlador_Base{
                 array_push($array_subempresas, $key);
             }
             $idUsuario = implode(",", $array_subempresas);
-
             $array_empresas_hijas = $_SESSION['mfo_datos']['array_empresas_hijas'];
           }else{
             $array_empresas_hijas = array();
@@ -197,7 +189,6 @@ class Controlador_Oferta extends Controlador_Base{
           $filtros = $_SESSION['mfo_datos']['Filtrar_ofertas'];
 
           if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['J']) && empty($filtros['K']) && empty($filtros['S']) && empty($filtros['Q'])){
-
 
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
@@ -340,7 +331,7 @@ class Controlador_Oferta extends Controlador_Base{
           }
           
           if (Utils::getParam('guardarEdicion') == 1) {
-            $idOferta = Utils::getParam('idOferta');
+            $idOferta = Utils::desencriptar(Utils::getParam('idOferta', '', $this->data));
             self::guardarDescripcion($idOferta);
           }
 
@@ -447,19 +438,19 @@ class Controlador_Oferta extends Controlador_Base{
             Utils::doRedirect(PUERTO.'://'.HOST.'/');               
           }
 
-          $eliminarPostulacion = Utils::getParam('eliminarPostulacion', '', $this->data);
-          $empresa = Utils::getParam('empresa', '', $this->data);
+          $eliminarPostulacion = Utils::desencriptar(Utils::getParam('eliminarPostulacion', '', $this->data));
+          $empresa = Utils::desencriptar(Utils::getParam('empresa', '', $this->data));
 
           if(!empty($eliminarPostulacion)){
             $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
             if(!empty($empresa)){
-              $tipo_post = 1; 
+              $tipo_post = 1;
+              $r = Modelo_Postulacion::postAutoxIdPostAeliminar($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa,$tiempo);
             }else{
               $tipo_post = 2;
+              $r = array();
             }
 
-            $r = Modelo_Postulacion::postAutoxIdPostAeliminar($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa,$tiempo);
-          
             if(!empty($r['ids_postulaciones'])){
               $resultado = Modelo_Postulacion::eliminarPostulacion($r['ids_postulaciones'],$tipo_post);
               if(empty($resultado)){
@@ -467,8 +458,8 @@ class Controlador_Oferta extends Controlador_Base{
               }else{
                 Modelo_EmpresaBloq::insertEmpresa($_SESSION['mfo_datos']['usuario']['id_usuario'],$empresa);
                   self::devolverPostulaciones(explode(",",$r['ids_usuariosplanes']));
-                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';                    
-                  //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
+                  $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
+                  Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
               }
             }else{
 
@@ -480,7 +471,7 @@ class Controlador_Oferta extends Controlador_Base{
                     $_SESSION['mostrar_error'] = 'No se pudo eliminar la postulaci\u00f3n, intente de nuevo';
                 }else{                    
                   $_SESSION['mostrar_exito'] = 'Se ha eliminado la postulaci\u00f3n exitosamente';
-                  //Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
+                  Utils::doRedirect(PUERTO.'://'.HOST.'/'.$vista.'/');
                 }
               }
             }
@@ -490,6 +481,8 @@ class Controlador_Oferta extends Controlador_Base{
 
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
+            }else{
+              $_SESSION['mfo_datos']['filtro'] = FILTRO_PREFERENCIAS_DEFAULT;
             }
 
             if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){
@@ -589,14 +582,11 @@ class Controlador_Oferta extends Controlador_Base{
               throw new Exception("Ha ocurrido un error en el cambio de estatus, intente nuevamente");
           }
           $GLOBALS['db']->commit();
-          $_SESSION['mostrar_exito'] = 'El estatus de la oferta fue editado exitosamente';                            
-          //$this->redirectToController('postulacion');
+          $_SESSION['mostrar_exito'] = 'El estatus de la oferta fue editado exitosamente';
       }catch (Exception $e) {
           $_SESSION['mostrar_error'] = $e->getMessage();
           $GLOBALS['db']->rollback();
-          //$this->redirectToController('detalleOferta');
       }
-      //Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');
     }
 
     public static function devolverPostulaciones($ids_planes){

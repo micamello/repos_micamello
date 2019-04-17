@@ -69,7 +69,7 @@ function abrirModalEditar(id,idOferta){
 
     $.ajax({
         type: "GET",
-        url: puerto_host+"?mostrar=oferta&opcion=buscaDescripcion&idOferta="+idOferta,
+        url: puerto_host+"/index.php?mostrar=oferta&opcion=buscaDescripcion&idOferta="+idOferta,
         dataType:'json',
         async: false,
 
@@ -177,9 +177,11 @@ function enviarPclave(ruta,tipo,page){
 function obtenerFiltro(ruta,page){
 
     var pclave = $('#inputGroup1').val();
-    var categoria = $('#categoria').val();
+    var categoria = $('#categorias').val();
     var provincia = $('#provincia').val();
     var jornada = $('#jornada').val();
+    var salario = $('#salario').val();
+
     var busco = false;
 
     if(pclave != ''){
@@ -196,6 +198,10 @@ function obtenerFiltro(ruta,page){
     }
     if(jornada != 0){
         ruta += "J"+jornada+"/";
+        busco = true;
+    }
+    if(salario != 0){
+        ruta += "K"+salario+"/";
         busco = true;
     }
 

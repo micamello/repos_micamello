@@ -91,7 +91,7 @@ class Modelo_Postulacion{
 	public static function postAutoxIdPostAeliminar($idusuario,$idempresa,$tiempo){
 		if (empty($idusuario) || empty($idempresa) || empty($tiempo)){ return false; }
 
-		$sql = "SELECT GROUP_CONCAT(p.id_auto ORDER BY p.id_auto) as ids_postulaciones, GROUP_CONCAT(a.id_usuarioplan ORDER BY p.id_auto) as ids_usuariosplanes FROM mfo_oferta o 
+		echo $sql = "SELECT GROUP_CONCAT(p.id_auto ORDER BY p.id_auto) as ids_postulaciones, GROUP_CONCAT(a.id_usuarioplan ORDER BY p.id_auto) as ids_usuariosplanes FROM mfo_oferta o 
 			INNER JOIN mfo_postulacion p ON p.id_ofertas = o.id_ofertas
     		INNER JOIN mfo_postulacion_automatica a ON a.id_postulacion = p.id_auto
 			WHERE o.id_empresa = $idempresa AND p.id_usuario = $idusuario 
