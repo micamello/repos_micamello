@@ -45,7 +45,7 @@ class Modelo_Usuario{
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
                      u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
                      u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,        
-                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil
+                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil, ul.tipo_registro
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -178,7 +178,7 @@ class Modelo_Usuario{
 
   public static function actualizarSession($idUsuario,$tipo_usuario){
     if ($tipo_usuario == self::CANDIDATO){
-      
+
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.viajar, u.discapacidad, u.residencia, u.id_escolaridad, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
         ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral
 

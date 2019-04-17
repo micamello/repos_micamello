@@ -62,6 +62,7 @@ RewriteRule ^registro/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=registro&opc
 
 #perfil
 RewriteRule ^perfil/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil [L]
+RewriteRule ^cambioClave/$ %{ENV:REWRITEBASE}index.php?mostrar=perfil&opcion=cambioContrasena [L]
 
 #logout
 RewriteRule ^logout/$ %{ENV:REWRITEBASE}index.php?mostrar=logout [L]
