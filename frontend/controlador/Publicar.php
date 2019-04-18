@@ -92,6 +92,7 @@ class Controlador_Publicar extends Controlador_Base {
     $listSubareas = Modelo_AreaSubarea::obtieneAreas_Subareas();
     $tipolicencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
 
+
     $tags = array('areasSubareas'=> $listSubareas,
                   'arrprovinciasucursal'=>$arrprovinciasucursal,
                   'arrciudad'=>$arrciudad,
