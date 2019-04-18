@@ -20,7 +20,7 @@
 		            </div>
 		            <div class="col-md-12">
 		                <div id="seccion_clave_ant" class="form-group">
-		                  <label class="text-center">Contrase&ntilde;a Anterior<i class="requerido">*</i></label><div id="err_clave_ant" class="help-block with-errors"></div>
+		                  <label class="text-center">Contrase&ntilde;a anterior<i class="requerido">*</i></label><div id="err_clave_ant" class="help-block with-errors"></div>
 		                  <div class="input-group">
 		                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
 		                    <input id="password_ant" name="password_ant" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" class="form-control" value="<?php if(isset($data['password_ant'])){ echo $data['password_ant']; } ?>" onkeyup="validarClave()">
