@@ -319,7 +319,7 @@ class Controlador_Oferta extends Controlador_Base{
           
           Vista::render('detalle_oferta', $tags);
         break;
-        case 'vacantes':
+        case 'vacantes':          
           $vista = $opcion;
 
           //solo empresas

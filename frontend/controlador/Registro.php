@@ -250,11 +250,11 @@ class Controlador_Registro extends Controlador_Base {
 
   public function registroRedSocial($correo,$nombre,$apellido){
     $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
-    $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListado();
+    $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
     $id_genero = Modelo_Genero::obtenerListadoGenero();
     $id_genero = $id_genero[0]['id_genero'];
     $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
-    $id_situacionlaboral = $id_situacionlaboral[0]['id_situacionlaboral'];
+    $id_situacionlaboral = $id_situacionlaboral['id_situacionlaboral'];
 
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $escolaridad = Modelo_Escolaridad::obtieneListado();
