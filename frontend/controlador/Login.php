@@ -27,15 +27,19 @@ class Controlador_Login extends Controlador_Base {
           } 
           if ($usuario["estado"] != 1){
             throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electr\u00F3nico para activarlo o comuniquese con el administrador para su activaci\u00F3n");            
-          }          
-          if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
-            throw new Exception("Error en el sistema, por favor intente denuevo");
-          }                                 
+          }   
+
+          if(!empty($usuario['ultima_sesion'])){       
+            if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
+              throw new Exception("Error en el sistema, por favor intente denuevo");
+            }  
+          }                               
           self::registroSesion($usuario);              
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
         }         
+  
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                        $_SESSION['mfo_datos']['usuario']['id_usuario'],
                                        (isset($_SESSION['mfo_datos']['usuario']['infohv'])) ? $_SESSION['mfo_datos']['usuario']['infohv'] : array(),
@@ -54,7 +58,8 @@ class Controlador_Login extends Controlador_Base {
  
   }
  
-  public static function registroSesion($usuario){        
+  public static function registroSesion($usuario){     
+
     $_SESSION['mfo_datos']['usuario'] = $usuario;
     //busqueda de planes activos
     $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"],$usuario["tipo_usuario"]);

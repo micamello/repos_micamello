@@ -19,6 +19,10 @@ if(document.getElementById('form_editarPerfil')){
     }
 }
 
+$('#button_cambiar').on('click', function(){
+    enviarCambioClave();
+});
+
 $('#boton').on('click', function(){
   enviarFormulario();
 });
@@ -490,6 +494,7 @@ function validarFormulario(tipovalidacion){
     var nacionalidad = document.getElementById('id_nacionalidad').value;
     var fecha_nacimiento = document.getElementById('fecha_nacimiento').value;
     var telefono = document.getElementById('telefono').value;
+
     var provincia = document.getElementById('provincia').value;
     var ciudad = document.getElementById('ciudad').value;
 
@@ -511,6 +516,7 @@ function validarFormulario(tipovalidacion){
         var lugar_estudio = document.getElementById('lugar_estudio');
         var universidad = document.getElementById('universidad').selectedIndex;
         var universidad2 = document.getElementById('universidad2').value;
+        var convencional = document.getElementById('convencional').value;
         
         var tipo_doc = document.getElementById('documentacion').value;
         var dni = document.getElementById('dni').value;
@@ -617,7 +623,7 @@ function validarFormulario(tipovalidacion){
         if(tiene_trabajo == null || tiene_trabajo == 0){
 
             colocaError("err_trab", "seccion_trab",err_list,"boton");
-            mensaje += '- Tiene trabajo?, '+err_list+'\n';
+            mensaje += '- Situaci\u00F3n laboral, '+err_list+'\n';
             error = 1;
         }else{
             quitarError("err_trab", "seccion_trab");
@@ -781,11 +787,28 @@ function validarFormulario(tipovalidacion){
           error = 1; 
         }
 
+        if(convencional.length != ''){
+
+            if(convencional.length < '6'){
+                colocaError("err_tlfCon","seccion_tlfCon","Longitud mín. 6 caracteres","boton");
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 6 caracteres\n'; 
+                error = 1; 
+            }else if(convencional.length > '15'){
+
+                colocaError("err_tlfCon","seccion_tlfCon","Longitud máx. 15 caracteres","boton");
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 15 caracteres\n'; 
+                error = 1; 
+            }else{
+               quitarError("err_tlfCon","seccion_tlfCon"); 
+            }
+        }
+
     }else if(tipo_usuario == 2){
 
         var nombre_contact = document.getElementById('nombre_contact').value;
         var apellido_contact = document.getElementById('apellido_contact').value;
         var tel_one_contact = document.getElementById('tel_one_contact').value;
+        var tel_two_contact = document.getElementById('tel_two_contact').value;
 
         if(nombre_contact.length <= '100'){
             if(nombre_contact == null || nombre_contact.length == 0 || /^\s+$/.test(nombre_contact)){
@@ -833,29 +856,52 @@ function validarFormulario(tipovalidacion){
             error = 1; 
         }
 
-        if(tel_one_contact.length <= '25'){
+        if(tel_one_contact.length >= '10' && tel_one_contact.length <= '15'){
 
             if(tel_one_contact == null || tel_one_contact.length == 0 || /^\s+$/.test(tel_one_contact)){
 
-                colocaError("err_tlfCon", "seccion_tlfCon",err_campo,"boton");
-                mensaje += '- Teléfono, '+err_campo+'\n';
+                colocaError("err_tlfCel", "seccion_tlfCel",err_campo,"boton");
+                mensaje += '- Celular de contacto, '+err_campo+'\n';
                 error = 1;
 
             }else if(!expreg_telf.test(tel_one_contact)){
 
-                colocaError("err_tlfCon", "seccion_tlfCon",err_formato_numeros,"boton");
-                mensaje += '- Teléfono de contacto, '+err_formato_numeros+'\n';
+                colocaError("err_tlfCel", "seccion_tlfCel",err_formato_numeros,"boton");
+                mensaje += '- Celular de contacto, '+err_formato_numeros+'\n';
                 error = 1; 
 
             }else{
-                quitarError("err_tlfCon","seccion_tlfCon");
+                quitarError("err_tlfCel","seccion_tlfCel");
             }
-        }else{
-
-            colocaError("err_tlfCon","seccion_tlfCon","El telefono no debe exceder de 25 caracteres","boton");
-            mensaje += '- Teléfono de contacto, no debe exceder de 100 caracteres\n'; 
+        }else if(tel_one_contact.length < '10'){
+            colocaError("err_tlfCel","seccion_tlfCel","Longitud mín. 10 caracteres","boton");
+            mensaje += '- Celular de contacto, longitud m\u00EDn. 10 caracteres\n'; 
             error = 1; 
+        }else if(tel_one_contact.length > '15'){
+
+            colocaError("err_tlfCel","seccion_tlfCel","Longitud máx. 15 caracteres","boton");
+            mensaje += '- Celular de contacto, longitud m\u00E1x. 15 caracteres\n'; 
+            error = 1; 
+        }else{
+           quitarError("err_tlfCel","seccion_tlfCel"); 
         }
+
+        if(tel_two_contact.length != ''){
+
+            if(tel_two_contact.length < '6'){
+                colocaError("err_tlfCon2","seccion_tlfCon2","Longitud mín. 6 caracteres","boton");
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 6 caracteres\n'; 
+                error = 1; 
+            }else if(tel_two_contact.length > '15'){
+
+                colocaError("err_tlfCon2","seccion_tlfCon2","Longitud máx. 15 caracteres","boton");
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 15 caracteres\n'; 
+                error = 1; 
+            }else{
+                quitarError("err_tlfCon2","seccion_tlfCon2");
+            }
+        }
+
     }
 
     if(nombres.length <= '100'){
@@ -883,29 +929,37 @@ function validarFormulario(tipovalidacion){
         error = 1; 
     }
 
-    if(telefono.length <= '25'){
+    if(telefono.length >= '10' && telefono.length <= '15'){
 
         if(telefono == null || telefono.length == 0 || /^\s+$/.test(telefono)){
 
             colocaError("err_tlf", "seccion_tlf",err_campo,"boton");
-            mensaje += '- Teléfono, '+err_campo+'\n';
+            mensaje += '- Celular, '+err_campo+'\n';
             error = 1;
 
         }else if(!expreg_telf.test(telefono)){
 
             colocaError("err_tlf", "seccion_tlf",err_formato_numeros,"boton");
-            mensaje += '- Teléfono, '+err_formato_numeros+'\n';
+            mensaje += '- Celular, '+err_formato_numeros+'\n';
             error = 1; 
 
         }else{
             quitarError("err_tlf","seccion_tlf");
         }
+    }else if(telefono.length < '10'){
+        colocaError("err_tlf","seccion_tlf","Longitud mín. 10 caracteres","boton");
+        mensaje += '- Celular, longitud m\u00EDn. 6 caracteres\n'; 
+        error = 1; 
+    }else if(telefono.length > '15'){
+
+        colocaError("err_tlf","seccion_tlf","Longitud máx. 15 caracteres","boton");
+        mensaje += '- Celular, longitud m\u00E1x. 15 caracteres\n'; 
+        error = 1; 
     }else{
 
-        colocaError("err_tlf","seccion_tlf","El telefono no debe exceder de 25 caracteres","boton");
-        mensaje += '- Teléfono, no debe exceder de 25 caracteres\n';
-        error = 1; 
+        quitarError("err_tlf","seccion_tlf");
     }
+
 
     if(!isNaN(fecha_nacimiento)){
 
@@ -984,6 +1038,24 @@ function validarClave(){
 
     var password = document.getElementById('password').value;
     var password_two = document.getElementById('password_two').value;
+
+    if(document.getElementById('password_ant')){
+
+        var password_ant = document.getElementById('password_ant').value;
+        //console.log('password_ant: '+password_ant);
+        if(password_ant == null || password_ant.length == 0 || /^\s+$/.test(password_ant)){
+
+            colocaError("err_clave_ant", "seccion_clave_ant",err_campo,"button_cambiar");
+            error = 1; 
+
+        }else if(!expreg.test(password_ant)){
+
+            colocaError("err_clave_ant", "seccion_clave_ant",err_formato,"button_cambiar"); 
+            error = 1;  
+        }else{
+            quitarError("err_clave_ant", "seccion_clave_ant");
+        }
+    }
 
     if(password == null || password.length == 0 || /^\s+$/.test(password)){
 

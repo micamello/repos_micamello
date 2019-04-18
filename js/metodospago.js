@@ -50,7 +50,7 @@ $('#provincia').change(function(){
   if(id_provincia != ""){
     $.ajax({
       type: "GET",
-      url: puerto_host+"?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
+      url: puerto_host+"index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
       dataType:'json',
       success:function(data){
         $('#ciudad').html('<option value="">Selecciona una ciudad</option>');
@@ -72,7 +72,7 @@ $('#provinciaP').change(function(){
   if(id_provincia != ""){
     $.ajax({
       type: "GET",
-      url: puerto_host+"?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
+      url: puerto_host+"index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
       dataType:'json',
       success:function(data){
         $('#ciudadP').html('<option value="">Selecciona una ciudad</option>');

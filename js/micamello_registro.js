@@ -869,10 +869,10 @@ function verificarExiste(obj){
 	var puerto_host = $('#puerto_host').val();
 	var retorno = "";
 	if(obj[0].id == 'correoCandEmp'){
-		url = puerto_host+"?mostrar=registro&opcion=buscarCorreo&correo="+buscar;
+		url = puerto_host+"index.php?mostrar=registro&opcion=buscarCorreo&correo="+buscar;
 	}
 	if(obj[0].id == 'documentoCandEmp'){
-		url = puerto_host+"?mostrar=registro&opcion=buscarDocumento&documento="+buscar;
+		url = puerto_host+"index.php?mostrar=registro&opcion=buscarDocumento&documento="+buscar;
 	}
 	$.ajax({
 	    type: "GET",

@@ -95,7 +95,7 @@ if($('#provinciaOf').length){
       if(id_provincia != ""){
         $.ajax({
           type: "GET",
-          url: puerto_host+"?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
+          url: puerto_host+"index.php?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
           dataType:'json',
           success:function(data){
             $('#ciudadOf').html('<option value="">Seleccione una ciudad</option>');
@@ -905,7 +905,7 @@ $('#planesSelect').on('change', function(){
       if(id_plan != ""){
         $.ajax({
           type: "GET",
-          url: puerto_host+"?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
+          url: puerto_host+"index.php?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
           dataType:'json',
           success:function(data){
             mostrarDatosPlan(data);

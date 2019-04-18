@@ -227,7 +227,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 	                                    	<div class="col-md-6">
 											    <div id="seccion_tlf" class="form-group">
-											        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
+											        <label for="telefono">Celular <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
 											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>"  onkeyup="validarFormulario(false)" />
 											    </div>
 											</div>         
@@ -259,7 +259,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 											<div class="col-md-6">
 											    <div id="seccion_tlf" class="form-group">
-											        <label for="telefono">Tel&eacute;fono <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
+											        <label for="telefono">Celular <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
 											        <input class="form-control" type="text" id="telefono" name="telefono" minlength="9" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>"  onkeyup="validarFormulario(false)" />
 											    </div>
 											</div>
@@ -314,9 +314,9 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 
 	                                    	<div class="col-md-6">
-											    <div id="seccion_tlf" class="form-group">
-											        <label for="convencional">Convencional (Opcional)</label><div id="err_tlf" class="help-block with-errors"></div>
-											        <input class="form-control" type="text" id="convencional" name="convencional" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario(false)" />
+											    <div id="seccion_tlfCon" class="form-group">
+											        <label for="convencional">Tel&eacute;fono Convencional (Opcional)</label><div id="err_tlfCon" class="help-block with-errors"></div>
+											        <input class="form-control" type="text" id="convencional" name="convencional" minlength="6" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario(false)" />
 											    </div>
 											</div>
 
@@ -668,18 +668,18 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 									            </div> 
 
 									            <div class="col-md-6" id="group_num1_contact">
-									              <div id="seccion_tlfCon" class="form-group">
-									                <label class="text-center">Teléfono 1</label>&nbsp;<i class="requerido">*</i><div id="err_tlfCon" class="help-block with-errors"></div>
+									              <div id="seccion_tlfCel" class="form-group">
+									                <label class="text-center">Celular</label>&nbsp;<i class="requerido">*</i><div id="err_tlfCel" class="help-block with-errors"></div>
 
-									                <input type="text" name="tel_one_contact" id="tel_one_contact" maxlength="25" value="<?php echo (isset($data['tel_one_contact'])) ? $data['tel_one_contact'] : $_SESSION['mfo_datos']['usuario']['telefono1']; ?>" class="form-control" pattern='[0-9]+' onkeyup="validarFormulario(false)" onkeydown="return validaNumeros(event)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?>>
+									                <input type="text" name="tel_one_contact" id="tel_one_contact" minlength="6" maxlength="15" value="<?php echo (isset($data['tel_one_contact'])) ? $data['tel_one_contact'] : $_SESSION['mfo_datos']['usuario']['telefono1']; ?>" class="form-control" pattern='[0-9]+' onkeyup="validarFormulario(false)" onkeydown="return validaNumeros(event)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?>>
 									              </div>
 									            </div> 
 
 									            <div class="col-md-6" id="group_num2_contact">
-									              <div class="form-group">
-									                <label class="text-center">Teléfono 2 (opcional):</label><div class="help-block with-errors"></div>
+									              <div id="seccion_tlfCon2" class="form-group">
+									                <label class="text-center">Tel&eacute;fono convencional (opcional):</label><div id="err_tlfCon2" class="help-block with-errors"></div>
 
-									                <input type="text" name="tel_two_contact" id="tel_two_contact" maxlength="25" value="<?php echo (isset($data['tel_two_contact'])) ? $data['tel_two_contact'] : $_SESSION['mfo_datos']['usuario']['telefono2']; ?>" class="form-control" pattern='[0-9]+' onkeydown="return validaNumeros(event)" <?php /*if($btnSig == 1){ echo 'disabled'; }*/ ?>>
+									                <input type="text" name="tel_two_contact" id="tel_two_contact" minlength="6" maxlength="15" value="<?php echo (isset($data['tel_two_contact'])) ? $data['tel_two_contact'] : $_SESSION['mfo_datos']['usuario']['telefono2']; ?>" onkeyup="validarFormulario(false)" class="form-control" pattern='[0-9]+' onkeydown="return validaNumeros(event)" <?php /*if($btnSig == 1){ echo 'disabled'; }*/ ?>>
 									              </div>
 									            </div> 
 									        </div>
@@ -698,6 +698,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 										<?php }else{ 	?>
 											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn btn-info <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 									    <?php } ?>
+									    <span class="help-block">En este formulario los campos con (<i class="requerido">*</i>) son obligatorios</span>
 									</div>
 				            	</div>  
 			            	</div>   
@@ -744,7 +745,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 	        <!--<a href="" class="btn btn-success" id="btncambiar">Cambiar</a>-->
-	        <input type="button" id="button_cambiar" name="btnusu" class="btn btn-success" value="Cambiar" onclick="enviarCambioClave()"> 
+	        <input type="button" id="button_cambiar" name="btnusu" class="btn btn-success" value="Cambiar"> 
 	      </div>
   		</form>
     </div>    

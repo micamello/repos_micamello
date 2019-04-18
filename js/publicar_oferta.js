@@ -55,7 +55,7 @@ $('#provincia_of').change(function()
     if(id_provincia != ""){
         $.ajax({
             type: "GET",
-            url: puerto_host+"?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
+            url: puerto_host+"index.php?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
             dataType:'json',
             success:function(data){
                 $('#ciudad_of').html('<option value="">Selecciona una ciudad</option>');
