@@ -14,7 +14,7 @@ class Controlador_Contrasena extends Controlador_Base {
       default:
         $this->mostrarDefault();
       break;
-    }        
+    }      
   }
 
   public function validarToken(){
