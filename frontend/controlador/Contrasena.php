@@ -10,7 +10,47 @@ class Controlador_Contrasena extends Controlador_Base {
     switch($opcion){      
       case 'recuperacion':
         $this->validarToken();
-      break;      
+      break;   
+      case 'cambioContrasena':
+
+        if (Utils::getParam('cambiarClave_obligatorio') == 1) {
+
+            try{
+                $password_ant = Utils::getParam('password_ant', '', $this->data);
+                $pass_ant = Modelo_Usuario::obtenerPassAnt($_SESSION['mfo_datos']['usuario']['id_usuario_login']);
+
+                if($pass_ant != md5($password_ant)){
+                    $tags['data'] = array('password'=>$_POST["password"],'password_two'=>$_POST["password_two"],'password_ant'=>$_POST["password_ant"]);
+                    throw new Exception("La contrase\u00F1a anterior no es v\u00E1lida, intente de nuevo");
+                }else{
+                    
+                    $obj_perfil = new Controlador_Perfil();
+                    $existeError = $obj_perfil->guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login'],2);
+                    if($existeError == 1){
+                        $tags['data'] = array('password'=>$_POST["password"],'password_two'=>$_POST["password_two"],'password_ant'=>$_POST["password_ant"]);
+                    }else{
+
+                      session_regenerate_id(true);
+                      session_destroy();
+                      $_SESSION['mostrar_exito'] = 'El cambio de contrase\u00F1a se ha realizado con \u00E9xito! \n Por motivos de seguridad cerraremos la sesi\u00F3n, por favor vuelva a ingresar utilizando la nueva contrase\u00F1a. ';
+                      $this->redirectToController('login'); 
+                    }
+                }
+            }catch (Exception $e) {
+                $_SESSION['mostrar_error'] = $e->getMessage();
+                $GLOBALS['db']->rollback();
+            }
+            //redirigir al perfil
+        }else{
+            $_SESSION['mostrar_error'] = 'Para continuar deber\u00E1 cambiar su contrase\u00F1a';      
+        }
+
+        $breadcrumbs['cambioClave'] = 'Cambio de contrase&ntilde;a';
+        $tags["template_js"][] = "editarPerfil";
+        $tags['breadcrumbs'] = $breadcrumbs;
+        Vista::render('cambio_contrasena', $tags); 
+            
+      break;   
       default:
         $this->mostrarDefault();
       break;

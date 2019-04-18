@@ -7,16 +7,18 @@ class Controlador_Perfil extends Controlador_Base
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
+
+        if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($usuario['tipo_registro'] == Modelo_Usuario::PRE_REG || $usuario['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){ 
+            Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
+        } 
+
         //Obtiene todos los banner activos segun el tipo
         $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
         $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
         $msj1 = $imgArch1 = $btnDescarga = '';
-        
+        //$breadcrumbs = array();
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
-            case 'cambioContrasena':
-                Vista::render('cambio_contrasena', array());   
-            break;
             case 'buscarDni':
                 $dni = Utils::getParam('dni', '', $this->data); 
                 //Permite determinar si el documento ingresado ya esta registrado en base de datos
@@ -76,8 +78,13 @@ class Controlador_Perfil extends Controlador_Base
                 if (Utils::getParam('cambiarClave') == 1) {
 
                     //Guarda el cambio de clave
-                    self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login']);
-                    $_SESSION['mostrar_exito'] = 'La contrase\u00F1a fue modificada exitosamente.';
+                    $existeError = self::guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login'],1);
+
+                    if($existeError == 1){
+                        $this->redirectToController('perfil');
+                    }else{
+                        $_SESSION['mostrar_exito'] = 'La contrase\u00F1a fue modificada exitosamente.';
+                    }
                 }
 
                 //Obtiene los datos necesarios según los datos del usuario
@@ -204,18 +211,24 @@ class Controlador_Perfil extends Controlador_Base
             }else{
                 $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
                 if (empty($validaTlf2)){
-                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " no es v\u00E1lido");
+                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no es v\u00E1lido");
                 }
-                if (strlen($data['tel_one_contact']) > 25) {
-                    throw new Exception("El telefono de contacto 1 " . $data['tel_one_contact'] . " supera el l\u00CDmite permitido");
+                if (strlen($data['tel_one_contact']) > 15) {
+                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " supera el l\u00CDmite permitido");
+                }
+                if (strlen($data['tel_one_contact']) < 10) {
+                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no alcanza el l\u00CDmite m\u00CDnimo permitido");
                 }
                 if(isset($_POST['tel_two_contact']) && !empty($_POST['tel_two_contact'])){
                     $validaTlf3 = Utils::valida_telefono($data['tel_two_contact']);
                     if (empty($validaTlf3)) {
-                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " no es v\u00E1lido");
+                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no es v\u00E1lido");
                     }
-                    if (strlen($data['tel_two_contact']) > 25) {
-                        throw new Exception("El telefono de contacto 2 " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
+                    if (strlen($data['tel_two_contact']) > 15) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
+                    }
+                    if (strlen($data['tel_two_contact']) < 6) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
                     }
                 }
                 if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::EMPRESA)){
@@ -225,10 +238,13 @@ class Controlador_Perfil extends Controlador_Base
 
             $validaTlf = Utils::valida_telefono($data['telefono']);
             if (empty($validaTlf)) {
-                throw new Exception("El telefono " . $data['telefono'] . " no es v\u00E1lido");
+                throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
             }
-            if (strlen($data['telefono']) > 25) {
-                throw new Exception("El telefono " . $data['telefono'] . " supera el l\u00CDmite permitido");
+            if (strlen($data['telefono']) > 15) {
+                throw new Exception("El celular " . $data['telefono'] . " supera el l\u00CDmite permitido");
+            }
+            if (strlen($data['telefono']) < 10) {
+                throw new Exception("El celular " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
             }
             $validaFecha = Utils::valida_fecha($data['fecha_nacimiento']);
             if (empty($validaFecha)) {
@@ -236,6 +252,20 @@ class Controlador_Perfil extends Controlador_Base
             }
             
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
+
+                if(!empty($data['convencional'])){
+                    $validaTlf = Utils::valida_telefono($data['convencional']);
+                    if (empty($validaTlf)) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " no es v\u00E1lido");
+                    }
+                    if (strlen($data['telefono']) > 15) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " supera el l\u00CDmite permitido");
+                    }
+                    if (strlen($data['telefono']) < 6) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
+                    }
+                }
+
                 $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
                 if (empty($validaFechaNac)) {
                     throw new Exception("Debe ser Mayor de edad");
@@ -386,7 +416,9 @@ class Controlador_Perfil extends Controlador_Base
     }
 
     //Función que permite el cambio de clave, verifica que no existe ningún error y procede a registrarlas
-    public function guardarClave($id_login){
+    public function guardarClave($id_login,$tipo_vista){
+
+        $error = 0;
         try {
             if($_POST["password"] != "" || $_POST["password_two"] != ""){
                 if ($_POST["password"] != $_POST["password_two"]){
@@ -401,12 +433,19 @@ class Controlador_Perfil extends Controlador_Base
                 if (!Modelo_Usuario::modificarPassword($_POST["password"],$id_login)) {
                     throw new Exception("Ha ocurrido un error al guardar las contrase\u00F1as, intente nuevamente");
                 }
+
+                if($tipo_vista == 2){
+                    if (!Modelo_Usuario::modificarFechaLogin($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario'])){            
+                        throw new Exception("Error en el sistema, por favor intente denuevo");
+                    }
+                }
             }
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $GLOBALS['db']->rollback();
-            $this->redirectToController('perfil');
+            $error = 1;
         }
+        return $error;
     }
 
     //Función que permite saber si el usuario puede o no descargar un informe de personalidad parcial o completo

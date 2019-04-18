@@ -6,6 +6,9 @@ class Modelo_Usuario{
   const EMPRESA = 2;
   const TEST_PARCIAL = 1;
   const TEST_COMPLETO = 2;
+  const PRE_REG = 1; 
+  const REDSOCIAL_REG = 3; 
+  const NORMAL_REG = 2; 
 
   public static function obtieneNroUsuarios($pais,$tipo=self::CANDIDATO){
     if (empty($pais)){ return false; }
@@ -216,6 +219,7 @@ class Modelo_Usuario{
               INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
               WHERE e.id_empresa = ? AND e.estado = 1";
     }
+
     //echo $sql;
     return $rs2 = $GLOBALS['db']->auto_array($sql,array($idUsuario)); 
   }
@@ -927,6 +931,10 @@ class Modelo_Usuario{
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
       
+      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
+      }        
+
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -935,7 +943,7 @@ class Modelo_Usuario{
       $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
-      //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test          
+      //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test  
       if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";        
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
@@ -1148,18 +1156,11 @@ WHERE
     return $GLOBALS['db']->update("mfo_usuario",array("pendiente_test"=>$estado),"id_usuario=".$id_usuario);
   }
 
-  /*public static function obtieneListadoEmpresas(){
-    $sql = "SELECT * FROM mfo_empresam2 ORDER BY nombre";
-    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
-
-    $datos = array();
-    if (!empty($arrdatos) && is_array($arrdatos)){
-
-      foreach ($arrdatos as $key => $value) {
-        $datos[$value['id_empresa']] = $value['nombre'];
-      }
-    }
-    return $datos;
-  }*/
+  public static function obtenerPassAnt($id_usuario_login){
+    if(empty($id_usuario_login)){return false;}
+    $sql = "SELECT password FROM mfo_usuario_login WHERE id_usuario_login = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario_login));
+    if (empty($rs['password'])){ return false; } else{ return $rs['password']; }
+  }
 }  
 ?>

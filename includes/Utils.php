@@ -935,6 +935,5 @@ public static function validarTelefonoConvencional($contenido){
       return false;
     }
   }
-
 }
 ?>
