@@ -253,7 +253,6 @@ class Controlador_Registro extends Controlador_Base {
     $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListado();
     $id_genero = Modelo_Genero::obtenerListadoGenero();
     $id_genero = $id_genero[0]['id_genero'];
-    $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil[0]['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral[0]['id_situacionlaboral']));
 
 
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();

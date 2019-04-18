@@ -138,7 +138,7 @@ class Controlador_Publicar extends Controlador_Base {
                       'edadMaxOf'=>1);
       $datosReg = $this->camposRequeridos($campos);
       $planCombo = explode("_", Utils::desencriptar($datosReg['planUsuario']));
-      $confidencial = 1;
+      $confidencial = 1;//Por defecto es confidencial
       if(!Modelo_PermisoPlan::busquedaPermisoxPlan($planCombo[0], 'publicarOfertaConfidencial')){
         $confidencial = $_POST['confidencialOf'];
       }
@@ -204,8 +204,7 @@ class Controlador_Publicar extends Controlador_Base {
         
       }
 
-      $datosReg = array_merge($datosReg, array("descripcion"=>$_POST['descripcionOferta'], 
-                                                "confidencialOf"=>$_POST['confidencialOf'], 
+      $datosReg = array_merge($datosReg, array("descripcion"=>$_POST['descripcionOferta'],  
                                                 "id_empresa"=>$id_empresa,
                                                 'id_empresa_plan'=>$id_empresa_plan,
                                                 'id_areas_subareas'=> $arraySubareas,
