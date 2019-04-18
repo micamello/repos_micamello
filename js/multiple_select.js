@@ -225,6 +225,7 @@ function inicializarDependencia(obj){
                 listado_opciones += "<li class='select_list_subarea subarea_disabled "+selected_class+"' id='"+$(opciones[i]).val()+"'>"+opcion_texto+"<input type='checkbox' "+check_check+"></li>";
             }
         }
+        subpanelNumber = "";
         if(settings.dependence.items != false){
             var subpanelNumber = '&nbsp; (máx: '+settings.dependence.items+')';
         }

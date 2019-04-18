@@ -253,8 +253,8 @@ class Controlador_Registro extends Controlador_Base {
     $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListado();
     $id_genero = Modelo_Genero::obtenerListadoGenero();
     $id_genero = $id_genero[0]['id_genero'];
-    $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil[0]['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral[0]['id_situacionlaboral']));
-
+    $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
+    $id_situacionlaboral = $id_situacionlaboral[0]['id_situacionlaboral'];
 
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $escolaridad = Modelo_Escolaridad::obtieneListado();
@@ -283,7 +283,7 @@ class Controlador_Registro extends Controlador_Base {
                              "ultima_sesion"=>$campo_fecha, "id_nacionalidad"=>SUCURSAL_PAISID, "tipo_doc"=>0, 
                              "id_escolaridad"=>$escolaridad[0]['id_escolaridad'], "genero"=>$id_genero, 
                              "id_usuario_login"=>$id_usuario_login, "tipo_usuario"=>Modelo_Usuario::CANDIDATO,
-                              "id_estadocivil"=>$id_estadocivil, "id_situacionlaboral"=>$id_situacionlaboral);
+                             "id_estadocivil"=>$id_estadocivil, "id_situacionlaboral"=>$id_situacionlaboral);
          
       if(!Modelo_Usuario::crearUsuario($dato_registro)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
