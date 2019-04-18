@@ -12,7 +12,7 @@
 						<?php 
 						//$funcionEnc = new Utils();
 						foreach ($planes as $plan) {							
-							echo "<option value='".Utils::encriptar($plan['id_plan']."_".$plan['id_empresa_plan'])."'>Plan ".$plan['nombre']."</option>";
+							echo "<option value='".Utils::encriptar($plan['id_plan']."_".$plan['id_empresa_plan'])."'>Plan ".utf8_encode($plan['nombre'])."</option>";
 						}
 						?>
 					</select>
@@ -170,7 +170,7 @@
 									<?php
 										if (!empty($arrescolaridad)){
 											foreach ($arrescolaridad as $escolaridad) {
-												echo "<option value='".$escolaridad['id_escolaridad']."'>".$escolaridad['descripcion']."</option>";
+												echo "<option value='".$escolaridad['id_escolaridad']."'>".utf8_encode($escolaridad['descripcion'])."</option>";
 											}
 										}
 										else{
@@ -207,7 +207,7 @@
 														<?php 
 															if (!empty($arridioma)){
 																foreach ($arridioma as $idioma) {
-																	echo "<option value='".$idioma['id_idioma']."'>".$idioma['descripcion']."</option>";
+																	echo "<option value='".$idioma['id_idioma']."'>".utf8_encode($idioma['descripcion'])."</option>";
 																}
 															}
 															else{
