@@ -364,12 +364,12 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	<option value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
 				                                    	foreach($situacionLaboral as $key => $r){ 
-															echo "<option value='".$r['id_situacionlaboral']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_situacionlaboral'] == $r['id_situacionlaboral'] || (isset($data['id_situacionlaboral']) && $data['id_situacionlaboral'] == $r['id_situacionlaboral']))
+															echo "<option value='".$key."'";
+															if ($_SESSION['mfo_datos']['usuario']['id_situacionlaboral'] == $key || (isset($data['id_situacionlaboral']) && $data['id_situacionlaboral'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
-															echo ">".utf8_encode($r['descripcion'])."</option>";
+															echo ">".utf8_encode($r)."</option>";
 														} ?>
 													</select>
 												</div>
@@ -401,12 +401,12 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 				                                    	<?php 
 				                                    	
 				                                    	foreach($licencia as $key => $r){ 
-															echo "<option value='".$r['id_tipolicencia']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_tipolicencia'] == $r['id_tipolicencia'] || (isset($data['id_tipolicencia']) && $data['id_tipolicencia'] == $r['id_tipolicencia']))
+															echo "<option value='".$key."'";
+															if ($_SESSION['mfo_datos']['usuario']['id_tipolicencia'] == $key || (isset($data['id_tipolicencia']) && $data['id_tipolicencia'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
-															echo ">".$r['descripcion']."</option>";
+															echo ">".$r."</option>";
 														} ?>
 													</select>
 												</div>

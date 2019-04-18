@@ -106,18 +106,6 @@ foreach ($data as $letra => $value) {
                 }else{
                     echo 'Sin discapacidad';
                 }
-            }else if($letra == 'L'){
-                if($value['id'] == 1){
-                    echo 'Tiene licencia';
-                }else{
-                    echo 'Sin licencia';
-                }
-            }else if($letra == 'T'){
-                if($value['id'] == 1){
-                    echo 'Tiene trabajo';
-                }else{
-                    echo 'Sin trabajo';
-                }
             }else if($letra == 'V'){
                 if($value['id'] == 1){
                     echo 'Puede viajar';
@@ -125,7 +113,12 @@ foreach ($data as $letra => $value) {
                     echo 'No puede viajar';
                 }
             }else{
-                echo utf8_encode(ucfirst(strtolower($value['nombre'])));
+
+                if($letra == 'L'){
+                    echo utf8_encode(ucfirst($value['nombre']));
+                }else{
+                    echo utf8_encode(ucfirst(strtolower($value['nombre'])));
+                }
             }
             echo '</span>
                     <span class="input-group-addon btn-filtro" style="padding:0px; cursor:pointer;">

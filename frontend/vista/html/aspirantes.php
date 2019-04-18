@@ -241,41 +241,43 @@
 				<div class="panel-body">
 					<div class="filtros">
 				<?php
-			    	foreach (TIENE_LICENCIA as $key => $v) {
+			    	foreach (PUEDE_VIAJAR as $key => $v) {
 						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/V'.$key.'/';
 						echo '<li class="lista"><a href="'.$ruta.'1/" class="viajar" id="'.$key.'">'.$v.'</a></li>';
 					}
 				?></div>
 				</div>
 		    </div>
-		    <!--<div class="panel panel-default shadow-panel1">
+		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
-		        <span><i class="fa fa-briefcase"></i> Tiene trabajo?</span>
+		        <span><i class="fa fa-briefcase"></i> Situaci&oacute;n Laboral</span>
 		      </div>
 		      <div class="panel-body">
 		      	<div class="filtros">
 				    <?php
-				    //foreach (TIENE_LICENCIA as $key => $v) {
-						//	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T'.$key.'/';
-						//	echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="'.$key.'">'.$v.'</a></li>';
-					  //}?>					  	
-					  </div>
+				    	foreach ($situacionLaboral as $key => $v) {
+							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T'.$key.'/';
+							echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="'.$key.'">'.utf8_encode($v).'</a></li>';
+					  	} ?>					  	
+					</div>
 		      </div>
-		    </div>-->
-		    <!--<div class="panel panel-default shadow-panel1">
+		    </div>
+		    <div class="panel panel-default shadow-panel1">
 					<div class="panel-heading">
-						<span><i class="fa fa-id-card-o"></i> Tiene licencia?</span>
+						<span><i class="fa fa-id-card-o"></i> Tipo de Licencia</span>
 					</div>
 					<div class="panel-body">
 						<div class="filtros">
 						<?php
-					  //foreach (TIENE_LICENCIA as $key => $v) {
-						//	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L'.$key.'/';
-						//	echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="'.$key.'">'.$v.'</a></li>';
-						//}?>							
+							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L0/';
+							echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="0">No posee</a></li>';
+					  		foreach ($licencia as $key => $v) {
+								$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L'.$key.'/';
+								echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="'.$key.'">'.$v.'</a></li>';
+							} ?>							
 						</div>
 				  </div>
-		    </div>-->
+		    </div>
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
 		            <span><i class="fa fa-wheelchair"></i> Discapacidad</span>

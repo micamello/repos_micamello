@@ -48,8 +48,8 @@ class Controlador_Perfil extends Controlador_Base
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
                 $genero = Modelo_Genero::obtenerListadoGenero();
-                $situacionLaboral = Modelo_SituacionLaboral::obtieneListado();
-                $licencia = Modelo_TipoLicencia::obtieneListado();
+                $situacionLaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
+                $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
                 $estado_civil = Modelo_EstadoCivil::obtieneListado();
                 $areas = Modelo_AreaSubarea::obtieneAreas_Subareas();
 

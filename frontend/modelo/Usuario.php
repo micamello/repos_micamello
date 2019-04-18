@@ -288,7 +288,7 @@ class Modelo_Usuario{
   public static function obtenerAspirantes($idOferta,$page,$limite,$obtCantdRegistros=false){
     
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,p.fecha_postulado,
-    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.tiene_trabajo,u.licencia,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
     u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
     FROM
       mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
@@ -310,7 +310,7 @@ class Modelo_Usuario{
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
-      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
     }else{
       $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }
@@ -335,7 +335,7 @@ class Modelo_Usuario{
 
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$obtCantdRegistros=false){
 
-    $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,p.fecha_postulado,u.tiene_trabajo,u.licencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
+    $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.genero,p.fecha_postulado,u.id_situacionlaboral,u.id_tipolicencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
     u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
     FROM
       mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
@@ -357,7 +357,7 @@ class Modelo_Usuario{
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
-      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
     }else{
       $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }
@@ -532,21 +532,16 @@ class Modelo_Usuario{
     }
 
     if(!empty($filtros['T']) && $filtros['T'] != 0){ 
-      if($filtros['T'] == 2){
-        $req = 0;
-      }else{
-        $req = 1;
-      }
-      $sql .= " AND t2.tiene_trabajo = ".$req;
+      $sql .= " AND t2.id_situacionlaboral = ".$filtros['T'];
     }
 
-    if(!empty($filtros['L']) && $filtros['L'] != 0){ 
-      if($filtros['L'] == 2){
-        $req = 0;
+    if($filtros['L'] != -1 && $filtros['L'] >= 0){ 
+
+      if($filtros['L'] == 0){
+        $sql .= " AND t2.id_tipolicencia IS NULL"; 
       }else{
-        $req = 1;
+        $sql .= " AND t2.id_tipolicencia = ".$filtros['L'];
       }
-      $sql .= " AND t2.licencia = ".$req;
     }
 
     if(!empty($filtros['V']) && $filtros['V'] != 0){ 
@@ -816,21 +811,18 @@ class Modelo_Usuario{
       $sql .= " AND t2.discapacidad = ".$req;
     }
     if(!empty($filtros['T']) && $filtros['T'] != 0){ 
-      if($filtros['T'] == 2){
-        $req = 0;
-      }else{
-        $req = 1;
-      }
-      $sql .= " AND t2.tiene_trabajo = ".$req;
+      $sql .= " AND t2.id_situacionlaboral = ".$filtros['T'];
     }
-    if(!empty($filtros['L']) && $filtros['L'] != 0){ 
-      if($filtros['L'] == 2){
-        $req = 0;
+
+    if($filtros['L'] != -1 && $filtros['L'] >= 0){ 
+
+      if($filtros['L'] == 0){
+        $sql .= " AND t2.id_tipolicencia IS NULL"; 
       }else{
-        $req = 1;
+        $sql .= " AND t2.id_tipolicencia = ".$filtros['L'];
       }
-      $sql .= " AND t2.licencia = ".$req;
     }
+
     if(!empty($filtros['V']) && $filtros['V'] != 0){ 
       if($filtros['V'] == 2){
         $req = 0;

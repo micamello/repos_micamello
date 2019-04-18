@@ -56,6 +56,8 @@ class Controlador_Aspirante extends Controlador_Base
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta);
+                $situacionLaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
+                $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
 
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista']);
 
@@ -126,11 +128,15 @@ class Controlador_Aspirante extends Controlador_Base
                         
                     }else if($letra == 'L' && $type == 1){
                         
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
+                        if(isset($licencia[$id]) || $id == 0){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
+                        }
                         
                     }else if($letra == 'T' && $type == 1){
-                        
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
+
+                        if(isset($situacionLaboral[$id])){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
+                        }
                         
                     }else if($letra == 'V' && $type == 1){
                         
@@ -150,7 +156,11 @@ class Controlador_Aspirante extends Controlador_Base
 
                     }else if($type == 2){
 
-                        $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = 0;
+                        if($letra == 'L'){
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = -1;
+                        }else{
+                            $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = 0;
+                        }
                     }
                 }
 
@@ -196,10 +206,19 @@ class Controlador_Aspirante extends Controlador_Base
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                         }
                         if($letra == 'L'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                            if(isset($licencia[$value]) || $value == 0){
+
+                                if($value == 0){
+                                    $array_datos[$letra] = array('id'=>$value,'nombre'=>'No posee licencia');
+                                }else{
+                                    $array_datos[$letra] = array('id'=>$value,'nombre'=>'Licencia: '.$licencia[$value]);
+                                }
+                            }
                         }
                         if($letra == 'T'){
-                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                            if(isset($situacionLaboral[$value])){
+                                $array_datos[$letra] = array('id'=>$value,'nombre'=>$situacionLaboral[$value]);
+                            }
                         }
                         if($letra == 'V'){
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
@@ -307,11 +326,12 @@ class Controlador_Aspirante extends Controlador_Base
                     'facetas'=>$facetas,
                     'datos_usuarios'=>$datos_usuarios,
                     'limite_plan'=>$limite_plan,
-                    //'registrosXpag'=>$registrosXpag,
                     'nombre_plan'=>$nombre_plan,
                     'costo'=>$costo,
                     'id_plan'=>$id_plan,
-                    'listado_planes'=>$listado_planes
+                    'listado_planes'=>$listado_planes,
+                    'situacionLaboral'=>$situacionLaboral,
+                    'licencia'=>$licencia
                 );
          
                 $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
@@ -385,7 +405,7 @@ class Controlador_Aspirante extends Controlador_Base
 
             default:
                 
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0);
+                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0);
 
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
@@ -396,6 +416,8 @@ class Controlador_Aspirante extends Controlador_Base
                 }
 
                 $escolaridad      = Modelo_Escolaridad::obtieneListadoAsociativo();
+                $situacionLaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
+                $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
 
                 if(isset($_SESSION['mfo_datos']['subempresas'])){
                     $subempresas = $_SESSION['mfo_datos']['subempresas'];  
@@ -485,11 +507,12 @@ class Controlador_Aspirante extends Controlador_Base
                     'facetas'=>$facetas,
                     'datos_usuarios'=>$datos_usuarios,
                     'limite_plan'=>$limite_plan,
-                    //'registrosXpag'=>$registrosXpag,
                     'nombre_plan'=>$nombre_plan,
                     'costo'=>$costo,
                     'id_plan'=>$id_plan,
-                    'listado_planes'=>$listado_planes
+                    'listado_planes'=>$listado_planes,
+                    'situacionLaboral'=>$situacionLaboral,
+                    'licencia'=>$licencia
                 );
 
                 $tags["template_js"][] = "ion.rangeSlider.min";
