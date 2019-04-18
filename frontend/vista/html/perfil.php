@@ -497,7 +497,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 
 		                                    <div class="col-md-6">
 												<div class="form-group" id="seccion_area">
-													<label>&Aacute;reas de Inter&eacute;s (Máx 3) <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<label>&Aacute;reas de Inter&eacute;s <span class="requerido" title="Este campo es obligatorio">*</span></label>													
 													<div id="err_area" class="help-block with-errors"></div>
 													<select class="form-control" id="area" name="area[]" multiple="multiple">
 													  <!-- <option value="">Seleccione una opción</option> -->
@@ -524,10 +524,10 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 											<div class="col-md-6">
 												<div class="form-group">
 													<label>Sub-Áreas <span class="requerido" title="Este campo es obligatorio">*</span></label>
+													<br><br>
 													<div class="help-block with-errors"></div>
-													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple">
-													  <?php 
-													  
+													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple" onchange="validarFormulario(false);">
+													  <?php 													  
 													    if(!empty($areas) && is_array($areas)){
 													      foreach ($areas as $area) {
 													      	$selected = '';

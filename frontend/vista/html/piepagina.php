@@ -167,7 +167,7 @@
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>Teléfono 1 <i class="obligatorio">*</i></label>
+                <label>Celular <i class="obligatorio">*</i></label>
                 <input type="text" class="form-control" name="tel1ConEmp" id="tel1ConEmp">
                 <div></div>
               </div>
@@ -175,7 +175,7 @@
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>Teléfono 2 (opcional)</label>
+                <label>Tel&eacute;fono Convencional (opcional)</label>
                 <input type="text" class="form-control" name="tel2ConEmp" id="tel2ConEmp">
                 <div></div>
               </div>
