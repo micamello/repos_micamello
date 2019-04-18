@@ -259,6 +259,7 @@ class Controlador_Registro extends Controlador_Base {
     $id_genero = $id_genero[0]['id_genero'];
     $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
 
+
     foreach ($id_situacionlaboral as $key => $value) {
       $id_situacionlaboral = $key;
       break;

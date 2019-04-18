@@ -692,6 +692,54 @@ a.addButton:hover{
   padding: 5px 50px 5px 50px;
   background-color: #0267cf;
   border-radius: 5px;
-  color: white;
   margin-bottom: 10px;
+}
+
+/*perfil de usuario estilos*/
+.nombreUsuario{
+  background-color: #46ABF9;
+  color: white;
+  border-radius: 10px;
+  margin: 20px 0 20px 0;
+
+}
+
+.nombreUsuario>h5{
+  font-size: 25px;
+  color: white;
+  padding: 10px 10px 10px 10px;
+}
+
+.contentData{
+  background-color: #F6F6F6;
+  border-radius: 20px;
+  padding: 5px 0 5px 0;
+  margin: 8px 0 8px 0;
+  /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+}
+
+.contentData>label, b, p, li{
+  font-size: 18px;
+}
+
+.contentData>h5, b, p, li{
+  color: black;
+}
+
+.reveal:hover{
+  /*background-color: #7EBEFF;*/
+}
+
+.botonRevelar{
+  background-color: #59B984;
+  position: absolute;
+  right: 0;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+}
+
+.botonRevelar:hover{
+  color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }

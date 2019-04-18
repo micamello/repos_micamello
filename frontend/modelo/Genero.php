@@ -6,5 +6,10 @@ class Modelo_Genero{
     	return $GLOBALS['db']->auto_array($sql,array(), true);
 	}
 
+	public static function obtieneGenero($idGenero){
+    	$sql = "SELECT g.descripcion FROM mfo_genero g WHERE g.id_genero = ?";
+    	return $GLOBALS['db']->auto_array($sql,array($idGenero));
+	}
+
 }  
 ?>
