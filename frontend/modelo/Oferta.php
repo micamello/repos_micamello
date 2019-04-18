@@ -28,7 +28,7 @@ class Modelo_Oferta{
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
-      r.edad_minima, IF(o.id_tipolicencia IS NULL,'No poseo',tl.descripcion) AS licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas";
+      r.edad_minima, IF(o.id_tipolicencia IS NULL,'Sin licencia',tl.descripcion) AS licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas";
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
          $sql .= ", pos.tipo, pos.id_auto as id_postulacion, pos.resultado, u.id_usuario, emp.nombres AS empresa, emp.id_empresa AS id_empresa, IF(TIMESTAMPDIFF(MINUTE, pos.fecha_postulado,now()) <= ".($tiempo*60).",1,0) as puedeEliminar";
@@ -140,7 +140,7 @@ class Modelo_Oferta{
     
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
-      $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario,o.a_convenir,o.primer_empleo, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,r.edad_minima, IF(o.id_tipolicencia IS NULL,'No poseo',tl.descripcion) AS licencia, r.viajar, ul.username";
+      $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario,o.a_convenir,o.primer_empleo, o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,r.edad_minima, IF(o.id_tipolicencia IS NULL,'Sin licencia',tl.descripcion) AS licencia, r.viajar, ul.username";
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
         $sql .= ", pos.tipo, pos.id_auto AS id_postulacion, pos.resultado, u.id_usuario, emp.nombres AS empresa, emp.id_empresa AS id_empresa, IF(TIMESTAMPDIFF(MINUTE, pos.fecha_postulado,now()) <= ".($tiempo*60).",1,0) as puedeEliminar";

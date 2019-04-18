@@ -90,7 +90,7 @@ class Controlador_Publicar extends Controlador_Base {
     $arrescolaridad = Modelo_Escolaridad::obtieneListado();   
     $fechacontratacion = date('Y-m-d',strtotime('+1 day',strtotime(date('Y-m-d H:i:s')))); 
     $listSubareas = Modelo_AreaSubarea::obtieneAreas_Subareas();
-    $tipolicencia = Modelo_TipoLicencia::obtieneListado();
+    $tipolicencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
 
     $tags = array('areasSubareas'=> $listSubareas,
                   'arrprovinciasucursal'=>$arrprovinciasucursal,

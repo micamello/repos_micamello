@@ -209,7 +209,7 @@ class Controlador_Aspirante extends Controlador_Base
                             if(isset($licencia[$value]) || $value == 0){
 
                                 if($value == 0){
-                                    $array_datos[$letra] = array('id'=>$value,'nombre'=>'No posee licencia');
+                                    $array_datos[$letra] = array('id'=>$value,'nombre'=>'Sin licencia');
                                 }else{
                                     $array_datos[$letra] = array('id'=>$value,'nombre'=>'Licencia: '.$licencia[$value]);
                                 }

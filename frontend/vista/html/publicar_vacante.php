@@ -287,7 +287,7 @@
 									<option value="0">Sin Licencia</option>
 									<?php 
 										foreach ($tipolicencia as $key => $value) {
-											echo "<option value='".$value["id_tipolicencia"]."'>".$value["descripcion"]."</option>";
+											echo "<option value='".$key."'>".$value."</option>";
 										}
 									?>
 								</select>

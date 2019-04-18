@@ -270,7 +270,7 @@
 						<div class="filtros">
 						<?php
 							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L0/';
-							echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="0">No posee</a></li>';
+							echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="0">Sin licencia</a></li>';
 					  		foreach ($licencia as $key => $v) {
 								$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L'.$key.'/';
 								echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="'.$key.'">'.$v.'</a></li>';
