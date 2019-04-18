@@ -1013,6 +1013,7 @@ function enviarCambioClave(){
 function validarClave(){
 
     var expreg = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+    var expreg_ant = /^[A-Za-z\d]{8,}$/;
     var error = 0;
     var err_campo = "El campo no puede ser vacío";
     var err_formato = "Formato incorrecto, Letras y números, mínimo 8 caracteres";
@@ -1023,13 +1024,13 @@ function validarClave(){
     if(document.getElementById('password_ant')){
 
         var password_ant = document.getElementById('password_ant').value;
-        //console.log('password_ant: '+password_ant);
+
         if(password_ant == null || password_ant.length == 0 || /^\s+$/.test(password_ant)){
 
             colocaError("err_clave_ant", "seccion_clave_ant",err_campo,"button_cambiar");
             error = 1; 
 
-        }else if(!expreg.test(password_ant)){
+        }else if(!expreg_ant.test(password_ant)){
 
             colocaError("err_clave_ant", "seccion_clave_ant",err_formato,"button_cambiar"); 
             error = 1;  
