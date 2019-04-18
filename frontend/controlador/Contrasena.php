@@ -2,17 +2,20 @@
 class Controlador_Contrasena extends Controlador_Base {
   
   public function construirPagina(){
-    if( Modelo_Usuario::estaLogueado() ){
-      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-    }
 
     $opcion = Utils::getParam('opcion','',$this->data);  
+
     switch($opcion){      
       case 'recuperacion':
+        if( Modelo_Usuario::estaLogueado() ){
+         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+        }   
         $this->validarToken();
       break;   
       case 'cambioContrasena':
-
+        if( !Modelo_Usuario::estaLogueado() ){
+         Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
+        } 
         if (Utils::getParam('cambiarClave_obligatorio') == 1) {
 
             try{
@@ -52,6 +55,9 @@ class Controlador_Contrasena extends Controlador_Base {
             
       break;   
       default:
+        if( Modelo_Usuario::estaLogueado() ){
+         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+        } 
         $this->mostrarDefault();
       break;
     }      
