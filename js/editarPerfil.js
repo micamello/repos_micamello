@@ -469,21 +469,40 @@ function validarDni(){
 
 }
 
+function validarNombreApellido(nombre){
+    if((/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{1,}$/.test(nombre)) && (/(.*[a-zA-ZÁÉÍÓÚñáéíóúÑ]){1}/.test(nombre))){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
+function validarNombreEmpresa(nombre){
+    if((/^([a-zA-ZÁÉÍÓÚñáéíóúÑ]+[0-9&.,' ]*)*$/.test(nombre))){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function validarFormulario(tipovalidacion){
 
     var mensaje = '';
     var tipo_usuario = document.getElementById('tipo_usuario').value;
-    if(tipo_usuario == 1){
+    /*if(tipo_usuario == 1){
       expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;
     }else{
       expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ 0-9.', &]+$/i;
-    }
-    //var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
+    }*/
+
     var expreg_telf = /^[0-9]+$/i;
     var error = 0;
     var err_list = "Debe seleccionar una opción de la lista";
     var err_campo = "El campo no puede ser vacío";
-    var err_formato_letra = "Formato incorrecto, solo letras";
+    var err_formato_letra = "Formato incorrecto, Mín. 1 caracter";
+    var err_formato_letra2 = "Formato incorrecto, Mín. 3 caracter";
     var err_formato_numeros = "Formato incorrecto, solo números";
     var err_univ = "Debe introducir una universidad";
 
@@ -501,17 +520,13 @@ function validarFormulario(tipovalidacion){
     if(tipo_usuario == 1){
 
         var discapacidad = document.getElementById('discapacidad').selectedIndex;
-        /*var experiencia = document.getElementById('experiencia').selectedIndex;*/
         var estado_civil = document.getElementById('estado_civil').selectedIndex;
         var genero = document.getElementById('genero').selectedIndex;
         var tiene_trabajo = document.getElementById('tiene_trabajo').selectedIndex;
         var residencia = document.getElementById('residencia').selectedIndex;
         var viajar = document.getElementById('viajar').selectedIndex;
-        //var licencia = document.getElementById('licencia').selectedIndex;
         var escolaridad = document.getElementById('escolaridad').selectedIndex;
-        //var estatus = document.getElementById('estatus').selectedIndex;
         var area_select = document.getElementById('area');
-        //var nivel_interes = document.getElementById('nivel_interes');
         var select_array_idioma = document.getElementById('select_array_idioma');
         var lugar_estudio = document.getElementById('lugar_estudio');
         var universidad = document.getElementById('universidad').selectedIndex;
@@ -524,13 +539,6 @@ function validarFormulario(tipovalidacion){
         if ($("#dni").is(":disabled") == false ){
           if(tipo_doc != 0){          
             quitarError("seleccione_error","seleccione_group");          
-            /*var validar = validarDocumento(dni,tipo_doc,"err_dni","seccion_dni","boton");
-            if(validar != ''){ 
-              mensaje += validar+'\n';         
-              error = 1;
-            }else{
-              quitarError("err_dni","seccion_dni");
-            }*/
           }else{
             colocaError("seleccione_error","seleccione_group",err_list,"boton");
             mensaje += '- Tipo de documento, '+err_list+'\n';
@@ -595,14 +603,6 @@ function validarFormulario(tipovalidacion){
             quitarError("err_dis", "seccion_dis");
         }
 
-        /*if(experiencia == null || experiencia == 0){
-
-            colocaError("err_exp", "seccion_exp",err_list,"boton");
-            error = 1;
-        }else{
-            quitarError("err_exp", "seccion_exp");
-        }
-*/
         if(estado_civil == null || estado_civil == 0){
 
             colocaError("err_civil", "seccion_civil",err_list,"boton");
@@ -648,15 +648,6 @@ function validarFormulario(tipovalidacion){
             quitarError("err_via", "seccion_via");
         }
 
-        /*if(licencia == null || licencia == 0){
-
-            colocaError("err_lic", "seccion_lic",err_list,"boton");
-            mensaje += '- Tiene licencia?, '+err_list+'\n';
-            error = 1;
-        }else{
-            quitarError("err_lic", "seccion_lic");
-        }*/
-
         if(escolaridad == null || escolaridad == 0){
 
             colocaError("err_esc", "seccion_esc",err_list,"boton");
@@ -665,14 +656,6 @@ function validarFormulario(tipovalidacion){
         }else{
             quitarError("err_esc", "seccion_esc");
         }
-
-        /*if(estatus == null || estatus == 0){
-
-            colocaError("err_est", "seccion_est",err_list,"boton");
-            error = 1;
-        }else{
-            quitarError("err_est", "seccion_est");
-        }*/
 
         if($(".depende").is(":visible")){
 
@@ -727,34 +710,8 @@ function validarFormulario(tipovalidacion){
             error = 1;
         }else{
 
-            /*var cantd_selec = $('#seleccionados1').find('help-block').length;
-            if(cantd_selec != 0)
-            {
-                colocaError("err_area", "seccion_area",err_list,"boton");
-                mensaje += '- Area, '+err_list+'\n';
-                error = 1;
-            }else{*/
-                quitarError("err_area", "seccion_area");
-            //}
+            quitarError("err_area", "seccion_area");
         }
-
-        /*if(nivel_interes.value == null || nivel_interes.value == 0){
-
-            colocaError("err_int", "seccion_int",err_list,"boton");
-            mensaje += '- Nivel de Interes, '+err_list+'\n';
-            error = 1;
-        }else{
-            
-            var cantd_selec = $('#seleccionados2').find('help-block').length;
-            if(cantd_selec != 0)
-            {
-                colocaError("err_int", "seccion_int",err_list,"boton");
-                mensaje += '- Nivel de Interes, '+err_list+'\n';
-                error = 1;
-            }else{
-                quitarError("err_int", "seccion_int");
-            }
-        }*/
 
         if((select_array_idioma.length) == 0 || (select_array_idioma.length) == -1){
 
@@ -773,7 +730,7 @@ function validarFormulario(tipovalidacion){
                 colocaError("err_ape", "seccion_apellido",err_campo,"boton");
                 mensaje += '- Apellidos, '+err_campo+'\n';
                 error = 1; 
-            }else if(!expreg.test(apellidos)){
+            }else if(!validarNombreEmpresa(apellidos)){
                 colocaError("err_ape", "seccion_apellido",err_formato_letra,"boton");
                 mensaje += '- Apellidos, '+err_formato_letra+'\n';
                 error = 1;
@@ -803,12 +760,62 @@ function validarFormulario(tipovalidacion){
             }
         }
 
+        if(nombres.length <= '100'){
+
+            if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
+
+                colocaError("err_nom", "seccion_nombre",err_campo,"boton");
+                mensaje += '- Nombres, '+err_campo+'\n';
+                error = 1; 
+
+            }else if(!validarNombreApellido(nombres)){
+         
+                colocaError("err_nom", "seccion_nombre",err_formato_letra,"boton");
+                mensaje += '- Nombres, '+err_formato_letra+'\n';
+                error = 1;
+
+            }else{
+                quitarError("err_nom","seccion_nombre");
+            }
+
+        }else{
+
+            colocaError("err_nom","seccion_nombre","El nombre no debe exceder de 100 caracteres","boton");
+            mensaje += '- Nombres, no debe exceder de 100 caracteres\n';
+            error = 1; 
+        }
+
     }else if(tipo_usuario == 2){
 
         var nombre_contact = document.getElementById('nombre_contact').value;
         var apellido_contact = document.getElementById('apellido_contact').value;
         var tel_one_contact = document.getElementById('tel_one_contact').value;
         var tel_two_contact = document.getElementById('tel_two_contact').value;
+
+        if(nombres.length <= '100'){
+
+            if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
+
+                colocaError("err_nom", "seccion_nombre",err_campo,"boton");
+                mensaje += '- Nombre de la empresa, '+err_campo+'\n';
+                error = 1; 
+
+            }else if(!validarNombreEmpresa(nombres)){
+         
+                colocaError("err_nom", "seccion_nombre",err_formato_letra2,"boton");
+                mensaje += '- Nombre de la empresa, '+err_formato_letra2+'\n';
+                error = 1;
+
+            }else{
+                quitarError("err_nom","seccion_nombre");
+            }
+
+        }else{
+
+            colocaError("err_nom","seccion_nombre","El nombre no debe exceder de 100 caracteres","boton");
+            mensaje += '- Nombre de la empresa, no debe exceder de 100 caracteres\n';
+            error = 1; 
+        }
 
         if(nombre_contact.length <= '100'){
             if(nombre_contact == null || nombre_contact.length == 0 || /^\s+$/.test(nombre_contact)){
@@ -904,30 +911,7 @@ function validarFormulario(tipovalidacion){
 
     }
 
-    if(nombres.length <= '100'){
-
-        if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
-
-            colocaError("err_nom", "seccion_nombre",err_campo,"boton");
-            mensaje += '- Nombres, '+err_campo+'\n';
-            error = 1; 
-
-        }else if(!expreg.test(nombres)){
-     
-            colocaError("err_nom", "seccion_nombre",err_formato_letra,"boton");
-            mensaje += '- Nombres, '+err_formato_letra+'\n';
-            error = 1;
-
-        }else{
-            quitarError("err_nom","seccion_nombre");
-        }
-
-    }else{
-
-        colocaError("err_nom","seccion_nombre","El nombre no debe exceder de 100 caracteres","boton");
-        mensaje += '- Nombres, no debe exceder de 100 caracteres\n';
-        error = 1; 
-    }
+    
 
     if(telefono.length >= '10' && telefono.length <= '15'){
 
@@ -1009,13 +993,10 @@ function validarFormulario(tipovalidacion){
     }else{
         quitarError("err_nac", "seccion_nac");
     }
-    
-    //console.log(mensaje);
+
     if(error == 1){
         return mensaje;
     }else{
-        //$("#boton").removeAttr('disabled');
-        //$("#boton").removeClass('disabled');
         return '';
     }
 }

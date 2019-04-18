@@ -199,7 +199,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 			                                        <div id="seccion_gen" class="form-group">
 			                                            <label for="genero">G&eacute;nero <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_gen" class="help-block with-errors"></div>
 			                                            <select id="genero" name="genero" class="form-control"  onchange="validarFormulario(false)" >
-															<option value="0">Seleccione un genero</option>
+															<option disabled value="0">Seleccione un genero</option>
 					                                    	<?php 
 					                                    	foreach($genero as $key => $ge){ 
 																echo "<option value='".$ge['id_genero']."'";
@@ -238,7 +238,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    <div id="seccion_nac" class="form-group">
 	                                            <label for="nacionalidad">Nacionalidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_nac" class="help-block with-errors"></div>
 	                                            <select class="form-control" name="id_nacionalidad" id="id_nacionalidad"  onchange="validarFormulario(false)" >
-	                                            	<option value="0">Seleccione su opci&oacute;n</option>
+	                                            	<option disabled value="0">Seleccione su opci&oacute;n</option>
 													<?php 
 													if (!empty($nacionalidades)){
 				                    					foreach($nacionalidades as $key => $n){ 
@@ -270,7 +270,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 	                                        <div id="seccion_provincia" class="form-group">
 	                                            <label for="provincia">Provincia de Residencia<span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_prov" class="help-block with-errors"></div>
 	                                            <select class="form-control" name="provincia" id="provincia"  onchange="validarFormulario(false)" >
-	                                            	<option value="0">Seleccione una provincia</option>
+	                                            	<option disabled value="0">Seleccione una provincia</option>
 													<?php 
 													if (!empty($arrprovincia)){									
 				                    					foreach($arrprovincia as $key => $pr){ 
@@ -304,7 +304,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 														echo ">".utf8_encode($ciudad['ciudad'])."</option>";
 													} 
 	                                            }else{ ?>
-													<option value="0">Selecciona una ciudad</option>
+													<option disabled value="0">Selecciona una ciudad</option>
 	                                            <?php } ?>
 	                                            </select>
 	                                        </div>
@@ -324,7 +324,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    	<div id="seccion_civil" class="form-group">
 			                                    	<label for="estado_civil">Estado civil <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_civil" class="help-block with-errors"></div>
 				                                    <select id="estado_civil" name="estado_civil" class="form-control"  onchange="validarFormulario()" >
-				                                    	<option value="0">Seleccione una opci&oacute;n</option>
+				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
 				                                    	foreach($estado_civil as $key => $e){ 
 															echo "<option value='".$e['id_estadocivil']."'";
@@ -343,7 +343,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    	<div id="seccion_res" class="form-group">
 			                                    	<label for="residencia">&#191;Puede cambiar de residencia&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_res" class="help-block with-errors"></div>
 				                                    <select id="residencia" name="residencia" class="form-control"  onchange="validarFormulario(false)" >
-				                                    	<option value="0">Seleccione una opci&oacute;n</option>
+				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
 				                                    	foreach(REQUISITO as $key => $r){ 
 															echo "<option value='$key'";
@@ -361,7 +361,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    	<div id="seccion_trab" class="form-group">
 			                                    	<label for="tiene_trabajo">Situaci&oacute;n Laboral <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_trab" class="help-block with-errors"></div>
 				                                    <select id="tiene_trabajo" name="tiene_trabajo" class="form-control"  onchange="validarFormulario(false)" >
-				                                    	<option value="0">Seleccione una opci&oacute;n</option>
+				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
 				                                    	foreach($situacionLaboral as $key => $r){ 
 															echo "<option value='".$key."'";
@@ -379,7 +379,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    	<div id="seccion_via" class="form-group">
 			                                    	<label for="viajar">&#191;Puede viajar&#63; <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_via" class="help-block with-errors"></div>
 				                                    <select id="viajar" name="viajar" class="form-control"  onchange="validarFormulario(false)" >
-				                                    	<option value="0">Seleccione una opci&oacute;n</option>
+				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
 				                                    	foreach(REQUISITO as $key => $r){ 
 															echo "<option value='$key'";
@@ -416,7 +416,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                    	<div id="seccion_dis" class="form-group">
 			                                    	<label for="discapacidad">Discapacidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_dis" class="help-block with-errors"></div>
 				                                    <select id="discapacidad" name="discapacidad" class="form-control"  onchange="validarFormulario(false)" >
-				                                    	<option value="-1">Tiene alguna discapacidad&#63;</option>
+				                                    	<option disabled value="-1">Tiene alguna discapacidad&#63;</option>
 				                                    	<?php 
 				                                    	foreach(REQUISITO as $key => $dis){ 
 															echo "<option value='$key'";
@@ -434,7 +434,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                        <div id="seccion_esc" class="form-group">
 		                                            <label for="escolaridad">&Uacute;ltimo estudio realizado <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_esc" class="help-block with-errors"></div>
 		                                            <select id="escolaridad" name="escolaridad" class="form-control" onchange="ocultarCampos(); validarFormulario(false);"style="padding-left: 0px;"  >
-		                                            	<option value="0">Seleccione una opci&oacute;n</option>
+		                                            	<option disabled value="0">Seleccione una opci&oacute;n</option>
 														<?php 
 														if (!empty($escolaridad)){
 					                                    	foreach($escolaridad as $key => $es){ 
@@ -478,7 +478,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                        <div id="seccion_univ" class="form-group">
 		                                            <label for="universidad">Universidad <span class="requerido" title="Este campo es obligatorio">*</span></label><div id="err_univ" class="help-block with-errors"></div>
 		                                            <select class="form-control" id="universidad" name="universidad"  onchange="validarFormulario(false)" >
-		                                            	<option value="0">Seleccione su opci&oacute;n</option>
+		                                            	<option disabled value="0">Seleccione su opci&oacute;n</option>
 														<?php 
 														if (!empty($universidades)){
 					                                    	foreach($universidades as $key => $u){ 

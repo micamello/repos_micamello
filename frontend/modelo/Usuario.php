@@ -310,7 +310,7 @@ class Modelo_Usuario{
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
-      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
     }else{
       $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }
@@ -357,7 +357,7 @@ class Modelo_Usuario{
     $sql = "SELECT ";
 
     if($obtCantdRegistros == false){
-      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
     }else{
       $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
     }

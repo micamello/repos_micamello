@@ -24,6 +24,8 @@ function colocaError(campo, id, mensaje,btn){
   var elem2 = document.createElement("P");             
   elem2.classList.add('list-unstyled');
   elem2.classList.add('msg_error');
+  //elem2.classList.add('ahashakeheartache');
+  
   elem2.appendChild(elem1); 
   nodo.appendChild(elem2); 
 

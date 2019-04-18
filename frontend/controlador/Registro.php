@@ -155,8 +155,12 @@ class Controlador_Registro extends Controlador_Base {
     // usuario tipo candidato
     if($datosValidos['tipo_usuario'] == 1){
       $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
-      $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListado();
-      $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil[0]['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral[0]['id_situacionlaboral']));
+      $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
+      foreach ($id_situacionlaboral as $key => $value) {
+        $id_situacionlaboral = $key;
+        exit;
+      }
+      $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil[0]['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral));
       $escolaridad = Modelo_Escolaridad::obtieneListado();
       $data = array(
                     "nombres"=>$datosValidos['nombresCandEmp'], /*data -----*/
@@ -250,11 +254,15 @@ class Controlador_Registro extends Controlador_Base {
 
   public function registroRedSocial($correo,$nombre,$apellido){
     $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
-    $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListado();
+    $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
     $id_genero = Modelo_Genero::obtenerListadoGenero();
     $id_genero = $id_genero[0]['id_genero'];
     $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
-    $id_situacionlaboral = $id_situacionlaboral[0]['id_situacionlaboral'];
+
+    foreach ($id_situacionlaboral as $key => $value) {
+      $id_situacionlaboral = $key;
+      exit;
+    }
 
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();
     $escolaridad = Modelo_Escolaridad::obtieneListado();

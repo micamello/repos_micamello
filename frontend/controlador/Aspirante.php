@@ -16,8 +16,15 @@ class Controlador_Aspirante extends Controlador_Base
         }
 
         //Valida los permisos 
-        if(isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos')){
-           $this->redirectToController('vacantes');
+        if(isset($_SESSION['mfo_datos']['planes'])){
+
+            if($vista == 1 && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatosPostulados')){
+                $_SESSION['mostrar_error'] = 'Su plan no permite ver inscritos';
+               $this->redirectToController('vacantes');
+            }elseif($vista == 2 && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos')){
+                $_SESSION['mostrar_error'] = 'Su plan no permite ver candidatos registrados';
+                $this->redirectToController('vacantes');
+            }
         }
 
         $mostrar = Utils::getParam('mostrar', '', $this->data);

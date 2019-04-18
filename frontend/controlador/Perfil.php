@@ -8,9 +8,9 @@ class Controlador_Perfil extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
 
-        if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){ 
+        /*if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){ 
             Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
-        } 
+        } */
 
         //Obtiene todos los banner activos segun el tipo
         $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        

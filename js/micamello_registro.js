@@ -900,7 +900,7 @@ function validarCorreo1(correo) {
 }
 
 function validarNombreApellido(nombre){
-	if((/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{4,}$/.test(nombre)) && (/(.*[a-zA-ZÁÉÍÓÚñáéíóúÑ]){1}/.test(nombre))){
+	if((/^[A-Za-zÁÉÍÓÚñáéíóúÑ ]{1,}$/.test(nombre)) && (/(.*[a-zA-ZÁÉÍÓÚñáéíóúÑ]){1}/.test(nombre))){
 		return true;
 	}
 	else{
@@ -909,7 +909,7 @@ function validarNombreApellido(nombre){
 }
 
 function validarNombreEmpresa(nombre){
-	if((/^[a-zA-ZÁÉÍÓÚñáéíóúÑ0-9&.,' ]{4,}$/.test(nombre)) && (/(.*[a-zA-ZÁÉÍÓÚñáéíóúÑ]){3}/.test(nombre))){
+	if((/^([a-zA-ZÁÉÍÓÚñáéíóúÑ]+[0-9&.,' ]*)*$/.test(nombre))){
 		return true;
 	}
 	else{
