@@ -313,7 +313,7 @@ function validarOnSubmit(){
 // Campo celularCandEmp-------------------------------------
 	if(camposavalidar[3].val() != ""){
 		if(!validarTelefono(camposavalidar[3].val())){
-			crearMensajeError(camposavalidar[3], "Ingrese un número válido");
+			crearMensajeError(camposavalidar[3], "Longitud entre 10 y 15 dígitos");
 		}
 		else{
 			eliminarMensajeError(camposavalidar[3], "");
@@ -452,7 +452,7 @@ function validarOnSubmit(){
 //tel1ConEmp
 		if(camposavalidar[12].val() != ""){
 			if(!validarTelefono(camposavalidar[12].val())){
-				crearMensajeError(camposavalidar[12], "Ingrese un número válido");
+				crearMensajeError(camposavalidar[12], "Longitud entre 10 y 15 dígitos");
 			}
 			else{
 				eliminarMensajeError(camposavalidar[12], "");
@@ -464,8 +464,8 @@ function validarOnSubmit(){
 
 //tel2ConEmp
 		if(camposavalidar[13].val() != ""){
-			if(!validarTelefono(camposavalidar[13].val())){
-				crearMensajeError(camposavalidar[13], "Ingrese un número válido");
+			if(!validarTelefonoConvencional(camposavalidar[13].val())){
+				crearMensajeError(camposavalidar[13], "Longitud entre 6 y 15 dígitos");
 			}
 			else{
 				eliminarMensajeError(camposavalidar[13], "");
@@ -598,7 +598,7 @@ $('#modal_registro').on('show.bs.modal', function(){
 		$('#celularCandEmp').on('blur', function(){
 			if($(this).val() != ""){
 				if(!validarTelefono($(this).val())){
-					crearMensajeError($(this), "Ingrese un número válido");
+					crearMensajeError($(this), "Longitud entre 10 y 15 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this), "");
@@ -777,7 +777,7 @@ $('#modal_registro').on('show.bs.modal', function(){
 		$('#tel1ConEmp').on('blur', function(){
 			if($(this).val() != ""){
 				if(!validarTelefono($(this).val())){
-					crearMensajeError($(this), "Ingrese un número válido");
+					crearMensajeError($(this), "Longitud entre 10 y 15 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this), "");
@@ -792,8 +792,8 @@ $('#modal_registro').on('show.bs.modal', function(){
 	if($('#tel2ConEmp').length){
 		$('#tel2ConEmp').on('blur', function(){
 			if($(this).val() != ""){
-				if(!validarTelefono($(this).val())){
-					crearMensajeError($(this), "Ingrese un número válido");
+				if(!validarTelefonoConvencional($(this).val())){
+					crearMensajeError($(this), "Longitud entre 6 y 15 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this), "");
@@ -869,10 +869,10 @@ function verificarExiste(obj){
 	var puerto_host = $('#puerto_host').val();
 	var retorno = "";
 	if(obj[0].id == 'correoCandEmp'){
-		url = puerto_host+"index.php?mostrar=registro&opcion=buscarCorreo&correo="+buscar;
+		url = puerto_host+"/index.php?mostrar=registro&opcion=buscarCorreo&correo="+buscar;
 	}
 	if(obj[0].id == 'documentoCandEmp'){
-		url = puerto_host+"index.php?mostrar=registro&opcion=buscarDocumento&documento="+buscar;
+		url = puerto_host+"/index.php?mostrar=registro&opcion=buscarDocumento&documento="+buscar;
 	}
 	$.ajax({
 	    type: "GET",
@@ -919,6 +919,10 @@ function validarNombreEmpresa(nombre){
 
 function validarTelefono(telefono){
 	return /^[0-9]{10,15}$/.test(telefono);
+}
+
+function validarTelefonoConvencional(telefono){
+	return /^[0-9]{6,15}$/.test(telefono);
 }
 
 function validarNumero(numero){

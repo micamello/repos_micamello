@@ -286,7 +286,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];
                 $arrprovincia = $_SESSION['mfo_datos']['arrprovincia'];
 
-                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'mostrar'=>$mostrar,'id_oferta'=>Utils::encriptar($id_oferta),'vista'=>$vista,'facetas'=>$facetas)); 
+                $link = Vista::display('filtrarAspirantes',array('data'=>$array_datos,'mostrar'=>$mostrar,'id_oferta'=>((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta),'vista'=>$vista,'facetas'=>$facetas)); 
 
                 $tags = array(
                     'arrarea'       => $arrarea,
@@ -301,7 +301,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'vista'=>$vista,
                     'array_empresas'=>$array_empresas,
                     'datosOfertas'=>$datosOfertas,
-                    'id_oferta'=>Utils::encriptar($id_oferta),
+                    'id_oferta'=>(!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta,
                     'posibilidades'=>$posibilidades,
                     'descargas'=>$descargas,
                     'facetas'=>$facetas,
@@ -314,7 +314,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'listado_planes'=>$listado_planes
                 );
          
-                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta).'/'.$type.$cadena;
+                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
 
                 $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$url);
                 $pagination->setPage($page);

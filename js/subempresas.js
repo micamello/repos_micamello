@@ -47,7 +47,7 @@ function calcularRecursos(idplan){
 
   $.ajax({
       type: "GET",
-      url: puerto_host+"index.php?mostrar=subempresa&opcion=buscaRecursos&idPlanEmpresa="+idplan,
+      url: puerto_host+"/index.php?mostrar=subempresa&opcion=buscaRecursos&idPlanEmpresa="+idplan,
       dataType:'json',
       async: false,
       success:function(data){

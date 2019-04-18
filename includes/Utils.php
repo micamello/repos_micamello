@@ -315,6 +315,15 @@ class Utils{
     else return false; 
   }
 
+
+// public static function validarTelefono($contenido){
+//   return preg_match("/^[0-9]{10,15}+$/", $contenido);
+// }
+
+public static function validarTelefonoConvencional($contenido){
+  return preg_match("/^[0-9]{6,15}+$/", $contenido);
+}
+
   //en formato de YYYY-MM-DD o YYYY-MM-DD HH:MM:SS
   public static function valida_fecha($strdate){
     $long_date = "/^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2} [0-9]{1,2}:[0-9]{1,2}:[0-9]{1,2}$/";
@@ -572,7 +581,7 @@ class Utils{
 
   public static function generarPassword() {
       $length = rand(8, 10);
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGH IJKLMNOPQRSTUVWXYZ';
       $charactersLength = strlen($characters);
       $randomString = '';
       for ($i = 0; $i < $length; $i++) {

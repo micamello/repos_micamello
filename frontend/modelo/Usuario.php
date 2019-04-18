@@ -240,7 +240,7 @@ class Modelo_Usuario{
         $licencia = "null";
       }
 
-      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"id_genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"id_tipolicencia"=>$licencia,"id_estadocivil"=>$data['estado_civil'],"viajar"=>$data['viajar'],"id_situacionlaboral"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional']); 
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"id_genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"id_tipolicencia"=>$licencia,"id_estadocivil"=>$data['estado_civil'],"viajar"=>$data['viajar'],"id_situacionlaboral"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional'],"residencia"=>$data['residencia']); 
 
       if (!empty($data['documentacion'])){          
         $datos['tipo_doc'] = $data['documentacion'];

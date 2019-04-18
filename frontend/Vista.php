@@ -94,7 +94,7 @@ class Vista {
         if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos')){
             $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/verAspirantes/2/0/1/", "nombre"=>"Buscar Candidatos");
         }else{
-          $menu["menu"][] = array("onclick"=>($deshabilitarmenu) ? "javascript:void(0);" : 'redireccionar(\''.PUERTO."://".HOST."/verAspirantes/2/0/1/".'\')', "nombre"=>"Buscar Candidatos");
+          $menu["menu"][] = array("onclick"=>($deshabilitarmenu) ? "javascript:void(0);" : 'redireccionar(\''.PUERTO."://".HOST."/planes/".'\')', "nombre"=>"Buscar Candidatos");
         }
       }
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){

@@ -79,14 +79,14 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
 	  	  $GLOBALS['db']->beginTrans();
 
         if (!Modelo_Postulacion::postularse($rows["id_usuario"],$oferta["id_ofertas"],$oferta["salario"],Modelo_Postulacion::AUTOMATICO)){  
-          throw new Exception("Error al grabar la postulacion ".print_r($oferta,true));
+          throw new Exception("Error al grabar la postulacion ");
         } 
         $idpostulacion = $GLOBALS['db']->insert_id();      
         if (!Modelo_Postulacion::guardarPostAuto($idpostulacion,$plan["id_usuario_plan"])){
-        	throw new Exception("Error al grabar la postulacion automatica ".print_r($oferta,true));
+        	throw new Exception("Error al grabar la postulacion automatica ");
         }       
         if (!Modelo_UsuarioxPlan::restarPublicaciones($plan["id_usuario_plan"],$cont_publicacion,Modelo_Usuario::CANDIDATO)){
-          throw new Exception("Error al restar las autopostulaciones ".print_r($oferta,true)); 
+          throw new Exception("Error al restar las autopostulaciones "); 
         }
 
 	  	  $GLOBALS['db']->commit();

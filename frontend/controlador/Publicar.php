@@ -16,8 +16,9 @@ class Controlador_Publicar extends Controlador_Base {
       $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
+    
     if (isset($_SESSION['mfo_datos']['planes']) && 
-      (!Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta') || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOfertaConfidencial'))){
+      !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOferta') && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'publicarOfertaConfidencial')){
       $_SESSION['mostrar_error'] = "No tiene permisos para publicar oferta";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
@@ -205,7 +206,6 @@ class Controlador_Publicar extends Controlador_Base {
       }
 
       $datosReg = array_merge($datosReg, array("descripcion"=>$_POST['descripcionOferta'], 
-                                                "confidencialOf"=>$_POST['confidencialOf'], 
                                                 "id_empresa"=>$id_empresa,
                                                 'id_empresa_plan'=>$id_empresa_plan,
                                                 'id_areas_subareas'=> $arraySubareas,
