@@ -31,12 +31,10 @@ class Controlador_Contrasena extends Controlador_Base {
                     $existeError = $obj_perfil->guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login'],2);
                     if($existeError == 1){
                         $tags['data'] = array('password'=>$_POST["password"],'password_two'=>$_POST["password_two"],'password_ant'=>$_POST["password_ant"]);
-                    }else{
-
-                      session_regenerate_id(true);
+                    }else{                      
+                      Vista::render('msjcontrasena_exito', array());                       
                       session_destroy();
-                      $_SESSION['mostrar_exito'] = 'El cambio de contrase\u00F1a se ha realizado con \u00E9xito! \n Por motivos de seguridad cerraremos la sesi\u00F3n, por favor vuelva a ingresar utilizando la nueva contrase\u00F1a. ';
-                      $this->redirectToController('login'); 
+                      exit;
                     }
                 }
             }catch (Exception $e) {
