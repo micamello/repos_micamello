@@ -273,7 +273,7 @@ class Controlador_Perfil extends Controlador_Base
                         if (!Modelo_UsuarioLogin::editarDniLogin($_SESSION['mfo_datos']['usuario']['id_usuario_login'],$data['dni'])) {
                             throw new Exception("Ha ocurrido un error al guardar la c\u00E9dula , intente nuevamente");
                         }
-                    }
+                    }                    
 
                     if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
                         throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
