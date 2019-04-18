@@ -158,7 +158,7 @@ class Controlador_Registro extends Controlador_Base {
       $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
       foreach ($id_situacionlaboral as $key => $value) {
         $id_situacionlaboral = $key;
-        exit;
+        break;
       }
       $datosValidos = array_merge($datosValidos, array('id_estadocivil'=>$id_estadocivil[0]['id_estadocivil'], 'id_situacionlaboral'=>$id_situacionlaboral));
       $escolaridad = Modelo_Escolaridad::obtieneListado();
@@ -261,7 +261,7 @@ class Controlador_Registro extends Controlador_Base {
 
     foreach ($id_situacionlaboral as $key => $value) {
       $id_situacionlaboral = $key;
-      exit;
+      break;
     }
 
     $default_city = Modelo_Sucursal::obtieneCiudadDefault();

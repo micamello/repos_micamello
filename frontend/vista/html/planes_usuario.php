@@ -47,7 +47,7 @@
                               </td>
                             <?php }else{ ?>
                               <td style="text-align:center;" data-title="Ofertas:"><?php echo $value['num_post_rest'];?></td>   
-                              <td style="text-align:center;" data-title="Accesos:"><?php echo $value['num_accesos'];?></td>   
+                              <td style="text-align:center;" data-title="Accesos:"><?php echo $value['num_accesos_rest'];?></td>   
                             <?php } ?>    
                             
                             <?php if($value['costo'] == 0){ ?>
