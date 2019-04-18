@@ -199,7 +199,7 @@ class Modelo_UsuarioxPlan{
         return $GLOBALS['db']->auto_array($sql,array(),false);
       }else{
         $sql .= " AND em.fecha_caducidad IS NOT NULL ORDER BY em.id_empresa";
-        //echo $sql;
+        //Utils::log("FERNANDA ".$sql);
         return $GLOBALS['db']->auto_array($sql,array(),true);
       }
 

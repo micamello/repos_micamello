@@ -8,7 +8,7 @@ class Controlador_Perfil extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
 
-        if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($usuario['tipo_registro'] == Modelo_Usuario::PRE_REG || $usuario['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){ 
+        if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){ 
             Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
         } 
 

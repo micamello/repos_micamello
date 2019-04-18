@@ -175,7 +175,7 @@
 
             <div class="col-md-6">
               <div class="form-group">
-                <label>Tel&eacute;fono Convencional (opcional)</label>
+                <label>Convencional (opcional)</label>
                 <input type="text" class="form-control" name="tel2ConEmp" id="tel2ConEmp">
                 <div></div>
               </div>
