@@ -9,6 +9,7 @@ function navegador(){
 }
 
 function redireccionar(ruta){
+  console.log(ruta);
   abrirModal('Debe contratar un plan que permita buscar candidatos','alert_descarga',ruta,'Ok','');
 }
 
@@ -84,7 +85,7 @@ function abrirModal(mensaje,id,enlace,btn,titulo){
     if(btn != 'Ok' && btn != ''){
 
       $('#'+btn).html('Aceptar');
-      document.getElementById('btn_cancelar').style.display = 'inline-block';
+      document.getElementById('btn_cancelar').style.display = 'inline-block';      
       document.getElementById(btn).setAttribute('href', enlace);
     }else{ 
 
