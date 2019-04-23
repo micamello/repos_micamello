@@ -698,12 +698,12 @@
 													<td title="Descargar Informe de personalidad <?php echo $title; ?>" data-title="Informe <?php echo $title; ?>" style="vertical-align: middle; text-align: center;">
 									            		<?php 
 
-										            		//if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
 																echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
-															//}else{
+															}else{
 							
-															//	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-clipboard fa-1x '.$color.'"></i></a>';
-															//}
+																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-clipboard fa-1x '.$color.'"></i></a>';
+															}
 														?>
 													</td>
 												<?php } ?>

@@ -276,15 +276,20 @@ class Controlador_Aspirante extends Controlador_Base
                     $nombre_plan = $datos_plan['nombre_plan'];
                     $costo = $datos_plan['costo'];
 
-                    if(!empty($limite_plan)){
-                        $limite_aspirantes = $limite_plan;
-                    }else{
-                        $limite_aspirantes = count($paises);
-                    } 
-
                     $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,$limite_plan,true);   
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,$limite_plan,false);
+
+                    if(!empty($limite_plan)){
+
+                        if($limite_plan >= count($cantd_aspirantes)){
+                            $limite_aspirantes = count($cantd_aspirantes);
+                        }else{
+                            $limite_aspirantes = $limite_plan;
+                        }
+                    }else{
+                        $limite_aspirantes = count($cantd_aspirantes);
+                    } 
 
                 }else{
 
@@ -454,7 +459,12 @@ class Controlador_Aspirante extends Controlador_Base
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,$limite_plan,true);
 
                     if(!empty($limite_plan)){
-                        $limite_aspirantes = $limite_plan;
+
+                        if($limite_plan >= count($paises)){
+                            $limite_aspirantes = count($paises);
+                        }else{
+                            $limite_aspirantes = $limite_plan;
+                        }
                     }else{
                         $limite_aspirantes = count($paises);
                     }         

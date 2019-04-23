@@ -14,28 +14,29 @@
 					<div class="respuestas" id="respuestas" style="display: none;"></div>					
 					<input type="hidden" name="tiempo" id="tiempo" value="<?php echo $tiempo; ?>">
 					<input type="hidden" name="acceso" id="acceso" value="<?php echo (isset($acceso) && !empty($acceso)) ? "1" : "0"; ?>">
+					<input type="hidden" name="faceta" id="faceta" value="<?php echo $faceta; ?>">
 					 <?php 
 						$array_group = array();
 						foreach ($data as $key => $value) {
 						 $array_group[$value['id_pregunta']][$key] = $value;
 						}
-			            switch($faceta){
-			            	case 1:
-			            	  $indice = 1;
-			            	break;
-			            	case 2:
-			            	  $indice = 5;
-			            	break;
-			            	case 3:
-			            	  $indice = 9;
-			            	break;
-			            	case 4:
-			            	  $indice = 13;
-			            	break;
-			            	case 5:
-			            	  $indice = 17;
-			            	break;
-			            }
+            switch($faceta){
+            	case 1:
+            	  $indice = 1;
+            	break;
+            	case 2:
+            	  $indice = 5;
+            	break;
+            	case 3:
+            	  $indice = 9;
+            	break;
+            	case 4:
+            	  $indice = 13;
+            	break;
+            	case 5:
+            	  $indice = 17;
+            	break;
+            }
             
 						shuffle($array_group);
 
