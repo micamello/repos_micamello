@@ -6,14 +6,22 @@
 				<div class="fotoPerfil">
 					<div class="text-center">
 						<div class="col-md-12">
-							<img class="perfil_photo_user" src="<?php echo Modelo_Usuario::obtieneFoto($infoUsuario['username']) ?>">
+							<img class="perfil_photo_user" src="<?php echo Modelo_Usuario::obtieneFoto($datosUsuario['username']) ?>">
 						</div>
 					</div>
+				</div>
+				<div class="col-md-12">
+					<!-- <?php echo $vista; ?> -->
+					<a href="<?php echo PUERTO.'://'.HOST.'/hvUsuario/'.Utils::encriptar($datosUsuario['username']).'/'.$id_oferta.'/'.$vista.'/' ?>" class="btn btn-warning">Descargar datos</a>
 				</div>
 				<div class="col-md-12">
 					<div class="nombreUsuario">
 						<h5 class=""><?php echo $datosUsuario['nombres']." ".$datosUsuario['apellidos'] ?></h5>
 					</div>
+					<?php if(isset($datosUsuario['aspSalarial'])){
+						echo "<h5><b>Aspiración salarial: </b>". SUCURSAL_MONEDA.$datosUsuario['aspSalarial']."</h5>";
+					}
+					?>
 				</div>
 				<div class="col-md-12">
 					<hr>
@@ -193,6 +201,7 @@
 						<hr>
 						<h4>áreas de interés</h4>
 						<?php
+						// print_r($vista);
 							foreach ($datosUsuario['usuarioxarea'] as $key => $value) {
 								echo "<div class='col-md-6 col-md-offset-3'>";
 											echo "<div class='contentData'>";
@@ -213,16 +222,6 @@
 							}
 						?>
 					</div>
-
-
-
-					
-
-					
-					
-					
-					
-
 				</div>
 			</div>
 		</div>

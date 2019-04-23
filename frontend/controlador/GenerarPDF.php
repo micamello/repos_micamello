@@ -21,8 +21,11 @@ class Controlador_GenerarPDF extends Controlador_Base
     $vista = Utils::getParam('vista','',$this->data);
     $id_oferta = Utils::getParam('id_oferta','',$this->data);
     switch($opcion){
-      case 'informePersonalidad':
-      self::informePersonalidad();
+      case 'hvUsuario':
+        $username = Utils::getParam('username','',$this->data);
+        $id_oferta = Utils::getParam('id_oferta','',$this->data);
+        $vista = Utils::getParam('vista','',$this->data);
+        self::hvUsuario($username, $id_oferta, $vista);
       break;
       case 'informeusuario':
 
@@ -236,7 +239,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     $mpdf->WriteHTML($enddoc);   
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
     $mpdf->WriteHTML($html);
-    $mpdf->Output($nombre_archivo, 'D');
+    $mpdf->Output($nombre_archivo, 'I');
   }
 
   public function perfilAspirante($username, $vista, $id_oferta){
@@ -600,6 +603,376 @@ class Controlador_GenerarPDF extends Controlador_Base
     $mpdf->WriteHTML($enddoc);
 
     $mpdf->Output('informe_'.$datos_usuario['infoUsuario']['username'].".pdf", 'I');
+  }
+
+  public function hvUsuario($username, $id_oferta, $vista){
+    // print_r($username."----".$id_oferta."----".$vista);
+    // exit();
+        $datos = Modelo_Usuario::existeUsuario(Utils::desencriptar($username));
+        if($vista == 1){
+            $aspSalarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
+            $datos = array_merge($datos, array('aspSalarial'=>$aspSalarial['asp_salarial']));
+        }
+        $mfoUsuario = Modelo_Usuario::informacionPerfilUsuario($datos['id_usuario']);
+        $datos = array_merge($datos, $mfoUsuario);
+        if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
+            $datos['dni'] = Utils::ocultarCaracteres($datos['dni'], 0, 0);
+            $datos['correo'] = Utils::ocultarEmail($datos['correo'], 0, 0);
+            $datos['telefono'] = Utils::ocultarCaracteres($datos['telefono'], 0, 0);
+        }
+        if($mfoUsuario['telefonoConvencional'] != "-"){
+            $mfoUsuario['telefonoConvencional'] = Utils::ocultarCaracteres($mfoUsuario['telefonoConvencional'], 0, 0);
+        }
+        $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($datos['id_usuario']);
+        $dataareasubarea = array();
+        foreach ($usuarioxarea as $key=>$value) {
+            array_push($dataareasubarea, $value[0]);
+        }
+        $dataareasubarea = implode(",", $dataareasubarea);
+        $areasubarea = Modelo_UsuarioxAreaSubarea::obtieneAreas_Subareas($dataareasubarea);
+        $array_group = array();
+        foreach ($areasubarea as $key => $value) {
+            $array_group[$value['id_area']][$key] = $value;
+        }
+        $areasubarea = $array_group;
+        $usuarioxnivelidioma = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($datos['id_usuario']);
+        $datos = array_merge($datos, array("usuarioxarea"=>$areasubarea));
+        $datos = array_merge($datos, array("usuarioxnivelidioma"=>$usuarioxnivelidioma));
+        // $html = $datos['username'];
+        $inicioTabla = "<table style='width: 100%;'>";
+        // $tableinter = 
+        $finTabla = "</table>";
+        $iniciothead = "<thead>";
+        $finthead = "</thead>";
+        $iniciotbody = "<tbody>";
+        $fintbody = "</tbody>";
+        $iniciotr = "<tr>";
+        $fintr = "</tr>";
+        $iniciotd = "<td colspan='";
+        $tdstyle = "' style='";
+        $tdinter = "'>";
+        $fintd = "</td>";
+
+        $fotoPerfil = "";
+        $divinicio = "<div style='";
+        $divinter = "'>";
+        $divfinal = "</div>";
+        $imageninicio = "<img src='";
+        $imagenstyle = "' style='";
+        $imagenfin = "'>";
+        // $foto = Modelo_Usuario::obtieneFoto($datos['username']);
+        $foto = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$datos['username'].'.jpg';
+        $html .= $divinicio."text-align: center;".$divinter.$imageninicio.$foto.$imagenstyle."width: 120px;height: 120px;border-style: solid;border-color: white;".$imagenfin.$divfinal;
+        // echo $html;
+        // exit();
+        if(isset($datos['aspSalarial'])){
+          $html .= "<h5 style='text-align: center;'><b>Aspiración salarial:</b> ".SUCURSAL_MONEDA.$datos['aspSalarial']."</h5>";
+        }
+        $html .= $inicioTabla;
+          $html .= $iniciotbody;
+            $html .= $iniciotr;
+              $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
+                $html .= "<h4>Datos de usuario</h4>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Nombres</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Apellidos</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['nombres'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['apellidos'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Nacionalidad</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Edad</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['nacionalidad'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['edad'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Disponibilidad para viajar</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Cambio de residencia</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['viajar'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['residencia'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Discapacidad</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Género</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['discapacidad'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['genero'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Escolaridad</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Situación laboral</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['escolaridad'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['situacionLaboral'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Licencia</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Universidad</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['licencia'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['universidad'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Estado civil</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['estadocivil'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+// --------------***************--------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
+                $html .= "<h4>Datos de residencia</h4>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Ciudad</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>País</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Provincia</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['ciudad'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['pais'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['provincia'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+// --------------***************--------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
+                $html .= "<h4>Datos de contacto</h4>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+// ------------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Correo</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Teléfono</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['correo'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['telefono'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Dni</b>";
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Teléfono convencional</b>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+            $html .= $iniciotr;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['dni'];
+              $html .= $fintd;
+
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['telefonoConvencional'];
+              $html .= $fintd;
+
+            $html .= $fintr;
+
+// --------------***************--------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
+                $html .= "<h4>Idiomas</h4>";
+              $html .= $fintd;
+            $html .= $fintr;
+// -----------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."12".$tdstyle."text-align: center;".$tdinter;
+              $html.= "<br>";
+                foreach ($datos['usuarioxnivelidioma'] as $key=>$value) {
+                  $html.= "<span><b>".$key."</b> - ".$value[2]."</span><br>";
+                }
+                $html.= "<br>";
+                $html.= "<br>";
+              $html .= $fintd;
+            $html .= $fintr;
+// --------------***************--------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
+                $html .= "<h4>Áreas de interés</h4>";
+              $html .= $fintd;
+            $html .= $fintr;
+
+// -----------------------------------------------------
+            $html .= $iniciotr;
+              $html .= $iniciotd."12".$tdstyle."text-align: center;".$tdinter;
+                foreach ($datos['usuarioxarea'] as $key => $value) {
+                        $actual = $value;
+                        $name = "";
+                        foreach ($actual as $key2 => $value2) {
+                          if($name != $value2['area']){
+                            $name = $value2['area'];
+                            $html.= "<br><h4 style='text-align: center;'>Área: ".$value2['area']."<br></h4>";
+                          }
+                        }
+                        $html.= "<h4 style='text-align: center;'>Subáreas: </h4>";
+                        foreach ($actual as $key1 => $value1) {
+                          $html.= $value1['subarea']."<br>";
+                        }
+              }
+              $html .= $fintd;
+            $html .= $fintr;
+
+
+          $html .= $fintbody;
+        $html .= $finTabla;
+        // $html = '';
+
+        // echo $html;
+        // var_dump($datos);
+        // exit();
+        self::informePersonalidad($html, "eder");
+        // print_r($html);
+        // var_dump($datos);
+    // print_r($id_oferta."--".$vista);
+    // exit();
   }
 }
 ?>

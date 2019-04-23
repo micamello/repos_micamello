@@ -364,7 +364,9 @@ class Controlador_Aspirante extends Controlador_Base
 
             case 'detallePerfil':
                 if (Modelo_Usuario::EMPRESA) {
-
+                    if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
+                        Utils::doRedirect(PUERTO . '://' . HOST . '/planes/');
+                    }
                     $this->perfilAspirante($username, $id_oferta, $vista);
                 }
             break;
@@ -550,13 +552,18 @@ class Controlador_Aspirante extends Controlador_Base
     }
 
     public function perfilAspirante($username, $id_oferta, $vista){
-            // if($vista == 1){
-
-            // }
+            if($vista == 1){
+                $planOferta = Modelo_Oferta::obtenerPlanOferta($id_oferta);
+                $id_plan = $planOferta['id_plan'];
+                if(!Modelo_PermisoPlan::busquedaPermisoxPlan($id_plan, 'detallePerfilCandidatos')){
+                    Utils::doRedirect(PUERTO . '://' . HOST . '/planes/');  
+                }
+            }
             $data_user = self::datauser($username, $id_oferta, $vista);
-            
+            print_r($id_oferta);
+            // exit();
             $breadcrumbs = array();
-            $breadcrumbs['verAspirantes/'.$vista.'/'.$id_oferta."/1"] = "Ver aspirantes";
+            $breadcrumbs['verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta)."/1"] = "Ver aspirantes";
             $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
             // $planes = array();
 
@@ -573,10 +580,13 @@ class Controlador_Aspirante extends Controlador_Base
     }
 
     public function datauser($username, $id_oferta, $vista){
-        // print_r("<br><br><br><br><br><br>".$vista."-".$id_oferta."<br><br>");
         $datos = Modelo_Usuario::existeUsuario($username);
         $mfoUsuario = Modelo_Usuario::informacionPerfilUsuario($datos['id_usuario']);
         $datos = array_merge($datos, $mfoUsuario);
+        if($vista == 1){
+            $aspSalarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
+            $datos = array_merge($datos, array('aspSalarial'=>$aspSalarial['asp_salarial']));
+        }
         $classHidden = "";
         if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
             $mostrarBoton = "<div class='col-md-12'><a class='btn btn-success' href='".PUERTO.'://'.HOST.'/planes/'."'>Mostrar datos</a></div>";

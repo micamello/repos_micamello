@@ -310,10 +310,12 @@ var primerEmpleoOf
     //     console.log("eder");
     // })
 // ------------------------------------------------------------------
+    var mensajes = "";
     if(nombreOferta.val() != ""){
         if(nombreOferta.val().length <= 250){
             if(!validarTituloEmpresa(nombreOferta.val())){
                 crearMensajeError(nombreOferta, "Escriba un título válido");
+                mensajes += "- Campo titulo: Escriba un título válido";
             }
             else{
                 eliminarMensajeError(nombreOferta);
@@ -321,15 +323,18 @@ var primerEmpleoOf
         }
         else{
             crearMensajeError(nombreOferta, "Longitud máxima de caracteres 250.");
+            mensajes += "- Campo titulo: Longitud máxima de caracteres 250";
         }
     }
     else{
         crearMensajeError(nombreOferta, "Rellene este campo.");
+        mensajes += "- Campo título no puede ser vacío";
     }
 
 // ------------------------------------------------------------------
     if(contenido == ""){
         crearMensajeError(descripcionOferta, "Rellene este campo");
+        mensajes += "\n- El campo descripción no puede ser vacío";
     }
     else{
         eliminarMensajeError(descripcionOferta);
@@ -339,6 +344,7 @@ var primerEmpleoOf
     if(salarioOf.val() != ""){
         if(!validarFloat(salarioOf.val())){
             crearMensajeError(salarioOf, "Ingrese un valor correcto");
+            mensajes += "\n-Campo salario: Ingrese un valor válido";
         }
         else{
             eliminarMensajeError(salarioOf);
@@ -346,11 +352,13 @@ var primerEmpleoOf
     }
     else{
         crearMensajeError(salarioOf, "Rellene este campo");
+        mensajes += "\n-El campo salario no puede ser vacío";
     }
 
 // ------------------------------------------------------------------
     if(salarioConv.val() == ""){
-        crearMensajeError(salarioConv, "Rellene este campo");
+        crearMensajeError(salarioConv, "Seleccione una opción");
+        mensajes += "\n-Campo salario a convenir: seleccione una opción";
     }
     else{
         eliminarMensajeError(salarioConv);
@@ -360,6 +368,7 @@ var primerEmpleoOf
         if(validarFecha(fechaCont.val())){
             if(!fechaMayor(fechaCont.val())){
                 crearMensajeError(fechaCont, 'Ingrese una fecha válida (mayor a actual)');
+                mensajes += "\n- Campo fecha contratación: Ingrese una fecha mayor a la actual";
             }
             else{
                 eliminarMensajeError(fechaCont);
@@ -367,28 +376,33 @@ var primerEmpleoOf
         }
         else{
             crearMensajeError(fechaCont, "Ingrese una fecha válida");
+            mensajes += "\n- Ingrese una fecha válida"
         }
     }
     else{
         crearMensajeError(fechaCont, "Rellene este campo");
+        mensajes += "\n- El campo fecha contratación no puede estar vacío";
     }
 
 // ------------------------------------------------------------------
 if(cantVac.val() != ""){
     if(!validarVacante(cantVac.val())){
         crearMensajeError(cantVac, "Ingrese un valor válido");
+        mensajes += "\n- Campo Cantidad vacante: Ingrese un valor válido";
     }
     else{
         eliminarMensajeError(cantVac);
     }
 }
 else{
-    crearMensajeError(fechaCont, "Rellene este campo");
+    crearMensajeError(cantVac, "Rellene este campo");
+    mensajes += "\n- El campo cantidad de vacantes no puede ser vacío";
 }
 
 // ------------------------------------------------------------------
 if(provinciaOf.val() == "" || provinciaOf.val() == null){
     crearMensajeError(provinciaOf, "Seleccione una opción");
+    mensajes += "\n- Campo provincia: Seleccione una opción";
 }
 else{
     eliminarMensajeError(provinciaOf);
@@ -397,6 +411,7 @@ else{
 // ------------------------------------------------------------------
 if(ciudadOf.val() == "" || ciudadOf.val() == null){
     crearMensajeError(ciudadOf, "Seleccione una opción");
+    mensajes += "\n- Campo ciudad: Seleccione una opción";
 }
 else{
     eliminarMensajeError(ciudadOf);
@@ -404,6 +419,7 @@ else{
 // ------------------------------------------------------------------
 if(subareasCand.val() == "" || subareasCand.val() == null){
     crearMensajeError(subareasCand, "Seleccione una opción");
+    mensajes += "\n- Campo subarea: Seleccione una opción";
 }
 else{
     eliminarMensajeError(subareasCand);
@@ -412,6 +428,7 @@ else{
 // ------------------------------------------------------------------
 if(jornadaOf.val() == "" || jornadaOf.val() == null){
     crearMensajeError(jornadaOf, "Seleccione una opción");
+    mensajes += "\n- Campo jornada: Seleccione una opción";
 }
 else{
     eliminarMensajeError(jornadaOf);
@@ -420,6 +437,7 @@ else{
 // ------------------------------------------------------------------
 if(escolaridadOf.val() == "" || escolaridadOf.val() == null){
     crearMensajeError(escolaridadOf, "Seleccione una opción");
+    mensajes += "\n- Campo escolaridad: Seleccione una opción";
 }
 else{
     eliminarMensajeError(escolaridadOf);
@@ -433,6 +451,7 @@ if(edadMinOf.val() != ""){
             var devuelve = validarMinMaxEdad(edadMinOf, edadMaxOf, 1);
             if(devuelve[1] == false && devuelve[0] != false){
                 crearMensajeError(devuelve[0], "Verifique la edad");
+                mensajes+= "\n- Verifique el campo Edad mínima";
             }
             else{
                 eliminarMensajeError(edadMinOf);
@@ -440,14 +459,17 @@ if(edadMinOf.val() != ""){
         }
         else{
             crearMensajeError(edadMinOf, "Edad mínima 18 años, máxima 100");
+            mensajes+= "\n- Verifique el campo Edad mínima";
         }
     }
     else{
         crearMensajeError(edadMinOf, "El campo solo acepta números");
+        mensajes+= "\n- Verifique el campo Edad mínima";
     }
 }
 else{
     crearMensajeError(edadMinOf, "Rellene este campo");
+    mensajes+= "\n- Verifique el campo Edad mínima";
 }
 // ------------------------------------------------------------------
 if(edadMaxOf.val() != ""){
@@ -456,7 +478,8 @@ if(edadMaxOf.val() != ""){
             eliminarMensajeError(edadMaxOf);
             var devuelve = validarMinMaxEdad(edadMinOf, edadMaxOf, 2);
             if(devuelve[1] == false && devuelve[0] != false){
-                crearMensajeError(devuelve[0], "Verifique la edad");
+                crearMensajeError(devuelve[0], "- Verifique la edad");
+                mensajes += "\n- Verifique el campo edad máxima";
             }
             else{
                 eliminarMensajeError(edadMaxOf);
@@ -464,19 +487,23 @@ if(edadMaxOf.val() != ""){
         }
         else{
             crearMensajeError(edadMaxOf, "Edad mínima 18 años, máxima 100");
+            mensajes += "\n- Verifique el campo edad máxima";
         }
     }
     else{
         crearMensajeError(edadMaxOf, "El campo solo acepta números");
+        mensajes += "\n- Verifique el campo edad máxima";
     }
 }
 else{
     crearMensajeError(edadMaxOf, "Rellene este campo");
+    mensajes += "\n- Verifique el campo edad máxima";
 }
 
 
 if(select_array_idioma.val() == "" || select_array_idioma.val() == null){
     crearMensajeError($('#listadoIdiomas'), "Seleccione un idioma");
+    mensajes += "\n- Campo idioma: Seleccione al menos un idioma";
 }
 else{
     eliminarMensajeError($('#listadoIdiomas'));
@@ -488,6 +515,7 @@ else{
 // ------------------------------------------------------------------
 if(anosexp.val() == "" || anosexp.val() == null){
     crearMensajeError(anosexp, "Seleccione una opción");
+    mensajes += "\n- Campo años experiencia: Seleccione una opción";
 }
 else{
     eliminarMensajeError(anosexp);
@@ -495,6 +523,7 @@ else{
 // ------------------------------------------------------------------
 if(dispOf.val() == "" || dispOf.val() == null){
     crearMensajeError(dispOf, "Seleccione una opción");
+    mensajes += "\n- Campo disponibilidad para viajar: Seleccione una opción";
 }
 else{
     eliminarMensajeError(dispOf);
@@ -502,6 +531,7 @@ else{
 // ------------------------------------------------------------------
 if(licenciaOf.val() == "" || licenciaOf.val() == null){
     crearMensajeError(licenciaOf, "Seleccione una opción");
+    mensajes += "\n- Campo licencia: Seleccione una opción";
 }
 else{
     eliminarMensajeError(licenciaOf);
@@ -509,6 +539,7 @@ else{
 // ------------------------------------------------------------------
 if(residenciaOf.val() == "" || residenciaOf.val() == null){
     crearMensajeError(residenciaOf, "Seleccione una opción");
+    mensajes += "\n- Campo cambio de residencia: Seleccione una opción";
 }
 else{
     eliminarMensajeError(residenciaOf);
@@ -516,6 +547,7 @@ else{
 // ------------------------------------------------------------------
 if(discapacidadOf.val() == "" || discapacidadOf.val() == null){
     crearMensajeError(discapacidadOf, "Seleccione una opción");
+    mensajes += "\n- Campo discapacidad: Seleccione una opción";
 }
 else{
     eliminarMensajeError(discapacidadOf);
@@ -523,6 +555,7 @@ else{
 // ------------------------------------------------------------------
 if(confidencialOf.val() == "" || confidencialOf.val() == null){
     crearMensajeError(confidencialOf, "Seleccione una opción");
+    mensajes += "\n- Campo confidencial: Seleccione una opción";
 }
 else{
     eliminarMensajeError(confidencialOf);
@@ -530,6 +563,7 @@ else{
 // ------------------------------------------------------------------
 if(ofertaUrgenteOf.val() == "" || ofertaUrgenteOf.val() == null){
     crearMensajeError(ofertaUrgenteOf, "Seleccione una opción");
+    mensajes += "\n- Campo oferta urgente: Seleccione una opción";
 }
 else{
     eliminarMensajeError(ofertaUrgenteOf);
@@ -537,9 +571,13 @@ else{
 // ------------------------------------------------------------------
 if(primerEmpleoOf.val() == "" || primerEmpleoOf.val() == null){
     crearMensajeError(primerEmpleoOf, "Seleccione una opción");
+    mensajes += "\n- Campo primer empleo: Seleccione una opción";
 }
 else{
     eliminarMensajeError(primerEmpleoOf);
+}
+if(mensajes != ""){
+    mensajeErrorAlert(mensajes);
 }
 
 }
@@ -955,5 +993,9 @@ function formatearFecha(contenido){
     var yyy = date.getFullYear();
     var fecha_formateada = dia + ' de ' + meses[mes] + ' de ' + yyy;
     return fecha_formateada;
+}
+
+function mensajeErrorAlert(mensaje){
+    swal('Faltan algunos datos!', mensaje, 'error');
 }
 

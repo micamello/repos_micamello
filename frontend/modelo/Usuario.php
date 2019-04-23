@@ -1011,11 +1011,11 @@ WHERE
     }    
   }
 
-  // public static function aspSalarial($id_usuario, $id_oferta){
-  //   if(empty($id_usuario) || empty($id_oferta)){return false;}
-  //   $sql = "SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = ? AND id_ofertas = ? LIMIT 1;";
-  //   return $GLOBALS['db']->auto_array($sql,array($id_usuario,$id_oferta));
-  // }
+  public static function aspSalarial($id_usuario, $id_oferta){
+    if(empty($id_usuario) || empty($id_oferta)){return false;}
+    $sql = "SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = ? AND id_ofertas = ? LIMIT 1;";
+    return $GLOBALS['db']->auto_array($sql,array($id_usuario,$id_oferta));
+  }
 
   public static function infoUsuario($id_usuario){
     if(empty($id_usuario)){return false;}
