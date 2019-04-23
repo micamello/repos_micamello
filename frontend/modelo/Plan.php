@@ -10,7 +10,7 @@ class Modelo_Plan{
     costo=2 => los que no tenga precio 0*/
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
   	if (empty($tipousuario)||empty($sucursal)){ return false; }
-    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.extension, p.num_cuenta, p.num_accesos,
+    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.extension, p.num_cuenta, p.num_accesos, p.limite_perfiles,
                    IF(p.promocional,p.prom_codigo_paypal,p.codigo_paypal) AS codigo_paypal,
                    IF(p.promocional,p.prom_num_post,p.num_post) AS num_post, 
                    IF(p.promocional,p.prom_costo,p.costo) AS costo, 

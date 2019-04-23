@@ -220,7 +220,7 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no alcanza el l\u00CDmite m\u00CDnimo permitido");
                 }
                 if(isset($_POST['tel_two_contact']) && !empty($_POST['tel_two_contact'])){
-                    $validaTlf3 = Utils::valida_telefono($data['tel_two_contact']);
+                    $validaTlf3 = Utils::validarTelefonoConvencional($data['tel_two_contact']);
                     if (empty($validaTlf3)) {
                         throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no es v\u00E1lido");
                     }
@@ -254,7 +254,7 @@ class Controlador_Perfil extends Controlador_Base
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
 
                 if(!empty($data['convencional'])){
-                    $validaTlf = Utils::valida_telefono($data['convencional']);
+                    $validaTlf = Utils::validarTelefonoConvencional($data['convencional']);
                     if (empty($validaTlf)) {
                         throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " no es v\u00E1lido");
                     }

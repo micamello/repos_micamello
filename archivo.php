@@ -7,6 +7,7 @@ $carpeta = Utils::getParam('carpeta','',$_GET);
 $param1 = Utils::getParam('param1','',$_GET); //username
 $param2 = Utils::getParam('param2','',$_GET); //idoferta
 
+
 if (empty($carpeta) || empty($param1)){
    exit; 
 }

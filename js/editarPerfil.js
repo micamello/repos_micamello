@@ -544,41 +544,38 @@ function validarFormulario(tipovalidacion){
             mensaje += '- Tipo de documento, '+err_list+'\n';
             error = 1;
           }          
-
-          if($('#dni').val() != "" && tipovalidacion == true){
-
-            if(document.getElementById('dni').value.length >= 10){
-              if(searchAjax($('#dni'),tipo_doc) == false){
-                if(DniRuc_Validador($('#dni'),tipo_doc) == true){
-                  quitarError("err_dni","seccion_dni");
+          
+          if($('#dni').val() != ""){
+            if (tipovalidacion == true){
+              if(document.getElementById('dni').value.length >= 10){
+                if(searchAjax($('#dni'),tipo_doc) == false){
+                  if(DniRuc_Validador($('#dni'),tipo_doc) == true){
+                    quitarError("err_dni","seccion_dni");
+                  }else{
+                    colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","boton");
+                    mensaje += "- Documento ingresado no es válido"+'\n';
+                    error = 1;      
+                  }
                 }else{
-                  colocaError("err_dni", "seccion_dni","Documento ingresado no es válido","boton");
-                  mensaje += "- Documento ingresado no es válido"+'\n';
-                  error = 1;      
-                }
-              }else{
-                colocaError("err_dni", "seccion_dni","Documento ingresado ya existe","boton");
-                mensaje += "- Documento ingresado ya existe"+'\n'; 
-                error = 1; 
-              } 
-            }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
-
-              colocaError("err_dni", "seccion_dni","El número de cédula debe tener mínimo 10 dígitos","boton");
-              error = 1;
-              mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'\n';
-
-            }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
-
-              colocaError("err_dni", "seccion_dni","El pasaporte debe tener mínimo 6 dígitos","boton");
-              error = 1;
-              mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'\n';
-            }
-            else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
-
-              colocaError("err_dni", "seccion_dni","El RUC debe tener mínimo 13 dígitos","boton");
-              error = 1;
-              mensaje += "- El RUC debe tener mínimo 13 dígitos"+'\n';
-            }
+                  colocaError("err_dni", "seccion_dni","Documento ingresado ya existe","boton");
+                  mensaje += "- Documento ingresado ya existe"+'\n'; 
+                  error = 1; 
+                } 
+              }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
+                colocaError("err_dni", "seccion_dni","El número de cédula debe tener mínimo 10 dígitos","boton");
+                error = 1;
+                mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'\n';
+              }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+                colocaError("err_dni", "seccion_dni","El pasaporte debe tener mínimo 6 dígitos","boton");
+                error = 1;
+                mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'\n';
+              }
+              else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
+                colocaError("err_dni", "seccion_dni","El RUC debe tener mínimo 13 dígitos","boton");
+                error = 1;
+                mensaje += "- El RUC debe tener mínimo 13 dígitos"+'\n';
+              }
+            }    
           }else{
             colocaError("err_dni", "seccion_dni","Documento no puede ser vacío","boton");
             mensaje += "- Documento no puede ser vacío"+'\n';
@@ -824,7 +821,7 @@ function validarFormulario(tipovalidacion){
                 mensaje += '- Nombre de contacto, '+err_campo+'\n';
                 error = 1; 
 
-            }else if(!expreg.test(nombre_contact)){
+            }else if(!validarNombreEmpresa(nombre_contact)){
 
                 colocaError("err_nomCon", "seccion_nombreContacto",err_formato_letra,"boton");
                 mensaje += '- Nombre de contacto, '+err_formato_letra+'\n'; 
@@ -847,7 +844,7 @@ function validarFormulario(tipovalidacion){
                 mensaje += '- Apellido de contacto, '+err_campo+'\n';
                 error = 1; 
 
-            }else if(!expreg.test(apellido_contact)){
+            }else if(!validarNombreEmpresa(apellido_contact)){
 
                 colocaError("err_apeCon", "seccion_apellidoContacto",err_formato_letra,"boton");
                 mensaje += '- Apellido de contacto, '+err_formato_letra+'\n';

@@ -39,7 +39,15 @@
                     }
                     if ($listadoAcciones[$key] == "accessos"){
                       $permiso = str_replace('NRO',$gratuito["num_accesos"],$permiso);
-                    }  
+                    } 
+                    if ($listadoAcciones[$key] == "buscarCandidatosPostulados"){
+                      if (!empty($gratuito["limite_perfiles"])){
+                        $permiso = str_replace('NRO',$gratuito["limite_perfiles"],$permiso);  
+                      }
+                      else{
+                       $permiso = str_replace('NRO','',$permiso);   
+                      }
+                    } 
                     $permisos_grat .= utf8_encode(trim($permiso)).'||';
                   }
                   if ($gratuito["num_post"] == -1){
@@ -107,6 +115,14 @@
                     }
                     if ($listadoAcciones[$key] == "accessos"){
                       $permiso = str_replace('NRO',$plan["num_accesos"],$permiso);
+                    }
+                    if ($listadoAcciones[$key] == "buscarCandidatosPostulados"){
+                      if (!empty($plan["limite_perfiles"])){    
+                        $permiso = str_replace('NRO',$plan["limite_perfiles"],$permiso);
+                      }
+                      else{
+                        $permiso = str_replace('NRO','',$permiso); 
+                      }
                     }  
                     $permisos_plan .= utf8_encode(trim($permiso)).'||';
                   }     
@@ -176,6 +192,14 @@
                     }
                     if ($listadoAcciones[$key] == "accessos"){
                       $permiso = str_replace('NRO',$aviso["num_accesos"],$permiso);
+                    }
+                    if ($listadoAcciones[$key] == "buscarCandidatosPostulados"){
+                      if (!empty($aviso["limite_perfiles"])){
+                        $permiso = str_replace('NRO',$aviso["limite_perfiles"],$permiso);
+                      }
+                      else{
+                        $permiso = str_replace('NRO','',$permiso); 
+                      }
                     }
                     $permisos_aviso .= utf8_encode(trim($permiso)).'||';
                   }       
