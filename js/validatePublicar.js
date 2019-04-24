@@ -854,13 +854,12 @@ $('#primerEmpleoOf').on('blur change', function(){
 
 // ******************funciones***********************
 function fechaMayor(fecha){
-    var fechaActual = new Date().toISOString().slice(0,10).split('-');
-    var fechaForm = fecha.split('-');
-    if(fechaActual[0] <= fechaForm[0] && fechaActual[1] <= fechaForm[1] && fechaActual[2] <= fechaForm[2]){
-        return true;
+    var ahora = new Date().toISOString().slice(0,10);
+    if(ahora>fecha){
+        return false;
     }
     else{
-        return false;
+        return true;
     }
 }
 
