@@ -358,12 +358,15 @@ class Controlador_Aspirante extends Controlador_Base
                 $tags["template_css"][] = "ion.rangeSlider";
                 $tags["template_css"][] = "ion.rangeSlider.skinModern";
 
+
                 Vista::render('aspirantes', $tags);
             break;
 
             case 'detallePerfil':
                 if (Modelo_Usuario::EMPRESA) {
-
+                    if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
+                        Utils::doRedirect(PUERTO . '://' . HOST . '/planes/');
+                    }
                     $this->perfilAspirante($username, $id_oferta, $vista);
                 }
             break;
@@ -549,73 +552,71 @@ class Controlador_Aspirante extends Controlador_Base
     }
 
     public function perfilAspirante($username, $id_oferta, $vista){
-            $data_user = self::datauser($username, $id_oferta, $vista);
-            
-            $breadcrumbs = array();
-            $breadcrumbs['verAspirantes/'.$vista.'/'.$id_oferta."/1"] = "Ver aspirantes";
-            $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
-            $planes = array();
-            if(isset($_SESSION['mfo_datos']['planes'])){
-                $planes = $_SESSION['mfo_datos']['planes'];
-            }else{
-                array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
+            if($vista == 1){
+                $planOferta = Modelo_Oferta::obtenerPlanOferta($id_oferta);
+                $id_plan = $planOferta['id_plan'];
+                if(!Modelo_PermisoPlan::busquedaPermisoxPlan($id_plan, 'detallePerfilCandidatos')){
+                    Utils::doRedirect(PUERTO . '://' . HOST . '/planes/');  
+                }
             }
+            $data_user = self::datauser($username, $id_oferta, $vista);
+            print_r($id_oferta);
+            // exit();
+            $breadcrumbs = array();
+            $breadcrumbs['verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta)."/1"] = "Ver aspirantes";
+            $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
+            // $planes = array();
 
             $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
-
-            $tags = array("breadcrumbs"=>$breadcrumbs,
-                    "infoUsuario"=>$data_user['infoUsuario'],
-                    "escolaridad"=>$data_user['escolaridad'],
-                    "Conf"=>$data_user['Conf'],
-                    "Resultados"=>$data_user['Resultados'],
-                    "asp_sararial"=>$data_user['asp_sararial'],
+            $tags["template_js"][] = "detalleperfil";
+            $tags1 = array("breadcrumbs"=>$breadcrumbs,
+                    "datosUsuario"=>$data_user,
                     "enlaceCompraPlan"=>$enlaceCompraPlan,
                     "id_oferta"=>$id_oferta,
                     "vista"=>$vista
               );
-            
-        $tags["template_js"][] = "html2canvas.min";
-        $tags["template_js"][] = "jsPDF-1.4.1/dist/jspdf.debug";
-        //$tags["template_js"][] = "mic";
-        $tags["template_js"][] = "Chart.min";
+            $tags = array_merge($tags, $tags1);
         Vista::render('perfilAspirante', $tags);
     }
 
     public function datauser($username, $id_oferta, $vista){
         $datos = Modelo_Usuario::existeUsuario($username);
-        $info_usuario = Modelo_Usuario::infoUsuario($datos['id_usuario']);
-        $escolaridad = Modelo_Escolaridad::obtieneListadoAsociativo();
-        $asp_salarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
-        $contacto = array();
-        $array_rasgosxusuario = array();
-
-
+        $mfoUsuario = Modelo_Usuario::informacionPerfilUsuario($datos['id_usuario']);
+        $datos = array_merge($datos, $mfoUsuario);
+        if($vista == 1){
+            $aspSalarial = Modelo_Usuario::aspSalarial($datos['id_usuario'], $id_oferta);
+            $datos = array_merge($datos, array('aspSalarial'=>$aspSalarial['asp_salarial']));
+        }
+        $classHidden = "";
         if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-                $contacto = ["correo"=>Utils::ocultarEmail($info_usuario['correo']), "telefono"=>Utils::ocultarCaracteres($info_usuario['telefono'], 0, 0), "dni"=>Utils::ocultarCaracteres($info_usuario['dni'], 0, 0)];
+            $mostrarBoton = "<div class='col-md-12'><a class='btn btn-success' href='".PUERTO.'://'.HOST.'/planes/'."'>Mostrar datos</a></div>";
+            $datos['dni'] = Utils::ocultarCaracteres($datos['dni'], 0, 0);
+            $datos['correo'] = Utils::ocultarEmail($datos['correo'], 0, 0);
+            $datos['telefono'] = Utils::ocultarCaracteres($datos['telefono'], 0, 0);
+            if($mfoUsuario['telefonoConvencional'] != "-"){
+                $mfoUsuario['telefonoConvencional'] = Utils::ocultarCaracteres($mfoUsuario['telefonoConvencional'], 0, 0);
             }
-            else{
-                $contacto = ["correo"=>$info_usuario['correo'], "telefono"=>$info_usuario['telefono'], "dni"=>$info_usuario['dni']];
-            }
-
-        if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')){
-                $cuestionariosUsuario = Modelo_Cuestionario::listadoCuestionariosxUsuario($info_usuario['id_usuario']);
-                
-                $resultados = array();
-                $rasgoxtest = array();
-                foreach ($cuestionariosUsuario as $cuestionarios) {
-                  $test = "Test".$cuestionarios['id_cuestionario'];
-                  $rasgoxtest = Modelo_InformePDF::obtieneValorxRasgoxTest($info_usuario['id_usuario'], $cuestionarios['id_cuestionario']);
-                  foreach ($rasgoxtest as $res) {
-                    array_push($array_rasgosxusuario, array("nombre"=>$res['nombre'], "valor"=>$res['valor']));
-                  }
-                }
-            }
-
-        return array("infoUsuario"=>$info_usuario,
-                    "escolaridad"=>$escolaridad,
-                    "Conf"=>$contacto,
-                    "Resultados"=>$array_rasgosxusuario,
-                    "asp_sararial"=>$asp_salarial);
+            $classHidden = " reveal";
+            $datos = array_merge($datos, array("classHidden"=>$classHidden));
+            $datos = array_merge($datos, array('mostrarBoton'=>$mostrarBoton));
+        }
+        $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($datos['id_usuario']);
+        $dataareasubarea = array();
+        foreach ($usuarioxarea as $key=>$value) {
+            array_push($dataareasubarea, $value[0]);
+        }
+        $dataareasubarea = implode(",", $dataareasubarea);
+        $areasubarea = Modelo_UsuarioxAreaSubarea::obtieneAreas_Subareas($dataareasubarea);
+        $array_group = array();
+        foreach ($areasubarea as $key => $value) {
+            $array_group[$value['id_area']][$key] = $value;
+        }
+        $areasubarea = $array_group;
+        $usuarioxnivelidioma = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($datos['id_usuario']);
+        $datos = array_merge($datos, array("usuarioxarea"=>$areasubarea));
+        $datos = array_merge($datos, array("usuarioxnivelidioma"=>$usuarioxnivelidioma));
+        return $datos;
+        
     }
 
 }
