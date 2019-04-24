@@ -114,6 +114,53 @@ class Modelo_Usuario{
     return (!empty($rs['id_usuario'])) ? $rs : false;
   }
 
+  public static function informacionPerfilUsuario($idUsuario){
+    $sql = "SELECT 
+    u.telefono,
+    DATE_FORMAT(u.fecha_nacimiento, '%Y-%m-%d') AS fecha_nacimiento,
+    YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,
+    u.tipo_doc,
+    IF(u.viajar = '0' , 'NO', 'SI') as viajar,
+    IF(u.residencia = '0' , 'NO', 'SI') as residencia,
+    IF(u.discapacidad = '0' , 'NO', 'SI') as discapacidad,
+    ifnull(u.tlf_convencional, '-') as telefonoConvencional,
+    g.descripcion AS genero,
+    e.descripcion AS escolaridad,
+    sl.descripcion AS situacionLaboral,
+    c.nombre AS ciudad,
+    pais.nombre_abr AS pais,
+    pr.nombre AS provincia,
+    mpais.nombre_abr AS nacionalidad,
+    ifnull(tl.descripcion, '-') AS licencia,
+    ifnull(uni.id_univ, ifnull(uni.nombre, '-')) as universidad,
+    ifnull(es.descripcion, '-') as estadocivil
+FROM
+    mfo_usuario u
+    LEFT JOIN
+    mfo_tipolicencia tl ON tl.id_tipolicencia = u.id_tipolicencia
+  LEFT JOIN mfo_universidades uni ON uni.id_univ = u.id_univ,
+    mfo_genero g,
+    mfo_escolaridad e,
+    mfo_situacionlaboral sl,
+    mfo_ciudad c,
+    mfo_provincia pr,
+    mfo_pais pais,
+    mfo_pais mpais,
+    mfo_estadocivil es
+        
+WHERE
+    g.id_genero = u.id_genero
+        AND e.id_escolaridad = u.id_escolaridad
+        AND sl.id_situacionlaboral = u.id_situacionlaboral
+        AND pais.id_pais = pr.id_pais
+        AND pr.id_provincia = c.id_provincia
+        AND u.id_nacionalidad = mpais.id_pais
+        AND c.id_ciudad = u.id_ciudad
+        AND es.id_estadocivil = u.id_estadocivil
+        AND u.id_usuario = ?;";
+    return $GLOBALS['db']->auto_array($sql,array($idUsuario));
+  }
+
   public static function existeUsername($username){
     if(empty($username)){return false;}
     $sql = "SELECT * FROM mfo_usuario_login WHERE username = ?;";

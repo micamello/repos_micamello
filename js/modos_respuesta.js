@@ -1,5 +1,7 @@
 $(window).on('load',function(){
-  $('#msg_inforcuestionario').modal('show');
+	if ($('#faceta').val() <= 3){
+    $('#msg_inforcuestionario').modal('show');
+  }
 });
 
 // DOBLE CLICK

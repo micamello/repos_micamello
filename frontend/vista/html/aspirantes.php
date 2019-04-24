@@ -772,7 +772,6 @@
 																}else{
 																	echo $mostrar;
 																}
-
 															}
 														
 														echo '</td>';

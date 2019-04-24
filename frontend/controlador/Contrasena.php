@@ -45,7 +45,9 @@ class Controlador_Contrasena extends Controlador_Base {
         }else{
             $_SESSION['mostrar_error'] = 'Para continuar deber\u00E1 cambiar su contrase\u00F1a';      
         }
-
+        $this->linkRedesSociales();
+        $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
+        $tags = array('social'=>$social_reg);
         $breadcrumbs['cambioClave'] = 'Cambio de contrase&ntilde;a';
         $tags["template_js"][] = "editarPerfil";
         $tags['breadcrumbs'] = $breadcrumbs;
@@ -83,8 +85,7 @@ class Controlador_Contrasena extends Controlador_Base {
       if( strtotime($fecha." +".HORAS_VALIDO_PASSWORD." hours") < time() ){
         throw new Exception("El enlace para recuperaci\u00F3n de contrase\u00F1a ya no es v\u00E1lida, por favor ingrese denuevo su correo para el env\u00EDo");        
       }  
-      if ( Utils::getParam('confirm_form') == 1 ){
-        Utils::log("PASO");
+      if ( Utils::getParam('confirm_form') == 1 ){        
         $campos = array('password1'=>1,'password2'=>1);
         $data = $this->camposRequeridos($campos);
         if ($data["password1"] != $data["password2"]){
@@ -114,7 +115,7 @@ class Controlador_Contrasena extends Controlador_Base {
   
   public function mostrarDefault(){
     $this->linkRedesSociales();    
-
+    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
     if ( Utils::getParam('forgot_form') == 1 ){
       try{
         $campos = array('correo1'=>1);
@@ -137,13 +138,13 @@ class Controlador_Contrasena extends Controlador_Base {
         if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
           throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
         }
-        $_SESSION['mostrar_exito'] = "Se envi\u00F3 a su direcci\u00F3n de correo ingresada el enlace para el cambio de correo, recuerde que tiene un m\u00E1ximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contrase\u00F1a y en el caso de que no encuentre su correo revisar tambien su carpeta de spam";         
+        $_SESSION['mostrar_exito'] = "Se envi\u00F3 a su direcci\u00F3n de correo el enlace para el cambio de contrase\u00F1a, recuerde que tiene un m\u00E1ximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contrase\u00F1a no olvide revisar tambien su carpeta de spam";         
       }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     }
-    
+    $tags = array('social'=>$social_reg);
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "DateTimePicker";

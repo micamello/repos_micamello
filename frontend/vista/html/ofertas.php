@@ -297,7 +297,7 @@
 												}
 												?>
 
-												<b style='color: black;'><?php echo $o['titulo']; ?></b>  
+												<b style='color: black;'><?php echo utf8_encode($o['titulo']); ?></b>  
 												<?php 
 												if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
 													if($vista == 'postulacion'){

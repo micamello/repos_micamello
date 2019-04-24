@@ -226,11 +226,8 @@ class Modelo_Oferta{
     }
     $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
 
-    if(!empty($filtros['A']) && $filtros['A'] != 0){
+    $sql .= ' GROUP BY o.id_ofertas';
 
-      $sql .= ' GROUP BY o.id_ofertas';
-    }
-    
     if(!empty($filtros['O']) && $filtros['O'] != 0){
       $tipo = substr($filtros['O'],0,1);
       $t = substr($filtros['O'],1,2);

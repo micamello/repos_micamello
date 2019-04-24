@@ -23,7 +23,8 @@ $tipo_usuario = 1;
     
     $client->debug = false;
     $client->debug_http = true;
-    $client->redirect_uri = LK_REDIRECT_URI;
+    // $client->redirect_uri = LK_REDIRECT_URI;
+    $client->redirect_uri = PUERTO.'://'.HOST.'/linkedin.php';
     $client->server = "LinkedIn";
     $client->client_id = LK_ID_CLIENTE;
     $client->client_secret = LK_SECRET;

@@ -79,20 +79,20 @@ define('FB_ID_CLIENTE', '2148107835439054');
 define('FB_CLIENTE_SECRET', 'cac4885b9285bde2975216f6a26f69a9');
 
 // twitter
-define('CONSUMER_KEY', 's7ac5g54J6UDY5CLw3GAmIUbq');
-define('CONSUMER_SECRET', '0tBkfO1NhUSq2CrefAKkI1wZqmUFJbdM7ugBCX48NOY4UwFOwU');
-define('ACCESS_TOKEN', '1055523335109533696-nCq3bDsm4J4EJzo6PMnbRknuDGqKha');
-define('ACCESS_TOKEN_SECRET', 'u37zWlOowuE3bo6GxKORUaQpWy5b39H6cNTalRxuydsTO');
-define('OAUTH_CALLBACK', 'https://www.micamello.com.ec/desarrollov2/twitter.php?tipo_usuario=1');
+define('CONSUMER_KEY', 'gJH5LuLrlmEIWGWtXm9S7A0o7');
+define('CONSUMER_SECRET', 'JdEcME5eRfbnNcjMMkkB1OdvXKmdGOyDVpSx01SvhUTiwAuscQ');
+define('ACCESS_TOKEN', '1055523335109533696-f1gHlquih3kjXPWzsIxnCJWgqaYuLF');
+define('ACCESS_TOKEN_SECRET', 'zyYUWeicNZDVbwQvDD4N7HYXEr2xep2m5VgrbY9RPbRr0');
+// define('OAUTH_CALLBACK', 'https://www.micamello.com.ec/desarrollov3/twitter.php');
 
 // google
-define('G_ID_CLIENTE', '286913321702-08b89odiboi5us5kvuj2tckskmhk7bg4.apps.googleusercontent.com');
-define('G_SECRET', 'dkpJFubkmGyTHXx3gjptqcCf');
+define('G_ID_CLIENTE', '267500430223-s19h2gid1va7d1t7vm7e29cddnd03aav.apps.googleusercontent.com');
+define('G_SECRET', '1dwFr9eQ_OOiGGCaoUvBLFYh');
 
 // linkedin
 define('LK_ID_CLIENTE', '78mhxodb8c3yih');
 define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
-define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
+// define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
 // CORREOS_TEMPLATES

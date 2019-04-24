@@ -47,7 +47,7 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 #RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
 RewriteRule ^imagenes/usuarios/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=profile&param1=$1 [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
-RewriteRule ^hojasDeVida/([a-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
 
 #login
 RewriteRule ^login/?$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
@@ -159,7 +159,7 @@ RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mo
 RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&username=$2&vista=$3&id_oferta=$4 [L]
 
 #Aspirantes
-RewriteRule ^aspirante/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2&vista=$3 [L]
+RewriteRule ^aspirante/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=aspirante&opcion=detallePerfil&username=$1&id_oferta=$2&vista=$3 [L]
 
 #Minisitio
 RewriteRule ^filtrarEntrevistados/([A-Z]{1}[0-9_]{1,})/([0-9]+)/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=minisitio&opcion=filtrar&param1=$1&type=$2&metodo=$3 [L]
@@ -187,3 +187,6 @@ RewriteRule ^test/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionariom2 [L]
 
 #RegistroRespuestas
 RewriteRule ^registroresp/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionariom2&opcion=guardarresp [L]
+
+#HvUsuario
+RewriteRule ^hvUsuario/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/?$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=hvUsuario&username=$1&id_oferta=$2&vista=$3 [L]
