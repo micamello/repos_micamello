@@ -63,14 +63,14 @@ class Modelo_Respuesta{
     return $rs;
   }
 
-  public static function guardarRespuestas($respuestas, $tiempo, $idusuario){
-    if(empty($respuestas) || empty($tiempo) || empty($idusuario)){return false;}
+  public static function guardarRespuestas($respuestas, $idusuario){
+    if(empty($respuestas) || empty($idusuario)){return false;}
     $array_session = array();
     foreach ($respuestas as $key => $value) {
-      array_push($array_session,array($value['orden'], "'".$tiempo."'", $value['opcion'], $idusuario));
+      array_push($array_session,array($value['orden'], $value['opcion'], $idusuario));
     }
     if (!empty($array_session)){
-      $result = $GLOBALS['db']->insert_multiple("mfo_respuesta","orden_seleccion,tiempo,id_opcion,id_usuario",$array_session); 
+      $result = $GLOBALS['db']->insert_multiple("mfo_respuesta","orden_seleccion,id_opcion,id_usuario",$array_session); 
     }
     return $result;
   }

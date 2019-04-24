@@ -26,14 +26,15 @@ class Modelo_PorcentajexFaceta{
 		return $datos;
 	}
 
-  public static function guardarValores($valor,$idusuario,$idfaceta,$estado=1){
+  public static function guardarValores($valor,$idusuario,$idfaceta,$estado=1, $tiempo){
     if (empty($idusuario) || empty($idfaceta)){ return false; }
     $fecha_culminacion = date("Y-m-d H:i:s");    
     $vlinsert = array("valor" => $valor,
                       "id_usuario" => $idusuario,
                       "id_faceta" => $idfaceta,
                       "fecha_culminacion" => $fecha_culminacion,
-                      "estado" => $estado);
+                      "estado" => $estado,
+                      "tiempo"=>"".$tiempo."");
     return $GLOBALS['db']->insert("mfo_porcentajexfaceta",$vlinsert);
   }
 
