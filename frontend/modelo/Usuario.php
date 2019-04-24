@@ -632,7 +632,7 @@ WHERE
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.edad = '".$pclave."' OR t2.asp_salarial LIKE '%".$pclave."%' OR t2.fecha_postulado LIKE '%".$pclave."%')";
+      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.asp_salarial LIKE '%".$pclave."%' OR t2.fecha_postulado LIKE '%".$pclave."%')";
     }
 
     if($obtCantdRegistros === false){
@@ -923,7 +923,7 @@ WHERE
       }else{
         $pclave = $filtros['Q'];
       }
-      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(t2.fecha_nacimiento)) = '".$pclave."' OR t2.fecha_creacion LIKE '%".$pclave."%')";
+      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.fecha_creacion LIKE '%".$pclave."%')";
     }
 
 
