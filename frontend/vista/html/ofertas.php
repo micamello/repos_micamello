@@ -50,7 +50,7 @@
 <div class="container">
 	<div class="col-md-12">
 
-	  	<div class="col-md-4 visible-md-inline visible-lg-inline">
+	  	<div class="col-md-3 visible-md-inline visible-lg-inline">
 	  		<b>
 				<span style="font-size: 18px;"><i class="fa fa-filter"></i>Filtros</span>
 			</b>
@@ -223,11 +223,8 @@
 			    </div>
 			</form>
 		</div>
-
 		
-			
-		
-		<div class="col-md-8">
+		<div class="col-md-9">
 			<b>
 				<span style="font-size: 18px;"><?php echo $breadcrumbs[$vista]; ?></span>
 			</b>
@@ -423,7 +420,7 @@
 								  	</div>
 								  	<div class="row">
 								  		<div class="estados_postulados col-md-12">
-							                <?php $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$o['id_ofertas']);
+							                <?php $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$o['id_ofertas']);echo $o['id_ofertas'];
 							                	$cv_descargado = Modelo_Descarga::obtieneDescargaCV($_SESSION['mfo_datos']['usuario']['infohv']['id_infohv'],$o['id_empresa'],$o['id_ofertas']);
 							                 ?>
 							                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
@@ -484,7 +481,7 @@
 			</div>
 	      </div>
 	      <input type="hidden" name="guardarEdicion" id="guardarEdicion" value="1">
-	      <input type="hidden" name="idOferta" id="idOferta" value="<?php echo $o['id_ofertas']; ?>">
+	      <input type="hidden" name="idOferta" id="idOferta" value="<?php echo Utils::encriptar($o['id_ofertas']); ?>">
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 	        <input type="button" id="boton" name="boton" class="btn btn-success" value="Guardar" onclick="enviarEdicion()"> 

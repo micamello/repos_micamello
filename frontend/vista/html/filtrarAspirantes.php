@@ -16,6 +16,9 @@ foreach ($data as $letra => $value) {
         if($letra == 'A'){
             $ruta .= '/A'.$value['id'];
         }
+        if($letra == 'C'){
+            $ruta .= '/C'.$value['id'];
+        }
         if($letra == 'P'){
             $ruta .= '/P'.$value['id'];
         }

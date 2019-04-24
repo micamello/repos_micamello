@@ -225,6 +225,11 @@ class Modelo_Oferta{
       $sql .= " AND o.estado = 1";
     }
     $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
+
+    if(!empty($filtros['A']) && $filtros['A'] != 0){
+
+      $sql .= ' GROUP BY o.id_ofertas';
+    }
     
     if(!empty($filtros['O']) && $filtros['O'] != 0){
       $tipo = substr($filtros['O'],0,1);
@@ -406,7 +411,7 @@ class Modelo_Oferta{
 
   public static function obtenerPlanOferta($id_ofertas){
 
-    $sql = 'SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo FROM mfo_oferta o
+    $sql = 'SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest FROM mfo_oferta o
           INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
           INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
           WHERE o.id_ofertas = '.$id_ofertas;
