@@ -56,7 +56,6 @@
 							$pos = -1;
 							echo '<div class="col-md-12" style="padding-right: 5px;">';
 							foreach ($facetas as $key => $v) {
-
 								$letra = substr($v,0,1);
 								if($letra == 'A' && $i > 1){
 									$letra = 'P';
@@ -324,7 +323,6 @@
 								$pos = -1;
 								echo '<div class="col-md-12" style="padding-right: 5px;">';
 								foreach ($facetas as $key => $v) {
-
 									$letra = substr($v,0,1);
 									if($letra == 'A' && $i > 6){
 										$letra = 'P';
@@ -548,9 +546,7 @@
 				                <option disabled selected value="0">Seleccione un plan con accesos</option>
 				                <?php 
 									foreach ($listado_planes as $key => $v) {
-
 										if($v['num_accesos_rest'] > 0){
-
 											echo '<option value="'.Utils::encriptar($v['id_usuario_plan']).'"';
 											if(!empty($_SESSION['mfo_datos']['planSeleccionado']) && $_SESSION['mfo_datos']['planSeleccionado'] == Utils::encriptar($v['id_usuario_plan']))
 											{
@@ -609,7 +605,6 @@
 							    	<?php 
 							    	$r = 3;
 							    	foreach($facetas as $key => $nombre){ 
-
 							    		echo "<th style='vertical-align: middle; text-align: center;'>".substr($nombre, 0,1)."</th>";
 								        $r++;
 							    	} ?>
@@ -639,7 +634,6 @@
 						        	if(!empty($aspirantes)){ 
 						        		for ($i=0; $i < count($aspirantes); $i++) { 
 						        			$a = $aspirantes[$i]; 
-
 						        			$id_Usuario = Utils::encriptar($a['id_usuario']);
 						        			if($page > 1){
 						        				$num_aumentar = ($page-1)*REGISTRO_PAGINA;
@@ -655,14 +649,11 @@
 							            		} ?>
 							            		<td style="<?php echo $display; ?>" class="checkboxes">
 							            			<?php 
-
 							            			$mostrar = '';
 							            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){ 
-
 							            				if(!in_array($id_Usuario, $_SESSION['mfo_datos']['usuariosHabilitados'])){
 							            					array_push($_SESSION['mfo_datos']['usuariosHabilitados'],$id_Usuario);
 							            				}
-
 							            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] == ''){
 															
 							            					$mostrar = 'Acceso Enviado';
@@ -684,7 +675,6 @@
 
 							            			<?php
 							            			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-
 							            				echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; 
 							            			}else{
 							            				echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita ver los datos del candidato\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')">'.$a['nombres'].' '.$a['apellidos'].'</a>';
@@ -692,7 +682,6 @@
 												</td>
 							            		<td data-title="Edad: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $a['edad']; ?></td>
 													<?php if($vista == 1){ 
-
 													$date1 = new DateTime(str_replace('00:00:00', '', $a['fecha_postulado']));
 													$date2 = new DateTime(date('Y-m-d'));
 													$diff = $date1->diff($date2);
@@ -703,13 +692,11 @@
 												<?php } ?>
 												<?php foreach($facetas as $key => $nombre){ 
 										    		echo "<td data-title='".substr($nombre, 0,1).":' style='vertical-align: middle; text-align: center;'>";
-
 										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){ 
 										    			echo $datos_usuarios[$a['id_usuario']][$key].'%';
 										    		}else{ 
 										    			echo '-';
 										    		}
-
 										    		echo "</td>";
 										    	} ?>
 												<td data-title="Estudios: " style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>
@@ -725,20 +712,16 @@
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 									            		<?php 
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-
 										            			if(in_array('-1',$posibilidades)){
 																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
 																}else{
 																	$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
-
 																	if($cantidadRestante > 0){
 																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
 																	}else{
-
 																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
 																	}
 																}
-
 															}else{
 																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
 															}
@@ -749,17 +732,12 @@
 														echo '<td title="Descargar Informe de personalidad ';
 									            			$color = '';
 									            			$title = 'completo';
-
 									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
-
 									            				$color = ' parcial';
 									            				$title = 'parcial';	
 									            			}
-
 									            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
-
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-
 										            			if($mostrar == ''){
 																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
 																}else{
@@ -788,47 +766,37 @@
 								</tbody>
 							</table>
 							<?php 
-
 							if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R']) && $_SESSION['mfo_datos']['Filtrar_aspirantes']['R'] != ''){
-
 								$facetas_porcentajes = array();
 								$literales = array();
 								$exp = '/';
 								$j = 0;
-
 								foreach ($facetas as $clave => $c) {
-
 									$letra = substr($c,0,1);
 									if($letra == 'A' && $j > 1){
 									  $letra = 'P';
 									}
 									$pos = strstr($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'], $letra);
 									if($pos !== false){
-
 									  $exp .= '('.$letra.'[0-9]{1,3})';
 									  $literales[$letra] = $clave;
 									}
 									$j++;
 								}
 								$exp .= '/';
-
 								preg_match_all($exp,$_SESSION['mfo_datos']['Filtrar_aspirantes']['R'],$salida, PREG_PATTERN_ORDER);
 								unset($salida[0]);
-
 								foreach ($salida as $key => $value) {
 									$l = substr($value[0],0,1);
 									$i = substr($value[0],1);
 									$facetas_porcentajes[$literales[$l]] = $i;
 								}
-
 								$b = 0;
 								foreach ($facetas as $clave => $c) {
 									$l = substr($c,0,1);
-
 									if($l == 'A' && $b > 1){
 									  $l = 'P';
 									}
-
 									if(isset($facetas_porcentajes[$clave])){
 										echo '<input type="hidden" name="'.$l.'" id="'.$l.'" value="'.$facetas_porcentajes[$clave].'">';
 									}else{
@@ -855,4 +823,3 @@
 		</div>
 	</div>
 </div>
-

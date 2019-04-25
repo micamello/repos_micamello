@@ -43,10 +43,12 @@ class Controlador_Login extends Controlador_Base {
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                        $_SESSION['mfo_datos']['usuario']['id_usuario'],
                                        (isset($_SESSION['mfo_datos']['usuario']['infohv'])) ? $_SESSION['mfo_datos']['usuario']['infohv'] : array(),
-                                       $_SESSION['mfo_datos']['planes'],'login');   
+                                       $_SESSION['mfo_datos']['planes'],'login');  
+
       }
       catch( Exception $e ){
         $_SESSION['mostrar_error'] = $e->getMessage();
+        
       }
     } 
 
