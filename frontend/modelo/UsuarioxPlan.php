@@ -343,6 +343,12 @@ class Modelo_UsuarioxPlan{
     if (empty($id_plan_empresa)) { return false; }    
     return $GLOBALS['db']->execute("UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = ".$id_plan_empresa);
   }
+
+  public static function restarNumeroAccesos($id_plan_empresa,$cantd_a_restar){
+    if (empty($id_plan_empresa)) { return false; }    
+    return $GLOBALS['db']->execute("UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest - ".$cantd_a_restar." WHERE id_empresa_plan = ".$id_plan_empresa);
+  }
+
 }  
 
 ?>

@@ -39,8 +39,13 @@ class Controlador_Cuestionario extends Controlador_Base {
           $GLOBALS['db']->beginTrans();
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
           $arrayDatos = self::validarRespuesta($_POST['array_orden'], $_POST['array_opcion']);
-          $tiempo = $_POST['tiempo'];
-          if(!Modelo_Respuesta::guardarRespuestas($arrayDatos, $tiempo, $id_usuario)){
+          $fecha1 = new DateTime($_POST["tiempo"]);
+          $fecha2 = new DateTime("now");
+          $diferencia = $fecha1->diff($fecha2);
+          $tiempo = $diferencia->format('%H:%i:%s');
+          //       print_r($tiempo);
+          // exit();
+          if(!Modelo_Respuesta::guardarRespuestas($arrayDatos, $id_usuario)){
             throw new Exception("Ha ocurrido un error, intente nuevamente.");
           }
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
@@ -63,7 +68,7 @@ class Controlador_Cuestionario extends Controlador_Base {
           $porcentaje = round($totalfaceta/count($vlbaremo),2); 
           $acceso = Utils::getParam('acceso', '', $this->data);         
           $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
-          if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta,$estado)){
+          if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta,$estado,$tiempo)){
             throw new Exception("Ha ocurrido un error, intente nuevamente."); 
           }
           if ($faceta == 5 && $estado == 0){

@@ -524,6 +524,25 @@ WHERE
        }
     }
 
+    if(!empty($filtros['C']) && $filtros['C'] != 0){
+       if($filtros['C'] == 1){
+        $sql .= " AND t2.edad BETWEEN '18' and '25'";
+      }
+
+      if($filtros['C'] == 2){
+        $sql .= " AND t2.edad BETWEEN '25' and '35'";
+      }
+
+      if($filtros['C'] == 3){
+        $sql .= " t2.edad BETWEEN '35' AND '45'";
+      }
+
+      if($filtros['C'] == 4){
+        $sql .= " AND t2.edad >= 45";
+      }
+    }
+
+
     //obtiene los aspirantes para esa ubicacion 
     if(!empty($filtros['U']) && $filtros['U'] != 0){ 
 
@@ -613,7 +632,7 @@ WHERE
         $pclave = $filtros['Q'];
       }
 
-      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.edad = '".$pclave."' OR t2.asp_salarial LIKE '%".$pclave."%' OR t2.fecha_postulado LIKE '%".$pclave."%')";
+      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.asp_salarial LIKE '%".$pclave."%' OR t2.fecha_postulado LIKE '%".$pclave."%')";
     }
 
     if($obtCantdRegistros === false){
@@ -823,6 +842,25 @@ WHERE
         $sql .= " AND DATE_FORMAT(t2.fecha_creacion, '%Y-%m-%d') BETWEEN DATE_FORMAT(DATE_SUB(NOW(), INTERVAL 1 MONTH), '%Y-%m-%d') AND DATE_FORMAT(NOW(), '%Y-%m-%d')";
        }
     }
+
+    if(!empty($filtros['C']) && $filtros['C'] != 0){
+       if($filtros['C'] == 1){
+        $sql .= " AND t2.edad BETWEEN '18' and '25'";
+      }
+
+      if($filtros['C'] == 2){
+        $sql .= " AND t2.edad BETWEEN '25' and '35'";
+      }
+
+      if($filtros['C'] == 3){
+        $sql .= " t2.edad BETWEEN '35' AND '45'";
+      }
+
+      if($filtros['C'] == 4){
+        $sql .= " AND t2.edad >= 45";
+      }
+    }
+    
     if(!empty($filtros['A']) && $filtros['A'] != 0){
       $sql .= " AND ua.id_usuario = t2.id_usuario AND ua.id_areas_subareas IN(SELECT asu.id_areas_subareas FROM mfo_area_subareas asu WHERE asu.id_area = ".$filtros['A'].")";
     }
@@ -885,7 +923,7 @@ WHERE
       }else{
         $pclave = $filtros['Q'];
       }
-      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR (YEAR(now()) - YEAR(t2.fecha_nacimiento)) = '".$pclave."' OR t2.fecha_creacion LIKE '%".$pclave."%')";
+      $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.fecha_creacion LIKE '%".$pclave."%')";
     }
 
 
@@ -964,10 +1002,10 @@ WHERE
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
       
-      Utils::log(print_r($_SESSION,true));
-      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
+      //Utils::log(print_r($_SESSION,true));
+      /*if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
-      }        
+      }       */ 
 
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
@@ -1195,6 +1233,35 @@ WHERE
     $sql = "SELECT password FROM mfo_usuario_login WHERE id_usuario_login = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($id_usuario_login));
     if (empty($rs['password'])){ return false; } else{ return $rs['password']; }
+  }
+
+  public static function consultarTestIncompleto($usuarios,$cantd_facetas){
+
+    if(empty($cantd_facetas) || empty($usuarios)){return false;}
+
+    $sql = 'SELECT GROUP_CONCAT(t.id_usuario) AS usuarios FROM (SELECT id_usuario, IF(SUM(estado) = '.$cantd_facetas.',1,0) AS test_terminado 
+      FROM mfo_porcentajexfaceta WHERE id_usuario IN('.$usuarios.')
+      GROUP BY id_usuario
+      HAVING test_terminado = 0) t';
+    $rs = $GLOBALS['db']->auto_array($sql,array(),false);
+    if (empty($rs['usuarios'])){ return false; } else{ return $rs['usuarios']; }
+  }
+
+  public static function obtenerDatos($usuarios){
+    if(empty($usuarios)){return false;}
+
+    $sql = 'SELECT u.id_usuario,u.nombres,u.apellidos,ul.correo FROM mfo_usuario u, mfo_usuario_login ul WHERE u.id_usuario IN('.$usuarios.') AND u.id_usuario_login = ul.id_usuario_login';
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+
+    $datos = array();
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+        $datos[$value['id_usuario']] = array('nombres' => $value['nombres'],'apellidos'=>$value['apellidos'],'correo'=>$value['correo']);
+      }
+    }
+    return $datos;
+
   }
 }  
 ?>

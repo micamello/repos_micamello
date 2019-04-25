@@ -56,7 +56,6 @@
 							$pos = -1;
 							echo '<div class="col-md-12" style="padding-right: 5px;">';
 							foreach ($facetas as $key => $v) {
-
 								$letra = substr($v,0,1);
 								if($letra == 'A' && $i > 1){
 									$letra = 'P';
@@ -221,6 +220,21 @@
 
 		    <div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
+		            <span><i class="fa fa-venus-mars"></i> Edades</span>
+		          </div>
+		      <div class="panel-body">
+		      	<div class="filtros">
+				<?php
+					foreach (EDADES as $key => $v) {
+				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/C'.$key.'/';
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="edades">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+					}
+				?></div>
+		      </div>
+		    </div>
+
+		    <div class="panel panel-default shadow-panel1">
+		      <div class="panel-heading">
 		            <span><i class="fa fa-venus-mars"></i> Genero</span>
 		          </div>
 		      <div class="panel-body">
@@ -309,7 +323,6 @@
 								$pos = -1;
 								echo '<div class="col-md-12" style="padding-right: 5px;">';
 								foreach ($facetas as $key => $v) {
-
 									$letra = substr($v,0,1);
 									if($letra == 'A' && $i > 6){
 										$letra = 'P';
@@ -414,6 +427,17 @@
 			        </div>
 
 			        <div class="form-group">
+			            <select id="viajar" class="form-control">
+			                <option value="0">Seleccione una edad</option>
+			                <?php
+								foreach (EDADES as $key => $v) {
+									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
+								}
+							?>                    
+			            </select>
+			        </div> 
+
+			        <div class="form-group">
 			            <select id="genero" class="form-control">
 			                <option value="0">Seleccione un g&eacute;nero</option>
 			                <?php
@@ -437,23 +461,22 @@
 
 			        <div class="form-group">
 			            <select id="trabajo" class="form-control">
-			                <option value="0">Tiene trabajo?</option>
-			                <?php
-								foreach (TIENE_TRABAJO as $key => $v) {
-									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
-								}
-							?>                    
+			                <option value="0">Situcaci&oacute;n Laboral</option>
+							<?php
+					    		foreach ($situacionLaboral as $key => $v) {
+									echo '<option value="'.$key.'">'.utf8_encode($v).'</option>';
+						  		} ?>                    
 			            </select>
 			        </div>
 
 			        <div class="form-group">
 			            <select id="licencia" class="form-control">
-			                <option value="0">Tiene licencia?</option>
-			                <?php
-								foreach (TIENE_LICENCIA as $key => $v) {
-									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
-								}
-							?>                    
+			                <option value="-1">Tipo de Licencia</option>    
+							<?php
+							echo '<option value="0">Sin licencia</option>';
+					  		foreach ($licencia as $key => $v) {
+								echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
+							} ?>               
 			            </select>
 			        </div>
 
@@ -487,15 +510,29 @@
 		
 		<div class="col-md-9"> 
 			
-			<div <?php echo $style_activo; ?> id="activarAccesos" class="parpadea pull-right" >
-				<h6 style="color:#6d6d6b"><strong>Enviar accesos a candidatos para completar informe</strong><a id="btn_accesos" class="btn btn-md btn-warning">Activar accesos</a></h6>
-			</div>
-			<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right" >
-				<a id="btn_accesos_cancelar" class="btn btn-md btn-default">Cancelar</a>
-				<a id="btn_accesos_confirmar" class="btn btn-md btn-success">Enviar accesos</a>
-			</div>
+			<?php if(($vista == 1 && $num_accesos_rest > 0) || $vista == 2){ ?> 
+				<div <?php echo $style_activo; ?> id="activarAccesos" class="parpadea pull-right" >
+					<h6 style="color:#6d6d6b"><strong>Enviar accesos a candidatos para completar informe</strong><a id="btn_accesos" class="btn btn-md btn-warning">Activar accesos</a></h6>
+				</div>
+				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right" >
+					<a id="btn_accesos_cancelar" class="btn btn-md btn-default">Cancelar</a>
+					<a id="btn_accesos_confirmar" class="btn btn-md btn-success">Enviar accesos</a>
+
+					<?php if($vista == 1){ ?> 
+						<br>
+						<div class="col-md-12" align="right" > 
+							<b>N&uacute;mero de accesos restantes: 
+							  <span class="parpadea" style="color:red">
+							    <?php echo $num_accesos_rest; ?>					
+							  </span>
+						  </b> 
+						</div>
+					<?php } ?>
+				</div>
+				<br><br><br>
+			<?php } ?>
 			
-			<br><br><br>
+			
 			<?php if($vista == 2){ ?>
 				<div id="planes" class='panel panel-default shadow'>
 					<div class="panel-heading">
@@ -509,15 +546,13 @@
 				                <option disabled selected value="0">Seleccione un plan con accesos</option>
 				                <?php 
 									foreach ($listado_planes as $key => $v) {
-
 										if($v['num_accesos_rest'] > 0){
-
-											echo '<option value="'.Utils::encriptar($v['id_plan']).'"';
-											if(!empty($_SESSION['mfo_datos']['planSeleccionado']) && $_SESSION['mfo_datos']['planSeleccionado'] == Utils::encriptar($v['id_plan']))
+											echo '<option value="'.Utils::encriptar($v['id_usuario_plan']).'"';
+											if(!empty($_SESSION['mfo_datos']['planSeleccionado']) && $_SESSION['mfo_datos']['planSeleccionado'] == Utils::encriptar($v['id_usuario_plan']))
 											{
 												echo ' selected="selected"';
 											}
-											echo '>'.utf8_encode(ucfirst(strtolower($v['nombre']))).' - '.$v['num_accesos_rest'].' accesos</option>';
+											echo '>'.utf8_encode(ucfirst(strtolower($v['nombre']))).'('.date("Y-m-d", strtotime($v['fecha_compra'])).') - '.$v['num_accesos_rest'].' accesos</option>';
 										}
 									}
 								?>                    
@@ -543,11 +578,13 @@
 	        <div id="result">
 	        	<div class='panel panel-default shadow'>
 					<div class='panel-body'>
+
+						<?php #print_r($_SESSION['mfo_datos']['usuariosHabilitados']); ?>
 						<div id="no-more-tables" class="table-responsive">
 				        	<table class="table table-hover">
 				        		<thead class="etiquetaBody">
 							      <tr>
-							      	<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" title="Marcar Todo" <?php if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ echo 'checked'; } ?>></th>
+							      	<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" <?php if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan"'; } ?> <?php if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ echo 'checked'; } ?>></th>
 							      	<th style="vertical-align: middle; text-align: center;">N°</th>
 									<th colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
 							        <th style="vertical-align: middle; text-align: center;" style="width: 100px">
@@ -568,7 +605,6 @@
 							    	<?php 
 							    	$r = 3;
 							    	foreach($facetas as $key => $nombre){ 
-
 							    		echo "<th style='vertical-align: middle; text-align: center;'>".substr($nombre, 0,1)."</th>";
 								        $r++;
 							    	} ?>
@@ -593,12 +629,11 @@
 							      </tr>
 							    </thead>
 				        		<tbody>
-						        	<?php 						        	
+						        	<?php 	
+				        	
 						        	if(!empty($aspirantes)){ 
-				
 						        		for ($i=0; $i < count($aspirantes); $i++) { 
 						        			$a = $aspirantes[$i]; 
-
 						        			$id_Usuario = Utils::encriptar($a['id_usuario']);
 						        			if($page > 1){
 						        				$num_aumentar = ($page-1)*REGISTRO_PAGINA;
@@ -613,9 +648,24 @@
 							            			$display = 'display:none; vertical-align: middle; text-align: center;';
 							            		} ?>
 							            		<td style="<?php echo $display; ?>" class="checkboxes">
-							            			<?php if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){ ?>
-							            				<input type="checkbox" class="check_usuarios" <?php if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled"'; } if(in_array($id_Usuario,$_SESSION['mfo_datos']['usuarioSeleccionado'])){ echo 'checked'; } ?> id="<?php echo $id_Usuario; ?>" name="usuarios_check" onclick="marcarSeleccionado('<?php echo $id_Usuario; ?>')">
-							            			<?php }else{ echo '-'; } ?>
+							            			<?php 
+							            			$mostrar = '';
+							            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){ 
+							            				if(!in_array($id_Usuario, $_SESSION['mfo_datos']['usuariosHabilitados'])){
+							            					array_push($_SESSION['mfo_datos']['usuariosHabilitados'],$id_Usuario);
+							            				}
+							            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] == ''){
+															
+							            					$mostrar = 'Acceso Enviado';
+							            				}
+							            			
+								            			if($mostrar == ''){
+													?>
+							            				<input type="checkbox" class="check_usuarios" <?php if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan" '; } if(in_array($id_Usuario,$_SESSION['mfo_datos']['usuarioSeleccionado'])){ echo 'checked'; } ?> id="<?php echo $id_Usuario; ?>" name="usuarios_check" onclick="marcarSeleccionado('<?php echo $id_Usuario; ?>')">
+							            			<?php }else{
+							            				echo '-'; 
+							            			   }
+							            		    }else{ echo '-'; } ?>
 							            		</td>
 							            		<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php echo $num_aumentar+($i+1); ?></td>
 							            		
@@ -625,7 +675,6 @@
 
 							            			<?php
 							            			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-
 							            				echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; 
 							            			}else{
 							            				echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita ver los datos del candidato\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')">'.$a['nombres'].' '.$a['apellidos'].'</a>';
@@ -633,7 +682,6 @@
 												</td>
 							            		<td data-title="Edad: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $a['edad']; ?></td>
 													<?php if($vista == 1){ 
-
 													$date1 = new DateTime(str_replace('00:00:00', '', $a['fecha_postulado']));
 													$date2 = new DateTime(date('Y-m-d'));
 													$diff = $date1->diff($date2);
@@ -644,13 +692,11 @@
 												<?php } ?>
 												<?php foreach($facetas as $key => $nombre){ 
 										    		echo "<td data-title='".substr($nombre, 0,1).":' style='vertical-align: middle; text-align: center;'>";
-
 										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){ 
 										    			echo $datos_usuarios[$a['id_usuario']][$key].'%';
 										    		}else{ 
 										    			echo '-';
 										    		}
-
 										    		echo "</td>";
 										    	} ?>
 												<td data-title="Estudios: " style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>
@@ -666,20 +712,16 @@
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 									            		<?php 
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-
 										            			if(in_array('-1',$posibilidades)){
 																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
 																}else{
 																	$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
-
 																	if($cantidadRestante > 0){
 																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
 																	}else{
-
 																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
 																	}
 																}
-
 															}else{
 																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
 															}
@@ -687,25 +729,31 @@
 													</td>
 
 													<?php 
-														if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
-								            				$color = ' parcial';
-								            				$title = 'parcial';
-								            			}else{
-								            				$color = '';
-								            				$title = 'completo';
-								            			}
-													?>
-													<td title="Descargar Informe de personalidad <?php echo $title; ?>" data-title="Informe <?php echo $title; ?>" style="vertical-align: middle; text-align: center;">
-									            		<?php 
-
+														echo '<td title="Descargar Informe de personalidad ';
+									            			$color = '';
+									            			$title = 'completo';
+									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
+									            				$color = ' parcial';
+									            				$title = 'parcial';	
+									            			}
+									            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-																echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
+										            			if($mostrar == ''){
+																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
+																}else{
+																	echo $mostrar;
+																}
 															}else{
 							
-																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-clipboard fa-1x '.$color.'"></i></a>';
+																if($mostrar == ''){
+																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-clipboard fa-1x '.$color.'"></i></a>';
+																}else{
+																	echo $mostrar;
+																}
 															}
-														?>
-													</td>
+														
+														echo '</td>';
+													?>
 												<?php } ?>
 							            	</tr>
 										<?php }
@@ -718,47 +766,37 @@
 								</tbody>
 							</table>
 							<?php 
-
 							if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R']) && $_SESSION['mfo_datos']['Filtrar_aspirantes']['R'] != ''){
-
 								$facetas_porcentajes = array();
 								$literales = array();
 								$exp = '/';
 								$j = 0;
-
 								foreach ($facetas as $clave => $c) {
-
 									$letra = substr($c,0,1);
 									if($letra == 'A' && $j > 1){
 									  $letra = 'P';
 									}
 									$pos = strstr($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'], $letra);
 									if($pos !== false){
-
 									  $exp .= '('.$letra.'[0-9]{1,3})';
 									  $literales[$letra] = $clave;
 									}
 									$j++;
 								}
 								$exp .= '/';
-
 								preg_match_all($exp,$_SESSION['mfo_datos']['Filtrar_aspirantes']['R'],$salida, PREG_PATTERN_ORDER);
 								unset($salida[0]);
-
 								foreach ($salida as $key => $value) {
 									$l = substr($value[0],0,1);
 									$i = substr($value[0],1);
 									$facetas_porcentajes[$literales[$l]] = $i;
 								}
-
 								$b = 0;
 								foreach ($facetas as $clave => $c) {
 									$l = substr($c,0,1);
-
 									if($l == 'A' && $b > 1){
 									  $l = 'P';
 									}
-
 									if(isset($facetas_porcentajes[$clave])){
 										echo '<input type="hidden" name="'.$l.'" id="'.$l.'" value="'.$facetas_porcentajes[$clave].'">';
 									}else{
@@ -774,6 +812,10 @@
 				</div>
 				<input type="hidden" name="vista" id="vista" value="<?php echo $vista; ?>">
 				<input type="hidden" name="accesos" id="accesos" value="<?php echo $_SESSION['mfo_datos']['accesos']; ?>">
+
+				<form role="form" name="form_enviarAccesos" id="form_enviarAccesos" method="post" action="<?php echo PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/'.$page.'/'; ?>">
+					<input type="hidden" name="enviar_accesos" id="enviar_accesos" value="1">
+				</form>
 	        </div>
 	        <div class="col-md-12">
 				<?php echo $paginas; ?>
@@ -781,4 +823,3 @@
 		</div>
 	</div>
 </div>
-

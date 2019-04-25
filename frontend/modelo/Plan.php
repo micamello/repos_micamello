@@ -74,10 +74,11 @@ class Modelo_Plan{
                     (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))";
 
               if($idPlan != false){
-                $sql .= " AND e.id_plan = ".$idPlan;
+                $sql .= " AND e.id_empresa_plan = ".$idPlan;
               }
       $sql .= " ORDER BY e.fecha_compra ASC";
-    }    
+    }  
+    //echo $sql;  
     return $GLOBALS['db']->auto_array($sql,array($idUsuario),true);
   }
    

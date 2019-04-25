@@ -45,7 +45,9 @@ class Controlador_Contrasena extends Controlador_Base {
         }else{
             $_SESSION['mostrar_error'] = 'Para continuar deber\u00E1 cambiar su contrase\u00F1a';      
         }
-
+        $this->linkRedesSociales();
+        $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
+        $tags = array('social'=>$social_reg);
         $breadcrumbs['cambioClave'] = 'Cambio de contrase&ntilde;a';
         $tags["template_js"][] = "editarPerfil";
         $tags['breadcrumbs'] = $breadcrumbs;
@@ -113,7 +115,7 @@ class Controlador_Contrasena extends Controlador_Base {
   
   public function mostrarDefault(){
     $this->linkRedesSociales();    
-
+    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
     if ( Utils::getParam('forgot_form') == 1 ){
       try{
         $campos = array('correo1'=>1);
@@ -142,7 +144,7 @@ class Controlador_Contrasena extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     }
-    
+    $tags = array('social'=>$social_reg);
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "DateTimePicker";

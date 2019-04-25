@@ -109,6 +109,10 @@ $(document).ready(function () {
     verFacetasTodas();
 });
 
+$('#btn_accesos_confirmar').on('click', function(){
+	document.form_enviarAccesos.submit();
+});
+
 $('#btn_accesos').on('click', function(){
 	activar();
 });
@@ -121,8 +125,14 @@ $('#cerrar_accesos').on('click', function(){
 	desactivar();
 });
 
-$('#marcarTo').on('click',function(){
-	marcarTodo();
+
+$('#marcarTo').on('change',function(){
+
+	if(!$("#marcarTo").is(':checked')) { 
+		desmarcarCheckboxes();
+	}else{
+		marcarTodo();
+	}
 });
 
 $('#listadoPlanes').on('change',function(){
@@ -131,6 +141,9 @@ $('#listadoPlanes').on('change',function(){
 	var plan = $('#listadoPlanes').val();
 
 	$('.check_usuarios').removeAttr('disabled');
+	$('.check_usuarios').removeAttr('title');
+	document.getElementById('marcarTo').setAttribute('title', 'Marcar Todo');
+	$('#marcarTo').removeAttr('disabled');
 	$.ajax({
         type: "GET",
         url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarPlanSeleccionado&idPlan="+plan,
@@ -172,7 +185,7 @@ function marcarTodo(){
 				}
 				$.ajax({
 			        type: "GET",
-			        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&usuario="+usuarios,
+			        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar=1&usuario="+usuarios,
 			        dataType:'json',         
 			    })
 	        },
@@ -199,7 +212,7 @@ function marcarTodo(){
 
 		$.ajax({
 	        type: "GET",
-	        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&usuario="+usuarios,
+	        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar=1&usuario="+usuarios,
 	        dataType:'json',         
 	    })
 	}
@@ -207,13 +220,15 @@ function marcarTodo(){
 
 function desmarcarCheckboxes(){
 
-	var checkboxesMT = document.getElementsByName('marcarTo');
-	checkboxesMT.checked = false;
+	var puerto_host = $('#puerto_host').val();
+	document.getElementById('marcarTo').removeAttribute('checked');
+	document.getElementById('marcarTo').setAttribute('title', 'Debe seleccionar un plan');
 
 	var usuarios = '';
 	var checkboxes = document.getElementsByName('usuarios_check');
 	for(var i=0;i<checkboxes.length;i++) {
 
+		checkboxes[i].setAttribute('title','Debe seleccionar un plan');
 		checkboxes[i].checked = false;
 		if(usuarios != ''){
 			usuarios += ','+checkboxes[i].id;
@@ -224,7 +239,7 @@ function desmarcarCheckboxes(){
 
 	$.ajax({
         type: "GET",
-        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&usuario="+usuarios,
+        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar=0&usuario="+usuarios,
         dataType:'json',         
     })
 }
@@ -232,10 +247,25 @@ function desmarcarCheckboxes(){
 function marcarSeleccionado(usuario){
 
 	var puerto_host = $('#puerto_host').val();
+	var marcar = 1;
+	if(!$("#"+usuario).is(':checked')) { 
+		marcar = 0;
+	}
+
 	$.ajax({
         type: "GET",
-        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&usuario="+usuario,
-        dataType:'json',         
+        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar="+marcar+"&usuario="+usuario,
+        dataType:'json', 
+        success:function(data){
+        	if(data.marcarTo == 1){
+        		document.getElementById('marcarTo').setAttribute('checked','checked');
+        	}else{
+        		document.getElementById('marcarTo').removeAttribute('checked');
+        	}
+        },
+        error: function (request, status, error) {
+            error = 1;
+        }        
     })
 }
 
@@ -243,9 +273,12 @@ function activar(){
 
 	var puerto_host = $('#puerto_host').val();
 	var vista = $('#vista').val();
-	if(vista == 2){
+	if(vista == 2){ 
 		$('#planes').show();
 		$('.check_usuarios').attr('disabled','disabled');
+		$('#marcarTo').attr('disabled','disabled');
+		document.getElementById('marcarTo').removeAttribute('checked');
+		document.getElementById('marcarTo').setAttribute('title', 'Debe seleccionar un plan');
 	}else{
 		$('#planes').hide();
 	}
@@ -472,7 +505,7 @@ function obtenerFiltro(ruta,page){
 		busco = true;
 	}
 
-	if(licencia != 0){
+	if(licencia != -1){
 		ruta += "L"+licencia+"/";
 		busco = true;
 	}

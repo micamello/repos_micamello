@@ -34,6 +34,7 @@ define('VALOR_GENERO', array('M'=>'1', 'F'=>'2', 'P'=>'3'));
 define('PRIORIDAD', array('1'=>'Informe Parcial', '2'=>'Informe Completo'));
 define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
 define('SALARIO', array('1'=>'Menos de 386', '2'=>'Entre 386 y 700', '3'=>'Entre 700 y 1200', '4'=>'M&aacute;s de 1200'));
+define('EDADES', array('1'=>'18 a 25 A&ntilde;os', '2'=>'25 a 35 A&ntilde;os', '3'=>'35 a 45 A&ntilde;os', '4'=>'M&aacute;s de 45 a&ntilde;os'));
 define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as', '3'=>'&Uacute;ltima semana', '4'=>'&Uacute;ltimo mes'));
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));
@@ -78,20 +79,20 @@ define('FB_ID_CLIENTE', '2148107835439054');
 define('FB_CLIENTE_SECRET', 'cac4885b9285bde2975216f6a26f69a9');
 
 // twitter
-define('CONSUMER_KEY', 's7ac5g54J6UDY5CLw3GAmIUbq');
-define('CONSUMER_SECRET', '0tBkfO1NhUSq2CrefAKkI1wZqmUFJbdM7ugBCX48NOY4UwFOwU');
-define('ACCESS_TOKEN', '1055523335109533696-nCq3bDsm4J4EJzo6PMnbRknuDGqKha');
-define('ACCESS_TOKEN_SECRET', 'u37zWlOowuE3bo6GxKORUaQpWy5b39H6cNTalRxuydsTO');
-define('OAUTH_CALLBACK', 'https://www.micamello.com.ec/desarrollov2/twitter.php?tipo_usuario=1');
+define('CONSUMER_KEY', 'gJH5LuLrlmEIWGWtXm9S7A0o7');
+define('CONSUMER_SECRET', 'JdEcME5eRfbnNcjMMkkB1OdvXKmdGOyDVpSx01SvhUTiwAuscQ');
+define('ACCESS_TOKEN', '1055523335109533696-f1gHlquih3kjXPWzsIxnCJWgqaYuLF');
+define('ACCESS_TOKEN_SECRET', 'zyYUWeicNZDVbwQvDD4N7HYXEr2xep2m5VgrbY9RPbRr0');
+// define('OAUTH_CALLBACK', 'https://www.micamello.com.ec/desarrollov3/twitter.php');
 
 // google
-define('G_ID_CLIENTE', '286913321702-08b89odiboi5us5kvuj2tckskmhk7bg4.apps.googleusercontent.com');
-define('G_SECRET', 'dkpJFubkmGyTHXx3gjptqcCf');
+define('G_ID_CLIENTE', '267500430223-s19h2gid1va7d1t7vm7e29cddnd03aav.apps.googleusercontent.com');
+define('G_SECRET', '1dwFr9eQ_OOiGGCaoUvBLFYh');
 
 // linkedin
 define('LK_ID_CLIENTE', '78mhxodb8c3yih');
 define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
-define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
+// define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
 // CORREOS_TEMPLATES

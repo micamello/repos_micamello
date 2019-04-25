@@ -12,7 +12,7 @@
 				</div>
 				<div class="col-md-12">
 					<!-- <?php echo $vista; ?> -->
-					<a href="<?php echo PUERTO.'://'.HOST.'/hvUsuario/'.Utils::encriptar($datosUsuario['username']).'/'.$id_oferta.'/'.$vista.'/' ?>" class="btn btn-warning">Descargar datos</a>
+					<a target="_blanked" href="<?php echo PUERTO.'://'.HOST.'/hvUsuario/'.Utils::encriptar($datosUsuario['username']).'/'.$id_oferta.'/'.$vista.'/' ?>" class="btn btn-warning">Descargar datos</a>
 				</div>
 				<div class="col-md-12">
 					<div class="nombreUsuario">

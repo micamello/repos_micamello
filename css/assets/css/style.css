@@ -2356,6 +2356,11 @@ work Section style
 
 .parcial{
   color:red;
+  cursor:pointer;
+}
+
+.completo{
+  cursor:pointer;
 }
 
 #planes{
