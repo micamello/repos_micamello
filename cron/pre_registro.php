@@ -9,142 +9,106 @@ set_time_limit(0);
 
 require_once '../constantes.php';
 require_once '../init.php';
+require_once '../multisitios.php';
 
 define('SUCURSAL_PAISID',39);
 define('DOMINIO','micamello.com.ec');
 
 //pregunta si ya se esta ejecutando el cron sino crea el archivo
-$resultado = file_exists(CRON_RUTA.'procesando_preregistro.txt');
-if ($resultado){
-  exit;
-}
-else{
-  Utils::crearArchivo(CRON_RUTA,'procesando_preregistro.txt','');
-}
-
+// $resultado = file_exists(CRON_RUTA.'procesando_preregistro.txt');
+// if ($resultado){
+//   exit;
+// }
+// else{
+//   Utils::crearArchivo(CRON_RUTA,'procesando_preregistro.txt','');
+// }
 $usuarios = Modelo_PreRegistro::preregistrados();
+$tipodoc = "";
 if (!empty($usuarios) && is_array($usuarios)){	
+	$datosPreregistro = array();
 	$conterror = 0;
-	$escolaridad = Modelo_Escolaridad::obtieneListado();
-	$default_city = Modelo_Sucursal::obtieneCiudadDefault();
-	foreach($usuarios as $usuario){   
-	  try{
-	  	$GLOBALS['db']->beginTrans(); 
-			$long_dni = strlen($usuario["dni"]);
-			if ($long_dni == 13){   
-				$valido1 = ValidadorEc::validarRucPersonaNatural($usuario["dni"]);
-				$valido2 = ValidadorEc::validarRucSociedadPrivada($usuario["dni"]);
-				$valido3 = ValidadorEc::validarRucSociedadPublica($usuario["dni"]);
-				if (!$valido1 && !$valido2 && !$valido3){
-					$conterror++;
-					throw new Exception("RUC INVALIDO ".$usuario["dni"]);    			    			    		
-	    	}
-	    	$tipodoc = 1;
-			}    
-	    elseif($long_dni == 10){
-	    	$valido = ValidadorEc::validarCedula($usuario["dni"]);
-	    	if (!$valido){
+	$escolaridad = Modelo_Escolaridad::obtieneListado()[0]['id_escolaridad'];
+	$default_city = Modelo_Sucursal::obtieneCiudadDefault()['id_ciudad'];
+	$datosPreregistro = array_merge($datosPreregistro,
+									array("id_escolaridad"=>$escolaridad, 
+											"id_ciudad"=>$default_city));
+	foreach($usuarios as $usuario){  
+	  	try{
+	  		$datosPreregistro = array_merge($datosPreregistro, $usuario);
+		  	$longitudDoc = strlen($datosPreregistro['dni']);
+		  	if($longitudDoc == 10){
+		  		if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)){
+			        $function = 'validar_'.SUCURSAL_ISO;
+			        if(!Utils::$function($datosPreregistro['dni'])){
+			        	$conterror++;
+	    				throw new Exception("CEDULA INVALIDA ".$datosPreregistro["dni"]);
+			        }
+			    }
+			    $tipodoc = 2;
+		  	}
+		  	elseif($longitudDoc == 13){
+		  		if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)){
+			        $function = 'validar_'.SUCURSAL_ISO;
+			        if(!Utils::$function($datosPreregistro['dni'])){
+			        	$conterror++;
+	    				throw new Exception("RUC INVALIDO ".$datosPreregistro["dni"]);
+			        }
+			    }
+			    $tipodoc = 1;
+		  	}
+		  	elseif($longitudDoc <= 6){
+		  		$conterror++;
+		  		throw new Exception("PASAPORTE INVALIDO ".$datosPreregistro["dni"]);
+		  	}
+		  	else{
+		  		$tipodoc = 3;
+		  	}
+// Comprobar si es válido el correo
+
+			if(!Utils::es_correo_valido($datosPreregistro['correo'])){
+				$conterror++;
+				throw new Exception("EL CORREO NO ES VÁLIDO ".$datosPreregistro["correo"]);
+			}
+			
+			if (Modelo_Usuario::existeDni($datosPreregistro["dni"]) != false){
 	    		$conterror++;
-	    		throw new Exception("CEDULA INVALIDA ".$usuario["dni"]);
-	    	}
-	    	$tipodoc = 2;
-	    }
-	    elseif ($long_dni <= 6){
-	    	$conterror++;
-	    	throw new Exception("PASAPORTE INVALIDO ".$usuario["dni"]);
-	    }
-	    else{
-	    	$tipodoc = 3;
-	    }
+	    		throw new Exception("DNI YA EXISTE ".$datosPreregistro["dni"]);	      	    		    		
+		    }
 
-	    $validocorreo = Utils::es_correo_valido($usuario["correo"]);
-	    if (!$validocorreo){
-	    	$conterror++;
-	    	throw new Exception("CORREO INVALIDO ".$usuario["correo"]);
-	    }
+		    if (Modelo_Usuario::existeCorreo($datosPreregistro["correo"]) != false){
+		    	$conterror++;
+		      	throw new Exception("CORREO YA EXISTE ".$datosPreregistro["correo"]);
+		    } 
+		    print_r($datosPreregistro);
+		    exit();
 
-	    if ($usuario["tipo_usuario"] == 2 && $long_dni != 13){
-	    	$conterror++;
-	    	throw new Exception("RUC INVALIDO ".$usuario["dni"]);	      	    
-	    }
 
-	    if (!Modelo_Usuario::existeDni($usuario["dni"])){
-	    	$conterror++;
-	    	throw new Exception("DNI YA EXISTE ".$usuario["dni"]);	      	    		    		
-	    }
+		   	$nombre = Utils::no_carac(explode(" ", trim($datosPreregistro['nombres']))); 
+		    $nombre[0] = strtolower($nombre[0]);	    	    	    	    
+		    if ($datosPreregistro['tipo_usuario'] == 1){ 
+		      $apellido = Utils::no_carac(explode(" ", trim($datosPreregistro['apellidos'])));
+		      $apellido[0] = strtolower($apellido[0]);
+		      $username = Utils::generarUsername($nombre[0].$apellido[0]);
+		    }
+		    else{
+		      $username = Utils::generarUsername($nombre[0]);
+		    }
 
-	    if (!Modelo_Usuario::existeCorreo($usuario["correo"])){
-	    	$conterror++;
-	      throw new Exception("CORREO YA EXISTE ".$usuario["correo"]);
-	    }    	       	
-    	
-	    $nombre = Utils::no_carac(explode(" ", trim($usuario['nombres']))); 
-	    $nombre[0] = strtolower($nombre[0]);	    	    	    	    
-	    if ($usuario['tipo_usuario'] == 1){   
-	      $apellido = Utils::no_carac(explode(" ", trim($usuario['apellidos'])));
-	      $apellido[0] = strtolower($apellido[0]);
-	      $username = Utils::generarUsername($nombre[0].$apellido[0]);
-	    }
-	    else{
-	      $username = Utils::generarUsername($nombre[0]);
-	    }
-      
- 			$password = Utils::generarPassword();
-      $usuario_login = array("tipo_usuario"=>$usuario["tipo_usuario"], "username"=>$username, 
-      	                     "password"=>$password, "correo"=>$usuario['correo'], "dni"=>$usuario["dni"]);
-      if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
-        throw new Exception("Error al crear el usuario_login");
-      }
-      $id_usuario_login = $GLOBALS['db']->insert_id();
-      $mayor_edad = date("Y-m-d H:i:s",strtotime($usuario["fecha"]."- 18 year"));
-      if ($usuario["tipo_usuario"] == 1) {      	
-        $data = array('telefono'=>$usuario['telefono'], 'nombres'=>$usuario['nombres'], 'apellidos'=>$usuario['apellidos'], 
-        	            'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>date('Y-m-d H:i:s'), 'estado'=>1, 'term_cond'=>1,
-        	            'id_ciudad'=>$default_city['id_ciudad'], 'ultima_sesion'=>date('Y-m-d H:i:s'), 'id_nacionalidad'=>SUCURSAL_PAISID, 
-        	            'tipo_doc'=>$tipodoc, 'id_escolaridad'=>$escolaridad[0]['id_escolaridad'], 'genero'=>'M', 
-        	            'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$usuario["tipo_usuario"]);       
-      }
-      else{
-        $data = array('telefono'=>$usuario['telefono'], 'nombres'=>$usuario['nombres'], 'fecha_nacimiento'=>$mayor_edad,
-        	            'fecha_creacion'=>date('Y-m-d H:i:s'), 'estado'=>1, 'term_cond'=>1, 'id_ciudad'=>$default_city['id_ciudad'],
-        	            'ultima_sesion'=>date('Y-m-d H:i:s'), 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>$usuario['tipo_usuario']); 
-      }
-      if(!Modelo_Usuario::crearUsuario($data)){
-        throw new Exception("Error al ingresar el usuario o empresa");
-      }
 
-      $user_id = $GLOBALS['db']->insert_id();
-      if ($usuario["tipo_usuario"] == 2){      	
-      	$contacto = array('nombre_contact'=>$usuario['nombres'], 'apellido_contact'=>$usuario['nombres'], 'tel_one_contact'=>$usuario['telefono'], 'tel_two_contact'=>'');
-        if(!Modelo_ContactoEmpresa::crearContactoEmpresa($contacto, $user_id)){
-          throw new Exception("Error al ingresar el contacto de la empresa");
-        }
-      }
 
-      if (!Modelo_PreRegistro::borrarPreregistro($usuario['id'])){
-      	throw new Exception("Error al borrar el preregistro");
-      }
 
-      $GLOBALS['db']->commit();
-    
-	    $nombre_mostrar = utf8_encode($usuario["nombres"]).(!empty($usuario['apellidos']) ? " ".utf8_encode($usuario['apellidos']) : "");
-	    $enlace = "<a href='".PUERTO."://".DOMINIO."/desarrollov3/login/'>click aqu&iacute;</a>";
-	  
-      $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_USUARIO");
-      $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
-      $email_body = str_replace("%USERNAME%", $username, $email_body);   
-      $email_body = str_replace("%CORREO%", $usuario["correo"], $email_body);   
-      $email_body = str_replace("%PASSWORD%", $password, $email_body);   
-      $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
-      Utils::envioCorreo($usuario["correo"],"Activación de Usuario",$email_body);          
 
-      echo utf8_encode($usuario['nombres'])." ".utf8_encode($usuario['apellidos'])."/".$username."<br>";    
-    }
-    catch(Exception $e){
-  	  $GLOBALS['db']->rollback();
-  	  echo "Error en usuario ".$usuario['id']." ".$e->getMessage()."<br>";  	  
-		  Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
-    }         
+
+
+
+		  		print_r("correcto");
+		  	exit();
+    	}
+	    catch(Exception $e){
+	  	  $GLOBALS['db']->rollback();
+	  	  echo "Error en usuario ".$usuario['id']." ".$e->getMessage()."<br>";  	  
+			  Utils::envioCorreo('administrador.gye@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
+	    }         
 	}
 	echo "TOTAL REGISTROS INVALIDOS ".$conterror;
 }

@@ -209,10 +209,12 @@ WHERE
                 'id_usuario_login'=>$dato_registro['id_usuario_login']));
     }
     else{
-      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
+      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado'], 'id_sectorindustrial'=>$dato_registro['id_sectorindustrial']);
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }
+      // print_r($arreglo_datos);
+      // exit();
       $result = $GLOBALS['db']->insert('mfo_empresa',$arreglo_datos);
     }
     return $result;

@@ -49,8 +49,9 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     } 
-
-    $tags = array('social'=>$social_reg);
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $tags = array('social'=>$social_reg,
+                  'genero'=>$arrgenero);
 
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
