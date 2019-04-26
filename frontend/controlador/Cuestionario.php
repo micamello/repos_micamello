@@ -68,6 +68,7 @@ class Controlador_Cuestionario extends Controlador_Base {
           $porcentaje = round($totalfaceta/count($vlbaremo),2); 
           $acceso = Utils::getParam('acceso', '', $this->data);         
           $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
+          //preguntar si tiene un plan para responder el tercer cuestionario
           if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta,$estado,$tiempo)){
             throw new Exception("Ha ocurrido un error, intente nuevamente."); 
           }
