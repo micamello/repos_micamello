@@ -1002,12 +1002,11 @@ WHERE
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
-      //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
-      
-      //Utils::log(print_r($_SESSION,true));
-      /*if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
+      //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
+            
+      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
-      }       */ 
+      }        
 
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
@@ -1024,6 +1023,8 @@ WHERE
       }
       //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
+        //si existe un acceso eliminar la notificacion del acceso
+        
         $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
