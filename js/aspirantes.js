@@ -126,14 +126,14 @@ $('#cerrar_accesos').on('click', function(){
 });
 
 
-$('#marcarTo').on('change',function(){
+/*$('#marcarTo').on('change',function(){
 
 	if(!$("#marcarTo").is(':checked')) { 
 		desmarcarCheckboxes();
 	}else{
 		marcarTodo();
 	}
-});
+});*/
 
 $('#listadoPlanes').on('change',function(){
 
@@ -142,8 +142,8 @@ $('#listadoPlanes').on('change',function(){
 
 	$('.check_usuarios').removeAttr('disabled');
 	$('.check_usuarios').removeAttr('title');
-	document.getElementById('marcarTo').setAttribute('title', 'Marcar Todo');
-	$('#marcarTo').removeAttr('disabled');
+	//document.getElementById('marcarTo').setAttribute('title', 'Marcar Todo');
+	//$('#marcarTo').removeAttr('disabled');
 	$.ajax({
         type: "GET",
         url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarPlanSeleccionado&idPlan="+plan,
@@ -157,43 +157,46 @@ function marcarTodo(){
 	var plan = $('#listadoPlanes').val();
 	var usuarios = '';
 
-	if(plan != undefined){
-		$.ajax({
-	        type: "GET",
-	        url: puerto_host+"/index.php?mostrar=aspirante&opcion=buscarCantdAccesos&idPlan="+plan,
-	        dataType:'json',
-	        success:function(data){
+	if(plan == undefined){
+		plan = $('#planOf').val();
+	}
 
-	        	var checkboxes = document.getElementsByName('usuarios_check');
-				for(var i=0;i<checkboxes.length;i++) {
+	$.ajax({
+        type: "GET",
+        url: puerto_host+"/index.php?mostrar=aspirante&opcion=buscarCantdAccesos&idPlan="+plan,
+        dataType:'json',
+        success:function(data){
 
-					if(i <= (data.cantd-1)){
-						if(checkboxes[i].checked == true){
-							checkboxes[i].checked = false;
-						}else{
-							checkboxes[i].checked = true;
-						}
-						
-						if(usuarios != ''){
-							usuarios += ','+checkboxes[i].id;
-						}else{
-							usuarios = checkboxes[i].id;
-						}
+        	var checkboxes = document.getElementsByName('usuarios_check');
+			for(var i=0;i<checkboxes.length;i++) {
+
+				if(i <= (data.cantd-1)){
+					if(checkboxes[i].checked == true){
+						checkboxes[i].checked = false;
 					}else{
-						break;
+						checkboxes[i].checked = true;
 					}
+					
+					if(usuarios != ''){
+						usuarios += ','+checkboxes[i].id;
+					}else{
+						usuarios = checkboxes[i].id;
+					}
+				}else{
+					break;
 				}
-				$.ajax({
-			        type: "GET",
-			        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar=1&usuario="+usuarios,
-			        dataType:'json',         
-			    })
-	        },
-	        error: function (request, status, error) {
-	            error = 1;
-	        }           
-	    })
-	}else{
+			}
+			$.ajax({
+		        type: "GET",
+		        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar=1&usuario="+usuarios,
+		        dataType:'json',         
+		    })
+        },
+        error: function (request, status, error) {
+            error = 1;
+        }           
+    })
+	/*}else{
 		var checkboxes = document.getElementsByName('usuarios_check');
 		for(var i=0;i<checkboxes.length;i++) {
 
@@ -215,14 +218,14 @@ function marcarTodo(){
 	        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar=1&usuario="+usuarios,
 	        dataType:'json',         
 	    })
-	}
+	}*/
 }
 
 function desmarcarCheckboxes(){
 
 	var puerto_host = $('#puerto_host').val();
-	document.getElementById('marcarTo').removeAttribute('checked');
-	document.getElementById('marcarTo').setAttribute('title', 'Debe seleccionar un plan');
+	//document.getElementById('marcarTo').removeAttribute('checked');
+	//document.getElementById('marcarTo').setAttribute('title', 'Debe seleccionar un plan');
 
 	var usuarios = '';
 	var checkboxes = document.getElementsByName('usuarios_check');
@@ -257,11 +260,11 @@ function marcarSeleccionado(usuario){
         url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarUsuariosSeleccionados&marcar="+marcar+"&usuario="+usuario,
         dataType:'json', 
         success:function(data){
-        	if(data.marcarTo == 1){
+        	/*if(data.marcarTo == 1){
         		document.getElementById('marcarTo').setAttribute('checked','checked');
         	}else{
         		document.getElementById('marcarTo').removeAttribute('checked');
-        	}
+        	}*/
         },
         error: function (request, status, error) {
             error = 1;
@@ -276,9 +279,9 @@ function activar(){
 	if(vista == 2){ 
 		$('#planes').show();
 		$('.check_usuarios').attr('disabled','disabled');
-		$('#marcarTo').attr('disabled','disabled');
-		document.getElementById('marcarTo').removeAttribute('checked');
-		document.getElementById('marcarTo').setAttribute('title', 'Debe seleccionar un plan');
+		//$('#marcarTo').attr('disabled','disabled');
+		//document.getElementById('marcarTo').removeAttribute('checked');
+		//document.getElementById('marcarTo').setAttribute('title', 'Debe seleccionar un plan');
 	}else{
 		$('#planes').hide();
 	}

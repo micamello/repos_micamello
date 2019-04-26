@@ -2,7 +2,7 @@
 	<?php  
 	if($costo == 0 && !empty($limite_plan)){ ?>
 		<div class="alert alert-warning col-md-12"> 
-			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b> y solo puede vizualizar <b><?php echo $limite_plan; ?></b> perfil(es).
+			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, existen en esta oferta <?php echo $cantd_total; ?> postulados pero solo puede vizualizar <b><?php echo $limite_plan; ?></b> postulados.
 		</div>
 	<?php } ?>
 
@@ -182,24 +182,24 @@
 				?></div>
 				</div>
 		    </div>
-		    <?php if ($vista == 1){ ?>
-			    <div class="panel panel-default shadow-panel1">
+		    <?php #if ($vista == 1){ ?>
+			    <!--<div class="panel panel-default shadow-panel1">
 					<div class="panel-heading">
 						<span><i class="fa fa-calendar"></i>Fecha de postulaci&oacute;n</span>
 					</div>
 					<div class="panel-body">
 						<div class="filtros">
 					<?php						
-					    foreach (FECHA_POSTULADO as $key => $v) {
+					    /*foreach (FECHA_POSTULADO as $key => $v) {
 					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/F'.$key.'/';
 							//$ruta = Controlador_Aspirante::calcularRuta($ruta,'F');
 					    	echo '<li class="lista"><a href="'.$ruta.'1/" class="fecha" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-					    }
+					    }*/
 					?></div>
 					</div>
-			    </div>
+			    </div>-->
 
-			<?php } ?>
+			<?php #} ?>
 
 		    <?php if ($vista == 1){ ?>
 		    <div class="panel panel-default shadow-panel1">
@@ -263,20 +263,20 @@
 				?></div>
 				</div>
 		    </div>
-		    <div class="panel panel-default shadow-panel1">
+		    <!--<div class="panel panel-default shadow-panel1">
 		      <div class="panel-heading">
 		        <span><i class="fa fa-briefcase"></i> Situaci&oacute;n Laboral</span>
 		      </div>
 		      <div class="panel-body">
 		      	<div class="filtros">
 				    <?php
-				    	foreach ($situacionLaboral as $key => $v) {
+				    	/*foreach ($situacionLaboral as $key => $v) {
 							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T'.$key.'/';
 							echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="'.$key.'">'.utf8_encode($v).'</a></li>';
-					  	} ?>					  	
+					  	}*/ ?>					  	
 					</div>
 		      </div>
-		    </div>
+		    </div>-->
 		    <div class="panel panel-default shadow-panel1">
 					<div class="panel-heading">
 						<span><i class="fa fa-id-card-o"></i> Tipo de Licencia</span>
@@ -330,8 +330,7 @@
 										$letra = 'P';
 									}
 									$f .= $letra.'-';
-									//$j = $letra;
-									
+
 									$pos += 6;
 									
 									echo '<div id="fac_'.$i.'" style="float:left;width: 100%;"><div class="p-3">
@@ -392,10 +391,6 @@
 			        </div>
 
                 	<div class="form-group">
-                		<?php 
-                			//$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/'; 
-                			//$ruta = Controlador_Aspirante::calcularRuta($ruta,'');
-                		?>
 			            <select id="escolaridad" class="form-control">
 			                <option value="0">Seleccione un nivel de estudio</option>
 			                <?php
@@ -406,16 +401,16 @@
 			            </select>
 			        </div>
 			        
-			        <div class="form-group">
+			        <!--<div class="form-group">
 			            <select id="postulado" class="form-control">
 			                <option value="0">Seleccione una fecha de postulaci&oacute;n</option>
 			                <?php
-								foreach (FECHA_POSTULADO as $key => $v) {
+								/*foreach (FECHA_POSTULADO as $key => $v) {
 									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
-								}
+								}*/
 							?>                    
 			            </select>
-			        </div>
+			        </div>-->
 
 			        <div class="form-group">
 			            <select id="salario" class="form-control">
@@ -460,16 +455,16 @@
 							?>                    
 			            </select>
 			        </div> 
-
+			        <!--
 			        <div class="form-group">
 			            <select id="trabajo" class="form-control">
 			                <option value="0">Situcaci&oacute;n Laboral</option>
 							<?php
-					    		foreach ($situacionLaboral as $key => $v) {
+					    		/*foreach ($situacionLaboral as $key => $v) {
 									echo '<option value="'.$key.'">'.utf8_encode($v).'</option>';
-						  		} ?>                    
+						  		}*/ ?>                    
 			            </select>
-			        </div>
+			        </div>-->
 
 			        <div class="form-group">
 			            <select id="licencia" class="form-control">
@@ -588,10 +583,11 @@
 				        	<table class="table table-hover">
 				        		<thead class="etiquetaBody">
 							      <tr>
-							      	<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" <?php if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan"'; } ?> <?php if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ echo 'checked'; } ?>></th>
-							      	<th style="vertical-align: middle; text-align: center;">N°</th>
+							      	<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
+							      	<!--<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php #if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" <?php #if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan"'; } ?> <?php #if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ #echo 'checked'; } ?>></th>-->
+							      	<th style="vertical-align: middle; text-align: center;">Foto</th>
 									<th colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
-							        <th style="vertical-align: middle; text-align: center;" style="width: 100px">
+							        <th style="vertical-align: middle; text-align: center;width: 100px">
 										<?php 
 											$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O1'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
 										?>
@@ -635,17 +631,17 @@
 							    </thead>
 				        		<tbody>
 						        	<?php 	
-				        	
+				        	//print_r($_SESSION['mfo_datos']['usuarioSeleccionado']);
 						        	if(!empty($aspirantes)){ 
 						        		for ($i=0; $i < count($aspirantes); $i++) { 
 						        			$a = $aspirantes[$i]; 
 
 						        			$id_Usuario = Utils::encriptar($a['id_usuario']);
-						        			if($page > 1){
+						        			/*if($page > 1){
 						        				$num_aumentar = ($page-1)*REGISTRO_PAGINA;
 						        			}else{
 						        				$num_aumentar = 0;
-						        			}
+						        			}*/
 						        			?>
 							            	<tr>
 							            		<?php if($_SESSION['mfo_datos']['accesos'] == 1){ 
@@ -663,9 +659,10 @@
 							            					array_push($_SESSION['mfo_datos']['usuariosHabilitados'],$id_Usuario);
 							            				}
 
-							            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] == ''){
+							            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] == '' /*|| array_key_exists($a['id_usuario'],$usuariosConAccesos))*/){
 															
 							            					$mostrar = 'Acceso Enviado';
+
 							            				}
 							            			
 								            			if($mostrar == ''){
@@ -676,9 +673,9 @@
 							            			   }
 							            		    }else{ echo '-'; } ?>
 							            		</td>
-							            		<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php echo $num_aumentar+($i+1); ?></td>
+							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
 							            		
-							            		<!--<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="50" height="50" src="<?php #echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>-->
+							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="150" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>
 							            		
 							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
 
@@ -750,7 +747,7 @@
 									            			$color = '';
 									            			$title = 'completo';
 
-									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
+									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL && !array_key_exists($a['id_usuario'],$usuariosConAccesos)){
 
 									            				$color = ' parcial';
 									            				$title = 'parcial';	
@@ -761,7 +758,7 @@
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
 
 										            			if($mostrar == ''){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
+																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
 																}else{
 																	echo $mostrar;
 																}
@@ -844,8 +841,9 @@
 				</div>
 				<input type="hidden" name="vista" id="vista" value="<?php echo $vista; ?>">
 				<input type="hidden" name="accesos" id="accesos" value="<?php echo $_SESSION['mfo_datos']['accesos']; ?>">
+				<input type="hidden" name="planOf" id="planOf" value="<?php echo Utils::encriptar($id_empresa_plan); ?>">
 
-				<form role="form" name="form_enviarAccesos" id="form_enviarAccesos" method="post" action="<?php echo PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/'.$page.'/'; ?>">
+				<form role="form" name="form_enviarAccesos" id="form_enviarAccesos" method="post" action="<?php echo $ruta_redirect.'/'.$page.'/'; ?>">
 					<input type="hidden" name="enviar_accesos" id="enviar_accesos" value="1">
 				</form>
 	        </div>

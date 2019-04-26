@@ -12,6 +12,7 @@ class Modelo_PermisoPlan{
       }      
     }
     else{
+
       foreach($planes as $plan){
         $idaccion = self::busquedaPermisoxPlan($plan["id_plan"],$permiso);
         if (isset($idaccion["id_accionSist"]) && !empty($idaccion["id_accionSist"])){
@@ -24,7 +25,7 @@ class Modelo_PermisoPlan{
   
   public static function busquedaPermisoxPlan($idplan, $permiso){
     if (empty($idplan)){ return false; }
-    $sql = "SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+   $sql = "SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
             INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
             WHERE mfo_accionsist.accion = ? AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = ?";
     return $rs = $GLOBALS['db']->auto_array($sql,array($permiso,$idplan));              

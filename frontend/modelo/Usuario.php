@@ -332,7 +332,7 @@ WHERE
   }
 
 
-  public static function obtenerAspirantes($idOferta,$page,$limite,$obtCantdRegistros=false){
+  public static function obtenerAspirantes($idOferta,$page,$limite,$cantd_faceta,$obtCantdRegistros=false){
     
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
     u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
@@ -352,7 +352,7 @@ WHERE
 
     $subquery1 .= ") t2"; 
 
-    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.$cantd_faceta.',2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
 
     $sql = "SELECT ";
 
@@ -399,7 +399,7 @@ WHERE
 
     $subquery1 .= ") t2";
 
-    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.count($facetas).',2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
 
     $sql = "SELECT ";
 
@@ -694,7 +694,7 @@ WHERE
     return $rs;
   }
 
-  public static function busquedaGlobalAspirantes($id_pais_empresa,$page,$obtCantdRegistros=false){     
+  public static function busquedaGlobalAspirantes($id_pais_empresa,$cantd_faceta,$page,$obtCantdRegistros=false){     
 
     $sql = "SELECT ";
 
@@ -712,7 +712,7 @@ WHERE
 
     $subquery1 .= ") t2"; 
 
-    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.$cantd_faceta.',2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
 
     if($obtCantdRegistros == false){
       $sql .= "t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_creacion, t2.fecha_nacimiento, t2.edad, t2.id_nacionalidad AS id_pais,e.descripcion AS estudios,t2.discapacidad,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
@@ -749,7 +749,7 @@ WHERE
       up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
         AND u.id_usuario_login = ul.id_usuario_login AND ul.tipo_usuario = 1 GROUP BY u.id_usuario";
     $subquery1 .= " ORDER BY pago DESC, u.fecha_creacion ASC) t2";
-    $subquery2 = '(SELECT id_usuario,IF(COUNT(1) > 2,2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.count($facetas).',2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
       $sql .= "t2.id_usuario, t2.username, t2.nombres, t2.apellidos, t2.id_genero,t2.discapacidad, t2.fecha_nacimiento,t2.fecha_creacion, t2.edad, e.descripcion AS estudios, t2.id_nacionalidad AS id_pais, pr.nombre AS ubicacion, pr.id_provincia, t2.pago, t1.test_realizados";

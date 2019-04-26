@@ -54,11 +54,23 @@ class Modelo_Opcion{
 		return $datos;
 	}
 
-	public static function datosGraficos2($id_usuario,$estado){
+	public static function datosGraficos2($id_usuario,$estado,$empresa=false){
 
 		if (empty($id_usuario)){ return false; }
-		$sql = 'SELECT id_faceta, valor as prom FROM mfo_porcentajexfaceta p WHERE id_usuario = '.$id_usuario.' AND estado = '.$estado;
+		$sql = 'SELECT id_faceta, valor as prom FROM mfo_porcentajexfaceta p WHERE id_usuario = '.$id_usuario;
 
+		if($empresa == false){
+			$sql .= ' AND estado = '.$estado;
+		}else{
+
+			$usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($empresa);
+			if(array_key_exists($id_usuario,$usuariosConAccesos) && $usuariosConAccesos[$id_usuario] != ''){
+				$sql .= '';
+			}else{
+				$sql .= ' AND estado = '.$estado;
+			}
+		}
+		
 		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
 		$datos = array();

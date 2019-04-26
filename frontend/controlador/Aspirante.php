@@ -54,6 +54,7 @@ class Controlador_Aspirante extends Controlador_Base
         }
 
         $facetas = Modelo_Faceta::obtenerFacetas();
+        $cantd_facetas = count($facetas);
         $datos_usuarios = Modelo_PorcentajexFaceta::usuariosxfaceta();
 
         switch ($opcion) {
@@ -68,22 +69,22 @@ class Controlador_Aspirante extends Controlador_Base
                 $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
 
-                unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista']);
+                unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista'],$this->data['enviar_accesos']);
 
                 $cadena = '';
                 $array_datos = $aspirantesFiltrados = array();
-               
+
                 foreach ($this->data as $param => $value) {
                     
                     $letra = substr($value,0,1);
                     $id = substr($value,1);
                     $cadena .= '/'.$value;
-                    if($letra == 'F' && $type == 1){
+                    /*if($letra == 'F' && $type == 1){
                         
                         if(isset(FECHA_POSTULADO[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         }
-                    }else if($letra == 'C' && $type == 1){
+                    }else */if($letra == 'C' && $type == 1){
                           
                         if(isset(EDADES[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
@@ -146,13 +147,13 @@ class Controlador_Aspirante extends Controlador_Base
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         }
                         
-                    }else if($letra == 'T' && $type == 1){
+                    }/*else if($letra == 'T' && $type == 1){
 
                         if(isset($situacionLaboral[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         }
                         
-                    }else if($letra == 'V' && $type == 1){
+                    }*/else if($letra == 'V' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         
@@ -182,11 +183,11 @@ class Controlador_Aspirante extends Controlador_Base
 
                     if($value !=0 || $value != ''){
 
-                        if($letra == 'F'){
+                        /*if($letra == 'F'){
                             if(isset(FECHA_POSTULADO[$value])){
                                 $array_datos[$letra] = array('id'=>$value,'nombre'=>FECHA_POSTULADO[$value]);
                             }
-                        }
+                        }*/
 
                         if($letra == 'A'){
                             if(isset($arrarea[$value])){
@@ -235,14 +236,17 @@ class Controlador_Aspirante extends Controlador_Base
                                 }
                             }
                         }
-                        if($letra == 'T'){
+                        
+                        /*if($letra == 'T'){
                             if(isset($situacionLaboral[$value])){
                                 $array_datos[$letra] = array('id'=>$value,'nombre'=>$situacionLaboral[$value]);
                             }
-                        }
+                        }*/
+
                         if($letra == 'V'){
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                         }
+
                         if($letra == 'N'){
                             if(isset($nacionalidades[$value])){
                                 $array_datos[$letra] = array('id'=>$value,'nombre'=>$nacionalidades[$value]);
@@ -312,7 +316,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $breadcrumbs['vacantes'] = 'Ver Ofertas';
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
                     
-                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,array(),true);
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,true);
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,false);
 
@@ -326,6 +330,13 @@ class Controlador_Aspirante extends Controlador_Base
                     $id_empresa_plan = false;
                     $num_accesos_rest = 0;
                     $costo = -1;
+                }
+
+                $enviar_accesos = Utils::getParam('enviar_accesos', '', $this->data);
+                $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
+                if(!empty($enviar_accesos)){
+
+                    $this->enviarAccesos($idUsuario,$tipoUsuario,$ruta.'/'.$page.'/',$vista,$cantd_facetas,$id_empresa_plan);
                 }
 
                 $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario);
@@ -347,6 +358,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'page' =>$page,
                     'mostrar'=>$mostrar,
                     'vista'=>$vista,
+                    'ruta_redirect'=>$ruta,
                     'array_empresas'=>$array_empresas,
                     'datosOfertas'=>$datosOfertas,
                     'id_oferta'=>(!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta,
@@ -358,16 +370,17 @@ class Controlador_Aspirante extends Controlador_Base
                     'nombre_plan'=>$nombre_plan,
                     'costo'=>$costo,
                     'id_plan'=>$id_plan,
+                    'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
-                    'situacionLaboral'=>$situacionLaboral,
+                    //'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest
                 );
          
-                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
+                //$url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
 
-                $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$url);
+                $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$ruta);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
 
@@ -423,11 +436,16 @@ class Controlador_Aspirante extends Controlador_Base
 
                 $usuario = Utils::getParam('usuario', '', $this->data);
                 $marcar = Utils::getParam('marcar', '0', $this->data);
-                $marcarTo = 0;
+                //$marcarTo = 0;
 
-                if($usuario != '' && $marcar == 1){
+                if($usuario != ''){
                     $usuarios = explode(',',$usuario);
+                }else{
+                    $usuarios = array();
+                }
 
+                if(count($usuarios) > 0){
+                    
                     if(count($usuarios) >= 1 && $marcar == 1){
                         foreach ($usuarios as $key => $id) {
                             if(!in_array($id,$_SESSION['mfo_datos']['usuarioSeleccionado'])){
@@ -435,16 +453,17 @@ class Controlador_Aspirante extends Controlador_Base
                             }
                         }
                     }else if(count($usuarios) == 1 && $marcar == 0){
-                        remover($id,$_SESSION['mfo_datos']['usuarioSeleccionado']);
+                        $clave = array_search($usuarios[0], $_SESSION['mfo_datos']['usuarioSeleccionado']);
+                        unset($_SESSION['mfo_datos']['usuarioSeleccionado'][$clave]);
                     }
                 }else{
                     $_SESSION['mfo_datos']['usuarioSeleccionado'] = array();
                 }
 
-                if(count($_SESSION['mfo_datos']['usuarioSeleccionado']) == count($_SESSION['mfo_datos']['usuariosHabilitados'])){
+                /*if(count($_SESSION['mfo_datos']['usuarioSeleccionado']) == count($_SESSION['mfo_datos']['usuariosHabilitados'])){
                     $marcarTo = 1;
                 }
-                Vista::renderJSON(array('marcarTo'=>$marcarTo));
+                Vista::renderJSON(array('marcarTo'=>$marcarTo));*/
             break;
 
             default:
@@ -454,7 +473,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
-
+                //print_r($usuariosConAccesos);
                 //solo empresa 
                 if ($tipoUsuario != Modelo_Usuario::EMPRESA){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
@@ -489,18 +508,19 @@ class Controlador_Aspirante extends Controlador_Base
                     $nombre_plan = $datos_plan['nombre_plan'];
                     $costo = $datos_plan['costo'];
                    
-                    $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,$limite_plan,false);
-                    $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,$limite_plan,true);
+                    $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,$limite_plan,$cantd_facetas,false);
+                    $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,$limite_plan,$cantd_facetas,true);
 
+                    $cantd_total = count($paises);
                     if(!empty($limite_plan)){
 
-                        if($limite_plan >= count($paises)){
-                            $limite_aspirantes = count($paises);
+                        if($limite_plan >= $cantd_total){
+                            $limite_aspirantes = $cantd_total;
                         }else{
                             $limite_aspirantes = $limite_plan;
                         }
                     }else{
-                        $limite_aspirantes = count($paises);
+                        $limite_aspirantes = $cantd_total;
                     }         
 
                     //$url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta);
@@ -509,10 +529,11 @@ class Controlador_Aspirante extends Controlador_Base
                    
                     $breadcrumbs['aspirante'] = 'Buscar Aspirantes';
 
-                    $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,false);
-                    $paises = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$page,true); 
+                    $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$cantd_facetas,$page,false);
+                    $paises = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$cantd_facetas,$page,true); 
                     $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);                    
                     $limite_aspirantes = count($paises);
+                    $cantd_total = count($paises);
 
                     $nombre_plan = '';
                     $limite_plan = '';
@@ -524,9 +545,10 @@ class Controlador_Aspirante extends Controlador_Base
                 }
 
                 $enviar_accesos = Utils::getParam('enviar_accesos', '', $this->data);
+                $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::  encriptar($id_oferta) : $id_oferta);
                 if(!empty($enviar_accesos)){
-                    $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/'.$page.'/';
-                    $this->enviarAccesos($idUsuario,$tipoUsuario,$ruta,$vista,$id_empresa_plan);
+
+                    $this->enviarAccesos($idUsuario,$tipoUsuario,$ruta.'/'.$page.'/',$vista,$cantd_facetas,$id_empresa_plan);
                 }
 
                 $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario);
@@ -559,6 +581,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'page' => $page,
                     'mostrar'=>$mostrar,
                     'vista'=>$vista,
+                    'ruta_redirect'=>$ruta,
                     'id_oferta'=> (!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta,
                     'datosOfertas'=>$datosOfertas,
                     'array_empresas'=>$array_empresas,
@@ -570,11 +593,13 @@ class Controlador_Aspirante extends Controlador_Base
                     'nombre_plan'=>$nombre_plan,
                     'costo'=>$costo,
                     'id_plan'=>$id_plan,
+                    'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
-                    'situacionLaboral'=>$situacionLaboral,
+                    //'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
-                    'num_accesos_rest'=>$num_accesos_rest
+                    'num_accesos_rest'=>$num_accesos_rest,
+                    'cantd_total'=>$cantd_total
                 );
 
                 $tags["template_js"][] = "ion.rangeSlider.min";
@@ -583,11 +608,12 @@ class Controlador_Aspirante extends Controlador_Base
                 $tags["template_css"][] = "ion.rangeSlider";
                 $tags["template_css"][] = "ion.rangeSlider.skinModern";
                 
-                $url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta);
-                $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$url);
+                //$url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta);
+
+                $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$ruta);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
-
+                //print_r($tags);
                 Vista::render('aspirantes', $tags);
             break;
         }
@@ -661,7 +687,7 @@ class Controlador_Aspirante extends Controlador_Base
         
     }
 
-    public function enviarAccesos($idUsuario,$tipoUsuario,$ruta,$vista,$id_plan=false){
+    public function enviarAccesos($idUsuario,$tipoUsuario,$ruta,$vista,$cantd_facetas,$id_plan=false){
 
         try{
 
@@ -684,82 +710,86 @@ class Controlador_Aspirante extends Controlador_Base
                     //Consultar que el plan tenga realmente la cantidad de accesos disponibles para los que selecciono
                     if(!empty($cantd) && $cantd[0]['num_accesos_rest'] >= count($_SESSION['mfo_datos']['usuarioSeleccionado'])){
 
-                        $usuarios = $_SESSION['mfo_datos']['usuarioSeleccionado'];
-                        foreach ($usuarios as $key => $id) {
-                            if($u == ''){
-                                $u = Utils::desencriptar($id);
-                            }else{
-                                $u .= ','.Utils::desencriptar($id);
-                            }
-                        } 
+                        if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){
 
-                        $cantd_facetas = count(Modelo_Faceta::obtenerFacetas());
-
-                        //consultar los datos de los usuarios seleccionados
-                        $datos_usuarios = Modelo_Usuario::obtenerDatos($u);
-
-                        //consultar los id de los usuarios y que tengan el informe incompleto para esa empresa y asi enviar los correos
-                        $usuariosTestIncompletos = Modelo_Usuario::consultarTestIncompleto($u,$cantd_facetas);
-
-                        $usuariosEnviosPrevios = Modelo_AccesoEmpresa::consultarEnvioPrevio($usuariosTestIncompletos,$idUsuario);
-
-                        $usuarios_con_accesos = Modelo_AccesoEmpresa::obtenerAccesosDistintaEmp($idUsuario);
-
-                        $a1 = explode(",",$usuariosTestIncompletos);
-
-                        if(!empty($usuariosEnviosPrevios)){
-                            $a2 = explode(",",$usuariosEnviosPrevios);
-                        }else{
-                            $a2 = array();
-                        }
-                        //print_r($usuarios_con_accesos); 
-                        //print_r($a1); 
-                        //La diferencia de los usuarios en $usuariosTestIncompletos y $usuariosEnviosPrevios permitirá saber a cuales usuarios deben enviarsele el correo para que completen el test
-                        $diff = array_diff($a1,$a2);
-
-                        //print_r($diff); //exit;
-
-                        //print_r($interseccion);
-                        //exit;
-                        $email_body = Modelo_TemplateEmail::obtieneHTML("ENVIO_ACCESO");
-                        $fecha = date('Y-m-d H:i:s');
-                        $cantd_a_restar = 0;
-                        foreach ($diff as $key => $id) {
-                            
-                            if(Modelo_AccesoEmpresa::guardarAcceso($id,$fecha,$idPlan,$idUsuario)){
-                                $cantd_a_restar++;
-
-                                if(!in_array($id, $usuarios_con_accesos)){
-                                    //echo 'enviara correo a: '.$id;
-                                    $datos = $datos_usuarios[$id];
-                                    $nombre_mostrar = utf8_encode($datos["nombres"])." ".utf8_encode($datos["apellidos"]);    
-                                    $template = $email_body;
-                                    $enlace = PUERTO.'://'.HOST.'/login/';
-                                    $template = str_replace("%NOMBRES%", $nombre_mostrar, $template);   
-                                    $template = str_replace("%ENLACE%", $enlace, $template);      
-                                    $template = str_replace("%FECHA%", $fecha, $template); 
-                                    $notif_body = $template;
-                                    //Utils::envioCorreo($datos['correo'],"Completar Test C.A.N.E.A",$template);
-                                    Modelo_Notificacion::insertarNotificacion($id,$notif_body,Modelo_Usuario::CANDIDATO,Modelo_Notificacion::DESBLOQUEO_ACCESO);
+                            $usuarios = $_SESSION['mfo_datos']['usuarioSeleccionado'];
+                            foreach ($usuarios as $key => $id) {
+                                if($u == ''){
+                                    $u = Utils::desencriptar($id);
+                                }else{
+                                    $u .= ','.Utils::desencriptar($id);
                                 }
+                            } 
+
+                            //$cantd_facetas = count(Modelo_Faceta::obtenerFacetas());
+
+                            //consultar los datos de los usuarios seleccionados
+                            $datos_usuarios = Modelo_Usuario::obtenerDatos($u);
+
+                            //consultar los id de los usuarios y que tengan el informe incompleto para esa empresa y asi enviar los correos
+                            $usuariosTestIncompletos = Modelo_Usuario::consultarTestIncompleto($u,$cantd_facetas);
+
+                            $usuariosEnviosPrevios = Modelo_AccesoEmpresa::consultarEnvioPrevio($usuariosTestIncompletos,$idUsuario);
+
+                            $usuarios_con_accesos = Modelo_AccesoEmpresa::obtenerAccesosDistintaEmp($idUsuario);
+
+                            if(!empty($usuariosTestIncompletos)){
+                                $a1 = explode(",",$usuariosTestIncompletos);
                             }else{
-                                throw new Exception("Ha ocurrido un error al enviar los accesos, intente nuevamente1");
+                                $a1 = array();
                             }
-                        }
 
-                        //Con el resultado de $usuariosEnviosPrevios se consumira el acceso de la empresa aunque realmente no se haya enviado el enlace porque ya el usuario lo habia realizado con otra empresa
-                        /*foreach ($a2 as $key => $id) {
-                            $cantd_a_restar++;
-                            if(!Modelo_AccesoEmpresa::guardarAcceso($id,$fecha,$idPlan,$idUsuario)){
-                                throw new Exception("Ha ocurrido un error al enviar los accesos, intente nuevamente2");
+                            if(!empty($usuariosEnviosPrevios)){
+                                $a2 = explode(",",$usuariosEnviosPrevios);
+                            }else{
+                                $a2 = array();
                             }
-                        }*/
-                        
-                        //Descontar la cantidad de accesos enviados de los restantes del plan
-                        if(!Modelo_UsuarioxPlan::restarNumeroAccesos($idPlan,$cantd_a_restar)){
-                            throw new Exception("Ha ocurrido un error al enviar los accesos, intente nuevamente3");
-                        }
+                            //print_r($usuarios_con_accesos); 
+                            //print_r($a1); 
+                            //La diferencia de los usuarios en $usuariosTestIncompletos y $usuariosEnviosPrevios permitirá saber a cuales usuarios deben enviarsele el correo para que completen el test
+                            $diff = array_diff($a1,$a2);
 
+                            //print_r($diff); //exit;
+
+                            //print_r($usuarios_con_accesos); 
+                            //exit;
+                            $email_body = Modelo_TemplateEmail::obtieneHTML("ENVIO_ACCESO");
+                            $fecha = date('Y-m-d H:i:s');
+                            $cantd_a_restar = 0;
+                            foreach ($diff as $key => $id) {
+                                
+                                if(Modelo_AccesoEmpresa::guardarAcceso($id,$fecha,$idPlan,$idUsuario)){
+                                    $cantd_a_restar++;
+
+                                    if(!in_array($id, $usuarios_con_accesos)){
+                                        //echo 'enviara correo a: '.$id;
+                                        $datos = $datos_usuarios[$id];
+                                        $nombre_mostrar = utf8_encode($datos["nombres"])." ".utf8_encode($datos["apellidos"]);    
+                                        $template = $email_body;
+                                        $enlace = PUERTO.'://'.HOST.'/login/';
+
+                                        $notif_body = "Estimado <b>".$nombre_mostrar."</b>.<br><br>Hoy (".$fecha.") una importante empresa del sector est&aacute; interesado en su perfil y desea conocer un poco m&aacute;s de usted, por tal motivo si desea completar el test (C.A.N.E.A) de MI CAMELLO S.A. presione Aceptar.<br><br> En caso de no desear realizar dicho test presione Cancelar.";
+
+                                        $template = str_replace("%NOMBRES%", $nombre_mostrar, $template);
+                                        $template = str_replace("%ENLACE%", $enlace, $template);      
+                                        $template = str_replace("%FECHA%", $fecha, $template);
+
+                                        //Utils::envioCorreo($datos['correo'],"Completar Test C.A.N.E.A",$template);
+
+                                        Modelo_Notificacion::insertarNotificacion($id,$notif_body,Modelo_Usuario::CANDIDATO,Modelo_Notificacion::DESBLOQUEO_ACCESO);
+                                    }
+                                }else{
+                                    throw new Exception("Ha ocurrido un error al enviar los accesos, intente nuevamente1");
+                                }
+                            }
+                            
+                            //Descontar la cantidad de accesos enviados de los restantes del plan
+                            if(!Modelo_UsuarioxPlan::restarNumeroAccesos($idPlan,$cantd_a_restar)){
+                                throw new Exception("Ha ocurrido un error al enviar los accesos, intente nuevamente3");
+                            }
+                        }else{
+                            throw new Exception("No selecciono ning\u00FAn usuario, intente nuevamente");
+                        }
                     }else{
                         throw new Exception("La cantidad de usuarios seleccionados supera el l\u00EDmite del plan, intente nuevamente");
                     }
@@ -776,7 +806,7 @@ class Controlador_Aspirante extends Controlador_Base
             unset($_SESSION['mfo_datos']['planSeleccionado']);
             $_SESSION['mfo_datos']['usuarioSeleccionado'] = array();
             $_SESSION['mfo_datos']['ultimaVistaActiva'] = $vista;
-            $_SESSION['mfo_datos']['usuariosHabilitados'] = array(); exit;
+            $_SESSION['mfo_datos']['usuariosHabilitados'] = array(); 
             Utils::doRedirect($ruta); 
 
         }catch (Exception $e) {

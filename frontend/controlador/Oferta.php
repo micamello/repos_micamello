@@ -29,6 +29,15 @@ class Controlador_Oferta extends Controlador_Base{
        array_push($planes, array('fecha_caducidad'=>'','num_rest'=>''));
       }
 
+      if($opcion == 'vacantes'){
+     
+        unset($_SESSION['mfo_datos']['accesos']);
+        unset($_SESSION['mfo_datos']['planSeleccionado']);
+        $_SESSION['mfo_datos']['usuarioSeleccionado'] = array();
+        $_SESSION['mfo_datos']['ultimaVistaActiva'] = $vista;
+        $_SESSION['mfo_datos']['usuariosHabilitados'] = array();
+      }
+
       if($vista == 'oferta'){        
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['infohv'],$planes,$vista);
       }
