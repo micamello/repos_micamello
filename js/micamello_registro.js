@@ -31,6 +31,7 @@ var apellidoConEmp;
 var tel1ConEmp;
 var tel2ConEmp;
 var terminosCond;
+var sectorind;
 
 function camposDelForm(){
 	nombresCandEmp = "";
@@ -45,6 +46,7 @@ function camposDelForm(){
 	apellidoConEmp = "";
 	tel1ConEmp = "";
 	tel2ConEmp = "";
+	sectorind = "";
 	// habilitar campos del formulario
 	campos = [];
 	if($('#nombresCandEmp').length){
@@ -123,8 +125,13 @@ function camposDelForm(){
 		terminosCond = $('#terminosCond');
 		campos.push(terminosCond);
 	}
-	// terminosCond
 
+	if($('#sectorind').length){
+		sectorind = $('#sectorind');
+		campos.push(sectorind);
+	}
+	// terminosCond
+	console.log(campos);
 	return campos;
 }
 
@@ -135,7 +142,6 @@ $('#regCandMic').on('click', function(){
 	if(campos[6].length){
 		inicializarDatePickerFecha('fechaShow');
 	}
-	console.log(campos);
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 1);
 	riseModal();
@@ -159,7 +165,6 @@ $('#regEmpMic').on('click', function(){
 	$('#tipo_usuario').val(2);
 	$('#tipo_documentacion').val(1);
 	var tags = camposDelForm();
-	console.log(campos);
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 2);
 	riseModal();
@@ -172,10 +177,15 @@ function showTags(tags, tipo){
 				tags[i].attr('disabled','disabled');
 				tags[i].prev().html('Documento <i class="obligatorio">*</i>');
 			}
+			if(tags[i].attr('id') == 'correoCandEmp'){
+				tags[i].parents(':eq(1)').removeClass('col-md-12');
+				tags[i].parents(':eq(1)').addClass('col-md-6');
+			}
 			if(tags[i].attr('id') == 'nombreConEmp' ||
 				tags[i].attr('id') == 'apellidoConEmp' ||
 				tags[i].attr('id') == 'tel1ConEmp' ||
-				tags[i].attr('id') == 'tel2ConEmp'){
+				tags[i].attr('id') == 'tel2ConEmp' ||
+				tags[i].attr('id') == 'sectorind'){
 				tags[i].parents(':eq(1)').css('display', 'none');
 			}
 			else{
@@ -199,6 +209,10 @@ function showTags(tags, tipo){
 			if(tags[i].attr('id') == 'documentoCandEmp'){
 				tags[i].removeAttr('disabled');
 				tags[i].prev().html('RUC <i class="obligatorio">*</i>');
+			}
+			if(tags[i].attr('id') == 'correoCandEmp'){
+				tags[i].parents(':eq(1)').removeClass('col-md-6');
+				tags[i].parents(':eq(1)').addClass('col-md-12');
 			}
 			if(tags[i].attr('id') == 'apellidosCand' ||
 				tags[i].attr('id') == 'tipoDoc' ||
@@ -474,6 +488,17 @@ function validarOnSubmit(){
 		else{
 			eliminarMensajeError(camposavalidar[13], "");
 		}
+
+// Campo tipoDoc-------------------------------------
+	if(tipo_usuario == 2){
+		console.log(tipo_usuario+"---"+camposavalidar[15].val());
+		if(camposavalidar[15].val() == "" || camposavalidar[15].val() == null){
+			crearMensajeError(camposavalidar[15], "Seleccione una opción");
+			
+		}else{
+			eliminarMensajeError(camposavalidar[15], "");	
+		}
+	}
 	}
 }
 
@@ -816,6 +841,17 @@ $('#modal_registro').on('show.bs.modal', function(){
 		})
 	}
 
+	if($('#sectorind').length){
+		$('#sectorind').on('change blur', function(){
+			if($(this).val() == "" || $(this).val() == null){
+				crearMensajeError($(this), "Seleccione una opción");
+			}
+			else{
+				eliminarMensajeError($(this), "");
+			}
+		});
+	}
+
 // validaciones de cada componente--------------------------------------------------------------------------
 
 function crearMensajeError(obj, mensaje){
@@ -949,8 +985,6 @@ function checkErrors(){
 	var error_2 = $('.error_class');
 	var error_3 = $('.error_class_1');
 	var error_4 = $('.error_class_2');
-	console.log(error_4.length);
-	// var error_5 = $('.error');
 	if(error_1.length == 0 && error_2.length == 0 && error_3.length == 0 && error_4.length == 0){
 		return true;
 	}
@@ -1012,3 +1046,43 @@ function validarFormatoFecha(campo) {
     return false;
   }
 }
+
+$(document).ready(function(){
+	var errorRegister = leerCookie('modalRegistro').split("_");
+	if(errorRegister[0] == 0 && (errorRegister[1] == 1 || errorRegister[1] == 2)){
+		$('#tipo_usuario').val(errorRegister[1] );
+		var tags = camposDelForm();
+		showTags(tags, errorRegister[1]);
+		console.log(errorRegister);
+		riseModal();
+	}
+});
+
+function editarCookie(cname, cvalue, exdays){
+	var d = new Date();
+	d.setTime(d.getTime() + (exdays*24*60*60*1000));
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+function eliminarCookie(cname){
+	var d = new Date();
+	d.setTime(d.getTime() - 1000);
+	var expires = "expires="+d.toUTCString();
+	document.cookie = cname + "=; " + expires;
+}
+
+function leerCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0;i < ca.length;i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1,c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+    }
+    return null;
+}
+
+$('#closeModalRegistro').on('click', function(){
+	editarCookie('modalRegistro', '0_0', 1);
+})

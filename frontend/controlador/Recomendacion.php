@@ -4,7 +4,9 @@ class Controlador_Recomendacion extends Controlador_Base {
   public function construirPagina(){
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
-    $tags = array('social'=>$social_reg);
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $tags = array('social'=>$social_reg,
+                  'genero'=>$arrgenero);
 
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');

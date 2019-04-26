@@ -1,7 +1,10 @@
 <?php
 class Controlador_Inicio extends Controlador_Base {
   
-  public function construirPagina(){   
+  public function construirPagina(){
+    if(!isset($_COOKIE['modalRegistro'])){
+      setcookie('modalRegistro', "0_0", time() + (86400 * 30), "/");
+    }
 
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
@@ -14,6 +17,7 @@ class Controlador_Inicio extends Controlador_Base {
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
     $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $arrsectorind = Modelo_SectorIndustrial::consulta();
     
     $tags = array('banners'=>$arrbanner, 
                   'nro_oferta'=>$nro_oferta,
@@ -23,7 +27,8 @@ class Controlador_Inicio extends Controlador_Base {
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
                   'social'=>$social_reg,
-                  'genero'=>$arrgenero);
+                  'genero'=>$arrgenero,
+                  'arrsectorind'=>$arrsectorind);
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "DateTimePicker";

@@ -51,8 +51,9 @@ class Controlador_Login extends Controlador_Base {
         
       }
     } 
-
-    $tags = array('social'=>$social_reg);
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $tags = array('social'=>$social_reg,
+                  'genero'=>$arrgenero);
 
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";

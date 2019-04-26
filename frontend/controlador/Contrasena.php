@@ -47,7 +47,9 @@ class Controlador_Contrasena extends Controlador_Base {
         }
         $this->linkRedesSociales();
         $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
-        $tags = array('social'=>$social_reg);
+        $arrgenero = Modelo_Genero::obtenerListadoGenero();
+        $tags = array('social'=>$social_reg,
+                  'genero'=>$arrgenero);
         $breadcrumbs['cambioClave'] = 'Cambio de contrase&ntilde;a';
         $tags["template_js"][] = "editarPerfil";
         $tags['breadcrumbs'] = $breadcrumbs;
@@ -144,7 +146,9 @@ class Controlador_Contrasena extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     }
-    $tags = array('social'=>$social_reg);
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $tags = array('social'=>$social_reg,
+                  'genero'=>$arrgenero);
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "DateTimePicker";

@@ -29,7 +29,7 @@
         <h4 class="modal-title">Modal Header</h4>
       </div> -->
       <div class="modal-body">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" id="closeModalRegistro" data-dismiss="modal">&times;</button>
 
         <form action="<?php echo PUERTO."://".HOST;?>/registro/" method="post" id="form_register">
           <input type="hidden" name="tipo_usuario" id="tipo_usuario">
@@ -55,6 +55,23 @@
               </div>
 
               <div class="col-md-6">
+                <div class="form-group">
+                  <label>Sector industrial <i class="obligatorio">*</i></label>
+                  <select id="sectorind" name="sectorind" class="form-control">
+                    <option value="" selected="selected" disabled="disabled">Seleccione una opción</option>
+                    <?php 
+                      if(!empty($arrsectorind)){
+                        foreach($arrsectorind as $sectorind){
+                          echo "<option value='".$sectorind['id_sectorindustrial']."'>".$sectorind['descripcion']."</option>";
+                        }
+                      }
+                    ?>
+                  </select>
+                  <div></div>
+                </div>
+              </div>
+
+              <div class="col-md-12">
                 <div class="form-group">
                   <label>Correo <i class="obligatorio">*</i></label>
                   <input type="text" name="correoCandEmp" class="form-control" id="correoCandEmp">

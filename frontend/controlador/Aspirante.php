@@ -656,18 +656,6 @@ class Controlador_Aspirante extends Controlador_Base
             $datos = array_merge($datos, array('aspSalarial'=>$aspSalarial['asp_salarial']));
         }
         $classHidden = "";
-        if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-            $mostrarBoton = "<div class='col-md-12'><a class='btn btn-success' href='".PUERTO.'://'.HOST.'/planes/'."'>Mostrar datos</a></div>";
-            $datos['dni'] = Utils::ocultarCaracteres($datos['dni'], 0, 0);
-            $datos['correo'] = Utils::ocultarEmail($datos['correo'], 0, 0);
-            $datos['telefono'] = Utils::ocultarCaracteres($datos['telefono'], 0, 0);
-            if($mfoUsuario['telefonoConvencional'] != "-"){
-                $mfoUsuario['telefonoConvencional'] = Utils::ocultarCaracteres($mfoUsuario['telefonoConvencional'], 0, 0);
-            }
-            $classHidden = " reveal";
-            $datos = array_merge($datos, array("classHidden"=>$classHidden));
-            $datos = array_merge($datos, array('mostrarBoton'=>$mostrarBoton));
-        }
         $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($datos['id_usuario']);
         $dataareasubarea = array();
         foreach ($usuarioxarea as $key=>$value) {
