@@ -284,12 +284,14 @@ class Controlador_Oferta extends Controlador_Base{
           if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
             $subempresas = $_SESSION['mfo_datos']['subempresas']; 
             $array_subempresas = array();
-            foreach ($subempresas as $key => $id) {
-              array_push($array_subempresas, $key);
-            }
+            if (!empty($subempresas)){
+              foreach ($subempresas as $key => $id) {
+                array_push($array_subempresas, $key);
+              }
 
-            if(!empty($array_subempresas)){
-              $idUsuario = $idUsuario.",".implode(",", $array_subempresas);
+              if(!empty($array_subempresas)){
+                $idUsuario = $idUsuario.",".implode(",", $array_subempresas);
+              }
             }
           }
  
