@@ -131,7 +131,7 @@ class Modelo_Oferta{
         $sql .= " ORDER BY orden_urgente DESC,o.fecha_creado DESC";
       }
     }
-    echo $sql;
+    //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

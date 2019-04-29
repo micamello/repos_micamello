@@ -210,12 +210,12 @@
 												foreach ($actual as $key2 => $value2) {
 													if($name != $value2['area']){
 														$name = $value2['area'];
-														echo "<label>Área: ".$value2['area']."</label><br>";
+														echo "<label>Área: ".utf8_encode($value2['area'])."</label><br>";
 													}
 												}
 												echo "<label>Subáreas</label>";
 												foreach ($actual as $key1 => $value1) {
-													echo "<li>".$value1['subarea']."</li>";
+													echo "<li>".utf8_encode($value1['subarea'])."</li>";
 												}
 									echo "</div>";
 								echo "</div>";
