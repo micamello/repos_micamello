@@ -88,11 +88,11 @@ $('#provinciaP').change(function(){
 });
 
 
-$('#btn_submitpaypal').click(function(){  
+/*$('#btn_submitpaypal').click(function(){  
   var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
   $('#custom').attr('value',valor);
   console.log('v2: '+valor);
-});
+});*/
 
 $('#imagen').change(function(e) {
     addImage(e); 

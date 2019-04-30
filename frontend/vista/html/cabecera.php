@@ -53,6 +53,8 @@
     }
   </style>
   <?php } ?>
+
+  <script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js" ></script>
 </head>
 
 <body>

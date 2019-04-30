@@ -68,11 +68,18 @@ define('METODO_SELECCION', array('1'=>array(
 										'Esta opción le permitirá seleccionar y arrastrar la respuesta; tome en cuenta que la opción 1 es la opción con la que más se siente identificado y la opción 5 la opción con la que menos se siente identificado.', ''
 									)));
 
+define('AREASPERMITIDAS', '3');
+define('VALORES_ORDENAMIENTO', array('100','1000'));
+
+//FACTURACION ELECTRONICA
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
-define('AREASPERMITIDAS', '3');
-define('VALORES_ORDENAMIENTO', array('100','1000'));
+//PAYME
+define('ACQUIRERID','237');
+define('IDCOMMERCE','10030');
+define('PAYME_SECRET_KEY','BsNTqkAEUePerJm*55654423');
+define('CURRENCY_CODE','840');
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');

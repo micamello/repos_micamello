@@ -106,13 +106,13 @@ class Controlador_Plan extends Controlador_Base {
   }
  
   public function compra(){    
-
-    $idplan = Utils::getParam('idplan','',$this->data);
+    $idplan = Utils::getParam('idplan','',$this->data);    
     try{ 
       if (empty($idplan)){
         throw new Exception("Debe seleccionar un plan para la compra");
       }
        
+      $idplan = Utils::desencriptar($idplan); 
       $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
       $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
       $sucursal = SUCURSAL_ID; 
@@ -146,8 +146,10 @@ class Controlador_Plan extends Controlador_Base {
         $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
         $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
-        $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
- 
+        $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado(); 
+        $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);         
+        $tags["transid"] = Utils::generarTransId('C');
+        $tags["purchaseVerification"] = openssl_digest(ACQUIRERID . IDCOMMERCE . $tags["transid"] . $infoplan["costo"] . CURRENCY_CODE . PAYME_SECRET_KEY, 'sha512'); 
         $tags["template_js"][] = "DniRuc_Validador";
         //$tags["template_js"][] = "mic";
         $tags["template_js"][] = "metodospago";              

@@ -260,6 +260,9 @@ $('.reveal_content').on('click', function(){
 function riseModal(){
 	if($('#modal_registro').length){
 		var modal = $('#modal_registro');
+		if($('#tipoDoc').val() != ""){
+			$('#documentoCandEmp').attr('disabled', false);
+		}
 		modal.modal('show');
 	}
 }
