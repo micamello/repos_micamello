@@ -264,6 +264,9 @@ function riseModal(){
 			$('#documentoCandEmp').attr('disabled', false);
 		}
 		modal.modal('show');
+		if($('#tipoDoc').val() != ""){
+			$('#documentoCandEmp').attr('disabled', false);
+		}
 	}
 }
 

@@ -76,5 +76,27 @@ class Modelo_AccesoEmpresa{
     }
     return $datos;
   }
+
+  public static function obtenerListado(){
+    $sql = "SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;";
+    return $GLOBALS['db']->auto_array($sql,array(), true);
+  }
+
+
+  public static function actualizarFechaxidAcceso($idAcceso, $fecha){
+    if (empty($idAcceso)){ return false; }
+    return $GLOBALS['db']->update("mfo_accesos_empresas",array("fecha_terminado_test"=>$fecha),"id_accesos_empresas=".$idAcceso." AND fecha_terminado_test IS NULL");  
+  }
+
 }  
 ?>

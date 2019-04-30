@@ -187,9 +187,9 @@ WHERE
     return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
 
-  public static function crearUsuario($dato_registro){
-    // var_dump($dato_registro);
-    // exit();    
+  public static function crearUsuario($dato_registro){   
+    var_dump($dato_registro);
+    // exit();
     if(empty($dato_registro)){return false;}
     if ($dato_registro['tipo_usuario'] == 1) {
       $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 
@@ -213,8 +213,6 @@ WHERE
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }
-      // print_r($arreglo_datos);
-      // exit();
       $result = $GLOBALS['db']->insert('mfo_empresa',$arreglo_datos);
     }
     return $result;
@@ -1265,6 +1263,31 @@ WHERE
     }
     return $datos;
 
+  }
+
+  public static function obtenerUsuariosPreregistrados(){
+    $sql = "SELECT 
+    *
+FROM
+    (SELECT 
+        e.nombres, '' apellidos, e.id_empresa id_reg, e.id_usuario_login, e.ultima_sesion, e.estado
+    FROM
+        mfo_empresa e UNION SELECT u.nombres, u.apellidos apellidos, u.id_usuario id_reg,
+        u.id_usuario_login, u.ultima_sesion, u.estado
+    FROM
+        mfo_usuario u) AS data,
+    mfo_usuario_login AS ul
+WHERE
+    data.ultima_sesion IS NULL
+        AND ul.tipo_registro = 1
+        AND data.estado = 0
+        AND ul.id_usuario_login = data.id_usuario_login;";
+    return $GLOBALS['db']->auto_array($sql,array(), true);
+  }
+
+  public static function obtenerFacetasxUsuario($id_usuario){
+    $sql = "SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = ?";
+    return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
   }
 }  
 ?>
