@@ -581,7 +581,7 @@ public static function validarTelefonoConvencional($contenido){
 
   public static function generarPassword() {
       $length = rand(8, 10);
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGH IJKLMNOPQRSTUVWXYZ';
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $charactersLength = strlen($characters);
       $randomString = '';
       for ($i = 0; $i < $length; $i++) {

@@ -1,0 +1,1386 @@
+[2019/04/30 09:32:17] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:17] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:56] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:56] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:56] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:56] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:57] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:57] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:57] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:57] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:57] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:57] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:57] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:57] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:57] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:57] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:58] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:58] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:58] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:58] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:58] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:58] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:58] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:58] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:58] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:58] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:32:58] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:32:58] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:04] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:04] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:05] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:05] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:05] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:05] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:05] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:05] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:05] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:05] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:05] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:05] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:10] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:10] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:28] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:28] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:28] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:29] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:29] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:33:40] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:33:40] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:34:10] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:34:10] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:34:41] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:34:41] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:34:45] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:34:45] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:34:46] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:34:46] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:34:46] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:34:46] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:35:00] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:35:00] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:35:33] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:35:33] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:35:33] SQL Query: SELECT * FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:35:33] SQL Query: SELECT * FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:36:05] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:36:05] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:36:05] SQL Query: SELECT * FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:36:05] SQL Query: SELECT * FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:36:24] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:36:24] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:36:24] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:36:24] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:41:55] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:41:55] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:41:55] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:41:55] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:42:33] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:42:33] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:42:33] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:42:33] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:14] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:14] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:14] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:14] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:14] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:28] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:28] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:28] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:28] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:35] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:35] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:35] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:35] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:35] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:36] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:36] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:36] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:36] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:36] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:36] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:36] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:36] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:36] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:37] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:37] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:37] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:37] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:37] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:45:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:45:42] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:45:42] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:45:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:45:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:48:38] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:48:38] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 09:48:38] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:48:38] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:48:38] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:48:38] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:48:45] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:48:45] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 09:48:45] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:48:45] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:48:45] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:48:45] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:49:09] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:49:09] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 09:49:09] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:49:09] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:49:09] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:49:09] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:49:40] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:49:40] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 09:49:40] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:49:40] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:49:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:49:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:49:45] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:49:45] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 09:49:45] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:49:45] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:49:45] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:49:45] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:50:14] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:50:14] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 09:50:14] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:50:14] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:50:14] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:50:14] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 09:50:26] Utils::createSession empezo una nueva sesion
+[2019/04/30 09:50:26] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 09:50:26] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 09:50:26] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 09:50:26] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 09:50:26] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:14:31] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:14:31] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:14:31] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:14:31] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:14:31] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:14:31] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:14:51] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:14:51] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:14:51] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:14:51] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:14:51] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:14:51] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:26] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:26] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:26] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:26] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:26] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:26] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:33] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:33] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:33] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:33] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:33] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:33] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:40] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:40] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:40] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:40] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:40] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:40] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:40] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:40] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:41] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:41] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:41] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:41] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:41] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:41] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:41] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:41] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:41] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:41] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:41] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:41] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:41] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:41] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:41] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:41] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:41] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:41] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:41] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:42] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:42] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:42] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:42] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:42] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:42] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:18:50] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:18:50] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:18:50] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:18:50] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:18:50] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:18:50] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:21:26] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:21:26] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:21:26] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:21:26] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:21:26] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:21:26] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:22:21] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:22:21] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:22:21] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:22:21] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:22:21] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:22:21] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:22:34] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:22:34] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:22:34] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:22:34] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:22:34] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:22:34] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:22:51] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:22:51] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:22:51] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:22:51] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:22:51] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:23:01] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:23:01] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:23:01] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:23:01] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:23:01] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:23:09] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:23:09] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:23:09] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:23:09] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:23:09] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:23:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:23:42] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:23:42] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:23:42] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:23:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:23:42] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:29:12] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:29:12] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:29:12] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:29:12] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:29:12] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:29:12] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:29:27] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:29:27] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:29:27] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:29:27] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:29:27] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:29:27] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:30:27] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:30:27] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:30:27] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:30:27] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:30:27] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:30:27] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:30:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:30:28] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:30:28] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:30:28] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:30:28] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:30:28] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:30:29] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:30:29] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:30:29] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:30:29] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:30:29] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:30:29] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:30:29] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:30:29] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:30:29] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:30:29] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:30:29] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:30:29] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:40:23] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:40:23] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:40:23] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:40:23] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:40:23] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:40:23] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:40:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:40:28] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:40:28] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:40:28] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:40:28] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:40:28] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:41:40] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:41:40] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:41:40] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:41:40] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:41:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:41:40] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2019-04-30 10:41:40" WHERE id_usuario=1 AND fecha_terminado_test IS NULL
+[2019/04/30 10:41:40] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:41:40] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2019-04-30 10:41:40" WHERE id_usuario=2 AND fecha_terminado_test IS NULL
+[2019/04/30 10:42:07] Utils::createSession empezo una nueva sesion
+[2019/04/30 10:42:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 10:42:07] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 10:42:07] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 10:42:07] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 10:42:07] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2019-04-11 18:20:00" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 10:42:07] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 10:42:07] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2019-04-11 18:20:00" WHERE id_accesos_empresas=2 AND fecha_terminado_test IS NULL
+[2019/04/30 11:16:37] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:16:37] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 11:16:37] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 11:16:37] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 11:16:52] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:16:52] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 11:16:52] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 11:16:52] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 11:16:52] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 11:16:52] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 11:50:17] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:50:17] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 11:50:17] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 11:50:17] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 11:50:17] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '964'
+[2019/04/30 11:50:17] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2019-04-11 18:20:00" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 11:50:17] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '965'
+[2019/04/30 11:50:17] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2019-04-11 18:20:00" WHERE id_accesos_empresas=2 AND fecha_terminado_test IS NULL
+[2019/04/30 11:50:19] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:50:19] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 11:50:19] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 11:50:19] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 11:50:49] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:50:49] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 11:50:49] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 11:50:49] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 11:51:32] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:51:32] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 11:51:32] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 11:51:32] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 11:52:09] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:52:09] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 11:52:09] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 11:52:09] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 11:52:09] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 2
+[2019/04/30 11:52:09] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 11:52:09] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '964'
+[2019/04/30 11:52:09] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 964 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 11:52:09] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 2
+[2019/04/30 11:52:09] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 11:52:09] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '965'
+[2019/04/30 11:52:09] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 965 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 11:59:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 11:59:42] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 12:51:46] Utils::createSession empezo una nueva sesion
+[2019/04/30 12:51:46] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 12:51:46] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 12:51:46] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 12:51:46] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 12:51:47] Utils::createSession empezo una nueva sesion
+[2019/04/30 12:51:47] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 12:51:47] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 12:51:47] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 12:51:47] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 12:51:49] Utils::createSession empezo una nueva sesion
+[2019/04/30 12:51:49] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 12:51:49] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 12:51:49] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 12:51:49] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 12:52:00] Utils::createSession empezo una nueva sesion
+[2019/04/30 12:52:00] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 12:52:00] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 12:52:00] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 12:52:00] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 01:01:02] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:01:02] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:01:02] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:01:02] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:01:02] SQL Query: SELECT * FROM mfo_accesos_empresas;
+[2019/04/30 01:12:06] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:12:06] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:12:06] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:12:06] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:12:06] SQL Query: SELECT acc.*, u.nombres, e.nombres FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:12:55] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:12:55] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:12:55] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:12:55] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:12:55] SQL Query: SELECT acc.*, u.nombres, e.nombres FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:13:49] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:13:49] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:13:49] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:13:49] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:13:49] SQL Query: SELECT acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:24:31] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:24:31] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:24:31] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:24:31] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:24:31] SQL Query: SELECT acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:24:31] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 01:24:31] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-08-14 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 01:24:31] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 01:24:31] SQL Trans: START TRANSACTION
+[2019/04/30 01:24:31] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 3
+[2019/04/30 01:24:31] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 01:24:31] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:24:31] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:24:31] SQL Trans: COMMIT
+[2019/04/30 01:24:37] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:24:37] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:24:37] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:24:37] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:24:37] SQL Query: SELECT acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:24:37] SQL Trans: START TRANSACTION
+[2019/04/30 01:24:37] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:24:37] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 01:24:37] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:24:37] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 01:24:37] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:24:37] SQL Trans: COMMIT
+[2019/04/30 01:26:38] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:26:38] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:26:38] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:26:38] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:26:38] SQL Query: SELECT acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, e.correo correoEmp FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:38:03] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:38:03] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:38:03] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:38:03] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:38:03] SQL Query: SELECT acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, e.correo correoEmp FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:38:06] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:38:06] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:38:06] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:38:06] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:38:06] SQL Query: SELECT acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, e.correo correoEmp FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:38:20] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:38:20] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:38:20] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:38:20] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:38:20] SQL Query: SELECT acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, e.correo correoEmp FROM mfo_accesos_empresas acc, mfo_usuario u, mfo_empresa e WHERE acc.id_usuario = u.id_usuario AND e.id_empresa = acc.id_empresa;
+[2019/04/30 01:42:26] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:42:26] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:42:26] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:42:26] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:42:26] SQL Query: SELECT 
+    acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+FROM
+    mfo_accesos_empresas acc,
+    mfo_usuario u,
+    mfo_empresa e,
+    mfo_usuario_login ul
+WHERE
+  acc.id_usuario = u.id_usuario
+    AND acc.id_empresa = e.id_empresa
+    AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:43:14] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:43:14] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:43:14] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:43:14] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:43:14] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:43:15] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:43:15] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:43:15] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:43:15] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:43:15] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:43:49] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:43:49] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:43:49] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:43:49] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:43:49] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:43:49] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 01:43:49] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 01:43:49] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 01:43:49] SQL Trans: START TRANSACTION
+[2019/04/30 01:43:49] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:43:49] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 01:43:49] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:43:49] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:43:52] SQL Trans: COMMIT
+[2019/04/30 01:44:02] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:44:02] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:44:02] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:44:02] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:44:02] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:44:02] SQL Trans: START TRANSACTION
+[2019/04/30 01:44:02] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:44:02] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 01:44:02] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:44:02] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 01:44:02] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:44:05] SQL Trans: COMMIT
+[2019/04/30 01:54:07] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:54:07] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:54:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:54:07] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:54:07] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:54:07] SQL Trans: START TRANSACTION
+[2019/04/30 01:54:07] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:54:07] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 01:54:07] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:54:07] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:54:09] SQL Trans: COMMIT
+[2019/04/30 01:54:09] SQL Trans: START TRANSACTION
+[2019/04/30 01:54:09] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:54:09] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 01:54:09] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:54:09] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 01:54:09] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:54:10] SQL Trans: COMMIT
+[2019/04/30 01:56:08] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:56:08] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:56:08] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:56:08] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:56:08] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:56:08] SQL Trans: START TRANSACTION
+[2019/04/30 01:56:08] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:56:08] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 01:56:08] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:56:08] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:56:18] SQL Trans: COMMIT
+[2019/04/30 01:56:18] SQL Trans: START TRANSACTION
+[2019/04/30 01:56:18] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:56:18] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 01:56:18] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:56:18] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 01:56:18] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:56:28] SQL Trans: COMMIT
+[2019/04/30 01:57:17] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:57:17] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:57:17] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:57:17] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:57:17] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:59:32] Utils::createSession empezo una nueva sesion
+[2019/04/30 01:59:32] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:59:32] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 01:59:32] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 01:59:32] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 01:59:32] SQL Trans: START TRANSACTION
+[2019/04/30 01:59:32] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:59:32] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 01:59:32] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:59:32] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:59:34] SQL Trans: COMMIT
+[2019/04/30 01:59:34] SQL Trans: START TRANSACTION
+[2019/04/30 01:59:34] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 01:59:34] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 01:59:34] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 01:59:34] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 01:59:34] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 01:59:35] SQL Trans: COMMIT
+[2019/04/30 02:01:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:01:28] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:01:29] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:01:29] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:01:29] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:01:29] SQL Trans: START TRANSACTION
+[2019/04/30 02:01:29] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:01:29] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 02:01:29] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:01:29] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:01:30] SQL Trans: COMMIT
+[2019/04/30 02:01:30] SQL Trans: START TRANSACTION
+[2019/04/30 02:01:30] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:01:30] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 02:01:30] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:01:30] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 02:01:30] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:01:32] SQL Trans: COMMIT
+[2019/04/30 02:01:46] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:01:46] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:01:46] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:01:46] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:01:46] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:04:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:04:42] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:04:42] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:04:42] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:04:42] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:05:11] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:05:11] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:05:11] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:05:11] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:05:11] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:05:11] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:05:14] SQL Trans: COMMIT
+[2019/04/30 02:05:35] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:05:35] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:05:35] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:05:35] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:05:35] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:05:35] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:05:37] SQL Trans: COMMIT
+[2019/04/30 02:05:48] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:05:48] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:05:48] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:05:48] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:05:48] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:05:48] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:05:49] SQL Trans: COMMIT
+[2019/04/30 02:05:49] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:05:51] SQL Trans: COMMIT
+[2019/04/30 02:06:20] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:06:20] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:06:20] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:06:20] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:06:20] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:06:20] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:06:22] SQL Trans: COMMIT
+[2019/04/30 02:06:22] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:06:24] SQL Trans: COMMIT
+[2019/04/30 02:07:13] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:07:13] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:07:13] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:07:13] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:07:13] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:07:13] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:07:15] SQL Trans: COMMIT
+[2019/04/30 02:07:15] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:07:17] SQL Trans: COMMIT
+[2019/04/30 02:08:35] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:08:35] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:08:35] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:08:35] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:08:35] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:08:51] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:08:51] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:08:51] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:08:51] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:08:51] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:08:51] SQL Trans: START TRANSACTION
+[2019/04/30 02:08:51] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:08:51] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 02:08:51] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:08:51] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:08:53] SQL Trans: COMMIT
+[2019/04/30 02:08:53] SQL Trans: START TRANSACTION
+[2019/04/30 02:08:53] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:08:53] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 02:08:53] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:08:53] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 02:08:53] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:08:55] SQL Trans: COMMIT
+[2019/04/30 02:33:54] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:33:54] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:33:54] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:33:54] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:33:54] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:34:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:34:42] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:34:42] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:34:42] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:34:42] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:35:18] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:35:18] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:35:18] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:35:18] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:35:18] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:35:18] SQL Trans: START TRANSACTION
+[2019/04/30 02:35:18] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:35:18] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 02:35:18] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:35:18] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:35:20] SQL Trans: COMMIT
+[2019/04/30 02:35:20] SQL Trans: START TRANSACTION
+[2019/04/30 02:35:20] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:35:20] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 02:35:20] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:35:20] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 02:35:20] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:35:24] SQL Trans: COMMIT
+[2019/04/30 02:51:19] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:51:19] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:51:42] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:51:48] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:51:48] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:51:55] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:51:55] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 02:55:17] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:55:17] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 02:55:17] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:55:17] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:55:17] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:55:17] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 02:55:17] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 02:55:17] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 02:55:18] SQL Trans: START TRANSACTION
+[2019/04/30 02:55:18] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:55:18] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 02:55:18] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:55:18] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:55:20] SQL Trans: COMMIT
+[2019/04/30 02:57:23] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:57:23] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 02:57:23] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:57:23] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:57:23] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:57:23] SQL Trans: START TRANSACTION
+[2019/04/30 02:57:23] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:57:23] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 02:57:23] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:57:23] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:57:25] SQL Trans: COMMIT
+[2019/04/30 02:57:25] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 02:57:25] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=2 AND fecha_terminado_test IS NULL
+[2019/04/30 02:57:25] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 02:58:01] Utils::createSession empezo una nueva sesion
+[2019/04/30 02:58:01] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 02:58:01] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 02:58:01] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 02:58:01] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 02:58:01] SQL Trans: START TRANSACTION
+[2019/04/30 02:58:01] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 02:58:01] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 02:58:01] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1'
+[2019/04/30 02:58:01] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 02:58:01] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 02:58:02] SQL Trans: COMMIT
+[2019/04/30 03:04:04] Utils::createSession empezo una nueva sesion
+[2019/04/30 03:04:04] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 03:04:04] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 03:04:04] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 03:04:04] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 03:04:04] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 03:04:04] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 03:04:04] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 03:04:06] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 03:04:06] SQL Trans: START TRANSACTION
+[2019/04/30 03:04:06] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 03:04:07] SQL Trans: COMMIT
+[2019/04/30 03:14:00] Utils::createSession empezo una nueva sesion
+[2019/04/30 03:14:00] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 03:14:00] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 03:14:00] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 03:14:00] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login;
+[2019/04/30 03:14:00] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 03:14:00] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 03:14:00] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 03:14:02] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 03:14:02] SQL Trans: START TRANSACTION
+[2019/04/30 03:14:02] SQL Trans: COMMIT
+[2019/04/30 04:27:07] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:27:07] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:27:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:27:07] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:27:07] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:27:07] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:27:07] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=2 AND fecha_terminado_test IS NULL
+[2019/04/30 04:27:30] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:27:30] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:27:30] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:27:30] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:27:30] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:27:47] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:27:47] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:27:47] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:27:47] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:27:47] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:29:50] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:29:50] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:29:50] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:29:50] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:29:50] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:29:50] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:29:50] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 04:29:50] SQL Trans: START TRANSACTION
+[2019/04/30 04:30:21] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:30:21] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:30:21] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:30:21] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:30:21] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:30:21] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:30:21] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=2 AND fecha_terminado_test IS NULL
+[2019/04/30 04:30:21] SQL Trans: START TRANSACTION
+[2019/04/30 04:30:29] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:30:29] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:30:29] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:30:29] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:30:29] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:31:19] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:31:19] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:31:19] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:31:19] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:31:19] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:33:33] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:33:33] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:33:33] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:33:33] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:33:33] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:33:33] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:33:33] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 04:34:15] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:34:15] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:34:15] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:34:15] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:34:15] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:34:15] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:34:15] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=2 AND fecha_terminado_test IS NULL
+[2019/04/30 04:34:15] SQL Trans: START TRANSACTION
+[2019/04/30 04:34:15] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 04:34:15] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 04:34:15] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1' AND fecha_terminado_test IS NULL LIMIT 1
+[2019/04/30 04:34:15] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 04:34:15] SQL Trans: COMMIT
+[2019/04/30 04:34:15] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:37:02] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:37:02] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:37:02] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:37:02] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:37:02] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:37:08] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:37:08] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:37:08] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:37:08] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:37:08] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:37:14] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:37:14] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:37:14] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:37:14] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:37:14] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:37:19] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:37:19] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:37:19] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:37:19] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:37:19] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:37:28] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:37:28] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:37:28] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:37:28] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:37:28] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:40:21] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:40:21] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:40:21] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:40:21] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:40:22] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:40:22] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:40:22] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 04:40:22] SQL Trans: START TRANSACTION
+[2019/04/30 04:40:22] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 04:40:22] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=1
+[2019/04/30 04:40:22] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1' AND fecha_terminado_test IS NULL LIMIT 1
+[2019/04/30 04:40:22] SQL Trans: COMMIT
+[2019/04/30 04:40:22] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:40:23] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:40:23] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2018-05-05 13:05:05" WHERE id_accesos_empresas=2 AND fecha_terminado_test IS NULL
+[2019/04/30 04:40:23] SQL Trans: START TRANSACTION
+[2019/04/30 04:40:23] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 2
+[2019/04/30 04:40:23] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=2
+[2019/04/30 04:40:23] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1' AND fecha_terminado_test IS NULL LIMIT 1
+[2019/04/30 04:40:23] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 04:40:23] SQL Trans: COMMIT
+[2019/04/30 04:40:23] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:44:48] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:44:48] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:44:48] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:44:48] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:44:48] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:44:48] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '1'
+[2019/04/30 04:44:48] SQL execute: UPDATE mfo_accesos_empresas SET fecha_terminado_test="2019-04-13 13:05:05" WHERE id_accesos_empresas=1 AND fecha_terminado_test IS NULL
+[2019/04/30 04:44:48] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '1' AND fecha_terminado_test IS NULL LIMIT 1
+[2019/04/30 04:44:48] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 1 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 04:44:48] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:50:35] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:50:55] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:50:56] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:50:56] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:50:56] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:50:56] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:50:56] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:50:57] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:51:02] Utils::createSession empezo una nueva sesion
+[2019/04/30 04:51:02] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACEPTACION_ACCESO' LIMIT 1
+[2019/04/30 04:51:02] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_retornoAcceso'
+[2019/04/30 04:51:02] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/04/30 04:51:02] SQL Query: SELECT 
+                acc.*, u.nombres nombre_usuario, u.apellidos apellido_usuario, e.nombres nombre_empresa, ul.correo
+            FROM
+                mfo_accesos_empresas acc,
+                mfo_usuario u,
+                mfo_empresa e,
+                mfo_usuario_login ul
+            WHERE
+              acc.id_usuario = u.id_usuario
+                AND acc.id_empresa = e.id_empresa
+                AND ul.id_usuario_login = e.id_usuario_login AND acc.fecha_terminado_test IS NULL;
+[2019/04/30 04:51:02] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '2'
+[2019/04/30 04:51:02] SQL Trans: START TRANSACTION
+[2019/04/30 04:51:02] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 04:51:02] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=3
+[2019/04/30 04:51:02] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '2' AND fecha_terminado_test IS NULL LIMIT 1
+[2019/04/30 04:51:02] SQL Trans: COMMIT
+[2019/04/30 04:51:02] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 04:51:04] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '2'
+[2019/04/30 04:51:04] SQL Trans: START TRANSACTION
+[2019/04/30 04:51:04] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 2
+[2019/04/30 04:51:04] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=4
+[2019/04/30 04:51:04] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '2' AND fecha_terminado_test IS NULL LIMIT 1
+[2019/04/30 04:51:04] SQL Trans: COMMIT
+[2019/04/30 04:51:04] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1
+[2019/04/30 04:51:06] SQL Query: SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = '2'
+[2019/04/30 04:51:06] SQL Trans: START TRANSACTION
+[2019/04/30 04:51:06] SQL execute: UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest + 1 WHERE id_empresa_plan = 1
+[2019/04/30 04:51:06] SQL execute: DELETE FROM mfo_accesos_empresas WHERE id_accesos_empresas=5
+[2019/04/30 04:51:06] SQL Query: SELECT * FROM mfo_accesos_empresas WHERE id_usuario = '2' AND fecha_terminado_test IS NULL LIMIT 1
+[2019/04/30 04:51:06] SQL execute: DELETE FROM mfo_notificacion WHERE id_usuario = 2 AND tipo =2 AND tipo_usuario = 1
+[2019/04/30 04:51:06] SQL Trans: COMMIT
+[2019/04/30 04:51:06] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'DEVOLUCION_ACCESO' LIMIT 1

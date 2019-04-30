@@ -3,12 +3,10 @@ class Modelo_ContactoEmpresa{
   
   public static function crearContactoEmpresa($datoContacto, $user_id){
   	if (empty($datoContacto) || empty($user_id)){ return false; }
-    print_r($datoContacto);
-    // exit();
     if(!isset($datoContacto['tel2ConEmp'])){
-      // if($datoContacto['tel2ConEmp'] == ''){
+      if($datoContacto['tel2ConEmp'] == ''){
         $datoContacto['tel2ConEmp'] = NULL;
-      // }
+      }
     }
 
     $result = $GLOBALS['db']->insert('mfo_contactoempresa',
