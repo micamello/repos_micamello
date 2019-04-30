@@ -10,7 +10,7 @@ if($('#metodoSeleccion').length){
 			
 		}
 		else{
-			crearMensajeErrorBig(this, "Por favor, selecciona una opción para poder continuar con los cuestionarios");
+			crearMensajeErrorBig(this, "Por favor, seleccione una opción para poder continuar con los test");
 			event.preventDefault();
 		}
 	})

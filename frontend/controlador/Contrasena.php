@@ -147,8 +147,10 @@ class Controlador_Contrasena extends Controlador_Base {
       }
     }
     $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $arrsectorind = Modelo_SectorIndustrial::consulta();
     $tags = array('social'=>$social_reg,
-                  'genero'=>$arrgenero);
+                  'genero'=>$arrgenero,
+                  'arrsectorind'=>$arrsectorind);
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "DateTimePicker";

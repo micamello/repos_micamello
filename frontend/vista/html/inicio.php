@@ -51,34 +51,33 @@
                 </div>
             </section>
     <?php } ?>
-    
-            <!--Featured Section-->
-            <section>
+                
+            <!--<section>
                 <div class="container">
                     <div class="row">
                         
                         <div class="job_count">
                             <div  align="center" class="col-md-4 col-sm-4 col-xs-12" >
                                 <h3 class="info_text_jobs">Empleos Agregados</h3>                                
-                                <h2 align="" class="count"><?php echo $nro_oferta; ?></h2>                                   
+                                <h2 align="" class="count"><?php //echo $nro_oferta; ?></h2>                                   
                             </div>
                             <div align="center" class="col-md-4 col-sm-4 col-xs-12">
                                 <h3 class="info_text_jobs">Candidatos Activos</h3>  
-                                <h2 class="count"><?php echo $nro_candidato; ?></h2>                                   
+                                <h2 class="count"><?php //echo $nro_candidato; ?></h2>                                   
                             </div>
                            <div align="center" class="col-md-4 col-sm-4 col-xs-12">
                                 <h3 class="info_text_jobs">Empresas Disponibles</h3>
-                                <h2 class="count"><?php echo $nro_empresa; ?></h2>
+                                <h2 class="count"><?php //echo $nro_empresa; ?></h2>
                             </div>
                         </div>
-                    </div><!-- End off row -->
-                </div><!-- End off container -->
-            </section><!-- End off Featured Section-->
+                    </div>
+                </div>
+            </section>-->
 
             <section id="brand" class="business bg-grey roomy-70">
               <div class="container-fluid">
                 <div class="" align="center">
-                                    <h2 class="title_section">Categorías de Empleos</h2>
+                                    <h2 class="title_section">&Aacute;reas de Empleos</h2>
                                         Una mejor carrera está por ahí. Te ayudaremos a encontrarlo Somos 
                                         su primer paso para convertirnos en todo lo que queremos ser.
                                 </div><br><br>                
@@ -89,18 +88,11 @@
                     if (!empty($arrarea)){
                       foreach($arrarea as $area) {                        
                         ?>
-                          <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
-                            <?php if(Modelo_Usuario::estalogueado() && $area['ofertas'] > 0 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ 
-                                echo '<a href="'.PUERTO.'://'.HOST.'/oferta/1/A'.$area['id_area'].'/1/">';
-                            } ?>
-                              <div class="brand_item col-md-2 col-sm-6" align="center"><i class="<?php echo $area['ico'] ?> font_awesome"></i><br><br>
-                                <h5><?php echo utf8_encode($area['nombre']) ?></h5>
-                                <div class="nvac">(<?php echo $area['ofertas']; ?> vacantes)</div><br><br>
-                              </div>
-                            <?php if(Modelo_Usuario::estalogueado()){ 
-                                echo '</a>';
-                            } ?>
-                          </div>
+                        <div class="item <?php if($cont == 1){ echo 'active'; } ?>">                            
+                          <div class="brand_item col-md-2 col-sm-6" align="center"><i class="<?php echo $area['ico'] ?> font_awesome"></i><br><br>
+                            <h5><?php echo utf8_encode($area['nombre']) ?></h5>                            
+                          </div>                            
+                        </div>
                         <?php $cont++; 
                       } 
                     }

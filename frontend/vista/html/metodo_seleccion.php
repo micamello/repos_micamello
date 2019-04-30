@@ -18,7 +18,7 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="text-center">
-						<h5>Selecciona un método para responder el cuestionario</h5>
+						<h5>Seleccione un m&eacute;todo para responder el test</h5>
 					</div><br><br>
 					<div>
 						<div class="row">

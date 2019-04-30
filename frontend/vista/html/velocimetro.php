@@ -17,7 +17,7 @@
                    $clase = "";
                  }
                 ?>
-                <li class="<?php echo $clase;?>">Cuestionario <?php echo $i;?></li>                
+                <li class="<?php echo $clase;?>">Test <?php echo $i;?></li>                
               <?php } ?>
             </ul>
         </div><br><br>

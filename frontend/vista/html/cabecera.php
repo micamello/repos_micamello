@@ -195,28 +195,25 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
     </div> 
 </nav>
 
-
 <?php
-if(isset($show_banner)){ ?>
-<section id="home" class="home bg-black fix">
+//if(isset($show_banner)){ ?>
+<!--<section id="home" class="home bg-black fix">
   <div class="overlay" ></div>
   <div class="container">
-    <!--<div class="row">-->
       <div class="main_home text-center">
         <div class="col-md-12">
           <div class="hello_slid">
             <div class="slid_item">
               <div class="home_text ">
-                <h2 class="text-white">Bienvenid@ <strong><?php echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '; if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])) { echo utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']); } ?></strong></h2>
+                <h2 class="text-white">Bienvenid@ <strong><?php //echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '; if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])) { echo utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']); } ?></strong></h2>
               </div>
             </div>
           </div>
         </div>
       </div>
-    <!--</div>End off row-->
-  </div><!--End off container -->
-</section> <!--End off Home Sections-->
-<?php } ?>
+  </div>
+</section>-->
+<?php //} ?>
 
 <?php
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>

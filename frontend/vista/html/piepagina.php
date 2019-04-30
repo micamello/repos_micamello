@@ -62,7 +62,7 @@
                     <?php 
                       if(!empty($arrsectorind)){
                         foreach($arrsectorind as $sectorind){
-                          echo "<option value='".$sectorind['id_sectorindustrial']."'>".$sectorind['descripcion']."</option>";
+                          echo "<option value='".$sectorind['id_sectorindustrial']."'>".utf8_encode($sectorind['descripcion'])."</option>";
                         }
                       }
                     ?>
@@ -89,7 +89,7 @@
 
               <div class="col-md-6">
                 <div class="form-group">
-                  <label>Tipo documentación <i class="obligatorio">*</i></label>
+                  <label>Tipo documentaci&oacute;n <i class="obligatorio">*</i></label>
                   <select class="form-control" id="tipoDoc" name="tipoDoc">
                     <option value="">Seleccione una opción</option>
                     <?php 

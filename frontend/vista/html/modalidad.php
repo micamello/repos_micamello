@@ -8,10 +8,10 @@
         <div class="text-center">
           <div>
             <span style="font-size: 14px; font-weight: bold;">
-              En esta página se presentan dos opciones de respuestas, para responder el cuestionario. Seleccione la opción con la que más se sienta cómodo.
+              En esta p&aacute;gina se presentan dos opciones de respuestas, para responder el test. Seleccione la opci&oacute;n con la que m&aacute;s se sienta c&oacute;modo.
             </span>
             <span style="font-size: 14px; font-weight: bold;">
-              En la parte inferior podrá visualizar dos ejemplos didácticos. 
+              En la parte inferior podr&aacute; visualizar dos ejemplos did&aacute;cticos. 
             </span>
           </div>
           <br><br>
