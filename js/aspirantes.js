@@ -120,7 +120,7 @@ $('#btn_convertir').on('click', function(){
 
 	var puerto_host = $('#puerto_host').val();
 	var idOferta = document.getElementById('idOferta').value;
-	/*if($('#cantd_planes').val() > 0){
+	if($('#cantd_planes').val() > 0){
 		
 		$.ajax({
 	        type: "GET",
@@ -137,7 +137,7 @@ $('#btn_convertir').on('click', function(){
 	            error = 1;
 	        }                  
 	    })
-	}else{*/
+	}else{
 
 		$.ajax({
 	        type: "GET",
@@ -147,7 +147,7 @@ $('#btn_convertir').on('click', function(){
 	    })
 
 	    window.location = puerto_host+'/planes/';
-	//}
+	}
 });
 
 
