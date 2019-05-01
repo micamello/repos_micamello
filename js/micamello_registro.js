@@ -143,7 +143,7 @@ $('#regCandMic').on('click', function(){
 	}
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 1);
-	celularCandEmp.prev('label')[0].innerHTML = "Celular";
+	celularCandEmp.prev('label')[0].innerHTML = "Celular <i class='obligatorio'>*</i></label>";
 	riseModal();
 });
 
@@ -167,7 +167,7 @@ $('#regEmpMic').on('click', function(){
 	var tags = camposDelForm();
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 2);
-	celularCandEmp.prev('label')[0].innerHTML = "Teléfono";
+	celularCandEmp.prev('label')[0].innerHTML = "Teléfono <i class='obligatorio'>*</i></label>";
 	riseModal();
 });
 
