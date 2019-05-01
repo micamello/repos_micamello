@@ -95,7 +95,8 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
 
         $empresa = Modelo_Usuario::busquedaPorId($oferta["id_usuario"],Modelo_Usuario::EMPRESA);    
         $mail_ofertas .= utf8_encode($oferta["titulo"])."<br>";
-        $mail_ofertas .= utf8_encode($empresa["nombres"])." - ".utf8_encode($oferta["provincia"])."/".utf8_encode($oferta["ciudad"])."<br><br>";
+        $nombre_empresa = ($oferta["confidencial"]) ? "Nombre de la Empresa - Confidencial" : utf8_encode($empresa["nombres"]);
+        $mail_ofertas .= $nombre_empresa." - ".utf8_encode($oferta["provincia"])."/".utf8_encode($oferta["ciudad"])."<br><br>";
 
         //si al plan ya se le acabo las autopostulaciones busca otro
         $numpostact = Modelo_UsuarioxPlan::consultaNroPostulaciones($plan["id_usuario_plan"]);
@@ -119,6 +120,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
     $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");    
     $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
     $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);      
+    //echo $email_body;
     Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);   
   }
 

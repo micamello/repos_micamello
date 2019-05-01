@@ -48,7 +48,7 @@ class Utils{
     return $result;
   }
 
-  static public function enviarEmail($parametros){    
+  /*static public function enviarEmail($parametros){    
     $url = "";
     $asunto = "";
     $body = "";
@@ -232,12 +232,6 @@ class Utils{
             
         break;
       }
-      // Utils::log(utf8_encode($template['contenido']));
-      // Utils::log($body);
-      // Utils::log(print_r(TAGS_REPLACE_T1,true));
-      // print_r($body);
-      // exit();
-
     $template_data = array('asunto'=>$asunto, 'body'=>$body);
     $asunto = $template_data['asunto'];
     $body = $template_data['body'];
@@ -247,7 +241,7 @@ class Utils{
     else{
       return false;
     }
-  }
+  }*/
 
   public static function envioCorreo($to, $subject, $body, $attachments=array()){    
     $mail = new PHPMailer();
@@ -280,12 +274,12 @@ class Utils{
     $encriptado = $objaes->encrypt($texto);
     return bin2hex($encriptado);
   }
+
   public static function desencriptar($texto){    
     $objaes = new Aes(KEY_ENCRIPTAR);
     $desencriptado = hex2bin($texto);
     return $objaes->decrypt($desencriptado);
   }
-
 
   public static function long_minima($str, $val){
     if (preg_match("/[^0-9]/", $val)){
@@ -581,13 +575,25 @@ public static function validarTelefonoConvencional($contenido){
 
   public static function generarPassword() {
       $length = rand(8, 10);
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGH IJKLMNOPQRSTUVWXYZ';
+      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
       $charactersLength = strlen($characters);
       $randomString = '';
       for ($i = 0; $i < $length; $i++) {
           $randomString .= $characters[rand(0, $charactersLength - 1)];
       }
       return $randomString;
+  }
+
+  public static function generarTransId($identificador) {
+    if (empty($identificador)){ return false; }    
+    $length = rand(7, 7);
+    $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = $identificador.'-';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
   }
 
   public static function validar_EC($dni){

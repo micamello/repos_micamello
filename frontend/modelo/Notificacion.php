@@ -31,6 +31,11 @@ class Modelo_Notificacion{
     return $GLOBALS['db']->auto_array($sql,array($id));
   }
 
+  public static function eliminarNotificacionUsuario($id_usuario, $tipo){
+    if (empty($id_usuario) || empty($tipo)){ return false; }
+    return $GLOBALS['db']->delete('mfo_notificacion','id_usuario = '.$id_usuario.' AND tipo ='.$tipo.' AND tipo_usuario = 1');
+  }
+
   /*public static function existeNotificacion($id_usuario,$tipo,$fecha_compra,$autopostulaciones=false){
     if(empty($id_usuario) || empty($fecha_compra) || empty($tipo)){ return false; }
     if(!is_bool($autopostulaciones) && $autopostulaciones >= 0 && $autopostulaciones <= AUTOPOSTULACION_MIN){

@@ -68,6 +68,7 @@ class Controlador_Cuestionario extends Controlador_Base {
           $porcentaje = round($totalfaceta/count($vlbaremo),2); 
           $acceso = Utils::getParam('acceso', '', $this->data);         
           $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
+          //preguntar si tiene un plan para responder el tercer cuestionario
           if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta,$estado,$tiempo)){
             throw new Exception("Ha ocurrido un error, intente nuevamente."); 
           }
@@ -134,6 +135,7 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags["faceta"] = $faceta;        
         $tags["template_css"][] = "toastr.min";
         $tags["template_js"][] = "jquery-ui";
+        $tags["template_js"][] = "jquery.ui.touch-punch.min";
         $tags["template_js"][] = "modos_respuesta";
         $tags["template_js"][] = "toastr.min";        
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);

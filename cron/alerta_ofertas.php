@@ -38,7 +38,8 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC) ){
 
   foreach($ofertas as $oferta){    
     $mail_ofertas .= utf8_encode($oferta["titulo"])."<br>";
-    $mail_ofertas .= utf8_encode($oferta["empresa"])." - ".utf8_encode($oferta["provincia"])." / ".utf8_encode($oferta["ciudad"])."<br>";
+    $nombre_empresa = ($oferta["confidencial"]) ? "Nombre de la Empresa - Confidencial" : utf8_encode($oferta["empresa"]);
+    $mail_ofertas .= $nombre_empresa." - ".utf8_encode($oferta["provincia"])." / ".utf8_encode($oferta["ciudad"])."<br>";
     $mail_ofertas .= "<a href='".PUERTO."://".$sucursal["dominio"]."/desarrollov3/detalleOferta/oferta/".Utils::encriptar($oferta["id_ofertas"])."/'>Ver Oferta</a><br><br>";
     echo $mail_ofertas."<br>";
   }
@@ -47,7 +48,8 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC) ){
     $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);
     $email_body = Modelo_TemplateEmail::obtieneHTML("OFERTAS_LABORALES");
     $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
-    $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);   
+    $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);
+    //echo $email_body;   
     Utils::envioCorreo($rows["correo"],"Ofertas Laborales",$email_body);     
   }
 }

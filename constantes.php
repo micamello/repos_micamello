@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'micamello_desarrollo3');
+define('DBNOMBRE', 'micamello_desarrollo7');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -25,7 +25,7 @@ define('PATH_PROFILE',FRONTEND_RUTA.'imagenes/usuarios/profile/');
 define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
 define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'alert-warning'));
 define('ESTADOS',array('1'=>'Activo','0'=>'Inactivo'));
-define('MAIL_SUGERENCIAS','info@micamello.com.ec');
+define('MAIL_SUGERENCIAS','desarrollo@micamello.com.ec');
 define('PATH_COMPROBANTE',FRONTEND_RUTA.'imagenes/usuarios/comprobante/');
 define('STATUS_CARRERA', array('1'=>'Estudiante', '2'=>'Graduado'));
 define('POSTULACIONES', array('2'=>'Manual', '1'=>'Autom&aacute;tico'));
@@ -48,7 +48,8 @@ define('DISCAPACIDAD',array('1'=>'S&iacute;','2'=>'No'));
 //define('FILTRO_PREFERENCIAS_DEFAULT',0);
 
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
-define('REGISTRO_PAGINA',3);
+
+define('REGISTRO_PAGINA',20);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Unión libre', '3'=>'Casado(a)', '4'=>'Separado(a)','5'=>'Divorciado(a)','6'=>'Viudo(a)','7'=>'Otro'));
@@ -68,11 +69,18 @@ define('METODO_SELECCION', array('1'=>array(
 										'Esta opción le permitirá seleccionar y arrastrar la respuesta; tome en cuenta que la opción 1 es la opción con la que más se siente identificado y la opción 5 la opción con la que menos se siente identificado.', ''
 									)));
 
+define('AREASPERMITIDAS', '3');
+define('VALORES_ORDENAMIENTO', array('100','1000'));
+
+//FACTURACION ELECTRONICA
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
-define('AREASPERMITIDAS', '3');
-define('VALORES_ORDENAMIENTO', array('100','1000'));
+//PAYME
+define('ACQUIRERID','237');
+define('IDCOMMERCE','10030');
+define('PAYME_SECRET_KEY','BsNTqkAEUePerJm*55654423');
+define('CURRENCY_CODE','840');
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');

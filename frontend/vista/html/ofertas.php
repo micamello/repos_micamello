@@ -391,7 +391,7 @@
 							                </div>
 							                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 								                <div class='col-xs-6 col-md-<?php echo $c5; ?>' align='center'>
-								                    <span class="inscritos"><b>Inscritos: </b></span>
+								                    <span class="inscritos"><b>Postulados: </b></span>
 								                <?php 
 								                	if(isset($aspirantesXoferta[$o['id_ofertas']])){
 														$cantd = $aspirantesXoferta[$o['id_ofertas']];

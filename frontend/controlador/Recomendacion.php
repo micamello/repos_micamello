@@ -4,7 +4,11 @@ class Controlador_Recomendacion extends Controlador_Base {
   public function construirPagina(){
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
-    $tags = array('social'=>$social_reg);
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $arrsectorind = Modelo_SectorIndustrial::consulta();
+    $tags = array('social'=>$social_reg,
+                  'genero'=>$arrgenero,
+                  'arrsectorind'=>$arrsectorind);
 
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -15,8 +19,8 @@ class Controlador_Recomendacion extends Controlador_Base {
         $campos = array('nombres' => 1, 'correo1' => 1, 'telefono' => 1, 'descripcion' => 1);
         $data = $this->camposRequeridos($campos);
         
-        //if(self::envioRecomendaciones(MAIL_SUGERENCIAS,$data)){
-        if(self::envioRecomendaciones("ffueltala@gmail.com",$data)){  
+        if(self::envioRecomendaciones(MAIL_SUGERENCIAS,$data)){
+        //if(self::envioRecomendaciones("ffueltala@gmail.com",$data)){  
           $_SESSION['mostrar_exito'] = 'Sus recomendaciones han sido enviadas exitosamente';
         }else{
           $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones fall\u00F3, intente de nuevo';

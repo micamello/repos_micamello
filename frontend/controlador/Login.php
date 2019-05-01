@@ -51,15 +51,17 @@ class Controlador_Login extends Controlador_Base {
         
       }
     } 
-
-    $tags = array('social'=>$social_reg);
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $arrsectorind = Modelo_SectorIndustrial::consulta();
+    $tags = array('social'=>$social_reg,
+                  'genero'=>$arrgenero,
+                  'arrsectorind'=>$arrsectorind);
 
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "micamello_registro";
     Vista::render('login',$tags);  
- 
   }
  
   public static function registroSesion($usuario){     

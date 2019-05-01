@@ -36,7 +36,7 @@ class Controlador_Registro extends Controlador_Base {
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'apellidosCand'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'tipoDoc'=>1, 'documentoCandEmp'=>1, 'fechaNac'=>1, 'generoUsuario'=>1, 'password_1'=>1, 'password_2'=>1);
         }
         if($_POST['tipo_usuario'] == 2){
-          $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1, 'nombreConEmp'=>1, 'apellidoConEmp'=>1, 'tel1ConEmp'=>1);
+          $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1, 'nombreConEmp'=>1, 'apellidoConEmp'=>1, 'tel1ConEmp'=>1, 'sectorind'=>1);
           if(isset($_POST['tel2ConEmp']) && $_POST['tel2ConEmp'] != ""){
             $campos = array_merge($campos, array('tel2ConEmp'=>1));
           }
@@ -46,22 +46,31 @@ class Controlador_Registro extends Controlador_Base {
         $GLOBALS['db']->beginTrans();
         $id_usuario = self::guardarDatosUsuario($datosValidos);
         if (empty($id_usuario)){
-          throw new Exception("Error en el sistema 1, por favor intente de nuevo");
+          throw new Exception("Error en el sistema, por favor intente de nuevo");
         }
         $GLOBALS['db']->commit();
+        if(isset($_COOKIE['modalRegistro'])){
+          setcookie('modalRegistro', "1_".$_POST['tipo_usuario']."", time() + (86400 * 30), "/");
+        }
+        // setcookie("showModal", "", time()-3600);
+        unset($_SESSION["EDER1"]);
+        print_r('eder1');
         $nombres = $datosReg['nombresCandEmp'].((isset($datosReg['apellidosCand'])) ? " ".$datosReg['apellidosCand'] : '');
         $token = Utils::generarToken($id_usuario,"ACTIVACION");
         if (empty($token)){
-          throw new Exception("Error en el sistema 2, por favor intente de nuevo");
+          throw new Exception("Error en el sistema, por favor intente de nuevo");
         }
         $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
             throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
         }
-        $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entreda o spam para activar tu cuenta';
+        $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
       } 
       catch (Exception $e) {
+        if(isset($_COOKIE['modalRegistro'])){
+          setcookie('modalRegistro', "0_".$_POST['tipo_usuario']."", time() + (86400 * 30), "/");
+        }
         $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
@@ -93,13 +102,20 @@ class Controlador_Registro extends Controlador_Base {
       if(!Utils::valida_fecha_mayor_edad($datosReg['fechaNac'])){
         throw new Exception("Debe ser mayor de edad");
       }
+
+      if(!Utils::validarTelefono($datosReg['celularCandEmp'])){
+        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+      }
     }
 
-    if(!Utils::validarTelefono($datosReg['celularCandEmp'])){
-      throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
-    }
 
     if($datosReg['tipo_usuario'] == 2){
+
+      if(!Utils::validarTelefono($datosReg['celularCandEmp']) && !Utils::validarTelefonoConvencional($datosReg['tel2ConEmp'])){
+        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+      }
+
+
       if(!Utils::validarTelefono($datosReg['tel1ConEmp'])){
         throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
       }
@@ -141,6 +157,8 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function guardarDatosUsuario($datosValidos){
+    // print_r($datosValidos);
+    // exit();
     $data = array(); $id_usuario = "";    
     $usuario_login = array("tipo_usuario"=>$datosValidos['tipo_usuario'], "username"=>$datosValidos['username'], 
                            "password"=>$datosValidos['password_1'], "correo"=>$datosValidos['correoCandEmp'], "dni"=>$datosValidos['documentoCandEmp'], "tipo_registro"=>2);
@@ -194,7 +212,8 @@ class Controlador_Registro extends Controlador_Base {
                     "id_ciudad"=>$ciudadDefault['id_ciudad'],
                     "id_nacionalidad"=>SUCURSAL_PAISID,
                     "id_usuario_login"=>$id_usuario_login, 
-                    "tipo_usuario"=>$datosValidos['tipo_usuario']);
+                    "tipo_usuario"=>$datosValidos['tipo_usuario'],
+                    "id_sectorindustrial"=>$datosValidos['sectorind']);
       if(!Modelo_Usuario::crearUsuario($data)){
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
@@ -302,7 +321,7 @@ class Controlador_Registro extends Controlador_Base {
       $nombres = $nombre." ".$apellido;      
       $token = Utils::generarToken($user_id,"ACTIVACION");
       if (empty($token)){
-        throw new Exception("Error en el sistema 3, por favor intente de nuevo");
+        throw new Exception("Error en el sistema, por favor intente de nuevo");
       }
       $token .= "||".$user_id."||".Modelo_Usuario::CANDIDATO."||".date("Y-m-d H:i:s");
       $token = Utils::encriptar($token);

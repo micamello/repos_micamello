@@ -187,9 +187,9 @@ WHERE
     return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
 
-  public static function crearUsuario($dato_registro){
-    // var_dump($dato_registro);
-    // exit();    
+  public static function crearUsuario($dato_registro){   
+    var_dump($dato_registro);
+    // exit();
     if(empty($dato_registro)){return false;}
     if ($dato_registro['tipo_usuario'] == 1) {
       $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 
@@ -209,7 +209,7 @@ WHERE
                 'id_usuario_login'=>$dato_registro['id_usuario_login']));
     }
     else{
-      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado']);
+      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado'], 'id_sectorindustrial'=>$dato_registro['id_sectorindustrial']);
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }
@@ -999,12 +999,11 @@ WHERE
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
-      //si no tiene hoja de vida cargada  y si campos de ttelefonos correo areas y cedula     
-      
-      //Utils::log(print_r($_SESSION,true));
-      /*if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
+      //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
+            
+      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
-      }       */ 
+      }        
 
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
@@ -1016,12 +1015,14 @@ WHERE
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test  
       if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
-        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";        
+        $_SESSION['mostrar_error'] = "Debe completar el test";        
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
-        $_SESSION['mostrar_error'] = "Debe completar el cuestionario";
+        //si existe un acceso eliminar la notificacion del acceso
+        
+        $_SESSION['mostrar_error'] = "Debe completar el test";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
@@ -1261,6 +1262,31 @@ WHERE
     }
     return $datos;
 
+  }
+
+  public static function obtenerUsuariosPreregistrados(){
+    $sql = "SELECT 
+    *
+FROM
+    (SELECT 
+        e.nombres, '' apellidos, e.id_empresa id_reg, e.id_usuario_login, e.ultima_sesion, e.estado
+    FROM
+        mfo_empresa e UNION SELECT u.nombres, u.apellidos apellidos, u.id_usuario id_reg,
+        u.id_usuario_login, u.ultima_sesion, u.estado
+    FROM
+        mfo_usuario u) AS data,
+    mfo_usuario_login AS ul
+WHERE
+    data.ultima_sesion IS NULL
+        AND ul.tipo_registro = 1
+        AND data.estado = 0
+        AND ul.id_usuario_login = data.id_usuario_login;";
+    return $GLOBALS['db']->auto_array($sql,array(), true);
+  }
+
+  public static function obtenerFacetasxUsuario($id_usuario){
+    $sql = "SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = ?";
+    return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
   }
 }  
 ?>

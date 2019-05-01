@@ -47,7 +47,7 @@
                                    if($cantd_cuentas > 0 && $puedeCrearCuenta == 1){ ?>
                                         <div class="col-md-12 icon_oferta">
                                             <a href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/"><span id="boton" name="" class="btn btn-md btn-success">
-                                            <i class="fa fa-industry " title="Crear nueva empresa"></i> CREAR EMPRESA</span></a>
+                                            <i class="fa fa-industry " title="Crear nueva empresa"></i> CREAR SUBCUENTA</span></a>
                                         </div>
                                     <?php } ?>
                                 </div>

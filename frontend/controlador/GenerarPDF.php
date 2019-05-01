@@ -211,14 +211,6 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
         $mfoUsuario = Modelo_Usuario::informacionPerfilUsuario($datos['id_usuario']);
         $datos = array_merge($datos, $mfoUsuario);
-        if (isset($_SESSION['mfo_datos']['planes']) && !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos')){
-            $datos['dni'] = Utils::ocultarCaracteres($datos['dni'], 0, 0);
-            $datos['correo'] = Utils::ocultarEmail($datos['correo'], 0, 0);
-            $datos['telefono'] = Utils::ocultarCaracteres($datos['telefono'], 0, 0);
-        }
-        if($mfoUsuario['telefonoConvencional'] != "-"){
-            $mfoUsuario['telefonoConvencional'] = Utils::ocultarCaracteres($mfoUsuario['telefonoConvencional'], 0, 0);
-        }
         $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($datos['id_usuario']);
         $dataareasubarea = array();
         foreach ($usuarioxarea as $key=>$value) {

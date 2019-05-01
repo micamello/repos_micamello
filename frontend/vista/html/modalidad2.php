@@ -4,7 +4,7 @@
 		<div class="text-center">
 			<br>
 			<div class="con_encabezado">
-				<span class="encabezado">Por favor ordene de 1 a 5 las siguientes oraciones en cada pregunta. (1 es la oración con la que mas se identifica y 5 es con la que menos se identifica). Este cuestionario consta de 20 preguntas</span>
+				<span class="encabezado">Por favor ordene de 1 a 5 las siguientes oraciones en cada pregunta. (1 es la oración con la que mas se identifica y 5 es con la que menos se identifica). Este test consta de 20 preguntas</span>
 			</div>
 			<br>
 		</div>
@@ -97,19 +97,20 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel" align="center">Instrucciones</h4>
+        <h4 class="modal-title" id="myModalLabel" align="center">Recomendaciones</h4>
       </div>
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-            <h5 class="text-justify">Para una mayor efectividad en tu búsqueda, a continuación, te presentamos tres <b>Formularios de Personalidad</b>, sigue las siguientes instrucciones:</h5>
-            <h5 class="text-justify">- Debes responder en el menor tiempo posible<br>
-               - Apagar celulares o aparatos que pudieran ser distractores<br>
-               - Contesta en forma honesta y precisa. <b>Solo accederás una vez</b><br>
-               - Al enviar no podrás realizar ningún tipo de corrección</h5>
-            <h5>¿Estás listo? Coloca tu mente en blanco y haz clic</h5>
+            <h5 class="text-justify">Para obtener mayor efectividad en su b&uacute;squeda de empleo, le invitamos a llenar el siguiente <b>Test de Personalidad</b>. Por favor, tome en cuenta las siguientes recomendaciones:</h5>
+            <h5 class="text-justify">- No existe l&iacute;mite de tiempo, pero mientras menos se demore tendr&aacute; mejores resultados<br>
+               - Busque un lugar tranquilo para que pueda completar el test<br>
+               - Apague celulares o aparatos que puedan distraerlo</b><br>
+               - Conteste de forma honesta y precisa. <b>Solo puede acceder una vez</b><br>
+               - Al enviar no podr&aacute; realizar ning&uacute;n tipo de correcci&oacute;n
+             </h5>            
             <center>
-              <button type="button" class="btn btn-success" data-dismiss="modal">Formularios </button>
+              <button type="button" class="btn btn-success" data-dismiss="modal">Comenzar</button>
             </center> 
           </div>
         </div>

@@ -59,9 +59,9 @@ class ValidadorEc
         else{
             $digitoVerComparar = 10 - $digitoVer;
         }
-        print_r("<br>. ".$digitoVerComparar ."==". $digitos[9]);
+        // print_r("<br>. ".$digitoVerComparar ."==". $digitos[9]);
         if($digitoVerComparar == $digitos[9]){
-            print_r("eder");
+            // print_r("eder");
             return true;
         }
         else{
