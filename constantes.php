@@ -48,6 +48,7 @@ define('DISCAPACIDAD',array('1'=>'S&iacute;','2'=>'No'));
 //define('FILTRO_PREFERENCIAS_DEFAULT',0);
 
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
+
 define('REGISTRO_PAGINA',20);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));

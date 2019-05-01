@@ -74,7 +74,7 @@
             <br>
             <center>
               <a href="#" class="ok" onclick="CrearCookie();"><b>OK</b></a> | 
-              <a href="<?php echo PUERTO."://".HOST;?>/docs/politicas_de_cookies.pdf" target="_blank" class="info">M&aacute;s informaci&oacute;n</a>
+              <a href="<?php #echo PUERTO."://".HOST;?>/docs/politicas_de_cookies.pdf" target="_blank" class="info">M&aacute;s informaci&oacute;n</a>
             </center> 
           </div>
         </div>

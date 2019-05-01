@@ -304,6 +304,29 @@ class Modelo_Oferta{
                                                           ));
     return $result;
   }
+
+  public static function guardarOfertaConvertida($data){
+    $result = $GLOBALS['db']->insert('mfo_oferta', array('id_empresa'=>$data['id_empresa'], 
+                                                          'titulo'=>$data['titulo'],
+                                                          'descripcion'=>$data['descripcion'],
+                                                          'salario'=>$data['salario'],
+                                                          'a_convenir'=>$data['a_convenir'],
+                                                          'fecha_contratacion'=>$data['fecha_contratacion'],
+                                                          'vacantes'=>$data['vacantes'],
+                                                          'anosexp'=>$data['anosexp'],
+                                                          'estado'=>$data['estado'],
+                                                          'fecha_creado'=>$data['fecha_creado'],
+                                                          'tipo'=>$data['tipo'],
+                                                          'primer_empleo'=>$data['primer_empleo'],
+                                                          'id_jornada'=>$data['id_jornada'],
+                                                          'id_ciudad'=>$data['id_ciudad'],
+                                                          'id_requisitoOferta'=>$data['id_requisitoOferta'],
+                                                          'id_escolaridad'=>$data['id_escolaridad'],
+                                                          'id_empresa_plan'=>$data['id_empresa_plan'] 
+                                                          ));
+    return $result;
+  }
+
 // se esta utlizando 15-04-2019
   public static function aspirantesXofertas(){
     $sql = "SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
@@ -372,13 +395,25 @@ class Modelo_Oferta{
 
   public static function ofertaPostuladoPor($idOferta){
     if (empty($idOferta)){ return false; }
-    $sql = "SELECT id_empresa FROM mfo_oferta where id_ofertas = ?";
+    $sql = "SELECT * FROM mfo_oferta where id_ofertas = ?";
+    return $GLOBALS['db']->auto_array($sql,array($idOferta),true);
+  }
+
+  public static function consultarOferta($idOferta){
+    if (empty($idOferta)){ return false; }
+    $sql = "SELECT o.*,r.*,GROUP_CONCAT(os.id_areas_subareas) AS id_areas_subareas FROM mfo_oferta o, mfo_requisitooferta r, mfo_oferta_subareas os WHERE o.id_requisitoOferta = r.id_requisitoOferta AND o.id_ofertas = os.id_ofertas AND o.id_ofertas = ?";
     return $GLOBALS['db']->auto_array($sql,array($idOferta),true);
   }
 
   public static function consultarDescripcionOferta($idOferta){
     if (empty($idOferta)){ return false; }
     $sql = "SELECT descripcion FROM mfo_oferta where id_ofertas = ?";
+    return $GLOBALS['db']->auto_array($sql,array($idOferta));
+  }
+
+  public static function consultarTituloOferta($idOferta){
+    if (empty($idOferta)){ return false; }
+    $sql = "SELECT titulo FROM mfo_oferta where id_ofertas = ?";
     return $GLOBALS['db']->auto_array($sql,array($idOferta));
   }
 

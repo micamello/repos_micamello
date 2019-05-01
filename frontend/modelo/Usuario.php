@@ -534,7 +534,7 @@ WHERE
       }
 
       if($filtros['C'] == 3){
-        $sql .= " t2.edad BETWEEN '35' AND '45'";
+        $sql .= " AND t2.edad BETWEEN '35' AND '45'";
       }
 
       if($filtros['C'] == 4){
@@ -561,7 +561,7 @@ WHERE
       }
 
       if($filtros['S'] == 3){
-        $sql .= " t2.asp_salarial BETWEEN '700' AND '1200'";
+        $sql .= " AND t2.asp_salarial BETWEEN '700' AND '1200'";
       }
 
       if($filtros['S'] == 4){
@@ -688,7 +688,6 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-
     //echo 'SQL1: '.$sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
@@ -853,7 +852,7 @@ WHERE
       }
 
       if($filtros['C'] == 3){
-        $sql .= " t2.edad BETWEEN '35' AND '45'";
+        $sql .= " AND t2.edad BETWEEN '35' AND '45'";
       }
 
       if($filtros['C'] == 4){
