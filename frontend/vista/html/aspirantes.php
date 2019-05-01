@@ -1,6 +1,6 @@
 <div class="container">
 	<?php  
-	if($costo == 0 && !empty($limite_plan)){ ?>
+	if(/*$costo == 0 && */!empty($limite_plan)){ ?>
 		<div class="alert alert-warning col-md-12"> 
 			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, existen en esta oferta <?php echo $cantd_total; ?> postulados pero solo puede vizualizar <b><?php echo $limite_plan; ?></b> postulados.
 		</div>
@@ -328,7 +328,6 @@
 										$letra = 'P';
 									}
 									$f .= $letra.'-';
-
 									$pos += 6;
 									
 									echo '<div id="fac_'.$i.'" style="float:left;width: 100%;"><div class="p-3">
@@ -465,7 +464,7 @@
 			        </div>-->
 
 			        <div class="form-group">
-			            <select id="licencia" class="form-control">
+			        	<select id="licencia" class="form-control">
 			                <option value="-1">Tipo de Licencia</option>    
 							<?php
 							echo '<option value="0">Sin licencia</option>';
@@ -506,8 +505,10 @@
 		<div class="col-md-9"> 
 			
 			<?php if(($vista == 1 && $num_accesos_rest > 0) || $vista == 2){ ?> 
-				<div <?php echo $style_activo; ?> id="activarAccesos" class="parpadea pull-right" >
-					<h6 style="color:#6d6d6b"><strong>Enviar accesos a candidatos para completar informe</strong><a id="btn_accesos" class="btn btn-md btn-warning">Activar accesos</a></h6>
+				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right" >
+					<h6 style="color:#6d6d6b">
+						<button id="btn_accesos" type="button" class="btn btn-warning" data-placement="bottom" data-toggle="tooltip" data-html="true" title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo. Y mejor a&uacute;n, ¡puedes completar el proceso de selecci&oacute;n!</p>">Activar accesos</button>
+					</h6>
 				</div>
 				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right" >
 					<a id="btn_accesos_cancelar" class="btn btn-md btn-default">Cancelar</a>
@@ -619,23 +620,35 @@
 								           <a href="<?php echo $ruta.'1/'; ?>">Salario<i class="fa fa-sort"></i></a>
 								       </th>
 								   <?php } ?>
-								   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) || in_array('-1',$posibilidades)){ ?>
+								   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))/*|| in_array('-1',$posibilidades)*/){ ?>
 							        	<th colspan="2" style="vertical-align: middle; text-align: center;">Acci&oacute;n</th>
 							    	<?php } ?>
 							      </tr>
 							    </thead>
 				        		<tbody>
 						        	<?php 	
-				        	//print_r($_SESSION['mfo_datos']['usuarioSeleccionado']);
+				        			//$_SESSION['mfo_datos']['registrosPagina']);
 						        	if(!empty($aspirantes)){ 
 						        		for ($i=0; $i < count($aspirantes); $i++) { 
 						        			$a = $aspirantes[$i]; 
 						        			$id_Usuario = Utils::encriptar($a['id_usuario']);
-						        			/*if($page > 1){
+											if($page > 1){
 						        				$num_aumentar = ($page-1)*REGISTRO_PAGINA;
 						        			}else{
 						        				$num_aumentar = 0;
-						        			}*/
+						        			}
+						        			if(!empty($limite_plan)){
+						        				$ver = false;
+						        				if($i <= ($limite_plan-1) && $num_aumentar <= ($limite_plan-1)){
+						        					$ver = true;
+						        				}
+						        			}else{
+						        				$ver = true;
+						        			}
+						        			
+						        			/*echo '<br>i: '.$i;
+						        			echo '<br>limite-1: '.($limite_plan-1);
+						        			echo '<br>num_aumentar: '.$num_aumentar;*/
 						        			?>
 							            	<tr>
 							            		<?php if($_SESSION['mfo_datos']['accesos'] == 1){ 
@@ -650,11 +663,9 @@
 							            				if(!in_array($id_Usuario, $_SESSION['mfo_datos']['usuariosHabilitados'])){
 							            					array_push($_SESSION['mfo_datos']['usuariosHabilitados'],$id_Usuario);
 							            				}
-
 							            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] == ''){
 															
 							            					$mostrar = 'Acceso Enviado';
-
 							            				}
 							            			
 								            			if($mostrar == ''){
@@ -669,15 +680,22 @@
 							            		
 							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="150" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>
 							            		
+							            		
 							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
 
 							            			<?php
-							            			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-							            				echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; 
-							            			}else{
-							            				echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita ver los datos del candidato\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')">'.$a['nombres'].' '.$a['apellidos'].'</a>';
-							            			} ?>
+								            			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
+								            				echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; 
+								            			}else{
+								            				if(!$ver){ 
+								            					echo '-';
+								            				}else{
+								            					echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita ver los datos del candidato\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')">'.$a['nombres'].' '.$a['apellidos'].'</a>';
+								            				} 
+								            			} 
+							            			?>
 												</td>
+												
 							            		<td data-title="Edad: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $a['edad']; ?></td>
 													<?php if($vista == 1){ 
 													$date1 = new DateTime(str_replace('00:00:00', '', $a['fecha_postulado']));
@@ -693,7 +711,7 @@
 										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){ 
 										    			echo $datos_usuarios[$a['id_usuario']][$key].'%';
 										    		}else{ 
-										    			echo '-';
+										    			echo '0.00%';
 										    		}
 										    		echo "</td>";
 										    	} ?>
@@ -706,22 +724,26 @@
 													$compl_url = '';
 												} ?>
 
-												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) ||in_array('-1',$posibilidades)){ ?>
+												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) /*|| in_array('-1',$posibilidades)*/){ ?>
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 									            		<?php 
-										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-										            			if(in_array('-1',$posibilidades)){
+										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
+										            			//if(in_array('-1',$posibilidades)){
 																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
-																}else{
-																	$cantidadRestante = array_sum($posibilidades) - $descargas['cantd_descarga'];
+																/*}else{
+																	$cantidadRestante = $posibilidades - count($descargas);
 																	if($cantidadRestante > 0){
 																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
 																	}else{
 																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
-																	}
-																}
+																	//}
+																}*/
 															}else{
-																echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
+																if(!$ver){
+																	echo '-';
+																}else{
+																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
+																}
 															}
 														?>
 													</td>
@@ -730,23 +752,25 @@
 														echo '<td title="Descargar Informe de personalidad ';
 									            			$color = '';
 									            			$title = 'completo';
-
 									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
-
 									            				$color = ' parcial';
 									            				$title = 'parcial';	
 									            			}
 									            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
-										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
+										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 										            			if($mostrar == ''){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
+																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
 																}else{
 																	echo $mostrar;
 																}
 															}else{
 							
 																if($mostrar == ''){
-																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-clipboard fa-1x '.$color.'"></i></a>';
+																	if(!$ver){
+																		echo '-';
+																	}else{
+																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-clipboard fa-1x '.$color.'"></i></a>';
+																	}
 																}else{
 																	echo $mostrar;
 																}
@@ -821,6 +845,65 @@
 	        <div class="col-md-12">
 				<?php echo $paginas; ?>
 			</div>
+			
+			<?php 
+				if(/*$costo == 0 && */!empty($limite_plan)){ 
+					if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
+						echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
+					}else{
+						//$_SESSION['mfo_datos']['usuario']['ofertaConvertir'] = $id_oferta;
+						echo '<input type="hidden" name="cantd_planes" id="cantd_planes" value="'.count($planes).'">
+					<input type="hidden" name="idOferta" id="idOferta" value="'.$id_oferta.'">';
+					?>
+					<div id="convertirOferta" class="parpadea pull-right" >
+						<h6 style="color:#6d6d6b">
+							<strong>Mira todos los perfiles y escoge el mejor candidato</strong>
+							<a id="btn_convertir" class="btn btn-md btn-warning"><?php if(count($planes)!=0){ echo 'CONVERTIR'
+							; }else{ echo 'CONTRATAR'; } ?> AHORA</a>
+						</h6>
+					</div>
+					<?php } 
+				} ?>
 		</div>
 	</div>
+</div>
+
+<div class="modal fade" id="convertir" tabindex="-1" role="dialog" aria-labelledby="convertir" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">    
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Convertir Oferta</h5>                  
+      </div>
+      	<form action = "<?php echo PUERTO."://".HOST;?>/convertir/" method = "post" id="form_convertir" name="form_convertir">
+	      <div class="modal-body">
+	      	<div class="row">
+		      	<div class="col-md-12">
+			        <div class="col-md-12">
+		                <div id="seccion_oferta" class="form-group">
+		                  <label class="text-center">Oferta</label>
+		                  <p id="titulo_oferta"></p>
+		                </div>
+		            </div>
+		            <div class="col-md-12">
+						<label>Seleccione plan:</label>
+						<select name="planUsuario_convertir" id="planUsuario_convertir" class="form-control">
+							<?php
+							foreach ($planes as $plan) {							
+								echo "<option value='".Utils::encriptar($plan['id_empresa_plan'])."'>Plan ".utf8_encode($plan['nombre'])."(".date('Y-m-d',strtotime($plan['fecha_compra'])).") - ".$plan['num_publicaciones_rest']." publicaciones</option>";
+							}
+							?>
+						</select>
+						<br>
+					</div> 
+				</div>
+			</div>
+	      </div>
+	      <input type="hidden" name="convertirOferta" id="convertirOferta" value="1">
+	      <div class="modal-footer">
+	        <button type="button" id="cancelar_conversion" name="cancelar_conversion" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+	        <input type="button" id="button_convertir_oferta" name="button_convertir_oferta" class="btn btn-success" value="Convertir"> 
+	      </div>
+  		</form>
+    </div>    
+  </div>
 </div>
