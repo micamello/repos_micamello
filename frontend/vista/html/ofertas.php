@@ -406,7 +406,9 @@
 														echo ' <br> <span class="aspirantes">'.$cantd.'</span>';
 													}else{
 														//echo ' <br> <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver inscritos en la oferta\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')" class="aspirantes">'.$cantd.'</span>';
+
 														echo ' <br> <a class="aspirantes" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($o['id_ofertas']).'/1/">'.$cantd.'</a>';
+
 													}
 												?>
 								                </div>
