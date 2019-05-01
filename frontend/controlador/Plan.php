@@ -106,18 +106,19 @@ class Controlador_Plan extends Controlador_Base {
   }
  
   public function compra(){    
-    $idplan = Utils::getParam('idplan','',$this->data);    
+    $idplanen = Utils::getParam('idplan','',$this->data);    
     try{ 
-      if (empty($idplan)){
+      if (empty($idplanen)){
         throw new Exception("Debe seleccionar un plan para la compra");
       }
-       
-      $idplan = Utils::desencriptar($idplan); 
+          
+      $idplan = Utils::desencriptar(7);       
       $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
       $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
       $sucursal = SUCURSAL_ID; 
-      $tipoplan = ($tipousu == Modelo_Usuario::CANDIDATO) ? Modelo_Plan::CANDIDATO : Modelo_Plan::EMPRESA;
-      $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);
+      $tipoplan = ($tipousu == Modelo_Usuario::CANDIDATO) ? Modelo_Plan::CANDIDATO : Modelo_Plan::EMPRESA;     
+      
+      $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);      
       if (!isset($infoplan["id_plan"]) || empty($infoplan["id_plan"])){
         throw new Exception("El plan seleccionado no esta activo o no esta disponible");
       }
