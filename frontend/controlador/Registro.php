@@ -102,13 +102,20 @@ class Controlador_Registro extends Controlador_Base {
       if(!Utils::valida_fecha_mayor_edad($datosReg['fechaNac'])){
         throw new Exception("Debe ser mayor de edad");
       }
+
+      if(!Utils::validarTelefono($datosReg['celularCandEmp'])){
+        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+      }
     }
 
-    if(!Utils::validarTelefono($datosReg['celularCandEmp'])){
-      throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
-    }
 
     if($datosReg['tipo_usuario'] == 2){
+
+      if(!Utils::validarTelefono($datosReg['celularCandEmp']) && !Utils::validarTelefonoConvencional($datosReg['tel2ConEmp'])){
+        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+      }
+
+
       if(!Utils::validarTelefono($datosReg['tel1ConEmp'])){
         throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
       }

@@ -131,7 +131,6 @@ function camposDelForm(){
 		campos.push(sectorind);
 	}
 	// terminosCond
-	console.log(campos);
 	return campos;
 }
 
@@ -144,6 +143,7 @@ $('#regCandMic').on('click', function(){
 	}
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 1);
+	celularCandEmp.prev('label')[0].innerHTML = "Celular";
 	riseModal();
 });
 
@@ -167,6 +167,7 @@ $('#regEmpMic').on('click', function(){
 	var tags = camposDelForm();
 	// funcion mostrar dependiente del tipo de usuario
 	showTags(tags, 2);
+	celularCandEmp.prev('label')[0].innerHTML = "Teléfono";
 	riseModal();
 });
 
@@ -330,20 +331,41 @@ function validarOnSubmit(){
 		crearMensajeError(camposavalidar[2], "Rellene este campo");
 	}
 
-// Campo celularCandEmp-------------------------------------
+
+	if(tipo_usuario == 2){
+		// Campo celularCandEmp-------------------------------------
 	if(camposavalidar[3].val() != ""){
-		if(!validarTelefono(camposavalidar[3].val())){
-			crearMensajeError(camposavalidar[3], "Longitud entre 10 y 15 dígitos");
+		if(validarTelefono(camposavalidar[3].val()) || validarTelefonoConvencional(camposavalidar[3].val())){
+				eliminarMensajeError(camposavalidar[3], "");
+			}
+			else{
+				crearMensajeError(camposavalidar[3], "Longitud entre 10 y 15 dígitos");
+			}
+		}else{
+			crearMensajeError(camposavalidar[3], "Rellene este campo");
 		}
-		else{
-			eliminarMensajeError(camposavalidar[3], "");
-		}
-	}else{
-		crearMensajeError(camposavalidar[3], "Rellene este campo");
 	}
+
+
 
 // Campo tipoDoc-------------------------------------
 	if(tipo_usuario == 1){
+
+// Campo celularCandEmp-------------------------------------
+		if(camposavalidar[3].val() != ""){
+			if(!validarTelefono(camposavalidar[3].val())){
+				crearMensajeError(camposavalidar[3], "Longitud entre 10 y 15 dígitos");
+			}
+			else{
+				eliminarMensajeError(camposavalidar[3], "");
+			}
+		}else{
+			crearMensajeError(camposavalidar[3], "Rellene este campo");
+		}
+
+
+
+
 		if(camposavalidar[4].val() != ""){
 			eliminarMensajeError(camposavalidar[4], "");
 		}else{
@@ -497,7 +519,6 @@ function validarOnSubmit(){
 
 // Campo tipoDoc-------------------------------------
 	if(tipo_usuario == 2){
-		console.log(tipo_usuario+"---"+camposavalidar[15].val());
 		if(camposavalidar[15].val() == "" || camposavalidar[15].val() == null){
 			crearMensajeError(camposavalidar[15], "Seleccione una opción");
 			
@@ -627,12 +648,23 @@ $('#modal_registro').on('show.bs.modal', function(){
 
 	if($('#celularCandEmp').length){
 		$('#celularCandEmp').on('blur', function(){
+			var tipo_user = $('#tipo_usuario').val();
 			if($(this).val() != ""){
-				if(!validarTelefono($(this).val())){
-					crearMensajeError($(this), "Longitud entre 10 y 15 dígitos");
+				if(tipo_user == 2){
+					if(validarTelefono($(this).val()) || validarTelefonoConvencional($(this).val())){
+						eliminarMensajeError($(this), "");
+					}
+					else{
+						crearMensajeError($(this), "Longitud entre 10 y 15 dígitos");
+					}
 				}
 				else{
-					eliminarMensajeError($(this), "");
+					if(!validarTelefono($(this).val())){
+						crearMensajeError($(this), "Longitud entre 10 y 15 dígitos");
+					}
+					else{
+						eliminarMensajeError($(this), "");
+					}
 				}
 			}
 			else{
