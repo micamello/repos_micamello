@@ -234,9 +234,14 @@ class Controlador_Plan extends Controlador_Base {
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
+
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){
+//echo 'dsefsdF: '.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
+      if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
+        $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
+      }
       $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
       $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 

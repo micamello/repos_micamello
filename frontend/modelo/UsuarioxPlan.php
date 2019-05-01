@@ -104,19 +104,24 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->update('mfo_usuario_plan',$values_update,'id_usuario='.$usuario.' AND id_plan='.$plan);
   }
  
-  public static function disponibilidadDescarga($id_empresa){
-    $sql = "SELECT num_descarga_rest 
+  public static function disponibilidadDescarga($id_empresa,$id_oferta){
+    /*$sql = "SELECT num_descarga_rest 
             FROM mfo_empresa_plan  
             WHERE (num_descarga_rest > 0 or num_descarga_rest = -1) AND 
-                  id_empresa = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC";
-    $arrdatos = $GLOBALS['db']->auto_array($sql,array($id_empresa),true);
-    $datos = array();
+                  id_empresa = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC";*/
+    $sql = "SELECT limite_perfiles FROM mfo_empresa_plan ep, mfo_plan p, mfo_oferta o
+            WHERE ep.id_empresa = ? 
+            AND ep.estado = 1 AND ep.id_plan = p.id_plan AND o.id_empresa_plan = ep.id_empresa_plan 
+            AND o.id_ofertas = ?";
+    $rs = $GLOBALS['db']->auto_array($sql,array($id_empresa,$id_oferta),false);
+    /*$datos = array();
     if (!empty($arrdatos) && is_array($arrdatos)){
       foreach ($arrdatos as $key => $value) {
         array_push($datos,$value['num_descarga_rest']);
       }
     }
-    return $datos;
+    return $datos;*/
+    if (empty($rs['limite_perfiles'])){ return false; } else{ return $rs['limite_perfiles']; }
   }
  
   public static function obtenerAspiranteSegunPlanContratado($id_usuario,$id_usuario_plan){

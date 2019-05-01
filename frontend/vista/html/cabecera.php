@@ -58,7 +58,7 @@
 <body>
 
 <!--                       LEY DE COOKIES                     -->
-<div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+<!--<div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -72,14 +72,14 @@
             <br>
             <center>
               <a href="#" class="ok" onclick="CrearCookie();"><b>OK</b></a> | 
-              <a href="<?php echo PUERTO."://".HOST;?>/docs/politicas_de_cookies.pdf" target="_blank" class="info">M&aacute;s informaci&oacute;n</a>
+              <a href="<?php #echo PUERTO."://".HOST;?>/docs/politicas_de_cookies.pdf" target="_blank" class="info">M&aacute;s informaci&oacute;n</a>
             </center> 
           </div>
         </div>
       </div>      
     </div>
   </div>
-</div>
+</div>-->
 
 <!--NOTIFICACIONES-->
 <?php

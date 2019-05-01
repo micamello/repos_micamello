@@ -48,7 +48,7 @@ define('DISCAPACIDAD',array('1'=>'S&iacute;','2'=>'No'));
 //define('FILTRO_PREFERENCIAS_DEFAULT',0);
 
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
-define('REGISTRO_PAGINA',10);
+define('REGISTRO_PAGINA',3);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
 define('ESTADO_CIVIL',array('1'=>'Soltero(a)', '2'=>'Unión libre', '3'=>'Casado(a)', '4'=>'Separado(a)','5'=>'Divorciado(a)','6'=>'Viudo(a)','7'=>'Otro'));

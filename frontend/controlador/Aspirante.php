@@ -30,8 +30,9 @@ class Controlador_Aspirante extends Controlador_Base
         $mostrar = Utils::getParam('mostrar', '', $this->data);
         $opcion = Utils::getParam('opcion', '', $this->data);
         $page = Utils::getParam('page', '1', $this->data);
-        $id_oferta = Utils::getParam('id_oferta', '', $this->data); 
-        $id_oferta = (!empty($id_oferta)) ? Utils::desencriptar($id_oferta) : $id_oferta;        
+        $id_oferta = Utils::getParam('id_oferta', '', $this->data);
+        $id_oferta = (!empty($id_oferta)) ? Utils::desencriptar($id_oferta) : $id_oferta;   
+    
         $type = Utils::getParam('type', '', $this->data); 
         $vista = Utils::getParam('vista', '', $this->data);
         $username = Utils::getParam('username', '', $this->data);
@@ -50,12 +51,13 @@ class Controlador_Aspirante extends Controlador_Base
         }
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_aspirantes'])){
-            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>0,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
+            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,/*'T'=>0,*/'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
         }
 
         $facetas = Modelo_Faceta::obtenerFacetas();
         $cantd_facetas = count($facetas);
         $datos_usuarios = Modelo_PorcentajexFaceta::usuariosxfaceta();
+
 
         switch ($opcion) {
             case 'filtrar':       
@@ -68,11 +70,29 @@ class Controlador_Aspirante extends Controlador_Base
                 $situacionLaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
                 $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
+                $planes = $datosOferta = array();
 
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista'],$this->data['enviar_accesos']);
 
                 $cadena = '';
                 $array_datos = $aspirantesFiltrados = array();
+
+                if($vista == 1){
+                    $datos_plan = Modelo_Oferta::obtenerPlanOferta($id_oferta);
+                    $limite_plan = (int)$datos_plan['limite_perfiles'];
+                    $id_plan = $datos_plan['id_plan'];
+                    $id_empresa_plan = $datos_plan['id_empresa_plan'];
+                    $num_accesos_rest = $datos_plan['num_accesos_rest'];
+                    $nombre_plan = $datos_plan['nombre_plan'];
+                    $costo = $datos_plan['costo'];
+                }else{
+                    $nombre_plan = '';
+                    $limite_plan = '';
+                    $id_plan = false;
+                    $id_empresa_plan = false;
+                    $num_accesos_rest = 0;
+                    $costo = -1;
+                }
 
                 foreach ($this->data as $param => $value) {
                     
@@ -287,49 +307,53 @@ class Controlador_Aspirante extends Controlador_Base
                     }
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
 
-                    $datos_plan = Modelo_Oferta::obtenerPlanOferta($id_oferta);
+                    /*$datos_plan = Modelo_Oferta::obtenerPlanOferta($id_oferta);
                     $limite_plan = (int)$datos_plan['limite_perfiles'];
                     $id_plan = $datos_plan['id_plan'];
                     $id_empresa_plan = $datos_plan['id_empresa_plan'];
                     $num_accesos_rest = $datos_plan['num_accesos_rest'];
                     $nombre_plan = $datos_plan['nombre_plan'];
-                    $costo = $datos_plan['costo'];
+                    $costo = $datos_plan['costo'];*/
 
-                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,$limite_plan,true);   
+                    $filtros = $_SESSION['mfo_datos']['Filtrar_aspirantes'];
+                    //print_r($filtros);
+                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) && $filtros['O'] == 1 && empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C'])){
+                        $limite_filtrado = '';
+                    }else{
+                        $limite_filtrado = $limite_plan;
+                    }
 
-                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,$limite_plan,false);
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,true);   
+
+                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,false);
 
                     if(!empty($limite_plan)){
 
-                        if($limite_plan >= count($cantd_aspirantes)){
+                        foreach ($_SESSION['mfo_datos']['planes'] as $plan) {
+                          $planUsuario = Modelo_UsuarioxPlan::consultarRecursosAretornar($plan['id_empresa_plan']);
+                            if($plan['num_rest'] > 0){
+                              array_push($planes, $planUsuario);
+                            }
+                        }
+
+                        /*if($limite_plan >= count($cantd_aspirantes)){
                             $limite_aspirantes = count($cantd_aspirantes);
                         }else{
                             $limite_aspirantes = $limite_plan;
-                        }
-                    }else{
+                        }*/
+                    }/*else{*/
                         $limite_aspirantes = count($cantd_aspirantes);
-                    } 
+                    //} 
 
                 }else{
 
                     $id_oferta = 0;
                     $breadcrumbs['vacantes'] = 'Ver Ofertas';
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
-                    
                     $cantd_aspirantes = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,true);
-
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,false);
-
                     $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);
-
                     $limite_aspirantes = count($cantd_aspirantes);
-
-                    $nombre_plan = '';
-                    $limite_plan = '';
-                    $id_plan = false;
-                    $id_empresa_plan = false;
-                    $num_accesos_rest = 0;
-                    $costo = -1;
                 }
 
                 $enviar_accesos = Utils::getParam('enviar_accesos', '', $this->data);
@@ -339,8 +363,8 @@ class Controlador_Aspirante extends Controlador_Base
                     $this->enviarAccesos($idUsuario,$tipoUsuario,$ruta.'/'.$page.'/',$vista,$cantd_facetas,$id_empresa_plan);
                 }
 
-                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario);
-                $descargas = Modelo_Descarga::cantidadDescarga($idUsuario);
+                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario,$id_oferta);
+                $descargas = Modelo_Descarga::descargas($idUsuario,$id_oferta);
 
                 $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];
                 $arrprovincia = $_SESSION['mfo_datos']['arrprovincia'];
@@ -375,7 +399,8 @@ class Controlador_Aspirante extends Controlador_Base
                     //'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
-                    'num_accesos_rest'=>$num_accesos_rest
+                    'num_accesos_rest'=>$num_accesos_rest,
+                    'planes'=>$planes
                 );
          
                 //$url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
@@ -468,11 +493,12 @@ class Controlador_Aspirante extends Controlador_Base
 
             default:
                 
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,'F'=>0,'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
+                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,/*'T'=>0,*/'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
 
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
+                $planes = array();
                 //print_r($usuariosConAccesos);
                 //solo empresa 
                 if ($tipoUsuario != Modelo_Usuario::EMPRESA){
@@ -493,6 +519,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                 if($vista == 1){
 
+
                     if(isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
                         $breadcrumbs['vacantes'] = 'Ver Ofertas';
                     }else{
@@ -508,20 +535,27 @@ class Controlador_Aspirante extends Controlador_Base
                     $nombre_plan = $datos_plan['nombre_plan'];
                     $costo = $datos_plan['costo'];
                    
-                    $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,$limite_plan,$cantd_facetas,false);
-                    $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,$limite_plan,$cantd_facetas,true);
+                    $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,/*$limite_plan*/'',$cantd_facetas,false);
+                    $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,/*$limite_plan*/'',$cantd_facetas,true);
 
                     $cantd_total = count($paises);
                     if(!empty($limite_plan)){
+                        
+                        foreach ($_SESSION['mfo_datos']['planes'] as $plan) {
+                          $planUsuario = Modelo_UsuarioxPlan::consultarRecursosAretornar($plan['id_empresa_plan']);
+                            if($plan['num_rest'] > 0){
+                              array_push($planes, $planUsuario);
+                            }
+                        }
 
-                        if($limite_plan >= $cantd_total){
+                        /*if($limite_plan >= $cantd_total){
                             $limite_aspirantes = $cantd_total;
                         }else{
                             $limite_aspirantes = $limite_plan;
-                        }
-                    }else{
+                        }*/
+                    }/*else{*/
                         $limite_aspirantes = $cantd_total;
-                    }         
+                    //}         
 
                     //$url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta);
                 }else{
@@ -551,8 +585,8 @@ class Controlador_Aspirante extends Controlador_Base
                     $this->enviarAccesos($idUsuario,$tipoUsuario,$ruta.'/'.$page.'/',$vista,$cantd_facetas,$id_empresa_plan);
                 }
 
-                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario);
-                $descargas = Modelo_Descarga::cantidadDescarga($idUsuario);
+                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario,$id_oferta);
+                $descargas = Modelo_Descarga::descargas($idUsuario,$id_oferta);
                 
                 $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();
 
@@ -599,7 +633,8 @@ class Controlador_Aspirante extends Controlador_Base
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest,
-                    'cantd_total'=>$cantd_total
+                    'cantd_total'=>$cantd_total,
+                    'planes'=>$planes
                 );
 
                 $tags["template_js"][] = "ion.rangeSlider.min";

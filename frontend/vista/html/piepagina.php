@@ -31,7 +31,7 @@
       <div class="modal-body">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-        <form action="<?php echo PUERTO."://".HOST;?>/registro/" method="post" id="form_register">
+        <form action="<?php echo PUERTO."://".HOST;?>/registro/" method="post" id="form_register" autocomplete="off">
           <input type="hidden" name="tipo_usuario" id="tipo_usuario">
           <input type="hidden" name="tipo_documentacion" id="tipo_documentacion">
           <input type="hidden" name="formularioRegistro" id="formularioRegistro" value="1">
@@ -127,7 +127,7 @@
                   <label>Contraseña <i class="obligatorio">*</i></label>
                   <div class="inner-addon right-addon">
                     <i class="fa fa-eye reveal_content" title="Mostrar contraseña"></i>
-                    <input type="password" class="form-control" name="password_1" id="password_1">
+                    <input type="password" class="form-control" name="password_1" id="password_1" spellcheck="false">
                     <div></div>
                   </div>
                 </div>
@@ -138,7 +138,7 @@
                   <label>Repita contraseña <i class="obligatorio">*</i></label>
                   <div class="inner-addon right-addon">
                     <i class="fa fa-eye reveal_content"></i>
-                    <input type="password" class="form-control" name="password_2" id="password_2">
+                    <input type="password" class="form-control" name="password_2" id="password_2" spellcheck="false">
                     <div></div>
                   </div>
                 </div>
