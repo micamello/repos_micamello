@@ -14,7 +14,7 @@ class Controlador_Login extends Controlador_Base {
       try{
         $campos = array('username'=>1, 'password1'=>1);        
         $data = $this->camposRequeridos($campos);                        
-        $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password1"]);
+        $usuario = Modelo_Usuario::autenticacion($data["username"], $data["password1"]);        
         if (!empty($usuario)){                      
           if ($usuario["id_pais"] != SUCURSAL_PAISID){
             $sucursal = Modelo_Sucursal::consultaxPais($usuario["id_pais"]);

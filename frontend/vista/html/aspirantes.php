@@ -328,7 +328,6 @@
 										$letra = 'P';
 									}
 									$f .= $letra.'-';
-
 									$pos += 6;
 									
 									echo '<div id="fac_'.$i.'" style="float:left;width: 100%;"><div class="p-3">
@@ -628,19 +627,16 @@
 							    </thead>
 				        		<tbody>
 						        	<?php 	
-
 				        			//$_SESSION['mfo_datos']['registrosPagina']);
 						        	if(!empty($aspirantes)){ 
 						        		for ($i=0; $i < count($aspirantes); $i++) { 
 						        			$a = $aspirantes[$i]; 
 						        			$id_Usuario = Utils::encriptar($a['id_usuario']);
-
 											if($page > 1){
 						        				$num_aumentar = ($page-1)*REGISTRO_PAGINA;
 						        			}else{
 						        				$num_aumentar = 0;
 						        			}
-
 						        			if(!empty($limite_plan)){
 						        				$ver = false;
 						        				if($i <= ($limite_plan-1) && $num_aumentar <= ($limite_plan-1)){
@@ -667,11 +663,9 @@
 							            				if(!in_array($id_Usuario, $_SESSION['mfo_datos']['usuariosHabilitados'])){
 							            					array_push($_SESSION['mfo_datos']['usuariosHabilitados'],$id_Usuario);
 							            				}
-
 							            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] == ''){
 															
 							            					$mostrar = 'Acceso Enviado';
-
 							            				}
 							            			
 								            			if($mostrar == ''){
@@ -693,7 +687,6 @@
 								            			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 								            				echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.$a['nombres'].' '.$a['apellidos'].'</a>'; 
 								            			}else{
-
 								            				if(!$ver){ 
 								            					echo '-';
 								            				}else{
@@ -746,7 +739,6 @@
 																	//}
 																}*/
 															}else{
-
 																if(!$ver){
 																	echo '-';
 																}else{
@@ -760,9 +752,7 @@
 														echo '<td title="Descargar Informe de personalidad ';
 									            			$color = '';
 									            			$title = 'completo';
-
 									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
-
 									            				$color = ' parcial';
 									            				$title = 'parcial';	
 									            			}
@@ -776,7 +766,6 @@
 															}else{
 							
 																if($mostrar == ''){
-
 																	if(!$ver){
 																		echo '-';
 																	}else{
@@ -858,9 +847,7 @@
 			</div>
 			
 			<?php 
-
 				if(/*$costo == 0 && */!empty($limite_plan)){ 
-
 					if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
 						echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
 					}else{
