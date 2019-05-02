@@ -36,9 +36,13 @@ class Controlador_Oferta extends Controlador_Base{
         $_SESSION['mfo_datos']['usuarioSeleccionado'] = array();
         $_SESSION['mfo_datos']['ultimaVistaActiva'] = $vista;
         $_SESSION['mfo_datos']['usuariosHabilitados'] = array();
+        if(empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores'])){ 
+          $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
+          Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+        }
       }
 
-      if($vista == 'oferta' || $opcion == 'vacantes'){        
+      if($vista == 'oferta' /*|| $opcion == 'vacantes'*/){        
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['infohv'],$planes,$vista);
       }
 

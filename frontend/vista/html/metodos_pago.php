@@ -306,11 +306,11 @@
               <div class="col-xs-12 col-md-12">
                 <div class="breadcrumb" align="center">                  
                   <label>Plan Seleccionado</label>&nbsp;<?php echo $plan["nombre"];?>
-                  <input type="hidden" name="acquirerId" id="acquirerId" value="<?php echo ACQUIRERID;?>" />
-                  <input type="hidden" name ="idCommerce" id="idCommerce" value="<?php echo IDCOMMERCE; ?>" />
+                  <input type="hidden" name="acquirerId" id="acquirerId" value="<?php //echo ACQUIRERID;?>" />
+                  <input type="hidden" name ="idCommerce" id="idCommerce" value="<?php //echo IDCOMMERCE; ?>" />
                   <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $transid; ?>" />
                   <input type="hidden" name="purchaseAmount" id="purchaseAmount" value="<?php echo $plan["costo"]; ?>" />
-                  <input type="hidden" name="purchaseCurrencyCode" id="purchaseCurrencyCode" value="<?php echo CURRENCY_CODE; ?>" />
+                  <input type="hidden" name="purchaseCurrencyCode" id="purchaseCurrencyCode" value="<?php //echo CURRENCY_CODE; ?>" />
                   <input type="hidden" name="language" id="language" value="SP" />
                   <input type="hidden" name="shippingState" id="shippingState" value="" />
                   <input type="hidden" name="shippingCity" id="shippingCity" value="" />

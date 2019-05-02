@@ -917,9 +917,8 @@ WHERE
       }
     }  
     //si es empresa
-    else{ 
-
-      if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
+    else{       
+      if(empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores'])){ 
         $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }  
