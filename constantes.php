@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'micamello_desarrollo3');
+define('DBNOMBRE', 'base_fer');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -35,6 +35,9 @@ define('PRIORIDAD', array('1'=>'Informe Parcial', '2'=>'Informe Completo'));
 define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
 define('SALARIO', array('1'=>'Menos de 386', '2'=>'Entre 386 y 700', '3'=>'Entre 700 y 1200', '4'=>'M&aacute;s de 1200'));
 define('EDADES', array('1'=>'18 a 25 A&ntilde;os', '2'=>'25 a 35 A&ntilde;os', '3'=>'35 a 45 A&ntilde;os', '4'=>'M&aacute;s de 45 a&ntilde;os'));
+
+define('NRO_TRABAJADORES', array('1'=>'De 1 a 10 trabajadores', '2'=>'De 11 a 50 trabajadores', '3'=>'De 51 a 200 trabajadores', '4'=>'De 201 a 500 trabajadores','5'=>'De 501 a 1000 trabajadores','6'=>'M&aacute;s de 1000 trabajadores'));
+
 define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as', '3'=>'&Uacute;ltima semana', '4'=>'&Uacute;ltimo mes'));
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));

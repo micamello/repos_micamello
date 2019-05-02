@@ -51,9 +51,9 @@ class Modelo_Usuario{
               WHERE u.id_usuario_login = ?";
     }
     else{
-      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
+      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
                      e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
-                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
               FROM mfo_empresa e
               INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -236,10 +236,10 @@ WHERE
         WHERE u.id_usuario = ? AND u.estado = 1";
     }
     else{
-      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
+      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
                       e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
                      t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, ul.id_usuario_login, ul.correo, 
-                     ul.dni, ul.username, ul.tipo_usuario,p.id_pais
+                     ul.dni, ul.username, ul.tipo_usuario,p.id_pais, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
               FROM mfo_empresa e
               INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = e.id_usuario_login
               INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
@@ -281,7 +281,7 @@ WHERE
       }
       return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
     }else{
-      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad']);
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"id_nacionalidad"=>$data['id_nacionalidad'],"id_sectorindustrial"=>$data['sectorind'],"pagina_web"=>$data['pagina_web'],"nro_trabajadores"=>$data['nro_trabajadores']);
       return $GLOBALS['db']->update("mfo_empresa",$datos,"id_empresa=".$idUsuario);
     }
   }
@@ -879,10 +879,11 @@ WHERE
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
-            
+          
       if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
-      }        
+      }    
+
       if (empty($infohv)){
         $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -916,7 +917,12 @@ WHERE
       }
     }  
     //si es empresa
-    else{  
+    else{ 
+
+      if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
+        $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
+        Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+      }  
       if (isset($planes)){
         Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
       }

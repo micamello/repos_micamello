@@ -172,6 +172,8 @@ $('#btn_accesos_confirmar').on('click', function(){
 });
 
 $('#btn_accesos').on('click', function(){
+	
+	$('#aviso_accesos').modal();
 	activar();
 });
 

@@ -38,7 +38,7 @@ class Controlador_Oferta extends Controlador_Base{
         $_SESSION['mfo_datos']['usuariosHabilitados'] = array();
       }
 
-      if($vista == 'oferta'){        
+      if($vista == 'oferta' || $opcion == 'vacantes'){        
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['infohv'],$planes,$vista);
       }
 

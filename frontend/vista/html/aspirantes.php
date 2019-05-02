@@ -847,7 +847,7 @@
 			</div>
 			
 			<?php 
-				if(/*$costo == 0 && */!empty($limite_plan)){ 
+				if(/*$costo == 0 && */!empty($limite_plan) && $cantd_total > $limite_plan){ 
 					if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
 						echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
 					}else{
@@ -872,7 +872,7 @@
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Convertir Oferta</h5>                  
+        <h5 class="modal-title" id="title_convertir">Convertir Oferta</h5>                  
       </div>
       	<form action = "<?php echo PUERTO."://".HOST;?>/convertir/" method = "post" id="form_convertir" name="form_convertir">
 	      <div class="modal-body">
@@ -904,6 +904,34 @@
 	        <input type="button" id="button_convertir_oferta" name="button_convertir_oferta" class="btn btn-success" value="Convertir"> 
 	      </div>
   		</form>
+    </div>    
+  </div>
+</div>
+
+<div class="modal fade" id="aviso_accesos" tabindex="-1" role="dialog" aria-labelledby="aviso_accesos" aria-hidden="true" data-backdrop="static">
+  <div class="modal-dialog" role="document">    
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="title">ACTIVAR ACCESOS</h5>                  
+      </div>
+		<div class="modal-body">
+			<div class="row">
+			  	<div class="col-md-12">
+			        <p align="justify">Los accesos tienen como funcionalidad, permitir que las empresas completen el proceso de selecci&oacute;n.</p>
+
+		            <p align="justify"><b>Beneficios<b></p>
+		            <ul align="justify">
+						<li type="circle">La empresa puede completar el proceso de selecci&oacute;n de personal.</li>
+						<li type="circle">La empresa puede escoger el(los) candidato(s) para que finalice el test de personalidad CANEA.</li>
+						<li type="circle">La empresa puede activar uno o varios accesos, de acuerdo al plan que haya contratado.</li>
+						<li type="circle">Si no posee ning&uacute;n plan contratado debe adquirir uno para disfrutar de este beneficio.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+		</div>
     </div>    
   </div>
 </div>

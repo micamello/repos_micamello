@@ -16,6 +16,8 @@ class Controlador_Perfil extends Controlador_Base
         $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
         $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
         $msj1 = $imgArch1 = $btnDescarga = '';
+        $tipo_usuario = $_SESSION['mfo_datos']['usuario']['tipo_usuario'];
+
         //$breadcrumbs = array();
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
@@ -38,20 +40,30 @@ class Controlador_Perfil extends Controlador_Base
                 Vista::renderJSON($arrciudad);
                 break;
             default:
+
+                $arridioma = $arrnivelidioma = $escolaridad = $arrarea = $universidades = $puedeDescargarInforme = $genero = $situacionLaboral = $licencia = $estado_civil = $areas = $arrsectorind = $nivelIdiomas = $cargo = array();          
+
                 //Listados de datos para llenar los select de la vista
-                $arridioma = Modelo_Idioma::obtieneListado();
-                $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
-                $escolaridad  = Modelo_Escolaridad::obtieneListado();
-                $arrarea      = Modelo_Area::obtieneListado();
-                $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
-                $puedeDescargarInforme = self::obtenerPermiso($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
+                    $arridioma = Modelo_Idioma::obtieneListado();
+                    $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
+                    $escolaridad  = Modelo_Escolaridad::obtieneListado();
+                    $arrarea      = Modelo_Area::obtieneListado();
+                    $universidades   = Modelo_Universidad::obtieneListado(SUCURSAL_PAISID);
+                    $puedeDescargarInforme = self::obtenerPermiso($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    $genero = Modelo_Genero::obtenerListadoGenero();
+                    $situacionLaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
+                    $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
+                    $estado_civil = Modelo_EstadoCivil::obtieneListado();
+                    $areas = Modelo_AreaSubarea::obtieneAreas_Subareas();
+                    $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                }else{
+                    $arrsectorind = Modelo_SectorIndustrial::consulta();
+                    $cargo = Modelo_Cargo::consulta();
+                }
+                
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
                 $nacionalidades = Modelo_Pais::obtieneListado();
-                $genero = Modelo_Genero::obtenerListadoGenero();
-                $situacionLaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
-                $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
-                $estado_civil = Modelo_EstadoCivil::obtieneListado();
-                $areas = Modelo_AreaSubarea::obtieneAreas_Subareas();
 
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
@@ -71,7 +83,7 @@ class Controlador_Perfil extends Controlador_Base
                     $btnSubir  = 0;
 
                     //Guarda los datos editados por el usuario
-                    $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
+                    $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
 
                 }
                 //Detecta si el parametro cambiarClave viene por post para así acceder al cambio de clave
@@ -90,10 +102,9 @@ class Controlador_Perfil extends Controlador_Base
                 //Obtiene los datos necesarios según los datos del usuario
                 $provincia    = Modelo_Provincia::obtieneProvincia($_SESSION['mfo_datos']['usuario']['id_ciudad']);
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($provincia['id_provincia']);
-                $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
 
                 //Valida que el único que guarda foto es el candidato y si tiene o no cargado uno previo
-                if (isset($_SESSION['mfo_datos']['usuario']['infohv']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
+                if (isset($_SESSION['mfo_datos']['usuario']['infohv']) && $tipo_usuario == Modelo_Usuario::CANDIDATO) {
                     if($_SESSION['mfo_datos']['usuario']['infohv']['formato'] == ''){
                         $imgArch1 = 'actualizar.png';
                     }else{
@@ -117,7 +128,6 @@ class Controlador_Perfil extends Controlador_Base
                 $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
-                    //'arrinteres'                => $arrinteres,
                     'areaxusuario'              => $areaxusuario,
                     'arrprovincia'              => $arrprovincia,
                     'nivelxusuario'             => $nivelxusuario,
@@ -143,14 +153,15 @@ class Controlador_Perfil extends Controlador_Base
                     'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'estado_civil'=>$estado_civil,
-                    'areas'=>$areas
+                    'areas'=>$areas,
+                    'arrsectorind'=>$arrsectorind,
+                    'cargo'=>$cargo
                 );
 
                 //Pasar a la vista los js y css que se van a necesitar
                 $tags["template_css"][] = "DateTimePicker";
                 $tags["template_css"][] = "multiple_select";
                 $tags["template_js"][] = "multiple_select";
-                //$tags["template_js"][] = "mic";
                 $tags["template_js"][] = "DniRuc_Validador";
                 $tags["template_js"][] = "DateTimePicker";
                 $tags["template_js"][] = "editarPerfil";
@@ -186,11 +197,11 @@ class Controlador_Perfil extends Controlador_Base
                     $campos['documentacion'] = 1;
                 }
             } else {
-                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'fecha_nacimiento' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0);
+                $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0,'pagina_web'=>0,'nro_trabajadores'=>1,'sectorind'=>1,'cargo'=>1);
             }
 
             $data = $this->camposRequeridos($campos);
-      
+
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
@@ -208,50 +219,22 @@ class Controlador_Perfil extends Controlador_Base
                         throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso m\u00E1x de 2MB");
                     }
                 }
-            }else{
-                $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
-                if (empty($validaTlf2)){
-                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no es v\u00E1lido");
-                }
-                if (strlen($data['tel_one_contact']) > 15) {
-                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " supera el l\u00CDmite permitido");
-                }
-                if (strlen($data['tel_one_contact']) < 10) {
-                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no alcanza el l\u00CDmite m\u00CDnimo permitido");
-                }
-                if(isset($_POST['tel_two_contact']) && !empty($_POST['tel_two_contact'])){
-                    $validaTlf3 = Utils::validarTelefonoConvencional($data['tel_two_contact']);
-                    if (empty($validaTlf3)) {
-                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no es v\u00E1lido");
-                    }
-                    if (strlen($data['tel_two_contact']) > 15) {
-                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
-                    }
-                    if (strlen($data['tel_two_contact']) < 6) {
-                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
-                    }
-                }
-                if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::EMPRESA)){
-                  throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
-                }
-            }
 
-            $validaTlf = Utils::valida_telefono($data['telefono']);
-            if (empty($validaTlf)) {
-                throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
-            }
-            if (strlen($data['telefono']) > 15) {
-                throw new Exception("El celular " . $data['telefono'] . " supera el l\u00CDmite permitido");
-            }
-            if (strlen($data['telefono']) < 10) {
-                throw new Exception("El celular " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
-            }
-            $validaFecha = Utils::valida_fecha($data['fecha_nacimiento']);
-            if (empty($validaFecha)) {
-                throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es v\u00E1lida");
-            }
-            
-            if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
+                $validaFecha = Utils::valida_fecha($data['fecha_nacimiento']);
+                if (empty($validaFecha)) {
+                    throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es v\u00E1lida");
+                }
+
+                $validaTlf = Utils::valida_telefono($data['telefono']);
+                if (empty($validaTlf)) {
+                    throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
+                }
+                if (strlen($data['telefono']) > 15) {
+                    throw new Exception("El celular " . $data['telefono'] . " supera el l\u00CDmite permitido");
+                }
+                if (strlen($data['telefono']) < 10) {
+                    throw new Exception("El celular " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
+                }
 
                 if(!empty($data['convencional'])){
                     $validaTlf = Utils::validarTelefonoConvencional($data['convencional']);
@@ -278,8 +261,58 @@ class Controlador_Perfil extends Controlador_Base
                 }
                 if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::CANDIDATO)){
                   throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
+                } 
+
+                $validaTlf = Utils::valida_telefono($data['telefono']);
+                if (!$validaTlf) {
+                    throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
+                }
+                if (strlen($data['telefono']) > 15) {
+                    throw new Exception("El celular " . $data['telefono'] . " supera el l\u00CDmite permitido");
+                }
+                if (strlen($data['telefono']) < 10) {
+                    throw new Exception("El celular " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
+                }
+
+            }else{
+                $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
+                if (empty($validaTlf2)){
+                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no es v\u00E1lido");
+                }
+                if (strlen($data['tel_one_contact']) > 15) {
+                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " supera el l\u00CDmite permitido");
+                }
+                if (strlen($data['tel_one_contact']) < 10) {
+                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no alcanza el l\u00CDmite m\u00CDnimo permitido");
+                }
+                if(isset($_POST['tel_two_contact']) && !empty($_POST['tel_two_contact'])){
+                    $validaTlf3 = Utils::validarTelefonoConvencional($data['tel_two_contact']);
+                    if (empty($validaTlf3)) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no es v\u00E1lido");
+                    }
+                    if (strlen($data['tel_two_contact']) > 15) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
+                    }
+                    if (strlen($data['tel_two_contact']) < 6) {
+                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
+                    }
+                }
+                if (!Utils::alfabetico($data['nombres'],Modelo_Usuario::EMPRESA)){
+                  throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
+                }
+
+                $validaTlf = Utils::valida_telefono($data['telefono']);
+                if (!$validaTlf) {
+                    throw new Exception("El tel\u00E9fono " . $data['telefono'] . " no es v\u00E1lido");
+                }
+                if (strlen($data['telefono']) > 15) {
+                    throw new Exception("El tel\u00E9fono " . $data['telefono'] . " supera el l\u00CDmite permitido");
+                }
+                if (strlen($data['telefono']) < 9) {
+                    throw new Exception("El tel\u00E9fono " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
                 }
             }
+
             if(strlen($data['nombres']) > 100){
               throw new Exception("Nombres: " . $data['nombres'] . " supera el l\u00CDmite permitido");
             }
@@ -311,12 +344,19 @@ class Controlador_Perfil extends Controlador_Base
                 }else{
                     throw new Exception("Debe ingresar una universidad");
                 }
-            }else{                  
+            }else{             
+
                 if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
                     throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
                 }
                 if (!Modelo_ContactoEmpresa::editarContactoEmpresa($data, $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
+                }
+
+                if(strlen($data['pagina_web']) > 0){
+                    if (!Utils::validaURL($data['pagina_web'])){
+                      throw new Exception("La p\u00E1gina web: " . $data['pagina_web'] . " formato no permitido");  
+                    }
                 }
             }
             if (!empty($imagen) && $imagen['error'] != 4) {

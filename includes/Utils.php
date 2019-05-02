@@ -309,13 +309,20 @@ class Utils{
     else return false; 
   }
 
+  public static function validaURL($url){ 
+    if (preg_match("/^(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?$/",$url)) 
+      return true; 
+    else return false; 
+  }
 
 // public static function validarTelefono($contenido){
 //   return preg_match("/^[0-9]{10,15}+$/", $contenido);
 // }
 
 public static function validarTelefonoConvencional($contenido){
-  return preg_match("/^[0-9]{6,15}+$/", $contenido);
+  if (preg_match("/^[0-9]{9,15}+$/",$contenido)) 
+    return true; 
+  else return false; 
 }
 
   //en formato de YYYY-MM-DD o YYYY-MM-DD HH:MM:SS

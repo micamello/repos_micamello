@@ -328,7 +328,7 @@ class Controlador_Registro extends Controlador_Base {
       if (!$this->correoActivacionRedSocial($correo,$nombres,$token,$username,$password)){
         throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
       }
-      $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entreda o spam para activar tu cuenta';  
+      $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar tu cuenta';  
     } 
     catch (Exception $e) {
       $GLOBALS['db']->rollback();
