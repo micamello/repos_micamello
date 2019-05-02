@@ -35,7 +35,7 @@ class Modelo_Usuario{
   }
   public static function autenticacion($username, $password){
     $password = md5($password);         
-    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, cod_payme
+    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?) AND password = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
@@ -174,9 +174,7 @@ WHERE
     $rs = $GLOBALS['db']->auto_array($sql,array($dni));
     return (empty($rs['dni'])) ? false : $rs['id_usuario_login'];
   }
-  public static function crearUsuario($dato_registro){   
-    var_dump($dato_registro);
-    // exit();
+  public static function crearUsuario($dato_registro){       
     if(empty($dato_registro)){return false;}
     if ($dato_registro['tipo_usuario'] == 1) {
       $result = $GLOBALS['db']->insert('mfo_usuario',array('telefono'=>$dato_registro['telefono'], 
@@ -196,7 +194,7 @@ WHERE
                 'id_usuario_login'=>$dato_registro['id_usuario_login']));
     }
     else{
-      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'fecha_nacimiento'=>$dato_registro['fecha_nacimiento'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado'], 'id_sectorindustrial'=>$dato_registro['id_sectorindustrial']);
+      $arreglo_datos = array('telefono'=>$dato_registro['telefono'], 'nombres'=>$dato_registro['nombres'],'nro_trabajadores'=>$dato_registro['nro_trabajadores'], 'fecha_creacion'=>$dato_registro['fecha_creacion'], 'term_cond'=>$dato_registro['term_cond'], 'id_ciudad'=>$dato_registro['id_ciudad'], 'id_nacionalidad'=>$dato_registro['id_nacionalidad'], 'id_usuario_login'=>$dato_registro['id_usuario_login'],'estado'=>$dato_registro['estado'], 'id_sectorindustrial'=>$dato_registro['id_sectorindustrial']);
       if(isset($dato_registro['padre'])){
         $arreglo_datos['padre'] = $dato_registro['padre'];
       }

@@ -205,7 +205,8 @@ class Controlador_Registro extends Controlador_Base {
     else{
       $data = array("nombres"=>$datosValidos['nombresCandEmp'],
                     "telefono"=>$datosValidos['celularCandEmp'],
-                    "fecha_nacimiento"=>$fechaNacimientoDefault,
+                    //"fecha_nacimiento"=>$fechaNacimientoDefault,
+                    "nro_trabajadores" => 0,                    
                     "fecha_creacion"=>$fechaDefault,/* -----*/
                     "estado"=>0,
                     "term_cond"=>1,
