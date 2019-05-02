@@ -276,13 +276,8 @@ class Utils{
   }
 
   public static function desencriptar($texto){   
-    $objaes = new Aes(KEY_ENCRIPTAR);
-    
-    /*$texto = (string)$texto;*/
+    $objaes = new Aes(KEY_ENCRIPTAR);    
     $desencriptado = hex2bin($texto);
-    /*var_dump($desencriptado);
-    exit;
-    Utils::log("B ".$desencriptado);   */
     return $objaes->decrypt($desencriptado);
   }
 

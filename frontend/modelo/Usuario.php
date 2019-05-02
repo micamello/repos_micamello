@@ -35,7 +35,7 @@ class Modelo_Usuario{
   }
   public static function autenticacion($username, $password){
     $password = md5($password);         
-    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, cod_payme
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?) AND password = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
@@ -51,7 +51,7 @@ class Modelo_Usuario{
               WHERE u.id_usuario_login = ?";
     }
     else{
-      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
+      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
                      e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
                      t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado
               FROM mfo_empresa e
@@ -236,7 +236,7 @@ WHERE
         WHERE u.id_usuario = ? AND u.estado = 1";
     }
     else{
-      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_nacimiento, e.fecha_creacion,
+      $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
                       e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
                      t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, ul.id_usuario_login, ul.correo, 
                      ul.dni, ul.username, ul.tipo_usuario,p.id_pais
