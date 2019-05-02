@@ -2,7 +2,7 @@
 class Modelo_Comprobante{
   
   const TIPO_PAGOS = array('1'=>'Pago verificado','2'=>'Pago incorrecto','3'=>'En proceso');
-  const METODOS_PAGOS = array('2'=>'Pay Me','1'=>'Dep&oacute;sito Bancario');
+  const METODOS_PAGOS = array('2'=>'Paypal','1'=>'Dep&oacute;sito Bancario', '3'=>'PayMe');
 
   const PAGO_PROCESO = 3;
   const PAGO_VERIFICADO = 1;

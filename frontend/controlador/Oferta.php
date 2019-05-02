@@ -86,7 +86,7 @@ class Controlador_Oferta extends Controlador_Base{
           $idOferta = Utils::desencriptar($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
           if (Utils::getParam('convertirOferta') == 1) {
             $id_empresa_plan = Utils::desencriptar(Utils::getParam('planUsuario_convertir', '', $this->data));
-            $datosOferta = Modelo_oferta::consultarOferta($idOferta);
+            $datosOferta = Modelo_Oferta::consultarOferta($idOferta);
             print_r($datosOferta); 
             $datosOferta[0]['id_empresa_plan'] = $id_empresa_plan;
 

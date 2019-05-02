@@ -9,10 +9,11 @@ set_time_limit(0);
 
 require_once '../constantes.php';
 require_once '../init.php';
-require_once '../multisitios.php';
+//require_once '../multisitios.php';
 
 define('SUCURSAL_PAISID',39);
-define('DOMINIO','micamello.com.ec');
+define('SUCURSAL_ISO','EC');
+//define('DOMINIO','micamello.com.ec');
 
 // pregunta si ya se esta ejecutando el cron sino crea el archivo
 $resultado = file_exists(CRON_RUTA.'procesando_preregistro.txt');
