@@ -353,9 +353,9 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
                 }
 
-                if(strlen($data['pagina_web']) > 0){
-                    if (!Utils::validaURL($data['pagina_web'])){
-                      throw new Exception("La p\u00E1gina web: " . $data['pagina_web'] . " formato no permitido");  
+                if(isset($_POST['pagina_web']) && strlen($_POST['pagina_web']) > 0){
+                    if (!Utils::validaURL($_POST['pagina_web'])){
+                      throw new Exception("La p\u00E1gina web: " . $_POST['pagina_web'] . " formato no permitido");  
                     }
                 }
             }
@@ -439,6 +439,8 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
                 if(!empty($array_subareas_seleccionadas)){
+
+                    //Utils::log(print_r($array_subareas_seleccionadas,true));
                     if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
                         throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
                     }

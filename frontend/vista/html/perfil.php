@@ -250,7 +250,7 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
 		                                	<div class="col-md-6">
 			                                    <div class="form-group" id="seccion_pag" >
 			                                        <label for="pagina_web">P&aacute;gina Web (Opcional)</label><div id="err_pag" class="help-block with-errors"></div>
-			                                        <input class="form-control" id="pagina_web" type="text" value="<?php if(isset($data['pagina_web'])){ echo $data['pagina_web']; } else{ echo $_SESSION['mfo_datos']['usuario']['pagina_web']; } ?>" onkeyup="validarFormulario(false)"/>
+			                                        <input class="form-control" id="pagina_web" name="pagina_web" type="text" value="<?php if(isset($data['pagina_web'])){ echo $data['pagina_web']; } else{ echo $_SESSION['mfo_datos']['usuario']['pagina_web']; } ?>" onkeyup="validarFormulario(false)"/>
 			                                    </div>
 		                                    </div>
 
