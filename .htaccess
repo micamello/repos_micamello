@@ -92,7 +92,7 @@ RewriteRule ^registroOferta/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar&opcio
 RewriteRule ^compraplan/exito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=exito [L]
 RewriteRule ^compraplan/error/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=error [L]
 RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
-RewriteRule ^compraplan/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra&idplan=$1 [L]
+RewriteRule ^compraplan/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra&idplan=$1 [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
 RewriteRule ^planesUsuario/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario [L]
 RewriteRule ^planesUsuario/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario&desactivarPlan=$1 [L]

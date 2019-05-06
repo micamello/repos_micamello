@@ -37,12 +37,13 @@ class Controlador_Publicar extends Controlador_Base {
         Vista::renderJSON($arrciudad);
       break;
       case 'buscaPlan':
-        $id_plan_empresa = Utils::getParam('id_plan', '', $this->data);        
-        $explodePlanEmpresa = explode("_", Utils::desencriptar($id_plan_empresa));                
+        $id_plan_empresa = Utils::getParam('id_plan', '', $this->data);                      
+        $explodePlanEmpresa = explode("_", Utils::desencriptar($id_plan_empresa));                        
         $id_plan = $explodePlanEmpresa[0];
         $id_empresa_plan = $explodePlanEmpresa[1];                
         $plan = Modelo_UsuarioxPlan::consultarRecursosAretornar($id_empresa_plan);           
         $confidencialPlan = array();
+        //Utils::log("FER ".print_r($plan,true));
         if(Modelo_PermisoPlan::busquedaPermisoxPlan($id_plan, 'publicarOfertaConfidencial')){
           $confidencialPlan = array_merge($plan, array('confidencial'=>0));
         }
@@ -53,8 +54,8 @@ class Controlador_Publicar extends Controlador_Base {
       break;
       case 'registroOferta':
         $datos = $_POST;
-        $validados = $this->validarCampos($datos);
         try {
+            $validados = $this->validarCampos($datos);
                 $GLOBALS['db']->beginTrans();
                   $this->guardarDatosOferta($validados);
                 $GLOBALS['db']->commit();
@@ -190,9 +191,10 @@ class Controlador_Publicar extends Controlador_Base {
         throw new Exception("Debe seleccionar al menos una sub\u00E1rea por \u00E1rea");
       }
 
-      if(count($datosReg['area_select']) != 1){
-        throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
-      }
+      //Utils::log(print_r($datosReg,true));
+      //if(count($datosReg['area_select']) != 1){
+      //    throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
+      //}
 
       $listadoIdiomasNivel = Modelo_NivelxIdioma::obtieneListado();
       $idiomaNivelIdioma = array();

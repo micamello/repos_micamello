@@ -5,14 +5,12 @@ class Controlador_Plan extends Controlador_Base {
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
-
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
       Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                      $_SESSION['mfo_datos']['usuario']['id_usuario'],
                                      (isset($_SESSION['mfo_datos']['usuario']['infohv']) ? $_SESSION['mfo_datos']['usuario']['infohv'] : null),
                                      (isset($_SESSION['mfo_datos']['planes']) ? $_SESSION['mfo_datos']['planes'] : null)); 
     }
-
     $breadcrumbs = array();
     $opcion = Utils::getParam('opcion','',$this->data);      
     switch($opcion){      
@@ -38,15 +36,11 @@ class Controlador_Plan extends Controlador_Base {
   }
  
   public function planesUsuario(){
-
     $breadcrumbs['planesUsuario'] = 'Mis planes';
     $desactivarPlan = Utils::getParam('desactivarPlan', '', $this->data);
- 
     if(!empty($desactivarPlan)){
- 
         $id_usuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
         $aspirantes = Modelo_UsuarioxPlan::obtenerAspiranteSegunPlanContratado($id_usuario,$desactivarPlan);
- 
         if($aspirantes['aspirantes'] == 0){
           $r = Modelo_UsuarioxPlan::desactivarPlan($desactivarPlan);
           if(!$r){
@@ -59,19 +53,15 @@ class Controlador_Plan extends Controlador_Base {
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
     }
- 
     //Obtiene todos los banner activos segun el tipo
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);    
     $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
- 
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
-
     $tags = self::mostrarDefault(2);    
     $tags["show_banner"] = 1;
     $tags["planUsuario"] = $planUsuario;
     $tags['breadcrumbs'] = $breadcrumbs;
- 
     Vista::render('planes_usuario',$tags); 
   }
  
@@ -87,16 +77,12 @@ class Controlador_Plan extends Controlador_Base {
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
     }    
- 
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
-    $tags["show_banner"] = 1;
-     
+    $tags["show_banner"] = 1;     
     $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
- 
     $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";          
- 
     if($tipo == 1){    
       Vista::render($render, $tags); 
     }else{            
@@ -106,31 +92,27 @@ class Controlador_Plan extends Controlador_Base {
   }
  
   public function compra(){    
-    $idplanen = Utils::getParam('idplan','',$this->data);    
+    $idplan = Utils::getParam('idplan','',$this->data);
     try{ 
-      if (empty($idplanen)){
+      if (empty($idplan)){
         throw new Exception("Debe seleccionar un plan para la compra");
-      }
-          
-      $idplan = Utils::desencriptar(7);       
+      }       
+      $idplan = Utils::desencriptar($idplan);
       $idusu = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
       $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
       $sucursal = SUCURSAL_ID; 
-      $tipoplan = ($tipousu == Modelo_Usuario::CANDIDATO) ? Modelo_Plan::CANDIDATO : Modelo_Plan::EMPRESA;     
-      
-      $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);      
+      $tipoplan = ($tipousu == Modelo_Usuario::CANDIDATO) ? Modelo_Plan::CANDIDATO : Modelo_Plan::EMPRESA;
+      $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);
       if (!isset($infoplan["id_plan"]) || empty($infoplan["id_plan"])){
         throw new Exception("El plan seleccionado no esta activo o no esta disponible");
-      }
-      if (empty($infoplan["costo"])){        
+      }      
+      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $tipousu == Modelo_Usuario::EMPRESA)){        
         if ($this->existePlan($infoplan["id_plan"])){
           throw new Exception("Ya esta subscrito al plan seleccionado");   
-        }
-                 
-        if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"])){
+        }                 
+        if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"])){
           throw new Exception("Error al registrar la subscripci\u00F3n, por favor intente denuevo");   
-        }  
-        
+        }          
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
         if ($tipousu == Modelo_Usuario::CANDIDATO){
           $_SESSION['mostrar_exito'] = "Subcripci\u00F3n exitosa, ahora puede postular a una oferta"; 
@@ -141,22 +123,25 @@ class Controlador_Plan extends Controlador_Base {
           $this->redirectToController('publicar');
         }
       }
-      else{
+      else{        
+        if (empty($_SESSION['mfo_datos']['usuario']['cod_payme'])){
+
+        }
+        else{
+          $tags["cod_payme"] = $_SESSION['mfo_datos']['usuario']['cod_payme'];
+        }
         //presenta metodos de pago
         $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);        
         $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
         $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
-        $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado(); 
-        $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);         
-        $tags["transid"] = Utils::generarTransId('C');
-        $tags["purchaseVerification"] = openssl_digest(ACQUIRERID . IDCOMMERCE . $tags["transid"] . $infoplan["costo"] . CURRENCY_CODE . PAYME_SECRET_KEY, 'sha512'); 
+        $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
+        $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
         $tags["template_js"][] = "DniRuc_Validador";
         //$tags["template_js"][] = "mic";
         $tags["template_js"][] = "metodospago";              
         Vista::render('metodos_pago', $tags);      
-      }
-       
+      }       
     }
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
@@ -209,7 +194,6 @@ class Controlador_Plan extends Controlador_Base {
       }
        
       $archivo = Utils::validaExt($_FILES['imagen'],3);
-
       if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],$data["telefono"],
                                                   $data["dni"],$data["tipo_doc"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
                                                   $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],$data["idplan"],
@@ -222,7 +206,6 @@ class Controlador_Plan extends Controlador_Base {
       if (!Utils::upload($_FILES['imagen'],$id_comprobante,PATH_COMPROBANTE,3)){
         throw new Exception("Error al cargar la imagen, por favor intente denuevo");
       }
-
       $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
       $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan ser\u00E1 aprobado en un m\u00E1ximo de ".$tiempo." horas";  
       Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
@@ -237,11 +220,9 @@ class Controlador_Plan extends Controlador_Base {
     $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
     $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
-
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){
-//echo 'dsefsdF: '.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
       if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
         $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
       }
@@ -253,5 +234,50 @@ class Controlador_Plan extends Controlador_Base {
     Vista::render($template, $tags);       
   }
 
+  public function generarCodPayMe(){
+    $idEntCommerce = '580';
+    $codCardHolderCommerce = '40';
+    $names = 'Juan';
+    $lastNames = 'Perez';
+    $mail = 'desarrollo@micamello.com.ec';
+    $reserved1 = '';
+    $reserved2 = '';
+    $reserved3 = '';
+
+    //Clave SHA-2.
+    $claveSecreta = 'frepFfNABxuWSrdrmm$55695532889';
+
+    //VERSION PHP >= 5.3
+    //echo openssl_digest('', 'sha512');
+    //VERSION PHP < 5.3
+    //echo hash('sha512', $idEntCommerce . $codCardHolderCommerce . $mail . $claveSecreta);
+    $registerVerification = openssl_digest($idEntCommerce . $codCardHolderCommerce . $mail . $claveSecreta, 'sha512');
+                
+    //Referencia al Servicio Web de Wallet            
+    $wsdl = 'https://integracion.alignetsac.com/WALLETWS/services/WalletCommerce?wsdl';
+    $client = new SoapClient($wsdl);
+
+    //Creación de Arreglo para el almacenamiento y envío de parametros. 
+    $params = array(
+        'idEntCommerce'=>$idEntCommerce,
+        'codCardHolderCommerce'=>$codCardHolderCommerce,
+        'names'=>$names,
+        'lastNames'=>$lastNames,
+        'mail'=>$mail,
+        'reserved1'=>$reserved1,
+        'reserved2'=>$reserved2,
+        'reserved3'=>$reserved3,
+        'registerVerification'=>$registerVerification
+    );
+
+    //Consumo del metodo RegisterCardHolder
+    $result = $client->RegisterCardHolder($params);
+    print_r($result);
+    //Lectura de parametros de respuesta.
+    echo "Código de Respuesta:" . $result->ansCode . "<br/>";
+    echo "Descripción: " . $result->ansDescription . "<br/>";
+    //Token que será enviado en el parametro userCodePayme en V-POS2.
+    echo "Código de Asociación: " . $result->codAsoCardHolderWallet . "<br/>";
+  }
 }  
 ?>

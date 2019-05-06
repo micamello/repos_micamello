@@ -20,6 +20,13 @@ function buttonaviso(){
 	$('#msg_confirmplan').modal();
 }
 
+function buttonavisograt(){ 
+  var desc = ($('#avisonombre').length) ? $('#avisonombre').attr('value') : $('#avisocmb option:selected').text();  
+  $('#desplan').html(desc);
+  $('#btncomprar').attr('href',$('#puerto_host').val()+'/compraplan/'+$('#avisocmb').val()+'/');
+  window.location.href = $('#puerto_host').val()+'/compraplan/'+$('#avisocmb').val()+'/';  
+}
+
 function msg_compra(id,desc){		  
 	$('#desplan').html(desc);
   $('#btncomprar').attr('href',$('#puerto_host').val()+'/compraplan/'+id+'/');
@@ -31,7 +38,7 @@ function loadgratuito(idplan){
   var estiloul = ($('#gratprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
   var duracion = ($('#gratprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';
   duracion = duracion + (($('#gratdura_'+idplan).attr('value') != 0) ? 'Plan&nbsp;' + $('#gratdura_'+idplan).attr('value') + ' d&iacute;as' : 'Gratuito');  
-  var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#gratid_'+idplan).attr('value')+'.'+$('#gratext_'+idplan).attr('value');
+  //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#gratid_'+idplan).attr('value')+'.'+$('#gratext_'+idplan).attr('value');
   var costo = $('#simbolo').val()+$('#gratcosto_'+idplan).attr('value');
   var permisos = $('#gratpermiso_'+idplan).attr('value').split('||');
   var strperm = '';
@@ -45,7 +52,7 @@ function loadgratuito(idplan){
   $('#grattitulo').html($('#grattitulo_'+idplan).attr('value'));
   $('#grattitulo').attr('class','title '+estilotitulo);
   $('#gratul').attr('style',estiloul);
-  $('#gratimg').attr('src',srcimagen);
+  //$('#gratimg').attr('src',srcimagen);
   $('#gratdura').html(duracion);
   $('#gratcosto').html(costo);
   $('#gratpermisos').html(strperm);
@@ -56,7 +63,7 @@ function loadplanes(idplan){
   var estiloul = ($('#planprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
   var duracion = ($('#planprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';
   duracion = duracion + (($('#plandura_'+idplan).attr('value') != 0) ? 'Plan&nbsp;' + $('#plandura_'+idplan).attr('value') + ' d&iacute;as' : 'Ilimitado');  
-  var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#planid_'+idplan).attr('value')+'.'+$('#planext_'+idplan).attr('value');
+  //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#planid_'+idplan).attr('value')+'.'+$('#planext_'+idplan).attr('value');
   var costo = $('#simbolo').val()+$('#plancosto_'+idplan).attr('value');
   var permisos = $('#planpermiso_'+idplan).attr('value').split('||');
   var strperm = '';
@@ -70,7 +77,7 @@ function loadplanes(idplan){
   $('#plantitulo').html($('#plantitulo_'+idplan).attr('value'));
   $('#plantitulo').attr('class','title '+estilotitulo);
   $('#planul').attr('style',estiloul);
-  $('#planimg').attr('src',srcimagen);
+  //$('#planimg').attr('src',srcimagen);
   $('#plandura').html(duracion);
   $('#plancosto').html(costo);
   $('#planpermisos').html(strperm);
@@ -79,9 +86,9 @@ function loadplanes(idplan){
 function loadavisos(idplan){	
   var estilotitulo = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'headingrojo' : 'headingazul';
   var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
-  var duracion = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';
+  var duracion = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';  
   duracion = duracion + (($('#avisodura_'+idplan).attr('value') != 0) ? 'Plan&nbsp;' + $('#avisodura_'+idplan).attr('value') + ' d&iacute;as' : 'Ilimitado');  
-  var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#avisoid_'+idplan).attr('value')+'.'+$('#avisoext_'+idplan).attr('value');
+  //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#avisoid_'+idplan).attr('value')+'.'+$('#avisoext_'+idplan).attr('value');
   var costo = $('#simbolo').val()+$('#avisocosto_'+idplan).attr('value');
   var permisos = $('#avisopermiso_'+idplan).attr('value').split('||');
   var strperm = '';
@@ -95,10 +102,14 @@ function loadavisos(idplan){
   $('#avisotitulo').html($('#avisotitulo_'+idplan).attr('value'));
   $('#avisotitulo').attr('class','title '+estilotitulo);
   $('#avisoul').attr('style',estiloul);
-  $('#avisoimg').attr('src',srcimagen);
+  //$('#avisoimg').attr('src',srcimagen);
   $('#avisodura').html(duracion);
   $('#avisocosto').html(costo);
   $('#avisopermisos').html(strperm);
+}
+
+function mensaje(){
+  swal('Información!', 'Por ser nuestro lanzamiento le otorgamos el paquete Básico totalmente gratis', 'success');
 }
 
 $(function() {  	

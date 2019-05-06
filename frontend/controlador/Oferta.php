@@ -45,6 +45,7 @@ class Controlador_Oferta extends Controlador_Base{
       }
 
       if($vista == 'oferta'){        
+
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['infohv'],$planes,$vista);
       }
 
@@ -93,7 +94,6 @@ class Controlador_Oferta extends Controlador_Base{
           if (Utils::getParam('convertirOferta') == 1) {
             $id_empresa_plan = Utils::desencriptar(Utils::getParam('planUsuario_convertir', '', $this->data));
             $datosOferta = Modelo_oferta::consultarOferta($idOferta);
-     
             $datosOferta[0]['id_empresa_plan'] = $id_empresa_plan;
 
             $datosRequisitos = array('viajar'=>$datosOferta[0]['viajar'],'residencia'=>$datosOferta[0]['residencia'],'discapacidad'=>$datosOferta[0]['discapacidad'],'confidencial'=>$datosOferta[0]['confidencial'],'edad_minima'=>$datosOferta[0]['edad_minima'],'edad_maxima'=>$datosOferta[0]['edad_maxima']);

@@ -458,7 +458,7 @@ function ocultarCampos(){
 
 function enviarFormulario(){
 
-    var estado = validarFormulario(true);
+    var estado = validarFormulario(true);    
     //console.log(estado);
     if(estado == ''){
         document.form_editarPerfil.submit();

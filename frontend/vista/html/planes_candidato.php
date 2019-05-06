@@ -1,14 +1,17 @@
+<br><br><br><br>
 <div class="container">
   <div class="row">
     <div class="main_business">      
       <?php if (!empty($planes)){ ?>                
         <div class="col-md-12">        
-          <h3 align="left">Seleccione un plan:</h3>
+          <!--<h3 align="left">Seleccione un plan:</h3>-->
           <div class="pricingdiv">   
-            <?php foreach($planes as $plan){ ?>
+            <?php foreach($planes as $plan){ 
+              $plan["id_plan"] = Utils::encriptar($plan["id_plan"]);
+            ?>
               <ul style="<?php echo ($plan["promocional"]) ? "border: 2px solid #a21414;" : "border: 1px solid #262D5D";?>" class="theplan col-xs-12 col-md-4">
                 <li class="title <?php echo ($plan["promocional"]) ? "headingrojo" : "headingazul";?>"><?php echo utf8_encode($plan["nombre"]);?></li>
-                <li><img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/planes/<?php echo $plan["id_plan"];?>.<?php echo $plan["extension"];?>" ></li>
+                <!--<li><img src="<?php //echo PUERTO;?>://<?php //echo HOST;?>/imagenes/planes/<?php //echo $plan["id_plan"];?>.<?php //echo $plan["extension"];?>" ></li>-->
                 <li class="titulo">
                   <?php 
                   echo (($plan["promocional"]) ? "Promoci&oacute;n<br>" : "");                 
@@ -38,11 +41,11 @@
                     <?php } ?>
                   </h1>
                   <?php if (empty($plan["costo"])) { ?>
-                    <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo Utils::encriptar($plan["id_plan"]);?>/"
+                    <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"
                       <span class="icon-tag"></span>POSTULARSE
                     </a>
                   <?php } else { ?>
-                    <a class="pricebutton" onclick="msg_compra('<?php echo Utils::encriptar($plan["id_plan"]);?>','<?php echo utf8_encode($plan["nombre"]);?>');">
+                    <a class="pricebutton" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');">
                       <span class="icon-tag"></span>SUBSCRIBIRSE
                     </a>
                   <?php } ?>                    
