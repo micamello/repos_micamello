@@ -753,8 +753,14 @@
 									            			$color = '';
 									            			$title = 'completo';
 									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
-									            				$color = ' parcial';
-									            				$title = 'parcial';	
+
+									            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] != ''){
+									            					$color = '';
+									            					$title = 'completo';
+									            				}else{
+										            				$color = ' parcial';
+										            				$title = 'parcial';	
+									            				}
 									            			}
 									            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {

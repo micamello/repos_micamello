@@ -104,7 +104,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     $nombre = strtolower($datosusuario['nombres'].' '.$datosusuario['apellidos']);
     $nombre_archivo = utf8_encode(str_replace(' ', '_',str_replace($codigo,$sinacentos,$nombre))).'.pdf';
     $nombre = str_replace($codigo,$conacentos,$nombre);
-    $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.strtoupper($nombre).'</h3>';
+    $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.utf8_encode(strtoupper($nombre)).'</h3>';
     $informe .= '<p align="justify" style="margin-bottom:2px;margin-top:2px;"><hr width=100%><b>FACTORES QUE MIDE CANEA</b> (En este test no existen resultados ni buenos ni malos.)<hr width=100%></p>
     <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>C: Conciencia:</b> Es la capacidad para controlar los propios impulsos, la autodisciplina y la organización.</p>
     <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Afabilidad (Amabilidad):</b> Es el comportamiento empático, generoso y mediador.</p>

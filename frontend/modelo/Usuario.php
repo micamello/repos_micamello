@@ -279,7 +279,8 @@ WHERE
       }
       return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
     }else{
-      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"id_nacionalidad"=>$data['id_nacionalidad'],"id_sectorindustrial"=>$data['sectorind'],"pagina_web"=>$data['pagina_web'],"nro_trabajadores"=>$data['nro_trabajadores']);
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"id_nacionalidad"=>$data['id_nacionalidad'],"id_sectorindustrial"=>$data['sectorind'],"nro_trabajadores"=>$data['nro_trabajadores'],"pagina_web" => $_POST['pagina_web']);
+
       return $GLOBALS['db']->update("mfo_empresa",$datos,"id_empresa=".$idUsuario);
     }
   }

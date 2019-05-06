@@ -124,7 +124,7 @@ class Controlador_Perfil extends Controlador_Base
                     $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
-Utils::log($areaxusuario);
+//print_r($areaxusuario);
                 $nrototaltest = Modelo_Cuestionario::totalTest();
                 $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,
@@ -347,17 +347,17 @@ Utils::log($areaxusuario);
                 }
             }else{             
 
+                if(isset($data['pagina_web']) && $data['pagina_web'] != ''){
+                    if (!Utils::validaURL($data['pagina_web'])){
+                      throw new Exception("La p\u00E1gina web: " . $data['pagina_web'] . " formato no permitido");  
+                    }
+                }
+
                 if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
                     throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
                 }
                 if (!Modelo_ContactoEmpresa::editarContactoEmpresa($data, $idUsuario)) {
                     throw new Exception("Ha ocurrido un error al guardar los datos de la persona de contacto, intente nuevamente");
-                }
-
-                if(isset($_POST['pagina_web']) && strlen($_POST['pagina_web']) > 0){
-                    if (!Utils::validaURL($_POST['pagina_web'])){
-                      throw new Exception("La p\u00E1gina web: " . $_POST['pagina_web'] . " formato no permitido");  
-                    }
                 }
             }
             if (!empty($imagen) && $imagen['error'] != 4) {
@@ -441,7 +441,7 @@ Utils::log($areaxusuario);
 
                 if(!empty($array_subareas_seleccionadas)){
 
-                    //Utils::log(print_r($array_subareas_seleccionadas,true));
+                    //print_r($array_subareas_seleccionadas);
                     if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
                         throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
                     }
