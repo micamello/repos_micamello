@@ -91,7 +91,7 @@ class Controlador_Cuestionario extends Controlador_Base {
                   $email_subject = "Aceptación de Acceso"; 
                   $candidato = utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '.utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']);
                   $email_body = Modelo_TemplateEmail::obtieneHTML("ACEPTACION_ACCESO");
-                  $email_body = str_replace("%NOMBRES%", $infoempresa["nombres"], $email_body);   
+                  $email_body = str_replace("%NOMBRES%", utf8_encode($infoempresa["nombres"]), $email_body);   
                   $email_body = str_replace("%CANDIDATO%", $candidato, $email_body);               
                   $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);         
                   Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);
@@ -147,7 +147,10 @@ class Controlador_Cuestionario extends Controlador_Base {
           Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
         }           
         if ($faceta >= 3){          
-          $this->validaTercerFormulario($faceta);
+          $acceso = $this->validaTercerFormulario($faceta);
+          if (!empty($acceso)){
+            Modelo_Notificacion::eliminarNotificacionUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],Modelo_Notificacion::DESBLOQUEO_ACCESO);
+          }
         }
         $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($_SESSION['mfo_datos']['usuario']['id_usuario']);        
         if ($faceta > 1 && !empty($metodoSeleccion) && isset($metodoSeleccion["metodo_resp"]) && !empty($metodoSeleccion["metodo_resp"])){

@@ -305,7 +305,7 @@
 
               <div class="col-xs-12 col-md-12">
                 <div class="breadcrumb" align="center">                  
-                  <label>Plan Seleccionado</label>&nbsp;<?php echo $plan["nombre"];?>
+                  <label>Plan Seleccionado</label>&nbsp;<?php echo utf8_encode($plan["nombre"]);?>
                   <input type="hidden" name="acquirerId" id="acquirerId" value="<?php //echo ACQUIRERID;?>" />
                   <input type="hidden" name ="idCommerce" id="idCommerce" value="<?php //echo IDCOMMERCE; ?>" />
                   <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $transid; ?>" />

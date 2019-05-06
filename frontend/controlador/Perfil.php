@@ -124,6 +124,7 @@ class Controlador_Perfil extends Controlador_Base
                     $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
+Utils::log($areaxusuario);
                 $nrototaltest = Modelo_Cuestionario::totalTest();
                 $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,

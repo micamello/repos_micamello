@@ -85,7 +85,7 @@ class Modelo_Plan{
    
   public static function busquedaActivoxTipo($plan,$tipo,$sucursal){
     if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }
-    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, prom_duracion,
+    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, prom_duracion, num_accesos,
                    IF(promocional,prom_costo,costo) AS costo,
                    IF(promocional,prom_num_post,num_post) AS num_post,
                    IF(promocional,prom_duracion,duracion) AS duracion,

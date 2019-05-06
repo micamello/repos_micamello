@@ -103,7 +103,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
               <b class="text_large">
                 <?php echo $notificaciones['descripcion'];?>
               </b>
-              <b class="text_small"><?php echo $notificaciones['descripcion']; ?></b>
+              <b class="text_small"><?php echo utf8_encode($notificaciones['descripcion']); ?></b>
               <br>
               <center>
                 <?php if ($notificaciones["tipo"] == Modelo_Notificacion::DESBLOQUEO_ACCESO && 
