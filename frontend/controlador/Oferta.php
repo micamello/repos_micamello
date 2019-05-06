@@ -36,13 +36,16 @@ class Controlador_Oferta extends Controlador_Base{
         $_SESSION['mfo_datos']['usuarioSeleccionado'] = array();
         $_SESSION['mfo_datos']['ultimaVistaActiva'] = $vista;
         $_SESSION['mfo_datos']['usuariosHabilitados'] = array();
-        if(empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores'])){ 
+
+        if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
           $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
           Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-        }
+        } 
+      
       }
 
-      if($vista == 'oferta' /*|| $opcion == 'vacantes'*/){        
+      if($vista == 'oferta'){        
+
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['infohv'],$planes,$vista);
       }
 
@@ -90,8 +93,7 @@ class Controlador_Oferta extends Controlador_Base{
           $idOferta = Utils::desencriptar($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
           if (Utils::getParam('convertirOferta') == 1) {
             $id_empresa_plan = Utils::desencriptar(Utils::getParam('planUsuario_convertir', '', $this->data));
-            $datosOferta = Modelo_Oferta::consultarOferta($idOferta);
-            print_r($datosOferta); 
+            $datosOferta = Modelo_oferta::consultarOferta($idOferta);
             $datosOferta[0]['id_empresa_plan'] = $id_empresa_plan;
 
             $datosRequisitos = array('viajar'=>$datosOferta[0]['viajar'],'residencia'=>$datosOferta[0]['residencia'],'discapacidad'=>$datosOferta[0]['discapacidad'],'confidencial'=>$datosOferta[0]['confidencial'],'edad_minima'=>$datosOferta[0]['edad_minima'],'edad_maxima'=>$datosOferta[0]['edad_maxima']);

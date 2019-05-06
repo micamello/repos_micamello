@@ -499,7 +499,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
                 $planes = array();
-                //print_r($usuariosConAccesos);
+
                 //solo empresa 
                 if ($tipoUsuario != Modelo_Usuario::EMPRESA){
                   Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
