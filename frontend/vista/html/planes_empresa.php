@@ -66,12 +66,15 @@
                 
                 <ul id="gratul" style="" class="theplan col-xs-12 col-md-4">
                   <li class="" id="grattitulo"></li>
+                  <li>
+                    <h1 id="gratcosto"><span class="subscript"></span></h1>                    
+                  </li>
                   <!--<li><img id="gratimg" src=""></li>-->
-                  <li class="titulo" id="gratdura"></li>
+                  <h3 id="gratdura"></h3>
                   <?php if (count($gratuitos) > 1){ ?>                    
                      <select class="form-control" id="gratcmb">
                        <?php echo $opc_select; ?>
-                     </select>                    
+                     </select>                   
                   <?php } else{  ?>
                     <li>
                       <input type="hidden" id="gratcmb" value="<?php echo $gratuito["id_plan"];?>">
@@ -79,11 +82,8 @@
                     </li>
                   <?php }?>
                   <div id="gratpermisos"></div>  
-                  <li>
-                    <h1 id="gratcosto"><span class="subscript"></span></h1>
-                    <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "mensaje();" : 'buttongrat();';?>
+                  <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "mensaje();" : 'buttongrat();';?>
                     <a class="pricebutton" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Subscribirse</a>
-                  </li>
                 </ul>
               <?php } ?> 
 
@@ -145,8 +145,11 @@
                 <?php } ?>
                 <ul id="planul" style="" class="theplan col-xs-12 col-md-4">
                   <li class="" id="plantitulo"></li>
-                  <!--<li><img src="" id="planimg"></li>-->
-                  <li class="titulo" id="plandura"></li>
+                   <li>
+                    <h1 id="plancosto"></h1>
+                    <h6><small>(El precio incluye IVA)</small></h6>                                        
+                  </li>
+                  <h3 id="plandura"></h3>
                   <?php if (count($planes) > 1){ ?>                                        
                     <li>
                     <select class="form-control" id="plancmb">
@@ -157,13 +160,9 @@
                     <input type="hidden" id="plancmb" value="<?php echo Utils::encriptar($plan["id_plan"]);?>">                      
                     <input type="hidden" id="plannombre" value="<?php echo utf8_encode($plan["nombre"]);?>">
                   <?php } ?>  
-                  <div id="planpermisos"></div>                    
-                  <li>
-                    <h1 id="plancosto"></h1>
-                    <h6><small>(El precio incluye IVA)</small></h6>
-                    <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "mensaje();" : 'buttonplan();';?>
-                    <a class="pricebutton" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
-                  </li>
+                  <div id="planpermisos"></div>   
+                  <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "mensaje();" : 'buttonplan();';?>                 
+                  <a class="pricebutton" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
                 </ul>                                    
               <?php } ?> 
               
@@ -227,8 +226,11 @@
                 <?php } ?>
                 <ul id="avisoul" class="theplan col-xs-12 col-md-4">
                   <li id="avisotitulo" class=""></li>
-                  <!--<li><img src="" id="avisoimg"></li>-->
-                  <li class="titulo" id="avisodura"></li>
+                  <li>
+                    <h1 id="avisocosto"></h1>
+                    <h6><small>(El precio incluye IVA)</small></h6>                    
+                  </li>
+                  <h3 id="avisodura"></h3>
                   <?php if (count($avisos) > 1){ ?>
                     <li>
                       <select class="form-control" id="avisocmb">
@@ -236,16 +238,14 @@
                       </select>
                     </li>
                   <?php } else { ?>
-                    <input type="hidden" id="avisocmb" value="<?php echo $aviso["id_plan"];?>">   
-                    <input type="hidden" id="avisonombre" value="<?php echo utf8_encode($aviso["nombre"]);?>">                   
+                    <li>
+                      <input type="hidden" id="avisocmb" value="<?php echo $aviso["id_plan"];?>">   
+                      <input type="hidden" id="avisonombre" value="<?php echo utf8_encode($aviso["nombre"]);?>">                   
+                    </li>
                   <?php } ?>  
                   <div id="avisopermisos"></div>
-                  <li>
-                    <h1 id="avisocosto"></h1>
-                    <h6><small>(El precio incluye IVA)</small></h6>
-                    <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "buttonavisograt();" : 'buttonaviso();';?>
-                    <a class="pricebutton" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
-                  </li>
+                  <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "buttonavisograt();" : 'buttonaviso();';?>
+                  <a class="pricebutton" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
                 </ul>
               <?php } ?>
             </div>                                          
