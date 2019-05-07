@@ -17,9 +17,9 @@
                       <h6><small>(El precio incluye IVA)</small></h6>
                     <?php } ?>
                   </h1>
-                  <h1>
-                    <?php echo $plan["duracion"]." DÍAS";?>
-                  </h1>                                     
+                  <h3>
+                    <?php echo $plan["duracion"]." D&Iacute;AS";?>
+                  </h3>                                     
                 </li>
                 <?php 
                 $listadoAcciones = explode(",",$plan['acciones']);
