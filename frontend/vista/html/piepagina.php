@@ -144,7 +144,7 @@
                   <label>Contraseña <i class="obligatorio">*</i></label>
                   <div class="inner-addon right-addon">
                     <i class="fa fa-eye reveal_content" title="Mostrar contraseña"></i>
-                    <input type="password" class="form-control" name="password_1" id="password_1" autocomplete="off">
+                    <input type="password" class="form-control" name="password_1" id="password_1" spellcheck="false">
                     <div></div>
                   </div>
                 </div>
@@ -155,7 +155,7 @@
                   <label>Repita contraseña <i class="obligatorio">*</i></label>
                   <div class="inner-addon right-addon">
                     <i class="fa fa-eye reveal_content"></i>
-                    <input type="password" class="form-control" name="password_2" id="password_2" autocomplete="off">
+                    <input type="password" class="form-control" name="password_2" id="password_2" spellcheck="false">
                     <div></div>
                   </div>
                 </div>
@@ -279,98 +279,70 @@
 
 <?php } ?>
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
-<!--<div id="grafico" style="width: 100%; max-width:900px; height: 500px; visibility: hidden;"></div>-->
+
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
-<section id="action" class="banner_info_email">
-                <div class="container">
-                    <div class="row">
-                        <div class="maine_action">
-                            <div class="col-md-4">
-                                <div class="action_item text-center">
-                                    
-                                </div>
-                            </div>
-                            <div class="col-md-8 col-sm-12 col-xs-12">
-                               <div class="content_email">
-                                   <div>
-                                        <span class="pre_text_email">NECESITA AYUDA? ESCRÍBANOS:</span>
-                                        <i class="fa fa-envelope"></i>
-                                        <a class="info_email_mic">info@micamello.com.ec</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <!--<a href="form-sug.php" style="color: white; text-decoration: underline;"><b>Recomendaciones o sugerencias <i class="fa fa-focus"></i></b></a>-->
-                                    </div>
-                               </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-
-            <footer id="contact" class="footer p-top-30">
-                <!--<div class="action-lage"></div>-->
-                <div class="container-fluid" align="center">
-
-                    <div class="foot_mic">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="foot_div_section">
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">T&eacute;rminos y Condiciones</a>| 
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Pol&iacute;ticas de Privacidad</a>|
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Pol&iacute;ticas de Cookies</a>|                                    
-            <a class="legal_info_content" href="http://blog.micamello.com.ec" target="blanked">Blog</a>|
-
-                                    <a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a>
-                                    
-                                   
-                                </div><!-- End off widget item -->
-                            </div><!-- End off col-md-3 -->
-                            <div class="col-md-6">
-                            <div class="foot_div_section">
-                              <div class="widget_item widget_latest sm-m-top-50" align="center">
-                                <div class="row">
-                                  <div class="form-inline">
-                                    <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
-                                      <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic"> 
-                                      <span class="text_icons_footer"><?php echo utf8_encode($sucursal["nombre_abr"]);?></span>
-                                    <?php }?>                                                                                
-                                    <span class="separate_social_country">|</span>
-                                    
-                                    <span class="text_icons_footer">Siguenos en:</span>
-                                    <a href="https://es-la.facebook.com/MiCamello.com.ec/" target="_blank">
-                                      <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
-                                    </a>                                                                       
-                                    <a href="https://twitter.com/MiCamelloec" target="_blank">
-                                      <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">
-                                    </a>
-                                    <a href="https://www.instagram.com/micamelloec/" target="_blank">
-                                      <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">
-                                    </a>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                    </div>
-                </div>
-     
-</footer> 
-<!-- modal_seleccionados -->
-<div class="modal fade" id="modal_select" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
-        <div class="modal-body" style="overflow: scroll;">
-          <!-- <div class="col-md-12" id="modalmodal"> -->
-            
-          <!-- </div> -->
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-        </div>
+<footer id="contact" class="footer p-top-30">
+  <div class="container-fluid">
+    <div class="foot_mic">
+      <div class="pie-pag col-md-4" style=" padding-left: 30px;
+      ">
+        <h3>Nosotros</h3>
+        <p><a class="" href="">¿Quiénes somos?</a></p>
+        <p><a class="legal_info_content" href="http://blog.micamello.com.ec/" target="blanked">Blog</a></p>
+        <h3>Políticas de Privacidad</h3>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">Términos y Condiciones</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Políticas de Privacidad</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Políticas de Cookies</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a></p>
+      </div>
+      <div class="pie-pag col-md-4" style=" padding-left: 30px;
+      ">
+        <h3>Disponible también en otros países</h3>
+        <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
+          <a>
+            <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
+          </a>
+        <?php }?>   
+      </div>
+      <div class="pie-pag col-md-4" style="padding-left: 30px;
+      ">
+        <h3>Contacto</h3>
+        <p>info@micamello.com.ec</p>
+        <p>Ecuador</p>
+        <a href="<?php echo FACEBOOK; ?>" target="_blank">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
+        </a>
+        <a href="<?php echo TWITTER; ?>" target="_blank">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">
+        </a>
+        <a href="<?php echo INSTAGRAM; ?>" target="_blank">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">
+        </a>
+      </div>
+      <div class="col-md-12">
+        <p>©<?php echo date('Y'); ?> <b>MiCamello.</b> Todos los derechos reservados.</p>
       </div>
     </div>
   </div>
+</footer> 
+
+<!-- modal_seleccionados -->
+<div class="modal fade" id="modal_select" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+      <div class="modal-body" style="overflow: scroll;">
+        <!-- <div class="col-md-12" id="modalmodal"> -->
+          
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>

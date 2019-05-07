@@ -104,25 +104,25 @@ class Controlador_Registro extends Controlador_Base {
       }
 
       if(!Utils::validarTelefono($datosReg['celularCandEmp'])){
-        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido (entre 10 o 15 d\u00EDgitos)");
       }
     }
 
 
     if($datosReg['tipo_usuario'] == 2){
 
-      if(!Utils::validarTelefono($datosReg['celularCandEmp']) && !Utils::validarTelefonoConvencional($datosReg['tel2ConEmp'])){
-        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+      if(!Utils::valida_telefono($datosReg['celularCandEmp'])){
+        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido");
       }
 
 
       if(!Utils::validarTelefono($datosReg['tel1ConEmp'])){
-        throw new Exception("Ingrese un número de celular válido (entre 10 o 15 dígitos)");
+        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido (entre 10 o 15 d\u00EDgitos)");
       }
 
       if(isset($datosReg['tel2ConEmp'])){
         if(!Utils::validarTelefonoConvencional($datosReg['tel2ConEmp'])){
-          throw new Exception("Ingrese un número de teléfono convencional válido (entre 6 o 15 dígitos)");
+          throw new Exception("Ingrese un n\u00FAmero de tel\u00E9fono convencional v\u00E1lido (entre 6 o 15 d\u00CDgitos)");
         }
       }
     }
@@ -131,7 +131,7 @@ class Controlador_Registro extends Controlador_Base {
       throw new Exception("El documento ingresado ya existe");
     }
     if(!Utils::validarPassword($datosReg['password_1']) || !Utils::validarPassword($datosReg['password_2'])){
-      throw new Exception("La contraseña ingresada no cumple el formato");
+      throw new Exception("La contrase\u00F1a ingresada no cumple el formato");
     }
     if(!Utils::passCoinciden($datosReg['password_1'], $datosReg['password_2'])){
       throw new Exception("Las contrase\u00F1as ingresadas no coinciden");
@@ -205,7 +205,8 @@ class Controlador_Registro extends Controlador_Base {
     else{
       $data = array("nombres"=>$datosValidos['nombresCandEmp'],
                     "telefono"=>$datosValidos['celularCandEmp'],
-                    // "fecha_nacimiento"=>$fechaNacimientoDefault,
+                    //"fecha_nacimiento"=>$fechaNacimientoDefault,
+                    "nro_trabajadores" => 0,                    
                     "fecha_creacion"=>$fechaDefault,/* -----*/
                     "estado"=>0,
                     "term_cond"=>1,
@@ -328,7 +329,7 @@ class Controlador_Registro extends Controlador_Base {
       if (!$this->correoActivacionRedSocial($correo,$nombres,$token,$username,$password)){
         throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
       }
-      $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entreda o spam para activar tu cuenta';  
+      $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar tu cuenta';  
     } 
     catch (Exception $e) {
       $GLOBALS['db']->rollback();

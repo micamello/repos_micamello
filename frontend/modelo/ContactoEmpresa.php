@@ -22,7 +22,7 @@ class Modelo_ContactoEmpresa{
   public static function editarContactoEmpresa($data,$user_id){
 
   	$telf2 = $data['tel_two_contact'];
-  	$datos = array('nombres'=>$data['nombre_contact'],'apellidos'=>$data['apellido_contact'],'telefono1'=>$data['tel_one_contact']);
+  	$datos = array('nombres'=>$data['nombre_contact'],'apellidos'=>$data['apellido_contact'],'telefono1'=>$data['tel_one_contact'],'id_cargo'=>$data['cargo']);
   	if($telf2 != ''){
   		$datos['telefono2'] = $telf2;
   	}else{

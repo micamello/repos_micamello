@@ -1,0 +1,916 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Oswald|Roboto);
+@font-face {
+font-family: ‘Antipasto’;
+   src: url('../fonts/antipasto.eot');
+   src: url('../fonts/antipasto.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/antipasto.woff') format('woff'),
+        url('../fonts/antipasto.ttf') format('truetype'),
+        url('../fonts/antipasto.svg#adlerRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+font-family: ‘Roboto’;
+   src: url('../fonts/roboto-regular.eot');
+   src: url('../fonts/roboto-regular.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/roboto-regular.woff') format('woff'),
+        url('../fonts/roboto-regular.ttf') format('truetype'),
+        url('../fonts/roboto-regular.svg#adlerRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+html,
+body {
+    font-size: 14px;
+    color: #797979 !important;
+    width: 100%;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+    font-weight: 400;
+    font-family: ‘Roboto’, sans-serif !important;
+}
+
+/*------------------------------------------------------------------*/
+/*   IE10 in Windows 8 and Windows Phone 8 Bug fix
+/*-----------------------------------------------------------------*/
+
+@-webkit-viewport { width: device-width; }
+@-moz-viewport { width: device-width; }
+@-ms-viewport { width: device-width; }
+@-o-viewport { width: device-width; }
+@viewport { width: device-width; }
+
+
+
+.menu-bar {
+    position: absolute;
+    top: 20px;    
+    left: 50%;
+    height: 14px;
+    margin-left: -10px;
+}
+
+.bars {
+    display: block;
+    width: 20px;
+    height: 3px;    
+    background-color: #333;
+    box-shadow: 0 5px 0 #333, 0 10px 0 #333;
+}
+
+.menu1 {
+    display: none; 
+    width: 100%;
+    padding: 30px 10px 50px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #fff;
+}
+.menu1 ul {
+    margin-bottom: 0;
+}
+.menu1 a {
+    color: #333; 
+    text-transform: uppercase;
+    opacity: 0.8;
+}
+.menu1 a:hover {
+    text-decoration: none;
+    opacity: 1;
+}
+#imagen-centro{
+display: inline;
+}
+#algo-centro{
+    margin: 0 auto;
+}
+/*FILTROS DESPLEGABLES*/
+#drop-tit{
+    text-align: left;
+}
+/*MENU*/
+/*LOGO*/
+
+#img-logo{
+    margin-left: 50px;
+}
+#img-logo{
+    padding: 5px;
+}
+
+
+.nav > li {
+    font-size: 16px;
+}
+.parrafo{
+    font-family: ‘Roboto’;
+    font-size: 14pt;
+    padding-bottom: 30px;
+}
+.btn-minimalist{
+    background-color: transparent;
+    border: 2px solid white;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-size: 16px;
+        position: relative;
+    display: block;
+}
+.btn-minimalist-blue{
+    background-color: transparent;
+    border: 2px solid #204478;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-size: 16px;
+}
+.btn-minimalista{
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin: 10px;
+    color: white;
+    width: 50%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.btn-minimalista a{
+    color: white;
+    font-size: 16pt;
+}
+.btn-blue{
+    border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #204478;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.btn-blue a{
+    color: white;
+}
+.btn-blue:hover{
+    color: #204478;
+    border: 2px solid #204478;
+    background-color: transparent;
+}
+.btn-blue:hover a{
+    color: #204478;
+ }
+ .banner-publicidad{
+    background-color: #4b98dd;
+ }
+
+ /*TIMER*/
+ #regEmpMic{
+    display: inline;
+ }
+ .menu-timer{
+    background-color: transparent;
+    margin-bottom: 20px;
+
+ }
+ .timer-iconos{
+    color: #204478;
+    font-size: 30pt !important;
+    margin-right: 20px;
+    margin-top: 10px;
+ }
+ .timer-bloque{
+    /*background-image: url(../img/bloque-01.png);
+    background-repeat: no-repeat;
+*/
+ }
+ .wraper{
+        padding: 4% 4% 0% 4%;
+        color: #fff;
+}
+ .texto-timer{
+    color: #204478;
+    font-size: 35pt;
+    text-align: right;
+    font-family: ‘Antipasto’;
+ }
+ .second-text-timer{
+    color: #2d2d2d;
+    font-family: ‘Antipasto’;
+    text-align: center;
+    font-size: 20pt;
+    border: 2px solid #2d2d2d;
+    padding: 20px;
+    margin-top: 20px;
+    
+ }
+ .timer{
+    font-family: ‘Antipasto’;
+    font-size: 100pt;
+    color: #424242;
+    border: none
+ }
+
+ .timer>li>p{
+    color: #424242;
+}
+ .timer>li>span{
+
+    border-bottom: 3px solid #424242;
+ }
+ .timer-bloque>img{
+    float: right;
+ }
+
+
+#prox{
+        font-size: 100pt;
+    }
+/*-------------------------------------------------------------
+ * Countdown
+ *-------------------------------------------------------------*/
+
+
+#back-countdiown{
+    padding: 0;
+}
+
+#back-countdiown li {
+    display: inline-block;
+    text-align: center;
+    position: relative;
+}
+
+/*PANTALLAS PEQUEÑAS*/
+@media screen and (max-width:600px){
+    #back-countdiown li{
+       margin-bottom: 20px;
+    }
+    #prox{
+        font-size: 30pt;
+    }
+}
+/*PANTALLAS MEDIANAS*/
+@media only screen and (max-width:908px) and (min-width:481px){
+    #prox{
+        font-size: 50pt;
+    }
+}
+
+
+#back-countdiown li:last-child {
+  margin-right: 0
+}
+#back-countdiown li p{
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 300;
+}
+#back-countdiown li span:hover {
+    cursor: pointer;
+}
+/*END TIMER*/
+
+
+
+
+.navbar-default
+{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: #204478;
+  color: white;
+}
+/*MENU*/
+.btn-menu-active{
+   border-bottom: 1px solid #fff; 
+
+ 
+}
+.product{
+    margin-top: 100px;
+}
+/*REGISTRO*/
+@media (min-width: 768px) {
+  .container {
+    width: 75%;
+  }
+}
+.registro-cuadro{
+    background-color: #204478;
+    padding: 20px;
+    text-align: left;
+    margin: 0 auto;
+    display: inline-block;
+}
+#registro-algo-centro{
+    margin: 0 auto;
+    background-color: #204478;
+
+}
+ .reg-cuadro{
+    background-color: white;
+    padding: 20px;
+    text-align: left;
+    margin: 0 auto;
+    display: inline-block;
+
+
+ }
+  .acceso-social{
+    color:white;
+    background-color: #4b95da;
+    font-size: 15pt !important;
+    width: 50px;
+    height: 50px;
+    padding: 15px;
+    margin-left: 20px;
+    margin-right: 20px;
+    border-radius: 50%;
+ }
+ .registro-titulo{
+    text-align: center;
+    font-size: 30px;
+    color: #495057;
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+   margin-top: 20px;
+   margin-bottom: 20px; 
+
+
+ }
+ .register-formulario {
+    padding: 20px;
+}
+.subt-registro>label{
+    font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+   font-size: 16px;
+   text-align: center;
+   font-weight: normal;
+}
+/*BANNER FOTO*/
+.cuadro-banner{
+    border: 2px solid #4b98dd;
+    display: table;
+    padding: 40px 20px 40px 20px;
+    margin: 30px 20px 30px 20px;
+}
+.cuadro-banner>div>p{
+    font-family: ‘Antipasto’;
+    color: #204478;
+    font-size: 35pt;
+    border-bottom: 1px solid #204478;
+}
+#foto-banner{
+    padding: 0;
+}
+#cuadro-celeste{
+    background-color: #4b98dd;
+    margin-top: 20px;
+    color: white;
+}
+#cuadro-celeste:hover{
+    color: #4b98dd;
+    border: 2px solid #4b98dd;
+    background-color: transparent;
+}
+
+@media screen and (max-width: 1000px) {
+    .ocultar{
+        display:none;
+    }
+
+    .canea-text{
+        font-size: 90pt;
+    }
+
+}
+
+
+
+
+.carousel-control          { width:  4%; }
+.carousel-control.left,.carousel-control.right {
+
+  margin-left:15px;
+}
+
+@media (max-width: 767px) {
+  .carousel-inner .active.left { left: -100%; }
+  .carousel-inner .next        { left:  100%; }
+  .carousel-inner .prev    { left: -100%; }
+  .active > div {display:none;}
+  .active > div:first-child {display:block;}
+
+}
+@media (min-width: 767px) and (max-width: 992px ) {
+  .carousel-inner .active.left { left: -50%; }
+  .carousel-inner .next        { left:  50%; }
+  .carousel-inner .prev    { left: -50%; }
+  .active > div { display:none; }
+  .active > div:first-child { display:block; }
+  .active > div:first-child + div { display:block; }
+}
+@media (min-width: 992px ) {
+  .carousel-inner .active.left { left: -16.7%; }
+  .carousel-inner .next        { left:  16.7%; }
+  .carousel-inner .prev    { left: -16.7%; }  
+}
+
+
+.carousel-xs{
+  width: 25%;
+  margin: 0 auto;
+}
+
+
+
+/*OFERTAS DE EMPLEO-CANDIDATO*/
+#texto-empleo{
+}
+.empleo-icono{
+    color: #686868;
+    font-size: 30pt !important;
+
+}
+#empleo-2{
+    font-weight: bold;
+}
+/*CANEA QUE ES*/
+.texto-canea{
+    text-align: center;
+    font-family: ‘Antipasto’;
+    text-transform: uppercase;
+    font-size: 20pt;
+    color: #204478;
+    margin-bottom: 30px;
+}
+/*VELOCIMETRO*/
+.velocimetro{
+    background-color: white;
+    width: 100%;
+}
+.vel-titulo{
+    text-transform: uppercase;
+    color: #828181;
+    font-size: 40pt;
+    font-weight: bold;
+}
+.vel-titulo-din{
+    color: #61af6a;
+    font-size: 40pt;
+    font-weight: bolder;
+}
+.vel-subt{
+    font-family: ‘Antipasto’;
+    font-size: 35pt;
+}
+.vel-caja{
+    background-color: #0b66a9;
+    text-align: center;
+margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.vel-titulo-1{
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 30pt;
+}
+.vel-subt-1{
+    color: white;
+    font-size: 24pt;
+}
+#btn-vel{
+    text-transform: uppercase;
+    font-size: 24pt;
+    padding: 10px 40px;
+    margin: 20px;
+    vertical-align: middle;
+}
+#caja-centro{
+        margin: 0 auto;
+    display: inline-flex;      
+}
+/*PLANES*/
+#plan-tabla{
+    padding: 1px;
+}
+#plan-dias{
+    color: #182e4f;
+    font-weight: bold;
+    font-size: 20pt;
+    text-transform: uppercase;
+}
+#plan-precio{
+    color: #204478;
+    font-weight: bold;
+    font-size: 40pt;
+}
+#plan-precio-2{
+    color: #204478;
+    font-weight: bold;
+    font-size: 45pt;
+}
+#select-plan{
+    margin: 20px 30px;
+}
+#lista-plan{
+    color: #4b94d9;
+    margin-left: 30px;
+    padding-right: 20px;
+}
+#lista-plan-2{
+    color: #6b6b6b;
+    margin: 0px;
+}
+#titulo-planes {
+    background-color: #204478;
+    text-transform: uppercase;
+    color: white;
+    padding: 0px;
+    font-size: 24pt;
+    font-weight: bold;
+}
+
+.izq{
+    border-right: 1px solid #204478
+
+}
+.der{
+border-left: 1px solid #204478
+}
+/*DETALLES*/
+#btn-verde{
+    background-color: #61af6a;
+    text-transform: uppercase;
+    font-size: 16pt;
+    border-radius: 0px;
+    padding: 10px 40px;
+}
+#btn-rojo{
+    text-align: center;
+    background-color: #ad3131;
+    text-transform: uppercase;
+    font-size: 16pt;
+    border-radius: 0px;
+    padding: 10px 40px;
+}
+#tit-detalle{
+    background-color: #204478;
+
+}
+#empresa-detalle{
+    text-align: center;
+    color: #4b98dd;
+    font-size: 18pt;
+    font-weight: bold;
+    border-bottom: 2px solid #4b98dd;
+    display: table;
+}
+.tit-detalle-1{
+    font-size: 14pt;
+    text-align: center;
+}
+.subt-detalle{
+ font-size: 12pt;   
+}
+/*INTRO TEST*/
+.tit-test{
+    text-align: center;
+    font-size: 20pt;
+    font-weight: bold;
+    color: #848484;
+}
+.margin-40{
+    margin-top: 40px;
+}
+#img-test{
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+/*OFERTA EMPRESA*/
+.postulacion-icono-editar{
+    text-align: center;
+    color:#4b98dd;
+    font-size: 30pt !important;
+}
+.postulacion-icono-postulado{
+    color: #ad3131;
+    text-align: center;
+    font-size: 30pt !important;
+}
+/*POSTULACIONES*/
+.caja-postulaciones{
+    border-radius: 5%;
+    margin: 20px 0px;
+
+     /*border: 1px solid #c50f0f61;*/
+}
+.titulo-postulaciones{    
+    text-transform: uppercase;
+    color: white;
+    font-family: ‘Roboto’;
+    font-size: 20pt;
+    background-color: #ad3131;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+}
+.titulo-postulaciones-normal{    
+    text-transform: uppercase;
+    color: white;
+    font-family: ‘Roboto’;
+    font-size: 20pt;
+    background-color: #61af6a;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.ofertaUrgente{
+  background: #f5f5f5;
+border-radius: 0px 0px 10px 10px;
+padding-top: 10px;
+  color: #5e5e5e;
+}
+#postulacion-2{
+    padding-top: 10px;
+}
+/*PRE REGISTRO*/
+.camello>img{
+    padding-top: 20px;
+
+}
+/*POSTULACIONES-CANDIDATO*/
+.cargo-postulaciones{
+    color: #383838;
+    font-family: ‘Roboto’;
+    text-align: center;
+    font-style: italic;
+    margin-top: 5px;
+
+}
+.texto-postulaciones{
+    color: #5e5e5e;
+    font-family: ‘Roboto’;
+    text-align: left;
+}
+.postulacion-icono-ver{
+    text-align: center;
+    color:#61af6a;
+    font-size: 30pt !important;
+}
+.postulacion-icono-basura{
+    text-align: center;
+    color:#ad3131;
+    font-size: 30pt !important;
+}
+.postulacion-icono{
+    text-align: center;
+    font-size: 30pt !important;
+}
+.icono-aprobado{
+    color: #61af6a;
+}
+.icono-por-aprobar{
+    color: #c1c1c1;
+}
+#tipo-plan{
+    padding: 10px 10px 10px 20px;
+    background-color: #e5e5e5;
+    color: #afafaf;
+    font-family: ‘Roboto’;
+    font-weight: bold;
+    font-size: 12pt;
+    margin: 0;
+    text-transform: uppercase;
+
+}
+#caracteristica_oferta{
+        padding: 10px 20px 0px 20px;
+}
+#tipo-empresa{
+    color: #686868;
+    margin-bottom: 5px;
+    font-size: 14pt;
+    text-transform: uppercase;
+    height: 50px;
+
+}
+/*QUIENES SOMOS*/
+.qs-text{
+    color: #515151;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+    padding: 15px;
+    font-family: ‘Roboto’;
+    
+}
+.qs-text-lista{
+    color: #4b94d9;
+}
+.qs-iconos{
+    color: #4b95da;
+    font-size: 90pt !important;
+}
+.qs-subt{
+    font-family: ‘Antipasto’;
+    color: #204478;
+    font-size: 28pt;
+    padding-top: 30px;
+    text-transform: uppercase;
+}
+.qs-mv{
+    
+    padding-top: 80px;
+}
+.lista-valores{
+    text-align: left;
+    margin-left: 20px;
+
+    color: #515151;
+}
+
+
+ .banner-light{
+    color: white;
+    font-size: 20pt;
+    font-family: ‘Roboto’;
+    padding-top: 20px;
+    
+ }
+ .banner-light>p{
+    margin: 20px;
+ }
+ .pie-pag{
+    font-size: 12pt;
+    text-align: left;
+    margin: 20px 0px 20px 0px; 
+    
+    color: #686868;
+
+ }
+ nav{
+    font-family: 'Raleway', sans-serif;
+ }
+ footer{
+    background-color: #f4f4f4;
+ }
+ #social-pie{
+    margin-right: 5px;
+    font-size: 15pt !important;
+ }
+ #altura-44 {
+    height: 44px !important;
+}
+ .inicio{
+    background-color: #efefef;
+    display: block;
+    margin-top: 20px;
+    padding: 40px 0px 40px 0px;
+ }
+ #inicio-cuadro{
+    background-color: white;
+    padding: 20px;
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 30px;
+ }
+ .pie-pag>h3{
+    color:#686868;
+ }
+ .pie-pag>p{
+
+    margin-bottom: 5px; 
+ }
+ .pie-pag>p>a{
+    font-size: 15px;
+    text-align: left;
+ }
+.bloque{
+    background-color: #204478;
+    padding-top: 40px;
+    padding-bottom: 40px;
+
+}
+.cuadrado{
+    border: 2px solid #204478;
+    margin-left: 50px;
+    margin-right: -50px;
+    text-align: center;
+}
+#prueba-e{
+    padding: 0;
+        margin-left: -15px;
+}
+.canea-text{
+    background-color: transparent;
+    text-align: center;
+    font-weight: 1000;
+    font-size: 190pt;
+    font-family: ‘Antipasto’;
+    color: #204478;
+
+}
+.altura{
+    height: 400px;
+}
+.titulo{
+    display: inline-block;
+    margin: 0 auto;    
+    font-family: ‘Antipasto’;
+    font-size: 30pt;
+    text-align: center;
+    color: #204478;
+    border-bottom: 3px solid #204478;
+    
+}
+.titulo-blanco{
+    font-family: ‘Antipasto’;
+    font-size: 30pt;
+    text-align: center;
+    color: white;
+    border-bottom: 3px solid white;
+}
+.texto{
+    padding-top:20px; 
+    font-family: ‘Roboto’;
+    color: #686868;
+    font-size: 16pt;
+}
+.registro-nav{
+    margin: 0 auto;
+        width: 100px;
+    color: #204478;
+    border: 2px solid #204478;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    
+    
+}
+.espacio{
+    margin-bottom: 10px;
+}
+.navbar {
+    min-height: 60px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 0px;
+    color: white;
+}
+
+.indicadores {
+    position: relative;
+    display: flex;
+   justify-content: center;
+   align-items: center;
+}
+.texto-white{
+    color: white;
+
+
+}
+.texto-white h5{
+    color: white;
+
+
+}
+
+
+.btn-minimalist{
+    background-color: transparent;
+    border: 2px solid white;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-size: 16px;
+}
+.iconos{
+    color: white;
+    border: 1px solid white;
+  padding: 20px;
+}
+.social{
+    font-size: 25px !important;
+     color: white;
+     padding-top: 15px;
+}
+.menu{
+    color:white;
+}
+.link{
+    font-weight: bold;
+    color: #0b66a9;
+}
+
+.logo{
+    padding: 10px;
+}
+.centro{
+    text-align: center;
+}

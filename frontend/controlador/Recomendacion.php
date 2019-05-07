@@ -10,9 +10,9 @@ class Controlador_Recomendacion extends Controlador_Base {
                   'genero'=>$arrgenero,
                   'arrsectorind'=>$arrsectorind);
 
-    if( Modelo_Usuario::estaLogueado() ){
+    /*if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-    }
+    }*/
     
     try {
       if (Utils::getParam('enviarRecomendacion') == 1) {
@@ -20,8 +20,12 @@ class Controlador_Recomendacion extends Controlador_Base {
         $data = $this->camposRequeridos($campos);
         
         if(self::envioRecomendaciones(MAIL_SUGERENCIAS,$data)){
-        //if(self::envioRecomendaciones("ffueltala@gmail.com",$data)){  
-          $_SESSION['mostrar_exito'] = 'Sus recomendaciones han sido enviadas exitosamente';
+
+          if(self::envioRecomendacionesUser($data)){
+            $_SESSION['mostrar_exito'] = 'Sus recomendaciones han sido enviadas exitosamente';
+          }else{
+            $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones fall\u00F3, intente de nuevo';
+          }
         }else{
           $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones fall\u00F3, intente de nuevo';
         }
@@ -45,6 +49,18 @@ class Controlador_Recomendacion extends Controlador_Base {
     $email_body = str_replace("%CORREO%", $data['correo1'], $email_body);
     $email_body = str_replace("%TELEFONO%", $data['telefono'], $email_body);    
     if (Utils::envioCorreo($correo,"Recomendaciones o Sugerencias",$email_body)){
+      return true;
+    }
+    else{
+      return false;
+    }
+  }
+
+  public function envioRecomendacionesUser($data){
+    $email_body = Modelo_TemplateEmail::obtieneHTML("SUGERENCIAS_USUARIO");
+    $email_body = str_replace("%NOMBRES%", $data['nombres'], $email_body);   
+    $email_body = str_replace("%SUGERENCIA%", $data['descripcion'], $email_body);   
+    if (Utils::envioCorreo($data['correo1'],"Recomendaciones o Sugerencias",$email_body)){
       return true;
     }
     else{

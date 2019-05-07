@@ -92,7 +92,7 @@ RewriteRule ^registroOferta/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar&opcio
 RewriteRule ^compraplan/exito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=exito [L]
 RewriteRule ^compraplan/error/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=resultado&mensaje=error [L]
 RewriteRule ^compraplan/deposito/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=deposito [L]
-RewriteRule ^compraplan/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra&idplan=$1 [L]
+RewriteRule ^compraplan/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=compra&idplan=$1 [L]
 RewriteRule ^planes/$ %{ENV:REWRITEBASE}index.php?mostrar=plan [L]
 RewriteRule ^planesUsuario/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario [L]
 RewriteRule ^planesUsuario/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&opcion=planes_usuario&desactivarPlan=$1 [L]
@@ -102,6 +102,7 @@ RewriteRule ^planesUsuario/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=plan&o
 #ofertas
 RewriteRule ^oferta/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta [L]
 RewriteRule ^oferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=oferta&page=$1 [L]
+RewriteRule ^convertir/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=convertirOferta [L]
 RewriteRule ^detalleOferta/([a-z]+)/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
 
 ######################################################################################
@@ -155,7 +156,7 @@ RewriteRule ^verAspirantes/([0-9]+)/([A-Za-z0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-
 #generarPDF
 RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&username=$2 [L]
 
-RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&idPlan=$2&username=$3 [L]
+RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&idPlan=$2&idOferta=$3&username=$4 [L]
 
 #datosPDF
 RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&username=$2&vista=$3&id_oferta=$4 [L]

@@ -3,7 +3,7 @@ body
 {
     /*Para vista perfil*/
     background-color: #fff;
-    padding-top: 72px;
+    /*  padding-top: 72px;*/
 }
 a {
   cursor:pointer;
@@ -53,27 +53,31 @@ a {
     border-radius: 0px;
 }
 
+
+
+
+
 .navbar-default
 {
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #0267cf;
-  /*color: white;*/
+  background-color: #204478;
+  color: white;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover
 {
   background-color: #3385ff;
-  color: white;
+  /*color: white;*/
   border-radius: 10px;
 }
 /*Estilos Default opciones del navbar*/
 .navbar-default .navbar-nav>li>a {
-    color: #cccccc;
+    color: #fff;
 }
 /*Estilos de opciones del navbar en hover*/
 .navbar-default .navbar-nav>li>a:hover {
-    color: white;
+    /*color: white;*/
     /*font-size: 15px;*/
     /*background-color: #1a75ff;*/
 }
@@ -87,7 +91,7 @@ a {
 }
 
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover {
-    color: white;
+    /*color: white;*/
     background-color: #1a75ff;
 }
 
@@ -303,7 +307,7 @@ a {
 
 .tti_section
 {
-  background-color: #4B92A7;
+  background-color: #4b98dd;
   padding: 50px 0 50px 0;
 }
 
@@ -391,12 +395,13 @@ a {
 
   .country_mic
   {
-    width: 5%;
+    width: 10%;
   }
 
   .social_mic
   {
-    width: 5%;
+    width: 10%;
+    border-radius: 50%;
   }
 
   .separate_social_country
@@ -640,8 +645,6 @@ a {
   margin-bottom: 10px; 
   border-radius: 50%; 
   border: 2px solid #5d9fe2; 
-  height: 96px;
-  width: 96px;
 }
 
 .parpadea {
@@ -1112,11 +1115,6 @@ fieldset {
 }
 
 
-.ofertaUrgente{
-  background: #e2abab61;
-  border: 1px solid #c50f0f61;
-  color: red;
-}
 
 .etiquetaOfertaUrgente{
   color:black;

@@ -77,9 +77,9 @@ class Vista {
     $menu = array();
     if( !Modelo_Usuario::estaLogueado() ){
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
-      $menu["menu"][] = array("href"=>"#", "id"=>"regCandMic", "nombre"=>"Registro Candidato");
-      $menu["menu"][] = array("href"=>"#", "id"=>"regEmpMic", "nombre"=>"Registro Empresa");
-      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/login/", "nombre"=>"Iniciar Sesi&oacute;n");
+      //$menu["menu"][] = array("href"=>"#", "id"=>"regEmpMic", "nombre"=>"Registro Empresa");
+      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/login/", "nombre"=>"Ingresar");
+      $menu["menu"][] = array("href"=>"#", "id"=>"regCandMic", "nombre"=>"Registrate");
     }
     else{      
       $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/", "nombre"=>"Inicio"); 

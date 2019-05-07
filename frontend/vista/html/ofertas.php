@@ -399,13 +399,16 @@
 														$cantd = 0;
 													}
 
-													if (isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatosPostulados',$id_plan) || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos',$id_plan)) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
+													/*if (isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatosPostulados',$id_plan) || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos',$id_plan)) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
 														echo ' <br> <a class="aspirantes" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($o['id_ofertas']).'/1/">'.$cantd.'</a>';
 
-													}elseif($cantd == 0){
+													}else*/if($cantd == 0){
 														echo ' <br> <span class="aspirantes">'.$cantd.'</span>';
 													}else{
-														echo ' <br> <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver inscritos en la oferta\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')" class="aspirantes">'.$cantd.'</span>';
+														//echo ' <br> <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver inscritos en la oferta\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')" class="aspirantes">'.$cantd.'</span>';
+
+														echo ' <br> <a class="aspirantes" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($o['id_ofertas']).'/1/">'.$cantd.'</a>';
+
 													}
 												?>
 								                </div>

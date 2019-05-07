@@ -10,7 +10,8 @@ class Modelo_Plan{
     costo=2 => los que no tenga precio 0*/
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
   	if (empty($tipousuario)||empty($sucursal)){ return false; }
-    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.extension, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+    $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion,
                    IF(p.promocional,p.prom_codigo_paypal,p.codigo_paypal) AS codigo_paypal,
                    IF(p.promocional,p.prom_num_post,p.num_post) AS num_post, 
                    IF(p.promocional,p.prom_costo,p.costo) AS costo, 
@@ -84,7 +85,7 @@ class Modelo_Plan{
    
   public static function busquedaActivoxTipo($plan,$tipo,$sucursal){
     if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }
-    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, extension, num_cuenta,
+    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, prom_duracion, num_accesos,
                    IF(promocional,prom_costo,costo) AS costo,
                    IF(promocional,prom_num_post,num_post) AS num_post,
                    IF(promocional,prom_duracion,duracion) AS duracion,

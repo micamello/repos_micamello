@@ -36,9 +36,16 @@ class Controlador_Oferta extends Controlador_Base{
         $_SESSION['mfo_datos']['usuarioSeleccionado'] = array();
         $_SESSION['mfo_datos']['ultimaVistaActiva'] = $vista;
         $_SESSION['mfo_datos']['usuariosHabilitados'] = array();
+
+        if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
+          $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
+          Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+        } 
+      
       }
 
       if($vista == 'oferta'){        
+
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],$_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['infohv'],$planes,$vista);
       }
 
@@ -70,9 +77,48 @@ class Controlador_Oferta extends Controlador_Base{
       $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));            
 
       switch ($opcion) {
+        case 'convertir':
+          $idOferta = Utils::getParam('idOferta', '', $this->data);
+          $tipo = Utils::getParam('tipo', '', $this->data);
+          
+          if($tipo == 1){
+            $_SESSION['mfo_datos']['usuario']['ofertaConvertir'] = $idOferta;
+          }else{
+            unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
+          }
+
+        break;
+        case 'convertirOferta':
+
+          $idOferta = Utils::desencriptar($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
+          if (Utils::getParam('convertirOferta') == 1) {
+            $id_empresa_plan = Utils::desencriptar(Utils::getParam('planUsuario_convertir', '', $this->data));
+            $datosOferta = Modelo_oferta::consultarOferta($idOferta);
+            $datosOferta[0]['id_empresa_plan'] = $id_empresa_plan;
+
+            $datosRequisitos = array('viajar'=>$datosOferta[0]['viajar'],'residencia'=>$datosOferta[0]['residencia'],'discapacidad'=>$datosOferta[0]['discapacidad'],'confidencial'=>$datosOferta[0]['confidencial'],'edad_minima'=>$datosOferta[0]['edad_minima'],'edad_maxima'=>$datosOferta[0]['edad_maxima']);
+            
+            unset($datos[0]['viajar'],$datos[0]['residencia'],$datos[0]['discapacidad'],$datos[0]['confidencial'],$datos[0]['edad_minima'],$datos[0]['edad_maxima']);
+            self::convertirOferta($datosOferta[0],$datosRequisitos);
+          }
+
+        break;
         case 'buscaDescripcion':
           $idOferta = Utils::desencriptar(Utils::getParam('idOferta', '', $this->data));
           $resultado = Modelo_Oferta::consultarDescripcionOferta($idOferta);
+          Vista::renderJSON($resultado);
+        break;
+        case 'buscaTitulo':
+
+          $idOferta = Utils::getParam('idOferta', '', $this->data);
+          $tipo = Utils::getParam('tipo', '', $this->data);
+
+          $idOferta = (!empty($idOferta)) ? Utils::desencriptar($idOferta) : $idOferta; 
+
+          if($tipo == 1){
+            $_SESSION['mfo_datos']['usuario']['ofertaConvertir'] = Utils::encriptar($idOferta);
+          }
+          $resultado = Modelo_Oferta::consultarTituloOferta($idOferta);
           Vista::renderJSON($resultado);
         break;
         case 'filtrar':
@@ -604,7 +650,61 @@ class Controlador_Oferta extends Controlador_Base{
       foreach ($ids_planes as $key => $id_plan_usuario) {
         Modelo_UsuarioxPlan::sumarPublicaciones($id_plan_usuario);
       }
+    }
 
+    public static function convertirOferta($datos,$datos_requisitos){
+      
+      $oferta_ant = $datos['id_ofertas'];
+      try{
+
+        $GLOBALS['db']->beginTrans();
+        $datos_area_subarea = explode(",",$datos['id_areas_subareas']);
+        unset($datos['id_ofertas'],$datos['id_areas_subareas']);
+        
+        //desactivar oferta anterior
+        if(!Modelo_Oferta::desactivarOferta($oferta_ant)){
+          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+        }
+
+        if(!Modelo_Oferta::guardarRequisitosOferta($datos_requisitos)){
+          throw new Exception("Ha ocurrido un error al guardar los requisitos de la oferta");
+        }
+
+        $datos['estado'] = 1;
+        $datos['id_requisitoOferta'] = $GLOBALS['db']->insert_id();
+
+        //Insertar el nuevo registro de la oferta con el id_empresa_plan actualizado
+        if(!Modelo_Oferta::guardarOfertaConvertida($datos)){
+          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+        }
+        $id_oferta_nueva = $GLOBALS['db']->insert_id(); 
+      
+        if(!Modelo_OfertaxAreaSubarea::guardarOfertaAreasSubareas($id_oferta_nueva, $datos_area_subarea)){
+          throw new Exception("Ha ocurrido un error al guardar las subareas de la oferta");
+        }
+
+        //Restar el numero de publicaciones del plan seleccionado
+        $plan_seleccionado = Modelo_UsuarioxPlan::consultarRecursosAretornar($datos['id_empresa_plan']);
+        if(!Modelo_UsuarioxPlan::restarPublicaciones($datos['id_empresa_plan'], $plan_seleccionado['num_publicaciones_rest'], Modelo_Usuario::EMPRESA)){
+          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+        } 
+
+        //Mover a los postulados de la oferta anterior a la nueva
+        if(!Modelo_Postulacion::transladarCandidatos($oferta_ant,$id_oferta_nueva)){
+          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+        }
+
+        $GLOBALS['db']->commit();
+        $_SESSION['mostrar_exito'] = 'La oferta fue convertida exitosamente.';
+        $datoOfertaNueva = Modelo_Oferta::ofertaPostuladoPor($id_oferta_nueva)[0]['id_ofertas'];
+        unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
+        $enlace = PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($datoOfertaNueva).'/1/';
+      }catch (Exception $e) {
+        $enlace = PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($oferta_ant).'/1/';
+        $_SESSION['mostrar_error'] = $e->getMessage();
+        $GLOBALS['db']->rollback();
+      }
+      Utils::doRedirect($enlace);
     }
 }
 ?>

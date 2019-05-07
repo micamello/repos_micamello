@@ -88,11 +88,11 @@ $('#provinciaP').change(function(){
 });
 
 
-/*$('#btn_submitpaypal').click(function(){  
+$('#btn_submitpaypal').click(function(){  
   var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
   $('#custom').attr('value',valor);
   console.log('v2: '+valor);
-});*/
+});
 
 $('#imagen').change(function(e) {
     addImage(e); 
@@ -158,31 +158,22 @@ function validaCampos(tipo){
 }
 /*
 function validarCorreo(correo,err_correo,seccion_correo,btn){
-
   var error = 0;
   var expreg_correo = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/i;
-
   if(correo == null || correo.length == 0 || /^\s+$/.test(correo)){
-
     colocaError(err_correo, seccion_correo,"El campo no puede ser vacío",btn);
     error = 1; 
-
   }else if(!expreg_correo.test(correo)){
-
     colocaError(err_correo,seccion_correo,"Formato incorrecto, no es un correo válido",btn); 
     error = 1;  
-
   }else{
     quitarError(err_correo,seccion_correo);
   }
   return error;
 }
-
 function validarInput(campo,err,err_campo,btn){
-
   var error = 0;
   var expreg = /^[a-z A-ZñÑáéíóúÁÉÍÓÚ]+$/i;
-
   if(campo == null || campo.length == 0 || /^\s+$/.test(campo)){
     colocaError(err,err_campo,"El campo no puede ser vacío",btn);
     error = 1; 
@@ -194,22 +185,15 @@ function validarInput(campo,err,err_campo,btn){
   }
   return error;
 }
-
 function validarDir(direccion,err_dir, seccion_dir,btn){
-
   var error = 0;
   var expreg1 = /^[a-z A-Z 0-9 ÁÉÍÓÚáéíóúñÑ]+$/i;
-
   if(direccion == null || direccion.length == 0 || /^\s+$/.test(direccion)){
-
     colocaError(err_dir, seccion_dir,"El campo no puede ser vacío",btn);
     error = 1; 
-
   }else if(!expreg1.test(direccion)){
-
     colocaError(err_dir, seccion_dir,"Formato incorrecto, solo letras y números",btn); 
     error = 1;
-
   }else{
       quitarError(err_dir,seccion_dir);
   }
@@ -231,20 +215,14 @@ function validarSelect(id,err_select,err_group_select,btn){
 }
 
 /*function validarNumTelf(num,err_telf,seccion_telf,btn){
-
   var expreg_telf = /^[0-9]+$/i;
   var error = 0;
-
   if(num == null || num.length == 0 || /^\s+$/.test(num)){
-
       colocaError(err_telf,seccion_telf,"El campo no puede ser vacío",btn);
       error = 1;
-
   }else if(!expreg_telf.test(num)){
-
       colocaError(err_telf,seccion_telf,"Formato incorrecto, solo numeros",btn);
       error = 1; 
-
   }else{
       quitarError(err_telf,seccion_telf);
   }
@@ -522,9 +500,7 @@ $('#dniP').on('blur', function(){
 });
 
 function enviarFormulario(form){
-
   var estado = validarFormulario();
-  
   if(estado == 1 && form == 'form_deposito'){
     document.form_deposito.submit();
   }else if(form == 'form_paypal'){    
@@ -538,7 +514,9 @@ function enviarFormulario(form){
       document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
       $('#form_paypal').submit();
     }
-  }
+  }else if(form == 'form_payme'){
+    
+  }  
 }
 
 function validarFormulario(){
@@ -552,7 +530,6 @@ function validarFormulario(){
   var form = document.getElementById("tipoSeleccionado").value;
 
   if(form == 1){
-
     var archivo = document.getElementById('imagen');
     var num_comprobante = document.getElementById('num_comprobante').value;
     var correo = document.getElementById('correo').value;

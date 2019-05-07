@@ -32,7 +32,6 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
 
         $fechacaducidad = strtotime ( '+'.$parametro.' hours',strtotime($accesoemp['fecha_envio_acceso']));
         $fechacaducidad = date('Y-m-d H:i:s',$fechacaducidad);
-
           if(count($facetaxusuario) == $facetas){
             if(!Modelo_AccesoEmpresa::actualizarFechaxidAcceso($accesoemp['id_accesos_empresas'], $fechacaducidad)){
               throw new Exception("Ha ocurrido un error al actualizar la fecha de caducidad");
@@ -52,7 +51,7 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
               Utils::envioCorreo($accesoemp["correo"],"Aceptación de acceso",$email_body); 
           }
           else{
-                if($fechacaducidad <= date('Y:m:d H:i:s')){
+                if($fechacaducidad <= date('Y-m-d H:i:s')){
                   proceso($accesoemp);
                   $nombre_mostrar = utf8_encode($accesoemp["nombre_usuario"]).(!empty($accesoemp['apellido_usuario']) ? " ".utf8_encode($accesoemp['apellido_usuario']) : "");
                   $email_body = Modelo_TemplateEmail::obtieneHTML("DEVOLUCION_ACCESO");

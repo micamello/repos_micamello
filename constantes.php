@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root'); 
-define('DBNOMBRE', 'micamello_desarrollo7');
+define('DBNOMBRE', 'base_fer');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -35,6 +35,12 @@ define('PRIORIDAD', array('1'=>'Informe Parcial', '2'=>'Informe Completo'));
 define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
 define('SALARIO', array('1'=>'Menos de 386', '2'=>'Entre 386 y 700', '3'=>'Entre 700 y 1200', '4'=>'M&aacute;s de 1200'));
 define('EDADES', array('1'=>'18 a 25 A&ntilde;os', '2'=>'25 a 35 A&ntilde;os', '3'=>'35 a 45 A&ntilde;os', '4'=>'M&aacute;s de 45 a&ntilde;os'));
+define('FACEBOOK', 'https://es-la.facebook.com/MiCamello.com.ec/');
+define('TWITTER', 'https://twitter.com/MiCamelloec');
+define('INSTAGRAM', 'https://www.instagram.com/micamelloec/');
+
+define('NRO_TRABAJADORES', array('1'=>'De 1 a 10 trabajadores', '2'=>'De 11 a 50 trabajadores', '3'=>'De 51 a 200 trabajadores', '4'=>'De 201 a 500 trabajadores','5'=>'De 501 a 1000 trabajadores','6'=>'M&aacute;s de 1000 trabajadores'));
+
 define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as', '3'=>'&Uacute;ltima semana', '4'=>'&Uacute;ltimo mes'));
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
 define('MESES', array('01'=>'Enero', '02'=>'Febrero', '03'=>'Marzo', '04'=>'Abril','05'=>'Mayo', '06'=>'Junio', '07'=>'Julio', '08'=>'Agosto','09'=>'Septiembre', '10'=>'Octubre', '11'=>'Noviembre', '12'=>'Diciembre'));
@@ -48,6 +54,7 @@ define('DISCAPACIDAD',array('1'=>'S&iacute;','2'=>'No'));
 //define('FILTRO_PREFERENCIAS_DEFAULT',0);
 
 define('ANOSEXP', array('1'=>'Sin Experiencia', '2'=>'1 - 3 a&ntilde;os', '3'=>'4 - 6 a&ntilde;os', '4'=>'7 - 10 a&ntilde;os', '5'=>'M&aacute;s de 10 a&ntilde;os'));
+
 define('REGISTRO_PAGINA',20);
 define('RUTA_PAYPAL','https://www.sandbox.paypal.com/cgi-bin/webscr');
 define('REQUISITO', array('0'=>'No', '1'=>'S&iacute;'));
@@ -76,10 +83,11 @@ define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-w
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
 //PAYME
-define('ACQUIRERID','237');
-define('IDCOMMERCE','10030');
-define('PAYME_SECRET_KEY','BsNTqkAEUePerJm*55654423');
-define('CURRENCY_CODE','840');
+define('PAYME_ACQUIRERID','237');
+define('PAYME_IDCOMMERCE','10030');
+define('PAYME_SECRET_KEY','MGvMqSVsEyLDxRJHkL.39434899322');
+define('PAYME_CURRENCY_CODE','840');
+define('PAYME_WS','https://integracion.alignetsac.com/WALLETWS/services/WalletCommerce?wsdl');
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');

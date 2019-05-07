@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+  	$('[data-toggle="tooltip"]').tooltip();   
+
 	if($('#accesos').val() == 1 && $('#vista').val() == 2){
 		$('#planes').show();
     }/*else{
@@ -106,14 +108,72 @@ $(document).ready(function () {
         },
     });
 
-    verFacetasTodas();
+    verFacetasTodas(); 
+    cargaAutomaticaModal();
 });
+
+$('#button_convertir_oferta').on('click', function(){
+	document.form_convertir.submit();
+});
+
+$('#btn_convertir').on('click', function(){
+
+	var puerto_host = $('#puerto_host').val();
+	var idOferta = document.getElementById('idOferta').value;
+	if($('#cantd_planes').val() > 0){
+		
+		$.ajax({
+	        type: "GET",
+	        url: puerto_host+"/index.php?mostrar=oferta&opcion=buscaTitulo&idOferta="+idOferta+"&tipo=1",
+	        dataType:'json',
+	        async: false,
+	        success:function(data){
+
+	            $('#titulo_oferta').html(data.titulo);
+	            //$('#id_oferta').val(idOferta);
+	            $('#convertir').modal();
+	        },
+	        error: function (request, status, error) {
+	            error = 1;
+	        }                  
+	    })
+	}else{
+
+		$.ajax({
+	        type: "GET",
+	        url: puerto_host+"/index.php?mostrar=oferta&opcion=convertir&idOferta="+idOferta+"&tipo=1",
+	        dataType:'json',
+	        async: false,                 
+	    })
+
+	    window.location = puerto_host+'/planes/';
+	}
+});
+
+
+$('#cancelar_conversion').on('click', function(){
+
+	var puerto_host = $('#puerto_host').val();
+	$.ajax({
+        type: "GET",
+        url: puerto_host+"/index.php?mostrar=oferta&opcion=convertir&tipo=2",
+        dataType:'json',
+        async: false,                 
+    })
+
+    if(document.getElementById('ofertaConvertir') && document.getElementById('ofertaConvertir').value != ''){
+    	window.location = puerto_host+'/verAspirantes/1/'+document.getElementById('ofertaConvertir').value+'/1/';
+	}
+});
+
 
 $('#btn_accesos_confirmar').on('click', function(){
 	document.form_enviarAccesos.submit();
 });
 
 $('#btn_accesos').on('click', function(){
+	
+	$('#aviso_accesos').modal();
 	activar();
 });
 
@@ -125,6 +185,28 @@ $('#cerrar_accesos').on('click', function(){
 	desactivar();
 });
 
+function cargaAutomaticaModal(){
+
+	var puerto_host = $('#puerto_host').val();
+	if(document.getElementById('ofertaConvertir') && document.getElementById('ofertaConvertir').value != ''){
+
+    	var idOferta = document.getElementById('ofertaConvertir').value;	
+		$.ajax({
+	        type: "GET",
+	        url: puerto_host+"/index.php?mostrar=oferta&opcion=buscaTitulo&idOferta="+idOferta+"&tipo=2",
+	        dataType:'json',
+	        async: false,
+	        success:function(data){
+
+	            $('#titulo_oferta').html(data.titulo);
+	            $('#convertir').modal();
+	        },
+	        error: function (request, status, error) {
+	            error = 1;
+	        }                  
+	    })
+    }
+}
 
 /*$('#marcarTo').on('change',function(){
 
