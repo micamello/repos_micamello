@@ -4,51 +4,45 @@
     <div class="main_business">      
       <?php if (!empty($planes)){ ?>                
         <div class="col-md-12">        
-          <!--<h3 align="left">Seleccione un plan:</h3>-->
+          <h3 align="center">Planes</h3>
           <div class="pricingdiv">   
             <?php foreach($planes as $plan){ 
               $plan["id_plan"] = Utils::encriptar($plan["id_plan"]);
             ?>
               <ul style="<?php echo ($plan["promocional"]) ? "border: 2px solid #a21414;" : "border: 1px solid #262D5D";?>" class="theplan col-xs-12 col-md-4">
-                <li class="title <?php echo ($plan["promocional"]) ? "headingrojo" : "headingazul";?>"><?php echo utf8_encode($plan["nombre"]);?></li>
-                <!--<li><img src="<?php //echo PUERTO;?>://<?php //echo HOST;?>/imagenes/planes/<?php //echo $plan["id_plan"];?>.<?php //echo $plan["extension"];?>" ></li>-->
-                <li class="titulo">
-                  <?php 
-                  echo (($plan["promocional"]) ? "Promoci&oacute;n<br>" : "");                 
-                  if (!empty($plan["duracion"])){ 
-                    echo "Plan&nbsp;".$plan["duracion"]." días"; 
-                  } 
-                  else{
-                    echo "Plan&nbsp;Gratuito"; 
-                  }
-                ?></li>
-                <?php 
-                  $listadoAcciones = explode(",",$plan['acciones']);
-                  $listadoPermisos = explode(",",$plan['permisos']);
-                  foreach($listadoPermisos as $key => $permiso){                    
-                    if ($listadoAcciones[$key] == "autopostulacion"){
-                      $permiso = str_replace('NRO',$plan["num_post"],$permiso);
-                    }              
-                ?>
-                  <li class="text-justify">• <?php echo utf8_encode(trim($permiso));?></li>
-                <?php                           
-                  } 
-                ?>
+                <li class="title <?php echo ($plan["promocional"]) ? "headingrojo" : "headingazul";?>"><?php echo strtoupper(utf8_encode($plan["nombre"]));?></li>                                
                 <li>
                   <h1><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?>
                     <?php if (!empty($plan["costo"])){ ?>  
                       <h6><small>(El precio incluye IVA)</small></h6>
                     <?php } ?>
                   </h1>
-                  <?php if (empty($plan["costo"])) { ?>
-                    <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"
-                      <span class="icon-tag"></span>POSTULARSE
-                    </a>
-                  <?php } else { ?>
-                    <a class="pricebutton" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');">
-                      <span class="icon-tag"></span>SUBSCRIBIRSE
-                    </a>
-                  <?php } ?>                    
+                  <h1>
+                    <?php echo $plan["duracion"]." DÍAS";?>
+                  </h1>                                     
+                </li>
+                <?php 
+                $listadoAcciones = explode(",",$plan['acciones']);
+                $listadoPermisos = explode(",",$plan['permisos']);
+                foreach($listadoPermisos as $key => $permiso){                    
+                  if ($listadoAcciones[$key] == "autopostulacion"){
+                    $permiso = str_replace('NRO',$plan["num_post"],$permiso);
+                  }              
+                ?>
+                  <li class="text-justify">• <?php echo utf8_encode(trim($permiso));?></li>
+                <?php                           
+                } 
+                ?>
+                <li>
+                <?php if (empty($plan["costo"])) { ?>
+                  <a class="pricebutton" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/">
+                    <span class="icon-tag"></span>POSTULARSE
+                  </a>
+                <?php } else { ?>
+                  <a class="pricebutton" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');">
+                    <span class="icon-tag"></span>SUBSCRIBIRSE
+                  </a>
+                <?php } ?> 
                 </li>
               </ul>
             <?php } ?> 
