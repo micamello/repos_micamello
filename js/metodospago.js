@@ -643,7 +643,7 @@ function validarFormulario(){
       error = 1;    
     }
     if(zip.length <= '10'){
-      if(validarInput(zip,err_zip,seccion_zip,btn)){
+      if(validarDir(zip,err_zip,seccion_zip,btn)){
         error = 1;
       }else{
         quitarError(err_zip,seccion_zip);
