@@ -55,7 +55,7 @@ class Controlador_Velocimetro extends Controlador_Base {
       $msj1 = '¡FELICIDADES!';
       $msj2 = 'Ahora formas parte del presente y el futuro de las empresas, siendo el candidato ideal';
       $textoBoton = "Ver Resultados";
-      $enlaceboton = PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';
+      $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
     }
 
     $tags["valorporc"] = $valorporc;
