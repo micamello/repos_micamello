@@ -15,17 +15,15 @@ class Vista {
       $sess_suc_msg = '';
     } 
     ob_start();
-
     if (!empty ($cabecera)){      
       require RUTA_VISTA . "html/". $cabecera . '.php';
     }
-
     $ruta = RUTA_VISTA . "html/". $pagina . '.php';
     if( file_exists($ruta) ){
-        require $ruta;       
+      require $ruta;       
     }    
     else{
-        echo 'Esta pagina no existe : '. $pagina;  
+      echo 'Esta pagina no existe : '. $pagina;  
     }
     if (!empty($piepagina)){
       require RUTA_VISTA . "html/" . $piepagina . '.php';
