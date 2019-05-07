@@ -40,7 +40,7 @@ class Vista {
     ob_start();
 
     $ruta = RUTA_VISTA . "html/". $pagina . '.php';
-    if( file_exists($ruta) ){
+    if(file_exists($ruta) ){
         require $ruta;       
     }    
     else{

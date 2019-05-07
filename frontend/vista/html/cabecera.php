@@ -17,9 +17,9 @@
   <!-- Archivo css micamello mic.css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
   <!--Theme custom css -->
-  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css">
-  <!--<link rel="stylesheet" href="<?php #echo PUERTO."://".HOST;?>/css/media-queries.css">-->
-  <link href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!--<link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/style.css">
+  <link rel="stylesheet" href="<?php #echo PUERTO."://".HOST;?>/css/media-queries.css">-->
+  <link href="<?php echo PUERTO."://".HOST;?>/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap-multiselect.css">
@@ -225,10 +225,11 @@ if($navegador == 'MSIE'){ ?>
 
 <?php
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
-    <br>
-    <?php if(!isset($show_banner)){ ?> 
-      <br><br><br><br>
-    <?php } ?>
+  <br>
+  <?php if(!isset($show_banner)){ ?> 
+    <br><br><br><br>
+  <?php } ?>
+  <section id="product" class="product">
     <div class="container">
       <ol class="breadcrumb" align="left">
         <?php 
@@ -245,6 +246,5 @@ if($navegador == 'MSIE'){ ?>
         } ?>
       </ol> 
     </div>
-  <?php } ?>
-
-<section id="product" class="product">
+  </section>
+<?php } ?>

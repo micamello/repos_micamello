@@ -119,6 +119,14 @@ display: inline;
         position: relative;
     display: block;
 }
+.btn-min-light{
+    color: #4b98dd;
+    background-color: transparent;
+    border: 2px solid #4b98dd;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    
+}
 .btn-minimalist-blue{
     background-color: transparent;
     border: 2px solid #204478;
@@ -132,13 +140,23 @@ display: inline;
     border: 2px solid #fff;
     margin: 10px;
     color: white;
-    width: 50%;
     padding-top: 10px;
     padding-bottom: 10px;
 }
 .btn-minimalista a{
     color: white;
     font-size: 16pt;
+}
+.btn-light-blue{
+    border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #4b98dd;
+    color: white;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
 }
 .btn-blue{
     border-color: transparent;
@@ -151,6 +169,22 @@ display: inline;
     font-weight: bold;
     margin-bottom: 20px;
 }
+.btn-blue.disabled{
+    background-color: #303d4c;
+    color: #989899;
+    cursor: not-allowed;
+}
+.btn-blue.disabled:hover{
+    background-color: #303d4c;
+    color: #989899;
+    cursor: not-allowed;
+}
+.btn-blue.disabled:hover a{
+    background-color: #303d4c;
+    color: #989899;
+    cursor: not-allowed;
+ }
+
 .btn-blue a{
     color: white;
 }
@@ -165,7 +199,15 @@ display: inline;
  .banner-publicidad{
     background-color: #4b98dd;
  }
-
+/*EDITAR PERFIL*/
+.perfil-cuadro{
+  background-color: #204478;
+  text-transform: uppercase;
+  color: white;
+  font-weight: bold;
+  font-size: 18pt;
+  padding: 10px 0px;
+}
  /*TIMER*/
  #regEmpMic{
     display: inline;
@@ -251,11 +293,24 @@ display: inline;
     #prox{
         font-size: 30pt;
     }
+    .texto-canea{
+        font-size: 14pt;
+    }
 }
 /*PANTALLAS MEDIANAS*/
-@media only screen and (max-width:908px) and (min-width:481px){
+@media only screen and (max-width:1000px) and (min-width:481px){
     #prox{
         font-size: 50pt;
+    }
+    .texto-canea{
+        font-size: 14pt;
+    }
+}
+@media only screen and (min-width:1000px){
+   
+
+    .texto-canea{
+        font-size: 18pt;
     }
 }
 
@@ -442,7 +497,7 @@ display: inline;
     text-align: center;
     font-family: ‘Antipasto’;
     text-transform: uppercase;
-    font-size: 20pt;
+
     color: #204478;
     margin-bottom: 30px;
 }
@@ -702,6 +757,9 @@ padding-top: 10px;
 
 }
 /*QUIENES SOMOS*/
+#margin-b-15{
+    margin-bottom: 15px;
+}
 .qs-text{
     color: #515151;
     font-size: 16px;
@@ -812,7 +870,7 @@ padding-top: 10px;
     background-color: transparent;
     text-align: center;
     font-weight: 1000;
-    font-size: 190pt;
+    font-size: 170pt;
     font-family: ‘Antipasto’;
     color: #204478;
 
@@ -913,4 +971,189 @@ padding-top: 10px;
 }
 .centro{
     text-align: center;
+}
+
+
+/*BARRA DE EDITAR*/
+
+.checkout-wrap {
+  color: #444;
+  font-family: 'PT Sans Caption', sans-serif;
+  margin: 0px 0px 40px auto;
+  max-width: 1200px;
+  position: relative;
+}
+
+ul.checkout-bar li {
+  color: #57aed1;
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 20px 14px 80px;
+  position: relative;
+  z-index: 999;
+
+}
+ul.checkout-bar li:before {
+  -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+  background: #57aed1;
+  border: 2px solid #FFF;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  left: 20px;
+  line-height: 37px;
+  height: 35px;
+  position: absolute;
+  text-align: center;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  top: 4px;
+  width: 35px;
+  z-index: 999;
+}
+ul.checkout-bar li.active {
+  color: #8bc53f;
+  font-weight: bold;
+  z-index: 999;
+}
+ul.checkout-bar li.active:before {
+  background: #8bc53f;
+  z-index: 999;
+}
+ul.checkout-bar li.visited {
+  background: #ECECEC;
+  color: #57aed1;
+  z-index: 999;
+}
+ul.checkout-bar li.visited:before {
+  background: #57aed1;
+  z-index: 999;
+}
+ul.checkout-bar li:nth-child(1):before {
+  content: "1";
+}
+ul.checkout-bar li:nth-child(2):before {
+  content: "2";
+}
+ul.checkout-bar li:nth-child(3):before {
+  content: "3";
+}
+ul.checkout-bar li:nth-child(4):before {
+  content: "4";
+}
+ul.checkout-bar li:nth-child(5):before {
+  content: "5";
+}
+ul.checkout-bar li:nth-child(6):before {
+  content: "6";
+}
+ul.checkout-bar a {
+  color: #57aed1;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media all and (min-width: 800px) {
+  .checkout-bar li.active:after {
+    -webkit-animation: myanimation 3s 0;
+    background-size: 35px 35px;
+    background-color: #8bc53f;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 15px;
+    width: 100%;
+    left: 50%;
+    position: absolute;
+    top: -50px;
+    z-index: 0;
+  }
+
+  .checkout-wrap {
+    margin-top: 0px;
+    z-index: 9;
+  }
+
+
+  ul.checkout-bar {
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    background-size: 35px 35px;
+    background-color: #57aed1;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.4) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.4) 75%, transparent 75%, transparent);
+    border-radius: 15px;
+    height: 15px;
+    margin: 0 auto;
+    padding: 0;
+    position: absolute;
+    width: 100%;
+  }
+  ul.checkout-bar:before {
+    background-size: 35px 35px;
+    background-color: #57aed1;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    content: " ";
+    height: 15px;
+    left: 0;
+    position: absolute;
+    width: 10%;
+  }
+  ul.checkout-bar li {
+    display: inline-block;
+    margin: 50px 0 0;
+    padding: 0;
+    text-align: center;
+    width: 19%;
+  }
+  ul.checkout-bar li:before {
+    background: #57aed1;
+    height: 45px;
+    left: 40%;
+    line-height: 45px;
+    position: absolute;
+    top: -65px;
+    width: 45px;
+    z-index: 99;
+  }
+  ul.checkout-bar li.visited {
+    background: none;
+  }
+  ul.checkout-bar li.visited:after {
+    background-size: 35px 35px;
+    background-color: #57aed1;
+    background-image: -webkit-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    background-image: -moz-linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+    -webkit-box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 2px 2px 2px 0px rgba(0, 0, 0, 0.2);
+    content: "";
+    height: 15px;
+    left: 50%;
+    position: absolute;
+    top: -50px;
+    width: 100%;
+    z-index: 99;
+  }
+}
+
+/*SUBIR FOTO*/
+
+.upload-photo {
+   opacity: 0;
+   position: absolute;
+   z-index: -1;
+}
+
+.custom_file:hover img 
+{
+    transform: scale(1.2);
 }

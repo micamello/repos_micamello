@@ -6,20 +6,20 @@ class Controlador_Velocimetro extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
     //solo candidatos pueden ingresar a los test
-    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
+   /* if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
     $faceta = Modelo_Respuesta::facetaActual($_SESSION['mfo_datos']['usuario']['id_usuario']);
     if (empty($faceta)){
       Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
-    }
-
+    }*/
+$faceta = 3;
     $this->mostrarDefault($faceta);     
   }
 
   public function mostrarDefault($faceta){    
-    $nrototaltest = Modelo_Cuestionario::totalTest();
+    /*$nrototaltest = Modelo_Cuestionario::totalTest();
     $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);    
     if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && $nrotestusuario < ($nrototaltest-3)){
       $enlaceboton = "cuestionario";
@@ -30,44 +30,40 @@ class Controlador_Velocimetro extends Controlador_Base {
     }  
     else{          
       $enlaceboton = "planes"; 
-    }
+    }*/
     
     if($faceta == 1){
-      $imagengif = "gif-lo-quiero.gif";
-      $descrporc = "Bajas";
-      $valorporc = "20";      
-      $imagen = "caracol.gif";
-      $textoBoton = "Siguiente";
+      $posibilidades = 'Bajas 20%';
+      $valorporc = 20;
+      $img = 'vel1.png'; 
+      $msj1 = '¡SIGUE AS&Iacute;!';
+      $msj2 = 'Estas a punto de descubrir tus puntos fuertes y de mejora';
+      $textoBoton = "Continuar";
     }
     elseif ($faceta == 2) {
-      $imagengif = "gif-lo-quiero.gif";
-      $descrporc = "Medianas";
-      $valorporc = "40";
-      $imagen = "tortuga.gif";
-      $textoBoton = "Siguiente";
+      $posibilidades = 'Medio 40%'; 
+      $valorporc = 40;
+      $img = 'vel2.png';
+      $msj1 = 'VAS MUY BIEN!';
+      $msj2 = 'Obtendras resultados beneficiosos para tu carrera profesional';
+      $textoBoton = "Continuar";
     }
     else{
-      $imagengif = "gif_felicidades.gif";
-      $descrporc = "Altas";
-      $valorporc = "100";
-      $enlaceboton = "postulacion";
-      $imagen = "camello.gif";
-      $textoBoton = "Postúlate";
+      $posibilidades = 'Alto 100%'; 
+      $valorporc = 100;
+      $img = 'vel3.png';
+      $msj1 = '¡FELICIDADES!';
+      $msj2 = 'Ahora formas parte del presente y el futuro de las empresas, siendo el candidato ideal';
+      $textoBoton = "Ver Resultados";
     }
 
     $tags["valorporc"] = $valorporc;
-    $tags["descrporc"] = $descrporc;
-    $tags["imagengif"] = $imagengif;
+    $tags["posibilidades"] = $posibilidades;
+    $tags["img"] = $img;
+    $tags["msj1"] = $msj1;
+    $tags["msj2"] = $msj2;
     $tags["enlaceboton"] = $enlaceboton;
-    $tags["imagen"] = $imagen;
     $tags["textoBoton"] = $textoBoton;
-    $tags["faceta"] = $faceta;
-    $tags["nrototaltest"] = $nrototaltest;
-    $tags["nrotestusuario"] = $nrotestusuario;
-
-    $tags["template_js"][] = "d3.v3.min";
-    $tags["template_js"][] = "velocimetro";
-    $tags["template_css"][] = "velocimetro";
 
     Vista::render('velocimetro', $tags);    
   }

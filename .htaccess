@@ -193,3 +193,7 @@ RewriteRule ^registroresp/?$ %{ENV:REWRITEBASE}index.php?mostrar=cuestionariom2&
 
 #HvUsuario
 RewriteRule ^hvUsuario/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/?$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=hvUsuario&username=$1&id_oferta=$2&vista=$3 [L]
+
+#RegistroRespuestas
+RewriteRule ^canea/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=canea [L]
+RewriteRule ^quienesSomos/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=quienesSomos [L]

@@ -1,6 +1,4 @@
-﻿</section>
-
-<div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
+﻿<div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
@@ -288,7 +286,7 @@
       <div class="pie-pag col-md-4" style=" padding-left: 30px;
       ">
         <h3>Nosotros</h3>
-        <p><a class="" href="">¿Quiénes somos?</a></p>
+        <p><a class="" href="<?php echo PUERTO.'://'.HOST.'/quienesSomos/'?>">¿Quiénes somos?</a></p>
         <p><a class="legal_info_content" href="http://blog.micamello.com.ec/" target="blanked">Blog</a></p>
         <h3>Políticas de Privacidad</h3>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">Términos y Condiciones</a></p>

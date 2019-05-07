@@ -48,6 +48,12 @@ class Controlador_Inicio extends Controlador_Base {
         $datodni = Modelo_Usuario::existeDni($dni);        
         Vista::renderJSON(array("respdni"=>$datodni));
       break;
+      case 'quienesSomos':    
+        Vista::render('quienesSomos', $tags);
+      break;
+      case 'canea':    
+        Vista::render('canea', $tags);
+      break;
       default:    
         Vista::render('inicio', $tags);
       break;

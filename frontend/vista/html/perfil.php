@@ -1,4 +1,4 @@
-<br><br><br><br>
+<section id="product" class="product">
 <?php  
 $_SESSION['mostrar_exito'] = "";
 $_SESSION['mostrar_error'] = "";
@@ -824,3 +824,4 @@ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDAT
     </div>    
   </div>
 </div>
+</section>
