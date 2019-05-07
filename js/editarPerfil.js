@@ -860,7 +860,7 @@ function validarFormulario(tipovalidacion){
             error = 1; 
         }
 
-        if(tel_one_contact.length >= '6' && tel_one_contact.length <= '15'){
+        if(tel_one_contact.length >= '10' && tel_one_contact.length <= '15'){
 
             if(tel_one_contact == null || tel_one_contact.length == 0 || /^\s+$/.test(tel_one_contact)){
 
