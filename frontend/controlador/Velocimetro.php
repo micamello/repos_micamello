@@ -6,20 +6,20 @@ class Controlador_Velocimetro extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
     //solo candidatos pueden ingresar a los test
-   /* if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
+    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
 
     $faceta = Modelo_Respuesta::facetaActual($_SESSION['mfo_datos']['usuario']['id_usuario']);
     if (empty($faceta)){
       Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
-    }*/
-$faceta = 3;
+    }
+
     $this->mostrarDefault($faceta);     
   }
 
   public function mostrarDefault($faceta){    
-    /*$nrototaltest = Modelo_Cuestionario::totalTest();
+    $nrototaltest = Modelo_Cuestionario::totalTest();
     $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);    
     if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && $nrotestusuario < ($nrototaltest-3)){
       $enlaceboton = "cuestionario";
@@ -30,7 +30,7 @@ $faceta = 3;
     }  
     else{          
       $enlaceboton = "planes"; 
-    }*/
+    }
     
     if($faceta == 1){
       $posibilidades = 'Bajas 20%';
@@ -55,6 +55,7 @@ $faceta = 3;
       $msj1 = '¡FELICIDADES!';
       $msj2 = 'Ahora formas parte del presente y el futuro de las empresas, siendo el candidato ideal';
       $textoBoton = "Ver Resultados";
+      $enlaceboton = PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';
     }
 
     $tags["valorporc"] = $valorporc;

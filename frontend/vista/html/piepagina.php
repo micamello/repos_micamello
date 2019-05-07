@@ -1,19 +1,3 @@
-﻿<div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
-  <div class="modal-dialog" role="document">    
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"><b>Notificaci&oacute;n</b></h5>   
-      </div>
-      <div class="modal-body">
-        <h5 id="mensaje"></h5>
-      </div>
-      <div class="modal-footer" style="margin-top: 0px;">
-        <button type="button" id="btn_cancelar" class="btn btn-md btn-default" data-dismiss="modal">Cancelar</button>
-        <a href="#" id="btn_modal" class="btn btn-md btn-success">Ok</a>
-      </div>
-    </div>    
-  </div>
-</div>
 
 <?php if( !Modelo_Usuario::estaLogueado() ){ ?>
 
@@ -280,6 +264,7 @@
 
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 
+
 <footer id="contact" class="footer p-top-30">
   <div class="container-fluid">
     <div class="foot_mic">
@@ -323,33 +308,33 @@
       </div>
     </div>
   </div>
-</footer> 
-
+</footer>
 <!-- modal_seleccionados -->
-<div class="modal fade" id="modal_select" role="dialog">
-  <div class="modal-dialog modal-lg">
+<div class="modal fade" id="alert_descarga" tabindex="-1" role="dialog" aria-labelledby="alert_descarga" aria-hidden="true">
+  <div class="modal-dialog" role="document">    
     <div class="modal-content">
-      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
-      <div class="modal-body" style="overflow: scroll;">
-        <!-- <div class="col-md-12" id="modalmodal"> -->
-          
-        <!-- </div> -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><b>Notificaci&oacute;n</b></h5>   
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      <div class="modal-body">
+        <h5 id="mensaje"></h5>
       </div>
-    </div>
+      <div class="modal-footer" style="margin-top: 0px;">
+        <button type="button" id="btn_cancelar" class="btn btn-md btn-default" data-dismiss="modal">Cancelar</button>
+        <a href="#" id="btn_modal" class="btn btn-md btn-success">Ok</a>
+      </div>
+    </div>    
   </div>
 </div>
+<input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
+<input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script> 
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/sweetalert.min.js"></script>
 <?php
 if (isset($template_js) && is_array($template_js)){
@@ -366,14 +351,12 @@ if (isset($template_js) && is_array($template_js)){
         });
       </script>";
 }?>
-
 <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){
           swal('Exitoso!', '".$sess_suc_msg."', 'success');
         });
       </script>";
-} ?>
-    
+}?>  
 </body>
 </html>

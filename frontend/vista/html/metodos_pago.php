@@ -92,28 +92,35 @@
               </div>
               <div class="col-md-6">
                 <div id="seccion_nombre" class="form-group">
-                  <label>Nombre y apellidos</label><div id="err_nom" class="help-block with-errors"></div>
-                  <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Ejemplo: Carlos Crespo" maxlength="100">
+                  <label>Nombre</label><div id="err_nom" class="help-block with-errors"></div>
+                  <input type="text" name="nombre" id="nombre" class="form-control" placeholder="" maxlength="30">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div id="seccion_apellido" class="form-group">
+                  <label>Apellido</label><div id="err_apell" class="help-block with-errors"></div>
+                  <input type="text" name="apellido" id="apellido" class="form-control" placeholder="" maxlength="50">
                 </div>
               </div>
               <div class="col-md-6">
                 <div id="seccion_correo" class="form-group">    
                   <label>Correo</label><div id="err_correo" class="help-block with-errors"></div>
-                  <input type="email" name="correo" id="correo" class="form-control" placeholder="Ejemplo: carloscrespo@gmail.com" minlength="10" maxlength="100">
+                  <input type="email" name="correo" id="correo" class="form-control" placeholder="" minlength="10" maxlength="30">
                 </div>  
               </div> 
-              <div class="col-md-6">           
-                <div id="seccion_dir" class="form-group">    
-                  <label>Direcci&oacute;n</label><div id="err_dir" class="help-block with-errors"></div>
-                  <input type="text" name="direccion" id="direccion" class="form-control" placeholder="Ejemplo: Samanes V" maxlength="100">
-                </div>
-              </div>
               <div class="col-md-6">
                 <div id="seccion_tlf" class="form-group">    
                   <label>Tel&eacute;fono</label><div id="err_tlf" class="help-block with-errors"></div>
-                  <input type="text" name="telefono" id="telefono" class="form-control" minlength="10" maxlength="15" onkeyup="return validaNumeros(event);" >
+                  <input type="text" name="telefono" id="telefono" class="form-control" minlength="9" maxlength="15" onkeyup="return validaNumeros(event);" >
                 </div>
               </div>
+              <div class="col-md-12">           
+                <div id="seccion_dir" class="form-group">    
+                  <label>Direcci&oacute;n</label><div id="err_dir" class="help-block with-errors"></div>
+                  <input type="text" name="direccion" id="direccion" class="form-control" placeholder="" maxlength="50">
+                </div>
+              </div>
+              
               <div align="center">
                 <input type="button" id="btndeposito" name="btndeposito" value="Aceptar" class="btn btn-success btn-sm disabled" onclick="enviarFormulario('form_deposito');">
               </div>
@@ -216,7 +223,7 @@
             <form name="form_payme" id="form_payme" action="#" method="post" class="alignet-form-vpos2">
               <div class="col-xs-12 col-md-12"> 
                 <div class="col-md-6">
-                  <div id="seccion_tipoP" class="form-group">    
+                  <div id="seccion_tipoPM" class="form-group">    
                     <label>Tipo de Documento</label><div id="err_tipoPM" class="help-block with-errors"></div>
                     <select id="tipo_docPM" name="tipo_docPM" class="form-control"> 
                     <option disabled selected value="0">Seleccione una opción</option>             
@@ -239,14 +246,14 @@
 
                 <div class="col-md-6"> 
                   <div id="seccion_nombrePM" class="form-group">
-                    <label>Nombres</label><div id="err_nomP" class="help-block with-errors"></div>
+                    <label>Nombre</label><div id="err_nomPM" class="help-block with-errors"></div>
                     <input type="text" name="shippingFirstName" id="shippingFirstName" class="form-control" value="" maxlength="30" />
                   </div>
                 </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_apellidoPM" class="form-group">
-                    <label>Apellidos</label><div id="err_apellidoP" class="help-block with-errors"></div>
+                    <label>Apellido</label><div id="err_apellidoPM" class="help-block with-errors"></div>
                     <input type="text" name="shippingLastName" id="shippingLastName" class="form-control" value="" maxlength="50" />
                   </div>
                 </div>
@@ -282,7 +289,7 @@
                 <div class="col-md-6"> 
                   <div id="seccion_provPM" class="form-group"> 
                     <label>Provincia</label><div id="err_provPM" class="help-block with-errors"></div> 
-                    <select id="provincia" name="provincia" class="form-control"> 
+                    <select id="provinciaPM" name="provinciaPM" class="form-control"> 
                     <option disabled selected value="0">Seleccione una opci&oacute;n</option>             
                     <?php
                       foreach($arrprovincia as $key=>$provincia){
@@ -296,7 +303,7 @@
                 <div class="col-md-6"> 
                   <div id="seccion_ciuPM" class="form-group"> 
                     <label>Ciudad</label><div id="err_ciuPM" class="help-block with-errors"></div> 
-                    <select id="ciudad" name="ciudad" class="form-control">                     
+                    <select id="ciudadPM" name="ciudadPM" class="form-control">                     
                     </select>
                   </div>
                 </div>
@@ -306,11 +313,11 @@
               <div class="col-xs-12 col-md-12">
                 <div class="breadcrumb" align="center">                  
                   <label>Plan Seleccionado</label>&nbsp;<?php echo utf8_encode($plan["nombre"]);?>
-                  <input type="hidden" name="acquirerId" id="acquirerId" value="<?php //echo ACQUIRERID;?>" />
-                  <input type="hidden" name ="idCommerce" id="idCommerce" value="<?php //echo IDCOMMERCE; ?>" />
+                  <input type="hidden" name="acquirerId" id="acquirerId" value="<?php echo PAYME_ACQUIRERID;?>" />
+                  <input type="hidden" name ="idCommerce" id="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
                   <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $transid; ?>" />
                   <input type="hidden" name="purchaseAmount" id="purchaseAmount" value="<?php echo $plan["costo"]; ?>" />
-                  <input type="hidden" name="purchaseCurrencyCode" id="purchaseCurrencyCode" value="<?php //echo CURRENCY_CODE; ?>" />
+                  <input type="hidden" name="purchaseCurrencyCode" id="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
                   <input type="hidden" name="language" id="language" value="SP" />
                   <input type="hidden" name="shippingState" id="shippingState" value="" />
                   <input type="hidden" name="shippingCity" id="shippingCity" value="" />
@@ -325,7 +332,7 @@
                   <input type="hidden" name="reserved4" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>" />
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
-                  <input type="button" onclick="enviarFormulario('form_payme');" value="Comprar">
+                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn btn-success btn-sm disabled">
                 </div>   
 
                                   
