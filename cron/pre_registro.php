@@ -151,7 +151,7 @@ if (!empty($usuarios) && is_array($usuarios)){
 		    	$mfoEmpresa = array("telefono"=>$datosPreregistro['telefono'],
 		    						"nombres"=>$datosPreregistro['nombres'],
 		    						"fecha_nacimiento"=>$fechaActual,
-		    						"fecha_creacion"=>$datosPreregistro['fecha'],
+		    						// "fecha_creacion"=>$datosPreregistro['fecha'],
 		    						"estado"=>0,
 		    						"term_cond"=>1,
 		    						"id_ciudad"=>$datosPreregistro['id_ciudad'],

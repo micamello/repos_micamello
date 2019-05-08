@@ -12,20 +12,41 @@ class Controlador_Registro extends Controlador_Base {
       case 'activacion':
         $this->validarToken();
       break;
-      case 'buscarCorreo':
-        $buscar = Utils::getParam('correo','',$this->data);
-        $datocorreo = Modelo_Usuario::existeCorreo($buscar);
-        Vista::renderJSON(array("dato"=>$datocorreo));
-      break;  
-      case 'buscarDocumento':
-        $buscar = Utils::getParam('documento','',$this->data);
-        $datoDocumento = Modelo_Usuario::existeDni($buscar);
-        Vista::renderJSON(array("dato"=>$datoDocumento));
+      case 'buscarDni':
+        $dni = Utils::getParam('dni', '', $this->data);
+        $buscardni = Modelo_Usuario::existeDni($dni);
+        Utils::log("eder");
+        Vista::renderJSON(array("dato"=>$buscardni));
       break;
-      default:
+      case 'buscarCorreo':
+        $correo = Utils::getParam('correo', '', $this->data);
+        $buscarcorreo = Modelo_Usuario::existeCorreo($correo);
+        Vista::renderJSON(array("dato"=>$buscarcorreo));
+      break;
+      case 'procesoGuardar':
         $this->procesoGuardado();
       break;
+      default:
+        // $this->procesoGuardado();
+      $this->mostrarDefault();
+      break;
     } 
+  }
+
+  public function mostrarDefault(){
+    $this->linkRedesSociales();
+    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
+    $arrgenero = Modelo_Genero::obtenerListadoGenero();
+    $arrsectorind = Modelo_SectorIndustrial::consulta();
+    $tags = array('arrgenero'=>$arrgenero,
+                  'arrsectorind'=>$arrsectorind,
+                  'social'=>$social_reg);
+
+    $tags["template_css"][] = "DateTimePicker";
+    $tags["template_js"][] = "DniRuc_Validador";
+    $tags["template_js"][] = "DateTimePicker";
+    $tags["template_js"][] = "registroUsuarios";
+    Vista::render('formularioRegistro', $tags);
   }
 
   public function procesoGuardado(){
@@ -42,6 +63,8 @@ class Controlador_Registro extends Controlador_Base {
           }
         }        
         $datosReg = $this->camposRequeridos($campos);
+        print_r($datosReg);
+        exit();
         $datosValidos = self::validarCamposReg($datosReg);
         $GLOBALS['db']->beginTrans();
         $id_usuario = self::guardarDatosUsuario($datosValidos);
@@ -75,7 +98,7 @@ class Controlador_Registro extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     }
-    Utils::doRedirect(PUERTO . '://' . HOST);
+    Utils::doRedirect(PUERTO . '://' . HOST.'/registro/');
   }
 
   public function validarCamposReg($datosReg){
