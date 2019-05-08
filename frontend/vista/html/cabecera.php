@@ -39,23 +39,9 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'UA-123345917-1');
-  </script>
+  </script>  
 
-  <?php if(isset($_SESSION['mostrar_banner'])){ ?>
-    <style>
-    /* Para vista perfil */
-    .home {
-      background-image: url(<?php echo $_SESSION['mostrar_banner']; ?>);   
-      background-size: cover;
-      position: relative;
-      padding-top: 185px;
-      padding-bottom: 79px;
-      width: 100%;
-    }
-  </style>
-<?php } ?>
-
-<!--<script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js" ></script>-->
+  <script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js"></script>
 </head>
 
 <body>

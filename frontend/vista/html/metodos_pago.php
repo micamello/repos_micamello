@@ -240,7 +240,7 @@
                   <div id="seccion_dniPM" class="form-group">    
                     <label>Identificaci&oacute;n</label>
                     <div class="help-block with-errors" id="err_dniPM"></div>
-                    <input type="text" name="reserved2" id="reserved2" class="form-control" minlength="10" maxlength="15">
+                    <input type="text" name="dniPM" id="dniPM" class="form-control" minlength="10" maxlength="15">
                   </div>
                 </div>
 
@@ -315,21 +315,35 @@
                   <label>Plan Seleccionado</label>&nbsp;<?php echo utf8_encode($plan["nombre"]);?>
                   <input type="hidden" name="acquirerId" id="acquirerId" value="<?php echo PAYME_ACQUIRERID;?>" />
                   <input type="hidden" name ="idCommerce" id="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
-                  <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $transid; ?>" />
+                  <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" />
                   <input type="hidden" name="purchaseAmount" id="purchaseAmount" value="<?php echo $plan["costo"]; ?>" />
                   <input type="hidden" name="purchaseCurrencyCode" id="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
                   <input type="hidden" name="language" id="language" value="SP" />
                   <input type="hidden" name="shippingState" id="shippingState" value="" />
                   <input type="hidden" name="shippingCity" id="shippingCity" value="" />
-                  <input type="hidden" name="shippingCountry" id="shippingCountry" value="EC" />
-                  <input type="hidden" name="userCommerce" id="userCommerce" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>" />
-                  <input type="hidden" name="userCodePayme" id="userCodePayme" value="8--580--4390" /> 
+                  <input type="hidden" name="shippingCountry" id="shippingCountry" value="EC" />                                    
+                  <input type="hidden" name="commerceAssociated" id="commerceAssociated" value="" />
                   <input type="hidden" name="descriptionProducts" id="descriptionProducts" value="<?php echo $plan["nombre"];?>" />
                   <input type="hidden" name="programmingLanguage" id="programmingLanguage" value="PHP" />
                   <input type="hidden" name="purchaseVerification" id="purchaseVerification" value="<?php echo $purchaseVerification; ?>" />
-                  <input type="hidden" name="reserved1" value="SP" />
-                  <input type="hidden" name="reserved3" value="<?php echo $plan["id_plan"];?>" />                  
-                  <input type="hidden" name="reserved4" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>" />
+                  <input type="hidden" name="reserved1" id="reserved1" value="" />
+                  <input type="hidden" name="reserved2" id="reserved2" value="<?php echo round($plan["costo"] - ((PAYME_IVA/100)*$plan["costo"]),2);?>" />
+                  <input type="hidden" name="reserved3" id="reserved3" value="<?php echo PAYME_IVA;?>" />
+                  <input type="hidden" name="reserved4" id="reserved4" value="000" />
+                  <input type="hidden" name="reserved5" id="reserved5" value="000" />
+                  <input type="hidden" name="reserved9" id="reserved9" value="000" />
+                  <input type="hidden" name="reserved10" id="reserved10" value="<?php echo round($plan["costo"] - ((PAYME_IVA/100)*$plan["costo"]),2);?>" />
+                  <input type="hidden" name="reserved15" id="reserved15" value="<?php echo $plan["id_plan"];?>" />                  
+                  <input type="hidden" name="reserved16" id="reserved16" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>" />
+                  <input type="hidden" name="reserved17" id="reserved17" value="" />
+                  <input type="hidden" name="reserved18" id="reserved18" value="" />
+                  <input type="hidden" name="reserved19" id="reserved19" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>" />
+                  <input type="hidden" name="taxMontoFijo" id="taxMontoFijo" value="<?php echo $plan["costo"]; ?>" />
+                  <input type="hidden" name="taxMontoGravaIva" name="taxMontoGravaIva" value="<?php echo round($plan["costo"] - ((PAYME_IVA/100)*$plan["costo"]),2);?>" />
+                  <input type="hidden" name="taxMontoIVA" id="taxMontoIVA" value="<?php echo PAYME_IVA;?>" />
+                  <input type="hidden" name="taxMontoNoGravaIva" id="taxMontoNoGravaIva" value="000" />
+                  <input type="hidden" name="taxServicio" id="taxServicio" value="000" />
+                  <input type="hidden" name="taxice" id="taxice" value="0" />
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
                   <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn btn-success btn-sm disabled">
