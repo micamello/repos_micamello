@@ -9,7 +9,7 @@ class Modelo_Comprobante{
   const PAGO_INVALIDO = 2;
   const METODO_DEPOSITO = 1;
   const METODO_PAYPAL = 2;
-  const METODO_PAYMENTEZ = 3;
+  const METODO_PAYME = 3;
 
   public static function obtieneComprobante($id_comprobante){
     $sql = "SELECT * FROM mfo_rcomprobantescam WHERE id_comprobante = ".$id_comprobante;
