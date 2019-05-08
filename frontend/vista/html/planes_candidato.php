@@ -18,7 +18,7 @@
                     <?php } ?>
                   </h1>
                   <h3>
-                    <?php echo $plan["duracion"]." D&Iacute;AS";?>
+                    <?php echo (empty($plan["duracion"])) ? "ILIMITADO" : $plan["duracion"]." D&Iacute;AS";?>
                   </h3>                                     
                 </li>
                 <?php 

@@ -13,8 +13,7 @@
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Políticas de Cookies</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a></p>
       </div>
-      <div class="pie-pag col-md-4" style=" padding-left: 30px;
-      ">
+      <div class="pie-pag col-md-4" style=" padding-left: 30px;">
         <h3>Disponible también en otros países</h3>
         <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
           <a>
@@ -60,16 +59,16 @@
     </div>    
   </div>
 </div>
-<input type="text" hidden id="puerto_host" value="<?php //echo PUERTO."://".HOST ;?>">
-<input type="hidden" id="iso" value="<?php //echo SUCURSAL_ISO; ?>">
+<input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST;?>">
+<input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 
-<script src="<?php //echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
-<script src="<?php //echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
-<script src="<?php //echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
-<script src="<?php //echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
-<script src="<?php //echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php //echo PUERTO."://".HOST;?>/js/loader.js"></script>
-<script src="<?php //echo PUERTO."://".HOST;?>/js/sweetalert.min.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
+<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/sweetalert.min.js"></script>
 <?php
 if (isset($template_js) && is_array($template_js)){
   foreach($template_js as $file_js){

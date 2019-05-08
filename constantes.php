@@ -85,9 +85,10 @@ define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronico
 //PAYME
 define('PAYME_ACQUIRERID','237');
 define('PAYME_IDCOMMERCE','10030');
-define('PAYME_SECRET_KEY','MGvMqSVsEyLDxRJHkL.39434899322');
+define('PAYME_SECRET_KEY','mjNkPqNvrjUxZAH.97676492');
 define('PAYME_CURRENCY_CODE','840');
-define('PAYME_WS','https://integracion.alignetsac.com/WALLETWS/services/WalletCommerce?wsdl');
+//define('PAYME_WS','https://integracion.alignetsac.com/WALLETWS/services/WalletCommerce?wsdl');
+define('PAYME_IVA','12');
 
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');

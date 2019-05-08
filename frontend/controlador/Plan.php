@@ -123,18 +123,15 @@ class Controlador_Plan extends Controlador_Base {
           $this->redirectToController('publicar');
         }
       }
-      else{        
-        if (empty($_SESSION['mfo_datos']['usuario']['cod_payme'])){
-
-        }
-        else{
-          $tags["cod_payme"] = $_SESSION['mfo_datos']['usuario']['cod_payme'];
-        }
+      else{                
         //presenta metodos de pago
         $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);        
         $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
         $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
+        $tags["purchaseOperationNumber"] = date('his');
+        $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . PAYME_IDCOMMERCE . $tags["purchaseOperationNumber"] . $info["costo"] . PAYME_CURRENCY_CODE . PAYME_SECRET_KEY, 'sha512');
+
         $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
         $tags["template_js"][] = "DniRuc_Validador";
@@ -232,52 +229,6 @@ class Controlador_Plan extends Controlador_Base {
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
     }  
     Vista::render($template, $tags);       
-  }
-
-  public function generarCodPayMe(){
-    $idEntCommerce = '580';
-    $codCardHolderCommerce = '40';
-    $names = 'Juan';
-    $lastNames = 'Perez';
-    $mail = 'desarrollo@micamello.com.ec';
-    $reserved1 = '';
-    $reserved2 = '';
-    $reserved3 = '';
-
-    //Clave SHA-2.
-    $claveSecreta = 'frepFfNABxuWSrdrmm$55695532889';
-
-    //VERSION PHP >= 5.3
-    //echo openssl_digest('', 'sha512');
-    //VERSION PHP < 5.3
-    //echo hash('sha512', $idEntCommerce . $codCardHolderCommerce . $mail . $claveSecreta);
-    $registerVerification = openssl_digest($idEntCommerce . $codCardHolderCommerce . $mail . $claveSecreta, 'sha512');
-                
-    //Referencia al Servicio Web de Wallet            
-    $wsdl = 'https://integracion.alignetsac.com/WALLETWS/services/WalletCommerce?wsdl';
-    $client = new SoapClient($wsdl);
-
-    //Creación de Arreglo para el almacenamiento y envío de parametros. 
-    $params = array(
-        'idEntCommerce'=>$idEntCommerce,
-        'codCardHolderCommerce'=>$codCardHolderCommerce,
-        'names'=>$names,
-        'lastNames'=>$lastNames,
-        'mail'=>$mail,
-        'reserved1'=>$reserved1,
-        'reserved2'=>$reserved2,
-        'reserved3'=>$reserved3,
-        'registerVerification'=>$registerVerification
-    );
-
-    //Consumo del metodo RegisterCardHolder
-    $result = $client->RegisterCardHolder($params);
-    print_r($result);
-    //Lectura de parametros de respuesta.
-    echo "Código de Respuesta:" . $result->ansCode . "<br/>";
-    echo "Descripción: " . $result->ansDescription . "<br/>";
-    //Token que será enviado en el parametro userCodePayme en V-POS2.
-    echo "Código de Asociación: " . $result->codAsoCardHolderWallet . "<br/>";
   }
 }  
 ?>
