@@ -26,8 +26,8 @@
       <div class="pie-pag col-md-4" style="padding-left: 30px;
       ">
         <h3>Contacto</h3>
-        <p>info@micamello.com.ec</p>
-        <p>Ecuador</p>
+        <p><i class="fa fa-envelope" id="social-pie" aria-hidden="true"></i>info@micamello.com.ec</p>
+        <p><i class="fa fa-map-marker" id="social-pie" aria-hidden="true"></i>&nbsp;&nbsp;Ecuador</p>
         <a href="<?php echo FACEBOOK; ?>" target="_blank">
           <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
         </a>
