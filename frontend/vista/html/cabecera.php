@@ -17,7 +17,7 @@
   <!-- Archivo css micamello mic.css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
   <!--Theme custom css -->
-  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css">
+  <!-- <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/style.css"> -->
   <!--<link rel="stylesheet" href="<?php #echo PUERTO."://".HOST;?>/css/media-queries.css">-->
   <link href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
