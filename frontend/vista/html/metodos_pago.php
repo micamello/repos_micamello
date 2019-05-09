@@ -219,57 +219,140 @@
       <div class="col-md-8">
         <div class="panel panel-default" id="panel_3">          
           <div class="panel-body">
-            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png"><br><br>   
-            <?php
-            $purchaseOperationNumber = date('his');
-            $purchaseVerification = openssl_digest(PAYME_ACQUIRERID . PAYME_IDCOMMERCE . $purchaseOperationNumber . "1000" . PAYME_CURRENCY_CODE . PAYME_SECRET_KEY, 'sha512'); 
-            ?>         
-            <form name="f1" id="f1" action="#" method="post" class="alignet-form-vpos2">
-            <table>
-                <tr><td>acquirerId</td><td><input type="text" name ="acquirerId" value="<?php echo PAYME_ACQUIRERID; ?>" /></td></tr>
-                <tr><td>idCommerce</td><td> <input type="text" name ="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" /></td></tr>
-                <tr><td>purchaseOperationNumber </td><td><input type="text" name="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" /></td></tr>
-                <tr><td>purchaseAmount </td><td><input type="text" name="purchaseAmount" value="1000" /></td></tr>
-                <tr><td>purchaseCurrencyCode </td><td><input type="text" name="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" /></td></tr>
-                <tr><td>language </td><td><input type="text" name="language" value="SP" /></td></tr>
-                <tr><td>shippingFirstName </td><td><input type="text" name="shippingFirstName" value="Juan" /></td></tr>
-                <tr><td>shippingLastName </td><td><input type="text" name="shippingLastName" value="Perez" /></td></tr>
-                <tr><td>shippingEmail </td><td><input type="text" name="shippingEmail" value="modalprueba1@test.com" /></td></tr>
-                <tr><td>shippingAddress </td><td><input type="text" name="shippingAddress" value="Direccion ABC" /></td></tr>
-                <tr><td>shippingZIP </td><td><input type="text" name="shippingZIP" value="ZIP 123" /></td></tr>
-                <tr><td>shippingCity </td><td><input type="text" name="shippingCity" value="CITY ABC" /></td></tr>
-                <tr><td>shippingState </td><td><input type="text" name="shippingState" value="STATE ABC" /></td></tr>
-                <tr><td>shippingCountry </td><td><input type="text" name="shippingCountry" value="EC" /></td></tr>
-                <!--<tr><td>userCommerce </td><td><input type="text" name="userCommerce" value="modalprueba1" /></td></tr>
-                <tr><td>userCodePayme </td><td><input type="text" name="userCodePayme" value="11--1941--4390" /></td></tr>-->
-                <tr><td>mcc </td><td><input type="text" name="mcc" value="" /></td></tr>
-                <tr><td>commerceAssociated </td><td><input type="text" name="commerceAssociated" value="" /></td></tr>
-                <tr><td>descriptionProducts </td><td><input type="text" name="descriptionProducts" value="Producto ABC" /></td></tr>
-                <tr><td>reserved1 </td><td><input type="text" name="reserved1" value="" /></td></tr>
-                <tr><td>reserved2 (Monto Grava IVA)</td><td><input type="text" name="reserved2" value="890" /></td></tr>
-                <tr><td>reserved3 (Monto IVA)</td><td><input type="text" name="reserved3" value="110" /></td></tr>
-                <tr><td>reserved4 </td><td><input type="text" name="reserved4" value="000" /></td></tr>
-                <tr><td>reserved5 </td><td><input type="text" name="reserved5" value="000" /></td></tr>
-                <tr><td>reserved9 </td><td><input type="text" name="reserved9" value="000" /></td></tr>
-                <tr><td>reserved10 (Monto Grava Iva)</td><td><input type="text" name="reserved10" value="890" /></td></tr>
-                <tr><td>programmingLanguage </td><td><input type="text" name="programmingLanguage" value="PHP" /></td></tr>
-                <tr><td>purchaseVerification </td><td><input type="text" name="purchaseVerification" value="<?php echo $purchaseVerification ?>" /></td></tr>
+            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png"><br><br>                       
+            <form name="form_payme" id="form_payme" action="#" method="post" class="alignet-form-vpos2">
+              <div class="col-xs-12 col-md-12">
+                <div class="col-md-6">
+                  <div id="seccion_tipoPM" class="form-group">    
+                    <label>Tipo de Documento</label><div id="err_tipoPM" class="help-block with-errors"></div>
+                    <select id="tipo_docPM" name="tipo_docPM" class="form-control"> 
+                    <option disabled selected value="0">Seleccione una opción</option>             
+                    <?php
+                      foreach(TIPO_DOCUMENTO as $key=>$tipo){
+                        echo "<option value='".$key."'>".utf8_encode($tipo)."</option>";
+                      }
+                    ?>  
+                    </select>
+                  </div>
+                </div>
+              
+                <div class="col-md-6"> 
+                  <div id="seccion_dniPM" class="form-group">    
+                    <label>Identificaci&oacute;n</label>
+                    <div class="help-block with-errors" id="err_dniPM"></div>
+                    <input type="text" name="dniPM" id="dniPM" class="form-control" minlength="10" maxlength="15">
+                  </div>
+                </div>
 
-                <tr><td>programmingLanguage </td><td><input type="text" name="programmingLanguage" value="PHP" /></td></tr>
+                <div class="col-md-6"> 
+                  <div id="seccion_nombrePM" class="form-group">
+                    <label>Nombre</label><div id="err_nomPM" class="help-block with-errors"></div>
+                    <input type="text" name="shippingFirstName" id="shippingFirstName" class="form-control" value="" maxlength="30" />
+                  </div>
+                </div>
 
-                <tr><td>taxMontoFijo </td><td><input type="text" name="taxMontoFijo" value="10" /></td></tr>
-                <tr><td>taxMontoGravaIva </td><td><input type="text" name="taxMontoGravaIva" value="890" /></td></tr>
-                <tr><td>taxMontoIVA </td><td><input type="text" name="taxMontoIVA" value="110" /></td></tr>
-                <tr><td>taxMontoNoGravaIva </td><td><input type="text" name="taxMontoNoGravaIva" value="000" /></td></tr>
-                <tr><td>taxServicio </td><td><input type="text" name="taxServicio" value="000" /></td></tr>
-                <tr><td>taxICE </td><td><input type="text" name="taxice" value="0" /></td></tr>
+                <div class="col-md-6"> 
+                  <div id="seccion_apellidoPM" class="form-group">
+                    <label>Apellido</label><div id="err_apellidoPM" class="help-block with-errors"></div>
+                    <input type="text" name="shippingLastName" id="shippingLastName" class="form-control" value="" maxlength="50" />
+                  </div>
+                </div> 
+              
+                <div class="col-md-6"> 
+                  <div id="seccion_correoPM" class="form-group">   
+                    <label>Correo</label><div id="err_correoPM" class="help-block with-errors"></div>
+                    <input type="text" name="shippingEmail" id="shippingEmail" class="form-control" value="" maxlength="30" />
+                  </div>
+                </div> 
 
-                <td colspan="2" align="center">
-                    <input type="button" name="boton01" value="Enviar Redirect" onclick="enviar();" ondblclick="enviar();">
-                    <input type="button" onclick="javascript:AlignetVPOS2.openModal('https://integracion.alignetsac.com/')" value="Enviar Modal">
-                </td>
-            </table>
-        </form>
+                <div class="col-md-6"> 
+                  <div id="seccion_tlfPM" class="form-group">    
+                    <label>Tel&eacute;fono</label><div id="err_tlfPM" class="help-block with-errors"></div>
+                    <input type="text" name="shippingPhone" id="shippingPhone" minlength="9" maxlength="15" class="form-control" onkeydown="return validaNumeros(event);">
+                  </div>
+                </div>
+
+                <div class="col-md-6"> 
+                  <div id="seccion_dirPM" class="form-group"> 
+                    <label>Direcci&oacute;n</label><div id="err_dirPM" class="help-block with-errors"></div> 
+                    <input type="text" name="shippingAddress" id="shippingAddress" class="form-control" value="" maxlength="50" />
+                  </div>
+                </div>
+
+                <div class="col-md-6"> 
+                  <div id="seccion_zipPM" class="form-group"> 
+                    <label>C&oacute;digo Postal</label><div id="err_zipPM" class="help-block with-errors"></div> 
+                    <input type="text" name="shippingZIP" id="shippingZIP" class="form-control" value="" maxlength="10"/>
+                  </div>
+                </div>
+
+                <div class="col-md-6"> 
+                  <div id="seccion_provPM" class="form-group"> 
+                    <label>Provincia</label><div id="err_provPM" class="help-block with-errors"></div> 
+                    <select id="provinciaPM" name="provinciaPM" class="form-control"> 
+                    <option disabled selected value="0">Seleccione una opci&oacute;n</option>             
+                    <?php
+                      foreach($arrprovincia as $key=>$provincia){
+                        echo "<option value='".$provincia["id_provincia"]."'>".utf8_encode($provincia["nombre"])."</option>";
+                      }
+                    ?>  
+                    </select>
+                  </div>
+                </div>
+              
+                <div class="col-md-6"> 
+                  <div id="seccion_ciuPM" class="form-group"> 
+                    <label>Ciudad</label><div id="err_ciuPM" class="help-block with-errors"></div> 
+                    <select id="ciudadPM" name="ciudadPM" class="form-control">                     
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xs-12 col-md-12">
+                <div class="breadcrumb" align="center">
+                  <label>Plan Seleccionado</label>&nbsp;<?php echo utf8_encode($plan["nombre"]);?>
+                  <input type="hidden" name ="acquirerId" value="<?php echo PAYME_ACQUIRERID; ?>" />
+                  <input type="hidden" name ="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
+                  <input type="hidden" name="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" />
+                  <input type="hidden" name="purchaseAmount" value="<?php echo $precio;?>" />
+                  <input type="hidden" name="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
+                  <input type="hidden" name="language" value="SP" />
+                  <input type="hidden" name="shippingCity" value="" />
+                  <input type="hidden" name="shippingState" value="" />
+                  <input type="hidden" name="shippingCountry" value="EC" />
+                  <input type="hidden" name="mcc" value="" />
+                  <input type="hidden" name="commerceAssociated" value="" />
+                  <input type="hidden" name="descriptionProducts" value="<?php echo utf8_encode($plan["nombre"]);?>" />
+                  <input type="hidden" name="reserved1" value="" />
+                  <input type="hidden" name="reserved2" value="<?php echo $taxMontoGravaIva;?>" />
+                  <input type="hidden" name="reserved3" value="<?php echo $taxMontoIVA;?>" />
+                  <input type="hidden" name="reserved4" value="000" />
+                  <input type="hidden" name="reserved5" value="000" />
+                  <input type="hidden" name="reserved9" value="000" />
+                  <input type="hidden" name="reserved10" value="<?php echo $taxMontoGravaIva;?>" />
+                  <input type="hidden" name="reserved15" value="<?php echo $plan["id_plan"];?>" />
+                  <input type="hidden" name="reserved16" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>" />
+                  <input type="hidden" name="reserved17" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>" />
+                  <input type="hidden" name="reserved18" id="reserved18" value="" />
+                  <input type="hidden" name="reserved19" id="reserved19" value="" />
+                  <input type="hidden" name="programmingLanguage" value="PHP" />
+                  <input type="hidden" name="purchaseVerification" value="<?php echo $purchaseVerification ?>" />
+                  <input type="hidden" name="taxMontoFijo" value="<?php echo $precio;?>" />
+                  <input type="hidden" name="taxMontoGravaIva" value="<?php echo $taxMontoGravaIva;?>" />
+                  <input type="hidden" name="taxMontoIVA" value="<?php echo $taxMontoIVA;?>" />
+                  <input type="hidden" name="taxMontoNoGravaIva" value="000" />
+                  <input type="hidden" name="taxServicio" value="000" />
+                  <input type="hidden" name="taxice" value="0" />
+                  <input type="hidden" name="rutaPayMe" id="rutaPayMe" value="<?php echo PAYME_RUTA;?>" />
+
+                  <br>
+                  <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
+                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn btn-success btn-sm ">
+                </div>
+              </div>
+            
+            </form>
           </div>
         </div>    
       </div>
@@ -277,10 +360,3 @@
     </div>
   </div>
 </div>
-
-<script language="Javascript">
-          function enviar(){
-            document.f1.action= 'https://integracion.alignetsac.com/VPOS2/faces/pages/startPayme.xhtml'
-            document.f1.submit();
-          }
-        </script>
