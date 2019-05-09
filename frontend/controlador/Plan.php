@@ -129,8 +129,10 @@ class Controlador_Plan extends Controlador_Base {
         $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
         $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
-        $tags["purchaseOperationNumber"] = date('his');
-        $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . PAYME_IDCOMMERCE . $tags["purchaseOperationNumber"] . $info["costo"] . PAYME_CURRENCY_CODE . PAYME_SECRET_KEY, 'sha512');
+        $tags["purchaseOperationNumber"] = date('his');        
+        $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . PAYME_IDCOMMERCE . $tags["purchaseOperationNumber"] . "112" . PAYME_CURRENCY_CODE . PAYME_SECRET_KEY, 'sha512');
+        //echo $tags["purchaseVerification"];
+        Utils::log("cod1:".$tags["purchaseVerification"]."termino");
 
         $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          

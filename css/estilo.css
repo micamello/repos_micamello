@@ -1156,6 +1156,7 @@ ul.checkout-bar a {
     transform: scale(1.2);
 }
 
+
 .btn-primary {
     color: #fff;
     background-color: #204478;
@@ -1176,4 +1177,12 @@ ul.checkout-bar a {
     font-family: ‘Roboto’, sans-serif !important;
     font-weight: bold;
     top: -15px;
+}
+
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+.modal-dialog {
+    margin: 2px auto;
+    z-index: 1100 !important;
 }
