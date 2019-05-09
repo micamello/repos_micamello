@@ -1177,3 +1177,10 @@ ul.checkout-bar a {
     font-weight: bold;
     top: -15px;
 }
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+.modal-dialog {
+    margin: 2px auto;
+    z-index: 1100 !important;
+}

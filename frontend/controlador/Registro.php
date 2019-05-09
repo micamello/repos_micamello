@@ -51,6 +51,7 @@ class Controlador_Registro extends Controlador_Base {
 
   public function procesoGuardado(){
     $iso = SUCURSAL_ISO;
+    $url = "";
     if ( Utils::getParam('formularioRegistro') == 1 ){
       try {        
         if($_POST['tipo_usuario'] == 1){
@@ -63,8 +64,7 @@ class Controlador_Registro extends Controlador_Base {
           }
         }        
         $datosReg = $this->camposRequeridos($campos);
-        print_r($datosReg);
-        exit();
+        
         $datosValidos = self::validarCamposReg($datosReg);
         $GLOBALS['db']->beginTrans();
         $id_usuario = self::guardarDatosUsuario($datosValidos);
@@ -72,12 +72,8 @@ class Controlador_Registro extends Controlador_Base {
           throw new Exception("Error en el sistema, por favor intente de nuevo");
         }
         $GLOBALS['db']->commit();
-        if(isset($_COOKIE['modalRegistro'])){
-          setcookie('modalRegistro', "1_".$_POST['tipo_usuario']."", time() + (86400 * 30), "/");
-        }
+        setcookie('preRegistro', null, -1, '/');
         // setcookie("showModal", "", time()-3600);
-        unset($_SESSION["EDER1"]);
-        print_r('eder1');
         $nombres = $datosReg['nombresCandEmp'].((isset($datosReg['apellidosCand'])) ? " ".$datosReg['apellidosCand'] : '');
         $token = Utils::generarToken($id_usuario,"ACTIVACION");
         if (empty($token)){
@@ -91,14 +87,13 @@ class Controlador_Registro extends Controlador_Base {
         $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
       } 
       catch (Exception $e) {
-        if(isset($_COOKIE['modalRegistro'])){
-          setcookie('modalRegistro', "0_".$_POST['tipo_usuario']."", time() + (86400 * 30), "/");
-        }
+        setcookie('preRegistro', $_POST['tipo_usuario'], time() + (86400 * 30), "/");
+        $url = "registro/";
         $GLOBALS['db']->rollback();
         $_SESSION['mostrar_error'] = $e->getMessage();
       }
     }
-    Utils::doRedirect(PUERTO . '://' . HOST.'/registro/');
+    Utils::doRedirect(PUERTO . '://' . HOST.'/'.$url);
   }
 
   public function validarCamposReg($datosReg){
@@ -180,8 +175,6 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function guardarDatosUsuario($datosValidos){
-    // print_r($datosValidos);
-    // exit();
     $data = array(); $id_usuario = "";    
     $usuario_login = array("tipo_usuario"=>$datosValidos['tipo_usuario'], "username"=>$datosValidos['username'], 
                            "password"=>$datosValidos['password_1'], "correo"=>$datosValidos['correoCandEmp'], "dni"=>$datosValidos['documentoCandEmp'], "tipo_registro"=>2);
@@ -367,7 +360,8 @@ class Controlador_Registro extends Controlador_Base {
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%USUARIO%", $username, $email_body);
     $email_body = str_replace("%CORREO%", $correo, $email_body);   
-    $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
+    $email_body = str_replace("%ENLACE%", $enlace, $email_body);
+
     if (Utils::envioCorreo($correo,"Registro de Usuario",$email_body)){
       return true;
     }
