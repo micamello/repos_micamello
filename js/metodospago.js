@@ -516,8 +516,7 @@ $('#dniPM').on('blur', function(){
 });
 
 function enviarFormulario(form){
-  //var estado = validarFormulario();
-  var estado = 1;
+  var estado = validarFormulario();  
   if(estado == 1 && form == 'form_deposito'){
     document.form_deposito.submit();
   }else if(form == 'form_paypal'){    
@@ -532,19 +531,11 @@ function enviarFormulario(form){
       $('#form_paypal').submit();
     }
   }else if(estado == 1 && form == 'form_payme'){
-    //$('#shippingState').val($("#provinciaPM option:selected").text());
-    //$('#shippingCity').val($("#ciudadPM option:selected").text());
-    //$('#reserved17').val($("#dniPM").val());
-    //$('#reserved18').val($("#tipo_docPM").val());
-    
-    /*$('#shippingState').val("Guayas");
-    $('#shippingCity').val("Guayaquil");
-    $('#reserved17').val("0919580985");
-    $('#reserved18').val("2");*/
-
-    //AlignetVPOS2.openModal('https://integracion.alignetsac.com/');
-    document.form_payme.action= 'https://integracion.alignetsac.com/VPOS2/faces/pages/startPayme.xhtml'
-    document.form_payme.submit();
+    $('#shippingState').val($("#provinciaPM option:selected").text());
+    $('#shippingCity').val($("#ciudadPM option:selected").text());
+    $('#reserved18').val($("#dniPM").val());
+    $('#reserved19').val($("#tipo_docPM").val());    
+    AlignetVPOS2.openModal($('#rutaPayMe').val());    
   }  
 }
 

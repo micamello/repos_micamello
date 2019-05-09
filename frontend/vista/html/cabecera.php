@@ -39,9 +39,7 @@
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'UA-123345917-1');
-  </script>-->  
-
-  <script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js"></script>
+  </script>-->    
 </head>
 
 <body>

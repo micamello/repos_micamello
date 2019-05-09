@@ -52,14 +52,10 @@ class Controlador_Plan extends Controlador_Base {
           $_SESSION['mostrar_error'] = 'No se puede eliminar la suscripci\u00F3n, ya existen postulados';
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
-    }
-    //Obtiene todos los banner activos segun el tipo
-    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);    
-    $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
+    }    
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
-    $tags = self::mostrarDefault(2);    
-    $tags["show_banner"] = 1;
+    $tags = self::mostrarDefault(2);        
     $tags["planUsuario"] = $planUsuario;
     $tags['breadcrumbs'] = $breadcrumbs;
     Vista::render('planes_usuario',$tags); 
@@ -76,10 +72,7 @@ class Controlador_Plan extends Controlador_Base {
       $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
-    }    
-    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
-    $tags["show_banner"] = 1;     
+    }        
     $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
     $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";          
@@ -124,20 +117,33 @@ class Controlador_Plan extends Controlador_Base {
         }
       }
       else{                
-        //presenta metodos de pago
-        $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);        
-        $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
-        $tags["show_banner"] = 1;
+        //presenta metodos de pago        
         $tags["plan"] = $infoplan;
+        //datos para payme
+        //$precio = $infoplan["costo"];
+        $decimal = strpos($infoplan["costo"], ".");        
+        $precio = ($decimal === false) ? $infoplan["costo"]."00" : str_replace(".","",$infoplan["costo"]);
+        $taxMontoGravaIva = round($infoplan["costo"] / GRAVAIVA,2);
+        $taxMontoIVA = round($infoplan["costo"] - $taxMontoGravaIva,2);
+        $decimal = strpos($taxMontoGravaIva, ".");  
+        $taxMontoGravaIva = ($decimal === false) ? $taxMontoGravaIva."00" : str_replace(".","",$taxMontoGravaIva);
+        $decimal = strpos($taxMontoIVA, ".");  
+        $taxMontoIVA = ($decimal === false) ? $taxMontoIVA."00" : str_replace(".","",$taxMontoIVA);
+        $tags["precio"] = $precio;
+        $tags["taxMontoGravaIva"] = $taxMontoGravaIva;
+        $tags["taxMontoIVA"] = $taxMontoIVA;
         $tags["purchaseOperationNumber"] = date('his');        
-        $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . PAYME_IDCOMMERCE . $tags["purchaseOperationNumber"] . "112" . PAYME_CURRENCY_CODE . PAYME_SECRET_KEY, 'sha512');
-        //echo $tags["purchaseVerification"];
-        Utils::log("cod1:".$tags["purchaseVerification"]."termino");
-
+        $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . 
+                                                       PAYME_IDCOMMERCE . 
+                                                       $tags["purchaseOperationNumber"] . 
+                                                       $precio . 
+                                                       PAYME_CURRENCY_CODE . 
+                                                       PAYME_SECRET_KEY, 'sha512');   
+              
         $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
+        //datos para transferencia bancaria
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
-        $tags["template_js"][] = "DniRuc_Validador";
-        //$tags["template_js"][] = "mic";
+        $tags["template_js"][] = "DniRuc_Validador";        
         $tags["template_js"][] = "metodospago";              
         Vista::render('metodos_pago', $tags);      
       }       
@@ -215,10 +221,7 @@ class Controlador_Plan extends Controlador_Base {
     }     
   }
   
-  public function resultado(){
-    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
-    $tags["show_banner"] = 1;
+  public function resultado(){    
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){

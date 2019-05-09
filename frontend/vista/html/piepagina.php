@@ -72,6 +72,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/sweetalert.min.js"></script>
+<script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js"></script>
 <?php
 if (isset($template_js) && is_array($template_js)){
   foreach($template_js as $file_js){
