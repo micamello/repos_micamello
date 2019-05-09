@@ -131,9 +131,10 @@
 
                             <div class="col-md-12 text-center">
                                 <div class="form-group check_box">
-                                    <div></div>
                                     <div class="checkbox subt-registro">
+
                                         <label>
+                                            <div></div>
                                             <input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He le&iacute;do y acepto las <a class="link" href="<?php echo PUERTO.'://'.HOST; ?>/docs/politicas_de_privacidad1.pdf" target="_blank">pol&iacute;ticas de privacidad</a> y <a class="link" href="<?php echo PUERTO.'://'.HOST; ?>/docs/terminos_y_condiciones1.pdf" target="_blank">t&eacute;rminos y condiciones</a>
                                         </label>
                                         <label>Nota: Después de registrarte le llegará un E-mail para validar tu cuenta</label>
@@ -145,10 +146,14 @@
                                     <div id="socialRegistro">
                                         <label>O puedes acceder con:</label>
                                         <br><br>
-                                        <a id="regEmpMic" href="#"><i class="acceso-social fa fa-facebook"></i></a>
-                                        <a id="regEmpMic" href="#"><i class="acceso-social fa fa-twitter"></i></a>
-                                        <a id="regEmpMic" href="#"><i class="acceso-social fa fa-google"></i></a>
-                                        <a id="regEmpMic" href="#"><i class="acceso-social fa fa-linkedin"></i></a>
+                                        <a id="regEmpMic" onclick="window.location = '<?php echo $social['fb']; ?>'"><i class="acceso-social fa fa-facebook"></i></a>
+
+                                        <a id="regEmpMic" onclick="window.location = '<?php echo $social['tw'] ?>'"><i class="acceso-social fa fa-twitter"></i></a>
+
+                                        <a id="regEmpMic" onclick="window.location = '<?php echo $social['gg'] ?>'"><i class="acceso-social fa fa-google"></i></a>
+
+                                        <a id="regEmpMic" onclick="window.location = '<?php echo $social['lk'] ?>'"><i class="acceso-social fa fa-linkedin"></i></a>
+
                                     </div>
                                 </div>
                             </div>

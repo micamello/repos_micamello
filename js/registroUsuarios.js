@@ -97,21 +97,42 @@ if($('#apellidosCand').length){
 	});
 }
 
-if($('#correoCandEmp').length){
-	$('#correoCandEmp').on('blur', function(){
-		if($(this).val() != ""){
-			if(!validarCorreo($(this).val())){
-				crearMensajeError($(this), "Ingrese un correo válido");
+// if($('#correoCandEmp').length){
+// 	$('#correoCandEmp').on('blur', function(){
+// 		if($(this).val() != ""){
+// 			if(!validarCorreo($(this).val())){
+// 				crearMensajeError($(this), "Ingrese un correo válido");
+// 			}
+// 			else{
+// 				eliminarMensajeError($(this));
+// 			}
+// 		}
+// 		else{
+// 			crearMensajeError($(this), "Rellene este campo");
+// 		}
+// 	});
+// }
+
+	if($('#correoCandEmp').length){
+		$('#correoCandEmp').on('blur', function(){
+			if($(this).val() != ""){
+				if(validarCorreo($(this).val())){
+					if(!searchAjax($(this))){
+						crearMensajeError($(this), 'El correo ingresado ya existe');
+					}
+					else{
+						eliminarMensajeError($(this), "");
+					}
+				}
+				else{
+					crearMensajeError($(this), "Ingrese un correo válido")
+				}
 			}
 			else{
-				eliminarMensajeError($(this));
+				crearMensajeError($(this), 'Rellene este campo');
 			}
-		}
-		else{
-			crearMensajeError($(this), "Rellene este campo");
-		}
-	});
-}
+		})
+	}
 
 
 if($('#celularCandEmp').length){
@@ -151,7 +172,7 @@ if($('#tipoDoc').length){
 			$('#tipo_documentacion').val($(this).val());
 				if(docCampo.val() != ""){ 
 					if(DniRuc_Validador(docCampo,$(this).val()) == true){
-						if(!searchAjax(docCampo) != true){
+						if(searchAjax(docCampo)){
 							eliminarMensajeError(docCampo);
 						}
 						else{
@@ -174,9 +195,8 @@ if($('#documentoCandEmp').length){
 	$('#documentoCandEmp').on('blur', function(){
 		if($(this).val() != ""){
 			var tipoDocCampo = $('#tipo_documentacion').val();
-			console.log(tipoDocCampo);
 			if(DniRuc_Validador($(this), tipoDocCampo) == true){
-				if(!searchAjax($(this)) != true){
+				if(searchAjax($(this))){
 					eliminarMensajeError($(this));
 				}
 				else{
@@ -205,7 +225,6 @@ if($('#fechaNac').length){
 				}
 			}
 			else{
-				console.log("eder");
 				crearMensajeError($(this), "Ingrese una fecha válida");
 			}
 		}
@@ -369,6 +388,16 @@ if($('#password_1').length){
 		});
 	}
 
+function viewErrors(){
+	var errorClass = $('.errorClass');
+	if(errorClass.length == 0){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 function validarOnSubmit(){
 	var tipousuario = $('#tipo_usuario').val();
 	if($('#nombresCandEmp').length){
@@ -458,7 +487,6 @@ if(tipousuario == 1){
 				}
 			}
 			else{
-				console.log("eder");
 				crearMensajeError($('#fechaNac'), "Ingrese una fecha válida");
 			}
 		}
@@ -468,18 +496,37 @@ if(tipousuario == 1){
 	}
 }
 
+	// if($('#correoCandEmp').length){
+	// 	if($('#correoCandEmp').val() != ""){
+	// 		if(!validarCorreo($('#correoCandEmp').val())){
+	// 			crearMensajeError($('#correoCandEmp'), "Ingrese un correo válido");
+	// 		}
+	// 		else{
+	// 			eliminarMensajeError($('#correoCandEmp'));
+	// 		}
+	// 	}
+	// 	else{
+	// 		crearMensajeError($('#correoCandEmp'), "Rellene este campo");
+	// 	}
+	// }
+
 	if($('#correoCandEmp').length){
-		if($('#correoCandEmp').val() != ""){
-			if(!validarCorreo($('#correoCandEmp').val())){
-				crearMensajeError($('#correoCandEmp'), "Ingrese un correo válido");
+			if($('#correoCandEmp').val() != ""){
+				if(validarCorreo($('#correoCandEmp').val())){
+					if(!searchAjax($('#correoCandEmp'))){
+						crearMensajeError($('#correoCandEmp'), 'El correo ingresado ya existe');
+					}
+					else{
+						eliminarMensajeError($('#correoCandEmp'), "");
+					}
+				}
+				else{
+					crearMensajeError($('#correoCandEmp'), "Ingrese un correo válido");
+				}
 			}
 			else{
-				eliminarMensajeError($('#correoCandEmp'));
+				crearMensajeError($('#correoCandEmp'), 'Rellene este campo');
 			}
-		}
-		else{
-			crearMensajeError($('#correoCandEmp'), "Rellene este campo");
-		}
 	}
 
 
@@ -511,9 +558,8 @@ if(tipousuario == 1){
 	if($('#documentoCandEmp').length){
 		if($('#documentoCandEmp').val() != ""){
 			var tipoDocCampo = $('#tipo_documentacion').val();
-			console.log(tipoDocCampo);
 			if(DniRuc_Validador($('#documentoCandEmp'), tipoDocCampo) == true){
-				if(!searchAjax($('#documentoCandEmp')) != true){
+				if(searchAjax($('#documentoCandEmp'))){
 					eliminarMensajeError($('#documentoCandEmp'));
 				}
 				else{
@@ -682,7 +728,7 @@ function searchAjax(obj){
         dataType:'json',
         async: false,
         success:function(data){
-            if(data.dato == 1){
+            if(data.dato != ""){
             	val_retorno1 = false;
             }
             else{
@@ -703,7 +749,7 @@ function crearMensajeError(obj, mensaje){
 		diverror = obj.parent().prev();
 	}
 	if(obj.attr('id') == "terminosCond"){
-		diverror = obj.parents(':eq(1)').prev();
+		diverror = obj.prev();
 	}
 	eliminarMensajeError(obj);
 	diverror.addClass('errorClass');
@@ -716,7 +762,8 @@ function eliminarMensajeError(obj){
 		diverror = obj.parent().prev();
 	}
 	if(obj.attr('id') == "terminosCond"){
-		diverror = obj.parents(':eq(1)').prev();
+		// diverror = obj.parents(':eq(1)').prev();
+		diverror = obj.prev();
 	}
 	diverror.removeClass('errorClass');
 	diverror.text('');
@@ -840,7 +887,9 @@ function habilitarCampos(id){
 
 $('#registroFormulario').on('submit', function(event){
 	validarOnSubmit();
-	event.preventDefault();
+	if(viewErrors() == false){
+		event.preventDefault();
+	}
 });
 
 function resetForm(){
@@ -861,6 +910,13 @@ function resetForm(){
 		$(elemento).removeClass('errorClass');
 		$(elemento).text('');
 	});
+
+	var eyeFontIcon = $('.fa-eye-slash');
+	$.each(eyeFontIcon, function(indice, elemento){
+		$(elemento).removeClass('fa-eye-slash');
+		$(elemento).addClass('fa-eye');
+		$(elemento).parent().next().attr('type', 'password');
+	});
 }
 
 
@@ -877,14 +933,6 @@ if($('.fa-eye,.fa-eye-slash').length){
 		}
 	})
 }
-
-
-
-
-
-
-
-
 
 function leerCookie(name) {
     var nameEQ = name + "=";
