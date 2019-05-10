@@ -81,7 +81,7 @@ foreach ($data as $letra => $value) {
 
             preg_match_all($exp,$value['id'],$salida, PREG_PATTERN_ORDER);
             unset($salida[0]);
-            echo '<div class="col-xs-12 col-md-12';
+            echo '<div id="btn-filtro-1" class="col-xs-12 col-md-12';
             echo ' btn-filtro">
             <div class="input-group">
                 <span>';
@@ -100,7 +100,7 @@ foreach ($data as $letra => $value) {
             
         }else{
 
-            echo '<div class="col-xs-12 col-md-4 btn-filtro">
+            echo '<div id="btn-filtro-1" class="col-xs-12 col-md-4 btn-filtro">
             <div class="input-group">
                 <span>';
             if($letra == 'D'){

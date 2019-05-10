@@ -1017,6 +1017,7 @@ padding-top: 10px;
 }
 .menu{
     color:white;
+    position: sticky;
 }
 .link{
     font-weight: bold;
@@ -1260,3 +1261,22 @@ ul.checkout-bar a {
     z-index: 1100 !important;
 }
 
+#barra{
+    background-color: #4b98dd;
+    color: white;
+    padding-top: 5px;
+}
+
+#btn-filtro-1{
+    background-color: #f2f2f2;
+    border-color: none;
+    color: #939393;
+    border-radius: 10px;
+}
+
+#icono-filtro{
+    border: 0;
+    background-color: #f2f2f2;
+    padding:0px; 
+    cursor:pointer;
+}

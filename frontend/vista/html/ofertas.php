@@ -280,7 +280,7 @@
 
 	<div class="col-md-9">
 
-		<div id="busquedas">
+		<div id="busquedas" class="container-fluid">
 			<?php if (isset($link)) { 
 			 echo $link; 
 			} ?>
@@ -341,7 +341,7 @@
 						<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>
 							<p id="texto-postulaciones" class="col-md-12">Publicada:<br> <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?></p>
 						<?php } ?>
-					<p id="tipo-plan" class="col-md-12"><?php echo $datos_plan[$o['id_ofertas']]; ?></p>
+					<p id="tipo-plan" class="col-md-12"><?php echo utf8_encode($datos_plan[$o['id_ofertas']]); ?></p>
 				</div>
 			</div>
 			<div class="col-md-10">
@@ -416,17 +416,17 @@
 							<i class="empleo-icono fa fa-dollar"></i><br>
 							<p id="postulacion-2"><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?></p>
 						</div>
-						<div class="col-md-<?php if($vista == 'postulacion'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
+						<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
 							<p id="empleo-2">Provincia:</p>
 							<i class="empleo-icono fa fa-map-marker"></i><br>
 							<p id="postulacion-2"><?php echo utf8_encode($o['provincia']);?></p>
 						</div>
-						<div class="col-md-<?php if($vista == 'postulacion'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
+						<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
 							<p id="empleo-2">Jornada:</p>
 							<i class="empleo-icono fa fa-clock-o"></i><br>
 							<p id="postulacion-2"><?php echo $o['jornada']; ?></p>
 						</div>
-						<div class="col-md-<?php if($vista == 'postulacion'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
+						<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
 							<p id="empleo-2">Vacantes:</p>
 							<i class="empleo-icono fa fa-users"></i><br>
 							<p id="postulacion-2"><?php echo $o['vacantes']; ?></p>
@@ -492,200 +492,6 @@
 		</div>
 	</div>
 </div><?php
-	            	
-               		//$id_plan = $datos_plan['id_plan'];
-	            	?>
-		            <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
-						echo "<a href='".PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/'>";
-					} ?>
-					<div class='panel panel-default shadow-panel'>
-						<?php if($o['tipo_oferta'] == 1){ echo '<div class="titulo-postulaciones">Aviso Urgente</div>'; }else{ echo '<div class="titulo-postulaciones-normal">Aviso Normal</div>'; } ?>
-						<div class='panel-body ofertaUrgente' id='caracteristica_oferta'>
-					   		<div class="row">
-					   			<div class="col-md-12">
-									<div class="col-sm-2 col-md-3 col-lg-2" style="padding-left: 0px;" align='center'>
-										<?php 										
-										$src_imagen = ($o['confidencial'] && $vista!='vacantes' && $vista!='cuentas') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : Modelo_Usuario::obtieneFoto($o['username']);
-										?>
-										<img id="imgPerfil" class="img-responsive postulacion'" src="<?php echo $src_imagen; ?>" alt="icono">
-						  			</div>
-						  			<div class='col-sm-8 col-md-7 col-lg-<?php if($vista == 'oferta'){ echo '10'; }else{ echo '8'; }?>'>
-										<span>
-									    	<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) { ?>
-										   		
-												<?php if (REQUISITO[$o['confidencial']] == 'No') {
-													echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
-												}
-												else
-												{
-													echo '<h5 class="empresa"><i>Nombre de la empresa - confidencial</i></h5>';
-												} 
-											}
-
-											if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $vista == 'cuentas'){
-
-												echo '<h5 class="empresa"><i>'.$o['empresa']."</i></h5>";
-											}
-											?>
-
-											<b style='color: black;'><?php echo utf8_encode($o['titulo']); ?></b>  
-											<?php 
-											if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
-												if($vista == 'postulacion'){
-											    	if(isset($o['tipo'])){ 						
-											    		echo ' | <span class="etiquetaPostulado">Aplic&oacute; de forma '.POSTULACIONES[$o['tipo']].'</span>';
-											    	}													    	
-												}													
-											}
-											?>
-											</span>
-											<br>
-										    <span style="color:#333;"><?php echo 'Fecha de creaci&oacute;n de la oferta: '.date("d-m-Y", strtotime($o['fecha_creado'])); ?></span>
-											<br>
-											<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
-												<div class="row">
-													<p style="color:#737272" class="cortar" align="justify"><?php echo strip_tags(html_entity_decode($o['descripcion'])); ?></p>
-												</div>
-											<?php } ?>
-							  			</div>
-							  			<?php if($vista == 'postulacion'){ ?>
-							  	
-							  				<div class="col-sm-1 col-md-2 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%;">
-												<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
-													<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/"; ?>">
-														<i class="fa fa-trash fa-2x"></i>
-													</a>
-												<?php }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1){ ?>
-													<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.$o['empresa'].')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
-														<i class="fa fa-trash fa-2x"></i>
-													</a>
-												<?php } ?>
-											</div>
-										<?php } ?>
-										<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>
-						  					<div class="col-sm-1 col-md-1 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%;">
-												<a href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/"; ?>">
-													<i class="fa fa-eye" title="Ver detalle de la oferta"></i>
-												</a>
-											</div>
-										<?php } ?>
-										<?php if($vista == 'vacantes'){ ?>
-											
-												<?php 
-													$tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
-													$puedeEditar = Modelo_Oferta::puedeEditar($o["id_ofertas"],$tiempo);
-													if($puedeEditar["editar"] == 1){
-												?>
-												<div id="editar" class="col-sm-1 col-md-1 col-lg-1 icon_oferta" align="center" style="vertical-align: middle; padding-top: 5%; cursor:pointer;">
-													<a onclick="abrirModalEditar('editar_Of','<?php echo Utils::encriptar($o["id_ofertas"]); ?>');">
-														<i class="fa fa-edit" title="Editar la oferta"></i>
-													</a>
-												</div>
-											<?php } ?>
-											
-										<?php } ?>
-							  		</div>
-							  	</div>
-							  	<div class="row">
-						   			<div class="col-md-12">
-										<hr style="margin-top: 10px; margin-bottom: 10px;"/>
-							  		</div>
-							  	</div>
-							  	<div class="row">
-						   			<div class="col-md-12">
-
-						   				<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { 
-						   					$c1 = 2;
-						   					$c2 = 3;
-						   					$c3 = 3;
-						   					$c4 = 2;
-						   					$c5 = 2;
-						   				}else{
-						   					$c1 = 3;
-						   					$c2 = 3;
-						   					$c3 = 3;
-						   					$c4 = 3;
-						   					$c5 = 3;
-						   				} ?>
-
-										<div class='col-xs-6 col-md-<?php echo $c1; ?>' align='center'>
-						                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Salario: </span><br><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?>
-						                </div>
-						                <div class='col-xs-6 col-md-<?php echo $c2; ?>' align='center'>
-						                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Provincia: </span><br><?php echo utf8_encode($o['provincia']);?>
-						                </div>
-						                <div class='col-xs-6 col-md-<?php echo $c3; ?>' align='center'>
-						                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Jornada: </span><br><?php echo $o['jornada']; ?>
-						                </div>
-						                <div class='col-xs-6 col-md-<?php echo $c4; ?>' align='center'>
-						                    <span class="<?php if($o['tipo_oferta'] == 1){ echo 'etiquetaOfertaUrgente';}else{ echo 'etiquetaOferta'; } ?>">Vacantes: </span><br><?php echo $o['vacantes']; ?>
-						                </div>
-						                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
-							                <div class='col-xs-6 col-md-<?php echo $c5; ?>' align='center'>
-							                    <span class="inscritos"><b>Postulados: </b></span>
-							                <?php 
-							                	if(isset($aspirantesXoferta[$o['id_ofertas']])){
-													$cantd = $aspirantesXoferta[$o['id_ofertas']];
-												}else{
-													$cantd = 0;
-												}
-
-												/*if (isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatosPostulados',$id_plan) || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos',$id_plan)) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $cantd != 0) { 
-													echo ' <br> <a class="aspirantes" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($o['id_ofertas']).'/1/">'.$cantd.'</a>';
-
-												}else*/if($cantd == 0){
-													echo ' <br> <span class="aspirantes">'.$cantd.'</span>';
-												}else{
-													//echo ' <br> <span style="cursor:pointer" onclick="abrirModal(\'Debe contratar un plan que permita ver inscritos en la oferta\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')" class="aspirantes">'.$cantd.'</span>';
-
-													echo ' <br> <a class="aspirantes" href="'.PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($o['id_ofertas']).'/1/">'.$cantd.'</a>';
-
-												}
-											?>
-							                </div>
-							            <?php } ?>
-							  		</div>
-							  	</div>
-							  	<?php if($vista == 'postulacion'){ ?>
-							  	<div class="row">
-						   			<div class="col-md-12">
-										<hr style="margin-top: 10px; margin-bottom: 10px;"/>
-							  		</div>
-							  	</div>
-							  	<div class="row">
-							  		<div class="estados_postulados col-md-12">
-						                <?php $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$o['id_ofertas']);
-						                	$cv_descargado = Modelo_Descarga::obtieneDescargaCV($_SESSION['mfo_datos']['usuario']['infohv']['id_infohv'],$o['id_empresa'],$o['id_ofertas']);
-						                 ?>
-						                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
-						                    <div class="wizard-icon"><i class="fa fa-file-text-o"></i></div>
-						                    <p>Postulado:
-						                    	<?php if(isset($postulado)){ ?>
-										    	<b><?php echo date("d-m-Y", strtotime($postulado[0]['fecha_postulado'])); ?></b>
-											<?php } ?></p>
-						                </div>
-						                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'activated'; } ?>">
-						                    <div class="wizard-icon"><i class="fa fa-user"></i></div>
-						                    <p>Estatus: <?php if(isset($o['tipo']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-										    	<b><?php echo ucfirst(strtolower(Modelo_Oferta::ESTATUS_OFERTA[$o['resultado']])); ?></b>
-											<?php } ?></p>
-						                </div>
-						                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else if(isset($cv_descargado) && $cv_descargado['cantd_descarga'] >= 1){ echo 'activated'; } ?>">
-						                    <div class="wizard-icon"><i class="fa fa-key"></i></div>
-						                    <p><b>CV visto</b></p>
-						                </div>
-						                <div class="col-md-3 col-xs-6 <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; } ?>">
-						                    <div class="wizard-icon"><i class="fa fa-check-circle"></i></div>
-						                    <p>Finalizado</p>
-						                </div>
-						            </div>
-							  	</div>
-							  <?php } ?>
-						    </div>
-						</div>
-					<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
-						echo "</a>";
-				    } 
 				}
 			} ?>
         </div>

@@ -121,26 +121,27 @@ if($navegador == 'MSIE'){ ?>
 
 <?php 
   if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($inicio)) { ?>
-    <section style="background-color: #369fe4; padding: 10px 0px 10px 0px;">
+    <div id="barra" class="top-info-bar bg-color-3 hidden-xs">
+      <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                
-                    <span style="font-size: 40px; color: white; font-weight: 500;">Llámanos a nuestras líneas Call Center:</span>
-               
-            </div>
+          <div class="col-sm-7">
+            <ul class="list-inline topList">
+              <p>Ll&aacute;manos a nuestras líneas Call Center:</p>
+          </div>
+
+          <div class="col-sm-2">
+            <ul class="list-inline topList">
+              <li><i class="fa fa-phone" aria-hidden="true"></i> <b>Quito:</b> 02 6055990</li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <ul class="list-inline topList">
+              <li><i class="fa fa-phone" aria-hidden="true"></i> <b>Guayaquil:</b> 04 6060111  </li>
+            </ul>
+          </div>
         </div>
-        <br>
-        <div class="row">
-            
-                <div class="col-md-6">
-                    <span style="font-size: 30px; color: white; text-align: center;"><b>Quito: </b>02&nbsp;6055990 <i class="fa fa-phone"></i></span>
-                </div>
-                <div class="col-md-6">
-                    <span style="font-size: 30px; color: white; text-align: center;"><b>Guayaquil: </b>04&nbsp;6060111 <i class="fa fa-phone"></i></span>
-                </div>
-           
-        </div>
-    </section>
+      </div>
+    </div>
 <?php } ?>
 
 <nav class="menu navbar navbar-default navbar-fixed-top">

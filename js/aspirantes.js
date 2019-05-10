@@ -173,7 +173,7 @@ $('#btn_accesos_confirmar').on('click', function(){
 
 $('#btn_accesos').on('click', function(){
 	
-	$('#modal_acceso').modal();
+	$('#aviso_accesos').modal();
 	activar();
 });
 
