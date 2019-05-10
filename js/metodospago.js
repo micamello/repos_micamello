@@ -1,7 +1,7 @@
 $(window).on('load',function(){  
   $("#panel_1").hide();
-  $("#panel_2").show();
-  $("#panel_3").hide();
+  $("#panel_2").hide();
+  $("#panel_3").show();
   $("#tipo_doc").change(function(){    
     if ($(this).val() == 1){
       $("#dni").attr("minlength","13");
@@ -376,20 +376,20 @@ $('#tipo_doc').on('change', function(){
 $('#tipo_docPM').on('change', function(){
     var tipo_doc = document.getElementById('tipo_docPM').value;
     if(tipo_doc != 0){      
-      if(document.getElementById('reserved2').value != ""){
-        if(document.getElementById('reserved2').value.length >= 10){
-          if(DniRuc_Validador($('#reserved2'),tipo_doc) == true){
+      if(document.getElementById('dniPM').value != ""){
+        if(document.getElementById('dniPM').value.length >= 10){
+          if(DniRuc_Validador($('#dniPM'),tipo_doc) == true){
             quitarError("err_dniPM","seccion_dniPM");
           }else{
             colocaError("err_dniPM", "seccion_dniPM","Documento inválido","btnpayme");
             error = 1;      
           } 
-        }else if(tipo_doc == 2 && document.getElementById('reserved2').value.length < 10){
+        }else if(tipo_doc == 2 && document.getElementById('dniPM').value.length < 10){
           colocaError("err_dniPM", "seccion_dniPM","Mínimo 10 dígitos","btnpayme");
-        }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+        }else if(tipo_doc == 3 && document.getElementById('dniPM').value.length < 6){
           colocaError("err_dniPM", "seccion_dniPM","Mínimo 6 dígitos","btnpayme");
         }
-        else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
+        else if(tipo_doc == 1 && document.getElementById('dniPM').value.length < 13){
           colocaError("err_dniPM", "seccion_dniPM","Mínimo 13 dígitos","btnpayme");
         }
       }else{
@@ -466,12 +466,12 @@ $('#dniP').on('blur', function(){
           colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
           error = 1;      
         }
-      }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
+      }else if(tipo_doc == 2 && document.getElementById('dniP').value.length < 10){
         colocaError("err_dniP", "seccion_dniP","El número de cédula debe tener mínimo 10 dígitos","btn_submitpaypal");
-      }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+      }else if(tipo_doc == 3 && document.getElementById('dniP').value.length < 6){
         colocaError("err_dniP", "seccion_dniP","El pasaporte debe tener mínimo 6 dígitos","btn_submitpaypal");
       }
-      else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
+      else if(tipo_doc == 1 && document.getElementById('dniP').value.length < 13){
         colocaError("err_dniP", "seccion_dniP","El RUC debe tener mínimo 13 dígitos","btn_submitpaypal");
       }
     }else{
@@ -485,23 +485,23 @@ $('#dniP').on('blur', function(){
   validaCampos(1);
 });
 
-$('#reserved2').on('blur', function(){
+$('#dniPM').on('blur', function(){
   var tipo_doc = document.getElementById('tipo_docPM').value;
   if(tipo_doc != 0){
-    if(document.getElementById('reserved2').value != ""){
-      if(document.getElementById('reserved2').value.length >= 10){
-        if(DniRuc_Validador($('#reserved2'),tipo_doc) == true){
+    if(document.getElementById('dniPM').value != ""){
+      if(document.getElementById('dniPM').value.length >= 10){
+        if(DniRuc_Validador($('#dniPM'),tipo_doc) == true){
           quitarError("err_dniPM","seccion_dniPM");
         }else{
           colocaError("err_dniPM", "seccion_dniPM","Documento inválido","btnpayme");
           error = 1;      
         } 
-      }else if(tipo_doc == 2 && document.getElementById('reserved2').value.length < 10){
+      }else if(tipo_doc == 2 && document.getElementById('dniPM').value.length < 10){
         colocaError("err_dniPM", "seccion_dniPM","Mínimo 10 dígitos","btnpayme");
-      }else if(tipo_doc == 3 && document.getElementById('reserved2').value.length < 6){
+      }else if(tipo_doc == 3 && document.getElementById('dniPM').value.length < 6){
         colocaError("err_dniPM", "seccion_dniPM","Mínimo 6 dígitos","btnpayme");
       }
-      else if(tipo_doc == 1 && document.getElementById('reserved2').value.length < 13){
+      else if(tipo_doc == 1 && document.getElementById('dniPM').value.length < 13){
         colocaError("err_dniPM", "seccion_dniPM","Mínimo 13 dígitos","btnpayme");
       }
     }else{
@@ -516,7 +516,7 @@ $('#reserved2').on('blur', function(){
 });
 
 function enviarFormulario(form){
-  var estado = validarFormulario();
+  var estado = validarFormulario();  
   if(estado == 1 && form == 'form_deposito'){
     document.form_deposito.submit();
   }else if(form == 'form_paypal'){    
@@ -533,8 +533,9 @@ function enviarFormulario(form){
   }else if(estado == 1 && form == 'form_payme'){
     $('#shippingState').val($("#provinciaPM option:selected").text());
     $('#shippingCity').val($("#ciudadPM option:selected").text());
-    
-    //AlignetVPOS2.openModal('https://integracion.alignetsac.com/','1');
+    $('#reserved18').val($("#dniPM").val());
+    $('#reserved19').val($("#tipo_docPM").val());    
+    AlignetVPOS2.openModal($('#rutaPayMe').val());    
   }  
 }
 
@@ -616,7 +617,7 @@ function validarFormulario(){
     var direccion = document.getElementById('shippingAddress').value;
     var telefono = document.getElementById('shippingPhone').value;
     var zip = document.getElementById('shippingZIP').value;
-    var dni = document.getElementById('reserved2');
+    var dni = document.getElementById('dniPM');
     var tipo = document.getElementById('tipo_docPM').value;
     var provincia = document.getElementById('provinciaPM');
     var ciudad = document.getElementById('ciudadPM');

@@ -33,29 +33,13 @@
     }  
   }
   ?>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
+  <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'UA-123345917-1');
-  </script>
-
-  <?php if(isset($_SESSION['mostrar_banner'])){ ?>
-    <style>
-    /* Para vista perfil */
-    .home {
-      background-image: url(<?php echo $_SESSION['mostrar_banner']; ?>);   
-      background-size: cover;
-      position: relative;
-      padding-top: 185px;
-      padding-bottom: 79px;
-      width: 100%;
-    }
-  </style>
-<?php } ?>
-
-<!--<script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js" ></script>-->
+  </script>-->    
 </head>
 
 <body>
@@ -227,26 +211,6 @@ if($navegador == 'MSIE'){ ?>
     </div> 
   </div>
 </nav>
-
-<?php
-//if(isset($show_banner)){ ?>
-<!--<section id="home" class="home bg-black fix">
-  <div class="overlay" ></div>
-  <div class="container">
-      <div class="main_home text-center">
-        <div class="col-md-12">
-          <div class="hello_slid">
-            <div class="slid_item">
-              <div class="home_text ">
-                <h2 class="text-white">Bienvenid@ <strong><?php //echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '; if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])) { echo utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']); } ?></strong></h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
-</section>-->
-<?php //} ?>
 
 <?php
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>

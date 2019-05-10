@@ -9,7 +9,7 @@
         <div align="center">     
           <?php foreach(Modelo_Comprobante::METODOS_PAGOS as $key=>$metodo){ ?>               
             <label>
-              <input type="radio" id="db" name="select_form" <?php echo ($key == Modelo_Comprobante::METODO_PAYPAL) ? 'checked="checked"' : '';?> onclick="cambia(<?php echo $key;?>)" value="<?php echo $key;?>">&nbsp;<?php echo $metodo;?>
+              <input type="radio" id="db" name="select_form" <?php echo ($key == Modelo_Comprobante::METODO_PAYME) ? 'checked="checked"' : '';?> onclick="cambia(<?php echo $key;?>)" value="<?php echo $key;?>">&nbsp;<?php echo $metodo;?>
             </label>&nbsp;&nbsp;&nbsp;&nbsp;  
           <?php } ?>            
         </div>
@@ -132,7 +132,7 @@
       
       <div class="col-md-2"></div>  
       <div class="col-md-8">
-        <div class="panel panel-default" id="panel_2">
+        <div class="panel panel-default" id="panel_2" style="display:none;">
           <div class="panel-body">
             <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/PayPal.jpg"><br><br>            
             <form action="#" method="post" name="form_paypal" id="form_paypal" role="form">
@@ -219,9 +219,9 @@
       <div class="col-md-8">
         <div class="panel panel-default" id="panel_3">          
           <div class="panel-body">
-            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png"><br><br>            
+            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png"><br><br>                       
             <form name="form_payme" id="form_payme" action="#" method="post" class="alignet-form-vpos2">
-              <div class="col-xs-12 col-md-12"> 
+              <div class="col-xs-12 col-md-12">
                 <div class="col-md-6">
                   <div id="seccion_tipoPM" class="form-group">    
                     <label>Tipo de Documento</label><div id="err_tipoPM" class="help-block with-errors"></div>
@@ -235,12 +235,12 @@
                     </select>
                   </div>
                 </div>
-
+              
                 <div class="col-md-6"> 
                   <div id="seccion_dniPM" class="form-group">    
                     <label>Identificaci&oacute;n</label>
                     <div class="help-block with-errors" id="err_dniPM"></div>
-                    <input type="text" name="reserved2" id="reserved2" class="form-control" minlength="10" maxlength="15">
+                    <input type="text" name="dniPM" id="dniPM" class="form-control" minlength="10" maxlength="15">
                   </div>
                 </div>
 
@@ -256,21 +256,21 @@
                     <label>Apellido</label><div id="err_apellidoPM" class="help-block with-errors"></div>
                     <input type="text" name="shippingLastName" id="shippingLastName" class="form-control" value="" maxlength="50" />
                   </div>
-                </div>
-
+                </div> 
+              
                 <div class="col-md-6"> 
                   <div id="seccion_correoPM" class="form-group">   
                     <label>Correo</label><div id="err_correoPM" class="help-block with-errors"></div>
                     <input type="text" name="shippingEmail" id="shippingEmail" class="form-control" value="" maxlength="30" />
                   </div>
-                </div>
+                </div> 
 
                 <div class="col-md-6"> 
                   <div id="seccion_tlfPM" class="form-group">    
                     <label>Tel&eacute;fono</label><div id="err_tlfPM" class="help-block with-errors"></div>
                     <input type="text" name="shippingPhone" id="shippingPhone" minlength="9" maxlength="15" class="form-control" onkeydown="return validaNumeros(event);">
                   </div>
-                </div>   
+                </div>
 
                 <div class="col-md-6"> 
                   <div id="seccion_dirPM" class="form-group"> 
@@ -299,7 +299,7 @@
                     </select>
                   </div>
                 </div>
-
+              
                 <div class="col-md-6"> 
                   <div id="seccion_ciuPM" class="form-group"> 
                     <label>Ciudad</label><div id="err_ciuPM" class="help-block with-errors"></div> 
@@ -307,36 +307,51 @@
                     </select>
                   </div>
                 </div>
-                                      
               </div>
 
               <div class="col-xs-12 col-md-12">
-                <div class="breadcrumb" align="center">                  
+                <div class="breadcrumb" align="center">
                   <label>Plan Seleccionado</label>&nbsp;<?php echo utf8_encode($plan["nombre"]);?>
-                  <input type="hidden" name="acquirerId" id="acquirerId" value="<?php echo PAYME_ACQUIRERID;?>" />
-                  <input type="hidden" name ="idCommerce" id="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
-                  <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $transid; ?>" />
-                  <input type="hidden" name="purchaseAmount" id="purchaseAmount" value="<?php echo $plan["costo"]; ?>" />
-                  <input type="hidden" name="purchaseCurrencyCode" id="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
-                  <input type="hidden" name="language" id="language" value="SP" />
-                  <input type="hidden" name="shippingState" id="shippingState" value="" />
-                  <input type="hidden" name="shippingCity" id="shippingCity" value="" />
-                  <input type="hidden" name="shippingCountry" id="shippingCountry" value="EC" />
-                  <input type="hidden" name="userCommerce" id="userCommerce" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>" />
-                  <input type="hidden" name="userCodePayme" id="userCodePayme" value="8--580--4390" /> 
-                  <input type="hidden" name="descriptionProducts" id="descriptionProducts" value="<?php echo $plan["nombre"];?>" />
-                  <input type="hidden" name="programmingLanguage" id="programmingLanguage" value="PHP" />
-                  <input type="hidden" name="purchaseVerification" id="purchaseVerification" value="<?php echo $purchaseVerification; ?>" />
-                  <input type="hidden" name="reserved1" value="SP" />
-                  <input type="hidden" name="reserved3" value="<?php echo $plan["id_plan"];?>" />                  
-                  <input type="hidden" name="reserved4" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>" />
+                  <input type="hidden" name ="acquirerId" value="<?php echo PAYME_ACQUIRERID; ?>" />
+                  <input type="hidden" name ="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
+                  <input type="hidden" name="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" />
+                  <input type="hidden" name="purchaseAmount" value="<?php echo $precio;?>" />
+                  <input type="hidden" name="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
+                  <input type="hidden" name="language" value="SP" />
+                  <input type="hidden" name="shippingCity" value="" />
+                  <input type="hidden" name="shippingState" value="" />
+                  <input type="hidden" name="shippingCountry" value="EC" />
+                  <input type="hidden" name="mcc" value="" />
+                  <input type="hidden" name="commerceAssociated" value="" />
+                  <input type="hidden" name="descriptionProducts" value="<?php echo utf8_encode($plan["nombre"]);?>" />
+                  <input type="hidden" name="reserved1" value="" />
+                  <input type="hidden" name="reserved2" value="<?php echo $taxMontoGravaIva;?>" />
+                  <input type="hidden" name="reserved3" value="<?php echo $taxMontoIVA;?>" />
+                  <input type="hidden" name="reserved4" value="000" />
+                  <input type="hidden" name="reserved5" value="000" />
+                  <input type="hidden" name="reserved9" value="000" />
+                  <input type="hidden" name="reserved10" value="<?php echo $taxMontoGravaIva;?>" />
+                  <input type="hidden" name="reserved15" value="<?php echo $plan["id_plan"];?>" />
+                  <input type="hidden" name="reserved16" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>" />
+                  <input type="hidden" name="reserved17" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>" />
+                  <input type="hidden" name="reserved18" id="reserved18" value="" />
+                  <input type="hidden" name="reserved19" id="reserved19" value="" />
+                  <input type="hidden" name="programmingLanguage" value="PHP" />
+                  <input type="hidden" name="purchaseVerification" value="<?php echo $purchaseVerification ?>" />
+                  <input type="hidden" name="taxMontoFijo" value="<?php echo $precio;?>" />
+                  <input type="hidden" name="taxMontoGravaIva" value="<?php echo $taxMontoGravaIva;?>" />
+                  <input type="hidden" name="taxMontoIVA" value="<?php echo $taxMontoIVA;?>" />
+                  <input type="hidden" name="taxMontoNoGravaIva" value="000" />
+                  <input type="hidden" name="taxServicio" value="000" />
+                  <input type="hidden" name="taxice" value="0" />
+                  <input type="hidden" name="rutaPayMe" id="rutaPayMe" value="<?php echo PAYME_RUTA;?>" />
+
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
-                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn btn-success btn-sm disabled">
-                </div>   
-
-                                  
-              </div>                        
+                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn btn-success btn-sm ">
+                </div>
+              </div>
+            
             </form>
           </div>
         </div>    

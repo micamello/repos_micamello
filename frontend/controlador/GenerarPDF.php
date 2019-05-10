@@ -548,7 +548,20 @@ class Controlador_GenerarPDF extends Controlador_Base
 
         $html .= $fintbody;
         $html .= $finTabla;
-        self::informePersonalidad($html, $datos['username'].".pdf");
+
+        $cabecera = "imagenes/pdf/header.png";
+        $piepagina = "imagenes/pdf/footer.png";
+        $mpdf=new mPDF('','A4');
+        $inidoc = "<!DOCTYPE html><html><link rel='stylesheet' href='css/informemic.css'>
+                    <body><main>";
+        $enddoc = "</main></body></body></html>";
+        $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="17%"></header>'); 
+        $mpdf->WriteHTML($inidoc);
+        $mpdf->WriteHTML($enddoc);   
+        $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
+        $mpdf->WriteHTML($html);
+        $mpdf->Output($datos['username'].".pdf", 'D');
+        // self::informePersonalidad($html, );
   }
 }
 ?>

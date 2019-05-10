@@ -1029,8 +1029,6 @@ padding-top: 10px;
 .centro{
     text-align: center;
 }
-
-
 /*BARRA DE EDITAR*/
 
 .checkout-wrap {
@@ -1232,3 +1230,33 @@ ul.checkout-bar a {
   overflow: auto;
   max-height: 200px;
 }
+
+.btn-primary {
+    color: #fff;
+    background-color: #204478;
+    border-color: #204478;
+}
+
+.btn-primary:hover{
+    transition: 0.3s;
+    background-color: #3C95D4;
+}
+
+/*clases de error*/
+
+.errorClass{
+    color: red;
+    position: absolute;
+    font-size: 12px;
+    font-family: ‘Roboto’, sans-serif !important;
+    font-weight: bold;
+    top: -15px;
+}
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+.modal-dialog {
+    margin: 2px auto;
+    z-index: 1100 !important;
+}
+

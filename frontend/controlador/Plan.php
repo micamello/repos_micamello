@@ -52,14 +52,11 @@ class Controlador_Plan extends Controlador_Base {
           $_SESSION['mostrar_error'] = 'No se puede eliminar la suscripci\u00F3n, ya existen postulados';
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
-    }
-    //Obtiene todos los banner activos segun el tipo
-    //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);    
-    //$_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
+    }    
+
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
-    $tags = self::mostrarDefault(2);    
-    $tags["show_banner"] = 1;
+    $tags = self::mostrarDefault(2);        
     $tags["planUsuario"] = $planUsuario;
     $tags['breadcrumbs'] = $breadcrumbs;
     Vista::render('planes_usuario',$tags); 
@@ -76,10 +73,9 @@ class Controlador_Plan extends Controlador_Base {
       $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
-    }    
-    //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
-    //$_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
-    $tags["show_banner"] = 1;     
+
+    }        
+
     $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
     $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";          
@@ -123,6 +119,7 @@ class Controlador_Plan extends Controlador_Base {
           $this->redirectToController('publicar');
         }
       }
+
       else{        
         if (empty($_SESSION['mfo_datos']['usuario']['cod_payme'])){
 
@@ -131,14 +128,32 @@ class Controlador_Plan extends Controlador_Base {
           $tags["cod_payme"] = $_SESSION['mfo_datos']['usuario']['cod_payme'];
         }
         //presenta metodos de pago
-        //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);        
-        //$_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
-        $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
+        //datos para payme
+        //$precio = $infoplan["costo"];
+        $decimal = strpos($infoplan["costo"], ".");        
+        $precio = ($decimal === false) ? $infoplan["costo"]."00" : str_replace(".","",$infoplan["costo"]);
+        $taxMontoGravaIva = round($infoplan["costo"] / GRAVAIVA,2);
+        $taxMontoIVA = round($infoplan["costo"] - $taxMontoGravaIva,2);
+        $decimal = strpos($taxMontoGravaIva, ".");  
+        $taxMontoGravaIva = ($decimal === false) ? $taxMontoGravaIva."00" : str_replace(".","",$taxMontoGravaIva);
+        $decimal = strpos($taxMontoIVA, ".");  
+        $taxMontoIVA = ($decimal === false) ? $taxMontoIVA."00" : str_replace(".","",$taxMontoIVA);
+        $tags["precio"] = $precio;
+        $tags["taxMontoGravaIva"] = $taxMontoGravaIva;
+        $tags["taxMontoIVA"] = $taxMontoIVA;
+        $tags["purchaseOperationNumber"] = date('his');        
+        $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . 
+                                                       PAYME_IDCOMMERCE . 
+                                                       $tags["purchaseOperationNumber"] . 
+                                                       $precio . 
+                                                       PAYME_CURRENCY_CODE . 
+                                                       PAYME_SECRET_KEY, 'sha512');   
+              
         $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
+        //datos para transferencia bancaria
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
-        $tags["template_js"][] = "DniRuc_Validador";
-        //$tags["template_js"][] = "mic";
+        $tags["template_js"][] = "DniRuc_Validador";        
         $tags["template_js"][] = "metodospago";              
         Vista::render('metodos_pago', $tags);      
       }       
@@ -215,11 +230,8 @@ class Controlador_Plan extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.$data["idplan"].'/');             
     }     
   }
-  
+
   public function resultado(){
-    //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
-    //$_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
-    $tags["show_banner"] = 1;
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){
@@ -232,52 +244,6 @@ class Controlador_Plan extends Controlador_Base {
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
     }  
     Vista::render($template, $tags);       
-  }
-
-  public function generarCodPayMe(){
-    $idEntCommerce = '580';
-    $codCardHolderCommerce = '40';
-    $names = 'Juan';
-    $lastNames = 'Perez';
-    $mail = 'desarrollo@micamello.com.ec';
-    $reserved1 = '';
-    $reserved2 = '';
-    $reserved3 = '';
-
-    //Clave SHA-2.
-    $claveSecreta = 'frepFfNABxuWSrdrmm$55695532889';
-
-    //VERSION PHP >= 5.3
-    //echo openssl_digest('', 'sha512');
-    //VERSION PHP < 5.3
-    //echo hash('sha512', $idEntCommerce . $codCardHolderCommerce . $mail . $claveSecreta);
-    $registerVerification = openssl_digest($idEntCommerce . $codCardHolderCommerce . $mail . $claveSecreta, 'sha512');
-                
-    //Referencia al Servicio Web de Wallet            
-    $wsdl = 'https://integracion.alignetsac.com/WALLETWS/services/WalletCommerce?wsdl';
-    $client = new SoapClient($wsdl);
-
-    //Creación de Arreglo para el almacenamiento y envío de parametros. 
-    $params = array(
-        'idEntCommerce'=>$idEntCommerce,
-        'codCardHolderCommerce'=>$codCardHolderCommerce,
-        'names'=>$names,
-        'lastNames'=>$lastNames,
-        'mail'=>$mail,
-        'reserved1'=>$reserved1,
-        'reserved2'=>$reserved2,
-        'reserved3'=>$reserved3,
-        'registerVerification'=>$registerVerification
-    );
-
-    //Consumo del metodo RegisterCardHolder
-    $result = $client->RegisterCardHolder($params);
-    print_r($result);
-    //Lectura de parametros de respuesta.
-    echo "Código de Respuesta:" . $result->ansCode . "<br/>";
-    echo "Descripción: " . $result->ansDescription . "<br/>";
-    //Token que será enviado en el parametro userCodePayme en V-POS2.
-    echo "Código de Asociación: " . $result->codAsoCardHolderWallet . "<br/>";
   }
 }  
 ?>
