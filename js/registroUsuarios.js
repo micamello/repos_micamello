@@ -1048,3 +1048,7 @@ function passwordCoinciden(obj1, obj2){
 		return false;
 	}
 }
+
+// $('.form-control').on('click', function(){
+// 	console.log($(this).attr('placeholder').split(' ')[0]);
+// })
