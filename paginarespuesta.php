@@ -12,6 +12,9 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              PAYME_CURRENCY_CODE . 
                                              $_POST['authorizationResult'] . 
                                              PAYME_SECRET_KEY, 'sha512');
+
+Utils::envioCorreo("desarrollo@micamello.com.ec","CRON PAYME",print_r($_POST,true));    
+
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
     $vl_insert = array();
@@ -44,17 +47,16 @@ try{
     $vl_insert["shippingEmail"] = $_POST["shippingEmail"];
     $vl_insert["shippingZIP"] = $_POST["shippingZIP"];
     $vl_insert["purchaseAmount"] = $_POST["purchaseAmount"];
-    $vl_insert["IDTransaction"] = $_POST["IDTransaction"];
-    Utils::envioCorreo("desarrollo@micamello.com.ec","CRON PAYME",print_r($_POST,true));    
+    $vl_insert["IDTransaction"] = $_POST["IDTransaction"];    
     if (!Modelo_Payme::guardar($vl_insert)){
       throw new Exception("Error Insert IPN Payme");
     } 
   }
-  Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/exito/');
+  Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
 }
 catch(Exception $e){    
   Utils::envioCorreo('desarrollo@micamello.com.ec',$e->getMessage(),print_r($_POST,true));
-  Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/error/');
+  Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/error/');
 }
 header("HTTP/1.1 200 OK");    
 ?>

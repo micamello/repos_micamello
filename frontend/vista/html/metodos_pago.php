@@ -272,41 +272,41 @@
                   </div>
                 </div>
 
-                <div class="col-md-6"> 
+                <div class="col-md-12"> 
                   <div id="seccion_dirPM" class="form-group"> 
                     <label>Direcci&oacute;n</label><div id="err_dirPM" class="help-block with-errors"></div> 
                     <input type="text" name="shippingAddress" id="shippingAddress" class="form-control" value="" maxlength="50" />
                   </div>
                 </div>
 
-                <div class="col-md-6"> 
+                <!--<div class="col-md-6"> 
                   <div id="seccion_zipPM" class="form-group"> 
                     <label>C&oacute;digo Postal</label><div id="err_zipPM" class="help-block with-errors"></div> 
                     <input type="text" name="shippingZIP" id="shippingZIP" class="form-control" value="" maxlength="10"/>
                   </div>
-                </div>
+                </div>-->
 
-                <div class="col-md-6"> 
+                <!--<div class="col-md-6"> 
                   <div id="seccion_provPM" class="form-group"> 
                     <label>Provincia</label><div id="err_provPM" class="help-block with-errors"></div> 
                     <select id="provinciaPM" name="provinciaPM" class="form-control"> 
                     <option disabled selected value="0">Seleccione una opci&oacute;n</option>             
                     <?php
-                      foreach($arrprovincia as $key=>$provincia){
-                        echo "<option value='".$provincia["id_provincia"]."'>".utf8_encode($provincia["nombre"])."</option>";
-                      }
+                      //foreach($arrprovincia as $key=>$provincia){
+                      //  echo "<option value='".$provincia["id_provincia"]."'>".utf8_encode($provincia["nombre"])."</option>";
+                      //}
                     ?>  
                     </select>
                   </div>
-                </div>
+                </div>-->
               
-                <div class="col-md-6"> 
+                <!--<div class="col-md-6"> 
                   <div id="seccion_ciuPM" class="form-group"> 
                     <label>Ciudad</label><div id="err_ciuPM" class="help-block with-errors"></div> 
                     <select id="ciudadPM" name="ciudadPM" class="form-control">                     
                     </select>
                   </div>
-                </div>
+                </div>-->
               </div>
 
               <div class="col-xs-12 col-md-12">
@@ -321,6 +321,7 @@
                   <input type="hidden" name="shippingCity" value="" />
                   <input type="hidden" name="shippingState" value="" />
                   <input type="hidden" name="shippingCountry" value="EC" />
+                  <input type="hidden" name="shippingZIP" value="" />
                   <input type="hidden" name="mcc" value="" />
                   <input type="hidden" name="commerceAssociated" value="" />
                   <input type="hidden" name="descriptionProducts" value="<?php echo utf8_encode($plan["nombre"]);?>" />
