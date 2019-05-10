@@ -54,8 +54,8 @@ class Controlador_Plan extends Controlador_Base {
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
     }
     //Obtiene todos los banner activos segun el tipo
-    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);    
-    $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
+    //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);    
+    //$_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
     $tags = self::mostrarDefault(2);    
@@ -77,8 +77,8 @@ class Controlador_Plan extends Controlador_Base {
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
     }    
-    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
+    //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
+    //$_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;     
     $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
@@ -131,8 +131,8 @@ class Controlador_Plan extends Controlador_Base {
           $tags["cod_payme"] = $_SESSION['mfo_datos']['usuario']['cod_payme'];
         }
         //presenta metodos de pago
-        $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);        
-        $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
+        //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);        
+        //$_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
         $tags["show_banner"] = 1;
         $tags["plan"] = $infoplan;
         $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
@@ -217,8 +217,8 @@ class Controlador_Plan extends Controlador_Base {
   }
   
   public function resultado(){
-    $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
-    $_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
+    //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);    
+    //$_SESSION['mostrar_banner'] = PUERTO.'://'.HOST.'/imagenes/banner/'.$arrbanner['id_banner'].'.'.$arrbanner['extension'];
     $tags["show_banner"] = 1;
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";

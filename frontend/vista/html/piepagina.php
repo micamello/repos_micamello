@@ -284,7 +284,7 @@
         <h3>Disponible también en otros países</h3>
         <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
           <a>
-            <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
+            <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="redes-mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
           </a>
         <?php }?>   
       </div>
@@ -294,13 +294,13 @@
         <p>info@micamello.com.ec</p>
         <p>Ecuador</p>
         <a href="<?php echo FACEBOOK; ?>" target="_blank">
-          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="redes-mic">
         </a>
         <a href="<?php echo TWITTER; ?>" target="_blank">
-          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="redes-mic">
         </a>
         <a href="<?php echo INSTAGRAM; ?>" target="_blank">
-          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="redes-mic">
         </a>
       </div>
       <div class="col-md-12">

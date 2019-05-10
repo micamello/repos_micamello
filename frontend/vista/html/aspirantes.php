@@ -1,13 +1,14 @@
 <div class="container">
 	<?php  
+
 	if(/*$costo == 0 && */!empty($limite_plan)){ ?>
-		<div class="alert alert-warning col-md-12"> 
+		<div class="alert alert-info col-md-12"> 
 			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, existen en esta oferta <?php echo $cantd_total; ?> postulados pero solo puede vizualizar <b><?php echo $limite_plan; ?></b> postulados.
 		</div>
 	<?php } ?>
 
 	<?php if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'])){ ?>
-		<div class="alert alert-warning col-md-12"> 
+		<div class="alert alert-info col-md-12"> 
 			Usted activ&oacute; el filtrado por facetas, en el cual se aplica la Teoría Basada en Rango Sumarizados de Likert Modificada a la premiaci&oacute;n por puntajes.
 		</div>
 	<?php } ?>
@@ -853,7 +854,7 @@
 			</div>
 			
 			<?php 
-				if(/*$costo == 0 && */!empty($limite_plan) && $cantd_total > $limite_plan){ 
+				if(/*$costo == 0 && */!empty($limite_plan)/* && $cantd_total > $limite_plan*/){ 
 					if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
 						echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
 					}else{
@@ -878,41 +879,40 @@
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="title_convertir">Convertir Oferta</h5>                  
+        <h5 class="titulo-modal-hoja modal-title">Convertir Oferta</h5>               
       </div>
       	<form action = "<?php echo PUERTO."://".HOST;?>/convertir/" method = "post" id="form_convertir" name="form_convertir">
-	      <div class="modal-body">
-	      	<div class="row">
-		      	<div class="col-md-12">
-			        <div class="col-md-12">
-		                <div id="seccion_oferta" class="form-group">
-		                  <label class="text-center">Oferta</label>
-		                  <p id="titulo_oferta"></p>
-		                </div>
-		            </div>
+	        <div class="modal-body">
+		        <div class="row">
 		            <div class="col-md-12">
-						<label>Seleccione plan:</label>
-						<select name="planUsuario_convertir" id="planUsuario_convertir" class="form-control">
-							<?php
-							foreach ($planes as $plan) {							
-								echo "<option value='".Utils::encriptar($plan['id_empresa_plan'])."'>Plan ".utf8_encode($plan['nombre'])."(".date('Y-m-d',strtotime($plan['fecha_compra'])).") - ".$plan['num_publicaciones_rest']." publicaciones</option>";
-							}
-							?>
-						</select>
-						<br>
-					</div> 
-				</div>
-			</div>
-	      </div>
-	      <input type="hidden" name="convertirOferta" id="convertirOferta" value="1">
-	      <div class="modal-footer">
-	        <button type="button" id="cancelar_conversion" name="cancelar_conversion" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
-	        <input type="button" id="button_convertir_oferta" name="button_convertir_oferta" class="btn btn-success" value="Convertir"> 
-	      </div>
-  		</form>
+						<div class="col-md-12">
+							<p id="titulo_oferta"></p>
+						</div>
+						<div class="hoja-archivo col-md-12">
+							<p>Seleccione plan:</p><br>
+						</div>
+						<div id="select-plan">
+							<select name="planUsuario_convertir" id="planUsuario_convertir" class="form-control">
+								<?php
+								foreach ($planes as $plan) {							
+									echo "<option value='".Utils::encriptar($plan['id_empresa_plan'])."'>Plan ".utf8_encode($plan['nombre'])."(".date('Y-m-d',strtotime($plan['fecha_compra'])).") - ".$plan['num_publicaciones_rest']." publicaciones</option>";
+								}
+								?>
+							</select>
+						</div>
+		        	</div>
+		      	</div>
+	        </div>
+    	</form>
+        <input type="hidden" name="convertirOferta" id="convertirOferta" value="1">
+        <div class="modal-footer" style="text-align: center !important;">
+          <button type="button" id="button_convertir_oferta" name="button_convertir_oferta" class="btn-light-blue" data-dismiss="modal">convertir</button>
+          <button type="button" id="cancelar_conversion" name="cancelar_conversion" class="btn-red" id="btn-rojo" data-dismiss="modal">cancelar</button>
+        </div>
     </div>    
   </div>
-</div>
+</div>﻿
+
 
 <div class="modal fade" id="aviso_accesos" tabindex="-1" role="dialog" aria-labelledby="aviso_accesos" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog" role="document">    

@@ -9,21 +9,35 @@ class Controlador_Inicio extends Controlador_Base {
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
 
-    $arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
+    //$arrbanner = Modelo_Banner::obtieneListado(Modelo_Banner::PRINCIPAL);
     //$nro_oferta = Modelo_Oferta::obtieneNumero(SUCURSAL_PAISID);
     //$nro_candidato = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::CANDIDATO);
     //$nro_empresa = Modelo_Usuario::obtieneNroUsuarios(SUCURSAL_PAISID,Modelo_Usuario::EMPRESA);
     //$arrarea = Modelo_Area::obtieneOfertasxArea(SUCURSAL_PAISID);
     $arrarea = Modelo_Area::obtieneListado();
+    $divisible = round(count($arrarea)/12);
+    $completar = ($divisible*12)-count($arrarea);
+
+    $i = 1;
+    foreach ($arrarea as $key => $a) {
+
+      $arrarea[] = array('id_area'=>$a['id_area'],'nombre'=>$a['nombre'],'ico'=>$a['ico']);
+      if($i == $completar){
+        break;
+      }
+      $i++;
+    }
+
     $arrtestimonio = Modelo_Testimonio::obtieneListado(SUCURSAL_PAISID);
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();
     $arrgenero = Modelo_Genero::obtenerListadoGenero();
     $arrsectorind = Modelo_SectorIndustrial::consulta();
     
-    $tags = array('banners'=>$arrbanner, 
+    $tags = array(//'banners'=>$arrbanner, 
                   //'nro_oferta'=>$nro_oferta,
                   //'nro_candidato'=>$nro_candidato,
                   //'nro_empresa'=>$nro_empresa,
+                  'inicio'=>1,
                   'arrarea'=>$arrarea,
                   'arrtestimonio'=>$arrtestimonio,
                   'arrauspiciante'=>$arrauspiciante,
