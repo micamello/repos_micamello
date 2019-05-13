@@ -1,4 +1,4 @@
-<section id="product" class="product">
+<!--<section id="product" class="product">-->
   <div class="container">
     <div class="text-center">
       <h2 class="titulo">Iniciar Sesi&oacute;n</h2>
@@ -40,4 +40,4 @@
       </div>
     </div>
   ﻿</section>
-</section>
+<!--</section>-->

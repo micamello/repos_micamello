@@ -119,6 +119,31 @@ if($navegador == 'MSIE'){ ?>
   </div>
 <?php } ?>
 
+<?php 
+  if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($inicio)) { ?>
+    <div id="barra" class="top-info-bar bg-color-3 hidden-xs">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-7">
+            <ul class="list-inline topList">
+              <p>Ll&aacute;manos a nuestras líneas Call Center:</p>
+          </div>
+
+          <div class="col-sm-2">
+            <ul class="list-inline topList">
+              <li><i class="fa fa-phone" aria-hidden="true"></i> <b>Quito:</b> 02 6055990</li>
+            </ul>
+          </div>
+          <div class="col-sm-3">
+            <ul class="list-inline topList">
+              <li><i class="fa fa-phone" aria-hidden="true"></i> <b>Guayaquil:</b> 04 6060111  </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+<?php } ?>
+
 <nav class="menu navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -158,12 +183,13 @@ if($navegador == 'MSIE'){ ?>
            </li>                              
          <?php } ?>
          <?php if (isset($menu["submenu"])){ ?>                            
-          <li class="dropdown">
+          <li class="dropdown" id="seccion_user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
               <?php echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).(isset($_SESSION['mfo_datos']['usuario']['apellidos']) ? ' '.utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']) : ''); ?>&nbsp;&nbsp;&nbsp;<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-              <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
+              <i class="fa fa-caret-down">
+                <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                 echo "usericon_safari";
-              } ?>"><i class="fa fa-caret-down"></i>
+              } ?>"></i>
               <ul class="dropdown-menu">
                 <?php foreach($menu["submenu"] as $submenu){ ?>  
                   <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>
@@ -188,33 +214,10 @@ if($navegador == 'MSIE'){ ?>
 </nav>
 
 <?php
-//if(isset($show_banner)){ ?>
-<!--<section id="home" class="home bg-black fix">
-  <div class="overlay" ></div>
-  <div class="container">
-      <div class="main_home text-center">
-        <div class="col-md-12">
-          <div class="hello_slid">
-            <div class="slid_item">
-              <div class="home_text ">
-                <h2 class="text-white">Bienvenid@ <strong><?php //echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '; if(isset($_SESSION['mfo_datos']['usuario']['apellidos'])) { echo utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']); } ?></strong></h2>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-  </div>
-</section>-->
-<?php //} ?>
-
-<?php
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
-  <br>
-  <?php if(!isset($show_banner)){ ?> 
-    <br><br><br><br>
-  <?php } ?>
-  <section id="product" class="product">
-    <div class="container">
+
+  <!--<section class="product" id="product">-->
+    <div class="container-fluid">
       <ol class="breadcrumb" align="left">
         <?php 
         $cont = 1;
@@ -230,5 +233,5 @@ if($navegador == 'MSIE'){ ?>
         } ?>
       </ol> 
     </div>
-  </section>
+  <!--</section>-->
 <?php } ?>

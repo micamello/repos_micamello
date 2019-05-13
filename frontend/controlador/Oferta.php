@@ -7,12 +7,12 @@ class Controlador_Oferta extends Controlador_Base{
       }
        
       //Obtiene todos los banner activos segun el tipo
-      $arrbanner     = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);
+      //$arrbanner     = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);
       //Muestra solo un banner de tipo candidato para no dar impresion que cambia de pagina        
-      $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
-      $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::PUBLICIDAD);
+      //$_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
+      //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::PUBLICIDAD);
       //obtiene el orden del banner de forma aleatoria segun la cantidad de banner
-      $_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];        
+      //$_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];        
 
       $opcion = Utils::getParam('opcion', '', $this->data); 
       $page = Utils::getParam('page', '1', $this->data);
@@ -73,6 +73,7 @@ class Controlador_Oferta extends Controlador_Base{
       $arrarea      = Modelo_Area::obtieneListadoAsociativo();
       $arrprovincia = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
       $arrjornadas  = Modelo_Jornada::obtieneListadoAsociativo();
+      $datos_plan = Modelo_Oferta::obtenerPlanOferta(false);
 
       $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));            
 
@@ -297,6 +298,7 @@ class Controlador_Oferta extends Controlador_Base{
             'aspirantesXoferta'=>$aspirantesXoferta,
             'array_empresas_hijas'=>$array_empresas_hijas,
             'areas_subareas'=>$areas_subareas,
+            'datos_plan'=>$datos_plan
           );
 
           if($vista != 'vacantes' && $vista != 'cuentas'){
@@ -368,7 +370,8 @@ class Controlador_Oferta extends Controlador_Base{
             'oferta'=> $oferta,
             'postulado'=>$postulado,
             'autopostulaciones_restantes'=>$autopostulaciones_restantes,
-            'vista'=>$vista
+            'vista'=>$vista,
+            'datos_plan'=>$datos_plan
           );
           
           $tags["show_banner"] = 1;
@@ -415,7 +418,8 @@ class Controlador_Oferta extends Controlador_Base{
             'vista'=>$vista,
             'ofertasSubempresas' => $ofertasSubempresas,
             'aspirantesXoferta'=>$aspirantesXoferta,
-            'enlaceCompraPlan'=>$enlaceCompraPlan
+            'enlaceCompraPlan'=>$enlaceCompraPlan,
+            'datos_plan'=>$datos_plan
           );
           
           $tags["template_js"][] = "tinymce/tinymce.min";
@@ -473,7 +477,8 @@ class Controlador_Oferta extends Controlador_Base{
             'page' => $page,
             'vista'=>$vista,
             'aspirantesXoferta'=>$aspirantesXoferta,
-            'array_empresas_hijas'=>$array_empresas_hijas
+            'array_empresas_hijas'=>$array_empresas_hijas,
+            'datos_plan'=>$datos_plan
           );
           
           $tags["template_js"][] = "tinymce/tinymce.min";
@@ -578,7 +583,8 @@ class Controlador_Oferta extends Controlador_Base{
             'page' => $page,
             'filtro'=>$filtro,
             'areas_subareas'=>$areas_subareas,
-            'vista'=>$vista
+            'vista'=>$vista,
+            'datos_plan'=>$datos_plan
           );
           $tags["template_js"][] = "tinymce/tinymce.min";
           $tags["template_js"][] = "oferta";

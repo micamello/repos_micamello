@@ -129,7 +129,7 @@ $('#btn_convertir').on('click', function(){
 	        async: false,
 	        success:function(data){
 
-	            $('#titulo_oferta').html(data.titulo);
+	            $('#titulo_oferta').html('<b>Oferta: </b>'+data.titulo);
 	            //$('#id_oferta').val(idOferta);
 	            $('#convertir').modal();
 	        },
@@ -198,8 +198,8 @@ function cargaAutomaticaModal(){
 	        async: false,
 	        success:function(data){
 
-	            $('#titulo_oferta').html(data.titulo);
-	            $('#convertir').modal();
+	            $('#titulo_oferta').html('<b>Oferta: </b>'+data.titulo);
+	            //$('#convertir').modal();
 	        },
 	        error: function (request, status, error) {
 	            error = 1;

@@ -259,9 +259,9 @@ class Controlador_Publicar extends Controlador_Base {
   }
 
   public function guardarDatosOferta($datos){
-    Utils::log(print_r($datos, true));
-    var_dump($datos);
-    exit();
+    // Utils::log(print_r($datos, true));
+    // var_dump($datos);
+    // exit();
     $datosRequisitoOferta = array('viajar'=>$datos['DispOf'],
                                   'residencia'=>$datos['residenciaOf'],
                                   'discapacidad'=>$datos['discapacidadOf'],

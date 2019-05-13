@@ -217,13 +217,10 @@
   </div>
 </div>
 
-<section class=" banner-publicidad">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="banner-light col-md-8">¡Planes que se adecuan a tus necesidades!</div>
-        <button class="btn-minimalista col-md-2"><a href="signup.html">Ver Planes</a></button>        
-      </div>
+<section style="background-color: grey;color: white; text-align:center" id="product" class="inicio">
+  <div class="container">
+    <div class="col-md-12">
+      <label>PUBLICIDAD</label>
     </div>
   </div>
 </section>

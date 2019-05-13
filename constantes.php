@@ -67,7 +67,8 @@ define('DOCUMENTACION', array('2'=>'Cédula', '3'=>'Pasaporte'));
 define('EDAD', array('1'=>'Entre 18 y 20 a&ntilde;os', '2'=>'Entre 20 y 30 a&ntilde;os','3'=>'Entre 30 y 40 a&ntilde;os','4'=>'Entre 40 y 50 a&ntilde;os','5'=>'M&aacute;s de 50 a&ntilde;os'));
 define('OPCIONES',array('a','b','c','d','e'));
 define('METODO_CUESTIONARIO',array('0'=>'Preguntas ordenadas','1'=>'Preguntas aleatorias'));
-
+define('DIVISIBLE_BLOQUE','12');
+define('DIVISIBLE_FILA','6');
 // método de selección
 define('METODO_SELECCION', array('1'=>array(
 										'Esta opción le permitirá dar doble clip para seleccionar la respuesta, tome en cuenta que el 1  es la opción  con la que más se siente identificado y 5 la opción con la que menos se siente identificado.'

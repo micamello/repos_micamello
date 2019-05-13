@@ -202,9 +202,10 @@ function eliminarIdioma(obj){
 if($('#formPublicar').length){
     $('#formPublicar').on('submit', function(event){
         validarFormPublicar();
-        if(validarFormError() > 0){
+        validarFormError();
+        // if(validarFormError() > 0){
             event.preventDefault();
-        }
+        // }
     })
 }
 
@@ -868,15 +869,39 @@ function validarTituloEmpresa(texto){
 }
 
 function crearMensajeError(obj, mensaje){
+    var objdiverror = "";
+    var texterror = "";
     eliminarMensajeError(obj);
-    var divError = "<div class='errorMensaje'>"+mensaje+"</div>";
-    obj.parents(':eq(0)').append(divError);
+    objdiverror = obj.prev();
+    var claseError = "";
+    claseError = "errorMensaje";
+    if(obj.attr('id') == "descripcionOferta"){
+        objdiverror = obj.prev().prev();
+    }
+    if(obj.attr('id') == "subareasCand"){
+        objdiverror = obj.parent().find('label').next();
+    }
+    if(obj.attr('id') == "listadoIdiomas"){
+        objdiverror = obj.parent().prev();
+        claseError = "errorMensaje1";
+    }
+    texterror = "<p class='"+claseError+"'>"+mensaje+"</p>";
+    objdiverror.append(texterror);
 }
 
 function eliminarMensajeError(obj){
-    if(obj.parents(':eq(0)').find('div.errorMensaje').length){
-        obj.parents(':eq(0)').find('div.errorMensaje')[0].outerHTML = "";
+    var objdiverror = "";
+    objdiverror = obj.prev();
+    if(obj.attr('id') == "descripcionOferta"){
+        objdiverror = obj.prev().prev();
     }
+    if(obj.attr('id') == "subareasCand"){
+        objdiverror = obj.parent().find('label').next();
+    }
+    if(obj.attr('id') == "listadoIdiomas"){
+        objdiverror = obj.parent().prev();
+    }
+    objdiverror[0].innerHTML = "";
 }
 
 function validarFloat(valor){
@@ -930,7 +955,7 @@ function validarNumeroEdad(edad){
 }
 
 function validarFormError(){
-    var errors = $('.errorMensaje').length;
+    var errors = $('.errorMensaje, .errorMensaje1').length;
     console.log(errors);
     return errors;
 }
@@ -963,10 +988,11 @@ function mostrarDatosPlan(data){
         fecha_caducidad = formatearFecha(data.fecha_caducidad);
     }
 
-    var html = "<div class='col-md-6'><span><b>Fecha de caducidad:</b></span><div class='bubbleData'>"+fecha_caducidad+"</div></div><div class='col-md-6'><span><b>Publicaciones restantes:</b></span><div class='bubbleData'><b>"+ofertaRest+"</b> Publicaciones</div></div>";
-    $('#detallePlan').removeClass('col-md-6');
-    $('#detallePlan').removeClass('col-md-offset-3');
-    $('#detallePlan').removeClass('cajaDetalle');
+    // var html = "<div class='col-md-6'><span><b>Fecha de caducidad:</b></span><div class='bubbleData'>"+fecha_caducidad+"</div></div><div class='col-md-6'><span><b>Publicaciones restantes:</b></span><div class='bubbleData'><b>"+ofertaRest+"</b> Publicaciones</div></div>";
+    var html = "<p><b>Fecha de caducidad:</b> "+fecha_caducidad+"<br><b>Publicaciones restantes:</b> "+ofertaRest+" publicaciones</p>";
+    // $('#detallePlan').removeClass('col-md-6');
+    // $('#detallePlan').removeClass('col-md-offset-3');
+    // $('#detallePlan').removeClass('cajaDetalle');
     $('#detallePlan')[0].innerHTML = "";
     $('#detallePlan').html(html);
     if(data.confidencial == 1){
@@ -997,4 +1023,3 @@ function formatearFecha(contenido){
 function mensajeErrorAlert(mensaje){
     swal('Faltan algunos datos!', mensaje, 'error');
 }
-

@@ -13,8 +13,8 @@ class Controlador_Perfil extends Controlador_Base
         } */
 
         //Obtiene todos los banner activos segun el tipo
-        $arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
-        $_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
+        //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
+        //$_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
         $msj1 = $imgArch1 = $btnDescarga = '';
         $tipo_usuario = $_SESSION['mfo_datos']['usuario']['tipo_usuario'];
 

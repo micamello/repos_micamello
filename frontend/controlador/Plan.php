@@ -53,6 +53,7 @@ class Controlador_Plan extends Controlador_Base {
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
     }    
+
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
     $tags = self::mostrarDefault(2);        
@@ -72,7 +73,9 @@ class Controlador_Plan extends Controlador_Base {
       $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
+
     }        
+
     $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
     $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";          
@@ -116,8 +119,15 @@ class Controlador_Plan extends Controlador_Base {
           $this->redirectToController('publicar');
         }
       }
-      else{                
-        //presenta metodos de pago        
+
+      else{        
+        if (empty($_SESSION['mfo_datos']['usuario']['cod_payme'])){
+
+        }
+        else{
+          $tags["cod_payme"] = $_SESSION['mfo_datos']['usuario']['cod_payme'];
+        }
+        //presenta metodos de pago
         $tags["plan"] = $infoplan;
         //datos para payme
         //$precio = $infoplan["costo"];
@@ -220,8 +230,8 @@ class Controlador_Plan extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/'.$data["idplan"].'/');             
     }     
   }
-  
-  public function resultado(){    
+
+  public function resultado(){
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){

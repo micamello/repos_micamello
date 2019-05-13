@@ -1,214 +1,183 @@
-<div class="">
-    <div class="row">
-        <div id="myCarousel1" class="carousel slide" data-ride="carousel">
-            <?php 
-            if (!empty($banners)){ ?>
-                <ol class="carousel-indicators">
-                <?php 
-                    $cont = 0;
-                    foreach($banners as $banner){  ?>
-                        <li data-target="#myCarousel1" data-slide-to="<?php echo $cont; ?>" <?php if($cont == 0){ echo 'class="active"'; } ?>></li>
-              <?php     $cont++; 
-                    } ?>
-                </ol>
-            <?php } ?>
 
-            <div class="carousel-inner">
-              <?php 
-            if (!empty($banners)){
-                $cont = 0;
-                foreach($banners as $banner){ ?>
-                    <div class="item <?php if($cont == 0){ echo 'active'; } ?>">
-                        <a href="<?php echo $banner['url']; ?>" target="_blan"><img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/<?php echo $banner['id_banner'];?>.<?php echo $banner['extension'];?>"></a>
-                    </div>
-                <?php $cont++; }
-            } ?>
+<!--<section id="product" class="product">-->
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="cuadro-banner">
+                  <div class="col-md-12">
+                    <p>¡Conoce las mejores empresas, encuentra tu pr&oacute;ximo trabajo y mucho m&aacute;s!</p>
+                  </div>
+                  <div class="col-md-12">
+                    <button class="btn-blue"  id="cuadro-celeste">
+                      <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
+                    </button>
+                  </div>
+                </div>
+            </div>
+
+            <div class="col-md-6" id="foto-banner">
+                <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/principal-2.jpg">
             </div>
         </div>
-    
     </div>
-    <?php 
-        if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) {
-            ?>
-            <section style="background-color: #369fe4; padding: 10px 0px 10px 0px;">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="container">
-                            <span style="font-size: 40px; color: white; font-weight: 500;">Llámanos a nuestras líneas Call Center:</span>
-                        </div>
-                    </div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="container">
-                        <div class="col-md-6">
-                            <span style="font-size: 30px; color: white; text-align: center;"><b>Quito: </b>02&nbsp;6055990 <i class="fa fa-phone"></i></span>
-                        </div>
-                        <div class="col-md-6">
-                            <span style="font-size: 30px; color: white; text-align: center;"><b>Guayaquil: </b>04&nbsp;6060111 <i class="fa fa-phone"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-    <?php } ?>
-                
-            <!--<section>
-                <div class="container">
-                    <div class="row">
-                        
-                        <div class="job_count">
-                            <div  align="center" class="col-md-4 col-sm-4 col-xs-12" >
-                                <h3 class="info_text_jobs">Empleos Agregados</h3>                                
-                                <h2 align="" class="count"><?php //echo $nro_oferta; ?></h2>                                   
-                            </div>
-                            <div align="center" class="col-md-4 col-sm-4 col-xs-12">
-                                <h3 class="info_text_jobs">Candidatos Activos</h3>  
-                                <h2 class="count"><?php //echo $nro_candidato; ?></h2>                                   
-                            </div>
-                           <div align="center" class="col-md-4 col-sm-4 col-xs-12">
-                                <h3 class="info_text_jobs">Empresas Disponibles</h3>
-                                <h2 class="count"><?php //echo $nro_empresa; ?></h2>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>-->
+<!--</section>-->
+<br><br>
 
-            <section id="brand" class="business bg-grey roomy-70">
-              <div class="container-fluid">
-                <div class="" align="center">
-                                    <h2 class="title_section">&Aacute;reas de Empleos</h2>
-                                        Una mejor carrera está por ahí. Te ayudaremos a encontrarlo Somos 
-                                        su primer paso para convertirnos en todo lo que queremos ser.
-                                </div><br><br>                
-                <div class="carousel slide col-md-10 col-md-offset-1" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel2">                  
-                  <div class="carousel-inner">
-                    <?php 
-                    $cont = 1;
-                    if (!empty($arrarea)){
-                      foreach($arrarea as $area) {                        
-                        ?>
-                        <div class="item <?php if($cont == 1){ echo 'active'; } ?>">                            
-                          <div class="brand_item col-md-2 col-sm-6" align="center"><i class="<?php echo $area['ico'] ?> font_awesome"></i><br><br>
-                            <h5><?php echo utf8_encode($area['nombre']) ?></h5>                            
-                          </div>                            
-                        </div>
-                        <?php $cont++; 
-                      } 
+<div class="text-center" align="center">
+    <h2 class="titulo">Áreas de Empleos</h2>
+  </div><br><br>
+
+<section id="brand" class="business bloque">
+    <div class="container-fluid">
+      <div class="carousel slide" data-ride="carousel" data-interval="3000" id="myCarousel1">
+         
+        
+      <div class="texto-white carousel-inner" role="listbox">
+        <?php 
+            $cont = 1;
+            $areas_bloque = array_chunk($arrarea, DIVISIBLE_BLOQUE);
+            foreach ($areas_bloque as $key => $valores) {
+                echo '<div class="item ';
+                if($cont == 1){ 
+                    echo 'active'; 
+                }
+                echo '"> ';
+                $arrarea = array_chunk($valores,DIVISIBLE_FILA);
+                foreach ($arrarea as $k => $a) {
+                    echo '<div class="col-md-12 col-sm-12">';
+                    foreach ($a as $c => $datos) {
+                        echo '<div class="brand_item col-md-2 col-sm-6" align="center">
+                            <i class="iconos '.$datos['ico'].'"></i><br><br>
+                            <h5>'.utf8_encode($datos['nombre']).'</h5>
+                        </div>';
                     }
-                    ?>
-                  </div>
-                </div>                
-              </div>
-            </section>
+                    echo '</div>';
+                }
+                echo '</div>'; 
+                $cont++;
+        } ?>
+      </div>
+    <?php 
+    if (!empty($areas_bloque)){ ?>
+        <ol class="indicadores col-md-12 carousel-indicators">
+        <?php 
+            for ($i=0; $i < count($areas_bloque); $i++) { 
+              ?>
+                <li data-target="#myCarousel1" data-slide-to="<?php echo $i; ?>" <?php if($i == 0){ echo 'class="active"'; } ?>></li>
+      <?php     
+            } ?>
+        </ol>
+    <?php } ?> 
+      
+    </div>   
 
-            <!--product section-->
-            <section class="casos_exito_mic">
-                <div class="container">
-                    <div class="row">                        
-                        <div class="main_test fix">
-                            <div class="col-md-12 col-sm-12 col-xs-12">
-                                <div class="text-center fix">
-                                    <h2 class="title_section">Casos de Éxito</h2>
-                                    <h5>Una mejor carrera está por ahí. Te ayudaremos a encontrarlo</h5>
-                                </div>
-                            </div>
+  </div>
+</section>
 
-                <?php foreach($arrtestimonio as $testimonio) { ?>
-                        <div class="col-md-4">
-                            <div class="test_item fix">
-                                <div class="col-sm-2 col-md-4" id="testimonio">
-                                    <img class="img-circle" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/testimonios/<?php echo $testimonio['id_testimonio'];?>.<?php echo $testimonio['extension'];?>"><i id="icono" class="fa fa-quote-left"></i></img>
-                                </div>
-                                <div style="" class="col-sm-10 col-md-8">
-                                    <h5><?php echo utf8_encode($testimonio['nombre']);?></h5>
-                                    <h6><?php echo utf8_encode($testimonio['profesion']);?></h6>
-                                    <p><?php echo utf8_encode($testimonio['descripcion']);?></p>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </section><!-- End off Product section -->
+<br><br>
+<div class="text-center" align="center">
+  <h2 class="titulo">¿Qué es CANEA?</h2>
+  <br><br>
+  <center>
+    <section>
+      <div class="col-md-12 col-sm-12">
+        <div class="canea-text col-md-1 ocultar">&nbsp;</div>
+        <div class="canea-text col-md-2 col-sm-2">C</div>
+        <div class="canea-text col-md-2 col-sm-2">A</div>
+        <div class="canea-text col-md-2 col-sm-2">N</div>
+        <div class="canea-text col-md-2 col-sm-2">E</div>
+        <div id="prueba-e" class="canea-text col-md-2 col-sm-2">A</div>
+        <div class="canea-text col-md-1 ocultar">&nbsp;</div>
+      </div>
+      <div class="parrafo col-md-12">
+        <p>Es un test enfocado al &aacute;mbito comportamental, el cual a trav&eacute;s de competencias ser&aacute; capaz de predecir las fortalezas que una persona tiene y necesita para el desarrollo de un puesto en espec&iacute;fico en las empresas.</p>
+      </div>
+      <a href="<?php echo PUERTO.'://'.HOST.'/canea/'?>" class="btn-blue texto-white">Conoce m&aacute;s</a>
+    </section>
+  </center>
+</div>
+<br>
 
 <!-- PUBLICIDAD -->
+<section class="tti_section text-center">
+  <div class="container">
+    <div class="row"> 
+      <div class="col-md-12">
+        <img id="imagen-centro" class="img-responsive" align="center" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/logo_tti_blanco.png">
+      </div>
+      <div class="col-md-12">
+        <div class="tti_concept">
+          <span>
+            Somos consultores asociados de TTI 
+            SUCCESS INSIGHTS™ , l&iacute;der mundial en medición de habilidades blandas 
+            para la gesti&oacute;n de talento y alto desempe&ntilde;o, con el nivel de 
+            confiabilidad m&aacute;s alto a nivel mundial.
+          </span>
+        </div>
+      </div>
 
-            <section class="tti_section">
-                <div class="container">
-                    <div class="row"> 
-                        <div class="col-md-12">
-                            <img class="img-responsive" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/logo_tti_blanco.png">
-                        </div>
-                        <div class="col-md-12">
-                            <div class="tti_concept">
-                                <span>
-                                    Somos consultores asociados de TTI SUCCESS INSIGHTS™ , líder mundial en medición de habilidades blandas para la gestión de talento y alto desempeño, con el nivel de confiabilidad más alto a nivel mundial.
-                                </span>
-                            </div>
-                        </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="item_tti">
+          <p>
+            <span class="tti_st">
+              <i class="fa fa-flag"></i>
+            </span>
+          </p>
+          
+          <span class="count">92</span>
+          <span>PA&Iacute;SES</span>
+        </div>
+      </div>
 
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="item_tti">
-                                <p>
-                                    <span class="tti_st">
-                                        <i class="fa fa-flag"></i>
-                                    </span>
-                                </p>
-                                
-                                <span class="count">92</span>
-                                <span>PAÍSES</span>
-                            </div>
-                        </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="item_tti">
+          <p>
+            <span class="tti_st">
+              <i class="fa fa-check-circle"></i>
+            </span>
+          </p>
+          
+          <p class="text_definition_tti">
+            <span class="count">10</span><span> MILLONES</span>
+          </p>
+          DE EVALUADOS
+        </div>
+      </div>
 
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="item_tti">
-                                <p>
-                                    <span class="tti_st">
-                                        <i class="fa fa-check-circle"></i>
-                                    </span>
-                                </p>
-                                
-                                <p class="text_definition_tti">
-                                    <span class="count">10</span><span> MILLONES</span>
-                                </p>
-                                DE EVALUADOS
-                            </div>
-                        </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="item_tti">
+          <p>
+            <span class="tti_st">
+              <i class="fa fa-clock-o"></i>
+            </span>
+          </p>
+          
+          <p>
+            <span class="count">8</span><span> SEGUNDOS</span>
+          </p>
+          EN ALG&Uacute;N LUGAR DEL MUNDO SE HACE UN TTI
+        </div>
+      </div>
 
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="item_tti">
-                                <p>
-                                    <span class="tti_st">
-                                        <i class="fa fa-clock-o"></i>
-                                    </span>
-                                </p>
-                                
-                                <p>
-                                    <span class="count">8</span><span> SEGUNDOS</span>
-                                </p>
-                                EN ALGÚN LUGAR DEL MUNDO SE HACE UN TTI
-                            </div>
-                        </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="item_tti">
+          <p>
+            <span class="tti_st">
+              <i class="fa fa-search"></i>
+            </span>
+          </p>
+          
+          <p>
+            <span class="count">30</span><span> AÑOS</span>
+          </p>
+          DE INVESTIGACI&Oacute;N
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        <div class="col-md-3 col-sm-6 col-xs-12">
-                            <div class="item_tti">
-                                <p>
-                                    <span class="tti_st">
-                                        <i class="fa fa-search"></i>
-                                    </span>
-                                </p>
-                                
-                                <p>
-                                    <span class="count">30</span><span> AÑOS</span>
-                                </p>
-                                DE INVESTIGACIÓN
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
 <!-- Listado de auspiciantes -->
 <section id="brand" class="brand fix">
@@ -221,7 +190,8 @@
           foreach($arrauspiciante as $auspiciante) {         
         ?>
             <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
-              <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php echo $auspiciante['url']; ?>"><img style="max-width:100%; width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a></div>
+              <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php echo $auspiciante['url']; ?>"><img style="max-width:100%; width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a>
+              </div>
             </div>
         <?php 
           $cont++; 
@@ -232,3 +202,15 @@
     </div>                
   </div>
 </section><!-- End off Brand section -->
+
+<section class=" banner-publicidad">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="banner-light col-md-6">¡Únete hoy y encuentra tu trabajo ideal!</div>
+        <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/registro/";?>">Registrate</a></button>
+        <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/login/";?>">Ingresar</a></button>
+      </div>
+    </div>
+  </div>
+</section>

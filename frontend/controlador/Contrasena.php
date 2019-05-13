@@ -31,8 +31,9 @@ class Controlador_Contrasena extends Controlador_Base {
                     $existeError = $obj_perfil->guardarClave($_SESSION['mfo_datos']['usuario']['id_usuario_login'],2);
                     if($existeError == 1){
                         $tags['data'] = array('password'=>$_POST["password"],'password_two'=>$_POST["password_two"],'password_ant'=>$_POST["password_ant"]);
-                    }else{                      
-                      Vista::render('msjcontrasena_exito', array());                       
+                    }else{            
+                      $tags["template_js"][] = "ocultarUser";          
+                      Vista::render('msjcontrasena_exito', $tags);                       
                       session_destroy();
                       exit;
                     }

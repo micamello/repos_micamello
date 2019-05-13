@@ -19,7 +19,7 @@
         <h3>Disponible también en otros países</h3>
         <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
           <a>
-            <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="country_mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
+            <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="redes-mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
           </a>
         <?php }?>   
       </div>
@@ -29,13 +29,13 @@
         <p><i class="fa fa-envelope" id="social-pie" aria-hidden="true"></i>info@micamello.com.ec</p>
         <p><i class="fa fa-map-marker" id="social-pie" aria-hidden="true"></i>&nbsp;&nbsp;Ecuador</p>
         <a href="<?php echo FACEBOOK; ?>" target="_blank">
-          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="social_mic">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/face.png" class="redes-mic">
         </a>
         <a href="<?php echo TWITTER; ?>" target="_blank">
-          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="social_mic">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/tw.png" class="redes-mic">
         </a>
         <a href="<?php echo INSTAGRAM; ?>" target="_blank">
-          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="social_mic">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="redes-mic">
         </a>
       </div>
       <div class="col-md-12">
@@ -59,6 +59,23 @@
         <a href="#" id="btn_modal" class="btn btn-md btn-success">Ok</a>
       </div>
     </div>    
+  </div>
+</div>
+
+
+<div class="modal fade" id="modal_select" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div>
+      <div class="modal-body" style="overflow: scroll">
+        <!-- <div class="col-md-12" id="modalmodal"> -->
+          
+        <!-- </div> -->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+      </div> 
+    </div>
   </div>
 </div>
 

@@ -444,13 +444,27 @@ class Modelo_Oferta{
     return $GLOBALS['db']->auto_array($sql,array(self::PORELIMINAR),true);          
   }
 
-  public static function obtenerPlanOferta($id_ofertas){
+  public static function obtenerPlanOferta($id_ofertas=false){
 
-    $sql = 'SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest FROM mfo_oferta o
+    $sql = 'SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
           INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
-          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
-          WHERE o.id_ofertas = '.$id_ofertas;
-    return $GLOBALS['db']->auto_array($sql,array(),false);
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan';
+
+    if($id_ofertas != false){
+      $sql .= ' WHERE o.id_ofertas = '.$id_ofertas;
+      return $GLOBALS['db']->auto_array($sql,array(),false);
+    }else{
+
+      $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+      $datos = array();
+      if (!empty($arrdatos) && is_array($arrdatos)){
+
+        foreach ($arrdatos as $key => $value) {
+          $datos[$value['id_ofertas']] = $value['nombre_plan'];
+        }
+      }
+      return $datos;
+    }
   }
 }  
 ?>
