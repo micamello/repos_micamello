@@ -1,4 +1,4 @@
-<section id="product" class="product">
+<!--<section id="product" class="product">-->
   <div class="container">
     <div class="text-center">
       <h2 class="titulo">Recuperaci&oacute;n de Contrase&ntilde;a</h2>
@@ -31,4 +31,4 @@
       </div>
     </div>
   ﻿</section>
-</section>
+<!--</section>-->

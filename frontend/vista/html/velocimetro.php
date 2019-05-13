@@ -1,4 +1,4 @@
-<section id="product" class="product">
+<!--<section id="product" class="product">-->
   <div class="container-fluid">
     <div class="row">
       <div class="text-center velocimetro col-md-12 col-sm-12">
@@ -26,4 +26,4 @@
       </div>
     </div>
   </div>
-</section>
+<!--</section>-->
