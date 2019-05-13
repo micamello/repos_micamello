@@ -1,4 +1,4 @@
-﻿<section id="product" class="">
+<section id="product" class="">
   <div class="text-center">
     <h2 class="titulo">Publicar Ofertas</h2>
   </div>

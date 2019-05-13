@@ -13,8 +13,6 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              $_POST['authorizationResult'] . 
                                              PAYME_SECRET_KEY, 'sha512');
 
-Utils::envioCorreo("desarrollo@micamello.com.ec","CRON PAYME",print_r($_POST,true));    
-
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
     $vl_insert = array();
@@ -50,9 +48,12 @@ try{
     $vl_insert["IDTransaction"] = $_POST["IDTransaction"];    
     if (!Modelo_Payme::guardar($vl_insert)){
       throw new Exception("Error Insert IPN Payme");
+    }
+    if ($_POST["authorizationResult"] = "00"){
+      Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
     } 
   }
-  Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
+  Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/error/');
 }
 catch(Exception $e){    
   Utils::envioCorreo('desarrollo@micamello.com.ec',$e->getMessage(),print_r($_POST,true));
