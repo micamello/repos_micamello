@@ -1,0 +1,21 @@
+[2019/05/13 08:47:07] Utils::createSession empezo una nueva sesion
+[2019/05/13 08:47:07] Controlador_Logout::construirPagina Login out
+[2019/05/13 08:47:07] Utils::createSession empezo una nueva sesion
+[2019/05/13 08:47:07] SQL Query: SELECT * FROM mfo_area
+[2019/05/13 08:47:07] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/13 08:47:07] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/13 08:47:07] SQL Query: SELECT * FROM mfo_genero
+[2019/05/13 08:47:07] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/13 08:47:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/13 08:47:25] Utils::createSession empezo una nueva sesion
+[2019/05/13 08:47:25] SQL Query: SELECT * FROM mfo_genero
+[2019/05/13 08:47:25] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/13 08:47:25] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/13 08:47:47] Utils::createSession empezo una nueva sesion
+[2019/05/13 08:47:47] SQL Query: SELECT * FROM mfo_genero
+[2019/05/13 08:47:47] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/13 08:47:47] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/13 08:47:50] Utils::createSession empezo una nueva sesion
+[2019/05/13 08:47:50] SQL Query: SELECT * FROM mfo_genero
+[2019/05/13 08:47:50] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/13 08:47:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
