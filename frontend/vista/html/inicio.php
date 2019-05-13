@@ -6,13 +6,13 @@
                   <div class="col-md-12">
                     <p>¡Conoce las mejores empresas, encuentra tu pr&oacute;ximo trabajo y mucho m&aacute;s!</p>
                   </div>
-                  <div class="col-md-12">
-                    <button class="btn-blue"  id="cuadro-celeste">
-
-                      <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
-
-                    </button>
-                  </div>
+                  <?php if(!isset($_SESSION)){ ?>
+                    <div class="col-md-12">
+                      <button class="btn-blue"  id="cuadro-celeste">
+                        <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
+                      </button>
+                    </div>
+                  <?php } ?>
                 </div>
             </div>
 
@@ -203,16 +203,16 @@
   </div>
 </section><!-- End off Brand section -->
 
-<section class=" banner-publicidad">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="banner-light col-md-6">¡Únete hoy y encuentra tu trabajo ideal!</div>
-
-        <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/registro/";?>">Registrate</a></button>
-        <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/login/";?>">Ingresar</a></button>
-
+<?php if(!isset($_SESSION)){ ?>
+  <section class=" banner-publicidad">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="banner-light col-md-6">¡Únete hoy y encuentra tu trabajo ideal!</div>
+          <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/registro/";?>">Registrate</a></button>
+          <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/login/";?>">Ingresar</a></button>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
+<?php } ?>
