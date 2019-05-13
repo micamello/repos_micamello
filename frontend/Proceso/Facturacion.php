@@ -22,10 +22,11 @@ class Proceso_Facturacion{
   public $codigoPrincipal;
   public $descripdetalle;
   public $numerofactura;
+  public $formadepago;
 
   const KEY_PUBLIC = RUTA_INCLUDES."factura/firmadigital/public.pem";
   const KEY_PRIVATE = RUTA_INCLUDES."factura/firmadigital/private.pem";
-  const RUTA_FACTURA = FRONTEND_RUTA."/imagenes/usuarios/facturas/";
+  const RUTA_FACTURA = FRONTEND_RUTA."imagenes/usuarios/facturas/";
   const KEY_PASSWORD = "Amor2018";
   const RUC = '0993064467001';
   const TIPO_EMISION = 1;
@@ -35,29 +36,27 @@ class Proceso_Facturacion{
   const DIR_MATRIZ = 'Km 12 Av. Febres Cordero Cdla. Villa Club Etapa Krypton Mz.14 Solar 3';
   const OBLIGADO_CONTABILIDAD = 'SI';  
   const ESTAB = '001';
-  const PTOEMI = '001';  
+  const PTOEMI = '002';  
   const PROPINA = '0.00';
   const PLAZO = 1;
   const UNIDAD_TIEMPO = 'Días';
   const AMBIENTE = array("PRUEBAS"=>1, "PRODUCCION"=>2);
   const TIPO_DOCUMENTO = array("FACTURA"=>"01");  
-  const TIPO_IDENTIF_COMPRADOR = array("RUC"=>"04","CÉDULA"=>"05","PASAPORTE"=>"06");
+  const TIPO_IDENTIF_COMPRADOR = array("1"=>"04","2"=>"05","3"=>"06");
   const CODIGO_IMPUESTO = array("IVA"=>2,"ICE"=>3,"IRBPNR"=>5);  
   const TARIFA_IVA = array("12"=>2,"14"=>3);
   const MONEDA = array(1=>'DOLAR');
   const FORMA_PAGO = array("SINFINANCIERO"=>"01","TARJETADEBITO"=>"16","TARJETACREDITO"=>"19");  
   const DES_FORMA_PAGO = array("01"=>"SIN UTILIZACION DEL SISTEMA FINANCIERO",
-                               "15"=>"COMPENSACIÓN DE DEUDAS", 
-                               "16"=>"TARJETA DE DÉBITO", 
-                               "17"=>"DINERO ELECTRÓNICO", 
-                               "18"=>"TARJETA PREPAGO", 
-                               "19"=>"TARJETA DE CRÉDITO", 
-                               "20"=>"OTROS CON UTILIZACION DEL SISTEMA FINANCIERO", 
-                               "21"=>"ENDOSO DE TÍTULOS"); 
+                               "16"=>"TARJETA DE DÉBITO",
+                               "19"=>"TARJETA DE CRÉDITO" 
+                          ); 
 
-  function generarFactura(){    
-    $this->importeImpuesto = number_format(round($this->importeTotal * (array_search(2, self::TARIFA_IVA)/100),2),2);
-    $this->totalSinImpuestos = number_format(round($this->importeTotal - $this->importeImpuesto,2),2);
+  function generarFactura(){         
+    $this->totalSinImpuestos = number_format(round($this->importeTotal / GRAVAIVA,2),2);
+    $this->importeImpuesto = number_format(round($this->importeTotal - $this->totalSinImpuestos,2),2);
+    Utils::log("VALOR IVA ".$this->importeImpuesto);
+    //number_format(round($this->importeTotal - $this->importeImpuesto,2),2);
     $this->importeTotal = number_format($this->importeTotal,2);
     $this->generarClaveAcceso();
     $this->creaXml();   
@@ -180,7 +179,7 @@ class Proceso_Facturacion{
     return $infoTributaria;
   }
 
-  function valoresinfoFactura(){
+  function valoresinfoFactura(){    
     $infoFactura = array("fechaEmision" => date("d/m/Y"),
                          "dirEstablecimiento" => self::DIR_MATRIZ,                             
                          "obligadoContabilidad" => self::OBLIGADO_CONTABILIDAD,                                  
@@ -194,11 +193,11 @@ class Proceso_Facturacion{
                          "propina" => self::PROPINA,
                          "importeTotal" => $this->importeTotal,
                          "moneda" => self::MONEDA[1],
-                         "pagos" => array("formaPago" => self::FORMA_PAGO["SINFINANCIERO"],
+                         "pagos" => array("formaPago" => $this->formadepago,
                                           "total" => $this->importeTotal,
                                           "plazo" => self::PLAZO,
                                           "unidadTiempo" => self::UNIDAD_TIEMPO)
-                        );    
+                        );      
     return $infoFactura;
   }
 
@@ -229,9 +228,9 @@ class Proceso_Facturacion{
   }
 
   function valoresinfoAdicional(){
-    $infoAdicional = array("Dirección" => $this->direccionComprador,
-                           "Teléfono" => $this->telefComprador,
-                           "Email" => $this->emailComprador);
+    $infoAdicional = array("Dirección:" => $this->direccionComprador,
+                           "Teléfono:" => $this->telefComprador,
+                           "Email:" => $this->emailComprador);
     return $infoAdicional;
   }
 
@@ -248,7 +247,7 @@ class Proceso_Facturacion{
     $result = $soap->validarComprobante($params);     
     $msgerror = print_r($result,true);    
     $valoresact = array();
-    $valoresact["fecha_estado"] = date('Y-m-d H:i:s');
+    $valoresact["fecha_estado"] = date('Y-m-d H:i:s');    
     if (is_object($result) && $result->RespuestaRecepcionComprobante->estado == "RECIBIDA"){
       $valoresact["estado"] = Modelo_Factura::RECIBIDO;            
       $return = true;
@@ -257,6 +256,7 @@ class Proceso_Facturacion{
       $valoresact["estado"] = Modelo_Factura::DEVUELTO;
       $valoresact["msg_error"] = $msgerror;            
       $return = false;
+      Utils::envioCorreo('desarrollo@micamello.com.ec','WS FACTURACION REC',print_r($result,true));
     }    
     Modelo_Factura::actualizar($claveAcceso,$valoresact);
     return $return;
@@ -267,8 +267,8 @@ class Proceso_Facturacion{
     $soap = new SoapClient(WS_SRI_AUTORIZACION, $options);
     $params = array("claveAccesoComprobante" => $claveAcceso);
     $result = $soap->autorizacionComprobante($params);     
-    $msgerror = print_r($result,true);    
-    $valoresact = array();    
+    $msgerror = print_r($result,true);       
+    $valoresact = array();       
     if (is_object($result) && $result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado == "AUTORIZADO"){
       $valoresact["estado"] = Modelo_Factura::AUTORIZADO;
       $fechaautorizacion = str_replace('T', ' ', substr($result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->fechaAutorizacion,0,18));
@@ -277,8 +277,10 @@ class Proceso_Facturacion{
     }
     else{
       $valoresact["estado"] = Modelo_Factura::NOAUTORIZADO;
-      $valoresact["fecha_estado"] = date('Y-m-d H:i:s');      
+      $valoresact["fecha_estado"] = date('Y-m-d H:i:s'); 
+      $valoresact["msg_error"] = $msgerror;      
       $return = false;
+      Utils::envioCorreo('desarrollo@micamello.com.ec','WS FACTURACION AUT',print_r($result,true));
     }   
     Modelo_Factura::actualizar($claveAcceso,$valoresact);
     return $return;   
@@ -402,7 +404,7 @@ class Proceso_Facturacion{
                         <td width="950"><b>Descripción</b></td>
                         <td width="10"><b>Precio Unitario</b></td>
                         <td width="10"><b>Descuento</b></td>
-                        <td width="10"><b>Precio Toral</b></td>
+                        <td width="10"><b>Precio Total</b></td>
                       </tr>';
     foreach ($detalles->detalle as $detalle) {
 
@@ -456,11 +458,11 @@ class Proceso_Facturacion{
                             <td '.$style1.' align="right">0.00</td>
                           </tr>
                           <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL no objeto de IVA</b></td>
+                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL NO OBJETO DE IVA</b></td>
                             <td '.$style1.' align="right">0.00</td>
                           </tr>
                           <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL exento de IVA</b></td>
+                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL EXENTO DE IVA</b></td>
                             <td '.$style1.' align="right">0.00</td>
                           </tr>
                           <tr>
@@ -478,11 +480,7 @@ class Proceso_Facturacion{
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>IVA '.$infoFactura->totalConImpuestos->totalImpuesto->tarifa.'%</b></td>
                             <td '.$style1.' align="right">'.$infoFactura->totalConImpuestos->totalImpuesto->valor.'</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>IRBPNR</b></td>
-                            <td '.$style1.' align="right">0.00</td>
-                          </tr>
+                          </tr>                          
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>PROPINA</b></td>
                             <td '.$style1.' align="right">'.$infoFactura->propina.'</td>

@@ -11,8 +11,7 @@ class Modelo_Plan{
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
   	if (empty($tipousuario)||empty($sucursal)){ return false; }
     $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
-                   p.prom_costo, p.prom_duracion,
-                   IF(p.promocional,p.prom_codigo_paypal,p.codigo_paypal) AS codigo_paypal,
+                   p.prom_costo, p.prom_duracion,                   
                    IF(p.promocional,p.prom_num_post,p.num_post) AS num_post, 
                    IF(p.promocional,p.prom_costo,p.costo) AS costo, 
                    IF(p.promocional,p.prom_duracion,p.duracion) AS duracion, 
@@ -89,8 +88,7 @@ class Modelo_Plan{
                    IF(promocional,prom_costo,costo) AS costo,
                    IF(promocional,prom_num_post,num_post) AS num_post,
                    IF(promocional,prom_duracion,duracion) AS duracion,
-                   IF(promocional,prom_porc_descarga,porc_descarga) AS porc_descarga,
-                   IF(promocional,prom_codigo_paypal,codigo_paypal) AS codigo_paypal 
+                   IF(promocional,prom_porc_descarga,porc_descarga) AS porc_descarga
             FROM mfo_plan 
             WHERE estado = 1 AND id_plan = ? AND tipo_usuario = ? AND id_sucursal = ? AND visibilidad = 1";
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    
@@ -102,7 +100,7 @@ class Modelo_Plan{
       $sql = "SELECT * FROM mfo_plan WHERE id_plan = ?";
     }
     else{
-      $sql = "SELECT p.tipo_plan, p.id_sucursal, p.num_post, p.duracion, p.codigo_paypal, p.nombre, 
+      $sql = "SELECT p.tipo_plan, p.id_sucursal, p.num_post, p.duracion, p.nombre, 
                      s.id_pais, p.tipo_usuario, p.num_cuenta, p.porc_descarga, p.num_accesos 
               FROM mfo_plan p
               INNER JOIN mfo_sucursal s ON s.id_sucursal = p.id_sucursal 

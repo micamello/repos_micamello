@@ -198,8 +198,7 @@
                   <input type="hidden" name="cmd" value="_s-xclick">
                   <input type="hidden" name="custom" id="custom" value="">
                   <input type="hidden" name="rm" value="2">
-                  <input type="hidden" name="return" id="return" value="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/paypal/">  
-                  <input type="hidden" name="hosted_button_id" value="<?php echo $plan["codigo_paypal"];?>">
+                  <input type="hidden" name="return" id="return" value="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/paypal/">                    
                   <input type="hidden" id="idplanP" name="idplanP" value="<?php echo $plan["id_plan"];?>">
                   <input type="hidden" id="usuarioP" name="usuarioP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>">
                   <input type="hidden" id="tipousuP" name="tipousuP" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>">

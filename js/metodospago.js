@@ -532,9 +532,9 @@ function enviarFormulario(form){
     }
   }else if(estado == 1 && form == 'form_payme'){
     //$('#shippingState').val($("#provinciaPM option:selected").text());
-    //$('#shippingCity').val($("#ciudadPM option:selected").text());
-    $('#reserved18').val($("#dniPM").val());
-    $('#reserved19').val($("#tipo_docPM").val());    
+    //$('#shippingCity').val($("#ciudadPM option:selected").text());    
+    $('#reserved18').val($("#tipo_docPM").val());    
+    $('#reserved19').val($("#dniPM").val());
     AlignetVPOS2.openModal($('#rutaPayMe').val());    
   }  
 }
