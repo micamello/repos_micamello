@@ -216,7 +216,6 @@ if($navegador == 'MSIE'){ ?>
 <?php
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
 
-
     <div class="container-fluid">
       <ol class="breadcrumb" align="left">
         <?php 

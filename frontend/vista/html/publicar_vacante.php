@@ -1,11 +1,10 @@
-﻿<form id="formPublicar" method="POST" action="<?php echo PUERTO.'://'.HOST.'/registroOferta/' ?>">
-	<section id="product" class="product">
-	  <div class="text-center">
-	    <h2 class="titulo">Publicar Ofertas</h2>
-	  </div>
-	</section>
+<section id="product" class="">
+  <div class="text-center">
+    <h2 class="titulo">Publicar Ofertas</h2>
+  </div>
+</section>
 
-
+<form id="formPublicar" method="POST" action="<?php echo PUERTO.'://'.HOST.'/registroOferta/' ?>">
 	<section id="product" class="inicio">
 	  <div class="container">
 	    <div class="col-md-6">
