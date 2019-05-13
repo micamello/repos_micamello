@@ -53,7 +53,7 @@ class Proceso_Subscripcion{
 	    }
 	    
       //facturacion electronica
-      /*$obj_facturacion = new Proceso_Facturacion();
+      $obj_facturacion = new Proceso_Facturacion();
       $obj_facturacion->razonSocialComprador = $this->objUsuario->nombres;
       $obj_facturacion->identificacionComprador = $this->objUsuario->dni;
       $obj_facturacion->direccionComprador = $this->objUsuario->direccion;
@@ -71,13 +71,13 @@ class Proceso_Subscripcion{
         if (!Modelo_Parametro::actualizarNroFactura()){
           throw new Exception("Error al generar el siguiente numero de factura");  
         } 
-      }*/   
+      }   
       
       $GLOBALS['db']->commit();
 
       $attachments = array();
       //envio a los WS al SRI
-      /*if ($obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
+      if ($obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
         sleep(5);
         $fecha_auto = $obj_facturacion->sendAutorizacion($rsfact["claveacceso"]);
         if (!empty($fecha_auto)){
@@ -90,7 +90,7 @@ class Proceso_Subscripcion{
           $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml",
                                  "archivo"=>$rsfact["claveacceso"].".xml");
         }
-      }*/
+      }
 
       $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
 
