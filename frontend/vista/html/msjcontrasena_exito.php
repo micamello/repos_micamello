@@ -1,4 +1,4 @@
-<section id="product" class="product">
+
   <div class="container">
     <div class="text-center">
       <h2 class="titulo">Contrase&ntilde;a Modificada</h2>
@@ -23,4 +23,3 @@
       </div>
     </div>
   ﻿</section>
-</section>

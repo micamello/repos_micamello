@@ -1,4 +1,4 @@
-<section id="product" class="product">
+<!--<section id="product" class="product">-->
   <div class="container">
     <div class="text-center">
       <h2 class="titulo">¿Qui&eacute;nes Somos?</h2>
@@ -43,4 +43,4 @@
       </div>
     </div>
   </section>
-</section>
+<!--</section>-->

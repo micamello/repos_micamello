@@ -1,6 +1,4 @@
 
-<section id="product" class="product">
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
@@ -10,7 +8,9 @@
                   </div>
                   <div class="col-md-12">
                     <button class="btn-blue"  id="cuadro-celeste">
-                      <a href="#" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
+
+                      <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
+
                     </button>
                   </div>
                 </div>
@@ -21,7 +21,7 @@
             </div>
         </div>
     </div>
-</section>
+
 <br><br>
 
 <div class="text-center" align="center">
@@ -208,8 +208,10 @@
     <div class="row">
       <div class="col-md-12">
         <div class="banner-light col-md-6">¡Únete hoy y encuentra tu trabajo ideal!</div>
-        <button class="btn-minimalista col-md-2"><a href="signup.html">Registrate</a></button>
-        <button class="btn-minimalista col-md-2"><a href="login.html">Ingresar</a></button>
+
+        <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/registro/";?>">Registrate</a></button>
+        <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/login/";?>">Ingresar</a></button>
+
       </div>
     </div>
   </div>

@@ -89,6 +89,7 @@ class Controlador_Publicar extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
 
+    $breadcrumbs['publicar'] = 'publicar oferta';
     $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
     $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
     $arrjornada = Modelo_Jornada::obtieneListado();
@@ -109,7 +110,8 @@ class Controlador_Publicar extends Controlador_Base {
                   'arrescolaridad'=>$arrescolaridad,
                   'fecha_contratacion'=>$fechacontratacion,
                   'planes'=>$planes,
-                  'tipolicencia'=>$tipolicencia
+                  'tipolicencia'=>$tipolicencia,
+                  'breadcrumbs'=>$breadcrumbs
                 );
 
     $tags["template_css"][] = "DateTimePicker";
@@ -259,9 +261,9 @@ class Controlador_Publicar extends Controlador_Base {
   }
 
   public function guardarDatosOferta($datos){
-    Utils::log(print_r($datos, true));
-    var_dump($datos);
-    exit();
+    // Utils::log(print_r($datos, true));
+    // var_dump($datos);
+    // exit();
     $datosRequisitoOferta = array('viajar'=>$datos['DispOf'],
                                   'residencia'=>$datos['residenciaOf'],
                                   'discapacidad'=>$datos['discapacidadOf'],

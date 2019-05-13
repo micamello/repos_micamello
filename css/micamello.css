@@ -648,18 +648,37 @@ a.addButton:hover{
 .errorMensaje{
   color: red;
   font-size: 13px;
-  text-align: center;
+  /*text-align: center;
   margin: 1px 50px 0 50px;
   padding: 0 5px 0 5px;
   background-color: white;
-  border-radius: 5px;
-  /*position: absolute;*/
-  position: absolute; 
-  left: 0px; 
+  border-radius: 5px;*/
+  position: absolute;
+  /*position: absolute; */
+  top: 46px;
+  /*left: 0px; 
   right: 0px; 
   margin-left: auto; 
   margin-right: auto; 
-  width: 100%; 
+  width: 100%; */
+}
+
+.errorMensaje1{
+  color: red;
+  font-size: 13px;
+  /*text-align: center;
+  margin: 1px 50px 0 50px;
+  padding: 0 5px 0 5px;
+  background-color: white;
+  border-radius: 5px;*/
+  position: absolute;
+  /*position: absolute; */
+  top: 0px;
+  /*left: 0px; 
+  right: 0px; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 100%; */
 }
 
 #formPublicar .form-group{
@@ -674,11 +693,11 @@ a.addButton:hover{
   color: #FFFFFF;
 }
 .detallePlan{
-  background-color: #0267cf;
+  /*background-color: #0267cf;
   border-radius: 10px;
   padding: 5px 10px 5px 10px;
   margin: 10px 0 10px 0;
-  color: #FFFFFF;
+  color: #FFFFFF;*/
 }
 
 .confidencialObligatory{

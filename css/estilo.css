@@ -410,7 +410,8 @@ display: inline;
 /*REGISTRO*/
 @media (min-width: 768px) {
   .container {
-    width: 75%;
+    /*width: 75%;*/
+    /*width: 970px;*/
   }
 }
 .registro-cuadro{
@@ -1260,6 +1261,7 @@ ul.checkout-bar a {
     margin: 2px auto;
     z-index: 1100 !important;
 }
+<<<<<<< HEAD
 
 #barra{
     background-color: #4b98dd;
@@ -1279,4 +1281,27 @@ ul.checkout-bar a {
     background-color: #f2f2f2;
     padding:0px; 
     cursor:pointer;
+}
+/*.form-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-control-placeholder {
+  position: absolute;
+  top: 0;
+  padding: 7px 0 0 13px;
+  transition: all 200ms;
+  opacity: 0.5;
+}
+
+.form-control:focus + .form-control-placeholder,
+.form-control:valid + .form-control-placeholder {
+  font-size: 75%;
+  transform: translate3d(0, -100%, 0);
+  opacity: 1;
+}*/
+
+.msgError{
+    margin: 16px 0 16px 0 !important;
 }

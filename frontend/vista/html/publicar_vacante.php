@@ -1,31 +1,27 @@
-﻿<form id="formPublicar" method="POST" action="<?php echo PUERTO.'://'.HOST.'/registroOferta/' ?>">
-<div class="">
-	<div class="breadcrumb">
-		<div class="container">
-			<b class="publicar_text">Publicar Ofertas</b>
-			<br>
-			<div class="col-md-12">
-				<div class="col-md-4 col-md-offset-4">
-					<label>Seleccione plan:</label>
-					<select name="planUsuario" id="planesSelect" class="form-control">
-						<!-- <option value="" selected="selected" disabled="disabled">Seleccione un plan</option> -->
-						<?php 
-						//$funcionEnc = new Utils();
-						foreach ($planes as $plan) {							
-							echo "<option value='".Utils::encriptar($plan['id_plan']."_".$plan['id_empresa_plan'])."'>Plan ".utf8_encode($plan['nombre'])."</option>";
-						}
-						?>
-					</select>
-					<br>
-				</div>
+﻿<section id="product" class="">
+  <div class="text-center">
+    <h2 class="titulo">Publicar Ofertas</h2>
+  </div>
+</section>
 
-			</div>
-			
-			<div class="col-md-6 col-md-offset-3 cajaDetalle" id="detallePlan">
-				<span style="text-align: center;">Detalle de Plan seleccionado</span>
-			</div>			 
-		</div>
-	</div>
+<form id="formPublicar" method="POST" action="<?php echo PUERTO.'://'.HOST.'/registroOferta/' ?>">
+	<section id="product" class="inicio">
+	  <div class="container">
+	    <div class="col-md-6">
+	      <label>Seleccione plan:</label>
+	      <select name="planUsuario" id="planesSelect" class="form-control">
+			<?php
+				foreach ($planes as $plan) {							
+					echo "<option value='".Utils::encriptar($plan['id_plan']."_".$plan['id_empresa_plan'])."'>Plan ".utf8_encode($plan['nombre'])."</option>";
+				}
+			?>
+			</select>
+	    </div>
+	    <div class="col-md-6" style="font-size: 12pt;padding-top: 10px;" id="detallePlan">
+	    </div>
+	  </div>
+	</section>
+	 <br>
 
 	<div class="container">
 		<div class="panel panel-default">
@@ -35,6 +31,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Título de la oferta</label>
+								<div class="msgError"></div>
 								<input type="text" class="form-control" name="nombreOferta" id="nombreOferta">
 							</div>
 						</div>	
@@ -42,6 +39,7 @@
 						<div class="col-md-12">
 							<div class="form-group">
 								<label>Descripción de la oferta</label>
+								<div class="msgError"></div>
 								<textarea id="descripcionOferta" name="descripcionOferta" id="descripcionOferta"></textarea>
 							</div>
 						</div>
@@ -49,6 +47,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Salario: </label>
+								<div class="msgError"></div>
 								<input type="text" class="form-control" name="salarioOf" id="salarioOf" placeholder="00.00">
 							</div>
 						</div>
@@ -56,6 +55,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Salario a convenir: </label>
+								<div class="msgError"></div>
 								<select class="form-control" id="salarioConv" name="salarioConv">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -69,6 +69,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Fecha de contratación: </label>
+								<div class="msgError"></div>
 								<input type="text" data-field="date" max="<?php echo date('Y-m-d'); ?>" value="<?php	echo $fecha_contratacion;?>" class="form-control" name="fechaCont" id="fechaCont">
 								<div id="fecha"></div>
 							</div>
@@ -77,6 +78,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cantidad de vacantes: </label>
+								<div class="msgError"></div>
 								<input type="text" class="form-control" name="cantVac" id="cantVac" min="1" value="1">
 							</div>
 						</div>
@@ -84,6 +86,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione provincia: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="provinciaOf" id="provinciaOf">
 									<option value="" disabled="disabled" selected="selected">Seleccione una opción</option>
 								<?php 
@@ -103,6 +106,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione ciudad: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="ciudadOf" id="ciudadOf">
 									<option value="" selected="selected" disabled="disabled">Seleccione una ciudad</option>
 								</select>
@@ -112,18 +116,19 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione área</label>
+								<div class="msgError"></div>
 								<select class="form-control" name="area_select[]" id="area_select" multiple>
 				       	<?php 
-                $i = 0;                
-                if(!empty($areasSubareas) && is_array($areasSubareas)){
-                  foreach ($areasSubareas as $area) {
-                    if($i != $area['id_area']){
-                      echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
-                        $i = $area['id_area'];
-                    }
-                  }
-                }
-	              ?>
+			                $i = 0;                
+			                if(!empty($areasSubareas) && is_array($areasSubareas)){
+			                  foreach ($areasSubareas as $area) {
+			                    if($i != $area['id_area']){
+			                      echo "<option value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
+			                        $i = $area['id_area'];
+			                    }
+			                  }
+			                }
+				              ?>
 							  </select>
 							</div>
 						</div>
@@ -131,6 +136,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Seleccione subárea</label>
+								<div class="msgError"></div>
 								<select class="form-control" name="subareasCand[]" id="subareasCand" multiple>
 								   	<?php                     
 				                        if(!empty($areasSubareas) && is_array($areasSubareas)){
@@ -148,6 +154,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Jornada: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="jornadaOf" id="jornadaOf">
 									<?php 
 										if (!empty($arrjornada)) {
@@ -166,6 +173,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Escolaridad: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="escolaridadOf" id="escolaridadOf">
 									<?php
 										if (!empty($arrescolaridad)){
@@ -184,6 +192,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Edad Mínima: </label>
+								<div class="msgError"></div>
 								<input type="text" class="form-control" name="edadMinOf" id="edadMinOf" value="18">
 							</div>
 						</div>
@@ -191,6 +200,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Edad Máxima: </label>
+								<div class="msgError"></div>
 								<input type="text" class="form-control" name="edadMaxOf" id="edadMaxOf" value="18">
 							</div>
 						</div>
@@ -235,15 +245,20 @@
 														?>
 													</select>
 												</div>
+												<br>
 											<!-- </div> -->
 										</div>
-										<div><a class="addButton" id="addButton">Añadir idioma</a><br><br></div>
+										<!-- <div><a class="btn-min-light" id="addButton">Añadir idioma</a><br><br></div> -->
+										<div align="center">
+					                      <a class="btn-min-light" align="center" id="addButton">Añadir idioma</a><br><br>
+					                    </div>
 									</div>
 									<div class="col-md-6 col-md-offset-1">
+										<div class="msgError"></div>
 										<div class="panel panel-default" style="min-height: 200px;">
 											<div class="panel-body listPanel" id="listadoIdiomas">
 												<label>Seleccione un idioma</label>
-											</div>		
+											</div>	
 										</div>
 									</div>
 
@@ -257,6 +272,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Años de experiencia: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="anosexp" id="anosexp">
 									<?php
 										foreach(ANOSEXP as $key => $exp){ 
@@ -270,6 +286,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Disponibilidad para viajar: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="DispOf" id="dispOf">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -283,6 +300,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Tipo de Licencia: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="licenciaOf" id="licenciaOf">
 									<option value="0">Sin Licencia</option>
 									<?php 
@@ -297,6 +315,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Cambio de residencia: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="residenciaOf" id="residenciaOf">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -310,6 +329,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Discapacidad: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="discapacidadOf" id="discapacidadOf">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -323,6 +343,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>Primer empleo: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="primerEmpleoOf" id="primerEmpleoOf">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -336,6 +357,7 @@
 						<div class="col-md-6">
 							<div class="form-group">
 								<label>¿Oferta urgente?: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="ofertaUrgenteOf" id="ofertaUrgenteOf">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -358,6 +380,7 @@
 						<div class="col-md-6" style="display: none;">
 							<div class="form-group">
 								<label>Confidencial: </label>
+								<div class="msgError"></div>
 								<select class="form-control" name="confidencialOf" id="confidencialOf">
 									<?php 
 										foreach (REQUISITO as $key => $value) {
@@ -370,16 +393,21 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+						<!-- <div class="col-md-12">
 							<div class="text-center">
 								<input type="submit" name="btnPublicar" id="btnPublicar" class="btn btn-success" value="Publicar oferta">
 							</div>
-						</div>
+						</div> -->
+
+						<div class="col-md-12">
+			              <div class="text-center">
+			                <input type="submit" name="btnPublicar" id="btnPublicar" class="btn-blue" value="Publicar oferta">
+			              </div>
+			            </div>
 
 					</div>
 				</div>
 			
 		</div>
 	</div>
-</div>
 </form>

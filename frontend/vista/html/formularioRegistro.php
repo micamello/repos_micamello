@@ -1,4 +1,4 @@
-<section id="product" class="inicio">
+<!--<section id="product" class="inicio">-->
     <div id="candidato">
         <div class="container" >
             <div class="row" id="registro-algo-centro">
@@ -162,4 +162,4 @@
                 </div>
             </div>
         </div>
-</section>
+<!--/section>-->

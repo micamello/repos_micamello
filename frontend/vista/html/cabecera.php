@@ -216,7 +216,6 @@ if($navegador == 'MSIE'){ ?>
 <?php
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
 
-  <section class="product" id="product">
     <div class="container-fluid">
       <ol class="breadcrumb" align="left">
         <?php 
@@ -233,5 +232,5 @@ if($navegador == 'MSIE'){ ?>
         } ?>
       </ol> 
     </div>
-  </section>
+ 
 <?php } ?>

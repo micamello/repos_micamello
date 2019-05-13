@@ -20,64 +20,57 @@ else{
 
 $registros = Modelo_Payme::obtieneNoProcesados();
 
-if (!empty($registros) && is_array($registros)){
+if (!empty($registros) && is_array($registros)){  
+
   foreach($registros as $registro){  
     if (empty($registro)){      
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_pame.php','Registro no tiene valores '.print_r($registro,true));
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Registro no tiene valores '.print_r($registro,true));
       continue;
     }
 
-    $cliente = obtenerDatosCliente($registro["custom"]); 
-    if (empty($cliente)){       
-    	Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme.php','Campo custom no tiene valores '.print_r($registro,true));
+    if (empty($registro["reserved15"]) || empty($registro["reserved16"]) ||         
+        empty($registro["reserved17"]) || empty($registro["shippingFirstName"]) ||         
+        empty($registro["shippingEmail"]) || empty($registro["reserved18"]) ||        
+        empty($registro["shippingPhone"]) || empty($registro["reserved19"]) ||         
+        empty($registro["shippingAddress"]) || empty($registro["shippingLastName"])){       
+    	Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Usuario no tiene valores '.print_r($registro,true));
       continue;
     }    
-    if (empty($registro["txn_id"]) || empty($registro["payment_gross"]) || empty($registro["id_paypal"])){      
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_paypal.php','Valores nulos '.print_r($registro,true));
+    if (empty($registro["IDTransaction"]) || empty($registro["purchaseOperationNumber"]) || empty($registro["purchaseAmount"])){
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Valores nulos '.print_r($registro,true));
       continue;
     }
-     
-    switch($registro["payment_status"]){
-      //si realizo el pago
-      case "Completed":
-         $procesador = (object) array('id'=>$registro["id_paypal"],
-                                      'tipo'=>'paypal',
-                                      'trans'=>$registro["txn_id"],
-                                      'monto'=>$registro["payment_gross"]);
-         $objSubscripcion = new Proceso_Subscripcion($cliente,$cliente->plan,$procesador);
-         $objSubscripcion->procesar();        
-      break;
-      //si cancelo el pago
-      case "Reversed":
-         $procesador = (object) array('id'=>$registro["id_paypal"],
-                                      'tipo'=>'paypal',
-                                      'trans'=>$registro["parent_txn_id"],
-                                      'monto'=>$registro["payment_gross"]);
-         $objCancelacion = new Proceso_Cancelacion($cliente,$cliente->plan,$procesador);
-         $objCancelacion->procesar();
-      break;
-    }     
+        
+    $id_payme = Modelo_Payme::consultaByTransaction($registro["IDTransaction"]);     
+    if (!empty($id_payme)){
+      if (!Modelo_Payme::modificarEstado($registro["id_payme"])){
+        Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','TransactionID duplicada sin poder actualizar el estado '.print_r($registro,true));
+        continue;
+      } 
+    }
+
+    //objeto de usuario     
+    $cliente = (object) array('plan'=>$registro["reserved15"],
+                              'id'=>$registro["reserved16"], 
+                              'tipo'=>$registro["reserved17"],
+                              'nombres'=>Utils::no_carac($registro["shippingFirstName"]). " " .Utils::no_carac($registro["shippingLastName"]),  
+                              'correo'=>$registro["shippingEmail"], 
+                              'tipodoc'=>$registro["reserved18"], 
+                              'telefono'=>$registro["shippingPhone"], 
+                               'dni'=>$registro["reserved19"], 
+                              'direccion'=>Utils::no_carac($registro["shippingAddress"]));
+                       
+    //objeto procesador      
+    $monto = substr($registro["purchaseAmount"],0,-2).".".substr($registro["purchaseAmount"], -2);         
+    $procesador = (object) array('id'=>$registro["id_payme"],
+                                 'tipo'=>'payme',
+                                 'trans'=>$registro["purchaseOperationNumber"],
+                                 'monto'=>$monto);
+    $objSubscripcion = new Proceso_Subscripcion($cliente,$cliente->plan,$procesador);
+    $objSubscripcion->procesar();                  
   }
 }
 
 //elimina archivo de procesamiento
-unlink(CRON_RUTA.'procesando_paypal.txt');
-
-function obtenerDatosCliente($custom){
-  if (empty($custom)){ return false; }
-  $datos = explode('|',$custom);
-  if (!is_array($datos)){ return false; }  
-  if (count($datos)<6){ return false; }
-  $usuario = array('plan'=>$datos[0],
-                   'id'=>$datos[1], 
-                   'tipo'=>$datos[2],
-                   'nombres'=>Utils::no_carac($datos[3]),  
-                   'correo'=>$datos[4], 
-                   'tipodoc'=>$datos[5], 
-                   'telefono'=>$datos[6], 
-                   'dni'=>$datos[7], 
-                   'direccion'=>Utils::no_carac($datos[8]));
-  $obj = (object) $usuario;  
-  return $obj;
-}
+unlink(CRON_RUTA.'procesando_payme.txt');
 ?>

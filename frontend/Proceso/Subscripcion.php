@@ -46,9 +46,9 @@ class Proceso_Subscripcion{
           throw new Exception("Error en crear el plan");  
         }
       }
-	    if ($this->procesador->tipo == 'paypal'){
-	      if (!Modelo_Paypal::modificarEstado($this->procesador->id)){
-	        throw new Exception("Error al actualizar el registro en tabla de paypal");	
+	    if ($this->procesador->tipo == 'payme'){
+	      if (!Modelo_Payme::modificarEstado($this->procesador->id)){
+	        throw new Exception("Error al actualizar el registro en tabla de payme");	
 	      }	
 	    }
 	    
@@ -108,7 +108,7 @@ class Proceso_Subscripcion{
   	  $GLOBALS['db']->rollback();
 	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
       $msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_paypal',$msgerror);	    
+	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);	    
   	}
 
   }
@@ -116,7 +116,7 @@ class Proceso_Subscripcion{
   public function guardarComprobante(){
     if (!Modelo_Comprobante::guardarComprobante($this->procesador->trans,$this->objUsuario->nombres,$this->objUsuario->correo,
         	                                      $this->objUsuario->telefono,$this->objUsuario->dni,$this->objUsuario->tipodoc,
-        	                                      Modelo_Comprobante::METODO_PAYPAL,'',$this->procesador->monto,
+        	                                      Modelo_Comprobante::METODO_PAYME,'',$this->procesador->monto,
         	                                      $this->objUsuario->id,$this->idplan,$this->objUsuario->direccion,$this->objUsuario->tipo,
                                                 Modelo_Comprobante::PAGO_VERIFICADO)){
       throw new Exception("Error al ingresar el comprobante transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan);
