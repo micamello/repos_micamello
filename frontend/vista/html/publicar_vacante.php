@@ -1,20 +1,10 @@
-﻿<form id="formPublicar" method="POST" action="<?php echo PUERTO.'://'.HOST.'/registroOferta/' ?>">
-	<section id="product" class="product">
-	  <div class="text-center">
-	    <h2 class="titulo">Publicar Ofertas</h2>
-	  </div>
-	</section>
-aqui va el banner
-<!-- <br>
-<div class="container-fluid">
-  <div class="col-md-12">
-    <ol style="text-align: left;" class="breadcrumb">
-      <li><a href="index.html">Inicio</a></li>
-      <li>Publicar Ofertas</li>  
-    </ol> 
+﻿<section id="product" class="">
+  <div class="text-center">
+    <h2 class="titulo">Publicar Ofertas</h2>
   </div>
-</div> -->
+</section>
 
+<form id="formPublicar" method="POST" action="<?php echo PUERTO.'://'.HOST.'/registroOferta/' ?>">
 	<section id="product" class="inicio">
 	  <div class="container">
 	    <div class="col-md-6">
