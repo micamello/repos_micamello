@@ -302,7 +302,7 @@ class Proceso_Facturacion{
 
     $mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
 
-    $logo = "<img src='".FRONTEND_RUTA."/imagenes/logo.png' alt='Mi Camello Logo' height='150'>";
+    $logo = "<img src='".FRONTEND_RUTA."/imagenes/sucursal/logos/factura.png' alt='Mi Camello Logo' height='150'>";
     $eslogan = "Eficiencia, innovación y transparencia";
 
     $style1 = ' style="padding: 5px 5px 5px 5px;" ';
