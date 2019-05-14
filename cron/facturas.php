@@ -62,12 +62,12 @@ if (count($facturas) > 0){
       $attachments = array();
       
       if (!$obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
-        throw new Exception("Error en primer WS del SRI");  
+        throw new Exception("1 WS del SRI");  
       }  
       sleep(5);
       $fecha_auto = $obj_facturacion->sendAutorizacion($rsfact["claveacceso"]);
       if (empty($fecha_auto)){
-        throw new Exception("Error en segundo WS del SRI");  
+        throw new Exception("2 WS del SRI");  
       }
 
       //adjuntar factura

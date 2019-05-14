@@ -903,7 +903,7 @@ WHERE
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
         //si existe un acceso eliminar la notificacion del acceso
         
-        $_SESSION['mostrar_error'] = "Debe completar el test";
+        //$_SESSION['mostrar_error'] = "Debe completar el test";
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
