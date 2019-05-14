@@ -111,7 +111,8 @@ class Controlador_Publicar extends Controlador_Base {
                   'fecha_contratacion'=>$fechacontratacion,
                   'planes'=>$planes,
                   'tipolicencia'=>$tipolicencia,
-                  'breadcrumbs'=>$breadcrumbs
+                  'breadcrumbs'=>$breadcrumbs,
+                  'vista'=>'publicar'
                 );
 
     $tags["template_css"][] = "DateTimePicker";

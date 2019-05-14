@@ -171,7 +171,7 @@ $('#btn_accesos_confirmar').on('click', function(){
 	document.form_enviarAccesos.submit();
 });
 
-$('#btn_accesos').on('click', function(){
+$('#activar-accesos').on('click', function(){
 	
 	$('#aviso_accesos').modal();
 	activar();

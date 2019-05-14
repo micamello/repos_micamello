@@ -40,8 +40,8 @@ class Modelo_Factura{
   }
 
   public static function factNoRecibidasAutorizadas(){
-    $sql = "SELECT * FROM mfo_factura WHERE estado = ? OR estado = ?";
-    return $GLOBALS['db']->auto_array($sql,array(self::DEVUELTO,self::NOAUTORIZADO),true);
+    $sql = "SELECT * FROM mfo_factura WHERE estado = ? OR estado = ? OR estado = ?";
+    return $GLOBALS['db']->auto_array($sql,array(self::DEVUELTO,self::NOAUTORIZADO,self::RECIBIDO),true);
   }
 }  
 ?>

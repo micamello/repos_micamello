@@ -14,7 +14,7 @@ class Modelo_AreaSubarea{
 
 	public static function obtieneAreas_subareas_usuario($id_usuario){
 
-		$sql = 'SELECT a.nombre as area,GROUP_CONCAT(s.nombre) as subareas FROM mfo_usuarioxarea ua
+		$sql = 'SELECT a.nombre as area,GROUP_CONCAT(CONCAT(" ",s.nombre)) as subareas FROM mfo_usuarioxarea ua
 				INNER JOIN mfo_area_subareas aa ON aa.id_areas_subareas = ua.id_areas_subareas
 				INNER JOIN mfo_area a ON a.id_area = aa.id_area 
 				INNER JOIN mfo_subareas s ON s.id_subareas = aa.id_subareas

@@ -27,12 +27,7 @@ class Proceso_Cancelacion{
 	    }
       if ($infousuario["id_pais"] <> $infoplan["id_pais"]){
         throw new Exception("Plan no corresponde al pais del usuario"); 
-      }
-      if ($this->procesador->tipo == 'paypal'){
-        if (empty($infoplan["codigo_paypal"])){
-          throw new Exception("Plan asociado con paypal"); 
-        }
-      }
+      }      
 
 	    //obtiene el ultimo plan comprado
 	    $plan = Modelo_UsuarioxPlan::obtienePlanComprobante($this->procesador->trans,$this->objUsuario->id,$this->idplan,$this->objUsuario->tipo);
