@@ -34,8 +34,9 @@ function msg_compra(id,desc){
 }
 
 function loadgratuito(idplan){	
-  var estilotitulo = ($('#gratprom_'+idplan).attr('value') == 1) ? 'headingrojo' : 'headingazul';
-  var estiloul = ($('#gratprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
+  var estilotitulo = ($('#gratprom_'+idplan).attr('value') == 1) ? 'headingrojo titulo-planes' : 'headingazul titulo-planes';
+  // var estiloul = ($('#gratprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
+  var estiloul = ($('#gratprom_'+idplan).attr('value') == 1) ? '' : '';
   var duracion = ($('#gratprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';
   duracion = duracion + (($('#gratdura_'+idplan).attr('value') != 0) ? $('#gratdura_'+idplan).attr('value') + ' D&Iacute;AS' : 'Gratuito');  
   //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#gratid_'+idplan).attr('value')+'.'+$('#gratext_'+idplan).attr('value');
@@ -45,7 +46,8 @@ function loadgratuito(idplan){
   if (permisos.length > 1){
 	  for (var i = 0; i < permisos.length; i++) {
 	  	if (permisos[i] != ''){
-	      strperm = strperm + '<li class="text-justify">• '+permisos[i]+'</li> ';
+	      // strperm = strperm + '<li class="text-justify">• '+permisos[i]+'</li> ';
+        strperm = strperm + '<li class="lista-plan" class="text-justify"><p class="lista-plan-2">'+permisos[i]+'</p></li> ';
 	    }
 	  }
   }
@@ -59,8 +61,9 @@ function loadgratuito(idplan){
 }
 
 function loadplanes(idplan){	
-  var estilotitulo = ($('#planprom_'+idplan).attr('value') == 1) ? 'headingrojo' : 'headingazul';
-  var estiloul = ($('#planprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
+  var estilotitulo = ($('#planprom_'+idplan).attr('value') == 1) ? 'headingrojo titulo-planes' : 'headingazul titulo-planes';
+  // var estiloul = ($('#planprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
+  var estiloul = ($('#planprom_'+idplan).attr('value') == 1) ? '' : '';
   var duracion = ($('#planprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';
   duracion = duracion + (($('#plandura_'+idplan).attr('value') != 0) ? $('#plandura_'+idplan).attr('value') + ' D&Iacute;AS' : 'Ilimitado');  
   //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#planid_'+idplan).attr('value')+'.'+$('#planext_'+idplan).attr('value');
@@ -70,7 +73,7 @@ function loadplanes(idplan){
   if (permisos.length > 1){
 	  for (var i = 0; i < permisos.length; i++) {
 	  	if (permisos[i] != ''){
-	      strperm = strperm + '<li class="text-justify">• '+permisos[i]+'</li> ';
+        strperm = strperm + '<li class="lista-plan" class="text-justify"><p class="lista-plan-2">'+permisos[i]+'</p></li> ';
 	    }
 	  }
   }
@@ -84,8 +87,9 @@ function loadplanes(idplan){
 }
 
 function loadavisos(idplan){	
-  var estilotitulo = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'headingrojo' : 'headingazul';
-  var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
+  var estilotitulo = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'headingrojo titulo-planes' : 'headingazul titulo-planes';
+  // var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
+  var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? '' : '';
   var duracion = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';  
   duracion = duracion + (($('#avisodura_'+idplan).attr('value') != 0) ? $('#avisodura_'+idplan).attr('value') + ' d&iacute;as' : 'Ilimitado');  
   //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#avisoid_'+idplan).attr('value')+'.'+$('#avisoext_'+idplan).attr('value');
@@ -95,7 +99,8 @@ function loadavisos(idplan){
   if (permisos.length > 1){
 	  for (var i = 0; i < permisos.length; i++) {
 	  	if (permisos[i] != ''){
-	      strperm = strperm + '<li class="text-justify">• '+permisos[i]+'</li> ';
+	      // strperm = strperm + '<li class="text-justify">• '+permisos[i]+'</li> ';
+        strperm = strperm + '<li class="lista-plan" class="text-justify"><p class="lista-plan-2">'+permisos[i]+'</p></li> ';
 	    }
 	  }
   }

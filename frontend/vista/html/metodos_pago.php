@@ -2,10 +2,11 @@
   <div class="row">
     <div class="main_business">                                                                                    
       <div class="container">
-        <div class="breadcrumb">
-          <h3>M&eacute;todos de pago</h3>
+        <div class="text-center">
+          <h2 class="titulo">Métodos de Pago</h2>
           <input type="hidden" name="tipoSeleccionado" id="tipoSeleccionado" value="">
         </div>
+        <br>
         <div align="center">     
           <?php foreach(Modelo_Comprobante::METODOS_PAGOS as $key=>$metodo){ ?>               
             <label>
@@ -19,10 +20,14 @@
       <div class="col-md-8">        
         <div class="panel panel-default" id="panel_1" style="display:none;">
           <div class="panel-body">
-            <form role="form" name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">  
-              <h4 class="text-center">Dep&oacute;sito bancario</h4>
-              <input type="hidden" id="idplan" name="idplan" value="<?php echo $plan["id_plan"];?>">              
-              <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/circulo-morado.png"><br>
+            <form role="form" name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">
+              <div class="col-md-12">
+                <input type="hidden" id="idplan" name="idplan" value="<?php echo $plan["id_plan"];?>">              
+              <div align="center">
+                <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/circulo-morado.png">
+                <h4 style="display: inline;" class="qs-subt">&nbsp Depósito bancario</h4>
+                <br><br>
+              </div>
               <p class="text-justify">En caso de haber realizado el dep&oacute;sito, proceda a ingresar el número, subir imagen(fotograf&iacute;a) del comprobante y llenar datos que se solicitan en la parte inferior.</p>
               <?php if (isset($ctabancaria) && !empty($ctabancaria)){ ?>
                 <?php foreach($ctabancaria as $banco){?>
@@ -36,7 +41,8 @@
                 <?php }?>
               <?php } ?>              
               <div>                                                
-                <h4 class="text-center">Datos del dep&oacute;sito</h4>
+                <!-- <h4 class="text-center">Datos del dep&oacute;sito</h4> -->
+                <h4 class="text-center qs-subt">Datos del depósito</h4>
                 <div class="row">
                   <div class="col-md-6">
                     <div id="seccion_comp" class="form-group">
@@ -50,17 +56,18 @@
                       <input type="text" name="valor" id="valor" class="form-control" onkeypress="return validaDecimales(event,this);" maxlength="10" minlength="2">
                     </div>
                   </div>
-                  <div id="seccion_img" class="col-md-6">
+                  <div id="seccion_img" class="col-md-12">
                     <div class="form-group">
                       <label>Imagen comprobante</label><div id="err_img" class="help-block with-errors" style="padding-top: 5px;"></div>
                       <br>
-                      <label for="imagen" class="custom_file">
+                      <label class="col-md-6" for="imagen" class="custom_file" style="text-align: right;">
                         <img id="imgupload" class="button-center" src="<?php echo PUERTO."://".HOST."/imagenes/upload-icon.png";?>" width="50px">
                       </label>
-                      <input type="file" class="upload-photo" id="imagen" name="imagen" accept=".png,.jpeg,.jpg" > 
-                      <div align="center">
-                        <p class="text-center arch_cargado" id="texto_status1">(debe ser menor a 1 MB con formato .jpg o .png)</p>
-                      </div> 
+                      <input type="file" class="col-md-6 upload-photo" id="imagen" name="imagen" accept=".png,.jpeg,.jpg" > 
+                      <p class="arch_cargado"  style="text-align: left;" id="texto_status1">(debe ser menor a 1 MB <br>con formato .jpg o .png)</p>
+                      <!-- <div align="center"> -->
+                        <!-- <p class="text-center arch_cargado" id="texto_status1">(debe ser menor a 1 MB con formato .jpg o .png)</p> -->
+                      <!-- </div>  -->
                     </div>
                   </div>
                   <div class="form-group col-md-6" id="divimagen">                    
@@ -68,7 +75,8 @@
                 </div>
               </div>
               <hr>
-              <h4 class="text-center">Detalles de Facturaci&oacute;n</h4>
+              <!-- <h4 class="text-center">Detalles de Facturaci&oacute;n</h4> -->
+              <h4 class="text-center qs-subt" style="padding-top: 0;">Detalles de Facturación</h4>
               <div class="col-md-6">
                 <div id="seccion_tipo" class="form-group">    
                   <label>Tipo de Documento</label><div id="err_tipo" class="help-block with-errors"></div>
@@ -122,7 +130,8 @@
               </div>
               
               <div align="center">
-                <input type="button" id="btndeposito" name="btndeposito" value="Aceptar" class="btn btn-success btn-sm disabled" onclick="enviarFormulario('form_deposito');">
+                <input type="button" id="btndeposito" name="btndeposito" value="Aceptar" class="btn-blue disabled" onclick="enviarFormulario('form_deposito');">
+              </div>
               </div>
             </form>
           </div>
@@ -219,7 +228,9 @@
       <div class="col-md-8">
         <div class="panel panel-default" id="panel_3">          
           <div class="panel-body">
-            <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png"><br><br>                       
+            <div align="center">
+              <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png"><br><br>  
+            </div>                     
             <form name="form_payme" id="form_payme" action="#" method="post" class="alignet-form-vpos2">
               <div class="col-xs-12 col-md-12">
                 <div class="col-md-6">
@@ -349,7 +360,7 @@
 
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
-                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn btn-success btn-sm ">
+                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn-blue disabled">
                 </div>
               </div>
             

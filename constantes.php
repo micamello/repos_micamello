@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'micamello_desarrollo3');
+define('DBNOMBRE', 'micamello_desarrollo8');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -71,9 +71,9 @@ define('DIVISIBLE_BLOQUE','12');
 define('DIVISIBLE_FILA','6');
 // método de selección
 define('METODO_SELECCION', array('1'=>array(
-										'Esta opción le permitirá dar doble clip para seleccionar la respuesta, tome en cuenta que el 1  es la opción  con la que más se siente identificado y 5 la opción con la que menos se siente identificado.'
+										'Doble click para ordenar las respuestas<br><br>'
 									), '2'=>array(
-										'Esta opción le permitirá seleccionar y arrastrar la respuesta; tome en cuenta que la opción 1 es la opción con la que más se siente identificado y la opción 5 la opción con la que menos se siente identificado.', ''
+										'Seleccionar y arrastrar para ordenar las respuestas', ''
 									)));
 
 define('AREASPERMITIDAS', '3');
@@ -112,84 +112,4 @@ define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
 // define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
 
-// CORREOS_TEMPLATES
-// REGISTRO MANUAL
-/*const TAGS_REPLACE_T1 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%");
-//REGISTRO RED SOCIAL
-const TAGS_REPLACE_T2 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
-// AVISO CREACION
-const TAGS_REPLACE_T3 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%CORREO%", "%PASSWORD%");
-// RECUPERAR CONTRASEÑA
-const TAGS_REPLACE_T4 = array("%NOMBRE%", "%URL_BOTON%", "%TEXTO_BOTON%");
-// PRE_REGISTRO ACTIVACION CUENTA USUARIO
-const TAGS_REPLACE_T5 = array("%NOMBRE%", "%NOMBRE_USUARIO%", "%URL_BOTON%", "%TEXTO_BOTON%", "%CORREO%", "%PASSWORD%");
-// ERROR CRON PRE_REGISTRO
-const TAGS_REPLACE_T6 = array("%MENSAJE_ERROR%");
-// RECOMENDACIONES
-const TAGS_REPLACE_T7 = array("%NOMBRE_DEST%", "%NOMBRE_USUARIO_SUGERENCIA%", "%MENSAJE_SUGERENCIA%", "%CORREO%", "%TELEFONO%");
-//ERROR_GENERAL
-const TAGS_REPLACE_T8 = array("%MENSAJE_ERROR%", "%CABECERA%", "%LOGO_TIPO_MENSAJE%");
-// AUTOPOSTULACIONES------------ALERTAS_OFERTAS
-const TAGS_REPLACE_T9 = array("%NOMBRE%", "%MENSAJE%", "%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%CONTENIDO%");
-// CANCELAR_PLANES
-const TAGS_REPLACE_T10 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%NOMBRE%", "%NOMBRE_PLAN%", "%FECHA_PLAN%");
-// MENSAJE_GENERAL
-const TAGS_REPLACE_T11 = array("%CABECERA%", "%LOGO_TIPO_MENSAJE%", "%MENSAJE%");
-
-// CEBECERAS
-define('TIPO', 	array(
-						'eliminar_oferta'=>array(
-												'asunto'=>'Error con Cron de eliminación oferta', 
-												'logo'=>'https://cdn4.iconfinder.com/data/icons/gradient-ui-1/512/error-512.png', 
-												'cabecera'=>'Error Cron Eliminar Ofertas'
-												),
-						'promocion_planes'=>array(
-												'asunto'=>'Error con Cron de Promocion Planes', 
-												'logo'=>'https://cdn4.iconfinder.com/data/icons/gradient-ui-1/512/error-512.png', 
-												'cabecera'=>'Error Cron Promocion Planes'
-												),
-						'autopostulacion'=>array(
-												'asunto'=>'Notificación autopostulaciones a ofertas', 
-												'logo'=>'https://cdn3.iconfinder.com/data/icons/finance-152/64/41-512.png', 
-												'cabecera'=>'Notificación autopostulaciones',
-												'contenido'=>'Le confirmamos su autopostulaci&oacute;n a las siguientes ofertas:'
-												),
-						'alerta_oferta'=>array(
-												'asunto'=>'Ofertas laborales recomendadas', 
-												'logo'=>'https://cdn4.iconfinder.com/data/icons/ios-web-user-interface-multi-circle-flat-vol-2/512/Alert_bell_notification_education_Christmas_bell_church_bell_ring-512.png', 
-												'cabecera'=>'Ofertas Laborales',
-												'contenido'=>'Le informamos las siguientes ofertas que se ajustan a su perfil:'
-												),
-						'cancelacion_plan'=>array(
-												'cabecera'=>"Caducidad de plan contratado",
-												'asunto'=>'Cancelación de plan', 
-												'logo'=>'https://cdn0.iconfinder.com/data/icons/twitter-ui-flat/48/Twitter_UI-11-512.png'
-												),
-						'registro_error'=>array(
-												'asunto'=>'Error Cron Cancelar Planes', 
-												'logo'=>'https://cdn4.iconfinder.com/data/icons/gradient-ui-1/512/error-512.png', 
-												'cabecera'=>'Error en registro candidato'
-												),
-						'cron_paypal_data'=>array(
-												'asunto'=>'Cron Paypal', 
-												'logo'=>'https://cdn0.iconfinder.com/data/icons/streamline-emoji-1/48/092-robot-face-1-512.png', 
-												'cabecera'=>'Mensaje CRON PAYPAL'
-												),
-						'error_cron_paypal'=>array(
-												'asunto'=>'',
-												'logo'=>'https://cdn0.iconfinder.com/data/icons/streamline-emoji-1/48/093-robot-face-2-512.png', 
-												'cabecera'=>'Mensaje Error CRON PAYPAL'
-												),
-						'cron_paypal_planes'=>array(
-												'asunto'=>'Cron planes_paypal.php',
-												'logo'=>'https://cdn4.iconfinder.com/data/icons/file-documents-vol-3/128/file_documents-20-512.png', 
-												'cabecera'=>'Notificación CRON PAYPAL'
-												),
-						'notificaciones'=>array(
-												'asunto'=>'',
-												'logo'=>'https://cdn4.iconfinder.com/data/icons/gradient-ui-1/512/error-512.png', 
-												'cabecera'=>'Mensaje Cancelación de Subscripción'
-												)
-					)
-		);*/
 ?>
