@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'base_fer');
+define('DBNOMBRE', 'micamello_desarrollo8');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -71,9 +71,9 @@ define('DIVISIBLE_BLOQUE','12');
 define('DIVISIBLE_FILA','6');
 // método de selección
 define('METODO_SELECCION', array('1'=>array(
-										'Esta opción le permitirá dar doble clip para seleccionar la respuesta, tome en cuenta que el 1  es la opción  con la que más se siente identificado y 5 la opción con la que menos se siente identificado.'
+										'Doble click para ordenar las respuestas<br><br>'
 									), '2'=>array(
-										'Esta opción le permitirá seleccionar y arrastrar la respuesta; tome en cuenta que la opción 1 es la opción con la que más se siente identificado y la opción 5 la opción con la que menos se siente identificado.', ''
+										'Seleccionar y arrastrar para ordenar las respuestas', ''
 									)));
 
 define('AREASPERMITIDAS', '3');

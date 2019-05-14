@@ -468,7 +468,7 @@ ul.list_content_mic > li:last-child {
 }
 
 .text_origen>label, .text_destino>label{
-  background-color: #47B3F8;
+  background-color: #08a9f4;
   width: 100%;
   margin-bottom: 0px;
   border-radius: 10px;
@@ -556,7 +556,7 @@ ul.list_content_mic > li:last-child {
 }
 
 .drag_origen>label, .drop_destino>label{
-  background-color: #47B3F8;
+  background-color: #08a9f4;
   width: 100%;
   margin-bottom: 0px;
   border-radius: 10px;
@@ -705,6 +705,7 @@ a.addButton:hover{
   border: dashed;
   border-radius: 5px;
   padding: 8px 0 8px 0;
+  text-align: center;
 }
 
 .bubbleData{

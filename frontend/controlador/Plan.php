@@ -76,7 +76,8 @@ class Controlador_Plan extends Controlador_Base {
 
     }        
 
-    $tags["template_css"][] = "planes";
+    $tags["template_css"][] = "media-queries";
+    // $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
     $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";          
     if($tipo == 1){    

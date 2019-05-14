@@ -203,9 +203,9 @@ if($('#formPublicar').length){
     $('#formPublicar').on('submit', function(event){
         validarFormPublicar();
         validarFormError();
-        // if(validarFormError() > 0){
+        if(validarFormError() > 0){
             event.preventDefault();
-        // }
+        }
     })
 }
 
