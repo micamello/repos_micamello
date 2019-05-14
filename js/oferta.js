@@ -1,3 +1,8 @@
+$('#orden').on('change', function(){
+    alert($('#orden').val());
+    window.location = $('#orden').val();
+});
+
 if(document.getElementById('des_of')){
     tinymce.init({ 
         selector:'textarea#des_of',

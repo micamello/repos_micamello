@@ -130,7 +130,7 @@
       </div>      
       <div class="col-md-2"></div>
       
-      <div class="col-md-2"></div>  
+      <!--<div class="col-md-2"></div>  
       <div class="col-md-8">
         <div class="panel panel-default" id="panel_2" style="display:none;">
           <div class="panel-body">
@@ -186,11 +186,7 @@
                     <input type="text" name="telefonoP" id="telefonoP" minlength="10" maxlength="15" class="form-control" onkeydown="return validaNumeros(event);">
                   </div>
                 </div>
-
-                <!--<div class="form-group col-md-6">    
-                  <label>C&eacute;dula / RUC:</label><div class="help-block with-errors"></div>
-                  <input type="text" name="dniP" id="dniP" class="form-control" onkeydown="return validaNumeros(event);" >
-                </div>-->                 
+                
               </div>
               <div class="col-xs-12 col-md-12">
                 <div class="breadcrumb" align="center">                  
@@ -213,7 +209,7 @@
         </div>    
       </div>  
       <div class="col-md-2"></div>  
-      <div class="col-md-2"></div>  
+      <div class="col-md-2"></div>-->
 
       <div class="col-md-8">
         <div class="panel panel-default" id="panel_3">          
@@ -271,41 +267,41 @@
                   </div>
                 </div>
 
-                <div class="col-md-12"> 
+                <div class="col-md-6"> 
                   <div id="seccion_dirPM" class="form-group"> 
                     <label>Direcci&oacute;n</label><div id="err_dirPM" class="help-block with-errors"></div> 
                     <input type="text" name="shippingAddress" id="shippingAddress" class="form-control" value="" maxlength="50" />
                   </div>
                 </div>
 
-                <!--<div class="col-md-6"> 
+                <div class="col-md-6"> 
                   <div id="seccion_zipPM" class="form-group"> 
                     <label>C&oacute;digo Postal</label><div id="err_zipPM" class="help-block with-errors"></div> 
                     <input type="text" name="shippingZIP" id="shippingZIP" class="form-control" value="" maxlength="10"/>
                   </div>
-                </div>-->
+                </div>
 
-                <!--<div class="col-md-6"> 
+                <div class="col-md-6"> 
                   <div id="seccion_provPM" class="form-group"> 
                     <label>Provincia</label><div id="err_provPM" class="help-block with-errors"></div> 
                     <select id="provinciaPM" name="provinciaPM" class="form-control"> 
                     <option disabled selected value="0">Seleccione una opci&oacute;n</option>             
                     <?php
-                      //foreach($arrprovincia as $key=>$provincia){
-                      //  echo "<option value='".$provincia["id_provincia"]."'>".utf8_encode($provincia["nombre"])."</option>";
-                      //}
+                    foreach($arrprovincia as $key=>$provincia){
+                      echo "<option value='".$provincia["id_provincia"]."'>".utf8_encode($provincia["nombre"])."</option>";
+                    }
                     ?>  
                     </select>
                   </div>
-                </div>-->
+                </div>
               
-                <!--<div class="col-md-6"> 
+                <div class="col-md-6"> 
                   <div id="seccion_ciuPM" class="form-group"> 
                     <label>Ciudad</label><div id="err_ciuPM" class="help-block with-errors"></div> 
                     <select id="ciudadPM" name="ciudadPM" class="form-control">                     
                     </select>
                   </div>
-                </div>-->
+                </div>
               </div>
 
               <div class="col-xs-12 col-md-12">

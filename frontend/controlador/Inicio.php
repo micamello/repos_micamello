@@ -14,7 +14,8 @@ class Controlador_Inicio extends Controlador_Base {
     $tags = array('banners'=>$arrbanner,
                   'arrarea'=>$arrarea,
                   'arrtestimonio'=>$arrtestimonio,
-                  'arrauspiciante'=>$arrauspiciante);         
+                  'arrauspiciante'=>$arrauspiciante,
+                  'vista'=>'inicio');         
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCorreo':        

@@ -1,17 +1,32 @@
 <div class="container">
+  <div class="text-center">
+    <h2 class="titulo">
+    <?php if($vista == 1){ ?>
+		Aspirantes Postulados
+	<?php }else{ ?>
+		Candidatos Registrados
+	<?php }?>	
+	</h2>
+  </div>
+</div>
+
+<div class="container-fluid">
 	<?php  
 
 	if(/*$costo == 0 && */!empty($limite_plan)){ ?>
+		<br>
 		<div class="alert alert-info col-md-12"> 
 			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, existen en esta oferta <?php echo $cantd_total; ?> postulados pero solo puede vizualizar <b><?php echo $limite_plan; ?></b> postulados.
 		</div>
 	<?php } ?>
 
 	<?php if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'])){ ?>
+		<br>
 		<div class="alert alert-info col-md-12"> 
 			Usted activ&oacute; el filtrado por facetas, en el cual se aplica la Teoría Basada en Rango Sumarizados de Likert Modificada a la premiaci&oacute;n por puntajes.
 		</div>
 	<?php } ?>
+	<br>
 	<div class="col-md-12">
 	  	<div class="col-md-3 visible-md-inline visible-lg-inline">
 	  		<b>
@@ -44,10 +59,17 @@
 			<?php
 			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'filtroFacetas',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 			    <div class="panel panel-default shadow-panel1">
-					<div class="panel-heading">
-						<span><i class="fa fa-comments"></i> Facetas</span>
-					</div>
-					<div class="panel-body">
+					<div class="panel-heading" data-toggle="collapse" href="#facetas-desplegable">
+				      <div class="row">
+				        <div class="col-md-10" id="drop-tit" >
+				          <span><i class="fa fa-comments"></i> Competencias</span>
+				        </div>
+				        <div class="col-md-2" >
+				          <span class="caret"></span>
+				        </div>
+				      </div>
+				    </div>
+					<div class="panel-body collapse" id="facetas-desplegable" aria-expanded="false">
 						<div id="facetas">
 						<?php
 						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
@@ -85,36 +107,55 @@
 		    <?php } ?>
 
 		    <div class="panel panel-default shadow-panel1">
-		          <div class="panel-heading">
-		              <span><i class="fa fa-money"></i> Informe de personalidad (prioridad)</span>
-		            </div>
-		          <div class="panel-body">
-		          	<div class="filtros">
-	          			<div class="btn-group" id="status" data-toggle="buttons">
-		          			<?php 
-		          			if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0){
-		          				$cont = 1;
-		          			}
-		          			foreach (PRIORIDAD as $key => $v) { ?>
-				              <?php 
-				              	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/P'.$key.'/';
-						    	//$ruta = Controlador_Aspirante::calcularRuta($ruta,'P');
-						    	$ruta .= '1/'; ?>
-						    	<label style="padding-left:5px; padding-right: 5px;" onclick="window.location='<?php echo $ruta; ?>'" class="btn btn-default btn-on-3 btn-md <?php if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == $key || ($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0 && $cont == 1)){ echo 'active'; $cont = count(PRIORIDAD); } ?>">
-									<input type="radio" value="<?php echo $key; ?>" name="multifeatured_module[module_id][status]" checked="checked" /><?php echo $v; ?>
-								</label>
-							<?php 
-							} ?>
-			            </div>
-					 </div>
-		          </div>
+		          <div class="panel-heading" data-toggle="collapse" href="#informe-desplegable">
+				      <div class="row">
+				        <div class="col-md-10" id="drop-tit" >
+				          <span>
+				            <i class="fa fa-address-book"></i> Informe de personalidad (prioridad)
+				          </span>
+				        </div>
+				        <div class="col-md-2" >
+				          <span class="caret"></span>
+				        </div>
+				      </div>
+				    </div>
+
+				    <div class="panel-body collapse" id="informe-desplegable" aria-expanded="false">
+			          	<div class="filtros">
+		          			<div class="btn-group" id="status" data-toggle="buttons">
+			          			<?php 
+			          			if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0){
+			          				$cont = 1;
+			          			}
+			          			foreach (PRIORIDAD as $key => $v) { ?>
+					              <?php 
+					              	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/P'.$key.'/';
+							    	//$ruta = Controlador_Aspirante::calcularRuta($ruta,'P');
+							    	$ruta .= '1/'; ?>
+							    	<label style="padding-left:5px; padding-right: 5px;" onclick="window.location='<?php echo $ruta; ?>'" class="btn btn-default btn-on-3 btn-md <?php if($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == $key || ($_SESSION['mfo_datos']['Filtrar_aspirantes']['P'] == 0 && $cont == 1)){ echo 'active'; $cont = count(PRIORIDAD); } ?>">
+										<input type="radio" value="<?php echo $key; ?>" name="multifeatured_module[module_id][status]" checked="checked" /><?php echo $v; ?>
+									</label>
+								<?php 
+								} ?>
+				            </div>
+						 </div>
+		          	</div>
 		    </div>
 
 		    <div class="panel panel-default shadow-panel1">
-				<div class="panel-heading">
-					<span><i class="fa fa-map-marker"></i> Residencia Actual</span>
-				</div>
-				<div class="panel-body">
+				<div class="panel-heading" data-toggle="collapse" href="#res-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-map-marker"></i> Residencia Actual
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="res-desplegable" aria-expanded="false">
 					<div class="filtros">
 				<?php
 					if (!empty($arrprovincia)) {
@@ -130,10 +171,19 @@
 				</div>
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
-				<div class="panel-heading">
-					<span><i class="fa fa-map"></i> Nacionalidad</span>
-				</div>
-				<div class="panel-body">
+				<div class="panel-heading" data-toggle="collapse" href="#nacional-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-map"></i> Nacionalidad
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="nacional-desplegable" aria-expanded="false">
 					<div class="filtros">
 				<?php
 					if (!empty($nacionalidades)) {
@@ -149,10 +199,18 @@
 				</div>
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
-				<div class="panel-heading">
-					<span><i class="fa fa-list-ul"></i> &Aacute;reas de Inter&eacute;s</span>
-				</div>
-				<div class="panel-body">
+				<div class="panel-heading" data-toggle="collapse" href="#areas-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+						<i class="fa fa-list-ul"></i> &Aacute;reas de Inter&eacute;s</span>
+					</div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="areas-desplegable" aria-expanded="false">
 					<div class="filtros">
 				<?php
 				if (!empty($arrarea)) { 
@@ -166,19 +224,28 @@
 				</div>
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
-				<div class="panel-heading">
-					<span><i class="fa fa-bar-chart"></i> Nivel de estudio</span>
-				</div>
-				<div class="panel-body">
+			    <div class="panel-heading" data-toggle="collapse" href="#estudios-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-bar-chart"></i> Nivel de estudio
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="estudios-desplegable" aria-expanded="false">
 					<div class="filtros">
-				<?php
-					if (!empty($escolaridad)) {
-						foreach ($escolaridad as $key => $v) {
-					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/E'.$key.'/';
-							//$ruta = Controlador_Aspirante::calcularRuta($ruta,'E');
-							echo '<li class="lista"><a href="'.$ruta.'1/" class="escolaridad" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+					<?php
+						if (!empty($escolaridad)) {
+							foreach ($escolaridad as $key => $v) {
+						    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/E'.$key.'/';
+								//$ruta = Controlador_Aspirante::calcularRuta($ruta,'E');
+								echo '<li class="lista"><a href="'.$ruta.'1/" class="escolaridad" id="' . $key . '">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+							}
 						}
-					}
 				?></div>
 				</div>
 		    </div>
@@ -202,11 +269,19 @@
 			<?php #} ?>
 
 		    <?php if ($vista == 1){ ?>
-		    <div class="panel panel-default shadow-panel1">
-		      <div class="panel-heading">
-		            <span><i class="fa fa-money"></i> Salario</span>
-		          </div>
-		      <div class="panel-body">
+		   
+		      <div class="panel panel-default shadow-panel1">
+		      	<div class="panel-heading" data-toggle="collapse" href="#salario-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span><i class="fa fa-money"></i> Salario</span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="salario-desplegable" aria-expanded="false">
 		      	<div class="filtros">
 				<?php
 					foreach (SALARIO as $key => $v) {
@@ -220,10 +295,17 @@
 		    <?php } ?>
 
 		    <div class="panel panel-default shadow-panel1">
-		      <div class="panel-heading">
-		            <span><i class="fa fa-venus-mars"></i> Edades</span>
-		          </div>
-		      <div class="panel-body">
+		      	<div class="panel-heading" data-toggle="collapse" href="#edades-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span><i class="fa fa-sort-numeric-asc"></i> Edades</span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="edades-desplegable" aria-expanded="false">
 		      	<div class="filtros">
 				<?php
 					foreach (EDADES as $key => $v) {
@@ -235,25 +317,43 @@
 		    </div>
 
 		    <div class="panel panel-default shadow-panel1">
-		      <div class="panel-heading">
-		            <span><i class="fa fa-venus-mars"></i> Genero</span>
-		          </div>
-		      <div class="panel-body">
-		      	<div class="filtros">
-				<?php
-					foreach (GENERO as $key => $v) {
-				    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/G'.VALOR_GENERO[$key].'/';
-						//$ruta = Controlador_Aspirante::calcularRuta($ruta,'G');
-						echo '<li class="lista"><a href="'.$ruta.'1/" class="genero">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
-					}
-				?></div>
-		      </div>
+		      	<div class="panel-heading" data-toggle="collapse" href="#genero-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-venus-mars"></i> G&eacute;nero
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="genero-desplegable" aria-expanded="false">
+		      		<div class="filtros">
+					<?php
+						foreach (GENERO as $key => $v) {
+					    	$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/G'.VALOR_GENERO[$key].'/';
+							//$ruta = Controlador_Aspirante::calcularRuta($ruta,'G');
+							echo '<li class="lista"><a href="'.$ruta.'1/" class="genero">' . utf8_encode(ucfirst(strtolower($v))). '</a></li>';
+						}
+					?></div>
+		      	</div>
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
-				<div class="panel-heading">
-					<span><i class="fa fa-plane"></i> Puede viajar?</span>
-				</div>
-				<div class="panel-body">
+				<div class="panel-heading" data-toggle="collapse" href="#viajar-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-plane"></i> Puede viajar?
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="viajar-desplegable" aria-expanded="false">
 					<div class="filtros">
 				<?php
 			    	foreach (PUEDE_VIAJAR as $key => $v) {
@@ -278,26 +378,44 @@
 		      </div>
 		    </div>-->
 		    <div class="panel panel-default shadow-panel1">
-					<div class="panel-heading">
-						<span><i class="fa fa-id-card-o"></i> Tipo de Licencia</span>
+				<div class="panel-heading" data-toggle="collapse" href="#lic-desplegable">
+				      <div class="row">
+				        <div class="col-md-10" id="drop-tit" >
+				          <span>
+				            <i class="fa fa-id-card-o"></i> Tipo de Licencia
+				          </span>
+				        </div>
+				        <div class="col-md-2" >
+				          <span class="caret"></span>
+				        </div>
+				      </div>
+				</div>
+				<div class="panel-body collapse" id="lic-desplegable" aria-expanded="false">
+					<div class="filtros">
+					<?php
+						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L0/';
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="0">Sin licencia</a></li>';
+				  		foreach ($licencia as $key => $v) {
+							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L'.$key.'/';
+							echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="'.$key.'">'.$v.'</a></li>';
+						} ?>							
 					</div>
-					<div class="panel-body">
-						<div class="filtros">
-						<?php
-							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L0/';
-							echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="0">Sin licencia</a></li>';
-					  		foreach ($licencia as $key => $v) {
-								$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/L'.$key.'/';
-								echo '<li class="lista"><a href="'.$ruta.'1/" class="licencia" id="'.$key.'">'.$v.'</a></li>';
-							} ?>							
-						</div>
-				  </div>
+				</div>
 		    </div>
 		    <div class="panel panel-default shadow-panel1">
-		      <div class="panel-heading">
-		            <span><i class="fa fa-wheelchair"></i> Discapacidad</span>
-		          </div>
-		      <div class="panel-body">
+		      <div class="panel-heading" data-toggle="collapse" href="#discapacidad-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-wheelchair"></i> Discapacidad
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="discapacidad-desplegable" aria-expanded="false">
 		      	<div class="filtros">
 				<?php
 					foreach (DISCAPACIDAD as $key => $v) {
@@ -339,7 +457,7 @@
 								}
 								echo '</div>';
 							}else{
-								echo 'No hay resultados';
+								echo '<br><br><div class="breadcrumb">No hay resultados</div>';
 							}
 						?>
 					</div>	
@@ -506,14 +624,18 @@
 		<div class="col-md-9"> 
 			
 			<?php if(($vista == 1 && $num_accesos_rest > 0) || $vista == 2){ ?> 
-				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right" >
-					<h6 style="color:#6d6d6b">
-						<button id="btn_accesos" type="button" class="btn btn-warning" data-placement="bottom" data-toggle="tooltip" data-html="true" title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo. Y mejor a&uacute;n, ¡puedes completar el proceso de selecci&oacute;n!</p>">Activar accesos</button>
-					</h6>
-				</div>
-				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right" >
-					<a id="btn_accesos_cancelar" class="btn btn-md btn-default">Cancelar</a>
-					<a id="btn_accesos_confirmar" class="btn btn-md btn-success">Enviar accesos</a>
+
+				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right">
+		          <h6 style="color:#6d6d6b">
+		            <button id="activar-accesos" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo. Y mejor aún, ¡puedes completar el proceso de selección!</p>">Activar accesos</button>
+		          </h6>
+		        </div>
+
+				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
+					<button id="btn_accesos_cancelar" type="button" class="btn-red">Cancelar</button>
+					<button id="btn_accesos_confirmar" type="button" class="btn-blue">Enviar accesos</button>
+					<!--<a id="btn_accesos_cancelar" class="btn btn-md btn-default">Cancelar</a>
+					<a id="btn_accesos_confirmar" class="btn btn-md btn-success">Enviar accesos</a>-->
 
 					<?php if($vista == 1){ ?> 
 						<br>
@@ -526,7 +648,7 @@
 						</div>
 					<?php } ?>
 				</div>
-				<br><br><br>
+				<br><br>
 			<?php } ?>
 			
 			
@@ -558,13 +680,6 @@
 		    		</div>
 		    	</div>
 	    	<?php } ?>
-			<b>
-				<?php if($vista == 1){ ?>
-					<span style="font-size: 17px;">Aspirantes Postulados</span>
-				<?php }else{ ?>
-					<span style="font-size: 17px;">Candidatos Registrados</span>
-					<?php }?>				
-			</b>
 			<br/><br/>
 			<div id="busquedas" class='container-fluid'>
 				<?php if (isset($link)) { 
@@ -575,11 +690,9 @@
 	        <div id="result">
 	        	<div class='panel panel-default shadow'>
 					<div class='panel-body'>
-
-						<?php #print_r($_SESSION['mfo_datos']['usuariosHabilitados']); ?>
 						<div id="no-more-tables" class="table-responsive">
-				        	<table class="table table-hover">
-				        		<thead class="etiquetaBody">
+			              <table class="table table-hover">
+			                <thead class="etiquetaBody">
 							      <tr>
 							      	<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
 							      	<!--<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php #if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" <?php #if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan"'; } ?> <?php #if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ #echo 'checked'; } ?>></th>-->
@@ -679,7 +792,7 @@
 							            		</td>
 							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
 							            		
-							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle" width="150" height="50" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>
+							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle img-responsive" width="100" height="100" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>
 							            		
 							            		
 							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
@@ -725,12 +838,69 @@
 													$compl_url = '';
 												} ?>
 
+												<?php 
+										
+													echo '<td title="Descargar Informe de personalidad ';
+								            			//$color = '';
+								            			$title = 'completo';
+								            			if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
+						            						$imagen = 'icono-aspirante-05';
+						            					}else{
+						            						$imagen = 'icono-aspirante-07';
+						            					}
+
+								            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
+
+								            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] != ''){
+								            					//$color = '';
+								            					$title = 'completo';
+
+								            					if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
+								            						$imagen = 'icono-aspirante-05';
+								            					}else{
+								            						$imagen = 'icono-aspirante-07';
+								            					}
+								            				}else{
+									            				//$color = ' parcial';
+									            				$title = 'parcial';	
+
+									            				if($a['numero_test'] == Modelo_Usuario::PRIMER_TEST){
+									            					$imagen = 'icono-aspirante-06';
+									            				}else if($a['numero_test'] == Modelo_Usuario::SEGUNDO_TEST){
+									            					$imagen = 'icono-aspirante-07';
+									            				}
+									            				
+								            				}
+								            			}
+								            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
+									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
+									            			if($mostrar == ''){
+																echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'/"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+															}else{
+																echo $mostrar;
+															}
+														}else{
+						
+															if($mostrar == ''){
+																if(!$ver){
+																	echo '-';
+																}else{
+																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+																}
+															}else{
+																echo $mostrar;
+															}
+														}
+													
+													echo '</td>';
+												?>
+
 												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) /*|| in_array('-1',$posibilidades)*/){ ?>
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 									            		<?php 
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 										            			//if(in_array('-1',$posibilidades)){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
+																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%"></a>';
 																/*}else{
 																	$cantidadRestante = $posibilidades - count($descargas);
 																	if($cantidadRestante > 0){
@@ -743,48 +913,11 @@
 																if(!$ver){
 																	echo '-';
 																}else{
-																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
+																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><img src="img/cv-07.png" class="redes-mic" width="100%"></a>';
 																}
 															}
 														?>
 													</td>
-
-													<?php 
-														echo '<td title="Descargar Informe de personalidad ';
-									            			$color = '';
-									            			$title = 'completo';
-									            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
-
-									            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] != ''){
-									            					$color = '';
-									            					$title = 'completo';
-									            				}else{
-										            				$color = ' parcial';
-										            				$title = 'parcial';	
-									            				}
-									            			}
-									            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
-										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
-										            			if($mostrar == ''){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'/"><i class="fa fa-clipboard fa-1x '.$color.'" aria-hidden="true"></i></a>';
-																}else{
-																	echo $mostrar;
-																}
-															}else{
-							
-																if($mostrar == ''){
-																	if(!$ver){
-																		echo '-';
-																	}else{
-																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-clipboard fa-1x '.$color.'"></i></a>';
-																	}
-																}else{
-																	echo $mostrar;
-																}
-															}
-														
-														echo '</td>';
-													?>
 												<?php } ?>
 							            	</tr>
 										<?php }
@@ -852,26 +985,28 @@
 	        <div class="col-md-12">
 				<?php echo $paginas; ?>
 			</div>
-			
-			<?php 
-				if(/*$costo == 0 && */!empty($limite_plan)/* && $cantd_total > $limite_plan*/){ 
-					if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
-						echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
-					}else{
-						//$_SESSION['mfo_datos']['usuario']['ofertaConvertir'] = $id_oferta;
-						echo '<input type="hidden" name="cantd_planes" id="cantd_planes" value="'.count($planes).'">
-					<input type="hidden" name="idOferta" id="idOferta" value="'.$id_oferta.'">';
-					?>
-					<div id="convertirOferta" class="parpadea pull-right" >
-						<h6 style="color:#6d6d6b">
-							<strong>Mira todos los perfiles y escoge el mejor candidato</strong>
-							<a id="btn_convertir" class="btn btn-md btn-warning"><?php if(count($planes)!=0){ echo 'CONVERTIR'
-							; }else{ echo 'CONTRATAR'; } ?> AHORA</a>
-						</h6>
-					</div>
-					<?php } 
-				} ?>
 		</div>
+		<?php 
+		if(!empty($limite_plan) && $cantd_total > $limite_plan){ 
+			if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
+				echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
+			}else{
+				//$_SESSION['mfo_datos']['usuario']['ofertaConvertir'] = $id_oferta;
+				echo '<input type="hidden" name="cantd_planes" id="cantd_planes" value="'.count($planes).'">
+				<input type="hidden" name="idOferta" id="idOferta" value="'.$id_oferta.'">';
+				?>
+				<div id="convertirOferta" class="col-md-9">
+				  <div class="col-md-6">
+				    <p style="text-align: right;" class="qs-text">Mira todos los perfiles y elige al mejor candidato!</p>
+				  </div>
+				  <div class="col-md-6">
+				    <button id="btn_convertir" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title=""><?php if(count($planes)!=0){ echo 'CONVERTIR'
+						; }else{ echo 'CONTRATAR'; } ?> AHORA</button>
+				  </div>
+				</div>
+			<?php 
+			} 
+		} ?>
 	</div>
 </div>
 
@@ -907,37 +1042,42 @@
         <input type="hidden" name="convertirOferta" id="convertirOferta" value="1">
         <div class="modal-footer" style="text-align: center !important;">
           <button type="button" id="button_convertir_oferta" name="button_convertir_oferta" class="btn-light-blue" data-dismiss="modal">convertir</button>
-          <button type="button" id="cancelar_conversion" name="cancelar_conversion" class="btn-red" id="btn-rojo" data-dismiss="modal">cancelar</button>
+          <button type="button" id="cancelar_conversion" name="cancelar_conversion" class="btn-red" data-dismiss="modal">cancelar</button>
         </div>
     </div>    
   </div>
 </div>﻿
 
-
 <div class="modal fade" id="aviso_accesos" tabindex="-1" role="dialog" aria-labelledby="aviso_accesos" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="title">ACTIVAR ACCESOS</h5>                  
+        <h5 class="titulo-modal-hoja modal-title" id="title">ACTIVAR ACCESOS</h5>                  
       </div>
 		<div class="modal-body">
 			<div class="row">
 			  	<div class="col-md-12">
-			        <p align="justify">Los accesos tienen como funcionalidad, permitir que las empresas completen el proceso de selecci&oacute;n.</p>
-
-		            <p align="justify"><b>Beneficios<b></p>
-		            <ul align="justify">
-						<li type="circle">La empresa puede completar el proceso de selecci&oacute;n de personal.</li>
-						<li type="circle">La empresa puede escoger el(los) candidato(s) para que finalice el test de personalidad CANEA.</li>
-						<li type="circle">La empresa puede activar uno o varios accesos, de acuerdo al plan que haya contratado.</li>
-						<li type="circle">Si no posee ning&uacute;n plan contratado debe adquirir uno para disfrutar de este beneficio.</li>
-					</ul>
+			        <div class="col-md-12">
+		              <p>Los accesos tienen como funcionalidad, permitir que las empresas completen el proceso de selecci&oacute;n</p>
+		              <p class="subt"><b>Beneficios </b></p>
+		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede completar el proceso de selecci&oacute;n de personal.</p></li>
+		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA.</p></li>
+		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede activar uno o varios accesos, de acuerdo al plan contratado. </p></li>
+		            </div>
 				</div>
 			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-success" data-dismiss="modal">OK</button>
+		<div class="modal-footer" style="text-align: center !important;">
+	        <button type="button" class="btn-light-blue" data-dismiss="modal">OK</button>
 		</div>
     </div>    
   </div>
 </div>
+
+<section style="background-color: grey;color: white; text-align:center" id="product" class="inicio">
+  <div class="container">
+    <div class="col-md-12">
+      <label>PUBLICIDAD</label>
+    </div>
+  </div>
+</section>

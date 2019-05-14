@@ -5,6 +5,9 @@ class Modelo_Usuario{
   const EMPRESA = 2;
   const TEST_PARCIAL = 1;
   const TEST_COMPLETO = 2;
+  const PRIMER_TEST = 1;
+  const SEGUNDO_TEST = 2;
+  const COMPLETO_TEST = 5;
   const PRE_REG = 1; 
   const REDSOCIAL_REG = 3; 
   const NORMAL_REG = 2; 
@@ -318,12 +321,12 @@ WHERE
       $subquery1 .= " LIMIT 0,".$limite; 
     }
     $subquery1 .= ") t2"; 
-    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.$cantd_faceta.',2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.$cantd_faceta.',2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
-      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test"; 
     }else{
-      $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
+      $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados, t1.numero_test";
     }
     
     $sql .= " FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, ";
@@ -356,12 +359,12 @@ WHERE
       $subquery1 .= " LIMIT 0,".$limite; 
     }
     $subquery1 .= ") t2";
-    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.count($facetas).',2,1) AS test_realizados FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.count($facetas).',2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
-      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago,t1.test_realizados"; 
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test"; 
     }else{
-      $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados";
+      $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados, t1.numero_test";
     }
     if(!empty($filtros['R']) && $filtros['R'] != ''){
       $sql .= ", IF(t1.test_realizados = 2,(".VALORES_ORDENAMIENTO[0]."*t.total)+".VALORES_ORDENAMIENTO[1].",t.total) AS ranqueo"; 

@@ -17,8 +17,8 @@
   <!-- Archivo css micamello mic.css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
   <!--Theme custom css -->
-  <!--<link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/style.css">
-  <link rel="stylesheet" href="<?php #echo PUERTO."://".HOST;?>/css/media-queries.css">-->
+  <!--<link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/style.css">-->
+  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
@@ -120,7 +120,7 @@ if($navegador == 'MSIE'){ ?>
 <?php } ?>
 
 <?php 
-  if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($inicio)) { ?>
+  if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($vista) && $vista == "inicio") { ?>
     <div id="barra" class="top-info-bar bg-color-3 hidden-xs">
       <div class="container">
         <div class="row">
@@ -147,7 +147,7 @@ if($navegador == 'MSIE'){ ?>
 <nav class="menu navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -158,15 +158,14 @@ if($navegador == 'MSIE'){ ?>
       </a>
     </div>
     <!-- End Header Navigation -->
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div class="collapse navbar-collapse" id="navbar-collapse-1">
       <ul class="nav navbar-nav"> 
       </ul>
       <ul class="nav navbar-nav navbar-right">                          
         <?php 
         if (isset($menu["menu"])){   
           foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
-            <li <?php if($optmnu["nombre"] == 'Registrate' || $optmnu["nombre"] == 'Ingresar'){ echo 'class="btn-minimalist"'; } ?> >
+            <li <?php if($optmnu['vista'] == $vista){ ?> class="btn-menu-active" <?php } if($optmnu["nombre"] == 'Registrate' || $optmnu["nombre"] == 'Ingresar'){ echo 'class="btn-minimalist"'; } ?> >
               <a class="texto-white" <?php if(isset($optmnu['id'])){ echo 'id="'.$optmnu["id"].'"';}  if(isset($optmnu['href'])){ echo 'href="'.$optmnu['href'].'"'; }else{ echo 'onclick="'.$optmnu['onclick'].'"'; } ?> <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
               Inicio';  }else{ echo $optmnu["nombre"]; } ?></a>
             </li>                            

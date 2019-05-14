@@ -771,8 +771,11 @@ padding-top: 10px;
 }
 .texto-postulaciones{
     color: #5e5e5e;
-    font-family: ‘Roboto’;
+    font-family: 'Roboto';
     text-align: left;
+    text-overflow:ellipsis;
+    white-space:nowrap; 
+    overflow:hidden; 
 }
 .postulacion-icono-ver{
     text-align: center;
@@ -1303,4 +1306,25 @@ ul.checkout-bar a {
 
 .msgError{
     margin: 16px 0 16px 0 !important;
+}
+
+.imagen-perfil img{
+    width: 120px;
+    height: 120px;
+}
+
+.ordenamientos{
+    padding-right: 0px;
+}
+
+.etiquetaBody{
+  font-size:12px;
+}
+
+.subt{
+    font-family: 'Roboto';
+    font-size: 30pt;
+    text-align: center;
+    padding-top: 10px;
+    color: #204478;
 }
