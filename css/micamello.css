@@ -584,10 +584,10 @@ ul.list_content_mic > li:last-child {
   border: 1px inset rgba(28,110,164,0.35);
   border-radius: 23px 23px 23px 23px;
 }
-
+/*
 .panel-heading{
   text-align: justify;
-}
+}*/
 a.addButton{
   background-color: #2BC368;
   color: white;

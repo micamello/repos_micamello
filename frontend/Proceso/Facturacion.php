@@ -402,7 +402,7 @@ class Proceso_Facturacion{
                         <td width="950"><b>Descripción</b></td>
                         <td width="10"><b>Precio Unitario</b></td>
                         <td width="10"><b>Descuento</b></td>
-                        <td width="10"><b>Precio Toral</b></td>
+                        <td width="10"><b>Precio ToTal</b></td>
                       </tr>';
     foreach ($detalles->detalle as $detalle) {
 

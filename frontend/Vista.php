@@ -80,14 +80,14 @@ class Vista {
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/registro/", "id"=>"regCandMic", "nombre"=>"Registrate");
     }
     else{      
-      $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/", "nombre"=>"Inicio"); 
+      $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/", "nombre"=>"Inicio","vista"=>"inicio"); 
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){           
-        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/oferta/", "nombre"=>"Empleos");
-        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/postulacion/", "nombre"=>"Mis Postulaciones");
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/oferta/", "nombre"=>"Empleos", "vista"=>"oferta");
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/postulacion/", "nombre"=>"Mis Postulaciones", "vista"=>"postulacion");
       }
       else{
-        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/publicar/", "nombre"=>"Publicar Ofertas");
-        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/vacantes/", "nombre"=>"Mis Ofertas");   
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/publicar/", "nombre"=>"Publicar Ofertas", "vista"=>"publicar");
+        $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/vacantes/", "nombre"=>"Mis Ofertas", "vista"=>"vacantes");   
 
         /*if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'buscarCandidatos')){
             $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/verAspirantes/2/0/1/", "nombre"=>"Buscar Candidatos");
@@ -97,10 +97,10 @@ class Vista {
       }
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
         if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'adminEmpresas') && Modelo_UsuarioxPlan::planCuentaPropio($_SESSION['mfo_datos']['usuario']['id_usuario'])){
-          $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/adminEmpresas/", "nombre"=>"Administración");
+          $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/adminEmpresas/", "nombre"=>"Administración","vista"=>"adminEmpresas");
         }
         if(isset($_SESSION['mfo_datos']['subempresas'])){
-          $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/cuentas/", "nombre"=>"Ofertas");
+          $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/cuentas/", "nombre"=>"Ofertas","vista"=>"cuentas");
         }
       }
       $menu["submenu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/planesUsuario/", "nombre"=>"Mis Planes");

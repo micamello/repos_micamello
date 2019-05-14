@@ -148,6 +148,7 @@ class Controlador_Oferta extends Controlador_Base{
           $id_jornada = '';
           $cadena = '';
           $array_datos = array();
+          $tipo_ordenamiento = 0;
           foreach ($this->data as $param => $value) {
             $letra = substr($value,0,1);
             $id = substr($value,1);
@@ -170,6 +171,7 @@ class Controlador_Oferta extends Controlador_Base{
                   $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id;
                 }
               }else if($letra == 'O' && $type == 1){
+                $tipo_ordenamiento = substr($value,1,1);
                 $_SESSION['mfo_datos']['Filtrar_ofertas'][$letra] = $id; 
               }
               else if($letra == 'S' && $type == 1){
@@ -298,7 +300,8 @@ class Controlador_Oferta extends Controlador_Base{
             'aspirantesXoferta'=>$aspirantesXoferta,
             'array_empresas_hijas'=>$array_empresas_hijas,
             'areas_subareas'=>$areas_subareas,
-            'datos_plan'=>$datos_plan
+            'datos_plan'=>$datos_plan,
+            'tipo_ordenamiento'=>$tipo_ordenamiento
           );
 
           if($vista != 'vacantes' && $vista != 'cuentas'){

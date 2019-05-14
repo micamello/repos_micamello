@@ -26,17 +26,17 @@ foreach ($data as $letra => $value) {
         }
 
         $valores = "'".$ruta."/',2,".$page;
-        echo '<div class="col-xs-12 col-md-6 btn-filtro">
+        echo '<div id="btn-filtro-1" class="col-xs-12 col-md-4 btn-filtro">
             <div class="input-group">
                 <span>'.utf8_encode(ucfirst(strtolower($value['nombre']))).'</span>
-                <span class="input-group-addon btn-filtro" style="padding:0px; cursor:pointer;">
+                <span id="icono-filtro" class="input-group-addon" style="padding:0px; cursor:pointer;">
                     <p onclick="enviarPclave('.$valores.')"><i style="font-size:20px;" class="fa fa-window-close"></i>
                     </p>
                 </span>
             </div>
         </div>';
 
-        if($i == 2){
+        if($i == 3){
             echo '<div class="clearfix"></div>';
             $i = 0;
         }

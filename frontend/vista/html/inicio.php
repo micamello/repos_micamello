@@ -8,7 +8,7 @@
                   </div>
                   <?php if(!isset($_SESSION)){ ?>
                     <div class="col-md-12">
-                      <button class="btn-blue"  id="cuadro-celeste">
+                      <button class="btn-blue" id="cuadro-celeste">
                         <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
                       </button>
                     </div>
@@ -25,7 +25,7 @@
 <br><br>
 
 <div class="text-center" align="center">
-    <h2 class="titulo">Áreas de Empleos</h2>
+    <h2 class="titulo">&Aacute;reas de Empleos</h2>
   </div><br><br>
 
 <section id="brand" class="business bloque">
@@ -77,7 +77,7 @@
 
 <br><br>
 <div class="text-center" align="center">
-  <h2 class="titulo">¿Qué es CANEA?</h2>
+  <h2 class="titulo">¿Qu&eacute; es CANEA?</h2>
   <br><br>
   <center>
     <section>
@@ -110,7 +110,7 @@
         <div class="tti_concept">
           <span>
             Somos consultores asociados de TTI 
-            SUCCESS INSIGHTS™ , l&iacute;der mundial en medición de habilidades blandas 
+            SUCCESS INSIGHTS™ , l&iacute;der mundial en medici&oacute;n de habilidades blandas 
             para la gesti&oacute;n de talento y alto desempe&ntilde;o, con el nivel de 
             confiabilidad m&aacute;s alto a nivel mundial.
           </span>

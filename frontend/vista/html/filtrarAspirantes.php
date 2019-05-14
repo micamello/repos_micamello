@@ -81,8 +81,7 @@ foreach ($data as $letra => $value) {
 
             preg_match_all($exp,$value['id'],$salida, PREG_PATTERN_ORDER);
             unset($salida[0]);
-            echo '<div id="btn-filtro-1" class="col-xs-12 col-md-12';
-            echo ' btn-filtro">
+            echo '<div id="btn-filtro-1" class="col-xs-12 col-md-12 btn-filtro">
             <div class="input-group">
                 <span>';
             foreach ($salida as $key => $value) {
@@ -91,7 +90,7 @@ foreach ($data as $letra => $value) {
                 echo $literales[$l].': '.$i.'%&nbsp;&nbsp;';
             }
             echo '</span>
-                    <span class="input-group-addon btn-filtro" style="padding:0px; cursor:pointer;">
+                    <span id="icono-filtro" class="input-group-addon" style="padding:0px; cursor:pointer;">
                         <p onclick="enviarPclave('.$valores.')"><i style="font-size:20px;" class="fa fa-window-close"></i>
                         </p>
                     </span>
@@ -124,7 +123,7 @@ foreach ($data as $letra => $value) {
                 }
             }
             echo '</span>
-                    <span class="input-group-addon btn-filtro" style="padding:0px; cursor:pointer;">
+                    <span id="icono-filtro" class="input-group-addon" style="padding:0px; cursor:pointer;">
                         <p onclick="enviarPclave('.$valores.')"><i style="font-size:20px;" class="fa fa-window-close"></i>
                         </p>
                     </span>
