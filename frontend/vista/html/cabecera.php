@@ -124,12 +124,12 @@ if($navegador == 'MSIE'){ ?>
     <div id="barra" class="top-info-bar bg-color-3 hidden-xs">
       <div class="container">
         <div class="row">
-          <div class="col-sm-7">
+          <div class="col-sm-6">
             <ul class="list-inline topList">
               <p>Ll&aacute;manos a nuestras líneas Call Center:</p>
           </div>
 
-          <div class="col-sm-2">
+          <div class="col-sm-3">
             <ul class="list-inline topList">
               <li><i class="fa fa-phone" aria-hidden="true"></i> <b>Quito:</b> 02 6055990</li>
             </ul>

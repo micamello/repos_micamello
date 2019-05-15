@@ -270,71 +270,46 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 			<div class="col-md-9">
 
 				<div class="container-fluid ordenamientos">
+					<div class="col-md-12">
+						<?php 
+							$sinOffSet = false;
+							if (trim($vista) == 'oferta' && isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { $sinOffSet = true; ?> 
+							<div class="col-md-5"> 
+								<div align="left" > 
+									<b>Autopostulaciones restantes: 
+										<span class="parpadea" style="color:red">
+											<?php echo $autopostulaciones_restantes['p_restantes']; ?>					
+										</span>
+									</b> 
+								</div><br>
+							</div> 
+						<?php } ?> 
 
-					<?php 
-						$sinOffSet = false;
-						if (trim($vista) == 'oferta' && isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { $sinOffSet = true; ?> 
-						<div class="col-md-7"> 
-							<div class="col-md-12" align="left" > 
-								<b>Autopostulaciones restantes: 
-									<span class="parpadea" style="color:red">
-										<?php echo $autopostulaciones_restantes['p_restantes']; ?>					
-									</span>
-								</b> 
-							</div><br>
-						</div> 
-					<?php } ?> 
-
-					<div class="<?php if(!$sinOffSet){ echo 'col-md-offset-7'; } ?> col-md-2 col-sm-8 col-xs-6" align="right" style="padding-right: 0px;"><b>Ordenar por: </b></div>
-					<div class="col-md-3 col-sm-4 col-xs-6 ordenamientos">
-						<select class="form-control" id="orden" name="orden">
-
-							<option value="0">Seleccione</option>
-							<?php 
-								$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/O';
-								$criterio = '';
-								if($tipo_ordenamiento == 1){
-									
-									if($_SESSION['mfo_datos']['Filtrar_ofertas']['O'] == 1){
-										$criterio .= "<option title='ordena salario de mayor a menor' selected disabled value='".$ruta."12/1/'>Salario (DESC)</option>";
-										$criterio .= "<option title='ordena salario de menor a mayor' value='".$ruta."11/1/'>Salario (ASC)</option>";
-									}else{
-										$criterio .= "<option title='ordena salario de mayor a menor' value='".$ruta."12/1/'>Salario (DESC)</option>";
-										$criterio .= "<option title='ordena salario de menor a mayor' selected disabled value='".$ruta."11/1/'>Salario (ASC)</option>";
-									}
-									$criterio .= "<option title='ordena fecha de menor a mayor' value='".$ruta."22/1/'>Fecha (ASC)</option>
-									<option title='ordena fecha de mayor a menor' value='".$ruta."21/1/'>Fecha (DESC)</option>";
-								}else{
-
-									$criterio .= "<option title='ordena fecha de menor a mayor' value='".$ruta."12/1/'>Salario (ASC)</option>
-									<option title='ordena fecha de mayor a menor' value='".$ruta."11/1/'>Salario (DESC)</option>";
-									if($_SESSION['mfo_datos']['Filtrar_ofertas']['O'] == 1){
-										$criterio .= "<option title='ordena fecha de mayor a menor' selected disabled value='".$ruta."22/1/'>Fecha (DESC)</option>";
-										$criterio .= "<option title='ordena fecha de menor a mayor' value='".$ruta."21/1/'>Fecha (ASC)</option>";
-									}else{
-										$criterio .= "<option title='ordena salario de mayor a menor' value='".$ruta."22/1/'>Fecha (DESC)</option>";
-										$criterio .= "<option title='ordena salario de menor a mayor' selected disabled value='".$ruta."21/1/'>Fecha (ASC)</option>";
-									}
-								}
-							?>
-							<?php echo $criterio; ?>
-
-							<?php 
-								/*$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/O2'.$_SESSION['mfo_datos']['Filtrar_ofertas']['O'].'/';
-								if($tipo_ordenamiento == 2){
-									if($_SESSION['mfo_datos']['Filtrar_ofertas']['O'] == 1){
-										$criterio = '(Menor a Mayor)';
-									}else{
-										$criterio = '(Mayor a Menor)';
-									}
-								}*/
-							?>
-							<!--<option value="<?php #echo $ruta.'1/'; ?>">Fecha <?php #echo $criterio; ?></option>-->
-						</select>
-					</div>
+				        <div class="col-md-4 <?php if(!$sinOffSet){ echo 'col-md-offset-5'; } ?>" style="display: flex;">
+					        <span>Ordenar por: </span>
+					        <select id="tipo_orden" name="tipo_orden" class="form-control">
+					          <option value="1">Salario</option>
+					          <option value="2">Fecha</option>
+					        </select>
+				        </div>
+				        <div class="col-md-3">
+				          <div>
+				          	<label class="radio-inline">
+				                <input type="radio" name="orden" value="1" title="Ordena de menor a mayor" <?php if($_SESSION['mfo_datos']['Filtrar_ofertas']['O'] == 2 && !empty($tipo_ordenamiento)){ echo 'checked'; } ?>>
+				                Ascendente
+				            </label>
+				            <label class="radio-inline">
+				               <input type="radio" name="orden" value="2" title="Ordena de mayor a menor" <?php if($_SESSION['mfo_datos']['Filtrar_ofertas']['O'] == 1 && !empty($tipo_ordenamiento)){ echo 'checked'; } ?>>
+				               Descendente
+				            </label>
+				          </div>
+				        </div>
+				        <?php $enlace_ordenamiento = PUERTO.'://'.HOST.'/'.$vista.'/1/O'; ?>
+						<input type="hidden" id="enlace_ordenamiento" name="enlace_ordenamiento" value="<?php echo $enlace_ordenamiento; ?>">
+			      	</div>
 				</div>
 
-				<br>
+				
 				<div id="busquedas" class="container-fluid">
 					<?php if (isset($link)) { 
 						echo $link; 
@@ -558,7 +533,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 </div>
 </div>
 </div>
-<div class="modal fade" id="editar_Of" tabindex="-1" role="dialog" aria-labelledby="editar_Of" aria-hidden="true">
+<div class="modal fade" id="editar_Of" tabindex="-1" role="dialog" aria-labelledby="editar_Of" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog" role="document">    
 		<div class="modal-content">
 			<div class="modal-header">
@@ -569,7 +544,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 					<div class="row">
 						<div class="col-md-12">
 							<div id="des_of_error" class="form-group">
-								<label class="">Descripci&oacute;n oferta: </label>&nbsp;<i class="requerido">*</i><div id="descripcion_error" class="help-block with-errors"></div>
+								<label class="">Descripci&oacute;n oferta: </label>&nbsp;<i>*</i><div id="descripcion_error" class="help-block with-errors"></div>
 								<textarea id="des_of" rows="7" required name="des_of" class="form-control" style="resize: none;" onkeyup="validarDescripcion()"></textarea>
 							</div>
 						</div>
@@ -577,7 +552,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				</div>
 				<input type="hidden" name="guardarEdicion" id="guardarEdicion" value="1">
 				<input type="hidden" name="idOferta" id="idOferta" value="<?php echo Utils::encriptar($o['id_ofertas']); ?>">
-				<div class="modal-footer">
+				<div class="modal-footer" style="text-align: center !important;">
 					<button type="button" class="btn-red" id="btn-rojo" data-dismiss="modal">Cancelar</button>
 					<input type="button" id="boton" name="boton" class="btn-light-blue" value="Guardar" onclick="enviarEdicion()"> 
 				</div>

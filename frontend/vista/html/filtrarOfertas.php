@@ -2,9 +2,8 @@
 $i = 0;
 foreach ($data as $letra => $value) { 
 
-    $i++;
     if($letra != 'O'){
-        
+        $i++;
         $ruta = PUERTO.'://'.HOST.'/'.$vista.'/2'; 
         if($letra == 'A'){
             $ruta .= '/A'.$value['id'];

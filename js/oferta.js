@@ -1,7 +1,33 @@
-$('#orden').on('change', function(){
-    alert($('#orden').val());
-    window.location = $('#orden').val();
+
+$(document).ready(function()
+{
+    $('#tipo_orden').on('change',function(){
+        $("input[type='radio'][name='orden']").each(function(){
+          if($(this).is(":checked"))
+            $(this).prop('checked',false);
+        });
+    });
+
+    $("input[name=orden]").change(function () {   
+
+        var resultado = "";
+        var orden = document.getElementsByName("orden");
+
+        for(var i=0;i<orden.length;i++)
+        {
+            if(orden[i].checked)
+                resultado = orden[i].value;
+        }
+
+        if(resultado != ''){
+            var ruta = $('#enlace_ordenamiento').val()+$('#tipo_orden').val()+resultado+'/1/';
+           // alert(ruta);
+            window.location = ruta;
+        }
+    });
+
 });
+
 
 if(document.getElementById('des_of')){
     tinymce.init({ 
@@ -233,8 +259,8 @@ function validarAspiracion(){
 
 }
 
-function verAspirantes($idOfertas){
+/*function verAspirantes($idOfertas){
 
 	var nueva_ruta = $('#puerto_host').val()+'/verAspirantes/'+$idOfertas;
 	alert(nueva_ruta);
-}
+}*/

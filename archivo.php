@@ -34,6 +34,19 @@ if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO
 
 $mostrar = false;
 switch ($carpeta){
+	case 'imgperfil':
+	  $extension = 'image/jpeg';
+	  $disposition = 'inline';
+	  $ruta = PATH_PROFILE.$archivo.'.jpg';	  
+	  $resultado = file_exists($ruta);	  	  
+	  if (!$resultado){
+	  	$ruta = FRONTEND_RUTA.'imagenes/icono-perfil-06.png';
+	  	//$archivo = 'user.png';
+	  }	  	
+	  //echo $ruta." / ".$archivo; exit;  
+	  $archivo = $archivo.'.jpg';
+	  $mostrar = true;
+	break;
 	case 'profile':
 	  $extension = 'image/jpeg';
 	  $disposition = 'inline';

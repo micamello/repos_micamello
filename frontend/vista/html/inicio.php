@@ -45,7 +45,7 @@
                 echo '"> ';
                 $arrarea = array_chunk($valores,DIVISIBLE_FILA);
                 foreach ($arrarea as $k => $a) {
-                    echo '<div class="col-md-12 col-sm-12">';
+                    echo '<div class="col-md-12 col-sm-12" id="bloque-car">';
                     foreach ($a as $c => $datos) {
                         echo '<div class="brand_item col-md-2 col-sm-6" align="center">
                             <i class="iconos '.$datos['ico'].'"></i><br><br>

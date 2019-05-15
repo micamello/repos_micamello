@@ -22,6 +22,10 @@ if(document.getElementById('form_editarPerfil')){
     }
 }
 
+$('#hoja_de_vida').on('click', function(){
+    $('#modal_actualizar').modal();
+});
+
 $('#button_cambiar').on('click', function(){
     enviarCambioClave();
 });
@@ -125,9 +129,9 @@ function validarImg(archivo,err_img,seccion_img,btn){
   var error = 0;
   if(file == 1){
     error = 1;
-  }else{
+  }/*else{
     $('#err_img').html('<p class="parpadea" style="font-size:11px;color:green">Imagen cargada</p>');
-  }
+  }*/
   return error;
 }
 
@@ -160,12 +164,12 @@ function fileValidation(fileInput){
 /* Carga de hoja de vida */
 $('#subirCV').change(function(e) {
 
-    $('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
-    $('#texto_status').html('Hoja de vida Cargada');
-    $('#texto_status').addClass('arch_cargado');
-    if(document.getElementById("mensaje_error_hv")){
-        document.getElementById("mensaje_error_hv").style.display = "none";
-    }
+    //$('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
+    $('#texto_status').html('Hoja de vida cargada');
+    //$('#texto_status').addClass('arch_cargado');
+    //if(document.getElementById("mensaje_error_hv")){
+    //    document.getElementById("mensaje_error_hv").style.display = "none";
+    //}
 });
 
 /*Eventos del campo de idiomas*/

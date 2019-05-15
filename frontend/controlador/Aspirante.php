@@ -797,7 +797,7 @@ class Controlador_Aspirante extends Controlador_Base
                                         $template = str_replace("%ENLACE%", $enlace, $template);      
                                         $template = str_replace("%FECHA%", $fecha, $template);
 
-                                        //Utils::envioCorreo($datos['correo'],"Completar Test C.A.N.E.A",$template);
+                                        Utils::envioCorreo($datos['correo'],"Completar Test C.A.N.E.A",$template);
 
                                         Modelo_Notificacion::insertarNotificacion($id,$notif_body,Modelo_Usuario::CANDIDATO,Modelo_Notificacion::DESBLOQUEO_ACCESO);
                                     }

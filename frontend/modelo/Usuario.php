@@ -1142,7 +1142,7 @@ WHERE
     return $GLOBALS['db']->auto_array($sql,array(), true);
   }
   public static function obtenerFacetasxUsuario($id_usuario){
-    $sql = "SELECT id_faceta FROM mfo_porcentajexfaceta WHERE id_usuario = ?";
+   $sql = "SELECT id_faceta,valor FROM mfo_porcentajexfaceta WHERE id_usuario = ?";
     return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
   }
 }  

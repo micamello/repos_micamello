@@ -45,6 +45,7 @@ RewriteRule . - [E=REWRITEBASE:/repos_micamello/]
 #imagenes del profile
 
 #RewriteCond %{REQUEST_URI} \.(jpg|jpeg|pdf|doc|docx)$ [NC]
+RewriteRule ^imagenes/imgperfil/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=imgperfil&param1=$1 [L]
 RewriteRule ^imagenes/usuarios/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=profile&param1=$1 [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]

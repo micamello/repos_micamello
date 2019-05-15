@@ -624,7 +624,7 @@
 		<div class="col-md-9"> 
 			
 			<?php if(($vista == 1 && $num_accesos_rest > 0) || $vista == 2){ ?> 
-
+				<br>
 				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right">
 		          <h6 style="color:#6d6d6b">
 		            <button id="activar-accesos" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo. Y mejor aún, ¡puedes completar el proceso de selección!</p>">Activar accesos</button>
@@ -632,14 +632,10 @@
 		        </div>
 
 				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
-					<button id="btn_accesos_cancelar" type="button" class="btn-red">Cancelar</button>
-					<button id="btn_accesos_confirmar" type="button" class="btn-blue">Enviar accesos</button>
-					<!--<a id="btn_accesos_cancelar" class="btn btn-md btn-default">Cancelar</a>
-					<a id="btn_accesos_confirmar" class="btn btn-md btn-success">Enviar accesos</a>-->
-
+					<a id="btn_accesos_cancelar" class="btn-red solo-texto dis-mov">Cancelar</a>
+					<a id="btn_accesos_confirmar" style="padding:15px 40px" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
 					<?php if($vista == 1){ ?> 
-						<br>
-						<div class="col-md-12" align="right" > 
+						<div class="restante" align="right"> 
 							<b>N&uacute;mero de accesos restantes: 
 							  <span class="parpadea" style="color:red">
 							    <?php echo $num_accesos_rest; ?>					
@@ -648,7 +644,7 @@
 						</div>
 					<?php } ?>
 				</div>
-				<br><br>
+				<div class="clearfix"></div>
 			<?php } ?>
 			
 			
@@ -680,7 +676,7 @@
 		    		</div>
 		    	</div>
 	    	<?php } ?>
-			<br/><br/>
+		
 			<div id="busquedas" class='container-fluid'>
 				<?php if (isset($link)) { 
 				 echo $link; 
@@ -791,8 +787,10 @@
 							            		    }else{ echo '-'; } ?>
 							            		</td>
 							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
-							            		
-							            		<td align="right" style="text-align: center;" data-title="Foto: "><img class="img-circle img-responsive" width="100" height="100" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil"></td>
+
+							            		<td align="right" style="text-align: center;" data-title="Foto: ">
+							                      <img class="imagen-perfil-2" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil" >
+							                    </td>
 							            		
 							            		
 							            		<td data-title="Aspirante: " style="vertical-align: middle; text-align: center;">
@@ -839,7 +837,7 @@
 												} ?>
 
 												<?php 
-										
+
 													echo '<td title="Descargar Informe de personalidad ';
 								            			//$color = '';
 								            			$title = 'completo';
@@ -1057,18 +1055,23 @@
 		<div class="modal-body">
 			<div class="row">
 			  	<div class="col-md-12">
-			        <div class="col-md-12">
-		              <p>Los accesos tienen como funcionalidad, permitir que las empresas completen el proceso de selecci&oacute;n</p>
+		            <div class="col-md-12">
+		              <p>Los accesos tienen como funcionalidad, permitir que las empresas completen el proceso de selección</p><hr>
+		            </div>
+		            <div class="col-md-6">
 		              <p class="subt"><b>Beneficios </b></p>
-		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede completar el proceso de selecci&oacute;n de personal.</p></li>
+		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede completar el proceso de selección de personal.</p></li>
 		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA.</p></li>
 		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede activar uno o varios accesos, de acuerdo al plan contratado. </p></li>
 		            </div>
-				</div>
+		            <div class="col-md-6" style="text-align: center !important;"><br><br><br><br>
+		              <button style="padding: 15px !important" type="button" class="btn-light-blue" data-dismiss="modal">OK</button>
+		            </div>
+		            <div class="col-md-12">
+		              <hr>
+		            </div>
+		          </div>
 			</div>
-		</div>
-		<div class="modal-footer" style="text-align: center !important;">
-	        <button type="button" class="btn-light-blue" data-dismiss="modal">OK</button>
 		</div>
     </div>    
   </div>

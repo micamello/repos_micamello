@@ -18,6 +18,8 @@ class Controlador_Perfil extends Controlador_Base
         $msj1 = $imgArch1 = $btnDescarga = '';
         $tipo_usuario = $_SESSION['mfo_datos']['usuario']['tipo_usuario'];
 
+        $breadcrumbs = array();
+
         //$breadcrumbs = array();
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
@@ -67,8 +69,8 @@ class Controlador_Perfil extends Controlador_Base
 
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
-                $imgArch2  = 'upload-icon.png';
-                $msj2      = 'Subir CV';
+                //$imgArch2  = 'upload-icon.png';
+                //$msj2      = 'Subir CV';
                 $ruta_arch = '#';
                 $btnSubir  = 1;
                 $btnDescarga = 0;
@@ -105,16 +107,16 @@ class Controlador_Perfil extends Controlador_Base
 
                 //Valida que el único que guarda foto es el candidato y si tiene o no cargado uno previo
                 if (isset($_SESSION['mfo_datos']['usuario']['infohv']) && $tipo_usuario == Modelo_Usuario::CANDIDATO) {
-                    if($_SESSION['mfo_datos']['usuario']['infohv']['formato'] == ''){
+                    /*if($_SESSION['mfo_datos']['usuario']['infohv']['formato'] == ''){
                         $imgArch1 = 'actualizar.png';
                     }else{
                         $imgArch1    = $_SESSION['mfo_datos']['usuario']['infohv']['formato'] . '.png';
                     }
-                    $msj1        = 'Cv Cargado';
+                    $msj1        = 'Cv Cargado';*/
                     $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['usuario']['infohv']['formato'];
                     $ruta_arch   = PUERTO."://".HOST.'/hojasDeVida/'.$_SESSION['mfo_datos']['usuario']['username'].'/';
                     $btnDescarga = 1;                   
-                    $msj2        = 'Actualizar CV';
+                    //$msj2        = 'Actualizar CV';
                 }
 
                 //Verifica si el usuario tiene datos en la variable de session para las areas y subareas seleccionadas
@@ -124,9 +126,10 @@ class Controlador_Perfil extends Controlador_Base
                     $areaxusuario  = Modelo_UsuarioxArea::obtieneListado($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
-//print_r($areaxusuario);
-                $nrototaltest = Modelo_Cuestionario::totalTest();
-                $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+                $breadcrumbs['perfil'] = 'Editar mi perfil';
+                $nrototalfacetas = Modelo_Faceta::obtenerFacetas();
+                //$nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+                $porcentaje_por_usuario = Modelo_Usuario::obtenerFacetasxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
                     'areaxusuario'              => $areaxusuario,
@@ -135,15 +138,15 @@ class Controlador_Perfil extends Controlador_Base
                     'provincia'                 => $provincia['id_provincia'],
                     'arrciudad'                 => $arrciudad,
                     'btnSig'                    => $btnSig,
-                    'imgArch1'                  => $imgArch1,
-                    'imgArch2'                  => $imgArch2,
-                    'msj1'                      => $msj1,
-                    'msj2'                      => $msj2,
+                    //'imgArch1'                  => $imgArch1,
+                    //'imgArch2'                  => $imgArch2,
+                    //'msj1'                      => $msj1,
+                    //'msj2'                      => $msj2,
                     'btnSubir'                  => $btnSubir,
                     'btnDescarga'               => $btnDescarga,
                     'ruta_arch'                 => $ruta_arch,
-                    'nrototaltest'              =>$nrototaltest,
-                    'nrotestusuario'            =>$nrotestusuario,
+                    'porcentaje_por_usuario'    =>$porcentaje_por_usuario,
+                    'nrototalfacetas'            =>$nrototalfacetas,
                     'nacionalidades'            =>$nacionalidades,
                     'universidades'             =>$universidades,
                     'arridioma'                 =>$arridioma,
@@ -156,7 +159,8 @@ class Controlador_Perfil extends Controlador_Base
                     'estado_civil'=>$estado_civil,
                     'areas'=>$areas,
                     'arrsectorind'=>$arrsectorind,
-                    'cargo'=>$cargo
+                    'cargo'=>$cargo,
+                    'breadcrumbs'=>$breadcrumbs
                 );
 
                 //Pasar a la vista los js y css que se van a necesitar

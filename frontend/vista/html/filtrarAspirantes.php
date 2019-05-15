@@ -1,7 +1,8 @@
 <?php 
-
+$i = 0;
 foreach ($data as $letra => $value) { 
 
+    
     if($vista == 1){
         $ruta = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta.'/2';
     }else{
@@ -9,7 +10,7 @@ foreach ($data as $letra => $value) {
     }
 
     if($letra != 'O'){
-
+        $i++;
         if($letra == 'F'){
             $ruta .= '/F'.$value['id'];
         }
@@ -129,6 +130,11 @@ foreach ($data as $letra => $value) {
                     </span>
                 </div>
             </div>';
+        }
+
+        if($i == 3){
+            echo '<div class="clearfix"></div>';
+            $i = 0;
         }
     }
 } 
