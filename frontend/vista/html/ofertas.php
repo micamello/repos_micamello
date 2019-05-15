@@ -285,15 +285,14 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 							</div> 
 						<?php } ?> 
 
-				        <div class="col-md-4 <?php if(!$sinOffSet){ echo 'col-md-offset-5'; } ?>" style="display: flex;">
+				        <div class="col-md-3 <?php if(!$sinOffSet){ echo 'col-md-offset-5'; } ?>" style="display: flex;">
 					        <span>Ordenar por: </span>
 					        <select id="tipo_orden" name="tipo_orden" class="form-control">
 					          <option value="1">Salario</option>
 					          <option value="2">Fecha</option>
 					        </select>
 				        </div>
-				        <div class="col-md-3">
-				          <div>
+				        <div class="col-md-4" style="padding-left: 0px; padding-right: 0px;">
 				          	<label class="radio-inline">
 				                <input type="radio" name="orden" value="1" title="Ordena de menor a mayor" <?php if($_SESSION['mfo_datos']['Filtrar_ofertas']['O'] == 2 && !empty($tipo_ordenamiento)){ echo 'checked'; } ?>>
 				                Ascendente
@@ -302,7 +301,6 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				               <input type="radio" name="orden" value="2" title="Ordena de mayor a menor" <?php if($_SESSION['mfo_datos']['Filtrar_ofertas']['O'] == 1 && !empty($tipo_ordenamiento)){ echo 'checked'; } ?>>
 				               Descendente
 				            </label>
-				          </div>
 				        </div>
 				        <?php $enlace_ordenamiento = PUERTO.'://'.HOST.'/'.$vista.'/1/O'; ?>
 						<input type="hidden" id="enlace_ordenamiento" name="enlace_ordenamiento" value="<?php echo $enlace_ordenamiento; ?>">
