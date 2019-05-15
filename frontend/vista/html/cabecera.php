@@ -216,7 +216,7 @@ if($navegador == 'MSIE'){ ?>
   if (isset($breadcrumbs) && is_array($breadcrumbs)){ ?>
 
     <div class="container-fluid">
-      <ol class="breadcrumb" align="left">
+      <ol class="breadcrumb" style="text-align: left;">
         <?php 
         $cont = 1;
         echo '<li><a href="'.PUERTO."://".HOST.'/">Inicio</a></li>';

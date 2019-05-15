@@ -248,7 +248,14 @@ class Controlador_GenerarPDF extends Controlador_Base
         $imageninicio = "<img src='";
         $imagenstyle = "' style='";
         $imagenfin = "'>";
-        $foto = PUERTO.'://'.HOST.'/imagenes/usuarios/profile/'.$datos['username'].'.jpg';
+        $ruta = PATH_PROFILE.$datos['username'].'.jpg';
+        $archivoRuta = "usuarios/profile/".$datos['username'].'.jpg'; 
+        $resultado = file_exists($ruta);
+        if (!$resultado){
+          $archivoRuta = "user.png";
+        }       
+        $archivo = $archivo.'.jpg';
+        $foto = PUERTO.'://'.HOST.'/imagenes/'.$archivoRuta;
         $html .= $divinicio."text-align: center;".$divinter.$imageninicio.$foto.$imagenstyle."width: 120px;height: 120px;border-style: solid;border-color: white;".$imagenfin.$divfinal;
         if(isset($datos['aspSalarial'])){
           $html .= "<h5 style='text-align: center;'><b>Aspiración salarial:</b> ".SUCURSAL_MONEDA.$datos['aspSalarial']."</h5>";

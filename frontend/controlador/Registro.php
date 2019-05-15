@@ -40,7 +40,8 @@ class Controlador_Registro extends Controlador_Base {
     $arrsectorind = Modelo_SectorIndustrial::consulta();
     $tags = array('arrgenero'=>$arrgenero,
                   'arrsectorind'=>$arrsectorind,
-                  'social'=>$social_reg);
+                  'social'=>$social_reg,
+                  'vista'=>'registro');
 
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";
@@ -82,7 +83,7 @@ class Controlador_Registro extends Controlador_Base {
         $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
         $token = Utils::encriptar($token);
         if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
-            throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
+            throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
         }
         $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
       } 
@@ -105,12 +106,19 @@ class Controlador_Registro extends Controlador_Base {
       throw new Exception("El correo ingresado ya existe");
     }
 
+    if($datosReg['tipo_documentacion'] == 1 || $datosReg['tipo_documentacion'] == 2){
       if (method_exists(new Utils, 'validar_'.$iso)){
         $function = 'validar_'.$iso;
         if(!Utils::$function($datosReg['documentoCandEmp'])){
           throw new Exception("El documento ingresado no es v\u00E1lido");
         }
       }
+    }
+    else{
+      if(!Utils::validarPasaporte($datosReg['documentoCandEmp'])){
+        throw new Exception("Ingrese un pasaporte válido");
+      }
+    }
 
     if($datosReg['tipo_usuario'] == 1){
       if(!Utils::valida_fecha($datosReg['fechaNac'])){
@@ -289,6 +297,7 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function registroRedSocial($correo,$nombre,$apellido){
+    $url = "";
     $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
     $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
     $id_genero = Modelo_Genero::obtenerListadoGenero();
@@ -348,10 +357,11 @@ class Controlador_Registro extends Controlador_Base {
       $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar tu cuenta';  
     } 
     catch (Exception $e) {
+      $url = "registro/";
       $GLOBALS['db']->rollback();
       $_SESSION['mostrar_error'] = $e->getMessage();
     }    
-    Utils::doRedirect(PUERTO.'://'.HOST.'/');
+    Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
   } 
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username){

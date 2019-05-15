@@ -14,16 +14,25 @@
 		echo "SDK Exception: " . $e->getMessage();
 		exit();
 	}
-	if (!$accessToken) {
-		// header('Location: index.php');
-		exit();
+
+	try {
+		if (!$accessToken) {
+			throw new Exception("Ha cancelado el registro");
+		}	
+	} catch (Exception $e) {
+		$obj_registro = new Utils();
+		$_SESSION['mostrar_error'] = $e->getMessage();
+		$obj_registro->doRedirect(PUERTO.'://'.HOST.'/registro/');
 	}
+	
 	$oAuth2Client = $FB->getOAuth2Client();
 	if (!$accessToken->isLongLived())
 		$accessToken = $oAuth2Client->getLongLivedAccessToken($accessToken);
 	$response = $FB->get("/me?fields=id, first_name, last_name, email, picture.type(large)", $accessToken);
 	$userData = $response->getGraphNode()->asArray();
 	$_SESSION['access_token'] = (string) $accessToken;
+	// print_r($userData);
+	// exit();
 	$obj_registro = new Controlador_Registro();
 	$obj_registro->facebook($userData, $tipo_usuario);
 ?>
