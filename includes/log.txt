@@ -848,3 +848,560 @@
 [2019/05/15 04:16:05] Utils::createSession empezo una nueva sesion
 [2019/05/15 04:16:05] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
 [2019/05/15 04:16:05] SQL Query: SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta
+[2019/05/15 04:30:41] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:41] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/05/15 04:30:41] SQL Query: SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta
+[2019/05/15 04:30:41] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 04:30:41] SQL Query: SELECT * FROM mfo_oferta where id_ofertas = '142'
+[2019/05/15 04:30:41] SQL Query: SELECT id_usuario, fecha_terminado_test FROM mfo_accesos_empresas WHERE id_empresa = 1
+[2019/05/15 04:30:41] SQL Query: SELECT * FROM mfo_escolaridad ORDER BY id_escolaridad ASC
+[2019/05/15 04:30:41] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/05/15 04:30:41] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/05/15 04:30:41] SQL Query: SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
+          INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan WHERE o.id_ofertas = 142
+[2019/05/15 04:30:41] SQL Query: SELECT t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, (SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = 142 GROUP BY u.id_usuario ORDER BY pago DESC, p.fecha_postulado ASC) t2, (SELECT id_usuario,IF(SUM(estado) = 5,2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1 WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario LIMIT 0,20
+[2019/05/15 04:30:41] SQL Query: SELECT n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados, t1.numero_test FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, (SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = 142 GROUP BY u.id_usuario ORDER BY pago DESC, p.fecha_postulado ASC) t2, (SELECT id_usuario,IF(SUM(estado) = 5,2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1 WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario
+[2019/05/15 04:30:41] SQL Trans: START TRANSACTION
+[2019/05/15 04:30:41] SQL Query: SELECT p.id_plan, p.nombre, p.costo, e.id_comprobante,e.id_empresa_plan_parent, e.fecha_compra,        
+                     IFNULL(e.fecha_caducidad,'-') AS fecha_caducidad, 
+                     CASE WHEN num_publicaciones_rest = -1 THEN 'ilimitado'
+                          WHEN num_publicaciones_rest = 0 THEN '-'
+                          ELSE num_publicaciones_rest
+                     END AS num_post_rest, 
+                     CASE WHEN num_descarga_rest = -1 THEN 'ilimitado'
+                          WHEN num_descarga_rest = 0 THEN '-'
+                          ELSE num_descarga_rest
+                     END AS num_descarga_rest, 
+                     CASE WHEN num_accesos_rest IS NULL THEN '-'
+                          WHEN num_accesos_rest = 0 THEN '-'
+                          ELSE num_accesos_rest
+                     END AS num_accesos_rest,
+                     e.id_empresa_plan AS id_usuario_plan, e.estado, f.id_factura
+              FROM mfo_empresa_plan e
+              INNER JOIN mfo_plan p ON e.id_plan = p.id_plan
+              LEFT JOIN mfo_factura f ON f.id_user_emp_plan = e.id_empresa_plan AND 
+                                         f.tipo_usuario = 2 AND f.estado = 2
+              WHERE e.id_empresa = '1' AND
+                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> '')) AND e.id_empresa_plan = 57 ORDER BY e.fecha_compra ASC
+[2019/05/15 04:30:41] SQL Trans: ROLLBACK
+[2019/05/15 04:30:41] SQL Query: SELECT limite_perfiles FROM mfo_empresa_plan ep, mfo_plan p, mfo_oferta o
+            WHERE ep.id_empresa = '1' 
+            AND ep.estado = 1 AND ep.id_plan = p.id_plan AND o.id_empresa_plan = ep.id_empresa_plan 
+            AND o.id_ofertas = '142'
+[2019/05/15 04:30:41] SQL Query: SELECT id_infohv FROM mfo_descarga WHERE id_empresa = '1' AND id_ofertas = '142'
+[2019/05/15 04:30:41] SQL Query: SELECT * FROM mfo_pais ORDER BY nombre_abr ASC
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/05/15 04:30:41] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'filtroFacetas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:41] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:42] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 04:30:42] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:42] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:42] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'miraydamontezuma1'
+[2019/05/15 04:30:42] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2019/05/15 04:30:42] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:42] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'pruebacuestionario'
+[2019/05/15 04:30:43] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:43] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 04:30:54] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:54] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/05/15 04:30:54] SQL Query: SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta
+[2019/05/15 04:30:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/05/15 04:30:54] SQL Query: SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
+          INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan WHERE o.id_ofertas = 142
+[2019/05/15 04:30:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:54] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 04:30:54] SQL Query: SELECT 
+    u.telefono,
+    DATE_FORMAT(u.fecha_nacimiento, '%Y-%m-%d') AS fecha_nacimiento,
+    YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,
+    u.tipo_doc,
+    IF(u.viajar = '0' , 'NO', 'SI') as viajar,
+    IF(u.residencia = '0' , 'NO', 'SI') as residencia,
+    IF(u.discapacidad = '0' , 'NO', 'SI') as discapacidad,
+    ifnull(u.tlf_convencional, '-') as telefonoConvencional,
+    g.descripcion AS genero,
+    e.descripcion AS escolaridad,
+    sl.descripcion AS situacionLaboral,
+    c.nombre AS ciudad,
+    pais.nombre_abr AS pais,
+    pr.nombre AS provincia,
+    mpais.nombre_abr AS nacionalidad,
+    ifnull(tl.descripcion, '-') AS licencia,
+    ifnull(uni.id_univ, ifnull(uni.nombre, '-')) as universidad,
+    ifnull(es.descripcion, '-') as estadocivil
+FROM
+    mfo_usuario u
+    LEFT JOIN
+    mfo_tipolicencia tl ON tl.id_tipolicencia = u.id_tipolicencia
+  LEFT JOIN mfo_universidades uni ON uni.id_univ = u.id_univ,
+    mfo_genero g,
+    mfo_escolaridad e,
+    mfo_situacionlaboral sl,
+    mfo_ciudad c,
+    mfo_provincia pr,
+    mfo_pais pais,
+    mfo_pais mpais,
+    mfo_estadocivil es
+        
+WHERE
+    g.id_genero = u.id_genero
+        AND e.id_escolaridad = u.id_escolaridad
+        AND sl.id_situacionlaboral = u.id_situacionlaboral
+        AND pais.id_pais = pr.id_pais
+        AND pr.id_provincia = c.id_provincia
+        AND u.id_nacionalidad = mpais.id_pais
+        AND c.id_ciudad = u.id_ciudad
+        AND es.id_estadocivil = u.id_estadocivil
+        AND u.id_usuario = '1';
+[2019/05/15 04:30:54] SQL Query: SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = '1' AND id_ofertas = '142' LIMIT 1;
+[2019/05/15 04:30:54] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '1'
+            ORDER BY b.id_area
+[2019/05/15 04:30:54] SQL Query: SELECT 
+		area.id_area,
+	    area.nombre as area,
+	    subarea.nombre as subarea
+	    
+	FROM
+	    mfo_area_subareas ares,
+	    mfo_area area, mfo_subareas subarea
+	WHERE
+		ares.id_area = area.id_area AND
+	    ares.id_subareas = subarea.id_subareas AND
+	    ares.id_areas_subareas IN (114)
+[2019/05/15 04:30:54] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1;
+[2019/05/15 04:30:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/05/15 04:30:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:30:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/05/15 04:30:54] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/05/15 04:30:54] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/05/15 04:30:54] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 04:30:54] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:54] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2019/05/15 04:30:54] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:30:54] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 04:31:04] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:04] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/05/15 04:31:04] SQL Query: SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta
+[2019/05/15 04:31:04] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 04:31:04] SQL Query: SELECT * FROM mfo_oferta where id_ofertas = '142'
+[2019/05/15 04:31:04] SQL Query: SELECT id_usuario, fecha_terminado_test FROM mfo_accesos_empresas WHERE id_empresa = 1
+[2019/05/15 04:31:04] SQL Query: SELECT * FROM mfo_escolaridad ORDER BY id_escolaridad ASC
+[2019/05/15 04:31:04] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/05/15 04:31:04] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/05/15 04:31:04] SQL Query: SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
+          INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan WHERE o.id_ofertas = 142
+[2019/05/15 04:31:04] SQL Query: SELECT t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, (SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = 142 GROUP BY u.id_usuario ORDER BY pago DESC, p.fecha_postulado ASC) t2, (SELECT id_usuario,IF(SUM(estado) = 5,2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1 WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario LIMIT 0,20
+[2019/05/15 04:31:04] SQL Query: SELECT n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados, t1.numero_test FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, (SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = 142 GROUP BY u.id_usuario ORDER BY pago DESC, p.fecha_postulado ASC) t2, (SELECT id_usuario,IF(SUM(estado) = 5,2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1 WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario
+[2019/05/15 04:31:04] SQL Query: SELECT limite_perfiles FROM mfo_empresa_plan ep, mfo_plan p, mfo_oferta o
+            WHERE ep.id_empresa = '1' 
+            AND ep.estado = 1 AND ep.id_plan = p.id_plan AND o.id_empresa_plan = ep.id_empresa_plan 
+            AND o.id_ofertas = '142'
+[2019/05/15 04:31:04] SQL Query: SELECT id_infohv FROM mfo_descarga WHERE id_empresa = '1' AND id_ofertas = '142'
+[2019/05/15 04:31:04] SQL Query: SELECT * FROM mfo_pais ORDER BY nombre_abr ASC
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/05/15 04:31:05] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'filtroFacetas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:05] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 04:31:05] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:05] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2019/05/15 04:31:05] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:05] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 04:31:05] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:05] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'pruebacuestionario'
+[2019/05/15 04:31:05] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:05] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'miraydamontezuma1'
+[2019/05/15 04:31:07] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:07] SQL Query: SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1
+[2019/05/15 04:31:07] SQL Query: SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta
+[2019/05/15 04:31:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/05/15 04:31:07] SQL Query: SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
+          INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan WHERE o.id_ofertas = 142
+[2019/05/15 04:31:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:07] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'miraydamontezuma1'
+[2019/05/15 04:31:07] SQL Query: SELECT 
+    u.telefono,
+    DATE_FORMAT(u.fecha_nacimiento, '%Y-%m-%d') AS fecha_nacimiento,
+    YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,
+    u.tipo_doc,
+    IF(u.viajar = '0' , 'NO', 'SI') as viajar,
+    IF(u.residencia = '0' , 'NO', 'SI') as residencia,
+    IF(u.discapacidad = '0' , 'NO', 'SI') as discapacidad,
+    ifnull(u.tlf_convencional, '-') as telefonoConvencional,
+    g.descripcion AS genero,
+    e.descripcion AS escolaridad,
+    sl.descripcion AS situacionLaboral,
+    c.nombre AS ciudad,
+    pais.nombre_abr AS pais,
+    pr.nombre AS provincia,
+    mpais.nombre_abr AS nacionalidad,
+    ifnull(tl.descripcion, '-') AS licencia,
+    ifnull(uni.id_univ, ifnull(uni.nombre, '-')) as universidad,
+    ifnull(es.descripcion, '-') as estadocivil
+FROM
+    mfo_usuario u
+    LEFT JOIN
+    mfo_tipolicencia tl ON tl.id_tipolicencia = u.id_tipolicencia
+  LEFT JOIN mfo_universidades uni ON uni.id_univ = u.id_univ,
+    mfo_genero g,
+    mfo_escolaridad e,
+    mfo_situacionlaboral sl,
+    mfo_ciudad c,
+    mfo_provincia pr,
+    mfo_pais pais,
+    mfo_pais mpais,
+    mfo_estadocivil es
+        
+WHERE
+    g.id_genero = u.id_genero
+        AND e.id_escolaridad = u.id_escolaridad
+        AND sl.id_situacionlaboral = u.id_situacionlaboral
+        AND pais.id_pais = pr.id_pais
+        AND pr.id_provincia = c.id_provincia
+        AND u.id_nacionalidad = mpais.id_pais
+        AND c.id_ciudad = u.id_ciudad
+        AND es.id_estadocivil = u.id_estadocivil
+        AND u.id_usuario = '1001';
+[2019/05/15 04:31:07] SQL Query: SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = '1001' AND id_ofertas = '142' LIMIT 1;
+[2019/05/15 04:31:07] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '1001'
+            ORDER BY b.id_area
+[2019/05/15 04:31:07] SQL Query: SELECT 
+		area.id_area,
+	    area.nombre as area,
+	    subarea.nombre as subarea
+	    
+	FROM
+	    mfo_area_subareas ares,
+	    mfo_area area, mfo_subareas subarea
+	WHERE
+		ares.id_area = area.id_area AND
+	    ares.id_subareas = subarea.id_subareas AND
+	    ares.id_areas_subareas IN (1,186,190)
+[2019/05/15 04:31:07] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1001;
+[2019/05/15 04:31:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/05/15 04:31:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/05/15 04:31:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/05/15 04:31:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/05/15 04:31:07] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/05/15 04:31:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 04:31:07] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:07] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'empresa1'
+[2019/05/15 04:31:07] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:07] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'miraydamontezuma1'
+[2019/05/15 04:31:09] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:31:09] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'miraydamontezuma1'
+[2019/05/15 04:31:09] SQL Query: SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = '1001' AND id_ofertas = '142' LIMIT 1;
+[2019/05/15 04:31:09] SQL Query: SELECT 
+    u.telefono,
+    DATE_FORMAT(u.fecha_nacimiento, '%Y-%m-%d') AS fecha_nacimiento,
+    YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,
+    u.tipo_doc,
+    IF(u.viajar = '0' , 'NO', 'SI') as viajar,
+    IF(u.residencia = '0' , 'NO', 'SI') as residencia,
+    IF(u.discapacidad = '0' , 'NO', 'SI') as discapacidad,
+    ifnull(u.tlf_convencional, '-') as telefonoConvencional,
+    g.descripcion AS genero,
+    e.descripcion AS escolaridad,
+    sl.descripcion AS situacionLaboral,
+    c.nombre AS ciudad,
+    pais.nombre_abr AS pais,
+    pr.nombre AS provincia,
+    mpais.nombre_abr AS nacionalidad,
+    ifnull(tl.descripcion, '-') AS licencia,
+    ifnull(uni.id_univ, ifnull(uni.nombre, '-')) as universidad,
+    ifnull(es.descripcion, '-') as estadocivil
+FROM
+    mfo_usuario u
+    LEFT JOIN
+    mfo_tipolicencia tl ON tl.id_tipolicencia = u.id_tipolicencia
+  LEFT JOIN mfo_universidades uni ON uni.id_univ = u.id_univ,
+    mfo_genero g,
+    mfo_escolaridad e,
+    mfo_situacionlaboral sl,
+    mfo_ciudad c,
+    mfo_provincia pr,
+    mfo_pais pais,
+    mfo_pais mpais,
+    mfo_estadocivil es
+        
+WHERE
+    g.id_genero = u.id_genero
+        AND e.id_escolaridad = u.id_escolaridad
+        AND sl.id_situacionlaboral = u.id_situacionlaboral
+        AND pais.id_pais = pr.id_pais
+        AND pr.id_provincia = c.id_provincia
+        AND u.id_nacionalidad = mpais.id_pais
+        AND c.id_ciudad = u.id_ciudad
+        AND es.id_estadocivil = u.id_estadocivil
+        AND u.id_usuario = '1001';
+[2019/05/15 04:31:09] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '1001'
+            ORDER BY b.id_area
+[2019/05/15 04:31:09] SQL Query: SELECT 
+		area.id_area,
+	    area.nombre as area,
+	    subarea.nombre as subarea
+	    
+	FROM
+	    mfo_area_subareas ares,
+	    mfo_area area, mfo_subareas subarea
+	WHERE
+		ares.id_area = area.id_area AND
+	    ares.id_subareas = subarea.id_subareas AND
+	    ares.id_areas_subareas IN (1,186,190)
+[2019/05/15 04:31:09] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1001;
