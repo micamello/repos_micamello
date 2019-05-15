@@ -39,17 +39,14 @@
             }
             
 						shuffle($array_group);
-
 						foreach ($array_group as $key => $value) {
 							$pregunta = "";
 							$pregunta = current($value);
 							$actual = $value;
-
 							echo "<div class='panel panel-default'>";
 							echo "<div class='error_msg' id='error".$indice."'></div>";
 							echo "<div class='panel-heading'><h5>Pregunta ".$indice."</h5></div>";
 							echo "<div class='panel-body'>";
-
 								echo "<div class='contenedor_p_".$pregunta['id_pregunta']."''>";
 								echo "<div class='row'>";
                 				echo "<div class='".$columna."col-md-6'>";
@@ -62,7 +59,6 @@
 									echo "</div><br><br>";
 								}
 								echo "</div>";
-
 								echo "<div class='col-md-6'>";
 								$l = 1;
 								foreach ($actual as $key => $value) {
@@ -70,10 +66,8 @@
 									echo "<div class='drop_destino'><input type='hidden' name='orden[]' value='".($l++)."'></div><br><br>";
 								}
 								echo "</div>";
-
 								echo "</div>";
 								echo "</div>";
-
 							echo "</div>";
 							echo "</div>";
 							echo "<br><br>";

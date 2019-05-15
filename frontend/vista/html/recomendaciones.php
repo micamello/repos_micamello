@@ -41,7 +41,7 @@
               <div class="row">          
                 <div class="col-xs-12">
                   <div class="text-center" style="margin-top: 20px;">
-                    <input type="submit" class="btn-blue"  value="Enviar" onclick="validaForm(3,'recomendaciones')"/>
+                    <input type="button" class="btn-blue"  value="Enviar" onclick="validaForm(3,'recomendaciones')"/>
                   </div>
                 </div>
               </div>

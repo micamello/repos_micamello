@@ -1405,3 +1405,27 @@ WHERE
 		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
 		AND i.id_idioma = nii.id_idioma
 		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1001;
+[2019/05/15 04:43:23] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:43:23] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 04:43:23] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 04:43:23] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 04:43:23] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 04:43:23] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 04:43:23] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 04:43:23] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 04:43:26] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:43:26] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 04:43:26] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 04:43:26] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 04:43:26] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 04:43:26] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 04:43:26] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 04:43:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 04:43:46] Utils::createSession empezo una nueva sesion
+[2019/05/15 04:43:46] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 04:43:46] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 04:43:46] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 04:43:46] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 04:43:46] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 04:43:46] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 04:43:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

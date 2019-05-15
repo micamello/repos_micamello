@@ -530,11 +530,13 @@ function enviarFormulario(form){
       document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
       $('#form_paypal').submit();
     }
-  }else if(estado == 1 && form == 'form_payme'){
-    $('#shippingState').val($("#provinciaPM option:selected").text());
-    $('#shippingCity').val($("#ciudadPM option:selected").text());    
+  }else if(estado == 1 && form == 'form_payme'){    
+    $('#shippingState').attr('value',$("#provinciaPM").children('option:selected').text());
+    $('#shippingCity').attr('value',$("#ciudadPM").children('option:selected').text());    
     $('#reserved18').val($("#tipo_docPM").val());    
     $('#reserved19').val($("#dniPM").val());
+    //alert($('#shippingState').val());
+    //alert($('#shippingCity').val());
     AlignetVPOS2.openModal($('#rutaPayMe').val());    
   }  
 }
