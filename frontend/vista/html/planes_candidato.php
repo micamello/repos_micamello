@@ -9,7 +9,7 @@
     <div class="col-md-12">
       <div class="pricingdiv flex-container">
         <?php $count = 0; $class=""; foreach($planes as $plan){$count++;
-              if($count == 1){$class = "izq";}if($count == 3){$class = "der";}
+              if($count == 1){$class = "izq";}if($count == 2){$class = "cen";}if($count == 3){$class = "der";}
               $plan["id_plan"] = Utils::encriptar($plan["id_plan"]);
             ?>
         <ul id="" class="<?php echo $class; ?> theplan plan-tabla col-xs-12 col-md-4 flex-item">

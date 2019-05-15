@@ -79,7 +79,7 @@ abstract class Controlador_Base{
       require_once "includes/gg_api/config.php";
       $this->gg_URL = $gClient->createAuthUrl();
       // LINKEDIN
-      $this->lk = "linkedin.php";
+      $this->lk = PUERTO."://".HOST."/linkedin.php";
       // TWITTER
       require_once "includes/tw_api/config.php";
       $this->tw = $connection->url("oauth/authorize", array('oauth_token' => $request_token['oauth_token']));

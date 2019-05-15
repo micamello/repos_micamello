@@ -663,7 +663,7 @@ class Controlador_Aspirante extends Controlador_Base
                 }
             }
             $data_user = self::datauser($username, $id_oferta, $vista);
-            print_r($id_oferta);
+            // print_r($id_oferta);
             // exit();
             $breadcrumbs = array();
             $breadcrumbs['verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta)."/1"] = "Ver aspirantes";

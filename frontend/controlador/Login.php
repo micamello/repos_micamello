@@ -55,7 +55,8 @@ class Controlador_Login extends Controlador_Base {
     $arrsectorind = Modelo_SectorIndustrial::consulta();
     $tags = array('social'=>$social_reg,
                   'genero'=>$arrgenero,
-                  'arrsectorind'=>$arrsectorind);
+                  'arrsectorind'=>$arrsectorind,
+                  'vista'=>'login');
 
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "DniRuc_Validador";

@@ -16,8 +16,8 @@
         </div>
         <br>
       </div>           
-      <div class="col-md-2"></div>
-      <div class="col-md-8">        
+      <!-- <div class="col-md-2"></div> -->
+      <div class="col-md-8 col-md-offset-2">        
         <div class="panel panel-default" id="panel_1" style="display:none;">
           <div class="panel-body">
             <form role="form" name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">
@@ -139,8 +139,8 @@
       </div>      
       <div class="col-md-2"></div>
       
-      <div class="col-md-2"></div>  
-      <div class="col-md-8">
+      <!-- <div class="col-md-2"></div>   -->
+      <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default" id="panel_2" style="display:none;">
           <div class="panel-body">
             <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/PayPal.jpg"><br><br>            
@@ -221,10 +221,10 @@
           </div>
         </div>    
       </div>  
-      <div class="col-md-2"></div>  
-      <div class="col-md-2"></div>  
+      <!-- <div class="col-md-2"></div>   -->
+      <!-- <div class="col-md-2"></div>   -->
 
-      <div class="col-md-8">
+      <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default" id="panel_3">          
           <div class="panel-body">
             <div align="center">

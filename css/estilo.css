@@ -339,8 +339,18 @@ display: inline;
     width: 40px;
     }
     .padding-5{
-    padding: 5px 0px;
-}
+        padding: 5px 0px;
+    }
+    .izq{
+        border: 1px solid #204478
+
+    }
+    .der{
+        border: 1px solid #204478
+    }
+    .cen{
+        border: 1px solid #204478
+    }
 }
 
 /*PANTALLAS MEDIANAS*/
@@ -355,6 +365,16 @@ display: inline;
     }
     .imagen{
         width: 40px;
+    }
+    .izq{
+        border: 1px solid #204478
+
+    }
+    .der{
+        border: 1px solid #204478
+    }
+    .cen{
+        border: 1px solid #204478
     }
 }
 /*PANTALLAS GRANDES*/
@@ -398,11 +418,25 @@ display: inline;
   background-color: #204478;
   color: white;
 }
+
+/*li:has(> ul.nav){
+    padding: 0px !important;
+    margin: 0px !important;
+    color: red;
+}*/
+/*.navbar-nav > li > a {
+    padding-top: 15px;
+    padding-bottom: 0px;
+}*/
+
+/*.dropdown-toggle{padding-bottom: 0px;}*/
+.dropdown>.dropdown-toggle{
+    padding-bottom: 0px;
+}
 /*MENU*/
 .btn-menu-active{
    border-bottom: 1px solid #fff; 
-
- 
+   /*position: absolute;*/
 }
 .product{
     margin-top: 100px;
