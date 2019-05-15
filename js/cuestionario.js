@@ -1,10 +1,11 @@
-// $(window).on('load',function(){
-//   $('#msg_inforcuestionario').modal('show');
-// });
+$(document).ready(function(){
+	// alert("eder");
+	$('#msg_canea').modal('show');
+})
 // MÉTODO DE SELECCIÓN
 if($('#metodoSeleccion').length){
 	$('#metodoSeleccion').on('submit', function(event){
-		// var modo_seleccion = $('[name="seleccion"]:checked').length;
+
 		console.log($('[name="seleccion"]:checked').length);
 		if($('[name="seleccion"]:checked').length > 0){
 			
@@ -17,11 +18,12 @@ if($('#metodoSeleccion').length){
 }
 
 function crearMensajeErrorBig(obj, mensaje){
-	var mensajeError = $(obj).parents().find('.error');
-	mensajeError.html('<div class="alert alert-danger">'+mensaje+'</div>');
+	// var mensajeError = $(obj).parents().find('.error');
+	// mensajeError.html('<div class="alert alert-danger">'+mensaje+'</div>');
 	// console.log(mensajeError);
+	swal('Advertencia!', 'Seleccione un método', 'error');
 }
-function eliminarMensajeErrorBig(obj){
-	var mensajeError = $(obj).parents().find('.error');
-	mensajeError.html('');
-}
+// function eliminarMensajeErrorBig(obj){
+// 	var mensajeError = $(obj).parents().find('.error');
+// 	mensajeError.html('');
+// }

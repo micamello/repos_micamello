@@ -45,11 +45,13 @@ try{
     $vl_insert["shippingEmail"] = $_POST["shippingEmail"];
     $vl_insert["shippingZIP"] = $_POST["shippingZIP"];
     $vl_insert["purchaseAmount"] = $_POST["purchaseAmount"];
-    $vl_insert["IDTransaction"] = $_POST["IDTransaction"];    
+    $vl_insert["IDTransaction"] = $_POST["IDTransaction"];
+    $vl_insert["shippingState"] = $_POST["shippingState"];    
+    $vl_insert["shippingCity"] = $_POST["shippingCity"];    
     if (!Modelo_Payme::guardar($vl_insert)){
       throw new Exception("Error Insert IPN Payme");
     }
-    if ($_POST["authorizationResult"] = "00"){
+    if ($_POST["authorizationResult"] = "00" && $_POST["errorCode"] = "00"){
       Utils::envioCorreo('desarrollo@micamello.com.ec','CRON_PAYME',print_r($_POST,true));
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
     } 

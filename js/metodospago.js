@@ -531,8 +531,8 @@ function enviarFormulario(form){
       $('#form_paypal').submit();
     }
   }else if(estado == 1 && form == 'form_payme'){
-    //$('#shippingState').val($("#provinciaPM option:selected").text());
-    //$('#shippingCity').val($("#ciudadPM option:selected").text());    
+    $('#shippingState').val($("#provinciaPM option:selected").text());
+    $('#shippingCity').val($("#ciudadPM option:selected").text());    
     $('#reserved18').val($("#tipo_docPM").val());    
     $('#reserved19').val($("#dniPM").val());
     AlignetVPOS2.openModal($('#rutaPayMe').val());    
@@ -616,11 +616,11 @@ function validarFormulario(){
     var apellido = document.getElementById('shippingLastName').value;
     var direccion = document.getElementById('shippingAddress').value;
     var telefono = document.getElementById('shippingPhone').value;
-    //var zip = document.getElementById('shippingZIP').value;
+    var zip = document.getElementById('shippingZIP').value;
     var dni = document.getElementById('dniPM');
     var tipo = document.getElementById('tipo_docPM').value;
-    //var provincia = document.getElementById('provinciaPM');
-    //var ciudad = document.getElementById('ciudadPM');
+    var provincia = document.getElementById('provinciaPM');
+    var ciudad = document.getElementById('ciudadPM');
     var err_nom = "err_nomPM"; var seccion_nombre = "seccion_nombrePM";
     var err_apell = "err_apellidoPM"; var seccion_apellido = "seccion_apellidoPM";
     var err_dir = "err_dirPM"; var seccion_dir = "seccion_dirPM"; 
@@ -628,9 +628,9 @@ function validarFormulario(){
     var err_dni = "err_dniPM"; var seccion_dni = "seccion_dniPM";
     var err_tipo = "err_tipoPM"; var seccion_tipo = "seccion_tipoPM";
     var err_correo = "err_correoPM"; var seccion_correo= "seccion_correoPM";
-    //var err_zip = "err_zipPM"; var seccion_zip= "seccion_zipPM";
-    //var err_prov = "err_provPM"; var seccion_prov= "seccion_provPM";
-    //var err_ciu = "err_ciuPM"; var seccion_ciu= "seccion_ciuPM";
+    var err_zip = "err_zipPM"; var seccion_zip= "seccion_zipPM";
+    var err_prov = "err_provPM"; var seccion_prov= "seccion_provPM";
+    var err_ciu = "err_ciuPM"; var seccion_ciu= "seccion_ciuPM";
     var btn = "btnpayme";    
           
     if(apellido.length <= '50'){
@@ -643,7 +643,7 @@ function validarFormulario(){
       colocaError(err_apell,seccion_apellido,"Máximo 50 caracteres",btn);
       error = 1;    
     }
-    /*if(zip.length <= '10'){
+    if(zip.length <= '10'){
       if(validarDir(zip,err_zip,seccion_zip,btn)){
         error = 1;
       }else{
@@ -666,7 +666,7 @@ function validarFormulario(){
     }
     else{
       quitarError(err_ciu,seccion_ciu);
-    }*/
+    }
   }
   
   if(nombre.length <= '30'){
