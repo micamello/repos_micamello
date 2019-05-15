@@ -1318,3 +1318,129 @@ presa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres,
             LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
             LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
             WHERE l.username = 'galletas'
+[2019/05/15 08:17:38] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:17:38] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 08:17:38] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 08:17:38] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 08:17:38] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 08:17:38] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 08:17:38] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 08:17:38] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/05/15 08:17:38] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 08:17:38] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:17:38] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 08:17:41] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:17:41] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 08:17:41] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 08:17:41] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 08:17:41] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 08:17:41] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 08:17:41] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 08:17:41] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/05/15 08:17:41] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 08:17:41] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:17:41] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 08:17:43] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:17:43] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 08:17:43] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 08:17:43] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 08:17:43] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 08:17:43] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 08:17:43] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 08:17:43] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/05/15 08:17:43] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 08:17:44] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:17:44] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 08:18:10] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:18:10] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 08:18:10] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 08:18:10] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 08:18:10] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 08:18:10] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 08:18:10] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 08:18:10] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/05/15 08:18:10] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 08:18:11] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:18:11] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 08:18:44] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:18:44] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 08:18:44] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 08:18:44] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 08:18:44] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 08:18:44] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 08:18:44] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 08:18:44] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/05/15 08:18:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 08:18:44] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:18:44] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 08:18:49] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:18:49] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 08:18:49] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 08:18:49] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 08:18:49] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 08:18:49] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 08:18:49] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 08:18:49] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/05/15 08:18:49] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 08:18:50] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:18:50] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/05/15 08:19:18] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:19:18] SQL Query: SELECT * FROM mfo_banner WHERE estado = 1 AND tipo = 1 order by orden ASC
+[2019/05/15 08:19:18] SQL Query: SELECT * FROM mfo_area
+[2019/05/15 08:19:18] SQL Query: SELECT * FROM mfo_testimonio where estado = 1 AND id_pais = '39' ORDER BY orden LIMIT 3
+[2019/05/15 08:19:18] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/15 08:19:18] SQL Query: SELECT * FROM mfo_genero
+[2019/05/15 08:19:18] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/15 08:19:18] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '1' LIMIT 1
+[2019/05/15 08:19:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/15 08:19:19] Utils::createSession empezo una nueva sesion
+[2019/05/15 08:19:19] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
