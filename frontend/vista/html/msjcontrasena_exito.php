@@ -14,7 +14,7 @@
             <div align="center" class="col-md-12">
               <h3>¡El cambio de contrase&ntilde;a se ha realizado con &eacute;xito!</h3><br>
               <h4>Por motivos de seguridad cerraremos la sesi&oacute;n, por favor vuelva a ingresar utilizando la nueva contrase&ntilde;a</h4><br>
-              <button href="<?php echo PUERTO."://".HOST."/login/";?>" class="btn-light-blue">Finalizar</button>
+              <a href="<?php echo PUERTO."://".HOST."/login/";?>" class="btn-light-blue">Finalizar</a>
             </div>
             <div class="row">          
             </div>

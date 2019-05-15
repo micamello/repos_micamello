@@ -18,6 +18,9 @@ class Proceso_Facturacion{
   public $telefComprador;
   public $emailComprador;
   public $tipoIdentifComprador;
+  public $provinciaComprador;
+  public $ciudadComprador;
+  public $codpostalComprador;
   public $importeTotal;
   public $codigoPrincipal;
   public $descripdetalle;
@@ -230,7 +233,10 @@ class Proceso_Facturacion{
   function valoresinfoAdicional(){
     $infoAdicional = array("Dirección:" => $this->direccionComprador,
                            "Teléfono:" => $this->telefComprador,
-                           "Email:" => $this->emailComprador);
+                           "Email:" => $this->emailComprador,
+                           "Provincia:" => $this->provinciaComprador,
+                           "Ciudad:" => $this->ciudadComprador,
+                           "Código Postal:" => $this->codpostalComprador);
     return $infoAdicional;
   }
 

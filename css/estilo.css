@@ -613,16 +613,16 @@ margin: 0 auto;
     display: inline-flex;      
 }
 /*PLANES*/
-#plan-tabla{
+.plan-tabla{
     padding: 1px;
 }
-#plan-dias{
+.plan-dias{
     color: #182e4f;
     font-weight: bold;
     font-size: 20pt;
     text-transform: uppercase;
 }
-#plan-precio{
+.plan-precio{
     color: #204478;
     font-weight: bold;
     font-size: 40pt;
@@ -632,19 +632,20 @@ margin: 0 auto;
     font-weight: bold;
     font-size: 45pt;
 }
-#select-plan{
+.select-plan{
     margin: 20px 30px;
 }
-#lista-plan{
+.lista-plan{
     color: #4b94d9;
     margin-left: 30px;
     padding-right: 20px;
+    text-align: justify;
 }
-#lista-plan-2{
+.lista-plan-2{
     color: #6b6b6b;
     margin: 0px;
 }
-#titulo-planes {
+.titulo-planes {
     background-color: #204478;
     text-transform: uppercase;
     color: white;
@@ -1328,3 +1329,52 @@ ul.checkout-bar a {
     padding-top: 10px;
     color: #204478;
 }
+.flex-container {
+    display: -webkit-flex; 
+    display: flex; 
+    -webkit-flex-flow: row wrap; 
+    flex-flow: row wrap;
+}
+
+.flex-item {
+    display:block ;
+}
+.btn-bottom{
+    position: absolute; bottom:5px; left: 50%;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+.contenido-modal-rec{
+    font-family: Roboto;
+    color: #000000;
+    font-size: 13pt;
+    margin-right: 15px;
+    /*padding-top: 30px;*/
+    /*text-transform: uppercase;*/
+}
+.contenido-modal-list{
+    font-family: Roboto;
+    color: #000000;
+    font-size: 13pt;
+    margin-right: 15px;
+    /*padding-top: 30px;*/
+    /*text-transform: uppercase;*/
+}
+.qs-subt-1{
+    font-family: Roboto;
+    color: #204478;
+    font-size: 28pt;
+    padding-top: 30px;
+    text-transform: uppercase;
+}
+
+.canea-text-modal{
+    background-color: transparent;
+    text-align: center;
+    font-weight: 1000;
+    font-size: 170pt;
+    font-family: ‘Antipasto’;
+    color: #204478;
+        font-size: 50pt;
+    }

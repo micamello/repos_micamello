@@ -32,7 +32,9 @@ if (!empty($registros) && is_array($registros)){
         empty($registro["reserved17"]) || empty($registro["shippingFirstName"]) ||         
         empty($registro["shippingEmail"]) || empty($registro["reserved18"]) ||        
         empty($registro["shippingPhone"]) || empty($registro["reserved19"]) ||         
-        empty($registro["shippingAddress"]) || empty($registro["shippingLastName"])){       
+        empty($registro["shippingAddress"]) || empty($registro["shippingLastName"]) || 
+        empty($registro["shippingCity"]) || empty($registro["shippingState"]) ||
+        empty($registro["shippingZIP"])){       
     	Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Usuario no tiene valores '.print_r($registro,true));
       continue;
     }    
@@ -57,8 +59,12 @@ if (!empty($registros) && is_array($registros)){
                               'correo'=>$registro["shippingEmail"], 
                               'tipodoc'=>$registro["reserved18"], 
                               'telefono'=>$registro["shippingPhone"], 
-                               'dni'=>$registro["reserved19"], 
-                              'direccion'=>Utils::no_carac($registro["shippingAddress"]));
+                              'dni'=>$registro["reserved19"], 
+                              'direccion'=>Utils::no_carac($registro["shippingAddress"]),
+                              'provincia'=>Utils::no_carac($registro["shippingState"]),
+                              'ciudad'=>Utils::no_carac($registro["shippingCity"]),
+                              'codpostal'=>Utils::no_carac($registro["shippingZIP"])  
+                            );
                        
     //objeto procesador      
     $monto = substr($registro["purchaseAmount"],0,-2).".".substr($registro["purchaseAmount"], -2);     
