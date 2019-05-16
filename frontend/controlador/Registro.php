@@ -27,8 +27,7 @@ class Controlador_Registro extends Controlador_Base {
         $this->procesoGuardado();
       break;
       default:
-        // $this->procesoGuardado();
-      $this->mostrarDefault();
+        $this->mostrarDefault();
       break;
     } 
   }

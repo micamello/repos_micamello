@@ -23,8 +23,10 @@ class Controlador_Recomendacion extends Controlador_Base {
 
           if(self::envioRecomendacionesUser($data)){
             $_SESSION['mostrar_exito'] = 'Sus recomendaciones han sido enviadas exitosamente';
+            Utils::doRedirect(PUERTO.'://'.HOST.'/');
           }else{
             $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones fall\u00F3, intente de nuevo';
+            Utils::doRedirect(PUERTO.'://'.HOST.'/recomendacion/');
           }
         }else{
           $_SESSION['mostrar_error'] = 'El correo con sus recomendaciones fall\u00F3, intente de nuevo';
@@ -33,11 +35,7 @@ class Controlador_Recomendacion extends Controlador_Base {
     } catch (Exception $e) {
         $_SESSION['mostrar_error'] = $e->getMessage();
     }
-    
-    $tags["template_css"][] = "DateTimePicker";
-    $tags["template_js"][] = "DniRuc_Validador";
-    $tags["template_js"][] = "DateTimePicker";
-    $tags["template_js"][] = "micamello_registro";
+    $tags = array('vista'=>'recomendacion');
     Vista::render('recomendaciones', $tags);
   }
 

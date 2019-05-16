@@ -1,17 +1,25 @@
 header{
-        padding: -34px 0px 0px -57px;
+        padding: -54px -58px 0px -58px;
+        /*margin-bottom: 220px;*/
 }
 
 main{
-        margin: 0px 155px 55px 155px; 
-        font-size: 30px;
+        /*margin: 50px 155px 55px 155px; */
+        /*font-size: 30px;*/
 }
 
 footer{
         padding-bottom: -34px;
-        padding-right: -57px;
-        text-align: right;
-}/*
+        padding-right: -58px;
+        padding-left: -58px;
+        /*text-align: right;*/
+}
+
+body{
+}
+/*
+
+
 
 .titulo_1{
         text-align: center; 
