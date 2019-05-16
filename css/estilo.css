@@ -117,104 +117,6 @@ display: inline;
     font-size: 14pt;
     padding-bottom: 30px;
 }
-.btn-minimalist{
-    background-color: transparent;
-    border: 2px solid white;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: white;
-    font-size: 16px;
-        position: relative;
-    display: block;
-}
-.btn-min-light{
-    color: #4b98dd;
-    background-color: transparent;
-    border: 2px solid #4b98dd;
-    padding: 10px 30px;
-    text-transform: uppercase;
-    
-}
-.btn-minimalist-blue{
-    background-color: transparent;
-    border: 2px solid #204478;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: white;
-    font-size: 16px;
-}
-
-.btn-minimalista{
-    background-color: transparent;
-    border: 2px solid #fff;
-    margin: 10px;
-    color: white;
-    padding: 10px 20px;
-}
-.btn-minimalista a{
-    color: white;
-    font-size: 16pt;
-}
-.btn-red{
-    border-color: transparent;
-    font-family: ‘Roboto’;
-    font-size: 16pt;
-    background-color: #ad3131;
-    color: white;
-    text-transform: uppercase;
-    padding: 15px 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.btn-light-blue{
-    border-color: transparent;
-    font-family: ‘Roboto’;
-    font-size: 16pt;
-    background-color: #4b98dd;
-    color: white;
-    text-transform: uppercase;
-    padding: 15px 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.btn-blue{
-    border-color: transparent;
-    font-family: ‘Roboto’;
-    font-size: 16pt;
-    background-color: #204478;
-    color: white;
-    text-transform: uppercase;
-    padding: 10px 40px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-.btn-blue.disabled{
-    background-color: #303d4c;
-    color: #989899;
-    cursor: not-allowed;
-}
-.btn-blue.disabled:hover{
-    background-color: #303d4c;
-    color: #989899;
-    cursor: not-allowed;
-}
-.btn-blue.disabled:hover a{
-    background-color: #303d4c;
-    color: #989899;
-    cursor: not-allowed;
- }
-
-.btn-blue a{
-    color: white;
-}
-.btn-blue:hover{
-    color: #204478;
-    border: 2px solid #204478;
-    background-color: transparent;
-}
-.btn-blue:hover a{
-    color: #204478;
- }
  .banner-publicidad{
     background-color: #4b98dd;
  }
@@ -1004,15 +906,6 @@ padding-top: 10px;
 
 }
 
-
-.btn-minimalist{
-    background-color: transparent;
-    border: 2px solid white;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: white;
-    font-size: 16px;
-}
 .iconos{
     color: white;
     border: 1px solid white;
@@ -1409,3 +1302,201 @@ ul.checkout-bar a {
     margin: 2px auto;
     z-index: 1100 !important;
 }
+
+.imagen-perfil-2{
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    background: #22242a;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+}
+
+
+/************************************************************nuevos estilos*************************************/
+#opcional{
+    font-size: 10px;;
+}
+
+.restante{
+    margin-top:30px; 
+    margin-bottom:15px;
+}
+
+.errorClass{
+    color: red;
+    position: absolute;
+    font-size: 12px;
+    font-family: ‘Roboto’, sans-serif !important;
+    font-weight: bold;
+    top: -15px;
+}
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+.modal-dialog {
+    margin: 2px auto;
+    z-index: 1100 !important;
+}
+
+.imagen-perfil-2{
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+
+    background: #22242a;
+    box-shadow: 0 1.5px 4px rgba(0, 0, 0, 0.24), 0 1.5px 6px rgba(0, 0, 0, 0.12);
+}
+
+/**BOTONES**/
+
+.btn-minimalist{
+    background-color: transparent;
+    border: 2px solid white;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-size: 16px;
+        position: relative;
+    display: block;
+}
+.btn-min-light{
+    color: #4b98dd;
+    background-color: transparent;
+    border: 2px solid #4b98dd;
+    padding: 10px 30px;
+    text-transform: uppercase;
+    
+}
+.btn-minimalist-blue{
+    background-color: transparent;
+    border: 2px solid #204478;
+    margin-left: 10px;
+    margin-right: 10px;
+    color: white;
+    font-size: 16px;
+}
+
+.btn-minimalista{
+    background-color: transparent;
+    border: 2px solid #fff;
+    margin: 10px;
+    color: white;
+    padding: 10px 20px;
+}
+.btn-minimalista a{
+    color: white;
+    font-size: 16pt;
+}
+
+.btn-minimalista:hover{
+    color: white;
+    text-decoration: none;
+    border: 2px solid white;
+    background-color: transparent;
+}
+.btn-minimalista:hover a{
+    color: white;
+    text-decoration: none;
+ }
+.btn-red{
+    border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #ad3131;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+}
+.btn-red a{
+    color: white;
+    text-decoration: none;
+}
+.btn-red:hover{
+    color: #ad3131;
+    border: 2px solid #ad3131;
+    background-color: transparent;
+    text-decoration: none;
+}
+.btn-red:hover a{
+    color: #ad3131;
+    text-decoration: none;
+ }
+.btn-light-blue{
+    border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #4b98dd;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;    
+    border: 2px solid transparent;
+    line-height: normal;
+}
+.btn-light-blue a{
+    color: white;
+    text-decoration: none;
+}
+.btn-light-blue:hover{
+    color: #4b98dd;
+    border: 2px solid #4b98dd;
+    background-color: transparent;
+    text-decoration: none;
+}
+.btn-light-blue:hover a{
+    color: #4b98dd;
+    text-decoration: none;
+ }
+.btn-blue{
+    border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #204478;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 2px solid transparent;    
+    line-height: normal;
+    cursor: pointer;
+}
+.btn-blue.disabled{
+    background-color: #303d4c;
+    color: #989899;
+    cursor: not-allowed;
+}
+.btn-blue.disabled:hover{
+    background-color: #303d4c;
+    color: #989899;
+    cursor: not-allowed;
+}
+.btn-blue.disabled:hover a{
+    background-color: #303d4c;
+    color: #989899;
+    cursor: not-allowed;
+ }
+.btn-blue a{
+    color: white;
+}
+.btn-blue:hover{
+    color: #204478;
+    border: 2px solid #204478;
+    background-color: transparent;
+    text-decoration: none;
+}
+.btn-blue:hover a{
+    color: #204478;
+    text-decoration: none;
+ }

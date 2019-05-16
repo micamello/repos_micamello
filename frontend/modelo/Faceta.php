@@ -1,7 +1,7 @@
 <?php 
 class Modelo_Faceta{
   
-  public static function obtenerLiterales(){
+  /*public static function obtenerLiterales(){
     echo $sql = "SELECT id_faceta,SUBSTRING(descripcion, 1, 1) as faceta FROM mfo_faceta WHERE estado = 1";  
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
     $datos = array();
@@ -12,7 +12,7 @@ class Modelo_Faceta{
       }
     }
     return $datos;         
-  }
+  }*/
   public static function obtenerFacetas(){
     
     $sql = "SELECT id_faceta,descripcion as faceta FROM mfo_faceta WHERE estado = 1";  

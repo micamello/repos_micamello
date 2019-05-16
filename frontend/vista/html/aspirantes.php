@@ -633,7 +633,7 @@
 
 				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
 					<a id="btn_accesos_cancelar" class="btn-red solo-texto dis-mov">Cancelar</a>
-					<a id="btn_accesos_confirmar" style="padding:15px 40px" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
+					<a id="btn_accesos_confirmar" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
 					<?php if($vista == 1){ ?> 
 						<div class="restante" align="right"> 
 							<b>N&uacute;mero de accesos restantes: 
@@ -1058,14 +1058,14 @@
 		            <div class="col-md-12">
 		              <p>Los accesos tienen como funcionalidad, permitir que las empresas completen el proceso de selección</p><hr>
 		            </div>
-		            <div class="col-md-6">
+		            <div class="col-md-8">
 		              <p class="subt"><b>Beneficios </b></p>
 		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede completar el proceso de selección de personal.</p></li>
 		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA.</p></li>
 		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede activar uno o varios accesos, de acuerdo al plan contratado. </p></li>
 		            </div>
-		            <div class="col-md-6" style="text-align: center !important;"><br><br><br><br>
-		              <button style="padding: 15px !important" type="button" class="btn-light-blue" data-dismiss="modal">OK</button>
+		            <div class="col-md-4" style="text-align: center !important;"><br><br><br><br>
+		              <button style="padding: 15px !important" type="button" class="btn-light-blue" data-dismiss="modal">Aceptar</button>
 		            </div>
 		            <div class="col-md-12">
 		              <hr>

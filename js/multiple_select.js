@@ -49,7 +49,7 @@ $.fn.multiple_select = function(options){
         listado_opciones = "No hay ninguna opción";
     }
     
-    var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
+    var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon' style='position:inherit'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
     
     padre_objeto.after(panel);
     var numero = $('#'+id_panel).siblings('label')[0];
@@ -232,7 +232,7 @@ function inicializarDependencia(obj){
         if(settings.dependence.items != false){
             var subpanelNumber = ' (máx: '+settings.dependence.items+')';
         }
-        var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
+        var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon' style='position:inherit'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
         padre_objeto.after(panel);
         var numero = $('#'+id_panel).siblings('label')[0];
         numero.textContent+= subpanelNumber;
