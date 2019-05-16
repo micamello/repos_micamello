@@ -412,7 +412,7 @@ function validaForm(tipo,btn){
 
 function validarNumTelf(num,err_telf,seccion_telf,btn){
 
-  var expreg_telf = /^[0-9]+$/;
+  var expreg_telf = /^[0-9]{9,15}$/;
   var error = 0;
 
   if(num == null || num.length == 0 || /^\s+$/.test(num)){
@@ -421,9 +421,8 @@ function validarNumTelf(num,err_telf,seccion_telf,btn){
       error = 1;
 
   }else if(!expreg_telf.test(num)){
-
-      colocaError(err_telf,seccion_telf,"Formato incorrecto, solo numeros",btn);
-      error = 1; 
+      colocaError(err_telf,seccion_telf,"Formato incorrecto, solo numeros (min 9, máx 15)",btn);
+      error = 1;
 
   }else{
       quitarError(err_telf,seccion_telf);
@@ -434,14 +433,14 @@ function validarNumTelf(num,err_telf,seccion_telf,btn){
 function validarDir(direccion,err_dir, seccion_dir,btn){
 
   var error = 0;
-  var expreg1 = /^[a-z A-Z0-9ñÑÁÉÍÓÚáéíóú]+$/;
+  var expreg1 = /^[a-z A-Z0-9ñÑÁÉÍÓÚáéíóú /\n/]+$/;
 
   if(direccion == null || direccion.length == 0 || /^\s+$/.test(direccion)){
 
     colocaError(err_dir, seccion_dir,"El campo no puede ser vac\u00EDo",btn);
     error = 1; 
 
-  }else if(!expreg1.test(direccion)){
+  }else if(expreg1.test(direccion) == false){
 
     colocaError(err_dir, seccion_dir,"Formato incorrecto, solo letras y n\u00FAmeros",btn); 
     error = 1;
@@ -500,6 +499,7 @@ function validaCampos(form,btn){
 
 function verifyErrors(){
   var listerrors = document.getElementsByClassName('msg_error');
+  console.log(listerrors.length);
   return listerrors.length;
 }
 

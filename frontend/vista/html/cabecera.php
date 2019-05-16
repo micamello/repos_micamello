@@ -16,12 +16,10 @@
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap.css">
   <!-- Archivo css micamello mic.css -->
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/mic.css">
-  <!--Theme custom css -->
-  <!--<link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/style.css">-->
+  <!--Theme custom css -->  
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/media-queries.css">
   <link href="<?php echo PUERTO."://".HOST;?>/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-  <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">
-  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/assets/css/font-awesome.min.css">
+  <link href="<?php echo PUERTO."://".HOST;?>/css/cookies.css" rel="stylesheet" type="text/css">  
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap-multiselect.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/micamello.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/estilo.css">

@@ -240,6 +240,9 @@ display: inline;
     .imagen{
     width: 40px;
     }
+    .canea-text-modal{
+        font-size: 40pt;
+    }
     .padding-5{
         padding: 5px 0px;
     }
@@ -268,6 +271,10 @@ display: inline;
     .imagen{
         width: 40px;
     }
+    .canea-text-modal{
+        font-size: 100pt;
+
+    }
     .izq{
         border: 1px solid #204478
 
@@ -287,6 +294,11 @@ display: inline;
    .vel-titulo{
     font-size: 40pt;
 }
+.canea-text-modal{
+        font-size: 150pt;
+
+        margin-top: -40px;
+    }
 #btn-rojo{
         font-size: 16pt;
     }
@@ -1304,10 +1316,8 @@ ul.checkout-bar a {
     background-color: transparent;
     text-align: center;
     font-weight: 1000;
-    font-size: 170pt;
     font-family: ‘Antipasto’;
     color: #204478;
-        font-size: 50pt;
 }
 
 

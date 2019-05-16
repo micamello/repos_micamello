@@ -41,46 +41,45 @@ $_SESSION['mostrar_error'] = ""; ?>
 	<br><br><br>
 </div>
 <?php } ?>
-<form role="form" name="form_editarPerfil" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/perfil/" enctype="multipart/form-data">
-	<div class="container"><br>
-	    
-	        <div class="col-md-12">
-	            <div class="col-md-4">
-	                <div id="seccion_img" class="panel panel-default shadow">
-	                	<img id="imagen_perfil" width="100%" alt="fotoPerfil" src="<?php echo PUERTO."://".HOST."/imagenes/imgperfil/".$_SESSION['mfo_datos']['usuario']['username']."/"; ?>">
-	                    <input id="file-input" type="file" name="file-input"  class="upload-photo">
-	                    <div class="perfil-cuadro" id="err_img" align="center">
-	                    	<label style="cursor:pointer" class="text-center" for="file-input">Presiona aqu&iacute; para actualizar tu foto de perfil (.jpg, .jpeg, M&Aacute;X:1M)</label>
-	                    </div> 
-	                    <br>
-	                </div>
 
-	                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-	                	<div id="carga" class="panel panel-default"> 	
-	                		<?php if($btnDescarga == 1){ ?>
-	                    		<img width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>">
-	                    		<div class="perfil-cuadro" align="center">
-			                    	<label style="cursor:pointer" class="text-center" id="hoja_de_vida">Presiona aqu&iacute; para actualizar o descargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label>
-			                    </div> 
-			                    <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" >
-	                    	<?php }else{ ?>
-	                    		<img id="hoja_de_vida2" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>">
-			                    <input id="subirCV" type="file" name="subirCV"  class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
-			                    <div class="perfil-cuadro" align="center">
-			                    	<label style="cursor:pointer" class="text-center" for="subirCV">Presiona aqu&iacute; para cargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label>
-			                    </div> 
-	      					<?php } ?>
-	                    </div>
-	                <?php } ?>
-	      
-			        <div style="cursor:pointer" class="panel panel-default"><br><br><br>
-			        	<a onclick="abrirModal('','cambiar_clave','','');">
-				            <img width="100%" alt="cambio_clave" src="<?php echo PUERTO.'://'.HOST.'/imagenes/contra.png'; ?>">
-				            <div class="perfil-cuadro" id="err_img" align="center">
-				              <label style="cursor:pointer" class="text-center" for="">Presiona aqu&iacute; para cambiar tu contraseña</label>
-				            </div>
-			        	</a>
-			        </div>
+<div class="container"><br>
+    <form role="form" name="form_editarPerfil" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/perfil/" enctype="multipart/form-data">
+        <div class="col-md-12">
+            <div class="col-md-4">
+                <div id="seccion_img" class="panel panel-default shadow">
+                	<img id="imagen_perfil" width="100%" alt="fotoPerfil" src="<?php echo PUERTO."://".HOST."/imagenes/imgperfil/".$_SESSION['mfo_datos']['usuario']['username']."/"; ?>">
+                    <input id="file-input" type="file" name="file-input"  class="upload-photo">
+                    <div class="perfil-cuadro" id="err_img" align="center">
+                    	<label style="cursor:pointer" class="text-center" for="file-input">Presiona aqu&iacute; para actualizar tu foto de perfil (.jpg, .jpeg, M&Aacute;X:1M)</label>
+                    </div> 
+                    <br>
+                </div>
+
+                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+                	<div id="carga" class="panel panel-default"> 	
+                		<?php if($btnDescarga == 1){ ?>
+                    		<img width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>">
+                    		<div class="perfil-cuadro" align="center">
+		                    	<label style="cursor:pointer" class="text-center" id="hoja_de_vida">Presiona aqu&iacute; para actualizar o descargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label>
+		                    </div> 
+                    	<?php }else{ ?>
+                    		<img id="hoja_de_vida2" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>">
+		                    <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
+		                    <div class="perfil-cuadro" align="center">
+		                    	<label style="cursor:pointer" class="text-center" for="subirCV">Presiona aqu&iacute; para cargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label>
+		                    </div> 
+      					<?php } ?>
+                    </div>
+                <?php } ?>
+      
+		        <div style="cursor:pointer" class="panel panel-default"><br><br><br>
+		        	<a onclick="abrirModal('','cambiar_clave','','');">
+			            <img width="100%" alt="cambio_clave" src="<?php echo PUERTO.'://'.HOST.'/imagenes/contra.png'; ?>">
+			            <div class="perfil-cuadro" id="err_img" align="center">
+			              <label style="cursor:pointer" class="text-center" for="">Presiona aqu&iacute; para cambiar tu contraseña</label>
+			            </div>
+		        	</a>
+		        </div>
 
 				    <?php if($puedeDescargarInforme == 1 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 				    	<div class="panel panel-default"><br><br><br>
@@ -92,7 +91,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 				        	</a>
 				        </div>
 					<?php } ?>
-	            </div>                
+	       	</div>                
 	            <div class="col-md-8">
 	                <div class="panel panel-default shadow">
 	                    <div class="panel-body">
@@ -748,8 +747,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 			    	</div>
 		    	</div> 
 		    </div>
-	</div>
-</form>
+		</div>
+	</form>
+</div>
 
 <section class=" banner-publicidad">
   <div class="container-fluid">

@@ -35,7 +35,7 @@ define('PRIORIDAD', array('1'=>'Informe Parcial', '2'=>'Informe Completo'));
 define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
 define('SALARIO', array('1'=>'Menos de 386', '2'=>'Entre 386 y 700', '3'=>'Entre 700 y 1200', '4'=>'M&aacute;s de 1200'));
 define('EDADES', array('1'=>'18 a 25 A&ntilde;os', '2'=>'25 a 35 A&ntilde;os', '3'=>'35 a 45 A&ntilde;os', '4'=>'M&aacute;s de 45 a&ntilde;os'));
-define('FACEBOOK', 'https://es-la.facebook.com/MiCamello.com.ec/');
+define('FACEBOOK', 'https://www.facebook.com/MiCamello.com.ec/');
 define('TWITTER', 'https://twitter.com/MiCamelloec');
 define('INSTAGRAM', 'https://www.instagram.com/micamelloec/');
 define('NRO_TRABAJADORES', array('1'=>'De 1 a 10 trabajadores', '2'=>'De 11 a 50 trabajadores', '3'=>'De 51 a 200 trabajadores', '4'=>'De 201 a 500 trabajadores','5'=>'De 501 a 1000 trabajadores','6'=>'M&aacute;s de 1000 trabajadores'));
