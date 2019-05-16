@@ -120,7 +120,7 @@ if($navegador == 'MSIE'){ ?>
 <?php
   $fixed = "";
   if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($vista) && $vista == "inicio") { 
-    $fixed = "navbar-fixed-top";
+    $fixed = "navbar-fixed-top menu";
 ?>
     <div id="barra" class="top-info-bar bg-color-3 hidden-xs">
       <div class="container">
@@ -145,7 +145,7 @@ if($navegador == 'MSIE'){ ?>
     </div>
 <?php } ?>
 
-<nav class="menu navbar navbar-default <?php echo $fixed;?>">
+<nav class="navbar navbar-default <?php echo $fixed;?>">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">

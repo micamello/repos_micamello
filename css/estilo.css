@@ -964,7 +964,7 @@ padding-top: 10px;
 }
 .menu{
     color:white;
-    /*position: sticky;*/
+    position: sticky;
 }
 .link{
     font-weight: bold;

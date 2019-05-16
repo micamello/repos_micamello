@@ -136,8 +136,8 @@ class Controlador_Contrasena extends Controlador_Base {
         $_SESSION['mostrar_error'] = $e->getMessage();         
       }
     }
-                
-    Vista::render('recuperar_password', array());  
+    $tags = array('vista'=>'contrasena');
+    Vista::render('recuperar_password', $tags);  
   } 
 
   public function envioCorreo($correo,$nombres,$token){

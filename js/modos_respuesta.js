@@ -419,13 +419,14 @@ function makeDrop(drop, drag){
 			drag.appendTo(drop);
 			// padre_directo_drag.addClass('espacio');
 			crearInputsArastre();
-			toastr.remove();
+			// toastr.remove();
 		}
 		else{
-			toastr.remove();
-			toastr.options.positionClass = "toast-top-center";
-			toastr.warning('Ubique la opción en la pregunta correspondiente');
+			// toastr.remove();
+			// toastr.options.positionClass = "toast-top-center";
+			// toastr.warning('Ubique la opción en la pregunta correspondiente');
 			drag.css({top: '0px', left: '0px'});
+			swal('Advertencia!', 'Ubique la opción en la pregunta correspondiente', 'error');
 		}
 	}
 	else{
