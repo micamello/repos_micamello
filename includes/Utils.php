@@ -604,6 +604,8 @@ public static function validarTelefonoConvencional($contenido){
   }
 
   public static function validar_EC($dni){
+    print_r($dni);
+    exit();
     if (empty($dni)) {return false;}
     $val = false;
     if(ValidadorEc::DniRuc_Validador($dni)) {
@@ -611,6 +613,10 @@ public static function validarTelefonoConvencional($contenido){
     }
       return $val;
     }
+
+  public static function validarPasaporte($pasaporte){
+    return (!preg_match("/^[a-zA-Z0-9]+$/", $pasaporte) || strlen($pasaporte) < 6)? false : true;;
+  }
 
   public static function no_carac($cadena){    
     $cadena = str_replace(utf8_decode('À'), 'A', $cadena);

@@ -102,6 +102,7 @@ completamente identificado y la opción 5 es la que menos se siente identificado
               </div>
             </div>
           </div> -->
+
         <div class="text-center">
           <button type="button" class="btn-blue" data-dismiss="modal">Seleccionar método</button>
         </div>

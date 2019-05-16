@@ -16,8 +16,8 @@
         </div>
         <br>
       </div>           
-      <div class="col-md-2"></div>
-      <div class="col-md-8">        
+      <!-- <div class="col-md-2"></div> -->
+      <div class="col-md-8 col-md-offset-2">        
         <div class="panel panel-default" id="panel_1" style="display:none;">
           <div class="panel-body">
             <form role="form" name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">
@@ -130,7 +130,7 @@
               </div>
               
               <div align="center">
-                <input type="button" id="btndeposito" name="btndeposito" value="Aceptar" class="btn-blue disabled" onclick="enviarFormulario('form_deposito');">
+                <input type="button" id="btndeposito" name="btndeposito" value="Aceptar" class="btn-blue " onclick="enviarFormulario('form_deposito');">
               </div>
               </div>
             </form>
@@ -139,8 +139,8 @@
       </div>      
       <div class="col-md-2"></div>
       
-      <!--<div class="col-md-2"></div>  
-      <div class="col-md-8">
+      <div class="col-md-8 col-md-offset-2">
+
         <div class="panel panel-default" id="panel_2" style="display:none;">
           <div class="panel-body">
             <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/PayPal.jpg"><br><br>            
@@ -217,10 +217,13 @@
           </div>
         </div>    
       </div>  
-      <div class="col-md-2"></div>  
-      <div class="col-md-2"></div>-->
 
-      <div class="col-md-8">
+
+      <div class="col-md-2"></div>  
+      <div class="col-md-2"></div>
+
+
+      <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default" id="panel_3">          
           <div class="panel-body">
             <div align="center">
@@ -324,8 +327,8 @@
                   <input type="hidden" name="purchaseAmount" value="<?php echo $precio;?>" />
                   <input type="hidden" name="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
                   <input type="hidden" name="language" value="SP" />
-                  <input type="hidden" name="shippingCity" value="" />
-                  <input type="hidden" name="shippingState" value="" />
+                  <input type="hidden" name="shippingCity" id="shippingCity" value="" />
+                  <input type="hidden" name="shippingState" id="shippingState" value="" />
                   <input type="hidden" name="shippingCountry" value="EC" />
                   <input type="hidden" name="shippingZIP" value="" />
                   <input type="hidden" name="mcc" value="" />
@@ -355,7 +358,8 @@
 
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
-                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn-blue disabled">
+
+                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn-blue ">
                 </div>
               </div>
             

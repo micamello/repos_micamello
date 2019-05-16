@@ -126,7 +126,8 @@
                   ?>
                   <input type="hidden" id="planpermiso_<?php echo $plan["id_plan"];?>" value="<?php echo $permisos_plan;?>">
                 <?php } ?>
-                <ul id="planul" style="" class="theplan plan-tabla col-xs-12 col-md-4 flex-item">
+
+                <ul id="planul" style="" class="cen theplan plan-tabla col-xs-12 col-md-4 flex-item">
                   <div class="" id="plantitulo"></div>
                   <div id="plancosto" class="plan-precio"></div>
                   <small>(El precio incluye IVA)</small>                                 
