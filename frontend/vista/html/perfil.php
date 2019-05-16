@@ -64,7 +64,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 		                    </div> 
                     	<?php }else{ ?>
                     		<img id="hoja_de_vida2" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>">
-		                    <input id="subirCV" type="file" name="file-input"  class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
+		                    <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
 		                    <div class="perfil-cuadro" align="center">
 		                    	<label style="cursor:pointer" class="text-center" for="subirCV">Presiona aqu&iacute; para cargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label>
 		                    </div> 

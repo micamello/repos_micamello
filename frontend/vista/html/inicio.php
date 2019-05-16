@@ -1,4 +1,3 @@
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
@@ -104,7 +103,7 @@
       <p>Es un test enfocado al &aacute;mbito comportamental, el cual a trav&eacute;s de competencias ser&aacute; capaz de predecir las fortalezas que una persona tiene y necesita para el desarrollo de un puesto en espec&iacute;fico en las empresas.</p>
     </div>
     <button class="btn-blue">
-      <a href="canea.html" class="texto-white">Conoce m&aacute;s</a>
+      <a href="<?php echo PUERTO."://".HOST."/canea/"?>" class="texto-white">Conoce m&aacute;s</a>
     </button>
   </center>
 </div>
