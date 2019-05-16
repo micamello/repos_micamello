@@ -1,10 +1,7 @@
 <?php
 class Controlador_Login extends Controlador_Base {
  
-  public function construirPagina(){
-
-    $this->linkRedesSociales();
-    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
+  public function construirPagina(){    
 
     if( Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
@@ -51,17 +48,8 @@ class Controlador_Login extends Controlador_Base {
         
       }
     } 
-    $arrgenero = Modelo_Genero::obtenerListadoGenero();
-    $arrsectorind = Modelo_SectorIndustrial::consulta();
-    $tags = array('social'=>$social_reg,
-                  'genero'=>$arrgenero,
-                  'arrsectorind'=>$arrsectorind,
-                  'vista'=>'login');
-
-    $tags["template_css"][] = "DateTimePicker";
-    $tags["template_js"][] = "DniRuc_Validador";
-    $tags["template_js"][] = "DateTimePicker";
-    $tags["template_js"][] = "micamello_registro";
+        
+    $tags = array('vista'=>'login');    
     Vista::render('login',$tags);  
   }
  

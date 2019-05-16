@@ -2,17 +2,6 @@
 class Controlador_Recomendacion extends Controlador_Base {
   
   public function construirPagina(){
-    $this->linkRedesSociales();
-    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
-    $arrgenero = Modelo_Genero::obtenerListadoGenero();
-    $arrsectorind = Modelo_SectorIndustrial::consulta();
-    $tags = array('social'=>$social_reg,
-                  'genero'=>$arrgenero,
-                  'arrsectorind'=>$arrsectorind);
-
-    /*if( Modelo_Usuario::estaLogueado() ){
-      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-    }*/
     
     try {
       if (Utils::getParam('enviarRecomendacion') == 1) {
@@ -33,12 +22,9 @@ class Controlador_Recomendacion extends Controlador_Base {
     } catch (Exception $e) {
         $_SESSION['mostrar_error'] = $e->getMessage();
     }
-    
-    $tags["template_css"][] = "DateTimePicker";
-    $tags["template_js"][] = "DniRuc_Validador";
-    $tags["template_js"][] = "DateTimePicker";
-    $tags["template_js"][] = "micamello_registro";
-    Vista::render('recomendaciones', $tags);
+        
+    $tags = array('vista'=>'recomendacion');
+    Vista::render('recomendaciones',$tags);
   }
 
   public function envioRecomendaciones($correo,$data){
