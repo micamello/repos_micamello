@@ -79,7 +79,7 @@
 							$pos = -1;
 							echo '<div class="col-md-12" style="padding-right: 5px;">';
 							foreach ($facetas as $key => $v) {
-								$letra = substr($v,0,1);
+								$letra = $v['literal'];//substr($v,0,1);
 								if($letra == 'A' && $i > 1){
 									$letra = 'P';
 								}
@@ -442,7 +442,7 @@
 								$pos = -1;
 								echo '<div class="col-md-12" style="padding-right: 5px;">';
 								foreach ($facetas as $key => $v) {
-									$letra = substr($v,0,1);
+									$letra = $v['literal'];//substr($v,0,1);
 									if($letra == 'A' && $i > 6){
 										$letra = 'P';
 									}
@@ -711,8 +711,9 @@
 							    	<?php } ?>
 							    	<?php 
 							    	$r = 3;
+							    	
 							    	foreach($facetas as $key => $nombre){ 
-							    		echo "<th style='vertical-align: middle; text-align: center;'>".substr($nombre, 0,1)."</th>";
+							    		echo "<th style='vertical-align: middle; text-align: center;'>".$nombre['literal']."</th>";
 								        $r++;
 							    	} ?>
 							        <th style="vertical-align: middle; text-align: center;" title="Nivel de Estudios">
@@ -819,7 +820,7 @@
 							            			<td data-title="Postulado hace: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $diff->days . ' d&iacute;as'; /*echo date("d", strtotime($a['fecha_postulado'])).' de '.MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado']));*/ ?></td>
 												<?php } ?>
 												<?php foreach($facetas as $key => $nombre){ 
-										    		echo "<td data-title='".substr($nombre, 0,1).":' style='vertical-align: middle; text-align: center;'>";
+										    		echo "<td data-title='".$nombre['literal']/*substr($nombre, 0,1)*/.":' style='vertical-align: middle; text-align: center;'>";
 										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){ 
 										    			echo $datos_usuarios[$a['id_usuario']][$key].'%';
 										    		}else{ 
@@ -934,7 +935,7 @@
 								$exp = '/';
 								$j = 0;
 								foreach ($facetas as $clave => $c) {
-									$letra = substr($c,0,1);
+									$letra = $c['literal'];//substr($c,0,1);
 									if($letra == 'A' && $j > 1){
 									  $letra = 'P';
 									}
@@ -955,7 +956,7 @@
 								}
 								$b = 0;
 								foreach ($facetas as $clave => $c) {
-									$l = substr($c,0,1);
+									$l = $c['literal'];//substr($c,0,1);
 									if($l == 'A' && $b > 1){
 									  $l = 'P';
 									}

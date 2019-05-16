@@ -2,7 +2,6 @@
 $i = 0;
 foreach ($data as $letra => $value) { 
 
-    
     if($vista == 1){
         $ruta = PUERTO.'://'.HOST.'/verAspirantes/1/'.$id_oferta.'/2';
     }else{
@@ -66,7 +65,7 @@ foreach ($data as $letra => $value) {
             $literales = array();
             foreach ($facetas as $key => $c) {
 
-                $letra = substr($c,0,1);
+                $letra = $c['literal'];//substr($c,0,1);
                 if($letra == 'A' && $a > 1){
                     $letra = 'P';
                 }

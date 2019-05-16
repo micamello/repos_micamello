@@ -378,7 +378,7 @@ WHERE
       $exp = '/';
       
       foreach ($facetas as $clave => $c) {
-        $letra = substr($c,0,1);
+        $letra = $c['literal'];//substr($c,0,1);
         if($letra == 'A' && $a > 1){
           $letra = 'P';
         }
@@ -1141,8 +1141,18 @@ WHERE
         AND ul.id_usuario_login = data.id_usuario_login;";
     return $GLOBALS['db']->auto_array($sql,array(), true);
   }
-  public static function obtenerFacetasxUsuario($id_usuario){
-   $sql = "SELECT id_faceta,valor FROM mfo_porcentajexfaceta WHERE id_usuario = ?";
+  public static function obtenerFacetasxUsuario($id_usuario,$facetas=false){
+
+    if($facetas == false){
+      $sql = 'SELECT id_faceta,valor FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ?';
+    }else{
+      $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
+        INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor
+        INNER JOIN mfo_descriptor d on d.id_faceta = pf.id_faceta
+        WHERE pf.id_usuario = ? and pf.id_faceta in('.$facetas.')
+        AND b.id_puntaje = d.id_puntaje;';
+    }
+
     return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
   }
 }  

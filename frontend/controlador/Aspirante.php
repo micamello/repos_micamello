@@ -744,8 +744,6 @@ class Controlador_Aspirante extends Controlador_Base
                                 }
                             } 
 
-                            //$cantd_facetas = count(Modelo_Faceta::obtenerFacetas());
-
                             //consultar los datos de los usuarios seleccionados
                             $datos_usuarios = Modelo_Usuario::obtenerDatos($u);
 

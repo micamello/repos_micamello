@@ -64,18 +64,37 @@ class Controlador_GenerarPDF extends Controlador_Base
         if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){
 
           $result = Modelo_Opcion::datosGraficos2($idusuario,1,$id_empresa); 
+          $cantd_facetas = count($result);
+          $tipo_informe = '';
+          $cantd_f = $cont = 0;
+          if(($cantd_facetas == Modelo_Usuario::PRIMER_TEST || $cantd_facetas == Modelo_Usuario::SEGUNDO_TEST) || ($cantd_facetas > Modelo_Usuario::SEGUNDO_TEST && $cantd_facetas < Modelo_Usuario::COMPLETO_TEST)){
+            $tipo_informe = 'parcial';
+            $cantd_f = 2;
+          }else if($cantd_facetas == Modelo_Usuario::COMPLETO_TEST){
+            $tipo_informe = 'completo';
+            $cantd_f = 5;
+          }
+
           $idsfacetas = "";
           foreach($result as $keyvl=>$vlresult){
-            $idsfacetas .= $keyvl.","; 
+            $cont++;
+            if($cont<=$cantd_f){
+              $idsfacetas .= $keyvl.","; 
+            }else{
+              break;
+            }
           }
-          $idsfacetas = substr($idsfacetas, 0, -1);         
-          $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario,$idsfacetas);          
 
+          $idsfacetas = substr($idsfacetas, 0, -1);         
+          $preguntas = Modelo_Respuesta::resultadoxUsuario($idusuario,$idsfacetas);   
+          $porcentajesxfaceta = Modelo_Usuario::obtenerFacetasxUsuario($idusuario,$idsfacetas);  
+          $rasgos = Modelo_Rasgo::obtieneListadoAsociativo();
+          //print_r($rasgos);    
           $colores = Modelo_Faceta::obtenerColoresLiterales();
           $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
           $array_datos_graficos = array();
          
-          $informe = $this->generaInforme(array('datos'=>$usuario,'preguntas'=>$preguntas,'facetas'=>$facetasDescripcion,'datosGraficos'=>$result,'colores'=>$colores,'datos_descarga'=>array('id_usuario'=>$idusuario,'id_empresa'=>$id_empresa,'id_oferta'=>$id_oferta,'puedeDescargar'=>$puedeDescargar)));
+          $informe = $this->generaInforme(array('datos'=>$usuario,'tipo_informe'=>$tipo_informe,'preguntas'=>$preguntas,'facetas'=>$facetasDescripcion,'datosGraficos'=>$result,'colores'=>$colores,'datos_descarga'=>array('id_usuario'=>$idusuario,'id_empresa'=>$id_empresa,'id_oferta'=>$id_oferta,'puedeDescargar'=>$puedeDescargar),'porcentajesxfaceta'=>$porcentajesxfaceta,'rasgos'=>$rasgos,'facetasHabilitadas'=>explode(',',$idsfacetas)));
         }else{
           
           $enlace = $_SERVER['HTTP_REFERER'];
@@ -94,9 +113,12 @@ class Controlador_GenerarPDF extends Controlador_Base
 
   public function generaInforme($datos){
     $facetas = $datos['facetas'];
+    $tipo_informe = $datos['tipo_informe'];
     $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
     $datosusuario = $datos['datos'];
     $preguntas = $datos['preguntas'];
+    $porcentajesxfaceta = $datos['porcentajesxfaceta'];
+    $rasgos = $datos['rasgos'];
     $datos_descarga = $datos['datos_descarga'];
     $conacentos = array('Á', 'É','Í','Ó','Ú','Ñ');
     $sinacentos = array('a', 'e','i','o','u','n');
@@ -105,21 +127,84 @@ class Controlador_GenerarPDF extends Controlador_Base
     $nombre_archivo = utf8_encode(str_replace(' ', '_',str_replace($codigo,$sinacentos,$nombre))).'.pdf';
     $nombre = str_replace($codigo,$conacentos,$nombre);
     $informe = '<h3 align="center">INFORME DE TEST CANEA DE '.utf8_encode(strtoupper($nombre)).'</h3>';
-    $informe .= '<p align="justify" style="margin-bottom:2px;margin-top:2px;"><hr width=100%><b>FACTORES QUE MIDE CANEA</b> (En este test no existen resultados ni buenos ni malos.)<hr width=100%></p>
-    <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>C: Conciencia:</b> Es la capacidad para controlar los propios impulsos, la autodisciplina y la organización.</p>
-    <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Afabilidad (Amabilidad):</b> Es el comportamiento empático, generoso y mediador.</p>
-    <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>N: Neurotisismo (Ansiedad):</b> Es la reacción a su entorno social o personal, y estabilidad emocional.</p>
-    <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>E: Extraversión:</b> Es la capacidad de interactuar en sus relaciones sociales, laborales.</p>
-    <p align="justify" style="margin-bottom:2px;margin-top:2px;"><b>A: Apertura a la Experiencia:</b> Es la experiencia, mente abierta, originalidad, imaginación y creatividad.</p>
-    <p align="justify"><b>'.utf8_encode(ucwords($datosusuario['nombres'].' '.$datosusuario['apellidos'])).'; CANEA</b>, Es un instrumento, de aplicación fundamentado en el comportamiento humano. El mismo que te dar&aacute; una visión general de tu estilo de comportamiento en el ámbito laboral y personal. Basado en la idea de que las emociones y los comportamientos no son ni buenos ni malos.</p> 
-    <p align="justify"><b>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p> ';
+
     $cantd_preg = 0;
+    $pos_no_disponible = 1;
     $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
+
+    $puntaxfaceta = array();
+
+    foreach ($porcentajesxfaceta as $c => $datos_resultado) {
+      $puntaxfaceta[$datos_resultado['id_faceta']] = $datos_resultado['id_puntaje'];
+      $etiquetas_faceta .=  $datos_resultado['valor'].'|';
+      $colors .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
+      $descrip_facetas .= $facetas[$datos_resultado['id_faceta']]['faceta'].': '.$datos_resultado['valor'].'|';
+      $descrip_titulo .= $facetas[$datos_resultado['id_faceta']]['literal'];
+    }
+
+    $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
+    $colors = substr($colors, 0,-1);
+    $descrip_facetas = substr($descrip_facetas, 0,-1);
+    $porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
+
+    $informe .= '<table><tr>';
+    foreach ($facetas as $id_faceta => $f) {
+      $informe .= '<td style="background-color:'.$datos['colores'][$id_faceta].'">'.$f['literal'].'</td>';
+    }
+    $cantd_facetas = count($facetas);
+    $informe .= '</tr>';
+     
+    foreach ($rasgos as $puntaje => $r) {
+
+      $informe .= '<tr>';
+      foreach ($facetas as $id_faceta => $value) {
+
+        if(in_array($id_faceta, $datos['facetasHabilitadas'])){
+          $informe .= '<td ';
+          if($puntaxfaceta[$id_faceta] == $puntaje){ 
+            $informe .= 'style="background-color:'.$datos['colores'][$id_faceta].';"';
+          }
+         $informe .= '>'.utf8_encode($r[$id_faceta]).'</td>';
+        }else{
+
+          if($pos_no_disponible <= 3){
+            $informe .= '<td>NO DISPONIBLE</td>';
+            $pos_no_disponible++;
+          }else{
+            $informe .= '<td></td>';
+          }
+          
+        }
+      }
+      $informe .= '</tr>';
+    }
+    $informe .= '</table>';
+
+    $informe .= '<br>';
+    foreach ($porcentajesxfaceta as $k => $valores) {
+
+      $l = $facetas[$valores['id_faceta']]['literal'];
+      $d = $facetas[$valores['id_faceta']]['faceta'];
+      $informe .= utf8_encode($l.'/'.$d.': '.str_replace('_NOMBRE_', utf8_encode(strtoupper($datosusuario['nombres'])),$valores['descripcion']));
+      $informe .= '<br><br>';
+    }
+
+    $informe .= '<br>';
+
     foreach($preguntas as $key => $pregunta){
       $cantd_preg++;
       $resultado = Modelo_Baremo::obtienePuntaje($pregunta['orden1'],$pregunta['orden2'],$pregunta['orden3'],$pregunta['orden4'],$pregunta['orden5']);
-      $descriptor = Modelo_Descriptor::obtieneTextos($pregunta['id_competencia'],$resultado['id_puntaje']);       
-      if ($pregunta['id_faceta'] != $faceta){
+
+      $informe .= ($key + 1).'. '.strtoupper(utf8_encode($pregunta['nombre'])).' - '.utf8_encode($pregunta['descripcion']);
+      $informe .= '<br>';
+      //buscar valor en segundo baremo
+      $informe .= 'porcentaje: '.$resultado['porcentaje'];
+      $informe .= '<br>';
+      $informe .= 'limites: '.$pregunta['limite_inferior'].' - '.$pregunta['limite_medio'].' - '.$pregunta['limite_superior'];
+      $informe .= '<br><br>';
+
+      //$descriptor = Modelo_Descriptor::obtieneTextos($pregunta['id_competencia'],$resultado['id_puntaje']);       
+     /* if ($pregunta['id_faceta'] != $faceta){
         $faceta = $pregunta['id_faceta'];
         $datosfaceta = Modelo_Faceta::consultaIndividual($pregunta['id_faceta']);
         $informe .= '<p align="justify"><b>'.utf8_encode($datosfaceta['introduccion'])."</b></p>";
@@ -127,32 +212,27 @@ class Controlador_GenerarPDF extends Controlador_Base
         ;
       }
       $parrafo .= ucwords(strtolower(utf8_encode($datosusuario['nombres']))).' '.utf8_encode($descriptor['descripcion']).' ';
-     
-      if($cantd_preg == $preg_x_faceta){
+     */
+      /*if($cantd_preg == $preg_x_faceta){
           
           $cantd_preg = 0;
 
           $calculo_promedio = $datos['datosGraficos'][$pregunta['id_faceta']];
           $etiquetas_faceta .=  $calculo_promedio.'|';
           $colors .= str_replace("#", "", $datos['colores'][$pregunta['id_faceta']]).'|';
-          $descrip_facetas .= $facetas[$pregunta['id_faceta']].': '.$calculo_promedio.'|';
-          $descrip_titulo .= substr($facetas[$pregunta['id_faceta']],0,1);
+          $descrip_facetas .= $facetas[$pregunta['id_faceta']]['faceta'].': '.$calculo_promedio.'|';
+          $descrip_titulo .= $facetas[$pregunta['id_faceta']]['literal'];
           $informe .= '<p align="justify">'.substr($parrafo, 0,-2).'</p>';
           $parrafo = '';
-      }
+      }*/
     }
-    $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
-    $colors = substr($colors, 0,-1);
-    $descrip_facetas = substr($descrip_facetas, 0,-1);
-    $porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
-
     
-    if(count($datos['datosGraficos']) == count($facetas)){
+    if(count($porcentajesxfaceta) == count($facetas)){
       $informe .= '<p align="center"><img align="center" src="https://chart.googleapis.com/chart?chs=500x300&chd=t:'.$porcentajes_faceta.'&cht=p&chl='.$etiquetas_faceta.'&chco='.$colors.'&chtt='.$descrip_titulo.'&chdl='.$descrip_facetas.'" class="img-responsive"></p>';
     }
    
-    //echo $informe; 
-    self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
+    echo $informe; 
+    //self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
   }
 
   public function informePersonalidad($html,$nombre_archivo,$datos_descarga){
@@ -167,7 +247,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     $mpdf->WriteHTML($enddoc);   
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="17%"></footer>');
     $mpdf->WriteHTML($html);
-    //$mpdf->Output($nombre_archivo, 'D');
 
     //validar  si es empresa y si tiene cupo para descargar
     if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){

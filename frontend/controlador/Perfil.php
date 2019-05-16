@@ -127,7 +127,7 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
                 $breadcrumbs['perfil'] = 'Editar mi perfil';
-                $nrototalfacetas = Modelo_Faceta::obtenerFacetas();
+                $nrototalfacetas = count(Modelo_Faceta::obtenerFacetas());
                 //$nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $porcentaje_por_usuario = Modelo_Usuario::obtenerFacetasxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,
@@ -207,20 +207,45 @@ class Controlador_Perfil extends Controlador_Base
 
             $data = $this->camposRequeridos($campos);
 
+            if(isset($_POST['subareas']) && !empty($_POST['subareas']) && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
+
+                $array_subareas_seleccionadas = array();
+                $areas_subareas = array();
+                foreach ($_POST['subareas'] as $i => $datos_select_area) {
+                    
+                    $valor = explode("_", $datos_select_area);
+
+                    if(isset($listAreas[$valor[0]]) && isset($listSubareas[$valor[1]])){
+                        $areas_subareas[$valor[0]][] = $valor[2];
+                        array_push($array_subareas_seleccionadas, $valor[2]);
+                    }else{
+
+                        throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
+                    }
+                }
+                $data['areaxusuario'] = $areas_subareas;
+            }else{
+                $data['areaxusuario'] = array();
+            }
+            
+            
+
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
 
             if ($imagen['error'] != 4) {
                 $validaImg = Utils::valida_upload($imagen, 1);
-                if (empty($validaImg)) {
-                    throw new Exception("La imagen debe ser en formato .jpg .jpeg .pjpeg y con un peso m\u00E1x de 1MB");
+                if (!$validaImg) {
+                    throw new Exception("La imagen debe ser en formato .jpg .jpeg y con un peso m\u00E1x de 1MB");
                 }
             }
+            
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
                 if (!empty($archivo) && $archivo['error'] != 4) {
                     $validaFile = Utils::valida_upload($archivo, 2);
-                    if (empty($validaFile)) {
+                    
+                    if (!$validaFile) {
                         throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso m\u00E1x de 2MB");
                     }
                 }
@@ -375,19 +400,19 @@ class Controlador_Perfil extends Controlador_Base
                     if (isset($_SESSION['mfo_datos']['usuario']['infohv'])) {
                         if ($arch[1] != $_SESSION['mfo_datos']['usuario']['infohv']['formato']) {
                             if (!Modelo_InfoHv::actualizarHv($_SESSION['mfo_datos']['usuario']['infohv']['id_infohv'], $arch[1])) {
-                                throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
+                                throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente1");
                             } else {
                                 if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
-                                  throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
+                                  throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente2");
                                 }
                             }
                         }
                     } else {
                         if (!Modelo_InfoHv::cargarHv($idUsuario, $arch[1])) {
-                            throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");
+                            throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente3");
                         } else {
                             if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
-                              throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente");  
+                              throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente4");  
                             }
                         }
                     }
@@ -425,7 +450,7 @@ class Controlador_Perfil extends Controlador_Base
                     $array_data_area = explode(",",$_SESSION['mfo_datos']['usuario']['subareas']);
                 }
 
-                if(isset($_POST['subareas']) && !empty($_POST['subareas']) && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
+                /*if(isset($_POST['subareas']) && !empty($_POST['subareas']) && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
 
                     $array_subareas_seleccionadas = array();
                     $areas_subareas = array();
@@ -441,7 +466,7 @@ class Controlador_Perfil extends Controlador_Base
                             throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
                         }
                     }
-                }
+                }*/
 
                 if(!empty($array_subareas_seleccionadas)){
 
@@ -498,10 +523,12 @@ class Controlador_Perfil extends Controlador_Base
     //Función que permite saber si el usuario puede o no descargar un informe de personalidad parcial o completo
     public function obtenerPermiso($idusuario){
 
-        $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
         $informe = 0;
-        if($cantd_facetas > 0){
-            $informe = 1;
+        if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial'))){
+            $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
+            if($cantd_facetas > 0){
+                $informe = 1;
+            }
         }
         return $informe;
     }

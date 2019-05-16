@@ -3,7 +3,7 @@ class Modelo_Respuesta{
 
   public static function resultadoxUsuario($idusuario,$faceta=null){
     if (empty($idusuario)){ return false; }
-    $sql = "SELECT o.id_pregunta, p.id_competencia, c.id_faceta,        
+    $sql = "SELECT o.id_pregunta, p.id_competencia, c.id_faceta, c.descripcion, c.nombre, c.limite_inferior, c.limite_medio, c.limite_superior,        
                    SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
                    SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
                    SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,

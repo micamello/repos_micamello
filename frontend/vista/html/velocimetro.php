@@ -17,7 +17,7 @@
             <div class="col-md-4 col-sm-12">
               <h5>&nbsp;</h5>
             <button class="btn-minimalista">
-              <a href="<?php echo PUERTO.'://'.HOST.'/'.$enlaceboton.'/'; ?>">Ver Resultados</a>
+              <a href="<?php echo PUERTO.'://'.HOST.'/'.$enlaceboton.'/'; ?>"><?php echo $textoBoton; ?></a>
             </button>      
             </div>  
           </div>

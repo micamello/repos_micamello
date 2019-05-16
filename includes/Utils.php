@@ -404,7 +404,7 @@ public static function validarTelefonoConvencional($contenido){
     elseif($tipo == 3){
       $peso_valido = PESO_IMAGEN;
     }    
-    if (($valida_arch[0] == true) && (!empty($file_temp)) && ($file_size <= $peso_valido))
+    if (($valida_arch[0] == true) && (!empty($file_temp)) && ($file_size > 0) && ($file_size <= $peso_valido))
       return true;
     else
       return false;

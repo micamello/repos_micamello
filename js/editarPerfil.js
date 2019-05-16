@@ -100,16 +100,20 @@ function eliminar_item_selected(selected_item,tipo,op){
 
 /*Muestra dinamicamente si la imagen / foto fue cargada*/
 $('#file-input').change(function(e) {
-    addImage(e); 
-    validarImg(document.getElementById('file-input'),'err_img','seccion_img',"btndeposito");
+   console.log(document.getElementById('file-input').files[0]);
+    var error = validarImg(document.getElementById('file-input'));
+
+    if(error == 0){
+        addImage(e); 
+    }
 });
 
 function addImage(e){
     var file = e.target.files[0],
     imageType = /image.*/;
 
-if (!file.type.match(imageType))
-    return;
+    if (!file.type.match(imageType))
+        return;
 
     var reader = new FileReader();
     reader.onload = fileOnload;
@@ -123,53 +127,74 @@ function fileOnload(e) {
 
 
 /*Valida si la imagen / foto fue cargada*/
-function validarImg(archivo,err_img,seccion_img,btn){
+function validarImg(archivo){
 
-  var file = fileValidation(archivo);
+  var file = fileValidation(archivo,1);
   var error = 0;
   if(file == 1){
     error = 1;
-  }/*else{
-    $('#err_img').html('<p class="parpadea" style="font-size:11px;color:green">Imagen cargada</p>');
-  }*/
+  }else{
+    swal('Información!','Imagen cargada', 'success');
+  }
   return error;
 }
 
 /*Valida el peso del archivo*/
-function fileValidation(fileInput){
+function fileValidation(fileInput,tipo){
 
   var filePath = fileInput.value;
-  var allowedExtensions = /[.jpg |.jpeg |.png]$/i;
-  
-  if(filePath != ''){
-   
-    var tamano = fileInput.files[0].size/1024/1024;
-    if(tamano > 1){
-      document.getElementById('err_img').innerHTML = '<p class="parpadea" style="font-size:11px;color:red">El peso permitido es de máximo 1MB</p>';
-      return 1;
-    }else{
-      return 0;
-    }
-    
-  }else if(!allowedExtensions.test(filePath)){
+  var error = 0;
 
-    fileInput.value = '';
-    document.getElementById('err_img').innerHTML = '<p class="parpadea" style="font-size:11px;color:red">El formato permitido es .jpeg/.jpg/.png</p>';
-    return 1;
-  }else{
-    return 0;
-  }
+    if(tipo == 1){
+        var allowedExtensions = /(.jpg|.jpeg)$/i;
+        if(filePath != ''){
+       
+            var tamano = fileInput.files[0].size/1024/1024;
+            if(tamano > 1){
+              swal('Advertencia!','El peso permitido es de máx. 1MB', 'error');
+              error = 1;
+            }else if(!allowedExtensions.exec(filePath)){
+                fileInput.value = '';
+                swal('Información!','El formato permitido es .jpeg/.jpg/', 'error');
+                error =1;
+            }else{
+              error = 0;
+            }
+        }
+    }else{
+        var allowedExtensions = /(.pdf|.doc|.docx)$/i;
+        if(filePath != ''){
+       
+            var tamano = fileInput.files[0].size/1024/1024;
+            if(tamano > 2){
+              swal('Advertencia!','El peso permitido de la hoja de vida es máx. 2MB', 'error');
+              error = 0;
+            }else if(!allowedExtensions.exec(filePath)){
+                fileInput.value = '';
+                swal('Información!','El formato permitido de la hoja de vida es .pdf/.doc/.docx/', 'error');
+                error =1;
+            }else{
+              error = 0;
+            }
+        }else{
+            swal('Advertencia!','Cargar la hoja de vida es obligatorio', 'error');
+        }
+    }
+
+  return error;
 }
 
 /* Carga de hoja de vida */
 $('#subirCV').change(function(e) {
 
-    //$('#imagenBtn').attr("src",$('#puerto_host').val()+'/imagenes/actualizar.png');
-    $('#texto_status').html('Hoja de vida cargada');
-    //$('#texto_status').addClass('arch_cargado');
-    //if(document.getElementById("mensaje_error_hv")){
-    //    document.getElementById("mensaje_error_hv").style.display = "none";
-    //}
+    var file = fileValidation(document.getElementById('subirCV'),2);
+    var error = 0;
+    if(file == 1){
+        error = 1;
+    }else{
+        swal('Información!','Hoja de vida cargada', 'success');
+        $('#modal_actualizar').modal('hide');
+    }
 });
 
 /*Eventos del campo de idiomas*/
@@ -1095,7 +1120,7 @@ function validarClave(){
     var expreg_ant = /^[A-Za-z\d]{8,}$/;
     var error = 0;
     var err_campo = "El campo no puede ser vacío";
-    var err_formato = "Formato incorrecto, Letras y números, mí. 8 dígitos";
+    var err_formato = "Letras y números, mín. 8 dígitos";
 
     var password = document.getElementById('password').value;
     var password_two = document.getElementById('password_two').value;
