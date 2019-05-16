@@ -64,7 +64,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 		                    </div> 
                     	<?php }else{ ?>
                     		<img id="hoja_de_vida2" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>">
-		                    <input id="subirCV" type="file" name="file-input"  class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
+		                    <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
 		                    <div class="perfil-cuadro" align="center">
 		                    	<label style="cursor:pointer" class="text-center" for="subirCV">Presiona aqu&iacute; para cargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label>
 		                    </div> 
@@ -126,7 +126,6 @@ $_SESSION['mostrar_error'] = ""; ?>
 	                                        </div>
 	                                    </div>
                                  
-
                                     	<div class="col-md-6">
 								            <div class="form-group" id="seleccione_group">
 								              <label for="tipo_dni">Tipo de documento</label><div id="seleccione_error" class="help-block with-errors"></div>
@@ -189,22 +188,22 @@ $_SESSION['mostrar_error'] = ""; ?>
 
                                     <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 
-	                                    <div class="col-md-6">
-		                                        <div id="seccion_gen" class="form-group">
-		                                            <label for="genero">G&eacute;nero <span title="Este campo es obligatorio">*</span></label><div id="err_gen" class="help-block with-errors"></div>
-		                                            <select id="genero" name="genero" class="form-control"  onchange="validarFormulario(false)" >
-														<option disabled value="0">Seleccione un genero</option>
-				                                    	<?php 
-				                                    	foreach($genero as $key => $ge){ 
-															echo "<option value='".$ge['id_genero']."'";
-															if ($_SESSION['mfo_datos']['usuario']['id_genero'] == $ge['id_genero'] || (isset($data['id_genero']) && $data['id_genero'] == $ge['id_genero']))
-															{ 
-																echo " selected='selected'";
-															}
-															echo ">".$ge['descripcion']."</option>";
-														} ?>
-		                                            </select>
-		                                        </div>
+	                                    <div class="col-md-6" style="height: 84px;">
+	                                        <div id="seccion_gen" class="form-group">
+	                                            <label for="genero">G&eacute;nero <span title="Este campo es obligatorio">*</span></label><div id="err_gen" class="help-block with-errors"></div>
+	                                            <select id="genero" name="genero" class="form-control"  onchange="validarFormulario(false)" >
+													<option disabled value="0">Seleccione un genero</option>
+			                                    	<?php 
+			                                    	foreach($genero as $key => $ge){ 
+														echo "<option value='".$ge['id_genero']."'";
+														if ($_SESSION['mfo_datos']['usuario']['id_genero'] == $ge['id_genero'] || (isset($data['id_genero']) && $data['id_genero'] == $ge['id_genero']))
+														{ 
+															echo " selected='selected'";
+														}
+														echo ">".$ge['descripcion']."</option>";
+													} ?>
+	                                            </select>
+	                                        </div>
 		                                </div>
 
 		                                <div class="col-md-6">
@@ -257,7 +256,7 @@ $_SESSION['mostrar_error'] = ""; ?>
                                         </div>
                                     </div>		
 
-                                    
+                                   
 									<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 
 										<div class="col-md-6">
@@ -545,7 +544,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 										<div class="col-md-6">
 											<div class="form-group">
 												<label>Sub-Áreas <span title="Este campo es obligatorio">*</span></label>
-												<br><br>
+												<br>
 												<div class="help-block with-errors"></div>
 												<select class="form-control" id="subareas" name="subareas[]" multiple="multiple" onchange="validarFormulario(false);">
 												  <?php 													  
@@ -832,3 +831,4 @@ $_SESSION['mostrar_error'] = ""; ?>
     </div>    
   </div>
 </div>﻿
+

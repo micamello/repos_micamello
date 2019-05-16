@@ -27,12 +27,12 @@ class Controlador_GenerarPDF extends Controlador_Base
       case 'informeusuario':
 
         $usuario = Modelo_Usuario::existeUsuario($username);
-        /*echo '<br>idusuario: '.*/$idusuario = $usuario['id_usuario']; 
+        $idusuario = $usuario['id_usuario']; 
         $idPlan = Utils::getParam('idPlan','',$this->data);
-        /*echo '<br>idPlan: '.*/$idPlan = ((!empty($idPlan)) ? Utils::desencriptar($idPlan) : $idPlan);
+        $idPlan = ((!empty($idPlan)) ? Utils::desencriptar($idPlan) : $idPlan);
 
         $id_oferta = Utils::getParam('idOferta','',$this->data);
-        /*echo '<br>id_oferta: '.*/$id_oferta = ((!empty($id_oferta)) ? Utils::desencriptar($id_oferta) : $id_oferta);
+        $id_oferta = ((!empty($id_oferta)) ? Utils::desencriptar($id_oferta) : $id_oferta);
         $puedeDescargar = false;
         $cantidadRestante = 1;
         $id_empresa = false;

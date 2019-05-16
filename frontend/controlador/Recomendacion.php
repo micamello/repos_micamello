@@ -2,17 +2,6 @@
 class Controlador_Recomendacion extends Controlador_Base {
   
   public function construirPagina(){
-    $this->linkRedesSociales();
-    $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
-    $arrgenero = Modelo_Genero::obtenerListadoGenero();
-    $arrsectorind = Modelo_SectorIndustrial::consulta();
-    $tags = array('social'=>$social_reg,
-                  'genero'=>$arrgenero,
-                  'arrsectorind'=>$arrsectorind);
-
-    /*if( Modelo_Usuario::estaLogueado() ){
-      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-    }*/
     
     try {
       if (Utils::getParam('enviarRecomendacion') == 1) {

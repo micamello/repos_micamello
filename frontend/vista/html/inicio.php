@@ -1,4 +1,3 @@
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
@@ -77,24 +76,35 @@
 
 <br><br>
 <div class="text-center" align="center">
-  <h2 class="titulo">¿Qu&eacute; es CANEA?</h2>
-  <br><br>
+  <h2 class="titulo">¿Qué es CANEA?</h2>
   <center>
-    <section>
-      <div class="col-md-12 col-sm-12">
-        <div class="canea-text col-md-1 ocultar">&nbsp;</div>
-        <div class="canea-text col-md-2 col-sm-2">C</div>
-        <div class="canea-text col-md-2 col-sm-2">A</div>
-        <div class="canea-text col-md-2 col-sm-2">N</div>
-        <div class="canea-text col-md-2 col-sm-2">E</div>
-        <div id="prueba-e" class="canea-text col-md-2 col-sm-2">A</div>
-        <div class="canea-text col-md-1 ocultar">&nbsp;</div>
+    <div class="col-md-12 col-sm-12 text-center">
+      <div class="col-md-2 col-sm-2 col-xs-2 col-sm-offset-1 col-xs-offset-1">
+        <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm ">C</div>
       </div>
-      <div class="parrafo col-md-12">
-        <p>Es un test enfocado al &aacute;mbito comportamental, el cual a trav&eacute;s de competencias ser&aacute; capaz de predecir las fortalezas que una persona tiene y necesita para el desarrollo de un puesto en espec&iacute;fico en las empresas.</p>
+      <div class="col-md-2 col-sm-2 col-xs-2  text-center">
+        <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm ">A</div>
       </div>
-      <a href="<?php echo PUERTO.'://'.HOST.'/canea/'?>" class="btn-blue texto-white">Conoce m&aacute;s</a>
-    </section>
+      <div class="col-md-2 col-sm-2 col-xs-2 ">
+        <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm">N</div>
+        
+      </div>
+      <div class="col-md-2 col-sm-2 col-xs-2 ">
+        <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm ">E</div>
+        
+      </div>
+      <div id="prueba-e" class="col-md-2 col-sm-2 col-xs-2 ">
+        <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm">A</div>
+        
+      </div>
+      <div class="canea-text-modal col-md-1 ocultar">&nbsp;</div>
+    </div>
+    <div class="parrafo col-md-12 col-sm-12 col-xs-12">
+      <p>Es un test enfocado al &aacute;mbito comportamental, el cual a trav&eacute;s de competencias ser&aacute; capaz de predecir las fortalezas que una persona tiene y necesita para el desarrollo de un puesto en espec&iacute;fico en las empresas.</p>
+    </div>
+    <button class="btn-blue">
+      <a href="<?php echo PUERTO."://".HOST."/canea/"?>" class="texto-white">Conoce m&aacute;s</a>
+    </button>
   </center>
 </div>
 <br>

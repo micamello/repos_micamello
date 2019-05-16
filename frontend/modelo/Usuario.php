@@ -896,7 +896,7 @@ WHERE
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test  
       if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
-        $_SESSION['mostrar_error'] = "Debe completar el test";        
+        //$_SESSION['mostrar_error'] = "Debe completar el test";        
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test

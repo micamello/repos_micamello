@@ -59,6 +59,9 @@ class Proceso_Subscripcion{
       $obj_facturacion->codigoPrincipal = $this->idplan;
       $obj_facturacion->descripdetalle = $infoplan["nombre"]; 
       $obj_facturacion->formadepago = $this->procesador->tipopago;     
+      $obj_facturacion->provinciaComprador = $this->objUsuario->provincia;     
+      $obj_facturacion->ciudadComprador = $this->objUsuario->ciudad;     
+      $obj_facturacion->codpostalComprador = $this->objUsuario->codpostal;     
       $rsfact = $obj_facturacion->generarFactura(); 
       if (is_array($rsfact) && isset($rsfact["claveacceso"]) && isset($rsfact["xml"]) && !empty($rsfact["claveacceso"]) && !empty($rsfact["xml"])){
         if (!Modelo_Factura::guardar($rsfact["claveacceso"],$rsfact["xml"],$this->objUsuario->id,$infousuario["tipo_usuario"],$infoplan["id_sucursal"],$id_comprobante)){
