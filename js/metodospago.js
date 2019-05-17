@@ -136,8 +136,7 @@ function validaCampos(tipo){
     $("#"+btn).removeClass('disabled');     
     if(tipo == 1){    
       var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
-      $('#custom').attr('value',valor);
-      console.log('v1: '+valor);
+      $('#custom').attr('value',valor);      
       document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
     }
   }
