@@ -44,5 +44,27 @@ class Modelo_Faceta{
             WHERE id_faceta = ? LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($idfaceta));
   }
+
+  public static function competenciasXfaceta(){
+
+    $sql = "SELECT f.id_faceta, GROUP_CONCAT(m.nombre SEPARATOR ', ') as competencias FROM mfo_faceta f
+          INNER JOIN mfo_competencia m ON m.id_faceta = f.id_faceta
+          GROUP BY f.id_faceta";
+
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+
+    $datos = array();
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+        $datos[$value['id_faceta']] = array();
+      }
+
+      foreach ($arrdatos as $key => $value) {
+        $datos[$value['id_faceta']] = $value['competencias'];
+      }
+    }
+    return $datos;
+  }
 }  
 ?>

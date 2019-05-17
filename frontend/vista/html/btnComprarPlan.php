@@ -13,9 +13,15 @@ if (!empty($presentarBtnCompra)){
 
 if ($presentarBtn){
 ?>
-	<div class="parpadea pull-right" >
-		<h6 style="color:#6d6d6b"><strong>Desea adquirir un plan con mayores beneficios?</strong><a href="<?php echo PUERTO."://".HOST."/planes/";?>" id="btn_compra" class="btn btn-md btn-warning">Adquierelo YA!</a></h6>
-		<br>
-		<br>
+	<div class="col-md-offset-4 col-md-8">
+	  <div class="col-md-8">
+	    <p style="text-align: right;" class="qs-text">Desea adquirir un plan con mayores beneficios?</p>
+	  </div>
+	  <div class="col-md-4">
+	    <a href="<?php echo PUERTO."://".HOST."/planes/";?>" id="btn_compra" class="btn-blue">Adquierelo YA!</a>
+	  </div>
 	</div>
+
 <?php } ?>
+
+

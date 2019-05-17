@@ -104,7 +104,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 					<div class="row">
 						<div class="col-md-10" id="drop-tit" >
 							<span>
-								<i class="fa fa-list-ul"></i> &Aacute;reas de Inter&eacute;s
+								<i class="fa fa-list-ul"></i> &Aacute;reas de Empleos
 							</span>
 						</div>
 						<div class="col-md-2" >
@@ -288,8 +288,8 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				        <div class="col-md-3 <?php if(!$sinOffSet){ echo 'col-md-offset-5'; } ?>" style="display: flex;">
 					        <span>Ordenar por: </span>
 					        <select id="tipo_orden" name="tipo_orden" class="form-control">
-					          <option value="1">Salario</option>
-					          <option value="2">Fecha</option>
+					          <option value="1" <?php if($tipo_ordenamiento == 1){ echo 'selected'; } ?>>Salario</option>
+					          <option value="2" <?php if($tipo_ordenamiento == 2){ echo 'selected'; } ?>>Fecha</option>
 					        </select>
 				        </div>
 				        <div class="col-md-4" style="padding-left: 0px; padding-right: 0px;">

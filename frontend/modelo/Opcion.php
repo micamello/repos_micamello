@@ -87,29 +87,6 @@ class Modelo_Opcion{
 		return $datos;
 	}
 
-	public static function competenciasXfaceta(){
-
-		$sql = 'SELECT f.id_faceta, GROUP_CONCAT(m.descripcion SEPARATOR "-") AS competencias FROM mfo_facetam2 f
-				
-				INNER JOIN mfo_competenciam2 m ON m.id_faceta = f.id_faceta
-				GROUP BY f.id_faceta';
-
-		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
-
-		$datos = array();
-		if (!empty($arrdatos) && is_array($arrdatos)){
-
-			foreach ($arrdatos as $key => $value) {
-				$datos[$value['id_faceta']] = array();
-			}
-
-			foreach ($arrdatos as $key => $value) {
-				$datos[$value['id_faceta']] = $value['competencias'];
-			}
-		}
-		return $datos;
-	}
-
 	public static function obtieneOpciones($faceta){
 		if (empty($faceta)){ return false; }
 		$sql = "SELECT o.id_opcion, o.descripcion, o.valor, p.id_pregunta 
