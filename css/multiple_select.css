@@ -101,7 +101,7 @@ ul.list_content_mic > li:last-child {
 
 /*añadiendo clase de lista seleccionada o elemento seleccionado*/
 .active_li{
-	background-color: #56B78A;
+	background-color: #4B98DD;
 	border-radius: 5px;
 	color: white;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -125,7 +125,7 @@ ul.list_content_mic > li:last-child {
 
 /* align glyph */
 .left-addon .fa  { left:  0px;}
-.right-addon .fa { right: 0px;}
+.right-addon .fa { right: 32px;}
 
 /* add padding  */
 .left-addon input  { padding-left:  30px; }
@@ -147,7 +147,7 @@ ul.list_content_mic > li:last-child {
 }
 
 .subarea_selected{
-	background-color: #56B78A;
+	background-color: #4B98DD;
 	color: white;
 	/*border-radius: 15px;*/
 }
@@ -175,8 +175,8 @@ ul.list_content_mic > li:last-child {
 
 .modal_selected_list{
 	/*padding: 1px;*/
-	border: solid #56B78A;;
-	background-color: #56B78A;;
+	border: solid #4B98DD;;
+	background-color: #4B98DD;;
 	border-radius: 20px;
 	color: white;
 	white-space: nowrap;

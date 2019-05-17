@@ -43,7 +43,7 @@ function quitarError(campo,id){
 
 "use strict";
 jQuery(document).ready(function ($) {
-    
+    bannerTel();
 //for Preloader
 
     //$(window).load(function () {
@@ -582,3 +582,19 @@ function searchAjax(obj,tipo_dni){
 }
 
 $('.modal').css('overflow-y', 'auto');
+
+function bannerTel(){
+  if($('.navbar-fixed-top').prev().length){
+    var navbar = $('.navbar-fixed-top');
+    var heightelement = $('.navbar-fixed-top').prev().height();
+    navbar.css('top', heightelement+'px');
+    console.log($('.navbar-fixed-top').height()+heightelement+30);
+    $('body').css('padding-top', ($('.navbar-fixed-top').height()+heightelement+35)+'px');
+  }
+  else{
+    $('body').css('padding-top', ($('.navbar-fixed-top').height()+35)+'px');
+  }
+}
+$(window).resize(function(){
+  bannerTel();
+});

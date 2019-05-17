@@ -14,7 +14,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 					<h6><b>Las ofertas aqu&iacute; presentadas estan filtradas por las siguientes caracteristicas:</b></h6>
 
 					<?php if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
-						echo '<br><b>&Aacute;reas y sub&aacute;reas de inter&eacute;s: </b>';
+						echo '<br><b>&Aacute;reas y sub&aacute;reas de empleo: </b>';
 						$areas = '';
 						foreach ($areas_subareas as $key => $value) {
 
@@ -219,7 +219,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 								$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/'; 
 								?>
 								<select id="categorias" class="form-control">
-									<option value="0">Seleccione un &aacute;rea de inter&eacute;s</option>
+									<option value="0">Seleccione un &aacute;rea de empleo</option>
 									<?php
 									foreach ($arrarea as $key => $v) {
 										echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
