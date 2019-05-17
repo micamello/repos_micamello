@@ -5,7 +5,7 @@
 </section>
 
 <form id="formPublicar" method="POST" action="<?php echo PUERTO.'://'.HOST.'/registroOferta/' ?>">
-	<section id="product" class="inicio">
+	<section id="product" class="bloque-gris">
 	  <div class="container">
 	    <div class="col-md-6">
 	      <label>Seleccione plan:</label>

@@ -352,7 +352,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 												<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>
 													<p id="texto-postulaciones">Publicada:<br> <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?></p>
 												<?php } ?>
-												<?php if($vista != 'oferta'){ ?>
+												<?php if($vista == 'vacantes'){ ?>
 													<p id="tipo-plan"><?php echo utf8_encode($datos_plan[$o['id_ofertas']]); ?></p>
 												<?php } ?>
 											</div>

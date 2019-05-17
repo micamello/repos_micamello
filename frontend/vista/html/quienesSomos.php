@@ -18,19 +18,19 @@
         </div>
 
         <div style="margin-top: 20px; text-align:center " class="col-md-12">
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <i class="qs-iconos fa fa-bullhorn"></i>
             <h3 class="qs-subt">Misi&oacute;n</h3>
             <p class="qs-text">Ofrecer servicios de reclutamiento de calidad, al innovar a trav&eacute;s de eficientes herramientas el proceso de selecci&oacute;n que garantice la estabilidad y armon&iacute;a en las relaciones laborales. </p>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6 col-sm-6 col-xs-12">
             <i class="qs-iconos fa fa-eye"></i>
             <h3 class="qs-subt">Visi&oacute;n</h3>
             <p class="qs-text">Convertirnos en la mejor referencia digital latinoamericana enlazando estrat&eacute;gicamente a las empresas y los candidatos.</p>
           </div>
         </div>
 
-        <div style="margin-top: 20px;" align="center" class="col-md-12">
+        <div style="margin-top: 20px;" align="center" class="col-sm-12 col-xs-12 col-md-12">
           <h3 class="qs-subt">Valores Corporativos</h3>
           <ul class="col-md-8 col-md-offset-2 qs-text">
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Trabajo: Mi Camello se identifica con los modismos de nuestra cultura latina, en lo que respecta a trabajo.</p></li>

@@ -2,7 +2,6 @@
   <div class="container">
     <div class="col-md-12">
       <div><h2 class="titulo text-center">Mis Planes</h2></div>
-      <div><h2 class="titulo text-center">Escoge tu plan</h2></div>
       <br>
       <br>
     </div>

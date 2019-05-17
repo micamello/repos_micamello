@@ -9,7 +9,7 @@
             </div>
             <br><br><br>
             <!-- <div><p class="text-center" style="font-size: 20px;margin-bottom: 20px;">Planes Contratados</p></div> -->
-            <div class="" style="text-align: center;"><h2 class="titulo">Planes Contratados</h2></div>
+            <div class="" style="text-align: center;"><h2 class="qs-subt">Planes Contratados</h2></div>
             <div class="panel-body">
               <div id="no-more-tables">
                 <table class="table table-bordered table-hover">

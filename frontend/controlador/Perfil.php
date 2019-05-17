@@ -83,7 +83,7 @@ class Controlador_Perfil extends Controlador_Base
                         $_FILES['subirCV'] = ''; 
                     }
                     $btnSubir  = 0;
-
+                    //print_r($_FILES); 
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
 
@@ -228,8 +228,6 @@ class Controlador_Perfil extends Controlador_Base
                 $data['areaxusuario'] = array();
             }
             
-            
-
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
@@ -237,10 +235,10 @@ class Controlador_Perfil extends Controlador_Base
             if ($imagen['error'] != 4) {
                 $validaImg = Utils::valida_upload($imagen, 1);
                 if (!$validaImg) {
-                    throw new Exception("La imagen debe ser en formato .jpg .jpeg y con un peso m\u00E1x de 1MB");
+                    
                 }
             }
-            
+            //throw new Exception("La imagen debe ser en formato .jpg .jpeg y con un peso m\u00E1x de 1MB");
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
                 if (!empty($archivo) && $archivo['error'] != 4) {
                     $validaFile = Utils::valida_upload($archivo, 2);
@@ -396,18 +394,20 @@ class Controlador_Perfil extends Controlador_Base
             } 
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 if (!empty($archivo) && $archivo['error'] != 4) {
-                    $arch = Utils::validaExt($archivo, 2);
-                    if (isset($_SESSION['mfo_datos']['usuario']['infohv'])) {
-                        if ($arch[1] != $_SESSION['mfo_datos']['usuario']['infohv']['formato']) {
+                    $arch = Utils::validaExt($archivo, 2); 
+
+                    if (!empty($_SESSION['mfo_datos']['usuario']['infohv'])) {
+                        //if ($arch[1] != $_SESSION['mfo_datos']['usuario']['infohv']['formato']) {
                             if (!Modelo_InfoHv::actualizarHv($_SESSION['mfo_datos']['usuario']['infohv']['id_infohv'], $arch[1])) {
-                                throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente1");
+                                   
                             } else {
                                 if (!Utils::upload($archivo, $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2)){
                                   throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente2");
                                 }
                             }
-                        }
-                    } else {
+                       // }
+                    } else {                    
+                       
                         if (!Modelo_InfoHv::cargarHv($idUsuario, $arch[1])) {
                             throw new Exception("Ha ocurrido un error al guardar el archivo, intente nuevamente3");
                         } else {

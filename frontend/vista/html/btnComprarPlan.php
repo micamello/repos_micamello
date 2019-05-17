@@ -21,7 +21,7 @@ if ($presentarBtn){
 	    <a href="<?php echo PUERTO."://".HOST."/planes/";?>" id="btn_compra" class="btn-blue">Adquierelo YA!</a>
 	  </div>
 	</div>
-
+	<br><br>
 <?php } ?>
 
 

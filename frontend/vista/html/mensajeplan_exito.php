@@ -1,5 +1,5 @@
 <div class="text-center">
-    <h2 class="qs-subt">Estimado/a <?php echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres'])."&nbsp;".((isset($_SESSION['mfo_datos']['usuario']['apellidos'])) ? utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']) : '');?></h2>
+    <h2 class="qs-subt"><?php echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres'])."&nbsp;".((isset($_SESSION['mfo_datos']['usuario']['apellidos'])) ? utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']) : '');?></h2>
   </div>
 <br>
 <section id="product" class="inicio">

@@ -164,7 +164,8 @@
                     <div align="center">
                       <div class="cambiar">
                         <h5 class="centro">
-                         <span class="btn btn-success" id="btn-rojo">Ya aplic&oacute; para la oferta</span>
+                          <br>
+                         <span class="btn-red" style="cursor:pointer">Ya aplic&oacute; para la oferta</span>
                         </h5>
                       </div>
                     </div>
@@ -174,7 +175,7 @@
                         <div class="col-md-12">
                           <div id="seccion_asp" class="form-group">
                               <label for="aspiracion">Aspiraci&oacute;n salarial</label><div id="err_asp" class="help-block with-errors"></div>
-                              <input class="form-control" type="text" min="1" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' maxlength="5"> placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,2); ?>" required/>
+                              <input class="form-control" type="text" min="1" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' maxlength="5" placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,2); ?>" required/>
                           </div>
                           <h5>
                             <button type="button" class="btn btn-success" id="btn-verde" onclick="validarAspiracion();">POSTULARSE</button>

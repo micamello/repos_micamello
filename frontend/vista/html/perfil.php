@@ -8,7 +8,9 @@ $_SESSION['mostrar_error'] = ""; ?>
   </div>
 </div>
 
-<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
+<?php
+
+ if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <br>
 <div class="container">
 	<div class="checkout-wrap">
@@ -220,7 +222,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 		                                	<div class="col-md-6">
 			                                    <div class="form-group" id="seccion_pag" >
 			                                        <label for="pagina_web">P&aacute;gina Web <span id="opcional">(opcional)</span></label><div id="err_pag" class="help-block with-errors"></div>
-			                                        <input class="form-control" id="pagina_web" name="pagina_web" type="text" value="<?php if(isset($data['pagina_web'])){ echo $data['pagina_web']; } else{ echo $_SESSION['mfo_datos']['usuario']['pagina_web']; } ?>" onkeyup="validarFormulario(false)"/>
+			                                        <input class="form-control" id="pagina_web" name="pagina_web" type="text" value="<?php if(isset($data['pagina_web'])){ echo $data['pagina_web']; } else{ echo $_SESSION['mfo_datos']['usuario']['pagina_web']; } ?>" onkeyup="validarFormulario(false)" placeholder="http://www.ejemplo.com"/>
 			                                    </div>
 		                                    </div>
 
@@ -515,11 +517,12 @@ $_SESSION['mostrar_error'] = ""; ?>
 													<input type="text" name="universidad2" id="universidad2" maxlength="100" class="form-control"   pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ.]+" style="display:none" onkeyup="validarFormulario(false)" value="<?php if(isset($data['universidad2'])){ echo $data['universidad2']; } else{ if($_SESSION['mfo_datos']['usuario']['nombre_univ'] != ' '){ echo $_SESSION['mfo_datos']['usuario']['nombre_univ']; } } ?>">
 		                                        </div>
 		                                    </div>
-
+<?php #print_r($_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]); ?>
 		                                    <div class="col-md-6">
 												<div class="form-group" id="seccion_area">
 													<label>&Aacute;reas de Inter&eacute;s <span title="Este campo es obligatorio">*</span></label>													
 													<div id="err_area" class="help-block with-errors"></div>
+
 													<select class="form-control" id="area" name="area[]" multiple="multiple">
 													  <!-- <option value="">Seleccione una opción</option> -->
 													  <?php 
@@ -529,7 +532,8 @@ $_SESSION['mostrar_error'] = ""; ?>
 																$selected = '';
 													        if($i != $area['id_area']){
 
-													        	if(isset($data['areaxusuario'][$area['id_area']])){
+													        	if(isset($data['areaxusuario'][$area['id_area']]) || isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
+
 													        		$selected = "selected='selected'";
 													        	}
 													          	echo "<option ".$selected." value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
@@ -552,7 +556,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 													    if(!empty($areas) && is_array($areas)){
 													      foreach ($areas as $area) {
 													      	$selected = '';
-												        	if(isset($data['areaxusuario'][$area['id_area']]) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])){
+												        	if((isset($data['areaxusuario'][$area['id_area']]) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])) || (in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]))){
 												        		$selected = "selected='selected'";
 												        	}
 												          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
@@ -808,10 +812,11 @@ $_SESSION['mostrar_error'] = ""; ?>
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="titulo-modal-hoja modal-title" id="exampleModalLongTitle">Hoja de Vida</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>                
+        <h5 class="titulo-modal-hoja modal-title" id="exampleModalLongTitle">Hoja de Vida
+        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true">&times;</span>
+        	</button> 
+        </h5>                 
       </div>
         <div class="modal-body">
           <div class="row">

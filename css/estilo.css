@@ -260,6 +260,10 @@ display: inline;
 
 /*PANTALLAS MEDIANAS*/
 @media only screen and (max-width:1000px) and (min-width:481px){
+    .qs-mv{
+        margin-top: 80px;
+    }
+
     #prox{
         font-size: 50pt;
     }
@@ -288,6 +292,11 @@ display: inline;
 }
 /*PANTALLAS GRANDES*/
 @media only screen and (min-width:1000px){
+
+    .qs-mv{
+        margin-top: 80px;
+    }
+
     #bloque-car{
         height: 170px;
     }
@@ -796,12 +805,12 @@ padding-top: 10px;
     color: #204478;
     font-size: 28pt;
     padding-top: 30px;
-    text-transform: uppercase;
 }
-.qs-mv{
+
+/*.qs-mv{
     
     padding-top: 80px;
-}
+}*/
 .lista-valores{
     text-align: left;
     margin-left: 20px;
@@ -842,7 +851,6 @@ padding-top: 10px;
     height: 44px !important;
 }
  .inicio{
-    background-color: #efefef;
     display: block;
     margin-top: 20px;
     padding: 40px 0px 40px 0px;
@@ -1543,3 +1551,16 @@ ul.checkout-bar a {
 .navbar-nav > li > a.dropdown-toggle {
     padding-top: 10px;
 }
+
+.bloque-gris{
+    background-color: #efefef;
+    display: block;
+    margin-top: 20px;
+    padding: 40px 0px 40px 0px;
+ }
+
+ .btn-min-light:hover{
+    text-decoration: none;
+    background-color: #4b98dd;
+    color: white;
+ }

@@ -8,7 +8,7 @@
       ">
         <h3>Nosotros</h3>
         <p><a class="" href="<?php echo PUERTO.'://'.HOST.'/quienesSomos/'?>">¿Quiénes somos?</a></p>
-        <p><a class="legal_info_content" href="http://blog.micamello.com.ec/" target="blanked">Blog</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO; ?>://blog.micamello.com.ec/" target="blanked">Blog</a></p>
         <h3>Políticas de Privacidad</h3>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">Términos y Condiciones</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Políticas de Privacidad</a></p>

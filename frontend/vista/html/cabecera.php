@@ -163,7 +163,7 @@ if($navegador == 'MSIE'){ ?>
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" id="img-logo"  href="<?php echo PUERTO."://".HOST;?>">
-        <img class="logo" src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
+        <img class="logo" style="height: 160%; padding:0px; margin-top: -10px; width: auto;" src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
       </a>
     </div>
     <!-- End Header Navigation -->
