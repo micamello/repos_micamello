@@ -30,20 +30,10 @@ a {
 {
   width: 35px;
   height: 35px;
-  position: relative;
-  top: -7px;
-  float: right;
-  left: 10px;
   border-radius: 100%;
   background-color: #b8c5cc;
-  /*margin: 200px 20px 20px 20px;*/
-  /*margin-top: -20px;*/
   display: block;
   display: inline-block;
-}
-
-.usericon_safari{
-  /*margin-top: 0px;*/
 }
 
 .navbar {
@@ -701,8 +691,11 @@ a {
   background-image: none;
   border: 1px solid transparent;
   border-radius: 4px;
-  background-color: #56B78A;
+  background-color: #204478;;
   color: white;
+}
+.button_transfer_list:hover{
+  color: #FFFFFF ;
 }
 
 .bounce {
@@ -746,14 +739,14 @@ a {
 .badge_item{
   padding: 5px 20px 5px 20px;
   margin: 5px 8px 5px 18px;
-  background-color: #56b78a;
+  background-color: #204478;
   color: white;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .badge_item:hover{
-  background-color: #D56464;
+  background-color: #4B98DD;
 }
 
 .error_text{
@@ -820,10 +813,10 @@ a {
   cursor: pointer;
 }
 
-.badge_item:hover{
+/*.badge_item:hover{
   background-color: #D56464;
 
-}
+}*/
 
 .show_hidden{
   cursor: pointer;
