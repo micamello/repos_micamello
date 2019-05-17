@@ -352,9 +352,11 @@ class Controlador_Oferta extends Controlador_Base{
               self::guardarEstatus($idUsuario,$idOferta,$status);   
               Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');                       
             }else{
-              if($aspiracion > 0){
+              if(strlen($aspiracion) > 0 && strlen($aspiracion) <= 5){
                 self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
                 Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
+              }else if(strlen($aspiracion) > 5){
+                $_SESSION['mostrar_error'] = "La aspiraci\u00f3n salarial debe máximo de 5 dígitos";
               }else{
                 $_SESSION['mostrar_error'] = "La aspiraci\u00f3n salarial debe ser mayor a 0";
               }

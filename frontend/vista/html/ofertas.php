@@ -316,9 +316,9 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 
 				<div id="result">
-					<?php 
+					<?php  
 					if(!empty($ofertas) && $ofertas[0]['id_ofertas'] != ''){
-						foreach($ofertas as $key => $o){ ?>
+						foreach($ofertas as $key => $o){  ?>
 
 							<div class="caja-postulaciones">
 								<?php if($o['tipo_oferta'] == 1){ echo '<div class="titulo-postulaciones">Aviso Urgente</div>'; }else{ echo '<div class="titulo-postulaciones-normal">Aviso Normal</div>'; } ?>
@@ -402,7 +402,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 													<?php 
 													$tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
 													$puedeEditar = Modelo_Oferta::puedeEditar($o["id_ofertas"],$tiempo);
-													$puedeEditar["editar"] = 1;
+													
 													?>
 
 													<div class="<?php if($vista == 'oferta'){ echo ' col-md-3 col-sm-6 col-xs-12'; }else if($vista == 'vacantes'){ echo 'col-sm-6 col-xs-12'; } ?> ">
@@ -417,7 +417,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 														} ?>
 
 														<?php if($vista != 'oferta'){ ?>
-															<div class="<?php if($vista == 'postulacion' && (isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1 || isset($o['tipo']) && $o['tipo'] == 1)){ echo 'col-md-4 col-sm-6 col-xs-12'; }else if($vista == 'postulacion' && $o['puedeEliminar'] == 0){ echo 'col-md-2 col-sm-3 col-xs-6'; } 
+															<div class="<?php if($vista == 'postulacion' && (isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1 && $o['tipo'] == 1)){ echo 'col-md-2 col-sm-3 col-xs-6'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 1){ echo 'col-md-4 col-sm-6 col-xs-12'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 2){ echo 'col-md-2 col-sm-3 col-xs-6'; }  
 															if($puedeEditar["editar"] == 0 && $vista == 'vacantes'){ echo 'col-md-6 col-md-offset-6 col-xs-12'; } ?> ">
 															<?php } ?>
 															<a href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/"; ?>">

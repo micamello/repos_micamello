@@ -843,9 +843,9 @@
 								            			//$color = '';
 								            			$title = 'completo';
 								            			if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
-						            						$imagen = 'icono-aspirante-05';
+						            						$imagen = 'icono-aspirante-05.png';
 						            					}else{
-						            						$imagen = 'icono-aspirante-07';
+						            						$imagen = 'icono-aspirante-07.png';
 						            					}
 
 								            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
@@ -855,18 +855,18 @@
 								            					$title = 'completo';
 
 								            					if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
-								            						$imagen = 'icono-aspirante-05';
+								            						$imagen = 'icono-aspirante-05.png';
 								            					}else{
-								            						$imagen = 'icono-aspirante-07';
+								            						$imagen = 'icono-aspirante-07.png';
 								            					}
 								            				}else{
 									            				//$color = ' parcial';
 									            				$title = 'parcial';	
 
 									            				if($a['numero_test'] == Modelo_Usuario::PRIMER_TEST){
-									            					$imagen = 'icono-aspirante-06';
+									            					$imagen = 'icono-aspirante-06.png';
 									            				}else if($a['numero_test'] == Modelo_Usuario::SEGUNDO_TEST){
-									            					$imagen = 'icono-aspirante-07';
+									            					$imagen = 'icono-aspirante-07.png';
 									            				}
 									            				
 								            				}
@@ -1051,7 +1051,10 @@
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="titulo-modal-hoja modal-title" id="title">ACTIVAR ACCESOS</h5>                  
+        <h5 class="titulo-modal-hoja modal-title" id="title">ACTIVAR ACCESOS</h5>    
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>              
       </div>
 		<div class="modal-body">
 			<div class="row">

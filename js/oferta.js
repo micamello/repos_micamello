@@ -252,6 +252,9 @@ function validarAspiracion(){
     if(aspiracion == 0 || aspiracion == ''){
         colocaError("err_asp", "seccion_asp","La aspiración salarial debe ser mayor a 0.","boton");
         error = 1; 
+    }else if(aspiracion.length > 5){
+        colocaError("err_asp", "seccion_asp","La aspiración salarial no debe exceder de 5 dígitos.","boton");
+        error = 1; 
     }else{
         quitarError("err_asp", "seccion_asp");
         document.form_postulacion.submit();
