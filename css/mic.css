@@ -30,20 +30,10 @@ a {
 {
   width: 35px;
   height: 35px;
-  position: relative;
-  top: -7px;
-  float: right;
-  left: 10px;
   border-radius: 100%;
   background-color: #b8c5cc;
-  /*margin: 200px 20px 20px 20px;*/
-  /*margin-top: -20px;*/
   display: block;
   display: inline-block;
-}
-
-.usericon_safari{
-  /*margin-top: 0px;*/
 }
 
 .navbar {

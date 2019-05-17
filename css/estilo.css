@@ -963,8 +963,11 @@ padding-top: 10px;
      padding-top: 15px;
 }
 .menu{
-    color:white;
-    position: sticky;
+    /*color:white;*/
+    /*position: sticky !important;*/
+    /*position: -webkit-sticky;*/
+    /*padding-bottom: 10px;*/
+    /*top: 30px;*/
 }
 .link{
     font-weight: bold;
@@ -1532,3 +1535,11 @@ ul.checkout-bar a {
     color: #204478;
     text-decoration: none;
  }
+/*-------------------------------------*/
+.metodoTexto{
+    text-align: center;
+    color: black;
+}
+.navbar-nav > li > a.dropdown-toggle {
+    padding-top: 10px;
+}
