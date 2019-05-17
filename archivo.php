@@ -86,7 +86,7 @@ if($carpeta=='hv' && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario
 			Modelo_Descarga::registrarDescarga($infoHv['id_infohv'],$id_empresa,$id_oferta);
 			$mostrar = true;
 		}else{
-			echo $cantidadRestante = 0;
+			$cantidadRestante = 0;
 			$mostrar = false;
 		}
 	}
