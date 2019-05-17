@@ -168,7 +168,7 @@ function fileValidation(fileInput,tipo){
             var tamano = fileInput.files[0].size/1024/1024;
             if(tamano > 2){
               swal('Advertencia!','El peso permitido de la hoja de vida es máx. 2MB', 'error');
-              error = 0;
+              error = 1;
             }else if(!allowedExtensions.exec(filePath)){
                 fileInput.value = '';
                 swal('Información!','El formato permitido de la hoja de vida es .pdf/.doc/.docx/', 'error');

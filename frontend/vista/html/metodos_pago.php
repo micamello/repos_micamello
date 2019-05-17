@@ -137,10 +137,9 @@
           </div>
         </div>        
       </div>      
-      <div class="col-md-2"></div>
       
+      <div class="col-md-2"></div>      
       <div class="col-md-8 col-md-offset-2">
-
         <div class="panel panel-default" id="panel_2" style="display:none;">
           <div class="panel-body">
             <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/PayPal.jpg"><br><br>            
@@ -218,11 +217,7 @@
         </div>    
       </div>  
 
-
-      <div class="col-md-2"></div>  
-      <div class="col-md-2"></div>
-
-
+      <div class="col-md-2"></div>        
       <div class="col-md-8 col-md-offset-2">
         <div class="panel panel-default" id="panel_3">          
           <div class="panel-body">
@@ -359,7 +354,7 @@
                   <br>
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
 
-                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn-blue ">
+                  <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn-blue">
                 </div>
               </div>
             

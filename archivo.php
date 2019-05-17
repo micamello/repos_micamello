@@ -1,21 +1,16 @@
 <?php
 require_once 'constantes.php';
 require_once 'init.php';
-include 'multisitios.php';
-
+//include 'multisitios.php';
 $carpeta = Utils::getParam('carpeta','',$_GET);
 $param1 = Utils::getParam('param1','',$_GET); //username
 $param2 = Utils::desencriptar(Utils::getParam('param2','',$_GET)); //idoferta
-
-
 if (empty($carpeta) || empty($param1)){
    exit; 
 }
-
 if(!Modelo_Usuario::estaLogueado()){
   exit;
 }
-
 if(!empty($param1) && !empty($carpeta)){
 	$usuario = Modelo_Usuario::existeUsuario($param1);
 	if (empty($usuario)){
@@ -25,13 +20,11 @@ if(!empty($param1) && !empty($carpeta)){
 		$archivo = $usuario["username"];
 	}
 }
-
 //si es candidato no puede ver imagenes/hojas de vida de otros candidatos
 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO && 
 	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){	
   exit;
 }
-
 $mostrar = false;
 switch ($carpeta){
 	case 'imgperfil':
@@ -72,9 +65,7 @@ switch ($carpeta){
 		$mostrar = (!$resultado) ? false : true;		
 	break;
 }
-
 if($carpeta=='hv' && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::EMPRESA){
-
 	$id_oferta = (!empty($param2)) ? $param2 : false;
 	$id_empresa = $_SESSION['mfo_datos']['usuario']['id_usuario'];
 	$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($id_empresa,$id_oferta);
@@ -103,7 +94,6 @@ if($carpeta=='hv' && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario
 		}
 	}*/
 }
-
 if ($mostrar){
   header("Pragma: no-cache"); 
   header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); 
@@ -121,6 +111,5 @@ else{
 	$enlace = $_SERVER['HTTP_REFERER'];
 	header('Location: '.$enlace);
 }
-
 exit;
 ?>
