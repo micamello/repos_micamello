@@ -73,7 +73,7 @@ foreach ($data as $letra => $value) {
                 if($pos !== false){
 
                     $exp .= '('.$letra.'[0-9]{1,3})';
-                    $literales[$letra] = $c;
+                    $literales[$letra] = $c['faceta'];
                 }
                 $a++;
             }

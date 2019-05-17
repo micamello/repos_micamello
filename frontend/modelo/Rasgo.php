@@ -3,7 +3,7 @@ class Modelo_Rasgo{
   
   	public static function obtieneListadoAsociativo(){
 
-		$sql = "SELECT id_faceta, id_puntaje, GROUP_CONCAT(descripcion SEPARATOR '/') as rasgo FROM mfo_rasgo GROUP BY id_faceta,id_puntaje ORDER BY id_puntaje";
+		$sql = "SELECT id_faceta, id_puntaje, GROUP_CONCAT(descripcion SEPARATOR '/ ') as rasgo FROM mfo_rasgo GROUP BY id_faceta,id_puntaje ORDER BY id_puntaje";
     	$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
 		$datos = array();

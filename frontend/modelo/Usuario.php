@@ -345,6 +345,8 @@ WHERE
     return $rs; 
   }
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$obtCantdRegistros=false){
+    print_r($filtros['R']);
+
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,u.id_situacionlaboral,u.id_tipolicencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
     u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
     FROM

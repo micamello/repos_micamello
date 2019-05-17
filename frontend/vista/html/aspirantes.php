@@ -71,7 +71,7 @@
 				    </div>
 					<div class="panel-body collapse" id="facetas-desplegable" aria-expanded="false">
 						<div id="facetas">
-						<?php
+						<?php 
 						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
 						if (!empty($facetas)) {
 							$i = 0;
@@ -89,7 +89,7 @@
 								$pos += 6;
 								
 								echo '<div id="fac_'.$i.'" style="float:left;width: 90%;"><div class="p-3">
-						                <h6 class="font-16 mb-3 mt-0">'.utf8_encode(ucfirst(strtolower($v))).'</h6>
+						                <h6 class="font-16 mb-3 mt-0">'.utf8_encode(ucfirst(strtolower($v['faceta']))).'</h6>
 						                <input type="text" id="range_0'.$i.'">
 						            </div></div><div id="btn_'.$i.'" style="float:right;padding-top: 40px;cursor:pointer"><a onclick="verFacetas(\''.$letra.'\','.$pos.')"><i class="fa fa-search"></i></a></div>';
 								$i++;
@@ -203,7 +203,7 @@
 			      <div class="row">
 			        <div class="col-md-10" id="drop-tit" >
 			          <span>
-						<i class="fa fa-list-ul"></i> &Aacute;reas de Inter&eacute;s</span>
+						<i class="fa fa-list-ul"></i> &Aacute;reas de Empleos</span>
 					</div>
 			        <div class="col-md-2" >
 			          <span class="caret"></span>
@@ -450,7 +450,7 @@
 									$pos += 6;
 									
 									echo '<div id="fac_'.$i.'" style="float:left;width: 100%;"><div class="p-3">
-							                <h6 class="font-16 mb-3 mt-0">'.utf8_encode(ucfirst(strtolower($v))).'</h6>
+							                <h6 class="font-16 mb-3 mt-0">'.utf8_encode(ucfirst(strtolower($v['literal']))).'</h6>
 							                <input type="text" id="range_0'.$i.'">
 							            </div></div>';
 									$i++;
