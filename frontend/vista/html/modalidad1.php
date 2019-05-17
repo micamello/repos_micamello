@@ -4,7 +4,7 @@
 		<div class="text-center">
 			<br>
 			<div class="con_encabezado">
-				<span class="encabezado">Por favor ordene de 1 a 5 las siguientes oraciones en cada pregunta. (1 es la oración con la que mas se identifica y 5 es con la que menos se identifica). Este test consta de 20 preguntas</span>
+				<span class="encabezado">Por favor ordene de 1 a 5 las siguientes oraciones en cada pregunta. (1 es la oración con la que mas se identifica y 5 es con la que menos se identifica). Este test consta de 20 preguntas<br><h3 class="metodoTexto"><b>Método seleccionado: </b>Doble Click<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/1.png";?>"></h3></span>
 			</div>
 			<br>
 		</div>
