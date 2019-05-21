@@ -1,6 +1,3 @@
-<input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
-<input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
-
 <footer id="contact" class="footer p-top-30">
   <div class="container-fluid">
     <div class="foot_mic">

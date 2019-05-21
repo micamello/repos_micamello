@@ -2,7 +2,6 @@
     <div class="col-md-12">
       <div class="text-center"><h2 class="titulo text-center">Planes</h2></div>
       <br>
-      <br>
     </div>
 
 <?php if (!empty($planes)){ ?>   

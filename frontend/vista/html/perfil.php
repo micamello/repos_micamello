@@ -138,7 +138,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 									                  $option = '';
 									                  foreach(DOCUMENTACION as $key => $doc){
 									                    $option .= "<option value='".$key."'";
-									                	if ($_SESSION['mfo_datos']['usuario']['tipo_doc'] == $key || (isset($data['tipo_doc']) && $data['tipo_doc'] == $key))
+									                	if ($_SESSION['mfo_datos']['usuario']['tipo_doc'] == $key || (isset($data['documentacion']) && $data['documentacion'] == $key))
 														{ 
 															$option .= " selected='selected'";
 														}
@@ -212,7 +212,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 			                                <div class="col-md-6">
 			                                    <div id="mayoria" class="form-group">
 			                                        <label for="mayor_edad">Fecha de Nacimiento<span title="Este campo es obligatorio">*</span></label><div id="error" class="help-block with-errors"></div>
-			                                         <input type="text" data-field="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>" placeholder="aaaa-mm-dd" value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>">
+			                                         <input type="text" data-field="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>" placeholder="aaaa-mm-dd" value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>" onchange="validarFormulario(false)">
 			                                         <div id="fecha"></div>
 			                                    </div>
 		                                    </div>
@@ -517,7 +517,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 													<input type="text" name="universidad2" id="universidad2" maxlength="100" class="form-control"   pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ.]+" style="display:none" onkeyup="validarFormulario(false)" value="<?php if(isset($data['universidad2'])){ echo $data['universidad2']; } else{ if($_SESSION['mfo_datos']['usuario']['nombre_univ'] != ' '){ echo $_SESSION['mfo_datos']['usuario']['nombre_univ']; } } ?>">
 		                                        </div>
 		                                    </div>
-<?php #print_r($_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]); ?>
+
 		                                    <div class="col-md-6">
 												<div class="form-group" id="seccion_area">
 													<label>&Aacute;reas de Inter&eacute;s <span title="Este campo es obligatorio">*</span></label>													
@@ -568,7 +568,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 											</div>
 
 		                                    <div class="clearfix"></div>
-		                                
+		
 		                                    <div class="col-md-4 col-md-offset-1">
 												<div class="form-group">
 													<label>Idioma: </label><div class="help-block with-errors"></div>

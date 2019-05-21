@@ -13,10 +13,10 @@
 <div class="container-fluid">
 	<?php  
 
-	if(/*$costo == 0 && */!empty($limite_plan)){ ?>
+	if(!empty($limite_plan) && $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)] > $limite_plan){ ?>
 		<br>
 		<div class="alert alert-info col-md-12"> 
-			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, existen en esta oferta <?php echo $cantd_total; ?> postulados pero solo puede vizualizar <b><?php echo $limite_plan; ?></b> postulados.
+			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, en esta oferta existen <b><?php echo $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)]; ?> postulados</b> pero solo puede visualizar <b><?php echo $limite_plan; ?></b>.
 		</div>
 	<?php } ?>
 
@@ -750,7 +750,7 @@
 						        			}
 						        			if(!empty($limite_plan)){
 						        				$ver = false;
-						        				if($i <= ($limite_plan-1) && $num_aumentar <= ($limite_plan-1)){
+						        				if($i < $limite_plan && ($num_aumentar+$i) <= $limite_plan-1){
 						        					$ver = true;
 						        				}
 						        			}else{
@@ -984,28 +984,30 @@
 	        <div class="col-md-12">
 				<?php echo $paginas; ?>
 			</div>
-		</div>
+		
 		<?php 
-		if(!empty($limite_plan) && $cantd_total > $limite_plan){ 
-			if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
-				echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
-			}else{
-				//$_SESSION['mfo_datos']['usuario']['ofertaConvertir'] = $id_oferta;
-				echo '<input type="hidden" name="cantd_planes" id="cantd_planes" value="'.count($planes).'">
-				<input type="hidden" name="idOferta" id="idOferta" value="'.$id_oferta.'">';
-				?>
-				<div id="convertirOferta" class="col-md-9">
-				  <div class="col-md-6">
-				    <p style="text-align: right;" class="qs-text">Mira todos los perfiles y elige al mejor candidato!</p>
-				  </div>
-				  <div class="col-md-6">
-				    <button id="btn_convertir" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title=""><?php if(count($planes)!=0){ echo 'CONVERTIR'
-						; }else{ echo 'CONTRATAR'; } ?> AHORA</button>
-				  </div>
-				</div>
-			<?php 
-			} 
-		} ?>
+
+			if(!empty($limite_plan) && $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)] > $limite_plan){ 
+				if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){ 
+					echo '<input type="hidden" name="ofertaConvertir" id="ofertaConvertir" value="'.$_SESSION['mfo_datos']['usuario']['ofertaConvertir'].'">';
+				}else{
+					//$_SESSION['mfo_datos']['usuario']['ofertaConvertir'] = $id_oferta;
+					echo '<input type="hidden" name="cantd_planes" id="cantd_planes" value="'.count($planes).'">
+					<input type="hidden" name="idOferta" id="idOferta" value="'.$id_oferta.'">';
+					?>
+					<div id="convertirOferta">
+					  <div class="col-md-6">
+					    <p style="text-align: right;" class="qs-text">Mira todos los perfiles y elige al mejor candidato!</p>
+					  </div>
+					  <div class="col-md-6">
+					    <button id="btn_convertir" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title=""><?php if(count($planes)!=0){ echo 'COMPLETAR'
+							; }else{ echo 'CONTRATAR'; } ?> AHORA</button>
+					  </div>
+					</div>
+				<?php 
+				} 
+			} ?>
+		</div>
 	</div>
 </div>
 

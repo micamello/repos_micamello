@@ -361,6 +361,9 @@ $('#tipo_doc').on('change', function(){
         else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
           colocaError("err_dni", "seccion_dni","Mínimo 13 dígitos","btndeposito");
         }
+        else{
+          quitarError("err_dni","seccion_dni");
+        }
       }else{
         colocaError("err_dni", "seccion_dni","Documento obligatorio","btndeposito");
         error = 1;
@@ -373,7 +376,9 @@ $('#tipo_doc').on('change', function(){
 });
 
 $('#tipo_docPM').on('change', function(){
+
     var tipo_doc = document.getElementById('tipo_docPM').value;
+    console.log(tipo_doc);
     if(tipo_doc != 0){      
       if(document.getElementById('dniPM').value != ""){
         if(document.getElementById('dniPM').value.length >= 10){
@@ -390,6 +395,9 @@ $('#tipo_docPM').on('change', function(){
         }
         else if(tipo_doc == 1 && document.getElementById('dniPM').value.length < 13){
           colocaError("err_dniPM", "seccion_dniPM","Mínimo 13 dígitos","btnpayme");
+        }
+        else{
+          quitarError("err_dniPM","seccion_dniPM");
         }
       }else{
         colocaError("err_dniPM", "seccion_dniPM","Documento obligatorio","btnpayme");
@@ -414,7 +422,7 @@ $('#num_comprobante').on('blur', function(){
 
 $('#valor').on('blur', function(){
   var val = document.getElementById('valor').value;
-  validarNumTelf(val,"err_val","seccion_val","btndeposito");
+  validarDineroFormPlanes(val,"err_val","seccion_val","btndeposito");
   validaCampos(2);
 });
 
@@ -442,6 +450,9 @@ $('#dni').on('blur', function(){
       }
       else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
         colocaError("err_dni", "seccion_dni","Mínimo 13 dígitos","btndeposito");
+      }
+      else{
+        quitarError("err_dni","seccion_dni");
       }
     }else{
       colocaError("err_dni", "seccion_dni","Documento no puede ser vacío","btndeposito");
@@ -502,6 +513,9 @@ $('#dniPM').on('blur', function(){
       }
       else if(tipo_doc == 1 && document.getElementById('dniPM').value.length < 13){
         colocaError("err_dniPM", "seccion_dniPM","Mínimo 13 dígitos","btnpayme");
+      }
+      else{
+        quitarError("err_dniPM","seccion_dniPM");
       }
     }else{
       colocaError("err_dniPM", "seccion_dniPM","Documento no puede ser vacío","btnpayme");
@@ -685,7 +699,7 @@ function validarFormulario(){
   }else{
     quitarError(err_correo,seccion_correo);
   }
-  if(direccion.length >= '10' && direccion.length <= '50'){
+  if(direccion.length >= 10 && direccion.length <= 50){
     if(validarDir(direccion,err_dir,seccion_dir,btn)){
       error = 1;
     }else{

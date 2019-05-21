@@ -53,7 +53,7 @@
                   <div class="col-md-6">
                     <div id="seccion_val" class="form-group">
                       <label>Valor del d&eacute;posito</label><div id="err_val" class="help-block with-errors"></div>
-                      <input type="text" name="valor" id="valor" class="form-control" onkeypress="return validaDecimales(event,this);" maxlength="10" minlength="2">
+                      <input type="text" name="valor" id="valor" class="form-control" onkeypress="return validaDecimales(event,this);" maxlength="5" minlength="2">
                     </div>
                   </div>
                   <div id="seccion_img" class="col-md-12">

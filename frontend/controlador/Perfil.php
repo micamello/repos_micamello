@@ -59,6 +59,7 @@ class Controlador_Perfil extends Controlador_Base
                     $estado_civil = Modelo_EstadoCivil::obtieneListado();
                     $areas = Modelo_AreaSubarea::obtieneAreas_Subareas();
                     $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    //print_r($nivelIdiomas);
                 }else{
                     $arrsectorind = Modelo_SectorIndustrial::consulta();
                     $cargo = Modelo_Cargo::consulta();
@@ -86,7 +87,7 @@ class Controlador_Perfil extends Controlador_Base
                     //print_r($_FILES); 
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
-
+                    $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
                 //Detecta si el parametro cambiarClave viene por post para así acceder al cambio de clave
                 if (Utils::getParam('cambiarClave') == 1) {
@@ -220,14 +221,14 @@ class Controlador_Perfil extends Controlador_Base
                         array_push($array_subareas_seleccionadas, $valor[2]);
                     }else{
 
-                        throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
+                       
                     }
                 }
                 $data['areaxusuario'] = $areas_subareas;
             }else{
                 $data['areaxusuario'] = array();
             }
-            
+
             if (!isset($data['dni'])){
                 $data['dni'] = $_SESSION['mfo_datos']['usuario']['dni'];
             }
@@ -238,7 +239,7 @@ class Controlador_Perfil extends Controlador_Base
                     
                 }
             }
-            //throw new Exception("La imagen debe ser en formato .jpg .jpeg y con un peso m\u00E1x de 1MB");
+
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
                 if (!empty($archivo) && $archivo['error'] != 4) {
                     $validaFile = Utils::valida_upload($archivo, 2);

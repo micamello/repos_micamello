@@ -361,6 +361,7 @@ WHERE
     if($obtCantdRegistros === false && !empty($limite)){
       $subquery1 .= " LIMIT 0,".$limite; 
     }
+   // echo $subquery1;
     $subquery1 .= ") t2";
     $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.count($facetas).',2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
     $sql = "SELECT ";
