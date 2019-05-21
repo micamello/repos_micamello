@@ -762,10 +762,11 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
         $mfoUsuario = Modelo_Usuario::informacionPerfilUsuario($datos['id_usuario']);
         $datos = array_merge($datos, $mfoUsuario);
-        $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($datos['id_usuario']);
+        $usuarioxarea = Modelo_UsuarioxArea::listado($datos['id_usuario']);
         $dataareasubarea = array();
         foreach ($usuarioxarea as $key=>$value) {
-            array_push($dataareasubarea, $value[0]);
+            // array_push($dataareasubarea, $value[0]);
+          array_push($dataareasubarea, $value['id_areas_subareas']);
         }
         $dataareasubarea = implode(",", $dataareasubarea);
         $areasubarea = Modelo_UsuarioxAreaSubarea::obtieneAreas_Subareas($dataareasubarea);
@@ -811,6 +812,9 @@ class Controlador_GenerarPDF extends Controlador_Base
         if(isset($datos['aspSalarial'])){
           $html .= "<h5 style='text-align: center;'><b>Aspiración salarial:</b> ".SUCURSAL_MONEDA.$datos['aspSalarial']."</h5>";
         }
+        $documento = ""; if($datos['tipo_doc'] == 1) $documento = 'Ruc';
+                if($datos['tipo_doc'] == 2) $documento = 'Cédula';
+                if($datos['tipo_doc'] == 3) $documento = 'Pasaporte';
         $html .= $inicioTabla;
           $html .= $iniciotbody;
             $html .= $iniciotr;
@@ -842,19 +846,21 @@ class Controlador_GenerarPDF extends Controlador_Base
             $html .= $fintr;
     // ------------------------------------------------------
             $html .= $iniciotr;
+
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Nacionalidad</b>";
+              $html .= "<b>Estado civil</b>";
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
               $html .= "<b>Edad</b>";
               $html .= $fintd;
+
             $html .= $fintr;
 
             $html .= $iniciotr;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['nacionalidad'];
+              $html .= $datos['estadocivil'];
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
@@ -912,7 +918,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 // ------------------------------------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Escolaridad</b>";
+              $html .= "<b>Último estudio realizado</b>";
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
@@ -935,11 +941,11 @@ class Controlador_GenerarPDF extends Controlador_Base
 // ------------------------------------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Licencia</b>";
+              $html .= "<b>Tipo de licencia</b>";
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Universidad</b>";
+              $html .= "<b>Estudios en el extranjero</b>";
               $html .= $fintd;
             $html .= $fintr;
 
@@ -950,22 +956,23 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['universidad'];
+              $html .= $datos['extranjero'];
               $html .= $fintd;
 
             $html .= $fintr;
 
 // ------------------------------------------------------
             $html .= $iniciotr;
+
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Estado civil</b>";
+              $html .= "<b>Universidad</b>";
               $html .= $fintd;
             $html .= $fintr;
 
             $html .= $iniciotr;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['estadocivil'];
+              $html .= $datos['universidad'];
               $html .= $fintd;
 
             $html .= $fintr;
@@ -979,15 +986,15 @@ class Controlador_GenerarPDF extends Controlador_Base
 // ------------------------------------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Ciudad</b>";
+              $html .= "<b>Ciudad de residencia</b>";
               $html .= $fintd;
 
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>País</b>";
+              $html .= "<b>Nacionalidad</b>";
               $html .= $fintd;
 
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Provincia</b>";
+              $html .= "<b>Provincia de residencia</b>";
               $html .= $fintd;
             $html .= $fintr;
 
@@ -998,7 +1005,7 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= $fintd;
 
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['pais'];
+              $html .= $datos['nacionalidad'];
               $html .= $fintd;
 
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
@@ -1021,7 +1028,7 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Teléfono</b>";
+              $html .= "<b>Celular</b>";
               $html .= $fintd;
             $html .= $fintr;
 
@@ -1039,11 +1046,11 @@ class Controlador_GenerarPDF extends Controlador_Base
 
             $html .= $iniciotr;
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Dni</b>";
+              $html .= "<b>".$documento."</b>";
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Teléfono convencional</b>";
+              $html .= "<b>Teléfono</b>";
               $html .= $fintd;
             $html .= $fintr;
 

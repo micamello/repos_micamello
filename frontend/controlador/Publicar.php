@@ -114,7 +114,7 @@ class Controlador_Publicar extends Controlador_Base {
                   'breadcrumbs'=>$breadcrumbs,
                   'vista'=>'publicar'
                 );
-
+    $tags["template_css"][] = "multiple_select";
     $tags["template_css"][] = "DateTimePicker";
     $tags["template_js"][] = "assets/js/main";
     $tags["template_js"][] = "tinymce/tinymce.min";      
@@ -142,7 +142,7 @@ class Controlador_Publicar extends Controlador_Base {
                       'primerEmpleoOf'=>1,
                       'ofertaUrgenteOf'=>1,
                       'anosexp'=>1,
-                      'licenciaOf'=>0, 
+                      'licenciaOf'=>1, 
                       'DispOf'=>1, 
                       'residenciaOf'=>1,
                       'discapacidadOf'=>1,

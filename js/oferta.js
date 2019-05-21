@@ -78,14 +78,14 @@ if(document.getElementById('des_of')){
                     quitarError('descripcion_error','des_of_error');
                     document.getElementById("des_of_error").setAttribute("class", "form-group");
                     if (errors.length <= 0 && ($(':input').filter('[required]:visible').val() != "")) {                    
-                        publicar_btn.setAttribute("class", "btn btn-success");
+                        publicar_btn.setAttribute("class", "btn-light-blue");
                     }
                     else{
-                        publicar_btn.setAttribute("class", "btn btn-success disabled");
+                        publicar_btn.setAttribute("class", "btn-light-blue disabled");
                     }
                 }
                 else{
-                    publicar_btn.setAttribute("class", "btn btn-success disabled");
+                    publicar_btn.setAttribute("class", "btn-light-blue disabled");
                 }
             });
         }

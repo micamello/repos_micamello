@@ -238,6 +238,9 @@ function inicializarDependencia(obj){
         numero.textContent+= subpanelNumber;
         loadButtonSelected(obj);
         ondeleteCount();
+        var modalSelectedSpace = $('#'+id_panel).parent(':eq(0)').parent().next();
+        var modalCode = '<div class="modal fade" id="modal_select" role="dialog"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body" style="overflow: scroll"></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></div> </div></div></div>';
+        modalSelectedSpace.append(modalCode);
     }
 }
 
@@ -556,7 +559,7 @@ function rise_modal_selected(obj){
             texto_area = $('#area_'+id_area).text().match(/(.*)[(]/)[1];
             seleccionados_listado += '<div class="clearfix"></div><div><label>'+texto_area+'</label><br>';
         }
-        seleccionados_listado += "<p class='modal_selected_list col-md-6' style='padding: 1px;'>"+texto+"<i class='fa fa-times' id='selected_"+id+"' onclick='delete_list(this);'></i></p>";
+        seleccionados_listado += "<p class='modal_selected_list col-md-4 col-md-offset-1'><span>"+texto+"</span><i class='fa fa-times' id='selected_"+id+"' onclick='delete_list(this);'></i></p>";
     }
     panel_body.append(seleccionados_listado);
 }

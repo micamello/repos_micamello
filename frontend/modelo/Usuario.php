@@ -117,7 +117,7 @@ class Modelo_Usuario{
     IF(u.viajar = '0' , 'NO', 'SI') as viajar,
     IF(u.residencia = '0' , 'NO', 'SI') as residencia,
     IF(u.discapacidad = '0' , 'NO', 'SI') as discapacidad,
-    ifnull(u.tlf_convencional, '-') as telefonoConvencional,
+    IF(u.tlf_convencional != '', u.tlf_convencional, '-') as telefonoConvencional,
     g.descripcion AS genero,
     e.descripcion AS escolaridad,
     sl.descripcion AS situacionLaboral,
@@ -126,7 +126,8 @@ class Modelo_Usuario{
     pr.nombre AS provincia,
     mpais.nombre_abr AS nacionalidad,
     ifnull(tl.descripcion, '-') AS licencia,
-    ifnull(uni.id_univ, ifnull(uni.nombre, '-')) as universidad,
+    if(nombre_univ != '', 'SI', 'NO') as extranjero,
+    if (u.id_univ, uni.nombre, if(nombre_univ, nombre_univ, '-')) as universidad,
     ifnull(es.descripcion, '-') as estadocivil
 FROM
     mfo_usuario u
