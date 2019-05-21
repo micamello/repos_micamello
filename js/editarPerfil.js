@@ -537,8 +537,8 @@ function validarFormulario(tipovalidacion){
     var error = 0;
     var err_list = "Debe seleccionar una opción";
     var err_campo = "No puede ser vacío";
-    var err_formato_letra = "Mín. 1 caracter";
-    var err_formato_letra2 = "Mín. 3 caracter";
+    var err_formato_letra = "Solo letras, mín. 1 caracter";
+    var err_formato_letra2 = "Solo letras, mín. 3 caracter";
     var err_formato_numeros = "Solo números";
     var err_univ = "Debe introducir una universidad";
 
@@ -762,7 +762,7 @@ function validarFormulario(tipovalidacion){
                     colocaError("err_ape", "seccion_apellido",err_campo,"boton");
                     mensaje += '- Apellidos, '+err_campo+'\n';
                     error = 1; 
-                }else if(!validarNombreEmpresa(apellidos)){
+                }else if(!validarNombreApellido(apellidos)){
                     colocaError("err_ape", "seccion_apellido",err_formato_letra,"boton");
                     mensaje += '- Apellidos, '+err_formato_letra+'\n';
                     error = 1;

@@ -24,7 +24,7 @@ class Modelo_Oferta{
   }
 
   public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$cambioRes=false,&$filtros=false){
-    
+
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
         $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
@@ -45,7 +45,7 @@ class Modelo_Oferta{
     $tiempo_ofertaUrgente = Modelo_Parametro::obtieneValor('tiempo_ofertaUrgente');
     $sql .= ", IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= ".($tiempo_ofertaUrgente*60)." && o.tipo = 1,1,0) as orden_urgente";
 
-    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os, mfo_tipolicencia tl ";
+    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os, mfo_tipolicencia tl";
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= ", mfo_postulacion pos, mfo_usuario u";
     }
@@ -131,7 +131,7 @@ class Modelo_Oferta{
         $sql .= " ORDER BY orden_urgente DESC,o.fecha_creado DESC";
       }
     }
-    //echo $sql;
+    echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -154,7 +154,7 @@ class Modelo_Oferta{
     $tiempo_ofertaUrgente = Modelo_Parametro::obtieneValor('tiempo_ofertaUrgente');
     $sql .= ", IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= ".($tiempo_ofertaUrgente*60)." && o.tipo = 1,1,0) as orden_urgente";
 
-    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_tipolicencia tl ";
+    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_tipolicencia tl";
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= ", mfo_postulacion pos, mfo_usuario u";
     }
@@ -264,7 +264,7 @@ class Modelo_Oferta{
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
-    //echo $sql;
+    echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

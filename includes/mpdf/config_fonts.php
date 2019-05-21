@@ -198,6 +198,9 @@ $this->fontdata = array(
 		'BI' => "XB Zar BdIt.ttf",
 		'unAGlyphs' => true,
 		),
+	"gothic"=>array(
+		'R' => "GOTHIC.TTF",
+	),
 
 
 

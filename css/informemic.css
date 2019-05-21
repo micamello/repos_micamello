@@ -16,70 +16,173 @@ footer{
 }
 
 body{
-}
-/*
-
-
-
-.titulo_1{
-        text-align: center; 
-        font-family: 
-        font-family: 'Archivo', sans-serif;
-}
-
-.text_justify{
-        text-align: justify; 
-        font-family: font-family: 'Archivo', sans-serif;
-}
-
-.text_separate{
-        padding-top: 350px; 
-        font-size: 80px; 
-        font-weigth: 550; 
-        text-align: center; 
-        font-family: font-family: 'Archivo', sans-serif; 
-        color: #118BD8;
-}
-
-.ant_name{
-        font-size: 25px; 
-        font-family: font-family: 'Archivo', sans-serif;
-}
-
-.name_caratula{
-        font-size: 80px; 
-        font-family: font-family: 'Archivo', sans-serif; 
-        color: #118BD8;
-}
-
-.content_caratula{
-        padding-top: 500px; 
-        text-align: right;
-}
-
-.items_inf{
-        background-color: #0096FF;
-        padding: 5px;
-        border-radius: 10px;
-        margin: 0px 175px 10px 175px;
-
+        font-family: "gothic";
+        width: 1000px;
+        padding-right: 15px;
+          padding-left: 15px;
+          margin-right: auto;
+          margin-left: auto;
+          text-align: justify;
+      }
+      p{
+        font-size: 12pt;
+      }
+      h1{
         text-align: center;
-        font-size: 14px;
-        color: #FFFFFF;
-}
+      }
+      h2{
+        font-weight: bold;
+        text-transform: uppercase;
+        font-size: 14pt;
+      }
+      img{
+        width: 50%;
+        margin: 0 auto;
+      }
+      blockquote{
+        font-style: italic;
+        font-size: 14pt;
+        text-align: center;
+      } 
+      td{
+        width: 70px !important;
+      } 
+      .tabla2 td  {
+        border-left: 1px solid black;
+        border-right: 1px solid black;
+        border-collapse: collapse;
+      }
+      .tabla1,
+      .tabla2,
+      .tabla1 td,
+      .tabla1 th,
+      .tabla2 th{
+        border: 1px solid black;
+          border-collapse: collapse;
+      }
+      .pg1{
+        text-align: right;    
+      }
+      .pg1 p{
+        font-size: 18pt;
+      }
 
-.img_inf_mic{
-        width: 75%;
-        position: absolute;
-}
+      .mayor{
+        font-size: 16pt;
+        font-weight: bold;
+      }
+      .tabla1 td{
+        padding: 5px;
+      }
+      .tabla1 tr{   
+        text-align: center;
+      }
+      .tabla1 th{
+        font-size: 20pt;
+      }
+      .verde{
+        color: #2da952;
+        text-transform: uppercase;
+      }
+      .amarillo{
+        color: #f1e60d;
+        text-transform: uppercase;
+      }
+      .rojo{
+        color: #e51c20;
+        text-transform: uppercase;
+      }
+      .morado{
+        color: #66398e;
+        text-transform: uppercase;
+      }
+      .azul{
+        color: #0a6fb7;
+        text-transform: uppercase;
+      }
+      .verde-bg{
+        background-color: #a8d08d;
+      }
+      .amarillo-bg{
+        background-color: #ffd966;
+      }
+      .rojo-bg{
+        background-color: #ff7575;
+      }
+      .morado-bg{
+        background-color: #a86ed4;
+      }
+      .azul-bg{
+        background-color: #4b98dd;
+      }
 
-.div_img_mic_inf{
+      .tabla2 th{
+        text-align: center;
+        font-size: 20pt;
+      }
+      .tabla2 td{
+        padding: 5px;
+      }
+      .bloque-1{
+        text-align: center;
+        font-size: 11pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        padding: 25px 40px;
+      }
+      .bloque-gris{
+        background-color: #c9c9c9;
+        width: 500px;
+        padding: 5px 20px;
+      }
+      .pintar-azul{
+        background-color: #204478;
+      }
+      .pintar-celeste{
+        background-color: #4b98dd;
+      }
+      .publicidad{
+        text-align: center;
+        font-size: 14pt;
+        font-style: italic;
+        width: 70%;
+        margin: 0 auto;
+      }
+      .link{
+        font-weight: bold;
+      }
+      .aviso{
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+      }
+      .limite{
+        border-left: 1px solid red;
+      }
 
-        padding-left: 210px;
-        position: fixed;
-        bottom: 0;
-}
+      /***TABLAS GUIAS*/
+      .demo {
+        /*border:1px solid #000000;*/
+        border-collapse:collapse;
+        font-size: 110px;
+      }
 
-.selectedItems{
-        background-color: cyan;
-}*/
+     #borde_barra{
+        border:1px solid #000000;
+      }
+
+      .fin{
+        border-right:1px solid #000000;
+      }
+
+      .porcentaje{
+        padding-left: 50px;
+      }
+
+      .porcentaje span{
+        border:1px solid #000000;
+      }
+
+      .color_asterisco{
+        color:#4b98dd;
+      }

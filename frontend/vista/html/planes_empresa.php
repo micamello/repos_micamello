@@ -3,7 +3,6 @@
     <div class="col-md-12">
       <div><h2 class="titulo text-center">Mis Planes</h2></div>
       <br>
-      <br>
     </div>
 
 <?php if (!empty($planes)){ ?> 
@@ -145,8 +144,7 @@
                   <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "mensaje();" : 'buttonplan();';?>
                   <br>
                   <br>
-                  <br>
-                  <br>         
+                  <br>       
                   <a class="pricebutton btn-blue btn-bottom" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
                   <p><br></p>
                 </ul>                                    
