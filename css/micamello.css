@@ -634,6 +634,7 @@ a.addButton:hover{
   color: white;
   padding: 5px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 .active_button{
