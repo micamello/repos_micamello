@@ -346,6 +346,7 @@ class Controlador_Oferta extends Controlador_Base{
             }
           }
  
+          $licencias = Modelo_TipoLicencia::obtieneListadoAsociativo();
           $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);         
           if (Utils::getParam('postulado') == 1) {          
             if(!empty($status)){
@@ -376,6 +377,7 @@ class Controlador_Oferta extends Controlador_Base{
             'postulado'=>$postulado,
             'autopostulaciones_restantes'=>$autopostulaciones_restantes,
             'vista'=>$vista,
+            'licencias'=>$licencias,
             'datos_plan'=>$datos_plan
           );
           

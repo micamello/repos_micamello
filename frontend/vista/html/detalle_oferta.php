@@ -97,7 +97,11 @@
             <div>
               <h5>
                 <b>Tipo de licencia para conducir: </b>
-                <?php echo $o['licencia']; ?>                        
+                <?php if($o['licencia'] == 0){
+                  echo 'Sin licencia';
+                }else{ 
+                  echo $licencias[$o['licencia']]; 
+                } ?>                        
               </h5>
             </div>
           </div>
