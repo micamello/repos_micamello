@@ -136,14 +136,13 @@ class Proceso_Subscripcion{
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
     $notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
-      $mensaje = "Por favor acceda a este enlace para ver las ofertas.";       
-      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
+      $mensaje = "Descubra todas sus oportunidades laborales dando ";       
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
     }else{
-      $mensaje = "Por favor acceda a este enlace para publicar una oferta."; 
-      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
+      $mensaje = "Para publicar una oferta, por favor de "; 
+      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
     } 
-    $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
-    $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
+    $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);       
     Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,Modelo_Notificacion::ACTIVACION_SUBSCRIPCION);
     Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
   }

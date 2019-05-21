@@ -4,7 +4,17 @@ class Controlador_Inicio extends Controlador_Base {
   public function construirPagina(){
   
     setcookie('preRegistro', null, -1, '/');    
-    $arrarea = Modelo_Area::obtieneListado();    
+    $arrarea = Modelo_Area::obtieneListado();  
+    $divisible = round(count($arrarea)/12);
+    $completar = ($divisible*12)-count($arrarea);
+    $i = 1;
+    foreach ($arrarea as $key => $a) {
+      $arrarea[] = array('id_area'=>$a['id_area'],'nombre'=>$a['nombre'],'ico'=>$a['ico']);
+      if($i == $completar){
+        break;
+      }
+      $i++;
+    }  
     $arrauspiciante = Modelo_Auspiciante::obtieneListado();        
     
     $tags = array('arrarea'=>$arrarea,                  
