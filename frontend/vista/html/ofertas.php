@@ -334,7 +334,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 												<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) { 	?>
 													<?php if (REQUISITO[$o['confidencial']] == 'No') {
-														echo '<p id="tipo-empresa">'.$o['empresa'].'</p>';
+														echo '<p id="tipo-empresa">'.utf8_encode($o['empresa']).'</p>';
 													}
 													else
 													{
@@ -344,7 +344,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 												if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $vista == 'cuentas'){
 
-													echo '<p id="tipo-empresa">'.$o['empresa'].'</p>';
+													echo '<p id="tipo-empresa">'.utf8_encode($o['empresa']).'</p>';
 												}
 												?>
 											</div>
