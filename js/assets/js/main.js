@@ -410,6 +410,21 @@ function validaForm(tipo,btn){
   }
 }
 
+function validarDineroFormPlanes(num,err_val,seccion_val,btn){
+  var expreg_telf = /^[0-9]{2,5}$/;
+  var error = 0;
+    if(num == null || num.length == 0 || /^\s+$/.test(num)){
+      colocaError(err_val,seccion_val,"El campo no puede ser vac\u00EDo",btn);
+      error = 1;
+    }else if(!expreg_telf.test(num)){
+        colocaError(err_val,seccion_val,"Formato incorrecto, solo numeros",btn);
+        error = 1;
+    }else{
+        quitarError(err_val,seccion_val);
+    }
+    return error;
+}
+
 function validarNumTelf(num,err_telf,seccion_telf,btn){
 
   var expreg_telf = /^[0-9]{9,15}$/;
