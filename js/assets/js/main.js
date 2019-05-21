@@ -588,7 +588,7 @@ function bannerTel(){
     var navbar = $('.navbar-fixed-top');
     var heightelement = $('.navbar-fixed-top').prev().height();
     navbar.css('top', heightelement+'px');
-    console.log($('.navbar-fixed-top').height()+heightelement+30);
+    //console.log($('.navbar-fixed-top').height()+heightelement+30);
     $('body').css('padding-top', ($('.navbar-fixed-top').height()+heightelement+35)+'px');
   }
   else{

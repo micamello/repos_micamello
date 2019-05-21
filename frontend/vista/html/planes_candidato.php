@@ -48,7 +48,7 @@
                   </a><p><br></p>
                 <?php } else { ?>
                   <a class="pricebutton btn-blue btn-bottom" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');">
-                    <span class="icon-tag"></span>SUBSCRIBIRSE
+                    <span class="icon-tag"></span>SUSCRIBIRSE
                   </a><p><br></p>
                 <?php } ?> 
 

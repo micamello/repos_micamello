@@ -1,5 +1,6 @@
 <?php 
 $i = 0;
+$filtros_r = '';
 foreach ($data as $letra => $value) { 
 
     if($vista == 1){
@@ -81,15 +82,15 @@ foreach ($data as $letra => $value) {
 
             preg_match_all($exp,$value['id'],$salida, PREG_PATTERN_ORDER);
             unset($salida[0]);
-            echo '<div id="btn-filtro-1" class="col-xs-12 col-md-12 btn-filtro">
+            $filtros_r .= '<div id="btn-filtro-1" class="col-xs-12 col-md-12 btn-filtro">
             <div class="input-group">
                 <span>';
             foreach ($salida as $key => $value) {
                 $l = substr($value[0],0,1);
                 $i = substr($value[0],1);
-                echo $literales[$l].': '.$i.'%&nbsp;&nbsp;';
+                $filtros_r .= $literales[$l].': '.$i.'%&nbsp;&nbsp;';
             }
-            echo '</span>
+            $filtros_r .= '</span>
                     <span id="icono-filtro" class="input-group-addon" style="padding:0px; cursor:pointer;">
                         <p onclick="enviarPclave('.$valores.')"><i style="font-size:20px;" class="fa fa-window-close"></i>
                         </p>
@@ -137,5 +138,5 @@ foreach ($data as $letra => $value) {
         }
     }
 } 
-
+echo $filtros_r;
 ?>

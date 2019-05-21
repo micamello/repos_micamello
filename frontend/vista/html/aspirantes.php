@@ -1,3 +1,8 @@
+<style>
+	.shadow-panel1{
+		cursor:pointer;
+	}
+</style>
 <div class="container">
   <div class="text-center">
     <h2 class="titulo">

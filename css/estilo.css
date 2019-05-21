@@ -301,7 +301,7 @@ display: inline;
         height: 170px;
     }
    .vel-titulo{
-    font-size: 40pt;
+    font-size: 30pt;
 }
 .canea-text-modal{
         font-size: 150pt;
@@ -540,7 +540,10 @@ display: inline;
 }
 .vel-subt{
     font-family: ‘Antipasto’;
-    font-size: 35pt;
+    font-size: 30pt;
+    color:#424242;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .vel-caja{
     background-color: #0b66a9;
@@ -671,7 +674,7 @@ border-left: 1px solid #204478
     margin-top: 40px;
 }
 #img-test{
-    width: 50%;
+    width: 40%;
     margin: 0 auto;
     text-align: center;
 }
