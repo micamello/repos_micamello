@@ -636,6 +636,11 @@ border-left: 1px solid #204478
     border-radius: 0px;
 
 }
+#btn-rojo:hover{
+    color: #ad3131;
+    background-color: #FFFFFF;
+}
+
 #tit-detalle{
     background-color: #204478;
 

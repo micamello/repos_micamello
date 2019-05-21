@@ -143,6 +143,10 @@ $this->fontdata = array(
 		'BI' => "Norasi-BoldOblique.ttf",
 		),
 
+	"gothic" => array(
+		'R'=> "GOTHIC.TTF",
+	),
+
 
 /* Indic fonts */
 	"ind_bn_1_001" => array(

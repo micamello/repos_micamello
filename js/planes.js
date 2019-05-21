@@ -114,7 +114,7 @@ function loadavisos(idplan){
 }
 
 function mensaje(){
-  swal('Información!', 'Por ser nuestro lanzamiento le otorgamos el paquete Básico totalmente gratis', 'success');
+  swal('Información!', 'Por ser nuestro lanzamiento le otorgamos el paquete Simple totalmente gratis', 'success');
 }
 
 $(function() {  	

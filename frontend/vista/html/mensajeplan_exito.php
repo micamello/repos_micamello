@@ -9,10 +9,10 @@
         <div class="" id="inicio-cuadro"> 
           <div align="center" class="col-md-12">
             <!-- <h3>¡El cambio de contraseña se ha realizado con éxito!</h3><br> -->
-            Dentro de un momento su plan ser&aacute; activado<br>
-					Por favor revise su correo para verificar su subscripci&oacute;n<br><br>
+            <h4>Dentro de un momento su plan ser&aacute; activado<br>
+					Por favor revise su correo para verificar su subscripci&oacute;n</h4><br>
 				<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO && isset($msg_cuestionario) && $msg_cuestionario == 1) { ?>
-					Cuando su plan este activo, podr&aacute; realizar el tercer <a href="<?php echo PUERTO."://".HOST."/preguntas/"; ?>" class="btn-blue">formulario</a>
+					<h4>Cuando su plan este activo, podr&aacute; realizar el tercer <a href="<?php echo PUERTO."://".HOST."/preguntas/"; ?>" class="btn-blue">formulario</a></h4>
 				<?php } ?>
             <!-- <button class="btn-light-blue">Finalizar</button> -->
           </div>

@@ -5,6 +5,8 @@ ini_set("max_input_time", "0");
 ini_set('memory_limit', "768M");
 set_time_limit(0);
 
+$dominio = "www.micamello.com.ec/desarrollov3/";
+
 /*Script para cancelar planes de la empresa/candidato, dependiendo del plan(es) contratados y fecha actual, si el usuario es de tipo empresa inactivar las ofertas publicadas con ese plan y si es candidato y el plan tiene 5 postulaciones restantes generar un registro en la tabla de alertas*/
 
 require_once '../constantes.php';
@@ -110,10 +112,12 @@ if (!empty($arrempresa)){
 }*/
 
 function envioCorreo($nombres,$correo,$plan,$fecha){
+	$enlace = "<a href='".PUERTO."://".$dominio."/planes/'>click aqu&iacute;</a>";
   $email_body = Modelo_TemplateEmail::obtieneHTML("CANCELACION_SUBSCRIPCION");
   $email_body = str_replace("%NOMBRES%", utf8_encode($nombres), $email_body);   
   $email_body = str_replace("%PLAN%", utf8_encode($plan), $email_body); 
   $email_body = str_replace("%FECHA%", $fecha, $email_body);   
+  $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
   Utils::envioCorreo($correo,"Cancelación de Subscripción",$email_body);		
 }
 

@@ -18,7 +18,14 @@ $(document).ready(function(){
             //alert(request.responseText);
           }                  
         })
-      }
+      };
+
+      if($(this).val() == 0){
+            $('#confidencialOf').next().text("Su información se mostrará a los candidatos");
+        }
+        else{
+            $('#confidencialOf').next().text("Su información no se mostrará a los candidatos");
+        }
 })
 
 var contenido = "";
@@ -298,6 +305,12 @@ var primerEmpleoOf
         discapacidadOf = $('#discapacidadOf');
     }
     if($('#confidencialOf').length){
+        if($('#confidencialOf').val() == 0){
+            $('#confidencialOf').next().text("Su información se mostrará a los candidatos");
+        }
+        else{
+            $('#confidencialOf').next().text("Su información no se mostrará a los candidatos");
+        }
         confidencialOf = $('#confidencialOf');
     }
     if($('#ofertaUrgenteOf').length){
@@ -343,6 +356,7 @@ var primerEmpleoOf
 
 // ------------------------------------------------------------------
     if(salarioOf.val() != ""){
+        var permitidosFloat = /^[0-9.]+$/;
         if(!validarFloat(salarioOf.val())){
             crearMensajeError(salarioOf, "Ingrese un valor correcto");
             mensajes += "\n-Campo salario: Ingrese un valor válido";
@@ -388,8 +402,8 @@ var primerEmpleoOf
 // ------------------------------------------------------------------
 if(cantVac.val() != ""){
     if(!validarVacante(cantVac.val())){
-        crearMensajeError(cantVac, "Ingrese un valor válido");
-        mensajes += "\n- Campo Cantidad vacante: Ingrese un valor válido";
+        crearMensajeError(cantVac, "Superó número máximo de vacantes");
+        mensajes += "\n- Campo Cantidad vacante: Superó número máximo de vacantes";
     }
     else{
         eliminarMensajeError(cantVac);
@@ -446,25 +460,27 @@ else{
 
 // ------------------------------------------------------------------
 if(edadMinOf.val() != ""){
-    if(validarNumeroEdad(edadMinOf.val())){
-        if(edadMinOf.val() >= 18 && edadMinOf.val() <= 100){
-            eliminarMensajeError(edadMinOf);
-            var devuelve = validarMinMaxEdad(edadMinOf, edadMaxOf, 1);
-            if(devuelve[1] == false && devuelve[0] != false){
-                crearMensajeError(devuelve[0], "Verifique la edad");
-                mensajes+= "\n- Verifique el campo Edad mínima";
-            }
-            else{
-                eliminarMensajeError(edadMinOf);
+    var edadmayor = parseInt($('#edadMaxOf').val());
+    var edadmenor = parseInt($('#edadMinOf').val());
+    if(edadmenor != ""){
+        if(edadmenor >= 18 && edadmenor < 101){
+            if($(edadmenor != "")){
+                if(edadmenor > edadmayor){
+                    crearMensajeError($('#edadMaxOf'), "Verifique la edad");
+                    mensajes+= "\n- Verifique el campo Edad mínima";
+                }
+                else{
+                    eliminarMensajeError($(edadMinOf));
+                }
             }
         }
         else{
-            crearMensajeError(edadMinOf, "Edad mínima 18 años, máxima 100");
+            crearMensajeError($(this), "Mín: 18 años , Máx: 100 años");
             mensajes+= "\n- Verifique el campo Edad mínima";
         }
     }
     else{
-        crearMensajeError(edadMinOf, "El campo solo acepta números");
+        crearMensajeError($(this), "Rellene este campo");
         mensajes+= "\n- Verifique el campo Edad mínima";
     }
 }
@@ -472,28 +488,30 @@ else{
     crearMensajeError(edadMinOf, "Rellene este campo");
     mensajes+= "\n- Verifique el campo Edad mínima";
 }
-// ------------------------------------------------------------------
+// // ------------------------------------------------------------------
 if(edadMaxOf.val() != ""){
-    if(validarNumeroEdad(edadMaxOf.val())){
-        if(edadMaxOf.val() >= 18 && edadMaxOf.val() <= 100){
-            eliminarMensajeError(edadMaxOf);
-            var devuelve = validarMinMaxEdad(edadMinOf, edadMaxOf, 2);
-            if(devuelve[1] == false && devuelve[0] != false){
-                crearMensajeError(devuelve[0], "- Verifique la edad");
-                mensajes += "\n- Verifique el campo edad máxima";
-            }
-            else{
-                eliminarMensajeError(edadMaxOf);
+    var edadmayor = parseInt($('#edadMaxOf').val());
+    var edadmenor = parseInt($('#edadMinOf').val());
+    if(edadmayor != ""){
+        if(edadmayor >= 18 && edadmayor < 101){
+            if($(edadmayor != "")){
+                if(edadmenor > edadmayor){
+                    crearMensajeError($('#edadMaxOf'), "Verifique la edad");
+                    mensajes+= "\n- Verifique el campo Edad mayor";
+                }
+                else{
+                    eliminarMensajeError($(edadMaxOf));
+                }
             }
         }
         else{
-            crearMensajeError(edadMaxOf, "Edad mínima 18 años, máxima 100");
-            mensajes += "\n- Verifique el campo edad máxima";
+            crearMensajeError($(this), "Mín: 18 años , Máx: 100 años");
+            mensajes+= "\n- Verifique el campo Edad mayor";
         }
     }
     else{
-        crearMensajeError(edadMaxOf, "El campo solo acepta números");
-        mensajes += "\n- Verifique el campo edad máxima";
+        crearMensajeError($(this), "Rellene este campo");
+        mensajes+= "\n- Verifique el campo Edad mayor";
     }
 }
 else{
@@ -611,19 +629,34 @@ $('#descripcionOferta').on('blur', function(){
     }
 });
 
-$('#salarioOf').on('keyup', function(){
-    if($(this).val() != ""){
-        if(!validarFloat($(this).val())){
-            crearMensajeError($(this), "Ingrese un valor correcto");
+if($('#salarioOf').length){
+    $('#salarioOf').on('blur', function(event){
+        if($(this).val() != ""){
+            if(!validarFloat($(this).val())){
+                crearMensajeError($(this), "Formato incorrecto");
+            }
+            else{
+                eliminarMensajeError($(this));
+            }
         }
         else{
+            crearMensajeError($(this), "Rellene este campo");
+        }
+    });
+
+    $('#salarioOf').on('keypress', function(event){
+        var permitidos = /^[0-9.]+$/;
+        if(permitidos.test(event.key)){
             eliminarMensajeError($(this));
         }
-    }
-    else{
-        crearMensajeError($(this), "Rellene este campo");
-    }
-});
+        else{
+            event.preventDefault();
+            crearMensajeError($(this), "Caracter no permitido");
+        }
+
+    });
+}
+
 
 $('#salarioConv').on('blur', function(){
     if($(this).val() == "" || $(this).val() == null){
@@ -653,20 +686,36 @@ $('#fechaCont').on('change', function(){
     }
 });
 
-$('#cantVac').on('keyup', function(){
-    if($(this).val() != ""){
-        if(!validarVacante($(this).val())){
-            crearMensajeError($(this), "Ingrese un valor válido");
+$('#cantVac').on('blur', function(event){
+        if($(this).val() != ""){
+            if($(this).val() >= 1){
+                if(!validarVacante($(this).val())){
+                    crearMensajeError($(this), "Superó número máximo de vacantes");
+                }
+                else{
+                    eliminarMensajeError($(this));
+                }
+            }
+            else{
+                crearMensajeError($(this), "Mínimo una vacante");
+            }
         }
         else{
+            crearMensajeError($(this), "Rellene este campo");
+        }
+    });
+
+    $('#cantVac').on('keypress', function(event){
+        var permitidos = /^[0-9]+$/;
+        if(permitidos.test(event.key)){
             eliminarMensajeError($(this));
         }
-    }
-    else{
-        crearMensajeError($(this), "Rellene este campo");
-    }
+        else{
+            event.preventDefault();
+            crearMensajeError($(this), "Caracter no permitido");
+        }
 
-});
+    });
 
 $('#provinciaOf').on('blur change', function(){
     if($(this).val() == "" || $(this).val() == null){
@@ -714,25 +763,40 @@ $('#escolaridadOf').on('blur change', function(){
     }
 });
 
-$('#edadMinOf').on('keyup', function(){
-    if($(this).val() != ""){
-        if(validarNumeroEdad($(this).val())){
-            if($(this).val() >= 18 && $(this).val() <= 100){
-                eliminarMensajeError($(this));
-                var devuelve = validarMinMaxEdad($(this), $('#edadMaxOf'), 1);
-                if(devuelve[1] == false && devuelve[0] != false){
-                    crearMensajeError(devuelve[0], "Verifique la edad");
+// $('#edadMinOf').on('blur', function(){
+//     if($(this).val() != ""){
+//         if($(this).val() >= 18 && $(this).val() <= 100){
+//             if($('#edadMaxOf').val() != "" && $('#edadMaxOf').val() < $(this).val()){
+//                 crearMensajeError($('#edadMaxOf'), "Verifique la edad");
+//             }
+//             else{
+//                 eliminarMensajeError($('#edadMaxOf'));
+//             }
+//         }
+//         else{
+//             crearMensajeError($(this), "Mín: 18 años , Máx: 100 años");
+//         }
+//     }
+//     else{
+//         crearMensajeError($(this), "Rellene este campo");
+//     }
+// });
+$('#edadMinOf').on('blur', function(){
+    var edadmayor = parseInt($('#edadMaxOf').val());
+    var edadmenor = parseInt($('#edadMinOf').val());
+    if(edadmenor != ""){
+        if(edadmenor >= 18 && edadmenor < 101){
+            if(edadmayor != ""){
+                if(edadmenor > edadmayor){
+                    crearMensajeError($('#edadMaxOf'), "Verifique la edad");
                 }
                 else{
                     eliminarMensajeError($(this));
                 }
             }
-            else{
-                crearMensajeError($(this), "Edad mínima 18 años, máxima 100");
-            }
         }
         else{
-            crearMensajeError($(this), "El campo solo acepta números");
+            crearMensajeError($(this), "Mín: 18 años , Máx: 100 años");
         }
     }
     else{
@@ -740,31 +804,50 @@ $('#edadMinOf').on('keyup', function(){
     }
 });
 
-$('#edadMaxOf').on('keyup', function(){
-    if($(this).val() != ""){
-        if(validarNumeroEdad($(this).val())){
-            if($(this).val() >= 18 && $(this).val() <= 100){
-                eliminarMensajeError($(this));
-                var devuelve = validarMinMaxEdad($('#edadMinOf'), $(this), 2);
-                if(devuelve[1] == false && devuelve[0] != false){
-                    crearMensajeError(devuelve[0], "Verifique la edad");
+$('#edadMinOf').on('keypress', function(event){
+    var permitidosEdad = /^[0-9]+$/;
+    if(!permitidosEdad.test(event.key)){
+        event.preventDefault();
+        crearMensajeError($(this), "Caracter no permitido");
+    }
+    else{
+        eliminarMensajeError($(this));
+    }
+})
+
+$('#edadMaxOf').on('blur', function(){
+    var edadmayor = parseInt($('#edadMaxOf').val());
+    var edadmenor = parseInt($('#edadMinOf').val());
+    if(edadmayor != ""){
+        if(edadmayor >= 18 && edadmayor < 101){
+            if($(edadmayor != "")){
+                if(edadmenor > edadmayor){
+                    crearMensajeError($('#edadMaxOf'), "Verifique la edad");
                 }
                 else{
                     eliminarMensajeError($(this));
                 }
             }
-            else{
-                crearMensajeError($(this), "Edad mínima 18 años, máxima 100");
-            }
         }
         else{
-            crearMensajeError($(this), "El campo solo acepta números");
+            crearMensajeError($(this), "Mín: 18 años , Máx: 100 años");
         }
     }
     else{
         crearMensajeError($(this), "Rellene este campo");
     }
 });
+
+$('#edadMaxOf').on('keypress', function(event){
+    var permitidosEdad = /^[0-9]+$/;
+    if(!permitidosEdad.test(event.key)){
+        event.preventDefault();
+        crearMensajeError($(this), "Caracter no permitido");
+    }
+    else{
+        eliminarMensajeError($(this));
+    }
+})
 
 $('#select_array_idioma').on('change', function(){
     if($(this).val() == "" || $(this).val() == null){
@@ -827,6 +910,15 @@ $('#discapacidadOf').on('blur change', function(){
 });
 
 $('#confidencialOf').on('blur change', function(){
+    console.log($(this).next()[0]);
+    if($(this).val() == 0){
+        // $(this).next().text("eder 1");
+        $(this).next().text("Su información se mostrará a los candidatos");
+    }
+    else{
+        // $(this).next().text("eder 2");
+        $(this).next().text("Su información no se mostrará a los candidatos");
+    }
     if($(this).val() == "" || $(this).val() == null){
         crearMensajeError($(this), "Seleccione una opción");
     }
@@ -905,7 +997,7 @@ function eliminarMensajeError(obj){
 }
 
 function validarFloat(valor){
-    return /^[0-9]+([.,][0-9]{1,2})?$/.test(valor);
+    return /^([0-9]{1,5})[.][0-9]{2}?$/.test(valor);
 }
 
 function validarFecha(fecha){
@@ -913,7 +1005,7 @@ function validarFecha(fecha){
 }
 
 function validarVacante(numero){
-    if(numero >= 1 && (/^[0-9]{1,3}$/.test(numero))){
+    if((/^[0-9]{1,4}$/.test(numero))){
         return true;
     }    
     else{
@@ -947,6 +1039,7 @@ function validarMinMaxEdad(min, max, tipo){
             }
         }
     }
+    console.log(retorno);
     return retorno;
 }
 
@@ -956,7 +1049,6 @@ function validarNumeroEdad(edad){
 
 function validarFormError(){
     var errors = $('.errorMensaje, .errorMensaje1').length;
-    console.log(errors);
     return errors;
 }
 

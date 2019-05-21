@@ -80,10 +80,15 @@ if (count($facturas) > 0){
                              "archivo"=>$rsfact["claveacceso"].".xml");          
 
       $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
-      $email_subject = "Facturación"; 
+      $email_subject = "Factura Electrónica"; 
+      $mensaje = "N&uacute;mero de Autorizaci&oacute;n: ".$rsfact["claveacceso"]."<br>";
+      $mensaje .= "Fecha de Emisi&oacute;n: ".$fecha_auto."<br>";
+      $mensaje .= "Tipo de Comprobante: Factura<br>";
+      $mensaje .= "Valor Total: ".$datos_comprobante["valor"]."<br>";
+
       $email_body = Modelo_TemplateEmail::obtieneHTML("FACTURACION");
       $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
-      $email_body = str_replace("%PLAN%", $infoplan["nombre"], $email_body);   
+      $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
       Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
             
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");

@@ -15,6 +15,7 @@ footer{
         /*text-align: right;*/
 }
 
+<<<<<<< HEAD
 body{
         font-family: "gothic";
         width: 1000px;
@@ -72,6 +73,50 @@ body{
         font-weight: bold;
       }
       .tabla1 td{
+        padding: 5px; 
+      }
+
+
+
+
+.titulo_1{
+        text-align: center; 
+        font-family: 
+        font-family: 'Archivo', sans-serif;
+}
+
+.text_justify{
+        text-align: justify; 
+        font-family: font-family: 'Archivo', sans-serif;
+}
+
+.text_separate{
+        padding-top: 350px; 
+        font-size: 80px; 
+        font-weigth: 550; 
+        text-align: center; 
+        font-family: font-family: 'Archivo', sans-serif; 
+        color: #118BD8;
+}
+
+.ant_name{
+        font-size: 25px; 
+        font-family: font-family: 'Archivo', sans-serif;
+}
+
+.name_caratula{
+        font-size: 80px; 
+        font-family: font-family: 'Archivo', sans-serif; 
+        color: #118BD8;
+}
+
+.content_caratula{
+        padding-top: 500px; 
+        text-align: right;
+}
+
+.items_inf{
+        background-color: #0096FF;
         padding: 5px;
       }
       .tabla1 tr{   

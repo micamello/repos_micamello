@@ -749,14 +749,14 @@ function fileValidation(fileInput){
   if(filePath != ''){
     var tamano = fileInput.files[0].size/1024/1024;
     if(tamano > 1){
-      colocaError("err_img", "seccion_img","El peso permitido es de máximo es de 1MB","btndeposito");
+      colocaError("err_img", "seccion_img","Peso máximo 1MB","btndeposito");
       document.getElementById('divimagen').innerHTML = '';
       return 1;
     }else{
       return 0;
     }
   }else if(!allowedExtensions.test(filePath)){
-    colocaError("err_img", "seccion_img","El formato permitido es .jpeg/.jpg/.png","btndeposito");
+    colocaError("err_img", "seccion_img","Formato permitido .jpeg/.jpg/.png","btndeposito");
     fileInput.value = '';
     document.getElementById('divimagen').innerHTML = '';
     return 1;
