@@ -490,7 +490,7 @@ public static function validarTelefonoConvencional($contenido){
   }
 
   static public function formatoDinero($str){
-    return ( ! preg_match("/^[0-9]+(?:\.[0-9]{0,2})?$/", $str)) ? false : true;
+    return ( ! preg_match("/^([0-9]{1,5})[.][0-9]{2}?$/", $str)) ? false : true;
   }
 
 
@@ -604,8 +604,6 @@ public static function validarTelefonoConvencional($contenido){
   }
 
   public static function validar_EC($dni){
-    print_r($dni);
-    exit();
     if (empty($dni)) {return false;}
     $val = false;
     if(ValidadorEc::DniRuc_Validador($dni)) {

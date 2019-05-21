@@ -1,5 +1,10 @@
 <?php
 class Modelo_UsuarioxArea{
+
+  public static function listado($id_usuario){
+    $sql = "SELECT id_areas_subareas FROM mfo_usuarioxarea where id_usuario = ?";
+    return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
+  }
   
   public static function obtieneListado($id_usuario){
     $sql = "SELECT a.id_usuario, b.id_area, b.id_subareas 

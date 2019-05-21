@@ -1,3 +1,7 @@
+<?php 
+	// var_dump($datosUsuario);
+	// exit();
+?>
 <div class="text-center">
     <h2 class="titulo">Perfil del Candidato</h2>
   </div>
@@ -52,13 +56,6 @@
 							<h5><b>Apellidos: </b><?php echo $datosUsuario['apellidos'] ?></h5>
 						</div>
 					</div>
-
-					<div class="col-md-6">
-						<div class="contentData">
-							<h5><b>Nacionalidad: </b><?php echo $datosUsuario['nacionalidad'] ?></h5>
-						</div>
-					</div>
-
 					
 					<div class="col-md-6">
 						<div class="contentData">
@@ -68,7 +65,7 @@
 
 					<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Disp. Viajar: </b><?php echo $datosUsuario['viajar'] ?></h5>
+							<h5><b>Disponibilidad para Viajar: </b><?php echo $datosUsuario['viajar'] ?></h5>
 						</div>
 					</div>
 
@@ -94,7 +91,7 @@
 
 					<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Escolaridad: </b><?php echo $datosUsuario['escolaridad'] ?></h5>
+							<h5><b>Último estudio realizado: </b><?php echo $datosUsuario['escolaridad'] ?></h5>
 						</div>
 					</div>
 
@@ -106,7 +103,13 @@
 
 					<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Licencia: </b><?php echo $datosUsuario['licencia'] ?></h5>
+							<h5><b>Tipo de licencia: </b><?php echo $datosUsuario['licencia'] ?></h5>
+						</div>
+					</div>
+
+					<div class="col-md-6">
+						<div class="contentData">
+							<h5><b>Estudios en el extranjero: </b><?php echo $datosUsuario['extranjero'] ?></h5>
 						</div>
 					</div>
 
@@ -128,17 +131,18 @@
 					<div align="left">
 						<div class="col-md-4">
 							<div class="contentData">
-								<h5><b>Ciudad: </b><?php echo $datosUsuario['ciudad'] ?></h5>
+								<h5><b>Ciudad de residencia: </b><?php echo $datosUsuario['ciudad'] ?></h5>
+							</div>
+						</div>
+						
+						<div class="col-md-4">
+							<div class="contentData">
+								<h5><b>Nacionalidad: </b><?php echo $datosUsuario['nacionalidad'] ?></h5>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="contentData">
-								<h5><b>Pais: </b><?php echo $datosUsuario['pais'] ?></h5>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div class="contentData">
-								<h5><b>Provincia: </b><?php echo $datosUsuario['provincia'] ?></h5>
+								<h5><b>Provincia de residencia: </b><?php echo $datosUsuario['provincia'] ?></h5>
 							</div>
 						</div>
 					</div>
@@ -156,17 +160,22 @@
 
 					<div class="col-md-6">
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
-							<h5><b>Teléfono: </b><?php echo $datosUsuario['telefono'] ?></h5>
+							<h5><b>Celular: </b><?php echo $datosUsuario['telefono'] ?></h5>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
-							<h5><b>DNI: </b><?php echo $datosUsuario['dni'] ?></h5>
+							<?php
+							$documento = ""; if($datosUsuario['tipo_doc'] == 1) $documento = 'Ruc';
+								if($datosUsuario['tipo_doc'] == 2) $documento = 'Cédula';
+								if($datosUsuario['tipo_doc'] == 3) $documento = 'Pasaporte';
+										?>
+							<h5><b><?php echo $documento; ?>: </b><?php echo $datosUsuario['dni'] ?></h5>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
-							<h5><b>Teléfono convencional: </b><?php echo $datosUsuario['telefonoConvencional'] ?></h5>
+							<h5><b>Teléfono: </b><?php echo $datosUsuario['telefonoConvencional'] ?></h5>
 						</div>
 					</div>
 				</div>

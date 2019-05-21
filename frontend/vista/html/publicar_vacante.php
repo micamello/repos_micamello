@@ -250,7 +250,7 @@
 										</div>
 										<!-- <div><a class="btn-min-light" id="addButton">Añadir idioma</a><br><br></div> -->
 										<div align="center">
-					                      <a class="btn-min-light" align="center" id="addButton">Añadir idioma</a><br><br>
+					                      <a class="btn-blue" align="center" id="addButton">Añadir idioma</a><br><br>
 					                    </div>
 									</div>
 									<div class="col-md-6 col-md-offset-1">
@@ -263,7 +263,7 @@
 									</div>
 
 									<div id="listadoIdiomasSeleccionados" style="display: none;">
-										<select id="select_array_idioma" name="nivel_idioma[]"></select>
+										<select id="select_array_idioma" name="nivel_idioma[]" multiple="multiple"></select>
 									</div>
 								</div>
 							</div>

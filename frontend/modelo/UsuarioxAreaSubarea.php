@@ -2,7 +2,6 @@
 class Modelo_UsuarioxAreaSubarea{
   
 	public static function obtieneAreas_Subareas($areaxsubarea){
-		// exit();
 		$sql = "SELECT 
 		area.id_area,
 	    area.nombre as area,
@@ -15,9 +14,6 @@ class Modelo_UsuarioxAreaSubarea{
 		ares.id_area = area.id_area AND
 	    ares.id_subareas = subarea.id_subareas AND
 	    ares.id_areas_subareas IN (".$areaxsubarea.")";
-	    // print_r($sql);
-	    // exit();
-
 	    return $GLOBALS['db']->auto_array($sql,array(),true);
 	}
 }  

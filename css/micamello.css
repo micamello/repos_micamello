@@ -174,30 +174,7 @@ ul.list_content_mic > li:last-child {
 	color: #FFFFFF;
 }
 
-.modal_selected_list{
-	/*padding: 1px;*/
-	border: solid #56B78A;;
-	background-color: #56B78A;;
-	border-radius: 20px;
-	color: white;
-	white-space: nowrap;
-  	overflow: hidden;
-  	text-overflow: ellipsis;
-  	font-weight: bold;
-  	/*margin: 5px 2px 5px 2px;*/
-}
 
-.modal_selected_list > i{
-	/*right: 0;*/
-	float: right;
-	/*position: fixed;*/
-	background-color: #337699;
-	border-radius: 50%;
-	padding: 8px;
-	/*margin: -4px -4px 0 0;*/
-	color: white;
-	cursor: pointer;
-}
 
 .subarea_disabled_1{
 	/*//This makes it not clickable*/
@@ -592,16 +569,34 @@ ul.list_content_mic > li:last-child {
   text-align: justify;
 }*/
 a.addButton{
-  background-color: #2BC368;
-  color: white;
-  padding: 10px 15px 10px 15px;
-  border-radius: 10px;
+  border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #204478;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 2px solid transparent;    
+    line-height: normal;
+    cursor: pointer;
   /*bottom: 50%;*/
 }
 
 a.addButton:hover{
-  color: white;
-  box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
+  border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #204478;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 2px solid transparent;    
+    line-height: normal;
+    cursor: pointer;
 }
 .listPanel{
   overflow-y: scroll;
@@ -623,7 +618,7 @@ a.addButton:hover{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  background-color: #46C04C;
+  background-color: #08a9f4;
   color: #FFFFFF;
   border-radius: 5px;
 }
@@ -642,10 +637,18 @@ a.addButton:hover{
 }
 
 .active_button{
-  background-color: #FF0C0C;
-  color: white;
-  padding: 10px 15px 10px 15px;
-  border-radius: 10px;
+  border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #204478;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 2px solid transparent;    
+    line-height: normal;
+    cursor: pointer;
 }
 
 .errorMensaje{

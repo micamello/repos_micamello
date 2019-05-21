@@ -97,7 +97,7 @@ class Controlador_Oferta extends Controlador_Base{
             $datosOferta = Modelo_oferta::consultarOferta($idOferta);
             $datosOferta[0]['id_empresa_plan'] = $id_empresa_plan;
 
-            $datosRequisitos = array('viajar'=>$datosOferta[0]['viajar'],'residencia'=>$datosOferta[0]['residencia'],'discapacidad'=>$datosOferta[0]['discapacidad'],'confidencial'=>$datosOferta[0]['confidencial'],'edad_minima'=>$datosOferta[0]['edad_minima'],'edad_maxima'=>$datosOferta[0]['edad_maxima']);
+            $datosRequisitos = array('viajar'=>$datosOferta[0]['viajar'],'residencia'=>$datosOferta[0]['residencia'],'discapacidad'=>$datosOferta[0]['discapacidad'],'confidencial'=>$datosOferta[0]['confidencial'],'edad_minima'=>$datosOferta[0]['edad_minima'],'edad_maxima'=>$datosOferta[0]['edad_maxima'],'id_tipolicencia'=>$datosOferta[0]['id_tipolicencia']);
             
             unset($datos[0]['viajar'],$datos[0]['residencia'],$datos[0]['discapacidad'],$datos[0]['confidencial'],$datos[0]['edad_minima'],$datos[0]['edad_maxima']);
             self::convertirOferta($datosOferta[0],$datosRequisitos);

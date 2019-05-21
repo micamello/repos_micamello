@@ -663,13 +663,9 @@ class Controlador_Aspirante extends Controlador_Base
                 }
             }
             $data_user = self::datauser($username, $id_oferta, $vista);
-            // print_r($id_oferta);
-            // exit();
             $breadcrumbs = array();
             $breadcrumbs['verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta)."/1"] = "Ver aspirantes";
             $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
-            // $planes = array();
-
             $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
             $tags["template_js"][] = "detalleperfil";
             $tags1 = array("breadcrumbs"=>$breadcrumbs,
@@ -691,10 +687,10 @@ class Controlador_Aspirante extends Controlador_Base
             $datos = array_merge($datos, array('aspSalarial'=>$aspSalarial['asp_salarial']));
         }
         $classHidden = "";
-        $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($datos['id_usuario']);
+        $usuarioxarea = Modelo_UsuarioxArea::listado($datos['id_usuario']);
         $dataareasubarea = array();
         foreach ($usuarioxarea as $key=>$value) {
-            array_push($dataareasubarea, $value[0]);
+            array_push($dataareasubarea, $value['id_areas_subareas']);
         }
         $dataareasubarea = implode(",", $dataareasubarea);
         $areasubarea = Modelo_UsuarioxAreaSubarea::obtieneAreas_Subareas($dataareasubarea);
