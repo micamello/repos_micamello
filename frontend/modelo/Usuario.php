@@ -549,6 +549,9 @@ WHERE
       }
       $sql .= " AND (t2.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.apellidos LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR t2.asp_salarial LIKE '%".$pclave."%' OR t2.fecha_postulado LIKE '%".$pclave."%')";
     }
+
+    $sql .= ' GROUP BY t2.id_usuario';
+    
     if($obtCantdRegistros === false){
       if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
         $tipo = substr($filtros['O'],0,1);
@@ -598,7 +601,7 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-    //echo 'SQL1: '.$sql;
+    echo 'SQL1: '.$sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

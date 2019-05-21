@@ -1,3 +1,8 @@
+<style>
+	.shadow-panel1{
+		cursor:pointer;
+	}
+</style>
 
 <div class="container-fluid">
 	<div class="text-center">

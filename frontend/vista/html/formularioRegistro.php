@@ -1,3 +1,11 @@
+<div class="container-fluid">
+  <div class="text-center">
+    <h2 class="titulo">Registro de Cuenta</h2>
+  </div>
+  <br>
+  <p>Seleccione el tipo de cuenta y a continuaci&oacute;n ingrese su informaci&oacute;n correspondiente</p><br>
+</div>
+
 <!--<section id="product" class="inicio">-->
     <div id="candidato">
         <div class="container" >

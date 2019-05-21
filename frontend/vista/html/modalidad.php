@@ -28,7 +28,7 @@ completamente identificado y la opción 5 es la que menos se siente identificado
           }
         ?>
         <div class="col-md-12" align="center">
-          <input type="submit" class="btn-blue margin-40"  value="Ir a los tests"/>
+          <input type="submit" class="btn-blue"  value="Ir a los tests"/>
         </div>
       </div>
     </div>
