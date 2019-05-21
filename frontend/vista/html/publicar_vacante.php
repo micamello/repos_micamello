@@ -48,7 +48,7 @@
 							<div class="form-group">
 								<label>Salario: </label>
 								<div class="msgError"></div>
-								<input type="text" class="form-control" name="salarioOf" id="salarioOf" placeholder="00.00">
+								<input type="text" class="form-control" name="salarioOf" maxlength="8" minlength="3" id="salarioOf" placeholder="00.00">
 							</div>
 						</div>
 
@@ -79,7 +79,7 @@
 							<div class="form-group">
 								<label>Cantidad de vacantes: </label>
 								<div class="msgError"></div>
-								<input type="text" class="form-control" name="cantVac" id="cantVac" min="1" value="1">
+								<input type="text" class="form-control" name="cantVac" id="cantVac" maxlength="3" minlength="1" min="1" value="1">
 							</div>
 						</div>
 
