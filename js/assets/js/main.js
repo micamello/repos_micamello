@@ -1,3 +1,4 @@
+
 function navegador(){
   var agente = window.navigator.userAgent;
   var navegadores = ["Chrome", "Firefox", "Safari", "Opera", "MSIE", "Trident", "Edge"];
@@ -43,6 +44,7 @@ function quitarError(campo,id){
 
 "use strict";
 jQuery(document).ready(function ($) {
+
     bannerTel();
 //for Preloader
 
@@ -610,6 +612,6 @@ function bannerTel(){
     $('body').css('padding-top', ($('.navbar-fixed-top').height()+35)+'px');
   }
 }
-$(window).resize(function(){
+/*$(window).resize(function(){
   bannerTel();
-});
+});*/

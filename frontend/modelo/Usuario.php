@@ -1155,7 +1155,7 @@ WHERE
     }else{
       $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
         INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor
-        INNER JOIN mfo_descriptor d on d.id_faceta = pf.id_faceta
+        INNER JOIN mfo_descriptor2 d on d.id_faceta = pf.id_faceta
         WHERE pf.id_usuario = ? and pf.id_faceta in('.$facetas.')
         AND b.id_puntaje = d.id_puntaje;';
     }

@@ -9,7 +9,7 @@
       <div class="row" id="registro-algo-centro">  
         <div class="col-md-6 col-md-offset-3">
           <div class="" id="inicio-cuadro"> 
-            <form action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login">
+            <form action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login" autocomplete="off">
               <div class="col-md-12">
                 <div class="form-group" id="seccion_username">
                   <label>Usuario/Correo <span title="Este campo es obligatorio">*</span></label><div id="err_username" class="help-block with-errors"></div>

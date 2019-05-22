@@ -156,17 +156,19 @@ class Controlador_GenerarPDF extends Controlador_Base
 
     foreach ($porcentajesxfaceta as $c => $datos_resultado) {
       $puntaxfaceta[$datos_resultado['id_faceta']] = $datos_resultado['id_puntaje'];
-      $etiquetas_faceta .=  $datos_resultado['valor'].'|';
+      $etiquetas_faceta .= $facetas[$datos_resultado['id_faceta']]['literal'].': '.$datos_resultado['valor'].'|';
+      $porcentajes_faceta .= /*$facetas[$datos_resultado['id_faceta']]['literal'].' '.*/$datos_resultado['valor'].',';
       $colors .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
       $colors_l .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
       $descrip_facetas .= $facetas[$datos_resultado['id_faceta']]['faceta'].': '.$datos_resultado['valor'].'|';
       $descrip_titulo .= $facetas[$datos_resultado['id_faceta']]['literal'];
     }
 
-    $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
+    echo $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
     $colors = substr($colors, 0,-1);
     $descrip_facetas = substr($descrip_facetas, 0,-1);
-    $porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
+    $porcentajes_faceta = substr($porcentajes_faceta, 0,-1);
+    //$porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
     $colores_class = array('C'=>'background-color: #a8d08d;','A'=>'background-color: #ffd966;','N'=>'background-color: #ff7575;','E'=>'background-color: #a86ed4;','A1'=>'background-color: #4b98dd;');
 
     $informe = '<br><br><br><br>
@@ -186,7 +188,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       </div>
     </div> 
     <div style="page-break-after:always;"></div>
-    <br><br>
+    <br>
     <div id="pagina-2">
       <h2>INTRODUCCIÓN ';
 
@@ -251,11 +253,28 @@ class Controlador_GenerarPDF extends Controlador_Base
         <tr>'.$tds_competencias.'</tr>
       </table>';
     
+      $datosXpreguntas = array(); 
+      $caracteristicas_generales = array();
+      $parrafo = '';
+      foreach($preguntas as $id_competencia => $pregunta){
+        $cantd_preg++;
+        $resultado = Modelo_Baremo::obtienePuntaje($pregunta['orden1'],$pregunta['orden2'],$pregunta['orden3'],$pregunta['orden4'],$pregunta['orden5']);
+        $datosXpreguntas[$id_competencia] = $resultado['porcentaje'];
+        $descriptor = Modelo_Descriptor::obtieneTextos($id_competencia,$resultado['id_puntaje']);       
+        $parrafo .= ucwords(strtolower(utf8_encode($datosusuario['nombres']))).' '.utf8_encode($descriptor['descripcion']).' ';
+       
+        if($cantd_preg == $preg_x_faceta){
+          $cantd_preg = 0;
+          $caracteristicas_generales[$pregunta['id_faceta']] = '<p align="justify">'.substr($parrafo, 0,-1).'</p>'; 
+          $parrafo = '';
+        }
+      }
+
       $informe .= '<br><br><h2>QUÉ SON LAS COMPETENCIAS LABORALES?</h2>
       <p>Las competencias laborales se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al <b>desempeño y desarrollo</b> individual y organizacional.</p>
     </div>
     <div style="page-break-after:always;"></div>
-    <br><br>
+    <br>
     <div id="pagina-3">
       <h2>CARACTERISTICAS GENERALES ';
       if($tipo_informe == 'parcial'){
@@ -267,17 +286,19 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '<p>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. En este test no existen resultados ni buenos ni malos. Una Vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento. </p>
       ';
       $pos_no_disponible = 1;
-      foreach ($competencias as $key => $value) {
+      foreach ($competencias as $id_faceta => $value) {
         $comp = explode(', ',$value);
-        $span = '<span style="color:'.$datos['colores'][$key].'" class="mayor">'.$facetas[$key]['literal'].'</span>';
+        $span = '<span style="color:'.$datos['colores'][$id_faceta].'" class="mayor">'.$facetas[$id_faceta]['literal'].'</span>';
         if($pos_no_disponible < 3){
-          $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$key]['literal']), $span, $facetas[$key]['faceta'],1).'/'.$comp[0].'</b>,'.str_replace($comp[0].',', '',$value)).'</li></ul><br>';
+          $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).'/'.$comp[0].'</b>,'.str_replace($comp[0].',', '',$value)).'</li></ul>';
+          $informe .= $caracteristicas_generales[$id_faceta];
           $pos_no_disponible++;
         }else{
           if($tipo_informe == 'parcial'){
-            $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$key]['literal']), $span, $facetas[$key]['faceta'],1).'/'.$comp[0].'</b> - <b class="rojo">no disponible</b>').'</li></ul><br>';
+            $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).'/'.$comp[0].'</b> - <b class="rojo">no disponible</b>').'</li></ul><br>';
           }else{
-            $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$key]['literal']), $span, $facetas[$key]['faceta'],1).'/'.$comp[0].'</b>,'.str_replace($comp[0].',', '',$value)).'</li></ul><br>';
+            $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).'/'.$comp[0].'</b>,'.str_replace($comp[0].',', '',$value)).'</li></ul>';
+            $informe .= $caracteristicas_generales[$id_faceta];
           }
         }
       }
@@ -292,7 +313,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $informe .= 'DEL INFORME PARCIAL</h2>';
         $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
       }else{
-        $fuente = 'font-size:40pt;';
+        $fuente = 'font-size:35pt;';
         $informe .= '</h2>';
       }
 
@@ -339,7 +360,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       </center>
     </div>';
     $informe .= '<div style="page-break-after:always;"></div>
-    <br><br>
+    <br>
     <div id="pagina-5">
       <h2>ESTILO PERSONALIZADO';
 
@@ -384,7 +405,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '</center>
     </div>';
     $informe .= '<div style="page-break-after:always;"></div>
-    <br><br>
+    <br>
     <div id="pagina-6">
       <h2>JERARQUIA DE COMPETENCIAS';
 
@@ -398,14 +419,9 @@ class Controlador_GenerarPDF extends Controlador_Base
       <p>Las graficas de Jerarquía de competencias mostrarán por orden su estilo de trabajo según las competencias laborales. Le ayudará a entender en cuales de estas competencias será más productivo.</p>';
       $cantd_salto = 6;
 
-      $datosXpreguntas = array(); 
-      $key = 0;
-      foreach($preguntas as $id_competencia => $pregunta){
-        $resultado = Modelo_Baremo::obtienePuntaje($pregunta['orden1'],$pregunta['orden2'],$pregunta['orden3'],$pregunta['orden4'],$pregunta['orden5']);
-        $datosXpreguntas[$id_competencia] = $resultado['porcentaje'];
-      }
+      //aqui
       arsort($datosXpreguntas);
-
+      $key = 0;
       foreach ($datosXpreguntas as $id_competencia => $resultado) {
 
         $pregunta = $preguntas[$id_competencia];
@@ -543,7 +559,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         </table>';
 
         if($cantd_salto == $cantd_preg){
-          $informe .= '<div style="page-break-after:always;"></div><br><br>';
+          $informe .= '<div style="page-break-after:always;"></div><br>';
           $cantd_salto++;
           $cantd_preg=0;
         }
@@ -551,7 +567,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 
       $informe .=  '</div>';
       if($tipo_informe == 'parcial'){
-        $informe .= '<br><br>
+        $informe .= '
         <div class="publicidad">¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</div>';
       }else{
         $informe .= '<div style="page-break-after:always;"></div><br><br><div>
@@ -576,9 +592,16 @@ class Controlador_GenerarPDF extends Controlador_Base
                 <body><main>";
     $enddoc = "</main></body></body></html>";
     $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="100%"></header>'); 
-    $mpdf->WriteHTML($inidoc);
-    $mpdf->WriteHTML($enddoc);   
     $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="100%"></footer>');
+    $mpdf->AddPage('', '', '', '', '',
+        15, // margin_left
+        15, // margin right
+        25, // margin top
+        30, // margin bottom
+        10, // margin header
+        8);
+    $mpdf->WriteHTML($inidoc);
+    $mpdf->WriteHTML($enddoc);  
     $mpdf->WriteHTML($html);
 
     //validar  si es empresa y si tiene cupo para descargar
