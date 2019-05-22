@@ -158,6 +158,8 @@ RewriteRule ^verAspirantes/([0-9]+)/([A-Za-z0-9]+)/([0-9]+)/([A-Z]{1}[^.]+)/([0-
 #generarPDF
 RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&username=$2 [L]
 
+RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&tipo=$2&idFactura=$3 [L]
+
 RewriteRule ^fileGEN/([A-Za-z]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=fileGEN&opcion=$1&idPlan=$2&idOferta=$3&username=$4 [L]
 
 #datosPDF

@@ -76,9 +76,9 @@
                           <td style="text-align: center;" data-title="Estado del Plan: "><?php echo ESTADOS[$value['estado']]; ?></td>
                           <td style="text-align: center;" data-title="Factura: ">
                               <?php if(!empty($value['id_factura'])){ ?>
-                                  <a title="Descargar factura" href="#">
-                                      <i class="fa fa-money"></i></i>
-                                  </a>
+
+                                <a title="Descargar factura" target="_blank" href="<?php echo PUERTO.'://'.HOST.'/fileGEN/generarFactura/RIDE/'.Utils::encriptar($value['id_factura']).'/';?>"><img src="<?php echo PUERTO."://".HOST.'/imagenes/factura.png';?>" width="30%"></a>
+                                 
                               <?php }else{ echo '-'; } ?>
                           </td>                                                    
                       </tr>

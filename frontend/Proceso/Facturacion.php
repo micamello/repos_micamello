@@ -292,10 +292,10 @@ class Proceso_Facturacion{
     return $return;   
   }
 
-  function generarRIDE($xml,$fecha_auto){
+  function generarRIDE($xml,$fecha_auto,$tipoArch=false){
     if (empty($xml)){ return false; }     
     $tipo_emision = array(1=>"NORMAL");   
-    $factura = simplexml_load_string($xml);    
+    $factura = simplexml_load_string($xml);   
     $infoTributaria = $factura->infoTributaria;
     $infoFactura = $factura->infoFactura;
     $detalles = $factura->detalles;
@@ -303,8 +303,6 @@ class Proceso_Facturacion{
 
     $obj_generar = new GenerarBarcode((string)$infoTributaria->claveAcceso,FRONTEND_RUTA.'/imagenes/imagenesCod/');
     $obj_generar->imprimirbarcode();
-    //header('Content-Type: text/html');
-    //ob_flush();
 
     $mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
 
@@ -503,10 +501,14 @@ class Proceso_Facturacion{
     $mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">Provincia: Guayas Cantón: DAULE Parroquia LA AURORA (SATÉLITE) <br>km. 12 Av. Febres Cordero Cdla. Villa Club etapa Krypton Mz. 14 Solar 3 (a cuatro cuadras de la garita). <br>Teléfono: 2753106 Celular: 099234268. E-mail: infor@micamello.com.ec</footer>');
 
     $mpdf->WriteHTML($contenido);
-
-    unlink(FRONTEND_RUTA.'/imagenes/imagenesCod/'.$infoTributaria->claveAcceso.'.png');
     //echo $contenido;
-    $mpdf->Output(self::RUTA_FACTURA.$infoTributaria->claveAcceso.".pdf", 'F');
+    unlink(FRONTEND_RUTA.'/imagenes/imagenesCod/'.$infoTributaria->claveAcceso.'.png');
+
+    if($tipoArch){
+      $mpdf->Output($infoTributaria->claveAcceso.".pdf", 'D');
+    }else{
+      $mpdf->Output(self::RUTA_FACTURA.$infoTributaria->claveAcceso.".pdf", 'F');
+    }
   }
 
   function generarXML($xml,$claveacceso){
