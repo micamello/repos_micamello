@@ -123,8 +123,6 @@ if($navegador == 'MSIE'){ ?>
     $fixed = "menu";
 ?>
 
-
-
     <!-- <div class="container-fluid"> -->
       <div id="barra" class="top-info-bar bg-color-3" style="top: 0px; position: fixed; margin-bottom: 50px !important; z-index: 1000; width: 100%">
       <div class="container">
@@ -149,8 +147,6 @@ if($navegador == 'MSIE'){ ?>
       </div>
     </div>
     <!-- </div> -->
-
-
 <?php } ?>
 
 <nav class="navbar navbar-default navbar-fixed-top <?php echo $fixed; ?>">

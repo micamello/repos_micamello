@@ -1218,6 +1218,18 @@ ul.checkout-bar a {
 .btn-primary:focus{
     transition: 0.3s;
     background-color: #204478;
+    transition: 0.3s;
+    background-color: #204478;
+}
+
+.btn-primary:active{
+    transition: 0.3s;
+    background-color: #204478;
+}
+
+.btn-primary:focus{
+    transition: 0.3s;
+    background-color: #204478;
 }*/
 
 .btn-primary:active:hover, .btn-primary.active:hover, .open > .dropdown-toggle.btn-primary:hover, .btn-primary:active:focus, .btn-primary.active:focus, .open > .dropdown-toggle.btn-primary:focus, .btn-primary:active.focus, .btn-primary.active.focus, .open > .dropdown-toggle.btn-primary.focus {
