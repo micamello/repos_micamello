@@ -662,14 +662,16 @@ class Controlador_GenerarPDF extends Controlador_Base
         $imagenstyle = "' style='";
         $imagenfin = "'>";
         $ruta = PATH_PROFILE.$datos['username'].'.jpg';
-        $archivoRuta = "usuarios/profile/".$datos['username'].'.jpg'; 
-        $resultado = file_exists($ruta);
+        //$archivoRuta = "usuarios/profile/".$datos['username'].'.jpg';         
+        $resultado = file_exists($ruta);        
         if (!$resultado){
-          $archivoRuta = "user.png";
+          $ruta = FRONTEND_RUTA.'imagenes/user.png';
+          //$archivoRuta = "user.png";
         }       
-        $archivo = $archivo.'.jpg';
-        $foto = PUERTO.'://'.HOST.'/imagenes/'.$archivoRuta;
-        $html .= $divinicio."text-align: center;".$divinter.$imageninicio.$foto.$imagenstyle."width: 120px;height: 120px;border-style: solid;border-color: white;".$imagenfin.$divfinal;
+        //$archivo = $archivo.'.jpg';
+        //$foto = PUERTO.'://'.HOST.'/imagenes/'.$archivoRuta;
+        //echo $ruta; exit;
+        $html .= $divinicio."text-align: center;".$divinter.$imageninicio.$ruta.$imagenstyle."width: 120px;height: 120px;border-style: solid;border-color: white;".$imagenfin.$divfinal;
         if(isset($datos['aspSalarial'])){
           $html .= "<h5 style='text-align: center;'><b>Aspiración salarial:</b> ".SUCURSAL_MONEDA.$datos['aspSalarial']."</h5>";
         }
@@ -697,11 +699,11 @@ class Controlador_GenerarPDF extends Controlador_Base
             $html .= $iniciotr;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['nombres'];
+              $html .= utf8_encode($datos['nombres']);
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['apellidos'];
+              $html .= utf8_encode($datos['apellidos']);
               $html .= $fintd;
 
             $html .= $fintr;
@@ -721,7 +723,7 @@ class Controlador_GenerarPDF extends Controlador_Base
             $html .= $iniciotr;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['estadocivil'];
+              $html .= utf8_encode($datos['estadocivil']);
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
@@ -790,11 +792,11 @@ class Controlador_GenerarPDF extends Controlador_Base
             $html .= $iniciotr;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['escolaridad'];
+              $html .= utf8_encode($datos['escolaridad']);
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['situacionLaboral'];
+              $html .= utf8_encode($datos['situacionLaboral']);
               $html .= $fintd;
 
             $html .= $fintr;
@@ -817,7 +819,7 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['extranjero'];
+              $html .= utf8_encode($datos['extranjero']);
               $html .= $fintd;
 
             $html .= $fintr;
@@ -833,7 +835,7 @@ class Controlador_GenerarPDF extends Controlador_Base
             $html .= $iniciotr;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['universidad'];
+              $html .= utf8_encode($datos['universidad']);
               $html .= $fintd;
 
             $html .= $fintr;
@@ -862,15 +864,15 @@ class Controlador_GenerarPDF extends Controlador_Base
             $html .= $iniciotr;
 
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['ciudad'];
+              $html .= utf8_encode($datos['ciudad']);
               $html .= $fintd;
 
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['nacionalidad'];
+              $html .= utf8_encode($datos['nacionalidad']);
               $html .= $fintd;
 
               $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['provincia'];
+              $html .= utf8_encode($datos['provincia']);
               $html .= $fintd;
 
             $html .= $fintr;
@@ -960,12 +962,12 @@ class Controlador_GenerarPDF extends Controlador_Base
                         foreach ($actual as $key2 => $value2) {
                           if($name != $value2['area']){
                             $name = $value2['area'];
-                            $html.= "<br><h4 style='text-align: center;'>Área: ".$value2['area']."<br></h4>";
+                            $html.= "<br><h4 style='text-align: center;'>Área: ".utf8_encode($value2['area'])."<br></h4>";
                           }
                         }
                         $html.= "<h4 style='text-align: center;'>Subáreas: </h4>";
                         foreach ($actual as $key1 => $value1) {
-                          $html.= $value1['subarea']."<br>";
+                          $html.= utf8_encode($value1['subarea'])."<br>";
                         }
               }
               $html .= $fintd;
@@ -973,7 +975,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 
 
         $html .= $fintbody;
-        $html .= $finTabla;
+        $html .= $finTabla;        
 
         $cabecera = "imagenes/pdf/header1.png";
         $piepagina = "imagenes/pdf/footer1.png";
