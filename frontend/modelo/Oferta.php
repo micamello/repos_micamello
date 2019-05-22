@@ -294,25 +294,31 @@ class Modelo_Oferta{
   }
 
   public static function guardarOfertaConvertida($data){
-    $result = $GLOBALS['db']->insert('mfo_oferta', array('id_empresa'=>$data['id_empresa'], 
-                                                          'titulo'=>$data['titulo'],
-                                                          'descripcion'=>$data['descripcion'],
-                                                          'salario'=>$data['salario'],
-                                                          'a_convenir'=>$data['a_convenir'],
-                                                          'fecha_contratacion'=>$data['fecha_contratacion'],
-                                                          'vacantes'=>$data['vacantes'],
-                                                          'anosexp'=>$data['anosexp'],
-                                                          'estado'=>$data['estado'],
-                                                          'fecha_creado'=>$data['fecha_creado'],
-                                                          'tipo'=>$data['tipo'],
-                                                          'primer_empleo'=>$data['primer_empleo'],
-                                                          'id_tipolicencia'=>$data['id_tipolicencia'],
-                                                          'id_jornada'=>$data['id_jornada'],
-                                                          'id_ciudad'=>$data['id_ciudad'],
-                                                          'id_requisitoOferta'=>$data['id_requisitoOferta'],
-                                                          'id_escolaridad'=>$data['id_escolaridad'],
-                                                          'id_empresa_plan'=>$data['id_empresa_plan'] 
-                                                          ));
+
+    $datos = array('id_empresa'=>$data['id_empresa'], 
+                'titulo'=>$data['titulo'],
+                'descripcion'=>$data['descripcion'],
+                'salario'=>$data['salario'],
+                'a_convenir'=>$data['a_convenir'],
+                'fecha_contratacion'=>$data['fecha_contratacion'],
+                'vacantes'=>$data['vacantes'],
+                'anosexp'=>$data['anosexp'],
+                'estado'=>$data['estado'],
+                'fecha_creado'=>$data['fecha_creado'],
+                'tipo'=>$data['tipo'],
+                'primer_empleo'=>$data['primer_empleo'],
+                'id_jornada'=>$data['id_jornada'],
+                'id_ciudad'=>$data['id_ciudad'],
+                'id_requisitoOferta'=>$data['id_requisitoOferta'],
+                'id_escolaridad'=>$data['id_escolaridad'],
+                'id_empresa_plan'=>$data['id_empresa_plan'] 
+                );
+
+    if(!empty($data['id_tipolicencia'])){
+      $datos['id_tipolicencia'] = $data['id_tipolicencia'];
+    }
+    
+    $result = $GLOBALS['db']->insert('mfo_oferta', $datos);
     return $result;
   }
 

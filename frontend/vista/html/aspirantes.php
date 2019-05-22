@@ -795,7 +795,7 @@
 							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
 
 							            		<td align="right" style="text-align: center;" data-title="Foto: ">
-							                      <img class="imagen-perfil-2" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil" >
+							                      <img class="imagen-perfil-2" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil" width="50" height="50">
 							                    </td>
 							            		
 							            		
@@ -1019,10 +1019,11 @@
 <div class="modal fade" id="convertir" tabindex="-1" role="dialog" aria-labelledby="convertir" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
+    	<form action = "<?php echo PUERTO."://".HOST;?>/convertir/" method = "post" id="form_convertir" name="form_convertir">
       <div class="modal-header">
         <h5 class="titulo-modal-hoja modal-title">Convertir Oferta</h5>               
       </div>
-      	<form action = "<?php echo PUERTO."://".HOST;?>/convertir/" method = "post" id="form_convertir" name="form_convertir">
+      	
 	        <div class="modal-body">
 		        <div class="row">
 		            <div class="col-md-12">
@@ -1044,12 +1045,13 @@
 		        	</div>
 		      	</div>
 	        </div>
-    	</form>
+    	
         <input type="hidden" name="convertirOferta" id="convertirOferta" value="1">
         <div class="modal-footer" style="text-align: center !important;">
           <button type="button" id="button_convertir_oferta" name="button_convertir_oferta" class="btn-light-blue" data-dismiss="modal">convertir</button>
           <button type="button" id="cancelar_conversion" name="cancelar_conversion" class="btn-red" data-dismiss="modal">cancelar</button>
         </div>
+      </form>  
     </div>    
   </div>
 </div>﻿

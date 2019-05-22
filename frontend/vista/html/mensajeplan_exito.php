@@ -18,7 +18,7 @@
           </div>
           <div class="col-md-12">
 				<?php if(isset($ofertaConvertir)){ ?>
-					<a href="<?php echo PUERTO."://".HOST."/verAspirantes/1/".$ofertaConvertir."/1/"; ?>" id="btn_convertir" class="btn-blue">CONVERTIR OFERTA AHORA</a>
+					<!--<a href="<?php #echo PUERTO."://".HOST."/verAspirantes/1/".$ofertaConvertir."/1/"; ?>" id="btn_convertir" class="btn-blue">CONVERTIR OFERTA AHORA</a>-->
 				<?php } ?>
 			</div>
           <div class="row">          

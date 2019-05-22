@@ -971,5 +971,70 @@ public static function validarTelefonoConvencional($contenido){
     return (Integer)strlen(substr(strrchr($x+"", "."), 1));
   } 
 
+  public static function crearThumbnail($nombreImagen, $nombreThumbnail, $nuevoAncho, $nuevoAlto){
+    
+    // Obtiene las dimensiones de la imagen.
+    list($ancho, $alto) = getimagesize($nombreImagen);
+
+    // Establece el alto para el thumbnail si solo se paso el ancho.
+    if ($nuevoAlto == 0 && $nuevoAncho != 0){
+        $factorReduccion = $ancho / $nuevoAncho;
+        $nuevoAlto = $alto / $factorReduccion;
+    }
+    
+    // Establece el ancho para el thumbnail si solo se paso el alto.
+    if ($nuevoAlto != 0 && $nuevoAncho == 0){
+        $factorReduccion = $alto / $nuevoAlto;
+        $nuevoAncho = $ancho / $factorReduccion;
+    }
+             
+    // Abre la imagen original.
+    list($imagen, $tipo) = self::abrirImagen($nombreImagen);
+    
+    // Crea la nueva imagen (el thumbnail).
+    $thumbnail = imagecreatetruecolor($nuevoAncho, $nuevoAlto);  
+    imagecopyresampled($thumbnail , $imagen, 0, 0, 0, 0, $nuevoAncho, $nuevoAlto, $ancho, $alto);
+    
+    // Guarda la imagen.
+    self::guardarImagen($thumbnail, $nombreThumbnail, $tipo);
+  }
+
+  public static function abrirImagen($nombre){
+    $info = getimagesize($nombre);
+    switch ($info["mime"]){
+        case "image/jpeg":
+            $imagen = imagecreatefromjpeg($nombre);
+            break;
+        case "image/gif":
+            $imagen = imagecreatefromgif($nombre);
+            break;
+        case "image/png":
+            $imagen = imagecreatefrompng($nombre);
+            break;
+        default :
+            echo "Error: No es un tipo de imagen permitido.";
+    }
+    $resultado[0]= $imagen;
+    $resultado[1]= $info["mime"];
+    return $resultado;
+  }
+
+  public static function guardarImagen($imagen, $nombre, $tipo){
+
+    switch ($tipo){
+        case "image/jpeg":
+            imagejpeg($imagen, $nombre, 100); // El 100 es la calidade de la imagen (entre 1 y 100. Con 100 sin compresion ni perdida de calidad.).
+            break;
+        case "image/gif":
+            imagegif($imagen, $nombre);
+            break;
+        case "image/png":
+            imagepng($imagen, $nombre, 9); // El 9 es grado de compresion de la imagen (entre 0 y 9. Con 9 maxima compresion pero igual calidad.).
+            break;
+        default :
+            echo "Error: Tipo de imagen no permitido.";
+    }
+  }  
+
 }
 ?>

@@ -1,8 +1,7 @@
 <?php
-class Controlador_Perfil extends Controlador_Base
-{
-    public function construirPagina()
-    {
+class Controlador_Perfil extends Controlador_Base{
+
+    public function construirPagina(){
         //Si el usuario no esta logueado lo retorna a la página de logueo
         if (!Modelo_Usuario::estaLogueado()) {
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
@@ -184,8 +183,7 @@ class Controlador_Perfil extends Controlador_Base
     }
 
     //Función para hacer el validado de todos los campos del módulo de perfil y si no hay ningun problema proceder al guardado, sino hace un rollback
-    public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario)
-    {
+    public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario){
         try {
 
             $listAreas = Modelo_Area::obtieneListadoAsociativo();
@@ -391,7 +389,8 @@ class Controlador_Perfil extends Controlador_Base
             if (!empty($imagen) && $imagen['error'] != 4) {
               if (!Utils::upload($imagen,$_SESSION['mfo_datos']['usuario']['username'],PATH_PROFILE,1)){
                 throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
-              }  
+              }
+              Utils::crearThumbnail(PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',300,0);  
             } 
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 if (!empty($archivo) && $archivo['error'] != 4) {
