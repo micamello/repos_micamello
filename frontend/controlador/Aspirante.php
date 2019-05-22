@@ -318,7 +318,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $filtros = $_SESSION['mfo_datos']['Filtrar_aspirantes'];
                     //print_r($filtros);
                     $fill = true;
-                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) && $filtros['O'] == 1 && empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C'])){
+                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) /*&& $filtros['O'] == 1 */&& empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C'])){
                         /*echo 'limite_filtrado: '.*/$limite_filtrado = '';
                     }else{
                         /*echo 'limite_filtrado: '.*/$limite_filtrado = $limite_plan;

@@ -24,6 +24,16 @@ class Controlador_GenerarPDF extends Controlador_Base
         $vista = Utils::getParam('vista','',$this->data);
         self::hvUsuario($username, $id_oferta, $vista);
       break;
+      case 'generarFactura':
+        $idFactura = Utils::desencriptar(Utils::getParam('idFactura','',$this->data));
+
+        if(!empty($idFactura)){
+          $consultaFactura = Modelo_Factura::obtenerFactura($idFactura,Modelo_Factura::AUTORIZADO);
+          
+          $obj_facturacion = new Proceso_Facturacion();
+          $obj_facturacion->generarRIDE(utf8_encode($consultaFactura["xml"]),$consultaFactura['fecha_estado'],true);
+        }
+      break;
       case 'informeusuario':
 
         $usuario = Modelo_Usuario::existeUsuario($username);
@@ -37,7 +47,11 @@ class Controlador_GenerarPDF extends Controlador_Base
         $cantidadRestante = 1;
         $id_empresa = false;
 
-        $existe_en_oferta = Modelo_Postulacion::obtienePostuladoxUsuario($idusuario,$id_oferta);
+        if(!empty($id_oferta)){
+          $existe_en_oferta = Modelo_Postulacion::obtienePostuladoxUsuario($idusuario,$id_oferta);
+        }else{
+          $existe_en_oferta = array();
+        }
 
         if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
 
@@ -124,7 +138,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     $porcentajesxfaceta = $datos['porcentajesxfaceta'];
     $rasgos = $datos['rasgos'];
     $competencias = $datos['competencias'];
-   
+  
     $datos_descarga = $datos['datos_descarga'];
     $conacentos = array('Á', 'É','Í','Ó','Ú','Ñ');
     $sinacentos = array('a', 'e','i','o','u','n');

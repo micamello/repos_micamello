@@ -551,7 +551,7 @@ WHERE
     }
 
     $sql .= ' GROUP BY t2.id_usuario';
-    
+
     if($obtCantdRegistros === false){
       if(!empty($filtros['O']) && $filtros['O'] != 0 && strlen($filtros['O'])>1){
         $tipo = substr($filtros['O'],0,1);
@@ -601,7 +601,7 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-    echo 'SQL1: '.$sql;
+    //echo 'SQL1: '.$sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -1159,7 +1159,7 @@ WHERE
         WHERE pf.id_usuario = ? and pf.id_faceta in('.$facetas.')
         AND b.id_puntaje = d.id_puntaje;';
     }
-
+//echo $sql;
     return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
   }
 }  

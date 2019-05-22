@@ -44,8 +44,8 @@ class Modelo_Plan{
                      u.id_usuario_plan, u.estado, f.id_factura
               FROM mfo_usuario_plan u 
               INNER JOIN mfo_plan p ON u.id_plan = p.id_plan
-              LEFT JOIN mfo_factura f ON f.id_user_emp_plan = u.id_usuario_plan AND 
-                                         f.tipo_usuario = 1 AND f.estado = 2
+              LEFT JOIN mfo_factura f ON f.id_comprobante = u.id_comprobante AND 
+                                         f.tipo_usuario = 1 AND f.estado = ".Modelo_Factura::AUTORIZADO."
               WHERE u.id_usuario = ? AND
                     (u.estado = 1 OR (u.estado = 0 AND u.id_comprobante <> ''))
               ORDER BY u.fecha_compra ASC";
@@ -68,8 +68,8 @@ class Modelo_Plan{
                      e.id_empresa_plan AS id_usuario_plan, e.estado, f.id_factura
               FROM mfo_empresa_plan e
               INNER JOIN mfo_plan p ON e.id_plan = p.id_plan
-              LEFT JOIN mfo_factura f ON f.id_user_emp_plan = e.id_empresa_plan AND 
-                                         f.tipo_usuario = 2 AND f.estado = 2
+              LEFT JOIN mfo_factura f ON f.id_comprobante = e.id_comprobante AND 
+                                         f.tipo_usuario = 2 AND f.estado = ".Modelo_Factura::AUTORIZADO."
               WHERE e.id_empresa = ? AND
                     (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))";
 
@@ -78,7 +78,7 @@ class Modelo_Plan{
               }
       $sql .= " ORDER BY e.fecha_compra ASC";
     }  
-    //echo $sql;  
+    echo $sql;  
     return $GLOBALS['db']->auto_array($sql,array($idUsuario),true);
   }
    

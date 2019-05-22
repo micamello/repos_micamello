@@ -1072,9 +1072,11 @@
 		            </div>
 		            <div class="col-md-8">
 		              <p class="subt"><b>Beneficios </b></p>
-		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede completar el proceso de selección de personal.</p></li>
-		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA.</p></li>
-		              <li class="qs-text-lista"><p class="lista-valores">La empresa puede activar uno o varios accesos, de acuerdo al plan contratado. </p></li>
+		              <ul>
+			              <li class="qs-text-lista"><p style="color:#515151">La empresa puede completar el proceso de selección de personal.</p></li>
+			              <li class="qs-text-lista"><p style="color:#515151">La empresa puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA.</p></li>
+			              <li class="qs-text-lista"><p style="color:#515151">La empresa puede activar uno o varios accesos, de acuerdo al plan contratado. </p></li>
+		          	</ul>
 		            </div>
 		            <div class="col-md-4" style="text-align: center !important;"><br><br><br><br>
 		              <button style="padding: 15px !important" type="button" class="btn-light-blue" data-dismiss="modal">Aceptar</button>
