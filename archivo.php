@@ -11,13 +11,27 @@ if (empty($carpeta) || empty($param1)){
 if(!Modelo_Usuario::estaLogueado()){
   exit;
 }
+$usuario = array();
 if(!empty($param1) && !empty($carpeta)){
-	$usuario = Modelo_Usuario::existeUsuario($param1);
-	if (empty($usuario)){
-		exit;
+	$rsc = file_exists(FRONTEND_RUTA.'cache/users/'.$param1.'.txt');
+	if ($rsc){
+    $fp = fopen(FRONTEND_RUTA.'cache/users/'.$param1.'.txt', 'r');
+    $path = fgets($fp);
+    fclose($fp);
+    $values = explode(",",$path);
+    $usuario["id_usuario"] = trim($values[0]);
+    $usuario["tipo_usuario"] = trim($values[1]);
+    $usuario["username"] = $param1;
+    $archivo = $param1;
 	}
 	else{
-		$archivo = $usuario["username"];
+		$usuario = Modelo_Usuario::existeUsuario($param1);
+		if (empty($usuario)){
+			exit;
+		}
+		else{
+			$archivo = $usuario["username"];
+		}
 	}
 }
 //si es candidato no puede ver imagenes/hojas de vida de otros candidatos

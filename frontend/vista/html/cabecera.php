@@ -193,7 +193,7 @@ if($navegador == 'MSIE'){ ?>
               <i class="fa fa-caret-down">
                 <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                 echo "usericon_safari";
-              } ?>"></i>
+              } ?>" width="35" height="35"></i>
               <ul class="dropdown-menu">
                 <?php foreach($menu["submenu"] as $submenu){ ?>  
                   <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>

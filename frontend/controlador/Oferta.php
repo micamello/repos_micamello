@@ -97,7 +97,10 @@ class Controlador_Oferta extends Controlador_Base{
             $datosOferta = Modelo_oferta::consultarOferta($idOferta);
             $datosOferta[0]['id_empresa_plan'] = $id_empresa_plan;
 
-            $datosRequisitos = array('viajar'=>$datosOferta[0]['viajar'],'residencia'=>$datosOferta[0]['residencia'],'discapacidad'=>$datosOferta[0]['discapacidad'],'confidencial'=>$datosOferta[0]['confidencial'],'edad_minima'=>$datosOferta[0]['edad_minima'],'edad_maxima'=>$datosOferta[0]['edad_maxima'],'id_tipolicencia'=>$datosOferta[0]['id_tipolicencia']);
+            $datosRequisitos = array('viajar'=>$datosOferta[0]['viajar'],'residencia'=>$datosOferta[0]['residencia'],'discapacidad'=>$datosOferta[0]['discapacidad'],'confidencial'=>$datosOferta[0]['confidencial'],'edad_minima'=>$datosOferta[0]['edad_minima'],'edad_maxima'=>$datosOferta[0]['edad_maxima']);
+            if (!empty($datosOferta[0]['id_tipolicencia'])) {
+              $datosRequisitos["id_tipolicencia"] = $datosOferta[0]['id_tipolicencia'];
+            }
             
             unset($datos[0]['viajar'],$datos[0]['residencia'],$datos[0]['discapacidad'],$datos[0]['confidencial'],$datos[0]['edad_minima'],$datos[0]['edad_maxima']);
             self::convertirOferta($datosOferta[0],$datosRequisitos);
@@ -676,7 +679,7 @@ class Controlador_Oferta extends Controlador_Base{
         
         //desactivar oferta anterior
         if(!Modelo_Oferta::desactivarOferta($oferta_ant)){
-          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+          throw new Exception("Ha ocurrido un error. Intente nuevamente 1");
         }
 
         if(!Modelo_Oferta::guardarRequisitosOferta($datos_requisitos)){
@@ -686,9 +689,10 @@ class Controlador_Oferta extends Controlador_Base{
         $datos['estado'] = 1;
         $datos['id_requisitoOferta'] = $GLOBALS['db']->insert_id();
 
+        Utils::log("FERNAND ".print_r($datos,true));
         //Insertar el nuevo registro de la oferta con el id_empresa_plan actualizado
         if(!Modelo_Oferta::guardarOfertaConvertida($datos)){
-          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+          throw new Exception("Ha ocurrido un error. Intente nuevamente 2");
         }
         $id_oferta_nueva = $GLOBALS['db']->insert_id(); 
       
@@ -699,12 +703,12 @@ class Controlador_Oferta extends Controlador_Base{
         //Restar el numero de publicaciones del plan seleccionado
         $plan_seleccionado = Modelo_UsuarioxPlan::consultarRecursosAretornar($datos['id_empresa_plan']);
         if(!Modelo_UsuarioxPlan::restarPublicaciones($datos['id_empresa_plan'], $plan_seleccionado['num_publicaciones_rest'], Modelo_Usuario::EMPRESA)){
-          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+          throw new Exception("Ha ocurrido un error. Intente nuevamente 3");
         } 
 
         //Mover a los postulados de la oferta anterior a la nueva
         if(!Modelo_Postulacion::transladarCandidatos($oferta_ant,$id_oferta_nueva)){
-          throw new Exception("Ha ocurrido un error. Intente nuevamente");
+          throw new Exception("Ha ocurrido un error. Intente nuevamente 4");
         }
 
         $GLOBALS['db']->commit();

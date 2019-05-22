@@ -31,7 +31,8 @@ class Controlador_Login extends Controlador_Base {
               throw new Exception("Error en el sistema, por favor intente denuevo");
             }  
           }                               
-          self::registroSesion($usuario);              
+          self::registroSesion($usuario);
+          self::registroCache($_SESSION['mfo_datos']['usuario']);              
         }
         else{
           throw new Exception("Usuario o Password Incorrectos");
@@ -54,30 +55,25 @@ class Controlador_Login extends Controlador_Base {
   }
  
   public static function registroSesion($usuario){     
-
     $_SESSION['mfo_datos']['usuario'] = $usuario;
     //busqueda de planes activos
     $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"],$usuario["tipo_usuario"]);
-
     if (!empty($planesactivos) && is_array($planesactivos)){
       $_SESSION['mfo_datos']['planes'] = $planesactivos; 
     }
     if ($usuario["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
       $usuarioxarea = Modelo_UsuarioxArea::obtieneListado($usuario["id_usuario"]);
       $subareas = Modelo_UsuarioxArea::consultarSubareas($usuario["id_usuario"]);
-      $infohv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);
-      
+      $infohv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);      
       if (!empty($usuarioxarea) && is_array($usuarioxarea)){
         $_SESSION['mfo_datos']['usuario']['usuarioxarea'] = $usuarioxarea; 
       }
       if (!empty($subareas) && is_array($subareas)){
         $_SESSION['mfo_datos']['usuario']['subareas'] = $subareas['subareas']; 
       }
-
       if (!empty($infohv) && is_array($infohv)){
         $_SESSION['mfo_datos']['usuario']['infohv'] = $infohv; 
       }
-
     }  
     else{      
       $hijos = Modelo_Usuario::obtieneHerenciaEmpresa($usuario["id_usuario"]);
@@ -87,6 +83,16 @@ class Controlador_Login extends Controlador_Base {
     }  
     @ini_set("session.gc_maxlifetime", 14400000000000);        
     session_write_close();  
+  }
+
+  public static function registroCache($usuario){
+    $rsc = file_exists(FRONTEND_RUTA.'cache/users/'.$usuario["username"].'.txt');
+    if (!$rsc){
+      $fp = fopen(FRONTEND_RUTA.'cache/users/'.$usuario["username"].'.txt', "w");
+      $lines = $usuario['id_usuario'].",".$usuario['tipo_usuario']."\n";
+      fputs($fp, $lines);
+      fclose($fp);
+    }
   }
  
 }  
