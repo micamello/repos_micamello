@@ -78,7 +78,7 @@ class Modelo_Plan{
               }
       $sql .= " ORDER BY e.fecha_compra ASC";
     }  
-    echo $sql;  
+    //echo $sql;  
     return $GLOBALS['db']->auto_array($sql,array($idUsuario),true);
   }
    
