@@ -1,7 +1,3 @@
-<?php 
-	// var_dump($datosUsuario);
-	// exit();
-?>
 <div class="text-center">
     <h2 class="titulo">Perfil del Candidato</h2>
   </div>
@@ -28,7 +24,7 @@
 				<div class="col-md-6">
 		        	<div class="col-md-12">
 			            <div class="nombreUsuario">
-			            	<h3 class=""><?php echo $datosUsuario['nombres']." ".$datosUsuario['apellidos'] ?></h3>
+			            	<h3 class=""><?php echo utf8_encode($datosUsuario['nombres'])." ".utf8_encode($datosUsuario['apellidos']) ?></h3>
 			            </div>
 		            	<?php if(isset($datosUsuario['aspSalarial'])){
 							echo "<h5><b>Aspiración salarial: </b>". SUCURSAL_MONEDA.$datosUsuario['aspSalarial']."</h5>";
@@ -48,12 +44,12 @@
 					<div align="left">
 						<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Nombres: </b><?php echo $datosUsuario['nombres'] ?></h5>
+							<h5><b>Nombres: </b><?php echo utf8_encode($datosUsuario['nombres']) ?></h5>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Apellidos: </b><?php echo $datosUsuario['apellidos'] ?></h5>
+							<h5><b>Apellidos: </b><?php echo utf8_encode($datosUsuario['apellidos']) ?></h5>
 						</div>
 					</div>
 					
@@ -91,13 +87,13 @@
 
 					<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Último estudio realizado: </b><?php echo $datosUsuario['escolaridad'] ?></h5>
+							<h5><b>Último estudio realizado: </b><?php echo utf8_encode($datosUsuario['escolaridad']) ?></h5>
 						</div>
 					</div>
 
 					<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Situación laboral: </b><?php echo $datosUsuario['situacionLaboral'] ?></h5>
+							<h5><b>Situación laboral: </b><?php echo utf8_encode($datosUsuario['situacionLaboral']) ?></h5>
 						</div>
 					</div>
 
@@ -115,7 +111,7 @@
 
 					<div class="col-md-6">
 						<div class="contentData">
-							<h5><b>Universidad: </b><?php echo $datosUsuario['universidad'] ?></h5>
+							<h5><b>Universidad: </b><?php echo utf8_encode($datosUsuario['universidad']) ?></h5>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -131,18 +127,18 @@
 					<div align="left">
 						<div class="col-md-4">
 							<div class="contentData">
-								<h5><b>Ciudad de residencia: </b><?php echo $datosUsuario['ciudad'] ?></h5>
+								<h5><b>Ciudad de residencia: </b><?php echo utf8_encode($datosUsuario['ciudad']) ?></h5>
 							</div>
 						</div>
 						
 						<div class="col-md-4">
 							<div class="contentData">
-								<h5><b>Nacionalidad: </b><?php echo $datosUsuario['nacionalidad'] ?></h5>
+								<h5><b>Nacionalidad: </b><?php echo utf8_encode($datosUsuario['nacionalidad']) ?></h5>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="contentData">
-								<h5><b>Provincia de residencia: </b><?php echo $datosUsuario['provincia'] ?></h5>
+								<h5><b>Provincia de residencia: </b><?php echo utf8_encode($datosUsuario['provincia']) ?></h5>
 							</div>
 						</div>
 					</div>
@@ -167,7 +163,7 @@
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
 							<?php
 							$documento = ""; if($datosUsuario['tipo_doc'] == 1) $documento = 'Ruc';
-								if($datosUsuario['tipo_doc'] == 2) $documento = 'Cédula';
+								if($datosUsuario['tipo_doc'] == 2) $documento = 'C&eacute;dula';
 								if($datosUsuario['tipo_doc'] == 3) $documento = 'Pasaporte';
 										?>
 							<h5><b><?php echo $documento; ?>: </b><?php echo $datosUsuario['dni'] ?></h5>
