@@ -286,7 +286,7 @@ $('#shippingPhone').on('blur', function(){
 
 $('#direccion').on('blur', function(){
   var dir = document.getElementById('direccion').value;
-  if(dir.length <= '10' && dir.length <= '50'){
+  if(dir.length >= '10' && dir.length <= '50'){
     validarDir(dir,"err_dir","seccion_dir","btndeposito");
     validaCampos(2);
   }else{
