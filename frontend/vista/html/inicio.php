@@ -5,7 +5,7 @@
                   <div class="col-md-12">
                     <p>¡Conoce las mejores empresas, encuentra tu pr&oacute;ximo trabajo y mucho m&aacute;s!</p>
                   </div>
-                  <?php if(!isset($_SESSION)){ ?>
+                  <?php if(!Modelo_Usuario::estaLogueado()){ ?>
                     <div class="col-md-12">
                       <button class="btn-blue" id="cuadro-celeste">
                         <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
@@ -213,7 +213,7 @@
   </div>
 </section><!-- End off Brand section -->
 
-<?php if(!isset($_SESSION)){ ?>
+<?php if(!Modelo_Usuario::estaLogueado()){ ?>
   <section class=" banner-publicidad">
     <div class="container-fluid">
       <div class="row">
