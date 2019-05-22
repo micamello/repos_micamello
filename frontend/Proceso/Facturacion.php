@@ -387,7 +387,7 @@ class Proceso_Facturacion{
                     <tr>
                       <td '.$style1.'><b>Razón Social / Nombres y Apellidos: </b></td>
                       <td '.$style1.'>'.strtoupper($infoFactura->razonSocialComprador).'</td>
-                      <td '.$style1.'><b>RUC / CI: </b></td>
+                      <td '.$style1.'><b>Identificación: </b></td>
                       <td '.$style1.'>'.$infoFactura->identificacionComprador.'</td>
                     </tr>
                     <tr>

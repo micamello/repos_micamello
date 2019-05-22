@@ -31,10 +31,12 @@ class Modelo_Factura{
     $valupdate = array();
     if (!isset($valores["msg_error"]) || empty($valores["msg_error"])){
       $valupdate["estado"] = $valores["estado"];
+      $valupdate["fecha_estado"] = $valores["fecha_estado"];
     }
     else{
       $valupdate["estado"] = $valores["estado"];
       $valupdate["msg_error"] = $valores["msg_error"];
+      $valupdate["fecha_estado"] = $valores["fecha_estado"];
     }
     return $GLOBALS['db']->update("mfo_factura",$valupdate,"clave_acceso='".$claveAcceso."'");
   }

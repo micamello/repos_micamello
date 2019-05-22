@@ -143,7 +143,7 @@ class Controlador_Plan extends Controlador_Base {
         $tags["precio"] = $precio;
         $tags["taxMontoGravaIva"] = $taxMontoGravaIva;
         $tags["taxMontoIVA"] = $taxMontoIVA;
-        $tags["purchaseOperationNumber"] = date('his');        
+        $tags["purchaseOperationNumber"] = generarTransactionId();       
         $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . 
                                                        PAYME_IDCOMMERCE . 
                                                        $tags["purchaseOperationNumber"] . 
@@ -245,6 +245,15 @@ class Controlador_Plan extends Controlador_Base {
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
     }  
     Vista::render($template, $tags);       
+  }
+
+  public function generarTransactionId(){
+
+    $random = random(000000001, 999999999);
+    if(strlen($random) < 9){
+      $random = str_pad($random, 9, "0", STR_PAD_LEFT);
+    }
+    return $random;
   }
 }  
 ?>

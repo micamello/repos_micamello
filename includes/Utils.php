@@ -957,5 +957,19 @@ public static function validarTelefonoConvencional($contenido){
     $from = '/'.preg_quote($from, '/').'/'; 
     return preg_replace($from, $to, $content, 1); 
   }
+
+  public static function random($min, $max){
+    $decimals = max(count_decimals($min),count_decimals($max));
+    $factor = pow(10, $decimals);
+    list($usec, $sec) = explode(' ', microtime());
+    $seed = (float) $sec + ((float) $usec * 100000);
+    srand($seed);
+    return rand($min*$factor, $max*$factor) / $factor;
+  }
+
+  public static function count_decimals($x){
+    return  strlen(substr(strrchr($x+"", "."), 1));
+  } 
+
 }
 ?>
