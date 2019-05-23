@@ -45,7 +45,7 @@ function quitarError(campo,id){
 "use strict";
 jQuery(document).ready(function ($) {
 
-    bannerTel();
+    // bannerTel();
 //for Preloader
 
     //$(window).load(function () {

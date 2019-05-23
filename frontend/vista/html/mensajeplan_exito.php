@@ -12,7 +12,7 @@
             <h4>Dentro de un momento su plan ser&aacute; activado<br>
 					Por favor revise su correo para verificar su subscripci&oacute;n</h4><br>
 				<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO && isset($msg_cuestionario) && $msg_cuestionario == 1) { ?>
-					<h4>Cuando su plan este activo, podr&aacute; realizar el tercer <a href="<?php echo PUERTO."://".HOST."/preguntas/"; ?>" class="btn-blue">formulario</a></h4>
+					<h4>Cuando su plan este activo, podr&aacute; realizar el tercer <br><a href="<?php echo PUERTO."://".HOST."/preguntas/"; ?>" class="btn-blue">formulario</a></h4>
 				<?php } ?>
             <!-- <button class="btn-light-blue">Finalizar</button> -->
           </div>
