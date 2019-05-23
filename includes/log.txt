@@ -14959,3 +14959,9 @@ presa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres,
             LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
             LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
             WHERE l.username = 'nescafe'
+[2019/05/23 08:13:27] Utils::createSession empezo una nueva sesion
+[2019/05/23 08:13:27] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/23 08:13:51] Utils::createSession empezo una nueva sesion
+[2019/05/23 08:13:51] SQL Query: SELECT * FROM mfo_area
+[2019/05/23 08:13:51] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/05/23 08:13:51] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
