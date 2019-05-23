@@ -313,7 +313,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $informe .= 'DEL INFORME PARCIAL</h2>';
         $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
       }else{
-        $fuente = 'font-size:35pt;';
+        $fuente = 'font-size:30pt;';
         $informe .= '</h2>';
       }
 
