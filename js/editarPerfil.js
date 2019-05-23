@@ -779,10 +779,10 @@ function validarFormulario(tipovalidacion){
                 colocaError("err_tlfCon","seccion_tlfCon","Longitud mín. 9 caracteres","boton");
                 mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres\n'; 
                 error = 1; 
-            }else if(convencional.length > '15'){
+            }else if(convencional.length > '9'){
 
-                colocaError("err_tlfCon","seccion_tlfCon","Longitud máx. 15 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 15 caracteres\n'; 
+                colocaError("err_tlfCon","seccion_tlfCon","Longitud máx. 9 caracteres","boton");
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres\n'; 
                 error = 1; 
             }else{
                quitarError("err_tlfCon","seccion_tlfCon"); 
