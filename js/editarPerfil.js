@@ -988,10 +988,10 @@ function validarFormulario(tipovalidacion){
                 colocaError("err_tlfCon2","seccion_tlfCon2","Longitud mín. 9 caracteres","boton");
                 mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres\n'; 
                 error = 1; 
-            }else if(tel_two_contact.length > '15'){
+            }else if(tel_two_contact.length > '9'){
 
-                colocaError("err_tlfCon2","seccion_tlfCon2","Longitud máx. 15 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 15 caracteres\n'; 
+                colocaError("err_tlfCon2","seccion_tlfCon2","Longitud máx. 9 caracteres","boton");
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres\n'; 
                 error = 1; 
             }else{
                 quitarError("err_tlfCon2","seccion_tlfCon2");
