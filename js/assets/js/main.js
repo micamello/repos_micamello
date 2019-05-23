@@ -45,7 +45,8 @@ function quitarError(campo,id){
 "use strict";
 jQuery(document).ready(function ($) {
 
-    bannerTel();
+    // bannerTel();
+
 //for Preloader
 
     //$(window).load(function () {
@@ -612,6 +613,8 @@ function bannerTel(){
     $('body').css('padding-top', ($('.navbar-fixed-top').height()+35)+'px');
   }
 }
-/*$(window).resize(function(){
-  bannerTel();
-});*/
+
+$(window).resize(function(){
+  // bannerTel();
+});
+

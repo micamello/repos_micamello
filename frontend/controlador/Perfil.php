@@ -254,7 +254,7 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es v\u00E1lida");
                 }
 
-                $validaTlf = Utils::valida_telefono($data['telefono']);
+                $validaTlf = Utils::validarTelefono($data['telefono']);
                 if (empty($validaTlf)) {
                     throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
                 }
@@ -292,7 +292,7 @@ class Controlador_Perfil extends Controlador_Base
                   throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
                 } 
 
-                $validaTlf = Utils::valida_telefono($data['telefono']);
+                $validaTlf = Utils::validarTelefono($data['telefono']);
                 if (!$validaTlf) {
                     throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
                 }
@@ -304,7 +304,7 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
             }else{
-                $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
+                $validaTlf2 = Utils::validarTelefono($data['tel_one_contact']);
                 if (empty($validaTlf2)){
                     throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no es v\u00E1lido");
                 }
@@ -330,7 +330,7 @@ class Controlador_Perfil extends Controlador_Base
                   throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
                 }
 
-                $validaTlf = Utils::valida_telefono($data['telefono']);
+                $validaTlf = Utils::validarCelularConvencional($data['telefono']);
                 if (!$validaTlf) {
                     throw new Exception("El tel\u00E9fono " . $data['telefono'] . " no es v\u00E1lido");
                 }

@@ -202,10 +202,8 @@ $('#idioma_of').on('change', function(){
 
     if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
         document.getElementById('effect_bounce').classList.add('bounce');
-        document.getElementById('btn_transfer').classList.add('active_button');
     }else{
         document.getElementById('effect_bounce').classList.remove('bounce');
-        document.getElementById('btn_transfer').classList.remove('active_button');
     }
 });
 
@@ -213,10 +211,8 @@ $('#nivel_idi_of').on('change', function(){
 
     if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
         document.getElementById('effect_bounce').classList.add('bounce');
-        document.getElementById('btn_transfer').classList.add('active_button');
     }else{
         document.getElementById('effect_bounce').classList.remove('bounce');
-        document.getElementById('btn_transfer').classList.remove('active_button');
     }
 });
 

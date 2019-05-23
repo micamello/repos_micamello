@@ -981,7 +981,7 @@ padding-top: 10px;
 .menu{
     /*color:white;*/
     /*position: sticky !important;*/
-    /*position: -webkit-sticky;*/
+    position: sticky;
     /*padding-bottom: 10px;*/
     /*top: 30px;*/
 }
@@ -1241,6 +1241,12 @@ ul.checkout-bar a {
     color: #fff;
     background-color: #204478;
     border-color: #204d74;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    color: #fff;
+    background-color: #204478;
+    border-color: #122b40;
 }
 
 /*clases de error*/
