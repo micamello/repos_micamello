@@ -129,25 +129,25 @@ class Controlador_Registro extends Controlador_Base {
       }
 
       if(!Utils::validarTelefono($datosReg['celularCandEmp'])){
-        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido (entre 10 o 15 d\u00EDgitos)");
+        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido (10d\u00EDgitos)");
       }
     }
 
 
     if($datosReg['tipo_usuario'] == 2){
 
-      if(!Utils::valida_telefono($datosReg['celularCandEmp'])){
-        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido");
+      if(!Utils::validarCelularConvencional($datosReg['celularCandEmp'])){
+        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido (entre 9 y 15 d\u00EDgitos)");
       }
 
 
       if(!Utils::validarTelefono($datosReg['tel1ConEmp'])){
-        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido (entre 10 o 15 d\u00EDgitos)");
+        throw new Exception("Ingrese un n\u00FAmero de celular v\u00E1lido (10 d\u00EDgitos)");
       }
 
       if(isset($datosReg['tel2ConEmp'])){
         if(!Utils::validarTelefonoConvencional($datosReg['tel2ConEmp'])){
-          throw new Exception("Ingrese un n\u00FAmero de tel\u00E9fono convencional v\u00E1lido (entre 6 o 15 d\u00CDgitos)");
+          throw new Exception("Ingrese un n\u00FAmero de tel\u00E9fono convencional v\u00E1lido (9 d\u00CDgitos)");
         }
       }
     }

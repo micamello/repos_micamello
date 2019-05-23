@@ -315,11 +315,17 @@ class Utils{
     else return false; 
   }
 
-// public static function validarTelefono($contenido){
-//   return preg_match("/^[0-9]{10,15}+$/", $contenido);
-// }
+ // public static function validarTelefono($contenido){
+ //   return preg_match("/^[0-9]{10,15}+$/", $contenido);
+ // }
 
 public static function validarTelefonoConvencional($contenido){
+  if (preg_match("/^[0-9]{9}+$/",$contenido)) 
+    return true; 
+  else return false; 
+}
+
+public static function validarCelularConvencional($contenido){
   if (preg_match("/^[0-9]{9,15}+$/",$contenido)) 
     return true; 
   else return false; 

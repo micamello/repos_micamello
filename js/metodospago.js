@@ -187,6 +187,9 @@ $('#tipo_docP').on('change', function(){
         else if(tipo_doc == 1 && document.getElementById('dniP').value.length < 13){
           colocaError("err_dniP", "seccion_dniP","El RUC debe tener mínimo 13 dígitos","btn_submitpaypal");
         }
+        else{
+          quitarError("err_dniP","seccion_dniP");
+        }
       }else{
         colocaError("err_dniP", "seccion_dniP","Documento no puede ser vacío","btn_submitpaypal");
         error = 1;
@@ -286,7 +289,9 @@ $('#shippingPhone').on('blur', function(){
 
 $('#direccion').on('blur', function(){
   var dir = document.getElementById('direccion').value;
-  if(dir.length <= '10' && dir.length <= '50'){
+  console.log(dir.length);
+  if(dir.length >= 10 && dir.length <= 50){
+    console.log(dir.length + "dentro");
     validarDir(dir,"err_dir","seccion_dir","btndeposito");
     validaCampos(2);
   }else{
