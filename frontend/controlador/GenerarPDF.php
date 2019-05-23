@@ -309,11 +309,11 @@ class Controlador_GenerarPDF extends Controlador_Base
     <div id="pagina-4">
       <h2>DESCRIPTORES ';
       if($tipo_informe == 'parcial'){
-        $fuente = 'font-size:33pt;';
+        $fuente = 'font-size:30pt;';
         $informe .= 'DEL INFORME PARCIAL</h2>';
         $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
       }else{
-        $fuente = 'font-size:35pt;';
+        $fuente = 'font-size:27pt;';
         $informe .= '</h2>';
       }
 

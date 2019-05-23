@@ -90,10 +90,14 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                 <center>
                   <?php if ($notificaciones["tipo"] == Modelo_Notificacion::DESBLOQUEO_ACCESO && 
                   $notificaciones["tipo_usuario"] == Modelo_Usuario::CANDIDATO) { ?>
-                    <a href="javascript:void(0);" onclick="cancelarAcceso(<?php echo $notificaciones['id_notificacion'];?>);" class="btn btn-cancel"><b>Cancelar</b></a>
-                    <a href="javascript:void(0);" onclick="aceptarAcceso(<?php echo $notificaciones['id_notificacion'];?>);" class="btn btn-success"><b>Aceptar</b></a>
+                    <!--<a href="javascript:void(0);" onclick="cancelarAcceso(<?php #echo $notificaciones['id_notificacion'];?>);" class="btn btn-cancel"><b>Cancelar</b></a>-->
+                    <!--<a href="javascript:void(0);" onclick="aceptarAcceso(<?php #echo $notificaciones['id_notificacion'];?>);" class="btn btn-success"><b>Aceptar</b></a>-->
+                    <a href="javascript:void(0);" onclick="cancelarAcceso(<?php echo $notificaciones['id_notificacion'];?>);" class="btn-red" id="btn-rojo">Cancelar</a>
+                    <a href="javascript:void(0);" onclick="aceptarAcceso(<?php echo $notificaciones['id_notificacion'];?>);" class="btn-blue">Aceptar</a>
+                    
                   <?php } else { ?>
-                    <a href="javascript:void(0);" onclick="desactivarNotificacion(<?php echo $notificaciones['id_notificacion'];?>);" class="btn btn-success"><b>Aceptar</b></a>
+                    <!--<a href="javascript:void(0);" onclick="desactivarNotificacion(<?php #echo $notificaciones['id_notificacion'];?>);" class="btn btn-success"><b>Aceptar</b></a>-->
+                    <a href="javascript:void(0);" onclick="desactivarNotificacion(<?php echo $notificaciones['id_notificacion'];?>);" class="btn-blue">Aceptar</a>
                   <?php } ?>                  
                 </center> 
               </div>
