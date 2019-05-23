@@ -140,7 +140,7 @@ if($('#celularCandEmp').length){
 		var tipousuario = $('#tipo_usuario').val();
 		if($(this).val() != ""){
 			if(tipousuario == 2){
-				if(!ValidarCelTelEmp($(this).val())){
+				if(!ValidarCelularConvencional($(this).val())){
 					crearMensajeError($(this), "Mínimo 9 dígitos, máx. 15");
 				}
 				else{
@@ -149,7 +149,7 @@ if($('#celularCandEmp').length){
 			}
 			else{
 				if(!validarCelCand($(this).val())){
-					crearMensajeError($(this), "Mínimo 10 dígitos, máx. 15");
+					crearMensajeError($(this), "Debe contener 10 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this));
@@ -348,8 +348,8 @@ if($('#password_1').length){
 	if($('#tel1ConEmp').length){
 		$('#tel1ConEmp').on('blur', function(){
 			if($(this).val() != ""){
-				if(!ValidarCelTelEmp($(this).val())){
-					crearMensajeError($(this), "Longitud entre 9 y 15 dígitos");
+				if(!validarCelCand($(this).val())){
+					crearMensajeError($(this), "10 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this), "");
@@ -364,7 +364,7 @@ if($('#password_1').length){
 	if($('#tel2ConEmp').length){
 		$('#tel2ConEmp').on('blur', function(){
 			if($(this).val() != ""){
-				if(!ValidarCelTelEmp($(this).val())){
+				if(!ValidarCelularConvencional($(this).val())){
 					crearMensajeError($(this), "Longitud entre 9 y 15 dígitos");
 				}
 				else{
@@ -534,7 +534,7 @@ if(tipousuario == 1){
 		var tipousuario = $('#tipo_usuario').val();
 		if($('#celularCandEmp').val() != ""){
 			if(tipousuario == 2){
-				if(!ValidarCelTelEmp($('#celularCandEmp').val())){
+				if(!ValidarCelularConvencional($('#celularCandEmp').val())){
 					crearMensajeError($('#celularCandEmp'), "Mínimo 9 dígitos, máx. 15");
 				}
 				else{
@@ -543,7 +543,7 @@ if(tipousuario == 1){
 			}
 			else{
 				if(!validarCelCand($('#celularCandEmp').val())){
-					crearMensajeError($('#celularCandEmp'), "Mínimo 10 dígitos, máx. 15");
+					crearMensajeError($('#celularCandEmp'), "Debe contener 10 dígitos");
 				}
 				else{
 					eliminarMensajeError($('#celularCandEmp'));
@@ -672,7 +672,7 @@ if(tipousuario == 1){
 
 		if($('#tel1ConEmp').length){
 			if($('#tel1ConEmp').val() != ""){
-				if(!ValidarCelTelEmp($('#tel1ConEmp').val())){
+				if(!ValidarCelularConvencional($('#tel1ConEmp').val())){
 					crearMensajeError($('#tel1ConEmp'), "Longitud entre 9 y 15 dígitos");
 				}
 				else{
@@ -686,7 +686,7 @@ if(tipousuario == 1){
 
 		if($('#tel2ConEmp').length){
 			if($('#tel2ConEmp').val() != ""){
-				if(!ValidarCelTelEmp($('#tel2ConEmp').val())){
+				if(!ValidarCelularConvencional($('#tel2ConEmp').val())){
 					crearMensajeError($('#tel2ConEmp'), "Longitud entre 9 y 15 dígitos");
 				}
 				else{
@@ -960,13 +960,17 @@ function validarCorreo(correo) {
   return /^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(correo);
 }
 
+function ValidarTelefonoConvencional(valor){
+	if(/^[0-9]{9}$/.test(valor)){return true;}else{return false;}
+}
 
-function ValidarCelTelEmp(valor){
+
+function ValidarCelularConvencional(valor){
 	if(/^[0-9]{9,15}$/.test(valor)){return true;}else{return false;}
 }
 
 function validarCelCand(valor){
-	if(/^[0-9]{10,15}$/.test(valor)){return true;}else{return false;}
+	if(/^[0-9]{10}$/.test(valor)){return true;}else{return false;}
 }
 
 function calcularEdad(contenido){
