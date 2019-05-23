@@ -256,6 +256,13 @@ display: inline;
     .cen{
         border: 1px solid #204478
     }
+    .btn-min-light{
+        padding: 10px 10px;
+    }
+
+    .btn-blue{
+        padding: 10px 10px;
+    }
 }
 
 /*PANTALLAS MEDIANAS*/
@@ -289,6 +296,14 @@ display: inline;
     .cen{
         border: 1px solid #204478
     }
+
+    .btn-min-light{
+        padding: 10px 30px;
+    }
+
+    .btn-blue{
+        padding: 10px 30px;
+    }
 }
 /*PANTALLAS GRANDES*/
 @media only screen and (min-width:1000px){
@@ -316,6 +331,14 @@ display: inline;
     }
     .imagen{
         width: 70px;
+    }
+
+    .btn-min-light{
+        padding: 10px 30px;
+    }
+
+    .btn-blue{
+        padding: 10px 30px;
     }
 
 }
@@ -1460,7 +1483,8 @@ ul.checkout-bar a {
     color: #4b98dd;
     background-color: transparent;
     border: 2px solid #4b98dd;
-    padding: 10px 30px;
+    /*padding: 10px 30px;*/
+
     text-transform: uppercase;
     
 }
@@ -1555,7 +1579,7 @@ ul.checkout-bar a {
     background-color: #204478;
     color: white;
     text-transform: uppercase;
-    padding: 10px 40px;
+    /*padding: 10px 40px;*/
     font-weight: bold;
     margin-bottom: 20px;
     border: 2px solid transparent;    

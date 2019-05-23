@@ -149,7 +149,7 @@ if($('#celularCandEmp').length){
 			}
 			else{
 				if(!validarCelCand($(this).val())){
-					crearMensajeError($(this), "Debe contener 10 dígitos");
+					crearMensajeError($(this), "Debe contener entre 10 y 15 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this));
@@ -543,7 +543,7 @@ if(tipousuario == 1){
 			}
 			else{
 				if(!validarCelCand($('#celularCandEmp').val())){
-					crearMensajeError($('#celularCandEmp'), "Debe contener 10 dígitos");
+					crearMensajeError($('#celularCandEmp'), "Debe contener entre 10 y 15 dígitos");
 				}
 				else{
 					eliminarMensajeError($('#celularCandEmp'));
@@ -970,7 +970,7 @@ function ValidarCelularConvencional(valor){
 }
 
 function validarCelCand(valor){
-	if(/^[0-9]{10}$/.test(valor)){return true;}else{return false;}
+	if(/^[0-9]{10,15}$/.test(valor)){return true;}else{return false;}
 }
 
 function calcularEdad(contenido){

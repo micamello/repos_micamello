@@ -339,7 +339,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 	                                    	<div class="col-md-6">
 											    <div id="seccion_tlfCon" class="form-group">
 											        <label for="convencional">Tel&eacute;fono Convencional <span id="opcional">(opcional)</span></label><div id="err_tlfCon" class="help-block with-errors"></div>
-											        <input class="form-control" type="text" id="convencional" name="convencional" minlength="6" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario(false)" />
+											        <input class="form-control" type="text" id="convencional" name="convencional" minlength="9" maxlength="9" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario(false)" />
 											    </div>
 											</div>
 
@@ -704,7 +704,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 									              <div id="seccion_tlfCon2" class="form-group">
 									                <label class="text-center">Convencional <span id="opcional">(opcional)</span></label><div id="err_tlfCon2" class="help-block with-errors"></div>
 
-									                <input type="text" name="tel_two_contact" id="tel_two_contact" minlength="6" maxlength="15" value="<?php echo (isset($data['tel_two_contact'])) ? $data['tel_two_contact'] : $_SESSION['mfo_datos']['usuario']['telefono2']; ?>" onkeyup="validarFormulario(false)" class="form-control" pattern='[0-9]+' onkeydown="return validaNumeros(event)" <?php /*if($btnSig == 1){ echo 'disabled'; }*/ ?>>
+									                <input type="text" name="tel_two_contact" id="tel_two_contact" minlength="9" maxlength="9" value="<?php echo (isset($data['tel_two_contact'])) ? $data['tel_two_contact'] : $_SESSION['mfo_datos']['usuario']['telefono2']; ?>" onkeyup="validarFormulario(false)" class="form-control" pattern='[0-9]+' onkeydown="return validaNumeros(event)" <?php /*if($btnSig == 1){ echo 'disabled'; }*/ ?>>
 									              </div>
 									            </div> 
 
