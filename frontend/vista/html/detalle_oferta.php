@@ -7,10 +7,10 @@
 
 <div class="main_business">
   <div class="container">
-    <div class="row" align="justify">
+    <div class="row equal" align="justify">
       <?php foreach ($oferta as $key => $o) { ?>
       <div class="detalles-cuadro col-md-6">
-        <div class="panel panel-primary shadow-panel1">
+        <div class="panel panel-primary shadow-panel1 panel1">
           <div class="panel-heading" id="tit-detalle">
             <?php echo utf8_encode($o['titulo']); ?>
           </div>
@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <div class="panel panel-default shadow-panel1">
+        <div class="panel panel-default shadow-panel1 panel1">
           <div class="panel-body">
             <div align="center">
               <img class="publicidad img-responsive" src="<?php echo PUERTO."://".HOST;?>/imagenes/anuncio.gif">
