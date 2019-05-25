@@ -793,7 +793,7 @@ class Controlador_Aspirante extends Controlador_Base
                                         $template = $email_body;
                                         $enlace = PUERTO.'://'.HOST.'/login/';
 
-                                        $notif_body = "Estimado <b>".$nombre_mostrar."</b>.<br><br>Hoy (".$fecha.") una importante empresa del sector est&aacute; interesado en su perfil y desea conocer un poco m&aacute;s de usted, por tal motivo si desea completar el test (C.A.N.E.A) de MI CAMELLO S.A. presione Aceptar.<br><br> En caso de no desear realizar dicho test presione Cancelar.";
+                                        $notif_body = "Estimado <b>".$nombre_mostrar."</b>.<br><br>Hoy (".$fecha.") una importante empresa del sector est&aacute; interesado en su perfil y desea conocer un poco m&aacute;s de usted, complete el test si desea continuar en el proceso de selecci&oacute;n";
 
                                         $template = str_replace("%NOMBRES%", $nombre_mostrar, $template);
                                         $template = str_replace("%ENLACE%", $enlace, $template);      

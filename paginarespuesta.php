@@ -51,7 +51,7 @@ try{
     if (!Modelo_Payme::guardar($vl_insert)){
       throw new Exception("Error Insert IPN Payme");
     }
-    if ($_POST["authorizationResult"] = "00" && $_POST["errorCode"] = "00"){
+    if ($_POST["authorizationResult"] == "00" && $_POST["errorCode"] == "00"){
       Utils::envioCorreo('desarrollo@micamello.com.ec','CRON_PAYME',print_r($_POST,true));
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
     } 

@@ -28,7 +28,7 @@
 	<?php if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'])){ ?>
 		<br>
 		<div class="alert alert-info col-md-12"> 
-			Usted activ&oacute; el filtrado por facetas, en el cual se aplica la Teoría Basada en Rango Sumarizados de Likert Modificada a la premiaci&oacute;n por puntajes.
+			Usted activ&oacute; el filtrado por competencias, estos son los mejores candidatos.
 		</div>
 	<?php } ?>
 	<br>
@@ -843,7 +843,7 @@
 												} ?>
 
 												<?php 
-
+                          $imagen = '';
 													echo '<td title="Descargar Informe de personalidad ';
 								            			//$color = '';
 								            			$title = 'completo';
@@ -854,8 +854,9 @@
 						            					}
 
 								            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
-
+                                      
 								            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] != ''){
+
 								            					//$color = '';
 								            					$title = 'completo';
 
@@ -876,10 +877,14 @@
 									            				
 								            				}
 								            			}
+
 								            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 									            			if($mostrar == ''){
-																echo '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'/"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+									            				
+																$variable = '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'/"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+																
+																echo $variable;
 															}else{
 																echo $mostrar;
 															}
@@ -896,7 +901,7 @@
 															}
 														}
 													
-													echo '</td>';
+													echo '</td>';													
 												?>
 
 												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) /*|| in_array('-1',$posibilidades)*/){ ?>

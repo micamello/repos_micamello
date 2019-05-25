@@ -36,9 +36,16 @@ if(!empty($param1) && !empty($carpeta)){
 }
 //si es candidato no puede ver imagenes/hojas de vida de otros candidatos
 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO && 
-	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){	
+	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){
   exit;
 }
+//si es empresa no puede ver imagenes de otros candidatos
+if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::EMPRESA && 
+	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && 
+	  $usuario["tipo_usuario"]==Modelo_Usuario::EMPRESA && $carpeta != "hv"){
+  exit;
+}
+
 $mostrar = false;
 switch ($carpeta){
 	case 'imgperfil':
@@ -55,12 +62,12 @@ switch ($carpeta){
 	case 'profile':
 	  $extension = 'image/jpeg';
 	  $disposition = 'inline';
-	  $ruta = PATH_PROFILE.$archivo.'.jpg';	  
+	  $ruta = PATH_PROFILE.$archivo.'-thumb.jpg';	  
 	  $resultado = file_exists($ruta);	  	  
 	  if (!$resultado){
 	  	$ruta = FRONTEND_RUTA.'imagenes/user.png';
 	  }	  	  
-	  $archivo = $archivo.'.jpg';
+	  $archivo = $archivo.'-thumb.jpg';
 	  $mostrar = true;
 	break;
 	case 'hv':	  
@@ -74,6 +81,8 @@ switch ($carpeta){
 		$ruta = PATH_ARCHIVO.$archivo.'.'.$infoHv['formato'];		
 		$resultado = file_exists($ruta);	  
 		$archivo = $archivo.'.'.$infoHv['formato'];
+
+		Utils::log($archivo);
 		$mostrar = (!$resultado) ? false : true;		
 	break;
 }
@@ -97,7 +106,6 @@ if ($mostrar){
   readfile($ruta); 	
 }   
 else{
-	
 	$_SESSION['mostrar_error'] = 'Archivo no encontrado';
 	$enlace = $_SERVER['HTTP_REFERER'];
 	header('Location: '.$enlace);

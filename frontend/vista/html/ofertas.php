@@ -333,7 +333,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 										<div class="col-md-2 col-sm-4 col-xs-12" style="padding-left: 0px;" align="center">
 											<div class="col-md-12 col-sm-12 col-xs-12 imagen-perfil">
 												<?php 										
-												$src_imagen = ($o['confidencial'] && $vista!='vacantes' && $vista!='cuentas') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : Modelo_Usuario::obtieneFoto($o['username']);
+												$src_imagen = ($o['confidencial'] && $vista!='vacantes' && $vista!='cuentas') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : PUERTO.'://'.HOST.'/imagenes/imgperfil/'.$o['username'].'/';
 												?>
 												<img id="imgPerfil" class="img-responsive" src="<?php echo $src_imagen; ?>" alt="icono">
 
