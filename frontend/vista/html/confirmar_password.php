@@ -15,7 +15,7 @@
                   <label>Nueva Contrase&ntilde;a <span title="Este campo es obligatorio">*</span></label><div id="err_clave" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input type="password" name="password1" id="password1" class="form-control" title="Letras y números, mínimo 8 caracteres" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password2.pattern = this.value;" maxlength="15" minlength="8" onkeyup="validaForm(2,'recuperar')">
+                    <input type="password" name="password1" id="password1" class="form-control noautofill" title="Letras y números, mínimo 8 caracteres" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password2.pattern = this.value;" maxlength="15" minlength="8" onkeyup="validaForm(2,'recuperar')" readonly>
                   </div> 
                   <input type="hidden" name="confirm_form" id="confirm_form" value="1">
                   <input type="hidden" name="token" id="token" value="<?php echo $token;?>">        
@@ -26,7 +26,7 @@
                   <label>Confirme Contrase&ntilde;a <span title="Este campo es obligatorio">*</span></label><div id="err_clave1" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input type="password" name="password2" id="password2" class="form-control" title="Letras y números, mínimo 8 caracteres" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password2.pattern = this.value;" maxlength="15" minlength="8" onkeyup="validaForm(2,'recuperar')">
+                    <input type="password" name="password2" id="password2" class="form-control noautofill" title="Letras y números, mínimo 8 caracteres" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password2.pattern = this.value;" maxlength="15" minlength="8" onkeyup="validaForm(2,'recuperar')" readonly>
                   </div>
                 </div>
               </div>
