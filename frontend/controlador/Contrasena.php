@@ -103,7 +103,7 @@ class Controlador_Contrasena extends Controlador_Base {
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
     } 
-        
+    $tags = array('vista'=>'contrasena');
     Vista::render('confirmar_password', $tags);     
   }
   

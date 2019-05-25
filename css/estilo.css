@@ -1635,3 +1635,18 @@ ul.checkout-bar a {
     background-color: #4b98dd;
     color: white;
  }
+
+.loaderMic{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background-color: black;
+    opacity: 0.5;
+}
+/*.LogMic{
+    background-color: white;
+    padding: 100px;
+}*/

@@ -41,7 +41,11 @@
 </head>
 
 <body>
-
+  <!-- <div class="loaderMic">
+    <div class="LogMic">
+        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/loader3.gif" class="img-responsive center">
+    </div>
+  </div> -->
   <!--                       LEY DE COOKIES                     -->
 <!--<div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">

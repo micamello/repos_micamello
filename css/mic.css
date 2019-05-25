@@ -739,14 +739,20 @@ a {
 .badge_item{
   padding: 5px 20px 5px 20px;
   margin: 5px 8px 5px 18px;
-  background-color: #204478;
+  background-color: #08a9f4;
   color: white;
   border-radius: 5px;
   cursor: pointer;
 }
 
 .badge_item:hover{
-  background-color: #4B98DD;
+  background-color: #DDDDDD;
+  color: black;
+}
+
+.badge_item>i{
+  background-color: white;
+  color: red;
 }
 
 .error_text{
