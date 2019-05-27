@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/bootstrap-multiselect.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/micamello.css">
   <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/estilo.css">
+  <link rel="stylesheet" href="<?php echo PUERTO."://".HOST;?>/css/sweetalert.v2.css">
 
   <?php
   if (isset($template_css) && is_array($template_css)){

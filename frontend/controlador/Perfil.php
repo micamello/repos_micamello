@@ -372,7 +372,8 @@ class Controlador_Perfil extends Controlador_Base
               if (!Utils::upload($imagen,$_SESSION['mfo_datos']['usuario']['username'],PATH_PROFILE,1)){
                 throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
               }
-              Utils::crearThumbnail(PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',300,0);  
+              Utils::crearThumbnail(PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',300,0);
+              Utils::crearThumbnail(PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'-thumb.jpg',50,0);    
             } 
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 if (!empty($archivo) && $archivo['error'] != 4) {

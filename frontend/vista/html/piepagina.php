@@ -70,7 +70,7 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
 <script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script>
-<script src="<?php echo PUERTO."://".HOST;?>/js/sweetalert.min.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/sweetalert.v2.js"></script>
 <script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js"></script>
 
 <?php
@@ -83,16 +83,31 @@ if (isset($template_js) && is_array($template_js)){
 
 <!--mensajes de error y exito-->
 <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
+
   echo "<script type='text/javascript'>
-        $(document).ready(function(){
-          swal('Advertencia!', '".$sess_err_msg."', 'error');
+        $(document).ready(function(){          
+          Swal.fire({
+            title: 'Advertencia!',
+            text: '".$sess_err_msg."',
+            imageUrl: 'http://localhost/repos_micamello/imagenes/logo.png',
+            imageWidth: 400,
+            imageHeight: 200,
+            animation: false
+          });     
         });
       </script>";
 }?>
 <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){
-          swal('Exitoso!', '".$sess_suc_msg."', 'success');
+          Swal.fire({
+            title: 'Exitoso!',
+            text: '".$sess_suc_msg."',
+            imageUrl: 'http://localhost/repos_micamello/imagenes/logo.png',
+            imageWidth: 400,
+            imageHeight: 200,
+            animation: false
+          });          
         });
       </script>";
 }?>  
