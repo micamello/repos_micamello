@@ -70,7 +70,7 @@ class Modelo_Opcion{
 				$sql .= ' AND estado = '.$estado;
 			}
 		}
-		
+
 		$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
 		$datos = array();

@@ -85,7 +85,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                 <b class="text_large">
                   <?php echo $notificaciones['descripcion'];?>
                 </b>
-                <b class="text_small"><?php echo utf8_encode($notificaciones['descripcion']); ?></b>
+                <b class="text_small" style="text-align: justify;"><?php echo utf8_encode($notificaciones['descripcion']); ?></b>
                 <br>
                 <center>
                   <?php if ($notificaciones["tipo"] == Modelo_Notificacion::DESBLOQUEO_ACCESO && 
@@ -208,13 +208,13 @@ if($navegador == 'MSIE'){ ?>
         <?php } ?>
       <?php } ?>
       <li>
-        <a id="regEmpMic" href="<?php echo FACEBOOK; ?>"><i class="social fa fa-facebook"></i></a>
+        <a target="_blank" id="regEmpMic" href="<?php echo FACEBOOK; ?>"><i class="social fa fa-facebook"></i></a>
       </li>
       <li>
-        <a id="regEmpMic" href="<?php echo TWITTER; ?>"><i class="social fa fa-twitter"></i></a>
+        <a target="_blank" id="regEmpMic" href="<?php echo TWITTER; ?>"><i class="social fa fa-twitter"></i></a>
       </li>
       <li>
-        <a id="regEmpMic" href="<?php echo INSTAGRAM; ?>"><i class="social fa fa-instagram"></i></a>
+        <a target="_blank" id="regEmpMic" href="<?php echo INSTAGRAM; ?>"><i class="social fa fa-instagram"></i></a>
       </li>
       </ul>
     </div> 

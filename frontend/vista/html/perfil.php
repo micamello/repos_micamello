@@ -92,6 +92,12 @@ $_SESSION['mostrar_error'] = ""; ?>
 					              <label style="cursor:pointer" class="text-center" for="">Presiona aqu&iacute; para acceder a tu informe de personalidad</label>
 					            </div>
 				        	</a>
+				        	<!--<div align="center">
+							<input type="hidden" name="createchart" id="createchart" value="1"/>
+							  <input type="hidden" name="hidden_div_html" id="hidden_div_html" />
+							  <button type="button" name="create_pdf" id="create_pdf" class="btn btn-danger btn-xs">Create PDF</button>
+							 
+							</div>-->
 				        </div>
 					<?php } ?>
 	       	</div>                
@@ -740,7 +746,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn-light-blue <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
 										<?php }else{ 	?>
-											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn-light-blue <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>SIGUIENTE</a>
+											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn-light-blue <?php if($btnSig == 0){ echo 'disabled'; } ?>" <?php if($btnSig == 0){ echo 'disabled'; } ?>>PUBLICAR OFERTA</a>
 									    <?php } ?>
 									    <div  style="padding: 10px 0px">
 									    	<span class="help-block">En este formulario los campos con (<i>*</i>) son obligatorios</span>
@@ -755,7 +761,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 		</div>
 	</form>
 </div>
-
+<!--<input style="display:none" type="text" id="datosGrafico" value="A: 26.3, 26.3/N: 26.04, 26.04/E: 34.56, 34.56/A: 50, 50/C: 40.1, 40.1" />-->
 <section class=" banner-publicidad">
   <div class="container-fluid">
     <div class="row">

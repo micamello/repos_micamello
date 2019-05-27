@@ -1,4 +1,5 @@
 <?php
+require_once 'includes/mpdf/mpdf.php';
 class Controlador_Perfil extends Controlador_Base
 {
     public function construirPagina()
@@ -19,10 +20,13 @@ class Controlador_Perfil extends Controlador_Base
         $tipo_usuario = $_SESSION['mfo_datos']['usuario']['tipo_usuario'];
 
         $breadcrumbs = array();
-
+//print_r( $_SESSION['mfo_datos']['grafico']); exit;
         //$breadcrumbs = array();
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
+            case 'guardarGrafico':
+               $_SESSION['mfo_datos']['grafico'] = $_POST['imagen'];
+            break;
             case 'buscarDni':
                 $dni = Utils::getParam('dni', '', $this->data); 
                 //Permite determinar si el documento ingresado ya esta registrado en base de datos

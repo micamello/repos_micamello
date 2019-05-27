@@ -49,8 +49,8 @@ class Controlador_Acceso extends Controlador_Base{
       $email_subject = "Devolución de Acceso"; 
       $candidato = utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '.utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']);
       $email_body = Modelo_TemplateEmail::obtieneHTML("DEVOLUCION_ACCESO");
-      $email_body = str_replace("%NOMBRES%", $infoempresa["nombres"], $email_body);   
-      $email_body = str_replace("%CANDIDATO%", $candidato, $email_body);               
+      $email_body = str_replace("%NOMBRES%", utf8_encode($infoempresa["nombres"]), $email_body);   
+      $email_body = str_replace("%CANDIDATO%", utf8_encode($candidato), $email_body);               
       $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);         
       Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);
 

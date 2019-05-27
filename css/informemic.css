@@ -15,7 +15,7 @@ footer{
         /*text-align: right;*/
 }
 
-<<<<<<< HEAD
+
 body{
         font-family: "gothic";
         width: 1000px;
@@ -126,40 +126,40 @@ body{
         font-size: 20pt;
       }
       .verde{
-        color: #2da952;
-        text-transform: uppercase;
-      }
-      .amarillo{
-        color: #f1e60d;
-        text-transform: uppercase;
-      }
-      .rojo{
-        color: #e51c20;
-        text-transform: uppercase;
-      }
-      .morado{
-        color: #66398e;
-        text-transform: uppercase;
-      }
-      .azul{
-        color: #0a6fb7;
-        text-transform: uppercase;
-      }
-      .verde-bg{
-        background-color: #a8d08d;
-      }
-      .amarillo-bg{
-        background-color: #ffd966;
-      }
-      .rojo-bg{
-        background-color: #ff7575;
-      }
-      .morado-bg{
-        background-color: #a86ed4;
-      }
-      .azul-bg{
-        background-color: #4b98dd;
-      }
+    color: #5EB782;
+    text-transform: uppercase;
+  }
+  .amarillo{
+    color: #FCDC59;
+    text-transform: uppercase;
+  }
+  .rojo{
+    color: #E25050;
+    text-transform: uppercase;
+  }
+  .morado{
+    color: #8C4DCE;
+    text-transform: uppercase;
+  }
+  .azul{
+    color: #2B8DC9;
+    text-transform: uppercase;
+  }
+  .verde-bg{
+    background-color: #a8d08d;
+  }
+  .amarillo-bg{
+    background-color: #ffd966;
+  }
+  .rojo-bg{
+    background-color: #ff7575;
+  }
+  .morado-bg{
+    background-color: #a86ed4;
+  }
+  .azul-bg{
+    background-color: #4b98dd;
+  }
 
       .tabla2 th{
         text-align: center;
@@ -231,3 +231,17 @@ body{
       .color_asterisco{
         color:#4b98dd;
       }
+
+      .tabla-canea {
+    text-align: left;
+    color: #515151;
+  }
+  .bloq{
+    padding-right: 25px;
+    padding-left: 5px;
+    width: 250px;
+  }
+  .bloq-canea{
+
+    width: 100px;
+  }

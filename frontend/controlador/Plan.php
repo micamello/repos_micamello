@@ -143,7 +143,7 @@ class Controlador_Plan extends Controlador_Base {
         $tags["precio"] = $precio;
         $tags["taxMontoGravaIva"] = $taxMontoGravaIva;
         $tags["taxMontoIVA"] = $taxMontoIVA;
-        $tags["purchaseOperationNumber"] = generarTransactionId();       
+        $tags["purchaseOperationNumber"] = $this->generarTransactionId();       
         $tags["purchaseVerification"] = openssl_digest(PAYME_ACQUIRERID . 
                                                        PAYME_IDCOMMERCE . 
                                                        $tags["purchaseOperationNumber"] . 

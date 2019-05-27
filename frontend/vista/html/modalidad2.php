@@ -4,7 +4,7 @@
 		<div class="text-center">
 			<br>
 			<div class="con_encabezado">
-				<span class="encabezado">Por favor ordene de 1 a 5 las siguientes oraciones en cada pregunta. (1 es la oración con la que mas se identifica y 5 es con la que menos se identifica). Este test consta de 20 preguntas<br><h3 class="metodoTexto"><b>Método seleccionado: </b>Seleccionar y arrastrar<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/2.png";?>"></h3></span>
+				<span class="encabezado">Por favor ordene de 1 a 5 las siguientes oraciones en cada pregunta. (1 es la oración con la que más se identifica y 5 es con la que menos se identifica). Este test consta de 20 preguntas<br><br><h3 class="metodoTexto"><b>Método seleccionado: </b>Seleccionar y arrastrar<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/2.png";?>"></h3></span>
 			</div>
 			<br>
 		</div>
@@ -45,7 +45,7 @@
 							$actual = $value;
 							echo "<div class='panel panel-default'>";
 							echo "<div class='error_msg' id='error".$indice."'></div>";
-							echo "<div class='panel-heading'><h5>Pregunta ".$indice."</h5></div>";
+							echo "<div class='panel-heading'><h4>Pregunta ".$indice."</h4></div>";
 							echo "<div class='panel-body'>";
 								echo "<div class='contenedor_p_".$pregunta['id_pregunta']."''>";
 								echo "<div class='row'>";
