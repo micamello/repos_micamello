@@ -645,7 +645,7 @@
 							  </span>
 						  	</b> 
 						  	<br>
-						  	<small id="passwordHelpBlock" class="form-text text-muted">Seleccione los candidatos a los que desee enviar accesos</small>
+						  	<small class="form-text text-muted">Seleccione los candidatos a los que desee enviar accesos</small>
 						</div>
 					<?php } ?>
 				</div>
@@ -715,7 +715,7 @@
 									           <a href="<?php echo $ruta.'1/'; ?>"><?php echo 'Postulado hace'; ?><i class="fa fa-sort"></i></a>
 									        </th>
 								    	<?php } ?>
-								    	<th colspan="5" style="vertical-align: middle; text-align: center; cursor:help"><span data-placement="top" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo. Y mejor aún, ¡puedes completar el proceso de selección!</p>">INFORME</span></th>
+								    	<th colspan="5" style="vertical-align: middle; text-align: center;">INFORME <i data-placement="top" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, canea!</p>" style="padding-left: 5px;font-size: 18px;cursor:help;" class="fa fa-question-circle-o" aria-hidden="true"></i></th>
 								        <th rowspan="2" style="vertical-align: middle; text-align: center;" title="Nivel de Estudios">
 								        	<?php 
 												$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O3'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
