@@ -416,10 +416,11 @@ ul.list_content_mic > li:last-child {
 
 .text_origen{
   background-color: #F7F7F7;
+  font-size: 16px;
   border-color: #CFC7C7;
   border-radius: 10px;
   font-family: Roboto;
-  min-height: 60px;
+  min-height: 50px;
   cursor: pointer;
   color: white;
   display:flex;
@@ -432,9 +433,10 @@ ul.list_content_mic > li:last-child {
 
 .text_destino{
   background-color: #F7F7F7;
+  font-size: 16px;
   border-color: #CFC7C7;
   border-radius: 10px;
-  min-height: 60px;
+  min-height: 50px;
   cursor: pointer;
   color: white;
   display:flex;
@@ -450,8 +452,8 @@ ul.list_content_mic > li:last-child {
   width: 100%;
   margin-bottom: 0px;
   border-radius: 10px;
-  min-height: 60px;
-  padding: 10px 15px 10px 15px;
+  min-height: 50px;
+  padding: 3px 7px 3px 7px;
   -webkit-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
   -moz-box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);
   box-shadow: 0px 0px 5px -1px rgba(0,0,0,1);

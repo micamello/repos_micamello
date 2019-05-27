@@ -6,8 +6,7 @@
   <form id="metodoSeleccion" action="<?php echo PUERTO."://".HOST;?>/modalidad/" method="POST">
       <div class="row">
         <div class="col-md-12">
-          <p class="qs-text">A continuación se le presentaran dos opciones de respuestas, escoja con la que se sienta más cómodo. Tome en cuenta que la opción 1 es aquella con la que se siente
-completamente identificado y la opción 5 es la que menos se siente identificado</p>
+          <p class="qs-text">A continuación se le presentaran dos opciones de respuestas, escoja con la que se sienta más cómodo.</p>
         </div>
         <div class="col-md-12">
           <?php 
@@ -35,7 +34,7 @@ completamente identificado y la opción 5 es la que menos se siente identificado
   </form>
 </div>
 
-<div class="modal fade" id="msg_canea" tabindex="-1" role="dialog" aria-labelledby="msg_canea" aria-hidden="true">
+<div class="modal fade" id="msg_canea" tabindex="-1" role="dialog" aria-labelledby="msg_canea" aria-hidden="true" data-backdrop="static">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="row">
@@ -104,7 +103,7 @@ completamente identificado y la opción 5 es la que menos se siente identificado
           </div> -->
 
         <div class="text-center">
-          <button type="button" class="btn-blue" data-dismiss="modal">Seleccionar método</button>
+          <button type="button" class="btn-blue" data-dismiss="modal">Continuar</button>
         </div>
       </section> 
       </div>     

@@ -1,204 +1,54 @@
-var value = $('#valorporc').val();
-var gaugeMaxValue = 100; 
-// données à calculer 
-var percentValue = value / gaugeMaxValue; 
-var needleClient;
-(function(){
-var barWidth, chart, chartInset, degToRad, repaintGauge,
-    height, margin, numSections, padRad, percToDeg, percToRad, 
-    percent, radius, sectionIndx, svg, totalPercent, width;
-  percent = percentValue;
-  numSections = 1;
-  sectionPerc = 1 / numSections / 2;
-  padRad = 0.025;
-  chartInset = 10;    
-  // Orientation of gauge:
-  totalPercent = .75;
-  el = d3.select('.chart-gauge');
-  margin = {
-    top: 20,
-    right: 20,    
-    bottom: 30,
-    left: 20
-  };
-  
-  width = el[0][0].offsetWidth - margin.left - margin.right - 100;
-  height = width;
-  radius = Math.min(width, height) / 2;
-  barWidth = 40 * width / 300;
-  //Utility methods 
-  percToDeg = function(perc) {
-    return perc * 360;
-  };
-  percToRad = function(perc) {
-    return degToRad(percToDeg(perc));
-  };
-  degToRad = function(deg) {
-    return deg * Math.PI / 180;
-  };
-  // Create SVG element
-  svg = el.append('svg').attr('width', el[0][0].offsetWidth).attr('height', height + margin.top + margin.bottom).attr({
-    style: 'padding-top: 25px;padding-left: 50px;padding-right: 50px;'
-  });;
-  // Add layer for the panel
-  chart = svg.append('g').attr('transform', "translate(" + ((width + margin.left) / 2) + ", " + ((height + margin.top) / 2) + ")");
-  chart.append('path').attr('class', "arc chart-first");
-  chart.append('path').attr('class', "arc chart-second");
-  chart.append('path').attr('class', "arc chart-third");
-  arc3 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
-  arc2 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
-  arc1 = d3.svg.arc().outerRadius(radius - chartInset).innerRadius(radius - chartInset - barWidth)
-  repaintGauge = function () 
-  {
-    perc = 0.5;
-    var next_start = totalPercent;
-    arcStartRad = percToRad(next_start);
-    arcEndRad = arcStartRad + percToRad(perc / 3);
-    next_start += perc / 3;
-    arc1.startAngle(arcStartRad).endAngle(arcEndRad);
-    arcStartRad = percToRad(next_start);
-    arcEndRad = arcStartRad + percToRad(perc / 3);
-    next_start += perc / 3;
-    arc2.startAngle(arcStartRad + padRad).endAngle(arcEndRad);
-    arcStartRad = percToRad(next_start);
-    arcEndRad = arcStartRad + percToRad(perc / 3);
-    arc3.startAngle(arcStartRad + padRad).endAngle(arcEndRad);
-    chart.select(".chart-first").attr('d', arc1);
-    chart.select(".chart-second").attr('d', arc2);
-    chart.select(".chart-third").attr('d', arc3);
-  }
-    var dataset = [{metric:name, value: value}]
-    var texts = svg.selectAll("text")
-                .data(dataset)
-                .enter();
-    texts.append("text")
-         .text(function(){
-              return dataset[0].metric;
-         })
-         .attr('id', "Name")
-         .attr('transform', "translate(" + ((width + margin.left) / 6) + ", " + ((height + margin.top) / 1.5) + ")")
-         .attr("font-size",25)
-         .style("display", "none"); 
+$(document).ready(function(){
 
-/*var trX = Math.abs(180 - 230 * Math.cos(percToRad(percent / 2)));
-var trY = Math.abs(195 - 210 * Math.sin(percToRad(percent / 2)));
-
-displayValue = function() {
-                texts.append("text")
-                    .text(function(){
-                        return dataset[0].value+'%';
-                    })
-                    .attr('id', "Value")
-                    .attr('transform', "translate(" + trX + ", " + trY+ ")")
-                    .attr("font-size",12)  
-                    .attr("class","parpadea")                                     
-                    .style("fill", '#DB2929');
-            } */
+    var datos = $('#datosGrafico').val();
+    datos = datos.split('/');
     
- var trX = Math.abs(180 - 210 * Math.cos(percToRad(percent / 2))); 
- var trY = Math.abs(180 - 210 * Math.sin(percToRad(percent / 2))); 
- // (180, 195) are the coordinates of the center of the gauge.
-  displayValue = function() { 
-    texts.append("text") 
-      .text(function(){ 
-          return dataset[0].value+'%'; 
-      }) 
-      .attr('id', "Value") 
-      .attr('transform', "translate(" + trX + ", " + trY+ ")") 
-      .attr("font-size",12) 
-      .attr("class","parpadea") 
-      .style("fill", '#FB0006'); 
-  } 
-
-    texts.append("text")
-        .text(function(){
-            return 0+' ';
-        })
-        .attr('id', 'scale0')
-        .attr('transform', "translate(" + ((width + margin.left) / 100 ) + ", " + ((height + margin.top) / 2) + ")")
-        .attr("font-size", 15)
-        .style("fill", "#000000");
-    /*texts.append("text")
-        .text(function(){
-            return 25;
-        })
-        .attr('id', 'scale0')
-        .attr('transform', "translate(" + ((width + margin.left) / 10 ) + ", " + ((height + margin.top) / 5) + ")")
-        .attr("font-size", 15)
-        .style("fill", "#000000");                    
-    texts.append("text")
-        .text(function(){
-            return gaugeMaxValue/2;
-        })
-        .attr('id', 'scale10')
-        .attr('transform', "translate(" + ((width + margin.left) / 2.15 ) + ", " + ((height + margin.top) / 30) + ")")
-        .attr("font-size", 15)
-        .style("fill", "#000000");
-    texts.append("text")
-        .text(function(){
-            return 75;
-        })
-        .attr('id', 'scale0')
-        .attr('transform', "translate(" + ((width + margin.left) / 1.2 ) + ", " + ((height + margin.top) / 5) + ")")
-        .attr("font-size", 15)
-        .style("fill", "#000000");*/                                       
-    texts.append("text")
-        .text(function(){
-            return gaugeMaxValue;
-        })
-        .attr('id', 'scale20')
-        .attr('transform', "translate(" + ((width + margin.left) / 1.03 ) + ", " + ((height + margin.top) / 2) + ")")
-        .attr("font-size", 15)
-        .style("fill", "#000000");    
-  var Needle = (function() {
-    //Helper function that returns the `d` value for moving the needle
-    var recalcPointerPos = function(perc) {
-      var centerX, centerY, leftX, leftY, rightX, rightY, thetaRad, topX, topY;
-      thetaRad = percToRad(perc / 2);
-      centerX = 0;
-      centerY = 0;
-      topX = centerX - this.len * Math.cos(thetaRad);
-      topY = centerY - this.len * Math.sin(thetaRad);
-      leftX = centerX - this.radius * Math.cos(thetaRad - Math.PI / 2);
-      leftY = centerY - this.radius * Math.sin(thetaRad - Math.PI / 2);
-      rightX = centerX - this.radius * Math.cos(thetaRad + Math.PI / 2);
-      rightY = centerY - this.radius * Math.sin(thetaRad + Math.PI / 2);             
-      return "M " + leftX + " " + leftY + " L " + topX + " " + topY + " L " + rightX + " " + rightY;
-    };
-    function Needle(el) {
-      this.el = el;
-      this.len = width / 2.5;
-      this.radius = this.len / 8;
+    var arreglo = [['Task', 'Hours per Day']];
+    for (var i = 0; i < datos.length; i++) {
+        arreglo.push(datos[i].split(','));
     }
-    Needle.prototype.render = function() {
-      this.el.append('circle').attr('class', 'needle-center').attr('cx', 0).attr('cy', 0).attr('r', this.radius);
-      return this.el.append('path').attr('class', 'needle').attr('id', 'client-needle').attr('d', recalcPointerPos.call(this, 0));
-    };
-    Needle.prototype.moveTo = function(perc) {
-      var self,
-          oldValue = this.perc || 0;
-      this.perc = perc;
-      self = this;
-      // Reset pointer position
-      this.el.transition().delay(100).ease('quad').duration(200).select('.needle').tween('reset-progress', function() {
-        return function(percentOfPercent) {
-          var progress = (1 - percentOfPercent) * oldValue;            
-          repaintGauge(progress);
-          return d3.select(this).attr('d', recalcPointerPos.call(self, progress));
+    var puerto_host = $('#puerto_host').val();
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(arreglo);
+
+        var options = {
+          pieSliceText: 'label',
+          is3D: true,
+          width:4000,
+          height:2600,
+          pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
+          fontSize:80,
+          legend: 'none',
+          slices: {
+            0: { color: '#ffd966' },
+            1: { color: '#ff7575' },
+            2: { color: '#a86ed4' },
+            3: { color: '#4b98dd' },
+            4: { color: '#a8d08d' }
+          }
         };
-      });
-      this.el.transition().delay(300).ease('bounce').duration(3700).select('.needle').tween('progress', function() {
-        return function(percentOfPercent) {
-          var progress = percentOfPercent * perc;
-          repaintGauge(progress);
-          return d3.select(this).attr('d', recalcPointerPos.call(self, progress));
-        };
-      });
-    };      
-    return Needle;
-  })();
-  needle = new Needle(chart);
-  needle.render();
-  needle.moveTo(percent);
-  setTimeout(displayValue, 3900);
-})();
+
+        var chart_1 = new google.visualization.PieChart(document.getElementById('g_chart_1'));
+        chart_1.draw(data, options);
+
+        var chart_div = document.getElementById('chart_div');
+
+        google.visualization.events.addListener(chart_1, 'ready', function () {
+            $.ajax({
+                type: "POST",
+                url: puerto_host+"/index.php?mostrar=velocimetro&opcion=guardarGrafico",
+                data: {imagen:chart_1.getImageURI()},
+                success(data){
+                    document.getElementById('Chart_details').style.display='none';
+                },
+                error(){
+                    document.getElementById('Chart_details').style.display='none';
+                }
+            });
+        });
+
+        chart_1.draw(data, options);
+    }
+});

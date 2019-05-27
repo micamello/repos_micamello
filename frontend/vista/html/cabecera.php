@@ -42,7 +42,11 @@
 </head>
 
 <body>
-
+  <!-- <div class="loaderMic">
+    <div class="LogMic">
+        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/loader3.gif" class="img-responsive center">
+    </div>
+  </div> -->
   <!--                       LEY DE COOKIES                     -->
 <!--<div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
@@ -86,7 +90,7 @@ if(isset($_SESSION['mfo_datos']['usuario'])){
                 <b class="text_large">
                   <?php echo $notificaciones['descripcion'];?>
                 </b>
-                <b class="text_small"><?php echo utf8_encode($notificaciones['descripcion']); ?></b>
+                <b class="text_small" style="text-align: justify;"><?php echo utf8_encode($notificaciones['descripcion']); ?></b>
                 <br>
                 <center>
                   <?php if ($notificaciones["tipo"] == Modelo_Notificacion::DESBLOQUEO_ACCESO && 
@@ -209,13 +213,13 @@ if($navegador == 'MSIE'){ ?>
         <?php } ?>
       <?php } ?>
       <li>
-        <a id="regEmpMic" href="<?php echo FACEBOOK; ?>"><i class="social fa fa-facebook"></i></a>
+        <a target="_blank" id="regEmpMic" href="<?php echo FACEBOOK; ?>"><i class="social fa fa-facebook"></i></a>
       </li>
       <li>
-        <a id="regEmpMic" href="<?php echo TWITTER; ?>"><i class="social fa fa-twitter"></i></a>
+        <a target="_blank" id="regEmpMic" href="<?php echo TWITTER; ?>"><i class="social fa fa-twitter"></i></a>
       </li>
       <li>
-        <a id="regEmpMic" href="<?php echo INSTAGRAM; ?>"><i class="social fa fa-instagram"></i></a>
+        <a target="_blank" id="regEmpMic" href="<?php echo INSTAGRAM; ?>"><i class="social fa fa-instagram"></i></a>
       </li>
       </ul>
     </div> 

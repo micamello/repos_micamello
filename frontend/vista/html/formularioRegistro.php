@@ -18,7 +18,7 @@
                         </div>
                      </div>
                     <h3 class="registro-titulo">Registrarse como Candidato</h3>
-                        <form action="<?php echo PUERTO.'://'.HOST.'/registroUsuario/' ?>" method="POST" id="registroFormulario">
+                        <form action="<?php echo PUERTO.'://'.HOST.'/registroUsuario/' ?>" method="POST" id="registroFormulario" autocomplete="off">
 
                             <input type="hidden" name="tipo_usuario" id="tipo_usuario">
                             <input type="hidden" name="tipo_documentacion" id="tipo_documentacion">
@@ -30,7 +30,7 @@
                             </div>
                             <div class="col-md-6 form-group">
                                 <div></div>
-                                <input type="text" class="espacio  form-control" placeholder="Apellidos *" name="apellidosCand" id="apellidosCand"/>
+                                <input type="text" class="espacio  form-control noautofill" placeholder="Apellidos *" name="apellidosCand" id="apellidosCand" readonly/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <div></div>
@@ -48,12 +48,12 @@
 
                             <div class="col-md-6 form-group">
                                 <div></div>
-                                <input type="text" class="espacio form-control" placeholder="Correo *" id="correoCandEmp" name="correoCandEmp" />
+                                <input type="text" class="espacio form-control noautofill" readonly placeholder="Correo *" id="correoCandEmp" name="correoCandEmp" />
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <div></div>
-                                <input type="text" class="espacio form-control" placeholder="Célular *" id="celularCandEmp" name="celularCandEmp"/>
+                                <input type="text" class="espacio form-control noautofill" readonly placeholder="Célular *" id="celularCandEmp" name="celularCandEmp"/>
                             </div>
 
                             <div class="col-md-6 form-group">
@@ -100,7 +100,7 @@
                                 <div></div>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-eye"></i></div>
-                                    <input type="password" class="espacio form-control" placeholder="Contraseña *" value="" id="password_1" name="password_1"/>
+                                    <input type="password" class="espacio form-control noautofill" placeholder="Contraseña *" value="" id="password_1" name="password_1"/ readonly>
                                 </div>
                             </div>
 
@@ -108,7 +108,7 @@
                                 <div></div>
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-eye"></i></div>
-                                    <input type="password" class="espacio form-control"  placeholder="Repita Contraseña *" id="password_2" name="password_2"/>
+                                    <input type="password" class="espacio form-control noautofill"  placeholder="Repita Contraseña *" id="password_2" name="password_2"/ readonly>
                                 </div>
                             </div>
 
@@ -123,17 +123,17 @@
 
                             <div class="col-md-6 form-group">
                                 <div></div>
-                                <input type="text" class="espacio form-control" placeholder="Apellidos *" id="apellidoConEmp" name="apellidoConEmp"/>
+                                <input type="text" class="espacio form-control noautofill" placeholder="Apellidos *" id="apellidoConEmp" name="apellidoConEmp" readonly/>
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <div></div>
-                                <input type="text" class="espacio form-control" placeholder="Célular *" id="tel1ConEmp" name="tel1ConEmp"/>
+                                <input type="text" class="espacio form-control noautofill" placeholder="Celular *" id="tel1ConEmp" name="tel1ConEmp" readonly/>
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <div></div>
-                                <input type="text" class="espacio form-control" placeholder="Convencional (opcional) *" id="tel2ConEmp" name="tel2ConEmp"/>
+                                <input type="text" class="espacio form-control noautofill" placeholder="Convencional (opcional) *" id="tel2ConEmp" name="tel2ConEmp" readonly/>
                             </div>
 
 

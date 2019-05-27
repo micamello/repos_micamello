@@ -362,8 +362,8 @@ var primerEmpleoOf
     if(salarioOf.val() != ""){
         var permitidosFloat = /^[0-9.]+$/;
         if(!validarFloat(salarioOf.val())){
-            crearMensajeError(salarioOf, "Ingrese un valor correcto");
-            mensajes += "\n-Campo salario: Ingrese un valor válido";
+            crearMensajeError(salarioOf, "Ingrese un valor correcto, 00.00");
+            mensajes += "\n-Campo salario: Ingrese un valor válido, 00.00";
         }
         else{
             eliminarMensajeError(salarioOf);
@@ -637,7 +637,7 @@ if($('#salarioOf').length){
     $('#salarioOf').on('blur', function(event){
         if($(this).val() != ""){
             if(!validarFloat($(this).val())){
-                crearMensajeError($(this), "Formato incorrecto");
+                crearMensajeError($(this), "Formato incorrecto, 00.00");
             }
             else{
                 eliminarMensajeError($(this));

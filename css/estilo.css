@@ -1637,6 +1637,7 @@ ul.checkout-bar a {
  }
 
 
+
 /*.equal {
   display: -webkit-box;
   display: -moz-box;
@@ -1648,8 +1649,26 @@ ul.checkout-bar a {
 div[class*='col-'] {
   flex:1 1 auto;
   /*background: lightblue;*/
-  display: flex;
+  /*display: flex;*/
 }
 .panel1 {
   flex:1 0 100%;
+}
+
+
+/*.LogMic{
+    background-color: white;
+    padding: 100px;
+
 }*/
+
+.loaderMic{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    background-color: black;
+    opacity: 0.5;
+}

@@ -636,9 +636,7 @@
 		          </h6>
 		        </div>
 
-				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
-					<a id="btn_accesos_cancelar" class="btn-red solo-texto dis-mov">Cancelar</a>
-					<a id="btn_accesos_confirmar" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
+		        <div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
 					<?php if($vista == 1){ ?> 
 						<div class="restante" align="right"> 
 							<b>N&uacute;mero de accesos restantes: 
@@ -649,6 +647,7 @@
 						</div>
 					<?php } ?>
 				</div>
+
 				<div class="clearfix"></div>
 			<?php } ?>
 			
@@ -779,12 +778,14 @@
 							            				if(!in_array($id_Usuario, $_SESSION['mfo_datos']['usuariosHabilitados'])){
 							            					array_push($_SESSION['mfo_datos']['usuariosHabilitados'],$id_Usuario);
 							            				}
+
 							            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] == ''){
-															
-							            					$mostrar = 'Acceso Enviado';
-							            				}
-							            			
-								            			if($mostrar == ''){
+								            				$mostrar = 'Acceso Enviado';
+							            				}/*else if(array_key_exists($a['id_usuario'],$usuariosConAccesos)){
+								            				//$mostrar = '-';
+							            				}*/
+								            									            			
+								            			if($mostrar == '' && !array_key_exists($a['id_usuario'],$usuariosConAccesos)){
 													?>
 							            				<input type="checkbox" class="check_usuarios" <?php if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan" '; } if(in_array($id_Usuario,$_SESSION['mfo_datos']['usuarioSeleccionado'])){ echo 'checked'; } ?> id="<?php echo $id_Usuario; ?>" name="usuarios_check" onclick="marcarSeleccionado('<?php echo $id_Usuario; ?>')">
 							            			<?php }else{
@@ -845,37 +846,34 @@
 												<?php 
                           $imagen = '';
 													echo '<td title="Descargar Informe de personalidad ';
-								            			//$color = '';
-								            			$title = 'completo';
-								            			if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
-						            						$imagen = 'icono-aspirante-05.png';
-						            					}else{
-						            						$imagen = 'icono-aspirante-07.png';
-						            					}
-
+	
 								            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
                                       
 								            				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] != ''){
-
-								            					//$color = '';
-								            					$title = 'completo';
+								            					$title = 'parcial';
 
 								            					if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
+								            						$title = 'completo';
 								            						$imagen = 'icono-aspirante-05.png';
-								            					}else{
-								            						$imagen = 'icono-aspirante-07.png';
-								            					}
-								            				}else{
-									            				//$color = ' parcial';
-									            				$title = 'parcial';	
-
-									            				if($a['numero_test'] == Modelo_Usuario::PRIMER_TEST){
+								            					}else if($a['numero_test'] == Modelo_Usuario::PRIMER_TEST){
 									            					$imagen = 'icono-aspirante-06.png';
 									            				}else if($a['numero_test'] == Modelo_Usuario::SEGUNDO_TEST){
 									            					$imagen = 'icono-aspirante-07.png';
 									            				}
+								            				}else{
+									            				
+									            				$title = 'parcial';	
+
+									            				if($a['numero_test'] == Modelo_Usuario::PRIMER_TEST){
+									            					$imagen = 'icono-aspirante-06.png';
+									            				}else{
+									            					$imagen = 'icono-aspirante-07.png';
+									            				}
 									            				
 								            				}
+								            			}else{
+								            				$title = 'completo';
+								            				$imagen = 'icono-aspirante-05.png';
 								            			}
 
 								            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
@@ -994,7 +992,13 @@
 	        <div class="col-md-12">
 				<?php echo $paginas; ?>
 			</div>
-		
+			<div class="col-md-12">
+				<br>
+				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
+					<a id="btn_accesos_cancelar" class="btn-red solo-texto dis-mov">Cancelar</a>
+					<a id="btn_accesos_confirmar" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
+				</div>
+			</div>
 		<?php 
 
 			if(!empty($limite_plan) && $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)] > $limite_plan){ 

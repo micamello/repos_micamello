@@ -78,7 +78,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
 
         if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){
-
+        
           $result = Modelo_Opcion::datosGraficos2($idusuario,1,$id_empresa); 
           $cantd_facetas = count($result);
           $tipo_informe = '';
@@ -147,6 +147,8 @@ class Controlador_GenerarPDF extends Controlador_Base
     $nombre = strtolower($datosusuario['nombres'].' '.$datosusuario['apellidos']);
     $nombre_archivo = utf8_encode(str_replace(' ', '_',str_replace($codigo,$sinacentos,$nombre))).'.pdf';
     $nombre = str_replace($codigo,$conacentos,$nombre);
+    $colores_bg = array('C'=>'verde-bg','A'=>'amarillo-bg','N'=>'rojo-bg','E'=>'morado-bg','A1'=>'azul-bg');
+    $colores = array('C'=>'verde','A'=>'amarillo','N'=>'rojo','E'=>'morado','A1'=>'azul');
 
     $cantd_preg = 0;
     $pos_no_disponible = 1;
@@ -157,19 +159,20 @@ class Controlador_GenerarPDF extends Controlador_Base
     foreach ($porcentajesxfaceta as $c => $datos_resultado) {
       $puntaxfaceta[$datos_resultado['id_faceta']] = $datos_resultado['id_puntaje'];
       $etiquetas_faceta .= $facetas[$datos_resultado['id_faceta']]['literal'].': '.$datos_resultado['valor'].'|';
-      $porcentajes_faceta .= /*$facetas[$datos_resultado['id_faceta']]['literal'].' '.*/$datos_resultado['valor'].',';
+      $porcentajes_faceta .= $datos_resultado['valor'].',';
       $colors .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
       $colors_l .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
       $descrip_facetas .= $facetas[$datos_resultado['id_faceta']]['faceta'].': '.$datos_resultado['valor'].'|';
       $descrip_titulo .= $facetas[$datos_resultado['id_faceta']]['literal'];
     }
 
-    echo $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
+    $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
+
     $colors = substr($colors, 0,-1);
     $descrip_facetas = substr($descrip_facetas, 0,-1);
     $porcentajes_faceta = substr($porcentajes_faceta, 0,-1);
     //$porcentajes_faceta = str_replace('|', ',', $etiquetas_faceta);
-    $colores_class = array('C'=>'background-color: #a8d08d;','A'=>'background-color: #ffd966;','N'=>'background-color: #ff7575;','E'=>'background-color: #a86ed4;','A1'=>'background-color: #4b98dd;');
+    /*$colores_class = array('C'=>'background-color: #a8d08d;','A'=>'background-color: #ffd966;','N'=>'background-color: #ff7575;','E'=>'background-color: #a86ed4;','A1'=>'background-color: #4b98dd;');*/
 
     $informe = '<br><br><br><br>
     <div id="pagina-1">
@@ -189,7 +192,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     </div> 
     <div style="page-break-after:always;"></div>
     <br>
-    <div id="pagina-2">
+    <div id="pagina-2" style="text-align:justify">
       <h2>INTRODUCCIÓN ';
 
       if($tipo_informe == 'parcial'){
@@ -217,22 +220,24 @@ class Controlador_GenerarPDF extends Controlador_Base
         foreach ($facetas as $id_faceta => $datos_facetas) {
 
           if($datos_facetas['literal'] == 'A' && $cantd_a > 1){
-            $color = $colores_class[$datos_facetas['literal'].'1']; 
+            $color = $colores_bg[$datos_facetas['literal'].'1'];
+            $color1 = $colores[$datos_facetas['literal'].'1']; 
           }else{
-            $color = $colores_class[$datos_facetas['literal']];
+            $color = $colores_bg[$datos_facetas['literal']];
+            $color1 = $colores[$datos_facetas['literal']];
             $cantd_a++; 
           }
 
-          $informe .= '<th style="color:'.$datos['colores'][$id_faceta].';">'.$datos_facetas['literal'].'</th>';
-          $ths .= '<th width="';
-          if($datos_facetas['literal'] == 'C' || $datos_facetas['literal'] == 'A'){
+          $informe .= '<th class="'.$color1.'">'.$datos_facetas['literal'].'</th>';
+          $ths .= '<th style="width: 150px"';
+          /*if($datos_facetas['literal'] == 'C' || $datos_facetas['literal'] == 'A'){
             $ths .= '500';
           }else{
             $ths .= '300';
-          }
-          $ths .= '" style="font-size:40pt;'.$color.'">'.$datos_facetas['literal'].'</th>';
+          }*/
+          $ths .= ' class="'.$color.'">'.$datos_facetas['literal'].'</th>';
           $span = '<span class="mayor">'.$datos_facetas['literal'].'</span>';
-          $tds .= '<td style="text-align:center; '.$color.'">'.Utils::str_replace_first($datos_facetas['literal'], $span, strtoupper($datos_facetas['faceta']),1).'</td>';
+          $tds .= '<td style="text-align:center;" class="'.$color.'">'.Utils::str_replace_first($datos_facetas['literal'], $span, strtoupper($datos_facetas['faceta']),1).'</td>';
 
           if($pos_no_disponible < 3){
             $tds_competencias .= '<td style="text-align:center;">'.utf8_encode($competencias[$id_faceta]).'</td>';
@@ -259,7 +264,11 @@ class Controlador_GenerarPDF extends Controlador_Base
       foreach($preguntas as $id_competencia => $pregunta){
         $cantd_preg++;
         $resultado = Modelo_Baremo::obtienePuntaje($pregunta['orden1'],$pregunta['orden2'],$pregunta['orden3'],$pregunta['orden4'],$pregunta['orden5']);
-        $datosXpreguntas[$id_competencia] = $resultado['porcentaje'];
+
+        if($resultado['porcentaje'] >= 30){
+          $datosXpreguntas[$id_competencia] = $resultado['porcentaje'];
+        }
+
         $descriptor = Modelo_Descriptor::obtieneTextos($id_competencia,$resultado['id_puntaje']);       
         $parrafo .= ucwords(strtolower(utf8_encode($datosusuario['nombres']))).' '.utf8_encode($descriptor['descripcion']).' ';
        
@@ -270,12 +279,12 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
 
-      $informe .= '<br><br><h2>QUÉ SON LAS COMPETENCIAS LABORALES?</h2>
+      $informe .= '<br><br><h2>¿QUÉ SON LAS COMPETENCIAS LABORALES?</h2>
       <p>Las competencias laborales se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al <b>desempeño y desarrollo</b> individual y organizacional.</p>
     </div>
     <div style="page-break-after:always;"></div>
     <br>
-    <div id="pagina-3">
+    <div id="pagina-3" style="text-align:justify">
       <h2>CARACTERISTICAS GENERALES ';
       if($tipo_informe == 'parcial'){
         $informe .= 'DE SU INFORME PARCIAL</h2><div class="publicidad">REGISTRESE EN NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</div>';
@@ -286,9 +295,21 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '<p>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. En este test no existen resultados ni buenos ni malos. Una Vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento. </p>
       ';
       $pos_no_disponible = 1;
+      $cantd_a = 0;
       foreach ($competencias as $id_faceta => $value) {
         $comp = explode(', ',$value);
-        $span = '<span style="color:'.$datos['colores'][$id_faceta].'" class="mayor">'.$facetas[$id_faceta]['literal'].'</span>';
+        $color1 = '';
+
+        //print_r($facetas[$id_faceta]['literal']);
+        if($facetas[$id_faceta]['literal'] == 'A' && $cantd_a > 1){
+          $color1 = $colores[$facetas[$id_faceta]['literal'].'1']; 
+        }else{
+          
+          $color1 = $colores[$facetas[$id_faceta]['literal']];
+          $cantd_a++; 
+        }
+
+        $span = '<span class="mayor '.$color1.'">'.$facetas[$id_faceta]['literal'].'</span>';
         if($pos_no_disponible < 3){
           $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).'/'.$comp[0].'</b>,'.str_replace($comp[0].',', '',$value)).'</li></ul>';
           $informe .= $caracteristicas_generales[$id_faceta];
@@ -302,11 +323,12 @@ class Controlador_GenerarPDF extends Controlador_Base
           }
         }
       }
+      //exit;
       $informe .= '
     </div>';
     $informe .= '<div style="page-break-after:always;"></div>
-    <br>
-    <div id="pagina-4">
+
+    <div id="pagina-4" style="text-align:justify">
       <h2>DESCRIPTORES ';
       if($tipo_informe == 'parcial'){
         $fuente = 'font-size:30pt;';
@@ -319,31 +341,33 @@ class Controlador_GenerarPDF extends Controlador_Base
 
       $informe .= '<p>Basado en las respuestas de: <b>'.utf8_encode(strtoupper($datosusuario['nombres'])).',</b> el reporte ha marcado aquellas palabras que describen su comportamiento. Describe como resuelve problemas y enfrenta desafíos, influencia a personas, responde al ritmo del ambiente y como responde a reglas y procedimientos impuestos. </p>
       <center>
+
         <table class="tabla2">
+          <tr>
+            <th style="height: 35px;"colspan="5">DESCRIPTORES</th>
+          </tr>
           <tr>
             '.$ths.'
           </tr>';
       $pos_no_disponible = 1;
-      foreach ($rasgos as $puntaje => $r) {
 
+      //$informe .= '<tr>';
+      //foreach ($rasgos as $puntaje => $r) {
+
+        //echo implode(",", $rasgos[$puntaxfaceta[$id_faceta]][$id_faceta]);
+       // $cantd_a = 0;
+       // $informe .= '<td>';
+        //echo  implode(",",$rasgos[$puntaxfaceta[$id_faceta]][$id_faceta]);
+        //$informe .= '</td>';
         $informe .= '<tr>';
-        $cantd_a = 0;
         foreach ($facetas as $id_faceta => $value) {
-
+        
           if(in_array($id_faceta, $datos['facetasHabilitadas'])){
-            $informe .= '<td style="';
-            if($puntaxfaceta[$id_faceta] == $puntaje){ 
-
-              if($value['literal'] == 'A' && $cantd_a > 1){
-                $color = $colores_class[$value['literal'].'1']; 
-              }else{
-                $color = $colores_class[$value['literal']];
-                $cantd_a++; 
-              }
-
-              $informe .= $color;
+            $informe .= '<td>';
+            foreach ($rasgos[$id_faceta][$puntaxfaceta[$id_faceta]] as $key => $r) {
+              $informe .= '<br>'.utf8_encode($r);
             }
-           $informe .= $fuente.'">'.utf8_encode($r[$id_faceta]).'</td>';
+            $informe .= '</td>';
           }else{
 
             if($pos_no_disponible <= 3 && $tipo_informe == 'parcial'){
@@ -354,14 +378,12 @@ class Controlador_GenerarPDF extends Controlador_Base
             }
           }
         }
-        $informe .= '</tr>';
-      }
-      $informe .= '</table>
+      $informe .= '</tr></table>
       </center>
     </div>';
     $informe .= '<div style="page-break-after:always;"></div>
     <br>
-    <div id="pagina-5">
+    <div id="pagina-5" style="text-align:justify">
       <h2>ESTILO PERSONALIZADO';
 
       if($tipo_informe == 'parcial'){
@@ -379,15 +401,15 @@ class Controlador_GenerarPDF extends Controlador_Base
           
           $l = $facetas[$valores['id_faceta']]['literal'];
           if($l == 'A' && $cantd_a > 1){
-            $color = $colores_class[$l.'1']; 
+            $color = $colores_bg[$l.'1']; 
           }else{
-            $color = $colores_class[$l];
+            $color = $colores_bg[$l];
             $cantd_a++; 
           }
           
           $d = strtoupper($facetas[$valores['id_faceta']]['faceta']);
           $informe .= '<tr>
-            <td style="'.$color.' text-align: center; font-size: 11pt; font-weight: bold; text-transform: uppercase;
+            <td class="'.$color.'" style="text-align: center; font-size: 11pt; font-weight: bold; text-transform: uppercase;
         padding-top: 25px; padding-left: 40px; padding-bottom: 25px; padding-right: 40px;">'.utf8_encode($l.'/'.$d).'
             </td>
             <td style="background-color: #c9c9c9; width: 500px; padding: 5px 20px;">
@@ -405,8 +427,8 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '</center>
     </div>';
     $informe .= '<div style="page-break-after:always;"></div>
-    <br>
-    <div id="pagina-6">
+    
+    <div id="pagina-6" style="text-align:justify">
       <h2>JERARQUIA DE COMPETENCIAS';
 
       if($tipo_informe == 'parcial'){
@@ -422,10 +444,14 @@ class Controlador_GenerarPDF extends Controlador_Base
       //aqui
       arsort($datosXpreguntas);
       $key = 0;
+      $cantd_preg = 0;
+      $cantd_hoja_total = round(count($datosXpreguntas)/6)-1;
+      $cantd_hoja = 1;
       foreach ($datosXpreguntas as $id_competencia => $resultado) {
 
         $pregunta = $preguntas[$id_competencia];
         $cantd_preg++;
+
         $informe .= '<p><b>'.($key + 1).'. '.str_replace($cambiar_letra,$conacentos,strtoupper(utf8_encode($pregunta['nombre']))).' -</b> '.utf8_encode($pregunta['descripcion']).' </p>';
        
         $key++;
@@ -558,16 +584,18 @@ class Controlador_GenerarPDF extends Controlador_Base
           </tbody>
         </table>';
 
-        if($cantd_salto == $cantd_preg){
-          $informe .= '<div style="page-break-after:always;"></div><br>';
+        if($cantd_salto == $cantd_preg && $cantd_hoja <= $cantd_hoja_total){
+
+          $informe .= /*$cantd_hoja.' - '.$cantd_hoja_total.' - '.$cantd_preg.' - '.$cantd_salto.*/'<div style="page-break-after:always;"></div><br>';
           $cantd_salto++;
-          $cantd_preg=0;
+          $cantd_hoja++;
+          $cantd_preg = 0;
         }
       }
 
       $informe .=  '</div>';
       if($tipo_informe == 'parcial'){
-        $informe .= '
+        $informe .= '<br><br>
         <div class="publicidad">¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</div>';
       }else{
         $informe .= '<div style="page-break-after:always;"></div><br><br><div>
@@ -577,10 +605,33 @@ class Controlador_GenerarPDF extends Controlador_Base
       }
 
     if(count($porcentajesxfaceta) == count($facetas)){
-      $informe .= '<p align="center"><img width="600" heigth="600" align="center" src="https://chart.googleapis.com/chart?chs=750x400&chd=t:'.$porcentajes_faceta.'&cht=p3&chl='.$etiquetas_faceta.'&chdl='.$descrip_facetas.'&chdls=000000,15&chdlp=b&chco='.$colors.'"></p>';
+      $informe .= '<p align="center"><img width="600" heigth="600" align="center" src="'.$datosusuario['grafico'].'">';/*'<p align="center"><img width="600" heigth="600" align="center" src="https://chart.googleapis.com/chart?chs=750x400&chd=t:'.$porcentajes_faceta.'&cht=p3&chp=3&chl='.$etiquetas_faceta.'&chdl='.$descrip_facetas.'&chdls=000000,15&chdlp=b&chco='.$colors.'"></p>';*/
+
+
+      $porcentajes_faceta = explode(",",  $porcentajes_faceta);
+      $informe .= '<table style="font-size:18px" class="tabla-canea">
+          <tr>
+            <th class="verde-bg bloq-canea">&nbsp;</th>
+            <th class="bloq">Hacer '.$porcentajes_faceta[0].'%</th>
+            <th class="amarillo-bg bloq-canea">&nbsp;</th>
+            <th class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</th>
+            <th class="rojo-bg bloq-canea">&nbsp;</th>
+            <th class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</th>
+          </tr>
+      </table>
+
+      <table style="font-size:18px" class="tabla-canea">
+          <tr>
+            <th class="bloq-canea">&nbsp;</th>
+            <th class="morado-bg bloq-canea">&nbsp;</th>
+            <th class="bloq">Asertividad '.$porcentajes_faceta[3].'%</th>
+            <th class="azul-bg bloq-canea">&nbsp;</th>
+            <th class="bloq">Pensar '.$porcentajes_faceta[4].'%</th>
+            <th class="bloq-canea">&nbsp;</th>
+        </tr>
+      </table></p>';
     }
-   
-    //echo $informe; 
+    //echo $informe;
     self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
   }
 
@@ -612,12 +663,12 @@ class Controlador_GenerarPDF extends Controlador_Base
       if(!empty($posibilidades)){
         
         if(in_array($datos_descarga['id_usuario'], $descargas)){
-          $mpdf->Output($nombre_archivo, 'D');
+          $mpdf->Output($nombre_archivo, 'I');
         }else{
 
           if(count($descargas) < $posibilidades){
             //Modelo_Descarga::registrarDescargaInforme($datos_descarga['id_usuario'],$datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
-            $mpdf->Output($nombre_archivo, 'D');
+            $mpdf->Output($nombre_archivo, 'I');
           }else{
             $_SESSION['mostrar_error'] = 'Ya agoto su cupo de descargas de informes para esta oferta';
             $enlace = $_SERVER['HTTP_REFERER'];
@@ -629,10 +680,10 @@ class Controlador_GenerarPDF extends Controlador_Base
         if(!in_array($datos_descarga['id_usuario'], $descargas)){
           //Modelo_Descarga::registrarDescargaInforme($datos_descarga['id_usuario'],$datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
         }
-        $mpdf->Output($nombre_archivo, 'D');
+        $mpdf->Output($nombre_archivo, 'I');
       }
     }else{
-      $mpdf->Output($nombre_archivo, 'D');
+      $mpdf->Output($nombre_archivo, 'I');
     }
   }
 

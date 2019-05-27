@@ -100,7 +100,7 @@ class Modelo_Usuario{
   public static function existeUsuario($username){
     if(empty($username)){ return false; }
     $sql = "SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
-                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
             FROM mfo_usuario_login l
             LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
             LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
@@ -322,7 +322,7 @@ WHERE
       $subquery1 .= " LIMIT 0,".$limite; 
     }
     $subquery1 .= ") t2"; 
-    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.$cantd_faceta.',2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.$cantd_faceta.',2,1) AS test_realizados, COUNT(1) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
       $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test"; 
@@ -363,7 +363,7 @@ WHERE
     }
    // echo $subquery1;
     $subquery1 .= ") t2";
-    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.count($facetas).',2,1) AS test_realizados, SUM(estado) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.count($facetas).',2,1) AS test_realizados, COUNT(1) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
       $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test"; 
@@ -1102,6 +1102,12 @@ WHERE
     if(empty($id_usuario)){return false;}
     return $GLOBALS['db']->update("mfo_usuario",array("pendiente_test"=>$estado),"id_usuario=".$id_usuario);
   }
+
+  public static function actualizarGrafico($id_usuario,$imagen){
+    if(empty($id_usuario) || empty($imagen)){return false;}
+    return $GLOBALS['db']->update("mfo_usuario",array("grafico"=>$imagen),"id_usuario=".$id_usuario);
+  }
+
   public static function obtenerPassAnt($id_usuario_login){
     if(empty($id_usuario_login)){return false;}
     $sql = "SELECT password FROM mfo_usuario_login WHERE id_usuario_login = ?";
@@ -1151,7 +1157,7 @@ WHERE
   public static function obtenerFacetasxUsuario($id_usuario,$facetas=false){
 
     if($facetas == false){
-      $sql = 'SELECT id_faceta,valor FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ?';
+      $sql = 'SELECT id_faceta,valor,literal FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ? ORDER BY id_faceta';
     }else{
       $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
         INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor

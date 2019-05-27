@@ -7,6 +7,13 @@ $(document).ready(function(){
 	}
 });
 
+
+
+// readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly', 'readonly');" style="background-color: #FFFFFF;"
+// readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly', 'readonly');" style="background-color: #FFFFFF;"
+
+
+
 if($('#fechaNac')){
 	$('#fechaShow').DateTimePicker({
       dateFormat: "yyyy-MM-dd",
