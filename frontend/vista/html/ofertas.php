@@ -326,7 +326,13 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 						foreach($ofertas as $key => $o){  ?>
 
 							<div class="caja-postulaciones">
-								<?php if($o['tipo_oferta'] == 1){ echo '<div class="titulo-postulaciones">Aviso Urgente</div>'; }else{ echo '<div class="titulo-postulaciones-normal">Aviso Normal</div>'; } ?>
+								<?php if($o['tipo_oferta'] == 1){ echo '<div class="titulo-postulaciones">Aviso Urgente'; }else{ echo '<div class="titulo-postulaciones-normal">Aviso Normal'; } 
+									if($o['estado'] == Modelo_Oferta::PORAPROBAR){
+										echo ' - POR APROBAR</div>';
+									}else{
+										echo '</div>';
+									}
+								?>
 								<div class='panel-body ofertaUrgente' id='caracteristica_oferta'>
 									<div class="row">
 
@@ -556,7 +562,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				<input type="hidden" name="guardarEdicion" id="guardarEdicion" value="1">
 				<input type="hidden" name="idOferta" id="idOferta" value="<?php echo Utils::encriptar($o['id_ofertas']); ?>">
 				<div class="modal-footer" style="text-align: center !important;">
-					<button type="button" class="btn-red" id="btn-rojo" data-dismiss="modal">Cancelar</button>
+					<button type="button" style="line-height: normal;" class="btn-red" id="btn-rojo" data-dismiss="modal">Cancelar</button>
 					<input type="button" id="boton" name="boton" class="btn-light-blue" value="Guardar" onclick="enviarEdicion()"> 
 				</div>
 			</form>

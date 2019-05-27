@@ -1672,3 +1672,19 @@ div[class*='col-'] {
     background-color: black;
     opacity: 0.5;
 }
+
+ .btn-light-blue.disabled{
+    background-color: #4d5f73;
+    color: #989899;
+    cursor: not-allowed;
+}
+.btn-light-blue.disabled:hover{
+    background-color: #4d5f73;
+    color: #989899;
+    cursor: not-allowed;
+}
+.btn-light-blue.disabled:hover a{
+    background-color: #4d5f73;
+    color: #989899;
+    cursor: not-allowed;
+ }

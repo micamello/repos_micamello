@@ -62,6 +62,7 @@ class Controlador_Aspirante extends Controlador_Base
         switch ($opcion) {
             case 'filtrar':       
 
+                $enviar_accesos = Utils::getParam('enviar_accesos', '', $this->data);
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $arrprovincia  = Modelo_Provincia::obtieneListadoAsociativo(SUCURSAL_PAISID);
                 $nacionalidades       = Modelo_Pais::obtieneListadoAsociativo();
@@ -360,7 +361,6 @@ class Controlador_Aspirante extends Controlador_Base
                     $limite_aspirantes = count($cantd_aspirantes);
                 }
 
-                $enviar_accesos = Utils::getParam('enviar_accesos', '', $this->data);
                 $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
                 if(!empty($enviar_accesos)){
 

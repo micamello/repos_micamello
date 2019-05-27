@@ -27,7 +27,7 @@ class Modelo_Oferta{
 
     $sql = "SELECT ";
     if($obtCantdRegistros == false){
-        $sql .= "o.id_ofertas, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
+        $sql .= "o.id_ofertas, o.estado, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
       r.edad_minima, IF(o.id_tipolicencia IS NULL,0,o.id_tipolicencia) AS licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas";
       if (!empty($vista) && ($vista == 'postulacion')){ 
         $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
@@ -60,7 +60,7 @@ class Modelo_Oferta{
     AND j.id_jornada = o.id_jornada
     AND p.id_pais = ".$pais_empresa;
     if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
-      $sql .= " AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
+      $sql .= " AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
     }else{
       $sql .= " AND o.estado = 1 ";
     }
@@ -384,7 +384,7 @@ class Modelo_Oferta{
   public static function puedeEditar($idOferta,$tiempo){
     if (empty($idOferta)){ return false; }
 
-    $sql = "SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= ".($tiempo*60).", 1,0) AS editar FROM mfo_oferta where id_ofertas = ? LIMIT 1";
+    $sql = "SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= ".($tiempo*60).", 1,0) AS editar FROM mfo_oferta where id_ofertas = ? AND (o.estado = 1 OR o.estado = 2) LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($idOferta),false);
   }
 

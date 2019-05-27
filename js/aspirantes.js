@@ -377,6 +377,7 @@ function activar(){
 	$('#accesos').val(0);
 	$('#activarAccesos').hide();
 	$('#desactivarAccesos').show();
+	$('#desactivarAccesos_btn').show();
 	$('#marcar').show();
 	$('.checkboxes').show();
 }
@@ -396,9 +397,12 @@ function desactivar(){
 	$('#accesos').val(1);
 	$('#planes').hide();
 	$('#desactivarAccesos').hide();
+	$('#desactivarAccesos_btn').hide();
 	$('#activarAccesos').show();
 	$('#marcar').hide();
 	$('.checkboxes').hide();
+
+	$('html, body').animate({scrollTop:0}, 'slow'); 
 }
 
 function enviarPclave(ruta,tipo,page){

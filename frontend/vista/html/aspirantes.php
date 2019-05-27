@@ -643,7 +643,9 @@
 							  <span class="parpadea" style="color:red">
 							    <?php echo $num_accesos_rest; ?>					
 							  </span>
-						  </b> 
+						  	</b> 
+						  	<br>
+						  	<small id="passwordHelpBlock" class="form-text text-muted">Seleccione los candidatos a los que desee enviar accesos</small>
 						</div>
 					<?php } ?>
 				</div>
@@ -691,54 +693,53 @@
 	        	<div class='panel panel-default shadow'>
 					<div class='panel-body'>
 						<div id="no-more-tables" class="table-responsive">
-			              <table class="table table-hover">
-			                <thead class="etiquetaBody">
-							      <tr>
-							      	<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
-							      	<!--<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php #if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" <?php #if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan"'; } ?> <?php #if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ #echo 'checked'; } ?>></th>-->
-							      	<th style="vertical-align: middle; text-align: center;">Foto</th>
-									<th colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
-							        <th style="vertical-align: middle; text-align: center;width: 100px">
-										<?php 
-											$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O1'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
-										?>
-							           <a href="<?php echo $ruta.'1/'; ?>">Edad <i class="fa fa-sort"></i></a>
-							        </th>
-							        <?php if($vista == 1) { ?>
-								        <th style="vertical-align: middle; text-align: center;">
+			                <table class="table table-hover">
+			                	<thead class="etiquetaBody">
+							    	<tr>
+								      	<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
+								      	<!--<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php #if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" <?php #if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan"'; } ?> <?php #if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ #echo 'checked'; } ?>></th>-->
+								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Foto</th>
+										<th rowspan="2" colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
+								        <th rowspan="2" style="vertical-align: middle; text-align: center;width: 100px">
 											<?php 
-												$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O2'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
-											
+												$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O1'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
 											?>
-								           <a href="<?php echo $ruta.'1/'; ?>"><?php echo 'Postulado hace'; ?><i class="fa fa-sort"></i></a>
+								           <a href="<?php echo $ruta.'1/'; ?>">Edad <i class="fa fa-sort"></i></a>
 								        </th>
-							    	<?php } ?>
-							    	<?php 
-							    	$r = 3;
-							    	
-							    	foreach($facetas as $key => $nombre){ 
-							    		echo "<th style='vertical-align: middle; text-align: center;'>".$nombre['literal']."</th>";
-								        $r++;
-							    	} ?>
-							        <th style="vertical-align: middle; text-align: center;" title="Nivel de Estudios">
-							        	<?php 
-											$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O3'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
-										?>
-							           <a href="<?php echo $ruta.'1/'; ?>">Estudios<i class="fa fa-sort"></i></a>
-							       </th>
-
-							        <?php if($vista == 1) { ?>
-								        <th style="width: 100px; vertical-align: middle; text-align: center;" title="Aspiraci&oacute;n Salarial">
+								        <?php if($vista == 1) { ?>
+									        <th rowspan="2" style="vertical-align: middle; text-align: center;">
+												<?php 
+													$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O2'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
+												
+												?>
+									           <a href="<?php echo $ruta.'1/'; ?>"><?php echo 'Postulado hace'; ?><i class="fa fa-sort"></i></a>
+									        </th>
+								    	<?php } ?>
+								    	<th colspan="5" style="vertical-align: middle; text-align: center; cursor:help"><span data-placement="top" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo. Y mejor aún, ¡puedes completar el proceso de selección!</p>">INFORME</span></th>
+								        <th rowspan="2" style="vertical-align: middle; text-align: center;" title="Nivel de Estudios">
 								        	<?php 
-												$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O4'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
+												$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O3'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
 											?>
-								           <a href="<?php echo $ruta.'1/'; ?>">Salario<i class="fa fa-sort"></i></a>
+								           <a href="<?php echo $ruta.'1/'; ?>">Estudios<i class="fa fa-sort"></i></a>
 								       </th>
-								   <?php } ?>
-								   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))/*|| in_array('-1',$posibilidades)*/){ ?>
-							        	<th colspan="2" style="vertical-align: middle; text-align: center;">Acci&oacute;n</th>
-							    	<?php } ?>
-							      </tr>
+
+								        <?php if($vista == 1) { ?>
+									        <th rowspan="2" style="width: 100px; vertical-align: middle; text-align: center;" title="Aspiraci&oacute;n Salarial">
+									        	<?php 
+													$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O4'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
+												?>
+									           <a href="<?php echo $ruta.'1/'; ?>">Salario<i class="fa fa-sort"></i></a>
+									       </th>
+									   <?php } ?>
+									   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))/*|| in_array('-1',$posibilidades)*/){ ?>
+								        	<th rowspan="2" colspan="2" style="vertical-align: middle; text-align: center;">Acci&oacute;n</th>
+								    	<?php } ?>
+							      	</tr>
+							      	<tr><?php 
+								    	foreach($facetas as $key => $nombre){ 
+								    		echo "<th style='vertical-align: middle; text-align: center;'>".$nombre['literal']."</th>";
+								    	} ?>
+								    </tr>
 							    </thead>
 				        		<tbody>
 						        	<?php 	
@@ -764,8 +765,13 @@
 						        			/*echo '<br>i: '.$i;
 						        			echo '<br>limite-1: '.($limite_plan-1);
 						        			echo '<br>num_aumentar: '.$num_aumentar;*/
-						        			?>
-							            	<tr>
+						        			
+							            	if(array_key_exists($a['id_usuario'],$usuariosConAccesos)){
+					            				$color = ' style="background-color: #bbdcf9;"';
+				            				}else{
+				            					$color = '';
+				            				} ?>
+							            	<tr<?php echo $color; ?>>
 							            		<?php if($_SESSION['mfo_datos']['accesos'] == 1){ 
 							            			$display = 'display:block; vertical-align: middle; text-align: center;';
 							            		}else{
@@ -991,7 +997,7 @@
 			</div>
 			<div class="col-md-12">
 				<br>
-				<div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
+				<div <?php echo $style_desactivo; ?> id="desactivarAccesos_btn" class="pull-right">
 					<a id="btn_accesos_cancelar" class="btn-red solo-texto dis-mov">Cancelar</a>
 					<a id="btn_accesos_confirmar" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
 				</div>

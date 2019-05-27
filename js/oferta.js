@@ -95,6 +95,7 @@ if(document.getElementById('des_of')){
 
 function abrirModalEditar(id,idOferta){
     
+    quitarError("descripcion_error", "des_of_error");
     document.getElementById('idOferta').value = idOferta;
     var puerto_host = $('#puerto_host').val();
 
@@ -119,7 +120,7 @@ function abrirModalEditar(id,idOferta){
 function enviarEdicion(){
 
     var estado = validarDescripcion();
-    console.log(estado);
+    //console.log(estado);
     if(estado == 1){
         var action = document.getElementById('form_editar_Of').action;
         action += document.getElementById('idOferta').value+'/1/';

@@ -596,6 +596,8 @@ WHERE
       }else{
         if(!empty($filtros['R']) && $filtros['R'] != ''){
           $sql .= " ORDER BY ranqueo DESC";
+        }else{
+          $sql .= " ORDER BY t2.pago DESC, t2.fecha_postulado ASC";
         }
       }
       $page = ($page - 1) * REGISTRO_PAGINA;

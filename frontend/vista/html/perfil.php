@@ -686,7 +686,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 									              <div id="seccion_nomCon" class="form-group">
 									                <label class="text-center">Nombres</label>&nbsp;<i>*</i><div id="err_nomCon" class="help-block with-errors"></div>
 
-									                <input type="text" name="nombre_contact" id="nombre_contact" maxlength="100" value="<?php echo (isset($data['nombres_contacto'])) ? $data['nombres_contacto'] : $_SESSION['mfo_datos']['usuario']['nombres_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control" onkeyup="validarFormulario(false)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?> >
+									                <input type="text" name="nombre_contact" id="nombre_contact" maxlength="100" value="<?php echo (isset($data['nombres_contacto'])) ? utf8_encode($data['nombres_contacto']) : utf8_encode($_SESSION['mfo_datos']['usuario']['nombres_contacto']); ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control" onkeyup="validarFormulario(false)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?> >
 									              </div>
 									            </div>  
 
@@ -694,7 +694,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 									              <div id="seccion_apeCon" class="form-group">
 									                <label class="text-center">Apellidos</label>&nbsp;<i>*</i><div id="err_apeCon" class="help-block with-errors"></div>
 
-									                <input type="text" name="apellido_contact" id="apellido_contact" maxlength="100" value="<?php echo (isset($data['apellidos_contacto'])) ? $data['apellidos_contacto'] : $_SESSION['mfo_datos']['usuario']['apellidos_contacto']; ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control" onkeyup="validarFormulario(false)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?>>
+									                <input type="text" name="apellido_contact" id="apellido_contact" maxlength="100" value="<?php echo (isset($data['apellidos_contacto'])) ? utf8_encode($data['apellidos_contacto']) : utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos_contacto']); ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control" onkeyup="validarFormulario(false)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?>>
 									              </div>
 									            </div> 
 

@@ -400,6 +400,7 @@ class Controlador_Oferta extends Controlador_Base{
           if (Utils::getParam('guardarEdicion') == 1) {
             $idOferta = Utils::desencriptar(Utils::getParam('idOferta', '', $this->data));
             self::guardarDescripcion($idOferta);
+            Utils::doRedirect(PUERTO . '://' . HOST . '/vacantes/');
           }
 
           $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
