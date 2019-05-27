@@ -1104,6 +1104,12 @@ WHERE
     if(empty($id_usuario)){return false;}
     return $GLOBALS['db']->update("mfo_usuario",array("pendiente_test"=>$estado),"id_usuario=".$id_usuario);
   }
+
+  public static function actualizarGrafico($id_usuario,$imagen){
+    if(empty($id_usuario) || empty($imagen)){return false;}
+    return $GLOBALS['db']->update("mfo_usuario",array("grafico"=>$imagen),"id_usuario=".$id_usuario);
+  }
+
   public static function obtenerPassAnt($id_usuario_login){
     if(empty($id_usuario_login)){return false;}
     $sql = "SELECT password FROM mfo_usuario_login WHERE id_usuario_login = ?";
@@ -1153,7 +1159,7 @@ WHERE
   public static function obtenerFacetasxUsuario($id_usuario,$facetas=false){
 
     if($facetas == false){
-      $sql = 'SELECT id_faceta,valor FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ?';
+      $sql = 'SELECT id_faceta,valor,literal FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ? ORDER BY id_faceta';
     }else{
       $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
         INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor
