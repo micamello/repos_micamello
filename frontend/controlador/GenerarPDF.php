@@ -1058,12 +1058,26 @@ class Controlador_GenerarPDF extends Controlador_Base
         // $html = "";
 
         $inidoc = "<!DOCTYPE html><html><link rel='stylesheet' href='css/informemic.css'>
-                    <body>";
+                    <body>
+                    <style>
+                      
+                    </style>
+                    ";
         $enddoc = "</body></html>";
+        
         $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="100%"></header>');
         $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="100%"></footer>');
+        $mpdf->AddPage('',
+        '', '', '', '',
+        10, // margin_left
+        10, // margin right
+       25, // margin top
+       30, // margin bottom
+        10, // margin header
+        8);
         $mpdf->WriteHTML($inidoc);
-        $mpdf->WriteHTML($enddoc);   
+        $mpdf->WriteHTML($enddoc);
+
         $mpdf->WriteHTML($html);
         $mpdf->Output($datos['username'].".pdf", 'I');
         // self::informePersonalidad($html, );

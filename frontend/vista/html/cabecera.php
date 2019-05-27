@@ -41,7 +41,11 @@
 </head>
 
 <body>
-
+  <!-- <div class="loaderMic">
+    <div class="LogMic">
+        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/loader3.gif" class="img-responsive center">
+    </div>
+  </div> -->
   <!--                       LEY DE COOKIES                     -->
 <!--<div class="modal fade" id="msg_cookies" tabindex="-1" role="dialog" aria-labelledby="msg_cookies" aria-hidden="true" data-backdrop="static" data-keyboard="false">
   <div class="modal-dialog" role="document">
@@ -153,7 +157,7 @@ if($navegador == 'MSIE'){ ?>
     <!-- </div> -->
 <?php } ?>
 
-<nav class="navbar navbar-default navbar-fixed-top <?php echo $fixed; ?>">
+<nav class="navbar navbar-default navbar-fixed-top menu">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">
@@ -197,7 +201,7 @@ if($navegador == 'MSIE'){ ?>
               <i class="fa fa-caret-down">
                 <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                 echo "usericon_safari";
-              } ?>"></i>
+              } ?>" width="35" height="35"></i>
               <ul class="dropdown-menu">
                 <?php foreach($menu["submenu"] as $submenu){ ?>  
                   <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>

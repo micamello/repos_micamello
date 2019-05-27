@@ -1,4 +1,4 @@
-
+// $('body').css('overflow', 'hidden');
 function navegador(){
   var agente = window.navigator.userAgent;
   var navegadores = ["Chrome", "Firefox", "Safari", "Opera", "MSIE", "Trident", "Edge"];
@@ -8,6 +8,14 @@ function navegador(){
       }
   }
 }
+
+// $(document).ajaxStart(function(){
+
+// });
+
+// $(document).ajaxStop(function(){
+
+// });
 
 function redireccionar(ruta){
   console.log(ruta);
@@ -44,8 +52,11 @@ function quitarError(campo,id){
 
 "use strict";
 jQuery(document).ready(function ($) {
+  $('body').css('overflow', 'auto');
+  $('.loaderMic').fadeOut( "slow");
+  eventos();
 
-    bannerTel();
+    // bannerTel();
 //for Preloader
 
     //$(window).load(function () {
@@ -81,6 +92,25 @@ jQuery(document).ready(function ($) {
     //End
 
 });
+
+function eventos(){
+  if($('.noautofill').length){
+    var variables = $('.noautofill');
+    $.each(variables, function(indice, obj){
+      $(obj).attr('readonly', 'readonly');
+      $(obj).css('background-color', '#FFFFFF');
+    });
+    variables.on('focus blur', function(event){
+      console.log(event.type);
+      if(event.type == "focus"){
+        $(this).removeAttr('readonly');
+      }
+      if(event.type == "blur"){
+        $(this).attr('readonly', 'readonly');
+      }
+    });
+  }
+}
 
 function abrirModal(mensaje,id,enlace,btn,titulo){
 
@@ -612,6 +642,8 @@ function bannerTel(){
     $('body').css('padding-top', ($('.navbar-fixed-top').height()+35)+'px');
   }
 }
-/*$(window).resize(function(){
-  bannerTel();
-});*/
+
+$(window).resize(function(){
+  // bannerTel();
+});
+

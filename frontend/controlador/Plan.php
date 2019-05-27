@@ -248,7 +248,6 @@ class Controlador_Plan extends Controlador_Base {
   }
 
   public function generarTransactionId(){
-
     $random = Utils::random(000000001, 999999999);
     if(strlen($random) < 9){
       $random = str_pad($random, 9, "0", STR_PAD_LEFT);

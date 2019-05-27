@@ -32,7 +32,7 @@ class Controlador_Recomendacion extends Controlador_Base {
     $email_body = Modelo_TemplateEmail::obtieneHTML("SUGERENCIAS");
     $email_body = str_replace("%NOMBRES%", MAIL_NOMBRE, $email_body);   
     $email_body = str_replace("%SUGERENCIA%", $data['descripcion'], $email_body);
-    $email_body = str_replace("%USUARIO%", $data['nombres'], $email_body);
+    $email_body = str_replace("%USUARIO%", ucfirst($data['nombres']), $email_body);
     $email_body = str_replace("%CORREO%", $data['correo1'], $email_body);
     $email_body = str_replace("%TELEFONO%", $data['telefono'], $email_body);    
     if (Utils::envioCorreo($correo,"Recomendaciones o Sugerencias",$email_body)){
@@ -45,7 +45,7 @@ class Controlador_Recomendacion extends Controlador_Base {
 
   public function envioRecomendacionesUser($data){
     $email_body = Modelo_TemplateEmail::obtieneHTML("SUGERENCIAS_USUARIO");
-    $email_body = str_replace("%NOMBRES%", $data['nombres'], $email_body);   
+    $email_body = str_replace("%NOMBRES%", ucfirst($data['nombres']), $email_body);   
     $email_body = str_replace("%SUGERENCIA%", $data['descripcion'], $email_body);   
     if (Utils::envioCorreo($data['correo1'],"Recomendaciones o Sugerencias",$email_body)){
       return true;

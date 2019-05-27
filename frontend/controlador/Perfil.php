@@ -1,5 +1,5 @@
 <?php
-require_once 'includes/mpdf/mpdf.php';
+
 class Controlador_Perfil extends Controlador_Base
 {
     public function construirPagina()
@@ -9,19 +9,15 @@ class Controlador_Perfil extends Controlador_Base
             Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
         }    
 
-        /*if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){ 
+        if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){ 
             Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
-        } */
+        }
 
-        //Obtiene todos los banner activos segun el tipo
-        //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_PERFIL);        
-        //$_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
         $msj1 = $imgArch1 = $btnDescarga = '';
         $tipo_usuario = $_SESSION['mfo_datos']['usuario']['tipo_usuario'];
 
         $breadcrumbs = array();
-//print_r( $_SESSION['mfo_datos']['grafico']); exit;
-        //$breadcrumbs = array();
+
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
             case 'guardarGrafico':
@@ -63,7 +59,6 @@ class Controlador_Perfil extends Controlador_Base
                     $estado_civil = Modelo_EstadoCivil::obtieneListado();
                     $areas = Modelo_AreaSubarea::obtieneAreas_Subareas();
                     $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                    //print_r($nivelIdiomas);
                 }else{
                     $arrsectorind = Modelo_SectorIndustrial::consulta();
                     $cargo = Modelo_Cargo::consulta();
@@ -74,8 +69,6 @@ class Controlador_Perfil extends Controlador_Base
 
                 $area_select  = $nivel_interes  = false;
                 $btnSig       = 0;
-                //$imgArch2  = 'upload-icon.png';
-                //$msj2      = 'Subir CV';
                 $ruta_arch = '#';
                 $btnSubir  = 1;
                 $btnDescarga = 0;
@@ -88,7 +81,6 @@ class Controlador_Perfil extends Controlador_Base
                         $_FILES['subirCV'] = ''; 
                     }
                     $btnSubir  = 0;
-                    //print_r($_FILES); 
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
                     $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
@@ -112,16 +104,9 @@ class Controlador_Perfil extends Controlador_Base
 
                 //Valida que el único que guarda foto es el candidato y si tiene o no cargado uno previo
                 if (isset($_SESSION['mfo_datos']['usuario']['infohv']) && $tipo_usuario == Modelo_Usuario::CANDIDATO) {
-                    /*if($_SESSION['mfo_datos']['usuario']['infohv']['formato'] == ''){
-                        $imgArch1 = 'actualizar.png';
-                    }else{
-                        $imgArch1    = $_SESSION['mfo_datos']['usuario']['infohv']['formato'] . '.png';
-                    }
-                    $msj1        = 'Cv Cargado';*/
                     $nombre_arch = $_SESSION['mfo_datos']['usuario']['username'] . '.' . $_SESSION['mfo_datos']['usuario']['infohv']['formato'];
                     $ruta_arch   = PUERTO."://".HOST.'/hojasDeVida/'.$_SESSION['mfo_datos']['usuario']['username'].'/';
                     $btnDescarga = 1;                   
-                    //$msj2        = 'Actualizar CV';
                 }
 
                 //Verifica si el usuario tiene datos en la variable de session para las areas y subareas seleccionadas
@@ -133,7 +118,6 @@ class Controlador_Perfil extends Controlador_Base
 
                 $breadcrumbs['perfil'] = 'Editar mi perfil';
                 $nrototalfacetas = count(Modelo_Faceta::obtenerFacetas());
-                //$nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $porcentaje_por_usuario = Modelo_Usuario::obtenerFacetasxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
@@ -143,10 +127,6 @@ class Controlador_Perfil extends Controlador_Base
                     'provincia'                 => $provincia['id_provincia'],
                     'arrciudad'                 => $arrciudad,
                     'btnSig'                    => $btnSig,
-                    //'imgArch1'                  => $imgArch1,
-                    //'imgArch2'                  => $imgArch2,
-                    //'msj1'                      => $msj1,
-                    //'msj2'                      => $msj2,
                     'btnSubir'                  => $btnSubir,
                     'btnDescarga'               => $btnDescarga,
                     'ruta_arch'                 => $ruta_arch,
@@ -188,8 +168,7 @@ class Controlador_Perfil extends Controlador_Base
     }
 
     //Función para hacer el validado de todos los campos del módulo de perfil y si no hay ningun problema proceder al guardado, sino hace un rollback
-    public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario)
-    {
+    public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario){
         try {
 
             $listAreas = Modelo_Area::obtieneListadoAsociativo();
@@ -223,9 +202,6 @@ class Controlador_Perfil extends Controlador_Base
                     if(isset($listAreas[$valor[0]]) && isset($listSubareas[$valor[1]])){
                         $areas_subareas[$valor[0]][] = $valor[2];
                         array_push($array_subareas_seleccionadas, $valor[2]);
-                    }else{
-
-                       
                     }
                 }
                 $data['areaxusuario'] = $areas_subareas;
@@ -258,7 +234,7 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("La fecha " . $data['fecha_nacimiento'] . " no es v\u00E1lida");
                 }
 
-                $validaTlf = Utils::valida_telefono($data['telefono']);
+                $validaTlf = Utils::validarTelefono($data['telefono']);
                 if (empty($validaTlf)) {
                     throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
                 }
@@ -296,7 +272,7 @@ class Controlador_Perfil extends Controlador_Base
                   throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
                 } 
 
-                $validaTlf = Utils::valida_telefono($data['telefono']);
+                $validaTlf = Utils::validarTelefono($data['telefono']);
                 if (!$validaTlf) {
                     throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
                 }
@@ -308,7 +284,7 @@ class Controlador_Perfil extends Controlador_Base
                 }
 
             }else{
-                $validaTlf2 = Utils::valida_telefono($data['tel_one_contact']);
+                $validaTlf2 = Utils::validarTelefono($data['tel_one_contact']);
                 if (empty($validaTlf2)){
                     throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no es v\u00E1lido");
                 }
@@ -334,7 +310,7 @@ class Controlador_Perfil extends Controlador_Base
                   throw new Exception("Nombres: " . $data['nombres'] . " formato no permitido");  
                 }
 
-                $validaTlf = Utils::valida_telefono($data['telefono']);
+                $validaTlf = Utils::validarCelularConvencional($data['telefono']);
                 if (!$validaTlf) {
                     throw new Exception("El tel\u00E9fono " . $data['telefono'] . " no es v\u00E1lido");
                 }
@@ -395,7 +371,8 @@ class Controlador_Perfil extends Controlador_Base
             if (!empty($imagen) && $imagen['error'] != 4) {
               if (!Utils::upload($imagen,$_SESSION['mfo_datos']['usuario']['username'],PATH_PROFILE,1)){
                 throw new Exception("Ha ocurrido un error al guardar la imagen del perfil, intente nuevamente");  
-              }  
+              }
+              Utils::crearThumbnail(PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',300,0);  
             } 
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 if (!empty($archivo) && $archivo['error'] != 4) {
@@ -455,27 +432,8 @@ class Controlador_Perfil extends Controlador_Base
                     $array_data_area = explode(",",$_SESSION['mfo_datos']['usuario']['subareas']);
                 }
 
-                /*if(isset($_POST['subareas']) && !empty($_POST['subareas']) && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
-
-                    $array_subareas_seleccionadas = array();
-                    $areas_subareas = array();
-                    foreach ($_POST['subareas'] as $i => $datos_select_area) {
-                        
-                        $valor = explode("_", $datos_select_area);
-
-                        if(isset($listAreas[$valor[0]]) && isset($listSubareas[$valor[1]])){
-                            $areas_subareas[$valor[0]][] = $valor[2];
-                            array_push($array_subareas_seleccionadas, $valor[2]);
-                        }else{
-
-                            throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
-                        }
-                    }
-                }*/
-
                 if(!empty($array_subareas_seleccionadas)){
 
-                    //print_r($array_subareas_seleccionadas);
                     if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
                         throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
                     }

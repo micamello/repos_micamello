@@ -29,8 +29,12 @@ $(document).ready(function(){
 })
 
 var contenido = "";
+var puerto_host = $('#puerto_host').val();
 tinymce.init({ 
     selector:'textarea#descripcionOferta',
+    external_plugins: {"nanospell": puerto_host+"/nanospell/plugin.js"},
+        nanospell_dictionary: "es",
+        // forced_root_block: false ,
     style_formats: [
         {title: 'Headers', items: [
             {title: 'Header 1', format: 'h1'},

@@ -99,7 +99,7 @@ class Modelo_Usuario{
   //Búsqueda del username en la BD
   public static function existeUsuario($username){
     if(empty($username)){ return false; }
-    echo $sql = "SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+    $sql = "SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
                    u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
             FROM mfo_usuario_login l
             LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login

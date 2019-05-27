@@ -24,7 +24,7 @@
 			                  <label class="text-center">Contrase&ntilde;a anterior<i>*</i></label><div id="err_clave_ant" class="help-block with-errors"></div>
 			                  <div class="input-group">
 			                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-			                    <input id="password_ant" name="password_ant" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" class="form-control" value="<?php if(isset($data['password_ant'])){ echo $data['password_ant']; } ?>" onkeyup="validarClave()">
+			                    <input id="password_ant" name="password_ant" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" class="form-control noautofill" value="<?php if(isset($data['password_ant'])){ echo $data['password_ant']; } ?>" onkeyup="validarClave()" readonly>
 			                  </div>
 			                </div>
 			          	</div>
@@ -34,7 +34,7 @@
 			                  <label class="text-center">Contrase&ntilde;a <i>*</i></label><div id="err_clave" class="help-block with-errors"></div>
 			                  <div class="input-group">
 			                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-			                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" value="<?php if(isset($data['password'])){ echo $data['password']; } ?>" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control" onkeyup="validarClave()" >
+			                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" value="<?php if(isset($data['password'])){ echo $data['password']; } ?>" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control noautofill" onkeyup="validarClave()" readonly>
 			                  </div>
 			                </div>
 				        </div>
@@ -44,7 +44,7 @@
 				                <label class="text-center">Confirmar Contrase&ntilde;a <i>*</i></label><div id="err_clave1" class="help-block with-errors"></div>
 				                <div class="input-group">
 				                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-				                    <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" value="<?php if(isset($data['password_two'])){ echo $data['password_two']; } ?>" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" onkeyup="validarClave()" >
+				                    <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" value="<?php if(isset($data['password_two'])){ echo $data['password_two']; } ?>" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control noautofill" onkeyup="validarClave()" readonly>
 				                </div>
 				            </div>
 			          	</div>

@@ -258,10 +258,8 @@ $('#idioma_of').on('change', function(){
 
     if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
         document.getElementById('effect_bounce').classList.add('bounce');
-        //document.getElementById('btn_transfer').classList.add('active_button');
     }else{
         document.getElementById('effect_bounce').classList.remove('bounce');
-        //document.getElementById('btn_transfer').classList.remove('active_button');
     }
 });
 
@@ -269,10 +267,8 @@ $('#nivel_idi_of').on('change', function(){
 
     if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
         document.getElementById('effect_bounce').classList.add('bounce');
-        //document.getElementById('btn_transfer').classList.add('active_button');
     }else{
         document.getElementById('effect_bounce').classList.remove('bounce');
-        //document.getElementById('btn_transfer').classList.remove('active_button');
     }
 });
 
@@ -362,7 +358,6 @@ $('#btn_transfer').on('click', function()
             nodo_option.selected = "selected";
             select_array_idioma.appendChild(nodo_option);
             document.getElementById('effect_bounce').classList.remove('bounce');
-            //document.getElementById('btn_transfer').classList.remove('active_button');
             
             limpiarSelect("idioma_of");
             limpiarSelect("nivel_idi_of");
@@ -398,7 +393,6 @@ function delete_item_selected(selected_item){
 
         if(selected_item.id == tag_idioma.options[tag_idioma.selectedIndex].value){
             document.getElementById('effect_bounce').classList.add('bounce');
-            //document.getElementById('btn_transfer').classList.add('active_button');
         }
     }
 
@@ -839,10 +833,10 @@ function validarFormulario(tipovalidacion){
                 colocaError("err_tlfCon","seccion_tlfCon","Longitud mín. 9 caracteres","boton");
                 mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres\n'; 
                 error = 1; 
-            }else if(convencional.length > '15'){
+            }else if(convencional.length > '9'){
 
-                colocaError("err_tlfCon","seccion_tlfCon","Longitud máx. 15 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 15 caracteres\n'; 
+                colocaError("err_tlfCon","seccion_tlfCon","Longitud máx. 9 caracteres","boton");
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres\n'; 
                 error = 1; 
             }else{
                quitarError("err_tlfCon","seccion_tlfCon"); 
