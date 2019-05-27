@@ -11,7 +11,7 @@
 				<div class="fotoPerfil">
 					<div class="text-center">
 						<div class="col-md-6">
-							<img class="perfil_photo_user" src="<?php echo Modelo_Usuario::obtieneFoto($datosUsuario['username']) ?>">
+							<img class="perfil_photo_user" src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgperfil/'.$datosUsuario['username'].'/';?>">
 						</div>
 					</div>
 				</div>
