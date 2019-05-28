@@ -543,7 +543,6 @@ class Controlador_Aspirante extends Controlador_Base
                    
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,false);
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,true);
-
                     $cantd_total = count($paises);
 
                     $_SESSION['mfo_datos']['usuario']['cantd_total'] = array($id_oferta=>$cantd_total);
@@ -597,8 +596,8 @@ class Controlador_Aspirante extends Controlador_Base
                 $descargas = Modelo_Descarga::descargas($idUsuario,$id_oferta);
                 
                 $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();
-
                 $arrprovincia = $nacionalidades = array();
+
                 foreach ($paises as $key => $value) {
                    if (!empty($arranacionalidades[$value['id_pais']])){
                      $nacionalidades[$value['id_pais']] = $arranacionalidades[$value['id_pais']];

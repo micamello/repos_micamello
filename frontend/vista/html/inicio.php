@@ -1,6 +1,6 @@
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6 qs-mv">
+            <div class="col-md-6">
                 <div class="cuadro-banner">
                   <div class="col-md-12">
                     <p>¡Conoce las mejores empresas, encuentra tu pr&oacute;ximo trabajo y mucho m&aacute;s!</p>
