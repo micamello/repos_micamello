@@ -198,7 +198,14 @@ function enviarPclave(ruta,tipo,page){
 	}else{
 		
         if(tipo == 1){
-            swal('Notificación!', 'La longitud mínima de la palabra clave es de 3 caracteres', 'error');
+          Swal.fire({
+            title: '¡Notificación!',
+            html: 'La longitud mínima de la palabra clave es de 3 caracteres',
+            imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+            imageWidth: 210,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });            
         }else{
             var nueva_ruta = ruta/*+tipo+'/'*/+page+"/";
             window.location = nueva_ruta;

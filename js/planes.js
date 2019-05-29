@@ -114,7 +114,14 @@ function loadavisos(idplan){
 }
 
 function mensaje(){
-  swal('Información!', 'Por ser nuestro lanzamiento le otorgamos el paquete Simple totalmente gratis', 'success');
+  Swal.fire({
+    title: '¡Información!',
+    html: 'Por ser nuestro lanzamiento le otorgamos el paquete Simple totalmente gratis',
+    imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
+    imageWidth: 210,
+    confirmButtonText: 'ACEPTAR',
+    animation: true
+  });  
 }
 
 $(function() {  	

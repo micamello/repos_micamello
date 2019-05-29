@@ -55,7 +55,14 @@ $('#provinciaPM').change(function(){
         });
       },
       error: function (request, status, error) {
-        swal('Advertencia!', 'Error  por favor intente denuevo', 'error');    
+        Swal.fire({
+          title: '¡Advertencia!',
+          html: 'Error por favor intente denuevo',
+          imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+          imageWidth: 210,
+          confirmButtonText: 'ACEPTAR',
+          animation: true
+        });        
       }                  
     });
     quitarError("err_provPM","seccion_provPM");
@@ -77,10 +84,10 @@ $('#ciudadPM').change(function(){
   }
 });
 
-$('#btn_submitpaypal').click(function(){  
+/*$('#btn_submitpaypal').click(function(){  
   var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
   $('#custom').attr('value',valor);  
-});
+});*/
 
 $('#imagen').change(function(e) {
   addImage(e); 
@@ -104,11 +111,11 @@ function fileOnload(e) {
 }
 
 function validaCampos(tipo){
-  if(tipo == 1){
+  /*if(tipo == 1){
     var elem = $('#form_paypal').find('input[type!="hidden"]');
     var btn = 'btn_submitpaypal';
     var select = document.getElementById('tipo_docP').value;
-  }else if (tipo == 2){
+  }else */if (tipo == 2){
     var elem = $('#form_deposito').find('input[type!="hidden"]');
     var btn = 'btndeposito';
     var select = document.getElementById('tipo_doc').value;
@@ -134,11 +141,11 @@ function validaCampos(tipo){
     $("#"+btn).addClass('disabled');
   }else{    
     $("#"+btn).removeClass('disabled');     
-    if(tipo == 1){    
+    /*if(tipo == 1){    
       var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
       $('#custom').attr('value',valor);      
       document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
-    }
+    }*/
   }
 }
 
@@ -164,7 +171,7 @@ function validarImg(archivo,err_img,seccion_img,btn){
   return error;
 }
 
-$('#tipo_docP').on('change', function(){
+/*$('#tipo_docP').on('change', function(){
     var tipo_doc = document.getElementById('tipo_docP').value;
     if(tipo_doc != 0){
       if(document.getElementById('dniP').value != ""){
@@ -199,7 +206,7 @@ $('#tipo_docP').on('change', function(){
       error = validarSelect(tipo_doc,'err_tipoP','seccion_tipoP','btn_submitpaypal');
     }
     validaCampos(1);
-});
+});*/
 
 $('#nombre').on('blur', function(){
   var nombres = document.getElementById('nombre').value;
@@ -211,7 +218,7 @@ $('#nombre').on('blur', function(){
   }
 });
 
-$('#nombreP').on('blur', function(){
+/*$('#nombreP').on('blur', function(){
   var nombres = document.getElementById('nombreP').value;
   if(nombres.length <= '100'){
     validarInput(nombres,"err_nomP","seccion_nombreP","btn_submitpaypal")
@@ -219,7 +226,7 @@ $('#nombreP').on('blur', function(){
   }else{
     colocaError("err_nomP","seccion_nombreP","El nombre no debe exceder de 100 caracteres","btn_submitpaypal");
   }
-});
+});*/
 
 $('#shippingFirstName').on('blur', function(){
   var nombres = document.getElementById('shippingFirstName').value;
@@ -470,7 +477,7 @@ $('#dni').on('blur', function(){
   validaCampos(2);
 });
 
-$('#dniP').on('blur', function(){
+/*$('#dniP').on('blur', function(){
   var tipo_doc = document.getElementById('tipo_docP').value;
   if(tipo_doc != 0){
     if(document.getElementById('dniP').value != ""){
@@ -498,7 +505,7 @@ $('#dniP').on('blur', function(){
     error = validarSelect(tipo_doc,'err_tipoP','seccion_tipoP','btn_submitpaypal');
   }
   validaCampos(1);
-});
+});*/
 
 $('#dniPM').on('blur', function(){
   var tipo_doc = document.getElementById('tipo_docPM').value;
@@ -537,7 +544,7 @@ function enviarFormulario(form){
   var estado = validarFormulario();  
   if(estado == 1 && form == 'form_deposito'){
     document.form_deposito.submit();
-  }else if(form == 'form_paypal'){    
+  }/*else if(form == 'form_paypal'){    
     if(estado != 1){
       $("#btn_submitpaypal").on('click', function(evt){
         evt.preventDefault();  
@@ -548,7 +555,7 @@ function enviarFormulario(form){
       document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;      
       $('#form_paypal').submit();
     }
-  }else if(estado == 1 && form == 'form_payme'){    
+  }*/else if(estado == 1 && form == 'form_payme'){    
     $('#shippingState').attr('value',$("#provinciaPM").children('option:selected').text());
     $('#shippingCity').attr('value',$("#ciudadPM").children('option:selected').text());    
     $('#reserved18').val($("#tipo_docPM").val());    
@@ -615,7 +622,7 @@ function validarFormulario(){
       colocaError(err_apell,seccion_apellido,"Máximo 50 caracteres",btn);
       error = 1;    
     }
-  }else if (form == 2){
+  }/*else if (form == 2){
     var nombre = document.getElementById('nombreP').value;
     var direccion = document.getElementById('direccionP').value;
     var telefono = document.getElementById('telefonoP').value;
@@ -629,7 +636,7 @@ function validarFormulario(){
     var err_tipo = "err_tipoP"; var seccion_tipo = "seccion_tipoP";
     var err_correo = "err_correoP"; var seccion_correo= "seccion_correoP";
     var btn = "btn_submitpaypal";
-  }
+  }*/
   else{    
     var correo = document.getElementById('shippingEmail').value;    
     var nombre = document.getElementById('shippingFirstName').value;
@@ -757,7 +764,7 @@ function validarFormulario(){
   }
   if(error == 0){
     $("#"+btn).removeClass('disabled');
-    document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
+    //document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
     return 1;
   }
 }
