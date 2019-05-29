@@ -540,6 +540,7 @@ function enviarFormulario(){
     var estado = validarFormulario(true);    
     //console.log(estado);
     if(estado == ''){
+        $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();
     }else{
       //mostrarERRORES
