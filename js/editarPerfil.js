@@ -137,7 +137,14 @@ $('#provincia').change(function()
                 }
             },
             error: function (request, status, error) {
-                alert(request.responseText);
+              Swal.fire({
+                title: '¡Información!',
+                html: request.responseText,
+                imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                imageWidth: 210,
+                confirmButtonText: 'ACEPTAR',
+                animation: true
+              });                  
             }                  
         })
     }
@@ -190,7 +197,14 @@ function validarImg(archivo){
   if(file == 1){
     error = 1;
   }else{
-    swal('Información!','Imagen cargada', 'success');
+    Swal.fire({
+      title: '¡Información!',
+      html: 'Imagen cargada',
+      imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
+      imageWidth: 210,
+      confirmButtonText: 'ACEPTAR',
+      animation: true
+    });     
   }
   return error;
 }
@@ -207,11 +221,25 @@ function fileValidation(fileInput,tipo){
        
             var tamano = fileInput.files[0].size/1024/1024;
             if(tamano > 1){
-              swal('Advertencia!','El peso permitido es de máx. 1MB', 'error');
+              Swal.fire({
+                title: '¡Advertencia!',
+                html: 'El peso permitido es de máx. 1MB',
+                imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                imageWidth: 210,
+                confirmButtonText: 'ACEPTAR',
+                animation: true
+              });                
               error = 1;
             }else if(!allowedExtensions.exec(filePath)){
                 fileInput.value = '';
-                swal('Información!','El formato permitido es .jpeg/.jpg/', 'error');
+                Swal.fire({
+                  title: '¡Advertencia!',
+                  html: 'El formato permitido es .jpeg/.jpg/',
+                  imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                  imageWidth: 210,
+                  confirmButtonText: 'ACEPTAR',
+                  animation: true
+                });                
                 error =1;
             }else{
               error = 0;
@@ -223,17 +251,38 @@ function fileValidation(fileInput,tipo){
        
             var tamano = fileInput.files[0].size/1024/1024;
             if(tamano > 2){
-              swal('Advertencia!','El peso permitido de la hoja de vida es máx. 2MB', 'error');
+              Swal.fire({
+                title: '¡Advertencia!',
+                html: 'El peso permitido de la hoja de vida es máx. 2MB',
+                imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                imageWidth: 210,
+                confirmButtonText: 'ACEPTAR',
+                animation: true
+              });                  
               error = 1;
             }else if(!allowedExtensions.exec(filePath)){
                 fileInput.value = '';
-                swal('Información!','El formato permitido de la hoja de vida es .pdf/.doc/.docx/', 'error');
+                Swal.fire({
+                  title: '¡Advertencia!',
+                  html: 'El formato permitido de la hoja de vida es .pdf/.doc/.docx/',
+                  imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                  imageWidth: 210,
+                  confirmButtonText: 'ACEPTAR',
+                  animation: true
+                });                
                 error =1;
             }else{
               error = 0;
             }
         }else{
-            swal('Advertencia!','Cargar la hoja de vida es obligatorio', 'error');
+           Swal.fire({
+              title: '¡Advertencia!',
+              html: 'Cargar la hoja de vida es obligatorio',
+              imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+              imageWidth: 210,
+              confirmButtonText: 'ACEPTAR',
+              animation: true
+           });               
         }
     }
 
@@ -248,8 +297,15 @@ $('#subirCV').change(function(e) {
     if(file == 1){
         error = 1;
     }else{
-        swal('Información!','Hoja de vida cargada', 'success');
-        $('#modal_actualizar').modal('hide');
+      Swal.fire({
+        title: '¡Información!',
+        html: 'Hoja de vida cargada',
+        imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
+        imageWidth: 210,
+        confirmButtonText: 'ACEPTAR',
+        animation: true
+      });      
+      $('#modal_actualizar').modal('hide');
     }
 });
 
@@ -543,7 +599,14 @@ function enviarFormulario(){
         document.form_editarPerfil.submit();
     }else{
       //mostrarERRORES
-      swal('Faltan algunos datos!', estado, 'error');
+      Swal.fire({
+        title: '¡Advertencia!',        
+        html: 'Faltan algunos datos:<br>'+estado,
+        imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+        imageWidth: 210,
+        confirmButtonText: 'ACEPTAR',
+        animation: true
+      });      
     }
 }
 

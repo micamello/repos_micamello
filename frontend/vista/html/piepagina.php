@@ -59,8 +59,6 @@
   </div>
 </div>
 
-
-
 <input type="text" hidden id="puerto_host" value="<?php echo PUERTO."://".HOST ;?>">
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 
@@ -83,35 +81,48 @@ if (isset($template_js) && is_array($template_js)){
 
 <!--mensajes de error y exito-->
 <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
-
   echo "<script type='text/javascript'>
         $(document).ready(function(){          
           Swal.fire({
-            title: 'Advertencia!',
+            title: '¡Advertencia!',
             text: '".$sess_err_msg."',
-            imageUrl: 'http://localhost/repos_micamello/imagenes/logo.png',
-            imageWidth: 400,
-            imageHeight: 200,
-            animation: false
+            imageUrl: '".PUERTO."://".HOST."/imagenes/wrong-04.png',
+            imageWidth: 210,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
           });     
         });
       </script>";
 }?>
+
 <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){
           Swal.fire({
-            title: 'Exitoso!',
+            title: '¡Exitoso!',
             text: '".$sess_suc_msg."',
-            imageUrl: 'http://localhost/repos_micamello/imagenes/logo.png',
-            imageWidth: 400,
-            imageHeight: 200,
-            animation: false
+            imageUrl: '".PUERTO."://".HOST."/imagenes/logo-04.png',
+            imageWidth: 210,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });          
+        });
+      </script>";
+}?> 
+ 
+<?php if (isset($sess_not_msg) && !empty($sess_not_msg)){
+  echo "<script type='text/javascript'>
+        $(document).ready(function(){
+          Swal.fire({            
+            text: '".$sess_not_msg."',
+            imageUrl: '".PUERTO."://".HOST."/imagenes/logo-04.png',
+            imageWidth: 210,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
           });          
         });
       </script>";
 }?>  
-
 <!--<div class="container" id="Chart_details">
     <div id='chart_div' ></div><div id='g_chart_1' style="width: auto; height: auto;"></div>
 </div>-->

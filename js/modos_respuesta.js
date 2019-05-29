@@ -189,8 +189,14 @@ if($('#forma_1').length){
 }
 
 function alertErrores(texto){
-	swal('Verificar!', texto, 'error');
-
+	Swal.fire({
+    title: '¡Verificar!',
+    html: texto,
+    imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+    imageWidth: 210,
+    confirmButtonText: 'ACEPTAR',
+    animation: true
+  });	
 }
 
 // DOBLE CLICK
@@ -426,7 +432,14 @@ function makeDrop(drop, drag){
 			// toastr.options.positionClass = "toast-top-center";
 			// toastr.warning('Ubique la opción en la pregunta correspondiente');
 			drag.css({top: '0px', left: '0px'});
-			swal('Advertencia!', 'Ubique la opción en la pregunta correspondiente', 'error');
+			Swal.fire({
+	      title: '¡Advertencia',
+	      html: 'Ubique la opción en la pregunta correspondiente',
+	      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+	      imageWidth: 210,
+	      confirmButtonText: 'ACEPTAR',
+	      animation: true
+	    });			
 		}
 	}
 	else{

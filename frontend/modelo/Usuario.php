@@ -940,7 +940,7 @@ WHERE
         Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
       }
       else{
-        $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
+        $_SESSION["mostrar_notif"] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";          
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       } 
     }    
