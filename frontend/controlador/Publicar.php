@@ -19,7 +19,7 @@ class Controlador_Publicar extends Controlador_Base {
     $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($id_usuario, $_SESSION['mfo_datos']['usuario']['tipo_usuario']);
 
     if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
-      $_SESSION['mostrar_error'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
+      $_SESSION['mostrar_notif'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
     

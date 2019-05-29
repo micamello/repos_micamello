@@ -415,11 +415,18 @@ function enviarPclave(ruta,tipo,page){
 	}else{
 		
 		if(tipo == 1){
-            swal('Notificación!', 'La longitud mínima de la palabra clave es de 2 caracteres', 'error');
-        }else{
-            var nueva_ruta = ruta+page+"/";
-            window.location = nueva_ruta;
-        }
+      Swal.fire({
+	      title: '¡Advertencia!',
+	      html: 'La longitud mínima de la palabra clave es de 2 caracteres',
+	      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+	      imageWidth: 210,
+	      confirmButtonText: 'ACEPTAR',
+	      animation: true
+      });           
+    }else{
+      var nueva_ruta = ruta+page+"/";
+      window.location = nueva_ruta;
+    }
 	}
 }
 
@@ -436,7 +443,14 @@ function verFacetas(facetas,pos){
 		var nueva_ruta = ruta+porcentajes+'/'+page+"/";
 		window.location = nueva_ruta;
 	}else{
-		swal('Advertencia!', 'Debe seleccionar un porcentaje', 'error');
+		Swal.fire({
+	    title: '¡Advertencia!',
+	    html: 'Debe seleccionar un porcentaje',
+	    imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+	    imageWidth: 210,
+	    confirmButtonText: 'ACEPTAR',
+	    animation: true
+    });		
 	}
 }
 
@@ -619,6 +633,13 @@ function obtenerFiltro(ruta,page){
 		window.location = nueva_ruta;
 	}else{
 		//abrirModal('Debe Seleccionar al menos un filtro','alert_descarga','','Ok');
-		swal('Advertencia!', 'Debe Seleccionar al menos un filtro', 'error');
+		Swal.fire({
+      title: '¡Advertencia!',
+      html: 'Debe Seleccionar al menos un filtro',
+      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+      imageWidth: 210,
+      confirmButtonText: 'ACEPTAR',
+      animation: true
+    });		
 	}
 }

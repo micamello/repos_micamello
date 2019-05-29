@@ -225,6 +225,89 @@ display: inline;
 
 /*PANTALLAS PEQUEÑAS*/
 @media screen and (max-width:600px){
+    #btn-pre{
+        margin-top: 0px;
+        font-size: 16px;
+    }
+    .texto-timer{
+        font-size: 18pt;
+        text-align: justify;    
+    }
+    .timer-iconos{
+        font-size: 20pt !important;
+        margin: 0px;
+    }
+    #camello {    
+        height: 80px;
+    }
+    .margenes{
+       margin: 0px 1px 25px 1px; 
+    }
+    #tipeo{
+        height: 270px;
+        margin-bottom: 20px;
+    }
+    #ancho-150{
+        width: 110%;
+    }
+    .logo-1 img{
+        height: 88%;
+        padding: 0px;
+        margin-top: -1px;
+        width: auto;
+    }
+    .izq{
+        border: 1px solid #204478
+    }
+    .der{
+        border: 1px solid #204478
+    }   
+    .cen{
+        border: 1px solid #204478
+    }
+     .second-text-timer{
+        font-size: 10pt;
+     }
+    .mover-boton{
+        margin-top: 10pt;
+    }
+    .canea-text-modal{
+        font-size: 40pt;
+    }
+    .dis-mov{
+        display: block;
+    }
+    .solo-texto{
+        font-size: 14px;
+    }
+    .btn-min-light{
+      padding: 10px 10px;
+    }
+    .btn-blue{
+        padding: 10px 10px;
+    }
+    #btn-verde{
+        padding: 10px;
+    }
+    .btn-naranja{
+        padding: 10px 10px;
+    }
+     .timer{
+        font-size: 70pt;
+    }
+    #back-countdiown li {
+        display: inline;
+    }
+    #icono-mover {
+        position: inherit;
+    }
+    #texto-edit{
+        font-size: 12pt;
+    }
+    .timer-bloque{
+        text-align: right;
+        padding-top: 20px;
+    }
     #back-countdiown li{
        margin-bottom: 20px;
     }
@@ -238,17 +321,52 @@ display: inline;
         font-size: 10pt;
     }
     .imagen{
-    width: 40px;
-    }
-    .canea-text-modal{
-        font-size: 40pt;
+        width: 40px;
     }
     .padding-5{
-        padding: 5px 0px;
+    padding: 5px 0px;
+    }
+    #boton-blue{
+        font-size: 10px;
+        padding: 10px 20px;
+    }
+    .img-res2{
+        width: 70px;
+    }
+
+}
+
+/*PANTALLAS MEDIANAS*/
+@media only screen and (max-width:1000px) and (min-width:481px){
+    #btn-pre{
+        margin-top: 20px;
+    }
+    .texto-timer{
+        font-size: 25pt;
+        text-align: center;    
+    }
+     .timer-iconos{
+        font-size: 25pt !important;
+        margin: 0px 20px;
+    }
+    #camello {    
+        height: 80px;
+    }
+    .margenes{
+        margin: 0px 18px 25px 18px;
+    }
+    #tipeo{
+        height: 150px;
+        margin-bottom: 25px;
+    }
+    #ancho-150{
+        width: 110px;
+    }
+    .qs-mv{        
+        margin-top: 80px;
     }
     .izq{
         border: 1px solid #204478
-
     }
     .der{
         border: 1px solid #204478
@@ -256,21 +374,19 @@ display: inline;
     .cen{
         border: 1px solid #204478
     }
-    .btn-min-light{
-        padding: 10px 10px;
+    .mover-boton{
+        margin-top: -25pt;
     }
-
-    .btn-blue{
-        padding: 10px 10px;
+    .canea-text-modal{
+        font-size: 100pt;
     }
-}
-
-/*PANTALLAS MEDIANAS*/
-@media only screen and (max-width:1000px) and (min-width:481px){
-    .qs-mv{
-        margin-top: 80px;
+    #boton-blue{
+        font-size: 14px;
+        padding: 10px 20px;
     }
-
+    .img-res2{
+        width: 100px;
+    }
     #prox{
         font-size: 50pt;
     }
@@ -282,48 +398,88 @@ display: inline;
     .imagen{
         width: 40px;
     }
-    .canea-text-modal{
-        font-size: 100pt;
-
+    .timer-bloque{
+        text-align: right;
+        padding-top: 20px;
     }
-    .izq{
-        border: 1px solid #204478
-
-    }
-    .der{
-        border: 1px solid #204478
-    }
-    .cen{
-        border: 1px solid #204478
-    }
-
-    .btn-min-light{
+    .btn-min-light {
         padding: 10px 30px;
     }
-
     .btn-blue{
+        padding: 10px 30px;
+    }
+    .btn-naranja{
+        padding: 10px 30px;
+    }
+    #btn-verde{
         padding: 10px 30px;
     }
 }
 /*PANTALLAS GRANDES*/
 @media only screen and (min-width:1000px){
 
-    .qs-mv{
+    .img-res2{
+        width: 100px;
+    }
+    #altura-detalle{
+        height: 300px;
+    }
+    .btn-min-light {
+        padding: 10px 30px;
+    }
+    .btn-blue{
+        padding: 10px 30px;
+    }
+    #btn-verde{
+        padding: 5px 30px;
+    }
+    .btn-naranja{
+        padding: 10px 30px;
+    }
+    #btn-pre{
+        margin-top: 20px;
+    }
+    .texto-timer{
+        font-size: 30pt;
+        text-align: center;    
+    }    
+    .timer-iconos{
+        font-size: 30pt !important;
+        margin: 0px 20px;
+    }
+    #camello {    
+        height: 120px;
+    }
+    .margenes{
+        margin: 0px 18px 25px 18px;
+    }
+    #tipeo{
+        height: 200px;
+        margin-bottom: 25px;
+    }
+    #ancho-150{
+        width: 150px;
+    }
+    .qs-mv{    
         margin-top: 80px;
     }
-
+    .second-text-timer{
+        font-size: 20pt;
+    }
+    .mover-boton{
+        margin-top: -30pt;
+    }
+    .canea-text-modal{
+        font-size: 150pt;
+        margin-top: -40px;
+    }
     #bloque-car{
         height: 170px;
     }
-   .vel-titulo{
-    font-size: 30pt;
-}
-.canea-text-modal{
-        font-size: 150pt;
-
-        margin-top: -40px;
+    .vel-titulo{
+        font-size: 40pt;
     }
-#btn-rojo{
+    #btn-rojo{
         font-size: 16pt;
     }
     .texto-canea{
@@ -332,15 +488,6 @@ display: inline;
     .imagen{
         width: 70px;
     }
-
-    .btn-min-light{
-        padding: 10px 30px;
-    }
-
-    .btn-blue{
-        padding: 10px 30px;
-    }
-
 }
 
 
@@ -1673,6 +1820,7 @@ div[class*='col-'] {
     color: #989899;
     cursor: not-allowed;
 }
+<<<<<<< HEAD
 .loaderMic>.LogMic{
     display: flex;
     justify-content: center;
@@ -1706,11 +1854,110 @@ div[class*='col-'] {
     opacity: 0.5;
 }
 
-.no{
+/*.no{
   color: #fc3535 !important;
   font-size: 22px !important;
-}
+}*/
 
+/**NUEVOS CAMBIOS 27/MAYO **/
+.margenes{
+    background-color: #333333;
+    border-radius: 10px;
+}
+.tit-pol{
+    font-size: 22px;
+    font-weight: 700;
+    color: #4b5052;
+    text-transform: uppercase;
+}
+.tit-pol-2{
+    font-size: 18px;
+    font-weight: 700;
+    color: #4b5052;
+    text-transform: uppercase;
+}
+.politica{
+    text-align: justify;
+    margin: 30px 0px;
+}
+.subt-pol{
+    font-size: 16px;
+    font-weight: bold;
+    color: #4b5052
+}
+#planes-promo {
+    background-color: #ec3131;
+    text-transform: uppercase;
+    color: white;
+    padding: 0px;
+    font-size: 24pt;
+    font-weight: bold;
+}
+.price-was {
+    padding-top: 10px;
+    color:#999;
+    text-decoration: line-through;
+}
+.descuento {
+    width: 90px;
+    height: 90px;
+    font-weight: bold;
+    float: left;
+    color:white;
+}
+.promo-1{
+    font-size: 20px;
+    line-height: 14px;
+    padding-top: 30px;
+    margin: 0px;
+}
+.promo-2{
+    font-size: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+.btn-red{
+    border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #ec3131;
+    color: white;
+    text-transform: uppercase;
+    padding: 10px 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 2px solid transparent;
+}
+.btn-red a{
+    color: white;
+    text-decoration: none;
+}
+.btn-red:hover{
+    color: #ec3131;
+    border: 2px solid #ec3131;
+    background-color: transparent;
+    text-decoration: none;
+}
+.btn-red:hover a{
+    color: #ec3131;
+    text-decoration: none;
+ }
+
+.plan-interno-info {
+    max-width: 280px;
+    width: 100%;
+    margin: 0px auto;
+    border: none;
+    min-height: 100%;
+}
+.tabla-planes th{
+    padding: 0px;
+    background-color: #204478; 
+    font-size: 14pt; 
+    vertical-align:top; 
+    color: white; 
+    text-transform: uppercase
+}
 .campo{
   color: #4b5052;
   font-family: 'Roboto';
@@ -1726,5 +1973,69 @@ div[class*='col-'] {
 .errorContainer{
     position: relative;
     padding: 5px 0 5px 0;
->>>>>>> VP
+}
+
+.no{
+  color: #fc3535 !important;
+  font-size: 22px !important;
+}
+.titulo-detalle{
+    color: #4b98dd;
+    text-transform: uppercase;
+    text-align: center;
+}
+.detalles-subt{
+    text-align: center;
+    color: #6b6b6b;
+    margin-bottom: 20px;
+}
+.empresa-detalle{
+    text-transform: uppercase;
+}
+.resumen{
+    background-color: #f2f2f2;
+    padding: 20px;
+    margin: 20px 0px;
+}
+.resumen i{
+    padding-right: 10px;
+    font-size: 18px;
+    margin-top: -10px;
+}
+.publ-img{
+    margin: 20px 0px;
+}
+.tit-detalle-1{
+    font-size: 14pt;
+    text-align: center;
+    font-weight: bold;
+}
+.titulo-postulaciones-pendiente{    
+    text-transform: uppercase;
+    color: white;
+    font-family: ‘Roboto’;
+    font-size: 20pt;
+    background-color: #909090;
+    text-align: center;
+    border-radius: 10px 10px 0px 0px;
+}
+.btn-naranja{
+    border-color: transparent;
+    font-family: ‘Roboto’;
+    font-size: 16pt;
+    background-color: #f17525;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 20px;
+    border: 2px solid transparent;    
+    line-height: normal;
+    cursor: pointer;
+}
+.btn-naranja:hover{
+    color: #f17525;
+    border: 2px solid #f17525;
+    background-color: transparent;
+    text-decoration: none;
+>>>>>>> 3ab7498ae01fd0896bb0f97da4e7a3ac0b03ac25
 }

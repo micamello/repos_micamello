@@ -7,6 +7,7 @@ class Vista {
       
     $sess_err_msg = self::obtieneMsgError();
     $sess_suc_msg = self::obtieneMsgExito();
+    $sess_not_msg = self::obtieneMsgNotif();
     $menu = self::obtieneMenu($deshabilitarmenu);
     if( !$sess_err_msg ){
       $sess_err_msg = '';
@@ -14,6 +15,9 @@ class Vista {
     if (!$sess_suc_msg){
       $sess_suc_msg = '';
     } 
+    if (!$sess_not_msg){
+      $sess_not_msg = '';
+    }
     ob_start();
     if (!empty ($cabecera)){      
       require RUTA_VISTA . "html/". $cabecera . '.php';
@@ -33,18 +37,15 @@ class Vista {
 
   public static function display($pagina, $template_vars = array()){    
     if (!empty($template_vars))
-        extract($template_vars);
-    
+      extract($template_vars);    
     ob_start();
-
     $ruta = RUTA_VISTA . "html/". $pagina . '.php';
     if(file_exists($ruta) ){
-        require $ruta;       
+      require $ruta;       
     }    
     else{
-        echo 'Esta pagina no existe : '. $pagina;  
-    }
-        
+      echo 'Esta pagina no existe : '. $pagina;  
+    }        
     $to_return = ob_get_clean();
     return $to_return;
   }
@@ -67,6 +68,17 @@ class Vista {
       $msg = str_replace (array("\r\n", "\n", "\r"), '', $msg);
       $msg = htmlentities($msg, ENT_QUOTES, 'UTF-8');
       unset($_SESSION['mostrar_exito']);
+    }
+    return $msg;
+  } 
+
+  private static function obtieneMsgNotif(){
+    $msg = "";    
+    if( isset($_SESSION['mostrar_notif']) && !empty($_SESSION['mostrar_notif']) ){
+      $msg = $_SESSION['mostrar_notif'];
+      $msg = str_replace (array("\r\n", "\n", "\r"), '', $msg);
+      $msg = htmlentities($msg, ENT_QUOTES, 'UTF-8');
+      unset($_SESSION['mostrar_notif']);
     }
     return $msg;
   }  
