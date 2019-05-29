@@ -1,0 +1,95 @@
+[2019/05/29 11:09:55] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:09:55] SQL Query: SELECT * FROM mfo_genero
+[2019/05/29 11:09:55] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/29 11:09:55] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 11:29:04] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:29:04] SQL Query: SELECT * FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com'
+[2019/05/29 11:30:24] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:30:24] SQL Query: SELECT * FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com'
+[2019/05/29 11:30:33] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:30:33] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/05/29 11:30:33] eder
+[2019/05/29 11:30:51] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:30:51] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/05/29 11:30:51] eder
+[2019/05/29 11:30:51] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:30:51] SQL Query: SELECT * FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com'
+[2019/05/29 11:30:52] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:30:52] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/05/29 11:30:52] eder
+[2019/05/29 11:31:03] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:31:03] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/05/29 11:31:03] eder
+[2019/05/29 11:31:04] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com'
+[2019/05/29 11:31:04] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/05/29 11:31:04] eder
+[2019/05/29 11:31:04] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com'
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661'
+[2019/05/29 11:31:04] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'ederpozo'
+[2019/05/29 11:31:04] SQL Trans: START TRANSACTION
+[2019/05/29 11:31:04] SQL execute: INSERT INTO mfo_usuario_login (tipo_usuario,username,password,correo,dni,tipo_registro) VALUES ('1','ederpozo','525a7953a3ccadd755defc7207fe4bbf','edervpozo@gmail.com','0706715661','2')
+[2019/05/29 11:31:04] SQL Query: select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = 39 limit 1;
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/05/29 11:31:04] SQL execute: INSERT INTO mfo_usuario (telefono,nombres,apellidos,fecha_nacimiento,fecha_creacion,estado,term_cond,id_ciudad,id_nacionalidad,tipo_doc,id_escolaridad,id_genero,id_estadocivil,id_situacionlaboral,id_usuario_login) VALUES ('0968597677','eder','pozo','1994-03-13','2019-05-29 11:31:04','0','1','1','39','2','1','1','1','1','1553')
+[2019/05/29 11:31:04] SQL Trans: COMMIT
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'REGISTRO_USUARIO' LIMIT 1
+[2019/05/29 11:31:04] SQL Trans: ROLLBACK
+[2019/05/29 11:31:04] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_genero
+[2019/05/29 11:31:04] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/05/29 11:31:04] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 11:51:34] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:51:34] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 11:51:37] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:51:37] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 11:51:49] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:51:49] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 11:51:49] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 11:51:49] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 11:51:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 11:54:51] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:54:51] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 11:54:51] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 11:54:51] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 11:57:47] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:57:47] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 11:57:47] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 11:57:47] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 11:59:32] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:59:32] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 11:59:32] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 11:59:32] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 11:59:33] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 11:59:42] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:59:42] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 11:59:42] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 11:59:42] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 11:59:51] Utils::createSession empezo una nueva sesion
+[2019/05/29 11:59:51] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 11:59:51] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 11:59:51] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 11:59:52] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 12:00:34] Utils::createSession empezo una nueva sesion
+[2019/05/29 12:00:34] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 12:00:34] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 12:00:34] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 12:00:35] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 12:01:46] Utils::createSession empezo una nueva sesion
+[2019/05/29 12:01:46] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 12:01:46] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 12:01:46] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
+[2019/05/29 12:01:47] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/05/29 12:01:58] Utils::createSession empezo una nueva sesion
+[2019/05/29 12:01:58] SQL Query: SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = 'edervpozo@gmail.com' LIMIT 1
+[2019/05/29 12:01:58] SQL Query: SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = '1553'
+[2019/05/29 12:01:58] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'RECUPERACION_CONTRASENA' LIMIT 1
