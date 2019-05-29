@@ -174,6 +174,7 @@ if($('#tipoDoc').length){
 		var textoSelect = $(this).children('option:selected').text();
 		var docCampo = $('#documentoCandEmp');
 		if($(this).val() != ""){
+			docCampo.siblings('label').html('Número de '+ textoSelect +' <span class="no">*</span>');
 			docCampo.attr('placeholder', "Número de "+textoSelect+" *");
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($(this).val());
@@ -451,6 +452,7 @@ if(tipousuario == 1){
 		var textoSelect = $('#tipoDoc').children('option:selected').text();
 		var docCampo = $('#documentoCandEmp');
 		if($('#tipoDoc').val() != ""){
+			docCampo.siblings('label').html('Número de '+ textoSelect +' <span class="no">*</span>');
 			docCampo.attr('placeholder', "Número de "+textoSelect+" *");
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($('#tipoDoc').val());
@@ -751,29 +753,32 @@ function searchAjax(obj){
 }
 
 function crearMensajeError(obj, mensaje){
+	var mensajeError = $('<p></p>');
 	var diverror = $(obj).prev();
 	if(obj.attr('id') == "password_1" || obj.attr('id') == "password_2"){
 		diverror = obj.parent().prev();
 	}
 	if(obj.attr('id') == "terminosCond"){
-		diverror = obj.prev();
+		diverror = obj.parent().find('div');
 	}
 	eliminarMensajeError(obj);
-	diverror.addClass('errorClass');
-	diverror.text(mensaje);
+	mensajeError.addClass('errorClass');
+	mensajeError.text(mensaje);
+	diverror.append(mensajeError);
 }
 
 function eliminarMensajeError(obj){
-	var diverror = $(obj).prev();
+	var diverror = obj.parent().find('div')[0];
+	// console.log(obj.parent().find('div')[0]);
+	// var diverror = $(obj).prev();
 	if(obj.attr('id') == "password_1" || obj.attr('id') == "password_2"){
-		diverror = obj.parent().prev();
+		// diverror = diverror.parent();
+		diverror = obj.parent().parent().find('div')[0];
 	}
-	if(obj.attr('id') == "terminosCond"){
-		// diverror = obj.parents(':eq(1)').prev();
-		diverror = obj.prev();
-	}
-	diverror.removeClass('errorClass');
-	diverror.text('');
+	diverror.innerHTML = "";
+	// if(obj.attr('id') == "terminosCond"){
+	// 	diverror = obj.parent().find('div');
+	// }
 }
 
 function habilitarCampos(id){
@@ -862,7 +867,9 @@ function habilitarCampos(id){
 		tel1ConEmp.parent().css('display', 'none');
 		tel2ConEmp.parent().css('display', 'none');
 		$('#socialRegistro').css('display', '');
+		documentoCandEmp.siblings('label').html('Documento <span class="no">*</span>');
 		documentoCandEmp.attr('placeholder', 'Documento *');
+		celularCandEmp.siblings('label').html('Celular <span class="no">*</span>');
 		celularCandEmp.attr('placeholder', 'Celular *');
 		if($('#tipoDoc').val() != ""){
 			$('#documentoCandEmp').prop('disabled', false);
@@ -887,7 +894,9 @@ function habilitarCampos(id){
 		tel1ConEmp.parent().css('display', '');
 		tel2ConEmp.parent().css('display', '');
 		$('#socialRegistro').css('display', 'none');
+		documentoCandEmp.siblings('label').html('Ruc <span class="no">*</span>');
 		documentoCandEmp.attr('placeholder', 'Ruc *');
+		celularCandEmp.siblings('label').html('Teléfono <span class="no">*</span>');
 		celularCandEmp.attr('placeholder', 'Teléfono *');
 	}
 }
@@ -896,6 +905,9 @@ $('#registroFormulario').on('submit', function(event){
 	validarOnSubmit();
 	if(viewErrors() == false){
 		event.preventDefault();
+	}
+	else{
+		$('.loaderMic').css('display', 'block');
 	}
 });
 
@@ -914,8 +926,9 @@ function resetForm(){
 	});
 	var errorClass = $('.errorClass');
 	$.each(errorClass, function(indice, elemento){
-		$(elemento).removeClass('errorClass');
-		$(elemento).text('');
+		// $(elemento).removeClass('errorClass');
+		// $(elemento).text('');
+		elemento.outerHTML = "";
 	});
 
 	var eyeFontIcon = $('.fa-eye-slash');

@@ -3,13 +3,15 @@
     <h2 class="titulo">Registro de Cuenta</h2>
   </div>
   <br>
-  <p>Seleccione el tipo de cuenta y a continuaci&oacute;n ingrese su informaci&oacute;n correspondiente</p><br>
+  <p style="font-size: 16pt">Seleccione el tipo de cuenta y a continuación ingrese su información correspondiente</p><br>
 </div>
 
 <!--<section id="product" class="inicio">-->
-    <div id="candidato">
-        <div class="container" >
-            <div class="row" id="registro-algo-centro">
+    <div id="registro-algo-centro">
+        <br>
+        <br>
+        <div class="container">
+            <div class="row">
                 <div class="col-md-10 col-md-offset-1" id="inicio-cuadro">
                      <div class="text-right">
                          <div class="btn-group controlTipo">
@@ -25,15 +27,20 @@
                             <input type="hidden" name="formularioRegistro" id="formularioRegistro" value="1">
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Nombre <span class="no"> *</span></label>
+                                <div class="errorContainer"></div>
                                 <input type="text" name="nombresCandEmp" class="espacio form-control" id="nombresCandEmp" placeholder="Nombres *">
                             </div>
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Apellido <span class="no"> *</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <input type="text" class="espacio  form-control noautofill" placeholder="Apellidos *" name="apellidosCand" id="apellidosCand" readonly/>
                             </div>
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Sector industrial <span class="no"> *</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <select id="sectorind" name="sectorind" class="espacio form-control">
                                     <option value="" selected="selected" disabled="disabled">Sector industrial *</option>
                                     <?php 
@@ -47,17 +54,23 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Correo <span class="no"> *</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <input type="text" class="espacio form-control noautofill" readonly placeholder="Correo *" id="correoCandEmp" name="correoCandEmp" />
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
-                                <input type="text" class="espacio form-control noautofill" readonly placeholder="Célular *" id="celularCandEmp" name="celularCandEmp"/>
+                                <label class="campo">Celular <span class="no"> *</span></label>
+                                <div class="errorContainer"></div>
+                                
+                                <input type="text" class="espacio form-control noautofill" readonly placeholder="Celular *" id="celularCandEmp" name="celularCandEmp"/>
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Tipo documentación <span class="no">*</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <select class=" espacio form-control" id="tipoDoc" name="tipoDoc">
                                     <option value="">Tipo documentación *</option>
                                         <?php 
@@ -71,19 +84,18 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Documento <span class="no"> *</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <input type="text" class="espacio form-control" placeholder="Documento *" id="documentoCandEmp" name="documentoCandEmp"/>
                             </div>
 
-                            <div class="col-md-6 form-group">
-                                <div></div>
-                                <input placeholder="Fecha de Nacimiento *" type="text" data-field="date" class="espacio form-control" name="fechaNac" id="fechaNac">
-                                <div id="fechaShow"></div>
-                                <div id="errorFechaUsuario"></div>
-                            </div>
+                            
 
-                            <div class="col-md-6 form-group" id="altura-44">
-                                <div></div>
+                            <div class="col-md-6 form-group">
+                                <label class="campo">Género <span class="no">*</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <select class="espacio form-control" name="generoUsuario" id="generoUsuario">
                                     <option value="" selected="selected" disabled="disabled">Género *   </option>
                                     <?php 
@@ -97,7 +109,18 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Fecha nacimiento <span class="no">*</span></label>
+                                <div class="errorContainer"></div>
+                                
+                                <input placeholder="Fecha de Nacimiento *" type="text" data-field="date" class="espacio form-control" name="fechaNac" id="fechaNac">
+                                <div id="fechaShow"></div>
+                                <!-- <div id="errorFechaUsuario"></div> -->
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label class="campo">Contraseña <span class="no">*</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-eye"></i></div>
                                     <input type="password" class="espacio form-control noautofill" placeholder="Contraseña *" value="" id="password_1" name="password_1"/ readonly>
@@ -105,7 +128,9 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Repita contraseña<span class="no">*</span></label>
+                                <div class="errorContainer"></div>
+                                
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-eye"></i></div>
                                     <input type="password" class="espacio form-control noautofill"  placeholder="Repita Contraseña *" id="password_2" name="password_2"/ readonly>
@@ -117,23 +142,27 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Nombres <span class="no">*</span></label>
+                                <div class="errorContainer"></div>
                                 <input type="text" class="espacio form-control" placeholder="Nombres *" id="nombreConEmp" name="nombreConEmp"/>
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Apellidos<span class="no">*</span></label>
+                                <div class="errorContainer"></div>
                                 <input type="text" class="espacio form-control noautofill" placeholder="Apellidos *" id="apellidoConEmp" name="apellidoConEmp" readonly/>
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
+                                <label class="campo">Celular<span class="no">*</span></label>
+                                <div class="errorContainer"></div>
                                 <input type="text" class="espacio form-control noautofill" placeholder="Celular *" id="tel1ConEmp" name="tel1ConEmp" readonly/>
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <div></div>
-                                <input type="text" class="espacio form-control noautofill" placeholder="Convencional (opcional) *" id="tel2ConEmp" name="tel2ConEmp" readonly/>
+                                <label class="campo">Convencional <span class="no"></span></label>
+                                <div class="errorContainer"></div>
+                                <input type="text" class="espacio form-control noautofill" placeholder="Convencional (opcional)" id="tel2ConEmp" name="tel2ConEmp" readonly/>
                             </div>
 
 
@@ -142,7 +171,7 @@
                                     <div class="checkbox subt-registro">
 
                                         <label>
-                                            <div></div>
+                                            <div class="errorContainer"></div>
                                             <input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He le&iacute;do y acepto las <a class="link" href="<?php echo PUERTO.'://'.HOST; ?>/docs/politicas_de_privacidad1.pdf" target="_blank">pol&iacute;ticas de privacidad</a> y <a class="link" href="<?php echo PUERTO.'://'.HOST; ?>/docs/terminos_y_condiciones1.pdf" target="_blank">t&eacute;rminos y condiciones</a>
                                         </label>
                                     </div>
