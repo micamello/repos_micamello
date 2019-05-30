@@ -59,7 +59,8 @@ class Controlador_Publicar extends Controlador_Base {
                 $GLOBALS['db']->beginTrans();
                   $this->guardarDatosOferta($validados);
                 $GLOBALS['db']->commit();
-                $_SESSION['mostrar_exito'] = 'Su oferta se ha publicado correctamente'; 
+                $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
+                $_SESSION['mostrar_exito'] = 'Su oferta se ha publicado correctamente, debe esperar un m\u00E1ximo de '.$tiempo.' horas para que el administrador apruebe el nuevo contenido.'; 
                 $url = "vacantes/"; 
          } catch (Exception $e) {
                 $url = "publicar/";
@@ -296,10 +297,7 @@ class Controlador_Publicar extends Controlador_Base {
                          'id_empresa_plan'=>$datos['id_empresa_plan'],
                          'id_tipolicencia'=>$datos['licenciaOf']
                           );
-
-      print_r($datosOferta);
-      Utils::log($datosOferta['descripcion']);
-      // exit();
+          
       if(!Modelo_Oferta::guardarOferta($datosOferta)){
         throw new Exception("Ha ocurrido un error al guardar los datos de la oferta");
       }

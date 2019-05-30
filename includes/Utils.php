@@ -40,6 +40,7 @@ class Utils{
   static public function doRedirect( $goto ){    
     $GLOBALS['db']->close();    
     header("Location: ".$goto);    
+    exit;    
   }
   
   static public function es_correo_valido($email){
@@ -69,8 +70,8 @@ class Utils{
           $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
         }
       }
-    }    
-    return $mail->send(); 
+    }      
+    return $mail->send();
   }
 
   public static function encriptar($texto){      

@@ -20,7 +20,9 @@ class Controlador_Velocimetro extends Controlador_Base {
       case 'guardarGrafico':
         $imagen = Utils::getParam('imagen','',$this->data);
         if (!empty($imagen)){
-          Modelo_Usuario::actualizarGrafico($_SESSION['mfo_datos']['usuario']['id_usuario']);          
+          if (Modelo_Usuario::actualizarGrafico($_SESSION['mfo_datos']['usuario']['id_usuario'],$imagen)){
+            $_SESSION['mfo_datos']['usuario']['grafico'] = $imagen; 
+          }
         }
       break;  
       default:
@@ -68,16 +70,17 @@ class Controlador_Velocimetro extends Controlador_Base {
       $msj2 = '¡FELICIDADES! Acaba de completar el TEST CANEA. Ahora usted forma parte del presente y del futuro de las empresas, siendo el CANDIDATO IDEAL.';
       $textoBoton = "VER RESULTADOS INFORME COMPLETO";
       $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
-      $result_faceta = Modelo_Usuario::obtenerFacetasxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
-      $str_grafico = '';
 
-      /*print_r($result_faceta);
-      $reg_ultimo = array_shift($result_faceta);
-      foreach($result_faceta as $rs){
-        $str_grafico .= $rs["literal"].": ".$rs["valor"].", ";
+      if (!isset($_SESSION['mfo_datos']['usuario']['grafico']) || empty($_SESSION['mfo_datos']['usuario']['grafico'])){
+        $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+        $str_grafico = '';
+        $reg_ultimo = array_shift($result_faceta);
+        foreach($result_faceta as $rs){
+          $str_grafico .= $rs["literal"].": ".$rs["valor"].",".$rs["valor"]."|";
+        }
+        $str_grafico .= $reg_ultimo["literal"].": ".$reg_ultimo["valor"].",".$reg_ultimo["valor"];       
+        $tags["val_grafico"] = $str_grafico;
       }
-      $str_grafico .= $reg_ultimo["literal"].": ".$reg_ultimo["valor"];*/
-      $tags["val_grafico"] = '';
     }
 
     $tags["valorporc"] = $valorporc;
