@@ -296,10 +296,7 @@ class Controlador_Publicar extends Controlador_Base {
                          'id_empresa_plan'=>$datos['id_empresa_plan'],
                          'id_tipolicencia'=>$datos['licenciaOf']
                           );
-
-      print_r($datosOferta);
-      Utils::log($datosOferta['descripcion']);
-      // exit();
+          
       if(!Modelo_Oferta::guardarOferta($datosOferta)){
         throw new Exception("Ha ocurrido un error al guardar los datos de la oferta");
       }

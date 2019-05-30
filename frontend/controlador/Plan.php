@@ -156,7 +156,8 @@ class Controlador_Plan extends Controlador_Base {
         //datos para transferencia bancaria
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          
         $tags["template_js"][] = "DniRuc_Validador";        
-        $tags["template_js"][] = "metodospago";              
+        $tags["template_js"][] = "metodospago";   
+        $tags["template_js"][] = "alignet";   
         Vista::render('metodos_pago', $tags);      
       }       
     }

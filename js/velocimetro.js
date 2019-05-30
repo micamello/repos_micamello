@@ -1,6 +1,6 @@
 $(document).ready(function(){
-
-    var datos = $('#datosGrafico').val();
+    
+    /*var datos = $('#datosGrafico').val();
     datos = datos.split('/');
     
     var arreglo = [['Task', 'Hours per Day']];
@@ -10,6 +10,7 @@ $(document).ready(function(){
     var puerto_host = $('#puerto_host').val();
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawChart);
+
     function drawChart() {
         var data = google.visualization.arrayToDataTable(arreglo);
 
@@ -34,8 +35,9 @@ $(document).ready(function(){
         chart_1.draw(data, options);
 
         var chart_div = document.getElementById('chart_div');
-
+        
         google.visualization.events.addListener(chart_1, 'ready', function () {
+
             $.ajax({
                 type: "POST",
                 url: puerto_host+"/index.php?mostrar=velocimetro&opcion=guardarGrafico",
@@ -50,5 +52,5 @@ $(document).ready(function(){
         });
 
         chart_1.draw(data, options);
-    }
+    }*/
 });
