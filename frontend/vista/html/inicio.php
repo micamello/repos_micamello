@@ -219,7 +219,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="banner-light col-md-6">¡Únete hoy y encuentra tu trabajo ideal!</div>
-          <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/registro/";?>">Registrate</a></button>
+          <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/registro/";?>">Registrarse</a></button>
           <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST."/login/";?>">Ingresar</a></button>
         </div>
       </div>

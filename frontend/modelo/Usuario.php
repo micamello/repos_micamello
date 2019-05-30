@@ -1171,7 +1171,7 @@ WHERE
         WHERE pf.id_usuario = ? and pf.id_faceta in('.$facetas.')
         AND b.id_puntaje = d.id_puntaje;';
     }
-//echo $sql;
+    //echo $sql;
     return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
   }
 }  

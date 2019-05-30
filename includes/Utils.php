@@ -40,8 +40,6 @@ class Utils{
   static public function doRedirect( $goto ){    
     $GLOBALS['db']->close();    
     header("Location: ".$goto);    
-    exit;
-    Utils::log("mostrar_notif 0: ".$_SESSION["mostrar_notif"]);
   }
   
   static public function es_correo_valido($email){
