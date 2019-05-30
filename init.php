@@ -32,9 +32,7 @@ if(count($_COOKIE) != 0){ $_COOKIE = filter_input_array(INPUT_COOKIE, FILTER_SAN
 //	$_SERVER[$key] = ($key != 'HTTP_HOST') ? filter_input(INPUT_SERVER,$key,FILTER_SANITIZE_STRING) : $server;
 //}
 
-$_SUBMIT = array_merge($_POST, $_GET);  
-
-//echo $_SESSION["mostrar_notif"]; exit;
+$_SUBMIT = array_merge($_POST, $_GET);       
 
 Utils::createSession(); 
 ?>

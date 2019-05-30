@@ -75,7 +75,6 @@
 <?php
 if(isset($_SESSION['mfo_datos']['usuario'])){
   $notificaciones = Modelo_Notificacion::notificacionxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
-
   if(!empty($notificaciones)){ ?>
     <input type="hidden" name="msg_notificacion" id="msg_notificacion" value="1">
     <div class="modal fade" id="notificaciones" tabindex="-1" role="dialog" aria-labelledby="notificaciones" aria-hidden="true" data-backdrop="static" data-keyboard="false">
