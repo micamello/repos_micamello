@@ -20,9 +20,9 @@ class Controlador_Perfil extends Controlador_Base
 
         $opcion = Utils::getParam('opcion', '', $this->data);
         switch ($opcion) {
-            case 'guardarGrafico':
-               $_SESSION['mfo_datos']['grafico'] = $_POST['imagen'];
-            break;
+            //case 'guardarGrafico':
+            //   $_SESSION['mfo_datos']['grafico'] = $_POST['imagen'];
+            //break;
             case 'buscarDni':
                 $dni = Utils::getParam('dni', '', $this->data); 
                 //Permite determinar si el documento ingresado ya esta registrado en base de datos

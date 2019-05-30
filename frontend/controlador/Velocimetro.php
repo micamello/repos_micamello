@@ -15,7 +15,19 @@ class Controlador_Velocimetro extends Controlador_Base {
       Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
     }
 
-    $this->mostrarDefault($faceta);     
+    $opcion = Utils::getParam('opcion','',$this->data); 
+    switch($opcion){ 
+      case 'guardarGrafico':
+        $imagen = Utils::getParam('imagen','',$this->data);
+        if (!empty($imagen)){
+          Modelo_Usuario::actualizarGrafico($_SESSION['mfo_datos']['usuario']['id_usuario']);          
+        }
+      break;  
+      default:
+        $this->mostrarDefault($faceta);  
+      break;
+    }
+       
   }
 
   public function mostrarDefault($faceta){    
@@ -56,6 +68,14 @@ class Controlador_Velocimetro extends Controlador_Base {
       $msj2 = 'Ahora formas parte del presente y el futuro de las empresas, siendo el candidato ideal';
       $textoBoton = "Ver Resultados";
       $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
+      $result_faceta = Modelo_Usuario::obtenerFacetasxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+      $str_grafico = '';
+      $reg_ultimo = array_shift($result_faceta);
+      foreach($result_faceta as $rs){
+        $str_grafico .= $rs["literal"].": ".$rs["valor"].", ";
+      }
+      $str_grafico .= $reg_ultimo["literal"].": ".$reg_ultimo["valor"];
+      $tags["val_grafico"] = $str_grafico;
     }
 
     $tags["valorporc"] = $valorporc;
@@ -65,6 +85,7 @@ class Controlador_Velocimetro extends Controlador_Base {
     $tags["msj2"] = $msj2;
     $tags["enlaceboton"] = $enlaceboton;
     $tags["textoBoton"] = $textoBoton;
+    $tags["template_js"][] = "velocimetro";  
 
     Vista::render('velocimetro', $tags);    
   }

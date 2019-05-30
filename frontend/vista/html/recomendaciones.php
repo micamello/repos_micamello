@@ -1,12 +1,10 @@
-<br/><br/>
-<!--<section id="product" class="product">-->
-  <div class="container">
-      <div class="text-center">
-        <h2 class="titulo">Env&iacute;anos tus dudas y sugerencias</h2>
-      </div>
+<section>
+  
+  <div class="text-center">
+    <h2 class="titulo">Env&iacute;anos tus dudas y sugerencias</h2>
   </div>
-  <section class="inicio">
-    <div class="container bloque-gris">
+  
+  <div class="container bloque-gris" style="padding: 0px;">
       <div class="row">
         <div class="col-md-6 col-md-offset-3">
           <div class="" id="inicio-cuadro"> 
@@ -49,6 +47,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+  </div>
+</section>
 <!--</section>-->
+<br><br>

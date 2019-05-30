@@ -1,10 +1,11 @@
 <?php
 class Controlador_Plan extends Controlador_Base {
    
-  public function construirPagina(){
+  public function construirPagina(){    
+    Utils::log("mostrar_notif 2: ".$_SESSION["mostrar_notif"]);
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
-    }
+    }    
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
       Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
                                      $_SESSION['mfo_datos']['usuario']['id_usuario'],
@@ -79,7 +80,7 @@ class Controlador_Plan extends Controlador_Base {
     $tags["template_css"][] = "media-queries";
     // $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
-    $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";          
+    $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";       
     if($tipo == 1){    
       Vista::render($render, $tags); 
     }else{            

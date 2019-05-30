@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row">
     <div class="text-center velocimetro col-md-12 col-sm-12">
@@ -24,4 +23,9 @@
       </center>
     </div>
   </div>
+</div>
+<!--grafico para informe-->
+<input style="display:none" type="text" id="datosGrafico" value="<?php echo (!empty($val_grafico)) ? $val_grafico : ""; ?>" />
+<div class="container" id="Chart_details">
+    <div id='chart_div'></div><div id='g_chart_1' style="width: auto; height: auto;"></div>
 </div>

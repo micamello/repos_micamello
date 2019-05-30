@@ -22,8 +22,8 @@ class Utils{
     return $default;
   }
   
-  static public function createSession(){           
-    Utils::log(__METHOD__ . " empezo una nueva sesion");
+  static public function createSession(){               
+    //Utils::log(__METHOD__ . " empezo una nueva sesion");
     session_name('mfo_datos');
     session_start();      
   } 
@@ -37,10 +37,11 @@ class Utils{
     return $default;
   }
  
-  static public function doRedirect( $goto ){
-    $GLOBALS['db']->close();
-    header("Location: ".$goto);
+  static public function doRedirect( $goto ){    
+    $GLOBALS['db']->close();    
+    header("Location: ".$goto);    
     exit;
+    Utils::log("mostrar_notif 0: ".$_SESSION["mostrar_notif"]);
   }
   
   static public function es_correo_valido($email){

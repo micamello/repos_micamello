@@ -106,7 +106,14 @@ function modal_set(id)
 
 	if (id == null)
 	{
-		alert("Por favor recarge la página");
+		Swal.fire({
+      title: '¡Información!',
+      html: 'Por favor recarge la página',
+      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+      imageWidth: 210,
+      confirmButtonText: 'ACEPTAR',
+      animation: true
+    });		
 	}
 
 	if (id == 1){

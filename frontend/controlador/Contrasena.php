@@ -2,9 +2,7 @@
 class Controlador_Contrasena extends Controlador_Base {
   
   public function construirPagina(){
-
     $opcion = Utils::getParam('opcion','',$this->data);  
-
     switch($opcion){      
       case 'recuperacion':
         if( Modelo_Usuario::estaLogueado() ){
@@ -17,11 +15,9 @@ class Controlador_Contrasena extends Controlador_Base {
          Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
         } 
         if (Utils::getParam('cambiarClave_obligatorio') == 1) {
-
             try{
                 $password_ant = Utils::getParam('password_ant', '', $this->data);
                 $pass_ant = Modelo_Usuario::obtenerPassAnt($_SESSION['mfo_datos']['usuario']['id_usuario_login']);
-
                 if($pass_ant != md5($password_ant)){
                     $tags['data'] = array('password'=>$_POST["password"],'password_two'=>$_POST["password_two"],'password_ant'=>$_POST["password_ant"]);
                     throw new Exception("La contrase\u00F1a anterior no es v\u00E1lida, intente de nuevo");
@@ -61,12 +57,10 @@ class Controlador_Contrasena extends Controlador_Base {
       break;
     }      
   }
-
   public function validarToken(){
     $tags = array();
     try{            
       $respuesta = Utils::getParam('token', '', false);
-
       if (empty($respuesta)){
         throw new Exception("La recuperaci\u00F3n del password es fallida, por favor intente denuevo");
       }  
@@ -139,7 +133,6 @@ class Controlador_Contrasena extends Controlador_Base {
     $tags = array('vista'=>'contrasena');
     Vista::render('recuperar_password', $tags);  
   } 
-
   public function envioCorreo($correo,$nombres,$token){
     $enlace = "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a>"; 
     $email_body = Modelo_TemplateEmail::obtieneHTML("RECUPERACION_CONTRASENA");

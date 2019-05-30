@@ -14,8 +14,14 @@ $(document).ready(function(){
             mostrarDatosPlan(data);
           },
           error: function (request, status, error) {
-            swal('Advertencia!', request.responseText, 'error');
-            //alert(request.responseText);
+            Swal.fire({
+              title: '¡Advertencia!',
+              html: request.responseText,
+              imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+              imageWidth: 210,
+              confirmButtonText: 'ACEPTAR',
+              animation: true
+            });                        
           }                  
         })
       };
@@ -118,7 +124,14 @@ if($('#provinciaOf').length){
 
           },
           error: function (request, status, error) {
-            alert(request.responseText);
+            Swal.fire({
+              title: '¡Información!',
+              html: request.responseText,
+              imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+              imageWidth: 210,
+              confirmButtonText: 'ACEPTAR',
+              animation: true
+            });            
           }                  
         })
       }
@@ -1117,5 +1130,12 @@ function formatearFecha(contenido){
 }
 
 function mensajeErrorAlert(mensaje){
-    swal('Faltan algunos datos!', mensaje, 'error');
+  Swal.fire({
+    title: '¡Faltan algunos datos!',
+    html: mensaje,
+    imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+    imageWidth: 210,
+    confirmButtonText: 'ACEPTAR',
+    animation: true
+  });      
 }

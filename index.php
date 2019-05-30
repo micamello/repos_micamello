@@ -12,7 +12,6 @@ include 'multisitios.php';
 dispatch();
 $GLOBALS['db']->close();
 
-
 function dispatch() {
     global $_SUBMIT;
     $pagina = Utils::getParam('mostrar', 'inicio');
