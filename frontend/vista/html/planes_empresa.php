@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="container">
     <div class="col-md-12">
-      <div><h2 class="titulo text-center">Mis Planes</h2></div>
+      <div><h2 class="titulo text-center">Planes</h2></div>
       <br>
     </div>
 
@@ -70,13 +70,12 @@
                       <input type="hidden" id="gratcmb" value="<?php echo $gratuito["id_plan"];?>">
                       <input type="hidden" id="gratnombre" value="<?php echo utf8_encode($gratuito["nombre"]);?>">
                   <?php }?>
-                  <div id="gratpermisos"></div>  
-                  <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "mensaje();" : 'buttongrat();';?>
+                  <div id="gratpermisos"></div>                    
                   <br>
                   <br>
                   <br>
                   <br> 
-                    <a class="pricebutton btn-blue btn-bottom" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
+                    <a class="pricebutton btn-blue btn-bottom" onclick="buttongrat();"><span class="icon-tag"></span> Suscribirse</a>
                     <p><br></p>
                 </ul>
               <?php } ?> 
@@ -140,12 +139,11 @@
                     <input type="hidden" id="plancmb" value="<?php echo Utils::encriptar($plan["id_plan"]);?>">                      
                     <input type="hidden" id="plannombre" value="<?php echo utf8_encode($plan["nombre"]);?>">
                   <?php } ?>  
-                  <div id="planpermisos"></div>   
-                  <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "mensaje();" : 'buttonplan();';?>
+                  <div id="planpermisos"></div>                     
                   <br>
                   <br>
                   <br>       
-                  <a class="pricebutton btn-blue btn-bottom" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
+                  <a class="pricebutton btn-blue btn-bottom" onclick="buttonplan();"><span class="icon-tag"></span> Suscribirse</a>
                   <p><br></p>
                 </ul>                                    
               <?php } ?> 
@@ -211,13 +209,12 @@
                       <input type="hidden" id="avisocmb" value="<?php echo $aviso["id_plan"];?>">   
                       <input type="hidden" id="avisonombre" value="<?php echo utf8_encode($aviso["nombre"]);?>">
                   <?php } ?>  
-                  <div id="avisopermisos"></div>
-                  <?php $habilitado = (empty($_SESSION['mfo_datos']['planes'])) ? "buttonavisograt();" : 'buttonaviso();';?>
+                  <div id="avisopermisos"></div>                  
                   <br>
                   <br>
                   <br>
                   <br> 
-                  <a class="pricebutton btn-blue btn-bottom" onclick="<?php echo $habilitado;?>"><span class="icon-tag"></span> Suscribirse</a>
+                  <a class="pricebutton btn-blue btn-bottom" onclick="buttonaviso();"><span class="icon-tag"></span> Suscribirse</a>
                   <p><br></p>
                 </ul>
               <?php } ?>
@@ -228,6 +225,8 @@
 <?php } ?> 
   </div>
 </div>
+
+
 <!-- Modal -->
 <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
   <div class="modal-dialog" role="document">    

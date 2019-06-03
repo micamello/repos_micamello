@@ -143,7 +143,7 @@ class Proceso_Subscripcion{
       $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
     } 
     $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);       
-    Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,Modelo_Notificacion::ACTIVACION_SUBSCRIPCION);
+    //Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,Modelo_Notificacion::ACTIVACION_SUBSCRIPCION);
     Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
   }
 

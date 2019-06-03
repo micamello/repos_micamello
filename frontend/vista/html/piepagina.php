@@ -87,11 +87,10 @@ if (isset($template_js) && is_array($template_js)){
 <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){          
-          Swal.fire({
-            title: '¡Advertencia!',
+          Swal.fire({            
             text: '".$sess_err_msg."',
             imageUrl: '".PUERTO."://".HOST."/imagenes/wrong-04.png',
-            imageWidth: 210,
+            imageWidth: 75,
             confirmButtonText: 'ACEPTAR',
             animation: true
           });     

@@ -887,7 +887,6 @@ WHERE
     }
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
-
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
@@ -897,7 +896,7 @@ WHERE
       }    
 
       if (empty($infohv)){
-        //$_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
+        $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }   
       
@@ -919,7 +918,7 @@ WHERE
       elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
         Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/'); 
       }
-      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {
+      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {    
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
       } 
       else{           
@@ -932,20 +931,18 @@ WHERE
 
     else{ 
 
-      if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
-        //$_SESSION['mostrar_notif'] = "Debe completar el perfil para continuar";
+      if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
+
+        $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }  
-
-      Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
-
-      //if (isset($planes)){
-        //Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
-      //}
-      //else{
-        //$_SESSION["mostrar_notif"] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";                 
-        //Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
-      //} 
+      if (isset($planes)){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
+      }
+      else{
+        $_SESSION["mostrar_notif"] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";          
+        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+      } 
     }    
   }
   public static function aspSalarial($id_usuario, $id_oferta){
@@ -1162,7 +1159,7 @@ WHERE
   public static function obtenerFacetasxUsuario($id_usuario,$facetas=false){
 
     if($facetas == false){
-      $sql = 'SELECT id_faceta,valor FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ? ORDER BY id_faceta';
+      $sql = 'SELECT id_faceta,valor,literal FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ? ORDER BY id_faceta';
     }else{
       $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
         INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor

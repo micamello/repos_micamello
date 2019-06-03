@@ -35,7 +35,7 @@ class Controlador_Login extends Controlador_Base {
           self::registroCache($_SESSION['mfo_datos']['usuario']);              
         }
         else{
-          throw new Exception("Usuario o Password Incorrectos");
+          throw new Exception("Usuario o contrase\u00F1a incorrectos");
         }         
         
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],

@@ -60,9 +60,11 @@ abstract class Controlador_Base{
                                                       $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
       if (count($_SESSION['mfo_datos']['planes']) <> count($arrplanes)){
         $_SESSION['mfo_datos']['planes'] = $arrplanes;
-        unset($_SESSION['mfo_datos']['actualizar_planes']);       
+        unset($_SESSION['mfo_datos']['actualizar_planes']); 
+        return true;       
       }      
-    }
+    }    
+    return false;
   }
 
   public function linkRedesSociales(){
