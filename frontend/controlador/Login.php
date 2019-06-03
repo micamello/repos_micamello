@@ -54,7 +54,7 @@ class Controlador_Login extends Controlador_Base {
   }
  
   public static function registroSesion($usuario){     
-    $_SESSION['mfo_datos']['usuario'] = $usuario;
+    $_SESSION['mfo_datos']['usuario'] = $usuario;    
     //busqueda de planes activos
     $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"],$usuario["tipo_usuario"]);
     if (!empty($planesactivos) && is_array($planesactivos)){

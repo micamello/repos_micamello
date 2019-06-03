@@ -11,8 +11,10 @@ class Controlador_Perfil extends Controlador_Base
         if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){
             Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
         }
-
-        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
+                
+        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && 
+            (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || 
+             empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){           
           $_SESSION['mostrar_notif'] = "Debe completar el perfil para continuar";        
         } 
 
