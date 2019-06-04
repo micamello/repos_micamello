@@ -14,16 +14,16 @@ function navegador(){
 //   $('.loaderMic').css('display', 'block');
 // });
 
-$(document).ajaxStart(function(){
-  $('.spin').open({ 
-      image: puerto_host+'/imagenes/loader.gif',
-      // color: 'red',
-    });
-});
+// $(document).ajaxStart(function(){
+//   $('.spin').open({ 
+//       image: puerto_host+'/imagenes/loader.gif',
+//       // color: 'red',
+//     });
+// });
 
-$(document).ajaxStop(function(){
-  $('.spin').close();
-});
+// $(document).ajaxStop(function(){
+//   $('.spin').close();
+// });
 
 
 
@@ -60,11 +60,20 @@ function quitarError(campo,id){
     $("#"+id).removeClass('has-error');
 }
 
+
+
 "use strict";
 jQuery(document).ready(function ($) {
-  $('body').css('overflow', 'auto');
-  $('.loaderMic').delay('2').fadeOut( "fast");
+  // console.log();
+  if(window.location.pathname.split("/")[3] != "exito"){
+    $('body').css('overflow', 'auto');
+    $('.loaderMic').delay('2').fadeOut( "fast");
+  }
+
   eventos();
+
+
+
 
     // bannerTel();
 //for Preloader
