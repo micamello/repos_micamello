@@ -40,8 +40,7 @@ class Utils{
   static public function doRedirect( $goto ){    
     $GLOBALS['db']->close();    
     header("Location: ".$goto);    
-    exit;
-    Utils::log("mostrar_notif 0: ".$_SESSION["mostrar_notif"]);
+    exit;    
   }
   
   static public function es_correo_valido($email){
@@ -60,7 +59,7 @@ class Utils{
     $mail->Password = MAIL_PASSWORD;     
     $mail->From = MAIL_CORREO; 
     $mail->FromName = MAIL_NOMBRE;         
-    $mail->SMTPAutoTLS = false;    
+    $mail->SMTPAutoTLS = true;    
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 
@@ -71,8 +70,8 @@ class Utils{
           $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
         }
       }
-    }    
-    return $mail->send(); 
+    }      
+    return $mail->send();
   }
 
   public static function encriptar($texto){      

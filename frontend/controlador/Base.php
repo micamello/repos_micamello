@@ -30,7 +30,7 @@ abstract class Controlador_Base{
         $valor = Utils::getParam($campo,'',$this->data);
         if (is_array($valor)){
           if (count($valor)<=0 && $requerido == 1){
-            throw new Exception("Los campos marcado con asterisco son obligatorios");
+            throw new Exception("Por favor, complete toda la información requerida");
           }         
           foreach($valor as $key=>$val){
             $val = strip_tags($val);
@@ -42,7 +42,7 @@ abstract class Controlador_Base{
         else{
           $valor = trim($valor);
           if ($valor == "" && $requerido == 1){                    
-            throw new Exception("Los campos marcado con asterisco son obligatorios");
+            throw new Exception("Por favor, complete toda la información requerida");
           }
           $valor = strip_tags($valor);
           $valor = str_replace("\r\n","<br>",$valor);
@@ -60,9 +60,11 @@ abstract class Controlador_Base{
                                                       $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
       if (count($_SESSION['mfo_datos']['planes']) <> count($arrplanes)){
         $_SESSION['mfo_datos']['planes'] = $arrplanes;
-        unset($_SESSION['mfo_datos']['actualizar_planes']);       
+        unset($_SESSION['mfo_datos']['actualizar_planes']); 
+        return true;       
       }      
-    }
+    }    
+    return false;
   }
 
   public function linkRedesSociales(){

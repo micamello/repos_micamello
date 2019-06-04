@@ -18,7 +18,7 @@
           <a>
             <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="redes-mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
           </a>
-        <?php }?>   
+        <?php } ?>   
       </div>
       <div class="pie-pag col-md-4" style="padding-left: 30px;
       ">
@@ -68,14 +68,18 @@
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/cookies.js" type="text/javascript"></script>
-<script type="text/javascript" src="<?php echo PUERTO."://".HOST;?>/js/loader.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/loader.js" type="text/javascript"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/sweetalert.v2.js"></script>
-<script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js"></script>
 
 <?php
 if (isset($template_js) && is_array($template_js)){
   foreach($template_js as $file_js){
-    echo '<script type="text/javascript" src="'.PUERTO.'://'.HOST.'/js/'.$file_js.'.js"></script>';
+    if ($file_js == "alignet"){
+      echo '<script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js"></script>';
+    }
+    else{
+      echo '<script type="text/javascript" src="'.PUERTO.'://'.HOST.'/js/'.$file_js.'.js"></script>';
+    }
   }  
 }
 ?>
@@ -84,11 +88,10 @@ if (isset($template_js) && is_array($template_js)){
 <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){          
-          Swal.fire({
-            title: '¡Advertencia!',
+          Swal.fire({            
             text: '".$sess_err_msg."',
             imageUrl: '".PUERTO."://".HOST."/imagenes/wrong-04.png',
-            imageWidth: 210,
+            imageWidth: 75,
             confirmButtonText: 'ACEPTAR',
             animation: true
           });     
@@ -99,8 +102,7 @@ if (isset($template_js) && is_array($template_js)){
 <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){
-          Swal.fire({
-            title: '¡Exitoso!',
+          Swal.fire({            
             text: '".$sess_suc_msg."',
             imageUrl: '".PUERTO."://".HOST."/imagenes/logo-04.png',
             imageWidth: 210,

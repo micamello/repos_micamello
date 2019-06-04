@@ -20,7 +20,9 @@ class Controlador_Velocimetro extends Controlador_Base {
       case 'guardarGrafico':
         $imagen = Utils::getParam('imagen','',$this->data);
         if (!empty($imagen)){
-          Modelo_Usuario::actualizarGrafico($_SESSION['mfo_datos']['usuario']['id_usuario']);          
+          if (Modelo_Usuario::actualizarGrafico($_SESSION['mfo_datos']['usuario']['id_usuario'],$imagen)){
+            $_SESSION['mfo_datos']['usuario']['grafico'] = $imagen; 
+          }
         }
       break;  
       default:
@@ -45,43 +47,39 @@ class Controlador_Velocimetro extends Controlador_Base {
     }
     
     if($faceta == 1){
-      $posibilidades = 'Bajas 20%';
       $valorporc = 20;
       $img = 'vel1.png'; 
-      $msj1 = '¡SIGUE AS&Iacute;!';
-      $msj2 = 'Estas a punto de descubrir tus puntos fuertes y de mejora';
-      $textoBoton = "Continuar";
+      $msj2 = 'Sus posibilidades de estar entre las primeras opciones de selección son pocas. Incremente sus oportunidades. El <b>TEST CANEA</b> tiene mucho más que ofrecerle para que sus opciones aumenten.  ';
+      $textoBoton = "CONTINUAR";
     }
     elseif ($faceta == 2) {
-      $posibilidades = 'Medio 40%'; 
       $valorporc = 40;
       $img = 'vel2.png';
-      $msj1 = 'VAS MUY BIEN!';
-      $msj2 = 'Obtendras resultados beneficiosos para tu carrera profesional';
-      $textoBoton = "Continuar";
+      $msj2 = '¡Excelente! Ahora sus posibilidades se han incrementado. Mejore sus oportunidades al  completar el <b>TEST CANEA</b>. No desespere, recuerde que obtendrá mejores resultados y beneficios para su carrera profesional.';
+      $textoBoton = "VER PLANES";
     }
     else{
-      $posibilidades = 'Alto 100%'; 
       $valorporc = 100;
       $img = 'vel3.png';
-      $msj1 = '¡FELICIDADES!';
-      $msj2 = 'Ahora formas parte del presente y el futuro de las empresas, siendo el candidato ideal';
-      $textoBoton = "Ver Resultados";
+      $msj2 = '¡FELICIDADES! Acaba de completar el TEST CANEA. Ahora usted forma parte del presente y del futuro de las empresas, siendo el CANDIDATO IDEAL.';
+      $textoBoton = "VER INFORME COMPLETO";
       $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
-      $result_faceta = Modelo_Usuario::obtenerFacetasxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
-      $str_grafico = '';
-      $reg_ultimo = array_shift($result_faceta);
-      foreach($result_faceta as $rs){
-        $str_grafico .= $rs["literal"].": ".$rs["valor"].", ";
+
+      if (!isset($_SESSION['mfo_datos']['usuario']['grafico']) || empty($_SESSION['mfo_datos']['usuario']['grafico'])){
+        $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+        $str_grafico = '';
+        $reg_ultimo = array_shift($result_faceta);
+        foreach($result_faceta as $rs){
+          $str_grafico .= $rs["literal"].":".$rs["valor"].",".$rs["valor"]."|";
+        }
+        $str_grafico .= $reg_ultimo["literal"].":".$reg_ultimo["valor"].",".$reg_ultimo["valor"];       
+        $tags["val_grafico"] = $str_grafico;
       }
-      $str_grafico .= $reg_ultimo["literal"].": ".$reg_ultimo["valor"];
-      $tags["val_grafico"] = $str_grafico;
     }
 
     $tags["valorporc"] = $valorporc;
     $tags["posibilidades"] = $posibilidades;
     $tags["img"] = $img;
-    $tags["msj1"] = $msj1;
     $tags["msj2"] = $msj2;
     $tags["enlaceboton"] = $enlaceboton;
     $tags["textoBoton"] = $textoBoton;

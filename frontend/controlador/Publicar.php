@@ -57,6 +57,7 @@ class Controlador_Publicar extends Controlador_Base {
         
          // Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
       // break;
+
       default:
             $this->mostrarDefault();
       break;
@@ -302,8 +303,6 @@ class Controlador_Publicar extends Controlador_Base {
                          'id_empresa_plan'=>$datos['id_empresa_plan'],
                          'id_tipolicencia'=>$datos['licenciaOf']
                           );
-
-      Utils::log($datosOferta['descripcion']);
       if(!Modelo_Oferta::guardarOferta($datosOferta)){
         throw new Exception("Ha ocurrido un error al guardar los datos de la oferta");
       }

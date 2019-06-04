@@ -239,7 +239,7 @@ WHERE
     }
     else{
       $sql = "SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
-                      e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
                      t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, ul.id_usuario_login, ul.correo, 
                      ul.dni, ul.username, ul.tipo_usuario,p.id_pais, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
               FROM mfo_empresa e
@@ -248,9 +248,9 @@ WHERE
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
               INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
               WHERE e.id_empresa = ? AND e.estado = 1";
-    }
-    //echo $sql;
-    return $rs2 = $GLOBALS['db']->auto_array($sql,array($idUsuario)); 
+    }    
+    $rs2 = $GLOBALS['db']->auto_array($sql,array($idUsuario));     
+    return $rs2;
   }
   public static function updateUsuario($data,$idUsuario,$imagen=false,$session_foto,$tipo_usuario){    
     $foto = 0;
@@ -887,6 +887,7 @@ WHERE
     }
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
+
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
@@ -895,8 +896,7 @@ WHERE
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
 
-      if (empty($infohv)){
-        $_SESSION['mostrar_error'] = "Cargar la hoja de vida es obligatorio";
+      if (empty($infohv)){        
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }   
       
@@ -904,21 +904,18 @@ WHERE
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
       
       //si no tengo plan o mi plan no tiene permiso para el tercer formulario, debe tener uno menos del total de test  
-      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){
-        //$_SESSION['mostrar_error'] = "Debe completar el test";        
+      if ((!isset($planes) || !Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario')) && $nrotestxusuario < ($nrotest-3)){        
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
-        //si existe un acceso eliminar la notificacion del acceso
-        
-        //$_SESSION['mostrar_error'] = "Debe completar el test";
+        //si existe un acceso eliminar la notificacion del acceso              
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
       }
       elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
         Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/'); 
       }
-      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {    
+      elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {
         Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
       } 
       else{           
@@ -931,18 +928,11 @@ WHERE
 
     else{ 
 
-      if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
-
-        $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
+      if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){         
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-      }  
-      if (isset($planes)){
-        Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/');
-      }
-      else{
-        $_SESSION["mostrar_notif"] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";          
-        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       } 
+       
+      Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/'); 
     }    
   }
   public static function aspSalarial($id_usuario, $id_oferta){

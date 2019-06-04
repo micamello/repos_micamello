@@ -37,6 +37,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       case 'informeusuario':
 
         $usuario = Modelo_Usuario::existeUsuario($username);
+
         $idusuario = $usuario['id_usuario']; 
         $idPlan = Utils::getParam('idPlan','',$this->data);
         $idPlan = ((!empty($idPlan)) ? Utils::desencriptar($idPlan) : $idPlan);
@@ -61,23 +62,24 @@ class Controlador_GenerarPDF extends Controlador_Base
 
           }else{
             $puedeDescargar = false;
-            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n';
+            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n, por favor adquiera un plan.';
             //$ruta = PUERTO . '://' . HOST . '/vacantes/';
           }
         }
-
-        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-
-          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial'))){
+        
+        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
+          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial'))){                    
             $puedeDescargar = true;
           }else{ 
             $puedeDescargar = false;
-            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n';
+            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n, por favor adquiera un plan.';
             //$ruta = PUERTO . '://' . HOST . '/perfil/';
           }
         }
 
-        if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){
+        
+        if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || 
+           ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){
         
           $result = Modelo_Opcion::datosGraficos2($idusuario,1,$id_empresa); 
           $cantd_facetas = count($result);
@@ -331,11 +333,9 @@ class Controlador_GenerarPDF extends Controlador_Base
     <div id="pagina-4" style="text-align:justify">
       <h2>DESCRIPTORES ';
       if($tipo_informe == 'parcial'){
-        $fuente = 'font-size:30pt;';
         $informe .= 'DEL INFORME PARCIAL</h2>';
         $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
       }else{
-        $fuente = 'font-size:27pt;';
         $informe .= '</h2>';
       }
 
@@ -371,7 +371,7 @@ class Controlador_GenerarPDF extends Controlador_Base
           }else{
 
             if($pos_no_disponible <= 3 && $tipo_informe == 'parcial'){
-              $informe .= '<td style="'.$fuente.'" class="rojo"><b>no disponible</b></td>';
+              $informe .= '<td class="rojo"><b>no disponible</b></td>';
               $pos_no_disponible++;
             }else{
               $informe .= '<td></td>';
@@ -663,12 +663,12 @@ class Controlador_GenerarPDF extends Controlador_Base
       if(!empty($posibilidades)){
         
         if(in_array($datos_descarga['id_usuario'], $descargas)){
-          $mpdf->Output($nombre_archivo, 'I');
+          $mpdf->Output($nombre_archivo, 'D');
         }else{
 
           if(count($descargas) < $posibilidades){
             //Modelo_Descarga::registrarDescargaInforme($datos_descarga['id_usuario'],$datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
-            $mpdf->Output($nombre_archivo, 'I');
+            $mpdf->Output($nombre_archivo, 'D');
           }else{
             $_SESSION['mostrar_error'] = 'Ya agoto su cupo de descargas de informes para esta oferta';
             $enlace = $_SERVER['HTTP_REFERER'];
@@ -680,10 +680,10 @@ class Controlador_GenerarPDF extends Controlador_Base
         if(!in_array($datos_descarga['id_usuario'], $descargas)){
           //Modelo_Descarga::registrarDescargaInforme($datos_descarga['id_usuario'],$datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
         }
-        $mpdf->Output($nombre_archivo, 'I');
+        $mpdf->Output($nombre_archivo, 'D');
       }
     }else{
-      $mpdf->Output($nombre_archivo, 'I');
+      $mpdf->Output($nombre_archivo, 'D');
     }
   }
 
@@ -1079,7 +1079,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $mpdf->WriteHTML($enddoc);
 
         $mpdf->WriteHTML($html);
-        $mpdf->Output($datos['username'].".pdf", 'I');
+        $mpdf->Output($datos['username'].".pdf", 'D');
         // self::informePersonalidad($html, );
   }
 }
