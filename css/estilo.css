@@ -155,7 +155,7 @@ display: inline;
 }
  .texto-timer{
     color: #204478;
-    font-size: 35pt;
+    font-size: 30pt;
     text-align: right;
     font-family: ‘Antipasto’;
  }
@@ -540,8 +540,7 @@ display: inline;
 /*REGISTRO*/
 @media (min-width: 768px) {
   .container {
-    width: 75%;
-    /*width: 970px;*/
+    /*width: 75%;*/
   }
 }
 .registro-cuadro{
@@ -800,7 +799,7 @@ border-left: 1px solid #204478
     text-transform: uppercase;
     font-size: 16pt;
     border-radius: 0px;
-    padding: 10px 40px;
+    /*padding: 10px 40px;*/
 }
 #btn-rojo{
     text-align: center;
@@ -871,7 +870,7 @@ border-left: 1px solid #204478
     color: white;
     font-family: ‘Roboto’;
     font-size: 20pt;
-    background-color: #ad3131;
+    background-color: #b76969;
     text-align: center;
     border-radius: 10px 10px 0px 0px;
 }
@@ -880,7 +879,7 @@ border-left: 1px solid #204478
     color: white;
     font-family: ‘Roboto’;
     font-size: 20pt;
-    background-color: #61af6a;
+    background-color: #8cba8f;
     text-align: center;
     border-radius: 10px 10px 0px 0px;
 }
@@ -892,7 +891,7 @@ padding-top: 10px;
   color: #5e5e5e;
 }
 #postulacion-2{
-    padding-top: 10px;
+    padding-top: 10px 0px;
 }
 /*PRE REGISTRO*/
 .camello>img{
@@ -1820,7 +1819,7 @@ div[class*='col-'] {
     color: #989899;
     cursor: not-allowed;
 }
-<<<<<<< HEAD
+
 .loaderMic>.LogMic{
     display: flex;
     justify-content: center;
@@ -1878,7 +1877,7 @@ div[class*='col-'] {
 }
 .politica{
     text-align: justify;
-    margin: 30px 0px;
+    /*margin: 30px 0px;*/
 }
 .subt-pol{
     font-size: 16px;
@@ -2037,5 +2036,6 @@ div[class*='col-'] {
     border: 2px solid #f17525;
     background-color: transparent;
     text-decoration: none;
->>>>>>> 3ab7498ae01fd0896bb0f97da4e7a3ac0b03ac25
 }
+
+.f-s-16px{ font-size: 16px; }

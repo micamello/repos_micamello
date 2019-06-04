@@ -30,7 +30,7 @@
 					<div class="col-md-12">
 						<div class="col-md-12">
 							<div class="form-group">
-								<label>Título de la oferta <b>*</b></label>
+								<label class="campo">Título de la oferta <span class="no">*</span></label>
 								<div class="errorContainer"></div>
 								<input type="text" class="form-control" value="<?php if(isset($_POST['nombreOferta'])) echo $_POST['nombreOferta']; ?>" name="nombreOferta" id="nombreOferta">
 							</div>

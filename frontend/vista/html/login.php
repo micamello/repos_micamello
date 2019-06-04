@@ -29,7 +29,7 @@
               <div class="row">          
                 <div class="col-xs-12">
                   <div class="text-center" style="margin-top: 20px;">
-                    <label>¿Olvidaste tu contraseña? <a href="<?php echo PUERTO."://".HOST;?>/contrasena/">Haz click aqui</a></label><br>
+                    <label>¿Olvidaste tu contraseña? <a href="<?php echo PUERTO."://".HOST;?>/contrasena/">Haz click aquí</a></label><br>
                     <button id="btn_sesion" type="button" class="btn-blue" onclick="validaForm(1,'btn_sesion')">Ingresar</button>
                   </div>
                 </div>

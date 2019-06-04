@@ -39,6 +39,18 @@ class Controlador_Inicio extends Controlador_Base {
       case 'canea':    
         Vista::render('canea', $tags);
       break;
+      case 'terminoscondiciones':
+        $vista = 'documentos/terminos_condiciones_'.SUCURSAL_ID;
+        Vista::render($vista, $tags);
+      break;
+      case 'politicaprivacidad':
+        $vista = 'documentos/politica_privacidad_'.SUCURSAL_ID;
+        Vista::render($vista, $tags);
+      break;
+      case 'politicacookie':
+        $vista = 'documentos/politicacookie_'.SUCURSAL_ID;
+        Vista::render($vista, $tags);
+      break;
       default:    
         Vista::render('inicio', $tags);
       break;

@@ -2,6 +2,8 @@
   
   <div class="text-center">
     <h2 class="titulo">Env&iacute;anos tus dudas y sugerencias</h2>
+    <br><br>
+    <p style="font-size: 16pt">Si desea enviarnos sus dudas y sugerencias, por favor complete  el siguiente formulario y responderemos lo antes posible. </p><br>
   </div>
   
   <div class="container bloque-gris" style="padding: 0px;">

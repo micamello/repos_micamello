@@ -380,7 +380,7 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function correoActivacionRedSocial($correo,$nombres,$token,$username,$clave){
-    $enlace = "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
+    $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
     $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUA_REDSOCIAL");
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%USUARIO%", $username, $email_body);

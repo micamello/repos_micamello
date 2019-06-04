@@ -103,19 +103,19 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-12">  
-             <span class="contenido-modal-rec">Para obtener mayor efectividad en su b&uacute;squeda de empleo, le invitamos a llenar el siguiente <b>Test de Personalidad</b>. Por favor, tome en cuenta las siguientes recomendaciones:</span>
+          <div class="col-md-12" style="text-align: justify;">  
+             <span class="contenido-modal-rec">Para obtener mayor efectividad en su búsqueda de empleo, le invitamos a llenar el siguiente <b>Test de Personalidad</b>. Por favor, tome en cuenta las siguientes recomendaciones:<br></span>
             <ul>
-            	<li class="contenido-modal-rec">No existe l&iacute;mite de tiempo, pero mientras menos se demore tendr&aacute; mejores resultados.</li>
+            	<li class="contenido-modal-rec">Para obtener mejores resultados debe completar el Test CANEA en el menor tiempo posible, sin embargo no tiene límite fijado. </li>
             	<li class="contenido-modal-list">Busque un lugar tranquilo para que pueda completar el test.</li>
             	<li class="contenido-modal-list">Apague celulares o aparatos que puedan distraerlo.</li>
             	<li class="contenido-modal-list">Conteste de forma honesta y precisa. <b>Solo puede acceder una vez.</b></li>
-            	<li class="contenido-modal-list">Al enviar no podr&aacute; realizar ning&uacute;n tipo de correcci&oacute;n.</li>
+            	<li class="contenido-modal-list">Al enviar no podrá realizar ningún tipo de corrección.</li>
             </ul>   
             <br>
             <br>    
             <center>
-              <button type="button" class="btn-blue" data-dismiss="modal">Comenzar</button>
+              <button type="button" class="btn-blue" data-dismiss="modal">Iniciar Test</button>
             </center> 
           </div>
         </div>
