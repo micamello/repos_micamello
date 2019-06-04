@@ -796,13 +796,19 @@ margin: 0 auto;
     font-size: 24pt;
     font-weight: bold;
 }
-
 .izq{
     border-right: 1px solid #204478
-
 }
 .der{
 border-left: 1px solid #204478
+}
+.planes-promo {
+  background-color: #ec3131;
+  text-transform: uppercase;
+  color: white;
+  padding: 0px;
+  font-size: 24pt;
+  font-weight: bold;
 }
 /*DETALLES*/
 #btn-verde{
@@ -1935,8 +1941,10 @@ div[class*='col-'] {
     width: 100%;
     margin: 0px auto;
     border: none;
-    min-height: 100%;
+    /*min-height: 100%;*/
+    min-height: 20%;
 }
+
 .tabla-planes th{
     padding: 0px;
     background-color: #204478; 
