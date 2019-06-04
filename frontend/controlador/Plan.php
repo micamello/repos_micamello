@@ -75,11 +75,12 @@ class Controlador_Plan extends Controlador_Base {
     }
     else{
       $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);      
-      $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
+      if (isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){
+        $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
+      }            
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
     }        
-
     $tags["template_css"][] = "media-queries";
     // $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
