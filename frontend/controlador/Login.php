@@ -23,7 +23,7 @@ class Controlador_Login extends Controlador_Base {
             }            
           } 
           if ($usuario["estado"] != 1){
-            throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electr\u00F3nico para activarlo o comuniquese con el administrador para su activaci\u00F3n");            
+            throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electr\u00F3nico para activarlo o escr\u00EDbanos a info@micamello.com.ec para su activaci\u00F3n");            
           }   
 
           if(!empty($usuario['ultima_sesion'])){       

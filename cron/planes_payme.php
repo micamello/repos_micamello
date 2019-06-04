@@ -24,7 +24,7 @@ if (!empty($registros) && is_array($registros)){
 
   foreach($registros as $registro){  
     if (empty($registro)){      
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Registro no tiene valores '.print_r($registro,true));
+      //Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Registro no tiene valores '.print_r($registro,true));
       continue;
     }
 
@@ -35,18 +35,18 @@ if (!empty($registros) && is_array($registros)){
         empty($registro["shippingAddress"]) || empty($registro["shippingLastName"]) || 
         empty($registro["shippingCity"]) || empty($registro["shippingState"]) ||
         empty($registro["shippingZIP"])){       
-    	Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Usuario no tiene valores '.print_r($registro,true));
+    	//Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Usuario no tiene valores '.print_r($registro,true));
       continue;
     }    
     if (empty($registro["IDTransaction"]) || empty($registro["purchaseOperationNumber"]) || empty($registro["purchaseAmount"])){
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Valores nulos '.print_r($registro,true));
+      //Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Valores nulos '.print_r($registro,true));
       continue;
     }
         
     $id_payme = Modelo_Payme::consultaByTransaction($registro["IDTransaction"]);     
     if (!empty($id_payme)){
       if (!Modelo_Payme::modificarEstado($registro["id_payme"])){
-        Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','TransactionID duplicada sin poder actualizar el estado '.print_r($registro,true));
+        //Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','TransactionID duplicada sin poder actualizar el estado '.print_r($registro,true));
         continue;
       } 
     }

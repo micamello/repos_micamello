@@ -33,8 +33,8 @@
         <div style="margin-top: 20px;" align="center" class="col-sm-12 col-xs-12 col-md-12">
           <h3 class="qs-subt">Valores Corporativos</h3>
           <ul class="col-md-8 col-md-offset-2 qs-text">
-            <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Trabajo: Mi Camello se identifica con los modismos de nuestra cultura latina, en lo que respecta a trabajo.</p></li>
-            <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Oportunidad: Brindaremos al empresariado visibilidad en la b&uacute;squeda de su capital humano y desarrollaremos estrategias de captaci&oacute;n en todos los niveles profesionales.</p></li>
+            <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Orientación al cliente: Trabajamos de forma profesional y constante para lograr la plena satisfacción del usuario. Para ello, enfatizamos una relación de confianza y transparencia.</p></li>
+            <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Compromiso: Asumimos las labores con esfuerzo, empeño y dedicación buscando mejorar cada día lo que hacemos. Nos enfocamos en desarrollar acciones creativas para generar mejoras continuas en los procesos de la organización; forjando confianza y respaldo en nuestros clientes y compañeros.</p></li>
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Innovaci&oacute;n: Contamos con herramientas tecnol&oacute;gicas de &uacute;ltima generaci&oacute;n que facilitar&aacute;n nuestro desempe&ntilde;o en el mundo digital.</p></li>
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Transparencia: Realizamos nuestra gesti&oacute;n de forma objetiva, clara y verificable.</p></li>
               <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">Eficiencia: Tenemos el claro objetivo de fortalecer la confianza en todos los candidatos, el empresariado y servir de enlace entre ellos.</p></li>

@@ -101,8 +101,7 @@ if (isset($template_js) && is_array($template_js)){
 <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){
-          Swal.fire({
-            title: '¡Exitoso!',
+          Swal.fire({            
             text: '".$sess_suc_msg."',
             imageUrl: '".PUERTO."://".HOST."/imagenes/logo-04.png',
             imageWidth: 210,
