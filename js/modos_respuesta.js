@@ -189,11 +189,10 @@ if($('#forma_1').length){
 }
 
 function alertErrores(texto){
-	Swal.fire({
-    title: '¡Verificar!',
+	Swal.fire({    
     html: texto,
     imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-    imageWidth: 210,
+    imageWidth: 75,
     confirmButtonText: 'ACEPTAR',
     animation: true
   });	
@@ -432,11 +431,10 @@ function makeDrop(drop, drag){
 			// toastr.options.positionClass = "toast-top-center";
 			// toastr.warning('Ubique la opción en la pregunta correspondiente');
 			drag.css({top: '0px', left: '0px'});
-			Swal.fire({
-	      title: '¡Advertencia',
+			Swal.fire({	      
 	      html: 'Ubique la opción en la pregunta correspondiente',
 	      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-	      imageWidth: 210,
+	      imageWidth: 75,
 	      confirmButtonText: 'ACEPTAR',
 	      animation: true
 	    });			

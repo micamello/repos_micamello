@@ -142,11 +142,10 @@ $('#provincia').change(function()
                 }
             },
             error: function (request, status, error) {
-              Swal.fire({
-                title: '¡Información!',
+              Swal.fire({                
                 html: request.responseText,
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                imageWidth: 210,
+                imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
                 animation: true
               });                  
@@ -202,8 +201,7 @@ function validarImg(archivo){
   if(file == 1){
     error = 1;
   }else{
-    Swal.fire({
-      title: '¡Información!',
+    Swal.fire({      
       html: 'Imagen cargada',
       imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
       imageWidth: 210,
@@ -226,22 +224,20 @@ function fileValidation(fileInput,tipo){
        
             var tamano = fileInput.files[0].size/1024/1024;
             if(tamano > 1){
-              Swal.fire({
-                title: '¡Advertencia!',
+              Swal.fire({                
                 html: 'El peso permitido es de máx. 1MB',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                imageWidth: 210,
+                imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
                 animation: true
               });                
               error = 1;
             }else if(!allowedExtensions.exec(filePath)){
                 fileInput.value = '';
-                Swal.fire({
-                  title: '¡Advertencia!',
+                Swal.fire({                  
                   html: 'El formato permitido es .jpeg/.jpg/',
                   imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                  imageWidth: 210,
+                  imageWidth: 75,
                   confirmButtonText: 'ACEPTAR',
                   animation: true
                 });                
@@ -256,22 +252,20 @@ function fileValidation(fileInput,tipo){
        
             var tamano = fileInput.files[0].size/1024/1024;
             if(tamano > 2){
-              Swal.fire({
-                title: '¡Advertencia!',
+              Swal.fire({                
                 html: 'El peso permitido de la hoja de vida es máx. 2MB',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                imageWidth: 210,
+                imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
                 animation: true
               });                  
               error = 1;
             }else if(!allowedExtensions.exec(filePath)){
                 fileInput.value = '';
-                Swal.fire({
-                  title: '¡Advertencia!',
+                Swal.fire({                  
                   html: 'El formato permitido de la hoja de vida es .pdf/.doc/.docx/',
                   imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                  imageWidth: 210,
+                  imageWidth: 75,
                   confirmButtonText: 'ACEPTAR',
                   animation: true
                 });                
@@ -280,11 +274,10 @@ function fileValidation(fileInput,tipo){
               error = 0;
             }
         }else{
-           Swal.fire({
-              title: '¡Advertencia!',
+           Swal.fire({              
               html: 'Cargar la hoja de vida es obligatorio',
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 210,
+              imageWidth: 75,
               confirmButtonText: 'ACEPTAR',
               animation: true
            });               
@@ -302,11 +295,10 @@ $('#subirCV').change(function(e) {
     if(file == 1){
         error = 1;
     }else{
-      Swal.fire({
-        title: '¡Información!',
+      Swal.fire({        
         html: 'Hoja de vida cargada',
         imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
-        imageWidth: 210,
+        imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });      
@@ -605,11 +597,10 @@ function enviarFormulario(){
         document.form_editarPerfil.submit();
     }else{
       //mostrarERRORES
-      Swal.fire({
-        title: '¡Advertencia!',        
+      Swal.fire({          
         html: 'Faltan algunos datos:<br>'+estado,
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-        imageWidth: 210,
+        imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });      

@@ -69,11 +69,10 @@ function desactivarNotificacion(id){
       $("#notificaciones").modal('hide');        
     },
     error: function (request, status, error) {
-      Swal.fire({
-        title: '¡Advertencia!',
+      Swal.fire({        
         html: 'Error por favor intente denuevo',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-        imageWidth: 210,
+        imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });            
@@ -90,8 +89,7 @@ function cancelarAcceso(id){
     dataType:'json',
     success:function(data){             
       if (data.respuesta == "OK"){ 
-        Swal.fire({
-          title: '¡Exitoso!',
+        Swal.fire({        
           html: data.mensaje,
           imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
           imageWidth: 210,
@@ -100,22 +98,20 @@ function cancelarAcceso(id){
         });               
       }     
       else{
-        Swal.fire({
-          title: '¡Advertencia!',
+        Swal.fire({          
           html: data.mensaje,
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-          imageWidth: 210,
+          imageWidth: 75,
           confirmButtonText: 'ACEPTAR',
           animation: true
         });        
       }
     },
     error: function (request, status, error) {
-      Swal.fire({
-        title: '¡Advertencia!',
+      Swal.fire({        
         html: 'Error en la cancelación del acceso, por favor intente denuevo',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-        imageWidth: 210,
+        imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });      
@@ -134,11 +130,10 @@ function aceptarAcceso(id){
       $(location).attr('href',$('#puerto_host').val()+'/preguntas/');      
     },
     error: function (request, status, error) {
-      Swal.fire({
-        title: '¡Advertencia!',
+      Swal.fire({        
         html: 'Error por favor intente denuevo',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-        imageWidth: 210,
+        imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });            

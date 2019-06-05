@@ -16,10 +16,9 @@ $(document).ready(function(){
           },
           error: function (request, status, error) {
             Swal.fire({
-              title: '¡Advertencia!',
               html: request.responseText,
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 210,
+              imageWidth: 75,
               confirmButtonText: 'ACEPTAR',
               animation: true
             });                        
@@ -125,10 +124,9 @@ if($('#provinciaOf').length){
           },
           error: function (request, status, error) {
             Swal.fire({
-              title: '¡Información!',
               html: request.responseText,
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 210,
+              imageWidth: 75,
               confirmButtonText: 'ACEPTAR',
               animation: true
             });            
@@ -1159,11 +1157,10 @@ function formatearFecha(contenido){
 }
 
 function mensajeErrorAlert(mensaje){
-  Swal.fire({
-    title: '¡Faltan algunos datos!',
+  Swal.fire({    
     html: mensaje,
     imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-    imageWidth: 210,
+    imageWidth: 75,
     confirmButtonText: 'ACEPTAR',
     animation: true
   });      

@@ -370,20 +370,29 @@
 				?></div>
 				</div>
 		    </div>
-		    <!--<div class="panel panel-default shadow-panel1">
-		      <div class="panel-heading">
-		        <span><i class="fa fa-briefcase"></i> Situaci&oacute;n Laboral</span>
-		      </div>
-		      <div class="panel-body">
-		      	<div class="filtros">
-				    <?php
-				    	/*foreach ($situacionLaboral as $key => $v) {
-							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T'.$key.'/';
-							echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="'.$key.'">'.utf8_encode($v).'</a></li>';
-					  	}*/ ?>					  	
-					</div>
-		      </div>
-		    </div>-->
+		    <div class="panel panel-default shadow-panel1">
+				<div class="panel-heading" data-toggle="collapse" href="#situacion-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-briefcase"></i> Situaci&oacute;n Laboral
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="situacion-desplegable" aria-expanded="false">
+					<div class="filtros">
+					<?php
+			    	foreach ($situacionLaboral as $key => $v) {
+						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T'.$key.'/';
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="'.$key.'">'.utf8_encode($v).'</a></li>';
+					} ?>
+				  	</div>
+				</div>
+		    </div>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading" data-toggle="collapse" href="#lic-desplegable">
 				      <div class="row">

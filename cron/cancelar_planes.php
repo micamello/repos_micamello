@@ -7,7 +7,7 @@ set_time_limit(0);
 
 $dominio = "www.micamello.com.ec/desarrollov3/";
 
-/*Script para cancelar planes de la empresa/candidato, dependiendo del plan(es) contratados y fecha actual, si el usuario es de tipo empresa inactivar las ofertas publicadas con ese plan y si es candidato y el plan tiene 5 postulaciones restantes generar un registro en la tabla de alertas*/
+/*Script para cancelar planes de la empresa/candidato, dependiendo del plan(es) contratados y fecha actual, si el usuario es de tipo empresa inactivar las ofertas publicadas con ese plan*/
 
 require_once '../constantes.php';
 require_once '../init.php';
@@ -23,11 +23,11 @@ else{
 
 $arrcandidato = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::CANDIDATO);
 if (!empty($arrcandidato)){
-	$fechaactual = date("Y-m-d H:i:s");
+	$fechaactual = date("Y-m-d");
 	foreach($arrcandidato as $usuarioplan){
 		try{
 			$infousuario = Modelo_Usuario::busquedaPorId($usuarioplan["id_usuario"],Modelo_Usuario::CANDIDATO);
-		  if ($usuarioplan["fecha_caducidad"] <= $fechaactual){			
+		  if (substr($usuarioplan["fecha_caducidad"],0,-9) < $fechaactual){			
 				$GLOBALS['db']->beginTrans();      
 				//Desactivar el plan caducado del usuario 
 				if (!Modelo_UsuarioxPlan::desactivarPlan($usuarioplan["id_usuario_plan"],Modelo_Usuario::CANDIDATO)){
@@ -38,7 +38,7 @@ if (!empty($arrcandidato)){
         envioCorreo($infousuario["nombres"]." ".$infousuario["apellidos"],$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);				
         echo "Plan de Candidato Desactivado ".$usuarioplan["id_usuario_plan"]."<br>";				
 			}
-			else{				
+			/*else{				
 			  $resultado = Modelo_UsuarioxPlan::publicacionesRestantes($usuarioplan["id_usuario"]);
 				if($resultado['p_restantes'] == 0){
 	        $mensaje = "Estimado ".utf8_encode($infousuario["nombres"]." ".$infousuario["apellidos"]).",<br>De su plan contratado el ".$usuarioplan["fecha_compra"]." se han agotado las autopostulaciones.<br>De querer seguir haciendo uso de este servicio debe activar un nuevo plan.";	        
@@ -56,7 +56,7 @@ if (!empty($arrcandidato)){
 	        }
 	        echo "Notificacion de que 5 o menos autopostulaciones a Candidato Enviado ".$usuarioplan["id_usuario"]."<br>";
 				}
-		  }
+		  }*/
 		}
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();
@@ -64,18 +64,20 @@ if (!empty($arrcandidato)){
       Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Cancelar Planes',$e->getMessage());
     }    
 	}
-} 
+}
 
-$arrempresa = Modelo_UsuarioxPlan::planesActivosPagados(Modelo_Usuario::EMPRESA);
+$arrempresa = Modelo_UsuarioxPlan::planesActivosEmpresas();
 if (!empty($arrempresa)){
-	$fechaactual = date("Y-m-d H:i:s");
+	$fechaactual = date("Y-m-d");
 	foreach($arrempresa as $usuarioplan){
 		try{
 			$infousuario = Modelo_Usuario::busquedaPorId($usuarioplan["id_usuario"],Modelo_Usuario::EMPRESA);
-		  if ($usuarioplan["fecha_caducidad"] <= $fechaactual){			
+      
+		  if (substr($usuarioplan["fecha_caducidad"],0,-9) < $fechaactual){			
+		  	
 				$GLOBALS['db']->beginTrans();      
 				//Desactivar el plan caducado del usuario 
-				if (!Modelo_UsuarioxPlan::desactivarPlan($usuarioplan["id_usuario_plan"],Modelo_Usuario::EMPRESA)){
+				if (!Modelo_UsuarioxPlan::desactivarPlanEmpresa($usuarioplan["id_usuario_plan"],Modelo_Usuario::EMPRESA)){
 					throw new Exception("Error al desactivar el plan caducado"); 
 				}
 												        							
@@ -92,7 +94,7 @@ if (!empty($arrempresa)){
 				$GLOBALS['db']->commit();
         envioCorreo($infousuario["nombres"],$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);
 				echo "Plan de Empresa Desactivado ".$usuarioplan["id_usuario"]."<br>";
-			}			
+			}		
 		}
     catch(Exception $e){
   	  $GLOBALS['db']->rollback();

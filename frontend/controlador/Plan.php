@@ -41,7 +41,7 @@ class Controlador_Plan extends Controlador_Base {
  
   public function planesUsuario(){
     $breadcrumbs['planesUsuario'] = 'Mis planes';
-    $desactivarPlan = Utils::getParam('desactivarPlan', '', $this->data);
+    /*$desactivarPlan = Utils::getParam('desactivarPlan', '', $this->data);
     if(!empty($desactivarPlan)){
         $id_usuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
         $aspirantes = Modelo_UsuarioxPlan::obtenerAspiranteSegunPlanContratado($id_usuario,$desactivarPlan);
@@ -56,7 +56,7 @@ class Controlador_Plan extends Controlador_Base {
           $_SESSION['mostrar_error'] = 'No se puede eliminar la suscripci\u00F3n, ya existen postulados';
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/planesUsuario/');
-    }    
+    }*/    
 
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
@@ -74,13 +74,33 @@ class Controlador_Plan extends Controlador_Base {
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,$sucursal);       
     }
     else{
-      $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);      
-      if (isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){
-        $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
-      }            
-      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
-      $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
-    }        
+      $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);        
+      $gratuitos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
+      $idplanes = '';
+      $totgratuitos = count($gratuitos);
+      foreach($gratuitos as $key=>$gratuito){
+        $idplanes .= $gratuito["id_plan"].((($key+1)==$totgratuitos) ? "" : ",");
+      }      
+      //si ya tiene un gratuito comprado este mes      
+      if (!Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"]) && 
+          isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){         
+        $tags['gratuitos'] = $gratuitos;  
+      }      
+      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);     
+      $avisos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
+      $idplanes = '';
+      $totavisos = count($avisos);
+      foreach($avisos as $key=>$aviso){
+        if ($aviso["promocional"] == 1){
+          $idplanes .= $aviso["id_plan"].((($key+1)==$totavisos) ? "" : ",");
+        }
+      }
+      //consulta si nunca ha comprado el aviso como promocional      
+      if (!empty($idplanes) && !Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
+        $tags['aviso_promocional'] = 1;
+      }
+      $tags['avisos'] = $avisos;
+    }     
     $tags["template_css"][] = "media-queries";
     // $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
@@ -105,11 +125,12 @@ class Controlador_Plan extends Controlador_Base {
       $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
       $sucursal = SUCURSAL_ID; 
       $tipoplan = ($tipousu == Modelo_Usuario::CANDIDATO) ? Modelo_Plan::CANDIDATO : Modelo_Plan::EMPRESA;
-      $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);
+      $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);      
       if (!isset($infoplan["id_plan"]) || empty($infoplan["id_plan"])){
         throw new Exception("El plan seleccionado no esta activo o no esta disponible");
       }      
-      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $tipousu == Modelo_Usuario::EMPRESA)){        
+            
+      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1)){ 
         if ($this->existePlan($infoplan["id_plan"])){
           throw new Exception("Ya esta subscrito al plan seleccionado");   
         }                 
