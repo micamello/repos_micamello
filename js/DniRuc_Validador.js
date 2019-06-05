@@ -43,6 +43,7 @@ function DniRuc_Validador(valor, tipo){
 }
 
 function validarCedulaEcuador(valor, tipo){	
+
 	provincia = valor.substr(0,2);
 	longitud = 10;
 	if(tipo == 1){
@@ -61,19 +62,19 @@ function validarCedulaEcuador(valor, tipo){
 		    digitos[8]  = valor.substr(8,1);         
 		    digitos[9]  = valor.substr(9,1);
 
-			    consecutivo[0] = (digitos[0]) * 2; if(consecutivo[0] > 9) consecutivo[0] -= 9;       
-			    consecutivo[1] = (digitos[1]) * 1;         
-			    consecutivo[2] = (digitos[2]) * 2; if(consecutivo[2] > 9) consecutivo[2] -= 9;         
-			    consecutivo[3] = (digitos[3]) * 1;         
-			    consecutivo[4] = (digitos[4]) * 2; if(consecutivo[4] > 9) consecutivo[4] -= 9;         
-			    consecutivo[5] = (digitos[5]) * 1;         
-			    consecutivo[6] = (digitos[6]) * 2; if(consecutivo[6] > 9) consecutivo[6] -= 9;         
-			    consecutivo[7] = (digitos[7]) * 1;        
-			    consecutivo[8] = (digitos[8]) * 2; if(consecutivo[8] > 9) consecutivo[8] -= 9;
-			    resultado = 0;
-			    for (var i = 0; i < consecutivo.length; i++) {
-			    	resultado += consecutivo[i];
-			    }
+		    consecutivo[0] = (digitos[0]) * 2; if(consecutivo[0] > 9) consecutivo[0] -= 9;       
+		    consecutivo[1] = (digitos[1]) * 1;         
+		    consecutivo[2] = (digitos[2]) * 2; if(consecutivo[2] > 9) consecutivo[2] -= 9;         
+		    consecutivo[3] = (digitos[3]) * 1;         
+		    consecutivo[4] = (digitos[4]) * 2; if(consecutivo[4] > 9) consecutivo[4] -= 9;         
+		    consecutivo[5] = (digitos[5]) * 1;         
+		    consecutivo[6] = (digitos[6]) * 2; if(consecutivo[6] > 9) consecutivo[6] -= 9;         
+		    consecutivo[7] = (digitos[7]) * 1;        
+		    consecutivo[8] = (digitos[8]) * 2; if(consecutivo[8] > 9) consecutivo[8] -= 9;
+		    resultado = 0;
+		    for (var i = 0; i < consecutivo.length; i++) {
+		    	resultado += consecutivo[i];
+		    }
 			digitoVer = resultado%10;
 			if(digitoVer == 0){
 				digitoVerComparar = digitoVer;
@@ -81,6 +82,7 @@ function validarCedulaEcuador(valor, tipo){
 			else{
 				digitoVerComparar = 10 - digitoVer;
 			}
+
 			if(digitoVerComparar == digitos[9]){
 				return true;
 			}

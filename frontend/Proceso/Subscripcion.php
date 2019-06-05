@@ -107,7 +107,7 @@ class Proceso_Subscripcion{
   	  $GLOBALS['db']->rollback();
 	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
       $msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);	    
+	    //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);	    
   	}
 
   }

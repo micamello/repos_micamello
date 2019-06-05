@@ -761,7 +761,13 @@ $_SESSION['mostrar_error'] = ""; ?>
 		</div>
 	</form>
 </div>
-<!--<input style="display:none" type="text" id="datosGrafico" value="A: 26.3, 26.3/N: 26.04, 26.04/E: 34.56, 34.56/A: 50, 50/C: 40.1, 40.1" />-->
+
+<!--grafico para informe-->
+<input style="display:none" type="text" id="datosGrafico" value="<?php echo (!empty($val_grafico)) ? $val_grafico : ""; ?>" />
+<div class="container" id="Chart_details">
+  <!--<div id='chart_div'></div>--><div id='g_chart_1' style="width: auto; height: auto;"></div>
+</div>
+
 <section class=" banner-publicidad">
   <div class="container-fluid">
     <div class="row">

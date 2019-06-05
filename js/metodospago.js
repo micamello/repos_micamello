@@ -55,11 +55,10 @@ $('#provinciaPM').change(function(){
         });
       },
       error: function (request, status, error) {
-        Swal.fire({
-          title: '¡Advertencia!',
+        Swal.fire({          
           html: 'Error por favor intente denuevo',
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-          imageWidth: 210,
+          imageWidth: 75,
           confirmButtonText: 'ACEPTAR',
           animation: true
         });        
@@ -297,8 +296,6 @@ $('#shippingPhone').on('blur', function(){
 $('#direccion').on('blur', function(){
   var dir = document.getElementById('direccion').value;
   if(dir.length >= 10 && dir.length <= 50){
-    console.log(dir.length + "dentro");
-
     validarDir(dir,"err_dir","seccion_dir","btndeposito");
     validaCampos(2);
   }else{

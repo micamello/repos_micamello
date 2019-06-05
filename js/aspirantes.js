@@ -112,6 +112,93 @@ $(document).ready(function () {
     cargaAutomaticaModal();
 });
 
+
+function generarGrafico(id_usuario,ruta){
+
+    var datos = $('#datosGrafico').val();
+    datos = datos.split('|');
+    
+    var arreglo = [['Task', 'Hours per Day']];
+    for (var i = 0; i < datos.length; i++) {
+
+    	var porcion = datos[i].split(',');
+    	porcion[1] = parseFloat(porcion[1]);
+        arreglo.push(porcion);
+    }
+
+    var puerto_host = $('#puerto_host').val();
+    google.charts.load("current", {packages:["corechart"]});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable(arreglo);
+
+        var options = {
+          pieSliceText: 'label',
+          is3D: true,
+          width:3500,
+          height:2000,
+          pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
+          fontSize:80,
+          legend: 'none',
+          slices: {
+            0: { color: '#FCDC59' },
+            1: { color: '#E25050' },
+            2: { color: '#8C4DCE' },
+            3: { color: '#2B8DC9' },
+            4: { color: '#5EB782' }
+          }
+        };
+
+        document.getElementById('Chart_details').style.display='block';
+        var chart_1 = new google.visualization.PieChart(document.getElementById('g_chart_1'));
+        chart_1.draw(data, options);
+        var chart_div = document.getElementById('chart_div');
+
+        google.visualization.events.addListener(chart_1, 'ready', function () {
+
+           var uri = chart_1.getImageURI();
+           document.getElementById('Chart_details').style.display='none';
+		   //chart_div.innerHTML = '<img width="600" heigth="600" align="center" src="'+uri+'">';
+
+	       $.ajax({
+	         	type: "POST",
+		        url: puerto_host+"/index.php?mostrar=aspirante&opcion=guardarGrafico",
+		        data: {id_usuario:id_usuario, imagen:uri},
+		        dataType:'json',
+		        success(resultado){
+		        	redirigir(ruta);
+	       		} 
+	       });
+        });
+    }
+}
+
+function hacerInforme(ruta,id_usuario){
+
+	var puerto_host = $('#puerto_host').val();
+	$.ajax({
+        type: "POST",
+        url: puerto_host+"/index.php?mostrar=aspirante&opcion=consultarPorcentajesFacetas",
+        data: {id_usuario:id_usuario},
+        dataType:'json',
+        success(resultado){
+
+        	if(resultado.graficar != ''){
+            	$('#datosGrafico').val(resultado.graficar);
+            	generarGrafico(id_usuario,ruta);
+            	
+            }else{
+            	redirigir(ruta);
+            }
+        }
+    });
+}
+
+
+function redirigir(ruta){
+	window.location = ruta+'/';
+}
+
 $('#button_convertir_oferta').on('click', function(){
 	document.form_convertir.submit();
 });
@@ -415,11 +502,10 @@ function enviarPclave(ruta,tipo,page){
 	}else{
 		
 		if(tipo == 1){
-      Swal.fire({
-	      title: '¡Advertencia!',
+      Swal.fire({	      
 	      html: 'La longitud mínima de la palabra clave es de 2 caracteres',
 	      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-	      imageWidth: 210,
+	      imageWidth: 75,
 	      confirmButtonText: 'ACEPTAR',
 	      animation: true
       });           
@@ -443,11 +529,10 @@ function verFacetas(facetas,pos){
 		var nueva_ruta = ruta+porcentajes+'/'+page+"/";
 		window.location = nueva_ruta;
 	}else{
-		Swal.fire({
-	    title: '¡Advertencia!',
+		Swal.fire({	    
 	    html: 'Debe seleccionar un porcentaje',
 	    imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-	    imageWidth: 210,
+	    imageWidth: 75,
 	    confirmButtonText: 'ACEPTAR',
 	    animation: true
     });		
@@ -633,11 +718,10 @@ function obtenerFiltro(ruta,page){
 		window.location = nueva_ruta;
 	}else{
 		//abrirModal('Debe Seleccionar al menos un filtro','alert_descarga','','Ok');
-		Swal.fire({
-      title: '¡Advertencia!',
+		Swal.fire({      
       html: 'Debe Seleccionar al menos un filtro',
       imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-      imageWidth: 210,
+      imageWidth: 75,
       confirmButtonText: 'ACEPTAR',
       animation: true
     });		

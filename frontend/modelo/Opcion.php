@@ -23,7 +23,7 @@ class Modelo_Opcion{
 	public static function datosGraficos($id_usuario){
 
 		if (empty($id_usuario)){ return false; }
-		$sql = 'SELECT t.id_faceta,sum(b.porcentaje) as prom, sum(id_competencia) as cantd_competencias FROM (SELECT GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) as puntaje, c.id_faceta, (1) as id_competencia
+		echo $sql = 'SELECT t.id_faceta,sum(b.porcentaje) as prom, sum(id_competencia) as cantd_competencias FROM (SELECT GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor) as puntaje, c.id_faceta, (1) as id_competencia
 		FROM mfo_opcionm2 o
 		INNER JOIN mfo_respuestam2 r on r.id_opcion = o.id_opcion
 		INNER JOIN mfo_preguntam2 p on p.id_pregunta = o.id_pregunta

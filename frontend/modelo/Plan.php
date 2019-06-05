@@ -11,11 +11,7 @@ class Modelo_Plan{
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
   	if (empty($tipousuario)||empty($sucursal)){ return false; }
     $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
-                   p.prom_costo, p.prom_duracion,                   
-                   IF(p.promocional,p.prom_num_post,p.num_post) AS num_post, 
-                   IF(p.promocional,p.prom_costo,p.costo) AS costo, 
-                   IF(p.promocional,p.prom_duracion,p.duracion) AS duracion, 
-                   IF(p.promocional,p.prom_porc_descarga,p.porc_descarga) AS porc_descarga, 
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
                    GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
                    GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
             FROM mfo_plan p
@@ -84,11 +80,9 @@ class Modelo_Plan{
    
   public static function busquedaActivoxTipo($plan,$tipo,$sucursal){
     if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }
-    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, prom_duracion, num_accesos,
-                   IF(promocional,prom_costo,costo) AS costo,
-                   IF(promocional,prom_num_post,num_post) AS num_post,
-                   IF(promocional,prom_duracion,duracion) AS duracion,
-                   IF(promocional,prom_porc_descarga,porc_descarga) AS porc_descarga
+    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, 
+                   prom_duracion, num_accesos, promocional, costo, num_post,                                      
+                   duracion, porc_descarga                   
             FROM mfo_plan 
             WHERE estado = 1 AND id_plan = ? AND tipo_usuario = ? AND id_sucursal = ? AND visibilidad = 1";
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    

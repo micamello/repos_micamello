@@ -511,7 +511,7 @@ function validarDir(direccion,err_dir, seccion_dir,btn){
 
   }else if(expreg1.test(direccion) == false){
 
-    colocaError(err_dir, seccion_dir,"Formato incorrecto, solo letras y n\u00FAmeros",btn); 
+    colocaError(err_dir, seccion_dir,"Solo letras y n\u00FAmeros, sin comas ni puntos",btn); 
     error = 1;
 
   }else{
@@ -568,7 +568,7 @@ function validaCampos(form,btn){
 
 function verifyErrors(){
   var listerrors = document.getElementsByClassName('msg_error');
-  console.log(listerrors.length);
+  //console.log(listerrors.length);
   return listerrors.length;
 }
 

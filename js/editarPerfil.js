@@ -1,58 +1,63 @@
-//HACER ESTO AL MOMENTO DE TERMINAR EL TERCER CUESTIONARIO
-/*$(document).ready(function(){
+$(document).ready(function(){
 
     var datos = $('#datosGrafico').val();
-    datos = datos.split('/');
-    
-    var arreglo = [['Task', 'Hours per Day']];
-    for (var i = 0; i < datos.length; i++) {
-        arreglo.push(datos[i].split(','));
-    }
-    var puerto_host = $('#puerto_host').val();
-    google.charts.load("current", {packages:["corechart"]});
-    google.charts.setOnLoadCallback(drawChart);
-    function drawChart() {
-        var data = google.visualization.arrayToDataTable(arreglo);
 
-        var options = {
-          pieSliceText: 'label',
-          is3D: true,
-          width:4000,
-          height:2600,
-          pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
-          fontSize:80,
-          legend: 'none',
-          slices: {
-            0: { color: '#ffd966' },
-            1: { color: '#ff7575' },
-            2: { color: '#a86ed4' },
-            3: { color: '#4b98dd' },
-            4: { color: '#a8d08d' }
-          }
-        };
+    if(datos != ''){
 
-        var chart_1 = new google.visualization.PieChart(document.getElementById('g_chart_1'));
-        chart_1.draw(data, options);
+        datos = datos.split('|');
+        
+        var arreglo = [['Task', 'Hours per Day']];
+        for (var i = 0; i < datos.length; i++) {
 
-        var chart_div = document.getElementById('chart_div');
+            var porcion = datos[i].split(',');
+            porcion[1] = parseFloat(porcion[1]);
+            arreglo.push(porcion);
+        }
+        var puerto_host = $('#puerto_host').val();
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable(arreglo);
 
-        google.visualization.events.addListener(chart_1, 'ready', function () {
-            $.ajax({
-                type: "POST",
-                url: puerto_host+"/index.php?mostrar=perfil&opcion=guardarGrafico",
-                data: {imagen:chart_1.getImageURI()},
-                success(data){
-                    document.getElementById('Chart_details').style.display='none';
-                },
-                error(){
-                    document.getElementById('Chart_details').style.display='none';
-                }
+            var options = {
+              pieSliceText: 'label',
+              is3D: true,
+              width:3500,
+              height:2000,
+              pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
+              fontSize:80,
+              legend: 'none',
+              slices: {
+                0: { color: '#FCDC59' },
+                1: { color: '#E25050' },
+                2: { color: '#8C4DCE' },
+                3: { color: '#2B8DC9' },
+                4: { color: '#5EB782' }
+              }
+            };
+
+            document.getElementById('Chart_details').style.display='block';
+            var chart_1 = new google.visualization.PieChart(document.getElementById('g_chart_1'));
+            chart_1.draw(data, options);
+            var chart_div = document.getElementById('chart_div');
+
+            google.visualization.events.addListener(chart_1, 'ready', function () {
+
+               var uri = chart_1.getImageURI();
+               document.getElementById('Chart_details').style.display='none';
+               //chart_div.innerHTML = '<img width="600" heigth="600" align="center" src="'+uri+'">';
+
+               $.ajax({
+                    type: "POST",
+                    url: puerto_host+"/index.php?mostrar=velocimetro&opcion=guardarGrafico",
+                    data: {imagen:uri},
+                    dataType:'json',
+               });
             });
-        });
-
-        chart_1.draw(data, options);
+        }
     }
-});*/
+});
+
 
 if(document.getElementById('form_editarPerfil')){
 
@@ -137,11 +142,10 @@ $('#provincia').change(function()
                 }
             },
             error: function (request, status, error) {
-              Swal.fire({
-                title: '¡Información!',
+              Swal.fire({                
                 html: request.responseText,
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                imageWidth: 210,
+                imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
                 animation: true
               });                  
@@ -197,8 +201,7 @@ function validarImg(archivo){
   if(file == 1){
     error = 1;
   }else{
-    Swal.fire({
-      title: '¡Información!',
+    Swal.fire({      
       html: 'Imagen cargada',
       imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
       imageWidth: 210,
@@ -221,22 +224,20 @@ function fileValidation(fileInput,tipo){
        
             var tamano = fileInput.files[0].size/1024/1024;
             if(tamano > 1){
-              Swal.fire({
-                title: '¡Advertencia!',
+              Swal.fire({                
                 html: 'El peso permitido es de máx. 1MB',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                imageWidth: 210,
+                imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
                 animation: true
               });                
               error = 1;
             }else if(!allowedExtensions.exec(filePath)){
                 fileInput.value = '';
-                Swal.fire({
-                  title: '¡Advertencia!',
+                Swal.fire({                  
                   html: 'El formato permitido es .jpeg/.jpg/',
                   imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                  imageWidth: 210,
+                  imageWidth: 75,
                   confirmButtonText: 'ACEPTAR',
                   animation: true
                 });                
@@ -251,22 +252,20 @@ function fileValidation(fileInput,tipo){
        
             var tamano = fileInput.files[0].size/1024/1024;
             if(tamano > 2){
-              Swal.fire({
-                title: '¡Advertencia!',
+              Swal.fire({                
                 html: 'El peso permitido de la hoja de vida es máx. 2MB',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                imageWidth: 210,
+                imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
                 animation: true
               });                  
               error = 1;
             }else if(!allowedExtensions.exec(filePath)){
                 fileInput.value = '';
-                Swal.fire({
-                  title: '¡Advertencia!',
+                Swal.fire({                  
                   html: 'El formato permitido de la hoja de vida es .pdf/.doc/.docx/',
                   imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-                  imageWidth: 210,
+                  imageWidth: 75,
                   confirmButtonText: 'ACEPTAR',
                   animation: true
                 });                
@@ -275,11 +274,10 @@ function fileValidation(fileInput,tipo){
               error = 0;
             }
         }else{
-           Swal.fire({
-              title: '¡Advertencia!',
+           Swal.fire({              
               html: 'Cargar la hoja de vida es obligatorio',
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 210,
+              imageWidth: 75,
               confirmButtonText: 'ACEPTAR',
               animation: true
            });               
@@ -297,11 +295,10 @@ $('#subirCV').change(function(e) {
     if(file == 1){
         error = 1;
     }else{
-      Swal.fire({
-        title: '¡Información!',
+      Swal.fire({        
         html: 'Hoja de vida cargada',
         imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
-        imageWidth: 210,
+        imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });      
@@ -600,11 +597,10 @@ function enviarFormulario(){
         document.form_editarPerfil.submit();
     }else{
       //mostrarERRORES
-      Swal.fire({
-        title: '¡Advertencia!',        
+      Swal.fire({          
         html: 'Faltan algunos datos:<br>'+estado,
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-        imageWidth: 210,
+        imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });      

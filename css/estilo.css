@@ -795,13 +795,19 @@ margin: 0 auto;
     font-size: 24pt;
     font-weight: bold;
 }
-
 .izq{
     border-right: 1px solid #204478
-
 }
 .der{
 border-left: 1px solid #204478
+}
+.planes-promo {
+  background-color: #ec3131;
+  text-transform: uppercase;
+  color: white;
+  padding: 0px;
+  font-size: 24pt;
+  font-weight: bold;
 }
 /*DETALLES*/
 #btn-verde{
@@ -1046,7 +1052,7 @@ padding-top: 10px;
     background-color: white;
     padding: 20px;
     text-align: left;
-    margin-top: 30px;
+    margin-top: 70px;
     margin-bottom: 30px;
  }
  .pie-pag>h3{
@@ -1957,8 +1963,10 @@ div[class*='col-'] {
     width: 100%;
     margin: 0px auto;
     border: none;
-    min-height: 100%;
+    /*min-height: 100%;*/
+    min-height: 20%;
 }
+
 .tabla-planes th{
     padding: 0px;
     background-color: #204478; 
@@ -2261,4 +2269,61 @@ div[class*='col-'] {
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+}
+
+
+.caja-cuenta{
+    border: 2px solid #204478;
+    padding: 10px;
+    color: #204478;
+    margin-bottom: 10px;
+}
+.caja-cuenta p{
+    font-size: 16px;
+    padding-bottom: 2px;
+    text-align: center;
+    font-weight: bold;
+}
+@media (max-width: 1200px) {
+    .navbar-header {
+      float: none;
+    }
+    .navbar-toggle {
+      display: block;
+    }
+    .navbar-collapse.collapse {
+      display: none!important;
+    }
+    .navbar-nav {
+      float: none!important;
+    }
+    .navbar-nav>li {
+      float: none;
+    }
+
+    .esp-men{
+        display: inline !important;
+    }
+    .navbar-collapse.collapse.in{
+      display:block !important;
+    }
+}
+
+.caja-cuenta-2{
+    border: 2px solid #204478;
+    padding: 10px;
+    color: #204478;
+    margin-bottom: 10px;
+}
+.caja-cuenta-2-subt{
+    font-size: 16px;
+    padding-bottom: 2px;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+.caja-cuenta-2 p{
+    position: initial;
+    margin: 0px;
+    padding: 0px;
 }

@@ -51,7 +51,7 @@ class Controlador_Aspirante extends Controlador_Base
         }
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_aspirantes'])){
-            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,/*'T'=>0,*/'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
+            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
         }
 
         $facetas = Modelo_Faceta::obtenerFacetas();
@@ -60,6 +60,42 @@ class Controlador_Aspirante extends Controlador_Base
 
 
         switch ($opcion) {
+            case 'consultarPorcentajesFacetas':
+
+                $id_usuario = (!empty($_POST['id_usuario'])) ? Utils::desencriptar($_POST['id_usuario']) : ''; 
+                $usuario = Modelo_Usuario::obtieneNombres($id_usuario);
+                $graficar = '';
+
+                if(!isset($usuario['grafico']) && $usuario['grafico'] == ''){
+
+                  $result = Modelo_Opcion::datosGraficos2($id_usuario,1,$_SESSION['mfo_datos']['usuario']['id_usuario']);
+                  $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
+
+                  $porcentajesxfaceta = array();
+
+                  $datos = array();
+                  $faceta_uno = '';
+                  foreach ($result as $id_faceta => $valor) {
+                    if($facetasDescripcion[$id_faceta]['literal'] != 'C'){
+                      array_push($datos,$facetasDescripcion[$id_faceta]['literal'].':'.$valor.','.$valor);
+                    }else{
+                      $faceta_uno .= $facetasDescripcion[$id_faceta]['literal'].':'.$valor.','.$valor;
+                    }
+                  }
+                  array_push($datos, $faceta_uno);
+                  $graficar = implode('|',$datos);
+                }
+                Vista::renderJSON(array('graficar'=>$graficar));
+
+            break;
+            case 'guardarGrafico':
+                $imagen = Utils::getParam('imagen','',$this->data);
+                $user = Utils::getParam('id_usuario','',$this->data);
+                $id_usuario = (!empty($user)) ? Utils::desencriptar($user) : '';
+                if (!empty($imagen)){
+                  Modelo_Usuario::actualizarGrafico($id_usuario,$imagen);
+                }
+            break;
             case 'filtrar':       
 
                 $enviar_accesos = Utils::getParam('enviar_accesos', '', $this->data);
@@ -168,13 +204,13 @@ class Controlador_Aspirante extends Controlador_Base
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         }
                         
-                    }/*else if($letra == 'T' && $type == 1){
+                    }else if($letra == 'T' && $type == 1){
 
                         if(isset($situacionLaboral[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         }
                         
-                    }*/else if($letra == 'V' && $type == 1){
+                    }else if($letra == 'V' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         
@@ -258,11 +294,11 @@ class Controlador_Aspirante extends Controlador_Base
                             }
                         }
                         
-                        /*if($letra == 'T'){
+                        if($letra == 'T'){
                             if(isset($situacionLaboral[$value])){
                                 $array_datos[$letra] = array('id'=>$value,'nombre'=>$situacionLaboral[$value]);
                             }
-                        }*/
+                        }
 
                         if($letra == 'V'){
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
@@ -295,7 +331,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                     if(isset($_SESSION['mfo_datos']['subempresas'])){
                         $subempresas = $_SESSION['mfo_datos']['subempresas'];  
-                        //$array_empresas = explode(",",$subempresas);
+
                         foreach ($subempresas as $key => $id) {
                             array_push($array_empresas, $key);
                         }
@@ -308,26 +344,33 @@ class Controlador_Aspirante extends Controlador_Base
                     }
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
 
-                    /*$datos_plan = Modelo_Oferta::obtenerPlanOferta($id_oferta);
-                    $limite_plan = (int)$datos_plan['limite_perfiles'];
-                    $id_plan = $datos_plan['id_plan'];
-                    $id_empresa_plan = $datos_plan['id_empresa_plan'];
-                    $num_accesos_rest = $datos_plan['num_accesos_rest'];
-                    $nombre_plan = $datos_plan['nombre_plan'];
-                    $costo = $datos_plan['costo'];*/
-
                     $filtros = $_SESSION['mfo_datos']['Filtrar_aspirantes'];
-                    //print_r($filtros);
+                    
                     $fill = true;
-                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) /*&& $filtros['O'] == 1 */&& empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C'])){
+
+                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) /*&& $filtros['O'] == 1 */&& empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C']) && empty($filtros['T'])){
                         /*echo 'limite_filtrado: '.*/$limite_filtrado = '';
+
                     }else{
-                        /*echo 'limite_filtrado: '.*/$limite_filtrado = $limite_plan;
+                        $limite_filtrado = $limite_plan;
                         $fill = false;
                     }
 
-                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,false);
-                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$fill);
+                    $usuarios = array();
+                    $usuarios1 = '';
+                    if(!empty($filtros['P'])){
+                        foreach ($usuariosConAccesos as $id => $fecha) {
+                            if($filtros['P'] == 1 && $fecha == ''){
+                                array_push($usuarios, $id);
+                            }else if($filtros['P'] == 2 && $fecha != ''){
+                                array_push($usuarios, $id);
+                            }
+                        }
+                        $usuarios1 = implode(',', $usuarios);
+                    }
+
+                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuarios1,false);
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuarios1,$fill);
                     $cantd_total = count($cantd_aspirantes);
 
                     $_SESSION['mfo_datos']['Filtrar_aspirantes'] = $filtros;
@@ -341,14 +384,8 @@ class Controlador_Aspirante extends Controlador_Base
                             }
                         }
 
-                        /*if($limite_plan >= count($cantd_aspirantes)){
-                            $limite_aspirantes = count($cantd_aspirantes);
-                        }else{
-                            $limite_aspirantes = $limite_plan;
-                        }*/
-                    }/*else{*/
-                        $limite_aspirantes = $cantd_total;
-                    //} 
+                    }
+                    $limite_aspirantes = $cantd_total;
 
                 }else{
 
@@ -400,7 +437,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'id_plan'=>$id_plan,
                     'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
-                    //'situacionLaboral'=>$situacionLaboral,
+                    'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest,
@@ -408,7 +445,6 @@ class Controlador_Aspirante extends Controlador_Base
                     'planes'=>$planes
                 );
          
-                //$url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.((!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta) .'/'.$type.$cadena;
 
                 $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$ruta);
                 $pagination->setPage($page);
@@ -499,7 +535,7 @@ class Controlador_Aspirante extends Controlador_Base
             default:
                 
                 unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,/*'T'=>0,*/'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
+                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
 
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
@@ -636,7 +672,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'id_plan'=>$id_plan,
                     'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
-                    //'situacionLaboral'=>$situacionLaboral,
+                    'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest,

@@ -15,6 +15,8 @@
   </div>
 </div>
 
+
+
 <div class="container-fluid">
 	<?php  
 
@@ -368,20 +370,29 @@
 				?></div>
 				</div>
 		    </div>
-		    <!--<div class="panel panel-default shadow-panel1">
-		      <div class="panel-heading">
-		        <span><i class="fa fa-briefcase"></i> Situaci&oacute;n Laboral</span>
-		      </div>
-		      <div class="panel-body">
-		      	<div class="filtros">
-				    <?php
-				    	/*foreach ($situacionLaboral as $key => $v) {
-							$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T'.$key.'/';
-							echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="'.$key.'">'.utf8_encode($v).'</a></li>';
-					  	}*/ ?>					  	
-					</div>
-		      </div>
-		    </div>-->
+		    <div class="panel panel-default shadow-panel1">
+				<div class="panel-heading" data-toggle="collapse" href="#situacion-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-briefcase"></i> Situaci&oacute;n Laboral
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="situacion-desplegable" aria-expanded="false">
+					<div class="filtros">
+					<?php
+			    	foreach ($situacionLaboral as $key => $v) {
+						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/T'.$key.'/';
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="trabajo" id="'.$key.'">'.utf8_encode($v).'</a></li>';
+					} ?>
+				  	</div>
+				</div>
+		    </div>
 		    <div class="panel panel-default shadow-panel1">
 				<div class="panel-heading" data-toggle="collapse" href="#lic-desplegable">
 				      <div class="row">
@@ -715,7 +726,7 @@
 									           <a href="<?php echo $ruta.'1/'; ?>"><?php echo 'Postulado hace'; ?><i class="fa fa-sort"></i></a>
 									        </th>
 								    	<?php } ?>
-								    	<th colspan="5" style="vertical-align: middle; text-align: center;">INFORME <i data-placement="top" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, canea!</p>" style="padding-left: 5px;font-size: 18px;cursor:help;" class="fa fa-question-circle-o" aria-hidden="true"></i></th>
+								    	<th colspan="5" style="vertical-align: middle; text-align: center;">INFORME <i data-placement="top" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Es un resumen de las características generales por competencias que describe al candidato. </p>" style="padding-left: 5px;font-size: 18px;cursor:help;" class="fa fa-question-circle-o" aria-hidden="true"></i></th>
 								        <th rowspan="2" style="vertical-align: middle; text-align: center;" title="Nivel de Estudios">
 								        	<?php 
 												$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/O3'.$_SESSION['mfo_datos']['Filtrar_aspirantes']['O'].'/';
@@ -886,7 +897,7 @@
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 									            			if($mostrar == ''){
 									            				
-																$variable = '<a target="_blank" href="'.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'/"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+																$variable = '<a target="_blank" onclick="hacerInforme(\''.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'\',\''.Utils::encriptar($a['id_usuario']).'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
 																
 																echo $variable;
 															}else{
@@ -1115,3 +1126,9 @@
     </div>
   </div>
 </section>
+
+<!--grafico para informe-->
+<input style="display:none" type="text" id="datosGrafico" value="<?php echo (!empty($val_grafico)) ? $val_grafico : ""; ?>" />
+<div class="container" id="Chart_details">
+  <!--<div id='chart_div'></div>--><div id='g_chart_1' style="width: auto; height: auto;"></div>
+</div>

@@ -383,6 +383,7 @@ class Modelo_Oferta{
 
   public static function puedeEditar($idOferta,$tiempo){
     if (empty($idOferta)){ return false; }
+
     $sql = "SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= ".($tiempo*60).", 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = ? AND (estado = 1 OR estado = 2) LIMIT 1";    
     return $GLOBALS['db']->auto_array($sql,array($idOferta),false);
   }

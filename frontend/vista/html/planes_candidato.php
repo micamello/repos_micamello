@@ -1,9 +1,11 @@
 <div class="container-fluid">
   <div class="container">
     <div class="col-md-12">
-      <h2 class="titulo text-center">Planes</h2>
+      <div><h2 class="titulo text-center">Planes</h2></div>
+      <br>
     </div>
-    <div class="col-md-12" style="margin: 0 auto;">
+    
+    <div class="col-md-12">
       <div class="pricingdiv flex-container">
       <?php 
       if (!empty($planes)){  
@@ -36,25 +38,29 @@
           <?php } ?>
           <br>
           <br>
+          <br>
+          <br>
           <?php if (empty($plan["costo"])) { ?>
-            <a class="pricebutton btn-blue" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/">
+            <a class="pricebutton btn-blue btn-bottom" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"><span class="icon-tag"></span>
               POSTULARSE
             </a>
-          <?php } else { ?>
-            <a class="pricebutton btn-blue" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');">
+          <?php } else { ?>            
+            <a class="pricebutton btn-blue btn-bottom" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');"><span class="icon-tag"></span>
               SUSCRIBIRSE
             </a>
-          <?php } ?>        
+          <?php } ?>  
+          <p><br></p>      
         </ul>
       <?php 
         } 
       } ?> 
       </div> 
     </div>
+
   </div>  
 </div>
-<br>
  
+<br> 
 <!-- Modal -->
 <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
   <div class="modal-dialog" role="document">    
