@@ -47,7 +47,7 @@ class Modelo_Usuario{
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
                      u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
                      u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,        
-                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil
+                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil, u.grafico
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -230,7 +230,7 @@ WHERE
   public static function actualizarSession($idUsuario,$tipo_usuario){
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.viajar, u.discapacidad, u.residencia, u.id_escolaridad, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
-        ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral
+        ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral, u.grafico
         FROM mfo_usuario u
         INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
         INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -1048,7 +1048,7 @@ WHERE
     if (empty($padre)) { return false; }
      $sql = "SELECT ";
     if($obtCantdRegistros == false){
-      $sql .= "e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_planes,GROUP_CONCAT(ep.id_empresa_plan_parent) AS ids_parents,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes,GROUP_CONCAT(DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d')) AS fecha_compra, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado";
+      $sql .= "e.nombres, e.id_empresa,GROUP_CONCAT(ep.id_empresa_plan) AS ids_empresasPlans,GROUP_CONCAT(ep.id_plan) AS ids_planes,GROUP_CONCAT(ep.id_empresa_plan_parent) AS ids_parents,GROUP_CONCAT(ep.fecha_caducidad) AS fechas_caducidades, GROUP_CONCAT(pl.nombre) AS planes,GROUP_CONCAT(DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d')) AS fecha_compra, GROUP_CONCAT(IF(ep.num_publicaciones_rest = -1,'Ilimitado',ep.num_publicaciones_rest)) AS num_publicaciones_rest, GROUP_CONCAT(IF(ep.num_descarga_rest = -1,'Ilimitado',ep.num_descarga_rest)) AS num_descarga_rest, GROUP_CONCAT(IF(ep.num_accesos_rest = -1,'Ilimitado',ep.num_accesos_rest)) AS num_accesos_rest,GROUP_CONCAT(IF(ep.estado = 1,'Activo','Inactivo')) AS estado";
     }else{
       $sql .= "*";
     }
@@ -1176,6 +1176,13 @@ WHERE
     }
     //echo $sql;
     return $GLOBALS['db']->auto_array($sql,array($id_usuario), true);
+  }
+
+  public static function obtieneNombres($idusuario){
+    if (empty($idusuario)){ return false; }
+    $sql = "SELECT nombres, apellidos,id_usuario,grafico FROM mfo_usuario WHERE id_usuario = ? LIMIT 1";
+    $rs = $GLOBALS['db']->auto_array($sql,array($idusuario));
+    return $rs;
   }
 }  
 ?>

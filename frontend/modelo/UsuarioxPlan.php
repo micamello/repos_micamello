@@ -39,7 +39,7 @@ class Modelo_UsuarioxPlan{
       $values_insert["id_comprobante"] = $idcomprobante;
     }
     if ($tipousuario == Modelo_Usuario::EMPRESA){
-      $values_insert["num_descarga_rest"] = $porcdesc;
+      //$values_insert["num_descarga_rest"] = $porcdesc;
       $values_insert["num_accesos_rest"] = $numaccesos;
       if ($idEmpresaPlanParent != false){
         $values_insert["id_empresa_plan_parent"] = $idEmpresaPlanParent;
@@ -55,7 +55,7 @@ class Modelo_UsuarioxPlan{
       $result = $GLOBALS['db']->update('mfo_usuario_plan',array('estado'=>0),'id_usuario_plan='.$id_usuario_plan);
     }
     else{
-      $result = $GLOBALS['db']->update('mfo_empresa_plan',array('estado'=>0,'num_publicaciones_rest'=>0,'num_descarga_rest'=>0),'id_empresa_plan='.$id_usuario_plan);
+      $result = $GLOBALS['db']->update('mfo_empresa_plan',array('estado'=>0,'num_publicaciones_rest'=>0/*,'num_descarga_rest'=>0*/,'num_accesos_rest'=>0),'id_empresa_plan='.$id_usuario_plan);
     }		
     return $result;
   }
@@ -234,7 +234,7 @@ class Modelo_UsuarioxPlan{
 
   #OBTENER LAS PUBLICACIONES Y DESCARGAS SEGUN EL PLAN SELECCIONADO
   public static function tieneRecursos($idEmpresaPlan=false,$idEmpresa=false){
-    $sql = "SELECT ep.id_plan,ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta, ep.id_empresa_plan,p.nombre, DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d') as fecha_compra
+    $sql = "SELECT ep.id_plan,ep.num_publicaciones_rest AS numero_postulaciones, ep.num_descarga_rest AS numero_descarga, p.num_cuenta, ep.id_empresa_plan,p.nombre, DATE_FORMAT(ep.fecha_compra, '%Y-%m-%d') as fecha_compra, ep.num_accesos_rest AS numero_accesos
      FROM mfo_empresa_plan ep
       INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
       INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
@@ -253,7 +253,7 @@ class Modelo_UsuarioxPlan{
   }
 
   public static function consultarRecursosAretornar($idPlanEmpresa){
-    $sql = "SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres
+    $sql = "SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
       FROM mfo_empresa_plan ep
       INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
       INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
@@ -283,7 +283,13 @@ class Modelo_UsuarioxPlan{
       $cantd_desc = -1;
     }
 
-    return $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => $cantd_post, 'num_descarga_rest' => $cantd_desc),'id_empresa_plan='.$recursos['id_empresa_plan_parent']);
+    if($result['num_accesos_rest'] != -1 && $recursos['num_accesos_rest'] != -1){
+      $cantd_accesos = $result['num_accesos_rest']+$recursos['num_accesos_rest'];
+    }else if($recursos['num_accesos_rest'] == -1){
+      $cantd_accesos = -1;
+    }
+
+    return $GLOBALS['db']->update('mfo_empresa_plan',array('num_publicaciones_rest' => $cantd_post, 'num_descarga_rest' => $cantd_desc, 'num_accesos_rest' => $cantd_accesos),'id_empresa_plan='.$recursos['id_empresa_plan_parent']);
   }
 
   public static function planesConCuentas($idEmpresa/*,$cantd_empresas*/,$planes=false,$tipo=0){
@@ -306,11 +312,11 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array(),true);   
   }
 
-  public static function actualizarPublicacionesEmpresa($id_empresa_plan, $num_post,$num_desc){
+  public static function actualizarPublicacionesEmpresa($id_empresa_plan, $num_post,$num_desc,$num_accesos){
 
     if (empty($id_empresa_plan)) {return false;}
 
-    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post,"num_descarga_rest"=>$num_desc, "estado"=>1), "id_empresa_plan = ".$id_empresa_plan);
+    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("num_publicaciones_rest"=>$num_post/*,"num_descarga_rest"=>$num_desc*/,"num_accesos_rest"=>$num_accesos, "estado"=>1), "id_empresa_plan = ".$id_empresa_plan);
     return $result;
   }
 
@@ -322,7 +328,7 @@ class Modelo_UsuarioxPlan{
       $estado = 0;
     }
     
-    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("estado"=>$estado,"num_publicaciones_rest"=>-1,"num_descarga_rest"=>-1), "id_empresa_plan = ".$id_empresa_plan);
+    $result = $GLOBALS['db']->update('mfo_empresa_plan', array("estado"=>$estado,"num_publicaciones_rest"=>-1/*,"num_descarga_rest"=>-1*/), "id_empresa_plan = ".$id_empresa_plan);
     return $result;
   }
 

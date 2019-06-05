@@ -59,7 +59,7 @@ class Utils{
     $mail->Password = MAIL_PASSWORD;     
     $mail->From = MAIL_CORREO; 
     $mail->FromName = MAIL_NOMBRE;         
-    $mail->SMTPAutoTLS = true;    
+    $mail->SMTPAutoTLS = false;    
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 

@@ -15,13 +15,13 @@ class Modelo_Faceta{
   }*/
   public static function obtenerFacetas(){
     
-    $sql = "SELECT id_faceta,descripcion as faceta, literal FROM mfo_faceta WHERE estado = 1";  
+    $sql = "SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1";  
     $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true); 
     $datos = array();
     $existe = 0;
     if (!empty($arrdatos) && is_array($arrdatos)){
       foreach ($arrdatos as $key => $value) {
-        $datos[$value['id_faceta']] = array('faceta'=>$value['faceta'],'literal'=>$value['literal']);
+        $datos[$value['id_faceta']] = array('faceta'=>$value['faceta'],'literal'=>$value['literal'],'introduccion'=>$value['introduccion']);
       }
     }
     return $datos;         

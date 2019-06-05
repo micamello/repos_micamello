@@ -44,7 +44,7 @@
 <body>
   <!-- <div class="loaderMic">
     <div class="LogMic">
-        <img src="<?php echo PUERTO."://".HOST;?>/imagenes/loader3.gif" class="img-responsive center">
+        <img src="<?php #echo PUERTO."://".HOST;?>/imagenes/loader3.gif" class="img-responsive center">
     </div>
   </div> -->
   <!--                       LEY DE COOKIES                     -->
@@ -183,15 +183,14 @@ if($navegador == 'MSIE'){ ?>
               Inicio';  }else{ echo $optmnu["nombre"]; } ?></a>
             </li>                            
           <?php } ?>
-          <?php if (isset($menu["submenu_cuentas"])){ ?>                            
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Cuentas&nbsp;<i class="fa fa-caret-down"></i>
-                <ul class="dropdown-menu">
-                  <?php foreach($menu["submenu_cuentas"] as $submenu_cuentas){ ?>  
-                   <li><a href="<?php echo $submenu_cuentas['href'];?>"><?php echo $submenu_cuentas['nombre'];?></a></li>
-                 <?php } ?>
-               </ul>
-             </a>
+          <?php if (isset($menu["submenu_cuentas"])){ ?>  
+            <li class="dropdown" >
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración<i class="fa fa-caret-down"></i></a>
+              <ul class="dropdown-menu">
+                <?php foreach($menu["submenu_cuentas"] as $submenu_cuentas){ ?>  
+                 <li><a href="<?php echo $submenu_cuentas['href'];?>"><?php echo $submenu_cuentas['nombre'];?></a></li>
+               <?php } ?>
+             </ul>
            </li>                              
          <?php } ?>
          <?php if (isset($menu["submenu"])){ ?>                            

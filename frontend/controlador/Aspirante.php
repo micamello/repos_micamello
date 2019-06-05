@@ -60,6 +60,42 @@ class Controlador_Aspirante extends Controlador_Base
 
 
         switch ($opcion) {
+            case 'consultarPorcentajesFacetas':
+
+                $id_usuario = (!empty($_POST['id_usuario'])) ? Utils::desencriptar($_POST['id_usuario']) : ''; 
+                $usuario = Modelo_Usuario::obtieneNombres($id_usuario);
+                $graficar = '';
+
+                if(!isset($usuario['grafico']) && $usuario['grafico'] == ''){
+
+                  $result = Modelo_Opcion::datosGraficos2($id_usuario,1,$_SESSION['mfo_datos']['usuario']['id_usuario']);
+                  $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
+
+                  $porcentajesxfaceta = array();
+
+                  $datos = array();
+                  $faceta_uno = '';
+                  foreach ($result as $id_faceta => $valor) {
+                    if($facetasDescripcion[$id_faceta]['literal'] != 'C'){
+                      array_push($datos,$facetasDescripcion[$id_faceta]['literal'].':'.$valor.','.$valor);
+                    }else{
+                      $faceta_uno .= $facetasDescripcion[$id_faceta]['literal'].':'.$valor.','.$valor;
+                    }
+                  }
+                  array_push($datos, $faceta_uno);
+                  $graficar = implode('|',$datos);
+                }
+                Vista::renderJSON(array('graficar'=>$graficar));
+
+            break;
+            case 'guardarGrafico':
+                $imagen = Utils::getParam('imagen','',$this->data);
+                $user = Utils::getParam('id_usuario','',$this->data);
+                $id_usuario = (!empty($user)) ? Utils::desencriptar($user) : '';
+                if (!empty($imagen)){
+                  Modelo_Usuario::actualizarGrafico($id_usuario,$imagen);
+                }
+            break;
             case 'filtrar':       
 
                 $enviar_accesos = Utils::getParam('enviar_accesos', '', $this->data);

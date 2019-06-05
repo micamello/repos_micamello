@@ -546,7 +546,7 @@ function validaCampos(form,btn){
 
 function verifyErrors(){
   var listerrors = document.getElementsByClassName('msg_error');
-  console.log(listerrors.length);
+  //console.log(listerrors.length);
   return listerrors.length;
 }
 
