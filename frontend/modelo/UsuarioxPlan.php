@@ -203,8 +203,7 @@ class Modelo_UsuarioxPlan{
          //echo $sql;
         return $GLOBALS['db']->auto_array($sql,array(),false);
       }else{
-        $sql .= " AND em.fecha_caducidad IS NOT NULL ORDER BY em.id_empresa";
-        //Utils::log("FERNANDA ".$sql);
+        $sql .= " AND em.fecha_caducidad IS NOT NULL ORDER BY em.id_empresa";        
         return $GLOBALS['db']->auto_array($sql,array(),true);
       }
 
@@ -354,6 +353,36 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->execute("UPDATE mfo_empresa_plan SET num_accesos_rest = num_accesos_rest - ".$cantd_a_restar." WHERE id_empresa_plan = ".$id_plan_empresa);
   }
 
+  public static function existePlanEmpresa($idplanes,$id_empresa,$estado=1){
+    if (empty($idplanes) || empty($id_empresa)){ return false; }
+    $sql = "SELECT id_empresa_plan FROM mfo_empresa_plan WHERE id_empresa = ?";
+    if ($estado == 1){
+      $sql .= " AND estado = 1 ";      
+    }
+    $sql .= " AND id_plan IN (".$idplanes.") LIMIT 1";
+    $rs = $GLOBALS['db']->auto_array($sql,array($id_empresa));
+    if (isset($rs["id_empresa_plan"]) && !empty($rs["id_empresa_plan"])){      
+      return true;
+    }
+    else{      
+      return false;
+    }
+  }
+
+  public static function planesActivosEmpresas(){
+    $sql = "SELECT em.id_empresa_plan AS id_usuario_plan, em.id_empresa AS id_usuario, 
+                   em.fecha_caducidad, p.nombre, em.fecha_compra 
+            FROM mfo_empresa_plan em
+            INNER JOIN mfo_plan p ON p.id_plan = em.id_plan
+            WHERE em.estado = 1 AND em.fecha_caducidad IS NOT NULL 
+            ORDER BY em.id_empresa";
+    return $GLOBALS['db']->auto_array($sql,array(),true);        
+  } 
+
+  public static function desactivarPlanEmpresa($id_usuario_plan){
+    if (empty($id_usuario_plan)){ return false; }    
+    return $GLOBALS['db']->update('mfo_empresa_plan',array('estado'=>0),'id_empresa_plan='.$id_usuario_plan);           
+  }
 }  
 
 ?>

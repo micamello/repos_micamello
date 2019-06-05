@@ -1,4 +1,5 @@
-// $('body').css('overflow', 'hidden');
+var puerto_host = $('#puerto_host').val();
+$('body').css('overflow', 'hidden');
 function navegador(){
   var agente = window.navigator.userAgent;
   var navegadores = ["Chrome", "Firefox", "Safari", "Opera", "MSIE", "Trident", "Edge"];
@@ -9,13 +10,22 @@ function navegador(){
   }
 }
 
-// $(document).ajaxStart(function(){
+// $('form').on("submit", function (e) {
+//   $('.loaderMic').css('display', 'block');
+// });
 
+// $(document).ajaxStart(function(){
+//   $('.spin').open({ 
+//       image: puerto_host+'/imagenes/loader.gif',
+//       // color: 'red',
+//     });
 // });
 
 // $(document).ajaxStop(function(){
-
+//   $('.spin').close();
 // });
+
+
 
 function redireccionar(ruta){
   console.log(ruta);
@@ -50,11 +60,20 @@ function quitarError(campo,id){
     $("#"+id).removeClass('has-error');
 }
 
+
+
 "use strict";
 jQuery(document).ready(function ($) {
-  $('body').css('overflow', 'auto');
-  $('.loaderMic').fadeOut( "slow");
+  // console.log();
+  if(window.location.pathname.split("/")[3] != "exito"){
+    $('body').css('overflow', 'auto');
+    $('.loaderMic').delay('2').fadeOut( "fast");
+  }
+
   eventos();
+
+
+
 
     // bannerTel();
 //for Preloader
@@ -101,7 +120,6 @@ function eventos(){
       $(obj).css('background-color', '#FFFFFF');
     });
     variables.on('focus blur', function(event){
-      console.log(event.type);
       if(event.type == "focus"){
         $(this).removeAttr('readonly');
       }
@@ -385,6 +403,7 @@ function validarCorreo(correo,err_correo,seccion_correo,btn){
 
 $('#btn_sesion').click(function () {
   if (!$('#btn_sesion').hasClass("disabled")){
+    $('.loaderMic').css('display', 'block');
     document.form_login.submit();
   }      
 });
@@ -392,6 +411,7 @@ $('#btn_sesion').click(function () {
 $("#password1").keypress(function(e) {
   if(e.which == 13) {
     if (!$('#btn_sesion').hasClass("disabled")){
+      $('.loaderMic').css('display', 'block');
       document.form_login.submit();
     }   
   }
@@ -399,12 +419,14 @@ $("#password1").keypress(function(e) {
 
 $('#recomendaciones').click(function () {
   if (!$('#recomendaciones').hasClass("disabled")){
+    $('.loaderMic').css('display', 'block');
     $('#form_recomendaciones').submit();    
   }      
 });
 
 $('#recuperar').click(function () {
   if (!$('#recuperar').hasClass("disabled")){
+    $('.loaderMic').css('display', 'block');
     $('#form_contrasena').submit();    
   }      
 });
@@ -489,7 +511,7 @@ function validarDir(direccion,err_dir, seccion_dir,btn){
 
   }else if(expreg1.test(direccion) == false){
 
-    colocaError(err_dir, seccion_dir,"Formato incorrecto, solo letras y n\u00FAmeros",btn); 
+    colocaError(err_dir, seccion_dir,"Solo letras y n\u00FAmeros, sin comas ni puntos",btn); 
     error = 1;
 
   }else{

@@ -198,11 +198,10 @@ function enviarPclave(ruta,tipo,page){
 	}else{
 		
         if(tipo == 1){
-          Swal.fire({
-            title: '¡Notificación!',
+          Swal.fire({            
             html: 'La longitud mínima de la palabra clave es de 3 caracteres',
             imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-            imageWidth: 210,
+            imageWidth: 75,
             confirmButtonText: 'ACEPTAR',
             animation: true
           });            
