@@ -42,8 +42,8 @@ class Modelo_Plan{
               INNER JOIN mfo_plan p ON u.id_plan = p.id_plan
               LEFT JOIN mfo_factura f ON f.id_comprobante = u.id_comprobante AND 
                                          f.tipo_usuario = 1 AND f.estado = ".Modelo_Factura::AUTORIZADO."
-              WHERE u.id_usuario = ? AND
-                    (u.estado = 1 OR (u.estado = 0 AND u.id_comprobante <> ''))
+              WHERE u.id_usuario = ? /*AND
+                    (u.estado = 1 OR (u.estado = 0 AND u.id_comprobante <> ''))*/
               ORDER BY u.fecha_compra ASC";
     }
     else{
@@ -66,8 +66,8 @@ class Modelo_Plan{
               INNER JOIN mfo_plan p ON e.id_plan = p.id_plan
               LEFT JOIN mfo_factura f ON f.id_comprobante = e.id_comprobante AND 
                                          f.tipo_usuario = 2 AND f.estado = ".Modelo_Factura::AUTORIZADO."
-              WHERE e.id_empresa = ? AND
-                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))";
+              WHERE e.id_empresa = ? /*AND
+                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))*/";
 
               if($idPlan != false){
                 $sql .= " AND e.id_empresa_plan = ".$idPlan;
