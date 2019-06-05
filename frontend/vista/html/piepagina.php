@@ -6,6 +6,7 @@
         <h3>Nosotros</h3>
         <p><a class="" target="_blank" href="<?php echo PUERTO.'://'.HOST.'/quienesSomos/'?>">¿Quiénes somos?</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO; ?>://blog.micamello.com.ec/" target="blanked">Blog</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/canea/"?>" target="blanked">¿Qué es CANEA?</a></p>
         <h3>Políticas de Privacidad</h3>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">Términos y Condiciones</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">Políticas de Privacidad</a></p>
@@ -33,6 +34,9 @@
         </a>
         <a href="<?php echo INSTAGRAM; ?>" target="_blank">
           <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/ins.png" class="redes-mic">
+        </a>
+        <a href="<?php echo LINKEDIN; ?>" target="_blank">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/redes/linkedin.png" class="redes-mic">
         </a>
       </div>
       <div class="col-md-12">

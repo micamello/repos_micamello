@@ -136,8 +136,21 @@ display: inline;
   text-transform: uppercase;
   color: white;
   font-weight: bold;
-  font-size: 18pt;
-  padding: 10px 0px;
+  font-size: 16px;
+  padding: 10px 10px;
+  border: 2px solid #204478;
+
+}
+
+.perfil-cuadro:hover{
+    color: #204478;
+    border: 2px solid #204478;
+    background-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+}
+.perfil-cuadro:hover label{
+    cursor: pointer;
 }
  /*TIMER*/
  #regEmpMic{
@@ -235,6 +248,12 @@ display: inline;
 
 /*PANTALLAS PEQUEÑAS*/
 @media screen and (max-width:600px){
+    #logo-1{
+        margin-top: -20px;
+    }
+     #letra-tip{
+        font-size: 10px; 
+    }
     #btn-pre{
         margin-top: 0px;
         font-size: 16px;
@@ -348,6 +367,12 @@ display: inline;
 
 /*PANTALLAS MEDIANAS*/
 @media only screen and (max-width:1000px) and (min-width:481px){
+    #logo-1{
+         margin-top: -20px;
+    }
+    #letra-tip{
+        font-size: 10px; 
+    }
     #btn-pre{
         margin-top: 20px;
     }
@@ -427,7 +452,9 @@ display: inline;
 }
 /*PANTALLAS GRANDES*/
 @media only screen and (min-width:1000px){
-
+    #logo-1{
+         margin-top: -10px;
+    }
     .img-res2{
         width: 100px;
     }
@@ -550,6 +577,7 @@ display: inline;
 /*REGISTRO*/
 @media (min-width: 768px) {
   .container {
+    /*revisar esto*/
     /*width: 75%;*/
   }
 }
@@ -1042,11 +1070,11 @@ padding-top: 10px;
     margin-top: 20px;
     padding: 40px 0px 40px 0px;
  }
- #inicio-cuadro{
+  #inicio-cuadro{
     background-color: white;
     padding: 20px;
     text-align: left;
-    margin-top: 30px;
+    margin-top: 70px;
     margin-bottom: 30px;
  }
  .pie-pag>h3{
@@ -1358,6 +1386,33 @@ ul.checkout-bar a {
 .custom_file:hover img 
 {
     transform: scale(1.2);
+}
+
+/**ESTILO*/
+.carousel-fade .carousel-inner .item {
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
 }
 
 /*Brand Section
@@ -1973,11 +2028,11 @@ div[class*='col-'] {
   font-weight: 400;
   font-size: 15px;
 }
-#registro-algo-centro{
+/*#registro-algo-centro{
     margin: 0 auto;
     background-color: #204478;
 
-}
+}*/
 
 .errorContainer{
     position: relative;
@@ -2261,4 +2316,222 @@ div[class*='col-'] {
   animation-duration: 1s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
+}
+
+/*#logo-1{
+    padding-top: -10px;
+}*/
+
+
+.css-typing p {
+  border-right: .15em solid grey;
+  white-space: nowrap;
+  overflow: hidden;
+text-align: left;
+} 
+/*
+animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;*/
+.css-typing p:nth-child(1) {
+  width: 11.6em;
+  -webkit-animation: type 7s steps(70, end);
+  animation: type 7s steps(70, end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.css-typing p:nth-child(2) {
+  width: 25em;
+  opacity: 0;
+  -webkit-animation: type2 7s steps790, end);
+  animation: type2 7s steps(70, end);
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.css-typing p:nth-child(3) {
+  width: 23em;
+  opacity: 0;
+  -webkit-animation: type3 7s steps(53, end);
+  animation: type3 7s steps(53, end);
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+.css-typing p:nth-child(4) {
+  width: 13em;
+  opacity: 0;
+  -webkit-animation: type4 5s steps(30, end), blink .5s step-end infinite alternate;
+  animation: type4 3.5s steps(30, end), blink .5s step-end infinite alternate;
+  -webkit-animation-delay: 14s;
+  animation-delay: 14s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@-webkit-keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@-webkit-keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+@-webkit-keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type4 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+@-webkit-keyframes type4 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    border-color: tranparent;
+  }
+}
+
+.cont-rrss{
+    padding: 0px 5px;
+}
+
+/*NUEVOS CAMBIOS 3/06*/
+@media (max-width: 1200px) {
+    .navbar-header {
+      float: none;
+    }
+    .navbar-toggle {
+      display: block;
+    }
+    .navbar-collapse.collapse {
+      display: none!important;
+    }
+    .navbar-nav {
+      float: none!important;
+    }
+    .navbar-nav>li {
+      float: none;
+    }
+
+    .esp-men{
+        display: inline !important;
+    }
+    .navbar-collapse.collapse.in{
+      display:block !important;
+    }
 }
