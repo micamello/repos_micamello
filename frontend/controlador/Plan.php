@@ -1,8 +1,7 @@
 <?php
 class Controlador_Plan extends Controlador_Base {
    
-  public function construirPagina(){    
-    Utils::log("mostrar_notif 2: ".$_SESSION["mostrar_notif"]);
+  public function construirPagina(){        
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }    
@@ -29,6 +28,10 @@ class Controlador_Plan extends Controlador_Base {
       break;
       case 'planes_usuario':
         $this->planesUsuario();
+      break;
+      case 'verificarCompra':
+        // Utils::log("eder llego al controlador");
+        $this->verificaCompra();
       break;
       default:        
         $this->mostrarDefault(1);
@@ -64,6 +67,7 @@ class Controlador_Plan extends Controlador_Base {
   }
  
   public function mostrarDefault($tipo){
+    $breadcrumbs['planes'] = 'Planes';
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
     $sucursal = SUCURSAL_ID;           
     if ($tipousu == Modelo_Usuario::CANDIDATO){
@@ -71,15 +75,16 @@ class Controlador_Plan extends Controlador_Base {
     }
     else{
       $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);      
-      $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
+      if (isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){
+        $tags['gratuitos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
+      }            
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);
       $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
-
     }        
-
     $tags["template_css"][] = "media-queries";
     // $tags["template_css"][] = "planes";
     $tags["template_js"][] = "planes";
+    $tags['breadcrumbs'] = $breadcrumbs;
     $render = ($tipousu == Modelo_usuario::CANDIDATO) ? "planes_candidato" : "planes_empresa";       
     if($tipo == 1){    
       Vista::render($render, $tags); 
@@ -243,10 +248,11 @@ class Controlador_Plan extends Controlador_Base {
       }
       $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+      // $tags["template_js"][] = "planValidarActivacion";
       $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
     }  
-    Vista::render($template, $tags);       
+    Vista::render($template, $tags,'', '');       
   }
 
   public function generarTransactionId(){

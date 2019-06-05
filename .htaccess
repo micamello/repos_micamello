@@ -85,7 +85,6 @@ RewriteRule ^velocimetro/$ %{ENV:REWRITEBASE}index.php?mostrar=velocimetro [L]
 
 #publicar
 RewriteRule ^publicar/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar [L]
-RewriteRule ^registroOferta/$ %{ENV:REWRITEBASE}index.php?mostrar=publicar&opcion=registroOferta [L]
 
 
 
@@ -202,3 +201,6 @@ RewriteRule ^hvUsuario/([A-Za-z0-9]+)/([0-9]+)/([0-9]+)/?$ %{ENV:REWRITEBASE}ind
 #RegistroRespuestas
 RewriteRule ^canea/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=canea [L]
 RewriteRule ^quienesSomos/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=quienesSomos [L]
+RewriteRule ^terminoscondiciones/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=terminoscondiciones [L]
+RewriteRule ^politicaprivacidad/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=politicaprivacidad [L]
+RewriteRule ^politicacookie/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=politicacookie [L]

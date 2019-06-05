@@ -22,7 +22,7 @@ class Modelo_Plan{
             INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
             INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
             WHERE p.tipo_usuario = ? AND p.estado = 1 AND p.id_sucursal = ? AND 
-                  a.estado = 1 AND p.visibilidad = 1 ";    
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1 ";    
     if (!empty($costo)){        
       $sql .= ($costo == 1) ? " AND p.costo = 0 " : " AND p.costo <> 0 ";            
     }

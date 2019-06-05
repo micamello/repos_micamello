@@ -37,6 +37,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       case 'informeusuario':
 
         $usuario = Modelo_Usuario::existeUsuario($username);
+
         $idusuario = $usuario['id_usuario']; 
         $idPlan = Utils::getParam('idPlan','',$this->data);
         $idPlan = ((!empty($idPlan)) ? Utils::desencriptar($idPlan) : $idPlan);
@@ -61,22 +62,23 @@ class Controlador_GenerarPDF extends Controlador_Base
 
           }else{
             $puedeDescargar = false;
-            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n';
+            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n, por favor adquiera un plan.';
             //$ruta = PUERTO . '://' . HOST . '/vacantes/';
           }
         }
-
-        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-
-          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial'))){
+        
+        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
+          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial'))){                    
             $puedeDescargar = true;
           }else{ 
             $puedeDescargar = false;
-            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n';
+            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n, por favor adquiera un plan.';
           }
         }
 
-        if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){
+        
+        if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || 
+           ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){
         
           $result = Modelo_Opcion::datosGraficos2($idusuario,1,$id_empresa); 
           $cantd_facetas = count($result);
@@ -1048,7 +1050,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $mpdf->WriteHTML($enddoc);
 
         $mpdf->WriteHTML($html);
-        $mpdf->Output($datos['username'].".pdf", 'I');
+        $mpdf->Output($datos['username'].".pdf", 'D');
         // self::informePersonalidad($html, );
   }
 }

@@ -396,13 +396,13 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 														<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
 															<div class="col-md-2 col-sm-3 col-xs-6">
-																<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/"; ?>">
+																<a class="f-s-16px"  style="cursor:pointer" title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/"; ?>">
 																	<i class="postulacion-icono-basura fa fa-trash"></i><br>Eliminar postulaci&oacute;n
 																</a>
 															</div>
 														<?php }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1){ ?>
 															<div class="col-md-2 col-sm-3 col-xs-6">
-																<a style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.$o['empresa'].')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
+																<a class="f-s-16px" style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.$o['empresa'].')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
 																	<i class="postulacion-icono-basura fa fa-trash"></i><br>Eliminar postulaci&oacute;n
 																</a>
 															</div>
@@ -431,7 +431,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 															<div class="<?php if($vista == 'postulacion' && (isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1 && $o['tipo'] == 1)){ echo 'col-md-2 col-sm-3 col-xs-6'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 1){ echo 'col-md-4 col-sm-6 col-xs-12'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 2){ echo 'col-md-2 col-sm-3 col-xs-6'; }  
 															if($puedeEditar["editar"] == 0 && $vista == 'vacantes'){ echo 'col-md-6 col-md-offset-6 col-xs-12'; } ?> ">
 															<?php } ?>
-															<a href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/"; ?>">
+															<a class="f-s-16px" href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/"; ?>">
 																<i class="postulacion-icono-ver fa fa-eye"></i><br>
 															Ver detalles de la oferta</a>
 															<?php if($vista != 'oferta'){ ?>

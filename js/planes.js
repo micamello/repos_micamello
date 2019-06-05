@@ -87,13 +87,13 @@ function loadplanes(idplan){
 }
 
 function loadavisos(idplan){	
-  var estilotitulo = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'headingrojo titulo-planes' : 'headingazul titulo-planes';
+  var estilotitulo = ($('#avisoprom_'+idplan).attr('value') == 1) ? '' : '';
   // var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
-  var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? '' : '';
+  //var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? '' : '';
   var duracion = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';  
   duracion = duracion + (($('#avisodura_'+idplan).attr('value') != 0) ? $('#avisodura_'+idplan).attr('value') + ' d&iacute;as' : 'Ilimitado');  
   //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#avisoid_'+idplan).attr('value')+'.'+$('#avisoext_'+idplan).attr('value');
-  var costo = $('#simbolo').val()+$('#avisocosto_'+idplan).attr('value');
+  //var costo = $('#simbolo').val()+$('#avisocosto_'+idplan).attr('value');
   var permisos = $('#avisopermiso_'+idplan).attr('value').split('||');
   var strperm = '';
   if (permisos.length > 1){
@@ -103,25 +103,14 @@ function loadavisos(idplan){
         strperm = strperm + '<li class="lista-plan" class="text-justify"><p class="lista-plan-2">'+permisos[i]+'</p></li> ';
 	    }
 	  }
-  }
+  }  
   $('#avisotitulo').html($('#avisotitulo_'+idplan).attr('value'));
-  $('#avisotitulo').attr('class','title '+estilotitulo);
-  $('#avisoul').attr('style',estiloul);
+  //$('#avisotitulo').attr('class','title '+estilotitulo);
+  //$('#avisoul').attr('style',estiloul);
   //$('#avisoimg').attr('src',srcimagen);
   $('#avisodura').html(duracion);
-  $('#avisocosto').html(costo);
+  //$('#avisocosto').html(costo);
   $('#avisopermisos').html(strperm);
-}
-
-function mensaje(){
-  Swal.fire({
-    title: '¡Información!',
-    html: 'Por ser nuestro lanzamiento le otorgamos el paquete Simple totalmente gratis',
-    imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
-    imageWidth: 210,
-    confirmButtonText: 'ACEPTAR',
-    animation: true
-  });  
 }
 
 $(function() {  	

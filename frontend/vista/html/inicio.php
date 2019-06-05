@@ -8,7 +8,7 @@
                   <?php if(!Modelo_Usuario::estaLogueado()){ ?>
                     <div class="col-md-12">
                       <button class="btn-blue" id="cuadro-celeste">
-                        <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete m&aacute;s</a>
+                        <a href="<?php echo PUERTO."://".HOST."/registro/"?>" class="texto-white">Suscr&iacute;bete</a>
                       </button>
                     </div>
                   <?php } ?>

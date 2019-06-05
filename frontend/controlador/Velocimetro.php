@@ -56,7 +56,7 @@ class Controlador_Velocimetro extends Controlador_Base {
       $valorporc = 40;
       $img = 'vel2.png';
       $msj2 = '¡Excelente! Ahora sus posibilidades se han incrementado. Mejore sus oportunidades al  completar el <b>TEST CANEA</b>. No desespere, recuerde que obtendrá mejores resultados y beneficios para su carrera profesional.';
-      $textoBoton = "CONTINUAR";
+      $textoBoton = "VER PLANES";
     }
     else{
       $valorporc = 100;

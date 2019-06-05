@@ -7,9 +7,9 @@
         <p><a class="" target="_blank" href="<?php echo PUERTO.'://'.HOST.'/quienesSomos/'?>">¿Quiénes somos?</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO; ?>://blog.micamello.com.ec/" target="blanked">Blog</a></p>
         <h3>Políticas de Privacidad</h3>
-        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/terminos_y_condiciones".SUCURSAL_ID.".pdf";?>" target="_blank">Términos y Condiciones</a></p>
-        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_privacidad".SUCURSAL_ID.".pdf";?>" target="_blank">Políticas de Privacidad</a></p>
-        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/docs/politicas_de_cookies".".pdf";?>" target="_blank">Políticas de Cookies</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">Términos y Condiciones</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">Políticas de Privacidad</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/politicacookie/";?>" target="_blank">Políticas de Cookies</a></p>
         <p><a target="_blank" class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a></p>
       </div>
       <div class="pie-pag col-md-4" style=" padding-left: 30px;">
@@ -63,6 +63,7 @@
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
+<script src="<?php echo PUERTO."://".HOST;?>/js/spinMic.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
@@ -87,11 +88,10 @@ if (isset($template_js) && is_array($template_js)){
 <?php if (isset($sess_err_msg) && !empty($sess_err_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){          
-          Swal.fire({
-            title: '¡Advertencia!',
+          Swal.fire({            
             text: '".$sess_err_msg."',
             imageUrl: '".PUERTO."://".HOST."/imagenes/wrong-04.png',
-            imageWidth: 210,
+            imageWidth: 75,
             confirmButtonText: 'ACEPTAR',
             animation: true
           });     
@@ -102,8 +102,7 @@ if (isset($template_js) && is_array($template_js)){
 <?php if (isset($sess_suc_msg) && !empty($sess_suc_msg)){
   echo "<script type='text/javascript'>
         $(document).ready(function(){
-          Swal.fire({
-            title: '¡Exitoso!',
+          Swal.fire({            
             text: '".$sess_suc_msg."',
             imageUrl: '".PUERTO."://".HOST."/imagenes/logo-04.png',
             imageWidth: 210,

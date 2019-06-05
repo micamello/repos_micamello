@@ -11,11 +11,7 @@ class Controlador_Perfil extends Controlador_Base
         if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){
             Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
         }
-
-        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
-          $_SESSION['mostrar_notif'] = "Debe completar el perfil para continuar";        
-        } 
-
+                        
         $msj1 = $imgArch1 = $btnDescarga = '';
         $tipo_usuario = $_SESSION['mfo_datos']['usuario']['tipo_usuario'];
 
@@ -44,8 +40,7 @@ class Controlador_Perfil extends Controlador_Base
                 $arrciudad    = Modelo_Ciudad::obtieneCiudadxProvincia($id_provincia);
                 Vista::renderJSON($arrciudad);
                 break;
-            default:
-
+            default:                
                 $arridioma = $arrnivelidioma = $escolaridad = $arrarea = $universidades = $puedeDescargarInforme = $genero = $situacionLaboral = $licencia = $estado_civil = $areas = $arrsectorind = $nivelIdiomas = $cargo = array();          
 
                 //Listados de datos para llenar los select de la vista
@@ -88,6 +83,13 @@ class Controlador_Perfil extends Controlador_Base
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
                     $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
+
+                if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && 
+                    (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || 
+                     empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){           
+                  $_SESSION['mostrar_notif'] = "Debe completar el perfil para continuar";        
+                } 
+                
                 //Detecta si el parametro cambiarClave viene por post para así acceder al cambio de clave
                 if (Utils::getParam('cambiarClave') == 1) {
 
@@ -455,8 +457,9 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }            
             $GLOBALS['db']->commit();
-            Controlador_Login::registroSesion(Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario));
-            $_SESSION['mostrar_exito'] = 'El perfil fue completado';
+            $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario);            
+            Controlador_Login::registroSesion($sess_usuario);            
+            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
             
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();

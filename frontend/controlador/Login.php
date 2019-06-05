@@ -23,7 +23,7 @@ class Controlador_Login extends Controlador_Base {
             }            
           } 
           if ($usuario["estado"] != 1){
-            throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electr\u00F3nico para activarlo o comuniquese con el administrador para su activaci\u00F3n");            
+            throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electr\u00F3nico para activarlo o escr\u00EDbanos a info@micamello.com.ec para su activaci\u00F3n");            
           }   
 
           if(!empty($usuario['ultima_sesion'])){       
@@ -35,7 +35,7 @@ class Controlador_Login extends Controlador_Base {
           self::registroCache($_SESSION['mfo_datos']['usuario']);              
         }
         else{
-          throw new Exception("Usuario o Password Incorrectos");
+          throw new Exception("Usuario o contrase\u00F1a incorrectos");
         }         
         
         Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
@@ -54,7 +54,7 @@ class Controlador_Login extends Controlador_Base {
   }
  
   public static function registroSesion($usuario){     
-    $_SESSION['mfo_datos']['usuario'] = $usuario;
+    $_SESSION['mfo_datos']['usuario'] = $usuario;    
     //busqueda de planes activos
     $planesactivos = Modelo_UsuarioxPlan::planesActivos($usuario["id_usuario"],$usuario["tipo_usuario"]);
     if (!empty($planesactivos) && is_array($planesactivos)){

@@ -2,6 +2,9 @@
   
   <div class="text-center">
     <h2 class="titulo">Env&iacute;anos tus dudas y sugerencias</h2>
+
+    <p class="qs-text">Si desea enviarnos sus dudas y sugerencias, por favor complete  el siguiente cuadro y responderemos lo antes posible.</p>
+
   </div>
   
   <div class="container bloque-gris" style="padding: 0px;">

@@ -52,25 +52,14 @@ class Controlador_Publicar extends Controlador_Base {
         }
         Vista::renderJSON($confidencialPlan);
       break;
-      case 'registroOferta':
-        $datos = $_POST;
-        try {
-            $validados = $this->validarCampos($datos);
-                $GLOBALS['db']->beginTrans();
-                  $this->guardarDatosOferta($validados);
-                $GLOBALS['db']->commit();
-                $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
-                $_SESSION['mostrar_exito'] = 'Su oferta se ha publicado correctamente, debe esperar un m\u00E1ximo de '.$tiempo.' horas para que el administrador apruebe el nuevo contenido.'; 
-                $url = "vacantes/"; 
-         } catch (Exception $e) {
-                $url = "publicar/";
-                $GLOBALS['db']->rollback();
-                $_SESSION['mostrar_error'] = $e->getMessage();
-         }
-         Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
-      break;
+      // case 'registroOferta':
+
+        
+         // Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
+      // break;
+
       default:
-        $this->mostrarDefault();
+            $this->mostrarDefault();
       break;
     } 
   }
@@ -91,8 +80,10 @@ class Controlador_Publicar extends Controlador_Base {
     }
 
     $breadcrumbs['publicar'] = 'publicar oferta';
+    $idProvinciaSucursal = $arrprovinciasucursal[0]['id_provincia'];
+    if(!empty($_POST['provinciaOf']) && $_POST){$idProvinciaSucursal = $_POST['provinciaOf'];}
     $arrprovinciasucursal = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
-    $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($arrprovinciasucursal[0]['id_provincia']);
+    $arrciudad = Modelo_Ciudad::obtieneCiudadxProvincia($idProvinciaSucursal);
     $arrjornada = Modelo_Jornada::obtieneListado();
     $arridioma = Modelo_Idioma::obtieneListado();
     $arrnivelidioma = Modelo_NivelIdioma::obtieneListado();
@@ -122,6 +113,24 @@ class Controlador_Publicar extends Controlador_Base {
     $tags["template_js"][] = "multiple_select";
     $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "validatePublicar";
+
+    if(isset($_POST) && !empty($_POST)){
+      $datos = $_POST;
+        try {
+          $validados = $this->validarCampos($datos);
+          $GLOBALS['db']->beginTrans();
+          $this->guardarDatosOferta($validados);
+          $GLOBALS['db']->commit();
+          $_SESSION['mostrar_exito'] = 'Su oferta se ha publicado correctamente'; 
+          $url = "vacantes/";
+          Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
+         }
+         catch (Exception $e) {
+          $_SESSION['dataPublicar'] = $_POST;
+          $GLOBALS['db']->rollback();
+          $_SESSION['mostrar_error'] = $e->getMessage();
+        }
+      }
     Vista::render('publicar_vacante', $tags);
   }
 
@@ -263,9 +272,6 @@ class Controlador_Publicar extends Controlador_Base {
   }
 
   public function guardarDatosOferta($datos){
-    // Utils::log(print_r($datos, true));
-    // var_dump($datos);
-    // exit();
     $datosRequisitoOferta = array('viajar'=>$datos['DispOf'],
                                   'residencia'=>$datos['residenciaOf'],
                                   'discapacidad'=>$datos['discapacidadOf'],
@@ -286,7 +292,7 @@ class Controlador_Publicar extends Controlador_Base {
                          'fecha_contratacion'=>$datos['fechaCont'],
                          'vacantes'=>$datos['cantVac'],
                          'anosexp'=>$datos['anosexp'],
-                         'estado'=>0,
+                         'estado'=>2,
                          'fecha_creado'=>$fechaActual,
                          'tipo'=>$datos['ofertaUrgenteOf'],
                          'primer_empleo'=>$datos['primerEmpleoOf'],
@@ -297,7 +303,6 @@ class Controlador_Publicar extends Controlador_Base {
                          'id_empresa_plan'=>$datos['id_empresa_plan'],
                          'id_tipolicencia'=>$datos['licenciaOf']
                           );
-          
       if(!Modelo_Oferta::guardarOferta($datosOferta)){
         throw new Exception("Ha ocurrido un error al guardar los datos de la oferta");
       }
