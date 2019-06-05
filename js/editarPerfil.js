@@ -1,63 +1,11 @@
+//HACER ESTO AL MOMENTO DE TERMINAR EL TERCER CUESTIONARIO
 $(document).ready(function(){
-
-    var datos = $('#datosGrafico').val();
-
-    if(datos != ''){
-
-        datos = datos.split('|');
-        
-        var arreglo = [['Task', 'Hours per Day']];
-        for (var i = 0; i < datos.length; i++) {
-
-            var porcion = datos[i].split(',');
-            porcion[1] = parseFloat(porcion[1]);
-            arreglo.push(porcion);
-        }
-        var puerto_host = $('#puerto_host').val();
-        google.charts.load("current", {packages:["corechart"]});
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable(arreglo);
-
-            var options = {
-              pieSliceText: 'label',
-              is3D: true,
-              width:3500,
-              height:2000,
-              pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
-              fontSize:80,
-              legend: 'none',
-              slices: {
-                0: { color: '#FCDC59' },
-                1: { color: '#E25050' },
-                2: { color: '#8C4DCE' },
-                3: { color: '#2B8DC9' },
-                4: { color: '#5EB782' }
-              }
-            };
-
-            document.getElementById('Chart_details').style.display='block';
-            var chart_1 = new google.visualization.PieChart(document.getElementById('g_chart_1'));
-            chart_1.draw(data, options);
-            var chart_div = document.getElementById('chart_div');
-
-            google.visualization.events.addListener(chart_1, 'ready', function () {
-
-               var uri = chart_1.getImageURI();
-               document.getElementById('Chart_details').style.display='none';
-               //chart_div.innerHTML = '<img width="600" heigth="600" align="center" src="'+uri+'">';
-
-               $.ajax({
-                    type: "POST",
-                    url: puerto_host+"/index.php?mostrar=velocimetro&opcion=guardarGrafico",
-                    data: {imagen:uri},
-                    dataType:'json',
-               });
-            });
-        }
-    }
+  console.log(errorsVerify());
+  if(errorsVerify() == false){
+    $('.btnPerfil').addClass('disabled');
+    $('.btnPerfil').attr('disabled', 'disabled');
+  }
 });
-
 
 if(document.getElementById('form_editarPerfil')){
 
@@ -204,7 +152,7 @@ function validarImg(archivo){
     Swal.fire({      
       html: 'Imagen cargada',
       imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
-      imageWidth: 210,
+      imageWidth: 75,
       confirmButtonText: 'ACEPTAR',
       animation: true
     });     
@@ -597,8 +545,8 @@ function enviarFormulario(){
         document.form_editarPerfil.submit();
     }else{
       //mostrarERRORES
-      Swal.fire({          
-        html: 'Faltan algunos datos:<br>'+estado,
+      Swal.fire({
+        html: 'Faltan algunos datos por completar:<br>Los campos con (*) son obligatorios',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
         imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
@@ -686,7 +634,7 @@ function validarFormulario(tipovalidacion){
             quitarError("seleccione_error","seleccione_group");          
           }else{
             colocaError("seleccione_error","seleccione_group",err_list,"boton");
-            mensaje += '- Tipo de documento, '+err_list+'\n';
+            mensaje += '- Tipo de documento, '+err_list+'<br>';
             error = 1;
           }          
           
@@ -698,32 +646,32 @@ function validarFormulario(tipovalidacion){
                     quitarError("err_dni","seccion_dni");
                   }else{
                     colocaError("err_dni", "seccion_dni","Documento no válido","boton");
-                    mensaje += "- Documento ingresado no es válido"+'\n';
+                    mensaje += "- Documento ingresado no es válido"+'<br>';
                     error = 1;      
                   }
                 }else{
                   colocaError("err_dni", "seccion_dni","Documento ya existe","boton");
-                  mensaje += "- Documento ingresado ya existe"+'\n'; 
+                  mensaje += "- Documento ingresado ya existe"+'<br>'; 
                   error = 1; 
                 } 
               }else if(tipo_doc == 2 && document.getElementById('dni').value.length < 10){
                 colocaError("err_dni", "seccion_dni","Documento mínimo de 10 dígitos","boton");
                 error = 1;
-                mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'\n';
+                mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'<br>';
               }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
                 colocaError("err_dni", "seccion_dni","Documento mínimo de 6 dígitos","boton");
                 error = 1;
-                mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'\n';
+                mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'<br>';
               }
               else if(tipo_doc == 1 && document.getElementById('dni').value.length < 13){
                 colocaError("err_dni", "seccion_dni","Documento mínimo de 13 dígitos","boton");
                 error = 1;
-                mensaje += "- El RUC debe tener mínimo 13 dígitos"+'\n';
+                mensaje += "- El RUC debe tener mínimo 13 dígitos"+'<br>';
               }
             }    
           }else{
             colocaError("err_dni", "seccion_dni",err_campo,"boton");
-            mensaje += "- Documento no puede ser vacío"+'\n';
+            mensaje += "- Documento no puede ser vacío"+'<br>';
             error = 1;
           }
         }
@@ -734,12 +682,12 @@ function validarFormulario(tipovalidacion){
         }else if(document.getElementById('btnDescarga').value == 0 && document.getElementById('subirCV').value == ''){
             error = 1;
             //console.log('entro');
-            mensaje += '- Debe cargar la hoja de vida\n';
+            mensaje += '- Debe cargar la hoja de vida<br>';
         }
 
         if(discapacidad == null || discapacidad == 0){
             colocaError("err_dis", "seccion_dis",err_list,"boton");
-            mensaje += '- Discapacidad, '+err_list+'\n';
+            mensaje += '- Discapacidad, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_dis", "seccion_dis");
@@ -756,7 +704,7 @@ function validarFormulario(tipovalidacion){
         if(genero == null || genero == 0){
 
             colocaError("err_gen", "seccion_gen",err_list,"boton");
-            mensaje += '- Genero, '+err_list+'\n';
+            mensaje += '- Genero, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_gen", "seccion_gen");
@@ -765,7 +713,7 @@ function validarFormulario(tipovalidacion){
         if(tiene_trabajo == null || tiene_trabajo == 0){
 
             colocaError("err_trab", "seccion_trab",err_list,"boton");
-            mensaje += '- Situaci\u00F3n laboral, '+err_list+'\n';
+            mensaje += '- Situaci\u00F3n laboral, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_trab", "seccion_trab");
@@ -774,7 +722,7 @@ function validarFormulario(tipovalidacion){
         if(residencia == null || residencia == 0){
 
             colocaError("err_res", "seccion_res",err_list,"boton");
-            mensaje += '- Cambio de residencia?, '+err_list+'\n';
+            mensaje += '- Cambio de residencia?, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_res", "seccion_res");
@@ -784,7 +732,7 @@ function validarFormulario(tipovalidacion){
         if(viajar == null || viajar == 0){
 
             colocaError("err_via", "seccion_via",err_list,"boton");
-            mensaje += '- Puede viajar?, '+err_list+'\n';
+            mensaje += '- Puede viajar?, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_via", "seccion_via");
@@ -793,7 +741,7 @@ function validarFormulario(tipovalidacion){
         if(escolaridad == null || escolaridad == 0){
 
             colocaError("err_esc", "seccion_esc",err_list,"boton");
-            mensaje += '- Escolaridad, '+err_list+'\n';
+            mensaje += '- Escolaridad, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_esc", "seccion_esc");
@@ -809,7 +757,7 @@ function validarFormulario(tipovalidacion){
                     if(universidad2 == null || universidad2 == ''){
 
                         colocaError("err_univ", "seccion_univ",err_univ,"boton");
-                        mensaje += '- Universidad, '+err_list+'\n';
+                        mensaje += '- Universidad, '+err_list+'<br>';
                         error = 1;
                     }else{
                         quitarError("err_univ", "seccion_univ");
@@ -827,7 +775,7 @@ function validarFormulario(tipovalidacion){
             if(universidad == null || universidad == 0){
 
                 colocaError("err_univ", "seccion_univ",err_list,"boton");
-                mensaje += '- Universidad, '+err_list+'\n';
+                mensaje += '- Universidad, '+err_list+'<br>';
                 error = 1;
             }else{
                 quitarError("err_univ", "seccion_univ");
@@ -838,7 +786,7 @@ function validarFormulario(tipovalidacion){
             if(universidad2 == null || universidad2 == ''){
 
                 colocaError("err_univ", "seccion_univ",err_univ,"boton");
-                mensaje += '- Universidad, '+err_list+'\n';
+                mensaje += '- Universidad, '+err_list+'<br>';
                 error = 1;
             }else{
                 quitarError("err_univ", "seccion_univ");
@@ -848,7 +796,7 @@ function validarFormulario(tipovalidacion){
         if(area_select.value == null || area_select.value == 0){
 
             colocaError("err_area", "seccion_area",err_list,"boton");
-            mensaje += '- \u00C1reas, '+err_list+'\n';
+            mensaje += '- \u00C1reas, '+err_list+'<br>';
             error = 1;
         }else{
 
@@ -858,7 +806,7 @@ function validarFormulario(tipovalidacion){
         if((select_array_idioma.length) == 0 || (select_array_idioma.length) == -1){
 
             colocaError("listado_idiomas", "seccion_listado",err_list,"boton");
-            mensaje += '- Listado de idiomas, '+err_list+'\n';
+            mensaje += '- Listado de idiomas, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("listado_idiomas", "seccion_listado");
@@ -870,11 +818,11 @@ function validarFormulario(tipovalidacion){
 
                 if(apellidos == null || apellidos.length == 0 || /^\s+$/.test(apellidos)){
                     colocaError("err_ape", "seccion_apellido",err_campo,"boton");
-                    mensaje += '- Apellidos, '+err_campo+'\n';
+                    mensaje += '- Apellidos, '+err_campo+'<br>';
                     error = 1; 
                 }else if(!validarNombreApellido(apellidos)){
                     colocaError("err_ape", "seccion_apellido",err_formato_letra,"boton");
-                    mensaje += '- Apellidos, '+err_formato_letra+'\n';
+                    mensaje += '- Apellidos, '+err_formato_letra+'<br>';
                     error = 1;
                 }else{
                     quitarError("err_ape","seccion_apellido");
@@ -882,7 +830,7 @@ function validarFormulario(tipovalidacion){
              
             }else{
               colocaError("err_ape","seccion_apellido","Longitud máx. 100 caracteres","boton");
-              mensaje += '- Apellidos, El apellido no debe exceder de 100 caracteres\n';
+              mensaje += '- Apellidos, El apellido no debe exceder de 100 caracteres<br>';
               error = 1; 
             }
         }
@@ -891,12 +839,12 @@ function validarFormulario(tipovalidacion){
 
             if(convencional.length < '9'){
                 colocaError("err_tlfCon","seccion_tlfCon","Longitud mín. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres\n'; 
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres<br>'; 
                 error = 1; 
             }else if(convencional.length > '9'){
 
                 colocaError("err_tlfCon","seccion_tlfCon","Longitud máx. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres\n'; 
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres<br>'; 
                 error = 1; 
             }else{
                quitarError("err_tlfCon","seccion_tlfCon"); 
@@ -908,13 +856,13 @@ function validarFormulario(tipovalidacion){
             if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
 
                 colocaError("err_nom", "seccion_nombre",err_campo,"boton");
-                mensaje += '- Nombres, '+err_campo+'\n';
+                mensaje += '- Nombres, '+err_campo+'<br>';
                 error = 1; 
 
             }else if(!validarNombreApellido(nombres)){
          
                 colocaError("err_nom", "seccion_nombre",err_formato_letra,"boton");
-                mensaje += '- Nombres, '+err_formato_letra+'\n';
+                mensaje += '- Nombres, '+err_formato_letra+'<br>';
                 error = 1;
 
             }else{
@@ -924,25 +872,25 @@ function validarFormulario(tipovalidacion){
         }else{
 
             colocaError("err_nom","seccion_nombre","Longitud máx. 100 caracteres","boton");
-            mensaje += '- Nombres, no debe exceder de 100 caracteres\n';
+            mensaje += '- Nombres, no debe exceder de 100 caracteres<br>';
             error = 1; 
         }
 
         if(!isNaN(fecha_nacimiento)){
 
             colocaError("error", "mayoria","Elegir una fecha válida","boton");
-            mensaje += '- Fecha de nacimiento, debe elegir una fecha válida\n';
+            mensaje += '- Fecha de nacimiento, debe elegir una fecha válida<br>';
             error = 1;
         }else if(validarFormatoFecha(fecha_nacimiento)){
 
           colocaError("error", "mayoria","Formato incorrecto","boton");
-          mensaje += '- Fecha de nacimiento, El formato de fecha es incorrecto\n';
+          mensaje += '- Fecha de nacimiento, El formato de fecha es incorrecto<br>';
           error = 1;
 
         }else if(calcularEdad() == 0 && tipo_usuario == 1){
 
             colocaError("error", "mayoria","Debe ser mayor de edad","boton");
-            mensaje += '- Fecha de nacimiento, debe ser mayor de edad\n';
+            mensaje += '- Fecha de nacimiento, debe ser mayor de edad<br>';
             error = 1;
 
         }else{
@@ -952,7 +900,7 @@ function validarFormulario(tipovalidacion){
         if(telefono == null || telefono.length == 0 || /^\s+$/.test(telefono)){
 
             colocaError("err_tlf", "seccion_tlf",err_campo,"boton");
-            mensaje += '- Celular, '+err_campo+'\n';
+            mensaje += '- Celular, '+err_campo+'<br>';
             error = 1;
             
         }else if(telefono.length >= '10' && telefono.length <= '15'){ 
@@ -960,7 +908,7 @@ function validarFormulario(tipovalidacion){
             if(!expreg_telf.test(telefono)){
 
                 colocaError("err_tlf", "seccion_tlf",err_formato_numeros,"boton");
-                mensaje += '- Celular, '+err_formato_numeros+'\n';
+                mensaje += '- Celular, '+err_formato_numeros+'<br>';
                 error = 1; 
 
             }else{
@@ -968,12 +916,12 @@ function validarFormulario(tipovalidacion){
             }
         }else if(telefono.length < '10'){
             colocaError("err_tlf","seccion_tlf","Longitud mín. 10 caracteres","boton");
-            mensaje += '- Celular, longitud m\u00EDn. 10 caracteres\n'; 
+            mensaje += '- Celular, longitud m\u00EDn. 10 caracteres<br>'; 
             error = 1; 
         }else if(telefono.length > '15'){
 
             colocaError("err_tlf","seccion_tlf","Longitud máx. 15 caracteres","boton");
-            mensaje += '- Celular, longitud m\u00E1x. 15 caracteres\n'; 
+            mensaje += '- Celular, longitud m\u00E1x. 15 caracteres<br>'; 
             error = 1; 
         }else{
             quitarError("err_tlf","seccion_tlf");
@@ -995,13 +943,13 @@ function validarFormulario(tipovalidacion){
             if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
 
                 colocaError("err_nom", "seccion_nombre",err_campo,"boton");
-                mensaje += '- Nombre de la empresa, '+err_campo+'\n';
+                mensaje += '- Nombre de la empresa, '+err_campo+'<br>';
                 error = 1; 
 
             }else if(!validarNombreEmpresa(nombres)){
          
                 colocaError("err_nom", "seccion_nombre",err_formato_letra2,"boton");
-                mensaje += '- Nombre de la empresa, '+err_formato_letra2+'\n';
+                mensaje += '- Nombre de la empresa, '+err_formato_letra2+'<br>';
                 error = 1;
 
             }else{
@@ -1011,7 +959,7 @@ function validarFormulario(tipovalidacion){
         }else{
 
             colocaError("err_nom","seccion_nombre","Longitud máx. 100 caracteres","boton");
-            mensaje += '- Nombre de la empresa, no debe exceder de 100 caracteres\n';
+            mensaje += '- Nombre de la empresa, no debe exceder de 100 caracteres<br>';
             error = 1; 
         }
 
@@ -1019,13 +967,13 @@ function validarFormulario(tipovalidacion){
             if(nombre_contact == null || nombre_contact.length == 0 || /^\s+$/.test(nombre_contact)){
 
                 colocaError("err_nomCon", "seccion_nombreContacto",err_campo,"boton");
-                mensaje += '- Nombre de contacto, '+err_campo+'\n';
+                mensaje += '- Nombre de contacto, '+err_campo+'<br>';
                 error = 1; 
 
             }else if(!validarNombreEmpresa(nombre_contact)){
 
                 colocaError("err_nomCon", "seccion_nombreContacto",err_formato_letra,"boton");
-                mensaje += '- Nombre de contacto, '+err_formato_letra+'\n'; 
+                mensaje += '- Nombre de contacto, '+err_formato_letra+'<br>'; 
                 error = 1;  
             }else{
                 quitarError("err_nomCon","seccion_nombreContacto");
@@ -1033,7 +981,7 @@ function validarFormulario(tipovalidacion){
         }else{
 
             colocaError("err_nomCon", "seccion_nombreContacto","Longitud máx. 100 caracteres","boton");
-            mensaje += '- Nombre de contacto, no debe exceder de 100 caracteres\n'; 
+            mensaje += '- Nombre de contacto, no debe exceder de 100 caracteres<br>'; 
             error = 1; 
         }
 
@@ -1042,13 +990,13 @@ function validarFormulario(tipovalidacion){
             if(apellido_contact == null || apellido_contact.length == 0 || /^\s+$/.test(apellido_contact)){
 
                 colocaError("err_apeCon", "seccion_apellidoContacto",err_campo,"boton");
-                mensaje += '- Apellido de contacto, '+err_campo+'\n';
+                mensaje += '- Apellido de contacto, '+err_campo+'<br>';
                 error = 1; 
 
             }else if(!validarNombreEmpresa(apellido_contact)){
 
                 colocaError("err_apeCon", "seccion_apellidoContacto",err_formato_letra,"boton");
-                mensaje += '- Apellido de contacto, '+err_formato_letra+'\n';
+                mensaje += '- Apellido de contacto, '+err_formato_letra+'<br>';
                 error = 1;  
 
             }else{
@@ -1057,14 +1005,14 @@ function validarFormulario(tipovalidacion){
         }else{
 
             colocaError("err_apeCon","seccion_apellidoContacto","Longitud máx. 100 caracteres","boton");
-            mensaje += '- Apellido de contacto, no debe exceder de 100 caracteres\n'; 
+            mensaje += '- Apellido de contacto, no debe exceder de 100 caracteres<br>'; 
             error = 1; 
         }
 
         if(tel_one_contact == null || tel_one_contact.length == 0 || /^\s+$/.test(tel_one_contact)){
 
             colocaError("err_tlfCel", "seccion_tlfCel",err_campo,"boton");
-            mensaje += '- Celular de contacto, '+err_campo+'\n';
+            mensaje += '- Celular de contacto, '+err_campo+'<br>';
             error = 1;
 
         }else if(tel_one_contact.length >= '10' && tel_one_contact.length <= '15'){
@@ -1072,7 +1020,7 @@ function validarFormulario(tipovalidacion){
             if(!expreg_telf.test(tel_one_contact)){
 
                 colocaError("err_tlfCel", "seccion_tlfCel",err_formato_numeros,"boton");
-                mensaje += '- Celular de contacto, '+err_formato_numeros+'\n';
+                mensaje += '- Celular de contacto, '+err_formato_numeros+'<br>';
                 error = 1; 
 
             }else{
@@ -1081,12 +1029,12 @@ function validarFormulario(tipovalidacion){
 
         }else if(tel_one_contact.length < '10'){
             colocaError("err_tlfCel","seccion_tlfCel","Longitud mín. 10 caracteres","boton");
-            mensaje += '- Celular de contacto, longitud m\u00EDn. 10 caracteres\n'; 
+            mensaje += '- Celular de contacto, longitud m\u00EDn. 10 caracteres<br>'; 
             error = 1; 
         }else if(tel_one_contact.length > '15'){
 
             colocaError("err_tlfCel","seccion_tlfCel","Longitud máx. 15 caracteres","boton");
-            mensaje += '- Celular de contacto, longitud m\u00E1x. 15 caracteres\n'; 
+            mensaje += '- Celular de contacto, longitud m\u00E1x. 15 caracteres<br>'; 
             error = 1; 
         }else{
            quitarError("err_tlfCel","seccion_tlfCel"); 
@@ -1096,12 +1044,12 @@ function validarFormulario(tipovalidacion){
 
             if(tel_two_contact.length < '9'){
                 colocaError("err_tlfCon2","seccion_tlfCon2","Longitud mín. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres\n'; 
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres<br>'; 
                 error = 1; 
             }else if(tel_two_contact.length > '9'){
 
                 colocaError("err_tlfCon2","seccion_tlfCon2","Longitud máx. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres\n'; 
+                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres<br>'; 
                 error = 1; 
             }else{
                 quitarError("err_tlfCon2","seccion_tlfCon2");
@@ -1111,7 +1059,7 @@ function validarFormulario(tipovalidacion){
         if(telefono == null || telefono.length == 0 || /^\s+$/.test(telefono)){
 
             colocaError("err_tlf", "seccion_tlf",err_campo,"boton");
-            mensaje += '- Tel\u00E9fono, '+err_campo+'\n';
+            mensaje += '- Tel\u00E9fono, '+err_campo+'<br>';
             error = 1;
             
         }else if(telefono.length >= '9' && telefono.length <= '15'){ 
@@ -1119,7 +1067,7 @@ function validarFormulario(tipovalidacion){
             if(!expreg_telf.test(telefono)){
 
                 colocaError("err_tlf", "seccion_tlf",err_formato_numeros,"boton");
-                mensaje += '- Tel\u00E9fono, '+err_formato_numeros+'\n';
+                mensaje += '- Tel\u00E9fono, '+err_formato_numeros+'<br>';
                 error = 1; 
 
             }else{
@@ -1127,12 +1075,12 @@ function validarFormulario(tipovalidacion){
             }
         }else if(telefono.length < '9'){
             colocaError("err_tlf","seccion_tlf","Longitud mín. 9 caracteres","boton");
-            mensaje += '- Tel\u00E9fono, longitud m\u00EDn. 9 caracteres\n'; 
+            mensaje += '- Tel\u00E9fono, longitud m\u00EDn. 9 caracteres<br>'; 
             error = 1; 
         }else if(telefono.length > '15'){
 
             colocaError("err_tlf","seccion_tlf","Longitud máx. 15 caracteres","boton");
-            mensaje += '- Tel\u00E9fono, longitud m\u00E1x. 15 caracteres\n'; 
+            mensaje += '- Tel\u00E9fono, longitud m\u00E1x. 15 caracteres<br>'; 
             error = 1; 
         }else{
             quitarError("err_tlf","seccion_tlf");
@@ -1142,7 +1090,7 @@ function validarFormulario(tipovalidacion){
 
             if(!ValidURL(pagina_web)){
                 colocaError("err_pag", "seccion_pag","Formato incorrecto","boton");
-                mensaje += '- La p\u00E1gina tiene un formato incorrecto, '+err_campo+'\n';
+                mensaje += '- La p\u00E1gina tiene un formato incorrecto, '+err_campo+'<br>';
                 error = 1;
             }else{
                 quitarError("err_pag","seccion_pag");
@@ -1154,7 +1102,7 @@ function validarFormulario(tipovalidacion){
         if(sectorind == null || sectorind == 0){
 
             colocaError("err_sector", "seccion_sector",err_list,"boton");
-            mensaje += '- Sector industrial, '+err_list+'\n';
+            mensaje += '- Sector industrial, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_sector","seccion_sector");
@@ -1163,7 +1111,7 @@ function validarFormulario(tipovalidacion){
         if(nro_trabajadores == null || nro_trabajadores == 0){
 
             colocaError("err_nro", "seccion_nro",err_list,"boton");
-            mensaje += '- N\u00FAmero de trabajadores, '+err_list+'\n';
+            mensaje += '- N\u00FAmero de trabajadores, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_nro","seccion_nro");
@@ -1172,7 +1120,7 @@ function validarFormulario(tipovalidacion){
         if(cargo == null || cargo == 0){
 
             colocaError("err_cargo", "seccion_cargo",err_list,"boton");
-            mensaje += '- Cargo, '+err_list+'\n';
+            mensaje += '- Cargo, '+err_list+'<br>';
             error = 1;
         }else{
             quitarError("err_cargo","seccion_cargo");
@@ -1183,7 +1131,7 @@ function validarFormulario(tipovalidacion){
     if(provincia == null || provincia == 0){
 
         colocaError("err_prov", "seccion_provincia",err_list,"boton");
-        mensaje += '- Provincia, '+err_list+'\n';
+        mensaje += '- Provincia, '+err_list+'<br>';
         error = 1;
     }else{
         quitarError("err_prov","seccion_provincia");
@@ -1192,7 +1140,7 @@ function validarFormulario(tipovalidacion){
     if(ciudad == null || ciudad == 0){
 
         colocaError("err_ciu", "seccion_ciudad",err_list,"boton");
-        mensaje += '- Ciudad, '+err_list+'\n';
+        mensaje += '- Ciudad, '+err_list+'<br>';
         error = 1;
 
     }else{
@@ -1202,7 +1150,7 @@ function validarFormulario(tipovalidacion){
     if(nacionalidad == null || nacionalidad == 0){
 
         colocaError("err_nac", "seccion_nac",err_list,"boton");
-        mensaje += '- Nacionalidad, '+err_list+'\n';
+        mensaje += '- Nacionalidad, '+err_list+'<br>';
         error = 1;
     }else{
         quitarError("err_nac", "seccion_nac");
