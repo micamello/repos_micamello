@@ -1016,6 +1016,7 @@ padding-top: 10px;
 }
 .qs-text-lista{
     color: #4b94d9;
+    /*text-align: justify;*/
 }
 .qs-iconos{
     color: #4b95da;

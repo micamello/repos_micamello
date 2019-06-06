@@ -135,7 +135,7 @@
 
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Seleccione área <b>*</b></label>
+								<label>Seleccione área (máx: numero)<b>*</b></label>
 								<div class="errorContainer"></div>
 								<select class="form-control" name="area_select[]" id="area_select" multiple>
 				       	<?php 
@@ -160,7 +160,7 @@
 
 						<div class="col-md-6">
 							<div class="form-group">
-								<label>Seleccione subárea <b>*</b></label>
+								<label>Seleccione subárea (máx: numero)<b>*</b></label>
 								<div class="errorContainer"></div>
 								<select class="form-control" name="subareasCand[]" id="subareasCand" multiple>
 								   	<?php                     

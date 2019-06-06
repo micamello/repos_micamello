@@ -52,8 +52,12 @@ $.fn.multiple_select = function(options){
     var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon' style='position:inherit'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
     
     padre_objeto.after(panel);
-    var numero = $('#'+id_panel).siblings('label')[0];
-    numero.textContent+= " (máx: "+settings.items+")";
+    // var numero = $('#'+id_panel).siblings('label')[0];
+    // numero.textContent+= " (máx: "+settings.items+")";
+    // console.log(this.siblings('label').text());
+    if(this.siblings('label').text().indexOf('numero') >= 0){
+        this.siblings('label').text(this.siblings('label').text().replace('numero', settings.items));
+    }
 
     // inicializar si tiene dependencia
     if(settings.dependence.id_dependencia != false){
@@ -228,19 +232,23 @@ function inicializarDependencia(obj){
                 listado_opciones += "<li class='select_list_subarea subarea_disabled "+selected_class+"' id='"+$(opciones[i]).val()+"'>"+opcion_texto+"<input type='checkbox' "+check_check+"></li>";
             }
         }
-        subpanelNumber = "";
-        if(settings.dependence.items != false){
-            var subpanelNumber = ' (máx: '+settings.dependence.items+')';
-        }
+        // subpanelNumber = "";
+        // if(settings.dependence.items != false){
+            // var subpanelNumber = ' (máx: '+settings.dependence.items+')';
+        // }
         var panel = "<div id='"+id_panel+"' class='panel panel-default panel_mic'><div class='panel-heading'><div class='inner-addon right-addon' style='position:inherit'><input class='form-control' placeholder='Buscar...' id='"+input_id+"'></div></div><div class='panel-body panelb_mic'><ul class='list_content_mic'>"+listado_opciones+"</ul></div></div>";
         padre_objeto.after(panel);
-        var numero = $('#'+id_panel).siblings('label')[0];
-        numero.textContent+= subpanelNumber;
+        // var numero = $('#'+id_panel).siblings('label')[0];
+        // numero.textContent+= subpanelNumber;
         loadButtonSelected(obj);
         ondeleteCount();
         var modalSelectedSpace = $('#'+id_panel).parent(':eq(0)').parent().next();
         var modalCode = '<div class="modal fade" id="modal_select" role="dialog"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header">Áreas seleccionadas<button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body" style="overflow: scroll"></div><div class="modal-footer"><button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button></div> </div></div></div>';
         modalSelectedSpace.append(modalCode);
+
+        if($('#'+id_panel).siblings('label').text().indexOf('numero') >= 0){
+            $('#'+id_panel).siblings('label').text($('#'+id_panel).siblings('label').text().replace('numero', settings.dependence.items));
+        }
     }
 }
 
