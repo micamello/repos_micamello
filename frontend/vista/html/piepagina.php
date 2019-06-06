@@ -133,7 +133,5 @@ if (isset($template_js) && is_array($template_js)){
 <!--<div class="container" id="Chart_details">
     <div id='chart_div' ></div><div id='g_chart_1' style="width: auto; height: auto;"></div>
 </div>-->
-
-
 </body>
 </html>

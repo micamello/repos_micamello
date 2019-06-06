@@ -205,7 +205,7 @@ class Controlador_Plan extends Controlador_Base {
  
   public function deposito(){
     try{
-      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'direccion'=>1,'tipo_doc'=>1,'telefono'=>1,'dni'=>1);
+      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'direccion'=>1,'tipo_doc'=>1,'telefono'=>1,'dni'=>1,'provincia'=>1,'ciudad'=>1,'shipping'=>1);
       $data = $this->camposRequeridos($campos);   
        
       if (!Utils::alfanumerico($data["num_comprobante"]) || strlen($data["num_comprobante"]) > 50){
@@ -220,12 +220,15 @@ class Controlador_Plan extends Controlador_Base {
       if (!Utils::valida_telefono($data["telefono"]) || strlen($data["telefono"]) > 25){
         throw new Exception("N\u00FAmero de tel\u00E9fono no es v\u00E1lido");
       }
+      if (!Utils::alfanumerico($data["shipping"]) || strlen($data["shipping"]) > 10){
+        throw new Exception("C\u00F3digo postal no es v\u00E1lido");
+      }
       if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
         if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)) {
           $function = 'validar_'.SUCURSAL_ISO;
           $validaCedula = Utils::$function($data['dni']);
           if ($validaCedula == false){
-            throw new Exception("El DNI ingresado no es v\u00E1lido");
+            throw new Exception("El documento ingresado no es v\u00E1lido");
           }
         }
       }
@@ -237,10 +240,15 @@ class Controlador_Plan extends Controlador_Base {
       }
        
       $archivo = Utils::validaExt($_FILES['imagen'],3);
-      if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],$data["telefono"],
-                                                  $data["dni"],$data["tipo_doc"],Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
-                                                  $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],$data["idplan"],
-                                                  $data['direccion'],$_SESSION['mfo_datos']['usuario']['tipo_usuario'])){
+      if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],
+                                                  $data["telefono"],$data["dni"],$data["tipo_doc"],
+                                                  Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
+                                                  $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],
+                                                  $data["idplan"],$data['direccion'],
+                                                  $_SESSION['mfo_datos']['usuario']['tipo_usuario'], 
+                                                  Modelo_Comprobante::PAGO_PROCESO,$data["provincia"],
+                                                  $data["ciudad"],$data["shipping"],
+                                                  Proceso_Facturacion::FORMA_PAGO["SINFINANCIERO"])){
         throw new Exception("Error al ingresar el dep\u00F3sito, por favor intente denuevo");
       }
  

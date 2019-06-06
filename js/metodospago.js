@@ -72,6 +72,38 @@ $('#provinciaPM').change(function(){
   }
 });
 
+$('#select_provincia').change(function(){
+  var id_provincia = $('select[id=select_provincia]').val();
+  var puerto_host = $('#puerto_host').val();
+  if(id_provincia != ""){
+    $.ajax({
+      type: "GET",
+      url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
+      dataType:'json',
+      success:function(data){
+        $('#ciudad').html('<option value="">Seleccione una ciudad</option>');
+        $.each(data, function(index, value) {
+            $('#ciudad').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
+        });
+      },
+      error: function (request, status, error) {
+        Swal.fire({          
+          html: 'Error por favor intente denuevo',
+          imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+          imageWidth: 75,
+          confirmButtonText: 'ACEPTAR',
+          animation: true
+        });        
+      }                  
+    });
+    quitarError("err_prov","seccion_prov");
+  }
+  else{    
+    colocaError("err_prov", "seccion_prov","Seleccione una opción","btndeposito");
+    error = 1;
+  }
+});
+
 $('#ciudadPM').change(function(){
   var id_ciudad = $('select[id=ciudadPM]').val();  
   if(id_ciudad != ""){    
@@ -79,6 +111,17 @@ $('#ciudadPM').change(function(){
   }
   else{    
     colocaError("err_ciuPM", "seccion_ciuPM","Seleccione una opción","btnpayme");
+    error = 1;
+  }
+});
+
+$('#select_ciudad').change(function(){
+  var id_ciudad = $('select[id=select_ciudad]').val();  
+  if(id_ciudad != ""){    
+    quitarError("err_ciu","seccion_ciu");
+  }
+  else{    
+    colocaError("err_ciu", "seccion_ciu","Seleccione una opción","btndeposito");
     error = 1;
   }
 });
@@ -137,9 +180,9 @@ function validaCampos(tipo){
     errors++;
   }
   if(errors > 0 || verifyErrors() > 0){    
-    $("#"+btn).addClass('disabled');
+    //$("#"+btn).addClass('disabled');
   }else{    
-    $("#"+btn).removeClass('disabled');     
+    //$("#"+btn).removeClass('disabled');     
     /*if(tipo == 1){    
       var valor = $('#idplanP').val()+'|'+$('#usuarioP').val()+'|'+$('#tipousuP').val()+'|'+reemplazar($('#nombreP').val())+'|'+$('#correoP').val()+'|'+$('#tipo_docP').val()+'|'+$('#telefonoP').val()+'|'+$('#dniP').val()+'|'+reemplazar($('#direccionP').val());
       $('#custom').attr('value',valor);      
@@ -269,7 +312,7 @@ $('#telefono').on('blur', function(){
   }
 });
 
-$('#telefonoP').on('blur', function(){
+/*$('#telefonoP').on('blur', function(){
   var tel = document.getElementById('telefonoP').value;
   if(tel.length >= '10' && tel.length <= '25'){
     validarNumTelf(tel,"err_tlfP","seccion_tlfP","btn_submitpaypal");
@@ -279,7 +322,7 @@ $('#telefonoP').on('blur', function(){
   }else{
     colocaError("err_tlfP","seccion_tlfP","El teléfono no debe exceder de 25 caracteres","btn_submitpaypal");
   }
-});
+});*/
 
 $('#shippingPhone').on('blur', function(){
   var tel = document.getElementById('shippingPhone').value;
@@ -303,7 +346,7 @@ $('#direccion').on('blur', function(){
   }
 });
 
-$('#direccionP').on('blur', function(){
+/*$('#direccionP').on('blur', function(){
   var dir = document.getElementById('direccionP').value;
   if(dir.length >= '10' && dir.length <= '100'){
     validarDir(dir,"err_dirP","seccion_dirP","btn_submitpaypal");
@@ -311,7 +354,7 @@ $('#direccionP').on('blur', function(){
   }else{
     colocaError("err_dirP","seccion_dirP","Dirección longitud entre 10 y 100 caracteres","btn_submitpaypal");
   }
-});
+});*/
 
 $('#shippingAddress').on('blur', function(){
   var dir = document.getElementById('shippingAddress').value;
@@ -329,11 +372,11 @@ $('#correo').on('blur', function(){
   validaCampos(2);
 });
 
-$('#correoP').on('blur', function(){
+/*$('#correoP').on('blur', function(){
   var correoP = document.getElementById('correoP').value;
   validarCorreo(correoP,'err_correoP','seccion_correoP','btn_submitpaypal');
   validaCampos(1);
-});
+});*/
 
 $('#shippingEmail').on('blur', function(){
   var correoP = document.getElementById('shippingEmail').value;
@@ -348,6 +391,16 @@ $('#shippingZIP').on('blur', function(){
     validaCampos(1);
   }else{
     colocaError("err_zipPM","seccion_zipPM","Mínimo 1 y máximo 10 caracteres","btnpayme");
+  }
+});
+
+$('#shipping').on('blur', function(){
+  var dir = document.getElementById('shipping').value;
+  if(dir.length >= '1' && dir.length <= '10'){
+    validarDir(dir,"err_zip","seccion_zip","btndeposito");
+    validaCampos(1);
+  }else{
+    colocaError("err_zip","seccion_zip","Mínimo 1 y máximo 10 caracteres","btndeposito");
   }
 });
 
@@ -540,6 +593,8 @@ $('#dniPM').on('blur', function(){
 function enviarFormulario(form){
   var estado = validarFormulario();  
   if(estado == 1 && form == 'form_deposito'){
+    $('#provincia').attr('value',$("#select_provincia").children('option:selected').text());
+    $('#ciudad').attr('value',$("#select_ciudad").children('option:selected').text()); 
     document.form_deposito.submit();
   }/*else if(form == 'form_paypal'){    
     if(estado != 1){
@@ -581,6 +636,9 @@ function validarFormulario(){
     var telefono = document.getElementById('telefono').value;
     var dni = document.getElementById('dni');
     var tipo = document.getElementById('tipo_doc').value;
+    var zip = document.getElementById('shipping').value;
+    var provincia = document.getElementById('select_provincia');
+    var ciudad = document.getElementById('select_ciudad');
     var err_nom = "err_nom"; var seccion_nombre = "seccion_nombre";
     var err_apell = "err_apell"; var seccion_apellido = "seccion_apellido";
     var err_dir = "err_dir"; var seccion_dir = "seccion_dir"; 
@@ -588,6 +646,9 @@ function validarFormulario(){
     var err_dni = "err_dni"; var seccion_dni = "seccion_dni";
     var err_tipo = "err_tipo"; var seccion_tipo = "seccion_tipo";
     var err_correo = "err_correo"; var seccion_correo= "seccion_correo";
+    var err_zip = "err_zip"; var seccion_zip= "seccion_zip";
+    var err_prov = "err_prov"; var seccion_prov= "seccion_prov";
+    var err_ciu = "err_ciu"; var seccion_ciu= "seccion_ciu";
     var btn = "btndeposito";    
     if(num_comprobante.length <= '50'){
       if(validarNumTelf(num_comprobante,"err_comp","seccion_comp",btn)){
@@ -618,6 +679,30 @@ function validarFormulario(){
     }else{
       colocaError(err_apell,seccion_apellido,"Máximo 50 caracteres",btn);
       error = 1;    
+    }
+    if(zip.length <= '10'){
+      if(validarDir(zip,err_zip,seccion_zip,btn)){
+        error = 1;
+      }else{
+        quitarError(err_zip,seccion_zip);
+      }
+    }else{
+      colocaError(err_zip,seccion_zip,"Máximo 10 caracteres",btn);
+      error = 1;    
+    }
+    if (provincia.value == 0){
+      colocaError(err_prov,seccion_prov,"Seleccione una opción",btn);
+      error = 1;     
+    }
+    else{
+      quitarError(err_prov,seccion_prov);
+    }
+    if (ciudad.value == 0){
+      colocaError(err_ciu,seccion_ciu,"Seleccione una opción",btn);
+      error = 1;     
+    }
+    else{
+      quitarError(err_ciu,seccion_ciu);
     }
   }/*else if (form == 2){
     var nombre = document.getElementById('nombreP').value;
