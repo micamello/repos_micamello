@@ -10,7 +10,10 @@
           <div align="center" class="col-md-12">
             <!-- <h3>¡El cambio de contraseña se ha realizado con éxito!</h3><br> -->
             <h4>Ha ocurrido un error al comprar el plan<br>
-					Por favor intente nuevamente la compra o contactese con el administrador</h4><br>
+					Por favor intente nuevamente la compra o escr&iacute;banos a info@micamello.com.ec</h4><br>
+            <div align="center">
+              <a href="<?php echo PUERTO.'://'.HOST.'/'; ?>" class="btn btn-blue">Aceptar</a>
+            </div>
             <!-- <button class="btn-light-blue">Finalizar</button> -->
           </div>
           <div class="row">          

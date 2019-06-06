@@ -30,8 +30,7 @@ class Controlador_Plan extends Controlador_Base {
         $this->planesUsuario();
       break;
       case 'verificarCompra':
-        // Utils::log("eder llego al controlador");
-        $this->verificaCompra();
+        Vista::renderJSON(array("dato"=>$_SESSION['mfo_datos']['planActivar']));
       break;
       default:        
         $this->mostrarDefault(1);
@@ -272,8 +271,10 @@ class Controlador_Plan extends Controlador_Base {
       // $tags["template_js"][] = "planValidarActivacion";
       $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
-    }  
-    Vista::render($template, $tags,'', '');       
+    }
+    $cab = ''; $pie = '';
+    if($mensaje != 'exito'){$cab = 'cabecera'; $pie = 'piepagina';}
+    Vista::render($template, $tags,$cab, $pie);        
   }
 
   public function generarTransactionId(){
