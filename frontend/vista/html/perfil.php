@@ -528,7 +528,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 		                                    <div class="col-md-6">
 												<div class="form-group" id="seccion_area">
-													<label>&Aacute;reas de Inter&eacute;s <span title="Este campo es obligatorio">*</span></label>													
+													<label>&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando máximo numero áreas de su interés<span title="Este campo es obligatorio">*</span></label>													
 													<div id="err_area" class="help-block with-errors"></div>
 
 													<select class="form-control" id="area" name="area[]" multiple="multiple">
