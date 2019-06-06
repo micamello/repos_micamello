@@ -6923,3 +6923,35 @@
             FROM mfo_notificacion 
             WHERE id_usuario = '1035' AND tipo_usuario = '1' LIMIT 1
 [2019/06/06 04:19:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/06 04:21:35] SQL Query: SELECT metodo_resp FROM mfo_usuario WHERE id_usuario = '1035'
+[2019/06/06 04:21:35] SQL Query: SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = '1035')
+[2019/06/06 04:21:35] SQL Query: SELECT o.id_opcion, o.descripcion, o.valor, p.id_pregunta 
+						FROM mfo_opcion o
+						INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+						INNER JOIN mfo_competencia c ON p.id_competencia = c.id_competencia
+						WHERE c.id_faceta = '1'
+						ORDER BY p.orden, RAND()
+[2019/06/06 04:21:35] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1035' AND tipo_usuario = '1' LIMIT 1
+[2019/06/06 04:21:35] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/06 04:29:36] SQL Query: SELECT metodo_resp FROM mfo_usuario WHERE id_usuario = '1035'
+[2019/06/06 04:29:36] SQL Query: SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = '1035')
+[2019/06/06 04:29:36] SQL Query: SELECT o.id_opcion, o.descripcion, o.valor, p.id_pregunta 
+						FROM mfo_opcion o
+						INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+						INNER JOIN mfo_competencia c ON p.id_competencia = c.id_competencia
+						WHERE c.id_faceta = '1'
+						ORDER BY p.orden, RAND()
+[2019/06/06 04:29:36] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1035' AND tipo_usuario = '1' LIMIT 1
+[2019/06/06 04:29:36] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

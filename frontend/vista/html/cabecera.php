@@ -175,7 +175,7 @@ if($navegador == 'MSIE'){ ?>
                 <div class="css-typing hidden-md hidden-lg"><p id="letra-tip">Innovamos para avanzar</p></div>
               </a>
             </li>
-            <li class="css-typing visible-lg visible-md hidden-xs">
+            <li class="css-typing visible-lg visible-md hidden-xs" style="margin-right: 74px;">
               <p id="letra-tip" style="margin-top: 20px; vertical-align: middle;">Innovamos para avanzar</p>
             </li>
           </ul> 
