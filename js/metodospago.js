@@ -81,9 +81,9 @@ $('#select_provincia').change(function(){
       url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
       dataType:'json',
       success:function(data){
-        $('#ciudad').html('<option value="">Seleccione una ciudad</option>');
+        $('#select_ciudad').html('<option value="">Seleccione una ciudad</option>');
         $.each(data, function(index, value) {
-            $('#ciudad').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
+            $('#select_ciudad').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
         });
       },
       error: function (request, status, error) {
@@ -594,7 +594,7 @@ function enviarFormulario(form){
   var estado = validarFormulario();  
   if(estado == 1 && form == 'form_deposito'){
     $('#provincia').attr('value',$("#select_provincia").children('option:selected').text());
-    $('#ciudad').attr('value',$("#select_ciudad").children('option:selected').text()); 
+    $('#ciudad').attr('value',$("#select_ciudad").children('option:selected').text());     
     document.form_deposito.submit();
   }/*else if(form == 'form_paypal'){    
     if(estado != 1){
@@ -652,54 +652,55 @@ function validarFormulario(){
     var btn = "btndeposito";    
     if(num_comprobante.length <= '50'){
       if(validarNumTelf(num_comprobante,"err_comp","seccion_comp",btn)){
-        error = 1;
+        error = 1;        
       }else{
         quitarError("err_comp","seccion_comp");
       }
     }else{
       colocaError("err_comp","seccion_comp","El comprobante no debe exceder de 50 caracteres",btn);
-      error = 1;
+      error = 1;      
     }
-    if(validarNumTelf(valor,"err_val","seccion_val",btn)){
+    if(validarDineroFormPlanes(valor,"err_val","seccion_val",btn)){      
       error = 1;
     }else{
       quitarError("err_val","seccion_val");
     }
     if(validarImg(archivo,'err_img','seccion_img',btn)){
-      error = 1;
+      error = 1;      
     }else{
       quitarError('err_img','seccion_img');
     }
     if(apellido.length <= '50'){
       if(validarInput(apellido,err_apell,seccion_apellido,btn)){
-        error = 1;
+        error = 1;        
       }else{
         quitarError(err_apell,seccion_apellido);
       }
     }else{
-      colocaError(err_apell,seccion_apellido,"Máximo 50 caracteres",btn);
+      colocaError(err_apell,seccion_apellido,"Máximo 50 caracteres",btn);      
       error = 1;    
     }
     if(zip.length <= '10'){
       if(validarDir(zip,err_zip,seccion_zip,btn)){
-        error = 1;
+        error = 1;        
       }else{
         quitarError(err_zip,seccion_zip);
       }
     }else{
       colocaError(err_zip,seccion_zip,"Máximo 10 caracteres",btn);
-      error = 1;    
+      error = 1;          
     }
     if (provincia.value == 0){
       colocaError(err_prov,seccion_prov,"Seleccione una opción",btn);
       error = 1;     
+      console.log("PASO 3");
     }
     else{
       quitarError(err_prov,seccion_prov);
     }
     if (ciudad.value == 0){
       colocaError(err_ciu,seccion_ciu,"Seleccione una opción",btn);
-      error = 1;     
+      error = 1;           
     }
     else{
       quitarError(err_ciu,seccion_ciu);
@@ -780,13 +781,13 @@ function validarFormulario(){
   
   if(nombre.length <= '30'){
     if(validarInput(nombre,err_nom,seccion_nombre,btn)){
-      error = 1;
+      error = 1;      
     }else{
       quitarError(err_nom,seccion_nombre);
     }
   }else{
     colocaError(err_nom,seccion_nombre,"Máximo 30 caracteres",btn);
-    error = 1;    
+    error = 1;        
   }
   if(validarCorreo(correo,err_correo,seccion_correo,btn)){
     error = 1;
@@ -795,29 +796,29 @@ function validarFormulario(){
   }
   if(direccion.length >= 10 && direccion.length <= 50){
     if(validarDir(direccion,err_dir,seccion_dir,btn)){
-      error = 1;
+      error = 1;      
     }else{
       quitarError(err_dir,seccion_dir);
     }
   }else{
     colocaError(err_dir,seccion_dir,"Mínimo 10 y máximo 50 caracteres",btn);
-    error = 1;
+    error = 1;    
   }
   if(telefono.length >= '9' && telefono.length <= '15'){
     if(validarNumTelf(telefono,err_tlf, seccion_tlf,btn)){
-      error = 1;
+      error = 1;      
     }else{
       quitarError(err_tlf, seccion_tlf);
     }
   }else if(telefono.length <= '10'){
     colocaError(err_tlf,seccion_tlf,"Mínimo 9 caracteres",btn);
-    error = 1;    
+    error = 1;     
   }else{
     colocaError(err_tlf,seccion_tlf,"Máximo 15 caracteres",btn);
-    error = 1;
+    error = 1;    
   }
   if(validarSelect(tipo,err_tipo,seccion_tipo,btn)){
-    error = 1;
+    error = 1;    
   }else{
     quitarError(err_tipo,seccion_tipo);
   }
@@ -827,14 +828,14 @@ function validarFormulario(){
         quitarError(err_dni,seccion_dni);
       }else{
         colocaError(err_dni, seccion_dni,"Documento inválido",btn);
-        error = 1;      
+        error = 1;          
       } 
     }else if(tipo == 2 && dni.value.length < 10){
       colocaError(err_dni, seccion_dni,"Mínimo 10 dígitos",btn);
-      error = 1;
+      error = 1;      
     }else if(tipo == 3 && dni.value.length < 6){
       colocaError(err_dni, seccion_dni,"Mínimo 6 dígitos",btn);
-      error = 1;
+      error = 1;      
     }
     else if(tipo == 1 && dni.value.length < 13){
       colocaError(err_dni, seccion_dni,"Mínimo 13 dígitos",btn);
@@ -842,10 +843,10 @@ function validarFormulario(){
     }
   }else{
     colocaError(err_dni, seccion_dni,"Documento no puede ser vacío",btn);
-    error = 1;
+    error = 1;    
   }
   if(error == 0){
-    $("#"+btn).removeClass('disabled');
+    //$("#"+btn).removeClass('disabled');
     //document.getElementById('form_paypal').action = document.getElementById('rutaPAYPAL').value;
     return 1;
   }

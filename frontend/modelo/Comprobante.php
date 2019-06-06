@@ -30,7 +30,7 @@ class Modelo_Comprobante{
                          'fecha_creacion'=>date('Y-m-d H:i:s'),'tipo_doc'=>$tipodoc,'tipo_pago'=>$tipopago,
                          'ext_imagen'=>$imagen,'valor'=>$valor,'estado'=>$estado,'id_plan'=>$plan,
                          'id_user_emp'=>$usuario,'dni'=>$dni,'direccion'=>$direccion,'tipo_usuario'=>$tipousu,
-                         'provincia'=>$provincia,'ciudad'=>$ciudad,'codigopostal'=>$codpostal,'formpago'=>$formapago);
+                         'provincia'=>$provincia,'ciudad'=>$ciudad,'codigopostal'=>$codpostal,'formapago'=>$formapago);
     return $GLOBALS['db']->insert('mfo_rcomprobantescam',$data_insert);                      
   }
 
