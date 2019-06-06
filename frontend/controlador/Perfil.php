@@ -123,7 +123,7 @@ class Controlador_Perfil extends Controlador_Base
 
                 $breadcrumbs['perfil'] = 'Editar mi perfil';
                 $nrototalfacetas = count(Modelo_Faceta::obtenerFacetas());
-                $porcentaje_por_usuario = Modelo_Usuario::obtenerFacetasxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);                
+                $porcentaje_por_usuario = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);                
                 if (!isset($_SESSION['mfo_datos']['usuario']['grafico']) || empty($_SESSION['mfo_datos']['usuario']['grafico'])){
                     $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     $str_grafico = '';
