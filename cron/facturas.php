@@ -41,10 +41,15 @@ if (count($facturas) > 0){
       $obj_facturacion->direccionComprador = $datos_comprobante["direccion"];
       $obj_facturacion->emailComprador = $datos_comprobante["correo"];
       $obj_facturacion->telefComprador = $datos_comprobante["telefono"];            
-      $obj_facturacion->tipoIdentifComprador = TIPO_DOCUMENTO[$datos_comprobante["tipo_doc"]];            
+      $obj_facturacion->tipoIdentifComprador = $datos_comprobante["tipo_doc"];            
       $obj_facturacion->importeTotal = $datos_comprobante["valor"];
       $obj_facturacion->codigoPrincipal = $datos_comprobante["id_plan"];
-      $obj_facturacion->descripdetalle = $infoplan["nombre"];
+      $obj_facturacion->descripdetalle = utf8_encode($infoplan["nombre"]);
+      $obj_facturacion->formadepago = $datos_comprobante["formapago"];    
+      $obj_facturacion->provinciaComprador = $datos_comprobante["provincia"];     
+      $obj_facturacion->ciudadComprador = $datos_comprobante["ciudad"];     
+      $obj_facturacion->codpostalComprador = $datos_comprobante["codigopostal"];       
+      
       $obj_facturacion->numerofactura = (int)substr($factura["clave_acceso"],30,9);      
       $rsfact = $obj_facturacion->generarFactura();  
 
@@ -52,15 +57,15 @@ if (count($facturas) > 0){
         throw new Exception("Error no se pudo generar la factura");   
       }
       
-      $datosact = array("clave_acceso" => $rsfact["claveacceso"], "xml" => $rsfact["xml"], "estado" => Modelo_Factura::NOENVIADO, 
-                        "msg_error" => "", "fecha_estado" => "");
+      $datosact = array("clave_acceso" => $rsfact["claveacceso"], 
+                        "xml" => $rsfact["xml"], "estado" => Modelo_Factura::NOENVIADO, 
+                        "msg_error" => "", "fecha_estado" => "null");
       
       if (!Modelo_Factura::actualizar($factura["clave_acceso"],$datosact)){
         throw new Exception("Error al actualizar la factura");  
       }       
       
-      $attachments = array();
-      
+      $attachments = array();      
       if (!$obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
         throw new Exception("1 WS del SRI");  
       }  
@@ -88,13 +93,20 @@ if (count($facturas) > 0){
 
       $email_body = Modelo_TemplateEmail::obtieneHTML("FACTURACION");
       $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
-      $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);   
-      Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
+      $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);         
             
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
 
       $GLOBALS['db']->commit();
+
+      Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body,$attachments);
+      
+      if (!empty($attachments)){
+        //eliminar archivos temporales
+        unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
+        unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
+      }
     }
     catch(Exception $e){
       $GLOBALS['db']->rollback();

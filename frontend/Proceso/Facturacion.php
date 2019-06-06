@@ -57,8 +57,7 @@ class Proceso_Facturacion{
 
   function generarFactura(){         
     $this->totalSinImpuestos = number_format(round($this->importeTotal / GRAVAIVA,2),2);
-    $this->importeImpuesto = number_format(round($this->importeTotal - $this->totalSinImpuestos,2),2);
-    Utils::log("VALOR IVA ".$this->importeImpuesto);
+    $this->importeImpuesto = number_format(round($this->importeTotal - $this->totalSinImpuestos,2),2);    
     //number_format(round($this->importeTotal - $this->importeImpuesto,2),2);
     $this->importeTotal = number_format($this->importeTotal,2);
     $this->generarClaveAcceso();
@@ -256,6 +255,7 @@ class Proceso_Facturacion{
     $valoresact["fecha_estado"] = date('Y-m-d H:i:s');    
     if (is_object($result) && $result->RespuestaRecepcionComprobante->estado == "RECIBIDA"){
       $valoresact["estado"] = Modelo_Factura::RECIBIDO;            
+      $valoresact["msg_error"] = '';
       $return = true;
     }
     else{
@@ -279,6 +279,7 @@ class Proceso_Facturacion{
       $valoresact["estado"] = Modelo_Factura::AUTORIZADO;
       $fechaautorizacion = str_replace('T', ' ', substr($result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->fechaAutorizacion,0,18));
       $valoresact["fecha_estado"] = $fechaautorizacion;      
+      $valoresact["msg_error"] = '';
       $return = $fechaautorizacion;
     }
     else{

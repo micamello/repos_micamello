@@ -40,7 +40,7 @@ class Controlador_Contrasena extends Controlador_Base {
             }
             //redirigir al perfil
         }else{
-            $_SESSION['mostrar_error'] = 'Para continuar deber\u00E1 cambiar su contrase\u00F1a';      
+            $_SESSION['mostrar_notif'] = 'Para continuar deber\u00E1 cambiar su contrase\u00F1a';      
         }
         
         $breadcrumbs['cambioClave'] = 'Cambio de contrase&ntilde;a';
