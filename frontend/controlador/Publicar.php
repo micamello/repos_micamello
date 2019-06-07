@@ -245,9 +245,9 @@ class Controlador_Publicar extends Controlador_Base {
         throw new Exception("El campo descripci\u00F3n es obligatorio");
       }
 
-      if(!Utils::formatoDinero($datosReg['salarioOf'])){
+      /*if(!Utils::formatoDinero($datosReg['salarioOf'])){
         throw new Exception("El campo salario solo permite n\u00FAmeros");
-      }
+      }*/
 
       if (Utils::validarNumeros($datosReg['cantVac']) == false) {
         throw new Exception("El campo vacantes solo permite n\u00FAmeros");

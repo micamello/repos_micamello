@@ -116,7 +116,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   
   //5.-envio de correo al candidato
   if (!empty($mail_ofertas)){
-    $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);    
+    $nombre_mostrar = ucfirst(utf8_encode($rows["nombres"]))." ".ucfirst(utf8_encode($rows["apellidos"]));    
     $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");    
     $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
     $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);      

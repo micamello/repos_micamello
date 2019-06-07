@@ -91,8 +91,8 @@ class Proceso_Subscripcion{
         }
       }
 
-      $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
-
+      $nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".ucfirst((isset($infousuario["apellidos"])) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");
+       
 	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
                                  $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments);
       
@@ -133,20 +133,24 @@ class Proceso_Subscripcion{
 
   public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$attachments){  
   	$email_subject = "Activación de Subscripción"; 
-    $email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_SUBSCRIPCION");
+    if ($tipousuario == Modelo_Usuario::CANDIDATO){
+      $template_nombre = "ACTIVACION_SUBSCRIPCION_CANDIDATO";      
+    }
+    else{
+      $template_nombre = "ACTIVACION_SUBSCRIPCION_EMPRESA";       
+    }
+    $email_body = Modelo_TemplateEmail::obtieneHTML($template_nombre);
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
-    $notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
-    if ($tipousuario == Modelo_Usuario::CANDIDATO){
-      $mensaje = "Descubra todas sus oportunidades laborales dando ";       
-      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
-    }else{
-      $mensaje = "Para publicar una oferta, por favor de "; 
-      $mensaje .= "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
+    //$notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
+    if ($tipousuario == Modelo_Usuario::CANDIDATO){      
+      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
+    }else{      
+      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
     } 
-    $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);       
-    //Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,Modelo_Notificacion::ACTIVACION_SUBSCRIPCION);
+    $email_body = str_replace("%ENLACE%", $enlace, $email_body);     
     Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
+    //Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,Modelo_Notificacion::ACTIVACION_SUBSCRIPCION);
   }
 
 }
