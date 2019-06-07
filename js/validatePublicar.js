@@ -150,8 +150,8 @@ if($('#idiomaOf').length){
     $('#idiomaOf').on('change', function(){
         // $('#addButton').parent().removeClass('bounce');
         $('#addButton').parent().addClass('bounce');
-        $('#addButton').removeClass('addButton');
-        $('#addButton').addClass('active_button');
+        // $('#addButton').removeClass('addButton');
+        // $('#addButton').addClass('active_button');
     })
 }
 
@@ -176,8 +176,8 @@ if($('#addButton').length){
                 contenedorIdiomas.find('ul').append(li);
                 crearArrayIdiomas(selectIdioma.val(), selectNivelIdioma.val());
                 $('#addButton').parent().removeClass('bounce');
-                $('#addButton').removeClass('active_button');
-                $('#addButton').addClass('addButton');
+                // $('#addButton').removeClass('active_button');
+                // $('#addButton').addClass('addButton');
 
                 selectIdioma.children(':selected').attr('disabled', true);
             }
