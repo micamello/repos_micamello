@@ -90,8 +90,8 @@ function loadavisos(idplan){
   var estilotitulo = ($('#avisoprom_'+idplan).attr('value') == 1) ? '' : '';
   // var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
   //var estiloul = ($('#avisoprom_'+idplan).attr('value') == 1) ? '' : '';
-  var duracion = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';  
-  duracion = duracion + (($('#avisodura_'+idplan).attr('value') != 0) ? $('#avisodura_'+idplan).attr('value') + ' d&iacute;as' : 'Ilimitado');  
+  //var duracion = ($('#avisoprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';  
+  var duracion = (($('#avisodura_'+idplan).attr('value') != 0) ? $('#avisodura_'+idplan).attr('value') + ' d&iacute;as' : 'Ilimitado');  
   //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#avisoid_'+idplan).attr('value')+'.'+$('#avisoext_'+idplan).attr('value');
   //var costo = $('#simbolo').val()+$('#avisocosto_'+idplan).attr('value');
   var permisos = $('#avisopermiso_'+idplan).attr('value').split('||');

@@ -11,11 +11,7 @@ class Modelo_Plan{
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
   	if (empty($tipousuario)||empty($sucursal)){ return false; }
     $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
-                   p.prom_costo, p.prom_duracion,                   
-                   IF(p.promocional,p.prom_num_post,p.num_post) AS num_post, 
-                   IF(p.promocional,p.prom_costo,p.costo) AS costo, 
-                   IF(p.promocional,p.prom_duracion,p.duracion) AS duracion, 
-                   IF(p.promocional,p.prom_porc_descarga,p.porc_descarga) AS porc_descarga, 
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
                    GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
                    GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
             FROM mfo_plan p
@@ -46,8 +42,8 @@ class Modelo_Plan{
               INNER JOIN mfo_plan p ON u.id_plan = p.id_plan
               LEFT JOIN mfo_factura f ON f.id_comprobante = u.id_comprobante AND 
                                          f.tipo_usuario = 1 AND f.estado = ".Modelo_Factura::AUTORIZADO."
-              WHERE u.id_usuario = ? AND
-                    (u.estado = 1 OR (u.estado = 0 AND u.id_comprobante <> ''))
+              WHERE u.id_usuario = ? /*AND
+                    (u.estado = 1 OR (u.estado = 0 AND u.id_comprobante <> ''))*/
               ORDER BY u.fecha_compra ASC";
     }
     else{
@@ -70,8 +66,8 @@ class Modelo_Plan{
               INNER JOIN mfo_plan p ON e.id_plan = p.id_plan
               LEFT JOIN mfo_factura f ON f.id_comprobante = e.id_comprobante AND 
                                          f.tipo_usuario = 2 AND f.estado = ".Modelo_Factura::AUTORIZADO."
-              WHERE e.id_empresa = ? AND
-                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))";
+              WHERE e.id_empresa = ? /*AND
+                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))*/";
 
               if($idPlan != false){
                 $sql .= " AND e.id_empresa_plan = ".$idPlan;
@@ -84,11 +80,9 @@ class Modelo_Plan{
    
   public static function busquedaActivoxTipo($plan,$tipo,$sucursal){
     if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }
-    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, prom_duracion, num_accesos,
-                   IF(promocional,prom_costo,costo) AS costo,
-                   IF(promocional,prom_num_post,num_post) AS num_post,
-                   IF(promocional,prom_duracion,duracion) AS duracion,
-                   IF(promocional,prom_porc_descarga,porc_descarga) AS porc_descarga
+    $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, 
+                   prom_duracion, num_accesos, promocional, costo, num_post,                                      
+                   duracion, porc_descarga                   
             FROM mfo_plan 
             WHERE estado = 1 AND id_plan = ? AND tipo_usuario = ? AND id_sucursal = ? AND visibilidad = 1";
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    

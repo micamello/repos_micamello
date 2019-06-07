@@ -502,11 +502,10 @@ function enviarPclave(ruta,tipo,page){
 	}else{
 		
 		if(tipo == 1){
-      Swal.fire({
-	      title: '¡Advertencia!',
+      Swal.fire({	      
 	      html: 'La longitud mínima de la palabra clave es de 2 caracteres',
 	      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-	      imageWidth: 210,
+	      imageWidth: 75,
 	      confirmButtonText: 'ACEPTAR',
 	      animation: true
       });           
@@ -530,11 +529,10 @@ function verFacetas(facetas,pos){
 		var nueva_ruta = ruta+porcentajes+'/'+page+"/";
 		window.location = nueva_ruta;
 	}else{
-		Swal.fire({
-	    title: '¡Advertencia!',
+		Swal.fire({	    
 	    html: 'Debe seleccionar un porcentaje',
 	    imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-	    imageWidth: 210,
+	    imageWidth: 75,
 	    confirmButtonText: 'ACEPTAR',
 	    animation: true
     });		
@@ -720,11 +718,10 @@ function obtenerFiltro(ruta,page){
 		window.location = nueva_ruta;
 	}else{
 		//abrirModal('Debe Seleccionar al menos un filtro','alert_descarga','','Ok');
-		Swal.fire({
-      title: '¡Advertencia!',
+		Swal.fire({      
       html: 'Debe Seleccionar al menos un filtro',
       imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-      imageWidth: 210,
+      imageWidth: 75,
       confirmButtonText: 'ACEPTAR',
       animation: true
     });		

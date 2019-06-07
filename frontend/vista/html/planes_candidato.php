@@ -2,8 +2,9 @@
   <div class="container">
     <div class="col-md-12">
       <div><h2 class="titulo text-center">Planes</h2></div>
+      <br>
     </div>
-
+    
     <div class="col-md-12">
       <div class="pricingdiv flex-container">
       <?php 
@@ -43,7 +44,7 @@
             <a class="pricebutton btn-blue btn-bottom" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"><span class="icon-tag"></span>
               POSTULARSE
             </a>
-          <?php } else { ?>
+          <?php } else { ?>            
             <a class="pricebutton btn-blue btn-bottom" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');"><span class="icon-tag"></span>
               SUSCRIBIRSE
             </a>

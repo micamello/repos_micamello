@@ -2,9 +2,11 @@ function verificarCompraPlan(){
   var puerto_host = $('#puerto_host').val();
   $.ajax({
       type: "GET",
-      url: url = puerto_host+"/index.php?mostrar=plan&opcion=verificarCompra",
+      url: puerto_host+"/index.php?mostrar=plan&opcion=verificarCompra",
+      dataType:'json',
+        async: false,
       success:function(data){
-        if(data === true){
+        if(data.dato == 1){
           $('.spin').find('h4').text('Su compra fue procesada con éxito');
           $('.spin').find('img').attr('src', puerto_host+'/imagenes/success.png');
           $('.spin').delay('2000').fadeOut( "slow", function(){
@@ -19,5 +21,5 @@ function verificarCompraPlan(){
 }
 
 $(document).ready(function(){
-    setInterval(verificarCompraPlan, 2000);
+    setInterval(verificarCompraPlan, 1000);
 });

@@ -31,6 +31,7 @@
       echo '<link rel="stylesheet" href="'.PUERTO.'://'.HOST.'/css/'.$file_css.'.css">';
     }  
   }
+
   ?>
   <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
   <script>
@@ -167,14 +168,23 @@ if($navegador == 'MSIE'){ ?>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" id="img-logo"  href="<?php echo PUERTO."://".HOST;?>">
-        <img class="logo" style="height: 160%; padding:0px; margin-top: -10px; width: auto;" src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
-      </a>
+
+      <ul class="nav navbar-nav navbar-left">
+            <li>
+              <a class="navbar-brand" id="img-logo"  href="index.html">
+                <img class="logo" id="logo-1" style="padding: 0px; width: auto;" src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
+                <div class="css-typing hidden-md hidden-lg"><p id="letra-tip">Innovamos para avanzar</p></div>
+              </a>
+            </li>
+            <li class="css-typing visible-lg visible-md hidden-xs" style="margin-right: 74px;">
+              <p id="letra-tip" style="margin-top: 20px; vertical-align: middle;">Innovamos para avanzar</p>
+            </li>
+          </ul> 
     </div>
     <!-- End Header Navigation -->
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
-      <ul class="nav navbar-nav"> 
-      </ul>
+      <!-- <ul class="nav navbar-nav"> 
+      </ul> -->
       <ul class="nav navbar-nav navbar-right">                          
         <?php 
         if (isset($menu["menu"])){   
@@ -211,15 +221,18 @@ if($navegador == 'MSIE'){ ?>
           </li>                              
         <?php } ?>
       <?php } ?>
-      <li>
-        <a target="_blank" id="regEmpMic" href="<?php echo FACEBOOK; ?>"><i class="social fa fa-facebook"></i></a>
-      </li>
-      <li>
-        <a target="_blank" id="regEmpMic" href="<?php echo TWITTER; ?>"><i class="social fa fa-twitter"></i></a>
-      </li>
-      <li>
-        <a target="_blank" id="regEmpMic" href="<?php echo INSTAGRAM; ?>"><i class="social fa fa-instagram"></i></a>
-      </li>
+      <li class="esp-men">
+          <a id="regEmpMic" href="<?php echo FACEBOOK; ?>" target="_blank"><i class="social fa fa-facebook"></i></a>
+        </li>
+        <li class="esp-men">
+          <a id="regEmpMic" href="<?php echo TWITTER; ?>" target="_blank"><i class="social fa fa-twitter"></i></a>
+        </li>
+        <li class="esp-men">
+          <a id="regEmpMic" href="<?php echo INSTAGRAM; ?>" target="_blank"><i class="social fa fa-instagram"></i></a>
+        </li>
+        <li class="esp-men">
+          <a id="regEmpMic" href="<?php echo LINKEDIN; ?>" target="_blank"><i class="social fa fa-linkedin"></i></a>
+        </li>
       </ul>
     </div> 
   </div>

@@ -14,16 +14,16 @@ function navegador(){
 //   $('.loaderMic').css('display', 'block');
 // });
 
-// $(document).ajaxStart(function(){
-//   $('.spin').open({ 
-//       image: puerto_host+'/imagenes/loader.gif',
-//       // color: 'red',
-//     });
-// });
+$(document).ajaxStart(function(){
+  $('.spin').open({ 
+      image: puerto_host+'/imagenes/loader.gif',
+      // color: 'red',
+    });
+});
 
-// $(document).ajaxStop(function(){
-//   $('.spin').close();
-// });
+$(document).ajaxStop(function(){
+  $('.spin').close();
+});
 
 
 
@@ -490,7 +490,7 @@ function validarNumTelf(num,err_telf,seccion_telf,btn){
       error = 1;
 
   }else if(!expreg_telf.test(num)){
-      colocaError(err_telf,seccion_telf,"Formato incorrecto, solo numeros (min 9, máx 15)",btn);
+      colocaError(err_telf,seccion_telf,"Solo numeros (min 9, máx 15)",btn);
       error = 1;
 
   }else{
@@ -511,7 +511,7 @@ function validarDir(direccion,err_dir, seccion_dir,btn){
 
   }else if(expreg1.test(direccion) == false){
 
-    colocaError(err_dir, seccion_dir,"Formato incorrecto, solo letras y n\u00FAmeros",btn); 
+    colocaError(err_dir, seccion_dir,"Solo letras y n\u00FAmeros, sin comas ni puntos",btn); 
     error = 1;
 
   }else{

@@ -51,7 +51,7 @@ class Controlador_Aspirante extends Controlador_Base
         }
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_aspirantes'])){
-            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,/*'T'=>0,*/'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
+            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
         }
 
         $facetas = Modelo_Faceta::obtenerFacetas();
@@ -205,13 +205,13 @@ class Controlador_Aspirante extends Controlador_Base
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         }
                         
-                    }/*else if($letra == 'T' && $type == 1){
+                    }else if($letra == 'T' && $type == 1){
 
                         if(isset($situacionLaboral[$id])){
                             $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         }
                         
-                    }*/else if($letra == 'V' && $type == 1){
+                    }else if($letra == 'V' && $type == 1){
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         
@@ -295,11 +295,11 @@ class Controlador_Aspirante extends Controlador_Base
                             }
                         }
                         
-                        /*if($letra == 'T'){
+                        if($letra == 'T'){
                             if(isset($situacionLaboral[$value])){
                                 $array_datos[$letra] = array('id'=>$value,'nombre'=>$situacionLaboral[$value]);
                             }
-                        }*/
+                        }
 
                         if($letra == 'V'){
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
@@ -348,8 +348,10 @@ class Controlador_Aspirante extends Controlador_Base
                     $filtros = $_SESSION['mfo_datos']['Filtrar_aspirantes'];
                     
                     $fill = true;
-                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) /*&& $filtros['O'] == 1 */&& empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C'])){
-                        $limite_filtrado = '';
+
+                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) /*&& $filtros['O'] == 1 */&& empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C']) && empty($filtros['T'])){
+                        /*echo 'limite_filtrado: '.*/$limite_filtrado = '';
+
                     }else{
                         $limite_filtrado = $limite_plan;
                         $fill = false;
@@ -436,6 +438,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'id_plan'=>$id_plan,
                     'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
+                    'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest,
@@ -533,7 +536,7 @@ class Controlador_Aspirante extends Controlador_Base
             default:
                 
                 unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
-                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,/*'T'=>0,*/'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
+                $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
 
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
@@ -669,7 +672,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'id_plan'=>$id_plan,
                     'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
-                    //'situacionLaboral'=>$situacionLaboral,
+                    'situacionLaboral'=>$situacionLaboral,
                     'licencia'=>$licencia,
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest,

@@ -62,7 +62,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 
           }else{
             $puedeDescargar = false;
-            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n, por favor adquiera un plan.';
+            $_SESSION['mostrar_notif'] = 'Usted no tiene tiene permiso para realizar esta acci\u00F3n, por favor adquiera un plan.';
             //$ruta = PUERTO . '://' . HOST . '/vacantes/';
           }
         }
@@ -72,7 +72,8 @@ class Controlador_GenerarPDF extends Controlador_Base
             $puedeDescargar = true;
           }else{ 
             $puedeDescargar = false;
-            $_SESSION['mostrar_error'] = 'Usted no tiene tiene permisos para realizar esta acci\u00F3n, por favor adquiera un plan.';
+            $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago.';
+            //$ruta = PUERTO . '://' . HOST . '/perfil/';
           }
         }
 

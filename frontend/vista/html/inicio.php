@@ -3,7 +3,7 @@
             <div class="col-md-6">
                 <div class="cuadro-banner">
                   <div class="col-md-12">
-                    <p>¡Conoce las mejores empresas, encuentra tu pr&oacute;ximo trabajo y mucho m&aacute;s!</p>
+                    <p>¡Conoce las mejores empresas, encuentra tu pr&oacute;xima oportunidad laboral y evalua tus competencias!</p>
                   </div>
                   <?php if(!Modelo_Usuario::estaLogueado()){ ?>
                     <div class="col-md-12">
@@ -29,7 +29,7 @@
 
 <section id="brand" class="business bloque">
     <div class="container-fluid">
-      <div class="carousel slide" data-ride="carousel" data-interval="3000" id="myCarousel1">
+      <div class="carousel slide fade-carousel carousel-fade" data-ride="carousel" data-interval="3000" id="myCarousel1">
          
         
       <div class="texto-white carousel-inner" role="listbox">
@@ -100,14 +100,14 @@
       <div class="canea-text-modal col-md-1 ocultar">&nbsp;</div>
     </div>
     <div class="parrafo col-md-12 col-sm-12 col-xs-12">
-      <p>Es un test enfocado al &aacute;mbito comportamental, el cual a trav&eacute;s de competencias ser&aacute; capaz de predecir las fortalezas que una persona tiene y necesita para el desarrollo de un puesto en espec&iacute;fico en las empresas.</p>
+      <p>Es un Test que tiene por objetivo evaluar las competencias laborales de los candidatos y facilitar el proceso de reclutamiento de las empresas.</p>
     </div>
     <button class="btn-blue">
       <a href="<?php echo PUERTO."://".HOST."/canea/"?>" class="texto-white">Conoce m&aacute;s</a>
     </button>
   </center>
 </div>
-<br>
+<!-- <br> -->
 
 <!-- PUBLICIDAD -->
 <section class="tti_section text-center">

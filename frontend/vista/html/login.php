@@ -4,12 +4,12 @@
       <h2 class="titulo">Iniciar Sesi&oacute;n</h2>
     </div>
   </div>
-  <section id="product" class="inicio">
-    <div class="container">
-      <div class="row" id="registro-algo-centro">  
-        <div class="col-md-6 col-md-offset-3">
-          <div class="" id="inicio-cuadro"> 
-            <form action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login" autocomplete="off">
+
+    <div class="row" id="registro-algo-centro" style="margin-top: 10px">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3" id="inicio-cuadro">
+            <form style="margin-top: 10px" action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login" autocomplete="off">
               <div class="col-md-12">
                 <div class="form-group" id="seccion_username">
                   <label>Usuario/Correo <span title="Este campo es obligatorio">*</span></label><div id="err_username" class="help-block with-errors"></div>
@@ -28,16 +28,16 @@
               </div>
               <div class="row">          
                 <div class="col-xs-12">
-                  <div class="text-center" style="margin-top: 20px;">
+                  <div class="text-center">
                     <label><a href="<?php echo PUERTO."://".HOST;?>/contrasena/">¿Olvidaste tu contraseña?&nbsp;Haz click aqu&iacute;</a></label><br>
-                    <button id="btn_sesion" type="button" class="btn-blue" onclick="validaForm(1,'btn_sesion')">Ingresar</button>
+                    <button id="btn_sesion" type="button" class="btn-blue" style="margin-bottom: 0px;" onclick="validaForm(1,'btn_sesion')">Ingresar</button>
                   </div>
                 </div>
               </div>
             </form>
-          </div>
+        </div>
         </div>
       </div>
     </div>
-  ﻿</section>
+
 <!--</section>-->

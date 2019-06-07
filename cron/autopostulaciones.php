@@ -109,7 +109,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
 	    catch(Exception $e){
 	  	  $GLOBALS['db']->rollback();
 	  	  echo "NO PROCESADO REGISTRO ".$oferta['id_ofertas']."<br>";        
-	      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron autopostulaciones',$e->getMessage());      
+	      //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron autopostulaciones',$e->getMessage());      
 	    }
     }        
   }  

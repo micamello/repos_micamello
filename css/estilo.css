@@ -136,8 +136,21 @@ display: inline;
   text-transform: uppercase;
   color: white;
   font-weight: bold;
-  font-size: 18pt;
-  padding: 10px 0px;
+  font-size: 16px;
+  padding: 10px 10px;
+  border: 2px solid #204478;
+
+}
+
+.perfil-cuadro:hover{
+    color: #204478;
+    border: 2px solid #204478;
+    background-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+}
+.perfil-cuadro:hover label{
+    cursor: pointer;
 }
  /*TIMER*/
  #regEmpMic{
@@ -235,6 +248,13 @@ display: inline;
 
 /*PANTALLAS PEQUEÑAS*/
 @media screen and (max-width:600px){
+    #logo-1{
+        margin-top: -20px;
+        height: 140%;
+    }
+     #letra-tip{
+        font-size: 10px; 
+    }
     #btn-pre{
         margin-top: 0px;
         font-size: 16px;
@@ -348,6 +368,13 @@ display: inline;
 
 /*PANTALLAS MEDIANAS*/
 @media only screen and (max-width:1000px) and (min-width:481px){
+    #logo-1{
+         margin-top: -10px;
+         height: 120%;
+    }
+    #letra-tip{
+        font-size: 10px; 
+    }
     #btn-pre{
         margin-top: 20px;
     }
@@ -427,7 +454,10 @@ display: inline;
 }
 /*PANTALLAS GRANDES*/
 @media only screen and (min-width:1000px){
-
+    #logo-1{
+         margin-top: -10px;
+         height: 160%;
+    }
     .img-res2{
         width: 100px;
     }
@@ -550,6 +580,7 @@ display: inline;
 /*REGISTRO*/
 @media (min-width: 768px) {
   .container {
+    /*revisar esto*/
     /*width: 75%;*/
   }
 }
@@ -988,6 +1019,7 @@ padding-top: 10px;
 }
 .qs-text-lista{
     color: #4b94d9;
+    /*text-align: justify;*/
 }
 .qs-iconos{
     color: #4b95da;
@@ -1048,7 +1080,7 @@ padding-top: 10px;
     margin-top: 20px;
     padding: 40px 0px 40px 0px;
  }
- #inicio-cuadro{
+  #inicio-cuadro{
     background-color: white;
     padding: 20px;
     text-align: left;
@@ -1364,6 +1396,33 @@ ul.checkout-bar a {
 .custom_file:hover img 
 {
     transform: scale(1.2);
+}
+
+/**ESTILO*/
+.carousel-fade .carousel-inner .item {
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
 }
 
 /*Brand Section
@@ -1981,11 +2040,11 @@ div[class*='col-'] {
   font-weight: 400;
   font-size: 15px;
 }
-#registro-algo-centro{
+/*#registro-algo-centro{
     margin: 0 auto;
     background-color: #204478;
 
-}
+}*/
 
 .errorContainer{
     position: relative;
@@ -2054,6 +2113,7 @@ div[class*='col-'] {
     border: 2px solid #f17525;
     background-color: transparent;
     text-decoration: none;
+
 }
 
 .f-s-16px{ font-size: 16px; }
@@ -2270,7 +2330,6 @@ div[class*='col-'] {
   animation-fill-mode: both;
 }
 
-
 .caja-cuenta{
     border: 2px solid #204478;
     padding: 10px;
@@ -2283,6 +2342,199 @@ div[class*='col-'] {
     text-align: center;
     font-weight: bold;
 }
+/*#logo-1{
+    padding-top: -10px;
+}*/
+
+
+.css-typing p {
+  border-right: .15em solid grey;
+  white-space: nowrap;
+  overflow: hidden;
+text-align: left;
+} 
+/*
+animation: 
+    typing 3.5s steps(30, end),
+    blink-caret .5s step-end infinite;*/
+.css-typing p:nth-child(1) {
+  width: 11.6em;
+  -webkit-animation: type 7s steps(70, end);
+  animation: type 7s steps(70, end);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+    -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.css-typing p:nth-child(2) {
+  width: 25em;
+  opacity: 0;
+  -webkit-animation: type2 7s steps790, end);
+  animation: type2 7s steps(70, end);
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.css-typing p:nth-child(3) {
+  width: 23em;
+  opacity: 0;
+  -webkit-animation: type3 7s steps(53, end);
+  animation: type3 7s steps(53, end);
+  -webkit-animation-delay: 7s;
+  animation-delay: 7s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+.css-typing p:nth-child(4) {
+  width: 13em;
+  opacity: 0;
+  -webkit-animation: type4 5s steps(30, end), blink .5s step-end infinite alternate;
+  animation: type4 3.5s steps(30, end), blink .5s step-end infinite alternate;
+  -webkit-animation-delay: 14s;
+  animation-delay: 14s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@-webkit-keyframes type {
+  0% {
+    width: 0;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    border: none;
+  }
+}
+
+@keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@-webkit-keyframes type2 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+@-webkit-keyframes type3 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+@keyframes type4 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+@-webkit-keyframes type4 {
+  0% {
+    width: 0;
+  }
+  1% {
+    opacity: 1;
+  }
+  99.9% {
+    border-right: .15em solid grey;
+  }
+  100% {
+    opacity: 1;
+    border: none;
+  }
+}
+
+
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    border-color: tranparent;
+  }
+}
+
+.cont-rrss{
+    padding: 0px 5px;
+}
+
+/*NUEVOS CAMBIOS 3/06*/
 @media (max-width: 1200px) {
     .navbar-header {
       float: none;
@@ -2306,6 +2558,80 @@ div[class*='col-'] {
     .navbar-collapse.collapse.in{
       display:block !important;
     }
+
+
+
+
+
+
+
+
+    .navbar-nav .open .dropdown-menu {
+       position: static;
+       float: none;
+       width: auto;
+       margin-top: 0;
+       background-color: transparent;
+       border: 0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+    }
+}
+
+/*NUEVOS CAMBIOS 3/06*/
+/*@media (max-width: 1200px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+   .navbar-nav .open .dropdown-menu {
+       position: static;
+       float: none;
+       width: auto;
+       margin-top: 0;
+       background-color: transparent;
+       border: 0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+    }
+}*/
+
+/*NUEVOS CAMBIOS 3/06*/
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+
+    /*border-color: #204478;*/
+
 }
 
 .caja-cuenta-2{

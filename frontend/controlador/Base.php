@@ -15,7 +15,7 @@ abstract class Controlador_Base{
     global $_SUBMIT;
     $this->device = $device;
     $this->data = $_SUBMIT;        
-    self::verificaCompra();    
+    $_SESSION['mfo_datos']['planActivar'] = self::verificaCompra();    
   }
   
   public function redirectToController($controladorNombre, $params = array()){  
@@ -61,10 +61,10 @@ abstract class Controlador_Base{
       if (count($_SESSION['mfo_datos']['planes']) <> count($arrplanes)){
         $_SESSION['mfo_datos']['planes'] = $arrplanes;
         unset($_SESSION['mfo_datos']['actualizar_planes']); 
-        return true;       
+        return 1;   
       }      
     }    
-    return false;
+    return 0;
   }
 
   public function linkRedesSociales(){

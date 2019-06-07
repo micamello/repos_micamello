@@ -16,10 +16,9 @@ $(document).ready(function(){
           },
           error: function (request, status, error) {
             Swal.fire({
-              title: '¡Advertencia!',
               html: request.responseText,
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 210,
+              imageWidth: 75,
               confirmButtonText: 'ACEPTAR',
               animation: true
             });                        
@@ -125,10 +124,9 @@ if($('#provinciaOf').length){
           },
           error: function (request, status, error) {
             Swal.fire({
-              title: '¡Información!',
               html: request.responseText,
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 210,
+              imageWidth: 75,
               confirmButtonText: 'ACEPTAR',
               animation: true
             });            
@@ -152,8 +150,8 @@ if($('#idiomaOf').length){
     $('#idiomaOf').on('change', function(){
         // $('#addButton').parent().removeClass('bounce');
         $('#addButton').parent().addClass('bounce');
-        $('#addButton').removeClass('addButton');
-        $('#addButton').addClass('active_button');
+        // $('#addButton').removeClass('addButton');
+        // $('#addButton').addClass('active_button');
     })
 }
 
@@ -178,8 +176,8 @@ if($('#addButton').length){
                 contenedorIdiomas.find('ul').append(li);
                 crearArrayIdiomas(selectIdioma.val(), selectNivelIdioma.val());
                 $('#addButton').parent().removeClass('bounce');
-                $('#addButton').removeClass('active_button');
-                $('#addButton').addClass('addButton');
+                // $('#addButton').removeClass('active_button');
+                // $('#addButton').addClass('addButton');
 
                 selectIdioma.children(':selected').attr('disabled', true);
             }
@@ -1159,11 +1157,10 @@ function formatearFecha(contenido){
 }
 
 function mensajeErrorAlert(mensaje){
-  Swal.fire({
-    title: '¡Faltan algunos datos!',
+  Swal.fire({    
     html: mensaje,
     imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-    imageWidth: 210,
+    imageWidth: 75,
     confirmButtonText: 'ACEPTAR',
     animation: true
   });      

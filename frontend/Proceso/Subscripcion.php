@@ -57,7 +57,7 @@ class Proceso_Subscripcion{
       $obj_facturacion->tipoIdentifComprador = $this->objUsuario->tipodoc;            
       $obj_facturacion->importeTotal = $this->procesador->monto;
       $obj_facturacion->codigoPrincipal = $this->idplan;
-      $obj_facturacion->descripdetalle = $infoplan["nombre"]; 
+      $obj_facturacion->descripdetalle = utf8_encode($infoplan["nombre"]); 
       $obj_facturacion->formadepago = $this->procesador->tipopago;     
       $obj_facturacion->provinciaComprador = $this->objUsuario->provincia;     
       $obj_facturacion->ciudadComprador = $this->objUsuario->ciudad;     
@@ -107,7 +107,7 @@ class Proceso_Subscripcion{
   	  $GLOBALS['db']->rollback();
 	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
       $msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);	    
+	    //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);	    
   	}
 
   }
@@ -123,7 +123,9 @@ class Proceso_Subscripcion{
         	                                      $this->objUsuario->telefono,$this->objUsuario->dni,$this->objUsuario->tipodoc,
         	                                      $tipoproc,'',$this->procesador->monto,$this->objUsuario->id,
         	                                      $this->idplan,$this->objUsuario->direccion,$this->objUsuario->tipo,
-                                                Modelo_Comprobante::PAGO_VERIFICADO)){
+                                                Modelo_Comprobante::PAGO_VERIFICADO,$this->objUsuario->provincia,
+                                                $this->objUsuario->ciudad,$this->objUsuario->codpostal,
+                                                $this->procesador->tipopago)){
       throw new Exception("Error al ingresar el comprobante transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan);
     }  
 	  return $GLOBALS['db']->insert_id();	  

@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'micamell_desarrollo3');
+define('DBNOMBRE', 'micamello_desarrollo10');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -38,6 +38,7 @@ define('EDADES', array('1'=>'18 a 25 A&ntilde;os', '2'=>'25 a 35 A&ntilde;os', '
 define('FACEBOOK', 'https://www.facebook.com/MiCamello.com.ec/');
 define('TWITTER', 'https://twitter.com/MiCamelloec');
 define('INSTAGRAM', 'https://www.instagram.com/micamelloec/');
+define('LINKEDIN','https://www.linkedin.com/company/mi-camello-s-a/');
 define('NRO_TRABAJADORES', array('1'=>'De 1 a 10 trabajadores', '2'=>'De 11 a 50 trabajadores', '3'=>'De 51 a 200 trabajadores', '4'=>'De 201 a 500 trabajadores','5'=>'De 501 a 1000 trabajadores','6'=>'M&aacute;s de 1000 trabajadores'));
 define('FECHA_POSTULADO', array('1'=>'Hoy', '2'=>'&Uacute;ltimos 3 d&iacute;as', '3'=>'&Uacute;ltima semana', '4'=>'&Uacute;ltimo mes'));
 define('CALCULAR_FECHA', array('1'=>'', '2'=>'-3DIAS', '3'=>'-1SEMANA', '4'=>'-1MES'));
