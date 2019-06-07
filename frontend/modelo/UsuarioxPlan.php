@@ -389,6 +389,14 @@ class Modelo_UsuarioxPlan{
     if (empty($id_usuario_plan)){ return false; }    
     return $GLOBALS['db']->update('mfo_empresa_plan',array('estado'=>0),'id_empresa_plan='.$id_usuario_plan);           
   }
+
+  public static function consultaIndividual($idempresaplan,$tipousu){
+    if (empty($idempresaplan) || empty($tipousu)){ return false; }
+    $tabla = ($tipousu == Modelo_Usuario::EMPRESA) ? "mfo_empresa_plan" : "mfo_usuario_plan";
+    $id = ($tipousu == Modelo_Usuario::EMPRESA) ? "id_empresa_plan" : "id_usuario_plan";
+    $sql = "SELECT id_plan FROM ".$tabla." WHERE ".$id." = ?";
+    return $GLOBALS['db']->auto_array($sql,array($idempresaplan),true); 
+  }
 }  
 
 ?>

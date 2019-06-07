@@ -48,10 +48,15 @@ class Controlador_Acceso extends Controlador_Base{
       $infoempresa = Modelo_Usuario::busquedaPorId($acceso["id_empresa"],Modelo_Usuario::EMPRESA);
       $email_subject = "Devolución de Acceso"; 
       $candidato = ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['nombres'])).' '.ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']));
+      $enlace = "<a href='".PUERTO.'://'.HOST.'/planesUsuario/'."'>Mis Planes</a>";
+      $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($acceso["id_empresa_plan"]);
+      $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
       $email_body = Modelo_TemplateEmail::obtieneHTML("DEVOLUCION_ACCESO");
       $email_body = str_replace("%NOMBRES%", utf8_encode($infoempresa["nombres"]), $email_body);   
-      $email_body = str_replace("%CANDIDATO%", utf8_encode($candidato), $email_body);               
-      $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);         
+      $email_body = str_replace("%CANDIDATO%", utf8_encode($candidato), $email_body);              
+      $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);  
+      $email_body = str_replace("%PLAN%", $infoplan["nombre"], $email_body);
+      $email_body = str_replace("%ENLACE%", $enlace, $email_body);       
       Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);
 
       $GLOBALS['db']->commit();
