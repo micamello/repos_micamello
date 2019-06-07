@@ -18,16 +18,19 @@ class Modelo_Comprobante{
 
   public static function guardarComprobante($numero, $nombre, $correo, $telefono, $dni, $tipodoc, 
   																					$tipopago, $imagen, $valor, $usuario, $plan, $direccion, 
-                                            $tipousu, $estado = self::PAGO_PROCESO){
+                                            $tipousu, $estado = self::PAGO_PROCESO, $provincia, 
+                                            $ciudad, $codpostal,$formapago){
     if (empty($numero) || empty($nombre) || empty($correo) || empty($telefono) ||
     	  empty($dni) || empty($tipodoc) || empty($tipopago) || empty($valor) || 
-    	  empty($usuario) || empty($plan) || empty($direccion) || empty($tipousu)){ 
+    	  empty($usuario) || empty($plan) || empty($direccion) || empty($tipousu) || 
+        empty($provincia) || empty($ciudad) || empty($codpostal) || empty($formapago)){ 
     	return false; 
     }
     $data_insert = array('num_comprobante'=>$numero,'nombre'=>$nombre,'correo'=>$correo,'telefono'=>$telefono,
                          'fecha_creacion'=>date('Y-m-d H:i:s'),'tipo_doc'=>$tipodoc,'tipo_pago'=>$tipopago,
                          'ext_imagen'=>$imagen,'valor'=>$valor,'estado'=>$estado,'id_plan'=>$plan,
-                         'id_user_emp'=>$usuario,'dni'=>$dni,'direccion'=>$direccion,'tipo_usuario'=>$tipousu);
+                         'id_user_emp'=>$usuario,'dni'=>$dni,'direccion'=>$direccion,'tipo_usuario'=>$tipousu,
+                         'provincia'=>$provincia,'ciudad'=>$ciudad,'codigopostal'=>$codpostal,'formapago'=>$formapago);
     return $GLOBALS['db']->insert('mfo_rcomprobantescam',$data_insert);                      
   }
 

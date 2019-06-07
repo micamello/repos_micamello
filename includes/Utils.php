@@ -301,9 +301,8 @@ public static function validarCelularConvencional($contenido){
   }
 
   static public function formatoDinero($str){
-    return ( ! preg_match("/^([0-9]{1,5})[.][0-9]{2}?$/", $str)) ? false : true;
+    return ( ! preg_match("/^[0-9]{2,5}$/", $str)) ? false : true;
   }
-
 
   public static function validarPalabras($data){
     $merge_palabras;

@@ -31,6 +31,7 @@
       echo '<link rel="stylesheet" href="'.PUERTO.'://'.HOST.'/css/'.$file_css.'.css">';
     }  
   }
+
   ?>
   <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
   <script>

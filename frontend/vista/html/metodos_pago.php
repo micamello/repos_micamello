@@ -122,14 +122,44 @@
                   <input type="text" name="telefono" id="telefono" class="form-control" minlength="9" maxlength="15" onkeyup="return validaNumeros(event);" >
                 </div>
               </div>
-              <div class="col-md-12">           
+              <div class="col-md-6">           
                 <div id="seccion_dir" class="form-group">    
                   <label>Direcci&oacute;n</label><div id="err_dir" class="help-block with-errors"></div>
                   <input type="text" name="direccion" id="direccion" class="form-control" placeholder="" maxlength="50">
                 </div>
               </div>
-              
+              <div class="col-md-6"> 
+                <div id="seccion_zip" class="form-group"> 
+                  <label>C&oacute;digo Postal</label><div id="err_zip" class="help-block with-errors"></div> 
+                  <input type="text" name="shipping" id="shipping" class="form-control" value="" maxlength="10"/>
+                </div>
+              </div>
+
+              <div class="col-md-6"> 
+                <div id="seccion_prov" class="form-group"> 
+                  <label>Provincia</label><div id="err_prov" class="help-block with-errors"></div> 
+                  <select id="select_provincia" name="select_provincia" class="form-control"> 
+                  <option disabled selected value="0">Seleccione una opci&oacute;n</option>             
+                  <?php
+                  foreach($arrprovincia as $key=>$provincia){
+                    echo "<option value='".$provincia["id_provincia"]."'>".utf8_encode($provincia["nombre"])."</option>";
+                  }
+                  ?>  
+                  </select>
+                </div>
+              </div>
+            
+              <div class="col-md-6"> 
+                <div id="seccion_ciu" class="form-group"> 
+                  <label>Ciudad</label><div id="err_ciu" class="help-block with-errors"></div> 
+                  <select id="select_ciudad" name="select_ciudad" class="form-control">                     
+                  </select>
+                </div>
+              </div>
+              </div>
               <div align="center">
+                <input type="hidden" name="provincia" id="provincia" value="" />
+                <input type="hidden" name="ciudad" id="ciudad" value="" />
                 <input type="button" id="btndeposito" name="btndeposito" value="Aceptar" class="btn-blue " onclick="enviarFormulario('form_deposito');">
               </div>
               </div>

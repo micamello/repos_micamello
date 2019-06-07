@@ -490,7 +490,7 @@ function validarNumTelf(num,err_telf,seccion_telf,btn){
       error = 1;
 
   }else if(!expreg_telf.test(num)){
-      colocaError(err_telf,seccion_telf,"Formato incorrecto, solo numeros (min 9, máx 15)",btn);
+      colocaError(err_telf,seccion_telf,"Solo numeros (min 9, máx 15)",btn);
       error = 1;
 
   }else{

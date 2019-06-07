@@ -23,7 +23,7 @@ function dispatch() {
       //no existe controlador
     }
     return $controlador->construirPagina();
-  }
+}
   
 function obtieneControlador($nombre){
   switch($nombre){
