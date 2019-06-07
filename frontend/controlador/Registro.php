@@ -74,7 +74,7 @@ class Controlador_Registro extends Controlador_Base {
         $GLOBALS['db']->commit();
         setcookie('preRegistro', null, -1, '/');
         // setcookie("showModal", "", time()-3600);
-        $nombres = $datosReg['nombresCandEmp'].((isset($datosReg['apellidosCand'])) ? " ".$datosReg['apellidosCand'] : '');
+        $nombres = ucfirst($datosReg['nombresCandEmp']).((isset($datosReg['apellidosCand'])) ? " ".ucfirst($datosReg['apellidosCand']) : '');
         $token = Utils::generarToken($id_usuario,"ACTIVACION");
         if (empty($token)){
           throw new Exception("Error en el sistema, por favor intente de nuevo");
@@ -319,8 +319,8 @@ class Controlador_Registro extends Controlador_Base {
       if (!empty($datocorreo)){
         throw new Exception("El correo asociado con su red social ya se encuentra ingresada");
       }
-      $apell_user = Utils::no_carac(explode(" ", trim($apellido)));
-      $nombre_user = Utils::no_carac(explode(" ", trim($nombre)));
+      $apell_user = Utils::no_carac(explode(" ", ucfirst(trim($apellido))));
+      $nombre_user = Utils::no_carac(explode(" ", ucfirst(trim($nombre))));
       $username = $nombre_user[0].$apell_user[0];
       $username = Utils::generarUsername(strtolower($username));      
       $password = Utils::generarPassword();

@@ -43,7 +43,7 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
                 }
               }
             
-              $nombre_mostrar = utf8_encode($accesoemp["nombre_usuario"]).(!empty($accesoemp['apellido_usuario']) ? " ".utf8_encode($accesoemp['apellido_usuario']) : "");
+              $nombre_mostrar = ucfirst(utf8_encode($accesoemp["nombre_usuario"])).(!empty($accesoemp['apellido_usuario']) ? " ".ucfirst(utf8_encode($accesoemp['apellido_usuario'])) : "");
               $email_body = Modelo_TemplateEmail::obtieneHTML("ACEPTACION_ACCESO");
               $email_body = str_replace("%NOMBRES%", $accesoemp['nombre_empresa'], $email_body);
               $email_body = str_replace("%CANDIDATO%", $nombre_mostrar, $email_body);    
@@ -53,7 +53,7 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
           else{
                 if($fechacaducidad <= date('Y-m-d H:i:s')){
                   proceso($accesoemp);
-                  $nombre_mostrar = utf8_encode($accesoemp["nombre_usuario"]).(!empty($accesoemp['apellido_usuario']) ? " ".utf8_encode($accesoemp['apellido_usuario']) : "");
+                  $nombre_mostrar = ucfirst(utf8_encode($accesoemp["nombre_usuario"])).(!empty($accesoemp['apellido_usuario']) ? " ".ucfirst(utf8_encode($accesoemp['apellido_usuario'])) : "");
                   $email_body = Modelo_TemplateEmail::obtieneHTML("DEVOLUCION_ACCESO");
                   $email_body = str_replace("%NOMBRES%", $accesoemp['nombre_empresa'], $email_body);
                   $email_body = str_replace("%CANDIDATO%", $nombre_mostrar, $email_body);    

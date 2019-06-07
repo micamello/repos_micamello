@@ -812,7 +812,7 @@ class Controlador_Aspirante extends Controlador_Base
                                     if(!in_array($id, $usuarios_con_accesos)){
                                         //echo 'enviara correo a: '.$id;
                                         $datos = $datos_usuarios[$id];
-                                        $nombre_mostrar = utf8_encode($datos["nombres"])." ".utf8_encode($datos["apellidos"]);    
+                                        $nombre_mostrar = ucfirst(utf8_encode($datos["nombres"]))." ".ucfirst(utf8_encode($datos["apellidos"]));    
                                         $template = $email_body;
                                         $enlace = PUERTO.'://'.HOST.'/login/';
 

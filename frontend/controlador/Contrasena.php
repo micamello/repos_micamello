@@ -120,7 +120,7 @@ class Controlador_Contrasena extends Controlador_Base {
         }
         $token .= "||".$datousuario["id_usuario_login"]."||".date("Y-m-d H:i:s");        
         $token = Utils::encriptar($token);
-        $nombres = $datousuario['nombres'] . ((isset($datousuario['apellidos'])) ? "&nbsp;".$datousuario['apellidos'] : '');
+        $nombres = ucfirst(utf8_encode($datousuario['nombres'])) . ((isset($datousuario['apellidos'])) ? "&nbsp;".ucfirst(utf8_encode($datousuario['apellidos'])) : '');
         if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
           throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
         }
@@ -136,7 +136,7 @@ class Controlador_Contrasena extends Controlador_Base {
   public function envioCorreo($correo,$nombres,$token){
     $enlace = "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a>"; 
     $email_body = Modelo_TemplateEmail::obtieneHTML("RECUPERACION_CONTRASENA");
-    $email_body = str_replace("%NOMBRES%", utf8_encode($nombres), $email_body);   
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);        
     if (Utils::envioCorreo($correo,"Recuperación de Contraseña",$email_body)){
       return true;
