@@ -84,7 +84,7 @@ if (count($facturas) > 0){
       $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml",
                              "archivo"=>$rsfact["claveacceso"].".xml");          
 
-      $nombres = utf8_encode($infousuario["nombres"])." ".(isset($infousuario["apellidos"]) ? utf8_encode($infousuario["apellidos"]) : "");
+      $nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".(isset($infousuario["apellidos"]) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");
       $email_subject = "Factura Electrónica"; 
       $mensaje = "N&uacute;mero de Autorizaci&oacute;n: ".$rsfact["claveacceso"]."<br>";
       $mensaje .= "Fecha de Emisi&oacute;n: ".$fecha_auto."<br>";

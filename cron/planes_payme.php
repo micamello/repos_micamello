@@ -73,7 +73,7 @@ if (!empty($registros) && is_array($registros)){
                                  'tipo'=>'payme',
                                  'trans'=>$registro["purchaseOperationNumber"],
                                  'monto'=>$monto,
-                                 'tipopago'=>$tipopago);
+                                 'tipopago'=>$tipopago);    
     $objSubscripcion = new Proceso_Subscripcion($cliente,$cliente->plan,$procesador);
     $objSubscripcion->procesar();                  
   }

@@ -371,6 +371,7 @@ class Controlador_Aspirante extends Controlador_Base
                     }
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuarios1,false);
+                    
                     $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuarios1,$fill);
                     $cantd_total = count($cantd_aspirantes);
 

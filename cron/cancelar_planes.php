@@ -35,7 +35,7 @@ if (!empty($arrcandidato)){
 				}													
 				
         $GLOBALS['db']->commit();       
-        envioCorreo($infousuario["nombres"]." ".$infousuario["apellidos"],$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);				
+        envioCorreo(ucfirst($infousuario["nombres"])." ".ucfirst($infousuario["apellidos"]),$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);				
         echo "Plan de Candidato Desactivado ".$usuarioplan["id_usuario_plan"]."<br>";				
 			}
 			/*else{				
@@ -92,7 +92,7 @@ if (!empty($arrempresa)){
         }
 				
 				$GLOBALS['db']->commit();
-        envioCorreo($infousuario["nombres"],$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);
+        envioCorreo(ucfirst($infousuario["nombres"]),$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);
 				echo "Plan de Empresa Desactivado ".$usuarioplan["id_usuario"]."<br>";
 			}		
 		}

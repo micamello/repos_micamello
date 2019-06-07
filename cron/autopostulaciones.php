@@ -5,6 +5,8 @@ ini_set("max_input_time", "0");
 ini_set('memory_limit', "768M");
 set_time_limit(0);
 
+$dominio = "www.micamello.com.ec/desarrollov3/";
+
 /*Script que permite las autopostulaciones del candidato dependiendo del plan contratado,
 ubicación del candidato, areas de interes tomando en cuenta solo 3 dias laborables anteriores a la contratacion del plan y 
 envio de correo con el numero de autopostulaciones*/
@@ -94,9 +96,10 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
         $cont_publicacion = $cont_publicacion - 1; 
 
         $empresa = Modelo_Usuario::busquedaPorId($oferta["id_usuario"],Modelo_Usuario::EMPRESA);    
-        $mail_ofertas .= utf8_encode($oferta["titulo"])."<br>";
-        $nombre_empresa = ($oferta["confidencial"]) ? "Nombre de la Empresa - Confidencial" : utf8_encode($empresa["nombres"]);
-        $mail_ofertas .= $nombre_empresa." - ".utf8_encode($oferta["provincia"])."/".utf8_encode($oferta["ciudad"])."<br><br>";
+        $mail_ofertas .= "<label style='color:#0b66a9;'><a href='".PUERTO."://".$dominio."/detalleOferta/oferta/".Utils::encriptar($oferta["id_ofertas"])."/'>".utf8_encode($oferta["titulo"])."</a></label><br>";
+        $nombre_empresa = ($oferta["confidencial"]) ? "Empresa Confidencial" : "Empresa ".utf8_encode($empresa["nombres"]);
+        $mail_ofertas .= $nombre_empresa." - ".utf8_encode($oferta["provincia"])."/".utf8_encode($oferta["ciudad"]);
+        $mail_ofertas .= "<hr>";
 
         //si al plan ya se le acabo las autopostulaciones busca otro
         $numpostact = Modelo_UsuarioxPlan::consultaNroPostulaciones($plan["id_usuario_plan"]);
@@ -116,12 +119,14 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   
   //5.-envio de correo al candidato
   if (!empty($mail_ofertas)){
-    $nombre_mostrar = utf8_encode($rows["nombres"])." ".utf8_encode($rows["apellidos"]);    
+    $enlace = "<a href='".PUERTO."://".$dominio."/postulacion/'>Mis Postulaciones</a>";
+    $nombre_mostrar = ucfirst(utf8_encode($rows["nombres"]))." ".ucfirst(utf8_encode($rows["apellidos"]));    
     $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");    
     $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
-    $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);      
+    $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);
+    $email_body = str_replace("%ENLACE%", $enlace, $email_body);      
     //echo $email_body;
-    Utils::envioCorreo($rows["correo"],"Autopostulaciones Automáticas",$email_body);   
+    Utils::envioCorreo($rows["correo"],"Postulaciones Automáticas",$email_body);   
   }
 
 }

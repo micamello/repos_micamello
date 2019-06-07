@@ -594,16 +594,16 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							?>                    
 			            </select>
 			        </div> 
-			        <!--
+			        
 			        <div class="form-group">
 			            <select id="trabajo" class="form-control">
 			                <option value="0">Situcaci&oacute;n Laboral</option>
 							<?php
-					    		/*foreach ($situacionLaboral as $key => $v) {
+					    		foreach ($situacionLaboral as $key => $v) {
 									echo '<option value="'.$key.'">'.utf8_encode($v).'</option>';
-						  		}*/ ?>                    
+						  		} ?>                    
 			            </select>
-			        </div>-->
+			        </div>
 
 			        <div class="form-group">
 			        	<select id="licencia" class="form-control">

@@ -38,7 +38,7 @@ $usuariosNoSesion = Modelo_Usuario::obtenerUsuariosPreregistrados();
 					throw new Exception("Ha ocurrido un error al actualizar la contraseña");
 				}
 
-			   	$nombre_mostrar = utf8_encode($usuarios["nombres"]).(!empty($usuarios['apellidos']) ? " ".utf8_encode($usuarios['apellidos']) : "");
+			   	$nombre_mostrar = ucfirst(utf8_encode($usuarios["nombres"])).(!empty($usuarios['apellidos']) ? " ".ucfirst(utf8_encode($usuarios['apellidos'])) : "");
 			  
 			   	$email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_USUARIO");
 			   	$email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
