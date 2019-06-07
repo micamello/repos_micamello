@@ -539,14 +539,20 @@ function ocultarCampos(){
 function enviarFormulario(){
 
     var estado = validarFormulario(true);    
-    //console.log(estado);
-    if(estado == ''){
+    var file = document.getElementById('subirCV');
+    if(estado == '' && file != ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();
-    }else{
+    }else if(estado != '' && file == ''){
+        // error de ambos lados
+
+    }else if(estado == '' && file == ''){
+      //solo falta hoja de vida
+    }else if(estado != '' && file != ''){
       //mostrarERRORES
       Swal.fire({
-        html: 'Faltan algunos datos por completar:<br>Los campos con (*) son obligatorios',
+        // title: '¡Advertencia!',        
+        html: 'Faltan algunos datos:<br>',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
         imageWidth: 75,
         confirmButtonText: 'ACEPTAR',

@@ -165,23 +165,7 @@
       font-weight: 700;
     }
 
-    .list-unstyled.msg_error
-    {
-      position: absolute;
-      left: 0px;
-      /*padding-top: 20px;*/
-      margin-top: 14px;
-      text-align: center;
-      /*text-align: middle;*/
-      top: 0px;
-      border: none;
-      border-radius: 0px;
-      padding: 0 0 0 0;
-      background-color: transparent;
-      color: red;
-      font-size: 11px;
-      right: 0px
-    }  
+     
 }
 
 
@@ -251,21 +235,7 @@
       width: 5%;
     }
 
-    .list-unstyled.msg_error
-    {
-      position: relative;
-      left: 0px;
-      text-align: center;
-      /*text-align: middle;*/
-      top: 0px;
-      border: none;
-      border-radius: 0px;
-      padding: 0 0 0 0;
-      background-color: transparent;
-      color: red;
-      font-size: 15px;
-      right: 0px
-    }  
+    
 
     .user_icon
     {
@@ -403,21 +373,7 @@
       width: 5%;
     }
 
-    .list-unstyled.msg_error
-    {
-      position: relative;
-      left: 0px;
-      text-align: center;
-      /*text-align: middle;*/
-      top: 0px;
-      border: none;
-      border-radius: 0px;
-      padding: 0 0 0 0;
-      background-color: transparent;
-      color: red;
-      font-size: 15px;
-      right: 0px
-    }  
+    
 
     .user_icon
     {
@@ -526,21 +482,7 @@
       width: 5%;
     }
 
-    .list-unstyled.msg_error
-    {
-      position: relative;
-      left: 0px;
-      text-align: center;
-      /*text-align: middle;*/
-      top: 0px;
-      border: none;
-      border-radius: 0px;
-      padding: 0 0 0 0;
-      background-color: transparent;
-      color: red;
-      font-size: 15px;
-      right: 0px
-    }
+    
 
     .user_icon
     {
