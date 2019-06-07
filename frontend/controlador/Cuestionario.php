@@ -88,12 +88,17 @@ class Controlador_Cuestionario extends Controlador_Base {
               if (!empty($accesos)){
                 foreach($accesos as $acceso){
                   $infoempresa = Modelo_Usuario::busquedaPorId($acceso["id_empresa"],Modelo_Usuario::EMPRESA);
+                  $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($acceso["id_empresa_plan"]);
+                  $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
                   $email_subject = "Aceptación de Acceso"; 
                   $candidato = ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['nombres'])).' '.ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']));
+                  $enlace = "<a href='".PUERTO.'://'.HOST.'/planesUsuario/'."'>Mis Planes</a>";
                   $email_body = Modelo_TemplateEmail::obtieneHTML("ACEPTACION_ACCESO");
                   $email_body = str_replace("%NOMBRES%", ucfirst(utf8_encode($infoempresa["nombres"])), $email_body);   
                   $email_body = str_replace("%CANDIDATO%", $candidato, $email_body);               
-                  $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);         
+                  $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);
+                  $email_body = str_replace("%PLAN%", $infoplan["nombre"], $email_body);
+                  $email_body = str_replace("%ENLACE%", $enlace, $email_body);
                   Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);
                 }
               }
