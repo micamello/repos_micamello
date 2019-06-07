@@ -149,6 +149,7 @@ function validarImg(archivo){
   if(file == 1){
     error = 1;
   }else{
+    $('#btnDescargarHV').val('cargada');
     Swal.fire({      
       html: 'Imagen cargada',
       imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
@@ -243,6 +244,7 @@ $('#subirCV').change(function(e) {
     if(file == 1){
         error = 1;
     }else{
+        $('#btnDescargarHV').val('cargada');
       Swal.fire({        
         html: 'Hoja de vida cargada',
         imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
@@ -537,25 +539,36 @@ function ocultarCampos(){
 }
 
 function enviarFormulario(){
-
     var estado = validarFormulario(true);    
-<<<<<<< HEAD
     var file = document.getElementById('subirCV').value;
-=======
-    var file = document.getElementById('subirCV');
->>>>>>> FF
     if(estado == '' && file != ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();
-    }else if(estado != '' && file == ''){
-        //error de ambos lados
     }else if(estado == '' && file == ''){
-      //solo falta hoja de vida
+        //solo falta hoja de vida
+      Swal.fire({
+        // title: '¡Advertencia!',        
+        html: 'Por favor, ,debe cargar la hoja de vida<br>',
+        imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+        imageWidth: 75,
+        confirmButtonText: 'ACEPTAR',
+        animation: true
+      });
+    }else if(estado != '' && file == ''){
+      // error de ambos lados
+        Swal.fire({
+            // title: '¡Advertencia!',        
+            html: 'Por favor, cargue su hoja de vida y complete los campos con (*)<br>',
+            imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+            imageWidth: 75,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });
     }else if(estado != '' && file != ''){
       //mostrarERRORES
       Swal.fire({
         // title: '¡Advertencia!',        
-        html: 'Faltan algunos datos:<br>',
+        html: 'Por favor, complete los campos con (*)<br>',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
         imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
@@ -684,16 +697,6 @@ function validarFormulario(tipovalidacion){
             error = 1;
           }
         }
-
-        /*if(document.getElementById('subirCV') && document.getElementById('subirCV').value != ''){
-            $("#mensaje_error_hv").remove();
-
-        }else if(document.getElementById('btnDescarga').value == 0 && document.getElementById('subirCV').value == ''){
-            error = 1;
-            //console.log('entro');
-
-            mensaje += '- Debe cargar la hoja de vida\n';
-        }*/
 
         if(discapacidad == null || discapacidad == 0){
             colocaError("err_dis", "seccion_dis",err_list,"boton");
