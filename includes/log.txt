@@ -6311,3 +6311,99 @@
             FROM mfo_notificacion 
             WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
 [2019/06/07 04:01:02] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:10:58] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:10:58] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_genero
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/06/07 04:10:58] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:10:58] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:10:58] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:10:58] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:10:58] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/06/07 04:10:58] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/06/07 04:10:58] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:10:58] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:10:58] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:10:58] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:10:58] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:11:00] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/06/07 04:11:05] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:11:05] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_genero
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/06/07 04:11:05] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:11:05] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:11:05] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_subareas
+[2019/06/07 04:11:05] SQL Trans: START TRANSACTION
+[2019/06/07 04:11:05] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661' AND id_usuario_login <> 1555
+[2019/06/07 04:11:05] SQL execute: UPDATE mfo_usuario_login SET dni="0706715661" WHERE id_usuario_login=1555
+[2019/06/07 04:11:05] SQL execute: UPDATE mfo_usuario SET foto="0",nombres="Eder",telefono="0968597677",id_ciudad="1",fecha_nacimiento="1994-03-13",id_nacionalidad="39",apellidos="Pozo",id_genero="1",discapacidad="0",id_escolaridad="1",id_tipolicencia= NULL,id_estadocivil="1",viajar="0",id_situacionlaboral="1",tlf_convencional="",residencia="0",id_univ= NULL,nombre_univ=" " WHERE id_usuario=1044
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_nivelidioma_idioma
+[2019/06/07 04:11:05] SQL execute: DELETE FROM mfo_usuario_nivelidioma WHERE id_usuario = 1044
+[2019/06/07 04:11:05] SQL execute: INSERT INTO mfo_usuario_nivelidioma (id_usuario,id_nivelIdioma_idioma) VALUES ('1044','5')
+[2019/06/07 04:11:05] SQL Trans: COMMIT
+[2019/06/07 04:11:05] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.viajar, u.discapacidad, u.residencia, u.id_escolaridad, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
+        ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral, u.grafico
+        FROM mfo_usuario u
+        INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
+        INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+        INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+        WHERE u.id_usuario = '1044' AND u.estado = 1
+[2019/06/07 04:11:05] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '1044' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:11:05] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '1044'
+            ORDER BY b.id_area
+[2019/06/07 04:11:05] SQL Query: SELECT GROUP_CONCAT(id_areas_subareas) AS subareas FROM mfo_usuarioxarea WHERE id_usuario =1044
+[2019/06/07 04:11:05] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 1044
+[2019/06/07 04:11:05] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:11:05] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/06/07 04:11:05] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/06/07 04:11:05] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:11:05] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:11:05] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:11:05] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:11:05] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:11:06] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
