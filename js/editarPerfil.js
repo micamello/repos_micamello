@@ -539,7 +539,11 @@ function ocultarCampos(){
 function enviarFormulario(){
 
     var estado = validarFormulario(true);    
+<<<<<<< HEAD
     var file = document.getElementById('subirCV').value;
+=======
+    var file = document.getElementById('subirCV');
+>>>>>>> FF
     if(estado == '' && file != ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();

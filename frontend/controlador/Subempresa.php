@@ -484,7 +484,7 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function correoAvisoCreacion($correo,$nombres,$username,$password){
 
-        $nombre_mostrar = utf8_encode(strtoupper($nombres));  
+        $nombre_mostrar = ucfirst(utf8_encode($nombres));  
         $enlace = "<a href='".PUERTO."://".HOST."/desarrollov3/login/'>click aqu&iacute;</a>";
 
         $email_body = Modelo_TemplateEmail::obtieneHTML("CREACION_EMPRESA");
