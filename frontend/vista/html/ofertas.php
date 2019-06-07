@@ -326,12 +326,19 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 						foreach($ofertas as $key => $o){  ?>
 
 							<div class="caja-postulaciones">
-								<?php if($o['tipo_oferta'] == 1){ echo '<div class="titulo-postulaciones">Aviso Urgente'; }else{ echo '<div class="titulo-postulaciones-normal">Aviso Normal'; } 
-									if($o['estado'] == Modelo_Oferta::PORAPROBAR){
-										echo ' - POR APROBAR</div>';
-									}else{
-										echo '</div>';
-									}
+								<?php 
+
+								if($o['estado'] == Modelo_Oferta::PORAPROBAR){ $poraprobar = ' - POR APROBAR'; $clase = 'titulo-postulaciones-peniente'; }else{ $poraprobar = ''; } 
+
+								if($o['tipo_oferta'] == 1 && $poraprobar == ''){ 
+									$clase = 'titulo-postulaciones'; 
+									$t = 'Aviso Urgente'.$poraprobar;
+								}else if($o['tipo_oferta'] == 0 && $poraprobar == ''){
+									$clase = 'titulo-postulaciones-normal';
+									$t = 'Aviso Normal'.$poraprobar;
+								}
+								echo '<div class="'.$clase.'">'.$t.'</div>'; 
+								
 								?>
 								<div class='panel-body ofertaUrgente' id='caracteristica_oferta'>
 									<div class="row">

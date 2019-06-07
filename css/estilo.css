@@ -1735,7 +1735,7 @@ ul.checkout-bar a {
     font-weight: bold;
     margin-bottom: 20px;
     border: 2px solid transparent;
-}
+}/*
 .btn-red a{
     color: white;
     text-decoration: none;
@@ -1749,7 +1749,7 @@ ul.checkout-bar a {
 .btn-red:hover a{
     color: #ad3131;
     text-decoration: none;
- }
+ }*/
 .btn-light-blue{
     border-color: transparent;
     font-family: ‘Roboto’;

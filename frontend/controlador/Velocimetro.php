@@ -49,19 +49,22 @@ class Controlador_Velocimetro extends Controlador_Base {
     if($faceta == 1){
       $valorporc = 20;
       $img = 'vel1.png'; 
-      $msj2 = 'Sus posibilidades de estar entre las primeras opciones de selección son pocas. Incremente sus oportunidades. El <b>TEST CANEA</b> tiene mucho más que ofrecerle para que sus opciones aumenten.  ';
+      $titulo = 'HA COMPLETADO LA PRIMERA FASE DEL TEST';
+      $msj2 = 'Solo ha completado 1 test de competencias, sus posibilidades de estar entre las primeras opciones de selecci&oacute;n son pocas. Incremente sus oportunidades. Nuestro test Canea tiene mucho m&aacute;s que ofrecerle para que sus opciones aumenten. ';
       $textoBoton = "CONTINUAR";
     }
     elseif ($faceta == 2) {
       $valorporc = 40;
       $img = 'vel2.png';
-      $msj2 = '¡Excelente! Ahora sus posibilidades se han incrementado. Mejore sus oportunidades al  completar el <b>TEST CANEA</b>. No desespere, recuerde que obtendrá mejores resultados y beneficios para su carrera profesional.';
+      $titulo = '¡SIGA ADELANTE! HA COMPLETADO LA SEGUNDA FASE DEL TEST';
+      $msj2 = '¡Excelente! Ha completado el segundo test, ahora sus posibilidades se han incrementado. Mejore sus oportunidades al completar el TEST CANEA. No desespere, recuerde que obtendrá mejores resultados y beneficios para su carrera profesional';
       $textoBoton = "VER PLANES";
     }
     else{
       $valorporc = 100;
       $img = 'vel3.png';
-      $msj2 = '¡FELICIDADES! Acaba de completar el TEST CANEA. Ahora usted forma parte del presente y del futuro de las empresas, siendo el CANDIDATO IDEAL.';
+      $titulo = '¡FELICIDADES! ACABA DE COMPELTAR EL TEST CANEA.';
+      $msj2 = 'Ahora usted forma parte del presente y del futuro de las empresas, siendo el CANDIDATO IDEAL.';
       $textoBoton = "VER INFORME COMPLETO";
       $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
 
@@ -78,7 +81,7 @@ class Controlador_Velocimetro extends Controlador_Base {
     }
 
     $tags["valorporc"] = $valorporc;
-    $tags["posibilidades"] = $posibilidades;
+    $tags["titulo"] = $titulo;
     $tags["img"] = $img;
     $tags["msj2"] = $msj2;
     $tags["enlaceboton"] = $enlaceboton;
