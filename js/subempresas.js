@@ -4,9 +4,15 @@
     return calcularRecursos(idplan,0);
   }
 });*/
-
 if(document.getElementById('form_editarCuenta')){
   calRec();
+}
+
+if(document.getElementById('form_crearCuenta')){
+  var idplan = document.getElementById('plan').value;
+  if(idplan != 0){
+    calcularRecursos(idplan);
+  }
 }
 
 function cambiarEstados(){
@@ -27,20 +33,23 @@ function cambiarEstados(){
 
 function calRec(){
 
-  var idplan = $('#plan').val();
-  if(idplan != ''){
-    return calcularRecursos(idplan,0);
+  var idplan = document.getElementById('plan').value;
+  if(idplan == 0){
+    colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_editar");
+    return 1;
+  }else{
+    return calcularRecursos(idplan);
   }
 }
 
-function calcularRecursos(idplan,tipo){
+function calcularRecursos(idplan){
   //console.log(tipo);
   var mensaje = '';
   var nuevo_valor = 0;
   var puerto_host = $('#puerto_host').val();
 
   if(idplan == ''){
-    var idplan = $('#plan').val();
+    var idplan = document.getElementById('plan').value;
   }
 
   if(document.getElementById('name_user') && document.getElementById('name_user').value == ''){
@@ -54,7 +63,7 @@ function calcularRecursos(idplan,tipo){
     }
   }
 
-  var ya_entro = 0;
+  //var ya_entro = 0;
 
   $.ajax({
       type: "GET",
@@ -82,178 +91,399 @@ function calcularRecursos(idplan,tipo){
           document.getElementById('accesNum').value = '';
         }
 
-        if(document.getElementById('post') && document.getElementById('acces')){
+        if(document.getElementById('form_editarCuenta')){
+          var btn = "button_editar";
+        }else{
+          var btn = "button_crear";
+        }
 
+        if(document.getElementById('post') && document.getElementById('acces')){
+          console.log('if1');
           var post = parseInt(document.getElementById('post').value);
           var acces = parseInt(document.getElementById('acces').value);
 
-          var cantd_1 = Math.abs(post-num_post);
-          var cantd_3 = Math.abs(acces-num_accesos);
+          if(post_asignar > post){
+            var cantd_rest1 = parseInt(post_asignar-post);
+          }else{
+            var cantd_rest1 = parseInt(post-post_asignar);
+          }
 
-          if(!isNaN(cantd_1)){
+          if(accesos_asignar > acces){
+            var cantd_rest3 = parseInt(accesos_asignar-acces);
+          }else{
+            var cantd_rest3 = parseInt(acces-accesos_asignar);
+          }
+          //console.log(cantd_rest3);
+          var tipo = 1;
+        }else{
+          console.log('if2');
+          var cantd_rest1 = parseInt(post_asignar);
+          var cantd_rest3 = parseInt(accesos_asignar);
 
-            var sumAsignar = post_asignar+post;
+          var post = parseInt(num_post);
+          var acces = parseInt(num_accesos);
+          var tipo = 2;
+        }
+        
+        //if(cantd_rest1 == cantd_rest3 && cantd_rest1 != 0){
+          if(!isNaN(cantd_rest1) && cantd_rest1 >= 0){
 
-            if(num_post <= sumAsignar && num_post != 0){
+            if(tipo == 1){
+              var sumAsignar = post_asignar+post;
+            }else{
+              var sumAsignar = post_asignar;
+            }
+            console.log('sumAsignar: '+sumAsignar);
+              console.log('sumAsignar3: '+sumAsignar3);
+              console.log('post: '+post);
+              console.log('acces: '+acces);
+            if(num_post <= sumAsignar && num_post != 0 && sumAsignar != 0){
 
-              if(sumAsignar-num_post == 0){
+              if(parseInt(sumAsignar-num_post) == 0){
                 nuevo_valor = 0;
               }else{
                 nuevo_valor = sumAsignar-num_post;
               }
+              //console.log('nuevo_valor:'+nuevo_valor);
               document.getElementById('post_asignar').innerHTML = nuevo_valor;
               quitarError("rec1","recursos1");
+            }else if(num_post == 0 && num_accesos == 0 && num_post != ''){
+                console.log('aqui entro ifnuevo');
+                colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+                document.getElementById('post_asignar').innerHTML = post_asignar;
+                document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
             }else{
+              
+              if(post_asignar > 0){
 
-              document.getElementById('post_asignar').innerHTML = post_asignar+post;
-              if(num_post == '' && tipo == 0){
-                //console.log('aqui entro4');
-                colocaError("rec1","recursos1","No pueden ser vac\u00EDo.","button_editar");
-              }else if(num_post == 0 && num_accesos == 0 && num_accesos != '' && tipo == 0){
+                if(tipo == 1){
+                  document.getElementById('post_asignar').innerHTML = post_asignar+post;
+                }else{
+                  document.getElementById('post_asignar').innerHTML = post_asignar;
+                }
+                if(num_post == ''){
+                  //console.log('aqui entro4');
+                  colocaError("rec1","recursos1","No pueden ser vac\u00EDo.",btn);
+                  mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                }else if(num_post == 0 && num_accesos == 0 && num_accesos != ''){
+                  //console.log('aqui entro');
+                  colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                  colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                  mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                  mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+                }else if(num_post > post_asignar){
+                  colocaError("rec1","recursos1","Cantidad no v\u00E1lida.",btn);
+                  mensaje += 'Cantd. ofertas, cantidad no v\u00E1lida. <br>';
+                }else{
+                  quitarError("rec1","recursos1");
+                }
+              }else if(num_post == 0 && num_accesos == 0 && num_accesos != ''){
                 //console.log('aqui entro');
-                colocaError("rec1","recursos1","No pueden ser cero ambos recursos.","button_editar");
-                colocaError("rec3","recursos3","No pueden ser cero ambos recursos.","button_editar");
+                colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
               }else{
-                quitarError("rec1","recursos1");
+                document.getElementById('pI').innerHTML = '';
+                //document.getElementById('post_asignar').innerHTML = post_asignar;
+
+                if(num_post == 0 && tipo == 2){
+                  //console.log('num_post: '+num_post);
+                  document.getElementById('num_post').disabled = true;
+                  document.getElementById('num_post').value = 0;
+                  document.getElementById('post_asignar').innerHTML = post_asignar;
+                  quitarError("rec1","recursos1");
+                }else if(num_post == 0 && tipo == 1){
+                  console.log('acces: '+acces);
+                  if(acces == 0 && accesos_asignar < 0){
+                    document.getElementById('num_post').value = 1;
+                    document.getElementById('post_asignar').innerHTML = post_asignar+post-1;
+                  }else{
+                    document.getElementById('num_post').value = 0;
+                    document.getElementById('post_asignar').innerHTML = post_asignar+post;
+                    //document.getElementById('num_post').disabled = true;
+                  }
+                  quitarError("rec1","recursos1");
+                }else{
+                  document.getElementById('post_asignar').innerHTML = post_asignar+post;
+                  /*if(num_post == 0 && num_accesos == 0 && num_accesos != ''){
+                    //console.log('aqui entro');
+                    colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                    colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                    mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                    mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+                  }else */if(num_post > post_asignar){
+                    colocaError("rec1","recursos1","Cantidad no v\u00E1lida.",btn);
+                    mensaje += 'Cantd. ofertas, cantidad no v\u00E1lida. <br>';
+                  }else{
+                    quitarError("rec1","recursos1");
+                  }
+                }
               }
             }
+            $('#seccion_postulacion').show();
+            $('#seccion_acceso').show();
           }else{
-            mensaje += '- Cantd. ofertas, no es un formato v\u00E1lido. \n';
+            colocaError("rec1","recursos1","Cantidad no v\u00E1lida.",btn);
+            mensaje += 'Cantd. ofertas, cantidad no v\u00E1lida. <br>';
+            document.getElementById('post_asignar').innerHTML = 0;
           }
 
-
-          if(!isNaN(cantd_3)){ 
-
-            var sumAsignar3 = accesos_asignar+acces;
-            if(num_accesos <= sumAsignar3 && num_accesos != 0){
+          if(!isNaN(cantd_rest3) && cantd_rest3 >= 0){ 
+            
+            if(tipo == 1){
+              var sumAsignar3 = accesos_asignar+acces;
+            }else{
+              var sumAsignar3 = accesos_asignar;
+            }
+            console.log(sumAsignar3);
+            if(num_accesos <= sumAsignar3 && num_accesos != 0 && sumAsignar3 != 0){
               
               if(sumAsignar3-num_accesos == 0){
                 nuevo_valor = 0;
               }else{
                 nuevo_valor = sumAsignar3-num_accesos;
               }
-
+              
               document.getElementById('accesos_asignar').innerHTML = nuevo_valor;
               quitarError("rec3","recursos3");
+            }else if(num_post == 0 && num_accesos == 0 && num_accesos != ''){
+              //console.log('aqui entro2');
+              colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+              colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+              mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+              mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+              document.getElementById('post_asignar').innerHTML = post_asignar;
+              document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
             }else{
-              document.getElementById('accesos_asignar').innerHTML = accesos_asignar+acces;
-              if(num_accesos == '' && tipo == 0){
-                console.log('aqui entro3');
-                colocaError("rec3","recursos3","No pueden ser vac\u00EDo.","button_editar");
-              }else if(num_post == 0 && num_accesos == 0 && num_post != '' && tipo == 0){
-                //console.log('aqui entro2');
-                colocaError("rec1","recursos1","No pueden ser cero ambos recursos.","button_editar");
-                colocaError("rec3","recursos3","No pueden ser cero ambos recursos.","button_editar");
-              }else{
-                quitarError("rec3","recursos3");
+              //console.log(accesos_asignar);
+              if(accesos_asignar > 0){
+                if(tipo == 1){
+                  document.getElementById('accesos_asignar').innerHTML = accesos_asignar+acces;
+                }else{
+                  document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
+                }
+                if(num_accesos == ''){
+                  //console.log('aqui entro3');
+                  colocaError("rec3","recursos3","No pueden ser vac\u00EDo.",btn);
+                  mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+                }else if(num_post == 0 && num_accesos == 0 && num_post != ''){
+                  //console.log('aqui entro2');
+                  colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                  colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                  mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                  mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+                }else if(num_accesos > accesos_asignar){
+                  colocaError("rec3","recursos3","Cantidad no v\u00E1lida.",btn);
+                  mensaje += 'Cantd. accesos, cantidad no v\u00E1lida. <br>';
+                }else{
+                  quitarError("rec3","recursos3");
+                }
+              }/*else if(post == cantd_rest1 && acces == cantd_rest3){
+                console.log('aqui entro ifnuevo');
+                colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+              }*/else{
+                
+                document.getElementById('aI').innerHTML = '';
+                //document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
+
+                if(num_accesos == 0 && tipo == 2){
+                  //console.log('num_accesos: '+num_accesos);
+                  document.getElementById('num_accesos').disabled = true;
+                  document.getElementById('num_accesos').value = 0;
+                  document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
+                  quitarError("rec3","recursos3");
+                }else if(num_accesos == 0 && tipo == 1 /*&& accesos_asignar == num_accesos*/){
+                 console.log('post: '+post);
+                  if(post == 0 && post_asignar < 0){ console.log('entro'+post_asignar);
+                    document.getElementById('num_accesos').value = 1;
+                    document.getElementById('accesos_asignar').innerHTML = accesos_asignar+acces-1;
+                  }else{
+                    document.getElementById('num_accesos').value = 0;
+                    //document.getElementById('num_accesos').disabled = true;
+                    document.getElementById('accesos_asignar').innerHTML = accesos_asignar+acces;
+                  }
+                  quitarError("rec3","recursos3");
+                }else{
+                  document.getElementById('accesos_asignar').innerHTML = accesos_asignar+acces;
+                  /*if(num_post == 0 && num_accesos == 0 && num_post != ''){
+                    //console.log('aqui entro2');
+                    colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                    colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                    mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                    mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+                  }else*/ if(num_accesos > accesos_asignar){
+                    colocaError("rec3","recursos3","Cantidad no v\u00E1lida.",btn);
+                    mensaje += 'Cantd. accesos, cantidad no v\u00E1lida. <br>';
+                  }else{
+                    quitarError("rec3","recursos3");
+                  }
+                }
               }
             }
+            $('#seccion_postulacion').show();
+            $('#seccion_acceso').show();
           }else{
-            //error = 1;
-            mensaje += '- Cantd. accesos, no es un formato v\u00E1lido. \n';
+            //console.log('aaaaa');
+            colocaError("rec3","recursos3","Cantidad no v\u00E1lida.",btn);
+            mensaje += 'Cantd. accesos, cantidad no v\u00E1lida. <br>';
+            document.getElementById('accesos_asignar').innerHTML = 0;
           }
-    
-        }else{
+        /*}else{
+          alert('no permitir llegar a cero');
+        }*/
+        /*}else{
+          console.log('if2');
+         
+          if(post_asignar > 0){
 
-          if(post_asignar >= 1){
-
-            var cantd_1 = num_post;
-
-            if(cantd_1 != -1){
+            if(num_post != -1){
               
-              if(cantd_1 <= post_asignar && cantd_1 != 0){
-                nuevo_valor = post_asignar-cantd_1;
+              if(num_post <= post_asignar && num_post != 0 && post_asignar != 0){
+                nuevo_valor = post_asignar-num_post;
                 document.getElementById('post_asignar').innerHTML = nuevo_valor;
                 quitarError("rec1","recursos1");
               }else{
+                console.log('num_post: '+num_post);
                 document.getElementById('post_asignar').innerHTML = post_asignar;
-                console.log('cantd_1: '+cantd_1);
-                if(cantd_1 == '' && tipo == 0){
-                  console.log('entro if');
-                  colocaError("rec1","recursos1","No pueden ser vac\u00EDo.","button_crear");
-                }else if(cantd_1 == 0 && cantd_2 == 0 && tipo == 0){
-                  colocaError("rec1","recursos1","No pueden ser cero ambos recursos.","button_crear");
-                  colocaError("rec3","recursos3","No pueden ser cero ambos recursos.","button_crear");
+                if(num_post == ''){
+                  colocaError("rec1","recursos1","No pueden ser vac\u00EDo.",btn);
+                  mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
+                }else if(num_post == 0 ){
+                  colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                  //colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                  mensaje += 'Cantd. ofertas, no pueden ser cero ambos recursos. <br>';
+                  //mensaje += 'Cantd. accesos, no pueden ser cero ambos recursos. <br>';
+                }else if(num_post > post_asignar){
+                  colocaError("rec1","recursos1","Cantidad no v\u00E1lida.",btn);
+                  mensaje += 'Cantd. ofertas, cantidad no v\u00E1lida. <br>';
                 }else{
                   quitarError("rec1","recursos1");
                 }
               }
-
               $('#seccion_postulacion').show();
+              $('#seccion_acceso').show();
             }else{
-              colocaError("rec1","recursos1","No puede ser vac\u00EDo","button_crear");
-              mensaje += '- Cantd. ofertas, No puede ser vac\u00EDo. \n';
-              document.getElementById('post_asignar').innerHTML = post_asignar;
-              $('#seccion_postulacion').hide();
+              colocaError("rec1","recursos1","No puede ser vac\u00EDo",btn);
+              mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. <br>';
             }
             document.getElementById('pI').innerHTML = '';
           }else{
-            if(post_asignar == -1){ 
+            /*if(post_asignar == -1){ 
               document.getElementById('pI').innerHTML = '<label style="color:red" class="parpadea">Número de Publicaciones Ilimitadas</label>';
               document.getElementById('num_post').value = '-1';
               $('#seccion_postulacion').hide();
             }else{
               document.getElementById('pI').innerHTML = '';
-              $('#seccion_postulacion').hide();
+
+              if(post_asignar == 0){
+                document.getElementById('num_post').disabled = true;
+                document.getElementById('num_post').value = 0;
+                document.getElementById('post_asignar').innerHTML = 0;
+              }else{
+                document.getElementById('post_asignar').innerHTML = post_asignar;
+              }
+
+              if(num_accesos == 0){
+                colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                mensaje += 'Cantd. accesos, no pueden ser cero ambos recursos. <br>';
+              }
+
+              quitarError("rec1","recursos1");
             }
+              colocaError("rec1","recursos1","Cantidad no v\u00E1lida.",btn);
+              mensaje += 'Cantd. ofertas, cantidad no v\u00E1lida. <br>';
+               //document.getElementById('num_post').value = 0;
+               // document.getElementById('post_asignar').innerHTML = 0;
+            
           }
 
-          if(accesos_asignar >= 1){
+          if(accesos_asignar > 0){
 
-              var cantd_2 = num_accesos;
-              
-              if(cantd_2 != -1){
+              if(num_accesos != -1){
                 
-                if(cantd_2 <= accesos_asignar && cantd_2 != 0){
-                    nuevo_valor = accesos_asignar-cantd_2;
+                if(num_accesos <= accesos_asignar && num_accesos != 0 && accesos_asignar != 0){
+                    nuevo_valor = accesos_asignar-num_accesos;
                     document.getElementById('accesos_asignar').innerHTML = nuevo_valor;
                     quitarError("rec3","recursos3");
                 }else{
                   document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
-                  console.log('cantd_2: '+cantd_2);
-                  if(cantd_2 == '' && tipo == 0){
-                    console.log('entro if2');
-                    colocaError("rec3","recursos3","No pueden ser vac\u00EDo.","button_crear");
-                  }else if(cantd_1 == 0 && cantd_2 == 0 && tipo == 0){
-                    colocaError("rec1","recursos1","No pueden ser cero ambos recursos.","button_crear");
-                    colocaError("rec3","recursos3","No pueden ser cero ambos recursos.","button_crear");
+                  console.log('num_accesos: '+num_accesos);
+                  if(num_accesos == ''){
+                    colocaError("rec3","recursos3","No pueden ser vac\u00EDo.",btn);
+                    mensaje += 'Cantd. accesos, no pueden ser vac\u00EDo. <br>';
+                  }else if( num_accesos == 0){
+                    //colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                    colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
+                    //mensaje += 'Cantd. ofertas, no pueden ser cero ambos recursos. <br>';
+                    mensaje += 'Cantd. accesos, no pueden ser cero ambos recursos. <br>';
+                  }else if(num_accesos > accesos_asignar){
+                    colocaError("rec3","recursos3","Cantidad no v\u00E1lida.",btn);
+                    mensaje += 'Cantd. accesos, cantidad no v\u00E1lida. <br>';
                   }else{
                     quitarError("rec3","recursos3");
                   }
                 }
+                $('#seccion_postulacion').show();
                 $('#seccion_acceso').show();
               }else{
-                 colocaError("rec3","recursos3","No puede ser vac\u00EDo","button_crear");
-                 mensaje += '- Cantd. accesos, No puede ser vac\u00EDo. \n';
-                 document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
-                 $('#seccion_acceso').hide();
+                 colocaError("rec3","recursos3","No puede ser vac\u00EDo",btn);
+                 mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. <br>';
               }
               document.getElementById('aI').innerHTML = '';
           }else{
-            if(accesos_asignar == -1){
+            /*if(accesos_asignar == -1){
               document.getElementById('aI').innerHTML = '<label style="color:red" class="parpadea">Número de Accesos Ilimitados</label>';
               document.getElementById('num_accesos').value = '-1';
               $('#seccion_acceso').hide();
             }else{
               document.getElementById('aI').innerHTML = '';
-              $('#seccion_acceso').hide();
-            }
-          }
+            
+              if(accesos_asignar == 0){
+                document.getElementById('num_accesos').disabled = true;
+                document.getElementById('num_accesos').value = 0;
+                document.getElementById('accesos_asignar').innerHTML = 0;
+              }else{
+                document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
+              }
 
-          if((post_asignar >= 0 || post_asignar == -1) /*|| (desc_asignar >= 0 || desc_asignar == -1) */|| (accesos_asignar >= 0 || accesos_asignar == -1)){
+              if(num_post == 0 ){
+                colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
+                mensaje += 'Cantd. ofertas, no pueden ser cero ambos recursos. <br>';
+              }
+              quitarError("rec3","recursos3"); 
+            }
+              colocaError("rec3","recursos3","Cantidad no v\u00E1lida.",btn);
+              mensaje += 'Cantd. accesos, cantidad no v\u00E1lida. <br>';
+              //document.getElementById('num_accesos').value = 0;
+                //document.getElementById('accesos_asignar').innerHTML = 0;
+           
+          }*/
+
+          if((post_asignar >= 0 || post_asignar == -1) || (accesos_asignar >= 0 || accesos_asignar == -1)){
             $('#seccion_recursos').show();
           }
-        }
+        //}
 
         if(document.getElementById('form_editarCuenta')){
-          validaRecursos();
+          if(mensaje != '' || verifyErrors() > 0){
+            $("#button_editar").addClass('disabled');
+          }else{
+            $("#button_editar").removeClass('disabled');
+          }
         }else{
           validaCampos();
         }
       },
       error: function (request, status, error) {
           //error = 1;
-          mensaje += 'Hubo un error de conexi\u00F3n al servidor. \n';
+          mensaje += 'Hubo un error de conexi\u00F3n al servidor. <br>';
       }                  
   })
   
@@ -270,7 +500,7 @@ $('#plan').on('change', function(){
 
     var plan = document.getElementById('plan').value;
 
-    if(calcularRecursos(plan,1) == 1 || plan != 0){
+    if(calcularRecursos(plan) == 1 || plan != 0){
       quitarError("err_plan","seccion_plan");
     }else{
       $('#seccion_recursos').hide();
@@ -309,12 +539,10 @@ $('#sectorind').on('change', function(){
   if(sector_industrial != 0){
     quitarError("err_sector","sector");
   }else{
-    //mensaje += '- Sector Industrial, Debe seleccionar una opci\u00F3n\n';
+    //mensaje += '- Sector Industrial, Debe seleccionar una opci\u00F3n<br>';
     colocaError("err_sector","sector","Debe seleccionar una opción de la lista",'button_crear');
   }
 });
-
-
 
 $('#nombre_contact').on('blur', function(){
 
@@ -346,12 +574,12 @@ $('#tel_one_contact').on('blur', function(){
     validaCampos();
   }else if(tel_one_contact.length < '10'){
       colocaError("tel_err","group_num1_contact","Longitud mín. 10 caracteres","button_crear");
-      //mensaje += '- Celular, longitud m\u00EDn. 10 caracteres\n'; 
+      //mensaje += '- Celular, longitud m\u00EDn. 10 caracteres<br>'; 
       error = 1; 
   }else if(tel_one_contact.length > '15'){
 
       colocaError("tel_err","group_num1_contact","Longitud máx. 15 caracteres","button_crear");
-      //mensaje += '- Celular, longitud m\u00E1x. 15 caracteres\n'; 
+      //mensaje += '- Celular, longitud m\u00E1x. 15 caracteres<br>'; 
       error = 1; 
   }else{
       quitarError("tel_err","group_num1_contact");
@@ -367,12 +595,12 @@ $('#numero_cand').on('blur', function(){
     validaCampos();
   }else if(tel_one_contact.length < '9'){
       colocaError("err_num","seccion_num","Longitud mín. 9 caracteres","button_crear");
-      //mensaje += '- Celular, longitud m\u00EDn. 9 caracteres\n'; 
+      //mensaje += '- Celular, longitud m\u00EDn. 9 caracteres<br>'; 
       error = 1; 
   }else if(tel_one_contact.length > '15'){
 
       colocaError("err_num","seccion_num","Longitud máx. 15 caracteres","button_crear");
-      //mensaje += '- Celular, longitud m\u00E1x. 15 caracteres\n'; 
+      //mensaje += '- Celular, longitud m\u00E1x. 15 caracteres<br>'; 
       error = 1; 
   }else{
       quitarError("err_num","seccion_num");
@@ -387,16 +615,16 @@ $('#tel_two_contact').on('blur', function(){
   if(tel_two_contact.length > 0){
     if(!expreg_telf.test(tel_two_contact)){
       colocaError("tel_err2","group_num2_contact","Formato incorrecto, solo numeros",'button_crear');
-      //mensaje += '- Tel\u00E9fono convencional, Formato incorrecto\n';
+      //mensaje += '- Tel\u00E9fono convencional, Formato incorrecto<br>';
       error = 1; 
     }else if(tel_two_contact.length < '9'){
         colocaError("tel_err2","group_num2_contact","Longitud mín. 9 caracteres","button_crear");
-        //mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres\n'; 
+        //mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres<br>'; 
         error = 1; 
     }else if(tel_two_contact.length > '9'){
 
         colocaError("tel_err2","group_num2_contact","Longitud máx. 9 caracteres","button_crear");
-        //mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres\n'; 
+        //mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres<br>'; 
         error = 1; 
     }else{
         quitarError("tel_err2","group_num2_contact");
@@ -436,14 +664,14 @@ function chequeaRUC(dni){
 
             if(((dni.length)) < 13){
                 colocaError("dni_error", "dni_group", "Para ingresar el RUC son 13 números",btn);
-                mensaje += '- RUC, son 13 números \n';
+                mensaje += '- RUC, son 13 números <br>';
             }
           }
       }
   }       
   else{
       colocaError("dni_error", "dni_group", "El campo no puede ser vacío", btn);
-      mensaje += '- RUC, no puede ser vacío \n';
+      mensaje += '- RUC, no puede ser vacío <br>';
   }
   return mensaje;
 }
@@ -459,9 +687,13 @@ $('#button_crear').on('click', function(){
 });
 
 $('#button_editar').on('click', function(){
-  enviarRecursos();
+  var mensaje = enviarRecursos();
+  if(mensaje != '' || verifyErrors() > 0){
+    $("#button_editar").addClass('disabled');
+  }else{
+    $("#button_editar").removeClass('disabled');
+  }
 });
-
 
 function existeCorreo(correo){
 
@@ -484,27 +716,6 @@ function existeCorreo(correo){
   return value;
 }
 
-/*function existeDni(dni){
-
-  var value = "";
-  var puerto_host = $('#puerto_host').val();
-  if (dni != "") {
-      $.ajax({
-          type: "GET",
-          url: puerto_host+"?opcion=buscaDni&dni="+dni,
-          dataType: 'json',
-          async: false,
-          success:function(data){
-              value = data.respdni;
-          },
-          error: function (request, status, error) {
-              alert(request.responseText);
-          }                  
-      })
-  }
-  return value;
-}*/
-
 function validarNumTelf(num,err_telf,seccion_telf,campo){
 
   var btn = "button_crear";
@@ -514,12 +725,12 @@ function validarNumTelf(num,err_telf,seccion_telf,campo){
   if(num == null || num.length == 0 || /^\s+$/.test(num)){
 
       colocaError(err_telf,seccion_telf,"El campo no puede ser vacío",btn);
-      mensaje += '- '+campo+', no puede ser vacío \n';
+      mensaje += '- '+campo+', no puede ser vacío <br>';
 
   }else if(!expreg_telf.test(num)){
 
     colocaError(err_telf,seccion_telf,"Formato incorrecto, solo numeros",btn);
-    mensaje += '- '+campo+', Formato incorrecto, solo numeros \n';
+    mensaje += '- '+campo+', Formato incorrecto, solo numeros <br>';
 
   }else{
       quitarError(err_telf,seccion_telf);
@@ -539,20 +750,20 @@ function validarCorreo(){
   if(correo == null || correo.length == 0 || /^\s+$/.test(correo)){
 
     colocaError(err_correo, seccion_correo,"El campo no puede ser vacío",btn);
-    mensaje += '- Correo, no puede ser vacío\n';
+    mensaje += '- Correo, no puede ser vacío<br>';
     //error = 1; 
 
   }else if(!expreg_correo.test(correo)){
 
     colocaError(err_correo,seccion_correo,"Formato incorrecto",btn); 
-    mensaje += '- Correo, Formato incorrecto, no es un correo válido\n';
+    mensaje += '- Correo, Formato incorrecto, no es un correo válido<br>';
     //error = 1;  
 
   }else{
 
     if(existeCorreo(correo) != false){
         colocaError(err_correo,seccion_correo, "El correo ingresado ya existe", btn);
-        mensaje += '- Correo, ingresado ya existe\n';
+        mensaje += '- Correo, ingresado ya existe<br>';
     }
     else{
         quitarError(err_correo,seccion_correo);
@@ -569,14 +780,13 @@ function enviarFormulario(){
       document.form_crearCuenta.submit();
   }else{
     //mostrarERRORES
-    Swal.fire({
-      //title: '¡Advertencia!',        
-      html: 'Faltan algunos datos:<br>'+estado,
+    Swal.fire({            
+      html: 'Faltan algunos datos por completar:<br>Los campos con (*) son obligatorios',
       imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-      imageWidth: 210,
+      imageWidth: 75,
       confirmButtonText: 'ACEPTAR',
       animation: true
-    });      
+    });        
   }
 }
 
@@ -610,18 +820,17 @@ function validaCampos(){
 
 function enviarRecursos(){
 
-  var estado = validaRecursos();
+  var estado = calRec();
   if(estado == '' && verifyErrors() == 0){
     document.form_editarCuenta.submit();
   }else{
-    Swal.fire({
-      //title: '¡Advertencia!',        
-      html: 'Faltan algunos datos:<br>'+estado,
+    Swal.fire({            
+      html: 'Faltan algunos datos por completar:<br>Los campos con (*) son obligatorios',
       imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-      imageWidth: 210,
+      imageWidth: 75,
       confirmButtonText: 'ACEPTAR',
       animation: true
-    });
+    });  
   }
 }
 
@@ -641,22 +850,35 @@ function validaRecursos(){
 
   var mensaje = ''; 
 
+  
+    var plan = document.getElementById('plan').value;
+
+    if(plan == 0){
+      colocaError("err_plan","seccion_plan","Debe seleccionar una opción de la lista","button_editar");
+      mensaje += '- Plan, debe seleccionar una opci\u00F3n. <br>';
+    }else{
+      if(document.getElementById('err_plan')){
+        quitarError("err_plan","seccion_plan");
+      }
+    }
+
   var num_post = document.getElementById('num_post').value;
   var num_accesos = document.getElementById('num_accesos').value;
   if(num_post == '' && num_accesos == ''){
+    console.log(num_post);
     colocaError("rec1","recursos1","No puede ser vac\u00EDo","button_editar");
     colocaError("rec3","recursos3","No puede ser vac\u00EDo","button_editar");
-    mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. \n';
-    mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. \n';
+    mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. <br>';
+    mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. <br>';
   }else if(num_post == '' && num_accesos >= 0){
     colocaError("rec1","recursos1","No puede ser vac\u00EDo","button_editar");
-    mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. \n';
+    mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. <br>';
   }else if(num_accesos == '' && num_post >= 0){
     colocaError("rec3","recursos3","No puede ser vac\u00EDo","button_editar");
-    mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. \n';
+    mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. <br>';
   }
 
-//console.log(mensaje);
+  console.log(mensaje);
   if(mensaje != '' || verifyErrors() > 0){
     $("#button_editar").addClass('disabled');
   }else{
@@ -715,7 +937,7 @@ function validarFormulario(){
     if(sector_industrial != 0){
       quitarError("err_sector","sector");
     }else{
-      mensaje += '- Sector Industrial, Debe seleccionar una opci\u00F3n\n';
+      mensaje += '- Sector Industrial, Debe seleccionar una opci\u00F3n<br>';
       colocaError("err_sector","sector","Debe seleccionar una opción de la lista",'button_crear');
       //error = 1;
     }
@@ -726,19 +948,33 @@ function validarFormulario(){
       mensaje += mjs;
     }
 
-    var num_post = document.getElementById('num_post').value;
+    /*var num_post = document.getElementById('num_post').value;
     var num_accesos = document.getElementById('num_accesos').value;
     if(num_post == '' && num_accesos == ''){
       colocaError("rec1","recursos1","No puede ser vac\u00EDo","button_editar");
       colocaError("rec3","recursos3","No puede ser vac\u00EDo","button_editar");
-      mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. \n';
-      mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. \n';
+      mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. <br>';
+      mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. <br>';
     }else if(num_post == '' && num_accesos >= 0){
       colocaError("rec1","recursos1","No puede ser vac\u00EDo","button_editar");
-      mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. \n';
+      mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. <br>';
     }else if(num_accesos == '' && num_post >= 0){
       colocaError("rec3","recursos3","No puede ser vac\u00EDo","button_editar");
-      mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. \n';
+      mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. <br>';
+    }*/
+
+    var idplan = document.getElementById('plan').value;
+
+    if(idplan == 0){
+      colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_crear");
+      mensaje += '- Debe seleccionar una opcion de la lista<br>';
+    }else{
+
+      var mjs = calcularRecursos(idplan);
+      if(mjs != ''){
+        mensaje += mjs;
+      }
+      quitarError("err_plan","seccion_plan");
     }
 
     if(mensaje != ''){
@@ -757,11 +993,11 @@ function validarInput(campo,err,err_campo,nom_campo){
 
   if(campo == null || campo.length == 0 || /^\s+$/.test(campo)){
     colocaError(err,err_campo,"El campo no puede ser vacío",btn);
-    mensaje += '- '+nom_campo+', no puede ser vacío \n';
+    mensaje += '- '+nom_campo+', no puede ser vacío <br>';
     //error = 1; 
   }else if(!expreg.test(campo)){
     colocaError(err,err_campo,"Formato incorrecto, solo letras",btn);
-    mensaje += '- '+nom_campo+', Formato incorrecto, solo letras \n';
+    mensaje += '- '+nom_campo+', Formato incorrecto, solo letras <br>';
     //error = 1;
   }else{
     quitarError(err,err_campo);
@@ -773,10 +1009,10 @@ function validarSelect(err_select,err_group_select,campo){
 
   var btn = "button_crear";
   var mensaje = '';
-  var idEmpresaPlan = $('#plan').val();
+  var idEmpresaPlan = document.getElementById('plan').value;
 
   if(idEmpresaPlan != 0){
-    var mjs = calcularRecursos(idEmpresaPlan,0);
+    var mjs = calcularRecursos(idEmpresaPlan);
     //console.log(mjs);
     if(mjs != ''){
       mensaje += mjs;
@@ -786,7 +1022,7 @@ function validarSelect(err_select,err_group_select,campo){
     }
   }else{
     colocaError(err_select,err_group_select,"Debe seleccionar una opción",btn);
-    mensaje += '- '+campo+', debe seleccionar una opci\u00F3n \n';
+    mensaje += '- '+campo+', debe seleccionar una opci\u00F3n <br>';
     //error = 1;
   }
 

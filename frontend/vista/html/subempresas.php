@@ -113,7 +113,7 @@
                                         }
                                     ?>
                                     <tr align="center">
-                                        <td style="vertical-align:middle; text-align: center;" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;" data-title="Nombres:"><?php echo utf8_encode($value['nombres']); ?></td>
+                                        <td style="vertical-align:middle; text-align: center;" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;" data-title="Nombres:"><a href="<?php echo PUERTO.'://'.HOST.'/detalleEmpresa/'.Utils::encriptar($value['id_empresa']).'/'; ?>"><?php echo utf8_encode($value['nombres']); ?></a></td>
                                         
                                         <?php 
 
@@ -140,11 +140,11 @@
                                                print_r('<br>num_post: '.$num_post[$key]); 
                                                 print_r('<br>tieneRecursos: '.$tieneRecursos[$ids_parents[$key]]['postulaciones']); */
                    
-                                                if(isset($tieneRecursos[$ids_parents[$key]]) && (    ($num_post[$key] == 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0) || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] == 0) || ($tieneRecursos[$ids_parents[$key]]['postulaciones'] === 'Ilimitado') || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0)
-                                                )){
+                                               /* if(isset($tieneRecursos[$ids_parents[$key]]) && (    ($num_post[$key] == 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0) || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] == 0) || ($tieneRecursos[$ids_parents[$key]]['postulaciones'] === 'Ilimitado') || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0)
+                                                )){*/
                                                     //echo '<br>entro: '.$tieneRecursos[$ids_parents[$key]]['postulaciones'];
                                                     $puedeEditarCuenta = 1;
-                                                }
+                                                //}
 
 
                                                     /*$puedeEditarCuenta = Modelo_UsuarioxPlan::tieneRecursos($ids_parents[$key],false);

@@ -429,7 +429,8 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 														<?php if($vista != 'oferta'){ ?>
 															<div class="<?php if($vista == 'postulacion' && (isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1 && $o['tipo'] == 1)){ echo 'col-md-2 col-sm-3 col-xs-6'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 1){ echo 'col-md-4 col-sm-6 col-xs-12'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 2){ echo 'col-md-2 col-sm-3 col-xs-6'; }  
-															if($puedeEditar["editar"] == 0 && $vista == 'vacantes'){ echo 'col-md-6 col-md-offset-6 col-xs-12'; } ?> ">
+															if($puedeEditar["editar"] == 0 && $vista == 'vacantes'){ echo 'col-md-6 col-md-offset-6 col-xs-12'; }
+															if($vista == 'cuentas'){ echo 'col-md-6 col-xs-12'; } ?> ">
 															<?php } ?>
 															<a class="f-s-16px" href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/"; ?>">
 																<i class="postulacion-icono-ver fa fa-eye"></i><br>
@@ -458,17 +459,17 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 																	<i class="empleo-icono fa fa-dollar"></i><br>
 																	<p id="postulacion-2"><?php echo SUCURSAL_MONEDA.number_format($o['salario'],2);?></p>
 																</div>
-																<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
+																<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes' || $vista == 'cuentas'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
 																	<p id="empleo-2">Provincia:</p>
 																	<i class="empleo-icono fa fa-map-marker"></i><br>
 																	<p id="postulacion-2"><?php echo utf8_encode($o['provincia']);?></p>
 																</div>
-																<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
+																<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes' || $vista == 'cuentas'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
 																	<p id="empleo-2">Jornada:</p>
 																	<i class="empleo-icono fa fa-clock-o"></i><br>
 																	<p id="postulacion-2"><?php echo $o['jornada']; ?></p>
 																</div>
-																<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
+																<div class="col-md-<?php if($vista == 'postulacion' || $vista == 'vacantes' || $vista == 'cuentas'){ echo '2'; }else{ echo '3'; } ?> col-sm-3 col-xs-6">
 																	<p id="empleo-2">Vacantes:</p>
 																	<i class="empleo-icono fa fa-users"></i><br>
 																	<p id="postulacion-2"><?php echo $o['vacantes']; ?></p>

@@ -39,7 +39,7 @@ class Modelo_UsuarioxPlan{
       $values_insert["id_comprobante"] = $idcomprobante;
     }
     if ($tipousuario == Modelo_Usuario::EMPRESA){
-      //$values_insert["num_descarga_rest"] = $porcdesc;
+      $values_insert["num_descarga_rest"] = $porcdesc;
       $values_insert["num_accesos_rest"] = $numaccesos;
       if ($idEmpresaPlanParent != false){
         $values_insert["id_empresa_plan_parent"] = $idEmpresaPlanParent;
@@ -55,7 +55,7 @@ class Modelo_UsuarioxPlan{
       $result = $GLOBALS['db']->update('mfo_usuario_plan',array('estado'=>0),'id_usuario_plan='.$id_usuario_plan);
     }
     else{
-      $result = $GLOBALS['db']->update('mfo_empresa_plan',array('estado'=>0,'num_publicaciones_rest'=>0/*,'num_descarga_rest'=>0*/,'num_accesos_rest'=>0),'id_empresa_plan='.$id_usuario_plan);
+      $result = $GLOBALS['db']->update('mfo_empresa_plan',array('estado'=>0,'num_publicaciones_rest'=>0,'num_descarga_rest'=>-1,'num_accesos_rest'=>0),'id_empresa_plan='.$id_usuario_plan);
     }		
     return $result;
   }
@@ -267,7 +267,7 @@ class Modelo_UsuarioxPlan{
     }
     
     $cantd_post = $cantd_desc = 0;
-    $sql = "SELECT num_publicaciones_rest,num_descarga_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1";
+    $sql = "SELECT num_publicaciones_rest,num_descarga_rest,num_accesos_rest FROM mfo_empresa_plan WHERE id_empresa_plan = ".$recursos['id_empresa_plan_parent']." LIMIT 1";
 
     $result = $GLOBALS['db']->auto_array($sql,array(),false);
 

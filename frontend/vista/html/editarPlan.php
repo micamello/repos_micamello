@@ -4,7 +4,8 @@
       <section>
         <div class="col-md-12">
           <div class="text-center">
-            <h2 class="titulo">Editar Plan <?php echo $planHijo['nombre'].' - '.$planHijo['nombres']; ?></h2><br><br>
+            <h2 class="titulo">Editar Plan <?php echo ' - '.$planHijo['nombres']; ?></h2><br>
+            <?php echo '<br><p class="caja-cuenta-2-subt">Nombre plan: '.$planHijo['nombre'].'</p><p class="caja-cuenta-2-subt">Fecha de compra: '.$planHijo['fecha_compra'].'</p>'; ?><br>
           </div>
         </div>
       </section>
@@ -12,7 +13,7 @@
   </div>
 </div>
 
-<?php print_r($planHijo);
+<?php #print_r($planHijo);
 #print_r($planPadre); ?>
 
 <div id="registro-algo-centro">
@@ -37,8 +38,8 @@
                       <div class="col-md-6">
                         <div class="caja-cuenta-2" id="recursos1">
                           <h4 class="caja-cuenta-2-subt"><b>Asignar Ofertas</b></h4>
-                          <label style="margin-bottom: 0px;" for="numPost">N&uacute;mero de Ofertas&nbsp;</label><span title="Este campo es obligatorio">*</span><div id="rec1" class="help-block with-errors" style="margin: 0px; height: 15px;"></div>
-                          <input type="number" min="1" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calRec()" onclick="calRec()" onkeydown="return validaNumeros(event);" class="form-control" value="<?php if(isset($planHijo['num_publicaciones_rest']) && !empty($planHijo['num_publicaciones_rest'])){ echo $planHijo['num_publicaciones_rest']; }else{ echo '0'; } ?>">
+                          <label style="margin-bottom: 0px;" for="numPost">N&uacute;mero de Ofertas&nbsp;</label><span class="requerido" title="Este campo es obligatorio">*</span><div id="rec1" class="help-block with-errors" style="margin: 0px; height: 15px;"></div>
+                          <input type="number" min="0" pattern="^[0-9]+" name="num_post" id="num_post" onkeyup="calRec()" onclick="calRec()" onchange="calRec()" onkeydown="return validaNumeros(event);" class="form-control" value="<?php if(isset($planHijo['num_publicaciones_rest']) && !empty($planHijo['num_publicaciones_rest'])){ echo $planHijo['num_publicaciones_rest']; }else{ echo '0'; } ?>">
                           <label style="font-size: 12px;">Publicación por asignar: </label>
                           <div style="display: inline;" id="post_asignar"></div>
                         </div>
@@ -50,27 +51,13 @@
                       <div class="col-md-6">
                         <div class="caja-cuenta-2" id="recursos3">
                           <h4 class="caja-cuenta-2-subt"><b>Asignar Accesos</b></h4>
-                          <label style="margin-bottom: 0px;" for="numAcces">N&uacute;mero de Accesos&nbsp;</label><span title="Este campo es obligatorio">*</span><div id="rec3" class="help-block with-errors" style="margin: 0px; height: 15px;"></div>
-                              <input type="number" min="1" pattern="^[0-9]+" name="num_accesos" id="num_accesos" onkeyup="calRec()" onclick="calRec()" onkeydown="return validaNumeros(event);" class="form-control" value="<?php if(isset($planHijo['num_accesos_rest']) && !empty($planHijo['num_accesos_rest'])){ echo $planHijo['num_accesos_rest']; }else{ echo '0'; } ?>">
+                          <label style="margin-bottom: 0px;" for="numAcces">N&uacute;mero de Accesos&nbsp;</label><span class="requerido" title="Este campo es obligatorio">*</span><div id="rec3" class="help-block with-errors" style="margin: 0px; height: 15px;"></div><input type="number" min="0" pattern="^[0-9]+" name="num_accesos" id="num_accesos" onkeyup="calRec()" onclick="calRec()" onchange="calRec()" onkeydown="return validaNumeros(event);" class="form-control" value="<?php if(isset($planHijo['num_accesos_rest']) && !empty($planHijo['num_accesos_rest'])){ echo $planHijo['num_accesos_rest']; }else{ echo '0'; } ?>">
                           <label style="font-size: 12px;">Accesos por asignar: </label>
                           <div style="display: inline;" id="accesos_asignar"></div>
                         </div>
                       </div>
                     </div>
                     <div  id="aI" class="text-center"></div>
-
-                    <!--<div id="seccion_descarga">
-                      <div class="col-md-12">
-                        <div class="caja-cuenta-2" id="recursos2">
-                          <h4 class="caja-cuenta-2-subt"><b>Asignar Descargas</b></h4>
-                          <label style="margin-bottom: 0px;" for="numDesc">N&uacute;mero de Descargas</label><span title="Este campo es obligatorio">*</span><div id="rec3" class="help-block with-errors" style="margin: 0px; height: 15px;"></div>
-                              <input type="number" min="1" pattern="^[0-9]+" name="num_desc" id="num_desc" onkeyup="calRec()" onclick="calRec()" onkeydown="return validaNumeros(event);" class="form-control" value="<?php #if(isset($planHijo['num_descarga_rest']) && !empty($planHijo['num_descarga_rest'])){ echo $planHijo['num_descarga_rest']; }else{ echo '1'; } ?>">
-                          <label style="font-size: 12px;">Descargas por asignar: </label>
-                          <div style="display: inline;" id="desc_asignar"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div  id="dI" class="col-md-12 text-center"></div>-->
                   </div>
                   <input type="hidden" name="postNum" id="postNum" value="">
                   <!--<input type="hidden" name="descNum" id="descNum" value="">-->

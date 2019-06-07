@@ -281,7 +281,7 @@ function fileValidation(fileInput,tipo){
             }
         }else{
            Swal.fire({
-              title: '¡Advertencia!',
+              title: '¡dAvertencia!',
               html: 'Cargar la hoja de vida es obligatorio',
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
               imageWidth: 210,
@@ -599,11 +599,15 @@ function ocultarCampos(){
 function enviarFormulario(){
 
     var estado = validarFormulario(true);    
-    //console.log(estado);
-    if(estado == ''){
+    var file = document.getElementById('subirCV');
+    if(estado == '' && file != ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();
-    }else{
+    }else if(estado != '' && file == ''){
+        //error de ambos lados
+    }else if(estado == '' && file == ''){
+      //solo falta hoja de vida
+    }else if(estado != '' && file != ''){
       //mostrarERRORES
       Swal.fire({
         title: '¡Advertencia!',        
@@ -737,14 +741,14 @@ function validarFormulario(tipovalidacion){
           }
         }
 
-        if(document.getElementById('subirCV') && document.getElementById('subirCV').value != ''){
+        /*if(document.getElementById('subirCV') && document.getElementById('subirCV').value != ''){
             $("#mensaje_error_hv").remove();
 
         }else if(document.getElementById('btnDescarga').value == 0 && document.getElementById('subirCV').value == ''){
             error = 1;
             //console.log('entro');
             mensaje += '- Debe cargar la hoja de vida\n';
-        }
+        }*/
 
         if(discapacidad == null || discapacidad == 0){
             colocaError("err_dis", "seccion_dis",err_list,"boton");

@@ -607,11 +607,11 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-    echo 'SQL1: '.$sql;
+    //echo 'SQL1: '.$sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
-  public static function busquedaGlobalAspirantes($id_pais_empresa,$cantd_faceta,$page,$obtCantdRegistros=false){     
+  /*public static function busquedaGlobalAspirantes($id_pais_empresa,$cantd_faceta,$page,$obtCantdRegistros=false){     
     $sql = "SELECT ";
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,u.fecha_creacion,
     u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
@@ -870,7 +870,7 @@ WHERE
     //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
-  }
+  }*/
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
     if (empty($id)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -892,7 +892,8 @@ WHERE
     return $GLOBALS['db']->auto_array($sql,array($id)); 
   }
 
-  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){    
+  public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){   
+
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
           
@@ -1169,6 +1170,23 @@ WHERE
     if (empty($idusuario)){ return false; }
     $sql = "SELECT nombres, apellidos,id_usuario,grafico FROM mfo_usuario WHERE id_usuario = ? LIMIT 1";
     $rs = $GLOBALS['db']->auto_array($sql,array($idusuario));
+    return $rs;
+  }
+
+  public static function consultarInfoEmpresa($id_empresa){
+    if (empty($id_empresa)){ return false; }
+    $sql = "SELECT e.id_empresa, e.telefono, e.nombres, si.descripcion as sectorindustrial, l.username, 
+            l.correo, l.dni, ce.nombres as nombres_contacto, ce.apellidos as apellidos_contacto, ce.telefono1, ce.telefono2
+             FROM mfo_empresa e
+            INNER JOIN mfo_usuario_login l
+            INNER JOIN mfo_contactoempresa ce 
+            INNER JOIN mfo_sectorindustrial si
+            WHERE e.id_empresa = ? 
+            AND l.id_usuario_login = e.id_usuario_login
+            AND e.id_empresa = ce.id_empresa
+            AND si.id_sectorindustrial = e.id_sectorindustrial
+            LIMIT 1";
+    $rs = $GLOBALS['db']->auto_array($sql,array($id_empresa));
     return $rs;
   }
 }  
