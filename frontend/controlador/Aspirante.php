@@ -357,21 +357,8 @@ class Controlador_Aspirante extends Controlador_Base
                         $fill = false;
                     }
 
-                    $usuarios = array();
-                    $usuarios1 = '';
-                    if(!empty($filtros['P'])){
-                        foreach ($usuariosConAccesos as $id => $fecha) {
-                            if($filtros['P'] == 1 && $fecha == ''){
-                                array_push($usuarios, $id);
-                            }else if($filtros['P'] == 2 && $fecha != ''){
-                                array_push($usuarios, $id);
-                            }
-                        }
-                        $usuarios1 = implode(',', $usuarios);
-                    }
-
-                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuarios1,false);
-                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuarios1,$fill);
+                    $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuariosConAccesos,false);
+                    $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuariosConAccesos,$fill);
                     $cantd_total = count($cantd_aspirantes);
 
                     $_SESSION['mfo_datos']['Filtrar_aspirantes'] = $filtros;

@@ -222,12 +222,7 @@ function fileValidation(fileInput,tipo){
               error = 0;
             }
         }else{
-<<<<<<< HEAD
-           Swal.fire({
-              title: '¡dAvertencia!',
-=======
            Swal.fire({              
->>>>>>> 751cee2bd8c1e3d09de961b790c321c03f013326
               html: 'Cargar la hoja de vida es obligatorio',
               imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
               imageWidth: 75,
@@ -544,7 +539,7 @@ function ocultarCampos(){
 function enviarFormulario(){
 
     var estado = validarFormulario(true);    
-    var file = document.getElementById('subirCV');
+    var file = document.getElementById('subirCV').value;
     if(estado == '' && file != ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();

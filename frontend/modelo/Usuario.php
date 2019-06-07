@@ -346,7 +346,7 @@ WHERE
     return $rs; 
   }
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$usuarios_accesos,$obtCantdRegistros=false){
-
+    //print_r($usuarios_accesos);
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,u.id_situacionlaboral,u.id_tipolicencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
     u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
     FROM
@@ -441,10 +441,31 @@ WHERE
     }
     if(!empty($filtros['P']) && $filtros['P'] != 0){
 
+      $usuarios = array();
+      $usuarios1 = '';
+      if(!empty($filtros['P'])){
+          foreach ($usuarios_accesos as $id => $fecha) { 
+              if($filtros['P'] == 1 && $fecha == ''){
+                  array_push($usuarios, $id);
+              }else if($filtros['P'] == 2 && $fecha != ''){
+                  array_push($usuarios, $id);
+              }
+          }
+          $usuarios1 = implode(',', $usuarios);
+      }
+
       if($filtros['P'] == 1){
-        $sql .= ' AND (t1.test_realizados = 1 AND (t1.numero_test = 2 OR t2.id_usuario IN('.$usuarios_accesos.')))';
+        if($usuarios1 != ''){
+          $sql .= ' AND (t1.test_realizados = 1) AND (t1.numero_test = 2 OR t2.id_usuario IN('.$usuarios1.'))';
+        }else{
+          $sql .= ' AND (t1.test_realizados = 1 AND t1.numero_test < '.count($facetas).')';
+        }
       }else{
-        $sql .= ' AND (t1.test_realizados = 2 OR t2.id_usuario IN('.$usuarios_accesos.'))';
+        if($usuarios1 != ''){
+          $sql .= ' AND ((t1.test_realizados = 2) OR t2.id_usuario IN('.$usuarios1.'))';
+        }else{
+          $sql .= ' AND (t1.test_realizados = 2)';
+        }
       }
     } 
     if(!empty($filtros['A']) && $filtros['A'] != 0){
@@ -607,7 +628,7 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-    //echo 'SQL1: '.$sql;
+    echo 'SQL1: '.$sql; exit;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
