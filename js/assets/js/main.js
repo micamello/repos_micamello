@@ -64,6 +64,13 @@ function quitarError(campo,id){
 
 "use strict";
 jQuery(document).ready(function ($) {
+
+  if($('#blockRightClick').length){
+    console.log("eder");
+    $("body").on("contextmenu",function(e){
+     return false;
+   });
+  }
   // console.log();
   if(window.location.pathname.split("/")[3] != "exito"){
     $('body').css('overflow', 'auto');

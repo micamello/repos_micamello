@@ -1,0 +1,1301 @@
+[2019/06/07 04:13:09] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:13:09] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_genero
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/06/07 04:13:09] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:13:09] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:13:09] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:13:09] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:13:09] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/06/07 04:13:10] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/06/07 04:13:10] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:13:10] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:13:10] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:13:10] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:13:10] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:13:10] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/06/07 04:13:53] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:13:53] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:13:53] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:13:53] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:14:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:14:20] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'ederpozo21' OR correo = 'ederpozo21') AND password = '525a7953a3ccadd755defc7207fe4bbf'
+[2019/06/07 04:14:20] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
+                     u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
+                     u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,        
+                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil, u.grafico
+              FROM mfo_usuario u
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              WHERE u.id_usuario_login = '1555'
+[2019/06/07 04:14:20] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '1044' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:14:20] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '1044'
+            ORDER BY b.id_area
+[2019/06/07 04:14:20] SQL Query: SELECT GROUP_CONCAT(id_areas_subareas) AS subareas FROM mfo_usuarioxarea WHERE id_usuario =1044
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 1044
+[2019/06/07 04:14:20] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:14:20] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_genero
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/06/07 04:14:20] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:14:20] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:14:20] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:14:20] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:14:20] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/06/07 04:14:20] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/06/07 04:14:20] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:14:20] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:14:20] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:14:20] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:14:20] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:14:20] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/06/07 04:14:48] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:14:48] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_genero
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/06/07 04:14:48] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:14:48] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:14:48] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_subareas
+[2019/06/07 04:14:48] SQL Trans: START TRANSACTION
+[2019/06/07 04:14:48] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '0706715661' AND id_usuario_login <> 1555
+[2019/06/07 04:14:48] SQL execute: UPDATE mfo_usuario_login SET dni="0706715661" WHERE id_usuario_login=1555
+[2019/06/07 04:14:48] SQL execute: UPDATE mfo_usuario SET foto="0",nombres="Eder",telefono="0968597677",id_ciudad="1",fecha_nacimiento="1994-03-13",id_nacionalidad="39",apellidos="Pozo",id_genero="1",discapacidad="0",id_escolaridad="1",id_tipolicencia= NULL,id_estadocivil="1",viajar="0",id_situacionlaboral="1",tlf_convencional="",residencia="0",id_univ= NULL,nombre_univ=" " WHERE id_usuario=1044
+[2019/06/07 04:14:48] SQL execute: INSERT INTO mfo_infohv (id_usuario,formato,fecha_creacion) VALUES ('1044','pdf','2019-06-07 16:14:48')
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_nivelidioma_idioma
+[2019/06/07 04:14:48] SQL execute: DELETE FROM mfo_usuario_nivelidioma WHERE id_usuario = 1044
+[2019/06/07 04:14:48] SQL execute: INSERT INTO mfo_usuario_nivelidioma (id_usuario,id_nivelIdioma_idioma) VALUES ('1044','30')
+[2019/06/07 04:14:48] SQL Trans: COMMIT
+[2019/06/07 04:14:48] SQL Query: SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.viajar, u.discapacidad, u.residencia, u.id_escolaridad, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
+        ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral, u.grafico
+        FROM mfo_usuario u
+        INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
+        INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+        INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+        WHERE u.id_usuario = '1044' AND u.estado = 1
+[2019/06/07 04:14:48] SQL Query: SELECT *,num_post_rest AS num_rest FROM mfo_usuario_plan WHERE id_usuario = '1044' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:14:48] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '1044'
+            ORDER BY b.id_area
+[2019/06/07 04:14:48] SQL Query: SELECT GROUP_CONCAT(id_areas_subareas) AS subareas FROM mfo_usuarioxarea WHERE id_usuario =1044
+[2019/06/07 04:14:48] SQL Query: SELECT * FROM mfo_infohv WHERE id_usuario = 1044
+[2019/06/07 04:14:48] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:14:48] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/06/07 04:14:48] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/06/07 04:14:48] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:14:48] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:14:48] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:14:48] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:14:48] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:14:49] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/06/07 04:16:53] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:16:53] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_genero
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/06/07 04:16:53] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:16:53] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 1044
+[2019/06/07 04:16:53] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:16:53] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:16:53] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/06/07 04:16:53] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/06/07 04:16:53] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:16:53] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:16:53] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '1044' ORDER BY f.id_faceta
+[2019/06/07 04:16:53] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:16:53] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:16:53] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/06/07 04:16:56] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:16:56] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:16:56] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:16:56] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:29:20] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:29:20] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:29:20] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:29:20] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:29:46] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:29:46] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:29:46] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:29:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:29:58] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:29:58] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:29:58] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:29:58] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:00] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:00] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:00] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:00] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:00] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:00] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:00] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:00] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:00] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:00] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:00] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:00] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:03] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:03] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:03] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:03] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:04] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:04] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:04] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:04] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:05] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:05] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:05] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:05] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:05] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:05] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:05] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:05] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:05] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:07] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:07] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:07] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:07] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:07] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:31] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:31] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:31] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:31] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:35] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:35] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:35] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:35] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:39] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:30:39] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:30:39] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:39] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:30:43] SQL Query: SELECT COUNT(1) AS nro FROM mfo_faceta
+[2019/06/07 04:30:43] SQL Query: SELECT COUNT(1) AS nro FROM mfo_porcentajexfaceta WHERE id_usuario = '1044'
+[2019/06/07 04:30:43] SQL Query: SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = '1044')
+[2019/06/07 04:30:43] SQL Query: SELECT metodo_resp FROM mfo_usuario WHERE id_usuario = '1044'
+[2019/06/07 04:30:43] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:30:43] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:34:29] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:34:29] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:34:29] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1044' AND tipo_usuario = '1' LIMIT 1
+[2019/06/07 04:34:29] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:34:32] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:34:32] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:34:32] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:34:32] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:34:33] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:34:49] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:34:49] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '2'
+[2019/06/07 04:34:49] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-06-07 16:34:49" WHERE id_empresa=1
+[2019/06/07 04:34:49] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:34:49] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('1')
+[2019/06/07 04:34:49] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:34:49] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:34:49] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 58
+[2019/06/07 04:34:49] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 63
+[2019/06/07 04:34:49] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:34:49] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia =  ORDER BY c.nombre ASC
+[2019/06/07 04:34:49] SQL Query: SELECT * FROM mfo_jornada
+[2019/06/07 04:34:49] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:34:49] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:34:49] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:34:49] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:34:49] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:34:49] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:34:49] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/06/07 04:34:49] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:34:49] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:34:50] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:34:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:34:50] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 63
+[2019/06/07 04:34:50] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOfertaConfidencial' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/06/07 04:34:59] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:34:59] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:34:59] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:34:59] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:35:00] SQL Query: SELECT * FROM mfo_genero
+[2019/06/07 04:35:00] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/06/07 04:35:00] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:35:01] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:35:36] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'plannerspro' OR correo = 'plannerspro') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:35:36] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '980'
+[2019/06/07 04:35:36] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-06-07 16:35:36" WHERE id_empresa=6
+[2019/06/07 04:35:36] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '6' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:35:36] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('6')
+[2019/06/07 04:35:36] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/06/07 04:35:36] SQL Query: SELECT * FROM mfo_cargo
+[2019/06/07 04:35:36] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:35:36] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:35:36] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 120;
+[2019/06/07 04:35:36] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 12 ORDER BY c.nombre ASC
+[2019/06/07 04:35:36] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '6'
+            ORDER BY b.id_area
+[2019/06/07 04:35:36] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:35:36] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '6' ORDER BY f.id_faceta
+[2019/06/07 04:35:36] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '6' ORDER BY f.id_faceta
+[2019/06/07 04:35:36] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '6' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:35:36] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:35:49] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:35:49] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:35:49] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:35:49] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:35:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:36:00] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:36:11] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:36:16] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:36:24] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'agripacsa' OR correo = 'agripacsa') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:36:24] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '1307'
+[2019/06/07 04:36:24] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-06-07 16:36:24" WHERE id_empresa=10
+[2019/06/07 04:36:24] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '10' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:36:24] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('10')
+[2019/06/07 04:36:24] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/06/07 04:36:24] SQL Query: SELECT * FROM mfo_cargo
+[2019/06/07 04:36:24] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:36:24] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:36:24] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/06/07 04:36:24] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/06/07 04:36:24] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '10'
+            ORDER BY b.id_area
+[2019/06/07 04:36:24] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:36:24] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '10' ORDER BY f.id_faceta
+[2019/06/07 04:36:24] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '10' ORDER BY f.id_faceta
+[2019/06/07 04:36:24] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '10' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:36:24] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:36:30] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:36:30] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:36:30] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:36:30] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:36:31] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:36:41] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa2' OR correo = 'empresa2') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:36:41] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '3'
+[2019/06/07 04:36:41] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '2' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:36:41] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('2')
+[2019/06/07 04:36:41] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '2' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:36:42] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo = 0 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:36:42] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 2 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:36:42] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 1 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:36:42] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '2' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:36:42] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:37:36] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '2' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:37:36] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:37:48] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:37:48] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:37:48] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:37:48] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:41:32] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:41:32] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:41:32] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:41:36] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:41:36] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:41:36] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:43:13] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:43:18] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:43:18] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:43:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:49:26] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:49:26] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:49:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:49:30] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:49:42] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:49:42] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '2'
+[2019/06/07 04:49:42] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-06-07 16:49:42" WHERE id_empresa=1
+[2019/06/07 04:49:42] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:49:42] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('1')
+[2019/06/07 04:49:42] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 58
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 63
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 93
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 99
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 100
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 101
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 102
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 103
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 106
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 107
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 108
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 109
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 110
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 111
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 112
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 113
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 114
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 115
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 116
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 117
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 118
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 119
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 120
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 121
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 122
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 123
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 124
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 125
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 126
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 127
+[2019/06/07 04:49:42] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 128
+[2019/06/07 04:49:42] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:49:42] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia =  ORDER BY c.nombre ASC
+[2019/06/07 04:49:42] SQL Query: SELECT * FROM mfo_jornada
+[2019/06/07 04:49:42] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:49:42] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:49:42] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:49:42] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:49:42] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:49:42] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:42] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:49:42] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:49:43] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:49:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:49:43] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 63
+[2019/06/07 04:49:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOfertaConfidencial' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/06/07 04:49:45] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:49:45] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:49:45] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:49:45] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:49:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:50:00] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa2' OR correo = 'empresa2') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:50:00] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '3'
+[2019/06/07 04:50:00] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-06-07 16:50:00" WHERE id_empresa=2
+[2019/06/07 04:50:00] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '2' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:50:00] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('2')
+[2019/06/07 04:50:00] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '2' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:50:00] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo = 0 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:50:00] SQL Query: SELECT id_empresa_plan FROM mfo_empresa_plan WHERE id_empresa = '2' AND estado = 1  AND id_plan IN (7) LIMIT 1
+[2019/06/07 04:50:01] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 2 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:50:01] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 1 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:50:01] SQL Query: SELECT id_empresa_plan FROM mfo_empresa_plan WHERE id_empresa = '2' AND id_plan IN (8) LIMIT 1
+[2019/06/07 04:50:01] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '2' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:50:01] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:11] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:54:11] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:54:11] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:54:11] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:13] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:18] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa11' OR correo = 'empresa11') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:54:18] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '4'
+[2019/06/07 04:54:18] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-06-07 16:54:18" WHERE id_empresa=3
+[2019/06/07 04:54:18] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '3' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:54:18] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('3')
+[2019/06/07 04:54:18] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '3' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:54:18] SQL Query: SELECT id_empresa,padre FROM mfo_empresa where id_empresa = '1'
+[2019/06/07 04:54:18] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo = 0 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:54:18] SQL Query: SELECT id_empresa_plan FROM mfo_empresa_plan WHERE id_empresa = '3' AND estado = 1  AND id_plan IN (7) LIMIT 1
+[2019/06/07 04:54:18] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 2 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:54:18] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 1 GROUP BY p.id_plan ORDER BY p.costo
+[2019/06/07 04:54:18] SQL Query: SELECT id_empresa_plan FROM mfo_empresa_plan WHERE id_empresa = '3' AND id_plan IN (8) LIMIT 1
+[2019/06/07 04:54:18] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '3' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:54:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:22] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/06/07 04:54:22] SQL Query: SELECT * FROM mfo_cargo
+[2019/06/07 04:54:22] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:54:22] SQL Query: SELECT * FROM mfo_pais
+[2019/06/07 04:54:22] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 16;
+[2019/06/07 04:54:22] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 2 ORDER BY c.nombre ASC
+[2019/06/07 04:54:22] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '3'
+            ORDER BY b.id_area
+[2019/06/07 04:54:22] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/06/07 04:54:22] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '3' ORDER BY f.id_faceta
+[2019/06/07 04:54:22] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '3' ORDER BY f.id_faceta
+[2019/06/07 04:54:22] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '3' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:54:22] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:23] Controlador_Logout::construirPagina Login out
+[2019/06/07 04:54:23] SQL Query: SELECT * FROM mfo_area
+[2019/06/07 04:54:23] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/06/07 04:54:23] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:32] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:38] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa1' OR correo = 'empresa1') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/06/07 04:54:38] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '2'
+[2019/06/07 04:54:38] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-06-07 16:54:38" WHERE id_empresa=1
+[2019/06/07 04:54:38] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:54:38] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('1')
+[2019/06/07 04:54:38] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 58
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 63
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 93
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 99
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 100
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 101
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 102
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 103
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 106
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 107
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 108
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 109
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 110
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 111
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 112
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 113
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 114
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 115
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 116
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 117
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 118
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 119
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 120
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 121
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 122
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 123
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 124
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 125
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 126
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 127
+[2019/06/07 04:54:38] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 128
+[2019/06/07 04:54:38] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/06/07 04:54:38] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia =  ORDER BY c.nombre ASC
+[2019/06/07 04:54:38] SQL Query: SELECT * FROM mfo_jornada
+[2019/06/07 04:54:38] SQL Query: SELECT * from mfo_idioma
+[2019/06/07 04:54:38] SQL Query: SELECT * from mfo_nivelidioma
+[2019/06/07 04:54:38] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/06/07 04:54:38] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/06/07 04:54:38] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/06/07 04:54:38] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:38] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/06/07 04:54:38] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/06/07 04:54:39] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '1' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/06/07 04:54:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/06/07 04:54:39] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 63
+[2019/06/07 04:54:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOfertaConfidencial' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '6'
