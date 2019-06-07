@@ -328,14 +328,14 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 							<div class="caja-postulaciones">
 								<?php 
 
-								if($o['estado'] == Modelo_Oferta::PORAPROBAR){ $poraprobar = ' - POR APROBAR'; $clase = 'titulo-postulaciones-peniente'; }else{ $poraprobar = ''; } 
+								if($o['estado'] == Modelo_Oferta::PORAPROBAR){ $t = 'Aviso Pendiente de Aprobaci&oacute;n'; $clase = 'titulo-postulaciones-pendiente'; }else{ $t = ''; } 
 
-								if($o['tipo_oferta'] == 1 && $poraprobar == ''){ 
+								if($o['tipo_oferta'] == 1 && $t == ''){ 
 									$clase = 'titulo-postulaciones'; 
-									$t = 'Aviso Urgente'.$poraprobar;
-								}else if($o['tipo_oferta'] == 0 && $poraprobar == ''){
+									$t = 'Aviso Urgente';
+								}else if($o['tipo_oferta'] == 0 && $t == ''){
 									$clase = 'titulo-postulaciones-normal';
-									$t = 'Aviso Normal'.$poraprobar;
+									$t = 'Aviso Normal';
 								}
 								echo '<div class="'.$clase.'">'.$t.'</div>'; 
 								
@@ -550,6 +550,18 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 </div>
 </div>
 </div>
+
+<section class=" banner-publicidad">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="banner-light col-md-8">¡Planes que se adecuan a tus necesidades!</div>
+        <button class="btn-minimalista col-md-2"><a href="<?php echo PUERTO."://".HOST;?>/planes/">Ver Planes</a></button>        
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="modal fade" id="editar_Of" tabindex="-1" role="dialog" aria-labelledby="editar_Of" aria-hidden="true" data-backdrop="static">
 	<div class="modal-dialog" role="document">    
 		<div class="modal-content">

@@ -25,6 +25,18 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
   </div>
 </div>
 
+<br>
+<div class=" banner-publicidad">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="banner-light col-md-9 click ">est&aacute; a un solo click de encontrar el <b>candidato ideal</b></div>
+        <button class="btn-minimalista heartBeat animated infinite col-md-2"><a href="<?php echo PUERTO."://".HOST;?>/publicar/">Publicar Oferta</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="container-fluid">
 	<?php  
 	if(!empty($limite_plan) && $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)] > $limite_plan){ ?>
@@ -36,9 +48,9 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 
 	<?php if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'])){ ?>
 		<br>
-		<div class="alert alert-info col-md-12"> 
-			Usted activ&oacute; el filtrado por competencias, estos son los mejores candidatos.
-		</div>
+		<div class="alert alert-info col-md-12" style="font-size: 14pt;"> 
+	    	Usted activ&oacute; el <b>filtro por competencias,</b> estos son los mejores candidatos.
+	  	</div>
 	<?php } ?>
 	<br>
 	<div class="col-md-12">
@@ -650,21 +662,21 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				<br>
 				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right">
 		          <h6 style="color:#6d6d6b">
-		            <button id="activar-accesos" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo. Y mejor aún, ¡puedes completar el proceso de selección!</p>">Activar accesos</button>
+		            <button id="activar-accesos" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo.</p>">Activar accesos</button>
 		          </h6>
 		        </div>
 
 		        <div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
 					<?php if($vista == 1){ ?> 
-						<div class="restante" align="right"> 
-							<b>N&uacute;mero de accesos restantes: 
-							  <span class="parpadea" style="color:red">
-							    <?php echo $num_accesos_rest; ?>					
-							  </span>
-						  	</b> 
-						  	<br>
-						  	<small class="form-text text-muted">Seleccione los candidatos a los que desee enviar accesos</small>
-						</div>
+						<div class="col-md-12" align="right" style="font-size: 14pt;"> 
+				          <b style="text-transform: uppercase;">Número de accesos restantes: 
+				            <span class="parpadea"><?php echo $num_accesos_rest; ?></span>
+				          </b><br>
+				          <b>
+				            <p style="padding-top: 10px;color: #a5a5a5;" class="bounce infinite animated form-text text-muted">Seleccione los candidatos a los que desee enviar accesos</p>
+				          </b> 
+				        </div>
+
 					<?php } ?>
 				</div>
 
@@ -1106,7 +1118,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="titulo-modal-hoja modal-title" id="title">ACTIVAR ACCESOS    
+        <h5 class="subt modal-title" id="title">ACTIVAR ACCESOS    
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 	          <span aria-hidden="true">&times;</span>
 	        </button>
@@ -1116,15 +1128,14 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			<div class="row">
 			  	<div class="col-md-12">
 		            <div class="col-md-12">
-		              <p>Los accesos tienen como funcionalidad, permitir que las empresas completen el proceso de selección</p><hr>
+		              <p>Los accesos tienen como prop&oacute;sito, permitir a las empresas completar el proceso de selecci&oacute;n. </p><hr>
 		            </div>
 		            <div class="col-md-8">
-		              <p class="subt"><b>Beneficios </b></p>
+		              <p class="subt" style="font-size: 25pt"><b>Beneficios </b></p>
 		              <ul>
-			              <li class="qs-text-lista"><p style="color:#515151">La empresa puede completar el proceso de selección de personal.</p></li>
-			              <li class="qs-text-lista"><p style="color:#515151">La empresa puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA.</p></li>
-			              <li class="qs-text-lista"><p style="color:#515151">La empresa puede activar uno o varios accesos, de acuerdo al plan contratado. </p></li>
-		          	</ul>
+		                <li class="qs-text-lista"><p style="color: #797979;">Puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA</p></li>
+		                <li class="qs-text-lista"><p style="color: #797979;">Puede activar uno o varios accesos, de acuerdo al <b><a href="planes-empresa.html">plan contratado.</a></b> </p></li>
+		              </ul>
 		            </div>
 		            <div class="col-md-4" style="text-align: center !important;"><br><br><br><br>
 		              <button style="padding: 15px !important" type="button" class="btn-light-blue" data-dismiss="modal">Aceptar</button>
@@ -1138,6 +1149,18 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
     </div>    
   </div>
 </div>
+<br>
+<div class=" banner-publicidad">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="banner-light col-md-9 click ">est&aacute; a un solo click de encontrar el <b>candidato ideal</b></div>
+        <button class="btn-minimalista heartBeat animated infinite col-md-2"><a href="<?php echo PUERTO."://".HOST;?>/publicar/">Publicar Oferta</a></button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <section style="background-color: grey;color: white; text-align:center" id="product" class="inicio">
   <div class="container">

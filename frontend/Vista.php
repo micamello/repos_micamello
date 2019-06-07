@@ -115,7 +115,7 @@ class Vista {
           $menu["submenu_cuentas"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/cuentas/", "nombre"=>"Ofertas","vista"=>"cuentas");
         }
       }
-      $menu["submenu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/planesUsuario/", "nombre"=>"Mis Planes");
+      $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/planesUsuario/", "nombre"=>"Mis Planes");
       $menu["submenu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/perfil/", "nombre"=>"Mi Perfil"); 
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/logout/", "nombre"=>"Cerrar Sesión");
     }
