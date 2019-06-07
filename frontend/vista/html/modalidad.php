@@ -6,7 +6,7 @@
   <form id="metodoSeleccion" action="<?php echo PUERTO."://".HOST;?>/modalidad/" method="POST">
       <div class="row">
         <div class="col-md-12">
-          <p class="qs-text">A continuación se le presentaran dos opciones de respuestas, escoja con la que se sienta más cómodo.</p>
+          <p class="qs-text">A continuación le presentamos dos métodos de respuesta, elija la opción con la que se sienta más cómodo.</p>
         </div>
         <div class="col-md-12">
           <?php 

@@ -89,9 +89,9 @@ class Controlador_Cuestionario extends Controlador_Base {
                 foreach($accesos as $acceso){
                   $infoempresa = Modelo_Usuario::busquedaPorId($acceso["id_empresa"],Modelo_Usuario::EMPRESA);
                   $email_subject = "Aceptación de Acceso"; 
-                  $candidato = utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).' '.utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']);
+                  $candidato = ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['nombres'])).' '.ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']));
                   $email_body = Modelo_TemplateEmail::obtieneHTML("ACEPTACION_ACCESO");
-                  $email_body = str_replace("%NOMBRES%", utf8_encode($infoempresa["nombres"]), $email_body);   
+                  $email_body = str_replace("%NOMBRES%", ucfirst(utf8_encode($infoempresa["nombres"])), $email_body);   
                   $email_body = str_replace("%CANDIDATO%", $candidato, $email_body);               
                   $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);         
                   Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);

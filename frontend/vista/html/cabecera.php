@@ -171,12 +171,12 @@ if($navegador == 'MSIE'){ ?>
 
       <ul class="nav navbar-nav navbar-left">
             <li>
-              <a class="navbar-brand" id="img-logo" href="index.html">
-                <img class="logo" id="logo-1" style="height: 160%; padding: 0px; width: auto;" src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
+              <a class="navbar-brand" id="img-logo"  href="index.html">
+                <img class="logo" id="logo-1" style="padding: 0px; width: auto;" src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
                 <div class="css-typing hidden-md hidden-lg"><p id="letra-tip">Innovamos para avanzar</p></div>
               </a>
             </li>
-            <li class="css-typing visible-lg visible-md hidden-xs">
+            <li class="css-typing visible-lg visible-md hidden-xs" style="margin-right: 74px;">
               <p id="letra-tip" style="margin-top: 20px; vertical-align: middle;">Innovamos para avanzar</p>
             </li>
           </ul> 

@@ -4,7 +4,10 @@
 		<div class="text-center">
 			<br>
 			<div class="con_encabezado">
-				<span class="encabezado">Por favor ordene de 1 a 5 las siguientes oraciones en cada pregunta. (1 es la oración con la que más se identifica y 5 es con la que menos se identifica). Este test consta de 20 preguntas<br><br><h3 class="metodoTexto"><b>Método seleccionado: </b>Doble Click<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/1.png";?>"></h3></span>
+				<span class="encabezado">Usted ha optado por el <b>MÉTODO DE DOBLE CLICK</b>. Debe ordenar de 1 a 5 las oraciones en cada pregunta. Siendo 1 la oración con la que más se identifica y 5 con la que menos se identifica. El Test CANEA consta de 20 preguntas.</span><br>
+				<div align="center">
+					<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/1.png";?>">
+				</div>
 			</div>
 			<br>
 		</div>
@@ -104,13 +107,15 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12" style="text-align: justify;">  
-             <span class="contenido-modal-rec">Para obtener mayor efectividad en su búsqueda de empleo, le invitamos a llenar el siguiente <b>Test de Personalidad</b>. Por favor, tome en cuenta las siguientes recomendaciones:<br></span>
+             <span class="contenido-modal-rec">Para obtener mayor efectividad en la búsqueda de empleo, le invitamos a completar el siguiente <b>TEST DE COMPETENCIAS</b>. ¡Recuerde! los test no son una pérdida de tiempo, mucho menos si el reclutador tiene claro cómo utilizar esta herramienta.</span><br><br>
             <ul>
-            	<li class="contenido-modal-rec">Para obtener mejores resultados debe completar el Test CANEA en el menor tiempo posible, sin embargo no tiene límite fijado. </li>
-            	<li class="contenido-modal-list">Busque un lugar tranquilo para que pueda completar el test.</li>
-            	<li class="contenido-modal-list">Apague celulares o aparatos que puedan distraerlo.</li>
-            	<li class="contenido-modal-list">Conteste de forma honesta y precisa. <b>Solo puede acceder una vez.</b></li>
-            	<li class="contenido-modal-list">Al enviar no podrá realizar ningún tipo de corrección.</li>
+            	<li class="contenido-modal-list">Prepárese. Mantenga una actitud tranquila.</li>
+            	<li class="contenido-modal-list">Cuidado con las mentiras, no corra el riesgo de perder credibilidad.</li>
+            	<li class="contenido-modal-list">Lea las instrucciones.</li>
+            	<li class="contenido-modal-list">Domine los nervios.</li>
+            	<li class="contenido-modal-list">Sea usted mismo.</li>
+            	<li class="contenido-modal-list">Solo se puede acceder una sola vez.</li>
+            	<li class="contenido-modal-list">Después enviar el test no podrá realizar ningún tipo de corrección.</li>
             </ul>   
             <br>
             <br>    

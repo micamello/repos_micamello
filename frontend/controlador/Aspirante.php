@@ -68,7 +68,8 @@ class Controlador_Aspirante extends Controlador_Base
 
                 if(!isset($usuario['grafico']) && $usuario['grafico'] == ''){
 
-                  $result = Modelo_Opcion::datosGraficos2($id_usuario,1,$_SESSION['mfo_datos']['usuario']['id_usuario']);
+                  $empresa = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+                  $result = Modelo_Opcion::datosGraficos2($id_usuario,1,$empresa);
                   $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
 
                   $porcentajesxfaceta = array();
@@ -121,14 +122,14 @@ class Controlador_Aspirante extends Controlador_Base
                     $id_empresa_plan = $datos_plan['id_empresa_plan'];
                     $num_accesos_rest = $datos_plan['num_accesos_rest'];
                     $nombre_plan = $datos_plan['nombre_plan'];
-                    $costo = $datos_plan['costo'];
+                    //$costo = $datos_plan['costo'];
                 }else{
                     $nombre_plan = '';
                     $limite_plan = '';
                     $id_plan = false;
                     $id_empresa_plan = false;
                     $num_accesos_rest = 0;
-                    $costo = -1;
+                    //$costo = -1;
                 }
 
                 foreach ($this->data as $param => $value) {
@@ -434,7 +435,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'datos_usuarios'=>$datos_usuarios,
                     'limite_plan'=>$limite_plan,
                     'nombre_plan'=>$nombre_plan,
-                    'costo'=>$costo,
+                    //'costo'=>$costo,
                     'id_plan'=>$id_plan,
                     'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
@@ -562,7 +563,6 @@ class Controlador_Aspirante extends Controlador_Base
 
                 if($vista == 1){
 
-
                     if(isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
                         $breadcrumbs['vacantes'] = 'Ver Ofertas';
                     }else{
@@ -576,7 +576,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $id_empresa_plan = $datos_plan['id_empresa_plan'];
                     $num_accesos_rest = $datos_plan['num_accesos_rest'];
                     $nombre_plan = $datos_plan['nombre_plan'];
-                    $costo = $datos_plan['costo'];
+                    //$costo = $datos_plan['costo'];
                    
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,false);
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,true);
@@ -618,7 +618,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $id_plan = false;
                     $id_empresa_plan = false;
                     $num_accesos_rest = 0;
-                    $costo = -1;
+                    //$costo = -1;
                     //$url = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.Utils::encriptar(0);
                 }
 
@@ -669,7 +669,7 @@ class Controlador_Aspirante extends Controlador_Base
                     'datos_usuarios'=>$datos_usuarios,
                     'limite_plan'=>$limite_plan,
                     'nombre_plan'=>$nombre_plan,
-                    'costo'=>$costo,
+                    //'costo'=>$costo,
                     'id_plan'=>$id_plan,
                     'id_empresa_plan'=>$id_empresa_plan,
                     'listado_planes'=>$listado_planes,
@@ -825,7 +825,7 @@ class Controlador_Aspirante extends Controlador_Base
                                     if(!in_array($id, $usuarios_con_accesos)){
                                         //echo 'enviara correo a: '.$id;
                                         $datos = $datos_usuarios[$id];
-                                        $nombre_mostrar = utf8_encode($datos["nombres"])." ".utf8_encode($datos["apellidos"]);    
+                                        $nombre_mostrar = ucfirst(utf8_encode($datos["nombres"]))." ".ucfirst(utf8_encode($datos["apellidos"]));    
                                         $template = $email_body;
                                         $enlace = PUERTO.'://'.HOST.'/login/';
 

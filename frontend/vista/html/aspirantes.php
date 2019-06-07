@@ -3,23 +3,30 @@
 		cursor:pointer;
 	}
 </style>
+
+<?php 
+
+$empresa_hija = false;
+if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array($datosOfertas['id_empresa'], $array_empresas))){
+	$empresa_hija = true;
+}else{
+	$nombre_empresa = strtoupper($datosOfertas['nombres']);
+} ?>
+
 <div class="container">
   <div class="text-center">
     <h2 class="titulo">
     <?php if($vista == 1){ ?>
-		Aspirantes Postulados
+		Aspirantes Postulados <?php if(isset($nombre_empresa)){ echo ' - '.$nombre_empresa; } ?>
 	<?php }else{ ?>
-		Candidatos Registrados
+		Candidatos Registrados 
 	<?php }?>	
 	</h2>
   </div>
 </div>
 
-
-
 <div class="container-fluid">
 	<?php  
-
 	if(!empty($limite_plan) && $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)] > $limite_plan){ ?>
 		<br>
 		<div class="alert alert-info col-md-12"> 
@@ -639,7 +646,7 @@
 		
 		<div class="col-md-9"> 
 			
-			<?php if(($vista == 1 && $num_accesos_rest > 0) || $vista == 2){ ?> 
+			<?php if(($vista == 1 && $num_accesos_rest > 0 && $empresa_hija == true) || $vista == 2){ ?> 
 				<br>
 				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right">
 		          <h6 style="color:#6d6d6b">
@@ -662,7 +669,9 @@
 				</div>
 
 				<div class="clearfix"></div>
-			<?php } ?>
+			<?php }else{
+				echo '<br><br>';
+			} ?>
 			
 			
 			<?php if($vista == 2){ ?>
@@ -707,8 +716,9 @@
 			                <table class="table table-hover">
 			                	<thead class="etiquetaBody">
 							    	<tr>
-								      	<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
-								      	<!--<th id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php #if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>"><input type="checkbox" name="marcarTo" id="marcarTo" <?php #if(empty($_SESSION['mfo_datos']['planSeleccionado']) && $vista == 2){ echo 'disabled="disabled" title="Debe seleccionar un plan"'; } ?> <?php #if(!empty($_SESSION['mfo_datos']['usuarioSeleccionado'])){ #echo 'checked'; } ?>></th>-->
+							    		<?php if($empresa_hija){ ?>
+								      		<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
+								      	<?php } ?>
 								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Foto</th>
 										<th rowspan="2" colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
 								        <th rowspan="2" style="vertical-align: middle; text-align: center;width: 100px">
@@ -742,7 +752,7 @@
 									           <a href="<?php echo $ruta.'1/'; ?>">Salario<i class="fa fa-sort"></i></a>
 									       </th>
 									   <?php } ?>
-									   	<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas))/*|| in_array('-1',$posibilidades)*/){ ?>
+									   	<?php if($empresa_hija){ ?>
 								        	<th rowspan="2" colspan="2" style="vertical-align: middle; text-align: center;">Acci&oacute;n</th>
 								    	<?php } ?>
 							      	</tr>
@@ -753,7 +763,9 @@
 								    </tr>
 							    </thead>
 				        		<tbody>
-						        	<?php 	
+						        	<?php 
+
+
 				        			//$_SESSION['mfo_datos']['registrosPagina']);
 						        	if(!empty($aspirantes)){ 
 						        		for ($i=0; $i < count($aspirantes); $i++) { 
@@ -821,7 +833,14 @@
 
 							            			<?php
 								            			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
-								            				echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">'.utf8_encode($a['nombres']).' '.utf8_encode($a['apellidos']).'</a>'; 
+
+								            				if($empresa_hija){
+								            					echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">';
+								            				}
+								            				echo utf8_encode($a['nombres']).' '.utf8_encode($a['apellidos']);
+								            				if($empresa_hija){
+								            					echo '</a>'; 
+								            				}
 								            			}else{
 								            				if(!$ver){ 
 								            					echo '-';
@@ -860,8 +879,9 @@
 													$compl_url = '';
 												} ?>
 
-												<?php 
-                          $imagen = '';
+												<?php if($empresa_hija){ 
+
+													$imagen = '';
 													echo '<td title="Descargar Informe de personalidad ';
 	
 								            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
@@ -916,10 +936,8 @@
 															}
 														}
 													
-													echo '</td>';													
-												?>
+													echo '</td>'; ?>
 
-												<?php if(($datosOfertas == false) || (isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)) /*|| in_array('-1',$posibilidades)*/){ ?>
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 									            		<?php 
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
@@ -1009,13 +1027,15 @@
 	        <div class="col-md-12">
 				<?php echo $paginas; ?>
 			</div>
-			<div class="col-md-12">
-				<br>
-				<div <?php echo $style_desactivo; ?> id="desactivarAccesos_btn" class="pull-right">
-					<a id="btn_accesos_cancelar" class="btn-red solo-texto dis-mov">Cancelar</a>
-					<a id="btn_accesos_confirmar" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
+			<?php if($empresa_hija){ ?>
+				<div class="col-md-12">
+					<br>
+					<div <?php echo $style_desactivo; ?> id="desactivarAccesos_btn" class="pull-right">
+						<a id="btn_accesos_cancelar" class="btn-red solo-texto dis-mov">Cancelar</a>
+						<a id="btn_accesos_confirmar" class="btn-blue solo-texto dis-mov">Enviar accesos</a>
+					</div>
 				</div>
-			</div>
+			<?php } ?>
 		<?php 
 
 			if(!empty($limite_plan) && $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)] > $limite_plan){ 

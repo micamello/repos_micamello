@@ -250,6 +250,7 @@ display: inline;
 @media screen and (max-width:600px){
     #logo-1{
         margin-top: -20px;
+        height: 140%;
     }
      #letra-tip{
         font-size: 10px; 
@@ -368,7 +369,8 @@ display: inline;
 /*PANTALLAS MEDIANAS*/
 @media only screen and (max-width:1000px) and (min-width:481px){
     #logo-1{
-         margin-top: -20px;
+         margin-top: -10px;
+         height: 120%;
     }
     #letra-tip{
         font-size: 10px; 
@@ -454,6 +456,7 @@ display: inline;
 @media only screen and (min-width:1000px){
     #logo-1{
          margin-top: -10px;
+         height: 160%;
     }
     .img-res2{
         width: 100px;
@@ -2555,6 +2558,80 @@ animation:
     .navbar-collapse.collapse.in{
       display:block !important;
     }
+
+
+
+
+
+
+
+
+    .navbar-nav .open .dropdown-menu {
+       position: static;
+       float: none;
+       width: auto;
+       margin-top: 0;
+       background-color: transparent;
+       border: 0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+    }
+}
+
+/*NUEVOS CAMBIOS 3/06*/
+/*@media (max-width: 1200px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-left,.navbar-right {
+        float: none !important;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-fixed-top {
+        top: 0;
+        border-width: 0 0 1px;
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin-top: 7.5px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .collapse.in{
+        display:block !important;
+    }
+   .navbar-nav .open .dropdown-menu {
+       position: static;
+       float: none;
+       width: auto;
+       margin-top: 0;
+       background-color: transparent;
+       border: 0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+    }
+}*/
+
+/*NUEVOS CAMBIOS 3/06*/
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+
+    /*border-color: #204478;*/
+
 }
 
 .caja-cuenta-2{

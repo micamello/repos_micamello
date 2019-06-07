@@ -390,8 +390,8 @@ class Modelo_Oferta{
 
   public static function ofertaPostuladoPor($idOferta){
     if (empty($idOferta)){ return false; }
-    $sql = "SELECT * FROM mfo_oferta where id_ofertas = ?";
-    return $GLOBALS['db']->auto_array($sql,array($idOferta),true);
+    $sql = "SELECT * FROM mfo_oferta o INNER JOIN mfo_empresa e WHERE o.id_ofertas = ? AND o.id_empresa = e.id_empresa LIMIT 1";
+    return $GLOBALS['db']->auto_array($sql,array($idOferta),false);
   }
 
   public static function consultarOferta($idOferta){

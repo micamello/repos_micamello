@@ -140,6 +140,7 @@ RewriteRule ^editarPlanEmpresa/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?most
 RewriteRule ^crearEmpresas/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=crearEmpresas [L]
 RewriteRule ^cuentas/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas [L]
 RewriteRule ^cuentas/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=cuentas&page=$1 [L]
+RewriteRule ^detalleEmpresa/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=subempresa&opcion=consultarInfoEmpresa&idEmpresa=$1 [L]
 
 #########################################################################################
 
