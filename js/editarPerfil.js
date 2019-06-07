@@ -149,6 +149,7 @@ function validarImg(archivo){
   if(file == 1){
     error = 1;
   }else{
+    $('#btnDescargarHV').val('cargada');
     Swal.fire({      
       html: 'Imagen cargada',
       imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
