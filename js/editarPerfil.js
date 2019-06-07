@@ -539,7 +539,6 @@ function ocultarCampos(){
 }
 
 function enviarFormulario(){
-
     var estado = validarFormulario(true);    
     var file = document.getElementById('subirCV').value;
     if(estado == '' && file != ''){
