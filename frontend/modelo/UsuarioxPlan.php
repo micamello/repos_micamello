@@ -139,7 +139,7 @@ class Modelo_UsuarioxPlan{
     $sql = "SELECT id_usuario_plan, fecha_compra, num_post_rest 
             FROM mfo_usuario_plan 
             WHERE id_usuario = ? AND estado = 1 AND 
-                  fecha_caducidad > NOW() AND num_post_rest > 0 
+                  (fecha_caducidad > NOW() OR fecha_caducidad IS NULL) AND num_post_rest > 0 
             ORDER BY fecha_compra";
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);   
   }

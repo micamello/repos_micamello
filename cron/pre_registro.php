@@ -189,7 +189,7 @@ if (!empty($usuarios) && is_array($usuarios)){
 			$enlace = "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
 
 
-		   	$nombre_mostrar = utf8_encode($datosPreregistro["nombres"]).(!empty($datosPreregistro['apellidos']) ? " ".utf8_encode($datosPreregistro['apellidos']) : "");
+		   	$nombre_mostrar = ucfirst(utf8_encode($datosPreregistro["nombres"])).(!empty($datosPreregistro['apellidos']) ? " ".ucfirst(utf8_encode($datosPreregistro['apellidos'])) : "");
 		    // $enlace = "<a href='".PUERTO."://".DOMINIO."/desarrollov3/login/'>click aqu&iacute;</a>";
 		  
 		   	$email_body = Modelo_TemplateEmail::obtieneHTML("ACTIVACION_USUARIO");

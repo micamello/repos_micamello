@@ -139,22 +139,16 @@ class Controlador_Plan extends Controlador_Base {
         }          
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
         if ($tipousu == Modelo_Usuario::CANDIDATO){
-          $_SESSION['mostrar_exito'] = "Subcripci\u00F3n exitosa, ahora puede postular a una oferta"; 
+          $_SESSION['mostrar_exito'] = "Suscripci\u00F3n exitosa, ahora puede postular a una oferta"; 
           $this->redirectToController('oferta');
         }
         else{
-          $_SESSION['mostrar_exito'] = "Subcripci\u00F3n exitosa, ahora puede publicar una oferta"; 
+          $_SESSION['mostrar_exito'] = "Suscripci\u00F3n exitosa, ahora puede publicar una oferta"; 
           $this->redirectToController('publicar');
         }
       }
 
-      else{        
-        if (empty($_SESSION['mfo_datos']['usuario']['cod_payme'])){
-
-        }
-        else{
-          $tags["cod_payme"] = $_SESSION['mfo_datos']['usuario']['cod_payme'];
-        }
+      else{                
         //presenta metodos de pago
         $tags["plan"] = $infoplan;
         //datos para payme

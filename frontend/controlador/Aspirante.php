@@ -359,6 +359,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuariosConAccesos,false);
                     $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuariosConAccesos,$fill);
+
                     $cantd_total = count($cantd_aspirantes);
 
                     $_SESSION['mfo_datos']['Filtrar_aspirantes'] = $filtros;

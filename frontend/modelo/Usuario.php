@@ -628,7 +628,7 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-    echo 'SQL1: '.$sql; exit;
+
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
