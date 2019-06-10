@@ -119,8 +119,14 @@ class Controlador_Publicar extends Controlador_Base {
         try {
           $validados = $this->validarCampos($datos);
           $GLOBALS['db']->beginTrans();
-          $this->guardarDatosOferta($validados);
+          $datosRetorno = $this->guardarDatosOferta($validados);
           $GLOBALS['db']->commit();
+          $directoriosCorreos = ['desarrollo@micamello.com.ec', 'desarrollo2@micamello.com.ec', 'administrador.gye@micamello.com.ec'];
+          foreach (DIRECTORIOCORREOS as $key => $value) {
+            $emailBody = "Se debe revisar una oferta: <br><br>Id oferta: ".$datosRetorno['id']."<br>Título de la oferta: ".$datosRetorno['titulo'];
+            Utils::envioCorreo($value, 'Se ha registrado una oferta', $emailBody);
+          }
+
           $_SESSION['mostrar_exito'] = 'Su oferta se ha publicado correctamente'; 
           $url = "vacantes/";
           Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
@@ -245,9 +251,9 @@ class Controlador_Publicar extends Controlador_Base {
         throw new Exception("El campo descripci\u00F3n es obligatorio");
       }
 
-      /*if(!Utils::formatoDinero($datosReg['salarioOf'])){
+      if(!Utils::formatoDineroDecimal($datosReg['salarioOf'])){
         throw new Exception("El campo salario solo permite n\u00FAmeros");
-      }*/
+      }
 
       if (Utils::validarNumeros($datosReg['cantVac']) == false) {
         throw new Exception("El campo vacantes solo permite n\u00FAmeros");
@@ -317,11 +323,21 @@ class Controlador_Publicar extends Controlador_Base {
       }
       if(!Modelo_UsuarioxPlan::restarPublicaciones($datos['id_empresa_plan'], $datos['numeroPub'], Modelo_Usuario::EMPRESA)){
         throw new Exception("Ha ocurrido un error. Intente nuevamente");
-      }      
+      }   
+      return array('id'=>$id_Oferta, 'titulo'=>$datos['nombreOferta']);   
   }
 
-
-
+// public function envioCorreo($data){
+//     $email_body = Modelo_TemplateEmail::obtieneHTML("SUGERENCIAS_USUARIO");
+//     $email_body = str_replace("%NOMBRES%", ucfirst($data['nombres']), $email_body);   
+//     $email_body = str_replace("%SUGERENCIA%", $data['descripcion'], $email_body);   
+//     if (Utils::envioCorreo($data['correo1'],"Recomendaciones o Sugerencias",$email_body)){
+//       return true;
+//     }
+//     else{
+//       return false;
+//     }
+//   }
 
 }
 ?>

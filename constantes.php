@@ -100,4 +100,7 @@ define('LK_ID_CLIENTE', '78mhxodb8c3yih');
 define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
 // define("LK_REDIRECT_URI", "https://www.micamello.com.ec/desarrollov2/linkedin.php");
 define("LK_SCOPE", 'r_basicprofile r_emailaddress');
+
+// correos
+define("DIRECTORIOCORREOS", array('0'=>'desarrollo@micamello.com.ec', '1'=>'desarrollo2@micamello.com.ec', '2'=>'administrador.gye@micamello.com.ec'));
 ?>

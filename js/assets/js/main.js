@@ -10,6 +10,9 @@ function navegador(){
   }
 }
 
+$(window).on('resize', function(){
+  console.log($(window).width());
+});
 // $('form').on("submit", function (e) {
 //   $('.loaderMic').css('display', 'block');
 // });
