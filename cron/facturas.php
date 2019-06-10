@@ -58,7 +58,7 @@ if (count($facturas) > 0){
       }
       
       $datosact = array("clave_acceso" => $rsfact["claveacceso"], 
-                        "xml" => $rsfact["xml"], "estado" => Modelo_Factura::NOENVIADO, 
+                        "xml" => $rsfact["xml"], "estado" => $factura->estado, 
                         "msg_error" => "", "fecha_estado" => "null");
       
       if (!Modelo_Factura::actualizar($factura["clave_acceso"],$datosact)){
@@ -98,9 +98,7 @@ if (count($facturas) > 0){
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
 
-      $GLOBALS['db']->commit();
-
-      Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body,$attachments);
+      $GLOBALS['db']->commit();      
       
       if (!empty($attachments)){
         //eliminar archivos temporales

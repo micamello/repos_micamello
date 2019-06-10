@@ -9,7 +9,6 @@ $_SESSION['mostrar_error'] = ""; ?>
 </div>
 
 <?php
-
  if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <br>
 <div class="container">
@@ -539,9 +538,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 													      foreach ($areas as $area) {
 																$selected = '';
 													        if($i != $area['id_area']){
-
-													        	if(isset($data['areaxusuario'][$area['id_area']]) || isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
-
+													        	if(array_key_exists($area['id_area'], $data['areaxusuario'])){
+													        		$selected = "selected='selected'";
+													        	}else if(!isset($data['areaxusuario']) && array_key_exists($area['id_area'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
 													        		$selected = "selected='selected'";
 													        	}
 													          	echo "<option ".$selected." value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
@@ -566,10 +565,13 @@ $_SESSION['mostrar_error'] = ""; ?>
 													    if(!empty($areas) && is_array($areas)){
 													      foreach ($areas as $area) {
 													      	$selected = '';
-												        	if((isset($data['areaxusuario'][$area['id_area']]) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])) || (in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]))){
+												        	if((array_key_exists($area['id_area'],$data['areaxusuario']) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']]))){
+												        		$selected = "selected='selected'";
+												        	}elseif(!isset($data['areaxusuario']) && in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]))
+												        	{
 												        		$selected = "selected='selected'";
 												        	}
-												          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
+												          echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
 													      }
 													    }
 													   ?>
@@ -854,4 +856,3 @@ $_SESSION['mostrar_error'] = ""; ?>
     </div>    
   </div>
 </div>﻿
-

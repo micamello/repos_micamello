@@ -297,11 +297,11 @@ $('#subirCV').change(function(e) {
     if(file == 1){
         error = 1;
     }else{
-        $('#btnDescargarHV').val('cargada');
+      $('#btnDescargarHV').val('cargada');
       Swal.fire({        
         html: 'Hoja de vida cargada',
         imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
-        imageWidth: 75,
+        imageWidth: 210,
         confirmButtonText: 'ACEPTAR',
         animation: true
       });      
@@ -593,7 +593,7 @@ function ocultarCampos(){
 
 function enviarFormulario(){
     var estado = validarFormulario(true);    
-    var file = document.getElementById('subirCV').value;
+    var file = document.getElementById('btnDescargarHV').value;    
     if(estado == '' && file != ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();
@@ -601,7 +601,7 @@ function enviarFormulario(){
         //solo falta hoja de vida
       Swal.fire({
         // title: '¡Advertencia!',        
-        html: 'Por favor, ,debe cargar la hoja de vida<br>',
+        html: 'Por favor cargue su hoja de vida<br>',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
         imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
@@ -611,7 +611,7 @@ function enviarFormulario(){
       // error de ambos lados
         Swal.fire({
             // title: '¡Advertencia!',        
-            html: 'Por favor, cargue su hoja de vida y complete los campos con (*)<br>',
+            html: 'Por favor cargue su hoja de vida y complete los campos con (*)<br>',
             imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
             imageWidth: 75,
             confirmButtonText: 'ACEPTAR',
@@ -621,7 +621,7 @@ function enviarFormulario(){
       //mostrarERRORES
       Swal.fire({
         // title: '¡Advertencia!',        
-        html: 'Por favor, complete los campos con (*)<br>',
+        html: 'Por favor complete los campos con (*)<br>',
         imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
         imageWidth: 75,
         confirmButtonText: 'ACEPTAR',
