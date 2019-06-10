@@ -56,10 +56,10 @@ class Proceso_Facturacion{
                           ); 
 
   function generarFactura(){         
-    $this->totalSinImpuestos = number_format(round($this->importeTotal / GRAVAIVA,2),2);
-    $this->importeImpuesto = number_format(round($this->importeTotal - $this->totalSinImpuestos,2),2);    
+    $this->totalSinImpuestos = /*number_format(*/round($this->importeTotal / GRAVAIVA,2)/*,2)*/;
+    $this->importeImpuesto = /*number_format(*/round($this->importeTotal - $this->totalSinImpuestos,2)/*,2)*/;    
     //number_format(round($this->importeTotal - $this->importeImpuesto,2),2);
-    $this->importeTotal = number_format($this->importeTotal,2);
+    $this->importeTotal = /*number_format(*/$this->importeTotal/*,2)*/;
     $this->generarClaveAcceso();
     $this->creaXml();   
     $this->sign(); 
@@ -456,7 +456,7 @@ class Proceso_Facturacion{
     $contenido .= '<table width="500" border="1" style="text-align:center; border-collapse: collapse;">
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL 12%</b></td>
-                            <td '.$style1.' align="right">'.$infoFactura->totalConImpuestos->totalImpuesto->baseImponible.'</td>
+                            <td '.$style1.' align="right">'.number_format($infoFactura->totalConImpuestos->totalImpuesto->baseImponible,2).'</td>
                           </tr>
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL 0%</b></td>
@@ -472,7 +472,7 @@ class Proceso_Facturacion{
                           </tr>
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL SIN IMPUESTOS</b></td>
-                            <td '.$style1.' align="right">'.$infoFactura->totalSinImpuestos.'</td>
+                            <td '.$style1.' align="right">'.number_format($infoFactura->totalSinImpuestos,2).'</td>
                           </tr>
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>TOTAL DESCUENTO</b></td>
@@ -484,7 +484,7 @@ class Proceso_Facturacion{
                           </tr>
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>IVA '.$infoFactura->totalConImpuestos->totalImpuesto->tarifa.'%</b></td>
-                            <td '.$style1.' align="right">'.$infoFactura->totalConImpuestos->totalImpuesto->valor.'</td>
+                            <td '.$style1.' align="right">'.number_format($infoFactura->totalConImpuestos->totalImpuesto->valor,2).'</td>
                           </tr>                          
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>PROPINA</b></td>
@@ -492,7 +492,7 @@ class Proceso_Facturacion{
                           </tr>
                           <tr>
                             <td '.$style1.' colspan="2" align="left"><b>VALOR TOTAL</b></td>
-                            <td '.$style1.' align="right">'.$infoFactura->importeTotal.'</td>
+                            <td '.$style1.' align="right">'.number_format($infoFactura->importeTotal,2).'</td>
                           </tr>
                       </table>';
     $contenido .= "</td>";

@@ -69,6 +69,7 @@ if (!empty($registros) && is_array($registros)){
     //objeto procesador      
     $monto = substr($registro["purchaseAmount"],0,-2).".".substr($registro["purchaseAmount"], -2);     
     $tipopago = ($registro["reversed22"] == "DEBIT") ? Proceso_Facturacion::FORMA_PAGO["TARJETADEBITO"] : Proceso_Facturacion::FORMA_PAGO["TARJETACREDITO"];   
+    Utils::log("MONTO PLANES PAYME ".$monto);
     $procesador = (object) array('id'=>$registro["id_payme"],
                                  'tipo'=>'payme',
                                  'trans'=>$registro["purchaseOperationNumber"],
