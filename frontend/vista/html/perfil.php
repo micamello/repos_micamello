@@ -9,7 +9,6 @@ $_SESSION['mostrar_error'] = ""; ?>
 </div>
 
 <?php
-
  if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <br>
 <div class="container">
@@ -567,12 +566,13 @@ $_SESSION['mostrar_error'] = ""; ?>
 													    if(!empty($areas) && is_array($areas)){
 													      foreach ($areas as $area) {
 													      	$selected = '';
+
 												        	if(array_key_exists($area['id_area'], $data['areaxusuario']) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])){
 												        		$selected = "selected='selected'";
 												        	}else if(!isset($data['areaxusuario']) && in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
 												        		$selected = "selected='selected'";
 												        	}
-												          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
+												          echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
 													      }
 													    }
 													   ?>
@@ -857,4 +857,3 @@ $_SESSION['mostrar_error'] = ""; ?>
     </div>    
   </div>
 </div>﻿
-

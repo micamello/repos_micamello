@@ -18,12 +18,9 @@ class Controlador_Velocimetro extends Controlador_Base {
     $opcion = Utils::getParam('opcion','',$this->data); 
     switch($opcion){ 
       case 'guardarGrafico':
-        $imagen = Utils::getParam('imagen','',$this->data);
-        Utils::log("PASO 0");
-        if (!empty($imagen)){
-          Utils::log("PASO 1");
-          if (Modelo_Usuario::actualizarGrafico($_SESSION['mfo_datos']['usuario']['id_usuario'],$imagen)){
-            Utils::log("PASO 2");
+        $imagen = Utils::getParam('imagen','',$this->data);        
+        if (!empty($imagen)){        
+          if (Modelo_Usuario::actualizarGrafico($_SESSION['mfo_datos']['usuario']['id_usuario'],$imagen)){        
             $_SESSION['mfo_datos']['usuario']['grafico'] = $imagen; 
           }
         }
