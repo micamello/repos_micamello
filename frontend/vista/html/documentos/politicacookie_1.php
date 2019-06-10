@@ -1,4 +1,4 @@
-<div class="text-center">
+<div class="text-center" id="blockRightClick">
   <h2 class="titulo">Políticas de Cookies</h2>
 </div>
 

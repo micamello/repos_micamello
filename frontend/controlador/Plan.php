@@ -255,7 +255,11 @@ class Controlador_Plan extends Controlador_Base {
         throw new Exception("Error al cargar la imagen, por favor intente denuevo");
       }
       $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
-      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan ser\u00E1 aprobado en un m\u00E1ximo de ".$tiempo." horas";  
+      $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan ser\u00E1 aprobado en un m\u00E1ximo de ".$tiempo." horas";
+      foreach (DIRECTORIOCORREOS as $key => $value) {
+        $emailBody = "Se debe aprobar un Plan:<br><br>Id comprobante : ".$id_comprobante."<br>id usuario/empresa: ".$_SESSION['mfo_datos']['usuario']['id_usuario']."<br>Tipo usuario: ".$_SESSION['mfo_datos']['usuario']['tipo_usuario']."<br>Número de comprobante: ".$data["num_comprobante"];
+        Utils::envioCorreo($value, 'Se debe aprobar un depósito', $emailBody);
+      }  
       Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
     }
     catch(Exception $e){
