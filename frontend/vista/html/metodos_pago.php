@@ -173,7 +173,7 @@
         <div class="panel panel-default" id="panel_3">          
           <div class="panel-body">
             <div align="center">
-              <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png"><br><br>  
+              <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png" class="img-responsive"><br><br>  
             </div>                     
             <form name="form_payme" id="form_payme" action="#" method="post" class="alignet-form-vpos2">
               <div class="col-xs-12 col-md-12">

@@ -300,6 +300,10 @@ public static function validarCelularConvencional($contenido){
     return ( ! preg_match("/^([-a-z0-9 -])+$/i", $str)) ? false : true;
   }
 
+  static public function formatoDineroDecimal($str){
+    return ( ! preg_match("/^([0-9]{1,5})[.][0-9]{2}?$/", $str)) ? false : true;
+  }
+
   static public function formatoDinero($str){
     return ( ! preg_match("/^[0-9]{2,5}$/", $str)) ? false : true;
   }
