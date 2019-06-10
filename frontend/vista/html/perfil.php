@@ -558,21 +558,33 @@ $_SESSION['mostrar_error'] = ""; ?>
 												<div class="form-group">
 													<label>Sub-Áreas <span title="Este campo es obligatorio" class="no">*</span></label>
 													<div class="hidden-xs hidden-sm">
-														<br><div style="padding-top: 7px;"></div>
+														<div style="padding-top: 7px;"></div>
 													</div>
 													<div class="help-block with-errors"></div>
 													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple" onchange="validarFormulario(false);">
-													  <?php 													  
-													    if(!empty($areas) && is_array($areas)){
-													      foreach ($areas as $area) {
-													      	$selected = '';
-												        	if((isset($data['areaxusuario'][$area['id_area']]) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])) || (in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]))){
-												        		$selected = "selected='selected'";
-												        	}
-												          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
+													  <?php 																			   					  
+													  if(!empty($areas) && is_array($areas)){													    	
+													    foreach ($areas as $area) {
+													      $selected = '';													      														      	
+													      if (isset($data['areaxusuario'][$area['id_area']])){
+                                  if (in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])){
+                                  	$selected = "selected='selected'";
+                                  }  
 													      }
+													      elseif (isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
+													      	if (in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
+													      		$selected = "selected='selected'";
+													      	}
+													      }
+												        /*if((isset($data['areaxusuario'][$area['id_area']]) && 												      
+												        		  in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])) || 
+												        		  (in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]))){
+												        		$selected = "selected='selected'";
+												        }*/
+												        echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
 													    }
-													   ?>
+													  }
+													  ?>
 													</select>
 												</div>
 											</div>
