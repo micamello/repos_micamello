@@ -1051,8 +1051,9 @@ class Controlador_GenerarPDF extends Controlador_Base
         $mpdf->WriteHTML($enddoc);
 
         $mpdf->WriteHTML($html);
+        //echo $html;
         $mpdf->Output($datos['username'].".pdf", 'D');
-        // self::informePersonalidad($html, );
+        
   }
 }
 ?>
