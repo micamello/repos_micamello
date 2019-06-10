@@ -291,7 +291,6 @@ class Controlador_Subempresa extends Controlador_Base
     public function crearEmpresa($idUsuario){
 
         try{
-
             $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'dni'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0/*,"postNum"=>1*/,"num_post"=>0,/*"descNum"=>1, "num_desc"=>1,*/"num_accesos"=>0, "plan"=>1, "sectorind"=>1);  
 
             $data = $this->camposRequeridos($campos);
