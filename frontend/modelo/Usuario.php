@@ -1210,5 +1210,21 @@ WHERE
     $rs = $GLOBALS['db']->auto_array($sql,array($id_empresa));
     return $rs;
   }
+
+  public static function buscarUsernameSubempresas($subempresas){
+    $sql = "SELECT username FROM mfo_empresa e 
+            INNER JOIN mfo_usuario_login ul ON e.id_usuario_login = ul.id_usuario_login
+            WHERE id_empresa IN(".$subempresas.")";
+    $arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
+
+    $datos = array();
+    if (!empty($arrdatos) && is_array($arrdatos)){
+
+      foreach ($arrdatos as $key => $value) {
+        array_push($datos, $value['username']);
+      }
+    }
+    return $datos;  
+  }
 }  
 ?>

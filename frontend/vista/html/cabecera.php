@@ -196,7 +196,7 @@ if($navegador == 'MSIE'){ ?>
           <?php } ?>
           <?php if (isset($menu["submenu_cuentas"])){ ?>  
             <li class="dropdown" >
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Administración<i class="fa fa-caret-down"></i></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">Administración<i class="fa fa-caret-down"></i></a>
               <ul class="dropdown-menu">
                 <?php foreach($menu["submenu_cuentas"] as $submenu_cuentas){ ?>  
                  <li><a href="<?php echo $submenu_cuentas['href'];?>"><?php echo $submenu_cuentas['nombre'];?></a></li>

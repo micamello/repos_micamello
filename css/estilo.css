@@ -2365,6 +2365,7 @@ animation:
   animation-fill-mode: forwards;
     -webkit-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
+  font-size: 14px;
 }
 
 .css-typing p:nth-child(2) {

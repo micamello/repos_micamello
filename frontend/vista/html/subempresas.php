@@ -27,6 +27,8 @@
                     array_push($planes_con_postulaciones, $key);
                 }
             }
+
+            if(!empty($tieneRecursos)){
         ?>
 
           <div class="col-md-4 col-sm-12">
@@ -49,22 +51,22 @@
                 <span><?php echo $accesos; ?></span>
             </div>
           </div>
+        <?php } ?>
           <div class="clearfix"></div>
             <div class="col-md-12">
                 <div class="panel panel-default" style="border-color: #404040;border-radius: 0px">
                     <div class="panel-body">
                       <div class="form-group col-md-12" align="right">
-                        <div style="margin: 10px 0px;" class="col-md-12 icon_oferta">
-                            <?php 
-                                if($cantd_cuentas > 0 && $puedeCrearCuenta == 1){ ?>
-                                    <a class="btn-blue" href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/">
-                                        <span id="boton" name="">
-                                            <i class="fa fa-industry hidden-sm hidden-xs" title="Crear nueva empresa"></i> 
-                                            CREAR SUBCUENTA
-                                        </span>
-                                    </a>
-                            <?php } ?>
-                        </div>
+                        <?php  if($cantd_cuentas > 0 && $puedeCrearCuenta == 1){ ?>
+                            <div style="margin: 10px 0px;" class="col-md-12 icon_oferta">
+                                <a class="btn-blue" href="<?php echo PUERTO."://".HOST;?>/crearEmpresas/">
+                                    <span id="boton" name="">
+                                        <i class="fa fa-industry hidden-sm hidden-xs" title="Crear nueva empresa"></i> 
+                                        CREAR SUBCUENTA
+                                    </span>
+                                </a>
+                            </div> 
+                        <?php } ?>
                       </div>
                       <div style="overflow-x:auto; width: 100%">
                         <table class="table table-bordered table-hover">
@@ -140,11 +142,11 @@
                                                print_r('<br>num_post: '.$num_post[$key]); 
                                                 print_r('<br>tieneRecursos: '.$tieneRecursos[$ids_parents[$key]]['postulaciones']); */
                    
-                                               /* if(isset($tieneRecursos[$ids_parents[$key]]) && (    ($num_post[$key] == 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0) || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] == 0) || ($tieneRecursos[$ids_parents[$key]]['postulaciones'] === 'Ilimitado') || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0)
-                                                )){*/
+                                                if(isset($tieneRecursos[$ids_parents[$key]]) /*&& (    ($num_post[$key] == 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0) || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] == 0) || ($tieneRecursos[$ids_parents[$key]]['postulaciones'] === 'Ilimitado') || ($num_post[$key] > 0 && $tieneRecursos[$ids_parents[$key]]['postulaciones'] > 0)
+                                                )*/){
                                                     //echo '<br>entro: '.$tieneRecursos[$ids_parents[$key]]['postulaciones'];
                                                     $puedeEditarCuenta = 1;
-                                                //}
+                                                }
 
 
                                                     /*$puedeEditarCuenta = Modelo_UsuarioxPlan::tieneRecursos($ids_parents[$key],false);
@@ -162,7 +164,7 @@
                                                     }encriptar($texto)
                                                     desencriptar($texto)
                                                      echo '<br>puedeEditar: '.$puedeEditarCuenta.'<br>';*/
-                                                    if(($fechas_caducidades[$key] >= date('Y-m-d H:i:s') || $estados[$key] != 'Inactivo') && $puedeEditarCuenta == 1){ ?>
+                                                    if(($fechas_caducidades[$key] >= date('Y-m-d H:i:s') || $estados[$key] != 'Inactivo') && $puedeEditarCuenta == 1 && !empty($tieneRecursos)){ ?>
                                                         <td class="icon_oferta" style="vertical-align:middle; text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/editarPlanEmpresa/'.Utils::encriptar($ids_empresasPlans[$key]).'/'; ?>">
                                                             <i class="fa fa-pencil-square-o" title="Editar ofertas"></i>
                                                         </a></td>
@@ -172,7 +174,7 @@
                                                             </td>
                                                     <?php } 
 
-                                                    if($estados[$key] != 'Inactivo'){ ?>
+                                                    if($estados[$key] != 'Inactivo' && !empty($tieneRecursos)){ ?>
                                                         <td class="icon_oferta" style="vertical-align:middle; text-align:center;"><a onclick="abrirModal('Está seguro que desea eliminar las ofertas?','alert_descarga','<?php echo PUERTO.'://'.HOST.'/eliminarPlanEmpresa/'.Utils::encriptar($ids_empresasPlans[$key]).'/'; ?>','btn_modal');">
                                                             <i class="fa fa-trash " title="Liberar ofertas"></i>
                                                         </a></td>
@@ -183,7 +185,7 @@
 
                                                      if($mostrar == 0){
                 
-                                                        if(!empty($puedeCrearPlan)){ ?>
+                                                        if(!empty($puedeCrearPlan) && !empty($tieneRecursos)){ ?>
                                                             <td class="icon_oferta" style="vertical-align:middle; text-align: center;" align="center" rowspan="<?php echo ((isset($planes)) ? count($planes) : '1'); ?>" style="text-align: center;"><a href="<?php echo PUERTO.'://'.HOST.'/asignarPlanEmpresa/'.Utils::encriptar($value['id_empresa']).'/'; ?>">
                                                                 <i class="fa fa-plus " title="Asignar ofertas"></i>
                                                             </a></td>

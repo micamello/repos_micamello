@@ -39,11 +39,24 @@ if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO
 	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){
   exit;
 }
-//si es empresa no puede ver imagenes de otros candidatos
-if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::EMPRESA && 
-	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && 
-	  $usuario["tipo_usuario"]==Modelo_Usuario::EMPRESA && $carpeta != "hv"){
-  exit;
+//si es empresa no puede ver imagenes de otras empresas
+if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && 
+	  $usuario["tipo_usuario"] == Modelo_Usuario::EMPRESA && $carpeta != "hv"){
+
+	if(isset($_SESSION['mfo_datos']['subempresas']) && !empty($_SESSION['mfo_datos']['subempresas']) && $usuario["username"] != $_SESSION['mfo_datos']['usuario']['username']){
+
+		//buscar los username de mis empresas hijas
+		$array_subempresas = array();
+		foreach ($_SESSION['mfo_datos']['subempresas'] as $key => $id) {
+            array_push($array_subempresas, $key);
+        }
+        $sub = implode(",", $array_subempresas);
+		$sub = Modelo_Usuario::buscarUsernameSubempresas($sub);
+
+		if(!in_array($usuario["username"],$sub)){
+			exit;
+		}
+	}
 }
 
 $mostrar = false;

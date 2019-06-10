@@ -155,7 +155,7 @@
                             <div class="cambiar">
                               <h5 class="centro">
                                 <br>
-                               <span class="btn-red" style="cursor:pointer">Ya aplic&oacute; para la oferta</span>
+                               <button type="button" class="btn-red" style="cursor:pointer">Ya aplic&oacute; para la oferta</button>
                               </h5>
                             </div>
                           </div>
