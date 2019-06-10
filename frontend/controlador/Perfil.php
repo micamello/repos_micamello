@@ -208,10 +208,16 @@ class Controlador_Perfil extends Controlador_Base
 
             $data = $this->camposRequeridos($campos);
 
+            $array_data_area = array();
+            if(isset($_SESSION['mfo_datos']['usuario']['subareas'])){
+                $array_data_area = explode(",",$_SESSION['mfo_datos']['usuario']['subareas']);
+            }
+
             if(isset($_POST['subareas']) && !empty($_POST['subareas']) && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
 
                 $array_subareas_seleccionadas = array();
                 $areas_subareas = array();
+                
                 foreach ($_POST['subareas'] as $i => $datos_select_area) {
                     
                     $valor = explode("_", $datos_select_area);
@@ -221,6 +227,7 @@ class Controlador_Perfil extends Controlador_Base
                         array_push($array_subareas_seleccionadas, $valor[2]);
                     }
                 }
+
                 $data['areaxusuario'] = $areas_subareas;
             }else{
                 $data['areaxusuario'] = array();
@@ -445,10 +452,6 @@ class Controlador_Perfil extends Controlador_Base
                         throw new Exception("Ha ocurrido un error al guardar los idiomas del usuario, intente nuevamente");
                     }
                 }   
-                $array_data_area = array();
-                if(isset($_SESSION['mfo_datos']['usuario']['subareas'])){
-                    $array_data_area = explode(",",$_SESSION['mfo_datos']['usuario']['subareas']);
-                }
 
                 if(!empty($array_subareas_seleccionadas)){
 

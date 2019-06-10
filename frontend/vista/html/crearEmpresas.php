@@ -48,7 +48,7 @@
                         <div class="col-md-6">
                             <div class="form-group" id="seccion_nombre">
                               <p class="campo">Nombres de la empresa&nbsp;<span class="requerido" title="Este campo es obligatorio">*</span></p><div id="err_nom" class="help-block with-errors"></div>
-                              <input type="text" name="name_user" id="name_user" placeholder="Ejemplo: micamellosa" maxlength="100" class="form-control" value="<?php if(isset($data['name_user']) && !empty($data['name_user'])){ echo $data['name_user']; } ?>">
+                              <input type="text" name="name_user" id="name_user" placeholder="Ejemplo: micamello s.a." maxlength="100" class="form-control" value="<?php if(isset($data['name_user']) && !empty($data['name_user'])){ echo $data['name_user']; } ?>">
                             </div>
                         </div>
 

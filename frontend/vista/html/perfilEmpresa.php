@@ -11,7 +11,7 @@
 						<div class="fotoPerfil">
 							<div class="text-center">
 								<div class="col-md-6">
-									<img style="height:200px; width: 200px;" class="perfil_photo_user" src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgperfil/'.$datosEmpresa['username'].'/';?>">
+									<img style="height:200px; width: 200px;" class="perfil_photo_user" src="<?php echo PUERTO.'://'.HOST.'/imagenes/usuarios/'.$datosEmpresa['username'].'/';?>">
 								</div>
 							</div>
 						</div>

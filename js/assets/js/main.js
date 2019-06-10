@@ -17,16 +17,16 @@ $(window).on('resize', function(){
 //   $('.loaderMic').css('display', 'block');
 // });
 
-$(document).ajaxStart(function(){
-  $('.spin').open({ 
-      image: puerto_host+'/imagenes/loader.gif',
-      // color: 'red',
-    });
-});
+// $(document).ajaxStart(function(){
+//   $('.spin').open({ 
+//       image: puerto_host+'/imagenes/loader.gif',
+//       // color: 'red',
+//     });
+// });
 
-$(document).ajaxStop(function(){
-  $('.spin').close();
-});
+// $(document).ajaxStop(function(){
+//   $('.spin').close();
+// });
 
 
 

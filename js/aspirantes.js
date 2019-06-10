@@ -174,6 +174,7 @@ function generarGrafico(id_usuario,ruta){
 }
 
 function hacerInforme(ruta,id_usuario){
+	$('#loaderMic').css('display', 'block');
 
 	var puerto_host = $('#puerto_host').val();
 	$.ajax({

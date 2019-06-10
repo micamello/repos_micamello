@@ -593,7 +593,7 @@ function ocultarCampos(){
 
 function enviarFormulario(){
     var estado = validarFormulario(true);    
-    var file = document.getElementById('subirCV').value;
+    var file = document.getElementById('btnDescargarHV').value;
     if(estado == '' && file != ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();

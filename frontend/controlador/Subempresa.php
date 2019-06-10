@@ -292,7 +292,7 @@ class Controlador_Subempresa extends Controlador_Base
 
         try{
 
-            $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'dni'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0/*,"postNum"=>1*/,"num_post"=>1,/*"descNum"=>1, "num_desc"=>1,*/"num_accesos"=>1, "plan"=>1, "sectorind"=>1);  
+            $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'dni'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0/*,"postNum"=>1*/,"num_post"=>0,/*"descNum"=>1, "num_desc"=>1,*/"num_accesos"=>0, "plan"=>1, "sectorind"=>1);  
 
             $data = $this->camposRequeridos($campos);
 
@@ -345,6 +345,9 @@ class Controlador_Subempresa extends Controlador_Base
                 $numPublicaciones = $var1;
             }else{
                 $var1 = $data["num_post"];
+                if($var1 == ''){
+                    $var1 = 0;
+                }
                 $numPublicaciones = $planPadre['num_publicaciones_rest']-$var1;
                 if($numPublicaciones < 0){
                     throw new Exception("Ha ocurrido un error asignar ofertas, intente nuevamente");
@@ -364,6 +367,9 @@ class Controlador_Subempresa extends Controlador_Base
                 $numAccesos = $var3;
             }else{
                 $var3 = $data["num_accesos"];
+                if($var3 == ''){
+                    $var3 = 0;
+                }
                 $numAccesos = $planPadre['num_accesos_rest']-$var3;
                 if($numAccesos < 0){
                     throw new Exception("Ha ocurrido un error asignar accesos, intente nuevamente");
@@ -374,7 +380,7 @@ class Controlador_Subempresa extends Controlador_Base
                 throw new Exception("Error al actualizar las ofertas de la empresa."); 
             }
 
-            if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,0,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$idPlan,$var3)){
+            if (!Modelo_UsuarioxPlan::guardarPlan($id_empresa,Modelo_Usuario::EMPRESA,$planPadre['id_plan'],$var1,false,-1,'',$planPadre['fecha_compra'],$planPadre['fecha_caducidad'],$idPlan,$var3)){
               throw new Exception("Error al registrar el plan, por favor intente de nuevo.");   
             }
 
@@ -487,6 +493,7 @@ class Controlador_Subempresa extends Controlador_Base
         $nombre_mostrar = ucfirst(utf8_encode($nombres));  
         $enlace = "<a href='".PUERTO."://".HOST."/desarrollov3/login/'>click aqu&iacute;</a>";
 
+        $asunto = 'Creaci&oacute;n de Subempresa';
         $email_body = Modelo_TemplateEmail::obtieneHTML("CREACION_EMPRESA");
         $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
         $email_body = str_replace("%USUARIO%", $username, $email_body);   

@@ -48,7 +48,7 @@ $_SESSION['mostrar_error'] = ""; ?>
     <form role="form" name="form_editarPerfil" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/perfil/" enctype="multipart/form-data">
         <div class="">
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <div id="seccion_img" class="recuadro-perfil panel panel-default"><br>
+                <div id="seccion_img" class="recuadro-perfil panel panel-default">
                 	<img id="imagen_perfil" width="100%" alt="fotoPerfil" src="<?php echo PUERTO."://".HOST."/imagenes/imgperfil/".$_SESSION['mfo_datos']['usuario']['username']."/"; ?>" style="border-radius: 20px 20px 0px 0px;">
                     <input id="file-input" type="file" name="file-input"  class="upload-photo">
                     <div class="perfil-cuadro" id="err_img" align="center">
@@ -540,8 +540,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 																$selected = '';
 													        if($i != $area['id_area']){
 
-													        	if(isset($data['areaxusuario'][$area['id_area']]) || isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
-
+													        	if(array_key_exists($area['id_area'], $data['areaxusuario'])){
+													        		$selected = "selected='selected'";
+													        	}else if(!isset($data['areaxusuario']) && array_key_exists($area['id_area'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
 													        		$selected = "selected='selected'";
 													        	}
 													          	echo "<option ".$selected." value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
@@ -566,7 +567,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 													    if(!empty($areas) && is_array($areas)){
 													      foreach ($areas as $area) {
 													      	$selected = '';
-												        	if((isset($data['areaxusuario'][$area['id_area']]) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])) || (in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]))){
+												        	if(array_key_exists($area['id_area'], $data['areaxusuario']) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])){
+												        		$selected = "selected='selected'";
+												        	}else if(!isset($data['areaxusuario']) && in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
 												        		$selected = "selected='selected'";
 												        	}
 												          	echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";

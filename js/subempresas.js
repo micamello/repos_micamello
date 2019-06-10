@@ -705,6 +705,9 @@ function existeCorreo(correo){
           url: puerto_host+"/index.php?mostrar=inicio&opcion=buscaCorreo&correo="+correo,
           dataType: 'json',
           async: false,
+          before:{
+            
+          }
           success:function(data){
               value = data.respcorreo;
           },
