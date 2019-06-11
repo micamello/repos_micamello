@@ -1,5 +1,5 @@
 <div class="text-center">
-	<h2 class="titulo">Perfil de <?php echo strtoupper(utf8_encode($datosEmpresa['nombres'])); ?></h2>
+	<h2 class="titulo">Perfil de <?php echo utf8_encode($datosEmpresa['nombres']); ?></h2>
 </div>
 <div class="container-fluid">
 	<div class="container">
@@ -19,7 +19,7 @@
 						<div class="col-md-6">
 				        	<div class="col-md-12">
 					            <div class="nombreUsuario">
-					            	<h3 class=""><?php echo strtoupper(utf8_encode($datosEmpresa['nombres'])); ?></h3>
+					            	<h3 class=""><?php echo utf8_encode($datosEmpresa['nombres']); ?></h3>
 					            </div>
 				        	</div>
 				        	<div class="col-md-12">

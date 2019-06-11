@@ -4,7 +4,7 @@
       <section>
         <div class="col-md-12">
           <div class="text-center">
-            <h2 class="titulo">Asignar Ofertas - <?php echo $nombreEmp; ?></h2><br><br>
+            <h2 class="titulo">Asignar Ofertas - <?php echo utf8_encode($nombreEmp); ?></h2><br><br>
           </div>
         </div>
       </section>

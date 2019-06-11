@@ -4,8 +4,8 @@
       <section>
         <div class="col-md-12">
           <div class="text-center">
-            <h2 class="titulo">Editar Plan <?php echo ' - '.$planHijo['nombres']; ?></h2><br>
-            <?php echo '<br><p class="caja-cuenta-2-subt">Nombre plan: '.$planHijo['nombre'].'</p><p class="caja-cuenta-2-subt">Fecha de compra: '.$planHijo['fecha_compra'].'</p>'; ?><br>
+            <h2 class="titulo">Editar Plan <?php echo ' - '.utf8_encode($planHijo['nombres']); ?></h2><br>
+            <?php echo '<br><p class="caja-cuenta-2-subt">Nombre plan: '.utf8_encode($planHijo['nombre']).'</p><p class="caja-cuenta-2-subt">Fecha de compra: '.$planHijo['fecha_compra'].'</p>'; ?><br>
           </div>
         </div>
       </section>

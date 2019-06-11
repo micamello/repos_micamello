@@ -497,10 +497,10 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function correoAvisoCreacion($correo,$nombres,$username,$password){
 
-        $nombre_mostrar = ucfirst(utf8_encode($nombres));  
+        $nombre_mostrar = utf8_encode($nombres);  
         $enlace = "<a href='".PUERTO."://".HOST."/desarrollov3/login/'>click aqu&iacute;</a>";
 
-        $asunto = 'Creaci&oacute;n de Subempresa';
+        $asunto = 'Creación de Subempresa';
         $email_body = Modelo_TemplateEmail::obtieneHTML("CREACION_EMPRESA");
         $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
         $email_body = str_replace("%USUARIO%", $username, $email_body);   
