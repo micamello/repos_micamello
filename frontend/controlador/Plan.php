@@ -143,11 +143,26 @@ class Controlador_Plan extends Controlador_Base {
       if (!isset($infoplan["id_plan"]) || empty($infoplan["id_plan"])){
         throw new Exception("El plan seleccionado no esta activo o no esta disponible");
       }      
-            
-      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1)){ 
-        if ($this->existePlan($infoplan["id_plan"])){
-          throw new Exception("Ya esta subscrito al plan seleccionado");   
-        }                 
+      //si es una empresa hija      
+      $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);  
+      $gratuitos = 0;
+      if (!empty($nivel) && isset($_SESSION['mfo_datos']['planes'])){                  
+        foreach($_SESSION['mfo_datos']['planes'] as $planhija){
+          if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
+            $gratuitos = 0;
+          }
+          else{
+            $gratuitos = 1;
+          }
+        }        
+      }      
+      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1) ||
+          (!empty($nivel) && $gratuitos == 0)){ 
+        if ($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
+          if ($this->existePlan($infoplan["id_plan"])){
+            throw new Exception("Ya esta subscrito al plan seleccionado");   
+          }                 
+        }
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"])){
           throw new Exception("Error al registrar la subscripci\u00F3n, por favor intente denuevo");   
         }          
