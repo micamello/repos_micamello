@@ -80,11 +80,25 @@ class Controlador_Plan extends Controlador_Base {
       $totgratuitos = count($gratuitos);
       foreach($gratuitos as $key=>$gratuito){
         $idplanes .= $gratuito["id_plan"].((($key+1)==$totgratuitos) ? "" : ",");
-      }      
+      }        
       //si ya tiene un gratuito comprado este mes      
       if (!Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"]) && 
           isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){         
-        $tags['gratuitos'] = $gratuitos;  
+        //si es empresa hija
+        if (!empty($nivel)){          
+          $gratuitos = 1;
+          foreach($_SESSION['mfo_datos']['planes'] as $planhija){
+            if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
+              $gratuitos = 0;
+            }
+          }
+          if ($gratuitos == 1){
+            $tags['gratuitos'] = $gratuitos;
+          }
+        }
+        else{
+          $tags['gratuitos'] = $gratuitos;  
+        }        
       }      
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);     
       $avisos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
