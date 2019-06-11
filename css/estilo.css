@@ -2667,3 +2667,6 @@ animation:
     padding: 0px;
 }
 
+input[type='number'] {
+    -moz-appearance:textfield;
+}

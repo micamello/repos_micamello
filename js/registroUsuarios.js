@@ -719,6 +719,7 @@ if(tipousuario == 1){
 }
 
 function searchAjax(obj){
+	// <div style="position: relative;"><i class="fa fa-spinner fa-spin" style="position: absolute; right: 5px; top: -35px;"></i></div>
 	var val_retorno1 = "";	
 	var puerto_host = $('#puerto_host').val();
 	var contenido = $(obj).val();
@@ -746,6 +747,19 @@ function searchAjax(obj){
         },
         error: function (request, status, error) {
             console.log(request.responseText);
+           	// Swal.fire({                
+            //     html: request.responseText,
+            //     imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+            //     imageWidth: 75,
+            //     confirmButtonText: 'ACEPTAR',
+            //     animation: true
+            //   });
+        },
+        beforeSend : function(){
+        	ajaxLoader(obj, 'aparecer');
+        },
+        complete : function(){
+        	ajaxLoader(obj, 'desaparecer');
         }
 		  });
 		}

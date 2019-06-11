@@ -710,7 +710,13 @@ function existeCorreo(correo){
           },
           error: function (request, status, error) {
               alert(request.responseText);
-          }                  
+          },
+          beforeSend : function(){
+            ajaxLoader($('#correo'), 'aparecer');
+          },
+          complete : function(){
+            ajaxLoader($('#correo'), 'desaparecer');
+          }                 
       })
   }
   return value;
