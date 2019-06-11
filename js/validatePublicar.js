@@ -22,7 +22,13 @@ $(document).ready(function(){
               confirmButtonText: 'ACEPTAR',
               animation: true
             });                        
-          }                  
+          },
+          beforeSend : function(){
+            ajaxLoader($('#planesSelect'), 'aparecer');
+            },
+            complete : function(){
+                ajaxLoader($('#planesSelect'), 'desaparecer');
+            }           
         })
       };
 
@@ -130,7 +136,13 @@ if($('#provinciaOf').length){
               confirmButtonText: 'ACEPTAR',
               animation: true
             });            
-          }                  
+          },
+          beforeSend : function(){
+            ajaxLoader($('#provinciaOf'), 'aparecer');
+            },
+            complete : function(){
+                ajaxLoader($('#provinciaOf'), 'desaparecer');
+            }                
         })
       }
     });
@@ -1112,7 +1124,13 @@ $('#planesSelect').on('change', function(){
           },
           error: function (request, status, error) {
             alert(request.responseText);
-          }                  
+          },
+          beforeSend : function(){
+            ajaxLoader($('#planesSelect'), 'aparecer');
+            },
+            complete : function(){
+                ajaxLoader($('#planesSelect'), 'desaparecer');
+            }                 
         })
       }   
 });

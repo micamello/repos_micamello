@@ -67,7 +67,6 @@
 <input type="hidden" id="iso" value="<?php echo SUCURSAL_ISO; ?>">
 
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/jquery-3.0.0.js"></script>
-<script src="<?php echo PUERTO."://".HOST;?>/js/spinMic.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/vendor/bootstrap.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/assets/js/main.js"></script>
 <script src="<?php echo PUERTO."://".HOST;?>/js/notificaciones.js" type="text/javascript"></script>
