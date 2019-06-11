@@ -407,6 +407,10 @@ class Controlador_Subempresa extends Controlador_Base
             }else{
                 $var1 = $_POST["num_post"];
 
+                if($var1 == ''){
+                    $var1 = 0;
+                }
+
                 if(isset($_POST["post"])){
                     $post = $_POST["post"];
                 }else{
@@ -438,6 +442,10 @@ class Controlador_Subempresa extends Controlador_Base
                 $numAccesos = 0;
             }else{
                 $var3 = $_POST["num_accesos"];
+
+                if($var3 == ''){
+                    $var3 = 0;
+                }
 
                 if(isset($_POST["acces"])){
                     $acces = $_POST["acces"];
