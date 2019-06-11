@@ -139,14 +139,18 @@
 								<div class="errorContainer"></div>
 								<select class="form-control" name="area_select[]" id="area_select" multiple>
 				       	<?php 
+				       	// Utils::log("ederederedereder:". print_r($_POST['area_select'], true));
 			                $i = 0;                
 			                if(!empty($areasSubareas) && is_array($areasSubareas)){
 			                  foreach ($areasSubareas as $area) {
-			                  	
+			                  	$selected = "";
+			                  	// Utils::log("area: ".print_r($area));
 			                    if($i != $area['id_area']){
-			                    	foreach ($_POST['area_select'] as $key => $value) {
+			                    	if(isset($_POST['area_select'])){
+			                    		foreach ($_POST['area_select'] as $key => $value) {
 			                    		$selected = "";
-			                    		if($value == $area['id_area']){$selected = "selected = 'selected'"; break;}
+				                    		if($value == $area['id_area']){$selected = "selected = 'selected'"; break;}
+				                    	}
 			                    	}
 			                      echo "<option ".$selected." value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
 			                        $i = $area['id_area'];
@@ -168,10 +172,12 @@
 				                          foreach ($areasSubareas as $area) {
 				                          	$selected = "";
 				                            if($j != $area['id_subareas']){
-				                            	foreach ($_POST['subareasCand'] as $key => $value) {
-						                    		$selected = "";
-						                    		if($value == $area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']){$selected = "selected = 'selected'"; break;}
-						                    	}
+				                            	if(isset($_POST['subareasCand'])){
+				                            		foreach ($_POST['subareasCand'] as $key => $value) {
+							                    		$selected = "";
+							                    		if($value == $area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']){$selected = "selected = 'selected'"; break;}
+							                    	}
+				                            	}
 				                              echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
 				                            }
 				                          }

@@ -126,8 +126,8 @@ class Controlador_Publicar extends Controlador_Base {
             $emailBody = "Se debe revisar una oferta: <br><br>Id oferta: ".$datosRetorno['id']."<br>Título de la oferta: ".$datosRetorno['titulo'];
             Utils::envioCorreo($value, 'Se ha registrado una oferta', $emailBody);
           }
-
-          $_SESSION['mostrar_exito'] = 'Su oferta se ha publicado correctamente'; 
+          $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
+          $_SESSION['mostrar_exito'] = 'La oferta fue registrada exitosamente, debe esperar un m\u00E1ximo de '.$tiempo.' horas para que el administrador apruebe la oferta.'; 
           $url = "vacantes/";
           Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
          }

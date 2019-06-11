@@ -171,7 +171,7 @@ if($navegador == 'MSIE'){ ?>
 
       <ul class="nav navbar-nav navbar-left">
             <li>
-              <a class="navbar-brand" id="img-logo"  href="<?php echo PUERTO.'://'.HOST; ?>">
+              <a class="navbar-brand" id="img-logo" style="margin-left: 0px" href="<?php echo PUERTO.'://'.HOST; ?>">
                 <img class="logo" id="logo-1" style="padding: 0px; width: auto;" src="<?php echo PUERTO.'://'.HOST.'/imagenes/sucursal/logos/'.SUCURSAL_ID.'.'.SUCURSAL_LOGO;?>" alt="micamellologo">
                 <div class="css-typing hidden-md hidden-lg"><p id="letra-tip">Innovamos para avanzar</p></div>
               </a>
@@ -207,11 +207,11 @@ if($navegador == 'MSIE'){ ?>
          <?php if (isset($menu["submenu"])){ ?>                            
           <li class="dropdown" id="seccion_user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-              <?php echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']).(isset($_SESSION['mfo_datos']['usuario']['apellidos']) ? ' '.utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']) : ''); ?>&nbsp;&nbsp;&nbsp;<!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-              <i class="fa fa-caret-down">
+              <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
+              
                 <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                 echo "usericon_safari";
-              } ?>" width="35" height="35"></i>
+              } ?>" width="35" height="35">&nbsp;<i class="fa fa-caret-down"></i>
               <ul class="dropdown-menu">
                 <?php foreach($menu["submenu"] as $submenu){ ?>  
                   <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>
@@ -222,16 +222,16 @@ if($navegador == 'MSIE'){ ?>
         <?php } ?>
       <?php } ?>
       <li class="esp-men">
-          <a id="regEmpMic" href="<?php echo FACEBOOK; ?>" target="_blank"><i class="social fa fa-facebook"></i></a>
+          <a id="regEmpMic" style="padding-left:0px" href="<?php echo FACEBOOK; ?>" target="_blank"><i class="social fa fa-facebook"></i></a>
         </li>
         <li class="esp-men">
-          <a id="regEmpMic" href="<?php echo TWITTER; ?>" target="_blank"><i class="social fa fa-twitter"></i></a>
+          <a id="regEmpMic" style="padding-left:0px" href="<?php echo TWITTER; ?>" target="_blank"><i class="social fa fa-twitter"></i></a>
         </li>
         <li class="esp-men">
-          <a id="regEmpMic" href="<?php echo INSTAGRAM; ?>" target="_blank"><i class="social fa fa-instagram"></i></a>
+          <a id="regEmpMic" style="padding-left:0px" href="<?php echo INSTAGRAM; ?>" target="_blank"><i class="social fa fa-instagram"></i></a>
         </li>
         <li class="esp-men">
-          <a id="regEmpMic" href="<?php echo LINKEDIN; ?>" target="_blank"><i class="social fa fa-linkedin"></i></a>
+          <a id="regEmpMic" style="padding-left:0px" href="<?php echo LINKEDIN; ?>" target="_blank"><i class="social fa fa-linkedin"></i></a>
         </li>
       </ul>
     </div> 

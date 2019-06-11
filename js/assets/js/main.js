@@ -10,9 +10,9 @@ function navegador(){
   }
 }
 
-$(window).on('resize', function(){
-  console.log($(window).width());
-});
+// $(window).on('resize', function(){
+//   console.log($(window).width());
+// });
 // $('form').on("submit", function (e) {
 //   $('.loaderMic').css('display', 'block');
 // });
@@ -77,14 +77,9 @@ jQuery(document).ready(function ($) {
   // console.log();
   if(window.location.pathname.split("/")[3] != "exito"){
     $('body').css('overflow', 'auto');
-    $('.loaderMic').delay('2').fadeOut( "fast");
+    $('.loaderMic').delay('500').fadeOut( "fast");
   }
-
   eventos();
-
-
-
-
     // bannerTel();
 //for Preloader
 
@@ -653,6 +648,12 @@ function searchAjax(obj,tipo_dni){
       },
       error: function (request, status, error) {
           console.log(request.responseText);
+      },
+      beforeSend : function(){
+        ajaxLoader($('#provincia'), 'aparecer');
+      },
+      complete : function(){
+        ajaxLoader($('#provincia'), 'desaparecer');
       }
     });
   }
@@ -679,3 +680,42 @@ $(window).resize(function(){
   // bannerTel();
 });
 
+
+function ajaxLoader(obj, action){
+  // console.log(obj[0].tagName != 'SELECT');
+  if(obj[0].tagName != 'SELECT'){
+    if(action == 'aparecer'){
+      if(obj.siblings('div.contE').length){
+        obj.siblings('div.contE').remove();
+      }
+      obj.after(' <div style="position: relative;" class="contE"><i class="fa fa-spinner fa-spin fa-2x" style="position: absolute; right: 5px; top: -41px;"></i></div>');
+    }
+    else if(action == 'desaparecer'){
+      if(obj.siblings('div.contE').length){
+        obj.siblings('div.contE').delay('500').fadeOut( "fast", function(){
+          obj.siblings('div.contE').remove();
+        });
+      }
+    }
+  }
+  else{
+    // console.log("esun sleect");
+    
+    if(action == 'aparecer'){
+      obj.attr('disabled', true);
+        if(obj.siblings('div.contE').length){
+          obj.siblings('div.contE').remove();
+        }
+        obj.after(' <div style="position: relative;" class="contE"><i class="fa fa-spinner fa-spin fa-2x" style="position: absolute; right: 25px; top: -31px;"></i></div>');
+    }
+    else if(action == 'desaparecer'){
+      if(obj.siblings('div.contE').length){
+        obj.siblings('div.contE').delay('500').fadeOut( "fast", function(){
+          obj.siblings('div.contE').remove();
+          obj.attr('disabled', false);
+        });
+      }
+    }
+
+  }
+}

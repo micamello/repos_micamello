@@ -56,7 +56,7 @@ $.fn.multiple_select = function(options){
     // numero.textContent+= " (máx: "+settings.items+")";
     // console.log(this.siblings('label').text());
     if(this.siblings('label').text().indexOf('numero') >= 0){
-        this.siblings('label').text(this.siblings('label').text().replace('numero', settings.items));
+        this.siblings('label').html(this.siblings('label').html().replace('numero', settings.items));
     }
 
     // inicializar si tiene dependencia
@@ -247,7 +247,7 @@ function inicializarDependencia(obj){
         modalSelectedSpace.append(modalCode);
 
         if($('#'+id_panel).siblings('label').text().indexOf('numero') >= 0){
-            $('#'+id_panel).siblings('label').text($('#'+id_panel).siblings('label').text().replace('numero', settings.dependence.items));
+            $('#'+id_panel).siblings('label').html($('#'+id_panel).siblings('label').html().replace('numero', settings.dependence.items));
         }
     }
 }

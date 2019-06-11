@@ -121,7 +121,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 	                                    <div class="col-md-6">
 	                                        <div id="seccion_nombre" class="form-group">
-	                                            <label for="nombres"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nombres <?php }else{ ?> Nombre de la empresa<?php } ?><span title="Este campo es obligatorio" class="no">*</span></label><div id="err_nom" class="help-block with-errors"></div>
+	                                            <label for="nombres"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nombres <?php }else{ ?> Nombre de la empresa<?php } ?><span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_nom" class="help-block with-errors"></div>
 
 	                                			<input class="form-control" type="text" id="nombres" name="nombres" maxlength="100" value="<?php if(isset($data['nombres'])){ echo utf8_encode($data['nombres']); } else{ echo utf8_encode($_SESSION['mfo_datos']['usuario']['nombres']); } ?>" pattern="[a-z A-ZñÑáéíóúÁÉÍÓÚ]+"  onkeyup="validarFormulario(false)" />
 	                                        </div>
@@ -130,7 +130,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 		                                    <div class="col-md-6">
 		                                        <div id="seccion_apellido" class="form-group">
-		                                            <label for="apellidos">Apellidos<span title="Este campo es obligatorio" class="no">*</span></label><div id="err_ape" class="help-block with-errors"></div>
+		                                            <label for="apellidos">Apellidos<span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_ape" class="help-block with-errors"></div>
 
 		                                			<input class="form-control noautofill" type="text" id="apellidos" name="apellidos" maxlength="100" value="<?php if(isset($data['apellidos'])){ echo utf8_encode($data['apellidos']); } else{ echo utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']); } ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+'  onkeyup="validarFormulario(false)" readonly/>
 		                                        </div>
@@ -166,7 +166,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 	                                		<div class="col-md-6">
 								                <div class="form-group" id="seccion_sector">
-								                  <label>Sector industrial <span class="no"> *</span></label>
+								                  <label>Sector industrial <span class="requerido"> *</span></label>
 								                  <div id="err_sector" class="help-block with-errors"></div>
 								                  <select id="sectorind" name="sectorind" class="form-control">
 								                    <option value="" selected="selected" disabled="disabled">Seleccione una opción</option>
@@ -191,7 +191,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 	                                    <div class="col-md-6">
 		                                    <div class="form-group">
-		                                        <label for="correo">Correo <span title="Este campo es obligatorio" class="no"></span></label><div class="help-block with-errors"></div>
+		                                        <label for="correo">Correo <span title="Este campo es obligatorio" class="requerido"></span></label><div class="help-block with-errors"></div>
 		                                        <input class="form-control" id="correo" type="email" disabled value="<?php if(isset($data['correo'])){ echo $data['correo']; } else{ echo $_SESSION['mfo_datos']['usuario']['correo']; } ?>"/>
 		                                    </div>
 	                                    </div>
@@ -200,7 +200,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 		                                    <div class="col-md-6" style="height: 84px;">
 		                                        <div id="seccion_gen" class="form-group">
-		                                            <label for="genero">G&eacute;nero <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_gen" class="help-block with-errors"></div>
+		                                            <label for="genero">G&eacute;nero <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_gen" class="help-block with-errors"></div>
 		                                            <select id="genero" name="genero" class="form-control"  onchange="validarFormulario(false)" >
 														<option disabled value="0">Seleccione un genero</option>
 				                                    	<?php 
@@ -218,7 +218,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 			                                <div class="clearfix"></div>
 			                                <div class="col-md-6">
 			                                    <div id="mayoria" class="form-group">
-			                                        <label for="mayor_edad">Fecha de Nacimiento<span title="Este campo es obligatorio" class="no">*</span></label><div id="error" class="help-block with-errors"></div>
+			                                        <label for="mayor_edad">Fecha de Nacimiento<span title="Este campo es obligatorio" class="requerido">*</span></label><div id="error" class="help-block with-errors"></div>
 			                                         <input type="text" data-field="date" class="form-control" name="fecha_nacimiento" id="fecha_nacimiento" max="<?php echo date('Y-m-d'); ?>" placeholder="aaaa-mm-dd" value="<?php if(isset($data['fecha_nacimiento'])){ echo $data['fecha_nacimiento']; } else{ echo date('Y-m-d',strtotime($_SESSION['mfo_datos']['usuario']['fecha_nacimiento'])); } ?>" onchange="validarFormulario(false)">
 			                                         <div id="fecha"></div>
 			                                    </div>
@@ -239,7 +239,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 	                                    	<div class="col-md-6">
 											    <div id="seccion_tlf" class="form-group">
-											        <label for="telefono">Celular <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
+											        <label for="telefono">Celular <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
 											        <input class="form-control noautofill" type="text" id="telefono" name="telefono" minlength="10" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>"  onkeyup="validarFormulario(false)" readonly/>
 											    </div>
 											</div>         
@@ -248,7 +248,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 	                                    <div class="col-md-6">
 		                                    <div id="seccion_nac" class="form-group">
-	                                            <label for="nacionalidad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nacionalidad <?php }else{ ?> Pais <?php } ?> <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_nac" class="help-block with-errors"></div>
+	                                            <label for="nacionalidad"><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> Nacionalidad <?php }else{ ?> Pais <?php } ?> <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_nac" class="help-block with-errors"></div>
 	                                            <select class="form-control" name="id_nacionalidad" id="id_nacionalidad"  onchange="validarFormulario(false)" >
 	                                            	<option disabled value="0">Seleccione su opci&oacute;n</option>
 													<?php 
@@ -271,7 +271,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 											<div class="col-md-6">
 											    <div id="seccion_nro" class="form-group">
-											        <label for="nro_trabajadores">N&uacute;mero de Trabajadores <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_nro" class="help-block with-errors"></div>
+											        <label for="nro_trabajadores">N&uacute;mero de Trabajadores <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_nro" class="help-block with-errors"></div>
 											        <select id="nro_trabajadores" name="nro_trabajadores" class="form-control"  onchange="validarFormulario(false)" >
 				                                    	<option disabled selected value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
@@ -289,7 +289,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 											<div class="col-md-4">
 											    <div id="seccion_tlf" class="form-group">
-											        <label for="telefono">Tel&eacute;fono <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
+											        <label for="telefono">Tel&eacute;fono <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_tlf" class="help-block with-errors"></div>
 											        <input class="form-control noautofill" type="text" id="telefono" name="telefono" minlength="9" maxlength="15" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['telefono'])){ echo $data['telefono']; } else{ echo $_SESSION['mfo_datos']['usuario']['telefono']; } ?>"  onkeyup="validarFormulario(false)" readonly/>
 											    </div>
 											</div>
@@ -298,7 +298,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 	                                    
 	                                    <div class="col-md-<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { echo '6'; }else{ echo '4'; } ?>">
 	                                        <div id="seccion_provincia" class="form-group">
-	                                            <label for="provincia">Provincia<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> de Residencia <?php } ?><span title="Este campo es obligatorio" class="no">*</span></label><div id="err_prov" class="help-block with-errors"></div>
+	                                            <label for="provincia">Provincia<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> de Residencia <?php } ?><span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_prov" class="help-block with-errors"></div>
 	                                            <select class="form-control" name="provincia" id="provincia"  onchange="validarFormulario(false)" >
 	                                            	<option disabled value="0">Seleccione una provincia</option>
 													<?php 
@@ -320,7 +320,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 	                                    <div class="col-md-<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { echo '6'; }else{ echo '4'; } ?>">
 	                                        <div id="seccion_ciudad" class="form-group">
-	                                            <label for="ciudad">Ciudad<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> de Residencia <?php } ?><span title="Este campo es obligatorio" class="no">*</span></label><div id="err_ciu" class="help-block with-errors"></div>
+	                                            <label for="ciudad">Ciudad<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?> de Residencia <?php } ?><span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_ciu" class="help-block with-errors"></div>
 	                                            <select id="ciudad" name="ciudad" class="form-control"  onchange="validarFormulario(false)" >
 	                                            <?php 
 	                                            if(!empty($arrciudad)){
@@ -345,14 +345,14 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 	                                    	<div class="col-md-6">
 											    <div id="seccion_tlfCon" class="form-group">
-											        <label for="convencional">Tel&eacute;fono Convencional <span title="Este campo es obligatorio" class="no"></span><span id="opcional">(opcional)</span></label><div id="err_tlfCon" class="help-block with-errors"></div>
+											        <label for="convencional">Tel&eacute;fono Convencional <span title="Este campo es obligatorio" class="requerido"></span><span id="opcional">(opcional)</span></label><div id="err_tlfCon" class="help-block with-errors"></div>
 											        <input class="form-control noautofill" type="text" id="convencional" name="convencional" minlength="9" maxlength="9" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario(false)" readonly/>
 											    </div>
 											</div>
 
 											<div class="col-md-6">
 		                                    	<div id="seccion_civil" class="form-group">
-			                                    	<label for="estado_civil">Estado civil <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_civil" class="help-block with-errors"></div>
+			                                    	<label for="estado_civil">Estado civil <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_civil" class="help-block with-errors"></div>
 				                                    <select id="estado_civil" name="estado_civil" class="form-control"  onchange="validarFormulario()" >
 				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
@@ -371,7 +371,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 		                                    
 		                                    <div class="col-md-6">
 		                                    	<div id="seccion_res" class="form-group">
-			                                    	<label for="residencia">&#191;Puede cambiar de residencia&#63; <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_res" class="help-block with-errors"></div>
+			                                    	<label for="residencia">&#191;Puede cambiar de residencia&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_res" class="help-block with-errors"></div>
 				                                    <select id="residencia" name="residencia" class="form-control"  onchange="validarFormulario(false)" >
 				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
@@ -389,7 +389,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 											<div class="col-md-6">
 		                                    	<div id="seccion_trab" class="form-group">
-			                                    	<label for="tiene_trabajo">Situaci&oacute;n Laboral <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_trab" class="help-block with-errors"></div>
+			                                    	<label for="tiene_trabajo">Situaci&oacute;n Laboral <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_trab" class="help-block with-errors"></div>
 				                                    <select id="tiene_trabajo" name="tiene_trabajo" class="form-control"  onchange="validarFormulario(false)" >
 				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
@@ -407,7 +407,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 											<div class="col-md-6">
 		                                    	<div id="seccion_via" class="form-group">
-			                                    	<label for="viajar">&#191;Puede viajar&#63; <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_via" class="help-block with-errors"></div>
+			                                    	<label for="viajar">&#191;Puede viajar&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_via" class="help-block with-errors"></div>
 				                                    <select id="viajar" name="viajar" class="form-control"  onchange="validarFormulario(false)" >
 				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
@@ -425,7 +425,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 											<div class="col-md-6">
 		                                    	<div id="seccion_lic" class="form-group">
-			                                    	<label for="licencia">Tipo de Licencia <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_lic" class="help-block with-errors"></div>
+			                                    	<label for="licencia">Tipo de Licencia <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_lic" class="help-block with-errors"></div>
 				                                    <select id="licencia" name="licencia" class="form-control"  onchange="validarFormulario(false)" >
 				                                    	<option selected value="0">No poseo</option>
 				                                    	<?php 
@@ -444,7 +444,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 	 										
 	 										<div class="col-md-6">
 		                                    	<div id="seccion_dis" class="form-group">
-			                                    	<label for="discapacidad">Discapacidad <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_dis" class="help-block with-errors"></div>
+			                                    	<label for="discapacidad">Discapacidad <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_dis" class="help-block with-errors"></div>
 				                                    <select id="discapacidad" name="discapacidad" class="form-control"  onchange="validarFormulario(false)" >
 				                                    	<option disabled value="-1">Tiene alguna discapacidad&#63;</option>
 				                                    	<?php 
@@ -462,7 +462,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 		                                    <div class="col-md-12" >
 		                                        <div id="seccion_esc" class="form-group">
-		                                            <label for="escolaridad">&Uacute;ltimo estudio realizado <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_esc" class="help-block with-errors"></div>
+		                                            <label for="escolaridad">&Uacute;ltimo estudio realizado <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_esc" class="help-block with-errors"></div>
 		                                            <select id="escolaridad" name="escolaridad" class="form-control" onchange="ocultarCampos(); validarFormulario(false);"style="padding-left: 0px;"  >
 		                                            	<option disabled value="0">Seleccione una opci&oacute;n</option>
 														<?php 
@@ -482,7 +482,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 											<div class="col-md-6 depende" hidden>
 		                                        <div id="seccion_estudio" class="form-group">
-		                                            <label for="lugar_estudio">&#191;Estudi&oacute; en el extranjero&#63; <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_estudio" class="help-block with-errors"></div>
+		                                            <label for="lugar_estudio">&#191;Estudi&oacute; en el extranjero&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_estudio" class="help-block with-errors"></div>
 		                                            <select class="form-control" id="lugar_estudio" name="lugar_estudio" onchange='mostrarUni(); validarFormulario(false);'  >
 		                                            	<option value="-1" selected="selected">Seleccione su opci&oacute;n</option>
 
@@ -506,7 +506,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 		                                    <div hidden class="col-md-6 depende">
 		                                        <div id="seccion_univ" class="form-group">
-		                                            <label for="universidad">Universidad <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_univ" class="help-block with-errors"></div>
+		                                            <label for="universidad">Universidad <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_univ" class="help-block with-errors"></div>
 		                                            <select class="form-control" id="universidad" name="universidad"  onchange="validarFormulario(false)" >
 		                                            	<option disabled selected value="0">Seleccione su opci&oacute;n</option>
 														<?php 
@@ -525,9 +525,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 		                                        </div>
 		                                    </div>
 
-		                                    <div class="col-md-6">
+		                                    <div class="col-md-12 col-sm-12 col-lg-6">
 												<div class="form-group" id="seccion_area">
-													<label>&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando máximo numero áreas de su inter&eacute;s<span title="Este campo es obligatorio" class="no"> *</span></label>													
+													<label style="font-size: 13px;">&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando máximo numero áreas de su inter&eacute;s<span title="Este campo es obligatorio" class="requerido"> *</span></label>													
 													<div id="err_area" class="help-block with-errors"></div>
 
 													<select class="form-control" id="area" name="area[]" multiple="multiple">
@@ -554,11 +554,11 @@ $_SESSION['mostrar_error'] = ""; ?>
 												</div>
 											</div>
 
-											<div class="col-md-6">
+											<div class="col-md-12 col-sm-12 col-lg-6">
 												<div class="form-group">
-													<label>Sub-Áreas <span title="Este campo es obligatorio" class="no">*</span></label>
+													<label style="font-size: 13px;">Sub-Áreas <span title="Este campo es obligatorio" class="requerido">*</span></label>
 													<div class="hidden-xs hidden-sm">
-														<br><div style="padding-top: 7px;"></div>
+														<div style="padding-top: 17px;"></div>
 													</div>
 													<div class="help-block with-errors"></div>
 													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple" onchange="validarFormulario(false);">
@@ -691,7 +691,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 								           	 	<!-- Empresas contacto -->
 									            <div class="col-md-6" id="group_nombre_contact">
 									              <div id="seccion_nomCon" class="form-group">
-									                <label class="text-center">Nombres</label><span title="Este campo es obligatorio" class="no">*</span><div id="err_nomCon" class="help-block with-errors"></div>
+									                <label class="text-center">Nombres</label><span title="Este campo es obligatorio" class="requerido">*</span><div id="err_nomCon" class="help-block with-errors"></div>
 
 									                <input type="text" name="nombre_contact" id="nombre_contact" maxlength="100" value="<?php echo (isset($data['nombres_contacto'])) ? utf8_encode($data['nombres_contacto']) : utf8_encode($_SESSION['mfo_datos']['usuario']['nombres_contacto']); ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Juan David" class="form-control" onkeyup="validarFormulario(false)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?> >
 									              </div>
@@ -699,7 +699,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 									            <div class="col-md-6" id="group_apell_contact">
 									              <div id="seccion_apeCon" class="form-group">
-									                <label class="text-center">Apellidos</label><span title="Este campo es obligatorio" class="no">*</span><div id="err_apeCon" class="help-block with-errors"></div>
+									                <label class="text-center">Apellidos</label><span title="Este campo es obligatorio" class="requerido">*</span><div id="err_apeCon" class="help-block with-errors"></div>
 
 									                <input type="text" name="apellido_contact" id="apellido_contact" maxlength="100" value="<?php echo (isset($data['apellidos_contacto'])) ? utf8_encode($data['apellidos_contacto']) : utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos_contacto']); ?>" pattern='[a-z A-ZñÑáéíóúÁÉÍÓÚ]+' placeholder="Ejemplo: Ortíz Zambrano" class="form-control" onkeyup="validarFormulario(false)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?>>
 									              </div>
@@ -707,7 +707,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 									            <div class="col-md-4" id="group_num1_contact">
 									              <div id="seccion_tlfCel" class="form-group">
-									                <label class="text-center">Celular</label><span title="Este campo es obligatorio" class="no">*</span><div id="err_tlfCel" class="help-block with-errors"></div>
+									                <label class="text-center">Celular</label><span title="Este campo es obligatorio" class="requerido">*</span><div id="err_tlfCel" class="help-block with-errors"></div>
 
 									                <input type="text" name="tel_one_contact" id="tel_one_contact" minlength="6" maxlength="15" value="<?php echo (isset($data['tel_one_contact'])) ? $data['tel_one_contact'] : $_SESSION['mfo_datos']['usuario']['telefono1']; ?>" readonly class="form-control noautofill" pattern='[0-9]+' onkeyup="validarFormulario(false)" onkeydown="return validaNumeros(event)"  <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { echo ''; } ?>>
 									              </div>
@@ -798,7 +798,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 		      	<div class="col-md-12">
 			        <div class="col-md-6">
 		                <div id="seccion_clave" class="form-group">
-		                  <label class="text-center">Contrase&ntilde;a <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_clave" class="help-block with-errors"></div>
+		                  <label class="text-center">Contrase&ntilde;a <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_clave" class="help-block with-errors"></div>
 		                  <div class="input-group">
 		                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
 		                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control noautofill" onkeyup="validarClave()" readonly>
@@ -807,7 +807,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 		            </div>
 		            <div class="col-md-6">
 		              <div id="seccion_clave1" class="form-group">
-		                  <label class="text-center">Confirmar Contrase&ntilde;a <span title="Este campo es obligatorio" class="no">*</span></label><div id="err_clave1" class="help-block with-errors"></div>
+		                  <label class="text-center">Confirmar Contrase&ntilde;a <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_clave1" class="help-block with-errors"></div>
 		                  <div class="input-group">
 		                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
 		                    <input id="password_two" name="password_two" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Ingrese la misma contraseña' : '');" placeholder="Verificar contraseña" class="form-control" onkeyup="validarClave()" >
