@@ -594,10 +594,6 @@ function ocultarCampos(){
 function enviarFormulario(){
     var estado = validarFormulario(true);    
 
-
-    var file = document.getElementById('btnDescargarHV').value;
-    if(estado == '' && file != ''){
-
   if($('#tipo_usuario').val() == 2){
     
     if(estado == ''){
