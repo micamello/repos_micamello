@@ -593,30 +593,25 @@ function ocultarCampos(){
 
 function enviarFormulario(){
     var estado = validarFormulario(true);    
-
-
-    var file = document.getElementById('btnDescargarHV').value;
-    if(estado == '' && file != ''){
-
-  if($('#tipo_usuario').val() == 2){
-    
-    if(estado == ''){
-        $('.loaderMic').css('display', 'block');
-        document.form_editarPerfil.submit();
-    }
-    else if(estado != ''){
-      //mostrarERRORES
-      Swal.fire({
-        // title: '¡Advertencia!',        
-        html: 'Por favor complete los campos con (*)<br>',
-        imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-        imageWidth: 75,
-        confirmButtonText: 'ACEPTAR',
-        animation: true
-      });      
-    }
-    
-  }else if($('#tipo_usuario').val() == 1){
+    if($('#tipo_usuario').val() == 2){
+      
+      if(estado == ''){
+          $('.loaderMic').css('display', 'block');
+          document.form_editarPerfil.submit();
+      }
+      else if(estado != ''){
+        //mostrarERRORES
+        Swal.fire({
+          // title: '¡Advertencia!',        
+          html: 'Por favor complete los campos con (*)<br>',
+          imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+          imageWidth: 75,
+          confirmButtonText: 'ACEPTAR',
+          animation: true
+        });      
+      }
+      
+    }else if($('#tipo_usuario').val() == 1){
       var file = document.getElementById('btnDescargarHV').value;
      if(estado == '' && file != ''){
           $('.loaderMic').css('display', 'block');
@@ -655,7 +650,6 @@ function enviarFormulario(){
             });
       }
     }
-
 }
 
 function validarDni(){

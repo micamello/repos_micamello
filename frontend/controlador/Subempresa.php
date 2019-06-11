@@ -299,8 +299,8 @@ class Controlador_Subempresa extends Controlador_Base
             $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year")); 
             $default_city = 1;     
 
-            $username = str_replace(" ", "",strtolower($data['name_user']));
-            $username = Utils::generarUsername(strtolower(Utils::no_carac(utf8_decode($username))));
+            $username = explode(" ", strtolower($data['name_user']));
+            $username = Utils::generarUsername(strtolower(Utils::no_carac(utf8_decode($username[0]))));
             $password = Utils::generarPassword();
 
             $usuario_login = array("tipo_usuario"=>Modelo_Usuario::EMPRESA, "username"=>$username, "password"=>$password, "correo"=>$data['correo'], "dni"=>$data['dni'], "tipo_registro"=>Modelo_Usuario::PRE_REG);
@@ -325,9 +325,7 @@ class Controlador_Subempresa extends Controlador_Base
                 throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta o el correo no existe, intente nuevamente");
             }
 
-            $contactoEmpresa = array("nombreConEmp"=>$data['nombres_contact'],
-                                            "apellidoConEmp"=>$data['apellidos_contact'],
-                                            "tel1ConEmp"=>$data['tel_one_contact']);
+            $contactoEmpresa = array("nombreConEmp"=>$data['nombre_contact'],"apellidoConEmp"=>$data['apellido_contact'],"tel1ConEmp"=>$data['tel_one_contact']);
             if(!empty($data['tel_two_contact'])){
                 $contactoEmpresa["tel2ConEmp"] = $data['tel_two_contact'];
             }
@@ -497,7 +495,7 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function correoAvisoCreacion($correo,$nombres,$username,$password){
 
-        $nombre_mostrar = utf8_encode($nombres);  
+        $nombre_mostrar = ucfirst($nombres);  
         $enlace = "<a href='".PUERTO."://".HOST."/desarrollov3/login/'>click aqu&iacute;</a>";
 
         $asunto = 'Creación de Subempresa';
