@@ -699,22 +699,19 @@ function existeCorreo(correo){
 
   var value = "";
   var puerto_host = $('#puerto_host').val();
-  if (correo != "") {
+  if(correo != ""){
       $.ajax({
           type: "GET",
           url: puerto_host+"/index.php?mostrar=inicio&opcion=buscaCorreo&correo="+correo,
           dataType: 'json',
           async: false,
-          before:{
-            
-          }
           success:function(data){
               value = data.respcorreo;
           },
           error: function (request, status, error) {
               alert(request.responseText);
           }                  
-      })
+      });
   }
   return value;
 }
