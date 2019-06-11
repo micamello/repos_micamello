@@ -39,7 +39,7 @@ class Controlador_Subempresa extends Controlador_Base
                 $data_emp = Modelo_Usuario::consultarInfoEmpresa($idEmpresa);
                 $breadcrumbs = array();
                 $breadcrumbs['adminEmpresas/'] = "Administración de cuenta";
-                $breadcrumbs['infoEmpresa'] = 'Empresa ('.$data_emp['nombres'].')';
+                $breadcrumbs['infoEmpresa'] = 'Empresa ('.utf8_encode($data_emp['nombres']).')';
 
                 $tags = array("breadcrumbs"=>$breadcrumbs,
                     "datosEmpresa"=>$data_emp,
@@ -332,7 +332,7 @@ class Controlador_Subempresa extends Controlador_Base
                 $contactoEmpresa["tel2ConEmp"] = $data['tel_two_contact'];
             }
 
-            if(!Modelo_ContactoEmpresa::crearContactoEmpresa($data, $id_empresa)){
+            if(!Modelo_ContactoEmpresa::crearContactoEmpresa($contactoEmpresa, $id_empresa)){
                 throw new Exception("Ha ocurrido un error al crear contacto de la empresa, intente nuevamente");
             }
 
@@ -500,7 +500,7 @@ class Controlador_Subempresa extends Controlador_Base
         $nombre_mostrar = ucfirst(utf8_encode($nombres));  
         $enlace = "<a href='".PUERTO."://".HOST."/desarrollov3/login/'>click aqu&iacute;</a>";
 
-        $asunto = 'Creaci&oacute;n de Subempresa';
+        $asunto = 'Creación de Subempresa';
         $email_body = Modelo_TemplateEmail::obtieneHTML("CREACION_EMPRESA");
         $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
         $email_body = str_replace("%USUARIO%", $username, $email_body);   

@@ -10,12 +10,12 @@ class Modelo_ContactoEmpresa{
     }
 
     $result = $GLOBALS['db']->insert('mfo_contactoempresa',
-                                    array(
-                                          'id_empresa'=>$user_id,
-                                          'nombres'=>$datoContacto['nombreConEmp'],
-                                          'apellidos'=>$datoContacto['apellidoConEmp'],
-                                          'telefono1'=>$datoContacto['tel1ConEmp'],
-                                          'telefono2'=>$datoContacto['tel2ConEmp']));
+      array(
+        'id_empresa'=>$user_id,
+        'nombres'=>$datoContacto['nombreConEmp'],
+        'apellidos'=>$datoContacto['apellidoConEmp'],
+        'telefono1'=>$datoContacto['tel1ConEmp'],
+        'telefono2'=>$datoContacto['tel2ConEmp']));
     return $result;
   }
 
