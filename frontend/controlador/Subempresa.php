@@ -325,11 +325,14 @@ class Controlador_Subempresa extends Controlador_Base
                 throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta o el correo no existe, intente nuevamente");
             }
 
-            $contactoEmpresa = array("nombreConEmp"=>$data['nombre_contact'],"apellidoConEmp"=>$data['apellido_contact'],"tel1ConEmp"=>$data['tel_one_contact']);
+            $contactoEmpresa = array("nombreConEmp"=>$data['nombre_contact'],
+                                     "apellidoConEmp"=>$data['apellido_contact'],
+                                     "tel1ConEmp"=>$data['tel_one_contact']);
+
             if(!empty($data['tel_two_contact'])){
                 $contactoEmpresa["tel2ConEmp"] = $data['tel_two_contact'];
             }
-
+            
             if(!Modelo_ContactoEmpresa::crearContactoEmpresa($contactoEmpresa, $id_empresa)){
                 throw new Exception("Ha ocurrido un error al crear contacto de la empresa, intente nuevamente");
             }
@@ -495,7 +498,11 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function correoAvisoCreacion($correo,$nombres,$username,$password){
 
+<<<<<<< HEAD
         $nombre_mostrar = ucfirst($nombres);  
+=======
+        $nombre_mostrar = $nombres;  
+>>>>>>> FF
         $enlace = "<a href='".PUERTO."://".HOST."/desarrollov3/login/'>click aqu&iacute;</a>";
 
         $asunto = 'Creación de Subempresa';
