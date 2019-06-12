@@ -497,12 +497,7 @@ class Controlador_Subempresa extends Controlador_Base
     }
 
     public function correoAvisoCreacion($correo,$nombres,$username,$password){
-
-<<<<<<< HEAD
         $nombre_mostrar = ucfirst($nombres);  
-=======
-        $nombre_mostrar = $nombres;  
->>>>>>> FF
         $enlace = "<a href='".PUERTO."://".HOST."/desarrollov3/login/'>click aqu&iacute;</a>";
 
         $asunto = 'Creación de Subempresa';
