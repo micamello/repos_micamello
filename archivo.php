@@ -77,7 +77,7 @@ switch ($carpeta){
 	  $disposition = 'inline';
 	  $ruta = PATH_PROFILE.$archivo.'-thumb.jpg';	  
 	  $resultado = file_exists($ruta);	  	  
-	  if (!$resultado){
+	  if (!$resultado){	  	
 	  	$ruta = FRONTEND_RUTA.'imagenes/user.png';
 	  }	  	  
 	  $archivo = $archivo.'-thumb.jpg';
@@ -95,7 +95,6 @@ switch ($carpeta){
 		$resultado = file_exists($ruta);	  
 		$archivo = $archivo.'.'.$infoHv['formato'];
 
-		Utils::log($archivo);
 		$mostrar = (!$resultado) ? false : true;		
 	break;
 }
