@@ -143,11 +143,26 @@ class Controlador_Plan extends Controlador_Base {
       if (!isset($infoplan["id_plan"]) || empty($infoplan["id_plan"])){
         throw new Exception("El plan seleccionado no esta activo o no esta disponible");
       }      
-            
-      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1)){ 
-        if ($this->existePlan($infoplan["id_plan"])){
-          throw new Exception("Ya esta subscrito al plan seleccionado");   
-        }                 
+      //si es una empresa hija      
+      $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);  
+      $gratuitos = 0;
+      if (!empty($nivel) && isset($_SESSION['mfo_datos']['planes'])){                  
+        foreach($_SESSION['mfo_datos']['planes'] as $planhija){
+          if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
+            $gratuitos = 0;
+          }
+          else{
+            $gratuitos = 1;
+          }
+        }        
+      }      
+      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1) ||
+          (!empty($nivel) && $gratuitos == 0)){ 
+        if ($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
+          if ($this->existePlan($infoplan["id_plan"])){
+            throw new Exception("Ya esta subscrito al plan seleccionado");   
+          }                 
+        }
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"])){
           throw new Exception("Error al registrar la subscripci\u00F3n, por favor intente denuevo");   
         }          
@@ -164,17 +179,46 @@ class Controlador_Plan extends Controlador_Base {
 
       else{                
         //presenta metodos de pago
-        $tags["plan"] = $infoplan;
+        $tags["plan"] = $infoplan;        
         //datos para payme
-        //$precio = $infoplan["costo"];
-        $decimal = strpos($infoplan["costo"], ".");        
-        $precio = ($decimal === false) ? $infoplan["costo"]."00" : str_replace(".","",$infoplan["costo"]);
+        //$precio = $infoplan["costo"]; 
+        $infoplan["costo"] = round($infoplan["costo"],2);       
+        $decimal = strpos($infoplan["costo"], ".");                
+        if ($decimal === false){
+          $precio = $infoplan["costo"]."00";
+        }
+        else{
+          $vldecimal = str_replace(".","",strstr($infoplan["costo"], "."));
+          $vldecimal = str_pad($vldecimal,2,"0",STR_PAD_RIGHT);
+          $vlentero = strstr($infoplan["costo"], ".",true);
+          $precio = (!empty($vlentero)) ? $vlentero.$vldecimal : $vldecimal;        
+        }
+
         $taxMontoGravaIva = round($infoplan["costo"] / GRAVAIVA,2);
         $taxMontoIVA = round($infoplan["costo"] - $taxMontoGravaIva,2);
-        $decimal = strpos($taxMontoGravaIva, ".");  
-        $taxMontoGravaIva = ($decimal === false) ? $taxMontoGravaIva."00" : str_replace(".","",$taxMontoGravaIva);
+        $decimal = strpos($taxMontoGravaIva, ".");
+        if ($decimal === false){
+          $taxMontoGravaIva = $taxMontoGravaIva."00";
+        }
+        else{
+          $vldecimal = str_replace(".","",strstr($taxMontoGravaIva, "."));
+          $vldecimal = str_pad($vldecimal,2,"0",STR_PAD_RIGHT);
+          $vlentero = strstr($taxMontoGravaIva, ".",true);
+          $taxMontoGravaIva = (!empty($vlentero)) ? $vlentero.$vldecimal : $vldecimal;        
+        }
+        //$taxMontoGravaIva = ($decimal === false) ? $taxMontoGravaIva."00" : str_replace(".","",$taxMontoGravaIva);
+
         $decimal = strpos($taxMontoIVA, ".");  
-        $taxMontoIVA = ($decimal === false) ? $taxMontoIVA."00" : str_replace(".","",$taxMontoIVA);
+        if ($decimal === false){
+          $taxMontoIVA = $taxMontoIVA."00";
+        }
+        else{
+          $vldecimal = str_replace(".","",strstr($taxMontoIVA, "."));
+          $vldecimal = str_pad($vldecimal,2,"0",STR_PAD_RIGHT);
+          $vlentero = strstr($taxMontoIVA, ".",true);
+          $taxMontoIVA = (!empty($vlentero)) ? $vlentero.$vldecimal : $vldecimal;        
+        }
+        //$taxMontoIVA = ($decimal === false) ? $taxMontoIVA."00" : str_replace(".","",$taxMontoIVA);
         $tags["precio"] = $precio;
         $tags["taxMontoGravaIva"] = $taxMontoGravaIva;
         $tags["taxMontoIVA"] = $taxMontoIVA;
@@ -184,8 +228,8 @@ class Controlador_Plan extends Controlador_Base {
                                                        $tags["purchaseOperationNumber"] . 
                                                        $precio . 
                                                        PAYME_CURRENCY_CODE . 
-                                                       PAYME_SECRET_KEY, 'sha512');   
-              
+                                                       PAYME_SECRET_KEY, 'sha512'); 
+        
         $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
         //datos para transferencia bancaria
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          

@@ -66,13 +66,13 @@
 							<div align="left">
 								<div class="col-md-6">
 									<div class="contentData">
-										<h5><b>Nombres de contacto: </b><?php echo $datosEmpresa['nombres_contacto']; ?></h5>
+										<h5><b>Nombres de contacto: </b><?php echo utf8_encode($datosEmpresa['nombres_contacto']); ?></h5>
 									</div>
 								</div>
 
 								<div class="col-md-6">
 									<div class="contentData">
-										<h5><b>Apellidos de contacto: </b><?php echo $datosEmpresa['apellidos_contacto']; ?></h5>
+										<h5><b>Apellidos de contacto: </b><?php echo utf8_encode($datosEmpresa['apellidos_contacto']); ?></h5>
 									</div>
 								</div>
 

@@ -792,15 +792,10 @@ class Controlador_Aspirante extends Controlador_Base
                             }else{
                                 $a2 = array();
                             }
-                            //print_r($usuarios_con_accesos); 
-                            //print_r($a1); 
+
                             //La diferencia de los usuarios en $usuariosTestIncompletos y $usuariosEnviosPrevios permitirá saber a cuales usuarios deben enviarsele el correo para que completen el test
                             $diff = array_diff($a1,$a2);
-
-                            //print_r($diff); //exit;
-
-                            //print_r($usuarios_con_accesos); 
-                            //exit;
+                                                        
                             $email_body = Modelo_TemplateEmail::obtieneHTML("ENVIO_ACCESO");
                             $fecha = date('Y-m-d H:i:s');
                             $cantd_a_restar = 0;
@@ -808,7 +803,7 @@ class Controlador_Aspirante extends Controlador_Base
                                 
                                 if(Modelo_AccesoEmpresa::guardarAcceso($id,$fecha,$idPlan,$idUsuario)){
                                     $cantd_a_restar++;
-
+                                    Utils::log("FERNANDA 2 ".$id." - ".print_r($usuarios_con_accesos,true));
                                     if(!in_array($id, $usuarios_con_accesos)){
                                         //echo 'enviara correo a: '.$id;
                                         $datos = $datos_usuarios[$id];

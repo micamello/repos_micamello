@@ -12,7 +12,7 @@
             <h4>Ha ocurrido un error al comprar el plan<br>
 					Por favor intente nuevamente la compra o escr&iacute;banos a info@micamello.com.ec</h4><br>
             <div align="center">
-              <a href="<?php echo PUERTO.'://'.HOST.'/'; ?>" class="btn btn-blue">Aceptar</a>
+              <a href="<?php echo PUERTO.'://'.HOST.'/planes/'; ?>" class="btn btn-blue">Aceptar</a>
             </div>
             <!-- <button class="btn-light-blue">Finalizar</button> -->
           </div>

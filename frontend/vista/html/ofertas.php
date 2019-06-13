@@ -349,7 +349,18 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 												$src_imagen = ($o['confidencial'] && $vista!='vacantes' && $vista!='cuentas') ? PUERTO.'://'.HOST.'/imagenes/logo_oferta.png' : PUERTO.'://'.HOST.'/imagenes/imgperfil/'.$o['username'].'/';
 												?>
 												<img id="imgPerfil" class="img-responsive" src="<?php echo $src_imagen; ?>" alt="icono">
+											</div>
 
+											<div class="col-md-12 col-sm-12 col-xs-12">
+												<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>
+													<p id="texto-postulaciones">Publicada:<br> <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?></p>
+												<?php } ?>
+												<?php if($vista == 'vacantes'){ ?>
+													<p id="tipo-plan"><?php echo utf8_encode($datos_plan[$o['id_ofertas']]); ?></p>
+												<?php } ?>
+											</div>
+
+											<div class="col-md-12 col-sm-12 col-xs-12">
 												<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA) { 	?>
 													<?php if (REQUISITO[$o['confidencial']] == 'No') {
 														echo '<p id="tipo-empresa">'.utf8_encode($o['empresa']).'</p>';
@@ -366,14 +377,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 												}
 												?>
 											</div>
-											<div class="col-md-12 col-sm-12 col-xs-12">
-												<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>
-													<p id="texto-postulaciones">Publicada:<br> <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?></p>
-												<?php } ?>
-												<?php if($vista == 'vacantes'){ ?>
-													<p id="tipo-plan"><?php echo utf8_encode($datos_plan[$o['id_ofertas']]); ?></p>
-												<?php } ?>
-											</div>
+											
 										</div>
 										<div class="col-md-10 col-sm-8 col-xs-12">
 											<div class="col-md-<?php if($vista == 'oferta'){ echo '9'; }else{ echo '12'; } ?>">

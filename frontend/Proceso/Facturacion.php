@@ -39,7 +39,7 @@ class Proceso_Facturacion{
   const DIR_MATRIZ = 'Km 12 Av. Febres Cordero Cdla. Villa Club Etapa Krypton Mz.14 Solar 3';
   const OBLIGADO_CONTABILIDAD = 'SI';  
   const ESTAB = '001';
-  const PTOEMI = '002';  
+  const PTOEMI = '003';  
   const PROPINA = '0.00';
   const PLAZO = 1;
   const UNIDAD_TIEMPO = 'Días';
@@ -277,7 +277,7 @@ class Proceso_Facturacion{
     $valoresact = array();       
     if (is_object($result) && $result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->estado == "AUTORIZADO"){
       $valoresact["estado"] = Modelo_Factura::AUTORIZADO;
-      $fechaautorizacion = str_replace('T', ' ', substr($result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->fechaAutorizacion,0,18));
+      $fechaautorizacion = str_replace('T', ' ', substr($result->RespuestaAutorizacionComprobante->autorizaciones->autorizacion->fechaAutorizacion,0,19));
       $valoresact["fecha_estado"] = $fechaautorizacion;      
       $valoresact["msg_error"] = '';
       $return = $fechaautorizacion;
@@ -302,12 +302,12 @@ class Proceso_Facturacion{
     $detalles = $factura->detalles;
     $infoAdicional = $factura->infoAdicional;
 
-    $obj_generar = new GenerarBarcode((string)$infoTributaria->claveAcceso,FRONTEND_RUTA.'/imagenes/imagenesCod/');
+    $obj_generar = new GenerarBarcode((string)$infoTributaria->claveAcceso,FRONTEND_RUTA.'imagenes/imagenesCod/');
     $obj_generar->imprimirbarcode();
 
-    $mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
+    //$mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
 
-    $logo = "<img src='".FRONTEND_RUTA."/imagenes/sucursal/logos/factura.png' alt='Mi Camello Logo' height='150'>";
+    $logo = "<img src='".FRONTEND_RUTA."imagenes/sucursal/logos/factura.png' alt='Mi Camello Logo' height='150'>";
     $eslogan = "Eficiencia, innovación y transparencia";
 
     $style1 = ' style="padding: 5px 5px 5px 5px;" ';
@@ -403,14 +403,14 @@ class Proceso_Facturacion{
     $contenido .= "<tr>";
     $contenido .= "<td colspan='2'>";
     $contenido .= '<table width="1000" border="1" style="text-align:center; border-collapse: collapse;" >
-                      <tr>
-                        <td width="10"><b>Cod. Principal</b></td>
-                        <td width="10"><b>Cant.</b></td>
-                        <td width="950"><b>Descripción</b></td>
-                        <td width="10"><b>Precio Unitario</b></td>
-                        <td width="10"><b>Descuento</b></td>
-                        <td width="10"><b>Precio Total</b></td>
-                      </tr>';
+                     <tr>
+                       <td width="10"><b>Cod. Principal</b></td>
+                       <td width="10"><b>Cant.</b></td>
+                       <td width="950"><b>Descripción</b></td>
+                       <td width="10"><b>Precio Unitario</b></td>
+                       <td width="10"><b>Descuento</b></td>
+                       <td width="10"><b>Precio Total</b></td>
+                     </tr>';
     foreach ($detalles->detalle as $detalle) {
 
       $contenido .= '<tr>
@@ -428,7 +428,7 @@ class Proceso_Facturacion{
     $contenido .= "<tr>";
     $contenido .= "<td>";
     $contenido .= '<table width="500" style="border: 1px solid #000; padding-top: 20px;padding-left: 15px;padding-bottom: 15px;padding-right: 15px;">
-                      <tr><td align="center" style="padding-left: 15px; padding-right: 5px;" colspan="2"><b>Información Adicional</b></td></tr>';
+                     <tr><td align="center" style="padding-left: 15px; padding-right: 5px;" colspan="2"><b>Información Adicional</b></td></tr>';
 
     foreach ($infoAdicional->campoAdicional as $nodo) 
     {
@@ -440,61 +440,61 @@ class Proceso_Facturacion{
     $contenido .= '</table>
                   <br>
                   <table width="500" border="1" style="text-align:center; border-collapse: collapse;">
-                      <tr>
-                        <td '.$style1.' align="center"><b>Forma de Pago</b></td>
-                        <td '.$style1.' align="center"><b>Valor</b></td>
-                      </tr>
-                      <tr>
-                        <td '.$style1.' align="center">'.self::DES_FORMA_PAGO[(string)$infoFactura->pagos->pago->formaPago].'</td>
-                        <td '.$style1.' align="center">'.$infoFactura->pagos->pago->total.'</td>
-                      </tr>
+                    <tr>
+                      <td '.$style1.' align="center"><b>Forma de Pago</b></td>
+                      <td '.$style1.' align="center"><b>Valor</b></td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' align="center">'.self::DES_FORMA_PAGO[(string)$infoFactura->pagos->pago->formaPago].'</td>
+                      <td '.$style1.' align="center">'.$infoFactura->pagos->pago->total.'</td>
+                    </tr>
                   </table>
                   ';
     $contenido .= "</td>";
     $contenido .= "<td valign='top' align='right'>";
 
     $contenido .= '<table width="500" border="1" style="text-align:center; border-collapse: collapse;">
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL 12%</b></td>
-                            <td '.$style1.' align="right">'.number_format($infoFactura->totalConImpuestos->totalImpuesto->baseImponible,2).'</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL 0%</b></td>
-                            <td '.$style1.' align="right">0.00</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL NO OBJETO DE IVA</b></td>
-                            <td '.$style1.' align="right">0.00</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL EXENTO DE IVA</b></td>
-                            <td '.$style1.' align="right">0.00</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL SIN IMPUESTOS</b></td>
-                            <td '.$style1.' align="right">'.number_format($infoFactura->totalSinImpuestos,2).'</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>TOTAL DESCUENTO</b></td>
-                            <td '.$style1.' align="right">'.$infoFactura->totalDescuento.'</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>ICE</b></td>
-                            <td '.$style1.' align="right">0.00</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>IVA '.$infoFactura->totalConImpuestos->totalImpuesto->tarifa.'%</b></td>
-                            <td '.$style1.' align="right">'.number_format($infoFactura->totalConImpuestos->totalImpuesto->valor,2).'</td>
-                          </tr>                          
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>PROPINA</b></td>
-                            <td '.$style1.' align="right">'.$infoFactura->propina.'</td>
-                          </tr>
-                          <tr>
-                            <td '.$style1.' colspan="2" align="left"><b>VALOR TOTAL</b></td>
-                            <td '.$style1.' align="right">'.number_format($infoFactura->importeTotal,2).'</td>
-                          </tr>
-                      </table>';
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL 12%</b></td>
+                      <td '.$style1.' align="right">'./*number_format(*/$infoFactura->totalConImpuestos->totalImpuesto->baseImponible/*,2)*/.'</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL 0%</b></td>
+                      <td '.$style1.' align="right">0.00</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL NO OBJETO DE IVA</b></td>
+                      <td '.$style1.' align="right">0.00</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL EXENTO DE IVA</b></td>
+                      <td '.$style1.' align="right">0.00</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>SUBTOTAL SIN IMPUESTOS</b></td>
+                      <td '.$style1.' align="right">'./*number_format(*/$infoFactura->totalSinImpuestos/*,2)*/.'</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>TOTAL DESCUENTO</b></td>
+                      <td '.$style1.' align="right">'.$infoFactura->totalDescuento.'</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>ICE</b></td>
+                      <td '.$style1.' align="right">0.00</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>IVA '.$infoFactura->totalConImpuestos->totalImpuesto->tarifa.'%</b></td>
+                      <td '.$style1.' align="right">'./*number_format(*/$infoFactura->totalConImpuestos->totalImpuesto->valor/*,2)*/.'</td>
+                    </tr>                          
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>PROPINA</b></td>
+                      <td '.$style1.' align="right">'.$infoFactura->propina.'</td>
+                    </tr>
+                    <tr>
+                      <td '.$style1.' colspan="2" align="left"><b>VALOR TOTAL</b></td>
+                      <td '.$style1.' align="right">'./*number_format(*/$infoFactura->importeTotal/*,2)*/.'</td>
+                    </tr>
+                   </table>';
     $contenido .= "</td>";
     $contenido .= "</tr>";                            
     $contenido .= "</table>";
@@ -502,14 +502,14 @@ class Proceso_Facturacion{
     $mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">Provincia: Guayas Cantón: DAULE Parroquia LA AURORA (SATÉLITE) <br>km. 12 Av. Febres Cordero Cdla. Villa Club etapa Krypton Mz. 14 Solar 3 (a cuatro cuadras de la garita). <br>Teléfono: 2753106 Celular: 099234268. E-mail: infor@micamello.com.ec</footer>');
 
     $mpdf->WriteHTML($contenido);
-    //echo $contenido;
+    
     unlink(FRONTEND_RUTA.'/imagenes/imagenesCod/'.$infoTributaria->claveAcceso.'.png');
 
     if($tipoArch){
       $mpdf->Output($infoTributaria->claveAcceso.".pdf", 'D');
     }else{
       $mpdf->Output(self::RUTA_FACTURA.$infoTributaria->claveAcceso.".pdf", 'F');
-    }
+    }    
   }
 
   function generarXML($xml,$claveacceso){

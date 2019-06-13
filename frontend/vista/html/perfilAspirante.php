@@ -11,12 +11,12 @@
 				<div class="fotoPerfil">
 					<div class="text-center">
 						<div class="col-md-6">
-							<img class="perfil_photo_user" src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgperfil/'.$datosUsuario['username'].'/';?>">
+							<img class="perfil_photo_user" src="<?php echo PUERTO.'://'.HOST.'/imagenes/usuarios/'.$datosUsuario['username'].'/';?>">
 						</div>
 					</div>
 				</div>
 				<div class="col-md-6">
-					<!-- <?php echo $vista; ?> -->
+					<!-- <?php #echo $vista; ?> -->
 					
 				</div>
 
@@ -33,7 +33,7 @@
 		        	</div>
 			        <div class="col-md-12">
 			        	<br>
-			        	<a target="_blanked" href="<?php echo PUERTO.'://'.HOST.'/hvUsuario/'.Utils::encriptar($datosUsuario['username']).'/'.$id_oferta.'/'.$vista.'/' ?>" class="btn-blue">Descargar datos</a> 
+			        	<a target="_blank" href="<?php echo PUERTO.'://'.HOST.'/hvUsuario/'.Utils::encriptar($datosUsuario['username']).'/'.$id_oferta.'/'.$vista.'/' ?>" class="btn-blue">Descargar datos</a> 
 			        </div>
 		      	</div>
 				<div class="col-md-12">
