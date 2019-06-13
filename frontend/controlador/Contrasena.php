@@ -2,7 +2,7 @@
 class Controlador_Contrasena extends Controlador_Base {
   
   public function construirPagina(){
-    $opcion = Utils::getParam('opcion','',$this->data);  
+    $opcion = Utils::getParam('opcion','',$this->data);      
     switch($opcion){      
       case 'recuperacion':
         if( Modelo_Usuario::estaLogueado() ){
@@ -63,7 +63,7 @@ class Controlador_Contrasena extends Controlador_Base {
       $respuesta = Utils::getParam('token', '', false);
       if (empty($respuesta)){
         throw new Exception("La recuperaci\u00F3n del password es fallida, por favor intente denuevo");
-      }  
+      }        
       $tags["token"] = $respuesta;              
       $respuesta = Utils::desencriptar($respuesta);      
       $valores = explode("||",$respuesta);      
@@ -96,8 +96,8 @@ class Controlador_Contrasena extends Controlador_Base {
     }
     catch( Exception $e ){
       $_SESSION['mostrar_error'] = $e->getMessage();  
-    } 
-    $tags = array('vista'=>'contrasena');
+    }     
+    //$tags["vista"] = "contrasena";
     Vista::render('confirmar_password', $tags);     
   }
   

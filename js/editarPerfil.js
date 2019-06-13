@@ -629,7 +629,7 @@ function enviarFormulario(){
         //mostrarERRORES
         Swal.fire({
           // title: '¡Advertencia!',        
-          html: 'Por favor, complete los campos con (*)<br>',
+          html: 'Por favor complete los campos con (*)<br>',
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
           imageWidth: 75,
           confirmButtonText: 'ACEPTAR',
@@ -639,7 +639,7 @@ function enviarFormulario(){
           //solo falta hoja de vida
         Swal.fire({
           // title: '¡Advertencia!',        
-          html: 'Por favor, ,debe cargar la hoja de vida. <br>',
+          html: 'Por favor cargue su hoja de vida. <br>',
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
           imageWidth: 75,
           confirmButtonText: 'ACEPTAR',
