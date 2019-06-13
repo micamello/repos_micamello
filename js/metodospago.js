@@ -62,7 +62,13 @@ $('#provinciaPM').change(function(){
           confirmButtonText: 'ACEPTAR',
           animation: true
         });        
-      }                  
+      },
+      beforeSend : function(){
+          ajaxLoader($('#provinciaPM'), 'aparecer');
+        },
+        complete : function(){
+          ajaxLoader($('#provinciaPM'), 'desaparecer');
+        }                 
     });
     quitarError("err_provPM","seccion_provPM");
   }
@@ -94,7 +100,13 @@ $('#select_provincia').change(function(){
           confirmButtonText: 'ACEPTAR',
           animation: true
         });        
-      }                  
+      },
+      beforeSend : function(){
+          ajaxLoader($('#select_provincia'), 'aparecer');
+        },
+        complete : function(){
+          ajaxLoader($('#select_provincia'), 'desaparecer');
+        }                  
     });
     quitarError("err_prov","seccion_prov");
   }

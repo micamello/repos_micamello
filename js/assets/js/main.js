@@ -69,7 +69,6 @@ function quitarError(campo,id){
 jQuery(document).ready(function ($) {
 
   if($('#blockRightClick').length){
-    console.log("eder");
     $("body").on("contextmenu",function(e){
      return false;
    });

@@ -659,7 +659,7 @@ function enviarFormulario(){
       }
     }
 
-}
+}}
 
 function validarDni(){
 

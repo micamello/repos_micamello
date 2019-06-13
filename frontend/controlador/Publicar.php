@@ -211,9 +211,14 @@ class Controlador_Publicar extends Controlador_Base {
       }
 
       //Utils::log(print_r($datosReg,true));
-      //if(count($datosReg['area_select']) != 1){
-      //    throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
-      //}
+      if(count($datosReg['area_select']) < AREASPERMITIDAS_PUB || count($datosReg['area_select']) > AREASPERMITIDAS_PUB){
+         throw new Exception("Seleccione n\u00FAmero permitido de \u00E1reas");
+      }
+
+      if(count($datosReg['subareasCand']) < SUBAREA_PERM_PUB || count($datosReg['subareasCand']) > SUBAREA_PERM_PUB){
+         throw new Exception("Seleccione n\u00FAmero permitido de sub\u00E1reas");
+      }
+
 
       $listadoIdiomasNivel = Modelo_NivelxIdioma::obtieneListado();
       $idiomaNivelIdioma = array();
