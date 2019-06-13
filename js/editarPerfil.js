@@ -660,6 +660,7 @@ function enviarFormulario(){
     }
 }
 
+
 function validarDni(){
 
 }

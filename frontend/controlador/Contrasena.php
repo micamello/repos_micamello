@@ -135,7 +135,7 @@ class Controlador_Contrasena extends Controlador_Base {
   } 
   public function envioCorreo($correo,$nombres,$token){
     $enlace = "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a>"; 
-    $email_body = Modelo_TemplateEmail::obtieneHTML("RECUPERACION_CONTRASENA");
+    $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);        
     if (Utils::envioCorreo($correo,"Recuperación de Contraseña",$email_body)){

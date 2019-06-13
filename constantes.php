@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'micamello_desarrollo3');
+define('DBNOMBRE', 'micamello_desarrollo11');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -71,7 +71,8 @@ define('METODO_SELECCION', array('1'=>array(
 									), '2'=>array(
 										'Seleccionar y arrastrar para ordenar las respuestas', ''
 									)));
-define('AREASPERMITIDAS', '3');
+define('AREASPERMITIDAS_PUB', '1');
+define('SUBAREA_PERM_PUB', '1');
 define('VALORES_ORDENAMIENTO', array('100','1000'));
 //FACTURACION ELECTRONICA
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');

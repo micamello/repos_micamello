@@ -266,7 +266,7 @@ if($('#formPublicar').length){
         validarFormPublicar();
         validarFormError();
         if(validarFormError() > 0){
-            event.preventDefault();
+            // event.preventDefault();
         }
         else{
             $('.loaderMic').css('display', 'block');
