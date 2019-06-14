@@ -211,17 +211,7 @@ if($navegador == 'MSIE'){ ?>
                 echo "usericon_safari";
               } ?>" width="35" height="35">&nbsp;<i class="fa fa-caret-down"></i>
               <ul class="dropdown-menu">
-                <li style="    display: block;
-    padding: 3px 20px;
-    clear: both;
-    line-height: 1.42857143;
-    color: white;
-    white-space: nowrap;
-    border-radius: 3px;
-    border-bottom: white;
-    font-weight: bold;
-    text-decoration: none;
-    color: #39bed3"><?php echo strtoupper($_SESSION['mfo_datos']['usuario']['username']); ?></li>
+                <li id="estilo_username"><?php echo strtoupper($_SESSION['mfo_datos']['usuario']['username']); ?></li>
                 <?php foreach($menu["submenu"] as $submenu){ ?>  
                   <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>
                 <?php } ?>

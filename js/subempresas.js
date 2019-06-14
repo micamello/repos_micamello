@@ -485,14 +485,14 @@ function calcularRecursos(idplan){
           //error = 1;
           mensaje += 'Hubo un error de conexi\u00F3n al servidor. <br>';
       },
-      beforeSend : function(){
+       beforeSend : function(){
         ajaxLoader($('#num_post'), 'aparecer');
         ajaxLoader($('#num_accesos'), 'aparecer');
       },
       complete : function(){
         ajaxLoader($('#num_post'), 'desaparecer');
         ajaxLoader($('#num_accesos'), 'desaparecer');
-      }                 
+      }               
   })
   
   return mensaje;

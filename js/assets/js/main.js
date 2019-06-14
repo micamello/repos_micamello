@@ -650,10 +650,10 @@ function searchAjax(obj,tipo_dni){
           console.log(request.responseText);
       },
       beforeSend : function(){
-        ajaxLoader($('#provincia'), 'aparecer');
+        ajaxLoader(obj, 'aparecer');
       },
       complete : function(){
-        ajaxLoader($('#provincia'), 'desaparecer');
+        ajaxLoader(obj, 'desaparecer');
       }
     });
   }
