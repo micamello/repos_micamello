@@ -683,6 +683,7 @@ $(window).resize(function(){
 
 function ajaxLoader(obj, action){
   // console.log(obj[0].tagName != 'SELECT');
+  console.log(obj[0].tagName);
   if(obj[0].tagName != 'SELECT'){
     if(action == 'aparecer'){
       if(obj.siblings('div.contE').length){
@@ -700,7 +701,7 @@ function ajaxLoader(obj, action){
   }
   else{
     // console.log("esun sleect");
-    
+    console.log(obj[0].tagName);
     if(action == 'aparecer'){
       obj.attr('disabled', true);
         if(obj.siblings('div.contE').length){
