@@ -26,7 +26,7 @@ $(document).ready(function(){
         is3D: true,
         width:3500,
         height:2000,
-        pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
+        pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 60},
         fontSize:80,
         legend: 'none',
         slices: {
@@ -686,7 +686,7 @@ function validarNombreEmpresa(nombre){
 }
 
 function ValidURL(str) {
-  var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+  var regex = /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   if(!regex .test(str)) {
     return false;
   } else {
@@ -891,7 +891,7 @@ function validarFormulario(tipovalidacion){
                 quitarError("err_univ", "seccion_univ");
             }
         } 
-
+        
         if(area_select.value == null || area_select.value == 0){
 
             colocaError("err_area", "seccion_area",err_list,"boton");

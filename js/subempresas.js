@@ -98,7 +98,7 @@ function calcularRecursos(idplan){
         }
 
         if(document.getElementById('post') && document.getElementById('acces')){
-          console.log('if1');
+          //console.log('if1');
           var post = parseInt(document.getElementById('post').value);
           var acces = parseInt(document.getElementById('acces').value);
 
@@ -116,7 +116,7 @@ function calcularRecursos(idplan){
           //console.log(cantd_rest3);
           var tipo = 1;
         }else{
-          console.log('if2');
+          //console.log('if2');
           var cantd_rest1 = parseInt(post_asignar);
           var cantd_rest3 = parseInt(accesos_asignar);
 
@@ -133,10 +133,10 @@ function calcularRecursos(idplan){
             }else{
               var sumAsignar = post_asignar;
             }
-            console.log('sumAsignar: '+sumAsignar);
-              console.log('sumAsignar3: '+sumAsignar3);
-              console.log('post: '+post);
-              console.log('acces: '+acces);
+            //console.log('sumAsignar: '+sumAsignar);
+              //console.log('sumAsignar3: '+sumAsignar3);
+              //console.log('post: '+post);
+              //console.log('acces: '+acces);
             if(num_post <= sumAsignar && num_post != 0 && sumAsignar != 0){
 
               if(parseInt(sumAsignar-num_post) == 0){
@@ -148,7 +148,7 @@ function calcularRecursos(idplan){
               document.getElementById('post_asignar').innerHTML = nuevo_valor;
               quitarError("rec1","recursos1");
             }else if(num_post == 0 && num_accesos == 0 && num_post != ''){
-                console.log('aqui entro ifnuevo');
+                //console.log('aqui entro ifnuevo');
                 colocaError("rec1","recursos1","No pueden ser cero ambos recursos.",btn);
                 colocaError("rec3","recursos3","No pueden ser cero ambos recursos.",btn);
                 mensaje += 'Cantd. ofertas, no pueden ser vac\u00EDo. <br>';
@@ -197,7 +197,7 @@ function calcularRecursos(idplan){
                   document.getElementById('post_asignar').innerHTML = post_asignar;
                   quitarError("rec1","recursos1");
                 }else if(num_post == 0 && tipo == 1){
-                  console.log('acces: '+acces);
+                  //console.log('acces: '+acces);
                   if(acces == 0 && accesos_asignar < 0){
                     document.getElementById('num_post').value = 1;
                     document.getElementById('post_asignar').innerHTML = post_asignar+post-1;
@@ -239,7 +239,7 @@ function calcularRecursos(idplan){
             }else{
               var sumAsignar3 = accesos_asignar;
             }
-            console.log(sumAsignar3);
+            //console.log(sumAsignar3);
             if(num_accesos <= sumAsignar3 && num_accesos != 0 && sumAsignar3 != 0){
               
               if(sumAsignar3-num_accesos == 0){
@@ -300,7 +300,7 @@ function calcularRecursos(idplan){
                   document.getElementById('accesos_asignar').innerHTML = accesos_asignar;
                   quitarError("rec3","recursos3");
                 }else if(num_accesos == 0 && tipo == 1 /*&& accesos_asignar == num_accesos*/){
-                 console.log('post: '+post);
+                 //console.log('post: '+post);
                   if(post == 0 && post_asignar < 0){ console.log('entro'+post_asignar);
                     document.getElementById('num_accesos').value = 1;
                     document.getElementById('accesos_asignar').innerHTML = accesos_asignar+acces-1;
@@ -484,7 +484,15 @@ function calcularRecursos(idplan){
       error: function (request, status, error) {
           //error = 1;
           mensaje += 'Hubo un error de conexi\u00F3n al servidor. <br>';
-      }                  
+      },
+      beforeSend : function(){
+        ajaxLoader($('#num_post'), 'aparecer');
+        ajaxLoader($('#num_accesos'), 'aparecer');
+      },
+      complete : function(){
+        ajaxLoader($('#num_post'), 'desaparecer');
+        ajaxLoader($('#num_accesos'), 'desaparecer');
+      }                 
   })
   
   return mensaje;

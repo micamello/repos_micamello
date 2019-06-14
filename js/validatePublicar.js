@@ -8,23 +8,23 @@ $(document).ready(function(){
       var puerto_host = $('#puerto_host').val();
       if(id_plan != ""){
         $.ajax({
-          type: "GET",
-          url: puerto_host+"/index.php?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
-          dataType:'json',
-          success:function(data){
-            mostrarDatosPlan(data);
-          },
-          error: function (request, status, error) {
-            Swal.fire({
-              html: request.responseText,
-              imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 75,
-              confirmButtonText: 'ACEPTAR',
-              animation: true
-            });                        
-          },
-          beforeSend : function(){
-            ajaxLoader($('#planesSelect'), 'aparecer');
+            type: "GET",
+            url: puerto_host+"/index.php?mostrar=publicar&opcion=buscaPlan&id_plan="+id_plan,
+            dataType:'json',
+            success:function(data){
+                mostrarDatosPlan(data);
+            },
+            error: function (request, status, error) {
+                Swal.fire({
+                  html: request.responseText,
+                  imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                  imageWidth: 75,
+                  confirmButtonText: 'ACEPTAR',
+                  animation: true
+                });                        
+            },
+            beforeSend : function(){
+                ajaxLoader($('#planesSelect'), 'aparecer');
             },
             complete : function(){
                 ajaxLoader($('#planesSelect'), 'desaparecer');
@@ -117,31 +117,34 @@ if($('#provinciaOf').length){
       var puerto_host = $('#puerto_host').val();
       if(id_provincia != ""){
         $.ajax({
-          type: "GET",
-          url: puerto_host+"/index.php?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
-          dataType:'json',
-          success:function(data){
-            $('#ciudadOf').html('<option value="">Seleccione una ciudad</option>');
+            type: "GET",
+            url: puerto_host+"/index.php?mostrar=publicar&opcion=buscaCiudad&id_provincia="+id_provincia,
+            dataType:'json',
+            success:function(data){
+            $('#ciudadOf').html('<option selected disabled value="0">Seleccione una ciudad</option>');
             $.each(data, function(index, value) {
               $('#ciudadOf').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
             });
             $('#ciudadOf').attr('disabled', false);
 
-          },
-          error: function (request, status, error) {
-            Swal.fire({
-              html: request.responseText,
-              imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 75,
-              confirmButtonText: 'ACEPTAR',
-              animation: true
-            });            
-          },
-          beforeSend : function(){
-            ajaxLoader($('#provinciaOf'), 'aparecer');
+            },
+            error: function (request, status, error) {
+                $('#ciudadOf').html('<option selected disabled value="0">Seleccione una ciudad</option>');
+                Swal.fire({
+                  html: 'Ocurrio un error no se pudo consultar las ciudades',
+                  imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                  imageWidth: 75,
+                  confirmButtonText: 'ACEPTAR',
+                  animation: true
+                });            
+            },
+            beforeSend : function(){
+                ajaxLoader($('#provinciaOf'), 'aparecer');
+                ajaxLoader($('#ciudadOf'), 'aparecer');
             },
             complete : function(){
                 ajaxLoader($('#provinciaOf'), 'desaparecer');
+                ajaxLoader($('#ciudadOf'), 'desaparecer');
             }                
         })
       }
@@ -1123,6 +1126,7 @@ $('#planesSelect').on('change', function(){
 
           },
           error: function (request, status, error) {
+            ajaxLoader($('#planesSelect'), 'aparecer');
             alert(request.responseText);
           },
           beforeSend : function(){
