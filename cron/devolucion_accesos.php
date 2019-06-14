@@ -9,7 +9,7 @@ set_time_limit(0);
 
 require_once '../constantes.php';
 require_once '../init.php';
-require_once '../multisitios.php';
+//require_once '../multisitios.php';
 
 define('DOMINIO','micamello.com.ec');
 
@@ -25,14 +25,13 @@ else{
 $email_body = "";
 $parametro = Modelo_Parametro::obtieneValor("tiempo_retornoAcceso");
 $facetas = count(Modelo_Faceta::obtenerFacetas());
-$listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
+$listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();  
   if(!empty($listadoAcceso) && is_array($listadoAcceso)){
-    foreach ($listadoAcceso as $accesoemp) {
+    foreach ($listadoAcceso as $accesoemp) {      
       $facetaxusuario = Modelo_Usuario::obtenerFacetasxUsuario($accesoemp['id_usuario']);
       try {
-
         $fechacaducidad = strtotime ( '+'.$parametro.' hours',strtotime($accesoemp['fecha_envio_acceso']));
-        $fechacaducidad = date('Y-m-d H:i:s',$fechacaducidad);
+        $fechacaducidad = date('Y-m-d H:i:s',$fechacaducidad);          
           if(count($facetaxusuario) == $facetas){
             if(!Modelo_AccesoEmpresa::actualizarFechaxidAcceso($accesoemp['id_accesos_empresas'], $fechacaducidad)){
               throw new Exception("Ha ocurrido un error al actualizar la fecha de caducidad");
@@ -45,14 +44,14 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
             }
           
             $nombre_mostrar = ucfirst(utf8_encode($accesoemp["nombre_usuario"])).(!empty($accesoemp['apellido_usuario']) ? " ".ucfirst(utf8_encode($accesoemp['apellido_usuario'])) : "");
-            $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($accesoemp["id_empresa_plan"]);
+            $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($accesoemp["id_empresa_plan"],Modelo_Usuario::CANDIDATO);
             $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
             $enlace = "<a href='".PUERTO.'://'.HOST.'/planesUsuario/'."'>Mis Planes</a>";
             $email_body = Modelo_TemplateEmail::obtieneHTML("ACEPTACION_ACCESO");
-            $email_body = str_replace("%NOMBRES%", $accesoemp['nombre_empresa'], $email_body);
+            $email_body = str_replace("%NOMBRES%", utf8_encode($accesoemp['nombre_empresa']), $email_body);
             $email_body = str_replace("%CANDIDATO%", $nombre_mostrar, $email_body);    
             $email_body = str_replace("%FECHA%", $accesoemp['fecha_envio_acceso'], $email_body); 
-            $email_body = str_replace("%PLAN%", $infoplan["nombre"], $email_body);
+            $email_body = str_replace("%PLAN%", utf8_encode($infoplan["nombre"]), $email_body);
             $email_body = str_replace("%ENLACE%", $enlace, $email_body); 
             Utils::envioCorreo($accesoemp["correo"],"Aceptación de acceso",$email_body); 
           }
@@ -60,7 +59,7 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
             if($fechacaducidad <= date('Y-m-d H:i:s')){
               proceso($accesoemp);
               $nombre_mostrar = ucfirst(utf8_encode($accesoemp["nombre_usuario"])).(!empty($accesoemp['apellido_usuario']) ? " ".ucfirst(utf8_encode($accesoemp['apellido_usuario'])) : "");
-              $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($accesoemp["id_empresa_plan"]);
+              $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($accesoemp["id_empresa_plan"], Modelo_Usuario::EMPRESA);
               $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
               $enlace = "<a href='".PUERTO.'://'.HOST.'/planesUsuario/'."'>Mis Planes</a>";
               $email_body = Modelo_TemplateEmail::obtieneHTML("DEVOLUCION_ACCESO");
