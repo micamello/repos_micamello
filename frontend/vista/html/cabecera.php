@@ -205,13 +205,23 @@ if($navegador == 'MSIE'){ ?>
          <?php } ?>
          <?php if (isset($menu["submenu"])){ ?>                            
           <li class="dropdown" id="seccion_user">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
               <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-              
                 <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                 echo "usericon_safari";
               } ?>" width="35" height="35">&nbsp;<i class="fa fa-caret-down"></i>
               <ul class="dropdown-menu">
+                <li style="    display: block;
+    padding: 3px 20px;
+    clear: both;
+    line-height: 1.42857143;
+    color: white;
+    white-space: nowrap;
+    border-radius: 3px;
+    border-bottom: white;
+    font-weight: bold;
+    text-decoration: none;
+    color: #39bed3"><?php echo strtoupper($_SESSION['mfo_datos']['usuario']['username']); ?></li>
                 <?php foreach($menu["submenu"] as $submenu){ ?>  
                   <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>
                 <?php } ?>

@@ -172,7 +172,7 @@
 
                                         <label>
                                             <div class="errorContainer"></div>
-                                            <input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He le&iacute;do y acepto las <a class="link" href="<?php echo PUERTO.'://'.HOST; ?>/docs/politicas_de_privacidad1.pdf" target="_blank">pol&iacute;ticas de privacidad</a> y <a class="link" href="<?php echo PUERTO.'://'.HOST; ?>/docs/terminos_y_condiciones1.pdf" target="_blank">t&eacute;rminos y condiciones</a>
+                                            <input type="checkbox" class="terminosCond" name="terminosCond" id="terminosCond"> He le&iacute;do y acepto las <a class="link" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">pol&iacute;ticas de privacidad</a> y <a class="link" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">t&eacute;rminos y condiciones</a>
                                         </label>
                                     </div>
                                 </div>
