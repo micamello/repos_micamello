@@ -8,7 +8,6 @@
   <meta name="google-site-verification" content="Hy5ewWRp0yOqH1Z_3Q59zSVffxTZDLa_T50VEoGBIBw" />
   <title>MiCamello - Portal de Empleos en Ecuador</title>
   <meta name="keywords" content="ofertas de trabajo, trabajos, empleos, bolsa de empleos, buscar trabajo, busco empleo, portal de empleo, ofertas de empleo, bolsa de empleo, trabajos en ecuador, paginas de empleo, empleos ecuador, camello">
-  <title>MiCamello - Portal de Empleos en Ecuador</title>
   <meta name="description" content="Cientos de empresas publican las mejores ofertas en la bolsa de trabajo Mi Camello Ecuador. Busca empleo y apúntate y sé el primero en postular">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:image" content="https://www.micamello.com.ec/" />

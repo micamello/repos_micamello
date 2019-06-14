@@ -199,8 +199,10 @@ class Controlador_Plan extends Controlador_Base {
                                                        $tags["purchaseOperationNumber"] . 
                                                        $precio . 
                                                        PAYME_CURRENCY_CODE . 
-                                                       PAYME_SECRET_KEY, 'sha512');   
-              
+                                                       PAYME_SECRET_KEY, 'sha512'); 
+
+        Utils::log('purchaseVerification: '.$tags["purchaseVerification"]);  
+        
         $tags["arrprovincia"] = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
         //datos para transferencia bancaria
         $tags["ctabancaria"] = Modelo_Ctabancaria::obtieneListado();          

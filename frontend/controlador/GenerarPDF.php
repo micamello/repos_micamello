@@ -72,7 +72,7 @@ class Controlador_GenerarPDF extends Controlador_Base
                   Modelo_Descarga::registrarDescargaInforme($idusuario,$id_empresa,$id_oferta);
                   $puedeDescargar = true;
                 }else{
-                  $_SESSION['mostrar_notif'] = 'Ya agoto su cupo de descargas de informes para esta oferta';
+                  $_SESSION['mostrar_notif'] = 'Usted no puede visualizar este informe porque ha superado el l\u00EDmite de descargas para esta oferta';
                   $enlace = $_SERVER['HTTP_REFERER'];
                   $puedeDescargar = false;
                   Utils::doRedirect($enlace);
@@ -100,7 +100,7 @@ class Controlador_GenerarPDF extends Controlador_Base
             $puedeDescargar = true;
           }else{ 
             $puedeDescargar = false;
-            $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago.';
+            $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago. Su informe parcial lo puede descargar en su perfil';
             //$ruta = PUERTO . '://' . HOST . '/perfil/';
           }
         }
@@ -228,7 +228,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 
       if($tipo_informe == 'parcial'){
         $informe .= '<p>El presente informe parcial le da la oportunidad de que conozca únicamente dos importantes facetas de su personalidad y ocho importantes competencias en su lugar de trabajo. <br></p>
-        <p><b>CANEA</b> tiene mucho más que ofrecerle acerca de sus destrezas, habilidades y comportamientos. Anímese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
+        <p><b>CANEA</b> tiene mucho m&aacute;s que ofrecerle acerca de sus destrezas, habilidades y comportamientos. Anímese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
         </p>
         <blockquote>
           <b>¡Sea siempre la primera opción para las empresas, rindiendo el test completo!</b>
