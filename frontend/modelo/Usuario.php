@@ -1175,7 +1175,7 @@ WHERE
   public static function obtenerFacetasxUsuario($id_usuario,$facetas=false){
 
     if($facetas == false){
-      $sql = 'SELECT id_faceta,valor,literal FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ? ORDER BY id_faceta';
+      $sql = 'SELECT id_faceta,valor FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ? ORDER BY id_faceta';
     }else{
       $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
         INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor

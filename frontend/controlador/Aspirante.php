@@ -803,7 +803,7 @@ class Controlador_Aspirante extends Controlador_Base
                                 
                                 if(Modelo_AccesoEmpresa::guardarAcceso($id,$fecha,$idPlan,$idUsuario)){
                                     $cantd_a_restar++;
-                                    Utils::log("FERNANDA 2 ".$id." - ".print_r($usuarios_con_accesos,true));
+                                                                        
                                     if(!in_array($id, $usuarios_con_accesos)){
                                         //echo 'enviara correo a: '.$id;
                                         $datos = $datos_usuarios[$id];
