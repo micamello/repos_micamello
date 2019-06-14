@@ -3,7 +3,7 @@ require_once 'includes/mpdf/mpdf.php';
 
 class Controlador_GenerarPDF extends Controlador_Base
 {
-	public function construirPagina(){
+  public function construirPagina(){
     if(!Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
@@ -54,23 +54,21 @@ class Controlador_GenerarPDF extends Controlador_Base
           $existe_en_oferta = array();
         }
 
-        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
-
+        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){          
           if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$idPlan) && !empty($id_oferta) && !empty($existe_en_oferta)){
             $id_empresa = $_SESSION['mfo_datos']['usuario']['id_usuario'];
 
             $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($id_empresa,$id_oferta);
             $descargas = Modelo_Descarga::descargasInforme($id_empresa,$id_oferta);
-
-            if(!empty($posibilidades)){
-              
+            
+            if(!empty($posibilidades)){              
               if(in_array($idusuario, $descargas)){
                 $puedeDescargar = true;
               }else{
-
                 if(count($descargas) < $posibilidades){
                   Modelo_Descarga::registrarDescargaInforme($idusuario,$id_empresa,$id_oferta);
                   $puedeDescargar = true;
+
                 }else{
                   $_SESSION['mostrar_notif'] = 'Usted no puede visualizar este informe porque ha superado el l\u00EDmite de descargas para esta oferta';
                   $enlace = $_SERVER['HTTP_REFERER'];
@@ -78,17 +76,13 @@ class Controlador_GenerarPDF extends Controlador_Base
                   Utils::doRedirect($enlace);
                 }
               }
-            }else{
-
+            }else{              
               if(!in_array($idusuario, $descargas)){
-                Modelo_Descarga::registrarDescargaInforme($idusuario,$id_empresa,$id_oferta);
-                $puedeDescargar = true;
-              }else{
-                $puedeDescargar = false;
+                Modelo_Descarga::registrarDescargaInforme($idusuario,$id_empresa,$id_oferta);              
               }
-            }
-
-          }else{
+              $puedeDescargar = true;
+            }            
+          }else{            
             $puedeDescargar = false;
             $_SESSION['mostrar_notif'] = 'Usted no tiene permiso para realizar esta acci\u00F3n, por favor adquiera un plan.';
             //$ruta = PUERTO . '://' . HOST . '/vacantes/';
@@ -102,13 +96,12 @@ class Controlador_GenerarPDF extends Controlador_Base
             $puedeDescargar = false;
             $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago. Su informe parcial lo puede descargar en su perfil';
             //$ruta = PUERTO . '://' . HOST . '/perfil/';
-          }
+          }          
         }
-
         
         if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || 
-           ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){
-        
+           ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $puedeDescargar == true)){                  
+          
           $result = Modelo_Opcion::datosGraficos2($idusuario,1,$id_empresa); 
           $cantd_facetas = count($result);
           $tipo_informe = '';
@@ -170,14 +163,17 @@ class Controlador_GenerarPDF extends Controlador_Base
     $competencias = $datos['competencias'];
   
     $datos_descarga = $datos['datos_descarga'];
-    $conacentos = array('Á', 'É','Í','Ó','Ú','Ñ');
+    $conacentos = array('&aacute;', '&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;');
     $sinacentos = array('a', 'e','i','o','u','n');
-    $cambiar_letra = array('á', 'é','í','ó','ú','ñ');
+    $cambiar_letra = array('&aacute;', '&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;');
     $codigo   = array('&aacute;', '&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;');
-    $nombre = strtolower($datosusuario['nombres'].' '.$datosusuario['apellidos']);
-    $nombre_archivo = utf8_encode(str_replace(' ', '_',str_replace($codigo,$sinacentos,$nombre))).'.pdf';
-    $nombre_mayuscula = strtoupper(str_replace($codigo,$conacentos,$nombre));
+    $nombre = strtolower($datosusuario['nombres'].' '.$datosusuario['apellidos']);    
+    $nombre_archivo = utf8_encode(str_replace(' ', '_',Utils::no_carac($nombre))).'.pdf';
+    //Utils::log("FERNANDA 2 ".$nombre_archivo);
+    $nombre_mayuscula = strtoupper(Utils::no_carac($nombre));
+    //Utils::log("FERNANDA 3 ".$nombre_mayuscula);
     $solo_nombres = strtoupper(str_replace($codigo,$conacentos,strtolower($datosusuario['nombres'])));
+    //Utils::log("FERNANDA 4 ".$solo_nombre);
     $colores_bg = array('C'=>'verde-bg','A'=>'amarillo-bg','N'=>'rojo-bg','E'=>'morado-bg','A1'=>'azul-bg');
     $colores = array('C'=>'verde','A'=>'amarillo','N'=>'rojo','E'=>'morado','A1'=>'azul');
 
@@ -227,18 +223,18 @@ class Controlador_GenerarPDF extends Controlador_Base
       <blockquote>Tu talento es nuestra oportunidad.</blockquote>';
 
       if($tipo_informe == 'parcial'){
-        $informe .= '<p>El presente informe parcial le da la oportunidad de que conozca únicamente dos importantes facetas de su personalidad y ocho importantes competencias en su lugar de trabajo. <br></p>
-        <p><b>CANEA</b> tiene mucho m&aacute;s que ofrecerle acerca de sus destrezas, habilidades y comportamientos. Anímese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
+        $informe .= '<p>El presente informe parcial le da la oportunidad de que conozca &uacute;nicamente dos importantes facetas de su personalidad y ocho importantes competencias en su lugar de trabajo. <br></p>
+        <p><b>CANEA</b> tiene mucho m&aacute;s que ofrecerle acerca de sus destrezas, habilidades y comportamientos. An&iacute;mese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
         </p>
         <blockquote>
-          <b>¡Sea siempre la primera opción para las empresas, rindiendo el test completo!</b>
+          <b>¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
         </blockquote>';
       }
 
-      $informe .= '<h2>¿QU&Eacute; ES CANEA?</h2>
-      <p>Es un Test que tiene por objetivo evaluar las competencias laborales de los candidatos y facilitar el proceso de reclutamiento de las empresas. Se diseñó para comprender las aptitudes de una persona y llevarla a lograr un desarrollo profesional.</p>';
-      /*$informe .= '<table class="tabla1" style="width:100%">
-        <tr>';*/
+      $informe .= '<h2>&iquest;QU&Eacute; ES CANEA?</h2>
+      <p>Es un Test que tiene por objetivo evaluar las competencias laborales de los candidatos y facilitar el proceso de reclutamiento de las empresas. Se dise&ntilde;&oacute; para comprender las aptitudes de una persona y llevarla a lograr un desarrollo profesional.</p>';
+      //$informe .= '<table class="tabla1" style="width:100%">
+        //<tr>';
         $tds = $ths = $tds_competencias = '';
         $cantd_a = 0;
         foreach ($facetas as $id_faceta => $datos_facetas) {
@@ -255,27 +251,27 @@ class Controlador_GenerarPDF extends Controlador_Base
           //$informe .= '<th class="'.$color1.'">'.$datos_facetas['literal'].'</th>';
           $ths .= '<th style="width: 150px"';
           $ths .= ' class="'.$color.'">'.$datos_facetas['literal'].'</th>';
-          /*$span = '<span class="mayor">'.$datos_facetas['literal'].'</span>';
-          $tds .= '<td style="text-align:center;" class="'.$color.'">'.Utils::str_replace_first($datos_facetas['literal'], $span, strtoupper($datos_facetas['faceta']),1).'</td>';
+          //$span = '<span class="mayor">'.$datos_facetas['literal'].'</span>';
+          //$tds .= '<td style="text-align:center;" class="'.$color.'">'.Utils::str_replace_first($datos_facetas['literal'], $span, strtoupper($datos_facetas['faceta']),1).'</td>';
 
-          if($pos_no_disponible < 3){
-            $tds_competencias .= '<td style="text-align:center;">'.utf8_encode($competencias[$id_faceta]).'</td>';
-            $pos_no_disponible++;
-          }else{
+          //if($pos_no_disponible < 3){
+          //  $tds_competencias .= '<td style="text-align:center;">'.utf8_encode($competencias[$id_faceta]).'</td>';
+          //  $pos_no_disponible++;
+          //}else{
 
-            if($tipo_informe == 'parcial'){
-              $tds_competencias .= '<td style="text-align:center;font-size:12pt;" class="rojo"><b>no disponible</b></td>';
-            }else{
-              $tds_competencias .= '<td style="text-align:center;">'.utf8_encode($competencias[$id_faceta]).'</td>';
-            }
-          }*/
+          //  if($tipo_informe == 'parcial'){
+          //    $tds_competencias .= '<td style="text-align:center;font-size:12pt;" class="rojo"><b>no disponible</b></td>';
+          //  }else{
+          //    $tds_competencias .= '<td style="text-align:center;">'.utf8_encode($competencias[$id_faceta]).'</td>';
+          //  }
+          //}
         }
         $pos_no_disponible = 1;
 
-        /*$informe .= '</tr>
-        <tr>'.$tds.'</tr>
-        <tr>'.$tds_competencias.'</tr>
-      </table>';*/
+        //$informe .= '</tr>
+        //<tr>'.$tds.'</tr>
+        //<tr>'.$tds_competencias.'</tr>
+      //</table>';
     
       $datosXpreguntas = array(); 
       $caracteristicas_generales = array();
@@ -298,13 +294,13 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
 
-      $informe .= '<br><h2>¿QUÉ SON LAS COMPETENCIAS LABORALES?</h2>
-      <p>Estas se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al desempeño y desarrollo individual en un puesto de trabajo.</p>
-      <br><h2>¿QUÉ ES EL COMPORTAMIENTO?</h2>
-      <p>Es la habilidad de interactuar efectivamente con la gente, esta habilidad, puede ser el éxito o fracaso en su trabajo.</p> 
-      <p>Las inventigaciones han demostrado que aquellas personas que se conocen más así mismas, son más capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
-      <br><h2>INTRODUCCIÓN</h2>
-      <p>Este informe se desarrolló para que conozcamos y entendamos de una forma más clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
+      $informe .= '<br><h2>&iquest;QU&eacute; SON LAS COMPETENCIAS LABORALES?</h2>
+      <p>Estas se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al desempe&ntilde;o y desarrollo individual en un puesto de trabajo.</p>
+      <br><h2>&iquest;QU&eacute; ES EL COMPORTAMIENTO?</h2>
+      <p>Es la habilidad de interactuar efectivamente con la gente, esta habilidad, puede ser el &eacute;xito o fracaso en su trabajo.</p> 
+      <p>Las inventigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
+      <br><h2>INTRODUCCI&Oacute;N</h2>
+      <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
 
       if($tipo_informe == 'parcial'){
         $informe .= '<div class="publicidad">REGISTRESE EN NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</div>';
@@ -314,10 +310,10 @@ class Controlador_GenerarPDF extends Controlador_Base
     <div style="page-break-after:always;"></div>
     <br>
     <div id="pagina-3" style="text-align:justify">
-      <h2>CARACTERÍSTICAS GENERALES DE COMPORTAMIENTO LABORAL</h2>';
+      <h2>CARACTER&Iacute;STICAS GENERALES DE COMPORTAMIENTO LABORAL</h2>';
 
-      $informe .= '<p>Este informe analizó la forma en que <b>'.$solo_nombres.'</b> hace las actividades y tareas y cómo reacciona ante los retos que se presentan y se viven diariamente en su sitio de trabajo. Recuerde solo medimos comportamientos. Solo le ofrecemos afirmaciones positivas, en aquellas áreas de conductas en que la persona demuestra su estilo de comportamiento.</p>
-        <p>El comportamiento es un lenguaje universal de “como actuamos”, o de nuestro comportamiento observable. En este test no existen resultados ni buenos, ni malos. Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</p>
+      $informe .= '<p>Este informe analiz&oacute; la forma en que <b>'.$solo_nombres.'</b> hace las actividades y tareas y c&oacute;mo reacciona ante los retos que se presentan y se viven diariamente en su sitio de trabajo. Recuerde solo medimos comportamientos. Solo le ofrecemos afirmaciones positivas, en aquellas &aacute;reas de conductas en que la persona demuestra su estilo de comportamiento.</p>
+        <p>El comportamiento es un lenguaje universal de &quot;como actuamos&quot;, o de nuestro comportamiento observable. En este test no existen resultados ni buenos, ni malos. Una vez que haya le&iacute;do el reporte, omita cualquier afirmaci&oacute;n que no parezca aplicar a su comportamiento.</p>
         <p>De acuerdo a las respuestas de <b>'.$solo_nombres.',</b> le presentamos descripciones generales de su forma de actuar en su trabajo, identificando la manera en que   prefiere realizar sus funciones.</p>';
       $pos_no_disponible = 1;
       $cantd_a = 0;
@@ -360,7 +356,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     <div id="pagina-4" style="text-align:justify">
       <h2>DESCRIPTORES</h2>';
   
-      $informe .= '<p>Basado en las respuestas de <b>'.$solo_nombres.',</b> predominan las palabras que más describen su comportamiento cuando: resuelve  problemas y enfrenta desafíos, influye en personas, responde al ritmo del ambiente,  reglas  y  procedimientos impuestos. </p>
+      $informe .= '<p>Basado en las respuestas de <b>'.$solo_nombres.',</b> predominan las palabras que m&aacute;s describen su comportamiento cuando: resuelve  problemas y enfrenta desaf&iacute;os, influye en personas, responde al ritmo del ambiente,  reglas  y  procedimientos impuestos. </p>
       <center>
 
         <table class="tabla2">
@@ -397,245 +393,245 @@ class Controlador_GenerarPDF extends Controlador_Base
         $informe .= '<br><div class="publicidad">INGRESA EN EL LINK <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA OBTENER MEJORES BENEFICIOS.</div>';
       }
 
-    $informe .= '</center></div><div style="page-break-after:always;"></div>
-    <br>
-    <div id="pagina-5" style="text-align:justify">
-      <h2>ESTILO PERSONALIZADO</h2>';
+      $informe .= '</center></div><div style="page-break-after:always;"></div>
+      <br>
+      <div id="pagina-5" style="text-align:justify">
+        <h2>ESTILO PERSONALIZADO</h2>';
 
-    $informe .= '<p><b>'.$solo_nombres.'</b> le estamos proporcionando un resumen de sí mismo. Comprender esta sección le ayudará a proyectar una imagen para controlar posibles situaciones. <b>Una vez que haya leído el reporte, omita cualquier afirmación que no parezca aplicar a su comportamiento.</b></p>
-    <center>
-      <table class="tabla-3">';
+      $informe .= '<p><b>'.$solo_nombres.'</b> le estamos proporcionando un resumen de s&iacute; mismo. Comprender esta secci&oacute;n le ayudar&aacute; a proyectar una imagen para controlar posibles situaciones. <b>Una vez que haya le&iacute;do el reporte, omita cualquier afirmaci&oacute;n que no parezca aplicar a su comportamiento.</b></p>
+      <center>
+        <table class="tabla-3">';
 
-    $cantd_a = 0;
-    foreach ($porcentajesxfaceta as $k => $valores) {
-      
-      $l = $facetas[$valores['id_faceta']]['literal'];
-      if($l == 'A' && $cantd_a > 1){
-        $color = $colores_bg[$l.'1']; 
-      }else{
-        $color = $colores_bg[$l];
-        $cantd_a++; 
+      $cantd_a = 0;
+      foreach ($porcentajesxfaceta as $k => $valores) {
+        
+        $l = $facetas[$valores['id_faceta']]['literal'];
+        if($l == 'A' && $cantd_a > 1){
+          $color = $colores_bg[$l.'1']; 
+        }else{
+          $color = $colores_bg[$l];
+          $cantd_a++; 
+        }
+        
+        $d = strtoupper($facetas[$valores['id_faceta']]['faceta']);
+        $informe .= '<tr>
+          <td class="'.$color.'" style="text-align: center; font-size: 11pt; font-weight: bold; text-transform: uppercase;
+      padding-top: 25px; padding-left: 40px; padding-bottom: 25px; padding-right: 40px;">'.utf8_encode($l.'/'.$d).'
+          </td>
+          <td style="background-color: #c9c9c9; width: 500px; padding: 5px 20px;">
+          '.str_replace('_NOMBRE_',$solo_nombres,utf8_encode($valores['descripcion'])).'
+          </td>
+        </tr><tr><td></td></tr>';
       }
+      $informe .= '</table>';
+
+      if($tipo_informe == 'parcial'){
+        $informe .= '<br>
+        <div class="publicidad">Recuerde ingresar a <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</div>';
+      }
+
+      $informe .= '</center>
+      </div><div style="page-break-after:always;"></div>
       
-      $d = strtoupper($facetas[$valores['id_faceta']]['faceta']);
-      $informe .= '<tr>
-        <td class="'.$color.'" style="text-align: center; font-size: 11pt; font-weight: bold; text-transform: uppercase;
-    padding-top: 25px; padding-left: 40px; padding-bottom: 25px; padding-right: 40px;">'.utf8_encode($l.'/'.$d).'
-        </td>
-        <td style="background-color: #c9c9c9; width: 500px; padding: 5px 20px;">
-        '.str_replace('_NOMBRE_',$solo_nombres,utf8_encode($valores['descripcion'])).'
-        </td>
-      </tr><tr><td></td></tr>';
-    }
-    $informe .= '</table>';
+      <div id="pagina-6" style="text-align:justify">
+        <h2>JERARQU&iacute;A DE COMPETENCIAS</h2>';
 
-    if($tipo_informe == 'parcial'){
-      $informe .= '<br>
-      <div class="publicidad">Recuerde ingresar a <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</div>';
-    }
+      $informe .= '
+      <p>Las gr&aacute;ficas de jerarqu&iacute;a mostrar&aacute;n por orden sus competencias de trabajo. Le ayudar&aacute; a entender en cuales de estas competencias ser&aacute; m&aacute;s productivo.</p><p>Nota: el porcentaje representado luego del asterisco (*) representa la media poblacional de cada competencia.</p>';
 
-    $informe .= '</center>
-    </div><div style="page-break-after:always;"></div>
-    
-    <div id="pagina-6" style="text-align:justify">
-      <h2>JERARQUÍA DE COMPETENCIAS</h2>';
+      $cantd_salto = 6;
 
-    $informe .= '
-    <p>Las gráficas de jerarquía mostrarán por orden sus competencias de trabajo. Le ayudará a entender en cuales de estas competencias será más productivo.</p><p>Nota: el porcentaje representado luego del asterisco (*) representa la media poblacional de cada competencia.</p>';
+      //aqui
+      arsort($datosXpreguntas);
+      $key = 0;
+      $cantd_preg = 0;
+      $cantd_hoja_total = round(count($datosXpreguntas)/6)-1;
+      $cantd_hoja = 1;
+      foreach ($datosXpreguntas as $id_competencia => $resultado) {
 
-    $cantd_salto = 6;
+        $pregunta = $preguntas[$id_competencia];
+        $cantd_preg++;
 
-    //aqui
-    arsort($datosXpreguntas);
-    $key = 0;
-    $cantd_preg = 0;
-    $cantd_hoja_total = round(count($datosXpreguntas)/6)-1;
-    $cantd_hoja = 1;
-    foreach ($datosXpreguntas as $id_competencia => $resultado) {
+        $informe .= '<p><b>'.($key + 1).'. '.str_replace($cambiar_letra,$conacentos,strtoupper(utf8_encode($pregunta['nombre']))).' -</b> '.utf8_encode($pregunta['descripcion']).' </p>';
+       
+        $key++;
+        $informe .= '<table class="demo">
+          <tbody>
+            <tr>
+              <th colspan="2">0</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">10</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">20</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">30</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">40</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">50</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">60</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">70</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">80</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3">90</th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th colspan="3" width="100">100</th>
+              <th class="porcentaje" rowspan="3"><span>'.number_format($resultado, 2, '.', ',').'</span></th>
+            </tr>
+            <tr id="borde_barra">';
+            $porcentaje = round($resultado); //43
+            $limite_inferior = round($pregunta['limite_inferior']); //53
+            $limite_medio = round($pregunta['limite_medio']);//62
+            $limite_superior = round($pregunta['limite_superior']); //71
 
-      $pregunta = $preguntas[$id_competencia];
-      $cantd_preg++;
-
-      $informe .= '<p><b>'.($key + 1).'. '.str_replace($cambiar_letra,$conacentos,strtoupper(utf8_encode($pregunta['nombre']))).' -</b> '.utf8_encode($pregunta['descripcion']).' </p>';
-     
-      $key++;
-      $informe .= '<table class="demo">
-        <tbody>
-          <tr>
-            <th colspan="2">0</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">10</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">20</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">30</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">40</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">50</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">60</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">70</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">80</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3">90</th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th></th>
-            <th colspan="3" width="100">100</th>
-            <th class="porcentaje" rowspan="3"><span>'.number_format($resultado, 2, '.', ',').'</span></th>
-          </tr>
-          <tr id="borde_barra">';
-          $porcentaje = round($resultado); //43
-          $limite_inferior = round($pregunta['limite_inferior']); //53
-          $limite_medio = round($pregunta['limite_medio']);//62
-          $limite_superior = round($pregunta['limite_superior']); //71
-
-          if($porcentaje >= $limite_medio){
-            $punto_medio = ($porcentaje - $limite_medio); //-19
-            $part1 = $porcentaje - $punto_medio - 1;
-            $part2 = $porcentaje - $limite_medio; 
-            $part3 = 100 - $porcentaje;
-            $part2 = '<td colspan="1" align="center" class="pintar-azul color_asterisco">*</td>
-            <td colspan="'.$part2.'" class="pintar-azul"></td>
-            <td class="fin" style="padding-left:50px;" colspan="'.$part3.'">&nbsp;</td>';
-          }else{
-            $part1 = $porcentaje;
-            $part2 = $limite_medio - $porcentaje - 1; 
-            $part3 = 100 - $limite_medio;
-            $part2 = '<td colspan="'.$part2.'">&nbsp;</td>
-            <td colspan="1" align="center" class="color_asterisco">*</td>
-            <td class="fin" colspan="'.$part3.'">&nbsp;</td>';
-          }
-
-          $informe .= '<td colspan="'.$part1.'" class="pintar-azul"></td>
-            '.$part2.'
-          </tr>
-          <tr style="font-size:12px;">';
-          
-          for ($i=1; $i <= 100; $i++) { 
-            if($i >= $limite_inferior && $i <= $limite_superior){
-              $informe .= '<td class="pintar-celeste">';
-              if($i == $limite_medio){
-                $informe .= $pregunta['limite_medio'];
-              }
-              $informe .= '</td>';
+            if($porcentaje >= $limite_medio){
+              $punto_medio = ($porcentaje - $limite_medio); //-19
+              $part1 = $porcentaje - $punto_medio - 1;
+              $part2 = $porcentaje - $limite_medio; 
+              $part3 = 100 - $porcentaje;
+              $part2 = '<td colspan="1" align="center" class="pintar-azul color_asterisco">*</td>
+              <td colspan="'.$part2.'" class="pintar-azul"></td>
+              <td class="fin" style="padding-left:50px;" colspan="'.$part3.'">&nbsp;</td>';
             }else{
-              $informe .= '<td>&nbsp;</td>';
+              $part1 = $porcentaje;
+              $part2 = $limite_medio - $porcentaje - 1; 
+              $part3 = 100 - $limite_medio;
+              $part2 = '<td colspan="'.$part2.'">&nbsp;</td>
+              <td colspan="1" align="center" class="color_asterisco">*</td>
+              <td class="fin" colspan="'.$part3.'">&nbsp;</td>';
             }
-          }
-          $informe .= '</tr>
-        </tbody>
-      </table>';
 
-      if($cantd_salto == $cantd_preg && $cantd_hoja <= $cantd_hoja_total){
+            $informe .= '<td colspan="'.$part1.'" class="pintar-azul"></td>
+              '.$part2.'
+            </tr>
+            <tr style="font-size:12px;">';
+            
+            for ($i=1; $i <= 100; $i++) { 
+              if($i >= $limite_inferior && $i <= $limite_superior){
+                $informe .= '<td class="pintar-celeste">';
+                if($i == $limite_medio){
+                  $informe .= $pregunta['limite_medio'];
+                }
+                $informe .= '</td>';
+              }else{
+                $informe .= '<td>&nbsp;</td>';
+              }
+            }
+            $informe .= '</tr>
+          </tbody>
+        </table>';
 
-        $informe .= '<div style="page-break-after:always;"></div><br>';
-        $cantd_salto++;
-        $cantd_hoja++;
-        $cantd_preg = 0;
+        if($cantd_salto == $cantd_preg && $cantd_hoja <= $cantd_hoja_total){
+
+          $informe .= '<div style="page-break-after:always;"></div><br>';
+          $cantd_salto++;
+          $cantd_hoja++;
+          $cantd_preg = 0;
+        }
       }
-    }
 
-    $informe .=  '</div>';
-    if($tipo_informe == 'parcial'){
-      $informe .= '<br><br>
-      <div class="publicidad">¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</div>';
-    }else{
-      $informe .= '<div style="page-break-after:always;"></div><br><br><div>
-        <h2>resumen canea</h2>
-        <h1 style="text-align: left; display: block"><span class="verde">C</span><span class="amarillo">A</span><span class="rojo">N</span><span class="morado">E</span><span class="azul">A</span></h1>
-      </div>';
-    }
+      $informe .=  '</div>';
+      if($tipo_informe == 'parcial'){
+        $informe .= '<br><br>
+        <div class="publicidad">¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</div>';
+      }else{
+        $informe .= '<div style="page-break-after:always;"></div><br><br><div>
+          <h2>resumen canea</h2>
+          <h1 style="text-align: left; display: block"><span class="verde">C</span><span class="amarillo">A</span><span class="rojo">N</span><span class="morado">E</span><span class="azul">A</span></h1>
+        </div>';
+      }
 
-    if(count($porcentajesxfaceta) == count($facetas)){
-      $informe .= '<p align="center"><img width="600" heigth="600" align="center" src="'.$datosusuario['grafico'].'">';
+      if(count($porcentajesxfaceta) == count($facetas)){
+        $informe .= '<p align="center"><img width="600" heigth="600" align="center" src="'.$datosusuario['grafico'].'">';
 
-      $porcentajes_faceta = explode(",",  $porcentajes_faceta);
-      $informe .= '<table style="font-size:18px" class="tabla-canea">
-          <tr>
-            <td style="background-color:#5EB782;" class="bloq-canea">&nbsp;</td>
-            <td class="bloq">Hacer '.$porcentajes_faceta[0].'%</td>
-            <td style="background-color:#FCDC59;" class="bloq-canea">&nbsp;</td>
-            <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
-            <td style="background-color:#E25050;" class="bloq-canea">&nbsp;</td>
-            <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
-          </tr>
-          <tr>
-            <td style="background-color:#8C4DCE;" class="bloq-canea">&nbsp;</td>
-            <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
-            <td style="background-color:#2B8DC9;" class="bloq-canea">&nbsp;</td>
-            <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
-            <td class="bloq-canea"></td>
-            <td class="bloq"></td>
-          </tr>
-      </table></p>';
-    }
-    //echo $informe;
-    self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
+        $porcentajes_faceta = explode(",",  $porcentajes_faceta);
+        $informe .= '<table style="font-size:18px" class="tabla-canea">
+            <tr>
+              <td style="background-color:#5EB782;" class="bloq-canea">&nbsp;</td>
+              <td class="bloq">Hacer '.$porcentajes_faceta[0].'%</td>
+              <td style="background-color:#FCDC59;" class="bloq-canea">&nbsp;</td>
+              <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
+              <td style="background-color:#E25050;" class="bloq-canea">&nbsp;</td>
+              <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
+            </tr>
+            <tr>
+              <td style="background-color:#8C4DCE;" class="bloq-canea">&nbsp;</td>
+              <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
+              <td style="background-color:#2B8DC9;" class="bloq-canea">&nbsp;</td>
+              <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
+              <td class="bloq-canea"></td>
+              <td class="bloq"></td>
+            </tr>
+        </table></p>';
+      }
+      //echo $informe;    
+      self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
   }
 
-  public function informePersonalidad($html,$nombre_archivo,$datos_descarga){
+  public function informePersonalidad($html,$nombre_archivo,$datos_descarga){    
     $cabecera = "imagenes/pdf/header1.png";
     $piepagina = "imagenes/pdf/footer1.png";
     $mpdf=new mPDF('','A4');
@@ -651,10 +647,11 @@ class Controlador_GenerarPDF extends Controlador_Base
         30, // margin bottom
         10, // margin header
         8);
-    $mpdf->WriteHTML($inidoc);
-    $mpdf->WriteHTML($enddoc);  
+    
+    $mpdf->WriteHTML($inidoc);    
     $mpdf->WriteHTML($html);
-
+    $mpdf->WriteHTML($enddoc);          
+    
     //validar  si es empresa y si tiene cupo para descargar
     /*if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
       $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
@@ -683,6 +680,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $mpdf->Output($nombre_archivo, 'D');
       }
     }else{*/
+      
       $mpdf->Output($nombre_archivo, 'D');
     //}
   }
@@ -747,10 +745,10 @@ class Controlador_GenerarPDF extends Controlador_Base
         //echo $ruta; exit;
         $html .= $divinicio."text-align: center;".$divinter.$imageninicio.$ruta.$imagenstyle."width: 120px;height: 120px;border-style: solid;border-color: white;".$imagenfin.$divfinal;
         if(isset($datos['aspSalarial'])){
-          $html .= "<h5 style='text-align: center;'><b>Aspiración salarial:</b> ".SUCURSAL_MONEDA.$datos['aspSalarial']."</h5>";
+          $html .= "<h5 style='text-align: center;'><b>Aspiraci&oacute;n salarial:</b> ".SUCURSAL_MONEDA.$datos['aspSalarial']."</h5>";
         }
         $documento = ""; if($datos['tipo_doc'] == 1) $documento = 'Ruc';
-                if($datos['tipo_doc'] == 2) $documento = 'Cédula';
+                if($datos['tipo_doc'] == 2) $documento = 'C&eacute;dula';
                 if($datos['tipo_doc'] == 3) $documento = 'Pasaporte';
         $html .= $inicioTabla;
           $html .= $iniciotbody;
@@ -836,7 +834,7 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Género</b>";
+              $html .= "<b>G&eacute;nero</b>";
               $html .= $fintd;
             $html .= $fintr;
 
@@ -855,11 +853,11 @@ class Controlador_GenerarPDF extends Controlador_Base
 // ------------------------------------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Último estudio realizado</b>";
+              $html .= "<b>&uacute;ltimo estudio realizado</b>";
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Situación laboral</b>";
+              $html .= "<b>Situaci&oacute;n laboral</b>";
               $html .= $fintd;
             $html .= $fintr;
 
@@ -987,7 +985,7 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= $fintd;
 
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Teléfono</b>";
+              $html .= "<b>Tel&eacute;fono</b>";
               $html .= $fintd;
             $html .= $fintr;
 
@@ -1023,7 +1021,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 // --------------***************--------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
-                $html .= "<h4>Áreas de interés</h4>";
+                $html .= "<h4>&aacute;reas de inter&eacute;s</h4>";
               $html .= $fintd;
             $html .= $fintr;
 
@@ -1036,10 +1034,10 @@ class Controlador_GenerarPDF extends Controlador_Base
                         foreach ($actual as $key2 => $value2) {
                           if($name != $value2['area']){
                             $name = $value2['area'];
-                            $html.= "<br><h4 style='text-align: center;'>Área: ".utf8_encode($value2['area'])."<br></h4>";
+                            $html.= "<br><h4 style='text-align: center;'>&aacute;rea: ".utf8_encode($value2['area'])."<br></h4>";
                           }
                         }
-                        $html.= "<h4 style='text-align: center;'>Subáreas: </h4>";
+                        $html.= "<h4 style='text-align: center;'>Sub&aacute;reas: </h4>";
                         foreach ($actual as $key1 => $value1) {
                           $html.= utf8_encode($value1['subarea'])."<br>";
                         }

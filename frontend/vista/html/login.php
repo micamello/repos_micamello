@@ -12,7 +12,7 @@
             <form style="margin-top: 10px" action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login" autocomplete="off">
               <div class="col-md-12">
                 <div class="form-group" id="seccion_username">
-                  <label>Usuario/Correo <span title="Este campo es obligatorio">*</span></label><div id="err_username" class="help-block with-errors"></div>
+                  <label>Usuario o Correo <span title="Este campo es obligatorio">*</span></label><div id="err_username" class="help-block with-errors"></div>
                   <input type="text" name="username" id="username" class="form-control" placeholder="Ej: palvarez/pedroalvarez@gmail.com" maxlength="50" minlength="4"  onkeyup="validaForm(1,'btn_sesion')">
                   <input type="hidden" name="login_form" id="login_form" value="1">            
                 </div>

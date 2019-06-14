@@ -10,7 +10,7 @@ $empresa_hija = false;
 if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array($datosOfertas['id_empresa'], $array_empresas))){
 	$empresa_hija = true;
 }else{
-	$nombre_empresa = strtoupper($datosOfertas['nombres']);
+	$nombre_empresa = utf8_encode($datosOfertas['nombres']);
 } ?>
 
 <div class="container">

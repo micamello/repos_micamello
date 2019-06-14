@@ -267,7 +267,6 @@ public static function validarCelularConvencional($contenido){
     return array($status,$ext);
   }
 
-
   public static function validarNumeros($campo){
     if(preg_match ("/^[0-9]+$/", $campo)) return true;
     else return false;
@@ -676,9 +675,7 @@ public static function validarCelularConvencional($contenido){
   }
 
   public static function detectarNavegador(){
-
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    
     if(strpos($user_agent, 'MSIE') !== FALSE)
       return 'MSIE';
     elseif(strpos($user_agent, 'Edge') !== FALSE) //Microsoft Edge
@@ -843,6 +840,14 @@ public static function validarCelularConvencional($contenido){
             echo "Error: Tipo de imagen no permitido.";
     }
   }  
+
+  public static function quitarCaracIzquierda($cadena,$caracter){
+    if (empty($cadena)){ return false; }
+    while (strpos($cadena, $caracter) === 0) {
+      $cadena = substr ($cadena,1);
+    }
+    return $cadena;
+  }
 
 }
 ?>

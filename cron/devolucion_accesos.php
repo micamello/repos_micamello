@@ -56,7 +56,7 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
             $email_body = str_replace("%ENLACE%", $enlace, $email_body); 
             Utils::envioCorreo($accesoemp["correo"],"Aceptación de acceso",$email_body); 
           }
-          else{
+          else{            
             if($fechacaducidad <= date('Y-m-d H:i:s')){
               proceso($accesoemp);
               $nombre_mostrar = ucfirst(utf8_encode($accesoemp["nombre_usuario"])).(!empty($accesoemp['apellido_usuario']) ? " ".ucfirst(utf8_encode($accesoemp['apellido_usuario'])) : "");
@@ -64,10 +64,10 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
               $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
               $enlace = "<a href='".PUERTO.'://'.HOST.'/planesUsuario/'."'>Mis Planes</a>";
               $email_body = Modelo_TemplateEmail::obtieneHTML("DEVOLUCION_ACCESO");
-              $email_body = str_replace("%NOMBRES%", $accesoemp['nombre_empresa'], $email_body);
+              $email_body = str_replace("%NOMBRES%", utf8_encode($accesoemp['nombre_empresa']), $email_body);
               $email_body = str_replace("%CANDIDATO%", $nombre_mostrar, $email_body);    
               $email_body = str_replace("%FECHA%", $accesoemp['fecha_envio_acceso'], $email_body); 
-              $email_body = str_replace("%PLAN%", $infoplan["nombre"], $email_body);
+              $email_body = str_replace("%PLAN%", utf8_encode($infoplan["nombre"]), $email_body);
               $email_body = str_replace("%ENLACE%", $enlace, $email_body); 
               Utils::envioCorreo($accesoemp["correo"],"Devolución de acceso",$email_body);
             } 
