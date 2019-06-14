@@ -176,7 +176,7 @@
           foreach($avisos as $aviso){                 
             $aviso["id_plan"] = Utils::encriptar($aviso["id_plan"]);
         ?>
-            <input type="hidden" id="avisotitulo_<?php echo $aviso["id_plan"];?>" value="<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "Promocional" : utf8_encode($aviso["nombre"]);?>">
+            <input type="hidden" id="avisotitulo_<?php echo $aviso["id_plan"];?>" value="<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? utf8_encode($aviso["nombre"])." (Promocional)" : utf8_encode($aviso["nombre"]);?>">
             <input type="hidden" id="avisoprom_<?php echo $aviso["id_plan"];?>" value="<?php echo $aviso["promocional"];?>">
             <input type="hidden" id="avisoext_<?php echo $aviso["id_plan"];?>" value="<?php echo $aviso["extension"];?>">
             <input type="hidden" id="avisoid_<?php echo $aviso["id_plan"];?>" value="<?php echo $aviso["id_plan"];?>">
@@ -286,7 +286,7 @@
       </div>    
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary" href="" id="btncomprar">Comprar</a>
+        <a class="btn btn-primary" href="" id="btncomprar">Continuar</a>
       </div>
     </div>    
   </div>
