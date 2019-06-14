@@ -26,7 +26,7 @@ $(document).ready(function(){
         is3D: true,
         width:3500,
         height:2000,
-        pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
+        pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 60},
         fontSize:80,
         legend: 'none',
         slices: {
