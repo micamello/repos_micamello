@@ -74,7 +74,7 @@
       </div>    
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-        <a class="btn btn-primary" href="" id="btncomprar">Comprar</a>
+        <a class="btn btn-primary" href="" id="btncomprar">Continuar</a>
       </div>
     </div>    
   </div>
