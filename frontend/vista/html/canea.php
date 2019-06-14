@@ -8,7 +8,7 @@
     <div class="container">
       <div class="row">
           <div class="col-md-12">
-            <p class="qs-text" style="font-size: 18px">Canea es un test basado en la teoria de los <b>"5 GRANDES RASGOS DE PERSONALIDAD"</b> y ha sido muy utilizada en diversas investigaciones para el area organizacional a nivel mundial.</p>
+            <p class="qs-text" style="font-size: 18px">Canea es un test basado en la teoria de los <b>"5 GRANDES RASGOS DE PERSONALIDAD"</b> y ha sido muy utilizada en diversas investigaciones para el &aacute;rea organizacional a nivel mundial.</p>
           </div>
 
           <div class="col-md-12 col-sm-12 text-center">

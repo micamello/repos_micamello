@@ -305,7 +305,7 @@ class Proceso_Facturacion{
     $obj_generar = new GenerarBarcode((string)$infoTributaria->claveAcceso,FRONTEND_RUTA.'imagenes/imagenesCod/');
     $obj_generar->imprimirbarcode();
 
-    //$mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
+    $mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
 
     $logo = "<img src='".FRONTEND_RUTA."imagenes/sucursal/logos/factura.png' alt='Mi Camello Logo' height='150'>";
     $eslogan = "Eficiencia, innovación y transparencia";

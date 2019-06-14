@@ -548,17 +548,17 @@ class Controlador_GenerarPDF extends Controlador_Base
         $porcentajes_faceta = explode(",",  $porcentajes_faceta);
         $informe .= '<table style="font-size:18px" class="tabla-canea">
             <tr>
-              <td style="background-color:#5EB782;" class="bloq-canea">&nbsp;</td>
+              <td style="background-color:#5EB782;" class="bloq-canea">C</td>
               <td class="bloq">Hacer '.$porcentajes_faceta[0].'%</td>
-              <td style="background-color:#FCDC59;" class="bloq-canea">&nbsp;</td>
+              <td style="background-color:#FCDC59;" class="bloq-canea">A</td>
               <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
-              <td style="background-color:#E25050;" class="bloq-canea">&nbsp;</td>
+              <td style="background-color:#E25050;" class="bloq-canea">N</td>
               <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
             </tr>
             <tr>
-              <td style="background-color:#8C4DCE;" class="bloq-canea">&nbsp;</td>
+              <td style="background-color:#8C4DCE;" class="bloq-canea">E</td>
               <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
-              <td style="background-color:#2B8DC9;" class="bloq-canea">&nbsp;</td>
+              <td style="background-color:#2B8DC9;" class="bloq-canea">A</td>
               <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
               <td class="bloq-canea"></td>
               <td class="bloq"></td>

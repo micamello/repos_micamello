@@ -80,7 +80,7 @@ class Controlador_Login extends Controlador_Base {
         $_SESSION['mfo_datos']['subempresas'] = $hijos;
       }      
     }  
-    @ini_set("session.gc_maxlifetime", 600);        
+    @ini_set("session.gc_maxlifetime", 900);        
     session_write_close();  
   }
 
