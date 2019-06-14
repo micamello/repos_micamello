@@ -131,7 +131,7 @@ $('#provincia').change(function()
             url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
             dataType:'json',
             success:function(data){
-                $('#ciudad').html('<option value="0">Selecciona una ciudad</option>');
+                $('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
                 $.each(data, function(index, value) {
                     $('#ciudad').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
                 });
@@ -143,8 +143,9 @@ $('#provincia').change(function()
                 }
             },
             error: function (request, status, error) {
+            	$('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
               Swal.fire({                
-                html: request.responseText,
+                html: 'Ocurrio un error al consultar las ciudades',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
                 imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
@@ -152,9 +153,11 @@ $('#provincia').change(function()
               });                  
             },
             beforeSend : function(){
+              ajaxLoader($('#ciudad'), 'aparecer');
               ajaxLoader($('#provincia'), 'aparecer');
             },
             complete : function(){
+              ajaxLoader($('#ciudad'), 'desaparecer');
               ajaxLoader($('#provincia'), 'desaparecer');
             }                
         })

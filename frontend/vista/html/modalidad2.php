@@ -4,7 +4,7 @@
 		<div class="text-center">
 			<br>
 			<div class="con_encabezado">
-				<span class="encabezado">Usted ha optado por el <b>MÉTODO SELECCIONAR Y ARRASTRAR</b>. Debe ordenar de 1 a 5 las oraciones en cada pregunta. Siendo 1 la oración con la que más se identifica y 5 con la que menos se identifica. El Test CANEA consta de 20 preguntas.</span><br>
+				<span class="encabezado">Usted ha optado por el <b>MÉTODO DE DOBLE CLICK</b>. Ordene de 1 a 5 las oraciones en cada pregunta. En donde 1 es la oración con la que más se identifica y 5 con la que menos se identifica. El Test CANEA consta de 20 preguntas.</span><br>
 				<div align="center">
 					<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/2.png";?>">
 				</div>
@@ -101,7 +101,7 @@
              <span class="contenido-modal-rec">Para obtener mayor efectividad en la búsqueda de empleo, le invitamos a completar el siguiente <b>TEST DE COMPETENCIAS</b>. ¡Recuerde! los test no son una pérdida de tiempo, mucho menos si el reclutador tiene claro cómo utilizar esta herramienta.</span><br><br>
             <ul>
             	<li class="contenido-modal-list">Prepárese. Mantenga una actitud tranquila.</li>
-            	<li class="contenido-modal-list">Cuidado con las mentiras, no corra el riesgo de perder credibilidad.</li>
+            	<li class="contenido-modal-list">Sea sincero, no pierda credibilidad</li>
             	<li class="contenido-modal-list">Lea las instrucciones.</li>
             	<li class="contenido-modal-list">Domine los nervios.</li>
             	<li class="contenido-modal-list">Sea usted mismo.</li>

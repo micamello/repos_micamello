@@ -56,7 +56,7 @@ function validarClavesRecuperar(){
 
 function validarCorreo(correo,err_correo,seccion_correo,btn){
 
-  var expreg_correo = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/;
+  var expreg_correo = /^[_a-zA-Z0-9-]+(.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(.[a-zA-Z0-9-]+)*(.[a-zA-Z]{2,4})$/;
   if(correo == null || correo.length == 0 || /^\s+$/.test(correo)){
     colocaError(err_correo, seccion_correo,"El campo no puede ser vac\u00EDo",btn);
   }else if(!expreg_correo.test(correo)){

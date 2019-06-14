@@ -43,7 +43,7 @@
          <h2 class="titulo">¿Qué es CANEA?</h2>
         </div>
         <div class="col-md-12">
-        <p class="qs-text">CANEA está basado en la teoría de los “5 GRANDES RASGOS DE PERSONALIDAD”, teoría que ha tenido validez y ha sido muy utilizada en diversas investigaciones en el área organizacional a nivel mundial. Para efectos prácticos CANEA se ha definido de la siguiente manera: </p>
+        <p class="qs-text" style="font-size: 18px">Canea es un test basado en la teoria de los <b>"5 GRANDES RASGOS DE PERSONALIDAD"</b> y ha sido muy utilizada en diversas investigaciones para el area organizacional a nivel mundial.</p>
       </div>
 
       <section>
@@ -60,11 +60,11 @@
               </div>
               <div class="col-md-2 col-sm-2 col-xs-2 ">
                 <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm">N</div>
-                <div class="texto-canea "><h4 class="hidden-sm hidden-xs">Estabilidad Emocional</h4></div>
+                <div class="texto-canea "><h4 class="hidden-sm hidden-xs">Inteligencia Emocional</h4></div>
               </div>
               <div class="col-md-2 col-sm-2 col-xs-2 ">
                 <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm ">E</div>
-                <div class="texto-canea "><h4 class="hidden-sm hidden-xs">Asertividad</h4></div>
+                <div class="texto-canea "><h4 class="hidden-sm hidden-xs">Asertividad / Comunicación</h4></div>
               </div>
               <div id="prueba-e" class="col-md-2 col-sm-2 col-xs-2 ">
                 <div class="canea-text-modal visible-lg visible-md visible-xs visible-sm">A</div>
