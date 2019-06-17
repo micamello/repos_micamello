@@ -115,7 +115,7 @@ function validarRucPersonaNatural(valor, tipo){
 
 function validarRucPersonaJuridica(valor){
 	provincia = valor.substr(0,2);
-	if(provincia > 1 && provincia < 24){
+	if(provincia >= 1 && provincia <= 24){
 		digitos = [];consecutivo = [];
 		if(valor.length == 13){
 			digitos[0]  = valor.substr(0,1);         
@@ -166,7 +166,7 @@ function validarRucPersonaJuridica(valor){
 
 function validarRucInstitucionPublica(valor){
 	provincia = valor.substr(0,2);
-	if(provincia > 1 && provincia < 24){
+	if(provincia >= 1 && provincia <= 24){
 		digitos = [];consecutivo = [];
 		if(valor.length == 13){
 			digitos[0]  = valor.substr(0,1);         

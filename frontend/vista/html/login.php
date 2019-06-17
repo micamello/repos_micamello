@@ -13,8 +13,8 @@
               <div class="col-md-12">
                 <div class="form-group" id="seccion_username">
                   <label>Usuario o Correo <span title="Este campo es obligatorio">*</span></label><div id="err_username" class="help-block with-errors"></div>
-                  <input type="text" name="username" id="username" class="form-control" placeholder="Ej: palvarez/pedroalvarez@gmail.com" maxlength="50" minlength="4"  onkeyup="validaForm(1,'btn_sesion')">
-                  <input type="hidden" name="login_form" id="login_form" value="1">            
+                  <input type="text" name="username" id="username" class="form-control noautofill" placeholder="Ej: palvarez/pedroalvarez@gmail.com" maxlength="50" minlength="4"  onkeyup="validaForm(1,'btn_sesion')">
+                  <input type="hidden" name="login_form" id="login_form" value="1" readonly>            
                 </div>
               </div>
               <div class="col-md-12">

@@ -179,6 +179,7 @@ if($('#tipoDoc').length){
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($(this).val());
 				if(docCampo.val() != ""){ 
+					console.log($(this).val());
 					if(DniRuc_Validador(docCampo,$(this).val()) == true){
 						if(searchAjax(docCampo)){
 							eliminarMensajeError(docCampo);
@@ -202,6 +203,7 @@ if($('#tipoDoc').length){
 if($('#documentoCandEmp').length){
 	$('#documentoCandEmp').on('blur', function(){
 		if($(this).val() != ""){
+			console.log($('#tipo_documentacion').val());
 			var tipoDocCampo = $('#tipo_documentacion').val();
 			if(DniRuc_Validador($(this), tipoDocCampo) == true){
 				if(searchAjax($(this))){
@@ -372,8 +374,8 @@ if($('#password_1').length){
 	if($('#tel2ConEmp').length){
 		$('#tel2ConEmp').on('blur', function(){
 			if($(this).val() != ""){
-				if(!ValidarCelularConvencional($(this).val())){
-					crearMensajeError($(this), "Longitud entre 9 y 15 dígitos");
+				if(!ValidarTelefonoConvencional($(this).val())){
+					crearMensajeError($(this), "Longitud de 9 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this), "");
@@ -695,8 +697,8 @@ if(tipousuario == 1){
 
 		if($('#tel2ConEmp').length){
 			if($('#tel2ConEmp').val() != ""){
-				if(!ValidarCelularConvencional($('#tel2ConEmp').val())){
-					crearMensajeError($('#tel2ConEmp'), "Longitud entre 9 y 15 dígitos");
+				if(!ValidarTelefonoConvencional($('#tel2ConEmp').val())){
+					crearMensajeError($('#tel2ConEmp'), "Longitud de 9 dígitos");
 				}
 				else{
 					eliminarMensajeError($('#tel2ConEmp'), "");
@@ -991,10 +993,11 @@ function safari(){
 }
 
 function validarCorreo(correo) { 
-  return /^\w+([\.\+\-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/.test(correo);
+  return /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/.test(correo);
 }
 
 function ValidarTelefonoConvencional(valor){
+	console.log(valor.length);
 	if(/^[0-9]{9}$/.test(valor)){return true;}else{return false;}
 }
 

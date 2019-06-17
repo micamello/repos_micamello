@@ -47,7 +47,7 @@
     <div class="externDivLoader">
       <div class="centrarLoader">
         <div align="center">
-          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/loader.gif" class="img-responsive center" style="min-height: 50px; max-height: 50px;">
+          <img src="<?php echo PUERTO."://".HOST;?>/imagenes/loader.gif" class="img-responsive center" style="min-height: 100px; max-height: 100px;">
         </div>
         <h4 style="text-align: justify;">Estamos procesando su compra...</h4>
 
