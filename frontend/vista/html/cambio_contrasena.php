@@ -31,7 +31,7 @@
 
 				        <div class="col-md-12">
 				            <div id="seccion_clave" class="form-group">
-			                  <label class="text-center">Contrase&ntilde;a <i>*</i></label><div id="err_clave" class="help-block with-errors"></div>
+			                  <label class="text-center">Contrase&ntilde;a nueva<i>*</i></label><div id="err_clave" class="help-block with-errors"></div>
 			                  <div class="input-group">
 			                    <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
 			                    <input title="Letras y números, mínimo 8 caracteres" id="password" name="password" type="password" pattern="^(?=(?:.*\d))(?=(?:.*[a-zA-Z]))\S{8,}$" value="<?php if(isset($data['password'])){ echo $data['password']; } ?>" onchange="this.setCustomValidity(this.validity.patternMismatch ? this.title : ''); if(this.checkValidity()) form.password_two.pattern = this.value;" class="form-control noautofill" onkeyup="validarClave()" readonly>

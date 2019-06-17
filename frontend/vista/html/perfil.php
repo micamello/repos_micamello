@@ -140,7 +140,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 	                                    	<div class="col-md-6">
 									            <div class="form-group" id="seleccione_group">
 									              <label for="tipo_dni">Tipo de documento</label><div id="seleccione_error" class="help-block with-errors"></div>
-									              <select class="form-control" id="documentacion" name="documentacion" <?php if($_SESSION['mfo_datos']['usuario']['tipo_doc'] == 0){ echo ''; }else{ echo 'disabled';} ?> onchange="validarFormulario(false)">
+									              <select class="form-control" id="documentacion" name="documentacion" <?php if($_SESSION['mfo_datos']['usuario']['tipo_doc'] == 0){ echo ''; }else{ echo 'disabled';} ?> onchange="validarFormulario(true)">
 									                <option selected="" value="">Seleccione una opci&oacute;n</option>
 									                <?php 
 									                  $option = '';
@@ -159,7 +159,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 								          	</div>                             
 		                                    <div class="col-md-6">
 			                                    <div class="form-group" id="seccion_dni">
-			                                        <label for="dni">C&eacute;dula</label><div id="err_dni" class="help-block with-errors"></div>
+			                                        <label id="nombre_documento" for="dni">C&eacute;dula</label><div id="err_dni" class="help-block with-errors"></div>
 			                                        <input class="form-control" type="text" id="dni" name="dni" <?php if(empty($_SESSION['mfo_datos']['usuario']['dni'])){ echo ''; }else{ echo 'disabled';} ?> value="<?php if(isset($data['dni'])){ echo $data['dni']; } else if(empty($_SESSION['mfo_datos']['usuario']['dni'])){ echo ''; }else{ echo $_SESSION['mfo_datos']['usuario']['dni'];  } ?>" onkeyup="validarFormulario(true)" />
 			                                    </div>
 		                                    </div>

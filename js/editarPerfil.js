@@ -96,6 +96,17 @@ $('#boton').on('click', function(){
   enviarFormulario();
 });
 
+$('#documentacion').change(function()
+{
+
+  if($('#documentacion').val()==3){
+    $('#nombre_documento').html('Pasaporte');
+  }else if($('#documentacion').val()==2){
+    $('#nombre_documento').html('C&eacute;dula');
+  }
+});
+
+
 if (document.getElementById("area"))
 {
   $('#area').multiple_select({
@@ -606,8 +617,10 @@ function enviarFormulario(){
     if($('#tipo_usuario').val() == 2){
       
       if(estado == ''){
-          $('.loaderMic').css('display', 'block');
-          document.form_editarPerfil.submit();
+        $('.loaderMic').css('display', 'block');
+        document.form_editarPerfil.submit();
+        var destino = $('#boton');
+        $('html, body').animate({ scrollTop: destino.offset().top }, 700); 
       }
       else if(estado != ''){
         //mostrarERRORES
@@ -768,6 +781,7 @@ function validarFormulario(tipovalidacion){
                 error = 1;
                 mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'<br>';
               }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
+                console.log(document.getElementById('dni').value.length);
                 colocaError("err_dni", "seccion_dni","Documento mínimo de 6 dígitos","boton");
                 error = 1;
                 mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'<br>';
@@ -776,6 +790,8 @@ function validarFormulario(tipovalidacion){
                 colocaError("err_dni", "seccion_dni","Documento mínimo de 13 dígitos","boton");
                 error = 1;
                 mensaje += "- El RUC debe tener mínimo 13 dígitos"+'<br>';
+              }else{
+                quitarError("err_dni","seccion_dni");
               }
             }    
           }else{

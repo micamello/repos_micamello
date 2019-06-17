@@ -127,12 +127,16 @@ class Controlador_Perfil extends Controlador_Base
                 
                 if (!isset($_SESSION['mfo_datos']['usuario']['grafico']) || empty($_SESSION['mfo_datos']['usuario']['grafico'])){
                     $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    
                     $str_grafico = '';
-                    $reg_ultimo = array_shift($result_faceta);
-                    foreach($result_faceta as $rs){
-                      $str_grafico .= $rs["literal"]/*.":".$rs["valor"]*/.",".$rs["valor"]."|";
-                    }
-                    $str_grafico .= $reg_ultimo["literal"]/*.":".$reg_ultimo["valor"]*/.",".$reg_ultimo["valor"];       
+                    if(count($result_faceta) > 0){
+                        
+                        $reg_ultimo = array_shift($result_faceta);
+                        foreach($result_faceta as $rs){
+                          $str_grafico .= $rs["literal"]/*.":".$rs["valor"]*/.",".$rs["valor"]."|";
+                        }
+                        $str_grafico .= $reg_ultimo["literal"]/*.":".$reg_ultimo["valor"]*/.",".$reg_ultimo["valor"];   
+                    }    
                 }
 
                 $tags = array('escolaridad' => $escolaridad,

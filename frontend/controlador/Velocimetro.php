@@ -73,9 +73,9 @@ class Controlador_Velocimetro extends Controlador_Base {
         $str_grafico = '';
         $reg_ultimo = array_shift($result_faceta);
         foreach($result_faceta as $rs){
-          $str_grafico .= $rs["literal"].":".$rs["valor"].",".$rs["valor"]."|";
+          $str_grafico .= $rs["literal"]/*.":".$rs["valor"]*/.",".$rs["valor"]."|";
         }
-        $str_grafico .= $reg_ultimo["literal"].":".$reg_ultimo["valor"].",".$reg_ultimo["valor"];       
+        $str_grafico .= $reg_ultimo["literal"]/*.":".$reg_ultimo["valor"]*/.",".$reg_ultimo["valor"];       
         $tags["val_grafico"] = $str_grafico;
       }
     }

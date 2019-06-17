@@ -649,7 +649,7 @@ function searchAjax(obj,tipo_dni){
           console.log(request.responseText);
       },
       beforeSend : function(){
-        ajaxLoader(obj, 'aparecer');
+        ajaxLoader(obj, 'aparecer',2);
       },
       complete : function(){
         ajaxLoader(obj, 'desaparecer');
