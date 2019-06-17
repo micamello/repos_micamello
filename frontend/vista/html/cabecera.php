@@ -8,7 +8,6 @@
   <meta name="google-site-verification" content="Hy5ewWRp0yOqH1Z_3Q59zSVffxTZDLa_T50VEoGBIBw" />
   <title>MiCamello - Portal de Empleos en Ecuador</title>
   <meta name="keywords" content="ofertas de trabajo, trabajos, empleos, bolsa de empleos, buscar trabajo, busco empleo, portal de empleo, ofertas de empleo, bolsa de empleo, trabajos en ecuador, paginas de empleo, empleos ecuador, camello">
-  <title>MiCamello - Portal de Empleos en Ecuador</title>
   <meta name="description" content="Cientos de empresas publican las mejores ofertas en la bolsa de trabajo Mi Camello Ecuador. Busca empleo y apúntate y sé el primero en postular">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:image" content="https://www.micamello.com.ec/" />
@@ -206,13 +205,13 @@ if($navegador == 'MSIE'){ ?>
          <?php } ?>
          <?php if (isset($menu["submenu"])){ ?>                            
           <li class="dropdown" id="seccion_user">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
               <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-              
                 <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                 echo "usericon_safari";
               } ?>" width="35" height="35">&nbsp;<i class="fa fa-caret-down"></i>
               <ul class="dropdown-menu">
+                <li id="estilo_username"><?php echo strtoupper($_SESSION['mfo_datos']['usuario']['username']); ?></li>
                 <?php foreach($menu["submenu"] as $submenu){ ?>  
                   <li><a <?php if(isset($submenu['href'])){ echo 'href="'.$submenu['href'].'"'; }else{ echo 'onclick="'.$submenu['onclick'].'"'; } ?>><?php echo $submenu['nombre'];?></a></li>
                 <?php } ?>

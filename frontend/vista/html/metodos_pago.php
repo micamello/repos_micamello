@@ -152,7 +152,8 @@
               <div class="col-md-6"> 
                 <div id="seccion_ciu" class="form-group"> 
                   <label>Ciudad</label><div id="err_ciu" class="help-block with-errors"></div> 
-                  <select id="select_ciudad" name="select_ciudad" class="form-control">                     
+                  <select id="select_ciudad" name="select_ciudad" class="form-control">       
+                    <option disabled selected value="0">Seleccione una opci&oacute;n</option>         
                   </select>
                 </div>
               </div>
@@ -258,7 +259,8 @@
                 <div class="col-md-6"> 
                   <div id="seccion_ciuPM" class="form-group"> 
                     <label>Ciudad</label><div id="err_ciuPM" class="help-block with-errors"></div> 
-                    <select id="ciudadPM" name="ciudadPM" class="form-control">                     
+                    <select id="ciudadPM" name="ciudadPM" class="form-control"> 
+                      <option disabled selected value="0">Seleccione una opci&oacute;n</option>                     
                     </select>
                   </div>
                 </div>

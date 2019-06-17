@@ -542,6 +542,9 @@ display: inline;
     .imagen{
         width: 70px;
     }
+    .menu-prueba {
+        width: 820px;
+    }
 }
 
 
@@ -997,7 +1000,7 @@ padding-top: 10px;
     color: #c1c1c1;
 }
 #tipo-plan{
-    padding: 10px 10px 10px 20px;
+    padding: 10px 0px;
     background-color: #e5e5e5;
     color: #afafaf;
     font-family: ‘Roboto’;
@@ -1015,8 +1018,7 @@ padding-top: 10px;
     margin-bottom: 5px;
     font-size: 14pt;
     text-transform: uppercase;
-    height: 50px;
-
+    height: auto;
 }
 /*QUIENES SOMOS*/
 #margin-b-15{
@@ -1792,6 +1794,7 @@ ul.checkout-bar a {
     text-decoration: none;
  }
 .btn-blue{
+    display: inline-block;
     border-color: transparent;
     font-family: ‘Roboto’;
     font-size: 16pt;
@@ -2122,12 +2125,18 @@ div[class*='col-'] {
     line-height: normal;
     cursor: pointer;
 }
+.btn-naranja a{
+    color: white;
+}
 .btn-naranja:hover{
     color: #f17525;
     border: 2px solid #f17525;
     background-color: transparent;
     text-decoration: none;
-
+}
+.btn-naranja:hover a{
+    color: #f17525;
+    text-decoration: none;
 }
 
 .f-s-16px{ font-size: 16px; }
@@ -2670,4 +2679,39 @@ animation:
 
 input[type='number'] {
     -moz-appearance:textfield;
+}
+
+@media (max-width: 767px) and (min-width: 481px){
+    #img-logo{
+      margin-left: 20px !important;
+    }
+    .user_icon {
+        display: inline;
+    }
+}
+@media (max-width: 1024px) and (min-width: 768px){
+    #img-logo{
+      margin-left: 0px !important;
+      padding-left: 0px;
+    }
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+input[type=number] { -moz-appearance:textfield; }
+
+#estilo_username{
+    line-height: normal;
+    padding: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #f1f1f1;
+    text-transform: uppercase;
+    text-align: center;
+    border-bottom: 2px solid white;
+    font-size: 16px;
 }

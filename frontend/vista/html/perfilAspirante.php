@@ -17,9 +17,7 @@
 				</div>
 				<div class="col-md-6">
 					<!-- <?php #echo $vista; ?> -->
-					
 				</div>
-
 
 				<div class="col-md-6">
 		        	<div class="col-md-12">

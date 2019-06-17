@@ -26,7 +26,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 </div>
 
 <br>
-<div class=" banner-publicidad">
+<div class=" banner-publicidad" align="center">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -1150,7 +1150,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
   </div>
 </div>
 <br>
-<div class=" banner-publicidad">
+<div class=" banner-publicidad" align="center">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">

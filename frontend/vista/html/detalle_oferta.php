@@ -6,7 +6,7 @@
 
 <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
 <br>
-<div class=" banner-publicidad">
+<div class=" banner-publicidad" align="center">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
@@ -228,7 +228,7 @@
 </div>
 
 <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
-<div class=" banner-publicidad">
+<div class=" banner-publicidad" align="center">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">

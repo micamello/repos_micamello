@@ -49,12 +49,13 @@ $('#provinciaPM').change(function(){
       url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
       dataType:'json',
       success:function(data){
-        $('#ciudadPM').html('<option value="">Seleccione una ciudad</option>');
+        $('#ciudadPM').html('<option disabled selected value="0">Seleccione una ciudad</option>');
         $.each(data, function(index, value) {
             $('#ciudadPM').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
         });
       },
       error: function (request, status, error) {
+        $('#ciudadPM').html('<option value="">Seleccione una ciudad</option>');
         Swal.fire({          
           html: 'Error por favor intente denuevo',
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
@@ -62,13 +63,15 @@ $('#provinciaPM').change(function(){
           confirmButtonText: 'ACEPTAR',
           animation: true
         });        
-      },
+      },   
       beforeSend : function(){
-          ajaxLoader($('#provinciaPM'), 'aparecer');
-        },
-        complete : function(){
-          ajaxLoader($('#provinciaPM'), 'desaparecer');
-        }                 
+        ajaxLoader($('#ciudadPM'), 'aparecer');
+        ajaxLoader($('#provinciaPM'), 'aparecer');
+      },
+      complete : function(){
+        ajaxLoader($('#ciudadPM'), 'desaparecer');
+        ajaxLoader($('#provinciaPM'), 'desaparecer');
+      }                 
     });
     quitarError("err_provPM","seccion_provPM");
   }
@@ -87,12 +90,13 @@ $('#select_provincia').change(function(){
       url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
       dataType:'json',
       success:function(data){
-        $('#select_ciudad').html('<option value="">Seleccione una ciudad</option>');
+        $('#select_ciudad').html('<option disabled selected value="0">Seleccione una ciudad</option>');
         $.each(data, function(index, value) {
             $('#select_ciudad').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
         });
       },
       error: function (request, status, error) {
+        $('#select_ciudad').html('<option value="">Seleccione una ciudad</option>');
         Swal.fire({          
           html: 'Error por favor intente denuevo',
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
@@ -102,11 +106,13 @@ $('#select_provincia').change(function(){
         });        
       },
       beforeSend : function(){
-          ajaxLoader($('#select_provincia'), 'aparecer');
-        },
-        complete : function(){
-          ajaxLoader($('#select_provincia'), 'desaparecer');
-        }                  
+        ajaxLoader($('#select_ciudad'), 'aparecer');
+        ajaxLoader($('#select_provincia'), 'aparecer');
+      },
+      complete : function(){
+        ajaxLoader($('#select_ciudad'), 'desaparecer');
+        ajaxLoader($('#select_provincia'), 'desaparecer');
+      }                   
     });
     quitarError("err_prov","seccion_prov");
   }

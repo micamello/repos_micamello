@@ -1,4 +1,5 @@
 <?php  
+
 $_SESSION['mostrar_exito'] = "";
 $_SESSION['mostrar_error'] = ""; ?>
 
@@ -228,8 +229,8 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 		                                	<div class="col-md-6">
 			                                    <div class="form-group" id="seccion_pag" >
-			                                        <label for="pagina_web">P&aacute;gina Web <span id="opcional">(opcional)</span></label><div id="err_pag" class="help-block with-errors"></div>
-			                                        <input class="form-control" id="pagina_web" name="pagina_web" type="text" value="<?php if(isset($data['pagina_web'])){ echo $data['pagina_web']; } else{ echo $_SESSION['mfo_datos']['usuario']['pagina_web']; } ?>" onkeyup="validarFormulario(false)" placeholder="http://www.ejemplo.com"/>
+			                                        <label for="pagina_web">P&aacute;gina Web <span id="opcional">(www.micamello.com.ec)</span></label><div id="err_pag" class="help-block with-errors"></div>
+			                                        <input class="form-control" id="pagina_web" name="pagina_web" type="text" value="<?php if(isset($data['pagina_web'])){ echo $data['pagina_web']; } else{ echo $_SESSION['mfo_datos']['usuario']['pagina_web']; } ?>" onkeyup="validarFormulario(false)" placeholder="www.micamello.com.ec"/>
 			                                    </div>
 		                                    </div>
 

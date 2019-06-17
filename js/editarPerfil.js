@@ -26,7 +26,7 @@ $(document).ready(function(){
         is3D: true,
         width:3500,
         height:2000,
-        pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 80},
+        pieSliceTextStyle: {color: 'black', fontName: 'dsfd', fontSize: 60},
         fontSize:80,
         legend: 'none',
         slices: {
@@ -131,7 +131,7 @@ $('#provincia').change(function()
             url: puerto_host+"/index.php?mostrar=perfil&opcion=buscaCiudad&id_provincia="+id_provincia,
             dataType:'json',
             success:function(data){
-                $('#ciudad').html('<option value="0">Selecciona una ciudad</option>');
+                $('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
                 $.each(data, function(index, value) {
                     $('#ciudad').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
                 });
@@ -143,8 +143,9 @@ $('#provincia').change(function()
                 }
             },
             error: function (request, status, error) {
+            	$('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
               Swal.fire({                
-                html: request.responseText,
+                html: 'Ocurrio un error al consultar las ciudades',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
                 imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
@@ -152,9 +153,11 @@ $('#provincia').change(function()
               });                  
             },
             beforeSend : function(){
+              ajaxLoader($('#ciudad'), 'aparecer');
               ajaxLoader($('#provincia'), 'aparecer');
             },
             complete : function(){
+              ajaxLoader($('#ciudad'), 'desaparecer');
               ajaxLoader($('#provincia'), 'desaparecer');
             }                
         })
@@ -684,7 +687,7 @@ function validarNombreEmpresa(nombre){
 }
 
 function ValidURL(str) {
-  var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+  var regex = /^(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/;
   if(!regex .test(str)) {
     return false;
   } else {
@@ -889,7 +892,7 @@ function validarFormulario(tipovalidacion){
                 quitarError("err_univ", "seccion_univ");
             }
         } 
-
+        
         if(area_select.value == null || area_select.value == 0){
 
             colocaError("err_area", "seccion_area",err_list,"boton");

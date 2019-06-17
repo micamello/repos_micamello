@@ -6,18 +6,15 @@ class Controlador_Publicar extends Controlador_Base {
     if(!Modelo_Usuario::estaLogueado()){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
-
     if(!empty($_SESSION['mfo_datos']['usuario']['tipo_usuario']) && ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) && (empty($_SESSION['mfo_datos']['usuario']['id_cargo']) || empty($_SESSION['mfo_datos']['usuario']['nro_trabajadores']))){ 
       $_SESSION['mostrar_error'] = "Debe completar el perfil para continuar";
       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
     }
-
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::EMPRESA){
       Utils::doRedirect(PUERTO.'://'.HOST.'/'); 
     }
     $id_usuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($id_usuario, $_SESSION['mfo_datos']['usuario']['tipo_usuario']);
-
     if (!isset($_SESSION['mfo_datos']['planes']) || empty($_SESSION['mfo_datos']['planes'])){
       $_SESSION['mostrar_notif'] = "No tiene un plan contratado. Para poder publicar una oferta, por favor aplique a uno de nuestros planes";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
@@ -28,7 +25,6 @@ class Controlador_Publicar extends Controlador_Base {
       $_SESSION['mostrar_error'] = "No tiene permisos para publicar oferta";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
-
     $opcion = Utils::getParam('opcion','',$this->data);
     switch($opcion){
       case 'buscaCiudad':
@@ -53,17 +49,14 @@ class Controlador_Publicar extends Controlador_Base {
         Vista::renderJSON($confidencialPlan);
       break;
       // case 'registroOferta':
-
         
          // Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
       // break;
-
       default:
             $this->mostrarDefault();
       break;
     } 
   }
-
   public function mostrarDefault(){
     $planes = array();
     $sumPub = 0;
@@ -78,7 +71,6 @@ class Controlador_Publicar extends Controlador_Base {
       $_SESSION['mostrar_error'] = "Por el momento no dispone de publicaciones restantes. Por favor adquiera un Plan para poder publicar una oferta";
       Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
     }
-
     $breadcrumbs['publicar'] = 'publicar oferta';
     $idProvinciaSucursal = $arrprovinciasucursal[0]['id_provincia'];
     if(!empty($_POST['provinciaOf']) && $_POST){$idProvinciaSucursal = $_POST['provinciaOf'];}
@@ -91,8 +83,6 @@ class Controlador_Publicar extends Controlador_Base {
     $fechacontratacion = date('Y-m-d',strtotime('+1 day',strtotime(date('Y-m-d H:i:s')))); 
     $listSubareas = Modelo_AreaSubarea::obtieneAreas_Subareas();
     $tipolicencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
-
-
     $tags = array('areasSubareas'=> $listSubareas,
                   'arrprovinciasucursal'=>$arrprovinciasucursal,
                   'arrciudad'=>$arrciudad,
@@ -113,7 +103,6 @@ class Controlador_Publicar extends Controlador_Base {
     $tags["template_js"][] = "multiple_select";
     $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "validatePublicar";
-
     if(isset($_POST) && !empty($_POST)){
       $datos = $_POST;
         try {
@@ -139,7 +128,6 @@ class Controlador_Publicar extends Controlador_Base {
       }
     Vista::render('publicar_vacante', $tags);
   }
-
   public function validarCampos($datos){
     if(Utils::getParam('registroOferta') == 1){
       $campos = array('planUsuario'=>1,
@@ -182,7 +170,6 @@ class Controlador_Publicar extends Controlador_Base {
           $num_publicaciones = $planes['num_publicaciones_rest'];
         }
       }
-
       if($id_empresa == null){
         throw new Exception("Ha ocurrido un error");
         
@@ -191,11 +178,9 @@ class Controlador_Publicar extends Controlador_Base {
         throw new Exception("Ha ocurrido un error");
         
       }
-
       $arraySubareas = array();
       $listAreas = Modelo_Area::obtieneListadoAsociativo();
       $listSubareas = Modelo_AreaSubarea::obtieneListadoAsociativo();
-
       for ($i=0; $i < count($datosReg['subareasCand']); $i++) { 
         $subareas = explode("_", $datosReg['subareasCand'][$i]);
         if(!in_array($subareas[0], array_keys($listAreas)) && !in_array($subareas[1], array_keys($listSubareas))){
@@ -205,7 +190,6 @@ class Controlador_Publicar extends Controlador_Base {
             array_push($arraySubareas, $subareas[2]);
           }
       }
-
       if(empty($arraySubareas)){
         throw new Exception("Debe seleccionar al menos una sub\u00E1rea por \u00E1rea");
       }
@@ -218,8 +202,10 @@ class Controlador_Publicar extends Controlador_Base {
       if(count($datosReg['subareasCand']) < SUBAREA_PERM_PUB || count($datosReg['subareasCand']) > SUBAREA_PERM_PUB){
          throw new Exception("Seleccione n\u00FAmero permitido de sub\u00E1reas");
       }
-
-
+      //Utils::log(print_r($datosReg,true));
+      //if(count($datosReg['area_select']) != 1){
+      //    throw new Exception("Seleccione el m\u00E1ximo o m\u00CDnimo permitido de \u00E1reas");
+      //}
       $listadoIdiomasNivel = Modelo_NivelxIdioma::obtieneListado();
       $idiomaNivelIdioma = array();
       $arrayIdiomasSel = array();
@@ -232,38 +218,32 @@ class Controlador_Publicar extends Controlador_Base {
           }
         }
       }
-
       if(empty($arrayIdiomasSel)){
         throw new Exception("Seleccione al menos un idioma");
         
       }
-
-      $datosReg = array_merge($datosReg, array("descripcion"=>$_POST['descripcionOferta'], 
+      $descOferta = trim(str_replace("'","",$_POST['descripcionOferta']));
+      $datosReg = array_merge($datosReg, array("descripcion"=>$descOferta, 
                                                 "id_empresa"=>$id_empresa,
                                                 'id_empresa_plan'=>$id_empresa_plan,
                                                 'id_areas_subareas'=> $arraySubareas,
                                                 'listadoNivelIdioma'=>$arrayIdiomasSel,
                                                 'numeroPub'=>$num_publicaciones));
-
       if(ctype_space($datosReg['nombreOferta']) 
         || Utils::validarTituloOferta($datosReg['nombreOferta'] == false 
         || Utils::validarLongitudCampos($datosReg['nombreOferta'], 100) == false)){
         throw new Exception("Ingrese un título válido para la oferta");
         
       }
-
       if(ctype_space($datosReg['descripcion']) && (empty($$datosReg['descripcion']) || $datosReg['descripcion'] == "")){
         throw new Exception("El campo descripci\u00F3n es obligatorio");
       }
-
       if(!Utils::formatoDineroDecimal($datosReg['salarioOf'])){
         throw new Exception("El campo salario solo permite n\u00FAmeros");
       }
-
       if (Utils::validarNumeros($datosReg['cantVac']) == false) {
         throw new Exception("El campo vacantes solo permite n\u00FAmeros");
       }
-
       $valida_fecha = Utils::valida_fecha($datosReg['fechaCont']);
       $valida_fecha_mayor = Utils::valida_fecha_mayor($datosReg['fechaCont']);
       if(empty($valida_fecha) || ($valida_fecha_mayor)==false){
@@ -281,7 +261,6 @@ class Controlador_Publicar extends Controlador_Base {
       return $datosReg;
     }
   }
-
   public function guardarDatosOferta($datos){
     $datosRequisitoOferta = array('viajar'=>$datos['DispOf'],
                                   'residencia'=>$datos['residenciaOf'],
@@ -292,7 +271,6 @@ class Controlador_Publicar extends Controlador_Base {
     if(!Modelo_Oferta::guardarRequisitosOferta($datosRequisitoOferta)){
       throw new Exception("Ha ocurrido un error al guardar los requisitos de la oferta");
     }
-
     $id_requisitoOferta = $GLOBALS['db']->insert_id();      
     $fechaActual = date('Y-m-d H:m:s');
     $datosOferta = array('id_empresa'=>$datos['id_empresa'],
@@ -317,12 +295,10 @@ class Controlador_Publicar extends Controlador_Base {
       if(!Modelo_Oferta::guardarOferta($datosOferta)){
         throw new Exception("Ha ocurrido un error al guardar los datos de la oferta");
       }
-
       $id_Oferta = $GLOBALS['db']->insert_id();
       if(!Modelo_OfertaxAreaSubarea::guardarOfertaAreasSubareas($id_Oferta, $datos['id_areas_subareas'])){
         throw new Exception("Ha ocurrido un error al guardar las subareas de la oferta");
       }
-
       if(!Modelo_OfertaxNivelIdioma::guardarOfertaNivelIdioma($id_Oferta, $datos['listadoNivelIdioma'])){
         throw new Exception("Ha ocurrido un error al guardar los idiomas de la oferta");
       }
@@ -331,7 +307,6 @@ class Controlador_Publicar extends Controlador_Base {
       }   
       return array('id'=>$id_Oferta, 'titulo'=>$datos['nombreOferta']);   
   }
-
 // public function envioCorreo($data){
 //     $email_body = Modelo_TemplateEmail::obtieneHTML("SUGERENCIAS_USUARIO");
 //     $email_body = str_replace("%NOMBRES%", ucfirst($data['nombres']), $email_body);   
@@ -343,6 +318,5 @@ class Controlador_Publicar extends Controlador_Base {
 //       return false;
 //     }
 //   }
-
 }
 ?>
