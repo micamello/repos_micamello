@@ -680,13 +680,16 @@ $(window).resize(function(){
 });
 
 
-function ajaxLoader(obj, action){
+function ajaxLoader(obj, action, tipo){
+  tipo = typeof tipo !== 'undefined' ?  tipo : "";
+  var res = "-41px";
+  if(tipo == 2){res = "-31px";}
   if(obj[0].tagName != 'SELECT'){
     if(action == 'aparecer'){
       if(obj.siblings('div.contE').length){
         obj.siblings('div.contE').remove();
       }
-      obj.after(' <div style="position: relative;" class="contE"><i class="fa fa-spinner fa-spin fa-2x" style="position: absolute; right: 5px; top: -41px;"></i></div>');
+      obj.after(' <div style="position: relative;" class="contE"><i class="fa fa-spinner fa-spin fa-2x" style="position: absolute; right: 5px; top: '+res+';"></i></div>');
     }
     else if(action == 'desaparecer'){
       if(obj.siblings('div.contE').length){
