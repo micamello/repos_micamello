@@ -51,12 +51,12 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
 <br>
-<div class=" banner-publicidad" align="center">
+<div class="banner-publicidad " align="center">
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
         <div class="banner-light col-md-9 click ">est&aacute; a un solo click de encontrar el <b>candidato ideal</b></div>
-        <button class="btn-minimalista heartBeat animated infinite col-md-2"><a href="<?php echo PUERTO."://".HOST;?>/publicar/">Publicar Oferta</a></button>
+        <button class="btn-blue-2 pulse animated infinite col-md-2"><a href="<?php echo PUERTO."://".HOST;?>/publicar/">Publicar Oferta</a></button>
       </div>
     </div>
   </div>
@@ -568,7 +568,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
     <div class="row">
       <div class="col-md-12">
         <div class="banner-light col-md-9 click ">est&aacute; a un solo click de encontrar el <b>candidato ideal</b></div>
-        <button class="btn-minimalista heartBeat animated infinite col-md-2"><a href="<?php echo PUERTO."://".HOST;?>/publicar/">Publicar Oferta</a></button>
+        <button class="btn-blue-2 pulse animated infinite col-md-2"><a href="<?php echo PUERTO."://".HOST;?>/publicar/">Publicar Oferta</a></button>
       </div>
     </div>
   </div>

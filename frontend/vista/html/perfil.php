@@ -685,8 +685,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 										<?php }else{ ?>
 
-					                    	<hr width="100%" />
-	                                    	<div class="form-group col-md-12">
+					            <!--<hr width="100%" />-->
+					            <div class="col-md-12"><hr></div>
+	                    <div class="form-group col-md-12">
 												<div class="col-md-12" align="center"><h4><b>Datos de contacto</b></h4></div>
 
 								           	 	<!-- Empresas contacto -->
