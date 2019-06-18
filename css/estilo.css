@@ -1,7 +1,7 @@
 @charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Oswald|Roboto);
 @font-face {
-font-family: ‘Antipasto’;
+font-family: 'Antipasto';
    src: url('../fonts/antipasto.eot');
    src: url('../fonts/antipasto.eot?#iefix') format('embedded-opentype'),
         url('../fonts/antipasto.woff') format('woff'),
@@ -180,11 +180,11 @@ display: inline;
     color: #204478;
     font-size: 30pt;
     text-align: right;
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
  }
  .second-text-timer{
     color: #2d2d2d;
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     text-align: center;
     font-size: 20pt;
     border: 2px solid #2d2d2d;
@@ -193,7 +193,7 @@ display: inline;
     
  }
  .timer{
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     font-size: 100pt;
     color: #424242;
     border: none
@@ -212,8 +212,12 @@ display: inline;
 
 
 #prox{
-        font-size: 100pt;
-    }
+  font-family: 'Antipasto';
+  font-size: 70pt;
+  color: white;
+  margin: 0px 10px !important;
+  padding: 5px 10px;
+}
 /*-------------------------------------------------------------
  * Countdown
  *-------------------------------------------------------------*/
@@ -660,7 +664,7 @@ display: inline;
     margin: 30px 20px 30px 20px;
 }
 .cuadro-banner>div>p{
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     color: #204478;
     font-size: 35pt;
     border-bottom: 1px solid #204478;
@@ -744,7 +748,7 @@ display: inline;
 /*CANEA QUE ES*/
 .texto-canea{
     text-align: center;
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     text-transform: uppercase;
 
     color: #204478;
@@ -766,7 +770,7 @@ display: inline;
     font-weight: bolder;
 }
 .vel-subt{
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     font-size: 30pt;
     color:#424242;
     margin-top: 10px;
@@ -1042,7 +1046,7 @@ padding-top: 10px;
     font-size: 90pt !important;
 }
 .qs-subt{
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     color: #204478;
     font-size: 28pt;
     padding-top: 30px;
@@ -1133,7 +1137,7 @@ padding-top: 10px;
     text-align: center;
     font-weight: 1000;
     font-size: 170pt;
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     color: #204478;
 
 }
@@ -1143,7 +1147,7 @@ padding-top: 10px;
 .titulo{
     display: inline-block;
     margin: 0 auto;    
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     font-size: 30pt;
     text-align: center;
     color: #204478;
@@ -1151,7 +1155,7 @@ padding-top: 10px;
     
 }
 .titulo-blanco{
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     font-size: 30pt;
     text-align: center;
     color: white;
@@ -1625,7 +1629,7 @@ ul.checkout-bar a {
     background-color: transparent;
     text-align: center;
     font-weight: 1000;
-    font-family: ‘Antipasto’;
+    font-family: 'Antipasto';
     color: #204478;
 }
 
@@ -1724,6 +1728,7 @@ ul.checkout-bar a {
     margin: 10px;
     color: white;
     padding: 10px 20px;
+    display: inline-block;
 }
 .btn-minimalista a{
     color: white;
@@ -1778,6 +1783,7 @@ ul.checkout-bar a {
     margin-bottom: 20px;    
     border: 2px solid transparent;
     line-height: normal;
+    display: inline-block;
 }
 .btn-light-blue a{
     color: white;
@@ -1807,6 +1813,12 @@ ul.checkout-bar a {
     border: 2px solid transparent;    
     line-height: normal;
     cursor: pointer;
+}
+.btn-blue:focus{
+    color: white;
+    background-color: #204478;
+    text-decoration: none;
+    border: 2px solid transparent;   
 }
 .btn-blue.disabled{
     background-color: #303d4c;
@@ -1988,6 +2000,7 @@ div[class*='col-'] {
     padding-top: 10px;
     color:#999;
     text-decoration: line-through;
+    font-size: 14pt;
 }
 .descuento {
     width: 90px;
@@ -2695,6 +2708,11 @@ input[type='number'] {
       padding-left: 0px;
     }
 }
+@media (min-width: 320px) and (max-width: 480px) {
+    #img-logo{
+      margin-left: 15px !important;
+    }
+}
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -2714,4 +2732,77 @@ input[type=number] { -moz-appearance:textfield; }
     text-align: center;
     border-bottom: 2px solid white;
     font-size: 16px;
+}
+
+.btn-blue-2{
+    display: inline-block;
+    border: 2px solid transparent;
+    margin: 10px;
+    padding: 10px 20px;
+    font-size: 16pt;
+    background-color: #204478;
+    color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: center;
+}
+.btn-blue-2 a{
+    background-color: #204478;
+    color: white;
+}
+.btn-blue-2:hover{
+    text-align: center;
+    background-color: #204478;
+    color: white;
+    text-decoration: none;
+}
+.btn-blue-2:hover a{
+    background-color: #204478;
+    color: white;
+    text-decoration: none;
+ }
+ .margenes-2{
+    background-color: #333333;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+@-webkit-keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.05, 1.05, 1.05);
+    transform: scale3d(1.05, 1.05, 1.05);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.pulse {
+  -webkit-animation-name: pulse;
+  animation-name: pulse;
 }
