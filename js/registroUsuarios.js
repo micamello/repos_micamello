@@ -121,8 +121,14 @@ if($('#apellidosCand').length){
 // }
 
 	if($('#correoCandEmp').length){
+		$('#correoCandEmp').on('keypress', function(event){
+			if(event.key == 0 || event.key == 32){
+				event.preventDefault();
+			}
+		});
 		$('#correoCandEmp').on('blur', function(){
 			if($(this).val() != ""){
+				$(this).val($(this).val().trim());
 				if(validarCorreo($(this).val())){
 					if(!searchAjax($(this))){
 						crearMensajeError($(this), 'El correo ingresado ya existe');
@@ -143,9 +149,15 @@ if($('#apellidosCand').length){
 
 
 if($('#celularCandEmp').length){
+	$('#celularCandEmp').on('keypress', function(event){
+		if(event.keyCode == 0 || event.keyCode == 32){
+			event.preventDefault();
+		}
+	});
 	$('#celularCandEmp').on('blur', function(){
 		var tipousuario = $('#tipo_usuario').val();
 		if($(this).val() != ""){
+			$(this).val($(this).val().trim());
 			if(tipousuario == 2){
 				if(!ValidarCelularConvencional($(this).val())){
 					crearMensajeError($(this), "Mínimo 9 dígitos, máx. 15");
@@ -201,9 +213,14 @@ if($('#tipoDoc').length){
 }
 
 if($('#documentoCandEmp').length){
+	$('#documentoCandEmp').on('keypress', function(event){
+		if(event.keyCode == 0 || event.keyCode == 32){
+			event.preventDefault();
+		}
+	});
 	$('#documentoCandEmp').on('blur', function(){
 		if($(this).val() != ""){
-			console.log($('#tipo_documentacion').val());
+			$(this).val($(this).val().trim());
 			var tipoDocCampo = $('#tipo_documentacion').val();
 			if(DniRuc_Validador($(this), tipoDocCampo) == true){
 				if(searchAjax($(this))){
@@ -356,8 +373,14 @@ if($('#password_1').length){
 	}
 
 	if($('#tel1ConEmp').length){
+		$('#tel1ConEmp').on('keypress', function(event){
+			if(event.keyCode == 0 || event.keyCode == 32){
+				event.preventDefault();
+			}
+		});
 		$('#tel1ConEmp').on('blur', function(){
 			if($(this).val() != ""){
+				$(this).val($(this).val().trim());
 				if(!validarCelCand($(this).val())){
 					crearMensajeError($(this), "10 dígitos");
 				}
@@ -372,8 +395,14 @@ if($('#password_1').length){
 	}
 
 	if($('#tel2ConEmp').length){
+		$('#tel2ConEmp').on('keypress', function(event){
+			if(event.keyCode == 0 || event.keyCode == 32){
+				event.preventDefault();
+			}
+		});
 		$('#tel2ConEmp').on('blur', function(){
 			if($(this).val() != ""){
+				$(this).val($(this).val().trim());
 				if(!ValidarTelefonoConvencional($(this).val())){
 					crearMensajeError($(this), "Longitud de 9 dígitos");
 				}
@@ -993,7 +1022,7 @@ function safari(){
 }
 
 function validarCorreo(correo) { 
-  return /^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/.test(correo);
+  return /^\s*([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\s*$/.test(correo);
 }
 
 function ValidarTelefonoConvencional(valor){
