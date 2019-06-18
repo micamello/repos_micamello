@@ -619,6 +619,8 @@ function enviarFormulario(){
       if(estado == ''){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();
+
+        console.log('ir abajo');
         var destino = $('#boton');
         $('html, body').animate({ scrollTop: destino.offset().top }, 700); 
       }

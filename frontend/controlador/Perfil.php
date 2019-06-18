@@ -60,7 +60,6 @@ class Controlador_Perfil extends Controlador_Base
                 }else{
                     $arrsectorind = Modelo_SectorIndustrial::consulta();
                     $cargo = Modelo_Cargo::consulta();
-                    $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
                 
                 $arrprovincia = Modelo_Provincia::obtieneProvinciasSucursal(SUCURSAL_PAISID);
@@ -82,6 +81,7 @@ class Controlador_Perfil extends Controlador_Base
                     $btnSubir  = 0;
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
+                    $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 }
 
                 if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && 
@@ -454,7 +454,9 @@ class Controlador_Perfil extends Controlador_Base
                     
                     if (!Modelo_UsuarioxNivelIdioma::guardarUsuarioNivelIdioma($idUsuario,$data_idioma_nivel)) {
                         throw new Exception("Ha ocurrido un error al guardar los idiomas del usuario, intente nuevamente");
-                    }
+                    }/*else{
+                        $data['nivel_idioma'] = 
+                    }*/
                 }   
 
                 if(!empty($array_subareas_seleccionadas)){
