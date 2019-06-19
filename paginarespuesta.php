@@ -12,6 +12,7 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              PAYME_CURRENCY_CODE . 
                                              trim($_POST['authorizationResult']) . 
                                              PAYME_SECRET_KEY, 'sha512');
+ Utils::envioCorreo('desarrollo@micamello.com.ec','PASO_OPAYME',print_r($_POST,true));
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
     $vl_insert = array();
@@ -67,5 +68,6 @@ catch(Exception $e){
   Utils::envioCorreo('desarrollo@micamello.com.ec',$e->getMessage(),print_r($_POST,true));
   Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/error/');
 }
+unset($_POST);
 header("HTTP/1.1 200 OK");    
 ?>
