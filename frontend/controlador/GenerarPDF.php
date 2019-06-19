@@ -81,7 +81,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
           if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')/* || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial')*/)){                    
             $puedeDescargar = true;
-          }else if(isset($_SESSION['mfo_datos']['planes'])){
+          }else if(!isset($_SESSION['mfo_datos']['planes'])){
             $puedeDescargar = true;
           }else{ 
             $puedeDescargar = false;
