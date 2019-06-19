@@ -254,15 +254,16 @@
 												<div class="form-group">
 													<label>Idioma: </label>
 													<select class="form-control" id="idiomaOf" name="idiomaOf">
+														<option value="" selected="selected" disabled="disabled">Seleccione una opción</option>
 														<?php 
 															if (!empty($arridioma)){
 																foreach ($arridioma as $idioma) {
 																	echo "<option value='".$idioma['id_idioma']."'>".utf8_encode($idioma['descripcion'])."</option>";
 																}
 															}
-															else{
-																echo "<option value=''>Seleccione una opción</option>";
-															}
+															// else{
+															// 	echo "<option value=''>Seleccione una opción</option>";
+															// }
 														?>
 													</select>
 												</div>
@@ -273,15 +274,16 @@
 												<div class="form-group">
 													<label>Nivel Idioma: </label>
 													<select class="form-control" id="nivelIdiomaOf" name="nivelIdiomaOf">
+														<option value="" selected="selected" disabled="disabled">Seleccione una opción</option>
 														<?php 
 															if (!empty($arrnivelidioma)){
 																foreach ($arrnivelidioma as $nivelidioma) {
 																	echo "<option value='".$nivelidioma['id_nivelIdioma']."'>".$nivelidioma['nombre']."</option>";
 																}
 															}
-															else{
-																echo "<option value=''>Seleccione una opción</option>";
-															}
+															// else{
+															// 	echo "<option value=''>Seleccione una opción</option>";
+															// }
 														?>
 													</select>
 												</div>
@@ -289,9 +291,9 @@
 											<!-- </div> -->
 										</div>
 										<!-- <div><a class="btn-min-light" id="addButton">Añadir idioma</a><br><br></div> -->
-										<div align="center">
-					                      <a class="btn-min-light" align="center" id="addButton">Añadir idioma</a><br><br>
-					                    </div>
+										<!-- <div align="center"> -->
+					                      <!-- <a class="btn-min-light" align="center" id="addButton">Añadir idioma</a><br><br> -->
+					                    <!-- </div> -->
 									</div>
 									<div class="col-md-6 col-md-offset-1">
 										<div class="errorContainer"></div>

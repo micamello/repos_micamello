@@ -717,6 +717,7 @@ function existeCorreo(correo){
               value = data.respcorreo;
           },
           error: function (request, status, error) {
+              colocaError(err_correo,seccion_correo, "No se pudo completar la solicitud.", btn);
               alert(request.responseText);
           },
           beforeSend : function(){

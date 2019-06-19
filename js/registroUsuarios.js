@@ -777,6 +777,7 @@ function searchAjax(obj){
             }
         },
         error: function (request, status, error) {
+        	crearMensajeError($(obj), "No se pudo completar la solicitud.");
             console.log(request.responseText);
            	// Swal.fire({                
             //     html: request.responseText,

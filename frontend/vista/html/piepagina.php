@@ -113,6 +113,11 @@ if (isset($template_js) && is_array($template_js)){
             animation: true
           });          
         });
+        if($('#form_cambiar').length){
+          $('html, body').animate({
+            scrollTop: ($('.btnPerfil').offset().top)
+        },1000);
+        }
       </script>";
 }?> 
  

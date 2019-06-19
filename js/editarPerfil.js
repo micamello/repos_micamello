@@ -1,6 +1,6 @@
 //HACER ESTO AL MOMENTO DE TERMINAR EL TERCER CUESTIONARIO
 $(document).ready(function(){
-  
+  $('#nivel_idi_of').attr('disabled', true);
   if(errorsVerify() == false){
     $('.btnPerfil').addClass('disabled');
     $('.btnPerfil').attr('disabled', 'disabled');
@@ -331,21 +331,12 @@ $('#subirCV').change(function(e) {
 
 /*Eventos del campo de idiomas*/
 $('#idioma_of').on('change', function(){
-
-    if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
-        document.getElementById('effect_bounce').classList.add('bounce');
-    }else{
-        document.getElementById('effect_bounce').classList.remove('bounce');
-    }
+  $('#nivel_idi_of').attr('disabled', false);
 });
 
 $('#nivel_idi_of').on('change', function(){
-
-    if(document.getElementById('idioma_of').value != 0 && document.getElementById('nivel_idi_of').value != 0){
-        document.getElementById('effect_bounce').classList.add('bounce');
-    }else{
-        document.getElementById('effect_bounce').classList.remove('bounce');
-    }
+    addIdioma();
+    $('#nivel_idi_of').attr('disabled', true);
 });
 
 /*Valrifica si no existe algún error en los inputs*/
@@ -381,8 +372,8 @@ function limpiarSelect(idSelect) {
 }
 
 /*Permite transferir los idiomas de la lista de select al div de seleccionados*/
-$('#btn_transfer').on('click', function()
-{
+// $('#btn_transfer').on('click', function()
+function addIdioma(){
     var select_array_idioma = document.getElementById('select_array_idioma');
     var options = "";
     var tag_idioma = document.getElementById('idioma_of');
@@ -433,7 +424,7 @@ $('#btn_transfer').on('click', function()
             nodo_option.setAttribute("id", "array_idioma"+id_idioma);
             nodo_option.selected = "selected";
             select_array_idioma.appendChild(nodo_option);
-            document.getElementById('effect_bounce').classList.remove('bounce');
+            // document.getElementById('effect_bounce').classList.remove('bounce');
             
             limpiarSelect("idioma_of");
             limpiarSelect("nivel_idi_of");
@@ -448,7 +439,8 @@ $('#btn_transfer').on('click', function()
         enableBTN();
     }
 
-})
+}
+// )
 
 /*Permite deseleccionar los idiomas seleccionados*/
 function delete_item_selected(selected_item){
@@ -468,7 +460,7 @@ function delete_item_selected(selected_item){
         tag_idioma.removeAttribute("disabled");
 
         if(selected_item.id == tag_idioma.options[tag_idioma.selectedIndex].value){
-            document.getElementById('effect_bounce').classList.add('bounce');
+            // document.getElementById('effect_bounce').classList.add('bounce');
         }
     }
 
