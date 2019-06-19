@@ -30,9 +30,6 @@ class Controlador_Plan extends Controlador_Base {
       case 'planes_usuario':
         $this->planesUsuario();
       break;
-      case 'verificarCompra':
-        Vista::renderJSON(array("dato"=>$_SESSION['mfo_datos']['planActivar']));
-      break;
       default:        
         $this->mostrarDefault(1);
       break;

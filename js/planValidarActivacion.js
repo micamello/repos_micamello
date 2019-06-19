@@ -2,7 +2,7 @@ function verificarCompraPlan(){
   var puerto_host = $('#puerto_host').val();
   $.ajax({
       type: "GET",
-      url: puerto_host+"/index.php?mostrar=plan&opcion=verificarCompra",
+      url: puerto_host+"/index.php?opcion=verificarCompra",
       dataType:'json',
         async: false,
       success:function(data){

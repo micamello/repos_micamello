@@ -342,10 +342,10 @@ if($('#idiomaOf').length){
 
 
 
-if($('#addButton').length){
+// if($('#addButton').length){
 
-        $('#addButton').on('click', function(){
-
+        // $('#addButton').on('click', function(){
+function eder(){
             var contenedorIdiomas = $('#listadoIdiomas');
 
             var selectIdioma = $('#idiomaOf');
@@ -392,11 +392,11 @@ if($('#addButton').length){
 
                 selectIdioma.children(':selected').attr('disabled', true);
 
-            }
+            }}
 
-        })
+        // })
 
-}
+// }
 
 
 
