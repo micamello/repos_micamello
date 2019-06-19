@@ -54,6 +54,7 @@ try{
     }    
     if (trim($_POST["authorizationResult"]) == "00" && trim($_POST["errorCode"]) == "00"){
       Utils::envioCorreo('desarrollo@micamello.com.ec','CRON_PAYME',print_r($_POST,true));
+      $_SESSION['mfo_datos']['actualizar_planes'] = 1; 
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
     }
     elseif(trim($_POST["authorizationResult"]) == "05" && trim($_POST["errorCode"]) == "2300"){

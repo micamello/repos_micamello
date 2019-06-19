@@ -331,18 +331,23 @@ class Controlador_Plan extends Controlador_Base {
     }     
   }
 
-  public function resultado(){
+  public function resultado(){    
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){
-      if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
-        $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
+      if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
+        if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
+          $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
+        }
+        $nrotest = Modelo_Cuestionario::totalTest();             
+        $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+        // $tags["template_js"][] = "planValidarActivacion";
+        $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
+        //$_SESSION['mfo_datos']['actualizar_planes'] = 1;      
       }
-      $nrotest = Modelo_Cuestionario::totalTest();             
-      $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
-      // $tags["template_js"][] = "planValidarActivacion";
-      $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
-      $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
+      else{
+        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+      }
     }
     $cab = ''; $pie = '';
     if($mensaje != 'exito'){$cab = 'cabecera'; $pie = 'piepagina';}

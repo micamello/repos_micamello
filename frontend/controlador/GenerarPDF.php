@@ -567,8 +567,8 @@ class Controlador_GenerarPDF extends Controlador_Base
             </tr>
         </table></p>';
       }
-      echo $informe;    
-      //self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
+      //echo $informe;    
+      self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
   }
   public function informePersonalidad($html,$nombre_archivo,$datos_descarga){    
     $cabecera = "imagenes/pdf/header1.png";

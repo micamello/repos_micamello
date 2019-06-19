@@ -14,9 +14,6 @@ function verificarCompraPlan(){
             window.location.href = puerto_host+"/"+$('#redireccionar').val()+"/";
           });
         }
-        if(data.dato == 2){
-          window.location.href = puerto_host+"/planes/";
-        }
       },
       error: function (request, status, error) {
           console.log(request.responseText);
