@@ -62,9 +62,12 @@ abstract class Controlador_Base{
         $_SESSION['mfo_datos']['planes'] = $arrplanes;
         unset($_SESSION['mfo_datos']['actualizar_planes']);
         return 1;   
-      }      
+      }
+      else{
+        return 0;
+      }     
     }
-    return 0;
+    return 2;
   }
 
   public function linkRedesSociales(){

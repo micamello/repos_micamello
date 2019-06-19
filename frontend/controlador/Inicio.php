@@ -52,6 +52,7 @@ class Controlador_Inicio extends Controlador_Base {
         Vista::render($vista, $tags);
       break;
       case 'verificarCompra':
+        Utils::log("edereder-----");
         Vista::renderJSON(array("dato"=>$_SESSION['mfo_datos']['planActivar']));
       break;
       default:            

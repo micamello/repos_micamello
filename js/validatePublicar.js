@@ -340,6 +340,12 @@ if($('#idiomaOf').length){
 
 }
 
+if($('#nivelIdiomaOf').length){
+    $('#nivelIdiomaOf').on('change', function(){
+        eder();
+    })
+}
+
 
 
 // if($('#addButton').length){

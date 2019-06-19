@@ -6,12 +6,16 @@ function verificarCompraPlan(){
       dataType:'json',
         async: false,
       success:function(data){
+        console.log(data.dato);
         if(data.dato == 1){
           $('.spin').find('h4').text('Su compra fue procesada con éxito');
           $('.spin').find('img').attr('src', puerto_host+'/imagenes/success.png');
           $('.spin').delay('2000').fadeOut( "slow", function(){
             window.location.href = puerto_host+"/"+$('#redireccionar').val()+"/";
           });
+        }
+        if(data.dato == 2){
+          window.location.href = puerto_host+"/planes/";
         }
       },
       error: function (request, status, error) {
