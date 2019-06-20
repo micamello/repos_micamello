@@ -129,24 +129,24 @@ class Controlador_Perfil extends Controlador_Base
                     $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     
                     $str_grafico = '';
-                    if(count($result_faceta) > 0){
+                    if(count($result_faceta) == 5){
                         
                         $reg_ultimo = array_shift($result_faceta);
                         foreach($result_faceta as $rs){
 
-                            if($rs["valor"] <= 30){
+                            if($rs["valor"] < 15){
                                 $str_grafico .= $rs["literal"].",".$rs["valor"]."|";
                             }else{
                                $str_grafico .= $rs["literal"].":".$rs["valor"].",".$rs["valor"]."|"; 
                             }
                         }
 
-                        if($reg_ultimo["valor"] <= 30){
+                        if($reg_ultimo["valor"] < 15){
                             $str_grafico .= $reg_ultimo["literal"].",".$reg_ultimo["valor"];   
                         }else{
                             $str_grafico .= $reg_ultimo["literal"].":".$reg_ultimo["valor"].",".$reg_ultimo["valor"];
                         }
-                    }    
+                    }     
                 }
 
                 $tags = array('escolaridad' => $escolaridad,
@@ -526,10 +526,10 @@ class Controlador_Perfil extends Controlador_Base
 
         $informe = 0;
         $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
-        if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $cantd_facetas > 0){
-            $informe = 1;
+        if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $cantd_facetas >= 2){
+            $informe = $cantd_facetas;
         }else if(!isset($_SESSION['mfo_datos']['planes']) && $cantd_facetas == 2){
-            $informe = 1;
+            $informe = $cantd_facetas;
         }
         return $informe;
     }

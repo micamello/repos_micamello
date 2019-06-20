@@ -39,7 +39,7 @@ if ($_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::CANDIDATO
 	  $_SESSION['mfo_datos']['usuario']['username'] != $usuario["username"] && $usuario["tipo_usuario"]==Modelo_Usuario::CANDIDATO){
   exit;
 }
-//si es empresa no puede ver imagenes de otras empresas
+//si es empresa no puede ver imagenes de otras empresas al menos que sea una empresa hija
 if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && 
 	  $usuario["tipo_usuario"] == Modelo_Usuario::EMPRESA && $carpeta != "hv"){
 

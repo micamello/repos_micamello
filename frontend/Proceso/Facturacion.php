@@ -499,7 +499,7 @@ class Proceso_Facturacion{
     $contenido .= "</tr>";                            
     $contenido .= "</table>";
 
-    $mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">Provincia: Guayas Cantón: DAULE Parroquia LA AURORA (SATÉLITE) <br>km. 12 Av. Febres Cordero Cdla. Villa Club etapa Krypton Mz. 14 Solar 3 (a cuatro cuadras de la garita). <br>Teléfono: 2753106 Celular: 099234268. E-mail: infor@micamello.com.ec</footer>');
+    $mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">Guayaquil: Av. León Febres Cordero km 12.5 Villa Club, Etapa Krypton Mz.14 V.3 | Quito: Calderón, calle Punin N3 - 89 y 9 Agosto. <br>PBX: 4 606 0111 | 2 605 5990. <br>E-mail: infor@micamello.com.ec</footer>');
 
     $mpdf->WriteHTML($contenido);
     

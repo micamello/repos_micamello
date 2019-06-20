@@ -292,11 +292,11 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 					if (trim($vista) == 'oferta' && isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'autopostulacion')) { $sinOffSet = true; ?> 
 					<div class="col-md-5"> 
 						<div align="left" > 
-							<b>Autopostulaciones restantes: 
+							<h4><b>Autopostulaciones restantes: 
 								<span class="parpadea" style="color:red">
 									<?php echo $autopostulaciones_restantes['p_restantes']; ?>					
 								</span>
-							</b> 
+							</b></h4>
 						</div><br>
 					</div> 
 				<?php } ?> 

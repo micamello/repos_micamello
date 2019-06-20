@@ -63,7 +63,7 @@ class Controlador_Velocimetro extends Controlador_Base {
     else{
       $valorporc = 100;
       $img = 'vel3.png';
-      $titulo = '¡FELICIDADES! ACABA DE COMPELTAR EL TEST CANEA.';
+      $titulo = '¡FELICIDADES! ACABA DE COMPLETAR EL TEST CANEA.';
       $msj2 = 'Ahora usted forma parte del presente y del futuro de las empresas, siendo el CANDIDATO IDEAL.';
       $textoBoton = "VER INFORME COMPLETO";
       $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
@@ -74,14 +74,14 @@ class Controlador_Velocimetro extends Controlador_Base {
         $reg_ultimo = array_shift($result_faceta);
         foreach($result_faceta as $rs){
 
-            if($rs["valor"] <= 30){
+            if($rs["valor"] < 15){
               $str_grafico .= $rs["literal"].",".$rs["valor"]."|";
             }else{
               $str_grafico .= $rs["literal"].":".$rs["valor"].",".$rs["valor"]."|"; 
             }
         }
 
-        if($reg_ultimo["valor"] <= 30){
+        if($reg_ultimo["valor"] < 15){
           $str_grafico .= $reg_ultimo["literal"].",".$reg_ultimo["valor"];   
         }else{
           $str_grafico .= $reg_ultimo["literal"].":".$reg_ultimo["valor"].",".$reg_ultimo["valor"];
