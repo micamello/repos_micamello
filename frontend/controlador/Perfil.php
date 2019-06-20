@@ -129,7 +129,7 @@ class Controlador_Perfil extends Controlador_Base
                     $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     
                     $str_grafico = '';
-                    if(count($result_faceta) > 0){
+                    if(count($result_faceta) > 2){
                         
                         $reg_ultimo = array_shift($result_faceta);
                         foreach($result_faceta as $rs){
