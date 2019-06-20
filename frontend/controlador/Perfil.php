@@ -515,11 +515,11 @@ class Controlador_Perfil extends Controlador_Base
     public function obtenerPermiso($idusuario){
 
         $informe = 0;
-        if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial'))){
-            $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
-            if($cantd_facetas > 0){
-                $informe = 1;
-            }
+        $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
+        if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $cantd_facetas > 0){
+            $informe = 1;
+        }else if(!isset($_SESSION['mfo_datos']['planes']) && $cantd_facetas == 2){
+            $informe = 1;
         }
         return $informe;
     }
