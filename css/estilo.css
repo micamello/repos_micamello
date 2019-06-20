@@ -1003,6 +1003,11 @@ padding-top: 10px;
 .icono-por-aprobar{
     color: #c1c1c1;
 }
+
+.cancelada{
+    color: #ca6f6f; 
+}
+
 #tipo-plan{
     padding: 10px 0px;
     background-color: #e5e5e5;
