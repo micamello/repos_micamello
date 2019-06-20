@@ -25,7 +25,7 @@ class Utils{
   static public function createSession(){               
     //Utils::log(__METHOD__ . " empezo una nueva sesion");
     session_name('mfo_datos');
-    ini_set("session.cookie_lifetime","900");
+    //ini_set("session.cookie_lifetime","900");
     ini_set("session.gc_maxlifetime","900");
     session_start();      
   } 
