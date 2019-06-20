@@ -12,7 +12,6 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              PAYME_CURRENCY_CODE . 
                                              trim($_POST['authorizationResult']) . 
                                              PAYME_SECRET_KEY, 'sha512');
- Utils::envioCorreo('desarrollo@micamello.com.ec','ANTES DE AUTORIZAR',print_r($_POST,true));
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
     $vl_insert = array();
@@ -63,6 +62,8 @@ try{
     else{
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/error/');
     } 
+    //eliminar archivo
+    @unlink(FRONTEND_RUTA.'cache/compras/'.trim($_POST["reserved16"]).'_'.trim($_POST["purchaseOperationNumber"]).'.txt');
   }  
 }
 catch(Exception $e){    

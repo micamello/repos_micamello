@@ -30,6 +30,9 @@ class Controlador_Plan extends Controlador_Base {
       case 'planes_usuario':
         $this->planesUsuario();
       break;
+      case 'file':
+        $this->crearFile();
+      break;
       default:        
         $this->mostrarDefault(1);
       break;
@@ -333,10 +336,8 @@ class Controlador_Plan extends Controlador_Base {
 
   public function resultado(){    
     $mensaje = Utils::getParam('mensaje','',$this->data);     
-    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
-    Utils::log("PASO CERO".$mensaje." - ".$_SESSION['mfo_datos']['actualizar_planes']);
-    if ($mensaje == "exito"){
-      Utils::log("PASO UNO");
+    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";    
+    if ($mensaje == "exito"){    
       if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
         if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
           $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
@@ -347,8 +348,7 @@ class Controlador_Plan extends Controlador_Base {
         $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
         //$_SESSION['mfo_datos']['actualizar_planes'] = 1;      
       }
-      else{
-        Utils::log("PASO TRES");
+      else{        
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }
     }
@@ -363,6 +363,22 @@ class Controlador_Plan extends Controlador_Base {
       $random = str_pad($random, 9, "0", STR_PAD_LEFT);
     }
     return $random;
+  }
+
+  public function crearFile(){
+    $idusuario = Utils::getParam('id','',$this->data);
+    $idpurchase = Utils::getParam('idpurchase','',$this->data);  
+    if (empty($idusuario) || empty($idpurchase)){
+      return false;
+    }    
+    $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idpurchase.'.txt', "w");    
+    fputs($fp, '');
+    if (!fclose($fp)){
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 }  
 ?>
