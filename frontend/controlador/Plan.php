@@ -334,7 +334,9 @@ class Controlador_Plan extends Controlador_Base {
   public function resultado(){    
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
+    Utils::log("PASO CERO".$mensaje." - ".$_SESSION['mfo_datos']['actualizar_planes']);
     if ($mensaje == "exito"){
+      Utils::log("PASO UNO");
       if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
         if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
           $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
@@ -346,6 +348,7 @@ class Controlador_Plan extends Controlador_Base {
         //$_SESSION['mfo_datos']['actualizar_planes'] = 1;      
       }
       else{
+        Utils::log("PASO TRES");
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }
     }
