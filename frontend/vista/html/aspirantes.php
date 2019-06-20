@@ -929,7 +929,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 									            			if($mostrar == ''){
 									            				
-																$variable = '<a target="_blank" onclick="hacerInforme(\''.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'\',\''.Utils::encriptar($a['id_usuario']).'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+																$variable = '<a onclick="hacerInforme(\''.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'\',\''.Utils::encriptar($a['id_usuario']).'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
 																
 																echo $variable;
 															}else{
@@ -954,7 +954,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 									            		<?php 
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 										            			//if(in_array('-1',$posibilidades)){
-																	echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%"></a>';
+																	echo '<a href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%"></a>';
 																/*}else{
 																	$cantidadRestante = $posibilidades - count($descargas);
 																	if($cantidadRestante > 0){

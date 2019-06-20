@@ -79,7 +79,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 				    <?php if($puedeDescargarInforme == 1 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 				    	<div class="recuadro-perfil panel panel-default" style="margin: 50px 0px;"><br>
-				    		<a target="_blank" href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
+				    		<a href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
 					            <img width="100%" alt="informePersonalidad" src="<?php echo PUERTO."://".HOST."/imagenes/informe.png";?>">
 					            <div class="perfil-cuadro" id="err_img" align="center">
 					              <label style="cursor:pointer" class="text-center" for="">acceder a informe de personalidad completo</label>

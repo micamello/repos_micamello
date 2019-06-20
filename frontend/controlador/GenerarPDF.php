@@ -590,35 +590,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     $mpdf->WriteHTML($inidoc);    
     $mpdf->WriteHTML($html);
     $mpdf->WriteHTML($enddoc);          
-    
-    //validar  si es empresa y si tiene cupo para descargar
-    /*if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
-      $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
-      $descargas = Modelo_Descarga::descargasInforme($datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
-      if(!empty($posibilidades)){
-        
-        if(in_array($datos_descarga['id_usuario'], $descargas)){
-          $mpdf->Output($nombre_archivo, 'D');
-        }else{
-          if(count($descargas) < $posibilidades){
-            Modelo_Descarga::registrarDescargaInforme($datos_descarga['id_usuario'],$datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
-            $mpdf->Output($nombre_archivo, 'D');
-          }else{
-            $_SESSION['mostrar_error'] = 'Ya agoto su cupo de descargas de informes para esta oferta';
-            $enlace = $_SERVER['HTTP_REFERER'];
-            Utils::doRedirect($enlace);
-          }
-        }
-      }else{
-        if(!in_array($datos_descarga['id_usuario'], $descargas)){
-          Modelo_Descarga::registrarDescargaInforme($datos_descarga['id_usuario'],$datos_descarga['id_empresa'],$datos_descarga['id_oferta']);
-        }
-        $mpdf->Output($nombre_archivo, 'D');
-      }
-    }else{*/
-      
-      $mpdf->Output($nombre_archivo, 'D');
-    //}
+    $mpdf->Output($nombre_archivo, 'D');
   }
  
   public function hvUsuario($username, $id_oferta, $vista){
