@@ -115,7 +115,7 @@ if (isset($template_js) && is_array($template_js)){
         });
         if($('#form_cambiar').length){
           $('html, body').animate({
-            scrollTop: ($('.btnPerfil').offset().top)
+            scrollTop: ($('.btnPerfil').offset().top-300)
         },1000);
         }
       </script>";
