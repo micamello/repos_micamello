@@ -30,9 +30,6 @@ class Controlador_Plan extends Controlador_Base {
       case 'planes_usuario':
         $this->planesUsuario();
       break;
-      case 'verificarCompra':
-        Vista::renderJSON(array("dato"=>$_SESSION['mfo_datos']['planActivar']));
-      break;
       default:        
         $this->mostrarDefault(1);
       break;
@@ -75,30 +72,33 @@ class Controlador_Plan extends Controlador_Base {
     }
     else{
       $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);        
-      $gratuitos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);
+      $gratuitos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);      
       $idplanes = '';
       $totgratuitos = count($gratuitos);
       foreach($gratuitos as $key=>$gratuito){
         $idplanes .= $gratuito["id_plan"].((($key+1)==$totgratuitos) ? "" : ",");
-      }        
+      }  
+          
       //si ya tiene un gratuito comprado este mes      
       if (!Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"]) && 
-          isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){         
-        //si es empresa hija
-        if (!empty($nivel)){          
+          isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){
+        //si es empresa hija        
+        /*if ($nivel > 1){
           $gratuitos = 1;
-          foreach($_SESSION['mfo_datos']['planes'] as $planhija){
-            if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
-              $gratuitos = 0;
+          if (isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){
+            foreach($_SESSION['mfo_datos']['planes'] as $planhija){
+              if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
+                $gratuitos = 0;
+              }
             }
           }
           if ($gratuitos == 1){
             $tags['gratuitos'] = $gratuitos;
           }
         }
-        else{
+        else{*/    
           $tags['gratuitos'] = $gratuitos;  
-        }        
+        //}        
       }      
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);     
       $avisos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
@@ -112,6 +112,7 @@ class Controlador_Plan extends Controlador_Base {
       //consulta si nunca ha comprado el aviso como promocional      
       if (!empty($idplanes) && !Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
         $tags['aviso_promocional'] = 1;
+        unset($tags['gratuitos']);
       }
       $tags['avisos'] = $avisos;
     }     
@@ -144,8 +145,8 @@ class Controlador_Plan extends Controlador_Base {
         throw new Exception("El plan seleccionado no esta activo o no esta disponible");
       }      
       //si es una empresa hija      
-      $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);  
-      $gratuitos = 0;
+      /*$nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);  
+      $gratuitos = 0;            
       if (!empty($nivel) && isset($_SESSION['mfo_datos']['planes'])){                  
         foreach($_SESSION['mfo_datos']['planes'] as $planhija){
           if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
@@ -155,14 +156,18 @@ class Controlador_Plan extends Controlador_Base {
             $gratuitos = 1;
           }
         }        
+      }*/      
+      $gratuito = 0;
+      if ($infoplan["promocional"] == 1 && !Modelo_UsuarioxPlan::existePlanEmpresa($infoplan["id_plan"],$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
+        $gratuito = 1;
       }      
-      if (empty($infoplan["costo"]) || (empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1) ||
-          (!empty($nivel) && $gratuitos == 0)){ 
+      if (empty($infoplan["costo"]) || $gratuito == 1/*(empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1) ||
+          (!empty($nivel) && $gratuitos == 0)*/){ 
         if ($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
           if ($this->existePlan($infoplan["id_plan"])){
             throw new Exception("Ya esta subscrito al plan seleccionado");   
           }                 
-        }
+        }        
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"])){
           throw new Exception("Error al registrar la subscripci\u00F3n, por favor intente denuevo");   
         }          
@@ -326,18 +331,23 @@ class Controlador_Plan extends Controlador_Base {
     }     
   }
 
-  public function resultado(){
+  public function resultado(){    
     $mensaje = Utils::getParam('mensaje','',$this->data);     
     $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
     if ($mensaje == "exito"){
-      if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
-        $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
+      if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
+        if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
+          $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
+        }
+        $nrotest = Modelo_Cuestionario::totalTest();             
+        $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+        // $tags["template_js"][] = "planValidarActivacion";
+        $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
+        //$_SESSION['mfo_datos']['actualizar_planes'] = 1;      
       }
-      $nrotest = Modelo_Cuestionario::totalTest();             
-      $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
-      // $tags["template_js"][] = "planValidarActivacion";
-      $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
-      $_SESSION['mfo_datos']['actualizar_planes'] = 1;      
+      else{
+        Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
+      }
     }
     $cab = ''; $pie = '';
     if($mensaje != 'exito'){$cab = 'cabecera'; $pie = 'piepagina';}

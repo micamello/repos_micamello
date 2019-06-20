@@ -583,7 +583,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 		                                    <div class="clearfix"></div>
 		
-		                                    <div class="col-md-4 col-md-offset-1">
+		                                    <div class="col-md-4 col-md-offset-2">
 												<div class="form-group">
 													<label>Idioma: </label><div class="help-block with-errors"></div>
 													<select id="idioma_of" name="idioma_of" class="form-control" <?php if(count($arridioma) == count($nivelIdiomas)){ echo 'disabled=disabled'; } ?> >
@@ -619,11 +619,11 @@ $_SESSION['mostrar_error'] = ""; ?>
 												</div>
 											</div>
 
-											<div class="col-md-2">
+											<!-- <div class="col-md-2">
 												<div class="form-group" id="effect_bounce">
 													<a id="btn_transfer" class="button_transfer_list"><i class="fa fa-plus"></i> Añadir idioma</a>
 												</div>
-											</div>
+											</div> -->
 											<div class="col-md-12">
 												<div id="seccion_listado" class="form-group">
 													<label>Idiomas seleccionados: </label><div id="listado_idiomas" class="help-block with-errors"></div>
@@ -685,8 +685,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 										<?php }else{ ?>
 
-					                    	<hr width="100%" />
-	                                    	<div class="form-group col-md-12">
+					            <!--<hr width="100%" />-->
+					            <div class="col-md-12"><hr></div>
+	                    <div class="form-group col-md-12">
 												<div class="col-md-12" align="center"><h4><b>Datos de contacto</b></h4></div>
 
 								           	 	<!-- Empresas contacto -->

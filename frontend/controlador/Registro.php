@@ -385,7 +385,7 @@ class Controlador_Registro extends Controlador_Base {
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%USUARIO%", $username, $email_body);
     $email_body = str_replace("%CORREO%", $correo, $email_body);
-    $email_body = str_replace("%CLAVE%", $clave, $email_body);   
+    $email_body = str_replace("%PASSWORD%", $clave, $email_body);   
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
     if (Utils::envioCorreo($correo,"Registro de Candidato Con Red Social",$email_body)){
       return true;

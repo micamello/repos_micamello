@@ -365,10 +365,24 @@ public static function validarCelularConvencional($contenido){
     return date('Y-m-d H:i:s',$dias_antes);
   }
 
-  public static function generarUsername($name){   
+  public static function numerosRandom($digitos){
+    $returnString = mt_rand(1, 9);
+    while (strlen($returnString) < $digitos) {
+      $returnString .= mt_rand(0, 9);
+    }
+    return $returnString;
+  }
+
+  public static function generarUsername($name){  
+    $longitudMin = 4;
     if(strlen($name) > 50){
       $name = substr($name, 1, 49);
-    } 
+    }
+    if(strlen($name) < $longitudMin){
+      $longitudFal = $longitudMin-(strlen($name));
+      $append = self::numerosRandom($longitudFal);
+      $name .= $append;
+    }
     $count = 0;
     $username = ($name);
     $username_generated = $username;

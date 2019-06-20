@@ -524,9 +524,11 @@ a {
   text-align: middle;
   padding: 11px 0px 6px 0px;
   color: red;
-  font-size: 11px;
+  font-size: 13px;
   right: 15px;
-  bottom: -4px;
+  bottom: -3px;
+  font-weight: bold;
+  font-family: "Segoe UI",Roboto,"Noto Sans";
 }
 
 .conditions_components

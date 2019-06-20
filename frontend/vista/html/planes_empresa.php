@@ -139,7 +139,7 @@
         <?php } ?>
 
         <?php 
-        if ((isset($aviso_promocional) && $aviso_promocional==1) || (!isset($gratuitos) || empty($gratuitos))){
+        if (/*(isset($aviso_promocional) && $aviso_promocional==1) || (*/!isset($gratuitos) || empty($gratuitos)/*)*/){
           $estilo = "izq col-md-offset-2";
         }  
         else{
@@ -222,8 +222,9 @@
             ?>
             <input type="hidden" id="avisopermiso_<?php echo $aviso["id_plan"];?>" value="<?php echo $permisos_aviso;?>">  
         <?php } ?>
-        <ul id="avisoul" class="<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "cen" : "der";?> theplan plan-tabla col-xs-12 col-md-4 flex-item">
-        <?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "" : "<div>&nbsp;</div>"; ?>                  
+
+        <ul id="avisoul" class="<?php echo (!isset($gratuitos) && !empty($gratuitos)) ? "cen" : "der";?> theplan plan-tabla col-xs-12 col-md-4 flex-item">
+        <?php echo (!isset($gratuitos) && !empty($gratuitos)) ? "" : "<div>&nbsp;</div>"; ?>                  
           <div id="avisotitulo" class="<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "planes-promo" : "";?> title headingazul titulo-planes"></div>
             <div id="avisocosto" class="<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "price-was" : "plan-precio";?>">
             <?php $msgcosto = (isset($aviso_promocional) && $aviso_promocional==1) ? "Antes " : "";?>             

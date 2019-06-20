@@ -5,7 +5,7 @@ $('#confidencialObligatory').css('display', 'none');
 
 
 $(document).ready(function(){
-
+    $('#nivelIdiomaOf').attr('disabled', true);
     idiomasPost();
 
 
@@ -259,7 +259,7 @@ if($('#provinciaOf').length){
             },
 
             error: function (request, status, error) {
-
+                crearMensajeError($(this), "No se pudo completar la solicitud.");
                 $('#ciudadOf').html('<option selected disabled value="0">Seleccione una ciudad</option>');
 
                 Swal.fire({
@@ -327,7 +327,7 @@ if($('#area_select').length){
 if($('#idiomaOf').length){
 
     $('#idiomaOf').on('change', function(){
-
+        $('#nivelIdiomaOf').attr('disabled', false);
         // $('#addButton').parent().removeClass('bounce');
 
         $('#addButton').parent().addClass('bounce');
@@ -340,17 +340,24 @@ if($('#idiomaOf').length){
 
 }
 
+if($('#nivelIdiomaOf').length){
+    $('#nivelIdiomaOf').on('change', function(){
+        addIdioma();
+    })
+}
 
 
-if($('#addButton').length){
 
-        $('#addButton').on('click', function(){
+// if($('#addButton').length){
 
+        // $('#addButton').on('click', function(){
+function addIdioma(){
             var contenedorIdiomas = $('#listadoIdiomas');
 
             var selectIdioma = $('#idiomaOf');
 
             var selectNivelIdioma = $('#nivelIdiomaOf');
+            // console.log($('#nivelIdiomaOf option:first').val());
 
             if(selectIdioma.val() != "" 
 
@@ -391,12 +398,22 @@ if($('#addButton').length){
 
 
                 selectIdioma.children(':selected').attr('disabled', true);
-
+                // console.log($(selectIdioma).first());
+                
+                // console.log($(selectNivelIdioma).first()[0]);
+                
+                // selectNivelIdioma
             }
+            // console.log(selectNivelIdioma.first().val());
+            selectIdioma.val($(selectIdioma).first().val());
+            $('#nivelIdiomaOf').val($('#nivelIdiomaOf option:first').val());
+            $('#nivelIdiomaOf').attr('disabled', true); 
+            $('#select_array_idioma').trigger('change'); 
+        }
 
-        })
+        // })
 
-}
+// }
 
 
 

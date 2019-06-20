@@ -432,7 +432,7 @@ class Modelo_Oferta{
   }
 
   public static function ofertasxEliminar(){
-    $sql = "SELECT o.id_ofertas, NOW() AS fecha_actual, DATE_ADD(e.fecha_caducidad, INTERVAL 3 MONTH) AS fecha_tope
+    $sql = "SELECT o.id_ofertas, NOW() AS fecha_actual, DATE_ADD(e.fecha_caducidad, INTERVAL 1 MONTH) AS fecha_tope
             FROM mfo_oferta o 
             INNER JOIN mfo_empresa_plan e ON e.id_empresa_plan = o.id_empresa_plan 
             WHERE o.estado = ?";  
