@@ -1,6 +1,9 @@
 
 $(document).ready(function()
 {
+
+    $('[data-toggle="tooltip"]').tooltip();   
+    
     $('#tipo_orden').on('change',function(){
         $("input[type='radio'][name='orden']").each(function(){
           if($(this).is(":checked"))

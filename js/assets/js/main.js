@@ -467,15 +467,19 @@ function validaForm(tipo,btn){
     validaCampos(3,btn);
   }
 }
+function validarFloat(valor){
+
+    return /^([0-9]{1,5})[.][0-9]{2}?$/.test(valor);
+
+}
 
 function validarDineroFormPlanes(num,err_val,seccion_val,btn){
-  var expreg_telf = /^[0-9]{2,5}$/;
   var error = 0;
     if(num == null || num.length == 0 || /^\s+$/.test(num)){
       colocaError(err_val,seccion_val,"El campo no puede ser vac\u00EDo",btn);
       error = 1;
-    }else if(!expreg_telf.test(num)){
-        colocaError(err_val,seccion_val,"Formato incorrecto, solo numeros",btn);
+    }else if(!validarFloat(num)){
+        colocaError(err_val,seccion_val,"Ingrese un valor correcto, 00.00",btn);
         error = 1;
     }else{
         quitarError(err_val,seccion_val);

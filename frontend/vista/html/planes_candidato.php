@@ -13,6 +13,9 @@
           $plan["id_plan"] = Utils::encriptar($plan["id_plan"]);
       ?>
         <ul class="plan-tabla <?php echo ($key == 0) ? "izq col-md-offset-2" : "cen"; ?> theplan col-xs-12 col-md-4 flex-item">
+          <?php if (empty($plan["costo"])){ ?> 
+            <div>&nbsp;</div>
+          <?php } ?>
           <div class="titulo-planes title headingazul"><?php echo strtoupper(utf8_encode($plan["nombre"]));?></div>
           <div class="plan-precio"><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?></div>
           <?php if (!empty($plan["costo"])){ ?> 

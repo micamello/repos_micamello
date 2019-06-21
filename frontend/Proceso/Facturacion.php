@@ -178,8 +178,7 @@ class Proceso_Facturacion{
                             "estab" => self::ESTAB,
                             "ptoEmi" => self::PTOEMI,
                             "secuencial" => $this->secuencial,
-                            "dirMatriz" => self::DIR_MATRIZ,
-                            "dirSucursal" => self::DIR_SUCURSAL);
+                            "dirMatriz" => self::DIR_MATRIZ);
     return $infoTributaria;
   }
 
@@ -377,7 +376,7 @@ class Proceso_Facturacion{
                       .$abrir_interlineado.'15'.$cerrar_interlineado.
                       '<tr><td style="padding-right: 5px;"><b>Dirección Matriz:</b></td><td width="500" style="padding-right: 15px;">'.$infoTributaria->dirMatriz.'</td>
                       </tr>
-                      <tr><td style="padding-right: 5px;"><b>Dirección Sucursal:</b></td><td width="500" style="padding-right: 15px;">'.$infoTributaria->dirSucursal.'</td>
+                      <tr><td style="padding-right: 5px;"><b>Dirección Sucursal:</b></td><td width="500" style="padding-right: 15px;">'.self::DIR_SUCURSAL.'</td>
                       </tr>'
                       .$abrir_interlineado.'15'.$cerrar_interlineado.
                       '<tr><td colspan="2" style=""><b>OBLIGADO A LLEVAR CONTABILIDAD:</b>&nbsp;&nbsp;&nbsp;&nbsp;'.$infoFactura->obligadoContabilidad.'</td>

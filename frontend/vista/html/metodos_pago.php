@@ -20,7 +20,7 @@
       <div class="col-md-8 col-md-offset-2">        
         <div class="panel panel-default" id="panel_1" style="display:none;">
           <div class="panel-body">
-            <form role="form" autocomplete="off"> name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">
+            <form role="form" autocomplete="off" name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">
               <div class="col-md-12">
                 <input type="hidden" id="idplan" name="idplan" value="<?php echo $plan["id_plan"];?>">              
               <div align="center">
@@ -53,7 +53,7 @@
                   <div class="col-md-6">
                     <div id="seccion_val" class="form-group">
                       <label>Valor del d&eacute;posito</label><div id="err_val" class="help-block with-errors"></div>
-                      <input type="text" name="valor" id="valor" class="form-control" onkeypress="return validaDecimales(event,this);" maxlength="5" minlength="2">
+                      <input type="text" name="valor" id="valor" class="form-control" onkeypress="return validaDecimales(event,this);" minlength="2" placeholder="00.00">
                     </div>
                   </div>
                   <div id="seccion_img" class="col-md-12">
@@ -113,7 +113,7 @@
               <div class="col-md-6">
                 <div id="seccion_correo" class="form-group">    
                   <label>Correo</label><div id="err_correo" class="help-block with-errors"></div>
-                  <input type="email" name="correo" id="correo" class="form-control" placeholder="" minlength="10" maxlength="30">
+                  <input type="email" name="correo" id="correo" class="form-control" minlength="10" maxlength="50" placeholder="ejemplo@micamello.com">
                 </div>  
               </div> 
               <div class="col-md-6">
@@ -176,7 +176,7 @@
             <div align="center">
               <img src="<?php echo PUERTO;?>://<?php echo HOST;?>/imagenes/logo_payme.png" class="img-responsive"><br><br>  
             </div>                     
-            <form name="form_payme" id="form_payme" action="#" method="post" class="alignet-form-vpos2">
+            <form name="form_payme" id="form_payme" action="#" method="post" class="alignet-form-vpos2" autocomplete="off">
               <div class="col-xs-12 col-md-12">
                 <div class="col-md-6">
                   <div id="seccion_tipoPM" class="form-group">    
@@ -217,7 +217,7 @@
                 <div class="col-md-6"> 
                   <div id="seccion_correoPM" class="form-group">   
                     <label>Correo</label><div id="err_correoPM" class="help-block with-errors"></div>
-                    <input type="text" name="shippingEmail" id="shippingEmail" class="form-control" value="" maxlength="30" />
+                    <input type="text" name="shippingEmail" id="shippingEmail" class="form-control" value="" minlength="10" maxlength="50" placeholder="ejemplo@micamello.com"/>
                   </div>
                 </div> 
 
