@@ -77,12 +77,12 @@ $_SESSION['mostrar_error'] = ""; ?>
       
 		        
 
-				    <?php if($puedeDescargarInforme == 1 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+				    <?php if($puedeDescargarInforme >= 2 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 				    	<div class="recuadro-perfil panel panel-default" style="margin: 50px 0px;"><br>
-				    		<a target="_blank" href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
+				    		<a href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
 					            <img width="100%" alt="informePersonalidad" src="<?php echo PUERTO."://".HOST."/imagenes/informe.png";?>">
 					            <div class="perfil-cuadro" id="err_img" align="center">
-					              <label style="cursor:pointer" class="text-center" for="">acceder a informe de personalidad completo</label>
+					              <label style="cursor:pointer" class="text-center" for="">acceder a informe de personalidad <?php if($puedeDescargarInforme >= 2 && $puedeDescargarInforme < 5){ echo 'parcial'; }else{ echo 'completo'; } ?></label>
 					            </div>
 				        	</a>
 				        	<!--<div align="center">
@@ -540,9 +540,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 																$selected = '';
 													        if($i != $area['id_area']){
 
-													        	if(array_key_exists($area['id_area'], $data['areaxusuario'])){
+													        	if(isset($data['areaxusuario']) && array_key_exists($area['id_area'], $data['areaxusuario'])){
 													        		$selected = "selected='selected'";
-													        	}else if(!isset($data['areaxusuario']) && array_key_exists($area['id_area'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
+													        	}else if(!isset($data['areaxusuario']) && isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && array_key_exists($area['id_area'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
 													        		$selected = "selected='selected'";
 													        	}
 													          	echo "<option ".$selected." value='".$area['id_area']."'>".utf8_encode($area['nombre_area'])."</option>";
@@ -568,9 +568,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 													      foreach ($areas as $area) {
 													      	$selected = '';
 
-												        	if(array_key_exists($area['id_area'], $data['areaxusuario']) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])){
+												        	if(isset($data['areaxusuario']) && array_key_exists($area['id_area'], $data['areaxusuario']) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])){
 												        		$selected = "selected='selected'";
-												        	}else if(!isset($data['areaxusuario']) && in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
+												        	}else if(!isset($data['areaxusuario']) && isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
 												        		$selected = "selected='selected'";
 												        	}
 												          echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";
@@ -854,7 +854,7 @@ $_SESSION['mostrar_error'] = ""; ?>
         	
         	<label class="btn-blue text-center" for="subirCV" style="cursor:pointer">actualizar</label>
       		<input type="hidden" name="" id="btnDescargarHV" value="<?php echo $_SESSION['mfo_datos']['usuario']['infohv']; ?>">
-      		<a href="<?php echo $ruta_arch; ?>"  target="_blank" class="btn-blue">descargar</a>
+      		<a href="<?php echo $ruta_arch; ?>" class="btn-blue">descargar</a>
         </div>
     </div>    
   </div>

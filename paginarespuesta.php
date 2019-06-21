@@ -12,7 +12,7 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              PAYME_CURRENCY_CODE . 
                                              trim($_POST['authorizationResult']) . 
                                              PAYME_SECRET_KEY, 'sha512');
- Utils::envioCorreo('desarrollo@micamello.com.ec','PASO_OPAYME',print_r($_POST,true));
+ Utils::envioCorreo('desarrollo@micamello.com.ec','ANTES DE AUTORIZAR',print_r($_POST,true));
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
     $vl_insert = array();
@@ -53,7 +53,7 @@ try{
       throw new Exception("Error Insert IPN Payme");
     }    
     if (trim($_POST["authorizationResult"]) == "00" && trim($_POST["errorCode"]) == "00"){
-      Utils::envioCorreo('desarrollo@micamello.com.ec','CRON_PAYME',print_r($_POST,true));
+      Utils::envioCorreo('desarrollo@micamello.com.ec','ERROR CODE O ',print_r($_POST,true));
       $_SESSION['mfo_datos']['actualizar_planes'] = 1; 
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
     }

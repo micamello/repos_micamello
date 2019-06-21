@@ -36,7 +36,8 @@ class Proceso_Facturacion{
   const VERSION = '1.0.0';
   const RAZON_SOCIAL = 'MICAMELLO S.A.';
   const NOMBRE_COMERCIAL = 'MICAMELLO S.A.';
-  const DIR_MATRIZ = 'Km 12 Av. Febres Cordero Cdla. Villa Club Etapa Krypton Mz.14 Solar 3';
+  const DIR_MATRIZ = 'Guayaquil: Av. León Febres Cordero km 12.5 Villa Club, Etapa Krypton Mz.14 V.3';
+  const DIR_SUCURSAL = 'Quito: Calderón, calle Punin N3 - 89 y 9 Agosto';
   const OBLIGADO_CONTABILIDAD = 'SI';  
   const ESTAB = '001';
   const PTOEMI = '003';  
@@ -177,7 +178,8 @@ class Proceso_Facturacion{
                             "estab" => self::ESTAB,
                             "ptoEmi" => self::PTOEMI,
                             "secuencial" => $this->secuencial,
-                            "dirMatriz" => self::DIR_MATRIZ);
+                            "dirMatriz" => self::DIR_MATRIZ,
+                            "dirSucursal" => self::DIR_SUCURSAL);
     return $infoTributaria;
   }
 
@@ -374,6 +376,8 @@ class Proceso_Facturacion{
                       </tr>'
                       .$abrir_interlineado.'15'.$cerrar_interlineado.
                       '<tr><td style="padding-right: 5px;"><b>Dirección Matriz:</b></td><td width="500" style="padding-right: 15px;">'.$infoTributaria->dirMatriz.'</td>
+                      </tr>
+                      <tr><td style="padding-right: 5px;"><b>Dirección Sucursal:</b></td><td width="500" style="padding-right: 15px;">'.$infoTributaria->dirSucursal.'</td>
                       </tr>'
                       .$abrir_interlineado.'15'.$cerrar_interlineado.
                       '<tr><td colspan="2" style=""><b>OBLIGADO A LLEVAR CONTABILIDAD:</b>&nbsp;&nbsp;&nbsp;&nbsp;'.$infoFactura->obligadoContabilidad.'</td>
@@ -499,7 +503,7 @@ class Proceso_Facturacion{
     $contenido .= "</tr>";                            
     $contenido .= "</table>";
 
-    $mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">Provincia: Guayas Cantón: DAULE Parroquia LA AURORA (SATÉLITE) <br>km. 12 Av. Febres Cordero Cdla. Villa Club etapa Krypton Mz. 14 Solar 3 (a cuatro cuadras de la garita). <br>Teléfono: 2753106 Celular: 099234268. E-mail: infor@micamello.com.ec</footer>');
+    $mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">'.self::DIR_MATRIZ.' | '.self::DIR_SUCURSAL.' <br>PBX: 4 606 0111 | 2 605 5990. <br>E-mail: infor@micamello.com.ec</footer>');
 
     $mpdf->WriteHTML($contenido);
     

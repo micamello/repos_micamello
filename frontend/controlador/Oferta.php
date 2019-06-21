@@ -4,15 +4,7 @@ class Controlador_Oferta extends Controlador_Base{
     public function construirPagina(){
       if (!Modelo_Usuario::estaLogueado()) {
           Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
-      }
-       
-      //Obtiene todos los banner activos segun el tipo
-      //$arrbanner     = Modelo_Banner::obtieneAleatorio(Modelo_Banner::BANNER_CANDIDATO);
-      //Muestra solo un banner de tipo candidato para no dar impresion que cambia de pagina        
-      //$_SESSION['mostrar_banner'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];
-      //$arrbanner = Modelo_Banner::obtieneAleatorio(Modelo_Banner::PUBLICIDAD);
-      //obtiene el orden del banner de forma aleatoria segun la cantidad de banner
-      //$_SESSION['publicidad'] = PUERTO . '://' . HOST . '/imagenes/banner/' . $arrbanner['id_banner'] . '.' . $arrbanner['extension'];        
+      }       
 
       $opcion = Utils::getParam('opcion', '', $this->data); 
       $page = Utils::getParam('page', '1', $this->data);
