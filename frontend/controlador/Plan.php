@@ -30,6 +30,9 @@ class Controlador_Plan extends Controlador_Base {
       case 'planes_usuario':
         $this->planesUsuario();
       break;
+      case 'file':
+        $this->crearFile();
+      break;
       default:        
         $this->mostrarDefault(1);
       break;
@@ -333,10 +336,8 @@ class Controlador_Plan extends Controlador_Base {
 
   public function resultado(){    
     $mensaje = Utils::getParam('mensaje','',$this->data);     
-    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";
-    Utils::log("PASO CERO".$mensaje." - ".$_SESSION['mfo_datos']['actualizar_planes']);
-    if ($mensaje == "exito"){
-      Utils::log("PASO UNO");
+    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";    
+    if ($mensaje == "exito"){    
       if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
         if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
           $tags["ofertaConvertir"] = $_SESSION['mfo_datos']['usuario']['ofertaConvertir'];
@@ -347,8 +348,7 @@ class Controlador_Plan extends Controlador_Base {
         $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
         //$_SESSION['mfo_datos']['actualizar_planes'] = 1;      
       }
-      else{
-        Utils::log("PASO TRES");
+      else{        
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }
     }
@@ -363,6 +363,46 @@ class Controlador_Plan extends Controlador_Base {
       $random = str_pad($random, 9, "0", STR_PAD_LEFT);
     }
     return $random;
+  }
+
+  public function crearFile(){
+    $idusuario = Utils::getParam('id','',$this->data);
+    $idoperation = Utils::getParam('idoperation','',$this->data);  
+    $idplan = Utils::getParam('idplan','',$this->data);  
+    $rs = 0; $msg = '';
+    if (!empty($idusuario) && !empty($idoperation) && !empty($idplan)){
+
+      /*if (file_exists(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idplan.'_'.$idoperation.'.txt')){
+        $rs = 2; $msg = 'Usted ya tiene una compra en proceso por favor espere unos minutos';
+      }
+      else{*/
+        $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idplan.'_'.$idoperation.'.txt', "w");    
+        fputs($fp, '');
+        if (fclose($fp)){
+          $rs = 1; $msg ='Error por favor intente denuevo';
+        }
+      /*}*/      
+    }        
+    Vista::renderJSON(array("resultado"=>$rs,"mensaje"=>$msg));
+  }
+
+  public function buscarUsuariosFile($idusuario){
+    $directorio = opendir(FRONTEND_RUTA.'cache/compras'); 
+    while ($archivo = readdir($directorio)) {
+      if (is_dir($archivo))//verificamos si es o no un directorio
+      {
+          echo "[".$archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
+      }
+      else
+      {
+          echo $archivo . "<br />";
+      }
+    }
+    
+    preg_match_all('/([0-9])_([0-9])_([0-9])/i',$matches);
+    if (!empty($matches)){
+
+    }
   }
 }  
 ?>

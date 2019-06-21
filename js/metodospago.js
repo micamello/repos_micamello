@@ -55,6 +55,7 @@ $('#provinciaPM').change(function(){
         });
       },
       error: function (request, status, error) {
+        colocaError("err_provPM", "seccion_provPM","No se ha podido completar la solicitud","btnpayme");
         $('#ciudadPM').html('<option value="">Seleccione una ciudad</option>');
         Swal.fire({          
           html: 'Error por favor intente denuevo',
@@ -96,6 +97,7 @@ $('#select_provincia').change(function(){
         });
       },
       error: function (request, status, error) {
+        colocaError("err_prov", "seccion_prov","No se ha podido completar la solicitud","btndeposito");
         $('#select_ciudad').html('<option value="">Seleccione una ciudad</option>');
         Swal.fire({          
           html: 'Error por favor intente denuevo',
@@ -461,8 +463,7 @@ $('#tipo_doc').on('change', function(){
 
 $('#tipo_docPM').on('change', function(){
 
-    var tipo_doc = document.getElementById('tipo_docPM').value;
-    console.log(tipo_doc);
+    var tipo_doc = document.getElementById('tipo_docPM').value;    
     if(tipo_doc != 0){      
       if(document.getElementById('dniPM').value != ""){
         if(document.getElementById('dniPM').value.length >= 10){
@@ -672,9 +673,45 @@ function enviarFormulario(form){
     $('#shippingCity').attr('value',$("#ciudadPM").children('option:selected').text());    
     $('#reserved18').val($("#tipo_docPM").val());    
     $('#reserved19').val($("#dniPM").val());
-    //alert($('#shippingState').val());
-    //alert($('#shippingCity').val());
-    AlignetVPOS2.openModal($('#rutaPayMe').val());    
+    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val()+'&idplan='+$('#reserved15').val();
+    $.ajax({
+      type: "GET",
+      url: enlace,
+      dataType:'json',
+      success:function(data){  
+      console.log(data); 
+        if (data.resultado == 1){
+          AlignetVPOS2.openModal($('#rutaPayMe').val());            
+        }  
+        else if(data.resultado == 2){
+          Swal.fire({            
+            text: data.mensaje,
+            imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
+            imageWidth: 210,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });
+        } 
+        else{
+          Swal.fire({        
+            html: data.mensaje,
+            imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+            imageWidth: 75,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });
+        }
+      },
+      error: function (request, status, error) {
+        Swal.fire({        
+          html: 'Error por favor intente denuevo',
+          imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+          imageWidth: 75,
+          confirmButtonText: 'ACEPTAR',
+          animation: true
+        });            
+      }                  
+    });    
   }  
 }
 
@@ -752,8 +789,7 @@ function validarFormulario(){
     }
     if (provincia.value == 0){
       colocaError(err_prov,seccion_prov,"Seleccione una opción",btn);
-      error = 1;     
-      console.log("PASO 3");
+      error = 1;           
     }
     else{
       quitarError(err_prov,seccion_prov);

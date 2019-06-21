@@ -61,7 +61,7 @@
 							if($navegador == "Safari"){
 								$columna = "offset-md-3 ";
 							}
-							echo "<div class='".$columna."col-md-6'>";
+							echo "<div class='".$columna."col-md-6 col-sm-6 col-xs-6 col-lg-6'>";
 							foreach ($actual as $key => $value) {
 								echo "<div class='text_origen' id='nido_".$value['id_opcion']."'>";
 								echo "<input type='hidden' name='opcion[]' value='".$value['id_opcion']."'>";
@@ -69,7 +69,7 @@
 								echo "</div><br><br>";
 							}
 							echo "</div>";
-							echo "<div class='".$columna."col-md-6'>";
+							echo "<div class='".$columna."col-md-6 col-sm-6 col-xs-6 col-lg-6'>";
 							$l = 1;
 							foreach ($actual as $key => $value) {
 								echo "<span class='order_priority'>".($l)."</span>";

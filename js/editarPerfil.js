@@ -154,6 +154,7 @@ $('#provincia').change(function()
                 }
             },
             error: function (request, status, error) {
+              colocaError("err_ciu", "seccion_ciudad","No se ha podido completar la solicitud","boton");
             	$('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
               Swal.fire({                
                 html: 'Ocurrio un error al consultar las ciudades',

@@ -364,7 +364,7 @@ class Controlador_Registro extends Controlador_Base {
   } 
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username){
-    $enlace = "<a href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
+    $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
     $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUARIO");
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%USUARIO%", $username, $email_body);
