@@ -31,7 +31,7 @@ $(document).ready(function(){
             },
 
             error: function (request, status, error) {
-
+                crearMensajeError($(this), "No se pudo completar la solicitud.");
                 Swal.fire({
 
                   html: request.responseText,
@@ -1612,7 +1612,7 @@ $('#ciudadOf').on('blur change', function(){
 
 
 $('#subareasCand').on('change', function(){
-
+    console.log("eder");
     if($(this).val() == "" || $(this).val() == null){
 
         crearMensajeError($(this), "Seleccione una opción");
@@ -2270,7 +2270,7 @@ $('#planesSelect').on('change', function(){
           },
 
           error: function (request, status, error) {
-
+            crearMensajeError($(this), "No se pudo completar la solicitud.");
             ajaxLoader($('#planesSelect'), 'aparecer');
 
             alert(request.responseText);
