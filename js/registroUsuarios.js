@@ -130,9 +130,13 @@ if($('#apellidosCand').length){
 			if($(this).val() != ""){
 				$(this).val($(this).val().trim());
 				if(validarCorreo($(this).val())){
-					if(!searchAjax($(this))){
-						crearMensajeError($(this), 'El correo ingresado ya existe');
+					var res = searchAjax($(this));					
+					if(res == 2){
+						crearMensajeError($(this), 'Verifique su conexión de red. Intente de nuevo');						
 					}
+					else if (res == 0){
+						crearMensajeError($(this), 'El correo ingresado ya existe');
+					}					
 					else{
 						eliminarMensajeError($(this), "");
 					}
@@ -553,7 +557,11 @@ if(tipousuario == 1){
 	if($('#correoCandEmp').length){
 			if($('#correoCandEmp').val() != ""){
 				if(validarCorreo($('#correoCandEmp').val())){
-					if(!searchAjax($('#correoCandEmp'))){
+					var res = searchAjax($('#correoCandEmp'));					
+					if(res == ''){
+						crearMensajeError($('#correoCandEmp'), 'No hay conexion con internet');						
+					}
+					else if (res == false){
 						crearMensajeError($('#correoCandEmp'), 'El correo ingresado ya existe');
 					}
 					else{
@@ -770,15 +778,17 @@ function searchAjax(obj){
         async: false,
         success:function(data){
             if(data.dato != ""){
-            	val_retorno1 = false;
+            	val_retorno1 = 0;
             }
             else{
-            	val_retorno1 = true;
+            	val_retorno1 = 1;
             }
         },
         error: function (request, status, error) {
+        	val_retorno1 = 2;
+        	console.log(error);
         	crearMensajeError($(obj), "No se pudo completar la solicitud.");
-            console.log(request.responseText);
+          console.log("A"+val_retorno1+"A");  
            	// Swal.fire({                
             //     html: request.responseText,
             //     imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
@@ -1023,7 +1033,7 @@ function safari(){
 }
 
 function validarCorreo(correo) { 
-  return /^\s*([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\s*$/.test(correo);
+  return /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/.test(correo);
 }
 
 function ValidarTelefonoConvencional(valor){

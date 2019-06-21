@@ -143,6 +143,7 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags["template_js"][] = "jquery.ui.touch-punch.min";
         $tags["template_js"][] = "modos_respuesta";
         $tags["template_js"][] = "toastr.min";        
+        $tags["nomobile"] = 1;
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);
       break;
       

@@ -271,7 +271,7 @@
                   <label>Plan Seleccionado</label>&nbsp;<?php echo utf8_encode($plan["nombre"]);?>
                   <input type="hidden" name ="acquirerId" value="<?php echo PAYME_ACQUIRERID; ?>" />
                   <input type="hidden" name ="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
-                  <input type="hidden" name="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" />
+                  <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" />
                   <input type="hidden" name="purchaseAmount" value="<?php echo $precio;?>" />
                   <input type="hidden" name="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
                   <input type="hidden" name="language" value="SP" />
@@ -289,13 +289,13 @@
                   <input type="hidden" name="reserved5" value="000" />
                   <input type="hidden" name="reserved9" value="000" />
                   <input type="hidden" name="reserved10" value="<?php echo $taxMontoGravaIva;?>" />
-                  <input type="hidden" name="reserved15" value="<?php echo $plan["id_plan"];?>" />
+                  <input type="hidden" name="reserved15" id="reserved15" value="<?php echo $plan["id_plan"];?>" />
                   <input type="hidden" name="reserved16" id="reserved16" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["id_usuario"];?>" />
                   <input type="hidden" name="reserved17" value="<?php echo $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];?>" />
                   <input type="hidden" name="reserved18" id="reserved18" value="" />
                   <input type="hidden" name="reserved19" id="reserved19" value="" />
                   <input type="hidden" name="programmingLanguage" value="PHP" />
-                  <input type="hidden" name="purchaseVerification" id="purchaseVerification" value="<?php echo $purchaseVerification ?>" />
+                  <input type="hidden" name="purchaseVerification" value="<?php echo $purchaseVerification ?>" />
                   <input type="hidden" name="taxMontoFijo" value="<?php echo $precio;?>" />
                   <input type="hidden" name="taxMontoGravaIva" value="<?php echo $taxMontoGravaIva;?>" />
                   <input type="hidden" name="taxMontoIVA" value="<?php echo $taxMontoIVA;?>" />

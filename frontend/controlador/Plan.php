@@ -367,17 +367,41 @@ class Controlador_Plan extends Controlador_Base {
 
   public function crearFile(){
     $idusuario = Utils::getParam('id','',$this->data);
-    $idpurchase = Utils::getParam('idpurchase','',$this->data);  
-    if (empty($idusuario) || empty($idpurchase)){
-      return false;
-    }    
-    $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idpurchase.'.txt', "w");    
-    fputs($fp, '');
-    if (!fclose($fp)){
-      return false;
+    $idoperation = Utils::getParam('idoperation','',$this->data);  
+    $idplan = Utils::getParam('idplan','',$this->data);  
+    $rs = 0; $msg = '';
+    if (!empty($idusuario) && !empty($idoperation) && !empty($idplan)){
+
+      /*if (file_exists(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idplan.'_'.$idoperation.'.txt')){
+        $rs = 2; $msg = 'Usted ya tiene una compra en proceso por favor espere unos minutos';
+      }
+      else{*/
+        $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idplan.'_'.$idoperation.'.txt', "w");    
+        fputs($fp, '');
+        if (fclose($fp)){
+          $rs = 1; $msg ='Error por favor intente denuevo';
+        }
+      /*}*/      
+    }        
+    Vista::renderJSON(array("resultado"=>$rs,"mensaje"=>$msg));
+  }
+
+  public function buscarUsuariosFile($idusuario){
+    $directorio = opendir(FRONTEND_RUTA.'cache/compras'); 
+    while ($archivo = readdir($directorio)) {
+      if (is_dir($archivo))//verificamos si es o no un directorio
+      {
+          echo "[".$archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
+      }
+      else
+      {
+          echo $archivo . "<br />";
+      }
     }
-    else{
-      return true;
+    
+    preg_match_all('/([0-9])_([0-9])_([0-9])/i',$matches);
+    if (!empty($matches)){
+
     }
   }
 }  

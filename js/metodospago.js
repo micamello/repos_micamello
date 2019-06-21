@@ -671,13 +671,34 @@ function enviarFormulario(form){
     $('#shippingCity').attr('value',$("#ciudadPM").children('option:selected').text());    
     $('#reserved18').val($("#tipo_docPM").val());    
     $('#reserved19').val($("#dniPM").val());
-    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val+'&idpurchase='+$('#purchaseVerification').val();
+    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val()+'&idplan='+$('#reserved15').val();
     $.ajax({
       type: "GET",
       url: enlace,
       dataType:'json',
-      success:function(data){      
-        AlignetVPOS2.openModal($('#rutaPayMe').val());            
+      success:function(data){  
+      console.log(data); 
+        if (data.resultado == 1){
+          AlignetVPOS2.openModal($('#rutaPayMe').val());            
+        }  
+        else if(data.resultado == 2){
+          Swal.fire({            
+            text: data.mensaje,
+            imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
+            imageWidth: 210,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });
+        } 
+        else{
+          Swal.fire({        
+            html: data.mensaje,
+            imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+            imageWidth: 75,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });
+        }
       },
       error: function (request, status, error) {
         Swal.fire({        
