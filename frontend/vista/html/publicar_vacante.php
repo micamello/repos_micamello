@@ -9,6 +9,7 @@
 	  <div class="container">
 	    <div class="col-md-6">
 	      <label>Seleccione plan:</label>
+	      <div class="errorContainer"></div>
 	      <select name="planUsuario" id="planesSelect" class="form-control">
 			<?php
 				foreach ($planes as $plan) {							

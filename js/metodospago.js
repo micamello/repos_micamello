@@ -55,6 +55,7 @@ $('#provinciaPM').change(function(){
         });
       },
       error: function (request, status, error) {
+        colocaError("err_provPM", "seccion_provPM","No se ha podido completar la solicitud","btnpayme");
         $('#ciudadPM').html('<option value="">Seleccione una ciudad</option>');
         Swal.fire({          
           html: 'Error por favor intente denuevo',
@@ -96,6 +97,7 @@ $('#select_provincia').change(function(){
         });
       },
       error: function (request, status, error) {
+        colocaError("err_prov", "seccion_prov","No se ha podido completar la solicitud","btndeposito");
         $('#select_ciudad').html('<option value="">Seleccione una ciudad</option>');
         Swal.fire({          
           html: 'Error por favor intente denuevo',

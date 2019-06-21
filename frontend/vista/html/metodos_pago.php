@@ -20,7 +20,7 @@
       <div class="col-md-8 col-md-offset-2">        
         <div class="panel panel-default" id="panel_1" style="display:none;">
           <div class="panel-body">
-            <form role="form" autocomplete="off"> name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">
+            <form role="form" autocomplete="off" name="form_deposito" id="form_deposito" method="post" enctype="multipart/form-data" action="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/deposito/">
               <div class="col-md-12">
                 <input type="hidden" id="idplan" name="idplan" value="<?php echo $plan["id_plan"];?>">              
               <div align="center">
