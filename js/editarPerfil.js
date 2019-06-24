@@ -156,13 +156,13 @@ $('#provincia').change(function()
             error: function (request, status, error) {
               colocaError("err_ciu", "seccion_ciudad","No se ha podido completar la solicitud","boton");
             	$('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
-              Swal.fire({                
+              /*Swal.fire({                
                 html: 'Ocurrio un error al consultar las ciudades',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
                 imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',
                 animation: true
-              });                  
+              });   */               
             },
             beforeSend : function(){
               ajaxLoader($('#ciudad'), 'aparecer');
@@ -539,22 +539,27 @@ function calcularEdad(){
 function mostrarUni(){
 
     var lugar_estudio = document.getElementById("lugar_estudio");
-
+    
     if(lugar_estudio){
 
       if(lugar_estudio.value != -1){
 
         if(lugar_estudio.value == 0){
-            document.getElementById("universidad2").style.display = "none";
-            document.getElementById("universidad").style.display = "block";
-            document.getElementById("universidad").setAttribute("required",true);
-            $("#universidad2").removeAttr("required");
+          ajaxLoader($('#universidad'), 'aparecer');
+          document.getElementById("universidad2").style.display = "none";
+          document.getElementById("universidad").style.display = "block";
+          document.getElementById("universidad").setAttribute("required",true);
+          $("#universidad2").removeAttr("required");
+          ajaxLoader($('#universidad'), 'desaparecer');
         }else{
-            document.getElementById("universidad").style.display = "none";
-            document.getElementById("universidad2").style.display = "block";
-            document.getElementById("universidad2").setAttribute("required",true);
-            $("#universidad").removeAttr("required");
+          ajaxLoader($('#universidad2'), 'aparecer');
+          document.getElementById("universidad").style.display = "none";
+          document.getElementById("universidad2").style.display = "block";
+          document.getElementById("universidad2").setAttribute("required",true);
+          $("#universidad").removeAttr("required");
+          ajaxLoader($('#universidad2'), 'desaparecer');
         }
+
       }else{
         $("#universidad").removeAttr("required");
         $("#universidad2").removeAttr("required");
@@ -598,7 +603,17 @@ function ocultarCampos(){
                 },
                 error: function (request, status, error) {
                     //alert(request.responseText);
-                }                  
+                    colocaError("err_esc", "seccion_esc","No se ha podido completar la solicitud","boton");
+                },
+                beforeSend : function(){
+                  ajaxLoader($('#escolaridad'), 'aparecer');
+                  ajaxLoader($('#lugar_estudio'), 'aparecer');
+                  
+                },
+                complete : function(){
+                  ajaxLoader($('#escolaridad'), 'desaparecer');
+                  ajaxLoader($('#lugar_estudio'), 'desaparecer');
+                }                   
             });
         }
     }
@@ -1059,8 +1074,8 @@ function validarFormulario(tipovalidacion){
 
             }else if(!validarNombreEmpresa(nombres)){
          
-                colocaError("err_nom", "seccion_nombre",err_formato_letra2,"boton");
-                mensaje += '- Nombre de la empresa, '+err_formato_letra2+'<br>';
+                colocaError("err_nom", "seccion_nombre","Formato incorrecto","boton");
+                mensaje += '- Nombre de la empresa, Formato incorrecto<br>';
                 error = 1;
 
             }else{
@@ -1083,8 +1098,8 @@ function validarFormulario(tipovalidacion){
 
             }else if(!validarNombreEmpresa(nombre_contact)){
 
-                colocaError("err_nomCon", "seccion_nombreContacto",err_formato_letra,"boton");
-                mensaje += '- Nombre de contacto, '+err_formato_letra+'<br>'; 
+                colocaError("err_nomCon", "seccion_nombreContacto","Formato incorrecto","boton");
+                mensaje += '- Nombre de contacto, '+"Formato incorrecto"+'<br>'; 
                 error = 1;  
             }else{
                 quitarError("err_nomCon","seccion_nombreContacto");

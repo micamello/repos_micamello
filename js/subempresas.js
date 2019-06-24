@@ -530,11 +530,28 @@ $('#plan').on('change', function(){
     validaRecursos();
 });*/
 
+function validarNombreEmpresa(nombre){
+  if((/^([a-zA-ZÁÉÍÓÚñáéíóúÑ]+[0-9&.,' ]*)*$/.test(nombre))){
+      return true;
+  }
+  else{
+      return false;
+  }
+}
+
 $('#name_user').on('blur', function(){
 
   var nombres = document.getElementById('name_user').value;
   if(nombres.length <= '100'){
-    validarInput(nombres,"err_nom","seccion_nombre","Nombres");
+    if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
+      colocaError("err_nom", "seccion_nombre","El campo no puede ser vacío","button_crear");
+      mensaje += '- Nombre de la empresa, no puede ser vacío <br>';
+    }else if(!validarNombreEmpresa(nombres)){
+      colocaError("err_nom", "seccion_nombre","Formato incorrecto","button_crear");
+      mensaje += '- Nombre de la empresa, Formato incorrecto<br>';
+    }else{
+      quitarError("err_nom","seccion_nombre");
+    }
     validaCampos();
   }else{
     colocaError("err_nom","seccion_nombre","El nombre no debe exceder de 100 caracteres","button_crear");
@@ -914,11 +931,21 @@ function validarFormulario(){
     }
 
     var nombres = document.getElementById('name_user').value;
-    var mjs = validarInput(nombres,"err_nom","seccion_nombre","Nombres");
-    if(mjs != ''){
-      mensaje += mjs;
-      //error = 1;
+    if(nombres.length <= '100'){
+      if(nombres == null || nombres.length == 0 || /^\s+$/.test(nombres)){
+        colocaError("err_nom", "seccion_nombre","El campo no puede ser vacío","button_crear");
+        mjs += '- Nombre de la empresa, no puede ser vacío <br>';
+      }else if(!validarNombreEmpresa(nombres)){
+        colocaError("err_nom", "seccion_nombre","Formato incorrecto","button_crear");
+        mjs += '- Nombre de la empresa, Formato incorrecto<br>';
+      }else{
+        quitarError("err_nom","seccion_nombre");
+      }
+      validaCampos();
+    }else{
+      colocaError("err_nom","seccion_nombre","El nombre no debe exceder de 100 caracteres","button_crear");
     }
+
 
     var nombres = document.getElementById('nombre_contact').value;
     var mjs = validarInput(nombres,"nom_cont","group_nombre_contact","Nombres contacto");

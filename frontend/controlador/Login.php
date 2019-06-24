@@ -32,7 +32,8 @@ class Controlador_Login extends Controlador_Base {
             }  
           }                               
           self::registroSesion($usuario);
-          self::registroCache($_SESSION['mfo_datos']['usuario']);              
+          self::registroCache($_SESSION['mfo_datos']['usuario']);   
+          self::registrarLogueo($_SESSION["mfo_datos"]["usuario"]["id_usuario_login"],$_SESSION['mfo_datos']['navegador']);           
         }
         else{
           throw new Exception("Usuario o contrase\u00F1a incorrectos");
@@ -93,6 +94,41 @@ class Controlador_Login extends Controlador_Base {
       fputs($fp, $lines);
       fclose($fp);
     }
+  }
+
+  public static function getRealIpAddr() { 
+    if (!empty($_SERVER['HTTP_CLIENT_IP'])) { 
+        $ip=$_SERVER['HTTP_CLIENT_IP']; 
+    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) { 
+        $ip=$_SERVER['HTTP_X_FORWARDED_FOR']; 
+    }else{ 
+        $ip=$_SERVER['REMOTE_ADDR']; 
+    } 
+    return $ip; 
+  } 
+
+  public static function registrarLogueo($id_usuario_login,$navegador){
+
+//    ALTER TABLE `micamell_desarrollo3`.`mfo_logs` 
+//ADD COLUMN `fecha` DATETIME NOT NULL AFTER `ip`;
+
+    //date_default_timezone_set('America/Guayaquil');//seteo para que me de la fecha de mi pais 
+    $fecha = date("Y-m-d H:i:s"); 
+    $ip = self::getRealIpAddr(); 
+
+    $pais_registrado = Modelo_Usuario::consultarSession($id_usuario_login,$ip);
+
+    if(empty($pais_registrado)){
+      Utils::log('entro en el curl');
+      $ch = curl_init("http://api.hostip.info/country.php?ip=$ip");
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
+      $country_code = curl_exec($ch);
+    }else{
+      $country_code = $pais_registrado;
+    }
+
+    $datos = array('id_usuario_login'=>$id_usuario_login,'ip'=>$ip,'fecha'=>$fecha,'navegador'=>$navegador, 'pais'=>$country_code);
+    Modelo_Usuario::registrarSessionLog($datos);
   }
  
 }  

@@ -1226,5 +1226,16 @@ WHERE
     }
     return $datos;  
   }
+
+  public static function consultarSession($id_usuario_login, $ip){
+    $sql = "SELECT pais FROM mfo_logs 
+            WHERE id_usuario_login = $id_usuario_login AND ip = '$ip'";
+    $rs = $GLOBALS['db']->auto_array($sql,array(),false);
+    if (empty($rs['pais'])){ return false; } else{ return $rs['pais']; }
+  }
+
+  public static function registrarSessionLog($data){
+    return $GLOBALS['db']->insert('mfo_logs', $data);
+  }
 }  
 ?>

@@ -57,13 +57,13 @@ $('#provinciaPM').change(function(){
       error: function (request, status, error) {
         colocaError("err_provPM", "seccion_provPM","No se ha podido completar la solicitud","btnpayme");
         $('#ciudadPM').html('<option value="">Seleccione una ciudad</option>');
-        Swal.fire({          
+        /*Swal.fire({          
           html: 'Error por favor intente denuevo',
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
           imageWidth: 75,
           confirmButtonText: 'ACEPTAR',
           animation: true
-        });        
+        });*/        
       },   
       beforeSend : function(){
         ajaxLoader($('#ciudadPM'), 'aparecer');
@@ -99,13 +99,13 @@ $('#select_provincia').change(function(){
       error: function (request, status, error) {
         colocaError("err_prov", "seccion_prov","No se ha podido completar la solicitud","btndeposito");
         $('#select_ciudad').html('<option value="">Seleccione una ciudad</option>');
-        Swal.fire({          
+        /*Swal.fire({          
           html: 'Error por favor intente denuevo',
           imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
           imageWidth: 75,
           confirmButtonText: 'ACEPTAR',
           animation: true
-        });        
+        });    */    
       },
       beforeSend : function(){
         ajaxLoader($('#select_ciudad'), 'aparecer');
