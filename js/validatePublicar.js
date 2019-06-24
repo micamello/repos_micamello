@@ -31,7 +31,7 @@ $(document).ready(function(){
             },
 
             error: function (request, status, error) {
-                crearMensajeError($(this), "No se pudo completar la solicitud.");
+                crearMensajeError($('#planesSelect'), "Verifique su conexión de red. Intente de nuevo.");
                 Swal.fire({
 
                   html: request.responseText,
@@ -259,22 +259,9 @@ if($('#provinciaOf').length){
             },
 
             error: function (request, status, error) {
-                crearMensajeError($(this), "No se pudo completar la solicitud.");
+                crearMensajeError($('#provinciaOf'), "Verifique su conexión de red. Intente de nuevo.");
+                // crearMensajeError($('#ciudadOf'), "Verifique su conexión de red. Intente de nuevo.");
                 $('#ciudadOf').html('<option selected disabled value="0">Seleccione una ciudad</option>');
-
-                Swal.fire({
-
-                  html: 'Ocurrio un error no se pudo consultar las ciudades',
-
-                  imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-
-                  imageWidth: 75,
-
-                  confirmButtonText: 'ACEPTAR',
-
-                  animation: true
-
-                });            
 
             },
 
@@ -1612,7 +1599,7 @@ $('#ciudadOf').on('blur change', function(){
 
 
 $('#subareasCand').on('change', function(){
-    console.log("eder");
+    console.log("llego a subareas - valor : "+$(this).val());
     if($(this).val() == "" || $(this).val() == null){
 
         crearMensajeError($(this), "Seleccione una opción");
@@ -2270,10 +2257,8 @@ $('#planesSelect').on('change', function(){
           },
 
           error: function (request, status, error) {
-            crearMensajeError($(this), "No se pudo completar la solicitud.");
+            crearMensajeError($('#planesSelect'), "Verifique su conexión de red. Intente de nuevo.");
             ajaxLoader($('#planesSelect'), 'aparecer');
-
-            alert(request.responseText);
 
           },
 

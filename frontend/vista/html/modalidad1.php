@@ -4,9 +4,11 @@
 		<div class="text-center">
 			<br>
 			<div class="con_encabezado">
-				<span class="encabezado">Usted ha optado por el <b>MÉTODO DE DOBLE CLICK</b>. Ordene de 1 a 5 las oraciones en cada pregunta. En donde 1 es la oración con la que más se identifica y 5 con la que menos se identifica. El Test CANEA consta de 20 preguntas.</span><br>
+				<span class="encabezado">Ordene de 1 a 5 las oraciones en cada pregunta. En donde 1 es la oración con la que más se identifica y 5 con la que menos se identifica. El Test CANEA consta de 20 preguntas.</span><br>
 				<div align="center">
-					<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/1.png";?>">
+					<h3 class="metodoTexto"><b>Método seleccionado: </b>Doble Click
+						<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/1.png";?>">
+					</h3>
 				</div>
 			</div>
 			<br>
@@ -61,7 +63,7 @@
 							if($navegador == "Safari"){
 								$columna = "offset-md-3 ";
 							}
-							echo "<div class='".$columna."col-md-6'>";
+							echo "<div class='".$columna."col-md-6 col-sm-6 col-xs-6 col-lg-6'>";
 							foreach ($actual as $key => $value) {
 								echo "<div class='text_origen' id='nido_".$value['id_opcion']."'>";
 								echo "<input type='hidden' name='opcion[]' value='".$value['id_opcion']."'>";
@@ -69,7 +71,7 @@
 								echo "</div><br><br>";
 							}
 							echo "</div>";
-							echo "<div class='".$columna."col-md-6'>";
+							echo "<div class='".$columna."col-md-6 col-sm-6 col-xs-6 col-lg-6'>";
 							$l = 1;
 							foreach ($actual as $key => $value) {
 								echo "<span class='order_priority'>".($l)."</span>";

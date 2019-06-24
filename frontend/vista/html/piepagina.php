@@ -147,6 +147,10 @@ if (isset($template_js) && is_array($template_js)){
           e.preventDefault();
          })
     });
+
+    $(document).on('mobileinit', function () {
+        $.mobile.ignoreContentEnabled = true;
+    });
   }
 </script>
 </body>

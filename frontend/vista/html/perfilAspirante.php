@@ -199,7 +199,7 @@
 					<div class="col-md-12">
 						<hr>
 						<!-- <h4>áreas de interés</h4> -->
-						<h4 class="qs-subt">áreas de interés</h4>
+						<h4 class="qs-subt">Áreas de interés</h4>
 
 						<div align="center" class="col-md-6 col-md-offset-3 table-responsive">
 						  <table class="table">
