@@ -860,7 +860,7 @@ class Controlador_GenerarPDF extends Controlador_Base
 // --------------***************--------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
-                $html .= "<h4>&aacute;reas de inter&eacute;s</h4>";
+                $html .= "<h4>&Aacute;reas de inter&eacute;s</h4>";
               $html .= $fintd;
             $html .= $fintr;
 // -----------------------------------------------------
@@ -872,10 +872,10 @@ class Controlador_GenerarPDF extends Controlador_Base
                         foreach ($actual as $key2 => $value2) {
                           if($name != $value2['area']){
                             $name = $value2['area'];
-                            $html.= "<br><h4 style='text-align: center;'>&aacute;rea: ".utf8_encode($value2['area'])."<br></h4>";
+                            $html.= "<br><h4 style='text-align: center;'>&Aacute;rea: ".utf8_encode($value2['area'])."<br></h4>";
                           }
                         }
-                        $html.= "<h4 style='text-align: center;'>Sub&aacute;reas: </h4>";
+                        $html.= "<h4 style='text-align: center;'>Sub&Aacute;reas: </h4>";
                         foreach ($actual as $key1 => $value1) {
                           $html.= utf8_encode($value1['subarea'])."<br>";
                         }

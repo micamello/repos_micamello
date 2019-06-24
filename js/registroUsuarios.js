@@ -7,13 +7,6 @@ $(document).ready(function(){
 	}
 });
 
-
-
-// readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly', 'readonly');" style="background-color: #FFFFFF;"
-// readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly', 'readonly');" style="background-color: #FFFFFF;"
-
-
-
 if($('#fechaNac')){
 	$('#fechaShow').DateTimePicker({
       dateFormat: "yyyy-MM-dd",
@@ -104,22 +97,6 @@ if($('#apellidosCand').length){
 	});
 }
 
-// if($('#correoCandEmp').length){
-// 	$('#correoCandEmp').on('blur', function(){
-// 		if($(this).val() != ""){
-// 			if(!validarCorreo($(this).val())){
-// 				crearMensajeError($(this), "Ingrese un correo válido");
-// 			}
-// 			else{
-// 				eliminarMensajeError($(this));
-// 			}
-// 		}
-// 		else{
-// 			crearMensajeError($(this), "Rellene este campo");
-// 		}
-// 	});
-// }
-
 	if($('#correoCandEmp').length){
 		$('#correoCandEmp').on('keypress', function(event){
 			if(event.key == 0 || event.key == 32){
@@ -130,15 +107,16 @@ if($('#apellidosCand').length){
 			if($(this).val() != ""){
 				$(this).val($(this).val().trim());
 				if(validarCorreo($(this).val())){
-					var res = searchAjax($(this));					
-					if(res == 2){
-						crearMensajeError($(this), 'Verifique su conexión de red. Intente de nuevo');						
-					}
-					else if (res == 0){
+					var searchAjaxVar = searchAjax($(this));
+					if(searchAjaxVar == 0){
 						crearMensajeError($(this), 'El correo ingresado ya existe');
-					}					
-					else{
+					}
+					else if(searchAjaxVar == 1){
+
 						eliminarMensajeError($(this), "");
+					}
+					else if(searchAjaxVar == 2){
+						crearMensajeError($(this), 'Verifique su conexión de red. Intente de nuevo.');
 					}
 				}
 				else{
@@ -194,14 +172,18 @@ if($('#tipoDoc').length){
 			docCampo.attr('placeholder', "Número de "+textoSelect+" *");
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($(this).val());
-				if(docCampo.val() != ""){ 
-					console.log($(this).val());
+				if(docCampo.val() != ""){
 					if(DniRuc_Validador(docCampo,$(this).val()) == true){
-						if(searchAjax(docCampo)){
-							eliminarMensajeError(docCampo);
+						var searchAjaxVar = searchAjax(docCampo);
+						if(searchAjaxVar == 0){
+							// eliminarMensajeError(docCampo);
+							crearMensajeError(docCampo, "El documento ingresado ya existe.");
 						}
-						else{
-							crearMensajeError(docCampo, "Documento ingresado ya existe");
+						else if(searchAjaxVar == 1){
+							eliminarMensajeError(docCampo, "");
+						}
+						else if(searchAjaxVar == 2){
+							crearMensajeError(docCampo, 'Verifique su conexión de red. Intente de nuevo.');
 						}
 					}
 					else{
@@ -227,11 +209,16 @@ if($('#documentoCandEmp').length){
 			$(this).val($(this).val().trim());
 			var tipoDocCampo = $('#tipo_documentacion').val();
 			if(DniRuc_Validador($(this), tipoDocCampo) == true){
-				if(searchAjax($(this))){
-					eliminarMensajeError($(this));
+				var searchAjaxVar = searchAjax($(this));
+				if(searchAjaxVar == 0){
+					// eliminarMensajeError($(this));
+					crearMensajeError($(this), "El documento ingresado ya existe.");
 				}
-				else{
-					crearMensajeError($(this), "Documento ingresado ya existe");
+				else if(searchAjaxVar == 1){
+					eliminarMensajeError($(this), "");
+				}
+				else if(searchAjaxVar == 2){
+					crearMensajeError($(this), 'Verifique su conexión de red. Intente de nuevo.');
 				}
 			}
 			else{
@@ -493,11 +480,15 @@ if(tipousuario == 1){
 			$('#tipo_documentacion').val($('#tipoDoc').val());
 				if(docCampo.val() != ""){ 
 					if(DniRuc_Validador(docCampo,$('#tipoDoc').val()) == true){
-						if(!searchAjax(docCampo) != true){
+						var searchAjaxVar = searchAjax(docCampo);
+						if(searchAjaxVar == 0){
 							eliminarMensajeError(docCampo);
 						}
-						else{
-							crearMensajeError(docCampo, "Documento ingresado ya existe");
+						else if(searchAjaxVar == 1){
+							eliminarMensajeError(docCampo, "");
+						}
+						else if(searchAjaxVar == 2){
+							crearMensajeError(docCampo, 'Verifique su conexión de red. Intente de nuevo.');
 						}
 					}
 					else{
@@ -557,15 +548,16 @@ if(tipousuario == 1){
 	if($('#correoCandEmp').length){
 			if($('#correoCandEmp').val() != ""){
 				if(validarCorreo($('#correoCandEmp').val())){
-					var res = searchAjax($('#correoCandEmp'));					
-					if(res == ''){
-						crearMensajeError($('#correoCandEmp'), 'No hay conexion con internet');						
+					var searchAjaxVar = searchAjax($('#correoCandEmp'));
+					if(searchAjaxVar == 0){
+						eliminarMensajeError($('#correoCandEmp'));
+
 					}
-					else if (res == false){
-						crearMensajeError($('#correoCandEmp'), 'El correo ingresado ya existe');
-					}
-					else{
+					else if(searchAjaxVar == 1){
 						eliminarMensajeError($('#correoCandEmp'), "");
+					}
+					else if(searchAjaxVar == 2){
+						crearMensajeError($('#correoCandEmp'), 'Verifique su conexión de red. Intente de nuevo.');
 					}
 				}
 				else{
@@ -607,11 +599,15 @@ if(tipousuario == 1){
 		if($('#documentoCandEmp').val() != ""){
 			var tipoDocCampo = $('#tipo_documentacion').val();
 			if(DniRuc_Validador($('#documentoCandEmp'), tipoDocCampo) == true){
-				if(searchAjax($('#documentoCandEmp'))){
+				var searchAjaxVar = searchAjax($('#documentoCandEmp'));
+				if(searchAjaxVar == 0){
 					eliminarMensajeError($('#documentoCandEmp'));
 				}
-				else{
-					crearMensajeError($('#documentoCandEmp'), "Documento ingresado ya existe");
+				else if(searchAjaxVar == 1){
+					eliminarMensajeError($('#documentoCandEmp'), "");
+				}
+				else if(searchAjaxVar == 2){
+					crearMensajeError($('#documentoCandEmp'), 'Verifique su conexión de red. Intente de nuevo.');
 				}
 			}
 			else{
@@ -778,17 +774,17 @@ function searchAjax(obj){
         async: false,
         success:function(data){
             if(data.dato != ""){
+            	// falso
             	val_retorno1 = 0;
             }
             else{
+            	// verdadero
             	val_retorno1 = 1;
             }
         },
         error: function (request, status, error) {
         	val_retorno1 = 2;
-        	console.log(error);
-        	crearMensajeError($(obj), "No se pudo completar la solicitud.");
-          console.log("A"+val_retorno1+"A");  
+            console.log(request.responseText);
            	// Swal.fire({                
             //     html: request.responseText,
             //     imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
@@ -1129,7 +1125,3 @@ function passwordCoinciden(obj1, obj2){
 		return false;
 	}
 }
-
-// $('.form-control').on('click', function(){
-// 	console.log($(this).attr('placeholder').split(' ')[0]);
-// })
