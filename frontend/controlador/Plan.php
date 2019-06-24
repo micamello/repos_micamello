@@ -371,38 +371,36 @@ class Controlador_Plan extends Controlador_Base {
     $idplan = Utils::getParam('idplan','',$this->data);  
     $rs = 0; $msg = '';
     if (!empty($idusuario) && !empty($idoperation) && !empty($idplan)){
-
-      /*if (file_exists(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idplan.'_'.$idoperation.'.txt')){
+      if ($this->buscarUsuariosFile($idusuario)){
         $rs = 2; $msg = 'Usted ya tiene una compra en proceso por favor espere unos minutos';
       }
-      else{*/
+      else{        
         $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idplan.'_'.$idoperation.'.txt', "w");    
         fputs($fp, '');
         if (fclose($fp)){
           $rs = 1; $msg ='Error por favor intente denuevo';
         }
-      /*}*/      
+      }      
     }        
     Vista::renderJSON(array("resultado"=>$rs,"mensaje"=>$msg));
   }
 
   public function buscarUsuariosFile($idusuario){
-    $directorio = opendir(FRONTEND_RUTA.'cache/compras'); 
+    $directorio = opendir(FRONTEND_RUTA.'cache/compras');     
     while ($archivo = readdir($directorio)) {
-      if (is_dir($archivo))//verificamos si es o no un directorio
-      {
-          echo "[".$archivo . "]<br />"; //de ser un directorio lo envolvemos entre corchetes
-      }
-      else
-      {
-          echo $archivo . "<br />";
-      }
+      if (!is_dir($archivo)){
+        preg_match_all("/([0-9]+)_([0-9]+)_([0-9]+)/i",$archivo,$matches);
+        if (is_array($matches)){
+          Utils::log("MATCHES ".print_r($matches,true));                    
+          if ($matches[1][0] == $idusuario){
+            Utils::log("VERDADERO");
+            return true;
+          }          
+        }        
+      }      
     }
-    
-    preg_match_all('/([0-9])_([0-9])_([0-9])/i',$matches);
-    if (!empty($matches)){
-
-    }
+    Utils::log("FALSE");
+    return false;
   }
 }  
 ?>

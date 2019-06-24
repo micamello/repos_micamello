@@ -139,7 +139,7 @@ if (isset($template_js) && is_array($template_js)){
 </div>-->
 <script type="text/javascript">
   if($("#form_payme").length || $("#form_deposito").length){
-    function disableF5(e) { console.log(e.keyCode); if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 82 || (e.which || e.keyCode) == 117) e.preventDefault(); };
+    function disableF5(e) { console.log(e.keyCode); if ((e.which || e.keyCode) == 116 || (e.which || e.keyCode) == 117) e.preventDefault(); };
 
     $(document).ready(function(){
          $(document).on("keydown", disableF5);
