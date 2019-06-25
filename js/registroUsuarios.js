@@ -99,13 +99,16 @@ if($('#apellidosCand').length){
 
 	if($('#correoCandEmp').length){
 		$('#correoCandEmp').on('keypress', function(event){
-			if(event.key == 0 || event.key == 32){
+			if(event.keyCode == 0 || event.keyCode == 32){
 				event.preventDefault();
 			}
 		});
+		$('#correoCandEmp').on('keyup', function(){
+			$(this).val($(this).val().toLowerCase());
+		})
 		$('#correoCandEmp').on('blur', function(){
 			if($(this).val() != ""){
-				$(this).val($(this).val().trim());
+				$(this).val($(this).val().trim().toLowerCase());
 				if(validarCorreo($(this).val())){
 					var searchAjaxVar = searchAjax($(this));
 					if(searchAjaxVar == 0){
@@ -1029,7 +1032,7 @@ function safari(){
 }
 
 function validarCorreo(correo) { 
-  return /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/.test(correo);
+  return /^([a-zA-Z0-9\+_\-]+)(\.[a-zA-Z0-9\+_\-]+)*@([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}$/.test(correo);
 }
 
 function ValidarTelefonoConvencional(valor){

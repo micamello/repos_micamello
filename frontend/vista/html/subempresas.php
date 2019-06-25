@@ -72,7 +72,7 @@
                         <table class="table table-bordered table-hover">
                             <thead>
                                 <tr class="breadcrumb">
-                                    <th class="text-center">Nombre empresa</th> 
+                                    <th class="text-center">Nombre empresa</th>
                                     <th class="text-center">Plan(es) asociado(s)</th>
                                     <th class="text-center">N° de ofertas restantes</th>
                                     <th class="text-center">N° de accesos restantes</th>
