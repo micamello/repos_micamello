@@ -13,7 +13,7 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              trim($_POST['authorizationResult']) . 
                                              PAYME_SECRET_KEY, 'sha512');
 
-$filename = FRONTEND_RUTA.'cache/compras/'.trim($_POST["reserved16"]).'_'.trim($_POST["reserved15"]).'_'.trim($_POST["purchaseOperationNumber"]).'.txt';
+$filename = FRONTEND_RUTA.'desarrollov3/cache/compras/'.trim($_POST["reserved16"]).'_'.trim($_POST["reserved15"]).'_'.trim($_POST["purchaseOperationNumber"]).'.txt';
 
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
@@ -55,8 +55,8 @@ try{
       throw new Exception("Error Insert IPN Payme");
     }    
     if (trim($_POST["authorizationResult"]) == "00" && trim($_POST["errorCode"]) == "00"){      
-      $_SESSION['mfo_datos']['actualizar_planes'] = 1; 
-      if (file_exists($filename)){
+      $_SESSION['mfo_datos']['actualizar_planes'] = 1;       
+      if (file_exists($filename)){        
         @unlink($filename);
       }
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');

@@ -390,16 +390,13 @@ class Controlador_Plan extends Controlador_Base {
     while ($archivo = readdir($directorio)) {
       if (!is_dir($archivo)){
         preg_match_all("/([0-9]+)_([0-9]+)_([0-9]+)/i",$archivo,$matches);
-        if (is_array($matches)){
-          Utils::log("MATCHES ".print_r($matches,true));                    
-          if ($matches[1][0] == $idusuario){
-            Utils::log("VERDADERO");
+        if (is_array($matches)){          
+          if ($matches[1][0] == $idusuario){          
             return true;
           }          
         }        
       }      
-    }
-    Utils::log("FALSE");
+    }    
     return false;
   }
 }  
