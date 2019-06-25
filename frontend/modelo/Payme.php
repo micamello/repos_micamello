@@ -29,10 +29,10 @@ class Modelo_Payme{
     return $GLOBALS['db']->auto_array($sql,array($IDTransaction,self::PROCESADO));    
   }
 
-  public static function consultaByOperationNumber($operationNumber){
+  public static function consultaByOperationNumber($operationNumber,$idusuario){
     if (empty($operationNumber)){ return false; }
-    $sql = "SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = ? AND estado = ? LIMIT 1";
-    return $GLOBALS['db']->auto_array($sql,array($operationNumber));    
+    $sql = "SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = ? AND reserved16 = ? LIMIT 1";
+    return $GLOBALS['db']->auto_array($sql,array($operationNumber,$idusuario));    
   }
 }  
 ?>

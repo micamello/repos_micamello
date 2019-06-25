@@ -20,16 +20,41 @@ else{
 }
 
 $directorio = opendir(FRONTEND_RUTA.'cache/compras');     
+
 while ($archivo = readdir($directorio)) {
   if (!is_dir($archivo)){
     preg_match_all("/([0-9]+)_([0-9]+)_([0-9]+)/i",$archivo,$matches);
-    if (is_array($matches)){       
-      print_r($matches);
-      echo "<BR>";
-      //if ()   
-      /*if ($matches[1][0] == $idusuario){          
-        return true;
-      }*/          
+    if (!empty($matches) && is_array($matches)){             
+      $rs = Modelo_Payme::consultaByOperationNumber($matches[3][0],$matches[1][0]);
+      if (empty($rs)){
+        $purchaseVerification = openssl_digest(PAYME_ACQUIRERID . 
+                                               PAYME_IDCOMMERCE . 
+                                               $matches[3][0] . 
+                                               $matches[2][0] . 
+                                               PAYME_CURRENCY_CODE . 
+                                               PAYME_SECRET_KEY, 'sha512');
+        
+        $url = PAYME_RUTA.'VPOS2/rest/operationAcquirer/consulte';
+                    
+        $dataRest = '{"idAcquirer":"'.PAYME_ACQUIRERID.'","idCommerce":"'.PAYME_IDCOMMERCE.'","operationNumber":"'.$matches[3][0].'","purchaseVerification":"'.$$purchaseVerification.'"}';
+                
+        $header = array('Content-Type: application/json');
+            
+        //Consumo del servicio Rest
+        $curl = curl_init();
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $dataRest);
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $header);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($curl);
+        $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        curl_close($curl);
+        print_r($response);
+      }              
+
+      unlink(FRONTEND_RUTA.'cache/compras/'.$archivo);
     }        
   }      
 } 
