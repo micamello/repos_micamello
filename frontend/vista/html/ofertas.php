@@ -36,7 +36,19 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				                  	<?php foreach ($areas_subareas as $key => $value) { ?>
 										<tr>
 											<th scope="row"><?php echo utf8_encode($value['area']); ?></th>
-											<td><?php echo utf8_encode($value['subareas']); ?></td>
+											<td>
+												<?php 
+													$text_subareas = '';
+													$text_subareas2 = '';
+													$subareas_array = explode(",",utf8_encode($value['subareas'])); 
+													if(count($subareas_array) > 3){
+														$text_subareas = $subareas_array[0].', '.$subareas_array[1].', '.$subareas_array[2];
+														unset($subareas_array[0],$subareas_array[1],$subareas_array[2]);
+														$text_subareas2 = implode(",", $subareas_array);
+													}
+												?>
+												<span><?php echo $text_subareas; ?> <span id="vermasdiv<?php echo $key; ?>" style="display:none"><?php echo ', '.$text_subareas2; ?></span></span><b><a href="#" onclick="vermas('vermasdiv<?php echo $key; ?>','ver<?php echo $key; ?>')" id="ver<?php echo $key; ?>"> ..ver m&aacute;s</a></b>
+											</td>
 										</tr>
 				              		<?php } ?>
 				                </tbody>
@@ -419,7 +431,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 									</div>
 									<?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 										<div class="col-md-6 col-sm-6">
-											<p class="texto-postulaciones" class="cortar" align="justify"><?php echo strip_tags(html_entity_decode($o['descripcion'])); ?></p>
+											<p class="texto-postulaciones cortar" align="justify"><?php echo strip_tags(html_entity_decode($o['descripcion'])); ?></p>
 										</div>
 									<?php }else{ ?>
 
