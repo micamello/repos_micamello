@@ -482,8 +482,12 @@ function calcularRecursos(idplan){
         }
       },
       error: function (request, status, error) {
+        colocaError("rec1","recursos1","Verifique su conexión de red. Intente de nuevo.","button_crear");
+        colocaError("rec3","recursos3","Verifique su conexión de red. Intente de nuevo.","button_crear");
           //error = 1;
-          mensaje += 'Hubo un error de conexi\u00F3n al servidor. <br>';
+          // console.log();
+          // mensaje += 'Hubo un error de conexi\u00F3n al servidor. <br>';
+          mensaje += 2;
       },
        beforeSend : function(){
         ajaxLoader($('#num_post'), 'aparecer');
@@ -499,7 +503,7 @@ function calcularRecursos(idplan){
 }
 
 $('#correo').on('blur', function(){
-
+  $(this).val($(this).val().trim().toLowerCase());
   validarCorreo();
   validaCampos();
 });
@@ -507,9 +511,13 @@ $('#correo').on('blur', function(){
 $('#plan').on('change', function(){
 
     var plan = document.getElementById('plan').value;
-
-    if(calcularRecursos(plan) == 1 || plan != 0){
+    var calcularRecursosVar = calcularRecursos(plan);
+    // console.log(calcularRecursosVar);
+    if((calcularRecursosVar == 1 || plan != 0) && calcularRecursosVar != 2){
       quitarError("err_plan","seccion_plan");
+    }
+    else if(calcularRecursosVar == 2){
+      colocaError("err_plan","seccion_plan","Verifique su conexión de red. Intente de nuevo.","button_crear");
     }else{
       $('#seccion_recursos').hide();
       colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_crear");
@@ -734,8 +742,9 @@ function existeCorreo(correo){
               value = data.respcorreo;
           },
           error: function (request, status, error) {
-              colocaError(err_correo,seccion_correo, "No se pudo completar la solicitud.", btn);
-              alert(request.responseText);
+              // colocaError("correo_div_error","correo_group", "No se pudo completar la solicitud.", "button_crear");
+              value = 2;
+              // alert(request.responseText);
           },
           beforeSend : function(){
             ajaxLoader($('#correo'), 'aparecer');
@@ -794,9 +803,12 @@ function validarCorreo(){
 
   }else{
 
-    if(existeCorreo(correo) != false){
+    if(existeCorreo(correo) != false && existeCorreo(correo) != 2){
         colocaError(err_correo,seccion_correo, "El correo ingresado ya existe", btn);
         mensaje += '- Correo, ingresado ya existe<br>';
+    }
+    else if(existeCorreo(correo) == 2){
+      colocaError("correo_div_error","correo_group", "Verifique su conexión de red. Intente de nuevo.", "button_crear");
     }
     else{
         quitarError(err_correo,seccion_correo);

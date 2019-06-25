@@ -18,15 +18,20 @@
         </div>
 
         <div style="margin-top: 20px; text-align:center " class="col-md-12">
-          <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <i class="qs-iconos fa fa-bullhorn"></i>
             <h3 class="qs-subt">Misi&oacute;n</h3>
             <p class="qs-text">Promover soluciones de servicios a nuestros clientes, logrando su plena satisfacci&oacute;n y contribuyendo a optimizar el desarrollo y realizaci&oacute;n de los candidatos.  </p>
           </div>
-          <div class="col-md-6 col-sm-6 col-xs-12">
+          <div class="col-md-4 col-sm-4 col-xs-12">
             <i class="qs-iconos fa fa-eye"></i>
             <h3 class="qs-subt">Visi&oacute;n</h3>
             <p class="qs-text">Constituirse como la mejor plataforma digital de empleo, innovadora en la gesti&oacute;n de la tecnología y reclutamiento 3.0. Comprometidos con la diversidad e igualdad de candidatos y reclutadores, bajo una gesti&oacute;n interna y externa Sostenible con &eacute;tica y Responsable.</p>
+          </div>
+          <div class="col-md-4 col-sm-4 col-xs-12">
+            <i class="qs-iconos fa fa-handshake-o"></i>
+            <h3 class="qs-subt">Principios</h3>
+            <p class="qs-text principio"><b>S</b> ostenible<br><b>É</b> tica<br><b>R</b> esponsable</p>
           </div>
         </div>
 
@@ -36,7 +41,7 @@
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">DESARROLLO PERSONAL: Aseguramos oportunidades de desarrollo basadas en el m&eacute;rito y en el talento profesional.</p></li>
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">SERVICIOS DE AJUSTE PERSONAL Y SOCIAL de cara a su plena integraci&oacute;n socio laboral.</p></li>
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">TRABAJO EN EQUIPO: Fomentamos la participaci&oacute;n de todos para lograr un objetivo com&uacute;n, compartiendo informaci&oacute;n y conocimientos.</p></li>
-            <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">CONDUCTA &eacute;TICA: Actuamos con profesionalidad, integridad moral, lealtad y respeto a las personas.</li>
+            <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">CONDUCTA &Eacute;TICA: Actuamos con profesionalidad, integridad moral, lealtad y respeto a las personas.</li>
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">ORIENTACION AL CLIENTE: Tenemos atenci&oacute;n, respeto y pasi&oacute;n por el cliente.</p></li>
             <li class="qs-text-lista"><p id="margin-b-15" class="lista-valores">INNOVACION: Promovemos mejoras continuas e innovaci&oacute;n para alcanzar la máxima calidad (investigaci&oacute;n del entorno) y creatividad (servicios “pret a porter”).</p></li>
           </ul>

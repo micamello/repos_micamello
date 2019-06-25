@@ -55,7 +55,7 @@ $('#provinciaPM').change(function(){
         });
       },
       error: function (request, status, error) {
-        colocaError("err_provPM", "seccion_provPM","No se ha podido completar la solicitud","btnpayme");
+        colocaError("err_provPM", "seccion_provPM","Verifique su conexión de red. Intente de nuevo.","btnpayme");
         $('#ciudadPM').html('<option value="">Seleccione una ciudad</option>');
         /*Swal.fire({          
           html: 'Error por favor intente denuevo',
@@ -97,7 +97,7 @@ $('#select_provincia').change(function(){
         });
       },
       error: function (request, status, error) {
-        colocaError("err_prov", "seccion_prov","No se ha podido completar la solicitud","btndeposito");
+        colocaError("err_prov", "seccion_prov","Verifique su conexión de red. Intente de nuevo.","btndeposito");
         $('#select_ciudad').html('<option value="">Seleccione una ciudad</option>');
         /*Swal.fire({          
           html: 'Error por favor intente denuevo',
@@ -389,11 +389,15 @@ $('#shippingAddress').on('blur', function(){
 });
 
 $('#correo').on('blur', function(){
-  $(this).val($(this).val().trim());
+  $(this).val($(this).val().trim().toLowerCase());
   var correoP = document.getElementById('correo').value;
   validarCorreo(correoP,'err_correo','seccion_correo','btndeposito');
   validaCampos(2);
 });
+
+$('#correo').on('keyup', function(){
+  $(this).val($(this).val().toLowerCase());
+})
 
 /*$('#correoP').on('blur', function(){
   var correoP = document.getElementById('correoP').value;
@@ -402,10 +406,14 @@ $('#correo').on('blur', function(){
 });*/
 
 $('#shippingEmail').on('blur', function(){
-  $(this).val($(this).val().trim());
+  $(this).val($(this).val().trim().toLowerCase());
   var correoP = document.getElementById('shippingEmail').value;
   validarCorreo(correoP,'err_correoPM','seccion_correoPM','btnpayme');
   validaCampos(2);
+});
+
+$('#shippingEmail').on('keyup', function(){
+  $(this).val($(this).val().toLowerCase());
 });
 
 $('#shippingZIP').on('blur', function(){

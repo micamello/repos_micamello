@@ -36,7 +36,8 @@ function redireccionar(ruta){
 }
 
 function colocaError(campo, id, mensaje,btn){
-
+  // console.log(campo);
+  // console.log("}{}{}{}{}{}{}{}{}{");
   nodo = document.getElementById(campo);
   nodo.innerHTML = '';
   var elem1 = document.createElement('P');
@@ -50,7 +51,7 @@ function colocaError(campo, id, mensaje,btn){
   
   elem2.appendChild(elem1); 
   nodo.appendChild(elem2); 
-
+  // console.log(nodo.textContent);
   $("#"+id).addClass('has-error');
 
   if(document.getElementById('form_paypal')){
@@ -392,7 +393,7 @@ function validarClavesRecuperar(){
 function validarCorreo(correo,err_correo,seccion_correo,btn){
 
   var error = 0;
-  var expreg_correo = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$/;
+  var expreg_correo = /^([a-zA-Z0-9\+_\-]+)(\.[a-zA-Z0-9\+_\-]+)*@([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}$/;
   if(correo == null || correo.length == 0 || /^\s+$/.test(correo)){
     colocaError(err_correo, seccion_correo,"El campo no puede ser vac\u00EDo",btn);
     error = 1;
