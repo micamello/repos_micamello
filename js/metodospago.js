@@ -681,7 +681,7 @@ function enviarFormulario(form){
     $('#shippingCity').attr('value',$("#ciudadPM").children('option:selected').text());    
     $('#reserved18').val($("#tipo_docPM").val());    
     $('#reserved19').val($("#dniPM").val());
-    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val()+'&idplan='+$('#reserved15').val();
+    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val()+'&precio='+$('#purchaseAmount').val();
     $.ajax({
       type: "GET",
       url: enlace,

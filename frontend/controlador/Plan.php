@@ -368,14 +368,14 @@ class Controlador_Plan extends Controlador_Base {
   public function crearFile(){
     $idusuario = Utils::getParam('id','',$this->data);
     $idoperation = Utils::getParam('idoperation','',$this->data);  
-    $idplan = Utils::getParam('idplan','',$this->data);  
+    $precio = Utils::getParam('precio','',$this->data);  
     $rs = 0; $msg = '';
-    if (!empty($idusuario) && !empty($idoperation) && !empty($idplan)){
+    if (!empty($idusuario) && !empty($idoperation) && !empty($precio)){
       if ($this->buscarUsuariosFile($idusuario)){
         $rs = 2; $msg = 'Usted ya tiene una compra en proceso por favor espere unos minutos';
       }
       else{        
-        $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idplan.'_'.$idoperation.'.txt', "w");    
+        $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$precio.'_'.$idoperation.'.txt', "w");    
         fputs($fp, '');
         if (fclose($fp)){
           $rs = 1; $msg ='Error por favor intente denuevo';

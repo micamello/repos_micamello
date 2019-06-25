@@ -272,7 +272,7 @@
                   <input type="hidden" name ="acquirerId" value="<?php echo PAYME_ACQUIRERID; ?>" />
                   <input type="hidden" name ="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
                   <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" />
-                  <input type="hidden" name="purchaseAmount" value="<?php echo $precio;?>" />
+                  <input type="hidden" name="purchaseAmount" id="purchaseAmount" value="<?php echo $precio;?>" />
                   <input type="hidden" name="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
                   <input type="hidden" name="language" value="SP" />
                   <input type="hidden" name="shippingCity" id="shippingCity" value="" />
