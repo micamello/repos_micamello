@@ -94,7 +94,7 @@ class Proceso_Subscripcion{
       $nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".ucfirst((isset($infousuario["apellidos"])) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");
        
 	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
-                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments);
+                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments, $infoplan['costo']);
       
       if (!empty($attachments)){
         //eliminar archivos temporales
@@ -131,7 +131,7 @@ class Proceso_Subscripcion{
 	  return $GLOBALS['db']->insert_id();	  
   }
 
-  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$attachments){  
+  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$attachments, $costo){  
   	$email_subject = "Activación de Subscripción"; 
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $template_nombre = "ACTIVACION_SUBSCRIPCION_CANDIDATO";      
@@ -140,7 +140,10 @@ class Proceso_Subscripcion{
       $template_nombre = "ACTIVACION_SUBSCRIPCION_EMPRESA";       
     }
     $email_body = Modelo_TemplateEmail::obtieneHTML($template_nombre);
-    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);
+    $precioTemplate = "Parcial";
+    if($precio > 0 && $tipousuario == Modelo_Usuario::EMPRESA){$precioTemplate = ""}
+    $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
     //$notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){      

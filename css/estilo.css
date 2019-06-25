@@ -375,6 +375,10 @@ display: inline;
 
 /*PANTALLAS MEDIANAS*/
 @media only screen and (max-width:1000px) and (min-width:481px){
+    .principio{
+        padding-left: 30pt !important;
+    }
+
     .navbar-nav .open .dropdown-menu {
         text-align: center;
     }
@@ -471,6 +475,9 @@ display: inline;
 
 /*PANTALLAS GRANDES*/
 @media only screen and (min-width:1000px){
+    .principio{
+        padding-left: 70pt  !important;
+    }
     
     #logo-1{
          margin-top: -10px;
@@ -1055,6 +1062,7 @@ padding-top: 10px;
     color: #204478;
     font-size: 28pt;
     padding-top: 30px;
+    margin-top: 0px !important;
 }
 
 /*.qs-mv{
@@ -2806,7 +2814,12 @@ input[type=number] { -moz-appearance:textfield; }
     transform: scale3d(1, 1, 1);
   }
 }
-
+.principio{
+    text-align: left;
+}
+.principio b{
+    color: #204478;
+}
 .pulse {
   -webkit-animation-name: pulse;
   animation-name: pulse;

@@ -24,7 +24,7 @@
             <p><small>&nbsp;</small></p>
           <?php } ?>
           <div class="plan-dias"><?php echo (empty($plan["duracion"])) ? "&nbsp;" : $plan["duracion"]." D&Iacute;AS";?></div>
-          <br>
+          <!--<br>-->
           <?php 
           $listadoAcciones = explode(",",$plan['acciones']);
           $listadoPermisos = explode(",",$plan['permisos']);
@@ -39,7 +39,7 @@
               </p>
             </li>
           <?php } ?>
-          <br>
+          <!--<br>-->
           <br>
           <br>
           <br>

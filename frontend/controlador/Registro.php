@@ -97,6 +97,7 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function validarCamposReg($datosReg){
+    $datosReg['correoCandEmp'] = trim(strtolower($datosReg['correoCandEmp']));
     $iso = SUCURSAL_ISO;
     if(!Utils::es_correo_valido($datosReg['correoCandEmp'])){
       throw new Exception("El correo ingresado no es v\u00E1lido");
