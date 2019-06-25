@@ -28,5 +28,11 @@ class Modelo_Payme{
     $sql = "SELECT id_payme FROM mfo_payme WHERE IDTransaction = ? AND estado = ? LIMIT 1";
     return $GLOBALS['db']->auto_array($sql,array($IDTransaction,self::PROCESADO));    
   }
+
+  public static function consultaByOperationNumber($operationNumber){
+    if (empty($operationNumber)){ return false; }
+    $sql = "SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = ? AND estado = ? LIMIT 1";
+    return $GLOBALS['db']->auto_array($sql,array($operationNumber));    
+  }
 }  
 ?>

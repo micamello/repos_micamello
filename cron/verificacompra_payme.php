@@ -23,7 +23,10 @@ $directorio = opendir(FRONTEND_RUTA.'cache/compras');
 while ($archivo = readdir($directorio)) {
   if (!is_dir($archivo)){
     preg_match_all("/([0-9]+)_([0-9]+)_([0-9]+)/i",$archivo,$matches);
-    if (is_array($matches)){          
+    if (is_array($matches)){       
+      print_r($matches);
+      echo "<BR>";
+      //if ()   
       /*if ($matches[1][0] == $idusuario){          
         return true;
       }*/          
