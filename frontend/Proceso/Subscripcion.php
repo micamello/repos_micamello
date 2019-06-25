@@ -142,7 +142,7 @@ class Proceso_Subscripcion{
     $email_body = Modelo_TemplateEmail::obtieneHTML($template_nombre);
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);
     $precioTemplate = "Parcial";
-    if($precio > 0){$precioTemplate = ""}
+    if($precio > 0 && $tipousuario == Modelo_Usuario::EMPRESA){$precioTemplate = ""}
     $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
     //$notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
