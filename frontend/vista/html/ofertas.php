@@ -9,7 +9,7 @@
 		<h2 class="titulo"><?php echo $breadcrumbs[$vista]; ?></h2>
 	</div>
 </div>
-<span>DSADADSAF <span id="vermasdiv" style="display:none">Texto de Ver Más</span></span><a href="#" onclick="vermas('vermasdiv','ver')" id="ver">...ver m&aacute;s</a>
+
 <br><?php  
 if(isset($filtro) && $vista == 'oferta'){ ?>
 	<div class="container-fluid">
