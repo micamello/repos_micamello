@@ -109,9 +109,6 @@ class Controlador_Login extends Controlador_Base {
 
   public static function registrarLogueo($id_usuario_login,$navegador){
 
-//    ALTER TABLE `micamell_desarrollo3`.`mfo_logs` 
-//ADD COLUMN `fecha` DATETIME NOT NULL AFTER `ip`;
-
     //date_default_timezone_set('America/Guayaquil');//seteo para que me de la fecha de mi pais 
     $fecha = date("Y-m-d H:i:s"); 
     $ip = self::getRealIpAddr(); 
