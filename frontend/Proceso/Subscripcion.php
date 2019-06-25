@@ -5,48 +5,48 @@ class Proceso_Subscripcion{
   protected $idplan;    
   protected $procesador;
 
-	function __construct($objUsuario,$idplan,$procesador){        
+  function __construct($objUsuario,$idplan,$procesador){        
     $this->objUsuario = $objUsuario;
     $this->idplan = $idplan;    
     $this->procesador = $procesador;
   }
 
   public function procesar(){
-    try{	
+    try{  
       $GLOBALS['db']->beginTrans();
 
-	    $infousuario = Modelo_Usuario::busquedaPorId($this->objUsuario->id,$this->objUsuario->tipo);
-	    $infoplan = Modelo_Plan::busquedaXId($this->idplan,true);
+      $infousuario = Modelo_Usuario::busquedaPorId($this->objUsuario->id,$this->objUsuario->tipo);
+      $infoplan = Modelo_Plan::busquedaXId($this->idplan,true);
       $infosucursal = Modelo_Sucursal::consultaDominio($infoplan["id_sucursal"]); 
 
-	    if (empty($infousuario) || empty($infoplan) || empty($infosucursal)){
-	      throw new Exception("Usuario, Plan o Sucursal no existe");	
-	    }
-	    if ($infousuario["tipo_usuario"] != $infoplan["tipo_usuario"]){
-	    	throw new Exception("Usuario no corresponde al plan");	
-	    }
+      if (empty($infousuario) || empty($infoplan) || empty($infosucursal)){
+        throw new Exception("Usuario, Plan o Sucursal no existe");  
+      }
+      if ($infousuario["tipo_usuario"] != $infoplan["tipo_usuario"]){
+        throw new Exception("Usuario no corresponde al plan");  
+      }
       if ($infousuario["id_pais"] <> $infoplan["id_pais"]){
         throw new Exception("Plan no corresponde al pais del usuario"); 
       }
-	  	
+      
       $id_comprobante = $this->guardarComprobante();      
       if (!Modelo_UsuarioxPlan::guardarPlan($this->objUsuario->id,$this->objUsuario->tipo,$this->idplan,$infoplan["num_post"],
                                             $infoplan["duracion"],$infoplan["porc_descarga"],$id_comprobante,false,false,false,
                                             $infoplan["num_accesos"])){
-        throw new Exception("Error en crear el plan");	
-      }	
+        throw new Exception("Error en crear el plan");  
+      } 
       //si es candidato y ya tenia los ultimos 3 cuestionarios hechos se los activa      
-	    if ($this->objUsuario->tipo == Modelo_Usuario::CANDIDATO){
+      if ($this->objUsuario->tipo == Modelo_Usuario::CANDIDATO){
         if (!Modelo_PorcentajexFaceta::updateEstado($this->objUsuario->id)){
           throw new Exception("Error en crear el plan");  
         }
       }
-	    if ($this->procesador->tipo == 'payme'){
-	      if (!Modelo_Payme::modificarEstado($this->procesador->id)){
-	        throw new Exception("Error al actualizar el registro en tabla de payme");	
-	      }	
-	    }
-	    
+      if ($this->procesador->tipo == 'payme'){
+        if (!Modelo_Payme::modificarEstado($this->procesador->id)){
+          throw new Exception("Error al actualizar el registro en tabla de payme"); 
+        } 
+      }
+      
       //facturacion electronica
       $obj_facturacion = new Proceso_Facturacion();
       $obj_facturacion->razonSocialComprador = $this->objUsuario->nombres;
@@ -93,8 +93,8 @@ class Proceso_Subscripcion{
 
       $nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".ucfirst((isset($infousuario["apellidos"])) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");
        
-	    $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
-                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments, $infoplan['costo']);
+      $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
+                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments, $this->idplan);
       
       if (!empty($attachments)){
         //eliminar archivos temporales
@@ -102,13 +102,13 @@ class Proceso_Subscripcion{
         unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
       }
 
-  	}
-  	catch(Exception $e){
-  	  $GLOBALS['db']->rollback();
-	  	echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
+    }
+    catch(Exception $e){
+      $GLOBALS['db']->rollback();
+      echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
       $msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-	    //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);	    
-  	}
+      //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);      
+    }
 
   }
 
@@ -120,19 +120,20 @@ class Proceso_Subscripcion{
       $tipoproc = Modelo_Comprobante::METODO_DEPOSITO;
     }
     if (!Modelo_Comprobante::guardarComprobante($this->procesador->trans,$this->objUsuario->nombres,$this->objUsuario->correo,
-        	                                      $this->objUsuario->telefono,$this->objUsuario->dni,$this->objUsuario->tipodoc,
-        	                                      $tipoproc,'',$this->procesador->monto,$this->objUsuario->id,
-        	                                      $this->idplan,$this->objUsuario->direccion,$this->objUsuario->tipo,
+                                                $this->objUsuario->telefono,$this->objUsuario->dni,$this->objUsuario->tipodoc,
+                                                $tipoproc,'',$this->procesador->monto,$this->objUsuario->id,
+                                                $this->idplan,$this->objUsuario->direccion,$this->objUsuario->tipo,
                                                 Modelo_Comprobante::PAGO_VERIFICADO,$this->objUsuario->provincia,
                                                 $this->objUsuario->ciudad,$this->objUsuario->codpostal,
                                                 $this->procesador->tipopago)){
       throw new Exception("Error al ingresar el comprobante transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan);
     }  
-	  return $GLOBALS['db']->insert_id();	  
+    return $GLOBALS['db']->insert_id();   
   }
 
   public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$attachments, $costo){  
-  	$email_subject = "Activación de Subscripción"; 
+    $costo = Modelo_Plan::busquedaXId($costo);
+    $email_subject = "Activación de Subscripción"; 
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $template_nombre = "ACTIVACION_SUBSCRIPCION_CANDIDATO";      
     }
@@ -142,7 +143,10 @@ class Proceso_Subscripcion{
     $email_body = Modelo_TemplateEmail::obtieneHTML($template_nombre);
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);
     $precioTemplate = "Parcial";
-    if($precio > 0 && $tipousuario == Modelo_Usuario::EMPRESA){$precioTemplate = ""}
+    if($costo['costo'] > 0 && $tipousuario == Modelo_Usuario::CANDIDATO){
+      $precioTemplate = "completo ";
+      $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
+    }
     $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
     //$notif_body = "Su plan ".$plan." ha sido activado exitosamente";    

@@ -145,12 +145,14 @@ if (isset($template_js) && is_array($template_js)){
          $(document).on("keydown", disableF5);
          $(document).on("contextmenu", function(e){
           e.preventDefault();
-         })
+         });
+
+
     });
 
-    $(document).on('mobileinit', function () {
-        $.mobile.ignoreContentEnabled = true;
-    });
+    // $(document).on('mobileinit', function () {
+    //     $.mobile.ignoreContentEnabled = true;
+    // });
   }
 </script>
 </body>

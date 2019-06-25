@@ -130,6 +130,14 @@ if(document.getElementById('listado_idiomas')){
     var listado_error = document.getElementById('listado_idiomas').id;
 }
 
+$('#telefono').on('blur', function(){
+  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
+});
+
+$('#convencional').on('blur', function(){
+  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
+});
+
 /* Carga select dependiente (ciudad) */
 $('#provincia').change(function()
 {
@@ -175,7 +183,6 @@ $('#provincia').change(function()
         })
     }
 });
-
 /*Permite deseleccionar las subareas seleccionadas*/
 function eliminar_item_selected(selected_item,tipo,op){
 
