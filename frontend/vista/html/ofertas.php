@@ -12,39 +12,67 @@
 
 <br><?php  
 if(isset($filtro) && $vista == 'oferta'){ ?>
-	<div class="container-fluid"> 
-		<div class="alert alert-info col-md-12"> 
-			<form role="form" name="filtro" id="filtro" method="post" action="<?php echo PUERTO.'://'.HOST.'/'.$vista.'/'; ?>">
-				<?php if($filtro == 1){ ?>
-					<h6><b>Las ofertas aqu&iacute; presentadas estan filtradas por las siguientes caracteristicas:</b></h6>
+	<div class="container-fluid">
+		<form role="form" name="filtro" id="filtro" method="post" action="<?php echo PUERTO.'://'.HOST.'/'.$vista.'/'; ?>"> 
+			<?php if($filtro == 1){ ?>
+			<div class="alert alert-info col-md-12" style="padding-bottom: 0px;"> 
+				<h2 class="subt-2 modal-title" style="text-decoration: underline; text-transform: uppercase;">Ofertas Filtradas</h2>
+				<div style="padding-bottom: 0px;">
+			        <div class="row">
+			            <div class="col-md-12">
+			              <p>Las ofertas aquí presentadas estan filtradas por las siguientes caracteristicas:</p>
+			            </div>
+			            <?php if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){ ?>
+				            <div class="col-md-4 col-md-offset-2">
+				              <h3 class="subt-2">&Aacute;reas y sub&aacute;reas de empleo</h3>
+				              <table class="table">
+				                <thead>
+				                  <tr>
+				                    <th style="text-align: center;font-weight: bold; font-size: 14pt;" scope="col">&Aacute;rea</th>
+				                    <th style="text-align: center;font-weight: bold; font-size: 14pt;"scope="col">Sub&aacute;reas</th>
+				                  </tr>
+				                </thead>
+				                <tbody>
+				                  	<?php foreach ($areas_subareas as $key => $value) { ?>
+										<tr>
+											<th scope="row"><?php echo utf8_encode($value['area']); ?></th>
+											<td><?php echo utf8_encode($value['subareas']); ?></td>
+										</tr>
+				              		<?php } ?>
+				                </tbody>
+				              </table>
+				           	</div>
+			            <?php } ?>
+			            <div class="col-md-4">
+			               	<h3 class="subt-2" style="padding: 15px; text-align: center">Cambio de residencia:
+			               		<span style="color: #797979;"> 
+			               			<?php if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 1){
+										echo 'SI';
 
-					<?php if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){
-						echo '<br><b>&Aacute;reas y sub&aacute;reas de empleo: </b>';
-						$areas = '';
-						foreach ($areas_subareas as $key => $value) {
-
-							$areas.='<br>- <b>'.utf8_encode($value['area']).'</b> -->'.utf8_encode($value['subareas']);
-						}
-						echo $areas.'<br>';
-					} ?>
-
-					<?php if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 1){
-						echo '<br><b>Cambio de Residencia:</b> SI';
-
-					}else{ 
-						echo '<br><b>Cambio de Residencia:</b> NO';
-					} ?>
-
-
-					<br><br>Si desea ver todas las ofertas sin filtro --> <a style="cursor:pointer" class="Button"  onclick="document.forms['filtro'].submit()"><b>Presione aquí</b></a>
-
-				<?php }else{ ?>
-					Si desea ver las ofertas con los filtros configurados en su cuenta --> <a style="cursor:pointer" class="Button"  onclick="document.forms['filtro'].submit()"> <b>Presione aquí</b></a>
-
-				<?php } ?>
-				<input type="hidden" name="filtro" id="filtro" value="<?php echo $filtro; ?>">
-			</form>
-		</div>
+									}else{ 
+										echo 'NO';
+									} ?>
+			               		</span>
+			               	</h3>
+			               	<br>Si desea ver todas las ofertas sin filtro <br><br><a style="cursor:pointer; padding: 15px !important" class="btn-blue-2 pulse animated infinite" onclick="document.forms['filtro'].submit()">Click Aqu&iacute;</a>
+			            </div> 
+			        </div>
+			    </div> 
+			</div>
+			<?php }else{ ?>
+	        	<div class="banner-publicidad " align="center">
+				  <div class="container-fluid">
+				    <div class="row">
+				      <div class="col-md-12">
+				        <div class="banner-light col-md-9 click ">Si desea ver las ofertas con los filtros configurados en su cuenta</div>
+				        <a style="cursor:pointer" onclick="document.forms['filtro'].submit()" id="filtro-pop" class="btn-blue-2 pulse animated infinite col-md-2">Click Aqu&iacute;</a>
+				      </div>
+				    </div>
+				  </div>
+				</div><br><br>
+	       	<?php } ?>
+	       	<input type="hidden" name="filtro" id="filtro" value="<?php echo $filtro; ?>">
+		</form>
 		<?php echo isset($enlaceCompraPlan) ? $enlaceCompraPlan : '';  ?> 
 	</div>
 <?php } ?>

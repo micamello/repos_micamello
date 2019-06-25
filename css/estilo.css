@@ -2811,3 +2811,7 @@ input[type=number] { -moz-appearance:textfield; }
   -webkit-animation-name: pulse;
   animation-name: pulse;
 }
+.subt-2{
+    color: #204478;
+    font-weight: bold;
+  }
