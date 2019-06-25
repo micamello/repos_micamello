@@ -321,7 +321,8 @@ $('#shippingLastName').on('blur', function(){
 });
 
 $('#telefono').on('blur', function(){
-  $(this).val($(this).val().trim());
+  // $(this).val($(this).val().trim());
+  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
   var tel = document.getElementById('telefono').value;
   if(tel.length >= '9' && tel.length <= '15'){
     validarNumTelf(tel,"err_tlf","seccion_tlf","btndeposito");
@@ -346,7 +347,8 @@ $('#telefono').on('blur', function(){
 });*/
 
 $('#shippingPhone').on('blur', function(){
-  $(this).val($(this).val().trim());
+  // $(this).val($(this).val().trim());
+  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
   var tel = document.getElementById('shippingPhone').value;
   if(tel.length >= '9' && tel.length <= '15'){
     validarNumTelf(tel,"err_tlfPM","seccion_tlfPM","btnpayme");
