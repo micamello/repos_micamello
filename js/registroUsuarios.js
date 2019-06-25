@@ -99,7 +99,7 @@ if($('#apellidosCand').length){
 
 	if($('#correoCandEmp').length){
 		$('#correoCandEmp').on('keypress', function(event){
-			if(event.key == 0 || event.key == 32){
+			if(event.keyCode == 0 || event.keyCode == 32){
 				event.preventDefault();
 			}
 		});
