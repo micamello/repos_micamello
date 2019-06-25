@@ -36,7 +36,7 @@ while ($archivo = readdir($directorio)) {
         
         $url = PAYME_RUTA.'VPOS2/rest/operationAcquirer/consulte';
                     
-        $dataRest = '{"idAcquirer":"'.PAYME_ACQUIRERID.'","idCommerce":"'.PAYME_IDCOMMERCE.'","operationNumber":"'.$matches[3][0].'","purchaseVerification":"'.$$purchaseVerification.'"}';
+        $dataRest = '{"idAcquirer":"'.PAYME_ACQUIRERID.'","idCommerce":"'.PAYME_IDCOMMERCE.'","operationNumber":"'.$matches[3][0].'","purchaseVerification":"'.$purchaseVerification.'"}';
                 
         $header = array('Content-Type: application/json');
             
@@ -52,9 +52,10 @@ while ($archivo = readdir($directorio)) {
         $code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
         curl_close($curl);
         print_r($response);
+        echo "<br>";echo "<br>";
       }              
 
-      unlink(FRONTEND_RUTA.'cache/compras/'.$archivo);
+      //unlink(FRONTEND_RUTA.'cache/compras/'.$archivo);
     }        
   }      
 } 

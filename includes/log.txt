@@ -1,0 +1,11 @@
+[2019/06/25 03:00:14] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '974105455' AND reserved16 = '10' LIMIT 1
+[2019/06/25 03:03:39] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '102367780' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:04:38] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '102367780' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:14:55] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '102367780' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:14:56] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '417816788' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:18:52] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '102367780' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:18:53] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '417816788' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:19:12] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '102367780' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:19:13] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '417816788' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:43:24] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '102367780' AND reserved16 = '1' LIMIT 1
+[2019/06/25 03:43:25] SQL Query: SELECT id_payme FROM mfo_payme WHERE purchaseOperationNumber = '416724253' AND reserved16 = '1' LIMIT 1
