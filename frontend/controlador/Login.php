@@ -33,9 +33,10 @@ class Controlador_Login extends Controlador_Base {
           }                               
           self::registroSesion($usuario);
           self::registroCache($_SESSION['mfo_datos']['usuario']);   
-          self::registrarLogueo($_SESSION["mfo_datos"]["usuario"]["id_usuario_login"],$_SESSION['mfo_datos']['navegador']);           
+          self::registrarLogueo($_SESSION["mfo_datos"]["usuario"]["id_usuario_login"],$_SESSION['mfo_datos']['navegador'],$data["username"],1);           
         }
         else{
+          self::registrarLogueo('',$_SESSION['mfo_datos']['navegador'],$data["username"],0);
           throw new Exception("Usuario o contrase\u00F1a incorrectos");
         }         
         
@@ -107,26 +108,120 @@ class Controlador_Login extends Controlador_Base {
     return $ip; 
   } 
 
-  public static function registrarLogueo($id_usuario_login,$navegador){
+  public static function registrarLogueo($id_usuario_login,$navegador,$username,$estatus){
 
-    //date_default_timezone_set('America/Guayaquil');//seteo para que me de la fecha de mi pais 
     $fecha = date("Y-m-d H:i:s"); 
-    $ip = self::getRealIpAddr(); 
+    $ip = self::get_client_ip(); 
+    $l = array();
 
-    $pais_registrado = Modelo_Usuario::consultarSession($id_usuario_login,$ip);
-
-    if(empty($pais_registrado)){
-      Utils::log('entro en el curl');
-      $ch = curl_init("http://api.hostip.info/country.php?ip=$ip");
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-      $country_code = curl_exec($ch);
+    if($id_usuario_login != ''){
+      $pais_registrado = Modelo_Usuario::consultarSession($id_usuario_login,$ip);
     }else{
-      $country_code = $pais_registrado;
+      $pais_registrado = '';
     }
 
-    $datos = array('id_usuario_login'=>$id_usuario_login,'ip'=>$ip,'fecha'=>$fecha,'navegador'=>$navegador, 'pais'=>$country_code);
+    if(empty($pais_registrado)){
+      $l = self::ip_info($ip,"location");
+      if($ip == '::1'){
+        $l['country_code'] = 'EC';
+        $l['country'] = 'Ecuador';
+      }
+    }else{
+      $l['country_code'] = 'EC';
+      $l['country'] = 'Ecuador';
+    }
+
+    $datos = array('ip'=>$ip,'fecha'=>$fecha,'navegador'=>$navegador, 'pais'=>$l['country'], 'abrev'=>$l['country_code'], 'username'=>$username,'estatus'=>$estatus);
+    if($id_usuario_login != ''){
+      $datos['id_usuario_login'] = $id_usuario_login;
+    }
     Modelo_Usuario::registrarSessionLog($datos);
   }
  
+  public static function get_client_ip() {
+    $ipaddress = '';
+    if ($_SERVER['HTTP_CLIENT_IP'])
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_X_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if($_SERVER['HTTP_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_FORWARDED'])
+       $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if($_SERVER['REMOTE_ADDR'])
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
+    return $ipaddress;
+  }
+
+
+    //Obtiene la info de la IP del cliente desde geoplugin
+  public static function ip_info($ip = NULL, $purpose = "location", $deep_detect = TRUE) {
+        $output = NULL;
+        if (filter_var($ip, FILTER_VALIDATE_IP) === FALSE) {
+            $ip = $_SERVER["REMOTE_ADDR"];
+            if ($deep_detect) {
+                if (filter_var(@$_SERVER['HTTP_X_FORWARDED_FOR'], FILTER_VALIDATE_IP))
+                    $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+                if (filter_var(@$_SERVER['HTTP_CLIENT_IP'], FILTER_VALIDATE_IP))
+                    $ip = $_SERVER['HTTP_CLIENT_IP'];
+            }
+        }
+        $purpose    = str_replace(array("name", "\n", "\t", " ", "-", "_"), NULL, strtolower(trim($purpose)));
+        $support    = array("country", "countrycode", "state", "region", "city", "location", "address");
+        $continents = array(
+            "AF" => "Africa",
+            "AN" => "Antarctica",
+            "AS" => "Asia",
+            "EU" => "Europe",
+            "OC" => "Australia (Oceania)",
+            "NA" => "North America",
+            "SA" => "South America"
+        );
+        if (filter_var($ip, FILTER_VALIDATE_IP) && in_array($purpose, $support)) {
+            $ipdat = json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+            if (strlen(trim($ipdat->geoplugin_countryCode)) == 2) {
+                switch ($purpose) {
+                    case "location":
+                        $output = array(
+                            "city"           => $ipdat->geoplugin_city,
+                            "state"          => $ipdat->geoplugin_regionName,
+                            "country"        => $ipdat->geoplugin_countryName,
+                            "country_code"   => $ipdat->geoplugin_countryCode,
+                            "continent"      => $continents[strtoupper($ipdat->geoplugin_continentCode)],
+                            "continent_code" => $ipdat->geoplugin_continentCode
+                        );
+                        break;
+                    case "address":
+                        $address = array($ipdat->geoplugin_countryName);
+                        if (strlen($ipdat->geoplugin_regionName) >= 1)
+                            $address[] = $ipdat->geoplugin_regionName;
+                        if (strlen($ipdat->geoplugin_city) >= 1)
+                            $address[] = $ipdat->geoplugin_city;
+                        $output = implode(", ", array_reverse($address));
+                        break;
+                    case "city":
+                        $output = $ipdat->geoplugin_city;
+                        break;
+                    case "state":
+                        $output = $ipdat->geoplugin_regionName;
+                        break;
+                    case "region":
+                        $output = $ipdat->geoplugin_regionName;
+                        break;
+                    case "country":
+                        $output = $ipdat->geoplugin_countryName;
+                        break;
+                    case "countrycode":
+                        $output = $ipdat->geoplugin_countryCode;
+                        break;
+                }
+            }
+        }
+        return $output;
+    }
 }  
 ?>
