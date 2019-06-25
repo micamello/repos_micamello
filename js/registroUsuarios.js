@@ -142,7 +142,7 @@ if($('#celularCandEmp').length){
 	$('#celularCandEmp').on('blur', function(){
 		var tipousuario = $('#tipo_usuario').val();
 		if($(this).val() != ""){
-			$(this).val($(this).val().trim());
+			$(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
 			if(tipousuario == 2){
 				if(!ValidarCelularConvencional($(this).val())){
 					crearMensajeError($(this), "Mínimo 9 dígitos, máx. 15");

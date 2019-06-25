@@ -600,7 +600,7 @@ $('#apellido_contact').on('blur', function(){
 });
 
 $('#tel_one_contact').on('blur', function(){
-
+  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
   var tel_one_contact = document.getElementById('tel_one_contact').value;
   if(tel_one_contact.length >= '10' && tel_one_contact.length <= '15'){
     validarNumTelf(tel_one_contact,"tel_err","group_num1_contact","Celular");
@@ -621,7 +621,7 @@ $('#tel_one_contact').on('blur', function(){
 });
 
 $('#numero_cand').on('blur', function(){
-
+  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
   var tel_one_contact = document.getElementById('numero_cand').value;
   if(tel_one_contact.length >= '9' && tel_one_contact.length <= '15'){
     validarNumTelf(tel_one_contact,"err_num","seccion_num","Teléfono");
@@ -642,7 +642,7 @@ $('#numero_cand').on('blur', function(){
 
 
 $('#tel_two_contact').on('blur', function(){
-
+  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
   var expreg_telf = /^[0-9]+$/i;
   var tel_two_contact = document.getElementById('tel_two_contact').value;
   if(tel_two_contact.length > 0){
