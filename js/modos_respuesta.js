@@ -5,41 +5,41 @@ $(window).on('load',function(){
 });
 
 // DOBLE CLICK
-if($('.contenedor_p').length){
-	var isTouched = false;
-	$('.contenedor_p').find('.text_origen').dblclick( function(){
-		var destino = $(this).parents('.contenedor_p').find('.text_destino');
-		var contenido_val = $(this).text();
-		if(contenido_val != ""){
-			for (var i = 0; i < destino.length; i++) {
-				if(!$(destino[i]).find('input[name="opcion[]"]').length){
-					var contenido_origen = $(this).html();
-					$(destino[i]).append(contenido_origen);
-					var icon = $('<i></i>');
-					icon.attr('class', 'fa fa-times delete_icon');
-					icon.attr('onclick', 'eliminarOpcion(this)');
-					$(destino[i]).append(icon);
-					$(this).html('');
-					if((i+2) == destino.length){
-						var ultimo_elemento = $(this).parents('.contenedor_p').find('.text_origen');
-						for (var j = 0; j < ultimo_elemento.length; j++) {
-							if($(ultimo_elemento[j]).find('input').length){
-								var contenido = $(ultimo_elemento[j]).html();
-								$(destino[i+1]).append(contenido);
-								var icon = $('<i></i>');
-								icon.attr('class', 'fa fa-times delete_icon');
-								icon.attr('onclick', 'eliminarOpcion(this)');
-								$(destino[i+1]).append(icon);
-								$(ultimo_elemento[j]).html('');
-							}
-						}
-					}
-					break;
-				}
-			}
-		}
-		crearArrayInputs();
-	});
+// if($('.contenedor_p').length){
+// 	var isTouched = false;
+// 	$('.contenedor_p').find('.text_origen').dblclick( function(){
+// 		var destino = $(this).parents('.contenedor_p').find('.text_destino');
+// 		var contenido_val = $(this).text();
+// 		if(contenido_val != ""){
+// 			for (var i = 0; i < destino.length; i++) {
+// 				if(!$(destino[i]).find('input[name="opcion[]"]').length){
+// 					var contenido_origen = $(this).html();
+// 					$(destino[i]).append(contenido_origen);
+// 					var icon = $('<i></i>');
+// 					icon.attr('class', 'fa fa-times delete_icon');
+// 					icon.attr('onclick', 'eliminarOpcion(this)');
+// 					$(destino[i]).append(icon);
+// 					$(this).html('');
+// 					if((i+2) == destino.length){
+// 						var ultimo_elemento = $(this).parents('.contenedor_p').find('.text_origen');
+// 						for (var j = 0; j < ultimo_elemento.length; j++) {
+// 							if($(ultimo_elemento[j]).find('input').length){
+// 								var contenido = $(ultimo_elemento[j]).html();
+// 								$(destino[i+1]).append(contenido);
+// 								var icon = $('<i></i>');
+// 								icon.attr('class', 'fa fa-times delete_icon');
+// 								icon.attr('onclick', 'eliminarOpcion(this)');
+// 								$(destino[i+1]).append(icon);
+// 								$(ultimo_elemento[j]).html('');
+// 							}
+// 						}
+// 					}
+// 					break;
+// 				}
+// 			}
+// 		}
+// 		crearArrayInputs();
+// 	});
 
 	// $('.contenedor_p').find('.text_origen').on('doubletap', function(event){
 	// 	event.preventDefault();
@@ -76,6 +76,159 @@ if($('.contenedor_p').length){
 	// 	}
 	// 	crearArrayInputs();
 	// });
+
+// }
+
+// DOBLE CLICK
+
+// if($('.contenedor_p').length){
+// 	var isTouched = false;
+// 	$('.contenedor_p').find('.text_origen').dblclick( function(){
+		
+// 		var destino = $(this).parents('.contenedor_p').find('.text_destino');
+// 		var contenido_val = $(this).text();
+// 		if(contenido_val != ""){
+// 			for (var i = 0; i < destino.length; i++) {
+// 				if(!$(destino[i]).find('input[name="opcion[]"]').length){
+// 					var contenido_origen = $(this).html();
+// 					$(destino[i]).append(contenido_origen);
+// 					var icon = $('<i></i>');
+// 					icon.attr('class', 'fa fa-times delete_icon');
+// 					icon.attr('onclick', 'eliminarOpcion(this)');
+// 					$(destino[i]).append(icon);
+// 					$(this).html('');
+// 					if((i+2) == destino.length){
+// 						var ultimo_elemento = $(this).parents('.contenedor_p').find('.text_origen');
+// 						for (var j = 0; j < ultimo_elemento.length; j++) {
+// 							if($(ultimo_elemento[j]).find('input').length){
+// 								var contenido = $(ultimo_elemento[j]).html();
+// 								$(destino[i+1]).append(contenido);
+// 								var icon = $('<i></i>');
+// 								icon.attr('class', 'fa fa-times delete_icon');
+// 								icon.attr('onclick', 'eliminarOpcion(this)');
+// 								$(destino[i+1]).append(icon);
+// 								$(ultimo_elemento[j]).html('');
+// 							}
+// 						}
+// 					}
+// 					break;
+// 				}
+// 			}
+// 		}
+// 		crearArrayInputs();
+// 	});
+
+	// $('.contenedor_p').find('.text_origen').on('doubletap', function(event){
+	// 	event.preventDefault();
+	// 	event.stopPropagation(); 
+	// 	var destino = $(this).parents('.contenedor_p').find('.text_destino');
+	// 	var contenido_val = $(this).text();
+	// 	if(contenido_val != ""){
+	// 		for (var i = 0; i < destino.length; i++) {
+	// 			if(!$(destino[i]).find('input[name="opcion[]"]').length){
+	// 				var contenido_origen = $(this).html();
+	// 				$(destino[i]).append(contenido_origen);
+	// 				var icon = $('<i></i>');
+	// 				icon.attr('class', 'fa fa-times delete_icon');
+	// 				icon.attr('onclick', 'eliminarOpcion(this)');
+	// 				$(destino[i]).append(icon);
+	// 				$(this).html('');
+	// 				if((i+2) == destino.length){
+	// 					var ultimo_elemento = $(this).parents('.contenedor_p').find('.text_origen');
+	// 					for (var j = 0; j < ultimo_elemento.length; j++) {
+	// 						if($(ultimo_elemento[j]).find('input').length){
+	// 							var contenido = $(ultimo_elemento[j]).html();
+	// 							$(destino[i+1]).append(contenido);
+	// 							var icon = $('<i></i>');
+	// 							icon.attr('class', 'fa fa-times delete_icon');
+	// 							icon.attr('onclick', 'eliminarOpcion(this)');
+	// 							$(destino[i+1]).append(icon);
+	// 							$(ultimo_elemento[j]).html('');
+	// 						}
+	// 					}
+	// 				}
+	// 				break;
+	// 			}
+	// 		}
+	// 	}
+	// 	crearArrayInputs();
+	// });
+
+// }
+
+// DOBLE CLICK
+if($('.contenedor_p').length){
+
+	$('.contenedor_p').find('.text_origen').on('dblclick', function(){
+		var destino = $(this).parents('.contenedor_p').find('.text_destino');
+		var contenido_val = $(this).text();
+		if(contenido_val != ""){
+			for (var i = 0; i < destino.length; i++) {
+				if(!$(destino[i]).find('input[name="opcion[]"]').length){
+					var contenido_origen = $(this).html();
+					$(destino[i]).append(contenido_origen);
+					var icon = $('<i></i>');
+					icon.attr('class', 'fa fa-times delete_icon');
+					icon.attr('onclick', 'eliminarOpcion(this)');
+					$(destino[i]).append(icon);
+					$(this).html('');
+					if((i+2) == destino.length){
+						var ultimo_elemento = $(this).parents('.contenedor_p').find('.text_origen');
+						for (var j = 0; j < ultimo_elemento.length; j++) {
+							if($(ultimo_elemento[j]).find('input').length){
+								var contenido = $(ultimo_elemento[j]).html();
+								$(destino[i+1]).append(contenido);
+								var icon = $('<i></i>');
+								icon.attr('class', 'fa fa-times delete_icon');
+								icon.attr('onclick', 'eliminarOpcion(this)');
+								$(destino[i+1]).append(icon);
+								$(ultimo_elemento[j]).html('');
+							}
+						}
+					}
+					break;
+				}
+			}
+		}
+		crearArrayInputs();
+	});
+
+	$('.contenedor_p').find('.text_origen').on('doubletap', function(event){
+		// $("body").nodoubletapzoom();
+		event.preventDefault();
+		event.stopPropagation(); 
+		var destino = $(this).parents('.contenedor_p').find('.text_destino');
+		var contenido_val = $(this).text();
+		if(contenido_val != ""){
+			for (var i = 0; i < destino.length; i++) {
+				if(!$(destino[i]).find('input[name="opcion[]"]').length){
+					var contenido_origen = $(this).html();
+					$(destino[i]).append(contenido_origen);
+					var icon = $('<i></i>');
+					icon.attr('class', 'fa fa-times delete_icon');
+					icon.attr('onclick', 'eliminarOpcion(this)');
+					$(destino[i]).append(icon);
+					$(this).html('');
+					if((i+2) == destino.length){
+						var ultimo_elemento = $(this).parents('.contenedor_p').find('.text_origen');
+						for (var j = 0; j < ultimo_elemento.length; j++) {
+							if($(ultimo_elemento[j]).find('input').length){
+								var contenido = $(ultimo_elemento[j]).html();
+								$(destino[i+1]).append(contenido);
+								var icon = $('<i></i>');
+								icon.attr('class', 'fa fa-times delete_icon');
+								icon.attr('onclick', 'eliminarOpcion(this)');
+								$(destino[i+1]).append(icon);
+								$(ultimo_elemento[j]).html('');
+							}
+						}
+					}
+					break;
+				}
+			}
+		}
+		crearArrayInputs();
+	});
 
 }
 

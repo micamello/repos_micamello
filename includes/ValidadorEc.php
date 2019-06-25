@@ -27,7 +27,7 @@ class ValidadorEc
         $digitoVer = 0;
         $digitoVerComparar = 0;
         // print_r($provincia);
-        if($provincia >=1 && $provincia <= 24){
+        if($provincia >=1 && $provincia <= 24 || $provincia == 30){
             $digitos[0] = substr($numero, 0, 1);
             $digitos[1] = substr($numero, 1, 1);
             $digitos[2] = substr($numero, 2, 1);
@@ -76,7 +76,7 @@ class ValidadorEc
         $resultado = 0;
         $digitoVer = 0;
         $digitoVerComparar = 0;
-        if($provincia >=1 && $provincia <= 24){
+        if($provincia >=1 && $provincia <= 24 || $provincia == 30){
             $digitos[0] = substr($numero, 0, 1);
             $digitos[1] = substr($numero, 1, 1);
             $digitos[2] = substr($numero, 2, 1);
