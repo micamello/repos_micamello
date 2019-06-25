@@ -2,6 +2,7 @@
 $(document).ready(function()
 {
 
+
     $('[data-toggle="tooltip"]').tooltip();   
     
     $('#tipo_orden').on('change',function(){
@@ -31,6 +32,17 @@ $(document).ready(function()
 
 });
 
+function vermas(elem,ver) { 
+    var eldiv =document.getElementById(elem); 
+    $("#"+elem).toggle();
+    console.log(document.getElementById(ver).innerHTML);
+
+    if(document.getElementById(ver).innerHTML == ' ..ver más'){
+        document.getElementById(ver).innerHTML = ' ..ver menos';
+    }else{
+        document.getElementById(ver).innerHTML = ' ..ver más';
+    }
+} 
 
 if(document.getElementById('des_of')){
     tinymce.init({ 
