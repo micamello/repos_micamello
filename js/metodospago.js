@@ -661,7 +661,27 @@ $('#dniPM').on('blur', function(){
   validaCampos(2);
 });
 
+
+
 function enviarFormulario(form){
+
+  if(AlignetVPOS2.isSafari()){
+    alert("es safari de nuevo");
+    var urlBase='https://vpayment.verifika.com';
+    var context = 'VPOS2';
+    var win = window.open(urlBase+context+'/faces/pages/safariEntry.xhtml','_blank','height=100px,width=100px,top=9999px,left=9999px');
+    setTimeout(function(){
+      win.close();
+        paymeFunction(form);
+    }, 2000);
+  }else{
+    paymeFunction(form);
+  } 
+
+   
+}
+
+function paymeFunction(form){
   var estado = validarFormulario();  
   if(estado == 1 && form == 'form_deposito'){
     $('#provincia').attr('value',$("#select_provincia").children('option:selected').text());
@@ -722,7 +742,7 @@ function enviarFormulario(form){
         });            
       }                  
     });    
-  }  
+  } 
 }
 
 function validarFormulario(){

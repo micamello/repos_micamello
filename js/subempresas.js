@@ -490,8 +490,8 @@ function calcularRecursos(idplan){
           mensaje += 2;
       },
        beforeSend : function(){
-        ajaxLoader($('#num_post'), 'aparecer');
-        ajaxLoader($('#num_accesos'), 'aparecer');
+        ajaxLoader($('#num_post'), 'aparecer', 2);
+        ajaxLoader($('#num_accesos'), 'aparecer', 2);
       },
       complete : function(){
         ajaxLoader($('#num_post'), 'desaparecer');
@@ -747,7 +747,7 @@ function existeCorreo(correo){
               // alert(request.responseText);
           },
           beforeSend : function(){
-            ajaxLoader($('#correo'), 'aparecer');
+            ajaxLoader($('#correo'), 'aparecer', 2);
           },
           complete : function(){
             ajaxLoader($('#correo'), 'desaparecer');

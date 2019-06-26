@@ -308,6 +308,15 @@
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
 
                   <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn-blue">
+                  <?php 
+                    if(Utils::detectarNavegador() == 'Safari'){
+                      ?>
+                      <button onclick="javascript:AlignetVPOS2.openModal($('#rutaPayMe').val());"></button>
+                      <?php
+                    }
+                  ?>
+                  <!-- <input type="button" id="btnpayme" name="btnpayme" onclick="javascript:AlignetVPOS2.openModal()" value="Comprar" class="btn-blue"> -->
+                  <!-- <button onclick="javascript:AlignetVPOS2.openModal()"></button> -->
                 </div>
               </div>
             
