@@ -129,6 +129,13 @@ if($navegador == 'MSIE'){ ?>
 <?php } ?>
 
 <?php
+$readonly = "";
+$noautofill = "";
+  if(Utils::detectarNavegador() != 'Safari'){
+    $readonly = "readonly";
+    $noautofill = "noautofill";
+  }
+
   $fixed = "";
   if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($vista) && $vista == "inicio") { 
     $fixed = "menu";

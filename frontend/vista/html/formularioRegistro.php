@@ -35,7 +35,7 @@
                                 <label class="campo">Apellido <span class="no"> *</span></label>
                                 <div class="errorContainer"></div>
                                 
-                                <input type="text" class="espacio  form-control noautofill" placeholder="Apellidos *" name="apellidosCand" id="apellidosCand" readonly/>
+                                <input type="text" class="espacio  form-control <?php echo $noautofill; ?>" placeholder="Apellidos *" name="apellidosCand" id="apellidosCand" <?php echo $readonly; ?>/>
                             </div>
                             <div class="col-md-6 form-group">
                                 <label class="campo">Sector industrial <span class="no"> *</span></label>
@@ -57,14 +57,14 @@
                                 <label class="campo">Correo <span class="no"> *</span></label>
                                 <div class="errorContainer"></div>
                                 
-                                <input type="text" class="espacio form-control noautofill" readonly placeholder="Correo *" id="correoCandEmp" name="correoCandEmp" />
+                                <input type="text" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Correo *" id="correoCandEmp" name="correoCandEmp" />
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label class="campo">Celular <span class="no"> *</span></label>
                                 <div class="errorContainer"></div>
                                 
-                                <input type="text" class="espacio form-control noautofill" readonly placeholder="Celular *" id="celularCandEmp" name="celularCandEmp"/>
+                                <input type="text" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Celular *" id="celularCandEmp" name="celularCandEmp"/>
                             </div>
 
                             <div class="col-md-6 form-group">
@@ -123,7 +123,7 @@
                                 
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-eye"></i></div>
-                                    <input type="password" class="espacio form-control noautofill" placeholder="Contraseña *" value="" id="password_1" name="password_1"/ readonly>
+                                    <input type="password" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Contraseña *" value="" id="password_1" name="password_1" <?php echo $readonly; ?>/>
                                 </div>
                             </div>
 
@@ -133,7 +133,7 @@
                                 
                                 <div class="input-group">
                                     <div class="input-group-addon"><i class="fa fa-eye"></i></div>
-                                    <input type="password" class="espacio form-control noautofill"  placeholder="Repita Contraseña *" id="password_2" name="password_2"/ readonly>
+                                    <input type="password" class="espacio form-control <?php echo $noautofill; ?>"  placeholder="Repita Contraseña *" id="password_2" name="password_2" <?php echo $readonly; ?>/>
                                 </div>
                             </div>
 
@@ -150,19 +150,19 @@
                             <div class="col-md-6 form-group">
                                 <label class="campo">Apellidos<span class="no">*</span></label>
                                 <div class="errorContainer"></div>
-                                <input type="text" class="espacio form-control noautofill" placeholder="Apellidos *" id="apellidoConEmp" name="apellidoConEmp" readonly/>
+                                <input type="text" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Apellidos *" id="apellidoConEmp" name="apellidoConEmp" <?php echo $readonly; ?>/>
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label class="campo">Celular<span class="no">*</span></label>
                                 <div class="errorContainer"></div>
-                                <input type="text" class="espacio form-control noautofill" placeholder="Celular *" id="tel1ConEmp" name="tel1ConEmp" readonly/>
+                                <input type="text" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Celular *" id="tel1ConEmp" name="tel1ConEmp" <?php echo $readonly; ?>/>
                             </div>
 
                             <div class="col-md-6 form-group">
                                 <label class="campo">Convencional <span class="no"></span></label>
                                 <div class="errorContainer"></div>
-                                <input type="text" class="espacio form-control noautofill" placeholder="Convencional (opcional)" id="tel2ConEmp" name="tel2ConEmp" readonly/>
+                                <input type="text" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Convencional (opcional)" id="tel2ConEmp" name="tel2ConEmp" <?php echo $readonly; ?>/>
                             </div>
 
 
