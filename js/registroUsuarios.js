@@ -485,7 +485,7 @@ if(tipousuario == 1){
 					if(DniRuc_Validador(docCampo,$('#tipoDoc').val()) == true){
 						var searchAjaxVar = searchAjax(docCampo);
 						if(searchAjaxVar == 0){
-							eliminarMensajeError(docCampo);
+							crearMensajeError(docCampo, "El documento ingresado ya existe.");
 						}
 						else if(searchAjaxVar == 1){
 							eliminarMensajeError(docCampo, "");
@@ -553,7 +553,7 @@ if(tipousuario == 1){
 				if(validarCorreo($('#correoCandEmp').val())){
 					var searchAjaxVar = searchAjax($('#correoCandEmp'));
 					if(searchAjaxVar == 0){
-						eliminarMensajeError($('#correoCandEmp'));
+						crearMensajeError($('#correoCandEmp'), "El correo ingresado ya existe.");
 
 					}
 					else if(searchAjaxVar == 1){
@@ -604,7 +604,7 @@ if(tipousuario == 1){
 			if(DniRuc_Validador($('#documentoCandEmp'), tipoDocCampo) == true){
 				var searchAjaxVar = searchAjax($('#documentoCandEmp'));
 				if(searchAjaxVar == 0){
-					eliminarMensajeError($('#documentoCandEmp'));
+					crearMensajeError($('#documentoCandEmp'), "El documento ingresado ya existe.");
 				}
 				else if(searchAjaxVar == 1){
 					eliminarMensajeError($('#documentoCandEmp'), "");

@@ -367,15 +367,14 @@ class Controlador_Plan extends Controlador_Base {
 
   public function crearFile(){
     $idusuario = Utils::getParam('id','',$this->data);
-    $idoperation = Utils::getParam('idoperation','',$this->data);  
-    $precio = Utils::getParam('precio','',$this->data);  
-    $rs = 0; $msg = '';
-    if (!empty($idusuario) && !empty($idoperation) && !empty($precio)){
+    $idoperation = Utils::getParam('idoperation','',$this->data);      
+    $rs = 0; $msg = 'Error en la conexion, por favor intente denuevo';
+    if (!empty($idusuario) && !empty($idoperation)){
       if ($this->buscarUsuariosFile($idusuario)){
         $rs = 2; $msg = 'Usted ya tiene una compra en proceso por favor espere unos minutos';
       }
       else{        
-        $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$precio.'_'.$idoperation.'.txt', "w");    
+        $fp = fopen(FRONTEND_RUTA.'cache/compras/'.$idusuario.'_'.$idoperation.'.txt', "w");
         fputs($fp, '');
         if (fclose($fp)){
           $rs = 1; $msg ='Error por favor intente denuevo';
@@ -389,7 +388,7 @@ class Controlador_Plan extends Controlador_Base {
     $directorio = opendir(FRONTEND_RUTA.'cache/compras');     
     while ($archivo = readdir($directorio)) {
       if (!is_dir($archivo)){
-        preg_match_all("/([0-9]+)_([0-9]+)_([0-9]+)/i",$archivo,$matches);
+        preg_match_all("/([0-9]+)_([0-9]+)/i",$archivo,$matches);
         if (is_array($matches)){          
           if ($matches[1][0] == $idusuario){          
             return true;

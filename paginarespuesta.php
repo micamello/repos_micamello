@@ -13,7 +13,7 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              trim($_POST['authorizationResult']) . 
                                              PAYME_SECRET_KEY, 'sha512');
 
-$filename = FRONTEND_RUTA.'desarrollov3/cache/compras/'.trim($_POST["reserved16"]).'_'.trim($_POST["reserved15"]).'_'.trim($_POST["purchaseOperationNumber"]).'.txt';
+$filename = FRONTEND_RUTA.'desarrollov3/cache/compras/'.trim($_POST["reserved16"]).'_'.trim($_POST["purchaseOperationNumber"]).'.txt';
 
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
@@ -47,7 +47,7 @@ try{
     $vl_insert["shippingEmail"] = trim($_POST["shippingEmail"]);
     $vl_insert["shippingZIP"] = trim($_POST["shippingZIP"]);
     $vl_insert["purchaseAmount"] = trim($_POST["purchaseAmount"]);
-    $vl_insert["IDTransaction"] = trim($_POST["IDTransaction"]);
+    //$vl_insert["IDTransaction"] = trim($_POST["IDTransaction"]);
     $vl_insert["shippingState"] = trim($_POST["shippingState"]); 
     $vl_insert["shippingCity"] = trim($_POST["shippingCity"]); 
 

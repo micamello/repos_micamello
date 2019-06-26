@@ -38,12 +38,12 @@ if (!empty($registros) && is_array($registros)){
     	//Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Usuario no tiene valores '.print_r($registro,true));
       continue;
     }    
-    if (empty($registro["IDTransaction"]) || empty($registro["purchaseOperationNumber"]) || empty($registro["purchaseAmount"])){
+    if (empty($registro["purchaseOperationNumber"]) || empty($registro["purchaseAmount"])){
       //Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Valores nulos '.print_r($registro,true));
       continue;
     }
         
-    $id_payme = Modelo_Payme::consultaByTransaction($registro["IDTransaction"]);         
+    $id_payme = Modelo_Payme::consultaByTransaction($registro["purchaseOperationNumber"]);         
     if (!empty($id_payme)){
       Modelo_Payme::modificarEstado($registro["id_payme"]);             
       continue;
