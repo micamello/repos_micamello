@@ -703,13 +703,12 @@ function paymeFunction(form){
     $('#shippingCity').attr('value',$("#ciudadPM").children('option:selected').text());    
     $('#reserved18').val($("#tipo_docPM").val());    
     $('#reserved19').val($("#dniPM").val());
-    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val()+'&precio='+$('#purchaseAmount').val();
+    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val();
     $.ajax({
       type: "GET",
       url: enlace,
       dataType:'json',
-      success:function(data){  
-      console.log(data); 
+      success:function(data){        
         if (data.resultado == 1){
           AlignetVPOS2.openModal($('#rutaPayMe').val());            
         }  
