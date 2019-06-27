@@ -13,8 +13,8 @@
               <div class="col-md-12">
                 <div class="form-group" id="seccion_username">
                   <label>Usuario o Correo <span title="Este campo es obligatorio">*</span></label><div id="err_username" class="help-block with-errors"></div>
-                  <input type="text" name="username" id="username" class="form-control noautofill" placeholder="Ej: palvarez/pedroalvarez@gmail.com" maxlength="50" minlength="4"  onkeyup="validaForm(1,'btn_sesion')">
-                  <input type="hidden" name="login_form" id="login_form" value="1" readonly>            
+                  <input type="text" name="username" id="username" class="form-control <?php echo $noautofill; ?>" placeholder="Ej: palvarez/pedroalvarez@gmail.com" maxlength="50" minlength="4"  onkeyup="validaForm(1,'btn_sesion')">
+                  <input type="hidden" name="login_form" id="login_form" value="1" <?php echo $readonly; ?>>            
                 </div>
               </div>
               <div class="col-md-12">
@@ -22,7 +22,7 @@
                   <label>Contrase&ntilde;a <span title="Este campo es obligatorio">*</span></label><div id="err_password" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input title="Letras y números, mínimo 8 caracteres" type="password" name="password1" id="password1" class="form-control noautofill" maxlength="15" minlength="8" onkeyup="validaForm(1,'btn_sesion')" readonly>
+                    <input title="Letras y números, mínimo 8 caracteres" type="password" name="password1" id="password1" class="form-control <?php echo $noautofill; ?>" maxlength="15" minlength="8" onkeyup="validaForm(1,'btn_sesion')" <?php echo $readonly; ?>>
                   </div>
                 </div>
               </div>

@@ -129,13 +129,21 @@ if($navegador == 'MSIE'){ ?>
 <?php } ?>
 
 <?php
+$readonly = "";
+$noautofill = "";
+  if(Utils::detectarNavegador() != 'Safari'){
+    $readonly = "readonly";
+    $noautofill = "noautofill";
+  }
+
   $fixed = "";
   if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($vista) && $vista == "inicio") { 
     $fixed = "menu";
 ?>
 
     <!-- <div class="container-fluid"> -->
-      <div id="barra" class="top-info-bar bg-color-3" style="top: 0px; position: fixed; margin-bottom: 50px !important; z-index: 1000; width: 100%">
+      <!--style="top: 0px; position: fixed; margin-bottom: 50px !important; z-index: 1000; width: 100%"-->
+      <div id="barra" class="top-info-bar bg-color-3 hidden-xs" >
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
@@ -159,8 +167,11 @@ if($navegador == 'MSIE'){ ?>
     </div>
     <!-- </div> -->
 <?php } ?>
-
-<nav class="navbar navbar-default navbar-fixed-top menu">
+<?php if (Modelo_Usuario::estaLogueado() && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
+  <nav class="navbar navbar-default navbar-fixed-top menu" style="position: sticky;">
+<?php }else{?>  
+  <nav class="navbar navbar-default navbar-fixed-top menu">
+<?php } ?> 
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">

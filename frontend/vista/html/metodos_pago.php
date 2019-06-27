@@ -272,7 +272,7 @@
                   <input type="hidden" name ="acquirerId" value="<?php echo PAYME_ACQUIRERID; ?>" />
                   <input type="hidden" name ="idCommerce" value="<?php echo PAYME_IDCOMMERCE; ?>" />
                   <input type="hidden" name="purchaseOperationNumber" id="purchaseOperationNumber" value="<?php echo $purchaseOperationNumber; ?>" />
-                  <input type="hidden" name="purchaseAmount" value="<?php echo $precio;?>" />
+                  <input type="hidden" name="purchaseAmount" id="purchaseAmount" value="<?php echo $precio;?>" />
                   <input type="hidden" name="purchaseCurrencyCode" value="<?php echo PAYME_CURRENCY_CODE; ?>" />
                   <input type="hidden" name="language" value="SP" />
                   <input type="hidden" name="shippingCity" id="shippingCity" value="" />
@@ -308,6 +308,15 @@
                   <label>Valor:</label>&nbsp;<?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?><br><br>       
 
                   <input type="button" id="btnpayme" name="btnpayme" onclick="enviarFormulario('form_payme');" value="Comprar" class="btn-blue">
+                  <?php 
+                    if(Utils::detectarNavegador() == 'Safari'){
+                      ?>
+                      <button onclick="javascript:AlignetVPOS2.openModal($('#rutaPayMe').val());"></button>
+                      <?php
+                    }
+                  ?>
+                  <!-- <input type="button" id="btnpayme" name="btnpayme" onclick="javascript:AlignetVPOS2.openModal()" value="Comprar" class="btn-blue"> -->
+                  <!-- <button onclick="javascript:AlignetVPOS2.openModal()"></button> -->
                 </div>
               </div>
             

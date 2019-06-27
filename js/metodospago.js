@@ -661,7 +661,27 @@ $('#dniPM').on('blur', function(){
   validaCampos(2);
 });
 
+
+
 function enviarFormulario(form){
+
+  if(AlignetVPOS2.isSafari()){
+    alert("es safari de nuevo");
+    var urlBase='https://vpayment.verifika.com';
+    var context = 'VPOS2';
+    var win = window.open(urlBase+context+'/faces/pages/safariEntry.xhtml','_blank','height=100px,width=100px,top=9999px,left=9999px');
+    setTimeout(function(){
+      win.close();
+        paymeFunction(form);
+    }, 2000);
+  }else{
+    paymeFunction(form);
+  } 
+
+   
+}
+
+function paymeFunction(form){
   var estado = validarFormulario();  
   if(estado == 1 && form == 'form_deposito'){
     $('#provincia').attr('value',$("#select_provincia").children('option:selected').text());
@@ -683,13 +703,12 @@ function enviarFormulario(form){
     $('#shippingCity').attr('value',$("#ciudadPM").children('option:selected').text());    
     $('#reserved18').val($("#tipo_docPM").val());    
     $('#reserved19').val($("#dniPM").val());
-    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val()+'&idplan='+$('#reserved15').val();
+    var enlace = $('#puerto_host').val()+"/index.php?mostrar=plan&opcion=file&id="+$('#reserved16').val()+'&idoperation='+$('#purchaseOperationNumber').val();
     $.ajax({
       type: "GET",
       url: enlace,
       dataType:'json',
-      success:function(data){  
-      console.log(data); 
+      success:function(data){        
         if (data.resultado == 1){
           AlignetVPOS2.openModal($('#rutaPayMe').val());            
         }  
@@ -722,7 +741,7 @@ function enviarFormulario(form){
         });            
       }                  
     });    
-  }  
+  } 
 }
 
 function validarFormulario(){
