@@ -144,7 +144,7 @@ class Proceso_Subscripcion{
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);
     $precioTemplate = "Parcial";
     if($costo['costo'] > 0 && $tipousuario == Modelo_Usuario::CANDIDATO){
-      $precioTemplate = "completo ";
+      $precioTemplate = "Completo ";
       $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
     }
     $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);

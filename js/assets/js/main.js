@@ -348,7 +348,7 @@ function validarUsuario(username){
 }
 
 function validarClave(){
-
+  $('#password1').val($('#password1').val().replace(/\s/g, ""));
   var password = document.getElementById('password1').value;
 
   if(password == null || password.length == 0 || /^\s+$/.test(password)){
