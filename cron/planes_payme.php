@@ -20,6 +20,8 @@ else{
 
 $registros = Modelo_Payme::obtieneNoProcesados();
 
+//Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Registro no tiene valores '.print_r($registros,true));
+
 if (!empty($registros) && is_array($registros)){  
 
   foreach($registros as $registro){  
