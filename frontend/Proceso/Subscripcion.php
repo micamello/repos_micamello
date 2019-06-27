@@ -14,7 +14,7 @@ class Proceso_Subscripcion{
   public function procesar(){
     try{  
       $GLOBALS['db']->beginTrans();
-
+      Utils::log("PASO TRES ".date('Y-m-d H:i:s'));
       $infousuario = Modelo_Usuario::busquedaPorId($this->objUsuario->id,$this->objUsuario->tipo);
       $infoplan = Modelo_Plan::busquedaXId($this->idplan,true);
       $infosucursal = Modelo_Sucursal::consultaDominio($infoplan["id_sucursal"]); 
@@ -35,6 +35,7 @@ class Proceso_Subscripcion{
                                             $infoplan["num_accesos"])){
         throw new Exception("Error en crear el plan");  
       } 
+      Utils::log("PASO CUATRO ".date('Y-m-d H:i:s'));
       //si es candidato y ya tenia los ultimos 3 cuestionarios hechos se los activa      
       if ($this->objUsuario->tipo == Modelo_Usuario::CANDIDATO){
         if (!Modelo_PorcentajexFaceta::updateEstado($this->objUsuario->id)){
@@ -46,7 +47,7 @@ class Proceso_Subscripcion{
           throw new Exception("Error al actualizar el registro en tabla de payme"); 
         } 
       }
-      
+      Utils::log("PASO CINCO ".date('Y-m-d H:i:s')); 
       //facturacion electronica
       $obj_facturacion = new Proceso_Facturacion();
       $obj_facturacion->razonSocialComprador = $this->objUsuario->nombres;
@@ -71,7 +72,7 @@ class Proceso_Subscripcion{
           throw new Exception("Error al generar el siguiente numero de factura");  
         } 
       }   
-      
+      Utils::log("PASO SEIS ".date('Y-m-d H:i:s'));
       $GLOBALS['db']->commit();
 
       /*$attachments = array();
@@ -96,6 +97,7 @@ class Proceso_Subscripcion{
       $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
                                  $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$this->idplan);
       
+      Utils::log("PASO SIETE ".date('Y-m-d H:i:s'));
       /*if (!empty($attachments)){
         //eliminar archivos temporales
         unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");

@@ -19,15 +19,15 @@ else{
 }
 
 $facturas = Modelo_Factura::factNoProcesadas();
+
 if (count($facturas) > 0){
   $obj_facturacion = new Proceso_Facturacion();
   $fecha_actual = date("Y-m-d");
   foreach($facturas as $factura){
     try{  
-      $GLOBALS['db']->beginTrans();
-      $fecha_factura = substr($factura["fecha_creacion"], 10);
-
-      if ($fecha_actual != $fecha_factura){
+      //$GLOBALS['db']->beginTrans();
+      $fecha_factura = substr($factura["fecha_creacion"], 0, 10);            
+      if ($fecha_actual != $fecha_factura){       
         $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
         if (empty($datos_comprobante)){
           throw new Exception("Error no se encontro datos en el comprobante");  
@@ -69,16 +69,16 @@ if (count($facturas) > 0){
           throw new Exception("Error al actualizar la factura");  
         }  
       }
-      else{
+      else{        
         $infousuario = Modelo_Usuario::busquedaPorId($factura["id_user_emp_plan"],$factura["tipo_usuario"]);
         if (empty($infousuario)){
           throw new Exception("Error no se encontro datos del usuario");  
         }   
 
-        $rsfact["claveacceso"] = $factura["clave_acceso"];
-        $rsfact["xml"] = $factura["xml"];
-      }           
-      
+        $rsfact["claveacceso"] = trim($factura["clave_acceso"]);
+        $rsfact["xml"] = utf8_encode($factura["xml"]);
+      }                     
+
       $attachments = array();      
       if (!$obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
         throw new Exception("1 WS del SRI");  
@@ -88,6 +88,8 @@ if (count($facturas) > 0){
       if (empty($fecha_auto)){
         throw new Exception("2 WS del SRI");  
       }
+
+      //$GLOBALS['db']->commit(); 
 
       //adjuntar factura
       $obj_facturacion->generarRIDE($rsfact["xml"],$fecha_auto);
@@ -108,20 +110,15 @@ if (count($facturas) > 0){
       $email_body = Modelo_TemplateEmail::obtieneHTML("FACTURACION");
       $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
       $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);         
-            
+      
+      Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body,$attachments);
+
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
-
-      $GLOBALS['db']->commit();      
       
-      if (!empty($attachments)){
-        //eliminar archivos temporales
-        unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
-        unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
-      }
     }
     catch(Exception $e){
-      $GLOBALS['db']->rollback();
+      //$GLOBALS['db']->rollback();
       echo "NO PROCESADO REGISTRO ".$factura["id_factura"]."<br>";     
       $msgerror = $e->getMessage()." factura:".$factura["id_factura"];
       Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron facturas',$msgerror);     

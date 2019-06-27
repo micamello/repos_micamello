@@ -20,10 +20,9 @@ else{
 
 $registros = Modelo_Payme::obtieneNoProcesados();
 
-//Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Registro no tiene valores '.print_r($registros,true));
-
 if (!empty($registros) && is_array($registros)){  
-
+  Utils::log("PASO UNO ".date('Y-m-d H:i:s'));
+  
   foreach($registros as $registro){  
     if (empty($registro)){      
       //Utils::envioCorreo('desarrollo@micamello.com.ec','Cron planes_payme','Registro no tiene valores '.print_r($registro,true));
@@ -69,7 +68,7 @@ if (!empty($registros) && is_array($registros)){
     //objeto procesador      
     $monto = substr($registro["purchaseAmount"],0,-2).".".substr($registro["purchaseAmount"], -2);     
     $tipopago = ($registro["reversed22"] == "DEBIT") ? Proceso_Facturacion::FORMA_PAGO["TARJETADEBITO"] : Proceso_Facturacion::FORMA_PAGO["TARJETACREDITO"];   
-    
+    Utils::log("PASO DOS ".date('Y-m-d H:i:s'));
     $procesador = (object) array('id'=>$registro["id_payme"],
                                  'tipo'=>'payme',
                                  'trans'=>$registro["purchaseOperationNumber"],
