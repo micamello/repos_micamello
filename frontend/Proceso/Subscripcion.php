@@ -74,7 +74,7 @@ class Proceso_Subscripcion{
       
       $GLOBALS['db']->commit();
 
-      $attachments = array();
+      /*$attachments = array();
       //envio a los WS al SRI
       if ($obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
         sleep(5);
@@ -89,18 +89,18 @@ class Proceso_Subscripcion{
           $attachments[] = array("ruta"=>Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml",
                                  "archivo"=>$rsfact["claveacceso"].".xml");
         }
-      }
+      }*/
 
       $nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".ucfirst((isset($infousuario["apellidos"])) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");
        
       $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
-                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$attachments, $this->idplan);
+                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$this->idplan);
       
-      if (!empty($attachments)){
+      /*if (!empty($attachments)){
         //eliminar archivos temporales
         unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
         unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
-      }
+      }*/
 
     }
     catch(Exception $e){
@@ -131,7 +131,7 @@ class Proceso_Subscripcion{
     return $GLOBALS['db']->insert_id();   
   }
 
-  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$attachments, $costo){  
+  public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$costo){  
     $costo = Modelo_Plan::busquedaXId($costo);
     $email_subject = "Activación de Subscripción"; 
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
@@ -156,7 +156,7 @@ class Proceso_Subscripcion{
       $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
     } 
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);     
-    Utils::envioCorreo($correo,$email_subject,$email_body,$attachments);
+    Utils::envioCorreo($correo,$email_subject,$email_body/*,$attachments*/);
     //Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario,Modelo_Notificacion::ACTIVACION_SUBSCRIPCION);
   }
 

@@ -18,52 +18,66 @@ else{
   Utils::crearArchivo(CRON_RUTA,'procesando_facturas.txt','');
 }
 
-$facturas = Modelo_Factura::factNoRecibidasAutorizadas();
+$facturas = Modelo_Factura::factNoProcesadas();
 if (count($facturas) > 0){
   $obj_facturacion = new Proceso_Facturacion();
+  $fecha_actual = date("Y-m-d");
   foreach($facturas as $factura){
     try{  
       $GLOBALS['db']->beginTrans();
-      $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
-      if (empty($datos_comprobante)){
-        throw new Exception("Error no se encontro datos en el comprobante");  
-      }  
-      $infousuario = Modelo_Usuario::busquedaPorId($datos_comprobante["id_user_emp"],$datos_comprobante["tipo_usuario"]);
-      if (empty($infousuario)){
-        throw new Exception("Error no se encontro datos del usuario");  
-      }    
-      $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);      
-      if (empty($infoplan)){
-        throw new Exception("Error no se encontro datos en el plan");  
-      }
-      $obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
-      $obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
-      $obj_facturacion->direccionComprador = $datos_comprobante["direccion"];
-      $obj_facturacion->emailComprador = $datos_comprobante["correo"];
-      $obj_facturacion->telefComprador = $datos_comprobante["telefono"];            
-      $obj_facturacion->tipoIdentifComprador = $datos_comprobante["tipo_doc"];            
-      $obj_facturacion->importeTotal = $datos_comprobante["valor"];
-      $obj_facturacion->codigoPrincipal = $datos_comprobante["id_plan"];
-      $obj_facturacion->descripdetalle = utf8_encode($infoplan["nombre"]);
-      $obj_facturacion->formadepago = $datos_comprobante["formapago"];    
-      $obj_facturacion->provinciaComprador = $datos_comprobante["provincia"];     
-      $obj_facturacion->ciudadComprador = $datos_comprobante["ciudad"];     
-      $obj_facturacion->codpostalComprador = $datos_comprobante["codigopostal"];       
-      
-      $obj_facturacion->numerofactura = (int)substr($factura["clave_acceso"],30,9);      
-      $rsfact = $obj_facturacion->generarFactura();  
+      $fecha_factura = substr($factura["fecha_creacion"], 10);
 
-      if (empty($rsfact) || !isset($rsfact["claveacceso"]) || !isset($rsfact["xml"]) || empty($rsfact["claveacceso"]) || empty($rsfact["xml"])){
-        throw new Exception("Error no se pudo generar la factura");   
+      if ($fecha_actual != $fecha_factura){
+        $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
+        if (empty($datos_comprobante)){
+          throw new Exception("Error no se encontro datos en el comprobante");  
+        }  
+        $infousuario = Modelo_Usuario::busquedaPorId($datos_comprobante["id_user_emp"],$datos_comprobante["tipo_usuario"]);
+        if (empty($infousuario)){
+          throw new Exception("Error no se encontro datos del usuario");  
+        }    
+        $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);      
+        if (empty($infoplan)){
+          throw new Exception("Error no se encontro datos en el plan");  
+        }
+        $obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
+        $obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
+        $obj_facturacion->direccionComprador = $datos_comprobante["direccion"];
+        $obj_facturacion->emailComprador = $datos_comprobante["correo"];
+        $obj_facturacion->telefComprador = $datos_comprobante["telefono"];            
+        $obj_facturacion->tipoIdentifComprador = $datos_comprobante["tipo_doc"];            
+        $obj_facturacion->importeTotal = $datos_comprobante["valor"];
+        $obj_facturacion->codigoPrincipal = $datos_comprobante["id_plan"];
+        $obj_facturacion->descripdetalle = utf8_encode($infoplan["nombre"]);
+        $obj_facturacion->formadepago = $datos_comprobante["formapago"];    
+        $obj_facturacion->provinciaComprador = $datos_comprobante["provincia"];     
+        $obj_facturacion->ciudadComprador = $datos_comprobante["ciudad"];     
+        $obj_facturacion->codpostalComprador = $datos_comprobante["codigopostal"];       
+        
+        $obj_facturacion->numerofactura = (int)substr($factura["clave_acceso"],30,9);      
+        $rsfact = $obj_facturacion->generarFactura();  
+
+        if (empty($rsfact) || !isset($rsfact["claveacceso"]) || !isset($rsfact["xml"]) || empty($rsfact["claveacceso"]) || empty($rsfact["xml"])){
+          throw new Exception("Error no se pudo generar la factura");   
+        }
+        
+        $datosact = array("clave_acceso" => $rsfact["claveacceso"], 
+                          "xml" => $rsfact["xml"], "estado" => $factura->estado, 
+                          "msg_error" => "", "fecha_estado" => "null");
+        
+        if (!Modelo_Factura::actualizar($factura["clave_acceso"],$datosact)){
+          throw new Exception("Error al actualizar la factura");  
+        }  
       }
-      
-      $datosact = array("clave_acceso" => $rsfact["claveacceso"], 
-                        "xml" => $rsfact["xml"], "estado" => $factura->estado, 
-                        "msg_error" => "", "fecha_estado" => "null");
-      
-      if (!Modelo_Factura::actualizar($factura["clave_acceso"],$datosact)){
-        throw new Exception("Error al actualizar la factura");  
-      }       
+      else{
+        $infousuario = Modelo_Usuario::busquedaPorId($factura["id_user_emp_plan"],$factura["tipo_usuario"]);
+        if (empty($infousuario)){
+          throw new Exception("Error no se encontro datos del usuario");  
+        }   
+
+        $rsfact["claveacceso"] = $factura["clave_acceso"];
+        $rsfact["xml"] = $factura["xml"];
+      }           
       
       $attachments = array();      
       if (!$obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
