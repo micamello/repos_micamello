@@ -676,9 +676,7 @@ function enviarFormulario(form){
     }, 2000);
   }else{
     paymeFunction(form);
-  } 
-
-   
+  }
 }
 
 function paymeFunction(form){
