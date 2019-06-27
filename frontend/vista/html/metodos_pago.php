@@ -311,7 +311,7 @@
                   <?php 
                     if(Utils::detectarNavegador() == 'Safari'){
                       ?>
-                      <button onclick="javascript:AlignetVPOS2.openModal($('#rutaPayMe').val());"></button>
+                      <button onclick="javascript:AlignetVPOS2.openModal('https://integracion.alignetsac.com');"></button>
                       <?php
                     }
                   ?>
