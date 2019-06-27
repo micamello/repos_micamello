@@ -133,14 +133,14 @@ class Controlador_Perfil extends Controlador_Base
                         $reg_ultimo = array_shift($result_faceta);
                         foreach($result_faceta as $rs){
 
-                            if($rs["valor"] < 15){
+                            if($rs["valor"] < 25){
                                 $str_grafico .= $rs["literal"].",".$rs["valor"]."|";
                             }else{
                                $str_grafico .= $rs["literal"].":".$rs["valor"].",".$rs["valor"]."|"; 
                             }
                         }
 
-                        if($reg_ultimo["valor"] < 15){
+                        if($reg_ultimo["valor"] < 25){
                             $str_grafico .= $reg_ultimo["literal"].",".$reg_ultimo["valor"];   
                         }else{
                             $str_grafico .= $reg_ultimo["literal"].":".$reg_ultimo["valor"].",".$reg_ultimo["valor"];

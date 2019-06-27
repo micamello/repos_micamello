@@ -2,7 +2,6 @@
 $(document).ready(function()
 {
 
-
     $('[data-toggle="tooltip"]').tooltip();   
     
     $('#tipo_orden').on('change',function(){
@@ -31,6 +30,10 @@ $(document).ready(function()
     });
 
 });
+
+function enviar(){
+    document.filtro.submit();
+}
 
 function vermas(elem,ver) { 
     var eldiv =document.getElementById(elem); 

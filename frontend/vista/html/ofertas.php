@@ -325,6 +325,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 		</form>
 	</div>
 	<div class="col-md-9">
+		
 		<div class="container-fluid ordenamientos">
 			<div class="col-md-12">
 				<?php 
@@ -453,7 +454,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 										<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
 											<div class="col-md-2 col-sm-3 col-xs-6">
-												<a class="f-s-16px"  style="cursor:pointer" title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/"; ?>">
+												<a class="f-s-16px" style="cursor:pointer" title="Eliminar postulaci&oacute;n" href="<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/"; ?>">
 													<i class="postulacion-icono-basura fa fa-trash"></i><br>Eliminar postulaci&oacute;n
 												</a>
 											</div>
@@ -478,7 +479,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 											if($puedeEditar["editar"] == 1){
 												?>
 												<div class="col-md-6 col-xs-6">
-													<a onclick="abrirModalEditar('editar_Of','<?php echo Utils::encriptar($o["id_ofertas"]); ?>');"><i class="postulacion-icono-editar fa fa-pencil-square-o  "></i><br>
+													<a class="f-s-16px" onclick="abrirModalEditar('editar_Of','<?php echo Utils::encriptar($o["id_ofertas"]); ?>');"><i class="postulacion-icono-editar fa fa-pencil-square-o"></i><br>
 													Editar la oferta</a>
 												</div>
 											<?php }

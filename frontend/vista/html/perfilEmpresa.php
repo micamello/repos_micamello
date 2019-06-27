@@ -42,7 +42,7 @@
 
 								<div class="col-md-6">
 									<div class="contentData">
-										<h5><b>Sector Industrial: </b><?php echo $datosEmpresa['sectorindustrial']; ?></h5>
+										<h5><b>Sector Industrial: </b><?php echo utf8_encode($datosEmpresa['sectorindustrial']); ?></h5>
 									</div>
 								</div>
 
