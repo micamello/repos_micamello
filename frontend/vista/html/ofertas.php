@@ -45,9 +45,11 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 														$text_subareas = $subareas_array[0].', '.$subareas_array[1].', '.$subareas_array[2];
 														unset($subareas_array[0],$subareas_array[1],$subareas_array[2]);
 														$text_subareas2 = implode(",", $subareas_array);
+													}else{
+														$text_subareas = utf8_encode($value['subareas']);
 													}
 												?>
-												<span><?php echo $text_subareas; ?> <span id="vermasdiv<?php echo $key; ?>" style="display:none"><?php echo ', '.$text_subareas2; ?></span></span><b><a href="#" onclick="vermas('vermasdiv<?php echo $key; ?>','ver<?php echo $key; ?>')" id="ver<?php echo $key; ?>"> ..ver m&aacute;s</a></b>
+												<span><?php echo $text_subareas; if($text_subareas2 != ''){ ?> <span id="vermasdiv<?php echo $key; ?>" style="display:none"><?php echo ', '.$text_subareas2; ?></span><?php } ?></span><?php if($text_subareas2 != ''){ ?> <b><a href="#" onclick="vermas('vermasdiv<?php echo $key; ?>','ver<?php echo $key; ?>')" id="ver<?php echo $key; ?>"> ..ver m&aacute;s</a></b><?php } ?>
 											</td>
 										</tr>
 				              		<?php } ?>
@@ -72,15 +74,16 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 			    </div> 
 			</div>
 			<?php }else{ ?>
-	        	<div class="banner-publicidad " align="center">
-				  <div class="container-fluid">
+	        	<div class="alert alert-info col-md-12" style="padding-bottom: 0px;"> 
 				    <div class="row">
 				      <div class="col-md-12">
-				        <div class="banner-light col-md-9 click ">Si desea ver las ofertas con los filtros configurados en su cuenta</div>
-				        <a style="cursor:pointer" onclick="document.forms['filtro'].submit()" id="filtro-pop" class="btn-blue-2 pulse animated infinite col-md-2">Click Aqu&iacute;</a>
+				        <div class="col-md-9" style="font-size: 18px;padding-top: 5px;">Si desea ver las ofertas con los filtros configurados en su cuenta</div>
+				        <div class="col-md-3">
+		              	<a style="font-size: 18px;cursor:pointer;padding-top: 5px;padding-bottom: 5px;padding-right: 10px;padding-left: 10px;width: 124px;margin-top: 0px;" onclick="document.forms['filtro'].submit()" id="filtro-pop" class="btn-blue-2 pulse animated infinite col-md-2">Click Aqu&iacute;</a>
+		            	</div>
 				      </div>
 				    </div>
-				  </div>
+				  
 				</div><br><br>
 	       	<?php } ?>
 	       	<input type="hidden" name="filtro" id="filtro" value="<?php echo $filtro; ?>">
@@ -460,7 +463,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 											</div>
 										<?php }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1){ ?>
 											<div class="col-md-2 col-sm-3 col-xs-6">
-												<a class="f-s-16px" style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.$o['empresa'].')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
+												<a class="f-s-16px" style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.utf8_encode($o['empresa']).')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
 													<i class="postulacion-icono-basura fa fa-trash"></i><br>Eliminar postulaci&oacute;n
 												</a>
 											</div>

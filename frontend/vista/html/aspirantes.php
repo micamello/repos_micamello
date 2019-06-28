@@ -117,13 +117,13 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 								echo '<div id="fac_'.$i.'" style="float:left;width: 90%;"><div class="p-3">
 						                <h6 class="font-16 mb-3 mt-0">'.utf8_encode(ucfirst(strtolower($v['faceta']))).'</h6>
 						                <input type="text" id="range_0'.$i.'">
-						            </div></div><div id="btn_'.$i.'" data-placement="top" data-toggle="tooltip" data-html="true" data-original-title="<i class=\'fa fa-info-circle fa-2x\'></i><br/><p>Filtrar &uacute;nicamente esta competencia. </p>" style="float:right;padding-top: 40px;cursor:pointer"><a onclick="verFacetas(\''.$letra.'\','.$pos.')"><i class="fa fa-search"></i></a></div>';
+						            </div></div><div id="btn_'.$i.'" data-placement="top" data-toggle="tooltip" data-html="true" data-original-title="<i class=\'fa fa-info-circle fa-2x\'></i><br/><p>Se mostrar&aacute;n candidatos &uacute;nicamente con esta competencia. </p>" style="float:right;padding-top: 40px;cursor:pointer"><a onclick="verFacetas(\''.$letra.'\','.$pos.')"><i class="fa fa-search"></i></a></div>';
 								$i++;
 							}
 							echo '<input type="hidden" name="f" id="f" value="'.$f.'">';
 							echo '<input type="hidden" name="ruta" id="ruta" value="'.$ruta.'">';
 							echo '<input type="hidden" name="page" id="page" value="'.$page.'">';
-							echo "<div class='clearfix'></div><br><a style='display:none' id='btn_consultar' name='btn_consultar' data-placement='top' data-toggle='tooltip' data-html='true' data-original-title='<i class=\"fa fa-info-circle fa-2x\"></i><br/><p>Filtrar por las competencia seleccionadas. </p>' class='btn btn-default' href='#'><i class='fa fa-search'></i></a></div>";
+							echo "<div class='clearfix'></div><br><a style='display:none' id='btn_consultar' name='btn_consultar' data-placement='top' data-toggle='tooltip' data-html='true' data-original-title='<i class=\"fa fa-info-circle fa-2x\"></i><br/><p>Se mostrar&aacute;n &uacute;nicamente candidatos con las competencias seleccionadas. </p>' class='btn btn-default' href='#'><i class='fa fa-search'></i></a></div>";
 						}else{
 							echo 'No hay resultados';
 						}

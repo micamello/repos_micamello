@@ -369,25 +369,6 @@ $_SESSION['mostrar_error'] = ""; ?>
 												</div>
 											</div>
 
-		                                    
-		                                    <div class="col-md-6">
-		                                    	<div id="seccion_res" class="form-group">
-			                                    	<label for="residencia">&#191;Puede cambiar de residencia&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_res" class="help-block with-errors"></div>
-				                                    <select id="residencia" name="residencia" class="form-control"  onchange="validarFormulario(false)" >
-				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
-				                                    	<?php 
-				                                    	foreach(REQUISITO as $key => $r){ 
-															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['residencia'] == $key || (isset($data['residencia']) && $data['residencia'] == $key))
-															{ 
-																echo " selected='selected'";
-															}
-															echo ">$r</option>";
-														} ?>
-													</select>
-												</div>
-											</div>
-
 											<div class="col-md-6">
 		                                    	<div id="seccion_trab" class="form-group">
 			                                    	<label for="tiene_trabajo">Situaci&oacute;n Laboral <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_trab" class="help-block with-errors"></div>
@@ -405,16 +386,16 @@ $_SESSION['mostrar_error'] = ""; ?>
 													</select>
 												</div>
 											</div>
-
-											<div class="col-md-6">
-		                                    	<div id="seccion_via" class="form-group">
-			                                    	<label for="viajar">&#191;Puede viajar&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_via" class="help-block with-errors"></div>
-				                                    <select id="viajar" name="viajar" class="form-control"  onchange="validarFormulario(false)" >
+		                                    
+		                                    <div class="col-md-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasFrecuentes/'>autopostulaciones</a>. </p>">
+		                                    	<div id="seccion_res" class="form-group">
+			                                    	<label for="residencia">&#191;Puede cambiar de residencia&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_res" class="help-block with-errors"></div>
+				                                    <select id="residencia" name="residencia" class="form-control"  onchange="validarFormulario(false)" >
 				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
 				                                    	<?php 
 				                                    	foreach(REQUISITO as $key => $r){ 
 															echo "<option value='$key'";
-															if ($_SESSION['mfo_datos']['usuario']['viajar'] == $key || (isset($data['viajar']) && $data['viajar'] == $key))
+															if ($_SESSION['mfo_datos']['usuario']['residencia'] == $key || (isset($data['residencia']) && $data['residencia'] == $key))
 															{ 
 																echo " selected='selected'";
 															}
@@ -438,6 +419,24 @@ $_SESSION['mostrar_error'] = ""; ?>
 																echo " selected='selected'";
 															}
 															echo ">".$r."</option>";
+														} ?>
+													</select>
+												</div>
+											</div>
+
+											<div class="col-md-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasFrecuentes/'>autopostulaciones</a>. </p>">
+		                                    	<div id="seccion_via" class="form-group">
+			                                    	<label for="viajar">&#191;Puede viajar&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_via" class="help-block with-errors"></div>
+				                                    <select id="viajar" name="viajar" class="form-control"  onchange="validarFormulario(false)" >
+				                                    	<option disabled value="0">Seleccione una opci&oacute;n</option>
+				                                    	<?php 
+				                                    	foreach(REQUISITO as $key => $r){ 
+															echo "<option value='$key'";
+															if ($_SESSION['mfo_datos']['usuario']['viajar'] == $key || (isset($data['viajar']) && $data['viajar'] == $key))
+															{ 
+																echo " selected='selected'";
+															}
+															echo ">$r</option>";
 														} ?>
 													</select>
 												</div>
@@ -526,9 +525,9 @@ $_SESSION['mostrar_error'] = ""; ?>
 		                                        </div>
 		                                    </div>
 
-		                                    <div class="col-md-12 col-sm-12 col-lg-6">
+		                                    <div class="col-md-12 col-sm-12 col-lg-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasFrecuentes/'>autopostulaciones</a>. </p>">
 												<div class="form-group" id="seccion_area">
-													<label style="font-size: 13px;">&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando máximo numero áreas de su inter&eacute;s<span title="Este campo es obligatorio" class="requerido"> *</span></label>													
+													<label style="font-size: 13px;">&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando máximo numero áreas de su inter&eacute;s<span title="Este campo es obligatorio" class="requerido"> *</span></label>											
 													<div id="err_area" class="help-block with-errors"></div>
 
 													<select class="form-control" id="area" name="area[]" multiple="multiple">

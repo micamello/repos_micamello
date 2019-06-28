@@ -1,5 +1,10 @@
 //HACER ESTO AL MOMENTO DE TERMINAR EL TERCER CUESTIONARIO
 $(document).ready(function(){
+
+  $('[data-toggle="tooltip"]').tooltip({
+    delay: {show: 0, hide: 5000}
+  });   
+  
   $('#nivel_idi_of').attr('disabled', true);
   if(errorsVerify() == false){
     $('.btnPerfil').addClass('disabled');
