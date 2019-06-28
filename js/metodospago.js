@@ -667,7 +667,7 @@ function enviarFormulario(form){
 
   if(AlignetVPOS2.isSafari()){
     alert("es safari de nuevo");
-    var urlBase='https://vpayment.verifika.com';
+    var urlBase='https://integracion.alignetsac.com/';
     var context = 'VPOS2';
     var win = window.open(urlBase+context+'/faces/pages/safariEntry.xhtml','_blank','height=100px,width=100px,top=9999px,left=9999px');
     setTimeout(function(){
@@ -676,9 +676,7 @@ function enviarFormulario(form){
     }, 2000);
   }else{
     paymeFunction(form);
-  } 
-
-   
+  }
 }
 
 function paymeFunction(form){

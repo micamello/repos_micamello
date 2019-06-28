@@ -269,6 +269,7 @@ if($('#generoUsuario').length){
 if($('#password_1').length){
 		$('#password_1').on('blur', function(){
 			if($(this).val() != ""){
+				$(this).val($(this).val().replace(/\s/g, ""));
 				if(validarPassword($(this).val())){
 					if($('#password_2').val() != ""){
 						if(!passwordCoinciden($(this), $('#password_2'))){
@@ -297,6 +298,7 @@ if($('#password_1').length){
 	if($('#password_2').length){
 		$('#password_2').on('blur', function(){
 			if($(this).val() != ""){
+				$(this).val($(this).val().replace(/\s/g, ""));
 				if(validarPassword($(this).val())){
 					if($('#password_2').val() != ""){
 						if(!passwordCoinciden($(this), $('#password_1'))){

@@ -41,9 +41,9 @@ class Modelo_Factura{
     return $GLOBALS['db']->update("mfo_factura",$valupdate,"clave_acceso='".$claveAcceso."'");
   }
 
-  public static function factNoRecibidasAutorizadas(){
-    $sql = "SELECT * FROM mfo_factura WHERE estado = ? OR estado = ? OR estado = ?";
-    return $GLOBALS['db']->auto_array($sql,array(self::DEVUELTO,self::NOAUTORIZADO,self::RECIBIDO),true);
+  public static function factNoProcesadas(){
+    $sql = "SELECT * FROM mfo_factura WHERE estado = ?";
+    return $GLOBALS['db']->auto_array($sql,array(self::NOENVIADO),true);
   }
 }  
 ?>

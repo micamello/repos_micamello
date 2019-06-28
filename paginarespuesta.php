@@ -59,12 +59,13 @@ try{
       if (file_exists($filename)){        
         @unlink($filename);
       }
+      Utils::log("PASO CERO ".date('Y-m-d H:i:s'));      
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
     }
     elseif(trim($_POST["authorizationResult"]) == "05" && trim($_POST["errorCode"]) == "2300"){
       if (file_exists($filename)){
         @unlink($filename);
-      }
+      }      
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/planes/'); 
     }
     else{

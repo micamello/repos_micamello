@@ -1318,6 +1318,9 @@ function validarClave(){
     var err_campo = "El campo no puede ser vacío";
     var err_formato = "Letras y números, mín. 8 dígitos";
 
+    $('#password').val($('#password').val().replace(/\s/g, ""));
+    $('#password_two').val($('#password_two').val().replace(/\s/g, ""));
+    $('#password_ant').val($('#password_ant').val().replace(/\s/g, ""));
     var password = document.getElementById('password').value;
     var password_two = document.getElementById('password_two').value;
 
