@@ -51,7 +51,8 @@ class Controlador_Inicio extends Controlador_Base {
         $vista = 'documentos/politicacookie_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;
-      case 'verificarCompra':        
+      case 'verificarCompra':  
+        //$resultado = $this->verificaCompra();
         Vista::renderJSON(array("dato"=>$_SESSION['mfo_datos']['planActivar']));
       break;
       default:            
