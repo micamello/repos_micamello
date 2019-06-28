@@ -5,8 +5,7 @@ function verificarCompraPlan(){
       url: puerto_host+"/index.php?mostrar=inicio&opcion=verificarCompra",
       dataType:'json',
         async: false,
-      success:function(data){
-        console.log(data.dato);
+        success:function(data){        
         if(data.dato == 1){
           $('.spin').find('h4').text('Su compra fue procesada con éxito');
           $('.spin').find('img').attr('src', puerto_host+'/imagenes/success.png');
