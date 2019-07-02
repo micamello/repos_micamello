@@ -78,11 +78,11 @@ define('VALORES_ORDENAMIENTO', array('100','1000'));
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 //PAYME
-define('PAYME_ACQUIRERID','237');
-define('PAYME_IDCOMMERCE','10030');
-define('PAYME_SECRET_KEY','mjNkPqNvrjUxZAH.97676492');
+define('PAYME_ACQUIRERID','39');
+define('PAYME_IDCOMMERCE','11562');
+define('PAYME_SECRET_KEY','ZttmezQdRsvnuZY$58989677');
 define('PAYME_CURRENCY_CODE','840');
-define('PAYME_RUTA','https://integracion.alignetsac.com/');
+define('PAYME_RUTA','https://vpayment.verifika.com/');
 define('GRAVAIVA','1.12');
 // facebook
 define('FB_ID_CLIENTE', '2148107835439054');

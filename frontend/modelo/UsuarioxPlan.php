@@ -397,6 +397,17 @@ class Modelo_UsuarioxPlan{
     $sql = "SELECT id_plan FROM ".$tabla." WHERE ".$id." = ?";
     return $GLOBALS['db']->auto_array($sql,array($idempresaplan),true); 
   }
+
+  public static function nroPlanesActivos($usuario,$tipo){
+    if (empty($usuario) || empty($tipo)){ return false; }
+    if ($tipo == Modelo_Usuario::CANDIDATO){
+      $sql = "SELECT COUNT(1) AS nro FROM mfo_usuario_plan WHERE id_usuario = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC";
+    }
+    else{
+      $sql = "SELECT COUNT(1) AS nro FROM mfo_empresa_plan WHERE id_empresa = ? AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC"; 
+    }
+    return $GLOBALS['db']->auto_array($sql,array($usuario));
+  }
 }  
 
 ?>
