@@ -34,6 +34,9 @@
               <button id="btn-verde" class="btn-medio bounceCss">
                 <a href="<?php echo PUERTO.'://'.HOST.'/'.$enlaceboton.'/'; ?>"><?php echo $textoBoton; ?></a>
               </button> 
+              <button id="btn-enlace" class="btn-medio bounceCss">
+                <a href="<?php echo PUERTO.'://'.HOST.'/oferta/'; ?>">POSTULAR A OFERTAS LABORALES</a>
+              </button> 
             <?php } ?> 
           </center>
         </div>
