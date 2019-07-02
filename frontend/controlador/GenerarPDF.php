@@ -130,6 +130,104 @@ class Controlador_GenerarPDF extends Controlador_Base
           Utils::doRedirect($enlace);
         }
       break;
+      case 'informeUsuarioCandidato':
+        $usuario = Modelo_Usuario::existeUsuario($username);
+        $idusuario = $usuario['id_usuario']; 
+        $idPlan = Utils::getParam('idPlan','',$this->data);
+        $idPlan = ((!empty($idPlan)) ? Utils::desencriptar($idPlan) : $idPlan);
+        $id_oferta = Utils::getParam('idOferta','',$this->data);
+        $id_oferta = ((!empty($id_oferta)) ? Utils::desencriptar($id_oferta) : $id_oferta);
+        $puedeDescargar = false;
+        $cantidadRestante = 1;
+        $id_empresa = false;
+        if(!empty($id_oferta)){
+          $existe_en_oferta = Modelo_Postulacion::obtienePostuladoxUsuario($idusuario,$id_oferta);
+        }else{
+          $existe_en_oferta = array();
+        }
+        /*if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){          
+          if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$idPlan) && !empty($id_oferta) && !empty($existe_en_oferta)){
+            $id_empresa = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+            $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($id_empresa,$id_oferta);
+            $descargas = Modelo_Descarga::descargasInforme($id_empresa,$id_oferta);
+            
+            if(!empty($posibilidades)){              
+              if(in_array($idusuario, $descargas)){
+                $puedeDescargar = true;
+              }else{
+                if(count($descargas) < $posibilidades){
+                  Modelo_Descarga::registrarDescargaInforme($idusuario,$id_empresa,$id_oferta);
+                  $puedeDescargar = true;
+                }else{
+                  $_SESSION['mostrar_notif'] = 'Usted no puede visualizar este informe porque ha superado el l\u00EDmite de descargas para esta oferta';
+                  $enlace = $_SERVER['HTTP_REFERER'];
+                  $puedeDescargar = false;
+                  Utils::doRedirect($enlace);
+                }
+              }
+            }else{              
+              if(!in_array($idusuario, $descargas)){
+                Modelo_Descarga::registrarDescargaInforme($idusuario,$id_empresa,$id_oferta);              
+              }
+              $puedeDescargar = true;
+            }            
+          }else{            
+            $puedeDescargar = false;
+            $_SESSION['mostrar_notif'] = 'Usted no tiene permiso para realizar esta acci\u00F3n, por favor adquiera un plan.';
+            //$ruta = PUERTO . '://' . HOST . '/vacantes/';
+          }
+        }*/
+        
+        //if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
+          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')/* || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial')*/)){                    
+            $puedeDescargar = true;
+          }else if(!isset($_SESSION['mfo_datos']['planes'])){
+            $puedeDescargar = true;
+          }else{ 
+            $puedeDescargar = false;
+            $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago. Su informe parcial lo puede descargar en su perfil';
+            //$ruta = PUERTO . '://' . HOST . '/perfil/';
+          }          
+        //}
+        
+        if(/*$idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] &&*/ $puedeDescargar == true){                  
+          
+          $result = Modelo_Opcion::datosGraficos2($idusuario,1,$id_empresa); 
+          $cantd_facetas = count($result);
+          $tipo_informe = '';
+          $cantd_f = $cont = 0;
+          if(($cantd_facetas == Modelo_Usuario::PRIMER_TEST || $cantd_facetas == Modelo_Usuario::SEGUNDO_TEST) || ($cantd_facetas > Modelo_Usuario::SEGUNDO_TEST && $cantd_facetas < Modelo_Usuario::COMPLETO_TEST)){
+            $tipo_informe = 'parcial';
+            $cantd_f = 2;
+          }else if($cantd_facetas == Modelo_Usuario::COMPLETO_TEST){
+            $tipo_informe = 'completo';
+            $cantd_f = 5;
+          }
+          $idsfacetas = "";
+          foreach($result as $keyvl=>$vlresult){
+            $cont++;
+            if($cont<=$cantd_f){
+              $idsfacetas .= $keyvl.","; 
+            }else{
+              break;
+            }
+          }
+          $idsfacetas = substr($idsfacetas, 0, -1);         
+          $preguntas = Modelo_Respuesta::resultadoxUsuarioxCompetencia($idusuario,$idsfacetas);   
+          $porcentajesxfaceta = Modelo_Usuario::obtenerFacetasxUsuario($idusuario,$idsfacetas);  
+          $rasgos = Modelo_Rasgo::obtieneListadoAsociativo();
+          $competencias = Modelo_Faceta::competenciasXfaceta();
+
+          $facetasDescripcion = Modelo_Faceta::obtenerFacetas();
+          $array_datos_graficos = array();
+         
+          $informe = $this->generaInformeCandidato(array('datos'=>$usuario,'tipo_informe'=>$tipo_informe,'preguntas'=>$preguntas,'facetas'=>$facetasDescripcion,'datos_descarga'=>array('id_usuario'=>$idusuario,'id_empresa'=>$id_empresa,'id_oferta'=>$id_oferta,'puedeDescargar'=>$puedeDescargar),'porcentajesxfaceta'=>$porcentajesxfaceta,'rasgos'=>$rasgos,'facetasHabilitadas'=>explode(',',$idsfacetas),'competencias'=>$competencias));
+        }else{
+          
+          $enlace = $_SERVER['HTTP_REFERER'];
+          Utils::doRedirect($enlace);
+        }
+      break;
       // case 'datousuario':
       //   $usuario = $username;
       //   $this->perfilAspirante($usuario, $vista, $id_oferta);
@@ -224,8 +322,8 @@ class Controlador_GenerarPDF extends Controlador_Base
             $cantd_a++; 
           }
           //$informe .= '<th class="'.$color1.'">'.$datos_facetas['literal'].'</th>';
-          $ths .= '<th style="width: 150px"';
-          $ths .= ' class="'.$color.'">'.$datos_facetas['literal'].'</th>';
+          $ths .= '<th style="width: 150px" class="'.$color.'">'.$datos_facetas['literal'].'</th>';
+          $thss .= '<td style="text-align:center;">'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1)).'</td>';
           //$span = '<span class="mayor">'.$datos_facetas['literal'].'</span>';
           //$tds .= '<td style="text-align:center;" class="'.$color.'">'.Utils::str_replace_first($datos_facetas['literal'], $span, strtoupper($datos_facetas['faceta']),1).'</td>';
           //if($pos_no_disponible < 3){
@@ -325,6 +423,8 @@ class Controlador_GenerarPDF extends Controlador_Base
           </tr>
           <tr>
             '.$ths.'
+          </tr><tr>
+            '.$thss.'
           </tr>';
       $pos_no_disponible = 1;
       $informe .= '<tr>';
@@ -570,6 +670,302 @@ class Controlador_GenerarPDF extends Controlador_Base
       //echo $informe;    
       self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
   }
+
+  public function generaInformeCandidato($datos){
+
+    $facetas = $datos['facetas'];
+    $tipo_informe = $datos['tipo_informe'];
+    $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
+    $datosusuario = $datos['datos'];
+    $preguntas = $datos['preguntas'];
+    $porcentajesxfaceta = $datos['porcentajesxfaceta'];
+    $rasgos = $datos['rasgos'];
+    $competencias = $datos['competencias'];
+
+    $datos_descarga = $datos['datos_descarga'];
+    $conacentos = array('&aacute;', '&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;');
+    $sinacentos = array('a', 'e','i','o','u','n');
+    $cambiar_letra = array('&aacute;', '&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;');
+    $codigo   = array('&aacute;', '&eacute;','&iacute;','&oacute;','&uacute;','&ntilde;');
+    $nombre = strtolower($datosusuario['nombres'].' '.$datosusuario['apellidos']);    
+    $nombre_archivo = utf8_encode(str_replace(' ', '_',Utils::no_carac($nombre))).'.pdf';
+    $nombre_mayuscula = strtoupper(Utils::no_carac($nombre));
+    $solo_nombres = strtoupper(str_replace($codigo,$conacentos,strtolower($datosusuario['nombres'])));
+
+    $colores_bg = array('C'=>'verde-bg','A'=>'amarillo-bg','N'=>'rojo-bg','E'=>'morado-bg','A1'=>'azul-bg');
+    $colores = array('C'=>'verde','A'=>'amarillo','N'=>'rojo','E'=>'morado','A1'=>'azul');
+    $cantd_preg = 0;
+    $pos_no_disponible = 1;
+    $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
+    $puntaxfaceta = array();
+    foreach ($porcentajesxfaceta as $c => $datos_resultado) {
+      $puntaxfaceta[$datos_resultado['id_faceta']] = $datos_resultado['id_puntaje'];
+      $etiquetas_faceta .= $facetas[$datos_resultado['id_faceta']]['literal'].': '.$datos_resultado['valor'].'|';
+      $porcentajes_faceta .= $datos_resultado['valor'].',';
+      $colors .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
+      $colors_l .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
+      $descrip_facetas .= $facetas[$datos_resultado['id_faceta']]['faceta'].': '.$datos_resultado['valor'].'|';
+      $descrip_titulo .= $facetas[$datos_resultado['id_faceta']]['literal'];
+    }
+    $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
+    $colors = substr($colors, 0,-1);
+    $descrip_facetas = substr($descrip_facetas, 0,-1);
+    $porcentajes_faceta = substr($porcentajes_faceta, 0,-1);
+    $informe = '<br><br><br><br>
+    <div id="pagina-1">
+      <h1>Informe ';
+      if($tipo_informe == 'parcial'){
+        $informe .= 'Parcial ';
+      }
+      $informe .= 'Por Competencias</h1>
+      <br><br><br><br>
+      <div style="text-align:center"><br><br><br><br><br>
+      <img width="600" src="'.FRONTEND_RUTA.'imagenes/pdf/diseno.png" class="canea">
+      </div><br><br><br><br><br><br><br>
+      <div class="pg1">
+        <p><b>NOMBRES Y APELLIDOS COMPLETOS:</b><br>'.$nombre_mayuscula.'</p>
+        <p><b>FECHA DE EMISION: </b><br>'.date('Y-m-d').'</p>
+      </div>
+    </div> 
+    <div style="page-break-after:always;"></div>
+    <br>
+    <div id="pagina-2" style="text-align:justify">';
+      
+      if($tipo_informe == 'parcial'){
+        
+        $informe .= '<blockquote>
+          <b>¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
+        </blockquote>';
+      }else{
+        $informe .= '<blockquote>Tu talento es nuestra oportunidad.</blockquote>';
+      }
+      $informe .= '<h2>&iquest;QU&Eacute; ES CANEA?</h2>
+      <p>Es un Test que tiene por objetivo evaluar las competencias laborales de los candidatos y facilitar el proceso de reclutamiento de las empresas. Se dise&ntilde;&oacute; para comprender las aptitudes de una persona y llevarla a lograr un desarrollo profesional.</p>';
+
+      $tds = $ths = $tds_competencias = '';
+      $cantd_a = 0;
+      foreach ($facetas as $id_faceta => $datos_facetas) {
+        if($datos_facetas['literal'] == 'A' && $cantd_a > 1){
+          $color = $colores_bg[$datos_facetas['literal'].'1'];
+          $color1 = $colores[$datos_facetas['literal'].'1']; 
+        }else{
+          $color = $colores_bg[$datos_facetas['literal']];
+          $color1 = $colores[$datos_facetas['literal']];
+          $cantd_a++; 
+        }
+
+        $span = '<span class="mayor '.$color.'">'.$facetas[$id_faceta]['literal'].'</span>';
+        $ths .= '<th style="width: 150px" class="'.$color1.'">'.$datos_facetas['literal'].'</th>';
+        $thss .= '<td style="text-align:center;">'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1)).'</td>';
+      }
+      //$pos_no_disponible = 1;
+    
+      $datosXpreguntas = array(); 
+      $caracteristicas_generales = array();
+      $parrafo = '';
+      foreach($preguntas as $id_competencia => $pregunta){
+        $cantd_preg++;
+        $resultado = Modelo_Baremo::obtienePuntaje($pregunta['orden1'],$pregunta['orden2'],$pregunta['orden3'],$pregunta['orden4'],$pregunta['orden5']);
+        if($resultado['porcentaje'] >= 30){
+          $datosXpreguntas[$id_competencia] = $resultado['porcentaje'];
+        }
+        $descriptor = Modelo_Descriptor::obtieneTextos($id_competencia,$resultado['id_puntaje']);       
+        $parrafo .= $solo_nombres.' '.utf8_encode($descriptor['descripcion']).' ';
+       
+        if($cantd_preg == $preg_x_faceta){
+          $cantd_preg = 0;
+          $caracteristicas_generales[$pregunta['id_faceta']] = '<p align="justify">'.substr($parrafo, 0,-1).'</p>'; 
+          $parrafo = '';
+        }
+      }
+      $informe .= '<br><h2>INTRODUCCI&Oacute;N</h2>
+      <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>
+
+      <p>El comportamiento es un lenguaje universal de &quot;como actuamos&quot;, o de nuestro comportamiento observable. <b>En este test no existen resultados ni buenos, ni malos</b>. Una vez que haya le&iacute;do el reporte, omita cualquier afirmaci&oacute;n que no parezca aplicar a su comportamiento.</p>
+    ';
+      if($tipo_informe == 'parcial'){
+        $informe .= '<div class="publicidad">REGISTRESE EN NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</div>';
+      }
+    $informe .= '</div>
+    <div style="page-break-after:always;"></div>
+    <br>
+    <div id="pagina-3" style="text-align:justify">
+      <h2>CARACTER&Iacute;STICAS GENERALES DE COMPORTAMIENTO LABORAL</h2>';
+      $informe .= '<p>Este informe analiz&oacute; la forma en que <b>'.$solo_nombres.'</b> hace las actividades y tareas y c&oacute;mo reacciona ante los retos que se presentan y se viven diariamente en su sitio de trabajo. Recuerde solo medimos comportamientos. Solo le ofrecemos afirmaciones positivas, en aquellas &aacute;reas de conductas en que la persona demuestra su estilo de comportamiento.</p>
+        ';
+      $pos_no_disponible = 1;
+      $cantd_a = 0;
+      foreach ($competencias as $id_faceta => $value) {
+        $comp = explode(', ',$value);
+        $color1 = '';
+        //print_r($facetas[$id_faceta]['literal']);
+        if($facetas[$id_faceta]['literal'] == 'A' && $cantd_a > 1){
+          $color1 = $colores[$facetas[$id_faceta]['literal'].'1']; 
+        }else{
+          
+          $color1 = $colores[$facetas[$id_faceta]['literal']];
+          $cantd_a++; 
+        }
+        $span = '<span class="mayor '.$color1.'">'.$facetas[$id_faceta]['literal'].'</span>';
+        if($pos_no_disponible < 3){
+          $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).': </b>'.$facetas[$id_faceta]['introduccion'].' ('.$comp[0]).')</li></ul>';
+          //$informe .= $caracteristicas_generales[$id_faceta];
+          $pos_no_disponible++;
+        }else{
+          if($tipo_informe == 'parcial'){
+            $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).': </b>'.$facetas[$id_faceta]['introduccion'].' ('.$comp[0].'). <b class="rojo">no disponible</b>').'</li></ul><br>';
+          }else{
+            $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).': </b>'.$facetas[$id_faceta]['introduccion'].' ('.$comp[0]).')</li></ul>';
+            //$informe .= $caracteristicas_generales[$id_faceta];
+          }
+        }
+      }
+      if($tipo_informe == 'parcial'){
+        $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
+      }
+      $informe .= '
+    </div>';
+    $informe .= '<div style="page-break-after:always;"></div>
+    <div id="pagina-4" style="text-align:justify">
+      <h2>DESCRIPTORES</h2>';
+  
+      $informe .= '<p>Basado en las respuestas de <b>'.$solo_nombres.',</b> predominan las palabras que m&aacute;s describen su comportamiento cuando: resuelve  problemas y enfrenta desaf&iacute;os, influye en personas, responde al ritmo del ambiente,  reglas  y  procedimientos impuestos. </p>
+      <center>
+        <table class="tabla2">
+          <tr>
+            <th style="height: 35px;"colspan="5">DESCRIPTORES</th>
+          </tr>
+          <tr>
+            '.$ths.'
+          </tr><tr>
+            '.$thss.'
+          </tr>';
+      $pos_no_disponible = 1;
+      $informe .= '<tr>';
+      foreach ($facetas as $id_faceta => $value) {
+      
+        if(in_array($id_faceta, $datos['facetasHabilitadas'])){
+          $informe .= '<td>';
+          foreach ($rasgos[$id_faceta][$puntaxfaceta[$id_faceta]] as $key => $r) {
+            $informe .= '<br>'.utf8_encode($r);
+          }
+          $informe .= '</td>';
+        }else{
+          if($pos_no_disponible <= 3 && $tipo_informe == 'parcial'){
+            $informe .= '<td class="rojo"><b>no disponible</b></td>';
+            $pos_no_disponible++;
+          }else{
+            $informe .= '<td></td>';
+          }
+        }
+      }
+      $informe .= '</tr></table>';
+      if($tipo_informe == 'parcial'){
+        $informe .= '<br><div class="publicidad">INGRESA EN EL LINK <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA OBTENER MEJORES BENEFICIOS.</div>';
+      }
+
+      $informe .= '</center></div><div style="page-break-after:always;"></div>
+      <br>
+      <div id="pagina-5" style="text-align:justify">
+        <h2>ESTILO PERSONALIZADO</h2>';
+      $informe .= '<p><b>'.$solo_nombres.'</b> le estamos proporcionando un resumen de s&iacute; mismo. Comprender esta secci&oacute;n le ayudar&aacute; a proyectar una imagen para controlar posibles situaciones. <b>Una vez que haya le&iacute;do el reporte, omita cualquier afirmaci&oacute;n que no parezca aplicar a su comportamiento.</b></p>
+      <center>
+        <table class="tabla-3">';
+      $cantd_a = 0;
+      foreach ($porcentajesxfaceta as $k => $valores) {
+        
+        $l = $facetas[$valores['id_faceta']]['literal'];
+        if($l == 'A' && $cantd_a > 1){
+          $color = $colores_bg[$l.'1']; 
+        }else{
+          $color = $colores_bg[$l];
+          $cantd_a++; 
+        }
+        
+        $d = strtoupper($facetas[$valores['id_faceta']]['faceta']);
+        $informe .= '<tr>
+          <td class="'.$color.'" style="text-align: center; font-size: 11pt; font-weight: bold; text-transform: uppercase;
+      padding-top: 25px; padding-left: 40px; padding-bottom: 25px; padding-right: 40px;">'.utf8_encode($l.'/'.$d).'
+          </td>
+          <td style="background-color: #c9c9c9; width: 500px; padding: 5px 20px;">
+          '.str_replace('_NOMBRE_',$solo_nombres,utf8_encode($valores['descripcion'])).'
+          </td>
+        </tr><tr><td></td></tr>';
+      }
+
+      if(count($porcentajesxfaceta) == 2){
+        $cantd_a = 0;
+        $cantd_facetas = 0;
+        foreach ($facetas as $identificador => $f) {
+
+          if($cantd_facetas >= 2){
+            $l = $f['literal'];
+            if($l == 'A' && $cantd_a > 1){
+              $color = $colores_bg[$l.'1']; 
+            }else{
+              $color = $colores_bg[$l];
+              $cantd_a++; 
+            }
+            
+            $d = strtoupper($f['faceta']);
+
+            $informe .= '<tr>
+              <td class="'.$color.'" style="text-align: center; font-size: 11pt; font-weight: bold; text-transform: uppercase;
+          padding-top: 25px; padding-left: 40px; padding-bottom: 25px; padding-right: 40px;">'.utf8_encode($l.'/'.$d).'
+              </td>
+              <td style="background-color: #c9c9c9; color:red; width: 500px; padding: 5px 20px;">
+              <b>NO DISPONIBLE</b>
+              </td>
+            </tr><tr><td></td></tr>';
+          }else{
+            $cantd_facetas++;
+          }
+        }
+      }
+      $informe .= '</table>';
+      if($tipo_informe == 'parcial'){
+        $informe .= '<br>
+        <div class="publicidad">Recuerde ingresar a <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</div>';
+      }
+      $informe .= '</center>
+      </div><div style="page-break-after:always;"></div>';
+
+      $informe .=  '</div>';
+      if($tipo_informe == 'parcial'){
+        $informe .= '<br><br>
+        <div class="publicidad"><b>¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</b></div>';
+      }else{
+        $informe .= '<div style="page-break-after:always;"></div><br><br><div>
+          <h2>resumen canea</h2>
+          <h1 style="text-align: left; display: block"><span class="verde">C</span><span class="amarillo">A</span><span class="rojo">N</span><span class="morado">E</span><span class="azul">A</span></h1>
+        </div>';
+      }
+      if(count($porcentajesxfaceta) == count($facetas)){
+        $informe .= '<p align="center"><img width="600" heigth="600" align="center" src="'.$datosusuario['grafico'].'">';
+        $porcentajes_faceta = explode(",",  $porcentajes_faceta);
+        $informe .= '<table style="font-size:18px" class="tabla-canea">
+            <tr>
+              <td style="background-color:#5EB782; text-align:center" class="bloq-canea">C</td>
+              <td class="bloq">Hacer '.$porcentajes_faceta[0].'%</td>
+              <td style="background-color:#FCDC59; text-align:center" class="bloq-canea">A</td>
+              <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
+              <td style="background-color:#E25050; text-align:center" class="bloq-canea">N</td>
+              <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
+            </tr>
+            <tr>
+              <td style="background-color:#8C4DCE; text-align:center" class="bloq-canea">E</td>
+              <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
+              <td style="background-color:#2B8DC9; text-align:center" class="bloq-canea">A</td>
+              <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
+              <td class="bloq-canea"></td>
+              <td class="bloq"></td>
+            </tr>
+        </table></p>';
+      }
+      //echo $informe;    
+      self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
+  }
+
   public function informePersonalidad($html,$nombre_archivo,$datos_descarga){    
     $cabecera = "imagenes/pdf/header1.png";
     $piepagina = "imagenes/pdf/footer1.png";
