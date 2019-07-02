@@ -79,7 +79,7 @@ if (isset($template_js) && is_array($template_js)){
   foreach($template_js as $file_js){
     if ($file_js == "alignet"){
       //echo '<script type="text/javascript" src="https://integracion.alignetsac.com/VPOS2/js/modalcomercio.js"></script>';
-      echo '<script type="text/javascript" src="https://vpayment.verifika.com/VPOS2/js/modalcomercio.js"></script>';
+      echo '<script type="text/javascript" src="'.PAYME_RUTA.'VPOS2/js/modalcomercio.js"></script>';
       
     }
     else{
