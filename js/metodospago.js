@@ -239,7 +239,7 @@ function validarImg(archivo,err_img,seccion_img,btn){
       if(document.getElementById('dniP').value != ""){
         if(document.getElementById('dniP').value.length >= 10){
 
-          if(DniRuc_Validador($('#dniP'),tipo_doc) == true){
+          if(DniRuc_Validador($('#dniP'),tipo_doc ,2) == true){
             quitarError("err_dniP","seccion_dniP");
           }else{
             colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
@@ -443,7 +443,7 @@ $('#tipo_doc').on('change', function(){
     if(tipo_doc != 0){      
       if(document.getElementById('dni').value != ""){
         if(document.getElementById('dni').value.length >= 10){
-          if(DniRuc_Validador($('#dni'),tipo_doc) == true){
+          if(DniRuc_Validador($('#dni'),tipo_doc, 2) == true){
             quitarError("err_dni","seccion_dni");
           }else{
             colocaError("err_dni", "seccion_dni","Documento inválido","btndeposito");
@@ -477,7 +477,7 @@ $('#tipo_docPM').on('change', function(){
     if(tipo_doc != 0){      
       if(document.getElementById('dniPM').value != ""){
         if(document.getElementById('dniPM').value.length >= 10){
-          if(DniRuc_Validador($('#dniPM'),tipo_doc) == true){
+          if(DniRuc_Validador($('#dniPM'),tipo_doc , 2) == true){
             quitarError("err_dniPM","seccion_dniPM");
           }else{
             colocaError("err_dniPM", "seccion_dniPM","Documento inválido","btnpayme");
@@ -533,7 +533,7 @@ $('#dni').on('blur', function(){
   if(tipo_doc != 0){
     if(document.getElementById('dni').value != ""){
       if(document.getElementById('dni').value.length >= 10){
-        if(DniRuc_Validador($('#dni'),tipo_doc) == true){
+        if(DniRuc_Validador($('#dni'),tipo_doc , 2) == true){
           quitarError("err_dni","seccion_dni");
         }else{
           colocaError("err_dni", "seccion_dni","Documento inválido","btndeposito");
@@ -566,7 +566,7 @@ $('#dni').on('blur', function(){
   if(tipo_doc != 0){
     if(document.getElementById('dniP').value != ""){
       if(document.getElementById('dniP').value.length >= 10){
-        if(DniRuc_Validador($('#dniP'),tipo_doc) == true){
+        if(DniRuc_Validador($('#dniP'),tipo_doc, 2) == true){
           quitarError("err_dniP","seccion_dniP");
         }else{
           colocaError("err_dniP", "seccion_dniP","Documento ingresado no es válido","btn_submitpaypal");
@@ -633,7 +633,7 @@ $('#dniPM').on('blur', function(){
   if(tipo_doc != 0){
     if(document.getElementById('dniPM').value != ""){
       if(document.getElementById('dniPM').value.length >= 10){
-        if(DniRuc_Validador($('#dniPM'),tipo_doc) == true){
+        if(DniRuc_Validador($('#dniPM'),tipo_doc, 2) == true){
           quitarError("err_dniPM","seccion_dniPM");
         }else{
           colocaError("err_dniPM", "seccion_dniPM","Documento inválido","btnpayme");
@@ -946,7 +946,7 @@ function validarFormulario(){
   }
   if(dni.value != ""){
     if(dni.value.length >= 10){      
-      if(DniRuc_Validador(dni,tipo) == true){
+      if(DniRuc_Validador(dni,tipo, 2) == true){
         quitarError(err_dni,seccion_dni);
       }else{
         colocaError(err_dni, seccion_dni,"Documento inválido",btn);
