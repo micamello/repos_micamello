@@ -6,8 +6,8 @@ var digitoVer = 0;
 var digitoVerComparar = 0;
 var expregNumero = /^[0-9]+$/i;
 var expregAlfaNum = /^[a-zA-Z0-9]+$/i;
-
-function DniRuc_Validador(valor, tipo){
+// accion 1.- validacion 2.- compra
+function DniRuc_Validador(valor, tipo, accion){
 // ************Validar cédula*******************
 	valor = $(valor).val();
 
@@ -20,7 +20,7 @@ function DniRuc_Validador(valor, tipo){
 
 		if(tipo == 1){
 			if(expregNumero.test(valor)){
-				if(validarRucPersonaNatural(valor, tipo) 
+				if(validarRucPersonaNatural(valor, tipo, accion) 
 					|| validarRucPersonaJuridica(valor)
 					|| validarRucInstitucionPublica(valor)){
 					return true;
@@ -93,12 +93,12 @@ function validarCedulaEcuador(valor, tipo){
 	}
 }
 
-function validarRucPersonaNatural(valor, tipo){
+function validarRucPersonaNatural(valor, tipo, accion){
 	var sucursal = 0;
 	if(validarCedulaEcuador(valor, tipo)){
 		if(valor.length == 13){
 			if(valor.substr(10, 12) == '001'){
-				return true;
+				if(accion == 2){return true;}else{return false;}
 			}
 			else{
 				return false;

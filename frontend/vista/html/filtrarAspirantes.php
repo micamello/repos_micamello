@@ -88,7 +88,7 @@ foreach ($data as $letra => $value) {
             foreach ($salida as $key => $value) {
                 $l = substr($value[0],0,1);
                 $i = substr($value[0],1);
-                $filtros_r .= $literales[$l].': '.$i.'%&nbsp;&nbsp;';
+                $filtros_r .= utf8_encode($literales[$l]).': '.$i.'%&nbsp;&nbsp;';
             }
             $filtros_r .= '</span>
                     <span id="icono-filtro" class="input-group-addon" style="padding:0px; cursor:pointer;">

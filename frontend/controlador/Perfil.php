@@ -219,6 +219,7 @@ class Controlador_Perfil extends Controlador_Base
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0,'pagina_web'=>0,'nro_trabajadores'=>1,'sectorind'=>1,'cargo'=>1);
             }
 
+            Utils::log("POST ".print_r($_POST,true));
             $data = $this->camposRequeridos($campos);
 
             $array_data_area = array();
@@ -273,7 +274,7 @@ class Controlador_Perfil extends Controlador_Base
 
                 $validaTlf = Utils::validarTelefono($data['telefono']);
                 if (empty($validaTlf)) {
-                    throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
+                    throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
                 }
                 if (strlen($data['telefono']) > 15) {
                     throw new Exception("El celular " . $data['telefono'] . " supera el l\u00CDmite permitido");
@@ -285,12 +286,12 @@ class Controlador_Perfil extends Controlador_Base
                 if(!empty($data['convencional'])){
                     $validaTlf = Utils::validarTelefonoConvencional($data['convencional']);
                     if (empty($validaTlf)) {
-                        throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " no es v\u00E1lido");
+                        throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
                     }
                     if (strlen($data['telefono']) > 15) {
                         throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " supera el l\u00CDmite permitido");
                     }
-                    if (strlen($data['telefono']) < 6) {
+                    if (strlen($data['telefono']) < 9) {
                         throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
                     }
                 }
@@ -311,7 +312,7 @@ class Controlador_Perfil extends Controlador_Base
 
                 $validaTlf = Utils::validarTelefono($data['telefono']);
                 if (!$validaTlf) {
-                    throw new Exception("El celular " . $data['telefono'] . " no es v\u00E1lido");
+                    throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
                 }
                 if (strlen($data['telefono']) > 15) {
                     throw new Exception("El celular " . $data['telefono'] . " supera el l\u00CDmite permitido");
@@ -323,7 +324,7 @@ class Controlador_Perfil extends Controlador_Base
             }else{
                 $validaTlf2 = Utils::validarTelefono($data['tel_one_contact']);
                 if (empty($validaTlf2)){
-                    throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " no es v\u00E1lido");
+                    throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
                 }
                 if (strlen($data['tel_one_contact']) > 15) {
                     throw new Exception("El celular de contacto " . $data['tel_one_contact'] . " supera el l\u00CDmite permitido");
@@ -334,12 +335,12 @@ class Controlador_Perfil extends Controlador_Base
                 if(isset($_POST['tel_two_contact']) && !empty($_POST['tel_two_contact'])){
                     $validaTlf3 = Utils::validarTelefonoConvencional($data['tel_two_contact']);
                     if (empty($validaTlf3)) {
-                        throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no es v\u00E1lido");
+                        throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
                     }
                     if (strlen($data['tel_two_contact']) > 15) {
                         throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " supera el l\u00CDmite permitido");
                     }
-                    if (strlen($data['tel_two_contact']) < 6) {
+                    if (strlen($data['tel_two_contact']) < 9) {
                         throw new Exception("El tel\u00E9fono convencional " . $data['tel_two_contact'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
                     }
                 }
@@ -349,7 +350,7 @@ class Controlador_Perfil extends Controlador_Base
 
                 $validaTlf = Utils::validarCelularConvencional($data['telefono']);
                 if (!$validaTlf) {
-                    throw new Exception("El tel\u00E9fono " . $data['telefono'] . " no es v\u00E1lido");
+                    throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
                 }
                 if (strlen($data['telefono']) > 15) {
                     throw new Exception("El tel\u00E9fono " . $data['telefono'] . " supera el l\u00CDmite permitido");
@@ -371,7 +372,15 @@ class Controlador_Perfil extends Controlador_Base
                       if($_POST['lugar_estudio'] == 1 && strlen($data['universidad2']) > 100){
                         throw new Exception("El nombre de la universidad: " . $data['universidad2'] . " supera el l\u00CDmite permitido");
                       }
-                    }            
+                    }
+
+                    $iso = SUCURSAL_ISO;
+                    if (method_exists(new Utils, 'validar_'.$iso)){
+                        $function = 'validar_'.$iso;
+                        if(!Utils::$function($data['dni'], 1)){
+                          throw new Exception("No permitido RUC de persona natural.");
+                        }
+                      }           
           
                     $datodni = Modelo_Usuario::existeDni($data['dni'],$_SESSION['mfo_datos']['usuario']['id_usuario_login']);
                     if (!empty($datodni)){                        

@@ -786,7 +786,7 @@ function validarFormulario(tipovalidacion){
             if (tipovalidacion == true){
               if(document.getElementById('dni').value.length >= 10){
                 if(searchAjax($('#dni'),tipo_doc) == false){
-                  if(DniRuc_Validador($('#dni'),tipo_doc) == true){
+                  if(DniRuc_Validador($('#dni'),tipo_doc, 1) == true){
                     quitarError("err_dni","seccion_dni");
                   }else{
                     colocaError("err_dni", "seccion_dni","Documento no válido","boton");
@@ -976,13 +976,13 @@ function validarFormulario(tipovalidacion){
         if(convencional.length != ''){
 
             if(convencional.length < '9'){
-                colocaError("err_tlfCon","seccion_tlfCon","Longitud mín. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres<br>'; 
+                colocaError("err_tlfCon","seccion_tlfCon","9 dígitos, incluir cod. provincia","boton");
+                mensaje += '- Tel\u00E9fono convencional, m\u00EDn. 9 d\u00EDgitos<br>'; 
                 error = 1; 
             }else if(convencional.length > '9'){
 
-                colocaError("err_tlfCon","seccion_tlfCon","Longitud máx. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres<br>'; 
+                colocaError("err_tlfCon","seccion_tlfCon","Máx. 9 digitos","boton");
+                mensaje += '- Tel\u00E9fono convencional, mm\u00E1x. 9 d\u00EDgitos<br>'; 
                 error = 1; 
             }else{
                quitarError("err_tlfCon","seccion_tlfCon"); 
@@ -1181,13 +1181,13 @@ function validarFormulario(tipovalidacion){
         if(tel_two_contact.length != ''){
 
             if(tel_two_contact.length < '9'){
-                colocaError("err_tlfCon2","seccion_tlfCon2","Longitud mín. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00EDn. 9 caracteres<br>'; 
+                colocaError("err_tlfCon2","seccion_tlfCon2","9 dígitos, incluir cod. provincia","boton");
+                mensaje += '- Tel\u00E9fono convencional, m\u00EDn. 9 d\u00EDgitos<br>'; 
                 error = 1; 
             }else if(tel_two_contact.length > '9'){
 
-                colocaError("err_tlfCon2","seccion_tlfCon2","Longitud máx. 9 caracteres","boton");
-                mensaje += '- Tel\u00E9fono convencional, longitud m\u00E1x. 9 caracteres<br>'; 
+                colocaError("err_tlfCon2","seccion_tlfCon2","Máx. 9 dígitos","boton");
+                mensaje += '- Tel\u00E9fono convencional, m\u00E1x. 9 d\u00EDgitos<br>'; 
                 error = 1; 
             }else{
                 quitarError("err_tlfCon2","seccion_tlfCon2");

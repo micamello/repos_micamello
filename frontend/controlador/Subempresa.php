@@ -299,6 +299,22 @@ class Controlador_Subempresa extends Controlador_Base
             $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year")); 
             $default_city = 1;     
 
+
+            // validaciones
+            $iso = SUCURSAL_ISO;
+            if(method_exists(new Utils, 'validar_'.$iso)){
+                $function = 'validar_'.$iso;
+                if(!Utils::$function($data['dni'], 1)){
+                  throw new Exception("No permitido RUC de persona natural.");
+                }
+            }
+
+            $datodni = Modelo_Usuario::existeDni($data['dni']);
+                if (!empty($datodni)){                        
+                  throw new Exception("El RUC ".$data["dni"]." ya existe");
+                }
+
+
             $username = explode(" ", strtolower($data['name_user']));
             $username = Utils::generarUsername(strtolower(Utils::no_carac(utf8_decode($username[0]))));
             $password = Utils::generarPassword();

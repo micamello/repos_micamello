@@ -178,8 +178,8 @@ class Controlador_GenerarPDF extends Controlador_Base
           }
         }*/
         
-        //if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
-          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')/* || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial')*/)){                    
+        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
+          /*if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso'))){                    
             $puedeDescargar = true;
           }else if(!isset($_SESSION['mfo_datos']['planes'])){
             $puedeDescargar = true;
@@ -187,8 +187,9 @@ class Controlador_GenerarPDF extends Controlador_Base
             $puedeDescargar = false;
             $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago. Su informe parcial lo puede descargar en su perfil';
             //$ruta = PUERTO . '://' . HOST . '/perfil/';
-          }          
-        //}
+          }  */  
+          $puedeDescargar = true;      
+        }
         
         if(/*$idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] &&*/ $puedeDescargar == true){                  
           
@@ -974,7 +975,7 @@ class Controlador_GenerarPDF extends Controlador_Base
                 <body><main>";
     $enddoc = "</main></body></body></html>";
     $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="100%"></header>'); 
-    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="100%"></footer>');
+    $mpdf->setHTMLFooter('<footer style="text-align:center; color:#386b97; font-weight:bold">{PAGENO}<img src="'.$piepagina.'" width="100%"></footer>');
     $mpdf->AddPage('', '', '', '', '',
         15, // margin_left
         15, // margin right

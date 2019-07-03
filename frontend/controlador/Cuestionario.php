@@ -145,6 +145,7 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags["template_js"][] = "modos_respuesta";
         $tags["template_js"][] = "toastr.min";        
         $tags["nomobile"] = 1;
+        $tags["pagadoEstado"] = Modelo_PorcentajexFaceta::obtienePermisoDescargar($id_usuario);
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);
       break;
       
@@ -158,6 +159,13 @@ class Controlador_Cuestionario extends Controlador_Base {
           if (!empty($acceso)){
             Modelo_Notificacion::eliminarNotificacionUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],Modelo_Notificacion::DESBLOQUEO_ACCESO);
           }          
+        }
+        //si tiene cuestionarios realizados por accesos
+        if ($faceta == 5){
+          $pf = Modelo_PorcentajexFaceta::obtienePermisoDescargar($_SESSION['mfo_datos']['usuario']["id_usuario"]);      
+          if (empty($pf) || $pf < 5){
+            $this->redirectToController('oferta'); 
+          }
         }
         $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($_SESSION['mfo_datos']['usuario']['id_usuario']);        
         if ($faceta > 1 && !empty($metodoSeleccion) && isset($metodoSeleccion["metodo_resp"]) && !empty($metodoSeleccion["metodo_resp"])){
@@ -198,9 +206,7 @@ class Controlador_Cuestionario extends Controlador_Base {
       if(!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')){
         $_SESSION['mostrar_error'] = "Debe comprar un plan para poder realizar el Tercer Formulario";  
         $this->redirectToController('planes');
-      }
-      //$pf = Modelo_PorcentajexFaceta::obtienePermisoDescargar($_SESSION['mfo_datos']['usuario']["id_usuario"]);
-
+      }      
       return false;
     }    
   }

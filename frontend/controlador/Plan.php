@@ -279,7 +279,7 @@ class Controlador_Plan extends Controlador_Base {
         throw new Exception("Direcci\u00F3n de correo electr\u00F3nico no es v\u00E1lido");
       }
       if (!Utils::valida_telefono($data["telefono"]) || strlen($data["telefono"]) > 25){
-        throw new Exception("N\u00FAmero de tel\u00E9fono no es v\u00E1lido");
+        throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero m\u00EDn. 9 y m\u00E1x. 15.");
       }      
       if (!Utils::alfanumerico($data["shipping"]) || strlen($data["shipping"]) > 10){
         throw new Exception("C\u00F3digo postal no es v\u00E1lido");
@@ -288,7 +288,7 @@ class Controlador_Plan extends Controlador_Base {
       if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
         if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)) {
           $function = 'validar_'.SUCURSAL_ISO;
-          $validaCedula = Utils::$function($data['dni']);
+          $validaCedula = Utils::$function($data['dni'], 2);
           if ($validaCedula == false){
             throw new Exception("El documento ingresado no es v\u00E1lido");
           }

@@ -569,7 +569,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 
 												        	if(isset($data['areaxusuario']) && array_key_exists($area['id_area'], $data['areaxusuario']) && in_array($area['id_subareas'], $data['areaxusuario'][$area['id_area']])){
 												        		$selected = "selected='selected'";
-												        	}else if(!isset($data['areaxusuario']) && is_array($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && !empty($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
+												        	}else if(!isset($data['areaxusuario']) && is_array($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']]) && !empty($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && in_array($area['id_subareas'], $_SESSION['mfo_datos']['usuario']['usuarioxarea'][$area['id_area']])){
 												        		$selected = "selected='selected'";
 												        	}
 												          echo "<option ".$selected." value='".$area['id_area']."_".$area['id_subareas']."_".$area['id_areas_subareas']."'>".utf8_encode($area['nombre_subarea'])."</option>";

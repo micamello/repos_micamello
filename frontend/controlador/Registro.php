@@ -109,7 +109,7 @@ class Controlador_Registro extends Controlador_Base {
     if($datosReg['tipo_documentacion'] == 1 || $datosReg['tipo_documentacion'] == 2){
       if (method_exists(new Utils, 'validar_'.$iso)){
         $function = 'validar_'.$iso;
-        if(!Utils::$function($datosReg['documentoCandEmp'])){
+        if(!Utils::$function($datosReg['documentoCandEmp'], 1)){
           throw new Exception("El documento ingresado no es v\u00E1lido");
         }
       }
@@ -298,6 +298,7 @@ class Controlador_Registro extends Controlador_Base {
 
   public function registroRedSocial($correo,$nombre,$apellido){
     $url = "";
+    $correo = strtolower($correo);
     $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
     $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
     $id_genero = Modelo_Genero::obtenerListadoGenero();
@@ -325,7 +326,6 @@ class Controlador_Registro extends Controlador_Base {
       $username = $nombre_user[0].$apell_user[0];
       $username = Utils::generarUsername(strtolower($username));      
       $password = Utils::generarPassword();
-      $userdata['email'] = strtolower($correo);
       $usuario_login = array("tipo_usuario"=>Modelo_Usuario::CANDIDATO, "username"=>$username, 
                              "password"=>$password, "correo"=>$correo, "dni"=>0, 'tipo_registro'=>3);
       if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuario_login)){
