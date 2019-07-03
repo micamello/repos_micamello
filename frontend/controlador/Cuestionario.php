@@ -158,7 +158,7 @@ class Controlador_Cuestionario extends Controlador_Base {
           $acceso = $this->validaTercerFormulario($faceta);
           if (!empty($acceso)){
             Modelo_Notificacion::eliminarNotificacionUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],Modelo_Notificacion::DESBLOQUEO_ACCESO);
-          }
+          }          
         }
         $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($_SESSION['mfo_datos']['usuario']['id_usuario']);        
         if ($faceta > 1 && !empty($metodoSeleccion) && isset($metodoSeleccion["metodo_resp"]) && !empty($metodoSeleccion["metodo_resp"])){
@@ -200,6 +200,8 @@ class Controlador_Cuestionario extends Controlador_Base {
         $_SESSION['mostrar_error'] = "Debe comprar un plan para poder realizar el Tercer Formulario";  
         $this->redirectToController('planes');
       }
+      //$pf = Modelo_PorcentajexFaceta::obtienePermisoDescargar($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+
       return false;
     }    
   }
