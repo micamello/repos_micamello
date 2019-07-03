@@ -220,7 +220,7 @@ class Modelo_Oferta{
     if(!empty($vista) && ($vista == 'postulacion')){
       $sql .= " AND o.estado = 1 AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }else if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
-      $sql .= " AND (o.estado = 1 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
+      $sql .= " AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
     }else{
       $sql .= " AND o.estado = 1";
     }

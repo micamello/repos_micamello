@@ -31,7 +31,7 @@
               <p class="text-justify">En caso de haber realizado el dep&oacute;sito, proceda a ingresar el número, subir imagen(fotograf&iacute;a) del comprobante y llenar datos que se solicitan en la parte inferior.</p>
               <?php if (isset($ctabancaria) && !empty($ctabancaria)){ ?>
                 <?php foreach($ctabancaria as $banco){?>
-                  <div class="breadcrumb col-md-6 text-justify">
+                  <div class="breadcrumb col-md-3 text-justify">
                     <h6><strong>Banco: </strong><?php echo $banco["nombre_banco"];?></h6>
                     <h6><strong>N° de cuenta: </strong><?php echo $banco["numero_cta"];?></h6>
                     <h6><strong>Nombre: </strong><?php echo $banco["nombres"]."&nbsp;".$banco["apellidos"];?></h6>

@@ -974,7 +974,7 @@ class Controlador_GenerarPDF extends Controlador_Base
                 <body><main>";
     $enddoc = "</main></body></body></html>";
     $mpdf->setHTMLHeader('<header><img src="'.$cabecera.'" width="100%"></header>'); 
-    $mpdf->setHTMLFooter('<footer><img src="'.$piepagina.'" width="100%"></footer>');
+    $mpdf->setHTMLFooter('<footer style="text-align:center; color:#386b97; font-weight:bold">{PAGENO}<img src="'.$piepagina.'" width="100%"></footer>');
     $mpdf->AddPage('', '', '', '', '',
         15, // margin_left
         15, // margin right
