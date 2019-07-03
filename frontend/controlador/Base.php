@@ -56,9 +56,9 @@ abstract class Controlador_Base{
   
   public function verificaCompra(){  
     if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){      
-      $arrplanes = Modelo_UsuarioxPlan::nroPlanesActivos($_SESSION["mfo_datos"]["usuario"]["id_usuario"],
+      $arrplanes = Modelo_UsuarioxPlan::planesActivos($_SESSION["mfo_datos"]["usuario"]["id_usuario"],
                                                          $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
-      if (count($_SESSION['mfo_datos']['planes']) <> $arrplanes["nro"]){
+      if (count($_SESSION['mfo_datos']['planes']) <> count($arrplanes)){
         $_SESSION['mfo_datos']['planes'] = $arrplanes;
         unset($_SESSION['mfo_datos']['actualizar_planes']);
         return 1;   

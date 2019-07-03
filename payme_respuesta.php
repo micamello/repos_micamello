@@ -56,10 +56,10 @@ try{
     }    
     if (trim($_POST["authorizationResult"]) == "00" && trim($_POST["errorCode"]) == "00"){      
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;       
+      Utils::log("SESSION 1 ".print_r($_SESSION,true));
       if (file_exists($filename)){        
         @unlink($filename);
-      }
-      Utils::log("PASO CERO ".date('Y-m-d H:i:s'));      
+      }      
       Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
     }
     elseif(trim($_POST["authorizationResult"]) == "05" && trim($_POST["errorCode"]) == "2300"){
