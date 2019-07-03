@@ -1,11 +1,4 @@
 <?php
-/*
- * http.php
- *
- * @(#) $Header: /opt2/ena/metal/http/http.php,v 1.94 2016/05/03 02:07:04 mlemos Exp $
- *
- */
-
 define('HTTP_CLIENT_ERROR_UNSPECIFIED_ERROR',       -1);
 define('HTTP_CLIENT_ERROR_NO_ERROR',                 0);
 define('HTTP_CLIENT_ERROR_INVALID_SERVER_ADDRESS',   1);
@@ -27,7 +20,7 @@ class http_class
 
 	var $protocol="http";
 	var $request_method="GET";
-	var $user_agent='httpclient (http://www.phpclasses.org/httpclient $Revision: 1.94 $)';
+	var $user_agent='CodexWorld (http://www.codexworld.com $Revision: 1.91 $)';
 	var $accept='';
 	var $authentication_mechanism="";
 	var $user;
@@ -74,8 +67,6 @@ class http_class
 	var $keep_alive = 1;
 	var $sasl_authenticate = 1;
 
-	/* private variables - DO NOT ACCESS */
-
 	var $state="Disconnected";
 	var $use_curl=0;
 	var $connection=0;
@@ -108,8 +99,6 @@ class http_class
 	var $connected_host = '';
 	var $connected_port = -1;
 	var $connected_ssl = 0;
-
-	/* Private methods - DO NOT CALL */
 
 	Function Tokenize($string,$separator="")
 	{
@@ -177,12 +166,7 @@ class http_class
 	Function OutputDebug($message)
 	{
 		if($this->log_debug)
-		{
-			if(strlen($this->log_file_name))
-				error_log($message."\n", 3, $this->log_file_name);
-			else
-				error_log($message);
-		}
+			error_log($message);
 		else
 		{
 			$message.="\n";
@@ -645,8 +629,6 @@ class http_class
 			$this->socks_host_port=$arguments["SOCKSHostPort"];
 		if(IsSet($arguments["SOCKSVersion"]))
 			$this->socks_version=$arguments["SOCKSVersion"];
-		if(IsSet($arguments["PreferCurl"]))
-			$this->prefer_curl=$arguments["PreferCurl"];
 		if(IsSet($arguments["Protocol"]))
 			$this->protocol=$arguments["Protocol"];
 		switch(strtolower($this->protocol))
@@ -1016,9 +998,7 @@ class http_class
 
 	Function ConnectFromProxy($arguments, &$headers)
 	{
-		$host = $this->host_name.':'.($this->host_port ? $this->host_port : 443);
-		$this->OutputDebug('Connecting from proxy to host '.$host);
-		if(!$this->PutLine('CONNECT '.$host.' HTTP/1.0')
+		if(!$this->PutLine('CONNECT '.$this->host_name.':'.($this->host_port ? $this->host_port : 443).' HTTP/1.0')
 		|| (strlen($this->user_agent)
 		&& !$this->PutLine('User-Agent: '.$this->user_agent))
 		|| (strlen($this->accept)
@@ -1043,15 +1023,12 @@ class http_class
 		switch($this->response_status)
 		{
 			case "200":
-				$this->OutputDebug('Establishing the cryptography layer with host '.$host);
-				if(!stream_socket_enable_crypto($this->connection, 1, STREAM_CRYPTO_METHOD_SSLv23_CLIENT))
+				if(!@stream_socket_enable_crypto($this->connection, 1, STREAM_CRYPTO_METHOD_SSLv23_CLIENT))
 				{
-					$this->OutputDebug('Failed establishing the cryptography layer with host '.$host);
 					$this->SetPHPError('it was not possible to start a SSL encrypted connection via this proxy', $php_errormsg, HTTP_CLIENT_ERROR_COMMUNICATION_FAILURE);
 					$this->Disconnect();
 					return($this->error);
 				}
-				$this->OutputDebug('Succeeded establishing the cryptography layer with host '.$host);
 				$this->state = "Connected";
 				break;
 			case "407":
@@ -1558,11 +1535,6 @@ class http_class
 					return($this->SetError("it was received an unexpected HTTP response status", HTTP_CLIENT_ERROR_PROTOCOL_FAILURE));
 				$this->response_status=$matches[1];
 				$this->response_message=$matches[2];
-				if($this->response_status == 204)
-				{
-					$this->content_length = 0;
-					$this->content_length_set = 1;
-				}
 			}
 			if($line=="")
 			{

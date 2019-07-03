@@ -160,7 +160,7 @@
                             </div>
 
                             <div class="col-md-6 form-group">
-                                <label class="campo">Convencional <span class="no"></span></label>
+                                <label class="campo">T&eacute;lefono Convencional <span class="no"></span></label>
                                 <div class="errorContainer"></div>
                                 <input type="text" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Convencional (opcional)" id="tel2ConEmp" name="tel2ConEmp" <?php echo $readonly; ?>/>
                             </div>

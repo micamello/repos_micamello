@@ -786,7 +786,7 @@ function validarFormulario(tipovalidacion){
             if (tipovalidacion == true){
               if(document.getElementById('dni').value.length >= 10){
                 if(searchAjax($('#dni'),tipo_doc) == false){
-                  if(DniRuc_Validador($('#dni'),tipo_doc) == true){
+                  if(DniRuc_Validador($('#dni'),tipo_doc, 1) == true){
                     quitarError("err_dni","seccion_dni");
                   }else{
                     colocaError("err_dni", "seccion_dni","Documento no válido","boton");

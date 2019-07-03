@@ -21,5 +21,5 @@ function verificarCompraPlan(){
 }
 
 $(document).ready(function(){
-    setInterval(verificarCompraPlan, 1000);
+    setInterval(verificarCompraPlan, 500);
 });
