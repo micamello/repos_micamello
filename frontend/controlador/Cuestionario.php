@@ -145,6 +145,7 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags["template_js"][] = "modos_respuesta";
         $tags["template_js"][] = "toastr.min";        
         $tags["nomobile"] = 1;
+        $tags["pagadoEstado"] = Modelo_PorcentajexFaceta::obtienePermisoDescargar($id_usuario);
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);
       break;
       
