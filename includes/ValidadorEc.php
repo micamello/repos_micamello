@@ -1,7 +1,8 @@
 <?php
 class ValidadorEc
 {
-    public static function DniRuc_Validador($numero){
+// accion 1.- validacion 2.- compra
+    public static function DniRuc_Validador($numero, $accion){
         
         if(!empty($numero)){
             if(strlen($numero) == 10){
@@ -9,7 +10,7 @@ class ValidadorEc
             }
 
             if(strlen($numero) == 13){
-                if(self::validarRucPersonaNatural($numero) ||self::validarRucPersonaJuridica($numero) ||self::validarRucInstitucionPublica($numero)){
+                if(self::validarRucPersonaNatural($numero,$accion) ||self::validarRucPersonaJuridica($numero) ||self::validarRucInstitucionPublica($numero)){
                     return true;
                 }
                 else{
@@ -51,25 +52,24 @@ class ValidadorEc
                 for ($i=0; $i < count($consecutivo); $i++) { 
                     $resultado += $consecutivo[$i];
                 }
+            $digitoVer = $resultado%10;
+            if($digitoVer == 0){
+                    $digitoVerComparar = $digitoVer;
+            }
+            else{
+                $digitoVerComparar = 10 - $digitoVer;
+            }
+            if($digitoVerComparar == $digitos[9]){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        $digitoVer = $resultado%10;
-        if($digitoVer == 0){
-                $digitoVerComparar = $digitoVer;
-        }
-        else{
-            $digitoVerComparar = 10 - $digitoVer;
-        }
-        // print_r("<br>. ".$digitoVerComparar ."==". $digitos[9]);
-        if($digitoVerComparar == $digitos[9]){
-            // print_r("eder");
-            return true;
-        }
-        else{
-            return false;
-        }
+        
     }
 
-    public static function validarRucPersonaNatural($numero){
+    public static function validarRucPersonaNatural($numero, $accion){
         $digitos = array();
         $consecutivo = array();
         $provincia = substr($numero, 0, 2);
@@ -100,20 +100,22 @@ class ValidadorEc
                 for ($i=0; $i < count($consecutivo); $i++) { 
                     $resultado += $consecutivo[$i];
                 }
+
+                $digitoVer = $resultado%10;
+                if($digitoVer == 0){
+                        $digitoVerComparar = $digitoVer;
+                }
+                else{
+                    $digitoVerComparar = 10 - $digitoVer;
+                }
+                if($digitoVerComparar == $digitos[9] && substr($numero, 10, 3) == "001"){
+                    if($accion == 2){return true;}else{return false;}
+                }
+                else{
+                    return false;
+                }
         }
-        $digitoVer = $resultado%10;
-        if($digitoVer == 0){
-                $digitoVerComparar = $digitoVer;
-        }
-        else{
-            $digitoVerComparar = 10 - $digitoVer;
-        }
-        if($digitoVerComparar == $digitos[9] && substr($numero, 10, 3) == "001"){
-            return true;
-        }
-        else{
-            return false;
-        }
+        
     }
 
     public static function validarRucPersonaJuridica($numero){

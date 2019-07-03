@@ -4,7 +4,7 @@
 		<div class="text-center">
 			<br>
 			<div class="con_encabezado">
-				<span class="encabezado">Ordene de 1 a 5 las oraciones en cada pregunta. En donde 1 es la oración con la que más se identifica y 5 con la que menos se identifica. El Test CANEA consta de 20 preguntas.</span><br>
+				<span class="encabezado">CANEA es un informe psicológico de competencias laborales que consta de tres tests con 20 apartados. Ordene de 1 a 5 las oraciones en cada pregunta. En donde 1 es la oración con la que más se identifica y 5 con la que menos se identifica.</span><br>
 				<div align="center">
 					<h3 class="metodoTexto"><b>Método seleccionado: </b>Doble Click
 						<img style="width: 3%;" src="<?php echo PUERTO."://".HOST."/imagenes/metodoSel/1.png";?>">

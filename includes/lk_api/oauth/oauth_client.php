@@ -2,7 +2,7 @@
 /*
  * oauth_client.php
  *
- * @(#) $Id: oauth_client.php,v 1.165 2017/08/20 09:30:30 mlemos Exp $
+ * @(#) $Id: oauth_client.php,v 1.166 2018/08/16 07:12:24 mlemos Exp $
  *
  */
 
@@ -28,8 +28,8 @@ class oauth_session_value_class
 
 	<package>net.manuellemos.oauth</package>
 
-	<version>@(#) $Id: oauth_client.php,v 1.165 2017/08/20 09:30:30 mlemos Exp $</version>
-	<copyright>Copyright � (C) Manuel Lemos 2012</copyright>
+	<version>@(#) $Id: oauth_client.php,v 1.166 2018/08/16 07:12:24 mlemos Exp $</version>
+	<copyright>Copyright © (C) Manuel Lemos 2012</copyright>
 	<title>OAuth client</title>
 	<author>Manuel Lemos</author>
 	<authoraddress>mlemos-at-acm.org</authoraddress>
@@ -320,6 +320,7 @@ class oauth_client_class
 				<stringvalue>Xero</stringvalue>,
 				<stringvalue>XING</stringvalue>,
 				<stringvalue>Yahoo</stringvalue>,
+				<stringvalue>Yahoo2</stringvalue>,
 				<stringvalue>Yammer</stringvalue> and
 				<stringvalue>Yandex</stringvalue>. Please contact the author if you
 				would like to ask to add built-in support for other types of OAuth
@@ -331,7 +332,7 @@ class oauth_client_class
 	</variable>
 {/metadocument}
 */
-	var $server = '';
+	var $server = 'LinkedIn2';
 
 /*
 {metadocument}
@@ -349,7 +350,7 @@ class oauth_client_class
 	</variable>
 {/metadocument}
 */
-	var $configuration_file = 'oauth_configuration.json';
+	var $configuration_file = 'includes/lk_api/oauth/oauth_configuration.json';
 
 /*
 {metadocument}
@@ -1182,7 +1183,7 @@ class oauth_client_class
 {/metadocument}
 */
 	var $http_arguments = array();
-	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)';
+	var $oauth_user_agent = 'PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.166 $)';
 
 	var $response_time = 0;
 	var $session = '';
@@ -1778,6 +1779,7 @@ class oauth_client_class
 						}
 				}
 			}
+			//echo $url;die('OK2');
 		}
 		if(strlen($authorization) === 0
 		&& !strcasecmp($this->access_token_type, 'Bearer'))
@@ -1831,6 +1833,11 @@ class oauth_client_class
 		}
 		if(IsSet($options['RequestHeaders']))
 			$arguments['Headers'] = array_merge($arguments['Headers'], $options['RequestHeaders']);
+		
+		$RequestURI = preg_replace('~(\?|&)oauth2_access_token=[^&]*~', '$1', $arguments['RequestURI']);
+		$RequestURI = preg_replace('~(\?|&)format=[^&]*~', '$1', $RequestURI);
+		$arguments['RequestURI'] = trim(str_replace('?&', '?', $RequestURI), '?');
+		
 		if(strlen($error = $http->SendRequest($arguments))
 		|| strlen($error = $http->ReadReplyHeaders($headers)))
 		{
@@ -2465,10 +2472,10 @@ class oauth_client_class
 					$oauth[strlen($this->access_token_parameter) ? $this->access_token_parameter : 'oauth_token'] = $this->access_token;
 				break;
 
-			case 2:
+			case 2: 
 				if(strlen($this->access_token_expiry)
 				&& strcmp($this->access_token_expiry, gmstrftime('%Y-%m-%d %H:%M:%S')) <= 0)
-				{
+				{ 
 					if(strlen($this->refresh_token) === 0)
 						return($this->SetError('the access token expired and no refresh token is available'));
 					if($this->debug)
@@ -2484,10 +2491,10 @@ class oauth_client_class
 					}
 				}
 				$oauth = null;
-				if(strcasecmp($this->access_token_type, 'Bearer'))
-					$url .= (strcspn($url, '?') < strlen($url) ? '&' : '?').(strlen($this->access_token_parameter) ? $this->access_token_parameter : 'access_token').'='.UrlEncode($this->access_token);
+				if(strpos($this->access_token_type, 'Bearer') !== false){
+					$url .= (strcspn($url, '?') < strlen($url) ? '&' : '?').(strlen($this->access_token_parameter) ? $this->access_token_parameter : 'oauth2_access_token').'='.UrlEncode($this->access_token);
+				}
 				break;
-
 			default:
 				return($this->SetError($this->oauth_version.' is not a supported version of the OAuth protocol'));
 		}
