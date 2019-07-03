@@ -74,9 +74,15 @@ define('METODO_SELECCION', array('1'=>array(
 
 define('AREASPERMITIDAS', '3');
 define('VALORES_ORDENAMIENTO', array('100','1000'));
+
 //FACTURACION ELECTRONICA
+//PRUEBAS
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
+
+//PRODUCCION
+//define('WS_SRI_RECEPCION','https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
+//define('WS_SRI_AUTORIZACION','https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
 
 //PAYME
 
@@ -89,7 +95,7 @@ define('PAYME_RUTA','https://integracion.alignetsac.com/');
 //PRODUCCION
 //define('PAYME_ACQUIRERID','39');
 //define('PAYME_IDCOMMERCE','11562');
-//define('PAYME_SECRET_KEY','ZttmezQdRsvnuZY$58989677');
+//define('PAYME_SECRET_KEY','ggkGwgUsgLUhQTTTZC?89837522396');
 //define('PAYME_RUTA','https://vpayment.verifika.com/');
 
 define('PAYME_CURRENCY_CODE','840');

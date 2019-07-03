@@ -178,8 +178,8 @@ class Controlador_GenerarPDF extends Controlador_Base
           }
         }*/
         
-        //if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
-          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')/* || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial')*/)){                    
+        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
+          /*if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso'))){                    
             $puedeDescargar = true;
           }else if(!isset($_SESSION['mfo_datos']['planes'])){
             $puedeDescargar = true;
@@ -187,8 +187,9 @@ class Controlador_GenerarPDF extends Controlador_Base
             $puedeDescargar = false;
             $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago. Su informe parcial lo puede descargar en su perfil';
             //$ruta = PUERTO . '://' . HOST . '/perfil/';
-          }          
-        //}
+          }  */  
+          $puedeDescargar = true;      
+        }
         
         if(/*$idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] &&*/ $puedeDescargar == true){                  
           
