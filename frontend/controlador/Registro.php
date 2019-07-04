@@ -109,7 +109,7 @@ class Controlador_Registro extends Controlador_Base {
     if($datosReg['tipo_documentacion'] == 1 || $datosReg['tipo_documentacion'] == 2){
       if (method_exists(new Utils, 'validar_'.$iso)){
         $function = 'validar_'.$iso;
-        if(!Utils::$function($datosReg['documentoCandEmp'], 1)){
+        if(!Utils::$function($datosReg['documentoCandEmp'], 1 , $datosReg['tipo_documentacion'])){
           throw new Exception("El documento ingresado no es v\u00E1lido");
         }
       }

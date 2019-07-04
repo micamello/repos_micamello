@@ -432,10 +432,10 @@ public static function validarCelularConvencional($contenido){
     return $randomString;
   }
 
-  public static function validar_EC($dni, $accion){
+  public static function validar_EC($dni, $accion, $tipoDoc){
     if (empty($dni)) {return false;}
     $val = false;
-    if(ValidadorEc::DniRuc_Validador($dni ,$accion)) {
+    if(ValidadorEc::DniRuc_Validador($dni ,$accion , $tipoDoc)) {
       $val = true;
     }
       return $val;

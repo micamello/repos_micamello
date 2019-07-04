@@ -376,7 +376,7 @@ class Controlador_Perfil extends Controlador_Base
                     $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 1)){
+                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
                           throw new Exception("C\u00E9dula o pasaporte no válido.");
                         }
                       }           
@@ -403,7 +403,7 @@ class Controlador_Perfil extends Controlador_Base
                 $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 1)){
+                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
                           throw new Exception("El RUC ingresado no es v\u00E1lido.");
                         }
                       }           
