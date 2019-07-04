@@ -441,7 +441,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 										<?php if($vista == 'postulacion'){ ?>
 											<div class="col-md-4 col-sm-3 col-xs-6">
-												<p class="texto-postulaciones">Modo que aplic&oacute;:<b><?php echo POSTULACIONES[$o['tipo']]; ?></b><br>
+												<p class="texto-postulaciones">Modo que aplic&oacute;:&nbsp;<b><?php echo POSTULACIONES[$o['tipo']]; ?></b><br>
 													Fecha de la oferta: <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?><br>
 													Jornada: <?php echo $o['jornada']; ?></p>
 											</div>

@@ -2,14 +2,14 @@
 class Modelo_Area{
   // se usa
   public static function obtieneListado(){
-    $sql = "SELECT * FROM mfo_area";
+    $sql = "SELECT * FROM mfo_area ORDER BY nombre";
     return $GLOBALS['db']->auto_array($sql,array(),true);
   }
   // se usa
   
 	public static function obtieneListadoAsociativo(){
 
-		$sql = "SELECT * FROM mfo_area";
+		$sql = "SELECT * FROM mfo_area ORDER BY nombre";
     	$arrdatos = $GLOBALS['db']->auto_array($sql,array(),true);
 
 		$datos = array();
