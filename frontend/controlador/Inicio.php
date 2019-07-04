@@ -2,12 +2,6 @@
 class Controlador_Inicio extends Controlador_Base {
   
   public function construirPagina(){
-    // print_r(Utils::validar_EC('12345879', 1));
-    // exit();
-    // $email_body = Modelo_TemplateEmail::obtieneHTML("POSTULACION_AUTOMATICA");
-    // Utils::envioCorreo("edervpozo@gmail.com","Postulaciones Automáticas",$email_body);
-    // print_r();
-    // exit();
     setcookie('preRegistro', null, -1, '/');    
     $arrarea = Modelo_Area::obtieneListado();  
     $divisible = round(count($arrarea)/12);

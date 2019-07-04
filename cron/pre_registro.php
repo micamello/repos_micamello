@@ -40,6 +40,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 	  		print_r("<br>-----USUARIO (".$i."): ".$datosPreregistro['nombres']."-----<br>");
 		  	$longitudDoc = strlen($datosPreregistro['dni']);
 		  	// echo $datosPreregistro['dni'];
+
 		  	if($longitudDoc == 10 && $datosPreregistro['tipo_usuario'] == 1){
 		  		// echo $datosPreregistro['dni']."<br>";
 		  		// print_r(Utils::validar_EC($datosPreregistro['dni'] , 1));
@@ -48,7 +49,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 			        $function = 'validar_'.SUCURSAL_ISO;
 			        if(!Utils::$function($datosPreregistro['dni'], 1)){
 			        	$conterror++;
-	    				throw new Exception("CEDULA INVALIDA ".$datosPreregistro["dni"]);
+	    				throw new Exception("CEDULA INVALIDA ".$datosPreregistro["dni"]."---------------");
 			        }
 			    }
 			    $tipodoc = 2;
@@ -65,16 +66,19 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 					    $email_body = str_replace("%ENLACE2%", "info@micamello.com.ec", $email_body);
 			        	// Utils::envioCorreo("administrador.gye@gmail.com","Ruc rechazado",$email_body);
 	    				throw new Exception("RUC INVALIDO ".$datosPreregistro["dni"]);
+
 			        }
 			    }
 			    $tipodoc = 1;
 		  	}
+
 		  	elseif($datosPreregistro['tipo_usuario'] == 1){
 		  			$tipodoc = 3;
 		  	}
 		  	elseif($longitudDoc <= 6 && $datosPreregistro['tipo_usuario'] == 1){
+
 		  		$conterror++;
-		  		throw new Exception("PASAPORTE INVALIDO ".$datosPreregistro["dni"]);
+		  		throw new Exception("PASAPORTE INVALIDO ".$datosPreregistro["dni"]."---------------");
 		  	}
 		  	else{
 		  		throw new Exception("<br>Documento ingresado no válido: -".$datosPreregistro["dni"]."-".$datosPreregistro["correo"]."- ".$datosPreregistro["nombres"]);
@@ -84,17 +88,17 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 
 			if(!Utils::es_correo_valido($datosPreregistro['correo'])){
 				$conterror++;
-				throw new Exception("EL CORREO NO ES VÁLIDO ".$datosPreregistro["correo"]);
+				throw new Exception("EL CORREO NO ES VÁLIDO ".$datosPreregistro["correo"]."---------------");
 			}
 			
 			if (Modelo_Usuario::existeDni($datosPreregistro["dni"]) != false){
 	    		$conterror++;
-	    		throw new Exception("DNI YA EXISTE ".$datosPreregistro["dni"]);	      	    		    		
+	    		throw new Exception("DNI YA EXISTE ".$datosPreregistro["dni"]."---------------");	      	    		    		
 		    }
 
 		    if (Modelo_Usuario::existeCorreo($datosPreregistro["correo"]) != false){
 		    	$conterror++;
-		      	throw new Exception("CORREO YA EXISTE ".$datosPreregistro["correo"]);
+		      	throw new Exception("CORREO YA EXISTE ".$datosPreregistro["correo"]."---------------");
 		    } 
 		    
 		   	$nombre = Utils::no_carac(explode(" ", trim(utf8_decode($datosPreregistro['nombres'])))); 
@@ -125,7 +129,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		    						"tipo_registro"=>$datosPreregistro['tipo_registro']);
 		    // se ingresa en la tabla mfo_usuario_login el registro
 		    if(!Modelo_UsuarioLogin::crearUsuarioLogin($usuarioLogin)){
-		    	throw new Exception("Error al crear el usuario_login");
+		    	throw new Exception("Error al crear el usuario_login"."---------------");
 		    }
 		    $fechaActual = date("Y-m-d H:i:s");
 		    $idUsuarioLogin = $GLOBALS['db']->insert_id();
@@ -199,11 +203,11 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 			   								"tel2ConEmp"=>'');
 
 			  	if(!Modelo_ContactoEmpresa::crearContactoEmpresa($contactoEmpresa, $idInsercion)){
-		          throw new Exception("Error al ingresar el contacto de la empresa");
+		          throw new Exception("Error al ingresar el contacto de la empresa"."---------------");
 		        }
 		    }
 		    if (!Modelo_PreRegistro::borrarPreregistro($datosPreregistro['id'])){
-		   		throw new Exception("Error al borrar el preregistro");
+		   		throw new Exception("Error al borrar el preregistro"."---------------");
 		    }
 		    echo $datosPreregistro['dni']." - si válido: ".$datosPreregistro['nombres'];
 		    $GLOBALS['db']->commit();
@@ -211,7 +215,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 
 		    $token = Utils::generarToken($idInsercion,"ACTIVACION");
 		      if (empty($token)){
-		        throw new Exception("Error en el sistema, por favor intente de nuevo");
+		        throw new Exception("Error en el sistema, por favor intente de nuevo"."---------------");
 		      }
 		    $token .= "||".$idInsercion."||".$datosPreregistro['tipo_usuario']."||".date("Y-m-d H:i:s");
 		    $token = Utils::encriptar($token);
@@ -227,16 +231,20 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		   	$email_body = str_replace("%CORREO%", $datosPreregistro["correo"], $email_body);   
 		   	$email_body = str_replace("%PASSWORD%", $password, $email_body);   
 		   	$email_body = str_replace("%ENLACE%", $enlace, $email_body);   
+
 		   	// Utils::envioCorreo("desarrollo@micamello.com.ec","Activación de Usuario",$email_body);         
+
 		   	echo utf8_encode($datosPreregistro['nombres'])." ".utf8_encode($datosPreregistro['apellidos'])."/".$username."<br>";
     	}
 	    catch(Exception $e){
 	  	  $GLOBALS['db']->rollback();
 
 	  	  echo $datosPreregistro['id']."Error en usuario ".$datosPreregistro['nombres']." ".$datosPreregistro['nombres']." - ".$e->getMessage()."<br>";  	  
+
 			  // Utils::envioCorreo('administrador.gye@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
 	    }
 	    $i++;         
+
 	}
 	print_r("FECHA DE FIN: ". date('Y-m-d h:i:s'));
 	echo "TOTAL REGISTROS INVALIDOS ".$conterror;

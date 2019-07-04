@@ -81,7 +81,11 @@ class Controlador_Perfil extends Controlador_Base
                     $btnSubir  = 0;
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
-                    $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    //$nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);                    
+                    if(!isset($data['error'])){
+                      $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+                      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+                    }
                 }
 
                 if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && 
@@ -218,7 +222,7 @@ class Controlador_Perfil extends Controlador_Base
             } else {
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0,'pagina_web'=>0,'nro_trabajadores'=>1,'sectorind'=>1,'cargo'=>1);
             }
-
+            
             $data = $this->camposRequeridos($campos);
 
             $array_data_area = array();
@@ -494,10 +498,11 @@ class Controlador_Perfil extends Controlador_Base
             $GLOBALS['db']->commit();
             $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario);            
             Controlador_Login::registroSesion($sess_usuario);            
-            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
             
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
+            $data["error"] = 1;
             $GLOBALS['db']->rollback();
         }
         return $data;
@@ -545,7 +550,7 @@ class Controlador_Perfil extends Controlador_Base
             $informe = $cantd_facetas;
         }else if(!isset($_SESSION['mfo_datos']['planes']) && $cantd_facetas == 2){
             $informe = $cantd_facetas;
-        }
+        }        
         return $informe;
     }
 }

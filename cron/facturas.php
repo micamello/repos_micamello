@@ -87,7 +87,7 @@ if (count($facturas) > 0){
       $fecha_auto = $obj_facturacion->sendAutorizacion($rsfact["claveacceso"]);
       if (empty($fecha_auto)){
         throw new Exception("2 WS del SRI");  
-      }
+      }          
 
       //$GLOBALS['db']->commit(); 
 

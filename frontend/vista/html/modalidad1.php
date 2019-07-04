@@ -22,7 +22,6 @@
 					<input type="hidden" name="faceta" id="faceta" value="<?php echo $faceta; ?>">
 					 <?php 
 						$array_group = array();
-
 						foreach ($data as $key => $value) {
 						 $array_group[$value['id_pregunta']][$key] = $value;
 						}
@@ -51,12 +50,10 @@
 							$pregunta = "";
 							$pregunta = current($value);
 							$actual = $value;
-
 							echo "<div class='panel panel-default'>";
 							echo "<div class='error_msg'></div>";
 							echo "<div class='panel-heading'><h4>Pregunta ".$indice."</h4></div>";
 							echo "<div class='panel-body'>";
-
 							echo "<div class='contenedor_p'>";
 							echo "<div class='row'>";
 							$columna = "";
@@ -77,11 +74,9 @@
 								echo "<span class='order_priority'>".($l)."</span>";
 								echo "<div class='text_destino'><input type='hidden' name='orden[]' value='".($l++)."'></div><br><br>";
 							}
-
 							echo "</div>";
 							echo "</div>";
 							echo "</div>";
-
 							echo "</div>";
 							echo "</div>";
 							echo "<br><br>";
@@ -105,7 +100,11 @@
     <div class="modal-content">
       <div class="text-center">
       	<?php 
+<<<<<<< HEAD
          	if($pagadoEstado == false || $pagadoEstado <= 2){?><h1 class="qs-subt-1">RECOMENDACIONES</h1><?php
+=======
+         	if($pagadoEstado == false || $pagadoEstado < 2){?><h1 class="qs-subt-1">RECOMENDACIONES</h1><?php
+>>>>>>> FF
          	}else{?><h1 class="qs-subt-1">¡Noticias Fant&aacute;sticas!</h1><?php
 	 		}
        	?>
@@ -115,7 +114,11 @@
         <div class="row">
           <div class="col-md-12" style="text-align: justify;">  
           	<?php 
+<<<<<<< HEAD
           		if($pagadoEstado == false || $pagadoEstado <= 2){
+=======
+          		if($pagadoEstado == false || $pagadoEstado < 2){
+>>>>>>> FF
           			?>
           				<span class="contenido-modal-rec">Para obtener mayor efectividad en la búsqueda de empleo, le invitamos a completar el siguiente <b>TEST DE COMPETENCIAS</b>. ¡Recuerde! los test no son una pérdida de tiempo, mucho menos si el reclutador tiene claro cómo utilizar esta herramienta.</span><br><br>
 			            <ul>
