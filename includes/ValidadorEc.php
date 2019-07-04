@@ -8,7 +8,7 @@ class ValidadorEc
             if(strlen($numero) == 10){
                 return self::validarCedulaEcuador($numero);
             }
-
+            else
             if(strlen($numero) == 13){
                 if(self::validarRucPersonaNatural($numero,$accion) ||self::validarRucPersonaJuridica($numero) ||self::validarRucInstitucionPublica($numero)){
                     return true;
@@ -16,6 +16,10 @@ class ValidadorEc
                 else{
                     return false;
                 }
+            }
+            else{
+                // echo "entro aqui";
+                return true;
             }
         }
     }
