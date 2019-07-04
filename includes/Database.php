@@ -124,6 +124,8 @@ class Database{
       if($value === 'null'){
         //$query .= $col . '=' . $value;
         $query .= $col . '= NULL';
+      }else if(substr_count($value, '"') > 0){ 
+        $query .= $col . "='" . utf8_decode($value) . "'";
       }else{
         $query .= $col . '="' . utf8_decode($value) . '"';
       }

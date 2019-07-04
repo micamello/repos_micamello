@@ -755,9 +755,9 @@ class Controlador_GenerarPDF extends Controlador_Base
           $cantd_a++; 
         }
 
-        $span = '<span class="mayor '.$color.'">'.$facetas[$id_faceta]['literal'].'</span>';
+        $span = '<span class="mayor">'.$facetas[$id_faceta]['literal'].'</span>';
         $ths .= '<th style="width: 150px" class="'.$color1.'">'.$datos_facetas['literal'].'</th>';
-        $thss .= '<td style="text-align:center;">'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1)).'</td>';
+        $thss .= '<td class="'.$color.'" style="text-align:center;">'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1)).'</td>';
       }
       //$pos_no_disponible = 1;
     

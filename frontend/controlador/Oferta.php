@@ -245,6 +245,7 @@ class Controlador_Oferta extends Controlador_Base{
 
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
+              Utils::doRedirect(PUERTO.'://'.HOST.'/cuentas/');
             }
 
             if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){
@@ -543,9 +544,8 @@ class Controlador_Oferta extends Controlador_Base{
 
             if(isset($_POST['filtro'])){
               $_SESSION['mfo_datos']['filtro'] = $_POST['filtro'];
-            }/*else{
-              $_SESSION['mfo_datos']['filtro'] = FILTRO_PREFERENCIAS_DEFAULT;
-            } */                       
+              Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
+            }                     
 
             if(isset($_SESSION['mfo_datos']['filtro']) && $_SESSION['mfo_datos']['filtro'] == 0){
               $filtro = 1;

@@ -26,7 +26,8 @@ if (count($facturas) > 0){
   foreach($facturas as $factura){
     try{  
       //$GLOBALS['db']->beginTrans();
-      $fecha_factura = substr($factura["fecha_creacion"], 0, 10);            
+      $fecha_factura = substr($factura["fecha_creacion"], 0, 10);   
+
       if ($fecha_actual != $fecha_factura){       
         $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
         if (empty($datos_comprobante)){
@@ -62,7 +63,7 @@ if (count($facturas) > 0){
         }
         
         $datosact = array("clave_acceso" => $rsfact["claveacceso"], 
-                          "xml" => $rsfact["xml"], "estado" => $factura->estado, 
+                          "xml" => $rsfact["xml"], "estado" => $factura['estado'], 
                           "msg_error" => "", "fecha_estado" => "null");
         
         if (!Modelo_Factura::actualizar($factura["clave_acceso"],$datosact)){
@@ -80,6 +81,7 @@ if (count($facturas) > 0){
       }                     
 
       $attachments = array();      
+      print_r($rsfact);
       if (!$obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
         throw new Exception("1 WS del SRI");  
       }  
@@ -121,7 +123,7 @@ if (count($facturas) > 0){
       //$GLOBALS['db']->rollback();
       echo "NO PROCESADO REGISTRO ".$factura["id_factura"]."<br>";     
       $msgerror = $e->getMessage()." factura:".$factura["id_factura"];
-      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron facturas',$msgerror);     
+      //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron facturas',$msgerror);     
     }
   }
 } 

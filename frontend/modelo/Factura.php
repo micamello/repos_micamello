@@ -38,6 +38,8 @@ class Modelo_Factura{
       $valupdate["msg_error"] = $valores["msg_error"];
       $valupdate["fecha_estado"] = $valores["fecha_estado"];
     }
+    $valupdate["xml"] = $valores["xml"];
+    $valupdate["claveacceso"] = $valores["claveacceso"];
     return $GLOBALS['db']->update("mfo_factura",$valupdate,"clave_acceso='".$claveAcceso."'");
   }
 

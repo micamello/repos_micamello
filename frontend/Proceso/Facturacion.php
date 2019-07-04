@@ -77,7 +77,7 @@ class Proceso_Facturacion{
     $clave = date('dmY').
              self::TIPO_DOCUMENTO["FACTURA"].
              self::RUC.
-             self::AMBIENTE["PRUEBAS"].
+             self::AMBIENTE["PRODUCCION"].
              $seriefactura.
              $this->secuencial.
              $this->numerico.
@@ -168,7 +168,7 @@ class Proceso_Facturacion{
   }
 
   function valoresInfoTributaria(){
-    $infoTributaria = array("ambiente" => self::AMBIENTE["PRUEBAS"], 
+    $infoTributaria = array("ambiente" => self::AMBIENTE["PRODUCCION"], 
                             "tipoEmision" => self::TIPO_EMISION,
                             "razonSocial" => self::RAZON_SOCIAL,                             
                             "nombreComercial" => self::NOMBRE_COMERCIAL,

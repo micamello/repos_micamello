@@ -81,7 +81,12 @@ class Controlador_Perfil extends Controlador_Base
                     $btnSubir  = 0;
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
-                    $nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    //$nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    if(!isset($data['error'])){
+                        Utils::log('entro en editado');
+                        $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+                        Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+                    }
                 }
 
                 if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && 
@@ -199,6 +204,7 @@ class Controlador_Perfil extends Controlador_Base
 
     //Función para hacer el validado de todos los campos del módulo de perfil y si no hay ningun problema proceder al guardado, sino hace un rollback
     public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario){
+
         try {
 
             $listAreas = Modelo_Area::obtieneListadoAsociativo();
@@ -486,12 +492,14 @@ class Controlador_Perfil extends Controlador_Base
             $GLOBALS['db']->commit();
             $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario);            
             Controlador_Login::registroSesion($sess_usuario);            
-            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
             
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $GLOBALS['db']->rollback();
+            $data['error'] = 1;
         }
+        Utils::log('data:'. print_r($data,true));
         return $data;
     }
 
@@ -535,7 +543,7 @@ class Controlador_Perfil extends Controlador_Base
         $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
         if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $cantd_facetas >= 2){
             $informe = $cantd_facetas;
-        }else if(!isset($_SESSION['mfo_datos']['planes']) && $cantd_facetas == 2){
+        }else if(!isset($_SESSION['mfo_datos']['planes']) || $cantd_facetas == 2){
             $informe = $cantd_facetas;
         }
         return $informe;

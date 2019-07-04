@@ -137,7 +137,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				      <div class="row">
 				        <div class="col-md-10" id="drop-tit" >
 				          <span>
-				            <i class="fa fa-address-book"></i> Informe de personalidad (prioridad)
+				            <i class="fa fa-address-book"></i> Informe de competencias laborales (prioridad)
 				          </span>
 				        </div>
 				        <div class="col-md-2" >
@@ -894,7 +894,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 												<?php if($empresa_hija){ 
 
 													$imagen = '';
-													echo '<td title="Descargar Informe de personalidad ';
+													echo '<td title="Descargar Informe de competencias laborales ';
 	
 								            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
                                       
@@ -941,7 +941,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 																if(!$ver){
 																	echo '-';
 																}else{
-																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de personalidad\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+																	echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar informes de competencias laborales\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
 																}
 															}else{
 																echo $mostrar;
@@ -1133,7 +1133,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 		            <div class="col-md-8">
 		              <p class="subt" style="font-size: 25pt"><b>Beneficios </b></p>
 		              <ul>
-		                <li class="qs-text-lista"><p style="color: #797979;">Puede escoger el (los) candidato (s) para finalizar el test de personalidad CANEA</p></li>
+		                <li class="qs-text-lista"><p style="color: #797979;">Puede escoger el (los) candidato (s) para finalizar el test de competencias laborales CANEA</p></li>
 		                <li class="qs-text-lista"><p style="color: #797979;">Puede activar uno o varios accesos, de acuerdo al <b><a href="planes-empresa.html">plan contratado.</a></b> </p></li>
 		              </ul>
 		            </div>

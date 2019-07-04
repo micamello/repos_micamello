@@ -24,7 +24,7 @@ $_SESSION['mostrar_error'] = ""; ?>
         <?php         
         for($i=1;$i<=3;$i++){ ?>
           <?php
-          	if (count($porcentaje_por_usuario) == $nrototalfacetas){ 
+          	if (count($porcentaje_por_usuario) == $nrototalfacetas && $puedeDescargarInforme > 2){ 
           		$clase = "visited";
        		}else if($i <= count($porcentaje_por_usuario) && $i == 1){
        			$clase = "visited";
@@ -82,7 +82,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 				    		<a href="<?php echo PUERTO."://".HOST."/fileGEN/informeUsuarioCandidato/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
 					            <img width="100%" alt="informePersonalidad" src="<?php echo PUERTO."://".HOST."/imagenes/informe.png";?>">
 					            <div class="perfil-cuadro" id="err_img" align="center">
-					              <label style="cursor:pointer" class="text-center" for="">acceder a informe de personalidad <?php if($puedeDescargarInforme >= 2 && $puedeDescargarInforme < 5){ echo 'parcial'; }else{ echo 'completo'; } ?></label>
+					              <label style="cursor:pointer" class="text-center" for="">acceder a informe de competencias laborales <?php if($puedeDescargarInforme >= 2 && $puedeDescargarInforme < 5){ echo 'parcial'; }else{ echo 'completo'; } ?></label>
 					            </div>
 				        	</a>
 				        	<!--<div align="center">
