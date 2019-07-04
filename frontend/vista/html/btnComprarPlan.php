@@ -17,7 +17,7 @@ if ($presentarBtn){
 	    <div class="col-md-8 col-md-8 col-xs-8">
 	      <p style="text-align: right;" class="qs-text">&iquest;Desea adquirir un plan con mayores beneficios&quest;</p>
 	    </div>
-	    <div class="col-md-4 col-sm-4 col-xs-4 btn-naranja"><!--CAMBIO x2-->
+	    <div class="col-md-4 col-sm-4 col-xs-4 btn-naranja pulse animated infinite"><!--CAMBIO x2-->
 	      <a href="<?php echo PUERTO."://".HOST."/planes/";?>" id="btn_compra" class="">Adquierelo YA!</a>
 	    </div>
 	</div>

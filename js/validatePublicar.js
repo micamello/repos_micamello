@@ -892,7 +892,7 @@ var primerEmpleoOf
 
             if(!fechaMayor(fechaCont.val())){
 
-                crearMensajeError(fechaCont, 'Ingrese una fecha válida (mayor a actual)');
+                crearMensajeError(fechaCont, 'Ingrese una fecha válida (mayor a la actual)');
 
                 mensajes += "\n- Campo fecha contratación: Ingrese una fecha mayor a la actual";
 

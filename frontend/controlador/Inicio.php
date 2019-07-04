@@ -2,7 +2,6 @@
 class Controlador_Inicio extends Controlador_Base {
   
   public function construirPagina(){
-
     setcookie('preRegistro', null, -1, '/');    
     $arrarea = Modelo_Area::obtieneListado();  
     $divisible = round(count($arrarea)/12);

@@ -81,7 +81,6 @@ class Controlador_Perfil extends Controlador_Base
                     $btnSubir  = 0;
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
-                    //$nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     if(!isset($data['error'])){
                         Utils::log('entro en editado');
                         $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
@@ -224,7 +223,7 @@ class Controlador_Perfil extends Controlador_Base
             } else {
                 $campos = array('nombres' => 1, 'ciudad' => 1, 'provincia' => 1, 'telefono' => 1, 'id_nacionalidad' => 1, 'nombre_contact'=>1,'apellido_contact'=>1,'tel_one_contact'=>1,'tel_two_contact'=>0,'pagina_web'=>0,'nro_trabajadores'=>1,'sectorind'=>1,'cargo'=>1);
             }
-
+            
             $data = $this->camposRequeridos($campos);
 
             $array_data_area = array();
@@ -382,8 +381,8 @@ class Controlador_Perfil extends Controlador_Base
                     $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 1)){
-                          throw new Exception("No permitido RUC de persona natural.");
+                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                          throw new Exception("C\u00E9dula o pasaporte no válido.");
                         }
                       }           
           
@@ -404,7 +403,15 @@ class Controlador_Perfil extends Controlador_Base
                 }else{
                     throw new Exception("Debe ingresar una universidad");
                 }
-            }else{             
+            }else{
+
+                $iso = SUCURSAL_ISO;
+                    if (method_exists(new Utils, 'validar_'.$iso)){
+                        $function = 'validar_'.$iso;
+                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                          throw new Exception("El RUC ingresado no es v\u00E1lido.");
+                        }
+                      }           
 
                 if(isset($data['pagina_web']) && $data['pagina_web'] != ''){
                     if (!Utils::validaURL($data['pagina_web'])){
@@ -496,6 +503,7 @@ class Controlador_Perfil extends Controlador_Base
             
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
+            $data["error"] = 1;
             $GLOBALS['db']->rollback();
             $data['error'] = 1;
         }
@@ -545,7 +553,7 @@ class Controlador_Perfil extends Controlador_Base
             $informe = $cantd_facetas;
         }else if(!isset($_SESSION['mfo_datos']['planes']) || $cantd_facetas == 2){
             $informe = $cantd_facetas;
-        }
+        }        
         return $informe;
     }
 }

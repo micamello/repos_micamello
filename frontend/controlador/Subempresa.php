@@ -304,7 +304,7 @@ class Controlador_Subempresa extends Controlador_Base
             $iso = SUCURSAL_ISO;
             if(method_exists(new Utils, 'validar_'.$iso)){
                 $function = 'validar_'.$iso;
-                if(!Utils::$function($data['dni'], 1)){
+                if(!Utils::$function($data['dni'], 1, 1)){
                   throw new Exception("No permitido RUC de persona natural.");
                 }
             }

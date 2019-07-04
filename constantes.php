@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'micamell_desarrollo3');
+define('DBNOMBRE', 'produccion3');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -115,7 +115,7 @@ define('G_SECRET', '1dwFr9eQ_OOiGGCaoUvBLFYh');
 // linkedin
 define('LK_ID_CLIENTE', '78mhxodb8c3yih');
 define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
-define("LK_SCOPE", 'r_basicprofile r_emailaddress');
+define("LK_SCOPE", 'r_liteprofile r_emailaddress');
 
 // correos
 define("DIRECTORIOCORREOS", array('0'=>'desarrollo@micamello.com.ec', '1'=>'desarrollo2@micamello.com.ec', '2'=>'administrador.gye@micamello.com.ec'));

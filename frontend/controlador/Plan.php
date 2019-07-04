@@ -60,7 +60,7 @@ class Controlador_Plan extends Controlador_Base {
 
     $idUsuario = $_SESSION["mfo_datos"]["usuario"]["id_usuario"];
     $planUsuario = Modelo_Plan::listadoPlanesUsuario($idUsuario,$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
-    $tags = self::mostrarDefault(2);        
+    //$tags = self::mostrarDefault(2);        
     $tags["planUsuario"] = $planUsuario;
     $tags['breadcrumbs'] = $breadcrumbs;
     Vista::render('planes_usuario',$tags); 
@@ -288,7 +288,7 @@ class Controlador_Plan extends Controlador_Base {
       if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
         if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)) {
           $function = 'validar_'.SUCURSAL_ISO;
-          $validaCedula = Utils::$function($data['dni'], 2);
+          $validaCedula = Utils::$function($data['dni'], 2, $data["tipo_doc"]);
           if ($validaCedula == false){
             throw new Exception("El documento ingresado no es v\u00E1lido");
           }
@@ -334,9 +334,10 @@ class Controlador_Plan extends Controlador_Base {
     }     
   }
 
-  public function resultado(){    
-    $mensaje = Utils::getParam('mensaje','',$this->data);     
-    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";    
+  public function resultado(){            
+    $mensaje = Utils::getParam('mensaje','',$this->data);         
+    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";   
+    Utils::log("SESSION 2 ".print_r($_SESSION,true)); 
     if ($mensaje == "exito"){    
       if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
         if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
@@ -344,16 +345,16 @@ class Controlador_Plan extends Controlador_Base {
         }
         $nrotest = Modelo_Cuestionario::totalTest();             
         $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
-        // $tags["template_js"][] = "planValidarActivacion";
+        // $tags["template_js"][] = "planValidarActivacion";        
         $tags['msg_cuestionario'] = ($nrotestxusuario < $nrotest) ? 1 : 0; 
         //$_SESSION['mfo_datos']['actualizar_planes'] = 1;      
       }
-      else{        
+      else{                
         Utils::doRedirect(PUERTO.'://'.HOST.'/planes/');
       }
     }
     $cab = ''; $pie = '';
-    if($mensaje != 'exito'){$cab = 'cabecera'; $pie = 'piepagina';}
+    if($mensaje != 'exito'){$cab = 'cabecera'; $pie = 'piepagina';}    
     Vista::render($template, $tags,$cab, $pie);        
   }
 

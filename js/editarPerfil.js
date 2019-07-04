@@ -63,6 +63,15 @@ $(document).ready(function(){
       });
     }
   }
+
+  if($('#documentacion')){
+    if($('#documentacion').val()==3){
+      $('#nombre_documento').html('Pasaporte');
+    }else if($('#documentacion').val()==2){
+      $('#nombre_documento').html('C&eacute;dula');
+    }
+  }
+
 });
 
 if(document.getElementById('form_editarPerfil')){

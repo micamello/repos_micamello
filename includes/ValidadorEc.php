@@ -2,20 +2,23 @@
 class ValidadorEc
 {
 // accion 1.- validacion 2.- compra
-    public static function DniRuc_Validador($numero, $accion){
+    public static function DniRuc_Validador($numero, $accion, $tipoDoc){
         
         if(!empty($numero)){
-            if(strlen($numero) == 10){
+            if($tipoDoc == 2){
                 return self::validarCedulaEcuador($numero);
             }
-
-            if(strlen($numero) == 13){
-                if(self::validarRucPersonaNatural($numero,$accion) ||self::validarRucPersonaJuridica($numero) ||self::validarRucInstitucionPublica($numero)){
+            else
+            if($tipoDoc == 1){
+                if(self::validarRucPersonaNatural($numero,$accion) || self::validarRucPersonaJuridica($numero) || self::validarRucInstitucionPublica($numero)){
                     return true;
                 }
                 else{
                     return false;
                 }
+            }
+            else{
+                return true;
             }
         }
     }
