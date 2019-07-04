@@ -100,11 +100,9 @@
     <div class="modal-content">
       <div class="text-center">
       	<?php 
-<<<<<<< HEAD
+
          	if($pagadoEstado == false || $pagadoEstado <= 2){?><h1 class="qs-subt-1">RECOMENDACIONES</h1><?php
-=======
-         	if($pagadoEstado == false || $pagadoEstado < 2){?><h1 class="qs-subt-1">RECOMENDACIONES</h1><?php
->>>>>>> FF
+         	
          	}else{?><h1 class="qs-subt-1">¡Noticias Fant&aacute;sticas!</h1><?php
 	 		}
        	?>
@@ -114,11 +112,9 @@
         <div class="row">
           <div class="col-md-12" style="text-align: justify;">  
           	<?php 
-<<<<<<< HEAD
+
           		if($pagadoEstado == false || $pagadoEstado <= 2){
-=======
-          		if($pagadoEstado == false || $pagadoEstado < 2){
->>>>>>> FF
+
           			?>
           				<span class="contenido-modal-rec">Para obtener mayor efectividad en la búsqueda de empleo, le invitamos a completar el siguiente <b>TEST DE COMPETENCIAS</b>. ¡Recuerde! los test no son una pérdida de tiempo, mucho menos si el reclutador tiene claro cómo utilizar esta herramienta.</span><br><br>
 			            <ul>
