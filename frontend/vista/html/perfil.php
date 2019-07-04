@@ -1,7 +1,7 @@
 <?php  
 
-$_SESSION['mostrar_exito'] = "";
-$_SESSION['mostrar_error'] = ""; ?>
+//$_SESSION['mostrar_exito'] = "";
+//$_SESSION['mostrar_error'] = ""; ?>
 
 <div class="container-fluid">
   <div class="text-center">
