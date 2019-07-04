@@ -377,7 +377,7 @@ class Controlador_Perfil extends Controlador_Base
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
                         if(!Utils::$function($data['dni'], 1)){
-                          throw new Exception("No permitido RUC de persona natural.");
+                          throw new Exception("C\u00E9dula o pasaporte no válido.");
                         }
                       }           
           
@@ -398,7 +398,15 @@ class Controlador_Perfil extends Controlador_Base
                 }else{
                     throw new Exception("Debe ingresar una universidad");
                 }
-            }else{             
+            }else{
+
+                $iso = SUCURSAL_ISO;
+                    if (method_exists(new Utils, 'validar_'.$iso)){
+                        $function = 'validar_'.$iso;
+                        if(!Utils::$function($data['dni'], 1)){
+                          throw new Exception("El RUC ingresado no es v\u00E1lido.");
+                        }
+                      }           
 
                 if(isset($data['pagina_web']) && $data['pagina_web'] != ''){
                     if (!Utils::validaURL($data['pagina_web'])){
