@@ -83,7 +83,7 @@ class Controlador_Perfil extends Controlador_Base
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
                     //$nivelIdiomas = Modelo_UsuarioxNivelIdioma::obtenerIdiomasUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);                    
                     if(!isset($data['error'])){
-                      $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+                      //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';                      
                       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
                     }
                 }
@@ -381,7 +381,7 @@ class Controlador_Perfil extends Controlador_Base
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
                         if(!Utils::$function($data['dni'], 1)){
-                          throw new Exception("C\u00E9dula o pasaporte no válido.");
+                          throw new Exception("C\u00E9dula o pasaporte no v\u00E1lido.");
                         }
                       }           
           
@@ -496,9 +496,9 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }            
             $GLOBALS['db']->commit();
-            $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario);            
-            Controlador_Login::registroSesion($sess_usuario);            
-            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+            $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario); 
+            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';           
+            Controlador_Login::registroSesion($sess_usuario);                        
             
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
