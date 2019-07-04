@@ -288,7 +288,7 @@ class Controlador_Plan extends Controlador_Base {
       if($data["tipo_doc"] == 1 || $data["tipo_doc"] == 2){
         if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)) {
           $function = 'validar_'.SUCURSAL_ISO;
-          $validaCedula = Utils::$function($data['dni'], 2);
+          $validaCedula = Utils::$function($data['dni'], 2, $data["tipo_doc"]);
           if ($validaCedula == false){
             throw new Exception("El documento ingresado no es v\u00E1lido");
           }

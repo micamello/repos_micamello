@@ -42,22 +42,30 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		  	// echo $datosPreregistro['dni'];
 
 		  	if($longitudDoc == 10 && $datosPreregistro['tipo_usuario'] == 1){
+		  		$tipodoc = 2;
+		  		if($datosPreregistro['tipo_doc'] != "" || $datosPreregistro['tipo_doc'] != null){
+	  				$tipodoc = $datosPreregistro['tipo_doc'];
+	  			}
 		  		// echo $datosPreregistro['dni']."<br>";
 		  		// print_r(Utils::validar_EC($datosPreregistro['dni'] , 1));
 		  		// exit();
 		  		if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)){
 			        $function = 'validar_'.SUCURSAL_ISO;
-			        if(!Utils::$function($datosPreregistro['dni'], 1)){
+			        if(!Utils::$function($datosPreregistro['dni'], 1, $tipodoc)){
 			        	$conterror++;
 	    				throw new Exception("CEDULA INVALIDA ".$datosPreregistro["dni"]."---------------");
 			        }
 			    }
-			    $tipodoc = 2;
+			    // $tipodoc = 2;
 		  	}
 		  	elseif($longitudDoc == 13 && $datosPreregistro['tipo_usuario'] == 2){
 		  		if (method_exists(new Utils, 'validar_'.SUCURSAL_ISO)){
+		  			$tipodoc = 1;
+		  			if($datosPreregistro['tipo_doc'] != "" || $datosPreregistro['tipo_doc'] != null){
+		  				$tipodoc = $datosPreregistro['tipo_doc'];
+		  			}
 		  			$function = 'validar_'.SUCURSAL_ISO;
-			        if(!Utils::$function($datosPreregistro['dni'] , 1)){
+			        if(!Utils::$function($datosPreregistro['dni'] , 1, $tipodoc)){
 			        	$conterror++;
 			        	// Utils::envioCorreo("administrador.gye@micamello.com.ec","Ruc no admintido","No persona natural".$datosPreregistro['dni']);
 			        	$email_body = Modelo_TemplateEmail::obtieneHTML("RUC_NO_VALIDO");
@@ -69,11 +77,14 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 
 			        }
 			    }
-			    $tipodoc = 1;
+			    
 		  	}
 
 		  	elseif($datosPreregistro['tipo_usuario'] == 1){
 		  			$tipodoc = 3;
+		  			if($datosPreregistro['tipo_doc'] != "" || $datosPreregistro['tipo_doc'] != null){
+		  				$tipodoc = $datosPreregistro['tipo_doc'];
+		  			}
 		  	}
 		  	elseif($longitudDoc <= 6 && $datosPreregistro['tipo_usuario'] == 1){
 
