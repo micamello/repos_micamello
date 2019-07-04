@@ -29,8 +29,7 @@ abstract class Controlador_Base{
 
         $valor = Utils::getParam($campo,'',$this->data);
         if (is_array($valor)){
-          if (count($valor)<=0 && $requerido == 1){
-            Utils::log($campo." - ".$valor);
+          if (count($valor)<=0 && $requerido == 1){            
             throw new Exception("Por favor, complete toda la informaci\u00F3n requerida");
           }         
           foreach($valor as $key=>$val){
@@ -42,8 +41,7 @@ abstract class Controlador_Base{
         }
         else{
           $valor = trim($valor);
-          if ($valor == "" && $requerido == 1){                    
-            Utils::log($campo." - ".$valor);
+          if ($valor == "" && $requerido == 1){                                
             throw new Exception("Por favor, complete toda la informaci\u00F3n requerida");
           }
           $valor = strip_tags($valor);

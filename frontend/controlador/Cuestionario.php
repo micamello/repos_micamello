@@ -88,7 +88,7 @@ class Controlador_Cuestionario extends Controlador_Base {
               if (!empty($accesos)){
                 foreach($accesos as $acceso){
                   $infoempresa = Modelo_Usuario::busquedaPorId($acceso["id_empresa"],Modelo_Usuario::EMPRESA);
-                  $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($acceso["id_empresa_plan"]);
+                  $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($acceso["id_empresa_plan"],Modelo_Usuario::EMPRESA);
                   $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
                   $email_subject = "Aceptación de Acceso"; 
                   $candidato = ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['nombres'])).' '.ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']));
@@ -150,23 +150,23 @@ class Controlador_Cuestionario extends Controlador_Base {
       break;
       
       default:        
-        $faceta = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);        
+        $faceta = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);               
         if (empty($faceta)){
-          Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+          $pf = Modelo_PorcentajexFaceta::obtienePermisoDescargar($_SESSION['mfo_datos']['usuario']["id_usuario"]);                
+          if (empty($pf) || $pf < 5){
+            $this->redirectToController('oferta'); 
+          }
+          else{
+            Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+          }
         }           
         if ($faceta >= 3){          
           $acceso = $this->validaTercerFormulario($faceta);
           if (!empty($acceso)){
             Modelo_Notificacion::eliminarNotificacionUsuario($_SESSION['mfo_datos']['usuario']['id_usuario'],Modelo_Notificacion::DESBLOQUEO_ACCESO);
           }          
-        }
-        //si tiene cuestionarios realizados por accesos
-        if ($faceta == 5){
-          $pf = Modelo_PorcentajexFaceta::obtienePermisoDescargar($_SESSION['mfo_datos']['usuario']["id_usuario"]);      
-          if (empty($pf) || $pf < 5){
-            $this->redirectToController('oferta'); 
-          }
-        }
+        }        
+        
         $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($_SESSION['mfo_datos']['usuario']['id_usuario']);        
         if ($faceta > 1 && !empty($metodoSeleccion) && isset($metodoSeleccion["metodo_resp"]) && !empty($metodoSeleccion["metodo_resp"])){
           Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/');
