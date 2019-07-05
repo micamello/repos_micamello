@@ -168,11 +168,11 @@ class Controlador_Plan extends Controlador_Base {
           (!empty($nivel) && $gratuitos == 0)*/){ 
         if ($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
           if ($this->existePlan($infoplan["id_plan"])){
-            throw new Exception("Ya esta subscrito al plan seleccionado");   
+            throw new Exception("Ya esta suscrito al plan seleccionado");   
           }                 
         }        
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"])){
-          throw new Exception("Error al registrar la subscripci\u00F3n, por favor intente denuevo");   
+          throw new Exception("Error al registrar la suscripci\u00F3n, por favor intente denuevo");   
         }          
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
         if ($tipousu == Modelo_Usuario::CANDIDATO){

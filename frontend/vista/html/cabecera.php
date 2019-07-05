@@ -201,7 +201,7 @@ $noautofill = "";
         <?php 
         if (isset($menu["menu"])){   
           foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
-            <li <?php if($optmnu['vista'] == $vista){ ?> class="btn-menu-active" <?php } if($optmnu["nombre"] == 'Registrate' || $optmnu["nombre"] == 'Ingresar'){ echo 'class="btn-minimalist"'; } ?> >
+            <li <?php if($optmnu['vista'] == $vista){ ?> class="btn-menu-active" <?php } if($optmnu["nombre"] == 'Reg&iacute;strate' || $optmnu["nombre"] == 'Ingresar'){ echo 'class="btn-minimalist"'; } ?> >
               <a class="texto-white" <?php if(isset($optmnu['id'])){ echo 'id="'.$optmnu["id"].'"';}  if(isset($optmnu['href'])){ echo 'href="'.$optmnu['href'].'"'; }else{ echo 'onclick="'.$optmnu['onclick'].'"'; } ?> <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
               Inicio';  }else{ echo $optmnu["nombre"]; } ?></a>
             </li>                            
