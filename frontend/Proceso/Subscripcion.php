@@ -131,7 +131,7 @@ class Proceso_Subscripcion{
 
   public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$costo){  
     $costo = Modelo_Plan::busquedaXId($costo);
-    $email_subject = "Activación de Subscripción"; 
+    $email_subject = "Activación de Suscripción"; 
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $template_nombre = "ACTIVACION_SUBSCRIPCION_CANDIDATO";      
     }

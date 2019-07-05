@@ -35,7 +35,7 @@ function calRec(){
 
   var idplan = document.getElementById('plan').value;
   if(idplan == 0){
-    colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_editar");
+    colocaError("err_plan","seccion_plan","Seleccione una opción","button_editar");
     return 1;
   }else{
     return calcularRecursos(idplan);
@@ -520,7 +520,7 @@ $('#plan').on('change', function(){
       colocaError("err_plan","seccion_plan","Verifique su conexión de red. Intente de nuevo.","button_crear");
     }else{
       $('#seccion_recursos').hide();
-      colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_crear");
+      colocaError("err_plan","seccion_plan","Seleccione una opción","button_crear");
     }
     validaCampos();
 });
@@ -533,7 +533,7 @@ $('#plan').on('change', function(){
       quitarError("err_plan","seccion_plan");
     }else{
       $('#seccion_recursos').hide();
-      colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_editar");
+      colocaError("err_plan","seccion_plan","Seleccione una opción","button_editar");
     }
     validaRecursos();
 });*/
@@ -573,7 +573,7 @@ $('#sectorind').on('change', function(){
     quitarError("err_sector","sector");
   }else{
     //mensaje += '- Sector Industrial, Debe seleccionar una opci\u00F3n<br>';
-    colocaError("err_sector","sector","Debe seleccionar una opción de la lista",'button_crear');
+    colocaError("err_sector","sector","Selecciona una opción.",'button_crear');
   }
 });
 
@@ -899,7 +899,7 @@ function validaRecursos(){
     var plan = document.getElementById('plan').value;
 
     if(plan == 0){
-      colocaError("err_plan","seccion_plan","Debe seleccionar una opción de la lista","button_editar");
+      colocaError("err_plan","seccion_plan","Selecciona una opción.","button_editar");
       mensaje += '- Plan, debe seleccionar una opci\u00F3n. <br>';
     }else{
       if(document.getElementById('err_plan')){
@@ -993,7 +993,7 @@ function validarFormulario(){
       quitarError("err_sector","sector");
     }else{
       mensaje += '- Sector Industrial, Debe seleccionar una opci\u00F3n<br>';
-      colocaError("err_sector","sector","Debe seleccionar una opción de la lista",'button_crear');
+      colocaError("err_sector","sector","Selecciona una opción.",'button_crear');
       //error = 1;
     }
 
@@ -1021,8 +1021,8 @@ function validarFormulario(){
     var idplan = document.getElementById('plan').value;
 
     if(idplan == 0){
-      colocaError("err_plan","seccion_plan","Debe seleccionar una opcion de la lista","button_crear");
-      mensaje += '- Debe seleccionar una opcion de la lista<br>';
+      colocaError("err_plan","seccion_plan","Seleccione una opción","button_crear");
+      mensaje += '- Seleccione una opción<br>';
     }else{
 
       var mjs = calcularRecursos(idplan);

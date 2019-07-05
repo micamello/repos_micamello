@@ -170,7 +170,7 @@ $('#provincia').change(function()
                 });
 
                 if(document.getElementById('ciudad').value == 0){
-                    colocaError("err_ciu", "seccion_ciudad","Debe seleccionar una opcion de la lista","boton");
+                    colocaError("err_ciu", "seccion_ciudad","Seleccione una opción","boton");
                 }else{
                     quitarError("err_ciu","seccion_ciudad");
                 }

@@ -120,7 +120,7 @@ function envioCorreo($nombres,$correo,$plan,$fecha){
   $email_body = str_replace("%PLAN%", utf8_encode($plan), $email_body); 
   $email_body = str_replace("%FECHA%", $fecha, $email_body);   
   $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
-  Utils::envioCorreo($correo,"Cancelación de Subscripción",$email_body);		
+  Utils::envioCorreo($correo,"Cancelación de Suscripción",$email_body);		
 }
 
 //elimina archivo de procesamiento

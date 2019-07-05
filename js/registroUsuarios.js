@@ -208,6 +208,7 @@ if($('#documentoCandEmp').length){
 		}
 	});
 	$('#documentoCandEmp').on('blur', function(){
+		console.log($('#tipo_documentacion').val());
 		if($(this).val() != ""){
 			$(this).val($(this).val().trim());
 			var tipoDocCampo = $('#tipo_documentacion').val();
@@ -225,6 +226,10 @@ if($('#documentoCandEmp').length){
 				}
 			}
 			else{
+				if($(this).val().length == 13){
+					crearMensajeError($(this), "No se admiten RUC de persona natural.");
+					return false;
+				}
 				crearMensajeError($(this), "Documento ingresado no es válido");
 			}
 		}
