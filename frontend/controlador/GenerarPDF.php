@@ -264,7 +264,8 @@ class Controlador_GenerarPDF extends Controlador_Base
     $cantd_preg = 0;
     $pos_no_disponible = 1;
     $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
-    $puntaxfaceta = array();
+    $puntaxfaceta = $horasbd = array();
+
     foreach ($porcentajesxfaceta as $c => $datos_resultado) {
       $puntaxfaceta[$datos_resultado['id_faceta']] = $datos_resultado['id_puntaje'];
       $etiquetas_faceta .= $facetas[$datos_resultado['id_faceta']]['literal'].': '.$datos_resultado['valor'].'|';
@@ -273,12 +274,13 @@ class Controlador_GenerarPDF extends Controlador_Base
       $colors_l .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
       $descrip_facetas .= $facetas[$datos_resultado['id_faceta']]['faceta'].': '.$datos_resultado['valor'].'|';
       $descrip_titulo .= $facetas[$datos_resultado['id_faceta']]['literal'];
+      array_push($horasbd, $datos_resultado['tiempo']);
     }
     $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
     $colors = substr($colors, 0,-1);
     $descrip_facetas = substr($descrip_facetas, 0,-1);
     $porcentajes_faceta = substr($porcentajes_faceta, 0,-1);
-    $horasbd = [ '00:07:04', '00:01:23', '00:08:59', '00:01:13', '00:01:20'];
+
     $informe = '<br><br><br><br>
     <div id="pagina-1">
       <h1>Informe ';
@@ -670,8 +672,8 @@ class Controlador_GenerarPDF extends Controlador_Base
             </tr>
         </table></p>';
       }
-      //echo $informe;    
-    self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
+    echo $informe;    
+    //self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
   }
 
   public function generaInformeCandidato($datos){

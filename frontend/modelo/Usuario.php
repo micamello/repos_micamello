@@ -1177,7 +1177,7 @@ WHERE
     if($facetas == false){
       $sql = 'SELECT id_faceta,valor FROM mfo_porcentajexfaceta pf WHERE pf.id_usuario = ? ORDER BY id_faceta';
     }else{
-      $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
+      $sql = 'SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje, pf.tiempo FROM mfo_porcentajexfaceta pf 
         INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor
         INNER JOIN mfo_descriptor2 d on d.id_faceta = pf.id_faceta
         WHERE pf.id_usuario = ? and pf.id_faceta in('.$facetas.')
