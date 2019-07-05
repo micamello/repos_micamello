@@ -79,7 +79,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
         
         if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){          
-          if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso')/* || Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePersoParcial')*/)){                    
+          /*if(isset($_SESSION['mfo_datos']['planes']) && (Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso'))){                    
             $puedeDescargar = true;
           }else if(!isset($_SESSION['mfo_datos']['planes'])){
             $puedeDescargar = true;
@@ -87,7 +87,8 @@ class Controlador_GenerarPDF extends Controlador_Base
             $puedeDescargar = false;
             $_SESSION['mostrar_notif'] = 'Para conocer los resultados de su informe, por favor suscribase al PLAN GRATUITO o a un plan de pago. Su informe parcial lo puede descargar en su perfil';
             //$ruta = PUERTO . '://' . HOST . '/perfil/';
-          }          
+          } */
+          $puedeDescargar = true;       
         }
         
         if(($idusuario == $_SESSION['mfo_datos']['usuario']['id_usuario'] && $puedeDescargar == true) || 
@@ -294,9 +295,11 @@ class Controlador_GenerarPDF extends Controlador_Base
       </div><br><br><br><br><br>
       <div class="pg1">
         <p><b>NOMBRES Y APELLIDOS COMPLETOS:</b><br>'.$nombre_mayuscula.'</p>
-        <p><b>FECHA DE EMISION: </b><br>'.date('Y-m-d').'</p>
-        <p><b>TIEMPO: </b><br>'.self::sumarHoras($horasbd).'</p>
-      </div>
+        <p><b>FECHA DE EMISION: </b><br>'.date('Y-m-d').'</p>';
+        if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ 
+          $informe .= '<p><b>TIEMPO: </b><br>'.self::sumarHoras($horasbd).'</p>';
+        }
+      $informe .= '</div>
     </div> 
     <div style="page-break-after:always;"></div>
     <br>
@@ -327,8 +330,9 @@ class Controlador_GenerarPDF extends Controlador_Base
             $cantd_a++; 
           }
           //$informe .= '<th class="'.$color1.'">'.$datos_facetas['literal'].'</th>';
-          $ths .= '<th style="width: 150px" class="'.$color.'">'.$datos_facetas['literal'].'</th>';
-          $thss .= '<td style="text-align:center;">'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1)).'</td>';
+          $span = '<span class="mayor">'.$datos_facetas['literal'].'</span>';
+          $ths .= '<th style="width: 150px" class="'.$color1.'">'.$datos_facetas['literal'].'</th>';
+          $thss .= '<td class="'.$color.'" style="text-align:center;">'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1)).'</td>';
           //$span = '<span class="mayor">'.$datos_facetas['literal'].'</span>';
           //$tds .= '<td style="text-align:center;" class="'.$color.'">'.Utils::str_replace_first($datos_facetas['literal'], $span, strtoupper($datos_facetas['faceta']),1).'</td>';
           //if($pos_no_disponible < 3){
@@ -482,6 +486,37 @@ class Controlador_GenerarPDF extends Controlador_Base
           </td>
         </tr><tr><td></td></tr>';
       }
+
+      if(count($porcentajesxfaceta) == 2){
+        $cantd_a = 0;
+        $cantd_facetas = 0;
+        foreach ($facetas as $identificador => $f) {
+
+          if($cantd_facetas >= 2){
+            $l = $f['literal'];
+            if($l == 'A' && $cantd_a > 1){
+              $color = $colores_bg[$l.'1']; 
+            }else{
+              $color = $colores_bg[$l];
+              $cantd_a++; 
+            }
+            
+            $d = strtoupper($f['faceta']);
+
+            $informe .= '<tr>
+              <td class="'.$color.'" style="text-align: center; font-size: 11pt; font-weight: bold; text-transform: uppercase;
+          padding-top: 25px; padding-left: 40px; padding-bottom: 25px; padding-right: 40px;">'.utf8_encode($l.'/'.$d).'
+              </td>
+              <td style="background-color: #c9c9c9; color:red; width: 500px; padding: 5px 20px;">
+              <b>NO DISPONIBLE</b>
+              </td>
+            </tr><tr><td></td></tr>';
+          }else{
+            $cantd_facetas++;
+          }
+        }
+      }
+      
       $informe .= '</table>';
       if($tipo_informe == 'parcial'){
         $informe .= '<br>

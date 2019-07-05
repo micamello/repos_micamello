@@ -127,7 +127,7 @@ class Modelo_Usuario{
     mpais.nombre_abr AS nacionalidad,
     ifnull(tl.descripcion, '-') AS licencia,
     if(nombre_univ != '', 'SI', 'NO') as extranjero,
-    if (u.id_univ, uni.nombre, if(nombre_univ, nombre_univ, '-')) as universidad,
+    if (u.id_univ <> '', uni.nombre, if(nombre_univ <> '', nombre_univ, '-')) as universidad,
     ifnull(es.descripcion, '-') as estadocivil
 FROM
     mfo_usuario u
@@ -152,7 +152,7 @@ WHERE
         AND u.id_nacionalidad = mpais.id_pais
         AND c.id_ciudad = u.id_ciudad
         AND es.id_estadocivil = u.id_estadocivil
-        AND u.id_usuario = ?;";
+        AND u.id_usuario = ?";
     return $GLOBALS['db']->auto_array($sql,array($idUsuario));
   }
   public static function existeUsername($username){
@@ -316,7 +316,7 @@ WHERE
       u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
         AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = $idOferta GROUP BY u.id_usuario";
     
-    $subquery1 .= " ORDER BY pago DESC, p.fecha_postulado ASC";
+    $subquery1 .= " ORDER BY pago DESC ";
     
     if($obtCantdRegistros === false && !empty($limite)){  
       $subquery1 .= " LIMIT 0,".$limite; 
@@ -336,7 +336,8 @@ WHERE
           AND n.id_pais = t2.id_nacionalidad
           AND c.id_provincia = pro.id_provincia
           AND c.id_ciudad = t2.id_ciudad
-          AND t1.id_usuario = t2.id_usuario";   
+          AND t1.id_usuario = t2.id_usuario
+          ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC ";   
     if($obtCantdRegistros === false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
@@ -622,7 +623,7 @@ WHERE
         if(!empty($filtros['R']) && $filtros['R'] != ''){
           $sql .= " ORDER BY ranqueo DESC";
         }else{
-          $sql .= " ORDER BY t2.pago DESC, t2.fecha_postulado ASC";
+          $sql .= " ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC";
         }
       }
       $page = ($page - 1) * REGISTRO_PAGINA;

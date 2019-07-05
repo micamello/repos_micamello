@@ -324,6 +324,7 @@ class Controlador_Oferta extends Controlador_Base{
           
           $idOferta = Utils::getParam('id', '', $this->data);
           $status = Utils::getParam('status', '', $this->data);
+          $tipo = Utils::getParam('tipo', '', $this->data);
           
           $idOferta = Utils::desencriptar($idOferta);
           $aspiracion = Utils::getParam('aspiracion', '', $this->data);
@@ -345,10 +346,10 @@ class Controlador_Oferta extends Controlador_Base{
           $licencias = Modelo_TipoLicencia::obtieneListadoAsociativo();
           $oferta = Modelo_Oferta::obtieneOfertas($idOferta,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);         
           if (Utils::getParam('postulado') == 1) {          
-            if(!empty($status)){
+            if(!empty($status) && $tipo == 2){
               self::guardarEstatus($idUsuario,$idOferta,$status);   
               Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');                       
-            }else{
+            }else if($tipo == 1){
               if(strlen($aspiracion) > 0 && strlen($aspiracion) <= 5){
                 self::guardarPostulacion($idUsuario,$idOferta,$aspiracion,$vista);
                 Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/'); 
@@ -356,6 +357,14 @@ class Controlador_Oferta extends Controlador_Base{
                 $_SESSION['mostrar_error'] = "La aspiraci\u00f3n salarial debe máximo de 5 dígitos";
               }else{
                 $_SESSION['mostrar_error'] = "La aspiraci\u00f3n salarial debe ser mayor a 0";
+              }
+            }else{
+              if($tipo == 1){
+                $_SESSION['mostrar_error'] = "Debe colocar una aspiraci\u00f3n salarial";
+              }
+              if($tipo == 2){
+                $_SESSION['mostrar_error'] = "Debe seleccionar un estatus";
+                $postulado = Modelo_Postulacion::obtienePostuladoxUsuario($idUsuario,$idOferta);
               }
             }
           }else{
@@ -374,7 +383,9 @@ class Controlador_Oferta extends Controlador_Base{
             'autopostulaciones_restantes'=>$autopostulaciones_restantes,
             'vista'=>$vista,
             'licencias'=>$licencias,
-            'datos_plan'=>$datos_plan
+            'datos_plan'=>$datos_plan,
+            'status'=>$status,
+            'aspiracion'=>$aspiracion
           );
           
           $tags["show_banner"] = 1;

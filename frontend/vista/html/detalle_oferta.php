@@ -146,11 +146,11 @@
                   <img class="publicidad img-responsive" src="<?php echo PUERTO."://".HOST;?>/imagenes/anuncio.gif">
                   <br>
                   <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-                    
+                    <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
+                    <input type="hidden" name="postulado" id="postulado" value="1">
+                    <input type="hidden" name="opcion" id="opcion" value="">
                       <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
-                        <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
-                        <input type="hidden" name="postulado" id="postulado" value="1">
-                        <input type="hidden" name="opcion" id="opcion" value="1">
+                        <input type="hidden" name="tipo" id="tipo" value="1">
                         <?php if(!empty($postulado)){ ?>
                           <div align="center">
                             <div class="cambiar">
@@ -166,7 +166,7 @@
                               <div class="col-md-12">
                                 <div id="seccion_asp" class="form-group">
                                     <label for="aspiracion">Aspiraci&oacute;n salarial</label><div id="err_asp" class="help-block with-errors"></div>
-                                    <input class="form-control" type="text" min="1" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' maxlength="5" placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,0); ?>" required/>
+                                    <input class="form-control" type="text" min="1" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' maxlength="5" placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,0); ?>" required value="<?php if(!empty($aspiracion)){ echo $aspiracion; } ?>"/>
                                 </div>
                                 <h5>
                                   <button type="button" class="btn btn-success" id="btn-verde" onclick="validarAspiracion();">POSTULARSE</button>
@@ -175,16 +175,13 @@
                             </div>
                           </div>
                         <?php } ?>
-                        </form>
                       <?php }else{ ?>
-                        <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
-                        <input type="hidden" name="postulado" id="postulado" value="1">
-                        <input type="hidden" name="opcion" id="opcion" value="2">
+                        <input type="hidden" name="tipo" id="tipo" value="2">
                         <div align="center">
                           <div align="cambiar">
                             <label for="status">Estatus del candidato en la oferta</label>
                             <select class="form-control" name="status" id="status">
-                              <option selected value="0" disabled>Seleccione un estatus</option>
+                              <option value="0" disabled>Seleccione un estatus</option>
                               <?php 
                                 foreach(ESTATUS_OFERTA as $key => $v){ 
 
@@ -202,7 +199,6 @@
                             </h5>
                           </div>
                         </div>
-                        </form>
                       <?php } ?>
                     </form>
                   <?php } ?>
