@@ -1822,9 +1822,9 @@ function deseleccionar(valor, id_select){
   $('#'+id_select.id).parents(':eq(1)').find('.panel-head-select').children().children().html(selectedOptions.length);
 
   if(id_select.id == 'area_select' && selectedOptions.length == 0){
-    colocaError("err_area","seccion_area","Debe seleccionar una opcion de la lista","boton");
+    colocaError("err_area","seccion_area","Seleccione una opción","boton");
   }else if(id_select.id == 'nivel_interes' && selectedOptions.length == 0){
-    colocaError("err_int","seccion_int","Debe seleccionar una opcion de la lista","boton");
+    colocaError("err_int","seccion_int","Seleccione una opción","boton");
   }
 }
 

@@ -134,7 +134,7 @@ class Controlador_Contrasena extends Controlador_Base {
     Vista::render('recuperar_password', $tags);  
   } 
   public function envioCorreo($correo,$nombres,$token){
-    $enlace = "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqui</a>"; 
+    $enlace = "<a href='".PUERTO."://".HOST."/contrasena/".$token."/'>click aqu&iacute;</a>"; 
     $email_body = Modelo_TemplateEmail::obtieneHTML("RECUPERACION_CONTRASENA");
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);        
