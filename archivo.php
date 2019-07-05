@@ -111,9 +111,10 @@ if($carpeta=='hv' && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario
 }
 if ($mostrar){
   header("Pragma: no-cache"); 
+  header("Content-Description: File Transfer");
   header("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0"); 
   header("Expires: 0"); 
-  header("Content-type: ".$extension); 
+  header("Content-Type: ".$extension); 
   header("Content-Disposition: ".$disposition."; filename=".$archivo); 
   readfile($ruta); 	
 }   

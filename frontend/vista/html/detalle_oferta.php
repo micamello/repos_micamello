@@ -151,6 +151,7 @@
                     <input type="hidden" name="opcion" id="opcion" value="">
                       <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
                         <input type="hidden" name="tipo" id="tipo" value="1">
+
                         <?php if(!empty($postulado)){ ?>
                           <div align="center">
                             <div class="cambiar">
@@ -175,13 +176,16 @@
                             </div>
                           </div>
                         <?php } ?>
+                        </form>
                       <?php }else{ ?>
                         <input type="hidden" name="tipo" id="tipo" value="2">
+
                         <div align="center">
                           <div align="cambiar">
                             <label for="status">Estatus del candidato en la oferta</label>
                             <select class="form-control" name="status" id="status">
                               <option value="0" disabled>Seleccione un estatus</option>
+
                               <?php 
                                 foreach(ESTATUS_OFERTA as $key => $v){ 
 
@@ -199,6 +203,7 @@
                             </h5>
                           </div>
                         </div>
+                        </form>
                       <?php } ?>
                     </form>
                   <?php } ?>
