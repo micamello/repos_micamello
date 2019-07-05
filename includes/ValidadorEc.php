@@ -10,9 +10,34 @@ class ValidadorEc
             }
             else
             if($tipoDoc == 1){
-                if(self::validarRucPersonaNatural($numero,$accion) || self::validarRucPersonaJuridica($numero) || self::validarRucInstitucionPublica($numero)){
-                    return true;
+                $personaNatural = self::validarRucPersonaNatural($numero,$accion);
+                $personaJuridica = self::validarRucPersonaJuridica($numero);
+                $rucPublico = self::validarRucInstitucionPublica($numero);
+
+                if($personaNatural == true){
+                    return $arr = array("estado"=>1, "tipo"=>4);
                 }
+                elseif($personaJuridica == true){
+                    return  true;
+                }
+                elseif($rucPublico == true){
+                    return  true;
+                }
+
+
+
+
+
+
+
+
+                // if((self::validarRucPersonaNatural($numero,$accion) || self::validarRucPersonaNatural($numero,$accion) == 4) || self::validarRucPersonaJuridica($numero) || self::validarRucInstitucionPublica($numero)){
+                //     return true;
+                // }
+
+
+
+
                 else{
                     return false;
                 }
