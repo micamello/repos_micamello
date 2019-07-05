@@ -239,7 +239,7 @@ if($('#fechaNac').length){
 		if($(this).val() != ""){
 			if(validarFormatoFecha($(this).val())){
 				if(!calcularEdad($(this).val())){
-					crearMensajeError($(this), "Debe ser mayor de edad");
+					crearMensajeError($(this), "Mayor a 18 y menor a 100 años");
 				}
 				else{
 					eliminarMensajeError($(this));
@@ -1078,13 +1078,14 @@ function calcularEdad(contenido){
         edad -= 1900;
     }
 
-    if(edad >= 18){
+    if(edad >= 18  && edad <= 100){
         
         return true;
 
     }else{
         return false;
     }
+    console.log(edad);
 }
 function validarFormatoFecha(campo) {
   var RegExPattern = /^\d{1,2}-\d{1,2}-\d{4}$/;

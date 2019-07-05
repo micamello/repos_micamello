@@ -84,6 +84,11 @@ class Controlador_Registro extends Controlador_Base {
         if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
             throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
         }
+        if($_POST['tipo_usuario'] == 2){
+          foreach (DIRECTORIOCORREOS as $key => $value) {
+            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos");
+          }
+        }
         $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
       } 
       catch (Exception $e) {

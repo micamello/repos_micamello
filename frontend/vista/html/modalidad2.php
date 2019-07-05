@@ -97,7 +97,7 @@
 
               echo "<div class='error_msg' id='error".$indice."'></div>";
 
-              echo "<div class='panel-heading'><h4>Pregunta ".$indice."</h4></div>";
+              echo "<div class='panel-heading'><h4>Apartado ".$indice."</h4></div>";
 
               echo "<div class='panel-body'>";
 
@@ -206,7 +206,7 @@
                     <li class="contenido-modal-list">Domine los nervios.</li>
                     <li class="contenido-modal-list">Sea usted mismo.</li>
                     <li class="contenido-modal-list">Solo se puede acceder una sola vez.</li>
-                    <li class="contenido-modal-list">Después enviar el test no podrá realizar ningún tipo de corrección.</li>
+                    <li class="contenido-modal-list">Después de enviar el test no podrá realizar ningún tipo de corrección.</li>
                   </ul>
                 <?php 
               }

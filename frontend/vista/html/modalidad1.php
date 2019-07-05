@@ -52,7 +52,7 @@
 							$actual = $value;
 							echo "<div class='panel panel-default'>";
 							echo "<div class='error_msg'></div>";
-							echo "<div class='panel-heading'><h4>Pregunta ".$indice."</h4></div>";
+							echo "<div class='panel-heading'><h4>Apartado ".$indice."</h4></div>";
 							echo "<div class='panel-body'>";
 							echo "<div class='contenedor_p'>";
 							echo "<div class='row'>";
@@ -100,11 +100,9 @@
     <div class="modal-content">
       <div class="text-center">
       	<?php 
-<<<<<<< HEAD
+
          	if($pagadoEstado == false || $pagadoEstado <= 2){?><h1 class="qs-subt-1">RECOMENDACIONES</h1><?php
-=======
-         	if($pagadoEstado == false || $pagadoEstado < 2){?><h1 class="qs-subt-1">RECOMENDACIONES</h1><?php
->>>>>>> FF
+
          	}else{?><h1 class="qs-subt-1">¡Noticias Fant&aacute;sticas!</h1><?php
 	 		}
        	?>
@@ -114,11 +112,9 @@
         <div class="row">
           <div class="col-md-12" style="text-align: justify;">  
           	<?php 
-<<<<<<< HEAD
+
           		if($pagadoEstado == false || $pagadoEstado <= 2){
-=======
-          		if($pagadoEstado == false || $pagadoEstado < 2){
->>>>>>> FF
+
           			?>
           				<span class="contenido-modal-rec">Para obtener mayor efectividad en la búsqueda de empleo, le invitamos a completar el siguiente <b>TEST DE COMPETENCIAS</b>. ¡Recuerde! los test no son una pérdida de tiempo, mucho menos si el reclutador tiene claro cómo utilizar esta herramienta.</span><br><br>
 			            <ul>
@@ -128,7 +124,7 @@
 			            	<li class="contenido-modal-list">Domine los nervios.</li>
 			            	<li class="contenido-modal-list">Sea usted mismo.</li>
 			            	<li class="contenido-modal-list">Solo se puede acceder una sola vez.</li>
-			            	<li class="contenido-modal-list">Después enviar el test no podrá realizar ningún tipo de corrección.</li>
+			            	<li class="contenido-modal-list">Después de enviar el test no podrá realizar ningún tipo de corrección.</li>
 			            </ul>
           			<?php	
           		}

@@ -14,7 +14,7 @@
               <div class="col-md-12">
                 <div class="form-group" id="seccion_correo">
                   <label>Correo Electr&oacute;nico <span title="Este campo es obligatorio">*</span></label><div id="err_correo" class="help-block with-errors"></div>
-                  <input type="email" name="correo1" id="correo1" class="form-control" placeholder="Ej: camello@gmail.com" aria-describedby="correoHelp" maxlength="100" minlength="10" onkeyup="validaForm(2,'recuperar')" >
+                  <input type="email" name="correo1" id="correo1" class="form-control" placeholder="Ej: camello@gmail.com" aria-describedby="correoHelp" maxlength="100" minlength="10" onblur="validaForm(2,'recuperar')" >
                   <input type="hidden" name="forgot_form" id="forgot_form" value="1">            
                 </div>
               </div>
