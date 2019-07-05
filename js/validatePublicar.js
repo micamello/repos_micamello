@@ -2290,7 +2290,8 @@ function mostrarDatosPlan(data){
 
     if(data.fecha_caducidad != ""){
 
-        fecha_caducidad = formatearFecha(data.fecha_caducidad);
+        // fecha_caducidad = formatearFecha(data.fecha_caducidad);
+        fecha_caducidad = (data.fecha_caducidad);
 
     }
 

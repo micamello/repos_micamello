@@ -97,7 +97,7 @@
 
               echo "<div class='error_msg' id='error".$indice."'></div>";
 
-              echo "<div class='panel-heading'><h4>Pregunta ".$indice."</h4></div>";
+              echo "<div class='panel-heading'><h4>Apartado ".$indice."</h4></div>";
 
               echo "<div class='panel-body'>";
 

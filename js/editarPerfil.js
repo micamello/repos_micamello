@@ -546,7 +546,7 @@ function calcularEdad(){
         edad -= 1900;
     }
 
-    if(edad >= 18){
+    if(edad >= 18 && edad <= 100){
         
         return 1;
 
@@ -1036,7 +1036,7 @@ function validarFormulario(tipovalidacion){
 
         }else if(calcularEdad() == 0 && tipo_usuario == 1){
 
-            colocaError("error", "mayoria","Debe ser mayor de edad","boton");
+            colocaError("error", "mayoria","Mayor a 18 y menor a 100 años","boton");
             mensaje += '- Fecha de nacimiento, debe ser mayor de edad<br>';
             error = 1;
 
