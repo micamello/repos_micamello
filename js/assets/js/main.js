@@ -509,9 +509,8 @@ function validarNumTelf(num,err_telf,seccion_telf,btn){
 }
 
 function validarDir(direccion,err_dir, seccion_dir,btn){
-
   var error = 0;
-  var expreg1 = /^[a-z A-Z0-9ñÑÁÉÍÓÚáéíóú /\n/]+$/;
+  var expreg1 = /^[a-z A-Z0-9ñÑÁÉÍÓÚáéíóú.,:; /\n/]+$/;
 
   if(direccion == null || direccion.length == 0 || /^\s+$/.test(direccion)){
 

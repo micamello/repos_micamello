@@ -52,7 +52,7 @@
 							$actual = $value;
 							echo "<div class='panel panel-default'>";
 							echo "<div class='error_msg'></div>";
-							echo "<div class='panel-heading'><h4>Pregunta ".$indice."</h4></div>";
+							echo "<div class='panel-heading'><h4>Apartado ".$indice."</h4></div>";
 							echo "<div class='panel-body'>";
 							echo "<div class='contenedor_p'>";
 							echo "<div class='row'>";
@@ -102,6 +102,7 @@
       	<?php 
 
          	if($pagadoEstado == false || $pagadoEstado <= 2){?><h1 class="qs-subt-1">RECOMENDACIONES</h1><?php
+
          	}else{?><h1 class="qs-subt-1">¡Noticias Fant&aacute;sticas!</h1><?php
 	 		}
        	?>
@@ -111,6 +112,7 @@
         <div class="row">
           <div class="col-md-12" style="text-align: justify;">  
           	<?php 
+
           		if($pagadoEstado == false || $pagadoEstado <= 2){
 
           			?>
