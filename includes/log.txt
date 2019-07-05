@@ -2526,3 +2526,709 @@
 [2019/07/04 06:56:34] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_espera'
 [2019/07/04 06:56:34] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 2880, 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = '157' AND (estado = 1 OR estado = 2) LIMIT 1
 [2019/07/04 06:56:34] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:36] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/05 01:38:36] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/05 01:38:36] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:36] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/05 01:38:36] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/05 01:38:36] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:38] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:45] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'empresa' OR correo = 'empresa') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/07/05 01:38:45] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '1453'
+[2019/07/05 01:38:45] SQL execute: UPDATE mfo_empresa SET ultima_sesion="2019-07-05 13:38:45" WHERE id_empresa=37
+[2019/07/05 01:38:45] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '37' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/07/05 01:38:45] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('37')
+[2019/07/05 01:38:45] SQL Query: SELECT pais FROM mfo_logs 
+            WHERE id_usuario_login = 1453 AND ip = '::1'
+[2019/07/05 01:38:45] SQL execute: INSERT INTO mfo_logs (ip,fecha,navegador,pais,abrev,username,estatus,id_usuario_login) VALUES ('::1','2019-07-05 13:38:45','Google Chrome','Ecuador','EC','empresa','1','1453')
+[2019/07/05 01:38:45] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '37' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/07/05 01:38:46] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo = 0 GROUP BY p.id_plan ORDER BY p.costo
+[2019/07/05 01:38:46] SQL Query: SELECT id_empresa_plan FROM mfo_empresa_plan WHERE id_empresa = '37' AND estado = 1  AND id_plan IN (7) LIMIT 1
+[2019/07/05 01:38:46] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 2 GROUP BY p.id_plan ORDER BY p.costo
+[2019/07/05 01:38:46] SQL Query: SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
+                   GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
+            FROM mfo_plan p
+            INNER JOIN mfo_permisoplan e ON p.id_plan = e.id_plan  
+            INNER JOIN mfo_accionsist a ON e.id_accionSist = a.id_accionSist            
+            WHERE p.tipo_usuario = '2' AND p.estado = 1 AND p.id_sucursal = '1' AND 
+                  a.estado = 1 AND p.visibilidad = 1 AND e.visibilidad = 1  AND p.costo <> 0  AND p.tipo_plan = 1 GROUP BY p.id_plan ORDER BY p.costo
+[2019/07/05 01:38:46] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '37' AND tipo_usuario = '2' LIMIT 1
+[2019/07/05 01:38:46] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:50] SQL Query: SELECT p.id_plan, p.nombre, p.costo, e.id_comprobante,e.id_empresa_plan_parent, e.fecha_compra,        
+                     IFNULL(e.fecha_caducidad,'-') AS fecha_caducidad, 
+                     CASE WHEN num_publicaciones_rest = -1 THEN 'ilimitado'
+                          WHEN num_publicaciones_rest = 0 THEN '-'
+                          ELSE num_publicaciones_rest
+                     END AS num_post_rest, 
+                     CASE WHEN num_descarga_rest = -1 THEN 'ilimitado'
+                          WHEN num_descarga_rest = 0 THEN '-'
+                          ELSE num_descarga_rest
+                     END AS num_descarga_rest, 
+                     CASE WHEN num_accesos_rest IS NULL THEN '-'
+                          WHEN num_accesos_rest = 0 THEN '-'
+                          ELSE num_accesos_rest
+                     END AS num_accesos_rest,
+                     e.id_empresa_plan AS id_usuario_plan, e.estado, f.id_factura
+              FROM mfo_empresa_plan e
+              INNER JOIN mfo_plan p ON e.id_plan = p.id_plan
+              LEFT JOIN mfo_factura f ON f.id_comprobante = e.id_comprobante AND 
+                                         f.tipo_usuario = 2 AND f.estado = 3
+              WHERE e.id_empresa = '37' /*AND
+                    (e.estado = 1 OR (e.estado = 0 AND e.id_comprobante <> ''))*/ ORDER BY e.fecha_compra ASC
+[2019/07/05 01:38:50] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '37' AND tipo_usuario = '2' LIMIT 1
+[2019/07/05 01:38:50] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:53] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/05 01:38:53] SQL Query: SELECT * FROM mfo_cargo
+[2019/07/05 01:38:53] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/07/05 01:38:53] SQL Query: SELECT * FROM mfo_pais
+[2019/07/05 01:38:53] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/07/05 01:38:53] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/07/05 01:38:53] SQL Query: SELECT a.id_usuario, b.id_area, b.id_subareas 
+            FROM mfo_usuarioxarea a
+            INNER JOIN mfo_area_subareas b ON a.id_areas_subareas = b.id_areas_subareas
+            WHERE a.id_usuario = '37'
+            ORDER BY b.id_area
+[2019/07/05 01:38:53] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/07/05 01:38:53] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '37' ORDER BY f.id_faceta
+[2019/07/05 01:38:53] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '37' ORDER BY f.id_faceta
+[2019/07/05 01:38:53] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '37' AND tipo_usuario = '2' LIMIT 1
+[2019/07/05 01:38:53] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:55] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/05 01:38:55] SQL Query: SELECT * FROM mfo_provincia WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/07/05 01:38:55] SQL Query: SELECT * FROM mfo_jornada
+[2019/07/05 01:38:55] SQL Query: SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
+          INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+[2019/07/05 01:38:55] SQL Query: SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
+            FROM mfo_oferta o
+            LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
+            WHERE (o.estado = 1 OR o.estado = 3)
+            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajexfaceta pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
+            GROUP BY o.id_ofertas;
+[2019/07/05 01:38:55] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_ofertaUrgente'
+[2019/07/05 01:38:55] SQL Query: SELECT o.id_ofertas, o.estado, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
+      r.edad_minima, IF(o.id_tipolicencia IS NULL,0,o.id_tipolicencia) AS licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas, emp.nombres AS empresa, emp.id_empresa AS id_usuario, IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= 7200 && o.tipo = 1,1,0) as orden_urgente FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os WHERE r.id_requisitoOferta = o.id_requisitoOferta
+    AND e.id_escolaridad = o.id_escolaridad
+    AND c.id_ciudad = o.id_ciudad
+    AND p.id_provincia = c.id_provincia
+    AND os.id_ofertas = o.id_ofertas
+    AND j.id_jornada = o.id_jornada
+    AND p.id_pais = 39 AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(37) AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login GROUP BY o.id_ofertas ORDER BY orden_urgente DESC,o.fecha_creado DESC LIMIT 0,20
+[2019/07/05 01:38:55] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_ofertaUrgente'
+[2019/07/05 01:38:55] SQL Query: SELECT emp.id_empresa AS id_usuario, emp.nombres, IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= 7200 && o.tipo = 1,1,0) as orden_urgente FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os WHERE r.id_requisitoOferta = o.id_requisitoOferta
+    AND e.id_escolaridad = o.id_escolaridad
+    AND c.id_ciudad = o.id_ciudad
+    AND p.id_provincia = c.id_provincia
+    AND os.id_ofertas = o.id_ofertas
+    AND j.id_jornada = o.id_jornada
+    AND p.id_pais = 39 AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(37) AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login GROUP BY o.id_ofertas ORDER BY orden_urgente DESC,o.fecha_creado DESC
+[2019/07/05 01:38:55] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '37' AND tipo_usuario = '2' LIMIT 1
+[2019/07/05 01:38:55] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:58] Controlador_Logout::construirPagina Login out
+[2019/07/05 01:38:58] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/05 01:38:58] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/05 01:38:58] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:38:59] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:39:05] SQL Query: SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+            FROM mfo_usuario_login 
+            WHERE (username = 'juan' OR correo = 'juan') AND password = '5690dddfa28ae085d23518a035707282'
+[2019/07/05 01:39:05] SQL Query: SELECT e.id_empresa AS id_usuario, e.telefono, e.nombres, e.fecha_creacion,
+                     e.foto, e.id_ciudad, e.ultima_sesion, e.id_nacionalidad, e.padre, t.nombres AS nombres_contacto,
+                     t.apellidos AS apellidos_contacto, t.telefono1, t.telefono2, p.id_pais, e.estado, e.id_sectorindustrial, e.nro_trabajadores, e.pagina_web, t.id_cargo
+              FROM mfo_empresa e
+              INNER JOIN mfo_ciudad c ON c.id_ciudad = e.id_ciudad
+              INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+              INNER JOIN mfo_contactoempresa t ON t.id_empresa = e.id_empresa
+              WHERE e.id_usuario_login = '1542'
+[2019/07/05 01:39:05] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '56' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/07/05 01:39:05] SQL Query: SELECT e.id_empresa,ep.id_plan,ep.id_empresa_plan_parent
+            FROM mfo_empresa e
+            INNER JOIN mfo_empresa_plan ep ON ep.id_empresa = e.id_empresa 
+            WHERE e.padre IN('56')
+[2019/07/05 01:39:05] SQL Query: SELECT pais FROM mfo_logs 
+            WHERE id_usuario_login = 1542 AND ip = '::1'
+[2019/07/05 01:39:06] SQL execute: INSERT INTO mfo_logs (ip,fecha,navegador,pais,abrev,username,estatus,id_usuario_login) VALUES ('::1','2019-07-05 13:39:05','Google Chrome','Ecuador','EC','juan','1','1542')
+[2019/07/05 01:39:06] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '56' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/07/05 01:39:06] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:06] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 85
+[2019/07/05 01:39:06] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/07/05 01:39:06] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia =  ORDER BY c.nombre ASC
+[2019/07/05 01:39:06] SQL Query: SELECT * FROM mfo_jornada
+[2019/07/05 01:39:06] SQL Query: SELECT * from mfo_idioma
+[2019/07/05 01:39:06] SQL Query: SELECT * from mfo_nivelidioma
+[2019/07/05 01:39:06] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/07/05 01:39:06] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area
+[2019/07/05 01:39:06] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/07/05 01:39:06] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:06] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '56' AND tipo_usuario = '2' LIMIT 1
+[2019/07/05 01:39:06] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:39:06] SQL Query: SELECT *,num_publicaciones_rest AS num_rest FROM mfo_empresa_plan WHERE id_empresa = '56' AND estado = 1 AND (fecha_caducidad > NOW() || fecha_caducidad IS NULL) ORDER BY fecha_compra ASC
+[2019/07/05 01:39:06] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOferta' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:06] SQL Query: SELECT ep.id_empresa_plan, ep.id_empresa_plan_parent, ep.num_publicaciones_rest,ep.num_descarga_rest, ep.fecha_compra, ep.fecha_caducidad, ep.id_plan, ep.id_empresa, ep.estado, p.nombre, e.nombres, ep.num_accesos_rest
+      FROM mfo_empresa_plan ep
+      INNER JOIN mfo_empresa e ON e.id_empresa = ep.id_empresa
+      INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+      WHERE ep.id_empresa_plan = 85
+[2019/07/05 01:39:06] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'publicarOfertaConfidencial' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:07] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/05 01:39:07] SQL Query: SELECT * FROM mfo_provincia WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/07/05 01:39:07] SQL Query: SELECT * FROM mfo_jornada
+[2019/07/05 01:39:07] SQL Query: SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
+          INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+[2019/07/05 01:39:07] SQL Query: SELECT o.id_ofertas, COUNT(p.id_auto) AS cantd_aspirantes 
+            FROM mfo_oferta o
+            LEFT JOIN mfo_postulacion p ON o.id_ofertas = p.id_ofertas
+            WHERE (o.estado = 1 OR o.estado = 3)
+            AND p.id_usuario = (SELECT pt.id_usuario FROM mfo_porcentajexfaceta pt WHERE pt.id_usuario = p.id_usuario LIMIT 1)
+            GROUP BY o.id_ofertas;
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_ofertaUrgente'
+[2019/07/05 01:39:07] SQL Query: SELECT o.id_ofertas, o.estado, o.fecha_creado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
+      r.edad_minima, IF(o.id_tipolicencia IS NULL,0,o.id_tipolicencia) AS licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas, emp.nombres AS empresa, emp.id_empresa AS id_usuario, IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= 7200 && o.tipo = 1,1,0) as orden_urgente FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os WHERE r.id_requisitoOferta = o.id_requisitoOferta
+    AND e.id_escolaridad = o.id_escolaridad
+    AND c.id_ciudad = o.id_ciudad
+    AND p.id_provincia = c.id_provincia
+    AND os.id_ofertas = o.id_ofertas
+    AND j.id_jornada = o.id_jornada
+    AND p.id_pais = 39 AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(56) AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login GROUP BY o.id_ofertas ORDER BY orden_urgente DESC,o.fecha_creado DESC LIMIT 0,20
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_ofertaUrgente'
+[2019/07/05 01:39:07] SQL Query: SELECT emp.id_empresa AS id_usuario, emp.nombres, IF(TIMESTAMPDIFF(MINUTE, o.fecha_creado,now()) <= 7200 && o.tipo = 1,1,0) as orden_urgente FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os WHERE r.id_requisitoOferta = o.id_requisitoOferta
+    AND e.id_escolaridad = o.id_escolaridad
+    AND c.id_ciudad = o.id_ciudad
+    AND p.id_provincia = c.id_provincia
+    AND os.id_ofertas = o.id_ofertas
+    AND j.id_jornada = o.id_jornada
+    AND p.id_pais = 39 AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(56) AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login GROUP BY o.id_ofertas ORDER BY orden_urgente DESC,o.fecha_creado DESC
+[2019/07/05 01:39:07] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:07] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '56' AND tipo_usuario = '2' LIMIT 1
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_espera'
+[2019/07/05 01:39:07] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 2880, 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = '188' AND (estado = 1 OR estado = 2) LIMIT 1
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_espera'
+[2019/07/05 01:39:07] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 2880, 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = '172' AND (estado = 1 OR estado = 2) LIMIT 1
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_espera'
+[2019/07/05 01:39:07] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 2880, 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = '171' AND (estado = 1 OR estado = 2) LIMIT 1
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_espera'
+[2019/07/05 01:39:07] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 2880, 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = '170' AND (estado = 1 OR estado = 2) LIMIT 1
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_espera'
+[2019/07/05 01:39:07] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 2880, 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = '193' AND (estado = 1 OR estado = 2) LIMIT 1
+[2019/07/05 01:39:07] SQL Query: SELECT descripcion FROM mfo_parametro WHERE nombre = 'tiempo_espera'
+[2019/07/05 01:39:07] SQL Query: SELECT IF(TIMESTAMPDIFF(MINUTE, fecha_creado,now()) <= 2880, 1,0) AS editar FROM mfo_oferta WHERE id_ofertas = '168' AND (estado = 1 OR estado = 2) LIMIT 1
+[2019/07/05 01:39:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:39:13] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/07/05 01:39:13] SQL Query: SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta
+[2019/07/05 01:39:13] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/05 01:39:13] SQL Query: SELECT * FROM mfo_oferta o INNER JOIN mfo_empresa e WHERE o.id_ofertas = '188' AND o.id_empresa = e.id_empresa LIMIT 1
+[2019/07/05 01:39:13] SQL Query: SELECT id_usuario, fecha_terminado_test FROM mfo_accesos_empresas WHERE id_empresa = 56
+[2019/07/05 01:39:13] SQL Query: SELECT * FROM mfo_escolaridad ORDER BY id_escolaridad ASC
+[2019/07/05 01:39:13] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/07/05 01:39:13] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/07/05 01:39:13] SQL Query: SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,o.id_ofertas FROM mfo_oferta o
+          INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
+          INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan WHERE o.id_ofertas = 188
+[2019/07/05 01:39:13] SQL Query: SELECT t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, (SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = 188 GROUP BY u.id_usuario ORDER BY pago DESC, p.fecha_postulado ASC) t2, (SELECT id_usuario,IF(SUM(estado) = 5,2,1) AS test_realizados, COUNT(1) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1 WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario LIMIT 0,20
+[2019/07/05 01:39:13] SQL Query: SELECT n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados, t1.numero_test FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, (SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = 188 GROUP BY u.id_usuario ORDER BY pago DESC, p.fecha_postulado ASC) t2, (SELECT id_usuario,IF(SUM(estado) = 5,2,1) AS test_realizados, COUNT(1) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1 WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario
+[2019/07/05 01:39:13] SQL Query: SELECT limite_perfiles FROM mfo_empresa_plan ep, mfo_plan p, mfo_oferta o
+            WHERE ep.id_empresa = '56' 
+            AND ep.estado = 1 AND ep.id_plan = p.id_plan AND o.id_empresa_plan = ep.id_empresa_plan 
+            AND o.id_ofertas = '188'
+[2019/07/05 01:39:13] SQL Query: SELECT id_infohv FROM mfo_descarga WHERE id_empresa = '56' AND id_ofertas = '188'
+[2019/07/05 01:39:13] SQL Query: SELECT * FROM mfo_pais ORDER BY nombre_abr ASC
+[2019/07/05 01:39:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:13] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '56' AND tipo_usuario = '2' LIMIT 1
+[2019/07/05 01:39:13] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'filtroFacetas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'detallePerfilCandidatos' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarHv' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:14] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/05 01:39:16] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/07/05 01:39:16] SQL Query: SELECT * FROM mfo_porcentajexfaceta ORDER BY id_usuario, id_faceta
+[2019/07/05 01:39:16] SQL Query: SELECT nombres, apellidos,id_usuario,grafico FROM mfo_usuario WHERE id_usuario = '1' LIMIT 1
+[2019/07/05 01:39:16] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/07/05 01:39:16] SQL Query: SELECT * FROM mfo_postulacion WHERE id_usuario = 1 AND id_ofertas = 188;
+[2019/07/05 01:39:16] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:16] SQL Query: SELECT limite_perfiles FROM mfo_empresa_plan ep, mfo_plan p, mfo_oferta o
+            WHERE ep.id_empresa = '56' 
+            AND ep.estado = 1 AND ep.id_plan = p.id_plan AND o.id_empresa_plan = ep.id_empresa_plan 
+            AND o.id_ofertas = '188'
+[2019/07/05 01:39:16] SQL Query: SELECT id_usuario FROM mfo_descarga_informe WHERE id_empresa = '56' AND id_ofertas = '188'
+[2019/07/05 01:39:16] SQL execute: INSERT INTO mfo_descarga_informe (id_empresa,id_usuario,id_ofertas) VALUES ('56','1','188')
+[2019/07/05 01:39:16] SQL Query: SELECT id_usuario, fecha_terminado_test FROM mfo_accesos_empresas WHERE id_empresa = 56
+[2019/07/05 01:39:16] SQL Query: SELECT id_faceta, valor as prom FROM mfo_porcentajexfaceta p WHERE id_usuario = 1 AND estado = 1
+[2019/07/05 01:39:16] SQL Query: SELECT o.id_pregunta, p.id_competencia, c.id_faceta, c.descripcion, c.nombre, c.limite_inferior, c.limite_medio, c.limite_superior,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuesta r 
+            INNER JOIN mfo_opcion o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia            
+            WHERE r.id_usuario = '1'  AND c.id_faceta IN (1,2,3,4,5) GROUP BY o.id_pregunta
+              ORDER BY o.id_pregunta, c.id_faceta, o.valor
+[2019/07/05 01:39:16] SQL Query: SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
+        INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor
+        INNER JOIN mfo_descriptor2 d on d.id_faceta = pf.id_faceta
+        WHERE pf.id_usuario = '1' and pf.id_faceta in(1,2,3,4,5)
+        AND b.id_puntaje = d.id_puntaje;
+[2019/07/05 01:39:16] SQL Query: SELECT id_faceta, id_puntaje, descripcion as rasgo FROM mfo_rasgo ORDER BY id_puntaje
+[2019/07/05 01:39:16] SQL Query: SELECT f.id_faceta, GROUP_CONCAT(m.nombre SEPARATOR ', ') as competencias FROM mfo_faceta f
+          INNER JOIN mfo_competencia m ON m.id_faceta = f.id_faceta
+          GROUP BY f.id_faceta
+[2019/07/05 01:39:16] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/07/05 01:39:16] SQL Query: SELECT COUNT(id_pregunta) AS cantd_preguntas
+            FROM mfo_pregunta p
+            INNER JOIN mfo_competencia c on c.id_competencia = p.id_competencia            
+            GROUP BY c.id_faceta LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/07/05 01:39:39] SQL Query: SELECT * FROM mfo_postulacion WHERE id_usuario = 1 AND id_ofertas = 188;
+[2019/07/05 01:39:39] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:39] SQL Query: SELECT limite_perfiles FROM mfo_empresa_plan ep, mfo_plan p, mfo_oferta o
+            WHERE ep.id_empresa = '56' 
+            AND ep.estado = 1 AND ep.id_plan = p.id_plan AND o.id_empresa_plan = ep.id_empresa_plan 
+            AND o.id_ofertas = '188'
+[2019/07/05 01:39:39] SQL Query: SELECT id_usuario FROM mfo_descarga_informe WHERE id_empresa = '56' AND id_ofertas = '188'
+[2019/07/05 01:39:39] SQL Query: SELECT id_usuario, fecha_terminado_test FROM mfo_accesos_empresas WHERE id_empresa = 56
+[2019/07/05 01:39:39] SQL Query: SELECT id_faceta, valor as prom FROM mfo_porcentajexfaceta p WHERE id_usuario = 1 AND estado = 1
+[2019/07/05 01:39:39] SQL Query: SELECT o.id_pregunta, p.id_competencia, c.id_faceta, c.descripcion, c.nombre, c.limite_inferior, c.limite_medio, c.limite_superior,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuesta r 
+            INNER JOIN mfo_opcion o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia            
+            WHERE r.id_usuario = '1'  AND c.id_faceta IN (1,2,3,4,5) GROUP BY o.id_pregunta
+              ORDER BY o.id_pregunta, c.id_faceta, o.valor
+[2019/07/05 01:39:39] SQL Query: SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
+        INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor
+        INNER JOIN mfo_descriptor2 d on d.id_faceta = pf.id_faceta
+        WHERE pf.id_usuario = '1' and pf.id_faceta in(1,2,3,4,5)
+        AND b.id_puntaje = d.id_puntaje;
+[2019/07/05 01:39:39] SQL Query: SELECT id_faceta, id_puntaje, descripcion as rasgo FROM mfo_rasgo ORDER BY id_puntaje
+[2019/07/05 01:39:39] SQL Query: SELECT f.id_faceta, GROUP_CONCAT(m.nombre SEPARATOR ', ') as competencias FROM mfo_faceta f
+          INNER JOIN mfo_competencia m ON m.id_faceta = f.id_faceta
+          GROUP BY f.id_faceta
+[2019/07/05 01:39:39] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/07/05 01:39:39] SQL Query: SELECT COUNT(id_pregunta) AS cantd_preguntas
+            FROM mfo_pregunta p
+            INNER JOIN mfo_competencia c on c.id_competencia = p.id_competencia            
+            GROUP BY c.id_faceta LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '1' AND orden3 = '4' AND orden4 = '3' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '1' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '1' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '2' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '1' AND orden3 = '5' AND orden4 = '4' AND orden5 = '3'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '3' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '5' AND orden5 = '2'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '4' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '1' AND orden3 = '2' AND orden4 = '3' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '8' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '9' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '10' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '4' AND orden4 = '5' AND orden5 = '3'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '11' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '5' AND orden3 = '2' AND orden4 = '3' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '12' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '5' AND orden2 = '1' AND orden3 = '3' AND orden4 = '2' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '13' AND id_puntaje = '3' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '5' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '14' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '15' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '5' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '1'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '16' AND id_puntaje = '5' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '5' AND orden3 = '2' AND orden4 = '1' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '17' AND id_puntaje = '4' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '18' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '5' AND orden3 = '3' AND orden4 = '2' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '19' AND id_puntaje = '3' LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '5' AND orden4 = '4' AND orden5 = '3'
+            LIMIT 1
+[2019/07/05 01:39:39] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '20' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'candidato1'
+[2019/07/05 01:39:58] SQL Query: SELECT * FROM mfo_postulacion WHERE id_usuario = 1 AND id_ofertas = 188;
+[2019/07/05 01:39:58] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'descargarInformePerso' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '4'
+[2019/07/05 01:39:58] SQL Query: SELECT limite_perfiles FROM mfo_empresa_plan ep, mfo_plan p, mfo_oferta o
+            WHERE ep.id_empresa = '56' 
+            AND ep.estado = 1 AND ep.id_plan = p.id_plan AND o.id_empresa_plan = ep.id_empresa_plan 
+            AND o.id_ofertas = '188'
+[2019/07/05 01:39:58] SQL Query: SELECT id_usuario FROM mfo_descarga_informe WHERE id_empresa = '56' AND id_ofertas = '188'
+[2019/07/05 01:39:58] SQL Query: SELECT id_usuario, fecha_terminado_test FROM mfo_accesos_empresas WHERE id_empresa = 56
+[2019/07/05 01:39:58] SQL Query: SELECT id_faceta, valor as prom FROM mfo_porcentajexfaceta p WHERE id_usuario = 1 AND estado = 1
+[2019/07/05 01:39:58] SQL Query: SELECT o.id_pregunta, p.id_competencia, c.id_faceta, c.descripcion, c.nombre, c.limite_inferior, c.limite_medio, c.limite_superior,        
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion ORDER BY o.valor), 1, 1) AS orden1,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 3, 1) AS orden2,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 5, 1) AS orden3,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 7, 1) AS orden4,
+                   SUBSTR(GROUP_CONCAT(r.orden_seleccion order BY o.valor), 9, 1) AS orden5
+            FROM mfo_respuesta r 
+            INNER JOIN mfo_opcion o ON o.id_opcion = r.id_opcion
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia            
+            WHERE r.id_usuario = '1'  AND c.id_faceta IN (1,2,3,4,5) GROUP BY o.id_pregunta
+              ORDER BY o.id_pregunta, c.id_faceta, o.valor
+[2019/07/05 01:39:58] SQL Query: SELECT pf.valor, pf.id_faceta, d.descripcion, d.id_puntaje FROM mfo_porcentajexfaceta pf 
+        INNER JOIN mfo_baremo2 b on b.porcentaje = pf.valor
+        INNER JOIN mfo_descriptor2 d on d.id_faceta = pf.id_faceta
+        WHERE pf.id_usuario = '1' and pf.id_faceta in(1,2,3,4,5)
+        AND b.id_puntaje = d.id_puntaje;
+[2019/07/05 01:39:58] SQL Query: SELECT id_faceta, id_puntaje, descripcion as rasgo FROM mfo_rasgo ORDER BY id_puntaje
+[2019/07/05 01:39:58] SQL Query: SELECT f.id_faceta, GROUP_CONCAT(m.nombre SEPARATOR ', ') as competencias FROM mfo_faceta f
+          INNER JOIN mfo_competencia m ON m.id_faceta = f.id_faceta
+          GROUP BY f.id_faceta
+[2019/07/05 01:39:58] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/07/05 01:39:58] SQL Query: SELECT COUNT(id_pregunta) AS cantd_preguntas
+            FROM mfo_pregunta p
+            INNER JOIN mfo_competencia c on c.id_competencia = p.id_competencia            
+            GROUP BY c.id_faceta LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '1' AND orden3 = '4' AND orden4 = '3' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '1' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '1' AND orden3 = '3' AND orden4 = '2' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '2' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '1' AND orden3 = '5' AND orden4 = '4' AND orden5 = '3'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '3' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '4' AND orden3 = '3' AND orden4 = '5' AND orden5 = '2'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '4' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '5' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '1' AND orden3 = '2' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '6' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '4' AND orden2 = '1' AND orden3 = '2' AND orden4 = '3' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '7' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '8' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '2' AND orden2 = '3' AND orden3 = '1' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '9' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '4' AND orden4 = '1' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '10' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '4' AND orden4 = '5' AND orden5 = '3'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '11' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '5' AND orden3 = '2' AND orden4 = '3' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '12' AND id_puntaje = '2' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '5' AND orden2 = '1' AND orden3 = '3' AND orden4 = '2' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '13' AND id_puntaje = '3' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '2' AND orden3 = '1' AND orden4 = '5' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '14' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '15' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '5' AND orden2 = '4' AND orden3 = '3' AND orden4 = '2' AND orden5 = '1'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '16' AND id_puntaje = '5' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '3' AND orden2 = '5' AND orden3 = '2' AND orden4 = '1' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '17' AND id_puntaje = '4' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '3' AND orden4 = '4' AND orden5 = '5'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '18' AND id_puntaje = '1' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '5' AND orden3 = '3' AND orden4 = '2' AND orden5 = '4'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '19' AND id_puntaje = '3' LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT porcentaje, id_puntaje 
+            FROM mfo_baremo 
+            WHERE orden1 = '1' AND orden2 = '2' AND orden3 = '5' AND orden4 = '4' AND orden5 = '3'
+            LIMIT 1
+[2019/07/05 01:39:58] SQL Query: SELECT descripcion FROM mfo_descriptor 
+            WHERE id_competencia = '20' AND id_puntaje = '1' LIMIT 1
