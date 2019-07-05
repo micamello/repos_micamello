@@ -176,7 +176,7 @@ if($('#tipoDoc').length){
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($(this).val());
 				if(docCampo.val() != ""){
-					if(DniRuc_Validador(docCampo,$(this).val(), 1) == true){
+					if(DniRuc_Validador(docCampo,$(this).val(), 2) == true){
 						var searchAjaxVar = searchAjax(docCampo);
 						if(searchAjaxVar == 0){
 							// eliminarMensajeError(docCampo);
@@ -212,7 +212,7 @@ if($('#documentoCandEmp').length){
 		if($(this).val() != ""){
 			$(this).val($(this).val().trim());
 			var tipoDocCampo = $('#tipo_documentacion').val();
-			if(DniRuc_Validador($(this), tipoDocCampo, 1) == true){
+			if(DniRuc_Validador($(this), tipoDocCampo, 2) == true){
 				var searchAjaxVar = searchAjax($(this));
 				if(searchAjaxVar == 0){
 					// eliminarMensajeError($(this));
@@ -489,7 +489,7 @@ if(tipousuario == 1){
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($('#tipoDoc').val());
 				if(docCampo.val() != ""){ 
-					if(DniRuc_Validador(docCampo,$('#tipoDoc').val(), 1) == true){
+					if(DniRuc_Validador(docCampo,$('#tipoDoc').val(), 2) == true){
 						var searchAjaxVar = searchAjax(docCampo);
 						if(searchAjaxVar == 0){
 							crearMensajeError(docCampo, "El documento ingresado ya existe.");
@@ -608,7 +608,7 @@ if(tipousuario == 1){
 	if($('#documentoCandEmp').length){
 		if($('#documentoCandEmp').val() != ""){
 			var tipoDocCampo = $('#tipo_documentacion').val();
-			if(DniRuc_Validador($('#documentoCandEmp'), tipoDocCampo, 1) == true){
+			if(DniRuc_Validador($('#documentoCandEmp'), tipoDocCampo, 2) == true){
 				var searchAjaxVar = searchAjax($('#documentoCandEmp'));
 				if(searchAjaxVar == 0){
 					crearMensajeError($('#documentoCandEmp'), "El documento ingresado ya existe.");

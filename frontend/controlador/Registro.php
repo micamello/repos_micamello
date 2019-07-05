@@ -66,6 +66,8 @@ class Controlador_Registro extends Controlador_Base {
         $datosReg = $this->camposRequeridos($campos);
         
         $datosValidos = self::validarCamposReg($datosReg);
+        // var_dump($datosValidos);
+        // exit();
         $GLOBALS['db']->beginTrans();
         $id_usuario = self::guardarDatosUsuario($datosValidos);
         if (empty($id_usuario)){
@@ -75,21 +77,38 @@ class Controlador_Registro extends Controlador_Base {
         setcookie('preRegistro', null, -1, '/');
         // setcookie("showModal", "", time()-3600);
         $nombres = ucfirst($datosReg['nombresCandEmp']).((isset($datosReg['apellidosCand'])) ? " ".ucfirst($datosReg['apellidosCand']) : '');
-        $token = Utils::generarToken($id_usuario,"ACTIVACION");
-        if (empty($token)){
-          throw new Exception("Error en el sistema, por favor intente de nuevo");
+
+
+
+        if($datosValidos['tipoEmpresa'] == ""){
+          $token = Utils::generarToken($id_usuario,"ACTIVACION");
+          if (empty($token)){
+            throw new Exception("Error en el sistema, por favor intente de nuevo");
+          }
+          $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
+          $token = Utils::encriptar($token);
+          if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , $datosValidos['tipoEmpresa'])){
+              throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
+          }
         }
-        $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
-        $token = Utils::encriptar($token);
-        if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'])){
-            throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
+        else{
+          $token = "";
+            if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , $datosValidos['tipoEmpresa'])){
+              throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
+          }
         }
+
         if($_POST['tipo_usuario'] == 2){
           foreach (DIRECTORIOCORREOS as $key => $value) {
             Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos");
           }
         }
-        $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
+        if($datosValidos['tipoEmpresa'] == ""){
+          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
+        }
+        else{
+          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada.';
+        }
       } 
       catch (Exception $e) {
         setcookie('preRegistro', $_POST['tipo_usuario'], time() + (86400 * 30), "/");
@@ -102,6 +121,7 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function validarCamposReg($datosReg){
+    $tipoEmpresa = "";
     $datosReg['correoCandEmp'] = trim(strtolower($datosReg['correoCandEmp']));
     $iso = SUCURSAL_ISO;
     if(!Utils::es_correo_valido($datosReg['correoCandEmp'])){
@@ -114,7 +134,12 @@ class Controlador_Registro extends Controlador_Base {
     if($datosReg['tipo_documentacion'] == 1 || $datosReg['tipo_documentacion'] == 2){
       if (method_exists(new Utils, 'validar_'.$iso)){
         $function = 'validar_'.$iso;
-        if(!Utils::$function($datosReg['documentoCandEmp'], 1 , $datosReg['tipo_documentacion'])){
+        $retornoDNIRUC = Utils::$function($datosReg['documentoCandEmp'], 2 , $datosReg['tipo_documentacion']);
+        if(is_array($retornoDNIRUC)){
+          $tipoEmpresa = $retornoDNIRUC['tipo'];
+          $retornoDNIRUC = $retornoDNIRUC['estado'];
+        }
+        if(!$retornoDNIRUC){
           throw new Exception("El documento ingresado no es v\u00E1lido");
         }
       }
@@ -183,6 +208,7 @@ class Controlador_Registro extends Controlador_Base {
     }
     $datosReg = array_merge($datosReg, $username);
     $datosReg = array_merge($datosReg, $nombreCorreo);
+    $datosReg = array_merge($datosReg, array('tipoEmpresa'=>$tipoEmpresa));
 
     return $datosReg;
   }
@@ -369,14 +395,20 @@ class Controlador_Registro extends Controlador_Base {
     Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
   } 
 
-  public function correoActivacionCuenta($correo,$nombres,$token, $username){
-    $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
-    $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUARIO");
+  public function correoActivacionCuenta($correo,$nombres,$token, $username, $tipoempresa){
+    $email_body = "";
+    if($tipoempresa == ""){
+      $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUARIO");
+      $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
+      $email_body = str_replace("%ENLACE%", $enlace, $email_body);
+    }
+    else{
+      $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_EMPRESA_NATURAL");
+    }
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
     $email_body = str_replace("%USUARIO%", $username, $email_body);
     $email_body = str_replace("%CORREO%", $correo, $email_body);   
-    $email_body = str_replace("%ENLACE%", $enlace, $email_body);
-
+    
     if (Utils::envioCorreo($correo,"Registro de Usuario",$email_body)){
       return true;
     }
