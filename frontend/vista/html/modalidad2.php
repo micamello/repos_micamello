@@ -221,7 +221,7 @@
             <br>
       <br> 
             <center>
-              <button type="button" class="btn-blue" data-dismiss="modal">Iniciar Test</button>
+              <button type="button" class="btn-blue" data-dismiss="modal">Continuar Test</button>
             </center> 
 
 

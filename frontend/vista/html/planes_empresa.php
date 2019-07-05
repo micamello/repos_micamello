@@ -282,7 +282,7 @@
         <h5 class="modal-title" id="exampleModalLongTitle">Confirmaci&oacute;n de Suscripci&oacute;n de Plan</h5>                        
       </div>
       <div class="modal-body">                           
-        <h5>Usted procedera a suscribirse en el Plan <b><span id="desplan"></span></b>&nbsp;¿Desea continuar?</h5>
+        <h5>Usted procedera a suscribirse en el <b>Plan <span id="desplan"></span></b>&nbsp;¿Desea continuar?</h5>
         <!-- <p class="text-center"><i class="fa fa-shopping-cart fa-5x" aria-hidden="true"></i></p> -->
       </div>    
       <div class="modal-footer">

@@ -66,7 +66,7 @@ class Controlador_Velocimetro extends Controlador_Base {
       $titulo = '¡FELICIDADES! ACABA DE COMPLETAR EL TEST CANEA.';
       $msj2 = 'Ahora usted forma parte del presente y del futuro de las empresas, siendo el CANDIDATO IDEAL.';
       $textoBoton = "VER INFORME COMPLETO";
-      $enlaceboton = "fileGEN/informeUsuarioCandidato/".$_SESSION['mfo_datos']['usuario']['username'];
+      $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
 
       if (!isset($_SESSION['mfo_datos']['usuario']['grafico']) || empty($_SESSION['mfo_datos']['usuario']['grafico'])){
         $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);

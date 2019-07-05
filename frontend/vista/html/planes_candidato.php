@@ -1,9 +1,5 @@
 <div class="container-fluid">
   <div class="container">
-    <div class="col-md-12">
-      <div><h2 class="titulo text-center">Planes</h2></div>
-      <br>
-    </div>
     
     <div class="col-md-12">
       <div class="pricingdiv flex-container">
@@ -16,14 +12,32 @@
           <?php if (empty($plan["costo"])){ ?> 
             <div>&nbsp;</div>
           <?php } ?>
-          <div class="titulo-planes title headingazul"><?php echo strtoupper(utf8_encode($plan["nombre"]));?></div>
-          <div class="plan-precio"><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?></div>
+          <div class="titulo-planes title <?php if(!empty($plan["costo"])){ echo 'planes-promo'; }else{ echo 'headingazul'; } ?> "><?php echo strtoupper(utf8_encode($plan["nombre"])); if(!empty($plan["costo"])){ echo '(Promocional)';} ?></div>
+
+          <?php if(!empty($plan["costo"])){ 
+            $costo = 15;
+           }else{
+            $costo = $plan["costo"];
+           } ?>
+          <div id="avisocosto" class="<?php echo (!empty($plan["costo"])) ? "price-was" : "plan-precio";?>">
+            <?php $msgcosto = (!empty($plan["costo"])) ? "Antes " : "";?>             
+            <?php echo $msgcosto.SUCURSAL_MONEDA.number_format($costo,2);?>
+            </div>
+
           <?php if (!empty($plan["costo"])){ ?> 
-            <p><small>(El precio incluye IVA)</small></p>
-          <?php } else{ ?>
-            <p><small>&nbsp;</small></p>
+            
+            <div class="plan-interno-info" style="margin: 4px auto;">
+            <div class="descuento" style="background:url(<?php echo PUERTO."://".HOST."/imagenes/planes-06.png"?>) no-repeat; background-size:100%;">
+              <p class="promo-1">PRECIO</p>
+              <p  class="promo-2">PROMOCIONAL</p>
+            </div>
+            <h2  style="margin-bottom: 0px; font-size: 36px; line-height: 38px; text-align:center;">
+              <strong id="plan-precio" style="color: #ec3131;"><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?></strong>
+            </h2>
+            
+            <div id="avisodura" class="plan-dias"><?php echo (empty($plan["duracion"])) ? "&nbsp;" : $plan["duracion"]." D&Iacute;AS";?></div>
+            </div> 
           <?php } ?>
-          <div class="plan-dias"><?php echo (empty($plan["duracion"])) ? "&nbsp;" : $plan["duracion"]." D&Iacute;AS";?></div>
           <!--<br>-->
           <?php 
           $listadoAcciones = explode(",",$plan['acciones']);
@@ -47,8 +61,9 @@
             <a class="pricebutton btn-blue btn-bottom" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"><span class="icon-tag"></span>
               POSTULARSE
             </a>
-          <?php } else { ?>            
-            <a class="pricebutton btn-blue btn-bottom" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');"><span class="icon-tag"></span>
+          <?php } else { ?>    
+          <br>        
+            <a class="pricebutton btn-<?php echo (!empty($plan["costo"])) ? "red" : "blue";?> btn-bottom" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');"><span class="icon-tag"></span>
               SUSCRIBIRSE
             </a>
           <?php } ?>  
@@ -72,7 +87,7 @@
         <h5 class="modal-title" id="exampleModalLongTitle">Confirmaci&oacute;n de Suscripci&oacute;n de Plan</h5>                        
       </div>
       <div class="modal-body">                           
-        <h5>Usted procedera a suscribirse en el Plan <b><span id="desplan"></span></b>&nbsp;¿Desea continuar?</h5>
+        <h5>Usted procedera a suscribirse en el <b>Plan <span id="desplan"></span></b>&nbsp;¿Desea continuar?</h5>
         <!-- <p class="text-center"><i class="fa fa-shopping-cart fa-5x" aria-hidden="true"></i></p> -->
       </div>    
       <div class="modal-footer">

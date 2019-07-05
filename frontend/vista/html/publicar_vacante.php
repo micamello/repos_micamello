@@ -242,7 +242,7 @@
 							<div class="form-group">
 								<label>Edad Máxima: <b>*</b></label>
 								<div class="errorContainer"></div>
-								<input type="text" class="form-control" name="edadMaxOf" id="edadMaxOf" value="<?php if(isset($_POST['edadMaxOf'])){echo $_POST['edadMaxOf'];}else{echo 18;} ?>">
+								<input type="text" class="form-control" name="edadMaxOf" id="edadMaxOf" value="<?php if(isset($_POST['edadMaxOf'])){echo $_POST['edadMaxOf'];}else{echo 100;} ?>">
 							</div>
 						</div>
 						<div class="col-md-12">

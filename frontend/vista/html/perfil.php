@@ -79,7 +79,7 @@
 
 				    <?php if($puedeDescargarInforme >= 2 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 				    	<div class="recuadro-perfil panel panel-default" style="margin: 50px 0px;"><br>
-				    		<a href="<?php echo PUERTO."://".HOST."/fileGEN/informeUsuarioCandidato/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
+				    		<a href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
 					            <img width="100%" alt="informePersonalidad" src="<?php echo PUERTO."://".HOST."/imagenes/informe.png";?>">
 					            <div class="perfil-cuadro" id="err_img" align="center">
 					              <label style="cursor:pointer" class="text-center" for="">acceder a informe de competencias laborales <?php if($puedeDescargarInforme >= 2 && $puedeDescargarInforme < 5){ echo 'parcial'; }else{ echo 'completo'; } ?></label>
@@ -527,7 +527,7 @@
 
 		                                    <div class="col-md-12 col-sm-12 col-lg-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasFrecuentes/'>autopostulaciones</a>. </p>">
 												<div class="form-group" id="seccion_area">
-													<label style="font-size: 13px;">&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando máximo numero áreas de su inter&eacute;s<span title="Este campo es obligatorio" class="requerido"> *</span></label>											
+													<label style="font-size: 13px;">&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando <b class="requerido">máximo numero áreas</b> de su inter&eacute;s<span title="Este campo es obligatorio" class="requerido"> *</span></label>											
 													<div id="err_area" class="help-block with-errors"></div>
 
 													<select class="form-control" id="area" name="area[]" multiple="multiple">

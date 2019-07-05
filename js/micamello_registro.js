@@ -4,7 +4,7 @@ if($('#fechaNac').length){
     shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
     shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
     fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
-    titleContentDate: "Configurar fecha",
+    titleContentDate: "Configurar fecha de nacimiento",
     titleContentTime: "Configurar tiempo",
     titleContentDateTime: "Configurar Fecha & Tiempo",
     setButtonContent: "Listo",
