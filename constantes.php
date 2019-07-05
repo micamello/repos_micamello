@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'micamell_desarrollo3');
+define('DBNOMBRE', 'micamello_desarrollo3');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -71,33 +71,26 @@ define('METODO_SELECCION', array('1'=>array(
 									), '2'=>array(
 										'Seleccionar y arrastrar para ordenar las respuestas', ''
 									)));
-
 define('AREASPERMITIDAS', '3');
 define('VALORES_ORDENAMIENTO', array('100','1000'));
-
 //FACTURACION ELECTRONICA
 //PRUEBAS
 define('WS_SRI_RECEPCION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 define('WS_SRI_AUTORIZACION','https://celcer.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
-
 //PRODUCCION
 //define('WS_SRI_RECEPCION','https://cel.sri.gob.ec/comprobantes-electronicos-ws/RecepcionComprobantesOffline?wsdl');
 //define('WS_SRI_AUTORIZACION','https://cel.sri.gob.ec/comprobantes-electronicos-ws/AutorizacionComprobantesOffline?wsdl');
-
 //PAYME
-
 //PRUEBAS
 define('PAYME_ACQUIRERID','237');
 define('PAYME_IDCOMMERCE','10030');
 define('PAYME_SECRET_KEY','mjNkPqNvrjUxZAH.97676492');
 define('PAYME_RUTA','https://integracion.alignetsac.com/');
-
 //PRODUCCION
 //define('PAYME_ACQUIRERID','39');
 //define('PAYME_IDCOMMERCE','11562');
 //define('PAYME_SECRET_KEY','ggkGwgUsgLUhQTTTZC?89837522396');
 //define('PAYME_RUTA','https://vpayment.verifika.com/');
-
 define('PAYME_CURRENCY_CODE','840');
 define('GRAVAIVA','1.12');
 // facebook
@@ -116,10 +109,8 @@ define('G_SECRET', '1dwFr9eQ_OOiGGCaoUvBLFYh');
 define('LK_ID_CLIENTE', '78mhxodb8c3yih');
 define('LK_SECRET', 'pWZA5w3DS9NGHG3c');
 define("LK_SCOPE", 'r_liteprofile r_emailaddress');
-
 // correos
 define("DIRECTORIOCORREOS", array('0'=>'desarrollo@micamello.com.ec', '1'=>'desarrollo2@micamello.com.ec', '2'=>'administrador.gye@micamello.com.ec'));
-
 define('AREASPERMITIDAS_PUB', '1');
 define('SUBAREA_PERM_PUB', '1');
 ?>

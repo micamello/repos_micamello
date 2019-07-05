@@ -264,7 +264,8 @@ class Controlador_GenerarPDF extends Controlador_Base
     $cantd_preg = 0;
     $pos_no_disponible = 1;
     $parrafo = $faceta = $porcentaje_faceta = $etiquetas_faceta = $colors = $descrip_facetas = $descrip_titulo = '';
-    $puntaxfaceta = array();
+    $puntaxfaceta = $horasbd = array();
+
     foreach ($porcentajesxfaceta as $c => $datos_resultado) {
       $puntaxfaceta[$datos_resultado['id_faceta']] = $datos_resultado['id_puntaje'];
       $etiquetas_faceta .= $facetas[$datos_resultado['id_faceta']]['literal'].': '.$datos_resultado['valor'].'|';
@@ -273,11 +274,13 @@ class Controlador_GenerarPDF extends Controlador_Base
       $colors_l .= str_replace("#", "", $datos['colores'][$datos_resultado['id_faceta']]).'|';
       $descrip_facetas .= $facetas[$datos_resultado['id_faceta']]['faceta'].': '.$datos_resultado['valor'].'|';
       $descrip_titulo .= $facetas[$datos_resultado['id_faceta']]['literal'];
+      array_push($horasbd, $datos_resultado['tiempo']);
     }
     $etiquetas_faceta = substr($etiquetas_faceta, 0,-1);
     $colors = substr($colors, 0,-1);
     $descrip_facetas = substr($descrip_facetas, 0,-1);
     $porcentajes_faceta = substr($porcentajes_faceta, 0,-1);
+
     $informe = '<br><br><br><br>
     <div id="pagina-1">
       <h1>Informe ';
@@ -288,10 +291,11 @@ class Controlador_GenerarPDF extends Controlador_Base
       <br><br><br><br>
       <div style="text-align:center"><br><br><br><br><br>
       <img width="600" src="'.FRONTEND_RUTA.'imagenes/pdf/diseno.png" class="canea">
-      </div><br><br><br><br><br><br><br>
+      </div><br><br><br><br><br>
       <div class="pg1">
         <p><b>NOMBRES Y APELLIDOS COMPLETOS:</b><br>'.$nombre_mayuscula.'</p>
         <p><b>FECHA DE EMISION: </b><br>'.date('Y-m-d').'</p>
+        <p><b>TIEMPO: </b><br>'.self::sumarHoras($horasbd).'</p>
       </div>
     </div> 
     <div style="page-break-after:always;"></div>
@@ -668,8 +672,8 @@ class Controlador_GenerarPDF extends Controlador_Base
             </tr>
         </table></p>';
       }
-      //echo $informe;    
-      self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
+    //echo $informe;    
+    self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
   }
 
   public function generaInformeCandidato($datos){
@@ -1309,6 +1313,15 @@ class Controlador_GenerarPDF extends Controlador_Base
         //echo $html;
         $mpdf->Output($datos['username'].".pdf", 'D');
         
+  }
+
+  public static function sumarHoras($horas) {
+    $total = 0;
+    foreach($horas as $h) {
+        $parts = explode(":", $h);
+        $total += $parts[2] + $parts[1]*60 + $parts[0]*3600;        
+    }   
+    return gmdate("H:i:s", $total);
   }
 }
 ?>

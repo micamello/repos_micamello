@@ -13,7 +13,7 @@ if($('#fechaNac')){
       shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
       shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
       fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
-      titleContentDate: "Configurar fecha",
+      titleContentDate: "Configurar fecha de nacimiento",
       titleContentTime: "Configurar tiempo",
       titleContentDateTime: "Configurar Fecha & Tiempo",
       setButtonContent: "Listo",
@@ -208,6 +208,7 @@ if($('#documentoCandEmp').length){
 		}
 	});
 	$('#documentoCandEmp').on('blur', function(){
+		console.log($('#tipo_documentacion').val());
 		if($(this).val() != ""){
 			$(this).val($(this).val().trim());
 			var tipoDocCampo = $('#tipo_documentacion').val();
@@ -225,6 +226,10 @@ if($('#documentoCandEmp').length){
 				}
 			}
 			else{
+				if($(this).val().length == 13){
+					crearMensajeError($(this), "No se admiten RUC de persona natural.");
+					return false;
+				}
 				crearMensajeError($(this), "Documento ingresado no es válido");
 			}
 		}

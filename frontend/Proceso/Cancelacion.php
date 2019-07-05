@@ -151,7 +151,7 @@ class Proceso_Cancelacion{
     $email_body = str_replace("%FECHA%", $fecha, $email_body);       
     $notif_body = $email_body;
     Modelo_Notificacion::insertarNotificacion($idusuario,$notif_body,$tipousuario);
-    Utils::envioCorreo($correo,"Cancelación de Subscripción",$email_body);
+    Utils::envioCorreo($correo,"Cancelación de Suscripción",$email_body);
   }
   
 }

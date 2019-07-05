@@ -462,7 +462,8 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 											</div>
 										<?php }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1){ ?>
 											<div class="col-md-2 col-sm-3 col-xs-6">
-												<a class="f-s-16px" style="cursor:pointer" title="Eliminar postulaci&oacute;n" onclick="abrirModal('Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.utf8_encode($o['empresa']).')</b>'; } ?>, Desea eliminar la postulación? ','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
+												<a class="f-s-16px" style="cursor:pointer" title="Eliminar postulaci&oacute;n" 
+												onclick="abrirModal('<span style=\"font-size:14px;\"> Si presiona el botón de Aceptar no recibirá más postulaciones automáticas de esta empresa <?php if (REQUISITO[$o['confidencial']] == 'No') { echo '<b>('.utf8_encode($o['empresa']).')</b>'; } ?>, Desea eliminar la postulación? </span>','alert_descarga','<?php echo PUERTO."://".HOST."/postulacion/eliminar/".Utils::encriptar($o['id_postulacion'])."/".Utils::encriptar($o['id_empresa'])."/"; ?>','Ok','Confirmación');">
 													<i class="postulacion-icono-basura fa fa-trash"></i><br>Eliminar postulaci&oacute;n
 												</a>
 											</div>

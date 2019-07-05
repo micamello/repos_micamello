@@ -146,10 +146,11 @@
                   <img class="publicidad img-responsive" src="<?php echo PUERTO."://".HOST;?>/imagenes/anuncio.gif">
                   <br>
                   <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-                    <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
-                      <input type="hidden" name="postulado" id="postulado" value="1">
-                      <input type="hidden" name="opcion" id="opcion" value="">
+                    
                       <?php if(!empty($vista) && $vista != 'postulacion'){ ?>
+                        <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
+                        <input type="hidden" name="postulado" id="postulado" value="1">
+                        <input type="hidden" name="opcion" id="opcion" value="1">
                         <?php if(!empty($postulado)){ ?>
                           <div align="center">
                             <div class="cambiar">
@@ -174,12 +175,16 @@
                             </div>
                           </div>
                         <?php } ?>
+                        </form>
                       <?php }else{ ?>
+                        <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
+                        <input type="hidden" name="postulado" id="postulado" value="1">
+                        <input type="hidden" name="opcion" id="opcion" value="2">
                         <div align="center">
                           <div align="cambiar">
                             <label for="status">Estatus del candidato en la oferta</label>
                             <select class="form-control" name="status" id="status">
-                              <option value="">Seleccione un estatus</option>
+                              <option selected value="0" disabled>Seleccione un estatus</option>
                               <?php 
                                 foreach(ESTATUS_OFERTA as $key => $v){ 
 
@@ -197,6 +202,7 @@
                             </h5>
                           </div>
                         </div>
+                        </form>
                       <?php } ?>
                     </form>
                   <?php } ?>

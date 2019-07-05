@@ -328,7 +328,7 @@ $('#telefono').on('blur', function(){
     validarNumTelf(tel,"err_tlf","seccion_tlf","btndeposito");
     validaCampos(2);
   }else if(tel.length <= '9'){
-    colocaError("err_tlf","seccion_tlf","Mínimo 9 caracteres","btndeposito");
+    colocaError("err_tlf","seccion_tlf","Mín. 9 dígitos. Máx. 15 dígitos","btndeposito");
   }else{
     colocaError("err_tlf","seccion_tlf","Máximo 15 caracteres","btndeposito");
   }
@@ -354,7 +354,7 @@ $('#shippingPhone').on('blur', function(){
     validarNumTelf(tel,"err_tlfPM","seccion_tlfPM","btnpayme");
     validaCampos(1);
   }else if(tel.length <= '9'){
-    colocaError("err_tlfPM","seccion_tlfPM","Mínimo 9 caracteres","btnpayme");
+    colocaError("err_tlfPM","seccion_tlfPM","Mín. 9 dígitos. Máx. 15 dígitos","btnpayme");
   }else{
     colocaError("err_tlfPM","seccion_tlfPM","Máximo 15 caracteres","btnpayme");
   }
@@ -933,7 +933,7 @@ function validarFormulario(){
       quitarError(err_tlf, seccion_tlf);
     }
   }else if(telefono.length <= '10'){
-    colocaError(err_tlf,seccion_tlf,"Mínimo 9 caracteres",btn);
+    colocaError(err_tlf,seccion_tlf,"Mín. 9 dígitos. Máx. 15 dígitos",btn);
     error = 1;     
   }else{
     colocaError(err_tlf,seccion_tlf,"Máximo 15 caracteres",btn);

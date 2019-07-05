@@ -254,9 +254,9 @@ public static function validarCelularConvencional($contenido){
         $ext = 'pdf';
         $status = true;
       }
-      $encontro = strpos($file['type'], 'word');
-      if($encontro != false){
-        $ext = 'docx';
+      $encontro = strpos($file['type'], 'word');      
+      if($encontro != false){        
+        $ext = (strstr($file['name'],'x')===false) ? 'doc' : 'docx';        
         $status = true;
       }
     }

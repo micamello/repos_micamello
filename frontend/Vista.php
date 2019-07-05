@@ -89,7 +89,7 @@ class Vista {
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
       //$menu["menu"][] = array("href"=>"#", "id"=>"regEmpMic", "nombre"=>"Registro Empresa");
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/login/", "nombre"=>"Ingresar");
-      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/registro/", "id"=>"regCandMic", "nombre"=>"Registrate");
+      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/registro/", "id"=>"regCandMic", "nombre"=>"Reg&iacute;strate");
     }
     else{      
       $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/", "nombre"=>"Inicio","vista"=>"inicio"); 

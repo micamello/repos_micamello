@@ -23,7 +23,7 @@
 
             <?php if($valorporc == 40){ ?>
               <button id="btn-verde" class="btn-medio bounceCss">
-                <a href="<?php echo PUERTO.'://'.HOST.'/fileGEN/informeUsuarioCandidato/'.$_SESSION['mfo_datos']['usuario']['username'].'/'; ?>">REVISE SU INFORME PARCIAL</a>
+                <a href="<?php echo PUERTO.'://'.HOST.'/fileGEN/informeusuario/'.$_SESSION['mfo_datos']['usuario']['username'].'/'; ?>">REVISE SU INFORME PARCIAL</a>
               </button> 
               <button id="btn-enlace" class="btn-medio bounceCss">
                 <a href="<?php echo PUERTO.'://'.HOST.'/'.$enlaceboton.'/'; ?>"><?php echo $textoBoton; ?></a>

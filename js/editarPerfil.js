@@ -88,7 +88,7 @@ if(document.getElementById('form_editarPerfil')){
             shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
             shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
             fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
-            titleContentDate: "Configurar fecha",
+            titleContentDate: "Configurar fecha de nacimiento",
             titleContentTime: "Configurar tiempo",
             titleContentDateTime: "Configurar Fecha & Tiempo",
             setButtonContent: "Listo",
@@ -170,7 +170,7 @@ $('#provincia').change(function()
                 });
 
                 if(document.getElementById('ciudad').value == 0){
-                    colocaError("err_ciu", "seccion_ciudad","Debe seleccionar una opcion de la lista","boton");
+                    colocaError("err_ciu", "seccion_ciudad","Seleccione una opción","boton");
                 }else{
                     quitarError("err_ciu","seccion_ciudad");
                 }

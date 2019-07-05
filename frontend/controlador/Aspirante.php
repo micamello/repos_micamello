@@ -809,9 +809,9 @@ class Controlador_Aspirante extends Controlador_Base
                                         $datos = $datos_usuarios[$id];
                                         $nombre_mostrar = ucfirst(utf8_encode($datos["nombres"]))." ".ucfirst(utf8_encode($datos["apellidos"]));    
                                         $template = $email_body;
-                                        $enlace = PUERTO.'://'.HOST.'/login/';
+                                        $enlace = '<a href="'.PUERTO.'://'.HOST.'/login/">Click aqu&iacute;</a>';
 
-                                        $notif_body = "Estimado <b>".$nombre_mostrar."</b>.<br><br>Hoy (".$fecha.") una importante empresa del sector est&aacute; interesado en su perfil y desea conocer un poco m&aacute;s de usted, complete el test si desea continuar en el proceso de selecci&oacute;n";
+                                        $notif_body = "Estimado <b>".$nombre_mostrar."</b>.<br><br>Hoy (".$fecha.") una importante empresa del sector est&aacute; interesado en su perfil y desea conocer un poco m&aacute;s de usted, complete el test CANEA si desea continuar en el proceso de selecci&oacute;n";
 
                                         $template = str_replace("%NOMBRES%", $nombre_mostrar, $template);
                                         $template = str_replace("%ENLACE%", $enlace, $template);      
