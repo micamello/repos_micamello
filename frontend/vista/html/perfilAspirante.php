@@ -125,18 +125,17 @@
 					<div align="left">
 						<div class="col-md-4">
 							<div class="contentData">
-								<h5><b>Ciudad de residencia: </b><?php echo utf8_encode($datosUsuario['ciudad']) ?></h5>
-							</div>
-						</div>
-						
-						<div class="col-md-4">
-							<div class="contentData">
 								<h5><b>Nacionalidad: </b><?php echo utf8_encode($datosUsuario['nacionalidad']) ?></h5>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<div class="contentData">
 								<h5><b>Provincia de residencia: </b><?php echo utf8_encode($datosUsuario['provincia']) ?></h5>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="contentData">
+								<h5><b>Ciudad de residencia: </b><?php echo utf8_encode($datosUsuario['ciudad']) ?></h5>
 							</div>
 						</div>
 					</div>

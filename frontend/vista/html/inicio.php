@@ -192,24 +192,25 @@
 <!-- Listado de auspiciantes -->
 <section id="brand" class="brand fix">
   <div class="container-fluid">
-    <div class="carousel slide col-md-12" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel3">
+    <br>
+    <!--<div class="carousel slide col-md-12" data-ride="carousel" data-type="multi" data-interval="3000" id="myCarousel3">
       <div class="carousel-inner">
         <?php 
-        $cont = 1;
+       /* $cont = 1;
         if (count($arrauspiciante) > 1){
-          foreach($arrauspiciante as $auspiciante) {         
+          foreach($arrauspiciante as $auspiciante) {     */    
         ?>
-            <div class="item <?php if($cont == 1){ echo 'active'; } ?>">
-              <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php echo $auspiciante['url']; ?>"><img style="max-width:100%; width:100%" src="<?php echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a>
+            <div class="item <?php #if($cont == 1){ echo 'active'; } ?>">
+              <div class="brand_item col-md-2 col-sm-6 "><a target="_blank" href="<?php #echo $auspiciante['url']; ?>"><img style="max-width:100%; width:100%" src="<?php #echo PUERTO."://".HOST;?>/imagenes/auspiciantes/<?php #echo $auspiciante['id_auspiciante'].'.'.$auspiciante['extension'];?>" class="img-responsive"></a>
               </div>
             </div>
         <?php 
-          $cont++; 
-          }
-        } 
+          #$cont++; 
+          #}
+        #} 
         ?>
       </div>
-    </div>                
+    </div>    -->            
   </div>
 </section><!-- End off Brand section -->
 

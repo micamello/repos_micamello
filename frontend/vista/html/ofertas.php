@@ -16,15 +16,14 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 		<form role="form" name="filtro" id="filtro" method="post" action="<?php echo PUERTO.'://'.HOST.'/'.$vista.'/'; ?>"> 
 			<?php if($filtro == 1){ ?>
 			<div class="alert alert-info col-md-12" style="padding-bottom: 0px;"> 
-				<h2 class="subt-2 modal-title" style="text-decoration: underline; text-transform: uppercase;">Ofertas Filtradas</h2>
 				<div style="padding-bottom: 0px;">
-			        <div class="row">
+			        <div class="container-fluid">
 			            <div class="col-md-12">
-			              <p>Las ofertas aquí presentadas estan filtradas por las siguientes caracteristicas:</p>
-			            </div>
+				          <p style="text-align: center;font-weight: bold; font-size: 16pt;">Las ofertas aquí presentadas estan filtradas por las siguientes características:</p>
+				        </div>
 			            <?php if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){ ?>
-				            <div class="col-md-4 col-md-offset-2">
-				              <h3 class="subt-2">&Aacute;reas y sub&aacute;reas de empleo</h3>
+				            <div class="col-md-6 col-sm-12">
+				              <h3 class="subt-2" style="font-size:14pt">&Aacute;reas y sub&aacute;reas de empleo</h3>
 				              <table class="table">
 				                <thead>
 				                  <tr>
@@ -57,8 +56,8 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				              </table>
 				           	</div>
 			            <?php } ?>
-			            <div class="col-md-4">
-			               	<h3 class="subt-2" style="padding: 15px; text-align: center">Cambio de residencia:
+			            <div class="col-md-6">
+			               	<h3 class="subt-2" style="padding: 15px; text-align: center; font-size:14pt">Cambio de residencia:
 			               		<span style="color: #797979;"> 
 			               			<?php if(isset($_SESSION['mfo_datos']['usuario']['residencia']) && $_SESSION['mfo_datos']['usuario']['residencia'] == 1){
 										echo 'SI';
@@ -68,7 +67,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 									} ?>
 			               		</span>
 			               	</h3>
-			               	<br>Si desea ver todas las ofertas sin filtro <br><br><a style="cursor:pointer; padding: 15px !important" class="btn-blue-2 pulse animated infinite" onclick="document.forms['filtro'].submit()">Click Aqu&iacute;</a>
+			               	<p style="text-align: center;font-weight: bold; font-size: 16pt;">Si desea ver todas las ofertas sin filtro </p><br><a style="cursor:pointer; padding: 15px !important" class="btn-light-blue pulse animated infinite" onclick="document.forms['filtro'].submit()">Click Aqu&iacute;</a>
 			            </div> 
 			        </div>
 			    </div> 

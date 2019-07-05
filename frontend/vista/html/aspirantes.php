@@ -662,8 +662,11 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				<br>
 				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right">
 		          <h6 style="color:#6d6d6b">
-		            <button id="activar-accesos" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo.</p>">Activar accesos</button>
+		            <button style="float: right;" id="activar-accesos" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo.</p>">Activar accesos</button>
 		          </h6>
+		          <?php if(count($usuariosConAccesos) > 0){ ?>
+		          	<p style="padding-top: 10px;color: #a5a5a5; float: right;" class="bounce infinite form-text text-muted">El color de fondo <span style="background-color: #bbdcf9; width: 50px; border: 1px solid #aaa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> indica que los usuarios completaron el informe mediante acceso.</p>
+		          <?php } ?>
 		        </div>
 
 		        <div <?php echo $style_desactivo; ?> id="desactivarAccesos" class="pull-right">
@@ -1134,7 +1137,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 		              <p class="subt" style="font-size: 25pt"><b>Beneficios </b></p>
 		              <ul>
 		                <li class="qs-text-lista"><p style="color: #797979;">Puede escoger el (los) candidato (s) para finalizar el test de competencias laborales CANEA</p></li>
-		                <li class="qs-text-lista"><p style="color: #797979;">Puede activar uno o varios accesos, de acuerdo al <b><a href="planes-empresa.html">plan contratado.</a></b> </p></li>
+		                <li class="qs-text-lista"><p style="color: #797979;">Puede activar uno o varios accesos, de acuerdo al <b><a href="<?php echo PUERTO."://".HOST;?>/planes/">plan contratado.</a></b> </p></li>
 		              </ul>
 		            </div>
 		            <div class="col-md-4" style="text-align: center !important;"><br><br><br><br>

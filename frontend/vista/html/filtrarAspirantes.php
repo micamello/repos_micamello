@@ -88,8 +88,9 @@ foreach ($data as $letra => $value) {
             foreach ($salida as $key => $value) {
                 $l = substr($value[0],0,1);
                 $i = substr($value[0],1);
-                $filtros_r .= utf8_encode($literales[$l]).': '.$i.'%&nbsp;&nbsp;';
+                $filtros_r .= utf8_encode($literales[$l]).': '.$i.'%&nbsp;&nbsp;-';
             }
+            $filtros_r = substr($filtros_r, 0, -1); 
             $filtros_r .= '</span>
                     <span id="icono-filtro" class="input-group-addon" style="padding:0px; cursor:pointer;">
                         <p onclick="enviarPclave('.$valores.')"><i style="font-size:20px;" class="fa fa-window-close"></i>

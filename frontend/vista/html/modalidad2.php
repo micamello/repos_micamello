@@ -206,7 +206,7 @@
                     <li class="contenido-modal-list">Domine los nervios.</li>
                     <li class="contenido-modal-list">Sea usted mismo.</li>
                     <li class="contenido-modal-list">Solo se puede acceder una sola vez.</li>
-                    <li class="contenido-modal-list">Después enviar el test no podrá realizar ningún tipo de corrección.</li>
+                    <li class="contenido-modal-list">Después de enviar el test no podrá realizar ningún tipo de corrección.</li>
                   </ul>
                 <?php 
               }

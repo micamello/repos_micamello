@@ -44,7 +44,7 @@ $_SESSION['mostrar_error'] = ""; ?>
 </div>
 <?php } ?>
 
-<div class="container"><br>
+<div class="container">
     <form role="form" name="form_editarPerfil" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/perfil/" enctype="multipart/form-data">
         <div class="">
             <div class="col-md-3 col-sm-3 col-xs-12">
