@@ -116,13 +116,13 @@ class Controlador_Registro extends Controlador_Base {
     }
     else{
       if(!Utils::validarPasaporte($datosReg['documentoCandEmp'])){
-        throw new Exception("Ingrese un pasaporte válido");
+        throw new Exception("Ingrese un pasaporte v\u00E1lido");
       }
     }
 
     if($datosReg['tipo_usuario'] == 1){
       if(!Utils::valida_fecha($datosReg['fechaNac'])){
-        throw new Exception("Ingrese una fecha válida");
+        throw new Exception("Ingrese una fecha v\u00E1lida");
       }
 
       if(!Utils::valida_fecha_mayor_edad($datosReg['fechaNac'])){

@@ -82,9 +82,8 @@ class Controlador_Perfil extends Controlador_Base
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
                     if(!isset($data['error'])){
-                        Utils::log('entro en editado');
-                        $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
-                        Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+                      //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';                      
+                      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
                     }
                 }
 
@@ -381,8 +380,8 @@ class Controlador_Perfil extends Controlador_Base
                     $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
-                          throw new Exception("C\u00E9dula o pasaporte no válido.");
+                        if(!Utils::$function($data['dni'], 1)){
+                          throw new Exception("C\u00E9dula o pasaporte no v\u00E1lido.");
                         }
                       }           
           
@@ -497,17 +496,16 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }            
             $GLOBALS['db']->commit();
-            $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario);            
-            Controlador_Login::registroSesion($sess_usuario);            
-            //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+            $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario); 
+            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';           
+            Controlador_Login::registroSesion($sess_usuario);                        
             
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $data["error"] = 1;
             $GLOBALS['db']->rollback();
             $data['error'] = 1;
-        }
-        Utils::log('data:'. print_r($data,true));
+        }        
         return $data;
     }
 

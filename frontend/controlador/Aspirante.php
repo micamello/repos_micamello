@@ -696,7 +696,7 @@ class Controlador_Aspirante extends Controlador_Base
             $data_user = self::datauser($username, $id_oferta, $vista);
             $breadcrumbs = array();
             $breadcrumbs['verAspirantes/'.$vista.'/'.Utils::encriptar($id_oferta)."/1"] = "Ver aspirantes";
-            $breadcrumbs['perfil'] = 'perfil Candidato ('.$username.')';
+            $breadcrumbs['perfil'] = 'Perfil del Candidato ('.$username.')';
             $enlaceCompraPlan = Vista::display('btnComprarPlan',array('presentarBtnCompra'=>$planes));
             $tags["template_js"][] = "detalleperfil";
             $tags1 = array("breadcrumbs"=>$breadcrumbs,
