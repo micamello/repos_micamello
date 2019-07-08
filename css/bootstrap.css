@@ -54,7 +54,7 @@ abbr[title] {
 }
 b,
 strong {
-  font-weight: bold;
+  font-weight: 500 !important;
 }
 dfn {
   font-style: italic;
@@ -177,7 +177,7 @@ textarea {
   overflow: auto;
 }
 optgroup {
-  font-weight: bold;
+  font-weight: 500 !important;
 }
 table {
   border-spacing: 0;
@@ -1447,7 +1447,7 @@ dd {
   line-height: 1.42857143;
 }
 dt {
-  font-weight: bold;
+  font-weight: 500 !important;
 }
 dd {
   margin-left: 0;
@@ -1553,7 +1553,7 @@ kbd {
 kbd kbd {
   padding: 0;
   font-size: 100%;
-  font-weight: bold;
+  font-weight: 500 !important;
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -2510,7 +2510,7 @@ label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
-  font-weight: bold;
+  font-weight: 500 !important;
 }
 input[type="search"] {
   -webkit-box-sizing: border-box;
@@ -4849,7 +4849,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   display: inline;
   padding: .2em .6em .3em;
   font-size: 75%;
-  font-weight: bold;
+  font-weight: 500 !important;
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -4917,7 +4917,7 @@ a.label:focus {
   min-width: 10px;
   padding: 3px 7px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: 500 !important;
   line-height: 1;
   color: #fff;
   text-align: center;
@@ -5038,7 +5038,7 @@ a.thumbnail.active {
   color: inherit;
 }
 .alert .alert-link {
-  font-weight: bold;
+  font-weight: 500 !important;
 }
 .alert > p,
 .alert > ul {
@@ -5844,7 +5844,7 @@ button.list-group-item-danger.active:focus {
 .close {
   float: right;
   font-size: 21px;
-  font-weight: bold;
+  font-weight: 500 !important;
   line-height: 1;
   color: #000;
   text-shadow: 0 1px 0 #fff;

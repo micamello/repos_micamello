@@ -16,7 +16,7 @@
       <div class="pie-pag col-md-4" style=" padding-left: 30px;">
         <h3>Disponible también en otros países</h3>
         <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
-          <a>
+          <a href="<?php echo PUERTO."://".$sucursal['dominio']; ?>" target="_blank">
             <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="redes-mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
           </a>
         <?php } ?>   

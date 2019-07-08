@@ -272,7 +272,7 @@ class Controlador_Plan extends Controlador_Base {
       if (!Utils::alfanumerico($data["num_comprobante"]) || strlen($data["num_comprobante"]) > 50){
         throw new Exception("N\u00FAmero de comprobante no es v\u00E1lido");
       }
-      if (!Utils::formatoDinero($data["valor"]) || strlen($data["valor"]) > 10){
+      if (!Utils::formatoDineroDecimal($data["valor"]) || strlen($data["valor"]) > 10){
         throw new Exception("Valor del comprobante no es v\u00E1lido");
       }
       if (!Utils::es_correo_valido($data["correo"]) || strlen($data["correo"]) > 100){

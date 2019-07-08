@@ -51,7 +51,7 @@
 }
 
 .pricingdiv ul.theplan li.title{
-  font-weight: bold;
+  font-weight: 500 !important;
   text-align: center;
   padding: 10px 5px;
   background: rgb(40, 193, 203);
@@ -86,7 +86,7 @@
   margin: 10px auto;
   border-radius: 5px;
   color: white;
-  font-weight: bold;
+  font-weight: 500 !important;
   border-radius: 5px;
   text-transform: uppercase;
   cursor: pointer;

@@ -179,7 +179,7 @@
 }
 
 .ms-drop ul > li label.optgroup {
-    font-weight: bold;
+    font-weight: 500 !important;
 }
 
 .ms-drop input[type="checkbox"] {

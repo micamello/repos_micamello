@@ -184,7 +184,7 @@ ul.checkout-bar li:before {
 }
 ul.checkout-bar li.active {
   color: #8bc53f;
-  font-weight: bold;
+  font-weight: 500 !important;
   z-index: 999;
 }
 ul.checkout-bar li.active:before {
@@ -439,7 +439,7 @@ ul.checkout-bar a {
     color: #fff;
     text-shadow: 0 1px 1px rgba(1,1,1,.8);
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 500 !important;
     text-align: center;
 }
 
