@@ -840,7 +840,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
 
 							            		<td align="right" style="text-align: center;" data-title="Foto: ">
-							                      <img class="imagen-perfil-2" src="<?php echo Modelo_Usuario::obtieneFoto($a['username']); ?>" alt="perfil" width="50" height="50">
+							                      <img class="imagen-perfil-2" src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgthumb/'.$username.'/'; ?>" alt="perfil" width="50" height="50">
 							                    </td>
 							            		
 							            		

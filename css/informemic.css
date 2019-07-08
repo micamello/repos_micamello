@@ -33,7 +33,7 @@ body{
         text-align: center;
       }
       h2{
-        font-weight: bold;
+        font-weight: 500 !important;
         text-transform: uppercase;
         font-size: 14pt;
       }
@@ -71,7 +71,7 @@ body{
 
       .mayor{
         font-size: 16pt;
-        font-weight: bold;
+        font-weight: 500 !important;
       }
       .tabla1 td{
         padding: 5px; 
@@ -172,7 +172,7 @@ body{
       .bloque-1{
         text-align: center;
         font-size: 11pt;
-        font-weight: bold;
+        font-weight: 500 !important;
         text-transform: uppercase;
         padding: 25px 40px;
       }
@@ -195,10 +195,10 @@ body{
         margin: 0 auto;
       }
       .link{
-        font-weight: bold;
+        font-weight: 500 !important;
       }
       .aviso{
-        font-weight: bold;
+        font-weight: 500 !important;
         text-transform: uppercase;
         text-align: center;
       }

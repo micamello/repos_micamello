@@ -2,431 +2,691 @@
     <h2 class="titulo">Términos y Condiciones</h2>
   </div>
 <div class="container politica" >
-  <h1 class="tit-pol">Introducción</h1>
-<p>MICAMELLO.COM.EC es un servicio ofrecido por Mi Camello Inc., empresa ubicada y registrada en
-los Estados Unidos de Norteamérica, en 4828 HOPSPRING DR ORLANDO FL 32829-8643,
-propietaria de la web MICAMELLO.COM.EC así como de las apps y bases de datos asociadas. Los
-términos y condiciones de uso de MICAMELLO.COM.EC constituyen un contrato legal, vinculante y
-exigible entre MICAMELLO.COM.EC y el usuario del sistema con relación al uso del sitio web y los
-servicios que presta MICAMELLO.COM.EC<br><br>
-El portal se reserva el derecho de modificar los servicios, los términos y condiciones y las normas
-que los complementan, en cualquier momento y tantas veces estime necesario
-MICAMELLO.COM.EC, por lo que es de exclusiva responsabilidad de los usuarios el leerlos y
-mantenerse informados sobre los cambios realizados, toda vez que, por el simple hecho de
-publicar la actualización en el portal, se entenderán notificados los usuarios del sistema.<br><br>
-<h1 class="tit-pol">1. QUÉ ES MICAMELLO.COM.EC</h1>
-MICAMELLO.COM.EC es un portal web de búsqueda de empleo, que se caracteriza por ser de fácil
-registro, acceso y administración. De igual manera, para aquellas empresas o personas que están
-buscando trabajadores, en donde podrán revisar el perfil de cada uno de los candidatos
-postulados para una oferta específica, pudiendo escoger aquel que más se ajuste a sus
-necesidades.<br><br>
-<h1 class="tit-pol">2. ACEPTACIÓN DE LOS TÉRMINOS Y CONDICIONES DE USO</h1>
-Usted puede visitar y utilizar los servicios del sitio web MICAMELLO.COM.EC únicamente si acepta
-por completo los términos y condiciones de uso que se establecen en el presente documento, y al
-usar o registrarse en cualquiera de los servicios de MICAMELLO.COM.EC significa y afirma su
-pleno conocimiento y consentimiento de estos términos y condiciones aplicables al uso de los
-servicios del portal.<br><br>
-Si usted no lee o no está de acuerdo con uno o varios de los términos y/o condiciones de uso, no
-use y/o no se registre en el portal, debiendo salir inmediatamente del sitio web
-MICAMELLO.COM.EC, y evite o suspenda todo uso de cualquiera de los servicios del portal.<br><br>
-Al visitar nuestro sitio web o usar nuestra aplicación y/o servicios, usted está celebrando un
-contrato legal con nosotros, que consiste en estos términos y condiciones, y los términos legales
-de nuestros servicios adicionales. Al utilizar nuestros servicios, usted manifiesta su
-consentimiento y reconoce que ha leído cuidadosa e íntegramente este documento, por tanto,
-acepta los mismos, en consecuencia, usted se obliga a cumplir con todas las disposiciones
-contenidas en estos términos y condiciones de uso.<br><br>
-Dentro del portal y por la dinámica del sistema, podrá encontrar términos y condiciones de uso
-específico o normas que reglamenten el uso de dicho módulo, mismo que de usted aceptarlos
-después de leerlos cuidadosamente, serán considerados como un complemento al presente
-documento, por ser éste el principal.<br><br>
-<h1 class="tit-pol">3. CUENTA DE USUARIO</h1>
-Dentro del portal MICAMELLO.COM.EC existen dos tipos de usuario, usuario candidato y usuario
-empresa.<br><br>
-<h1 class="tit-pol">4. USUARIO CANDIDATO</h1>
-Para acceder y utilizar ciertas secciones y características de MICAMELLO.COM.EC primero debe
-registrarse, este registro puede ser a través de sus cuentas de Facebook, Instagram, Google, si
-usted no posee una cuenta en dichas redes sociales, usted puede crear su cuenta en
-MICAMELLO.COM.EC ingresando datos básicos como son sus nombres y apellidos completos, y
-número de cedula y/o pasaporte, al momento en que se registre ya sea con sus datos de redes
-sociales o datos personales, el sistema le solicitará que elija tres (3) áreas de preferencia laboral y
-le remitirá un correo electrónico para la verificación del registro o redireccionándolo al perfil que
-debe completar como son los datos sobre años de experiencia laboral, edad, genero,
-discapacidad, nivel de escolaridad y elegir dos opciones en el nivel de interés al cual desea aplicar
-que pueden ser: Cargos Gerenciales, Cargos Medios o Cargos Básicos.<br><br>
-Completados todos los datos para el registro, el sistema le solicitará que responda un formulario
-de personalidad, luego de lo cual el sistema le mostrará un velocímetro con el avance del registro
-del candidato, permitiéndole en esta etapa continuar con el segundo formulario, al continuar
-podrá cargar su hoja de vida en formatos de Word, PDF, quedando así registrado en el sistema
-MICAMELLO.COM.EC, y se le informará sobre el resto de servicios que MICAMELLO.COM.EC
-oferta al candidato para mejorar su selección, dichos servicios tendrán un costo que el candidato
-podrá o no aceptarlos.<br><br>
-Si alguien diferente a usted accede a su Cuenta de Usuario o a cualquiera de las configuraciones
-de las Plataformas de Usuario, usted podrá ejecutar acciones disponibles en el sistema para
-realizar los cambios necesarios en su cuenta de usuario y aceptar los términos legales disponibles
-en la misma y se considerará que todas esas actividades se han producido en su representación y
-en su nombre. Por lo que, es necesario que usted mantenga la confidencialidad de sus
-credenciales de inicio de sesión de su cuenta usuario, porque usted será la persona única y
-responsable de todas las actividades que ocurran en su cuenta de usuario, y por los daños, gastos
-o pérdidas que puedan resultar de tales actividades.<br><br>
-Usted debe proporcionar información precisa y completa al registrar su Cuenta de Usuario y
-utilizar los servicios de MICAMELLO.COM.EC de los cuales usted única y exclusivamente tiene
-derechos. Le recomendamos muy especialmente proporcionar sus propios datos de contacto y
-facturación, incluyendo su dirección de correo electrónico válida, porque podemos utilizarla para
-identificar y determinar la persona que es real y verdaderamente dueña de la Cuenta Usuario
-entregada a MICAMELLO.COM.EC<br><br>
-En caso de controversias sobre propiedad de una Cuenta de Usuario, nos reservamos el derecho a
-determinar la propiedad de una Cuenta de Usuario, ya sea o no que hayamos llevado a cabo una
-investigación independiente. Sin embargo, si no podemos tomar esta determinación, nos
-reservamos el derecho a suspender una Cuenta de Usuario hasta que las partes en controversia
-resuelvan la propiedad de la cuenta, para lo cual MICAMELLO.COM.EC solicitará un documento
-notarizado en el que se determine la propiedad de la cuenta usuario.<br><br>
-MICAMELLO.COM.EC considerará dueño de una cuenta, al usuario que ha sido creado en nuestro
-portal, es decir a aquella que tiene acceso a la dirección del correo electrónico consignada en
-nuestros registros para la creación del usuario. Es por ello que usted debe mantener su nombre
-de usuario y contraseña protegidos, seguros y solo permitir su acceso a personas de su entera
-confianza, ya que todas las actividades que se realicen en su cuenta de usuario son de su exclusiva
-responsabilidad.<br><br>
-La información de usuario que se proporcione debe ser la suya propia en caso de personas
-naturales o la de su empresa en caso de las personas jurídicas, misma que debe ser completa y
-precisa. <br><br>
-<h1 class="tit-pol">5. USUARIO EMPRESA</h1>
-Para acceder, utilizar ciertas secciones, características de MICAMELLO.COM.EC y publicar ofertas
-de trabajo, primero debe registrarse, ingresando datos básicos como son la denominación
-comercial de la empresa, él teléfono y el ruc, al momento en que se registre se le remitirá un
-correo electrónico para la verificación del registro o redireccionándolo al perfil.<br><br>
-Si alguien diferente a la persona responsable de parte de la Empresa accede a su Cuenta de
-Usuario o a cualquiera de las configuraciones de las Plataformas de Usuario, usted podrá ejecutar
-acciones disponibles en el sistema para realizar los cambios necesarios en su cuenta de usuario y
-aceptar los términos legales disponibles en la misma y se considerará que todas esas actividades
-se han producido en su representación y en su nombre. Por lo que, es necesario que la Empresa
-mantenga la confidencialidad de sus credenciales de inicio de sesión de su cuenta usuario, siendo
-la única responsable de todas las actividades que ocurran en su cuenta de usuario, y por los
-daños, gastos o pérdidas que puedan resultar de tales actividades.<br><br>
-La Empresa deberá proporcionar información precisa y completa al registrar su Cuenta de Usuario
-y utilizar los servicios de MICAMELLO.COM.EC de los cuales tiene exclusivamente los derechos.<br><br>
-<h1 class="tit-pol">6. CONDICIONES COMERCIALES</h1>
-Para realizar una publicación, las empresas previamente registradas deberán ir al perfil de su
-usuario y elegir Publicar Vacante, allí llenara los campos de acuerdo con los requerimientos de su
-oferta para proceder a Publicar<br><br>
-<b>IMPORTANTE:</b> Todos los avisos pasan por el proceso de revisión antes de publicarse, esto significa
-que nuestro equipo administrativo tendrá un máximo de 24 horas para la verificación de los datos
-suministrados antes que se proceda a la activación del aviso.<br><br>
-Los avisos pudieran ser rechazados de acuerdo con lo siguiente:<br>
-<ul>
-  <li>Falta de información en el aviso: si el aviso no contiene suficiente información como la
-descripción, la experiencia y los requerimientos; puede ser rechazado por nuestro equipo.</li>
-  <li>Sector de actividad no permitido: el aviso de trabajo se refiere a actividades no permitidas
-como por ejemplo servicios sexuales, distribución de armas y/o drogas.</li>
-  <li>Cuando escribe su correo, links o teléfonos dentro del cuerpo del mensaje.</li>
-  <li>Cuando el Título del aviso no corresponde a la posición</li>
-  <li>Mi Camello no permite publicar avisos de empleo que sirven para distribuir, publicitar o
-promocionar productos o servicios no relacionados con la actividad del usuario empresa.</li>
-</ul>
-Estos avisos serán eliminados del portal antes de que se publiquen.<br><br>
-Los avisos tienen una vigencia de 30 días continuos, en los paquetes se ofrecen un número de
-ofertas (avisos) por un tiempo determinado para usar los mismos.
-El usuario empresa podrá eliminar más no modificar el aviso antes de que expire de acuerdo con
-su interés.<br><br>
-<b>De los avisos:</b>
-<ul>
-  <li>Mi Camello.com.ec ofrece al Usuario Empresa tres tipos de avisos (básico, simple y efectivo) y
-tres paquetes (Mi Camellito, Mi Camello y Mi Camello Plus)</li>
-  <li>El aviso básico permite la publicación gratuita de una oferta de trabajo, logrando visualizar a
-los candidatos (no muestra número de teléfono, ni correo electrónico, tampoco permite la
-descarga de Hojas de vida). No es posible publicar avisos gratuitos si tiene activo alguno de
-nuestros paquetes.</li>
-  <li>Los avisos completos se dividen en simple o efectivo y ofrecen descarga de hojas de vida y un
-informe de personalidad por cada uno de los candidatos postulados a una oferta
-determinada.</li>
-  <li>Paquetes: Contratando alguno de nuestros paquetes Micamello.com.ec le ofrece al Usuario
-Empresa, descuentos en la publicación de avisos y más descargas de Hojas de Vida e Informes
-de Personalidad.</li>
+  <h1 class="tit-pol">INFORMACI&Oacute;N DE CONTACTO</h1>
+  El titular del presente sitio web es:<br><br>
+
+MI CAMELLO S.A.<br>
+Registrada en Ecuador con N°.<br>
+Domicilio: Av. Febres Cordero solar 3, ciudad Guayaquil - Ecuador<br>
+Número de Registro Único de Contribuyentes (RUC): 0993064467001<br>
+Teléfono: +593 (04) 2753-106<br><br>
+
+Contacto:<br><br>
+<ul style="list-style: disc;">
+  <li>
+    Si eres Candidato puedes contactarte con nosotros a través del siguiente enlace: <a href="<?php echo PUERTO."://".HOST;?>/recomendacion/">formulario de contacto</a>
+  </li>
+  <li>
+    Si eres Empresa o Empleador puedes contactarte con nosotros a través del siguiente enlace: <a href="<?php echo PUERTO."://".HOST;?>/recomendacion/">formulario de contacto</a>
+  </li>
 </ul>
 <br>
-<i>Importante: Por promoción de lanzamiento tenemos gratis el Aviso Simple que incluye 1
-publicación por 30 días, activo, con los siguientes beneficios:
-Ver perfil completo, visibilidad de candidatos, búsqueda de candidatos, descarga de 25 hojas de
-vida, y recibir los informes de personalidad certificados.</i><br><br>
-<center><b>Valido desde el 07 de agosto de 2018 hasta el 31 de diciembre 2018</b></center><br>
-El usuario candidato Mi Camello.com.ec ofrece al Usuario Candidato aplicar en tiempo real a las
-ofertas de trabajo sin estar conectado, pudiendo acceder a la aplicación automática de las ofertas
-de trabajo disponibles según su perfil (autopostulación).<br><br>
-De los paquetes:<br>
-Mi Camello.com.ec ofrece tres tipos de paquetes (Camellito Básico, Camellito Simple y Camello
-Efectivo).<br>
+MI CAMELLO S.A. es titular de los siguientes sitios web:
 <ul>
-  <li>Contratando nuestro paquete Camellito Simple Micamello.com.ec le ofrece al Usuario
-Candidato, 42 autopostulaciones o 14 días de autopostulaciones (la primera opción que se
-dé), alertas de autopostulaciones e informe de personalidad certificado.</li>
-  <li>Contratando nuestro paquete Camello Efectivo Micamello.com.ec le ofrece al Usuario
-Candidato, 168 autopostulaciones o 45 días de autopostulaciones (la primera opción que se
-dé), alertas de autopostulaciones e informe de personalidad certificado.</li>
+  <li>
+    www.micamello.com.ec
+  </li>
+  <li>
+   www. micamello.com.co
+  </li>
+  <li>
+    www.superchamba.com.pe
+  </li>
+  <li>
+    www.superchamba.com.mx
+  </li>
+</ul>
+
+<!-- MI CAMELLO S.A. es titular de los siguientes sitios web: -->
+  <div class="text-center" id="blockRightClick">
+    <h2 class="titulo">TERMINOS Y CONDICIONES LEGALES  DE USO DEL PORTAL MICAMELLO S.A. </h2>
+  </div>
+<div class="container politica" >
+  <h1 class="tit-pol">PRE&Aacute;MBULO</h1>
+
+MI CAMELLO S.A. pone a disposición de los usuarios de internet el Sitio Web MICAMELLO, de forma gratuita, reservándose algunos servicios específicos, al pago de una suscripción o pago puntual. <br><br>
+
+ 
+MICAMELLO entiende por “Usuario Particular” o  "Candidato"” a aquellos usuarios, personas naturales, que buscan empleo o servicios relacionados, que utilicen los servicios de MI CAMELLO S.A. y accedan a los Sitios Web de los que éste último es titular.<br><br>
+ 
+MICAMELLO entiende por “Usuario u “Ofertante de Empleo” o "Empresa", a aquellas empresas jurídicas o reclutadores que utilicen los servicios de MI CAMELLO S.A. y accedan a los Sitios Web de los que éste último es titular.<br><br>
+      
+El acceso y el uso del Portal Web es totalmente voluntario, y se atribuye su uso a quien lo utiliza en condición de Usuario. <br><br>
+
+Debe tomarse en cuenta que todo Usuario acepta, desde el mismo momento en el que accede, sin ningún tipo de reserva, el contenido de las presentes Condiciones Legales, la “Política de Privacidad y Cookies”, así como, en su caso, las Condiciones Particulares que puedan complementar, sustituir o modificar las referidas condiciones en relación con los servicios y contenidos  del Portal Web acordadas, en su caso, la correspondiente Orden de Servicio o Contrato (en adelante, referidas conjuntamente como las “Condiciones Legales”). <br><br>
+
+El Usuario deberá leer detenidamente las Condiciones Legales antes de la utilización de cualquier servicio del Portal Web, ya que su uso se entenderá como aceptación de todas las condiciones del sistema, siendo su uso de su entera responsabilidad.<br><br>
+
+Para acceder a nuestro portal web, el Usuario debe tener al menos 16 años de edad en el Ecuador, y debe estar bajo la supervisión de su representante legal. <br><br>
+
+Si el Usuario es menor de 18 años o menor a la mayoría de edad legal establecida en su país, el uso de nuestro Portal Web y las obligaciones que se generen por el uso de ésta, serán de exclusiva responsabilidad de sus representantes legales (padres o tutor). <br><br>
+
+En caso de acceder al Portal Web en calidad de empleado o representante de un Usuario Empresa, se considera expresamente que, dicha persona declara y garantiza que tiene la autoridad legal suficiente para vincular al Usuario Empresa a las presentes Condiciones Legales.<br><br>
+
+Las Condiciones Legales son de libre acceso, se las puede imprimir, descargar y guardar sin restricción alguna, ya que son asequibles en cualquier momento a través del enlace “Aviso Legal” y “Privacidad”.<br><br>
+ 
+MI CAMELLO S.A. se reserva la posibilidad de modificar, sin previo aviso, el contenido de las Condiciones Legales, de manera que recomienda al Usuario, leerlas cada vez que acceda y utilice el Portal Web. <br><br>
+
+MI CAMELLO S.A. se reserva la posibilidad de modificar, sin previo aviso, el diseño, presentación y/o configuración de este Sitio Web; así como, eliminar, agregar o modificar algunos o todos los servicios ofrecidos.<br><br>
+
+En cualquier caso, MI CAMELLO S.A. se reserva el derecho de denegar el acceso a este Sitio Web, en cualquier momento y sin necesidad de previo aviso, a aquellos Usuarios que incumplan las Condiciones Legales que le sean aplicables.<br><br>
+
+<h1 class="tit-pol">OBJETIVO</h1>
+La finalidad de este Portal Web, es poner en contacto a los Candidatos de Trabajo, que buscan empleo, con Ofertantes de empleo, que a su vez buscan candidatos para trabajar, ofreciendo principalmente los siguientes servicios: <br><br>
+<ul>
+  <li>
+    Un directorio de ofertas de trabajo categorizadas por función y lugar.
+  </li>
+  <li>
+    La publicación de ofertas de trabajo y la posibilidad de obtener un contacto directo con las personas interesadas en dichas fuentes de empleo.
+  </li>
+  <li>
+    Un test de competencias laborales, cuya función es facilitar el tiempo de los ofertantes que buscan candidatos.
+  </li>
+</ul>
+<h1 class="tit-pol">OBLIGACIONES DE LOS USUARIOS DEL PORTAL WEB</h1>
+Las siguientes obligaciones son aplicables a cualquier Usuario que acceda y utilice el Portal Web, con independencia de que sea Candidato o Empresa.
+<br><br>
+ 
+El Usuario se compromete a:<br><br>
+
+<ul class="guionLi">
+  <li>
+    Hacer uso responsable del Portal Web, de sus servicios y únicamente para la finalidad del mismo, debiendo cumplir con todas las condiciones de uso del sistema, políticas de privacidad, condiciones legales y demás documentos que regulen el uso del portal web, manteniendo en todo momento el debido respeto al titular del servicio, a los demás Usuarios, al contenido, al vocabulario y las imágenes que se publiquen.
+  </li><br>
+  <li>
+    Respetar los derechos de terceros al utilizar servicios del Sitio Web. Por tanto, queda prohibida la reproducción, distribución, transmisión, adaptación o modificación, por cualquier medio y en cualquier forma, de los contenidos del Sitio Web, propiedad de MI CAMELLO S.A. o de terceros, (textos, diseños, gráficos, informaciones, bases de datos, archivos de sonido y/o imagen, marcas, software, logos, etc.) y demás elementos de este Sitio Web, salvo autorización previa de sus legítimos titulares o cuando así resulte permitido por la ley. 
+  </li><br>
+  <li>
+    Queda totalmente prohibida la publicación de contenido no autorizado en el Portal Web de conformidad con lo dispuesto en las presentes Condiciones Legales.
+  </li><br>
+  <li>
+    No utilizar mecanismos, software o scripts en relación con la utilización del Sitio Web.
+  </li><br>
+  <li>
+    No bloquear, sobrescribir, modificar o copiar contenidos, a no ser que ello sea estrictamente necesario para la correcta utilización de los servicios del Sitio Web y para la finalidad descrita anteriormente. Por ejemplo, el copiado mediante tecnologías de buscador tipo “Robot/Crawler” no es necesario para la correcta utilización de los servicios, por lo que queda prohibido expresamente.
+  </li><br>
+  <li>
+    No difundir y reproducir públicamente contenidos del Sitio Web o de otros Usuarios.
+  </li><br>
+  <li>
+    No realizar ninguna acción que pueda perjudicar la funcionalidad de la infraestructura del Sitio Web, especialmente para sobrecargarla.
+  </li><br>
+  <li>
+    No realizar ninguna acción que dañe o inutilice los materiales e informaciones contenidos en la misma, los sistemas de información o los documentos, archivos o cualquier clase de contenido almacenado en cualquier equipo informático (hacking) del Portal Web, los Usuarios del mismo y/o terceros.
+  </li><br>
+  <li>
+    En caso de registrarse en el Portal Web, debe custodiar la contraseña seleccionada, evitando el uso de la misma por terceros.
+  </li><br>
+  <li>
+    De conformidad con la política anti-spamming de MI CAMELLO, el Usuario se abstendrá de recabar o utilizar datos y contenido de otros Usuarios que haya sido publicados el Portal Web para actividades con fines promocionales o publicitarios; así también, deberá abstenerse de remitir comunicaciones comerciales de cualquier clase y a través de cualquier soporte no solicitado ni previamente consentido por MI CAMELLO S.A. y/o los interesados.
+  </li><br>
+  <li>
+    El Usuario tiene prohibido realizar cualquier actividad publicitaria, ofreciendo o distribuyendo bienes o servicios protegidos legalmente, así como realizar o fomentar acciones contrarias a la libre competencia, incluidas las encaminadas a la captación de clientes de manera progresiva (como sistemas en cadena, de bola de nieve o piramidales).
+  </li><br>
+</ul>
+
+<h1 class="tit-pol">PUBLICACIÓN DE CONTENIDOS EN EL PORTAL WEB</h1>
+
+<ul class="numberLi">
+  <li>
+    <h4 class="">Contenido de Usuario</h4>
+
+<p>Los Usuarios pueden incluir información en el Portal Web como textos, ofertas de empleo, mensajes, logotipos en formato jpg y de un tamaño máximo de 2g, y cualquier otro tipo de información y/o documento en el soporte que resulte de aplicación.</p>  <br>
+
+<p>Todo el material e información que un Usuario envíe, publique, muestre o ponga a disposición en el Portal Web, o a través de éste, se denomina “<b>Contenido de Usuario</b>”.</p> <br>
+ 
+<p>El Usuario sólo debe enviar, publicar, exhibir o poner a disposición Contenido que desee compartir con otros públicamente; por lo que, declara que tiene el derecho o autorización para enviarlo, publicarlo, exhibirlo o ponerlo a disposición en el Portal Web, el cual debe estar bajo las presentes Condiciones Legales de uso y de conformidad con la Política de Privacidad del Portal Web.</p>   <br>
+
+<p>El Usuario que envía, publica, exhibe o pone a disposición del Portal Web, Contenido de Usuario, de conformidad con la Ley, otorga a MI CAMELLO S.A. el derecho y licencia de uso, no exclusivo, mundial, perpetuo, irrevocable, totalmente pagado, libre de regalías y aptos para la sub licencia; por lo que, MI CAMELLO S.A. tendrá derecho a disponer del Contenido de Usuario como a bien tuviere, pudiendo entre otros, utilizar, vender, sub licenciar, reproducir, distribuir, publicar, elaborar trabajos sobre la base del Contenido de Usuario, en definitiva podrá hacer uso de éste, en cualquier modo, con el propósito de publicar material en el Portal Web o en los de sus socios colaboradores, para mantener  y promover el Portal Web sin restricciones. Adicionalmente, por el presente, concede autorización expresa, en los anteriormente expuestos, a MI CAMELLO S.A, sus asociados y sub licenciatarios, para utilizar su nombre, nombre de usuario o marcas comerciales y/o logotipos relacionados con cualquier Contenido de Usuario; o, los materiales de marketing utilizados en el Portal Web, o en acciones iniciadas por MI CAMELLO S. A. para promover o publicitar ese Contenido de Usuario (p. ej., Ofertas de empleo), incluyendo el uso de palabras clave en motores de búsqueda en páginas web de terceros.</p> <br>
+ 
+<p>El Usuario es el único responsable por todo el Contenido que incluya dentro del Portal Web, el cual debe ser actualizado de manera constante para que responda, en cada momento, a su situación real; en tal virtud, a través del presente, declara expresamente que es el único propietario del Contenido de Usuario que envía, publica, muestra, o de algún otro modo, pone a disposición en el Portal Web, o a través de éste; garantizando que el Contenido de Usuario enviado, publicado, exhibido o puesto a disposición, no infringe la Ley, ni los derechos de privacidad, derechos de publicidad, derechos de autor, derechos contractuales, derechos de propiedad intelectual, ni ningún otro derecho de cualquier persona o entidad; así como tampoco, las políticas de privacidad, condiciones de uso generales y demás documentos que regulan el uso de portal MICAMELLO; en consecuencia el envío, publicación, exhibición o disponibilidad en el Portal Web, o a través de éste, no dará lugar a ningún incumplimiento de un contrato entre el Usuario y un tercero.</p> <br>
+
+<p>El Usuario acepta defender, indemnizar y eximir de cualquier responsabilidad a MI CAMELLO S.A. y a las empresas de su grupo empresarial, ante cualquier reclamación resultante del Contenido de Usuario, puesto a disposición por el mismo. En caso de que el Contenido de Usuario infrinja las declaraciones realizadas anteriormente, el Usuario expresamente, acepta pagar todas las regalías, honorarios, daños y/o cualquier otro importe adeudado a cualquier persona o entidad, a causa de dicho Contenido de Usuario enviado, publicado o exhibido en el Portal Web o a través de éste.</p> <br>
+
+  </li>
+  <li>
+    <h4 class="">Reglas de publicación de Contenido de Usuario</h4>
+    <p>El Usuario se obliga y compromete a cumplir con las siguientes reglas:</p>
+    <ul class="guionLi">
+      <li>
+        El Contenido de Usuario que introduzca en MICAMELLO deberá ser veraz y exacto. A estos efectos, el Usuario garantiza la autenticidad de todos aquellos datos que comunique en el Portal Web, así como su derecho o autorización para facilitarlos.
+      </li><br>
+      <li>
+        
+          Es responsabilidad del Usuario mantener todo el Contenido de Usuario permanentemente actualizado de forma que responda en cada momento a su situación real. El Usuario será el único responsable de las manifestaciones falsas o inexactas que realice, y de los perjuicios que éstas pudieran causar a MI CAMELLO S.A. y/o a terceros.
+        
+      </li><br>
+      <li>
+        
+          El Usuario debe abstenerse de utilizar, publicar o poner a disposición en el Portal Web cualquier Contenido de Usuario que sea o pueda interpretarse como injurioso, difamatorio, calumnioso, discriminatorio, abusivo, obsceno, que contenga insultos de carácter sexual, étnico o racial, o de cualquier otro tipo, o que conoce que es falso, engañoso o inexacto. En caso de hacerlo, MI CAMELLO S.A. tendrá derecho a eliminar la cuenta de Usuario y denunciará la actuación ante la autoridad judicial correspondiente.
+        
+      </li><br>
+      <li>
+        
+          El Usuario debe abstenerse de utilizar, publicar o poner a disposición en el Portal Web cualquier Contenido de Usuario que sea de carácter pornográfico o que vulnere las leyes de protección de derechos de menores, o con la intención de publicitar, ofrecer o distribuir productos pornográficos o que vulneren las leyes de protección de derechos de menores, o para molestar a otros usuarios (especialmente mediante spam). En caso de hacerlo, MI CAMELLO S.A. tendrá derecho a eliminar la cuenta de Usuario y denunciará la actuación ante la autoridad judicial correspondiente.
+        
+      </li><br>
+      <li>
+        
+          El Usuario debe abstenerse de utilizar, publicar o poner a disposición en el Portal Web cualquier Contenido de Usuario que se encuentre protegido legalmente (en particular, por la legislación relativa a la propiedad intelectual e industrial. p. ej.: marcas, patentes, modelos de utilidad o modelos estéticos, secretos comerciales, etc.) sin tener derecho o autorización para a ello.
+        
+      </li><br>
+      <li>
+        
+          El Usuario debe abstenerse de utilizar, publicar o poner a disposición en el Portal Web cualquier Contenido de Usuario que deteriore, pueda deteriorar, o en algún otro modo, afectar la calidad de los servicios ofrecidos en el Portal Web.
+        
+      </li><br>
+    </ul>
+    <p>
+      El Usuario conoce y acepta que el uso de los servicios del Portal Web tiene lugar bajo su única y exclusiva responsabilidad.
+    </p>
+ 
+  <p>
+    MI CAMELLO S.A. se reserva el derecho de eliminar cualquier Contenido de Usuario o parte del mismo que, a criterio exclusivo de MI CAMELLO S.A., infrinja las reglas de publicación anteriores o cualquier otra obligación recogida en las presentes Condiciones Legales y demás documentos que regulan el uso del Portal Web.
+  </p> 
+
+  <p>
+    Si usted considera que un Contenido de Usuario incumple lo dispuesto en este apartado, contáctese con nuestro equipo de atención al cliente para que podamos tener la oportunidad de analizar y considerar, en su caso, su eliminación.
+  </p>
+ 
+  <p>
+    El Usuario responderá por los daños y perjuicios, que MI CAMELLO S. A. pueda sufrir, como consecuencia del incumplimiento doloso y/o culposo, de cualquiera de las obligaciones a las que queda sometido, de conformidad con las presentes Condiciones Legales, demás documentos que regulan el uso del Portal Web y la normativa legal vigente y aplicable al caso.
+  </p>
+
+    </p>
+  </li>
+<br>
+<li>
+    <h4 class="">Evaluaciones, comentarios y salarios</h4>
+      <p>
+        MICAMELLO pone a disposición de los Usuarios, el servicio del TEST CANEA, que es un test de evaluación por competencias; y también, los filtros para las empresas, y los procesos de selección que realizan, ofreciendo un mayor nivel de transparencia e información adecuada para que los Usuarios Candidatos, puedan tomar una decisión informada sobre el puesto de trabajo al que aplican.
+      </p>
+      <p>
+        El Usuario de la Empresa Cliente, conoce y acepta que en su perfil público o página de la empresa, así como en las ofertas de trabajo publicadas por el mismo, aparecerán  las evaluaciones de los  Usuarios Candidatos sobre el mismo, en base a una experiencia laboral actual, o pasada, o bien en un proceso de selección realizado con dicho Usuario Candidato, siempre y cuando el contenido de las evaluaciones y comentarios no sea de carácter ofensivo, injurioso, difamatorio o incumpla cualquiera de las reglas de publicación de Contenido de Usuario. El equipo de moderación de MI CAMELLO S.A. velará por el cumplimiento de lo anterior, pudiendo el Usuario Empresa denunciar, en su caso, el contenido de dicha evaluación en el Portal Web.
+      </p>
+      <p>
+        El Usuario Empresa no debe ofrecer incentivos a los empleados, exempleados o candidatos, a cambio de evaluaciones y/o comentarios dentro del portal. MI CAMELLO S.A. eliminará aquellas evaluaciones cuando tenga evidencia de que éstos fueron compensados de cualquier modo, para dejar dichas reseñas y comentarios en el Portal Web.
+      </p>
+      <p>
+        Los Usuarios Candidatos en el momento de realizar evaluaciones y/o comentarios deberán cumplir con todas las reglas de publicación expuestas en el anterior apartado, así como con el resto de obligaciones recogidas en las presentes Condiciones Legales. 
+      </p>
+      <p>
+        Cuando un Usuario Candidato realiza una evaluación y/o comentario éste debe representar su opinión personal - dentro de los límites ya señalados anteriormente -, sin coacción y sin seguir instrucciones de la empresa en cuestión.
+      </p>
+      <p>
+        Los Usuarios Candidatos tienen prohibido solicitar o aceptar incentivos (p. ej. regalos, recompensas económicas, etc.) a cambio de publicar evaluaciones y/o comentarios.
+      </p>
+</li>
+<br>
+
+<li>
+    <h4 class="">Contenido de terceros</h4>
+    <p>
+      El Portal Web también pone a disposición contenido de otros Usuarios, anunciantes y terceros. A estos efectos, “<b>Contenido de terceros</b>” significa cualquier trabajo de autoría o información, incluyendo evaluaciones de la empresa, reseñas de entrevistas, fotos de la compañía, salarios, respuestas de los Ofertantes de Empleo, ofertas de trabajo, información del perfil del Ofertante de Empleo, anuncios, comentarios, opiniones, publicaciones, currículums, mensajes, texto, archivos, imágenes, correo electrónico, datos y cualquier otro material que usted como Usuario encuentre dentro del Portal Web.
+    </p>
+    <p>
+      Debido a que no controlamos dicho Contenido de terceros, usted como Usuario entiende y acepta que: no somos responsables ni respaldamos o avalamos dicho Contenido de terceros, incluida la publicidad y la información sobre productos y servicios de terceros, anuncios de empleo o información relacionada con el Ofertante de Empleo, evaluaciones de la empresa y procesos de selección, así como salarios proporcionados por otros Usuarios; no garantizamos la exactitud, actualidad, idoneidad, fiabilidad o calidad de la información contenida en el Contenido de terceros; y, no asumimos ninguna responsabilidad por dicho Contenido que resulte censurable, inexacto, engañoso o ilegal o que incumpla las presentes Condiciones Legales  puesto a través del portal web.
+    </p>
+    <p>
+      El Portal Web puede contener enlaces a sitios web de terceros colocados por nosotros, o publicados por otros Usuarios o anunciantes, como un servicio adicional para aquellos interesados en esa información. El uso de todos estos enlaces a sitios web de terceros es bajo su propio criterio y riesgo. MI CAMELLO S.A. no supervisa ni tiene control alguno sobre los sitios web de terceros; por lo que, la inclusión de dichos enlaces en el portal, es únicamente de carácter informativo, para que quien tenga interés en éste visite el sitio, sin que ello implique nuestro apoyo, adopción o patrocinio de, o afiliación con, dicho sitio web de terceros.
+    </p>
+</li>
+
+ <br>
+
+ <li>
+    <h4 class="">Contenido de MICAMELLO</h4>
+    <p>
+      MICAMELLO autoriza al Usuario a la utilización de Portal Web para los servicios y funcionalidades ofrecidos por el mismo.
+    </p>
+    <p>
+      El Portal Web contiene contenido proporcionado por MI CAMELLO S.A. y nuestros licenciatarios (Usuarios). Nosotros y nuestros licenciantes (incluyendo Usuarios Terceros) poseemos, retenemos y hacemos uso de todos los derechos de propiedad (incluyendo todos los derechos de propiedad intelectual e industrial) que se derive del contenido que cada uno de nosotros proporciona dentro del Portal Web. 
+    </p>
+    <p>
+      Si usted es un Usuario de MICAMELLO, por la presente le concedemos una licencia de uso limitada, revocable y no sub licenciable, bajo los derechos de propiedad intelectual, para copiar e imprimir el Contenido de MICAMELLO, únicamente para su uso personal en relación con el uso del Portal Web, y para la finalidad del mismo. MI CAMELLO S.A. no concede ninguna otra licencia o autorización de uso de ninguna clase sobre sus derechos de propiedad intelectual e industrial o sobre cualquier otra propiedad o derecho relacionado con las funcionalidades y servicios de este Portal Web y de terceros.
+    </p>
+    <p>
+      A excepción de lo dispuesto en el párrafo precedente, los Usuarios deben abstenerse de:  reproducir, modificar, publicar, transmitir, distribuir, presentar públicamente o exhibir, vender, adaptar o crear trabajos derivados, basados en el Portal Web o el contenido (excluyendo su propio Contenido de Usuario); o alquilar, arrendar, prestar o vender acceso al Portal Web.
+    </p>
+    <p>
+      MI CAMELLO ® es una marca registrada de MI CAMELLO S.A. Las marcas registradas, logotipos y marcas de servicio ("Marcas") mostradas en el Portal Web son de nuestra propiedad o propiedad de terceros. No se le permite utilizar estas Marcas sin nuestro consentimiento previo por escrito, o el consentimiento de la tercera parte propietaria de la Marca.
+    </p>
+    <p>
+      El Usuario que detecte contenido no apropiado dentro del Portal Web o que infrinjan las presentes Condiciones Legales o cualquier otro documento que regule el uso del portal, o las leyes, debe notificar inmediatamente a MICAMELLO a través de los canales de comunicación.
+    </p>
+</li>
+</ul>
+<br>
+
+<h1 class="tit-pol">REGLAMENTO DE USO PARA LOS USUARIOS EMPRESAS</h1>
+<p class="subt-pol">
+  Registro de Usuario Empresa, perfil público y uso de la cuenta
+</p>
+La publicación de ofertas y el uso de determinados servicios de MICAMELLO requiere el registro del Ofertante de Empleo en el Portal Web como Usuario de la Empresa Cliente. Para ello, la persona de contacto del Ofertante de Empleo, que deberá ser un empleado autorizado o el representante legal de la empresa, quien deberá proporcionar y registrar los datos identificativos de la empresa, una contraseña; así como, sus datos de contacto para el Usuario Candidato.
+ 
+Para el registro en nuestro Portal Web, el Usuario de la Empresa Cliente deberá aceptar con carácter previo las presentes Condiciones Legales y la Política de Privacidad.
+ 
+En el registro y uso de la cuenta por parte del Usuario de la Empresa Cliente es obligatorio cumplir con las siguientes disposiciones:<br><br>
+
+<ul>
+  <li>
+    Registrar sólo empresas existentes y debidamente constituidas conforme a la normativa vigente.
+  </li>
+  <li>
+    Cada empresa solo podrá ser registrada una única vez con independencia de la existencia de filiales, sucursales o de la alteración de cualquier dato fiscal de la empresa previamente registrada, debiendo actualizar constantemente la información.
+  </li>
+  <li>
+    Que el registro y el uso de los servicios del Portal Web hayan sido autorizados por los representantes legales de la empresa. Con el registro en el Portal Web el Usuario de la Empresa Cliente declara y garantiza lo anterior.
+  </li>
+  <li>
+    Que exista algún tipo de relación laboral directa entre la Empresa con la persona física de contacto encargada de realizar el registro del Usuario de la Empresa Cliente (Ofertante de empleo). La persona física de contacto o representante del Usuario de la Empresa Cliente no podrá ser un agente independiente, ni representar y registrar a más de una empresa Ofertante de Empleo.
+  </li>
+  <li>
+    Utilizar los servicios del Sitio Web para la publicación de ofertas de trabajo, búsqueda de Candidatos de Trabajo, y gestionar sus procesos de selección mediante el uso de las herramientas ofrecidas por el portal web, o bien, mediante la herramienta de software de reclutamiento ofrecida por MI CAMELLO S.A.. Cualquier otro uso está terminantemente prohibido.
+  </li>
+  <li>
+    Se encuentra expresamente prohibido, cuando se trate de individuos ajenos a la organización del Usuario de la Empresa Cliente, incluyendo sus propios clientes, registrar tanto usuarios de la cuenta como permitir el uso de la misma o revender su acceso.
+  </li>
+  <li>
+    El Usuario de la Empresa Cliente debe utilizar el portal web para publicar los procesos de selección de su organización, con excepción de aquellas empresas reclutadoras que lo utilizan en el desarrollo de su propia actividad, excluyendo plataformas digitales, y siempre y cuando no compitan o pretendan competir contra MICAMELLO y/o las empresas de su grupo. 
+  </li>
+  <li>
+    Acceder a los servicios o cualquier información publicada en este sitio web de forma personal e interactiva. El acceso o lectura mediante robots o programas automáticos no está permitido.
+  </li>
+</ul> 
+Con el registro en el Portal Web, el Usuario de la Empresa Cliente dispone automáticamente de un perfil público o página de empresa para proporcionar información general de la misma, de su marca, incluir sus logotipos, información sobre premios y reconocimientos, divulgar los beneficios que ofrece la empresa, así como noticias y novedades sobre la misma. Contenido de Usuario que considere oportuno para la gestión de su reputación empresarial, para mejorar su visibilidad y contar la historia de su empresa. <br><br> 
+ 
+Con el objeto de completar, actualizar y/o mejorar el perfil público o página de la empresa, el Usuario de la Empresa Cliente autoriza a MICAMELLO a incluir información, logos o cualquier otra información que el Usuario de la Empresa Cliente tenga disponible públicamente en su página web corporativa y/o en redes sociales. El Usuario de la Empresa Cliente podrá editar, modificar, eliminar o actualizar dicho contenido incluido aquel que incorpore MICAMELLO en su perfil público o página de empresa en cualquier momento. MICAMELLO únicamente incluirá contenido que cumpla con las presentes Condiciones Legales y en particular, con las reglas de publicación de contenido reseñadas anteriormente. <br><br>
+ 
+MICAMELLO validará el cumplimiento de los requisitos para el registro en el Portal Web atendiendo a su mejor criterio o a la demanda legítima y acreditada de terceras personas, entidades o instituciones, y se reserva el derecho de no admitir el registro de una empresa o entidad, por motivos comerciales, o por incumplimientos contractuales previos o de las Condiciones Legales, ya sea probado o por fundadas sospechas de dicho incumplimiento, o por haberse recibido denuncias de terceros por actividades inadecuadas. <br><br>
+ 
+El incumplimiento de las normas de registro puede significar la cancelación inmediata de la cuenta de Usuario de la Empresa Cliente y la destrucción de los contenidos asociados a la misma sin posibilidad de recuperación. <br><br>
+ 
+En ningún caso la suspensión del servicio o la no activación por incumplimiento de las normas de registro o de cualquiera de las Condiciones Legales o demás documentos que regulan el uso del portal, dará lugar al reembolso del producto pagado. <br><br>
+
+
+<p class="subt-pol">
+  Contenido de las ofertas de trabajo
+</p>
+Todas las ofertas de trabajo deben responder a una oferta de trabajo veraz y real, y no puede duplicar una vacante previamente ya publicada. <br><br>
+ 
+Está prohibida la inserción de ofertas de trabajo en cualquiera de los siguientes casos:<br><br>
+
+<ul>
+  <li>
+    Que sean presuntamente ilícitas por la normativa nacional, comunitaria o internacional o cuyo objeto sea realizar actividades presuntamente ilícitas o que contravengan las buenas costumbres y los principios de la buena fe.
+  </li>
+  <li>
+    Que puedan dañar el buen nombre y reputación de MI CAMELLO S.A y sus asocidos.  
+  </li>
+  <li>
+    Que no cumplan con las reglas de publicación de Contenido establecidas en las presentes Condiciones Legales.  
+  </li>
+  <li>
+    Que no reúnan los parámetros de calidad establecidos en MI CAMELLO.  
+  </li>
+  <li>
+    Que incluya dentro del campo “Descripción de tareas" una forma de contacto directa con la empresa (e-mail, teléfono, URL).  
+  </li>
+  <li>
+    Que incluyan más de un puesto de trabajo en la misma oferta.  
+  </li>
+  <li>
+    Que corresponda a ofertas donde la remuneración sea exclusivamente por comisión o bien sea superior al salario medio del puesto de trabajo en cuestión.  
+  </li>
+  <li>
+    Que requieran del candidato una inversión de capital.  
+  </li>
+  <li>
+    Que consistan en trabajos de intercambio o voluntariado o trabajos con pagos diferidos.  
+  </li>
+  <li>
+    Que corresponda a ventas por sistema multi-nivel o piramidal.
+  </li>
+  <li>
+    Que exija el envío de fotografías (exceptuándose de esta limitación la fotografía tamaño pasaporte incluida en el currículum vitae facilitado por los Usuarios Candidatos).
+  </li>
+  <li>
+    Que se defina como ofertas de "modelos" u ofertas de "masajistas" sin requerir experiencia ni titulación específica en este campo.
+  </li>
+  <li>
+    Que atente contra los derechos fundamentales de las personas, vulnere sus derechos legales, pretenda aprovecharse de ellas, falte a la cortesía en la red, moleste o pueda generar opiniones negativas a los Usuarios o a terceros. A modo enunciativo, pero no limitado: está prohibida la inserción de contenidos que favorezcan o potencien la creación, mantenimiento y fomento de negocios relacionados con la pornografía, material obsceno o gestión de contactos eróticos; aquellos que estén relacionados con la videncia, tarot, “ciencias ocultas” o cualquier otro contenido relacionado; y en general, cualquier contenido que MI CAMELLO S.A. considere no apropiados para los Usuarios.
+  </li>
+  <li>
+    Que contravengan los principios de legalidad, honradez, responsabilidad, al buen nombre, protección de la dignidad humana, protección de menores, protección del orden público, la protección de la vida privada, la protección del consumidor y los derechos de propiedad intelectual e industrial.
+  </li>
+  <li>
+    Que contravengan los principios de legalidad, honradez, responsabilidad, al buen nombre, protección de la dignidad humana, protección de menores, protección del orden público, la protección de la vida privada, la protección del consumidor y los derechos de propiedad intelectual e industrial.
+  </li>
+</ul>
+<br>
+ 
+Las ofertas de trabajo que sean publicadas por plataformas tecnológicas que intermedien en la venta de bienes y/o servicios expresamente autorizadas por MI CAMELLO S.A., adicionalmente deberán cumplir con las siguientes especificaciones:<br><br>
+
+<ul>
+  <li>
+    Detallarán el modelo de negocio en la oferta de trabajo, especificando que se busca individuos interesados en prestar sus servicios por cuenta propia, así como el sistema retributivo que será de aplicación y cualquier otra condición que resulte relevante en función del referido modelo de negocio.
+  </li>
+  <li>
+    Podrán utilizar una única categoría para cada función, eligiéndose la más adecuada al perfil buscado. Se considerará uso fraudulento la publicación de la oferta de forma indiscriminada en categorías Candidato diferentes que no resulten de aplicación al referido perfil buscado.
+  </li>
+  <li>
+    El título de las ofertas deberá contener la ubicación concreta de la oferta, si ésta se publica para distintas ubicaciones.
+  </li>
+  <li>
+    Queda prohibido incitar o proponer al candidato a continuar con el registro para la efectiva postulación al puesto ofrecido en otro sitio web o aplicación móvil distinta al propio portal web MICAMELLO.
+  </li>
+</ul>
+<br>
+MI CAMELLO S.A. se reserva la potestad de retirar del Portal Web aquellos contenidos que se consideren inapropiados a las características y finalidades del Portal Web.<br><br>
+ 
+Cualquier Usuario de la Empresa Cliente que inserte un contenido que contravenga la legalidad vigente y las Condiciones Legales asumirá la responsabilidad exclusiva de los daños y perjuicios derivados de su publicación, eximiendo a MI CAMELLO S.A. de cualquier responsabilidad al respecto. <br><br>
+ 
+Si advierte algún contenido inapropiado en el Sitio Web, por favor contacte con nosotros a través de nuestro formulario de contacto. Insertar formulario de contacto 
+<br><br>
+<p class="subt-pol">
+  Otras obligaciones del Usuario De La Empresa Cliente 
+</p>
+Los Usuarios Empresariales no deberán utilizar el anuncio publicado para:
+<br><br>
+<ul class="letterLiParentesis">
+  <li>
+    Publicar información falsa, imprecisa o engañosa.
+  </li>
+  <li>
+    Publicar en nombre de otra persona, viva o muerta. 
+  </li>
+  <li>
+    Publicitar negocios o captar clientes (incluyendo, pero no limitado a: posiciones para empresas de tipo multinivel, franquicias, clubes de membresías, distribución de productos, o cualquiera que requiera inversión monetaria por parte del usuario) que no se encuentre expresamente permitido en las presentes Condiciones Legales;
+  </li>
+  <li>
+    Publicar cadenas de cartas o esquemas piramidales;
+  </li>
+  <li>
+    Publicar opiniones o noticias, anuncios comerciales, promoción de productos o servicios;
+  </li>
+  <li>
+    Obtener información masiva de los Usuarios, en particular sus CV, para usos distintos del objeto del Sitio Web;
+  </li>
 </ul><br>
-<i>
-Importante: Por promoción de lanzamiento tenemos gratis el Plan Camellito Simple que incluye 30
-días activo, con los siguientes beneficios:
-Visibilidad de ofertas de trabajo, Postulación a vacantes, Búsqueda de ofertas de trabajo, Cargar
-hoja de vida, Autopostulación por 15 días, y un Informe de personalidad certificado.</i><br><br>
-<center>Valido desde el 07 de agosto de 2018 hasta el 31 de diciembre 2018</center>
-<h1 class="tit-pol">7. OBLIGACIONES, DERECHOS Y PROHIBICIONES DE LOS USUARIOS</h1>
-Debe tener por lo menos 18 años, encontrarse en capacidad legal para contraer derechos y
-obligaciones conforme a las normativa legales vigentes en su país.<br><br>
-Si es una persona jurídica, quien debe registrar a la empresa es su representante legal o aquella
-persona que esté legalmente autorizada para registrar a la empresa dentro del portal.<br><br>
-MICAMELLO.COM.EC no se responsabiliza por empresas registradas sin autorización de su
-representante legal.<br><br>
-El usuario está obligado a proporcionar y/o registrar información real, veraz y actualizada sin
-infringir derechos de terceros, dentro del portal. MICAMELLO.COM.EC no se responsabiliza por
-falsedad de los datos o información registrada y/o cargada por los usuarios dentro de nuestra
-página web.<br><br>
-Acepta y se somete a los formularios y/o cuestionarios que MICAMELLO.COM.EC requiera de
-usted para completar y/o mejorar su perfil como candidato a un empleo.<br><br>
-Acepta sin objeción alguna los resultados de los formularios y/o cuestionarios que realice
-MICAMELLO.COM.EC. LOS FORMULARIOS SE REALIZAN SOLO UNA VEZ YA QUE NO SE VALORA
-PUNTUACION SINO ASPECTOS SUBJETIVOS DE LA PERSONA<br><br>
-Debe leer detenida y cuidadosamente los términos y condiciones de uso del sistema previo a
-aceptar los mismos, si usted los acepta tendrá derecho a acceder a los servicios de
-MICAMELLO.COM.EC y no habrá objeción alguna por los servicios prestados en el portal.<br><br>
-Al aceptar los términos y condiciones usted debe cumplir cabalmente con todas las leyes
-aplicables a los servicios que se prestan y los términos y condiciones contractuales que rigen el 
-uso del portal.<br><br>
-Ser el único y exclusivo responsable por los datos, información y demás acciones generadas
-dentro de su cuenta usuario. Excluyendo a MICAMELLO.COM.EC de cualquier responsabilidad por
-los mismos, incluso sobre posibles reclamos que pudiera haber por parte de terceros.<br><br>
-Mantenerse informado sobre las actualizaciones que se realicen a los términos y condiciones de
-uso del sistema, no podrá alegarse falta de conocimiento de estos, ya que al utilizar el portal
-usted acepta su pleno conocimiento.<br><br>
-Usted acepta que nosotros o nuestros socios le enviemos e-mails y contenido promocional. En
-caso de que no requiera recibir dicho contenido podrá contactarse directamente con
-MICAMELLO.COM.EC.<br><br>
-Al aceptar los servicios de MICAMELLO.COM.EC en uno de los planes de pago, usted acepta y se
-somete a los formularios que el portal publicara para su evaluación como candidato a un empleo,
-acepta incluso el contenido de este y avala al profesional que lo realiza.<br><br>
-Autoriza a MICAMELLO.COM.EC a publicar los datos e información del usuario guardada en la
-plataforma, debiendo hacer uso única y exclusivamente de aquella información o datos que sean
-pertinentes para el cumplimiento del objeto de los servicios que brinda MICAMELLO.COM.EC<br><br>
-Evitar enviar, transmitir o exhibir cualquier contenido de usuario o usar contenido con Licencia en
-un contexto que pueda considerarse difamatorio, calumnioso, obsceno, acosador, amenazador,
-incendiario, abusivo, racista, ofensivo, engañoso o fraudulento, que alimente conductas ilegales o
-nocivas y/o viole los derechos de MICAMELLO.COM.EC o de terceros.<br><br>
-No recolectar, cargar o cualquier otro método disponible para acceder a información sobre
-números de cuentas bancarias, tarjetas de crédito, u otras formas de datos financieros utilizados
-para realizar transacciones financieras entre MICAMELLO.COM.EC y el usuario.<br><br>
-No utilizar ningún "robot", "araña" u otro dispositivo automático, programa, script, algoritmo o
-metodología, o cualquier proceso manual similar o equivalente, para acceder, adquirir, copiar o
-monitorear cualquier punto de los Servicios de MICAMELLO.COM.EC o sus datos y/o contenidos, o
-en cualquier forma reproducir o eludir la estructura de navegación o presentación de cualquiera
-de los Servicios de MICAMELLO.COM.EC para obtener o intentar obtener material, documentos,
-servicios o información a través de cualquier medio no intencionadamente puesto a disposición a
-través de los Servicios de MICAMELLO.COM.EC<br><br>
-No actuar de una manera que pudiera ser percibida como perjudicial para la reputación y que
-pueda causar desprestigio o daños a MICAMELLO.COM.EC<br><br>
-No suplantar cualquier persona o entidad, o dar información falsa sobre los servicios de
-MICAMELLO.COM.EC y/o la Plataforma de Usuario, ya sea directa o indirectamente, o de
-cualquier otro modo hacer cualquier manipulación con el fin de disimular su identidad o el origen
-de cualquier mensaje o transmisión que usted envíe a MICAMELLO.COM.EC o los Usuarios Finales.<br><br>
-No hacer búsqueda inversa, rastrear o tratar de rastrear a otro Usuario de los Servicios de
-MICAMELLO.COM.EC, interferir o violar de cualquier forma el derecho a la privacidad u otros
-derechos de otro Usuario, o cosechar o recopilar información personal identificable sobre los
-visitantes o usuarios de los Servicios de MICAMELLO.COM.EC y/o la Plataforma de Usuario sin su
-expreso e informado consentimiento, debiendo notificarlo por escrito previamente a
-MICAMELLO.COM.EC<br><br>
-No desactivar, burlar, eludir o evitar de cualquier forma las medidas utilizadas para impedir o
-restringir el acceso a los diferentes Servicios que oferta MICAMELLO.COM.EC, utilizando el
-hackeo, extracción de contraseñas u otros medios ilegítimos y/o prohibidos.<br><br>
-No debe sondear, escanear o probar la vulnerabilidad de los Servicios de MICAMELLO.COM.EC o
-de cualquier red conectada a los Servicios de MICAMELLO.COM.EC<br><br>
-No subir a los Servicios de MICAMELLO.COM.EC y/o la Plataforma de Usuario, o de cualquier otra
-manera usarlos para diseñar, desarrollar, distribuir o de algún otro modo transmitir o ejecutar,
-cualquier virus, gusano, caballo de Troya, bomba de tiempo, web bug, spyware, malware, o 
-cualquier código, archivo o programa de computadora que pretenda o esté diseñado para dañar o
-secuestrar el funcionamiento de cualquier hardware, software o equipo de telecomunicaciones, o
-cualquier otro código o componente realmente o potencialmente dañino, disruptivo o invasivo.<br><br>
-No violar, intentar violar o de cualquier forma incumplir con algún o algunos de los Términos de
-MICAMELLO.COM.EC o cualquiera de las leyes o disposiciones aplicables al uso de los Servicios del
-portal.<br><br>
-En general evite hacer cosas ilegales que pueda perjudicar a MICAMELLO.COM.EC o a cualquier
-otra persona, no pude copiar o usar nuestro material o contenidos en ninguna otra plataforma o
-sitio web, hacer falsas declaraciones o abusar de nuestros servicios, o de alguna manera violar los
-derechos de alguien o de las leyes aplicables.<br><br>
-Aceptar que MICAMELLO.COM.EC no es responsable por el uso que se dé a los datos y/o
-información del usuario que esté disponible para otros usuarios por efectos de los servicios que
-oferta MICAMELLO.COM.EC, siendo de exclusiva responsabilidad del usuario que esté utilizando
-los mismos.<br><br>
-Los usuarios aceptan y reconocen que MICAMELLO.COM.EC no será responsable, contractual y/o
-extracontractual, por ningún daño o perjuicio, directo o indirecto, derivado de la utilización del
-portal.<br><br>
-En caso de que uno o más usuarios o algún tercero inicie cualquier tipo de reclamo o acción legal
-judicial o extrajudicial contra cualquier otro usuario, todos y cada uno de los usuarios
-involucrados eximen de responsabilidad a MICAMELLO.COM.EC y a su representante legal,
-apoderado, trabajadores y profesionales que presten sus servicios a MICAMELLO.COM.EC<br><br>
-<h1 class="tit-pol">8. OBLIGACIONES, DERECHOS Y PROHIBICIONES DE MICAMELLO.COM.EC</h1>
-En caso de controversias sobre la propiedad de una cuenta de usuario, MICAMELLO.COM.EC tiene
-la obligación de comprobar a través de los datos registrados en el sistema sobre el titular de la
-cuenta, para lo cual podrá utilizar cualquier medio, iniciar una investigación, e incluso solicitar
-documentación legal, como por ejemplo una declaración juramentada, a quien se creyere dueño
-de la cuenta de usuario, para poder ratificar la misma y permitir su acceso. Determinado que sea
-el usuario MICAMELLO.COM.EC notificará por escrito a la cuenta de correo electrónico registrada,
-quien tiene el derecho de uso de la cuenta de usuario.<br><br>
-Cierto contenido generado o guardado en MICAMELLO.COM.EC, incluyendo ciertos servicios de
-terceros, requieren o implican el envío, la recolección y/o uso de cierta información personal o
-identificable; por lo que, en particular y como parte del portal podrá recopilar, acceder y utilizar
-ciertos datos referentes a los usuarios a través de la plataforma, y es obligación de
-MICAMELLO.COM.EC publicarla para que pueda existir una correcta selección del empleador y del
-candidato, es por ello que el usuario acepta y autoriza la publicación de la información que
-MICAMELLO.COM.EC a su discreción considere pertinente.<br><br>
-MICAMELLO.COM.EC guardará estricta confidencialidad sobre los datos e información cargada
-dentro del portal, así como de las pruebas que realicen los candidatos y sus resultados, no
-divulgará dicha información sino única y exclusivamente para los servicios que brinda
-MICAMELLO.COM.EC El uso de dicha información dispone para parte de terceros (empresas o
-personas empleadoras) es de exclusiva responsabilidad de estos. Por el tipo de servicio que brinda
-MICAMELLO.COM.EC debe publicar cierta información, pero no por ello se podrá vincular como
-responsable del mal uso que pudieran realizar terceros con dichos datos.<br><br>
-En caso de detectarse el mal uso de dicha información, MICAMELLO.COM.EC cancelará los
-servicios de dicho usuario y notificará al usuario perjudicado para que tome las acciones que
-correspondan en contra del usuario que infrinja con sus obligaciones.<br><br>
-MICAMELLO.COM.EC cancelará la cuenta de usuario y dejará de prestar los servicios que oferta
-y/o que hayan sido contratados, sin reclamo alguno y/o reembolso de los dineros pagados por la
-falta de cumplimiento de una o varias de las obligaciones del usuario, reservándose el derecho de 
-iniciar las acciones legales que considere pertinentes.<br><br>
-Deberá guardar estricta confidencialidad sobre los datos y/o información del usuario que esté
-guardada en la plataforma y que no sea sujeto de publicación en el portal.<br><br>
-En virtud de que MICAMELLO.COM.EC es un portal a través del cual pone en contacto al usuario
-candidato con el usuario empresa o empleador, y brinda la información necesaria a ambas partes
-para que se genere este primer contacto, MICAMELLO.COM.EC no participa de las decisiones y/o
-de las acciones o acuerdos que llegaren a tener entre ellos; por lo que, no podrá imputarse a
-MICAMELLO.COM.EC algún tipo de responsabilidad por el incumplimiento de alguna de las partes.
-MICAMELLO.COM.EC tiene derecho a ofertar sus servicios ya sea de manera gratuita o en planes
-de pagos e imponer diferentes restricciones en cuanto a la carga, almacenamiento, descarga y
-utilización de los servicios de MICAMELLO.COM.EC en cada plan de pago.<br><br>
-MICAMELLO.COM.EC tiene derecho de seleccionar al profesional en las ramas de psicología para
-que desarrolle los formularios a los candidatos, no pudiendo los usuarios objetar a dicho
-profesional.<br><br>
-Tenemos todos los derechos sobre nuestros servicios, contenidos, datos, información, tecnología
-y características guardada y creada en la plataforma denominada MICAMELLO.COM.EC<br><br>
-Si usted nos hace llegar sugerencias, comentarios u otras informaciones relativas a los Servicios de
-MICAMELLO.COM.EC, que estén o puedan estar sujetos a derechos de Propiedad Intelectual,
-estos comentarios serán propiedad exclusiva de MICAMELLO.COM.EC Al enviar dichos
-Comentarios usted reconoce y acepta que pueden ser usados por el portal continuar el desarrollo,
-personalizar y mejorar los servicios; proporcionar asistencia y soporte técnico continuado;
-ponerse en contacto con usted con noticias y/o solicitudes de entrevistas generales o
-personalizadas relacionadas con el portal y que pueden estar o no estar basadas en sus opiniones;
-generar datos estadísticos consolidados y otras informaciones consolidadas y/o inferidas, que
-MICAMELLO.COM.EC puede utilizar para proporcionar y mejorar sus servicios, mejorar la
-seguridad de los datos y las capacidades de prevención de fraudes del sistema y cumplir con
-todas las leyes y reglamentaciones aplicables. Además, usted representa y garantiza que dichos
-Comentarios son exactos, completos, y no infringen los derechos de terceros; irrevocablemente
-asigna a MICAMELLO.COM.EC todo derecho, título e interés que pueda tener en dichos
-Comentarios, y expresa su renuncia irrevocable a cualquier y todas las demandas relacionadas con
-cualquiera de los derechos morales pasados, presentes o futuros, derechos de artista o cualquier
-otro derecho parecido en todo el mundo en o a tales comentarios.<br><br>
-MICAMELLO.COM.EC se reserva el derecho de publicar información que no esté acorde a los
-parámetros y condicionamientos establecidos en estos términos y condiciones de uso del sistema.
-MICAMELLO.COM.EC se reserva el derecho de cancelar temporal o definitivamente el acceso
-futuro a un usuario que ha infringido los términos y condiciones de uso del sistema, pudiendo
-eliminar su cuenta de usuario.<br><br>
-No garantiza que los servicios que se presten estén acorde a las expectativas o necesidades de los
-usuarios, pudiendo estos sugerir mejoras, quedando a potestad de MICAMELLO.COM.EC acoger o
-no dichas sugerencias, comentarios o reclamos.<br><br>
-MICAMELLO.COM.EC no garantiza que un candidato sea contratado, independientemente del
-servicio que haya decidido utilizar el usuario candidato, MICAMELLO.COM.EC únicamente otorga
-opciones y facilidades al usuario para que su perfil sea mejor ubicado dentro del portal, de
-acuerdo con su perfil y los resultados obtenidos por los formularios llenados por el usuario; sin
-que ello sea una garantía de contratación o acceso a un empleo.<br><br>
-No será responsable por la información almacenada en el portal, por algún daño o perjuicio,
-directo o indirecto, sin ningún tipo de limitación, o daños producidos por los datos y/o
-información generada y/o utilizada en y fuera del portal; así como por el deterioro o pérdida de la
-información.<br><br>
-MICAMELLO.COM.EC se reserva el derecho de dar por terminado los servicios que presta en 
-cualquier momento sin justificativo alguno, lo cual será notificado a los usuarios a través de las
-cuentas de correo electrónico registrado en las cuentas de usuarios.<br><br>
-En caso de que el usuario haya pagado por los servicios de MICAMELLO.COM.EC, se devolverá el
-proporcional del dinero por el tiempo de servicio restante que MICAMELLO.COM.EC no brindará
-su servicio.<br><br>
-MICAMELLO.COM.EC no devolverá dineros cancelados por los servicios, cuando la cuenta de
-usuario sea cancelada por la violación a las leyes aplicables a este servicio y/o los términos y
-condiciones de uso del sistema.<br><br>
-El uso de Internet en general y del Sitio en particular, así como el intercambio de información
-implica riesgos potenciales de daños al software y al hardware del Usuario. Por tal motivo, el
-equipo terminal desde el cual el Usuario accede al Sitio podría estar en condiciones de resultar
-atacado y dañado por la acción de hackers, quienes podrían incluso acceder a la información
-contenida en el equipo terminal del Usuario, extraerla, sustraerla y/o dañarla; por lo que
-MICAMELLO.COM.EC no será responsable por los daños que pudieran generarse.<br><br>
-MICAMELLO.COM.EC no se responsabiliza por la caída del sistema o mal funcionamiento de este,
-por fallas tecnológicas, técnicas o internet ajenos a MICAMELLO.COM.EC, por lo que no cabrá
-reclamo alguno.<br><br>
-No se garantiza el acceso y uso continuo e ininterrumpido del portal, el sistema puede
-eventualmente no estar disponible por circunstancias ajenas a MICAMELLO.COM.EC, teniendo la
-obligación de restablecer el sistema en el menor tiempo posible sin que por ello sea responsable
-por los posibles daños o perjuicios que pudiera causarse.<br><br>
-No será responsable por ningún error u omisión contenidos en el sitio web MICAMELLO.COM.EC<br><br>
-<h1 class="tit-pol">9. CONFIDENCIALIDAD DE LOS DATOS PERSONALES</h1>
-MICAMELLO.COM.EC se compromete a no ceder o vender su información a terceros, únicamente
-intercambiará entre sí la información necesaria entre los usuarios empresa o empleadores y los
-usuarios candidatos que se encuentren registrados de MICAMELLO.COM.EC, para lograr la
-interacción entre ellos y lograr la contratación del candidato que cumpla los requisitos y
-expectativas que requiera el empleador.<br><br>
-MICAMELLO.COM.EC no garantiza la contratación de ningún candidato.<br><br>
-<h1 class="tit-pol">10. PROPIEDAD INTELECTUAL</h1>
-Los contenidos, diseños, códigos fuente, base de datos, redes, archivos de la plataforma
-denominada MICAMELLO.COM.EC, son de propiedad de la Compañía MICAMELLO INC. y están
-protegidas por las leyes y los tratados internacionales de derechos de autor, marcas, patentes,
-modelos y diseños industriales.<br><br>
-El uso indebido y la reproducción total o parcial de dichos contenidos quedan prohibidos, salvo
-autorización expresa y por escrito de la Compañía MICAMELLO INC.<br><br>
-<h1 class="tit-pol">11. CANCELACIÓN DE USUARIO</h1>
-Usted puede dejar de utilizar y solicitar la cancelación de su cuenta de usuario o de los servicios
-en cualquier momento, conforme las instrucciones disponibles en el portal.<br><br>
-La fecha y hora efectiva para dicha cancelación será aquella en la que usted haya completado el
-proceso de cancelación de la cuenta de usuario y la fecha efectiva de cancelación de los servicios
-de pago será el final del periodo de suscripción de estos. Las suscripciones de pago se
-suspenderán solo a la expiración del respectivo periodo para el cual haya pagado.<br><br>
-En los casos de cancelación de usuario por cuenta propia, no existirán reembolsos por los
-servicios cancelados a MICAMELLO.COM.EC<br><br>
-Recordemos que el incumplimiento de las leyes aplicables y/o de los términos y condiciones de
-uso del sistema da el derecho a MICAMELLO.COM.EC de suspender temporalmente o cancelar la 
-cuenta de usuario, así como de los servicios pagados, sin derecho a reembolso.<br><br>
-<h1 class="tit-pol">12. PÉRDIDA DE DATOS Y CONTENIDO</h1>
-Al cancelarse su Cuenta de Usuario, se puede provocar la pérdida de datos, información,
-contenidos, y más de su Cuenta de Usuario, MICAMELLO.COM.EC no será responsable en modo
-alguno por tal Pérdida, así como tampoco se compromete a guardar una copia de seguridad de su
-Cuenta de Usuario.<br><br>
-<h1 class="tit-pol">13. MODIFICACIONES DE LOS TÉRMINOS Y CONDICIONES DE USO DEL SISTEMA Y DE LOS
-SERVICIOS DE PAGO QUE SE PRESTAN</h1>
-MICAMELLO.COM.EC se reserva el derecho de modificar cuantas veces sea necesario los términos
-y condiciones de uso, normas que lo complementan y que estén publicadas en el sitio web; así
-como, de los servicios de pago que están disponibles dentro del portal, sin necesidad de
-notificación previa a los usuarios.<br><br>
-Por lo que se advierte a los usuarios que deben revisar periódicamente dichos documentos, ya
-que MICAMELLO.COM.EC no se hace responsable por daños o perjuicios causados a los usuarios
-y/o a terceros; así como, por la suspensión o terminación de los servicios que presta el sitio web.<br><br>
-Estos Términos y Condiciones y cualesquiera otras notificaciones legales, términos y/o avisos
-enviados a usted por MICAMELLO.COM.EC, al aceptarlos constituirán el acuerdo completo entre
-usted y MICAMELLO.COM.EC sobre el tema presente de los mismos y reemplaza cualquier y todos
-los acuerdos, entendimientos, promesas, condiciones, negociaciones, convenios o
-representaciones anteriores o contemporáneos, entre usted y MICAMELLO.COM.EC, quedando
-vigente el último documento publicado en el portal web.<br><br>
-Usted además acepta que no está obligado a aceptar los términos y condiciones de uso, así como
-cualquier otro documento relacionado con el uso del sistema que se publicare en el portal, por lo
-que libre y voluntariamente acepta los mismos.<br><br>
-<h1 class="tit-pol">14. INTERPRETACIÓN DE LOS TÉRMINOS Y CONDICIONES DE USO</h1>
-Estos términos y condiciones de uso no son susceptibles de interpretación por parte del usuario,
-por lo que se entenderán en su estricto contexto, obedeciendo al objetivo del portal web
-MICAMELLO.COM.EC<br><br>
-<h1 class="tit-pol">15. CONTROVERSIAS, JURISDICCIÓN Y COMPETENCIA</h1>
-Los términos y condiciones de uso del sistema constituyen un acuerdo entre el portal
-MICAMELLO.COM.EC y los Usuarios, por lo que cualquier controversia que pudiera surgir entre las
-partes se tratará de solventar en primera instancia de manera directa en un término no mayor de
-quince (15) días laborables, llegando a acuerdos amigables. En caso de no obtener un arreglo
-directo, las partes someterán la controversia a un Centro de Mediación de los Estados Unidos de
-Norteamérica de acuerdo con las reglas determinadas en la Ley. En caso de no llegar a un
-acuerdo, o el acuerdo sea parcial, la controversia se someterá a la jurisdicción ordinaria.<br><br>
-<h1 class="tit-pol">16. DOMICILIO Y NOTIFICACIONES</h1>
-Toda notificación o comunicación que deba efectuarse entre las partes, por efectos de la
-aceptación de estos términos y condiciones de uso, deberá ser por escrito, declarando que el
-domicilio para notificaciones del usuario de la cuenta es el correo electrónico registrado en el
-portal; y el domicilio de MICAMELLO.COM.EC es el correo electrónico info@micamello.com.ec o
-a la dirección de Estados Unidos de Norteamérica, en 4828 Hopespring Dr Orlando FL
-32829-8643, <br><br>
-Estos Términos y Condiciones fueron actualizados por última vez el 07 de Enero de 2018.<br><br></p>
+En relación con los datos obtenidos de los Usuarios Candidatos, los Usuarios Empresariales deben cumplir lo siguiente: <br><br>
+<ul class="letterLiDat">
+  <li>
+    Acceder a los datos de los candidatos para las finalidades explícitas y legítimas de acuerdo con los servicios específicamente contratados y de conformidad con lo establecido en las presentes Condiciones Legales y únicamente para finalidades de reclutamiento para el empleo ofertado.
+  </li>
+  <li>
+    Tratar la información de los candidatos con la máxima reserva y confidencialidad y de acuerdo con lo establecido en la legislación sobre protección de datos personales y el derecho a la privacidad, quedando el uso de dicha información a su entera responsabilidad, especialmente en el cuidado al derecho a la privacidad.
+  </li>
+  <li>
+    No ceder los datos personales a personas físicas o jurídicas distintas de las que pudieran haber sido expresamente autorizadas y para usos distintos de la finalidad del Portal Web, que es la puesta en contacto, a través del Portal Web o de otra herramienta de software de reclutamiento ofrecida por MI CAMELLO S.A., entre particulares que buscan trabajo con Ofertantes de Empleo y viceversa.
+  </li>
+  <li>
+    Proteger los datos personales a los que tenga acceso garantizando su confidencialidad e impidiendo que terceros no autorizados puedan tener acceso a los mismos.
+  </li>
+  <li>
+    El acceso a los datos de las personas inscritas o asignadas a cada proceso de selección se permite durante un plazo máximo de 30 treinta días calendario en el caso de packs de ofertas; y, durante la vigencia de la oferta publicada (60 días calendario) en el caso de las ofertas básicas.
+  </li>
+  <li>
+    En ningún caso, se otorga permiso al Usuario de la Empresa Cliente para almacenar los datos de los Candidatos de Trabajo para otros anuncios de trabajo ni para constituir una base de datos privada de CVs ni para cualquier otro uso distinto a la finalidad del Portal Web, salvo que ello sea permitido por MI CAMELLO S.A., ya sea mediante el uso de la herramienta de software de reclutamiento ofrecida por el mismo o mediante autorización expresa por escrito. 
+  </li>
+</ul>
+<br><br>
+<p class="subt-pol">
+  Reglas de publicación de ofertas de trabajo 
+</p>
+En la publicación de las ofertas de trabajo en el Portal Web se siguen las siguientes reglas:<br><br> 
+<ul class="numberLi1">
+  <li>
+    MI CAMELLO S.A., a su sola discreción, puede poner a disposición del Usuario de la Empresa Cliente la posibilidad de publicar un número limitado de ofertas sin coste, a ser consumidas en un período determinado y con las restricciones que el Portal decida en cada momento. La oferta será comunicada a través del área de gestión de la cuenta personal del Usuario de la Empresa Cliente. MI CAMELLO S.A. se reserva el derecho de modificar las condiciones de la oferta en cualquier momento.
+  </li>
+  <li>
+    Todas las ofertas de trabajo son revisadas por el equipo de MI CAMELLO S.A. para validar su calidad y el cumplimiento de las Condiciones Legales. Una vez validadas, se mostrarán en la Portal Web. El proceso de validación puede tener una duración aproximada de 48 horas desde su introducción en el Portal Web. No obstante, en ocasiones dicho proceso puede tener una duración de hasta dos (2) días hábiles. Las ofertas de trabajo tienen un periodo de validez de sesenta (60) días calendario prorrogable por parte del Usuario de la Empresa Cliente, siempre sujeto al plazo de duración de la membresía o contrato y según las condiciones del servicio. Una vez superado el periodo de validez y/o de la membresía o contrato, las ofertas dejaran automáticamente de ser públicas. 
+  </li>
+  <li>
+    Las ofertas gratuitas o pagadas solo pueden ser modificadas dentro de las primeras 48 horas y solo podrá ser editada la descripción de la oferta.
+  </li>
+  <li>
+    Si las ofertas de trabajo publicadas han caducado, pero no han sido eliminadas por los motores de búsqueda de internet ajenos a MICAMELLO, se redirigirá el tráfico proveniente de estos a una selección de ofertas similares.
+  </li>
+  <li>
+    MI CAMELLO S.A. vela para que el contenido de los anuncios sea correcto. Sin embargo, no se hace responsable de aquellos errores que puedan surgir ni de los perjuicios que éstos puedan causar a terceros. Los contenidos publicados son responsabilidad exclusiva del Usuario de la Empresa Cliente que los publica.
+  </li>
+  <li>
+    El Usuario de la Empresa Cliente consiente y acepta que las ofertas publicadas por éste podrán ser incluidas en agregadores web con el objeto de mejorar la difusión y efectividad de la misma. La información facilitada por MI CAMELLO S.A. a los referidos agregadores web consistirá en el título, descripción de la oferta y resto de informaciones que el Usuario de la Empresa Cliente decide hacer público en MICAMELLO, junto con el enlace de la misma al Portal Web. MI CAMELLO S.A. velará para que el uso de dichos datos, por parte de los agregadores web, sea conforme con la finalidad del Portal Web, no pudiendo, sin embargo, hacerse garantizar su buen uso y hacerse responsable de éstos. 
+  </li>
+</ul> 
+<br><br>
+<p class="subt-pol">
+  Servicios de pago y su funcionamiento
+</p>
+
+
+
+
+MI CAMELLO S.A. incluye dentro de su funcionamiento el acceso a servicios de pago, ya sea mediante pago puntual o por suscripción, que permiten un uso mejorado del portal. El acceso a estos servicios por parte de los Usuarios Candidatos o Empresa es voluntario.<br><br>
+ 
+Los precios y tarifas aplicados a cada producto o suscripción corresponderán a los publicados en el Portal Web en el momento de su contratación y no incluyen en ningún caso los gastos derivados del método de pago elegido por el Usuario, ni aquellos impuestos que, en su caso, correspondan, los cuales se aplicarán antes del pago efectivo.<br><br>
+ 
+MI CAMELLO S.A. emitirá una factura una vez realizado el pago de un producto a través del Portal Web. Los Usuarios tendrán a su disposición dicha factura dentro del área de gestión de su cuenta personal, y también se enviará a su correo registrado. En caso de realizar la contratación a través de un representante comercial, éste será quien genere una factura que será remitida al Usuario de la Empresa Cliente por e-mail, a la vez que estará accesible dentro del Área de Gestión del Usuario Empresa dentro de MICAMELLO.<br><br>
+
+En el momento de publicación o actualización de las presentes Condiciones Legales, los servicios de pago disponibles en el Portal Web son los siguientes:<br><br>
+
+<ul>
+  <li>
+    Paquetes de planes (según el plan) que permite el acceso al Usuario Empresa a las siguientes funcionalidades:<br><br>
+    <ul>
+      <li>
+        Acceso limitado en cantidad y perfil a los datos de contacto de los CVs del directorio de Candidatos de Trabajo.
+      </li>
+      <li>
+        Visualización de los currículums de todos los Candidatos de Trabajo inscritos en las vacantes publicadas por el Usuario Empresarial. Así como el uso de filtros.
+      </li>
+      <li>
+        En los paquetes pagados, la posibilidad de ocultar el nombre del Usuario Empresa en las ofertas de trabajo para garantizar la confidencialidad de su publicación.
+      </li>
+      <li>
+        Descarga de hojas de vida y Test de competencias laborales.
+      </li>
+      <li>
+        Envió de accesos a los candidatos para completar el Test de Competencias.
+      </li>
+      <li>
+        También permite asignar cuentas a filiales de la misma empresa, y distribuir la cantidad de anuncios y la cantidad de accesos.
+      </li>
+    </ul>
+  </li>
+<br><br>
+  <li>
+    Paquetes de planes (según el plan) que permite el acceso al Usuario Candidato las siguientes funcionalidades:<br><br>
+    <ul>
+      <li>
+        Auto postulaciones.
+      </li>
+      <li>
+        Rendir el informe de Test por competencias laborales.
+      </li>
+      <li>
+        Descargar el Test por competencias.
+      </li>
+        Postulaciones manuales.
+      <li>
+        Los servicios de Planes de Ofertas finalizaran transcurridos sus días de contratación según cada plan. El Usuario de la Empresa Cliente únicamente podrá disfrutar de los servicios y acceder a los CVS aplicados 30 días más.
+      </li>
+    </ul>
+  </li>
+
+</ul>
+<br><br>
+
+
+
+
+<p class="subt-pol">
+  Terminación o suspensión de los servicios. Política de reembolso
+</p>
+Las Condiciones Legales permanecerán en vigor mientras el Usuario de la Empresa Cliente y Candidato utilice el Portal Web y su cuenta permanezca abierta. <br><br>
+
+MI CAMELLO S.A. se reserva la potestad de suspender o cancelar el servicio e impedir o limitar el acceso del Usuario de la Empresa Cliente y Candidato, sin derecho a reembolso del precio pagado en caso de uso fraudulento o no acorde con las presentes Condiciones Legales y en contra de la finalidad del Portal Web y demás documentos que regulen el uso del Portal. <br><br>
+ 
+Asimismo, MI CAMELLO S.A. se reserva el derecho de suspender o cancelar definitivamente el servicio del Portal Web en caso de no recibirse el correspondiente pago a la fecha de vencimiento de la factura, ello sin perjuicio de la aplicación de intereses y penalidades por impago y de la reclamación de las cantidades pendientes. <br><br>
+ 
+El incumplimiento de las normas de registro puede significar la cancelación inmediata de la cuenta de Usuario de la Empresa Cliente y Candidato; así como, la destrucción de los contenidos asociados a la misma sin posibilidad de recuperación. <br><br>
+ 
+En ningún caso la suspensión del servicio o la no activación por incumplimiento de las normas de registro o de cualquiera de las Condiciones Legales dará lugar al reembolso del producto pagado. <br><br>
+ 
+MI CAMELLO S.A. se reserva el derecho a terminar la relación contractual con el Usuario de la Empresa Cliente o Usuario Candidato en cualquier momento con o sin previo aviso. <br><br>
+
+El Usuario de la Empresa Cliente o Candidato tendrá derecho al reembolso de la parte no devengada de los servicios en caso de incumplimiento grave de MI CAMELLO S.A. de las presentes Condiciones Legales y/o los términos acordados en la correspondiente Orden de Servicios. <br><br>
+
+
+<h1 class="tit-pol">REGLAMENTO DE USO PARA LOS USUARIOS CANDIDATOS</h1>
+<p class="subt-pol">
+  Registro del Usuario Candidato y servicios
+</p>
+
+El acceso al Portal Web por parte de los Usuarios Candidatos de Trabajo exige la previa suscripción o registro de los mismos. <br><br>
+ 
+Sin embargo, para poder disfrutar de determinados servicios que ofrece el Portal Web el Usuario deberá registrarse en el mismo. Para crear una cuenta debe proporcionar los siguientes datos: nombre y apellidos, dirección de correo electrónico válida, así como una contraseña. Asimismo, el Usuario podrá incluir en su perfil, una fotografía en formato jpg, la ciudad o ubicación. También podrá subir su C.V. en nuestro Portal Web en formato Word o Pdf. <br> <br>
+ 
+Los servicios ofrecidos de manera gratuita son los siguientes:<br><br>
+
+<ul>
+  <li>
+    Un buscador y directorio de ofertas de trabajo por categoría y lugar.
+  </li>
+  <li>
+    Suscripción al envío de alertas de ofertas de trabajo publicadas recientemente y de acuerdo a las áreas y sub áreas seleccionadas.
+  </li>
+  <li>
+    Aplicación manual a ofertas de trabajo publicadas de forma que sus datos de contacto sean accesibles al Ofertante de Empleo.
+  </li>
+  <li>
+    Publicación gratuita de su currículum en el Portal Web.
+  </li>
+  <li>
+    Recibirá ocho auto-postulaciones.
+  </li>
+  <li>
+    Podrá completar parcialmente el Test CANEA de competencias laborales, y lo podrá descargar.
+  </li>
+</ul>
+<br><br> 
+Se ofrece el plan para candidato pagado con un total de 168 auto postulaciones y la opción de completar el Test CANEA. El beneficio es que MICAMELLO postula por usted, ahorrando tiempo, inclusive, cuando usted se encuentra ocupado.
+<br><br>
+ 
+MI CAMELLO S.A. puede decidir, en cualquier momento y sin previa notificación, dejar de ofrecer sus servicios o algunos de ellos de forma gratuita.
+<br><br>
+ 
+Mediante el registro como Usuario Candidato del Portal Web, el Demandante de Trabajo autoriza expresamente a MI CAMELLO S.A. a facilitar determinada información del mismo para posibilitar el contacto con los Ofertantes de Empleo, ya sea mediante el presente Portal Web o la herramienta de software de reclutamiento online ofrecida por MICAMELLO, en caso de que la vacante haya sido publicada por la empresa a través de dicha herramienta. MI CAMELLO S.A. respetará en todo momento el nivel de privacidad determinado por el Usuario Candidato y tratará sus datos de conformidad con lo establecido en la Política de Privacidad.<br><br>
+
+<p class="subt-pol">
+  Comunicaciones electrónicas y alertas
+</p>
+El Portal Web pone a disposición del Usuario Candidato un servicio gratuito de alertas de ofertas de trabajo que se enviará al correo electrónico del mismo una vez se haya registrado en el Portal Web mediante el correspondiente formulario y en el cual haya indicado las áreas y sub áreas de su interés. <br><br>
+
+<p class="subt-pol">
+Terminación o suspensión de los servicios
+</p>
+Las Condiciones Legales permanecerán en vigor mientras el Usuario Candidato utilice el Portal Web y su cuenta permanezca abierta. <br><br>
+ 
+MI CAMELLO S.A. se reserva la potestad de impedir o limitar el acceso y suspender o cancelar la cuenta del Usuario Candidato en caso de que se utilice incumpliendo las presentes Condiciones Legales y en contra de la finalidad del Portal Web. <br><br>
+
+<h1 class="tit-pol">DATOS DE CARÁCTER PERSONAL</h1>
+
+
+
+MI CAMELLO S.A. tratará los datos de carácter personal de los Usuarios de conformidad con los términos de la Política Privacidad y Protección de Datos que esta publicada en el Portal Web. <br><br>
+<h1 class="tit-pol">MEDIDAS DE SEGURIDAD</h1>
+
+
+MI CAMELLO S.A. ha implantado las medidas de seguridad oportunas en el Portal Web y trabaja constantemente en una protección adecuada del mismo. No obstante, las medidas de seguridad en Internet no son inquebrantables, respecto de la privacidad y seguridad, MI CAMELLO S.A. no garantiza que terceros, autorizados o no, puedan tener conocimiento de la clase, condiciones, características y circunstancias del uso que los Usuarios hacen de las funcionalidades, o que puedan acceder, interceptar, eliminar, alterar, modificar o manipular los mensajes, comunicaciones y contenidos de cualquier clase que los Usuarios difundan o pongan a disposición de terceros a través de dichas funcionalidades. <br><br>
+
+El uso de la contraseña es personal e intransferible, no estando permitida la cesión, ni siquiera temporal, a terceros. El Usuario deberá adoptar las medidas necesarias para la custodia de la contraseña por él seleccionada, evitando el uso de la misma por terceros. El Usuario es el único responsable de la utilización que se realice de su contraseña, con completa indemnidad para MICAMELLO S.A.. En el supuesto de que el Usuario conozca o sospeche del uso de su contraseña por terceros, deberá ponerlo en conocimiento de MI CAMELLO S.A. a la mayor brevedad posible.<br><br>
+
+
+<h1 class="tit-pol">EXCLUSIÓN DE GARANTÍAS Y LIMITACIÓN DE RESPONSABILIDAD</h1>
+
+
+Las exclusiones y limitaciones de responsabilidad de esta sección se aplican en la medida máxima permitida por la legislación vigente. Nada en esta sección tiene la intención de limitar cualquier derecho de los Usuarios que no pueda ser limitado legalmente.<br><br>
+ 
+MI CAMELLO S.A. proporciona los servicios y el acceso al Portal Web tal y como es y según disponibilidad. Renunciamos expresamente a cualquier garantía de cualquier tipo, ya sea expresa o implícita, incluyendo las garantías o condiciones de comerciabilidad, idoneidad para un propósito particular, título, disfrute tranquilo, exactitud o no infracción. <br><br>
+
+MI CAMELLO S.A. no garantiza que el Portal Web pueda estar disponible de forma ininterrumpida, oportuna, segura o libre de errores ni que los resultados que puedan obtenerse del uso del Portal Web sean precisos o fiables. Debido a razones de mantenimiento, seguridad o capacidad, así como a causa de acontecimientos sobre los que MI CAMELLO S.A. no puede influir (por ejemplo: anomalías de redes públicas de comunicación, cortes de electricidad, etc.) pueden producirse breves anomalías o la suspensión pasajera de los servicios del Portal Web. En consecuencia, MI CAMELLO S.A. excluye, en la máxima medida permitida por la legislación vigente, cualquier responsabilidad por los daños y perjuicios de toda naturaleza que puedan deberse a la falta de disponibilidad o de continuidad del funcionamiento del Portal Web y de los servicios habilitados en el mismo, así como a los errores en el acceso a las distintas páginas web o aquellas desde las que, en su caso, se presten dichos servicios.<br><br>
+ 
+MI CAMELLO S.A. no se responsabiliza por los daños y perjuicios que pudiera generarse por la falta de exactitud, exhaustividad, actualidad, de errores u omisiones de los que pudieran adolecer la información y servicios contenidos en este Portal Web u otros Contenidos de Usuario y de terceros a los que se pueda acceder a través del mismo. En caso de que un Usuario considere que existe Contenido en el Portal Web que atente contra sus derechos debe comunicarlo inmediatamente a MI CAMELLO S.A. a través del formulario de contacto del Portal Web; así como tampoco, asume ningún deber o compromiso de verificar ni de vigilar sus contenidos e informaciones más allá de las verificaciones de su equipo de moderación y tras aquellas denuncias remitidas por los Usuarios mediante el formulario de contacto accesible fácilmente en el Portal Web.<br><br>
+ 
+MI CAMELLO S.A. no se responsabiliza por los daños y perjuicios que pudieran deberse a los servicios prestados por terceros a través de este Portal Web, así como a los medios que éstos habilitan para gestionar las solicitudes de servicio, y concretamente, a modo enunciativo y no limitado: por los actos de competencia desleal y publicidad ilícita como consecuencia de la prestación de servicios por terceros a través del Portal Web, así como a la falta de veracidad, exactitud, exhaustividad, vicios, defectos, pertinencia y/o actualidad de los contenidos transmitidos, difundidos, almacenados, recibidos, obtenidos, puestos a disposición o accesibles mediante los servicios prestados por terceros a través de este Portal Web.<br><br>
+ 
+
+MI CAMELLO S.A. no garantiza que otros Usuarios que ya cuentan con la dirección de correo del Usuario a través de su contacto en el Portal Web puedan volver a contactar con éste en un futuro. Asimismo, la inclusión por parte de los Candidatos de Trabajo de su el currículum vitae en nuestra base de datos on-line aumenta considerablemente su visibilidad a Ofertantes de empleo en busca de personal. Se deja expresa constancia de que MI CAMELLO S.A. realiza un esfuerzo para limitar el acceso al currículum vitae de los Usuarios Candidatos solamente por Ofertantes de empleo con este fin. Sin embargo, MI CAMELLO S.A. no ofrece una garantía en este aspecto. En cualquier caso, prohibiremos el acceso al servicio, a cualquier empresa, que descubramos que hace un uso de los datos con fines diferentes a éste.<br><br>
+ 
+El Portal Web incluye dentro de sus contenidos enlaces a sitios web pertenecientes o gestionados por terceros, con el objeto de facilitar el acceso a información disponible a través de Internet. MI CAMELLO S.A. no asume ninguna responsabilidad derivada de la existencia de enlaces entre los contenidos de este sitio y contenidos situados fuera del mismo o de cualquier otra mención de contenidos externos a este sitio. Tales enlaces o menciones tienen una finalidad exclusivamente informativa y, en ningún caso, implican el apoyo, aprobación, comercialización o relación alguna entre MI CAMELLO S.A. y las personas o entidades autoras o gestoras de tales contenidos o titulares de los sitios donde se encuentren.<br><br>
+
+
+<h1 class="tit-pol">MODIFICACIÓN DE LAS CONDICIONES LEGALES</h1>
+
+
+MI CAMELLO S.A. se reserva la posibilidad de modificar sin previo aviso el contenido de las Condiciones Legales, de manera que recomienda al Usuario leerlas cada vez que acceda y utilice el Portal Web. Asimismo, MI CAMELLO S.A. se reserva la posibilidad de modificar sin previo aviso el diseño, presentación y/o configuración de este Sitio Web, así como algunos o todos los servicios ofrecidos, y añadir servicios nuevos. <br><br>
+
+Ninguno de los cambios se aplicará a aquellas reclamaciones presentadas antes de la publicación de los cambios. El acceso y uso del Portal Web por parte del Usuario constituirá su aceptación de dichos cambios. <br><br>
+
+<h1 class="tit-pol">LEGISLACIÓN APLICABLE Y JURISDICCIÓN</h1>
+
+Las presentes Condiciones Legales y el resto de condiciones del Sitio Web se regirán por la legislación Ecuatoriana. <br><br>
+ 
+Para las controversias que pudieran suscitarse por la prestación de los servicios y contenidos de MI CAMELLO S.A., así como sobre la interpretación, aplicación, ejecución, cumplimiento o incumplimiento de lo aquí establecido, MI CAMELLO S.A. y el Usuario, renuncia a su jurisdicción y se someten, a la jurisdicción de los Juzgados y Tribunales ecuatorianos de la ciudad de Guayaquil. <br><br>
+
+<h1 class="tit-pol">DERECHOS DE PROPIEDAD INTELECTUAL E INDUSTRIAL</h1>
+
+
+Copyright © 2019 – MI CAMELLO - Todos los derechos reservados. <br><br>
+ 
+Quedan reservados todos los derechos de explotación. <br><br>
+ 
+Los textos, diseños, imágenes, bases de datos, logos, estructura, marcas y demás elementos de este Portal Web están protegidos por los derechos de propiedad intelectual e industrial de MI CAMELLO y/o de terceros titulares de los mismos que han autorizado debidamente su inclusión en el Portal Web, mediante el formulario de registro o en su caso, acuerdos de cesión al respecto.<br>
+<br>
+ 
+Cualquier reproducción, transmisión, adaptación, traducción, modificación, comunicación al público, o cualquier otra explotación de todo o parte del contenido de este Sitio Web titularidad de MI CAMELLO S.A., efectuada de cualquier forma o por cualquier medio, electrónico, mecánico u otro, están estrictamente prohibidos salvo autorización previa por escrito de MI CAMELLO S.A.  o de terceros legítimos titulares. Cualquier infracción de estos derechos puede dar lugar a procedimientos judiciales civiles o penales que correspondan.<br>
+<br>
+ 
+La presencia en el Portal Web de cualquier texto, diseños, imágenes, bases de datos, logos, estructura, marcas u otros derechos de propiedad intelectual o industrial de terceros no implica la cesión de la titularidad de los mismos a MI CAMELLO S.A.. La legitimidad de los derechos de propiedad intelectual o industrial correspondientes a los contenidos aportados por los Usuarios es de la exclusiva responsabilidad de los mismos.<br>
+<br>
+ 
+En el caso de que cualquier Usuario o un tercero considere que se ha producido una violación de sus legítimos derechos de propiedad intelectual y/o industrial por la introducción de un determinado contenido en el Sitio Web deberá notificar dicha circunstancia por escrito a MI CAMELLO S.A. según los datos de contacto indicados más abajo e indicando:<br>
+<br>
+
+<ul>
+  <li>
+    Datos identificativos del interesado titular de los derechos presuntamente infringidos. Si la reclamación la presenta un tercero distinto del interesado, deberá indicar y acreditar la representación con la que actúa.
+  </li>
+  <li>
+    Indicación de los contenidos protegidos por los derechos de propiedad intelectual y/o industrial y su ubicación en el Portal Web.
+  </li>
+  <li>
+    Acreditación de la existencia, titularidad y vigencia de los citados derechos de propiedad intelectual y/o industrial.
+  </li>
+  <li>
+     Declaración expresa en la que el interesado se responsabiliza de la veracidad de los datos e información facilitados en la notificación a que se refiere este punto.
+  </li>
+</ul>
+<br><br>
+<ul>
+  <li style="list-style-type: none;">
+    <h1 class="tit-pol">
+      INFORMACIÓN DE CONTACTO
+    </h1>
+    <ul>
+      <li>
+        Si eres Usuario Candidato a través del siguiente enlace: <a href="<?php echo PUERTO."://".HOST;?>/recomendacion/">formulario de Contacto</a>
+      </li>
+      <li>
+        Si eres Usuario Empresa a través del siguiente enlace: <a href="<?php echo PUERTO."://".HOST;?>/recomendacion/">formulario de Contacto</a>
+      </li>
+    </ul>
+  </li>
+</ul>
+<br><br>
+En caso de utilizar el formulario de contacto debes facilitarnos la mayor información posible sobre tu solicitud: nombre y apellidos, dirección de correo electrónico que utilizas para nuestro Portal Web y los motivos de tu solicitud.
+<br><br>
 </div>

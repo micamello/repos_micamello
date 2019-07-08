@@ -155,7 +155,7 @@ ul.list_content_mic > li:last-child {
 .area_with_subarea{
 	background-color: #B2B0B0;
 	color: black;
-	font-weight: bold;
+	font-weight: 500 !important;
 }
 
 .button_selected{
@@ -182,7 +182,7 @@ ul.list_content_mic > li:last-child {
 	white-space: nowrap;
   	overflow: hidden;
   	text-overflow: ellipsis;
-  	font-weight: bold;
+  	font-weight: 500 !important;
   	/*margin: 5px 2px 5px 2px;*/
 }
 .modal_selected_list > span{
@@ -197,7 +197,7 @@ ul.list_content_mic > li:last-child {
 }
 
 .seleccion_e{
-	font-weight: bold;
+	font-weight: 500 !important;
 }
 
 

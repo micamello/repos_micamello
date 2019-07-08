@@ -50,7 +50,7 @@
     padding-right: 10px; 
     white-space: nowrap;
     text-align:left;
-    font-weight: bold;
+    font-weight: 500 !important;
   }
  
   /*

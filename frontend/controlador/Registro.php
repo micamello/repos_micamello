@@ -100,7 +100,7 @@ class Controlador_Registro extends Controlador_Base {
 
         if($_POST['tipo_usuario'] == 2){
           foreach (DIRECTORIOCORREOS as $key => $value) {
-            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos");
+            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos ".$datosReg['nombresCandEmp']);
           }
         }
         if($datosValidos['tipoEmpresa'] == ""){

@@ -156,7 +156,7 @@ ul.list_content_mic > li:last-child {
 .area_with_subarea{
 	background-color: #B2B0B0;
 	color: black;
-	font-weight: bold;
+	font-weight: 500 !important;
 }
 
 .button_selected{
@@ -183,7 +183,7 @@ ul.list_content_mic > li:last-child {
 }
 
 .seleccion_e{
-	font-weight: bold;
+	font-weight: 500 !important;
 }
 
 .check_box1{
@@ -506,7 +506,7 @@ ul.list_content_mic > li:last-child {
 
 .encabezado{
   text-align:justify; font-size: 18px; 
-  font-weight: bold;
+  font-weight: 500 !important;
   font-family: Roboto;
 }
 
@@ -578,7 +578,7 @@ a.addButton{
     color: white;
     text-transform: uppercase;
     padding: 10px 40px;
-    font-weight: bold;
+    font-weight: 500 !important;
     margin-bottom: 20px;
     border: 2px solid transparent;    
     line-height: normal;
@@ -594,7 +594,7 @@ a.addButton:hover{
     color: white;
     text-transform: uppercase;
     padding: 10px 40px;
-    font-weight: bold;
+    font-weight: 500 !important;
     margin-bottom: 20px;
     border: 2px solid transparent;    
     line-height: normal;
@@ -647,7 +647,7 @@ a.addButton:hover{
     color: white;
     text-transform: uppercase;
     padding: 10px 40px;
-    font-weight: bold;
+    font-weight: 500 !important;
     margin-bottom: 20px;
     border: 2px solid transparent;    
     line-height: normal;

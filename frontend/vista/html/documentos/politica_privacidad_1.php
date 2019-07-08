@@ -1,303 +1,394 @@
 <div class="text-center" id="blockRightClick">
-  <h2 class="titulo">Política de Privacidad</h2>
+  <h2 class="titulo">POLÍTICA DE PRIVACIDAD SOBRE MANEJO Y USO DE DATOS DE LOS CANDIDATOS</h2>
 </div>
 <div class="container politica" >
-  <p>De conformidad con la Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes de Datos
-mediante la aceptación de estas políticas de privacidad, otorga el consentimiento informado,
-expreso, libre e inequívoco para que los datos personales que se proporcionen a través de la página
-web www.micamello.com.ec (en adelante MICAMELLO.COM.EC.) sean incluidos en la base de datos
-de MICAMELLO.COM.EC y puedan ser utilizados conforme se establece en estas políticas de
-privacidad.<br><br>
-Los USUARIOS de MICAMELLO.COM.EC tanto aquellos denominados CANDIDATOS como aquellos
-denominados EMPRESA respetan la privacidad de toda persona que visite el sitio web
-MICAMELLO.COM.EC y la información registrada en ésta.<br><br>
-Las políticas de privacidad establecen la información que MICAMELLO.COM.EC recopila y el uso que
-se da a la misma, explicando la seguridad que se ha tomado en el sitio web para la protección de sus
-datos.<br><br>
-A través del presente MICAMELLO INC. garantiza que se han tomado las medidas de seguridad tanto
-organizativas como técnicas requeridas por la Ley de Comercio Electrónico, Firmas Electrónicas y
-Mensajes de Datos y su Reglamento para la protección de datos.<br><br>
-La presente política de privacidad será válida únicamente para los datos de carácter personal
-obtenidos por MICAMELLO.COM.EC, no siendo aplicable para aquella información recadaba por
-terceros en otras páginas web, incluso si éstas se encuentran enlazadas por MICAMELLO.COM.EC.<br><br>
-Por lo expuesto, MICAMELLO.COM.EC manifiesta el compromiso de mantener y garantizar las
-relaciones comerciales de forma segura mediante la protección de los datos personales y
-garantizando el derecho a la privacidad de cada uno de los usuarios de MICAMELLO.COM.EC.<br><br>
-En caso de no estar de acuerdo con las Políticas de Privacidad, por favor, abandone el Sitio Web y
-absténgase de utilizar los Servicios que se ofrecen. La utilización por el usuario del Sitio Web se
-entenderá como aceptación plena y sin reservas de las Políticas de Privacidad aquí establecidas.
-En adelante, los términos “Usted” y “Usuario” serán utilizados para hacer referencia a todas las
-personas físicas y/o jurídicas que por cualquier razón accedan al Sitio Web.<br><br></p>
-<p class="tit-pol-2">¿Qué se consideran datos personales?</p>
-MICAMELLO.COM.EC considera datos personales a toda información relativa a una persona que se
-entrega a MICAMELLO.COM.EC para ingresar al sitio web; es decir, nombres completos, email, fecha
-de nacimiento, edad; para el caso de EL CANDIDATO también podrá subir su hoja de vida en nuestro
-portal web en formato WORD o PDF; y, si se adquiere uno o más de los servicios que se ofertan
-dentro de MICAMELLO.COM.EC, por el cual se otorgue factura y de acuerdo con la forma de pago se
-requerirá de datos como: Nombres y Apellidos, o nombre de la empresa, cédula o RUC, domicilio,
-teléfono, tipo de cuenta, tipo de tarjeta de crédito, casa bancaria, número de cuenta, número de
-tarjeta, código de la tarjeta.<br><br>
-Adicionalmente, cuando se visite el sitio MICAMELLO.COM.EC, determinada información se
-almacena automáticamente por motivos técnicos como lo es la dirección IP asignada por su
-proveedor de acceso a internet.<br><br>
-Finalidad, legitimación, categoría de los datos recabados, consentimiento al tratamiento de los datos<br><br>
-Se informa al USUARIO que, a través de los formularios de registro de usuario, suscripción a los
-servicios ofertados, formularios de personalidad y de pago de servicios, se recaban datos y se
-almacenan en un fichero, con la exclusiva finalidad de envío de comunicaciones electrónicas tales
-como oferta de candidatos, oferta de empleos, publicidad relativa a los servicios que se ofertan en
-MICAMELLO.COM.EC. Los campos marcados como obligatorios son imprescindibles para realizar la
-finalidad expresada.<br><br>
-Respecto de los datos otorgados relativos a la información de su tarjeta de crédito, cuenta bancaria,
-serán utilizados únicamente para el cobro del servicio de pago que el USUARIO haya solicitado,
-existiendo comunicación electrónica únicamente entre el USUARIO dueño de los datos,
-MICAMELLO.COM.EC y la institución financiera respectiva, para respaldo del servicio solicitado, el
-USUARIO deberá aceptar/suscribir el contrato de adhesión respectivo.<br><br>
-Asimismo, podrá dar cumplimiento mediante los datos, a los requerimientos que realicen los
-USUARIOS. Y, únicamente tendrá acceso a sus datos el titular de la cuenta de usuario, y bajo ningún
-concepto estos datos serán cedidos, compartidos, transferidos, ni vendidos a ningún tercero.
-La aceptación de las políticas de privacidad, mediante el procedimiento establecido para obtener los
-datos personales, se entenderá a todos los efectos como la prestación de su CONSENTIMIENTO
-EXPRESO E INEQUÍVOCO del USUARIO al tratamiento de los datos de carácter personal en los
-términos que se exponen en el presente documento.<br><br>
-Por tanto, la autorización y legitimación de uso de los datos personales se obtiene a través del
-consentimiento como tal y como posteriormente se establecerán.<br><br>
-En ningún caso se realizará un uso distinto al de la finalidad establecida en el presente documento, ni
-mucho menos se cederán o venderán los mismos a un tercero.<br><br>
+  <p><br>La presente Política de Privacidad explica sobre la recopilación, manejo, uso, derechos y responsabilidad de los datos de carácter personal (en adelante, los “<b>Datos Personales</b>” o “<b>Datos Personales de los Candidatos</b>”) de los usuarios (en adelante, “<b>Candidato</b>”, “<b>Usuario Particular</b>” o “<b>Demandante de Trabajo</b>”) que buscan empleo o servicios relacionados, y acceden y/o utilizan los servicios del portal web de empleo y/o aplicación móvil Mi Camello.<br><br>
 
-<p class="subt-pol">Menores de edad</p>
-En ningún caso MICAMELLO.COM.EC acepta como usuarios a personas menores de edad, por ser
-ésta una plataforma de búsqueda de empleo y contratación de personal dirigida a personas mayores
-de 18 años.<br><br>
-Al acceder al Sitio Web y utilizar los Servicios de MICAMELLO.COM.EC el Usuario confirma que es
-mayor de edad. En caso de que un menor de edad haga uso del sistema MICAMELLO.COM.EC
-utilizando información falsa, adulterada o usurpando una identidad, serán los padres de éste los
-responsables civiles y penales por las consecuencias que acarree dicho acto.<br><br>
-SI MICAMELLO.COM.EC llegare a detectar que una persona es menor de edad, denegará
-inmediatamente el acceso a la plataforma web.<br><br>
+Para MI CAMELLO es fundamental mantener la privacidad y seguridad de los Datos Personales de los Candidatos.
+<br><br>
 
-<p class="subt-pol">Legitimación.</p>
-En virtud del consentimiento expreso otorgado a través de la aceptación de las políticas de
-privacidad, MICAMELLO INC. podrá tratar y hacer uso de los datos del USUARIO conforme lo
-estipulado, siendo requisito obligatorio para poder suscribirse al portal y acceder a sus servicios
-gratuitos y de pago.<br><br>
-El USUARIO podrá retirar su consentimiento en cualquier momento, al cancelar su cuenta de usuario.<br><br>
-En dicho caso MICAMELLO.COM.EC dejará de utilizar los datos registrados en el portal.<br><br>
+<p class="tit-pol-2" style="text-decoration: underline;">DE LA RECOPILACIÓN DE DATOS:</p>
+<p class="tit-pol-2">DATOS QUE RECOPILAMOS</p>
 
-<p class="subt-pol">Categoría de los datos.</p>
-Los datos recabados en ningún momento son especialmente protegidos o tienen un nivel de
-protección, sino que son categorizados como datos identificativos y se los trata como tal. <br><br>
-Tiempo de conservación de los datos.
-MICAMELLO.COM.EC conservará los datos durante el tiempo que establezca la Ley o hasta que el
-USUARIO solicite su eliminación.<br><br>
+</p>
+Como Usuario Candidato, recopilamos los datos personales que ingresas al sistema Mi Camello, al momento de registrarte como usuario, esto con la finalidad de proporcionarte nuestros servicios de la mejor manera posible. 
 
-<p class="subt-pol">Cumplimiento de la normativa de aplicación</p>
-MICAMELLO.COM.EC observa y aplica la Ley de Comercio Electrónico, Firmas Electrónicas y Mensajes
-de Datos y su Reglamento; así como la Ley de Derechos del Consumidor, y, para efectos
-contractuales el Código Civil.<br><br>
+Para tu conocimiento, te informamos que al crear una cuenta debes proporcionarnos datos como tus nombres y apellidos, tu dirección de correo electrónico, así como una contraseña, como obligatorios.
 
-<p class="subt-pol">Medidas de seguridad</p>
-MICAMELLO.COM.EC le informa que tiene implantadas las medidas de seguridad de índole técnicas,
-tecnológicas y organizativas necesarias para garantizar la seguridad de sus datos de carácter personal
-y evitar su alteración, pérdida y tratamiento y/o acceso no autorizado, habida cuenta del estado de la
-tecnología, la naturaleza de los datos almacenados y los riesgos a que están expuestos, ya que
-provengan de la acción humana o del medio físico o natural.
-Así mismo, MICAMELLO.COM.EC ha establecido mediadas adicionales en orden a reforzar la
-confidencialidad e integridad de la información en su organización. Manteniendo continuamente la
-supervisión, control y evaluación de los procesos para asegurar el respeto a la privacidad de los
-datos.<br><br>
+Una vez creado el usuario, dentro del sistema, podrás a tu discreción, incluir en tu perfil tus datos académicos, la experiencia laboral y aptitudes, una fotografía, tu ciudad o ubicación. También podrás subir tu C.V. en formato Word o Pdf.
+ 
+Cuando te has registrado como usuario de Mi Camello, también recibimos datos de tus dispositivos y redes, dentro de esta información se incluye los datos de ubicación, información sobre tu dirección IP, servidor proxy, sistema operativo, navegador web y complementos.
 
-<p class="subt-pol">Ejercicio de derechos</p>
-El USUARIO que haya facilitado sus datos a través de www.micamello.com.ec podrá dirigirse
-directamente a MICAMELLO.COM.EC con el fin de ejercer sus derechos, solicitando el acceso a sus
-datos, rectificarlos o suprimirlos, expresar su deseo de limitación y oposición respecto del
-almacenamiento de sus datos.<br><br>
-El método más rápido y sencillo será accediendo a su cuenta de usuario directamente y modificar sus
-datos o borrar la cuenta de usuario.<br><br>
-Cualquier información que MICAMELLO.COM.EC requiera almacenar, en virtud de una obligación
-legal o contractual, será bloqueada y sólo será utilizada para dichos fines en lugar de ser borrada.<br><br>
-El USUARIO podrá ejercer su derecho mediante comunicación escrita a través del correo electrónico
-info@micamello.com.ec dirigida a MICAMELLO.COM.EC con la referencia “Protección de datos”,
-especificando sus datos, acreditando su identidad y los motivos de su solicitud.<br><br>
+Te informamos, además, que recopilamos datos a través de cookies de la forma en que se describe más adelante en nuestra Política de Cookies.
+ 
+Tú eliges el nivel de privacidad que deseas que tengan los datos proporcionados a MI CAMELLO. 
+<br><br>
 
-<p class="subt-pol">Links o enlaces externos</p>
-Como un servicio a nuestros USUARIOS, MICAMELLO.COM.EC puede incluir hipervínculos a otros
-sitios web que no son operados o controlados por MICAMELLO.COM.EC. Por tal motivo no se
-garantiza, ni se hace responsable de la licitud, fiabilidad, utilidad, veracidad y actualidad de los
-contenidos de tales sitios web o de sus prácticas de privacidad, ni de los permisos que los USUARIOS
-concedan a tales sitios. Por favor, antes de proporcionar información a dichos sitios web ajenos a
-MICAMELLO.COM.EC tenga en cuenta que sus prácticas de privacidad pueden diferir de las de
-MICAMELLO.COM.EC, por lo que deberá informarse previamente.<br><br>
-El único objeto de los enlaces es proporcionar al USUARIO la posibilidad de acceder a dichos enlaces,
-aunque MICAMELLO.COM.EC no ofrece ni comercializa por sí ni por medio de terceros la
-información, contenidos y servicios disponibles en los sitios enlazados, ni aprueba, supervisa o
-controla en modo alguno los contenidos y servicios y cualquier material de cualquier naturaleza
-existente en los mismos. MICAMELLO.COM.EC no se responsabiliza en ningún caso de los resultados 
-que puedan derivarse al USUARIO por acceso a dichos enlaces.<br><br>
+<p class="subt-pol">EDAD M&Iacute;NIMA</p>
+Para acceder o utilizar nuestro portal web debes tener 16 años de edad o más. Si eres menor de 18 años o menor a la mayoría legal de tu país, tu uso de nuestro portal web debe estar bajo la supervisión de tus padres o tutor u otro adulto responsable.<br>
+Si tenemos conocimiento de que un menor de edad nos ha proporcionado información sin autorización parental, eliminaremos dicha información y suprimiremos la cuenta de referido menor.
+<br><br>
+<!-- revisado update -->
+<!-- <p class="subt-pol">Legitimación.</p> -->
+<p class="tit-pol-2" style="text-decoration: underline;">DEL MANEJO DE LOS DATOS:</p>
+Mi Camello almacena los datos que nos has proporcionado y los administra con la finalidad de tener una mayor productividad, este manejo de datos se los utiliza con el objetivo de servir de interfaz entre el usuario, y las aplicaciones que se utilizan. <br><br>
+<!-- revisado update -->
+<p class="subt-pol">PLAZO DE CONSERVACIÓN DE LOS DATOS:</p>
+<p class="subt-pol">¿Por cuánto tiempo conservaremos tus datos?</p>
 
-<p class="subt-pol">Cookies</p>
-MICAMELLO.COM.EC utiliza cookies para verificar la cuenta de usuario y determinar cuándo se inicia
-sesión. De este modo ayudamos a nuestros USUARIOS a acceder a los servicios de
-MICAMELLO.COM.EC con mayor facilidad y mostrar la experiencia y las funciones correspondientes.
-También se utilizan las cookies para proteger la cuenta de usuario, los datos del usuario y los
-servicios de MICAMELLO.COM.EC, lo cual sirve para la lucha contra las actividades que infringen las
-políticas de privacidad o afectan de algún modo la capacidad de operar. De igual manera se utilizan
-las cookies para mostrar publicidad y hacer recomendaciones de empleos a los USUARIOS que
-puedan estar interesados en los mismos, para la obtención de datos estadísticos y rendimiento de
-servicios.<br><br>
+Los datos que nos facilites serán conservados mientras tu cuenta en nuestro portal web siga activa o en la medida en que sea necesario para proporcionarte nuestros servicios, hasta que solicites su supresión.
 
-<p class="subt-pol">Modificaciones de las políticas de privacidad</p>
-MICAMELLO.COM.EC se reserva el derecho a modificar sus políticas de privacidad de acuerdo a su
-propio criterio, de acuerdo con las necesidades del servicio. Cualquier modificación de las políticas de
-privacidad serán publicadas. El uso de MICAMELLO.COM.EC después de dichos cambios, implicará la
-aceptación de los mismos.<br><br>
+En caso de existir acciones legales que nos haya sido notificadas, los datos se conservarán por el tiempo que sea necesario para cumplir con las obligaciones legales o disposiciones judiciales.<br><br>
+<!-- revisado update -->
+<p class="subt-pol">DESTINATARIOS DE DATOS:</p>
+<p class="subt-pol">¿A qué destinatarios se comunicarán tus datos?</p>
+Tus datos serán comunicados a la empresa ofertante o reclutadora de empleo (Usuarios Profesionales) cuando hayas aplicado a una oferta para posibilitar el contacto con esta última.<br><br>
+ 
+Por otro lado, tus datos podrán ser tratados por los proveedores de MI CAMELLO-incluidas empresas del grupo MI CAMELLO - cuando consideremos necesario para asistirnos en la prestación de nuestros servicios; tales como: servicios de hosting, infraestructuras de sistemas, desarrollo de software, servicio de envío de notificaciones, comercialización, soporte, marketing, entre otros. <br><br>
 
-<p class="subt-pol">Servicios ofrecidos por terceros</p>
-Para el desarrollo de los servicios que MICAMELLO.COM.EC ofrece, utiliza necesariamente los
-siguientes prestadores de servicios, bajo las condiciones de su privacidad: PayPal y Paymentez.<br><br>
-El usuario y en general cualquier persona podrá establecer un hiperenlace o dispositivo técnico de
-enlace desde su sitio web a MICAMELLO.COM.EC. El establecimiento del hiperenlace no implica en
-ningún caso la existencia de relaciones entre MICAMELLO.COM.EC y el propietario del sitio web en la
-que se establezca el Hiperenlace, ni la aceptación o aprobación por parte de MICAMELLO.COM.EC de
-sus contenidos o servicios. En todo caso, MICAMELLO.COM.EC reserva el derecho de prohibir o
-inutilizar en cualquier momento cualquier hiperenlace al sitio web.<br><br>
+Te informamos que MI CAMELLO ha suscrito los correspondientes contratos de encargo de tratamiento de datos con cada uno de los proveedores que prestan servicios a MI CAMELLO, para asegurar que tus Datos Personales se tratan con la debida confidencialidad, seguridad y únicamente para la finalidad para la que han sido comunicados, teniendo un acceso limitado a tu información y actuando siguiendo las instrucciones de MI CAMELLO.<br><br>
+ 
+Cuando exista una orden judicial relacionada con tus Datos Personales, éstos serán entregados al juzgador o juzgadores, cuando así lo requieran, eximiendo de cualquier responsabilidad a MI CAMELLO por el uso que se dé a dicha información.<br><br>
+<!-- revisado update -->
+<p class="tit-pol-2" style="text-decoration: underline;">DEL USO DE DATOS:</p>
+<p class="subt-pol">FINALIDADES Y LEGITIMACIÓN</p>
+<p class="subt-pol">¿Con qué finalidad tratamos tus datos personales?</p>
+El objetivo de MI CAMELLO mediante los servicios ofrecidos en el portal web de Mi Camello en Ecuador es el facilitar el contacto entre candidatos o demandantes de empleo de Ecuador, y empleadores o empresas reclutadoras que ofrecen puestos de trabajo en dicho país, ofreciendo herramientas y servicios que apoyan los procesos de búsqueda de empleo en Ecuador.
 
-<p class="subt-pol">Sistema de captura de datos personales y su finalidad</p>
-<ul>
-  <li>Formulario de registro de usuario: El sitio web incluye un formulario de inicio que sirve para
-obtener sus datos personales para la creación de la cuenta de usuario.
-  <li>Formulario de Personalidad: MICAMELLO.COM.EC incluye formularios de personalidad, que
-permitirá a la Empresa obtener información mas completa respecto al candidato que se
-postula a la oferta emitiendo un Informe de Personalidad Certificado y agregando un Plus a
-la hoja de vida del Candidato.</li>
-  <li>Formulario de suscripción de servicios de pago: En este formulario se obtienen datos
-personales adicionales a los que fueron entregados para la creación del usuario para la
-contratación de un servicio de pago.</li>
-  <li>Formulario para pago de servicios: Este formulario es para la obtención de datos del
-comprador y sus datos bancarios según la modalidad de pago que seleccione, para la
-cancelación de servicios de pago de MICAMELLO.COM.EC.</li>
-  <li>Formulario de contacto: Este formulario es para que el USUARIO pueda enviar a
-MICAMELLO.COM.EC consultas, observaciones, sugerencias o quejas respecto del servicio
-que brinda MICAMELLO.COM.EC, en este caso se utilizará el correo electrónico registrado en
-la cuenta de usuario para dar respuesta a las mismas.
-Estos datos se almacenarán en los servidores de MI CAMELLO INC. y en las plataformas del
-correo electrónico utilizados.</li>
-  <li>Cookies: Cuando una persona se registra o navega por MICAMELLO.COM.EC se almacenan 
-“Cookies”, cuyo tratamiento está determinado en la descripción antes realizada.</li>
-  <li>Formulario de cancelación: Este formulario puede ser utilizado por el USUARIO en cualquier
-momento cuando desee cancelar los servicios contratados o cancelar su cuenta de usuario.</li>
-  <li>Sistema de rastreo utilizadas: MICAMELLO.COM.EC utiliza tecnología de primera para el
-estudio de las preferencias de los usuarios, sus características demográficas, sus patrones de
-tráfico y otra información en conjunto para conocer cuál es su audiencia y sus necesidades.</li>
-  <li>Se informa a los USUARIOS que para la captación de nuevos suscriptores y clientes
-MICAMELLO.COM.EC utiliza diferentes medios por lo que al generar un anuncio se puede
-segmentar al público por el lugar, datos demográficos, intereses, etc. por lo que los datos
-obtenidos por esta plataforma estarán sujetos a esta política de privacidad desde el
-momento en que el usuario deje sus datos para unirse a MICAMELLO.COM.EC.</li>
-  <li>Se informa una vez más que MICAMELLO.COM.EC NO comparte, vende, alquila, transfiere, o
-cede la información personal del USUARIO a terceros. Por efectos del servicio que se presta y
-para el cumplimiento del mismo, se comparte cierta información con las empresas
-registradas en nuestro portal web y en el caso de servicios de pago con la institución
-financiera respectiva.</li>
+En concreto, te informamos que en MI CAMELLO tratamos los datos que nos facilitas, como Usuario Candidato, al registrarte o utilizar nuestro portal web, y/o aplicaciones móviles para las siguientes finalidades:<br><br>
+<ul style="text-align: justify; list-style: none;">
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Realizar una correcta gestión de nuestros servicios consistentes en:
+Creación de una cuenta en el portal web de MI CAMELLO.<br><br>
+  </li>
 
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Posibilitar el contacto con los ofertantes de empleo (Usuarios Empresa) mediante la aplicación a ofertas de empleo. <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    En este sentido, en función del nivel de privacidad que hayas elegido, los ofertantes de empleo podrán acceder a tus datos de contacto y a tu C.V.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+  Ser buscado a través de la base de datos de Candidatos registrados en el portal web de MI CAMELLO.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Recepción automática y gratuita de ofertas por vía electrónica.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Servicio de mensajería instantánea con los ofertantes de empleo para facilitar la comunicación entre estos; al usar el formulario de contacto <!--o el chat en el área de usuario-->, estarás utilizando nuestro servicio de mensajería. Los mensajes y anuncios son revisados para prevenir el fraude o un uso abusivo o inadecuado de nuestros servicios.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Gestión de nuestros servicios y tareas comerciales diarias, incluyendo recordatorios, avisos técnicos, actualizaciones, alertas de seguridad, y mensajes de soporte, entre otros. En el caso concreto de que utilices nuestro formulario de contacto de atención al usuario, tus datos serán utilizados para atender las consultas que nos plantees a través de este medio.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Envío de comunicaciones comerciales, encuestas, boletines, invitaciones a webinars, para informarte de nuestros productos, servicios y eventos, siempre que contemos con tu consentimiento para ello.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Para moderar y mostrar las evaluaciones de las empresas que hayas proporcionado, las revisiones de las entrevistas, los informes de salarios y otros contenidos que hayas enviado, ello para el beneficio de nuestros otros usuarios del portal web.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Mejorar nuestros servicios mediante el estudio de tu comportamiento como usuario a través de cookies para adaptarlo a tus necesidades y gustos. Puedes gestionar tus cookies siguiendo las instrucciones indicadas en nuestra Política de cookies.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Elaborar un perfil comercial en base a la información facilitada por ti para mostrarte publicidad personalizada perfilada a través de las cookies, siempre que contemos con tu consentimiento para ello. No se tomarán decisiones automatizadas en base a dicho perfil que produzcan efectos jurídicos o significativos para ti. El perfil comercial que se elabore a través de las cookies podrá ser utilizado por sites de terceros para mostrarte publicidad personalizada.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Enviar boletines y promociones con publicidad de otros sitios web de MI CAMELLO y de socios o partners colaboradores.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Utilizar tus datos para generar y compartir información agregada que no te identifica que nos da un mejor conocimiento de los usuarios de nuestra web en su conjunto y nos ayuda a ofrecerles un mejor servicio.<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Prevención de abusos y fraudes en el uso de nuestros servicios (por ejemplo, actividades fraudulentas, ataques de denegación de servicios, envío de spam, entre otros).<br><br>
+  </li>
+
+  <li><i style="color: #204478; font-size: 18px;"><b>&check;</b>&nbsp;</i>
+    Cesión de datos a organismos y autoridades públicas, siempre y cuando sean requeridos de conformidad con las disposiciones legales y reglamentarias.<br><br>
+  </li>
 </ul>
 
-<p class="subt-pol">Revocar el consentimiento o no recibir información</p>
-El USUARIO en cualquier momento puede oponerse al uso de su información para fines publicitarios,
-investigaciones de mercado o desarrollo de encuestas de satisfacción, así como revocar su
-consentimiento en cualquier momento sin que éste sea con efecto retroactivo.<br><br>
-Para ello, deberá enviar un correo electrónico a info@micamello.com.ec, de igual manera si ha
-recibido publicidad a su correo también podrá oponerse desde dicho correo electrónico. Se requiere
-que el USUARIO tenga en cuenta que el sistema de MICAMELLO.COM.EC pueda requerir de un lapso
-de tiempo de 72 horas para que su oposición o revocación se haga efectiva, entendiéndose que
-durante ese periodo pueda seguir recibiendo mensajes.<br><br>
-En relación a los derechos de acceso y rectificación se informa que solo podrá satisfacerse en relación
-a aquella información que esté bajo el control de MICAMELLO.COM.EC.<br><br>
+El tratamiento de tus Datos Personales se da sobre la base de la ejecución del contrato que suscribes con MI CAMELLO, al aceptar la presente política de privacidad, lo cual implica tu pleno conocimiento y consentimiento para el manejo y uso de tus datos, especialmente en lo relacionado con las finalidades indicadas anteriormente, con el objetivo de realizar una correcta gestión y prestación de nuestros servicios. <br><br>
 
-<p class="subt-pol">Aceptación y Consentimiento</p>
-El USUARIO declara haberse informado de las condiciones sobre la protección de datos de carácter
-personal, aceptando y consintiendo el tratamiento de los mismos por parte de MICAMELLO.COM.EC
-en la forma y para los fines legales antes señalados.<br><br>
-Como se indicó en varias ocasiones, el USUARIO tiene la libertad de revocar sus datos, pero
-considerando que no es con carácter retroactivo.<br><br>
-MICAMELLO.COM.EC refiere nuevamente que se reserva el derecho de modificar la presente política
-de privacidad de acuerdo con sus necesidades o por variación en la legislación vigente, en dicho caso
-se comunicará con antelación los cambios realizados.<br><br>
+Adicionalmente, el presente manejo y uso de datos está al amparo de lo dispuesto en la Ley de Comercio Electrónico, Firmas y Mensajes de Datos y su Reglamento.<br><br>
 
+La suscripción del presente contrato de Políticas de Privacidad es necesario para que tengas pleno conocimiento sobre el manejo y uso de tus datos personales que realizará MI CAMELLO y para el cumplimiento de nuestras obligaciones legales.<br><br>
 
-CONTACTO Si tiene preguntas sobre su privacidad cuando utilice el Sitio Web, por favor contáctenos
-al siguiente correo electrónico: info@micamello.com.ec<br><br>
-Esta Política de Privacidad fue actualizada por última vez el 07 de Enero de 2018.<br><br>
+<p class="tit-pol-2" style="text-decoration: underline;">DE LOS DERECHOS: </p>
+<p class="subt-pol">¿Cuáles son tus derechos cuando nos facilitas tus datos y cómo puedes ejercerlos?</p>
 
-
-<h1 class="tit-pol">CANCELACIÓN DE PLANES</h1>
-
-<p class="subt-pol">¿Qué es un Plan?</p>
-Mi Camello es un portal web de búsqueda de empleo, que se caracteriza por ser de fácil registro,
-acceso y administración. De igual manera, para aquellas empresas o personas que están buscando
-trabajadores, en donde podrán revisar el perfil de cada uno de los candidatos postulados para una
-oferta específica.<br><br>
-En este sentido, Mi Camello ofrece a sus internautas paquetes de servicios tanto para postulantes,
-quienes buscan empleos, como para empresarios/empleadores, quienes buscan personal para sus
-negocios. Estos paquetes ofrecen los servicios de Mi Camello para mejorar su interacción entre
-buscadores de empleos y empleadores, encontrándose organizados en planes de pago para que sean
-revisados, analizados y contratados por los interesados de acuerdo a sus necesidades.<br><br>
-
-<p class="subt-pol">¿Cuáles son los beneficios de un Plan?</p>
-Existen planes definidos tanto para postulantes como para empleadores.<br><br>
-Los diferentes planes permiten a sus contratantes a tener mejores oportunidades para encontrar
-trabajo y encontrar al postulante que se ajuste más a las necesidades de su empresa o negocio.<br><br>
-
-
-<p class="subt-pol">¿Cómo conocer en que consiste cada Plan?</p>
-Mi Camello publica en su página web el detalle de cada plan, en qué consiste, los beneficios del plan,
-el plazo de duración del plan, el costo del plan. Por lo que, cada persona puede revisar
-detenidamente si los planes que se ofrecen son de su interés y seleccionar aquél que más se ajuste a
-sus necesidades.<br><br>
-En caso de dudas respecto del alcance que tiene un plan, tiene la posibilidad de contactarse vía
-correo electrónico con Mi Camello para aclarar sus dudas. Mi Camello tiene la obligación de
-contestar dichas inquietudes vía correo electrónico.<br><br>
-
-<p class="subt-pol">¿Cómo contratar un plan?</p>
-En cada plan que se presente en la página web de Mi Camello existirá un link que le remitirá al
-formulario para la forma de pago.<br><br>
-El pago lo puede realizar con tarjeta de crédito a través de Paypal, asociando sus tarjetas de crédito a
-su cuenta PayPal.<br><br>
-En el sitio web se publicarán las tarjetas de crédito que son aceptadas.<br><br>
-
-<p class="subt-pol">¿Cuándo puede cancelar la suscripción de un Plan?</p>
-Usted puede cancelar un Plan si ha sucedido lo siguiente:
+Con relación a los Datos Personales que tratamos, tienes los siguientes derechos:<br><br>
 <ul>
-  <li>No recibió el producto</li>
-  <li>El producto no fue lo que el espero</li>
-  <li>Tuvo un acceso sin autorización</li>
-  <li>Tuvo un problema de facturación y montos duplicados</li>
+  <li>
+    <span style="text-decoration: underline;">Acceder o recopilar tus datos:</span> puedes solicitarnos, en cualquier momento, una copia de tus datos personales, por cualquiera de los canales de comunicación que tienes a tu disposición con MI CAMELLO. <br><br>
+  </li>
+  <li>
+    <span style="text-decoration: underline;">Cambiar o rectificar datos: </span> puedes editar parte de tus datos personales a través de tu área privada. Asimismo, podrás solicitarnos la modificación, actualización o corrección de tus datos si éstos no son precisos. <br><br>
+  </li>
+  <li>
+    <span style="text-decoration: underline;">Rechazar, limitar, oponerte o restringir el uso de datos:  </span> tienes derecho a solicitarnos que dejemos de usar la totalidad o parte de tus datos personales, salvo por motivos legítimos imperiosos o el ejercicio o defensa de posibles reclamaciones. <br><br>
+  </li>
+  <li>
+    <span style="text-decoration: underline;">Suprimir tus datos</span> puedes requerirnos borrar o eliminar todos o parte de tus Datos Personales.<br><br>
+  </li>
+  <li>
+    <span style="text-decoration: underline;">Solicitar la portabilidad de tus datos</span> cuando sea técnicamente posible, puedes requerir la transmisión de tus datos a otro responsable de tratamiento de datos, sin que ello afecte a la licitud del tratamiento basado en el consentimiento de este contrato, previo a su retirada<br><br>
+  </li>
 </ul>
-Cuando cancele un plan por el producto no fue lo que esperaba debe indicar las razones por las que
-no cubrió sus expectativas.<br><br>
 
-<p class="subt-pol">¿Cómo cancelar la suscripción a un Plan?</p>
-Para cancelar un plan debe ingresar con su usuario y contraseña y en el menú seleccionar Cancelar
-Plan.<br><br>
+Debes tener en cuenta que los referidos derechos están sujetos a determinadas limitaciones, tal y como establece la legislación vigente.<br><br>
+Las solicitudes individuales se atenderán dentro del plazo establecido en la Ley, cuya contabilización inicia a partir del momento en que MI CAMELLO confirme tu solicitud y de trámite a la misma. <br><br>
 
-<p class="subt-pol">¿Existen penalidades por la cancelación de la suscripción de un Plan?</p>
-Si el plan es de una empresa / empleador, se le eliminarán las ofertas publicadas con ese plan y si
-hubo aspirantes que aplicaron a esas ofertas se les devolverán las auto postulaciones a los
-candidatos. Y, si el plan es del candidato, se le eliminarán todas las auto postulaciones realizadas con
-ese plan.<br><br>
+MI CAMELLO, podrá establecer un costo, a su discreción, un costo por las solicitudes posteriores que provengan de la misma persona y por los mismos hechos; siempre y cuando esté permitido por Ley.<br><br>
 
-<p class="subt-pol">¿Qué pasa con el dinero cancelado?</p>
-Se devolverá el dinero a la tarjeta de crédito que fue debitado el valor por el Plan.<br><br>
+Si deseas hacer uso de cualquiera de tus derechos puedes dirigirte a nosotros utilizando la información de contacto que aparece más abajo; gestionaremos tu solicitud conforme a la legislación aplicable. <br><br>
 
-<p class="subt-pol">¿Qué pasa con mi usuario si cancelo un Plan?</p>
-Si se cancela el Plan, el usuario volverá a la versión gratuita, para que revise por usted mismo las
-ofertas de trabajo o los candidatos, según sea el caso.<br><br>
+En relación a los datos facilitados a las empresas ofertantes de empleo o reclutadoras, (Usuarios Profesionales) con los que hayas tomado contactado, puedes ejercer tus derechos frente a los mismos.<br><br>
+<p class="tit-pol-2" style="text-decoration: underline;">DE LA SEGURIDAD: </p>
+MI CAMELLO se preocupa por garantizar la seguridad y confidencialidad de los Datos Personales. Por eso, se han adoptado medidas de seguridad y medios técnicos adecuados para evitar su pérdida, mal uso o su acceso sin autorización del usuario.<br><br>
 
-<p class="subt-pol">¿Puede volver a contratar un Plan?</p>
-Si, siempre se puede volver a contratar un nuevo plan.<br><br>
+También MI CAMELLO dispone de procedimientos de actuación ante cualquier sospecha de violación de la seguridad de los Datos Personales que tratamos, en cuyo caso, MI CAMELLO realizará la pertinente notificación al usuario y a la autoridad competente, cuando así lo exija la ley. <br><br>
 
-<p class="subt-pol">¿Puede contratar más de un Plan?</p>
-Sí puede contratar varios planes y hacer uso de cada uno de ellos durante su tiempo de vigencia.<br><br>
+Debes tener en cuenta que, desafortunadamente, la transmisión de información a través de Internet no es completamente segura y corres el riesgo de que tu información sea vulnerada. Sin perjuicio de aquello, MI CAMELLO ha adoptado medidas de seguridad y medios técnicos para proteger los Datos Personales, no obstante, no puede garantizar la seguridad de los datos transmitidos a través de Internet; por lo tanto, cualquier transmisión queda bajo tu propio riesgo y responsabilidad. <br><br>
 
-Contactos
-Cualquier inquietud respecto de los planes puede comunicarse al correo info@micamello.com.ec</p>
+Una vez que MI CAMELLO haya recibido los Datos Personales, MI CAMELLO utilizará procedimientos estrictos y medidas de seguridad para evitar, en la medida de las posibilidades informáticas, el acceso no autorizado.<br><br>
+<br>
+<p class="tit-pol-2" style="text-decoration: underline;">DEL RESPONSABLE DEL TRATAMIENTO DE DATOS ENTREGADOS: </p>
+Debes tener en cuenta que, una vez que registras tu información en el portal de MI CAMELLO, esta debe ser tratada, ello implica la recopilación, manejo y uso de tus datos conforme lo hemos anotado anteriormente. <br><br>
+
+<p class="subt-pol">¿Quién es el Responsable del tratamiento de tus datos?</p>
+<ul>
+  <li>Nombre: MI CAMELLO</li>
+  <li>Contacto: <a href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Formulario de contacto</a></li>
+</ul>
+
+<p class="subt-pol" style="text-decoration: underline;">DE LAS ACTUALIZACIONES: </p>
+<p class="subt-pol">ACTUALIZACIONES DE LA POLÍTICA DE PRIVACIDAD</p>
+
+Podemos actualizar esta Política de Privacidad mediante la publicación de una versión actualizada en el Portal Web. <br>
+
+Si realizamos alguna modificación que consideremos que afecta a tus derechos o incrementa tus obligaciones te lo notificaremos mediante un aviso en el Portal Web.<br><br>
+
+Te recomendamos que revises de forma periódica la Política de Privacidad para estar actualizado de todas las novedades. <br><br>
+
+Declaras que tu uso continuado de nuestros servicios tras publicar, o en su caso, enviar un aviso acerca de nuestros cambios en esta Política de privacidad, implica que aceptas la Política de Privacidad y por tanto la recopilación, la utilización y tratamiento de tus datos personales están sujetos a la Política de privacidad actualizada.<br><br>
+
+Si no estás de acuerdo con cualquiera de los cambios, puedes cerrar tu cuenta.<br><br>
+
+<p class="subt-pol" style="text-decoration: underline;">DE LOS DATOS DE CONTACTO:</p>
+<p class="subt-pol">INFORMACIÓN DE CONTACTO</p>
+
+Si deseas hacer uso de cualquiera de tus derechos y/o si tienes alguna pregunta o queja sobre esta Política de Privacidad puedes contactarte con nosotros en la dirección y/o formulario de contacto indicados en el apartado de responsable. <br><br>
+
+Debes facilitarnos la mayor información posible sobre tu solicitud: nombre y apellidos, dirección de correo electrónico que utilizas para nuestro portal web y los motivos de tu solicitud, especificando, en su caso, el derecho que desea ejercer. <br><br>
+
+Asimismo, de ser necesario deberá acompañar la documentación que se considere necesaria para sustentar la solicitud y dar trámite a la misma.<br><br>
+
+<p class="subt-pol">POLÍTICA DE PRIVACIDAD PARA EMPRESAS O USUARIOS CANDIDATOS </p>
+La presente Política de Privacidad explica sobre la recopilación, manejo, uso, derechos y responsabilidad de los datos de carácter personal (en adelante, los “<b>Datos Personales</b>” o “<b>Datos Personales de los Candidatos</b>”) de los representantes, empleados y/o usuarios de las empresas o entidades Clientes (en adelante, los “<b>Usuarios de la Empresa Cliente</b>”) que actúan en representación y/o utilizan los servicios, productos y/o herramientas online ofrecidas por MI CAMELLO.<br><br>
+
+Para MI CAMELLO es fundamental mantener la privacidad y seguridad de los Datos Personales de los Candidatos.<br><br>
+
+
+<p class="subt-pol" style="text-decoration: underline;">DE LA RECOPILACIÓN DE DATOS:</p>
+<p class="subt-pol">DATOS QUE RECOPILAMOS</p>
+
+
+MI CAMELLO recopila datos personales de los Usuarios de la Empresa Cliente para poder proporcionar a sus Clientes o Usuarios Candidato los servicios de la mejor manera posible. En concreto, MI CAMELLO puede recopilar lo siguiente:<br><br>
+
+<ul>
+  <li>
+    Información personal de los Usuarios de la Empresa Cliente, proporcionada en el momento de suscribirse o registrarse, de la forma que sea aplicable, para utilizar los servicios de MI CAMELLO, crear las distintas cuentas de usuario, publicar material o solicitar información, entre otros. 
+  </li>
+  <li>
+    También es posible que se solicite determinada información al Cliente cuando MI CAMELLO preste asesoramiento en el uso de los servicios. Dicha información personal podrá ser: nombre completo, cargo, dirección de correo electrónico profesional, número de teléfono y contraseña, debiendo indicar el nombre de la empresa Cliente.
+  </li>
+  <li>
+    Detalles de las acciones que el usuario lleva a cabo a través de nuestros sitios web-herramienta online y de la prestación de nuestros servicios.
+  </li>
+  <li>
+    Detalles de las visitas a nuestros sitios web y/o herramienta online por parte del usuario incluyendo, pero no limitado a, datos de tráfico, dirección IP, datos de ubicación, duración de la actividad y otros datos de comunicación, sistema operativo, navegador web y los recursos a los que acceda.
+  </li>
+  <li>
+    Datos a través de cookies de la forma en que se describe más adelante en nuestra Política de Cookies.
+  </li>
+</ul>
+
+<p class="subt-pol">EDAD MÍNIMA</p>
+Toda la información personal facilitada por el Usuario de la Empresa Cliente deberá ser de usuarios que tengan la mayoría de edad, legal de acuerdo con el País. <br><br> 
+
+MI CAMELLO tomará las medidas apropiadas para eliminar aquellos datos de usuarios menores de edad, que lo sean según la legislación vigente de cada país, y que hayan sido facilitados por el Usuario de la Empresa Cliente, cuando MI CAMELLO tenga conocimiento de ello. <br><br>
+
+<p class="subt-pol" style="text-decoration: underline;">DEL MANEJO DE LOS DATOS</p>
+Mi Camello almacena los datos que nos has proporcionado y los administra con la finalidad de tener una mayor productividad, este manejo de datos se los utiliza con el objetivo de servir de interfaz entre el usuario, y las aplicaciones que se utilizan. <br><br>
+
+<p class="subt-pol">PLAZO DE CONSERVACIÓN DE LOS DATOS:</p>
+
+Conservaremos los Datos Personales durante el tiempo que MI CAMELLO proporcione los servicios, hasta el momento en que el Usuario de la Empresa Cliente solicite la eliminación de su cuenta o de los Datos Personales.<br><br>
+
+En caso de existir acciones legales que nos haya sido notificadas, los datos se conservarán por el tiempo que sea necesario para cumplir con las obligaciones legales o disposiciones judiciales.<br><br>
+
+<p class="subt-pol">DESTINATARIOS</p>
+
+Los Datos Personales podrán ser tratados por los proveedores de MI CAMELLO-incluidas empresas del grupo MI CAMELLO - cuando consideremos necesario para asistirnos en la prestación de nuestros servicios; tales como: servicios de hosting, infraestructuras de sistemas, desarrollo de software, servicio de envío de notificaciones, comercialización, soporte, marketing, entre otros. <br><br>
+
+Te informamos que MI CAMELLO ha suscrito los correspondientes contratos de encargo de tratamiento de datos con cada uno de los proveedores que prestan servicios a MI CAMELLO, para asegurar que tus Datos Personales se tratan con la debida confidencialidad, seguridad y únicamente para la finalidad para la que han sido comunicados, teniendo un acceso limitado a tu información y actuando siguiendo las instrucciones de MI CAMELLO.<br><br>
+
+Cuando exista una orden judicial relacionada con tus Datos Personales, éstos serán entregados al juzgador o juzgadores, cuando así lo requieran, eximiendo de cualquier responsabilidad a MI CAMELLO por el uso que se dé a dicha información.<br><br>
+
+<p class="subt-pol" style="text-decoration: underline;">DEL USO DE DATOS:</p>
+<p class="subt-pol">FINALIDADES Y LEGITIMACIÓN</p>
+MI CAMELLO trata los Datos Personales con un objetivo específico y sólo se tratan aquellos datos que son pertinentes para cumplir ese objetivo. <br><br>
+
+En este sentido, los Datos Personales del Cliente serán tratados para las siguientes finalidades:<br><br>
+<ul>
+  <li>
+    Prestación correcta de los servicios;
+  </li>
+  <li>
+    Para atender las consultas que pueda plantear el Usuario de la Empresa Cliente; o,
+  </li>
+  <li>
+    Para notificarle acerca de cambios en los servicios y proporcionarle información que sea relevante para el uso de los mismos, como:
+    <ul style="list-style-type: lower-alpha;"><br>
+      <li>
+        Envío de comunicaciones comerciales, encuestas, boletines, invitaciones a webinars, para informar de nuestras novedades, productos, servicios y eventos, entre otros.
+      </li>
+      <li>
+        Customizar, optimizar y mejorar la experiencia del Usuario de la Empresa Cliente con los sitios web y/o la herramienta online.
+      </li>
+      <li>
+        Envío de alertas técnicas, reportes, actualizaciones, notificaciones de seguridad y cualquier otra comunicación relativa a los servicios.
+      </li>
+      <li>
+        Envío de comunicaciones comerciales, boletines y/o promociones con publicidad de otros sitios web o productos de MI CAMELLO y de otros socios o partners colaboradores.
+      </li>
+      <li>
+        Mejorar nuestros servicios mediante el estudio del comportamiento del Usuario de la Empresa Cliente como usuario a través de cookies para adaptarlo a sus necesidades y gustos. <br>El usuario puede gestionar sus cookies siguiendo las instrucciones indicadas en nuestra Política de cookies. <br>
+      </li>
+      <li>
+        Utilizar los datos de los Usuarios de la Empresa Cliente para generar y compartir información agregada que no les identifica y que nos da un mejor conocimiento de los usuarios de nuestros servicios en su conjunto y nos ayuda a ofrecer a los Clientes un mejor servicio. 
+      </li>
+      <li>
+        Crear estadísticas que puedan ser utilizadas para mejorar nuestros servicios, siempre y cuando dichas estadísticas no identifiquen a ningún Usuario de Empresa Cliente ni contengan ningún dato de carácter personal.
+      </li>
+      <li>
+        Prevención de abusos y fraudes en el uso de nuestros servicios.
+      </li>
+      <li>
+        Cesión de datos a organismos y autoridades públicas, siempre y cuando sean requeridos de conformidad con las disposiciones legales y reglamentarias.
+      </li>
+    </ul>
+  </li>
+</ul>
+
+
+El tratamiento de los Datos Personales se da sobre la base de la ejecución del contrato que se suscribe con MI CAMELLO, al aceptar la presente política de privacidad, lo cual implica el pleno conocimiento y consentimiento para el manejo y uso de los datos personales, especialmente en lo relacionado con las finalidades indicadas anteriormente, con el objetivo de realizar una correcta gestión y prestación de nuestros servicios. <br>
+Adicionalmente, el presente manejo y uso de datos está al amparo de lo dispuesto en la Ley de Comercio Electrónico, Firmas y Mensajes de Datos y su Reglamento.<br><br>
+
+En este marco de objetivos, nuestro fundamento para la recopilación y tratamiento de los Datos Personales es la ejecución de un contrato en relación con las finalidades indicadas en el apartado a), b), c) y d) para realizar una correcta gestión y prestación de nuestros servicios.<br><br>
+
+Nuestro fundamento para realizar la finalidad indicada en los apartados e) y f) radican en el consentimiento de los Usuarios de la Empresa Cliente.<br><br>
+
+Asimismo, la recopilación y el tratamiento de Datos Personales para la finalidad indicada en el apartado g) y h) radica en el interés legítimo de MI CAMELLO como responsable del tratamiento.<br><br>
+
+La suscripción del presente contrato de Políticas de Privacidad es necesario para que tengas pleno conocimiento sobre el manejo y uso de tus datos personales que realizará MI CAMELLO y para el cumplimiento de nuestras obligaciones legales.<br><br>
+ 
+<p class="subt-pol" style="text-decoration: underline;">DE LOS DERECHOS: </p>
+En relación con los Datos Personales que MI CAMELLO trata para la prestación de sus servicios, el Cliente/los Usuarios de la Empresa Cliente tienen los siguientes derechos:<br><br>
+<ul>
+  <li>
+    <span style="text-decoration: underline;">
+      Acceder o recopilar sus datos:
+    </span> 
+    es posible solicitar una copia de los Datos Personales.
+  </li>
+  <li>
+    <span style="text-decoration: underline;">
+      Rectificar los datos:
+    </span> 
+    es posible solicitar a través del área privada la rectificación de los Datos Personales facilitados.
+  </li>
+  <li>
+    <span style="text-decoration: underline;">
+      Rechazar, limitar, oponerse o restringir el uso de datos:
+    </span> 
+    es posible solicitar que MI CAMELLO deje de usar la totalidad o parte de los Datos Personales, salvo que dicho acceso deba efectuarse por motivos legítimos imperiosos o debido al ejercicio o defensa de posibles reclamaciones.
+  </li>
+  <li>
+    <span style="text-decoration: underline;">
+      Suprimir sus datos:
+    </span> 
+    es posible solicitar borrar o eliminar todos o parte de los Datos Personales.
+  </li>
+  <li>
+    <span style="text-decoration: underline;">
+      Solicitar la portabilidad de los datos:
+    </span> 
+    cuando sea técnicamente posible, se puede pedir la transmisión de los Datos Personales a otro responsable de tratamiento, sin que ello afecte a la licitud del tratamiento basado en el consentimiento previo a su retirada.
+  </li>
+</ul>
+<br>
+Debes tener en cuenta que los referidos derechos están sujetos a determinadas limitaciones, tal y como establece la legislación vigente. <br><br>
+
+Las solicitudes individuales se atenderán dentro del plazo establecido en la Ley, cuya contabilización inicia a partir del momento en que MI CAMELLO confirme tu solicitud y de trámite a la misma. <br><br>
+
+MI CAMELLO, podrá establecer un costo, a su discreción, un costo por las solicitudes posteriores que provengan de la misma persona y por los mismos hechos; siempre y cuando esté permitido por Ley.<br><br>
+
+Para hacer uso de los indicados derechos puede dirigirse a MI CAMELLO utilizando la información de contacto que aparece en el apartado 1 de esta política. <br><br>
+
+MI CAMELLO gestionará la solicitud conforme a la legislación vigente.<br><br>
+
+<p class="subt-pol" style="text-decoration: underline;">DE LA SEGURIDAD: </p>
+MI CAMELLO se preocupa por garantizar la seguridad y confidencialidad de los Datos Personales. Por eso, se han adoptado medidas de seguridad y medios técnicos adecuados para evitar su pérdida, mal uso o su acceso sin autorización del Usuario de la Empresa Cliente.<br><br>
+
+
+También MI CAMELLO dispone de procedimientos de actuación ante cualquier sospecha de violación de la seguridad de los Datos Personales que tratamos, en cuyo caso, MI CAMELLO realizará la pertinente notificación al Usuario de la Empresa Cliente y a la autoridad competente, cuando así lo exija la ley. <br><br>
+
+Debes tener en cuenta que, desafortunadamente, la transmisión de información a través de Internet no es completamente segura y corres el riesgo de que tu información sea vulnerada. Sin perjuicio de aquello, MI CAMELLO ha adoptado medidas de seguridad y medios técnicos para proteger los Datos Personales, no obstante, no puede garantizar la seguridad de los datos transmitidos a través de Internet; por lo tanto, cualquier transmisión queda bajo tu propio riesgo y responsabilidad. <br><br>
+
+Una vez que MI CAMELLO haya recibido los Datos Personales, MI CAMELLO utilizará procedimientos estrictos y medidas de seguridad para evitar, en la medida de las posibilidades informáticas, el acceso no autorizado.<br><br>
+<p class="subt-pol" style="text-decoration: underline;">DEL RESPONSABLE DEL TRATAMIENTO DE DATOS ENTREGADOS:</p>
+Debes tener en cuenta que, una vez registrada tu información en el portal de MI CAMELLO, el Responsable del tratamiento de los datos de los Usuarios de la Empresa Cliente es MI CAMELLO , cuyos datos son los siguientes:<br><br>
+<ul>
+  <li>
+    Nombre: MI CAMELLO . <!--(en adelante “MI CAMELLO ”)-->
+  </li>
+  <li>
+    Contacto: <a href="<?php echo PUERTO."://".HOST;?>/recomendacion/">formulario de contacto.</a>
+  </li>
+</ul>
+<br>
+<p class="subt-pol" style="text-decoration: underline;">DE LAS ACTUALIZACIONES: </p>
+<p class="subt-pol">ACTUALIZACIONES DE LA POLÍTICA DE PRIVACIDAD</p>
+
+MI CAMELLO puede actualizar esta Política de Privacidad mediante la publicación de una versión actualizada en los sitios webs y/o herramienta. <br><br>
+
+Si se realiza alguna modificación que pueda afectar a los derechos del Cliente/Usuarios de la Empresa Cliente o que incremente sus obligaciones, MI CAMELLO lo notificará por email o mediante un aviso en el sitio web y/o herramienta.<br><br>
+
+El Cliente y/o los Usuarios de la Empresa Cliente deberán revisar de forma periódica la Política de Privacidad para estar actualizados de todas las novedades. <br><br>
+
+El uso de los servicios de MI CAMELLO por parte del Cliente y de los Usuarios de la Empresa Cliente implica su aceptación, lo que conlleva a que el tratamiento de los Datos Personales sea efectuado de conformidad con la presente Política de Privacidad. <br><br>
+
+Si el Cliente no está de acuerdo con cualquiera de los cambios, podrá dar de baja los servicios y cerrar su cuenta, de conformidad con lo estipulado en la correspondiente orden de servicio o contrato y/o condiciones de uso o términos de los servicios de MI CAMELLO.<br><br>
+
+
+<p class="subt-pol" style="text-decoration: underline;">DE LOS DATOS DE CONTACTO: </p>
+<p class="subt-pol">INFORMACIÓN DE CONTACTO</p>
+Para el ejercicio de los derechos indicados y para cualquier consulta sobre la presente Política el Cliente y/o los Usuarios de la Empresa Cliente, puede contactar con MI CAMELLO en la dirección y/o formulario de contacto indicados en el apartado 1.<br><br>
+
+Se deberá facilitar la mayor información posible sobre su solicitud: nombre de la empresa, nombre completo, dirección de correo electrónico utilizada para nuestros servicios y los motivos de la solicitud, especificando, en su caso, el derecho que desea ejercer. Asimismo, será necesario acompañar la documentación que se considere necesaria para sustentar la solicitud y dar trámite a la misma.<br><br>
+
+
+Última actualización: 06 de Junio  de 2019<br><br><br><br>
+
+<br><br><br>
 </div>
