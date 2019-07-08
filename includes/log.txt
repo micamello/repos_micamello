@@ -1,0 +1,60 @@
+[2019/07/08 01:19:43] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/08 01:19:43] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/08 01:19:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/07/08 01:19:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/07/08 01:19:43] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2019/07/08 01:19:43] SQL Query: SELECT id_empresa_plan 
+    FROM mfo_empresa_plan ep 
+    INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+    WHERE ep.id_empresa = 1 AND ep.id_empresa_plan_parent IS NULL
+    AND p.costo > 0 AND p.num_cuenta > 0 LIMIT 1;
+[2019/07/08 01:19:43] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/07/08 01:19:43] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/08 01:55:22] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/08 01:55:22] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/08 01:55:22] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/07/08 01:55:22] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/07/08 01:55:22] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2019/07/08 01:55:22] SQL Query: SELECT id_empresa_plan 
+    FROM mfo_empresa_plan ep 
+    INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+    WHERE ep.id_empresa = 1 AND ep.id_empresa_plan_parent IS NULL
+    AND p.costo > 0 AND p.num_cuenta > 0 LIMIT 1;
+[2019/07/08 01:55:22] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/07/08 01:55:22] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/08 01:56:19] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/08 01:56:19] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/08 01:56:19] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '8'
+[2019/07/08 01:56:19] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '7'
+[2019/07/08 01:56:19] SQL Query: SELECT mfo_accionsist.id_accionSist FROM mfo_accionsist 
+            INNER JOIN mfo_permisoplan on mfo_accionsist.id_accionSist = mfo_permisoplan.id_accionSist 
+            WHERE mfo_accionsist.accion = 'adminEmpresas' AND mfo_accionsist.estado = 1 AND mfo_permisoplan.id_plan = '9'
+[2019/07/08 01:56:19] SQL Query: SELECT id_empresa_plan 
+    FROM mfo_empresa_plan ep 
+    INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan
+    WHERE ep.id_empresa = 1 AND ep.id_empresa_plan_parent IS NULL
+    AND p.costo > 0 AND p.num_cuenta > 0 LIMIT 1;
+[2019/07/08 01:56:20] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '1' AND tipo_usuario = '2' LIMIT 1
+[2019/07/08 01:56:20] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
