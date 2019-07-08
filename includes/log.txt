@@ -2421,3 +2421,34 @@
             WHERE id_usuario = '63' AND tipo_usuario = '1' LIMIT 1
 [2019/07/05 05:24:27] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
 [2019/07/05 05:24:27] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 1
+[2019/07/08 06:10:56] SQL Query: SELECT * from mfo_idioma
+[2019/07/08 06:10:56] SQL Query: SELECT * from mfo_nivelidioma
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_universidades WHERE id_pais = 39 ORDER BY nombre;
+[2019/07/08 06:10:56] SQL Query: SELECT SUM(p.estado) as resultado FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta WHERE p.id_usuario = '978' ORDER BY f.orden ASC
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_genero
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_tipolicencia
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/07/08 06:10:56] SQL Query: SELECT t_a_sub.*, t_area.nombre as nombre_area, t_sub.nombre as nombre_subarea FROM mfo_area_subareas AS t_a_sub, mfo_subareas AS t_sub, mfo_area AS t_area WHERE t_a_sub.id_subareas = t_sub.id_subareas AND t_a_sub.id_area = t_area.id_area order by t_area.id_area, t_area.nombre
+[2019/07/08 06:10:56] SQL Query: SELECT i.descripcion,i.id_idioma,n.id_nivelIdioma,n.nombre FROM mfo_usuario_nivelidioma ni, mfo_nivelidioma_idioma nii, mfo_idioma i, mfo_nivelidioma n
+		WHERE ni.id_nivelIdioma_idioma = nii.id_nivelIdioma_idioma
+		AND i.id_idioma = nii.id_idioma
+		AND n.id_nivelIdioma = nii.id_nivelIdioma AND id_usuario = 978
+[2019/07/08 06:10:56] SQL Query: SELECT p.id_provincia, p.nombre FROM mfo_provincia p WHERE id_pais = '39' ORDER BY nombre ASC
+[2019/07/08 06:10:56] SQL Query: SELECT * FROM mfo_pais
+[2019/07/08 06:10:56] SQL Query: SELECT p.id_provincia FROM mfo_ciudad c, mfo_provincia p WHERE c.id_provincia = p.id_provincia
+      AND c.id_ciudad = 1;
+[2019/07/08 06:10:56] SQL Query: SELECT c.id_ciudad, c.nombre as ciudad
+            FROM mfo_ciudad c, mfo_provincia p
+            WHERE c.id_provincia = p.id_provincia AND c.id_provincia = 1 ORDER BY c.nombre ASC
+[2019/07/08 06:10:56] SQL Query: SELECT id_faceta,descripcion as faceta, literal, introduccion FROM mfo_faceta WHERE estado = 1
+[2019/07/08 06:10:56] SQL Query: SELECT p.id_faceta, p.valor, f.literal 
+            FROM mfo_porcentajexfaceta p INNER JOIN mfo_faceta f ON f.id_faceta = p.id_faceta 
+            WHERE p.id_usuario = '978' ORDER BY f.id_faceta
+[2019/07/08 06:10:56] SQL Query: SELECT id_notificacion,descripcion, tipo, tipo_usuario 
+            FROM mfo_notificacion 
+            WHERE id_usuario = '978' AND tipo_usuario = '1' LIMIT 1
+[2019/07/08 06:10:56] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/08 06:10:57] SQL Query: SELECT dependencia FROM mfo_escolaridad WHERE id_escolaridad = 7

@@ -220,7 +220,7 @@ $noautofill = "";
           <li class="dropdown" id="seccion_user">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" >
               <!-- &nbsp;&nbsp;&nbsp;&nbsp; -->
-                <img src="<?php echo Modelo_Usuario::obtieneFoto($_SESSION['mfo_datos']['usuario']['username']); ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
+                <img src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgthumb/'.$_SESSION['mfo_datos']['usuario']['username'].'/'; ?>" class="user_icon <?php if(Utils::detectarNavegador()=='Safari'){
                 echo "usericon_safari";
               } ?>" width="35" height="35">&nbsp;<i class="fa fa-caret-down"></i>
               <ul class="dropdown-menu">
