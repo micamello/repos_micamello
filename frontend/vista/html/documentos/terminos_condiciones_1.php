@@ -1,4 +1,4 @@
-<!--   <div class="text-center" id="blockRightClick">
+  <div class="text-center" id="blockRightClick">
     <h2 class="titulo">Términos y Condiciones</h2>
   </div>
 <div class="container politica" >
@@ -20,7 +20,22 @@ Contacto:<br><br>
     Si eres Empresa o Empleador puedes contactarte con nosotros a través del siguiente enlace: <a href="<?php echo PUERTO."://".HOST;?>/recomendacion/">formulario de contacto</a>
   </li>
 </ul>
-<br> -->
+<br>
+MI CAMELLO S.A. es titular de los siguientes sitios web:
+<ul>
+  <li>
+    www.micamello.com.ec
+  </li>
+  <li>
+   www. micamello.com.co
+  </li>
+  <li>
+    www.superchamba.com.pe
+  </li>
+  <li>
+    www.superchamba.com.mx
+  </li>
+</ul>
 
 <!-- MI CAMELLO S.A. es titular de los siguientes sitios web: -->
   <div class="text-center" id="blockRightClick">
