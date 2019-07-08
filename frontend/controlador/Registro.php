@@ -143,7 +143,7 @@ class Controlador_Registro extends Controlador_Base {
       }
     }
 
-    if($datosReg['tipo_usuario'] Modelo_Usuario::CANDIDATO){
+    if($datosReg['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
       if(!Utils::valida_fecha($datosReg['fechaNac'])){
         throw new Exception("Ingrese una fecha v\u00E1lida");
       }
@@ -390,19 +390,22 @@ class Controlador_Registro extends Controlador_Base {
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username, $tipoempresa){
     $email_body = "";
+    $asuntoEmail = "";
     if($tipoempresa == 1){
+      $asuntoEmail = "Candidato";
       $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUARIO");
       $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
+      $email_body = str_replace("%USUARIO%", $username, $email_body);
+      $email_body = str_replace("%CORREO%", $correo, $email_body); 
       $email_body = str_replace("%ENLACE%", $enlace, $email_body);
     }
     else{
+      $asuntoEmail = "Empresa";
       $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_EMPRESA");
     }
-    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
-    $email_body = str_replace("%USUARIO%", $username, $email_body);
-    $email_body = str_replace("%CORREO%", $correo, $email_body); 
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);
     
-    if (Utils::envioCorreo($correo,"Registro de Empresa",$email_body)){
+    if (Utils::envioCorreo($correo,"Registro de ".$asuntoEmail,$email_body)){
       return true;
     }
     else{
