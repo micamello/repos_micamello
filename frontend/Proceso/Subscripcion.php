@@ -92,8 +92,7 @@ class Proceso_Subscripcion{
        
       $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
                                  $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$this->idplan);
-      
-      Utils::log("PASO SIETE ".date('Y-m-d H:i:s'));
+            
       /*if (!empty($attachments)){
         //eliminar archivos temporales
         unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
@@ -103,9 +102,9 @@ class Proceso_Subscripcion{
     }
     catch(Exception $e){
       $GLOBALS['db']->rollback();
-      echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
+      //echo "NO PROCESADO REGISTRO ".$this->procesador->id."<br>";
       $msgerror = $e->getMessage()." transaccion:".$this->procesador->trans." usuario:".$this->objUsuario->id." plan:".$this->idplan;
-      //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);      
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron planes_payme',$msgerror);      
     }
 
   }
