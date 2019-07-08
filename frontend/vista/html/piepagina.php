@@ -5,8 +5,9 @@
       ">
         <h3>Nosotros</h3>
         <p><a class="" target="_blank" href="<?php echo PUERTO.'://'.HOST.'/quienesSomos/'?>">¿Quiénes somos?</a></p>
-        <p><a class="legal_info_content" href="<?php echo PUERTO; ?>://blog.micamello.com.ec/" target="blanked">Blog</a></p>
-        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/canea/"?>" target="blanked">¿Qué es CANEA?</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO; ?>://blog.micamello.com.ec/" target="blank">Blog</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/canea/"?>" target="blank">¿Qué es CANEA?</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/preguntasfrecuentes/"?>" target="blank">Preguntas y respuestas frecuentes</a></p>
         <h3>Políticas de Privacidad</h3>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">Condiciones legales de uso</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">Políticas de Privacidad</a></p>

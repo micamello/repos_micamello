@@ -35,6 +35,9 @@ class Controlador_Inicio extends Controlador_Base {
       case 'quienesSomos':    
         Vista::render('quienesSomos', $tags);
       break;
+      case 'preguntasfrecuentes':    
+        Vista::render('preguntasfrecuentes');
+      break;
       case 'canea':    
         Vista::render('canea', $tags);
       break;

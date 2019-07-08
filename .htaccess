@@ -206,3 +206,5 @@ RewriteRule ^quienesSomos/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=qu
 RewriteRule ^terminoscondiciones/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=terminoscondiciones [L]
 RewriteRule ^politicaprivacidad/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=politicaprivacidad [L]
 RewriteRule ^politicacookie/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=politicacookie [L]
+
+RewriteRule ^preguntasfrecuentes/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion=preguntasfrecuentes [L]
