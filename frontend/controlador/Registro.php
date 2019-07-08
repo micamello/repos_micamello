@@ -96,7 +96,7 @@ class Controlador_Registro extends Controlador_Base {
           }
           $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada.';
           foreach (DIRECTORIOCORREOS as $key => $value) {
-            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos");
+            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos ".$datosReg['nombresCandEmp']);
           }
         }
 
