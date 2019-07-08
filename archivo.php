@@ -75,12 +75,18 @@ switch ($carpeta){
 	case 'profile':
 	  $extension = 'image/jpeg';
 	  $disposition = 'inline';
-	  $ruta = PATH_PROFILE.$archivo.'-thumb.jpg';	  
+	  $thumb = Utils::getParam('param3','',$_GET);	  
+	  if (!empty($thumb)){
+	  	$ruta = PATH_PROFILE.$archivo.'-thumb.jpg';	  
+	  }
+	  else{
+      $ruta = PATH_PROFILE.$archivo.'.jpg';	  
+	  }	  
 	  $resultado = file_exists($ruta);	  	  
 	  if (!$resultado){	  	
 	  	$ruta = FRONTEND_RUTA.'imagenes/user.png';
 	  }	  	  
-	  $archivo = $archivo.'-thumb.jpg';
+	  $archivo = $archivo.(!empty($thumb)) ? '-thumb.jpg' : '.jpg';
 	  $mostrar = true;
 	break;
 	case 'hv':	  
