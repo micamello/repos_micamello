@@ -8,7 +8,7 @@
         <p><a class="legal_info_content" href="<?php echo PUERTO; ?>://blog.micamello.com.ec/" target="blanked">Blog</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/canea/"?>" target="blanked">¿Qué es CANEA?</a></p>
         <h3>Políticas de Privacidad</h3>
-        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">Términos y Condiciones</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">Condiciones legales de uso</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">Políticas de Privacidad</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/politicacookie/";?>" target="_blank">Políticas de Cookies</a></p>
         <p><a target="_blank" class="legal_info_content" href="<?php echo PUERTO."://".HOST;?>/recomendacion/">Recomendaciones</a></p>

@@ -2863,3 +2863,19 @@ input[type=number] { -moz-appearance:textfield; }
     bottom: -16px;
     left: 14px;
 }
+/*estilos ppoliticas y documentos*/
+ul.guionLi > li{list-style-type: none; color: #797979 !important;}
+ul.guionLi > li:before{content: "-"}
+ul.numberLi > li > h4{list-style-type: decimal; color: #4b5052; text-decoration: underline;}
+ul.numberLi > li > p{list-style-type: decimal; color: #797979; text-decoration: none;}
+ul.numberLi > li {list-style-type: decimal; color: #4b5052; text-decoration: none;}
+ul.letterLiParentesis > li {list-style-type: none; }
+ul.letterLiParentesis{counter-reset: list;}
+ul.letterLiParentesis > li:before{content: counter(list, lower-alpha) ") "; counter-increment: list;}
+
+ul.numberLi1{list-style-type: decimal;}
+ul.letterLiDat > li{list-style-type: lower-alpha;}
+/*ul.letterLiDat > li {list-style-type: none; }
+ul.letterLiDat{counter-reset: list;}
+ul.letterLiDat > li:before{content: counter(list, lower-alpha) ") "; counter-increment: list;}*/
+/*estilos ppoliticas y documentos*/
