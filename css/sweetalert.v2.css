@@ -443,7 +443,7 @@ body.swal2-toast-column .swal2-toast .swal2-validation-message {
     display: flex;
     align-items: center;
     font-size: 2em;
-    font-weight: 700
+    font-weight: 500
 }
 
 @media all and (-ms-high-contrast:none),

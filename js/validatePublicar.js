@@ -784,7 +784,7 @@ var primerEmpleoOf
 
             if(!validarTituloEmpresa(nombreOferta.val())){
 
-                crearMensajeError(nombreOferta, "Escriba un título válido");
+                crearMensajeError(nombreOferta, "No se aceptan carac. especiales.");
 
                 mensajes += "- Campo titulo: Escriba un título válido";
 
@@ -1338,7 +1338,7 @@ $('#nombreOferta').on('blur', function(){
 
             if(!validarTituloEmpresa($(this).val())){
 
-                crearMensajeError($(this), "Ingrese un título válido");
+                crearMensajeError($(this), "No se aceptan carac. especiales");
 
             }
 
