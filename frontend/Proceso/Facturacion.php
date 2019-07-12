@@ -309,7 +309,7 @@ class Proceso_Facturacion{
     $mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
 
     $logo = "<img src='".FRONTEND_RUTA."imagenes/sucursal/logos/factura.png' alt='Mi Camello Logo' height='150'>";
-    $eslogan = "Eficiencia, innovación y transparencia";
+    //$eslogan = "Eficiencia, innovación y transparencia";
 
     $style1 = ' style="padding: 5px 5px 5px 5px;" ';
     $abrir_interlineado = '<tr><td colspan="2" style="height:';
@@ -318,7 +318,7 @@ class Proceso_Facturacion{
     $contenido .= "<table width='1000' style='font-size: 18px; border-spacing: 5px;'>";
     $contenido .= "<tr>";
     $contenido .= "<td width='500' style='text-align:center;'>";
-    $contenido .= "<br>".$logo."<br><span atyle='text-align:center;color: #0d0d13;font-size: 10px;'>".$eslogan."<span>";
+    $contenido .= "<br>".$logo."<br>";
     $contenido .= "</td>";
     $contenido .= "<td rowspan='2' width='600' style=''>";
     $contenido .= '<table width="600" style="border: 1px solid #000;text-align:left;padding-top: 20px;padding-left: 15px;padding-right: 15px;">

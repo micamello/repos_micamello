@@ -36,7 +36,14 @@ class Controlador_Inicio extends Controlador_Base {
         Vista::render('quienesSomos', $tags);
       break;
       case 'preguntasfrecuentes':    
-        Vista::render('preguntasfrecuentes');
+        $generales = Modelo_PreguntasFrecuentes::obtieneListado(0);   
+        $candidatos = Modelo_PreguntasFrecuentes::obtieneListado(1);   
+        $empresas = Modelo_PreguntasFrecuentes::obtieneListado(2);  
+        
+        $tags = array('generales'=>$generales,                  
+                  'candidatos'=>$candidatos,
+                  'empresas'=>$empresas, 'vista'=>'inicio'); 
+        Vista::render('preguntasfrecuentes', $tags);
       break;
       case 'canea':    
 

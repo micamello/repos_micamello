@@ -1599,7 +1599,7 @@ $('#ciudadOf').on('blur change', function(){
 
 
 $('#subareasCand').on('change', function(){
-    console.log("llego a subareas - valor : "+$(this).val());
+    //console.log("llego a subareas - valor : "+$(this).val());
     if($(this).val() == "" || $(this).val() == null){
 
         crearMensajeError($(this), "Seleccione una opción");

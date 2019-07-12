@@ -503,8 +503,14 @@ class Controlador_Perfil extends Controlador_Base
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $data["error"] = 1;
+
+            $r = PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'];
+                
+            if(file_exists($r.'.jpg') && empty($_SESSION['mfo_datos']['usuario']['foto'])){ 
+                unlink($r.'.jpg');
+                unlink($r.'-thumb.jpg');
+            }
             $GLOBALS['db']->rollback();
-            $data['error'] = 1;
         }        
         return $data;
     }

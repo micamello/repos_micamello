@@ -167,7 +167,7 @@
                               <div class="col-md-12">
                                 <div id="seccion_asp" class="form-group">
                                     <label for="aspiracion">Aspiraci&oacute;n salarial</label><div id="err_asp" class="help-block with-errors"></div>
-                                    <input class="form-control" type="text" min="1" onkeydown="return validaNumeros(event)" name="aspiracion" id="aspiracion" pattern='[0-9]+' maxlength="5" placeholder="Ej: <?php echo SUCURSAL_MONEDA.number_format(450,0); ?>" required value="<?php if(!empty($aspiracion)){ echo $aspiracion; } ?>"/>
+                                    <input class="form-control" type="text" min="1" onkeydown="return validaNumeros(event)" onkeyup="caracteresEspecial()" onblur="caracteresEspecial()" name="aspiracion" id="aspiracion" pattern='[0-9]+' maxlength="5" placeholder="Ej: <?php echo number_format(450,0); ?>" required value="<?php if(!empty($aspiracion)){ echo $aspiracion; } ?>"/>
                                 </div>
                                 <h5>
                                   <button type="button" class="btn btn-success" id="btn-verde" onclick="validarAspiracion();">POSTULARSE</button>
@@ -218,7 +218,7 @@
         <section style="padding: 25px 0px; margin-bottom: 10px; background-color: grey;color: white; text-align:center">
           <div class="container">
             <div class="col-md-12">
-              <label>PUBLICIDAD</label>
+              <label>ANUNCIE AQU&Iacute;</label>
             </div>
           </div>
         </section>

@@ -20,7 +20,7 @@ function cambiarEstados(){
   if(document.getElementById('estado')){
 
     var estado = document.getElementById('estado').value;
-    console.log(estado);
+    //console.log(estado);
     if(estado == 0){
       document.getElementById('nom_estado').innerHTML = '<h6><b>Activo</b></h6>';
       document.getElementById('estado').value = 1;
@@ -910,7 +910,7 @@ function validaRecursos(){
   var num_post = document.getElementById('num_post').value;
   var num_accesos = document.getElementById('num_accesos').value;
   if(num_post == '' && num_accesos == ''){
-    console.log(num_post);
+    //console.log(num_post);
     colocaError("rec1","recursos1","No puede ser vac\u00EDo","button_editar");
     colocaError("rec3","recursos3","No puede ser vac\u00EDo","button_editar");
     mensaje += '- Cantd. ofertas, no puede ser vac\u00EDo. <br>';
@@ -923,7 +923,7 @@ function validaRecursos(){
     mensaje += '- Cantd. accesos, no puede ser vac\u00EDo. <br>';
   }
 
-  console.log(mensaje);
+  //onsole.log(mensaje);
   if(mensaje != '' || verifyErrors() > 0){
     $("#button_editar").addClass('disabled');
   }else{

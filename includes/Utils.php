@@ -55,12 +55,12 @@ class Utils{
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->CharSet = 'UTF-8';
-    $mail->Port = MAIL_PORT; 
-    $mail->Host = MAIL_HOST; 
-    $mail->Username = MAIL_USERNAME; 
-    $mail->Password = MAIL_PASSWORD;     
-    $mail->From = MAIL_CORREO; 
-    $mail->FromName = MAIL_NOMBRE;         
+    $mail->Port = "587"; 
+    $mail->Host = "smtp-relay.sendinblue.com"; 
+    $mail->Username = "ffueltala@gmail.com"; 
+    $mail->Password = "cz0Ls8tI34AZ2aUJ";     
+    $mail->From = "info@micamello.com.ec"; 
+    $mail->FromName = "Mi Camello";         
     $mail->SMTPAutoTLS = false;    
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
@@ -73,7 +73,7 @@ class Utils{
         }
       }
     }      
-    return $mail->send();
+    return $mail->send();        
   }
 
   public static function encriptar($texto){      

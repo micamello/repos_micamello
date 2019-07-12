@@ -46,22 +46,22 @@ class Controlador_Cuestionario extends Controlador_Base {
           //       print_r($tiempo);
           // exit();
           if(!Modelo_Respuesta::guardarRespuestas($arrayDatos, $id_usuario)){
-            throw new Exception("Ha ocurrido un error, intente nuevamente.");
+            throw new Exception("Ha ocurrido un error, intente nuevamente1.");
           }
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
           $faceta = Modelo_Respuesta::facetaActual($id_usuario);
           if (empty($faceta)){
-            throw new Exception("Ha ocurrido un error, intente nuevamente.");
+            throw new Exception("Ha ocurrido un error, intente nuevamente2.");
           }
           $vlbaremo = Modelo_Respuesta::resultadoxUsuario($id_usuario,$faceta);
           if (empty($vlbaremo)){
-            throw new Exception("Ha ocurrido un error, intente nuevamente."); 
+            throw new Exception("Ha ocurrido un error, intente nuevamente3."); 
           }
           $totalfaceta = 0;
           foreach($vlbaremo as $valores){
             $resbaremo = Modelo_Baremo::obtienePuntaje($valores["orden1"],$valores["orden2"],$valores["orden3"],$valores["orden4"],$valores["orden5"]);
             if (empty($resbaremo)){
-              throw new Exception("Ha ocurrido un error, intente nuevamente."); 
+              throw new Exception("Ha ocurrido un error, intente nuevamente4."); 
             }              
             $totalfaceta = $totalfaceta + $resbaremo["porcentaje"];
           }          
@@ -70,16 +70,16 @@ class Controlador_Cuestionario extends Controlador_Base {
           $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
           //preguntar si tiene un plan para responder el tercer cuestionario
           if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta,$estado,$tiempo)){
-            throw new Exception("Ha ocurrido un error, intente nuevamente."); 
+            throw new Exception("Ha ocurrido un error, intente nuevamente5."); 
           }
           if ($faceta == 5 && $estado == 0){
             if (!Modelo_Usuario::actualizarAceptarAcceso($_SESSION['mfo_datos']['usuario']['id_usuario'],0)){
-              throw new Exception("Ha ocurrido un error, intente nuevamente.");  
+              throw new Exception("Ha ocurrido un error, intente nuevamente6.");  
             } 
             $_SESSION['mfo_datos']['usuario']['pendiente_test'] = 0;
             $accesos = Modelo_AccesoEmpresa::consultaVariosPorCandidato($_SESSION['mfo_datos']['usuario']['id_usuario']);           
             if (!Modelo_AccesoEmpresa::actualizarFechaTermino($_SESSION['mfo_datos']['usuario']['id_usuario'])){
-              throw new Exception("Ha ocurrido un error, intente nuevamente.");  
+              throw new Exception("Ha ocurrido un error, intente nuevamente7.");  
             }            
           }
           $GLOBALS['db']->commit();

@@ -722,3 +722,7 @@ function ajaxLoader(obj, action, tipo){
 
   }
 }
+
+function caracteresEspecial(){
+  $('#aspiracion').val($('#aspiracion').val().replace(/[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/]/g, ""));
+}

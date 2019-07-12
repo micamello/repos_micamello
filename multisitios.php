@@ -17,7 +17,7 @@ if (isset($_SERVER['HTTP_HOST']) /*&& (strpos($_SERVER['HTTP_HOST'], 'www.') !==
       define('HOST', 'localhost/repos_micamello');  
     }
     else{
-      define('HOST', $_SERVER['HTTP_HOST'].'/desarrollo');  
+      define('HOST', $_SERVER['HTTP_HOST']);  
     }   
     define('SUCURSAL_ID',trim($values[0]));
     define('SUCURSAL_ICONO',trim($values[1]));
@@ -27,11 +27,12 @@ if (isset($_SERVER['HTTP_HOST']) /*&& (strpos($_SERVER['HTTP_HOST'], 'www.') !==
     define('SUCURSAL_ISO',trim($values[5]));
   }
   else{          
-    $sql = "SELECT s.id_sucursal, s.dominio, s.extensionicono, s.extensionlogo, s.id_pais, m.simbolo, s.iso 
+    $sql = "SELECT s.id_sucursal, s.extensionicono, s.extensionlogo, s.id_pais, m.simbolo, s.iso, s.dominio 
             FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.estado = 1 AND s.dominio = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($_SERVER['HTTP_HOST']));
+    Utils::log("RS".print_r($rs,true));
     if (empty($rs)){
-      Utils::doRedirect(PUERTO.'://'.$_SERVER['HTTP_HOST'].'/desarrollov3/error/paginanoencontrada.php');
+      Utils::doRedirect(PUERTO.'://'.$_SERVER['HTTP_HOST'].'/error/paginanoencontrada.php');
       exit;
     }
     $fp = fopen(FRONTEND_RUTA.'sucursales/'.$rs['dominio'].'.txt', "w");
@@ -42,7 +43,7 @@ if (isset($_SERVER['HTTP_HOST']) /*&& (strpos($_SERVER['HTTP_HOST'], 'www.') !==
       define('HOST', 'localhost/repos_micamello');  
     }
     else{
-      define('HOST', $rs['dominio'].'/desarrollo');  
+      define('HOST', $rs['dominio']);  
     }
     define('SUCURSAL_ID',trim($rs['id_sucursal']));
     define('SUCURSAL_ICONO',trim($rs['extensionicono']));
@@ -51,9 +52,10 @@ if (isset($_SERVER['HTTP_HOST']) /*&& (strpos($_SERVER['HTTP_HOST'], 'www.') !==
     define('SUCURSAL_MONEDA',trim($rs['simbolo']));
     define('SUCURSAL_ISO',trim($rs['iso']));
   }
+
 }
 else{
-  Utils::doRedirect(PUERTO.'://'.$_SERVER['HTTP_HOST'].'/desarrollov3/error/paginanoencontrada.php');
+  Utils::doRedirect(PUERTO.'://'.$_SERVER['HTTP_HOST'].'/error/paginanoencontrada.php');
   exit;
 } 
 ?>

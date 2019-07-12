@@ -1,5 +1,4 @@
 <?php
-
 ignore_user_abort( true );
 ini_set("max_execution_time", "0");
 ini_set("max_input_time", "0");
@@ -37,6 +36,8 @@ else{
   Utils::crearArchivo(CRON_RUTA,'procesando_preregistro.txt','');
 }
 $usuarios = Modelo_PreRegistro::preregistrados();
+// print_r($usuarios);
+// exit();
 $tipodoc = "";
 if (!empty($usuarios) && is_array($usuarios)){
 print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");	
@@ -76,7 +77,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 
 		  				$email_body = Modelo_TemplateEmail::obtieneHTML("VALIDAR_CORREO");
 		  				$email_body = str_replace("%NOMBRES%", $datosPreregistro['nombres'], $email_body);
-		  				Utils::envioCorreo("administrador.gye@micamello.com.ec","Validar correo",$email_body);
+		  				Utils::envioCorreo($datosPreregistro["correo"],"Validar correo",$email_body);
 		  				throw new Exception("NO SE REGISTRO validar correo: ".$datosPreregistro["dni"]);
 		  			}
 		  		}
@@ -96,7 +97,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 							    $email_body = str_replace("%ENLACE%", "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='https://www.micamello.com.ec/'>Click aqu&iacute;</a>", $email_body);   
 							    $email_body = str_replace("%ENLACE2%", "info@micamello.com.ec", $email_body);
 							    // aqui va el correo de que envie el ruc y nombramiento
-					        	Utils::envioCorreo("administrador.gye@micamello.com.ec","Ruc rechazado",$email_body);
+					        	Utils::envioCorreo($datosPreregistro["correo"],"Ruc rechazado",$email_body);
 			    				throw new Exception("RUC INVALIDO ".$datosPreregistro["dni"]);
 					        }
 					    }
@@ -139,10 +140,10 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		      	throw new Exception("CORREO YA EXISTE ".$datosPreregistro["correo"]);
 		    }
 		    
-		   	$nombre = Utils::no_carac(explode(" ", trim(($datosPreregistro['nombres']))));
+		   	$nombre = Utils::no_carac(explode(" ", trim(utf8_decode($datosPreregistro['nombres'])))); 
 		    $nombre[0] = strtolower($nombre[0]);	    	    	    	    
 		    if ($datosPreregistro['tipo_usuario'] == 1){ 
-		      $apellido = Utils::no_carac(explode(" ", trim(($datosPreregistro['apellidos']))));
+		      $apellido = Utils::no_carac(explode(" ", trim(utf8_decode($datosPreregistro['apellidos']))));
 		      $apellido[0] = strtolower($apellido[0]);
 		      $username = Utils::generarUsername($nombre[0].$apellido[0]);
 		    }
@@ -181,11 +182,12 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 			    		break;
 			    	}
 		    	}
-		    	$mfoUsuario = array("nombres"=>$datosPreregistro['nombres'],
-			    						"apellidos"=>$datosPreregistro['apellidos'],
+		    	$mfoUsuario = array("nombres"=>utf8_encode($datosPreregistro['nombres']),
+			    						"apellidos"=>utf8_encode($datosPreregistro['apellidos']),
 			    						"telefono"=>$datosPreregistro['telefono'],
 			    						"fecha_nacimiento"=>$datosPreregistro['fecha_nacimiento'],
-			    						"fecha_creacion"=>$datosPreregistro['fecha'],
+			    						// "fecha_creacion"=>$datosPreregistro['fecha'],
+			    						"fecha_creacion"=>$fechaActual,
 			    						"estado"=>0,
 			    						"term_cond"=>1,
 			    						"id_ciudad"=>$datosPreregistro['id_ciudad'],
@@ -215,7 +217,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		    		$datosPreregistro['id_sectorindustrial'] = 69;
 		    	}
 		    	$mfoEmpresa = array("telefono"=>$datosPreregistro['telefono'],
-		    						"nombres"=>$datosPreregistro['nombres'],
+		    						"nombres"=>utf8_encode($datosPreregistro['nombres']),
 		    						"fecha_creacion"=>$fechaActual,
 		    						"nro_trabajadores"=>1,
 		    						// "fecha_creacion"=>$datosPreregistro['fecha'],
@@ -270,7 +272,8 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		   	$email_body = str_replace("%PASSWORD%", $password, $email_body);   
 		   	$email_body = str_replace("%ENLACE%", $enlace, $email_body);   
 
-		   	Utils::envioCorreo("administrador.gye@micamello.com.ec","Activación de Usuario",$email_body);         
+		   	Utils::envioCorreo($datosPreregistro["correo"],"Activación de Usuario",$email_body);         
+		   	
 
 		   	echo utf8_encode($datosPreregistro['nombres'])." ".utf8_encode($datosPreregistro['apellidos'])."/".$username."<br>";
     	}

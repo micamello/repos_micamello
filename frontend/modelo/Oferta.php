@@ -184,11 +184,11 @@ class Modelo_Oferta{
     }
     if(!empty($filtros['K']) && $filtros['K'] != 0){
       if($filtros['K'] == 1){
-        $sql .= " AND o.salario < 386";
+        $sql .= " AND o.salario < 394";
       }
 
       if($filtros['K'] == 2){
-        $sql .= " AND o.salario between '386' and '700'";
+        $sql .= " AND o.salario between '394' and '700'";
       }
 
       if($filtros['K'] == 3){
@@ -460,6 +460,19 @@ class Modelo_Oferta{
       }
       return $datos;
     }
+  }
+
+  public static function consultarInfoOfertaEmpresa($id_oferta){
+    $sql = 'SELECT nombres AS empresa, o.titulo, ul.correo, o.descripcion, o.estado FROM mfo_empresa e, mfo_oferta o, mfo_usuario_login ul
+          WHERE e.id_empresa = o.id_empresa 
+          AND ul.id_usuario_login = e.id_usuario_login
+          AND o.id_ofertas = '.$id_oferta;
+    return $GLOBALS['db']->auto_array($sql,array(),false);  
+  }
+
+  public static function activarOferta($id_ofertas,$estado=self::ACTIVA){
+    if (empty($id_ofertas)){ return false; }
+    return $GLOBALS['db']->update('mfo_oferta',array('estado'=>$estado),'id_ofertas='.$id_ofertas);
   }
 }  
 ?>
