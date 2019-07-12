@@ -3015,6 +3015,7 @@ ul.letterLiDat > li:before{content: counter(list, lower-alpha) ") "; counter-inc
     display: contents!important;
 
 }
+.navbar{z-index: 1;}
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
     background-color: #4b98dd!important ;
     color: white!important;

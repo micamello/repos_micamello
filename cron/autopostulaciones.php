@@ -5,7 +5,7 @@ ini_set("max_input_time", "0");
 ini_set('memory_limit', "768M");
 set_time_limit(0);
 
-$dominio = "www.micamello.com.ec/desarrollov3/";
+$dominio = "www.micamello.com.ec/";
 
 /*Script que permite las autopostulaciones del candidato dependiendo del plan contratado,
 ubicación del candidato, areas de interes tomando en cuenta solo 3 dias laborables anteriores a la contratacion del plan y 
@@ -126,7 +126,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
     $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);      
     //echo $email_body;
-    Utils::envioCorreo($rows["correo"],"Postulaciones Automáticas",$email_body);   
+    //Utils::envioCorreo($rows["correo"],"Postulaciones Automáticas",$email_body);   
   }
 
 }

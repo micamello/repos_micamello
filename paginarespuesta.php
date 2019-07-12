@@ -13,7 +13,9 @@ $purchaseVericationComercio = openssl_digest(PAYME_ACQUIRERID .
                                              trim($_POST['authorizationResult']) . 
                                              PAYME_SECRET_KEY, 'sha512');
 
-$filename = FRONTEND_RUTA.'cache/compras/'.trim($_POST["reserved16"]).'_'.trim($_POST["purchaseOperationNumber"]).'.txt';
+$filename = FRONTEND_RUTA.'desarrollov3/cache/compras/'.trim($_POST["reserved16"]).'_'.trim($_POST["purchaseOperationNumber"]).'.txt';
+
+Utils::log("PASO CERO ".print_r($_POST,true));      
 
 try{
   if ($purchaseVericationVPOS2 == $purchaseVericationComercio || $purchaseVericationVPOS2 == "") {
@@ -54,26 +56,26 @@ try{
     if (!Modelo_Payme::guardar($vl_insert)){
       throw new Exception("Error Insert IPN Payme");
     }    
-    if (trim($_POST["authorizationResult"]) == "00" && trim($_POST["errorCode"]) == "00"){      
+    //if (trim($_POST["authorizationResult"]) == "00" && trim($_POST["errorCode"]) == "00"){      
       $_SESSION['mfo_datos']['actualizar_planes'] = 1;       
-      Utils::log("SESSION 1 ".print_r($_SESSION,true));
       if (file_exists($filename)){        
         @unlink($filename);
-      }      
-      Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/exito/');
-    }
-    elseif(trim($_POST["authorizationResult"]) == "05" && trim($_POST["errorCode"]) == "2300"){
-      if (file_exists($filename)){
-        @unlink($filename);
-      }      
-      Utils::doRedirect(PUERTO.'://'.HOST.'/planes/'); 
-    }
-    else{
-      if (file_exists($filename)){
-        @unlink($filename);
       }
-      Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/error/');
-    }       
+      
+      Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/exito/');
+    //}
+    //elseif(trim($_POST["authorizationResult"]) == "05" && trim($_POST["errorCode"]) == "2300"){
+    //  if (file_exists($filename)){
+    //    @unlink($filename);
+    //  }      
+    //  Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/planes/'); 
+    //}
+    //else{
+    //  if (file_exists($filename)){
+    //    @unlink($filename);
+    //  }
+    //  Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/error/');
+    //}       
   }  
 }
 catch(Exception $e){    
@@ -81,7 +83,7 @@ catch(Exception $e){
   if (file_exists($filename)){
     @unlink($filename);
   }
-  Utils::doRedirect(PUERTO.'://'.HOST.'/compraplan/error/');
+  Utils::doRedirect(PUERTO.'://'.HOST.'/desarrollov3/compraplan/error/');
 }
 unset($_POST);
 header("HTTP/1.1 200 OK");    

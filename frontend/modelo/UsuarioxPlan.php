@@ -395,7 +395,7 @@ class Modelo_UsuarioxPlan{
     $tabla = ($tipousu == Modelo_Usuario::EMPRESA) ? "mfo_empresa_plan" : "mfo_usuario_plan";
     $id = ($tipousu == Modelo_Usuario::EMPRESA) ? "id_empresa_plan" : "id_usuario_plan";
     $sql = "SELECT id_plan FROM ".$tabla." WHERE ".$id." = ?";
-    return $GLOBALS['db']->auto_array($sql,array($idempresaplan),true); 
+    return $GLOBALS['db']->auto_array($sql,array($idempresaplan)); 
   }
 
   public static function nroPlanesActivos($usuario,$tipo){

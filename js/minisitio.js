@@ -26,7 +26,7 @@ $('#pais').on('change', function(){
 	            dataType:'json',
 	            success:function(data){
 	                $('#provincia').html('<option value="">Selecciona una provincia</option>');
-	                console.log(data);
+	                //console.log(data);
 	                $.each(data, function(index, value) {
 	                    $('#provincia').append("<option value='"+index+"'>"+value+"</option>");
 
@@ -59,7 +59,7 @@ $('#provincia').on('change', function(){
 	            dataType:'json',
 	            success:function(data){
 	                $('#cantonnac').html('<option value="">Selecciona un cantón</option>');
-	                console.log(data);
+	                //console.log(data);
 	                $.each(data, function(index, value) {
 	                    $('#cantonnac').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
 	                });
@@ -81,7 +81,7 @@ $('#provincia_res').on('change', function(){
 	            dataType:'json',
 	            success:function(data){
 	                $('#canton_res').html('<option value="">Selecciona un cantón</option>');
-	                console.log(data);
+	                //console.log(data);
 	                $.each(data, function(index, value) {
 	                    $('#canton_res').append("<option value='"+value.id_ciudad+"'>"+value.ciudad+"</option>");
 	                });
@@ -103,7 +103,7 @@ $('#canton_res').on('change', function(){
 	            dataType:'json',
 	            success:function(data){
 	                $('#parroquia_res').html('<option value="">Selecciona una parroquia</option>');
-	                console.log(data);
+	                //console.log(data);
 	                $.each(data, function(index, value) {
 	                    $('#parroquia_res').append("<option value='"+value.id_parroquia+"'>"+value.descripcion+"</option>");
 	                });
@@ -291,7 +291,7 @@ function ValidarCamposVacios(campos){
 
 function errorCountMessage(){
 	var number = $('.error_field').length;
-	console.log(number);
+	//console.log(number);
 	return number;
 }
  // || $(obj)[0].checked != 1
@@ -326,7 +326,7 @@ function emptyField(obj){
 }
 
 function crearMensajeError(obj, mensaje){
-	console.log(mensaje);
+	//console.log(mensaje);
 	$(obj).siblings('div').html(mensaje_error);
 	$(obj).siblings('div').addClass('error_field');
 }
@@ -547,7 +547,7 @@ function validarRespuestas(){
 			contador_respuestas++;
 		}
 	}
-	console.log(contador_respuestas+"-----"+respuestas_insertadas.length);
+	//console.log(contador_respuestas+"-----"+respuestas_insertadas.length);
 	$return = false;
 	if(contador_respuestas == respuestas_insertadas.length){
 		$return  = true;
@@ -656,7 +656,7 @@ if($('#pre').length){
 					// }
 				}
 				else{
-					console.log("eder"+found);
+					//console.log("eder"+found);
 					eliminarMensajeError(obj, "");
 					eliminarMensajeError(found, "");
 				}
@@ -730,8 +730,8 @@ if($('#pre').length){
 				}
 		}
 		for (var i = 0; i < destino.length; i++) {
-			console.log("eder");
-			console.log($(obj).parent()[0]);
+			//console.log("eder");
+			//console.log($(obj).parent()[0]);
 			// if($(obj).parent()[0].length){
 				$(obj).parent()[0].innerHTML = "";
 			// }
@@ -751,7 +751,7 @@ if($('#pre').length){
 			orden = 0;
 			if($(respuestas[i]).find('input[name="opcion_double[]"]').length){
 				opcion = $(respuestas[i]).find('input[name="opcion_double[]"]').val();
-				console.log(opcion);
+				//console.log(opcion);
 			}
 
 			if($(respuestas[i]).find('input[name="orden_double[]"]').length){

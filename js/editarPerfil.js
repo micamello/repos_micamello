@@ -210,7 +210,7 @@ function eliminar_item_selected(selected_item,tipo,op){
 
 /*Muestra dinamicamente si la imagen / foto fue cargada*/
 $('#file-input').change(function(e) {
-   console.log(document.getElementById('file-input').files[0]);
+   //console.log(document.getElementById('file-input').files[0]);
     var error = validarImg(document.getElementById('file-input'));
 
     if(error == 0){
@@ -649,7 +649,7 @@ function enviarFormulario(){
         $('.loaderMic').css('display', 'block');
         document.form_editarPerfil.submit();
 
-        console.log('ir abajo');
+        //console.log('ir abajo');
         var destino = $('#boton');
         $('html, body').animate({ scrollTop: destino.offset().top }, 700); 
       }
@@ -795,7 +795,7 @@ function validarFormulario(tipovalidacion){
             if (tipovalidacion == true){
               if(document.getElementById('dni').value.length >= 10){
                 if(searchAjax($('#dni'),tipo_doc) == false){
-                  if(DniRuc_Validador($('#dni'),tipo_doc, 1) == true){
+                  if(DniRuc_Validador($('#dni'),tipo_doc, 2) == true){
                     quitarError("err_dni","seccion_dni");
                   }else{
                     colocaError("err_dni", "seccion_dni","Documento no válido","boton");
@@ -812,7 +812,7 @@ function validarFormulario(tipovalidacion){
                 error = 1;
                 mensaje += "- El número de cédula debe tener mínimo 10 dígitos"+'<br>';
               }else if(tipo_doc == 3 && document.getElementById('dni').value.length < 6){
-                console.log(document.getElementById('dni').value.length);
+                //console.log(document.getElementById('dni').value.length);
                 colocaError("err_dni", "seccion_dni","Documento mínimo de 6 dígitos","boton");
                 error = 1;
                 mensaje += "- El pasaporte debe tener mínimo 6 dígitos"+'<br>';
@@ -1329,12 +1329,12 @@ function validarClave(){
 
     $('#password').val($('#password').val().replace(/\s/g, ""));
     $('#password_two').val($('#password_two').val().replace(/\s/g, ""));
-    $('#password_ant').val($('#password_ant').val().replace(/\s/g, ""));
+    
     var password = document.getElementById('password').value;
     var password_two = document.getElementById('password_two').value;
 
     if(document.getElementById('password_ant')){
-
+        $('#password_ant').val($('#password_ant').val().replace(/\s/g, ""));
         var password_ant = document.getElementById('password_ant').value;
 
         if(password_ant == null || password_ant.length == 0 || /^\s+$/.test(password_ant)){

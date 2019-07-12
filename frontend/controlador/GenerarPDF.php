@@ -377,8 +377,8 @@ class Controlador_GenerarPDF extends Controlador_Base
       <p>Las inventigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
       <br><h2>INTRODUCCI&Oacute;N</h2>
       <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
-      if($tipo_informe == 'parcial'){
-        $informe .= '<div class="publicidad">REGISTRESE EN NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</div>';
+      if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+        $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>REGISTRESE EN NUESTRA PAGINA <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</b></div>';
       }
     $informe .= '</div>
     <div style="page-break-after:always;"></div>
@@ -415,8 +415,8 @@ class Controlador_GenerarPDF extends Controlador_Base
           }
         }
       }
-      if($tipo_informe == 'parcial'){
-        $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
+      if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+        $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>¡SEA UNA DE LAS PRIMERAS OPCIONES DE SELECCIÓN DE LAS EMPRESAS TERMINANDO EL TEST CANEA EN <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
       }
       $informe .= '
     </div>';
@@ -455,8 +455,8 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
       $informe .= '</tr></table>';
-      if($tipo_informe == 'parcial'){
-        $informe .= '<br><div class="publicidad">INGRESA EN EL LINK <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA OBTENER MEJORES BENEFICIOS.</div>';
+      if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+        $informe .= '<br><div class="publicidad" style="background-color:#FFC000"><b>¿DESEA OBTENER MEJORES RESULTADOS? COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
       }
       $informe .= '</center></div><div style="page-break-after:always;"></div>
       <br>
@@ -518,9 +518,9 @@ class Controlador_GenerarPDF extends Controlador_Base
       }
       
       $informe .= '</table>';
-      if($tipo_informe == 'parcial'){
+      if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
         $informe .= '<br>
-        <div class="publicidad">Recuerde ingresar a <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</div>';
+        <div class="publicidad" style="background-color:#FFC000"><b>RECUERDE INGRESAR A <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</b></div>';
       }
       $informe .= '</center>
       </div><div style="page-break-after:always;"></div>
@@ -528,7 +528,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       <div id="pagina-6" style="text-align:justify">
         <h2>JERARQU&iacute;A DE COMPETENCIAS</h2>';
       $informe .= '
-      <p>Las gr&aacute;ficas de jerarqu&iacute;a mostrar&aacute;n por orden sus competencias de trabajo. Le ayudar&aacute; a entender en cuales de estas competencias ser&aacute; m&aacute;s productivo.</p><p>Nota: el porcentaje representado luego del asterisco (*) representa la media poblacional de cada competencia.</p>';
+      <p>Las gr&aacute;ficas de jerarqu&iacute;a mostrar&aacute;n por orden sus competencias de trabajo. Le ayudar&aacute; a entender en cuales de estas competencias ser&aacute; m&aacute;s productivo.</p><p>Nota: el porcentaje representado debajo del asterisco (*) representa la media poblacional de cada competencia.</p>';
       $cantd_salto = 6;
       //aqui
       arsort($datosXpreguntas);
@@ -676,36 +676,37 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
       $informe .=  '</div>';
-      if($tipo_informe == 'parcial'){
+      if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
         $informe .= '<br><br>
-        <div class="publicidad">¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</div>';
-      }else{
+        <div class="publicidad" style="background-color:#FFC000"><b>¡ELEVE SUS OPORTUNIDADES DE OBTENER UN MEJOR EMPLEO! COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a>. Y POTENCIE SUS FORTALEZAS.</b></div>';
+      }else if($tipo_informe != 'parcial'){
         $informe .= '<div style="page-break-after:always;"></div><br><br><div>
           <h2>resumen canea</h2>
           <h1 style="text-align: left; display: block"><span class="verde">C</span><span class="amarillo">A</span><span class="rojo">N</span><span class="morado">E</span><span class="azul">A</span></h1>
         </div>';
-      }
-      if(count($porcentajesxfaceta) == count($facetas)){
-        $informe .= '<p align="center"><img width="600" heigth="600" align="center" src="'.$datosusuario['grafico'].'">';
-        $porcentajes_faceta = explode(",",  $porcentajes_faceta);
-        $informe .= '<table style="font-size:18px" class="tabla-canea">
-            <tr>
-              <td style="background-color:#5EB782; text-align:center" class="bloq-canea">C</td>
-              <td class="bloq">Hacer '.$porcentajes_faceta[0].'%</td>
-              <td style="background-color:#FCDC59; text-align:center" class="bloq-canea">A</td>
-              <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
-              <td style="background-color:#E25050; text-align:center" class="bloq-canea">N</td>
-              <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
-            </tr>
-            <tr>
-              <td style="background-color:#8C4DCE; text-align:center" class="bloq-canea">E</td>
-              <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
-              <td style="background-color:#2B8DC9; text-align:center" class="bloq-canea">A</td>
-              <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
-              <td class="bloq-canea"></td>
-              <td class="bloq"></td>
-            </tr>
-        </table></p>';
+      
+        if(count($porcentajesxfaceta) == count($facetas)){
+          $informe .= '<p align="center"><img width="600" heigth="600" align="center" src="'.$datosusuario['grafico'].'">';
+          $porcentajes_faceta = explode(",",  $porcentajes_faceta);
+          $informe .= '<table style="font-size:18px" class="tabla-canea">
+              <tr>
+                <td style="background-color:#5EB782; text-align:center" class="bloq-canea">C</td>
+                <td class="bloq">Hacer '.$porcentajes_faceta[0].'%</td>
+                <td style="background-color:#FCDC59; text-align:center" class="bloq-canea">A</td>
+                <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
+                <td style="background-color:#E25050; text-align:center" class="bloq-canea">N</td>
+                <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
+              </tr>
+              <tr>
+                <td style="background-color:#8C4DCE; text-align:center" class="bloq-canea">E</td>
+                <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
+                <td style="background-color:#2B8DC9; text-align:center" class="bloq-canea">A</td>
+                <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
+                <td class="bloq-canea"></td>
+                <td class="bloq"></td>
+              </tr>
+          </table></p>';
+        }
       }
     //echo $informe;    
     self::informePersonalidad($informe,$nombre_archivo,$datos_descarga);
@@ -824,7 +825,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       <p>El comportamiento es un lenguaje universal de &quot;como actuamos&quot;, o de nuestro comportamiento observable. <b>En este test no existen resultados ni buenos, ni malos</b>. Una vez que haya le&iacute;do el reporte, omita cualquier afirmaci&oacute;n que no parezca aplicar a su comportamiento.</p>
     ';
       if($tipo_informe == 'parcial'){
-        $informe .= '<div class="publicidad">REGISTRESE EN NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</div>';
+        $informe .= '<div class="publicidad">REGISTRESE EN NUESTRA PAGINA <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</div>';
       }
     $informe .= '</div>
     <div style="page-break-after:always;"></div>
@@ -861,7 +862,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
       if($tipo_informe == 'parcial'){
-        $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
+        $informe .= '<div class="publicidad">VISITE NUESTRA PAGINA <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA QUE LAS EMPRESAS CONOZCAN TU TALENTO</div>';
       }
       $informe .= '
     </div>';

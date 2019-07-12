@@ -1,10 +1,7 @@
 <div class="container-fluid">
   <div class="container">
-    <div class="col-md-12">
-      <div><h2 class="titulo text-center">Planes</h2></div>
-      <br>
-    </div>
- 
+    
+ <?php Utils::log('sucursal_modena: '.SUCURSAL_MONEDA); ?>
     <div class="col-md-12">
       <input type="hidden" id="simbolo" value="<?php echo SUCURSAL_MONEDA;?>">  
       <div class="pricingdiv flex-container">

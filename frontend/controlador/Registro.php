@@ -96,7 +96,7 @@ class Controlador_Registro extends Controlador_Base {
           }
           $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada.';
           foreach (DIRECTORIOCORREOS as $key => $value) {
-            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos ".$datosReg['nombresCandEmp']);
+            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa id: ".$id_usuario.". Verificar datos ".$datosReg['nombresCandEmp']);
           }
         }
 
@@ -305,19 +305,19 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function google($userdata){
-    $this->registroRedSocial($userdata["email"],$userdata['given_name'],$userdata['family_name']);    
+    $this->registroRedSocial($userdata["email"],($userdata['given_name']),($userdata['family_name']));   
   } 
 
   public function linkedin($userdata){
-    $this->registroRedSocial($userdata["emailAddress"],$userdata['firstName'],$userdata['lastName']);    
+    $this->registroRedSocial($userdata["emailAddress"],($userdata['firstName']),($userdata['lastName']));    
   }
 
   public function twitter($userdata){    
-    $this->registroRedSocial($userdata["email"],$userdata['name'],$userdata['screen_name']);    
+    $this->registroRedSocial($userdata["email"],($userdata['name']),($userdata['screen_name']));    
   }
 
   public function facebook($userdata){
-    $this->registroRedSocial($userdata["email"],$userdata['first_name'],$userdata['last_name']);    
+    $this->registroRedSocial($userdata["email"],($userdata['first_name']),($userdata['last_name']));    
   }
 
   public function registroRedSocial($correo,$nombre,$apellido){

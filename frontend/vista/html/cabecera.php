@@ -138,7 +138,7 @@ $noautofill = "";
 
   $fixed = "";
   if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($vista) && $vista == "inicio") { 
-    $fixed = "menu";
+    //$fixed = "menu";
 ?>
 
     <!-- <div class="container-fluid"> -->
@@ -167,11 +167,11 @@ $noautofill = "";
     </div>
     <!-- </div> -->
 <?php } ?>
-<?php if (Modelo_Usuario::estaLogueado() && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
-  <nav class="navbar navbar-default navbar-fixed-top menu" style="position: sticky;">
-<?php }else{?>  
-  <nav class="navbar navbar-default navbar-fixed-top menu">
-<?php } ?> 
+<?php //if (Modelo_Usuario::estaLogueado() && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
+  <!--<nav class="navbar navbar-default navbar-fixed-top menu" style="position: sticky;">-->
+<?php// }else{?>  
+  <nav class="navbar navbar-default menu">
+<?php //} ?> 
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1" aria-expanded="false">

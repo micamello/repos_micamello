@@ -380,7 +380,7 @@ class Controlador_Perfil extends Controlador_Base
                     $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                        if(!Utils::$function($data['dni'], 2, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
                           throw new Exception("C\u00E9dula o pasaporte no v\u00E1lido.");
                         }
                       }           
@@ -503,8 +503,14 @@ class Controlador_Perfil extends Controlador_Base
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $data["error"] = 1;
+
+            $r = PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'];
+                
+            if(file_exists($r.'.jpg') && empty($_SESSION['mfo_datos']['usuario']['foto'])){ 
+                unlink($r.'.jpg');
+                unlink($r.'-thumb.jpg');
+            }
             $GLOBALS['db']->rollback();
-            $data['error'] = 1;
         }        
         return $data;
     }

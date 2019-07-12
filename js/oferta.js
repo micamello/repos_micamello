@@ -38,7 +38,7 @@ function enviar(){
 function vermas(elem,ver) { 
     var eldiv =document.getElementById(elem); 
     $("#"+elem).toggle();
-    console.log(document.getElementById(ver).innerHTML);
+    //console.log(document.getElementById(ver).innerHTML);
 
     if(document.getElementById(ver).innerHTML == ' ..ver más'){
         document.getElementById(ver).innerHTML = ' ..ver menos';
