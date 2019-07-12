@@ -6,7 +6,7 @@ $(document).ready(function(){
 if($('#metodoSeleccion').length){
 	$('#metodoSeleccion').on('submit', function(event){
 
-		console.log($('[name="seleccion"]:checked').length);
+		//console.log($('[name="seleccion"]:checked').length);
 		if($('[name="seleccion"]:checked').length > 0){
 			
 		}

@@ -176,7 +176,7 @@ function validarInput(campo,err,err_campo,btn){
     colocaError(err,err_campo,"El campo no puede ser vac\u00EDo",btn);
     error = 1; 
   }else if(expreg.test(campo) == false){
-    console.log(campo + "/" + expreg);
+    //console.log(campo + "/" + expreg);
     colocaError(err,err_campo,"Formato incorrecto, solo letras",btn);
     error = 1;
   }else{
@@ -277,7 +277,7 @@ $(document).ready(function(){
       mostrarGrafico(nombres_res, valor_res);
   }
   expreg = /^[a-z ÁÉÍÓÚáéíóúñÑ]+$/i;  
-  console.log(expreg);
+  //console.log(expreg);
 });
 
 // function mostrarGrafico(label, valor){

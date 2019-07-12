@@ -54,10 +54,10 @@ class Controlador_Registro extends Controlador_Base {
     $url = "";
     if ( Utils::getParam('formularioRegistro') == 1 ){
       try {        
-        if($_POST['tipo_usuario'] == 1){
+        if($_POST['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'apellidosCand'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'tipoDoc'=>1, 'documentoCandEmp'=>1, 'fechaNac'=>1, 'generoUsuario'=>1, 'password_1'=>1, 'password_2'=>1);
         }
-        if($_POST['tipo_usuario'] == 2){
+        if($_POST['tipo_usuario'] == Modelo_Usuario::EMPRESA){
           $campos = array('tipo_usuario'=>1, 'tipo_documentacion'=>1, 'formularioRegistro'=>1, 'nombresCandEmp'=>1, 'correoCandEmp'=>1, 'celularCandEmp'=>1, 'documentoCandEmp'=>1, 'password_1'=>1, 'password_2'=>1, 'nombreConEmp'=>1, 'apellidoConEmp'=>1, 'tel1ConEmp'=>1, 'sectorind'=>1);
           if(isset($_POST['tel2ConEmp']) && $_POST['tel2ConEmp'] != ""){
             $campos = array_merge($campos, array('tel2ConEmp'=>1));
@@ -66,8 +66,7 @@ class Controlador_Registro extends Controlador_Base {
         $datosReg = $this->camposRequeridos($campos);
         
         $datosValidos = self::validarCamposReg($datosReg);
-        // var_dump($datosValidos);
-        // exit();
+
         $GLOBALS['db']->beginTrans();
         $id_usuario = self::guardarDatosUsuario($datosValidos);
         if (empty($id_usuario)){
@@ -78,37 +77,31 @@ class Controlador_Registro extends Controlador_Base {
         // setcookie("showModal", "", time()-3600);
         $nombres = ucfirst($datosReg['nombresCandEmp']).((isset($datosReg['apellidosCand'])) ? " ".ucfirst($datosReg['apellidosCand']) : '');
 
-
-
-        if($datosValidos['tipoEmpresa'] == ""){
+        if($datosValidos['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
           $token = Utils::generarToken($id_usuario,"ACTIVACION");
           if (empty($token)){
             throw new Exception("Error en el sistema, por favor intente de nuevo");
           }
           $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
           $token = Utils::encriptar($token);
-          if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , $datosValidos['tipoEmpresa'])){
+          if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , Modelo_Usuario::CANDIDATO)){
               throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
           }
+          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
         }
-        else{
+        if($datosValidos['tipo_usuario'] == Modelo_Usuario::EMPRESA){
           $token = "";
-            if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , $datosValidos['tipoEmpresa'])){
+            if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , Modelo_Usuario::EMPRESA)){
               throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
+          }
+          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada.';
+          foreach (DIRECTORIOCORREOS as $key => $value) {
+            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa id: ".$id_usuario.". Verificar datos ".$datosReg['nombresCandEmp']);
           }
         }
 
-        if($_POST['tipo_usuario'] == 2){
-          foreach (DIRECTORIOCORREOS as $key => $value) {
-            Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa. Verificar datos ".$datosReg['nombresCandEmp']);
-          }
-        }
-        if($datosValidos['tipoEmpresa'] == ""){
-          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
-        }
-        else{
-          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada.';
-        }
+// $datosValidos['tipoEmpresa'] != "" -> SI LA EMPRESA ES PERSONA NATURAL
+        
       } 
       catch (Exception $e) {
         setcookie('preRegistro', $_POST['tipo_usuario'], time() + (86400 * 30), "/");
@@ -150,7 +143,7 @@ class Controlador_Registro extends Controlador_Base {
       }
     }
 
-    if($datosReg['tipo_usuario'] == 1){
+    if($datosReg['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
       if(!Utils::valida_fecha($datosReg['fechaNac'])){
         throw new Exception("Ingrese una fecha v\u00E1lida");
       }
@@ -197,7 +190,7 @@ class Controlador_Registro extends Controlador_Base {
     // username para candidato
     $nombreCorreo = array();
     $nombreCandidatoEmpresa = explode(" ", Utils::no_carac(utf8_decode($datosReg['nombresCandEmp'])));
-    if($datosReg['tipo_usuario'] == 1){
+    if($datosReg['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
       $nombreCorreo = array('nombreCorreo'=>$nombreCandidatoEmpresa[0]." ".$apellidoCandidato[0]);
       $apellidoCandidato = explode(" ", Utils::no_carac(utf8_decode($datosReg['apellidosCand'])));
       $username = array("username"=>Utils::generarUsername(strtolower($nombreCandidatoEmpresa[0].$apellidoCandidato[0])));
@@ -226,7 +219,7 @@ class Controlador_Registro extends Controlador_Base {
     /*Debe ser mayor de edad fecha default*/
     $ciudadDefault = Modelo_Sucursal::obtieneCiudadDefault();    
     // usuario tipo candidato
-    if($datosValidos['tipo_usuario'] == 1){
+    if($datosValidos['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
       $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
       $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
       foreach ($id_situacionlaboral as $key => $value) {
@@ -312,19 +305,19 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function google($userdata){
-    $this->registroRedSocial($userdata["email"],$userdata['given_name'],$userdata['family_name']);    
+    $this->registroRedSocial($userdata["email"],($userdata['given_name']),($userdata['family_name']));   
   } 
 
   public function linkedin($userdata){
-    $this->registroRedSocial($userdata["emailAddress"],$userdata['firstName'],$userdata['lastName']);    
+    $this->registroRedSocial($userdata["emailAddress"],($userdata['firstName']),($userdata['lastName']));    
   }
 
   public function twitter($userdata){    
-    $this->registroRedSocial($userdata["email"],$userdata['name'],$userdata['screen_name']);    
+    $this->registroRedSocial($userdata["email"],($userdata['name']),($userdata['screen_name']));    
   }
 
   public function facebook($userdata){
-    $this->registroRedSocial($userdata["email"],$userdata['first_name'],$userdata['last_name']);    
+    $this->registroRedSocial($userdata["email"],($userdata['first_name']),($userdata['last_name']));    
   }
 
   public function registroRedSocial($correo,$nombre,$apellido){
@@ -397,19 +390,22 @@ class Controlador_Registro extends Controlador_Base {
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username, $tipoempresa){
     $email_body = "";
-    if($tipoempresa == ""){
+    $asuntoEmail = "";
+    if($tipoempresa == 1){
+      $asuntoEmail = "Candidato";
       $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_USUARIO");
       $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/registro/".$token."/'>click aqui</a>";
+      $email_body = str_replace("%USUARIO%", $username, $email_body);
+      $email_body = str_replace("%CORREO%", $correo, $email_body); 
       $email_body = str_replace("%ENLACE%", $enlace, $email_body);
     }
     else{
-      $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_EMPRESA_NATURAL");
+      $asuntoEmail = "Empresa";
+      $email_body = Modelo_TemplateEmail::obtieneHTML("REGISTRO_EMPRESA");
     }
-    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
-    $email_body = str_replace("%USUARIO%", $username, $email_body);
-    $email_body = str_replace("%CORREO%", $correo, $email_body);   
+    $email_body = str_replace("%NOMBRES%", $nombres, $email_body);
     
-    if (Utils::envioCorreo($correo,"Registro de Usuario",$email_body)){
+    if (Utils::envioCorreo($correo,"Registro de ".$asuntoEmail,$email_body)){
       return true;
     }
     else{

@@ -148,9 +148,9 @@ class Proceso_Subscripcion{
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
     //$notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){      
-      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
+      $enlace = "<a href='".PUERTO."://".$dominio."/oferta/'>click aqu&iacute;</a><br>";      
     }else{      
-      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
+      $enlace = "<a href='".PUERTO."://".$dominio."/publicar/'>click aqu&iacute;</a><br>";  
     } 
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);     
     Utils::envioCorreo($correo,$email_subject,$email_body/*,$attachments*/);

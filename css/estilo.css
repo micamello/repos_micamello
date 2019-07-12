@@ -2879,3 +2879,164 @@ ul.letterLiDat > li{list-style-type: lower-alpha;}
 ul.letterLiDat{counter-reset: list;}
 ul.letterLiDat > li:before{content: counter(list, lower-alpha) ") "; counter-increment: list;}*/
 /*estilos ppoliticas y documentos*/
+
+@media (min-width: 768px) {
+    .tabCommon.tabLeft .nav{
+        display:table-cell;
+        width: 200px;
+    }
+}
+    .tabCommon.tabLeft .nav li{
+        display:block;
+        padding:0 0 10px 0;
+    }
+    .tabCommon.tabLeft .nav li.active a{
+        position:relative;
+    }
+    .tabCommon.tabLeft .nav li.active a:after{
+        content:"";
+        width:0;
+        height:0;
+        border-style:solid;
+        border-width:10px 0 10px 10px;
+        border-color:transparent transparent transparent #4b98dd;
+        position:absolute;right:-9px;top:10px;
+        -webkit-border-radius:8px;
+        -moz-border-radius:8px;
+        border-radius:8px;
+        -webkit-transition:all 0.3s ease-in-out;
+        -moz-transition:all 0.3s ease-in-out;
+        -ms-transition:all 0.3s ease-in-out;
+        -o-transition:all 0.3s ease-in-out;
+        transition:all 0.3s ease-in-out  ;
+    }
+.accordionCommon .panel-heading span.iconBlock.iconTransparent {
+    background-color: transparent;
+    box-shadow: none;
+    color: #ffffff;
+}
+.iconBlock{
+    color: white;
+}
+.accordionCommon .panel-heading span.iconBlock {
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #ffffff;
+    color: #666666;
+    display: inline-block;
+    float: right;
+    -webkit-box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+}
+.faq-bloque-principal {
+    
+    margin-bottom: 30px;
+    
+}
+.faq-bloque-principal a{
+    text-decoration: none;
+}
+.faq-bloque-titulo{
+    margin: 0px;
+    background-color: #204478;
+    padding: 10px 20px;
+    color: white;
+    font-family: ‘Raleway’;
+    font-size: 18pt;
+    font-weight: bold;
+    display: block;
+}
+.faq-bloque-titulo:hover,
+.faq-bloque-titulo:focus
+{
+    color: white;
+    text-decoration: none;
+}
+.faq-bloque-texto-1{
+    background-color: #f8f8f8;
+    font-family: ‘Raleway’;
+    font-size: 16px;
+    color: #232323;
+}
+.faq-bloque-texto-2{
+        padding: 30px;
+}
+.faq-preguntas{
+    padding: 15px;
+}
+.iconBlock {
+    padding-top: 5px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    color: white;
+    display: inline-block;
+    float: right;
+    -webkit-box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    -moz-box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+    box-shadow: 0 4px 0 rgba(0,0,0,0.1);
+}
+.homeContactContent .form-group i {
+    z-index: 100;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    color: #888888;
+}
+.faq-tab{
+    background-color: #f8f8f8;
+    font-size: 16px;
+    color: #222222;
+    display: block;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-bottom: 10px!important;
+}
+.faq-formulario{
+    text-align: center;
+    font-size: 16px!important;
+
+}
+.faq-lista{
+    display: contents!important;
+
+}
+.navbar{z-index: 1;}
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+    background-color: #4b98dd!important ;
+    color: white!important;
+}
+.commentContent h3{font-size:16px;color:#ffffff;text-transform:capitalize;margin:0 0 12px 0;font-weight:600;}
+.commentContent p{color:#ffffff;margin-bottom:0;}.mapArea{width:100%;display:block;}
+.mapArea #map{width:100%;height:420px;}
+.newsSection .block .list-unstyled li,.newsSection .block .list-inline li{display:inline-block;}
+.homeContactContent h2{font-size:36px;line-height:4px1;color:#216a9d;text-transform:capitalize;font-family:'Dosis',sans-serif;margin:0 0 20px 0;}
+.homeContactContent p{font-size:15px;color:#222222;margin:0 0 15px 0;}
+.homeContactContent address>p{color:rgba(34,34,34,0.65);}
+.homeContactContent address>p>i{width:30px;height:30px;line-height:30px;margin-right:10px;-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%;text-align:center;color:#ffffff;font-size:16px;}
+.homeContactContent address>p>a{color:rgba(34,34,34,0.65);}
+.homeContactContent .form-group{position:relative;}
+.homeContactContent .form-group .input-group-addon{z-index:100;position:absolute;top:0;right:0;width:50px;height:50px;line-height:50px;text-align:center;color:#888888;border:none;background-color:transparent;}
+.homeContactContent .form-group i{z-index:100;position:absolute;top:0;right:0;width:50px;height:50px;line-height:50px;text-align:center;color:#888888;}
+.homeContactContent .form-group .form-control{padding-top: 0px; padding-bottom: 0px; position:relative;padding-right:50px;height:50px;border-width:1px;-webkit-border-radius:0px;-moz-border-radius:0px;border-radius:0px;color:#222222}
+.homeContactContent .form-group textarea.form-control{height:147px;line-height:30px;}@media (min-width: 320px) {.homeContactContent form .btn-primary{float:left;width:100%;}}@media (min-width: 768px) {.homeContactContent form .btn-primary{float:right;width:auto;}}
+.eventSidebar .homeContactContent .form-group{display:block;}
+.eventSidebar .homeContactContent .form-group i{left:-5px;}.eventSidebar .homeContactContent .form-group .form-control{padding-left:30px;}.addressContent{margin-bottom:25px;}
+.addressContent .media-left{width:85px;height:85px;line-height:85px;-webkit-border-radius:100%;-moz-border-radius:100%;border-radius:100%;-webkit-box-shadow:0 4px 0 rgba(0,0,0,0.1);-moz-box-shadow:0 4px 0 rgba(0,0,0,0.1);box-shadow:0 4px 0 rgba(0,0,0,0.1);text-align:center;font-size:30px;padding-right:0;color:#ffffff;}@media (min-width: 320px) {
+    .addressContent .media-left{display:inline-block;margin:0 10px 0 0;float:left;}}@media (min-width: 768px) {.addressContent .media-left{display:block;margin:0 0 10px 0;float:none;}}@media (min-width: 992px) {.addressContent .media-left{display:inline-block;margin:0 10px 0 0;float:left;}}.addressContent .media-body .media-heading{font-weight:700;text-transform:capitalize;margin-bottom:16px;color:#202020;}
+.addressContent .media-body p{font-weight:600;}.addressContent .media-body p a{color:#666666;}.areaPadding{padding:90px 0 100px 0;}.homeContactContent .formBtnArea{text-align:center;}@media (min-width: 320px) {.homeContactContent .formBtnArea .btn-primary{float:left;display:block;}}@media (min-width: 768px) {.homeContactContent .formBtnArea .btn-primary{float:none;display:inline-block;}}
+/*estilos ppoliticas y documentos*/

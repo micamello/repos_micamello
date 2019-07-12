@@ -161,7 +161,7 @@
 
                             <div class="col-md-6 form-group">
                                 <label class="campo">T&eacute;lefono Convencional <span class="no"></span></label>
-                                <div class="errorContainer"></div>
+                                <div class="errorContainer"></div><div class="errorContainer"></div>
                                 <input type="text" class="espacio form-control <?php echo $noautofill; ?>" placeholder="Convencional (opcional)" id="tel2ConEmp" name="tel2ConEmp" <?php echo $readonly; ?>/>
                             </div>
 
@@ -172,7 +172,7 @@
 
                                         <label>
                                             <div class="errorContainer"></div>
-                                            <input type="checkbox" style="position: absolute;" class="terminosCond" name="terminosCond" id="terminosCond"> He le&iacute;do y acepto las <a class="link" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">pol&iacute;ticas de privacidad</a> y <a class="link" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">t&eacute;rminos y condiciones</a>
+                                            <input type="checkbox" style="position: relative;" class="terminosCond" name="terminosCond" id="terminosCond"> He le&iacute;do y acepto las <a class="link" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">pol&iacute;ticas de privacidad</a> y <a class="link" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">t&eacute;rminos y condiciones</a>
                                         </label>
                                     </div>
                                 </div>

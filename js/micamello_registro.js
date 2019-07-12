@@ -924,7 +924,7 @@ function eliminarMensajeError(obj, mensaje){
 	}
 
 	if(obj.attr('id') == "fechaNac"){
-		console.log($(obj).next().next().removeAttr('class'));
+		//console.log($(obj).next().next().removeAttr('class'));
 		$(obj).removeClass('error_input');
 		$(obj).next().next().text("");
 		return false;
@@ -1074,7 +1074,7 @@ function validarFormatoFecha(campo) {
   var dia = parseInt(values[2]);
   var mes = parseInt(values[1]);
   var ano = parseInt(values[0]);
-  console.log(dia+"-"+mes+"-"+ano);
+  //console.log(dia+"-"+mes+"-"+ano);
 
   if((dia <= 0 || dia > 31) || (mes <= 0 || mes > 12) || (ano <= 1500 || ano > 2099)){
     return false;

@@ -7,13 +7,20 @@ $(document).ready(function(){
 	}
 });
 
+
+
+// readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly', 'readonly');" style="background-color: #FFFFFF;"
+// readonly onfocus="this.removeAttribute('readonly');" onblur="this.setAttribute('readonly', 'readonly');" style="background-color: #FFFFFF;"
+
+
+
 if($('#fechaNac')){
 	$('#fechaShow').DateTimePicker({
       dateFormat: "yyyy-MM-dd",
       shortDayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
       shortMonthNames: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
       fullMonthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Deciembre"],
-      titleContentDate: "Configurar fecha de nacimiento",
+      titleContentDate: "Configurar fecha",
       titleContentTime: "Configurar tiempo",
       titleContentDateTime: "Configurar Fecha & Tiempo",
       setButtonContent: "Listo",
@@ -97,29 +104,41 @@ if($('#apellidosCand').length){
 	});
 }
 
+// if($('#correoCandEmp').length){
+// 	$('#correoCandEmp').on('blur', function(){
+// 		if($(this).val() != ""){
+// 			if(!validarCorreo($(this).val())){
+// 				crearMensajeError($(this), "Ingrese un correo válido");
+// 			}
+// 			else{
+// 				eliminarMensajeError($(this));
+// 			}
+// 		}
+// 		else{
+// 			crearMensajeError($(this), "Rellene este campo");
+// 		}
+// 	});
+// }
+
 	if($('#correoCandEmp').length){
 		$('#correoCandEmp').on('keypress', function(event){
-			if(event.keyCode == 0 || event.keyCode == 32){
+			if(event.key == 0 || event.key == 32){
 				event.preventDefault();
 			}
 		});
-		$('#correoCandEmp').on('keyup', function(){
-			$(this).val($(this).val().toLowerCase());
-		})
 		$('#correoCandEmp').on('blur', function(){
 			if($(this).val() != ""){
-				$(this).val($(this).val().trim().toLowerCase());
+				$(this).val($(this).val().trim());
 				if(validarCorreo($(this).val())){
-					var searchAjaxVar = searchAjax($(this));
-					if(searchAjaxVar == 0){
+					var res = searchAjax($(this));					
+					if(res == ''){
+						crearMensajeError($(this), 'Verifique su conexión a internet. Intente de nuevo');						
+					}
+					else if (res == false){
 						crearMensajeError($(this), 'El correo ingresado ya existe');
-					}
-					else if(searchAjaxVar == 1){
-
+					}					
+					else{
 						eliminarMensajeError($(this), "");
-					}
-					else if(searchAjaxVar == 2){
-						crearMensajeError($(this), 'Verifique su conexión de red. Intente de nuevo.');
 					}
 				}
 				else{
@@ -142,7 +161,7 @@ if($('#celularCandEmp').length){
 	$('#celularCandEmp').on('blur', function(){
 		var tipousuario = $('#tipo_usuario').val();
 		if($(this).val() != ""){
-			$(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
+			$(this).val($(this).val().trim());
 			if(tipousuario == 2){
 				if(!ValidarCelularConvencional($(this).val())){
 					crearMensajeError($(this), "Mínimo 9 dígitos, máx. 15");
@@ -175,18 +194,14 @@ if($('#tipoDoc').length){
 			docCampo.attr('placeholder', "Número de "+textoSelect+" *");
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($(this).val());
-				if(docCampo.val() != ""){
-					if(DniRuc_Validador(docCampo,$(this).val(), 2) == true){
-						var searchAjaxVar = searchAjax(docCampo);
-						if(searchAjaxVar == 0){
-							// eliminarMensajeError(docCampo);
-							crearMensajeError(docCampo, "El documento ingresado ya existe.");
+				if(docCampo.val() != ""){ 
+					console.log($(this).val());
+					if(DniRuc_Validador(docCampo,$(this).val()) == true){
+						if(searchAjax(docCampo)){
+							eliminarMensajeError(docCampo);
 						}
-						else if(searchAjaxVar == 1){
-							eliminarMensajeError(docCampo, "");
-						}
-						else if(searchAjaxVar == 2){
-							crearMensajeError(docCampo, 'Verifique su conexión de red. Intente de nuevo.');
+						else{
+							crearMensajeError(docCampo, "Documento ingresado ya existe");
 						}
 					}
 					else{
@@ -208,28 +223,18 @@ if($('#documentoCandEmp').length){
 		}
 	});
 	$('#documentoCandEmp').on('blur', function(){
-		//console.log($('#tipo_documentacion').val());
 		if($(this).val() != ""){
 			$(this).val($(this).val().trim());
 			var tipoDocCampo = $('#tipo_documentacion').val();
-			if(DniRuc_Validador($(this), tipoDocCampo, 2) == true){
-				var searchAjaxVar = searchAjax($(this));
-				if(searchAjaxVar == 0){
-					// eliminarMensajeError($(this));
-					crearMensajeError($(this), "El documento ingresado ya existe.");
+			if(DniRuc_Validador($(this), tipoDocCampo) == true){
+				if(searchAjax($(this))){
+					eliminarMensajeError($(this));
 				}
-				else if(searchAjaxVar == 1){
-					eliminarMensajeError($(this), "");
-				}
-				else if(searchAjaxVar == 2){
-					crearMensajeError($(this), 'Verifique su conexión de red. Intente de nuevo.');
+				else{
+					crearMensajeError($(this), "Documento ingresado ya existe");
 				}
 			}
 			else{
-				if($(this).val().length == 13){
-					crearMensajeError($(this), "No se admiten RUC de persona natural.");
-					return false;
-				}
 				crearMensajeError($(this), "Documento ingresado no es válido");
 			}
 		}
@@ -244,7 +249,7 @@ if($('#fechaNac').length){
 		if($(this).val() != ""){
 			if(validarFormatoFecha($(this).val())){
 				if(!calcularEdad($(this).val())){
-					crearMensajeError($(this), "Mayor a 18 y menor a 100 años");
+					crearMensajeError($(this), "Debe ser mayor de edad");
 				}
 				else{
 					eliminarMensajeError($(this));
@@ -274,7 +279,6 @@ if($('#generoUsuario').length){
 if($('#password_1').length){
 		$('#password_1').on('blur', function(){
 			if($(this).val() != ""){
-				$(this).val($(this).val().replace(/\s/g, ""));
 				if(validarPassword($(this).val())){
 					if($('#password_2').val() != ""){
 						if(!passwordCoinciden($(this), $('#password_2'))){
@@ -303,7 +307,6 @@ if($('#password_1').length){
 	if($('#password_2').length){
 		$('#password_2').on('blur', function(){
 			if($(this).val() != ""){
-				$(this).val($(this).val().replace(/\s/g, ""));
 				if(validarPassword($(this).val())){
 					if($('#password_2').val() != ""){
 						if(!passwordCoinciden($(this), $('#password_1'))){
@@ -405,7 +408,7 @@ if($('#password_1').length){
 			if($(this).val() != ""){
 				$(this).val($(this).val().trim());
 				if(!ValidarTelefonoConvencional($(this).val())){
-					crearMensajeError($(this), "9 dígitos. Incluir cod.provincia.");
+					crearMensajeError($(this), "Longitud de 9 dígitos");
 				}
 				else{
 					eliminarMensajeError($(this), "");
@@ -489,16 +492,12 @@ if(tipousuario == 1){
 			docCampo.removeAttr('disabled');
 			$('#tipo_documentacion').val($('#tipoDoc').val());
 				if(docCampo.val() != ""){ 
-					if(DniRuc_Validador(docCampo,$('#tipoDoc').val(), 2) == true){
-						var searchAjaxVar = searchAjax(docCampo);
-						if(searchAjaxVar == 0){
-							crearMensajeError(docCampo, "El documento ingresado ya existe.");
+					if(DniRuc_Validador(docCampo,$('#tipoDoc').val()) == true){
+						if(!searchAjax(docCampo) != true){
+							eliminarMensajeError(docCampo);
 						}
-						else if(searchAjaxVar == 1){
-							eliminarMensajeError(docCampo, "");
-						}
-						else if(searchAjaxVar == 2){
-							crearMensajeError(docCampo, 'Verifique su conexión de red. Intente de nuevo.');
+						else{
+							crearMensajeError(docCampo, "Documento ingresado ya existe");
 						}
 					}
 					else{
@@ -558,16 +557,15 @@ if(tipousuario == 1){
 	if($('#correoCandEmp').length){
 			if($('#correoCandEmp').val() != ""){
 				if(validarCorreo($('#correoCandEmp').val())){
-					var searchAjaxVar = searchAjax($('#correoCandEmp'));
-					if(searchAjaxVar == 0){
-						crearMensajeError($('#correoCandEmp'), "El correo ingresado ya existe.");
-
+					var res = searchAjax($('#correoCandEmp'));					
+					if(res == ''){
+						crearMensajeError($('#correoCandEmp'), 'No hay conexion con internet');						
 					}
-					else if(searchAjaxVar == 1){
+					else if (res == false){
+						crearMensajeError($('#correoCandEmp'), 'El correo ingresado ya existe');
+					}
+					else{
 						eliminarMensajeError($('#correoCandEmp'), "");
-					}
-					else if(searchAjaxVar == 2){
-						crearMensajeError($('#correoCandEmp'), 'Verifique su conexión de red. Intente de nuevo.');
 					}
 				}
 				else{
@@ -608,16 +606,12 @@ if(tipousuario == 1){
 	if($('#documentoCandEmp').length){
 		if($('#documentoCandEmp').val() != ""){
 			var tipoDocCampo = $('#tipo_documentacion').val();
-			if(DniRuc_Validador($('#documentoCandEmp'), tipoDocCampo, 2) == true){
-				var searchAjaxVar = searchAjax($('#documentoCandEmp'));
-				if(searchAjaxVar == 0){
-					crearMensajeError($('#documentoCandEmp'), "El documento ingresado ya existe.");
+			if(DniRuc_Validador($('#documentoCandEmp'), tipoDocCampo) == true){
+				if(searchAjax($('#documentoCandEmp'))){
+					eliminarMensajeError($('#documentoCandEmp'));
 				}
-				else if(searchAjaxVar == 1){
-					eliminarMensajeError($('#documentoCandEmp'), "");
-				}
-				else if(searchAjaxVar == 2){
-					crearMensajeError($('#documentoCandEmp'), 'Verifique su conexión de red. Intente de nuevo.');
+				else{
+					crearMensajeError($('#documentoCandEmp'), "Documento ingresado ya existe");
 				}
 			}
 			else{
@@ -784,17 +778,16 @@ function searchAjax(obj){
         async: false,
         success:function(data){
             if(data.dato != ""){
-            	// falso
-            	val_retorno1 = 0;
+            	val_retorno1 = false;
             }
             else{
-            	// verdadero
-            	val_retorno1 = 1;
+            	val_retorno1 = true;
             }
         },
         error: function (request, status, error) {
-        	val_retorno1 = 2;
-            console.log(request.responseText);
+        	console.log(error);
+        	crearMensajeError($(obj), "No se pudo completar la solicitud.");
+          console.log("A"+val_retorno1+"A");  
            	// Swal.fire({                
             //     html: request.responseText,
             //     imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
@@ -1039,11 +1032,11 @@ function safari(){
 }
 
 function validarCorreo(correo) { 
-  return /^([a-zA-Z0-9\+_\-]+)(\.[a-zA-Z0-9\+_\-]+)*@([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}$/.test(correo);
+  return /^\s*([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}\s*$/.test(correo);
 }
 
 function ValidarTelefonoConvencional(valor){
-	//console.log(valor.length);
+	console.log(valor.length);
 	if(/^[0-9]{9}$/.test(valor)){return true;}else{return false;}
 }
 
@@ -1083,14 +1076,13 @@ function calcularEdad(contenido){
         edad -= 1900;
     }
 
-    if(edad >= 18  && edad <= 100){
+    if(edad >= 18){
         
         return true;
 
     }else{
         return false;
     }
-    //console.log(edad);
 }
 function validarFormatoFecha(campo) {
   var RegExPattern = /^\d{1,2}-\d{1,2}-\d{4}$/;
@@ -1136,3 +1128,7 @@ function passwordCoinciden(obj1, obj2){
 		return false;
 	}
 }
+
+// $('.form-control').on('click', function(){
+// 	console.log($(this).attr('placeholder').split(' ')[0]);
+// })

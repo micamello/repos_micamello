@@ -8,7 +8,7 @@
     <h2 class="titulo">Mi Perfil</h2>
   </div>
 </div>
-
+<br>
 <?php
  if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <br>
@@ -387,7 +387,7 @@
 												</div>
 											</div>
 		                                    
-		                                    <div class="col-md-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasFrecuentes/'>autopostulaciones</a>. </p>">
+		                                    <div class="col-md-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasfrecuentes/'>autopostulaciones</a>. </p>">
 		                                    	<div id="seccion_res" class="form-group">
 			                                    	<label for="residencia">&#191;Puede cambiar de residencia&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_res" class="help-block with-errors"></div>
 				                                    <select id="residencia" name="residencia" class="form-control"  onchange="validarFormulario(false)" >
@@ -424,7 +424,7 @@
 												</div>
 											</div>
 
-											<div class="col-md-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasFrecuentes/'>autopostulaciones</a>. </p>">
+											<div class="col-md-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasfrecuentes/'>autopostulaciones</a>. </p>">
 		                                    	<div id="seccion_via" class="form-group">
 			                                    	<label for="viajar">&#191;Puede viajar&#63; <span title="Este campo es obligatorio" class="requerido">*</span></label><div id="err_via" class="help-block with-errors"></div>
 				                                    <select id="viajar" name="viajar" class="form-control"  onchange="validarFormulario(false)" >
@@ -525,7 +525,7 @@
 		                                        </div>
 		                                    </div>
 
-		                                    <div class="col-md-12 col-sm-12 col-lg-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasFrecuentes/'>autopostulaciones</a>. </p>">
+		                                    <div class="col-md-12 col-sm-12 col-lg-6" data-placement="left" data-toggle="tooltip" data-html="true" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Esta informaci&oacute;n ser&aacute; tomada en cuenta para sus <a href='<?php echo PUERTO."://".HOST;?>/preguntasfrecuentes/'>autopostulaciones</a>. </p>">
 												<div class="form-group" id="seccion_area">
 													<label style="font-size: 13px;">&Aacute;reas de Inter&eacute;s. Consiga mejores resultados de empleo, seleccionando <b class="requerido">máximo numero áreas</b> de su inter&eacute;s<span title="Este campo es obligatorio" class="requerido"> *</span></label>											
 													<div id="err_area" class="help-block with-errors"></div>

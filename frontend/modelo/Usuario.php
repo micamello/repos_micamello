@@ -36,12 +36,12 @@ class Modelo_Usuario{
     }    
     return true;
   }
-  public static function autenticacion($username, $password){
-    $password = md5($password);         
-    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro
+  public static function autenticacion($username){
+    //$password = md5($password);         
+    $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, password
             FROM mfo_usuario_login 
-            WHERE (username = ? OR correo = ?) AND password = ?";
-    $rs = $GLOBALS['db']->auto_array($sql,array($username,$username,$password));     
+            WHERE (username = ? OR correo = ?) ";
+    $rs = $GLOBALS['db']->auto_array($sql,array($username,$username));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
@@ -509,10 +509,10 @@ WHERE
     //calcular que el salario este en el rango especificado
     if(!empty($filtros['S']) && $filtros['S'] != 0){
       if($filtros['S'] == 1){
-        $sql .= " AND t2.asp_salarial < 341";
+        $sql .= " AND t2.asp_salarial < 394";
       }
       if($filtros['S'] == 2){
-        $sql .= " AND t2.asp_salarial BETWEEN '386' and '700'";
+        $sql .= " AND t2.asp_salarial BETWEEN '394' and '700'";
       }
       if($filtros['S'] == 3){
         $sql .= " AND t2.asp_salarial BETWEEN '700' AND '1200'";
@@ -1198,7 +1198,7 @@ WHERE
   public static function consultarInfoEmpresa($id_empresa){
     if (empty($id_empresa)){ return false; }
     $sql = "SELECT e.id_empresa, e.telefono, e.nombres, si.descripcion as sectorindustrial, l.username, 
-            l.correo, l.dni, ce.nombres as nombres_contacto, ce.apellidos as apellidos_contacto, ce.telefono1, ce.telefono2
+            l.correo, l.dni, ce.nombres as nombres_contacto, ce.apellidos as apellidos_contacto, ce.telefono1, ce.telefono2, e.estado
              FROM mfo_empresa e
             INNER JOIN mfo_usuario_login l
             INNER JOIN mfo_contactoempresa ce 
@@ -1237,6 +1237,11 @@ WHERE
 
   public static function registrarSessionLog($data){
     return $GLOBALS['db']->insert('mfo_logs', $data);
+  }
+
+  public static function actualizarEmpresa($id_empresa,$estado){
+    if(empty($id_empresa)){return false;}
+    return $GLOBALS['db']->update("mfo_empresa",array("estado"=>$estado),"id_empresa=".$id_empresa);
   }
 }  
 ?>
