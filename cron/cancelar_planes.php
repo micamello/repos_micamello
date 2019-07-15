@@ -5,7 +5,7 @@ ini_set("max_input_time", "0");
 ini_set('memory_limit', "768M");
 set_time_limit(0);
 
-$dominio = "www.micamello.com.ec/desarrollov3/";
+$dominio = "www.micamello.com.ec/";
 
 /*Script para cancelar planes de la empresa/candidato, dependiendo del plan(es) contratados y fecha actual, si el usuario es de tipo empresa inactivar las ofertas publicadas con ese plan*/
 

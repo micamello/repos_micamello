@@ -35,7 +35,7 @@ if ($resultado){
 else{
   Utils::crearArchivo(CRON_RUTA,'procesando_preregistro.txt','');
 }
-$usuarios = Modelo_PreRegistro::preregistrados();
+$usuarios = Modelo_PreRegistro::preregistradosExcepciones('4388');
 // print_r($usuarios);
 // exit();
 $tipodoc = "";
@@ -186,8 +186,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 			    						"apellidos"=>utf8_encode($datosPreregistro['apellidos']),
 			    						"telefono"=>$datosPreregistro['telefono'],
 			    						"fecha_nacimiento"=>$datosPreregistro['fecha_nacimiento'],
-			    						// "fecha_creacion"=>$datosPreregistro['fecha'],
-			    						"fecha_creacion"=>$fechaActual,
+			    						"fecha_creacion"=>$datosPreregistro['fecha'],
 			    						"estado"=>0,
 			    						"term_cond"=>1,
 			    						"id_ciudad"=>$datosPreregistro['id_ciudad'],
@@ -217,7 +216,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		    		$datosPreregistro['id_sectorindustrial'] = 69;
 		    	}
 		    	$mfoEmpresa = array("telefono"=>$datosPreregistro['telefono'],
-		    						"nombres"=>utf8_encode($datosPreregistro['nombres']),
+		    						"nombres"=>$datosPreregistro['nombres'],
 		    						"fecha_creacion"=>$fechaActual,
 		    						"nro_trabajadores"=>1,
 		    						// "fecha_creacion"=>$datosPreregistro['fecha'],

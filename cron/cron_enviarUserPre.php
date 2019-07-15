@@ -17,6 +17,7 @@ foreach ($consultar_usuarios as $key => $usuario) {
     $email_body = str_replace("%CORREO%", $usuario['correo'], $email_body);   
     $email_body = str_replace("%PASSWORD%", 'User12345', $email_body);   
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);   
+
     Utils::envioCorreo($usuario["correo"],"Activación de Usuario",$email_body);     
-    break;
+
 }

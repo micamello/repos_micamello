@@ -40,8 +40,8 @@ class Modelo_Usuario{
     //$password = md5($password);         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, password
             FROM mfo_usuario_login 
-            WHERE (username = ? OR correo = ?)";
-    $rs = $GLOBALS['db']->auto_array($sql,array($username,$username));  
+            WHERE (username = ? OR correo = ?) ";
+    $rs = $GLOBALS['db']->auto_array($sql,array($username,$username));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
@@ -1248,15 +1248,11 @@ WHERE
 
   public static function busquedaPorCorreoMasivo($correos){
     if (empty($correos)){ return false; }    
-    $sql = "SELECT GROUP_CONCAT(id_usuario_login) AS id_usuario_login FROM mfo_usuario_login WHERE tipo_usuario = 1 and correo IN(".$correos.")";          
-    $rs = $GLOBALS['db']->auto_array($sql,array(),false);
+    $sql = "SELECT * FROM mfo_usuario u,mfo_usuario_login l WHERE l.tipo_usuario = 1 and u.id_usuario_login = l.id_usuario_login and l.correo IN(".$correos.")";          
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
 
-    $sql = "SELECT * FROM mfo_usuario u, mfo_usuario_login lo WHERE u.id_usuario_login IN(".$rs["id_usuario_login"].")
-    AND u.id_usuario_login = lo.id_usuario_login";
-
-    $rs2 = $GLOBALS['db']->auto_array($sql,array(),true);
-
-    return $rs2;    
+    return $rs;    
   }
+
 }  
 ?>

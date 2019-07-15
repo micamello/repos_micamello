@@ -36,28 +36,32 @@ class Controlador_Inicio extends Controlador_Base {
         Vista::render('quienesSomos', $tags);
       break;
       case 'preguntasfrecuentes': 
-
         $generales = Modelo_PreguntasFrecuentes::obtieneListado(0);   
         $candidatos = Modelo_PreguntasFrecuentes::obtieneListado(1);   
         $empresas = Modelo_PreguntasFrecuentes::obtieneListado(2);  
         
         $tags = array('generales'=>$generales,                  
                   'candidatos'=>$candidatos,
-                  'empresas'=>$empresas,'vista'=>''); 
+                  'empresas'=>$empresas, 'vista'=>'inicio'); 
+
         Vista::render('preguntasfrecuentes', $tags);
       break;
       case 'canea':    
+
         Vista::render('canea', $tags);
       break;
       case 'terminoscondiciones':
+        $tags['vista'] = " ";
         $vista = 'documentos/terminos_condiciones_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;
       case 'politicaprivacidad':
+      $tags['vista'] = " ";
         $vista = 'documentos/politica_privacidad_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;
       case 'politicacookie':
+      $tags['vista'] = " ";
         $vista = 'documentos/politicacookie_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;

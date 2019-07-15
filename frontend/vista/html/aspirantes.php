@@ -665,7 +665,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 		            <button style="float: right;" id="activar-accesos" type="button" class="btn-blue" data-placement="bottom" data-toggle="tooltip" data-html="true" title="" data-original-title="<i class='fa fa-info-circle fa-2x'></i><br/><p>Buenas noticias, puedes enviar accesos a los candidatos que elijas para que rindan el test completo.</p>">Activar accesos</button>
 		          </h6>
 		          <?php if(count($usuariosConAccesos) > 0){ ?>
-		          	<p style="padding-top: 10px;color: #a5a5a5; float: right;" class="bounce infinite form-text text-muted">El color de fondo <span style="background-color: #bbdcf9; width: 50px; border: 1px solid #aaa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> indica que los usuarios completaron el informe mediante acceso.</p>
+		          	<p style="padding-top: 10px;color: #a5a5a5; float: right;" class="bounce infinite form-text text-muted">El color de fondo <span style="background-color: #bbdcf9; width: 50px; border: 1px solid #aaa">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> indica a los usuarios que se les env&iacute;o accesos.</p>
 		          <?php } ?>
 		        </div>
 
@@ -840,7 +840,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
 
 							            		<td align="right" style="text-align: center;" data-title="Foto: ">
-							                      <img class="imagen-perfil-2" src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgthumb/'.$username.'/'; ?>" alt="perfil" width="50" height="50">
+							                      <img class="imagen-perfil-2" src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgthumb/'.$a['username'].'/'; ?>" alt="perfil" width="50" height="50">
 							                    </td>
 							            		
 							            		

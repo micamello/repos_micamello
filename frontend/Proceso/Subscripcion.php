@@ -90,8 +90,8 @@ class Proceso_Subscripcion{
 
       $nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".ucfirst((isset($infousuario["apellidos"])) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");
        
-      $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,
-                                 $infoplan["nombre"],$infousuario["tipo_usuario"],$infosucursal["dominio"],$this->idplan);
+      $this->crearNotificaciones($infousuario["correo"],$infousuario["id_usuario"],$nombres,$infoplan["nombre"],
+                                 $infousuario["tipo_usuario"],$infosucursal["dominio"],$infoplan["costo"]);
             
       /*if (!empty($attachments)){
         //eliminar archivos temporales
@@ -129,7 +129,7 @@ class Proceso_Subscripcion{
   }
 
   public function crearNotificaciones($correo,$idusuario,$nombres,$plan,$tipousuario,$dominio,$costo){  
-    $costo = Modelo_Plan::busquedaXId($costo);
+    //$costo = Modelo_Plan::busquedaXId($costo);
     $email_subject = "Activación de Suscripción"; 
     if ($tipousuario == Modelo_Usuario::CANDIDATO){
       $template_nombre = "ACTIVACION_SUBSCRIPCION_CANDIDATO";      
@@ -140,17 +140,17 @@ class Proceso_Subscripcion{
     $email_body = Modelo_TemplateEmail::obtieneHTML($template_nombre);
     $email_body = str_replace("%NOMBRES%", $nombres, $email_body);
     $precioTemplate = "Parcial";
-    if($costo['costo'] > 0 && $tipousuario == Modelo_Usuario::CANDIDATO){
+    $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
+    if($costo > 0 && $tipousuario == Modelo_Usuario::CANDIDATO){
       $precioTemplate = "Completo ";
       $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
-    }
-    $email_body = str_replace("%PRECIO%", $precioTemplate, $email_body);
+    }    
     $email_body = str_replace("%PLAN%", $plan, $email_body);   
     //$notif_body = "Su plan ".$plan." ha sido activado exitosamente";    
     if ($tipousuario == Modelo_Usuario::CANDIDATO){      
-      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/oferta/'>click aqu&iacute;</a><br>";      
+      $enlace = "<a href='".PUERTO."://".$dominio."/oferta/'>click aqu&iacute;</a><br>";      
     }else{      
-      $enlace = "<a href='".PUERTO."://".$dominio."/desarrollov3/publicar/'>click aqu&iacute;</a><br>";  
+      $enlace = "<a href='".PUERTO."://".$dominio."/publicar/'>click aqu&iacute;</a><br>";  
     } 
     $email_body = str_replace("%ENLACE%", $enlace, $email_body);     
     Utils::envioCorreo($correo,$email_subject,$email_body/*,$attachments*/);

@@ -335,7 +335,7 @@ if($('#forma_1').length){
 				}
 		}
 		if(contador_errores > 0){
-			console.log(contador_errores);
+			//console.log(contador_errores);
 			alertErrores(preguntasError);
 		}
 	})

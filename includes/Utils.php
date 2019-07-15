@@ -51,7 +51,7 @@ class Utils{
   }
 
   public static function envioCorreo($to, $subject, $body, $attachments=array()){    
-    /*$mail = new PHPMailer();
+    $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->CharSet = 'UTF-8';
@@ -73,7 +73,7 @@ class Utils{
         }
       }
     }      
-    return $mail->send();*/
+    return $mail->send();
   }
 
   public static function encriptar($texto){      

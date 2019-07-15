@@ -21,7 +21,6 @@
             </ul>
           </div>
           <div class="tab-content col-md-7 post-news-body" id="square">
-
             <!---CANDIDATO--->
             <?php if(count($candidatos) > 0) { ?>
               <div id="candidatos" class="tab-pane fade active in">

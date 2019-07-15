@@ -15,7 +15,7 @@
 require_once '../constantes.php';
 require_once '../init.php';
 
-/*$dominio = 'http://localhost/repos_micamello';
+$dominio = 'https://www.micamello.com.ec';
 
 if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 
@@ -24,7 +24,8 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 
 	echo '<b>Título:</b> '.$consultar_oferta["titulo"].'<br>';
 	echo '<b>Estado:</b> '.(($consultar_oferta["estado"]==1)?'Activa<br>':'Rechazada o Inactiva<br>');
-	echo '<b>Descripción:</b> '.$consultar_oferta["descripcion"];
+	echo '<b>Descripción:</b> '.$consultar_oferta["descripcion"].'<br><br>';
+
 	echo '<a class="boton_personalizado" href="'.$dominio.'/cron/aprobar_ofertas.php?id_oferta='.$id_oferta.'&estado=0">Rechazar</a>';
 	echo '<a class="boton_personalizado" href="'.$dominio.'/cron/aprobar_ofertas.php?id_oferta='.$id_oferta.'&estado=1">Aprobar</a>';
 
@@ -55,6 +56,4 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 }else{
 	echo "ENVIAR POR PARAMETRO EL ID_OFERTA";
 }
-*/
-Utils::envioCorreo('mariana280790@gmail.com',$email_subject,$email_body);
 ?>

