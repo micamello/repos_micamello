@@ -1168,7 +1168,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 <section style="background-color: grey;color: white; text-align:center" id="product" class="inicio">
   <div class="container">
     <div class="col-md-12">
-      <label>PUBLICIDAD</label>
+      <label>ANUNCIE AQU&Iacute;</label>
     </div>
   </div>
 </section>

@@ -82,6 +82,8 @@ class Controlador_Perfil extends Controlador_Base
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
                     if(!isset($data['error'])){
+
+                        Utils::log('entro sin error');
                       //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';                      
                       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
                     }
@@ -129,7 +131,7 @@ class Controlador_Perfil extends Controlador_Base
                 $porcentaje_por_usuario = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
                 
                 if (!isset($_SESSION['mfo_datos']['usuario']['grafico']) || empty($_SESSION['mfo_datos']['usuario']['grafico'])){
-                    $result_faceta = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                    $result_faceta = $porcentaje_por_usuario;//Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
                     
                     $str_grafico = '';
                     if(count($result_faceta) == 5 && $puedeDescargarInforme > 2){                        
@@ -380,7 +382,7 @@ class Controlador_Perfil extends Controlador_Base
                     $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                        if(!Utils::$function($data['dni'], 2, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
                           throw new Exception("C\u00E9dula o pasaporte no v\u00E1lido.");
                         }
                       }           
@@ -392,10 +394,10 @@ class Controlador_Perfil extends Controlador_Base
 
                     if (!empty($data['dni'])){
                         if (!Modelo_UsuarioLogin::editarDniLogin($_SESSION['mfo_datos']['usuario']['id_usuario_login'],$data['dni'])) {
-                            throw new Exception("Ha ocurrido un error al guardar la c\u00E9dula , intente nuevamente");
+                            throw new Exception("Ha ocurrido un error al guardar el documento de Identidad , intente nuevamente");
                         }
                     }                    
-
+                    
                     if (!Modelo_Usuario::updateUsuario($data, $idUsuario, $imagen, $_SESSION['mfo_datos']['usuario']['foto'],$tipo_usuario)) {
                         throw new Exception("Ha ocurrido un error al guardar el usuario, intente nuevamente");
                     }
@@ -407,7 +409,7 @@ class Controlador_Perfil extends Controlador_Base
                 $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                        if(!Utils::$function($data['dni'], 2, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
                           throw new Exception("El RUC ingresado no es v\u00E1lido.");
                         }
                       }           
@@ -432,6 +434,7 @@ class Controlador_Perfil extends Controlador_Base
               Utils::crearThumbnail(PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',300,0);
               Utils::crearThumbnail(PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'.jpg',PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'].'-thumb.jpg',50,0);    
             } 
+            
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
                 if (!empty($archivo) && $archivo['error'] != 4) {
                     $arch = Utils::validaExt($archivo, 2); 
@@ -491,10 +494,10 @@ class Controlador_Perfil extends Controlador_Base
                 if(!empty($array_subareas_seleccionadas)){
 
                     if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
-                        throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
+                        throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente"); 
                     }
                 }
-            }            
+            }           
             $GLOBALS['db']->commit();
             $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario); 
             $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';           
@@ -503,8 +506,14 @@ class Controlador_Perfil extends Controlador_Base
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $data["error"] = 1;
+            $r = PATH_PROFILE.$_SESSION['mfo_datos']['usuario']['username'];
+                
+            if(file_exists($r.'.jpg') && empty($_SESSION['mfo_datos']['usuario']['foto'])){ 
+                unlink($r.'.jpg');
+                unlink($r.'-thumb.jpg');
+            }
+
             $GLOBALS['db']->rollback();
-            $data['error'] = 1;
         }        
         return $data;
     }
@@ -547,7 +556,7 @@ class Controlador_Perfil extends Controlador_Base
 
         $informe = 0;
         $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
-        if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $cantd_facetas >= 2){
+        if(/*isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && */$cantd_facetas >= 2){
             $informe = $cantd_facetas;
         }else if(!isset($_SESSION['mfo_datos']['planes']) || $cantd_facetas == 2){
             $informe = $cantd_facetas;

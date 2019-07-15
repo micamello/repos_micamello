@@ -634,6 +634,11 @@ class Controlador_Oferta extends Controlador_Base{
       try{
         $GLOBALS['db']->beginTrans();
         if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'postulacion') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) {
+          
+            if(!Utils::validarNumeros($aspiracion)){
+              throw new Exception("No se admiten caracteres especiales, intente nuevamente");
+            }
+
             if (!Modelo_Postulacion::postularse($id_usuario,$id_oferta,$aspiracion)) {
                 throw new Exception("Ha ocurrido un error la postulaci\u00f3n, intente nuevamente");
             }
@@ -642,12 +647,12 @@ class Controlador_Oferta extends Controlador_Base{
             $this->redirectToController('oferta');
         }else{
             $_SESSION['mostrar_error'] = "No tiene permiso para postularse, contrate un plan"; 
-            $this->redirectToController('detalleOferta/'.$vista.'/'.$id_oferta);
+            $this->redirectToController('detalleOferta/'.$vista.'/'.Utils::encriptar($id_oferta));
         }
       }catch (Exception $e) {
           $_SESSION['mostrar_error'] = $e->getMessage();
           $GLOBALS['db']->rollback();
-          $this->redirectToController('detalleOferta/'.$vista.'/'.$id_oferta); 
+          $this->redirectToController('detalleOferta/'.$vista.'/'.Utils::encriptar($id_oferta)); 
       }
     }
 

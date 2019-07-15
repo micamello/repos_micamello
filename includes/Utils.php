@@ -51,14 +51,14 @@ class Utils{
   }
 
   public static function envioCorreo($to, $subject, $body, $attachments=array()){    
-    $mail = new PHPMailer();
+    /*$mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->CharSet = 'UTF-8';
-    $mail->Port = MAIL_PORT; 
-    $mail->Host = MAIL_HOST; 
-    $mail->Username = MAIL_USERNAME; 
-    $mail->Password = MAIL_PASSWORD;     
+    $mail->Port = PUERTO_SMTP; 
+    $mail->Host = SERVER_SMTP; 
+    $mail->Username = ID_SMTP;
+    $mail->Password = CLAVE_SMTP;     
     $mail->From = MAIL_CORREO; 
     $mail->FromName = MAIL_NOMBRE;         
     $mail->SMTPAutoTLS = false;    
@@ -73,7 +73,7 @@ class Utils{
         }
       }
     }      
-    return $mail->send();
+    return $mail->send();*/
   }
 
   public static function encriptar($texto){      
@@ -865,6 +865,8 @@ public static function validarCelularConvencional($contenido){
     }
     return $cadena;
   }
+
+
 
 }
 ?>

@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'micamello_desarrollo3');
+define('DBNOMBRE', 'base_actual');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -33,7 +33,7 @@ define('GENERO', array('M'=>'Masculino', 'F'=>'Femenino', 'P'=>'Prefiero no deci
 define('VALOR_GENERO', array('M'=>'1', 'F'=>'2', 'P'=>'3'));
 define('PRIORIDAD', array('1'=>'Informe Parcial', '2'=>'Informe Completo'));
 define('ESTATUS_OFERTA', array('1'=>'Contratado', '2'=>'No contratado', '3'=>'En proceso'));
-define('SALARIO', array('1'=>'Menos de 386', '2'=>'Entre 386 y 700', '3'=>'Entre 700 y 1200', '4'=>'M&aacute;s de 1200'));
+define('SALARIO', array('1'=>'Menos de 394', '2'=>'Entre 394 y 700', '3'=>'Entre 700 y 1200', '4'=>'M&aacute;s de 1200'));
 define('EDADES', array('1'=>'18 a 25 A&ntilde;os', '2'=>'25 a 35 A&ntilde;os', '3'=>'35 a 45 A&ntilde;os', '4'=>'M&aacute;s de 45 a&ntilde;os'));
 define('FACEBOOK', 'https://www.facebook.com/MiCamello.com.ec/');
 define('TWITTER', 'https://twitter.com/MiCamelloec');
@@ -113,4 +113,9 @@ define("LK_SCOPE", 'r_liteprofile r_emailaddress');
 define("DIRECTORIOCORREOS", array('0'=>'desarrollo@micamello.com.ec', '1'=>'desarrollo2@micamello.com.ec', '2'=>'administrador.gye@micamello.com.ec'));
 define('AREASPERMITIDAS_PUB', '1');
 define('SUBAREA_PERM_PUB', '1');
+
+define('SERVER_SMTP','smtp-relay.sendinblue.com');
+define('PUERTO_SMTP',587);
+define('ID_SMTP','ffueltala@gmail.com');
+define('CLAVE_SMTP','cz0Ls8tI34AZ2aUJ');
 ?>

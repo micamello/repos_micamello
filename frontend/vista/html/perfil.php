@@ -8,7 +8,7 @@
     <h2 class="titulo">Mi Perfil</h2>
   </div>
 </div>
-
+<br>
 <?php
  if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 <br>
