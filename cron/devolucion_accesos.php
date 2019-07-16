@@ -60,7 +60,7 @@ $listadoAcceso = Modelo_AccesoEmpresa::obtenerListado();
               proceso($accesoemp);
               $nombre_mostrar = ucfirst(utf8_encode($accesoemp["nombre_usuario"])).(!empty($accesoemp['apellido_usuario']) ? " ".ucfirst(utf8_encode($accesoemp['apellido_usuario'])) : "");
               $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($accesoemp["id_empresa_plan"], Modelo_Usuario::EMPRESA);
-              $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
+              $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"], true);
               $enlace = "<a href='".PUERTO.'://'.HOST.'/planesUsuario/'."'>Mis Planes</a>";
               $email_body = Modelo_TemplateEmail::obtieneHTML("DEVOLUCION_ACCESO");
               $email_body = str_replace("%NOMBRES%", utf8_encode($accesoemp['nombre_empresa']), $email_body);
