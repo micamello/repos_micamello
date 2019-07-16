@@ -28,7 +28,7 @@ class Controlador_Login extends Controlador_Base {
             throw new Exception("El usuario no esta activo, por favor revise su cuenta de correo electr\u00F3nico para activarlo o escr\u00EDbanos a info@micamello.com.ec para su activaci\u00F3n");            
           }   
 
-          if(!empty($usuario['ultima_sesion'])){       
+          if(!empty($usuario['ultima_sesion']) || $usuario['tipo_registro'] == Modelo_Usuario::NORMAL_REG){       
             if (!Modelo_Usuario::modificarFechaLogin($usuario["id_usuario"],$usuario["tipo_usuario"])){            
               throw new Exception("Error en el sistema, por favor intente denuevo");
             }  

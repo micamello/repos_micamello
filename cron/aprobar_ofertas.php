@@ -1,36 +1,3 @@
-<?php 
-/*require_once '../constantes.php';
-require_once '../init.php';
-
-if(isset($_GET['id_oferta']) && isset($_GET['estado'])){  
-
-	$id_oferta = $_GET['id_oferta'];
-	//1 activar - 0 rechazar
-	$estado = $_GET['estado'];
-
-	$consultar_oferta = Modelo_Oferta::consultarInfoOfertaEmpresa($id_oferta);
-
-	if($estado == 1){
-		$email_subject = "Activación de oferta"; 
-		$email_body = Modelo_TemplateEmail::obtieneHTML("OFERTA_APROBADA");   
-		Modelo_Oferta::activarOferta($id_oferta);                
-	}else{
-		$email_subject = "Rechazo de oferta"; 
-		$email_body = Modelo_TemplateEmail::obtieneHTML("OFERTA_RECHAZADA"); 
-		Modelo_Oferta::desactivarOferta($id_oferta);   
-	}
-
-	$email_body = str_replace("%NOMBRES%", utf8_encode($consultar_oferta["empresa"]), $email_body);   
-	$email_body = str_replace("%NOMBRE_OFERTA%", utf8_encode($consultar_oferta["titulo"]), $email_body);  
-
-	Utils::envioCorreo($consultar_oferta["correo"],$email_subject,$email_body);
-	echo 'YA ENVIO EL CORREO '.$consultar_oferta["correo"];
-}else{
-	echo "ENVIAR POR PARAMETRO EL ID_OFERTA Y ESTADO";
-}*/
-?>
-
-
 <style type="text/css">
   .boton_personalizado{
     text-decoration: none;

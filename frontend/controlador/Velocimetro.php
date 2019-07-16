@@ -74,14 +74,14 @@ class Controlador_Velocimetro extends Controlador_Base {
         $reg_ultimo = array_shift($result_faceta);
         foreach($result_faceta as $rs){
 
-            if($rs["valor"] < 25){
+            if($rs["valor"] < 30){
               $str_grafico .= $rs["literal"].",".$rs["valor"]."|";
             }else{
               $str_grafico .= $rs["literal"].":".$rs["valor"].",".$rs["valor"]."|"; 
             }
         }
 
-        if($reg_ultimo["valor"] < 25){
+        if($reg_ultimo["valor"] < 30){
           $str_grafico .= $reg_ultimo["literal"].",".$reg_ultimo["valor"];   
         }else{
           $str_grafico .= $reg_ultimo["literal"].":".$reg_ultimo["valor"].",".$reg_ultimo["valor"];

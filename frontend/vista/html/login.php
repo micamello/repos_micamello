@@ -22,7 +22,7 @@
                   <label>Contrase&ntilde;a <span title="Este campo es obligatorio">*</span></label><div id="err_password" class="help-block with-errors"></div>
                   <div class="input-group">
                     <span class="input-group-addon show_hidden" onclick="pass_reveal(this);"><i class="fa fa-eye"></i></span>
-                    <input title="Letras y números, mínimo 8 caracteres" type="password" name="password1" id="password1" class="form-control <?php echo $noautofill; ?>" maxlength="15" minlength="8" onkeyup="validaForm(1,'btn_sesion')" <?php echo $readonly; ?>>
+                    <input title="Letras y números, mínimo 8 caracteres" type="password" name="password1" id="password1" class="form-control <?php echo $noautofill; ?>" maxlength="20" minlength="8" onkeyup="validaForm(1,'btn_sesion')" <?php echo $readonly; ?>>
                   </div>
                 </div>
               </div>

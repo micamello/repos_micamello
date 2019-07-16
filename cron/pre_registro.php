@@ -108,18 +108,20 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 			    
 		  	}
 
-		  	elseif($datosPreregistro['tipo_usuario'] == 1){
-		  			$tipodoc = 3;
+		  	// elseif($datosPreregistro['tipo_usuario'] == 1){
+		  	// 		$tipodoc = 3;
+		  	// 		if($datosPreregistro['tipo_doc'] != "" || $datosPreregistro['tipo_doc'] != null){
+		  	// 			$tipodoc = $datosPreregistro['tipo_doc'];
+		  	// 		}
+		  	// }
+		  	elseif(($longitudDoc >= 6 && $longitudDoc != 10 && $longitudDoc != 13) && $datosPreregistro['tipo_usuario'] == 1){
+		  		$tipodoc = 3;
 		  			if($datosPreregistro['tipo_doc'] != "" || $datosPreregistro['tipo_doc'] != null){
 		  				$tipodoc = $datosPreregistro['tipo_doc'];
 		  			}
 		  	}
-		  	elseif($longitudDoc <= 6 && $datosPreregistro['tipo_usuario'] == 1){
-
-		  		$conterror++;
-		  		throw new Exception("PASAPORTE INVALIDO ".$datosPreregistro["dni"]);
-		  	}
 		  	else{
+		  		$conterror++;
 		  		throw new Exception("<br>Documento ingresado no válido: -".$datosPreregistro["dni"]."-".$datosPreregistro["correo"]."- ".$datosPreregistro["nombres"]);
 		  		
 		  	}
