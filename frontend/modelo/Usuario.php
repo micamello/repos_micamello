@@ -1243,5 +1243,14 @@ WHERE
     if(empty($id_empresa)){return false;}
     return $GLOBALS['db']->update("mfo_empresa",array("estado"=>$estado),"id_empresa=".$id_empresa);
   }
+
+  public static function busquedaPorCorreoMasivo($correos){
+    if (empty($correos)){ return false; }    
+    $sql = "SELECT l.id_usuario_login, u.nombres, u.apellidos, l.username, l.correo 
+            FROM mfo_usuario u,mfo_usuario_login l 
+            WHERE l.tipo_usuario = 1 and u.id_usuario_login = l.id_usuario_login and l.correo IN(".$correos.")";          
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    return $rs;    
+  }
 }  
 ?>
