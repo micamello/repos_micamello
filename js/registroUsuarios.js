@@ -291,7 +291,7 @@ if($('#password_1').length){
 					}
 				}
 				else{
-					crearMensajeError($(this), "Mín. 8 caracteres, 1 letra, 1 número");
+					crearMensajeError($(this), "Mín. 8, Máx. 50 carac., 1 letra, 1 número");
 				}
 			}
 			else{
@@ -320,7 +320,7 @@ if($('#password_1').length){
 					}
 				}
 				else{
-					crearMensajeError($(this), "Mín. 8 caracteres, 1 letra, 1 número");
+					crearMensajeError($(this), "Mín. 8, Máx. 50 carac., 1 letra, 1 número");
 				}
 			}
 			else{
@@ -649,7 +649,7 @@ if(tipousuario == 1){
 				}
 			}
 			else{
-				crearMensajeError($('#password_1'), "Mín. 8 caracteres, 1 letra, 1 número");
+				crearMensajeError($('#password_1'), "Mín. 8, Máx. 50 carac., 1 letra, 1 número");
 			}
 		}
 		else{
@@ -675,7 +675,7 @@ if(tipousuario == 1){
 				}
 			}
 			else{
-				crearMensajeError($('#password_2'), "Mín. 8 caracteres, 1 letra, 1 número");
+				crearMensajeError($('#password_2'), "Mín. 8, Máx. 50 carac., 1 letra, 1 número");
 			}
 		}
 		else{
@@ -1126,7 +1126,7 @@ function validarNombreEmpresa(nombre){
 }
 
 function validarPassword(password){
-	return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+	return /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,50}$/.test(password);
 }
 
 function passwordCoinciden(obj1, obj2){

@@ -1,0 +1,116 @@
+[2019/07/15 01:11:43] SQL Query: SELECT id,nombres,apellidos,correo,tipo_doc,dni,telefono,fecha,tipo_usuario,fecha_nacimiento, id_genero, id_sectorindustrial, term_cond FROM mfo_preregistro where id = '6' limit 1
+[2019/07/15 01:11:44] SQL Query: select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = 39 limit 1;
+[2019/07/15 01:11:44] SQL Trans: START TRANSACTION
+[2019/07/15 01:11:44] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '333'
+[2019/07/15 01:11:44] SQL Trans: ROLLBACK
+[2019/07/15 01:13:11] SQL Query: SELECT id,nombres,apellidos,correo,tipo_doc,dni,telefono,fecha,tipo_usuario,fecha_nacimiento, id_genero, id_sectorindustrial, term_cond FROM mfo_preregistro where id = '6' limit 1
+[2019/07/15 01:13:11] SQL Query: select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = 39 limit 1;
+[2019/07/15 01:13:11] SQL Trans: START TRANSACTION
+[2019/07/15 01:13:11] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '333'
+[2019/07/15 01:13:11] SQL Query: SELECT * FROM mfo_usuario_login WHERE correo = 'sds@dff.com'
+[2019/07/15 01:13:11] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'dsdsdsdsdsd'
+[2019/07/15 01:13:11] SQL execute: INSERT INTO mfo_usuario_login (tipo_usuario,username,password,correo,dni,tipo_registro) VALUES ('1','dsdsdsdsdsd','61b87df3e2e6a36cac1040684306d87d','sds@dff.com','333','1')
+[2019/07/15 01:13:11] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/07/15 01:13:11] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/07/15 01:13:11] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/07/15 01:13:11] SQL execute: INSERT INTO mfo_usuario (telefono,nombres,apellidos,fecha_nacimiento,fecha_creacion,estado,term_cond,id_ciudad,id_nacionalidad,tipo_doc,id_escolaridad,id_genero,id_estadocivil,id_situacionlaboral,id_usuario_login) VALUES ('34434','dsdsd','sdsdsd','2001-04-15','2019-07-15 13:13:11','0','1','1','39','3','1','1','1','1','54')
+[2019/07/15 01:13:11] SQL execute: DELETE FROM mfo_preregistro WHERE id = 6
+[2019/07/15 01:13:11] SQL Trans: COMMIT
+[2019/07/15 01:13:11] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACTIVACION_USUARIO' LIMIT 1
+[2019/07/15 01:29:21] SQL Query: SELECT id,nombres,apellidos,correo,tipo_doc,dni,telefono,fecha,tipo_usuario,fecha_nacimiento, id_genero, id_sectorindustrial, term_cond FROM mfo_preregistro where id = '6' limit 1
+[2019/07/15 01:29:21] SQL Query: select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = 39 limit 1;
+[2019/07/15 01:29:21] SQL Trans: START TRANSACTION
+[2019/07/15 01:29:21] SQL Trans: ROLLBACK
+[2019/07/15 01:31:04] SQL Query: SELECT id,nombres,apellidos,correo,tipo_doc,dni,telefono,fecha,tipo_usuario,fecha_nacimiento, id_genero, id_sectorindustrial, term_cond FROM mfo_preregistro where id = '62' limit 1
+[2019/07/15 01:31:04] SQL Query: select ciu.id_ciudad id_ciudad from mfo_provincia pro, mfo_ciudad ciu where ciu.id_provincia = pro.id_provincia and pro.id_pais = 39 limit 1;
+[2019/07/15 01:31:04] SQL Trans: START TRANSACTION
+[2019/07/15 01:31:04] SQL Query: SELECT * FROM mfo_usuario_login WHERE dni = '1726264490'
+[2019/07/15 01:31:04] SQL Query: SELECT * FROM mfo_usuario_login WHERE correo = 'gabytorres.22@hotmail.com'
+[2019/07/15 01:31:04] SQL Query: SELECT IFNULL(u.id_usuario,e.id_empresa) AS id_usuario, IFNULL(u.nombres,e.nombres) AS nombres, 
+                   u.apellidos, l.username, l.correo, u.telefono, l.dni, l.tipo_usuario, u.grafico
+            FROM mfo_usuario_login l
+            LEFT JOIN mfo_usuario u ON u.id_usuario_login = l.id_usuario_login
+            LEFT JOIN mfo_empresa e ON e.id_usuario_login = l.id_usuario_login
+            WHERE l.username = 'mara�atorres'
+[2019/07/15 01:31:04] SQL execute: INSERT INTO mfo_usuario_login (tipo_usuario,username,password,correo,dni,tipo_registro) VALUES ('1','mara?atorres','7db7192c9237a52100204f856506756e','gabytorres.22@hotmail.com','1726264490','1')
+[2019/07/15 01:31:04] SQL Query: SELECT * FROM mfo_escolaridad
+[2019/07/15 01:31:04] SQL Query: SELECT * FROM mfo_estadocivil
+[2019/07/15 01:31:04] SQL Query: SELECT * FROM mfo_situacionlaboral
+[2019/07/15 01:31:04] SQL execute: INSERT INTO mfo_usuario (telefono,nombres,apellidos,fecha_nacimiento,fecha_creacion,estado,term_cond,id_ciudad,id_nacionalidad,tipo_doc,id_escolaridad,id_genero,id_estadocivil,id_situacionlaboral,id_usuario_login) VALUES ('0999820246','MarÃ­a Gabriela ','Torres Villa','2001-04-15','2019-07-15 13:31:04','0','1','1','39','2','1','1','1','1','105')
+[2019/07/15 01:31:04] SQL execute: DELETE FROM mfo_preregistro WHERE id = 62
+[2019/07/15 01:31:04] SQL Trans: COMMIT
+[2019/07/15 01:31:05] SQL Query: SELECT * FROM mfo_templateemail where nombre = 'ACTIVACION_USUARIO' LIMIT 1
+[2019/07/15 05:33:48] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/15 05:33:48] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/15 05:33:49] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/15 05:33:51] SQL Query: SELECT * FROM mfo_genero
+[2019/07/15 05:33:51] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/15 05:33:51] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/15 05:34:22] SQL Query: SELECT * FROM mfo_genero
+[2019/07/15 05:34:22] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/15 05:34:22] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:23:42] SQL Query: SELECT * FROM mfo_area ORDER BY nombre
+[2019/07/16 08:23:42] SQL Query: SELECT * FROM mfo_auspiciante where estado = 1 ORDER BY orden
+[2019/07/16 08:23:43] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:23:45] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:23:45] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:23:45] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:26] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:26] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:44] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:44] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:45] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:45] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:45] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:24:45] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:24:45] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:24:45] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:25:33] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:25:33] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:25:33] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:25:33] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:25:33] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:25:33] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:28:07] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:28:07] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:28:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:28:07] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:28:07] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:28:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:28:07] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:28:07] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:28:07] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:28:17] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:28:17] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:28:17] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;
+[2019/07/16 08:28:18] SQL Query: SELECT * FROM mfo_genero
+[2019/07/16 08:28:18] SQL Query: SELECT * FROM mfo_sectorindustrial
+[2019/07/16 08:28:18] SQL Query: SELECT s.id_sucursal, s.extensionicono, p.nombre_abr, s.dominio FROM mfo_sucursal s, mfo_pais p WHERE s.id_pais = p.id_pais AND s.estado = 1;

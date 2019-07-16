@@ -35,7 +35,7 @@ if ($resultado){
 else{
   Utils::crearArchivo(CRON_RUTA,'procesando_preregistro.txt','');
 }
-$usuarios = Modelo_PreRegistro::preregistrados();
+$usuarios = Modelo_PreRegistro::preregistradosExcepciones(62);
 // print_r($usuarios);
 // exit();
 $tipodoc = "";
@@ -77,7 +77,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 
 		  				$email_body = Modelo_TemplateEmail::obtieneHTML("VALIDAR_CORREO");
 		  				$email_body = str_replace("%NOMBRES%", $datosPreregistro['nombres'], $email_body);
-		  				Utils::envioCorreo($datosPreregistro["correo"],"Validar correo",$email_body);
+		  				// Utils::envioCorreo($datosPreregistro["correo"],"Validar correo",$email_body);
 		  				throw new Exception("NO SE REGISTRO validar correo: ".$datosPreregistro["dni"]);
 		  			}
 		  		}
@@ -97,7 +97,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 							    $email_body = str_replace("%ENLACE%", "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='https://www.micamello.com.ec/'>Click aqu&iacute;</a>", $email_body);   
 							    $email_body = str_replace("%ENLACE2%", "info@micamello.com.ec", $email_body);
 							    // aqui va el correo de que envie el ruc y nombramiento
-					        	Utils::envioCorreo($datosPreregistro["correo"],"Ruc rechazado",$email_body);
+					        	// Utils::envioCorreo($datosPreregistro["correo"],"Ruc rechazado",$email_body);
 			    				throw new Exception("RUC INVALIDO ".$datosPreregistro["dni"]);
 					        }
 					    }
@@ -108,21 +108,27 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 			    
 		  	}
 
-		  	elseif($datosPreregistro['tipo_usuario'] == 1){
-		  			$tipodoc = 3;
+		  	
+		  	elseif(($longitudDoc >= 6 && $longitudDoc != 10 && $longitudDoc != 13) && $datosPreregistro['tipo_usuario'] == 1){
+
+		  		$tipodoc = 3;
 		  			if($datosPreregistro['tipo_doc'] != "" || $datosPreregistro['tipo_doc'] != null){
 		  				$tipodoc = $datosPreregistro['tipo_doc'];
 		  			}
+		  		// throw new Exception("PASAPORTE INVALIDO ".$datosPreregistro["dni"]);
 		  	}
-		  	elseif($longitudDoc <= 6 && $datosPreregistro['tipo_usuario'] == 1){
-
-		  		$conterror++;
-		  		throw new Exception("PASAPORTE INVALIDO ".$datosPreregistro["dni"]);
-		  	}
-		  	else{
-		  		throw new Exception("<br>Documento ingresado no válido: -".$datosPreregistro["dni"]."-".$datosPreregistro["correo"]."- ".$datosPreregistro["nombres"]);
+		  	else
+		  		if($longitudDoc < 6){
+		  			$conterror++;
+		  			throw new Exception("<br>Documento ingresado no válido: -".$datosPreregistro["dni"]."-".$datosPreregistro["correo"]."- ".$datosPreregistro["nombres"]);
 		  		
 		  	}
+		  	// elseif($datosPreregistro['tipo_usuario'] == 1){
+		  	// 		$tipodoc = 3;
+		  	// 		if($datosPreregistro['tipo_doc'] != "" || $datosPreregistro['tipo_doc'] != null){
+		  	// 			$tipodoc = $datosPreregistro['tipo_doc'];
+		  	// 		}
+		  	// }
 // Comprobar si es válido el correo
 
 			if(!Utils::es_correo_valido($datosPreregistro['correo'])){
@@ -272,7 +278,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 		   	$email_body = str_replace("%PASSWORD%", $password, $email_body);   
 		   	$email_body = str_replace("%ENLACE%", $enlace, $email_body);   
 
-		   	Utils::envioCorreo($datosPreregistro["correo"],"Activación de Usuario",$email_body);         
+		   	// Utils::envioCorreo("administrador.gye@micamello.com.ec","Activación de Usuario",$email_body);         
 		   	
 
 		   	echo utf8_encode($datosPreregistro['nombres'])." ".utf8_encode($datosPreregistro['apellidos'])."/".$username."<br>";
@@ -282,7 +288,7 @@ print_r("FECHA DE INICIO: ". date('Y-m-d h:i:s')."<br><br>");
 
 	  	  echo $datosPreregistro['id']."Error en usuario ".$datosPreregistro['nombres']." ".$datosPreregistro['nombres']." - ".$e->getMessage()."<br>";  	  
 
-			  Utils::envioCorreo('administrador.gye@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
+			  // Utils::envioCorreo('administrador.gye@micamello.com.ec','Error Cron PreRegistro',$e->getMessage());      
 	    }
 	    $i++;         
 
