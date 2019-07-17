@@ -11,6 +11,7 @@ class Modelo_Usuario{
   const PRE_REG = 1; 
   const REDSOCIAL_REG = 3; 
   const NORMAL_REG = 2; 
+  const REG_EMP = 4; 
   public static function obtieneNroUsuarios($pais,$tipo=self::CANDIDATO){
     if (empty($pais)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -37,7 +38,7 @@ class Modelo_Usuario{
     return true;
   }
   public static function autenticacion($username){
-    //$password = md5($password);         
+         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, password
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?) ";
@@ -919,13 +920,13 @@ WHERE
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
           
-      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
+      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] != self::NORMAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
 
-      if (empty($infohv)){        
+      if (empty($infohv) || !isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){        
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-      }   
+      }    
       
       $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);

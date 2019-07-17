@@ -555,12 +555,12 @@
 											</div>
 
 											<div class="col-md-12 col-sm-12 col-lg-6">
-												<div class="form-group">
+												<div class="form-group" id="seccion_subarea">
 													<label style="font-size: 13px;">Sub-Áreas <span title="Este campo es obligatorio" class="requerido">*</span></label>
 													<div class="hidden-xs hidden-sm">
 														<div style="padding-top: 17px;"></div>
 													</div>
-													<div class="help-block with-errors"></div>
+													<div id="err_subarea" class="help-block with-errors"></div>
 													<select class="form-control" id="subareas" name="subareas[]" multiple="multiple" onchange="validarFormulario(false);">
 													  <?php 													  
 													    if(!empty($areas) && is_array($areas)){

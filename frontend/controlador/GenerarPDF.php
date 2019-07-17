@@ -311,7 +311,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '
       <blockquote>Tu talento es nuestra oportunidad.</blockquote>';
       if($tipo_informe == 'parcial'){
-        $informe .= '<p>El presente informe parcial le da la oportunidad de que conozca &uacute;nicamente dos importantes facetas de su personalidad y ocho importantes competencias en su lugar de trabajo. <br></p>
+        $informe .= '<p>El presente informe parcial le da la oportunidad de que conozca &uacute;nicamente una importante faceta de su personalidad y ocho importantes competencias en su lugar de trabajo. <br></p>
         <p><b>CANEA</b> tiene mucho m&aacute;s que ofrecerle acerca de sus destrezas, habilidades y comportamientos. An&iacute;mese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
         </p>
         <blockquote>
