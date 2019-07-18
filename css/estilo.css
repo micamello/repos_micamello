@@ -1231,7 +1231,7 @@ padding-top: 10px;
 .menu{
     /*color:white;*/
     /*position: sticky !important;*/
-    position: sticky;
+    /*position: sticky;*/
     /*padding-bottom: 10px;*/
     /*top: 30px;*/
 }
@@ -3041,3 +3041,18 @@ div.navbar{position: relative;z-index: 1;}
     .addressContent .media-left{display:inline-block;margin:0 10px 0 0;float:left;}}@media (min-width: 768px) {.addressContent .media-left{display:block;margin:0 0 10px 0;float:none;}}@media (min-width: 992px) {.addressContent .media-left{display:inline-block;margin:0 10px 0 0;float:left;}}.addressContent .media-body .media-heading{font-weight:700;text-transform:capitalize;margin-bottom:16px;color:#202020;}
 .addressContent .media-body p{font-weight:600;}.addressContent .media-body p a{color:#666666;}.areaPadding{padding:90px 0 100px 0;}.homeContactContent .formBtnArea{text-align:center;}@media (min-width: 320px) {.homeContactContent .formBtnArea .btn-primary{float:left;display:block;}}@media (min-width: 768px) {.homeContactContent .formBtnArea .btn-primary{float:none;display:inline-block;}}
 /*estilos ppoliticas y documentos*/
+
+.resumen{
+    padding-left: 10px;
+}
+
+.nrovirado{
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    display: inline-block;
+    color: #ec3131;    
+    font-size: 18px;
+}

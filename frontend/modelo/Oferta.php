@@ -6,6 +6,7 @@ class Modelo_Oferta{
   const INACTIVA = 0;
   const PORAPROBAR = 2;
   const PORELIMINAR = 3;
+  const SOLOVER = 4;
   
   public static function obtieneNumero($pais){
     if (empty($pais)){ return false; }
@@ -61,6 +62,8 @@ class Modelo_Oferta{
     AND p.id_pais = ".$pais_empresa;
     if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
       $sql .= " AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
+    }else if(!empty($vista) && $vista == 'postulacion'){
+      $sql .= " AND (o.estado <> 2) ";
     }else{
       $sql .= " AND o.estado = 1 ";
     }
@@ -131,7 +134,7 @@ class Modelo_Oferta{
         $sql .= " ORDER BY orden_urgente DESC,o.fecha_creado DESC";
       }
     }
-    //echo $sql;
+    //echo $sql; exit;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -218,7 +221,7 @@ class Modelo_Oferta{
       $sql .= " AND (emp.nombres LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.titulo LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.descripcion LIKE '%".htmlentities($pclave,ENT_QUOTES,'UTF-8')."%' OR o.fecha_contratacion LIKE '%".$pclave."%')";
     }
     if(!empty($vista) && ($vista == 'postulacion')){
-      $sql .= " AND o.estado = 1 AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
+      $sql .= " AND (o.estado <> 2) AND o.estado = 1 AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
     }else if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
       $sql .= " AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
     }else{
@@ -441,7 +444,7 @@ class Modelo_Oferta{
 
   public static function obtenerPlanOferta($id_ofertas=false){
 
-    $sql = 'SELECT p.limite_perfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,
+    $sql = 'SELECT ep.num_limiteperfiles, p.id_plan, p.nombre AS nombre_plan, p.costo, ep.id_empresa_plan, ep.num_accesos_rest,
     o.id_ofertas, ep.fecha_caducidad FROM mfo_oferta o
           INNER JOIN mfo_empresa_plan ep ON ep.id_empresa_plan = o.id_empresa_plan
           INNER JOIN mfo_plan p ON p.id_plan = ep.id_plan';

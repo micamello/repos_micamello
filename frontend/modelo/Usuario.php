@@ -11,6 +11,7 @@ class Modelo_Usuario{
   const PRE_REG = 1; 
   const REDSOCIAL_REG = 3; 
   const NORMAL_REG = 2; 
+  const REG_EMP = 4; 
   public static function obtieneNroUsuarios($pais,$tipo=self::CANDIDATO){
     if (empty($pais)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -37,10 +38,10 @@ class Modelo_Usuario{
     return true;
   }
   public static function autenticacion($username){
-    //$password = md5($password);         
+         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, password
             FROM mfo_usuario_login 
-            WHERE (username = ? OR correo = ?) ";
+            WHERE (username = ? OR correo = ?)";
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
@@ -69,11 +70,11 @@ class Modelo_Usuario{
   }
   public static function busquedaPorCorreo($correo){
     if (empty($correo)){ return false; }    
-    $sql = "SELECT id_usuario_login, tipo_usuario, correo FROM mfo_usuario_login WHERE correo = ? LIMIT 1";          
+    $sql = "SELECT * FROM mfo_usuario_login WHERE correo = ? LIMIT 1";          
     $rs = $GLOBALS['db']->auto_array($sql,array($correo));
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
-      $sql = "SELECT id_usuario, nombres, apellidos FROM mfo_usuario WHERE id_usuario_login = ?";
+      $sql = "SELECT * FROM mfo_usuario WHERE id_usuario_login = ?";
     }
     else{
       $sql = "SELECT id_empresa AS id_usuario, nombres FROM mfo_empresa WHERE id_usuario_login = ?";      
@@ -281,6 +282,8 @@ WHERE
         $datos['id_univ'] = 'null';
         $datos['nombre_univ'] = ' ';
       }
+
+      print_r($datos);
       return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
     }else{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"id_nacionalidad"=>$data['id_nacionalidad'],"id_sectorindustrial"=>$data['sectorind'],"nro_trabajadores"=>$data['nro_trabajadores'],"pagina_web" => $_POST['pagina_web']);
@@ -337,7 +340,7 @@ WHERE
           AND c.id_provincia = pro.id_provincia
           AND c.id_ciudad = t2.id_ciudad
           AND t1.id_usuario = t2.id_usuario
-          ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC ";   
+          ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC, t2.id_usuario ASC ";   
     if($obtCantdRegistros === false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
@@ -623,7 +626,7 @@ WHERE
         if(!empty($filtros['R']) && $filtros['R'] != ''){
           $sql .= " ORDER BY ranqueo DESC";
         }else{
-          $sql .= " ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC";
+          $sql .= " ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC, t2.id_usuario ASC ";
         }
       }
       $page = ($page - 1) * REGISTRO_PAGINA;
@@ -919,13 +922,13 @@ WHERE
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
           
-      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
+      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] != self::NORMAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
 
-      if (empty($infohv)){        
+      if (empty($infohv) || !isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){        
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-      }   
+      }    
       
       $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
@@ -1252,5 +1255,6 @@ WHERE
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;    
   }
+
 }  
 ?>

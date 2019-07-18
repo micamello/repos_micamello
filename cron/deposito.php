@@ -32,7 +32,7 @@ try{
   	$nombresusuario .= " " .Utils::no_carac($infousuario["apellidos"]);
   }          
 	//facturacion electronica
-	/*$obj_facturacion = new Proceso_Facturacion();
+	$obj_facturacion = new Proceso_Facturacion();
 	$obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
 	$obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
 	$obj_facturacion->direccionComprador = $datos_comprobante["nombre"];
@@ -55,7 +55,7 @@ try{
 	  if (!Modelo_Parametro::actualizarNroFactura()){
 	    throw new Exception("Error al generar el siguiente numero de factura");  
 	  } 
-	}*/         
+	}         
 	$GLOBALS['db']->commit();
 
 	$nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".ucfirst((isset($infousuario["apellidos"])) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");

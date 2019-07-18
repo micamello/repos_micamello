@@ -145,7 +145,7 @@
                 <div class="col-md-12">
                   <img class="publicidad img-responsive" src="<?php echo PUERTO."://".HOST;?>/imagenes/anuncio.gif">
                   <br>
-                  <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+                  <?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO && $o['estado'] == Modelo_Oferta::ACTIVA){ ?>
                     <form role="form" name="form_postulacion" id="form_postulacion" method="post" action="<?php echo PUERTO."://".HOST;?>/detalleOferta/<?php echo $vista.'/'.Utils::encriptar($o['id_ofertas']); ?>/">
                     <input type="hidden" name="postulado" id="postulado" value="1">
                     <input type="hidden" name="opcion" id="opcion" value="">

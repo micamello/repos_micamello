@@ -17,7 +17,9 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
   <div class="text-center">
     <h2 class="titulo">
     <?php if($vista == 1){ ?>
-		Aspirantes Postulados <?php if(isset($nombre_empresa)){ echo ' - '.$nombre_empresa; } ?>
+		Aspirantes Postulados <?php if(isset($nombre_empresa)){ echo ' - '.$nombre_empresa; }else{
+			echo ' - '.utf8_encode($datosOfertas['titulo']);
+		} ?>
 	<?php }else{ ?>
 		Candidatos Registrados 
 	<?php }?>	

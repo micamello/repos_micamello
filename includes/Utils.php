@@ -55,6 +55,10 @@ class Utils{
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->CharSet = 'UTF-8';
+    $mail->Port = PUERTO_SMTP; 
+    $mail->Host = SERVER_SMTP; 
+    $mail->Username = ID_SMTP;
+    $mail->Password = CLAVE_SMTP;     
     $mail->Port = "587"; 
     $mail->Host = "smtp-relay.sendinblue.com"; 
     $mail->Username = "ffueltala@gmail.com"; 
@@ -891,6 +895,8 @@ public static function validarCelularConvencional($contenido){
     }
     return $cadena;
   }
+
+
 
 }
 ?>

@@ -22,9 +22,11 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 	$id_oferta = $_GET['id_oferta'];
 	$consultar_oferta = Modelo_Oferta::consultarInfoOfertaEmpresa($id_oferta);
 
+	echo '<b>Empresa:</b> '.$consultar_oferta["empresa"].'<br>';
 	echo '<b>Título:</b> '.$consultar_oferta["titulo"].'<br>';
 	echo '<b>Estado:</b> '.(($consultar_oferta["estado"]==1)?'Activa<br>':'Rechazada o Inactiva<br>');
 	echo '<b>Descripción:</b> '.$consultar_oferta["descripcion"].'<br><br>';
+
 	echo '<a class="boton_personalizado" href="'.$dominio.'/cron/aprobar_ofertas.php?id_oferta='.$id_oferta.'&estado=0">Rechazar</a>';
 	echo '<a class="boton_personalizado" href="'.$dominio.'/cron/aprobar_ofertas.php?id_oferta='.$id_oferta.'&estado=1">Aprobar</a>';
 
@@ -55,6 +57,4 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 }else{
 	echo "ENVIAR POR PARAMETRO EL ID_OFERTA";
 }
-
-
 ?>
