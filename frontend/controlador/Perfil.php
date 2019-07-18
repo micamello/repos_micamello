@@ -138,14 +138,14 @@ class Controlador_Perfil extends Controlador_Base
                         $reg_ultimo = array_shift($result_faceta);
                         foreach($result_faceta as $rs){
 
-                            if($rs["valor"] < 25){
+                            if($rs["valor"] < 30){
                                 $str_grafico .= $rs["literal"].",".$rs["valor"]."|";
                             }else{
                                $str_grafico .= $rs["literal"].":".$rs["valor"].",".$rs["valor"]."|"; 
                             }
                         }
 
-                        if($reg_ultimo["valor"] < 25){
+                        if($reg_ultimo["valor"] < 30){
                             $str_grafico .= $reg_ultimo["literal"].",".$reg_ultimo["valor"];   
                         }else{
                             $str_grafico .= $reg_ultimo["literal"].":".$reg_ultimo["valor"].",".$reg_ultimo["valor"];
@@ -212,7 +212,7 @@ class Controlador_Perfil extends Controlador_Base
 
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
 
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'estado_civil' => 1,'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1, 'convencional' => 0);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'estado_civil' => 1,'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area' => 1, 'subareas' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1, 'convencional' => 0);
 
                 if (isset($_POST['dni'])){
                   $campos['dni'] = 1;
@@ -233,11 +233,12 @@ class Controlador_Perfil extends Controlador_Base
             }
             
             $array_subareas_seleccionadas = array();
-            if(isset($_POST['subareas']) && count($_POST['subareas']) > 0 && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
+
+            if(isset($data['subareas']) && count($data['subareas']) > 0 && count($data['area']) >= 1 && count($data['area']) <= 3){
 
                 $areas_subareas = array();
                 
-                foreach ($_POST['subareas'] as $i => $datos_select_area) {
+                foreach ($data['subareas'] as $i => $datos_select_area) {
                     
                     $valor = explode("_", $datos_select_area);
 
@@ -382,7 +383,7 @@ class Controlador_Perfil extends Controlador_Base
                     $iso = SUCURSAL_ISO;
                     if (method_exists(new Utils, 'validar_'.$iso)){
                         $function = 'validar_'.$iso;
-                        if(!Utils::$function($data['dni'], 2, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
+                        if(!Utils::$function($data['dni'], 1, $_SESSION['mfo_datos']['usuario']['tipo_doc'])){
                           throw new Exception("C\u00E9dula o pasaporte no v\u00E1lido.");
                         }
                       }           
@@ -491,7 +492,7 @@ class Controlador_Perfil extends Controlador_Base
                     }*/
                 }   
 
-                if(is_array($array_subareas_seleccionadas) && count($array_subareas_seleccionadas)>0){
+                if(is_array($array_subareas_seleccionadas) && count($array_subareas_seleccionadas) > 0){
 
                     if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
                         throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente"); 

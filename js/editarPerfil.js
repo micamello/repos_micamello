@@ -797,7 +797,7 @@ function validarFormulario(tipovalidacion){
             if (tipovalidacion == true){
               if(document.getElementById('dni').value.length >= 10){
                 if(searchAjax($('#dni'),tipo_doc) == false){
-                  if(DniRuc_Validador($('#dni'),tipo_doc, 2) == true){
+                  if(DniRuc_Validador($('#dni'),tipo_doc, 1) == true){
                     quitarError("err_dni","seccion_dni");
                   }else{
                     colocaError("err_dni", "seccion_dni","Documento no válido","boton");
@@ -952,7 +952,7 @@ function validarFormulario(tipovalidacion){
             quitarError("err_area", "seccion_area");
         }
 
-        /*if(subarea_select.value == null || subarea_select.value == 0){
+        if(subarea_select.value == null || subarea_select.value == 0){
 
             colocaError("err_subarea", "seccion_subarea",err_list,"boton");
             mensaje += '- Subareas, '+err_list+'<br>';
@@ -960,7 +960,8 @@ function validarFormulario(tipovalidacion){
         }else{
 
             quitarError("err_subarea", "seccion_subarea");
-        }*/
+
+        }
 
         if((select_array_idioma.length) == 0 || (select_array_idioma.length) == -1){
 

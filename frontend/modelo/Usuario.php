@@ -38,7 +38,7 @@ class Modelo_Usuario{
     return true;
   }
   public static function autenticacion($username){
-    //$password = md5($password);         
+         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, password
             FROM mfo_usuario_login 
             WHERE (username = ? OR correo = ?)";
@@ -926,9 +926,9 @@ WHERE
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
 
-      if ((isset($_SESSION['mfo_datos']['usuario']['infohv']) && empty($infohv)) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){        
+      if (empty($infohv) || !isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){        
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
-      }   
+      }    
       
       $nrotest = Modelo_Cuestionario::totalTest();             
       $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($idusuario);
@@ -1249,9 +1249,10 @@ WHERE
 
   public static function busquedaPorCorreoMasivo($correos){
     if (empty($correos)){ return false; }    
-    $sql = "SELECT * FROM mfo_usuario u,mfo_usuario_login l WHERE l.tipo_usuario = 1 and u.id_usuario_login = l.id_usuario_login and l.correo IN(".$correos.")";          
+    $sql = "SELECT l.id_usuario_login, u.nombres, u.apellidos, l.username, l.correo 
+            FROM mfo_usuario u,mfo_usuario_login l 
+            WHERE l.tipo_usuario = 1 and u.id_usuario_login = l.id_usuario_login and l.correo IN(".$correos.")";          
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
-
     return $rs;    
   }
 
