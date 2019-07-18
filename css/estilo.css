@@ -3044,3 +3044,14 @@ ul.letterLiDat > li:before{content: counter(list, lower-alpha) ") "; counter-inc
 .resumen{
     padding-left: 10px;
 }
+
+.nrovirado{
+    -webkit-transform: rotate(-15deg);
+    -moz-transform: rotate(-15deg);
+    -o-transform: rotate(-15deg);
+    transform: rotate(-15deg);
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+    display: inline-block;
+    color: #ec3131;    
+    font-size: 18px;
+}

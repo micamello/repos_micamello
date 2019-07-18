@@ -11,7 +11,8 @@ class Modelo_Plan{
   public static function busquedaPlanes($tipousuario,$sucursal,$costo=false,$tipoplan=false,$nivel=false){
   	if (empty($tipousuario)||empty($sucursal)){ return false; }
     $sql = "SELECT p.id_plan, p.nombre, p.promocional, p.num_cuenta, p.num_accesos, p.limite_perfiles,
-                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga,                    
+                   p.prom_costo, p.prom_duracion, p.num_post, p.costo, p.duracion, p.porc_descarga, 
+                   p.prom_limiteperfiles,                   
                    GROUP_CONCAT(a.descripcion ORDER BY e.orden) AS permisos,
                    GROUP_CONCAT(a.accion ORDER BY e.orden) AS acciones
             FROM mfo_plan p
@@ -82,7 +83,7 @@ class Modelo_Plan{
     if (empty($plan) || empty($tipo) || empty($sucursal)){ return false; }
     $sql = "SELECT id_plan, nombre, tipo_usuario, tipo_plan, num_cuenta, prom_costo, 
                    prom_duracion, num_accesos, promocional, costo, num_post,                                      
-                   duracion, porc_descarga                   
+                   duracion, porc_descarga, limite_perfiles, prom_limiteperfiles                   
             FROM mfo_plan 
             WHERE estado = 1 AND id_plan = ? AND tipo_usuario = ? AND id_sucursal = ? AND visibilidad = 1";
     return $GLOBALS['db']->auto_array($sql,array($plan,$tipo,$sucursal));    

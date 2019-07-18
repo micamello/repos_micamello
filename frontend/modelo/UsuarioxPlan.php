@@ -12,8 +12,8 @@ class Modelo_UsuarioxPlan{
     return $GLOBALS['db']->auto_array($sql,array($usuario),true);
   }
 
-  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion,$porcdesc=0,$idcomprobante='',
-                                     $fechacreacion=false,$fechacaducidad=false,$idEmpresaPlanParent=false,$numaccesos=0){
+  public static function guardarPlan($usuario,$tipousuario,$plan,$numpost,$duracion,$porcdesc=0,$idcomprobante='',$fechacreacion=false,
+                                     $fechacaducidad=false,$idEmpresaPlanParent=false,$numaccesos=0,$limiteperfiles=false){
 	  if (empty($usuario) || empty($plan)){ return false; }
 	  $values_insert = array();
 	  $fechacreacion = (empty($fechacreacion)) ? date('Y-m-d H:i:s') : $fechacreacion;    
@@ -43,6 +43,9 @@ class Modelo_UsuarioxPlan{
       $values_insert["num_accesos_rest"] = $numaccesos;
       if ($idEmpresaPlanParent != false){
         $values_insert["id_empresa_plan_parent"] = $idEmpresaPlanParent;
+      }
+      if (!empty($limiteperfiles)){
+        $values_insert["num_limiteperfiles"] = $limiteperfiles;
       }
     }
     $tabla = ($tipousuario == Modelo_Usuario::CANDIDATO) ? "mfo_usuario_plan" : "mfo_empresa_plan";
