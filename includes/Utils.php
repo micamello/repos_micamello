@@ -50,35 +50,32 @@ class Utils{
     return $result;
   }
 
-  public static function envioCorreoSendinBlue($to, $subject, $body, $attachments=array()){    
-    $mail = new PHPMailer();
-    $mail->IsSMTP();
-    $mail->SMTPAuth = true;
-    $mail->CharSet = 'UTF-8';
-    $mail->Port = PUERTO_SMTP; 
-    $mail->Host = SERVER_SMTP; 
-    $mail->Username = ID_SMTP;
-    $mail->Password = CLAVE_SMTP;     
-    $mail->Port = "587"; 
-    $mail->Host = "smtp-relay.sendinblue.com"; 
-    $mail->Username = "ffueltala@gmail.com"; 
-    $mail->Password = "cz0Ls8tI34AZ2aUJ";     
-    $mail->From = "info@micamello.com.ec"; 
-    $mail->FromName = "Mi Camello";         
-    //$mail->SMTPAutoTLS = false;    
-    $mail->AddAddress($to); 
-    $mail->IsHTML(true); 
-    $mail->Subject = $subject; 
-    $mail->Body = $body; 
-    if (!empty($attachments) && is_array($attachments)){
-      foreach($attachments as $attachment){
-        if (file_exists($attachment["ruta"])){
-          $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
+
+  public static function envioCorreoSendinBlue($to, $subject, $body, $attachments=array()){
+    $adjuntos = array();
+      if (!empty($attachments) && is_array($attachments)){
+        foreach($attachments as $attachment){
+          if (file_exists($attachment["ruta"])){
+            $adjuntos = array($attachment["ruta"], $attachment["archivo"]);
+          }
         }
       }
-    }      
-    return $mail->send();    
-  }
+      $mail = new Mailin("https://api.sendinblue.com/v2.0","cz0Ls8tI34AZ2aUJ");
+      $data = array( "to" => array($to=>$to),
+          "from" => array(MAIL_CORREO, "Mi Camello"),
+          "subject" => $subject,
+          "html" => $body,
+          "attachment" => $adjuntos
+      );
+
+      $envio = $mail->send_email($data);
+      $idMensaje = $envio['data']['message-id'];
+      // var_dump($envio);
+      if($envio['code'] == 'success'){
+        return true;
+      }
+      return false;
+    }
 
   public static function envioCorreo($to, $subject, $body, $attachments=array()){    
     $mail = new PHPMailer();
@@ -486,6 +483,7 @@ public static function validarCelularConvencional($contenido){
     $cadena = str_replace(utf8_decode('Æ'), 'AE', $cadena);
     $cadena = str_replace(utf8_decode('Ç'), 'C', $cadena);
     $cadena = str_replace(utf8_decode('È'), 'E', $cadena);
+    $cadena = str_replace(utf8_decode('É'), 'E', $cadena);
     $cadena = str_replace(utf8_decode('Ê'), 'E', $cadena);
     $cadena = str_replace(utf8_decode('Ë'), 'E', $cadena);
     $cadena = str_replace(utf8_decode('Ì'), 'I', $cadena);

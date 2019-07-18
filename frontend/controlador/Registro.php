@@ -321,6 +321,9 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function registroRedSocial($correo,$nombre,$apellido){
+    if(empty($correo)){
+      throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direccion de correo o registrese llenando el formulario.");
+    }
     $url = "";
     $correo = strtolower($correo);
     $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
@@ -345,8 +348,8 @@ class Controlador_Registro extends Controlador_Base {
       if (!empty($datocorreo)){
         throw new Exception("El correo asociado con su red social ya se encuentra ingresada");
       }
-      $apell_user = Utils::no_carac(explode(" ", ucfirst(trim($apellido))));
-      $nombre_user = Utils::no_carac(explode(" ", ucfirst(trim($nombre))));
+      $apell_user = Utils::no_carac((explode(" ", ucfirst(trim(utf8_decode($apellido))))));
+      $nombre_user = Utils::no_carac((explode(" ", ucfirst(trim(utf8_decode($nombre))))));
       $username = $nombre_user[0].$apell_user[0];
       $username = Utils::generarUsername(strtolower($username));      
       $password = Utils::generarPassword();
@@ -386,7 +389,7 @@ class Controlador_Registro extends Controlador_Base {
       $_SESSION['mostrar_error'] = $e->getMessage();
     }    
     Utils::doRedirect(PUERTO.'://'.HOST.'/'.$url);
-  } 
+  }  
 
   public function correoActivacionCuenta($correo,$nombres,$token, $username, $tipoempresa){
     $email_body = "";
