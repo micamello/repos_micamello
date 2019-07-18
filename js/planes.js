@@ -34,10 +34,10 @@ function msg_compra(id,desc){
 }
 
 function loadgratuito(idplan){	
-  var estilotitulo = ($('#gratprom_'+idplan).attr('value') == 1) ? 'headingrojo titulo-planes' : 'headingazul titulo-planes';
+  //var estilotitulo = ($('#gratprom_'+idplan).attr('value') == 1) ? 'planes-promo titulo-planes' : 'headingazul titulo-planes';
   // var estiloul = ($('#gratprom_'+idplan).attr('value') == 1) ? 'border:2px solid #a21414;' : 'border:1px solid #262D5D;';
   var estiloul = ($('#gratprom_'+idplan).attr('value') == 1) ? '' : '';
-  var duracion = ($('#gratprom_'+idplan).attr('value') == 1) ? 'Promoci&oacute;n<br>' : '';
+  var duracion = ($('#gratprom_'+idplan).attr('value') == 1) ? '' : '';
   duracion = duracion + (($('#gratdura_'+idplan).attr('value') != 0) ? $('#gratdura_'+idplan).attr('value') + ' D&Iacute;AS' : 'Gratuito');  
   //var srcimagen = $('#puerto_host').val()+'/imagenes/planes/'+$('#gratid_'+idplan).attr('value')+'.'+$('#gratext_'+idplan).attr('value');
   var costo = $('#simbolo').val()+$('#gratcosto_'+idplan).attr('value');
@@ -52,7 +52,7 @@ function loadgratuito(idplan){
 	  }
   }
   $('#grattitulo').html($('#grattitulo_'+idplan).attr('value'));
-  $('#grattitulo').attr('class','title '+estilotitulo);
+  //$('#grattitulo').attr('class','title '+estilotitulo);
   $('#gratul').attr('style',estiloul);
   //$('#gratimg').attr('src',srcimagen);
   $('#gratdura').html(duracion);

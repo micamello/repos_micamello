@@ -3,7 +3,7 @@ require_once '../constantes.php';
 require_once '../init.php';
 
 /***DEPOSITOS MANUALES***/
-$id_comprobante = 1;  
+$id_comprobante = 186;  
 $datos_comprobante = Modelo_Comprobante::obtieneComprobante($id_comprobante);    
 $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);
 $infousuario = Modelo_Usuario::busquedaPorId($datos_comprobante["id_user_emp"],$datos_comprobante["tipo_usuario"]);
@@ -83,11 +83,11 @@ try{
 		$enlace = "<a href='".PUERTO."://".$dominio."/publicar/'>click aqu&iacute;</a><br>";  
 	} 
 	$email_body = str_replace("%ENLACE%", $enlace, $email_body);     
-	Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body);  
+	//Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body);  
 	echo "DEPOSITO REALIZADO";
 }
 catch(Exception $e){
   $GLOBALS['db']->rollback();            
-  Utils::envioCorreo('desarrollo@micamello.com.ec','Error deposito',$e->getMessage());      
+  //Utils::envioCorreo('desarrollo@micamello.com.ec','Error deposito',$e->getMessage());      
 }
 ?>
