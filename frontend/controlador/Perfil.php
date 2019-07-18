@@ -231,10 +231,10 @@ class Controlador_Perfil extends Controlador_Base
             if(isset($_SESSION['mfo_datos']['usuario']['subareas'])){
                 $array_data_area = explode(",",$_SESSION['mfo_datos']['usuario']['subareas']);
             }
+            
+            $array_subareas_seleccionadas = array();
+            if(isset($_POST['subareas']) && count($_POST['subareas']) > 0 && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
 
-            if(isset($_POST['subareas']) && !empty($_POST['subareas']) && count($_POST['area']) >= 1 && count($_POST['area']) <= 3){
-
-                $array_subareas_seleccionadas = array();
                 $areas_subareas = array();
                 
                 foreach ($_POST['subareas'] as $i => $datos_select_area) {
@@ -491,11 +491,13 @@ class Controlador_Perfil extends Controlador_Base
                     }*/
                 }   
 
-                if(!empty($array_subareas_seleccionadas)){
+                if(is_array($array_subareas_seleccionadas) && count($array_subareas_seleccionadas)>0){
 
                     if (!Modelo_UsuarioxArea::updateAreas($array_data_area, $array_subareas_seleccionadas,$areas_subareas, $idUsuario)) {
                         throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente"); 
                     }
+                }else{
+                    throw new Exception("Ha ocurrido un error al guardar las \u00E1reas de interes, intente nuevamente");
                 }
             }           
             $GLOBALS['db']->commit();

@@ -117,7 +117,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                 if($vista == 1){
                     $datos_plan = Modelo_Oferta::obtenerPlanOferta($id_oferta);
-                    $limite_plan = (int)$datos_plan['limite_perfiles'];
+                    $limite_plan = (int)$datos_plan['num_limiteperfiles'];
                     $id_plan = $datos_plan['id_plan'];
                     $id_empresa_plan = $datos_plan['id_empresa_plan'];
                     $num_accesos_rest = $datos_plan['num_accesos_rest'];
@@ -372,7 +372,6 @@ class Controlador_Aspirante extends Controlador_Base
                               array_push($planes, $planUsuario);
                             }
                         }
-
                     }
                     $limite_aspirantes = $cantd_total;
 
@@ -558,7 +557,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
 
                     $datos_plan = Modelo_Oferta::obtenerPlanOferta($id_oferta);
-                    $limite_plan = (int)$datos_plan['limite_perfiles'];
+                    $limite_plan = (int)$datos_plan['num_limiteperfiles'];
                     $id_plan = $datos_plan['id_plan'];
                     $id_empresa_plan = $datos_plan['id_empresa_plan'];
                     $num_accesos_rest = $datos_plan['num_accesos_rest'];

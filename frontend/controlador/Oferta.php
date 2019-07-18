@@ -722,7 +722,7 @@ class Controlador_Oferta extends Controlador_Base{
 
         $GLOBALS['db']->commit();
         $_SESSION['mostrar_exito'] = 'La oferta fue convertida exitosamente.';
-        //$datoOfertaNueva = Modelo_Oferta::ofertaPostuladoPor($id_oferta_nueva)[0]['id_ofertas'];
+        $datoOfertaNueva = Modelo_Oferta::ofertaPostuladoPor($id_oferta_nueva)[0]['id_ofertas'];
         unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
         $enlace = PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($id_oferta_nueva).'/1/';
       }catch (Exception $e) {

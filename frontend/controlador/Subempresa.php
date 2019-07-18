@@ -319,7 +319,7 @@ class Controlador_Subempresa extends Controlador_Base
             $username = Utils::generarUsername(strtolower(Utils::no_carac(utf8_decode($username[0]))));
             $password = Utils::generarPassword();
 
-            $usuario_login = array("tipo_usuario"=>Modelo_Usuario::EMPRESA, "username"=>$username, "password"=>$password, "correo"=>$data['correo'], "dni"=>$data['dni'], "tipo_registro"=>Modelo_Usuario::PRE_REG);
+            $usuario_login = array("tipo_usuario"=>Modelo_Usuario::EMPRESA, "username"=>$username, "password"=>$password, "correo"=>$data['correo'], "dni"=>$data['dni'], "tipo_registro"=>Modelo_Usuario::REG_EMP);
 
             $GLOBALS['db']->beginTrans();
 

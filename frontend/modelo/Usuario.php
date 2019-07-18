@@ -11,6 +11,7 @@ class Modelo_Usuario{
   const PRE_REG = 1; 
   const REDSOCIAL_REG = 3; 
   const NORMAL_REG = 2; 
+  const REG_EMP = 4; 
   public static function obtieneNroUsuarios($pais,$tipo=self::CANDIDATO){
     if (empty($pais)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -40,7 +41,7 @@ class Modelo_Usuario{
     //$password = md5($password);         
     $sql = "SELECT id_usuario_login, tipo_usuario, username, correo, dni, tipo_registro, password
             FROM mfo_usuario_login 
-            WHERE (username = ? OR correo = ?) ";
+            WHERE (username = ? OR correo = ?)";
     $rs = $GLOBALS['db']->auto_array($sql,array($username,$username));     
     if (empty($rs)){ return false; }
     if ($rs["tipo_usuario"] == self::CANDIDATO){
@@ -339,7 +340,7 @@ WHERE
           AND c.id_provincia = pro.id_provincia
           AND c.id_ciudad = t2.id_ciudad
           AND t1.id_usuario = t2.id_usuario
-          ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC ";   
+          ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC, t2.id_usuario ASC ";   
     if($obtCantdRegistros === false){
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
@@ -625,7 +626,7 @@ WHERE
         if(!empty($filtros['R']) && $filtros['R'] != ''){
           $sql .= " ORDER BY ranqueo DESC";
         }else{
-          $sql .= " ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC";
+          $sql .= " ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC, t2.id_usuario ASC ";
         }
       }
       $page = ($page - 1) * REGISTRO_PAGINA;
@@ -921,11 +922,11 @@ WHERE
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
           
-      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == self::REDSOCIAL_REG)){ 
+      if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] != self::NORMAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
 
-      if (empty($infohv)){        
+      if ((isset($_SESSION['mfo_datos']['usuario']['infohv']) && empty($infohv)) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){        
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }   
       

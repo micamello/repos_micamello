@@ -324,7 +324,8 @@ function fileValidation(fileInput,tipo){
               imageWidth: 75,
               confirmButtonText: 'ACEPTAR',
               animation: true
-           });               
+           });
+           error = 1;               
         }
     }
 
@@ -773,6 +774,7 @@ function validarFormulario(tipovalidacion){
         var viajar = document.getElementById('viajar').selectedIndex;
         var escolaridad = document.getElementById('escolaridad').selectedIndex;
         var area_select = document.getElementById('area');
+        var subarea_select = document.getElementById('subareas');
         var select_array_idioma = document.getElementById('select_array_idioma');
         var lugar_estudio = document.getElementById('lugar_estudio');
         var universidad = document.getElementById('universidad').selectedIndex;
@@ -949,6 +951,16 @@ function validarFormulario(tipovalidacion){
 
             quitarError("err_area", "seccion_area");
         }
+
+        /*if(subarea_select.value == null || subarea_select.value == 0){
+
+            colocaError("err_subarea", "seccion_subarea",err_list,"boton");
+            mensaje += '- Subareas, '+err_list+'<br>';
+            error = 1;
+        }else{
+
+            quitarError("err_subarea", "seccion_subarea");
+        }*/
 
         if((select_array_idioma.length) == 0 || (select_array_idioma.length) == -1){
 

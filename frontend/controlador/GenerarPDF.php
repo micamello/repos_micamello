@@ -243,6 +243,7 @@ class Controlador_GenerarPDF extends Controlador_Base
     } 
   }
   public function generaInforme($datos){
+
     $facetas = $datos['facetas'];
     $tipo_informe = $datos['tipo_informe'];
     $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
@@ -708,11 +709,11 @@ class Controlador_GenerarPDF extends Controlador_Base
                 <td style="background-color:#FCDC59; text-align:center" class="bloq-canea">A</td>
                 <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
                 <td style="background-color:#E25050; text-align:center" class="bloq-canea">N</td>
-                <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
+                <td class="bloq">Inteligencia Emocional '.$porcentajes_faceta[2].'%</td>
               </tr>
               <tr>
                 <td style="background-color:#8C4DCE; text-align:center" class="bloq-canea">E</td>
-                <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
+                <td class="bloq">Asertividad / Comunicación '.$porcentajes_faceta[3].'%</td>
                 <td style="background-color:#2B8DC9; text-align:center" class="bloq-canea">A</td>
                 <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
                 <td class="bloq-canea"></td>
@@ -1021,6 +1022,7 @@ class Controlador_GenerarPDF extends Controlador_Base
   }*/
 
   public function generaInformeCandidato($datos){
+    
     $facetas = $datos['facetas'];
     $tipo_informe = $datos['tipo_informe'];
     $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
@@ -1166,11 +1168,11 @@ class Controlador_GenerarPDF extends Controlador_Base
 
           if(($pos_no_disponible < 2 || $tipo_informe == 'completo') && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
             $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).': </b>'.$facetas[$id_faceta]['introduccion'].' Competencias que se evaluaron: '.$value).'.</li></ul>';
-            if($tipo_informe == 'completo'){
+            //if($tipo_informe == 'completo'){
               $informe .= $caracteristicas_generales[$id_faceta];
-            }else{
-              $informe .= '<br>';
-            }
+            //}else{
+            //  $informe .= '<br>';
+            //}
           }else{
             $informe .= '<ul><li><b>'.utf8_encode(Utils::str_replace_first(strtolower($facetas[$id_faceta]['literal']), $span, $facetas[$id_faceta]['faceta'],1).': </b><b class="rojo">no disponible</b>').'</li></ul><br>';
           }
@@ -1505,11 +1507,11 @@ class Controlador_GenerarPDF extends Controlador_Base
               <td style="background-color:#FCDC59; text-align:center" class="bloq-canea">A</td>
               <td class="bloq">Relaciones Interpersonales '.$porcentajes_faceta[1].'%</td>
               <td style="background-color:#E25050; text-align:center" class="bloq-canea">N</td>
-              <td class="bloq">Estabilidad Emocional '.$porcentajes_faceta[2].'%</td>
+              <td class="bloq">Inteligencia Emocional '.$porcentajes_faceta[2].'%</td>
             </tr>
             <tr>
               <td style="background-color:#8C4DCE; text-align:center" class="bloq-canea">E</td>
-              <td class="bloq">Asertividad '.$porcentajes_faceta[3].'%</td>
+              <td class="bloq">Asertividad / Comunicación '.$porcentajes_faceta[3].'%</td>
               <td style="background-color:#2B8DC9; text-align:center" class="bloq-canea">A</td>
               <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
               <td class="bloq-canea"></td>

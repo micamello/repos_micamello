@@ -378,7 +378,9 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				foreach($ofertas as $key => $o){  ?>
 					<div class="caja-postulaciones">
 						<?php 
-
+						if($vista == 'postulacion' && $o['estado'] != Modelo_Oferta::ACTIVA){
+							$o['puedeEliminar'] = 0; 
+						}
 						if($o['estado'] == Modelo_Oferta::PORAPROBAR){ $t = 'Aviso Pendiente de Aprobaci&oacute;n'; $clase = 'titulo-postulaciones-pendiente'; }else{ $t = ''; } 
 
 						if($o['tipo_oferta'] == 1 && $t == ''){ 
@@ -406,7 +408,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 											<p id="texto-postulaciones">Publicada:<br> <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?></p>
 										<?php } ?>
 										<?php if($vista == 'vacantes'){ ?>
-											<p id="tipo-plan"><?php echo utf8_encode($datos_plan[$o['id_ofertas']]); ?></p>
+											<p id="tipo-plan"><?php echo utf8_encode($datos_plan[$o['id_ofertas']]['nombre_plan']); ?></p>
 										<?php } ?>
 									</div>
 
@@ -452,7 +454,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 										<?php } ?>
 									<?php } ?>
 
-									<?php if($vista == 'postulacion'){ ?>
+									<?php if($vista == 'postulacion' && $o['estado'] == Modelo_Oferta::ACTIVA){ ?>
 
 										<?php if(isset($o['tipo']) && $o['tipo'] == 2){ ?>
 											<div class="col-md-2 col-sm-3 col-xs-6">
@@ -489,7 +491,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 										<?php if($vista != 'oferta'){ ?>
 											<div class="<?php if($vista == 'postulacion' && (isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1 && $o['tipo'] == 1)){ echo 'col-md-2 col-sm-3 col-xs-6'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 1){ echo 'col-md-4 col-sm-6 col-xs-12'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 2){ echo 'col-md-2 col-sm-3 col-xs-6'; }  
-											if($puedeEditar["editar"] == 0 && $vista == 'vacantes'){ echo 'col-md-6 col-md-offset-6 col-xs-12'; }
+											if($puedeEditar["editar"] == 0 && $vista == 'vacantes'){ echo 'col-md-8 col-md-offset-4 col-xs-12 '; }
 											if($vista == 'cuentas'){ echo 'col-md-6 col-xs-12'; } ?> ">
 											<?php } ?>
 											<a class="f-s-16px" href="<?php echo PUERTO."://".HOST."/detalleOferta/".$vista."/".Utils::encriptar($o["id_ofertas"])."/"; ?>">
@@ -570,23 +572,23 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 										?>
 										<div class="col-md-12 col-sm-12 col-xs-12">
 											<div class="col-md-3 col-sm-3 col-xs-6">
-												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'icono-aprobado'; } ?> fa fa-calendar"></i><br>
+												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($datos_plan[$o['id_ofertas']]['fecha_caducidad'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'icono-aprobado'; } ?> fa fa-calendar"></i><br>
 												<p id="postulacion-2"><?php if(isset($postulado)){ ?>
 													<?php echo date("d-m-Y", strtotime($postulado[0]['fecha_postulado'])); ?>
 													<?php } ?></p>
 											</div>
 											<div class="col-md-3 col-sm-3 col-xs-6">
-												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'icono-aprobado'; } ?> fa fa-spinner"></i><br>
+												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($datos_plan[$o['id_ofertas']]['fecha_caducidad'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'icono-aprobado'; } ?> fa fa-spinner"></i><br>
 												<p id="postulacion-2"><?php if(isset($o['tipo']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
 												<?php echo ucfirst(strtolower(Modelo_Oferta::ESTATUS_OFERTA[$o['resultado']])); ?>
 												<?php } ?></p>
 											</div>
 											<div class="col-md-3 col-sm-3 col-xs-6">
-												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else if(isset($cv_descargado) && $cv_descargado['cantd_descarga'] >= 1){ echo 'icono-aprobado'; }else{ echo 'icono-por-aprobar'; } ?> fa fa-file"></i><br>
+												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($datos_plan[$o['id_ofertas']]['fecha_caducidad'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else if(isset($cv_descargado) && $cv_descargado['cantd_descarga'] >= 1){ echo 'icono-aprobado'; }else{ echo 'icono-por-aprobar'; } ?> fa fa-file"></i><br>
 												<p id="postulacion-2">CV Visto</p>
 											</div>
 											<div class="col-md-3 col-sm-3 col-xs-6">
-												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($o['fecha_contratacion'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'icono-por-aprobar'; } ?> fa fa-check"></i><br>
+												<i class="postulacion-icono <?php if(date("Y-m-d H:i:s", strtotime($datos_plan[$o['id_ofertas']]['fecha_caducidad'])) <= date('Y-m-d H:i:s')){ echo 'cancelada'; }else{ echo 'icono-por-aprobar'; } ?> fa fa-check"></i><br>
 												<p id="postulacion-2">Finalizado</p>
 											</div>
 										</div>
