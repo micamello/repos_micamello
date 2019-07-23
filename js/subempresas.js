@@ -669,7 +669,7 @@ $('#tel_two_contact').on('blur', function(){
 
 function validar_EC(dni_obj,tipo,error,group,btn){
 
-  if(DniRuc_Validador($('#dni'),tipo, 1) == true){
+  if(DniRuc_Validador($('#dni'),tipo, 2) == true){
 
       if(searchAjax($('#dni'),tipo) == false){
         quitarError(error,group);

@@ -83,28 +83,12 @@ class Controlador_Plan extends Controlador_Base {
       }  
           
       //si ya tiene un gratuito comprado este mes      
-      if (!Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"]) && 
-          isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){
-        //si es empresa hija        
-        /*if ($nivel > 1){
-          $gratuitos = 1;
-          if (isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])){
-            foreach($_SESSION['mfo_datos']['planes'] as $planhija){
-              if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
-                $gratuitos = 0;
-              }
-            }
-          }
-          if ($gratuitos == 1){
-            $tags['gratuitos'] = $gratuitos;
-          }
-        }
-        else{*/    
-          $tags['gratuitos'] = $gratuitos;  
-        //}        
+      if (!Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"]) /*&& 
+          isset($_SESSION['mfo_datos']['planes']) && !empty($_SESSION['mfo_datos']['planes'])*/){        
+          $tags['gratuitos'] = $gratuitos;          
       }      
       $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::PAQUETE,$nivel);     
-      $avisos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
+      /*$avisos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
       $idplanes = '';
       $totavisos = count($avisos);
       foreach($avisos as $key=>$aviso){
@@ -117,7 +101,8 @@ class Controlador_Plan extends Controlador_Base {
         $tags['aviso_promocional'] = 1;
         unset($tags['gratuitos']);
       }
-      $tags['avisos'] = $avisos;
+      $tags['avisos'] = $avisos;*/
+      $tags['avisos'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,2,Modelo_Plan::AVISO,$nivel);
     }     
     $tags["template_css"][] = "media-queries";
     // $tags["template_css"][] = "planes";
@@ -146,32 +131,37 @@ class Controlador_Plan extends Controlador_Base {
       $infoplan = Modelo_Plan::busquedaActivoxTipo($idplan,$tipoplan,$sucursal);      
       if (!isset($infoplan["id_plan"]) || empty($infoplan["id_plan"])){
         throw new Exception("El plan seleccionado no esta activo o no esta disponible");
-      }      
-      //si es una empresa hija      
-      /*$nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);  
-      $gratuitos = 0;            
-      if (!empty($nivel) && isset($_SESSION['mfo_datos']['planes'])){                  
-        foreach($_SESSION['mfo_datos']['planes'] as $planhija){
-          if (isset($planhija["id_empresa_plan_parent"]) && !empty($planhija["id_empresa_plan_parent"])){
-            $gratuitos = 0;
-          }
-          else{
-            $gratuitos = 1;
-          }
-        }        
-      }*/      
-      $gratuito = 0;
-      if ($infoplan["promocional"] == 1 && !Modelo_UsuarioxPlan::existePlanEmpresa($infoplan["id_plan"],$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
-        $gratuito = 1;
-      }      
-      if (empty($infoplan["costo"]) || $gratuito == 1/*(empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1) ||
-          (!empty($nivel) && $gratuitos == 0)*/){ 
+      }          
+      //$gratuito = 0;
+      //if ($infoplan["promocional"] == 1 && !Modelo_UsuarioxPlan::existePlanEmpresa($infoplan["id_plan"],$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
+      //  $gratuito = 1;
+      //}      
+
+      /*|| $gratuito == 1(empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1) ||
+          (!empty($nivel) && $gratuitos == 0)*/
+
+      if (empty($infoplan["costo"])){ 
         if ($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
           if ($this->existePlan($infoplan["id_plan"])){
             throw new Exception("Ya esta suscrito al plan seleccionado");   
           }                 
-        }        
-        if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"])){
+        }  
+        else{
+          if ($this->existePlan($infoplan["id_plan"])){
+            throw new Exception("El plan seleccionado se encuentra activo");   
+          }
+          $limiteperfiles = ''; 
+          if (!empty($infoplan["limite_perfiles"])){
+            $limiteperfiles = $infoplan["limite_perfiles"];  
+          }
+          //if (Modelo_UsuarioxPlan::existePlanEmpresa($infoplan["id_plan"],$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
+          //  $limiteperfiles = $infoplan["limite_perfiles"];  
+          //}
+          //else{
+          //  $limiteperfiles = $infoplan["prom_limiteperfiles"];   
+          //}
+        }      
+        if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"],$limiteperfiles)){
           throw new Exception("Error al registrar la suscripci\u00F3n, por favor intente denuevo");   
         }          
         $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
@@ -323,9 +313,10 @@ class Controlador_Plan extends Controlador_Base {
       $tiempo = Modelo_Parametro::obtieneValor('tiempo_espera');
       $_SESSION['mostrar_exito'] = "Ingreso de comprobante exitoso, su plan ser\u00E1 aprobado en un m\u00E1ximo de ".$tiempo." horas";
       foreach (DIRECTORIOCORREOS as $key => $value) {
-        $emailBody = "Se debe aprobar un Plan:<br><br>Id comprobante : ".$id_comprobante."<br>id usuario/empresa: ".$_SESSION['mfo_datos']['usuario']['id_usuario']."<br>Tipo usuario: ".$_SESSION['mfo_datos']['usuario']['tipo_usuario']."<br>Número de comprobante: ".$data["num_comprobante"];
+        $emailBody = "Se debe aprobar un Plan:<br><br>Id comprobante : ".$id_comprobante."<br>id usuario/empresa: ".$_SESSION['mfo_datos']['usuario']['id_usuario']."<br>Tipo usuario: ".$_SESSION['mfo_datos']['usuario']['tipo_usuario']."<br>Número de comprobante: ".$data["num_comprobante"];        
         Utils::envioCorreo($value, 'Se debe aprobar un depósito', $emailBody);
-      }  
+      } 
+      $_SESSION['mfo_datos']['actualizar_planes'] = 1;  
       Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
     }
     catch(Exception $e){

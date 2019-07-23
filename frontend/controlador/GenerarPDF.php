@@ -244,7 +244,6 @@ class Controlador_GenerarPDF extends Controlador_Base
     } 
   }
   public function generaInforme($datos){
-
     $facetas = $datos['facetas'];
     $tipo_informe = $datos['tipo_informe'];
     $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
@@ -383,9 +382,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       <p>Las inventigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
       <br><h2>INTRODUCCI&Oacute;N</h2>
       <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
-
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-
         $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>REGISTRESE EN NUESTRA PAGINA <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</b></div>';
       }
     $informe .= '</div>
@@ -423,9 +420,7 @@ class Controlador_GenerarPDF extends Controlador_Base
           }
         }
       }
-
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-
         $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>¡SEA UNA DE LAS PRIMERAS OPCIONES DE SELECCIÓN DE LAS EMPRESAS TERMINANDO EL TEST CANEA EN <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
       }
       $informe .= '
@@ -465,9 +460,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
       $informe .= '</tr></table>';
-
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-
         $informe .= '<br><div class="publicidad" style="background-color:#FFC000"><b>¿DESEA OBTENER MEJORES RESULTADOS? COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
       }
       $informe .= '</center></div><div style="page-break-after:always;"></div>
@@ -650,10 +643,9 @@ class Controlador_GenerarPDF extends Controlador_Base
               $part1 = $porcentaje - $punto_medio - 1;
               $part2 = $porcentaje - $limite_medio; 
               $part3 = 100 - $porcentaje;
-
               $part2 = '<td colspan="1" align="center" class="pintar-azul color_asterisco">*</td>
-                <td colspan="'.$part2.'" class="pintar-azul"></td>
-                <td class="fin" style="padding-left:50px;" colspan="'.$part3.'">&nbsp;</td>';
+              <td colspan="'.$part2.'" class="pintar-azul"></td>
+              <td class="fin" style="padding-left:50px;" colspan="'.$part3.'">&nbsp;</td>';
             }else{
               $part1 = $porcentaje;
               $part2 = $limite_medio - $porcentaje - 1; 
@@ -692,9 +684,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
         $informe .= '<br><br>
         <div class="publicidad" style="background-color:#FFC000"><b>¡ELEVE SUS OPORTUNIDADES DE OBTENER UN MEJOR EMPLEO! COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a>. Y POTENCIE SUS FORTALEZAS.</b></div>';
-
       }else if($tipo_informe != 'parcial'){
-
         $informe .= '<div style="page-break-after:always;"></div><br><br><div>
           <h2>resumen canea</h2>
           <h1 style="text-align: left; display: block"><span class="verde">C</span><span class="amarillo">A</span><span class="rojo">N</span><span class="morado">E</span><span class="azul">A</span></h1>
@@ -1023,7 +1013,6 @@ class Controlador_GenerarPDF extends Controlador_Base
   }*/
 
   public function generaInformeCandidato($datos){
-
     $facetas = $datos['facetas'];
     $tipo_informe = $datos['tipo_informe'];
     $preg_x_faceta = Modelo_Pregunta::totalPregXfaceta()['cantd_preguntas'];
@@ -1089,7 +1078,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '
       <blockquote>Tu talento es nuestra oportunidad.</blockquote>';
       if($tipo_informe == 'parcial'){
-        $informe .= '<p>El presente informe parcial le da la oportunidad de que conozca &uacute;nicamente dos importantes facetas de su personalidad y ocho importantes competencias en su lugar de trabajo. <br></p>
+        $informe .= '<p>El presente informe parcial le da la oportunidad de que conozca &uacute;nicamente una importante faceta de su personalidad y ocho importantes competencias en su lugar de trabajo. <br></p>
         <p><b>CANEA</b> tiene mucho m&aacute;s que ofrecerle acerca de sus destrezas, habilidades y comportamientos. An&iacute;mese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
         </p>
         <blockquote>
@@ -1225,7 +1214,8 @@ class Controlador_GenerarPDF extends Controlador_Base
           }else{
             $informe .= '<td class="rojo"><b>no disponible</b></td>';
           }
-
+          
+          
         }else{
           if($pos_no_disponible <= 3 && $tipo_informe == 'parcial'){
             $informe .= '<td class="rojo"><b>no disponible</b></td>';

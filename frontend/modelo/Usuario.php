@@ -282,8 +282,6 @@ WHERE
         $datos['id_univ'] = 'null';
         $datos['nombre_univ'] = ' ';
       }
-
-      print_r($datos);
       return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
     }else{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"id_nacionalidad"=>$data['id_nacionalidad'],"id_sectorindustrial"=>$data['sectorind'],"nro_trabajadores"=>$data['nro_trabajadores'],"pagina_web" => $_POST['pagina_web']);
@@ -1249,12 +1247,43 @@ WHERE
 
   public static function busquedaPorCorreoMasivo($correos){
     if (empty($correos)){ return false; }    
-    $sql = "SELECT l.id_usuario_login, u.nombres, u.apellidos, l.username, l.correo 
+    $sql = "SELECT l.id_usuario_login, u.nombres, u.apellidos, l.username, l.correo, u.id_usuario 
             FROM mfo_usuario u,mfo_usuario_login l 
             WHERE l.tipo_usuario = 1 and u.id_usuario_login = l.id_usuario_login and l.correo IN(".$correos.")";          
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;    
   }
+
+
+  public static function perfilVisto($id_empresa, $id_usuario, $id_oferta, $fecha_visualizacion){
+    if(empty($id_empresa) || empty($id_usuario) || empty($id_oferta) || empty($fecha_visualizacion)){return false;}
+    $result = $GLOBALS['db']->insert('mfo_perfilvisto',
+                              array(
+                                  'id_empresa'=>$id_empresa,
+                                  'id_usuario'=>$id_usuario,
+                                  'id_ofertas'=>$id_oferta,
+                                  'fecha_visualizacion'=>$fecha_visualizacion
+                                )
+                            );
+    return $result;
+  }
+
+  public static function consultarVistoGeneral($id_empresa, $id_usuario, $id_oferta, $visto=false){
+    if(!$visto){
+      if(empty($id_empresa) || empty($id_usuario) || empty($id_oferta)){return false;}
+      $sql = "SELECT id_perfilvisto FROM mfo_perfilvisto where id_empresa = ".$id_empresa." AND id_usuario = ".$id_usuario." AND id_ofertas = ".$id_oferta." LIMIT 1";
+      $rs = $GLOBALS['db']->auto_array($sql, array(), false);
+      if(empty($rs)){return false;}else{return true;}
+    } 
+    else{
+      $sql = "SELECT  di.id_usuario FROM mfo_descarga_informe di where di.id_ofertas = ".$id_oferta." UNION SELECT  pv.id_usuario FROM mfo_perfilvisto pv where pv.id_ofertas = ".$id_oferta." UNION SELECT  info.id_usuario FROM mfo_descarga mde LEFT JOIN mfo_infohv info ON mde.id_infohv = info.id_infohv where mde.id_ofertas = ".$id_oferta.";";
+      $rs = $GLOBALS['db']->auto_array($sql, array(), true);
+      if(empty($rs)){return false;}else{return $rs;}
+    }  
+  }
+
+
+  // public
 
 }  
 ?>

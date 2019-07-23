@@ -1,7 +1,6 @@
 <div class="container-fluid">
   <div class="container">
     
- <?php Utils::log('sucursal_modena: '.SUCURSAL_MONEDA); ?>
     <div class="col-md-12">
       <input type="hidden" id="simbolo" value="<?php echo SUCURSAL_MONEDA;?>">  
       <div class="pricingdiv flex-container">
@@ -58,8 +57,8 @@
 
         <ul id="gratul" style="" class="izq theplan plan-tabla col-xs-12 col-md-4 flex-item">
           <div>&nbsp;</div>
-          <div class="" id="grattitulo"></div>
-            <div id="gratcosto" class="plan-precio"> 
+          <div class="title headingazul titulo-planes" id="grattitulo"></div>
+            <div id="gratcosto" class="plan-precio" > 
               <!-- <span class="subscript"></span> -->
             </div>
             <small>&nbsp;</small>
@@ -79,7 +78,7 @@
           <br>
           <br>
           <br> 
-          <a class="pricebutton btn-blue btn-bottom" onclick="buttongrat();"><span class="icon-tag"></span>Suscribirse</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttongrat();"><span class="icon-tag"></span>Publicar</a>
           <p><br></p>
         </ul>
       <?php } ?> 
@@ -162,7 +161,7 @@
           <br>
           <br>
           <br>                 
-          <a class="pricebutton btn-blue btn-bottom" onclick="buttonplan();"><span class="icon-tag"></span>Suscribirse</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttonplan();"><span class="icon-tag"></span>Publicar</a>
           <p><br></p>
         </ul>                                    
         <?php } ?> 
@@ -220,30 +219,30 @@
             <input type="hidden" id="avisopermiso_<?php echo $aviso["id_plan"];?>" value="<?php echo $permisos_aviso;?>">  
         <?php } ?>
 
-        <ul id="avisoul" class="<?php echo (!isset($gratuitos) && !empty($gratuitos)) ? "cen" : "der";?> theplan plan-tabla col-xs-12 col-md-4 flex-item">
-        <?php echo (!isset($gratuitos) && !empty($gratuitos)) ? "" : "<div>&nbsp;</div>"; ?>                  
-          <div id="avisotitulo" class="<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "planes-promo" : "";?> title headingazul titulo-planes"></div>
-            <div id="avisocosto" class="<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "price-was" : "plan-precio";?>">
+        <ul id="avisoul" class="der theplan plan-tabla col-xs-12 col-md-4 flex-item">
+          <div>&nbsp;</div>
+          <div id="avisotitulo" class="title headingazul titulo-planes"></div>
+            <div id="avisocosto" class="plan-precio">
             <?php $msgcosto = (isset($aviso_promocional) && $aviso_promocional==1) ? "Antes " : "";?>             
             <?php echo $msgcosto.SUCURSAL_MONEDA.number_format($aviso["costo"],2);?>
             </div>
                       
-          <?php if (isset($aviso_promocional) && $aviso_promocional==1){ ?>  
-            <div class="plan-interno-info" style="margin: 4px auto;">
-            <div class="descuento" style="background:url(<?php echo PUERTO."://".HOST."/imagenes/planes-06.png"?>) no-repeat; background-size:100%;">
+          <?php //if (isset($aviso_promocional) && $aviso_promocional==1){ ?>  
+            <!--<div class="plan-interno-info" style="margin: 4px auto;">
+            <div class="descuento" style="background:url(<?php //echo PUERTO."://".HOST."/imagenes/planes-06.png"?>) no-repeat; background-size:100%;">
               <p class="promo-1">PRECIO</p>
               <p  class="promo-2">PROMOCIONAL</p>
             </div>
             <h2  style="margin-bottom: 0px; font-size: 36px; line-height: 38px; text-align:center;">
-              <strong id="plan-precio" style="color: #ec3131;"><?php echo (empty($aviso["prom_costo"])) ? "GRATIS" : SUCURSAL_MONEDA.number_format($aviso["prom_costo"],2); ?></strong>
+              <strong id="plan-precio" style="color: #ec3131;"><?php //echo (empty($aviso["prom_costo"])) ? "GRATIS" : SUCURSAL_MONEDA.number_format($aviso["prom_costo"],2); ?></strong>
             </h2>
             
             <div id="avisodura" class="plan-dias"></div>
-            </div>            
-          <?php } else{ ?>
+            </div>-->            
+          <?php //} else{ ?>
             <small>(El precio incluye IVA)</small>
             <div id="avisodura" class="plan-dias"></div>
-          <?php } ?> 
+          <?php //} ?> 
           
           <?php if (count($avisos) > 1){ ?>
           <div class="select-plan">
@@ -260,8 +259,8 @@
           <br>
           <br>
           <br> 
-          <?php $enlace = (isset($aviso_promocional) && $aviso_promocional==1) ? "buttonavisograt();" : "buttonaviso();"; ?>
-          <a class="pricebutton btn-<?php echo (isset($aviso_promocional) && $aviso_promocional==1) ? "red" : "blue";?> btn-bottom" onclick="<?php echo $enlace;?>"><span class="icon-tag"></span>Suscribirse</a>
+          <?php //$enlace = (isset($aviso_promocional) && $aviso_promocional==1) ? "buttonavisograt();" : "buttonaviso();"; ?>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttonaviso();"><span class="icon-tag"></span>Publicar</a>
           <p><br></p>
         </ul>
       <?php } ?>
