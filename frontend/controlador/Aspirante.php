@@ -109,6 +109,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $licencia = Modelo_TipoLicencia::obtieneListadoAsociativo();
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
                 $planes = $datosOferta = array();
+                $vistos = Modelo_Usuario::consultarVistoGeneral(0, 0, $id_oferta, true);
 
                 unset($this->data['mostrar'],$this->data['opcion'],$this->data['page'],$this->data['type'],$this->data['id_oferta'],$this->data['vista'],$this->data['enviar_accesos']);
 
@@ -382,6 +383,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $breadcrumbs['aspirante'] = 'Ver Aspirantes';
                     $cantd_aspirantes = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,true);
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantesGlobal(SUCURSAL_PAISID,$_SESSION['mfo_datos']['Filtrar_aspirantes'],$page,$facetas,false);
+
                     $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);
                     $limite_aspirantes = count($cantd_aspirantes);
                 }
@@ -430,7 +432,8 @@ class Controlador_Aspirante extends Controlador_Base
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest,
                     'cantd_total'=>$cantd_total,
-                    'planes'=>$planes
+                    'planes'=>$planes,
+                    'vistos'=>$vistos
                 );
          
 
@@ -566,8 +569,11 @@ class Controlador_Aspirante extends Controlador_Base
                    
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,false);
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,true);
+                    $vistos = Modelo_Usuario::consultarVistoGeneral(0, 0, $id_oferta, true);
+                    // var_dump($vistos);
+                    // exit();
 
-                    Modelo_Usuario::consultarVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta);
+                    // Modelo_Usuario::consultarVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta);
 
                     $cantd_total = count($paises);
 
@@ -667,7 +673,8 @@ class Controlador_Aspirante extends Controlador_Base
                     'usuariosConAccesos'=>$usuariosConAccesos,
                     'num_accesos_rest'=>$num_accesos_rest,
                     'cantd_total'=>$cantd_total,
-                    'planes'=>$planes
+                    'planes'=>$planes,
+                    'vistos'=>$vistos
                 );
 
                 $tags["template_js"][] = "ion.rangeSlider.min";
@@ -709,7 +716,7 @@ class Controlador_Aspirante extends Controlador_Base
               );
             $fecha_visualizacion = date("Y-m-d H:i:s");
             try {
-                if(!Modelo_Usuario::consultarVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta)){
+                if(!Modelo_Usuario::consultarVistoGeneral($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta)){
                     $perfilVisto = Modelo_Usuario::perfilVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta,$fecha_visualizacion);
                     if(empty($perfilVisto)){
                         throw new Exception("Ha ocurrido un error al guardar la visualización");

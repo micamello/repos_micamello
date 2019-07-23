@@ -1270,13 +1270,22 @@ WHERE
     return $result;
   }
 
-  public static function consultarVisto($id_empresa, $id_usuario, $id_oferta){
-    if(empty($id_empresa) || empty($id_usuario) || empty($id_oferta)){return false;}
-    // echo "eder";
+  public static function consultarVistoGeneral($id_empresa, $id_usuario, $id_oferta, $visto=false){
+    if(!$visto){
+      if(empty($id_empresa) || empty($id_usuario) || empty($id_oferta)){return false;}
       $sql = "SELECT id_perfilvisto FROM mfo_perfilvisto where id_empresa = ".$id_empresa." AND id_usuario = ".$id_usuario." AND id_ofertas = ".$id_oferta." LIMIT 1";
       $rs = $GLOBALS['db']->auto_array($sql, array(), false);
       if(empty($rs)){return false;}else{return true;}
+    } 
+    else{
+      $sql = "SELECT  di.id_usuario FROM mfo_descarga_informe di where di.id_ofertas = ".$id_oferta." UNION SELECT  pv.id_usuario FROM mfo_perfilvisto pv where pv.id_ofertas = ".$id_oferta." UNION SELECT  info.id_usuario FROM mfo_descarga mde LEFT JOIN mfo_infohv info ON mde.id_infohv = info.id_infohv where mde.id_ofertas = ".$id_oferta.";";
+      $rs = $GLOBALS['db']->auto_array($sql, array(), true);
+      if(empty($rs)){return false;}else{return $rs;}
+    }  
   }
+
+
+  // public
 
 }  
 ?>

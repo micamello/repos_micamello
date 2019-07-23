@@ -734,9 +734,9 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			                	<thead class="etiquetaBody">
 							    	<tr>
 							    		<?php if($empresa_hija){ ?>
-								      		<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
-								      	<?php } ?>
-								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Estado</th>
+								      		<?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo '<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0px; display: 0;">Accesos</th>'; }else{ echo '<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center;border-bottom:0px; display:none;">Accesos</th>'; }
+								      	 } ?>
+								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Visto</th>
 								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Foto</th>
 										<th rowspan="2" colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
 								        <th rowspan="2" style="vertical-align: middle; text-align: center;width: 100px">
@@ -814,7 +814,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				            				} ?>
 							            	<tr<?php echo $color; ?>>
 							            		<?php if($_SESSION['mfo_datos']['accesos'] == 1){ 
-							            			$display = 'display:block; vertical-align: middle; text-align: center;';
+							            			$display = 'display: 1; vertical-align: middle; text-align: center;';
 							            		}else{
 							            			$display = 'display:none; vertical-align: middle; text-align: center;';
 							            		} ?>
@@ -843,7 +843,22 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
 
 							            		<td style="text-align: center; vertical-align: middle;">
-							            			Visto
+							            			
+							            			<?php
+							            				if(!empty($vistos)){
+							            					$new_arr = array_column($vistos,'id_usuario');
+								            				if(in_array($a['id_usuario'], $new_arr)){
+								            					$estilo = 'color: #7ABF89;';
+								            					// $imagenvisto = 'check-01.png';
+								            				}
+								            				else{
+								            					$estilo = 'color: #CDCDCD;';
+								            					// $imagenvisto = 'check-02.png';
+								            				}
+								            				echo "<i class='fa fa-eye' style='".$estilo."font-size: 25px;'></i>";
+								            				// echo "<img src='".PUERTO.'://'.HOST."/imagenes/".$imagenvisto."' width='40' height='40' alt='img.png'/>";
+							            				}
+							            			?>
 							            		</td>
 
 
@@ -887,9 +902,10 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 												<?php foreach($facetas as $key => $nombre){ 
 										    		echo "<td data-title='".$nombre['literal']/*substr($nombre, 0,1)*/.":' style='vertical-align: middle; text-align: center;'>";
 										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){ 
-										    			echo $datos_usuarios[$a['id_usuario']][$key].'%';
+										    			echo number_format($datos_usuarios[$a['id_usuario']][$key],0).'%';
 										    		}else{ 
-										    			echo '0.00%';
+										    			// echo '0.00%';
+										    			echo "0%";
 										    		}
 										    		echo "</td>";
 										    	} ?>
