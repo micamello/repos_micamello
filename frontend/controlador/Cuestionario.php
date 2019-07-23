@@ -89,9 +89,7 @@ class Controlador_Cuestionario extends Controlador_Base {
                 foreach($accesos as $acceso){
                   $infoempresa = Modelo_Usuario::busquedaPorId($acceso["id_empresa"],Modelo_Usuario::EMPRESA);
                   $infoempresaplan = Modelo_UsuarioxPlan::consultaIndividual($acceso["id_empresa_plan"],Modelo_Usuario::EMPRESA);
-                  Utils::log("aqui entro a imprimir datos de variable $infoempresaplan: ".print_r($infoempresaplan, true));
                   $infoplan = Modelo_Plan::busquedaXId($infoempresaplan["id_plan"]);
-                  Utils::log("aqui esta el del cuestionario: ".print_r($infoplan));
                   $email_subject = "Aceptación de Acceso"; 
                   $candidato = ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['nombres'])).' '.ucfirst(utf8_encode($_SESSION['mfo_datos']['usuario']['apellidos']));
                   $enlace = "<a href='".PUERTO.'://'.HOST.'/planesUsuario/'."'>Mis Planes</a>";

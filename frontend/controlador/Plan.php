@@ -149,13 +149,17 @@ class Controlador_Plan extends Controlador_Base {
         else{
           if ($this->existePlan($infoplan["id_plan"])){
             throw new Exception("El plan seleccionado se encuentra activo");   
-          } 
-          if (Modelo_UsuarioxPlan::existePlanEmpresa($infoplan["id_plan"],$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
+          }
+          $limiteperfiles = ''; 
+          if (!empty($infoplan["limite_perfiles"])){
             $limiteperfiles = $infoplan["limite_perfiles"];  
           }
-          else{
-            $limiteperfiles = $infoplan["prom_limiteperfiles"];   
-          }
+          //if (Modelo_UsuarioxPlan::existePlanEmpresa($infoplan["id_plan"],$_SESSION["mfo_datos"]["usuario"]["id_usuario"],0)){
+          //  $limiteperfiles = $infoplan["limite_perfiles"];  
+          //}
+          //else{
+          //  $limiteperfiles = $infoplan["prom_limiteperfiles"];   
+          //}
         }      
         if (!Modelo_UsuarioxPlan::guardarPlan($idusu,$tipousu,$infoplan["id_plan"],$infoplan["num_post"],$infoplan["duracion"],$infoplan["porc_descarga"],'',false,false,false,$infoplan["num_accesos"],$limiteperfiles)){
           throw new Exception("Error al registrar la suscripci\u00F3n, por favor intente denuevo");   

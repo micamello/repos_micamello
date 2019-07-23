@@ -282,8 +282,6 @@ WHERE
         $datos['id_univ'] = 'null';
         $datos['nombre_univ'] = ' ';
       }
-
-      print_r($datos);
       return $GLOBALS['db']->update("mfo_usuario",$datos,"id_usuario=".$idUsuario);
     }else{
       $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"id_nacionalidad"=>$data['id_nacionalidad'],"id_sectorindustrial"=>$data['sectorind'],"nro_trabajadores"=>$data['nro_trabajadores'],"pagina_web" => $_POST['pagina_web']);
@@ -1249,7 +1247,7 @@ WHERE
 
   public static function busquedaPorCorreoMasivo($correos){
     if (empty($correos)){ return false; }    
-    $sql = "SELECT l.id_usuario_login, u.nombres, u.apellidos, l.username, l.correo 
+    $sql = "SELECT l.id_usuario_login, u.nombres, u.apellidos, l.username, l.correo, u.id_usuario 
             FROM mfo_usuario u,mfo_usuario_login l 
             WHERE l.tipo_usuario = 1 and u.id_usuario_login = l.id_usuario_login and l.correo IN(".$correos.")";          
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);

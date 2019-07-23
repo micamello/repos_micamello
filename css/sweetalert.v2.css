@@ -443,7 +443,7 @@ body.swal2-toast-column .swal2-toast .swal2-validation-message {
     display: flex;
     align-items: center;
     font-size: 2em;
-    font-weight: 500
+    font-weight: 700
 }
 
 @media all and (-ms-high-contrast:none),
@@ -983,7 +983,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     padding: 0;
     color: #595959;
     font-size: 1.875em;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center;
     text-transform: none;
     word-wrap: break-word
@@ -1136,7 +1136,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     padding: 0;
     color: #545454;
     font-size: 1.125em;
-    font-weight: 500;
+    font-weight: 300;
     line-height: normal;
     word-wrap: break-word
 }
@@ -1225,7 +1225,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
 .swal2-range output {
     width: 20%;
     color: inherit;
-    font-weight: 500;
+    font-weight: 600;
     text-align: center
 }
 
@@ -1293,7 +1293,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     background: #f0f0f0;
     color: #666;
     font-size: 1em;
-    font-weight: 500
+    font-weight: 300
 }
 
 .swal2-validation-message::before {
@@ -1307,7 +1307,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     border-radius: 50%;
     background-color: #f27474;
     color: #fff;
-    font-weight: 500;
+    font-weight: 600;
     line-height: 1.5em;
     text-align: center
 }
@@ -1510,7 +1510,7 @@ body.swal2-no-backdrop .swal2-shown.swal2-bottom-right {
     margin: 0 0 1.25em;
     padding: 0;
     background: inherit;
-    font-weight: 500
+    font-weight: 600
 }
 
 .swal2-progress-steps li {
