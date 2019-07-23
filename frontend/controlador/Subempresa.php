@@ -109,7 +109,6 @@ class Controlador_Subempresa extends Controlador_Base
                 
             break;
             case 'crearEmpresas': 
-                
                 $data = array();
                 //Permite crear una nueva cuenta hija 
                 //buscar los planes activos y con recursos para asignar
@@ -304,7 +303,7 @@ class Controlador_Subempresa extends Controlador_Base
             $iso = SUCURSAL_ISO;
             if(method_exists(new Utils, 'validar_'.$iso)){
                 $function = 'validar_'.$iso;
-                if(!Utils::$function($data['dni'], 1, 1)){
+                if(!Utils::$function($data['dni'], 2, 1)){
                   throw new Exception("No permitido RUC de persona natural.");
                 }
             }
@@ -329,7 +328,7 @@ class Controlador_Subempresa extends Controlador_Base
 
             $id_usuario_login = $GLOBALS['db']->insert_id();
 
-            $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, 'term_cond'=>1, 'id_ciudad'=>$default_city, 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>Modelo_Usuario::EMPRESA, 'estado'=>1, 'padre'=>$idUsuario, 'id_sectorindustrial'=>$data['sectorind'],"nro_trabajadores" => 0);
+            $dato_registro = array('telefono'=>$data['numero_cand'], 'nombres'=>$data['name_user'], 'fecha_nacimiento'=>$mayor_edad, 'fecha_creacion'=>$campo_fecha, 'term_cond'=>1, 'id_ciudad'=>$default_city, 'ultima_sesion'=>$campo_fecha, 'id_nacionalidad'=>SUCURSAL_PAISID, 'id_usuario_login'=>$id_usuario_login, 'tipo_usuario'=>Modelo_Usuario::EMPRESA, 'estado'=>0, 'padre'=>$idUsuario, 'id_sectorindustrial'=>$data['sectorind'],"nro_trabajadores" => 0);
 
             if(!Modelo_Usuario::crearUsuario($dato_registro)){
                throw new Exception("Ha ocurrido un error al crear la empresa, intente nuevamente");
@@ -337,9 +336,9 @@ class Controlador_Subempresa extends Controlador_Base
  
             $id_empresa = $GLOBALS['db']->insert_id();
 
-            if(!self::correoAvisoCreacion($data['correo'],$data['name_user'],$username,$password)){
-                throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta o el correo no existe, intente nuevamente");
-            }
+            // if(!self::correoAvisoCreacion($data['correo'],$data['name_user'],$username,$password)){
+            //     throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta o el correo no existe, intente nuevamente");
+            // }
 
             $contactoEmpresa = array("nombreConEmp"=>$data['nombre_contact'],
                                      "apellidoConEmp"=>$data['apellido_contact'],
@@ -401,6 +400,9 @@ class Controlador_Subempresa extends Controlador_Base
             }
 
             $GLOBALS['db']->commit();
+            // Se envia correo a padre cuando crea una empresa hija
+            // Utils::envioCorreo();
+            self::correoCreacionEmpresaHija($_SESSION['mfo_datos']['usuario']['correo'], $_SESSION['mfo_datos']['usuario']['nombres'], array('nombresub'=>$data['name_user'], 'correosub'=>$data['correo']));
             $_SESSION['mostrar_exito'] = "La cuenta fue creada exitosamente.";
 
         }catch( Exception $e ){
@@ -512,7 +514,9 @@ class Controlador_Subempresa extends Controlador_Base
         }
     }
 
+    // correo de empresa hija en la creación
     public function correoAvisoCreacion($correo,$nombres,$username,$password){
+        // hay que modificar esto, modificar la plantilla
         $nombre_mostrar = ucfirst($nombres);  
         $enlace = "<a href='".PUERTO."://".HOST."/login/'>click aqu&iacute;</a>";
 
@@ -523,6 +527,23 @@ class Controlador_Subempresa extends Controlador_Base
         $email_body = str_replace("%CORREO%", $correo, $email_body);   
         $email_body = str_replace("%PASSWORD%", $password, $email_body);     
         $email_body = str_replace("%ENLACE%", $enlace, $email_body);  
+        if (Utils::envioCorreo($correo,$asunto,$email_body)){
+          return true;
+        }
+        else{
+          return false;
+        }
+    }
+
+    public function correoCreacionEmpresaHija($correo, $nombres, $datahija){
+        $nombre_mostrar = $nombres;
+        $asunto = "Creación de Empresa Hija";
+        $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/adminEmpresas/'>Click aquí</a>";
+        $email_body = Modelo_TemplateEmail::obtieneHTML("NOTIFICACION_CREACION_EMPRESA");
+        $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);
+        $email_body = str_replace("%NOMBRE_SUBEMPRESA%", $datahija['nombresub'], $email_body);
+        $email_body = str_replace("%CORREO_SUBEMPRESA%", $datahija['correosub'], $email_body);
+        $email_body = str_replace("%ENLACE%", $enlace, $email_body);
         if (Utils::envioCorreo($correo,$asunto,$email_body)){
           return true;
         }

@@ -177,7 +177,7 @@
                                     </div>
                                 </div>
                                 <input type="submit" class="btn-blue"  value="Registrarse"/>
-                                <!--<div class="subt-registro" style="padding-bottom: 20px">
+                                <div class="subt-registro" style="padding-bottom: 20px">
                                     <label>¿Ya tienes una cuenta? <a class="link" href="<?php echo PUERTO.'://'.HOST.'/login/' ?>">Inicia sesión</a></label><br>
                                     <div id="socialRegistro">
                                         <label>O puedes acceder con:</label>
@@ -191,7 +191,7 @@
                                         <a id="regEmpMic" onclick="window.location = '<?php echo $social['lk'] ?>'"><i class="acceso-social fa fa-linkedin"></i></a>
 
                                     </div>
-                                </div>-->
+                                </div>
                             </div>
                         </form>
                     </div>
