@@ -736,6 +736,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							    		<?php if($empresa_hija){ ?>
 								      		<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
 								      	<?php } ?>
+								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Estado</th>
 								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Foto</th>
 										<th rowspan="2" colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
 								        <th rowspan="2" style="vertical-align: middle; text-align: center;width: 100px">
@@ -841,7 +842,12 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							            		</td>
 							            		<!--<td data-title="N°: " style='vertical-align: middle; text-align: center;'><?php #echo $num_aumentar+($i+1); ?></td>-->
 
-							            		<td align="right" style="text-align: center;" data-title="Foto: ">
+							            		<td style="text-align: center; vertical-align: middle;">
+							            			Visto
+							            		</td>
+
+
+							            		<td align="right" style="text-align: center; vertical-align: middle;" data-title="Foto: ">
 							                      <img class="imagen-perfil-2" src="<?php echo PUERTO.'://'.HOST.'/imagenes/imgthumb/'.$a['username'].'/'; ?>" alt="perfil" width="50" height="50">
 							                    </td>
 							            		

@@ -566,6 +566,9 @@ class Controlador_Aspirante extends Controlador_Base
                    
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,false);
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,true);
+
+                    Modelo_Usuario::consultarVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta);
+
                     $cantd_total = count($paises);
 
                     $_SESSION['mfo_datos']['usuario']['cantd_total'] = array($id_oferta=>$cantd_total);
@@ -704,6 +707,21 @@ class Controlador_Aspirante extends Controlador_Base
                     "id_oferta"=>$id_oferta,
                     "vista"=>$vista
               );
+            $fecha_visualizacion = date("Y-m-d H:i:s");
+            try {
+                if(!Modelo_Usuario::consultarVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta)){
+                    $perfilVisto = Modelo_Usuario::perfilVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta,$fecha_visualizacion);
+                    if(empty($perfilVisto)){
+                        throw new Exception("Ha ocurrido un error al guardar la visualización");
+                        
+                    } 
+                }
+            } catch (Exception $e) {
+                $_SESSION['mostrar_error'] = $e->getMessage();
+                Vista::render('perfilAspirante', $tags);
+            }
+            
+            // exit();
             $tags = array_merge($tags, $tags1);
         Vista::render('perfilAspirante', $tags);
     }

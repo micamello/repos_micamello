@@ -322,7 +322,7 @@ class Controlador_Registro extends Controlador_Base {
 
   public function registroRedSocial($correo,$nombre,$apellido){
     if(empty($correo)){
-      throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direccion de correo o registrese llenando el formulario.");
+      throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direcci\u00F3n de correo o reg\u00CDstrese llenando el formulario.");
     }
     $url = "";
     $correo = strtolower($correo);

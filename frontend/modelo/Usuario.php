@@ -1256,5 +1256,27 @@ WHERE
     return $rs;    
   }
 
+
+  public static function perfilVisto($id_empresa, $id_usuario, $id_oferta, $fecha_visualizacion){
+    if(empty($id_empresa) || empty($id_usuario) || empty($id_oferta) || empty($fecha_visualizacion)){return false;}
+    $result = $GLOBALS['db']->insert('mfo_perfilvisto',
+                              array(
+                                  'id_empresa'=>$id_empresa,
+                                  'id_usuario'=>$id_usuario,
+                                  'id_ofertas'=>$id_oferta,
+                                  'fecha_visualizacion'=>$fecha_visualizacion
+                                )
+                            );
+    return $result;
+  }
+
+  public static function consultarVisto($id_empresa, $id_usuario, $id_oferta){
+    if(empty($id_empresa) || empty($id_usuario) || empty($id_oferta)){return false;}
+    // echo "eder";
+      $sql = "SELECT id_perfilvisto FROM mfo_perfilvisto where id_empresa = ".$id_empresa." AND id_usuario = ".$id_usuario." AND id_ofertas = ".$id_oferta." LIMIT 1";
+      $rs = $GLOBALS['db']->auto_array($sql, array(), false);
+      if(empty($rs)){return false;}else{return true;}
+  }
+
 }  
 ?>
