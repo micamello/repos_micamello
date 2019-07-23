@@ -42,11 +42,12 @@ class Controlador_GenerarPDF extends Controlador_Base
         $id_empresa = false;
         if(!empty($id_oferta)){
           $existe_en_oferta = Modelo_Postulacion::obtienePostuladoxUsuario($idusuario,$id_oferta);
+          $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
         }else{
-          $existe_en_oferta = array();
+          $existe_en_oferta = $datosOfertas = array();
         }
         if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){          
-          if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$idPlan) && !empty($id_oferta) && !empty($existe_en_oferta)){
+          if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$idPlan) && !empty($id_oferta) && !empty($existe_en_oferta) && (count($datosOfertas) > 0 && $datosOfertas['estado'] == Modelo_Oferta::ACTIVA)){
             $id_empresa = $_SESSION['mfo_datos']['usuario']['id_usuario'];
             $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($id_empresa,$id_oferta);
             $descargas = Modelo_Descarga::descargasInforme($id_empresa,$id_oferta);

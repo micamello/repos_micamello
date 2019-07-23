@@ -660,7 +660,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 		
 		<div class="col-md-9"> 
 			
-			<?php if(($vista == 1 && $num_accesos_rest > 0 && $empresa_hija == true) || $vista == 2){ ?> 
+			<?php if(($vista == 1 && $num_accesos_rest > 0 && $empresa_hija == true && $datosOfertas['estado'] == Modelo_Oferta::ACTIVA) || $vista == 2){ ?> 
 				<br>
 				<div <?php echo $style_activo; ?> id="activarAccesos" class="pull-right">
 		          <h6 style="color:#6d6d6b">
@@ -734,8 +734,8 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			                	<thead class="etiquetaBody">
 							    	<tr>
 							    		<?php if($empresa_hija){ ?>
-								      		<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0; <?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo "display:block;"; }else{ echo "display:none;"; } ?>">Accesos</th>
-								      	<?php } ?>
+								      		<?php if($_SESSION['mfo_datos']['accesos'] == 1){ echo '<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center; border-bottom:0px;">Accesos</th>'; }else{ echo '<th rowspan="2" id="marcar" style="vertical-align: middle; text-align: center;border-bottom:0px; display:none;">Accesos</th>'; }
+								      	 } ?>
 								      	<th rowspan="2" style="vertical-align: middle; text-align: center;">Foto</th>
 										<th rowspan="2" colspan="1" style="vertical-align: middle; text-align: center;">Nombre y Apellido</th>
 								        <th rowspan="2" style="vertical-align: middle; text-align: center;width: 100px">
@@ -782,8 +782,6 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				        		<tbody>
 						        	<?php 
 
-
-				        			//$_SESSION['mfo_datos']['registrosPagina']);
 						        	if(!empty($aspirantes)){ 
 						        		for ($i=0; $i < count($aspirantes); $i++) { 
 						        			$a = $aspirantes[$i]; 
@@ -802,10 +800,6 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 						        				$ver = true;
 						        			}
 						        			
-						        			/*echo '<br>i: '.$i;
-						        			echo '<br>limite-1: '.($limite_plan-1);
-						        			echo '<br>num_aumentar: '.$num_aumentar;*/
-						        			
 							            	if(array_key_exists($a['id_usuario'],$usuariosConAccesos)){
 					            				$color = ' style="background-color: #bbdcf9;"';
 				            				}else{
@@ -820,7 +814,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							            		<td style="<?php echo $display; ?>" class="checkboxes">
 							            			<?php 
 							            			$mostrar = '';
-							            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){ 
+							            			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL && $datosOfertas['estado'] == Modelo_Oferta::ACTIVA){ 
 							            				if(!in_array($id_Usuario, $_SESSION['mfo_datos']['usuariosHabilitados'])){
 							            					array_push($_SESSION['mfo_datos']['usuariosHabilitados'],$id_Usuario);
 							            				}
@@ -852,11 +846,16 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 								            			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'detallePerfilCandidatos',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 
 								            				if($empresa_hija){
-								            					echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">';
+
+								            					if($datosOfertas['estado'] == Modelo_Oferta::ACTIVA){
+								            						echo '<a href="'.PUERTO."://".HOST."/aspirante/".$a['username'].'/'.$id_oferta.'/'.$vista.'/">';
+								            					}
 								            				}
 								            				echo utf8_encode($a['nombres']).' '.utf8_encode($a['apellidos']);
 								            				if($empresa_hija){
-								            					echo '</a>'; 
+								            					if($datosOfertas['estado'] == Modelo_Oferta::ACTIVA){
+								            						echo '</a>'; 
+								            					}
 								            				}
 								            			}else{
 								            				if(!$ver){ 
@@ -930,11 +929,15 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 								            				$imagen = 'icono-aspirante-05.png';
 								            			}
 
-								            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
+								            			echo $title.'" data-title="Informe '.$title.$datosOfertas['estado'].'" style="vertical-align: middle; text-align: center;">';
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 									            			if($mostrar == ''){
 									            				
-																$variable = '<a onclick="hacerInforme(\''.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'\',\''.Utils::encriptar($a['id_usuario']).'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+									            				if($datosOfertas['estado'] == Modelo_Oferta::ACTIVA){
+									            					$variable = '<a onclick="hacerInforme(\''.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'\',\''.Utils::encriptar($a['id_usuario']).'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+									            				}else{
+																	$variable = '<img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%">';
+																}
 																
 																echo $variable;
 															}else{
@@ -958,16 +961,12 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 													<td title="Descargar Hoja de vida" data-title="Hoja de vida: " style="vertical-align: middle; text-align: center;">
 									            		<?php 
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
-										            			//if(in_array('-1',$posibilidades)){
-																	echo '<a href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%"></a>';
-																/*}else{
-																	$cantidadRestante = $posibilidades - count($descargas);
-																	if($cantidadRestante > 0){
-																		echo '<a target="_blank" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><i class="fa fa-file-text fa-1x"></i></a>';
-																	}else{
-																		echo '<a href="#" onclick="abrirModal(\'Debe contratar un plan que permita descargar hojas de vida\',\'alert_descarga\',\''.PUERTO."://".HOST."/planes/".'\',\'Ok\',\'\')"><i class="fa fa-file-text fa-1x"></i></a>';
-																	//}
-																}*/
+
+										            			if($datosOfertas['estado'] == Modelo_Oferta::ACTIVA){
+										            				echo '<a href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%"></a>';
+										            			}else{
+																	echo '<img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%">';
+										            			}
 															}else{
 																if(!$ver){
 																	echo '-';

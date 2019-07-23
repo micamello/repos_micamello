@@ -685,6 +685,9 @@ class Controlador_Oferta extends Controlador_Base{
         $GLOBALS['db']->beginTrans();
         $datos_area_subarea = explode(",",$datos['id_areas_subareas']);
         unset($datos['id_ofertas'],$datos['id_areas_subareas']);
+
+        $datos_oferta_idiomas = explode(",",$datos['id_nivelIdioma_idioma']);
+        unset($datos['id_ofertas'],$datos['id_nivelIdioma_idioma']);
         
         //desactivar oferta anterior
         if(!Modelo_Oferta::desactivarOferta($oferta_ant)){
@@ -696,9 +699,9 @@ class Controlador_Oferta extends Controlador_Base{
         }
 
         $datos['estado'] = 1;
+        $datos['fecha_creado'] = date('Y-m-d H:m:s');
         $datos['id_requisitoOferta'] = $GLOBALS['db']->insert_id();
 
-        Utils::log("FERNAND ".print_r($datos,true));
         //Insertar el nuevo registro de la oferta con el id_empresa_plan actualizado
         if(!Modelo_Oferta::guardarOfertaConvertida($datos)){
           throw new Exception("Ha ocurrido un error. Intente nuevamente 2");
@@ -707,6 +710,10 @@ class Controlador_Oferta extends Controlador_Base{
       
         if(!Modelo_OfertaxAreaSubarea::guardarOfertaAreasSubareas($id_oferta_nueva, $datos_area_subarea)){
           throw new Exception("Ha ocurrido un error al guardar las subareas de la oferta");
+        }
+
+        if(!Modelo_OfertaxNivelIdioma::guardarOfertaNivelIdioma($id_oferta_nueva, $datos_oferta_idiomas)){
+          throw new Exception("Ha ocurrido un error al guardar los idiomas de la oferta");
         }
 
         //Restar el numero de publicaciones del plan seleccionado
@@ -722,9 +729,9 @@ class Controlador_Oferta extends Controlador_Base{
 
         $GLOBALS['db']->commit();
         $_SESSION['mostrar_exito'] = 'La oferta fue convertida exitosamente.';
-        $datoOfertaNueva = Modelo_Oferta::ofertaPostuladoPor($id_oferta_nueva)[0]['id_ofertas'];
+        $datoOfertaNueva = Modelo_Oferta::ofertaPostuladoPor($id_oferta_nueva)['id_ofertas'];
         unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
-        $enlace = PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($id_oferta_nueva).'/1/';
+        $enlace = PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($datoOfertaNueva).'/1/';
       }catch (Exception $e) {
         $enlace = PUERTO.'://'.HOST.'/verAspirantes/1/'.Utils::encriptar($oferta_ant).'/1/';
         $_SESSION['mostrar_error'] = $e->getMessage();

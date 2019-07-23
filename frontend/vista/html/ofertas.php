@@ -381,7 +381,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 						if($vista == 'postulacion' && $o['estado'] != Modelo_Oferta::ACTIVA){
 							$o['puedeEliminar'] = 0; 
 						}
-						if($o['estado'] == Modelo_Oferta::PORAPROBAR){ $t = 'Aviso Pendiente de Aprobaci&oacute;n'; $clase = 'titulo-postulaciones-pendiente'; }else{ $t = ''; } 
+						if($o['estado'] == Modelo_Oferta::PORAPROBAR && $vista != 'postulacion'){ $t = 'Aviso Pendiente de Aprobaci&oacute;n'; $clase = 'titulo-postulaciones-pendiente'; }else{ $t = ''; } 
 
 						if($o['tipo_oferta'] == 1 && $t == ''){ 
 							$clase = 'titulo-postulaciones'; 
@@ -405,7 +405,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 
 									<div class="col-md-12 col-sm-12 col-xs-12">
 										<?php if($vista == 'vacantes' || $vista == 'cuentas'){ ?>
-											<p id="texto-postulaciones">Publicada:<br> <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?></p>
+											<p id="texto-postulaciones">Publicada:<br> <?php echo date("d-m-Y", strtotime($o['fecha_actualizado'])); ?></p>
 										<?php } ?>
 										<?php if($vista == 'vacantes'){ ?>
 											<p id="tipo-plan"><?php echo utf8_encode($datos_plan[$o['id_ofertas']]['nombre_plan']); ?></p>
@@ -443,7 +443,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 										<?php if($vista == 'postulacion'){ ?>
 											<div class="col-md-4 col-sm-3 col-xs-6">
 												<p class="texto-postulaciones">Modo que aplic&oacute;:&nbsp;<b><?php echo POSTULACIONES[$o['tipo']]; ?></b><br>
-													Fecha de la oferta: <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?><br>
+													Fecha de la oferta: <?php echo date("d-m-Y", strtotime($o['fecha_actualizado'])); ?><br>
 													Jornada: <?php echo $o['jornada']; ?></p>
 											</div>
 											<div class="col-md-4 col-sm-3 col-xs-6">
@@ -489,7 +489,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 											<?php }
 										} ?>
 
-										<?php if($vista != 'oferta'){ ?>
+										<?php if($vista != 'oferta'){   ?>
 											<div class="<?php if($vista == 'postulacion' && (isset($o['puedeEliminar']) && $o['puedeEliminar'] == 1 && $o['tipo'] == 1)){ echo 'col-md-2 col-sm-3 col-xs-6'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 1){ echo 'col-md-4 col-sm-6 col-xs-12'; }else if(isset($o['puedeEliminar']) && $o['puedeEliminar'] == 0 && $vista == 'postulacion' && $o['tipo'] == 2){ echo 'col-md-2 col-sm-3 col-xs-6'; }  
 											if($puedeEditar["editar"] == 0 && $vista == 'vacantes'){ echo 'col-md-8 col-md-offset-4 col-xs-12 '; }
 											if($vista == 'cuentas'){ echo 'col-md-6 col-xs-12'; } ?> ">
@@ -504,7 +504,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 									<?php if($vista == 'oferta'){ ?>
 										<div class="col-md-9 col-sm-6 col-xs-12">
 											<p class="texto-empleo">
-												Fecha de la oferta: <?php echo date("d-m-Y", strtotime($o['fecha_creado'])); ?></p>
+												Fecha de la oferta: <?php echo date("d-m-Y", strtotime($o['fecha_actualizado'])); ?></p>
 										</div>
 									<?php } ?>
 

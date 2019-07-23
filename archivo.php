@@ -106,13 +106,22 @@ switch ($carpeta){
 }
 if($carpeta=='hv' && $mostrar && $_SESSION['mfo_datos']['usuario']['tipo_usuario']==Modelo_Usuario::EMPRESA){
 	$id_oferta = (!empty($param2)) ? $param2 : false;
-	$id_empresa = $_SESSION['mfo_datos']['usuario']['id_usuario'];
-	$descargas = Modelo_Descarga::descargas($id_empresa,$id_oferta);
-	if(in_array($infoHv['id_infohv'], $descargas)){
-		$mostrar = true;
-	}else{
-		Modelo_Descarga::registrarDescarga($infoHv['id_infohv'],$id_empresa,$id_oferta);
-		$mostrar = true;
+
+	if(!empty($id_oferta)){
+
+		$datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta);
+		if($datosOfertas['estado'] == Modelo_Oferta::ACTIVA){
+			$id_empresa = $_SESSION['mfo_datos']['usuario']['id_usuario'];
+			$descargas = Modelo_Descarga::descargas($id_empresa,$id_oferta);
+			if(in_array($infoHv['id_infohv'], $descargas)){
+				$mostrar = true;
+			}else{
+				Modelo_Descarga::registrarDescarga($infoHv['id_infohv'],$id_empresa,$id_oferta);
+				$mostrar = true;
+			}
+		}else{
+			$mostrar = false;
+		}
 	}
 }
 if ($mostrar){

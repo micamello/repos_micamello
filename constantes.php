@@ -118,4 +118,7 @@ define('SERVER_SMTP','smtp-relay.sendinblue.com');
 define('PUERTO_SMTP',587);
 define('ID_SMTP','ffueltala@gmail.com');
 define('CLAVE_SMTP','cz0Ls8tI34AZ2aUJ');
+
+define('OFERTA_ACTIVA_DESCARGA','45');
+define('OFERTA_ACTIVA_VER','15');
 ?>

@@ -338,7 +338,7 @@ class Controlador_Aspirante extends Controlador_Base
                         }
                     }
 
-                    if(isset($datosOfertas[0]['id_empresa']) && in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
+                    if(isset($datosOfertas['id_empresa']) && in_array($datosOfertas['id_empresa'], $array_empresas)){
                         $breadcrumbs['cuentas'] = 'Ver Ofertas';
                     }else{
                         $breadcrumbs['vacantes'] = 'Ver Ofertas';
@@ -527,6 +527,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
+                //print_r($datosOfertas);
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
                 $planes = array();
 
@@ -549,7 +550,7 @@ class Controlador_Aspirante extends Controlador_Base
 
                 if($vista == 1){
 
-                    if(isset($datosOfertas[0]['id_empresa']) && !in_array($datosOfertas[0]['id_empresa'], $array_empresas)){
+                    if(isset($datosOfertas['id_empresa']) && !in_array($datosOfertas['id_empresa'], $array_empresas)){
                         $breadcrumbs['vacantes'] = 'Ver Ofertas';
                     }else{
                         $breadcrumbs['cuentas'] = 'Ver Ofertas subempresas';

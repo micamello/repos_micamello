@@ -41,7 +41,7 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 	if($estado == 1){
 		$email_subject = "Activación de oferta"; 
 		$email_body = Modelo_TemplateEmail::obtieneHTML("OFERTA_APROBADA");   
-		Modelo_Oferta::activarOferta($id_oferta);                
+		Modelo_Oferta::desactivarOferta($id_oferta,Modelo_Oferta::ACTIVA);                
 	}else{
 		$email_subject = "Rechazo de oferta"; 
 		$email_body = Modelo_TemplateEmail::obtieneHTML("OFERTA_RECHAZADA"); 
