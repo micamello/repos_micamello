@@ -134,7 +134,7 @@ class Modelo_Oferta{
         $sql .= " ORDER BY orden_urgente DESC,o.fecha_creado DESC";
       }
     }
-    //echo $sql; exit;
+    //echo $sql; 
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -428,8 +428,8 @@ class Modelo_Oferta{
             INNER JOIN mfo_empresa e ON e.id_empresa = o.id_empresa
             WHERE o.estado = 1 AND p.id_pais = ? AND 
                   o.id_ofertas IN (SELECT DISTINCT(id_ofertas) FROM mfo_oferta_subareas 
-                                   WHERE id_areas_subareas IN (".$areas.")) /*AND
-                  o.fecha_creado BETWEEN ? AND ?  */
+                                   WHERE id_areas_subareas IN (".$areas.")) AND
+                  o.fecha_creado BETWEEN ? AND ?  
             ORDER BY o.id_ofertas";    
     return $GLOBALS['db']->auto_array($sql,array($pais,$fechadesde,$fechahasta),true);        
   }

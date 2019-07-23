@@ -69,7 +69,7 @@ class Utils{
       );
 
       $envio = $mail->send_email($data);
-      $idMensaje = $envio['data']['message-id'];
+      //$idMensaje = $envio['data']['message-id'];
       // var_dump($envio);
       if($envio['code'] == 'success'){
         return true;

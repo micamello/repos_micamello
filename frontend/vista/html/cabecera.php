@@ -138,6 +138,7 @@ $noautofill = "";
 
   $fixed = "";
   if (isset($_SESSION['mfo_datos']['usuario']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && isset($vista) && $vista == "inicio") { 
+    //$fixed = "menu";
 ?>
 
     <!-- <div class="container-fluid"> -->

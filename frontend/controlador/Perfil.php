@@ -81,9 +81,7 @@ class Controlador_Perfil extends Controlador_Base
                     $btnSubir  = 0;
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
-                    if(!isset($data['error'])){
-
-                        Utils::log('entro sin error');
+                    if(!isset($data['error'])){                      
                       //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';                      
                       Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
                     }
@@ -559,7 +557,7 @@ class Controlador_Perfil extends Controlador_Base
 
         $informe = 0;
         $cantd_facetas = Modelo_PorcentajexFaceta::obtienePermisoDescargar($idusuario);
-        if(/*isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && */$cantd_facetas >= 2){
+        if(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso') && $cantd_facetas >= 2){
             $informe = $cantd_facetas;
         }else if(!isset($_SESSION['mfo_datos']['planes']) || $cantd_facetas == 2){
             $informe = $cantd_facetas;

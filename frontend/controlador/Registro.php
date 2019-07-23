@@ -72,7 +72,7 @@ class Controlador_Registro extends Controlador_Base {
         if (empty($id_usuario)){
           throw new Exception("Error en el sistema, por favor intente de nuevo");
         }
-        $GLOBALS['db']->commit();
+        
         setcookie('preRegistro', null, -1, '/');
         // setcookie("showModal", "", time()-3600);
         $nombres = ucfirst($datosReg['nombresCandEmp']).((isset($datosReg['apellidosCand'])) ? " ".ucfirst($datosReg['apellidosCand']) : '');
@@ -99,7 +99,7 @@ class Controlador_Registro extends Controlador_Base {
             Utils::envioCorreo($value,"Registro de empresa","Se registro una empresa id: ".$id_usuario.". Verificar datos ".$datosReg['nombresCandEmp']);
           }
         }
-
+        $GLOBALS['db']->commit(); 
 // $datosValidos['tipoEmpresa'] != "" -> SI LA EMPRESA ES PERSONA NATURAL
         
       } 
@@ -321,29 +321,41 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function registroRedSocial($correo,$nombre,$apellido){
-    if(empty($correo)){
-      throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direcci\u00F3n de correo o reg\u00CDstrese llenando el formulario.");
-    }
-    $url = "";
-    $correo = strtolower($correo);
-    $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
-    $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
-    $id_genero = Modelo_Genero::obtenerListadoGenero();
-    $id_genero = $id_genero[0]['id_genero'];
-    $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
-
-
-    foreach ($id_situacionlaboral as $key => $value) {
-      $id_situacionlaboral = $key;
-      break;
-    }
-
-    $default_city = Modelo_Sucursal::obtieneCiudadDefault();
-    $escolaridad = Modelo_Escolaridad::obtieneListado();
-    $campo_fecha = date("Y-m-d H:i:s");
-    $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
-    try {      
+    try {
+      if(empty($correo)){
+        throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direcci\u00F3n de correo o reg\u00CDstrese llenando el formulario.");
+      }
+      $url = "";
+      $correo = strtolower($correo);
+      $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
+      $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
+      $id_genero = Modelo_Genero::obtenerListadoGenero();
+      $id_genero = $id_genero[0]['id_genero'];
+      $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
+          
       $GLOBALS['db']->beginTrans();
+
+      if(empty($correo)){
+        throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direccion de correo o registrese llenando el formulario.");
+      }
+      $url = "";
+      $correo = strtolower($correo);
+      $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
+      $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
+      $id_genero = Modelo_Genero::obtenerListadoGenero();
+      $id_genero = $id_genero[0]['id_genero'];
+      $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
+
+      foreach ($id_situacionlaboral as $key => $value) {
+        $id_situacionlaboral = $key;
+        break;
+      }
+
+      $default_city = Modelo_Sucursal::obtieneCiudadDefault();
+      $escolaridad = Modelo_Escolaridad::obtieneListado();
+      $campo_fecha = date("Y-m-d H:i:s");
+      $mayor_edad = date("Y-m-d H:i:s",strtotime($campo_fecha."- 18 year"));
+    
       $datocorreo = Modelo_Usuario::existeCorreo($correo);
       if (!empty($datocorreo)){
         throw new Exception("El correo asociado con su red social ya se encuentra ingresada");
@@ -370,7 +382,7 @@ class Controlador_Registro extends Controlador_Base {
         throw new Exception("Ha ocurrido un error, por favor intente nuevamente");
       }
       $user_id = $GLOBALS['db']->insert_id();
-      $GLOBALS['db']->commit();        
+      
       $nombres = $nombre." ".$apellido;      
       $token = Utils::generarToken($user_id,"ACTIVACION");
       if (empty($token)){
@@ -381,6 +393,7 @@ class Controlador_Registro extends Controlador_Base {
       if (!$this->correoActivacionRedSocial($correo,$nombres,$token,$username,$password)){
         throw new Exception("Error en el env\u00EDo de correo, por favor intente denuevo");
       }
+       $GLOBALS['db']->commit();       
       $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar tu cuenta';  
     } 
     catch (Exception $e) {

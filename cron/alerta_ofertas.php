@@ -78,8 +78,8 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC) ){
       $email_body = Modelo_TemplateEmail::obtieneHTML("OFERTAS_LABORALES");
       $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
       $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);
-      // Utils::envioCorreo($rows["correo"],"Ofertas Laborales",$email_body); 
-      Utils::envioCorreo("edervpozo@gmail.com","Ofertas Laborales",$email_body);
+      Utils::envioCorreo($rows["correo"],"Ofertas Laborales",$email_body); 
+      
       $correosEnviados++;
       echo "<br><br><br>";  
     }

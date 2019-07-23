@@ -33,7 +33,7 @@
             } 
             if ($listadoAcciones[$key] == "buscarCandidatosPostulados"){
               if (!empty($gratuito["limite_perfiles"])){
-                $permiso = str_replace('NRO',"<span style='text-decoration:line-through;'>".$gratuito["limite_perfiles"]."</span>&nbsp;<span class='nrovirado'>".$gratuito["prom_limiteperfiles"]."</span>",$permiso);  
+                $permiso = str_replace('NRO',$gratuito["limite_perfiles"],$permiso);  
               }
               else{
                $permiso = str_replace('NRO','',$permiso);   
@@ -41,7 +41,7 @@
             } 
             if ($listadoAcciones[$key] == "descargarHv"){
               if (!empty($gratuito["limite_perfiles"])){
-                $permiso = str_replace('NRO',"los <span style='text-decoration:line-through;'>".$gratuito["limite_perfiles"]."</span>&nbsp;<span class='nrovirado'>".$gratuito["prom_limiteperfiles"]."</span>",$permiso);
+                $permiso = str_replace('NRO',"los ".$gratuito["limite_perfiles"],$permiso);
               }
               else{
                 $permiso = str_replace('NRO','todos los ',$permiso);   
@@ -57,8 +57,8 @@
 
         <ul id="gratul" style="" class="izq theplan plan-tabla col-xs-12 col-md-4 flex-item">
           <div>&nbsp;</div>
-          <div class="planes-promo" id="grattitulo"></div>
-            <div id="gratcosto" class="plan-precio" style="color:#ec3131;"> 
+          <div class="title headingazul titulo-planes" id="grattitulo"></div>
+            <div id="gratcosto" class="plan-precio" > 
               <!-- <span class="subscript"></span> -->
             </div>
             <small>&nbsp;</small>
@@ -78,7 +78,7 @@
           <br>
           <br>
           <br> 
-          <a class="pricebutton btn-red btn-bottom" onclick="buttongrat();"><span class="icon-tag"></span>Publicar</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttongrat();"><span class="icon-tag"></span>Publicar</a>
           <p><br></p>
         </ul>
       <?php } ?> 
@@ -161,7 +161,7 @@
           <br>
           <br>
           <br>                 
-          <a class="pricebutton btn-blue btn-bottom" onclick="buttonplan();"><span class="icon-tag"></span>Suscribirse</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttonplan();"><span class="icon-tag"></span>Publicar</a>
           <p><br></p>
         </ul>                                    
         <?php } ?> 
@@ -260,7 +260,7 @@
           <br>
           <br> 
           <?php //$enlace = (isset($aviso_promocional) && $aviso_promocional==1) ? "buttonavisograt();" : "buttonaviso();"; ?>
-          <a class="pricebutton btn-blue btn-bottom" onclick="buttonaviso();"><span class="icon-tag"></span>Suscribirse</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttonaviso();"><span class="icon-tag"></span>Publicar</a>
           <p><br></p>
         </ul>
       <?php } ?>
