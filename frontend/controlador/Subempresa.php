@@ -537,7 +537,7 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function correoCreacionEmpresaHija($correo, $nombres, $datahija){
         $nombre_mostrar = $nombres;
-        $asunto = "Creación de Empresa Hija";
+        $asunto = "Creación de Subempresa";
         $enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".PUERTO."://".HOST."/adminEmpresas/'>Click aquí</a>";
         $email_body = Modelo_TemplateEmail::obtieneHTML("NOTIFICACION_CREACION_EMPRESA");
         $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);

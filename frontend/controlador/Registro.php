@@ -322,22 +322,12 @@ class Controlador_Registro extends Controlador_Base {
 
   public function registroRedSocial($correo,$nombre,$apellido){
     try {
-      if(empty($correo)){
-        throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direcci\u00F3n de correo o reg\u00CDstrese llenando el formulario.");
-      }
-      $url = "";
-      $correo = strtolower($correo);
-      $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
-      $id_situacionlaboral = Modelo_SituacionLaboral::obtieneListadoAsociativo();
-      $id_genero = Modelo_Genero::obtenerListadoGenero();
-      $id_genero = $id_genero[0]['id_genero'];
-      $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
-          
       $GLOBALS['db']->beginTrans();
 
       if(empty($correo)){
         throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direccion de correo o registrese llenando el formulario.");
       }
+
       $url = "";
       $correo = strtolower($correo);
       $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
