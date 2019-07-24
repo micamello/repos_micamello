@@ -845,19 +845,17 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							            		<td style="text-align: center; vertical-align: middle;">
 							            			
 							            			<?php
+							            				$estilo = 'color: #CDCDCD;';
 							            				if(!empty($vistos)){
 							            					$new_arr = array_column($vistos,'id_usuario');
 								            				if(in_array($a['id_usuario'], $new_arr)){
 								            					$estilo = 'color: #7ABF89;';
 								            					// $imagenvisto = 'check-01.png';
 								            				}
-								            				else{
-								            					$estilo = 'color: #CDCDCD;';
-								            					// $imagenvisto = 'check-02.png';
-								            				}
-								            				echo "<i class='fa fa-eye' style='".$estilo."font-size: 25px;'></i>";
+								            				
 								            				// echo "<img src='".PUERTO.'://'.HOST."/imagenes/".$imagenvisto."' width='40' height='40' alt='img.png'/>";
 							            				}
+							            				echo "<i class='fa fa-eye' style='".$estilo."font-size: 25px;'></i>";
 							            			?>
 							            		</td>
 
