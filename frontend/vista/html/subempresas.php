@@ -76,7 +76,7 @@
                                     <th class="text-center">Plan(es) asociado(s)</th>
                                     <th class="text-center">N° de ofertas restantes</th>
                                     <th class="text-center">N° de accesos restantes</th>
-                                    <th class="text-center">Estado</th>
+                                    <th class="text-center">Estado del plan</th>
                                     <th colspan="3" class="text-center">Acciones</th>
                                 </tr>
                             </thead>
