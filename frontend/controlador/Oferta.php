@@ -699,7 +699,14 @@ class Controlador_Oferta extends Controlador_Base{
         }
 
         $datos['estado'] = 1;
-        $datos['fecha_creado'] = date('Y-m-d H:m:s');
+
+        $fecha_actual = date('Y-m-d H:m:s');
+        $datos['fecha_creado'] = $fecha_actual;
+        $datos['fecha_actualizado'] = $fecha_actual;
+        $dias_totales = (int)OFERTA_ACTIVA_DESCARGA + (int)OFERTA_ACTIVA_VER;
+        $fecha_caducidad = strtotime ( '+'.($dias_totales-1).' day' , strtotime ( $fecha_actual) ) ;
+        $fecha_caducidad = date ( 'Y-m-d H:m:s' , $fecha_caducidad );
+        $datos['fecha_caducidad'] = $fecha_caducidad;
         $datos['id_requisitoOferta'] = $GLOBALS['db']->insert_id();
 
         //Insertar el nuevo registro de la oferta con el id_empresa_plan actualizado

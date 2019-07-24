@@ -273,6 +273,10 @@ class Controlador_Publicar extends Controlador_Base {
     }
     $id_requisitoOferta = $GLOBALS['db']->insert_id();      
     $fechaActual = date('Y-m-d H:m:s');
+    $dias_totales = (int)OFERTA_ACTIVA_DESCARGA + (int)OFERTA_ACTIVA_VER;
+    $fecha_caducidad = strtotime ( '+'.($dias_totales-1).' day' , strtotime ( $fechaActual) ) ;
+    $fecha_caducidad = date ( 'Y-m-d H:m:s' , $fecha_caducidad );
+
     $datosOferta = array('id_empresa'=>$datos['id_empresa'],
                          'titulo'=>$datos['nombreOferta'],
                          'descripcion'=>$datos['descripcion'],
@@ -283,6 +287,8 @@ class Controlador_Publicar extends Controlador_Base {
                          'anosexp'=>$datos['anosexp'],
                          'estado'=>2,
                          'fecha_creado'=>$fechaActual,
+                         'fecha_actualizado'=>$fechaActual,
+                         'fecha_caducidad'=>$fecha_caducidad,
                          'tipo'=>$datos['ofertaUrgenteOf'],
                          'primer_empleo'=>$datos['primerEmpleoOf'],
                          'id_jornada'=>$datos['jornadaOf'],
