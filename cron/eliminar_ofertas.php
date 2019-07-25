@@ -22,18 +22,16 @@ $ofertas = Modelo_Oferta::obtenerOfertas();
 
 if (count($ofertas) > 0){
 
-	echo '<br>fecha_actual: '.$fechaactual = date("Y-m-d H:i:s");
-	echo '<br>dias_totales: '.$dias_totales = (int)OFERTA_ACTIVA_DESCARGA + (int)OFERTA_ACTIVA_VER;
-	echo '<br>';
+	$fechaactual = date("Y-m-d H:i:s");
+	$dias_totales = (int)OFERTA_ACTIVA_DESCARGA + (int)OFERTA_ACTIVA_VER;
+
 	foreach($ofertas as $oferta){
 
-		echo '<br>id_ofertas: '.$oferta["id_ofertas"];
-		echo '<br>fecha_creado: '.$oferta["fecha_creado"];
 		$fecha_con_permisos = strtotime ( '+'.(OFERTA_ACTIVA_DESCARGA-1).' day' , strtotime ( $oferta["fecha_creado"] ) ) ;
-		echo '<br>fecha_con_permisos: '.$fecha_con_permisos = date ( 'Y-m-d H:m:s' , $fecha_con_permisos );
+		$fecha_con_permisos = date ( 'Y-m-d H:m:s' , $fecha_con_permisos );
 
 		$fecha_limite = strtotime ( '+'.($dias_totales-1).' day' , strtotime ( $oferta["fecha_creado"] ) ) ;
-		echo '<br>fecha_limite: '.$fecha_limite = date ( 'Y-m-d H:m:s' , $fecha_limite );
+		$fecha_limite = date ( 'Y-m-d H:m:s' , $fecha_limite );
 
 		try{
 	    	if ($fechaactual >= $fecha_con_permisos && $fechaactual <= $fecha_limite){
@@ -52,7 +50,6 @@ if (count($ofertas) > 0){
 	  	    echo "Error al inactivar oferta ".$oferta["id_ofertas"]."<br>";
 	        Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron Eliminar Ofertas',$e->getMessage());
   		} 
-		  echo '<br>'; 
 	}
 }
 
