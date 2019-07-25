@@ -3,7 +3,7 @@ require_once '../constantes.php';
 require_once '../init.php';
 
 /***DEPOSITOS MANUALES***/
-$id_comprobante = 9;  
+$id_comprobante = 10;  
 $datos_comprobante = Modelo_Comprobante::obtieneComprobante($id_comprobante);    
 $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);
 $infousuario = Modelo_Usuario::busquedaPorId($datos_comprobante["id_user_emp"],$datos_comprobante["tipo_usuario"]);
