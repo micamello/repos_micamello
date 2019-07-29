@@ -822,7 +822,8 @@ public static function validarCelularConvencional($contenido){
   }
 
   public static function crearThumbnail($nombreImagen, $nombreThumbnail, $nuevoAncho, $nuevoAlto){
-    
+    // Se agrego esta linea
+    @ini_set('default_charset', 'UTF-8');
     // Obtiene las dimensiones de la imagen.
     list($ancho, $alto) = getimagesize($nombreImagen);
 
