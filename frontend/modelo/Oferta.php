@@ -417,8 +417,21 @@ class Modelo_Oferta{
     return $GLOBALS['db']->auto_array($sql,array($idOferta));
   }
 
-  public static function ofertasDiarias($pais,$areas){
-    if (empty($pais) || empty($areas)){ return false; }    
+  public static function ofertasDiarias($pais,$areas, $usuarioData){
+    if (empty($pais) || empty($areas) || empty($usuarioData)){ return false; }  
+    // Si puede viajar pero no puede cambiar de residencia (busca solo provincia);
+    // si puede viajar y tambien cambiar de residencia (busca en todo el pais);
+    // Si no puede viajar pero si puede cambiar de residencia (busca en todo el pais);
+    // si no puede viajar y no puede cambiar de residencia (busca en la provincia y la ciudad);
+    if($usuarioData['residencia'] == 1 && $usuarioData['viajar'] == 0){
+      $add_sql = " AND p.id_provincia = ".$usuarioData['id_provincia']." ";
+    }
+    elseif(($usuarioData['residencia'] == 1 && $usuarioData['viajar'] == 1) || ($usuarioData['residencia'] == 0 && $usuarioData['viajar'] == 1)){
+      $add_sql = "AND p.id_pais = ".$pais."";
+    }
+    elseif($usuarioData['residencia'] == 0 && $usuarioData['viajar'] == 0){
+      $add_sql = " AND p.id_provincia = ".$usuarioData['id_provincia']." AND c.id_ciudad = ".$usuarioData['id_ciudad']." ";
+    }  
     $fechaayer = date("Y-m-d",strtotime(date("Y-m-d")."- 1 day"));
     $fechadesde = $fechaayer." 00:00:00";
     $fechahasta = $fechaayer." 23:59:59";
@@ -428,12 +441,13 @@ class Modelo_Oferta{
             INNER JOIN mfo_ciudad c ON c.id_ciudad = o.id_ciudad
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
             INNER JOIN mfo_empresa e ON e.id_empresa = o.id_empresa
-            WHERE o.estado = 1 AND p.id_pais = ? AND 
+            WHERE o.estado = 1 ".$add_sql." AND 
                   o.id_ofertas IN (SELECT DISTINCT(id_ofertas) FROM mfo_oferta_subareas 
                                    WHERE id_areas_subareas IN (".$areas.")) AND
                   o.fecha_creado BETWEEN ? AND ?  
-            ORDER BY o.id_ofertas";    
-    return $GLOBALS['db']->auto_array($sql,array($pais,$fechadesde,$fechahasta),true);        
+            ORDER BY o.id_ofertas";  
+            // echo $sql."<br>";  
+    return $GLOBALS['db']->auto_array($sql,array($fechadesde,$fechahasta),true);        
   }
 
   public static function ofertasxEliminar(){
