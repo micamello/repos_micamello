@@ -2,6 +2,8 @@
 require_once 'constantes.php';
 require_once 'init.php';
 
+define('HOST','www.micamello.com.ec');
+
 //purchaseVerication que devuelve la Pasarela de Pagos
 $purchaseVericationVPOS2 = trim($_POST['purchaseVerification']);
 //purchaseVerication que genera el comercio
@@ -55,8 +57,7 @@ try{
       throw new Exception("Error Insert IPN Payme");
     }    
     if (trim($_POST["authorizationResult"]) == "00" && trim($_POST["errorCode"]) == "00"){      
-      $_SESSION['mfo_datos']['actualizar_planes'] = 1;       
-      Utils::log("SESSION 1 ".print_r($_SESSION,true));
+      $_SESSION['mfo_datos']['actualizar_planes'] = 1;             
       if (file_exists($filename)){        
         @unlink($filename);
       }      

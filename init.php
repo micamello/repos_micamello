@@ -1,7 +1,6 @@
 <?php
 require_once RUTA_INCLUDES.'/phpMailer/PHPMailerAutoload.php';
 require_once RUTA_INCLUDES.'/mpdf/mpdf.php';
-include RUTA_INCLUDES.'/mailin-smtp-api/Mailin.php';
 
 function cargarClases($nombreClase) {
   $nombre_archivo = RUTA_FRONTEND . str_replace('_', '/', $nombreClase) . '.php';
