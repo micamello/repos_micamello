@@ -4,11 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-<<<<<<< HEAD
-define('DBNOMBRE', 'micamello_desarrollo3');
-=======
-define('DBNOMBRE', 'base_actual');
->>>>>>> 0f8e394c22eacdd3499f6f30b1691942ef5deea1
+define('DBNOMBRE', 'produccion_e');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -16,12 +12,12 @@ define('RUTA_VISTA', FRONTEND_RUTA.'frontend/Vista/');
 define('RUTA_ADMIN', FRONTEND_RUTA.'admin');
 define('TOKEN', 'token.micamello.ecuador');
 define('HORAS_VALIDO_PASSWORD', '24');
-define('MAIL_CORREO','micamelloecuador@gmail.com');
+define('MAIL_CORREO','noresponder@micamello.com.ec');
 define('MAIL_NOMBRE','Mi Camello');
-define('MAIL_USERNAME','micamelloecuador@gmail.com');
-define('MAIL_PASSWORD','ecuador2018');
-define('MAIL_PORT','465');
-define('MAIL_HOST','smtp.gmail.com');
+define('MAIL_USERNAME','noresponder@micamello.com.ec');
+define('MAIL_PASSWORD','tmh!efKO=72@');
+define('MAIL_PORT','587');
+define('MAIL_HOST','mail.micamello.com.ec');
 define('KEY_ENCRIPTAR','micamelloecuador');
 define('PESO_IMAGEN','1000000');
 define('PESO_ARCHIVO','2000000');
@@ -125,4 +121,6 @@ define('CLAVE_SMTP','cz0Ls8tI34AZ2aUJ');
 
 define('OFERTA_ACTIVA_DESCARGA','45');
 define('OFERTA_ACTIVA_VER','15');
+
+define('MAX_PFACETA', '2');
 ?>
