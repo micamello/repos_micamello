@@ -4,11 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-<<<<<<< HEAD
 define('DBNOMBRE', 'micamello_desarrollo3');
-=======
-define('DBNOMBRE', 'base_actual');
->>>>>>> 0f8e394c22eacdd3499f6f30b1691942ef5deea1
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
