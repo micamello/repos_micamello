@@ -15,7 +15,6 @@ class Controlador_Registro extends Controlador_Base {
       case 'buscarDni':
         $dni = Utils::getParam('dni', '', $this->data);
         $buscardni = Modelo_Usuario::existeDni($dni);
-        Utils::log("eder");
         Vista::renderJSON(array("dato"=>$buscardni));
       break;
       case 'buscarCorreo':

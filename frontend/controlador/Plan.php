@@ -5,12 +5,12 @@ class Controlador_Plan extends Controlador_Base {
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }    
-    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-      Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
-                                     $_SESSION['mfo_datos']['usuario']['id_usuario'],
-                                     (isset($_SESSION['mfo_datos']['usuario']['infohv']) ? $_SESSION['mfo_datos']['usuario']['infohv'] : null),
-                                     (isset($_SESSION['mfo_datos']['planes']) ? $_SESSION['mfo_datos']['planes'] : null)); 
-    }
+    // if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+    //   Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
+    //                                  $_SESSION['mfo_datos']['usuario']['id_usuario'],
+    //                                  (isset($_SESSION['mfo_datos']['usuario']['infohv']) ? $_SESSION['mfo_datos']['usuario']['infohv'] : null),
+    //                                  (isset($_SESSION['mfo_datos']['planes']) ? $_SESSION['mfo_datos']['planes'] : null)); 
+    // }
     $breadcrumbs = array();
     $opcion = Utils::getParam('opcion','',$this->data);  
     

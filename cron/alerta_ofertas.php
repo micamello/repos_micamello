@@ -31,7 +31,7 @@ $id_ultimoUsuario = 0;
 
 $i = 0;
 while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC) ){
-  echo "(puede viajar: ".$rows['viajar']. " puede cambiar residencia: ".$rows['residencia'].")<br>";
+  // echo "(puede viajar: ".$rows['viajar']. " puede cambiar residencia: ".$rows['residencia'].")<br>";
   // var_dump($rows);
   $i++;
   if($result_set->num_rows == $i){
