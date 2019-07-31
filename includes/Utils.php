@@ -88,7 +88,8 @@ class Utils{
     $mail->Password = MAIL_PASSWORD;     
     $mail->From = MAIL_CORREO; 
     $mail->FromName = MAIL_NOMBRE;         
-    $mail->SMTPAutoTLS = false;    
+    $mail->SMTPAutoTLS = false;   
+    //$mail->SMTPSecure = 'ssl'; 
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 
@@ -99,9 +100,10 @@ class Utils{
           $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
         }
       }
-    }      
+    }          
     return $mail->send();
   }
+
 
   public static function encriptar($texto){      
     $objaes = new Aes(KEY_ENCRIPTAR);

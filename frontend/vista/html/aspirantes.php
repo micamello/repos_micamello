@@ -45,8 +45,17 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 		<br>
 		<div class="alert alert-info col-md-12"> 
 			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, en esta oferta existen <b><?php echo $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)]; ?> postulados</b> pero solo puede visualizar <b><?php echo $limite_plan; ?></b>.
+			<?php if($datosOfertas['estado'] == Modelo_Oferta::DENTRODELTIEMPO){ ?>
+				<br>Usted está dentro del tiempo límite de la oferta, por tal razón puede vizualizar los candidatos más no descargar su información.
+			<?php } ?>
+		</div>
+	<?php }else if($datosOfertas['estado'] == Modelo_Oferta::DENTRODELTIEMPO){ ?>
+		<br>
+		<div class="alert alert-info col-md-12"> 
+			Usted está dentro del tiempo límite de la oferta, por tal razón puede vizualizar los candidatos más no descargar su información.
 		</div>
 	<?php } ?>
+
 
 	<?php if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'])){ ?>
 		<br>
@@ -949,7 +958,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 								            				$imagen = 'icono-aspirante-05.png';
 								            			}
 
-								            			echo $title.'" data-title="Informe '.$title.$datosOfertas['estado'].'" style="vertical-align: middle; text-align: center;">';
+								            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 									            			if($mostrar == ''){
 									            				

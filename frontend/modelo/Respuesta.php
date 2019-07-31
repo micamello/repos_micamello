@@ -16,8 +16,7 @@ class Modelo_Respuesta{
             WHERE r.id_usuario = ? ";
     $sql .= (!empty($faceta)) ? " AND c.id_faceta IN (".$faceta.")" : "";        
     $sql .= " GROUP BY o.id_pregunta
-              ORDER BY o.id_pregunta, c.id_faceta, o.valor";  
-              Utils::log('sql:'.$sql);        
+              ORDER BY o.id_pregunta, c.id_faceta, o.valor";                      
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
   }
 

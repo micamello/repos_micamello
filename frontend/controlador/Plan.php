@@ -71,20 +71,7 @@ class Controlador_Plan extends Controlador_Base {
     $tipousu = $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"];
     $sucursal = SUCURSAL_ID;           
     if ($tipousu == Modelo_Usuario::CANDIDATO){
-      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,$sucursal); 
-      $planesUsuario = Modelo_Plan::listadoPlanesUsuario($_SESSION["mfo_datos"]["usuario"]["id_usuario"], Modelo_Usuario::CANDIDATO);
-      foreach($planesUsuario as $planCosto):
-        if($planCosto['costo'] > 0){break;}
-        else{
-          // id plan 11 autopostulacion
-          foreach ($tags['planes'] as $key => $value) {
-            if($value['id_plan'] == 11 && !next($planesUsuario)){
-              unset($tags['planes'][$key]);
-              break;
-            }
-          }
-        }
-      endforeach;  
+      $tags['planes'] = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,$sucursal);       
     }
     else{
       $nivel = Modelo_Usuario::obtieneNivel($_SESSION["mfo_datos"]["usuario"]["padre"]);        

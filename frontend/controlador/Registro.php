@@ -14,8 +14,7 @@ class Controlador_Registro extends Controlador_Base {
       break;
       case 'buscarDni':
         $dni = Utils::getParam('dni', '', $this->data);
-        $buscardni = Modelo_Usuario::existeDni($dni);
-        Utils::log("eder");
+        $buscardni = Modelo_Usuario::existeDni($dni);        
         Vista::renderJSON(array("dato"=>$buscardni));
       break;
       case 'buscarCorreo':
@@ -321,13 +320,12 @@ class Controlador_Registro extends Controlador_Base {
   }
 
   public function registroRedSocial($correo,$nombre,$apellido){
-    try {
+    try {      
       $GLOBALS['db']->beginTrans();
 
       if(empty($correo)){
         throw new Exception("No hemos podido crear su cuenta. Por favor verifique que su cuenta de red social contenga una direccion de correo o registrese llenando el formulario.");
       }
-
       $url = "";
       $correo = strtolower($correo);
       $id_estadocivil = Modelo_EstadoCivil::obtieneListado();
@@ -335,6 +333,7 @@ class Controlador_Registro extends Controlador_Base {
       $id_genero = Modelo_Genero::obtenerListadoGenero();
       $id_genero = $id_genero[0]['id_genero'];
       $id_estadocivil = $id_estadocivil[0]['id_estadocivil'];
+
 
       foreach ($id_situacionlaboral as $key => $value) {
         $id_situacionlaboral = $key;

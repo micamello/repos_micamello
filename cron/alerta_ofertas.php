@@ -31,7 +31,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC) ){
   $diferencia = explode(':', $diferencia);
   $minutosDiff = ($diferencia[0]*60) + $diferencia[1] + ($diferencia[2]/60);
 
-	if($correosEnviados >= 5 || $minutosDiff >= 60){
+	if($correosEnviados >= 500 || $minutosDiff >= 60){
     if($ultimousuariofile = file_exists(CRON_RUTA.'ultimousuario.txt')){
       unlink(CRON_RUTA.'ultimousuario.txt');
     }
@@ -79,6 +79,7 @@ while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC) ){
       $email_body = str_replace("%NOMBRES%", $nombre_mostrar, $email_body);   
       $email_body = str_replace("%OFERTAS%", $mail_ofertas, $email_body);
       Utils::envioCorreo($rows["correo"],"Ofertas Laborales",$email_body); 
+      //Utils::envioCorreo("desarrollo@micamello.com.ec","Ofertas Laborales",$email_body); 
       
       $correosEnviados++;
       echo "<br><br><br>";  
