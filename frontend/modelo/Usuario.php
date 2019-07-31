@@ -1198,7 +1198,7 @@ WHERE
 
   public static function consultarInfoEmpresa($id_empresa){
     if (empty($id_empresa)){ return false; }
-    $sql = "SELECT e.id_empresa, e.telefono, e.nombres, si.descripcion as sectorindustrial, l.username, 
+    $sql = "SELECT e.id_empresa, l.id_usuario_login, e.padre, e.telefono, e.nombres, si.descripcion as sectorindustrial, l.username, 
             l.correo, l.dni, ce.nombres as nombres_contacto, ce.apellidos as apellidos_contacto, ce.telefono1, ce.telefono2, e.estado
              FROM mfo_empresa e
             INNER JOIN mfo_usuario_login l

@@ -49,7 +49,9 @@ RewriteRule ^imagenes/imgperfil/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carp
 RewriteRule ^imagenes/usuarios/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=profile&param1=$1 [L]
 RewriteRule ^imagenes/imgthumb/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=profile&param1=$1&param3=thumb [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
+RewriteRule ^cargarHojaVida/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarHojaVida [L]
 
 #login
 RewriteRule ^login/?$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
