@@ -718,7 +718,7 @@ function obtenerFiltro(ruta,page){
 		ruta += "R"+facetas+"/";
 		busco = true;
 	}
-
+	
 	if(busco){
 		var nueva_ruta = ruta+page+"/";
 		window.location = nueva_ruta;
