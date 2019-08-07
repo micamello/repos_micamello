@@ -17,9 +17,9 @@ class Controlador_Cuestionario extends Controlador_Base {
     }
 
     //si no ha cargado hoja de vida no puede realizar cuestionarios
-    if (empty($_SESSION['mfo_datos']['usuario']['infohv'])){
-      $this->redirectToController('perfil');
-    }
+    // if (empty($_SESSION['mfo_datos']['usuario']['infohv'])){
+    //   $this->redirectToController('perfil');
+    // }
 
     $opcion = Utils::getParam('opcion', '', $this->data);
     switch ($opcion) {
@@ -43,13 +43,24 @@ class Controlador_Cuestionario extends Controlador_Base {
           $fecha2 = new DateTime("now");
           $diferencia = $fecha1->diff($fecha2);
           $tiempo = $diferencia->format('%H:%i:%s');
-          //       print_r($tiempo);
-          // exit();
+          $faceta = Modelo_Respuesta::facetaSiguiente($id_usuario);
+          $data = Modelo_Opcion::obtieneOpciones($faceta);
+          $var = 0;
+          foreach ($data as $opcion) {
+            $siguiente = next($data);
+            if(($opcion['id_faceta'] != $siguiente['id_faceta']) && count($siguiente['id_faceta']) > 0){
+              $var = 1;
+            }
+          }
+          print_r("var: ".$var);
+          exit();
           if(!Modelo_Respuesta::guardarRespuestas($arrayDatos, $id_usuario)){
             throw new Exception("Ha ocurrido un error, intente nuevamente1.");
           }
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
           $faceta = Modelo_Respuesta::facetaActual($id_usuario);
+          Utils::log("datos de la faceta: ".print_r($faceta, true));
+          exit();
           if (empty($faceta)){
             throw new Exception("Ha ocurrido un error, intente nuevamente2.");
           }
@@ -134,7 +145,8 @@ class Controlador_Cuestionario extends Controlador_Base {
             $tags["acceso"] = "1";
           }
         }        
-        $data = Modelo_Opcion::obtieneOpciones($faceta);        
+        $data = Modelo_Opcion::obtieneOpciones($faceta);
+        var_dump($data);        
         $tags["data"] = $data;
         $tags["tiempo"] = date("Y-m-d H:i:s");
         $tags["faceta"] = $faceta;        
@@ -147,6 +159,16 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags["nomobile"] = 1;
         $tags["pagadoEstado"] = Modelo_PorcentajexFaceta::obtienePermisoDescargar($id_usuario);
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);
+      break;
+
+      case 'consultarCA':
+        // Utils::log("entro aqui");
+        $ca = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
+          Utils::log("datos de $ca: ".$ca);
+          if($ca == 1){
+            $ca = '0';
+          }
+        Vista::renderJSON(array("dato"=>$ca));
       break;
       
       default:        

@@ -586,7 +586,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			        </div>
 
 			        <div class="form-group">
-			            <select id="viajar" class="form-control">
+			            <select id="edad" class="form-control">
 			                <option value="0">Seleccione una edad</option>
 			                <?php
 								foreach (EDADES as $key => $v) {
@@ -601,7 +601,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			                <option value="0">Seleccione un g&eacute;nero</option>
 			                <?php
 								foreach (GENERO as $key => $v) {
-									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
+									echo '<option value="'.VALOR_GENERO[$key].'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
 								}
 							?>                    
 			            </select>

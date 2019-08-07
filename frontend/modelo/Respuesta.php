@@ -57,6 +57,7 @@ class Modelo_Respuesta{
             INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
             INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
             WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)";
+            // Utils::log($sql);
     $result = $GLOBALS['db']->auto_array($sql,array($idusuario));          
     if (empty($result)){
       return 1;
@@ -81,6 +82,8 @@ class Modelo_Respuesta{
             INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
             INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
             WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)";
+            // Utils::log($sql);
+            echo $sql;
     $result = $GLOBALS['db']->auto_array($sql,array($idusuario));  
     return $result["orden"];
   }

@@ -637,6 +637,7 @@ function obtenerFiltro(ruta,page){
 	var nacionalidad = $('#nacionalidad').val();
 	var postulado = $('#postulado').val();
 	var genero = $('#genero').val();
+	var edad = $('#edad').val();
 	var viajar = $('#viajar').val();
 	var trabajo = $('#trabajo').val();
 	var licencia = $('#licencia').val();
@@ -674,13 +675,17 @@ function obtenerFiltro(ruta,page){
 		busco = true;
 	}
 
-	if(postulado != 0){
-		ruta += "F"+postulado+"/";
-		busco = true;
-	}
+	// if(postulado != 0){
+	// 	ruta += "F"+postulado+"/";
+	// 	busco = true;
+	// }
 
 	if(genero != 0){
 		ruta += "G"+genero+"/";
+		busco = true;
+	}
+	if(edad != 0){
+		ruta += "C"+edad+"/";
 		busco = true;
 	}
 
@@ -713,7 +718,7 @@ function obtenerFiltro(ruta,page){
 		ruta += "R"+facetas+"/";
 		busco = true;
 	}
-
+	
 	if(busco){
 		var nueva_ruta = ruta+page+"/";
 		window.location = nueva_ruta;

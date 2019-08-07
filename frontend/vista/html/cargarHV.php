@@ -1,4 +1,4 @@
-<form action="<?php echo ""; ?>" method='POST' id='cargarHVForm' enctype="multipart/form-data">
+<form action="<?php echo PUERTO."://".HOST."/subirHv/"; ?>" method='POST' id='cargarHVForm' enctype="multipart/form-data">
   <div class="text-center">
   <h2 class="titulo">Cargar Hoja de Vida</h2>
   </div>
@@ -12,7 +12,7 @@
             <small style="font-size: 100%">(.PDF, .doc, .docx/máx: 2mb)</small>
           </div>
         </div>
-        <input type="file" name="userHV" id="userHV" style="display: none;">
+        <input type="file" name="userHV" id="userHV" style="display: none;" accept=".pdf,.docx,.doc">
         <!-- <a href="#" style="font-size: 20pt;" class="btn-light-blue" disabled="">GUARDAR</a> -->
         <input type="submit" name="hvButton" id="hvButton" value="Guardar" class="btn-light-blue" style="font-size: 20pt;">
       </div>

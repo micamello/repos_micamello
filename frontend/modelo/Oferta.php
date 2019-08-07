@@ -444,7 +444,7 @@ class Modelo_Oferta{
             WHERE o.estado = 1 ".$add_sql." AND 
                   o.id_ofertas IN (SELECT DISTINCT(id_ofertas) FROM mfo_oferta_subareas 
                                    WHERE id_areas_subareas IN (".$areas.")) AND
-                  o.fecha_creado BETWEEN '".$fechadesde."' AND '".$fechahasta."'  
+                  o.fecha_creado BETWEEN ' ".$fechadesde."'  AND ' ".$fechahasta."'   
             ORDER BY o.id_ofertas";  
             // echo $sql."<br>";  
     return $GLOBALS['db']->auto_array($sql,array(),true);        

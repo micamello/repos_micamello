@@ -43,7 +43,6 @@
 	<br><br><br><br><br><br>
 </div>
 <?php } ?>
-
 <div class="container">
     <form role="form" name="form_editarPerfil" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/perfil/" enctype="multipart/form-data">
         <div class="">
@@ -57,7 +56,10 @@
                     <!-- <br> -->
                 </div>
 
-                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ 
+                	if(isset($_SESSION['mfo_datos']['usuario']['infohv']) && $ca > 2){
+
+                	?>
                 	<div id="carga" style="margin: 50px 0px;" class="recuadro-perfil panel panel-default"> 	
                 		<?php if($btnDescarga == 1){ ?><br>
                     		<img width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>" style="border-radius: 20px 20px 0px 0px;">
@@ -73,7 +75,10 @@
 		                    </div> 
       					<?php } ?>
                     </div>
-                <?php } ?>
+                <?php 
+
+            	}
+            } ?>
       
 		        
 
@@ -751,8 +756,12 @@
 
 					                <div align="center">
 					                	<input type="button" id="boton" name="" class="btn-blue" value="GUARDAR">
-										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>SIGUIENTE</a>
+										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
+											$defaultnext = "cuestionario";
+											Utils::log("La variable caUser: ".$ca);
+											if(!isset($_SESSION['mfo_datos']['usuario']['infohv']) && $ca > 2){$defaultnext = "cargarhojavida";}
+											?>
+											<a href="<?php echo PUERTO."://".HOST."/".$defaultnext."/";?>" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>SIGUIENTE</a>
 										<?php }else{ 	?>
 											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>PUBLICAR OFERTA</a>
 									    <?php } ?>
@@ -786,7 +795,7 @@
     </div>
   </div>
 </section>
-
+<!-- <input type="hidden" name="caUser" id="caUser" value="<?php echo $ca; ?>"> -->
 <div class="modal fade" id="cambiar_clave" tabindex="-1" role="dialog" aria-labelledby="cambiar_clave" aria-hidden="true">
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
@@ -818,6 +827,7 @@
 				</div>
 			</div>
 	      </div>
+
 	      <input type="hidden" name="cambiarClave" id="cambiarClave" value="1">
 	      <div class="modal-footer" style="text-align: center !important;">
 	        <button type="button" class="btn-red" id="btn-rojo" data-dismiss="modal">Cancelar</button>

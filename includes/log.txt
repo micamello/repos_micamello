@@ -1,0 +1,97 @@
+[2019/08/06 04:40:22] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/06 04:40:22] datos de la faceta: 2
+[2019/08/06 04:41:17] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/06 04:41:17] datos de la faceta: 2
+[2019/08/06 04:44:38] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/06 04:44:38] datos de la faceta: 2
+[2019/08/06 04:57:55] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/06 04:57:55] datos de la faceta: 2
+[2019/08/06 04:58:18] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/06 04:58:18] datos de la faceta: 2
+[2019/08/06 04:59:10] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/06 04:59:10] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/06 04:59:10] datos de la faceta: 2
+[2019/08/07 08:23:34] La variable caUser: 1
+[2019/08/07 08:23:34] datos de 1: 1
+[2019/08/07 08:48:29] La variable caUser: 1
+[2019/08/07 08:48:29] datos de 1: 1
+[2019/08/07 08:49:36] La variable caUser: 1
+[2019/08/07 08:49:36] datos de 1: 1
+[2019/08/07 08:53:17] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:54:57] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:55:07] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:55:10] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:55:35] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:55:50] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:56:07] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:56:19] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:56:30] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
+[2019/08/07 08:56:49] SELECT f.orden FROM mfo_opcion o 
+            INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
+            INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
+            INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)
