@@ -43,44 +43,52 @@ class Controlador_Cuestionario extends Controlador_Base {
           $fecha2 = new DateTime("now");
           $diferencia = $fecha1->diff($fecha2);
           $tiempo = $diferencia->format('%H:%i:%s');
-          $faceta = Modelo_Respuesta::facetaSiguiente($id_usuario);
-          $data = Modelo_Opcion::obtieneOpciones($faceta);
-          $var = 0;
-          foreach ($data as $opcion) {
-            $siguiente = next($data);
-            if(($opcion['id_faceta'] != $siguiente['id_faceta']) && count($siguiente['id_faceta']) > 0){
-              $var = 1;
+          $facetaArr = Modelo_Respuesta::facetaSiguiente($id_usuario);
+          if($facetaArr == 1){
+            $data = Modelo_Opcion::obtieneOpciones($facetaArr);
+            $facetaArr = array($facetaArr);
+            foreach ($data as $opcion) {
+              $siguiente = next($data);
+              if(($opcion['id_faceta'] != $siguiente['id_faceta']) && count($siguiente['id_faceta']) > 0){
+                array_push($facetaArr, $siguiente['id_faceta']);
+              }
             }
           }
-          print_r("var: ".$var);
-          exit();
+
           if(!Modelo_Respuesta::guardarRespuestas($arrayDatos, $id_usuario)){
             throw new Exception("Ha ocurrido un error, intente nuevamente1.");
           }
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
           $faceta = Modelo_Respuesta::facetaActual($id_usuario);
-          Utils::log("datos de la faceta: ".print_r($faceta, true));
-          exit();
-          if (empty($faceta)){
-            throw new Exception("Ha ocurrido un error, intente nuevamente2.");
+
+          // if (empty($faceta)){
+          //   throw new Exception("Ha ocurrido un error, intente nuevamente2.");
+          // }
+          
+          $porcentajeArr = array();
+          foreach ($facetaArr as $value) {
+            $totalfaceta = 0;
+            $porcentaje = 0;
+            $vlbaremo = Modelo_Respuesta::resultadoxUsuario($id_usuario,$value);
+            if (empty($vlbaremo)){
+              throw new Exception("Ha ocurrido un error, intente nuevamente3."); 
+            }
+
+            foreach($vlbaremo as $valores){
+              $resbaremo = Modelo_Baremo::obtienePuntaje($valores["orden1"],$valores["orden2"],$valores["orden3"],$valores["orden4"],$valores["orden5"]);
+              if (empty($resbaremo)){
+                throw new Exception("Ha ocurrido un error, intente nuevamente4."); 
+              }              
+              $totalfaceta = $totalfaceta + $resbaremo["porcentaje"];
+            }
+
+            $porcentaje = round($totalfaceta/count($vlbaremo),2); 
+            $acceso = Utils::getParam('acceso', '', $this->data);         
+            $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
+            array_push($porcentajeArr, $porcentaje);
           }
-          $vlbaremo = Modelo_Respuesta::resultadoxUsuario($id_usuario,$faceta);
-          if (empty($vlbaremo)){
-            throw new Exception("Ha ocurrido un error, intente nuevamente3."); 
-          }
-          $totalfaceta = 0;
-          foreach($vlbaremo as $valores){
-            $resbaremo = Modelo_Baremo::obtienePuntaje($valores["orden1"],$valores["orden2"],$valores["orden3"],$valores["orden4"],$valores["orden5"]);
-            if (empty($resbaremo)){
-              throw new Exception("Ha ocurrido un error, intente nuevamente4."); 
-            }              
-            $totalfaceta = $totalfaceta + $resbaremo["porcentaje"];
-          }          
-          $porcentaje = round($totalfaceta/count($vlbaremo),2); 
-          $acceso = Utils::getParam('acceso', '', $this->data);         
-          $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
-          //preguntar si tiene un plan para responder el tercer cuestionario
-          if (!Modelo_PorcentajexFaceta::guardarValores($porcentaje,$id_usuario,$faceta,$estado,$tiempo)){
+
+          if (!Modelo_PorcentajexFaceta::guardarValores($porcentajeArr,$id_usuario,$facetaArr,$estado,$tiempo)){
             throw new Exception("Ha ocurrido un error, intente nuevamente5."); 
           }
           if ($faceta == 5 && $estado == 0){
@@ -145,8 +153,7 @@ class Controlador_Cuestionario extends Controlador_Base {
             $tags["acceso"] = "1";
           }
         }        
-        $data = Modelo_Opcion::obtieneOpciones($faceta);
-        var_dump($data);        
+        $data = Modelo_Opcion::obtieneOpciones($faceta);      
         $tags["data"] = $data;
         $tags["tiempo"] = date("Y-m-d H:i:s");
         $tags["faceta"] = $faceta;        
@@ -162,7 +169,6 @@ class Controlador_Cuestionario extends Controlador_Base {
       break;
 
       case 'consultarCA':
-        // Utils::log("entro aqui");
         $ca = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
           Utils::log("datos de $ca: ".$ca);
           if($ca == 1){
