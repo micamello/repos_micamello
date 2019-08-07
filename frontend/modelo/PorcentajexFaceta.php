@@ -26,16 +26,15 @@ class Modelo_PorcentajexFaceta{
 		return $datos;
 	}
 
-  public static function guardarValores($valor,$idusuario,$idfaceta,$estado=1, $tiempo){
-    if (empty($idusuario) || empty($idfaceta)){ return false; }
-    $fecha_culminacion = date("Y-m-d H:i:s");    
-    $vlinsert = array("valor" => $valor,
-                      "id_usuario" => $idusuario,
-                      "id_faceta" => $idfaceta,
-                      "fecha_culminacion" => $fecha_culminacion,
-                      "estado" => $estado,
-                      "tiempo"=>"".$tiempo."");
-    return $GLOBALS['db']->insert("mfo_porcentajexfaceta",$vlinsert);
+  public static function guardarValores($valores,$idusuario,$facetas,$estado=1, $tiempo){
+    if (empty($idusuario) || empty($facetas) || !is_array($facetas) || !is_array($valores) || (count($valores) != count($facetas))){ return false; }
+    $fecha_culminacion = date("Y-m-d H:i:s");
+    $array_session = array();
+    foreach ($facetas as $key=>$faceta) {
+      array_push($array_session, array($valores[$key],$idusuario,$faceta,"'".$fecha_culminacion."'",$estado,"'".$tiempo."'"));
+    }
+    $result = $GLOBALS['db']->insert_multiple("mfo_porcentajexfaceta","valor,id_usuario,id_faceta,fecha_culminacion,estado,tiempo",$array_session);
+    return $result;
   }
 
   public static function updateEstado($idusuario,$estado=1){

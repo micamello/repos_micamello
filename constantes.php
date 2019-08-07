@@ -122,5 +122,5 @@ define('CLAVE_SMTP','cz0Ls8tI34AZ2aUJ');
 define('OFERTA_ACTIVA_DESCARGA','45');
 define('OFERTA_ACTIVA_VER','15');
 
-define('MAX_PFACETA', '1');
+define('MAX_PFACETA', '2');
 ?>
