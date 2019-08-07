@@ -20,7 +20,7 @@ $dominio = 'https://www.micamello.com.ec';
 if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 
 	$id_oferta = $_GET['id_oferta'];
-	$consultar_oferta = Modelo_Oferta::consultarInfoOfertaEmpresa($id_oferta);
+	$consultar_oferta = Modelo_Oferta::consultarInfoOfertaEmpresa($id_oferta);	
 
 	echo '<b>Empresa:</b> '.$consultar_oferta["empresa"].'<br>';
 	echo '<b>Título:</b> '.$consultar_oferta["titulo"].'<br>';
@@ -34,7 +34,7 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 
 	$id_oferta = $_GET['id_oferta'];
 	$consultar_oferta = Modelo_Oferta::consultarInfoOfertaEmpresa($id_oferta);
-
+  
 	//1 activar - 0 rechazar
 	$estado = $_GET['estado'];
 
@@ -42,6 +42,7 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 		$email_subject = "Activación de oferta"; 
 		$email_body = Modelo_TemplateEmail::obtieneHTML("OFERTA_APROBADA");   
 		Modelo_Oferta::desactivarOferta($id_oferta,Modelo_Oferta::ACTIVA);                
+
 	}else{
 		$email_subject = "Rechazo de oferta"; 
 		$email_body = Modelo_TemplateEmail::obtieneHTML("OFERTA_RECHAZADA"); 
@@ -50,8 +51,9 @@ if(isset($_GET['id_oferta']) && !isset($_GET['estado'])){
 
 	$email_body = str_replace("%NOMBRES%", utf8_encode($consultar_oferta["empresa"]), $email_body);   
 	$email_body = str_replace("%NOMBRE_OFERTA%", utf8_encode($consultar_oferta["titulo"]), $email_body);  
-
+     
 	Utils::envioCorreo($consultar_oferta["correo"],$email_subject,$email_body);
+	Utils::envioCorreo("creativo@micamello.com.ec",$email_subject,$email_body);
 	echo 'YA ENVIO EL CORREO A '.$consultar_oferta["correo"];
 
 }else{

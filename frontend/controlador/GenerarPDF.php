@@ -23,6 +23,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       break;
       case 'generarFactura':
         $idFactura = Utils::desencriptar(Utils::getParam('idFactura','',$this->data));
+        
         if(!empty($idFactura)){
           $consultaFactura = Modelo_Factura::obtenerFactura($idFactura,Modelo_Factura::AUTORIZADO);
           

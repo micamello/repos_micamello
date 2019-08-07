@@ -916,7 +916,6 @@ WHERE
   }
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){   
-
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
           
@@ -924,7 +923,8 @@ WHERE
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
 
-      if (empty($infohv) || !isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){        
+      //si no tiene completo el perfil
+      if (/*empty($infohv) || */!isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }    
       
@@ -939,6 +939,9 @@ WHERE
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
         //si existe un acceso eliminar la notificacion del acceso              
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }
+      elseif (empty($infohv)){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cargarhojavida/');
       }
       elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
         Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/'); 
