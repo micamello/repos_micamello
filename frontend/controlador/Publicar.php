@@ -241,6 +241,9 @@ class Controlador_Publicar extends Controlador_Base {
       if(!Utils::formatoDineroDecimal($datosReg['salarioOf'])){
         throw new Exception("El campo salario solo permite n\u00FAmeros");
       }
+      if($datosReg['salarioOf'] <= 0){
+        throw new Exception("Campo salario: Valor inv\u00E1lido. Min. $1.");
+      }
       if (Utils::validarNumeros($datosReg['cantVac']) == false) {
         throw new Exception("El campo vacantes solo permite n\u00FAmeros");
       }
