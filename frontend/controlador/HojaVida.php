@@ -5,12 +5,13 @@ class Controlador_HojaVida extends Controlador_Base{
     if(!Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
-    // if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
-    //   Utils::doRedirect(PUERTO.'://'.HOST.'/');
-    // }
-    // $causer = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
-    $opcion = Utils::getParam('opcion','',$this->data);
 
+    $causer = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
+    $opcion = Utils::getParam('opcion','',$this->data);
+    
+    if($causer != (MAX_PFACETA+1) || empty($causer)){
+       Utils::doRedirect(PUERTO.'://'.HOST.'/');
+    }
     if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA || (isset($_SESSION['mfo_datos']['usuario']['infohv']) || !empty($_SESSION['mfo_datos']['usuario']['infohv'])) && $opcion != "hvcargado"){
       Utils::doRedirect(PUERTO.'://'.HOST.'/');
     }
