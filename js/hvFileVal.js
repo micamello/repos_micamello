@@ -1,6 +1,6 @@
 var errorCount = 0;
-if($('#cargarHV').length){
-  $('#cargarHV').on('click', function(){
+if($('.recuadro-perfil').length){
+  $('.recuadro-perfil').on('click', function(){
     $('#userHV').click();
   });
 }
@@ -101,7 +101,7 @@ if($('#cargarHVForm').length){
 
 function validarSubmit(obj, e){
   if(errorCount == 1){
-    // e.preventDefault();
+     e.preventDefault();
   }
 }
 
