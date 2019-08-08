@@ -726,3 +726,29 @@ function ajaxLoader(obj, action, tipo){
 function caracteresEspecial(){
   $('#aspiracion').val($('#aspiracion').val().replace(/[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/]/g, ""));
 }
+
+function predictWord(obj){
+  var keywordInput = obj.val();
+  var url = puerto_host+"/index.php?mostrar=inicio&opcion=searchKeyWord&keywordInput="+keywordInput;
+  if(keywordInput.length >= 4){
+    console.log(obj.val());
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType:'json',
+      async: false,
+      success:function(data){
+        // console.log(data.returnWords);
+        displayWords(data, obj);
+      },
+      error: function (request, status, error) {
+          console.log(request.responseText);
+      }
+    })
+  }
+}
+
+function displayWords(data, obj){
+  console.log(obj[0]);
+  // obj.html('<p>edereder</p>');
+}

@@ -55,18 +55,25 @@ class Controlador_Inicio extends Controlador_Base {
         Vista::render($vista, $tags);
       break;
       case 'politicaprivacidad':
-      $tags['vista'] = " ";
+        $tags['vista'] = " ";
         $vista = 'documentos/politica_privacidad_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;
       case 'politicacookie':
-      $tags['vista'] = " ";
+        $tags['vista'] = " ";
         $vista = 'documentos/politicacookie_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;
       case 'verificarCompra':  
         //$resultado = $this->verificaCompra();
         Vista::renderJSON(array("dato"=>$_SESSION['mfo_datos']['planActivar']));
+      break;
+      case 'searchKeyWord':
+        $keyword = Utils::getParam('keywordInput', '', $this->data);
+        $arrayData = array('eder1', 'eder2', 'eder3');
+        Vista::renderJSON(array("returnWords"=>$arrayData));
+
+        // Utils::log("eder aqui entro el ajax ".$keyword);
       break;
       default:            
         Vista::render('inicio', $tags);

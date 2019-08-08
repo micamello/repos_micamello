@@ -78,7 +78,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 					<div class="filtros">
 						<div class="form-group">
 						    <div class="input-group">
-							    <input type="text" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
+							    <input type="text" onkeyup="javascript: predictWord($(this));" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 							    <?php 
 								    $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
 								    //$ruta = Controlador_Aspirante::calcularRuta($ruta,'Q');
@@ -92,7 +92,6 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 					</div>
 				</div>
 		    </div>
-
 			<?php
 			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'filtroFacetas',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 			    <div class="panel panel-default shadow-panel1">

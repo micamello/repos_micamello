@@ -113,6 +113,9 @@ RewriteRule ^convertir/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=conve
 RewriteRule ^detalleOferta/([a-z]+)/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
 
 ######################################################################################
+#palabrasClaves
+RewriteRule ^searchKeyWord/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion [L]
+######################################################################################
 
 #postulaciones
 RewriteRule ^postulacion/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=postulacion [L]

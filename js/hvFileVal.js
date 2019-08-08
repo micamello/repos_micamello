@@ -1,6 +1,6 @@
 var errorCount = 0;
-if($('#cargarHV').length){
-  $('#cargarHV').on('click', function(){
+if($('.recuadro-perfil').length){
+  $('.recuadro-perfil').on('click', function(){
     $('#userHV').click();
   });
 }

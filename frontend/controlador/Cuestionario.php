@@ -39,9 +39,9 @@ class Controlador_Cuestionario extends Controlador_Base {
           $diferencia = $fecha1->diff($fecha2);
           $tiempo = $diferencia->format('%H:%i:%s');
           $facetaArr = Modelo_Respuesta::facetaSiguiente($id_usuario);
-          if($facetaArr == 1){
-            $data = Modelo_Opcion::obtieneOpciones($facetaArr);
-            $facetaArr = array($facetaArr);
+          $facetaArr = array($facetaArr);
+          if($facetaArr[0] == 1){
+            $data = Modelo_Opcion::obtieneOpciones($facetaArr[0]);
             foreach ($data as $opcion) {
               $siguiente = next($data);
               if(($opcion['id_faceta'] != $siguiente['id_faceta']) && count($siguiente['id_faceta']) > 0){
