@@ -78,6 +78,14 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 					<div class="filtros">
 						<div class="form-group">
 						    <div class="input-group">
+						    	<div style="background-color: #FFFFFF; position: ; z-index: 9999;">
+						    		<div style="position: absolute; z-index: 9999;">
+						    			<li>eder</li>
+						    			<li>eder</li>
+						    			<li>eder</li>
+						    			<li>eder</li>
+						    		</div>
+						    	</div>
 							    <input type="text" onkeyup="javascript: predictWord($(this));" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 							    <?php 
 								    $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
