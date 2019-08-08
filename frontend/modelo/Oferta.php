@@ -134,7 +134,7 @@ class Modelo_Oferta{
         $sql .= " ORDER BY orden_urgente DESC,o.fecha_actualizado DESC";
       }
     }
-    //echo $sql; 
+    
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -267,7 +267,7 @@ class Modelo_Oferta{
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
-    //echo $sql;
+    Utils::log($sql);
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
