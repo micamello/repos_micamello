@@ -21,8 +21,7 @@ $dominio = "https://www.micamello.com.ec";
 if(isset($_GET['id_empresa']) && !isset($_GET['estado'])){
 	
 	$id_empresa = $_GET['id_empresa'];
-	$datos_empresa = Modelo_Usuario::consultarInfoEmpresa($id_empresa);
-	var_dump($datos_empresa);
+	$datos_empresa = Modelo_Usuario::consultarInfoEmpresa($id_empresa);	
 
 	echo '<b>Username:</b> '.$datos_empresa["username"].'<br>';
 	echo '<b>Nombres:</b> '.$datos_empresa["nombres"].'<br>';
@@ -33,7 +32,7 @@ if(isset($_GET['id_empresa']) && !isset($_GET['estado'])){
 	echo '<b>Razones:</b> <br><form role="form" name="aprobacionEmpresa" id="aprobacionEmpresa" method="post" action="'.$dominio.'/cron/empresa_aprobada.php?id_empresa='.$id_empresa.'&estado=0"><textarea id="razones" name="razones" style="margin: 0px; width: 666px; height: 164px;"></textarea><br><br>';
 	echo '<button style="font-size: 20px;" class="boton_personalizado" type="submit">Rechazar</button></form>';
 	echo '<a class="boton_personalizado" href="'.$dominio.'/cron/empresa_aprobada.php?id_empresa='.$id_empresa.'&estado=1">Aprobar</a>';
-	// echo Utils::generarPassword();
+	
 }else if(isset($_GET['id_empresa']) && isset($_GET['estado'])){
 	
 	$id_empresa = $_GET['id_empresa'];
@@ -46,7 +45,7 @@ if(isset($_GET['id_empresa']) && !isset($_GET['estado'])){
 		$email_subject = "Activación de Empresa"; 
 		$template_nombre = "ACTIVACION_EMPRESA";       
 		$email_body = Modelo_TemplateEmail::obtieneHTML($template_nombre);
-		if($datos_empresa['padre'] != null && $datos_empresa['padre'] != ""){
+		if(!empty($datos_empresa['padre'])){
 			$passHtml = '<b style="color: #0b66a9;">Contrase&ntilde;a: </b><br> <p style="text-align: center;">'.$newPass.'</p>';
 			$email_body = str_replace('%MENSAJE%', $passHtml, $email_body);
 			Modelo_Usuario::modificarPassword($newPass,$datos_empresa['id_usuario_login']);
@@ -69,14 +68,9 @@ if(isset($_GET['id_empresa']) && !isset($_GET['estado'])){
 	$email_body = str_replace("%CORREO%", $datos_empresa["correo"], $email_body);
 	$enlace = "<a style='background-color: #22b573; color: white; padding: 8px 20px; text-decoration: none; border-radius: 5px;' href='".$dominio."/login/'>click aqu&iacute;</a><br>";      
 	$email_body = str_replace("%ENLACE%", $enlace, $email_body);     
-	Utils::envioCorreo($datos_empresa["correo"],$email_subject,$email_body);
-	// Utils::envioCorreo("edervpozo@gmail.com",$email_subject,$email_body);
-
+	Utils::envioCorreo($datos_empresa["correo"],$email_subject,$email_body);	
 	echo 'YA ENVIO EL CORREO A '.$datos_empresa["correo"];
-
 }else{
 	echo "ENVIAR POR PARAMETRO EL ID_EMPRESA";
 }
-
- 
 ?>

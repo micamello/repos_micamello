@@ -303,10 +303,10 @@ class Proceso_Facturacion{
     $detalles = $factura->detalles;
     $infoAdicional = $factura->infoAdicional;
 
-    $obj_generar = new GenerarBarcode((string)$infoTributaria->claveAcceso,FRONTEND_RUTA.'imagenes/imagenesCod/');
+    /*$obj_generar = new GenerarBarcode((string)$infoTributaria->claveAcceso,FRONTEND_RUTA.'imagenes/imagenesCod/');
     $obj_generar->imprimirbarcode();
 
-    $mpdf=new mPDF('','A4','','',3,3,3,3,6,3); 
+    $mpdf=new mPDF('','A4','','',3,3,3,3,6,3); */
 
     $logo = "<img src='".FRONTEND_RUTA."imagenes/sucursal/logos/factura.png' alt='Mi Camello Logo' height='150'>";
     //$eslogan = "Eficiencia, innovación y transparencia";
@@ -502,9 +502,10 @@ class Proceso_Facturacion{
     $contenido .= "</tr>";                            
     $contenido .= "</table>";
 
-    $mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">'.self::DIR_MATRIZ.' | '.self::DIR_SUCURSAL.' <br>PBX: 4 606 0111 | 2 605 5990. <br>E-mail: infor@micamello.com.ec</footer>');
+    /*$mpdf->setHTMLFooter('<footer align="center" style="font-size:10px; color:#5d5858;">'.self::DIR_MATRIZ.' | '.self::DIR_SUCURSAL.' <br>PBX: 4 606 0111 | 2 605 5990. <br>E-mail: info@micamello.com.ec</footer>');*/
 
-    $mpdf->WriteHTML($contenido);
+    echo $contenido;
+    /*$mpdf->WriteHTML($contenido);
     
     unlink(FRONTEND_RUTA.'/imagenes/imagenesCod/'.$infoTributaria->claveAcceso.'.png');
 
@@ -512,7 +513,7 @@ class Proceso_Facturacion{
       $mpdf->Output($infoTributaria->claveAcceso.".pdf", 'D');
     }else{
       $mpdf->Output(self::RUTA_FACTURA.$infoTributaria->claveAcceso.".pdf", 'F');
-    }    
+    }*/    
   }
 
   function generarXML($xml,$claveacceso){

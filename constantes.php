@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'produccion_cambios');
+define('DBNOMBRE', 'micamello_desarrollov3');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -113,14 +113,11 @@ define("LK_SCOPE", 'r_liteprofile r_emailaddress');
 define("DIRECTORIOCORREOS", array('0'=>'desarrollo@micamello.com.ec', '1'=>'desarrollo2@micamello.com.ec', '2'=>'administrador.gye@micamello.com.ec'));
 define('AREASPERMITIDAS_PUB', '1');
 define('SUBAREA_PERM_PUB', '1');
-
 define('SERVER_SMTP','smtp-relay.sendinblue.com');
 define('PUERTO_SMTP',587);
 define('ID_SMTP','ffueltala@gmail.com');
 define('CLAVE_SMTP','cz0Ls8tI34AZ2aUJ');
-
 define('OFERTA_ACTIVA_DESCARGA','45');
 define('OFERTA_ACTIVA_VER','15');
-
-define('MAX_PFACETA', '2');
+define('MAX_PFACETA', '1');
 ?>

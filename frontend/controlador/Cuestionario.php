@@ -3,11 +3,9 @@ class Controlador_Cuestionario extends Controlador_Base {
   
   public function construirPagina(){
     $mostrar_dialog = false; 
-
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
-
     if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){
       if (isset($_SESSION['mfo_datos']['planes'])){
         $this->redirectToController('publicar');
@@ -15,12 +13,10 @@ class Controlador_Cuestionario extends Controlador_Base {
         $this->redirectToController('planes');
       }
     }
-
     //si no ha cargado hoja de vida no puede realizar cuestionarios
     // if (empty($_SESSION['mfo_datos']['usuario']['infohv'])){
     //   $this->redirectToController('perfil');
     // }
-
     $opcion = Utils::getParam('opcion', '', $this->data);
     switch ($opcion) {
       case 'modalidad':
@@ -33,7 +29,6 @@ class Controlador_Cuestionario extends Controlador_Base {
           Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/');
         }
       break;
-
       case 'guardarResp':
         try{ 
           $GLOBALS['db']->beginTrans();
@@ -54,13 +49,11 @@ class Controlador_Cuestionario extends Controlador_Base {
               }
             }
           }
-
           if(!Modelo_Respuesta::guardarRespuestas($arrayDatos, $id_usuario)){
             throw new Exception("Ha ocurrido un error, intente nuevamente1.");
           }
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
           $faceta = Modelo_Respuesta::facetaActual($id_usuario);
-
           // if (empty($faceta)){
           //   throw new Exception("Ha ocurrido un error, intente nuevamente2.");
           // }
@@ -73,7 +66,6 @@ class Controlador_Cuestionario extends Controlador_Base {
             if (empty($vlbaremo)){
               throw new Exception("Ha ocurrido un error, intente nuevamente3."); 
             }
-
             foreach($vlbaremo as $valores){
               $resbaremo = Modelo_Baremo::obtienePuntaje($valores["orden1"],$valores["orden2"],$valores["orden3"],$valores["orden4"],$valores["orden5"]);
               if (empty($resbaremo)){
@@ -81,13 +73,11 @@ class Controlador_Cuestionario extends Controlador_Base {
               }              
               $totalfaceta = $totalfaceta + $resbaremo["porcentaje"];
             }
-
             $porcentaje = round($totalfaceta/count($vlbaremo),2); 
             $acceso = Utils::getParam('acceso', '', $this->data);         
             $estado = (!empty($acceso) && $acceso == 1 && $_SESSION['mfo_datos']['usuario']['pendiente_test']) ? 0 : 1;
             array_push($porcentajeArr, $porcentaje);
           }
-
           if (!Modelo_PorcentajexFaceta::guardarValores($porcentajeArr,$id_usuario,$facetaArr,$estado,$tiempo)){
             throw new Exception("Ha ocurrido un error, intente nuevamente5."); 
           }
@@ -135,7 +125,6 @@ class Controlador_Cuestionario extends Controlador_Base {
         }
         Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/');
       break;
-
       case 'preguntas':
         $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
         $metodoSeleccion = Modelo_Usuario::consultarMetodoASeleccion($id_usuario);        
@@ -167,7 +156,6 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags["pagadoEstado"] = Modelo_PorcentajexFaceta::obtienePermisoDescargar($id_usuario);
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);
       break;
-
       case 'consultarCA':
         $ca = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
           Utils::log("datos de $ca: ".$ca);
@@ -205,7 +193,6 @@ class Controlador_Cuestionario extends Controlador_Base {
       break;
     }
   }
-
   public function validarRespuesta($arrayOrden, $arrayOpcion){
     $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
     $respuestas = Modelo_Respuesta::obtenerRespuestas($id_usuario);
@@ -224,7 +211,6 @@ class Controlador_Cuestionario extends Controlador_Base {
     }
     return $arrayData;
   }
-
   public function validaTercerFormulario($faceta){
     //consultar si tiene algun acceso
     $acceso = Modelo_AccesoEmpresa::consultaPorCandidato($_SESSION['mfo_datos']['usuario']["id_usuario"]);
@@ -238,6 +224,5 @@ class Controlador_Cuestionario extends Controlador_Base {
       return false;
     }    
   }
-
 }
 ?>

@@ -5,12 +5,12 @@ class Controlador_Plan extends Controlador_Base {
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }    
-    // if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-    //   Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
-    //                                  $_SESSION['mfo_datos']['usuario']['id_usuario'],
-    //                                  (isset($_SESSION['mfo_datos']['usuario']['infohv']) ? $_SESSION['mfo_datos']['usuario']['infohv'] : null),
-    //                                  (isset($_SESSION['mfo_datos']['planes']) ? $_SESSION['mfo_datos']['planes'] : null)); 
-    // }
+    if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+       Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
+                                      $_SESSION['mfo_datos']['usuario']['id_usuario'],
+                                      (isset($_SESSION['mfo_datos']['usuario']['infohv']) ? $_SESSION['mfo_datos']['usuario']['infohv'] : null),
+                                      (isset($_SESSION['mfo_datos']['planes']) ? $_SESSION['mfo_datos']['planes'] : null)); 
+     }
     $breadcrumbs = array();
     $opcion = Utils::getParam('opcion','',$this->data);  
     
@@ -269,7 +269,7 @@ class Controlador_Plan extends Controlador_Base {
  
   public function deposito(){    
     try{
-      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'correo'=>1,'direccion'=>1,'tipo_doc'=>1,'telefono'=>1,'dni'=>1,'provincia'=>1,'ciudad'=>1,'shipping'=>1);
+      $campos = array('idplan'=>1,'num_comprobante'=>1,'valor'=>1,'nombre'=>1,'apellido'=>1,'correo'=>1,'direccion'=>1,'tipo_doc'=>1,'telefono'=>1,'dni'=>1,'provincia'=>1,'ciudad'=>1,'shipping'=>1);
       $data = $this->camposRequeridos($campos);   
       
       if (!Utils::alfanumerico($data["num_comprobante"]) || strlen($data["num_comprobante"]) > 50){
@@ -306,7 +306,7 @@ class Controlador_Plan extends Controlador_Base {
        
       $archivo = Utils::validaExt($_FILES['imagen'],3);
       
-      if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"],$data["correo"],
+      if (!Modelo_Comprobante::guardarComprobante($data["num_comprobante"],$data["nombre"]." ".$data["apellido"],$data["correo"],
                                                   $data["telefono"],$data["dni"],$data["tipo_doc"],
                                                   Modelo_Comprobante::METODO_DEPOSITO,$archivo[1],
                                                   $data["valor"],$_SESSION['mfo_datos']['usuario']['id_usuario'],
@@ -347,8 +347,7 @@ class Controlador_Plan extends Controlador_Base {
 
   public function resultado(){            
     $mensaje = Utils::getParam('mensaje','',$this->data);         
-    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";   
-    Utils::log("SESSION 2 ".print_r($_SESSION,true)); 
+    $template = ($mensaje == 'exito') ? "mensajeplan_exito" : "mensajeplan_error";       
     if ($mensaje == "exito"){    
       if (isset($_SESSION['mfo_datos']['actualizar_planes']) && $_SESSION['mfo_datos']['actualizar_planes'] == 1){
         if(isset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']) && !empty($_SESSION['mfo_datos']['usuario']['ofertaConvertir'])){
