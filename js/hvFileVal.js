@@ -101,7 +101,7 @@ if($('#cargarHVForm').length){
 
 function validarSubmit(obj, e){
   if(errorCount == 1){
-    // e.preventDefault();
+     e.preventDefault();
   }
 }
 
