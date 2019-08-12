@@ -335,6 +335,8 @@ if($('#forma_1').length){
 				}
 		}
 		if(contador_errores > 0){
+			// Sobreescribiendo el mensaje del sweetalert
+			preguntasError = "Ordene las preguntas de todos los apartados.";
 			//console.log(contador_errores);
 			alertErrores(preguntasError);
 		}

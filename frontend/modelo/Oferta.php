@@ -24,6 +24,122 @@ class Modelo_Oferta{
     return (!empty($rs['cont'])) ? $rs['cont'] : 0;
   }
 
+  // copy of function down
+  public static function obtieneOfertas1($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$cambioRes=false,&$filtros=false){
+
+    $sql = "SELECT ";
+    if(($obtCantdRegistros == false) || $obtCantdRegistros == 2){
+        $sql .= "o.id_ofertas, o.estado, o.fecha_actualizado, o.titulo, o.descripcion, o.salario, o.primer_empleo, o.a_convenir,o.fecha_contratacion,o.vacantes,o.anosexp, o.tipo AS tipo_oferta, j.nombre AS jornada, p.nombre AS provincia, c.nombre AS ciudad, e.descripcion AS escolaridad, r.confidencial,r.discapacidad,r.residencia, r.edad_maxima,
+      r.edad_minima, IF(o.id_tipolicencia IS NULL,0,o.id_tipolicencia) AS licencia, r.viajar,ul.username, GROUP_CONCAT(DISTINCT(os.id_areas_subareas)) AS subareas";
+      if (!empty($vista) && ($vista == 'postulacion')){ 
+        $tiempo = Modelo_Parametro::obtieneValor('eliminar_postulacion');
+         $sql .= ", pos.tipo, pos.id_auto as id_postulacion, pos.resultado, u.id_usuario, emp.nombres AS empresa, emp.id_empresa AS id_empresa, IF(TIMESTAMPDIFF(MINUTE, pos.fecha_postulado,now()) <= ".($tiempo*60).",1,0) as puedeEliminar";
+      }else{
+        $sql .= ", emp.nombres AS empresa, emp.id_empresa AS id_usuario";
+      }
+      if(!empty($id)){
+         $sql .= ", GROUP_CONCAT(DISTINCT(ni.id_nivelIdioma_idioma)) AS idiomas";
+      }
+    }else{
+      $sql .= "emp.id_empresa AS id_usuario, emp.nombres";
+    }
+
+    $tiempo_ofertaUrgente = Modelo_Parametro::obtieneValor('tiempo_ofertaUrgente');
+    $sql .= ", IF(TIMESTAMPDIFF(MINUTE, o.fecha_actualizado,now()) <= ".($tiempo_ofertaUrgente*60)." && o.tipo = 1,1,0) as orden_urgente";
+
+    $sql .= " FROM mfo_oferta o, mfo_requisitooferta r, mfo_escolaridad e, mfo_jornada j, mfo_ciudad c, mfo_provincia p, mfo_usuario_login ul, mfo_empresa emp, mfo_oferta_subareas os";
+    if(!empty($vista) && ($vista == 'postulacion')){
+      $sql .= ", mfo_postulacion pos, mfo_usuario u";
+    }
+    if(!empty($id)){
+      $sql .= ", mfo_oferta_nivelidioma ofn, mfo_nivelidioma_idioma ni";
+    }
+    $sql .= " WHERE r.id_requisitoOferta = o.id_requisitoOferta
+    AND e.id_escolaridad = o.id_escolaridad
+    AND c.id_ciudad = o.id_ciudad
+    AND p.id_provincia = c.id_provincia
+    AND os.id_ofertas = o.id_ofertas
+    AND j.id_jornada = o.id_jornada
+    AND p.id_pais = ".$pais_empresa;
+    if(!empty($vista) && ($vista == 'vacantes' || $vista == 'cuentas')){
+      $sql .= " AND (o.estado = 1 OR o.estado = 2 OR o.estado = 3) AND o.id_empresa IN(".$idusuario.")";
+    }else if(!empty($vista) && $vista == 'postulacion'){
+      //$sql .= " AND (o.estado <> 2) ";
+    }else{
+      $sql .= " AND o.estado = 1 ";
+    }
+    
+    $sql .= " AND o.id_empresa = emp.id_empresa AND ul.id_usuario_login = emp.id_usuario_login";
+    if(!empty($id)){
+       $sql .= " AND ni.id_nivelIdioma_idioma = ofn.id_nivelIdioma_idioma
+      AND ofn.id_ofertas = o.id_ofertas AND o.id_ofertas = ".$id;
+    }
+    if(!empty($vista) && ($vista == 'postulacion')){
+      $sql .= " AND pos.id_usuario = u.id_usuario AND pos.id_ofertas = o.id_ofertas AND pos.id_usuario = ".$idusuario;
+    }
+    
+    if (!empty($vista) && ($vista != 'postulacion')){ 
+      if($areasInteres != false){
+        $sql .= " AND os.id_areas_subareas IN(".$areasInteres.")"; 
+      }
+
+      if($cambioRes != false){
+        $sql .= " AND c.id_ciudad = ".$cambioRes; 
+      }
+    }
+
+    $sql .= ' GROUP BY o.id_ofertas';
+    if(($obtCantdRegistros == false)){
+
+      if($filtros != false){
+        
+        $tipo = substr($filtros['O'],0,1);
+        $t = substr($filtros['O'],1,2);
+        if($tipo == 1){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY o.salario ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY o.salario DESC";
+          }
+          
+        }else if($tipo == 2){
+          if($t == 1){
+            $filtros['O'] = 2;
+            $sql .= " ORDER BY o.fecha_actualizado ASC";
+          }
+          if($t == 2){
+            $filtros['O'] = 1;
+            $sql .= " ORDER BY o.fecha_actualizado DESC";
+          }
+        }
+        
+      }else{
+
+        if(!empty($vista) && ($vista == 'postulacion')){ 
+          $sql .= " ORDER BY pos.tipo ASC";
+        }else{
+          $sql .= " ORDER BY orden_urgente DESC,o.fecha_actualizado DESC";
+        }
+      }
+
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
+
+    }else{
+      if(!empty($vista) && ($vista == 'postulacion')){ 
+        $sql .= " ORDER BY pos.tipo ASC";
+      }else{
+        $sql .= " ORDER BY orden_urgente DESC,o.fecha_actualizado DESC";
+      }
+    }
+    
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    return $rs;
+  }
+
   public static function obtieneOfertas($id=false,$page=false,$vista=false,$idusuario=false,$obtCantdRegistros=false,$pais_empresa,$areasInteres=false,$cambioRes=false,&$filtros=false){
 
     $sql = "SELECT ";

@@ -730,25 +730,59 @@ function caracteresEspecial(){
 function predictWord(obj){
   var keywordInput = obj.val();
   var url = puerto_host+"/index.php?mostrar=inicio&opcion=searchKeyWord&keywordInput="+keywordInput;
-  if(keywordInput.length >= 4){
-    console.log(obj.val());
     $.ajax({
       type: "GET",
       url: url,
       dataType:'json',
       async: false,
       success:function(data){
-        // console.log(data.returnWords);
-        displayWords(data, obj);
+        // if(data.returnWords.length > 0){
+          displayWords(data, obj);
+        // }
       },
       error: function (request, status, error) {
           console.log(request.responseText);
       }
     })
-  }
 }
 
 function displayWords(data, obj){
-  console.log(obj[0]);
-  // obj.html('<p>edereder</p>');
+  var resultadoString = "";
+  var valueFromInput = obj.val();
+  var elementFromPrepend = obj.parent();
+  if(valueFromInput == ""){
+    elementFromPrepend.prev().remove();
+    return false;
+  }
+  if(elementFromPrepend.prev().length > 0){
+    elementFromPrepend.prev().remove();
+  }
+  resultadoString = '<div class="panelTextPredictpanel">';
+  resultadoString += '<div class="subpaneltextpredict"><ul class="ulTextPredict">';
+    for (var i = 0; i < data.returnWords.length; i++) {
+      var idInput = ""+obj.attr('id')+"";
+      resultadoString += '<li onmouseover="lihover($(this));" onmouseleave="lileave($(this))" onclick="anadirText($(this), '+obj.attr('id')+');" class="liTextPredict">' + data.returnWords[i].toLowerCase() + '</li>';
+    }
+  resultadoString += "</ul></div></div>";
+  if(data.returnWords.length > 0){
+    obj.parent().before(resultadoString);
+  }
+}
+
+function desaparecerPanelList(){
+  $('.panelTextPredictpanel')[0].outerHTML = "";
+}
+
+
+function anadirText(obj, obj1){
+  $(obj1).val(obj.text());
+  $('.panelTextPredictpanel')[0].outerHTML = "";
+}
+
+function lihover(obj){
+  obj.addClass('lihover');
+}
+
+function lileave(obj){
+  obj.removeClass('lihover');
 }

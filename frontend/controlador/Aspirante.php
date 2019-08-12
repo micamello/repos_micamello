@@ -568,6 +568,9 @@ class Controlador_Aspirante extends Controlador_Base
                     //$costo = $datos_plan['costo'];
                    
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,false);
+                    $aspirantesPredict = Modelo_Usuario::obtenerAspirantes1($id_oferta,$page,'',$cantd_facetas,2);
+                    $arrayPermKeys = array("nombres", "apellidos", "asp_salarial");
+                    $arrayWords = Utils::createListArrMul($aspirantesPredict, $arrayPermKeys);
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,true);
                     $vistos = Modelo_Usuario::consultarVistoGeneral(0, 0, $id_oferta, true);
                     
@@ -599,6 +602,14 @@ class Controlador_Aspirante extends Controlador_Base
                     $breadcrumbs['aspirante'] = 'Buscar Aspirantes';
 
                     $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$cantd_facetas,$page,false);
+                    $aspirantesPredict = Modelo_Usuario::obtenerAspirantes1($id_oferta,$page,'',$cantd_facetas,2);
+                    $arrayPermKeys = array("nombres", "apellidos", "asp_salarial");
+                    $arrayWords = Utils::createListArrMul($aspirantesPredict, $arrayPermKeys);
+
+
+                    $aspirantesPredict = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,2);
+                    $arrayPermKeys = array("nombres", "apellidos", "asp_salarial");
+                    $arrayWords = Utils::createListArrMul($aspirantesPredict, $arrayPermKeys);
                     $paises = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$cantd_facetas,$page,true); 
                     $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);                    
                     $limite_aspirantes = count($paises);
