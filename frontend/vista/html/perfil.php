@@ -757,8 +757,7 @@
 					                <div align="center">
 					                	<input type="button" id="boton" name="" class="btn-blue" value="GUARDAR">
 										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
-											$defaultnext = "cuestionario";
-											Utils::log("La variable caUser: ".$ca);
+											$defaultnext = "cuestionario";											
 											if(!isset($_SESSION['mfo_datos']['usuario']['infohv']) && $ca > 2){$defaultnext = "cargarhojavida";}
 											?>
 											<a href="<?php echo PUERTO."://".HOST."/".$defaultnext."/";?>" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>SIGUIENTE</a>

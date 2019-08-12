@@ -338,6 +338,7 @@ if($('#forma_1').length){
 			// Sobreescribiendo el mensaje del sweetalert
 			preguntasError = "Ordene las preguntas de todos los apartados.";
 			//console.log(contador_errores);
+			preguntasError = "Ordene los enunciados de todos los apartados.";
 			alertErrores(preguntasError);
 		}
 	})
