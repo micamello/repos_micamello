@@ -410,10 +410,6 @@ class Controlador_Oferta extends Controlador_Base{
           $aspirantesXoferta = Modelo_Oferta::aspirantesXofertas();
 
           $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);     
-          $ofertasPredict = Modelo_Oferta::obtieneOfertas1(false,$page,$vista,$idUsuario,2,SUCURSAL_PAISID);
-          $arrayPermKeys = array("titulo","salario","a_convenir","empresa","jornada","ciuidad","provincia");
-          $arrayWords = Utils::createListArrMul($ofertasPredict, $arrayPermKeys);
-          //Para obtener la cantidad de registros totales de la consulta
           $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID);
 
           $planes = array();
@@ -563,18 +559,14 @@ class Controlador_Oferta extends Controlador_Base{
               $filtro = 1;
               $_SESSION['mfo_datos']['filtro'] = 0;
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID,$areasInteres,$cambioRes);     
-              $ofertasPredict = Modelo_Oferta::obtieneOfertas1(false,$page,$vista,$idUsuario,2,SUCURSAL_PAISID);
               $arrayPermKeys = array("titulo","salario","a_convenir","empresa","jornada","ciuidad","provincia");
-              $arrayWords = Utils::createListArrMul($ofertasPredict, $arrayPermKeys);
               //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID,$areasInteres,$cambioRes);                
             }else{
               $filtro = 0;
               $_SESSION['mfo_datos']['filtro'] = 1;
               $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
-              $ofertasPredict = Modelo_Oferta::obtieneOfertas1(false,$page,$vista,$idUsuario,2,SUCURSAL_PAISID);
-              $arrayPermKeys = array("titulo","salario","a_convenir","empresa","jornada","ciuidad","provincia");
-              $arrayWords = Utils::createListArrMul($ofertasPredict, $arrayPermKeys);
+
               //Para obtener la cantidad de registros totales de la consulta
               $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID); 
             }
@@ -585,10 +577,7 @@ class Controlador_Oferta extends Controlador_Base{
             $breadcrumbs['oferta'] = 'Ofertas de empleo';
           }else{   
             $filtro = 0;        
-            $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);
-            $ofertasPredict = Modelo_Oferta::obtieneOfertas1(false,$page,$vista,$idUsuario,2,SUCURSAL_PAISID);
-            $arrayPermKeys = array("titulo","salario","a_convenir","empresa","jornada","ciuidad","provincia");
-            $arrayWords = Utils::createListArrMul($ofertasPredict, $arrayPermKeys);           
+            $ofertas = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,false,SUCURSAL_PAISID);         
             //Para obtener la cantidad de registros totales de la consulta
             $registros = Modelo_Oferta::obtieneOfertas(false,$page,$vista,$idUsuario,true,SUCURSAL_PAISID);             
             $breadcrumbs['postulacion'] = 'Mis postulaciones';

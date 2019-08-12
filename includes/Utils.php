@@ -925,24 +925,30 @@ public static function validarCelularConvencional($contenido){
   }
 
 // funciones de texto predictivo
-  public static function createListArrMul($data, $none){
+  public static function createListArrMul($keyword,$tipo, $oferta=null){
     $arrayWords = array();
-    if(!empty($data)){
-      foreach ($data as $key => $value) {
+    $dataPredict = array();
+    $arrayPermKeys = array();
+    if(!empty($keyword)){
+      if($tipo == "oferta"){
+        $dataPredict = Modelo_Oferta::obtieneOfertas1($_SESSION["mfo_datos"]["usuario"]["id_usuario"],SUCURSAL_PAISID);
+        $arrayPermKeys = array("titulo","salario","a_convenir","empresa","jornada","ciudad","provincia");
+      }
+      if($tipo == "aspirantes"){
+        $oferta = self::desencriptar($oferta);
+        $dataPredict = Modelo_Usuario::obtenerAspirantes1($oferta);
+        $arrayPermKeys = array("nombres","apellidos");
+      }
+      foreach ($dataPredict as $key => $value) {
         foreach ($value as $key1 => $value1) {
-          if(!in_array($key1, $none) || (in_array(strtolower($value1), $arrayWords)))
+          if(!in_array($key1, $arrayPermKeys) || (in_array(strtolower($value1), $arrayWords)))
             {continue;}
-          array_push($arrayWords, (strip_tags(strtolower(($value1)))));
+            array_push($arrayWords, (strip_tags(strtolower(($value1)))));
         }
       }
-      $_SESSION['wordsPredict'] = $arrayWords;
+      $returnData = self::predictWords($arrayWords, $keyword);
     }
-    else{
-      if(isset($_SESSION['wordsPredict'])){
-        unset($_SESSION['wordsPredict']);
-      }
-    }
-    return $arrayWords;
+    return $returnData;
   }
   public static function predictWords($arrData, $keyword){
     $arrayResult = array();

@@ -120,7 +120,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				<div class="filtros">
 					<div class="form-group">
 						<div class="input-group">
-							<input type="text" onclick="javascript: predictWord($(this));" onkeyup="javascript: predictWord($(this));" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" onkeypress="return check(event)" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx"> 
+							<input type="text" onclick="javascript: predictWord($(this), 'oferta');" onkeyup="javascript: predictWord($(this), 'oferta');" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" onkeypress="return check(event)" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx"> 
 							<?php 
 							$ruta = PUERTO.'://'.HOST.'/'.$vista.'/1/';
 							?>
@@ -272,7 +272,7 @@ if(isset($filtro) && $vista == 'oferta'){ ?>
 				</div>
 				<div class="panel-body collapse" id="contenedor" aria-expanded="false" style="height: 30px;">
 					<div class="form-group">
-						<input type="text" onkeyup="javascript: predictWord($(this));" maxlength="30" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx"> 
+						<input type="text" onkeyup="javascript: predictWord($(this), 'oferta', <?php echo "'".$id_oferta."'"; ?>);" maxlength="30" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx"> 
 					</div>
 					<div class="form-group">
 						<?php 

@@ -71,6 +71,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			</b>
 			<br/><br/>
 			<div class="panel panel-default shadow-panel1">
+				<!-- <input type="hidden" name="oferta" id="oferta" value="<?php echo $id_oferta; ?>"> -->
 				<div class="panel-heading">
 				    <span><i class="fa fa-key"></i> Palabra Clave</span>
 				</div>
@@ -78,7 +79,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 					<div class="filtros">
 						<div class="form-group">
 						    <div class="input-group">
-							    <input type="text" onkeyup="javascript: predictWord($(this));" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
+							    <input type="text" onkeyup="javascript: predictWord($(this), 'aspirantes', <?php echo "'".$id_oferta."'"; ?>);" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 							    <?php 
 								    $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
 								    //$ruta = Controlador_Aspirante::calcularRuta($ruta,'Q');
@@ -476,7 +477,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				<div class="panel-heading" style="cursor:pointer" data-toggle="collapse" data-target="#contenedor"><i class="fa fa-angle-down"></i>Filtros</div>
                 <div class="panel-body collapse" id="contenedor">
                 	<div class="form-group">
-						<input type="text" maxlength="30" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
+						<input type="text" maxlength="30" onkeyup="javascript: predictWord($(this), 'aspirantes', <?php echo "'".$id_oferta."'"; ?>);" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 					</div>
 					<div class="form-group" id="facetas_movil">
 						<?php

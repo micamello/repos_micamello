@@ -196,7 +196,7 @@ function check(e) {
     tecla = (document.all) ? e.keyCode : e.which;
 
     //Tecla de retroceso para borrar, siempre la permite
-    if (tecla == 8) {
+    if (tecla == 8 || tecla == 32) {
         return true;
     }
 
