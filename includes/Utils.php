@@ -924,7 +924,39 @@ public static function validarCelularConvencional($contenido){
     return $cadena;
   }
 
-
+// funciones de texto predictivo
+  public static function createListArrMul($data, $none){
+    $arrayWords = array();
+    if(!empty($data)){
+      foreach ($data as $key => $value) {
+        foreach ($value as $key1 => $value1) {
+          if(!in_array($key1, $none) || (in_array(strtolower($value1), $arrayWords)))
+            {continue;}
+          array_push($arrayWords, (strip_tags(strtolower(($value1)))));
+        }
+      }
+      $_SESSION['wordsPredict'] = $arrayWords;
+    }
+    else{
+      if(isset($_SESSION['wordsPredict'])){
+        unset($_SESSION['wordsPredict']);
+      }
+    }
+    return $arrayWords;
+  }
+  public static function predictWords($arrData, $keyword){
+    $arrayResult = array();
+      $i = 1;
+      foreach($arrData as $value) {
+        if($i > 5){break;}
+        if(preg_match("/{$keyword}/i", (html_entity_decode($value)))){
+          // array_push($arrayResult, strip_tags(mb_strimwidth($value, 0, 30, ".....")));
+          array_push($arrayResult, ($value));
+          $i++;
+      }
+    }
+    return $arrayResult;
+  }
 
 }
 ?>

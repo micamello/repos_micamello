@@ -54,9 +54,9 @@ class Controlador_Cuestionario extends Controlador_Base {
           }
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
           $faceta = Modelo_Respuesta::facetaActual($id_usuario);
-          // if (empty($faceta)){
-          //   throw new Exception("Ha ocurrido un error, intente nuevamente2.");
-          // }
+          if (empty($faceta)){
+            throw new Exception("Ha ocurrido un error, intente nuevamente2.");
+          }
           
           $porcentajeArr = array();
           foreach ($facetaArr as $value) {

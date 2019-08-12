@@ -305,6 +305,51 @@ WHERE
         return true;  
     }
   }
+
+  // copy of function down
+  public static function obtenerAspirantes1($idOferta,$page,$limite,$cantd_faceta,$obtCantdRegistros=false){
+    
+    $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
+    u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    FROM
+      mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
+      mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
+    WHERE
+      u.id_usuario = p.id_usuario AND up.id_usuario = u.id_usuario AND up.id_plan = pl.id_plan
+        AND u.id_usuario_login = ul.id_usuario_login AND p.id_ofertas = o.id_ofertas AND o.id_ofertas = $idOferta GROUP BY u.id_usuario";
+    
+    $subquery1 .= " ORDER BY pago DESC ";
+    
+    if(($obtCantdRegistros === false || $obtCantdRegistros == 2) && !empty($limite)){  
+      $subquery1 .= " LIMIT 0,".$limite; 
+    }
+    $subquery1 .= ") t2"; 
+    $subquery2 = '(SELECT id_usuario,IF(SUM(estado) = '.$cantd_faceta.',2,1) AS test_realizados, COUNT(1) AS numero_test FROM mfo_porcentajexfaceta pt GROUP BY id_usuario) t1';
+    $sql = "SELECT ";
+    if(($obtCantdRegistros === false || $obtCantdRegistros == 2)){
+      $sql .= "t2.id_ofertas, t2.id_usuario,t2.username,t2.nombres,t2.apellidos,t2.id_genero,t2.fecha_postulado, t2.fecha_nacimiento, t2.edad, t2.asp_salarial, e.descripcion AS estudios,t2.discapacidad,t2.id_situacionlaboral,t2.id_tipolicencia,n.nombre_abr AS nacionalidad, n.id_pais, pro.id_provincia, pro.nombre AS ubicacion,t2.pago, t1.test_realizados, t1.numero_test"; 
+    }else{
+      $sql .= "n.id_pais, pro.id_provincia, pro.nombre AS ubicacion, t2.pago, t1.test_realizados, t1.numero_test";
+    }
+    
+    $sql .= " FROM mfo_escolaridad e, mfo_pais n, mfo_provincia pro, mfo_ciudad c, ";
+    $sql .= $subquery1.', '.$subquery2;
+    $sql .= " WHERE e.id_escolaridad = t2.id_escolaridad
+          AND n.id_pais = t2.id_nacionalidad
+          AND c.id_provincia = pro.id_provincia
+          AND c.id_ciudad = t2.id_ciudad
+          AND t1.id_usuario = t2.id_usuario
+          ORDER BY t2.pago DESC, t1.numero_test DESC, t2.fecha_postulado ASC, t2.id_usuario ASC ";   
+    if($obtCantdRegistros === false){
+      $page = ($page - 1) * REGISTRO_PAGINA;
+      $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
+    }
+    //echo $sql;
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    return $rs; 
+  }
+
   public static function obtenerAspirantes($idOferta,$page,$limite,$cantd_faceta,$obtCantdRegistros=false){
     
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,

@@ -3056,3 +3056,27 @@ div.navbar{position: relative;z-index: 1;}
     color: #ec3131;    
     font-size: 18px;
 }
+
+/*texto predictivo*/
+.panelTextPredictpanel{
+    /*position: absolute;z-index: 9999; margin-top: 35px; width: 100%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;*/
+    position: absolute;z-index: 9999; margin-top: 35px; width: 100%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;
+}
+
+.subpaneltextpredict{
+    background-color: white;position: ;width: 100%;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+}
+
+.ulTextPredict{
+    list-style: none; padding-left: 0px; text-align: left; margin-bottom: 0px !important;
+}
+
+.liTextPredict{
+    border-bottom: 1px solid #DEDEDE; border-radius: 2px; padding: 5px 0 5px 20px;
+}
+
+.lihover{
+    background-color: #C5E5EE;
+}
