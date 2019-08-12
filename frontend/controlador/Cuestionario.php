@@ -54,9 +54,9 @@ class Controlador_Cuestionario extends Controlador_Base {
           }
           $id_usuario = $_SESSION['mfo_datos']['usuario']['id_usuario'];
           $faceta = Modelo_Respuesta::facetaActual($id_usuario);
-          // if (empty($faceta)){
-          //   throw new Exception("Ha ocurrido un error, intente nuevamente2.");
-          // }
+          if (empty($faceta)){
+            throw new Exception("Ha ocurrido un error, intente nuevamente2.");
+          }
           
           $porcentajeArr = array();
           foreach ($facetaArr as $value) {
@@ -69,7 +69,7 @@ class Controlador_Cuestionario extends Controlador_Base {
             foreach($vlbaremo as $valores){
               $resbaremo = Modelo_Baremo::obtienePuntaje($valores["orden1"],$valores["orden2"],$valores["orden3"],$valores["orden4"],$valores["orden5"]);
               if (empty($resbaremo)){
-                throw new Exception("Ha ocurrido un error, intente nuevamente4."); 
+                throw new Exception("Ha ocurrido un error, intente nuevamente."); 
               }              
               $totalfaceta = $totalfaceta + $resbaremo["porcentaje"];
             }
@@ -157,8 +157,7 @@ class Controlador_Cuestionario extends Controlador_Base {
         Vista::render('modalidad'.$metodoSeleccion['metodo_resp'], $tags);
       break;
       case 'consultarCA':
-        $ca = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
-          Utils::log("datos de $ca: ".$ca);
+        $ca = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);          
           if($ca == 1){
             $ca = '0';
           }

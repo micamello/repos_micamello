@@ -630,11 +630,10 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-    Utils::log("el sql del filtro: ".$sql);
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
-  /*public static function busquedaGlobalAspirantes($id_pais_empresa,$cantd_faceta,$page,$obtCantdRegistros=false){     
+  public static function busquedaGlobalAspirantes($id_pais_empresa,$cantd_faceta,$page,$obtCantdRegistros=false){     
     $sql = "SELECT ";
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,u.fecha_creacion,
     u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
@@ -893,7 +892,7 @@ WHERE
     //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
-  }*/
+  }
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
     if (empty($id)){ return false; }
     if ($tipo == self::CANDIDATO){

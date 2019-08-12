@@ -2,8 +2,6 @@
 class Controlador_Velocimetro extends Controlador_Base {
 
   public function construirPagina(){
-      // Utils::log(print_r($_SESSION, true));
-      // exit();
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
     }
@@ -35,13 +33,9 @@ class Controlador_Velocimetro extends Controlador_Base {
   }
 
   public function mostrarDefault($faceta){
-    // Utils::log(print_r($_SESSION, true));
-    // exit();
     $nrototaltest = Modelo_Cuestionario::totalTest();
     $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);    
     if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && $nrotestusuario < ($nrototaltest-3)){
-      // echo "-----";
-      // exit();
       $enlaceboton = "cuestionario";
     }
     // //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
@@ -67,7 +61,7 @@ class Controlador_Velocimetro extends Controlador_Base {
       $textoBoton = "CONTINUAR AL TERCER TEST";
       if(!isset($_SESSION['mfo_datos']['usuario']['infohv'])){
         $enlaceboton = "cargarhojavida";
-        $textoBoton = "CONTINUA PARA CARGAR TU HOJA DE VIDA";
+        $textoBoton = "CONTINUA PARA CARGAR SU HOJA DE VIDA";
       }
     }
     else{

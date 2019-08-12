@@ -9,8 +9,7 @@ function consultarCA(){
         url: puerto_host+"/index.php?mostrar=cuestionario&opcion=consultarCA",
         dataType:'json',
         async: false,
-        success:function(data){
-          console.log("data: "+data.dato);
+        success:function(data){          
           valuereturn = ""+data.dato;
         },
         error: function (request, status, error) {
@@ -694,7 +693,7 @@ function enviarFormulario(){
       
     }else if($('#tipo_usuario').val() == 1){
       var file = document.getElementById('btnDescargarHV').value;
-      console.log("estado: "+estado + "--- file: " + file);
+      
       // return false;
       if(!$('#carga').length || !facetasCA > 2){
         file = "loaded";

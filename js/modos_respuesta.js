@@ -336,6 +336,7 @@ if($('#forma_1').length){
 		}
 		if(contador_errores > 0){
 			//console.log(contador_errores);
+			preguntasError = "Ordene los enunciados de todos los apartados.";
 			alertErrores(preguntasError);
 		}
 	})
