@@ -727,18 +727,20 @@ function caracteresEspecial(){
   $('#aspiracion').val($('#aspiracion').val().replace(/[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/]/g, ""));
 }
 
-function predictWord(obj){
+function predictWord(obj,type, oferta){
+  // console.log(oferta);
+  if(oferta == null && oferta == "" || oferta == 'undefined'){oferta = "";}
+  // console.log("------e"+oferta+"----------e");
   var keywordInput = obj.val();
-  var url = puerto_host+"/index.php?mostrar=inicio&opcion=searchKeyWord&keywordInput="+keywordInput;
+  var url = puerto_host+"/index.php?mostrar=inicio&opcion=searchKeyWord&keywordInput="+keywordInput+"&tipo="+type+"&oferta="+oferta;
+  // console.log(url);
     $.ajax({
       type: "GET",
       url: url,
       dataType:'json',
       async: false,
       success:function(data){
-        // if(data.returnWords.length > 0){
           displayWords(data, obj);
-        // }
       },
       error: function (request, status, error) {
           console.log(request.responseText);
@@ -770,13 +772,16 @@ function displayWords(data, obj){
 }
 
 function desaparecerPanelList(){
-  $('.panelTextPredictpanel')[0].outerHTML = "";
+  // if($('.panelTextPredictpanel').length.length){
+    $('.panelTextPredictpanel')[0].outerHTML = "";
+  // }
 }
 
 
 function anadirText(obj, obj1){
   $(obj1).val(obj.text());
-  $('.panelTextPredictpanel')[0].outerHTML = "";
+  // $('.panelTextPredictpanel')[0].outerHTML = "";
+  desaparecerPanelList();
 }
 
 function lihover(obj){

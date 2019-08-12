@@ -527,7 +527,7 @@ class Controlador_Aspirante extends Controlador_Base
                 
                 unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
                 $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
-
+                Utils::log("El id de la oferta: ".$id_oferta." - ".$page);
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
@@ -568,9 +568,6 @@ class Controlador_Aspirante extends Controlador_Base
                     //$costo = $datos_plan['costo'];
                    
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,false);
-                    $aspirantesPredict = Modelo_Usuario::obtenerAspirantes1($id_oferta,$page,'',$cantd_facetas,2);
-                    $arrayPermKeys = array("nombres", "apellidos", "asp_salarial");
-                    $arrayWords = Utils::createListArrMul($aspirantesPredict, $arrayPermKeys);
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,true);
                     $vistos = Modelo_Usuario::consultarVistoGeneral(0, 0, $id_oferta, true);
                     
@@ -602,14 +599,6 @@ class Controlador_Aspirante extends Controlador_Base
                     $breadcrumbs['aspirante'] = 'Buscar Aspirantes';
 
                     $aspirantes = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$cantd_facetas,$page,false);
-                    $aspirantesPredict = Modelo_Usuario::obtenerAspirantes1($id_oferta,$page,'',$cantd_facetas,2);
-                    $arrayPermKeys = array("nombres", "apellidos", "asp_salarial");
-                    $arrayWords = Utils::createListArrMul($aspirantesPredict, $arrayPermKeys);
-
-
-                    $aspirantesPredict = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,2);
-                    $arrayPermKeys = array("nombres", "apellidos", "asp_salarial");
-                    $arrayWords = Utils::createListArrMul($aspirantesPredict, $arrayPermKeys);
                     $paises = Modelo_Usuario::busquedaGlobalAspirantes(SUCURSAL_PAISID,$cantd_facetas,$page,true); 
                     $listado_planes = Modelo_Plan::listadoPlanesUsuario($idUsuario,$tipoUsuario);                    
                     $limite_aspirantes = count($paises);

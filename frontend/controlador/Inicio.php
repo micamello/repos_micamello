@@ -70,11 +70,11 @@ class Controlador_Inicio extends Controlador_Base {
       break;
       case 'searchKeyWord':
         $keyword = Utils::getParam('keywordInput', '', $this->data);
+        $tipo = Utils::getParam('tipo', '', $this->data);
+        $oferta = Utils::getParam('oferta', '', $this->data);
         $keyword = utf8_decode($keyword);
-        if(!empty($_SESSION['wordsPredict'])){
-          $arrayResult = Utils::predictWords($_SESSION['wordsPredict'], $keyword);
-        }
-        Vista::renderJSON(array("returnWords"=>$arrayResult));
+        $arrayWords = Utils::createListArrMul($keyword, $tipo, $oferta);
+        Vista::renderJSON(array("returnWords"=>$arrayWords));
       break;
       default:            
         Vista::render('inicio', $tags);
