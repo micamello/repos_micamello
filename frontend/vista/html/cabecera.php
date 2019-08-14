@@ -175,6 +175,11 @@ $noautofill = "";
   <!--<nav class="navbar navbar-default navbar-fixed-top menu" style="position: sticky;">-->
 <?php// }else{?>  
   <nav class="navbar navbar-default menu">
+    <div class="btn-whatsapp">
+      <a href="https://api.whatsapp.com/send?phone=<?php echo WB_DATA['number']; ?>&text=<?php echo WB_DATA['mensaje']; ?>" target="_blank"> <!--PONER NUMERO-->
+        <img src="http://s2.accesoperu.com/logos/btn_whatsapp.png" alt="chatWithMe.jpg">
+      </a>
+    </div>
 <?php //} ?> 
   <div class="container-fluid">
     <div class="navbar-header">
@@ -206,10 +211,26 @@ $noautofill = "";
         if (isset($menu["menu"])){   
           foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
             <li <?php if($optmnu['vista'] == $vista){ ?> class="btn-menu-active" <?php } if($optmnu["nombre"] == 'Reg&iacute;strate' || $optmnu["nombre"] == 'Ingresar'){ echo 'class="btn-minimalist"'; } ?> >
-              <a class="texto-white" <?php if(isset($optmnu['id'])){ echo 'id="'.$optmnu["id"].'"';}  if(isset($optmnu['href'])){ echo 'href="'.$optmnu['href'].'"'; }else{ echo 'onclick="'.$optmnu['onclick'].'"'; } ?> <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
-              Inicio';  }else{ echo $optmnu["nombre"]; } ?></a>
+              <a class="texto-white" <?php if(isset($optmnu['id'])){ echo 'id="'.$optmnu["id"].'"';} if($optmnu['nombre'] == "Planes"){echo "style='display: inline;'";}  if(isset($optmnu['href'])){ echo 'href="'.$optmnu['href'].'"'; }else{ echo 'onclick="'.$optmnu['onclick'].'"'; } ?> <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
+              Inicio';  }else{ 
+                if($optmnu['nombre'] == "Planes"){
+                  $planesLi = '<img src="'.PUERTO."://".HOST.'/imagenes/corona-06.png"  class="corona"><span class="crown-ph" style="text-align: center; display: inline-flex;">Obtén Plan<br>Premium</span>';
+                  echo $planesLi;
+                }
+                else{echo $optmnu["nombre"];}
+                } ?></a>
             </li>                            
           <?php } ?>
+          <?php if (isset($menu["submenu_nosotros"])){ ?>  
+            <li class="dropdown" >
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">Nosotros <i class="fa fa-caret-down"></i></a>
+              <ul class="dropdown-menu">
+                <?php foreach($menu["submenu_nosotros"] as $submenu_nosotros){ ?>  
+                 <li><a href="<?php echo $submenu_nosotros['href'];?>"><?php echo $submenu_nosotros['nombre'];?></a></li>
+               <?php } ?>
+             </ul>
+           </li>                              
+         <?php } ?>
           <?php if (isset($menu["submenu_cuentas"])){ ?>  
             <li class="dropdown" >
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">Administración<i class="fa fa-caret-down"></i></a>

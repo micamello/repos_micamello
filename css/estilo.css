@@ -1134,6 +1134,7 @@ padding-top: 10px;
 .bloque{
     background-color: #204478;
     padding-top: 40px;
+    padding-bottom: 20px;
 }
 .cuadrado{
     border: 2px solid #204478;
@@ -3079,4 +3080,40 @@ div.navbar{position: relative;z-index: 1;}
 
 .lihover{
     background-color: #C5E5EE;
+}
+.btn-whatsapp {
+       display:block;
+       width:70px;
+       height:70px;
+       color:#fff;
+       position: fixed;
+       left:20px;
+       bottom:20px;
+       border-radius:50%;
+       line-height:80px;
+       text-align:center;
+       z-index:999;
+}
+
+.banderas-icono{
+  display: inline;
+  margin-top: 15px;
+}
+.txt-banderas{
+  display: inline;
+  margin-left: 10px;
+}
+.lbl-editar{
+    color: #204478;
+    font-weight: bold;
+}
+.crown-ph{
+    color: #ffb404;
+    font-weight: bold;
+}
+.corona {
+    height: 35px;
+    
+    display: block;
+    display: inline-block;
 }

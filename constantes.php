@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'micamello_desarrollov3');
+define('DBNOMBRE', 'produccion_cambios');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -120,4 +120,7 @@ define('CLAVE_SMTP','cz0Ls8tI34AZ2aUJ');
 define('OFERTA_ACTIVA_DESCARGA','45');
 define('OFERTA_ACTIVA_VER','15');
 define('MAX_PFACETA', '2');
+define('WB_DATA', array('number'=>'593984919210', 'mensaje'=>'Saludos!. Solicito mas informacion acerca de sus servicios.'));
+define('MC_REG_YOUTUBE','https://www.youtube.com/embed/prZgN46_-R4?rel=0&autoplay=1');
+// Saludos!. Solicito mas informacion acerca de sus servicios
 ?>

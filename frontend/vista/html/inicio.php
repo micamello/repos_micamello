@@ -1,6 +1,7 @@
+
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-5">
                 <div class="cuadro-banner">
                   <div class="col-md-12">
                     <p>¡Conoce las mejores empresas, encuentra tu pr&oacute;xima oportunidad laboral y evalua tus competencias!</p>
@@ -15,8 +16,11 @@
                 </div>
             </div>
 
-            <div class="col-md-6" id="foto-banner">
+            <!-- <div class="col-md-6" id="foto-banner">
                 <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/principal-2.jpg">
+            </div> -->
+            <div class="col-md-7" id="foto-banner">
+              <iframe width="100%" height="514" src="<?php echo MC_REG_YOUTUBE; ?>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -27,9 +31,9 @@
     <h2 class="titulo">&Aacute;reas de Empleos</h2>
   </div><br><br>
 
-<section id="brand" class="business bloque">
-    <div class="container-fluid">
-      <div class="carousel slide fade-carousel carousel-fade" data-ride="carousel" data-interval="3000" id="myCarousel1">
+<section id="brand" class="business">
+    <div class="">
+      <div class="bloque carousel slide fade-carousel carousel-fade" data-ride="carousel" data-interval="3000" id="myCarousel1">
          
         
       <div class="texto-white carousel-inner" role="listbox">
@@ -57,6 +61,15 @@
                 $cont++;
         } ?>
       </div>
+      <!-- Controls -->
+        <a style="margin-left: 0px;"class="left carousel-control" href="#myCarousel1" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a style="margin-left: 0px;"class="right carousel-control" href="#myCarousel1" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     <?php 
     if (!empty($areas_bloque)){ ?>
         <ol class="indicadores col-md-12 carousel-indicators">

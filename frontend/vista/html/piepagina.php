@@ -3,11 +3,11 @@
     <div class="foot_mic">
       <div class="pie-pag col-md-4" style=" padding-left: 30px;
       ">
-        <h3>Nosotros</h3>
+        <!-- <h3>Nosotros</h3>
         <p><a class="" target="_blank" href="<?php echo PUERTO.'://'.HOST.'/quienesSomos/'?>">¿Quiénes somos?</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO; ?>://blog.micamello.com.ec/" target="blank">Blog</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/canea/"?>" target="blank">¿Qué es CANEA?</a></p>
-        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/preguntasfrecuentes/"?>" target="blank">Preguntas y respuestas frecuentes</a></p>
+        <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/preguntasfrecuentes/"?>" target="blank">Preguntas y respuestas frecuentes</a></p> -->
         <h3>Políticas de Privacidad</h3>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/terminoscondiciones/";?>" target="_blank">Condiciones legales de uso</a></p>
         <p><a class="legal_info_content" href="<?php echo PUERTO."://".HOST."/politicaprivacidad/";?>" target="_blank">Políticas de Privacidad</a></p>
@@ -17,9 +17,12 @@
       <div class="pie-pag col-md-4" style=" padding-left: 30px;">
         <h3>Disponible también en otros países</h3>
         <?php foreach(Modelo_Sucursal::obtieneListado() as $sucursal){ ?>  
-          <a href="<?php echo PUERTO."://".$sucursal['dominio']; ?>" target="_blank">
-            <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="redes-mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
-          </a>
+          <p class="banderas-icono">
+            <a href="<?php echo PUERTO."://".$sucursal['dominio']; ?>" target="_blank">
+              <img src="<?php echo PUERTO."://".HOST;?>/imagenes/sucursal/iconos/<?php echo $sucursal["id_sucursal"];?>.<?php echo $sucursal["extensionicono"];?>" class="redes-mic" title="<?php echo utf8_encode($sucursal["nombre_abr"]);?>"> 
+              <p class="txt-banderas"><?php echo $sucursal["nombre_abr"]; ?></p>
+            </a>
+          </p>
         <?php } ?>   
       </div>
       <div class="pie-pag col-md-4" style="padding-left: 30px;

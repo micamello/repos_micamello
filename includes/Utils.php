@@ -964,5 +964,10 @@ public static function validarCelularConvencional($contenido){
     return $arrayResult;
   }
 
+  // public static function convertirWhatsappMensaje($mensaje){
+  //   $mensaje = str_replace(" ", " %20", $mensaje);
+  //   return $mensaje;
+  // }
+
 }
 ?>
