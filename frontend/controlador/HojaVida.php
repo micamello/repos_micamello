@@ -29,9 +29,7 @@ class Controlador_HojaVida extends Controlador_Base{
         $this->mostrarDefault();
       break;
     }
-
     // $this->mostrarDefault();
-       
   }
 
   public function mostrarDefault(){
@@ -55,36 +53,60 @@ class Controlador_HojaVida extends Controlador_Base{
             throw new Exception("El tama\u00F1o de archivo excede lo permitido. (2 MB)");
           }
         
-
-        if(empty($_SESSION['mfo_datos']['usuario']['infohv'])){
-          if(Modelo_InfoHv::cargarHv($_SESSION['mfo_datos']['usuario']['id_usuario'], $extensionHV[1])){
-            if(!Utils::upload($file['userHV'],$_SESSION['mfo_datos']['usuario']['username'],PATH_ARCHIVO, 2)){
-              throw new Exception("Ha ocurrido un error al cargar el archivo. Intente nuevamente.");
+          if(empty($_SESSION['mfo_datos']['usuario']['infohv'])){
+            if(Modelo_InfoHv::cargarHv($_SESSION['mfo_datos']['usuario']['id_usuario'], $extensionHV[1])){
+              if(!Utils::upload($file['userHV'],$_SESSION['mfo_datos']['usuario']['username'],PATH_ARCHIVO, 2)){
+                throw new Exception("Ha ocurrido un error al cargar el archivo. Intente nuevamente.");
+              }
+              else{
+                $sess_usuario = Modelo_Usuario::actualizarSession($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
+                Controlador_Login::registroSesion($sess_usuario);              
+                $ruta = '/hvcargado/';    
+                //si tiene los test realizados
+                /*$test_realizados = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);                
+                if (!empty($test_realizados)){
+                  //busca planes gratuitos para el candidato
+                  $gratuitos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,SUCURSAL_ID,1,false);                                    
+                  foreach($gratuitos as $key=>$gratuito){
+                    //si no tiene un plan gratuito para registrarlo automaticamente
+                    $infoplan = Modelo_Plan::busquedaActivoxTipo($gratuito["id_plan"],Modelo_Plan::CANDIDATO,SUCURSAL_ID);
+                    if (!empty($infoplan) && !$this->existePlan($infoplan["id_plan"])) 
+                    if (!Modelo_UsuarioxPlan::guardarPlan($_SESSION['mfo_datos']['usuario']['id_usuario'],
+                                                          $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"],
+                                                          $infoplan["id_plan"],$infoplan["num_post"],
+                                                          $infoplan["duracion"],$infoplan["porc_descarga"],'',false,
+                                                          false,false,$infoplan["num_accesos"])){
+                      throw new Exception("Ha ocurrido un error, por favor intente denuevo");   
+                    }          
+                    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
+                  }    
+                }*/ 
+              }
             }
             else{
-              $sess_usuario = Modelo_Usuario::actualizarSession($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
-              Controlador_Login::registroSesion($sess_usuario);
-              // Utils::log("data: ".print_r($sess_usuario, true));
-
-              $ruta = '/hvcargado/';
-              // exit();
+              throw new Exception("Ha ocurrido un error al registrar su Hoja de vida. Intente nuevamente.");
             }
           }
-          else{
-            throw new Exception("Ha ocurrido un error al registrar su Hoja de vida. Intente nuevamente.");
-          }
-        }
-        // Utils::upload($file['userHV'], $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2);
-
-      } catch (Exception $e) {
+          // Utils::upload($file['userHV'], $_SESSION['mfo_datos']['usuario']['username'], PATH_ARCHIVO, 2);
+      } 
+      catch (Exception $e) {
         $ruta = '/cargarhojavida/';
         $_SESSION['mostrar_error'] = $e->getMessage();
         Utils::doRedirect(PUERTO . '://' . HOST . $ruta);
       }
-      echo $ruta;
-      // exit();
       Utils::doRedirect(PUERTO . '://' . HOST . $ruta);
     }
+  }
+
+  public function existePlan($idplan){
+    if (isset($_SESSION['mfo_datos']['planes'])){
+      foreach($_SESSION['mfo_datos']['planes'] as $planactivo){
+        if ($planactivo["id_plan"] == $idplan){
+          return true;
+        }
+      }
+    }
+    return false;
   }
 }
 ?>

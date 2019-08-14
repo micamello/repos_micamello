@@ -1,96 +1,69 @@
-<div class="container-fluid">
-  <div class="container">
-    
-    <div class="col-md-12">
-      <div class="pricingdiv flex-container">
-      <?php 
-      if (!empty($planes)){ 
-        $numberCol = 2;
-        if(count($planes) > 2){
-          $numberCol = 0;
+<div class="comparison container-fluid">
+  <table style="box-shadow: 10px 10px 5px grey;">
+    <thead>
+      <tr>
+        <th class="logo-tabla" rowspan="2"><img src="<?php echo PUERTO."://".HOST."/imagenes/logo-azul.png"?>" width="100%"></th>
+        <?php foreach($planes as $key=>$plan){ ?> 
+          <th class="plus head-plan">
+            <?php echo strtoupper(utf8_encode($plan["nombre"]));?> 
+            <img src="<?php echo PUERTO."://".HOST."/imagenes/corona-2-03.png"?>" class="corona">
+          </th>
+        <?php } ?>
+      </tr>     
+    </thead>
+    <tbody class="tabla-planes-n">    
+      <?php       
+      $listadoAcciones = explode(",",$plan['acciones']);
+      $listadoPermisos = explode(",",$plan['permisos']);        
+      foreach($listadoPermisos as $key => $permiso){                
+        $par = $key % 2;          
+        $clase = ($par == 0) ? "compare-row" : "";                                  
+        echo "<tr>";
+        echo "<td></td>";
+        echo "<td>".utf8_encode(trim($permiso))."</td>";            
+        echo "</tr>";
+        echo "<tr class='".$clase."'>";
+        echo "<td>".utf8_encode(trim($permiso))."</td>"; 
+        foreach($planes as $keyp=>$plan){                          
+          if ($listadoAcciones[$key] == "autopostulacion"){            
+            echo "<td><span class='plan-negrita'>".$plan["num_post"]."</span><span class='plan-negrita-2'>Autopostulaciones</span></td>";   
+          } 
+          else{
+            echo "<td><span class='simbolos tickgreen'>✔</span></td>"; 
+          }        
         }
-        foreach($planes as $key=>$plan){
-          // if($plan['id_plan'] == 11 && isset($autopostulacion) && $autopostulacion == 0){
-          //   continue;
-          // }
+        echo "</tr>";                     
+      }               
+      ?>                            
+    </tbody>
+    <tfoot>
+      <tr>
+        <td class="tab-ocultar"></td>
+        <?php         
+        foreach($planes as $key=>$plan){ 
+          echo "<td class='price-info'>";
+          echo SUCURSAL_MONEDA.number_format($plan["costo"],2);
+          echo "</td>";
+        }      
+        ?>                
+      </tr>
+      <tr>
+        <td>&nbsp</td>
+        <?php         
+        foreach($planes as $key=>$plan){ 
           $plan["id_plan"] = Utils::encriptar($plan["id_plan"]);
-         
-      ?>
-        <ul class="plan-tabla <?php echo ($key == 0) ? "izq col-md-offset-".$numberCol."" : "cen"; ?> theplan col-xs-12 col-md-4 flex-item">
-          
-          <?php if ($plan['promocional'] == 0){ ?> 
-            <div>&nbsp;</div>
-          <?php } ?>
-          <div class="titulo-planes title <?php if(!empty($plan["costo"]) && $plan['promocional'] == 1){ echo 'planes-promo'; }else{ echo 'headingazul'; } ?> "><?php echo strtoupper(utf8_encode($plan["nombre"])); if(!empty($plan["costo"]) && $plan['promocional'] == 1){ echo '(Promocional)';} ?></div>
-
-          <?php if(!empty($plan["costo"] && $plan['promocional'] == 1)){ 
-            $costo = 15;
-           }else{
-            $costo = $plan["costo"];
-           } ?>
-          <div id="avisocosto" class="<?php echo (!empty($plan["costo"]) && $plan['promocional'] == 1) ? "price-was" : "plan-precio";?>">
-            <?php $msgcosto = (!empty($plan["costo"]) && $plan['promocional'] == 1) ? "Antes " : "";?>             
-            <?php echo $msgcosto.SUCURSAL_MONEDA.number_format($costo,2);?>
-            </div>
-
-          <?php if (!empty($plan["costo"]) && $plan['promocional'] == 1){ ?> 
-            
-            <div class="plan-interno-info" style="margin: 4px auto;">
-            <div class="descuento" style="background:url(<?php echo PUERTO."://".HOST."/imagenes/planes-06.png"?>) no-repeat; background-size:100%;">
-              <p class="promo-1">PRECIO</p>
-              <p  class="promo-2">PROMOCIONAL</p>
-            </div>
-            <h2  style="margin-bottom: 0px; font-size: 36px; line-height: 38px; text-align:center;">
-              <strong id="plan-precio" style="color: #ec3131;"><?php echo SUCURSAL_MONEDA.number_format($plan["costo"],2);?></strong>
-            </h2>
-            
-            <div id="avisodura" class="plan-dias"><?php echo (empty($plan["duracion"])) ? "&nbsp;" : $plan["duracion"]." D&Iacute;AS";?></div>
-            </div> 
-          <?php } ?>
-          <!--<br>-->
-          <?php 
-          $listadoAcciones = explode(",",$plan['acciones']);
-          $listadoPermisos = explode(",",$plan['permisos']);
-          foreach($listadoPermisos as $key => $permiso){                    
-            if ($listadoAcciones[$key] == "autopostulacion"){
-              $permiso = str_replace('NRO',$plan["num_post"],$permiso);
-            }              
-            ?>
-            <li class="lista-plan" class="text-justify">
-              <p class="lista-plan-2">
-                <?php echo utf8_encode(trim($permiso));?>                
-              </p>
-            </li>
-          <?php } ?>
-          <!--<br>-->
-          <br>
-          <br>
-          <br>
-          <?php if (empty($plan["costo"])) { ?>
-            <a class="pricebutton btn-blue btn-bottom" href="<?php echo PUERTO;?>://<?php echo HOST;?>/compraplan/<?php echo $plan["id_plan"];?>/"><span class="icon-tag"></span>
-              POSTULARSE
-            </a>
-          <?php } else { ?>    
-          <br>        
-            <a class="pricebutton btn-<?php echo (!empty($plan["costo"]) && $plan['promocional'] == 1) ? "red" : "blue";?> btn-bottom" onclick="msg_compra('<?php echo $plan["id_plan"];?>','<?php echo utf8_encode($plan["nombre"]);?>');"><span class="icon-tag"></span>
-              POSTULARSE
-            </a>
-          <?php } ?>  
-          <p><br></p>      
-        </ul>
-      <?php
-      // echo "costo: ".$plan["precio"]."<br>";
-      // echo "promocional: ".$plan['promocional'];
-      // echo $i; 
-        } 
-      } ?> 
-      </div> 
-    </div>
-
-  </div>  
+          $enlace = (empty($plan['costo'])) ? "href='".PUERTO."://".HOST."/compraplan/".$plan["id_plan"]."/'" : 
+                                              "onclick=\"msg_compra('".$plan["id_plan"]."','".utf8_encode($plan["nombre"])."');\"";
+          echo "<td class='plus head-plan'><a ".$enlace." style='color:white;'>COMPRAR AHORA</a></td>"; 
+        }                            
+        ?>         
+      </tr>
+    </tfoot>
+  </table>
 </div>
  
-<br> 
+<br>
+<br>  
 <!-- Modal -->
 <div class="modal fade" id="msg_confirmplan" tabindex="-1" role="dialog" aria-labelledby="msg_confirmplan" aria-hidden="true">
   <div class="modal-dialog" role="document">    
