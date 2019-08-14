@@ -153,7 +153,8 @@ class Controlador_Plan extends Controlador_Base {
       /*|| $gratuito == 1(empty($_SESSION['mfo_datos']['planes']) && $infoplan["promocional"] == 1) ||
           (!empty($nivel) && $gratuitos == 0)*/
 
-      if (empty($infoplan["costo"])){ 
+      if (empty($infoplan["costo"])){
+        $limiteperfiles = '';  
         if ($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
           if ($this->existePlan($infoplan["id_plan"])){
             throw new Exception("Ya esta suscrito al plan seleccionado");   
@@ -162,8 +163,7 @@ class Controlador_Plan extends Controlador_Base {
         else{
           if ($this->existePlan($infoplan["id_plan"])){
             throw new Exception("El plan seleccionado se encuentra activo");   
-          }
-          $limiteperfiles = ''; 
+          }          
           if (!empty($infoplan["limite_perfiles"])){
             $limiteperfiles = $infoplan["limite_perfiles"];  
           }
