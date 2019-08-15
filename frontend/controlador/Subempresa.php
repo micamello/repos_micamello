@@ -128,8 +128,6 @@ class Controlador_Subempresa extends Controlador_Base
                 }
                 
                 $arrsectorind = Modelo_SectorIndustrial::consulta();
-                /*$empresas = Modelo_Usuario::obtieneSubempresasYplanes($idUsuario,$page,false,false);
-                $empresas = implode(",",array_unique($_SESSION['mfo_datos']['subempresas']));*/
                 $recursos = Modelo_UsuarioxPlan::tieneRecursos(false,$idUsuario);
                 $emp_plan = self::cuentasXplan($_SESSION['mfo_datos']['subempresas']);
                 $tieneRecursos = self::obtieneRecursos($recursos,$emp_plan);
@@ -191,9 +189,7 @@ class Controlador_Subempresa extends Controlador_Base
 
     public function obtieneRecursos($tieneRecursos,$emp_plan){
 
-        //$num_post = $num_desc = array();
         $valor_post = $valor_accesos = 0;
-        //$hay_neg_post = $hay_neg_desc = 0;
         $recursos = array();
 
         foreach ($tieneRecursos as $key => $value) {
@@ -290,7 +286,7 @@ class Controlador_Subempresa extends Controlador_Base
     public function crearEmpresa($idUsuario){
 
         try{
-            $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'dni'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0/*,"postNum"=>1*/,"num_post"=>0,/*"descNum"=>1, "num_desc"=>1,*/"num_accesos"=>0, "plan"=>1, "sectorind"=>1);  
+            $campos = array('correo'=>1, 'name_user'=>1,'numero_cand'=>1,'dni'=>1,"nombre_contact"=>1, "apellido_contact"=>1, "tel_one_contact"=>1, "tel_two_contact"=>0,"num_post"=>0,"num_accesos"=>0, "plan"=>1, "sectorind"=>1);  
 
             $data = $this->camposRequeridos($campos);
 
@@ -336,10 +332,6 @@ class Controlador_Subempresa extends Controlador_Base
  
             $id_empresa = $GLOBALS['db']->insert_id();
 
-            // if(!self::correoAvisoCreacion($data['correo'],$data['name_user'],$username,$password)){
-            //     throw new Exception("Ha ocurrido un error al enviar correo de la nueva cuenta o el correo no existe, intente nuevamente");
-            // }
-
             $contactoEmpresa = array("nombreConEmp"=>$data['nombre_contact'],
                                      "apellidoConEmp"=>$data['apellido_contact'],
                                      "tel1ConEmp"=>$data['tel_one_contact']);
@@ -368,14 +360,6 @@ class Controlador_Subempresa extends Controlador_Base
                     throw new Exception("Ha ocurrido un error asignar ofertas, intente nuevamente");
                 }
             }
-
-            /*if(isset($data["num_desc"]) && $data["num_desc"] == -1){
-                $var2 = -1;
-                $numDescargas = $var2;
-            }else{
-                $var2 = $data["num_desc"];
-                $numDescargas = $planPadre['num_descarga_rest']-$var2;
-            }*/
 
             if(isset($data["num_accesos"]) && $data["num_accesos"] == -1){
                 $var3 = -1;
@@ -439,21 +423,6 @@ class Controlador_Subempresa extends Controlador_Base
                     throw new Exception("Ha ocurrido un error asignar ofertas, intente nuevamente");
                 }
             }
-            
-            /*if(!isset($_POST["num_desc"]) || $_POST["num_desc"] == -1){
-                $var2 = -1;
-                $numDescargas = -1;
-            }else{
-                $var2 = $_POST["num_desc"];
-
-                if(isset($_POST["desc"])){
-                    $desc = $_POST["desc"];
-                }else{
-                    $desc = 0;
-                }
-
-                $numDescargas = ($planPadre['num_descarga_rest']+$desc) - $var2;
-            }*/
 
             if(!isset($_POST["num_accesos"]) || $_POST["num_accesos"] == -1){
                 $var3 = 0;

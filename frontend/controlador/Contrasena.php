@@ -121,9 +121,9 @@ class Controlador_Contrasena extends Controlador_Base {
         $token .= "||".$datousuario["id_usuario_login"]."||".date("Y-m-d H:i:s");        
         $token = Utils::encriptar($token);
         $nombres = ucfirst(utf8_encode($datousuario['nombres'])) . ((isset($datousuario['apellidos'])) ? "&nbsp;".ucfirst(utf8_encode($datousuario['apellidos'])) : '');
-        if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
+       /* if (!$this->envioCorreo($datousuario['correo'],$nombres,$token)){
           throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
-        }
+        }*/
         $_SESSION['mostrar_exito'] = "Se envi\u00F3 a su direcci\u00F3n de correo el enlace para el cambio de contrase\u00F1a, recuerde que tiene un m\u00E1ximo de ".HORAS_VALIDO_PASSWORD." horas para modificar su contrase\u00F1a no olvide revisar tambien su carpeta de spam";         
       }
       catch( Exception $e ){
@@ -145,5 +145,6 @@ class Controlador_Contrasena extends Controlador_Base {
       return false;
     }
   }
+
 }  
 ?>

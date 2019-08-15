@@ -53,7 +53,7 @@ if(!empty($array_correos)){
 
 	/*$file = fopen("correos.txt", "w");
 	foreach($array_correos2 as $c){
-		fwrite($file, $c);
+		fwrite($file, $c.PHP_EOL);
 	}
 	fclose($file);*/
 }

@@ -45,6 +45,14 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 		<br>
 		<div class="alert alert-info col-md-12"> 
 			Usted tiene un <b>Plan <?php echo utf8_encode($nombre_plan); ?></b>, en esta oferta existen <b><?php echo $_SESSION['mfo_datos']['usuario']['cantd_total'][Utils::desencriptar($id_oferta)]; ?> postulados</b> pero solo puede visualizar <b><?php echo $limite_plan; ?></b>.
+			<?php if($datosOfertas['estado'] == Modelo_Oferta::DENTRODELTIEMPO){ ?>
+				<br>Usted está dentro del tiempo límite de la oferta, por tal razón puede vizualizar los candidatos más no descargar su información.
+			<?php } ?>
+		</div>
+	<?php }else if($datosOfertas['estado'] == Modelo_Oferta::DENTRODELTIEMPO){ ?>
+		<br>
+		<div class="alert alert-info col-md-12"> 
+			Usted está dentro del tiempo límite de la oferta, por tal razón puede vizualizar los candidatos más no descargar su información.
 		</div>
 	<?php } ?>
 

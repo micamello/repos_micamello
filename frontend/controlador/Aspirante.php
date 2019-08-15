@@ -394,8 +394,8 @@ class Controlador_Aspirante extends Controlador_Base
                     $this->enviarAccesos($idUsuario,$tipoUsuario,$ruta.'/'.$page.'/',$vista,$cantd_facetas,$id_empresa_plan);
                 }
 
-                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario,$id_oferta);
-                $descargas = Modelo_Descarga::descargas($idUsuario,$id_oferta);
+                //$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario,$id_oferta);
+                //$descargas = Modelo_Descarga::descargas($idUsuario,$id_oferta);
 
                 $nacionalidades = $_SESSION['mfo_datos']['nacionalidades'];
                 $arrprovincia = $_SESSION['mfo_datos']['arrprovincia'];
@@ -417,8 +417,8 @@ class Controlador_Aspirante extends Controlador_Base
                     'array_empresas'=>$array_empresas,
                     'datosOfertas'=>$datosOfertas,
                     'id_oferta'=>(!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta,
-                    'posibilidades'=>$posibilidades,
-                    'descargas'=>$descargas,
+                    //'posibilidades'=>$posibilidades,
+                    //'descargas'=>$descargas,
                     'facetas'=>$facetas,
                     'datos_usuarios'=>$datos_usuarios,
                     'limite_plan'=>$limite_plan,
@@ -625,8 +625,8 @@ class Controlador_Aspirante extends Controlador_Base
                     $this->enviarAccesos($idUsuario,$tipoUsuario,$ruta.'/'.$page.'/',$vista,$cantd_facetas,$id_empresa_plan);
                 }
 
-                $posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario,$id_oferta);
-                $descargas = Modelo_Descarga::descargas($idUsuario,$id_oferta);
+                //$posibilidades = Modelo_UsuarioxPlan::disponibilidadDescarga($idUsuario,$id_oferta);
+                //$descargas = Modelo_Descarga::descargas($idUsuario,$id_oferta);
                 
                 $arranacionalidades = Modelo_Pais::obtieneListadoAsociativo();
                 $arrprovincia = $nacionalidades = array();
@@ -659,8 +659,8 @@ class Controlador_Aspirante extends Controlador_Base
                     'id_oferta'=> (!empty($id_oferta)) ? Utils::encriptar($id_oferta) : $id_oferta,
                     'datosOfertas'=>$datosOfertas,
                     'array_empresas'=>$array_empresas,
-                    'posibilidades'=>$posibilidades,
-                    'descargas'=>$descargas,
+                    //'posibilidades'=>$posibilidades,
+                    //'descargas'=>$descargas,
                     'facetas'=>$facetas,
                     'datos_usuarios'=>$datos_usuarios,
                     'limite_plan'=>$limite_plan,

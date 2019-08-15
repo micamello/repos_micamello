@@ -78,9 +78,11 @@ class Controlador_Plan extends Controlador_Base {
       $gratuitos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::EMPRESA,$sucursal,1,false);      
       $idplanes = '';
       $totgratuitos = count($gratuitos);
-      foreach($gratuitos as $key=>$gratuito){
-        $idplanes .= $gratuito["id_plan"].((($key+1)==$totgratuitos) ? "" : ",");
-      }  
+      if(count($gratuitos)>0){
+        foreach($gratuitos as $key=>$gratuito){
+          $idplanes .= $gratuito["id_plan"].((($key+1)==$totgratuitos) ? "" : ",");
+        }  
+      }
           
       //si ya tiene un gratuito comprado este mes      
       if (!Modelo_UsuarioxPlan::existePlanEmpresa($idplanes,$_SESSION["mfo_datos"]["usuario"]["id_usuario"]) /*&& 
