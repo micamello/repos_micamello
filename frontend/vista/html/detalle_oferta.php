@@ -4,9 +4,7 @@
   </div>
 </div>
 
-<?php 
-
-if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
+<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA){ ?>
 <br>
 <div class=" banner-publicidad" align="center">
   <div class="container-fluid">

@@ -127,6 +127,10 @@ class Vista {
       
       $menu["submenu"][] = array("href"=>PUERTO."://".HOST."/logout/", "nombre"=>"Cerrar Sesión");
     }
+    $menu["submenu_nosotros"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/quienesSomos/", "nombre"=>"¿Qui&eacute;nes somos?","vista"=>"quienesSomos");
+      $menu["submenu_nosotros"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://blog.micamello.com.ec/", "nombre"=>"Blog","vista"=>"");
+      $menu["submenu_nosotros"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/canea/", "nombre"=>"¿Qu&eacute; es CANEA?","vista"=>"canea");
+      $menu["submenu_nosotros"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/preguntasfrecuentes/", "nombre"=>"Preguntas y respuestas frecuentes","vista"=>"preguntasfrecuentes");
     return $menu;
   }
 

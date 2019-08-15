@@ -89,13 +89,16 @@ class Modelo_Opcion{
 
 	public static function obtieneOpciones($faceta){
 		if (empty($faceta)){ return false; }
-		$sql = "SELECT o.id_opcion, o.descripcion, o.valor, p.id_pregunta 
+		$add_sql = "";
+		if($faceta == 1){$add_sql = " BETWEEN ".$faceta." AND ".MAX_PFACETA." ";}else{$add_sql = " = ".$faceta." ";}
+		$sql = "SELECT o.id_opcion, o.descripcion, o.valor, p.id_pregunta, c.id_faceta
 						FROM mfo_opcion o
 						INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
 						INNER JOIN mfo_competencia c ON p.id_competencia = c.id_competencia
-						WHERE c.id_faceta = ?
+						-- WHERE c.id_faceta = ?
+						WHERE c.id_faceta ".$add_sql."
 						ORDER BY p.orden, RAND()";
-		return $GLOBALS['db']->auto_array($sql,array($faceta),true);		
+		return $GLOBALS['db']->auto_array($sql,array(),true);		
 	}
 }  
 ?>

@@ -527,10 +527,9 @@ class Controlador_Aspirante extends Controlador_Base
                 
                 unset($_SESSION['mfo_datos']['usuario']['ofertaConvertir']);
                 $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0, 'C'=>0);
-
+                Utils::log("El id de la oferta: ".$id_oferta." - ".$page);
                 $arrarea       = Modelo_Area::obtieneListadoAsociativo();
                 $datosOfertas = Modelo_Oferta::ofertaPostuladoPor($id_oferta); 
-                //print_r($datosOfertas);
                 $usuariosConAccesos = Modelo_AccesoEmpresa::obtenerUsuariosConAccesos($idUsuario);
                 $planes = array();
 
@@ -571,11 +570,7 @@ class Controlador_Aspirante extends Controlador_Base
                     $aspirantes = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,false);
                     $paises = Modelo_Usuario::obtenerAspirantes($id_oferta,$page,'',$cantd_facetas,true);
                     $vistos = Modelo_Usuario::consultarVistoGeneral(0, 0, $id_oferta, true);
-                    // var_dump($vistos);
-                    // exit();
-
-                    // Modelo_Usuario::consultarVisto($_SESSION['mfo_datos']['usuario']['id_usuario'],$data_user['id_usuario'],$id_oferta);
-
+                    
                     $cantd_total = count($paises);
 
                     $_SESSION['mfo_datos']['usuario']['cantd_total'] = array($id_oferta=>$cantd_total);
@@ -728,8 +723,7 @@ class Controlador_Aspirante extends Controlador_Base
                 $_SESSION['mostrar_error'] = $e->getMessage();
                 Vista::render('perfilAspirante', $tags);
             }
-            
-            // exit();
+                        
             $tags = array_merge($tags, $tags1);
         Vista::render('perfilAspirante', $tags);
     }

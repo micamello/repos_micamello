@@ -150,6 +150,8 @@ class Controlador_Perfil extends Controlador_Base
                         }
                     }     
                 }
+                $ca = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
+                
 
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
@@ -178,7 +180,8 @@ class Controlador_Perfil extends Controlador_Base
                     'arrsectorind'=>$arrsectorind,
                     'cargo'=>$cargo,
                     'val_grafico'=>$str_grafico,
-                    'breadcrumbs'=>$breadcrumbs
+                    'breadcrumbs'=>$breadcrumbs,
+                    'ca'=>$ca
                 );
 
                 //Pasar a la vista los js y css que se van a necesitar
@@ -435,6 +438,7 @@ class Controlador_Perfil extends Controlador_Base
             } 
             
             if($tipo_usuario == Modelo_Usuario::CANDIDATO) { 
+                $causer = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
                 if (!empty($archivo) && $archivo['error'] != 4) {
                     $arch = Utils::validaExt($archivo, 2); 
 
@@ -458,9 +462,10 @@ class Controlador_Perfil extends Controlador_Base
                             }
                         }
                     }
-                }else if (!isset($_SESSION['mfo_datos']['usuario']['infohv'])) {
-                    throw new Exception("Cargar la hoja de vida es obligatorio");
                 }
+                // else if (!isset($_SESSION['mfo_datos']['usuario']['infohv']) && $causer > 2) {
+                //     throw new Exception("Cargar la hoja de vida es obligatorio");
+                // }
                 $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
                 if (empty($validaFechaNac)) {
                     throw new Exception("Debe ser Mayor de edad");

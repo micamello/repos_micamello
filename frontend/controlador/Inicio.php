@@ -55,18 +55,26 @@ class Controlador_Inicio extends Controlador_Base {
         Vista::render($vista, $tags);
       break;
       case 'politicaprivacidad':
-      $tags['vista'] = " ";
+        $tags['vista'] = " ";
         $vista = 'documentos/politica_privacidad_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;
       case 'politicacookie':
-      $tags['vista'] = " ";
+        $tags['vista'] = " ";
         $vista = 'documentos/politicacookie_'.SUCURSAL_ID;
         Vista::render($vista, $tags);
       break;
       case 'verificarCompra':  
         //$resultado = $this->verificaCompra();
         Vista::renderJSON(array("dato"=>$_SESSION['mfo_datos']['planActivar']));
+      break;
+      case 'searchKeyWord':
+        $keyword = Utils::getParam('keywordInput', '', $this->data);
+        $tipo = Utils::getParam('tipo', '', $this->data);
+        $oferta = Utils::getParam('oferta', '', $this->data);
+        $keyword = utf8_decode($keyword);
+        $arrayWords = Utils::createListArrMul($keyword, $tipo, $oferta);
+        Vista::renderJSON(array("returnWords"=>$arrayWords));
       break;
       default:            
         Vista::render('inicio', $tags);

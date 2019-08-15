@@ -1,4 +1,25 @@
 //HACER ESTO AL MOMENTO DE TERMINAR EL TERCER CUESTIONARIO
+var facetasCA = consultarCA();
+
+function consultarCA(){
+    var puerto_host = $('#puerto_host').val();
+    var valuereturn = "";
+    $.ajax({
+        type: "GET",
+        url: puerto_host+"/index.php?mostrar=cuestionario&opcion=consultarCA",
+        dataType:'json',
+        async: false,
+        success:function(data){          
+          valuereturn = ""+data.dato;
+        },
+        error: function (request, status, error) {
+            console.log(request.responseText);
+        }
+      });
+    return valuereturn;
+  }
+
+
 $(document).ready(function(){
 
   $('[data-toggle="tooltip"]').tooltip({
@@ -177,7 +198,7 @@ $('#provincia').change(function()
             },
             error: function (request, status, error) {
               colocaError("err_ciu", "seccion_ciudad","No se ha podido completar la solicitud","boton");
-            	$('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
+              $('#ciudad').html('<option disabled selected value="0">Selecciona una ciudad</option>');
               /*Swal.fire({                
                 html: 'Ocurrio un error al consultar las ciudades',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
@@ -244,14 +265,16 @@ function validarImg(archivo){
   if(file == 1){
     error = 1;
   }else{
-    $('#btnDescargarHV').val('cargada');
-    Swal.fire({      
-      html: 'Imagen cargada',
-      imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
-      imageWidth: 210,
-      confirmButtonText: 'ACEPTAR',
-      animation: true
-    });     
+    if($('#carga').length || facetasCA > 2){
+      $('#btnDescargarHV').val('cargada');
+      Swal.fire({      
+        html: 'Imagen cargada',
+        imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
+        imageWidth: 210,
+        confirmButtonText: 'ACEPTAR',
+        animation: true
+      });
+    }     
   }
   return error;
 }
@@ -340,15 +363,17 @@ $('#subirCV').change(function(e) {
     if(file == 1){
         error = 1;
     }else{
-      $('#btnDescargarHV').val('cargada');
-      Swal.fire({        
-        html: 'Hoja de vida cargada',
-        imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
-        imageWidth: 210,
-        confirmButtonText: 'ACEPTAR',
-        animation: true
-      });      
-      $('#modal_actualizar').modal('hide');
+      if($('#carga').length || facetasCA > 2){
+        $('#btnDescargarHV').val('cargada');
+        Swal.fire({        
+          html: 'Hoja de vida cargada',
+          imageUrl: $('#puerto_host').val()+'/imagenes/logo-04.png',
+          imageWidth: 210,
+          confirmButtonText: 'ACEPTAR',
+          animation: true
+        });
+      }    
+        $('#modal_actualizar').modal('hide');
     }
 });
 
@@ -667,8 +692,13 @@ function enviarFormulario(){
       }
       
     }else if($('#tipo_usuario').val() == 1){
-
       var file = document.getElementById('btnDescargarHV').value;
+      
+      // return false;
+      if(!$('#carga').length || !facetasCA > 2){
+        file = "loaded";
+      }
+
       if(estado == '' && file != ''){
           $('.loaderMic').css('display', 'block');
           document.form_editarPerfil.submit();
@@ -683,27 +713,30 @@ function enviarFormulario(){
           confirmButtonText: 'ACEPTAR',
           animation: true
         });      
-      }else if(estado == '' && file == ''){
-          //solo falta hoja de vida
-        Swal.fire({
-          // title: '¡Advertencia!',        
-          html: 'Por favor cargue su hoja de vida. <br>',
-          imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-          imageWidth: 75,
-          confirmButtonText: 'ACEPTAR',
-          animation: true
-        });
       }
-      else if(estado != '' && file == ''){
-        // error de ambos lados
+      if($('#carga').length || facetasCA > 2){
+        if(estado == '' && file == ''){
+          //solo falta hoja de vida
           Swal.fire({
-              // title: '¡Advertencia!',        
-              html: 'Por favor cargue su hoja de vida y complete los campos con (*)<br>',
-              imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
-              imageWidth: 75,
-              confirmButtonText: 'ACEPTAR',
-              animation: true
-            });
+            // title: '¡Advertencia!',        
+            html: 'Por favor cargue su hoja de vida. <br>',
+            imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+            imageWidth: 75,
+            confirmButtonText: 'ACEPTAR',
+            animation: true
+          });
+        }
+        else if(estado != '' && file == ''){
+          // error de ambos lados
+            Swal.fire({
+                // title: '¡Advertencia!',        
+                html: 'Por favor cargue su hoja de vida y complete los campos con (*)<br>',
+                imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
+                imageWidth: 75,
+                confirmButtonText: 'ACEPTAR',
+                animation: true
+              });
+        }
       }
     }
 }

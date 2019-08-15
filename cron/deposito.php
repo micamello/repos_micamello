@@ -3,7 +3,7 @@ require_once '../constantes.php';
 require_once '../init.php';
 
 /***DEPOSITOS MANUALES***/
-$id_comprobante = 9;  
+$id_comprobante = 1;  
 $datos_comprobante = Modelo_Comprobante::obtieneComprobante($id_comprobante);    
 $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);
 $infousuario = Modelo_Usuario::busquedaPorId($datos_comprobante["id_user_emp"],$datos_comprobante["tipo_usuario"]);
@@ -35,7 +35,7 @@ try{
 	$obj_facturacion = new Proceso_Facturacion();
 	$obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
 	$obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
-	$obj_facturacion->direccionComprador = $datos_comprobante["nombre"];
+	$obj_facturacion->direccionComprador = $datos_comprobante["direccion"];
 	$obj_facturacion->emailComprador = $datos_comprobante["correo"];
 	$obj_facturacion->telefComprador = $datos_comprobante["telefono"];            
 	$obj_facturacion->tipoIdentifComprador = $datos_comprobante["tipo_doc"];            
@@ -83,11 +83,11 @@ try{
 		$enlace = "<a href='".PUERTO."://".$dominio."/publicar/'>click aqu&iacute;</a><br>";  
 	} 
 	$email_body = str_replace("%ENLACE%", $enlace, $email_body);     
-	// Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body);  
+	Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body);  
 	echo "DEPOSITO REALIZADO";
 }
 catch(Exception $e){
   $GLOBALS['db']->rollback();            
-  // Utils::envioCorreo('desarrollo@micamello.com.ec','Error deposito',$e->getMessage());      
+  Utils::envioCorreo('desarrollo@micamello.com.ec','Error deposito',$e->getMessage());      
 }
 ?>

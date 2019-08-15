@@ -305,6 +305,15 @@ WHERE
         return true;  
     }
   }
+
+  // copy of function down
+  public static function obtenerAspirantes1($idOferta){
+    
+    $sql = "SELECT u.nombres, u.apellidos, p.asp_salarial FROM mfo_usuario u inner join mfo_postulacion p ON u.id_usuario = p.id_usuario AND p.id_ofertas = ".$idOferta.";";
+    $rs = $GLOBALS['db']->auto_array($sql,array(),true);
+    return $rs; 
+  }
+
   public static function obtenerAspirantes($idOferta,$page,$limite,$cantd_faceta,$obtCantdRegistros=false){
     
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,
@@ -630,11 +639,10 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
-
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
-  /*public static function busquedaGlobalAspirantes($id_pais_empresa,$cantd_faceta,$page,$obtCantdRegistros=false){     
+  public static function busquedaGlobalAspirantes($id_pais_empresa,$cantd_faceta,$page,$obtCantdRegistros=false){     
     $sql = "SELECT ";
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,u.fecha_creacion,
     u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad,u.discapacidad,u.viajar,u.id_situacionlaboral,u.id_tipolicencia,
@@ -893,7 +901,7 @@ WHERE
     //echo $sql;
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
-  }*/
+  }
   public static function busquedaPorId($id,$tipo=self::CANDIDATO){
     if (empty($id)){ return false; }
     if ($tipo == self::CANDIDATO){
@@ -916,7 +924,6 @@ WHERE
   }
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){   
-
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
       //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
           
@@ -924,7 +931,8 @@ WHERE
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
 
-      if (empty($infohv) || !isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){        
+      //si no tiene completo el perfil
+      if (/*empty($infohv) || */!isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
       }    
       
@@ -939,6 +947,9 @@ WHERE
       elseif(isset($planes) && Modelo_PermisoPlan::tienePermiso($planes,'tercerFormulario') && $nrotestxusuario < $nrotest){
         //si existe un acceso eliminar la notificacion del acceso              
         Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+      }
+      elseif (empty($infohv)){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cargarhojavida/');
       }
       elseif($_SESSION['mfo_datos']['usuario']['pendiente_test']){
         Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/'); 
@@ -1198,7 +1209,7 @@ WHERE
 
   public static function consultarInfoEmpresa($id_empresa){
     if (empty($id_empresa)){ return false; }
-    $sql = "SELECT e.id_empresa, e.telefono, e.nombres, si.descripcion as sectorindustrial, l.username, 
+    $sql = "SELECT e.id_empresa, l.id_usuario_login, e.padre, e.telefono, e.nombres, si.descripcion as sectorindustrial, l.username, 
             l.correo, l.dni, ce.nombres as nombres_contacto, ce.apellidos as apellidos_contacto, ce.telefono1, ce.telefono2, e.estado
              FROM mfo_empresa e
             INNER JOIN mfo_usuario_login l

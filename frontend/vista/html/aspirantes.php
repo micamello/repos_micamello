@@ -56,6 +56,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 		</div>
 	<?php } ?>
 
+
 	<?php if(!empty($_SESSION['mfo_datos']['Filtrar_aspirantes']['R'])){ ?>
 		<br>
 		<div class="alert alert-info col-md-12" style="font-size: 14pt;"> 
@@ -70,6 +71,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			</b>
 			<br/><br/>
 			<div class="panel panel-default shadow-panel1">
+				<!-- <input type="hidden" name="oferta" id="oferta" value="<?php echo $id_oferta; ?>"> -->
 				<div class="panel-heading">
 				    <span><i class="fa fa-key"></i> Palabra Clave</span>
 				</div>
@@ -77,7 +79,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 					<div class="filtros">
 						<div class="form-group">
 						    <div class="input-group">
-							    <input type="text" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
+							    <input type="text" onkeyup="javascript: predictWord($(this), 'aspirantes', <?php echo "'".$id_oferta."'"; ?>);" maxlength="30" class="form-control" id="inputGroup" aria-describedby="inputGroup" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 							    <?php 
 								    $ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/';
 								    //$ruta = Controlador_Aspirante::calcularRuta($ruta,'Q');
@@ -91,7 +93,6 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 					</div>
 				</div>
 		    </div>
-
 			<?php
 			if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'filtroFacetas',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA) { ?>
 			    <div class="panel panel-default shadow-panel1">
@@ -476,7 +477,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				<div class="panel-heading" style="cursor:pointer" data-toggle="collapse" data-target="#contenedor"><i class="fa fa-angle-down"></i>Filtros</div>
                 <div class="panel-body collapse" id="contenedor">
                 	<div class="form-group">
-						<input type="text" maxlength="30" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
+						<input type="text" maxlength="30" onkeyup="javascript: predictWord($(this), 'aspirantes', <?php echo "'".$id_oferta."'"; ?>);" class="form-control" id="inputGroup1" placeholder="Ej: Enfermero(a) &oacute; xx-xx-xxxx" /> 
 					</div>
 					<div class="form-group" id="facetas_movil">
 						<?php
@@ -585,7 +586,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			        </div>
 
 			        <div class="form-group">
-			            <select id="viajar" class="form-control">
+			            <select id="edad" class="form-control">
 			                <option value="0">Seleccione una edad</option>
 			                <?php
 								foreach (EDADES as $key => $v) {
@@ -600,7 +601,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			                <option value="0">Seleccione un g&eacute;nero</option>
 			                <?php
 								foreach (GENERO as $key => $v) {
-									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
+									echo '<option value="'.VALOR_GENERO[$key].'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
 								}
 							?>                    
 			            </select>
@@ -847,19 +848,17 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 							            		<td style="text-align: center; vertical-align: middle;">
 							            			
 							            			<?php
+							            				$estilo = 'color: #CDCDCD;';
 							            				if(!empty($vistos)){
 							            					$new_arr = array_column($vistos,'id_usuario');
 								            				if(in_array($a['id_usuario'], $new_arr)){
 								            					$estilo = 'color: #7ABF89;';
 								            					// $imagenvisto = 'check-01.png';
 								            				}
-								            				else{
-								            					$estilo = 'color: #CDCDCD;';
-								            					// $imagenvisto = 'check-02.png';
-								            				}
-								            				echo "<i class='fa fa-eye' style='".$estilo."font-size: 25px;'></i>";
+								            				
 								            				// echo "<img src='".PUERTO.'://'.HOST."/imagenes/".$imagenvisto."' width='40' height='40' alt='img.png'/>";
 							            				}
+							            				echo "<i class='fa fa-eye' style='".$estilo."font-size: 25px;'></i>";
 							            			?>
 							            		</td>
 
@@ -959,7 +958,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 								            				$imagen = 'icono-aspirante-05.png';
 								            			}
 
-								            			echo $title.'" data-title="Informe '.$title.$datosOfertas['estado'].'" style="vertical-align: middle; text-align: center;">';
+								            			echo $title.'" data-title="Informe '.$title.'" style="vertical-align: middle; text-align: center;">';
 									            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarInformePerso',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 									            			if($mostrar == ''){
 									            				

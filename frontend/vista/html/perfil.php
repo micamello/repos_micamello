@@ -31,7 +31,7 @@
        		}else if($i <= count($porcentaje_por_usuario) && $i == 2){
        			$clase = "visited";
        		}else{
-       			$clase = "";
+       			$clase = ""; 
        		}
           ?>
           <li class="<?php echo $clase;?>">Test <?php echo $i;?></li>                
@@ -43,46 +43,76 @@
 	<br><br><br><br><br><br>
 </div>
 <?php } ?>
-
-<div class="container">
+<div class="container-fluid">
     <form role="form" name="form_editarPerfil" id="form_editarPerfil" method="post" action="<?php echo PUERTO."://".HOST;?>/perfil/" enctype="multipart/form-data">
         <div class="">
             <div class="col-md-3 col-sm-3 col-xs-12">
-                <div id="seccion_img" class="recuadro-perfil panel panel-default">
-                	<img id="imagen_perfil" width="100%" alt="fotoPerfil" src="<?php echo PUERTO."://".HOST."/imagenes/imgperfil/".$_SESSION['mfo_datos']['usuario']['username']."/"; ?>" style="border-radius: 20px 20px 0px 0px;">
+                <div style="text-align:center" id="seccion_img" class="recuadro-perfil panel panel-default"><br>
+                	<img id="imagen_perfil" width="70%" alt="fotoPerfil" src="<?php echo PUERTO."://".HOST."/imagenes/imgperfil/".$_SESSION['mfo_datos']['usuario']['username']."/"; ?>" style="border-radius: 20px 20px 0px 0px;">
                     <input id="file-input" type="file" name="file-input"  class="upload-photo">
-                    <div class="perfil-cuadro" id="err_img" align="center">
-                    	<label class="text-center" for="file-input">actualizar foto de perfil <small style="font-size: 75%">(.jpg .jpeg )</small></label>
-                    </div> 
+                    <!-- <div class="perfil-cuadro" id="err_img" align="center">
+                    	<label class="text-center" for="file-input">actualizar foto de perfil <small style="font-size: 75%">(.jpg .jpeg )</small></label> -->
+
+                    <!-- </div>  -->
                     <!-- <br> -->
+                   	<div class="form-group">
+		              	<h4 class="usuario">
+		            	   <u><?php echo $_SESSION['mfo_datos']['usuario']['username']; ?></u>
+		            	</h4><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO) { ?>
+		            	<h6>RUC: <?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?></h6><?php } ?>                           
+		            </div>
                 </div>
 
-                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-                	<div id="carga" style="margin: 50px 0px;" class="recuadro-perfil panel panel-default"> 	
+                <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ 
+                	if(isset($_SESSION['mfo_datos']['usuario']['infohv']) && ($ca > 2 || !$ca)){
+
+                	?>
+                	<div id="carga" style="padding:0px;margin: 10px 0px;" class="col-md-12 recuadro-perfil panel panel-default">	
                 		<?php if($btnDescarga == 1){ ?><br>
-                    		<img width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>" style="border-radius: 20px 20px 0px 0px;">
-                    		<div class="perfil-cuadro" align="center">
+                    		<img class="col-md-3" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/iconos-nuevos-07.png";?>" style="padding:0px;">
+                    		<label class="col-md-9 lbl-editar" style="padding-left:0px; padding-right:0px; padding-bottom:10px;font-size:16pt; cursor:pointer;" id="hoja_de_vida">ACTUALIZAR O DESCARGAR HOJA DE VIDA (.PDF, . DOC,  .DOCX, MÁX: 2MB)</label><br>
+                    		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" >
+                    		<!-- <div class="perfil-cuadro" align="center">
 		                    	<label style="cursor:pointer" class="text-center" id="hoja_de_vida">actualizar o descargar hoja de vida <br><small style="font-size: 75%">(.PDF, .doc, .docx/máx: 2mb)</small></label>
-		                    </div> 
-		                    <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" >
+		                    </div>  -->
+
+		                    <!-- <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" > -->
                     	<?php }else{ ?><br>
-                    		<img id="hoja_de_vida2" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>">
-		                    <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
-		                    <div class="perfil-cuadro" align="center">
-		                    	<label style="cursor:pointer" class="text-center" for="subirCV">Presiona aqu&iacute; para cargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label>
-		                    </div> 
+
+                    		<img class="col-md-3" alt="hoja_de_vida" id="hoja_de_vida2" src="<?php echo PUERTO."://".HOST."/imagenes/iconos-nuevos-07.png";?>" style="padding:0px;">
+                    		<label class="col-md-9 lbl-editar" style="padding-left:0px; padding-right:0px; padding-bottom:10px;font-size:16pt; cursor:pointer;" id="hoja_de_vida">Presiona aqu&iacute; para cargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label><br>
+                    		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx">
+                    		<!-- <img id="hoja_de_vida2" width="100%" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/cv.png";?>"> -->
+		                    
+		                    <!-- <div class="perfil-cuadro" align="center"> -->
+		                    	<!-- <label style="cursor:pointer" class="text-center" for="subirCV">Presiona aqu&iacute; para cargar tu hoja de vida (.pdf, .doc, .docx, M&Aacute;X:2M)</label> -->
+		                    <!-- </div>  -->
+		                    <!-- <input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx"> -->
       					<?php } ?>
                     </div>
-                <?php } ?>
+                <?php 
+
+            	}
+            } ?>
       
 		        
 
 				    <?php if($puedeDescargarInforme >= 2 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
-				    	<div class="recuadro-perfil panel panel-default" style="margin: 50px 0px;"><br>
+				    	<div class="col-md-12 recuadro-perfil panel panel-default" style="margin: 10px 0px;padding:0px;"><br>
 				    		<a href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
-					            <img width="100%" alt="informePersonalidad" src="<?php echo PUERTO."://".HOST."/imagenes/informe.png";?>">
-					            <div class="perfil-cuadro" id="err_img" align="center">
-					              <label style="cursor:pointer" class="text-center" for="">acceder a informe de competencias laborales <?php if($puedeDescargarInforme >= 2 && $puedeDescargarInforme < 5){ echo 'parcial'; }else{ echo 'completo'; } ?></label>
+					            <img alt="informePersonalidad" class="col-md-3" src="<?php echo PUERTO."://".HOST."/imagenes/iconos-nuevos-08.png";?>" style="padding: 0px;">
+					            <div class="col-md-9" id="err_img" align="center">
+					              <label style="padding:0px; font-size:16pt;cursor: pointer;" class="lbl-editar" for="">DESCARGA<?php if($puedeDescargarInforme >= 2 && $puedeDescargarInforme < 5){ echo ' EL 40% DEL TEST CANEA'; 
+
+					           	echo '<a style="display: initial;" class="texto-white" href="'.PUERTO."://".HOST.'/planes/">
+						        		<span class="col-md-9 crown-ph" style="padding:10px 0px; color:#515151;border-top:1px solid #515151; text-align: 	center; display: inline-flex;">OBTÉN EL 100% DEL TEST CANEA CON PREMIUM
+						        		</span>
+					        			<img src="'.PUERTO.'://'.HOST.'/imagenes/corona-06.png" class="col-md-3" style="padding: 15px 0px">
+					        		</a>';
+
+
+
+					          }else{ echo ' TU TEST CANEA'; } ?></label>
 					            </div>
 				        	</a>
 				        	<!--<div align="center">
@@ -94,30 +124,23 @@
 				        </div>
 					<?php } ?>
 
-					<div style="cursor:pointer" class="recuadro-perfil panel panel-default" style="margin: 50px 0px;"><br>
+					<div style="cursor:pointer; padding:0px;margin: 10px 0px;" class="col-md-12 recuadro-perfil panel panel-default"><br>
 			        	<a onclick="abrirModal('','cambiar_clave','','');">
-				            <img width="100%" alt="cambio_clave" src="<?php echo PUERTO.'://'.HOST.'/imagenes/contra.png'; ?>">
-				            <div class="perfil-cuadro" id="err_img" align="center">
-				              <label style="cursor:pointer" class="text-center" for="">cambiar contraseña</label>
-				            </div>
+				            <img class="col-md-3" style="padding: 0px;" alt="cambio_clave" src="<?php echo PUERTO.'://'.HOST.'/imagenes/iconos-nuevos-09.png'; ?>">
+				            <!-- <div class="perfil-cuadro" id="err_img" align="center col-md-9"> -->
+				              <label style="cursor:pointer; padding-left:0px; padding-right:0px; padding-bottom:20px; font-size:16pt;" class="col-md-9 lbl-editar" for="">CAMBIAR CONTRASE&Ntilde;A</label>
+				            <!-- </div> -->
 			        	</a>
 			        </div>
 	       	</div>                
 	            <div class="col-md-9 col-sm-9 col-xs-12">
-	                <div class="panel panel-default shadow">
-	                    <div class="panel-body">
-				            <div class="row">
-				            	<div class="main_business">
+	                <div class="panel panel-default">
+	                    <div class="">
+				            <div class="">
+				            	<div class="">
 	                                <div class="col-md-12">
 	                                	<div class="col-md-12" align="center" style="padding-top:20px">
-		                                    <div class="form-group">
-		                                        <label for="username">Usuario:
-		                                        	<h4 class="usuario">
-		                                        	   <u><?php echo $_SESSION['mfo_datos']['usuario']['username']; ?></u>
-		                                        	</h4><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO) { ?>
-		                                        	<h6>RUC: <?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?></h6><?php } ?>
-		                                        </label>		                                        
-		                                    </div>
+		                                    
 	                                    </div>
 
 	                                    <div class="col-md-6">
@@ -751,8 +774,11 @@
 
 					                <div align="center">
 					                	<input type="button" id="boton" name="" class="btn-blue" value="GUARDAR">
-										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
-											<a href="<?php echo PUERTO."://".HOST;?>/cuestionario/" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>SIGUIENTE</a>
+										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
+											$defaultnext = "cuestionario";											
+											if(!isset($_SESSION['mfo_datos']['usuario']['infohv']) && $ca > 2){$defaultnext = "cargarhojavida";}
+											?>
+											<a href="<?php echo PUERTO."://".HOST."/".$defaultnext."/";?>" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>SIGUIENTE</a>
 										<?php }else{ 	?>
 											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>PUBLICAR OFERTA</a>
 									    <?php } ?>
@@ -786,7 +812,7 @@
     </div>
   </div>
 </section>
-
+<!-- <input type="hidden" name="caUser" id="caUser" value="<?php echo $ca; ?>"> -->
 <div class="modal fade" id="cambiar_clave" tabindex="-1" role="dialog" aria-labelledby="cambiar_clave" aria-hidden="true">
   <div class="modal-dialog" role="document">    
     <div class="modal-content">
@@ -818,6 +844,7 @@
 				</div>
 			</div>
 	      </div>
+
 	      <input type="hidden" name="cambiarClave" id="cambiarClave" value="1">
 	      <div class="modal-footer" style="text-align: center !important;">
 	        <button type="button" class="btn-red" id="btn-rojo" data-dismiss="modal">Cancelar</button>

@@ -49,7 +49,11 @@ RewriteRule ^imagenes/imgperfil/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carp
 RewriteRule ^imagenes/usuarios/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=profile&param1=$1 [L]
 RewriteRule ^imagenes/imgthumb/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=profile&param1=$1&param3=thumb [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
+RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1 [L]
 RewriteRule ^hojasDeVida/([a-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
+RewriteRule ^cargarhojavida/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarhojavida [L]
+RewriteRule ^subirHv/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarhojavida&opcion=hvusuario [L]
+RewriteRule ^hvcargado/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarhojavida&opcion=hvcargado [L]
 
 #login
 RewriteRule ^login/?$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]
@@ -108,6 +112,9 @@ RewriteRule ^oferta/([0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&vista=
 RewriteRule ^convertir/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=convertirOferta [L]
 RewriteRule ^detalleOferta/([a-z]+)/([a-zA-Z0-9]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=oferta&opcion=detalleOferta&vista=$1&id=$2 [L]
 
+######################################################################################
+#palabrasClaves
+RewriteRule ^searchKeyWord/$ %{ENV:REWRITEBASE}index.php?mostrar=inicio&opcion [L]
 ######################################################################################
 
 #postulaciones

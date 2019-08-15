@@ -1,6 +1,6 @@
 <?php
 class Controlador_Velocimetro extends Controlador_Base {
-  
+
   public function construirPagina(){
     if( !Modelo_Usuario::estaLogueado() ){
       Utils::doRedirect(PUERTO.'://'.HOST.'/login/');
@@ -32,7 +32,7 @@ class Controlador_Velocimetro extends Controlador_Base {
        
   }
 
-  public function mostrarDefault($faceta){    
+  public function mostrarDefault($faceta){
     $nrototaltest = Modelo_Cuestionario::totalTest();
     $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);    
     if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && $nrotestusuario < ($nrototaltest-3)){
@@ -56,9 +56,13 @@ class Controlador_Velocimetro extends Controlador_Base {
     elseif ($faceta == 2) {
       $valorporc = 40;
       $img = 'vel2.png';
-      $titulo = '¡SIGA ADELANTE! HA COMPLETADO LA SEGUNDA FASE DEL TEST';
+      $titulo = '¡SIGA ADELANTE! HA COMPLETADO LA PRIMERA Y SEGUNDA FASE DEL TEST';
       $msj2 = '¡Excelente! Ha completado el segundo test, ahora sus posibilidades se han incrementado. Mejore sus oportunidades al completar el TEST CANEA. No desespere, recuerde que obtendrá mejores resultados y beneficios para su carrera profesional';
       $textoBoton = "CONTINUAR AL TERCER TEST";
+      if(!isset($_SESSION['mfo_datos']['usuario']['infohv'])){
+        $enlaceboton = "cargarhojavida";
+        $textoBoton = "CONTINUA PARA CARGAR SU HOJA DE VIDA";
+      }
     }
     else{
       $valorporc = 100;

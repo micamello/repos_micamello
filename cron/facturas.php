@@ -28,18 +28,18 @@ if (count($facturas) > 0){
       //$GLOBALS['db']->beginTrans();
       $fecha_factura = substr($factura["fecha_creacion"], 0, 10);   
 
-      if ($fecha_actual != $fecha_factura){       
-        $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
+      $datos_comprobante = Modelo_Comprobante::obtieneComprobante($factura["id_comprobante"]);
+      if ($fecha_actual != $fecha_factura){
         if (empty($datos_comprobante)){
-          throw new Exception("Error no se encontro datos en el comprobante");  
-        }  
+          throw new Exception("Error no se encontro datos en el comprobante");
+        }
         $infousuario = Modelo_Usuario::busquedaPorId($datos_comprobante["id_user_emp"],$datos_comprobante["tipo_usuario"]);
         if (empty($infousuario)){
           throw new Exception("Error no se encontro datos del usuario");  
-        }    
-        $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);      
+        }
+        $infoplan = Modelo_Plan::busquedaXId($datos_comprobante["id_plan"],true);
         if (empty($infoplan)){
-          throw new Exception("Error no se encontro datos en el plan");  
+          throw new Exception("Error no se encontro datos en el plan");
         }
         $obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
         $obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
@@ -80,8 +80,7 @@ if (count($facturas) > 0){
         $rsfact["xml"] = utf8_encode($factura["xml"]);
       }                     
 
-      $attachments = array();      
-      print_r($rsfact);
+      $attachments = array();            
       if (!$obj_facturacion->sendRecepcion($rsfact["xml"],$rsfact["claveacceso"])){
         throw new Exception("1 WS del SRI");  
       }  
@@ -104,16 +103,17 @@ if (count($facturas) > 0){
 
       $nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".(isset($infousuario["apellidos"]) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");
       $email_subject = "Factura Electrónica"; 
-      $mensaje = "N&uacute;mero de Autorizaci&oacute;n: ".$rsfact["claveacceso"]."<br>";
-      $mensaje .= "Fecha de Emisi&oacute;n: ".$fecha_auto."<br>";
-      $mensaje .= "Tipo de Comprobante: Factura<br>";
-      $mensaje .= "Valor Total: ".$datos_comprobante["valor"]."<br>";
+      $mensaje = "<p style='font-size:12px;line-height:18px;color:#555555;font-family:Helvetica Neue,Helvetica, Arial,sans-serif;margin:0;'><span style='font-size: 15px;'><b style='color: #0b66a9;'>N&uacute;mero de Autorizaci&oacute;n: </b>".$rsfact["claveacceso"]."</p>";
+      $mensaje .= "<p style='font-size:12px;line-height:18px;color:#555555;font-family:Helvetica Neue,Helvetica, Arial,sans-serif;margin:0;'><span style='font-size: 15px;'><b style='color: #0b66a9;'>Fecha de Emisi&oacute;n: </b>".$fecha_auto."</p>";
+      $mensaje .= "<p style='font-size:12px;line-height:18px;color:#555555;font-family:Helvetica Neue,Helvetica, Arial,sans-serif;margin:0;'><span style='font-size: 15px;'><b style='color: #0b66a9;'>Tipo de Comprobante:</b> Factura</p>";
+      $mensaje .= "<p style='font-size:12px;line-height:18px;color:#555555;font-family:Helvetica Neue,Helvetica, Arial,sans-serif;margin:0;'><span style='font-size: 15px;'><b style='color: #0b66a9;'>Valor Total: </b>".$datos_comprobante["valor"]."</p>";
 
       $email_body = Modelo_TemplateEmail::obtieneHTML("FACTURACION");
       $email_body = str_replace("%NOMBRES%", $nombres, $email_body);   
       $email_body = str_replace("%MENSAJE%", $mensaje, $email_body);         
       
       Utils::envioCorreo($infousuario["correo"],$email_subject,$email_body,$attachments);
+      Utils::envioCorreo("desarrollo@micamello.com.ec",$email_subject,$email_body,$attachments);
 
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".pdf");
       unlink(Proceso_Facturacion::RUTA_FACTURA.$rsfact["claveacceso"].".xml");
@@ -123,7 +123,7 @@ if (count($facturas) > 0){
       //$GLOBALS['db']->rollback();
       echo "NO PROCESADO REGISTRO ".$factura["id_factura"]."<br>";     
       $msgerror = $e->getMessage()." factura:".$factura["id_factura"];
-      //Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron facturas',$msgerror);     
+      Utils::envioCorreo('desarrollo@micamello.com.ec','Error Cron facturas',$msgerror);     
     }
   }
 } 

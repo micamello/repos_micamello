@@ -16,8 +16,7 @@ class Modelo_Respuesta{
             WHERE r.id_usuario = ? ";
     $sql .= (!empty($faceta)) ? " AND c.id_faceta IN (".$faceta.")" : "";        
     $sql .= " GROUP BY o.id_pregunta
-              ORDER BY o.id_pregunta, c.id_faceta, o.valor";  
-              Utils::log('sql:'.$sql);        
+              ORDER BY o.id_pregunta, c.id_faceta, o.valor";                      
     return $GLOBALS['db']->auto_array($sql,array($idusuario),true);  
   }
 
@@ -58,6 +57,7 @@ class Modelo_Respuesta{
             INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
             INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
             WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)";
+            // Utils::log($sql);
     $result = $GLOBALS['db']->auto_array($sql,array($idusuario));          
     if (empty($result)){
       return 1;
@@ -81,7 +81,7 @@ class Modelo_Respuesta{
             INNER JOIN mfo_pregunta p ON p.id_pregunta = o.id_pregunta
             INNER JOIN mfo_competencia c ON c.id_competencia = p.id_competencia
             INNER JOIN mfo_faceta f ON f.id_faceta = c.id_faceta
-            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)";
+            WHERE o.id_opcion = (SELECT MAX(id_opcion) FROM mfo_respuesta WHERE id_usuario = ?)";       
     $result = $GLOBALS['db']->auto_array($sql,array($idusuario));  
     return $result["orden"];
   }

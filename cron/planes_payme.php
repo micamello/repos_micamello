@@ -17,11 +17,10 @@ if ($resultado){
 else{
   Utils::crearArchivo(CRON_RUTA,'procesando_payme.txt','');
 }
- Utils::log("PASO UNO UNO".date('Y-m-d H:i:s'));
+
 $registros = Modelo_Payme::obtieneNoProcesados();
 
 if (!empty($registros) && is_array($registros)){  
-  Utils::log("PASO UNO ".date('Y-m-d H:i:s'));
   
   foreach($registros as $registro){  
     if (empty($registro)){      

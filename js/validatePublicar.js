@@ -844,16 +844,19 @@ var primerEmpleoOf
 
         if(!validarFloat(salarioOf.val())){
 
-            crearMensajeError(salarioOf, "Ingrese un valor correcto, 00.00");
+            crearMensajeError(salarioOf, "Formato incorrecto, 00.00");
 
             mensajes += "\n-Campo salario: Ingrese un valor válido, 00.00";
 
         }
 
         else{
-
-            eliminarMensajeError(salarioOf);
-
+            if(salarioOf.val() <= 0){
+                crearMensajeError(salarioOf, "Ingrese un valor válido. Min. $1");
+            }
+            else{
+                eliminarMensajeError(salarioOf);
+            }
         }
 
     }
@@ -1399,9 +1402,12 @@ if($('#salarioOf').length){
             }
 
             else{
-
-                eliminarMensajeError($(this));
-
+                if($(this).val() <= 0){
+                    crearMensajeError($(this), "Ingrese un valor válido. Min $1.");
+                }
+                else{
+                    eliminarMensajeError($(this));
+                }
             }
 
         }

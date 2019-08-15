@@ -77,7 +77,34 @@ class Utils{
       return false;
     }
 
-  public static function envioCorreo($to, $subject, $body, $attachments=array()){    
+  // public static function envioCorreo($to, $subject, $body, $attachments=array()){    
+  //   $mail = new PHPMailer();
+  //   $mail->IsSMTP();
+  //   $mail->SMTPAuth = false;
+  //   $mail->CharSet = 'UTF-8';
+  //   $mail->Port = MAIL_PORT; 
+  //   $mail->Host = MAIL_HOST; 
+  //   $mail->Username = MAIL_USERNAME; 
+  //   $mail->Password = MAIL_PASSWORD;     
+  //   $mail->From = MAIL_CORREO; 
+  //   $mail->FromName = MAIL_NOMBRE;         
+  //   $mail->SMTPAutoTLS = false;
+  //   $mail->SMTPSecure = 'ssl';   
+  //   $mail->AddAddress($to); 
+  //   $mail->IsHTML(true); 
+  //   $mail->Subject = $subject; 
+  //   $mail->Body = $body; 
+  //   if (!empty($attachments) && is_array($attachments)){
+  //     foreach($attachments as $attachment){
+  //       if (file_exists($attachment["ruta"])){
+  //         $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
+  //       }
+  //     }
+  //   }      
+  //   return $mail->send();
+  // }
+
+public static function envioCorreo($to, $subject, $body, $attachments=array()){    
     $mail = new PHPMailer();
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
@@ -88,7 +115,8 @@ class Utils{
     $mail->Password = MAIL_PASSWORD;     
     $mail->From = MAIL_CORREO; 
     $mail->FromName = MAIL_NOMBRE;         
-    $mail->SMTPAutoTLS = false;    
+    $mail->SMTPAutoTLS = false;   
+    //$mail->SMTPSecure = 'ssl'; 
     $mail->AddAddress($to); 
     $mail->IsHTML(true); 
     $mail->Subject = $subject; 
@@ -99,9 +127,10 @@ class Utils{
           $mail->AddAttachment($attachment["ruta"], $attachment["archivo"]);
         }
       }
-    }      
+    }          
     return $mail->send();
   }
+
 
   public static function encriptar($texto){      
     $objaes = new Aes(KEY_ENCRIPTAR);
@@ -822,7 +851,8 @@ public static function validarCelularConvencional($contenido){
   }
 
   public static function crearThumbnail($nombreImagen, $nombreThumbnail, $nuevoAncho, $nuevoAlto){
-    
+    // Se agrego esta linea
+    @ini_set('default_charset', 'UTF-8');
     // Obtiene las dimensiones de la imagen.
     list($ancho, $alto) = getimagesize($nombreImagen);
 
@@ -894,7 +924,50 @@ public static function validarCelularConvencional($contenido){
     return $cadena;
   }
 
+// funciones de texto predictivo
+  public static function createListArrMul($keyword,$tipo, $oferta=null){
+    $arrayWords = array();
+    $dataPredict = array();
+    $arrayPermKeys = array();
+    if(!empty($keyword)){
+      if($tipo == "oferta"){
+        $dataPredict = Modelo_Oferta::obtieneOfertas1($_SESSION["mfo_datos"]["usuario"]["id_usuario"],SUCURSAL_PAISID);
+        $arrayPermKeys = array("titulo","salario","a_convenir","empresa","jornada","ciudad","provincia");
+      }
+      if($tipo == "aspirantes"){
+        $oferta = self::desencriptar($oferta);
+        $dataPredict = Modelo_Usuario::obtenerAspirantes1($oferta);
+        $arrayPermKeys = array("nombres","apellidos");
+      }
+      foreach ($dataPredict as $key => $value) {
+        foreach ($value as $key1 => $value1) {
+          if(!in_array($key1, $arrayPermKeys) || (in_array(strtolower($value1), $arrayWords)))
+            {continue;}
+            array_push($arrayWords, (strip_tags(strtolower(($value1)))));
+        }
+      }
+      $returnData = self::predictWords($arrayWords, $keyword);
+    }
+    return $returnData;
+  }
+  public static function predictWords($arrData, $keyword){
+    $arrayResult = array();
+      $i = 1;
+      foreach($arrData as $value) {
+        if($i > 5){break;}
+        if(preg_match("/{$keyword}/i", (html_entity_decode($value)))){
+          // array_push($arrayResult, strip_tags(mb_strimwidth($value, 0, 30, ".....")));
+          array_push($arrayResult, ($value));
+          $i++;
+      }
+    }
+    return $arrayResult;
+  }
 
+  // public static function convertirWhatsappMensaje($mensaje){
+  //   $mensaje = str_replace(" ", " %20", $mensaje);
+  //   return $mensaje;
+  // }
 
 }
 ?>

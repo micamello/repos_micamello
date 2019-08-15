@@ -67,7 +67,7 @@ switch ($carpeta){
 	  $ruta = PATH_PROFILE.$archivo.'.jpg';	  
 	  $resultado = file_exists($ruta);	  	  
 	  if (!$resultado){
-	  	$ruta = FRONTEND_RUTA.'imagenes/icono-perfil-06.png';	  	
+	  	$ruta = FRONTEND_RUTA.'imagenes/iconos-nuevos-06.png';	  	
 	  }	  		  
 	  $archivo = $archivo.'.jpg';
 	  $mostrar = true;

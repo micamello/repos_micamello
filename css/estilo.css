@@ -1134,6 +1134,7 @@ padding-top: 10px;
 .bloque{
     background-color: #204478;
     padding-top: 40px;
+    padding-bottom: 20px;
 }
 .cuadrado{
     border: 2px solid #204478;
@@ -2584,8 +2585,8 @@ animation:
     padding: 0px 5px;
 }
 
-/*NUEVOS CAMBIOS 3/06*/
-@media (max-width: 1200px) {
+/*****CAMBIOS**********/
+@media (max-width: 1370px) {
     .navbar-header {
       float: none;
     }
@@ -3055,4 +3056,305 @@ div.navbar{position: relative;z-index: 1;}
     display: inline-block;
     color: #ec3131;    
     font-size: 18px;
+}
+
+/*texto predictivo*/
+.panelTextPredictpanel{
+    /*position: absolute;z-index: 9999; margin-top: 35px; width: 100%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;*/
+    position: absolute;z-index: 9999; margin-top: 35px; width: 100%;white-space: nowrap; overflow: hidden;text-overflow: ellipsis;
+}
+
+.subpaneltextpredict{
+    background-color: white;position: ;width: 100%;
+    border: 1px solid #bfbfbf;
+    border-radius: 3px;
+}
+
+.ulTextPredict{
+    list-style: none; padding-left: 0px; text-align: left; margin-bottom: 0px !important;
+}
+
+.liTextPredict{
+    border-bottom: 1px solid #DEDEDE; border-radius: 2px; padding: 5px 0 5px 20px;
+}
+
+.lihover{
+    background-color: #C5E5EE;
+}
+
+/*ULTIMOS CAMBIOS*/
+.corona {
+    height: 35px;
+    
+    display: block;
+    display: inline-block;
+}
+.crown-ph{
+    color: #ffb404;
+    font-weight: bold;
+}
+.lbl-editar{
+    color: #204478;
+    font-weight: bold;
+}
+.comparison {
+  max-width:940px;
+  margin:0 auto;
+  font:13px/1.4 'Raleway',Helvetica,Arial,sans-serif;
+  text-align:center;
+}
+
+.comparison table {
+  width:100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  table-layout: fixed;
+  border-bottom:1px solid #CCC;
+}
+
+.comparison td, .comparison th {
+  border-right:1px solid #CCC;
+  empty-cells: show;
+  padding:10px;
+}
+
+.compare-heading {
+  font-size:18px;
+  font-weight:bold !important;
+  border-bottom:0 !important;
+  padding-top:10px !important;
+}
+
+.comparison tbody tr:nth-child(odd) {
+  display:none;
+}
+
+.comparison .compare-row {
+  background:#F5F5F5;
+}
+
+.comparison .tickblue {
+  color:#0078C1;
+}
+
+.comparison .tickgreen {
+  color:#009E2C;
+}
+
+.comparison th {
+  border-bottom:1px solid #CCC;
+}
+
+.comparison tr td:first-child {
+  text-align:left;
+}
+  
+.comparison .qbse, .comparison .qbo, .comparison .tl {
+  color:#FFF;
+  padding:10px;
+  font-size:13px;
+  border-right:1px solid #CCC;
+  border-bottom:0;
+}
+
+.comparison .tl2 {
+  border-right:0;
+}
+
+.comparison .qbse {
+  background:#0078C1;
+  border-top-left-radius: 3px;
+  border-left:0px;
+}
+
+.comparison .qbo {
+  background:#009E2C;
+  border-top-right-radius: 3px;
+  border-right:0px;
+}
+
+.comparison .price-info {
+  padding:5px 15px 15px 15px;
+}
+
+.comparison .price-was {
+  color:#999;
+  text-decoration: line-through;
+}
+
+.comparison .price-now, .comparison .price-now span {
+  color:#ff5406;
+}
+
+.comparison .price-now span {
+  font-size:32px;
+}
+
+.comparison .price-small {
+    font-size: 18px !important;
+    position: relative;
+    top: -11px;
+    left: 2px;
+}
+
+.comparison .price-buy {
+  background:#ff5406;
+  padding:10px 20px;
+  font-size:12px;
+  display:inline-block;
+  color:#FFF;
+  text-decoration:none;
+  border-radius:3px;
+  text-transform:uppercase;
+  margin:5px 0 10px 0;
+}
+
+.comparison .price-try {
+  font-size:12px;
+}
+
+.comparison .price-try a {
+  color:#202020;
+}
+
+@media (max-width: 767px) {
+
+  
+    .tab-ocultar{
+        display: none;
+    }
+    .logo-tabla{
+        display: none;
+    }
+  .comparison td:first-child{
+    display: none;
+  }
+  .comparison tbody tr:nth-child(odd) {
+    display:table-row;
+    background:#F7F7F7;
+  }
+  .comparison .row {
+    background:#FFF;
+  }
+  .comparison td, .comparison th {
+    border:1px solid #CCC;
+  }
+  .price-info {
+  border-top:0 !important;
+  
+}
+  
+}
+
+@media (max-width: 639px) {
+      .head-plan{
+        font-size: 12pt!important;
+    }
+  .comparison .price-buy {
+    padding:5px 10px;
+  }
+  .comparison td, .comparison th {
+    padding:10px 5px;
+  }
+  .comparison .hide-mobile {
+    display:none;
+  }
+  .comparison .price-now span {
+  font-size:16px;
+}
+
+.comparison .price-small {
+    font-size: 16px !important;
+    top: 0;
+    left: 0;
+}
+  .comparison .qbse, .comparison .qbo {
+    font-size:12px;
+    padding:10px 5px;
+  }
+  .comparison .price-buy {
+    margin-top:10px;
+  }
+  .compare-heading {
+  font-size:13px;
+}
+}
+
+.head-plan{
+    
+    text-align: center;
+    color: white;
+    font-size: 18pt;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 10px 0px;
+}
+.avanzado{
+    background-color: #ff7700;
+}
+.plus{
+    background-color: #fab40a;
+}
+.gold{
+    background-color: #ccbd4c;
+}
+.platino{
+    background-color: #9a439e;
+}
+.diamante{
+    background-color: #79d5c5;
+}
+.dias-pr{
+    color:#515151;
+    text-align: center;
+    font-size: 18pt;
+}
+.tabla-planes-n{
+    color: #1e1e1e;
+    font-size: 12pt;
+}
+.plan-negrita{
+    font-size:16pt;
+    font-weight: bold;
+    display: block;
+}
+.simbolos{
+    font-size: 20pt;
+    font-weight: bold;
+}
+.equis{
+    color: #e57676;
+}
+.price-info{
+    color:#515151;
+    font-weight: bold;
+    font-size: 16pt;
+}
+
+.btn-whatsapp {
+       display:block;
+       width:70px;
+       height:70px;
+       color:#fff;
+       position: fixed;
+       left:20px;
+       bottom:20px;
+       border-radius:50%;
+       line-height:80px;
+       text-align:center;
+       z-index:999;
+}
+
+.banderas-icono{
+  display: inline;
+  margin-top: 15px;
+}
+.txt-banderas{
+  display: inline;
+  margin-left: 10px;
+
+}
+.lbl-editar{
+    color: #204478;
+    font-weight: bold;
 }

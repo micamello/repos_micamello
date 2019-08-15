@@ -23,6 +23,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       break;
       case 'generarFactura':
         $idFactura = Utils::desencriptar(Utils::getParam('idFactura','',$this->data));
+        
         if(!empty($idFactura)){
           $consultaFactura = Modelo_Factura::obtenerFactura($idFactura,Modelo_Factura::AUTORIZADO);
           
@@ -379,7 +380,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       <p>Estas se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al desempe&ntilde;o y desarrollo individual en un puesto de trabajo.</p>
       <br><h2>&iquest;QU&eacute; ES EL COMPORTAMIENTO?</h2>
       <p>Es la habilidad de interactuar efectivamente con la gente, esta habilidad, puede ser el &eacute;xito o fracaso en su trabajo.</p> 
-      <p>Las inventigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
+      <p>Las investigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
       <br><h2>INTRODUCCI&Oacute;N</h2>
       <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
@@ -1128,7 +1129,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       <p>Estas se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al desempe&ntilde;o y desarrollo individual en un puesto de trabajo.</p>
       <br><h2>&iquest;QU&eacute; ES EL COMPORTAMIENTO?</h2>
       <p>Es la habilidad de interactuar efectivamente con la gente, esta habilidad, puede ser el &eacute;xito o fracaso en su trabajo.</p> 
-      <p>Las inventigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
+      <p>Las investigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
       <br><h2>INTRODUCCI&Oacute;N</h2>
       <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
       

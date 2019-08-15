@@ -726,3 +726,68 @@ function ajaxLoader(obj, action, tipo){
 function caracteresEspecial(){
   $('#aspiracion').val($('#aspiracion').val().replace(/[`~!@#$%^&*()_°¬|+\-=?;:'",.<>\{\}\[\]\\\/]/g, ""));
 }
+
+function predictWord(obj,type, oferta){
+  // console.log(oferta);
+  if(oferta == null && oferta == "" || oferta == 'undefined'){oferta = "";}
+  // console.log("------e"+oferta+"----------e");
+  var keywordInput = obj.val();
+  var url = puerto_host+"/index.php?mostrar=inicio&opcion=searchKeyWord&keywordInput="+keywordInput+"&tipo="+type+"&oferta="+oferta;
+  // console.log(url);
+    $.ajax({
+      type: "GET",
+      url: url,
+      dataType:'json',
+      async: false,
+      success:function(data){
+          displayWords(data, obj);
+      },
+      error: function (request, status, error) {
+          console.log(request.responseText);
+      }
+    })
+}
+
+function displayWords(data, obj){
+  var resultadoString = "";
+  var valueFromInput = obj.val();
+  var elementFromPrepend = obj.parent();
+  if(valueFromInput == ""){
+    elementFromPrepend.prev().remove();
+    return false;
+  }
+  if(elementFromPrepend.prev().length > 0){
+    elementFromPrepend.prev().remove();
+  }
+  resultadoString = '<div class="panelTextPredictpanel">';
+  resultadoString += '<div class="subpaneltextpredict"><ul class="ulTextPredict">';
+    for (var i = 0; i < data.returnWords.length; i++) {
+      var idInput = ""+obj.attr('id')+"";
+      resultadoString += '<li onmouseover="lihover($(this));" onmouseleave="lileave($(this))" onclick="anadirText($(this), '+obj.attr('id')+');" class="liTextPredict">' + data.returnWords[i].toLowerCase() + '</li>';
+    }
+  resultadoString += "</ul></div></div>";
+  if(data.returnWords.length > 0){
+    obj.parent().before(resultadoString);
+  }
+}
+
+function desaparecerPanelList(){
+  // if($('.panelTextPredictpanel').length.length){
+    $('.panelTextPredictpanel')[0].outerHTML = "";
+  // }
+}
+
+
+function anadirText(obj, obj1){
+  $(obj1).val(obj.text());
+  // $('.panelTextPredictpanel')[0].outerHTML = "";
+  desaparecerPanelList();
+}
+
+function lihover(obj){
+  obj.addClass('lihover');
+}
+
+function lileave(obj){
+  obj.removeClass('lihover');
+}

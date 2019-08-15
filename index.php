@@ -83,6 +83,9 @@ function obtieneControlador($nombre){
     case 'acceso':
       return 'Acceso';
     break;
+    case 'cargarhojavida':
+      return 'HojaVida';
+    break;
     default:
       return 'Inicio'; 
     break;
