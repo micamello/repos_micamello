@@ -955,7 +955,7 @@ WHERE
         Utils::doRedirect(PUERTO.'://'.HOST.'/preguntas/'); 
       }
       elseif (isset($planes) && Modelo_PermisoPlan::tienePermiso($planes, 'autopostulacion') && $controlador == 'login') {
-        Utils::doRedirect(PUERTO.'://'.HOST.'/postulacion/');  
+        Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');  
       } 
       else{           
         if ($controlador == 'login'){          

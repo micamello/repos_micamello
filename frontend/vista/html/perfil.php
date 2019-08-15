@@ -107,7 +107,7 @@
 					           	echo '<a style="display: initial;" class="texto-white" href="'.PUERTO."://".HOST.'/planes/">
 						        		<span class="col-md-9 crown-ph" style="padding:10px 0px; color:#515151;border-top:1px solid #515151; text-align: 	center; display: inline-flex;">OBTÉN EL 100% DEL TEST CANEA CON PREMIUM
 						        		</span>
-					        			<img src="'.PUERTO.'://'.HOST.'/imagenes/corona-06.png" class="col-md-3" style="padding: 15px 0px">
+					        			<img src="'.PUERTO.'://'.HOST.'/imagenes/corona-06.png" class="col-md-3 corona_plan">
 					        		</a>';
 
 

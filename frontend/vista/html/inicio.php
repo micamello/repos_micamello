@@ -20,7 +20,9 @@
                 <img style="width: 100%; background-size: cover;" src="<?php echo PUERTO.'://'.HOST;?>/imagenes/banner/principal-2.jpg">
             </div> -->
             <div class="col-md-7" id="foto-banner">
-              <iframe width="100%" height="514" src="<?php echo MC_REG_YOUTUBE; ?>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen></iframe>
+              <div class="embed-responsive embed-responsive-16by9">
+                <iframe width="100%" class="yt-mic" src="<?php echo MC_REG_YOUTUBE; ?>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen></iframe>
+              </div>
             </div>
         </div>
     </div>

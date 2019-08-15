@@ -371,6 +371,11 @@ display: inline;
         width: 70px;
     }
 
+    .corona_plan{
+        padding: 0 !important;
+        max-width: 20%;
+    }
+
 }
 
 /*PANTALLAS MEDIANAS*/
@@ -3116,4 +3121,7 @@ div.navbar{position: relative;z-index: 1;}
     
     display: block;
     display: inline-block;
+}
+.corona_plan{
+    padding: 15px 0px;
 }
