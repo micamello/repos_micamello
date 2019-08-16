@@ -728,7 +728,7 @@ function caracteresEspecial(){
 }
 
 function predictWord(obj,type, oferta){
-  // console.log(oferta);
+   console.log(oferta);
   if(oferta == null && oferta == "" || oferta == 'undefined'){oferta = "";}
   // console.log("------e"+oferta+"----------e");
   var keywordInput = obj.val();

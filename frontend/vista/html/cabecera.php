@@ -42,11 +42,7 @@
     gtag('config', 'UA-123345917-1');
   </script>-->    
 </head>
-<?php 
-// Utils::log(print_r($_SESSION, true));
-// print_r($_SESSION);
-    // exit();
-     ?>
+
 <body>
   <div class="spin"/></div>
   <div class="loaderMic">

@@ -931,7 +931,7 @@ public static function validarCelularConvencional($contenido){
     $arrayPermKeys = array();
     if(!empty($keyword)){
       if($tipo == "oferta"){
-        $dataPredict = Modelo_Oferta::obtieneOfertas1($_SESSION["mfo_datos"]["usuario"]["id_usuario"],SUCURSAL_PAISID);
+        $dataPredict = Modelo_Oferta::obtieneOfertas1($_SESSION["mfo_datos"]["usuario"]["id_usuario"],SUCURSAL_PAISID, $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
         $arrayPermKeys = array("titulo","salario","a_convenir","empresa","jornada","ciudad","provincia");
       }
       if($tipo == "aspirantes"){
