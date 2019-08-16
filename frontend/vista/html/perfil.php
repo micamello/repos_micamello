@@ -59,7 +59,8 @@
 		              	<h4 class="usuario">
 		            	   <u><?php echo $_SESSION['mfo_datos']['usuario']['username']; ?></u>
 		            	</h4><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO) { ?>
-		            	<h6>RUC: <?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?></h6><?php } ?>                           
+		            	<h6>RUC: <?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?></h6><?php } ?>  
+		            	<label class="text-center profilePhoto" style="background-color: #204478; color: white; border-radius: 5px;margin: 0px 20px 0px 20px;" for="file-input">Actualizar foto de perfil <small style="font-size: 75%;">(.jpg .jpeg )</small></label>
 		            </div>
                 </div>
 
@@ -107,7 +108,7 @@
 					           	echo '<a style="display: initial;" class="texto-white" href="'.PUERTO."://".HOST.'/planes/">
 						        		<span class="col-md-9 crown-ph" style="padding:10px 0px; color:#515151;border-top:1px solid #515151; text-align: 	center; display: inline-flex;">OBTÉN EL 100% DEL TEST CANEA CON PREMIUM
 						        		</span>
-					        			<img src="'.PUERTO.'://'.HOST.'/imagenes/corona-06.png" class="col-md-3" style="padding: 15px 0px">
+					        			<img src="'.PUERTO.'://'.HOST.'/imagenes/corona-06.png" class="col-md-3 corona_plan">
 					        		</a>';
 
 

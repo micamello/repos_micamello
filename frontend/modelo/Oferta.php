@@ -276,7 +276,7 @@ class Modelo_Oferta{
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
-    
+
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

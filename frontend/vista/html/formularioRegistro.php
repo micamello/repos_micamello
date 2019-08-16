@@ -14,6 +14,11 @@
             <div class="row">
                 <div class="col-md-10 col-md-offset-1" id="inicio-cuadro">
                      <div class="text-right">
+                        <?php 
+                            if(isset($empresa)){
+                                echo "<input type='hidden' id='empresaForm'>";
+                            }
+                        ?>
                          <div class="btn-group controlTipo">
                           <button type="button" id="btnCand" class="btn btn-lg btn-primary">Candidato</button>
                           <button type="button" id="btnEmp" class="btn btn-lg btn-default">Empresa</button>

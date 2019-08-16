@@ -205,7 +205,24 @@ $noautofill = "";
       <ul class="nav navbar-nav navbar-right">                          
         <?php 
         if (isset($menu["menu"])){   
-          foreach($menu["menu"] as $key=>$optmnu){ ?>                                                    
+          foreach($menu["menu"] as $key=>$optmnu){ ?>
+          <?php 
+            if($optmnu['nombre'] == "Nosotros"){
+              if(isset($menu["submenu_nosotros"])){
+                ?>
+                <li class="dropdown" >
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">Nosotros <i class="fa fa-caret-down"></i></a>
+                  <ul class="dropdown-menu">
+                    <?php foreach($menu["submenu_nosotros"] as $submenu_nosotros){ ?>  
+                     <li><a href="<?php echo $submenu_nosotros['href'];?>"><?php echo $submenu_nosotros['nombre'];?></a></li>
+                   <?php } ?>
+                 </ul>
+               </li> 
+              <?php
+              }
+              continue;
+            }
+           ?>                                                    
             <li <?php if($optmnu['vista'] == $vista){ ?> class="btn-menu-active" <?php } if($optmnu["nombre"] == 'Reg&iacute;strate' || $optmnu["nombre"] == 'Ingresar'){ echo 'class="btn-minimalist"'; } ?> >
               <a class="texto-white" <?php if(isset($optmnu['id'])){ echo 'id="'.$optmnu["id"].'"';} if($optmnu['nombre'] == "Planes"){echo "style='display: inline;'";}  if(isset($optmnu['href'])){ echo 'href="'.$optmnu['href'].'"'; }else{ echo 'onclick="'.$optmnu['onclick'].'"'; } ?> <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
               Inicio';  }else{ 
@@ -217,16 +234,6 @@ $noautofill = "";
                 } ?></a>
             </li>                            
           <?php } ?>
-          <?php if (isset($menu["submenu_nosotros"])){ ?>  
-            <li class="dropdown" >
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">Nosotros <i class="fa fa-caret-down"></i></a>
-              <ul class="dropdown-menu">
-                <?php foreach($menu["submenu_nosotros"] as $submenu_nosotros){ ?>  
-                 <li><a href="<?php echo $submenu_nosotros['href'];?>"><?php echo $submenu_nosotros['nombre'];?></a></li>
-               <?php } ?>
-             </ul>
-           </li>                              
-         <?php } ?>
           <?php if (isset($menu["submenu_cuentas"])){ ?>  
             <li class="dropdown" >
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-top: 15px;">Administración<i class="fa fa-caret-down"></i></a>

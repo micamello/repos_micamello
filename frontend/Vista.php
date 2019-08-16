@@ -87,13 +87,14 @@ class Vista {
     $menu = array();
     if( !Modelo_Usuario::estaLogueado() ){
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Inicio");
-      //$menu["menu"][] = array("href"=>"javascript:void(0);", "nombre"=>"Nosotros");
+      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Nosotros");
       //$menu["menu"][] = array("href"=>"#", "id"=>"regEmpMic", "nombre"=>"Registro Empresa");
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/login/", "nombre"=>"Ingresar");
       $menu["menu"][] = array("href"=>PUERTO."://".HOST."/registro/", "id"=>"regCandMic", "nombre"=>"Reg&iacute;strate");
     }
     else{      
       $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/", "nombre"=>"Inicio","vista"=>"inicio"); 
+      $menu["menu"][] = array("href"=>PUERTO."://".HOST."/", "nombre"=>"Nosotros");
       if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){           
         $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/oferta/", "nombre"=>"Empleos", "vista"=>"oferta");
         $menu["menu"][] = array("href"=>($deshabilitarmenu) ? "javascript:void(0);" : PUERTO."://".HOST."/postulacion/", "nombre"=>"Mis Postulaciones", "vista"=>"postulacion");
