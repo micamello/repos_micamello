@@ -63,24 +63,7 @@ class Controlador_HojaVida extends Controlador_Base{
                 Controlador_Login::registroSesion($sess_usuario);              
                 $ruta = '/hvcargado/';    
                 //si tiene los test realizados
-                /*$test_realizados = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);                
-                if (!empty($test_realizados)){
-                  //busca planes gratuitos para el candidato
-                  $gratuitos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,SUCURSAL_ID,1,false);                                    
-                  foreach($gratuitos as $key=>$gratuito){
-                    //si no tiene un plan gratuito para registrarlo automaticamente
-                    $infoplan = Modelo_Plan::busquedaActivoxTipo($gratuito["id_plan"],Modelo_Plan::CANDIDATO,SUCURSAL_ID);
-                    if (!empty($infoplan) && !$this->existePlan($infoplan["id_plan"])) 
-                    if (!Modelo_UsuarioxPlan::guardarPlan($_SESSION['mfo_datos']['usuario']['id_usuario'],
-                                                          $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"],
-                                                          $infoplan["id_plan"],$infoplan["num_post"],
-                                                          $infoplan["duracion"],$infoplan["porc_descarga"],'',false,
-                                                          false,false,$infoplan["num_accesos"])){
-                      throw new Exception("Ha ocurrido un error, por favor intente denuevo");   
-                    }          
-                    $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($idusu,$tipousu);
-                  }    
-                }*/ 
+                // self::guardarPlanesGratis();
               }
             }
             else{
@@ -96,6 +79,28 @@ class Controlador_HojaVida extends Controlador_Base{
       }
       Utils::doRedirect(PUERTO . '://' . HOST . $ruta);
     }
+  }
+
+  public function guardarPlanesGratis(){
+     $test_realizados = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);                
+        if (!empty($test_realizados)){
+        //busca planes gratuitos para el candidato
+        $gratuitos = Modelo_Plan::busquedaPlanes(Modelo_Usuario::CANDIDATO,SUCURSAL_ID,1,false);                                    
+        foreach($gratuitos as $key=>$gratuito){
+          //si no tiene un plan gratuito para registrarlo automaticamente
+          $infoplan = Modelo_Plan::busquedaActivoxTipo($gratuito["id_plan"],Modelo_Plan::CANDIDATO,SUCURSAL_ID);
+          if (!empty($infoplan) && !$this->existePlan($infoplan["id_plan"])) {
+            if (!Modelo_UsuarioxPlan::guardarPlan($_SESSION['mfo_datos']['usuario']['id_usuario'],
+                                                $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"],
+                                                $infoplan["id_plan"],$infoplan["num_post"],
+                                                $infoplan["duracion"],$infoplan["porc_descarga"],'',false,
+                                                false,false,$infoplan["num_accesos"])){
+              throw new Exception("Ha ocurrido un error, por favor intente denuevo");   
+            }
+          }          
+          $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
+        }    
+      } 
   }
 
   public function existePlan($idplan){

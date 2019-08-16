@@ -59,7 +59,8 @@
 		              	<h4 class="usuario">
 		            	   <u><?php echo $_SESSION['mfo_datos']['usuario']['username']; ?></u>
 		            	</h4><?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] != Modelo_Usuario::CANDIDATO) { ?>
-		            	<h6>RUC: <?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?></h6><?php } ?>                           
+		            	<h6>RUC: <?php echo $_SESSION['mfo_datos']['usuario']['dni']; ?></h6><?php } ?>  
+		            	<label class="text-center profilePhoto" style="background-color: #204478; color: white; border-radius: 5px;margin: 0px 20px 0px 20px;" for="file-input">Actualizar foto de perfil <small style="font-size: 75%;">(.jpg .jpeg )</small></label>
 		            </div>
                 </div>
 

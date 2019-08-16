@@ -1,9 +1,13 @@
 $(document).ready(function(){
+	var inicioForm = 1;
 	if(leerCookie('preRegistro') != null){
 		controlButtonForm(leerCookie('preRegistro'));
 	}
 	else{
-		controlButtonForm(1);
+		if($('#empresaForm').length){
+			inicioForm = 2;
+		}
+		controlButtonForm(inicioForm);
 	}
 });
 

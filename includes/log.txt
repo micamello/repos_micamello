@@ -1,170 +1,18 @@
-[2019/08/14 05:33:06] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:06] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:33:15] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:15] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:33:24] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:24] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:33:25] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:25] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:33:25] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:25] Array
-(
-)
-
-[2019/08/14 05:33:25] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:25] Array
-(
-)
-
-[2019/08/14 05:33:26] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:26] Array
-(
-)
-
-[2019/08/14 05:33:27] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:27] Array
-(
-    [0] => weferfeedfe
-    [1] => asesora comercial / vendedora
-    [2] => importante empresa se encuentra en la búsqueda de un trabajador(a) social
-    [3] => agente vendedor
-    [4] => ejecutivo de ventas telefónicas con experiencia acreditada de un año
-)
-
-[2019/08/14 05:33:27] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:33:27] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:34:43] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:34:43] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:35:00] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:35:00] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:35:22] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:35:22] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:35:39] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:35:39] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:36:39] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:36:39] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:37:00] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:37:00] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:37:00] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:37:00] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:37:04] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:37:04] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:37:13] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:37:13] Array
-(
-    [0] => asistente contable
-    [1] => relacionadora publica universidades
-    [2] => coordinador de marketing digital
-    [3] => ejecutivo de call center
-    [4] => pasante contable
-)
-
-[2019/08/14 05:38:09] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:38:12] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:38:20] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:38:24] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
-[2019/08/14 05:45:22] SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1  AND p.id_pais = 39;
+[2019/08/16 12:57:02] ....2...
+[2019/08/16 12:58:32] ....2...
+[2019/08/16 12:58:40] ....2...
+[2019/08/16 12:58:54] ....2...
+[2019/08/16 12:59:01] ....2...
+[2019/08/16 12:59:10] ....2...
+[2019/08/16 12:59:17] ....2...
+[2019/08/16 12:59:45] ....2...
+[2019/08/16 01:00:00] ....2...
+[2019/08/16 01:00:05] ....2...
+[2019/08/16 01:01:39] ....2...
+[2019/08/16 01:01:47] ....2...
+[2019/08/16 01:02:02] .......
+[2019/08/16 01:02:06] ....2...
+[2019/08/16 01:02:14] ....2...
+[2019/08/16 01:03:22] ....2...
+[2019/08/16 01:03:32] .......
+[2019/08/16 01:03:35] ....2...
