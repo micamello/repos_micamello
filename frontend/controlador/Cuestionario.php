@@ -81,7 +81,12 @@ class Controlador_Cuestionario extends Controlador_Base {
           if (!Modelo_PorcentajexFaceta::guardarValores($porcentajeArr,$id_usuario,$facetaArr,$estado,$tiempo)){
             throw new Exception("Ha ocurrido un error, intente nuevamente5."); 
           }
+          // if ($faceta == 5){
+          //   $hvControlador = new Controlador_HojaVida();
+          //   $hvControlador->guardarPlanesGratis(); 
+          // }
           if ($faceta == 5 && $estado == 0){
+
             if (!Modelo_Usuario::actualizarAceptarAcceso($_SESSION['mfo_datos']['usuario']['id_usuario'],0)){
               throw new Exception("Ha ocurrido un error, intente nuevamente6.");  
             } 

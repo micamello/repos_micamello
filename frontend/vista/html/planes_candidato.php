@@ -14,7 +14,7 @@
     <tbody class="tabla-planes-n">    
       <?php       
       $listadoAcciones = explode(",",$plan['acciones']);
-      $listadoPermisos = explode(",",$plan['permisos']);        
+      $listadoPermisos = explode(",",$plan['permisos']);     
       foreach($listadoPermisos as $key => $permiso){                
         $par = $key % 2;          
         $clase = ($par == 0) ? "compare-row" : "";                                  
@@ -29,7 +29,11 @@
             echo "<td><span class='plan-negrita'>".$plan["num_post"]."</span><span class='plan-negrita-2'>Autopostulaciones</span></td>";   
           } 
           else{
-            echo "<td><span class='simbolos tickgreen'>✔</span></td>"; 
+            $indicador = "✔";
+            if($plan['costo'] == 0 && $listadoAcciones[$key] != "alertaOferta"){
+              $indicador = "X";
+            }
+            echo "<td><span class='simbolos tickgreen'>".$indicador."</span></td>"; 
           }        
         }
         echo "</tr>";                     

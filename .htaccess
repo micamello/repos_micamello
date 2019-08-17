@@ -65,6 +65,7 @@ RewriteRule ^cambioClave/$ %{ENV:REWRITEBASE}index.php?mostrar=contrasena&opcion
 
 #registro
 RewriteRule ^registro/$ %{ENV:REWRITEBASE}index.php?mostrar=registro [L]
+RewriteRule ^registro/empresa/$ %{ENV:REWRITEBASE}index.php?mostrar=registro&opcion=empresa [L]
 RewriteRule ^registroUsuario/$ %{ENV:REWRITEBASE}index.php?mostrar=registro&opcion=procesoGuardar [L]
 RewriteRule ^registro/([^.]+)/$ %{ENV:REWRITEBASE}index.php?mostrar=registro&opcion=activacion&token=$1 [L]
 

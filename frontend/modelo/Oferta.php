@@ -25,9 +25,10 @@ class Modelo_Oferta{
   }
 
   // copy of function down
-  public static function obtieneOfertas1($idempresa,$sucursal){
-    $sql = "SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e inner join mfo_oferta o ON e.id_empresa = o.id_empresa inner join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  inner join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1 AND e.id_empresa = ".$idempresa." AND p.id_pais = ".$sucursal.";";
-    Utils::log($sql);
+  public static function obtieneOfertas1($idempresa,$sucursal, $tipo_usuario){
+    $sql1 = "";
+    if($tipo_usuario == 2){$sql1 = " AND e.id_empresa = ".$idempresa." ";}
+    $sql = "SELECT o.titulo, c.nombre, p.nombre, o.estado, o.descripcion, e.nombres, e.id_empresa FROM mfo_empresa e left join mfo_oferta o ON e.id_empresa = o.id_empresa left join mfo_ciudad c ON o.id_ciudad = c.id_ciudad  left join mfo_provincia p ON c.id_provincia = p.id_provincia AND o.estado = 1 ".$sql." AND p.id_pais = ".$sucursal.";";
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -275,7 +276,7 @@ class Modelo_Oferta{
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA; 
     }
-    Utils::log($sql);
+
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }

@@ -25,13 +25,16 @@ class Controlador_Registro extends Controlador_Base {
       case 'procesoGuardar':
         $this->procesoGuardado();
       break;
+      case 'empresa':
+        $this->mostrarDefault(2);
+      break;
       default:
         $this->mostrarDefault();
       break;
     } 
   }
 
-  public function mostrarDefault(){
+  public function mostrarDefault($tipo=false){
     $this->linkRedesSociales();
     $social_reg = array('fb'=>$this->loginURL, 'gg'=>$this->gg_URL, 'lk'=>$this->lk, 'tw'=>$this->tw);
     $arrgenero = Modelo_Genero::obtenerListadoGenero();
@@ -45,6 +48,9 @@ class Controlador_Registro extends Controlador_Base {
     $tags["template_js"][] = "DniRuc_Validador";
     $tags["template_js"][] = "DateTimePicker";
     $tags["template_js"][] = "registroUsuarios";
+    if($tipo != false){
+      $tags = array_merge($tags, array('empresa'=>2));
+    }
     Vista::render('formularioRegistro', $tags);
   }
 
