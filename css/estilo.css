@@ -3380,3 +3380,9 @@ div.navbar{position: relative;z-index: 1;}
 .profilePhoto:hover{
     cursor: pointer;
 }
+
+.ofertas-cambio p{
+        font-weight: bold;
+        font-size: 16pt;
+
+}
