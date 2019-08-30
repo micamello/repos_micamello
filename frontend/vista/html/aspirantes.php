@@ -904,16 +904,38 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
  
 													?>
 							            			<td data-title="Postulado hace: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $diff->days . ' d&iacute;as'; /*echo date("d", strtotime($a['fecha_postulado'])).' de '.MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado']));*/ ?></td>
-												<?php } ?>
-												<?php foreach($facetas as $key => $nombre){ 
+												<?php } $cont = 1;?>
+												
+												<?php foreach($facetas as $key => $nombre){
 										    		echo "<td data-title='".$nombre['literal']/*substr($nombre, 0,1)*/.":' style='vertical-align: middle; text-align: center;'>";
-										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){ 
-										    			echo number_format($datos_usuarios[$a['id_usuario']][$key],0).'%';
+										    		$varValue = 0;
+										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){
+										    			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
+										    				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] != ''){
+										    					if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
+										    						$varValue = $datos_usuarios[$a['id_usuario']][$key];
+																}else if($a['numero_test'] == Modelo_Usuario::PRIMER_TEST){
+																	if($cont > 1){$varValue = 0;}
+																}else if($a['numero_test'] == Modelo_Usuario::SEGUNDO_TEST){
+																	if($cont > 2){$varValue = 0;}
+																}
+										    				}
+										    				else{
+										    					if($cont > 2){$varValue = 0;}else{
+										    						$varValue = $datos_usuarios[$a['id_usuario']][$key];
+										    					}
+										    				}
+										    			}
+										    			else{
+								            				$varValue = $datos_usuarios[$a['id_usuario']][$key];
+								            			}
+										    			echo number_format($varValue,0).'%';
 										    		}else{ 
 										    			// echo '0.00%';
 										    			echo "0%";
 										    		}
 										    		echo "</td>";
+										    		$cont++;
 										    	} ?>
 												<td data-title="Estudios: " style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>
 

@@ -4,7 +4,15 @@ class Controlador_Oferta extends Controlador_Base{
     public function construirPagina(){
       if (!Modelo_Usuario::estaLogueado()) {
           Utils::doRedirect(PUERTO . '://' . HOST . '/login/');
-      }       
+      }  
+      if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ 
+        Modelo_Usuario::validaPermisos($_SESSION['mfo_datos']['usuario']['tipo_usuario'],
+                                       $_SESSION['mfo_datos']['usuario']['id_usuario'],
+                                       (isset($_SESSION['mfo_datos']['usuario']['infohv'])) ? $_SESSION['mfo_datos']['usuario']['infohv'] : array(),
+                                       $_SESSION['mfo_datos']['planes']); 
+      }
+
+
 
       $opcion = Utils::getParam('opcion', '', $this->data); 
       $page = Utils::getParam('page', '1', $this->data);

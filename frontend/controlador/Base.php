@@ -14,8 +14,12 @@ abstract class Controlador_Base{
   function __construct($device='web'){
     global $_SUBMIT;
     $this->device = $device;
-    $this->data = $_SUBMIT;        
-    $_SESSION['mfo_datos']['planActivar'] = self::verificaCompra();    
+    $this->data = $_SUBMIT;  
+    if(Modelo_Usuario::estaLogueado() && !isset($_SESSION['mfo_datos']['planes']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
+      $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
+    }      
+    $_SESSION['mfo_datos']['planActivar'] = self::verificaCompra();  
+   Utils::log("datos de planes".print_r($_SESSION['mfo_datos'], true));  
   }
   
   public function redirectToController($controladorNombre, $params = array()){  

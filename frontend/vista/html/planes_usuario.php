@@ -31,6 +31,7 @@
           <tbody>
           <?php if(!empty($planUsuario)){ ?>
             <?php foreach ($planUsuario as $key => $value) { ?>
+              
               <style>
                   #centrar{
                       text-align: center;

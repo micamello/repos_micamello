@@ -58,7 +58,8 @@ class Controlador_Velocimetro extends Controlador_Base {
       $img = 'vel2.png';
       $titulo = '¡SIGA ADELANTE! HA COMPLETADO LA PRIMERA Y SEGUNDA FASE DEL TEST';
       $msj2 = '¡Excelente! Ha completado el segundo test, ahora sus posibilidades se han incrementado. Mejore sus oportunidades al completar el TEST CANEA. No desespere, recuerde que obtendrá mejores resultados y beneficios para su carrera profesional';
-      $textoBoton = "CONTINUAR AL TERCER TEST";
+      // $textoBoton = "CONTINUAR AL TERCER TEST";
+      $textoBoton = "CONTINUAR";
       if(!isset($_SESSION['mfo_datos']['usuario']['infohv'])){
         $enlaceboton = "cargarhojavida";
         $textoBoton = "CONTINUA PARA CARGAR SU HOJA DE VIDA";

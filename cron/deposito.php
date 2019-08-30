@@ -32,30 +32,30 @@ try{
   	$nombresusuario .= " " .Utils::no_carac($infousuario["apellidos"]);
   }          
 	//facturacion electronica
-	$obj_facturacion = new Proceso_Facturacion();
-	$obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
-	$obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
-	$obj_facturacion->direccionComprador = $datos_comprobante["direccion"];
-	$obj_facturacion->emailComprador = $datos_comprobante["correo"];
-	$obj_facturacion->telefComprador = $datos_comprobante["telefono"];            
-	$obj_facturacion->tipoIdentifComprador = $datos_comprobante["tipo_doc"];            
-	$obj_facturacion->importeTotal = $datos_comprobante["valor"];
-	$obj_facturacion->codigoPrincipal = $datos_comprobante["id_plan"];
-	$obj_facturacion->descripdetalle = utf8_encode($infoplan["nombre"]); 
-	$obj_facturacion->formadepago = Proceso_Facturacion::FORMA_PAGO["SINFINANCIERO"];     
-	$obj_facturacion->provinciaComprador = $datos_comprobante["provincia"];     
-	$obj_facturacion->ciudadComprador = $datos_comprobante["ciudad"];     
-	$obj_facturacion->codpostalComprador = $datos_comprobante["codigopostal"];     
-	$rsfact = $obj_facturacion->generarFactura(); 
-	if (is_array($rsfact) && isset($rsfact["claveacceso"]) && isset($rsfact["xml"]) && !empty($rsfact["claveacceso"]) && !empty($rsfact["xml"])){
-	  if (!Modelo_Factura::guardar($rsfact["claveacceso"],$rsfact["xml"],$datos_comprobante["id_user_emp"],
-	  	                           $infousuario["tipo_usuario"],$infoplan["id_sucursal"],$id_comprobante)){
-	    throw new Exception("Error al generar la factura");  
-	  }
-	  if (!Modelo_Parametro::actualizarNroFactura()){
-	    throw new Exception("Error al generar el siguiente numero de factura");  
-	  } 
-	}         
+	// $obj_facturacion = new Proceso_Facturacion();
+	// $obj_facturacion->razonSocialComprador = $datos_comprobante["nombre"];
+	// $obj_facturacion->identificacionComprador = $datos_comprobante["dni"];
+	// $obj_facturacion->direccionComprador = $datos_comprobante["direccion"];
+	// $obj_facturacion->emailComprador = $datos_comprobante["correo"];
+	// $obj_facturacion->telefComprador = $datos_comprobante["telefono"];            
+	// $obj_facturacion->tipoIdentifComprador = $datos_comprobante["tipo_doc"];            
+	// $obj_facturacion->importeTotal = $datos_comprobante["valor"];
+	// $obj_facturacion->codigoPrincipal = $datos_comprobante["id_plan"];
+	// $obj_facturacion->descripdetalle = utf8_encode($infoplan["nombre"]); 
+	// $obj_facturacion->formadepago = Proceso_Facturacion::FORMA_PAGO["SINFINANCIERO"];     
+	// $obj_facturacion->provinciaComprador = $datos_comprobante["provincia"];     
+	// $obj_facturacion->ciudadComprador = $datos_comprobante["ciudad"];     
+	// $obj_facturacion->codpostalComprador = $datos_comprobante["codigopostal"];     
+	// $rsfact = $obj_facturacion->generarFactura(); 
+	// if (is_array($rsfact) && isset($rsfact["claveacceso"]) && isset($rsfact["xml"]) && !empty($rsfact["claveacceso"]) && !empty($rsfact["xml"])){
+	//   if (!Modelo_Factura::guardar($rsfact["claveacceso"],$rsfact["xml"],$datos_comprobante["id_user_emp"],
+	//   	                           $infousuario["tipo_usuario"],$infoplan["id_sucursal"],$id_comprobante)){
+	//     throw new Exception("Error al generar la factura");  
+	//   }
+	//   if (!Modelo_Parametro::actualizarNroFactura()){
+	//     throw new Exception("Error al generar el siguiente numero de factura");  
+	//   } 
+	// }         
 	$GLOBALS['db']->commit();
 
 	$nombres = ucfirst(utf8_encode($infousuario["nombres"]))." ".ucfirst((isset($infousuario["apellidos"])) ? ucfirst(utf8_encode($infousuario["apellidos"])) : "");

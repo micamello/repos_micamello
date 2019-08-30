@@ -3,7 +3,8 @@
     <thead>
       <tr>
         <th class="logo-tabla" rowspan="2"><img src="<?php echo PUERTO."://".HOST."/imagenes/logo-azul.png"?>" width="100%"></th>
-        <?php foreach($planes as $key=>$plan){ ?> 
+        <?php foreach($planes as $key=>$plan){
+        if($plan['id_plan'] == 1){continue;} ?> 
           <th class="plus head-plan">
             <?php echo strtoupper(utf8_encode($plan["nombre"]));?> 
             <img src="<?php echo PUERTO."://".HOST."/imagenes/corona-2-03.png"?>" class="corona">
@@ -24,7 +25,8 @@
         echo "</tr>";
         echo "<tr class='".$clase."'>";
         echo "<td>".utf8_encode(trim($permiso))."</td>"; 
-        foreach($planes as $keyp=>$plan){                          
+        foreach($planes as $keyp=>$plan){ 
+        if($plan['id_plan'] == 1){continue;}                         
           if ($listadoAcciones[$key] == "autopostulacion"){            
             echo "<td><span class='plan-negrita'>".$plan["num_post"]."</span><span class='plan-negrita-2'>Autopostulaciones</span></td>";   
           } 
@@ -45,6 +47,7 @@
         <td class="tab-ocultar"></td>
         <?php         
         foreach($planes as $key=>$plan){ 
+          if($plan['id_plan'] == 1){continue;}
           echo "<td class='price-info'>";
           echo SUCURSAL_MONEDA.number_format($plan["costo"],2);
           echo "</td>";
@@ -55,6 +58,7 @@
         <td>&nbsp</td>
         <?php         
         foreach($planes as $key=>$plan){ 
+          if($plan['id_plan'] == 1){continue;}
           $plan["id_plan"] = Utils::encriptar($plan["id_plan"]);
           $enlace = (empty($plan['costo'])) ? "href='".PUERTO."://".HOST."/compraplan/".$plan["id_plan"]."/'" : 
                                               "onclick=\"msg_compra('".$plan["id_plan"]."','".utf8_encode($plan["nombre"])."');\"";
