@@ -30,7 +30,7 @@ if (isset($_SERVER['HTTP_HOST']) /*&& (strpos($_SERVER['HTTP_HOST'], 'www.') !==
     $sql = "SELECT s.id_sucursal, s.extensionicono, s.extensionlogo, s.id_pais, m.simbolo, s.iso, s.dominio 
             FROM mfo_sucursal s, mfo_moneda m WHERE s.id_moneda = m.id_moneda AND s.estado = 1 AND s.dominio = ?";
     $rs = $GLOBALS['db']->auto_array($sql,array($_SERVER['HTTP_HOST']));
-    Utils::log("RS".print_r($rs,true));
+    // Utils::log("RS".print_r($rs,true));
     if (empty($rs)){
       Utils::doRedirect(PUERTO.'://'.$_SERVER['HTTP_HOST'].'/error/paginanoencontrada.php');
       exit;

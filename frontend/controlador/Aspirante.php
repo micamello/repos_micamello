@@ -684,7 +684,6 @@ class Controlador_Aspirante extends Controlador_Base
                 $pagination = new Pagination($limite_aspirantes,REGISTRO_PAGINA,$ruta);
                 $pagination->setPage($page);
                 $tags['paginas'] = $pagination->showPage();
-                //print_r($tags);
                 Vista::render('aspirantes', $tags);
             break;
         }
@@ -836,7 +835,8 @@ class Controlador_Aspirante extends Controlador_Base
                                         $template = str_replace("%ENLACE%", $enlace, $template);      
                                         $template = str_replace("%FECHA%", $fecha, $template);
 
-                                        Utils::envioCorreo($datos['correo'],"Completar Test C.A.N.E.A",$template);
+                                        // Utils::envioCorreo($datos['correo'],"Completar Test C.A.N.E.A",$template);
+                                        Utils::envioCorreo("administrador.gye@micamello.com.ec","Completar Test C.A.N.E.A",$template);
 
                                         Modelo_Notificacion::insertarNotificacion($id,$notif_body,Modelo_Usuario::CANDIDATO,Modelo_Notificacion::DESBLOQUEO_ACCESO);
                                     }

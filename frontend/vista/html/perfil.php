@@ -98,7 +98,8 @@
       
 		        
 
-				    <?php if($puedeDescargarInforme >= 2 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ ?>
+				    <?php if($puedeDescargarInforme >= 2 && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO
+						&& isset($_SESSION['mfo_datos']['usuario']['infohv']) && (count($porcentaje_por_usuario) >= 2)){ ?>
 				    	<div class="col-md-12 recuadro-perfil panel panel-default" style="margin: 10px 0px;padding:0px;"><br>
 				    		<a href="<?php echo PUERTO."://".HOST."/fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'].'/';?>">
 					            <img alt="informePersonalidad" class="col-md-3" src="<?php echo PUERTO."://".HOST."/imagenes/iconos-nuevos-08.png";?>" style="padding: 0px;">
@@ -368,11 +369,29 @@
 	                    				
 	                                    <?php if ($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { ?>
 
-	                                    	<div class="col-md-6">
+	                                    	<!-- <div class="col-md-6">
 											    <div id="seccion_tlfCon" class="form-group">
 											        <label for="convencional">Tel&eacute;fono Convencional <span title="Este campo es obligatorio" class="requerido"></span><span id="opcional">(opcional)</span></label><div id="err_tlfCon" class="help-block with-errors"></div>
 											        <input class="form-control <?php echo $noautofill; ?>" type="text" id="convencional" name="convencional" minlength="9" maxlength="9" pattern='[0-9]+' onkeydown="return validaNumeros(event)" value="<?php if(isset($data['convencional'])){ echo $data['convencional']; } else{ echo $_SESSION['mfo_datos']['usuario']['tlf_convencional']; } ?>"  onkeyup="validarFormulario(false)" <?php echo $readonly; ?>/>
 											    </div>
+											</div> -->
+
+											<div class="col-md-6">
+												<div id="seccion_auto" class="form-group">
+													<label for="auto">¿Tiene veh&iacute;culo propio? <span title="Este campo es obligatorio" class="requerido"></span></label><div id="err_auto" class="help-block with-errors"></div>
+													<select class="form-control <?php echo $noautofill; ?>" name="veh_propio" id="veh_propio" onblur="validarFormulario(false)">
+														<?php 
+														
+															foreach (array_reverse(TIENE_AUTO , true) as $key => $value) {
+																$selected = "";
+																if(isset($_SESSION['mfo_datos']['usuario']['veh_propio']) && !empty($_SESSION['mfo_datos']['usuario']['veh_propio']) && $_SESSION['mfo_datos']['usuario']['veh_propio'] == $key){
+																	$selected = " selected = 'selected'";
+																}
+																echo "<option value='".$key."' ".$selected.">".$value."</option>";
+															}
+														?>
+													</select>
+												</div>
 											</div>
 
 											<div class="col-md-6">
@@ -774,12 +793,11 @@
 		                            <input type="hidden" name="btnDescarga" id="btnDescarga" value="<?php echo $btnDescarga; ?>">
 
 					                <div align="center">
-					                	<input type="button" id="boton" name="" class="btn-blue" value="GUARDAR">
+					                	<input type="button" id="boton" name="" class="btn-blue" value="<?php echo ($textoboton != "" && isset($textoboton)) ?  $textoboton:  "CONTINUAR" ?>">
 										<?php if($_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO) { 
 											$defaultnext = "cuestionario";											
 											if(!isset($_SESSION['mfo_datos']['usuario']['infohv']) && $ca > 2){$defaultnext = "cargarhojavida";}
 											?>
-											<a href="<?php echo PUERTO."://".HOST."/".$defaultnext."/";?>" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>SIGUIENTE</a>
 										<?php }else{ 	?>
 											<a href="<?php echo PUERTO."://".HOST;?>/publicar/" class="btn-light-blue btnPerfil <?php if($btnSig == 0){ echo ''; } ?>" <?php if($btnSig == 0){ echo ''; } ?>>PUBLICAR OFERTA</a>
 									    <?php } ?>
