@@ -82,6 +82,7 @@ class Controlador_HojaVida extends Controlador_Base{
   }
 
   public function guardarPlanesGratis(){
+    if($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
      $test_realizados = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);                
         if (!empty($test_realizados)){
         //busca planes gratuitos para el candidato
@@ -102,7 +103,8 @@ class Controlador_HojaVida extends Controlador_Base{
             }
           }
         }    
-      } 
+      }
+    } 
   }
 
   public function existePlan($idplan){
