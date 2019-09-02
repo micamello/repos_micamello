@@ -1712,12 +1712,19 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
               $html .= "<b>Universidad</b>";
               $html .= $fintd;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= "<b>Veh&iacute;culo propio</b>";
+              $html .= $fintd;
             $html .= $fintr;
             $html .= $iniciotr;
               $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
               $html .= utf8_encode($datos['universidad']);
               $html .= $fintd;
+              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= utf8_encode($datos['veh_propio']);
+              $html .= $fintd;
             $html .= $fintr;
+            
 // --------------***************--------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
@@ -1755,37 +1762,43 @@ class Controlador_GenerarPDF extends Controlador_Base
             $html .= $fintr;
 // ------------------------------------------------------
             $html .= $iniciotr;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
               $html .= "<b>Correo</b>";
               $html .= $fintd;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
               $html .= "<b>Celular</b>";
               $html .= $fintd;
-            $html .= $fintr;
-            $html .= $iniciotr;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['correo'];
-              $html .= $fintd;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['telefono'];
-              $html .= $fintd;
-            $html .= $fintr;
-            $html .= $iniciotr;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
               $html .= "<b>".$documento."</b>";
               $html .= $fintd;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= "<b>Tel&eacute;fono</b>";
-              $html .= $fintd;
             $html .= $fintr;
             $html .= $iniciotr;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['correo'];
+              $html .= $fintd;
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
+              $html .= $datos['telefono'];
+              $html .= $fintd;
+              $html .= $iniciotd."4".$tdstyle."text-align: center;".$tdinter;
               $html .= $datos['dni'];
               $html .= $fintd;
-              $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
-              $html .= $datos['telefonoConvencional'];
-              $html .= $fintd;
             $html .= $fintr;
+            // $html .= $iniciotr;
+            //   $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+            //   $html .= "<b>".$documento."</b>";
+            //   $html .= $fintd;
+            //   $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+            //   $html .= "<b>Tel&eacute;fono</b>";
+            //   $html .= $fintd;
+            // $html .= $fintr;
+            // $html .= $iniciotr;
+            //   $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+            //   $html .= $datos['dni'];
+            //   $html .= $fintd;
+            //   $html .= $iniciotd."6".$tdstyle."text-align: center;".$tdinter;
+            //   $html .= $datos['telefonoConvencional'];
+            //   $html .= $fintd;
+            // $html .= $fintr;
 // --------------***************--------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
@@ -1856,7 +1869,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $mpdf->WriteHTML($enddoc);
         $mpdf->WriteHTML($html);
         //echo $html;
-        $mpdf->Output($datos['username'].".pdf", 'D');
+        $mpdf->Output($datos['username'].".pdf", 'I');
         
   }
 

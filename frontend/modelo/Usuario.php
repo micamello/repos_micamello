@@ -127,6 +127,7 @@ class Modelo_Usuario{
     pr.nombre AS provincia,
     mpais.nombre_abr AS nacionalidad,
     ifnull(tl.descripcion, '-') AS licencia,
+    if(veh_propio = 1, 'SI', 'NO') as veh_propio,
     if(nombre_univ != '', 'SI', 'NO') as extranjero,
     if (u.id_univ <> '', uni.nombre, if(nombre_univ <> '', nombre_univ, '-')) as universidad,
     ifnull(es.descripcion, '-') as estadocivil
