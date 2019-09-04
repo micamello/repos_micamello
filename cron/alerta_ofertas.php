@@ -23,7 +23,8 @@ else{
   Utils::crearArchivo(CRON_RUTA,'alerta_ofertas.txt','');
 }
 
-$result_set = Modelo_Usuario::obtieneTodosCandidatos();
+// $result_set = Modelo_Usuario::obtieneTodosCandidatos();
+$result_set = Modelo_Usuario::obtieneTodosCandidatosOferta();
 $fechaInicial = new DateTime("now");
 
 $correosEnviados = 0;

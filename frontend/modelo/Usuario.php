@@ -359,7 +359,7 @@ WHERE
   }
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$usuarios_accesos,$obtCantdRegistros=false){
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,u.id_situacionlaboral,u.id_tipolicencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
-    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago, u.veh_propio 
     FROM
       mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
       mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
@@ -552,6 +552,11 @@ WHERE
       }
       $sql .= " AND t2.discapacidad = ".$req;
     }
+
+    if(!empty($filtros['W']) && $filtros['W'] != 0){
+      $sql .= " AND t2.veh_propio = ".$filtros['W'];
+    }
+
     if(!empty($filtros['T']) && $filtros['T'] != 0){ 
       $sql .= " AND t2.id_situacionlaboral = ".$filtros['T'];
     }
@@ -639,6 +644,7 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
+    Utils::log($sql);
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -1034,6 +1040,22 @@ WHERE
             ORDER BY u.id_usuario";
     return $GLOBALS['db']->Query($sql,array());
   }
+
+  public static function obtieneTodosCandidatosOferta(){
+    $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.viajar, p.id_pais, l.correo, 
+                   p.id_provincia, u.id_ciudad, u.residencia
+            FROM (select id_usuario from mfo_infohv) hv, (select count(id_usuario) as numero, id_usuario from mfo_porcentajexfaceta group by id_usuario) upf , mfo_usuario u
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            INNER JOIN mfo_usuario_login l ON l.id_usuario_login = u.id_usuario_login
+            WHERE u.estado = 1
+            and hv.id_usuario = u.id_usuario
+            and upf.id_usuario = u.id_usuario
+            and upf.numero = 2
+            ORDER BY u.id_usuario;";
+    return $GLOBALS['db']->Query($sql,array());
+  }
+
   public static function obtieneNivel($idpadre){
     if (empty($idpadre)) { return false; }
     $nivel = 0;

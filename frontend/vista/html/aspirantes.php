@@ -471,6 +471,31 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				?></div>
 		      </div>
 		    </div>
+
+		    <div class="panel panel-default shadow-panel1">
+		      <div class="panel-heading" data-toggle="collapse" href="#tiene_auto-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-car"></i> Auto propio
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="tiene_auto-desplegable" aria-expanded="false">
+		      	<div class="filtros">
+				<?php
+					foreach (TIENE_AUTO as $key => $v) {
+						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/W'.$key.'/';
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="discapacidad" id="'.$key.'">'.$v.'</a></li>';
+					}
+				?></div>
+		      </div>
+		    </div>
+
 		</div>
 		<div class="col-md-12 hidden-md hidden-lg">
 			<div class="panel panel-default shadow" style="border-radius: 5px;">

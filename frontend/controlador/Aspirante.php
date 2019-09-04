@@ -51,7 +51,7 @@ class Controlador_Aspirante extends Controlador_Base
         }
 
         if(!isset($_SESSION['mfo_datos']['Filtrar_aspirantes'])){
-            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
+            $_SESSION['mfo_datos']['Filtrar_aspirantes'] = array('A'=>0,/*'F'=>0,*/'P'=>0,'U'=>0,'G'=>0,'S'=>0,'N'=>0,'E'=>0,'D'=>0,'W'=>0,'L'=>-1,'T'=>0,'V'=>0,'O'=>1,'Q'=>0,'R'=>0,'C'=>0);
         }
 
         $facetas = Modelo_Faceta::obtenerFacetas();
@@ -200,6 +200,9 @@ class Controlador_Aspirante extends Controlador_Base
                         
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                         
+                    }else if($letra == 'W' && $type == 1){
+                        $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
+                        
                     }else if($letra == 'L' && $type == 1){
                         
                         if(isset($licencia[$id]) || $id == 0){
@@ -225,7 +228,6 @@ class Controlador_Aspirante extends Controlador_Base
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id;
                     }
                     else if($letra == 'O' && $type == 1){
-                        
                         $_SESSION['mfo_datos']['Filtrar_aspirantes'][$letra] = $id; 
 
                     }else if($type == 2){
@@ -283,6 +285,9 @@ class Controlador_Aspirante extends Controlador_Base
                             }
                         }
                         if($letra == 'D'){
+                            $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
+                        }
+                        if($letra == 'W'){
                             $array_datos[$letra] = array('id'=>$value,'nombre'=>$value);
                         }
                         if($letra == 'L'){
@@ -350,14 +355,13 @@ class Controlador_Aspirante extends Controlador_Base
                     
                     $fill = true;
 
-                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && $filtros['L'] == -1 && empty($filtros['V']) /*&& $filtros['O'] == 1 */&& empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C']) && empty($filtros['T'])){
+                    if(empty($filtros['A']) && empty($filtros['P']) && empty($filtros['U']) && empty($filtros['G']) && empty($filtros['S']) && empty($filtros['N']) && empty($filtros['E']) && empty($filtros['D']) && empty($filtros['W']) && $filtros['L'] == -1 && empty($filtros['V']) /*&& $filtros['O'] == 1 */&& empty($filtros['Q']) && empty($filtros['R']) && empty($filtros['C']) && empty($filtros['T'])){
                         /*echo 'limite_filtrado: '.*/$limite_filtrado = '';
 
                     }else{
                         $limite_filtrado = $limite_plan;
                         $fill = false;
                     }
-
                     $aspirantesFiltrados    = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuariosConAccesos,false);
                     $cantd_aspirantes = Modelo_Usuario::filtrarAspirantes($id_oferta,$filtros,$page,$facetas,$limite_filtrado,$usuariosConAccesos,$fill);
 
