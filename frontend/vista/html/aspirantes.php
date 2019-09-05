@@ -673,6 +673,17 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 								}
 							?>                    
 			            </select>
+			        </div>
+
+			        <div class="form-group">
+			            <select id="veh_propio" class="form-control">
+			                <option value="0">Vehículo propio</option>
+			                <?php
+								foreach (TIENE_AUTO as $key => $v) {
+									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
+								}
+							?>                    
+			            </select>
 			        </div>  
 
 			        <div class="form-group">

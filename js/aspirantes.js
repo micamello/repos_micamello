@@ -642,6 +642,7 @@ function obtenerFiltro(ruta,page){
 	var trabajo = $('#trabajo').val();
 	var licencia = $('#licencia').val();
 	var discapacidad = $('#discapacidad').val();
+	var veh_propio = $('#veh_propio').val();
 	var facetas = verFacetasTodasMovil();
 	var busco = false;
 
@@ -706,6 +707,11 @@ function obtenerFiltro(ruta,page){
 
 	if(discapacidad != 0){
 		ruta += "D"+discapacidad+"/";
+		busco = true;
+	}
+
+	if(veh_propio != 0){
+		ruta += "W"+veh_propio+"/";
 		busco = true;
 	}
 
