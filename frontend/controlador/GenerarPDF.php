@@ -376,12 +376,12 @@ class Controlador_GenerarPDF extends Controlador_Base
           $parrafo = '';
         }
       }
-      $informe .= '<br><h2>&iquest;QU&eacute; SON LAS COMPETENCIAS LABORALES?</h2>
+      $informe .= '<h2>&iquest;QU&eacute; SON LAS COMPETENCIAS LABORALES?</h2>
       <p>Estas se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al desempe&ntilde;o y desarrollo individual en un puesto de trabajo.</p>
-      <br><h2>&iquest;QU&eacute; ES EL COMPORTAMIENTO?</h2>
+      <h2>&iquest;QU&eacute; ES EL COMPORTAMIENTO?</h2>
       <p>Es la habilidad de interactuar efectivamente con la gente, esta habilidad, puede ser el &eacute;xito o fracaso en su trabajo.</p> 
       <p>Las investigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
-      <br><h2>INTRODUCCI&Oacute;N</h2>
+      <h2>INTRODUCCI&Oacute;N</h2>
       <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
         $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>REGISTRESE EN NUESTRA PAGINA <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, PARA ELEVAR TUS OPORTUNIDADES DE OBTENER UN EMPLEO.</b></div>';
@@ -1125,12 +1125,12 @@ class Controlador_GenerarPDF extends Controlador_Base
           $parrafo = '';
         }
       }
-      $informe .= '<br><h2>&iquest;QU&eacute; SON LAS COMPETENCIAS LABORALES?</h2>
+      $informe .= '<h2>&iquest;QU&eacute; SON LAS COMPETENCIAS LABORALES?</h2>
       <p>Estas se definen como el conjunto de conocimientos, destrezas, habilidades y comportamientos que contribuyen al desempe&ntilde;o y desarrollo individual en un puesto de trabajo.</p>
-      <br><h2>&iquest;QU&eacute; ES EL COMPORTAMIENTO?</h2>
+      <h2>&iquest;QU&eacute; ES EL COMPORTAMIENTO?</h2>
       <p>Es la habilidad de interactuar efectivamente con la gente, esta habilidad, puede ser el &eacute;xito o fracaso en su trabajo.</p> 
       <p>Las investigaciones han demostrado que aquellas personas que se conocen m&aacute;s as&iacute; mismas, son m&aacute;s capaces de desarrollar y comprender sus fortalezas y debilidades.</p>
-      <br><h2>INTRODUCCI&Oacute;N</h2>
+      <h2>INTRODUCCI&Oacute;N</h2>
       <p>Este informe se desarroll&oacute; para que conozcamos y entendamos de una forma m&aacute;s clara los comportamientos que determinan nuestra personalidad integral laboral.</p>';
       
     $informe .= '</div>
