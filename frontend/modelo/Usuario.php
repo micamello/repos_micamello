@@ -48,7 +48,7 @@ class Modelo_Usuario{
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, 
                      u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, 
                      u.id_situacionlaboral, u.viajar, u.id_tipolicencia, u.discapacidad, u.residencia,        
-                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil, u.grafico
+                     u.id_escolaridad, u.id_genero, u.id_univ, u.nombre_univ, p.id_pais, u.estado, u.tlf_convencional, u.pendiente_test, u.id_estadocivil, u.grafico, u.veh_propio
               FROM mfo_usuario u
               INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
               INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
@@ -127,6 +127,7 @@ class Modelo_Usuario{
     pr.nombre AS provincia,
     mpais.nombre_abr AS nacionalidad,
     ifnull(tl.descripcion, '-') AS licencia,
+    if(veh_propio = 1, 'SI', 'NO') as veh_propio,
     if(nombre_univ != '', 'SI', 'NO') as extranjero,
     if (u.id_univ <> '', uni.nombre, if(nombre_univ <> '', nombre_univ, '-')) as universidad,
     ifnull(es.descripcion, '-') as estadocivil
@@ -231,7 +232,7 @@ WHERE
   public static function actualizarSession($idUsuario,$tipo_usuario){
     if ($tipo_usuario == self::CANDIDATO){
       $sql = "SELECT u.id_usuario, u.telefono, u.nombres, u.apellidos, u.fecha_nacimiento, u.fecha_creacion, u.foto, u.id_ciudad, u.ultima_sesion, u.id_nacionalidad, u.tipo_doc, u.viajar, u.discapacidad, u.residencia, u.id_escolaridad, u.id_univ, u.nombre_univ, p.id_pais, ul.id_usuario_login, 
-        ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral, u.grafico
+        ul.correo, ul.dni, ul.username, ul.tipo_usuario, u.tlf_convencional,u.id_genero,u.id_estadocivil,u.id_tipolicencia, u.id_situacionlaboral, u.grafico, u.veh_propio
         FROM mfo_usuario u
         INNER JOIN mfo_usuario_login ul ON ul.id_usuario_login = u.id_usuario_login
         INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
@@ -266,7 +267,7 @@ WHERE
       if($licencia == 0){
         $licencia = "null";
       }
-      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"id_genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"id_tipolicencia"=>$licencia,"id_estadocivil"=>$data['estado_civil'],"viajar"=>$data['viajar'],"id_situacionlaboral"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional'],"residencia"=>$data['residencia']); 
+      $datos = array("foto"=>$foto,"nombres"=>$data['nombres'],"telefono"=>$data['telefono'],"id_ciudad"=>$data['ciudad'],"fecha_nacimiento"=>$data['fecha_nacimiento'],"id_nacionalidad"=>$data['id_nacionalidad'],"apellidos"=>$data['apellidos'],"id_genero"=>$data['genero'],"discapacidad"=>$data['discapacidad'],"id_escolaridad"=>$data['escolaridad'],"id_tipolicencia"=>$licencia,"id_estadocivil"=>$data['estado_civil'],"viajar"=>$data['viajar'],"id_situacionlaboral"=>$data['tiene_trabajo'],"tlf_convencional"=>$data['convencional'],"residencia"=>$data['residencia'], "veh_propio"=>$data['veh_propio']); 
       if (!empty($data['documentacion'])){          
         $datos['tipo_doc'] = $data['documentacion'];
       }
@@ -357,9 +358,8 @@ WHERE
     return $rs; 
   }
   public static function filtrarAspirantes($idOferta,&$filtros,$page,$facetas,$limite,$usuarios_accesos,$obtCantdRegistros=false){
-    //print_r($usuarios_accesos);
     $subquery1 = "(SELECT o.id_ofertas, u.id_usuario,ul.username,u.nombres,u.apellidos,u.id_genero,p.fecha_postulado,u.id_situacionlaboral,u.id_tipolicencia, u.viajar, u.fecha_nacimiento,YEAR(NOW()) - YEAR(u.fecha_nacimiento) AS edad, p.asp_salarial,u.discapacidad,
-    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago 
+    u.id_escolaridad, u.id_nacionalidad,u.id_ciudad,IF(SUM(pl.costo) > 0 && up.estado = 1,1,0) AS pago, u.veh_propio 
     FROM
       mfo_usuario u, mfo_usuario_login ul,mfo_postulacion p, 
       mfo_oferta o,mfo_usuario_plan up,mfo_plan pl 
@@ -552,6 +552,11 @@ WHERE
       }
       $sql .= " AND t2.discapacidad = ".$req;
     }
+
+    if(!empty($filtros['W']) && $filtros['W'] != 0){
+      $sql .= " AND t2.veh_propio = ".$filtros['W'];
+    }
+
     if(!empty($filtros['T']) && $filtros['T'] != 0){ 
       $sql .= " AND t2.id_situacionlaboral = ".$filtros['T'];
     }
@@ -639,6 +644,7 @@ WHERE
       $page = ($page - 1) * REGISTRO_PAGINA;
       $sql .= " LIMIT ".$page.",".REGISTRO_PAGINA;
     }
+    Utils::log($sql);
     $rs = $GLOBALS['db']->auto_array($sql,array(),true);
     return $rs;
   }
@@ -930,6 +936,7 @@ WHERE
       if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] != self::NORMAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
       }    
+      // Utils::log("eder data".print_r($_SESSION['mfo_datos']['usuario']['usuarioxarea'], true));
 
       //si no tiene completo el perfil
       if (/*empty($infohv) || */!isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea'])){ 
@@ -1033,6 +1040,22 @@ WHERE
             ORDER BY u.id_usuario";
     return $GLOBALS['db']->Query($sql,array());
   }
+
+  public static function obtieneTodosCandidatosOferta(){
+    $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.viajar, p.id_pais, l.correo, 
+                   p.id_provincia, u.id_ciudad, u.residencia
+            FROM (select id_usuario from mfo_infohv) hv, (select count(id_usuario) as numero, id_usuario from mfo_porcentajexfaceta group by id_usuario) upf , mfo_usuario u
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            INNER JOIN mfo_usuario_login l ON l.id_usuario_login = u.id_usuario_login
+            WHERE u.estado = 1
+            and hv.id_usuario = u.id_usuario
+            and upf.id_usuario = u.id_usuario
+            and upf.numero = 2
+            ORDER BY u.id_usuario;";
+    return $GLOBALS['db']->Query($sql,array());
+  }
+
   public static function obtieneNivel($idpadre){
     if (empty($idpadre)) { return false; }
     $nivel = 0;

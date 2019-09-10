@@ -37,8 +37,8 @@ class Controlador_Login extends Controlador_Base {
           self::registroSesion($usuario);
           self::registroCache($_SESSION['mfo_datos']['usuario']);   
           self::registrarLogueo($_SESSION["mfo_datos"]["usuario"]["id_usuario_login"],$_SESSION['mfo_datos']['navegador'],$data["username"],1);
-          // $hvControlador = new Controlador_HojaVida();
-          // $hvControlador->guardarPlanesGratis();           
+          $hvControlador = new Controlador_HojaVida();
+          $hvControlador->guardarPlanesGratis();           
         }
         else{
           self::registrarLogueo('',$_SESSION['mfo_datos']['navegador'],$data["username"],0);

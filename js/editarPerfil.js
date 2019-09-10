@@ -169,9 +169,9 @@ $('#telefono').on('blur', function(){
   $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
 });
 
-$('#convencional').on('blur', function(){
-  $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
-});
+// $('#convencional').on('blur', function(){
+//   $(this).val($(this).val().replace("+", "").replace(/[{()}]/g, '').replace(/\s/g, ""));
+// });
 
 /* Carga select dependiente (ciudad) */
 $('#provincia').change(function()
@@ -812,7 +812,7 @@ function validarFormulario(tipovalidacion){
         var lugar_estudio = document.getElementById('lugar_estudio');
         var universidad = document.getElementById('universidad').selectedIndex;
         var universidad2 = document.getElementById('universidad2').value;
-        var convencional = document.getElementById('convencional').value;
+        // var convencional = document.getElementById('convencional').value;
         
         var tipo_doc = document.getElementById('documentacion').value;
         var dni = document.getElementById('dni').value;
@@ -1028,21 +1028,21 @@ function validarFormulario(tipovalidacion){
             }
         }
 
-        if(convencional.length != ''){
+        // if(convencional.length != ''){
 
-            if(convencional.length < '9'){
-                colocaError("err_tlfCon","seccion_tlfCon","9 dígitos, incluir cod. provincia","boton");
-                mensaje += '- Tel\u00E9fono convencional, m\u00EDn. 9 d\u00EDgitos<br>'; 
-                error = 1; 
-            }else if(convencional.length > '9'){
+        //     if(convencional.length < '9'){
+        //         colocaError("err_tlfCon","seccion_tlfCon","9 dígitos, incluir cod. provincia","boton");
+        //         mensaje += '- Tel\u00E9fono convencional, m\u00EDn. 9 d\u00EDgitos<br>'; 
+        //         error = 1; 
+        //     }else if(convencional.length > '9'){
 
-                colocaError("err_tlfCon","seccion_tlfCon","Máx. 9 digitos","boton");
-                mensaje += '- Tel\u00E9fono convencional, mm\u00E1x. 9 d\u00EDgitos<br>'; 
-                error = 1; 
-            }else{
-               quitarError("err_tlfCon","seccion_tlfCon"); 
-            }
-        }
+        //         colocaError("err_tlfCon","seccion_tlfCon","Máx. 9 digitos","boton");
+        //         mensaje += '- Tel\u00E9fono convencional, mm\u00E1x. 9 d\u00EDgitos<br>'; 
+        //         error = 1; 
+        //     }else{
+        //        quitarError("err_tlfCon","seccion_tlfCon"); 
+        //     }
+        // }
 
         if(nombres.length <= '100'){
 
