@@ -83,7 +83,7 @@
 							$indice++;
 						}
 					  ?>
-					 <div class="row text-center">
+					   <div class="row text-center">
 					 	 <div class="col-md-12">
 					     <input type="submit" name="" value="Guardar" class="btn-blue">
 					   </div>
