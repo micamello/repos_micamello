@@ -11,6 +11,7 @@ $dominio = "www.micamello.com.ec/";
 
 require_once '../constantes.php';
 require_once '../init.php';
+require_once '../multisitios.php';
 
 //pregunta si ya se esta ejecutando el cron sino crea el archivo
 $resultado = file_exists(CRON_RUTA.'procesando_cancelar_planes.txt');
@@ -35,7 +36,7 @@ if (!empty($arrcandidato)){
 				}													
 				
         $GLOBALS['db']->commit();       
-        envioCorreo(ucfirst($infousuario["nombres"])." ".ucfirst($infousuario["apellidos"]),$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);				
+        envioCorreo(ucfirst($infousuario["nombres"])." ".ucfirst($infousuario["apellidos"]),$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"],PUERTO,HOST);				
         echo "Plan de Candidato Desactivado ".$usuarioplan["id_usuario_plan"]."<br>";				
 			}
 			/*else{				
@@ -92,7 +93,7 @@ if (!empty($arrempresa)){
         }
 				
 				$GLOBALS['db']->commit();
-        envioCorreo(ucfirst($infousuario["nombres"]),$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"]);
+        envioCorreo(ucfirst($infousuario["nombres"]),$infousuario["correo"],$usuarioplan["nombre"],$usuarioplan["fecha_compra"],PUERTO,HOST);
 				echo "Plan de Empresa Desactivado ".$usuarioplan["id_usuario"]."<br>";
 			}		
 		}
@@ -113,8 +114,8 @@ if (!empty($arrempresa)){
 	return true;
 }*/
 
-function envioCorreo($nombres,$correo,$plan,$fecha){
-	$enlace = "<a href='".PUERTO."://".$dominio."/planes/'>click aqu&iacute;</a>";
+function envioCorreo($nombres,$correo,$plan,$fecha,$puerto,$host){
+	$enlace = "<a href='".$puerto."://".$host."/planes/'>click aqu&iacute;</a>";
   $email_body = Modelo_TemplateEmail::obtieneHTML("CANCELACION_SUBSCRIPCION");
   $email_body = str_replace("%NOMBRES%", utf8_encode($nombres), $email_body);   
   $email_body = str_replace("%PLAN%", utf8_encode($plan), $email_body); 

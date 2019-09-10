@@ -83,16 +83,19 @@ class Controlador_Registro extends Controlador_Base {
         $nombres = ucfirst($datosReg['nombresCandEmp']).((isset($datosReg['apellidosCand'])) ? " ".ucfirst($datosReg['apellidosCand']) : '');
 
         if($datosValidos['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-          $token = Utils::generarToken($id_usuario,"ACTIVACION");
-          if (empty($token)){
-            throw new Exception("Error en el sistema, por favor intente de nuevo");
-          }
-          $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
-          $token = Utils::encriptar($token);
-          if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , Modelo_Usuario::CANDIDATO)){
-              throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
-          }
-          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
+          // se comentó esto porque ya no se van a enviar correos a los candidatos y que ellos puedan iniciar sesión directamente.
+          // $token = Utils::generarToken($id_usuario,"ACTIVACION");
+          // if (empty($token)){
+          //   throw new Exception("Error en el sistema, por favor intente de nuevo");
+          // }
+          // $token .= "||".$id_usuario."||".$datosValidos['tipo_usuario']."||".date("Y-m-d H:i:s");
+          // $token = Utils::encriptar($token);
+          // if (!$this->correoActivacionCuenta($datosValidos['correoCandEmp'],$nombres,$token,$datosValidos['username'] , Modelo_Usuario::CANDIDATO)){
+          //     throw new Exception("Error en el env\u00EDo de correo, por favor intente de nuevo");
+          // }
+          // $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente, revise su bandeja de entrada o spam para activar su cuenta';
+          $_SESSION['mostrar_exito'] = 'Se ha registrado correctamente. Ingrese su correo y contrase\u00F1a para iniciar sesi\u00F3n';
+          $url = "login/";
         }
         if($datosValidos['tipo_usuario'] == Modelo_Usuario::EMPRESA){
           $token = "";
@@ -239,7 +242,7 @@ class Controlador_Registro extends Controlador_Base {
                       "telefono"=>$datosValidos['celularCandEmp'],/*data -----*/
                       "fecha_nacimiento"=>$datosValidos['fechaNac'], /* -----*/
                       "fecha_creacion"=>$fechaDefault,/* -----*/
-                      "estado"=>0,
+                      "estado"=>1,
                       "term_cond"=>1,/*data*/
                       "id_ciudad"=>$ciudadDefault['id_ciudad'],/**/
                       "id_nacionalidad"=>SUCURSAL_PAISID,/*--*/

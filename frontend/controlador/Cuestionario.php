@@ -96,7 +96,9 @@ class Controlador_Cuestionario extends Controlador_Base {
               throw new Exception("Ha ocurrido un error, intente nuevamente7.");  
             }            
           }
+
           $GLOBALS['db']->commit();
+
           if($faceta == 1 || $faceta == 2 || $faceta == 5){
             if ($faceta == 5 && $estado == 0){              
               if (!empty($accesos)){
@@ -121,8 +123,9 @@ class Controlador_Cuestionario extends Controlador_Base {
             }
             else{
               Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+              //revisar
             }            
-          }
+          }//cierre if( faceta==1 o faceta==2 o faceta==5)
         }
         catch( Exception $e ){
           $GLOBALS['db']->rollback();
@@ -137,6 +140,7 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags = array();
         if (empty($faceta)){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+          //revisar
         }   
         if(!$metodoSeleccion){
           Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
@@ -178,6 +182,7 @@ class Controlador_Cuestionario extends Controlador_Base {
           }
           else{
             Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+            //revisar
           }
         }           
         if ($faceta >= 3){          
@@ -222,7 +227,9 @@ class Controlador_Cuestionario extends Controlador_Base {
       return $acceso; 
     }else{      
       if(!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')){
-        $_SESSION['mostrar_error'] = "Debe comprar un plan para poder realizar el Tercer Formulario";  
+        //Esta entrando aqui cuando el candidato tiene el test y lo vuelve a hacer!
+        $_SESSION['mostrar_error'] = "Para una mejor experiencia adquiera Premium";
+        /*$_SESSION['mostrar_error'] = "Debe comprar un plan para poder realizar el Tercer Formulario";*/
         $this->redirectToController('planes');
       }      
       return false;

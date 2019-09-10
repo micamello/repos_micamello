@@ -605,6 +605,7 @@ display: inline;
 /*MENU*/
 .btn-menu-active{
    border-bottom: 1px solid #fff; 
+   background-color: #093162;
    /*position: absolute;*/
 }
 .product{
@@ -2591,7 +2592,7 @@ animation:
 }
 
 /*****CAMBIOS**********/
-@media (max-width: 1370px) {
+@media (max-width: 1050px) {
     .navbar-header {
       float: none;
     }

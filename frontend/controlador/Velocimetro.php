@@ -34,18 +34,22 @@ class Controlador_Velocimetro extends Controlador_Base {
 
   public function mostrarDefault($faceta){
     $nrototaltest = Modelo_Cuestionario::totalTest();
-    $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);    
+    $nrotestusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+
     if ((!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')) && $nrotestusuario < ($nrototaltest-3)){
       $enlaceboton = "cuestionario";
     }
+
     // //si tengo plan y mi plan tiene permiso para el tercer formulario, debe tener el total de test
     elseif(isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario') && $nrotestusuario < $nrototaltest){
       $enlaceboton = "cuestionario";
-    }  
+    }
+
     else{          
       $enlaceboton = "planes"; 
     }
-    
+
+    /*Este caso no deberia ocurrir más!!..*/
     if($faceta == 1){
       $valorporc = 20;
       $img = 'vel1.png'; 
@@ -53,23 +57,30 @@ class Controlador_Velocimetro extends Controlador_Base {
       $msj2 = 'Solo ha completado 1 test de competencias, sus posibilidades de estar entre las primeras opciones de selecci&oacute;n son pocas. Incremente sus oportunidades. Nuestro test Canea tiene mucho m&aacute;s que ofrecerle para que sus opciones aumenten. ';
       $textoBoton = "CONTINUAR";
     }
+
     elseif ($faceta == 2) {
       $valorporc = 40;
       $img = 'vel2.png';
       $titulo = '¡SIGA ADELANTE! HA COMPLETADO LA PRIMERA Y SEGUNDA FASE DEL TEST';
       $msj2 = '¡Excelente! Ha completado el segundo test, ahora sus posibilidades se han incrementado. Mejore sus oportunidades al completar el TEST CANEA. No desespere, recuerde que obtendrá mejores resultados y beneficios para su carrera profesional';
       $textoBoton = "CONTINUAR AL TERCER TEST";
+      $enlaceboton = "planes";
+      
+      /*Este caso asumo que no va a ocurrir en el futuro, ya que esta vista aparecerá luego de subir la hoja de vida*/
       if(!isset($_SESSION['mfo_datos']['usuario']['infohv'])){
+        //Si el usuario no tiene hoja de vida se le muestra un boton para subir su hv
         $enlaceboton = "cargarhojavida";
-        $textoBoton = "CONTINUA PARA CARGAR SU HOJA DE VIDA";
+        $textoBoton = "CONTINUAR PARA CARGAR SU HOJA DE VIDA";
       }
     }
+
     else{
       $valorporc = 100;
       $img = 'vel3.png';
       $titulo = '¡FELICIDADES! ACABA DE COMPLETAR EL TEST CANEA.';
       $msj2 = 'Ahora usted forma parte del presente y del futuro de las empresas, siendo el CANDIDATO IDEAL.';
-      $textoBoton = "VER INFORME COMPLETO";
+      // $textoBoton = "VER INFORME COMPLETO";
+      $textoBoton = "VER OFERTAS LABORALES";
       $enlaceboton = "fileGEN/informeusuario/".$_SESSION['mfo_datos']['usuario']['username'];
 
       if (!isset($_SESSION['mfo_datos']['usuario']['grafico']) || empty($_SESSION['mfo_datos']['usuario']['grafico'])){

@@ -1,6 +1,7 @@
 <?php
 class Controlador_Perfil extends Controlador_Base
-{
+{   
+
     public function construirPagina()
     {
         //Si el usuario no esta logueado lo retorna a la página de logueo
@@ -82,8 +83,9 @@ class Controlador_Perfil extends Controlador_Base
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
                     if(!isset($data['error'])){                      
-                      //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';                      
-                      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+                      //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
+                      Utils::doRedirect(PUERTO.'://'.HOST.'/'.$_POST["redirect"].'/');                      
+                      // Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
                     }
                 }
 
@@ -205,6 +207,8 @@ class Controlador_Perfil extends Controlador_Base
 
     //Función para hacer el validado de todos los campos del módulo de perfil y si no hay ningun problema proceder al guardado, sino hace un rollback
     public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario){
+        
+        
 
         try {
 
@@ -505,8 +509,9 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }           
             $GLOBALS['db']->commit();
+
             $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario); 
-            $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';           
+            //$_SESSION['mostrar_exito'] = 'datos almacenados ';    
             Controlador_Login::registroSesion($sess_usuario);                        
             
         } catch (Exception $e) {

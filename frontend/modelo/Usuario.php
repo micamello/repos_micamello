@@ -925,7 +925,7 @@ WHERE
 
   public static function validaPermisos($tipousuario,$idusuario,$infohv,$planes,$controlador=false){   
     if ($tipousuario == Modelo_Usuario::CANDIDATO){   
-      //si no tiene hoja de vida cargada  y si campos de telefonos correo areas y cedula     
+      //si no tiene hoja de vida cargada  y si campos de telefonos, correo, areas y cedula     
           
       if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] != self::NORMAL_REG)){ 
         Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
@@ -974,6 +974,8 @@ WHERE
       Utils::doRedirect(PUERTO.'://'.HOST.'/publicar/'); 
     }    
   }
+
+
   public static function aspSalarial($id_usuario, $id_oferta){
     if(empty($id_usuario) || empty($id_oferta)){return false;}
     $sql = "SELECT asp_salarial FROM mfo_postulacion WHERE id_usuario = ? AND id_ofertas = ? LIMIT 1;";
@@ -1030,6 +1032,18 @@ WHERE
             INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
             INNER JOIN mfo_usuario_login l ON l.id_usuario_login = u.id_usuario_login
             WHERE u.estado = 1 
+            ORDER BY u.id_usuario";
+    return $GLOBALS['db']->Query($sql,array());
+  }
+  public static function obtieneTodosCandidatosCompletos(){
+    $sql = "SELECT u.id_usuario, u.nombres, u.apellidos, u.viajar, p.id_pais, l.correo, 
+                   p.id_provincia, u.id_ciudad, u.residencia
+            FROM mfo_usuario u
+            INNER JOIN mfo_ciudad c ON c.id_ciudad = u.id_ciudad
+            INNER JOIN mfo_provincia p ON p.id_provincia = c.id_provincia
+            INNER JOIN mfo_usuario_login l ON l.id_usuario_login = u.id_usuario_login
+            WHERE u.estado = 1
+            AND u.id_usuario IN (select hv.id_usuario from mfo_infohv hv, (select count(id_usuario), id_usuario from mfo_porcentajexfaceta group by id_usuario) upf where upf.id_usuario = hv.id_usuario)
             ORDER BY u.id_usuario";
     return $GLOBALS['db']->Query($sql,array());
   }

@@ -236,7 +236,7 @@ $noautofill = "";
               <a class="texto-white" <?php if(isset($optmnu['id'])){ echo 'id="'.$optmnu["id"].'"';} if($optmnu['nombre'] == "Planes"){echo "style='display: inline;'";}  if(isset($optmnu['href'])){ echo 'href="'.$optmnu['href'].'"'; }else{ echo 'onclick="'.$optmnu['onclick'].'"'; } ?> <?php echo (isset($optmnu["modal"])) ? ' ' : '';?>><?php if($optmnu["nombre"] == 'Inicio'){ echo '
               Inicio';  }else{ 
                 if($optmnu['nombre'] == "Planes"){
-                  $planesLi = '<img src="'.PUERTO."://".HOST.'/imagenes/corona-06.png"  class="corona"><span class="crown-ph" style="text-align: center; display: inline-flex;">Obtén Plan<br>Premium</span>';
+                  $planesLi = '<img src="'.PUERTO."://".HOST.'/imagenes/corona-06.png"  class="corona"><span class="crown-ph" style="text-align: center; display: inline-flex;">Premium</span>';
                   echo $planesLi;
                 }
                 else{echo $optmnu["nombre"];}
