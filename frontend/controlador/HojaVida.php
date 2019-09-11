@@ -50,7 +50,7 @@ class Controlador_HojaVida extends Controlador_Base{
           }
 
           if($file['userHV']['size'] > PESO_ARCHIVO){
-            throw new Exception("El tama\u00F1o de archivo excede lo permitido. (2 MB)");
+            throw new Exception("El tama\u00F1o de archivo excede lo permitido. (5 MB)");
           }
         
           if(empty($_SESSION['mfo_datos']['usuario']['infohv'])){
