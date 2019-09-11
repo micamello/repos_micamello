@@ -71,7 +71,7 @@
                 	<div id="carga" style="padding:0px;margin: 10px 0px;" class="col-md-12 recuadro-perfil panel panel-default">	
                 		<?php if($btnDescarga == 1){ ?><br>
                     		<img class="col-md-3" alt="hoja_de_vida" src="<?php echo PUERTO."://".HOST."/imagenes/iconos-nuevos-07.png";?>" style="padding:0px;">
-                    		<label class="col-md-9 lbl-editar" style="padding-left:0px; padding-right:0px; padding-bottom:10px;font-size:16pt; cursor:pointer;" id="hoja_de_vida">ACTUALIZAR O DESCARGAR HOJA DE VIDA (.PDF, . DOC,  .DOCX, MÁX: 2MB)</label><br>
+                    		<label class="col-md-9 lbl-editar" style="padding-left:0px; padding-right:0px; padding-bottom:10px;font-size:16pt; cursor:pointer;" id="hoja_de_vida">ACTUALIZAR O DESCARGAR HOJA DE VIDA (.PDF, . DOC,  .DOCX, MÁX: <?php echo (PESO_ARCHIVO/1000000) ?>MB)</label><br>
                     		<input id="subirCV" type="file" name="subirCV" class="upload-photo" accept="application/pdf,application/msword,.doc, .docx" >
                     		<!-- <div class="perfil-cuadro" align="center">
 		                    	<label style="cursor:pointer" class="text-center" id="hoja_de_vida">actualizar o descargar hoja de vida <br><small style="font-size: 75%">(.PDF, .doc, .docx/máx: 2mb)</small></label>
@@ -888,7 +888,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="col-md-12">
-                <p>Puede actualizar o descargar su hoja de vida. Recuerde solo aceptamos formato .pdf, .doc, .docx, y m&aacute;ximo hasta 2MB </p>
+                <p>Puede actualizar o descargar su hoja de vida. Recuerde solo aceptamos formato .pdf, .doc, .docx, y m&aacute;ximo hasta <?php echo (PESO_ARCHIVO/1000000) ?>MB </p>
                 <?php #if($btnDescarga != 1){ //echo '<p id="mensaje_error_hv" class="parpadea" style="font-size:16px;color:red;font-weight:bold;">Cargar la hoja de vida es obligatorio *</p>'; } ?>
               </div>
             </div>
