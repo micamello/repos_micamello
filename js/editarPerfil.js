@@ -317,10 +317,10 @@ function fileValidation(fileInput,tipo){
         var allowedExtensions = /(.pdf|.doc|.docx)$/i;
         if(filePath != ''){
        
-            var tamano = fileInput.files[0].size/1024/1024;
+            var tamano = fileInput.files[0].size/1024/1024/1024/1024/1024;
             if(tamano > 2){
               Swal.fire({                
-                html: 'El peso permitido de la hoja de vida es máx. 2MB',
+                html: 'El peso permitido de la hoja de vida es máx. 5MB',
                 imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
                 imageWidth: 75,
                 confirmButtonText: 'ACEPTAR',

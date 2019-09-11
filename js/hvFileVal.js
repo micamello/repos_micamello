@@ -21,9 +21,9 @@ if($('#userHV').length){
       }
       else{
         // console.log($(this)[0].files[0].size);
-        if($(this)[0].files[0].size > 2000000){
+        if($(this)[0].files[0].size > 5000000){
           imagen = "wrong-04.png";
-          texto = "El archivo cargado excede el tamaño permitido (2MB).";  
+          texto = "El archivo cargado excede el tamaño permitido (5MB).";  
           errorCount = 1;
         }
         else{
@@ -66,9 +66,9 @@ if($('#cargarHVForm').length){
       }
       else{
         // console.log($('#userHV')[0].files[0].size);
-        if($('#userHV')[0].files[0].size > 2000000){
+        if($('#userHV')[0].files[0].size > 5000000){
           imagen = "wrong-04.png";
-          texto = "El archivo cargado excede el tamaño permitido (2MB).";  
+          texto = "El archivo cargado excede el tamaño permitido (5MB).";  
           errorCount = 1;
         }
         else{

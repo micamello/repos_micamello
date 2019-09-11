@@ -1,3 +1,10 @@
+<script>
+
+  function seleccionar($dato){
+    document.getElementById("seleccion"+$dato).checked = true;
+}
+</script>
+
 <div class="text-center">
   <h2 class="titulo">Desarrollo de Tests</h2>
 </div>

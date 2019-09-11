@@ -1,4 +1,4 @@
-<div class="container">
+  <div class="container">
   
   <div class="row">
 
@@ -25,12 +25,14 @@
               <!-- <button id="btn-verde" class="btn-medio bounceCss">
                 <a href="<?php echo PUERTO.'://'.HOST.'/fileGEN/informeusuario/'.$_SESSION['mfo_datos']['usuario']['username'].'/'; ?>">REVISE SU INFORME PARCIAL</a>
               </button>  -->
+
               <button id="btn-enlace" class="btn-medio bounceCss">
                 <a href="<?php echo PUERTO.'://'.HOST.'/'.$enlaceboton.'/'; ?>"><?php echo $textoBoton; ?></a>
               </button> 
             <?php } ?>
 
             <?php if($valorporc == 100){ ?>
+              <!--Aqui debe llevar al perfil para que descargue el test o llevar a ofertas, siempre que no sea por acceso-->
               <button id="btn-verde" class="btn-medio bounceCss">
                 <a href="<?php echo PUERTO.'://'.HOST.'/'.$enlaceboton.'/'; ?>"><?php echo $textoBoton; ?></a>
               </button> 

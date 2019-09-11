@@ -24,7 +24,7 @@ else{
 }
 
 //1.-consulta de todos los usuarios activos de tipo candidatos
-$result_set = Modelo_Usuario::obtieneTodosCandidatos();
+$result_set = Modelo_Usuario::obtieneTodosCandidatosCompletos();
 while( $rows = mysqli_fetch_array( $result_set, Database::ASSOC ) ){
   $mail_ofertas = ""; 
 	//2.-consulta todos los planes activos del candidato que esten activos no hayan caducado y tenga aun postulaciones libres	

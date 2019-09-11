@@ -89,8 +89,10 @@ switch ($carpeta){
 	  $archivo = $archivo.(!empty($thumb)) ? '-thumb.jpg' : '.jpg';
 	  $mostrar = true;
 	break;
-	case 'hv':	  
-	  $infoHv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);	
+	case 'hv':	 
+		Utils::log("ederederedereder".$usuario["id_usuario"]); 
+	  $infoHv = Modelo_InfoHv::obtieneHv($usuario["id_usuario"]);
+	  Utils::log("edereder . ".print_r($infoHv , true));	
 		if($infoHv['formato'] == 'pdf'){
 		  $extension = 'application/pdf';
 		}else{

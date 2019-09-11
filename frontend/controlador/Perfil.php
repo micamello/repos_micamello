@@ -287,7 +287,7 @@ class Controlador_Perfil extends Controlador_Base
                     $validaFile = Utils::valida_upload($archivo, 2);
                     
                     if (!$validaFile) {
-                        throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso m\u00E1x de 2MB");
+                        throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso m\u00E1x de 5MB");
                     }
                 }
 

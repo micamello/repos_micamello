@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="main_business">      
-      <?php if (!empty($planes)){ ?>                
+      <?php if (!empty($planes)){?>                
         <div class="col-md-12">        
           <div class="container"><h3 align="left">Seleccione un plan:</h3></div>
           <div class="container">            

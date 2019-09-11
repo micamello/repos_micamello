@@ -21,7 +21,7 @@
             </div> -->
             <div class="col-md-7" id="foto-banner">
               <div class="embed-responsive embed-responsive-16by9">
-                <iframe width="100%" class="yt-mic" src="<?php echo MC_REG_YOUTUBE; ?>" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen></iframe>
+                <iframe width="100%" class="yt-mic" src="<?php echo MC_REG_YOUTUBE; ?>" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" frameborder="0" allowfullscreen></iframe>
               </div>
             </div>
         </div>
