@@ -471,6 +471,31 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 				?></div>
 		      </div>
 		    </div>
+
+		    <div class="panel panel-default shadow-panel1">
+		      <div class="panel-heading" data-toggle="collapse" href="#tiene_auto-desplegable">
+			      <div class="row">
+			        <div class="col-md-10" id="drop-tit" >
+			          <span>
+			            <i class="fa fa-car"></i> Auto propio
+			          </span>
+			        </div>
+			        <div class="col-md-2" >
+			          <span class="caret"></span>
+			        </div>
+			      </div>
+			    </div>
+			    <div class="panel-body collapse" id="tiene_auto-desplegable" aria-expanded="false">
+		      	<div class="filtros">
+				<?php
+					foreach (TIENE_AUTO as $key => $v) {
+						$ruta = PUERTO.'://'.HOST.'/verAspirantes/'.$vista.'/'.$id_oferta.'/1/W'.$key.'/';
+						echo '<li class="lista"><a href="'.$ruta.'1/" class="discapacidad" id="'.$key.'">'.$v.'</a></li>';
+					}
+				?></div>
+		      </div>
+		    </div>
+
 		</div>
 		<div class="col-md-12 hidden-md hidden-lg">
 			<div class="panel panel-default shadow" style="border-radius: 5px;">
@@ -644,6 +669,17 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 			                <option value="0">Discapacidad</option>
 			                <?php
 								foreach (DISCAPACIDAD as $key => $v) {
+									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
+								}
+							?>                    
+			            </select>
+			        </div>
+
+			        <div class="form-group">
+			            <select id="veh_propio" class="form-control">
+			                <option value="0">Vehículo propio</option>
+			                <?php
+								foreach (TIENE_AUTO as $key => $v) {
 									echo '<option value="'.$key.'">'.utf8_encode(ucfirst(strtolower($v))).'</option>';
 								}
 							?>                    
@@ -904,16 +940,38 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
  
 													?>
 							            			<td data-title="Postulado hace: " style="vertical-align: middle; text-align: center;" class="text-center"><?php echo $diff->days . ' d&iacute;as'; /*echo date("d", strtotime($a['fecha_postulado'])).' de '.MESES[date("m", strtotime($a['fecha_postulado']))].', '.date("Y", strtotime($a['fecha_postulado']));*/ ?></td>
-												<?php } ?>
-												<?php foreach($facetas as $key => $nombre){ 
+												<?php } $cont = 1;?>
+												
+												<?php foreach($facetas as $key => $nombre){
 										    		echo "<td data-title='".$nombre['literal']/*substr($nombre, 0,1)*/.":' style='vertical-align: middle; text-align: center;'>";
-										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){ 
-										    			echo number_format($datos_usuarios[$a['id_usuario']][$key],0).'%';
+										    		$varValue = 0;
+										    		if(isset($datos_usuarios[$a['id_usuario']][$key])){
+										    			if($a['test_realizados'] == Modelo_Usuario::TEST_PARCIAL){
+										    				if(array_key_exists($a['id_usuario'],$usuariosConAccesos) && $usuariosConAccesos[$a['id_usuario']] != ''){
+										    					if($a['numero_test'] == Modelo_Usuario::COMPLETO_TEST){
+										    						$varValue = $datos_usuarios[$a['id_usuario']][$key];
+																}else if($a['numero_test'] == Modelo_Usuario::PRIMER_TEST){
+																	if($cont > 1){$varValue = 0;}
+																}else if($a['numero_test'] == Modelo_Usuario::SEGUNDO_TEST){
+																	if($cont > 2){$varValue = 0;}
+																}
+										    				}
+										    				else{
+										    					if($cont > 2){$varValue = 0;}else{
+										    						$varValue = $datos_usuarios[$a['id_usuario']][$key];
+										    					}
+										    				}
+										    			}
+										    			else{
+								            				$varValue = $datos_usuarios[$a['id_usuario']][$key];
+								            			}
+										    			echo number_format($varValue,0).'%';
 										    		}else{ 
 										    			// echo '0.00%';
 										    			echo "0%";
 										    		}
 										    		echo "</td>";
+										    		$cont++;
 										    	} ?>
 												<td data-title="Estudios: " style="vertical-align: middle; text-align: center;"><?php echo utf8_encode($a['estudios']); ?></td>
 
@@ -963,7 +1021,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 									            			if($mostrar == ''){
 									            				
 									            				if($datosOfertas['estado'] == Modelo_Oferta::ACTIVA){
-									            					$variable = '<a onclick="hacerInforme(\''.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'\',\''.Utils::encriptar($a['id_usuario']).'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
+									            					$variable = '<a class="accionOpcion" onclick="hacerInforme(\''.PUERTO."://".HOST."/fileGEN/informeusuario/".Utils::encriptar($id_plan).'/'.$id_oferta.'/'.$a['username'].'\',\''.Utils::encriptar($a['id_usuario']).'\')"><img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%"></a>';
 									            				}else{
 																	$variable = '<img src="'.PUERTO."://".HOST.'/imagenes/'.$imagen.'" class="redes-mic" width="100%">';
 																}
@@ -992,7 +1050,7 @@ if(($datosOfertas == false) || (isset($datosOfertas['id_empresa']) && !in_array(
 										            		if (isset($_SESSION['mfo_datos']['planes']) && Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'], 'descargarHv',$id_plan) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::EMPRESA && $ver == true) {
 
 										            			if($datosOfertas['estado'] == Modelo_Oferta::ACTIVA){
-										            				echo '<a href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%"></a>';
+										            				echo '<a class="accionOpcion" href="'.PUERTO."://".HOST."/hojasDeVida/".$a['username'].'/'.$compl_url.'"><img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%"></a>';
 										            			}else{
 																	echo '<img src="'.PUERTO."://".HOST.'/imagenes/cv-07.png" class="redes-mic" width="100%">';
 										            			}

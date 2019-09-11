@@ -41,6 +41,10 @@ foreach ($data as $letra => $value) {
         if($letra == 'D'){
             $ruta .= '/D'.$value['id'];
         }
+        if($letra == 'W'){
+            Utils::log("eeeee");
+            $ruta .= '/W'.$value['id'];
+        }
         if($letra == 'L'){
             $ruta .= '/L'.$value['id'];
         }
@@ -115,6 +119,13 @@ foreach ($data as $letra => $value) {
                     echo 'Puede viajar';
                 }else{
                     echo 'No puede viajar';
+                }
+            }
+            elseif($letra == 'W'){
+                if($value['id'] == 1){
+                    echo 'Tiene auto';
+                }else{
+                    echo 'No tiene auto';
                 }
             }else{
 

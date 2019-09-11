@@ -1,7 +1,6 @@
 <?php
 class Controlador_Perfil extends Controlador_Base
-{   
-
+{
     public function construirPagina()
     {
         //Si el usuario no esta logueado lo retorna a la página de logueo
@@ -11,6 +10,18 @@ class Controlador_Perfil extends Controlador_Base
 
         if(empty($_SESSION['mfo_datos']['usuario']['ultima_sesion']) && ($_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::PRE_REG || $_SESSION['mfo_datos']['usuario']['tipo_registro'] == Modelo_Usuario::REDSOCIAL_REG)){
             Utils::doRedirect(PUERTO.'://'.HOST.'/cambioClave/');
+        }
+
+        $nrotestxusuario = Modelo_Cuestionario::totalTestxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);
+        if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && !empty($_SESSION['mfo_datos']['usuario']['usuarioxarea']) 
+              && ($nrotestxusuario == 0 || $nrotestxusuario == 1 || ( $_SESSION['mfo_datos']['usuario']['pendiente_test']))){
+
+            Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/');
+        }
+
+        if(isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && !empty($_SESSION['mfo_datos']['usuario']['usuarioxarea']) 
+              && !isset($_SESSION['mfo_datos']['usuario']['infohv'])){
+        Utils::doRedirect(PUERTO.'://'.HOST.'/cargarhojavida/');
         }
                         
         $msj1 = $imgArch1 = $btnDescarga = '';
@@ -83,9 +94,8 @@ class Controlador_Perfil extends Controlador_Base
                     //Guarda los datos editados por el usuario
                     $data = self::guardarPerfil($_FILES['file-input'], $_FILES['subirCV'], $_SESSION['mfo_datos']['usuario']['id_usuario'],$tipo_usuario);
                     if(!isset($data['error'])){                      
-                      //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';
-                      Utils::doRedirect(PUERTO.'://'.HOST.'/'.$_POST["redirect"].'/');                      
-                      // Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+                      //$_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';                      
+                      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
                     }
                 }
 
@@ -153,7 +163,11 @@ class Controlador_Perfil extends Controlador_Base
                     }     
                 }
                 $ca = Modelo_Respuesta::facetaSiguiente($_SESSION['mfo_datos']['usuario']['id_usuario']);
-                
+                $textoboton = "";
+                $porcentaje_por_usuario = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+                if((count($porcentaje_por_usuario) == 2 || count($porcentaje_por_usuario) == 5) && isset($_SESSION['mfo_datos']['usuario']['infohv']) && !empty($_SESSION['mfo_datos']['usuario']['infohv'])){
+                    $textoboton = "Actualizar perfil";
+                }
 
                 $tags = array('escolaridad' => $escolaridad,
                     'arrarea'                   => $arrarea,
@@ -183,7 +197,8 @@ class Controlador_Perfil extends Controlador_Base
                     'cargo'=>$cargo,
                     'val_grafico'=>$str_grafico,
                     'breadcrumbs'=>$breadcrumbs,
-                    'ca'=>$ca
+                    'ca'=>$ca,
+                    'textoboton'=>$textoboton
                 );
 
                 //Pasar a la vista los js y css que se van a necesitar
@@ -207,8 +222,6 @@ class Controlador_Perfil extends Controlador_Base
 
     //Función para hacer el validado de todos los campos del módulo de perfil y si no hay ningun problema proceder al guardado, sino hace un rollback
     public function guardarPerfil($imagen, $archivo, $idUsuario,$tipo_usuario){
-        
-        
 
         try {
 
@@ -217,7 +230,7 @@ class Controlador_Perfil extends Controlador_Base
 
             if ($tipo_usuario == Modelo_Usuario::CANDIDATO) {
 
-                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'estado_civil' => 1,'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area' => 1, 'subareas' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1, 'convencional' => 0);
+                $campos = array('nombres' => 1, 'apellidos' => 1, 'ciudad' => 1, 'provincia' => 1, 'estado_civil' => 1,'discapacidad' => 0, 'fecha_nacimiento' => 1, 'telefono' => 1, 'genero' => 1, 'escolaridad' => 1, 'area' => 1, 'subareas' => 1, 'id_nacionalidad' => 1, 'licencia' => 0, 'viajar' => 0, 'tiene_trabajo' => 0, 'nivel_idioma'=>1,'lugar_estudio'=>0, 'universidad'=>0, 'universidad2'=>0,'residencia'=>1, 'convencional' => 0, 'veh_propio'=>1);
 
                 if (isset($_POST['dni'])){
                   $campos['dni'] = 1;
@@ -274,7 +287,7 @@ class Controlador_Perfil extends Controlador_Base
                     $validaFile = Utils::valida_upload($archivo, 2);
                     
                     if (!$validaFile) {
-                        throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso m\u00E1x de 2MB");
+                        throw new Exception("El archivo debe tener formato .pdf .doc .docx y con un peso m\u00E1x de 5MB");
                     }
                 }
 
@@ -294,18 +307,22 @@ class Controlador_Perfil extends Controlador_Base
                     throw new Exception("El celular " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
                 }
 
-                if(!empty($data['convencional'])){
-                    $validaTlf = Utils::validarTelefonoConvencional($data['convencional']);
-                    if (empty($validaTlf)) {
-                        throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
-                    }
-                    if (strlen($data['telefono']) > 15) {
-                        throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " supera el l\u00CDmite permitido");
-                    }
-                    if (strlen($data['telefono']) < 9) {
-                        throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
-                    }
+                if(empty($data['veh_propio'])){
+                    throw new Exception("El campo veh\u00CDculo propio es obligatorio");
                 }
+
+                // if(!empty($data['convencional'])){
+                //     $validaTlf = Utils::validarTelefonoConvencional($data['convencional']);
+                //     if (empty($validaTlf)) {
+                //         throw new Exception("Solo se permite ingresar valores de tipo n\u00FAmero.");
+                //     }
+                //     if (strlen($data['telefono']) > 15) {
+                //         throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " supera el l\u00CDmite permitido");
+                //     }
+                //     if (strlen($data['telefono']) < 9) {
+                //         throw new Exception("El tel\u00E9fono convencional " . $data['telefono'] . " no alcanza el l\u00CDmite m\u00CDn. permitido");
+                //     }
+                // }
 
                 $validaFechaNac = Modelo_Usuario::validarFechaNac($data['fecha_nacimiento']);
                 if (empty($validaFechaNac)) {
@@ -509,11 +526,32 @@ class Controlador_Perfil extends Controlador_Base
                 }
             }           
             $GLOBALS['db']->commit();
-
             $sess_usuario = Modelo_Usuario::actualizarSession($idUsuario,$tipo_usuario); 
-            //$_SESSION['mostrar_exito'] = 'datos almacenados ';    
-            Controlador_Login::registroSesion($sess_usuario);                        
-            
+            Controlador_Login::registroSesion($sess_usuario);
+            // $_SESSION['mostrar_exito'] = 'El perfil fue completado exitosamente';  
+            /*Si tiene hv y tiene test ->se queda aqui -----*/
+            /*Si tiene hv y no tiene test ->test -----*/
+            /*Si no tiene hv y tiene test -> hv*/
+            /*Si no tiene hv y no tiene test ->test*/
+            $urlRedirect = "";
+            $porcentaje_por_usuario = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']["id_usuario"]);
+            if($tipo_usuario == Modelo_Usuario::CANDIDATO){
+                if(isset($_SESSION['mfo_datos']['usuario']['infohv']) && (count($porcentaje_por_usuario) == 2 || count($porcentaje_por_usuario) == 5)){
+                    Utils::log("entro aqui 2");
+                    $_SESSION['mostrar_exito'] = 'El perfil fue actualizado exitosamente'; 
+                  $urlRedirect = "perfil/";
+                }
+                elseif(isset($_SESSION['mfo_datos']['usuario']['infohv']) && (count($porcentaje_por_usuario) == 0 || count($porcentaje_por_usuario) >= 3 || count($porcentaje_por_usuario) <= 5)){
+                    $urlRedirect = "preguntas/";
+                }
+                elseif(!isset($_SESSION['mfo_datos']['usuario']['infohv']) && count($porcentaje_por_usuario) == 2){
+                    $urlRedirect = "cargarhojavida/";
+                }
+                else{
+                    $urlRedirect = "preguntas/";
+                }
+            }                                
+            Utils::doRedirect(PUERTO.'://'.HOST.'/'.$urlRedirect);
         } catch (Exception $e) {
             $_SESSION['mostrar_error'] = $e->getMessage();
             $data["error"] = 1;

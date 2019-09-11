@@ -4,7 +4,7 @@ define('PUERTO', 'http');
 define('FRONTEND_RUTA', 'C:/wamp64/www/repos_micamello/');
 define('DBSERVIDOR', 'localhost');
 define('DBUSUARIO', 'root');
-define('DBNOMBRE', 'produccion1');
+define('DBNOMBRE', 'produccion_2');
 define('DBCLAVE', '');     
 define('RUTA_INCLUDES', FRONTEND_RUTA.'includes/');
 define('RUTA_FRONTEND', FRONTEND_RUTA.'frontend/'); 
@@ -20,7 +20,7 @@ define('MAIL_PORT','587');
 define('MAIL_HOST','mail.micamello.com.ec');
 define('KEY_ENCRIPTAR','micamelloecuador');
 define('PESO_IMAGEN','1000000');
-define('PESO_ARCHIVO','2000000');
+define('PESO_ARCHIVO','5000000');
 define('PATH_PROFILE',FRONTEND_RUTA.'imagenes/usuarios/profile/');
 define('PATH_ARCHIVO',FRONTEND_RUTA.'imagenes/usuarios/hv/');
 define('CLASES_ESTATUS',array('1'=>'alert-success','2'=>'alert-danger','3'=>'alert-warning'));
@@ -47,6 +47,7 @@ define('PUEDE_VIAJAR',array('1'=>'S&iacute;','2'=>'No'));
 define('TIENE_TRABAJO',array('1'=>'S&iacute;','2'=>'No'));
 define('TIENE_LICENCIA',array('1'=>'S&iacute;','2'=>'No'));
 define('DISCAPACIDAD',array('1'=>'S&iacute;','2'=>'No'));
+define('TIENE_AUTO',array('1'=>'S&iacute;','2'=>'No'));
 //este filtro sirve para colocar por defecto el filtro de las areas y subareas del candidato o sin filtro
 //Para el 0 no se aplican los filtros y para 1 si se aplican 
 //define('FILTRO_PREFERENCIAS_DEFAULT',0);

@@ -35,7 +35,7 @@
                     <h6><strong>Banco: </strong><?php echo $banco["nombre_banco"];?></h6>
                     <h6><strong>N° de cuenta: </strong><?php echo $banco["numero_cta"];?></h6>
                     <h6><strong>Nombre: </strong><?php echo $banco["nombres"]."&nbsp;".$banco["apellidos"];?></h6>
-                    <h6><strong>C&eacute;dula: </strong><?php echo $banco["dni"];?></h6>
+                    <h6><strong>RUC: </strong><?php echo $banco["dni"];?></h6>
                     <h6><strong>Tipo de Cuenta: </strong><?php echo ($banco["tipocta"] == Modelo_Ctabancaria::AHORROS) ? "Ahorros" : "Corriente";?></h6>
                   </div>
                 <?php }?>

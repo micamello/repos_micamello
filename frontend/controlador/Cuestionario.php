@@ -13,6 +13,10 @@ class Controlador_Cuestionario extends Controlador_Base {
         $this->redirectToController('planes');
       }
     }
+
+    if(!isset($_SESSION['mfo_datos']['usuario']['usuarioxarea']) || empty($_SESSION['mfo_datos']['usuario']['usuarioxarea']) && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){ 
+      Utils::doRedirect(PUERTO.'://'.HOST.'/perfil/');
+    }
     //si no ha cargado hoja de vida no puede realizar cuestionarios
     // if (empty($_SESSION['mfo_datos']['usuario']['infohv'])){
     //   $this->redirectToController('perfil');
@@ -82,8 +86,8 @@ class Controlador_Cuestionario extends Controlador_Base {
             throw new Exception("Ha ocurrido un error, intente nuevamente5."); 
           }
           // if ($faceta == 5){
-          //   $hvControlador = new Controlador_HojaVida();
-          //   $hvControlador->guardarPlanesGratis(); 
+            $hvControlador = new Controlador_HojaVida();
+            $hvControlador->guardarPlanesGratis(); 
           // }
           if ($faceta == 5 && $estado == 0){
 
@@ -96,9 +100,7 @@ class Controlador_Cuestionario extends Controlador_Base {
               throw new Exception("Ha ocurrido un error, intente nuevamente7.");  
             }            
           }
-
           $GLOBALS['db']->commit();
-
           if($faceta == 1 || $faceta == 2 || $faceta == 5){
             if ($faceta == 5 && $estado == 0){              
               if (!empty($accesos)){
@@ -115,17 +117,22 @@ class Controlador_Cuestionario extends Controlador_Base {
                   $email_body = str_replace("%FECHA%", $acceso["fecha_envio_acceso"], $email_body);
                   $email_body = str_replace("%PLAN%", $infoplan["nombre"], $email_body);
                   $email_body = str_replace("%ENLACE%", $enlace, $email_body);
-                  Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);
+                  // Utils::envioCorreo($infoempresa["correo"],$email_subject,$email_body);
+                  Utils::envioCorreo("administrador.gye@micamello.com.ec",$email_subject,$email_body);
                 }
               }
               //envio de correo              
               Utils::doRedirect(PUERTO.'://'.HOST.'/oferta/');
             }
             else{
-              Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
-              //revisar
+              if(($faceta == 2 || $faceta == 5) && isset($_SESSION['mfo_datos']['usuario']['infohv'])){
+                Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
+              }
+              elseif(!isset($_SESSION['mfo_datos']['usuario']['infohv'])){
+                Utils::doRedirect(PUERTO.'://'.HOST.'/cargarhojavida/');
+              }
             }            
-          }//cierre if( faceta==1 o faceta==2 o faceta==5)
+          }
         }
         catch( Exception $e ){
           $GLOBALS['db']->rollback();
@@ -140,7 +147,6 @@ class Controlador_Cuestionario extends Controlador_Base {
         $tags = array();
         if (empty($faceta)){          
           Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
-          //revisar
         }   
         if(!$metodoSeleccion){
           Utils::doRedirect(PUERTO.'://'.HOST.'/cuestionario/'); 
@@ -182,7 +188,6 @@ class Controlador_Cuestionario extends Controlador_Base {
           }
           else{
             Utils::doRedirect(PUERTO.'://'.HOST.'/velocimetro/');
-            //revisar
           }
         }           
         if ($faceta >= 3){          
@@ -227,9 +232,7 @@ class Controlador_Cuestionario extends Controlador_Base {
       return $acceso; 
     }else{      
       if(!isset($_SESSION['mfo_datos']['planes']) || !Modelo_PermisoPlan::tienePermiso($_SESSION['mfo_datos']['planes'],'tercerFormulario')){
-        //Esta entrando aqui cuando el candidato tiene el test y lo vuelve a hacer!
-        $_SESSION['mostrar_error'] = "Para una mejor experiencia adquiera Premium";
-        /*$_SESSION['mostrar_error'] = "Debe comprar un plan para poder realizar el Tercer Formulario";*/
+        $_SESSION['mostrar_error'] = "Para una mejor experiencia adquiera Premium";  
         $this->redirectToController('planes');
       }      
       return false;

@@ -43,13 +43,13 @@
   }
 
   ?>
-  <!--<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-123345917-1"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
     gtag('config', 'UA-123345917-1');
-  </script>-->    
+  </script> -->    
 </head>
 
 <body>
@@ -182,7 +182,7 @@ $noautofill = "";
   <nav class="navbar navbar-default menu">
     <div class="btn-whatsapp">
       <a href="https://api.whatsapp.com/send?phone=<?php echo WB_DATA['number']; ?>&text=<?php echo WB_DATA['mensaje']; ?>" target="_blank"> <!--PONER NUMERO-->
-        <img src="http://s2.accesoperu.com/logos/btn_whatsapp.png" alt="chatWithMe.jpg">
+        <img style="max-width: 100%;" src="<?php echo PUERTO.'://'.HOST.'/imagenes/wp_logo.png' ?>" alt="chatWithMe.jpg">
       </a>
     </div>
 <?php //} ?> 

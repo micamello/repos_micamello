@@ -50,7 +50,7 @@ class Controlador_HojaVida extends Controlador_Base{
           }
 
           if($file['userHV']['size'] > PESO_ARCHIVO){
-            throw new Exception("El tama\u00F1o de archivo excede lo permitido. (2 MB)");
+            throw new Exception("El tama\u00F1o de archivo excede lo permitido. (5 MB)");
           }
         
           if(empty($_SESSION['mfo_datos']['usuario']['infohv'])){
@@ -61,9 +61,9 @@ class Controlador_HojaVida extends Controlador_Base{
               else{
                 $sess_usuario = Modelo_Usuario::actualizarSession($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION['mfo_datos']['usuario']['tipo_usuario']);
                 Controlador_Login::registroSesion($sess_usuario);              
-                $ruta = '/hvcargado/';    
+                $ruta = '/velocimetro/';    
                 //si tiene los test realizados
-                // self::guardarPlanesGratis();
+                self::guardarPlanesGratis();
               }
             }
             else{
@@ -82,6 +82,7 @@ class Controlador_HojaVida extends Controlador_Base{
   }
 
   public function guardarPlanesGratis(){
+    if($_SESSION["mfo_datos"]["usuario"]["tipo_usuario"] == Modelo_Usuario::CANDIDATO){
      $test_realizados = Modelo_PorcentajexFaceta::consultaxUsuario($_SESSION['mfo_datos']['usuario']['id_usuario']);                
         if (!empty($test_realizados)){
         //busca planes gratuitos para el candidato
@@ -90,17 +91,20 @@ class Controlador_HojaVida extends Controlador_Base{
           //si no tiene un plan gratuito para registrarlo automaticamente
           $infoplan = Modelo_Plan::busquedaActivoxTipo($gratuito["id_plan"],Modelo_Plan::CANDIDATO,SUCURSAL_ID);
           if (!empty($infoplan) && !$this->existePlan($infoplan["id_plan"])) {
-            if (!Modelo_UsuarioxPlan::guardarPlan($_SESSION['mfo_datos']['usuario']['id_usuario'],
+            if (Modelo_UsuarioxPlan::guardarPlan($_SESSION['mfo_datos']['usuario']['id_usuario'],
                                                 $_SESSION["mfo_datos"]["usuario"]["tipo_usuario"],
                                                 $infoplan["id_plan"],$infoplan["num_post"],
                                                 $infoplan["duracion"],$infoplan["porc_descarga"],'',false,
                                                 false,false,$infoplan["num_accesos"])){
-              throw new Exception("Ha ocurrido un error, por favor intente denuevo");   
+                 $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
             }
-          }          
-          $_SESSION['mfo_datos']['planes'] = Modelo_UsuarioxPlan::planesActivos($_SESSION['mfo_datos']['usuario']['id_usuario'],$_SESSION["mfo_datos"]["usuario"]["tipo_usuario"]);
+            else{
+              throw new Exception("Ha ocurrido un error, por favor intente denuevo");
+            }
+          }
         }    
-      } 
+      }
+    } 
   }
 
   public function existePlan($idplan){

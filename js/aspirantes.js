@@ -173,7 +173,7 @@ function generarGrafico(id_usuario,ruta){
     }
 }
 
-function hacerInforme(ruta,id_usuario){
+function hacerInforme(ruta,id_usuario, obj){
 	$('#loaderMic').css('display', 'block');
 
 	var puerto_host = $('#puerto_host').val();
@@ -194,6 +194,11 @@ function hacerInforme(ruta,id_usuario){
         }
     });
 }
+
+$('.accionOpcion').on('click', function(event){
+	var objevent = event.target;
+	objevent = $(objevent).parents('tr').find('td').eq(1).find('i').css('color', '#7ABF89')[0];
+})
 
 
 function redirigir(ruta){
@@ -642,6 +647,7 @@ function obtenerFiltro(ruta,page){
 	var trabajo = $('#trabajo').val();
 	var licencia = $('#licencia').val();
 	var discapacidad = $('#discapacidad').val();
+	var veh_propio = $('#veh_propio').val();
 	var facetas = verFacetasTodasMovil();
 	var busco = false;
 
@@ -709,6 +715,11 @@ function obtenerFiltro(ruta,page){
 		busco = true;
 	}
 
+	if(veh_propio != 0){
+		ruta += "W"+veh_propio+"/";
+		busco = true;
+	}
+
 	if(informe != 0){
 		ruta += "P"+informe+"/";
 		busco = true;
@@ -732,4 +743,9 @@ function obtenerFiltro(ruta,page){
       animation: true
     });		
 	}
+}
+
+function marcarVisto(obj){
+	console.log("eder");
+	console.log(obj);
 }

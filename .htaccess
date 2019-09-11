@@ -53,7 +53,7 @@ RewriteRule ^hojasDeVida/([a-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&
 RewriteRule ^hojasDeVida/([a-z0-9]+)/([A-Za-z0-9]+)/$ %{ENV:REWRITEBASE}archivo.php?carpeta=hv&param1=$1&param2=$2 [L]
 RewriteRule ^cargarhojavida/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarhojavida [L]
 RewriteRule ^subirHv/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarhojavida&opcion=hvusuario [L]
-RewriteRule ^hvcargado/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarhojavida&opcion=hvcargado [L]
+#RewriteRule ^hvcargado/$ %{ENV:REWRITEBASE}index.php?mostrar=cargarhojavida&opcion=hvcargado [L]
 
 #login
 RewriteRule ^login/?$ %{ENV:REWRITEBASE}index.php?mostrar=login [L]

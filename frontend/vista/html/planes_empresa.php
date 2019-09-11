@@ -78,7 +78,7 @@
           <br>
           <br>
           <br> 
-          <a class="pricebutton btn-blue btn-bottom" onclick="buttongrat();"><span class="icon-tag"></span>Publicar</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttongrat();"><span class="icon-tag"></span>Comprar</a>
           <p><br></p>
         </ul>
       <?php } ?> 
@@ -161,7 +161,7 @@
           <br>
           <br>
           <br>                 
-          <a class="pricebutton btn-blue btn-bottom" onclick="buttonplan();"><span class="icon-tag"></span>Publicar</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttonplan();"><span class="icon-tag"></span>Comprar</a>
           <p><br></p>
         </ul>                                    
         <?php } ?> 
@@ -260,7 +260,7 @@
           <br>
           <br> 
           <?php //$enlace = (isset($aviso_promocional) && $aviso_promocional==1) ? "buttonavisograt();" : "buttonaviso();"; ?>
-          <a class="pricebutton btn-blue btn-bottom" onclick="buttonaviso();"><span class="icon-tag"></span>Publicar</a>
+          <a class="pricebutton btn-blue btn-bottom" onclick="buttonaviso();"><span class="icon-tag"></span>Comprar</a>
           <p><br></p>
         </ul>
       <?php } ?>

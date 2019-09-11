@@ -117,6 +117,11 @@
 							<h5><b>Estado civil: </b><?php echo $datosUsuario['estadocivil'] ?></h5>
 						</div>
 					</div>
+					<div class="col-md-6">
+						<div class="contentData">
+							<h5><b>Auto propio: </b><?php echo $datosUsuario['veh_propio'] ?></h5>
+						</div>
+					</div>
 				</div>
 					<div class="col-md-12">
 						<hr>
@@ -145,18 +150,18 @@
 						<h4 class="qs-subt">Datos de contacto</h4>
 					</div>
 					<div align="left">
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
 							<h5><b>Correo: </b><?php echo $datosUsuario['correo'] ?></h5>
 						</div>
 					</div>
 
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
 							<h5><b>Celular: </b><?php echo $datosUsuario['telefono'] ?></h5>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-4">
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
 							<?php
 							$documento = ""; if($datosUsuario['tipo_doc'] == 1) $documento = 'Ruc';
@@ -166,11 +171,11 @@
 							<h5><b><?php echo $documento; ?>: </b><?php echo $datosUsuario['dni'] ?></h5>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<!-- <div class="col-md-6">
 						<div class="contentData<?php echo $datosUsuario['classHidden'] ?>">
 							<h5><b>Teléfono: </b><?php echo $datosUsuario['telefonoConvencional'] ?></h5>
 						</div>
-					</div>
+					</div> -->
 				</div>
 
 					<?php 

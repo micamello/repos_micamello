@@ -58,12 +58,8 @@
         <div class="text-center">
           <button type="button" class="btn-blue" data-dismiss="modal">Continuar</button>
         </div>
-      </section> 
+     </section> 
       </div>     
     </div>
   </div>
 </div>
-
-
-
-
