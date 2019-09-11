@@ -10,14 +10,16 @@ function buttonplan(){
   var desc = ($('#plannombre').length) ? $('#plannombre').attr('value') : $('#plancmb option:selected').text();  
   $('#btncomprar').attr('href',$('#puerto_host').val()+'/compraplan/'+$('#plancmb').val()+'/');
 	$('#desplan').html(desc);
-	$('#msg_confirmplan').modal();
+	// $('#msg_confirmplan').modal();
+  window.location.href = $('#puerto_host').val()+'/compraplan/'+$('#plancmb').val()+'/';
 }
 
 function buttonaviso(){	
 	var desc = ($('#avisonombre').length) ? $('#avisonombre').attr('value') : $('#avisocmb option:selected').text();  
   $('#btncomprar').attr('href',$('#puerto_host').val()+'/compraplan/'+$('#avisocmb').val()+'/');
 	$('#desplan').html(desc);
-	$('#msg_confirmplan').modal();
+	// $('#msg_confirmplan').modal();
+  window.location.href = $('#puerto_host').val()+'/compraplan/'+$('#avisocmb').val()+'/';
 }
 
 function buttonavisograt(){ 
@@ -30,7 +32,8 @@ function buttonavisograt(){
 function msg_compra(id,desc){		  
 	$('#desplan').html(desc);
   $('#btncomprar').attr('href',$('#puerto_host').val()+'/compraplan/'+id+'/');
-	$('#msg_confirmplan').modal();
+	// $('#msg_confirmplan').modal();
+  window.location.href = $('#puerto_host').val()+'/compraplan/'+id+'/';
 }
 
 function loadgratuito(idplan){	

@@ -173,7 +173,7 @@ function generarGrafico(id_usuario,ruta){
     }
 }
 
-function hacerInforme(ruta,id_usuario, obj){
+function hacerInforme(ruta,id_usuario){
 	$('#loaderMic').css('display', 'block');
 
 	var puerto_host = $('#puerto_host').val();
@@ -509,7 +509,7 @@ function enviarPclave(ruta,tipo,page){
 		
 		if(tipo == 1){
       Swal.fire({	      
-	      html: 'La longitud mínima de la palabra clave es de 2 caracteres',
+	      html: 'La longitud mÃ­nima de la palabra clave es de 2 caracteres',
 	      imageUrl: $('#puerto_host').val()+'/imagenes/wrong-04.png',
 	      imageWidth: 75,
 	      confirmButtonText: 'ACEPTAR',
@@ -743,9 +743,4 @@ function obtenerFiltro(ruta,page){
       animation: true
     });		
 	}
-}
-
-function marcarVisto(obj){
-	console.log("eder");
-	console.log(obj);
 }

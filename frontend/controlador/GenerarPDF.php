@@ -23,7 +23,6 @@ class Controlador_GenerarPDF extends Controlador_Base
       break;
       case 'generarFactura':
         $idFactura = Utils::desencriptar(Utils::getParam('idFactura','',$this->data));
-        
         if(!empty($idFactura)){
           $consultaFactura = Modelo_Factura::obtenerFactura($idFactura,Modelo_Factura::AUTORIZADO);
           
@@ -317,7 +316,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         <p><b>CANEA</b> tiene mucho m&aacute;s que ofrecerle acerca de sus destrezas, habilidades y comportamientos. An&iacute;mese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
         </p>
         <blockquote>
-          <b>¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
+          <b>Â¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
         </blockquote>';
       }
       $informe .= '<h2>&iquest;QU&Eacute; ES CANEA?</h2>
@@ -422,7 +421,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-        $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>¡SEA UNA DE LAS PRIMERAS OPCIONES DE SELECCIÓN DE LAS EMPRESAS TERMINANDO EL TEST CANEA EN <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
+        $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>Â¡SEA UNA DE LAS PRIMERAS OPCIONES DE SELECCIÃ“N DE LAS EMPRESAS TERMINANDO EL TEST CANEA EN <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
       }
       $informe .= '
     </div>';
@@ -462,7 +461,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       }
       $informe .= '</tr></table>';
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
-        $informe .= '<br><div class="publicidad" style="background-color:#FFC000"><b>¿DESEA OBTENER MEJORES RESULTADOS? COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
+        $informe .= '<br><div class="publicidad" style="background-color:#FFC000"><b>Â¿DESEA OBTENER MEJORES RESULTADOS? COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
       }
       $informe .= '</center></div><div style="page-break-after:always;"></div>
       <br>
@@ -526,7 +525,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '</table>';
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
         $informe .= '<br>
-        <div class="publicidad" style="background-color:#FFC000"><b>RECUERDE INGRESAR A <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</b></div>';
+        <div class="publicidad" style="background-color:#FFC000"><b>RECUERDE INGRESAR A <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. Â¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</b></div>';
       }
       $informe .= '</center>
       </div><div style="page-break-after:always;"></div>
@@ -684,7 +683,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .=  '</div>';
       if($tipo_informe == 'parcial' && $_SESSION['mfo_datos']['usuario']['tipo_usuario'] == Modelo_Usuario::CANDIDATO){
         $informe .= '<br><br>
-        <div class="publicidad" style="background-color:#FFC000"><b>¡ELEVE SUS OPORTUNIDADES DE OBTENER UN MEJOR EMPLEO! COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a>. Y POTENCIE SUS FORTALEZAS.</b></div>';
+        <div class="publicidad" style="background-color:#FFC000"><b>Â¡ELEVE SUS OPORTUNIDADES DE OBTENER UN MEJOR EMPLEO! COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a>. Y POTENCIE SUS FORTALEZAS.</b></div>';
       }else if($tipo_informe != 'parcial'){
         $informe .= '<div style="page-break-after:always;"></div><br><br><div>
           <h2>resumen canea</h2>
@@ -705,7 +704,7 @@ class Controlador_GenerarPDF extends Controlador_Base
               </tr>
               <tr>
                 <td style="background-color:#8C4DCE; text-align:center" class="bloq-canea">E</td>
-                <td class="bloq">Asertividad / Comunicación '.$porcentajes_faceta[3].'%</td>
+                <td class="bloq">Asertividad / ComunicaciÃ³n '.$porcentajes_faceta[3].'%</td>
                 <td style="background-color:#2B8DC9; text-align:center" class="bloq-canea">A</td>
                 <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
                 <td class="bloq-canea"></td>
@@ -781,7 +780,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       if($tipo_informe == 'parcial'){
         
         $informe .= '<blockquote>
-          <b>¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
+          <b>Â¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
         </blockquote>';
       }else{
         $informe .= '<blockquote>Tu talento es nuestra oportunidad.</blockquote>';
@@ -972,7 +971,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '</table>';
       if($tipo_informe == 'parcial'){
         $informe .= '<br>
-        <div class="publicidad">Recuerde ingresar a <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</div>';
+        <div class="publicidad">Recuerde ingresar a <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. Â¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</div>';
       }
       $informe .= '</center>
       </div><div style="page-break-after:always;"></div>';
@@ -980,7 +979,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .=  '</div>';
       if($tipo_informe == 'parcial'){
         $informe .= '<br><br>
-        <div class="publicidad"><b>¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</b></div>';
+        <div class="publicidad"><b>Â¡PARA CONOCER MAS DE SUS COMPETENCIAS LABORALES, FORTALEZAS, OPORTUNIDADES DE MEJORA Y ADQUIRIR UN INFORME COMPLETO INGRESE A <a class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>!</b></div>';
       }else{
         $informe .= '<div style="page-break-after:always;"></div><br><br><div>
           <h2>resumen canea</h2>
@@ -1083,7 +1082,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         <p><b>CANEA</b> tiene mucho m&aacute;s que ofrecerle acerca de sus destrezas, habilidades y comportamientos. An&iacute;mese a encontrar su talento, y que las empresas descubran su potencial. Mejores sus oportunidades laborales.
         </p>
         <blockquote>
-          <b>¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
+          <b>Â¡Sea siempre la primera opci&oacute;n para las empresas, rindiendo el test completo!</b>
         </blockquote>';
       }
       $informe .= '<h2>&iquest;QU&Eacute; ES CANEA?</h2>
@@ -1178,7 +1177,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         }
       }
       if($tipo_informe == 'parcial'){
-        $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>¡SEA UNA DE LAS PRIMERAS OPCIONES DE SELECCIÓN DE LAS EMPRESAS TERMINANDO EL TEST CANEA EN <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC, TE PODRAS POSICIONAR EN LOS PRIMEROS LUGARES…. NO DESPERDICIES TU POTENCIAL HASTE CONOCER…. TE ESTAN BUSCANDO</a></b></div>';
+        $informe .= '<div class="publicidad" style="background-color:#FFC000"><b>Â¡SEA UNA DE LAS PRIMERAS OPCIONES DE SELECCIÃ“N DE LAS EMPRESAS TERMINANDO EL TEST CANEA EN <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC, TE PODRAS POSICIONAR EN LOS PRIMEROS LUGARESâ€¦. NO DESPERDICIES TU POTENCIAL HASTE CONOCERâ€¦. TE ESTAN BUSCANDO</a></b></div>';
       }
       $informe .= '
     </div>';
@@ -1228,7 +1227,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       }
       $informe .= '</tr></table>';
       if($tipo_informe == 'parcial'){
-        $informe .= '<br><div class="publicidad" style="background-color:#FFC000"><b>¿DESEA OBTENER MEJORES RESULTADOS? COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
+        $informe .= '<br><div class="publicidad" style="background-color:#FFC000"><b>Â¿DESEA OBTENER MEJORES RESULTADOS? COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a></b></div>';
       }
       $informe .= '</center></div><div style="page-break-after:always;"></div>
       <br>
@@ -1294,7 +1293,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .= '</table>';
       if($tipo_informe == 'parcial'){
         $informe .= '<br>
-        <div class="publicidad" style="background-color:#FFC000"><b>RECUERDE INGRESAR A <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. ¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</b></div>';
+        <div class="publicidad" style="background-color:#FFC000"><b>RECUERDE INGRESAR A <a style="color:red" class="azul link" href="https://micamello.com.ec/" target="_blank">WWW.MICAMELLO.COM.EC</a>, para completar su informe. Â¡SE UNA DE LAS PRIMERAS OPCIONES EN LA EMPRESA!</b></div>';
       }
       $informe .= '</center>
       </div><div style="page-break-after:always;"></div>
@@ -1483,7 +1482,7 @@ class Controlador_GenerarPDF extends Controlador_Base
       $informe .=  '</div>';
       if($tipo_informe == 'parcial'){
         $informe .= '<br><br>
-        <div class="publicidad" style="background-color:#FFC000"><b>¡ELEVE SUS OPORTUNIDADES DE OBTENER UN MEJOR EMPLEO! COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a>. Y POTENCIE SUS FORTALEZAS. SEA LA PRIMERA OPCIÓN PARA SER CONTRATADO</b></div>';
+        <div class="publicidad" style="background-color:#FFC000"><b>Â¡ELEVE SUS OPORTUNIDADES DE OBTENER UN MEJOR EMPLEO! COMPLETE EL TEST CANEA INGRESANDO A <a style="color:red" class="azul link" href="'.PUERTO . '://' . HOST . '/planes/'.'" target="_blank">WWW.MICAMELLO.COM.EC</a>. Y POTENCIE SUS FORTALEZAS. SEA LA PRIMERA OPCIÃ“N PARA SER CONTRATADO</b></div>';
       }else{
         $informe .= '<div style="page-break-after:always;"></div><br><br><div>
           <h2>resumen canea</h2>
@@ -1504,7 +1503,7 @@ class Controlador_GenerarPDF extends Controlador_Base
             </tr>
             <tr>
               <td style="background-color:#8C4DCE; text-align:center" class="bloq-canea">E</td>
-              <td class="bloq">Asertividad / Comunicación '.$porcentajes_faceta[3].'%</td>
+              <td class="bloq">Asertividad / ComunicaciÃ³n '.$porcentajes_faceta[3].'%</td>
               <td style="background-color:#2B8DC9; text-align:center" class="bloq-canea">A</td>
               <td class="bloq">Pensar '.$porcentajes_faceta[4].'%</td>
               <td class="bloq-canea"></td>
@@ -1724,7 +1723,6 @@ class Controlador_GenerarPDF extends Controlador_Base
               $html .= utf8_encode($datos['veh_propio']);
               $html .= $fintd;
             $html .= $fintr;
-            
 // --------------***************--------------------------
             $html .= $iniciotr;
               $html .= $iniciotd."12".$tdstyle."text-align: center; background-color: rgb(37, 58, 91); color: white;".$tdinter;
@@ -1869,7 +1867,7 @@ class Controlador_GenerarPDF extends Controlador_Base
         $mpdf->WriteHTML($enddoc);
         $mpdf->WriteHTML($html);
         //echo $html;
-        $mpdf->Output($datos['username'].".pdf", 'I');
+        $mpdf->Output($datos['username'].".pdf", 'D');
         
   }
 
