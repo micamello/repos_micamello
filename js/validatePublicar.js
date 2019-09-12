@@ -851,12 +851,12 @@ var primerEmpleoOf
         }
 
         else{
-            if(salarioOf.val() <= 0){
-                crearMensajeError(salarioOf, "Ingrese un valor válido. Min. $1");
-            }
-            else{
+            // if(salarioOf.val() <= 0){
+            //     crearMensajeError(salarioOf, "Ingrese un valor válido. Min. $1");
+            // }
+            // else{
                 eliminarMensajeError(salarioOf);
-            }
+            // }
         }
 
     }
@@ -1402,12 +1402,12 @@ if($('#salarioOf').length){
             }
 
             else{
-                if($(this).val() <= 0){
-                    crearMensajeError($(this), "Ingrese un valor válido. Min $1.");
-                }
-                else{
+                // if($(this).val() <= 0){
+                //     crearMensajeError($(this), "Ingrese un valor válido. Min $1.");
+                // }
+                // else{
                     eliminarMensajeError($(this));
-                }
+                // }
             }
 
         }
@@ -2126,7 +2126,8 @@ function eliminarMensajeError(obj){
 
 function validarFloat(valor){
 
-    return /^([0-9]{1,5})[.][0-9]{2}?$/.test(valor);
+    // return /^([0-9]{1,5})[.][0-9]{2}?$/.test(valor);
+    return /^[0-9]{2,5}[.][0-9]{2}$/.test(valor);
 
 }
 

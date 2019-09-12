@@ -25,7 +25,7 @@
                         </div>
                      </div>
                     <h3 class="registro-titulo">Registrarse como Candidato</h3>
-                        <form action="<?php echo PUERTO.'://'.HOST.'/registroUsuario/' ?>" method="POST" id="registroFormulario" autocomplete="off">
+                        <form action="<?php echo PUERTO.'://'.HOST.'/registroUsuario/' ?>" method="POST" id="registroFormulario">
 
                             <input type="hidden" name="tipo_usuario" id="tipo_usuario">
                             <input type="hidden" name="tipo_documentacion" id="tipo_documentacion">

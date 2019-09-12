@@ -358,7 +358,7 @@ public static function validarCelularConvencional($contenido){
   }
 
   static public function formatoDineroDecimal($str){
-    return ( ! preg_match("/^([0-9]{1,5})[.][0-9]{2}?$/", $str)) ? false : true;
+    return ( ! preg_match("/^([0-9]{2,5})[.][0-9]{2}$/", $str)) ? false : true;
   }
 
   static public function formatoDinero($str){

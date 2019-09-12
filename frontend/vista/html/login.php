@@ -9,7 +9,7 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 col-md-offset-3" id="inicio-cuadro">
-            <form style="margin-top: 10px" action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login" autocomplete="off">
+            <form style="margin-top: 10px" action = "<?php echo PUERTO."://".HOST;?>/login/" method = "post" id="form_login" name="form_login">
               <div class="col-md-12">
                 <div class="form-group" id="seccion_username">
                   <label>Usuario o Correo <span title="Este campo es obligatorio">*</span></label><div id="err_username" class="help-block with-errors"></div>
