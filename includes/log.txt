@@ -10471,3 +10471,2296 @@
 
 )
 
+[2019/09/12 04:37:45] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:28:30
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:37:48] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:28:30
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:37:48] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:28:30
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:37:49] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:28:30
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:38:05] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:28:30
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+    [usuarioSeleccionado] => Array
+        (
+        )
+
+    [ultimaVistaActiva] => 
+    [usuariosHabilitados] => Array
+        (
+        )
+
+    [Filtrar_ofertas] => Array
+        (
+            [A] => 0
+            [P] => 0
+            [J] => 0
+            [O] => 1
+            [S] => 0
+            [Q] => 0
+            [K] => 0
+        )
+
+)
+
+[2019/09/12 04:38:53] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:28:30
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+    [usuarioSeleccionado] => Array
+        (
+        )
+
+    [ultimaVistaActiva] => 
+    [usuariosHabilitados] => Array
+        (
+        )
+
+    [Filtrar_ofertas] => Array
+        (
+            [A] => 0
+            [P] => 0
+            [J] => 0
+            [O] => 1
+            [S] => 0
+            [Q] => 0
+            [K] => 0
+        )
+
+)
+
+[2019/09/12 04:38:53] datos de planesArray
+(
+    [planActivar] => 0
+)
+
+[2019/09/12 04:38:54] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/12 04:38:54] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/12 04:39:00] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/12 04:39:01] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:01] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:01] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:04] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:04] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:04] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:05] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:51] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 11:42:23
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 39
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 2
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 39
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 55
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-26 10:20:31
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 1
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-25 10:20:31
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 1
+                )
+
+        )
+
+    [usuarioSeleccionado] => Array
+        (
+        )
+
+    [ultimaVistaActiva] => 
+    [usuariosHabilitados] => Array
+        (
+        )
+
+    [Filtrar_ofertas] => Array
+        (
+            [A] => 0
+            [P] => 0
+            [J] => 0
+            [O] => 1
+            [S] => 0
+            [Q] => 0
+            [K] => 0
+        )
+
+)
+
+[2019/09/12 04:39:51] datos de planesArray
+(
+    [planActivar] => 0
+)
+
+[2019/09/12 04:39:52] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/12 04:39:58] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/12 04:39:58] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 15:06:41
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 21
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 61
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-27 13:38:40
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-26 13:38:40
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_empresa_plan] => 72
+                    [id_empresa] => 3
+                    [id_plan] => 10
+                    [estado] => 1
+                    [fecha_compra] => 2019-09-12 15:01:55
+                    [id_comprobante] => 17
+                    [num_publicaciones_rest] => 400
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 75
+                    [fecha_caducidad] => 2020-09-11 15:01:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 400
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:59] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 15:06:41
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 21
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 61
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-27 13:38:40
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-26 13:38:40
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_empresa_plan] => 72
+                    [id_empresa] => 3
+                    [id_plan] => 10
+                    [estado] => 1
+                    [fecha_compra] => 2019-09-12 15:01:55
+                    [id_comprobante] => 17
+                    [num_publicaciones_rest] => 400
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 75
+                    [fecha_caducidad] => 2020-09-11 15:01:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 400
+                )
+
+        )
+
+)
+
+[2019/09/12 04:39:59] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 15:06:41
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 21
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 61
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-27 13:38:40
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-26 13:38:40
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_empresa_plan] => 72
+                    [id_empresa] => 3
+                    [id_plan] => 10
+                    [estado] => 1
+                    [fecha_compra] => 2019-09-12 15:01:55
+                    [id_comprobante] => 17
+                    [num_publicaciones_rest] => 400
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 75
+                    [fecha_caducidad] => 2020-09-11 15:01:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 400
+                )
+
+        )
+
+)
+
+[2019/09/12 04:40:02] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 15:06:41
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 21
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 61
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-27 13:38:40
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-26 13:38:40
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_empresa_plan] => 72
+                    [id_empresa] => 3
+                    [id_plan] => 10
+                    [estado] => 1
+                    [fecha_compra] => 2019-09-12 15:01:55
+                    [id_comprobante] => 17
+                    [num_publicaciones_rest] => 400
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 75
+                    [fecha_caducidad] => 2020-09-11 15:01:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 400
+                )
+
+        )
+
+)
+
+[2019/09/12 04:40:22] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 15:06:41
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 21
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 61
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-27 13:38:40
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-26 13:38:40
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_empresa_plan] => 72
+                    [id_empresa] => 3
+                    [id_plan] => 10
+                    [estado] => 1
+                    [fecha_compra] => 2019-09-12 15:01:55
+                    [id_comprobante] => 17
+                    [num_publicaciones_rest] => 400
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 75
+                    [fecha_caducidad] => 2020-09-11 15:01:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 400
+                )
+
+        )
+
+    [usuarioSeleccionado] => Array
+        (
+        )
+
+    [ultimaVistaActiva] => 
+    [usuariosHabilitados] => Array
+        (
+        )
+
+    [Filtrar_ofertas] => Array
+        (
+            [A] => 0
+            [P] => 0
+            [J] => 0
+            [O] => 1
+            [S] => 0
+            [Q] => 0
+            [K] => 0
+        )
+
+)
+
+[2019/09/12 04:41:50] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 29
+            [tipo_usuario] => 2
+            [username] => hidrovo
+            [correo] => consultas@hidrovoasociados.com
+            [dni] => 1712465739001
+            [tipo_registro] => 2
+            [password] => e6aebaed9546842f58cec4d32e1cd5f7
+            [id_usuario] => 3
+            [telefono] => 0992342681
+            [nombres] => HIDROVO ASOCIADOS
+            [fecha_creacion] => 2019-07-09 08:57:54
+            [foto] => 1
+            [id_ciudad] => 16
+            [ultima_sesion] => 2019-09-12 15:06:41
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Widman
+            [apellidos_contacto] => Hidrovo
+            [telefono1] => 0996603051
+            [telefono2] => 042753106
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 14
+            [nro_trabajadores] => 1
+            [pagina_web] => www.hidrovoasociados.com
+            [id_cargo] => 2
+        )
+
+    [planes] => Array
+        (
+            [0] => Array
+                (
+                    [id_empresa_plan] => 7
+                    [id_empresa] => 3
+                    [id_plan] => 4
+                    [estado] => 1
+                    [fecha_compra] => 2019-07-09 10:22:55
+                    [id_comprobante] => 1
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 10
+                    [fecha_caducidad] => 2019-11-06 10:22:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [1] => Array
+                (
+                    [id_empresa_plan] => 51
+                    [id_empresa] => 3
+                    [id_plan] => 6
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-08 11:38:22
+                    [id_comprobante] => 8
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 21
+                    [fecha_caducidad] => 2020-05-04 11:38:22
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 0
+                )
+
+            [2] => Array
+                (
+                    [id_empresa_plan] => 61
+                    [id_empresa] => 3
+                    [id_plan] => 7
+                    [estado] => 1
+                    [fecha_compra] => 2019-08-27 13:38:40
+                    [id_comprobante] => 
+                    [num_publicaciones_rest] => 0
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 0
+                    [fecha_caducidad] => 2019-09-26 13:38:40
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 5
+                    [num_rest] => 0
+                )
+
+            [3] => Array
+                (
+                    [id_empresa_plan] => 72
+                    [id_empresa] => 3
+                    [id_plan] => 10
+                    [estado] => 1
+                    [fecha_compra] => 2019-09-12 15:01:55
+                    [id_comprobante] => 17
+                    [num_publicaciones_rest] => 400
+                    [num_descarga_rest] => -1
+                    [num_accesos_rest] => 75
+                    [fecha_caducidad] => 2020-09-11 15:01:55
+                    [id_empresa_plan_parent] => 
+                    [num_limiteperfiles] => 
+                    [num_rest] => 400
+                )
+
+        )
+
+    [usuarioSeleccionado] => Array
+        (
+        )
+
+    [ultimaVistaActiva] => 
+    [usuariosHabilitados] => Array
+        (
+        )
+
+    [Filtrar_ofertas] => Array
+        (
+            [A] => 0
+            [P] => 0
+            [J] => 0
+            [O] => 1
+            [S] => 0
+            [Q] => 0
+            [K] => 0
+        )
+
+)
+
+[2019/09/13 12:14:07] datos de planesArray
+(
+    [planActivar] => 0
+)
+
+[2019/09/13 12:14:10] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/13 03:46:16] datos de planesArray
+(
+    [planActivar] => 0
+)
+
+[2019/09/13 03:46:22] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/13 03:46:26] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
+[2019/09/13 03:46:26] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 117
+            [tipo_usuario] => 2
+            [username] => inteme
+            [correo] => marcelo.balarezo@inteme.com.ec
+            [dni] => 1792407443001
+            [tipo_registro] => 1
+            [password] => c3111bdd1c72e72ecbe7df094ebded36
+            [id_usuario] => 27
+            [telefono] => 023825441
+            [nombres] => INTEME
+            [fecha_creacion] => 2019-07-09 10:29:31
+            [foto] => 0
+            [id_ciudad] => 184
+            [ultima_sesion] => 2019-08-26 10:38:08
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Marcelo
+            [apellidos_contacto] => Balarezo
+            [telefono1] => 0992913260
+            [telefono2] => 023825441
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 37
+            [nro_trabajadores] => 1
+            [pagina_web] => www.inteme.com.ec
+            [id_cargo] => 3
+        )
+
+)
+
+[2019/09/13 03:46:27] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 117
+            [tipo_usuario] => 2
+            [username] => inteme
+            [correo] => marcelo.balarezo@inteme.com.ec
+            [dni] => 1792407443001
+            [tipo_registro] => 1
+            [password] => c3111bdd1c72e72ecbe7df094ebded36
+            [id_usuario] => 27
+            [telefono] => 023825441
+            [nombres] => INTEME
+            [fecha_creacion] => 2019-07-09 10:29:31
+            [foto] => 0
+            [id_ciudad] => 184
+            [ultima_sesion] => 2019-08-26 10:38:08
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Marcelo
+            [apellidos_contacto] => Balarezo
+            [telefono1] => 0992913260
+            [telefono2] => 023825441
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 37
+            [nro_trabajadores] => 1
+            [pagina_web] => www.inteme.com.ec
+            [id_cargo] => 3
+        )
+
+)
+
+[2019/09/13 03:46:27] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 117
+            [tipo_usuario] => 2
+            [username] => inteme
+            [correo] => marcelo.balarezo@inteme.com.ec
+            [dni] => 1792407443001
+            [tipo_registro] => 1
+            [password] => c3111bdd1c72e72ecbe7df094ebded36
+            [id_usuario] => 27
+            [telefono] => 023825441
+            [nombres] => INTEME
+            [fecha_creacion] => 2019-07-09 10:29:31
+            [foto] => 0
+            [id_ciudad] => 184
+            [ultima_sesion] => 2019-08-26 10:38:08
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Marcelo
+            [apellidos_contacto] => Balarezo
+            [telefono1] => 0992913260
+            [telefono2] => 023825441
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 37
+            [nro_trabajadores] => 1
+            [pagina_web] => www.inteme.com.ec
+            [id_cargo] => 3
+        )
+
+    [planes] => Array
+        (
+        )
+
+)
+
+[2019/09/13 03:46:47] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 117
+            [tipo_usuario] => 2
+            [username] => inteme
+            [correo] => marcelo.balarezo@inteme.com.ec
+            [dni] => 1792407443001
+            [tipo_registro] => 1
+            [password] => c3111bdd1c72e72ecbe7df094ebded36
+            [id_usuario] => 27
+            [telefono] => 023825441
+            [nombres] => INTEME
+            [fecha_creacion] => 2019-07-09 10:29:31
+            [foto] => 0
+            [id_ciudad] => 184
+            [ultima_sesion] => 2019-08-26 10:38:08
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Marcelo
+            [apellidos_contacto] => Balarezo
+            [telefono1] => 0992913260
+            [telefono2] => 023825441
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 37
+            [nro_trabajadores] => 1
+            [pagina_web] => www.inteme.com.ec
+            [id_cargo] => 3
+        )
+
+    [planes] => Array
+        (
+        )
+
+)
+
+[2019/09/13 03:47:05] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+    [usuario] => Array
+        (
+            [id_usuario_login] => 117
+            [tipo_usuario] => 2
+            [username] => inteme
+            [correo] => marcelo.balarezo@inteme.com.ec
+            [dni] => 1792407443001
+            [tipo_registro] => 1
+            [password] => c3111bdd1c72e72ecbe7df094ebded36
+            [id_usuario] => 27
+            [telefono] => 023825441
+            [nombres] => INTEME
+            [fecha_creacion] => 2019-07-09 10:29:31
+            [foto] => 0
+            [id_ciudad] => 184
+            [ultima_sesion] => 2019-08-26 10:38:08
+            [id_nacionalidad] => 39
+            [padre] => 
+            [nombres_contacto] => Marcelo
+            [apellidos_contacto] => Balarezo
+            [telefono1] => 0992913260
+            [telefono2] => 023825441
+            [id_pais] => 39
+            [estado] => 1
+            [id_sectorindustrial] => 37
+            [nro_trabajadores] => 1
+            [pagina_web] => www.inteme.com.ec
+            [id_cargo] => 3
+        )
+
+    [planes] => Array
+        (
+        )
+
+)
+
+[2019/09/15 11:21:32] datos de planesArray
+(
+    [planActivar] => 0
+)
+
+[2019/09/15 11:21:54] datos de planesArray
+(
+    [planActivar] => 0
+    [navegador] => Mozilla Firefox
+)
+
