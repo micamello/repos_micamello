@@ -118,5 +118,34 @@ class Modelo_Plan{
                          "promocional"=>0);
     return $GLOBALS['db']->update("mfo_plan",$data_update,"id_plan=".$idplan);
   }
-}  
+
+
+    public static function busquedaEmpresaPlanTipo(){
+    $sql = "SELECT 
+              ep1.id_empresa_plan , p1.id_sucursal, ep1.estado, datedata.*, ep1.id_empresa
+            FROM
+                (SELECT 
+                    e.nombres,
+                        ep.id_plan as plan,
+                        MAX(ep.fecha_caducidad) AS maxdate
+                FROM
+                    mfo_empresa_plan ep, mfo_plan p, mfo_empresa e
+                WHERE
+                    ep.id_plan = p.id_plan
+                        AND e.id_empresa = ep.id_empresa
+                        AND p.costo = 0
+                GROUP BY ep.id_plan , ep.id_empresa) as datedata
+                inner join mfo_empresa_plan ep1 on ep1.id_plan = datedata.plan
+                inner join mfo_plan p1 ON p1.id_plan = ep1.id_plan
+                where datedata.maxdate = ep1.fecha_caducidad
+                AND p1.estado = 1;";
+
+      return $GLOBALS['db']->auto_array($sql, array(), true);
+  }
+
+
+}
+
+
+
 ?>
