@@ -3388,3 +3388,30 @@ div.navbar{position: relative;z-index: 1;}
         font-size: 16pt;
 
 }
+
+
+.in-btn{
+    position: absolute;
+    opacity: 0;
+    left: 40px;
+    top: 30px;
+    border: 1px solid green;
+    width: 90%;
+    z-index: 100;
+    font-size: 20pt;
+}
+
+
+.new{
+    position: relative;
+    left: 0px;
+    top: 30px;
+    width: 90px;
+    background: #204478;
+    padding: 5px 30px;
+    color: #fff;
+    font-size: 16pt;
+    cursor: pointer;
+}
+
+
